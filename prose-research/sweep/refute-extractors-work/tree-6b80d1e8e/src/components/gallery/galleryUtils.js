@@ -1,0 +1,145 @@
+// Facet vocabularies aligned to what the engine ACTUALLY persists AND what the
+// server list RPC filters on (migration 063/071). 'capital' is dropped — the
+// generator never emits it (TIER_ORDER stops at metropolis).
+export const TIER_OPTIONS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+// config.terrainType vocabulary (resolveConfig + getTerrainType). The old list
+// used display synonyms (coast/river/mountains) that never matched the stored
+// values, so those chips filtered to nothing; these are the real ones.
+export const TERRAIN_OPTIONS = ['plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert'];
+// getMagicLevel emits exactly these four bands — 'wild'/'forbidden' never persist.
+export const MAGIC_OPTIONS = ['none', 'low', 'medium', 'high'];
+// resolveConfig's canonical 11-culture catalog.
+export const CULTURE_OPTIONS = ['germanic', 'latin', 'celtic', 'arabic', 'norse', 'slavic', 'east_asian', 'mesoamerican', 'south_asian', 'steppe', 'greek'];
+// economicState.prosperity vocabulary (generateEconomicNarrative LABELS).
+export const PROSPERITY_OPTIONS = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
+
+export const REPORT_REASON_OPTIONS = [
+  ['unsafe_content', 'Unsafe content'],
+  ['private_information', 'Private information'],
+  ['spam', 'Spam'],
+  ['copyright', 'Copyright concern'],
+  ['other', 'Other'],
+];
+
+export const GALLERY_RESPONSIVE_CSS = `
+  .gallery-main-layout {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+
+  .gallery-sidebar-panel {
+    position: sticky;
+    top: 16px;
+  }
+
+  .gallery-topbar {
+    grid-template-columns: minmax(0, 1fr) minmax(170px, 230px);
+  }
+
+  .gallery-detail-hero {
+    grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+  }
+
+  .gallery-detail-body {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 330px);
+  }
+
+  @media (max-width: 860px) {
+    .gallery-main-layout,
+    .gallery-topbar,
+    .gallery-detail-hero,
+    .gallery-detail-body {
+      grid-template-columns: 1fr;
+    }
+
+    .gallery-sidebar-panel {
+      position: static;
+    }
+  }
+
+  /* The specimen plate hovers by INKING its frame darker in place (motion
+     grammar: oc-m-inkdarken, on the card), never by lifting or shadowing.
+     Curated plates ink toward the deep gold entry tone, keeping their gold
+     identity; the rest ink toward strong ink. Reduced-motion collapses the
+     transition to its instant end state (the global rule in organic.css). */
+  .sf-gallery-card:hover { border-color: var(--oc-ink-strong); }
+  .sf-gallery-card--curated:hover { border-color: var(--oc-entry); }
+`;
+
+export function human(value) {
+  return String(value || '').replace(/_/g, ' ');
+}
+
+export function formatDate(value) {
+  if (!value) return '';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+export function formatNumber(value) {
+  const n = Number(value) || 0;
+  if (n >= 1000000) return `${(n / 1000000).toFixed(1)}m`;
+  if (n >= 1000) return `${(n / 1000).toFixed(1)}k`;
+  return String(Math.max(0, Math.round(n)));
+}
+
+export function fallbackInitial(name) {
+  return String(name || '?').trim().charAt(0).toUpperCase() || '?';
+}
+
+export function activeFilterCount(filters = {}) {
+  return Object.values(filters).reduce((sum, value) => {
+    if (Array.isArray(value)) return sum + value.length;
+    return sum + (value ? 1 : 0);
+  }, 0);
+}
+
+/** Public URL for a gallery dossier slug (matches ShareToGallery's link form). */
+export function galleryUrlFor(slug) {
+  const path = `/gallery?slug=${encodeURIComponent(slug || '')}`;
+  if (typeof window === 'undefined') return path;
+  return `${window.location.origin}${path}`;
+}
+
+/**
+ * V-13 FEATURED — HIDDEN-UNTIL-OCCUPIED (the no-fake-names honesty): a Featured
+ * section renders ONLY when it holds at least one item. An empty featured set
+ * (nothing admin-featured yet) renders nothing — never an empty band. Pinned by
+ * tests/components/galleryFeaturedVisible.test.js.
+ * @param {unknown} items the featured tiles for a section
+ * @returns {boolean}
+ */
+export function featuredSectionVisible(items) {
+  return Array.isArray(items) && items.length > 0;
+}
+
+/**
+ * Share a gallery dossier (§7): Web Share API when available, else copy the
+ * public URL to clipboard. Never throws — returns { ok, method } so callers can
+ * show success/failure feedback. A cancelled native share sheet is { ok:false,
+ * cancelled:true } (not an error to surface).
+ * @param {{ slug?: string, name?: string }} [item] the tile/dossier being shared
+ */
+export async function shareGalleryDossier({ slug, name } = {}) {
+  if (!slug) return { ok: false, method: null };
+  const url = galleryUrlFor(slug);
+  const title = name ? `${name} — SettlementForge` : 'SettlementForge dossier';
+  if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+    try {
+      await navigator.share({ title, text: title, url });
+      return { ok: true, method: 'share' };
+    } catch (err) {
+      if (err && err.name === 'AbortError') return { ok: false, method: 'share', cancelled: true };
+      // fall through to clipboard
+    }
+  }
+  if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+    try {
+      await navigator.clipboard.writeText(url);
+      return { ok: true, method: 'copy' };
+    } catch {
+      return { ok: false, method: 'copy' };
+    }
+  }
+  return { ok: false, method: null };
+}

@@ -10325,6 +10325,113 @@
    "trueWording": "The basis of 'Concerning Pipe-weed' was a lengthy speech of Merry about pipe-weed",
    "note": "Live URL returned HTTP 403 with a browser UA; recovered via Wayback raw capture 20260304141309id_. Quote verbatim in section 'History of composition', continuing 'in a draft of the chapter The Road to Isengard, eventually removed and reworked', cited to Hammond & Scull, A Reader's Companion p. xxiv. 'Concerning Pipe-weed' is listed as a Prologue section in the same page's synopsis, so the reworked-into-the-Prologue limb holds.",
    "fromFile": "verdicts-tolkien-i388-402.json"
+  },
+  "403": {
+   "index": 403,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "dropped, being too lengthy",
+   "note": "Live tolkiengateway.net returns Cloudflare 403; verified on my own Wayback raw capture 20260304141309id_ (independently re-fetched, not reused). Page, History of composition: 'The \"Prologue\" would include a description of hobbit gift-giving customs and the ribadyan (birthday celebrant) but it was dropped, being too lengthy.' Quote 'being too lengthy' verbatim; every limb supported.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "404": {
+   "index": 404,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "their chief duties were rounding up stray livestock",
+   "note": "Raw en.wikipedia.org/wiki/The_Shire HTML, § Government: 'The Mayor of the Shire's chief township, Michel Delving, was the chief official and was treated in practice as the Mayor of the Shire.[19]'; 'their chief duties were rounding up stray livestock'; 'He held the largely ceremonial office of Thain of the Shire.[19]'. Ref [19] resolves in the page's own reference list to 'The Fellowship of the Ring, \"Prologue\", \"Of the Ordering of the Shire\"', so the attribution to the Prologue is carried by the page. The lead gloss ('by its real function rather than its title') is the claim's own summary, but it is exactly instantiated by the three page-supported facts.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "405": {
+   "index": 405,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one of the few signs for the hobbits of that troubled time",
+   "note": "Same page, § Government: 'At the time of The Lord of the Rings, there were many more Bounders than usual, one of the few signs for the hobbits of that troubled time.' Quote verbatim. Note the page dates it as 'at the time of The Lord of the Rings' rather than naming the War of the Ring, and the Bounders sentence itself carries no Prologue footnote (the nearest following cite is [1] Stanton 2013) — but it sits inside the Prologue-cited Government paragraph and the substance of every limb ('many more Bounders than usual' = rising headcount) is on the page.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "406": {
+   "index": 406,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "12 months of 30 days; five non-month days; seven-day week",
+   "note": "Same page, § Calendar: 'Year 1 corresponded to the foundation of the Shire in the year 1601 of the Third Age by Marcho and Blanco'; 'The Shire's calendar year has 12 months, each of 30 days. Five non-month days are added to create a 365-day year'; 'There are seven days in the Shire week.' Every arithmetic limb supported. Graded SUBSTANCE rather than VERBATIM only because the claim supplies no quotation to check word for word.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "407": {
+   "index": 407,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "by the start of the War of the Ring, had almost ceased to exist",
+   "note": "atolkienistperspective.wordpress.com raw HTML: block-quotes 'The Thain was the master of the Shire-moot, and captain of the Shire-muster and the Hobbitry-in-arms.' attributed on the page to 'The Fellowship of the Ring, Prologue: \"Of the Ordering of the Shire\"', then: 'However, Tolkien was quick to state that these meetings and musterings were uncommon, and that by the start of the War of the Ring, had almost ceased to exist.' Quote verbatim; the three institutions and the Prologue attribution are both explicit.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "408": {
+   "index": 408,
+   "verdict": "PARTIAL",
+   "trueWording": "a richly-textured anthropology about the hobbits and the Shire",
+   "note": "omnivorous.substack.com raw HTML carries the full post. Quote verbatim: 'a richly-textured anthropology about the hobbits and the Shire that they call home'. The books limb is verbatim too: 'they liked to have books filled with things that they already knew, set out fair and square with no contradictions' (7). But nothing on the page describes the Prologue's voice as editorial or scholarly or as keeping distance — the only tonal characterisations are 'more light-hearted than heavy' and 'It's not condescending, exactly'; the words scholarly, editorial, academic and detached do not occur, and the single hit for 'distance' is the hobbits distancing themselves from the Elves.",
+   "unsupportedLimb": "delivered in an editorial voice of scholarly distance",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "409": {
+   "index": 409,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien is indeed speaking in his own authorial (hobbit) persona",
+   "note": "Pezzini AAM PDF fetched raw from st-andrews (HTTP 200, 26 pp.), §1.8 'The hidden presence: Tolkien's own authorial/editorial voice', p. 12: 'The most important feature of the Note, however, is precisely the presence of Tolkien's authorial voice, which connects the meta-textual frame outlined above with Tolkien's actual writing of the LoTR (or rather, according to the narrative, compiling and translating). In the above passage, just as in the prologue in general, Tolkien is indeed speaking in his own authorial (hobbit) persona; this is shown by the statement that ‘[t]his account of the end of the Third age is drawn mainly from the Red Book of Westmarch’ and also by the reference to the publication of the Hobbit, which is said to have been … ‘already published’.' Every limb, including compiler/translator, is on the page.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "410": {
+   "index": 410,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he incorporated the revisions directly into the story",
+   "note": "cliffsnotes.com returns Cloudflare 403 live; verified on the Wayback raw capture 20231204093604id_. Analysis section: 'Instead of simply changing the story to fit, he incorporated the revisions directly into the story with the explanation of the Red Book, the first version of which is based on Bilbo's false account and the current version on his corrected story.' Quote verbatim. The page says 'the current version' where the claim says 'later copies' — same substance, different noun.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "411": {
+   "index": 411,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the feeling of rich historical detail that grounds the novel's fantastic elements",
+   "note": "Same Wayback capture. 'Tolkien uses this introduction to establish the feeling of rich historical detail that grounds the novel's fantastic elements in a sense of realism' and 'The detailed maps, as well as the literary convention of editing and translating a previous historical record, help the reader suspend disbelief and accept the stranger parts of the story.' Quote verbatim; both limbs supported. The page bundles the maps in with the editing/translating convention, and speaks of 'this introduction' (maps + Prologue + Note) where the claim says the Prologue.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "412": {
+   "index": 412,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "The prologue about Hobbits imitates ethnography ... comparable to ... Stukeley or Percy",
+   "note": "Raw en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings HTML, § Points of view: 'The prologue about Hobbits imitates ethnography, one of several antiquarian elements in The Lord of the Rings comparable to the writings of 18th century figures like William Stukeley or Thomas Percy.' and 'These sections of the novel do not further the action, but by using non-fiction techniques they make Middle-earth feel objectively real as well as subjectively experienced.' Every limb supported and the claim's wording is near-verbatim; graded SUBSTANCE only because the claim supplies no quotation to check word for word.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "413": {
+   "index": 413,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Findegil, King's Writer, finished this work in IV 172",
+   "note": "Pezzini PDF, §1.7, pp. 11-12, which block-quotes the Note in full: 'Findegil, King's Writer, finished this work in IV 172. It is an exact copy in all details of the Thain's Book in Minas Tirith. That book, was a copy, made at the request of King Elessar, of the Red Book of the Periannath, and was brought to him by the Thain Peregrin when he retired to Gondor in IV 64. ... In Minas Tirith it received much annotation, and many corrections, especially of names, words and quotations in the Elvish languages'. Quote verbatim, both dates and the annotation clause present. Two small looseness notes: IV 64 is the year Peregrin brought the book to Gondor (the Thain's Book being the copy made at Elessar's request), and 'a stemma written as prose' is the claim's own descriptor - Pezzini never uses the word stemma (0 hits in 26 pp.).",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "414": {
+   "index": 414,
+   "verdict": "PARTIAL",
+   "trueWording": "IV 172 / S.R. 1592",
+   "note": "schematax PDF fetched raw (HTTP 200, 3 pp.). The quote 'IV 172 / S.R. 1592' is verbatim, at stages (13), (14), (15) and in the timeline, and dual Age/Shire dating is indeed the schema's pervasive habit: (2) III 3002 / S.R. 1402, (3) III 3003-3018 / S.R. 1403-1418, (8) IV 62 / S.R. 1482, (11) IV 64 / S.R. 1484, and so on. But 'every stage' is falsified by the same page: stage (1) 'Bilbo has diaries containing his recountings of his quest for Erebor' carries no date at all, and stage (7) is printed as '(7) ? Sam makes his additions.' Two of the fifteen stages carry no dating, so the universal quantifier fails on the page that is cited for it.",
+   "unsupportedLimb": "every stage ... carries two datings (stages (1) and (7) carry none)",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "415": {
+   "index": 415,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Though the dates given are often conjectural, especially for the Second Age",
+   "note": "Pezzini PDF, §1.7 p. 12, inside the same block quotation of the Note: 'It was probably at Great Smials that The Tale of Years was put together, with the assistance of material collected by Meriadoc. Though the dates given are often conjectural, especially for the Second Age, they deserve attention.' Quote verbatim; the Tale of Years referent, the Second Age limb and the self-limiting sense are all on the page.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "416": {
+   "index": 416,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the libraries at Bucklebury and Tuckborough contained much",
+   "note": "Pezzini PDF, §1.7 p. 12, same block quotation: 'the libraries at Bucklebury and Tuckborough contained much that did not appear in the Red Book. In Brandy Hall there were many works dealing with Eriador and the history of Rohan. ... At Great Smials ... he and his successors collected many manuscripts written by scribes of Gondor: mainly copies or summaries of histories or legends relating to Elendil and his heirs. ... It was probably at Great Smials that The Tale of Years was put together'. Quote verbatim; every limb (Brandy Hall/Eriador+Rohan, Great Smials/Gondorian copies and summaries, Great Smials as the Tale of Years' place of assembly) is on the page.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  },
+  "417": {
+   "index": 417,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "transmitters, translators, redactors, scribes, and copyists",
+   "note": "scholar.valpo.edu blocks the viewcontent PDF live (403 HTML body); verified on the Wayback raw capture 20250604044813id_ of the same viewcontent URL (application/pdf, extracted with pypdf). Sherwood: 'Flieger has called Tolkien ‘the last in the line’ of ‘transmitters, translators, redactors, scribes, and copyists’ in the genealogy of The Red Book of Westmarch; he ‘inserted his own name into the header and footer on the title-page of The Lord of the Rings (and thus into the history of the \"book\"), not as the author of the book but as its final transmitter/redactor’ (2012, p. 42).' Quote verbatim, Flieger attribution explicit, every limb supported; the page adds 'header and footer on' before 'title-page'.",
+   "fromFile": "verdicts-tolkien-i403-417.json"
   }
  },
  "mergedAt": "see autosave.log",

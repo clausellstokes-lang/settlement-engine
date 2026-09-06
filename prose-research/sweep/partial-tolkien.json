@@ -106,5 +106,41 @@
    "note": "Same raw book text, ch. 3 'The Bourgeois Burglar', around the p. 63-64 running heads. Quote 'a variety probably of Nicotiana' verbatim, and the pipe-weed-not-tobacco reason is verbatim ('Because the word would sound wrong ... It is an import from some unknown Caribbean language via Spanish'). The only defective limb is the botanical label: a binomial needs genus plus species, and neither Shippey nor the Prologue supplies one.",
    "fromFile": "verdicts-tolkien-i388-402.json"
   }
+ },
+ {
+  "index": 408,
+  "feature": "Prologue as anthropology",
+  "claim": "The Prologue is a richly textured anthropology of the hobbits, delivered in an editorial voice of scholarly distance, and notes that hobbits liked books that set out what they already knew fair and square with no contradictions.",
+  "source": "Thomas J. West III, 'Tolkien Tuesdays: Re-Reading The Lord of the Rings: Prologue'",
+  "url": "https://omnivorous.substack.com/p/tolkien-tuesdays-re-reading-the-lord",
+  "page": "main text",
+  "quote": "a richly-textured anthropology about the hobbits",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 408,
+   "verdict": "PARTIAL",
+   "trueWording": "a richly-textured anthropology about the hobbits and the Shire",
+   "note": "omnivorous.substack.com raw HTML carries the full post. Quote verbatim: 'a richly-textured anthropology about the hobbits and the Shire that they call home'. The books limb is verbatim too: 'they liked to have books filled with things that they already knew, set out fair and square with no contradictions' (7). But nothing on the page describes the Prologue's voice as editorial or scholarly or as keeping distance — the only tonal characterisations are 'more light-hearted than heavy' and 'It's not condescending, exactly'; the words scholarly, editorial, academic and detached do not occur, and the single hit for 'distance' is the hobbits distancing themselves from the Elves.",
+   "unsupportedLimb": "delivered in an editorial voice of scholarly distance",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  }
+ },
+ {
+  "index": 414,
+  "feature": "dual-era dating",
+  "claim": "Every stage of the Red Book's fictional transmission carries two datings, an Age-date and a Shire-reckoning equivalent, so the records cross-reference two calendars.",
+  "source": "Alexander Schmitt, 'Stages and Logic of the fictitious tradition of Tolkien's Legendarium' (schematax.org, 2021)",
+  "url": "https://www.schematax.org/schemata/tolkien/schematax_tolkien_tradition-legendarium.pdf",
+  "page": "pp. 1–3",
+  "quote": "IV 172 / S.R. 1592",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 414,
+   "verdict": "PARTIAL",
+   "trueWording": "IV 172 / S.R. 1592",
+   "note": "schematax PDF fetched raw (HTTP 200, 3 pp.). The quote 'IV 172 / S.R. 1592' is verbatim, at stages (13), (14), (15) and in the timeline, and dual Age/Shire dating is indeed the schema's pervasive habit: (2) III 3002 / S.R. 1402, (3) III 3003-3018 / S.R. 1403-1418, (8) IV 62 / S.R. 1482, (11) IV 64 / S.R. 1484, and so on. But 'every stage' is falsified by the same page: stage (1) 'Bilbo has diaries containing his recountings of his quest for Erebor' carries no date at all, and stage (7) is printed as '(7) ? Sam makes his additions.' Two of the fifteen stages carry no dating, so the universal quantifier fails on the page that is cited for it.",
+   "unsupportedLimb": "every stage ... carries two datings (stages (1) and (7) carry none)",
+   "fromFile": "verdicts-tolkien-i403-417.json"
+  }
  }
 ]

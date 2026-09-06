@@ -1,0 +1,550 @@
+
+===== PAGE 1 =====
+®
+D&D ADVENTURERSLEAGUE
+THE WILD BEYOND THE WITCHLIGHT
+DUNGEONCRAFT DESIGNGUIDE:
+Effective Date: October 1, 2021. Version 1.2.
+DUNGEONS & DRAGONS
+The Wild Beyond the Witchlight Domains of Domains of Delight.
+You can create your own adventures foDr oDm&aDin Asd ovfe Dnetluigrehrts League set in a fey domain of your own design
+using and Delight or set it in the domain of Fablerise as presented in
+This document provides design guidance for these adventures. can be found for sale in the DMsGuild. In order to
+create your own adventures, you’ll also want the adventure templates and style guides used for the Dungeoncraft program. They
+can be found on the DMsGuild here.
+PTION REATE OMAIN OF ELIGHT
+O 1. C A D D
+Adventure Duration.
+Th E e N Wi E ld R B A ey L o nd U th I e D W E it L ch IN lig E ht S C RAFTING Y OUR A DVENTURE
+G G
+Your adventure should ideally be
+deviates slightly from the use written for a two-hour or four-hour play time. Adventures
+of the traditional pillars of D&D, typically through a greater with shorter playtimes are not allowed, and while longer
+degree of non-combat approaches to solving challenges. adventures are allowed, they are treated as four hour
+C
+D
+o
+o
+n
+m
+s
+a
+id
+in
+e
+s
+r
+o
+ta
+f
+k
+D
+i
+e
+n
+l
+g
+ig
+i
+h
+n
+t
+s piration from this approach when you Usaindgv eCnrteuarteusr feosr. purposes of rewards. You must note your
+design your own Feywild adventures. There is a section in the adventure play time in the description of thMe oandsvteenrt Muraen. u al
+supplement that suggests various fairytale The Wild B eYyooun dc atnh eu Wsei tccrhelaigtuhrtes suggested in the
+and folklore books which might be helpful as inspiration. DMoomrdaeinnk Daeinneinze’sn Tso tmabel eo fw Fhoiecsh, ar eV ofrloom’s Gthueid e to Monsters
+and . Other monsters from
+or
+ECHNICAL NFORMATION
+T I can be included, but should be used sparingly. Stat blocks
+A template is provided for use, including the Community must appear as printed. Note that if you are using an NPC
+Created D&D Adventurers League logo. You must use this stat block such as the cult fanatic and need to add racial
+template, and follow the formatting standards as presented abilities for a gnome you can annotated it after the stat
+in the template. This logo must appear on your adventure block with "Harry is a gnome cult fanatic with the
+(see “Additional Guidelines” below). You should be familiar following characteristics: Size small, Speed 25 feet,
+with the D&D Style Guide (also provided) as well. Please darkvision 60 feet, Languages Gnomish and Common." This
+review the Wizards and the DMsGuild Content Guidelines. information could alDsoo mbea pinrse osef nDteeldig whtithin the encounter
+OnPlyu ybolius h(ionrg a. co-designer) can Dungeon Master your text.
+adventure until it is published in the Dungeon MTahsete Wrsi lGdu ild. If an instruction in the document includes
+Beyond the WitIcfh ylioguh tin tend to publish your adventure on the a change to a stat block, mark that change with anD aosmteariisnks
+Dungeon Masters Guild, adventures supporting “o*f” D aenlidg hintclude a note after the stat block explaining the
+season must appear for sale by August Adavsetnetruisrke. YSeotut icnagn.not use the archfey presented in
+31, 2022. There are no exceptions to this rule. If you do not .
+publish your adventure you can continue to Dungeon Master Most of the adventure must take place in
+it through December 31, 2022. After that time, unpublished the domain you create. If, for story purposes, they need to
+adAvecncetusrseibs ialirtey .n o longer available in the D&D Adventurers start not in your domain, then you should choose a location
+League. Cainno tnhiec aFlo Ergleomtteenn tRse.alms. Only you or a co-designer can
+There is also the option for producing a more create adventures in your domain.
+accessibility-friendly version of your adventure. The template The Wild Beyond th eIt W isi timchpliogrhttant to note that your
+for that will be available soon and inserted into the pack. adventure cannot feature the Prismeer domain featured in
+.
+RT AND RAPHIC ESIGN
+A G D
+EWARDS
+R
+Your adventure must follow the template provided for layout,
+but may include art and other graphic design elements
+At the end of this document, yoDuu nwgiello fnin Md atshtreere’s t Gaubildese of
+magic items. Consumables can be from any DDAL allowed
+subject to the terms and conditions of the DMsGuild support
+source (most will be from the ).
+site, which has information on content, format, art, and
+Choose the magic item rewards for your adventure from
+various other common creator questions.
+t•h ese tables using the following:
+2-hour tier 1 (levels 1-4): choose 1 item from table A and
+up to 3 common or 1 uncommon consumables.
+Not for resale. Permission granted to print or photocopy this document for personal use only.
+Dungeoncraft Adventures: The Wild Beyond the Witchlight 1
+===== PAGE 2 =====
+• • Invitation.
+• Minor Magic Item.
+4-hour tier 1 (levels 1-4): choose 1 item from table A, 1 This should occur within the adventure.
+• from table B and up to 3 common or uncommon This can be a Common or Uncommon
+consumables. item, however if it is an Uncommon item its use is limited
+• 2-hour tier 2 (levels 5-10) choose 1 item from table C and to the adventure. It does not count toward the characters
+up to 3 common or uncommon consumables. • mPraoxf imciaegnicc yit.em limit for that time, however if it requires
+4-hour tier 2 (levels 5-10) choose 1 item from table C, 1 attunement normal attunement rules apply.
+from table B and up to 3 common or uncommon • Spellcasting .This does not persist past the end of the
+consumables. adventure.
+Dungeon Master’s Guide, This does not persist past the end of the
+You may add 1 minor property or quirk to each non- Graedavteern tPuarcet. Gifts.
+Dcounnsguemona bMlea smtearg’sic G iuteidme. (see the
+page 143). Properties must come from the table in the These can only be used in tier 2 (levels 5-
+You can take inspiration from your 10) and the following rules apply (rewards requiring no
+adventure setting’s theme or Feywild themes in general when •a dAjuusdtmieennctes .are not listed):
+choosing these. You may use the table for quirks or add a • Major Magic Item
+FGeoyldw Rildew inasrpdirse.d non-mechanical (game mechanics) quirk. This should occur within the adventure.
+• Time Displacemen. Ltegendary items are limited to use
+These are based on tier. This is total gold for within the adventure and are not available as rewards.
+the group, not individual. Treasure such as gems, coins, art • isT uisteleful only if the player intends to
+objects, and anything else portable that isn’t adventuring retire their character.
+gear counts towards the gold rewards listed. The fey cannot grant a for locations within the
+GOLD REWARDS BY ADVENTURE TIER
+Forgotten Realms (such as “Duke of Daggerford”) but can
+Tier Min. Max.
+• grant a title in your crWeaetaeldt hdomain (such a “Baron
+1 100 gp 500 gp
+Snowfen of Skylar”).
+2 1000 gp 5000 gp
+• TSahfee atymount listed in is changed to the following:
+10,000 gp.
+DOMAINS OF DELIGHT . This can be used within the framework of the
+• advewnitsuhre but generally is not impactful in D&D
+Domains of Delight Adventurers League.
+SING
+U
+The spell is still subject to D&D Adventurers League
+Follow the method outlined in the for
+rules regarding scope of what can be gained and the
+creating your domain for use in your adventu re. In places
+permanency (or lack thereof) of anything granted through
+where the document implies you can decide on the fly what
+the spell.
+triggers something (such as in “Weird Magic”section) you
+need to define what occurs or give the DM a short list of
+OST OF A EY ACT
+options appropriate for your domain. If it is something C F P
+presFeenywteidld t oG uoindleys be used if you need to create something on While the “your firstborn” is a traditional cost (Greater Pact),
+the fly, then the use of the tables is optional, such is the case do not use this cost. Many of the costs listed for Greater Pacts
+for . You can use the tables in that section as are only appropriate if it is the focus of the adventure
+inspiration or for creating NPCs. A few sections need (perform 3 quests, return stolen legendary item, etc.).
+additional guidance for use in D&D Adventurers League and
+are presented below. REAKING A ACT
+B P
+When making a pact is part of the adventure, then one of
+F EY O UTLOOK these consequences should be included. Make sure you
+The information that is presented here should be reflected in include the information regarding how this can be reversed
+your NPCs, but also should be something a helpful fey guide in your adventure.
+might present in a tier 1 (levels 1-4) adventure.
+EY URSES
+F C
+F EY P ACTS You can choose the effect instead of rolling if using this in
+Fey Pacts can be used but should be limited to a specific your adventure or give the DM a list of three possibilities to
+task/need of either the fey or the adventurers rather than a choose from. If removal is not completed by the conclusion of
+Lraenssdeorm P oaccctu Grirfetsn.ce. the adventure, then it persists for one more adventure or
+session afterwards. At the end of the next adventure or
+These can be used in tier 1 (levels 1-4) or session, it disappears.
+tier 2 (levels 5-10) adventures. The following restrictions
+a• pCplhya (rrmewards requiring no adjustments areC nhoatr lmis toefd ):
+Restoration Charm of the Slayer.
+• Fey Kin. sThhiips .g ift cannot include either the
+or the
+• Guide. This does not persist past the end of the
+adventure.
+The Guide can be a reoccurring NPC if you write
+more than one adventure, otherwise this benefit does not
+Not p f e o r r s r i e s s t a o le u . t P s e i r d m e i s o s f io t n h g e r a a n d t v e e d n to tu p r r e in . t or photocopy this document for personal use only.
+Dungeoncraft Adventures: The Wild Beyond the Witchlight 2
+===== PAGE 3 =====
+REATING YOUR RCHFEY DDITIONAL UIDELINES
+C A A G :
+You can use the tables randomly, choose from the features • HE INE RINT
+T F P
+listed or consider them more of a guide to what is max
+feasible/allowed. If you intend mfoar xthe characters to fight the At your option, you can publish your adventure on the
+archfey, then for tier 1 (levels 1-4) you are limited to a • Dungeon Masters Guild. Until published, only the designers
+CR 10 creature and for tier 2 a CR 15 creature. (maximum two individuals) can run the adventure.
+You and up to one co-designer can create a domain for use
+for your adventures. No one else, including other co-
+AGICAL IFTS
+M G • designers, may use the setting of that domain for future
+Anytime an entry says “it will vanish after a specified amount Dungeoncraft adventures.
+of time” that time is the adventure. A few gifts have additional • The D&D Adventurers League Content Managers do not
+modifiers. Only one magical gift may be given as a reward per need to review your adventure for youM too nrsutne ro Mr paunbualilsh it.
+a• dCvehnatrumre.. Charm of • Please include stat blocks for any creature you use in your
+Restoration Charm of the Slayer. • adventure that does not appear in the .
+• Refuge This gift cannot include either the Adventures must use the template provided. WBW-DC
+or the
+When published on the Dungeon Masters Guild (or listed in
+. While this gift does vanish after the adventure it
+an event program), your adventure must use the
+first appears in, if you write another adventure in your
+code to identify it as a Dungeoncraft Adventure intended
+• dTormaianiinn ygou can indicate that the refuge reappears for the for use during this Seasonal Campaign. This code should
+duration of that adventure.
+appear in the upper left corner of your cover. (If you intend
+. This normally costs 250 downtime days and to write multiple adventures, then we suggest that you
+1gp/day (PH 187) and is also limited to languages or tool consider using a three-letter identifier in you code such as
+proficiencies. The archfey instead grants a specific training the domain name so people can quickly find them. For
+or daily inspiration. The adventure must specify which • example: WBW-DC-SKY-01 for the first adventure in series
+language, tool proficiency, skill proficiency, or feat the set in a created domain called Skylar.)
+archfey
+o
+g ranOtns eth srpoeucgihfi tcr laainnignuga. gOen loyr o tnoeo lo pptrioofnic mieanyc bye.
+The DDAL Community Created logo and the DMsGuild logo
+selected from the list below.
+• must appear on the cover. No other logos should appear on
+o Daily inspiration. 50 the cover.
+o dOonwe nstpimecei fdica yssk, i0ll gppr. oficiency All Dungeoncraft Adventures published on the DM’s Guild
+20 downtime days, 0 gp.
+• must abide by the rules provided by the DM’s Guild in
+o One specific feat . 100 downtime terms of content that can be published in that marketplace.
+days plus 100 gp.
+Adventures must be written for a single table of players.
+. Must be from a player
+IMTPhOeRseT AcaNnTn:o t be epics/multi-table events.
+allowed resource. 200 downtime plus 250 gp.
+Dungeoncraft Adventures can be removed
+from the DMsGuild at any time for failing to meet these
+standards, those prescribed by the DMsGuild, or for any other
+reason deemed necessary by Wizards of the Coast.
+Additionally, any designer(s) publishing a Dungeoncraft
+Adventure on the Dungeon Masters Guild or running one that
+does not follow these r ules can have their ability to continue
+to create and publish sanctioned content under these rules
+suspended or revoked.
+Not for resale. Permission granted to print or photocopy this document for personal use only.
+Dungeoncraft Adventures: The Wild Beyond the Witchlight 3
+===== PAGE 4 =====
+TABLE A: UNCOMMON ITEMS TABLE B: COMMON ITEMS TABLE C: RARE ITEMS
+D12 A G IItCem TEM EWARDS D12 Item D12 Item
+M I R
+Eyes of minute seeing Veteran’s cane (XGE) Staff of swarming insects
+Bag of holding Wand of pyrotechnics (XGE) Staff of the woodlands
+1 1 1
+Slippers of spider climbing Cloak of billowing (XGE) Mantel of spell resistance
+2 2 2
+Bracers of archery Pipe of smoke monsters (XGE) Horn of Valhalla (silver)
+3 3 3
+Boots of striding and Illuminator’s tattoo (TCE) Figurine of wonderous power
+4 4 4
+springing (ivory goat)
+Masquerade tattoo (TCE)
+5
+5 Figurine of wonderous 5 Elven chain
+power (silver raven) Cloak of many fashions (XGE)
+6
+Bell branch (TCE)
+6
+6 Gem of brightness Hat of vermin (XGE)
+7
+Boots of speed
+7
+7 Instrument of the bards 8 Staff of bird calls (XGE)
+(doss lute) Bracers of defense
+8
+Pole of collapsing (XGE)
+9
+8 Pearl of power Ioun stone (protection)
+9
+Talking doll (XGE)
+10
+Cloak of protection Quall’s feather token (tree)
+9 10
+11 Wand of smiles (XGE)
+Feywild shard (TCE) Ring of free action
+10 11
+12
+Nature’s mantle (TCE)
+11 12
+12
+Not for resale. Permission granted to print or photocopy this document for personal use only.
+Dungeoncraft Adventures: The Wild Beyond the Witchlight 4
+===== PAGE 5 =====
+PTION SING DVENTURE EEDS Domains of Delight
+OIf you are not int2ere.stUed in creatinAg your own domain, do nSot despair! W e have an aTltheer nWaitlidve B meyeothnodd t hfoer W crietcahtilniggh Dt ungeoncraft
+adventures by using the following adventure seeds and the Archfey described in the . These adventure seeds
+are set in Fablerise, a small domain that has only recently appeared in Thither. See for more
+information about Prismeer, its archfey ruler, and Thither. Using Creatures.
+Monster
+Manual The Y Wouil dca Bne uyosen dc rtehaet Wurietsc hsluigghgtested in the
+The Wild Beyond the Witchlight
+G ENERAL G UIDELINES Domain DenizenMso tradbelnek waihniecnh’ sa rTeo mfroe mof tFhoee s, Volo’s
+Guide to a Mndon sters . Other
+deviates slightly from the
+monsters from or
+use of the traditional pillars of D&D, typically through a
+can be included, but should be used
+greater degree of non-combat approaches to solving
+sparingly. Stat blocks must appear as printed. Note that
+challenges. Consider taking inspiration from this approach
+Domains of Delight if you are using an NPC stat block such as the cult
+when you design your own Feywild adventures. There is a fanatic and need to add racial abilities for a gnome you
+section in the supplement that suggests can annotated it after the stat block with "Harry is a
+various fairytale and folklore books which might be gnome cult fanatic with the following characteristics:
+helpful as inspiration. Size small, Speed 25 feet, darkvision 60 feet, Languages
+AdGvnenomtuirseh Saentdti Cnogm. mon." This information could also be
+presented within the encounter text.
+ECHNICAL NFORMATION
+T I
+The adventure can start in the
+A template is provided for use, including the Community
+Forgotten Realms, in Thither, or Fablerise. Other
+Created D&D Adventurers League logo. You must use this
+settings, are not allowed, even briefly T. Fhaeb Wleirlids eB aenyodn itds
+template, and follow the formatting standards as
+tahrceh Wfeiyt cthhlei gYhatr.n spinner are detailed in the Domains of
+presented in the template. This logo must appear on your
+CaDnoelnigichatl iEnlfeomrmenattiso.n on Thither is in
+adventure (see “Additional Guidelines” below). You should
+be familiar with the D&D Style Guide (also provided) as
+It’s important to Tnhoete W thiladt Byoeyuor nd
+well. Please review the Wizards and the DMsGuild Content
+athdev eWnittucrhel icgahnt’.t feature the death of NPCs or the
+Guidelines. Only you (or a co-designer) can Dungeon
+destruction of locations featured in
+MaPsutebrl iysohuinr ga.d venture until it is published in the Dungeon
+Domains of Delight
+Masters Guild. The
+You can use the information about the fey provided in the
+Wild Beyond thIef Wyoiutc ihnlitgehntd to publish your adventure on
+(including the restrictions listed in
+the Dungeon Masters Guild, adventures supporting
+the previous section) within the context of the
+season must appear for sale by
+Adventure Seed used.
+August 31, 2022. There are no exceptions to this rule. If
+you do not publish your adventure you can continue to
+SING THE DVENTURE EEDS
+Dungeon Master it through December 31, 2022. After that U A S
+timAec,c uenspsiubbilliistyh.e d adventures are no longer available in Each adventure seed has a set level restriction, as well as
+the D&D Adventurers League. assigned character rewards that your adventure can use.
+There is also the option for producing a Your adventure can’t provide character rewards above
+more accessibility-friendly version of your adventure. The and beyond what’s listed, including story awards or
+template for that will be available shortly and inserted dAodwvenntitmuree a Scetievdit Tieist.l e.
+into the pack.
+These are placeholder titles. Please
+create a unique title for your adventure when it’s
+RT AND RAPHIC ESIGN
+A G D Adcvoemntpulertee Sde aendd L reevaedl yR taon rguen.. You are to add the name of
+Your adventure must follow the template provided for the seed in the credit section.
+layout, but may include art and other graphic design Adventure Seed Hook. This is the range of levels
+elements subject to the terms and conditions of the that your adventure can accommodate.
+DMsGuild support site, which has information on content, Adventure Seed Rewar Tdhse. content of your adventure
+format, art, and various other common creator questions. should be based off this single evocative sentence.
+Your adventure can provide
+Adventure Duration.
+RAFTING OUR DVENTURE the items listed as rewards.
+C Y A
+If it’s a two-hour adventure, you can include only those
+Your adventure should ideally be
+two items.
+written for a two-hour or four-hour play time.
+If it’s a four-hour adventure, you can include the magic
+Adventures with shorter playtimes are not allowed, and
+item listed, in addition to those items listed for two-
+while longer adventures are allowed, they are treated as Gohldo uRre awdavrednst.ures.
+four-hour adventures for purposes of rewards. You
+must note your adventure play time in the description These are based on tier. This is total gold
+of the adventure. for the group, not individual. Treasure such as gems, coins,
+art objects, and anything else portable that isn’t
+adventuring gear counts towards the gold rewards listed.
+Not for resale. Permission granted to print or photocopy this document for personal use only.
+Dungeoncraft Adventures: The Wild Beyond the Witchlight 5
+===== PAGE 6 =====
+GOLD REWARDS BY ADVENTURE TIER
+Tier Min. Max.
+1 100 gp 500 gp
+2 1000 gp 5000 gp
+Not for resale. Permission granted to print or photocopy this document for personal use only.
+Dungeoncraft Adventures: The Wild Beyond the Witchlight 6
+===== PAGE 7 =====
+DDITIONAL UIDELINES HE INE
+A G :T F
+•
+RINT
+P
+At your option, you can publish your adventure on the
+Dungeon Masters Guild. Until published, only the
+• designers (maximum two individuals) can run the
+adventure.
+The D&D Adventurers League Content Managers do not
+• need to review your adventure for you to run or publish
+it. Monster
+PMlaenasuea linclude stat blocks for any creature you use in
+• your adventure that does not appear in the
+• .
+Adventures must use the template provided.
+WheWn BpWub-lDisChed on the Dungeon Masters Guild (or
+listed in an event program), your adventure must use
+the code to identify it as a Dungeoncraft
+Adventure intended for use during this Seasonal
+Campaign. This code should appear in the upper left
+corner of your cover. (If you intend to write multiple
+adventures, then we suggest that you consider using a
+• three-letter identifier in you code so people can quickly
+find them.
+The DDAL Community Created logo and the DMsGuild
+• logo must appear on the cover. No other logos should
+appear on the cover
+All Dungeoncraft Adventures published on the
+DMsGuild must abide by the rules provided by the
+• DMsGuild in terms of content that can be published in
+that marketplace.
+Adventures must be written for a single table of players.
+IMTPhOeRseT AcaNnTn:o t be epics/multi-table events.
+Dungeoncraft Adventures can be removed
+from the DMsGuild at any time for failing to meet these
+standards, those prescribed by the DMsGuild, or for any
+other reason deemed necessary by Wizards of the Coast.
+Additionally, any designer(s) publishing a Dungeoncraft
+Adventure on the Dungeon Masters Guild or running one
+that does not follow these rules can have their ability to
+continue to create and publish sanctioned content under
+these rules suspended or revoked.
+Not for resale. Permission granted to print or photocopy this document for personal use only.
+Dungeoncraft Adventures: The Wild Beyond the Witchlight 7
+===== PAGE 8 =====
+Adv. Seed Title Never Too Late For Now Adv. Seed Lvl Range 1 – 4
+IER DVENTURE EEDS
+TAdv. See1d HDooCk A The characters rSun into an awakened rabbit that is late for an important event. Unfortunately, nefarious
+forces threaten his attendance.
+Adv. Seed Two-Hour Adventure: Oil of slipperiness, cloak of many fashions
+Rewards Four-Hour Adventure: +1 padded armor (a fine velvet vest)
+Adv. Seed Title Sticky Little Fingers Adv. Seed Lvl Range 1 – 4
+Adv. Seed Hook The characters awaken to find that something important has been taken from them. The only clue as to
+whom the perpetrator might be is a brilliant yellow feather.
+Adv. Seed Two-Hour Adventure: Spell scroll of fly, dark shard amulet
+Rewards Four-Hour Adventure: Wind fan
+Adv. Seed Title Lending a Hand Adv. Seed Lvl Range 1 – 4
+Adv. Seed Hook The characters find a badly injured sprite who claims to have been accosted by a creature made of mud.
+Adv. Seed Two-Hour Adventure: Potion of fire resistance, talking doll
+Rewards Four-Hour Adventure: Greatclub of warning
+Adv. Seed Title So…Thirsty… Adv. Seed Lvl Range 1 – 4
+Adv. Seed Hook The stream that an elf village has relied upon for a thousand years has run dry, and they can’t seem to figure
+out why.
+Adv. Seed Two-Hour Adventure: (5) +1 sling bullets, wand of pyrotechnics
+Rewards Four-Hour Adventure: Decanter of endless water
+Adv. Seed Title Where are We? Adv. Seed Lvl Range 1 – 4
+Adv. Seed Hook The characters take shelter in an unassuming ruin, only to find themselves in the Feywild when they awaken.
+Adv. Seed Rewards Two-Hour Adventure: Potion of growth, prosthetic limb (made of wood)
+Four-Hour Adventure: Restorative ointment (4 doses remaining)
+Adv. Seed Title What a Quagmire Adv. Seed Lvl Range 1 – 4
+Adv. Seed Hook Under the dark of each new moon, a mysterious shack emerges from the middle of a muddy bog. Rumors tell
+of wondrous treasures inside—though no one truly knows anyone who’s actually entered it.
+Adv. Seed Rewards Two-Hour Adventure: Spell scroll of entangle, orb of time
+Four-Hour Adventure: +1 all-purpose tool
+Adv. Seed Title Party Time! Adv. Seed Lvl Range 1 – 4
+Adv. Seed Hook All of the children in a small thorp have mysteriously gone missing, and the parents are worried sick. One of
+the kids mentioned everyone going to a special birthday party, but there are no clues other than that.
+Adv. Seed Rewards Two-Hour Adventure: Spell scroll of faerie fire, rope of mending
+Four-Hour Adventure: Hat of disguise (shaped like a conical party hat)
+Adv. Seed Title A Tough Sell Adv. Seed Lvl Range 1 – 4
+Adv. Seed Hook A seemingly friendly fey offers the characters a pouch filled with magic acorns, promising great wealth to those
+who plant them. He couldn’t tell a bigger lie.
+Adv. Seed Rewards Two-Hour Adventure: Potion of animal friendship, lock of trickery
+Four-Hour Adventure: Bag of tricks
+Adv. Seed Title Where the Winds Take Us Adv. Seed Lvl Range 1 – 4
+Adv. Seed Hook The characters are offered a trip in a splendid hot air balloon, but catastrophe strikes, and their 3-hour tour turns
+into a night of terror.
+Adv. Seed Rewards Two-Hour Adventure: (1) unbreakable arrow, feather token (feather fall)
+Four-Hour Adventure: Wind fan
+Not for resale. Permission granted to print or photocopy this document for personal use only.
+Dungeoncraft Adventures: The Wild Beyond the Witchlight 8
+===== PAGE 9 =====
+Adv. Seed Title Path of Resistance Adv. Seed Lvl Range 1-4
+Adv. Seed Hook Every path leads to a destination. But some paths lead to a destination you don’t know you needed to go and
+you can’t leave until you acquire what is waiting there for you.
+Adv. Seed Two-Hour Adventure: Potion of resistance (Force), Heward’s handy spice pouch
+Rewards Four-Hour Adventure: Add adamantine armor (scale mail or chain mail)
+Adv. Seed Title Looking a Gift Horse in the Mouth Adv. Seed Lvl Range 1-4
+Adv. Seed Hook What luck! A fey is here to help the characters. No problem is too small or too great. (Causing problems of
+any size is great fun to some fey!)
+Adv. Seed Two-Hour Adventure: Pixie dust, charlatan’s die
+Rewards Four-Hour Adventure: Add boots of striding and springing (shaped like unicorns’ hooves and fuzzy ankles)
+Adv. Seed Title Who Goes There? Adv. Seed Lvl Range 1 – 4
+Adv. Seed Hook Curious creatures have been emerging from breaks in the thickets of Fablerise.
+Adv. Seed Two-Hour Adventure: dust of disappearance, cloak of many fashions
+Rewards Four-Hour Adventure: Add figurine of wonderous power (silver raven)
+Adv. Seed Title Face Off! Adv. Seed Lvl Range 5 – 10
+IER DVENTURE EEDS
+TAdv. See2d HAook A mysterioSus strange r tells a scary story at a tavern before revealing themselves as an odd fey creature with
+the ability to steal their victims’ faces.
+Adv. Seed Two-Hour Adventure: (5) +2 crossbow bolts, armor of gleaming (scale)
+Rewards Four-Hour Adventure: Add amulet of health
+Adv. Seed Title Dryad Despair Adv. Seed Lvl Range 5 – 10
+Adv. Seed Hook The characters encounter a dryad in the middle of a blighted forest deep in the throes of despair. Her tree, a
+treant, was recently chopped down by a band of redcaps, and needs the last acorn it shed to return it to life.
+Adv. Seed Two-Hour Adventure: Spell scroll of blight, dread helm
+Rewards Four-Hour Adventure: Armor of resistance (necrotic) (medium armor only)
+Adv. Seed Title Woe Unto Ewe Adv. Seed Lvl Range 5 – 10
+Adv. Seed Hook A distraught hunter claims to be cursed after shooting a strange sheep with a golden pelt.
+Adv. Seed Two-Hour Adventure: Spell scroll of spirit guardians, pole of collapsing
+Rewards Four-Hour Adventure: Elven chain
+Adv. Seed Title A Host Spurned Adv. Seed Lvl Range 5 – 10
+Adv. Seed Hook Someone took advantage of Yarnspinner’s hospitality and has stolen one of the archfey’s favorite books. The
+immense spider is desperate to see it returned.
+Adv. Seed Two-Hour Adventure: Spell scroll of stoneskin, ruby of the war mage
+Rewards Four-Hour Adventure: Glamoured studded leather
+Adv. Seed Title Blood Bath Adv. Seed Lvl Range 5 – 10
+Adv. Seed Hook A notoriously vicious band of redcaps has filled a pond with the blood of their victims. Naturally, a nearby
+village takes issue with this and asks the characters for help.
+Adv. Seed Two-Hour Adventure: Spell scroll of greater restoration, shield of expression
+Rewards Four-Hour Adventure: Ioun stone of awareness
+Adv. Seed Title A Draconic Request Adv. Seed Lvl Range 5 – 10
+Adv. Seed Hook A faerie dragon with a fondness for meat pies has kidnapped an elderly baker and refuses to free her unless
+she reveals her secret recipe. Unfortunately, the baker has forgotten the recipe to a wicked hag.
+Adv. Seed Two-Hour Adventure: Spell scroll of guardian of nature, staff of adornment
+Rewards Four-Hour Adventure: +2 moon sickle
+Not for resale. Permission granted to print or photocopy this document for personal use only.
+Dungeoncraft Adventures: The Wild Beyond the Witchlight 9
+===== PAGE 10 =====
+Adv. Seed Title A Fine Suit Adv. Seed Lvl Range 5 – 10
+Adv. Seed Hook A huge unseelie fairy has been kidnapping people from a destitute village. He’s taken advantage of
+their plight to fatten them up with the plans of making a coat from their skin.
+Adv. Seed Two-Hour Adventure: Elixir of health, wand of conducting
+Rewards Four-Hour Adventure: Staff of withering
+Adv. Seed Title Wildest Dreams Adv. Seed Lvl Range 5-10
+Adv. Seed Hook The residents of a small Fey village have been seeing their dreams (and nightmares) come to life, and
+they’ve asked you to investigate why.
+Adv. Seed Two-Hour Adventure: spell scroll of revivify, cloak of billowing
+Rewards Four-Hour Adventure: Add staff of the woodlands
+Adv. Seed Title Feisty Fey Festivities Adv. Seed Lvl Range 5-10
+Adv. Seed Hook Two great fey courts have a mutual celebration planned but if they don’t get help soon, their strife may
+ruin the joy.
+Adv. Seed Two-Hour Adventure: Spell scroll of calm emotions, cloak of many fashions,
+Rewards Four-Hour Adventure: Add glamoured studded leather
+Adv. Seed Title Wild Hunt Adv. Seed Lvl Range 5-10
+Adv. Seed Hook Another fey hunting party is planned and some Feywild creatures express fear of becoming prey or
+collateral damage. They seek help.
+Adv. Seed Two-Hour Adventure: (5) +2 arrows, dread helm
+Rewards Four-Hour Adventure: Add bracers of defense
+DUNGEONS & DRAGONS, D&D, Wizards of the Coast, Forgotten Realms, the dragon ampersand, Player’s Handbook, Monster Manual, Dungeon Master’s Guide, D&D Adventurers League, all other
+Wizards of the Coast product names, and their respective logos are trademarks of Wizards of the Coast in the USA and other countries. All characters and their distinctive likenesses are property of
+Wizards of the Coast. This material is protected under the copyright laws of the United States of America. Any reproduction or unauthorized use of the material or artwork contained herein is prohibited
+without the express written permission of Wizards of the Coast.
+©2021 Wizards of the Coast LLC, PO Box 707, Renton, WA 98057-0707, USA. Manufactured by Hasbro SA, Rue Emile-Boéchat 31, 2800 Delémont, CH. Represented by Hasbro Europe, 4 The Square,
+Stockley Park, Uxbridge, Middlesex, UB11 1ET, UK.
+Not for resale. Permission granted to print or photocopy this document for personal use only.
+Dungeoncraft Adventures: The Wild Beyond the Witchlight 10

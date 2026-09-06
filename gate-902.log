@@ -955,3 +955,5 @@ gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as
 GATE_END=2026-09-06T09:33:01Z
 TRUE_EXIT=0
 GATE_LOAD_POST=25.21 33.71 27.06
+GATE_PORCELAIN_POST=[0]
+GATE_HEAD_POST=fd36f0298b1ead15f2a80eff83dafb92114a7ea4

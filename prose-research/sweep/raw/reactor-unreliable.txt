@@ -1,0 +1,299 @@
+ 
+
+ -->
+
+ For compliance with applicable privacy laws:
+
+ Are you under 18 years old?
+
+ No 
+ Yes 
+
+ What Makes an Unreliable Narrator: “Severian’s” Voice in Gene Wolfe’s The Book of the New Sun - Reactor 
+
+ Skip to content 
+
+ Advertisement
+
+ This Month's New Titles 
+
+ What to Watch This Month 
+
+ Sign up for our weekly newsletter 
+
+ Everything in one handy email. 
+
+ What Makes an Unreliable Narrator: “Severian’s” Voice in Gene Wolfe’s The Book of the New Sun - Reactor
+
+ Home /
+ What Makes an Unreliable Narrator: “Severian’s” Voice in Gene Wolfe’s The Book of the New Sun 
+
+ 9
+
+ Share
+
+ Blog
+
+ Writers on Writing
+
+ What Makes an Unreliable Narrator: “Severian’s” Voice in Gene Wolfe’s The Book of the New Sun
+
+ By Brian Evenson 
+
+ | 
+
+ Published on December 8, 2021
+
+ The Book of the New Sun omnibus cover by Don Maitz
+
+ 9
+
+ Share
+
+ The Book of the New Sun omnibus cover by Don Maitz
+
+ A few months ago, I wrote for Tor.com about the first time I encountered Gene Wolfe’s The Book of the New Sun and how it struck me in a way that very little fiction, whether genre or literary, had done before. I’ve read The Book of the New Sun a number of times since, and have spoken about it frequently, and yet when someone asks me what it is about the tetralogy that makes it so resonant for me, I often find myself struggling to answer. That’s not due to me not being able to put my finger on what it is so much as finding it hard to pick one strand free of the larger fabric of the book. The Book of the New Sun works in an integrated way in which all the parts of fiction speak to and amplify one another—something that’s rarer than you might think in fiction—and if I try to explain what Wolfe does with one element, I quickly find the discussion shifting to the elements this first element touches. Better, always, just to go read Wolfe himself.
+
+ And yet, despite that, I’m going to do my best to focus here on one thing in particular: the way The Book of the New Sun is narrated and why Wolfe’s approach strikes me as distinctive, even unique.
+
+ About a decade ago at a World Fantasy Convention, I was having dinner with a bunch of writers and critics when Wolfe came up. One of them praised him as the first writer to use the unreliable narrator to its full extent in science fiction. I wasn’t sure at the time if that idea of Wolfe being the first was true or not, and still am not—I suspect not, though it depends how you define “its full extent”. But Wolfe does have unreliable narrators that strike me as operating differently than how such narrators habitually do, because of the degree to which the motivations of those narrators remain elusive. Despite all of Wolfe’s precision with language, he’s also exceptionally good at using gaps and productive ambiguity in a way that drives the story forward while making it shiver, as if it is threatening to fall apart.
+
+ Take the case of Severian, the narrator of all four books of The Book of the New Sun . Over the course of the series, our sense of who he is as a narrator changes. He does initially seem unreliable, but not necessarily maliciously so, with his unreliability often being more sins of omission than outright deception. There are deliberate gaps in his narrative, but he does little to hide these gaps: they seem meant to catch gently on the reader’s attention upon first read, and more insistently as you reread. There’s also a significant disjunction in the order in which events happen and the order in which Severian chooses to recount them, and this rearrangement, combined with the gaps, makes it so that it is difficult to say at times (especially on a first read) if Severian is hiding something or simply telling the bits he wants to tell in the order he wants to tell them. That uncertainty is something Wolfe uses not so much to veil the unreliability as to make it seem less literarily motivated, more informal and human.
+
+ As you first read The Book of the New Sun you will likely notice moments of narration that seem odd and out of place, moments that seem strangely tentative, moments where he seems to hint at things it doesn’t seem like he could know, moments where you’re not quite certain why Severian says what he says or what the implications of his saying them are. For instance, relatively early in The Shadow of the Torturer Severian sees a portrait of “an armored figure in a desolate landscape,” which as he describes him will become evident to a careful reader is a picture of the moon landing. However, he then goes on to suggest something that seems incomprehensible at the time: he says that “in some obscure way” he feels he wants to take the picture off the wall and carry it to a mountain forest. Only a few pages later are we told that the moon is now covered with trees and thus the moon is green now–something we’ve been told before in the novel, but in a way that could have read as simply figurative. So Severian’s obscure desire to put the moon in the forest feels wrong or random to us, when in fact we later discover that it’s exactly right. Occasionally these moments are marked, with Severian suggesting that he would only understand the significance of something later, but at least as often Wolfe passes over them in silence. What’s created is a fabric of uncertainty which still has enough threads of narrative that we can move along it.
+
+ What follows has spoilers, since it’s impossible to talk in any sort of detail about what Wolfe is doing with narrative without them, so if you haven’t read at least the first two books of The Book of the New Sun , I suggest you stop reading this now and go read them.
+
+ It’s not until we get to the second book of The Book of the New Sun , The Claw of the Conciliator , that we begin to glimpse what might be one of the reasons for why Severian narrates as he does. In that volume, Severian participates in a feast in which he and others eat a portion of the dead chatelaine Thecla’s body in combination with an elixir made from the gland of a strange, alien creature called the alzabo. This creature seems to preserve within itself the personalities of those whom it eats. By eating of Thecla while taking the elixir, Severian acquires her personality in addition to his own. Or as he says later, “some part of her is with me still; at times I who remember am not Severian but Thecla, as though my mind were a picture framed behind glass, and Thecla stands before that glass and is reflected in it.”
+
+ Buy the Book
+
+ The Complete Book of the New Sun
+
+ Buy Book
+
+ icon-close 
+
+ The Complete Book of the New Sun
+
+ Buy this book from:
+
+ Amazon 
+
+ Barnes and Noble 
+
+ iBooks 
+
+ IndieBound 
+
+ Target 
+
+ Rather than an unreliable narrator, it begins to seem to the reader at this point, Severian is two overlapping narrators, with the personality of one inflecting what the other says, perhaps even sometimes taking over the narration. It is not so much the unreliability of a narrator we are facing as it is not always knowing who is actually doing the narrating. Perhaps these moments of uncertainty are due to this. Perhaps the tentativeness comes when the two selves are at disagreement or when their memories do not match—but since this largely occurs beneath the narrative rather than being something the narrative comments on, the ambiguity of where the narrative is coming from is an irreducible part of the text. Wolfe’s use of overlapping and conflicting selves fascinated me so much that I made it, in a somewhat different way, the focus of my novella The Warren .
+
+ Understanding that Severian is experiencing a sort of simulated dissociative identity disorder with two distinct personalities goes a long way to explaining the series’ narrative eccentricities. But once we become comfortable with that, Wolfe complicates our understanding of the voice of his narrator still further. Late in the tetralogy Severian encounters the dying Autarch, who encourages him to eat his forebrain while ingesting a drug that will operate similarly to the alzabo’s gland. This will allow Severian not only to become him, but to become all those whose memories and personalities the Autarch has already absorbed. As Severian tells another character, “I am two, in this single body.” But the Autarch “in one body is a thousand.” Which means that Severian, once he consumes the Autarch’s forebrain, is, in one body, a thousand and two. As the Autarch tells him “my life and the lives of all those who live in me will be continued in you.”
+
+ Indeed, after eating of the Autarch Severian discovers that “my eyes and hands were his.” Even though his physical body is the same, it feels different. His dislocation is so great that when he speaks he recognizes his voice not as “my” voice, but as the voice of “Severian, the young torturer”: his “I” has become a “he.” “But,” he goes on to ask, if that’s the case, “who was I?”
+
+ Mieke Bal in her book Narratology suggests that the term “third person narrator” is absurd: that there is always an “I” saying “he” or “she”. It’s just a question of whether the “I” is revealed (“I am going to the store”) or hidden (An unidentified I states: “She is going to the store”). But with Severian, what it means to say “I” has become uncertain and multiform. With Severian, there’s always a “we” lurking behind the “I” that speaks. Severian is a “we” consisting of more than a thousand others, who was once a “we” made up of two individuals, who before that was an “I”. The act of narrating the account that makes up The Book of the New Sun is a way of retroactively asserting an “I”—of constructing an I, really, in a way that will allow the mind attached to it to muster, organize and control its many overlapping selves. It is also a kind of falsification of what actually is going on in the mind of the narrator: a multiform and unstable personality is telling a story as if it were stable and unified. It is a multiplicity trying to speak as if it were a oneness—and many of the oddities of the narrative can be attributed to its failure (or perhaps one or several of its selves’ unwillingnesses) to do so.
+
+ Is this unreliability? Technically, I suppose it is, but to say that it is tells us very little about what is actually happening within Severian himself and how this bleeds into the narrative for us as readers. Each act of consumption of other selves has led to the deterritorialization and partial reterritorialization of Severian’s mind in a way that makes the territory that each personality occupies variable, overlapping, and in flux, and also, once we know this to be the case, changes the way the gestures of the narrator can be read. For instance, about a third of the way through The Claw of the Conciliator , Severian, in a parenthetical, recalls laughing with five other people (three men, two women) whose names we haven’t heard of before as he plays with torture equipment. It seems out of character for the young torturer, and only upon rereading did I realize that he has slipped into Thecla’s memories here and could sort out that she and her wealthy friends used to sneak into the prison through a secret door and torture people for fun–an act Severian would never have done. The text continues to open up. This is one reason, among many, why The Book of the New Sun gains so much on rereading: in rereading, we begin to see what was already there.
+
+ Brian Evenson is the author of over a dozen works of fiction. He has received three O. Henry Prizes for his fiction. His most recent book, Song for the Unraveling of the World, won a World Fantasy Award and a Shirley Jackson Award and was a finalist for both the Los Angeles Times Ray Bradbury Prize for Science Fiction, Fantasy, and Speculative Fiction and the Balcones Fiction Prize. He lives in Los Angeles and teaches at CalArts.
+
+ About the Author
+
+ -->
+
+ Brian Evenson
+
+ Author
+
+ BRIAN EVENSON is the author of a dozen books, most recently the story collection The Glassy, Burning Floor of Hell (2021). His penultimate collection, Song for the Unraveling of the World (2019), won the Shirley Jackson Award and the World Fantasy Award and was a finalist for the Ray Bradbury Prize. Other recent books include A Collapse of Horses (2016) and The Warren (2016). His novel Last Days won the ALA-RUSA award for Best Horror Novel of 2009. His novel The Open Curtain was a finalist for an Edgar Award and an International Horror Guild (IHG) Award. His 2003 collection The Wavering Knife won the IHG Award. He is the recipient of three O. Henry Prizes, an NEA fellowship, and a Guggenheim Award. His work has been translated into more than a dozen languages. He lives in Los Angeles and teaches at CalArts.
+
+ Learn More About Brian 
+
+ See All Posts About
+
+ Gene Wolfe 
+ narrative voice 
+ The Book of the New Sun 
+ unreliable narrators 
+ Writers on Writing 
+
+ Subscribe 
+
+ Connect with 
+
+ Login 
+
+ I allow to create an account
+
+ When you login first time using a Social Login button, we collect your account public profile information shared by Social Login provider, based on your privacy settings. We also get your email address to automatically create an account for you in our website. Once your account is created, you'll be logged-in to this account.
+
+ Disagree Agree 
+
+ Notify of 
+
+ new follow-up comments 
+ new replies to my comments 
+
+ Label 
+
+ {} 
+ [+] 
+
+ Name* 
+
+ Email* 
+
+ Website 
+
+ Connect with 
+
+ I allow to create an account
+
+ When you login first time using a Social Login button, we collect your account public profile information shared by Social Login provider, based on your privacy settings. We also get your email address to automatically create an account for you in our website. Once your account is created, you'll be logged-in to this account.
+
+ Disagree Agree 
+
+ Label 
+
+ {} 
+ [+] 
+
+ Name* 
+
+ Email* 
+
+ Website 
+
+ 9 Comments 
+
+ Oldest 
+
+ Newest 
+ Most Voted 
+
+ NancyLebovitz 
+
+ 4 years ago
+
+ A smaller thing I noticed– I think I noticed– is that chapters tend to end with an incoherent hugger-mugger, which is explained at the beginning of the next chapter.
+
+ 0
+
+ Reply 
+
+ Aonghus Fallon
+
+ 4 years ago
+
+ It took me a while to realise why I found the narrative voice in The Book of the New Sun so familiar. It reminds me of religious allegories I’ve read – I’m thinking of books like Pilgrim’s Progress, Pilgrim’s Regress and Phantastes . There’s the same strange, dream-like atmosphere and the same disengaged narrator. Mimicking the tone of an allegory (even if he wasn’t actually writing one) may have been Wolfe’s route into the story.
+
+ 0
+
+ Reply 
+
+ pfsmith 
+
+ 4 years ago
+
+ I will never tire of reading Book of the New Sun think pieces… Much like I will never tire of reading Book of the New Sun . 
+
+ 0
+
+ Reply 
+
+ AndyLove 
+
+ 4 years ago
+
+ I seem to recall one scene in particular in which Severian brings someone back to life accidentally (via the Claw, which if I recall correctly he doesn’t realize he has) and never figures out that he’s done so (which reminds me now of another unreliable narrator – Charlie Gordon, friend to Algernon).
+
+ 0
+
+ Reply 
+
+ Raskos 
+
+ 4 years ago
+
+ Severian tells us that he forgets nothing, and in fact in the one instance in the books when he tells us that his memory fails him, he remarks that it’s a totally unfamiliar sensation to him. He also repeatedly mentions that his account of the events that make up the books are an unbroken line of violet ink (the colour’s reserved for Autarchs), which I think ties in with his allegedly perfect memory.
+
+ I wonder how this squares with him being an unreliable narrator. Or maybe this is his way of forestalling this accusation.
+
+ 0
+
+ Reply 
+
+ pfsmith 
+
+ 4 years ago
+
+ #4
+
+ Severian indeed “resurrects” Dorcas with the Claw while traveling in the Botanic Gardens. He is unaware that he’s in possession of the Claw because Agia had slipped it into his pouch in the previous scen. It eventually becomes clear to the reader that the Claw was obviously responsible for bringing Docas back to life, and Severian is clearly aware of the Claw’s power to resurrect others, because he uses it for this purpose several times later on. However, it seems very odd that nowhere in the text, as far as I can remember, does Severian acknowledge that it was the Claw that raised Dorcas from the lake. Even Dorcas eventually figures out how the Claw works and explains it to him. But Severian never explicitly states that he realizes he used the Claw on her.
+
+ 0
+
+ Reply 
+
+ AndyLove 
+
+ 4 years ago
+
+ @6: Thanks.  And Dorcas’ widower never realizes that she’s the one he’s been haunting the dead pool for, too, right?
+
+ 0
+
+ Reply 
+
+ pfsmith 
+
+ 4 years ago
+
+ Correct. In fact, the widower never actually sees Dorcas emerge from the lake because Severian and Agia had already parted company with him just a moment before. He certainly would have recognized her, which gives the scene a touch of comic (or tragic) irony.
+
+ I will now offer a bit of my own amateur book analysis… Gene Wolfe has cited Jack Vance’s Dying Earth  stories as a primary inspiration for  Book of the New Sun.  There’s a scene in Vance’s  Eyes of the Overworld  where Cugel the Clever finds himself wandering a beach and happens upon an old man digging and sifting through the sand in search of a lost family heirloom–an amulet of magical properties. He’s been digging and searching for years and Cugel accidentally unearths the amulet within moments and keeps it for himself–much to the old man’s distress. It’s an entirely comic scene, but I can totally imagine it as the basis for Dorcas’ introduction in  BOTNS. 
+
+ 0
+
+ Reply 
+
+ AndyLove 
+
+ 4 years ago
+
+ @8: I wonder if that Cugel scene inspired the ending of “Holes” too.
+
+ 0
+
+ Reply 
+
+ “Time is an illusion. Lunchtime doubly so.”
+
+ Douglas Adams, The Hitchhiker’s Guide To The Galaxy
+
+ Privacy Policy 
+
+ Terms of Use 
+
+ Your Privacy Choices 
+
+ TPG 2026 
+ •
+ Site Credit 
+
+ wpDiscuz 
+
+ Insert 
+
+ You are going to send email to 
+
+ Send 
+
+ Move Comment
+
+ Move 
+
+ 

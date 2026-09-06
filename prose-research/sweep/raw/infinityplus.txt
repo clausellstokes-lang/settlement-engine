@@ -1,0 +1,493 @@
+ 
+
+ Some Moments with the Magus: An Interview with Gene Wolfe - infinity plus non-fiction 
+
+ Some Moments with the Magus: 
+
+ An Interview with Gene Wolfe
+
+ by Nick Gevers , Michael 
+ Andre-Driussi , and James Jordan 
+
+ INTRODUCTION, BY NICK GEVERS
+
+ I have interviewed Gene Wolfe before, early 
+ in 2002, for SF Site . Here is the summary of his literary career 
+ I offered then, together with an estimation of the uncertainties inherent 
+ in interviewing so consummately subtle a literary artist: 
+
+ "Gene Wolfe (born in 1931, an engineer by 
+ training, and long resident in Illinois) has been described as the 
+ best or most significant of contemporary SF writers; and to those 
+ well acquainted with his work, the judgement is hard to fault. Since 
+ the mid-1960s, he has contributed to SF and Fantasy a host of stories 
+ and novels of profound depth and provocative ambiguity; a Roman Catholic 
+ of Thomist inclination, he tests his readers' insight and attention 
+ to detail like the subtlest of theologians, weaving dense webs of 
+ allusion, implication, and sheer wonder. A master parodist, he possesses 
+ an extraordinary stylistic breadth, writing alternately with limpid 
+ simplicity and with a formidable baroque density of diction; and all 
+ this in the service of oblique, many-layered, endlessly surprising 
+ and beautifully structured fictions. He is simultaneously the Dickens 
+ and the Nabokov of the speculative genres: the author of huge, memorious 
+ novels of great psychological and spiritual penetration, and the ludic 
+ confectioner, the playful deployer of every trick in the literary 
+ compendium. Chesterton, Borges, and Kipling, John Fowles and Jack 
+ Vance and Damon Knight might equally be cited in analogy; but ultimately 
+ Gene Wolfe is sui generis , an ineffable magus of prose. Kim 
+ Stanley Robinson and Tim Powers may vie with him for supremacy as 
+ novelists within the genres of the fantastic; Lucius Shepard and Michael 
+ Swanwick may have his measure in the short fiction field; but across 
+ the full spectrum of textual length, Wolfe has no authentic qualitative 
+ equal -- his multi-volume novels and his intricately crafted short 
+ stories are all of a commanding piece. 
+
+ "This said, there are perhaps three distinct 
+ threads running through the Wolfe oeuvre, embodied respectively in 
+ the vast neo-classical novels, the contemporary fantasies, and the 
+ puzzles in miniature. The first bracket: Wolfe has a fascination with 
+ paganism and the rise of Christianity that eclipsed it, and has worked 
+ this into a series of related epics: The Book of the New Sun , 
+ made up of The Shadow of the Torturer (1980), The Claw of 
+ the Conciliator (1981), The Sword of the Lictor (1982), 
+ and The Citadel of the Autarch (1983), along with a sequel, 
+ The Urth of the New Sun (1987), collectively the account of 
+ the rise to power on a dying Urth of an itinerant torturer, Severian, 
+ messianic bringer of a New Sun; The Book of the Long Sun , composed 
+ of Nightside the Long Sun (1993), Lake of the Long Sun 
+ (1994), Caldé of the Long Sun (1994), and Exodus 
+ From the Long Sun (1996), relating the parallel reluctant ascendancy 
+ of an obscure priest, Patera Silk, on board the generation starship 
+ Whorl ; and The Book of the Short Sun -- On Blue's Waters 
+ (1999), In Green's Jungles (2000), Return To The Whorl 
+ (2001) -- in which Silk and his biographer, Horn, achieve a mysterious 
+ communion on the colony worlds at journey's end. This huge twelve-volume 
+ cathedral of words is of infinite fascination, one of the most complex 
+ religious allegories ever set to paper; the incomplete Latro series, 
+ set in Ancient Greece and so far consisting of Soldier of the Mist 
+ (1986) and Soldier of Arete (1989), covers not dissimilar ground 
+ with no less ingenuity and focus. And the 1972 novella cycle The 
+ Fifth Head of Cerberus , Wolfe's first major book, hangs ominously 
+ in the background of all these series, an experimental foundation 
+ or doubtful master key. 
+
+ "Even though the neo-classical novel cycles 
+ have probably attracted most attention, Wolfe's books with a roughly 
+ contemporary setting (call them, with minimal accuracy, his 
+ fantasies, his second career thread) are also of some note. Peace 
+ (1975), his early, vaguely autobiographical novel, is an intense sinister 
+ labyrinth of meanings; Free Live Free (1984) is the story of 
+ Oz retold with many a compelling bizarre spin; There Are Doors 
+ (1988) is a brilliant sexual fable in which nothing is what it seems; 
+ and Castleview (1990) is a weird Midwestern-Arthurian screwball 
+ comedy of recruitment ... perhaps. It is always hard to pin Wolfe 
+ down. Indeed: his numerous stories, collected in The Island of 
+ Doctor Death and Other Stories and Other Stories (1980), Gene 
+ Wolfe's Book of Days (1981, later incorporated into the 1992 omnibus 
+ Castle of Days ), Storeys From the Old Hotel (1988), 
+ Endangered Species (1989), and Strange Travelers (2000), 
+ form a third thread of entrancing formal deviousness, the most intellectually 
+ intriguing and exacting body of short fiction to appear since the 
+ heyday of Borges. In the Wolfe canon, all the mature texts, novels 
+ or tales, plainly or baroquely narrated, are rich with recomplicated 
+ significance; and even after many readings, the ferments of speculation 
+ they cause will never truly close. 
+
+ "When I interviewed Gene Wolfe by e-mail 
+ in January 2002, I came to the conversation aware that Wolfe the person 
+ is not unlike his books: genial (of course), accommodating, plain-spoken 
+ at times to a surprising degree; and yet a magician, a poser of paradoxes 
+ that, however simple on the surface, are in fact like the Labyrinth 
+ at Knossos, the mazes so many of his characters tread, as enormously 
+ involved and logically convoluted as reality itself. One cannot expect 
+ direct answers, at least about his books: they will speak for themselves, 
+ or not at all, and any candour is deceiving. But on certain practical 
+ topics (publishing, possibly engineering problems), all is clarity. 
+ For allowing me to be the latest interviewer errant to tilt at the 
+ windmills of his mind, a tourney of much fascination, I am very grateful 
+ to Mr. Wolfe." 
+
+ And I'm doubly grateful to Mr. Wolfe now, for 
+ permitting not only a second such tilt, but one by a trio of enthusiasts 
+ and critical scholars of his works: Michael Andre-Driussi, author of 
+ the noted Lexicon Urthus , a major glossary to the Urth novels, 
+ and a number of penetrating articles and chapbooks centring on the Wolfe 
+ oeuvre; James Jordan, erudite theologian and extensive commentator on 
+ religious motifs, meanings, and allusions in Wolfe's novels; and, again, 
+ myself. The present focus is partly on Wolfe's previous writings, which 
+ continue to excite fascinated interpretation and debate; partly on The 
+ Wizard Knight , a notable new epic, of which Book One, The Knight , 
+ appears from Tor in January 2004; and partly on Wolfe's current thinking 
+ and personal circumstances ... 
+
+ We conducted the following interview with Gene 
+ Wolfe by e-mail between August and October of 2003. Henceforward, Wolfe 
+ is GW, Michael Andre-Driussi is MAD, James Jordan is JJ, and I am my 
+ familiar NG. 
+
+ -- Nick Gevers . 
+
+ THE INTERVIEW
+
+ MAD : Read any good 
+ books lately?
+
+ GW : Yes. Adventures Among Books , 
+ by Andrew Lang; Being Gardner Dozois , by Michael Swanwick; and 
+ The New Wave Fabulists , edited by Peter Straub.
+
+ MAD : What would you 
+ do with NASA?
+
+ GW : What would I do with NASA? Obviously 
+ that would depend on how much money I had to work with. But basically 
+ I'd put more effort into spaceboat development and less into flying 
+ missions of dubious worth. NASA has suffered two disastrous crashes, 
+ the Challenger and the sainted Columbia . Both were vehicle 
+ failures. It needs a better boat.
+
+ MAD : What conventions 
+ are you planning to attend? Would you go to one overseas?
+
+ GW : The only convention on my schedule 
+ now is Windycon. That's quite near here, in November. I wouldn't attend 
+ an overseas con, or any distant con. Rosemary isn't up to travelling, 
+ and I'm not about to go away and leave her here alone.
+
+ MAD : Tell us about 
+ your dogs.
+
+ GW : We only have one dog now. Calamity 
+ Jane had to be put down. She was very old, and her medicine no longer 
+ controlled her seizures. Dilly is five now, I think. He's a neutered 
+ American Pit Bull Terrier, very gentle, about the color of buckskin.
+
+ MAD : What are your 
+ thoughts on the US military actions going on around the world (Afghanistan, 
+ Iraq, Liberia)?
+
+ GW : The US military is already spread 
+ too thin. Sending American troops into Liberia was not only foolish 
+ but foolhardy.
+
+ MAD : 
+ In the last few years world events have brought a new urgency to a few 
+ stories that you wrote in the 1970s: "The Blue Mouse" (1971, collected 
+ in Gene Wolfe's Book of Days ); "Hour of Trust" (1973, collected 
+ in The Island of Doctor Death and Other Stories and Other Stories ); 
+ and "Seven American Nights" (1978, also collected in IODDAOSAOS ). 
+ "The Blue Mouse" is, in part, about the willingness to fight in murky, 
+ international conflicts; "Hour of Trust" involves the same, but adds 
+ suicide bombers; "Seven American Nights" is set in a fallen America 
+ that could well be a result of the conflict in "Hour of Trust." "Hour 
+ of Trust" is the most haunting: it shows not only suicide bombers, but 
+ also their recruitment from an incoherent mass of variously disaffected 
+ people, and how they are used as tools for a coherent policy of terror; 
+ it shows a schism between Europe and the US; it shows the power of amateur 
+ video being broadcast. These stories were all written before the hostages 
+ were taken in Iran (1980), another moment which seems a part of the 
+ same picture. What inspired "Hour of Trust" in particular, and do you 
+ think that this 30-year-old nightmare is unfolding today in the post-September 
+ 11 world?
+
+ GW : "Hour of Trust" was inspired by a 
+ Damon Runyon story, "A Light in France." It's basically an early WWII 
+ story, written when most people expected that world war to be much like 
+ the first one. (We tend to forget that the first and second world wars 
+ were only about twenty-five years apart. We are losing the last WWII 
+ veterans; when Hitler's army marched into France, there were still a 
+ whole lot of WWI vets around, including Hitler.) Anyway, I read "A Light 
+ in France" and started playing with the idea in an SF setting.
+
+ I think you're the only person who has ever asked me about that story, 
+ Michael.
+
+ MAD : You've had several 
+ stories published online -- how do you like it? Is the technology up 
+ to speed, really "consumer-ready"? Is there a stigma or barrier about 
+ online publications with regards to reviews and award considerations, 
+ or does it seem like it is equal with print sources?
+
+ GW : Online publication is fine with me, 
+ in part because I hope to collect those stories later. Whether the medium 
+ is ready for consumers is better judged by those consumers. I sometimes 
+ read online -- but not often. The stigma is attached to pay scales. 
+ Much online publication is no pay or small pay.
+
+ NG : Is ambiguity a 
+ necessary property of your work? Does the richness of a Gene Wolfe novel 
+ or story depend, to some extent, on its simultaneous stimulation of 
+ multiple interpretations in the reader's head, so that thematic closure 
+ is never attainable?
+
+ GW : Ambiguity is necessary in some of 
+ my stories, not in all. In those, it certainly contributes to the richness 
+ of the story. I doubt that thematic closure is never attainable.
+
+ NG : A number of your 
+ readers have speculated on how your Korean War experience has fed into 
+ your writing. Certainly the events of 1950-1953 seem to find resonance 
+ in the war of Severian's Commonwealth against the Ascians, and in the 
+ war of Blanko against Soldo in In Green's Jungles . Your comments?
+
+ GW : My whole life experience feeds into 
+ my writing. I think that must be true for every writer. Clearly the 
+ Army and combat were major influences; just the same, you need to understand 
+ that many of the writers we have now couldn't load a revolver. I've 
+ crossed the Atlantic and the Pacific on ships. I've crewed on a sailboat. 
+ I've ridden a lot of horses and one camel -- his name was Tank, and 
+ we loped across the Australian desert. I've flown in a light plane and 
+ a helicopter. (As a passenger. I'm not a pilot.) I've boxed, though 
+ not professionally. And so on and so forth.
+
+ NG : An 
+ interesting distinction between the New Sun and Long Sun 
+ novels relates to the directness of divine presence or intervention. 
+ Severian learns the will of the Increate via intermediary beings -- 
+ Hierodules, Hierogrammates -- while Silk appears to communicate directly 
+ with the Outsider, as his people term God or the Increate. Is Silk more 
+ intrinsically holy than Severian?
+
+ GW : I don't think anyone is more intrinsically 
+ holy. People experience God in many ways; and it seems to me that God 
+ does what the rest of us do: He chooses the means that best gets His 
+ message across. He's not rewarding us by talking to us. He's talking 
+ to us because He has something to say to us directly, as opposed to 
+ the things He says to all humanity.
+
+ NG : At the recent Readercon, 
+ many observers were impressed by your impromptu rendering of the inner 
+ nature of a "bad man". In your view, does evil genuinely, consciously, 
+ exist? Can you perhaps expand on the points you were making at Readercon?
+
+ GW : You seem to think that the only genuine 
+ existence evil can have is conscious existence -- that no one is evil 
+ unless he admits it to himself. I disagree.
+
+ NG : Although the Latro 
+ novels have no declared connection with the New Sun/Long Sun/Short 
+ Sun sequence, the gods of Latro's Hellenic world do recur to some 
+ extent in the Long Sun and Short Sun books, the same pagan 
+ archetypes acquiring far future flesh as prevailed before Christianity. 
+ Pas is Zeus, or aspires to be, etc. Is this recurrence simply a reflection 
+ of inevitable similarities between pagan pantheons, or is a more literal, 
+ material, continuity of "divine" pagan personae involved? Is Pas Zeus 
+ indeed?
+
+ GW : Pas is certainly not Zeus. (No doubt 
+ he would like to be.) The classical gods are, in general, not as people 
+ today imagine them. Ares is the soldier god, not the war god, for example. 
+ Aphrodite is the sex goddess, not the love goddess; the love god is 
+ Eros, her son.
+
+ NG : There's a lot of 
+ uncertainty as to how the twelve New Sun/Long Sun/Short Sun volumes 
+ should collectively be titled. Would The Briah Cycle be an acceptable 
+ overall moniker? 
+
+ GW : The Briah Cycle seems to me 
+ to be as good a label as anyone is apt to find.
+
+ JJ : Angel-like creatures 
+ interact with Severian; the Outsider grants direct illumination to Silk; 
+ the Narrator of the Short Sun books is applying Silk's life in 
+ multiple ways. This looks like an extended "spin" on the Old Testament, 
+ the New Testament, and the Church afterwards. There are numerous parallels 
+ between Jesus and Silk, and after Silk's burial and "resurrection" we 
+ find in Exodus From the Long Sun long sections of "evangelism" 
+ for the "message of Silk," finishing with a fiery apocalypse -- all 
+ of which looks like the Gospels, the Book of Acts , and the Apocalypse. 
+ Did you have this kind of overall scheme in mind, either at the very 
+ beginning or when you came to write Long Sun and Short Sun ? 
+ And if not, do you think it is a useful way to think about these works?
+
+ GW : No, the Biblical parallel had never 
+ occurred to me. I think it may well be a useful way to look at those 
+ books, however.
+
+ JJ : J. K. Rowling is 
+ writing fairly sophisticated stories for young people in her "Harry 
+ Potter" series, reflecting her attachment to C. S. Lewis. Have you read 
+ these? Do you have any comments on their literary quality and general 
+ worth?
+
+ GW : I have read only the first "Harry 
+ Potter" book. I thought it excellent, perhaps the best thing written 
+ for older children since The Hobbit . I wish the books had been 
+ around when my kids were the right age for them.
+
+ JJ : Could you tell 
+ us about your and Rosemary's general health these days?
+
+ GW : Rosemary is diabetic and has difficulty 
+ walking any great distance. Stairs are very hard for her. I have glaucoma. 
+ We're well otherwise.
+
+ JJ : What things inspired 
+ you to move into writing the "Wizard Knight" books? Was this a long-time 
+ desire, or were you jogged into doing it by one thing or another, as 
+ thinking about costumes jogged you into creating Severian?
+
+ GW : I met a nice little boy named Nick. 
+ (He's not quite so little now.) He was very, very bright, and crazy 
+ about knights and the whole medieval scene. I tried to figure out what 
+ attracted him to it so much, and began to write a book. 
+
+ JJ : 
+ Many of your books, particularly the Latro and Briah books, portray 
+ a dimly-seen conflict or at least interaction of "higher powers" that 
+ is in part "behind" the human events. One sees the same kind of thing 
+ in the Book of Daniel , chapter 11, and also in the Iliad . 
+ I'm wondering about the origin of this interesting theme in your writing, 
+ how you came to think of writing this way.
+
+ GW : No comment.
+
+ JJ : Could you comment 
+ on some of the things that motivated your creation of the story of Patera 
+ Silk -- such as (possibly) (a) disappointment over people's misunderstanding 
+ of the Severian narrative; or (b) a desire to write your own version 
+ of The Diary of a Country Priest ; or (c) some specific event 
+ in your life; or (d) something else altogether?
+
+ GW : None of those you suggest. I began 
+ with the idea of writing about a good man in a bad religion. That's 
+ all.
+
+ JJ : Aww, why not? I 
+ might as well at least ask one of the $64,000 questions, so I'll 
+ just go for broke. (Hmm. I've gotta be very precise here. Okay, here 
+ goes:) Which of the following, if any, are physically (not in some merely 
+ literary or symbolic sense) the same planets as Blue and Green, in the 
+ same order?:
+
+ Ushas and Lune
+
+ Urth and Lune
+
+ Lune and Ushas
+
+ Lune and Urth
+
+ Two Urths
+
+ Two Ushases
+
+ Two Lunes
+
+ GW : None. 
+
+ On 
+ The Wizard Knight :
+
+ NG : Apart from your 
+ aforementioned meeting with young Nick, what first got you interested 
+ in writing a novel incorporating knightly chivalry and Teutonic myth?
+
+ GW : The short answer is that I don't 
+ know. I started thinking about knighthood, and wondering why that period 
+ has an eternal fascination for us. Greek myth is laid in the Golden 
+ Age. The Dark Ages are our Golden Age; most fairy tales, and all the 
+ best ones, are laid there. I start thinking about a lot of things, including 
+ dinner, but I needed a new book just then and wanted to get away from 
+ the universe of the New Sun books.
+
+ NG : Why did you choose 
+ to make the narrator of The Knight a contemporary American? More 
+ broadly, why in your opinion are so many authors of Arthurian fantasy 
+ (from Mark Twain in A Connecticut Yankee to Poul Anderson in 
+ Three Hearts and Three Lions ) inclined to insert modern viewpoint 
+ characters into novels set in the Dark Ages?
+
+ GW : I've no good answer. I felt I needed 
+ to bring in someone from outside, who would not have heard about the 
+ Aelf and Angrborn from childhood.
+
+ NG : You have narrated 
+ a number of stories and novels from the perspectives of children, but 
+ The Wizard Knight is by far your most ambitious exercise in a 
+ youthful vein. What, for you, are the particular challenges of assuming 
+ a young, or teenage, narrative voice?
+
+ GW : A youthful American voice isn't particularly 
+ challenging -- I've been a young American, and they're all around me. 
+ I can walk from my house to Barrington High School.
+
+ NG : The Knight 
+ describes a hierarchy of worlds, the two highest very possibly the realms 
+ of God and the angels, the lowest hellish terrains like Muspel. Does 
+ this scheme emanate from Teutonic and Celtic myth, from the Kabbalah, 
+ or primarily from Christian theology?
+
+ GW : I began with Teutonic Myth: Valhalla 
+ above, the elves below. When I needed another layer, I added one. The 
+ lowest is not Muspel.
+
+ NG : Although The 
+ Knight is very much a Gene Wolfe novel, packed with cunning clues, 
+ oblique touches, unusual viewpoints, searching dialogues, and brilliant 
+ prose, it seems more transparent, less veiled, than your previous epics. 
+ Could The Wizard Knight be employed as a sort of explicatory 
+ Rosetta Stone for the wider Wolfe oeuvre, your open statement of themes 
+ explored with greater disguise in the Briah and Latro books? 
+
+ GW : Perhaps it could be. I'll be interested 
+ to see whether anyone does it.
+
+ © Nick Gevers, Michael Andre-Driussi, and 
+ James Jordan 2003 . 
+
+ The Knight is published by Tor in the US in January 2004. 
+
+ Order online using these links and infinity 
+ plus will benefit: 
+
+ from 
+ Amazon.com / from 
+ Amazon.co.uk 
+
+ Elsewhere in infinity plus : 
+
+ fiction by Gene Wolfe - The 
+ Arimaspian Legacy . 
+ non-fiction - reviews 
+ of Gene Wolfe's work . 
+
+ Elsewhere on the web: 
+
+ Gene Wolfe links abound, but a good place 
+ to start is the Wolfe studies site, Ultan's 
+ Library . 
+
+ Let 
+ us know what you think of infinity plus - e-mail 
+ us at:
+
+ sf@infinityplus.co.uk 
+
+ support this site - buy books through these 
+ links:
+
+ A+ 
+ Books: an insider's view of sf, fantasy and horror 
+
+ amazon.com 
+ (US) | Internet 
+ Bookshop (UK) 
+
+ top 
+ of page 
+
+ [ home page | fiction 
+ | non-fiction & features 
+ archive | other 
+ stuff | A 
+ to Z ]
+
+ [ infinity 
+ plus bookshop | search 
+ infinity plus ] 
+
+ © Nick Gevers, Michael Andre-Driussi, 
+ and James Jordan 20 December 2003
+

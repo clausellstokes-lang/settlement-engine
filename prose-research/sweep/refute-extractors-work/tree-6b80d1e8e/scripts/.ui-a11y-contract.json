@@ -1,0 +1,32 @@
+{
+  "_doc": "UI a11y contract manifest (Cycle-3 Wave 5). THREE born-empty registries the uiA11yContract walker enforces over src/components: (1) zLayers — the frozen stacking manifest (every zIndex literal must resolve to a named layer or the local band); (2) mousedownActivationAllow — files exempt from the keyboard-reachable ban on mouse-only ACTIVATION; (3) handRolledTrapAllow — files exempt from the single-writer focus-trap rule. Edit this file only to REGISTER a new layer (with review) or, deliberately, to grandfather an exception. Do not raise the local ceiling to smuggle a global layer.",
+  "zLayersLocalCeil": 20,
+  "zLayers": {
+    "mapPanelBase": 30,
+    "mapPanelRaised": 40,
+    "mapControl": 45,
+    "popover": 50,
+    "floatingPanel": 60,
+    "drawerScrim": 90,
+    "drawerPanel": 100,
+    "overlayRaised": 120,
+    "banner": 260,
+    "annotationComposer": 280,
+    "dialogScrim": 300,
+    "dialogScrimRaised": 310,
+    "reportDialog": 420,
+    "coach": 900,
+    "feedback": 910,
+    "modal": 1000,
+    "paletteAndTakeover": 1100,
+    "accountMenu": 1200,
+    "tour": 4000,
+    "cascadePreview": 9100,
+    "pricingMoment": 9500,
+    "devPanel": 10000,
+    "devBanner": 99999
+  },
+  "zLayersUnregisteredAllow": [],
+  "mousedownActivationAllow": [],
+  "handRolledTrapAllow": []
+}
