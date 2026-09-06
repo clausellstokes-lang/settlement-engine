@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 18:16:00 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 18:24:14 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -220,7 +220,7 @@
 | hobb | synth |  | failed | 0 | — | — | 19:45:56 |
 | hobb | synth |  | result | 0 | section-hobb.md | — | 18:17:47 |
 | hobb | synth |  | in-flight | 0 | — | — | 17:48:45 |
-| hobb | synth |  | in-flight | 0 | — | — | 22:14:05 |
+| hobb | synth |  | in-flight | 0 | section-hobb-body.md | — | 22:21:41 |
 | hobb | verifier | i0-14 | result | 4 | — | verdict file WRITTEN | 16:56:40 |
 | hobb | verifier | i105-119 | result | 5 | — | verdict file WRITTEN | 17:03:33 |
 | hobb | verifier | i120-134 | result | 9 | — | verdict file WRITTEN | 17:10:40 |
@@ -382,10 +382,11 @@
 | leguin | regrade | regrade-r4 | result | 0 | build-leguin-r4.mjs | — | 17:31:56 |
 | leguin | regrade | regrade-r6 | failed | 0 | — | — | 18:42:14 |
 | leguin | regrade | regrade-r7 | failed | 0 | — | — | 19:46:12 |
-| leguin | regrade | regrade-r8 | in-flight | 0 | — | — | 22:15:47 |
+| leguin | regrade | regrade-r8 | result | 0 | — | — | 22:16:04 |
 | leguin | synth |  | failed | 0 | — | — | 19:46:18 |
 | leguin | synth |  | failed | 0 | — | — | 18:42:14 |
 | leguin | synth |  | result | 0 | section-leguin.md | — | 17:50:43 |
+| leguin | synth |  | in-flight | 0 | — | — | 22:24:07 |
 | leguin | verifier | i105-119 | result | 2 | — | verdict file WRITTEN | 17:03:23 |
 | leguin | verifier | i120-134 | result | 4 | — | verdict file WRITTEN | 17:03:37 |
 | leguin | verifier | i135-149 | result | 5 | — | verdict file WRITTEN | 17:03:44 |

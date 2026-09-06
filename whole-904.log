@@ -21,3 +21,6 @@ vendored lib pinned in manifest is missing on disk: flatqueue.js
      × every config produces byte-identical output to the golden master 28260ms
 Not implemented: navigation to another Document
 Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+VENDOR-MANIFEST.json has no `libs` to verify — refusing to pass with the supply-chain check vacuous. Re-pin the vendored libs: node scripts/validate-map-fork.mjs --update-manifest
+VENDOR-MANIFEST.json has no `libs` to verify — refusing to pass with the supply-chain check vacuous. Re-pin the vendored libs: node scripts/validate-map-fork.mjs --update-manifest

@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 18:16:28 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 18:23:08 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -82,7 +82,7 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - **kay**: claims 1007 · verdicts 893 (todo 114) · kept 448 · partial 48 · verdict files 37 (triage 2, regrade r5) · section 09-06 14:42 · critic 09-06 15:04
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 13:47 · critic 09-06 14:20
 - **wolfe**: claims 978 · verdicts 739 (todo 239) · kept 402 · partial 66 · verdict files 35 (triage 1, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
-- **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 14:14 · critic 09-06 14:28
+- **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 14:28
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
   File "<string>", line 1, in <genexpr>
@@ -99,4 +99,4 @@ KeyError: 'tag'
 - wf_e95fca37-bb5: 29 journal lines, 17 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;86204 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;86240 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;
-load: 21.00 16.18 10.43
+load: 19.57 19.05 14.35
