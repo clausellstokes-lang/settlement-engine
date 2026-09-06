@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 17:30:53 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 17:36:29 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -81,17 +81,21 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - **kay**: claims 1007 · verdicts 893 (todo 114) · kept 448 · partial 48 · verdict files 37 (triage 2, regrade r5) · section 09-06 14:42 · critic 09-06 15:04
 - **leguin**: claims 924 · verdicts 762 (todo 162) · kept 342 · partial 42 · verdict files 29 (triage 2, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
 - **wolfe**: claims 978 · verdicts 739 (todo 239) · kept 402 · partial 66 · verdict files 35 (triage 1, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
-- **hobb**: claims 696 · verdicts 673 (todo 23) · kept 471 · partial 50 · verdict files 38 (triage 1, regrade r4) · section 09-06 14:14 · critic 09-06 14:28
-- LAST-RUNS: tolkien r6-not-launched/(none — nothingToRun 14:55), kay r7/wf_b55db7cd-25f, leguin r7/wf_29dbbf1f-9e3, wolfe r6/wf_5c6be9e9-17f, martin r6/wf_004aff7a-269, hobb r6/wf_ab3eea15-df4, dnd r6/wf_df0a321b-0f2, ai r6/wf_e04d8c44-23e
+- **hobb**: claims 696 · verdicts 681 (todo 15) · kept 477 · partial 51 · verdict files 39 (triage 1, regrade r4) · section 09-06 14:14 · critic 09-06 14:28
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<string>", line 1, in <genexpr>
+KeyError: 'tag'
+- LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session cc123b6c-1961-44c5-b071-c5e5aee7ee80 (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_1326cde9-2e5: 2 journal lines, 2 agents
-- wf_255b6391-7fb: 2 journal lines, 2 agents
+- wf_255b6391-7fb: 3 journal lines, 2 agents
 - wf_3a29e467-750: 1 journal lines, 1 agents
 - wf_3d71f708-fe3: 1 journal lines, 1 agents
 - wf_b15831a8-df4: 1 journal lines, 1 agents
 - wf_d76e605d-6d1: 1 journal lines, 1 agents
 - wf_e95fca37-bb5: 4 journal lines, 4 agents
 
-## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.98 2.58 2.36
+## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;65055 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;
+load: 2.01 2.35 2.33

@@ -14301,6 +14301,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-hobb-triage-r7.json"
   },
+  "640": {
+   "index": 640,
+   "verdict": "NOT_FOUND",
+   "trueWording": "Tag archive lists ten recent entries; no census, no figures.",
+   "note": "Live fetch 200 (browser UA). https://elliottrwi.com/tag/hobb-reread/ is a paginated ten-post archive (currently entries 530-539) plus site nav; it carries no census, no '13', no '120', no 'Fitz and the Fool' grouping, and no per-entry opening sentences. The claim is a finder-original count, not a page assertion, so the cited URL cannot support it. Adversarial probe: Fitz and the Fool coverage begins at Entry 391 (Fool's Assassin ch.1); two spot-checked entries (391, 404) BOTH name an opening document (a Chivalry-to-Burrich letter; a Bee dream-journal passage), so the 13/120 figure is neither confirmed nor refuted and would need the full 120-entry census to test.",
+   "fromFile": "verdicts-hobb-i640-693.json"
+  },
   "641": {
    "index": 641,
    "verdict": "SKIPPED_TRIAGE",
@@ -14322,6 +14329,21 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-hobb-triage-r7.json"
   },
+  "644": {
+   "index": 644,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the in-milieu work is a song - the page never calls it one",
+   "trueWording": "opens with two stanzas from the in-milieu “The Vixen Queen’s Hunt”",
+   "note": "Live fetch 200. Quote verbatim in the body's opening paragraph; page title confirms Entry 33: Royal Assassin, Chapter 8, and the chapter is named 'The Queen Awakens'. Limbs 'Royal Assassin chapter', 'two stanzas', 'in-milieu' and the title are all supported. The limb 'song' is not: the words song, ballad, verse and poem appear ZERO times anywhere on the page (grep count 0), and 'stanzas' does not entail a song rather than a poem. Genre attribution is the finder's addition.",
+   "fromFile": "verdicts-hobb-i640-693.json"
+  },
+  "645": {
+   "index": 645,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "opens with a series of what read as folk sayings",
+   "note": "Live fetch 200. Quote verbatim in the body's opening paragraph, of the chapter 'Conspiracies'; page title confirms Entry 52: Royal Assassin, Chapter 27. Every limb supported. The claim reorders the phrase ('what read as a series of folk sayings') but the page wording is as given here and the substance is identical.",
+   "fromFile": "verdicts-hobb-i640-693.json"
+  },
   "646": {
    "index": 646,
    "verdict": "SKIPPED_TRIAGE",
@@ -14335,6 +14357,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-hobb-triage-r7.json"
+  },
+  "648": {
+   "index": 648,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "opens with the cryptic Kelstar’s Riddle",
+   "note": "Live fetch 200. Quote verbatim in the body's opening paragraph, which reads 'The first chapter in the first novel of the Tawny Man series, “Chade Fallstar,”' before the quoted phrase, then gives the riddle's text. Supports first-chapter-of-Tawny-Man and opens-with-a-riddle; the in-milieu attribution to Kelstar is carried by the possessive title Kelstar's Riddle. Page says 'series' where the claim says 'trilogy' - the Tawny Man is a trilogy, so no conflict. Title confirms Entry 221: Fool's Errand, Chapter 1.",
+   "fromFile": "verdicts-hobb-i640-693.json"
   },
   "649": {
    "index": 649,
@@ -14356,6 +14385,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-hobb-triage-r7.json"
+  },
+  "652": {
+   "index": 652,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "begins with verses from Starling Birdsong",
+   "note": "Live fetch 200. Quote verbatim in the body's opening paragraph, of the chapter 'Shared Sorrows'; page title confirms Entry 255: Golden Fool, Chapter 5. Claim's 'opens with' for the page's 'begins with' and 'attributed to' for 'from' are the same substance; every limb supported.",
+   "fromFile": "verdicts-hobb-i640-693.json"
   },
   "653": {
    "index": 653,
@@ -14455,6 +14491,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-hobb-triage-r7.json"
   },
+  "667": {
+   "index": 667,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the Asimovian device with which Hobb opens the chapters",
+   "note": "Live fetch 200. Quote verbatim in the closing commentary, in the sentence beginning 'I’ve noted before my appreciation for...'; the phrase continues by naming the Farseer and Tawny Man trilogies and glossing the device as the citation of in-milieu reference works, and the paragraph goes on to discuss Asimov by name. Both limbs - the two named trilogies and the attribution to Asimov - are supported. Title confirms Entry 237: Fool's Errand, Chapter 17.",
+   "fromFile": "verdicts-hobb-i640-693.json"
+  },
   "668": {
    "index": 668,
    "verdict": "SKIPPED_TRIAGE",
@@ -14482,6 +14525,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-hobb-triage-r7.json"
+  },
+  "672": {
+   "index": 672,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the chapter-prefaces used not only in the Asimovian style",
+   "note": "Live fetch 200. Quote verbatim in the commentary paragraph opening 'I remain pleased to see...'; the sentence continues with the Asimovian style glossed as providing greater context for the world and the events, 'but also to trace ongoing outside narratives', and the same paragraph repeats the point as pointing towards events outside the main narrative. Book identity: the page title is Entry 383: Blood of Dragons, Chapter 17 and the body refers once to 'the tetralogy'; the literal string 'Rain Wild' appears nowhere on the page, so the claim's 'Rain Wilds' label rests on the page-named novel plus its uncontested series membership rather than on the page's own words.",
+   "fromFile": "verdicts-hobb-i640-693.json"
   },
   "673": {
    "index": 673,
@@ -14622,6 +14672,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-hobb-triage-r7.json"
+  },
+  "693": {
+   "index": 693,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "History in the Margins: Epigraphs and Negative Space",
+   "note": "Live fetch 200; full page captured (72,729 chars of entry content, ending in the comment thread, so no truncation). Case-insensitive search of the whole bibliography finds 'epigraph' three times: once in the Oliver entry title, once inside Oliver's annotation, once inside the Petrovski memoir annotation. Exactly ONE entry title names epigraphs - Oliver, Matthew, in Mythlore vol. 41 no. 1 (2022), pp. 45-66 - matching the claim. (A short-form 'History in the Margins.' also appears in the page's index list; same single entry.) Graded SUBSTANCE not VERBATIM because the claim carried an empty quote field, so there was no quotation to match word for word. Minor slippage: the Oliver title names one novel, Assassin's Apprentice, where the claim says 'Hobb's novels'.",
+   "fromFile": "verdicts-hobb-i640-693.json"
   },
   "694": {
    "index": 694,

@@ -1,51 +1,79 @@
 {
- "_doc": "the LAST launch of every sweep (chair Fable 5.1, session 059d4243, 2026-09-06 14:58 after the ACCOUNT SWITCH: every 19ace14d run died; rebuilt by resume-research.sh (tolkien/kay/leguin/martin/dnd/ai) and the hand-built r6 top-ups (wolfe/hobb) launched as built): runId (this session's; dies with it), argsFile, tag, script. TAG LAW: a tag is a LAUNCH COUNTER — kay r6 = critic only; martin r6 / ai r6 = synth+critic (regrade-r5 already landed); dnd r6 = 46 triaged claims + regrade + synth + critic; leguin r7 = the r6 top-up's COMPLETION (4 finders re-run with PRIOR PROGRESS hints, 50 folded claims verified, regrade, synth, critic; existingHashes omitted — the merge dedupes by content); wolfe r6 / hobb r6 = the ONE critic-driven top-up (S-BOUND rule 4). tolkien: nothingToRun — STOPPED (rule 4). After these: dry-check, then dnd/ai's one targeted round ONLY if their new critics still name the PLACE / ARCHIVAL hole; nothing after.",
+ "_doc": "the LAST launch of every sweep. 2026-09-06 17:31 (chair Fable 5.1, session cc123b6c, after the 15:46 session-limit death of 059d4243): all seven rebuilt by resume-research.sh (kay's two rescue chunks added by hand, step 3) and launched at 17:29 as EMBEDDED scripts (sweep/embedded/*.js: the v3 script with `let A = <args JSON>` spliced in by prose-research/mk-embedded.py — byte-exact, hashes included, no paste; launch = Workflow({scriptPath})). OWNER ~17:30: 'do each research only one at a time. pause all others' → six runs STOPPED at ~17:30 (~3 min in), hobb kept. Resume a paused run by Workflow({scriptPath: <its script>, resumeFromRunId: <its runId>}) when the running one COMPLETES (the task notification); its files are the checkpoint either way. Order (chair, vetoable): hobb → leguin → kay → wolfe → dnd → martin → ai. TAG LAW unchanged: a tag is a LAUNCH COUNTER; these launches complete the r6/r7 rounds (kay r8, leguin r8, others r7); tolkien STOPPED (nothingToRun). Within the single running sweep the cap stays 4 (the args' cap; the owner may lower it).",
  "tolkien": {
-  "runId": "(none — nothingToRun 14:55)",
-  "argsFile": "args-tolkien-r6.json",
-  "tag": "r6-not-launched",
+  "runId": "(none — nothingToRun 17:26)",
+  "argsFile": "args-tolkien-r7.json",
+  "tag": "r7-not-launched",
   "script": "STOPPED by S-BOUND rule 4; section 14:20 + critic 14:42 stand"
  },
  "kay": {
-  "runId": "wf_b55db7cd-25f",
-  "argsFile": "args-kay-r7.json",
-  "tag": "r7",
-  "script": "research-workflow-v3.js (v3.4) — THE ONE TOP-UP (S-BOUND rule 4): 2 rescue chunks (25 triage-skipped claims) + 5 extra angles + regrade + synth + critic; existingHashes omitted at the paste (merge dedupes by content); r6 = the critic-only run wf_6aaded2c-7c9 (critic-kay.md 15:08)"
+  "runId": "wf_d76e605d-6d1",
+  "argsFile": "args-kay-r8.json",
+  "tag": "r8",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--kay-r8.js",
+  "status": "PAUSED ~17:30 — 3rd (rescue chunks kay-rescue-0/1 IN the embedded args)",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--kay-r8.js"
  },
  "leguin": {
-  "runId": "wf_29dbbf1f-9e3",
-  "argsFile": "args-leguin-r7.json",
-  "tag": "r7",
-  "script": "research-workflow-v3.js (v3.4) — completion of the r6 top-up (4 finders re-run w/ hints, 4 chunks, regrade, synth, critic); existingHashes omitted"
+  "runId": "wf_e95fca37-bb5",
+  "argsFile": "args-leguin-r8.json",
+  "tag": "r8",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--leguin-r8.js",
+  "status": "PAUSED ~17:30 (stopped ~3 min in) — 2nd",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--leguin-r8.js"
  },
  "wolfe": {
-  "runId": "wf_5c6be9e9-17f",
-  "argsFile": "args-wolfe-r6.json",
-  "tag": "r6",
-  "script": "research-workflow-v3.js (v3.4) — THE ONE TOP-UP: 7 extra angles + regrade + synth + critic"
+  "runId": "wf_1326cde9-2e5",
+  "argsFile": "args-wolfe-r7.json",
+  "tag": "r7",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--wolfe-r7.js",
+  "status": "PAUSED ~17:30 — 4th",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--wolfe-r7.js"
  },
  "martin": {
-  "runId": "wf_004aff7a-269",
-  "argsFile": "args-martin-r6.json",
-  "tag": "r6",
-  "script": "research-workflow-v3.js (v3.4) — synth + critic, regrade false (r5 landed)"
+  "runId": "wf_3a29e467-750",
+  "argsFile": "args-martin-r7.json",
+  "tag": "r7",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--martin-r7.js",
+  "status": "PAUSED ~17:30 — 6th (critic only, skipSynth)",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--martin-r7.js"
  },
  "hobb": {
-  "runId": "wf_ab3eea15-df4",
-  "argsFile": "args-hobb-r6.json",
-  "tag": "r6",
-  "script": "research-workflow-v3.js (v3.4) — THE ONE TOP-UP: 4 extra angles + regrade + synth + critic"
+  "runId": "wf_255b6391-7fb",
+  "argsFile": "args-hobb-r7.json",
+  "tag": "r7",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--hobb-r7.js",
+  "status": "RUNNING since 17:29 (the one live sweep)",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--hobb-r7.js"
  },
  "dnd": {
-  "runId": "wf_df0a321b-0f2",
-  "argsFile": "args-dnd-r6.json",
-  "tag": "r6",
-  "script": "research-workflow-v3.js (v3.4) — 4 chunks (46 claims after triage) + regrade + synth + critic"
+  "runId": "wf_3d71f708-fe3",
+  "argsFile": "args-dnd-r7.json",
+  "tag": "r7",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r7.js",
+  "status": "PAUSED ~17:30 — 5th (synth + critic)",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--dnd-r7.js"
  },
  "ai": {
-  "runId": "wf_e04d8c44-23e",
-  "argsFile": "args-ai-r6.json",
-  "tag": "r6",
-  "script": "research-workflow-v3.js (v3.4) — synth + critic, regrade false (r5 landed 14:42)"
+  "runId": "wf_b15831a8-df4",
+  "argsFile": "args-ai-r7.json",
+  "tag": "r7",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r7.js",
+  "status": "PAUSED ~17:30 — 7th (critic only, skipSynth)",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--ai-r7.js"
+ },
+ "_queue": {
+  "ruling": "OWNER 2026-09-06 ~17:30: one research sweep at a time; pause all others",
+  "order": [
+   "hobb",
+   "leguin",
+   "kay",
+   "wolfe",
+   "dnd",
+   "martin",
+   "ai"
+  ],
+  "running": "hobb",
+  "resume": "Workflow({scriptPath: d[<next>].scriptPath, resumeFromRunId: d[<next>].runId}) after the running one completes; then set status RUNNING here"
  }
 }

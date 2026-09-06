@@ -1101,5 +1101,29 @@
    "note": "The quoted phrase opens the review verbatim, and the 1995 date and Morgan's belief are supported (he uses 'he' of Hobb throughout, e.g. 'so he has been able to avoid'). But it is stated as a premise - 'Because Robin Hobb is the pseudonym of an experienced author... The Assassin's Apprentice is free of most of the problems that tend to infect first novels' - reasoning FROM the identity to the prose, not from the prose to the identity.",
    "fromFile": "verdicts-hobb-i506-520.json"
   }
+ },
+ {
+  "index": 644,
+  "feature": "repetition and refrain",
+  "claim": "Elliott records that a Royal Assassin chapter opens with two stanzas from an in-milieu song, \"The Vixen Queen's Hunt\".",
+  "source": "Geoffrey B. Elliott, 'A Robin Hobb Rereading Series', elliottrwi.com, Entry 33 (2019-09-23)",
+  "url": "https://elliottrwi.com/2019/09/23/a-robin-hobb-rereading-series-entry-33-royal-assassin-chapter-8/",
+  "quote": "opens with two stanzas from the in-milieu",
+  "page": "body, opening paragraph",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2019-09-23",
+  "routeHint": "wordpress.com REST v1.1 content field",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "angle": "epigraph-census",
+  "verdict": {
+   "index": 644,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the in-milieu work is a song - the page never calls it one",
+   "trueWording": "opens with two stanzas from the in-milieu “The Vixen Queen’s Hunt”",
+   "note": "Live fetch 200. Quote verbatim in the body's opening paragraph; page title confirms Entry 33: Royal Assassin, Chapter 8, and the chapter is named 'The Queen Awakens'. Limbs 'Royal Assassin chapter', 'two stanzas', 'in-milieu' and the title are all supported. The limb 'song' is not: the words song, ballad, verse and poem appear ZERO times anywhere on the page (grep count 0), and 'stanzas' does not entail a song rather than a poem. Genre attribution is the finder's addition.",
+   "fromFile": "verdicts-hobb-i640-693.json"
+  }
  }
 ]

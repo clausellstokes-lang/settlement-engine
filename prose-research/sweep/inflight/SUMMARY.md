@@ -1,10 +1,11 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 17:29:22 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 17:35:26 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | failed | 0 | — | — | 19:46:10 |
 | ai | critic |  | failed | 0 | — | — | 18:42:11 |
 | ai | critic |  | failed | 0 | — | — | 17:50:58 |
+| ai | critic |  | in-flight | 0 | — | — | 21:31:03 |
 | ai | finder | critics-direct | result | 45 | — | 128 claims, complete=True @14:02:13 | 17:26:31 |
 | ai | regrade | regrade-r4 | failed | 0 | — | — | 17:50:56 |
 | ai | regrade | regrade-r5 | failed | 0 | mk-r5.mjs | — | 18:42:09 |
@@ -98,6 +99,7 @@
 | dnd | synth |  | failed | 0 | secA.md, secB.md, secC.md | — | 19:46:03 |
 | dnd | synth |  | failed | 0 | — | — | 18:42:52 |
 | dnd | synth |  | failed | 0 | — | — | 17:51:08 |
+| dnd | synth |  | in-flight | 0 | — | — | 21:31:03 |
 | dnd | verifier | i109-123 | result | 11 | — | verdict file WRITTEN | 18:11:17 |
 | dnd | verifier | i109-123 | failed | 12 | — | verdict file WRITTEN | 17:51:02 |
 | dnd | verifier | i124-138 | result | 14 | — | verdict file WRITTEN | 17:49:59 |
@@ -250,6 +252,7 @@
 | hobb | verifier | i491-505 | result | 3 | claims_in.json | verdict file WRITTEN | 19:39:08 |
 | hobb | verifier | i506-520 | result | 3 | — | verdict file WRITTEN | 19:44:45 |
 | hobb | verifier | i521-535 | failed | 7 | — | verdict file absent | 19:45:45 |
+| hobb | verifier | i531-639 | in-flight | 20 | — | verdict file absent | 21:35:18 |
 | hobb | verifier | i536-550 | failed | 16 | — | verdict file absent | 19:45:33 |
 | hobb | verifier | i551-565 | failed | 13 | — | verdict file absent | 19:45:39 |
 | hobb | verifier | i566-580 | failed | 0 | — | verdict file absent | 19:45:45 |
@@ -258,6 +261,7 @@
 | hobb | verifier | i60-74 | result | 9 | — | verdict file WRITTEN | 17:02:10 |
 | hobb | verifier | i611-625 | failed | 0 | — | verdict file absent | 19:45:45 |
 | hobb | verifier | i626-640 | failed | 0 | — | verdict file absent | 19:45:50 |
+| hobb | verifier | i640-693 | result | 14 | — | verdict file WRITTEN | 21:34:12 |
 | hobb | verifier | i641-655 | failed | 0 | — | verdict file absent | 19:45:48 |
 | hobb | verifier | i656-670 | failed | 0 | — | verdict file absent | 19:45:45 |
 | hobb | verifier | i671-685 | failed | 0 | — | verdict file absent | 19:45:45 |
@@ -273,6 +277,7 @@
 | kay | finder | rescue-unread | result | 113 | — | 100 claims, complete=True @17:25:52 | 19:38:12 |
 | kay | finder | silmarillion-and-verse | result | 105 | — | 113 claims, complete=True @17:25:52 | 19:34:08 |
 | kay | finder | transcripts-and-readers | failed | 22 | — | — | 19:45:35 |
+| kay | finder | transcripts-and-readers | in-flight | 1 | — | — | 21:31:03 |
 | kay | finder | translators-and-ear | result | 80 | — | 35 claims, complete=True @17:25:52 | 19:33:40 |
 | kay | regrade | regrade-r4 | failed | 0 | — | — | 17:51:50 |
 | kay | regrade | regrade-r5 | result | 0 | build-kay-regrade.mjs | — | 18:26:34 |
@@ -398,10 +403,14 @@
 | leguin | verifier | i360-374 | result | 9 | — | verdict file WRITTEN | 17:22:56 |
 | leguin | verifier | i375-383 | result | 10 | — | verdict file WRITTEN | 17:23:26 |
 | leguin | verifier | i385-415 | failed | 8 | — | verdict file absent | 19:45:38 |
+| leguin | verifier | i385-415 | in-flight | 8 | — | verdict file absent | 21:31:03 |
 | leguin | verifier | i416-475 | failed | 11 | — | verdict file absent | 19:45:43 |
+| leguin | verifier | i416-475 | in-flight | 11 | — | verdict file absent | 21:31:03 |
 | leguin | verifier | i45-59 | result | 21 | — | verdict file WRITTEN | 17:00:18 |
 | leguin | verifier | i477-528 | failed | 8 | — | verdict file absent | 19:45:43 |
+| leguin | verifier | i477-528 | in-flight | 8 | — | verdict file absent | 21:31:03 |
 | leguin | verifier | i531-540 | failed | 1 | — | verdict file absent | 19:45:29 |
+| leguin | verifier | i531-560 | in-flight | 13 | — | verdict file absent | 21:31:03 |
 | leguin | verifier | i541-555 | failed | 0 | — | verdict file absent | 19:45:44 |
 | leguin | verifier | i556-570 | failed | 0 | — | verdict file absent | 19:45:44 |
 | leguin | verifier | i571-585 | failed | 0 | — | verdict file absent | 19:45:44 |
@@ -434,6 +443,7 @@
 | martin | critic |  | failed | 0 | — | — | 19:46:44 |
 | martin | critic |  | failed | 0 | — | — | 18:41:31 |
 | martin | critic |  | failed | 0 | — | — | 17:51:24 |
+| martin | critic |  | in-flight | 0 | — | — | 21:31:03 |
 | martin | finder | closereading | result | 43 | build_found.py, found-martin-closereading.json | 88 claims, complete=True @14:02:13 | 17:19:05 |
 | martin | finder | measurement | result | 60 | — | 60 claims, complete=True @14:02:13 | 17:19:44 |
 | martin | regrade | regrade-r4 | failed | 0 | — | — | 17:51:22 |
@@ -521,11 +531,13 @@
 | wolfe | critic |  | result | 0 | critic-wolfe.md | — | 18:34:19 |
 | wolfe | critic |  | failed | 0 | — | — | 17:52:41 |
 | wolfe | finder | close-continued | failed | 42 | — | 43 claims, complete=False @15:45:44 | 19:45:45 |
+| wolfe | finder | close-continued | in-flight | 1 | — | 43 claims, complete=False @15:45:44 | 21:31:03 |
 | wolfe | finder | counter | result | 68 | — | 114 claims, complete=True @17:25:54 | 19:22:08 |
 | wolfe | finder | editors | result | 35 | — | 78 claims, complete=True @17:25:54 | 19:17:55 |
 | wolfe | finder | le-guin | result | 56 | — | 31 claims, complete=True @17:25:54 | 19:25:33 |
 | wolfe | finder | measure | result | 36 | find-wolfe-measure.md, found-wolfe-measure.json, metrics.py | 38 claims, complete=True @17:25:54 | 19:18:11 |
 | wolfe | finder | monographs | failed | 71 | — | 54 claims, complete=False @15:46:26 | 19:46:26 |
+| wolfe | finder | monographs | in-flight | 8 | — | 54 claims, complete=False @15:46:26 | 21:31:03 |
 | wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
 | wolfe | regrade | regrade-r4 | result | 0 | — | — | 17:43:04 |
 | wolfe | regrade | regrade-r6 | failed | 0 | — | — | 19:50:40 |

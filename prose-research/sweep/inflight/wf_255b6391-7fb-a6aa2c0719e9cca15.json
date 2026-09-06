@@ -1,0 +1,46 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i531-639",
+ "lines": 141,
+ "firstTs": "2026-09-06T21:29:34.684Z",
+ "lastTs": "2026-09-06T21:35:18.190Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 35
+ },
+ "urlsFetched": [
+  "http://www.robinhobb.com/5000words.html",
+  "http://strangehorizons.com/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
+  "https://www.tor.com/2014/08/12/book-review-the-fools-assassin-robin-hobb/",
+  "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+  "http://sf-encyclopedia.uk/fe.php?nm=lindholm_megan",
+  "https://ansible.uk/writing/sfxrev97.html",
+  "https://www.theguardian.com/books/2014/sep/10/fools-assassin-robin-hobb-review-fantasy-novel",
+  "https://locusmag.com/interviews/",
+  "https://doi.org/10.12958/2227-2844-2024-2(361",
+  "https://www.fantasy-animation.org/current-posts/review-matthew-oliver-magic-words-magic-worlds-form-and-style-in-epic-fantasy-2022",
+  "https://elliottrwi.com/tag/hobb-reread/",
+  "https://web.archive.org/web/20080708183800id_/http://www.robinhobb.com/5000words.html",
+  "https://web.archive.org/web/20231113190246id_/https://www.tor.com/2014/08/12/book-review-the-fools-assassin-robin-hobb/",
+  "https://web.archive.org/web/20210808111349id_/http://sf-encyclopedia.uk/fe.php?nm=lindholm_megan",
+  "https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore",
+  "https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore",
+  "https://visnyk.luguniv.edu.ua/index.php/vphil/article/view/1027/1032",
+  "https://visnyk.luguniv.edu.ua/index.php/vphil/article/download/1027/1032/",
+  "https://elliottrwi.com/tag/hobb-reread/page/$p/",
+  "https://www.youtube.com/watch?v=$v"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_255b6391-7fb",
+ "agent": "a6aa2c0719e9cca15",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_255b6391-7fb/agent-a6aa2c0719e9cca15.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i531-639.json",
+  "exists": false
+ }
+}
