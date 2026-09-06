@@ -70,3 +70,36 @@ Findings (all Oliver's own analytic words unless marked):
   DISPUTES the authority of that register; Oliver partly rejects her reading. Must fetch Mendlesohn primary.
 - Oliver's works-cited names the two style monographs to chase (Mandala 2010; his own Magic Words, Magic Worlds 2022)
   and the epigraph article (Ekman & Taylor 2021).
+
+## ROUND-3 RESULT (final)
+found-hobb-academic.json written with complete:true — 73 claims, 31 sources (21 substantive).
+Claim-building and quote pre-verification are reproducible: hobb-acad/build.py (normalising verbatim checker),
+claims1..claims6.py (the claims), sources.py, assemble.py, coverage.txt. Every quotation was matched against the
+fetched text before writing; three were rewritten after the checker caught PDF artefacts (a running header splitting
+"la / expresión", the hyphenation "insis-tencia", and "reflect s on" in the Helsinki thesis).
+
+### What the angle actually yielded (the shape of the evidence)
+- THE TWO-REGISTER FINDING is the angle's centre and it is now triple-sourced at the primary: Oliver 2022 (the
+  epigraphs are "largely a formal history written in a distant, scholarly voice", dry and impersonal, citing
+  nursemaids and public information instead of the writer's own knowledge), Duits 2012 from the translator's chair
+  (the same opening "almost reads like an encyclopaedia", its English "a bit archaic" with long complex sentences,
+  while Hobb's narrative English is "clear and to the point"), and Ekman and Taylor 2021 on the form itself
+  (a world-intrinsic epigraph's SOURCE LINE alone tells the reader what text genres, titles and social positions
+  the world has; the register mimics research paper, parliamentary debate, historical treatise).
+- REGISTER DRIFT AS A SIGNAL: Oliver measures the epigraphs being "increasingly infected by the style of imaginative
+  fiction", counts the inverted-syntax sentences, and reads Fitz's shift into parataxis/parallelism as the move from
+  a discourse of history to a discourse of fantasy. This is the strongest evidence in the sweep that a register is a
+  variable the prose can move, not a fixed costume.
+- OMISSION: Oliver's "negative narration" is the single best-documented Hobb device for the program (sentences that
+  open on what is not happening; a 70-page stretch defined by an unstated fact; "training the reader to see what is
+  not there").
+- NAMING is unexpectedly rich (9 claims): Tkach and Volkova 2026 (transparent English-derived names inside the Six
+  Duchies against phonetically opaque names outside; socially significant anthroponyms dominate), Kok 2012 (the
+  naming custom is an institution, and the names "are not fantastical-sounding but English words"), Srsic 2025
+  (a character named only by her role), Mandala via Wikipedia (family described in the same terms as strangers).
+- CONSEQUENCE ON A HOUSEHOLD is thin in the academic literature and had to be assembled from side doors: Elliott on
+  avarice and pettiness and on the multi-generational liveship loan secured by marriages; Elliott on Words like
+  Coins, where imprecise wording causes a near-fatal childbirth; Lagus's chosen demonstration passage (a matriarch
+  at a deathbed weighing a servant's indenture). No academic source treats Hobb's household economy directly.
+- NOBODY has written on Hobb's PLACE description as such. The one thesis that would (Shropshire's geography MS) is
+  unfindable; the nearest available are Elliott's memorial-sites paper and the Crane and Fletcher relay.

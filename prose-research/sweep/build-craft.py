@@ -1,5 +1,12 @@
 import json,os
 OUT="found-wolfe-craft.json"
+COV=("Angle named no URL roster, only critics: Wright FETCHED (Confounding the Skin and the Mask, Ultan 2002; his BotNS review was already in the pooled state), "
+ "Andre-Driussi FETCHED (two Ultan interviews plus Posthistory 201), Gaiman NOT NEW (the WolfeWiki page is a pointer only; the primary sfsite text is already in the pooled state), "
+ "Clute NOT FETCHED at primary (only quoted inside Sini), Le Guin NOT FOUND as a craft essay (only a relayed blurb in Barach), Borski NOT FOUND online at primary. "
+ "Substantive per route: lateral search 13 (Gladstone, Holland, Alex/jafrank, Sini, Keeley x2, Polansky, Swanwick x2, Barach, Elliot, Noel, schicksalgemeinschaft), "
+ "bibliography chasing from the Ultan and WolfeWiki indexes 8 (Novice guide, Wright, Wowra x2, Andre-Driussi x2, Palmer, Cooney), game-designer route 1 substantive (Leo Hunt on Vaults of Vaarn) "
+ "plus 2 logged non-substantive (noisms, The Alexandrian). BLOCKED/NOT FOUND: lofkinreview 403, conceptualfiction 404, cwhowell and donbeck1 404 at guessed slugs, scatterings1976 empty body, DuckDuckGo HTML refused. "
+ "WebSearch budget was exhausted mid-sweep (200/200), so the last expansion ran by index-crawling ultan.org.uk rather than by search; reactormag is fetchable by curl with a browser UA despite the earlier round recording 403.")
 S=[]
 C=[]
 def src(title,url,kind,sub,date=None,route="curl browser-UA raw HTML"):
@@ -172,5 +179,11 @@ cl("annalist voice and deep time","To narrow the chronology Andre-Driussi search
 
 src("What would it be like... (teaser for C. S. E. Cooney piece)","https://ultan.org.uk/what-would-it-be-like/","analysis",False,"2016-06-08")
 
-json.dump({"complete":False,"coverage":"in progress","sourcesRead":S,"claims":C},open(OUT,"w"),indent=1,ensure_ascii=False)
+CO="https://ultan.org.uk/an-homage-to-my-honorary-grandfather/"
+src("An Homage to my Honorary Grandfather",CO,"own-words",True,"2016-06-10")
+cl("plainness and economy","Wolfe, quoted from a letter by novelist C. S. E. Cooney, advised always telling a story as cleanly and as clearly as possible.","Gene Wolfe, in letters and conversation, quoted by C. S. E. Cooney, Ultan's Library, 2016",CO,"Always tell a story as cleanly and as clearly as possible.","memoir, later section",kind="relay",date="2016-06-10",registerHint="dossier-archivist")
+cl("other: exposition and infodump","Wolfe's critique of Cooney's draft named her habit of interrupting dialogue with long infodumps, which he called lumps of prose like uncooked dumplings.","Gene Wolfe, letter to C. S. E. Cooney, quoted in Ultan's Library, 2016",CO,"lumps of prose like uncooked dumplings","memoir, on the first letter",kind="relay",polarity="rejects",date="2016-06-10",registerHint="dossier-archivist")
+cl("cadence and rhythm","Cooney reports that when she proposed cutting the sing-song rhythm and internal rhyme from one story, Wolfe urged her not to.","C. S. E. Cooney, 'An Homage to my Honorary Grandfather', Ultan's Library, 2016",CO,"he urged me not to take my knife to it","memoir, after the clean-and-clear advice",date="2016-06-10",confidence="high")
+
+json.dump({"complete":True,"coverage":COV,"sourcesRead":S,"claims":C},open(OUT,"w"),indent=1,ensure_ascii=False)
 print(len(S),"sources",len(C),"claims")

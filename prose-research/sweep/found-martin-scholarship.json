@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "IN PROGRESS",
+ "complete": true,
+ "coverage": "Named roster: Fafnir review of Young FETCHED (live, browser UA); Journal of Tolkien Research review of Young and Honegger FETCHED (live 403, recovered via Wayback id_ raw PDF capture); Young's monograph itself NOT FETCHED in full (Google Books API quota-exceeded, Perlego paywalled) but reached through two full-text reviews plus the publisher's table of contents; Larrington 2016 NOT FETCHED in full (no free full text) but reached through a full scholarly review quoting it at pp.14-15 and p.57; Carroll's Boydell monograph NOT FETCHED in full but reached through a full Fafnir review quoting pp.67, 173 and 182 plus Carroll's own signed article; Mendlesohn, Rhetorics of Fantasy FETCHED at the primary (author's own Introduction extract as PDF); Beveridge and Shan, 'Network of Thrones' FETCHED IN FULL (tandfonline 403 and no Wayback capture; recovered via the Math Horizons digital edition) - the phys.org summary was BLOCKED (403, no capture) and proved unnecessary; the PNAS study FETCHED IN FULL (pnas.org 403, recovered via the Warwick repository PDF); 'Food Fantasies', JFA 24.3 BLOCKED - the full ladder was walked and every route failed (Free Library Cloudflare 403 twice, no Wayback snapshot via the availability API or CDX, archive.ph 429 on three attempts, Gale returned 202 with an empty body, ProQuest 302 to login, the author's academia.edu proofs 403, and the article is indexed in neither OpenAlex nor Crossref). Substantive sources by route: named roster 6; bibliography chasing 2 (Honegger via the JTR review, Gessey-Jones's dataset via Amalvy et al.); 'cited by' 1 (Amalvy et al. 2024, via OpenAlex cites: on the PNAS work); lateral search 11 (the maester-register interviews and the At Sea Journal craft essays). 24 sources logged, 21 substantive. WebSearch budget was exhausted at 200 calls partway through the lateral phase; later discovery ran on OpenAlex, Crossref and direct fetches.",
  "sourcesRead": [
   {
    "title": "C. Palmer-Patel, 'Book Review: George R. R. Martin and the Fantasy Form', Fafnir 9.1: 117-121",
@@ -157,6 +157,46 @@
   {
    "title": "Erik Germani, 'Purple Prose in Green and Red', A Study of Ice and Fire, At Sea Journal",
    "url": "https://atseajournal.com/asoiaf/essays/purple.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "undated (site index references 2015)",
+   "route": "curl with browser user agent (live page)"
+  },
+  {
+   "title": "Amalvy, Janickyj, Mannion, MacCarron, Labatut, 'Interconnected Kingdoms: comparing A Song of Ice and Fire adaptations across media using complex networks', Social Network Analysis and Mining 14 (2024)",
+   "url": "https://doi.org/10.1007/s13278-024-01365-z",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024",
+   "route": "arXiv preprint PDF arxiv.org/pdf/2410.05453 (green OA of the Social Network Analysis and Mining article); pypdf text extract"
+  },
+  {
+   "title": "Erik Germani, 'Zeugma and Literary DNA', A Study of Ice and Fire, At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/proselike.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "undated (site index references 2015)",
+   "route": "curl with browser user agent (live page)"
+  },
+  {
+   "title": "Erik Germani, 'Cultural Anachronism', A Study of Ice and Fire, At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/cultural_anachronism.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "undated (site index references 2015)",
+   "route": "curl with browser user agent (live page)"
+  },
+  {
+   "title": "Erik Germani, 'Line Reading', A Study of Ice and Fire, At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/line_reading.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "undated (site index references 2015)",
+   "route": "curl with browser user agent (live page)"
+  },
+  {
+   "title": "Erik Germani, 'Odds and Ends (including 'Block Characterization')', A Study of Ice and Fire, At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/snippets.html",
    "kind": "analysis",
    "substantive": true,
    "date": "undated (site index references 2015)",
@@ -568,7 +608,7 @@
    "routeHint": "curl with browser user agent (live page)",
    "registerHint": "none",
    "confidence": "medium — Martin's words as quoted on this page; the original interview is not identified there",
-   "quote": "fundamentally dishonest if you write a war story and you leave that out"
+   "quote": "if you write a war story and you leave that out"
   },
   {
    "feature": "place and institution description",
@@ -792,7 +832,7 @@
    "routeHint": "curl with browser user agent (live page)",
    "registerHint": "chronicle-line",
    "confidence": "high",
-   "quote": "I didn’t want to get too close to the so-called present day of Westeros"
+   "quote": "too close to the so-called present day of Westeros"
   },
   {
    "feature": "civic record register",
@@ -1135,6 +1175,165 @@
    "registerHint": "herald-pools",
    "confidence": "high",
    "quote": "leap into a high register"
+  },
+  {
+   "feature": "stylometry",
+   "claim": "Amalvy and colleagues count 777 characters in the novels for their U2 period, against 199 in the TV show annotations.",
+   "source": "Amalvy et al., Social Network Analysis and Mining 14 (2024)",
+   "url": "https://doi.org/10.1007/s13278-024-01365-z",
+   "page": "section 2.5 'Character Sets'",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "arXiv preprint PDF arxiv.org/pdf/2410.05453 (green OA of the Social Network Analysis and Mining article); pypdf text extract",
+   "registerHint": "none",
+   "confidence": "high",
+   "quote": "there are 777 characters in the novels"
+  },
+  {
+   "feature": "naming and forms of address",
+   "claim": "Amalvy and colleagues report that 731, or 94 percent, of the novels' characters in their U2 period are named.",
+   "source": "Amalvy et al., Social Network Analysis and Mining 14 (2024)",
+   "url": "https://doi.org/10.1007/s13278-024-01365-z",
+   "page": "section 2.5 'Character Sets'",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "arXiv preprint PDF arxiv.org/pdf/2410.05453 (green OA of the Social Network Analysis and Mining article); pypdf text extract",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "quote": "named characters in the novels"
+  },
+  {
+   "feature": "withheld information and inference",
+   "claim": "Amalvy and colleagues note that their novel interaction data includes memories, because important plot information is frequently revealed through a character thinking of past events.",
+   "source": "Amalvy et al., Social Network Analysis and Mining 14 (2024)",
+   "url": "https://doi.org/10.1007/s13278-024-01365-z",
+   "page": "section 2.2, on the novels dataset",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "arXiv preprint PDF arxiv.org/pdf/2410.05453 (green OA of the Social Network Analysis and Mining article); pypdf text extract",
+   "registerHint": "chronicle-line",
+   "confidence": "high",
+   "quote": "Note that this does include memories"
+  },
+  {
+   "feature": "stylometry",
+   "claim": "Germani counts 148,130 sentences in A Song of Ice and Fire.",
+   "source": "Erik Germani, 'Zeugma and Literary DNA', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/proselike.html",
+   "page": "essay body",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "none",
+   "confidence": "medium — an author's own count with no stated tokenisation method",
+   "quote": "148,130 by my count"
+  },
+  {
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Germani found roughly 250 examples in A Song of Ice and Fire of a zeugma structure in which one verb governs two comma-separated clauses.",
+   "source": "Erik Germani, 'Zeugma and Literary DNA', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/proselike.html",
+   "page": "essay body",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — the search caught sentences whose first word repeated after the first comma, a proxy for the structure",
+   "quote": "I found ~250 examples of it"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Germani identifies the zeugma structure as one Martin uses for describing sky and weather, with the human body as its most common subject.",
+   "source": "Erik Germani, 'Zeugma and Literary DNA', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/proselike.html",
+   "page": "essay body, defining zeugma",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "quote": "one verb controls multiple phrases"
+  },
+  {
+   "feature": "dialogue register",
+   "claim": "Germani finds Martin willing to be culturally anachronistic in dialogue, citing a Lannister line lifted from Robert Frost.",
+   "source": "Erik Germani, 'Cultural Anachronism', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/cultural_anachronism.html",
+   "page": "essay body, opening",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "none",
+   "confidence": "high",
+   "quote": "Martin is willing to be anachronistic with his dialogue"
+  },
+  {
+   "feature": "dialogue register",
+   "claim": "Germani reports that one of Theon's chapters in A Dance with Dragons features 33 different speakers.",
+   "source": "Erik Germani, 'Line Reading', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/line_reading.html",
+   "page": "essay body",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "none",
+   "confidence": "high",
+   "quote": "chapters features 33 different speakers"
+  },
+  {
+   "feature": "other: introduction formula for a person",
+   "claim": "Germani finds that Martin's block characterisations follow a fixed order, hitting age, hair, eyes, clothes, and physique.",
+   "source": "Erik Germani, 'Block Characterization', in 'Odds and Ends', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/snippets.html",
+   "page": "section 'Block Characterization'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "quote": "He hits on age, hair, eyes, clothes, and physique"
+  },
+  {
+   "feature": "other: introduction formula for a person",
+   "claim": "Germani defines a block characterisation as the block of description a character receives when first coming on stage.",
+   "source": "Erik Germani, 'Block Characterization', in 'Odds and Ends', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/snippets.html",
+   "page": "section 'Block Characterization'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "quote": "block of description characters receive when they first come on stage"
+  },
+  {
+   "feature": "adjective and adverb discipline",
+   "claim": "Germani judges the insistence on eye colour in Martin's block characterisations conspicuous and of dubious value.",
+   "source": "Erik Germani, 'Block Characterization', in 'Odds and Ends', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/snippets.html",
+   "page": "section 'Block Characterization'",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "quote": "the insistence on eye color is conspicuous, and of dubious value"
+  },
+  {
+   "feature": "adjective and adverb discipline",
+   "claim": "Germani reproduces Martin's 2011 statement to Vulture that he is beginning to wish he had never bothered with the colour of people's eyes.",
+   "source": "George R. R. Martin, 2011 Vulture interview, quoted by Erik Germani, At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/snippets.html",
+   "page": "section 'Block Characterization'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — Martin's words reproduced at one remove; dated 2011 on the page, original not fetched",
+   "quote": "wish I had never bothered with the color of people"
   }
  ]
 }

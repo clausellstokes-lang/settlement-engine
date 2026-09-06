@@ -1,0 +1,23 @@
+{
+ "role": "finder",
+ "name": "dnd",
+ "angle": "usability-school",
+ "tag": null,
+ "lines": 5,
+ "firstTs": "2026-09-06T09:51:06.125Z",
+ "lastTs": "2026-09-06T09:51:06.723Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've reached your Fable limit. Switch to another model, or manage usage credits at claude.ai/settings/usage?from=cc_cli_limit_message, to continue.",
+ "run": "wf_0782e71f-b18",
+ "agent": "a4b2cce05219ff636",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_0782e71f-b18/agent-a4b2cce05219ff636.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-usability-school.json",
+  "claims": 123,
+  "complete": true,
+  "mtime": "08:25:50"
+ }
+}

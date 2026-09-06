@@ -12,6 +12,15 @@ FILES = {
  "https://arxiv.org/pdf/2505.18949": "a2505.18949.txt",
  "https://arxiv.org/pdf/2404.01413": "a2404.01413.txt",
  "https://arxiv.org/pdf/2410.12954": "note_collapse_pdf.txt",
+ "https://arxiv.org/pdf/2411.04427": "a2411.04427.txt",
+ "https://arxiv.org/pdf/2504.12522": "a2504.12522.txt",
+ "https://arxiv.org/pdf/2503.17126": "a2503.17126.txt",
+ "https://arxiv.org/pdf/2405.16455": "a2405.16455.txt",
+ "https://arxiv.org/pdf/2403.00553": "a2403.00553.txt",
+ "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse": "janus_wb.txt",
+ "https://aclanthology.org/2024.wikinlp-1.12.pdf": "wikinlp.txt",
+ "https://arxiv.org/pdf/2405.00492": "a2405.00492.txt",
+ "https://openreview.net/pdf?id=3pDMYjpOxk": "omahony.txt",
 }
 
 def build(sources, claims, coverage, complete):

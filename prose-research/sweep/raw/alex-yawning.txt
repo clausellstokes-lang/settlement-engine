@@ -1,0 +1,490 @@
+The Alexandrian » Forgotten Realms: A Textual History of the Yawning Portal 
+
+ Forgotten Realms: A Textual History of the Yawning Portal 
+
+ March 31st, 2022 
+
+ The Yawning Portal seems utterly synonymous with the Forgotten Realms today, but it actually didn’t appear in the original Forgotten Realm Campaign Setting boxed set, published in July 1987.
+
+ The wait was not particularly long, however. By the end of the year, driven in part by the prodigious amount of Realmslore Ed Greenwood had created for his setting, TSR had released nearly a dozen Forgotten Realms books, including FR1 Waterdeep and the North and the first details of Durnan’s tavern.
+
+ (The “and the North” portion of the title was actually something of a misnomer. According to Shannon Appelcline, Greenwood had warned TSR that his Waterdeep lore alone was enough to fill a book. And that was more than true: Almost all of the material about the rest of the North got knocked out of FR1 and later handed over to Jennell Jaquays for FR5 The Savage Frontier . It’s unclear why they didn’t just drop “and the North” from the title. Perhaps they felt locked in by the title they had solicited? But I digress.)
+
+ THE EARLY DAYS
+
+ In FR1 Waterdeep and the North , the Yawning Portal appears as Building #4:
+
+ 4. The Yawning Portal (inn) – See Durnan, p. 17
+
+ Thus, most of the original information about the Yawning Portal is actually contained in the NPC write-up of its proprietor, and these are fairly barebones: It contains a “ well-like shaft leading down into Undermountain, the subterranean ways under Mount Waterdeep.”
+
+ The Yawning Portal’s next appearance is in the City System (1988), a boxed set filled to the brim with twelve huge poster maps, ten of which joined together to form an insanely huge map of the city. The City System was designed to be used in conjunction with FR1 Waterdeep and the North : FR1 described the city. The boxed set only included the huge maps and a small pamphlet with useful tools (like random Street Scenes and indices).
+
+ (This confused the heck out of me as a kid, who bought City System but never saw a copy of FR1 at the local game store.)
+
+ In the City System , therefore, the Yawning Portal remains Building #4, but no additional text description is provided. The boxed set does include the first official map of the interior of the inn, but we’ll come back to this later.
+
+ The Yawning Portal’s next appearance was in the adventure module FRE3 Waterdeep (1989), also by Ed Greenwood. The PCs are taken to the Yawning Portal by Elminster and Khelben Arunsun the Blackstaff. The adventure tells DMs that they can use the map from the City System boxed set, but also includes a much more detailed description of the Portal’s interior:
+
+ It’s a “large, rambling building.”
+
+ A signboard above the “round door” reads “The Yawning Portal,” and “on the door itself, someone has chalked ‘Come Ye Inn.’” (sic)
+
+ It is dimly lit.
+
+ There’s at least one private side room .
+
+ A 14-year-old girl works as a server.
+
+ Most notably, FRE3 adds a second well to the Yawning Portal:
+
+ Durnan leads the party to the back of the inn. (…) The innkeeper lifts a huge bar from the door with one hand, as though it weighs nothing, and leans it against the wall. Then he opens the door and leads you into a dark room. The torch’s flickering light shows a covered wall and a table. On the table lie coils of rope, a tinder box, and a half dozen unlit torches…
+
+ “I haven’t been down this back way in some time,” he says. “We usually go down the dry one; it keeps the water cleaner.”
+
+ At some distance down the well, there’s a side tunnel that leads into a cavernous region of Undermountain which includes the Pool of Loss.
+
+ (The reason for this addition is fairly obvious: The adventure wants to send the PCs to Undermountain, but doesn’t have the space or page count to do that. So Durnan has a short cut that takes the PCs more or less directly to where they need to go.)
+
+ Despite only being an adventure module, FRE3 Waterdeep was frequently cited in TSR products as the authoritative source for the Yawning Portal. This notably includes the Ruins of Undermountain boxed set (1991), which rather hilariously notes:
+
+ More about Durnan and the inn can be found in the sourcebook FR1/Waterdeep And The North, the City System boxed set, and the module FRE3/Waterdeep. Details of the inn itself have been omitted from these pages to allow DMs free rein in customizing this rambling, shady place.
+
+ “We’ve detailed this location in THREE different books, but we haven’t included those details here so that you can have ‘free rein’ in customizing it.” Yeah. Sure. Whatever you say, TSR.
+
+ ( Ruins of Undermountain II actually doubles down on the absurdity here, similarly demurring to describe the inn, but this time asserting that “the Yawning Portal is detailed in the original Ruins of Undermountain boxed set,” where, of course, readers will instead find the boxed set declaring that it definitely does no such thing.)
+
+ But because the Portal actually hasn’t been particularly detailed previously, Ruins of Undermountain does add several new details:
+
+ “The Portal is a rambling, dingy, blue-tapestried building of smoothly carved pillars and paneling.”
+
+ It is located “squarely on the site of the long-vanished tower and fortified warehouses of the archmage Halaster Blackcloak.”
+
+ It is the “the only known entrance” to Undermountain accessible to the general public.
+
+ The first well is 40’ in diameter and located in the main taproom. It’s “situated between the bar and most of the dining tables” and surrounded by a “waist-high, foot-thick stone ring/rampart.” Lit torches are placed around the circumference of the well and there’s a massive block-and-tackle “hanging from a stone lintel above the well, hiding among the roof beams.” The well is 140 feet deep, dark below 50 feet, and there are noisemakers at the bottom (used to signal the taproom for the rope to be lowered).
+
+ You pay Durnan 1 gold piece per head to be lowered into Undermountain.
+
+ The “wet well,” which is used only for washing water, is lesser-known and hidden in a backroom. It leads to a section of the dungeon not detailed in the boxed set, but which connects “with the city sewers in many places” and the plane of Hades (via the Pool of Loss). It’s possible that there are actually multiple passages intersecting the wet well, but the phrasing here is ambiguous.
+
+ Now, you might expect to find some reference to the Yawning Portal in Volo’s Guide to Waterdeep (1992), but not really. It has a city map which my copy lacks, but which I believe is essentially identical to the one from FR1 Waterdeep and the North and on which the Portal remains Building #4. And it has a footnote telling you to go check out FRE3 Waterdeep .
+
+ So our next stop is actually the City of Splendors boxed set (1994), which is very much designed to replace both FR1 Waterdeep and the North and the City System boxed set (although it lacks the latter’s prodigious map). The numbered key for Waterdeep is overhauled with ward-based numbering, and the Yawning Portal is now C48 (C for the Castle Ward).
+
+ City of Splendors mostly compiles the known information about the Yawning Portal from all of our previous sources, but there are a few notable new details:
+
+ Durnan established the Yawning Portal in 1306 DR.
+
+ The Yawning Portal is a 3-story Class C building . (Class C buildings are generally the “tall row houses that line the streets” with shops on the ground floor and offices or apartments above that, but the “better-kept” inns and taverns are also grouped in here.)
+
+ It now also costs 1 gold piece to get pulled OUT of Undermountain . (Make sure to budget accordingly.) I believe this is also the first reference to patrons wagering on would-be adventurers.
+
+ There is actually now a long break in the Yawning Portal being described in RPG supplements, with one interesting sidenote in Skullport (1999), which claims in two different places (p. 9 and 64) that there is a secret door in the Yawning Portal’s wine cellar which leads, along a side passage, to the Bonewatch Pass, a tunnel which runs all the way to Skullport.
+
+ THE VIDEO GAME ERA
+
+ During this gap in RPG books from 1994-2004, the Yawning Portal actually makes two notable appearances in video games: Descent to Undermountain in 1994 and Neverwinter Nights: Hordes of the Underdark in 2003.
+
+ These are particularly notable because, as far as I can tell, they’re the first visual depictions of the tavern.
+
+ Note: Some online sources claim that the Yawning Portal also appeared in the Eye of the Beholder games, but although there is an unnamed tavern that briefly appears in the later games of that trilogy, there’s nothing to suggest that it’s the Yawning Portal. 
+
+ The depiction of the tavern in Descent to Undermountain is rather severely limited by the FPS technology of time, with everything rendered in Doom -style blocks.
+
+ The common room is depicted as a big square room, with a big square well.
+
+ Rather than a rope dangling over the well, there’s a wooden platform with a skull-embossed cage that’s lowered into Undermountain.
+
+ The common room is surrounded by a hallway studded with guest rooms. (The guests are delightfully eclectic, including a mind flayer, a drow, and the Open Lord’s son.)
+
+ Neverwinter Nights: Hordes of the Underdark has a very different design for the inn. The game starts on the second floor, which features:
+
+ An armory in the back corner of the inn, stocked with adventuring gear.
+
+ A large common room , which is sort of a hostel with multiple bunkbeds and a small library of books.
+
+ A stair leads down to the first floor where there’s:
+
+ Another common room , this one with cheap cots for sleeping but also accoutered with medical supplies for treating those injured escaping from Undermountain
+
+ The taproom which… uh… lacks any taps? (The games’ presentation is a little ramshackle here.)
+
+ Notably the taproom also lacks a well. The well is instead located in the basement, and is less of a well and more of a “gaping chasm.” A “well” is located on a rocky spur jutting out over the chasm, and is protected by a clockwork brass dome that irises up and down.
+
+ (The pointlessness of this defensive device is established a moment later when a beholder floats up out of the chasm and near-murders Durnan.)
+
+ More recently, in the new Neverwinter game (2019), the Yawning Portal is depicted once more:
+
+ This presentation is heavily influenced by the Portal’s presentation in Waterdeep: Dragon Heist (as we’ll see below).
+
+ The taproom is shown to have a vaulted ceiling all the way to the third floor, with balconies featuring additional seating lining three sides of the room (and skylights !).
+
+ The three-sided bar juts out into the room.
+
+ Next: Novels & Later Expeditions 
+
+ Filed under: Roleplaying Games Comments (3) 
+ Article tags: forgotten realms , waterdeep , yawning portal 
+
+ 3 Responses to “Forgotten Realms: A Textual History of the Yawning Portal”
+
+ Alberek says: 
+
+ My only visit of the Yawning Portal was on Neverwinter Nights’s expansion… but I remember it looked kinda bad.
+
+ April 1st, 2022 - 1:31 pm 
+
+ Original_Carl says: 
+
+ First reference to gambling on Undermountain expeditionaries is I think in the Undermountain Box Set, Campaign Guide, Yawning Portal.
+
+ Love this series, by the way and I’m reviewing it for an open megadungeon I’d like to run.
+
+ August 21st, 2022 - 5:11 pm 
+
+ On the Railroad Again – Rindis.com says: 
+
+ […] sprawling dungeon, there’s portals to all sorts of places in there, and the portal used from The Yawning Portal (Waterdeep key #4) is the second(?) one from there into the place; this one was added purely to […]
+
+ September 4th, 2026 - 2:01 pm 
+
+ Leave a Reply
+
+ Name (required) 
+
+ Mail (will not be published) (required) 
+
+ Website 
+
+ XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> 
+-->
+
+ Δ 
+
+ JUSTIN ALEXANDER
+ About - Bibliography 
+ Acting Resume 
+
+ROLEPLAYING GAMES
+ Gamemastery 101 
+
+ RPG Scenarios 
+
+ RPG Cheat Sheets 
+
+ RPG Miscellaneous 
+
+ Dungeons & Dragons 
+
+ Ptolus: Shadow of the Spire 
+
+ Alexandrian Auxiliary 
+
+ Check These Out 
+
+ Essays 
+
+ Other Games 
+
+ Reviews 
+
+ Shakespeare Sunday 
+
+ Thoughts of the Day 
+
+ Videos 
+
+ Patrons 
+
+ Open Game License 
+
+ Bluesky • Mastodon • Twitter 
+ 
+ Archives
+ Archives 
+
+ Select Month 
+ August 2026 (13) 
+ July 2026 (13) 
+ June 2026 (10) 
+ May 2026 (10) 
+ April 2026 (13) 
+ March 2026 (8) 
+ February 2026 (10) 
+ January 2026 (9) 
+ December 2025 (16) 
+ November 2025 (12) 
+ October 2025 (16) 
+ September 2025 (14) 
+ August 2025 (11) 
+ July 2025 (17) 
+ June 2025 (16) 
+ May 2025 (11) 
+ April 2025 (14) 
+ March 2025 (14) 
+ February 2025 (16) 
+ January 2025 (16) 
+ December 2024 (13) 
+ November 2024 (11) 
+ October 2024 (13) 
+ September 2024 (14) 
+ August 2024 (16) 
+ July 2024 (16) 
+ June 2024 (14) 
+ May 2024 (16) 
+ April 2024 (17) 
+ March 2024 (17) 
+ February 2024 (16) 
+ January 2024 (18) 
+ December 2023 (15) 
+ November 2023 (16) 
+ October 2023 (14) 
+ September 2023 (16) 
+ August 2023 (12) 
+ July 2023 (12) 
+ June 2023 (13) 
+ May 2023 (19) 
+ April 2023 (15) 
+ March 2023 (15) 
+ February 2023 (13) 
+ January 2023 (16) 
+ December 2022 (14) 
+ November 2022 (15) 
+ October 2022 (13) 
+ September 2022 (15) 
+ August 2022 (15) 
+ July 2022 (16) 
+ June 2022 (17) 
+ May 2022 (19) 
+ April 2022 (19) 
+ March 2022 (12) 
+ February 2022 (9) 
+ January 2022 (14) 
+ December 2021 (10) 
+ November 2021 (13) 
+ October 2021 (11) 
+ September 2021 (13) 
+ August 2021 (13) 
+ July 2021 (11) 
+ June 2021 (14) 
+ May 2021 (12) 
+ April 2021 (12) 
+ March 2021 (14) 
+ February 2021 (14) 
+ January 2021 (18) 
+ December 2020 (16) 
+ November 2020 (13) 
+ October 2020 (16) 
+ September 2020 (13) 
+ August 2020 (11) 
+ July 2020 (12) 
+ June 2020 (12) 
+ May 2020 (15) 
+ April 2020 (13) 
+ March 2020 (13) 
+ February 2020 (12) 
+ January 2020 (13) 
+ December 2019 (7) 
+ November 2019 (6) 
+ October 2019 (8) 
+ September 2019 (15) 
+ August 2019 (9) 
+ July 2019 (8) 
+ June 2019 (9) 
+ May 2019 (15) 
+ April 2019 (20) 
+ March 2019 (11) 
+ February 2019 (13) 
+ January 2019 (12) 
+ December 2018 (5) 
+ November 2018 (19) 
+ October 2018 (20) 
+ September 2018 (16) 
+ August 2018 (18) 
+ July 2018 (20) 
+ June 2018 (17) 
+ May 2018 (18) 
+ April 2018 (7) 
+ March 2018 (14) 
+ February 2018 (16) 
+ January 2018 (19) 
+ December 2017 (1) 
+ October 2017 (1) 
+ September 2017 (2) 
+ August 2017 (4) 
+ July 2017 (4) 
+ June 2017 (2) 
+ April 2017 (7) 
+ February 2017 (1) 
+ December 2016 (1) 
+ November 2016 (5) 
+ October 2016 (12) 
+ September 2016 (7) 
+ August 2016 (8) 
+ June 2016 (1) 
+ May 2016 (8) 
+ April 2016 (5) 
+ March 2016 (5) 
+ February 2016 (15) 
+ January 2016 (3) 
+ December 2015 (2) 
+ November 2015 (12) 
+ October 2015 (12) 
+ September 2015 (6) 
+ August 2015 (14) 
+ July 2015 (13) 
+ June 2015 (14) 
+ May 2015 (19) 
+ April 2015 (18) 
+ March 2015 (25) 
+ February 2015 (28) 
+ January 2015 (29) 
+ December 2014 (20) 
+ November 2014 (13) 
+ October 2014 (10) 
+ September 2014 (11) 
+ August 2014 (8) 
+ July 2014 (7) 
+ June 2014 (3) 
+ May 2014 (6) 
+ April 2014 (3) 
+ February 2014 (4) 
+ January 2014 (1) 
+ December 2013 (3) 
+ November 2013 (1) 
+ October 2013 (7) 
+ September 2013 (11) 
+ August 2013 (20) 
+ July 2013 (27) 
+ June 2013 (2) 
+ April 2013 (4) 
+ March 2013 (6) 
+ February 2013 (11) 
+ January 2013 (5) 
+ December 2012 (7) 
+ November 2012 (14) 
+ October 2012 (12) 
+ September 2012 (3) 
+ August 2012 (6) 
+ July 2012 (2) 
+ June 2012 (14) 
+ May 2012 (21) 
+ April 2012 (22) 
+ March 2012 (4) 
+ February 2012 (17) 
+ January 2012 (31) 
+ December 2011 (18) 
+ November 2011 (25) 
+ October 2011 (28) 
+ September 2011 (27) 
+ August 2011 (27) 
+ July 2011 (8) 
+ June 2011 (16) 
+ May 2011 (22) 
+ April 2011 (28) 
+ March 2011 (38) 
+ February 2011 (29) 
+ January 2011 (14) 
+ November 2010 (6) 
+ September 2010 (4) 
+ August 2010 (7) 
+ July 2010 (20) 
+ June 2010 (22) 
+ May 2010 (17) 
+ April 2010 (1) 
+ January 2010 (11) 
+ December 2009 (3) 
+ November 2009 (2) 
+ September 2009 (1) 
+ August 2009 (2) 
+ July 2009 (3) 
+ June 2009 (3) 
+ May 2009 (2) 
+ April 2009 (8) 
+ March 2009 (30) 
+ February 2009 (29) 
+ January 2009 (11) 
+ December 2008 (1) 
+ November 2008 (4) 
+ October 2008 (22) 
+ September 2008 (23) 
+ August 2008 (9) 
+ July 2008 (23) 
+ June 2008 (23) 
+ May 2008 (31) 
+ April 2008 (1) 
+ March 2008 (7) 
+ February 2008 (2) 
+ January 2008 (2) 
+ December 2007 (1) 
+ November 2007 (4) 
+ October 2007 (7) 
+ September 2007 (7) 
+ August 2007 (10) 
+ July 2007 (13) 
+ June 2007 (7) 
+ May 2007 (11) 
+ April 2007 (6) 
+ March 2007 (5) 
+ February 2007 (4) 
+ January 2007 (2) 
+ December 2006 (5) 
+ November 2006 (6) 
+ June 2006 (9) 
+ May 2006 (5) 
+ April 2006 (9) 
+ March 2006 (25) 
+ November 2005 (6) 
+ October 2005 (3) 
+ August 2005 (17) 
+ July 2005 (25) 
+
+ Recent Posts
+
+ Chaos Lorebook: The Magi of Chaos 
+
+ Ex-RPGNet Review: A Song of Ice and Fire 
+
+ Chaos Lorebook: The Earthbound Demons 
+
+ Ex-RPGNet Review: Penumbra Backdrops 
+
+ Chaos Lorebook: The Assassins of Chaos 
+
+ Recent Comments
+ Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) 
+ On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal 
+ Robert on Chaos Lorebook: The Magi of Chaos 
+ Justin Alexander on Ptolus: Running the Campaign – From Table to Page 
+ BP on Ex-RPGNet Review: A Song of Ice and Fire 
+ Remus on Some Thoughts on Swords & Sorcery 
+ BP on Ex-RPGNet Review: A Song of Ice and Fire 
+ Ben Ferguson on Ptolus: Running the Campaign – From Table to Page 
+ Jake on Ex-RPGNet Review: A Song of Ice and Fire 
+ William on Ex-RPGNet Review: A Song of Ice and Fire 
+
+ Author
+ Read Now! - Audio Book 
+
+Author
+
+ PDF Edition 
+
+ City Supplement 1: Dweredell 
+
+ City Supplement 2: Aerie 
+
+ City Supplement 3: Anyoc 
+
+ Rule Supplement 1: Mounted Combat 
+
+ Adventure: Complex of Zombies 
+
+ Adventure: The Black Mist 
+
+ Spells of Light and Darkness 
+
+ Mythos Audio Library: Call of Cthulhu 
+
+ Copyright © The Alexandrian . All rights reserved.

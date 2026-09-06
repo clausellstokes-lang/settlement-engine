@@ -1282,6 +1282,6 @@ Everything else agrees to within one or two rows, from a wholly independent extr
 
 **Labelling.** Every figure in this report is **CONFIRMED** — executed, from artefacts on disk that
 the commands above regenerate. The two interpretive claims are labelled where they appear: that the
-chrome registers top Axis B *because the bible's exemplar set is itself chrome* is **PLAUSIBLE**
+chrome registers top Axis B *because the bible's exemplar set is itself chrome* is **MEASURED for the top of the axis and WITHDRAWN for the bottom** (chair, 2026-09-06 from the refutation's P-8: 48 of 67 exemplars, 71.6%, come from chrome surfaces; a diegetic-only exemplar set moves R1 1.581 → 1.880 and R2 2.263 → 2.498, further away, so chrome explains why R16/R15/R9 sit near the bible and nothing about why R1/R2 sit far; Spearman ρ(published, diegetic-only) = 0.567)
 (reasoning over the measured composition in §5), and that R7's `10,000 people` digits are or are not
 a breach is **not ruled on** — the bible's numeral rule is contextual and that call is the chair's.

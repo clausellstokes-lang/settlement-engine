@@ -59,3 +59,58 @@ Raw fetches under sweep/dndplace/*.txt
 
 ### Sly Flourish (Mike Shea), "Running Towns in Fantasy RPGs", 2023-11-13
 - Prescribes "at least one of these fantastic features and probably no more than three" — a bounded count of defining features per settlement, "enough to define the town in the eyes of the characters".
+
+## Notes, round 2 (sources 9-28)
+### Merric Blackman, "Ghosts of Saltmarsh – Looking at the Town", 2019-05-22 (Wayback; merricb.com domain has LAPSED and now redirects to a liquor store)
+- U1 (1981) did not describe the town; it gave a SLOT LIST — "a town council, a merchant, a town map", a resting place, places of worship — details left to the DM.
+- He block-quotes the 2019 module's own Saltmarsh Overview. Its register: present tense, a population figure spelled in words ("roughly five thousand residents"), demographic composition, then how residents REACT to categories of visitor ("with a mixture of curiosity and fear"). This is the closest published D&D text to the dossier register found in this sweep.
+- Comparative reception: "a much better feel for the town than I did for Waterdeep" in Dragon Heist — the SMALL settlement legible where the metropolis is not.
+- Ten dock rumours; he plans to expand the table and deal one rumour per character.
+
+### Merric Blackman, "AD&D Review: The Village of Hommlet", 2022-01-26 (Wayback)
+- T1's player-facing text is "a long way from read-aloud text" — it is to be paraphrased or roleplayed. So the 1979 settlement register is NOT boxed text.
+- Villagers presented "in the houses where they live" — the person keyed to the dwelling.
+- "Wall of Text syndrome"; inhabitants "described in more detail than I think necessary" (contrast: Prince of Nothing praises the same density).
+- The introduction is a founding-rise-fall arc for the village.
+
+### Hipsters & Dragons / Strange Assembly on Waterdeep: Dragon Heist (2018)
+- The closing in-world chapter (Volo's Waterdeep Enchiridion) = laws, admin, taxes, taxis, landmarks, nobility, guilds, then a ward-by-ward overview, then a paragraph per festival; plus "a very brief history, layout" and "an introduction to the legal system" and social norms.
+
+### Shannon Appelcline, Product History for Volo's Guide to Waterdeep (DriveThruRPG, via Wayback; live page 403s)
+- The early-90s in-character books were "written as if they were real-world sources from within the gaming settings".
+- Greenwood's unreliable narrator let DMs discard any detail: "Volo was wrong."
+- OMISSION DEVICE: a locale Greenwood did not want to write got skipped by saying Volo had been kicked out of it.
+- Elminster's preface opens "I must warn ye" — the editor-persona warns of errors in the very book.
+
+### Gus L, "B2 - Keep on the Borderlands - Review", 2014 / Prince of Nothing, B2 review, 2019
+- Gus L: the Keep is "heaped with loving detail to almost no obvious purpose"; "provides too much for too little".
+- Prince: the Keep is "described as a series of rooms, with text conveyed in thick blocks".
+- Prince: it is "described in terms of components that can be interacted with", implications left to the GM — the DM-facing register refuses to state meaning.
+- Prince: what makes it live is the institution list — "complete with a church, merchant caravans, guilds, a tavern", a money-lender, drink prices.
+- Prince (rebutting Mearls, in the post's comment-response section): "the NPCs have motivations and character traits" though unnamed.
+
+### Bryce Lynch, Curse of Strahd review, tenfootpole.org
+- "Rooms are described in detail for the DM" with no impact on play; "The entries are so long that the important bits are lost"; "Three sentences are used when one will do."
+- Quotes the module's own read-aloud: "You find something on the ground."
+
+### Bryce Lynch, AA#13 White Dragon Run, 2011
+- A village write-up = about nine major buildings, "including the garrison, inn, jeweler, church and general store", plus prominent residents, a table for generating minor occupants, and "a decent sized rumor table, as is proper for a home base environment".
+- The failure: "The occupants all seem to be fine upstanding members of the community."
+
+### Justin Alexander — three articles (the richest vein for the archivist register)
+- Urbancrawl part 4: a key entry is one to three sentences ("A huge castle made from purple stone, housing a massive crystal..."); the key does not "represent all the information that you might prep about the city".
+- Using Lore Books (2020): an in-world document handout is "an executive summary for a book that doesn't exist"; DESCRIBE THE EXPERIENCE OF READING IT; "Instead of writing the conclusion, you are writing the clue"; "the key information is not what the book is primarily about"; present it "in an oblique or mythic manner"; his demonstration text hedges — "it is rather difficult to separate what is meant to be scholarship" from fancy.
+- Chaos Lorebook: The Assassins of Chaos (2026): a published example — physical object first ("Three blood-stained scrolls have been bound together"), then contents, with hedged inference ("It appears that the carach...", "which one can only hope are exaggerated").
+- A Textual History of the Yawning Portal (2022): ONE PLACE across seven official texts, 1987-2018. FR1 keys it as one line pointing at its proprietor's NPC entry; FRE3 (1989) adds sensory concretions (a signboard, chalk on the door reading "Come Ye Inn", dim light, a fourteen-year-old server); Ruins of Undermountain (1991) gives the adjective-stacked sentence "The Portal is a rambling, dingy, blue-tapestried building of smoothly carved pillars and paneling", the well's 40-foot diameter and 140-foot depth and the 1 gp fee, while SIMULTANEOUSLY claiming it omitted details "to allow DMs free rein in customizing this rambling, shady place"; City of Splendors (1994) adds the CIVIC-RECORD facts — founded 1306 DR, "a 3-story Class C building".
+
+### Age of Ravens (Lowell Francis), Gazetteers of Mystara review list, 2012
+- GAZ3 praised for economy: "a booklet which offers in 96 pages what many books would have needed twice that to do".
+
+### 2024 DMG Greyhawk (D&D Beyond / CBR / EN World)
+- The city gazetteer describes "the neighborhoods and prominent locations"; each location "full of flavorful NPCs, background hooks" and a reason to visit.
+- A calendar with invented month and weekday names and festivals.
+- Sargent praised for "implying terrifying things with a few carefully chosen words".
+
+## Gaps (honest)
+- No substantive close reading of the 2014 DMG chapter 1 settlement/government/commerce tables was found before the session's web-search budget ran out (200/200). Only Beth Rimmels' note that 2014's "Chapter One was about creating your own world".
+- Vallaki as TEXT is uncovered; Bryce covers Curse of Strahd's prose generally, Merric's Vallaki post is a play report.

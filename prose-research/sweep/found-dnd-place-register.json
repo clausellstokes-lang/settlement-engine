@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "checkpoint 3 — 25 sources fetched raw, 23 substantive.",
+ "complete": true,
+ "coverage": "Named roster: FETCHED substantively — Hommlet/T1 (Prince of Nothing 2021, Merric Blackman 2022), Keep on the Borderlands/B2 (Gus L 2014, Prince of Nothing 2019), Phandalin/Lost Mine (Gus L 2015, Idle Cartulary 2025), Saltmarsh (Merric Blackman 2019, who block-quotes the module's own Saltmarsh Overview), Waterdeep wards/Dragon Heist (Hipsters & Dragons, Strange Assembly), Volo's Guide to Waterdeep (Shannon Appelcline's DriveThruRPG product history, via Wayback), Mystara Gazetteers (Grognardia 2022, Prince of Nothing 2020, Age of Ravens 2012), Ptolus (Storytelling and Gaming 2021; Alexandrian urbancrawl and lore-book articles), 2024 DMG Greyhawk gazetteer (D&D Beyond/John Roy, CBR, EN World/Beth Rimmels), Curse of Strahd (Bryce Lynch). NOT FOUND at a substantive source: a close reading of the 2014 DMG chapter 1 settlement/government/commerce tables (only Rimmels' passing note that chapter one was world-creation) and a close reading of Vallaki as text (Merric's Vallaki post is a play report; Bryce covers Curse of Strahd's read-aloud and room prose generally). BLOCKED: DriveThruRPG and DMs Guild 403 to direct fetch (recovered via Wayback raw capture); merricb.com's domain has lapsed and redirects to an unrelated site (all three posts recovered via Wayback raw captures). Routes: 21 substantive sources by direct fetch, 4 by Wayback raw capture, 0 abstract-only; expansion after the named roster came from bibliography chasing and each site's own search page, because the session's web-search budget was exhausted after 12 queries — that is the one recall limit on this sweep.",
  "sourcesRead": [
   {
    "title": "[Review] T1 The Village of Hommlet (AD&D); Foreshadow — Age of Dusk (Prince of Nothing)",
@@ -201,6 +201,30 @@
    "substantive": false,
    "date": "fetched 2026-09-06",
    "route": "direct fetch; page body did not render to text (paywall/JS shell)"
+  },
+  {
+   "title": "The Alexandrian: Forgotten Realms – A Textual History of the Yawning Portal (Justin Alexander)",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-03-31",
+   "route": "direct fetch, browser UA; found by the site's own ?s= search"
+  },
+  {
+   "title": "The Alexandrian: Chaos Lorebook – The Assassins of Chaos (Justin Alexander)",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-08-17",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Running Curse of Strahd, Part 2 (Merric Blackman, Merric's Musings)",
+   "url": "https://merricb.com/2016/04/24/running-curse-of-strahd-part-2/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2016-04-24",
+   "route": "live domain lapsed; Wayback raw capture 20260301223639id_ — a play report, not a register analysis"
   }
  ],
  "claims": [
@@ -1211,6 +1235,146 @@
    "routeHint": "direct fetch with browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high — the quoted words are Alexander's own demonstration passage, not a published D&D product"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Justin Alexander says FR1 Waterdeep and the North carried most of the Yawning Portal's information inside its proprietor's NPC write-up.",
+   "source": "Justin Alexander, The Alexandrian, A Textual History of the Yawning Portal, 2022",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "contained in the NPC write-up of its proprietor",
+   "page": "section THE EARLY DAYS",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2022-03-31",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "concrete sensory noun",
+   "claim": "FRE3 Waterdeep describes the inn's door as bearing chalked words welcoming visitors.",
+   "source": "FRE3 Waterdeep (Ed Greenwood, TSR, 1989), quoted by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "Come Ye Inn",
+   "page": "section THE EARLY DAYS, list of FRE3 details",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1989",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high — the quoted words are the 1989 module's, reproduced by the critic"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Ruins of Undermountain describes the Yawning Portal as a rambling, dingy, blue-tapestried building of carved pillars and paneling.",
+   "source": "Ruins of Undermountain (TSR, 1991), quoted by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "a rambling, dingy, blue-tapestried building of smoothly carved pillars",
+   "page": "section THE EARLY DAYS, list of Ruins of Undermountain details",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1991",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high — the quoted words are the 1991 boxed set's, reproduced by the critic"
+  },
+  {
+   "feature": "omission as information",
+   "claim": "Ruins of Undermountain says it omitted the inn's details to allow DMs free rein in customizing the place.",
+   "source": "Ruins of Undermountain (TSR, 1991), block-quoted by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "to allow DMs free rein in customizing this rambling, shady place",
+   "page": "section THE EARLY DAYS, block quotation from Ruins of Undermountain",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1991",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high — the quoted words are the 1991 boxed set's own, reproduced by the critic who then mocks them"
+  },
+  {
+   "feature": "civic record register",
+   "claim": "City of Splendors classifies the Yawning Portal as a three-story Class C building.",
+   "source": "City of Splendors boxed set (TSR, 1994), reported by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "a 3-story Class C building",
+   "page": "section THE EARLY DAYS, list of City of Splendors details",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1994",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "civic record register",
+   "claim": "City of Splendors dates the founding of the Yawning Portal to 1306 DR.",
+   "source": "City of Splendors boxed set (TSR, 1994), reported by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "Durnan established the Yawning Portal in 1306 DR",
+   "page": "section THE EARLY DAYS, list of City of Splendors details",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1994",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: measured detail",
+   "claim": "Ruins of Undermountain gives the taproom well a depth of 140 feet.",
+   "source": "Ruins of Undermountain (TSR, 1991), reported by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "The well is 140 feet deep",
+   "page": "section THE EARLY DAYS, list of Ruins of Undermountain details",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1991",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "dm-page",
+   "confidence": "high — Alexander reports the figure; the unit and number are as printed on the page"
+  },
+  {
+   "feature": "other: in-world document form",
+   "claim": "Alexander's published chaos lorebook opens by naming the physical document before its contents.",
+   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "quote": "Three blood-stained scrolls have been bound together",
+   "page": "opening paragraph of the handout",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "2026-08-17",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high — the words are Alexander's own published in-world handout"
+  },
+  {
+   "feature": "withheld information and inference",
+   "claim": "Alexander's lorebook handout hedges its source's boasts as claims one can only hope are exaggerated.",
+   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "quote": "which one can only hope are exaggerated",
+   "page": "section UNTO THE DEATH OF WORLDS",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "2026-08-17",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "Alexander's lorebook handout marks its inferences with the phrase that it appears the creatures behave a certain way.",
+   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "quote": "It appears that the carach",
+   "page": "section UNTO THE DEATH OF WORLDS",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "2026-08-17",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
   }
  ]
 }

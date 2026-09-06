@@ -30,3 +30,25 @@ Finder: Opus 5. Started 2026-09-06.
 - Honegger: depth achieved "through his use of poems in the narrative which tell of an older time"; three poems Rains of Castamere, Bear and Maiden Fair, Doom of Valyria "each in themselves create the sense of an older transmitted oral tradition"
 - Martin quoted (interview, via Honegger, p159): "Tolkien was a philologist, and an Oxford don, and could spend decades laboriously inventing Elvish in all its detail. I, alas, am only a hardworking SF and Fantasy novel[ist] and I don't have a gift for languages"
 - Honegger: Martin "concentrated right from the beginning on the narrative construction of his world" (165)
+
+## FINAL STATUS (complete)
+25 sources logged, 23 substantive. 83 claims. found-martin-scholarship.json written with complete:true.
+Every quotation extracted BYTE-EXACT from the fetched text via exact.py (normalises curly quotes/whitespace
+for the search, returns the raw substring), so the verifier matches on the first pass. All quotes <= 12 words.
+
+BLOCKED (full ladder walked, all failed): 'Food Fantasies in George R. R. Martin', Anca Rosu, JFA 24.3 (2013) 446-466.
+  live Free Library -> Cloudflare 403 (twice, incl. cookie jar)
+  Wayback availability API -> no snapshot; Wayback CDX -> empty
+  archive.ph -> 429 on three attempts
+  go.gale.com -> HTTP 202, zero-byte body (institutional auth)
+  proquest.com -> 302 to login
+  academia.edu 'Rosu Proofs' -> 403
+  OpenAlex + Crossref -> article not indexed
+NOT FETCHED IN FULL (reached through full-text reviews instead): Young's monograph, Larrington 2016, Carroll 2018.
+  Google Books API -> HTTP 429 quota exceeded for the day; Perlego paywalled.
+NOTE: WebSearch budget hit its 200-call session cap partway through the lateral phase; later discovery ran on
+  OpenAlex (cites: filter), Crossref, and direct curl fetches.
+
+Local evidence files (all under this sweep dir): fafnir.txt jtr.txt mh_de.txt pnas.txt carroll_fafnir.txt
+grimdark.txt mend.txt larrington_rev.txt routledge.txt corpus.txt bookpage.txt slate.txt interk.txt
+as_*.txt (12 At Sea Journal essays). Builders: exact.py, build3.py. Extractors: h2t.py, pdf2t.py.

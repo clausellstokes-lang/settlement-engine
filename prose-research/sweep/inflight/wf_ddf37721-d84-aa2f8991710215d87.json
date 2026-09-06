@@ -1,0 +1,23 @@
+{
+ "role": "finder",
+ "name": "hobb",
+ "angle": "close",
+ "tag": null,
+ "lines": 5,
+ "firstTs": "2026-09-06T11:27:24.968Z",
+ "lastTs": "2026-09-06T11:27:25.715Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've reached your Fable limit. Switch to another model, or manage usage credits at claude.ai/settings/usage?from=cc_cli_limit_message, to continue.",
+ "run": "wf_ddf37721-d84",
+ "agent": "aa2f8991710215d87",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_ddf37721-d84/agent-aa2f8991710215d87.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-hobb-close.json",
+  "claims": 109,
+  "complete": true,
+  "mtime": "08:18:09"
+ }
+}

@@ -174,5 +174,61 @@
   "substantive": false,
   "date": "retrieved 2026-09-06",
   "route": "live URL — used as the bibliography for this angle"
+ },
+ {
+  "title": "Pierre-Louis Malosse, \"Justinian Visited and Revisited\" (English translation), Anabases 5 (2007), pp. 229-235",
+  "url": "http://brightweavings.com/justinian-visited-and-revisited/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2007",
+  "route": "live URL, raw HTML (the French original at http://brightweavings.com/justinien/ was also read; journals.openedition.org/anabases/3215 was blocked by an Anubis bot filter and has no Wayback capture)"
+ },
+ {
+  "title": "Andrew Patton, \"We See by Jad's Light Alone: Guy Gavriel Kay and the New Sanctuary Mosaicist\", Sarantine Letters special issue",
+  "url": "http://brightweavings.com/jadslight/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "n.d.",
+  "route": "live URL, raw HTML — NOTE the essay is written inside an in-world conceit, as if by a Sarantine scholar reviewing Kay's book as a history"
+ },
+ {
+  "title": "Narelle Campbell, \"Now and then: traces of the present in medievalist fantasy fiction\" (PhD thesis, University of Wollongong, 2013)",
+  "url": "https://ro.uow.edu.au/theses/3910",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2013",
+  "route": "ro.uow.edu.au download blocked (empty body); obtained via the Figshare mirror https://ndownloader.figshare.com/files/50372574, PDF text extracted with pdfminer"
+ },
+ {
+  "title": "Susannah Clements, \"From Middle Earth to Fionavar: Free Will and Sacrifice in High Fantasy by J.R.R. Tolkien and Guy Gavriel Kay\", Conference on Christianity and Literature (2002)",
+  "url": "http://brightweavings.com/clementsfionavarlotr/",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2002",
+  "route": "live URL, raw HTML — read; concerns free will and sacrifice, nothing on register"
+ },
+ {
+  "title": "Dena Taylor, \"Three Glasses of Wine: The Accommodation of Culture in The Lions of Al-Rassan\" (Nimrod Press, Babel Handbooks)",
+  "url": "http://brightweavings.com/denalions/",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "n.d.",
+  "route": "live URL, raw HTML — read; thematic, not stylistic"
+ },
+ {
+  "title": "M. R. Doshlova, \"The metaphorical worldview in G. G. Kay's novel 'Tigana': the problem of memory and national identity\" (conference paper, Kuban State University; Ural Federal University archive)",
+  "url": "https://elar.urfu.ru/bitstream/10995/151646/1/978-5-91256-808-4_128.pdf",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2026",
+  "route": "live URL, PDF binary, text extracted with pdfminer (Russian)"
+ },
+ {
+  "title": "Sylwia Borowska-Szerszun, \"When Gods are Absent from Fantasy: Religion and Spiritual Experience in Guy Gavriel Kay's The Lions of Al-Rassan and The Sarantine Mosaic\", in The Light of Life (Kraków: Libron, 2017), pp. 217-232",
+  "url": "https://repozytorium.uwb.edu.pl/jspui/bitstream/11320/8028/1/When_Gods_are_Absent_from_Fantasy.pdf",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2017",
+  "route": "BLOCKED for reading: the repository PDF is a 4.7 MB image-only scan and yielded 18 characters of extractable text; the BrightWeavings landing page carries only an abstract-length excerpt"
  }
 ]

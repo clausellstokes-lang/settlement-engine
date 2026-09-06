@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "in progress — 14 of the named roster fetched or substituted; the original Suvudu Q&A page appears lost (two relays used instead)",
+ "complete": true,
+ "coverage": "Roster: SSM 998 \"Editing Process\", SSM \"Heraldry in Westeros\" (1999), the MoPOP gardener page, Not a Blog on Vance (2009), the Harper Voyager Vance piece (2013), the 1979 speech — BOTH 1979 GoH speeches, \"Editors: The Writer's Natural Enemy\" (10 Mar 1979) and \"Critics and Reviewers\" (29 Sep 1979) — Reactor on Druon (Raets 2013) plus Martin's own Druon post, and History of Westeros 2022 (full transcript) were all FETCHED. The Pajiba Groell item was BLOCKED live (403) and read from a Wayback id_ capture. The ORIGINAL Suvudu Groell Q&A is NOT FOUND (suvudu.com is dead; the Wayback CDX has no capture of the Q&A path) and is covered by two relays, Pajiba and a fan re-transcription. \"García and Antonsson on his sentences\" was met by three of their own texts: the La Garde de Nuit transcript (2019 interview, published 2020), the ShadowDance interview (2017) and the unsigned Citadel review of A Game of Thrones (2001 capture). Substantive sources by route: 12 live fetches with a browser user agent, 6 Wayback id_ raw captures, 0 PDFs, 0 abstract-only; 5 further pages read and logged non-substantive (one, Tower of the Hand, was an empty JavaScript shell). Expansion beyond the roster came from bibliography chasing on georgerrmartin.com (the speeches and On Writing indexes yielded the September 1979 Critics speech, \"On Fantasy\" 1996 and \"The Usual\" 1983) and from the Wayback CDX index of westeros.org; open web search was cut off at the session's 200-search budget mid-sweep, so lateral discovery stopped earlier than the method's two-empty-searches rule would have — 18 substantive sources, 78 claims, every quotation re-checked verbatim against the fetched text.",
  "sourcesRead": [
   {
    "title": "So Spake Martin — \"Editing Process\" (Feb 29, 2000; Posts to Forums)",
@@ -22,7 +22,7 @@
    "title": "MoPOP blog, \"George R. R. Martin on the Architect and the Gardener\"",
    "url": "https://www.mopop.org/blog/posts/george-r-r-martin-on-the-architect-and-the-gardener",
    "kind": "own-words",
-   "substantive": false,
+   "substantive": true,
    "date": "2019-04-16",
    "route": "live curl, browser UA"
   },
@@ -113,6 +113,78 @@
    "substantive": true,
    "date": "2014-05-29",
    "route": "live curl, browser UA"
+  },
+  {
+   "title": "George R.R. Martin, \"Critics and Reviewers\" — GoH speech, Othercon III, College Station, September 29 1979",
+   "url": "https://georgerrmartin.com/about-george/speeches/critics-and-reviewers/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1979-09-29",
+   "route": "live curl, browser UA"
+  },
+  {
+   "title": "George R.R. Martin, \"On Fantasy\" (first published in Pati Perret, The Faces of Fantasy, 1996)",
+   "url": "https://georgerrmartin.com/about-george/on-writing-essays/on-fantasy-by-george-r-r-martin/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1996",
+   "route": "live curl, browser UA"
+  },
+  {
+   "title": "George R.R. Martin, \"The Usual\" — GoH speech, Windycon X, October 7 1983",
+   "url": "https://georgerrmartin.com/about-george/speeches/the-usual/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1983-10-07",
+   "route": "live curl, browser UA"
+  },
+  {
+   "title": "Unsigned Citadel review of A Game of Thrones, westeros.org (site copyright Elio M. García Jr. and Linda Antonsson)",
+   "url": "https://web.archive.org/web/20010503051917id_/http://www.westeros.org:80/Citadel/Reviews/Martin01a.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2001-05-03 (capture; page copyright 1999-2001)",
+   "route": "wayback id_ raw capture 20010503051917"
+  },
+  {
+   "title": "George R.R. Martin, \"The Preface That Never Was\" (written March 1986 for the unpublished JWC-6)",
+   "url": "https://georgerrmartin.com/about-george/on-writing-essays/the-preface-that-never-was-by-george-r-r-martin/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "1986-03",
+   "route": "live curl, browser UA"
+  },
+  {
+   "title": "George R.R. Martin, \"Here I Am Again\" — Disclave 1983 speech",
+   "url": "https://georgerrmartin.com/about-george/speeches/here-i-am-again/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "1983-05-29",
+   "route": "live curl, browser UA"
+  },
+  {
+   "title": "Speeches index, georgerrmartin.com (route to the 1979 and 1983 speeches)",
+   "url": "https://georgerrmartin.com/about-george/speeches/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "n/a",
+   "route": "live curl, browser UA"
+  },
+  {
+   "title": "Westeros.org news item \"Illustrated Edition Preview\" (pointer to a Vanity Fair interview with Anne Groell)",
+   "url": "https://web.archive.org/web/20250424071834id_/https://www.westeros.org/News/Entry/Illustrated_Edition_Preview",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2023 (undated on page)",
+   "route": "wayback id_ raw capture 20250424071834"
+  },
+  {
+   "title": "Tower of the Hand, \"Editor Anne Groell on TWOW and working with GRRM\"",
+   "url": "https://towerofthehand.com/blog/2014/05/30-editor-anne-groell-on-twow/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2014-05-30",
+   "route": "live curl returned a JavaScript shell with no article text; not read"
   }
  ],
  "claims": [
@@ -174,7 +246,7 @@
   },
   {
    "feature": "repetition and refrain",
-   "claim": "Pajiba reports that Martin's editor Anne Groell tried to cut back the repeated phrase \"words are wind\" in A Dance With Dragons and that Martin was stubborn about it.",
+   "claim": "Pajiba reports that Martin's editor Anne Groell tried to cut back a repeated phrase in A Dance With Dragons.",
    "source": "Genevieve Burgess, Pajiba (2014-05-30), relaying Anne Groell's Suvudu Q&A",
    "url": "https://web.archive.org/web/20241126034104id_/https://www.pajiba.com/game_of_thrones/george-rr-martins-editor-does-a-qa-but-doesnt-have-the-answer-you-want.php",
    "quote": "The repeated phrase she tried to cut back on",
@@ -944,7 +1016,7 @@
   },
   {
    "feature": "edition and house style",
-   "claim": "Antonsson says Fire & Blood is the unedited material that had been cut down to fit The World of Ice and Fire, and that they helped Anne Groell keep the two books consistent.",
+   "claim": "Antonsson says they cut Martin's originally written material down to fit The World of Ice and Fire, and that the unedited material later went into Fire & Blood.",
    "source": "Linda Antonsson, La Garde de Nuit interview (published 2020-03-25)",
    "url": "https://web.archive.org/web/20251202235322id_/https://www.lagardedenuit.com/meeting-with-elio-linda-westeros-org-the-world-of-ice-and-fire/",
    "quote": "we started cutting the material down to fit into this book",
@@ -972,7 +1044,7 @@
   },
   {
    "feature": "edition and house style",
-   "claim": "Groell says elements of The World of Ice and Fire had to be shortened because the book was getting too long, and that Martin revealed secrets so she could help him redirect parts of the plot.",
+   "claim": "Groell says elements of The World of Ice and Fire had to be shortened because the book was already getting too long.",
    "source": "Anne Groell, Suvudu Universe Q&A re-transcribed at The Fireside (2014-05-29)",
    "url": "https://insurrbution.blogspot.com/2014/05/interview-with-anne-groell-grrms-editor.html",
    "quote": "mainly because we had to shorten a",
@@ -997,6 +1069,216 @@
    "routeHint": "live curl with browser UA",
    "registerHint": "none",
    "confidence": "medium — fan re-transcription; original host dead"
+  },
+  {
+   "feature": "terminology consistency",
+   "claim": "Martin says internal consistency is a good objective yardstick by which to judge a piece of fiction.",
+   "source": "George R.R. Martin, \"Critics and Reviewers\", GoH speech, Othercon III (1979-09-29)",
+   "url": "https://georgerrmartin.com/about-george/speeches/critics-and-reviewers/",
+   "quote": "internal consistency is to my mind a good objective yardstick",
+   "page": "speech, disclaimers before the three rules",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1979-09-29",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "Martin says the ideal reader is absorbed into the narrative and lives events as the viewpoint character lives them, learning things as he learns them.",
+   "source": "George R.R. Martin, \"Critics and Reviewers\" (1979-09-29)",
+   "url": "https://georgerrmartin.com/about-george/speeches/critics-and-reviewers/",
+   "quote": "lives events as the viewpoint character lives them",
+   "page": "speech, section on the vicarious experience",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1979-09-29",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "withheld information and inference",
+   "claim": "Martin says that when he writes a story he organises events and information as carefully as he can to give the reader a vicarious experience.",
+   "source": "George R.R. Martin, \"Critics and Reviewers\" (1979-09-29)",
+   "url": "https://georgerrmartin.com/about-george/speeches/critics-and-reviewers/",
+   "quote": "I organize things — events and information and the like",
+   "page": "speech, section on the vicarious experience",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1979-09-29",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: story as engine",
+   "claim": "Martin says we read fiction to find out what happens.",
+   "source": "George R.R. Martin, \"Critics and Reviewers\" (1979-09-29)",
+   "url": "https://georgerrmartin.com/about-george/speeches/critics-and-reviewers/",
+   "quote": "We read fiction to find out what happens",
+   "page": "speech, after the Garp quotation",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1979-09-29",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: ending must be integral",
+   "claim": "Martin says the ending of a piece of fiction should grow out of what has gone before and be logical, consistent and integral to the rest of the story.",
+   "source": "George R.R. Martin, \"Critics and Reviewers\" (1979-09-29)",
+   "url": "https://georgerrmartin.com/about-george/speeches/critics-and-reviewers/",
+   "quote": "it needs to be logical and consistent and integral",
+   "page": "speech, section on the protected ending",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1979-09-29",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: theory of fantasy prose",
+   "claim": "Martin writes that the best fantasy is written in the language of dreams.",
+   "source": "George R.R. Martin, \"On Fantasy\" (1996)",
+   "url": "https://georgerrmartin.com/about-george/on-writing-essays/on-fantasy-by-george-r-r-martin/",
+   "quote": "The best fantasy is written in the language of dreams",
+   "page": "essay, opening line",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1996",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "concrete sensory noun",
+   "claim": "In \"On Fantasy\" Martin sets fantasy against reality using named concrete places, among them the strip malls of Burbank and the smokestacks of Cleveland.",
+   "source": "George R.R. Martin, \"On Fantasy\" (1996)",
+   "url": "https://georgerrmartin.com/about-george/on-writing-essays/on-fantasy-by-george-r-r-martin/",
+   "quote": "the strip malls of Burbank, the smokestacks of Cleveland",
+   "page": "essay, second paragraph",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "1996",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "none",
+   "confidence": "high — the passage is Martin's own demonstration, not a statement of rule"
+  },
+  {
+   "feature": "repetition and refrain",
+   "claim": "Martin says a writer who repeats himself too often is on the road toward stagnation and self-parody.",
+   "source": "George R.R. Martin, \"The Usual\", GoH speech, Windycon X (1983-10-07)",
+   "url": "https://georgerrmartin.com/about-george/speeches/the-usual/",
+   "quote": "on the road toward stagnation and self-parody",
+   "page": "speech, section on The Armageddon Rag",
+   "kind": "own-words",
+   "polarity": "rejects",
+   "date": "1983-10-07",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: voice as a by-product",
+   "claim": "Martin says all writers repeat themselves to a certain extent, that themes recur and a distinctive voice develops.",
+   "source": "George R.R. Martin, \"The Usual\" (1983-10-07)",
+   "url": "https://georgerrmartin.com/about-george/speeches/the-usual/",
+   "quote": "themes recur, a distinctive voice develops",
+   "page": "speech, section on The Armageddon Rag",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1983-10-07",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "withheld information and inference",
+   "claim": "The Westeros.org Citadel review says the history in A Game of Thrones is unveiled slowly, piece by piece like a jigsaw puzzle forming into place haphazardly.",
+   "source": "Unsigned Citadel review, westeros.org (site copyright Elio M. García Jr. and Linda Antonsson, 1999-2001)",
+   "url": "https://web.archive.org/web/20010503051917id_/http://www.westeros.org:80/Citadel/Reviews/Martin01a.html",
+   "quote": "piece-by-piece like a jigsaw puzzle forming into place haphazardly",
+   "page": "review, fifth paragraph",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2001-05-03",
+   "routeHint": "wayback id_ raw capture 20010503051917",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — the review is unsigned; authorship is inferred from the site copyright line naming García and Antonsson"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "The Westeros.org Citadel review says A Game of Thrones has more than a few point-of-view characters whose chapters are always divided by other points of view lying in between.",
+   "source": "Unsigned Citadel review, westeros.org (site copyright Elio M. García Jr. and Linda Antonsson, 1999-2001)",
+   "url": "https://web.archive.org/web/20010503051917id_/http://www.westeros.org:80/Citadel/Reviews/Martin01a.html",
+   "quote": "whose chapters are always divided by other POVs lying in-between",
+   "page": "review, penultimate paragraph",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2001-05-03",
+   "routeHint": "wayback id_ raw capture 20010503051917",
+   "registerHint": "none",
+   "confidence": "medium — unsigned review; authorship inferred from the site copyright line"
+  },
+  {
+   "feature": "other: register grounded in history",
+   "claim": "The Westeros.org Citadel review says that where The Lord of the Rings is inspired by epic legends and myth, A Game of Thrones is more grounded in history and reality.",
+   "source": "Unsigned Citadel review, westeros.org (site copyright Elio M. García Jr. and Linda Antonsson, 1999-2001)",
+   "url": "https://web.archive.org/web/20010503051917id_/http://www.westeros.org:80/Citadel/Reviews/Martin01a.html",
+   "quote": "this one is more grounded in history and reality",
+   "page": "review, paragraph comparing it to The Lord of the Rings",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2001-05-03",
+   "routeHint": "wayback id_ raw capture 20010503051917",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — unsigned review; authorship inferred from the site copyright line"
+  },
+  {
+   "feature": "repetition and refrain",
+   "claim": "Pajiba reports that Martin was stubborn about keeping the repeated phrase his editor wanted cut.",
+   "source": "Genevieve Burgess, Pajiba (2014-05-30), relaying Anne Groell's Suvudu Q&A",
+   "url": "https://web.archive.org/web/20241126034104id_/https://www.pajiba.com/game_of_thrones/george-rr-martins-editor-does-a-qa-but-doesnt-have-the-answer-you-want.php",
+   "quote": "but Martin was “stubborn.”",
+   "page": "numbered highlight 6",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "2014-05-30",
+   "routeHint": "wayback id_ raw capture 20241126034104",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "terminology consistency",
+   "claim": "Antonsson says they helped Anne Groell go over the Fire & Blood material and try to keep it consistent with The World of Ice and Fire.",
+   "source": "Linda Antonsson, La Garde de Nuit interview (published 2020-03-25)",
+   "url": "https://web.archive.org/web/20251202235322id_/https://www.lagardedenuit.com/meeting-with-elio-linda-westeros-org-the-world-of-ice-and-fire/",
+   "quote": "try and keep it consistent between the two books",
+   "page": "transcript, About Fire and Blood",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020-03-25",
+   "routeHint": "wayback id_ raw capture 20251202235322",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "edition and house style",
+   "claim": "Groell says Martin had to reveal a few secrets to her so that she could help him redirect parts of the plot of The World of Ice and Fire.",
+   "source": "Anne Groell, Suvudu Universe Q&A re-transcribed at The Fireside (2014-05-29)",
+   "url": "https://insurrbution.blogspot.com/2014/05/interview-with-anne-groell-grrms-editor.html",
+   "quote": "to reveal a few secrets so I could help him redirect parts of the plot",
+   "page": "Q&A, answer on knowing the ending",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "2014-05-29",
+   "routeHint": "live curl with browser UA; the original Suvudu page is gone",
+   "registerHint": "chronicle-line",
+   "confidence": "medium — fan re-transcription of a Q&A whose original host is dead"
   }
  ]
 }

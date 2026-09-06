@@ -1,0 +1,34 @@
+{
+ "role": "verifier",
+ "name": "tolkien",
+ "angle": null,
+ "tag": "i673-687",
+ "lines": 96,
+ "firstTs": "2026-09-06T12:20:50.163Z",
+ "lastTs": "2026-09-06T12:26:53.224Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "WebFetch": 2,
+  "Bash": 19
+ },
+ "urlsFetched": [
+  "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144",
+  "https://www.googleapis.com/books/v1/volumes/9uAsEAAAQBAJ",
+  "https://books.google.com/books?id=9uAsEAAAQBAJ&q=fronting+of+adverbials",
+  "https://link.springer.com/book/10.1007/978-3-030-69298-7",
+  "https://books.google.com/books?id={BOOK}&q={urllib.parse.quote(term",
+  "https://web.archive.org/web/20220615121435id_/https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 12:20pm (America/New_York)",
+ "run": "wf_d8edf077-aca",
+ "agent": "a743f48309b3431ba",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d8edf077-aca/agent-a743f48309b3431ba.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i673-687.json",
+  "exists": false
+ }
+}

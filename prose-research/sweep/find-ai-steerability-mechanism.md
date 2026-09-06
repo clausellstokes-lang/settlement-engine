@@ -52,3 +52,26 @@ Opus finder, 2026-09-06. Raw notes. All fetches by curl with browser UA + pypdf 
 - 10% original data retained -> "only minor degradation"
 - REPETITION PENALTY ABLATION (steerability!): penalty 2.0 "causes the models to produce lower score continuations to avoid using repeats", "enforcing this for the LLM experiments causes the perplexity to double compared with the original. Models remain as susceptible to model collapse, if not more."
 - Gen 9 output degenerates to a list of jackrabbit colours (concrete degeneration example)
+
+## Expansion (bibliography chasing + OpenAlex/OpenReview APIs; WebSearch budget exhausted after 1 query)
+- West & Potts (COLM 2025, arXiv 2505.00047): base model wins ORIGINALITY in all cases; originality vs human preference mean rho -0.08, pleasantness vs preference +0.34. THE reward-signal mechanism.
+- Padmakumar & He (ICLR 2024, 2309.05196): InstructGPT co-writing homogenises, base GPT3 does NOT; the model's contributed text is the culprit, user text unaffected.
+- Lu et al. Salieri (2410.04265): human authors 66.2% above LLMs; Creativity Index -30.1% after RLHF (verbatim), -8.9% (verbatim+semantic). STEERABILITY REFUTED: creativity-encouraging prompts p=0.23 N=600; top-p p=0.23; prompt length p=0.13; model size p=0.12.
+- Yun et al. (2505.18949): chat template structural tokens cause diversity collapse; explicit "be creative" inside the template still below a minimal prompt; temperature gains muted under full template.
+- Gerstgrasser et al. (2404.01413): accumulating data avoids model collapse -> collapse is not inevitable.
+- Borji (2410.12954): counter-note — the collapse outcome is a statistical phenomenon and may be unavoidable.
+- Murthy, Ullman & Hu (2411.04427): aligned < instruction-tuned; no model reaches human conceptual diversity.
+- Shypula et al. (COLM 2025, 2504.12522): COUNTER — preference-tuned models have GREATER *effective* semantic diversity (quality-thresholded); within the high-quality subset they are less diverse but the quality gain outweighs it.
+- Chung et al. Midjourney (2503.17126): DDPO/DORPO at 8B reaches human-dataset diversity; beats GPT-4o-iter which used diversity-inducing prompts. Human Gold is lower reward, far higher diversity.
+- Xiao/Su et al. (JASA, 2405.16455): KL regularization is an algorithmic bias -> preference collapse; PM-RLHF +29-41%.
+- janus (LessWrong 2022, via Wayback): ORIGIN of the term; RETRACTED the RLHF attribution for text-davinci-002. Temperature "flattens... into undifferentiated goo"; collapse "irreducible to an effective decrease in temperature"; but prompt engineering SOMETIMES avoids it.
+- O'Mahony et al. (ICLR 2024 ME-FoMo, via Wayback): SFT causes the token-level diversity drop, the reward step causes the OUTPUT-level collapse; creative prompts much worse than factual; Llama-2-chat "Frumplenook".
+- Peeperkorn et al. (ICCC 2024, 2405.00492): temperature weakly correlated with novelty, moderately with incoherence; "does not enable access to a larger slice of the probability distribution".
+- Brooks, Eggert & Peskoff (WikiNLP ACL 2024): ~5% of 2,909 new English Wikipedia articles flagged AI; flagged articles lower quality. The ONLY archival-register measurement found.
+- Shaib et al. (2403.00553): no standard method to measure lexical diversity.
+
+## The angle's verdict (for the chair, not a claim)
+The first sweep's "no prompt, temperature or model switch fixes the tells" is HALF right and the half it gets wrong is load-bearing:
+- TEMPERATURE: refuted as a fix by four independent measurements (DivPO, Peeperkorn, Yun, janus) and by Shumailov's repetition-penalty ablation. CONFIRMED.
+- PROMPTING: contested. Lu et al. (creativity prompts, p=0.23) and Yun et al. (explicit diversity inside the chat template) say no; Zhang et al. Verbalized Sampling says a DISTRIBUTION-LEVEL prompt gives 1.6-2.1x and recovers 66.8% of base diversity, and janus says prompt engineering sometimes works. The distinguishing variable is the SHAPE of the prompt, not its exhortation: asking for a distribution moves the model, asking it to "be creative" does not.
+- TRAINING: the failure is a post-training artefact, not a fixed trait — DivPO, DDPO/DORPO and PM-RLHF each move it, and base models beat aligned models on originality. But no source measured the archival register.

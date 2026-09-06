@@ -1,5 +1,3 @@
-
-=== PAGE 1 ===
 APPLIED
 MATHEMATICS
 ANTHROPOLOGY
@@ -118,8 +116,6 @@ doi:10.1073/pnas.2006465117/-/DCSupplemental
 .y
 www.pnas.org/cgi/doi/10.1073/pnas.2006465117 PNAS Latest Articles | 1 of 7
 Downloaded by guest on November 10, 2020 
-
-=== PAGE 2 ===
 distinction between story time and discourse time. Story time
 refers to the order and pace of events as they occurred in the
 ﬁctional world. It is measured in days and months, albeit using
@@ -208,8 +204,6 @@ Fig. 1. Network of the most predominant characters. For illustrative purposes we
 interact. Edge thicknesses represent the numbers of times that corresponding pair of characters interact in the narrative.
 2 of 7 | www.pnas.org/cgi/doi/10.1073/pnas.2006465117 Gessey-Jones et al.
 Downloaded by guest on November 10, 2020 
-
-=== PAGE 3 ===
 APPLIED
 MATHEMATICS
 ANTHROPOLOGY
@@ -346,8 +340,6 @@ with some other notable characters at the Red Wedding. After an
 Gessey-Jones et al. PNAS Latest Articles
 | 3 of 7
 Downloaded by guest on November 10, 2020 
-
-=== PAGE 4 ===
 0
 AB
 Fig. 2. Number of characters in the narrative. (A) Number of characters appearing in each individual chapter. This shows signiﬁcant ﬂuctuations chapter
@@ -406,8 +398,6 @@ are included. (B) Evolution of the degree assortativity. After the ﬁrst book (
 around 0. While the assortativity of the full network (blue) also ﬂuctuates, it stays slightly disassortative for the later books.
 4 of 7 | www.pnas.org/cgi/doi/10.1073/pnas.2006465117 Gessey-Jones et al.
 Downloaded by guest on November 10, 2020 
-
-=== PAGE 5 ===
 APPLIED
 MATHEMATICS
 ANTHROPOLOGY
@@ -474,8 +464,6 @@ distribution is memoryless in that it is what would be expected if deaths are ma
 of the series.
 Gessey-Jones et al. PNAS Latest Articles | 5 of 7
 Downloaded by guest on November 10, 2020 
-
-=== PAGE 6 ===
 AB
 Fig. 6. Empirical distributions of interevent times for signiﬁcant deaths by date (story time). Date here is measured using the ﬁctional Westerosi calendar.
 Shown in blue is the best-ﬁt discrete power law (Zeta) distribution.
@@ -579,8 +567,6 @@ as a device for engaging the reader in the story. Our analysis
 6 of 7
 | www.pnas.org/cgi/doi/10.1073/pnas.2006465117 Gessey-Jones et al.
 Downloaded by guest on November 10, 2020 
-
-=== PAGE 7 ===
 APPLIED
 MATHEMATICS
 ANTHROPOLOGY

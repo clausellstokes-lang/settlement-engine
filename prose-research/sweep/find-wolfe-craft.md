@@ -89,3 +89,16 @@ FETCHED RAW (HTTP 200, full body):
 - brianbiswas.com/blog/2015/wolfewritingrules — relay of the Black Gate interview already in state; five rules; thin
 NOT FOUND / BLOCKED: cwhowell.com Dark Souls post (404 at guessed path), conceptualfiction.com (404), donbeck1.substack (404 at guessed slug), scatterings1976.blogspot (empty body).
 NOTE reactormag is NOT blocked via curl + browser UA (earlier round recorded 403).
+
+## Batch 4 — index-crawl of ultan.org.uk after the WebSearch budget ran out (200/200)
+Ultan's Library front page yields the article roster; the craft-relevant ones fetched raw:
+- palmer-me-gene (Stephen Palmer, SF novelist, 2015-08-04) — "only a proportion of the meaning is on the surface"
+- the-reader-as-augur (Nick Gevers, 2000-09-05) — every Long Sun opening is a dialogue with a holder of privileged information; the hologram conceit
+- tell-me-about-the-lexicon-urthus (Andre-Driussi, 2008-09-25) — Wolfe said the words are real ("Words Weird and Wonderful"); naming schemes by group (saints, iron names, star names)
+- the-lupine-scholar (Wowra on Andre-Driussi, 2009-05-21) — omophagist, cherkaji; readers accused Wolfe of fabricating words
+- place-names-in-gene-wolfes-soldier-of-the-mist (Scott Wowra, 2016-09-07) — TOPONYMY: folk etymology predominant; Wolfe's foreword on translating place names; the 1988 Weird Tales interview on Thought/Rope
+- posthistory-201 (Andre-Driussi, 2020-07-06) — MEASUREMENT: range one thousand to thirty-thousand years; brute-force search of chiliads/thousand years/ages/aeons/eons
+- confounding-the-skin-and-the-mask (Peter Wright, 2002-01-15) — ambiguity as organising principle of form; the puzzle matters more than its solution
+- an-homage-to-my-honorary-grandfather (C. S. E. Cooney, 2016-06-10) — WOLFE'S OWN RULE: "Always tell a story as cleanly and as clearly as possible"; "lumps of prose like uncooked dumplings"; and the counter-case, he told her not to cut a story's rhyme
+Also: noelvee.wordpress 2015-06-03 (writer's craft post — Wolfe describes the world as an inhabitant would; rejects "histories as if they were written in books"), schicksalgemeinschaft 2021-05-16.
+All 89 quotations pre-verified by substring match against the whitespace-normalised fetched text (see /tmp/q*.py runs; raw files kept in sweep/wolfe-craft-raw/).

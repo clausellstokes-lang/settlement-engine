@@ -89,3 +89,15 @@ Lateral: Simon Willison link blog 2024-04-18 (raw/swillison.txt) — used only t
 ### DriveThruRPG / OneBookShelf (RELAY — policy text not reachable at primary)
 - Via EN World quoting Gizmodo (Jul 2023): marketplaces "will not accept standalone artwork products that utilize AI-generated art"; from July 31 content "primarily" of AI-generated writing not allowed; "We acknowledge enforcement challenges ... and trust in the goodwill of our partners to offer customers unique works based primarily on human creativity".
 - Primary reached: DriveThruRPG help page "Customer Experience with AI-Generated Content Within Titles", dated October 28, 2024 (Wayback 20251005160536): three filter values "Handcrafted", "Contains AI-Generated Content", "Creation Method Not Chosen by Publisher"; note the definitions are about ART only ("Artwork was made by an artist practicing their craft"). The 2024 storefront filter therefore does NOT label AI-written TEXT. Useful register/industry datum.
+
+## Expansion round (bibliography chasing + arXiv/OpenAlex/EuropePMC APIs; WebSearch budget exhausted)
+- Porter & Machery, Sci Rep 14:26133, 14 Nov 2024 — ChatGPT 3.5, human-out-of-the-loop, 10 poets x 5 poems; 1,634 participants (study 1), 696 (study 2); 46.6% accuracy on N=16,340; all 5 AI poems out-rated all 5 human poems; largest effect on RHYTHM; mechanism = accessibility ("doesn't make sense" 144 vs 29).
+- Chakrabarty & Dhillon, CHI 2026 (arXiv 2601.18353) — THE pivotal steerability result. 28 MFA writers vs GPT-4o/Claude 3.5 Sonnet/Gemini 1.5 Pro emulating 50 authors; expert preference for human 82.7% (in-context) reverses to 62% for AI after per-author fine-tuning of GPT-4o; stylistic fidelity 81.1%/80.0% for AI post-fine-tune; fine-tuning costs 583x the tokens; excerpts <=450 words.
+- Chakrabarty, Ginsburg & Dhillon, arXiv 2510.13939v4 — detectors flag 3% of fine-tuned vs 97% of prompted; median fine-tune cost $81/author.
+- Farrell, arXiv 2601.17363v3 — Italian, ChatGPT-4o vs Moravia, n=20, AI slightly preferred (modest).
+- Chakrabarty et al., Art or Artifice (CHI 2024) — the negative pole: LLM stories pass 3-10X fewer TTCW tests.
+- Chakrabarty, Laban & Wu, CHI 2025 — seven-category idiosyncrasy taxonomy; LAMP corpus 1,057 paragraphs; no model family better than another.
+- Doshi & Hauser, Sci Adv, 12 Jul 2024 — GPT-4 IDEAS only (not prose); novelty +8.1%; low-DAT writers "how well written" +26.6%; high-DAT writers unaffected; stories more similar to one another.
+
+## The gap this angle did NOT close
+No source read measures the archival / encyclopedic / civic-record register. Every measurement is lyric poetry, flash fiction, <=450-word literary excerpts, short stories, or PubMed article vocabulary. The nearest adjacent evidence is Hern's PubMed lexical measurement (an impersonal expository register) and Vara's "inconsistencies and untruths" warning about a first-person factual register.

@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "CHECKPOINT 2 (round 3, close-readings angle). The angle's named roster (Earthsea prose; From Elfland to Poughkeepsie; Steering the Craft; The Language of the Night) was fetched and mined in rounds 1-2 and is already banked in merged-leguin.json, so round 3 spent its budget on close readings those rounds missed: Always Coming Home as a fictional ethnography (4 sources), 'The Ones Who Walk Away from Omelas' as a description of a city (3), the opening paragraph of The Dispossessed (2 independent close readings), the opening of A Wizard of Earthsea read by a working novelist (1), a one-sentence close reading by a novelist-teacher (Matt Bell), plus reader/forum/comment-thread material (4). 27 pages fetched RAW by curl with a browser user agent; 22 substantive. Blocked: every route to a YouTube transcript (timedtext returns an empty body, youtubetotranscript 403, tactiq 401, youtubetranscript.com is client-side only, no yt-dlp on the machine) and www.tor.com 403 (cured by the reactormag mirror). WebFetch itself was unusable for this angle: it returned model-written summaries rather than page text, so nothing was quoted from it.",
+ "complete": true,
+ "coverage": "Round 3, Le Guin close-readings/line-level angle. Named roster: the four items the angle names (the Earthsea prose, From Elfland to Poughkeepsie, Steering the Craft, The Language of the Night) were all FETCHED and already banked in rounds 1-2 (merged-leguin.json holds 100 Le Guin claims, 41 kept, including the Elfland PDF, the NEA guide, Walton's reread, Stan Carey, LitHub, Nepveu and Vermont Softworks); this round re-read Stan Carey raw to confirm and then spent its budget on close readings the earlier rounds missed rather than duplicating them. NOT FOUND: no line-level close reading of Always Coming Home's ethnographic entries themselves (four reviews describe the form, none reads a Kesh paragraph). BLOCKED: every route to a video-essay transcript (YouTube timedtext returns an empty body, youtubetotranscript 403, tactiq 401, youtubetranscript.com is client-side only, no yt-dlp on the machine), so no video essay is cited; www.tor.com, theparisreview.org, granta.com and reddit all 403 to curl (the first cured by the reactormag mirror, the next two by Wayback raw captures, reddit not cured). WebFetch returned model-written summaries rather than page text for every URL tried, so nothing is quoted from it: all 34 pages were read raw. Sources: 34 fetched, 25 substantive. By route: named roster / prior-round confirmation 2; lateral search (WebSearch, budget exhausted mid-round) 24; bibliography chasing from the estate's own index of critical writing and from the Pressbooks book's sibling chapters 6; Wayback recovery ladder 2. The new ground opened: Always Coming Home as a fictional ethnography and the nearest thing in Le Guin to a settlement gazetteer (4 independent readers, who agree it works and agree it reads slowly); 'The Ones Who Walk Away from Omelas' as a sustained description of a city by a narrator who admits the limits of the record (3); the opening paragraph of The Dispossessed, close-read twice independently (no people in it, no names for seven pages); the opening of A Wizard of Earthsea read as a descent from a bird's-eye view to a goatherd, by a novelist who teaches it; a one-sentence close reading by Matt Bell; and reader/forum/comment-thread material including the dissenting view that the distance reads as surface without depth.",
  "sourcesRead": [
   {
    "title": "Sentence first (Stan Carey) \u2014 'How to see one's own world': Le Guin on writing style",
@@ -206,6 +206,70 @@
    "kind": "analysis",
    "substantive": false,
    "route": "curl with browser user agent (live URL)"
+  },
+  {
+   "title": "Michael Chabon, Le Guin's Subversive Imagination (The Paris Review Daily)",
+   "url": "https://www.theparisreview.org/blog/2019/11/20/leguins-subversive-imagination/",
+   "kind": "analysis",
+   "substantive": true,
+   "route": "live URL 403; Wayback raw capture (20260620070427id_)",
+   "date": "2019-11-20"
+  },
+  {
+   "title": "Jason P. Vest, The Re-Possessed: Ursula K. Le Guin storms the Library of America (The Common Reader)",
+   "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
+   "kind": "analysis",
+   "substantive": true,
+   "route": "curl browser UA",
+   "date": "2021-05-30"
+  },
+  {
+   "title": "Alison Smith, Her Left Hand, The Darkness (Granta)",
+   "url": "https://granta.com/her-left-hand-the-darkness/",
+   "kind": "reception",
+   "substantive": true,
+   "route": "live URL 403; Wayback raw capture (20250903091534id_)",
+   "date": "2019-01-03"
+  },
+  {
+   "title": "Sherryl Vint interviewed by Cal Flyn, The Best Ursula Le Guin Books (Five Books)",
+   "url": "https://fivebooks.com/best-books/best-ursula-le-guin-books-sherryl-vint/",
+   "kind": "analysis",
+   "substantive": true,
+   "route": "curl browser UA",
+   "date": "2021-05-07"
+  },
+  {
+   "title": "Sean Guynes, Introducing the Ursula K. Le Guin Reread (Reactor) + comment thread",
+   "url": "https://reactormag.com/introducing-the-ursula-k-le-guin-reread/",
+   "kind": "reader",
+   "substantive": true,
+   "route": "curl browser UA",
+   "date": "2020-06-22"
+  },
+  {
+   "title": "Terry Morris, Earthsea and Tales from Earthsea, Steam Engine Time No. 11 (fanzine PDF)",
+   "url": "https://efanzines.com/SFC/SteamEngineTime/SET11.pdf",
+   "kind": "reception",
+   "substantive": true,
+   "route": "PDF binary fetched, streams decompressed, text operators extracted",
+   "date": "2009-02"
+  },
+  {
+   "title": "Writing About Ursula and Her Work \u2014 the estate's index of critical writing (used for bibliography chasing)",
+   "url": "https://www.ursulakleguin.com/reviews",
+   "kind": "relay",
+   "substantive": false,
+   "route": "curl browser UA",
+   "date": "2026"
+  },
+  {
+   "title": "New Criticism chapter on Omelas, Beginnings and Endings: A Critical Edition (thematic, not prose-level)",
+   "url": "https://idaho.pressbooks.pub/beginnings-and-endings-a-critical-edition/chapter/new-criticism-10/",
+   "kind": "reader",
+   "substantive": false,
+   "route": "curl browser UA",
+   "date": "2022-12"
   }
  ],
  "claims": [
@@ -1094,6 +1158,137 @@
    "date": "2024-08",
    "routeHint": "curl with browser user agent (live URL)",
    "registerHint": "dossier-archivist"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Michael Chabon lists the ingredients of the Earthsea world as its flora, its weather, and the dialects and ceremonies of its inhabitants.",
+   "source": "Michael Chabon, \"Le Guin\u2019s Subversive Imagination\", The Paris Review Daily, 20 November 2019",
+   "url": "https://www.theparisreview.org/blog/2019/11/20/leguins-subversive-imagination/",
+   "quote": "from its flora to its weather to the dialects and ceremonies",
+   "page": "middle of the essay",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2019-11-20",
+   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/<ts>id_/<url>",
+   "registerHint": "dossier-archivist"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Chabon says Le Guin conjured an entire planet into vivid existence with nothing but lines on paper.",
+   "source": "Michael Chabon, The Paris Review Daily, 20 November 2019",
+   "url": "https://www.theparisreview.org/blog/2019/11/20/leguins-subversive-imagination/",
+   "quote": "conjured an entire planet into vivid existence",
+   "page": "middle of the essay",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2019-11-20",
+   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/<ts>id_/<url>",
+   "registerHint": "dossier-archivist"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Jason P. Vest says Le Guin weaves each place\u2019s contradictions, tensions, mores and rites into detailed portraits.",
+   "source": "Jason P. Vest, \"The Re-Possessed\", The Common Reader (Washington University), 30 May 2021",
+   "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
+   "quote": "each place\u2019s contradictions, tensions, mores, and rites into satisfyingly detailed",
+   "page": "early section on the Hainish novels",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2021-05-30",
+   "routeHint": "curl with browser user agent (live URL)",
+   "registerHint": "dossier-archivist"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Vest says Le Guin\u2019s invented worlds convince readers they are real places rife with complex histories, cultures and characters.",
+   "source": "Jason P. Vest, The Common Reader, 30 May 2021",
+   "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
+   "quote": "real places rife with complex histories, cultures, and characters",
+   "page": "early section on the Hainish novels",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2021-05-30",
+   "routeHint": "curl with browser user agent (live URL)",
+   "registerHint": "dossier-archivist"
+  },
+  {
+   "feature": "sentence length variation",
+   "claim": "Vest identifies the most famous sentence of The Left Hand of Darkness as the four-word line The king was pregnant.",
+   "source": "Jason P. Vest, The Common Reader, 30 May 2021, quoting Le Guin",
+   "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
+   "quote": "The king was pregnant",
+   "page": "section on The Left Hand of Darkness",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2021-05-30",
+   "routeHint": "curl with browser user agent (live URL)",
+   "registerHint": "chronicle-line"
+  },
+  {
+   "feature": "plainness and economy",
+   "claim": "Alison Smith calls Le Guin\u2019s prose in Very Far Away From Anywhere Else spare and clarifying.",
+   "source": "Alison Smith, \"Her Left Hand, The Darkness\", Granta, 3 January 2019",
+   "url": "https://granta.com/her-left-hand-the-darkness/",
+   "quote": "too taboo for her spare, clarifying prose",
+   "page": "memoir, middle section",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2019-01-03",
+   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/<ts>id_/<url>",
+   "registerHint": "none"
+  },
+  {
+   "feature": "plainness and economy",
+   "claim": "Smith describes Le Guin\u2019s genius as an amalgam of vivid prose, straight talk and revolutionary engagement.",
+   "source": "Alison Smith, Granta, 3 January 2019",
+   "url": "https://granta.com/her-left-hand-the-darkness/",
+   "quote": "vivid prose, straight talk and revolutionary engagement",
+   "page": "memoir, later section",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2019-01-03",
+   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/<ts>id_/<url>",
+   "registerHint": "none"
+  },
+  {
+   "feature": "other: language encodes ideology",
+   "claim": "Sherryl Vint says Le Guin is sensitive to the notion that ideologies and values are embedded in the language and metaphors we use.",
+   "source": "Sherryl Vint, interviewed by Cal Flyn, Five Books, 7 May 2021",
+   "url": "https://fivebooks.com/best-books/best-ursula-le-guin-books-sherryl-vint/",
+   "quote": "our ideologies and values are embedded in the language and metaphors",
+   "page": "interview, on The Word for World is Forest",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2021-05-07",
+   "routeHint": "curl with browser user agent (live URL)",
+   "registerHint": "dossier-archivist"
+  },
+  {
+   "feature": "plainness and economy",
+   "claim": "A commenter on the Reactor Le Guin reread picks out a five-word Le Guin sentence and calls it lovely.",
+   "source": "Reader comment on \"Introducing the Ursula K. Le Guin Reread\", Reactor comment thread",
+   "url": "https://reactormag.com/introducing-the-ursula-k-le-guin-reread/",
+   "quote": "He is done with doing.",
+   "page": "comment thread",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2020",
+   "routeHint": "curl with browser user agent (live URL)",
+   "registerHint": "chronicle-line"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Terry Morris faults the Ghibli Earthsea film for giving no sense of islands in a lonely ocean.",
+   "source": "Terry Morris, \"Earthsea and Tales from Earthsea\", Steam Engine Time No. 11 (fanzine), February 2009",
+   "url": "https://efanzines.com/SFC/SteamEngineTime/SET11.pdf",
+   "quote": "no sense of islands in a lonely ocean",
+   "page": "article on the Ghibli adaptation, p. 31",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2009-02",
+   "routeHint": "curl the PDF binary, then decompress its streams and pull the text-show operators",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium: read from PDF stream text extracted by hand, so spacing and apostrophes in the source may differ from my extraction"
   }
  ]
 }

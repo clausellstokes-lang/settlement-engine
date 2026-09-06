@@ -12,3 +12,11 @@ Not implemented: HTMLCanvasElement's toDataURL() method: without installing the 
      × every completeness claim carries an @enforced-by tag with ≥1 target 144ms
  ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 13159ms
      × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 43ms
+ ❯ tests/domain/livingContentMaterialization.test.js (11 tests | 1 failed) 28844ms
+     × every blind case materializes and discovers under the lit law 21903ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+ ❯ tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js (23 tests | 1 failed) 1095ms
+     × the current source tree matches the recorded hash (regenerate via npm run build:edge-shared) 100ms

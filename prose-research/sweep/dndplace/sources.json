@@ -198,5 +198,29 @@
   "substantive": false,
   "date": "fetched 2026-09-06",
   "route": "direct fetch; page body did not render to text (paywall/JS shell)"
+ },
+ {
+  "title": "The Alexandrian: Forgotten Realms – A Textual History of the Yawning Portal (Justin Alexander)",
+  "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2022-03-31",
+  "route": "direct fetch, browser UA; found by the site's own ?s= search"
+ },
+ {
+  "title": "The Alexandrian: Chaos Lorebook – The Assassins of Chaos (Justin Alexander)",
+  "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2026-08-17",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Running Curse of Strahd, Part 2 (Merric Blackman, Merric's Musings)",
+  "url": "https://merricb.com/2016/04/24/running-curse-of-strahd-part-2/",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2016-04-24",
+  "route": "live domain lapsed; Wayback raw capture 20260301223639id_ — a play report, not a register analysis"
  }
 ]

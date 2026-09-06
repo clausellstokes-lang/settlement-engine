@@ -1,0 +1,31 @@
+#!/bin/sh
+# run-registers-903.sh <dock> — the §903 register acts at the composed tip, LAST, in DESK-LANDING-PLAN.md §3 order with the
+# dirty-tree doors FIRST (the lighting door refuses porcelain): lighting → commit → mounts baseline, prose-numerics re-key,
+# writer-reach --write, tuning-inventory refreeze, OSR --write (shrink-only), wizard-news re-sign → commit → plain re-runs as receipts.
+# Every door under the gate mutex; refreeze doors exit NON-ZERO on success by design. Prints a PREDICTIONS line first (E4).
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
+D=$1; [ -d "$D" ] || { echo "usage: <dock>"; exit 9; }; cd "$D" || exit 9
+[ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty"; exit 8; }
+M="sh scripts/gate-mutex.sh --run --"
+echo "REGISTER_HEAD=$(git rev-parse HEAD) $(date '+%H:%M:%S')"
+echo "PREDICTIONS (E4, §903, derived at 6ff3249b9 = fd36f0298 + the four L-DEFAULT cars): __PREDICTIONS__"
+F=src/domain/display/stateProse/dossierMounts.js; node -e "import('$PWD/$F').then(m=>console.log('registry: mounts',m.DOSSIER_MOUNTS.length,'dark',m.UNMOUNTED_BLOCKS.length))"
+echo "--- lighting: probe vs register"; PR=$(PROBE_FARM_ROOT=$SC/.farms node $SC/chair-tools/lighting-probe.mjs "$D" 2>/dev/null | tail -1); RG=$(python3 -c "import json;d=json.load(open('tests/lint/.lighting-census-baseline.json'));print(json.dumps({k:d[k] for k in ('files','parked','credited','titles','suiteTitles')}))"); echo "  probe   : $PR"; echo "  register: $RG"
+echo "=== 1. LIGHTING (refuses a dirty tree — first):"; $M env LIGHTING_CENSUS_REFREEZE='Fable 5.1 chair — §903 lit-default landing' LIGHTING_CENSUS_NOTE='the L-DEFAULT hunk-1 consist (four lane cars over the §902 CAS) at the tip; re-derived by the farmed probe (printed in run-registers-903.sh)' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js > $SC/reg903-lighting.log 2>&1; echo "LIGHTING_DOOR_EXIT=$? (non-zero EXPECTED)"; $M npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js > $SC/reg903-lighting-plain.log 2>&1; echo "LIGHTING_PLAIN_EXIT=$? (must be 0)"; grep -E 'Tests ' $SC/reg903-lighting-plain.log | cut -c1-60
+git add tests/lint/.lighting-census-baseline.json && git commit -q -m "§903 lit-default landing (register car 1): the lighting census refreezes at the tip
+
+Derived by the farmed read-only probe before the door (the PREDICTIONS line and the probe/register pair in run-registers-903.sh's log); the door exited non-zero by design and the plain re-run is the receipt.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>" && echo "REGISTER CAR 1 (lighting) -> $(git rev-parse --short HEAD)"
+echo "=== 2. MOUNTS BASELINE:"; $M env UPDATE_MOUNT_BASELINE=1 npx vitest run tests/lint/dossierMountRegistry.walker.test.js > $SC/reg903-mounts.log 2>&1; echo "MOUNTS_DOOR_EXIT=$?"; echo "  changed: [$(git status --porcelain -uall | awk '{print $2}' | tr '\n' ' ')]"
+echo "=== 3. PROSE-NUMERICS re-key (dry, then --write):"; node $SC/prose-numerics-rekey.mjs "$D" > $SC/reg903-pn-dry.log 2>&1; echo "PN_DRY_EXIT=$?"; tail -2 $SC/reg903-pn-dry.log | cut -c1-160; node $SC/prose-numerics-rekey.mjs "$D" --write > $SC/reg903-pn.log 2>&1; echo "PN_WRITE_EXIT=$?"; tail -1 $SC/reg903-pn.log | cut -c1-160
+echo "=== 4. WRITER-REACH --write (shrink-only; predicted NO refresh — the lane changed no writer string; the dry run decides):"; node scripts/check-writer-reach.mjs > $SC/reg903-wr-dry.log 2>&1; echo "WR_DRY_EXIT=$? (read the refusal text if any)"; grep -E "DARK and unregistered|STALE|BANK THE WIN" $SC/reg903-wr-dry.log | head -6 | cut -c1-160; node scripts/check-writer-reach.mjs --write > $SC/reg903-wr.log 2>&1; echo "WRITER_REACH_WRITE_EXIT=$?"; tail -2 $SC/reg903-wr.log | cut -c1-200; node scripts/check-writer-reach.mjs > $SC/reg903-wr-plain.log 2>&1; echo "WR_PLAIN_EXIT=$? (must be 0)"
+echo "=== 5. TUNING INVENTORY refreeze:"; $M env TUNING_INVENTORY_REFREEZE='Fable 5.1 chair — §903 lit-default landing' TUNING_INVENTORY_NOTE='the lit-default consist at the tip: the preset table gained twenty-one virtual keys on realistic_regional (a rules table, not a tuning table); any movement is read from the diff, never assumed' npx vitest run tests/lint/tuningRegister.walker.test.js > $SC/reg903-tuning.log 2>&1; echo "TUNING_DOOR_EXIT=$? (non-zero EXPECTED)"
+echo "=== 6. OSR --write (ACTIVE: the shrink-only re-freeze that absorbs the compendiumData.generated.js INPUT drift car 1c caused; detectorSources empty = the lawful class; the walker's own message names this cure):"; node scripts/check-observed-shape-readers.mjs > $SC/reg903-osr-dry.log 2>&1; echo "OSR_DRY_EXIT=$? (expect 0: the CLI is open at rung 18)"; tail -2 $SC/reg903-osr-dry.log | cut -c1-160; node scripts/check-observed-shape-readers.mjs --write > $SC/reg903-osr.log 2>&1; echo "OSR_WRITE_EXIT=$?"; tail -3 $SC/reg903-osr.log | cut -c1-160; $M npx vitest run tests/lint/observedShapeReaders.walker.test.js > $SC/reg903-osr-walker.log 2>&1; echo "OSR_WALKER_PLAIN_EXIT=$? (must be 0 — the drift arm absorbed)"; grep -E "Tests " $SC/reg903-osr-walker.log | cut -c1-60
+echo "=== 6b. REALM-SCALE sourceFingerprint: MEASURED — a LIVE comparison between a certification plan and the tree (no committed product register; tests/ops/realmScaleCertification.test.js 10/10 green after the banner car). No door here; the kit's L-PROBE certification receipts predate the banner car and are re-run at the lighting landing (§901)."
+echo "=== 7. WIZARD-NEWS re-sign:"; ls $SC/wizard-resign.py >/dev/null 2>&1 && echo "  (hand act: python3 $SC/wizard-resign.py <log> tests/lint/.wizard-news-authoring-baseline.json --write — run after reading its usage; NOT automated here)"
+echo "REGISTER_PORCELAIN=[$(git status --porcelain -uall | awk '{print $2}' | tr '\n' ' ')]"
+echo "NEXT: review each changed register against PREDICTIONS; commit register car 2 (mounts, prose-numerics, writer-reach, tuning inventory, OSR); the wizard re-sign by hand as register car 3; plain re-runs of every walker as receipts; then the capsule car (--runtime-tests from the ratchet), the kit, the ratchet, totals, owed-ledger, the gate."
+exit 0

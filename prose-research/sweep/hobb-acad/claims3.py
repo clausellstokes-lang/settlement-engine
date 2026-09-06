@@ -1,0 +1,86 @@
+# -*- coding: utf-8 -*-
+ONO_URL="https://perspectives.pp.ua/index.php/vno/article/download/46053/46079"
+ONO_SRC="Polina Tkach (National Academy of the National Guard of Ukraine) and Maryna Volkova (Kharkiv National Air Force University), \"Robin Hobb's 'The World of the Elderlings' Onomasticon: The Structural and Functional Significance of Charactonyms\", Perspectives and Innovations of Science 5(47) (2026) 372-381"
+ONO_ROUTE="open-access PDF from perspectives.pp.ua (found via OpenAlex search for 'Robin Hobb'); English abstract, Ukrainian body"
+MOT_URL="https://journals.ur.edu.pl/SAR/article/download/11148/11875"
+MOT_SRC="Petra Srsic (University of Osijek), 'Motherhood, Disability, and Rebellion: Constructing the Mother in Hobb's Liveship Traders Trilogy', Studia Anglica Resoviensia 22 (2025) 145-157"
+COIN_URL="http://gelliottteaching.blogspot.com/2013/07/sample-conference-length-paper.html"
+COIN_SRC="Geoffrey B. Elliott, 'Sample Conference-length Paper: Searching the Hoard in Words like Coins', Geoffrey B. Elliott's Teaching Blog, 29 July 2013"
+WLS_URL="https://en.wikipedia.org/wiki/Liveship_Traders"
+ET26_URL="https://elliottrwi.com/2026/05/18/another-update-to-moving-beyond-tolkiens-medievalism/"
+ET26_SRC="Geoffrey B. Elliott, \"Another Update to 'Moving beyond Tolkien's Medievalism'\", conference paper, 18 May 2026"
+SL20_URL="https://www.sciendo.com/pdf/10.2478/cait-2020-0012"
+SL20_SRC="Velina Slavova, 'Emotional Valence Coded in the Phonemic Content - Statistical Evidence Based on Corpus Analysis', Cybernetics and Information Technologies 20.2 (2020)"
+
+CLAIMS=[
+ dict(feature='naming and forms of address',
+   claim="Tkach and Volkova find Hobb's Six Duchies naming built on a principle of national-cultural contrast.",
+   source=ONO_SRC,url=ONO_URL,quote="meticulously constructed upon the fundamental principle of national-cultural contrast",
+   page="Abstract",kind='analysis',polarity='asserts',date='2026',routeHint=ONO_ROUTE,
+   registerHint='dossier-archivist',confidence='high',_file='onomasticon.txt'),
+ dict(feature='naming and forms of address',
+   claim="They report that names for the neighbouring nations - Eyod, Rurisk, Kettricken - are phonetically foreign and carry no transparent semantics for the reader.",
+   source=ONO_SRC,url=ONO_URL,quote="phonetic foreignness and an absolute lack of transparent semantics",
+   page="Abstract",kind='analysis',polarity='asserts',date='2026',routeHint=ONO_ROUTE,
+   registerHint='dossier-archivist',confidence='high',_file='onomasticon.txt'),
+ dict(feature='naming and forms of address',
+   claim="Socially significant anthroponyms are the largest group in Hobb's naming, which the authors read as mirroring a setting where social mask, status and destiny are bound together.",
+   source=ONO_SRC,url=ONO_URL,quote="a person's social mask, status, and destiny are inextricably linked",
+   page="Abstract",kind='analysis',polarity='asserts',date='2026',routeHint=ONO_ROUTE,
+   registerHint='dossier-archivist',confidence='high',_file='onomasticon.txt'),
+ dict(feature='naming and forms of address',
+   claim="Names such as Shrewd, Desire and Patience are treated as direct psychological characterisation carried by the name itself.",
+   source=ONO_SRC,url=ONO_URL,quote="tools of direct psychological characterization",
+   page="Abstract",kind='analysis',polarity='asserts',date='2026',routeHint=ONO_ROUTE,
+   registerHint='dossier-archivist',confidence='high',_file='onomasticon.txt'),
+ dict(feature='naming and forms of address',
+   claim="Srsic notes that the Liveship Traders characters call the woman known only as Mother by that role and never by a name, and that her name is never given.",
+   source=MOT_SRC,url=MOT_URL,quote="they always refer to her as Mother, never by her name",
+   page="section 3, Violence, Trauma, and Naming",kind='analysis',polarity='asserts',date='2025',
+   routeHint="open-access PDF from journals.ur.edu.pl (found via OpenAlex)",registerHint='dossier-archivist',
+   confidence='high',_file='motherhood.txt'),
+ dict(feature='plainness and economy',
+   claim="Elliott reads Hobb's novella Words like Coins as a commentary on the craft of writing that warns against sloppiness of language.",
+   source=COIN_SRC,url=COIN_URL,quote="serves as a commentary on the craft of writing",
+   page="para. 2",kind='analysis',polarity='asserts',date='2013-07-29',
+   routeHint="live blogspot fetch",registerHint='none',confidence='high',_file='elliott-coins.txt'),
+ dict(feature='plainness and economy',
+   claim="In Elliott's reading the pecksies of that novella repeatedly press for linguistic precision and frugality.",
+   source=COIN_SRC,url=COIN_URL,quote="Linguistic precision and frugality are repeatedly emphasized by the pecksie",
+   page="para. 4",kind='analysis',polarity='asserts',date='2013-07-29',
+   routeHint="live blogspot fetch",registerHint='herald-pools',confidence='high',_file='elliott-coins.txt'),
+ dict(feature='plainness and economy',
+   claim="Elliott says the pecksies keep their own utterances exact, giving no more than is needed to be clear, so as to limit unintended consequences.",
+   source=COIN_SRC,url=COIN_URL,quote="giving no more than is necessary to be clear",
+   page="para. 5",kind='analysis',polarity='asserts',date='2013-07-29',
+   routeHint="live blogspot fetch",registerHint='herald-pools',confidence='high',_file='elliott-coins.txt'),
+ dict(feature='consequence on a household',
+   claim="Elliott traces the novella's central disaster - a near-fatal childbirth - to the protagonist's imprecise wording of a charm.",
+   source=COIN_SRC,url=COIN_URL,quote="all as a result of Mirrifen's lack of specificity",
+   page="para. 8",kind='analysis',polarity='asserts',date='2013-07-29',
+   routeHint="live blogspot fetch",registerHint='none',confidence='high',_file='elliott-coins.txt'),
+ dict(feature='point of view and distance',
+   claim="Borowska-Szerszun, relayed by Wikipedia, contrasts Martin's focus on the brutality of realism with Hobb's focus on the psychological aspects of trauma.",
+   source="Wikipedia, 'Liveship Traders', Style section, relaying Sylwia Borowska-Szerszun, Extrapolation 60.1 (2019) 1-22",
+   url=WLS_URL,quote="Hobb's narrative focuses more on the psychological aspects of trauma",
+   page="Style section",kind='relay',polarity='asserts',date='2026-09 (article revision as fetched)',
+   routeHint="live en.wikipedia.org fetch; the Extrapolation article itself is closed access (Liverpool UP)",
+   registerHint='none',confidence='high',_file='wiki-liveship-live.txt'),
+ dict(feature='point of view and distance',
+   claim="Borowska-Szerszun's own abstract says Hobb's novels reframe the traditional rape script by shifting emphasis to the survivor.",
+   source="Sylwia Borowska-Szerszun, 'Representation of Rape in George R. R. Martin's A Song of Ice and Fire and Robin Hobb's Liveship Traders', Extrapolation 60.1 (2019) 1-22 - abstract only, via the OpenAlex record",
+   url="https://api.openalex.org/works/doi:10.3828/extr.2019.2",quote="",
+   page="abstract",kind='analysis',polarity='asserts',date='2019-04',
+   routeHint="OpenAlex API record (the abstract is stored as an inverted index, so no contiguous quotation exists on the page); full text closed at Liverpool UP",
+   registerHint='none',confidence='medium: abstract only, full text not reached'),
+ dict(feature='place and institution description',
+   claim="Elliott observes that in the Fitz and the Fool novels Bee's journey up the Rain Wild River is narrated through animals and plants matching North American flora and fauna.",
+   source=ET26_SRC,url=ET26_URL,quote="noting animals and plants that seem to line up with",
+   page="section on North-American-ness",kind='analysis',polarity='asserts',date='2026-05-18',
+   routeHint="live elliottrwi.com fetch",registerHint='dossier-archivist',confidence='high',_file='elliott-tolk2026.txt'),
+ dict(feature='stylometry',
+   claim="Slavova's 2020 corpus study of emotional valence in phonemic content again drew its texts from a set of authors including Robin Hobb.",
+   source=SL20_SRC,url=SL20_URL,quote="Dickens, Neil Gaiman, Robin Hobb, Derek Landy, Brandon Sanderson",
+   page="Materials",kind='measurement',polarity='applies',date='2020',
+   routeHint="sciendo PDF",registerHint='none',confidence='high',_file='slavova2020.txt'),
+]

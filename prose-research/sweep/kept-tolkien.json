@@ -8733,5 +8733,853 @@
    "note": "Quote 'an echo of an echo' verbatim. Late-not-primitive limb verbatim on p.15: 'Beowulf is not a primitive poem; it is a late one, using the materials (then still plentiful) preserved from a day already changing and passing'. Remaining limbs verbatim: 'its maker was telling of things already old and weighted with regret, and he expended his art in making keen that touch upon the heart which sorrows have that are both poignant and remote... it is to us as a memory brought over the hills, an echo of an echo.'",
    "fromFile": "verdicts-tolkien-i553-567.json"
   }
+ },
+ {
+  "index": 568,
+  "feature": "literary and traditional diction",
+  "claim": "A translation must avoid colloquialism and false modernity and be literary and traditional, because the original's diction was poetical, archaic and artificial in its own day.",
+  "source": "Wikipedia, 'On Translating Beowulf'",
+  "url": "https://en.wikipedia.org/wiki/On_Translating_Beowulf",
+  "quote": "colloquialism and false modernity",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 568,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "avoid 'colloquialism and false modernity'; 'literary and traditional'",
+   "note": "Raw en.wikipedia.org/wiki/On_Translating_Beowulf fetched by curl (200). Quote 'colloquialism and false modernity' appears verbatim (Magennis quoting Tolkien). Every limb supported: the same block carries \"your language must be literary and traditional: not because it is now a long while since the poem was made ... but because the diction of Beowulf was poetical, archaic, artificial (if you will), in the day that the poem was made.\"",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 570,
+  "feature": "modern literary, not colloquial English",
+  "claim": "The translator owes allegiance to the original's meaning and style and renders it into modern literary English, not present-day colloquial English.",
+  "source": "Tolkien Estate, J.R.R. Tolkien 'Thoughts on Translation (Beowulf)'",
+  "url": "https://www.tolkienestate.com/scholarship/j-r-r-tolkien-thoughts-on-translation-beowulf/",
+  "quote": "modern literary, not present-day colloquial",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 570,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'absolute allegiance to the thing translated: to its meaning, its style'",
+   "note": "Raw tolkienestate.com page fetched by curl (200). Quote 'modern literary, not present-day colloquial' verbatim, in the parenthesis '(modern literary, not present-day colloquial) English is an instrument of very great capacity'. Allegiance limb verbatim too: 'First of all by absolute allegiance to the thing translated: to its meaning, its style, technique, and form.'",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 572,
+  "feature": "children's-book manner regretted (Letter 215)",
+  "claim": "Publishing The Hobbit under the convention that fairy-stories are for children had unfortunate effects on its mode of expression and narrative method, which he would have corrected if not rushed.",
+  "source": "Carpenter (ed.), The Letters of J.R.R. Tolkien, no. 215 to Walter Allen (April 1959, unsent draft)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "unfortunate effects on the mode of expression and narrative method",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 572,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'if I had not been rushed, I should have corrected'",
+   "note": "Letters PDF fetched (200, 1.88 MB, 493 pp) and text-extracted with pypdf. Letter 215 To Walter Allen, unsent draft (PDF p.309): 'When I published The Hobbit – hurriedly and without due consideration – I was still influenced by the convention that fairy-stories are naturally directed to children ... But it had some unfortunate effects on the mode of expression and narrative method, which if I had not been rushed, I should have corrected.' Quote verbatim; all limbs supported.",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 574,
+  "feature": "whimsy to historical (register arc of The Hobbit)",
+  "claim": "The Hobbit begins in a whimsy, even facetious, mode and moves steadily to a more serious, consistent and historical one — and he regrets much of the early manner.",
+  "source": "The Letters of J.R.R. Tolkien, no. 215",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "more consistent and historical",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 574,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "begins 'whimsy', even facetious; moves to serious/historical; 'I regret much'",
+   "note": "Letters PDF, Letter 215 (PDF pp.309-310): 'The Hobbit can be seen to begin in what might be called a more \"whimsy\" mode, and in places even more facetious, and move steadily to a more serious or significant, and more consistent and historical. .... But I regret much of it all the same.' Quote 'more consistent and historical' verbatim; every limb supported (page reads 'more serious or significant' where the claim says 'more serious').",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 575,
+  "feature": "LotR addressed to no class of reader",
+  "claim": "The Lord of the Rings was not specially addressed to children or any other class but to anyone who enjoys a long exciting story; adult language is assumed.",
+  "source": "The Letters of J.R.R. Tolkien, no. 215",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "a long exciting story",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 575,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'not specially addressed to children or to any other class of people'",
+   "note": "Letters PDF, Letter 215: 'that work was not specially addressed to children or to any other class of people. But to any one who enjoyed a long exciting story, of the sort that I myself naturally enjoy.' Quote verbatim. Adult-language limb supported in the same letter: 'I am not specially interested in children, and certainly not in writing for them: i.e. in addressing directly and expressly those who cannot understand adult language.'",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 576,
+  "feature": "regret of 'for children' style (Letter 165)",
+  "claim": "In so far as The Hobbit was dressed up as for children in style or manner, Tolkien regrets it, and so, he says, do the children.",
+  "source": "The Letters of J.R.R. Tolkien, no. 165 to Houghton Mifflin (June 1955)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "in style or manner, I regret it",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 576,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'In so far as it was dressed up as \"for children\" ... I regret it. So do the children.'",
+   "note": "Letters PDF at Letter 165 To the Houghton Mifflin Co. (PDF p.232). Quote 'in style or manner, I regret it' verbatim, and 'So do the children' immediately follows; the editorial bracket '[The Hobbit]' fixes the referent. Location caveat: the sentence sits in Carpenter's headnote to Letter 165, quoting Harvey Breit's 5 June 1955 New York Times column drawn from Tolkien's own answers, not in the body of the 30 June 1955 letter — which opens 'Please do not blame me for what Breit made of my letter!'",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 577,
+  "feature": "sound before sense (fine words)",
+  "claim": "Words like plenilune and argent are beautiful before they are understood; limiting vocabulary to a child's supposed reach cuts off the gifted from extending it.",
+  "source": "The Letters of J.R.R. Tolkien, no. 234 to Jane Neave (22 Nov 1961)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "beautiful words before they are understood",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 577,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'you ... simply cut off the gifted ones from the chance of extending it'",
+   "note": "Letters PDF, Letter 234 To Jane Neave, 22 November 1961 (PDF p.330): 'As for plenilune and argent, they are beautiful words before they are understood'. Quote verbatim; second limb verbatim too: 'As soon as you limit your vocabulary to what you suppose to be within their reach, you in fact simply cut off the gifted ones from the chance of extending it.'",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 578,
+  "feature": "first meeting in a living context",
+  "claim": "A fine word should first be met in a living context, not a dictionary; 'argent' does not mean 'silver' because its phonetic incarnation and heraldic overtones differ.",
+  "source": "The Letters of J.R.R. Tolkien, no. 234",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "in a living context, and not in a dictionary",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 578,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'They think argent \"means\" silver. But it does not.'",
+   "note": "Letters PDF, Letter 234: 'surely the first meeting should be in a living context, and not in a dictionary, like dried flowers in a hortus siccus!' Quote verbatim. Both remaining limbs on the page: 'clothed in a totally different phonetic incarnation' and 'the heraldic overtones it has ... which \"silver\" has not'.",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 579,
+  "feature": "flattening (writing down) deprecated",
+  "claim": "Tolkien deprecated the writing-down, flattening attitude that leaves children with little respect and no love for words; The Hobbit's early part was his one such mistake.",
+  "source": "Tolkien Gateway, 'Letter 234'",
+  "url": "https://tolkiengateway.net/wiki/Letter_234",
+  "quote": "writing down, flattening attitude",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 579,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "deprecated it; 'only made the mistake once, in the early part of The Hobbit'",
+   "note": "tolkiengateway.net 403 (Cloudflare challenge) on the live URL with browser UAs; recovered via Wayback raw capture https://web.archive.org/web/20260107071600id_/https://tolkiengateway.net/wiki/Letter_234 (200). Page: 'Tolkien deprecated the writing down, flattening attitude that made so many children have little respect and no love for words.' Quote verbatim; the one-mistake limb is supported earlier on the same page: 'He had only made the mistake once, in the early part of The Hobbit.'",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 580,
+  "feature": "full register span (Letter 131)",
+  "claim": "The Lord of the Rings is meant to include, even in style, the colloquialism and vulgarity of hobbits, poetry, and the highest style of prose.",
+  "source": "The Letters of J.R.R. Tolkien, no. 131 to Milton Waldman (1951)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "the colloquialism and vulgarity of Hobbits",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 580,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'even in style it is to include the colloquialism and vulgarity of Hobbits'",
+   "note": "Letters PDF, Letter 131 To Milton Waldman (PDF p.167 header; passage at p.177): '...even in style it is to include the colloquialism and vulgarity of Hobbits, poetry and the highest style of prose.' Quote verbatim (pypdf inserts stray intra-word spaces such as 'styl e' / 'colloquialis m'; the whitespace-stripped text matches the quote exactly).",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 581,
+  "feature": "tone rises with the hero's development",
+  "claim": "In The Hobbit the tone and style change with the hobbit's development, passing from fairy-tale to the noble and high and relapsing on the return.",
+  "source": "The Letters of J.R.R. Tolkien, no. 131",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "passing from fairy-tale to the noble and high",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 581,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'relapsing with the return' (claim says 'on the return')",
+   "note": "Letters PDF, Letter 131: 'as a critic has perceived) the tone and style change with the Hobbit's development, passing from fairy-tale to the noble and high and relapsing with the return.' Quote verbatim; all limbs supported, the only difference being the preposition ('with the return' vs the claim's 'on the return').",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 582,
+  "feature": "lesser tales against vast backcloths",
+  "claim": "The legendarium ranges from the cosmogonic to the fairy-story level, the larger founded on the lesser and the lesser drawing splendour from the vast backcloths.",
+  "source": "Wikipedia, 'Impression of depth in The Lord of the Rings' (citing Letter 131)",
+  "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+  "quote": "the lesser drawing splendour from the vast backcloths",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 582,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'the larger founded on the lesser in contact with the earth'",
+   "note": "Raw en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings fetched by curl (200). Blockquote: 'ranging from the large and cosmogonic, to the level of romantic fairy-story—the larger founded on the lesser in contact with the earth, the lesser drawing splendour from the vast backcloths'. Quote verbatim; the page's reference list confirms the source as 'Carpenter 2023, Letter #131 to Milton Waldman, late in 1951'.",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 583,
+  "feature": "translation scheme: register per language",
+  "claim": "Westron is equated with English and everything in it translated with differentiation of style for dialect; related tongues become English-related forms (Rohan like Old English, Dale Scandinavian); alien tongues are left alone.",
+  "source": "The Letters of J.R.R. Tolkien, no. 144 to Naomi Mitchison (25 Apr 1954)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "some differentiation of style to represent dialectal differences",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 583,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some differentiation of style to represent dialectal differences",
+   "note": "Letter 144 read raw from the PDF (pypdf text, p.193-194). Quote exact. Every limb on the page: 'equate the Westron or wide-spread Common Speech of the Third Age with English; and translate everything, including names such as The Shire'; 'Languages quite alien to the C.S. have been left alone'; Rohirrim names 'turned ... into forms like (but not identical with) Old English'; Dale and the Long Lake 'more or less Scandinavian in character'.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 584,
+  "feature": "Gondor's antique register",
+  "claim": "In Gondor the Common Speech is spoken in a nobler and more antique style, which the Elves also adopt when they use it.",
+  "source": "The Letters of J.R.R. Tolkien, no. 144",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "nobler and rather more antique style",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 584,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "nobler and rather more antique style",
+   "note": "Letter 144, p.194: 'especially from Gondor, where it remains spoken in nobler and rather more antique style (a style also usually adopted by the Elves when they use this language)'. Both limbs verbatim, including the Elves adopting it.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 585,
+  "feature": "leave things unexplained",
+  "claim": "As a story it is good that many things stay unexplained (especially if an explanation exists); Tolkien fears he erred by explaining too much, and readers stuck at the Council of Elrond.",
+  "source": "The Letters of J.R.R. Tolkien, no. 144",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "a lot of things unexplained",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 585,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a lot of things unexplained",
+   "note": "Letter 144, p.193: 'As a story, I think it is good that there should be a lot of things unexplained (especially if an explanation actually exists); and I have perhaps from this point of view erred in trying to explain too much, and give too much past history. Many readers have, for instance, rather stuck at the Council of Elrond.' All three limbs verbatim.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 586,
+  "feature": "phonaesthetic pleasure in Elvish",
+  "claim": "Quenya is built on a Latin basis with Finnish and Greek because they give him phonaesthetic pleasure; Sindarin is devised to resemble British-Welsh because that character fits Celtic-type legends.",
+  "source": "The Letters of J.R.R. Tolkien, no. 144",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "give me ‘phonaesthetic’ pleasure",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 586,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "give me 'phonaesthetic' pleasure",
+   "note": "Letter 144, p.194: Quenya 'composed on a Latin basis with two other (main) ingredients that happen to give me phonaesthetic pleasure: Finnish and Greek'; Sindarin's changes 'deliberately devised to give it a linguistic character very like ... British-Welsh ... because it seems to fit the rather Celtic type of legends and stories told of its speakers'. Both halves verbatim.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 587,
+  "feature": "languages the foundation; name first",
+  "claim": "The invention of languages is the foundation, the stories were made to provide a world for the languages, a name comes first and the story follows, and the book is largely an essay in linguistic aesthetic.",
+  "source": "The Letters of J.R.R. Tolkien, no. 165",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "largely an essay in ‘linguistic aesthetic’",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 587,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "largely an essay in 'linguistic aesthetic'",
+   "note": "Letter 165 (Houghton Mifflin), p.233: 'The invention of languages is the foundation. The [stories] were made rather to provide a world for the languages than the reverse. To me a name comes first and the story follows.' and 'It is to me, anyway, largely an essay in linguistic aesthetic'. Quote exact; all four limbs present. Source artifact worth recording: this scan's OCR renders 'stories' as 'stones' in that sentence -- a glyph error in this PDF, not a wording difference; the limb is supported either way.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 588,
+  "feature": "linguistic apparatus edited down",
+  "claim": "Only as much 'language' was left in The Lord of the Rings as readers could be expected to stomach — the visible Elvish is a deliberate restraint.",
+  "source": "The Letters of J.R.R. Tolkien, no. 165",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "as I thought would be stomached by readers",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 588,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as I thought would be stomached by readers",
+   "note": "Letter 165, p.233: 'I should have preferred to write in Elvish. But, of course, such a work as The Lord of the Rings has been edited and only as much language has been left in as I thought would be stomached by readers. (I now find that many would have liked more.)' Quote exact; the deliberate-restraint limb is that same sentence restated, with the Elvish antecedent supplied by the preceding line.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 589,
+  "feature": "sensibility to linguistic pattern",
+  "claim": "The sensibility to linguistic pattern affects Tolkien emotionally like colour or music; Gothic taught him aesthetic pleasure in a language for its own sake.",
+  "source": "The Letters of J.R.R. Tolkien, no. 163 to W.H. Auden (7 Jun 1955)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "affects me emotionally like colour or music",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 589,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "affects me emotionally like colour or music",
+   "note": "Letter 163 to Auden, p.228: 'the sensibility to linguistic pattern which affects me emotionally like colour or music'. Gothic limb same letter: 'I learned Anglo-Saxon at school (also Gothic ... though decisive -- I discovered in it ... for the first time the study of a language out of mere love: I mean for the acute aesthetic pleasure derived from a language for its own sake)'. 'in it' refers to Gothic; confirmed by the later 'Most important, perhaps, after Gothic ...'.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 590,
+  "feature": "North-western air (consult your roots)",
+  "claim": "A tale of this sort must consult the writer's roots: a man of the North-west sets it in a world with the Shoreless Sea to the West and endless enemy lands to the East.",
+  "source": "The Letters of J.R.R. Tolkien, no. 163",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "consult your roots",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 590,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "consult your roots",
+   "note": "Letter 163, p.228: 'if you want to write a tale of this sort you must consult your roots, and a man of the North-west of the Old World will set his heart and the action of his tale in an imaginary world of that air, and that situation: with the Shoreless Sea of his innumerable ancestors to the West, and the endless lands (out of which enemies mostly come) to the East.' Every limb verbatim.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 591,
+  "feature": "tushery vs real archaism",
+  "claim": "Tushery is bogus medieval stuff coloured with expletives like tush, pish, zounds; real archaic English is far terser than modern and says things the slack modern idiom cannot.",
+  "source": "The Letters of J.R.R. Tolkien, no. 171 to Hugh Brogan (Sept 1955, unsent draft)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "far more terse than modern",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 591,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "far more terse than modern",
+   "note": "Letter 171 to Brogan, p.240: 'The proper use of tushery is to apply it to the kind of bogus medieval stuff which attempts (without knowledge) to give a supposed temporal colour with expletives, such as tush, pish, zounds, marry, and the like. But a real archaic English is far more terse than modern; also many of things said could not be said in our slack and often frivolous idiom.' All limbs verbatim, including the three named expletives.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 592,
+  "feature": "disunion of word and meaning",
+  "claim": "Putting Théoden's thought into modern idiom would be an insincerity, a disunion of word and meaning, because people who think like that do not talk a modern idiom.",
+  "source": "The Letters of J.R.R. Tolkien, no. 171",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "a disunion of word and meaning",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 592,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a disunion of word and meaning",
+   "note": "Letter 171, p.240: 'But there would be an insincerity of thought, a disunion of word and meaning.' Theoden limb is the same passage: 'Theoden would certainly think, and probably say thus shall I sleep better! But people who think like that just do not talk a modern idiom.' All limbs verbatim.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 593,
+  "feature": "archaic narration in heroic scenes",
+  "claim": "Narrative (not only dialogue) archaism is defended because heroic scenes do not occur in a modern setting; changing the idiom would be like changing helms and hauberks into modern uniforms.",
+  "source": "The Letters of J.R.R. Tolkien, no. 171",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "helms, shields, hauberks into modern uniforms",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 593,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "helms, shields, hauberks into modern uniforms",
+   "note": "Letter 171, p.240: introduced explicitly as 'an example of archaism that cannot be defended as dramatic, since it is not in dialogue, but the author's description of the arming of the guests'; 'But such heroic scenes do not occur in a modern setting to which a modern idiom belongs'; 'I can see no more reason for not using the much terser and more vivid ancient style, than for changing the obsolete weapons, helms, shields, hauberks into modern uniforms.' All three limbs verbatim.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 594,
+  "feature": "fronting for emphasis",
+  "claim": "'Helms too they chose' puts the emphasised word in prominent first place without a clutter of empty words, a trick modern English should relearn by example.",
+  "source": "The Letters of J.R.R. Tolkien, no. 171",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "a lot of little ‘empty’ words",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 594,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a lot of little 'empty' words",
+   "note": "Letter 171, p.240: \"'Helms too they chose' is archaic ... if mod. E. has lost the trick of putting a word desired to emphasize (for pictorial, emotional or logical reasons) into prominent first place, without addition of a lot of little empty words (as the Chinese say), so much the worse for it. And so much the better for it the sooner it learns the trick again. And some one must begin the teaching, by example.\" Every limb including 'by example' is verbatim.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 595,
+  "feature": "choice of styles without unintelligibility",
+  "claim": "English's wealth leaves a choice of styles without any risk of unintelligibility, and refusing to use it is a parochialism of time.",
+  "source": "The Letters of J.R.R. Tolkien, no. 171",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "a choice of styles",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 595,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a choice of styles",
+   "note": "Letter 171, p.240: 'Why deliberately ignore, refuse to use the wealth of English which leaves us a choice of styles -- without any possibility of unintelligibility.' The parochialism limb is Tolkien's own label for that refusal, two paragraphs on (p.241): the 20th-c. delusion that contemporary usages have peculiar validity, 'Shake yourself out of this parochialism of time!'",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 596,
+  "feature": "Elrond's archaism by grammar and vocabulary",
+  "claim": "The Gateway summary of the Brogan draft records Tolkien rejecting 'tushery' as applying only to low-quality pastiche rather than real archaic English, with the Théoden passage as his sample.",
+  "source": "Tolkien Gateway, 'Letter 171'",
+  "url": "https://tolkiengateway.net/wiki/Letter_171",
+  "quote": "slack and often frivolous idiom",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 596,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "slack and often frivolous idiom",
+   "note": "tolkiengateway.net is behind Cloudflare (403 'Just a moment...' on both the plain and the browser-UA live fetch). Recovered by route 2: Wayback raw capture https://web.archive.org/web/20250919220544id_/https://tolkiengateway.net/wiki/Letter_171 -- full raw HTML, not a summarizer. Summary section: 'He rejects the charge of tushery, since this term properly denotes low-quality pastiches rather than real archaic English. The latter is far terser than modern English, and it is also capable of saying things that cannot be said in the slack and often frivolous idiom of today. Tolkien takes as an example a passage from The King of the Golden Hall', quoting the King's 'Nay, Gandalf!' speech and then discussing 'Theoden's thoughts'. Quote exact; both limbs supported. Note for the chair, not a defect in the claim: this row's 'feature' field reads 'Elrond's archaism by grammar and vocabulary', which does not describe the claim it is attached to.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 597,
+  "feature": "legends and language share a taste",
+  "claim": "Legends depend on the language they belong to and a living language on its legends; Esperanto is dead for lack of legends, and Tolkien's legends were invented to match his languages' taste.",
+  "source": "The Letters of J.R.R. Tolkien, no. 180 to 'Mr Thompson' (14 Jan 1956)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "legends of the same ‘taste’",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 597,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "legends of the same 'taste'",
+   "note": "Letter 180 to 'Mr Thompson', p.250: 'I made the discovery that legends depend on the language to which they belong; but a living language depends equally on the legends which it conveys by tradition'; 'Volapuk, Esperanto, Ido, Novial, &c &c are dead, far deader than ancient unused languages, because their authors never invented any Esperanto legends'; 'I began with language, I found myself involved in inventing legends of the same taste.' Words match one-for-one; the claim's quote string merely drops Tolkien's own scare quotes around 'legends'.",
+   "fromFile": "verdicts-tolkien-i583-597.json"
+  }
+ },
+ {
+  "index": 598,
+  "feature": "differentiation by diction and idiom, not accent",
+  "claim": "No vowel/consonant accent-marking is wanted; Orcs deliberately never drop aitches in the text; the linguistic differentiation Tolkien built is in diction and idiom.",
+  "source": "The Letters of J.R.R. Tolkien, no. 193 to Terence Tiller (2 Nov 1956)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "in diction, idiom, and so on",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 598,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in diction, idiom, and so on",
+   "note": "Letter 193 (PDF p.271) verbatim: 'no accent-differentiation is needed or desirable'; aitches 'not dropped in the text, and that is deliberate'; 'I paid great attention to such linguistic differentiation as was possible: in diction, idiom, and so on'. All three limbs on the page.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 599,
+  "feature": "Minas Tirith as the standard register",
+  "claim": "Minas Tirith is to the Common Speech as London is to modern English — the standard of comparison, whose people have no accent.",
+  "source": "The Letters of J.R.R. Tolkien, no. 193",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "as London is to modern English",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 599,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as London is to modern English, and the standard of comparison",
+   "note": "Letter 193 verbatim: 'As Minas Tirith is at the source of C. Speech it is to C.S. as London is to modern English, and the standard of comparison! None of its inhabitants should have an \"accent\" in terms of vowels &c.' Every limb supported.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 600,
+  "feature": "Rohirric tempo and sonority",
+  "claim": "The Rohirrim spoke with a slower tempo and more sonorous articulation than modern urbans, and in Common Speech speak the best Minas Tirith, perhaps a little too carefully as a learned tongue.",
+  "source": "The Letters of J.R.R. Tolkien, no. 193",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "a slower tempo and more sonorous articulation",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 600,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a slower tempo and more sonorous articulation, than modern 'urbans'",
+   "note": "Letter 193 verbatim, plus 'speaking the best M[inas] T[irith]. Possibly a little too good, as it would be a learned language, somewhat slower and more careful than a native's.' Letter says they spoke their own tongue so 'at least'; claim does not contradict this.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 601,
+  "feature": "Orcs nasty by delivery not vulgarism",
+  "claim": "Orcs are to sound nasty through intonation, articulation and tempo, not through conventional features of modern vulgar English.",
+  "source": "Tolkien Gateway, 'Letter 193'",
+  "url": "https://tolkiengateway.net/wiki/Letter_193",
+  "quote": "intonation, articulation, and tempo",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 601,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "intonation, articulation, and tempo ... to make Orcs sound nasty",
+   "note": "Wayback capture 20260108020555 of tolkiengateway.net/wiki/Letter_193 (live host 403s). Quote verbatim. The page instantiates the vulgar-English limb narrowly as 'Orcs should not drop aitches; that was not done in the text, deliberately' — the general phrase 'vulgar English' is not on the page, but the contrast the claim makes is.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 602,
+  "feature": "reading, not drama (necklace on a thread)",
+  "claim": "The book needs the older art of the reading mime; dramatization flattens scenery and characters, whereas passages read as a necklace upon a thread of narration would be fairer.",
+  "source": "The Letters of J.R.R. Tolkien, no. 194 to Terence Tiller (6 Nov 1956)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "as a necklace upon a thread of narration",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 602,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as a necklace upon a thread of narration",
+   "note": "Letter 194 (PDF p.272) verbatim: 'it requires rather the older art of the reading \"mime\"'; 'both the \"scenery\" and the \"characters\" become flat'; the necklace passage 'would ... prove both more interesting to listeners, and fairer to the author'. All limbs supported.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 604,
+  "feature": "verse triggers archaic style; no modern rusticity",
+  "claim": "A speaker who breaks into formal verse uses an archaic style as anyone capable of verse then would; where dialect marked place not rank, avoid any modern rusticity.",
+  "source": "The Letters of J.R.R. Tolkien, no. 152 to Rayner Heppenstall (22 Sept 1954)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "avoid any modern rusticity",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 604,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it would be best to avoid any modern rusticity",
+   "note": "Letter 152 to Rayner Heppenstall, 22 Sept 1954 (PDF p.205) verbatim: 'The young minstrel bursts into formal verse, and so uses an archaic style - as anyone would capable of verse at the time'; 'in a period when \"dialect\" merely marked place and not rank or function ... it would be best to avoid any modern rusticity.' All limbs supported.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 605,
+  "feature": "miles are miles (literal geography and season)",
+  "claim": "Though a fairy-story, the tale takes place in this earth's northern hemisphere: miles, days and weather are literal, and seasons are pictorial and basic to the tone.",
+  "source": "The Letters of J.R.R. Tolkien, no. 210 to Forrest J. Ackerman (June 1958)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "miles are miles, days are days, and weather is weather",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 605,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "miles are miles, days are days, and weather is weather",
+   "note": "Letter 210 (PDF p.291) verbatim, preceded by 'The Lord of the Rings may be a \"fairy-story\", but it takes place in the Northern hemisphere of this earth'. Seasons limb: 'They are pictorial ... this is basic to the purport and tone of the tale.' All limbs supported.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 606,
+  "feature": "tone not to be lowered to childish fairy-tale",
+  "claim": "'Old scamp!' exemplifies the treatment's tendency to lower the tone toward a childish fairy-tale; the setting is not fairy-land but real river-lands in autumn.",
+  "source": "The Letters of J.R.R. Tolkien, no. 210",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "in real river-lands in autumn",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 606,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We are not in 'fairy-land', but in real river-lands in autumn",
+   "note": "Letter 210 (PDF p.292) verbatim; the 'Old scamp!' limb is verbatim too: 'This is a good example of the general tendency that I find in Z to reduce and lower the tone towards that of a more childish fairy-tale.' Both limbs supported.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 607,
+  "feature": "neither contes de fées nor scientification",
+  "claim": "Any pull toward French fairy-tale style or toward science-fiction diction ('food concentrate' for lembas) is alien to the story; both modes are rejected.",
+  "source": "The Letters of J.R.R. Tolkien, no. 210",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "Both modes are alien to my story",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 607,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Both modes are alien to my story",
+   "note": "Letter 210 verbatim: lembas 'called a \"food concentrate\"'; 'I dislike strongly any pulling of my tale towards the style and feature of \"contes des fees\", or French fairy-stories. I dislike equally any pull towards \"scientification\", of which this expression is an example. Both modes are alien to my story.' The book prints 'contes des fees' (claim's header spells it 'contes de fees'); no substantive divergence.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 608,
+  "feature": "characters kept in style and sentiment",
+  "claim": "Speeches must represent the characters as written, in style and sentiment; perverting a character is resented more than spoiling plot or scenery.",
+  "source": "The Letters of J.R.R. Tolkien, no. 210",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "in style and sentiment",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 608,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "represented as I have presented them: in style and sentiment",
+   "note": "Letter 210 verbatim, including the second limb: 'I should resent perversion of the characters ... even more than the spoiling of the plot and scenery.' Both limbs supported.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 609,
+  "feature": "anticipation and assimilation flatten",
+  "claim": "Anticipating later devices and assimilating one incident to another have a flattening effect; a scene of gloom and silence beats yet another scene of screams and slashings.",
+  "source": "The Letters of J.R.R. Tolkien, no. 210",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "flattening the tale out",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 609,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "thereby flattening the tale out",
+   "note": "Letter 210 verbatim; assimilation limb verbatim as 'the flattening effect that assimilation of one incident to another must have'; the preference limb as 'A scene of gloom lit by a small red fire ... would seem to me far more impressive than yet one more scene of screams and rather meaningless slashings'. 'Silence' is supported in the same item: 'The Black Riders do not scream, but keep a more terrifying silence.'",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 610,
+  "feature": "two branches, two tones",
+  "claim": "The Ringbearers' action and the heroic matter are totally different in tone and scenery and must each be kept in coherent sequence; jumbling destroys both.",
+  "source": "The Letters of J.R.R. Tolkien, no. 210",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "totally different in tone and scenery",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 610,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "totally different in tone and scenery",
+   "note": "Letter 210 (PDF pp.293-294) verbatim: 'Prime Action, the Ringbearers ... Subsidiary Action ... leading to the \"heroic\" matter. It is essential that these two branches should each be treated in coherent sequence ... because they are totally different in tone and scenery. Jumbling them together entirely destroys these things.' All limbs supported.",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 611,
+  "feature": "heroic-age material culture honoured",
+  "claim": "Rohan is a dwelling of Men in a heroic age: no private chambers, the king receiving on the dais of his hall — details must fit the world described.",
+  "source": "The Letters of J.R.R. Tolkien, no. 210",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "a dwelling of Men in an ‘heroic age’",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 611,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a dwelling of Men in an 'heroic age'",
+   "note": "Letter 210 (PDF p.294) verbatim: 'In such a time private \"chambers\" played no part ... He received guests or emissaries, seated on the dais in his royal hall.' The passage is about Theoden/Edoras, i.e. Rohan ('the \"heroic\" Rohirrim'). The 'fit the world described' limb is verbatim in the same letter at item 8: 'If details are to be added ... they should at least fit the world described.'",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 613,
+  "feature": "a world for the languages (personal aesthetic)",
+  "claim": "The long book was an attempt to create a world for languages that agreed with his personal aesthetic — a situation in which an Elvish greeting would be ordinary.",
+  "source": "Tolkien Gateway, 'Letter 205'",
+  "url": "https://tolkiengateway.net/wiki/Letter_205",
+  "quote": "create a world for languages",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 613,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "create a world for languages that agreed with his personal aesthetic",
+   "note": "Live tolkiengateway.net returns a Cloudflare 403; verdict formed on the raw Wayback capture https://web.archive.org/web/20260301094505id_/https://tolkiengateway.net/wiki/Letter_205. Page (Letter 205, to Christopher Tolkien, 21 Feb 1958): 'Nobody believed him, said Tolkien, when he stated that his long book was an attempt to create a world for languages that agreed with his personal aesthetic, yet it was true. An enquirer ... had been told that Tolkien wanted to create a situation in which Elen sila lumenn' omentielvo would be a common greeting.' Quote verbatim; the 'Elvish greeting would be ordinary' limb is the page's Quenya greeting = 'a common greeting'.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 614,
+  "feature": "glimpses of a large history; unattainable vistas",
+  "claim": "Part of the attraction is the glimpses of a large history in the background, like a distant city in sunlit mist; to go there destroys the magic unless new unattainable vistas open.",
+  "source": "The Letters of J.R.R. Tolkien, no. 247 to Colonel Worskett (20 Sept 1963)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "unless new unattainable vistas are again revealed",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 614,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "To go there is to destroy the magic, unless new unattainable vistas are again revealed",
+   "note": "Raw PDF fetched (1.88 MB, 493 pp) and text-extracted; letter 247 'To Colonel Worskett', 20 September 1963, PDF p. 351. 'Part of the attraction of The L.R. is, I think, due to the glimpses of a large history in the background: an attraction like that of viewing far off an unvisited island, or seeing the towers of a distant city gleaming in a sunlit mist. To go there is to destroy the magic, unless new unattainable vistas are again revealed.' Quote verbatim (the extractor injects stray intra-word spaces, e.g. 'una ttainable'; whitespace-insensitive match confirmed). Every limb supported, including the recipient and date.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 615,
+  "feature": "language requires a habitation and history",
+  "claim": "Anyone who carries language invention far discovers that a language requires a suitable habitation and a history in which it can develop — the origin of the imaginary histories.",
+  "source": "The Letters of J.R.R. Tolkien, no. 294 to the Plimmers (8 Feb 1967)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "a suitable habitation, and a history",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 615,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a language requires a suitable habitation, and a history in which it can develop",
+   "note": "Same raw PDF; letter 294 'To Charlotte and Denis Plimmer', 8 February 1967, PDF p. 405. Tolkien's proposed rewording: 'The imaginary histories grew out of Tolkien's predilection for inventing languages. He discovered, as others have who carry out such inventions to any degree of completion, that a language requires a suitable habitation, and a history in which it can develop.' Quote verbatim; the 'origin of the imaginary histories' limb is the first sentence of that same passage.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 616,
+  "feature": "nomenclature as verisimilitude",
+  "claim": "The nomenclature, built from pre-existing invented languages, achieves a verisimilitude that assists literary belief in the story as historical; name-meanings are relevant solely to the fiction.",
+  "source": "The Letters of J.R.R. Tolkien, no. 297 drafts to 'Mr Rang' (Aug 1967)",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "the ‘literary belief in the story as historical",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 616,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "has achieved a verisimilitude, which assists probably in the 'literary belief in the story as historical",
+   "note": "Same raw PDF; letter 297, 'Drafts for a letter to Mr Rang', dated Aug. 1967, PDF p. 411. 'this construction, the product of very considerable thought and labour, has achieved (as I hoped) a verisimilitude, which assists probably in the ‘literary belief in the story as historical.' The pre-existing-languages and name-meaning limbs are the same letter: 'the bulk of the nomenclature is constructed from these pre-existing languages, and where the resulting names have analysable meanings (as is usual) these are relevant solely to the fiction with which they are integrated.'",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 617,
+  "feature": "Anglo-Saxon as translation device for Rohan only",
+  "claim": "Anglo-Saxon is used for the Mark's names and glimpses of its speech purely as a device of translation, and is the sole field for those names — delusory anywhere else.",
+  "source": "The Letters of J.R.R. Tolkien, no. 297",
+  "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+  "quote": "as a device of ‘translation’",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 617,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Anglo-Saxon' ... as a device of 'translation' ... the sole field ... entirely delusory",
+   "note": "Same raw PDF, letter 297, PDF pp. 411-412: 'The reason for using ‘Anglo-Saxon’ in the nomenclature and occasional glimpses of the language of the Eorlingas – as a device of ‘translation’ – is given in Appendix F. From which it follows that ‘Anglo-Saxon’ is not only a ‘fertile field’, but the sole field in which to look for the origin and meaning of words or names belonging to the speech of the Mark ... Outside this restricted field reference to A-S is entirely delusory.' Quote verbatim; every limb supported.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 618,
+  "feature": "hobbit and personal names untouched",
+  "claim": "Tolkien objected to translating personal nomenclature and insisted the word hobbit stay unaltered; the Shire is a parody of rural England whose toponymy is not Dutch.",
+  "source": "Tolkien Gateway, 'Letter 190'",
+  "url": "https://tolkiengateway.net/wiki/Letter_190",
+  "quote": "the word hobbit stayed unaltered",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 618,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's most important demand was that the word hobbit stayed unaltered",
+   "note": "Live host Cloudflare-blocked; raw Wayback capture https://web.archive.org/web/20250818153124id_/https://tolkiengateway.net/wiki/Letter_190 used. Page (Letter 190 to Rayner Unwin, 3 July 1956, on Schuchart's Dutch translation): 'he objected to translations of personal nomenclature; the Shire was based on (or, as he called it himself, \"a parody of\") rural England; plus, the toponymy of the Shire was wholly different from that of the Netherlands' and 'Tolkien's most important demand was that the word hobbit stayed unaltered; no more \"Hompen\".' All four limbs supported.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 619,
+  "feature": "Shire names meaningful, worn-down English",
+  "claim": "Shire names are not meaningless but English in form, built from elements now obsolete, dialectal, or worn-down and obscured.",
+  "source": "Tolkien, 'Guide to the Names in The Lord of the Rings' (Nomenclature, full text)",
+  "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+  "quote": "obsolete or dialectal",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 619,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not 'meaningless', but are English in form ... obsolete or dialectal, or are worn-down and obscured",
+   "note": "Raw PDF fetched from tolkien.ro (332 KB, 23 pp) and text-extracted; Guide to the Names, p. 1: 'Names (of places and persons) occur, especially in the Shire, which are not ‘meaningless’, but are English in form (that is, in theory the author’s translation of Common Speech names), containing elements that are in the current language obsolete or dialectal, or are worn-down and obscured in form. (See Appendix F.)' Quote verbatim; every limb supported.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 620,
+  "feature": "euphonious names of familiar English style",
+  "claim": "Common-Speech renderings of Elvish names (Rivendell for Imladris) are made to be both a translation and a euphonious name of familiar English style.",
+  "source": "Tolkien, 'Guide to the Names in The Lord of the Rings'",
+  "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+  "quote": "a euphonious name of familiar English style",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 620,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "both a translation and also (to English ears) a euphonious name of familiar English style",
+   "note": "Same raw PDF, Guide to the Names p. 1: 'the author, acting as translator of Elvish names already devised ... has taken pains to produce a Common Speech name that is both a translation and also (to English ears) a euphonious name of familiar English style, even if it does not actually occur in England. Rivendell is a successful example, as a translation of Grey-elven Imladris ‘Glen of the Cleft’.' Quote verbatim; the Rivendell/Imladris limb is explicit.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 621,
+  "feature": "feigned linguistic history",
+  "claim": "Leaving such names untranslated would introduce an unexplained element with no place in the feigned linguistic history of the period — the nomenclature is a single designed scheme.",
+  "source": "Tolkien, 'Guide to the Names in The Lord of the Rings'",
+  "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+  "quote": "the feigned linguistic history of the period",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 621,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "introduce an unexplained element without a place in the feigned linguistic history of the period",
+   "note": "Same raw PDF, Guide to the Names p. 1: 'to leave them unchanged would disturb the carefully devised scheme of nomenclature and introduce an unexplained element without a place in the feigned linguistic history of the period.' Quote verbatim; the 'single designed scheme' limb is the page's 'the carefully devised scheme of nomenclature'.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 624,
+  "feature": "four techniques of depth",
+  "claim": "Scholars summarise the depth effect as four techniques: enormous background scale, casual incomplete mentions, multiple accounts with apparent contradictions (Red Book frame), and varying literary styles.",
+  "source": "Wikipedia, 'Impression of depth in The Lord of the Rings'",
+  "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+  "quote": "casual, incomplete mentions",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 624,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "the apparently casual and incomplete mentions of this background",
+   "note": "Raw wikitext fetched via Special:Export. All four limbs are supported: the article's numbered list of 'four factors that help to build the impression of depth' is (1) 'the enormous scale and detail of Tolkien's Middle-earth background', (2) 'the apparently casual and incomplete mentions of this background in the text', (3) 'the multiple accounts, containing gaps and inconsistencies, as if it were a real body of historical documents' (section heading 'Multiple accounts, apparent contradictions', explained via the Prologue's Red Book of Westmarch redactions), (4) 'the multiple styles in which the various texts are written, as if by different hands.' Not VERBATIM only because the supplied quotation 'casual, incomplete mentions' is not word for word: the page reads 'casual and incomplete mentions'.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 625,
+  "feature": "editorial frame (last of the philological editors)",
+  "claim": "Tolkien positioned himself as the last of a line of philological editors of the Red Book, so the paratexts make the text seem annotated by many hands over ages.",
+  "source": "Wikipedia, 'Tolkien's frame stories'",
+  "url": "https://en.wikipedia.org/wiki/Tolkien%27s_frame_stories",
+  "quote": "the last of a line of philological editors",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 625,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "place him not as author but as the last of a line of philological editors of ancient documents",
+   "note": "Raw wikitext fetched via Special:Export. 'Several of these contribute to his frame stories, which place him not as author but as the last of a line of philological editors of ancient documents originally written by characters such as the Hobbits Bilbo and Frodo Baggins.' Quote verbatim (the wikilink markup wraps 'philological editors' but the rendered string is continuous). Paratext limb: 'Tolkien included a mass of paratexts – prefaces, notes, and appendices of all kinds'; many-hands limb: the text 'had in that long period been annotated and edited by many hands'. 'of the Red Book' is the article's Bilbo/Frodo manuscript, named Red Book of Westmarch elsewhere in the same article.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 626,
+  "feature": "philology as method (single sentence)",
+  "claim": "In the Valedictory Address Tolkien says he would rather wring the juice out of a single sentence or explore one word than survey — the sentence-level craft is the method.",
+  "source": "Tolkien Estate, Tom Shippey on 'The Monsters and the Critics and other essays'",
+  "url": "https://www.tolkienestate.com/scholarship/tom-shippey-the-monsters-and-the-critics-and-other-essays/",
+  "quote": "wring the juice out of a single sentence",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 626,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "rather try to wring the juice out of a single sentence, or explore the implications of one word",
+   "note": "Raw HTML fetched from tolkienestate.com and tag-stripped locally (no summarizer). Shippey: 'In the last text of the volume, his ‘Valedictory Address to the University of Oxford’, delivered in 1959 when he retired, Tolkien expresses his faith in literature, and gives a few clues about his method: ‘I would always rather try to wring the juice out of a single sentence, or explore the implications of one word than try to sum up a period in a lecture, or pot a poet in a paragraph’.' Quote verbatim; 'than survey' = the page's 'sum up a period in a lecture, or pot a poet in a paragraph'; 'the method' is the page's own framing ('gives a few clues about his method').",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 627,
+  "feature": "singularised speech for social difference",
+  "claim": "Tolkien singularised the speech of important characters to show social and cultural differences and asked why one should refuse to use the wealth of English.",
+  "source": "Tolkien Estate, Ferré, Lauzon and Riggs, 'Translating Tolkien'",
+  "url": "https://www.tolkienestate.com/writing/vincent-ferre-daniel-lauzon-and-david-riggs-translating-tolkien/",
+  "quote": "refuse to use the wealth of English",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 627,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "taking pains to singularize the speech of most of his important characters: social and cultural differences",
+   "note": "Raw HTML fetched from tolkienestate.com and tag-stripped locally. Ferre/Lauzon/Riggs: 'but also as a stylist, by taking pains to singularize the speech of most of his important characters: social and cultural differences are conspicuously present in the English text, from Gandalf to the Gaffer, Gollum to Theoden.' And: '‘Why deliberately ignore, refuse to use the wealth of English which leaves us a choice of styles – without any possibility of unintelligibility,’ the author wondered when a reader criticized his narrative style.' Quotation verbatim; both limbs supported (page spells it 'singularize').",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
  }
 ]

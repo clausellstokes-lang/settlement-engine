@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "IN PROGRESS (checkpoint 2): 22 sources fetched raw, 17 substantive. BrightWeavings Professional Scholarship (20 items) and Student Papers rosters enumerated and largely walked; paywalled chapters reached at abstract level only; no stylometric or corpus study of Kay found.",
+ "complete": true,
+ "coverage": "29 sources fetched raw and read, 21 substantive, 52 claims, every non-empty quotation re-checked against the fetched text before writing. ROSTER: the angle named no individual titles, so the roster was built from the two standing bibliographies — BrightWeavings' \"Professional Scholarship\" (20 items) and \"Student Papers\" (17 items) — plus OpenAlex (80 hits on \"Guy Gavriel Kay\", two pages walked), Crossref bibliographic queries, and the Wikipedia relay. FETCHED: Randall (Canadian Literature 129, 1991), Webb x2, Gunn (Easton Press intro), Cobb (Foundation 2005), Ordway (1998), Malosse (Anabases 5, 2007, English and French), Ringel (ICFA 2009), Patton (Sarantine Letters, in-world conceit), Doherty, Cawsey (Arthuriana 25.2, PDF), Taylor, Clements, Rettino (McGill honours 2012), Toyryla (Helsinki BA 2017), Hatch (Calgary), Kleander (Stirling 2008), Campbell (Wollongong PhD 2013, via Figshare mirror after the repository blocked the download), Pugar (Zagreb, Words to Works), Doshlova (Kuban/UrFU, Russian), Thompson's 1989 Camelot Project interview, the Locus 2025 interview, the LARB 2016 interview, and the Wikipedia articles on Kay and Tigana. ABSTRACT ONLY: Johnston (Palgrave 2019, read raw from a Wayback capture of the SpringerLink page) and Borowska-Szerszun (Orbis Litterarum 2026, read from the Crossref record). BLOCKED: Gary K. Wolfe, \"Guy Gavriel Kay: An Introduction\", Journal of the Fantastic in the Arts 20.2 (2009) — the JSTOR issue page fails to render and its only other index, Questia, is defunct with no Wayback capture; Toswell, \"Guy Gavriel Kay: Historical Fantasy\" (Amsterdam UP / De Gruyter Brill 2025) and Borowska-Szerszun, \"Remembering the Romance\" (Boydell 2020) — publisher pages return empty bodies, the books are not in OAPEN or DOAB, and the Google Books API quota was exhausted; Borowska-Szerszun, \"When Gods are Absent from Fantasy\" (2017) — the Bialystok repository PDF is a 4.7 MB image-only scan yielding 18 characters; Anabases on OpenEdition — Anubis bot filter, no Wayback capture (cured by the author-authorized reprint). ROUTES: 19 substantive by live raw HTML, 3 by PDF binary plus text extraction (one of them only via a Figshare mirror), 2 by abstract records (Wayback and Crossref). NEGATIVE FINDING: no stylometric, corpus-stylistic or computational study of Kay exists that I could locate through OpenAlex, Crossref or open web search — the quantitative claims in this angle are hand counts by narratologists (Randall's 26 focalizants and 87 shifts; Kleander's 21 focalizants and 150-plus focalizations in Tigana). Web search quota was exhausted mid-sweep, so the last expansion rounds ran through OpenAlex, Crossref and bibliography chasing only; two consecutive index queries surfaced nothing new.",
  "sourcesRead": [
   {
    "title": "Neil Randall, \"Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry\", Canadian Literature 129 (Summer 1991)",
@@ -177,6 +177,62 @@
    "substantive": false,
    "date": "retrieved 2026-09-06",
    "route": "live URL — used as the bibliography for this angle"
+  },
+  {
+   "title": "Pierre-Louis Malosse, \"Justinian Visited and Revisited\" (English translation), Anabases 5 (2007), pp. 229-235",
+   "url": "http://brightweavings.com/justinian-visited-and-revisited/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2007",
+   "route": "live URL, raw HTML (the French original at http://brightweavings.com/justinien/ was also read; journals.openedition.org/anabases/3215 was blocked by an Anubis bot filter and has no Wayback capture)"
+  },
+  {
+   "title": "Andrew Patton, \"We See by Jad's Light Alone: Guy Gavriel Kay and the New Sanctuary Mosaicist\", Sarantine Letters special issue",
+   "url": "http://brightweavings.com/jadslight/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "n.d.",
+   "route": "live URL, raw HTML — NOTE the essay is written inside an in-world conceit, as if by a Sarantine scholar reviewing Kay's book as a history"
+  },
+  {
+   "title": "Narelle Campbell, \"Now and then: traces of the present in medievalist fantasy fiction\" (PhD thesis, University of Wollongong, 2013)",
+   "url": "https://ro.uow.edu.au/theses/3910",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013",
+   "route": "ro.uow.edu.au download blocked (empty body); obtained via the Figshare mirror https://ndownloader.figshare.com/files/50372574, PDF text extracted with pdfminer"
+  },
+  {
+   "title": "Susannah Clements, \"From Middle Earth to Fionavar: Free Will and Sacrifice in High Fantasy by J.R.R. Tolkien and Guy Gavriel Kay\", Conference on Christianity and Literature (2002)",
+   "url": "http://brightweavings.com/clementsfionavarlotr/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2002",
+   "route": "live URL, raw HTML — read; concerns free will and sacrifice, nothing on register"
+  },
+  {
+   "title": "Dena Taylor, \"Three Glasses of Wine: The Accommodation of Culture in The Lions of Al-Rassan\" (Nimrod Press, Babel Handbooks)",
+   "url": "http://brightweavings.com/denalions/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "n.d.",
+   "route": "live URL, raw HTML — read; thematic, not stylistic"
+  },
+  {
+   "title": "M. R. Doshlova, \"The metaphorical worldview in G. G. Kay's novel 'Tigana': the problem of memory and national identity\" (conference paper, Kuban State University; Ural Federal University archive)",
+   "url": "https://elar.urfu.ru/bitstream/10995/151646/1/978-5-91256-808-4_128.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026",
+   "route": "live URL, PDF binary, text extracted with pdfminer (Russian)"
+  },
+  {
+   "title": "Sylwia Borowska-Szerszun, \"When Gods are Absent from Fantasy: Religion and Spiritual Experience in Guy Gavriel Kay's The Lions of Al-Rassan and The Sarantine Mosaic\", in The Light of Life (Kraków: Libron, 2017), pp. 217-232",
+   "url": "https://repozytorium.uwb.edu.pl/jspui/bitstream/11320/8028/1/When_Gods_are_Absent_from_Fantasy.pdf",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2017",
+   "route": "BLOCKED for reading: the repository PDF is a 4.7 MB image-only scan and yielded 18 characters of extractable text; the BrightWeavings landing page carries only an abstract-length excerpt"
   }
  ],
  "claims": [
@@ -711,6 +767,202 @@
    "routeHint": "Wayback raw capture 20191114214457id_ of the SpringerLink page",
    "registerHint": "none",
    "confidence": "medium — abstract only, the chapter text is behind a subscription"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Malosse argues that the Sarantine Mosaic, though deliberately unfaithful to history, evokes the Late Antique and Eastern Mediaeval world much more exactly than time-travel novels that respect history's givens.",
+   "source": "Pierre-Louis Malosse, Université Paul Valéry, Anabases 5 (2007)",
+   "url": "http://brightweavings.com/justinian-visited-and-revisited/",
+   "quote": "evokes the Late Antique and Eastern Mediaeval world much more exactly",
+   "page": "concluding section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "live URL, raw HTML (English translation hosted on BrightWeavings)",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: competing memories of one event",
+   "claim": "Malosse notes that the scene he cites to show Kay's style is presented as a senator's memory of what happened in front of him.",
+   "source": "Pierre-Louis Malosse, Université Paul Valéry, Anabases 5 (2007)",
+   "url": "http://brightweavings.com/justinian-visited-and-revisited/",
+   "quote": "A senator, Plautus Bonosus, remembers the scene as it unfolded before him",
+   "page": "concluding section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: mythic versus historical register",
+   "claim": "Malosse offers one passage as the sample by which to judge Kay's style against the narrative Procopius supplies.",
+   "source": "Pierre-Louis Malosse, Université Paul Valéry, Anabases 5 (2007)",
+   "url": "http://brightweavings.com/justinian-visited-and-revisited/",
+   "quote": "a passage to provide a sense of Guy Gavriel Kay’s style",
+   "page": "concluding section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Patton describes Kay laying narrative episodes next to each other in a lapidary fashion, sometimes making neighbours of vastly different places, ranks and perspectives.",
+   "source": "Andrew Patton, artist and art critic, in a Sarantine Letters essay written inside an in-world scholarly conceit",
+   "url": "http://brightweavings.com/jadslight/",
+   "quote": "the lapidary fashion in which narratival episodes were laid next to each other",
+   "page": "later section of the essay",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "n.d.",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "none",
+   "confidence": "medium — the observation is Patton's own, but it is voiced by a fictional in-world scholar persona"
+  },
+  {
+   "feature": "cadence and rhythm",
+   "claim": "Patton urges attention to the construction of Kay's book at the scale of the sentence as well as of the episode.",
+   "source": "Andrew Patton, artist and art critic, in a Sarantine Letters essay written inside an in-world scholarly conceit",
+   "url": "http://brightweavings.com/jadslight/",
+   "quote": "in both the writing of sentences and the composing of separate episodes",
+   "page": "later section of the essay",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "n.d.",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "none",
+   "confidence": "medium — voiced through the essay's in-world persona"
+  },
+  {
+   "feature": "register modulation",
+   "claim": "Campbell argues that Kay's shift into a more formal register for one episode of The Summer Tree adds mythic gravitas to that section.",
+   "source": "Narelle Campbell, PhD thesis, University of Wollongong (2013)",
+   "url": "https://ro.uow.edu.au/theses/3910",
+   "quote": "further mythic gravitas to this section of Kay’s tale.",
+   "page": "c. p. 322, chapter on Diarmuid and Sharra",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2013",
+   "routeHint": "Figshare mirror of the thesis PDF, pdfminer text",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: register as concealment",
+   "claim": "Campbell argues that the mythic ambience and literary resonance of The Fionavar Tapestry obscure the ethnic and gender imbalances of the episode in which Diarmuid seduces Sharra.",
+   "source": "Narelle Campbell, PhD thesis, University of Wollongong (2013)",
+   "url": "https://ro.uow.edu.au/theses/3910",
+   "quote": "",
+   "page": "chapter on Diarmuid and Sharra, paragraph beginning 'the plausibility of newer stories'",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2013",
+   "routeHint": "Figshare mirror of the thesis PDF, pdfminer text — the sentence survives extraction only with doubled inter-word spaces, so no exact quotation is offered",
+   "registerHint": "none",
+   "confidence": "medium — quotation withheld because the PDF extraction's spacing would not match a verifier's re-extraction"
+  },
+  {
+   "feature": "annalist voice and deep time",
+   "claim": "Rettino argues that when the narrator's voice reveals itself in Tigana it takes on the authority of a club-story teller.",
+   "source": "Matthew Rettino, McGill honours thesis (2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "When the narrator’s voice reveals itself, it adopts the authority of the club-story teller",
+   "page": "section on Tigana and the club-story",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2012",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "omission as information",
+   "claim": "Rettino argues that Kay's omniscient narrator in Under Heaven subverts historical narration by revealing that many events in history are not known.",
+   "source": "Matthew Rettino, McGill honours thesis (2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "by revealing that many events in history are not known",
+   "page": "section on Under Heaven",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2012",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: authorial revision",
+   "claim": "Kay said in 1989 that if he rewrote The Fionavar Tapestry he would polish the prose of the opening chapters.",
+   "source": "Guy Gavriel Kay, interviewed by Raymond H. Thompson at Mythcon, Vancouver, 30 July 1989 (The Camelot Project, 1999)",
+   "url": "https://d.lib.rochester.edu/camelot/text/interview-with-guy-gavriel-kay.html",
+   "quote": "I might polish the prose itself",
+   "page": "answer to 'If you could wave a magic wand that would rewrite the book'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1989-07-30",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Ordway frames her study as an account of how Kay invests a secondary world with the consistency of reality.",
+   "source": "Holly E. Ordway, UMass Amherst independent study (1998)",
+   "url": "http://brightweavings.com/worldbuilding/",
+   "quote": "investing it with the consistency of reality",
+   "page": "opening paragraphs",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1998-05-13",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: sources of a secondary world",
+   "claim": "Ordway states that Kay draws on literature, mythology and history as well as his own imagination to build his worlds.",
+   "source": "Holly E. Ordway, UMass Amherst independent study (1998)",
+   "url": "http://brightweavings.com/worldbuilding/",
+   "quote": "draws on literature, mythology, and history as well as his own imagination",
+   "page": "opening paragraphs",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1998-05-13",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: freely willed action",
+   "claim": "Webb argues that in Tigana the major events have their genesis in the emphatically freely willed actions of the protagonists.",
+   "source": "Janeen Webb, The Ringbearer: Journal of the Mythopoeic Literature Society of Australia (1991)",
+   "url": "http://brightweavings.com/webbtigana/",
+   "quote": "the major events have their genesis in the emphatically freely willed actions",
+   "page": "section on mythology and human deeds",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1991",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: memory and the erased name",
+   "claim": "Doshlova argues that Tigana's central metaphors — the lost name, distorted memory and music — form a single artistic system representing the formation, loss and recovery of national identity.",
+   "source": "M. R. Doshlova, Kuban State University, conference paper (Ural Federal University archive)",
+   "url": "https://elar.urfu.ru/bitstream/10995/151646/1/978-5-91256-808-4_128.pdf",
+   "quote": "",
+   "page": "abstract (p. 1237)",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2026",
+   "routeHint": "PDF binary, pdfminer text (Russian); no quotation offered because extraction doubles the inter-word spaces",
+   "registerHint": "none",
+   "confidence": "medium — paraphrase of the Russian abstract, no verbatim quotation offered"
   }
  ]
 }

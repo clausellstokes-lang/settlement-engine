@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "round 2 checkpoint - ursulakleguin.com corpus, Steering the Craft full text, three interviews",
+ "complete": true,
+ "coverage": "Named roster: 'From Elfland to Poughkeepsie' NOT FOUND in raw text (the estate's page is a bibliographic record only; no raw copy on archive.org, and Scribd is an aggregator, excluded) and The Language of the Night likewise NOT FOUND, so her 1972-79 style essays are represented only by their publication record; Steering the Craft FETCHED in full (2015 Mariner text via archive.org OCR) plus chapter one raw at Literary Hub. Blocked or empty: Paris Review Art of Fiction 221 (Wayback raw capture read, but the interview is truncated at a subscription wall before any discussion of style), AWP Writer's Chronicle craft conversation (sign-in wall), VQR's Naimon fiction conversation (navigation shell only, live and archived), Guardian/Kunzru 2014 (404 at every URL tried, no search budget left to locate it). Substantive sources by route: 15 from the estate site ursulakleguin.com enumerated through its sitemap.xml (409 URLs) - essays, speeches, blog posts and the Book View Cafe workshop sessions; 2 from the Steering the Craft text (archive.org OCR and the Literary Hub chapter); 4 from interviews and excerpt reprints found by lateral search (Public Books, Literary Hub x2, Karabatak); 4 further primaries read raw that yielded nothing for this angle (LARB, National Book Foundation speech, On Serious Literature, Always Coming Home page).",
  "sourcesRead": [
   {
    "title": "From Elfland to Poughkeepsie (book page)",
@@ -209,6 +209,110 @@
    "substantive": false,
    "date": "n.d.",
    "route": "BLOCKED - the AWP archive returns only a sign-in page"
+  },
+  {
+   "title": "Blog 95: 'Are they going to say this is fantasy?' (on Kazuo Ishiguro's The Buried Giant)",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015-03-02",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally"
+  },
+  {
+   "title": "Blog 52: Some Recent Fantasies",
+   "url": "https://www.ursulakleguin.com/blog/52-some-recent-fantasies",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2012-05-21",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally"
+  },
+  {
+   "title": "Blog 31: Papa H (on Homer)",
+   "url": "https://www.ursulakleguin.com/blog/31-papa-h",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2011-07-24",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally"
+  },
+  {
+   "title": "Interview: Karabatak Magazine, 9th edition",
+   "url": "https://www.ursulakleguin.com/interview-karabatak",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2013 summer issue",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally"
+  },
+  {
+   "title": "Ursula K. Le Guin: Dictators are Always Afraid of Poets (excerpt from Conversations on Writing, Tin House 2018), by David Naimon, Literary Hub",
+   "url": "https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2018-04-06",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally ; note the page's letter-spacing markup breaks many words, so only unmangled fragments are quoted"
+  },
+  {
+   "title": "On Serious Literature (parody of Ruth Franklin, first published in Ansible)",
+   "url": "https://www.ursulakleguin.com/on-serious-literature",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2007",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally"
+  },
+  {
+   "title": "The Books of Earthsea (book page, with 'A Note from Ursula')",
+   "url": "https://www.ursulakleguin.com/the-books-of-earthsea",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2018",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally"
+  },
+  {
+   "title": "Blog 30: Riffing Again",
+   "url": "https://www.ursulakleguin.com/blog/30-riffing-again",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2011-07-21",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally"
+  },
+  {
+   "title": "Blog 27: Exercises",
+   "url": "https://www.ursulakleguin.com/blog/27-exercises",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2011-06-24",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally"
+  },
+  {
+   "title": "National Book Foundation Medal acceptance speech",
+   "url": "https://www.ursulakleguin.com/nbf-medal",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2014-11-19",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally"
+  },
+  {
+   "title": "Always Coming Home (book page)",
+   "url": "https://www.ursulakleguin.com/always-coming-home-book",
+   "kind": "relay",
+   "substantive": false,
+   "date": "1985; LOA edition 2019; page accessed 2026-09-06",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally"
+  },
+  {
+   "title": "Writing Nameless Things: An Interview with Ursula K. Le Guin, by David Streitfeld, Los Angeles Review of Books",
+   "url": "https://lareviewofbooks.org/article/writing-nameless-things-an-interview-with-ursula-k-le-guin/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2017-11-17",
+   "route": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally ; read in full but concerns career, genre and publishing rather than prose style"
+  },
+  {
+   "title": "The Imaginative Reality of Ursula K. Le Guin (VQR, Summer 2018)",
+   "url": "https://www.vqronline.org/summer-2018/interviews-columns/imaginative-reality-ursula-k-le-guin",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2018",
+   "route": "BLOCKED - live page and Wayback raw capture both return only the site navigation shell, no article text"
   }
  ],
  "claims": [
@@ -721,7 +825,7 @@
    "claim": "Le Guin says there has to be white space around the word and silence around the voice.",
    "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
    "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
-   "quote": "There’s got to be white space around the word, silence around the voice.",
+   "quote": "white space around the word, silence around the voice",
    "page": "chapter 10, 'Crowding and Leaping'",
    "kind": "own-words",
    "polarity": "asserts",
@@ -819,7 +923,7 @@
    "claim": "Le Guin calls it a myth that short-sentence prose is more like the way we speak.",
    "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
    "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
-   "quote": "It’s a myth that short-sentence prose is “more like the way we speak.”",
+   "quote": "It’s a myth that short-sentence prose is",
    "page": "chapter 3, 'Sentence Length and Complex Syntax'",
    "kind": "own-words",
    "polarity": "rejects",
@@ -847,7 +951,7 @@
    "claim": "Le Guin says a sentence is not working as a narrative sentence if its similes or metaphors are so dazzling that they stop the reader.",
    "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
    "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
-   "quote": "the proper beauty and power of prose is in the work as a whole",
+   "quote": "the proper beauty and power of prose",
    "page": "chapter 3, 'Sentence Length and Complex Syntax'",
    "kind": "own-words",
    "polarity": "asserts",
@@ -973,7 +1077,7 @@
    "claim": "Le Guin says the world of a science fiction or fantasy story must be created and explained in the story, because the reader has no way of knowing it otherwise.",
    "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
    "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
-   "quote": "The world of the story must be created and explained in the story.",
+   "quote": "must be created and explained in the story",
    "page": "chapter 9, 'Indirect Narration, or What Tells'",
    "kind": "own-words",
    "polarity": "asserts",
@@ -1204,6 +1308,174 @@
    "date": "2005",
    "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
    "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Le Guin says a fantastic setting requires vivid and specific description, and that while characters may lose touch with their reality the storyteller cannot.",
+   "source": "Ursula K. Le Guin, blog 95, 'Are they going to say this is fantasy?', 2 March 2015",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "quote": "A fantastic setting requires vivid and specific description",
+   "page": "paragraph 3",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2015-03-02",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Le Guin says a toneless, inexact language is incapable of creating landscape, meaningful relationship or credible event.",
+   "source": "Ursula K. Le Guin, blog 95, 'Are they going to say this is fantasy?', 2 March 2015",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "quote": "A toneless, inexact language is incapable of creating landscape",
+   "page": "paragraph 3",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2015-03-02",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Le Guin says the imaginary must be imagined accurately and with scrupulous consistency.",
+   "source": "Ursula K. Le Guin, blog 95, 'Are they going to say this is fantasy?', 2 March 2015",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "quote": "accurately and with scrupulous consistency",
+   "page": "paragraph 3",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2015-03-02",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Le Guin says a generic landscape and vague perceptions must be brought to life by the language of the telling, since the whole thing is made out of words.",
+   "source": "Ursula K. Le Guin, blog 95, 'Are they going to say this is fantasy?', 2 March 2015",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "quote": "must be brought to life by the language of the telling",
+   "page": "paragraph 3",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2015-03-02",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "naming and forms of address",
+   "claim": "Le Guin names as a fault of The Buried Giant that a character never once forgets to address his wife as 'princess', and says she came to wish he would.",
+   "source": "Ursula K. Le Guin, blog 95, 'Are they going to say this is fantasy?', 2 March 2015",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "quote": "forgets to address his wife as “princess”",
+   "page": "paragraph 3",
+   "kind": "own-words",
+   "polarity": "rejects",
+   "date": "2015-03-02",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Le Guin praises William Alexander's Goblin Secrets for the unlabored imaginative authority and completeness of its setting and for the fine, vivid English it is written in.",
+   "source": "Ursula K. Le Guin, blog 52, 'Some Recent Fantasies', 21 May 2012",
+   "url": "https://www.ursulakleguin.com/blog/52-some-recent-fantasies",
+   "quote": "unlabored imaginative authority and completeness of its setting",
+   "page": "paragraph on Goblin Secrets",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2012-05-21",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "withheld information and inference",
+   "claim": "Le Guin praises in Goblin Secrets a haunting quality, a sense of depth, of unspoken further implication in the adventures and the characters.",
+   "source": "Ursula K. Le Guin, blog 52, 'Some Recent Fantasies', 21 May 2012",
+   "url": "https://www.ursulakleguin.com/blog/52-some-recent-fantasies",
+   "quote": "a sense of depth, of unspoken further implication",
+   "page": "paragraph on Goblin Secrets",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2012-05-21",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Le Guin says she likes stories that take the reader quietly into a place and let them do difficult and interesting work with some of the people there.",
+   "source": "Ursula K. Le Guin, blog 52, 'Some Recent Fantasies', 21 May 2012",
+   "url": "https://www.ursulakleguin.com/blog/52-some-recent-fantasies",
+   "quote": "take you quietly into a place and let you do difficult",
+   "page": "paragraph on Kij Johnson",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2012-05-21",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "Le Guin says Homer truly does not take sides, and that this is what permits the story to be tragic.",
+   "source": "Ursula K. Le Guin, blog 31, 'Papa H', 24 July 2011",
+   "url": "https://www.ursulakleguin.com/blog/31-papa-h",
+   "quote": "Homer truly doesn’t take sides",
+   "page": "paragraph 7",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2011-07-24",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "Le Guin says Homer's impartiality is far from dispassionate, the story being a torrent of passionate actions while remaining unprejudiced.",
+   "source": "Ursula K. Le Guin, blog 31, 'Papa H', 24 July 2011",
+   "url": "https://www.ursulakleguin.com/blog/31-papa-h",
+   "quote": "His impartiality is far from dispassionate",
+   "page": "paragraph 6",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2011-07-24",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "withheld information and inference",
+   "claim": "Le Guin says she had put clues into A Wizard of Earthsea without knowing it, and that they led her on into Ged's life.",
+   "source": "Ursula K. Le Guin, interview in Karabatak Magazine, 9th edition, summer 2013",
+   "url": "https://www.ursulakleguin.com/interview-karabatak",
+   "quote": "I had put clues into the book, without knowing it",
+   "page": "answer 6",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2013",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says the rhythms of a prose work are a very long beat, different from and in a way much coarser than the rhythms of poetry.",
+   "source": "Ursula K. Le Guin in conversation with David Naimon, 'Dictators are Always Afraid of Poets', excerpt from Conversations on Writing (Tin House, 2018), Literary Hub",
+   "url": "https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/",
+   "quote": "long beat, the rhythms of a prose work",
+   "page": "the exchange about Virginia Woolf and sound",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2018-04-06",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200); HTML converted to text locally ; the page's letter-spacing markup mangles many words, so the quotation is a short unmangled fragment",
+   "registerHint": "chronicle-line",
    "confidence": "high"
   }
  ]

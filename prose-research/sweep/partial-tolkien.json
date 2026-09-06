@@ -422,5 +422,124 @@
    "unsupportedLimb": "the 'native tongue' as distinct from the cradle-tongue (and 'rather than fashion')",
    "fromFile": "verdicts-tolkien-i553-567.json"
   }
+ },
+ {
+  "index": 569,
+  "feature": "neither colloquial nor obscure",
+  "claim": "The language should be intentionally antiquated but not arcane — words still in literary use among educated people — avoiding both the colloquial and the obscure.",
+  "source": "Philip Irving Mitchell (DBU), outline of 'On Translating Beowulf'",
+  "url": "https://www.dbu.edu/mitchell/tolkien-medieval-tradition-resources/beowulf-translate.html",
+  "quote": "avoid both the colloquial and the obscure",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 569,
+   "verdict": "PARTIAL",
+   "trueWording": "antiquated not arcane; avoid the colloquial and the obscure",
+   "unsupportedLimb": "'words still in literary use among educated people' — that qualifier appears nowhere on the DBU page (full page text read, 6,116 chars; no occurrence of 'educated' or 'literary use')",
+   "note": "Raw dbu.edu page fetched by curl (200). Quote 'avoid both the colloquial and the obscure' is verbatim, and 'intentionally antiquated but not intentionally arcane' supports that limb; the 'still in literary use among educated people' gloss is imported from Tolkien's essay, not from this page.",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 571,
+  "feature": "compact compounds",
+  "claim": "Resolving Old English compounds into phrases keeps colour but loosens and weakens the texture; compact naming is preferred.",
+  "source": "Wikipedia, 'On Translating Beowulf'",
+  "url": "https://en.wikipedia.org/wiki/On_Translating_Beowulf",
+  "quote": "loosens and weakens the texture",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 571,
+   "verdict": "PARTIAL",
+   "trueWording": "'Choice between the evils will vary with occasions'",
+   "unsupportedLimb": "'compact naming is preferred' — the page states no preference; it says the naming method 'retains the compactness of the original but loses its colour' and closes 'Choice between the evils will vary with occasions'",
+   "note": "Raw Wikipedia page fetched by curl (200). Quote 'loosens and weakens the texture' verbatim, and the colour/texture trade-off is exactly as claimed; but the page presents the two methods as balanced evils rather than favouring compact naming.",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 573,
+  "feature": "address-to-children as blemish",
+  "claim": "Intelligent children of good taste single out the points in manner where the address is to children as blemishes.",
+  "source": "Tolkien Gateway, 'Letter 215'",
+  "url": "https://tolkiengateway.net/wiki/Letter_215",
+  "quote": "singled out the places where the address was to children",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 573,
+   "verdict": "PARTIAL",
+   "trueWording": "'Intelligent children ... singled out the places where the address was to children as blemishes'",
+   "unsupportedLimb": "'of good taste' — the Tolkien Gateway page says only 'Intelligent children, he was glad to say'; the qualifier is absent from this page",
+   "note": "tolkiengateway.net returns 403 behind a Cloudflare 'Just a moment...' challenge to curl with both Chrome and Safari UAs plus full navigation headers; recovered via Wayback raw capture https://web.archive.org/web/20260104191641id_/https://tolkiengateway.net/wiki/Letter_215 (200). Quote is verbatim there. The 'of good taste' limb IS in the primary text (Letters PDF, Letter 215: 'Intelligent children of good taste (of which there seem quite a number)') but not on the cited page, so the claim is sound and the citation is short of it.",
+   "fromFile": "verdicts-tolkien-i568-582.json"
+  }
+ },
+ {
+  "index": 603,
+  "feature": "epic not dramatic conception",
+  "claim": "The tale was conceived epically rather than dramatically, so dramatizing it without liberties strips setting from dialogue and leaves both flat.",
+  "source": "Tolkien Gateway, 'Letter 194'",
+  "url": "https://tolkiengateway.net/wiki/Letter_194",
+  "quote": "a tale told epically",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 603,
+   "verdict": "PARTIAL",
+   "trueWording": "a tale told epically",
+   "note": "Wayback capture 20260110041608 of tolkiengateway.net/wiki/Letter_194 (live host 403s). Quote verbatim; the page also carries 'dialogue with the settings removed' and 'Both the scenery and the characters had become flat'. But the Gateway summary omits Tolkien's conditional entirely — the word 'libert' does not occur on the page (machine-checked). That limb IS in the underlying Letter 194: 'unless the dramatizer is given or takes liberties, as an independent person' — so the claim is true of the letter, just not fully carried by the cited page.",
+   "unsupportedLimb": "the 'unless the dramatizer is given or takes liberties' condition — absent from the Tolkien Gateway page",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 612,
+  "feature": "dignity of high characters",
+  "claim": "Gandalf must not splutter: despite humour and an avuncular manner he is a person of high and noble authority and great dignity.",
+  "source": "Tolkien Gateway, 'Letter 210'",
+  "url": "https://tolkiengateway.net/wiki/Letter_210",
+  "quote": "Gandalf was to be spluttering. Tolkien disapproved",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 612,
+   "verdict": "PARTIAL",
+   "trueWording": "Gandalf was to be spluttering. Tolkien disapproved both",
+   "note": "Wayback capture 20260820023126 of tolkiengateway.net/wiki/Letter_210 (live host 403s). Quote verbatim as the leading substring of 'Gandalf was to be spluttering. Tolkien disapproved both.' But the page carries none of the dignity limb: machine-checked, the strings 'dignity', 'avuncular', 'noble authority' and 'humour' do not occur anywhere on the page. That limb IS in the underlying Letter 210 ('he is a person of high and noble authority, and great dignity'), so the claim is true of the letter but not fully carried by the cited page.",
+   "unsupportedLimb": "'despite humour and an avuncular manner he is a person of high and noble authority and great dignity' — absent from the Tolkien Gateway page",
+   "fromFile": "verdicts-tolkien-i598-612.json"
+  }
+ },
+ {
+  "index": 622,
+  "feature": "hobbits adopt the style of those they meet",
+  "claim": "Appendix F explains varied hobbit speech by saying the more learned hobbits knew book-language and were quick to adopt the style of those they met.",
+  "source": "Wikipedia, 'Tolkien's prose style' (quoting Appendix F)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+  "quote": "quick to note and adopt the style",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 622,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the more learned hobbits knew book-language",
+   "trueWording": "\"the more learned and able among the Hobbits\" were \"quick to note and adopt the style of those whom they met\"",
+   "note": "Raw wikitext fetched via Special:Export (no summarizer). The quotation is verbatim and the Appendix F attribution is carried by the article's footnote (Tolkien 1955, Appendix F, 'The Languages and Peoples of the Third Age'). But the article nowhere contains 'book-language' (or 'book language' / 'bookish'): every occurrence of 'book' in the article was inspected and none supports that limb. Appendix F itself does say the learned hobbits acquired the true 'book-language', but that is not on the cited page.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
+ },
+ {
+  "index": 623,
+  "feature": "Appendix F cut to a third",
+  "claim": "The published Appendix F is only about one-third as long as its draft F2 — the visible linguistic apparatus is a deliberate reduction.",
+  "source": "Tolkien Gateway, 'The Appendix on Languages'",
+  "url": "https://tolkiengateway.net/wiki/The_Appendix_on_Languages",
+  "quote": "only about one-third as long",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 623,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the visible linguistic apparatus is a deliberate reduction",
+   "trueWording": "the published version is only about one-third as long as F2",
+   "note": "Live host Cloudflare-blocked; raw Wayback capture https://web.archive.org/web/20251203174904id_/https://tolkiengateway.net/wiki/The_Appendix_on_Languages used. The quotation is verbatim: '(the published version is only about one-third as long as F2)'. The 'deliberate reduction' limb is not supported and leans the other way: the page says Christopher found it 'unknown' whether the Westron exemplifications were cut by Tolkien's judgement or 'because of the constraints on space for publication', and that 'had his father not been facing severe space constraints the form of Appendix F would have been considerably different'. The page also credits the one-third cut to the intermediate typescript F3.",
+   "fromFile": "verdicts-tolkien-i613-627.json"
+  }
  }
 ]

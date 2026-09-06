@@ -73,3 +73,19 @@ Route: WebFetch returned SUMMARIES not page text, so every page this round was p
 ## NOT substantive for prose this round: John Pyle (Fairy Spell), F(r)iction (Morken), LitCharts ch.1, Matt Bell substack #21 (Le Guin named only in passing).
 ## Redirect/duplicate: reactormag "storytelling-lessons" (2022-03-10) is a republication of the same 2021 essay ("Originally published August 2021").
 ## BLOCKED so far: youtubetotranscript.com 403; www.tor.com 403 (reactormag mirror works); no yt-dlp/youtube-dl on this machine.
+
+## ROUND 3 — checkpoint 2 / FINAL
+Added by bibliography chase from the estate's own index (ursulakleguin.com/reviews):
+- Michael Chabon, Paris Review Daily 2019-11-20 (live 403 -> Wayback raw) — the world "detailed and plausible from its flora to its weather to the dialects and ceremonies of its inhabitants"; "conjured an entire planet into vivid existence".
+- Jason P. Vest, The Common Reader 2021-05-30 — Le Guin weaves "each place's contradictions, tensions, mores, and rites into satisfyingly detailed portraits"; worlds are "real places rife with complex histories, cultures, and characters"; the famous four-word sentence "The king was pregnant".
+- Alison Smith, Granta 2019-01-03 (403 -> Wayback raw) — "her spare, clarifying prose"; "vivid prose, straight talk and revolutionary engagement".
+- Sherryl Vint, Five Books 2021-05-07 — "our ideologies and values are embedded in the language and metaphors we use".
+- Reactor reread comment thread — a reader picks out "He is done with doing." as a lovely sentence.
+- Terry Morris, Steam Engine Time 11 (fanzine PDF, hand-extracted) — the Ghibli film gives "no sense of islands in a lonely ocean" (medium confidence: my PDF extractor drops apostrophes).
+- Pressbooks New Criticism chapter on Omelas: fetched, thematic only, NOT substantive for prose. Its bibliography yields Laurie Langbauer, ELH 75.1 (2008) — an academic-angle lead, not mined here.
+
+## DISCOVERY LIMITS HIT
+- WebSearch budget for the whole session was exhausted mid-round (200/200). Fallback engines: lite/html.duckduckgo.com connection refused, mojeek 403 on a real query, marginalia empty, bing serves a JS-only page, reddit 403 (json and old.reddit). So the last stretch of discovery was bibliography chasing only.
+- Video-essay transcripts remain UNREAD after four routes; no claim is made from any video.
+
+## FINAL: found-leguin-close.json — 78 claims, 34 sources, 25 substantive, complete:true. Every quotation grep-verified against the raw fetched text (lgc-claims1/2/3.py all report 0 unverified).

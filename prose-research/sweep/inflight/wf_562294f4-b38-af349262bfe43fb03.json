@@ -1,0 +1,34 @@
+{
+ "role": "verifier",
+ "name": "leguin",
+ "angle": null,
+ "tag": "i30-44",
+ "lines": 63,
+ "firstTs": "2026-09-06T09:48:41.804Z",
+ "lastTs": "2026-09-06T09:52:24.986Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 16,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://en.wikipedia.org/wiki/Special:Export/The_Tombs_of_Atuan",
+  "https://en.wikipedia.org/wiki/Special:Export/Tehanu",
+  "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+  "https://www.arts.gov/initiatives/nea-big-read/wizard-earthsea",
+  "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+  "https://en.wikipedia.org/wiki/The_Tombs_of_Atuan",
+  "https://en.wikipedia.org/wiki/Tehanu"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": " this chunk carried `routeHints` or `reverify`. Every quotation was checked against raw text: the NEA PDF via pypdf extraction of the 515,637-byte binary, the two Wikipedia articles via both `Special:Export` wikitext and the rendered live pages, and the arts.gov and SFE pages via de-tagged raw HTML.",
+ "run": "wf_562294f4-b38",
+ "agent": "af349262bfe43fb03",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_562294f4-b38/agent-af349262bfe43fb03.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i30-44.json",
+  "exists": true
+ }
+}
