@@ -5762,6 +5762,97 @@
    "trueWording": "the narrator's voice isn't as explicit, but it's still definitely present",
    "note": "Page: 'In Lord of the Rings, the narrator's voice isn't as explicit, but it's still definitely present', with the two examples the claim generalises - 'the offhand mention that Aragorn would never return to Cerin Amroth' (foreknowledge) and 'the jump into poetry as Theoden is riding to Gondor'. Viewpoint: 'Almost whenever there's a hobbit onstage, we see the hobbit's thoughts and no one else's.' Full match.",
    "fromFile": "verdicts-tolkien-i345-359.json"
+  },
+  "360": {
+   "index": 360,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this softens the blow when in fact several of the dwarves are killed",
+   "note": "halfwise: \"this softens the blow when in fact several of the dwarves are killed\"; Forest Shepherd: \"makes the story feel more like a bedtime story told by a parent\"; Orwell: \"Male, yes - Dad's voice, to be precise\"; and malickfan's opening post: \"unlike the sparse, impersonal 'narration' in LOTR\". All three limbs of the claim confirmed in raw page text.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "361": {
+   "index": 361,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Eowyn I am, Eomund's daughter (page uses a curly apostrophe)",
+   "note": "Quote verbatim (typographic apostrophe only difference). Negation/affirmation confirmed: \"the negative statement of 'No living man am I' is followed by the positive statement of 'You look upon a woman.'\" Pre-duel self-naming confirmed: \"It's like announcing one's identity before a duel-which is in effect what she is doing.\" NOT SUPPORTED: the closing conditional is nowhere called parallel or archaic; the post calls it \"heroic resoluteness\" and \"the courage of mortals\". That third limb is the researcher's own gloss.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "362": {
+   "index": 362,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Where now the horse and the rider?",
+   "note": "Quote appears verbatim (the page reprints Tolkien's lament in full). Adaptation supported in the page's own words: \"The passage of The Wanderer which is echoed most directly in The Lord of the Rings is the 'ubi sunt' passage\". NOT SUPPORTED: the page never analyses a rephrased opening question or an item-by-item expansion; it juxtaposes the two texts and leaves the comparison to the reader. Note for the sweep: this page, not the index-363 page, is where erotema is defined - quoting Juli Witte, \"This is called an erotema, a rhetorical question\".",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "363": {
+   "index": 363,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is a well-known poetic form: the lament, known by scholars as \"Ubi Sunt?\"",
+   "note": "Quote verbatim. Applied to the Rohirrim song: \"But it is of a mode that would have been easily recognized... for it is a well-known poetic form\". Greatness-past limb verbatim: \"It is a lament for the greatness of things now past, and perhaps, irrecoverable\". NOT SUPPORTED: raw text has zero occurrences of \"erotema\", \"rhetorical\" or even \"question\" - only the incipit gloss \"Where is...?\". The feature label \"ubi sunt as erotema\" is mis-sourced to this page; the erotema wording belongs to index 362's page.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "364": {
+   "index": 364,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Tolkien wrote his own beautiful version of this poem",
+   "note": "Claim carries an empty quote field, so verbatim is not assessable; substance confirmed. Raw text has \"Hwaer cwom mearg? Hwaer cwom mago?\" and then Tolkien's lines with rider, horn, helm, hauberk, harpstring, harvest. Byline and date confirmed: Lucy Holland, Feb 23, 2025. Caveat: \"expanded meditation\" is the researcher's characterisation - the page says only that Tolkien wrote his own version.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "365": {
+   "index": 365,
+   "verdict": "BLOCKED",
+   "trueWording": "",
+   "note": "cawthonrm1.medium.com returns HTTP 403 to both WebFetch and curl with a browser user-agent. Wayback tried once and has no capture at all: the availability API returned {\"archived_snapshots\": {}} and https://web.archive.org/web/2023/<url> returned HTTP 404 (WebFetch is separately barred from web.archive.org). No route reached the page, so none of the four limbs - the near-universal Rohirric alliterative verse, \"frontloads the rhyming stress\", the consonant-cluster/end-rhyme contrast, or the battle-fury prose after \"Arise, arise\" - could be checked.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "366": {
+   "index": 366,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the fire that giveth Life and Reality",
+   "note": "Quote verbatim, but note its provenance: it is John Garth quoting The Book of Lost Tales I p. 53, not Petty or Rosebury. King James limb verbatim and correctly routed: \"Anne C. Petty in /Tolkien in the Land of Heroes/... 'Anyone looking for biblical parallels within /The Silmarillion/ should make note of the highly formal, King James-style diction.' (as quoted in RG p. 32)\" - RG being Hammond and Scull's Reader's Guide; Rosebury likewise cited via Hammond and Scull. NOT SUPPORTED: \"-eth forms\" are never discussed as a feature (the sole -eth token is \"giveth\" inside the quotation), and \"distinctively\" appears zero times - the page's Tolkien-vs-Bible contrast is about the Ainur's participation, not diction.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "367": {
+   "index": 367,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Valaquenta opens with \"in the beginning\" (compare Gen 1:1)",
+   "note": "Fetched by curl after WebFetch got HTTP 403; page body confirms both limbs in one sentence pair: the Valaquenta opening quoted with \"(compare Gen 1:1)\", and \"The Ainulindale also unambiguously proclaims that Eru Iluvatar... is 'one' (compare Deut 6:4)\", preceded by \"extensive allusions to the creation stories in Genesis\". Author confirmed: Douglas Estes.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "368": {
+   "index": 368,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Westu Theoden hal",
+   "note": "Quote verbatim: \"a greeting Eomer gives to the king, Westu Theoden hal\". All three revived words confirmed in raw text - dwimmerlaik (\"from the Old English roots dweomer... + -lac\"), mathom (\"Tolkien revived it with a new sense, that of a hobbit's trinket\"), smial (\"based on the Old English smygel, or burrow\") - under the page's own framing \"He resurrects dead or little-used Old English words\". Author confirmed: David Wilton.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "369": {
+   "index": 369,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They rode on through sunset, and slow dusk, and gathering night.",
+   "note": "Quoted fragment appears verbatim as the post's opening line. Beowulf limb verbatim: \"this chapter has what I think is the most direct homage to that epic poem in the Lord of the Rings: the double introductions at Edoras\", glossed as Beowulf's coast-guard then the door-wardens of Heorot. Author confirmed: Michael Halila. Minor: \"accumulated temporal description\" is the researcher's label for the quoted sentence, not the blogger's phrase, though it is plainly true of the sentence itself.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "370": {
+   "index": 370,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tolkien's essential stylistic tactic is to lure us into filling in the blanks",
+   "note": "Every limb verbatim in Walker's answer: the essential-tactic sentence, \"tolkien's writing, too, sounds vividly detailed\", and \"he's actually giving us an open-ended outline between those furry toes and that big-bowled pipe\". The site renders \"tolkien\" lowercase throughout. Page is Pieter Collier's interview with Steven C. Walker, dated 22.07.09, matching the citation.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "371": {
+   "index": 371,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Theoden's toast \"Hail the victorious dead\" is about as Anglo-Saxon as you can get without actually being personally present at the Battle of Maldon.",
+   "note": "Fetched by curl after WebFetch got HTTP 403; the comment thread confirms the attribution exactly - commenter \"Patrick Nielsen Hayden\", 4 years ago on an article published October 13, 2021, so the 2021 date holds. The quoted phrase \"Hail the victorious dead\" appears verbatim. (princessroxana later re-quotes the same line back at him.) Article author is Elayne Audrey Becker.",
+   "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "372": {
+   "index": 372,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a typical hobbit reaction to the momentous events that have transpired",
+   "note": "Quote verbatim: \"all he has to say is: 'Well, I'm back'\". Hobbit-response limb verbatim as given. NOT SUPPORTED: \"emotional restraint\" is not the page's framing - raw text has zero hits for restrain/understat/muted/quiet/anticlimax, and the page calls the departure \"an emotional scene\" and quotes \"not all tears are an evil\". The restraint reading is the researcher's inference from \"all he has to say is\".",
+   "fromFile": "verdicts-tolkien-i360-372.json"
   }
  },
  "mergedAt": "see autosave.log"

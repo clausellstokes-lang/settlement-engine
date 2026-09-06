@@ -1,7 +1,7 @@
-Register (last car): the census totals re-freeze at the composed tip — totalTests 31511 -> 31872, totalFiles 2483 unchanged, entries 5
+Register (last car): the census totals re-freeze at the composed tip — totalTests 31872 -> 31970, totalFiles 2483 -> 2489 (the six lighting test files), entries 5
 
 Taken after every content and register car in the lineage that lands (the last car before the gate), under the gate
-mutex, with totalFiles and entries predicted in writing and totalTests refused as a figure: this run is its derivation.
+mutex, with totalFiles (2483 -> 2489) and entries (5) predicted in writing and met, and totalTests refused as a figure: this run is its derivation. (Message amended once before the gate: the template wrote "unchanged" for a figure that moved.)
 
 Seat: Fable 5.1 — validated
 

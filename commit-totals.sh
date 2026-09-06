@@ -20,10 +20,10 @@ TT=$(python3 -c "import json;print(json.load(open('$J'))['totalTests'])"); TF=$(
 [ "$MA" = "$RH" ] || { echo "⛔ measuredAtSha=$MA is not the measured head $RH"; exit 1; }
 [ "$TF" = "$EXP_FILES" ] || { echo "⛔ totalFiles=$TF (predicted $EXP_FILES) — a test file was added or lost; STOP and look"; exit 1; }
 [ "$EN" = "$EXP_ENTRIES" ] || { echo "⛔ entries=$EN (predicted $EXP_ENTRIES) — the known-failure census moved differently than derived; STOP and look:"; python3 -c "import json;[print('   ',k) for k in json.load(open('$J'))['entries']]"; exit 1; }
-BT=$(git show "${BASE}:${J}" | python3 -c "import json,sys;print(json.load(sys.stdin)['totalTests'])")
+BT=$(git show "${BASE}:${J}" | python3 -c "import json,sys;print(json.load(sys.stdin)['totalTests'])"); BF=$(git show "${BASE}:${J}" | python3 -c "import json,sys;print(json.load(sys.stdin)['totalFiles'])"); if [ "$BF" = "$TF" ]; then TFW="totalFiles $TF unchanged"; else TFW="totalFiles $BF -> $TF"; fi
 echo "totals: totalTests $BT -> $TT · totalFiles $TF · entries $EN · measuredAt $(echo $MA | cut -c1-9)"
 cat > "$SC/msg-totals.txt" <<MSG
-Register (last car): the census totals re-freeze at the composed tip — totalTests $BT -> $TT, totalFiles $TF unchanged, entries $EN
+Register (last car): the census totals re-freeze at the composed tip — totalTests $BT -> $TT, $TFW, entries $EN
 
 Taken after every content and register car in the lineage that lands (the last car before the gate), under the gate
 mutex, with totalFiles and entries predicted in writing and totalTests refused as a figure: this run is its derivation.

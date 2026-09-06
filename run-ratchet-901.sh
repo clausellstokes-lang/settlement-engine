@@ -16,7 +16,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED: derived 2026-09-05 at the lighting tip 47aed9eb4 (24 cars over 04bb92d19): totalFiles 2483 → 2489 (+6 test files ADDED, 0 deleted, 0 renamed — git diff --diff-filter=A 04bb92d19..HEAD -- tests: four property dormancy fences, presetLightingWitness, warRemembranceReader.jsx; the lighting census measured the same +6, 2537 → 2543); entries 5 → 5 (the five banked rows persist: voiceMechanics per-file debt magnitude 2 ≤ ceiling 2 — the same two files, labelBands +5 and generalStateProse +3, byte-identical to §900; enforcement-claims; writerReach corpusMeta and shapesDigest at 81 ≤ ceiling 81 — register car 2 kept simulationFlagsLit 81; the generator golden master, the declared shift); skippedCeiling unchanged (the proof skipped 111, as at §900) (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
+echo "PREDICTED: __PREDICTION__ (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"
