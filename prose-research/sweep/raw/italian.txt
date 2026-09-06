@@ -38,9 +38,9 @@ View a PDF of the paper titled Do readers prefer AI-generated Italian short stor
  view license 
  Current browse context: 
  cs.CL 
- < prev 
-   |   
- next > 
+ < prev 
+ | 
+ next > 
  new 
  | 
  recent 

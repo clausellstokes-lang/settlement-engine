@@ -21,7 +21,7 @@
  Main Membership 
  About Membership 
  Join the Authors Guild 
- Renew Membership / Rejoin the Guild 
+ Renew Membership / Rejoin the Guild 
  Membership FAQ 
  Member Code of Conduct 
  Services 
@@ -110,7 +110,7 @@
  Membership Collapse submenu 
  About Membership 
  Join the Authors Guild 
- Renew Membership / Rejoin the Guild 
+ Renew Membership / Rejoin the Guild 
  Membership FAQ 
  Member Code of Conduct 
  Services 
@@ -226,7 +226,7 @@
  Unauthorized Use of Authors’ Works to Train AI 
  To train their systems to generate new works, developers of artificial intelligences like GPT have copied millions of copyrighted works from the internet or illegallycompiled databases without permission or compensation, relying on a debatable theory of fair use under copyright law to do so. The inputted works are copied multiple times in the course of training, and the programs’ output often closely resembles the original copied materials. Our survey found that authors widely oppose the unauthorized use of their work to train generative AI: 
  90 percent of writers who responded to our survey believe that they should be compensated for the use of their work in training AI . Similarly, 86 percent of authors believe they should be credited for the use of their books in training generative AI, with the majority of the remaining segment surveyed saying that they were unsure. 67 percent of writers surveyed said they were not sure whether their publishing contracts or platform terms of service include permissions or grant of rights to use their work for any AI-related purposes. 
- The issue of contract clauses that allow a publisher or platform to license or use works to train generative AI technologies is one the Authors Guild addressed by releasing a model “No Generative AI Training” clause as part of an update to its Model Contract in March 2023. The clause can be found here .  
+ The issue of contract clauses that allow a publisher or platform to license or use works to train generative AI technologies is one the Authors Guild addressed by releasing a model “No Generative AI Training” clause as part of an update to its Model Contract in March 2023. The clause can be found here . 
  Views on Collective Licensing 
  A majority of respondents indicated support for a collective licensing system to compensate authors for the use of books, articles, stories, and other works used to train generative AI technologies: 
  65 percent of writers said they support a collective licensing system that would pay authors a fee for use of their works in training AI, while 27 percent were unsure. Only 9 percent said they did not support a collective licensing system, with many of those opposed to it not wanting AI to use their works at all. 
@@ -238,8 +238,8 @@
  Unregulated use of generative AI technology to produce books will seriously hurt the vibrance and diversity of what gets published in the future. And this will invariably affect the quality of ideas and expression that are so crucial to a healthy democracy. As Authors Guild CEO Mary Rasenberger wrote in her article How Will Authorship Be Defined in an AI Future? : “If we want to ensure that our literature and arts continue to reflect our current experiences and our imagined ones, we need to ensure that human creators are compensated and their work is protected.” 
  The Authors Guild recently conducted a new survey of U.S. author incomes, with preliminary results showing that full-time authors earned a median annual income from writing-related activities of $23,329 in 2022, of which an average of $12,000 was from their books. All authors, including part-time authors, earned a median writing income of $8,500 in 2022, and just $2,800 from books. The likely saturation of book markets with AI-generated works will undoubtedly push incomes down even further, forcing even more writers out of the profession, which in turn will lead to a devastating loss of voices and unique perspectives—the opposite of what we need in these uncertain times. This is not a future anyone wants. 
  Click here to learn more about our advocacy on artificial intelligence issues. 
- About the Authors Guild and Authors Guild Foundation  
- With more than 13,000 members, the Authors Guild is the nation’s oldest and largest professional organization for published writers. It advocates on behalf of working writers to protect free speech, freedom of expression and authors’ copyrights; fights for fair contracts and authors’ ability to earn a livable wage; and provides a welcoming community for writers and translators of fiction, nonfiction, poetry, and journalism. Through its educational and charitable arm, the Authors Guild Foundation, it also offers free programming to teach working writers about the business of writing, as well as organizing public events that highlight the importance of a rich, diverse American literary culture and the authors that contribute to it.  
+ About the Authors Guild and Authors Guild Foundation 
+ With more than 13,000 members, the Authors Guild is the nation’s oldest and largest professional organization for published writers. It advocates on behalf of working writers to protect free speech, freedom of expression and authors’ copyrights; fights for fair contracts and authors’ ability to earn a livable wage; and provides a welcoming community for writers and translators of fiction, nonfiction, poetry, and journalism. Through its educational and charitable arm, the Authors Guild Foundation, it also offers free programming to teach working writers about the business of writing, as well as organizing public events that highlight the importance of a rich, diverse American literary culture and the authors that contribute to it. 
  Footer Top Menu 
  Member Login 
  Sitebuilder Login 

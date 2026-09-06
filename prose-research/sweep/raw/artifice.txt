@@ -39,9 +39,9 @@ View a PDF of the paper titled Art or Artifice? Large Language Models and the Fa
  view license 
  Current browse context: 
  cs.CL 
- < prev 
-   |   
- next > 
+ < prev 
+ | 
+ next > 
  new 
  | 
  recent 

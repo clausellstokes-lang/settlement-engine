@@ -1,197 +1,100 @@
-The Alexandrian » Are We Really This Stupid? 
-
+ 
+ The Alexandrian » Are We Really This Stupid? 
  Are We Really This Stupid? 
-
  January 10th, 2011 
-
- As I mentioned a couple days ago , the fun I’ve been having with the Castle Ravenloft board game has recently inspired me to read (or re-read) I6 Ravenloft and Expedition to Castle Ravenloft . This has put me in the rather interesting position of comparing all three. And this has, in turn, forced me to ask a simple question:
-
- Are we really this stupid?
-
- Let me expand on that a little bit.
-
- The Castle Ravenloft boardgame is a dungeon-crawler without a Dungeon Master. Out of necessity, therefore, it is forced to provide a “program” for each monster in the game. When the monster is activated, it simply follows the program and takes the actions described. It’s a relatively simple mechanic which provides some interesting strategic wrinkles. (Since you know what the monster will do when presented with a given set of stimuli, you can exert some degree of “control” over them in a semi-prescient fashion.)
-
- That’s all fine. But let me give you a sampling of the text from the boardgame:
-
- Place the Start tile on the table. Place each Hero on a square adjacent to the stairway on the Start Tile. When a Hero reveals the Laboratory […] place Klak on the bone pile.
-
- (…)
-
- If the Skeleton is adjacent to a Hero, it attacks that Hero with a scimitar. If the Skeleton is within 1 tile of a Hero, it moves adjacent to the closest Hero and attacks that Hero with a charging slice. Otherwise, the Skeleton moves 1 tile toward the closest hero.
-
- And here’s some text from Expedition to Castle Ravenloft (pg. 32):
-
- Have the players place their figures at the end of the tile, with the single circle closest to them and the other two farther away. Place a figure for Balam in the close circle.
-
- (…)
-
- On its turn, each zombie moves from its starting position toward the closest enemy it can attack. A zombie behind a door opens it as part of its first move action.
-
- Both carcass eaters attack the closest PCs. If an adjacent character drops to -1 hit points or fewer for any reason, a carcass eater uses its rend fallen ability.
-
- Is there a reason why we’re treating modern Dungeon Masters as if they were only barely more competent than an inanimate piece of cardboard?
-
- Are we really this stupid?
-
- ISOLATED ENCOUNTERS 
-
- Expedition to Castle Ravenloft was one of the earliest adventures to use the “delve format”. But this isn’t just a matter of growing pains: This kind of “so prepackaged you can just turn off your brain” method of designing encounters has remained a staple of WotC’s adventure design right up through today.
-
- Conceptually, there’s one thing I really love about the delve format: Putting everything you need to run an encounter area in the description of the encounter area. That just makes good sense. But in practice, the delve format suffers from two problems:
-
- First, it artificially isolates the “encounter”. This tends to fatally sabotage the entire point of the delve format to begin with.
-
- For example, take encounter E6 in Expedition to Castle Ravenloft :
-
- This encounter takes place the first time the PCs enter this crossroads from any direction.
-
- Tactical Encounter : E6: Ghoul Foray on page 38.
-
- Development : These ghouls are not part of the necromantic infection, but an independent pack of undead taking advantage of the chaos. After venturing out of the cemetery (area E8), the ghouls are moving from house to house in search of valuables and still-living creatures. They are upset by the quick conversion of zombie victims to yet more zombies, but they are so hungry that they consume even the rotting undead. They lust for fresh corpses.
-
- That information is, in my opinion, rather crucial for running the encounter. Attempting to isolate a tactical encounter from the context in which that tactical encounter occurs, in my opinion, results in a very choppy, ineffective style of play.
-
- But even if you moved that information into the tactical encounter itself, the problem still wouldn’t be solved because encounters shouldn’t be taking place in a physical vacuum. For example, encounter E6 here takes place just one block away from Barovia’s church, which is encounter E7. What happens if the battle with the ghouls goes poorly and the PCs decide to retreat towards the church? Now I’m forced to go back to the adventure key, reorient the encounter within the context of the other geographical features around it, and then flip to the delve format presentation of E7 in yet another section of the book.
-
- Rather than making it easier for me to find all the information I need, you’ve got me flipping back and forth through the module just trying to orient myself.
-
- (Most of these problems were solved by Keep on the Shadowfell , which simply keyed the adventure to the tactical encounters. But after Keep on the Shadowfell , Wizards went right back to doing it the broken way they’d been doing it before.)
-
- T HE PERFECT ENCOUNTER 
-
- The other problem with the delve format, in my opinion, is that it tends to encourage the unproductive false idol of the “perfect encounter”. (Partly because it isolates the encounter and partly because the format inherently forces all encounters to be designed to the same specs.) Each of these encounters is designed to be “perfectly balanced” with monsters who have been pre-selected, pre-positioned, and pre-programmed.
-
- This tends to limit flexibility. You’ve invested a lot of preparation into carefully arranging the “perfect encounter” involving goblin bombadiers and guard drakes scurrying about a half-excavated room:
-
- But if you have those goblin bombadiers respond to a cry for reinforcements from the goblins just down the hall, you’re throwing all of that preparation away.
-
- Plus, when you’ve put this much effort into prepping an encounter, you can’t just let the PCs avoid it.
-
- And, to make a long story short, that’s how you end up with adventure modules which are just long, linear strings of isolated, prepackaged encounters.
-
- ENCOUNTERS ON THE FLY 
-
- The counter-argument, of course, is that encounters shouldn’t be boring.
-
- I couldn’t agree more.
-
- But I don’t think we need to try so hard. I think when the original Ravenloft module reads:
-
- The maid, Helga, is a vampire who will attack the PCs only when an opportunity to do so without having to fight the entire party presents itself. She also attacks if commanded to do so by Strahd. Helga will join the party, if asked to. She claims to be the daughter of a villager, cruelly forced into service of the Strahd.
-
- We don’t need a pregenerated tactical map showing where Helga is standing in room K32 with accompanying text telling the DM to have the players position their miniatures within 10 feet of the door when it opens in order to have an interesting encounter.
-
- I think publishers can put a little more trust in DMs (and, as DMs, we can put a little more trust in ourselves). So that when we ask the question–
-
+ As I mentioned a couple days ago , the fun I’ve been having with the Castle Ravenloft board game has recently inspired me to read (or re-read) I6 Ravenloft and Expedition to Castle Ravenloft . This has put me in the rather interesting position of comparing all three. And this has, in turn, forced me to ask a simple question: 
  Are we really this stupid? 
-
- –the answer can be, “No. We’re not.”
-
- And maybe that means the goblin bombadiers don’t lay an ambush in their excavated chamber. Maybe it means that the PCs end up barricading themselves in that chamber. Or the goblins all retreat into that chamber. Or the PCs return to find animated goblin zombies have been stationed in that chamber as guards.
-
- Once you remove the shackles of believing that the “perfect encounter” can be predesigned, you’ll be tapping into the strength of the RPG medium in creating encounters which are perfect for your gaming group because they were created by your gaming group.
-
+ Let me expand on that a little bit. 
+ The Castle Ravenloft boardgame is a dungeon-crawler without a Dungeon Master. Out of necessity, therefore, it is forced to provide a “program” for each monster in the game. When the monster is activated, it simply follows the program and takes the actions described. It’s a relatively simple mechanic which provides some interesting strategic wrinkles. (Since you know what the monster will do when presented with a given set of stimuli, you can exert some degree of “control” over them in a semi-prescient fashion.) 
+ That’s all fine. But let me give you a sampling of the text from the boardgame: 
+ Place the Start tile on the table. Place each Hero on a square adjacent to the stairway on the Start Tile. When a Hero reveals the Laboratory […] place Klak on the bone pile. 
+ (…) 
+ If the Skeleton is adjacent to a Hero, it attacks that Hero with a scimitar. If the Skeleton is within 1 tile of a Hero, it moves adjacent to the closest Hero and attacks that Hero with a charging slice. Otherwise, the Skeleton moves 1 tile toward the closest hero. 
+ And here’s some text from Expedition to Castle Ravenloft (pg. 32): 
+ Have the players place their figures at the end of the tile, with the single circle closest to them and the other two farther away. Place a figure for Balam in the close circle. 
+ (…) 
+ On its turn, each zombie moves from its starting position toward the closest enemy it can attack. A zombie behind a door opens it as part of its first move action. 
+ Both carcass eaters attack the closest PCs. If an adjacent character drops to -1 hit points or fewer for any reason, a carcass eater uses its rend fallen ability. 
+ Is there a reason why we’re treating modern Dungeon Masters as if they were only barely more competent than an inanimate piece of cardboard? 
+ Are we really this stupid? 
+ ISOLATED ENCOUNTERS 
+ Expedition to Castle Ravenloft was one of the earliest adventures to use the “delve format”. But this isn’t just a matter of growing pains: This kind of “so prepackaged you can just turn off your brain” method of designing encounters has remained a staple of WotC’s adventure design right up through today. 
+ Conceptually, there’s one thing I really love about the delve format: Putting everything you need to run an encounter area in the description of the encounter area. That just makes good sense. But in practice, the delve format suffers from two problems: 
+ First, it artificially isolates the “encounter”. This tends to fatally sabotage the entire point of the delve format to begin with. 
+ For example, take encounter E6 in Expedition to Castle Ravenloft : 
+ This encounter takes place the first time the PCs enter this crossroads from any direction. 
+ Tactical Encounter : E6: Ghoul Foray on page 38. 
+ Development : These ghouls are not part of the necromantic infection, but an independent pack of undead taking advantage of the chaos. After venturing out of the cemetery (area E8), the ghouls are moving from house to house in search of valuables and still-living creatures. They are upset by the quick conversion of zombie victims to yet more zombies, but they are so hungry that they consume even the rotting undead. They lust for fresh corpses. 
+ That information is, in my opinion, rather crucial for running the encounter. Attempting to isolate a tactical encounter from the context in which that tactical encounter occurs, in my opinion, results in a very choppy, ineffective style of play. 
+ But even if you moved that information into the tactical encounter itself, the problem still wouldn’t be solved because encounters shouldn’t be taking place in a physical vacuum. For example, encounter E6 here takes place just one block away from Barovia’s church, which is encounter E7. What happens if the battle with the ghouls goes poorly and the PCs decide to retreat towards the church? Now I’m forced to go back to the adventure key, reorient the encounter within the context of the other geographical features around it, and then flip to the delve format presentation of E7 in yet another section of the book. 
+ Rather than making it easier for me to find all the information I need, you’ve got me flipping back and forth through the module just trying to orient myself. 
+ (Most of these problems were solved by Keep on the Shadowfell , which simply keyed the adventure to the tactical encounters. But after Keep on the Shadowfell , Wizards went right back to doing it the broken way they’d been doing it before.) 
+ T HE PERFECT ENCOUNTER 
+ The other problem with the delve format, in my opinion, is that it tends to encourage the unproductive false idol of the “perfect encounter”. (Partly because it isolates the encounter and partly because the format inherently forces all encounters to be designed to the same specs.) Each of these encounters is designed to be “perfectly balanced” with monsters who have been pre-selected, pre-positioned, and pre-programmed. 
+ This tends to limit flexibility. You’ve invested a lot of preparation into carefully arranging the “perfect encounter” involving goblin bombadiers and guard drakes scurrying about a half-excavated room: 
+ But if you have those goblin bombadiers respond to a cry for reinforcements from the goblins just down the hall, you’re throwing all of that preparation away. 
+ Plus, when you’ve put this much effort into prepping an encounter, you can’t just let the PCs avoid it. 
+ And, to make a long story short, that’s how you end up with adventure modules which are just long, linear strings of isolated, prepackaged encounters. 
+ ENCOUNTERS ON THE FLY 
+ The counter-argument, of course, is that encounters shouldn’t be boring. 
+ I couldn’t agree more. 
+ But I don’t think we need to try so hard. I think when the original Ravenloft module reads: 
+ The maid, Helga, is a vampire who will attack the PCs only when an opportunity to do so without having to fight the entire party presents itself. She also attacks if commanded to do so by Strahd. Helga will join the party, if asked to. She claims to be the daughter of a villager, cruelly forced into service of the Strahd. 
+ We don’t need a pregenerated tactical map showing where Helga is standing in room K32 with accompanying text telling the DM to have the players position their miniatures within 10 feet of the door when it opens in order to have an interesting encounter. 
+ I think publishers can put a little more trust in DMs (and, as DMs, we can put a little more trust in ourselves). So that when we ask the question– 
+ Are we really this stupid? 
+ –the answer can be, “No. We’re not.” 
+ And maybe that means the goblin bombadiers don’t lay an ambush in their excavated chamber. Maybe it means that the PCs end up barricading themselves in that chamber. Or the goblins all retreat into that chamber. Or the PCs return to find animated goblin zombies have been stationed in that chamber as guards. 
+ Once you remove the shackles of believing that the “perfect encounter” can be predesigned, you’ll be tapping into the strength of the RPG medium in creating encounters which are perfect for your gaming group because they were created by your gaming group. 
  Filed under: Roleplaying Games Comments (6) 
  Article tags: 4th edition , d&d 
-
- 6 Responses to “Are We Really This Stupid?”
-
+ 6 Responses to “Are We Really This Stupid?” 
  Daniel says: 
-
- YES.
-
+ YES. 
  October 7th, 2012 - 11:24 pm 
-
  Lee Mohnkern says: 
-
- I completely agree. RPG games (especially the D&D 4e system) are rapidly becoming computer program code. The ridiculous amount of powers to keep track of, and the lack of logic behind most of them (fantasy battles in movies and books have zero of these “powers”) makes it almost impossible to visualize D&D battles, and games in general. 3.5 already had enough of this: rarely in a movie do you see a cleric healing a character in the middle of a battle. In 4e, there are so many powers flying left and right, and so much ongoing damage to keep track of, on top of the “padded sumo wrestler” HP levels, that combat seems to slow and becomes boring. The roles in combat are somewhat effective, but combat is far too slow, and monster tactics are dumbed down to the point where it is impossible for a DM to create engaging encounters.
-
+ I completely agree. RPG games (especially the D&D 4e system) are rapidly becoming computer program code. The ridiculous amount of powers to keep track of, and the lack of logic behind most of them (fantasy battles in movies and books have zero of these “powers”) makes it almost impossible to visualize D&D battles, and games in general. 3.5 already had enough of this: rarely in a movie do you see a cleric healing a character in the middle of a battle. In 4e, there are so many powers flying left and right, and so much ongoing damage to keep track of, on top of the “padded sumo wrestler” HP levels, that combat seems to slow and becomes boring. The roles in combat are somewhat effective, but combat is far too slow, and monster tactics are dumbed down to the point where it is impossible for a DM to create engaging encounters. 
  https://sites.google.com/site/riftwarsrpg/ 
-
- This is an RPG I am working on that will hopefully 1) reward roleplaying through gameplay 2) be a simple, streamlined system that includes many of the “realism issues” complained about in many games and 3) not be so overloaded with game balance elements that it becomes completely dissimilar to fantasy novels we like to read.
-
+ This is an RPG I am working on that will hopefully 1) reward roleplaying through gameplay 2) be a simple, streamlined system that includes many of the “realism issues” complained about in many games and 3) not be so overloaded with game balance elements that it becomes completely dissimilar to fantasy novels we like to read. 
  October 10th, 2012 - 11:13 am 
-
  unknown says: 
-
- good one.
-
+ good one. 
  October 11th, 2012 - 6:36 am 
-
  Sans says: 
-
- I agree for the most part. I do like the idea of knowing how NPCs normally would act, so the skeleton thing doesn’t bother me. Its why I am a big fan of the book “The Monsters Know What They’re Doing”.
-
+ I agree for the most part. I do like the idea of knowing how NPCs normally would act, so the skeleton thing doesn’t bother me. Its why I am a big fan of the book “The Monsters Know What They’re Doing”. 
  August 11th, 2020 - 12:37 pm 
-
  G says: 
-
- What does “delve format” mean?
-
+ What does “delve format” mean? 
  September 18th, 2025 - 7:38 pm 
-
  colin r says: 
-
  @G, “delve format” was a template WOTC used in the 4e era in their published adventures. See e.g. https://merricb.com/2020/04/29/the-doom-that-was-the-delve-format/ 
-
  September 19th, 2025 - 1:35 pm 
-
- Leave a Reply
-
+ Leave a Reply 
  Name (required) 
-
  Mail (will not be published) (required) 
-
  Website 
-
- XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> 
--->
-
+ XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> -->
  Δ 
-
  JUSTIN ALEXANDER
- About - Bibliography 
- Acting Resume 
-
+ About - Bibliography Acting Resume 
 ROLEPLAYING GAMES
  Gamemastery 101 
-
  RPG Scenarios 
-
  RPG Cheat Sheets 
-
  RPG Miscellaneous 
-
  Dungeons & Dragons 
-
  Ptolus: Shadow of the Spire 
-
  Alexandrian Auxiliary 
-
  Check These Out 
-
  Essays 
-
  Other Games 
-
  Reviews 
-
  Shakespeare Sunday 
-
  Thoughts of the Day 
-
  Videos 
-
  Patrons 
-
  Open Game License 
-
- Bluesky • Mastodon • Twitter 
- 
- Archives
- Archives 
-
+ Bluesky • Mastodon • Twitter Archives Archives 
  Select Month 
  August 2026 (13) 
  July 2026 (13) 
@@ -427,52 +330,23 @@ ROLEPLAYING GAMES
  October 2005 (3) 
  August 2005 (17) 
  July 2005 (25) 
-
- Recent Posts
-
+ Recent Posts 
  Chaos Lorebook: The Magi of Chaos 
-
  Ex-RPGNet Review: A Song of Ice and Fire 
-
  Chaos Lorebook: The Earthbound Demons 
-
  Ex-RPGNet Review: Penumbra Backdrops 
-
  Chaos Lorebook: The Assassins of Chaos 
-
- Recent Comments
- Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) 
- On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal 
- Robert on Chaos Lorebook: The Magi of Chaos 
- Justin Alexander on Ptolus: Running the Campaign – From Table to Page 
- BP on Ex-RPGNet Review: A Song of Ice and Fire 
- Remus on Some Thoughts on Swords & Sorcery 
- BP on Ex-RPGNet Review: A Song of Ice and Fire 
- Ben Ferguson on Ptolus: Running the Campaign – From Table to Page 
- Jake on Ex-RPGNet Review: A Song of Ice and Fire 
- William on Ex-RPGNet Review: A Song of Ice and Fire 
-
- Author
- Read Now! - Audio Book 
-
-Author
-
+ Recent Comments Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal Robert on Chaos Lorebook: The Magi of Chaos Justin Alexander on Ptolus: Running the Campaign – From Table to Page BP on Ex-RPGNet Review: A Song of Ice and Fire Remus on Some Thoughts on Swords & Sorcery BP on Ex-RPGNet Review: A Song of Ice and Fire Ben Ferguson on Ptolus: Running the Campaign – From Table to Page Jake on Ex-RPGNet Review: A Song of Ice and Fire William on Ex-RPGNet Review: A Song of Ice and Fire 
+ Author Read Now! - Audio Book 
+ Author 
  PDF Edition 
-
  City Supplement 1: Dweredell 
-
  City Supplement 2: Aerie 
-
  City Supplement 3: Anyoc 
-
  Rule Supplement 1: Mounted Combat 
-
  Adventure: Complex of Zombies 
-
  Adventure: The Black Mist 
-
  Spells of Light and Darkness 
-
  Mythos Audio Library: Call of Cthulhu 
-
  Copyright © The Alexandrian . All rights reserved.
+ 

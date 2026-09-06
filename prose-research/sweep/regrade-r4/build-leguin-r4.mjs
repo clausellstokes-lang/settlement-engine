@@ -41,24 +41,31 @@ const down = {
 };
 delete down[139];
 
-const idx = Object.keys(down).map(Number).sort((a, b) => a - b);
+// NOTE: `down` is keyed by POSITION in the kept array; the canonical claim index is the row's own
+// `index` field (== its nested verdict.index), which diverges from the position because PARTIAL rows
+// were dropped from the kept list. Verdicts must be keyed by the canonical index, or the merge's
+// byIdx lookup inside this file fails.
+const pos = Object.keys(down).map(Number).sort((a, b) => a - b);
 const claims = [];
 const verdicts = [];
-for (const i of idx) {
-  const row = kept[String(i)];
-  if (!row) throw new Error(`missing row ${i}`);
+for (const p of pos) {
+  const row = kept[p];
+  if (!row) throw new Error(`missing row at position ${p}`);
   const { verdict: v, ...claim } = row;
+  if (typeof claim.index !== 'number' || claim.index !== v.index) {
+    throw new Error(`position ${p}: claim.index ${claim.index} != verdict.index ${v.index}`);
+  }
   claims.push(claim);
   verdicts.push({
-    index: i,
+    index: claim.index,
     verdict: 'PARTIAL',
-    trueWording: down[i].trueWording ?? (v.trueWording || ''),
+    trueWording: down[p].trueWording ?? (v.trueWording || ''),
     note: v.note || '',
-    unsupportedLimb: down[i].limb
+    unsupportedLimb: down[p].limb
   });
 }
 
 const out = { name: 'leguin', regrade: true, claims, verdicts };
 fs.writeFileSync(`${SW}/verdicts-leguin-regrade-r4.json`, JSON.stringify(out, null, 1));
 console.log('downgraded', verdicts.length, 'of', Object.keys(kept).length, '| standing', Object.keys(kept).length - verdicts.length);
-console.log('indices:', idx.join(','));
+console.log('canonical indices:', verdicts.map(v => v.index).join(','));

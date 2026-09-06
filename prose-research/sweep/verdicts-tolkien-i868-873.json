@@ -1,0 +1,99 @@
+{
+  "name": "tolkien",
+  "chunk": 16,
+  "claims": [
+    {
+      "index": 868,
+      "feature": "orcs in modern idiom",
+      "claim": "Vaninskaya observes the Orcs speak the most modern idiom in the book, the clipped language of army dispatches and bureaucrats.",
+      "source": "Tolkien's prose style (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+      "quote": "clipped language of army dispatches",
+      "page": ""
+    },
+    {
+      "index": 869,
+      "feature": "Old English words rescued",
+      "claim": "The Riders of Rohan receive the fullest archaic treatment, with rescued Old English words such as éored, dwimmerlaik and mearas and actual Old English phrases.",
+      "source": "Tolkien's prose style (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+      "quote": "",
+      "page": ""
+    },
+    {
+      "index": 870,
+      "feature": "annalist voice",
+      "claim": "The Silmarillion documents events briefly as if in annals rather than describing persons, giving what Shippey calls more rarefied air.",
+      "source": "Tolkien's prose style (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+      "quote": "more rarefied air",
+      "page": "The Silmarillion"
+    },
+    {
+      "index": 871,
+      "feature": "embedded narration",
+      "claim": "The Lord of the Rings contains 45-50 embedded stories told by 23 characters; about half the novel is dialogue, poetry or character-narrated tales and 85% of the narrative is from a Hobbit perspective.",
+      "source": "Tolkien's prose style (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+      "quote": "",
+      "page": "Narrative quality"
+    },
+    {
+      "index": 872,
+      "feature": "hostile critics on diction",
+      "claim": "Stimpson accused Tolkien of shunning ordinary diction and Moorcock called the style comforting and unchallenging, charges Rosebury refuted by showing plain modern English.",
+      "source": "Tolkien's prose style (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+      "quote": "ordinary diction",
+      "page": ""
+    },
+    {
+      "index": 873,
+      "feature": "familiar phrasal verbs",
+      "claim": "Rosebury shows Tolkien favours familiar phrasal verbs such as 'have on' and 'get off' over the more literary 'wear' and 'dismount'.",
+      "source": "Tolkien: A Cultural Phenomenon (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Tolkien:_A_Cultural_Phenomenon",
+      "quote": "familiar phrasal verbs",
+      "page": ""
+    }
+  ],
+  "verdicts": [
+    {
+      "index": 868,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "\"the clipped language of army dispatches\" (Vaninskaya, quoted verbatim)",
+      "note": "Raw wikitext of en.wikipedia.org/wiki/Tolkien's_prose_style fetched with a browser UA via ?action=raw. Section 'Varied dialogue types for the enemy': 'Anna Vaninskaya writes that the most modern idiom in The Lord of the Rings is used by the Orcs overheard by Frodo and Sam in Mordor. Tolkien gives them the speech of the twentieth century, whether as soldiers, functionaries in party or government, or \"minor officials in a murderous bureaucracy\".' Two sentences later: 'She writes that Tolkien captures, too, \"the clipped language of army dispatches\"'. Every limb supported: Vaninskaya as attributor, most-modern-idiom, Orcs, army dispatches, bureaucrats."
+    },
+    {
+      "index": 869,
+      "verdict": "VERIFIED_SUBSTANCE",
+      "trueWording": "goes furthest with Riders of Rohan; words 'rescued from total obscurity'",
+      "note": "No quotation supplied in the claim, so graded on substance; the page nevertheless carries the claim's distinctive words verbatim. Section 'Incorporating the archaic, even Old English': 'Tolkien goes furthest with the Riders of Rohan, giving them \"Anglo-Saxon syntactic patterns\" ... He gives Rohan speakers words \"rescued from total obscurity\" like \"éored\", Old English for \"a troop of cavalry\", \"dwimmerlaik\", and \"mearas\".' The actual-phrases limb: 'Finally, Tolkien has his Riders of Rohan speak a few phrases directly in Old English, as when Éomer shouts \"Westu Théoden hál!\"'. All three limbs supported."
+    },
+    {
+      "index": 870,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "\"more rarefied air\" (Shippey, quoted verbatim on the page)",
+      "note": "Section 'The Silmarillion': 'The Silmarillion, by contrast with The Lord of the Rings, is written in a compressed style, in which events are briefly documented as if in annals recording history and legend, rather than described with much focus on persons or the niceties of conventional storytelling' (attributed to Bratman); the next sentence: 'Shippey states that The Silmarillion comes across to the reader as a more distant and mythic work ... there was in his view no place for humorously earthy Hobbits in the \"more rarefied air\" of that work.' Quote verbatim and both factual limbs present; the claim's connective 'giving' joins two adjacent, same-subject sentences by different scholars (Bratman for the annals limb, Shippey for the phrase) rather than reproducing a stated causal link."
+    },
+    {
+      "index": 871,
+      "verdict": "VERIFIED_SUBSTANCE",
+      "trueWording": "some 45 to 50 stories, 23 characters, about half dialogue, 85% Hobbit",
+      "note": "No quotation supplied, so graded on substance; all three figures match exactly. Section 'Narrative quality': 'There are some 45 to 50 stories embedded in the text of The Lord of the Rings, supposedly narrated by 23 of the novel's characters. ... About half of The Lord of the Rings consists of dialogue, poetry, or stories told by a character. The other half is narrative, often from the point of view of one of the characters, and usually – 85% of the time – a Hobbit protagonist.' (Kullmann and Siepmann). The 85% is of the narrative half specifically, which is what the claim says."
+    },
+    {
+      "index": 872,
+      "verdict": "PARTIAL",
+      "unsupportedLimb": "that Rosebury refuted Moorcock's charge — the page ties Rosebury's reply only to Stimpson's attack, never to Moorcock",
+      "trueWording": "Rosebury 'systematically replies to each item in Stimpson's attack'",
+      "note": "Quote verbatim and the two accusations are exact. Lead and 'Criticism' section: Stimpson 'wrote in 1969 that Tolkien not only \"shun[s] ordinary diction, he also wrenches syntax\"'; 'In 1978 ... Michael Moorcock, in his essay Epic Pooh, criticized Tolkien for utilizing a comforting and unchallenging writing style'. Rosebury limb: 'The scholar of humanities Brian Rosebury systematically replies to each item in Stimpson's attack, showing that Tolkien mostly uses plain modern English.' The page confines Rosebury's rebuttal to Stimpson; the claim's plural 'charges Rosebury refuted' extends it to Moorcock, which the page does not support. Note also the page says 'mostly uses plain modern English'."
+    },
+    {
+      "index": 873,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "\"familiar phrasal verbs 'have on' and 'get off'\" vs \"'wear' and 'dismount'\"",
+      "note": "Raw wikitext of en.wikipedia.org/wiki/Tolkien:_A_Cultural_Phenomenon fetched with a browser UA via ?action=raw. Reception section: 'Allan Turner comments in the same work that Rosebury rejects the unsupported assertions of archaising and \"wrenched syntax\" by critics like Catharine Stimpson, and that Rosebury pointed out that Tolkien used a plain descriptive style, demonstrably favouring the \"familiar phrasal verbs 'have on' and 'get off' .. to the slightly more literary 'wear' and 'dismount'\".' Quote verbatim; every limb supported. Only difference is intensity: the page reads 'slightly more literary', the claim 'the more literary'."
+    }
+  ]
+}

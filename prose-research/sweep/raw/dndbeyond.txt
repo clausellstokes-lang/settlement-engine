@@ -1,6 +1,5 @@
 
  Updates in the Player’s Handbook (2024) | Dungeons & Dragons 
- This site works best with JavaScript enabled. Please enable JavaScript to get the best experience from this site. 
  Skip to Content 
  Play D&D My Characters Create a character My Campaigns Beta Maps VTT More Tools D&D Beyond Mobile App Avrae Discord Bot Browse Homebrew My Homebrew Collection My Homebrew Creations Encounters My Dice Rules Browse Classes Backgrounds Species Feats Spells Equipment Magic Items Monsters Resources How to Play D&D D&D Beyond Basic Rules Rules Glossary D&D Character Sheets System Reference Document (SRD) Unearthed Arcana Featured Article Updating Your Campaign to the 5.5e D&D Rules Article Running Lairs: How to Make the Most of a Monster's Place of Power Library Free books View all Sign in to view your
 library & saved
@@ -19,7 +18,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  34 
  Tags 
  Player's Handbook 
- This article outlines what has changed between the 2014 and 2024 versions of the Player’s Handbook .  For an update on changes to the D&D Beyond toolset, see the D&D Beyond changelog . 
+ This article outlines what has changed between the 2014 and 2024 versions of the Player’s Handbook . For an update on changes to the D&D Beyond toolset, see the D&D Beyond changelog . 
  Classes 
  Origins 
  Feats 
@@ -29,7 +28,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  Rules 
  New Terminology 
  Using This Book with Older Books 
- When you play D&D with the 2024  Player’s Handbook , it replaces all rules, classes, subclasses, spells, feats, equipment, species, and backgrounds in the 2014 version of the book. There are a few exceptions; the following options don’t appear in the 2024 book and are still usable from 2014: 
+ When you play D&D with the 2024 Player’s Handbook , it replaces all rules, classes, subclasses, spells, feats, equipment, species, and backgrounds in the 2014 version of the book. There are a few exceptions; the following options don’t appear in the 2024 book and are still usable from 2014: 
  Knowledge Domain (Cleric subclass) 
  Nature Domain (Cleric subclass) 
  Tempest Domain (Cleric subclass) 
@@ -44,7 +43,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  Martial Adept (feat) 
  Any subclass, spell, or feat from Xanathar’s Guide to Everything or Tasha’s Cauldron of Everything that appears in this book replaces the version that appears in the Everything book. 
  Classes 
- The 2024  Player’s Handbook  includes twelve classes for player characters, and each class includes four subclasses. 
+ The 2024 Player’s Handbook includes twelve classes for player characters, and each class includes four subclasses. 
  New Subclass Names 
  The Updated Subclasses table lists new names for some subclasses. 
  Updated Subclasses 
@@ -681,7 +680,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  Evoker: Three revised features 
  Illusionist: Two new features and two revised features 
  Origins 
- The 2024  Player’s Handbook  lists sixteen backgrounds and ten species for player characters, including the following new options: 
+ The 2024 Player’s Handbook lists sixteen backgrounds and ten species for player characters, including the following new options: 
  Backgrounds 
  Farmer 
  Guard 
@@ -696,9 +695,9 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  Goliath 
  Orc 
  Feats 
- The 2024  Player’s Handbook  contains seventy-five feats, including thirty-seven new feats and thirty-five revised feats. Feats are divided into four categories: Origin, General, Fighting Style, and Epic Boon. 
+ The 2024 Player’s Handbook contains seventy-five feats, including thirty-seven new feats and thirty-five revised feats. Feats are divided into four categories: Origin, General, Fighting Style, and Epic Boon. 
  Equipment 
- The 2024  Player’s Handbook  provides the following changes to equipment: 
+ The 2024 Player’s Handbook provides the following changes to equipment: 
  Two revised weapon properties: Heavy , Light 
  Eight new weapon mastery properties: Cleave , Graze , Nick , Push , Sap , Slow , Topple , Vex 
  Two new weapons and three revised weapons 
@@ -707,7 +706,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  Revised adventuring gear, including three new items 
  Descriptions for all items of adventuring gear 
  Spells 
- The 2024  Player’s Handbook  provides 391 spells, including thirty new spells. The 2024 Spells table lists new, redesigned, and revised spells. 
+ The 2024 Player’s Handbook provides 391 spells, including thirty new spells. The 2024 Spells table lists new, redesigned, and revised spells. 
  2024 Spells 
  Level 
  Spell 
@@ -1153,9 +1152,9 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  9 
  Wish 
  Stat Blocks 
- The 2024  Player’s Handbook  includes an appendix of fifty-one stat blocks: twenty-one new stat blocks and twenty-six revised stat blocks. There are also three stat blocks for Rangers who can summon beast companions and twelve stat blocks related to spells. 
+ The 2024 Player’s Handbook includes an appendix of fifty-one stat blocks: twenty-one new stat blocks and twenty-six revised stat blocks. There are also three stat blocks for Rangers who can summon beast companions and twelve stat blocks related to spells. 
  Rules 
- The Rules Glossary in the 2024  Player’s Handbook  explains the following new and revised rules: 
+ The Rules Glossary in the 2024 Player’s Handbook explains the following new and revised rules: 
  New Rules 
  Ally 
  Attitude 
@@ -1229,7 +1228,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  Tremorsense 
  Unarmed Strike 
  New Terminology 
- The 2024  Player’s Handbook  uses some new terms, as shown in the Updated Terminology Table. 
+ The 2024 Player’s Handbook uses some new terms, as shown in the Updated Terminology Table. 
  Updated Terminology 
  2014 Term 
  2024 Term 
@@ -1444,7 +1443,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  View User Profile
  Send Message
  Posted Sep 3, 2024 
- Too bad you decided to kill the resistance and blade ward cantrips again. Guess you decided they were ok not being ever used after all.  
+ Too bad you decided to kill the resistance and blade ward cantrips again. Guess you decided they were ok not being ever used after all. 
  Rollback Post to Revision 
  RollBack 
  Son_of_Destiny 
@@ -1505,7 +1504,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  Send Message
  Posted Sep 4, 2024 
  Will there be an article listing all the erratas between the yet-to-arrive physical books and what's currently on dndbeyond? 
- Many issues with the book were fixed here, but it's a struggle to look for what exactly 
+ Many issues with the book were fixed here, but it's a struggle to look for what exactly 
  Rollback Post to Revision 
  RollBack 
  TheShireJedi 
@@ -1520,7 +1519,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  View User Profile
  Send Message
  Posted Sep 4, 2024 
- Spell list links to old spells. Is it intended?  
+ Spell list links to old spells. Is it intended? 
  Rollback Post to Revision 
  RollBack 
  LocopocomaLoco 
@@ -1566,7 +1565,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  View User Profile
  Send Message
  Posted Sep 4, 2024 
-  Good, but i feel that you should import ALL classes and subclasses into the 2024 players handbook. Because most people wont want to buy xanathars guide or tashas cauldron just for a couple new subclasses. 
+ Good, but i feel that you should import ALL classes and subclasses into the 2024 players handbook. Because most people wont want to buy xanathars guide or tashas cauldron just for a couple new subclasses. 
  Rollback Post to Revision 
  RollBack 
  VectorVictor_72 
@@ -1581,7 +1580,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  View User Profile
  Send Message
  Posted Sep 4, 2024 
- I think there's a LOT of good and new stuff that was updated/upgraded.  Some of the things that were changed seem kind of intuitively wrong as they conflict with written lore. Is there rationale why species or races of said species, are not automatically provided the language of their sub-group?? Drow, deep gnome (can't spell the S version), Duergar for example ---> don't get "free" undercommon. Similarly for rock gnome based on clan location could be argued to have undercommon. Sea elves should be defaulted aquan too. From a "tradional lineage" perspective, species should have built-in generic rare language suggestion/auto selection based upon lore. I'm not saying that everything has to be in the canon, but please "fix" this with the DM book. Things like the drow racial specific sign language should be built in options based upon species or subclass. Similarly, Aasimar should be provided celestial. Dragonkin and kobold should have draconic. It seems like rare languages are significantly less accessible during character creation. This means that DMs must choose on how they want to do it, since it isn't a player option to choose draconic, undercommon, deep speech, or other similarly rare languages that may be setting applicable. Short of comprehend languages or tongues.... seems like a lot of the rare languages are locked away. More structured rules for creating custom backgrounds with "starter" feats with MORE options would be nice. With the new backgrounds, there are a core set of "starter" feats, but this is pretty limited. Hopefully the DM's guide has more "starter" feats to help explain that +1 asi aren't meant to be starter and MORE structure on how to create custom backgrounds. Please tell me there isn't plans to re-release 2014 to 2024 campaign settings with minor updates to suit 5.5. We don't practically need a re-release of 5.5scag, 5.5eberron, 5.5fizbans, 5.5spelljammer, etc. A majority of the content would be recycled. Not trying to be a jerk but sell a digital upgrade for a small fee or even FREE for people who bought the base books already. I could see a $5 to $10 digital upgrade. Group some of the updates and release a "campaign addendum" rather than doing campaign rewrites. Quick rant about species / race / lineage / ancestry type issues. . . Tiefling may or may not have demon or devil related languages of abyssal or demonic. Tieflings were created due to a pretty intense set of unsavory interactions... Seems like there's some people that didn't like the Hadozee as released, but other races may be 1 generation from an unsavory act. It's just weird. It's strange how "race" is an ugly word, but we're playing pretend that these settings aren't violent, intense, racist, oppressive, tyrannical, fascist, etc. Example, why aren't Gully dwarves aren't a playable race? They weren't released as part of the dragonlance setting but they are ESSENTIAL in the books. Aghar are inherent to dragonlance books. You don't have to play them like the inept race they're typically seen as nothing is "black and white" -- this is a land of shades of gray. "Half races" aren't a thing and are seen as ugly. I don't get it. Gully dwarves should exist as a playable race that is half-dwarf and half gnome with features that are not gnome or dwarf. Turns out they're typically a canonically intellectually deficient. This is a lesson in "maybe some races shouldn't mate" perhaps? I get that corporate probably doesn't want to tell the story because of the sensitive subject and would try to re-write it. Woke management shouldn't be rewriting canon and shouldn't be removing "questionable" story elements.  
+ I think there's a LOT of good and new stuff that was updated/upgraded. Some of the things that were changed seem kind of intuitively wrong as they conflict with written lore. Is there rationale why species or races of said species, are not automatically provided the language of their sub-group?? Drow, deep gnome (can't spell the S version), Duergar for example ---> don't get "free" undercommon. Similarly for rock gnome based on clan location could be argued to have undercommon. Sea elves should be defaulted aquan too. From a "tradional lineage" perspective, species should have built-in generic rare language suggestion/auto selection based upon lore. I'm not saying that everything has to be in the canon, but please "fix" this with the DM book. Things like the drow racial specific sign language should be built in options based upon species or subclass. Similarly, Aasimar should be provided celestial. Dragonkin and kobold should have draconic. It seems like rare languages are significantly less accessible during character creation. This means that DMs must choose on how they want to do it, since it isn't a player option to choose draconic, undercommon, deep speech, or other similarly rare languages that may be setting applicable. Short of comprehend languages or tongues.... seems like a lot of the rare languages are locked away. More structured rules for creating custom backgrounds with "starter" feats with MORE options would be nice. With the new backgrounds, there are a core set of "starter" feats, but this is pretty limited. Hopefully the DM's guide has more "starter" feats to help explain that +1 asi aren't meant to be starter and MORE structure on how to create custom backgrounds. Please tell me there isn't plans to re-release 2014 to 2024 campaign settings with minor updates to suit 5.5. We don't practically need a re-release of 5.5scag, 5.5eberron, 5.5fizbans, 5.5spelljammer, etc. A majority of the content would be recycled. Not trying to be a jerk but sell a digital upgrade for a small fee or even FREE for people who bought the base books already. I could see a $5 to $10 digital upgrade. Group some of the updates and release a "campaign addendum" rather than doing campaign rewrites. Quick rant about species / race / lineage / ancestry type issues. . . Tiefling may or may not have demon or devil related languages of abyssal or demonic. Tieflings were created due to a pretty intense set of unsavory interactions... Seems like there's some people that didn't like the Hadozee as released, but other races may be 1 generation from an unsavory act. It's just weird. It's strange how "race" is an ugly word, but we're playing pretend that these settings aren't violent, intense, racist, oppressive, tyrannical, fascist, etc. Example, why aren't Gully dwarves aren't a playable race? They weren't released as part of the dragonlance setting but they are ESSENTIAL in the books. Aghar are inherent to dragonlance books. You don't have to play them like the inept race they're typically seen as nothing is "black and white" -- this is a land of shades of gray. "Half races" aren't a thing and are seen as ugly. I don't get it. Gully dwarves should exist as a playable race that is half-dwarf and half gnome with features that are not gnome or dwarf. Turns out they're typically a canonically intellectually deficient. This is a lesson in "maybe some races shouldn't mate" perhaps? I get that corporate probably doesn't want to tell the story because of the sensitive subject and would try to re-write it. Woke management shouldn't be rewriting canon and shouldn't be removing "questionable" story elements. 
  Rollback Post to Revision 
  RollBack 
  Kailaidescope 
@@ -1597,8 +1596,8 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  Send Message
  Posted Sep 5, 2024 
  Quote from VectorVictor_72 >> 
- Hopefully the DM's guide has more "starter" feats to help explain that +1 asi aren't meant to be starter and MORE structure on how to create custom backgrounds. 
-  I’m just waiting to see how they revise Oathbreaker and Death Domain personally 
+ Hopefully the DM's guide has more "starter" feats to help explain that +1 asi aren't meant to be starter and MORE structure on how to create custom backgrounds. 
+ I’m just waiting to see how they revise Oathbreaker and Death Domain personally 
  Rollback Post to Revision 
  RollBack 
  Lolgod2 
@@ -1628,7 +1627,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  Posts Quoted: 
  Reply 
  Clear All Quotes 
- Our Terms of Service and Privacy Notice have recently been updated to provide greater clarity as to how disputes are handled and transparency regarding the collection and use of personal data. Please review them here:  Terms of Service ,  Privacy Notice . By continuing to use the services, you agree to the new Terms.
+ Our Terms of Service and Privacy Notice have recently been updated to provide greater clarity as to how disputes are handled and transparency regarding the collection and use of personal data. Please review them here: Terms of Service , Privacy Notice . By continuing to use the services, you agree to the new Terms.
  Support 
  Help Portal 
  Support Forum 
@@ -1644,7 +1643,7 @@ favorites. Sign in Community Back Community Help Portal Articles Support Forum C
  Credits 
  Find us on social media 
  Download the D&D Beyond App 
- © 2017- 2024  Wizards of the Coast LLC | All Rights Reserved 
+ © 2017- 2024 Wizards of the Coast LLC | All Rights Reserved 
  Dungeons & Dragons, D&D Beyond, D&D, Wizards of the Coast, the dragon ampersand, and all other Wizards of the Coast product names, campaign settings, their respective logos, and The World's Greatest Roleplaying Game are © and trademark Wizards of the Coast in the U.S.A. and other countries. © 2024 Wizards. 
  Privacy Policy
  Terms of Service

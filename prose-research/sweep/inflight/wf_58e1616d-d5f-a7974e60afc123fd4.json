@@ -3,13 +3,14 @@
  "name": "wolfe",
  "angle": null,
  "tag": "i420-434",
- "lines": 62,
+ "lines": 69,
  "firstTs": "2026-09-06T17:27:18.842Z",
- "lastTs": "2026-09-06T17:29:39.945Z",
+ "lastTs": "2026-09-06T17:30:33.286Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 12
+  "Bash": 13,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://reactormag.com/gene-wolfe-peace-review/",
@@ -24,9 +25,9 @@
  "run": "wf_58e1616d-d5f",
  "agent": "a7974e60afc123fd4",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_58e1616d-d5f/agent-a7974e60afc123fd4.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i420-434.json",
-  "exists": false
+  "exists": true
  }
 }

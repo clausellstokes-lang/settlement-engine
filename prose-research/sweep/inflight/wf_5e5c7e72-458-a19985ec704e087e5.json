@@ -1,0 +1,21 @@
+{
+ "role": "synth",
+ "name": "leguin",
+ "angle": null,
+ "tag": null,
+ "lines": 76,
+ "firstTs": "2026-09-06T17:31:56.369Z",
+ "lastTs": "2026-09-06T17:34:00.639Z",
+ "tools": {
+  "Bash": 9,
+  "Read": 10
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "",
+ "run": "wf_5e5c7e72-458",
+ "agent": "a19985ec704e087e5",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_5e5c7e72-458/agent-a19985ec704e087e5.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

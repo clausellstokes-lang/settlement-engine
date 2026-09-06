@@ -1,0 +1,29 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i49-63",
+ "lines": 19,
+ "firstTs": "2026-09-06T17:35:10.149Z",
+ "lastTs": "2026-09-06T17:35:43.976Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 2
+ },
+ "urlsFetched": [
+  "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+  "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "https://media.wizards.com/2021/dnd/downloads/Dungeoncraft_Wild_Beyond_the_Witchlight_v1.2.pdf"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll set up a working directory and check what PDF extraction tooling is available while starting fetches.",
+ "run": "wf_f9424af6-fcf",
+ "agent": "a994fa9ed32ae012d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_f9424af6-fcf/agent-a994fa9ed32ae012d.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i49-63.json",
+  "exists": false
+ }
+}

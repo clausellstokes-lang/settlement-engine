@@ -1,129 +1,66 @@
-The Alexandrian » Random GM Tip: Awesome Dungeon Rooms 
-
+ 
+ The Alexandrian » Random GM Tip: Awesome Dungeon Rooms 
  Random GM Tip: Awesome Dungeon Rooms 
-
  January 19th, 2022 
-
- The Art of the Key breaks down how you can organize and format the room keys in your dungeon to make them easy to prep and run. But what do you actually put in the key? What do you fill your dungeon rooms with?
-
- Every dungeon is a unique snowflake, but my general process is:
-
- Make a list of ideas. “Section of dungeon that looks like a Mongolian temple,” “dracolisk hatchery,” etc. Often this is just a list of cool/necessary rooms that I want to include, riffing on the general theme or purpose of the dungeon. (You can use techniques like the Goblin Ampersand to juice a basic concept and help spur your creativity.)
-
- Draw the dungeon map, making sure to include all the cool ideas. (This will often involve combining multiple ideas into a single area to make them cooler in combo.)
-
- Flesh out the key.
-
- “Fleshing out the key” covers a variety of sins, but our key tip today for making awesome dungeon rooms is to avoid having rooms that are just one thing* .
-
- It’s not just the room with the goblins; it’s the room with the goblins and the bubbling stewpot and the chandelier made from kobold bones.
-
- It’s not just a room with some bookshelves; it’s a room with bookshelves, a slate table with a hidden compartment, and a looted rug from the Cambarran Dynasty.
-
- A good rule of thumb here is to include at least three interactive elements (i.e., things that require or reward the players for doing more than just looking at them).
-
- There are a couple reasons why this is good praxis.
-
- First, the interplay between the elements tends to result in gameplay that’s greater than the sum of its parts: A fight with goblins is interesting. A chandelier made from kobold bones is a nice bit of set dressing. Goblins swinging on a bone chandelier during a fight? That’s awesome.
-
- Second, a room with multiple interactive bits (i.e., things that are worth checking out) will encourage the group to split up and all check out different stuff.
-
- Lisa : I’m going to scan the bookshelves for interesting titles.
-
- Roberta : Can I make a History check to learn more about the antique rug?
-
- DM : Go ahead and give me that check. Sandra, what are you doing while they do that?
-
- Sandra : I’ll examine the table in the middle of the room.
-
- If each room just has one thing for the PCs to interact with, you’ll often find the group falling into a routine where one character defaults into being “the guy who checks out the one thing in the room worth checking out.” (Usually the rogue.) If you break that up with multiple, simultaneous interactions, over the course of the dungeon you’ll make it more likely that everyone in the group will feel engaged with the exploration.
-
- * The exception are empty rooms. In my dungeons, empty rooms are rarely truly empty (in the sense of being barren and featureless). Instead, “empty” rooms commonly feature one flavorful thing which does not have a significant interaction. (“Cool mural! Okay, let’s go left.”)
-
+ The Art of the Key breaks down how you can organize and format the room keys in your dungeon to make them easy to prep and run. But what do you actually put in the key? What do you fill your dungeon rooms with? 
+ Every dungeon is a unique snowflake, but my general process is: 
+ Make a list of ideas. “Section of dungeon that looks like a Mongolian temple,” “dracolisk hatchery,” etc. Often this is just a list of cool/necessary rooms that I want to include, riffing on the general theme or purpose of the dungeon. (You can use techniques like the Goblin Ampersand to juice a basic concept and help spur your creativity.) 
+ Draw the dungeon map, making sure to include all the cool ideas. (This will often involve combining multiple ideas into a single area to make them cooler in combo.) 
+ Flesh out the key. 
+ “Fleshing out the key” covers a variety of sins, but our key tip today for making awesome dungeon rooms is to avoid having rooms that are just one thing* . 
+ It’s not just the room with the goblins; it’s the room with the goblins and the bubbling stewpot and the chandelier made from kobold bones. 
+ It’s not just a room with some bookshelves; it’s a room with bookshelves, a slate table with a hidden compartment, and a looted rug from the Cambarran Dynasty. 
+ A good rule of thumb here is to include at least three interactive elements (i.e., things that require or reward the players for doing more than just looking at them). 
+ There are a couple reasons why this is good praxis. 
+ First, the interplay between the elements tends to result in gameplay that’s greater than the sum of its parts: A fight with goblins is interesting. A chandelier made from kobold bones is a nice bit of set dressing. Goblins swinging on a bone chandelier during a fight? That’s awesome. 
+ Second, a room with multiple interactive bits (i.e., things that are worth checking out) will encourage the group to split up and all check out different stuff. 
+ Lisa : I’m going to scan the bookshelves for interesting titles. 
+ Roberta : Can I make a History check to learn more about the antique rug? 
+ DM : Go ahead and give me that check. Sandra, what are you doing while they do that? 
+ Sandra : I’ll examine the table in the middle of the room. 
+ If each room just has one thing for the PCs to interact with, you’ll often find the group falling into a routine where one character defaults into being “the guy who checks out the one thing in the room worth checking out.” (Usually the rogue.) If you break that up with multiple, simultaneous interactions, over the course of the dungeon you’ll make it more likely that everyone in the group will feel engaged with the exploration. 
+ * The exception are empty rooms. In my dungeons, empty rooms are rarely truly empty (in the sense of being barren and featureless). Instead, “empty” rooms commonly feature one flavorful thing which does not have a significant interaction. (“Cool mural! Okay, let’s go left.”) 
  Filed under: Roleplaying Games Comments (2) 
  Article tags: random gm tips 
-
- 2 Responses to “Random GM Tip: Awesome Dungeon Rooms”
-
+ 2 Responses to “Random GM Tip: Awesome Dungeon Rooms” 
  bobamk says: 
-
- If you’re at a loss for “interactive elements” one easy go-to is spoor from another room in the dungeon. If you have kobolds in Area 6, you might put a few Small sized chairs in Area 12, a dead Kobold in Area 9, or a bunch of trash and ruined Small armor piled up in Area 4.
-
- If you’re really lost on what to include, you can roll a random room in your dungeon and just include spoor from the primary feature there. You could even do this in *every* room in your dungeon once you finish the initial pass of keying. JA (as usual) has another great article on this:
-
+ If you’re at a loss for “interactive elements” one easy go-to is spoor from another room in the dungeon. If you have kobolds in Area 6, you might put a few Small sized chairs in Area 12, a dead Kobold in Area 9, or a bunch of trash and ruined Small armor piled up in Area 4. 
+ If you’re really lost on what to include, you can roll a random room in your dungeon and just include spoor from the primary feature there. You could even do this in *every* room in your dungeon once you finish the initial pass of keying. JA (as usual) has another great article on this: 
  https://thealexandrian.net/wordpress/45564/roleplaying-games/ptolus-running-the-campaign-dungeon-clues 
-
  January 19th, 2022 - 3:18 pm 
-
  Helpful NPC Thom says: 
-
- Justin,
-
- This is a great method that I use myself. Obviously, some dungeon rooms are empty (it matters when taking into account the wisdom of the late Gygax: “YOU CAN NOT HAVE A MEANINGFUL CAMPAIGN IF STRICT TIME RECORDS ARE NOT KEPT”) but the rooms with interesting features I treat like those old interactive fiction games like Zork. Generally, I’ll give an overview of the room and note the standout features with which players (with adequate skill) can then interact.
-
- Example:
-
- You enter the high priest’s drably-decorated personal chambers. Worn drapes are half-opened, granting a view of the scenery beyond. A narrow-straw stuffed bed is in the corner next to a NEATLY-ORGANIZED OAKEN DESK. Across from a SILVER CHALICE rests upon an ONYX ALTAR.
-
- Obviously, I can’t do ALLCAPS with my voice, but I try to emphasize those important features to encourage inquiring players to poke and prod at them, which then reveals further details (the silver chalice has an INSCRIPTION upon it, the desk has LOCKED drawers).
-
+ Justin, 
+ This is a great method that I use myself. Obviously, some dungeon rooms are empty (it matters when taking into account the wisdom of the late Gygax: “YOU CAN NOT HAVE A MEANINGFUL CAMPAIGN IF STRICT TIME RECORDS ARE NOT KEPT”) but the rooms with interesting features I treat like those old interactive fiction games like Zork. Generally, I’ll give an overview of the room and note the standout features with which players (with adequate skill) can then interact. 
+ Example: 
+ You enter the high priest’s drably-decorated personal chambers. Worn drapes are half-opened, granting a view of the scenery beyond. A narrow-straw stuffed bed is in the corner next to a NEATLY-ORGANIZED OAKEN DESK. Across from a SILVER CHALICE rests upon an ONYX ALTAR. 
+ Obviously, I can’t do ALLCAPS with my voice, but I try to emphasize those important features to encourage inquiring players to poke and prod at them, which then reveals further details (the silver chalice has an INSCRIPTION upon it, the desk has LOCKED drawers). 
  January 21st, 2022 - 8:02 pm 
-
- Leave a Reply
-
+ Leave a Reply 
  Name (required) 
-
  Mail (will not be published) (required) 
-
  Website 
-
- XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> 
--->
-
+ XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> -->
  Δ 
-
  JUSTIN ALEXANDER
- About - Bibliography 
- Acting Resume 
-
+ About - Bibliography Acting Resume 
 ROLEPLAYING GAMES
  Gamemastery 101 
-
  RPG Scenarios 
-
  RPG Cheat Sheets 
-
  RPG Miscellaneous 
-
  Dungeons & Dragons 
-
  Ptolus: Shadow of the Spire 
-
  Alexandrian Auxiliary 
-
  Check These Out 
-
  Essays 
-
  Other Games 
-
  Reviews 
-
  Shakespeare Sunday 
-
  Thoughts of the Day 
-
  Videos 
-
  Patrons 
-
  Open Game License 
-
- Bluesky • Mastodon • Twitter 
- 
- Archives
- Archives 
-
+ Bluesky • Mastodon • Twitter Archives Archives 
  Select Month 
  August 2026 (13) 
  July 2026 (13) 
@@ -359,52 +296,23 @@ ROLEPLAYING GAMES
  October 2005 (3) 
  August 2005 (17) 
  July 2005 (25) 
-
- Recent Posts
-
+ Recent Posts 
  Chaos Lorebook: The Magi of Chaos 
-
  Ex-RPGNet Review: A Song of Ice and Fire 
-
  Chaos Lorebook: The Earthbound Demons 
-
  Ex-RPGNet Review: Penumbra Backdrops 
-
  Chaos Lorebook: The Assassins of Chaos 
-
- Recent Comments
- Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) 
- On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal 
- Robert on Chaos Lorebook: The Magi of Chaos 
- Justin Alexander on Ptolus: Running the Campaign – From Table to Page 
- BP on Ex-RPGNet Review: A Song of Ice and Fire 
- Remus on Some Thoughts on Swords & Sorcery 
- BP on Ex-RPGNet Review: A Song of Ice and Fire 
- Ben Ferguson on Ptolus: Running the Campaign – From Table to Page 
- Jake on Ex-RPGNet Review: A Song of Ice and Fire 
- William on Ex-RPGNet Review: A Song of Ice and Fire 
-
- Author
- Read Now! - Audio Book 
-
-Author
-
+ Recent Comments Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal Robert on Chaos Lorebook: The Magi of Chaos Justin Alexander on Ptolus: Running the Campaign – From Table to Page BP on Ex-RPGNet Review: A Song of Ice and Fire Remus on Some Thoughts on Swords & Sorcery BP on Ex-RPGNet Review: A Song of Ice and Fire Ben Ferguson on Ptolus: Running the Campaign – From Table to Page Jake on Ex-RPGNet Review: A Song of Ice and Fire William on Ex-RPGNet Review: A Song of Ice and Fire 
+ Author Read Now! - Audio Book 
+ Author 
  PDF Edition 
-
  City Supplement 1: Dweredell 
-
  City Supplement 2: Aerie 
-
  City Supplement 3: Anyoc 
-
  Rule Supplement 1: Mounted Combat 
-
  Adventure: Complex of Zombies 
-
  Adventure: The Black Mist 
-
  Spells of Light and Darkness 
-
  Mythos Audio Library: Call of Cthulhu 
-
  Copyright © The Alexandrian . All rights reserved.
+ 

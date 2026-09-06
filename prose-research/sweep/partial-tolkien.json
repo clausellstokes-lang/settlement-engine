@@ -1086,6 +1086,114 @@
   }
  },
  {
+  "index": 808,
+  "feature": "impression of depth",
+  "claim": "Critics stress that Tolkien's impression of depth and historical background is what formulaic followers fail to replicate.",
+  "source": "Tolkien's impact on fantasy (Wikipedia)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien%27s_impact_on_fantasy",
+  "page": "",
+  "quote": "impression of depth",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 808,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that critics stress formulaic followers fail to replicate that depth/historical background",
+   "trueWording": "an impression of depth behind the action",
+   "note": "Raw page (curl, browser UA, HTTP 200) has 'an impression of depth' three times verbatim, plus 'an extensive history behind the action'. But the page never links depth to what imitators fail at: its imitation critique is Attebery on The Sword of Shannara, 'to evoke wonder without engaging the mind or emotions', reducing Tolkien's artistry 'to a bare formula', and Kincaid on 'multi-volume Tolkien clones'. No critic on the page is quoted saying depth/historical background is the unreplicated element.",
+   "fromFile": "verdicts-tolkien-i808-822.json"
+  }
+ },
+ {
+  "index": 813,
+  "feature": "archaism tightrope",
+  "claim": "Le Guin warned against forced archaic language as a crutch, praising Tolkien's plain clear English, concrete vocabulary that avoids 'ichor', and the principle that the style is the book.",
+  "source": "From Elfland to Poughkeepsie to The Witcher (Nick Gibney)",
+  "url": "https://nickgibney.substack.com/p/from-elfland-to-poughkeepsie-to-the",
+  "page": "",
+  "quote": "ichor",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 813,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that Le Guin warned against forced archaic language 'as a crutch'",
+   "trueWording": "the tightrope of archaic language that Le Guin warns against",
+   "note": "Substack page (HTTP 200, raw HTML stripped) quotes Le Guin verbatim: 'Tolkien writes a plain, clear English... he has no \"ichor\"; everything is direct, concrete, and simple' and 'The style, of course, is the book.' Quote 'ichor' verbatim. The archaism limb is only partly there: the page says Sapkowski and Tolkien 'neither force themselves to walk the tightrope of archaic language that Le Guin warns against'. Nothing on the page calls archaism a crutch or gives that motive; 'crutch' does not occur on the page.",
+   "fromFile": "verdicts-tolkien-i808-822.json"
+  }
+ },
+ {
+  "index": 817,
+  "feature": "six archaism categories",
+  "claim": "Epic fantasy's archaisms fall into be-perfects ('Winter is come'), be- prefixes, hither/thither, thou/thee, postposed modifiers and do-less imperatives, used to suggest a whole past speech community.",
+  "source": "The 'Ye Olde' in Epic Fantasy: 6 More Archaisms (Thoughts on Fantasy)",
+  "url": "https://thoughtsonfantasy.com/2014/08/18/the-ye-olde-in-epic-fantasy-6-more-archaisms-and-why-authors-use-them/",
+  "page": "",
+  "quote": "a whole past speech community",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 817,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that these six categories are the set epic fantasy's archaisms 'fall into'",
+   "trueWording": "a whole past speech community with a different social hierarchy",
+   "note": "All six categories are on the page as numbered items 6-11: 6 'Winter is Come' (be for have), 7 the be- prefix, 8 hither/thither adverbials, 9 thou & thee, 10 repositioning modifiers, 11 imperatives/questions (stated subject, omitted 'do'). Purpose limb verbatim: 'to suggest not just the past, but a whole past speech community'. But the post frames these as 'the remaining 6' of an eleven-item list continued from the previous week (which covered 'here be dragons', 'unsavoury louts they were', 'prithee'), so the six are not the whole taxonomy the claim implies.",
+   "fromFile": "verdicts-tolkien-i808-822.json"
+  }
+ },
+ {
+  "index": 818,
+  "feature": "thou/you deliberately contrasted",
+  "claim": "A commenter notes the Nazgûl uses thee/thou while Éowyn answers in modern 'you', and that Tolkien was very deliberate about when he used 'thou'.",
+  "source": "The 'Ye Olde' in Epic Fantasy: 6 More Archaisms (Thoughts on Fantasy)",
+  "url": "https://thoughtsonfantasy.com/2014/08/18/the-ye-olde-in-epic-fantasy-6-more-archaisms-and-why-authors-use-them/",
+  "page": "",
+  "quote": "very deliberate about when he used 'thou'",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 818,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that one commenter made both observations - they are two different commenters",
+   "trueWording": "Ksenia on Eowyn's 'you'; bdandmcfoster on Tolkien's deliberate 'thou'",
+   "note": "Both observations are in the comment thread, but by different people. Ksenia (21 Aug 2019): 'notice that Eowyn herself doesn't say \"thee\" or \"thy\", she just says \"you.\"' bdandmcfoster (16 Sep 2020): 'Tolkien was very deliberate about when he used \"thou\" and when he used \"you\", and explains this in, I think, one of the appendices.' Quote is word-for-word (page uses curly double quotes around thou). The article body separately quotes the Nazgul's thee/thy speech to Eowyn.",
+   "fromFile": "verdicts-tolkien-i808-822.json"
+  }
+ },
+ {
+  "index": 825,
+  "feature": "names and forms, not prose",
+  "claim": "My Tolkien Archive judges the parody mimics the forms (foreword, map, prologue) with lazy names, without genuine engagement with Tolkien's prose itself.",
+  "source": "Bored of the Rings: A Parody (My Tolkien Archive)",
+  "url": "https://mytolkienarchive.wordpress.com/2024/12/18/bored-of-the-rings-a-parody-of-j-r-r-tolkiens-lord-of-the-rings/",
+  "page": "",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 825,
+   "verdict": "PARTIAL",
+   "trueWording": "spends a lot of time imitating the forms of it",
+   "note": "mytolkienarchive.wordpress.com raw page. Supported: 'It certainly spends a lot of time imitating the forms of it' (cover art, the authors' statement mimicking Tolkien's Ace-paperback response, 'to the maps, the most basic story and overall shape of things') and the lazy-names limb ('Dildo Buggers! Really? That's the best you could come up with? ... Lazy.'). NOT supported: the review never discusses Tolkien's prose; its complaint is absence of affection/appreciation ('it never really feels like there's any affection there'; 'any hint that they actually appreciate the original work as anything other than a platform'). 'Foreword' appears nowhere on the page; 'prologue' appears only inside the page's blockquoted Wikipedia summary, not in the reviewer's own judgement.",
+   "unsupportedLimb": "no genuine engagement with Tolkien's prose itself - the review never mentions prose (its charge is lack of affection); 'foreword' is absent from the page and 'prologue' occurs only in the quoted Wikipedia blurb",
+   "fromFile": "verdicts-tolkien-i823-837.json"
+  }
+ },
+ {
+  "index": 829,
+  "feature": "elf operas",
+  "claim": "Shalizi's review frames the Guide as an attack on fifty years of trilogies that are debased versions of The Lord of the Rings, which Jones calls elf operas.",
+  "source": "Diana Wynne Jones, The Tough Guide to Fantasyland (Cosma Shalizi review)",
+  "url": "https://bactra.org/reviews/tough-guide-to-fantasyland/",
+  "page": "",
+  "quote": "elf operas",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 829,
+   "verdict": "PARTIAL",
+   "trueWording": "'elf operas,' as they were recently named on Usenet",
+   "note": "bactra.org raw page. Quote 'elf operas' present, and the fifty-years/debased-trilogies limb is verbatim: 'it is still, fifty years on, churning out trilogies which are debased versions of The Lord of the Rings --- ``elf operas,'' as they were recently named on Usenet.' But Shalizi credits the coinage to Usenet, not to Jones; Jones is credited only with 'an open, flagrant and ... hilarious parody'.",
+   "unsupportedLimb": "which Jones calls elf operas - Shalizi attributes the term to Usenet ('as they were recently named on Usenet'), not to Jones",
+   "fromFile": "verdicts-tolkien-i823-837.json"
+  }
+ },
+ {
   "index": 839,
   "feature": "poems set to music",
   "claim": "The production set many poems to music, with Bill Nighy singing the fall of Gil-galad and Bilbo's Last Song and Douglas Livingstone reciting the Khazad-dûm poem.",
@@ -1119,6 +1227,60 @@
    "note": "Verified on Sibley's blog: 'Gerard Murphy, who gave the series its strong narrative voice'; Christopher Tolkien's help 'included recording an audiocassette of the acceptable pronunciation of Middle-earth words and names'. But the chronology sentence reads: Tolkien 'had been adamant that the two main threads ... should not be interwoven, but should follow their own individual chronology, as they do in the book', which Sibley concluded could not 'be applied to a dramatic presentation'. The page's word is un-interwoven/individual, the opposite of the claim's 'interlaced'.",
    "unsupportedLimb": "calling the chronology Sibley rejected 'interlaced' - the page says Tolkien insisted the threads NOT be interwoven, each on its own chronology",
    "fromFile": "verdicts-tolkien-i838-852.json"
+  }
+ },
+ {
+  "index": 862,
+  "feature": "accents replacing registers",
+  "claim": "The 2017 Tolkien: Medieval and Modern post argues Jackson replaced Tolkien's speech-register distinctions (rustic hobbits, more antique Gondor and Rohan) with visual accents, turning Gandalf's conditional syntax into the flat 'The Ring is altogether evil'.",
+  "source": "How Peter Jackson's Movies Fail to Adapt Tolkien's Style (Tolkien: Medieval and Modern, 2017)",
+  "url": "https://tolkienmedievalandmodern.blogspot.com/2017/04/how-peter-jacksons-movies-fail-to-adapt.html?m=1",
+  "page": "",
+  "quote": "The Ring is altogether evil",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 862,
+   "verdict": "PARTIAL",
+   "trueWording": "Post says Jackson uses accents 'immersing them in the sounds'",
+   "note": "Register limbs all verbatim: Appendix F 'hobbits indeed spoke for the most part a rustic dialect, whereas in Gondor and Rohan a more antique language was used'; 'Jackson uses accents to convey these differences instead'; the conditional-syntax contrast and the film line 'The Ring is altogether evil' are both on the page (dated April 11, 2017).",
+   "unsupportedLimb": "Accents called 'visual' - the post treats accents as auditory ('immersing them in the sounds of Middle Earth'), explicitly distinct from the films' visuals",
+   "fromFile": "verdicts-tolkien-i853-867.json"
+  }
+ },
+ {
+  "index": 865,
+  "feature": "per-speaker register table",
+  "claim": "Kullmann and Siepmann's corpus study shows Aragorn archaic with inversions, Sam colloquial and politely hedged, Gandalf plain and commanding, Legolas and Gimli proverbial, and Gollum an idiolect of obsessive repetition and minimal syntax.",
+  "source": "Tolkien's prose style (Wikipedia)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+  "page": "Characterisation by style",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 865,
+   "verdict": "PARTIAL",
+   "trueWording": "Gollum's 'extraordinary idiolect' is Rosebury's phrase, not theirs",
+   "note": "The Fellowship table 'after Kullmann and Siepmann' supports five limbs exactly: Aragorn Archaic/literary with Inversion; Sam Colloquial, rustic, working class, 'Often politely hedged'; Gandalf Plain, flexible, Commands; Gimli and Legolas Literary with Proverbs. Kullmann and Siepmann's corpus linguistics is also stated. But Gollum is outside the table and outside their attribution.",
+   "unsupportedLimb": "Gollum's idiolect of obsessive repetition and minimal syntax - the page attributes that to Brian Rosebury; Kullmann and Siepmann are cited only for Gollum's 'non-standard speech'",
+   "fromFile": "verdicts-tolkien-i853-867.json"
+  }
+ },
+ {
+  "index": 872,
+  "feature": "hostile critics on diction",
+  "claim": "Stimpson accused Tolkien of shunning ordinary diction and Moorcock called the style comforting and unchallenging, charges Rosebury refuted by showing plain modern English.",
+  "source": "Tolkien's prose style (Wikipedia)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+  "page": "",
+  "quote": "ordinary diction",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 872,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that Rosebury refuted Moorcock's charge — the page ties Rosebury's reply only to Stimpson's attack, never to Moorcock",
+   "trueWording": "Rosebury 'systematically replies to each item in Stimpson's attack'",
+   "note": "Quote verbatim and the two accusations are exact. Lead and 'Criticism' section: Stimpson 'wrote in 1969 that Tolkien not only \"shun[s] ordinary diction, he also wrenches syntax\"'; 'In 1978 ... Michael Moorcock, in his essay Epic Pooh, criticized Tolkien for utilizing a comforting and unchallenging writing style'. Rosebury limb: 'The scholar of humanities Brian Rosebury systematically replies to each item in Stimpson's attack, showing that Tolkien mostly uses plain modern English.' The page confines Rosebury's rebuttal to Stimpson; the claim's plural 'charges Rosebury refuted' extends it to Moorcock, which the page does not support. Note also the page says 'mostly uses plain modern English'.",
+   "fromFile": "verdicts-tolkien-i868-873.json"
   }
  }
 ]

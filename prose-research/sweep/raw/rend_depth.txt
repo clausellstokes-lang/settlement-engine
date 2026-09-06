@@ -62,10 +62,10 @@ The impression of depth in The Lord of the Rings is an aesthetic effect delibera
  ↑ In a letter written after the publication of The Lord of the Rings , Tolkien writes that "actually bridle was casually and carelessly used for what I suppose should have been called a headstall ... Glorfindel's horse would have an ornamental headstall , carrying a plume, and with the straps studded with jewels and small bells; but Glor[findel] would certainly not use a bit . I will change bridle and bit to headstall ." [ T 12 ] 
  References 
  Primary 
- 1 2 3 4 Tolkien 1983 , p.   72, "Sir Gawain and the Green Knight" 
+ 1 2 3 4 Tolkien 1983 , p. 72, "Sir Gawain and the Green Knight" 
  1 2 3 4 Carpenter 2023 , Letter #247 to Colonel Worskett, 20 September 1963 
  ↑ Tolkien 1954a , book 1, ch. 11 "A Knife in the Dark" 
- 1 2 Tolkien 1983 , p.   27, "The Monsters and the Critics" 
+ 1 2 Tolkien 1983 , p. 27, "The Monsters and the Critics" 
  1 2 Carpenter 2023 , Letter #131 to Milton Waldman , late in 1951 
  ↑ Tolkien 1954a , book 2, ch. 2 " The Council of Elrond " 
  1 2 Tolkien 1954 , book 4, ch. 10, "The Choices of Master Samwise" 
@@ -77,34 +77,34 @@ The impression of depth in The Lord of the Rings is an aesthetic effect delibera
  ↑ Tolkien 1954a , book 1, ch. 7 "In the House of Tom Bombadil" 
  ↑ Tolkien 1954 , book 3, ch. 5, "The White Rider" 
  Secondary 
- ↑ Shippey 2005 , pp.   351–352. 
- 1 2 3 4 Shippey 2005 , pp.   259–261. 
- 1 2 Ferdynus 2016 , pp.   32–42. 
- ↑ Shippey 2005 , pp.   364–365. 
- 1 2 3 4 5 6 7 8 9 10 11 12 13 Drout, Hitotsubashi & Scavera 2014 , pp.   167–211. 
- 1 2 3 4 5 6 Nagy 2003 , pp.   239–258. 
- ↑ Shippey 2005 , pp.   324–328. 
- ↑ Shippey 2005 , pp.   115–118. 
- ↑ Dickerson 2006 , p.   7. 
- 1 2 3 4 5 Sipahi 2016 , pp.   93–95. 
- 1 2 Brook-Rose 1981 , p.   247. 
- ↑ Shippey 2005 , pp.   364–365, where Shippey points also to pp. 129, 203, and notes 5 and 10 on pp. 441–441. 
+ ↑ Shippey 2005 , pp. 351–352. 
+ 1 2 3 4 Shippey 2005 , pp. 259–261. 
+ 1 2 Ferdynus 2016 , pp. 32–42. 
+ ↑ Shippey 2005 , pp. 364–365. 
+ 1 2 3 4 5 6 7 8 9 10 11 12 13 Drout, Hitotsubashi & Scavera 2014 , pp. 167–211. 
+ 1 2 3 4 5 6 Nagy 2003 , pp. 239–258. 
+ ↑ Shippey 2005 , pp. 324–328. 
+ ↑ Shippey 2005 , pp. 115–118. 
+ ↑ Dickerson 2006 , p. 7. 
+ 1 2 3 4 5 Sipahi 2016 , pp. 93–95. 
+ 1 2 Brook-Rose 1981 , p. 247. 
+ ↑ Shippey 2005 , pp. 364–365, where Shippey points also to pp. 129, 203, and notes 5 and 10 on pp. 441–441. 
  ↑ Sas 2019 , Article 9. 
  Sources 
  "},"doi-access":{"wt":"free"}},"i":5}},"\n* ",{"template":{"target":{"wt":"cite book ","href":"./Template:Cite_book"},"params":{"last":{"wt":"Nagy"},"first":{"wt":"Gergely"},"author-link":{"wt":"Gergely Nagy (scholar)"},"chapter":{"wt":"The great chain of reading: (inter-)textual relations and the technique of mythopoesis in the Turin Story"},"editor-last":{"wt":"Chance"},"editor-first":{"wt":"Jane"},"editor-link":{"wt":"Jane Chance"},"title":{"wt":"Tolkien the Medievalist"},"chapter-url":{"wt":"https://books.google.com/books?id=PQSpu0lU8K4C&pg=PT279"},"year":{"wt":"2003"},"publisher":{"wt":"[[Routledge]]"},"isbn":{"wt":"978-1-134-43970-6"},"at":{"wt":"Part 4, ch. 15, pp. 239-258"}},"i":6}},"\n* ",{"template":{"target":{"wt":"cite journal ","href":"./Template:Cite_journal"},"params":{"last":{"wt":"Sas"},"first":{"wt":"Katherine"},"year":{"wt":"2019"},"title":{"wt":"A Sense of Darker Perspective: How the Marauders Convey Tolkien's 'Impression of Depth' in Harry Potter and the Prisoner of Azkaban"},"journal":{"wt":"[[Mythlore]]"},"volume":{"wt":"38"},"issue":{"wt":"1"},"at":{"wt":"Article 9"},"url":{"wt":"https://dc.swosu.edu/mythlore/vol38/iss1/9"}},"i":7}},"\n* ",{"template":{"target":{"wt":"cite book ","href":"./Template:Cite_book"},"params":{"last":{"wt":"Shippey"},"first":{"wt":"Tom"},"author-link":{"wt":"Tom Shippey"},"title":{"wt":"[[The Road to Middle-Earth]]"},"date":{"wt":"2005"},"edition":{"wt":"Third"},"orig-year":{"wt":"1982"},"publisher":{"wt":"[[HarperCollins]]"},"isbn":{"wt":"978-0261102750"}},"i":8}},"\n* ",{"template":{"target":{"wt":"cite book ","href":"./Template:Cite_book"},"params":{"last":{"wt":"Sipahi"},"first":{"wt":"Peri"},"title":{"wt":"'A Mighty Matter of Legend': Tolkien's Rohirrim. A Source Study"},"url":{"wt":"https://books.google.com/books?id=9lR4DwAAQBAJ&pg=PA93"},"year":{"wt":"2016"},"publisher":{"wt":"Tectum Wissenschaftsverlag"},"isbn":{"wt":"978-3-8288-6568-6"}},"i":9}},"\n* ",{"template":{"target":{"wt":"ME-ref","href":"./Template:ME-ref"},"params":{"1":{"wt":"FOTR"}},"i":10}},"\n* ",{"template":{"target":{"wt":"ME-ref","href":"./Template:ME-ref"},"params":{"1":{"wt":"TT"}},"i":11}},"\n* ",{"template":{"target":{"wt":"ME-ref","href":"./Template:ME-ref"},"params":{"1":{"wt":"Silm"}},"i":12}},"\n* ",{"template":{"target":{"wt":"ME-ref","href":"./Template:ME-ref"},"params":{"1":{"wt":"Monsters"}},"i":13}},"\n",{"template":{"target":{"wt":"refend","href":"./Template:Refend"},"params":{},"i":14}}]}' id="mwAvo"> 
- Brook-Rose, Christine (1981). A rhetoric of the unreal   : studies in narrative and structure, especially of the fantastic . Cambridge University Press . ISBN   978-0-521-22561-8 . OCLC   7197513 . 
- Carpenter, Humphrey , ed. (2023) [1981]. The Letters of J. R. R. Tolkien : Revised and Expanded Edition . New York: HarperCollins . ISBN   978-0-35-865298-4 . 
- Dickerson, Matthew (2006). Ents, Elves, and Eriador: The Environmental Vision of J.R.R. Tolkien . University Press of Kentucky . ISBN   978-0-8131-7159-3 . 
- Drout, Michael D. C. ; Hitotsubashi, Namiko; Scavera, Rachel (2014). "Tolkien's Creation of the Impression of Depth". Tolkien Studies . 11 (1): 167– 211. doi : 10.1353/tks.2014.0008 . ISSN   1547-3163 . S2CID   170851865 . 
+ Brook-Rose, Christine (1981). A rhetoric of the unreal : studies in narrative and structure, especially of the fantastic . Cambridge University Press . ISBN 978-0-521-22561-8 . OCLC 7197513 . 
+ Carpenter, Humphrey , ed. (2023) [1981]. The Letters of J. R. R. Tolkien : Revised and Expanded Edition . New York: HarperCollins . ISBN 978-0-35-865298-4 . 
+ Dickerson, Matthew (2006). Ents, Elves, and Eriador: The Environmental Vision of J.R.R. Tolkien . University Press of Kentucky . ISBN 978-0-8131-7159-3 . 
+ Drout, Michael D. C. ; Hitotsubashi, Namiko; Scavera, Rachel (2014). "Tolkien's Creation of the Impression of Depth". Tolkien Studies . 11 (1): 167– 211. doi : 10.1353/tks.2014.0008 . ISSN 1547-3163 . S2CID 170851865 . 
  Ferdynus, Katarzyna (2016). "The Shadow of the Past. The Lord of the Rings and the Gothic Novel" . New Horizons in English Studies . 1 (1): 32– 42. doi : 10.17951/nh.2016.1.32 . 
- Nagy, Gergely (2003). "The great chain of reading: (inter-)textual relations and the technique of mythopoesis in the Turin Story" . In Chance, Jane (ed.). Tolkien the Medievalist . Routledge . Part 4, ch. 15, pp. 239-258. ISBN   978-1-134-43970-6 . 
+ Nagy, Gergely (2003). "The great chain of reading: (inter-)textual relations and the technique of mythopoesis in the Turin Story" . In Chance, Jane (ed.). Tolkien the Medievalist . Routledge . Part 4, ch. 15, pp. 239-258. ISBN 978-1-134-43970-6 . 
  Sas, Katherine (2019). "A Sense of Darker Perspective: How the Marauders Convey Tolkien's 'Impression of Depth' in Harry Potter and the Prisoner of Azkaban" . Mythlore . 38 (1). Article 9. 
- Shippey, Tom (2005) [1982]. The Road to Middle-Earth (Third   ed.). HarperCollins . ISBN   978-0261102750 . 
- Sipahi, Peri (2016). 'A Mighty Matter of Legend': Tolkien's Rohirrim. A Source Study . Tectum Wissenschaftsverlag. ISBN   978-3-8288-6568-6 . 
- Tolkien, J. R. R. (1954a). The Fellowship of the Ring . The Lord of the Rings . Boston: Houghton Mifflin . OCLC   9552942 . 
- Tolkien, J. R. R. (1954). The Two Towers . The Lord of the Rings . Boston: Houghton Mifflin . OCLC   1042159111 . 
- Tolkien, J. R. R. (1977). Christopher Tolkien (ed.). The Silmarillion . Boston: Houghton Mifflin . ISBN   978-0-395-25730-2 . 
- Tolkien, J. R. R. (1983). The Monsters and the Critics, and Other Essays . London: Allen & Unwin . OCLC   417591085 . 
+ Shippey, Tom (2005) [1982]. The Road to Middle-Earth (Third ed.). HarperCollins . ISBN 978-0261102750 . 
+ Sipahi, Peri (2016). 'A Mighty Matter of Legend': Tolkien's Rohirrim. A Source Study . Tectum Wissenschaftsverlag. ISBN 978-3-8288-6568-6 . 
+ Tolkien, J. R. R. (1954a). The Fellowship of the Ring . The Lord of the Rings . Boston: Houghton Mifflin . OCLC 9552942 . 
+ Tolkien, J. R. R. (1954). The Two Towers . The Lord of the Rings . Boston: Houghton Mifflin . OCLC 1042159111 . 
+ Tolkien, J. R. R. (1977). Christopher Tolkien (ed.). The Silmarillion . Boston: Houghton Mifflin . ISBN 978-0-395-25730-2 . 
+ Tolkien, J. R. R. (1983). The Monsters and the Critics, and Other Essays . London: Allen & Unwin . OCLC 417591085 . 
  v t e The Lord of the Rings 
  J. R. R. Tolkien 
  Constructing The Lord of the Rings 

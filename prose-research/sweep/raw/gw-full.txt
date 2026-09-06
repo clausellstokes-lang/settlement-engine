@@ -59,18 +59,18 @@
  License: CC BY 4.0
 arXiv:2601.18353v1 [cs.AI] 26 Jan 2026 
  Can Good Writing Be Generative? Expert-Level AI Writing Emerges through Fine-Tuning on High-Quality Books 
- Conference:  Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems; April 13–17, 2026; Barcelona, Spain Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI ’26), April 13–17, 2026, Barcelona, Spain DOI:  10.1145/3772318.3791276 ISBN:  979-8-4007-2278-3/2026/04 Conference:  Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems; April 13–17, 2026; Barcelona, Spain Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI ’26), April 13–17, 2026, Barcelona, Spain DOI:  10.1145/3772318.3791276 ISBN:  979-8-4007-2278-3/2026/04 CCS:  Human-centered computing Empirical studies in HCI CCS:  Human-centered computing Empirical studies in collaborative and social computing CCS:  Computing methodologies Natural language generation 
+ Conference: Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems; April 13–17, 2026; Barcelona, Spain Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI ’26), April 13–17, 2026, Barcelona, Spain DOI: 10.1145/3772318.3791276 ISBN: 979-8-4007-2278-3/2026/04 Conference: Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems; April 13–17, 2026; Barcelona, Spain Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI ’26), April 13–17, 2026, Barcelona, Spain DOI: 10.1145/3772318.3791276 ISBN: 979-8-4007-2278-3/2026/04 CCS: Human-centered computing Empirical studies in HCI CCS: Human-centered computing Empirical studies in collaborative and social computing CCS: Computing methodologies Natural language generation 
  Tuhin Chakrabarty
- Affiliation:  Stony Brook University , Stony Brook , NY , USA 
+ Affiliation: Stony Brook University , Stony Brook , NY , USA 
  email: tchakrabarty@cs.stonybrook.edu 
  and 
  Paramveer S. Dhillon
- Affiliation:  University of Michigan , Ann Arbor , MI , USA 
+ Affiliation: University of Michigan , Ann Arbor , MI , USA 
  email: dhillonp@umich.edu 
  © cc 
  Abstract. 
  Creative writing has long been considered a uniquely human endeavor, requiring voice and style that machines could not replicate. This assumption is challenged by Generative AI that can emulate thousands of author styles in seconds with negligible marginal labor. To understand this better, we conducted a behavioral experiment where 28 MFA writers (experts) competed against three LLMs in emulating 50 critically acclaimed authors. Based on blind pairwise comparisons by 28 expert judges and 131 lay judges, we find that experts preferred human writing in 82.7% of cases under the in-context prompting condition but this reversed to 62% preference for AI after fine-tuning on authors’ complete works. Lay judges, however, consistently preferred AI writing. Debrief interviews with expert writers revealed that their preference for AI writing triggered an identity crisis, eroding aesthetic confidence and questioning what constitutes “good writing.” These findings challenge discourse about AI’s creative limitations and raise fundamental questions about the future of creative labor. 
- Keywords:  HCI theory, concepts and models, Large Language Models, Design Methods, Natural Language Generation, Evaluation, Creative Writing, Generative AI, Homogenization
+ Keywords: HCI theory, concepts and models, Large Language Models, Design Methods, Natural Language Generation, Evaluation, Creative Writing, Generative AI, Homogenization
  † † cc-license: by † † cc-license: by 
  1. Introduction 
  In his book “The Program Era" ( McGurl, 2011 ) , eminent literary critic Mark McGurl discussed how " The rise of the creative-writing program stands as the most important event in postwar American literary history. " In these programs, "Show, don’t tell," which was a slogan in the nineteen-forties and fifties, shifted to an effectively opposite mantra, "Find your voice," that took over in the nineteen-sixties and seventies. McGurl observed that these guiding principles reflect evolving cultural beliefs—about identity, labor, gender, class, and notions of what counts as good writing —and that they have had a huge effect on the stories and novels that American writers have produced ( Menand, 2009 ) . McGurl’s observation about what constitutes "good writing" takes on new significance in the age of generative artificial intelligence. The same qualities that creative writing programs cultivated—coherence, voice, narrative structure—are precisely what make their literary output valuable training data for LLMs ( Gero et al., 2025 ) . Models trained on well-edited books and articles tend to generate more coherent and accurate outputs, something that’s crucial for establishing LLMs as intelligent systems. 
@@ -203,7 +203,7 @@ arXiv:2601.18353v1 [cs.AI] 26 Jan 2026
  MFA Candidate in Fiction 
  Female 
  Table 1 . Details of writers recruited for our study 
- For our writing task, we recruited 28 writers. Twenty-seven of them completed or are currently pursuing their MFA degree in top writing programs such as the Helen Zell Writers’ Program at the University of Michigan, Iowa Writers’ Workshop, Program in Creative Writing at NYU, Creative Writing Program at BU, and the MFA in Writing at Columbia School of the Arts. Sixteen of our writers identified as female, while 11 identified as male and one as non-binary. Table 1 provides details about individual writers. Our writers ranged in age from 25 to 35 and were racially diverse, identifying as Hispanic, Black, Asian, and White. Our expert sample represents the emerging literary elite whose professional judgment shapes contemporary publishing. Among our recruited MFA candidates, several have since been awarded Stanford Stegner Fellowships (one of the most competitive fiction writing fellowships in the United States), received Rhodes Scholarships, Pushcart Prize, assumed editorial positions at prestigious literary magazines such as Joyland , been awarded the Publishers Weekly Star Watch 2025 Honor and secured publishing contracts with major houses including W.W. Norton and HarperCollins. Additionally almost each of the recruited writers have had their fiction published in prestigious literary magazines such as The Yale Review, The Greensboro Review, Southampton Review, 
+ For our writing task, we recruited 28 writers. Twenty-seven of them completed or are currently pursuing their MFA degree in top writing programs such as the Helen Zell Writers’ Program at the University of Michigan, Iowa Writers’ Workshop, Program in Creative Writing at NYU, Creative Writing Program at BU, and the MFA in Writing at Columbia School of the Arts. Sixteen of our writers identified as female, while 11 identified as male and one as non-binary. Table 1 provides details about individual writers. Our writers ranged in age from 25 to 35 and were racially diverse, identifying as Hispanic, Black, Asian, and White. Our expert sample represents the emerging literary elite whose professional judgment shapes contemporary publishing. Among our recruited MFA candidates, several have since been awarded Stanford Stegner Fellowships (one of the most competitive fiction writing fellowships in the United States), received Rhodes Scholarships, Pushcart Prize, assumed editorial positions at prestigious literary magazines such as Joyland , been awarded the Publishers Weekly Star Watch 2025 Honor and secured publishing contracts with major houses including W.W. Norton and HarperCollins. Additionally almost each of the recruited writers have had their fiction published in prestigious literary magazines such as The Yale Review, The Greensboro Review, Southampton Review, 
  The Missouri Review, Joyland Magazine, Iowa Review . These accomplishments underscore that our experts represent not merely MFA candidates, but established and emerging voices whose aesthetic judgments carry professional authority in the literary marketplace. We acknowledge that all our recruited experts resided in the United States at the time of the study. This geographic restriction was necessary for administrative compliance, as U.S. tax regulations require declaration of compensation above certain thresholds, and the university’s payment infrastructure could not accommodate international participants without Individual Taxpayer Identification Numbers (ITINs) or Social Security Numbers (SSNs). 
  # 
  Author 
@@ -314,7 +314,7 @@ arXiv:2601.18353v1 [cs.AI] 26 Jan 2026
  Table 2. Author list for our pool of 50 authors. (✓) denotes authors who were used in the fine-tuning experiment. 
  Figure 2 . Writing Prompt to emulate Ottessa Moshfegh’s style/voice Writing prompt document titled "Ottessa Moshfegh Writing Style Analysis." The prompt presents 20 numbered excerpts from Moshfegh's works arranged in two columns, followed by a "Stylistic Features" section describing her writing as spanning memoir, magical realism, and historical fiction with amoral, frank, and bleakly funny characters. A "Content" section describes a specific scene involving the narrator, a character named Reva, and September 11 imagery. The prompt concludes with instructions highlighted in yellow: "Now write a 250 word excerpt about the content above emulating the style and voice of the author as seen in the 20 excerpts and the mentioned stylistic features." 
  3.1.2. Designing writing task for humans 
- As mentioned earlier, to improve AI writing, practitioners increasingly prompt AI systems to perform style mimicry by emulating specific writers’ choices   ( Chiang, 2024 ) . While the effectiveness of such stylistic emulation remains contested, the more pressing question concerns whether style mimicry genuinely improves the quality of AI-generated text and whether judges perceive these improvements as meaningful. To address this question, in collaboration with 5 English Ph.D. students we selected 50 internationally acclaimed published authors with distinct literary style/voice (See Table 2 ). To ensure consistency in the writing task, we provided each writer with an author-specific writing prompt. Each prompt consisted of three components: (i) twenty sample excerpts spanning an author’s complete body of work, (ii) textual descriptions of the author’s distinctive style and voice, and (iii) detailed content specifications about the original author-written excerpt that participants were required to emulate. These writing prompts were developed in collaboration with the 5 English Literature Ph.D. students who analyzed each author’s literary voice and created the verbalized style descriptions. The 20 excerpts from the authors were chosen manually after closer inspection for the in-context prompt. Figure 2 shows an example of a writing prompt. Writers could choose the author they wished to emulate and were compensated $75 for each writing task. The excerpts in this task ranged from 200-450 words. Each author was assigned to exactly three writers to ensure balanced representation. In terms of length of the excerpts we had strict requirements around adhering to the length of the original author-written excerpts. For 50 authors we thereby obtained a total of 150 excerpts. Almost every writer wrote more than two excerpts for the purpose of the study. Refer to Figure 8 in Appendix for the themes of the emulated excerpts. For the purpose of the study, MFA-trained expert writers had no time limitation to submit these excerpts and were encouraged to take as long as required to produce their best work. 
+ As mentioned earlier, to improve AI writing, practitioners increasingly prompt AI systems to perform style mimicry by emulating specific writers’ choices ( Chiang, 2024 ) . While the effectiveness of such stylistic emulation remains contested, the more pressing question concerns whether style mimicry genuinely improves the quality of AI-generated text and whether judges perceive these improvements as meaningful. To address this question, in collaboration with 5 English Ph.D. students we selected 50 internationally acclaimed published authors with distinct literary style/voice (See Table 2 ). To ensure consistency in the writing task, we provided each writer with an author-specific writing prompt. Each prompt consisted of three components: (i) twenty sample excerpts spanning an author’s complete body of work, (ii) textual descriptions of the author’s distinctive style and voice, and (iii) detailed content specifications about the original author-written excerpt that participants were required to emulate. These writing prompts were developed in collaboration with the 5 English Literature Ph.D. students who analyzed each author’s literary voice and created the verbalized style descriptions. The 20 excerpts from the authors were chosen manually after closer inspection for the in-context prompt. Figure 2 shows an example of a writing prompt. Writers could choose the author they wished to emulate and were compensated $75 for each writing task. The excerpts in this task ranged from 200-450 words. Each author was assigned to exactly three writers to ensure balanced representation. In terms of length of the excerpts we had strict requirements around adhering to the length of the original author-written excerpts. For 50 authors we thereby obtained a total of 150 excerpts. Almost every writer wrote more than two excerpts for the purpose of the study. Refer to Figure 8 in Appendix for the themes of the emulated excerpts. For the purpose of the study, MFA-trained expert writers had no time limitation to submit these excerpts and were encouraged to take as long as required to produce their best work. 
  3.1.3. Designing the writing task for LLMs 
  Like human writers we asked LLMs to perform the same writing task. In particular our experiments involved two approaches i) In-context Prompting ii) Fine-tuning. See Figure 1 for more details. 
  In-context Prompting: 
@@ -332,8 +332,8 @@ arXiv:2601.18353v1 [cs.AI] 26 Jan 2026
  9 
  measures the longest common subsequence between the generated text and reference text (ranging from ∼ \sim 0.16 to ∼ \sim 0.23) indicate relatively very low overlap between the AI-generated text and the original author-written excerpt. 
  Figure 5 . Number of tokens used for in-context prompting. Lollipop chart displaying the number of tokens used for in-context prompting across 50 authors, arranged in two columns of 25 authors each. Authors are sorted by token count in descending order, with horizontal lines extending from author names to circular markers indicating token values. The scale ranges from 0 to approximately 11K tokens, with values varying from around 4.5K to 10.6K tokens per author. 
- There is a significant difference in terms of how data intensive the two different LLM conditions are. Figures 5 ,  6 show that fine-tuning requires 583 times more number of tokens on average compared to In-context Prompting. For the in-context prompting setup, we therefore end up with 150 < H ​ u ​ m ​ a ​ n , A ​ I > <Human,AI> pairs and for fine-tuning setup we end up with 90 < H ​ u ​ m ​ a ​ n , A ​ I > <Human,AI> pairs. 
- Figure 6 . Number of training tokens for Fine-tuning. Fine-tuning requires 583 times more tokens on average compared to prompting (cf. Figure  5 ) Lollipop chart displaying the number of training tokens used for fine-tuning across 30 authors in a single column. Authors are sorted by token count in descending order, with horizontal lines extending from author names to circular markers indicating token values. The scale ranges from 0 to 12 million tokens, with values varying from approximately 0.9M to 10.9M tokens per author. Fine-tuning requires 583 times more tokens on average compared to in-context prompting. 
+ There is a significant difference in terms of how data intensive the two different LLM conditions are. Figures 5 , 6 show that fine-tuning requires 583 times more number of tokens on average compared to In-context Prompting. For the in-context prompting setup, we therefore end up with 150 < H ​ u ​ m ​ a ​ n , A ​ I > <Human,AI> pairs and for fine-tuning setup we end up with 90 < H ​ u ​ m ​ a ​ n , A ​ I > <Human,AI> pairs. 
+ Figure 6 . Number of training tokens for Fine-tuning. Fine-tuning requires 583 times more tokens on average compared to prompting (cf. Figure 5 ) Lollipop chart displaying the number of training tokens used for fine-tuning across 30 authors in a single column. Authors are sorted by token count in descending order, with horizontal lines extending from author names to circular markers indicating token values. The scale ranges from 0 to 12 million tokens, with values varying from approximately 0.9M to 10.9M tokens per author. Fine-tuning requires 583 times more tokens on average compared to in-context prompting. 
  3.1.4. Choice and Nature of Writing Task 
  Coming up with ideas or content and putting them into words fundamentally requires style and voice because the same content becomes radically different literature depending on how it is rendered. Edward P. J. Corbett’s classic article The Theory and Practice of Imitation in Classical Rhetoric ( Corbett, 1971 ) documents how imitation was central to learning to write and speak effectively, and later composition scholars have argued for a revival of sentence- and style-imitation exercises in contemporary teaching. Eugène-Melchior de Vogüé, discussing Russian realist writers, said: We all came out from under Gogol’s Overcoat. Developing one’s own distinct literary style and voice often takes years, and many young writers subconsciously borrow from other authors’ styles. In the Paris Review, American author Benjamin Nugent acknowledged that he spent much of his twenties trying to imitate George Saunders ( Nugent, 2020 ) . This has also been acknowledged by George Saunders himself, who teaches at Syracuse. In his words: Kids come [into the Creative Writing program] and imitate other writers ( Vander Ark, 2018 ) . This made MFA-trained writers an ideal choice for our task; while developing their own voices, they are heavily influenced by other writers. We also gave our MFA-trained expert writers the choice of which author they wanted to emulate. This reduced any possible friction and made the writing task effortless and enjoyable. 
  While our task doesn’t require participants to write an original story in their own voice, it should still be noted that our writing task requires originality under explicit content constraints. Although both AI and human writers received prompts with detailed content specifications, composing literary fiction and creative nonfiction still requires agency—especially in deliberate choices of words, syntax, voice, and narrative framing—to produce novel, coherent prose. Consider the Marilynne Robinson excerpt in Table 4 : the prose achieves its effect not through plot mechanics but through the accretion of syntactic choices such as the cascading dependent clauses, the modulation between concrete image and abstract reflection as well as the deliberate withholding of punctuated closure. These are not features one can specify in a prompt; they emerge from compositional judgment exercised sentence by sentence. Because literary fiction and creative nonfiction are inherently non-formulaic, the writing task extends beyond style imitation to creative composition, making it different from mere parody or pastiche. 
@@ -342,7 +342,7 @@ arXiv:2601.18353v1 [cs.AI] 26 Jan 2026
  3.2.1. Recruitment of Judges 
  For evaluation purposes, we rely on both experts as well as the average lay human as judges. We recruit the same 28 writers who act as expert judges. All the writers recruited in our study have teaching experience in the US, as it’s mandatory for them as a part of their MFA curriculum to act as instructors for undergraduate writing classes. Expert writers however aren’t always the representative consumer base. For this purpose we rely on 131 lay judges recruited from Prolific. Given the challenging nature of the evaluation task, we restricted ourselves to English-speaking countries (USA and UK). We also required participants to be born in these countries and have a 100% acceptance rate, be college-educated. It should be noted that expert judges (who served as participants in the writing task) never evaluated their own work. 
  3.2.2. Evaluation Setup 
- As shown in Figure 1 Phase 2, evaluators are shown a pair of < H ​ u ​ m ​ a ​ n w ​ r ​ i ​ t ​ t ​ e ​ n <Human_{written} , A ​ I g ​ e ​ n ​ e ​ r ​ a ​ t ​ e ​ d > AI_{generated}> excerpts centered around the exact same content for Writing Quality evaluation. Because style is judged with respect to a reference for Stylistic Fidelity evaluation, evaluators are shown a triple of < O ​ r ​ i ​ g ​ i ​ n ​ a ​ l , H ​ u ​ m ​ a ​ n w ​ r ​ i ​ t ​ t ​ e ​ n <Original,Human_{written} , A ​ I g ​ e ​ n ​ e ​ r ​ a ​ t ​ e ​ d > AI_{generated}> . We never notified our participants at any point during the study whether any given text was human-written or AI-generated due to the psychological bias associated with AI-writing  ( Li et al., 2024 ; Sarkar, 2025 ; Ling and Imas, 2025 ) . They are then required to submit their preference about which excerpt has better writing quality and which excerpt is closer to the original in terms of stylistic fidelity. Prior work ( McDonnell et al., 2016 ) has shown that requiring annotators to supply a rationale with each judgment increases transparency into how the decision was made and supports quality control/adjudication. Motivated by this, we asked both expert and lay judges to provide 2-5 sentence rationales grounded in snippets from these excerpts, explaining their preference (See A.3 in Appendix for more detail). These preferences along with rationales helped us understand both quantitatively and qualitatively the extent to which experts and lay judges agree or disagree on what qualifies as “good writing" or which excerpt is closer to the style of the original author and, more specifically, what lines of reasoning each group uses for their respective preferences. We paid participants $75 to evaluate a batch of 10 pairs of excerpts for Writing Quality and $100 for a batch of 10 for Stylistic Fidelity. Three distinct experts and five distinct lay judges evaluated each < H ​ u ​ m ​ a ​ n ​ _ ​ w ​ r ​ i ​ t ​ t ​ e ​ n , A ​ I ​ _ ​ g ​ e ​ n ​ e ​ r ​ a ​ t ​ e ​ d > <Human\_written,AI\_generated> pair or < O ​ r ​ i ​ g ​ i ​ n ​ a ​ l , H ​ u ​ m ​ a ​ n w ​ r ​ i ​ t ​ t ​ e ​ n <Original,Human_{written} , A ​ I g ​ e ​ n ​ e ​ r ​ a ​ t ​ e ​ d > AI_{generated}> triple with the final decision determined through majority voting. Writers who acted as expert judges didn’t assess their own work. Figures 14 and 14 (in the Appendix) show the evaluation interfaces for each task. A curious reader might wonder why we didn’t compare the AI-generated excerpt to an excerpt written by the original human author. We couldn’t do this because the original human author’s work could be found on the internet via Google Search, or if the participants had read the original excerpt before, they would be biased to choose the original version. 
+ As shown in Figure 1 Phase 2, evaluators are shown a pair of < H ​ u ​ m ​ a ​ n w ​ r ​ i ​ t ​ t ​ e ​ n <Human_{written} , A ​ I g ​ e ​ n ​ e ​ r ​ a ​ t ​ e ​ d > AI_{generated}> excerpts centered around the exact same content for Writing Quality evaluation. Because style is judged with respect to a reference for Stylistic Fidelity evaluation, evaluators are shown a triple of < O ​ r ​ i ​ g ​ i ​ n ​ a ​ l , H ​ u ​ m ​ a ​ n w ​ r ​ i ​ t ​ t ​ e ​ n <Original,Human_{written} , A ​ I g ​ e ​ n ​ e ​ r ​ a ​ t ​ e ​ d > AI_{generated}> . We never notified our participants at any point during the study whether any given text was human-written or AI-generated due to the psychological bias associated with AI-writing ( Li et al., 2024 ; Sarkar, 2025 ; Ling and Imas, 2025 ) . They are then required to submit their preference about which excerpt has better writing quality and which excerpt is closer to the original in terms of stylistic fidelity. Prior work ( McDonnell et al., 2016 ) has shown that requiring annotators to supply a rationale with each judgment increases transparency into how the decision was made and supports quality control/adjudication. Motivated by this, we asked both expert and lay judges to provide 2-5 sentence rationales grounded in snippets from these excerpts, explaining their preference (See A.3 in Appendix for more detail). These preferences along with rationales helped us understand both quantitatively and qualitatively the extent to which experts and lay judges agree or disagree on what qualifies as “good writing" or which excerpt is closer to the style of the original author and, more specifically, what lines of reasoning each group uses for their respective preferences. We paid participants $75 to evaluate a batch of 10 pairs of excerpts for Writing Quality and $100 for a batch of 10 for Stylistic Fidelity. Three distinct experts and five distinct lay judges evaluated each < H ​ u ​ m ​ a ​ n ​ _ ​ w ​ r ​ i ​ t ​ t ​ e ​ n , A ​ I ​ _ ​ g ​ e ​ n ​ e ​ r ​ a ​ t ​ e ​ d > <Human\_written,AI\_generated> pair or < O ​ r ​ i ​ g ​ i ​ n ​ a ​ l , H ​ u ​ m ​ a ​ n w ​ r ​ i ​ t ​ t ​ e ​ n <Original,Human_{written} , A ​ I g ​ e ​ n ​ e ​ r ​ a ​ t ​ e ​ d > AI_{generated}> triple with the final decision determined through majority voting. Writers who acted as expert judges didn’t assess their own work. Figures 14 and 14 (in the Appendix) show the evaluation interfaces for each task. A curious reader might wonder why we didn’t compare the AI-generated excerpt to an excerpt written by the original human author. We couldn’t do this because the original human author’s work could be found on the internet via Google Search, or if the participants had read the original excerpt before, they would be biased to choose the original version. 
  3.3. Debrief 
  Exploring prior relationship with technology 
  Before we discuss the evaluation results, how have technological tools shaped your writing and what are your thoughts 
@@ -519,9 +519,9 @@ arXiv:2601.18353v1 [cs.AI] 26 Jan 2026
  We conducted thematic analysis following Braun and Clarke’s six-phase framework to identify patterns in responses provided by participants to our revelation and sensemaking ( Braun and Clarke, 2006 ) . The authors of the paper independently conducted initial open coding of the transcripts, generating preliminary codes through line-by-line analysis. Through iterative discussion and comparison, we refined these codes and organized them into higher-level themes. This process therefore involved moving recursively between the coded data and emerging theme definitions, consistent with the reflexive thematic analysis approach ( Braun and Clarke, 2019 ) . Disagreements were resolved by consensus; unresolved alternatives were recorded as divergence memos and checked against additional data. Our analysis revealed five primary themes characterizing how participants made sense of others as well as their own earlier aesthetic preferences upon learning the content was AI-generated (Table 7 ). Next, we describe these analytic themes and use brief data extracts to illustrate and support them. 
  Criteria Reframing describes instances in which participants recognize a mismatch between the criteria they actually used to evaluate the excerpts and the properties they report valuing in high-quality or “authentic” writing. These realizations prompt them to reconsider what, for them, constitutes “good writing” and whether their evaluative standards remain appropriate in light of AI’s capabilities. For example, W10 noted having been “looking primarily for just readability” and worrying that they “might [have] gone for the easier as opposed to the more unique or something newer,” thereby acknowledging a tendency to privilege fluency over distinctiveness. Such reflections illustrate how participants move from treating their own criteria as largely implicit to subjecting them to more explicit scrutiny in response to encounters with AI-generated prose. 
  Process Attribution concerns how participants, once informed that a preferred excerpt was AI-generated, sought to account for differences between human and machine writing processes. Many emphasized that human writing is bound up with conscious effort, time pressure, and repeated cycles of drafting and revision, whereas AI systems can generate fluent text in a single pass. As W1 put it, one advantage of AI is that it can “put out something that’s super polished on the first attempt,” in contrast to their own “slower, more lengthy process that includes a lot of revision and going back.” Such comments allow participants to reconcile AI’s strong performance with their self-understanding as writers by locating the distinction not in surface polish, but in the temporal, iterative, and effortful character of human creative work. 
- Technical Sensemaking refers to a form of post-hoc explanation grounded in participants’ (often partial) understanding of how large language models work. Rather than only expressing surprise or unease, participants attempted to reason through why the AI could produce persuasive prose by invoking ideas about training data, model scale, or computational resources. For instance, several described the model as drawing on “mass data” or “pattern-matching” across enormous corpora (see W14 in Table  7 ), using these accounts to relocate AI’s advantage in technical infrastructure rather than in any intrinsically superior “craft.” In doing so, they turned an unsettling aesthetic outcome into something that could be explained in system-level terms. 
+ Technical Sensemaking refers to a form of post-hoc explanation grounded in participants’ (often partial) understanding of how large language models work. Rather than only expressing surprise or unease, participants attempted to reason through why the AI could produce persuasive prose by invoking ideas about training data, model scale, or computational resources. For instance, several described the model as drawing on “mass data” or “pattern-matching” across enormous corpora (see W14 in Table 7 ), using these accounts to relocate AI’s advantage in technical infrastructure rather than in any intrinsically superior “craft.” In doing so, they turned an unsettling aesthetic outcome into something that could be explained in system-level terms. 
  Expectation Violation captures instances where the revelation that an excerpt was AI-generated conflicted with participants’ prior beliefs about what AI can do or about their own ability to discern human from machine-written text, echoing classic work on expectancy violation ( Burgoon, 1993 ) . After the reveal, several writers described strong affective reactions. For example, W17 reported feeling “pretty horrified” and noted, “I thought I had a better grasp of the ability to distinguish AI writing,” describing a “chilled feeling, especially as [a] writer,” and finding it “kind of scary” that the excerpts were fully generated rather than merely AI-assisted. Such accounts indicate that the experimental feedback did more than surprise participants; it destabilized their sense of epistemic control over the boundary between human and AI-authored prose. 
- Capability Reassessment denotes moments in which participants substantially revise their prior beliefs about what AI can and cannot do in creative writing tasks. After the reveal, W13 remarked being “just confused” and that they “didn’t think that it had progressed to that level of sophistication,” adding that they had “always had faith that we would be able to discern something human from something technologically manufactured.” Comments of this kind, echoed in other interviews (see W15 in Table  7 ), show participants recognizing that their earlier assumptions about AI’s limitations no longer hold and adjusting their sense of the technology’s reach in light of the excerpts they had just evaluated. 
+ Capability Reassessment denotes moments in which participants substantially revise their prior beliefs about what AI can and cannot do in creative writing tasks. After the reveal, W13 remarked being “just confused” and that they “didn’t think that it had progressed to that level of sophistication,” adding that they had “always had faith that we would be able to discern something human from something technologically manufactured.” Comments of this kind, echoed in other interviews (see W15 in Table 7 ), show participants recognizing that their earlier assumptions about AI’s limitations no longer hold and adjusting their sense of the technology’s reach in light of the excerpts they had just evaluated. 
  4.4. How does choosing AI over human writing affect writers’ professional identity and conceptions of “good writing”? 
  Similar to the process described in Section 4.3 we did thematic analysis following Braun and Clarke’s six-phase framework to identify patterns in responses to Identity Impact Questions. Our analysis revealed three primary themes characterizing how the discovery of choosing AI over human writing destabilizes writers’ understanding of what counts as "good writing" and their sense of professional identity. 
  Erosion of Aesthetic Confidence captures how the experiment unsettled writers’ prior sense that they could reliably recognize AI-generated text. Several participants reported being familiar with the “feel” of AI writing, echoing recent HCI work on readers’ sensitivity to LLM-produced prose ( Chakrabarty et al., 2024a ; Russell et al., 2025 ) , yet found that fine-tuned or carefully prompted outputs no longer fit that template. W15, who frequently edits high school essays, described themselves as “pretty good at identifying AI-generated essays” and as someone who would not typically “enjoy AI generated writing,” but nonetheless experienced the fine-tuned AI generations as “surprising and frightening.” Others drew out practical implications: W7 remarked that the study “makes me feel like I’m going to have to run all my students’ things through AI checkers now,” while W2 admitted they had “never thought a machine would be capable of style,” finding that realization “scary” and “frustrating.” W1 similarly noted that, although they felt that they are able to recognize generic AI outputs that “don’t have any stylistic markers,” the excerpts in this study “definitely” did not fit that pattern. Taken together, these reflections suggest that encounters with high-end AI emulations do not simply surprise writers; they actively erode confidence in their own aesthetic and diagnostic abilities. 
@@ -548,10 +548,10 @@ arXiv:2601.18353v1 [cs.AI] 26 Jan 2026
  5.2. How does this work contribute to the debate around Generative AI and Fair Use? 
  A technologist, legal expert or user on the internet might think these results don’t matter for fair use analysis since the outputs from the user preference don’t directly copy the original works. While these outputs might match the quality and closely mirror the style of the source material, copyright law doesn’t give authors exclusive rights to their writing style ( Sobel, 2024 ) , and no one has a monopoly on producing high-quality literature. Some users have also asserted that while AI-generated outputs could serve as reasonable alternatives to an author’s existing or future works, the same could be said for human-written works that draw inspiration from earlier texts. Particularly, in Bartz v. Anthropic copyright case Judge Alsup noted “But if someone were to read all the modern-day classics because of their exceptional expression, memorize them, and then emulate a blend of their best writing, would that violate the Copyright Act? Of course not .’’ This is fundamentally wrong because an important difference between human and AI-generated emulations is that humans read; AI systems copy. Unlike the semi-parametric memory of a billion-parameter LLM, human memory is not a verbatim storage device. Additionally, fine-tuning a model on 20 novels takes 3-4 hours whereas, an average human cannot read or consume information at this pace. We foresee in the future a situation could arise where a human can steer outputs from fine-tuned models to produce high-quality books/novellas. The US Copyright Office has already recognized how AI-generated derivative work may flood the market for the source works, resulting in ‘‘market dilution,’’ which is closely tied to Fair Use Factor 4. 14 14 
  14 
- The fourth fair use factor – often dubbed the single most important factor – instructs courts to inquire into the effect of the use upon the potential market for or value of the copyrighted work In the Kadrey v. Meta , copyright case, Judge Chhabria granted summary judgment to Meta, but accepted the theory of market dilution. However Judge Chhabria suggested in his opinion that some kinds of books may be less subject to substitution than others. In his words “ It seems unlikely, for instance, that AI-generated books would meaningfully siphon sales away from well-known authors who sell books to people looking for books by those particular authors.” Our findings (Section 4.1) contradict Judge Chhabria’s assumption that authors with unique writing styles are naturally protected from being replaced. Without disclosure if readers actually enjoy AI-generated imitations of well-known authors—particularly those valued for their distinctive voices—then all authors could face significant competition, especially from AI systems fine-tuned specifically on their work. Since producing AI-generated content costs much less than paying human writers, this makes it even more likely that the original authors’ market share could be eroded. We examine the implications of AI model fine-tuning on Fair Use Factor 4 by analyzing a larger dataset in our contemporaneous work  ( Chakrabarty et al., 2025a ) . 
+ The fourth fair use factor – often dubbed the single most important factor – instructs courts to inquire into the effect of the use upon the potential market for or value of the copyrighted work In the Kadrey v. Meta , copyright case, Judge Chhabria granted summary judgment to Meta, but accepted the theory of market dilution. However Judge Chhabria suggested in his opinion that some kinds of books may be less subject to substitution than others. In his words “ It seems unlikely, for instance, that AI-generated books would meaningfully siphon sales away from well-known authors who sell books to people looking for books by those particular authors.” Our findings (Section 4.1) contradict Judge Chhabria’s assumption that authors with unique writing styles are naturally protected from being replaced. Without disclosure if readers actually enjoy AI-generated imitations of well-known authors—particularly those valued for their distinctive voices—then all authors could face significant competition, especially from AI systems fine-tuned specifically on their work. Since producing AI-generated content costs much less than paying human writers, this makes it even more likely that the original authors’ market share could be eroded. We examine the implications of AI model fine-tuning on Fair Use Factor 4 by analyzing a larger dataset in our contemporaneous work ( Chakrabarty et al., 2025a ) . 
  5.3. Can we regulate hidden AI authorship? 
  Creators may be motivated to hide the involvement of generative AI in creating a work, since acknowledging it could undermine their chances of obtaining copyright protection and profiting from the work. This brings in interesting questions around whether we can regulate such practices. First and foremost there is a dire need to update beliefs around AI detection. Some commercial AI detectors aren’t accurate, but that should not lead to the discourse that AI detectors don’t work. As a matter of fact text generated by prompting AI can be detected accurately as shown by recent work ( Russell et al., 2025 ; Jabarian and Imas, 2025 ) . Text generated from fine-tuned models however poses a separate kind of risk as they evade standard AI detectors, due to distributional similarity to human-written text. Here, watermarking remains a potential solution, especially post-hoc watermarking that evades paraphrase attacks ( Chang et al., 2024 ; Xu et al., 2024 ) . However at the crux of all these technical solutions, there needs to be legal restriction such as the EU AI Act’s Article 50, that obligates providers of systems generating synthetic audio/image/video/text to ensure outputs are marked and detectable. Publishing houses or Online Platforms such as Kindle could have certification boards that conduct proper investigation and commit to certifying how content was not produced by generative AI. As pointed by Noti-Victor (2025) , the FTC can also treat undisclosed AI authorship (when material to consumers) as a misleading omission and bring enforcement actions—even without a blanket federal disclosure law. We discuss AI detectability and how removing “AI quirks” changes preference patterns via
-additional analyses using a larger dataset in a related paper  ( Chakrabarty et al., 2025a ) . 
+additional analyses using a larger dataset in a related paper ( Chakrabarty et al., 2025a ) . 
  6. Limitations and Future Work 
  We tried our best to design a fair experiment, but we were constrained by some practical limitations. For instance a larger pool of experts would add more credibility to our study, but it was challenging to recruit more writers, given how our affiliation as AI researchers prevented writers from working with us. Our recruitment was mostly restricted to American creative writing programs and further study needs to be done across creative writing programs outside the US. While our pre-selected pool of 50 writers consisted of some writers who do not write in English, our experiments on style/voice emulation were done based on their English translation. Creative writing often depends on intrinsic motivation. While we offered MFA students a lucrative rate for writing the excerpts, it’s unclear if monetary incentives actually enhanced their creative output, since intrinsic motivation typically drives the best artistic work. Additionally there is a possibility that MFA trained expert writers are not very good at mimicking other writers. We acknowledge MFA trained expert writers are not monolithic and themselves have different skillsets and styles. Last but not least our experiments were conducted at a shorter excerpt level and conclusions cannot be drawn for long-form text. In its current form, AI is unable to generate long-form text that’s thematically coherent unlike humans. While we foresee a situation where humans can collaborate with a fine-tuned AI model to create competing long-form works, experimental evidence is required to make any broader claims. 
  7. Conclusion 
@@ -561,13 +561,13 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  B. R. Anderson, J. H. Shah, and M. Kreminski 
  Homogenization effects of large language models on human creative ideation .
  In Proceedings of the 16th conference on creativity & cognition ,
- pp. 413–425 .
+ pp. 413–425 .
  Cited by: §1 ,
  §2.4 .
  Birt et al. (2016) 
  L. Birt, S. Scott, D. Cavers, C. Campbell, and F. Walter 
  Member checking: a tool to enhance trustworthiness or merely a nod to validation? .
- Qualitative health research 26 ( 13 ), pp. 1802–1811 .
+ Qualitative health research 26 ( 13 ), pp. 1802–1811 .
  Cited by: §3.3 .
  Bloom (1997) 
  H. Bloom 
@@ -577,33 +577,33 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  Braun and Clarke (2006) 
  V. Braun and V. Clarke 
  Using thematic analysis in psychology .
- Qualitative research in psychology 3 ( 2 ), pp. 77–101 .
+ Qualitative research in psychology 3 ( 2 ), pp. 77–101 .
  Cited by: §4.3 .
  Braun and Clarke (2019) 
  V. Braun and V. Clarke 
  Reflecting on reflexive thematic analysis .
- Qualitative research in sport, exercise and health 11 ( 4 ), pp. 589–597 .
+ Qualitative research in sport, exercise and health 11 ( 4 ), pp. 589–597 .
  Cited by: §4.3 .
  Brauneis (2024) 
  R. Brauneis 
  Copyright and the training of human authors and generative machines .
- Colum. JL & Arts 48 , pp. 1 .
+ Colum. JL & Arts 48 , pp. 1 .
  Cited by: §5.1 .
  Brown et al. (2020) 
  T. Brown, B. Mann, N. Ryder, M. Subbiah, J. D. Kaplan, P. Dhariwal, A. Neelakantan, P. Shyam, G. Sastry, A. Askell, et al. 
  Language models are few-shot learners .
- Advances in neural information processing systems 33 , pp. 1877–1901 .
+ Advances in neural information processing systems 33 , pp. 1877–1901 .
  Cited by: §2.2 .
  Burgoon (1993) 
  J. K. Burgoon 
  Interpersonal expectations, expectancy violations, and emotional communication .
- Journal of language and social psychology 12 ( 1-2 ), pp. 30–48 .
+ Journal of language and social psychology 12 ( 1-2 ), pp. 30–48 .
  Cited by: §4.3 .
  Calderwood et al. (2025) 
  A. Calderwood, J. J. Y. Chung, Y. Sun, M. Roemmele, and M. Kreminski 
  Phraselette: a poet’s procedural palette .
  In Proceedings of the 2025 ACM Designing Interactive Systems Conference ,
- pp. 2701–2717 .
+ pp. 2701–2717 .
  Cited by: §2.1 .
  Chakrabarty et al. (2025a) 
  T. Chakrabarty, J. C. Ginsburg, and P. S. Dhillon 
@@ -617,19 +617,19 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  T. Chakrabarty, P. Laban, D. Agarwal, S. Muresan, and C. Wu 
  Art or artifice? large language models and the false promise of creativity .
  In Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems ,
- pp. 1–34 .
+ pp. 1–34 .
  Cited by: §4.4 .
  Chakrabarty et al. (2025b) 
  T. Chakrabarty, P. Laban, and C. Wu 
  Can AI writing be salvaged? Mitigating idiosyncrasies and improving human-ai alignment in the writing process through edits .
  In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems ,
- pp. 1–33 .
+ pp. 1–33 .
  Cited by: §1 .
  Chakrabarty et al. (2024b) 
  T. Chakrabarty, V. Padmakumar, F. Brahman, and S. Muresan 
  Creativity support in the age of large language models: an empirical study involving professional writers .
  In Proceedings of the 16th Conference on Creativity & Cognition ,
- C &C ’24 , New York, NY, USA , pp. 132–155 .
+ C &C ’24 , New York, NY, USA , pp. 132–155 .
  External Links: ISBN 9798400704857 ,
  Link ,
  Document 
@@ -649,63 +649,63 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  Corbett (1971) 
  E. P. Corbett 
  The theory and practice of imitation in classical rhetoric .
- College Composition & Communication 22 ( 3 ), pp. 243–250 .
+ College Composition & Communication 22 ( 3 ), pp. 243–250 .
  Cited by: §3.1.4 .
  Denzin (2001) 
  N. K. Denzin 
  The reflexive interview and a performative social science .
- Qualitative research 1 ( 1 ), pp. 23–46 .
+ Qualitative research 1 ( 1 ), pp. 23–46 .
  Cited by: §3.3 .
  Dhillon et al. (2024) 
  P. S. Dhillon, S. Molaei, J. Li, M. Golub, S. Zheng, and L. P. Robert 
  Shaping human-ai collaboration: varied scaffolding levels in co-writing with language models .
  In Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems ,
- pp. 1–18 .
+ pp. 1–18 .
  Cited by: §2.1 .
  Doshi and Hauser (2024) 
  A. R. Doshi and O. P. Hauser 
  Generative ai enhances individual creativity but reduces the collective diversity of novel content .
- Science Advances 10 ( 28 ), pp. eadn5290 .
+ Science Advances 10 ( 28 ), pp. eadn5290 .
  Cited by: §1 ,
  §2.4 .
  Draxler et al. (2024) 
  F. Draxler, A. Werner, F. Lehmann, M. Hoppe, A. Schmidt, D. Buschek, and R. Welsch 
  The ai ghostwriter effect: when users do not perceive ownership of ai-generated text but self-declare as authors .
- ACM Transactions on Computer-Human Interaction 31 ( 2 ), pp. 1–40 .
+ ACM Transactions on Computer-Human Interaction 31 ( 2 ), pp. 1–40 .
  Cited by: §2.1 .
  Erickson (2024) 
  K. Erickson 
  AI and work in the creative industries: digital continuity or discontinuity? .
- Creative Industries Journal , pp. 1–21 .
+ Creative Industries Journal , pp. 1–21 .
  Cited by: §2.4 .
  Finlay (2002) 
  L. Finlay 
  Negotiating the swamp: the opportunity and challenge of reflexivity in research practice .
- Qualitative research 2 ( 2 ), pp. 209–230 .
+ Qualitative research 2 ( 2 ), pp. 209–230 .
  Cited by: §3.3 .
  Gero et al. (2025) 
  K. I. Gero, M. Desai, C. Schnitzler, N. Eom, J. Cushman, and E. L. Glassman 
  Creative writers’ attitudes on writing as training data for large language models .
  In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems ,
- pp. 1–16 .
+ pp. 1–16 .
  Cited by: §1 ,
  §2.2 .
  Gero et al. (2022) 
  K. I. Gero, V. Liu, and L. Chilton 
  Sparks: inspiration for science writing using language models .
  In Proceedings of the 2022 ACM Designing Interactive Systems Conference ,
- pp. 1002–1019 .
+ pp. 1002–1019 .
  Cited by: §2.1 .
  Gero et al. (2023) 
  K. I. Gero, T. Long, and L. B. Chilton 
  Social dynamics of ai support in creative writing .
  In Proceedings of the 2023 CHI conference on human factors in computing systems ,
- pp. 1–15 .
+ pp. 1–15 .
  Cited by: §2.1 .
  Ginsburg (2025) 
  J. C. Ginsburg 
  AI inputs, fair use and the us copyright office report .
- Journal of Intellectual Property Law and Practice 20 ( 8 ), pp. 521–522 .
+ Journal of Intellectual Property Law and Practice 20 ( 8 ), pp. 521–522 .
  External Links: ISSN 1747-1532 ,
  Document ,
  Link 
@@ -714,7 +714,7 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  A. Guo, S. Sathyanarayanan, L. Wang, J. Heer, and A. X. Zhang 
  From pen to prompt: how creative writers integrate ai into their writing practice .
  In Proceedings of the 2025 Conference on Creativity and Cognition ,
- pp. 527–545 .
+ pp. 527–545 .
  Cited by: §2.1 .
  Hansen (2025) 
  D. Hansen 
@@ -726,12 +726,12 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  J. He, S. Houde, and J. D. Weisz 
  Which contributions deserve credit? perceptions of attribution in human-ai co-creation .
  In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems ,
- pp. 1–18 .
+ pp. 1–18 .
  Cited by: §2.3 .
  Hwang et al. (2025) 
  A. H. Hwang, Q. V. Liao, S. L. Blodgett, A. Olteanu, and A. Trischler 
  ’It was 80% me, 20% ai’: seeking authenticity in co-writing with large language models .
- Proceedings of the ACM on Human-Computer Interaction 9 ( 2 ), pp. 1–41 .
+ Proceedings of the ACM on Human-Computer Interaction 9 ( 2 ), pp. 1–41 .
  Cited by: §2.1 .
  Ippolito et al. (2022) 
  D. Ippolito, A. Yuan, A. Coenen, and S. Burnam 
@@ -759,19 +759,19 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  Kobak et al. (2025) 
  D. Kobak, R. González-Márquez, E. Horvát, and J. Lause 
  Delving into llm-assisted writing in biomedical publications through excess vocabulary .
- Science Advances 11 ( 27 ), pp. eadt3813 .
+ Science Advances 11 ( 27 ), pp. eadt3813 .
  Cited by: §2.1 .
  Kyi et al. (2025) 
  L. Kyi, A. Mahuli, M. S. Silberman, R. Binns, J. Zhao, and A. J. Biega 
  Governance of generative ai in creative work: consent, credit, compensation, and beyond .
  In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems ,
- pp. 1–16 .
+ pp. 1–16 .
  Cited by: §2.3 .
  Lee et al. (2024) 
  M. Lee, K. I. Gero, J. J. Y. Chung, S. B. Shum, V. Raheja, H. Shen, S. Venugopalan, T. Wambsganss, D. Zhou, E. A. Alghamdi, et al. 
  A design space for intelligent and interactive writing assistants .
  In Proceedings of the CHI Conference on Human Factors in Computing Systems ,
- pp. 1–35 .
+ pp. 1–35 .
  Cited by: §2.1 .
  Li et al. (2023) 
  X. Li, P. Yu, C. Zhou, T. Schick, O. Levy, L. Zettlemoyer, J. Weston, and M. Lewis 
@@ -782,7 +782,7 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  Z. Li, C. Liang, J. Peng, and M. Yin 
  How does the disclosure of AI assistance affect the perceptions of writing? .
  In Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing , Y. Al-Onaizan, M. Bansal, and Y. Chen (Eds.) ,
- Miami, Florida, USA , pp. 4849–4868 .
+ Miami, Florida, USA , pp. 4849–4868 .
  External Links: Link ,
  Document 
  Cited by: §3.2.2 .
@@ -799,19 +799,19 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  Liang et al. (2025b) 
  W. Liang, Y. Zhang, Z. Wu, H. Lepp, W. Ji, X. Zhao, H. Cao, S. Liu, S. He, Z. Huang, et al. 
  Quantifying large language model usage in scientific papers .
- Nature Human Behaviour , pp. 1–11 .
+ Nature Human Behaviour , pp. 1–11 .
  Cited by: §2.1 .
  Lima et al. (2025) 
  G. Lima, N. Grgić-Hlača, and E. M. Redmiles 
  Public opinions about copyright for ai-generated art: the role of egocentricity, competition, and experience .
  In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems ,
- pp. 1–32 .
+ pp. 1–32 .
  Cited by: §2.3 .
  Lin (2004) 
  C. Lin 
  ROUGE: a package for automatic evaluation of summaries .
  In Text Summarization Branches Out ,
- Barcelona, Spain , pp. 74–81 .
+ Barcelona, Spain , pp. 74–81 .
  External Links: Link 
  Cited by: §3.1.3 .
  Lincoln (1985) 
@@ -828,7 +828,7 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  T. McDonnell, M. Lease, M. Kutlu, and T. Elsayed 
  Why is that relevant? collecting annotator rationales for relevance judgments .
  In Proceedings of the AAAI Conference on Human Computation and Crowdsourcing ,
- Vol. 4 , pp. 139–148 .
+ Vol. 4 , pp. 139–148 .
  Cited by: §3.2.2 .
  McGurl (2011) 
  M. McGurl 
@@ -846,7 +846,7 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  P. Mirowski, J. Love, K. Mathewson, and S. Mohamed 
  A robot walks into a bar: can language models serve as creativity supporttools for comedy? an evaluation of llms’ humour alignment with comedians .
  In The 2024 ACM Conference on Fairness, Accountability, and Transparency ,
- pp. 1622–1636 .
+ pp. 1622–1636 .
  Cited by: §2.1 .
  Mirowski et al. (2023) 
  P. Mirowski, K. W. Mathewson, J. Pittman, and R. Evans 
@@ -860,7 +860,7 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  Noti-Victor (2025) 
  J. Noti-Victor 
  Regulating hidden ai authorship .
- Va. L. Rev. 111 , pp. 139 .
+ Va. L. Rev. 111 , pp. 139 .
  Cited by: §5.3 .
  Nugent (2020) 
  B. Nugent 
@@ -883,7 +883,7 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  J. Porquet, S. Wang, and L. B. Chilton 
  Copying style, extracting value: illustrators’ perception of ai style transfer and its impact on creative labor .
  In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems ,
- pp. 1–16 .
+ pp. 1–16 .
  Cited by: §2.4 .
  Russell et al. (2025) 
  J. Russell, M. Karpinska, and M. Iyyer 
@@ -894,13 +894,13 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  Samuelson (2023) 
  P. Samuelson 
  Generative ai meets copyright .
- Science 381 ( 6654 ), pp. 158–161 .
+ Science 381 ( 6654 ), pp. 158–161 .
  Cited by: §2.3 .
  Sarkar (2025) 
  A. Sarkar 
  AI could have written this: birth of a classist slur in knowledge work .
  In Proceedings of the Extended Abstracts of the CHI Conference on Human Factors in Computing Systems ,
- pp. 1–12 .
+ pp. 1–12 .
  Cited by: §3.2.2 .
  So and Piper (2016) 
  R. J. So and A. Piper 
@@ -951,13 +951,13 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  S. Wadinambiarachchi, R. M. Kelly, S. Pareek, Q. Zhou, and E. Velloso 
  The effects of generative ai on design fixation and divergent thinking .
  In Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems ,
- pp. 1–18 .
+ pp. 1–18 .
  Cited by: §2.4 .
  Wise et al. (2025) 
  T. Wise, Y. Yang, R. Shim, K. C. Chang, J. Oden Choi, and Q. Yang 
  Investigating how emerging adults explore identity through writing: opportunities for ai writing assistants to help .
  In Proceedings of the 2025 ACM Designing Interactive Systems Conference ,
- DIS ’25 , New York, NY, USA , pp. 2270–2282 .
+ DIS ’25 , New York, NY, USA , pp. 2270–2282 .
  External Links: ISBN 9798400714856 ,
  Link ,
  Document 
@@ -971,7 +971,7 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  A. Yuan, A. Coenen, E. Reif, and D. Ippolito 
  Wordcraft: story writing with large language models .
  In Proceedings of the 27th International Conference on Intelligent User Interfaces ,
- pp. 841–852 .
+ pp. 841–852 .
  Cited by: §2.1 .
  Zhang et al. (2026) 
  B. Zhang, C. Bu, and P. S. Dhillon 
@@ -982,7 +982,7 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  Z. Zhao, D. Masson, Y. Kim, G. Penn, and F. Chevalier 
  Making the write connections: linking writing support tools with writer needs .
  In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems ,
- pp. 1–21 .
+ pp. 1–21 .
  Cited by: §2.1 .
  Appendix A Appendix 
  Figure 8 . Themes for all the Content provided to Writers and LLM for the task Two-part table listing 50 authors and their associated key themes used in the writing task. The table has four columns arranged in two pairs of Author and Key Themes. Authors include: Percival Everett (racial identity, code-switching, "not Black enough" critique), Charles Bukowski (working-class life, loneliness, hedonism), Min Jin Lee (immigration, disability, economic survival), Virginia Woolf (memory, consciousness flow, time perception), Orhan Pamuk (father-son relationships, artistic validation), Cormac McCarthy (post-apocalyptic desolation, futility), Octavia Butler (time travel, slavery, moral compromise), Ian McEwan (truth vs. fiction, guilt, war trauma), George Saunders (political violence, moral justification), Margaret Atwood (dystopian control, female subjugation), Cheryl Strayed (maternal loss, death witnessing), Sally Rooney (relationship evolution, separation anxiety), David Foster Wallace (post-dream anxiety, alienation), Stephen King (horror chase, surreal violence), Haruki Murakami (solitary rituals, obsessive behavior), Ottessa Moshfegh (9/11 trauma, existential numbness), Alice Munro (family obligation, class differences), Flannery O'Connor (grace through violence, nihilism), Gabriel García Márquez (love at first sight, romantic whimsy), and 31 additional authors with similarly detailed thematic descriptions spanning identity, grief, cultural displacement, psychological disturbance, and literary experimentation. 
@@ -997,7 +997,7 @@ additional analyses using a larger dataset in a related paper  ( Chakrabarty et
  Figure 11 . Preference Evaluation from Experts for George Saunders and GPT - 4o Fine-tuned where Experts prefer AI emulation Writing quality comparison panel showing two text excerpts and three expert evaluations for George Saunders style emulation. Left: MFA-written excerpt beginning "One Saturday morning, he found himself sitting in the red Arviana sportscar he'd stashed in his dead uncle's garage" describing an assassination plot with short, declarative sentences. Right: Fine-tuned GPT-4o excerpt beginning "One Saturday morning he sat in a red car moldering in his dead uncle's garage, hidden from view, eating Lorna Doones and listening to traffic reports" with stream-of-consciousness rhetorical questions about morality and assassination. Bottom: Three expert reader evaluations, all preferring the AI excerpt. Expert Reader 1 praises the AI's character insight through details like eating cookies while contemplating assassination. Expert Reader 2 notes the AI's narrative voice fits better with "less self-seriousness" and effective rhetorical questions like "Would he? Or would he…" Expert Reader 3 describes the AI text as having "unhinged stream of consciousness" with sequences of rhetorical questions conveying inevitability, while the MFA reads as "a political manifesto." 
  Figure 12 . Preference Evaluation from Experts for Junot Diaz and GPT - 4o Fine-tuned for Stylistic Fidelity where Experts prefer AI emulation Writing style comparison panel showing an original Junot Díaz excerpt, two emulations, and three expert evaluations. Top: Original Díaz excerpt about infidelity, beginning "Your girl catches you cheating" with characteristic Spanish phrases, direct second-person address, and references to Dominican Republic. Middle left: MFA emulation with similar themes but described by experts as having "overwrought similes." Middle right: Fine-tuned GPT-4o emulation incorporating Díaz's stylistic markers including Spanish words ("salcedense," "papi chulo," "pendejas," "las plagas," "fukú"), parenthetical asides, and energetic voice. Bottom: Three expert reader evaluations, all preferring the AI excerpt. Expert Reader 1 notes the AI's ending matches the original's willingness to let "rhetorical questions go unasked." Expert Reader 2 describes the AI as "fun, engaging, and energetic" capturing "juicy gossip" style with colorful lines. Expert Reader 3 observes the AI "mirrors this with the parentheses, fragments, and phrases like 'little pito' and 'las plagas' and 'fuku'" while the MFA feels "more restrained." 
  A.4. User Interface Design 
- Figures  14 and 14 show the user interfaces for the quality evaluation and stylistic fidelity evaluation tasks respectively. 
+ Figures 14 and 14 show the user interfaces for the quality evaluation and stylistic fidelity evaluation tasks respectively. 
  Figure 13 . Quality Evaluation screen showing two excerpts (AI and Human) emulating Maya Angelou’s style or voice written based on content from her book Letter to My Daughter Screenshot of the writing quality evaluation interface. The header asks "Which response is better in terms of writing quality?" with instructions to consider coherence (how well ideas flow together), fluency (natural and smooth writing), and effectiveness (how well it achieves its goals). Two text excerpts are displayed side-by-side, both emulating Maya Angelou's style on the theme of home. Excerpt 1 begins "Home, that perennial thing. The place we've heard a million aphorisms about" and references Thomas Wolfe's novel. Excerpt 2 begins "When Thomas Wolfe declared you can't go home again, he hadn't reckoned with the stubborn geography of the heart" with vivid imagery of "Mama's laugh rings true as church bells." Below the excerpts are radio buttons to select Excerpt 1 or Excerpt 2, and a text box labeled "Reason" with placeholder text "Enter your reason here. Be detailed and constructive. Cite your reasons with snippets from the excerpt." A red warning states "Please enter at least 50 words. (0 words so far)" and a Next button appears at the bottom. Screenshot of the stylistic fidelity evaluation interface. The header asks "Which response is closer to the 'Original' paragraph in voice and style?" An original excerpt by Ben Lerner is displayed at top, beginning "I breathed in the night air that was or was not laced with anachronistic blossoms" describing Manhattan's skyline with philosophical observations about urban sublime and collective identity. Below are two emulation attempts: Excerpt 1 begins "I breathed in the night air that might or might not have smelled like blossoms" discussing the Manhattan skyline's "sublime effects." Excerpt 2 begins "Gazing upon the skyline of Manhattan, I inhaled the stench of the sewers, the smoke of the gyro stand" with detailed architectural observations. Below the excerpts are radio buttons to select Excerpt 1 or Excerpt 2, and a text box labeled "Reason" with placeholder text "Enter your reason here. Explain why your chosen excerpt better matches the style of the original. Cite specific snippets." A red warning states "Please enter at least 50 words. (0 words so far)" and a Next button appears at the bottom. 
  Figure 14 . Stylistic Fidelity evaluation screen showing two excerpts (AI and Human) emulating Ben Lerner’s style or voice written based on content from the original excerpt. 
  Experimental support, please

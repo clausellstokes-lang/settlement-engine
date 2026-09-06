@@ -3,13 +3,14 @@
  "name": "ai",
  "angle": null,
  "tag": "i269-283",
- "lines": 85,
+ "lines": 123,
  "firstTs": "2026-09-06T17:26:31.147Z",
- "lastTs": "2026-09-06T17:29:42.399Z",
+ "lastTs": "2026-09-06T17:33:15.633Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 16
+  "Bash": 23,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://arxiv.org/html/2305.14251",
@@ -22,13 +23,13 @@
   "https://arxiv.org/html/2410.08044"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now the Wikipedia AI Cleanup guide (claim 278).",
+ "lastAssistantText": "Checkpoint written and read back clean: 15 claims, 15 verdicts. All eight source URLs fetched live at HTTP 200 with a browser user agent and verified against raw page text — no summarizer, no Wayback fallback needed, no BLOCKED. No claim in this chunk carried `reverify` or `routeHints`.",
  "run": "wf_d28449b9-5d6",
  "agent": "a27417841a075224c",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-a27417841a075224c.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i269-283.json",
-  "exists": false
+  "exists": true
  }
 }

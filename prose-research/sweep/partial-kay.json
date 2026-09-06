@@ -49,5 +49,39 @@
    "note": "Quote 'exquisitely phrased vituperation' is verbatim ('depicts Crispin reading Pertennius’ ‘exquisitely phrased vituperation’ (LoE, 154)'). Supported limbs: Pertennius is 'Kay’s most obvious illustration of how ‘history can become dangerous when the creative aspect of its construction is concealed or unknown’'; 'Pertennius is modelled on Procopius'; 'As Pertennius sets out to ‘choose, sever and carve’ (White 1973, 288) among events'. Searched raw text for 'opening line', 'first line', 'writers of history': zero hits.",
    "fromFile": "verdicts-kay-i15-29.json"
   }
+ },
+ {
+  "index": 88,
+  "feature": "Yeats intertext",
+  "claim": "Taylor documents that the Sarantine titles and vision derive from Yeats's Byzantium poems and that the title phrase is an in-world idiom for a life at a cusp.",
+  "source": "Dena Taylor, 'On Sailing to Sarantium', TransVersions 10 (1999)",
+  "url": "https://brightweavings.com/denasailing/",
+  "quote": "Kay at his most historical",
+  "angle": "academic",
+  "verdict": {
+   "index": 88,
+   "verdict": "PARTIAL",
+   "trueWording": "The title refers to ... 'his life was on the cusp of change'; Kay drew Yeats's vision",
+   "note": "Raw HTML fetched live (200) from brightweavings.com/denasailing/, 'by Dena Taylor', headnote 'first published as a review in TransVersions 10, Toronto: Orchid Press, 1999'. The quote 'Kay at his most historical' is on the page verbatim ('Here is Kay at his most historical'), and the idiom limb is fully supported verbatim: \"To say of a man that he was sailing to Sarantium was to say that his life was on the cusp of change\". The vision limb is supported ('what he has drawn from Yeats's vision of Byzantium'). But the page names exactly ONE Yeats poem, 'Sailing to Byzantium', never a plural set of Byzantium poems, and never states that any title DERIVES from Yeats - it attributes the title to the in-world idiom instead. (That derivation is asserted elsewhere, in Malosse's note 12, not in Taylor.) Graded PARTIAL on the plural/derivation limb.",
+   "unsupportedLimb": "the Sarantine titles derive from Yeats's Byzantium poems - the page names one poem ('Sailing to Byzantium'), discusses one title, and attributes only the VISION to Yeats, never the title's derivation",
+   "fromFile": "verdicts-kay-i75-89.json"
+  }
+ },
+ {
+  "index": 100,
+  "feature": "honesty about limitations",
+  "claim": "Kay answers Henry James: treating the past as fantasy acknowledges the impossibility of recovering past world-views, a way of being honest about limitations.",
+  "source": "Guy Gavriel Kay, 'Home and Away' (keynote essay; shorter version in The Globe and Mail, fall 1999) — Wayback copy of the Bright Weavings text",
+  "url": "https://web.archive.org/web/20081016010636id_/http://www.brightweavings.com/ggkswords/globe.htm",
+  "quote": "a way of being honest about limitations",
+  "angle": "academic",
+  "verdict": {
+   "index": 100,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that treating the past as fantasy acknowledges the IMPOSSIBILITY of recovering past world-views — the page says it acknowledges \"the sort of difficulties James was referring to\", and Kay expressly rejects James's impossibility thesis (\"I don't agree, but I see the point\")",
+   "trueWording": "acknowledges the sort of difficulties James referred to — while disagreeing",
+   "note": "Quote \"a way of being honest about limitations\" is verbatim on the page, and the Henry James framing is real: \"It was Henry James who argued that historical fiction was, in fact, impossible ... getting to 'the real thing' with regard to the world views of people in the past simply could not be done.\" But Kay's own sentence is \"I don't agree, but I see the point, and it strikes me forcibly that by treating the past through the form of a fantasy, one acknowledges the sort of difficulties James was referring to, while still probing and revealing motifs of the past.\" Difficulties acknowledged, impossibility disputed — so the claim's 'impossibility' limb overstates the source.",
+   "fromFile": "verdicts-kay-i90-104.json"
+  }
  }
 ]

@@ -93,7 +93,7 @@
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-scholarship-history.json",
   "claims": 112,
-  "complete": false,
-  "mtime": "13:29:13"
+  "complete": true,
+  "mtime": "13:30:12"
  }
 }

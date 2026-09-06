@@ -1,0 +1,36 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i94-108",
+ "lines": 18,
+ "firstTs": "2026-09-06T17:35:10.150Z",
+ "lastTs": "2026-09-06T17:35:42.587Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 1
+ },
+ "urlsFetched": [
+  "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+  "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-4",
+  "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "https://revivifygames.com/blogs/news/what-i-value-in-adventure-design",
+  "https://slyflourish.com/writing_awesome_readaloud_text.html",
+  "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+  "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+  "https://alldeadgenerations.blogspot.com/2022/12/dungeon-design-process-and-keys.html",
+  "https://tenfootpole.org/ironspike/?p=5395",
+  "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll fetch each source as raw text. Let me set up and pull all ten URLs.",
+ "run": "wf_f9424af6-fcf",
+ "agent": "a7e299b2ab2d96325",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_f9424af6-fcf/agent-a7e299b2ab2d96325.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i94-108.json",
+  "exists": false
+ }
+}

@@ -11508,6 +11508,238 @@
    "trueWording": "the last sentence of the novella is as chilling as any written in all of science fiction and effectively encapsulates the mindset of all incipient tyrannical figures",
    "note": "Verbatim at the close of the paragraph on the opening/titular novella ('while \"The Fifth Head of Cerberus\" opens up the book...'), so both limbs — chilling as any in sf, and the tyrant's mindset — are supported.",
    "fromFile": "verdicts-wolfe-i420-434.json"
+  },
+  "435": {
+   "index": 435,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“‘V.R.T’ is told anachronically, with the reader left to piece everything together from a fragmentary, disjointed narrative”",
+   "note": "Raw HTML fetched from ultan.org.uk (HTTP 200, browser UA). Quote is contiguous and word-for-word. Both limbs supported: 'told anachronically' and the piecing-together clause sit in the same sentence. Byline on the page: 'reviewed by Robert Borski', dated 28 August 2001 — attribution confirmed.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "436": {
+   "index": 436,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“the only name he’s identified by in the book: Number Five (though both his first and last name are eminently decodeable)”",
+   "note": "Same raw page. Quote verbatim. The decodeable-names limb is the page's own parenthesis. Page says 'in the book' where the claim says 'the first novella's narrator'; the surrounding sentence is about Maitre and the narrator of the title novella, so the narrowing is accurate rather than a stretch.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "437": {
+   "index": 437,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Rich eccentricities of diction abound, retarding comprehension.”",
+   "note": "Raw HTML fetched from ultan.org.uk (HTTP 200). Quote verbatim. Second limb supported: the paragraph then itemises Tick, Oreb, the lower classes' 'thieves' cant', the lower-ranking soldiers, Remora, Incus, the Trivigaunti elite, Quetzal, Crane, Lemur. Locator nit only: the section is headed 'Dialogue.', not 'Voices' — the claim sentence itself does not assert the heading.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "438": {
+   "index": 438,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“As Wolfe’s narrator years afterwards reconstructs Silk’s story from his own memories and from much oral testimony”",
+   "note": "Same raw page, opening of the 'Plot.' section. Quote verbatim; the 'years afterwards' limb is on the page too, immediately before the quoted span.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "439": {
+   "index": 439,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Sometimes events are related in great, possibly very significant detail; elsewhere, complex developments are told at second hand”",
+   "note": "Same raw page, same 'Plot.' sentence. Quote verbatim; the second-hand limb is the following clause of the same sentence.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "440": {
+   "index": 440,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“or conveyed speedily and with gaping lacunae”",
+   "note": "Same raw page, same sentence. Quote verbatim as a contiguous span.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "441": {
+   "index": 441,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“in certain instances, only guesswork can reconstruct what has occurred”",
+   "note": "Same raw page, closing clause of the same 'Plot.' sentence. Quote verbatim; the subject throughout is the Long Sun narrative.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "442": {
+   "index": 442,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Detailed textual analysis, of the kind all Wolfe’s works demand, suggests that the Outsider has two oracular mouthpieces”",
+   "note": "Same raw page. Quote verbatim. It does sit in the Oreb/Quetzal discussion, as the locator says, and the claim's paraphrase (all Wolfe's works demand detailed textual analysis) is the page's own assertion.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "443": {
+   "index": 443,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Wolfe tells us that the torturers are the executors of a sentence decided elsewhere by the judicial process.”",
+   "note": "Raw HTML fetched from ultan.org.uk (HTTP 200). Quote verbatim, and the claim's added words 'by the judicial process' are the page's own continuation. Byline 'by Jeremy Crampton', dated 10 April 2001, signed 'Jeremy Crampton, October-December 2000' — attribution confirmed. Subject is Wolfe's Book of the New Sun throughout.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "444": {
+   "index": 444,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“The silence of the torturer also emphasises that the confession is not there for the benefit of the torturers, but to produce penitence in the accused, or to produce truth for the authorities”",
+   "note": "Same raw page. Quote verbatim. The claim compresses 'penitence in the accused, or ... truth for the authorities (be it judge or priest)' to 'penitence or truth for the authorities'; that reads the page correctly rather than adding to it.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "445": {
+   "index": 445,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“that his system should approximate so closely that of Europe up to the early modern period”",
+   "note": "Same raw page. Quote verbatim; the full sentence is 'It is all the more interesting therefore that his system should approximate so closely that of Europe up to the early modern period.' It sits at ~86% through the article, in the closing discussion — consistent with the 'conclusion' locator.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "446": {
+   "index": 446,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“1) Trust the text implicitly. The answers are in there.”",
+   "note": "Live host www.sfsite.com does not resolve (DNS NXDOMAIN on curl with browser UA and on WebFetch, both apex and www). Recovered via Wayback raw capture https://web.archive.org/web/20110608132208id_/http://www.sfsite.com/fsf/2007/gwng0704.htm (HTTP 200, full article text, not a summary; corroborated against the 2007 and 2010 captures). Quote verbatim and it is numbered rule 1. Page bylined 'by Neil Gaiman', with 'First published in The World Horror Convention 2002 Program Book' — attribution confirmed.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "447": {
+   "index": 447,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Peace really was a gentle Midwestern memoir the first time I read it. It only became a horror novel on the second or the third reading.”",
+   "note": "Same Wayback raw capture. Quote verbatim, inside numbered rule 3. Both limbs on the page; the claim's 'a later one' is the page's 'the second or the third reading'.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "448": {
+   "index": 448,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“the ones who see no need to point out how clever they are. Gene Wolfe is of the second kind”",
+   "note": "Same Wayback raw capture, numbered rule 7. Quote verbatim; the placing limb ('places Wolfe among') is the page's explicit 'Gene Wolfe is of the second kind'.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "449": {
+   "index": 449,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Its individual scenes are sharply evoked so that we travel in time, along with the narrator, to the novel’s streets and houses”",
+   "note": "Raw HTML fetched live from lareviewofbooks.org (HTTP 200); the sentence appears twice, as the standfirst and in the body. The live page renders its byline client-side, so authorship was confirmed on the Wayback raw capture https://web.archive.org/web/20200927175832id_/https://lareviewofbooks.org/article/we-read-things-differently/ — 'We Read Things Differently By Joan Gordon APRIL 30, 2013'. Quote verbatim; the 'streets and houses' limb is the body continuation.",
+   "fromFile": "verdicts-wolfe-i435-449.json"
+  },
+  "450": {
+   "index": 450,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no reviewer recognised Weer’s deathly state",
+   "note": "Live raw fetch of lareviewofbooks.org (HTTP 200) carries verbatim: 'as Wright points out, “no reviewer recognised Weer’s deathly state ... and the ghost’s story quickly became Wolfe’s first misinterpreted narrative.”' Wright's Attending Daedalus is named as the source two sentences earlier; Weer is identified as the novel's narrator. The live SPA HTML omits the byline, so the 'Joan Gordon' limb and the 30 April 2013 date were confirmed on the Wayback raw capture of the same URL ('We Read Things Differently By Joan Gordon APRIL 30, 2013'). 'When Peace first appeared' rests on 'no reviewer' + 'quickly became Wolfe's first misinterpreted narrative' plus the review's opening on the 1975 publication.",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "451": {
+   "index": 451,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "although I vehemently disagree that Wolfe’s goal is to confound",
+   "note": "Verbatim on the live raw page: 'I have to admit that the ghost story is probably the correct interpretation, although I vehemently disagree that Wolfe’s goal is to confound the reader.' The confounding claim is attributed to Wright in the preceding sentence ('as Wright says later ... “This element of choice is Wolfe’s principal device for confounding the reader.”'). Byline Joan Gordon confirmed on the Wayback capture of the same URL.",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "452": {
+   "index": 452,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "but the novel merely notes that she has grown",
+   "note": "Verbatim: 'Borski describes Olivia as “overeating — a classic symptom of rejection,” but the novel merely notes that she has grown “plump ... until she was a comfortable size 14,” as a result of not having to cook for herself any longer.' The elaborate symbolic reading limb is supported by the surrounding paragraph (Borski's 'Brimstone Trail', 'Alden Dennis Weer may be the Devil incarnate', Olivia 'embodying the fire-and-brimstone connection'). Byline Joan Gordon confirmed on the Wayback capture.",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "453": {
+   "index": 453,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "designed to ‘convey the flavour of an odd place at an odd time.’",
+   "note": "Live raw fetch of ultan.org.uk/review-botns/ (HTTP 200), 'Mapping a Masterwork', 28 August 2002, 'Reviewed by Peter Wright'. Page: 'Wolfe elaborates his textual games-playing by introducing significant levels unfamiliar diction, designed to ‘convey the flavour of an odd place at an odd time.’ 8'. Footnote 8 on the same page reads 'Gene Wolfe, Castle of Days (New York: Tor, 1992) p. 236', so the words are Wolfe's, quoted by Wright, about the unfamiliar diction.",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "454": {
+   "index": 454,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "obscure nouns ... ‘intended to be suggestive rather than definitive’",
+   "note": "Page: 'In his appendix to The Shadow of the Torturer, Wolfe invests his diction with an enforced polysemy when he explains that the obscure nouns found in his ‘translation’ of The Book of the New Sun are “intended to be suggestive rather than definitive”. 9' Footnote 9 = 'Gene Wolfe, The Shadow of the Torturer (London: Arrow, 1981), p. 302'. Every limb (Wolfe, appendix, obscure nouns, quoted by Wright) is on the page.",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "455": {
+   "index": 455,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unreliable because of the very characteristic that makes him appear wholly reliable",
+   "note": "Verbatim on the page: 'Ironically, Severian is unreliable because of the very characteristic that makes him appear wholly reliable: his eidetic memory.' Author Peter Wright named in the page's byline block ('Reviewed by Peter Wright').",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "456": {
+   "index": 456,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "mnemonists ... remember a wealth of detail (plot) which scatters meaning (story)",
+   "note": "Verbatim: 'given that mnemonists have a tendency to remember a wealth of detail (plot) which scatters meaning (story)'. The narrator limb is supported in the adjoining sentences ('it is his status as a mnemonist that marks Severian as someone who cannot be trusted'). Wright's parenthetical equates the scattered meaning with the story, as the claim renders it.",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "457": {
+   "index": 457,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "alerts the reader ... a complex and contrived textual game",
+   "note": "Verbatim: 'The gulf between plot and story, between the apparent and the real, alerts the reader to the fact that Wolfe is playing a complex and contrived textual game that facilitates a number of methods of interpretation.'",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "458": {
+   "index": 458,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "by effectively concealing his narratological sleight of hand",
+   "note": "Verbatim: 'Rather, by effectively concealing his narratological sleight of hand and constructing a puzzle for his reader, Wolfe attempts to alert that reader to the level of perception required.' The 'rather than displaying it' limb is carried by the contrast Wright sets up immediately before ('He is not necessarily preoccupied with demonstrating how proficient he is as a writer. Rather, ...') and after ('does not invite the reader to marvel at how clever Wolfe can be').",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "459": {
+   "index": 459,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "conventional, narrow and unimaginative approach",
+   "note": "Verbatim: 'critics have tended to extol The Book of the New Sun for its fluidity of style, the conception of its enigmatic, alien Earth, and the depth of its characterisation. This conventional, narrow and unimaginative approach was unsatisfactory in 1983 and will remain so until readers take up the gauntlet Wolfe throws at their feet.' Both limbs present.",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "460": {
+   "index": 460,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "purposeful in establishing, within the first pages, Severian as an unreliable narrator",
+   "note": "Live lists.urth.net is dead (curl exit 28, HTTP 000); recovered via the Wayback raw capture 20210416053637id_ of the same URL, whose 'link: rel=\"original\"' header matches. Message is by 'b sharp', Wed Sep 6 05:48:33 PDT 2006. Verbatim: 'they were Sev’s mistakes not Wolfe’s, and that they are purposeful in establishing, within the first pages, Severian as an unreliable narrator.' The rejection limb is explicit ('I can’t see a repeat of a mistake in an appendix as proof positive of auctorial error') against the quoted claim 'so the mistake is probably Wolfe’s'. The message page names the interlocutor only as 'Roy'; the surname Lackey was confirmed off-page from the archive's September 2006 author index (Roy C. Lackey posted five messages in this same 'Close Reading: Torturer Chapter I' thread).",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "461": {
+   "index": 461,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attacking BotNS chapter by chapter may expose a lot of things previously hidden in the cracks",
+   "note": "Same Wayback raw capture of 002941. Verbatim: 'Plaudits to JWillard for starting this thread. It appears that attacking BotNS chapter by chapter may expose a lot of things previously hidden in the cracks.' Author b sharp, 6 September 2006.",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "462": {
+   "index": 462,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Like I said, words like ‘perhaps’ and ‘seem’ are treacherous coming from Severian",
+   "note": "Wayback raw capture 20210416053633id_ of 002948; author JWillard, Wed Sep 6 12:25:03 PDT 2006. Verbatim: 'Another line I meant to comment on, pg. 11 of Shadow/Claw: “I dashed along a path that was (or at least then seemed) completely unfamiliar...” Like I said, words like ‘perhaps’ and ‘seem’ are treacherous coming from Severian.' 'Repeats' is carried by 'Like I said'; the second-instance and p.11 limbs are both on the page; JWillard as thread-starter is supported on this page ('I’m thrilled with the response this has received') and stated outright in 002941.",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "463": {
+   "index": 463,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Casual comment, or something more?",
+   "note": "Wayback raw capture of 058619 (header 'link: <...058619.html>; rel=\"original\"' confirms the capture is for this exact URL, despite the odd message number). Subject '(urth) Close Reading: Torturer Chapter II: Severian', JWillard, Sat Sep 9 23:13:17 PDT 2006. Verbatim: 'Paragraph #3: “That first recollection is of piling pebbles in the Old Yard.”  Casual comment, or something more?' The message is numbered paragraph by paragraph (#3, #4, #5, #6, #8...).",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "464": {
+   "index": 464,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Is this a pointer disguised as reminescence?",
+   "note": "Same 058619 capture. Verbatim, misspelling included: 'Then the line in #11 nags me more: “The decades of a saros would not be long enough for me to write all they meant to the ragged apprentice boy I was.”  Is this a pointer disguised as reminescence?' The quoted sentence is framed as reminiscence, matching the claim's limb.",
+   "fromFile": "verdicts-wolfe-i450-464.json"
+  },
+  "465": {
+   "index": 465,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If this is so, Wolfe is an amazing teacher: he shows Severian instructing us on the power of symbols yet simultaneously being blind to them (making their power all the more evident).\" The tomb limb is carried by the same message: \"Does Severian see the connection between the symbols graven on his tomb and what he would later do?\" and \"Severian was shaped by the tomb that bore his face\".",
+   "note": "Raw page reached via Wayback raw capture https://web.archive.org/web/20210416053620id_/http://lists.urth.net/pipermail/urth-urth.net/2006-September/003004.html (live host refuses connections: ECONNREFUSED 69.163.136.55:443, and a browser-UA curl timed out). Byline and date on the page: Bruce Hayles, brucehayles at gmail.com, Sun Sep 10 09:46:58 PDT 2006. Quote appears word for word (it spans a line wrap in the raw source: \"...instructing us on the / power of symbols\"). Every limb holds: the rule (\"It seems instead that Wolfe is giving us a rule\"; the quoted symbol speech \"We believe that we invent symbols. The truth is that they invent us...\"), Severian as its stater (\"he gives us the symbol speech\"), and the blindness to the tomb's symbols — the fountain, ship volant and rose Hayles calls \"the symbols graven on his tomb\".",
+   "fromFile": "verdicts-wolfe-i465-467.json"
+  },
+  "466": {
+   "index": 466,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"...we can use that rule to derive the influence of the ship volant, the fountain, and the rose, despite the fact that Severian does not emphasize them whatsoever.\"",
+   "note": "Same raw Wayback capture of 003004. Quote appears word for word. Three symbols named (ship volant, fountain, rose); the narrator who does not emphasise them is Severian; \"importance\" is the message's own frame (\"It certainly seems Wolfe is at least trying to tell us they are important\"). One wording nuance short of an unsupported limb: Hayles writes \"we CAN use that rule to derive\", where the claim says the reader \"must\" derive — the modality is softer on the page, but the operation, the three symbols and the absence of emphasis are all stated as claimed.",
+   "fromFile": "verdicts-wolfe-i465-467.json"
+  },
+  "467": {
+   "index": 467,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the cart tracks are the load-bearing evidence for the link — Lackey offers them as one corroborating detail among several (\"right down to the tracks\"), alongside the person to be met being Severian's future self and the concealed woman being Thecla, and he hedges the whole parallel as holding \"to some extent\".",
+   "trueWording": "\"...the Sand Garden to some extent replicated/foreshadowed what would happen months later on the beach, right down to the tracks of the two-wheeled cart, which had no business being on that beach.\"",
+   "note": "Raw page reached via Wayback raw capture https://web.archive.org/web/20210416053700id_/http://lists.urth.net/pipermail/urth-urth.net/2006-September/003007.html (live host down as above). Byline and date on the page: Roy C. Lackey, rclackey at stic.net, Sun Sep 10 23:43:34 PDT 2006. The quote \"had no business being on that beach.\" is on the page word for word, and the out-of-place-physical-detail limb (two-wheeled cart tracks on a beach) is fully supported. What the page does not support is the weight the claim assigns it: the tracks are the sharpest concrete correspondence in a list of correspondences, not stated to be the evidence the link rests on.",
+   "fromFile": "verdicts-wolfe-i465-467.json"
   }
  },
  "assembledFrom": [

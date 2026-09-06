@@ -37,8 +37,8 @@
  Translator 
  TV 
  Search SFE 
-    Search EoF 
-   Omit cross-reference entries 
+ Search EoF 
+ Omit cross-reference entries 
  Le Guin, Ursula K
  Entry updated 31 August 2026. Tagged: Author, Poet, Translator. 
  (1929-2018) US author and poet, based in Portland, Oregon, whose first novel was published in 1966; by 1970 she was already recognized as one of the most important writers within the field. Decades before her death, her reputation had extended far beyond the readership of Genre SF , while within the genre she was honoured with five Hugos and six Nebulas ; as much attention has been paid to her by the academic community as to Philip K Dick . 
@@ -258,13 +258,13 @@
  Recently visited entries 
  ISSN 3049-7612 
  Home/Welcome page 
- SFE Special Features   Latest entries; latest updates 
-   Recent deaths 
-   Anniversaries; also Timeline 
-   SFE Picture Gallery; What’s New 
-   Affiliate settings 
-   Show a random SFE entry   Bar charts, awards and more 
-   Incoming links, who wrote it, etc 
+ SFE Special Features Latest entries; latest updates 
+ Recent deaths 
+ Anniversaries; also Timeline 
+ SFE Picture Gallery; What’s New 
+ Affiliate settings 
+ Show a random SFE entry Bar charts, awards and more 
+ Incoming links, who wrote it, etc 
  Search help | RSS feed | Encyclopedia of Fantasy 
  Connect with SFE 
  Donate towards SFE expenses 
@@ -279,7 +279,7 @@
  John Clute on Facebook 
  SFE on Mastodon 
  x 
- This website uses cookies.   More information here . Accept Cookies 
+ This website uses cookies. More information here . Accept Cookies 
  Website by Ansible Editions
  Site and SFE content © 2011-2026 John Clute & David Langford 
  

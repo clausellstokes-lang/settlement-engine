@@ -43,9 +43,9 @@ View a PDF of the paper titled Can AI writing be salvaged? Mitigating Idiosyncra
  view license 
  Current browse context: 
  cs.CL 
- < prev 
-   |   
- next > 
+ < prev 
+ | 
+ next > 
  new 
  | 
  recent 

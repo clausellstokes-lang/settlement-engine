@@ -193,5 +193,90 @@
    "note": "The quoted Qarth passage does run animals (outer red sandstone), war (middle grey granite) and sex (innermost black marble), so the three-walled/animals-war-sex limb is exactly right, and 'a sly reference to the series itself' is verbatim. What the page does not say is that the referent is the series' decor; the tenor of the comparison there is scale — 'anyone familiar with Martin's slowly metastasizing epic—it began as a trilogy in 1996 and now runs to five volumes of a projected seven, each around a thousand pages long—will find it hard not to see in the Qartheen decor a sly reference to the series itself.'",
    "fromFile": "verdicts-martin-i435-449.json"
   }
+ },
+ {
+  "index": 463,
+  "feature": "pageantry and colour",
+  "claim": "Martin's taste for pageantry and colour (his medieval miniature dioramas) carries into the fiction.",
+  "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+  "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+  "quote": "I like the pageantry and the color",
+  "angle": "longform",
+  "verdict": {
+   "index": 463,
+   "verdict": "PARTIAL",
+   "trueWording": "I like the pageantry and the color - said of his medieval miniatures",
+   "note": "Quote verbatim, and the dioramas of mostly medieval miniatures are on the page. But the page never says this taste carries into the fiction: the only bridge it draws from the closets to the novels is population - 'Like his closets, Martin's head is crammed with people' - leading to Garcia's thousand-name census, not to pageantry or colour in the prose.",
+   "unsupportedLimb": "that the pageantry-and-colour taste carries into the fiction",
+   "fromFile": "verdicts-martin-i450-464.json"
+  }
+ },
+ {
+  "index": 490,
+  "feature": "cliffhanger plotting",
+  "claim": "The plotty, cliffhangery reversals (dead! alive! dying! a zombie! in disguise!) are conceded as the selling point.",
+  "source": "Sady Doyle, 'Enter Ye Myne Mystic World of Gayng-Raype', Tiger Beatdown, 26 Aug 2011",
+  "url": "https://tigerbeatdown.com/2011/08/26/enter-ye-myne-mystic-world-of-gayng-raype-what-the-r-stands-for-in-george-r-r-martin/",
+  "quote": "the plotty, cliffhangery aspects of Martin’s writing",
+  "angle": "longform",
+  "verdict": {
+   "index": 490,
+   "verdict": "PARTIAL",
+   "trueWording": "I could acknowledge the plotty, cliffhangery aspects as a selling point",
+   "note": "Wayback raw capture of tigerbeatdown.com (live host refuses connection). Quote and the whole reversal list are verbatim: 'I could acknowledge the plotty, cliffhangery aspects of Martin's writing as a selling point: So-and-so was dead! But now he's alive! But now he's dying! But now he's a zombie! But now he's the Prince of Sblarghlhaar, because he was IN DISGUISE!' But it sits in a run of declined moves ('I could get into the reasons... I could try to construct some kind of nuanced argument... I could try to look at the positives, before I get to the criticism. But you know what? I'm still going to criticize the books'), so the concession is hypothetical and withheld, and the article is 'a selling point', not 'the'.",
+   "unsupportedLimb": "conceded as the selling point — the page frames it as a hypothetical 'I could acknowledge... as a selling point' that Doyle then declines",
+   "fromFile": "verdicts-martin-i480-494.json"
+  }
+ },
+ {
+  "index": 494,
+  "feature": "frequency of rape scenes",
+  "claim": "The essay's core objection is the count of gratuitous rape, molestation and domestic-violence scenes, tallied book by book.",
+  "source": "Sady Doyle, 'Enter Ye Myne Mystic World of Gayng-Raype', Tiger Beatdown, 26 Aug 2011",
+  "url": "https://tigerbeatdown.com/2011/08/26/enter-ye-myne-mystic-world-of-gayng-raype-what-the-r-stands-for-in-george-r-r-martin/",
+  "quote": "TWENTY THOUSAND MILLION GRATUITOUS RAPE",
+  "angle": "longform",
+  "verdict": {
+   "index": 494,
+   "verdict": "PARTIAL",
+   "trueWording": "creepy primarily for his gratuitous rape/molestation/DV scenes",
+   "note": "Wayback raw capture. The core-objection limb is verbatim: 'He is creepy, primarily, because of his TWENTY THOUSAND MILLION GRATUITOUS RAPE AND/OR MOLESTATION AND/OR DOMESTIC VIOLENCE SCENES. And I could write a post about those... But you know what would be easier? I could just count them. One by one by one.' The essay does walk the books in order (sections 1-4, each with a 'Major Female Characters' roster), but no per-book count of scenes exists: the arithmetic is one cumulative 'FINAL SCORES' block after book four counting characters, not scenes — '83%' of major female characters abused/raped/threatened, '100%' of the female children.",
+   "unsupportedLimb": "tallied book by book — the tallies are a single cumulative FINAL SCORES block (percentages of major female characters), not a per-book count of scenes",
+   "fromFile": "verdicts-martin-i480-494.json"
+  }
+ },
+ {
+  "index": 500,
+  "feature": "compound neologisms",
+  "claim": "Compounds like sellsword, smallfolk, ironborn, greenseer and weirwood are a highly creative and enjoyable aspect of the style.",
+  "source": "Simon (Books & Boots), 'Some notes on George RR Martin's prose style', 31 Mar 2014",
+  "url": "https://astrofella.wordpress.com/2014/03/31/some-notes-on-george-rr-martins-prose-style/",
+  "quote": "a highly creative and enjoyable aspect of his style",
+  "angle": "longform",
+  "verdict": {
+   "index": 500,
+   "verdict": "PARTIAL",
+   "trueWording": "Martin uses this facility to coin scores of neologisms (of the compounds)",
+   "note": "The quote is verbatim but belongs to section 6 'New coinages', whose examples are sept/septon/septa, maester, wildlings, pyromancer, holdfast, warg, damphair. The five words the claim names are all on the page but in the SEPARATE section 7 'New word combinations', where the page says only 'Martin uses this facility to coin scores of neologisms' and that they 'build up a linguistic base for the otherness of his fantasy world' - no creative/enjoyable praise. Confirmed positionally: the praise phrase is on text line 73 under heading '6 New coinages'; the compound list is on line 77 under '7 New word combinations'. (The sibling 2013 post does call the compounds 'scores of wonderful and evocative neologisms' - see index 507 - but that is a different page from the one cited here.)",
+   "unsupportedLimb": "the praise 'a highly creative and enjoyable aspect of his style' is said of the new coinages (sept, maester, warg), not of the compounds sellsword/smallfolk/ironborn/greenseer/weirwood",
+   "fromFile": "verdicts-martin-i495-509.json"
+  }
+ },
+ {
+  "index": 502,
+  "feature": "ambiguous repetition",
+  "claim": "Repeated 'cool' and 'still' in the Water Gardens passage may be haste or deliberate torpor-evoking repetition.",
+  "source": "Simon (Books & Boots), 'Some notes on George RR Martin's prose style', 31 Mar 2014",
+  "url": "https://astrofella.wordpress.com/2014/03/31/some-notes-on-george-rr-martins-prose-style/",
+  "quote": "signs of haste, or careful repetitions",
+  "angle": "longform",
+  "verdict": {
+   "index": 502,
+   "verdict": "PARTIAL",
+   "trueWording": "the word paintings of the Water Palace of Lord Martell of Dorne",
+   "note": "Substantive limb is verbatim: '(I can't decide whether the repetitions in this passage - of cool and still - are signs of haste, or careful repetitions designed to evoke the lazy, torpid atmosphere of Lord Martell's sea retreat.)' Haste-vs-deliberate-torpor and the two repeated words are exactly right. Only the location label diverges: the page introduces the quoted FFC40 passage as the 'Water Palace', never 'Water Gardens'. Relabel the passage and the claim is fully sourced.",
+   "unsupportedLimb": "'the Water Gardens passage' - the page calls it the 'Water Palace of Lord Martell of Dorne'",
+   "fromFile": "verdicts-martin-i495-509.json"
+  }
  }
 ]

@@ -22,7 +22,7 @@
  We have recently deployed two browsing options on our new DriveThruRPG marketplace. Using these, customers can now choose to either view or filter out AI-Generated content in their Account Settings . (AI-Generated content is set to viewable by default.) This will apply to when you are logged into your account. 
  From the main page, select MENU > My Account > Account Settings > Additional Preferences and toggle Show AI Content to the OFF position. 
  AI-Generated Creation Method Filter 
- While exploring the website, titles are also now clearly labeled as Handcrafted or AI-Generated if the publisher has selected one of those options.  
+ While exploring the website, titles are also now clearly labeled as Handcrafted or AI-Generated if the publisher has selected one of those options. 
  What do the different filters mean? 
  Handcrafted → Artwork was made by an artist practicing their craft, without the use of AI-generation programs. 
  Contains AI-Generated Content → AI-Generation Programs such as Midjourney were used in creating some or all of the art in the title. 

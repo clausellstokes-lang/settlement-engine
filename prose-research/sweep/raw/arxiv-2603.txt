@@ -21,7 +21,7 @@
  Artificial Intelligence (cs.AI) ; Computation and Language (cs.CL); Computers and Society (cs.CY) 
  MSC classes: 
  68T50 
- ACM  classes: 
+ ACM classes: 
  I.2.7; I.2.6; K.4.1 
  Cite as: 
  arXiv:2603.13545 [cs.AI] 
@@ -40,9 +40,9 @@ View a PDF of the paper titled The AI Fiction Paradox, by Katherine Elkins View 
  view license 
  Current browse context: 
  cs.AI 
- < prev 
-   |   
- next > 
+ < prev 
+ | 
+ next > 
  new 
  | 
  recent 

@@ -1,7 +1,6 @@
-Techniques to Write Adventures - Luke Gearing 
-
+ 
+ Techniques to Write Adventures - Luke Gearing 
  Luke Gearing
-
  Home 
  Archives 
  Search 
@@ -12,9 +11,7 @@ Techniques to Write Adventures - Luke Gearing
  Contact 
  Books I’ve Read 
  Violence. 
-
- Recent entries
-
+ Recent entries 
  Wizards 
  Plastic Venus 
  Writing For Violence 
@@ -46,71 +43,39 @@ Techniques to Write Adventures - Luke Gearing
  Clerics 
  Wolves 3rd Party Shit 
  Writing NPCs 
-
  September 14, 2021 
  technique 
- Techniques to Write Adventures
-
+ Techniques to Write Adventures 
  There’s a random adventure jam you could join! 
-
- Obviously these will not work for everyone, are not universal and is very incomplete.
-
- Ideation
-
- This is the thing I can help the least with - coming up with ideas is very personal. You hopefully know best what works for you. For me, this is heavily rooted in history, geography, poetry and the visual aspects of film.
-
- When you do have an idea, if you can’t use it right now write it down somewhere. When you’re stuck in the middle of something else, a record of snippets and phrases like this can be a goldmine.
-
- One general piece of advice for this is to cultivate boredom. Allow yourself time to be bored - this is when you start thinking. I used to write a lot on trains because what else was I going to do?
-
- Switchup
-
- If I’m stuck on something, I stop typing and write it down physically. Something about changing how I am writing helps me immensely. Some of this might be that a physical pad and pen is much less distraction rich than a computer. I often turn off the Wi-Fi when trying to get something done.
-
- Outline To Fuck
-
- Use your outline (that is, your headings) to build a skeleton - then your words, the details, are the meat. Map First is similar, albeit using an actual map.
-
- Markdown is great for this because you don’t break flow, you just hit # a few times. I used this technique to write this piece. If you’re quite scatterbrained like me, it’s good to be able to quickly jump elsewhere in a document, type a heading and then go back to what you were working on before.
-
- !! detail
-
- If you don’t know the specifics of something (name, relationship, geography) just mark it with a !! and move on. When you’re done, search !! in the document and fill in the blanks. Many will have suggested themselves as you worked on the rest.
-
- After reading through this I went to add some words when I saw the !! - you quickly internalise it means “ incomplete”.
-
- Structures
-
- These are some structures for the development of an adventure. Move between them as you see fit.
-
- Mental Dig/Exploration
-
- If you have a good sense of the vibe and tone of a physical space, I often just close my eyes and imagine being there. This works for fine-tuning the vibe/tone, finding those touchstones which communicate the tone, and for finding out what else is there. I find this especially useful for dungeons - moving from room to room, the contents of physical space begin to suggest themselves to me.
-
- Map First
-
- I often have a map of a physical space before anything else. The map will change, but it acts as a framework to hang everything else from.
-
- Pearl
-
- Take your single (or most important) concept, element, vibe or (shudder) theme. Note down everything you can about it in an unstructured format. Now add another element, a complication or destabilisation - note down everything that changes next to the destabilised element. Repeat this as many times as you want.
-
- Resonance & Conflict
-
- List all of your concepts, elements, vibes or (retch) themes. Identify and highlight all conflicts and resonances. Many of these conflicts are where the adventure could lie. The resonances are good for building settings and factions.
-
- Timeline
-
- If you have a situation, write down a rough timeline of what will happen if the players never turn up. This will often help clarify details about the situation, about the factions and the stakes. This feeds back in - you might end up doing a few of these.
-
- Previous post
-
+ Obviously these will not work for everyone, are not universal and is very incomplete. 
+ Ideation 
+ This is the thing I can help the least with - coming up with ideas is very personal. You hopefully know best what works for you. For me, this is heavily rooted in history, geography, poetry and the visual aspects of film. 
+ When you do have an idea, if you can’t use it right now write it down somewhere. When you’re stuck in the middle of something else, a record of snippets and phrases like this can be a goldmine. 
+ One general piece of advice for this is to cultivate boredom. Allow yourself time to be bored - this is when you start thinking. I used to write a lot on trains because what else was I going to do? 
+ Switchup 
+ If I’m stuck on something, I stop typing and write it down physically. Something about changing how I am writing helps me immensely. Some of this might be that a physical pad and pen is much less distraction rich than a computer. I often turn off the Wi-Fi when trying to get something done. 
+ Outline To Fuck 
+ Use your outline (that is, your headings) to build a skeleton - then your words, the details, are the meat. Map First is similar, albeit using an actual map. 
+ Markdown is great for this because you don’t break flow, you just hit # a few times. I used this technique to write this piece. If you’re quite scatterbrained like me, it’s good to be able to quickly jump elsewhere in a document, type a heading and then go back to what you were working on before. 
+ !! detail 
+ If you don’t know the specifics of something (name, relationship, geography) just mark it with a !! and move on. When you’re done, search !! in the document and fill in the blanks. Many will have suggested themselves as you worked on the rest. 
+ After reading through this I went to add some words when I saw the !! - you quickly internalise it means “ incomplete”. 
+ Structures 
+ These are some structures for the development of an adventure. Move between them as you see fit. 
+ Mental Dig/Exploration 
+ If you have a good sense of the vibe and tone of a physical space, I often just close my eyes and imagine being there. This works for fine-tuning the vibe/tone, finding those touchstones which communicate the tone, and for finding out what else is there. I find this especially useful for dungeons - moving from room to room, the contents of physical space begin to suggest themselves to me. 
+ Map First 
+ I often have a map of a physical space before anything else. The map will change, but it acts as a framework to hang everything else from. 
+ Pearl 
+ Take your single (or most important) concept, element, vibe or (shudder) theme. Note down everything you can about it in an unstructured format. Now add another element, a complication or destabilisation - note down everything that changes next to the destabilised element. Repeat this as many times as you want. 
+ Resonance & Conflict 
+ List all of your concepts, elements, vibes or (retch) themes. Identify and highlight all conflicts and resonances. Many of these conflicts are where the adventure could lie. The resonances are good for building settings and factions. 
+ Timeline 
+ If you have a situation, write down a rough timeline of what will happen if the players never turn up. This will often help clarify details about the situation, about the factions and the stakes. This feeds back in - you might end up doing a few of these. 
+ Previous post 
  2d20 Bandits 
  On an encounter table, the entry 2d20 Bandits pulls a lot of work. Bandits are human beings. This makes them harder to deal with - when you lean in 
-
- Next post
-
+ Next post 
  Mentorship 1 - Retrospective 
  This was the first round of an ongoing commitment to mentor ttrpg writers with the goal of growing the space and helping others get published. At 
-
- Subscribe to the RSS feed for Luke Gearing
+ Subscribe to the RSS feed for Luke Gearing 

@@ -65,77 +65,77 @@
  Contact 
  Reviews 
  What’s the Score? – A Game of Thrones (Series Comparison!) 
- We’re off to the fantastical lands of Westeros for this edition of  What’s the Score , as we welcome genre titan George R.R. Martin to the AutoCrit family! 
- The popularity of Martin’s  A Song of Ice and Fire series needs no long-winded introduction – so let’s get to it, knock down the doors of the Red Keep and see exactly what’s going on inside the literary shadows of  A Game of Thrones . 
- How will the AutoCrit suite react to Martin’s weighty tome? Does the author sport a certain set of words he likes to use – or perhaps  over use? What can we learn from this particular novel that we can use in our own editing endeavors? It’s time to find out! 
- Stick around at the end for a summary score breakdown of the series so far – including  A Clash of Kings ,  A Storm of Swords ,  A Feast for Crows , and  A Dance with Dragons . 
- DISCLAIMER: Note that this series is not designed to provide any kind of qualitative judgment nor a critique of the works dissected. As an exercise in exploration,  What’s the Score?  offers unique insight for us word nerds as to the linguistic makeup of specific novels, and evokes discussion of possible editing strategies in retrospect. All novels chosen for inspection have already proved immensely successful and stand as a testament to the author’s talents. 
+ We’re off to the fantastical lands of Westeros for this edition of What’s the Score , as we welcome genre titan George R.R. Martin to the AutoCrit family! 
+ The popularity of Martin’s A Song of Ice and Fire series needs no long-winded introduction – so let’s get to it, knock down the doors of the Red Keep and see exactly what’s going on inside the literary shadows of A Game of Thrones . 
+ How will the AutoCrit suite react to Martin’s weighty tome? Does the author sport a certain set of words he likes to use – or perhaps over use? What can we learn from this particular novel that we can use in our own editing endeavors? It’s time to find out! 
+ Stick around at the end for a summary score breakdown of the series so far – including A Clash of Kings , A Storm of Swords , A Feast for Crows , and A Dance with Dragons . 
+ DISCLAIMER: Note that this series is not designed to provide any kind of qualitative judgment nor a critique of the works dissected. As an exercise in exploration, What’s the Score? offers unique insight for us word nerds as to the linguistic makeup of specific novels, and evokes discussion of possible editing strategies in retrospect. All novels chosen for inspection have already proved immensely successful and stand as a testament to the author’s talents. 
  Summary Score and Fingerprint 
  Starting with steady poise, A Game of Thrones comes out swinging with an excellent summary score of 79.99 using AutoCrit’s General Fiction comparison. This puts it right around where we expect to see bestsellers in our investigations –usually in the region of 75 to 85. 
  ( Click here to catch up with the rest of our inspections if you’re new to the blog.) 
- Looking at the fingerprint, you might be alarmed at the high numbers in each category. Remember, though, that  A Games of Thrones is a  very long book, so it’s only natural to see higher numbers. 
- It’s also worth remembering that each marker is simply an  indicator . It doesn’t necessarily mean there are definitely problems – instead, AutoCrit simply thinks you would do well to give these particular things your attention. 
+ Looking at the fingerprint, you might be alarmed at the high numbers in each category. Remember, though, that A Games of Thrones is a very long book, so it’s only natural to see higher numbers. 
+ It’s also worth remembering that each marker is simply an indicator . It doesn’t necessarily mean there are definitely problems – instead, AutoCrit simply thinks you would do well to give these particular things your attention. 
  So let’s get our editor’s hat on and do just that! 
  We’ll start with dialogue… 
  Dialogue 
- The general rule we all know and love is that the vast majority of your dialogue tags should use  said or  asked . This is for ease of reading, but it also gives the reader the opportunity to use their own imagination a little more (and thus become more absorbed by your work). 
- There are a  lot of dialogue tags in  A Game of Thrones – hardly unusual for such a long book that’s packed with character interaction and social/political intrigue. 
+ The general rule we all know and love is that the vast majority of your dialogue tags should use said or asked . This is for ease of reading, but it also gives the reader the opportunity to use their own imagination a little more (and thus become more absorbed by your work). 
+ There are a lot of dialogue tags in A Game of Thrones – hardly unusual for such a long book that’s packed with character interaction and social/political intrigue. 
  That said, having almost the same number of alternative dialogue tags as we do the standard two is a little alarming. Let’s have a look at the word-level analysis and puzzle this out. 
  Surprisingly, things aren’t quite as worrisome as they appeared. Said is definitely the most popular dialogue tag in the book, running far and away from anything else. 
  The tag is marked as overused, but that’s not something to worry about given the length of the novel and the amount of dialogue, which is naturally much greater than your average work of fiction. 
- Instead, we want to turn our attention to the less common tags such as  whispered ,  commanded ,  announced , and  muttered . To do that, we’ll hop into the manuscript and see what AutoCrit’s word-level recommendations think we should do… 
- Checking out the word recommendations in the sidebar, we’re drawn to  blurted . It’s used 14 times in the novel, and AutoCrit recommends we remove 11 of those. 
+ Instead, we want to turn our attention to the less common tags such as whispered , commanded , announced , and muttered . To do that, we’ll hop into the manuscript and see what AutoCrit’s word-level recommendations think we should do… 
+ Checking out the word recommendations in the sidebar, we’re drawn to blurted . It’s used 14 times in the novel, and AutoCrit recommends we remove 11 of those. 
  All of this is entirely your choice as the author, however, so you’re free to make the decisions that matter. From what we see in our own inspection, Martin doesn’t actually use blurted all that often, and certainly not in close proximity (which can make uncommon words stand out to the reader too much). 
  Frankly, it’s looking good. Sure, you might want to trim and tuck here and there if this were your novel – but, again, that’s up to you and what you think will deliver your desired reading experience. 
  Moving on, we’re checking out Martin’s use of adverbs in dialogue tags. This can be an area for some serious editorial wins, as adverbs in dialogue tags generally deliver a lesser experience than more well-rounded writing. 
- Which is to say, these adverbs tend to be a kind of shorthand,  telling the reader about the character’s mood or actions instead of  showing them and allowing the dialogue to organically feed off what’s already known. 
+ Which is to say, these adverbs tend to be a kind of shorthand, telling the reader about the character’s mood or actions instead of showing them and allowing the dialogue to organically feed off what’s already known. 
  There are quite a few words marked as overused here, so we’ll pop over to the manuscript and see what’s going on at the word level. 
- Here, we were drawn to an instance of  bluntly . We’re told that Brynden Tully says something bluntly, and then we’re immediately told he was never one to blunt the edge of his words. 
+ Here, we were drawn to an instance of bluntly . We’re told that Brynden Tully says something bluntly, and then we’re immediately told he was never one to blunt the edge of his words. 
  Yes, it does make sense when parsed, but it forms a quick stumbling block that might work better with the adverb removed. If this were your novel, would you rephrase? Let us know. 
  Next up is an example of two lines of dialogue between Arya and Sansa Stark. The two lines read almost identically in rhythm, and both employ adverbs in the dialogue tags. 
  This repetition of -ly words can make something feel “off” about passages, and this could be an example of where one (or both) could go without affecting the storytelling at all. Are the adverbs really telling us anything more about the characters or the nature of their conversation than we already know? 
  A good question to keep in mind when editing for yourself. 
  Repetition 
- Up next is repetition, and while we can see a fair number of words marked as overused, it doesn’t raise any alarms considering they’re entirely setting-appropriate words such as  lord ,  ser , and king , plus a range of character names. 
+ Up next is repetition, and while we can see a fair number of words marked as overused, it doesn’t raise any alarms considering they’re entirely setting-appropriate words such as lord , ser , and king , plus a range of character names. 
  Yes, there may be opportunities to remove some of these (especially in instances where they occur multiple times in quick succession) but we wouldn’t direct too much effort here for now. 
  The same can be said for the most frequent phrases within A Game of Thrones , all of which are intrinsic to the setting, and none of which are actually detected as overused. 
  Top job, Mr. Martin! 
  Strong Writing 
- Moving into the Strong Writing category, our adverb-o-meter plants  A Game of Thrones  right into the “Great” area – a real achievement, especially for a book of this length. 
+ Moving into the Strong Writing category, our adverb-o-meter plants A Game of Thrones right into the “Great” area – a real achievement, especially for a book of this length. 
  Breaking it down to the word level, however, we do still see a bunch of overused words. Given that adverbs are possibly the quickest and easiest words to excise when editing, let’s jump into the manuscript and see what’s going on… 
- Top of the list here are  truly and  scarcely , so we spent some time digging around to see what’s going on inside A Game of Thrones . 
+ Top of the list here are truly and scarcely , so we spent some time digging around to see what’s going on inside A Game of Thrones . 
  Scarcely is a word that appears quite often in both character dialogue and narrative prose. In all, it feels like a word that’s very much part of the book’s voice. In cases like this, it would be best to look for instances of repetition that could help you cut down. 
- Here, for example, we found a spot where  scarcely pops up in quick succession. An alternative word such as  barely might help alleviate any awkwardness from repetition. 
+ Here, for example, we found a spot where scarcely pops up in quick succession. An alternative word such as barely might help alleviate any awkwardness from repetition. 
  Here’s scarcely popping up again… 
- While  truly gets the red flag at the top of the recommendations list, we found it mainly appears in the book’s dialogue. Characters speak as characters speak, so there’s no real reason to get too caught up on that one – unless, of course, you can catch some repetitious examples that could be massaged. 
- On the same page, we find an adverb attached to dialogue, in which Jon Snow snaps angrily . This is an example of an adverb that isn’t really needed. The emphasis (italics and exclamation point) in the dialogue carries the message, as does the tag snapped.  The anger is already implied, so this one could definitely be removed. 
- Going much further in this particular manuscript (let’s not forget that  A Game of Thrones  has already been professionally edited, published, and adored by readers worldwide!) would be to nitpick, and that’s not the point here. 
+ While truly gets the red flag at the top of the recommendations list, we found it mainly appears in the book’s dialogue. Characters speak as characters speak, so there’s no real reason to get too caught up on that one – unless, of course, you can catch some repetitious examples that could be massaged. 
+ On the same page, we find an adverb attached to dialogue, in which Jon Snow snaps angrily . This is an example of an adverb that isn’t really needed. The emphasis (italics and exclamation point) in the dialogue carries the message, as does the tag snapped. The anger is already implied, so this one could definitely be removed. 
+ Going much further in this particular manuscript (let’s not forget that A Game of Thrones has already been professionally edited, published, and adored by readers worldwide!) would be to nitpick, and that’s not the point here. 
  But do keep these core concepts in mind for editing your own work. 
  Next up is the filler words report, and we’re sitting square in the middle here: 
- This isn’t a particularly concerning result off the bat, and that’s confirmed when we check it out at the word level. We only have a few words to tackle here, including  even , seemed , and seem .  
+ This isn’t a particularly concerning result off the bat, and that’s confirmed when we check it out at the word level. We only have a few words to tackle here, including even , seemed , and seem . 
  Jumping into the manuscript, we can see exact numbers recommended for removal. Given the length of the book, the numbers are actually smaller than expected, and there’s surely good opportunity to chop them down a little. 
- Seemed , for example, can be seen cropping up quite a lot throughout  A Game of Thrones , and some massaging there could easily bring the count down. 
+ Seemed , for example, can be seen cropping up quite a lot throughout A Game of Thrones , and some massaging there could easily bring the count down. 
  Making a quick pivot over to clichés and redundancies, we see nothing of concern – in fact, Martin’s redundancies result is one of the best we’ve seen. 
  Last in this section, we’re once again on the good side of the meter when we check out indicators for showing vs. telling. 
  The reason these words are highlighted is that they’re often markers of where an author is being too direct with their description. The presence of a word such as heard could reveal a passage where the author tells the reader a character heard something instead of showing the reader by having the character react to the sound. 
  In reality, both could occur – but this is one report that’s well worth the time to pore over when you’re editing your own stories. You’ll probably ignore most instances of a word, but you’ll also catch some excellent opportunities to make your writing richer. 
  Word Choice 
- Generic descriptions are those wishy-washy words that are basic shorthand for visual concepts. Think the likes of  big ,  great , and good. 
+ Generic descriptions are those wishy-washy words that are basic shorthand for visual concepts. Think the likes of big , great , and good. 
  This is another area where your writing could become a much richer and more involving experience for the reader if you put more intricate detail (but not too much!) into your descriptions. 
-   A Game of Thrones scores well here, sitting right near the middle, with a primary focus on the words looked ,  look , and  great . 
- Diving back into the manuscript, we can see Martin does appear to enjoy describing things as  great , and there’s plenty of  looked that could be expanded upon. 
- Here we have a direct tell of  Sansa looked radiant . She receives no further description or evocation of why that is, whereas Joffrey is afforded more detail. Could it be better if the feeling of radiance were more naturally evoked through description? 
+ A Game of Thrones scores well here, sitting right near the middle, with a primary focus on the words looked , look , and great . 
+ Diving back into the manuscript, we can see Martin does appear to enjoy describing things as great , and there’s plenty of looked that could be expanded upon. 
+ Here we have a direct tell of Sansa looked radiant . She receives no further description or evocation of why that is, whereas Joffrey is afforded more detail. Could it be better if the feeling of radiance were more naturally evoked through description? 
  This is, potentially, a nitpick – but do keep the concept in mind. 
- Here’s another use of  great , plus mention that Ned looked irritated. Could there be a better way to describe  how Ned looked irritated? 
- To wrap up this section we have the readings for  A Games of Thrones ‘ sentence starters and initial pronouns and names. 
+ Here’s another use of great , plus mention that Ned looked irritated. Could there be a better way to describe how Ned looked irritated? 
+ To wrap up this section we have the readings for A Games of Thrones ‘ sentence starters and initial pronouns and names. 
  There isn’t much to discuss about this factor, except to compare to other novels – where we tend to find similar results, especially in the use of initial pronouns. 
  Pacing & Momentum 
- Now we hop on the pacing rollercoaster and, yes, we like what we see. A tiny 3.39% of  A Game of Thrones is detected as slower in pace, and the graph gives us that nice up and down visual experience. 
- We’re always happy when you can almost pick out act breaks or where dramatic arcs are closed just by looking at the graph, and Martin’s novel definitely has that appeal.  
+ Now we hop on the pacing rollercoaster and, yes, we like what we see. A tiny 3.39% of A Game of Thrones is detected as slower in pace, and the graph gives us that nice up and down visual experience. 
+ We’re always happy when you can almost pick out act breaks or where dramatic arcs are closed just by looking at the graph, and Martin’s novel definitely has that appeal. 
  Sentences are much the same, with a comparatively small 851 sentences containing more than 30 words. 
  The appearance of the graph transposes quite well to the paragraph version, which speaks to a piece of work from an author who knows how to effectively control the reading experience. 
  Readability 
- In terms of readability,  A Game of Thrones comes in with a Flesch Reading Ease score of 87. This puts it in the realm of conversational English, so it should be easily understood and enjoyed by most readers. 
+ In terms of readability, A Game of Thrones comes in with a Flesch Reading Ease score of 87. This puts it in the realm of conversational English, so it should be easily understood and enjoyed by most readers. 
  Genre Comparison Score 
  Wow! The result is a tremendous jump forward to a score of 84.34 – a sign that when narrowed down to its particular niche, this book truly stands out. 
  That’s the magic of AutoCrit. Like the North, it remembers. It knows different audiences want different things, and it’s only too happy to be your hand. 
@@ -158,7 +158,7 @@
  A Dance with Dragons 
  General Fiction Summary Score 
  Sci-Fi/Fantasy Summary Score 
- It would appear not!  
+ It would appear not! 
  Every book in the series ends up with an admirable score, and a pleasant jump forward when held against its genre. 
  All in all, George R.R. Martin’s series earns huge respect from AutoCrit, and marks an author who most definitely knows his voice and has the skill to use it. 
  Until next time, keep your sword sharp and watch the shadows – there may be daggers inside them… 

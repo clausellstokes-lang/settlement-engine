@@ -3,27 +3,33 @@
  "name": "wolfe",
  "angle": null,
  "tag": "i450-464",
- "lines": 21,
+ "lines": 115,
  "firstTs": "2026-09-06T17:27:18.842Z",
- "lastTs": "2026-09-06T17:29:40.077Z",
+ "lastTs": "2026-09-06T17:35:21.631Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 3
+  "Bash": 30,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://lareviewofbooks.org/article/we-read-things-differently/",
   "https://ultan.org.uk/review-botns/",
-  "http://lists.urth.net/pipermail/urth-urth.net/2006-September/$m.html"
+  "http://lists.urth.net/pipermail/urth-urth.net/2006-September/$m.html",
+  "https://web.archive.org/web/20210416053637id_/http://lists.urth.net/pipermail/urth-urth.net/2006-September/$m.html",
+  "https://web.archive.org/web/2015id_/https://lareviewofbooks.org/article/we-read-things-differently/",
+  "https://web.archive.org/web/20210416053633id_/http://lists.urth.net/pipermail/urth-urth.net/2006-September/058619.html",
+  "https://web.archive.org/web/20210416053701id_/http://lists.urth.net/pipermail/urth-urth.net/2006-September/002938.html",
+  "https://web.archive.org/web/2021id_/http://lists.urth.net/pipermail/urth-urth.net/2006-September/author.html"
  ],
  "filesWritten": [],
- "lastAssistantText": "I'll start by reading the chunk file.",
+ "lastAssistantText": "All 15 claims resolved against raw pages. Writing the checkpoint file.",
  "run": "wf_58e1616d-d5f",
  "agent": "ad5234222475c8556",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_58e1616d-d5f/agent-ad5234222475c8556.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i450-464.json",
-  "exists": false
+  "exists": true
  }
 }

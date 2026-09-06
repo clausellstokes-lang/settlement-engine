@@ -3,13 +3,14 @@
  "name": "ai",
  "angle": null,
  "tag": "i299-313",
- "lines": 71,
+ "lines": 89,
  "firstTs": "2026-09-06T17:26:31.148Z",
- "lastTs": "2026-09-06T17:29:37.589Z",
+ "lastTs": "2026-09-06T17:32:22.079Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 14
+  "Bash": 17,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://en.wikipedia.org/w/index.php?title=Wikipedia:Signs_of_AI_writing&action=raw",
@@ -22,13 +23,13 @@
   "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing"
  ],
  "filesWritten": [],
- "lastAssistantText": "The 404 Media page confirms 302. Now the arXiv papers.",
+ "lastAssistantText": "Checkpoint file written and read back (15 claims, 15 verdicts, 19,292 bytes). All seven source URLs were fetched as raw text with a browser user agent — no host blocked, no Wayback route needed, no BLOCKED verdicts.",
  "run": "wf_d28449b9-5d6",
  "agent": "ad7dfd60e3a60953d",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-ad7dfd60e3a60953d.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i299-313.json",
-  "exists": false
+  "exists": true
  }
 }

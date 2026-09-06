@@ -35,9 +35,9 @@ View a PDF of the paper titled Can Good Writing Be Generative? Expert-Level AI W
  view license 
  Current browse context: 
  cs.AI 
- < prev 
-   |   
- next > 
+ < prev 
+ | 
+ next > 
  new 
  | 
  recent 

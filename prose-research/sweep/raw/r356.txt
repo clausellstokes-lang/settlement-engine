@@ -120,7 +120,7 @@
  F 
  S 
  S 
-   1 2 3 4 5 6 
+ 1 2 3 4 5 6 
  7 8 9 10 11 12 13 
  14 15 16 17 18 19 20 
  21 22 23 24 25 26 27 
@@ -152,7 +152,7 @@ Friday, August 21 2026
  Teaching 
  Living 
  Past 
- Written by  John Sanders October 15, 2019 Of Feet and Hobbit-Holes: Lessons Learned from a Literary Intro Reading Article 
+ Written by John Sanders October 15, 2019 Of Feet and Hobbit-Holes: Lessons Learned from a Literary Intro Reading Article 
  Literature is full of great beginnings. There are plenty to choose from — Austen’s “truth universally acknowledged,” Dickens’s contradicting description of the best (and worst) of times, Orwell’s clocks’ striking thirteen, etc. — each with their own merits. But I want to start this series on effective introductions with a line that I will always hold dear — the opening paragraph to J.R.R. Tolkien’s The Hobbit : 
  In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it was a hobbit-hole, and that means comfort. 
  Right off the bat, I think I’ve found my first approach to successful openings. 
@@ -162,11 +162,11 @@ ahead and read the first sentence out loud. “In a hole in the ground there
 lived a hobbit.” It has a certain rhythm to it which is both familiar and
 distinct. Let me show you what I mean: 
  Rhythm 
- # of syllables Poetic Term in a    Hole 
+ # of syllables Poetic Term in a Hole 
 ba-da-DA
  3 
 Anapest
- in the   Ground 
+ in the Ground 
 ba-da-DA
  3 
 Anapest
@@ -195,7 +195,7 @@ combine the hobbits’ descriptions with the tone presented, internalizing the
 subject matter as they learn more about them. 
  So, what is the takeaway from all this? It certainly isn’t that you should break out a poetry textbook when starting your next paper or take the longest route possible to get to the point (Tolkien’s circumscription only lasts a paragraph for a reason!). Instead, it is useful to ask whether your first few lines puts readers in the right place. A good way of doing this is by reading your words aloud (perhaps over music) to catch the rhythm, and including language that evokes your subject without describing it directly. Hey, if you’re reading this, you’re probably in the middle of some writing project — why not try it? 
  Next week, I’ll be taking this discussion to film and ask: what can a movie’s opening moments tell us about writing good intros? In the meantime, try reading Tolkien’s intro one last time, but this time with Howard Shore’s music in the background. You won’t be disappointed. 
- John Sanders  is a PhD Candidate in the Syracuse University English Department where he studies film, new media, and adaptation. He is currently working on a dissertation about digital and analog games based on literary works, and hopes that no one recalls his library books. 
+ John Sanders is a PhD Candidate in the Syracuse University English Department where he studies film, new media, and adaptation. He is currently working on a dissertation about digital and analog games based on literary works, and hopes that no one recalls his library books. 
  You may also like Palestinian Feminist Poetics of Resistance: Reviving Phantomized Political Prisoners Excess Emotion and Queer Subjectivity in Pericles “Unbury Your Gays”: Queer Phantoms in The Picture of Dorian Gray and Gideon the Ninth Share this: 
  Share on X (Opens in new window) 
  X 
@@ -291,7 +291,7 @@ subject matter as they learn more about them.
  F 
  S 
  S 
-   1 2 3 4 5 6 
+ 1 2 3 4 5 6 
  7 8 9 10 11 12 13 
  14 15 16 17 18 19 20 
  21 22 23 24 25 26 27 

@@ -3,15 +3,16 @@
  "name": "dnd",
  "angle": "scholarship-history",
  "tag": null,
- "lines": 484,
+ "lines": 499,
  "firstTs": "2026-09-06T16:58:52.736Z",
- "lastTs": "2026-09-06T17:29:40.792Z",
+ "lastTs": "2026-09-06T17:35:10.075Z",
  "tools": {
   "Read": 1,
-  "Bash": 106,
+  "Bash": 109,
   "ToolSearch": 1,
   "WebFetch": 1,
-  "WebSearch": 26
+  "WebSearch": 26,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://api.crossref.org/works?filter=isbn:9780262547604&rows=60&select=title,DOI,author,page,abstract",
@@ -115,11 +116,11 @@
  "run": "wf_f9424af6-fcf",
  "agent": "a5baef40f7ca4a1a6",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_f9424af6-fcf/agent-a5baef40f7ca4a1a6.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-scholarship-history.json",
   "claims": 112,
-  "complete": false,
-  "mtime": "13:29:13"
+  "complete": true,
+  "mtime": "13:30:12"
  }
 }

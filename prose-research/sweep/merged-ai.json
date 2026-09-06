@@ -10659,6 +10659,452 @@
    "note": "Quote appears word for word. Abstract confirms 'TTCW consists of 14 binary tests', 'We recruit 10 creative writers', and 'none of the LLMs positively correlate with the expert assessments'. Caveat: the dimensional gloss is only half supported - the paper states 'all models achieve their highest pass rate on the Fluency dimension' and Table 5 puts Originality lowest, but it does not single out Elaboration as a deficit (Elaboration tracks Flexibility), and it frames the gap as broad rather than concentrated.",
    "unsupportedLimb": "the dimensional gloss is only half supported — the paper does not single out Elaboration as a deficit and frames the gap as broad rather than concentrated.",
    "fromFile": "verdicts-ai-regrade-r1.json"
+  },
+  "254": {
+   "index": 254,
+   "verdict": "PARTIAL",
+   "trueWording": "hoax with well-formatted citations referencing completely nonexistent works",
+   "unsupportedLimb": "that it passed Articles for Creation, and that it survived 2023-01 to 2023-12",
+   "note": "Raw article fetched in full (404media.co, HTTP 200, not paywalled). Quote verbatim: 'The entire thing was an AI-generated hoax, with well-formatted citations referencing completely nonexistent works.' Supported limbs: 'more than 2,000 word article'; Ottoman fortress of Amberlisihar; 'the fortress never existed'; built '1466 by Mehmed the Conqueror' who the piece confirms was real; structural detail (stone and brick, craftsmen from Rumelia, timber from Black Sea forests). Unsupported: the page never mentions Articles for Creation or any review venue, and gives no lifespan for the article - its only dates are November 2023 (a different article, Chester Mental Health Center) and 'January 2022' inside a quoted ChatGPT phrase. Lebleu says only that fake citations 'might stay undetected for months'.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "255": {
+   "index": 255,
+   "verdict": "PARTIAL",
+   "trueWording": "list of completely fake sources in Russian and Hungarian",
+   "unsupportedLimb": "that Russian and Hungarian were chosen/effective because fewer reviewers could check them",
+   "note": "Wikipedia wikitext fetched via ?action=raw. Quote verbatim: 'the article Leninist historiography was entirely written by AI and included a list of completely fake sources in Russian and Hungarian at the bottom of the page. Google turned up no results for these sources.' The checkability rationale is absent from this page (no 'non-English', 'harder for', or 'fewer editors' anywhere in it). That rationale IS made in the 404 Media piece at index 254 ('This adds a layer of complications if the sources are not in English, as it makes it harder for most readers and editors to notice the issue') - but about the beetle/French case, not this one, and not on the cited page.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "256": {
+   "index": 256,
+   "verdict": "PARTIAL",
+   "trueWording": "real German and French sources, but completely off-topic; unrelated lifeform",
+   "unsupportedLimb": "that the unrelated subject was a crab",
+   "note": "Wikitext fetched raw. Quote verbatim: 'While the sourced articles were real, they were completely off-topic, with the French one discussing a completely unrelated lifeform.' The page names Estola albosignata, the beetle, and the German and French sources. It never says crab - the single 'crab' string match in the page is inside the username 'ScrabbleTiles'. The crab detail is real but comes from the 404 Media article at index 254 ('that article was about a completely unrelated species of crab'), a different source than the one cited here.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "257": {
+   "index": 257,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "models cite real sources but likely not verify the content",
+   "note": "Wikitext fetched raw. Full sentence: 'As of 2026, recent models will usually cite real sources, although they will likely not verify the content they are being cited for. The existence of these sources should not, by itself, be taken as evidence that the content is human-written.' Quote appears word for word; both limbs (real sources cited; the source is not checked against the sentence) are supported.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "258": {
+   "index": 258,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "models virtually always fail to properly source claims, often introduce errors",
+   "note": "Wikitext fetched raw. Full sentence: 'Unfortunately, these models virtually always fail to properly source claims and often introduce errors.' Quote word for word. One framing nuance, not a limb failure: the page predicates this of the models, the claim predicates it of the generated text.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "259": {
+   "index": 259,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "LLM confidently described the fictitious 'greater-toothed pademelon' as real",
+   "note": "Wikitext fetched raw. The quoted phrase appears word for word ('greater-toothed pademelons are found in wildlife preserves in Queensland'), and the page states 'greater-toothed pademelon' is a fictitious species, that 'This complete statement is false', that the model padded it with real red-necked-pademelon detail (shy, nocturnal, tracks, rustling), and that this shows 'LLM's can offer statements with a confident tone even when that information is factually incorrect'. Graded SUBSTANCE rather than VERBATIM only because the page's example is a chatbot response to a prompt, not an 'entry'.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "260": {
+   "index": 260,
+   "verdict": "PARTIAL",
+   "trueWording": "LLMs draw conclusions not present in any single reliable source",
+   "unsupportedLimb": "that it is delivered in encyclopedic voice",
+   "note": "Wikitext fetched raw. Quote verbatim: 'LLMs will sometimes \"draw conclusions\" which, even if they seem superficially familiar, are not present in any single reliable source', and the paragraph closes 'All of this is, in practical terms, equivalent to original research, or worse, outright fabrication' - so the original-research limb is fully supported. The register limb is not: the string 'encyclopedic' does not occur in the page at all. The nearest support is a different section's 'plausible-sounding and given with an air of confidence', which is about confidence, not encyclopedic register.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "261": {
+   "index": 261,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "neutral-seeming in tone, but not necessarily in substance",
+   "note": "Wikitext fetched raw; the quote is verbatim in the rendered page (the wikitext splits it across a piped link: 'neutral-seeming in tone, [[Algorithmic bias|but not necessarily in substance]]'). The biography limb is supported in other words by the next sentence: 'This concern is especially salient for biographies of living persons' - the page says 'especially salient', the claim says 'hardest to catch', and the page narrows to living persons.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "262": {
+   "index": 262,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "plausible-sounding and given with an air of confidence",
+   "note": "Wikitext fetched raw. Quote verbatim. The spot-check limb is supported in the same sentence-pair: 'An average user who believes that they are in possession of a useful tool, who maybe did a spot check for accuracy and \"didn't see any problems\", is biased to accept the output as provided; but it is highly likely that there are problems.'",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "263": {
+   "index": 263,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "might invent details when faced with an obscure-topic prompt",
+   "note": "Wikitext fetched raw. Near-verbatim, one inflection off: the page reads 'It might even invent details when faced with a prompt on an obscure topic or a nonsensical request' - 'invent', not the claim's 'invented' - so this is SUBSTANCE, not VERBATIM. 'Rather than saying less' is not stated but follows directly from inventing. STANDING CAVEAT for this source: the page carries {{Humorous essay|WP:NOAI}} at the top and its supporting refs are deliberate jokes (e.g. 'Chatty Al, On the Ontology of Ontologies: Why Everything is Probably a Sandwich'); it is a Wikipedia essay, not a guideline, and its examples are hypothetical or invented on purpose.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "264": {
+   "index": 264,
+   "verdict": "PARTIAL",
+   "trueWording": "One subtly false claim or distorted quote can misinform readers",
+   "unsupportedLimb": "that it survives review (the page asserts only that it can misinform and damage trust)",
+   "note": "Wikitext fetched raw. Quote verbatim (sentence-initial capital only): 'One subtly false claim or distorted quote can misinform readers and damage trust.' The 'embedded in otherwise correct text' limb is supported by the preceding sentence ('Even if 90% of an AI-generated article is correct and 10% is false, that 10% is a huge problem'). 'Survives review' is supported only inside an explicitly hypothetical scenario elsewhere on the page ('Imagine a scenario... This fictional biography could stand for days or weeks'), not as an observed fact. Same humorous-essay caveat as index 263.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "265": {
+   "index": 265,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "drafts often read like advertorials or partisan spins",
+   "note": "Wikitext fetched raw. Quote verbatim: 'editors noted how these drafts often read like advertorials or partisan spins - text that superficially met Wikipedia's guidelines in form, but not in spirit.' The promotional-language limb is stated as a feared hypothetical ('One hypothetical scenario we fear is an LLM churning out dozens of boosters for a company or ideology, each mixing facts with subtle promotional language') but also follows directly from 'advertorials'. Same humorous-essay caveat as index 263; note also the surrounding factual scaffolding is real (Princeton/WaPo, New Scientist refs).",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "266": {
+   "index": 266,
+   "verdict": "PARTIAL",
+   "trueWording": "seven references in one AI draft, five of those fabricated",
+   "unsupportedLimb": "that the others led to unrelated articles - the page says the citations 'led nowhere'",
+   "note": "Wikitext fetched raw. Quote verbatim: 'In one analysis, researchers found an AI-written draft of a historical article included seven references - and five of those were fabricated.' Two divergences: (a) the page attributes it to 'one analysis' by 'researchers', not 'one editor's test' (the preceding sentence does frame it as 'Wikipedia editors who have tested LLMs report'); (b) the follow-on reads 'on closer inspection they led nowhere', which is not 'led to unrelated articles'. ADVERSARIAL FLAG: the citation attached to this five-of-seven figure is itself one of the essay's joke refs - 'Irma McFakerson, How to Cite Books That Don't Exist' - so on this humorous-essay page the number has no traceable provenance and should not be repeated as a measured finding.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "267": {
+   "index": 267,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "patrons ask librarians to find books that don't exist",
+   "note": "Raw page fetched (HTTP 200); the article is member-gated after the lede, but the whole claim sits in the free lede: 'Reference librarian Eddie Kristan said lenders at the library where he works have been asking him to find books that don't exist without realizing they were hallucinated by AI... after fielding patron requests for the same fake book titles from real authors - the consequences of an AI-generated summer reading list circulated in special editions of the Chicago Sun-Times and The Philadelphia Inquirer.' Quote verbatim; every limb (newspaper list, real authors, nonexistent books, patrons asking librarians) supported. The claim says 'newspaper reading list'; the page specifies a syndicated summer reading list in two newspapers' special editions.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "268": {
+   "index": 268,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "commercially available LMs are riddled with errors",
+   "note": "arXiv HTML v2 fetched raw (483KB, full paper). Quote verbatim: 'Our results indicate that commercially available LMs are riddled with errors, having FActScores of 42%, 58% and 71%, respectively.' Exact figures confirmed: 'InstructGPT and ChatGPT achieve FActScores of 42.5% and 58.3%, respectively' and 'PerplexityAI... attains a FActScore of 71.5%'; PerplexityAI is described as 'search-augmented'. Biographies limb confirmed ('FActScores of people biographies generated by several state-of-the-art commercial LMs'). The below-humans limb is stated twice: 'All LMs are substantially less factual than humans' and 'GPT-4 and ChatGPT are far less factual than humans'.",
+   "fromFile": "verdicts-ai-i254-268.json"
+  },
+  "269": {
+   "index": 269,
+   "verdict": "PARTIAL",
+   "trueWording": "Error rates are higher for rarer entities, consistently across all models",
+   "unsupportedLimb": "the ~80% to ~16% ChatGPT figures — no per-frequency-bin precision numbers appear anywhere in the page text; they exist only inside Figure 2 (top), an image whose alt text is 'Refer to caption'",
+   "note": "Quote is verbatim as the Sec. 3.4 heading 'Error rates are higher for rarer entities.' The every-model limb is supported: 'There is a notable decrease in FActScore as the rarity of entities increases, consistently across all LM_subj s.' But the only numeric rarity drop stated in prose is PerplexityAI's: 'a relative drop of 50% and 64% observed at the atomic-level and sentence-level'. Searched the full text for 79-81.x and 15-17.x values near ChatGPT/frequency and for the five frequency bins ('very rare'...'very frequent', defined only in Appendix A.1) — no ChatGPT per-bin score is stated.",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "270": {
+   "index": 270,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Error rates are higher for facts mentioned later in the generation",
+   "unsupportedLimb": "",
+   "note": "Quote appears word for word inside the Sec. 3.4 heading 'Error rates are higher for facts mentioned later in the generation.' Body supports every limb: 'Figure 2 (bottom) reports factual precision over relative positions in a generation. Across all LMs, the later part of the generation has significantly worse precision.'",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "271": {
+   "index": 271,
+   "verdict": "PARTIAL",
+   "trueWording": "36.0% and 37.6% of supported and unsupported sentences have citations",
+   "unsupportedLimb": "'36% of both' — the two rates are not equal: supported sentences are 36.0% but unsupported sentences are 37.6%, not 36%",
+   "note": "No quote was supplied with this claim, so nothing could be checked word for word. The inference limb is the paper's own explicit conclusion: 'we find that, although PerplexityAI provides citations to the references, citations have little correlation with factual precision' and 'commercial LMs that incorporate search and provide citations may not be as reliable as expected.' Only the numeric limb misreports, by collapsing 36.0/37.6 into a single 36%.",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "272": {
+   "index": 272,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "major depressive disorder 4/68 6%; binge eating 17/60 28%; body dysmorphic 14/48 29%",
+   "unsupportedLimb": "",
+   "note": "Quote 'more prone to citation-related hallucinations' is verbatim in the Introduction: 'topics with lower online visibility, limited research coverage, or highly specialized scope are more prone to citation-related hallucinations.' Every limb holds: Results give 'major depressive disorder: 4/68, 6%; binge eating disorder: 17/60, 28%; body dysmorphic disorder: 14/48, 29%; chi2=13.7; P=.001', and the visibility limb is explicit — the three disorders were chosen as 'different levels of public awareness and research coverage: major depressive disorder (high), binge eating disorder (moderate), and body dysmorphic disorder (low).'",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "273": {
+   "index": 273,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There's nothing in this biography that's correct.",
+   "unsupportedLimb": "",
+   "note": "Quote is verbatim. Every limb holds: Kingery is 'one of my great-great-grandfathers... a pretty average, obscure individual'; the no-context limb is explicit twice — 'If I prompt ChatGPT, \"write a biography of John Peter Kingery,\" ChatGPT has no context' and 'I gave ChatGPT absolutely no context to work with'; and ChatGPT did produce the biography ('that's exactly what ChatGPT did').",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "274": {
+   "index": 274,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "In terms of language, makes sense. In terms of fact, not quite.",
+   "unsupportedLimb": "",
+   "note": "No quote was supplied. Page supports the claim in its own words: 'if I enter a question like, \"When did Ohio birth records start,\" ChatGPT is going to give me a response that in terms of language, makes sense. In terms of fact, not quite. Below is ChatGPT's response. I highlighted in yellow the text that is incorrect.' The response is reproduced as a screenshot whose alt text reads 'ChatGPT prompt asking \"when did Ohio birth records start\" and ChatGPT's response. Errors highlighted in yellow.' The blog frames it as a question 'we think it should know the answer to', matching the basic-record-keeping-fact limb.",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "275": {
+   "index": 275,
+   "verdict": "PARTIAL",
+   "trueWording": "the most common errors stem from... improper inferential links",
+   "unsupportedLimb": "the second- and third-place ranking ('then inaccurate paraphrase, then irrelevant sources') — the paper states only which error is most common; the actual distribution is in Figure 8, an image, and the text never ranks inaccurate paraphrasing above citing irrelevant sources",
+   "note": "The supplied quote 'surpassing basic fact-checking' IS on the page but belongs to a different passage — the verifiability/red-herring discussion ('addressing such verifiability issues is more nuanced, surpassing basic fact-checking') — not to the citation-error taxonomy, so it does not evidence this claim. The first limb is supported in Appendix C.3: three categories 'improper inferential linking, inaccurate paraphrasing, and citing irrelevant sources', and 'the most common errors stem from the tendency of LLMs to form improper inferential links between different pieces of information presented in the context window.' The claim's gloss of that category matches Table 9's example (source discusses religion in Hawaiian life but never mentions Lahaina). Sec. 4 adds 'the primary issues stem from drawing improper inferences and inaccurate paraphrasing', which is suggestive but is not a stated 2nd/3rd ordering.",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "276": {
+   "index": 276,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "introduce unverifiable connections between different pieces of information",
+   "unsupportedLimb": "",
+   "note": "Quote is verbatim. Every limb holds: 'low Verifiability scores stem from red herring fallacy or overspeculation issues. These arise when the generated articles introduce unverifiable connections between different pieces of information in R or between the information and the topic.' The distinct-from-hallucination limb is explicit: 'Compared to the widely discussed factual hallucination..., addressing such verifiability issues is more nuanced, surpassing basic fact-checking.' Appendix E repeats it as 'the red herring fallacy or the over-association of unrelated facts... calls for high-level sensemaking rather than mere fact-level verification.'",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "277": {
+   "index": 277,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "7 out of 10 editors said the articles sound 'emotional' or 'unneutral'",
+   "unsupportedLimb": "",
+   "note": "No quote was supplied, so no word-for-word check was possible; the claim is otherwise exact. Page: 'Another major issue identified is the transfer of bias and tone from Internet sources to the generated article, with 7 out of 10 editors mentioning that the STORM-generated articles sound \"emotional\" or \"unneutral\".' The editor-experience limb: 'we conduct human evaluation by collaborating with 10 experienced Wikipedia editors who have made at least 500 edits... and have more than 1 year of experience.' The source-bias limb is confirmed in Appendix E: 'the generated articles often contain emotional language and lack neutrality, primarily due to the source material.'",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "278": {
+   "index": 278,
+   "verdict": "PARTIAL",
+   "trueWording": "often the most reliable way... is to check whether the sources support the text",
+   "unsupportedLimb": "'stylistic signs ONLY prioritise which sentences to check' — the page presents sign-reading as the main identification method, one that 'can produce high degrees of certainty', not merely a triage step; and it calls source-checking 'often the most reliable way', not the only reliable test",
+   "note": "Quote is verbatim: 'often the most reliable way to determine whether content is AI-generated is to check whether the sources support the text (WP:V, i.e. whether content has been hallucinated). It can be most efficient to prioritise checking sentences which contain AI signs.' So the prioritisation role of signs is genuinely on the page — but as an efficiency tip alongside, not instead of, their evidential role: 'The main method editors use to identify LLM-generated content is to identify stylistic or linguistic signs... While such methods can produce high degrees of certainty, they are probabilistic, meaning editors should remain wary of false positives.' Page fetched at the redirect target 'Wikipedia:WikiProject AI Cleanup/Guide and resources'.",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "279": {
+   "index": 279,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "if it finds a particular version of a story cited more often",
+   "unsupportedLimb": "",
+   "note": "The supplied quote is NOT word for word — the page reads 'if it finds a particular version of a story cited more often', with 'of a story' present — so verbatim status fails on three words, but every limb of the claim is supported. Page: 'As an aggregator, if it finds a particular version of a story cited more often, it is trained to assume it is part of the mainstream discourse. It overemphasises the dominant narrative over alternative views, which reinforces misinterpretations and falsehoods.' The marginalisation limb: 'Marginalised voices - Indigenous people, minorities, or communities without digitised records - risk being erased further. When AI amplifies the dominant version of events, alternative interpretations fade into obscurity.'",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "280": {
+   "index": 280,
+   "verdict": "PARTIAL",
+   "trueWording": "instructing Copilot to cite primary sources... the bot confidently misquoted primary sources",
+   "unsupportedLimb": "that the fabricated paper was produced under the cite-primary-sources instruction — on the page the invented paper came from the EARLIER prompt (an essay based on Kanisetti's work); only the misquoting followed the primary-sources instruction",
+   "note": "The page separates two rounds: 'He asked Copilot... to write an essay based on his work about a medieval regiment in India. In its references, the tool produced a paper by an academic Kanisetti knew of, but he had never heard of this paper.' Then: 'Kanisetti then posed another query, instructing Copilot to cite primary sources. This time, the bot confidently misquoted primary sources and, again, admitted the fabrication when he called it out.' The claim's single sentence collapses both into the second round. Separately, the supplied quote is also not word for word: the page reads 'Large language models (LLMs) are trained to seem to be helpful', not 'Large language models are trained to seem helpful'.",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "281": {
+   "index": 281,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "invented events, fake citations, misquoted archival material, or fictional interpretations",
+   "unsupportedLimb": "",
+   "note": "Quote is verbatim. The no-qualifiers limb is in the same sentence: 'In historical research, hallucinations can manifest as invented events, fake citations, misquoted archival material, or fictional interpretations, which AI confidently presents without qualifiers or disclaimers.' The claim's 'and' for the page's 'or' is the only wording difference and does not change the enumeration.",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "282": {
+   "index": 282,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "hallucinations reinforce dominant perspectives while marginalizing underrepresented voices",
+   "unsupportedLimb": "",
+   "note": "No quote was supplied, so no word-for-word check was possible; the claim is otherwise near-identical to the page. Page: 'by replicating existing biases encoded in training data, hallucinations reinforce dominant perspectives while marginalizing underrepresented voices, further skewing historiographical balances (El Ganadi & Ruozzi, 2024).' All three limbs — training-data bias, dominant-perspective reinforcement, marginalisation — are in that one sentence.",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "283": {
+   "index": 283,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We identify eight such pages out of the flagged 45",
+   "unsupportedLimb": "",
+   "note": "Quote 'partial towards a specific viewpoint' is verbatim in the abstract: 'Flagged Wikipedia articles are typically of lower quality and are often self-promotional or partial towards a specific viewpoint on controversial topics.' Every limb holds. The 45 are the inspected set: 'We inspect each of the 45 English articles flagged as AI-generated by both GPTZero and Binoculars.' Sec. 5.3 'Pages Pushing Polarization' states 'we also identify pages that advocate a particular viewpoint on often polarizing political topics. We identify eight such pages out of the flagged 45' — distinct from the eight self-promotional pages of Sec. 5.2. The user limb: 'One user created five articles on English Wikipedia... on contentious moments in Albanian history... The user changed outcomes of an Albanian conflict from \"Mixed Results\" to \"Victory\" and deleted supporting text, before using AI to generate an entirely new page on said conflict.' Figure 2 names the conflict 'War in Dibra'.",
+   "fromFile": "verdicts-ai-i269-283.json"
+  },
+  "284": {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLM writing often puffs up the importance of the subject",
+   "note": "Raw wikitext + rendered page fetched (action=raw and action=render, live, 200). Quote 'marking a pivotal moment in the evolution of regional statistics' occurs exactly once in the rendered text, in the Statistical Institute of Catalonia example under the section 'Undue emphasis on significance, legacy, and broader trends'. Limbs: inflate importance = 'LLM writing often puffs up the importance of the subject matter by adding statements about how arbitrary aspects of the topic represent or contribute to a broader topic'; legacy/pivotal moments/broader trends = the section title plus its words-to-watch box ('is a testament/reminder', 'a crucial/pivotal/vital/significant/key role/moment', 'reflects broader'). The 'sources do not support' limb is supported page-wide rather than in this section: the sibling Superficial analyses section says 'For the purpose of Wikipedia, such comments are usually synthesis or unattributed opinions' and that RAG chatbots attach them to named sources 'regardless of whether those sources say anything close'.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "285": {
+   "index": 285,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLMs have serious problems keeping a neutral tone",
+   "note": "Quote 'Nestled within the breathtaking region of Gonder in Ethiopia' occurs exactly once in the rendered page, in the June 2023 Alamata (woreda) example under 'Promotional and advertisement-like language' (shortcuts WP:AIPUFFERY/WP:AIPEACOCK). Limbs: neutral-description failure = 'LLMs have serious problems keeping a neutral tone. Even when prompted to use an encyclopedic style, their output will often tend toward advertisement-like writing, or like the prose of a travel guide'; 'nestled' and 'vibrant' are both in that section's words-to-watch box, 'breathtaking' appears in the example itself. One nuance the claim does not carry: the page adds that newer LLMs are 'more subtly positive and tend to avoid obviously superlative statements like \"the best\"', so the strict-superlative reading is time-bound; the peacock/puffery reading is squarely supported.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "286": {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attaching a present participle phrase at the end of sentences",
+   "note": "Quote 'further enhancing its significance as a dynamic hub' occurs once, in the June 2023 Douera example under 'Superficial analyses'. Every limb is on the page: 'AI chatbots tend to insert superficial analysis of information, often in relation to its significance, recognition, or impact. This is often done by attaching a present participle (\"-ing\") phrase at the end of sentences'; the no-substance limb = 'such comments are usually synthesis or unattributed opinions'.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "287": {
+   "index": 287,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Words to watch: Industry reports, Experts argue, Some critics argue",
+   "note": "The exact quotation 'Industry reports suggest' does NOT appear on the page (0 occurrences in the rendered text); only the bare phrase 'Industry reports' appears, once, in the words-to-watch box of 'Vague attributions and overgeneralization of opinions' (WP:AIWEASEL), alongside 'Observers have cited', 'Experts argue' and 'Some critics argue'. The claim itself is fully supported in other words: 'AI chatbots tend to attribute opinions or claims to some vague authority-a practice called weasel wording... They may present views from one or two sources as widely held... mention the existence or opinion of multiple \"reviewers\" or \"scholars\" while only citing one person.' Graded SUBSTANCE, not VERBATIM, solely because the trailing verb 'suggest' is the sweep's, not the page's.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "288": {
+   "index": 288,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "focus is placed on characteristics of the sources themselves",
+   "note": "No quotation was supplied, so this is graded on substance against the raw page. Section 'Canned emphasis on notability, attribution, and media coverage' (WP:OVERATTRIBUTION/WP:AIATTR) supports both limbs: 'LLMs act as if the best way to prove that a subject is notable is to hit readers over the head with claims of notability, often by detailing sources that a subject has been covered in and specifying what kind of sources they are'; and 'the focus is placed on characteristics of the sources themselves: their contents, their availability/unavailability in public searching, and their classification in relation to the media landscape and the article's subject.' Independence and reach specifically: words-to-watch 'independent coverage', 'local/regional/national/[country name] media outlets', 'trade publications', and the November 2025 example 'profiled in multiple high-quality, independent, and widely-read outlets'.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "289": {
+   "index": 289,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Despite its [positive words], [subject] faces challenges...",
+   "note": "Quote 'Despite its success, the Panama Canal faces challenges' occurs once, in the March 2025 Panama Canal example under 'Outline-like conclusions about challenges and future prospects' (WP:FACESCHALLENGES). The formula limb is stated in the page's own words: 'a \"Challenges\" section, which typically begins with a sentence like \"Despite its [positive/promotional words], [article subject] faces challenges...\" and ends with either a vaguely positive assessment of the article subject, or speculation about how ongoing or potential initiatives could benefit the subject'; 'Future Prospects' is named as a companion section, and the vague-solutions limb matches the highlighted tail of the same example ('Future investments in technology... could enhance the canal's efficiency'). Small wording difference only: the page says such paragraphs 'usually appear at the end of articles', where the claim says they close sections.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "290": {
+   "index": 290,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "where there is one, there are likely others",
+   "note": "Quote 'enduring testament to the influence' occurs once, in the May 2025 Somali people example under 'High density of \"AI vocabulary\" words' (WP:AIVOCAB). All six words the claim names are in that section's words-to-watch box: delve, pivotal, underscore, testament, enduring, tapestry (tapestry and landscape flagged 'as an abstract noun'). The density/short-span limb: 'They often co-occur in LLM output: where there is one, there are likely others' and 'an edit (post-2022) introducing lots of them, lots of times, is one of the strongest tells for AI use.' The page also time-slices the vocabulary (delve is listed only in the 2023-mid-2024 GPT-4 band), which the claim does not distinguish.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "291": {
+   "index": 291,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "replaces copulas is or are with serves as a",
+   "note": "Quote 'serves as LAAA's exhibition space for contemporary art' occurs once, on the 'after' side of the Los Angeles Art Association text-diff under 'Avoidance of basic copulatives (\"is\"/\"are\" phrases)' (WP:AINOCOPULA/WP:AIREPRESENTS). Body: 'LLM-generated text often replaces simple constructions that use copulas such as is or are with constructions such as serves as a or mark the.' All four substitutes the claim names appear in the words-to-watch box: 'serves as/stands as/marks/functions as/operates as/represents [a]'.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "292": {
+   "index": 292,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "allude vaguely to the two subjects being associated with each other",
+   "note": "Quote 'being associated with leadership' occurs once, inside the page's own illustrative example under 'Vague expression of connection or association' (WP:AICONNECT/WP:AIASSOCIATION): 'In 2017, sources identified John Doe as being associated with leadership of ExampleCorp'. Both phrases the claim names are in that section's words-to-watch box: 'in connection with/to ...', 'connected with/to', 'in association with ...', 'associated with'. Replacing a named relation: 'Rather than directly stating a connection or relationship between two subjects (e.g., \"In 2017, John Doe was the CEO of ExampleCorp\")...'. The page frames the parties generically as 'two subjects' rather than the claim's 'people and events', though its example set includes a person-to-event instance ('organised in connection with celebrations of the 50th anniversary of Pakistan').",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "293": {
+   "index": 293,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'recur far above human frequency' - the page asserts no frequency comparison against human writers, and explicitly says the construction is common among human writers",
+   "trueWording": "common among human writers, but stereotypically an AI sign",
+   "note": "Quote 'not only a work of self-representation, but a visual document' occurs once, in the April 2025 Self-portrait (Yayoi Kusama) example under 'Negative parallelisms' (WP:AIPARALLEL); both named shapes have their own subsections, 'Not just X, but also Y' and 'Not X, but Y', and the body says 'It is common for LLMs to use parallel constructions involving \"not\", \"but\", or \"however\" such as \"Not only ... but ...\"'. The quantitative limb fails: the page makes no above-human frequency claim and states the opposite nuance - 'While it is common among human writers (especially in \"common misconceptions\" or \"myths busted\" listicles), it is stereotypically an \"AI sign.\"' Note the page's first shape is worded 'Not just X, but also Y', not the claim's 'Not only X but also Y' (the latter does appear in the body text).",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "294": {
+   "index": 294,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "lead defines the title as if a standalone real-world entity",
+   "note": "Quote 'EuroGames editions is the chronological list' occurs once, in the July 2025 EuroGames editions example under 'Leads treating Wikipedia lists or broad article titles as proper nouns'. Body supports both limbs: 'In AI-generated articles about topics with a title that is not a proper name, such as a list, the first sentence of the lead may introduce or define the article's title as if it were a standalone real-world entity.'",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "295": {
+   "index": 295,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "'Awards and recognition' is nearly ubiquitous in AI generated articles",
+   "note": "No quotation supplied; graded on substance. The page's '\"Awards and recognition\" section' section says: 'An \"Awards and recognition\" section is particularly common (indeed, also simply a \"Recognition\" section)... While human editors may also include sections about a subject's legacy or impact... the specific wording of \"Awards and recognition\" is nearly ubiquitous in AI generated articles.' Two wording gaps that do not defeat the claim: the page says AI-generated ARTICLES, not biographies specifically (biographies are a subset of that), and 'regardless of subject' is the claim's gloss on 'nearly ubiquitous' rather than page wording.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "296": {
+   "index": 296,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "LLMs overuse the rule of three",
+   "note": "No quotation supplied; graded on substance. The 'Rule of three' section (WP:RO3) states: 'LLMs overuse the rule of three. This can take different forms, from \"adjective, adjective, adjective\" to \"short phrase, short phrase, and short phrase\". LLMs often use this structure to make superficial analyses appear more comprehensive.' The claim's 'for rhythm rather than because the record has three' is a fair gloss of overuse plus 'stylistic flourishes' ('This sign is stronger when it appears in contexts where most people would not bother to include such stylistic flourishes, like edit summaries'), but the page never phrases the contrast in terms of what the record contains.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "297": {
+   "index": 297,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "uses them more often than nonprofessional human-written text of the same genre",
+   "note": "No quotation supplied; graded on substance. Section 'Overuse of em dashes' (WP:AIDASH): 'LLM output uses them more often than nonprofessional human-written text of the same genre, and uses them in places where humans are more likely to use commas, parentheses, colons, or (misused) hyphens and en dashes' - which supports both the rate limb and the clause-separation limb. Two qualifications the page carries and the claim does not: the baseline is NONPROFESSIONAL human writing of the same genre, and a maintenance box dated September 2026 says the sign 'seems to be less common in current LLM output' and should probably move to Historical indicators, citing a July 2026 Economist piece that 'of contemporary models only Claude used em dashes more than professional writers, and ChatGPT used them less.' The page also notes it is 'most useful... in combination with other indicators, not by itself' and is 'much more common on discussion pages than in article text'.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "298": {
+   "index": 298,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the '2022-2024' date window - the page attaches no date range to section summaries (the dated heading 'Didactic disclaimers (November 2022-2024)' is a different sign)",
+   "trueWording": "older LLMs often ended sections by summarizing and restating",
+   "note": "No quotation supplied; graded on substance against the raw page. The 'Section summaries' subsection (WP:CONCLUSION/WP:INCONCLUSION) supports the descriptive limb: 'When generating longer outputs (such as when told to \"write an article\"), older LLMs often added sections titled \"Conclusion\" or similar, and often ended paragraphs or sections by summarizing and restating its core idea', with words to watch 'In summary', 'In conclusion', 'Overall'. The 'now mostly gone' limb is supported by its placement under '== Historical indicators ==': 'The following indicators were common in text generated by older AI models, but are much less frequent in newer models... Dates are approximate.' But no 2022-2024 window is given for THIS sign - the page's only such heading window belongs to 'Didactic disclaimers (November 2022-2024)', and the section-summary examples are drawn from 2023 and 2024 revisions.",
+   "fromFile": "verdicts-ai-i284-298.json"
+  },
+  "299": {
+   "index": 299,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Editors sometimes paste chatbot correspondence, meant for the user, into article text",
+   "note": "Raw wikitext (action=raw) and rendered HTML both fetched. The supplied quote 'As you can see from the evidence presented above' is NOT on the page (zero hits in either representation) - it is not the page's wording. The substance is supported by section 'Communication intended for the user' > 'Collaborative communication': 'Editors sometimes paste text from an AI chatbot that was meant as correspondence, prewriting or advice, rather than article content. This may appear in article text or within comments', with words-to-watch 'I hope this helps', 'let me know', 'Would you like...', and community-addressing examples ('Collaboration, not confrontation, should be the goal').",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "300": {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "contentReference, oaicite/oai_citation, +1, turn0search0, attributableIndex; plus 'Use of Markdown'",
+   "note": "'oaicite' appears verbatim many times. Subsection heading: 'ChatGPT: contentReference, oaicite/oai_citation, +1, turn0search0, attributableIndex' - 'LLM output sometimes exposes its internal formatting code, which is an unambiguous indicator that the text originated with AI.' turn0search0 limb: 'ChatGPT may include citeturn0search0 ... at the ends of sentences'. Markdown limb: separate section 'Use of Markdown' - Markdown formatting 'is preserved in clipboard text by the copy functions on some chatbot platforms' and shows up in saved revisions (examples cited by diff). All four limbs supported; all are documented as surviving into live revisions.",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "301": {
+   "index": 301,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Broken external links; invalid DOI/ISBNs; book citations without page numbers",
+   "note": "Claim carries no quote, so verbatim cannot be graded; every limb is supported by three named sections. 'Broken external links': 'If a new article or draft has multiple citations with external links, and several of them are broken ... this is a strong sign of an AI-generated page'. 'Invalid DOI and ISBNs': 'Unresolvable DOIs and invalid ISBNs can be indicators of hallucinated references.' 'Book citations without page numbers or URLs': 'LLMs often generate book citations that do not include page numbers.'",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "302": {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Chester Mental Health Center article, November 2023, included that phrase",
+   "note": "404 Media article fetched live (no block, no archive route needed). Verbatim: 'One egregious example is this Wikipedia article about the Chester Mental Health Center, which in November of 2023 included the phrase \"As of my last knowledge update in January 2022,\" referring to the last time the large language model was updated.' Live-article limb, training-cutoff limb and date-of-information limb all supported; the page uses curly quotes around the phrase but the phrase itself is word for word.",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "303": {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the object is promoted to subject and becomes the 'doer'",
+   "note": "Talk section 'Suggested addition: Inanimate subjects performing human actions (dropped actors)'. 'Rooms tighten' verbatim in the example list ('\"Rooms tighten and rates move\" (hotels sell out and raise rates)'); 'The closure maps publish in June' supplies the maps-publish example. Agent-promotion limb verbatim: 'the object is promoted to subject and becomes the \"doer.\"' Actor-suppression limb: 'while not mentioning or skipping the \"doer\"' and 'prose in which things happen but nobody does anything'. Nuance recorded, not a limb failure: the page says LLM output 'defaults to actor-less constructions at high density', a shade weaker than the claim's 'ever'.",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "304": {
+   "index": 304,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'720 Draft-space hits' is the count for \"in connection with\" alone, not the three phrases together; 'disproportionately' is asserted by no measurement on the page",
+   "trueWording": "insource search of \"in connection with\" in Draft space returns 720 results",
+   "note": "Talk section 'Connections'. Quote 'in connection with' verbatim. Supported: all three phrases are named ('similar use of \"in connection with/to\" / \"associated with/to\" / \"involvement in\" language in other drafts that read as unnatural'), and 'a lot of obvious/likely AI content' among the hits. Unsupported as stated: the 720 figure is one insource search for the single phrase \"in connection with\", and the editor's 'a lot of obvious/likely AI content' is a look at the FIRST PAGE of those results, not the 720; the page offers no base-rate comparison, so 'disproportionately' is not established there.",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "305": {
+   "index": 305,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "not plausible many editors duplicated the same broken table format independently",
+   "note": "Talk section 'Weird table coding'; claim carries no quote so verbatim cannot be graded. Recurrence limb: 'have now seen at least a dozen or so times this year alone' and 'I've consistently come across this particular format in either the discography tables of musicians or the filmography tables of actors and filmmakers'. Independence limb verbatim in substance: 'it's just not plausible that this many editors would just suddenly keep inventing and duplicating the same broken table-coding format independently of each other.' (A later reply attributes the format to Markdown table syntax; that does not disturb the claim.)",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "306": {
+   "index": 306,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'most of which' overstates the page's 'a lot of them', and it is one editor's personal spreadsheet, not 'editors' collectively tracking",
+   "trueWording": "the spreadsheet I keep has 106 signs (sorted by strength)",
+   "note": "Talk section 'AI edit summaries section', Gnomingstuff: 'the spreadsheet I keep has 106 signs (sorted by strength) but a lot of them are variations on the same thing.' The 106 figure is exact and the variation observation is real, but the page says 'a lot of them', not 'most', gives no 'small set of core patterns', and the spreadsheet is one editor's private list rather than a project-wide tracker.",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "307": {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "consistently low frequency 2010-2022, sudden surge in usage starting in 2023",
+   "note": "Figure 2 caption, arXiv HTML v1: 'The words are: realm, intricate, showcasing, pivotal. These terms maintained a consistently low frequency in arXiv CS abstracts over more than a decade (2010-2022) but experienced a sudden surge in usage starting in 2023.' Quote verbatim; all four words, the flat 2010-2022 baseline and the 2023 surge all supported. Scope note: the corpus is arXiv Computer Science abstracts specifically.",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "308": {
+   "index": 308,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "By February 2024: 22.2% vs 14.7%; shorter papers 17.7% vs 13.6%",
+   "note": "No quote supplied, so verbatim cannot be graded; both figure pairs appear exactly. 'By February 2024, the abstracts of papers more similar to their closest peer had an estimated 22.2% of sentences modified by LLMs, compared to 14.7% for papers less similar to their closest peer.' And: 'By February 2024, the abstracts of shorter papers had an estimated 17.7% of sentences modified by LLMs, compared to 13.6% for longer papers'. Both limbs supported, including 'of sentences'.",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "309": {
+   "index": 309,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the 10-17% range and the 99%/308% rises are GPT-3.5 SIMULATION results (Table 1, abstracts before vs after ChatGPT processing), not measured changes in 2023 arXiv abstracts",
+   "trueWording": "real 2023 abstracts: is/are 'dropped by more than 10%'; rest is simulation",
+   "note": "Geng & Trotta v2 fetched raw. Real-data finding: 'The counts in 10,000 abstracts of these two words were quite stable before 2023. However, the frequency of these two terms has dropped by more than 10% in 2023' - a lower bound only, no upper bound and no per-category split. The numbers the claim cites are Table 1, 'Word frequency (per abstract) before and after ChatGPT processing': is/are cs -14%,-17%; math -9%,-5%; astro -11%,-1%; cond-mat -16%,-13%; significant cs 99%, math 308%, astro 53%, cond-mat 171%. That table is GPT-3.5 re-writing 10,000 period-14 (April-July 2022) abstracts, not an observation of 2023 abstracts. So the direction is right, the attribution of the figures to 2023 abstracts is wrong; the '10-17%' range also does not match the across-category simulation spread (-1% to -17%).",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "310": {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fraction of LLM-style abstracts estimated approximately 35% in computer science",
+   "note": "Abstract: 'especially in the field of computer science, where the fraction of LLM-style abstracts is estimated to be approximately 35%, if we take the responses of GPT-3.5 to one simple prompt ... as a baseline.' Results: 'the density of ChatGPT style texts of the most recent time period in this category is around 35% ... astro and cond-mat both reach values between 10% and 20%, approximately.' Date limb: the corpus is 'one million arXiv papers submitted from May 2018 to January 2024', so 'the most recent time period' ends 2024-01. All limbs supported; the paper's baseline caveat (one simple GPT-3.5 prompt) is worth carrying.",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "311": {
+   "index": 311,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "excess vocabulary in 2024 consisted almost entirely of style words",
+   "note": "Kobak et al. v1 raw. Quote verbatim: 'whereas the excess vocabulary in 2024 consisted almost entirely of style words (Figure 3a)'. Parts of speech limb: 'Out of all 280 excess style words in 2024, 66% were verbs and 18% were adjectives.' Ratios limb verbatim: 'Less common words with strong excess usage included delves (r = 25.2), showcasing (r = 9.2) and underscores (r = 9.1)'. Contrast limb: 'The excess vocabulary during the Covid pandemic consisted almost entirely of content words ... most excess words in prior years were nouns.' Corpus is 14 million PubMed abstracts, not arXiv.",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "312": {
+   "index": 312,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "might sound the same and would contain the same set of ideas and references",
+   "note": "Discussion section, verbatim: 'For instance, all LLM-generated introductions on a certain topic might sound the same and would contain the same set of ideas and references, thereby missing out on innovations and exacerbating citation injustice.' Framed by the authors as a consequence of homogenisation ('This makes LLM outputs less diverse and novel than human-written text'). Both limbs of the claim supported; it is the paper's stated expectation, not a measurement, and the claim's 'may' preserves that.",
+   "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "313": {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "six readability metrics all indicate LLM-generated texts tend to be less readable",
+   "note": "Huang et al. v1 raw. Quote verbatim: 'Figure 5(c) presents the results of six readability metrics, all of which indicate that LLM-generated texts tend to be less readable.' Table 1's LLM-processing column carries every other limb: Long word % up, 'To Be' verb % down, Auxiliary verb % down, Pronouns % down, Average sentence length up (Long sentence % up), Dale-Chall readability up, Flesch-Kincaid grade level up, Coleman-Liau index up (and Flesch reading ease down) - all three named formulas move in the less-readable direction. 'LLM-revised Wikipedia text' matches the method: real Wikipedia simulated through GPT-4o-mini and Gemini-1.5-Flash, 'comparing the texts before and after LLM processing'.",
+   "fromFile": "verdicts-ai-i299-313.json"
   }
  }
 }

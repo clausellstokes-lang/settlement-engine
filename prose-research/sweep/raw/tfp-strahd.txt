@@ -1,708 +1,343 @@
+ 
 Curse of Strahd | tenfootpole.org 
-
  Skip to content 
-
  tenfootpole.org 
-
- I bought these adventure and review them so you don't have to.
-
- Home 
- My Favorite of the new old school adventurers 
-
+ I bought these adventure and review them so you don't have to. 
+ Home My Favorite of the new old school adventurers 
  The Black Maw 
-
  The Book Introduction 
-
  About Bryce … 
- 
  Bryce’s ToDo List of reviews 
-
  Review Standards 
-
  ← Dungeon Magazine #73 
-
  Dungeon Magazine #74 → 
-
- Curse of Strahd
-
+ Curse of Strahd 
  Posted on March 14, 2016 by Bryce Lynch 
-
-by Jeremy Crawford,Tracy Hickman,Laura Hickman,Adam Lee,Chris Perkins,Richard Whitters
-
-WOTC
-
-D&D 5E
-
-Levels 1-10
-
- Under raging storm clouds, the vampire Count Strahd von Zarovich stands silhouetted against the ancient walls of Castle Ravenloft. Rumbling thunder pounds the castle spires. The wind’s howling increases as he turns his gaze down toward the village of Barovia. Far below, yet not beyond his keen eyesight, a party of adventurers has just entered his domain. Strahd’s face forms the barest hint of a smile as his dark plan unfolds. He knew they were coming, and he knows why they came — all according to his plan. A lightning flash rips through the darkness, but Strahd is gone. Only the howling of the wind fills the midnight air. The master of Castle Ravenloft is having guests for dinner. And you are invited.
-
+by Jeremy Crawford,Tracy Hickman,Laura Hickman,Adam Lee,Chris Perkins,Richard Whitters 
+WOTC 
+D&D 5E 
+Levels 1-10 
+ Under raging storm clouds, the vampire Count Strahd von Zarovich stands silhouetted against the ancient walls of Castle Ravenloft. Rumbling thunder pounds the castle spires. The wind’s howling increases as he turns his gaze down toward the village of Barovia. Far below, yet not beyond his keen eyesight, a party of adventurers has just entered his domain. Strahd’s face forms the barest hint of a smile as his dark plan unfolds. He knew they were coming, and he knows why they came — all according to his plan. A lightning flash rips through the darkness, but Strahd is gone. Only the howling of the wind fills the midnight air. The master of Castle Ravenloft is having guests for dinner. And you are invited. 
  This is a retelling of the original I6 Ravenloft adventure, both expanded and and harkening back to the old adventure. Previous WOTC 5E adventures have been almost afraid of providing gameable content. They have provided this kind of generic detail that has been both uninspiring and irrelevant. This don’t do that. It provides some interesting environments to game in and some genuinely spooky shit. In some respects it meets or rivals the spookiness in one of the best horror adventures of all time: The Inn of Lost Heroes. It’s a little more visceral in this adventure, at least in places. It’s sets up some nice places to play in, especially the villages, and does a decent job with the imagery in many of the encounters. Again, in some ways it does a better job bringing things to life than Phandelver. Phandelver is still the best WOTC 5E product though because Phandelver is PLAYABLE. You can crack is open and play it. Curse of STrahd requires reading. A LOT of reading. And note taking. A LOT of note taking. And photocopying. A LOT of photocopies. It also needs about 75% of the text trimmed out of it. Yes, that’s right: 75%. AT LEAST. 
-
  Some parts of this adventure are REALLY good. They rip at you and I dare say they are best examples yet of what DREAD is supposed to be. One of the first areas is in an appendix, meant to get the characters from Level 1 to Level 3, Death House (this might be a free download. If so I encourage you to check it out to see what I’m referring to.) The Children in this house were locked away in room 20 in the attic, starved to death by their parents. The window is bricked up. There are two small skeletons huddled in the middle of the floor, one clutching a teddy bear/doll, with a sad little toybox and dollhouse nearby. Holy Shit! This is WOTC and/or Adventurers League?!? It’s very good. There are other scenes in the same adventure, such as the crib draped in tattered/aged black veils, with a swaddled bundle in black in it.When you unwrap it, it’s empty. There’s also the classic “storage room full of mirrors and dress mannequins covered in sheets” room. These are all quite nice and in the case of the children, quite moving and/or visceral. 
-
  There are other examples as well, in a similar vein. There’s some hags that literally grind the bones of children to make “dream pastries” to hook people on for escapism. They have an old rain barrell that they use for scrying. If they rap on it three times then a dretch can be summoned, hauling itself out of the barrell. That’s very good. It demonstrates a basic understanding of the shared heritage of what a Hag is and then builds upon it. There’s enough here to get quite inspired. 
-
- There are bits and pieces of this sort of excellent adventure/encounter design all over the adventure, much more so than any other WOTC/5E adventure, including Phandelver. They are to be applauded for those bits. From the deep scratches on the doors and windows of Barovia to the woman mad with grief to the priests who’s trapped his undead son in the basement, there are some very good things going on in Barovia. Nice job Strahd!
-
- The villagers and places, in particular, seem more alive than they have in many other WOTC/5E adventures, or in many other adventures period. There are multiple people in each village who all have something going on with them. Each with their own personality. We’re not talking Pembrooktonshire here, but they are certainly a more interesting lot than has I recall ever appearing in any WOTC/TSR adventure, or most others for that matter. It’s not just one plotline, or two, but several. This is then augmented by many of the locations having events. Things HAPPEN in this adventure. People are not just waiting around. Parades of ghosts, vampire attacks, almost every location has one or two events to augment and/or enhance some of the plotlines in the village. This is REALLY good. It brings the place to life. No longer static many of the villages now feel alive in a way they seldom have before in a WOTC product.
-
+ There are bits and pieces of this sort of excellent adventure/encounter design all over the adventure, much more so than any other WOTC/5E adventure, including Phandelver. They are to be applauded for those bits. From the deep scratches on the doors and windows of Barovia to the woman mad with grief to the priests who’s trapped his undead son in the basement, there are some very good things going on in Barovia. Nice job Strahd! 
+ The villagers and places, in particular, seem more alive than they have in many other WOTC/5E adventures, or in many other adventures period. There are multiple people in each village who all have something going on with them. Each with their own personality. We’re not talking Pembrooktonshire here, but they are certainly a more interesting lot than has I recall ever appearing in any WOTC/TSR adventure, or most others for that matter. It’s not just one plotline, or two, but several. This is then augmented by many of the locations having events. Things HAPPEN in this adventure. People are not just waiting around. Parades of ghosts, vampire attacks, almost every location has one or two events to augment and/or enhance some of the plotlines in the village. This is REALLY good. It brings the place to life. No longer static many of the villages now feel alive in a way they seldom have before in a WOTC product. 
  Finally, let me comment that some of the art is quite nice. I don’t usually comment on art unless it sets the mood exceptionally well, and it usually doesn’t. In particular there’s a piece on the Gates on Barovia that does a wonderful job of setting the mood of what’s to come. And on the downside I think every picture of Strahd proper is forgettable or laughably bad. 
-
  Hmmm, no, one more thing before I move on to the bad. The monsters here are … almost good? The vampire spawn crawl on the ceilings. The hags are haglike. The spectres in the Death House adventure are provided an environment in which they can come to their full potential. You can imagine, from the descriptions of the setting and the monster, how they could be used to appear and attack and so on. IE: The DM is inspired by many of monster texts. That’s exactly what the fuck EVERY adventure should do. There’s also a few near misses. Again, Death House there’s a door that comes alive and sucks the party in. The adventure says something like “the door is a mimic.” Let me suggest that there is a world of difference, in inspiring a DM, between “the door is a mimic” and the door comes alive and reaches out and tries to suck the party in. Treat it as a mimic.” The first is boring old book shit. The second gives the DM a shortcut to running a bizarre encounter by referring back to some 5e rules. There are multiple places in the adventure in which this comes up, this … “wouldn’t it be cooler if I did X … and I can just use these stats to replicate that.” It is at least close enough that this comes to mind, even if I would see it reinforced a little more. 
-
- On to the bad. I find myself wanting to make excuses for the adventure. I want to place the blame on Pay Per Word or on some set of Writer’s Guidelines that had to be followed. I’ve got no basis for any of that, but I seem compelled to find the reason for the suck. Maybe because the non-sucky parts are at times very good?
-
- The read-aloud in this, in many places, is laughable. Here is an example: “You stumble upon an old grave.” Or another: “You find a corpse.” Or another: “The bundle contains one set of common clothes sized for a human adult.” Or “You hear the howls of a wolf some distance away.” This is meaningless dreck. If you’re not going to make an effort then it should have been eliminated and no read-aloud provided. Certainly other parts of the adventure provide no read aloud, so why here? Oh wait, oh wait! Here’s a masterpiece of creative read-aloud writing!!! “You find something on the ground.” What the FUCK is up with that? PPW? Style Guide demanding read aloud for every wandering monster entry? And for the record these ARE for a wanderers table, but the read aloud in other places is just as drivel-full. Nonsense, but important because …
-
+ On to the bad. I find myself wanting to make excuses for the adventure. I want to place the blame on Pay Per Word or on some set of Writer’s Guidelines that had to be followed. I’ve got no basis for any of that, but I seem compelled to find the reason for the suck. Maybe because the non-sucky parts are at times very good? 
+ The read-aloud in this, in many places, is laughable. Here is an example: “You stumble upon an old grave.” Or another: “You find a corpse.” Or another: “The bundle contains one set of common clothes sized for a human adult.” Or “You hear the howls of a wolf some distance away.” This is meaningless dreck. If you’re not going to make an effort then it should have been eliminated and no read-aloud provided. Certainly other parts of the adventure provide no read aloud, so why here? Oh wait, oh wait! Here’s a masterpiece of creative read-aloud writing!!! “You find something on the ground.” What the FUCK is up with that? PPW? Style Guide demanding read aloud for every wandering monster entry? And for the record these ARE for a wanderers table, but the read aloud in other places is just as drivel-full. Nonsense, but important because … 
  In other places the text is long/meaningless in different ways. Rooms are described in detail for the DM. Detail that is meaningless and has no impact on the game. I THINK the writer is trying to set some ambiance, trying to inspire the DM to communicate a creepy vision to the players. But it all becomes Wall of Text. The entries are so long that the important bits are lost. Even the inspiring bits are then lost. Three sentences are used when one will do. Six are used when it needed two, or three. This is one of the major sins of the adventure. There is so much text provided that instead of being inspired you are lost in it all. It’s impossible to run with the book open in front of you. You’re going to have to prepare notes ahead of time and/or highlight the shit out of the adventure in order to run it at the table. And, after all, that’s what this thing is supposed to do, right? Be run at the table? The PLAYABILITY of the text suffers. It’s unfocused. 
-
- Back to playability: there’s no overview. Oh, there’s the “Strahd wants his babe back” and the whole “random special object” section up front, but there is nothing beyond yet. It’s clear that each section is meant to tie in to the other locations, I suspect in order to get the characters on the road and roaming around, experiencing the mini-region around the castle. Recall that I mentioned that each of the areas has a lot going on, socially. Lots of little mini-plots. It is, for the most part, these things that hook into the larger region. In Death House you find the deed to w windmill nearby. There’s also an old woman selling sweets in the street. Someone wants you to escort Strahd’s babe to a certain safe place. And so it goes. A leads to B leads to C. But the only way to get an understanding of this is to read the book THOROUGHLY and take a lot of quite focused notes with this purpose in mind. There’s no orientation to the adventure for the DM. “Sandbox” is not an excuse. There’s clearly some things meant to be worked in and the adventure as a whole suffers from not having an overview of how these things fit together.
-
- The locations, particularly the social one such as villages and their ilk, suffer a lot from not having a summary/cheat-sheet. The major NPCs, a couple of words on personality to jar to DM’s memory, a sentence per plot, and so on. A concrete example? I’d love to! Page 26 has a brief overview of what everyone in Barovia knows about what’s going on. You’re going to have to refer back to this incessantly while running almost every social interaction in the book. Similarly, some of the villages have a section like this. You’re going to have to refer back to it, digging through the book. “Uh, hang on, let me find the page, it’s around here somewhere …” It’s lame. You know what you do get? A giant tear out poster in the back of the book. It’s fucking useless. It’s not a DM play aid it’s an art piece. It’s far too large to use during play and it shows the floor plans and layout for the the locations. Hang it on your wall, use it as a marketing piece for the artists who’s hawking his hi-res maps, independently, but it’s fucking useless for the DM. Had that section instead been one page per social location and a brief list of rumors/information and/or an overview flowchart then it would have been MARVELOUS. Seriously, I’m starting to think that no one at WOTV involved in this thing has ever run a game. You’re going to seriously make the argument that the poster map is useful during play? Really? Or that reference sheets wouldn’t have been more useful?
-
+ Back to playability: there’s no overview. Oh, there’s the “Strahd wants his babe back” and the whole “random special object” section up front, but there is nothing beyond yet. It’s clear that each section is meant to tie in to the other locations, I suspect in order to get the characters on the road and roaming around, experiencing the mini-region around the castle. Recall that I mentioned that each of the areas has a lot going on, socially. Lots of little mini-plots. It is, for the most part, these things that hook into the larger region. In Death House you find the deed to w windmill nearby. There’s also an old woman selling sweets in the street. Someone wants you to escort Strahd’s babe to a certain safe place. And so it goes. A leads to B leads to C. But the only way to get an understanding of this is to read the book THOROUGHLY and take a lot of quite focused notes with this purpose in mind. There’s no orientation to the adventure for the DM. “Sandbox” is not an excuse. There’s clearly some things meant to be worked in and the adventure as a whole suffers from not having an overview of how these things fit together. 
+ The locations, particularly the social one such as villages and their ilk, suffer a lot from not having a summary/cheat-sheet. The major NPCs, a couple of words on personality to jar to DM’s memory, a sentence per plot, and so on. A concrete example? I’d love to! Page 26 has a brief overview of what everyone in Barovia knows about what’s going on. You’re going to have to refer back to this incessantly while running almost every social interaction in the book. Similarly, some of the villages have a section like this. You’re going to have to refer back to it, digging through the book. “Uh, hang on, let me find the page, it’s around here somewhere …” It’s lame. You know what you do get? A giant tear out poster in the back of the book. It’s fucking useless. It’s not a DM play aid it’s an art piece. It’s far too large to use during play and it shows the floor plans and layout for the the locations. Hang it on your wall, use it as a marketing piece for the artists who’s hawking his hi-res maps, independently, but it’s fucking useless for the DM. Had that section instead been one page per social location and a brief list of rumors/information and/or an overview flowchart then it would have been MARVELOUS. Seriously, I’m starting to think that no one at WOTV involved in this thing has ever run a game. You’re going to seriously make the argument that the poster map is useful during play? Really? Or that reference sheets wouldn’t have been more useful? 
  I always feel like I’m walking a fine line between a critique and second guessing. Maybe it’s appropriate, maybe not. I’m a hypocrite though, so let’s talk Hooks & Railroads. The hooks in this are shitty. Just terrible. Strahd sends someone with a fake letter to get you in, both in Version A and Version B or “Strahd lures the tools in.” Then there’s the ever popular. “Mists surround you. You’re in Ravenloft.” You know, the one where the designer doesn’t even try at all. The only one with any promise at all “Werewolves in the Mist”, where werewolves comes out the mists of a forest to raid and steal children. This is the Adventurer’s League hook, and comes with some factions rumors along with it. The whole werewolves coming out of the mist to kill and kidnap is very imagery, it’s too bad that it’s all abstracted. I suspect that the opening read-aloud paragraph is somehow meant for a 4-hour con-game slot and not a 250 page campaign book. Too bad, expanding on this just a bit, even to the point of eliminated the other lame ass “Strahd manipulates you into coming” hooks would have been a much better use of the words. On a related note, the railroads in this are few and far between, which is a VERY good thing. And when they do show up they are ABSOLUTELY TERRIBLE. Strahd Knows All. Strahd Manipulates All. Strahd blah blah blah testing you blah blah blah forces you to blah blah blah. The whole Omniscient and Omnipotent being manipulating you and testing you thing has NEVER been a good hook. EVER. It is only a crutch for a weak writer taking a shortcut. I’m surprised to not see the Strahd Christmas Episode. “The Mists! The Mists!” “They surround you. They close in! Better go where I want you to go or I will kill you!” Lame. Boring. Not. Even. Trying. 
-
  Unrelated to the adventure, let me complement the designers on the Character Options presented in the book. This is, essentially, a replacement background that can be used instead of the boring ones in the PHB. Some of the other adventures have tried to include these also, however I’ve found them as boring and lame as the ones in the PHB. Not these! As A Haunted One you get things like: “A hag kidnapped you and raised.” or “A fiend possessed you as a child.” The ten harrowing events are almost all not just good but GREAT. “A monster that slaughtered dozens of innocent people spared your life, and you don’t know why.” THESE are the hooks that myths are made from, not the generic crap in the PHB. These get your mind working. You immediately want to come up with the specifics of what is going on. Similarly, the Gothic Trinket Table. “A winter coat stolen from a dying soldier.” or “A picture you drew as a child of your imaginary friend.” Great great stuff. Not the same old boring genericism that usually comes with official D&D products. 
-
- And on the “WOuldn’t it be nice” front, I think some more examples of how a less god-like Strahd interacts with the party would be nice, as well as some more examples of Dread. There’s a little bit of both of these present but I think a few more and/or different examples would be nice. The Strahd stuff seems to focus on his attacking the party. A list of 10 of examples of ways he interacts would have been welcome, especially is a non-combat setting. Similarly, there are some examples of inspiring Dread. Describing wood as rotten, mildew, etc. This would have been an excellent idea for a list of 10 things to put on top of a DM screen or reference sheet, all present to help remind the DM to add that certain style of flavor.
-
- You can find a copy of the Death House adventure at:
-
-http://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf
-
- This is the Adventurers League version of the one in the back of the book, meant to get the characters from first level to third, so they can then start the “main” adventure. It differs a bit, but not enough to matter and can serve as an excellent reference to some of the points I’m making. It’s a dungeon, rather than a social location, so the mini-plots and personalities of the people won’t be present in this, but some of the other positives and negatives will be.
-
- The last paragraph of page 3:
-
-“The Mists” are a crappy plot/hook device. There are better ways to do this, even if you want to use the classic Ravenloft mists.
-
- Room 2 (Main Hall) on Page 4:
-
-Note the length of the description for this. It’s trying to set up some ambiance but it’s using so many words/sentences that it’s quite hard to run during actual play. You have to read, instead of glance. Fewer words and a more opulent use of language would have been better in this description, and in many of the other descriptions. The extra stuff adds little gameable content.
-
- Room 6 (Upper Hall) on Page 5:
-
+ And on the “WOuldn’t it be nice” front, I think some more examples of how a less god-like Strahd interacts with the party would be nice, as well as some more examples of Dread. There’s a little bit of both of these present but I think a few more and/or different examples would be nice. The Strahd stuff seems to focus on his attacking the party. A list of 10 of examples of ways he interacts would have been welcome, especially is a non-combat setting. Similarly, there are some examples of inspiring Dread. Describing wood as rotten, mildew, etc. This would have been an excellent idea for a list of 10 things to put on top of a DM screen or reference sheet, all present to help remind the DM to add that certain style of flavor. 
+ You can find a copy of the Death House adventure at: 
+http://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf 
+ This is the Adventurers League version of the one in the back of the book, meant to get the characters from first level to third, so they can then start the “main” adventure. It differs a bit, but not enough to matter and can serve as an excellent reference to some of the points I’m making. It’s a dungeon, rather than a social location, so the mini-plots and personalities of the people won’t be present in this, but some of the other positives and negatives will be. 
+ The last paragraph of page 3: 
+“The Mists” are a crappy plot/hook device. There are better ways to do this, even if you want to use the classic Ravenloft mists. 
+ Room 2 (Main Hall) on Page 4: 
+Note the length of the description for this. It’s trying to set up some ambiance but it’s using so many words/sentences that it’s quite hard to run during actual play. You have to read, instead of glance. Fewer words and a more opulent use of language would have been better in this description, and in many of the other descriptions. The extra stuff adds little gameable content. 
+ Room 6 (Upper Hall) on Page 5: 
 The armor description is the second sentence is in the last paragraph on the first column. “has a visored helm shaped like a wolf’s head.” I’m always harping on how treasure should be less abstracted and book-like and make the PLAYERS want it. This is a good example of that. just that second clause, about the wolfs head, will make almost every player finding it drool over it. 
-
- Room 9 (Secret Room) on page 5/6:
-
-AT the top of page ten the chest is described. It’s a good description and the body hanging out of it is a very nice example of the extra “good” detail adding a lot to the ambiance. Again, the entire room thing is WAY too long and spoon-fed, but the core idea is a very good one.
-
- Room 15 (Nursemaids Suite) on page 7:
-
-As a DM, reading this, I had a very strong visual image of the nursemaid attacking through the stained glass door between the main bedroom and the nursery. The description of the spectre, in one sentence is very good. That is an example of doing a description right and inspiring the DM. Note also the last paragraph of the main room description. The crib with a black shroud/swaddled bundle is a very nice example building tension and dread and, like the body in the chest, is a great element for the room … even if it could use tighter writing.
-
- Room 20 (Children’s Room) on Page 7 and 8:
-
+ Room 9 (Secret Room) on page 5/6: 
+AT the top of page ten the chest is described. It’s a good description and the body hanging out of it is a very nice example of the extra “good” detail adding a lot to the ambiance. Again, the entire room thing is WAY too long and spoon-fed, but the core idea is a very good one. 
+ Room 15 (Nursemaids Suite) on page 7: 
+As a DM, reading this, I had a very strong visual image of the nursemaid attacking through the stained glass door between the main bedroom and the nursery. The description of the spectre, in one sentence is very good. That is an example of doing a description right and inspiring the DM. Note also the last paragraph of the main room description. The crib with a black shroud/swaddled bundle is a very nice example building tension and dread and, like the body in the chest, is a great element for the room … even if it could use tighter writing. 
+ Room 20 (Children’s Room) on Page 7 and 8: 
 A core room so it’s allowed to be longer, but it’s still too long. The last two sentences of the first paragraph, describing the children’s bodies, is GOLD. Pure GOLD. The doll house having the secret doors shown is great also and a good example of integrating secret and knowledge into an adventure … for people that pay attention and try harder. Finally, the examples of how to run Possession by the Ghosts, at the top of page 9, are quite nice shortcuts to get a decent little effect but still allowing the players to run their character. 
-
  This entry was posted in Reviews . Bookmark the permalink . 
-
  ← Dungeon Magazine #73 
-
  Dungeon Magazine #74 → 
-
  12 Responses to Curse of Strahd 
-
  kim says: 
-
  March 14, 2016 at 7:10 pm 
-
- is this the best 5e era wotc mega-adventure?
-
+ is this the best 5e era wotc mega-adventure? 
  Reply 
-
  Bryce Lynch says: 
-
  March 15, 2016 at 6:38 am 
-
- You ask a hard question, and one I don’t want to answer for fear of an endorsement.
-
- Yes, I think it is. The social elements of the the earlier adventures were essentially completely ignored and that’s not the case in this adventure. That elevates this one over the others.
-
+ You ask a hard question, and one I don’t want to answer for fear of an endorsement. 
+ Yes, I think it is. The social elements of the the earlier adventures were essentially completely ignored and that’s not the case in this adventure. That elevates this one over the others. 
  Reply 
-
  vividantivirus says: 
-
  March 15, 2016 at 8:06 pm 
-
- I hope this is only the best 5e WotC mega-adventure *thus far*. ???? I have high hopes that once a solid benchmark is established that similar products will be created in the future, both by WotC and third party publishers.
-
- As a curious note, I was surprised to see such a visceral reaction by some of the community who were under the impression that this would be more of a campaign-style book, like Sword Coast Adventures. Obviously, that was never the authors’ intent, but it may not have been clearly communicated (enough).
-
- Clearly, there’s a demand for such products… But this isn’t it. I’m happy just to have a solid product, not more of what we saw with the Tiamat books.
-
+ I hope this is only the best 5e WotC mega-adventure *thus far*. ???? I have high hopes that once a solid benchmark is established that similar products will be created in the future, both by WotC and third party publishers. 
+ As a curious note, I was surprised to see such a visceral reaction by some of the community who were under the impression that this would be more of a campaign-style book, like Sword Coast Adventures. Obviously, that was never the authors’ intent, but it may not have been clearly communicated (enough). 
+ Clearly, there’s a demand for such products… But this isn’t it. I’m happy just to have a solid product, not more of what we saw with the Tiamat books. 
  Reply 
-
  lord of wolf-reyet star says: 
-
  March 19, 2016 at 5:00 am 
-
- great. and how do you feel 5e rules add (or not) to the adventure? would it ‘work’ better as, for example, ad&d 1e?
-
+ great. and how do you feel 5e rules add (or not) to the adventure? would it ‘work’ better as, for example, ad&d 1e? 
  Reply 
-
  Gavin Ralston says: 
-
  March 14, 2016 at 8:06 pm 
-
- When I got a look at the authors who did the heavy lifting on the new content for Ravenloft, I was genuinely concerned the 5E campaigns would devolve into the mid 90’s shitfest of boxed text and lame…everything.
-
- I’m REALLY happy to see how happy you were with the good bits in the first half of the review.
-
- I honestly expected when you got to this I’d wind up seeing my worst fears for this product made manifest in a 5000 word rant.
-
- Glad I can put this thing on my short list of stuff to get–even with all the “bad bits” it really sounds like they’re making a conscious effort to fight their urge to puke useless information and bad speak-aloud text on us.
-
+ When I got a look at the authors who did the heavy lifting on the new content for Ravenloft, I was genuinely concerned the 5E campaigns would devolve into the mid 90’s shitfest of boxed text and lame…everything. 
+ I’m REALLY happy to see how happy you were with the good bits in the first half of the review. 
+ I honestly expected when you got to this I’d wind up seeing my worst fears for this product made manifest in a 5000 word rant. 
+ Glad I can put this thing on my short list of stuff to get–even with all the “bad bits” it really sounds like they’re making a conscious effort to fight their urge to puke useless information and bad speak-aloud text on us. 
  Reply 
-
  vividantivirus says: 
-
  March 15, 2016 at 7:56 pm 
-
- Great review. I never played Ravenloft back in the day, because it seemed to deviate so much of what I loved in other modules (I’m a perennial fan of T1 and its ilk). However, my group showed a lot of interest in this setting, so I preordered it several weeks ago. I had a feeling that the WotC team stood a better chance of banging out a solid product than its third parties, and it sounds like my hunch paid off.
-
- It sounds like many adventure authors continue to make the mistake of telling a story – in the form of keyed encounter backstory – instead of providing additional aids that assist Dungeon Masters to thread together episodic adventures, plots, and NPCs. Let’s face it, these books are big. They are a lot to navigate. As you said, having some full-page cheat sheets would go a long way to help RUN the adventure. We’re not buying these merely to be read. To be fair, I haven’t seen those types of adventure keys done well, although my breadth of adventures is not nearly as wide as yours.
-
- Still, the great thing about your reviews is that they help me focus where I need to make improvements and wholesale rewrites. It’s like having an English teacher guide you when you take on a difficult classic book. Just the knowing of what the pitfalls are allows for a more thorough read.
-
+ Great review. I never played Ravenloft back in the day, because it seemed to deviate so much of what I loved in other modules (I’m a perennial fan of T1 and its ilk). However, my group showed a lot of interest in this setting, so I preordered it several weeks ago. I had a feeling that the WotC team stood a better chance of banging out a solid product than its third parties, and it sounds like my hunch paid off. 
+ It sounds like many adventure authors continue to make the mistake of telling a story – in the form of keyed encounter backstory – instead of providing additional aids that assist Dungeon Masters to thread together episodic adventures, plots, and NPCs. Let’s face it, these books are big. They are a lot to navigate. As you said, having some full-page cheat sheets would go a long way to help RUN the adventure. We’re not buying these merely to be read. To be fair, I haven’t seen those types of adventure keys done well, although my breadth of adventures is not nearly as wide as yours. 
+ Still, the great thing about your reviews is that they help me focus where I need to make improvements and wholesale rewrites. It’s like having an English teacher guide you when you take on a difficult classic book. Just the knowing of what the pitfalls are allows for a more thorough read. 
  Reply 
-
  Jeff says: 
-
  April 6, 2016 at 4:47 pm 
-
- Thanks for your review. There’s a lot of things in the review that I hope will help me run Ravenloft better for my players.
-
- I’m starting Ravenloft next session. My hook was different. My PCs are in Greyhawk in Sterich, and I re-wrote the history of Sterich so that Strahd is, technically, the King. Once he disappeared into Barovia due to his curse, the kingdom never recovered and became an earldom of Keoland. My PCs were adventuring and came across a small castle, a “summer home” of one a descendant of Strahd’s cousin long ago. He claimed kingship over Sterich, was a buffoon, and was never accepted by the people. While in his “summer home”, he began having personal visitations from the Vistani, which he wrote of in his journal (discovered by the PCs). The Vistani gifted the false king with a crown (from Barovia, though, he didn’t know it). The crown was cursed and it began to slowly cause those in the keep to succumb to death and be raised as undead.
-
- When the PCs found the king, he had hidden is his dungeon while a warlock, his advisor, had assumed the mantle of the keep (and taken the crown for himself, being evil). It killed him, and everyone in the castle. The crown, by the time the PCs came upon it, had bones stained with blood growing out of the gold, which were embedded into the warlock’s skull. The battle was brutal, and my PCs almost died.
-
- Once the PCs had the crown, the Earl of Sterich requested that they take it to the far corner of Sterich (which is where I am placing Barovia). Thus, I didn’t have to use a totally lame hook (albeit, this one isn’t great, but I have good players). The Earl petitioned the players to go to Barovia, destroy take the cursed crown back to Strahd’s realm, and to destroy Strahd if possible.
-
- I wish you would have mentioned the token appearance of Mordenkainen in the adventure. I initially didn’t like it, but I figure it’s not everyday that my players encounter someone of such power, though, I don’t think any of my players know who he is.
-
+ Thanks for your review. There’s a lot of things in the review that I hope will help me run Ravenloft better for my players. 
+ I’m starting Ravenloft next session. My hook was different. My PCs are in Greyhawk in Sterich, and I re-wrote the history of Sterich so that Strahd is, technically, the King. Once he disappeared into Barovia due to his curse, the kingdom never recovered and became an earldom of Keoland. My PCs were adventuring and came across a small castle, a “summer home” of one a descendant of Strahd’s cousin long ago. He claimed kingship over Sterich, was a buffoon, and was never accepted by the people. While in his “summer home”, he began having personal visitations from the Vistani, which he wrote of in his journal (discovered by the PCs). The Vistani gifted the false king with a crown (from Barovia, though, he didn’t know it). The crown was cursed and it began to slowly cause those in the keep to succumb to death and be raised as undead. 
+ When the PCs found the king, he had hidden is his dungeon while a warlock, his advisor, had assumed the mantle of the keep (and taken the crown for himself, being evil). It killed him, and everyone in the castle. The crown, by the time the PCs came upon it, had bones stained with blood growing out of the gold, which were embedded into the warlock’s skull. The battle was brutal, and my PCs almost died. 
+ Once the PCs had the crown, the Earl of Sterich requested that they take it to the far corner of Sterich (which is where I am placing Barovia). Thus, I didn’t have to use a totally lame hook (albeit, this one isn’t great, but I have good players). The Earl petitioned the players to go to Barovia, destroy take the cursed crown back to Strahd’s realm, and to destroy Strahd if possible. 
+ I wish you would have mentioned the token appearance of Mordenkainen in the adventure. I initially didn’t like it, but I figure it’s not everyday that my players encounter someone of such power, though, I don’t think any of my players know who he is. 
  Reply 
-
  TrancePantsFL says: 
-
  April 7, 2016 at 12:47 pm 
-
- “though, I don’t think any of my players know who he is.”
-
- Though their characters might, at least by reputation!
-
+ “though, I don’t think any of my players know who he is.” 
+ Though their characters might, at least by reputation! 
  Reply 
-
  Jeff says: 
-
  April 7, 2016 at 1:36 pm 
-
- True, at least one of them would, who has a Noble background.
-
+ True, at least one of them would, who has a Noble background. 
  Reply 
-
  Sandra says: 
-
  April 28, 2016 at 10:25 am 
-
- Very good review. I wish the WotC guys see it.
-
-I like Curse of Strahd very, very much. But just as you note, it’s hard to run.
-
+ Very good review. I wish the WotC guys see it. 
+I like Curse of Strahd very, very much. But just as you note, it’s hard to run. 
  Reply 
-
  Sandra says: 
-
  May 28, 2016 at 2:03 pm 
-
- After a few sessions I want to revise this. It has been much easier to run than PotA was. Princes had this weird layout where there were multiple overview chapters that iterated. But to get the whole story on a particular location, you had to read the short intro, the longer intro, and then the full location. Which was tough at the table.
-
-In CoS, the locations are much more self-contained and the overview chapter is much better referenced.
-
+ After a few sessions I want to revise this. It has been much easier to run than PotA was. Princes had this weird layout where there were multiple overview chapters that iterated. But to get the whole story on a particular location, you had to read the short intro, the longer intro, and then the full location. Which was tough at the table. 
+In CoS, the locations are much more self-contained and the overview chapter is much better referenced. 
  Reply 
-
  Garndan says: 
-
  July 10, 2019 at 5:40 pm 
-
- Very Good Review! I ran the original module back in the day and it was awesome. I am running a group in 5e and they are about to finish the Wave Echo Cave in Lost Mine of Phandelver. I have all kinds of the new adventure hard-backs including Curse of Strahd. One of my players really wants to run this book but it seems SO involved and one of those “you definitely better know your shit” campaigns. I don’t know about anyone else but the Lost Mine of Phandelver give you so many villain’s and story lines you could write homebrew into eternity with it. That s what I did with the first Ravenloft! My players never again played anything but home brew based on Greyhawk setting. So I don’t know if I will use this book or not. Time will tell!
-
+ Very Good Review! I ran the original module back in the day and it was awesome. I am running a group in 5e and they are about to finish the Wave Echo Cave in Lost Mine of Phandelver. I have all kinds of the new adventure hard-backs including Curse of Strahd. One of my players really wants to run this book but it seems SO involved and one of those “you definitely better know your shit” campaigns. I don’t know about anyone else but the Lost Mine of Phandelver give you so many villain’s and story lines you could write homebrew into eternity with it. That s what I did with the first Ravenloft! My players never again played anything but home brew based on Greyhawk setting. So I don’t know if I will use this book or not. Time will tell! 
  Reply 
-
- Leave a Reply Cancel reply 
- Your email address will not be published. Required fields are marked * 
- Comment * 
- Name * 
-
+ Leave a Reply Cancel reply Your email address will not be published. Required fields are marked * Comment * Name * 
  Email * 
-
  Website 
-
- Notify me of follow-up comments by email. 
- Notify me of new posts by email. 
-
+ Notify me of follow-up comments by email. Notify me of new posts by email. 
  My Patreon 
-
  Emupad 
-
- RSS https://tenfootpole.org/ironspike/?feed=rss2
-
+ RSS https://tenfootpole.org/ironspike/?feed=rss2 
  Bryce’s Adventure Design Forum – Featuring… Book Talk! 
-
- Search Archive:
-
+ Search Archive: 
  Search for: 
-
- Recent Comments
- Reason on The Swan Hollow Intrigue 
- AG on The Swan Hollow Intrigue 
- rekalgelos on The Swan Hollow Intrigue 
- Kubo on AA#18 – The Forsaken Sepulcher 
- Slipjoint on AA#18 – The Forsaken Sepulcher 
- Beoric on The Swan Hollow Intrigue 
- Slipjoint on AA#5 – The Flaming Footprints of Jilanth 
- Lycaon on The Swan Hollow Intrigue 
- Lycaon on The Swan Hollow Intrigue 
- Slipjoint on Wheel of Evil 
- Stripe on The Swan Hollow Intrigue 
- Beoric on Stronghold of the Mad Dwarf 
- mudcore on Stronghold of the Mad Dwarf 
- DangerousPuhson on Stronghold of the Mad Dwarf 
- DangerousPuhson on Stronghold of the Mad Dwarf 
- "It's dark and you can't see" on The Doom of the Dark 
- Beoric on Stronghold of the Mad Dwarf 
- Beoric on Stronghold of the Mad Dwarf 
- DangerousPuhson on Stronghold of the Mad Dwarf 
- DangerousPuhson on Stronghold of the Mad Dwarf 
- 
- Blogroll
-
+ Recent Comments Reason on The Swan Hollow Intrigue AG on The Swan Hollow Intrigue rekalgelos on The Swan Hollow Intrigue Kubo on AA#18 – The Forsaken Sepulcher Slipjoint on AA#18 – The Forsaken Sepulcher Beoric on The Swan Hollow Intrigue Slipjoint on AA#5 – The Flaming Footprints of Jilanth Lycaon on The Swan Hollow Intrigue Lycaon on The Swan Hollow Intrigue Slipjoint on Wheel of Evil Stripe on The Swan Hollow Intrigue Beoric on Stronghold of the Mad Dwarf mudcore on Stronghold of the Mad Dwarf DangerousPuhson on Stronghold of the Mad Dwarf DangerousPuhson on Stronghold of the Mad Dwarf "It's dark and you can't see" on The Doom of the Dark Beoric on Stronghold of the Mad Dwarf Beoric on Stronghold of the Mad Dwarf DangerousPuhson on Stronghold of the Mad Dwarf DangerousPuhson on Stronghold of the Mad Dwarf Blogroll 
  Dungeon Categories 
 My ongoing attempt to identify good dungeoncrawls. The reviews are just a byproduct.
-0
-
- Categories
-
+0 
+ Categories 
  2 out of 10 
-
  5e 
-
  Adventurers League 
-
  ArtPunk Shovelware 
-
  Colored Lights May Hypnotize 
-
  Do Not Buy Ever 
-
  Dungeon Magazine 
-
  Dungeons & Dragons Adventure Review 
-
  God Effort 
-
  It fucking sucks, man 
-
  Level 0 
-
  Level 1 
-
  Level 12 
-
  Level 2 
-
  Level 3 
-
  Level 4 
-
  Level 5 
-
  Level 6 
-
  Level 8 
-
  Level 9 
-
  Meh. It's fine 
-
  Millions and Millions of its Babies 
-
  My Life is a Living Fucking Hell 
-
  No Regerts 
-
  No, seriously, the worst EVAR? 
-
  Pathfinder 
-
  Reviews 
-
  ribbet, ribbet 
-
  SciFi 
-
  The Best 
-
  The Worst EVAR? 
-
  Uncategorized 
-
- The link to the product in this review is probably an affiliate link. If you follow the link and buy the product, I make some money. Just thought you should know.
-
- Archives
-
+ The link to the product in this review is probably an affiliate link. If you follow the link and buy the product, I make some money. Just thought you should know. 
+ Archives 
  September 2026 
-
  August 2026 
-
  July 2026 
-
  June 2026 
-
  May 2026 
-
  April 2026 
-
  March 2026 
-
  February 2026 
-
  January 2026 
-
  December 2025 
-
  November 2025 
-
  October 2025 
-
  September 2025 
-
  August 2025 
-
  July 2025 
-
  June 2025 
-
  May 2025 
-
  April 2025 
-
  March 2025 
-
  February 2025 
-
  January 2025 
-
  December 2024 
-
  November 2024 
-
  October 2024 
-
  September 2024 
-
  August 2024 
-
  July 2024 
-
  June 2024 
-
  May 2024 
-
  April 2024 
-
  March 2024 
-
  February 2024 
-
  January 2024 
-
  December 2023 
-
  November 2023 
-
  October 2023 
-
  September 2023 
-
  August 2023 
-
  July 2023 
-
  June 2023 
-
  May 2023 
-
  April 2023 
-
  March 2023 
-
  February 2023 
-
  January 2023 
-
  December 2022 
-
  November 2022 
-
  October 2022 
-
  September 2022 
-
  August 2022 
-
  July 2022 
-
  June 2022 
-
  May 2022 
-
  April 2022 
-
  March 2022 
-
  February 2022 
-
  January 2022 
-
  December 2021 
-
  November 2021 
-
  October 2021 
-
  September 2021 
-
  August 2021 
-
  July 2021 
-
  June 2021 
-
  May 2021 
-
  April 2021 
-
  March 2021 
-
  February 2021 
-
  January 2021 
-
  December 2020 
-
  November 2020 
-
  October 2020 
-
  September 2020 
-
  August 2020 
-
  July 2020 
-
  June 2020 
-
  May 2020 
-
  April 2020 
-
  March 2020 
-
  February 2020 
-
  January 2020 
-
  December 2019 
-
  November 2019 
-
  October 2019 
-
  September 2019 
-
  August 2019 
-
  July 2019 
-
  June 2019 
-
  May 2019 
-
  April 2019 
-
  March 2019 
-
  February 2019 
-
  January 2019 
-
  December 2018 
-
  November 2018 
-
  October 2018 
-
  September 2018 
-
  August 2018 
-
  July 2018 
-
  June 2018 
-
  May 2018 
-
  April 2018 
-
  March 2018 
-
  February 2018 
-
  January 2018 
-
  December 2017 
-
  November 2017 
-
  October 2017 
-
  September 2017 
-
  August 2017 
-
  July 2017 
-
  June 2017 
-
  May 2017 
-
  April 2017 
-
  March 2017 
-
  February 2017 
-
  January 2017 
-
  December 2016 
-
  November 2016 
-
  October 2016 
-
  September 2016 
-
  August 2016 
-
  July 2016 
-
  June 2016 
-
  May 2016 
-
  April 2016 
-
  March 2016 
-
  February 2016 
-
  December 2015 
-
  November 2015 
-
  October 2015 
-
  September 2015 
-
  August 2015 
-
  July 2015 
-
  June 2015 
-
  May 2015 
-
  April 2015 
-
  August 2014 
-
  July 2014 
-
  June 2014 
-
  May 2014 
-
  April 2014 
-
  March 2014 
-
  February 2014 
-
  January 2014 
-
  December 2013 
-
  November 2013 
-
  October 2013 
-
  September 2013 
-
  August 2013 
-
  July 2013 
-
  June 2013 
-
  May 2013 
-
  April 2013 
-
  March 2013 
-
  February 2013 
-
  January 2013 
-
  December 2012 
-
  November 2012 
-
  October 2012 
-
  September 2012 
-
  August 2012 
-
  July 2012 
-
  June 2012 
-
  May 2012 
-
  April 2012 
-
  March 2012 
-
  February 2012 
-
  January 2012 
-
  December 2011 
-
  November 2011 
-
  October 2011 
-
  September 2011 
-
  August 2011 
-
- The link to the product in this review is probably an affiliate link. If you follow the link and buy the product, I make some money. Just thought you should know.
-
+ The link to the product in this review is probably an affiliate link. If you follow the link and buy the product, I make some money. Just thought you should know. 
  tenfootpole.org 
-
- Proudly powered by WordPress.
+ Proudly powered by WordPress. 

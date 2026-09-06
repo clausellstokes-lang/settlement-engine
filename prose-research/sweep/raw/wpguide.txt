@@ -98,7 +98,7 @@
  Content added before 30 November 2022 (the launch of ChatGPT ) is extremely unlikely to be LLM-generated. 
  LLM detection software [ edit ] 
  Shortcuts WP:LLMDETECT WP:LLMDETECT WP:AIDETECT WP:AIDETECT WP:GPTZERO WP:GPTZERO WP:ZEROGPT WP:ZEROGPT 
- See also: Wikipedia:Signs of AI writing §   AI detection tools 
+ See also: Wikipedia:Signs of AI writing § AI detection tools 
  Many AI detectors, such as GPTZero , are currently on the market. However, they often suffer from false positives, particularly free ones, [ 3 ] and should never be used as the sole evidence when accusing someone of AI usage . 
  These tools can suffer from both false positives and false negatives, and have a lack of transparency in how an "AI" score is calculated. Many sites now offer ways to "humanize" LLM text to attempt to fool these tools. Some human writers may have styles that naturally trigger the tool, and others may use writing plugins that improve their writing but also trigger the tool. The algorithms for such tools also may change, and are usually only free for a small amount of text, or will hide the results behind a paywall modal. However, such tools have improved over time and the best ones (usually non-free) have >95% accuracy rates, [ 4 ] and they can help check dozens of suspected edits for further inspection. A consistently high AI score could warrant additional investigation. Mixed scores are lower signal, since other editors may have changed the content substantially, and wiki formatting/markup can throw some tools off. 
  Useful tools [ edit ] 
@@ -204,13 +204,13 @@
  ↑ DiffUndo can be used to restore the pre-existing text (if any had been overwritten) while keeping edits after it intact. To use DiffUndo, go to the revision before the offending edit(s) by clicking its timestamp, click "Edit", click "Show changes", then undo all lines except those added by the user before clicking "Publish". 
  ↑ User:MPGuy2824/MoveToDraft is useful because it automatically tags the mainspace redirect for speedy deletion ( WP:R2 ), rather than you having to do it manually. 
  References [ edit ] 
- ↑ Cheng, Adam; Lin, Yiqun; Reedy, Gabriel; Joseph, Christine; Wirkowski, Samantha; Mallette, Viviane; Nagesh, Vikhashni; Krieser, David; Calhoun, Aaron (2025). "Ability of AI detection tools and humans to accurately identify different forms of AI-generated written content" . Advances in Simulation . 10 (1) 66. doi : 10.1186/s41077-025-00396-6 . PMC   12752165 . PMID   41272826 . 
- ↑ Russell, Jenna; Karpinska, Marzena; Iyyer, Mohit (2025). People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text . Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). Vienna, Austria: Association for Computational Linguistics. pp.   5342– 5373. arXiv : 2501.15654 . doi : 10.18653/v1/2025.acl-long.267 . Archived from the original on 2025-08-29 . Retrieved 2025-09-05 – via ACL Anthology . 
+ ↑ Cheng, Adam; Lin, Yiqun; Reedy, Gabriel; Joseph, Christine; Wirkowski, Samantha; Mallette, Viviane; Nagesh, Vikhashni; Krieser, David; Calhoun, Aaron (2025). "Ability of AI detection tools and humans to accurately identify different forms of AI-generated written content" . Advances in Simulation . 10 (1) 66. doi : 10.1186/s41077-025-00396-6 . PMC 12752165 . PMID 41272826 . 
+ ↑ Russell, Jenna; Karpinska, Marzena; Iyyer, Mohit (2025). People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text . Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). Vienna, Austria: Association for Computational Linguistics. pp. 5342– 5373. arXiv : 2501.15654 . doi : 10.18653/v1/2025.acl-long.267 . Archived from the original on 2025-08-29 . Retrieved 2025-09-05 – via ACL Anthology . 
  ↑ Fowler, Geoffrey (August 14, 2023). "What to do when you're accused of AI cheating" . The Washington Post . Retrieved October 20, 2023 . 
  ↑ "People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text" . arxiv.org . Retrieved 2025-11-28 . 
  Retrieved from " https://en.wikipedia.org/w/index.php?title=Wikipedia:WikiProject_AI_Cleanup/Guide_and_resources&oldid=1372327789 " 
  Categories : WikiProject advice WikiProject AI Cleanup 
- This page was last edited on 31 August 2026, at 07:49  (UTC) . 
+ This page was last edited on 31 August 2026, at 07:49 (UTC) . 
  Page was rendered with Parsoid . 
  Text is available under the Creative Commons Attribution-ShareAlike 4.0 License ;
 additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy . Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc. , a non-profit organization. 

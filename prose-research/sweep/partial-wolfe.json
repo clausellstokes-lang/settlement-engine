@@ -897,5 +897,29 @@
    "note": "Quotation verbatim: 'He once advised, “Always tell a story as cleanly and as clearly as possible.”' Cooney's memoir (Ultan's Library, 10 June 2016) mixes dinner conversation and correspondence, and this line is not placed in either. Secondary: the page calls her a poet and short-story writer with an unsold novel; 'novelist' is not the page's word.",
    "fromFile": "verdicts-wolfe-i345-359.json"
   }
+ },
+ {
+  "index": 467,
+  "feature": "other: incidental detail as evidence",
+  "claim": "Roy C. Lackey treats a physical detail that does not belong in its setting — cart tracks on a beach — as the load-bearing evidence linking two scenes.",
+  "source": "Roy C. Lackey, Urth mailing list, 10 September 2006",
+  "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/003007.html",
+  "quote": "had no business being on that beach.",
+  "page": "message body, reply on the Sand Garden",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2006-09-10",
+  "routeHint": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url>",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 467,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the cart tracks are the load-bearing evidence for the link — Lackey offers them as one corroborating detail among several (\"right down to the tracks\"), alongside the person to be met being Severian's future self and the concealed woman being Thecla, and he hedges the whole parallel as holding \"to some extent\".",
+   "trueWording": "\"...the Sand Garden to some extent replicated/foreshadowed what would happen months later on the beach, right down to the tracks of the two-wheeled cart, which had no business being on that beach.\"",
+   "note": "Raw page reached via Wayback raw capture https://web.archive.org/web/20210416053700id_/http://lists.urth.net/pipermail/urth-urth.net/2006-September/003007.html (live host down as above). Byline and date on the page: Roy C. Lackey, rclackey at stic.net, Sun Sep 10 23:43:34 PDT 2006. The quote \"had no business being on that beach.\" is on the page word for word, and the out-of-place-physical-detail limb (two-wheeled cart tracks on a beach) is fully supported. What the page does not support is the weight the claim assigns it: the tracks are the sharpest concrete correspondence in a list of correspondences, not stated to be the evidence the link rests on.",
+   "fromFile": "verdicts-wolfe-i465-467.json"
+  }
  }
 ]

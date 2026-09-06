@@ -474,11 +474,11 @@ Showing 1-50 of 78
  Book 
  Author 
  Search for a book to add a reference 
- add:   
+ add: 
  link
  cover
  Author: 
- add:   
+ add: 
  link
  photo
  Share 

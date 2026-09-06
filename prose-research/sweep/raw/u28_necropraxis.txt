@@ -1,424 +1,213 @@
-Improved area keys | Necropraxis 
-
+ 
+ Improved area keys | Necropraxis 
  Necropraxis 
-
- Classic fantasy roleplaying games and loosely associated thoughts
-
+ Classic fantasy roleplaying games and loosely associated thoughts 
  Menu 
  Skip to content 
  Home 
-
  About 
-
  Suggested Reading 
-
  Hazard System 
-
  Wonder & Wickedness 
-
- Improved area keys
-
+ Improved area keys 
  Leave a reply 
-
- Keying dungeons or wilderness areas has been around for as long as referees have been writing prep notes or sharing material for others to use. However, modules are still hard to use, and even personal notes (initially fortified by intent in mind) quickly become impenetrable, even to an original author. Just ask a programmer to revisit some inadequately commented code written several months or years ago. There has to be a better way.
-
- I think I have found a better method, or at least one that works well for me, but before I describe my current approach, I want to revisit a few common styles and discuss what works and does not work for each of them. The most common style in published modules (and also probably the oldest, as you can see it in some of the earlier modules, such as B2) is the dreaded wall of text. Areas are described in lengthy, proper english prose. Sometimes particular game elements (such as monsters or magic items) are set off from the text typographically. Modules in this format can be pleasurable to read (if well-written), and can be a good source of ideas or inspiration, but are quite cumbersome to use in play. There is always the lurking fear that one will miss an important bit of info that should be presented to players early and clearly, in order to support informed decision-making. They just don’t work very well in play. Unfortunately, this has become the accepted format for modules.
-
- Another older approach is the minimal key, exemplified by the few extant photos of Gygax’s Castle Greyhawk key . This is easy to use, but suffers in terms of being able to encode any kind of complexity. One is limited to very basic stocking information, and when complexity is added through improvisation, the details are invariable forgotten. Unsatisfactory. In terms of modern use, some one-page dungeons approach this level of concision and often (though not always) suffer for it. A few products have tried to split the difference (such as Stonehell Dungeon , with its two-page spread version of the one-page dungeon). Stonehell is notable for being one of the most user-friendly modules yet written, though the self-enforced simplicity limits the sophistication of described features, other than those described separately in “special dungeon notes” sections (which sort of defeats the purpose and requires page-flipping).
-
- There are some new approaches that work better, such as Courtney’s “set design” hierarchical outline format. This method works admirably in terms of direct, in-game usability. However, based on my experience, it has two flaws. One, outlines are often not a good use of space in terms of typesetting. This is a minor issue, but still bears mentioning for a medium that remains often expressed in hardcopy book form. Two, it lacks poetry. It is just not pleasant to read pages of outlines. Despite those issues, I would still take this format over the two traditional examples described above, but I think we can do better.
-
+ Keying dungeons or wilderness areas has been around for as long as referees have been writing prep notes or sharing material for others to use. However, modules are still hard to use, and even personal notes (initially fortified by intent in mind) quickly become impenetrable, even to an original author. Just ask a programmer to revisit some inadequately commented code written several months or years ago. There has to be a better way. 
+ I think I have found a better method, or at least one that works well for me, but before I describe my current approach, I want to revisit a few common styles and discuss what works and does not work for each of them. The most common style in published modules (and also probably the oldest, as you can see it in some of the earlier modules, such as B2) is the dreaded wall of text. Areas are described in lengthy, proper english prose. Sometimes particular game elements (such as monsters or magic items) are set off from the text typographically. Modules in this format can be pleasurable to read (if well-written), and can be a good source of ideas or inspiration, but are quite cumbersome to use in play. There is always the lurking fear that one will miss an important bit of info that should be presented to players early and clearly, in order to support informed decision-making. They just don’t work very well in play. Unfortunately, this has become the accepted format for modules. 
+ Another older approach is the minimal key, exemplified by the few extant photos of Gygax’s Castle Greyhawk key . This is easy to use, but suffers in terms of being able to encode any kind of complexity. One is limited to very basic stocking information, and when complexity is added through improvisation, the details are invariable forgotten. Unsatisfactory. In terms of modern use, some one-page dungeons approach this level of concision and often (though not always) suffer for it. A few products have tried to split the difference (such as Stonehell Dungeon , with its two-page spread version of the one-page dungeon). Stonehell is notable for being one of the most user-friendly modules yet written, though the self-enforced simplicity limits the sophistication of described features, other than those described separately in “special dungeon notes” sections (which sort of defeats the purpose and requires page-flipping). 
+ There are some new approaches that work better, such as Courtney’s “set design” hierarchical outline format. This method works admirably in terms of direct, in-game usability. However, based on my experience, it has two flaws. One, outlines are often not a good use of space in terms of typesetting. This is a minor issue, but still bears mentioning for a medium that remains often expressed in hardcopy book form. Two, it lacks poetry. It is just not pleasant to read pages of outlines. Despite those issues, I would still take this format over the two traditional examples described above, but I think we can do better. 
  When I read an area description, I have basically two priorities. The first is that the immediately relevant information be easily accessible. The second priority is that finding out more information about a particular element (“drilling down”) be easy. So the PC opens the chest; what’s inside? This realization led me to the following two principles: (primarily) immediately relevant features must be offset from other details and (secondarily) elaborative detail should follow so that it is easy to access when needed. Immediately relevant area features are not only nouns (a table in the room, a monster in the room, scorch marks that are a trap clue), but also event triggers ( if the northern door is opened , if a PC steps on a central flagstone , and so forth). When I am writing new area keys, I bold the immediately relevant features. Basically, the key is a tool for the referee, so everything that the referee needs first should stand out. 
-
  Some modules tried to address this issue with boxed text, but as noted above, features that are important to the referee immediately include more than only what the PCs perceive. Boxed text is also flawed because it separated the initial impression (“treasure chest”) from elaboration (the contents are usually buried somewhere three paragraphs down the page, with no obvious connective element, from a usability perspective). 
-
- One nice consequence of this approach is that it can be applied to existing modules without requiring rewriting (at least, to some degree). Newly written material can benefit from these principles more (given that elaborative detail can be concentrated after the first mention of immediately relevant features), but even without that knowledge the approach seems to work well based on my experimentation so far. This is particularly easy to do with a tablet and a PDF reader* that allows annotations such as highlighting, though I imagine it could also probably be done with cheap desktop software.
-
+ One nice consequence of this approach is that it can be applied to existing modules without requiring rewriting (at least, to some degree). Newly written material can benefit from these principles more (given that elaborative detail can be concentrated after the first mention of immediately relevant features), but even without that knowledge the approach seems to work well based on my experimentation so far. This is particularly easy to do with a tablet and a PDF reader* that allows annotations such as highlighting, though I imagine it could also probably be done with cheap desktop software. 
  From Tower of Mouths, by Matt Finch, in Knockspell 3 
-
- You will see that the immediately important features are clearly offset from information only required in the case of elaboration. A referee can take in the area with a glance (weapon racks, rushes, buckled floors, untouched alcove), secure in the knowledge that nothing is being overlooked, and quickly communicate the initial impression to players without needing to read any text verbatim. As players deliberate about what to do and ask clarifying questions, the referee can revisit the elaborative detail (check on the map again where the teleporter destination is, and so forth). The amount of text that must be read to get a handle on the area has been cut down by more than half without degrading the quality of the prose. Additionally, this was already a rather short description, and the savings yielded are usually greater.
-
- This method is even more useful for a truly sprawling area description, the kind that has half a paragraph about room history, a digression about how the area is used, and a table of twenty potions to sample, especially given that each of these subsections is likely to communicate information that should be immediately obvious to players (water damage from the history, footprints from the usage, and a fabulously glittering jewelled potion decanter nestled between 19 plain clay jars).
-
- Thus, the organizing principle should not be the nature of game entity (monster versus treasure, for example). Rather, features with higher referee immediacy should be emphasized.
-
- * I use an iPad with the GoodReader app. This program syncs bidirectionally with Dropbox and automatically offers to create files with a “- annotated” file name the first time you start to add annotations to a PDF, which it then syncs back to the folder in Dropbox. It is extremely convenient.
-
+ You will see that the immediately important features are clearly offset from information only required in the case of elaboration. A referee can take in the area with a glance (weapon racks, rushes, buckled floors, untouched alcove), secure in the knowledge that nothing is being overlooked, and quickly communicate the initial impression to players without needing to read any text verbatim. As players deliberate about what to do and ask clarifying questions, the referee can revisit the elaborative detail (check on the map again where the teleporter destination is, and so forth). The amount of text that must be read to get a handle on the area has been cut down by more than half without degrading the quality of the prose. Additionally, this was already a rather short description, and the savings yielded are usually greater. 
+ This method is even more useful for a truly sprawling area description, the kind that has half a paragraph about room history, a digression about how the area is used, and a table of twenty potions to sample, especially given that each of these subsections is likely to communicate information that should be immediately obvious to players (water damage from the history, footprints from the usage, and a fabulously glittering jewelled potion decanter nestled between 19 plain clay jars). 
+ Thus, the organizing principle should not be the nature of game entity (monster versus treasure, for example). Rather, features with higher referee immediacy should be emphasized. 
+ * I use an iPad with the GoodReader app. This program syncs bidirectionally with Dropbox and automatically offers to create files with a “- annotated” file name the first time you start to add annotations to a PDF, which it then syncs back to the folder in Dropbox. It is extremely convenient. 
  This entry was posted in Techniques on 2013-12-07 by Necropraxis . 
-
- Post navigation
-
+ Post navigation 
  ← Hangout screenshare fog of war 
  20 retainers → 
-
  0 thoughts on “ Improved area keys ” 
-
  Michael Prescott 2013-12-07 at 5:43 pm 
-
- These are really great observations, Brendan.
-
+ These are really great observations, Brendan. 
  Reply ↓ 
-
  Brendan Post author 2013-12-08 at 2:24 pm 
-
- @Michael
-
- Thanks!
-
+ @Michael 
+ Thanks! 
  Reply ↓ 
-
  Reynaldo 2013-12-07 at 11:37 pm 
-
- This is kind of fantastic – Its probably the first time I’ve considered using typed notes instead of my handwritten ones.
-
- Though I suppose I could bold or underline them instead.
-
+ This is kind of fantastic – Its probably the first time I’ve considered using typed notes instead of my handwritten ones. 
+ Though I suppose I could bold or underline them instead. 
  Reply ↓ 
-
  Brendan Post author 2013-12-08 at 2:23 pm 
-
- @Rey
-
- An actual physical highlighter pen would probably work well with handwritten notes, too.
-
- I have lots of respect for those with the discipline to use handwritten notes, especially in something like a composition book. If I did so, I think I would be constantly afraid about running out of space for expanding various aspects. I tend to also write nonlinearly (how I have been spoiled by software text editors).
-
+ @Rey 
+ An actual physical highlighter pen would probably work well with handwritten notes, too. 
+ I have lots of respect for those with the discipline to use handwritten notes, especially in something like a composition book. If I did so, I think I would be constantly afraid about running out of space for expanding various aspects. I tend to also write nonlinearly (how I have been spoiled by software text editors). 
  Reply ↓ 
-
  nexusphere 2013-12-09 at 6:43 am 
-
- Have you seen the pages from my Numenhalla or Perdition notebook?
-
- I guess what I would say, is that being forced to think or plan before writing has never served me poorly.
-
+ Have you seen the pages from my Numenhalla or Perdition notebook? 
+ I guess what I would say, is that being forced to think or plan before writing has never served me poorly. 
  Reply ↓ 
-
  Brendan Post author 2013-12-11 at 4:23 pm 
-
- @nexusphere
-
- Have you posted the contents of any of your notebooks?
-
+ @nexusphere 
+ Have you posted the contents of any of your notebooks? 
  Reply ↓ 
-
  jda1053 2013-12-09 at 10:05 am 
-
- Great posts! This adventure publisher is paying close attention.
-
+ Great posts! This adventure publisher is paying close attention. 
  Reply ↓ 
-
  Tad Davis 2013-12-10 at 3:08 am 
-
  How funny, I just wrote on exactly this same topic last week, and it turns out that you and I end up in very similar places in terms of our philosophy of dungeon key formats. 
-
- Cheers,
-
--Tad
-
+ Cheers, 
+-Tad 
  Reply ↓ 
-
  Mark 2013-12-10 at 3:33 am 
-
  Great article and ideas. Highlighting things that must be brought to the attention of players immediately is essential, otherwise the exploration style D&D process breaks down. 
-
  But equally important is the style or tone of the location that the PCs are exploring. It is the balance of these two that is tricky to replicate from 3rd party material. Pieces written by the DM himself/herself will be much simpler as the DM will have the image in mind of the immediate area and can relay it easily. 
-
- I am using a slightly different method, print the map out of a 3rd party adventure, making sure there is some white space around it and then use shorthand style symbols and a few handwritten notes to highlight what the players need to know. I also try to distill the tone of the location into a few descriptive words so that I can drop those in or emphasise them occasionally. This means when it comes to the session I have but a single sheet of paper in hand.
-
+ I am using a slightly different method, print the map out of a 3rd party adventure, making sure there is some white space around it and then use shorthand style symbols and a few handwritten notes to highlight what the players need to know. I also try to distill the tone of the location into a few descriptive words so that I can drop those in or emphasise them occasionally. This means when it comes to the session I have but a single sheet of paper in hand. 
  Reply ↓ 
-
  Brendan Post author 2013-12-11 at 4:30 pm 
-
- @Mark
-
- That sounds like a pretty reasonable approach. Though I often enjoy arbitrary restrictions, I don’t think that there is any need to use a single sheet of paper as a limit. I don’t mind context switching, as long as it is not continuous.
-
- An annotated map can be very useful. In an ideal case, unannotated maps would be included in any products as well, for use in restocking. I found myself recently redrawing module maps so that I could have a version to reveal slowly to players that did not have room numbers or hidden features such as secret doors.
-
- Mood is worth mentioning, though I think the need of extensive prose to communicate it is often overstated. A few well-chosen adjectives go a long way, as does actually interesting content. For example, “clay golem with wicker-fetish head imprinted with the names of 2000 slain soldiers.” Content often is tone.
-
+ @Mark 
+ That sounds like a pretty reasonable approach. Though I often enjoy arbitrary restrictions, I don’t think that there is any need to use a single sheet of paper as a limit. I don’t mind context switching, as long as it is not continuous. 
+ An annotated map can be very useful. In an ideal case, unannotated maps would be included in any products as well, for use in restocking. I found myself recently redrawing module maps so that I could have a version to reveal slowly to players that did not have room numbers or hidden features such as secret doors. 
+ Mood is worth mentioning, though I think the need of extensive prose to communicate it is often overstated. A few well-chosen adjectives go a long way, as does actually interesting content. For example, “clay golem with wicker-fetish head imprinted with the names of 2000 slain soldiers.” Content often is tone. 
  Reply ↓ 
-
  Pingback: In Defense of Boxed Text | ars phantasia 
-
  Robert Schwarz 2013-12-17 at 8:20 pm 
-
  Just give the players notes describing the room and tell them about any creatures which would be the primary concern initially. You can even include a little picture of the odd shaped rooms you have to draw anyways for the mapper. 
-
- If you use pictures or downloads you could include that sort of thing as well. In the age of the copy/paste every adventure can have as many handouts as Tomb of Horrors. Heck, you create bunch of gifs and text or email them one at a time.
-
+ If you use pictures or downloads you could include that sort of thing as well. In the age of the copy/paste every adventure can have as many handouts as Tomb of Horrors. Heck, you create bunch of gifs and text or email them one at a time. 
  Reply ↓ 
-
  Brendan Post author 2013-12-17 at 9:33 pm 
-
- @Robert
-
- It seems like you’re addressing a slightly different issue. Even before one might consider something like handouts, the referee needs to know everything immediately important about an area (what constitute trap triggers, clues, etc).
-
+ @Robert 
+ It seems like you’re addressing a slightly different issue. Even before one might consider something like handouts, the referee needs to know everything immediately important about an area (what constitute trap triggers, clues, etc). 
  Reply ↓ 
-
  Robert Schwarz 2013-12-18 at 10:51 pm 
-
- Most of the blocked text could be included in a handout and the players could read it or not without breaking the flow of the game or changing the tone.
-
- Personally I like bullet points for the GM. Just the facts and let the DM fill it out, but if you want the detail (or in the case of really complicated shaped rooms) the handouts are easy enough and all of the lose of concentration problems seem to disappear.
-
+ Most of the blocked text could be included in a handout and the players could read it or not without breaking the flow of the game or changing the tone. 
+ Personally I like bullet points for the GM. Just the facts and let the DM fill it out, but if you want the detail (or in the case of really complicated shaped rooms) the handouts are easy enough and all of the lose of concentration problems seem to disappear. 
  Reply ↓ 
-
  Pingback: The Alexandrian » The Art of the Key – Part 2: The Essential Key 
-
- Leave a Reply Cancel reply 
- Your email address will not be published. Required fields are marked * 
- Comment * 
- Name * 
-
+ Leave a Reply Cancel reply Your email address will not be published. Required fields are marked * Comment * Name * 
  Email * 
-
  Website 
-
  Save my name, email, and website in this browser for the next time I comment. 
-
  Δ 
-
- archives
- ► 2025 (1) 
-
+ archives ► 2025 (1) 
  ► January (1) 
-
  ► 2024 (3) 
-
  ► September (1) 
-
  ► August (1) 
-
  ► June (1) 
-
  ► 2023 (1) 
-
  ► January (1) 
-
  ► 2022 (4) 
-
  ► July (1) 
-
  ► June (2) 
-
  ► May (1) 
-
  ► 2021 (4) 
-
  ► September (1) 
-
  ► August (1) 
-
  ► March (2) 
-
  ► 2020 (16) 
-
  ► December (1) 
-
  ► September (1) 
-
  ► July (3) 
-
  ► June (2) 
-
  ► May (5) 
-
  ► April (2) 
-
  ► March (1) 
-
  ► January (1) 
-
  ► 2019 (26) 
-
  ► December (3) 
-
  ► November (4) 
-
  ► September (1) 
-
  ► July (1) 
-
  ► May (2) 
-
  ► April (1) 
-
  ► March (3) 
-
  ► February (6) 
-
  ► January (5) 
-
  ► 2018 (44) 
-
  ► December (7) 
-
  ► November (5) 
-
  ► October (1) 
-
  ► September (2) 
-
  ► August (4) 
-
  ► July (5) 
-
  ► June (7) 
-
  ► May (3) 
-
  ► April (4) 
-
  ► March (2) 
-
  ► February (3) 
-
  ► January (1) 
-
  ► 2017 (9) 
-
  ► December (1) 
-
  ► November (3) 
-
  ► July (1) 
-
  ► January (4) 
-
  ► 2016 (25) 
-
  ► December (5) 
-
  ► November (4) 
-
  ► September (2) 
-
  ► August (1) 
-
  ► July (7) 
-
  ► June (1) 
-
  ► May (3) 
-
  ► January (2) 
-
  ► 2015 (34) 
-
  ► December (3) 
-
  ► November (1) 
-
  ► September (2) 
-
  ► August (1) 
-
  ► July (8) 
-
  ► June (6) 
-
  ► May (3) 
-
  ► April (1) 
-
  ► March (3) 
-
  ► February (2) 
-
  ► January (4) 
-
  ► 2014 (77) 
-
  ► December (10) 
-
  ► November (2) 
-
  ► October (2) 
-
  ► September (2) 
-
  ► August (5) 
-
  ► July (9) 
-
  ► June (9) 
-
  ► May (6) 
-
  ► April (9) 
-
  ► March (9) 
-
  ► February (5) 
-
  ► January (9) 
-
  ► 2013 (158) 
-
  ► December (7) 
-
  ► November (14) 
-
  ► October (17) 
-
  ► September (13) 
-
  ► August (11) 
-
  ► July (13) 
-
  ► June (16) 
-
  ► May (11) 
-
  ► April (18) 
-
  ► March (14) 
-
  ► February (13) 
-
  ► January (11) 
-
  ► 2012 (281) 
-
  ► December (11) 
-
  ► November (22) 
-
  ► October (14) 
-
  ► September (17) 
-
  ► August (26) 
-
  ► July (32) 
-
  ► June (23) 
-
  ► May (26) 
-
  ► April (21) 
-
  ► March (33) 
-
  ► February (26) 
-
  ► January (30) 
-
  ► 2011 (70) 
-
  ► December (24) 
-
  ► November (15) 
-
  ► October (24) 
-
  ► September (5) 
-
  ► August (2) 
-
  Search Search 
-
- Proudly powered by WordPress
+ Proudly powered by WordPress 

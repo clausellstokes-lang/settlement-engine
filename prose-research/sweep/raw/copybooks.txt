@@ -41,9 +41,9 @@ View a PDF of the paper titled Readers Prefer Outputs of AI Trained on Copyright
  view license 
  Current browse context: 
  cs.CL 
- < prev 
-   |   
- next > 
+ < prev 
+ | 
+ next > 
  new 
  | 
  recent 

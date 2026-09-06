@@ -1,191 +1,97 @@
-The Alexandrian » GM Don’t List #13: Boxed Text Pitfalls 
-
+ 
+ The Alexandrian » GM Don’t List #13: Boxed Text Pitfalls 
  GM Don’t List #13: Boxed Text Pitfalls 
-
  August 1st, 2022 
-
  Go to Part 1 
-
- Boxed text in an RPG scenario is a prewritten narration designed to be read to the players by the GM. It looks like this:
-
+ Boxed text in an RPG scenario is a prewritten narration designed to be read to the players by the GM. It looks like this: 
  The center of this room is filled with a massive contraption of brass and copper and rotten, worm-eaten wood. Great hoops of metal are suspended about a central sphere, with various lumps, pulleys, cranks, and levers protruding here and there in an apparently chaotic and incomprehensible jumble. 
-
- (from The Complex of Zombies )
-
- The advantage of boxed text, of course, is that it can be prepared ahead of time: It can give you a chance to carefully consider and craft your choice of words to best effect. If there’s essential information that needs to be conveyed to the players, putting it in boxed text will virtually guarantee that it’s not accidentally omitted in actual play.
-
- In The Art of the Key , for example, I talk about how these features of boxed text make it ideal for conveying what characters see when first entering a room or location by clearly delineating the information the players should automatically have from the rest of the key. (Even if you don’t use full-fledged boxed text to achieve this effect, you’ll still want some form of not-boxed-text that fulfills the essential function.)
-
- So why wouldn’t you use boxed text?
-
- Carefully crafting your words is time-consuming. (Which may suggest its elimination by virtue of the principles of smart prep .)
-
- The result is inherently less flexible. (For example, if a room has multiple entries the boxed text needs to be generic enough to work for any potential entrance. Add to this NPCs, lighting conditions, etc.)
-
- Reading prepared text to an audience is a very specific performance, and can easily be one that a GM is not comfortable with. (In such cases, the spontaneity and engagement of improvising a description will often be superior to a stilted or rushed reading.)
-
- If you’re running a published adventure with boxed text and you’d rather not use it — for these or any other reasons — you may find it useful to highlight the key facts presented by the boxed text, quickly turning it into not-boxed text:
-
+ (from The Complex of Zombies ) 
+ The advantage of boxed text, of course, is that it can be prepared ahead of time: It can give you a chance to carefully consider and craft your choice of words to best effect. If there’s essential information that needs to be conveyed to the players, putting it in boxed text will virtually guarantee that it’s not accidentally omitted in actual play. 
+ In The Art of the Key , for example, I talk about how these features of boxed text make it ideal for conveying what characters see when first entering a room or location by clearly delineating the information the players should automatically have from the rest of the key. (Even if you don’t use full-fledged boxed text to achieve this effect, you’ll still want some form of not-boxed-text that fulfills the essential function.) 
+ So why wouldn’t you use boxed text? 
+ Carefully crafting your words is time-consuming. (Which may suggest its elimination by virtue of the principles of smart prep .) 
+ The result is inherently less flexible. (For example, if a room has multiple entries the boxed text needs to be generic enough to work for any potential entrance. Add to this NPCs, lighting conditions, etc.) 
+ Reading prepared text to an audience is a very specific performance, and can easily be one that a GM is not comfortable with. (In such cases, the spontaneity and engagement of improvising a description will often be superior to a stilted or rushed reading.) 
+ If you’re running a published adventure with boxed text and you’d rather not use it — for these or any other reasons — you may find it useful to highlight the key facts presented by the boxed text, quickly turning it into not-boxed text: 
  The center of this room is filled with a massive contraption of brass and copper and rotten, worm-eaten wood . Great hoops of metal are suspended about a central sphere, with various lumps, pulleys, cranks, and levers protruding here and there in an apparently chaotic and incomprehensible jumble. 
-
- (As described in The Art of the Key , you can use the same technique to quickly salvage location keys that have failed to differentiate “seen at a glance” information from hidden secrets.)
-
- SINS OF THE BOX
-
+ (As described in The Art of the Key , you can use the same technique to quickly salvage location keys that have failed to differentiate “seen at a glance” information from hidden secrets.) 
+ SINS OF THE BOX 
  Performance issues and a lack of flexibility, however, are not the only reasons that people dislike boxed text. Often they will have been on the receiving end of bad boxed text, which is all too prevalent in published adventures and, as a result of their poor example, homebrewed adventures, too. Many of these failures are either freeze-frame boxed text or remote-control boxed text 
-
- Freeze-frame boxed text is when the GM starts reading and then the PCs are frozen in place while a bunch of stuff happens. These can often get quite elaborate, with entire scenes being played through while the players sit impotently in their seats, boxed out (pun intended) from actually playing the game, but even subtle examples can be incredibly frustrating:
-
+ Freeze-frame boxed text is when the GM starts reading and then the PCs are frozen in place while a bunch of stuff happens. These can often get quite elaborate, with entire scenes being played through while the players sit impotently in their seats, boxed out (pun intended) from actually playing the game, but even subtle examples can be incredibly frustrating: 
  Grasping weeds and vines erupt from the cobblestone street beneath the carriage at the head of the parade. The ox pulling the cart panics, causing the vehicle to careen into a post covered in decorations. The vegetation then wraps around the cart’s wheels and the closest bystanders. A pair of revelers produce weapons, revealing themselves to be guards protecting the Prince of Vice. 
-
- (from Journeys Through the Radiant Citadel )
-
- As soon as the players hear, “Grasping weeds and vines erupt from the cobblestone street!” they’ll want to respond to that. Instead, everyone else in the scene – including the ox! – gets to react before they do.
-
- What we’ve identified here is the reaction point . You don’t always need to immediately stop talking when you’ve reached the reaction point (although often you should try to structure you descriptions so that you do ), but even if there are other pertinent details of the world to establish, what you should avoid at all costs is having the game world continue to move forward past the reaction point without letting the players react; without letting the players play the game.
-
- This is an easy trap to fall into with boxed text: The author (or GM) wants to establish the key features of the scene – vines appear, ox panics, cart crashes, disguised guards draw weapons – and the boxed format strongly biases you towards pushing all of that together into a single presentation.
-
- When you see freeze-framed boxed text as a GM, though, what you should do is break it up into actionable chunks . And I use the word “actionable” here because you are specifically looking for the actions you can take as GM, allowing the players to have a reaction to each of those actions.
-
- Here, for example, we actually start at the end of the boxed text: There are guards disguised as revelers. Before anything else happens, therefore, you should call for Perception checks to see if any PCs spot them.
-
- (If they are spotted, what do the PCs do with that information? I have no idea. Play to find out.)
-
- The next actionable chunk is: “Grasping weeds and vines erupt from the cobblestone street.”
-
- That signals the start of combat, which means that it should trigger an initiative check. So rather than skipping past that moment, make the initiative check. (Or don’t if you’ve already rolled initiative and are ready to go, go, go! But either way, you’re moving into tracked combat time.)
-
- The other actionable chunks are:
-
- the ox panicking and crashing the cart
-
- the guards drawing their weapons and moving to attack the vines
-
- These can obviously just happen during the first round of combat, with the PCs also taking whatever initial actions they think best, too.
-
- REMOTE-CONTROL BOXED TEXT
-
- Remote-control boxed text suffers from similar problems (preventing the players from participating), but insidiously goes one step further by declaring the thoughts or feelings or (worse yet!) actions of the PCs.
-
- “You look upon the devastation of the valley and are overwhelmed by sadness.”
-
- “You step forward and return the king’s greeting with a deep bow.”
-
- “As you return to Waterdeep, you smile, thinking fondly of the ale at Trollskull Manor.”
-
- “You see a strange creature crouching upon the boulder. As you step into the room, it looks up with wide, yellow eyes, gives a deafening call of alarm, and then scurries away.”
-
- There are two major problems with this sort of thing.
-
- First, a player controls exactly one thing: their character. When you take the one thing they control away from them — even for a little bit — you have effectively removed from the game. They are, in fact, no longer a player, but merely a spectator.
-
- Second, for many players, the damage that you do in those brief moments of seizing control can extend far beyond the moment itself. If their character does something that isn’t what they would have chosen to do, it can often feel as if there’s something “wrong” with the character. Do it enough — or do it at just the wrong moment — and the player may dissociate entirely from the character. When that happens, you may have easily just ruined the entire campaign for them.
-
- So… don’t do this. As the GM you literally have control over the entire game world. Be content with literally the entire universe of toys you have to play with.
-
- Focus on showing the players the scene and letting them react to it. Don’t tell them how they’re reacting to it.
-
- Those reactions, it should be noted might be:
-
- physical actions
-
- emotional reactions
-
- reflective thought
-
- dialogue
-
- And so forth. There’s a wide panoply of possible experiences, and some of them may be entirely internal to the player. You may never know, for example, how their character truly felt about something. That’s okay. The important part is that they know, and it will shape their actions and the course of the entire campaign.
-
+ (from Journeys Through the Radiant Citadel ) 
+ As soon as the players hear, “Grasping weeds and vines erupt from the cobblestone street!” they’ll want to respond to that. Instead, everyone else in the scene – including the ox! – gets to react before they do. 
+ What we’ve identified here is the reaction point . You don’t always need to immediately stop talking when you’ve reached the reaction point (although often you should try to structure you descriptions so that you do ), but even if there are other pertinent details of the world to establish, what you should avoid at all costs is having the game world continue to move forward past the reaction point without letting the players react; without letting the players play the game. 
+ This is an easy trap to fall into with boxed text: The author (or GM) wants to establish the key features of the scene – vines appear, ox panics, cart crashes, disguised guards draw weapons – and the boxed format strongly biases you towards pushing all of that together into a single presentation. 
+ When you see freeze-framed boxed text as a GM, though, what you should do is break it up into actionable chunks . And I use the word “actionable” here because you are specifically looking for the actions you can take as GM, allowing the players to have a reaction to each of those actions. 
+ Here, for example, we actually start at the end of the boxed text: There are guards disguised as revelers. Before anything else happens, therefore, you should call for Perception checks to see if any PCs spot them. 
+ (If they are spotted, what do the PCs do with that information? I have no idea. Play to find out.) 
+ The next actionable chunk is: “Grasping weeds and vines erupt from the cobblestone street.” 
+ That signals the start of combat, which means that it should trigger an initiative check. So rather than skipping past that moment, make the initiative check. (Or don’t if you’ve already rolled initiative and are ready to go, go, go! But either way, you’re moving into tracked combat time.) 
+ The other actionable chunks are: 
+ the ox panicking and crashing the cart 
+ the guards drawing their weapons and moving to attack the vines 
+ These can obviously just happen during the first round of combat, with the PCs also taking whatever initial actions they think best, too. 
+ REMOTE-CONTROL BOXED TEXT 
+ Remote-control boxed text suffers from similar problems (preventing the players from participating), but insidiously goes one step further by declaring the thoughts or feelings or (worse yet!) actions of the PCs. 
+ “You look upon the devastation of the valley and are overwhelmed by sadness.” 
+ “You step forward and return the king’s greeting with a deep bow.” 
+ “As you return to Waterdeep, you smile, thinking fondly of the ale at Trollskull Manor.” 
+ “You see a strange creature crouching upon the boulder. As you step into the room, it looks up with wide, yellow eyes, gives a deafening call of alarm, and then scurries away.” 
+ There are two major problems with this sort of thing. 
+ First, a player controls exactly one thing: their character. When you take the one thing they control away from them — even for a little bit — you have effectively removed from the game. They are, in fact, no longer a player, but merely a spectator. 
+ Second, for many players, the damage that you do in those brief moments of seizing control can extend far beyond the moment itself. If their character does something that isn’t what they would have chosen to do, it can often feel as if there’s something “wrong” with the character. Do it enough — or do it at just the wrong moment — and the player may dissociate entirely from the character. When that happens, you may have easily just ruined the entire campaign for them. 
+ So… don’t do this. As the GM you literally have control over the entire game world. Be content with literally the entire universe of toys you have to play with. 
+ Focus on showing the players the scene and letting them react to it. Don’t tell them how they’re reacting to it. 
+ Those reactions, it should be noted might be: 
+ physical actions 
+ emotional reactions 
+ reflective thought 
+ dialogue 
+ And so forth. There’s a wide panoply of possible experiences, and some of them may be entirely internal to the player. You may never know, for example, how their character truly felt about something. That’s okay. The important part is that they know, and it will shape their actions and the course of the entire campaign. 
  Go to Part 14: Fearing the Silence 
-
  Filed under: Roleplaying Games Comments (3) 
  Article tags: gm don't list 
-
- 3 Responses to “GM Don’t List #13: Boxed Text Pitfalls”
-
+ 3 Responses to “GM Don’t List #13: Boxed Text Pitfalls” 
  PuzzleSecretary says: 
-
- I’ve often seen freeze-frame boxed text simply referred to as “cutscenes”.
-
- In the Radiant Citadel example you give here, though, I don’t know that I’d stop exactly where you did. Where the vines erupted in the street is important to know. So is the apparent panic in the ox’s body language, though I agree that it shouldn’t get to act on that panic before combat begins. Anyone whose initiative count comes before the ox’s should have the opportunity to prevent or mitigate the damage it’s about to cause, and they won’t know they have that option if it’s not mentioned (though some players might guess).
-
- I’ve seen remote-control boxed text criticized before… but have also seen a minority of people not understand how it’s a problem.
-
+ I’ve often seen freeze-frame boxed text simply referred to as “cutscenes”. 
+ In the Radiant Citadel example you give here, though, I don’t know that I’d stop exactly where you did. Where the vines erupted in the street is important to know. So is the apparent panic in the ox’s body language, though I agree that it shouldn’t get to act on that panic before combat begins. Anyone whose initiative count comes before the ox’s should have the opportunity to prevent or mitigate the damage it’s about to cause, and they won’t know they have that option if it’s not mentioned (though some players might guess). 
+ I’ve seen remote-control boxed text criticized before… but have also seen a minority of people not understand how it’s a problem. 
  August 2nd, 2022 - 11:41 am 
-
  mellonbread says: 
-
- There was a lovely article in the old Wizards devblog, from around the 3.5 or 4e days, which was lost when they nuked their archives. The basic thesis was that boxed text (or any descriptive text delivered by the GM) should never be longer than three sentences, because after that point the players stop paying attention. Any additional exposition has to to wait until the players have had a chance to ask a question or made a decision.
-
- I don’t think Wizards actually abided by this rule in their own boxed text. I suspect nobody does. But I think the author was right.
-
+ There was a lovely article in the old Wizards devblog, from around the 3.5 or 4e days, which was lost when they nuked their archives. The basic thesis was that boxed text (or any descriptive text delivered by the GM) should never be longer than three sentences, because after that point the players stop paying attention. Any additional exposition has to to wait until the players have had a chance to ask a question or made a decision. 
+ I don’t think Wizards actually abided by this rule in their own boxed text. I suspect nobody does. But I think the author was right. 
  August 2nd, 2022 - 11:58 am 
-
  Andrew says: 
-
- I agree that it must be mentioned that boxed text is often too long. I have noticed players zoning out at points even in otherwise high-stakes scenes.
-
- I also tend to agree with Justin’s critiques here but it occurred to me that in some cases freeze-framed boxed text (or cut scenes, as PuzzleSecretary called them) could be desirable. Essentially you could be using the description as a form of aggressive scene framing, trying to manage pace or set up a specific moment.
-
+ I agree that it must be mentioned that boxed text is often too long. I have noticed players zoning out at points even in otherwise high-stakes scenes. 
+ I also tend to agree with Justin’s critiques here but it occurred to me that in some cases freeze-framed boxed text (or cut scenes, as PuzzleSecretary called them) could be desirable. Essentially you could be using the description as a form of aggressive scene framing, trying to manage pace or set up a specific moment. 
  August 2nd, 2022 - 7:13 pm 
-
- Leave a Reply
-
+ Leave a Reply 
  Name (required) 
-
  Mail (will not be published) (required) 
-
  Website 
-
- XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> 
--->
-
+ XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> -->
  Δ 
-
  JUSTIN ALEXANDER
- About - Bibliography 
- Acting Resume 
-
+ About - Bibliography Acting Resume 
 ROLEPLAYING GAMES
  Gamemastery 101 
-
  RPG Scenarios 
-
  RPG Cheat Sheets 
-
  RPG Miscellaneous 
-
  Dungeons & Dragons 
-
  Ptolus: Shadow of the Spire 
-
  Alexandrian Auxiliary 
-
  Check These Out 
-
  Essays 
-
  Other Games 
-
  Reviews 
-
  Shakespeare Sunday 
-
  Thoughts of the Day 
-
  Videos 
-
  Patrons 
-
  Open Game License 
-
- Bluesky • Mastodon • Twitter 
- 
- Archives
- Archives 
-
+ Bluesky • Mastodon • Twitter Archives Archives 
  Select Month 
  August 2026 (13) 
  July 2026 (13) 
@@ -421,52 +327,23 @@ ROLEPLAYING GAMES
  October 2005 (3) 
  August 2005 (17) 
  July 2005 (25) 
-
- Recent Posts
-
+ Recent Posts 
  Chaos Lorebook: The Magi of Chaos 
-
  Ex-RPGNet Review: A Song of Ice and Fire 
-
  Chaos Lorebook: The Earthbound Demons 
-
  Ex-RPGNet Review: Penumbra Backdrops 
-
  Chaos Lorebook: The Assassins of Chaos 
-
- Recent Comments
- Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) 
- On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal 
- Robert on Chaos Lorebook: The Magi of Chaos 
- Justin Alexander on Ptolus: Running the Campaign – From Table to Page 
- BP on Ex-RPGNet Review: A Song of Ice and Fire 
- Remus on Some Thoughts on Swords & Sorcery 
- BP on Ex-RPGNet Review: A Song of Ice and Fire 
- Ben Ferguson on Ptolus: Running the Campaign – From Table to Page 
- Jake on Ex-RPGNet Review: A Song of Ice and Fire 
- William on Ex-RPGNet Review: A Song of Ice and Fire 
-
- Author
- Read Now! - Audio Book 
-
-Author
-
+ Recent Comments Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal Robert on Chaos Lorebook: The Magi of Chaos Justin Alexander on Ptolus: Running the Campaign – From Table to Page BP on Ex-RPGNet Review: A Song of Ice and Fire Remus on Some Thoughts on Swords & Sorcery BP on Ex-RPGNet Review: A Song of Ice and Fire Ben Ferguson on Ptolus: Running the Campaign – From Table to Page Jake on Ex-RPGNet Review: A Song of Ice and Fire William on Ex-RPGNet Review: A Song of Ice and Fire 
+ Author Read Now! - Audio Book 
+ Author 
  PDF Edition 
-
  City Supplement 1: Dweredell 
-
  City Supplement 2: Aerie 
-
  City Supplement 3: Anyoc 
-
  Rule Supplement 1: Mounted Combat 
-
  Adventure: Complex of Zombies 
-
  Adventure: The Black Mist 
-
  Spells of Light and Darkness 
-
  Mythos Audio Library: Call of Cthulhu 
-
  Copyright © The Alexandrian . All rights reserved.
+ 

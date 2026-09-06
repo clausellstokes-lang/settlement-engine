@@ -25,9 +25,9 @@
  Press 
  Contact 
  Recipe for a Page-Turner: George R.R. Martin’s A Game of Thrones 
- Whatever you think of the TV series, A   Game of Thrones is a compulsively readable book. This is a rare thing. The ability to keep the pages turning is a kind of secret magic, in fact. A heady power for which most writers of narrative – fiction or nonfiction – would trade everything but their souls. How does one write a sustained narrative that can’t be put down? Is there a recipe for Martin’s success? 
+ Whatever you think of the TV series, A Game of Thrones is a compulsively readable book. This is a rare thing. The ability to keep the pages turning is a kind of secret magic, in fact. A heady power for which most writers of narrative – fiction or nonfiction – would trade everything but their souls. How does one write a sustained narrative that can’t be put down? Is there a recipe for Martin’s success? 
  Part I: The Prologue 
- If a novel is a multi-course meal, a prologue is the appetizer. This is where the guests decide whether they want to get up and leave the restaurant, or stay for the rest of dinner.   Let’s take a look at Martin’s prologue. Can we identify some of the ingredients he uses to make A   Game of Thrones such an irresistible read? 
+ If a novel is a multi-course meal, a prologue is the appetizer. This is where the guests decide whether they want to get up and leave the restaurant, or stay for the rest of dinner. Let’s take a look at Martin’s prologue. Can we identify some of the ingredients he uses to make A Game of Thrones such an irresistible read? 
  Before we dive in to the recipe, here’s a quick set-up: We’re in the forest, in a northern place, with a group of armed men looking for something. 
  Ingredient # 1: Direct POV character experience of dread and fear: 
  “Will could sense something else in the older man. You could taste it; a nervous tension that came perilous close to fear.” 
@@ -37,7 +37,7 @@
  I like to call this “Shadow Description.” If you want to hearken back to High School English, you could also call it foreshadowing . Whatever you call it, it’s hugely important in gripping fiction. 
  A few more examples: 
  “A cold wind whispered through the trees. His great sable cloak stirred behind him like something half-alive.” 
-  “. . . the rustle of leaves, and muttered curses as reaching branches grabbed at his longsword and tugged on his splendid sable coat.” 
+ “. . . the rustle of leaves, and muttered curses as reaching branches grabbed at his longsword and tugged on his splendid sable coat.” 
  Notice this theme of the landscape seeming half-alive. Not only is it creepy; it’s also a direct hint about what is to come. (Half-alive = half-dead.) 
  Ingredient # 3: Conflict between characters: 
  The men don’t like their commander, who is a spoiled young “lordling.” As the prologue goes on, this conflict goes from being an undercurrent to flashing out into the open. In other words, the conflict in the prologue has an arc . 
@@ -53,14 +53,14 @@
  Appropriately, the prologue ends with a shock, and another mystery: how is it possible that the lordling has come back to life? We won’t find out about this for quite some time. It will recede from the forefront of our consciousness, but unconsciously it will still be lodged there, giving us yet another reason to read on. 
  Okay, so much for the prologue. Our fictional dinner guest likes the appetizer and decides to stay for the first course. 
  Part II: Chapter One 
- Chapter One of A   Game of Thrones begins with a grim and bloody incident: the beheading of a deserter. It’s seen through the eyes of Bran, one of the half a dozen rotating close-third POV characters that carry the book. 
- When I went through this chapter looking for the ingredients Martin used to create a compulsively readable story, I was a bit surprised. I expected to see more of the ingredients we identified in the prologue, but that wasn’t the case. Most of the prologue ingredients were present: there was some mystery, a bit of low-grade conflict between characters, a few mild shivers of dread. In descriptions, The Shadow was definitely present, though not nearly as dire or intense as it had been in the prologue. But the first chapter was qualitatively different. The ingredients carried over from the prologue were minor, like seasonings or a light sauce for Chapter One’s main dish. 
+ Chapter One of A Game of Thrones begins with a grim and bloody incident: the beheading of a deserter. It’s seen through the eyes of Bran, one of the half a dozen rotating close-third POV characters that carry the book. 
+ When I went through this chapter looking for the ingredients Martin used to create a compulsively readable story, I was a bit surprised. I expected to see more of the ingredients we identified in the prologue, but that wasn’t the case. Most of the prologue ingredients were present: there was some mystery, a bit of low-grade conflict between characters, a few mild shivers of dread. In descriptions, The Shadow was definitely present, though not nearly as dire or intense as it had been in the prologue. But the first chapter was qualitatively different. The ingredients carried over from the prologue were minor, like seasonings or a light sauce for Chapter One’s main dish. 
  And what was that main dish, you might well ask? It had three principal ingredients: 
  1) character creation 
  2) world-building 
- 3) a framework of fascinating incident   providing a basis for #’s 1 and 2. 
- We already know about the first incident: the beheading. The second incident occurs when the party, returning to their castle, finds a dead wolf, a surprisingly big wolf in fact, with six nursing puppies. It’s worth noting that both incidents are related to the unfolding of the plot, but not at all central to it. They’re so minor, for example, that they probably wouldn’t appear in a three-page synopsis of the novel.  
- So why are these incidents featured in the all-important first chapter? Well, we learn some important details about the compelling imagined world we’ll be spending so much time in. We learn that we’re in the ninth year of summer, and that summer is now coming to an end. We learn that in this world there are frightening creatures called wildlings , and giant wolves, or direwolves.  
+ 3) a framework of fascinating incident providing a basis for #’s 1 and 2. 
+ We already know about the first incident: the beheading. The second incident occurs when the party, returning to their castle, finds a dead wolf, a surprisingly big wolf in fact, with six nursing puppies. It’s worth noting that both incidents are related to the unfolding of the plot, but not at all central to it. They’re so minor, for example, that they probably wouldn’t appear in a three-page synopsis of the novel. 
+ So why are these incidents featured in the all-important first chapter? Well, we learn some important details about the compelling imagined world we’ll be spending so much time in. We learn that we’re in the ninth year of summer, and that summer is now coming to an end. We learn that in this world there are frightening creatures called wildlings , and giant wolves, or direwolves. 
  More importantly, we learn a great deal about some of the main characters . We are shown that they are not only interesting, but sympathetic. The successful introduction of this ingredient, above all, is what “hooks” us, and what, in combination with the simmering sauce we’ve already identified, drives us to read on. 
  Let’s look a bit more closely at how character is introduced and developed in Chapter 1. The first thing we learn about Bran, the POV character for this chapter, is that he’s nervous and excited. We see him trying to act older than his seven years, and pretending not to be phased by the fact that his father is about to slice someone’s head off. Can you relate? Does this make you like the character less or more? 
  Martin wastes little time in establishing character sympathy, and Bran becomes even more sympathetic as the chapter goes on: he intervenes to save the wolf pups, simultaneously demonstrating willfulness, compassion, and courage. We can totally relate to his desire to save the fluffy wolf pups. We can’t help rooting for him to succeed. 
@@ -70,7 +70,7 @@
  Let’s turn to the important non-POV characters. Martin wastes no time in describing them either, using a comparative version of the familiar “three stroke” rule of character creation: 
  “Jon was slender where Robb was muscular, dark where Robb was fair, graceful and quick where his half brother was strong and fast.” 
  This gives us a pretty good initial sense of these two key characters, in a remarkably economical way. 
- Notice the way sympathy is established for the other characters as well. The Stark family, though brutal, lives by a noble code of honor: “the man who passes the sentence should swing the sword.” Jon takes Bran’s side on saving the wolf pups, and their father shows his own generosity of spirit by agreeing to let it happen, and so on. This turns out to be a group of very likable people – the kind of people a reader can imagine spending a lot of time with. This in itself is quite an achievement, given the brutal piece of vigilante justice that forms the chapter’s main action.  
+ Notice the way sympathy is established for the other characters as well. The Stark family, though brutal, lives by a noble code of honor: “the man who passes the sentence should swing the sword.” Jon takes Bran’s side on saving the wolf pups, and their father shows his own generosity of spirit by agreeing to let it happen, and so on. This turns out to be a group of very likable people – the kind of people a reader can imagine spending a lot of time with. This in itself is quite an achievement, given the brutal piece of vigilante justice that forms the chapter’s main action. 
  Share this: 
  Share on X (Opens in new window) 
  X 

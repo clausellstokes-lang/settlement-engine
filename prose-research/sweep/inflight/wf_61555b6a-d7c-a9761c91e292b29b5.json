@@ -3,13 +3,14 @@
  "name": "tolkien",
  "angle": null,
  "tag": "i853-867",
- "lines": 66,
+ "lines": 73,
  "firstTs": "2026-09-06T17:26:20.841Z",
- "lastTs": "2026-09-06T17:29:41.144Z",
+ "lastTs": "2026-09-06T17:30:54.480Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 14
+  "Bash": 15,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://ora.ox.ac.uk/objects/uuid:fd07c3e1-c729-47f3-ba24-f568968eedce/files/rbv73c0908",
@@ -24,9 +25,9 @@
  "run": "wf_61555b6a-d7c",
  "agent": "a9761c91e292b29b5",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_61555b6a-d7c/agent-a9761c91e292b29b5.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i853-867.json",
-  "exists": false
+  "exists": true
  }
 }

@@ -1,129 +1,66 @@
-The Alexandrian » The Art of the Key – Part 3: Hierarchy of Reference 
-
+ 
+ The Alexandrian » The Art of the Key – Part 3: Hierarchy of Reference 
  The Art of the Key – Part 3: Hierarchy of Reference 
-
  May 2nd, 2016 
-
  Go to Part 1 
-
- I’ve previously dismissed the dogmatization of the old delve adventure format due to the limitations of its one-size-fits-all approach. (Both in Part 1 of this series and, at greater length, in Are We Really This Stupid? ) But the delve format does have one really good idea:
-
+ I’ve previously dismissed the dogmatization of the old delve adventure format due to the limitations of its one-size-fits-all approach. (Both in Part 1 of this series and, at greater length, in Are We Really This Stupid? ) But the delve format does have one really good idea: 
  Everything you need is on the page. 
-
- When you’re using the delve format, you don’t have to open your Monster Manual to find a creature’s stat block and then open the Player’s Handbook to figure out how one of their spell-like abilities works: It’s all right there on the page.
-
- This is great from a utility standpoint, and can really smooth out the experience of running things at the table (because the GM can focus on running the encounter instead of flipping pages). It’s also a good rule for layout. (Whenever possible, try to arrange your layout so that information that needs to be referenced at the same time doesn’t require a page turn. For my keys I’ll frequently use page breaks to place the entire description for a room entirely on one page even if it means leaving a ton of unused white space on the previous page.)
-
- When you’re working on a project destined for publication and a general audience, figuring out what needs to be referenced and what doesn’t can be a tricky balancing act. When implementing a similar method of simulating system mastery for the sidebar reference system used in Legends & Labyrinths , I dealt with this issue by defining a very small set of “core concepts” that didn’t need to be referenced because it was assumed that players would be familiar with them, and then including a single page explaining those core concepts that new players could reference when they needed to. You can achieve a similar effect at your game table by using system cheat sheets .
-
- When prepping material for your own use, however, you should be able to very precisely calibrate your personal level of system mastery. For example, I know how the magic missile and fireball spells work in D&D, so I can just jot down their names. But if I’ve plucked an obscure spell I’ve never used before, I’m going to include a reference for it.
-
- I’ve actually spent more than 15 years now prepping material for the 3 rd Edition of D&D, and when I look back over that material I can clearly track my growing mastery of the system. For example, my earliest scenarios feature monster stat blocks with text like this frequently appended to them:
-
- SPRING ATTACK Can move both before and after attacking without AoO. (PHB, pg. 85)
-
- It didn’t take long before I no longer had to remind myself how the Spring Attack feat works. But when I recently ran an adventure with monsters which extensively used new feats from Monte Cook’s Book of Experimental Might , I was still using the same technique:
-
- Elude Blows : Subtract number from melee damage rolls and add it to AC vs. melee attacks (up to BAB). ( Book of Experimental Might, pg. 36.)
-
- And these references can be terribly esoteric and entirely personal in nature. For example, even after 15 years for some reason I constantly forget to take advantage of the Point Blank Shot feat for my NPCs. For some reason my eye skips right past it in a list of feats. So I’ll frequently drop it into the special abilities reference section I include after stat blocks even thought I know what it does.
-
- THE HIERARCHY OF REFERENCE
-
- In general, there’s a hierarchy of reference:
-
- Include the full text.
-
- Include a brief summary of the most important factors (and probably a page reference if you end up needing specific clarifications).
-
- Include just a page reference.
-
- List the keyword, spell name, feat, etc.
-
- Basically, you move down the hierarchy as you gain more and more mastery over the system you’re running. It’s like the vocab cards you use for learning a new language (except you never need to spend time memorizing them; playing the game does that for you organically) – as you master each concept you cycle them out of rotation.
-
- Including the full text for something has become really easy in an era of copy-and-paste. But having such a large bulk of text is not always the best option for quickly referencing something during play. And if you’re dealing with lots of different abilities or effects, including the full text for every single thing will often bloat your content to the point where it becomes more difficult to use (because, for example, you’re having to flip between multiple pages in order to run an encounter).
-
+ When you’re using the delve format, you don’t have to open your Monster Manual to find a creature’s stat block and then open the Player’s Handbook to figure out how one of their spell-like abilities works: It’s all right there on the page. 
+ This is great from a utility standpoint, and can really smooth out the experience of running things at the table (because the GM can focus on running the encounter instead of flipping pages). It’s also a good rule for layout. (Whenever possible, try to arrange your layout so that information that needs to be referenced at the same time doesn’t require a page turn. For my keys I’ll frequently use page breaks to place the entire description for a room entirely on one page even if it means leaving a ton of unused white space on the previous page.) 
+ When you’re working on a project destined for publication and a general audience, figuring out what needs to be referenced and what doesn’t can be a tricky balancing act. When implementing a similar method of simulating system mastery for the sidebar reference system used in Legends & Labyrinths , I dealt with this issue by defining a very small set of “core concepts” that didn’t need to be referenced because it was assumed that players would be familiar with them, and then including a single page explaining those core concepts that new players could reference when they needed to. You can achieve a similar effect at your game table by using system cheat sheets . 
+ When prepping material for your own use, however, you should be able to very precisely calibrate your personal level of system mastery. For example, I know how the magic missile and fireball spells work in D&D, so I can just jot down their names. But if I’ve plucked an obscure spell I’ve never used before, I’m going to include a reference for it. 
+ I’ve actually spent more than 15 years now prepping material for the 3 rd Edition of D&D, and when I look back over that material I can clearly track my growing mastery of the system. For example, my earliest scenarios feature monster stat blocks with text like this frequently appended to them: 
+ SPRING ATTACK Can move both before and after attacking without AoO. (PHB, pg. 85) 
+ It didn’t take long before I no longer had to remind myself how the Spring Attack feat works. But when I recently ran an adventure with monsters which extensively used new feats from Monte Cook’s Book of Experimental Might , I was still using the same technique: 
+ Elude Blows : Subtract number from melee damage rolls and add it to AC vs. melee attacks (up to BAB). ( Book of Experimental Might, pg. 36.) 
+ And these references can be terribly esoteric and entirely personal in nature. For example, even after 15 years for some reason I constantly forget to take advantage of the Point Blank Shot feat for my NPCs. For some reason my eye skips right past it in a list of feats. So I’ll frequently drop it into the special abilities reference section I include after stat blocks even thought I know what it does. 
+ THE HIERARCHY OF REFERENCE 
+ In general, there’s a hierarchy of reference: 
+ Include the full text. 
+ Include a brief summary of the most important factors (and probably a page reference if you end up needing specific clarifications). 
+ Include just a page reference. 
+ List the keyword, spell name, feat, etc. 
+ Basically, you move down the hierarchy as you gain more and more mastery over the system you’re running. It’s like the vocab cards you use for learning a new language (except you never need to spend time memorizing them; playing the game does that for you organically) – as you master each concept you cycle them out of rotation. 
+ Including the full text for something has become really easy in an era of copy-and-paste. But having such a large bulk of text is not always the best option for quickly referencing something during play. And if you’re dealing with lots of different abilities or effects, including the full text for every single thing will often bloat your content to the point where it becomes more difficult to use (because, for example, you’re having to flip between multiple pages in order to run an encounter). 
  UTILITY OF REFERENCE 
-
- In addition to streamlining your reference material, you can also manage this bloat by keeping in mind how you’ll actually use your scenario notes (and the references within it) and then organizing it accordingly.
-
- We’ve already broached this subject by talking about using page breaks to keep entire key entries on a single sheet. But you can accomplish a similar effect by “outsourcing” blocks of information onto separate sheets that you can reference simultaneously at the game table.
-
- When I’m GMing, I’ll frequently have my end of the table organized so that I can lay out multiple sheets of paper out in front of me. I’ll also use folding tray tables set up to my left, right, or both sides to hold additional reference material (including rulebooks and the like). I’ll occasionally be asked how I manage to keep the game running so smoothly when I’m juggling all these different pieces of paper, but the reality is that the game is running smoothly because I’m using all of those sheets: My eyes can skip rapidly from one reference to another, making it trivial to (for example) run an encounter featuring a half dozen different complicated stat blocks which would become a massive headache if I was instead trying to flip back and forth between six different pages in a Monster Manual .
-
- Monsters are, in fact, one of the easiest things to outsource onto their own sheets. (Often, of course, you can fit multiple such stat blocks onto a single sheet.) I’ll even include a quick visual reference when I can, which is both useful for describing the creature and also makes it really easy to quickly find the stat block I need to reference. Here’s a typical one:
-
- Outsourcing monsters like this is also an essential component of using the advanced technique of adversary rosters, which is what we’ll be discussing next.
-
+ In addition to streamlining your reference material, you can also manage this bloat by keeping in mind how you’ll actually use your scenario notes (and the references within it) and then organizing it accordingly. 
+ We’ve already broached this subject by talking about using page breaks to keep entire key entries on a single sheet. But you can accomplish a similar effect by “outsourcing” blocks of information onto separate sheets that you can reference simultaneously at the game table. 
+ When I’m GMing, I’ll frequently have my end of the table organized so that I can lay out multiple sheets of paper out in front of me. I’ll also use folding tray tables set up to my left, right, or both sides to hold additional reference material (including rulebooks and the like). I’ll occasionally be asked how I manage to keep the game running so smoothly when I’m juggling all these different pieces of paper, but the reality is that the game is running smoothly because I’m using all of those sheets: My eyes can skip rapidly from one reference to another, making it trivial to (for example) run an encounter featuring a half dozen different complicated stat blocks which would become a massive headache if I was instead trying to flip back and forth between six different pages in a Monster Manual . 
+ Monsters are, in fact, one of the easiest things to outsource onto their own sheets. (Often, of course, you can fit multiple such stat blocks onto a single sheet.) I’ll even include a quick visual reference when I can, which is both useful for describing the creature and also makes it really easy to quickly find the stat block I need to reference. Here’s a typical one: 
+ Outsourcing monsters like this is also an essential component of using the advanced technique of adversary rosters, which is what we’ll be discussing next. 
  Go to Part 4: Adversary Rosters 
-
  Filed under: Roleplaying Games Comment (1) 
  Article tags: art of the key , Arts of the GM 
-
- One Response to “The Art of the Key – Part 3: Hierarchy of Reference”
-
+ One Response to “The Art of the Key – Part 3: Hierarchy of Reference” 
  La préparation intelligente – quefaitesvous says: 
-
- […] au cours du temps et selon le système que vous utilisez. J’en aborde certains aspects dans The Hierarchy of Reference, mais cela s’applique de manière systématique. Peut-être avez-vous du mal à mettre en […]
-
+ […] au cours du temps et selon le système que vous utilisez. J’en aborde certains aspects dans The Hierarchy of Reference, mais cela s’applique de manière systématique. Peut-être avez-vous du mal à mettre en […] 
  June 3rd, 2018 - 4:24 pm 
-
- Leave a Reply
-
+ Leave a Reply 
  Name (required) 
-
  Mail (will not be published) (required) 
-
  Website 
-
- XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> 
--->
-
+ XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> -->
  Δ 
-
  JUSTIN ALEXANDER
- About - Bibliography 
- Acting Resume 
-
+ About - Bibliography Acting Resume 
 ROLEPLAYING GAMES
  Gamemastery 101 
-
  RPG Scenarios 
-
  RPG Cheat Sheets 
-
  RPG Miscellaneous 
-
  Dungeons & Dragons 
-
  Ptolus: Shadow of the Spire 
-
  Alexandrian Auxiliary 
-
  Check These Out 
-
  Essays 
-
  Other Games 
-
  Reviews 
-
  Shakespeare Sunday 
-
  Thoughts of the Day 
-
  Videos 
-
  Patrons 
-
  Open Game License 
-
- Bluesky • Mastodon • Twitter 
- 
- Archives
- Archives 
-
+ Bluesky • Mastodon • Twitter Archives Archives 
  Select Month 
  August 2026 (13) 
  July 2026 (13) 
@@ -359,52 +296,23 @@ ROLEPLAYING GAMES
  October 2005 (3) 
  August 2005 (17) 
  July 2005 (25) 
-
- Recent Posts
-
+ Recent Posts 
  Chaos Lorebook: The Magi of Chaos 
-
  Ex-RPGNet Review: A Song of Ice and Fire 
-
  Chaos Lorebook: The Earthbound Demons 
-
  Ex-RPGNet Review: Penumbra Backdrops 
-
  Chaos Lorebook: The Assassins of Chaos 
-
- Recent Comments
- Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) 
- On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal 
- Robert on Chaos Lorebook: The Magi of Chaos 
- Justin Alexander on Ptolus: Running the Campaign – From Table to Page 
- BP on Ex-RPGNet Review: A Song of Ice and Fire 
- Remus on Some Thoughts on Swords & Sorcery 
- BP on Ex-RPGNet Review: A Song of Ice and Fire 
- Ben Ferguson on Ptolus: Running the Campaign – From Table to Page 
- Jake on Ex-RPGNet Review: A Song of Ice and Fire 
- William on Ex-RPGNet Review: A Song of Ice and Fire 
-
- Author
- Read Now! - Audio Book 
-
-Author
-
+ Recent Comments Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal Robert on Chaos Lorebook: The Magi of Chaos Justin Alexander on Ptolus: Running the Campaign – From Table to Page BP on Ex-RPGNet Review: A Song of Ice and Fire Remus on Some Thoughts on Swords & Sorcery BP on Ex-RPGNet Review: A Song of Ice and Fire Ben Ferguson on Ptolus: Running the Campaign – From Table to Page Jake on Ex-RPGNet Review: A Song of Ice and Fire William on Ex-RPGNet Review: A Song of Ice and Fire 
+ Author Read Now! - Audio Book 
+ Author 
  PDF Edition 
-
  City Supplement 1: Dweredell 
-
  City Supplement 2: Aerie 
-
  City Supplement 3: Anyoc 
-
  Rule Supplement 1: Mounted Combat 
-
  Adventure: Complex of Zombies 
-
  Adventure: The Black Mist 
-
  Spells of Light and Darkness 
-
  Mythos Audio Library: Call of Cthulhu 
-
  Copyright © The Alexandrian . All rights reserved.
+ 

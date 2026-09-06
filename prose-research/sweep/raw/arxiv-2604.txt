@@ -43,9 +43,9 @@ View a PDF of the paper titled StoryScope: Investigating idiosyncrasies in AI fi
  view license 
  Current browse context: 
  cs.CL 
- < prev 
-   |   
- next > 
+ < prev 
+ | 
+ next > 
  new 
  | 
  recent 

@@ -21,7 +21,7 @@
  Main Membership 
  About Membership 
  Join the Authors Guild 
- Renew Membership / Rejoin the Guild 
+ Renew Membership / Rejoin the Guild 
  Membership FAQ 
  Member Code of Conduct 
  Services 
@@ -110,7 +110,7 @@
  Membership Collapse submenu 
  About Membership 
  Join the Authors Guild 
- Renew Membership / Rejoin the Guild 
+ Renew Membership / Rejoin the Guild 
  Membership FAQ 
  Member Code of Conduct 
  Services 

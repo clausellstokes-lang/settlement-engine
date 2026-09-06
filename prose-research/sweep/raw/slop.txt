@@ -35,7 +35,7 @@
  Projects
  Security and quality
  Insights
- main Branches Tags Go to file Code Open more actions menu Latest commit   History 26 Commits 26 Commits Folders and files Name Name Last commit message Last commit date data data     results results     results_by_domain results_by_domain     scripts scripts     slop_forensics slop_forensics     .env.example .env.example     .gitignore .gitignore     LICENSE LICENSE     README.md README.md     requirements.txt requirements.txt     slop_forensics_example.ipynb slop_forensics_example.ipynb     View all files Repository files navigation README MIT license More items Slop Forensics Toolkit 
+ main Branches Tags Go to file Code Open more actions menu Latest commit History 26 Commits 26 Commits Folders and files Name Name Last commit message Last commit date data data results results results_by_domain results_by_domain scripts scripts slop_forensics slop_forensics .env.example .env.example .gitignore .gitignore LICENSE LICENSE README.md README.md requirements.txt requirements.txt slop_forensics_example.ipynb slop_forensics_example.ipynb View all files Repository files navigation README MIT license More items Slop Forensics Toolkit 
  A toolkit for generating & analyzing "slop" — over-represented lexical patterns — in LLM outputs. 
  🧬 Dataset Generation 
  Generate a standardised set of outputs from several models for downstream analysis. 
@@ -222,7 +222,7 @@ We produce visual tree diagrams (both circular and rectangular), as well as data
 } 
  About No description, website, or topics provided. Resources Readme MIT license Activity Stars 370 stars Watchers 8 watching Forks 29 forks Report repository Releases Packages Used by Contributors Languages 
  Footer 
- © 2026 GitHub, Inc.
+ © 2026 GitHub, Inc.
  Footer navigation 
  Terms 
  Privacy 

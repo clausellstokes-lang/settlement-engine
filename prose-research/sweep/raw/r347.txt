@@ -105,7 +105,7 @@
  Do any of our language experts here have links to or examples of poetry that “Where now is the horse and the rider?” is modeled after? Would it be related to why Tolkien only gives the poem translated—the Internet claims that “Westu [name] hal” is Old English, so would the untranslated poem be basically Old English? (By the way, until now, I always mis-read “hal” as “hai”; it just looked more probable to me.) 
  * * * 
  Arriving at Edoras, and another example of insularity being bad, with Wormtongue being behind the refusal to give entry to anyone who does not know their language or come from Gondor. 
- We’ve discussed the bit at the door with the weapons a couple times before. *rummages* First, Graydon commented that “In handing over Glamdring, Gandalf is handing over the more famous, and better sword, compared to Narsil/Anduril,” and discusses its lineage. In the chapter, Aragorn says that “Telchar first wrought [Narsil] in the deeps of time,” which prompted me to search my e-book for “Telchar”; I didn’t find anything else in LotR under that name (perhaps the making was discussed in more general terms), but The Silmarillion  says that Telchar was a dwarf, which surprised me because I’d always vaguely assumed that Narsil was of Elvish make. Second, Firefly described how “The arrival at Meduseld in fact closely mirrors passages in Beowulf ,” and how the demand to disarm is actually a serious insult that requires appropriate response—which I found very useful because, you know, I don’t go around armed and neither do most people I know, so my attitude toward weapons in my home is rather different than that of the characters here. I admit without that context I found Aragorn’s behavior unusual, though I liked that he was able to still laugh when Gandalf refused to give up his staff. 
+ We’ve discussed the bit at the door with the weapons a couple times before. *rummages* First, Graydon commented that “In handing over Glamdring, Gandalf is handing over the more famous, and better sword, compared to Narsil/Anduril,” and discusses its lineage. In the chapter, Aragorn says that “Telchar first wrought [Narsil] in the deeps of time,” which prompted me to search my e-book for “Telchar”; I didn’t find anything else in LotR under that name (perhaps the making was discussed in more general terms), but The Silmarillion says that Telchar was a dwarf, which surprised me because I’d always vaguely assumed that Narsil was of Elvish make. Second, Firefly described how “The arrival at Meduseld in fact closely mirrors passages in Beowulf ,” and how the demand to disarm is actually a serious insult that requires appropriate response—which I found very useful because, you know, I don’t go around armed and neither do most people I know, so my attitude toward weapons in my home is rather different than that of the characters here. I admit without that context I found Aragorn’s behavior unusual, though I liked that he was able to still laugh when Gandalf refused to give up his staff. 
  * * * 
  Wormtongue. I hadn’t noticed before that his physical description, upon introduction, contains a small amount of ambiguity: “a wizened figure of a man, with a pale wise face and heavy-lidded eyes.” Unless this is some archaic non-positive use of “wise”? 
  His initial comment doesn’t give a good impression of his wisdom or effectiveness, but then he’s been saddled with As-You-Know-Bob’ing recent history: “You speak justly, lord. It is not yet five days since the bitter tidings came that Théodred your son was slain upon the West Marches: your right-hand, Second Marshal of the Mark.” I actually liked his observation about a third kind of person who only shows up when there’s trouble: “pickers of bones, meddlers in other men’s sorrows, carrion-fowl that grow fat on war.” Don’t we all know someone who delights excessively in the misfortunes of others? And his persuasive efforts later in the chapter are somewhat better, when he tries to be left behind with the women (especially Éowyn), children, and elderly. But I still didn’t get the impression that he was, as Gandalf called him, “bold and cunning.” Instead I saw him, as Gandalf says later in that paragraph, a “snake,” or at least our stereotypes thereof: insinuating, clever, but not employing physical force and probably a coward—so, okay, not a constrictor but a venomous snake. A spitting one. 
@@ -383,7 +383,7 @@ aware, cunning
  Reply 
  shinseifer 
  5 years ago
-  A very late observation, but are we even sure that Glamdring is older than Narsil, or are we showing an “Elves > Dwarves” bias here? Nogrod existed well before Gondolin and the return of the exiled Noldor in general, though i can’t find references specific to Telchar’s timeline. Moreover, I seem to recall from the Silmarillion that, while the Noldor were mighty artisans among Elvenkind, Dwarves were always, even in the Elder Days, the chief metallurgists and weapon-makers, and the Noldor themselves learned much from them during the First Age. 
+ A very late observation, but are we even sure that Glamdring is older than Narsil, or are we showing an “Elves > Dwarves” bias here? Nogrod existed well before Gondolin and the return of the exiled Noldor in general, though i can’t find references specific to Telchar’s timeline. Moreover, I seem to recall from the Silmarillion that, while the Noldor were mighty artisans among Elvenkind, Dwarves were always, even in the Elder Days, the chief metallurgists and weapon-makers, and the Noldor themselves learned much from them during the First Age. 
  Irrespective of the blades’ relative age it can be argued that Glamdring is still “nobler” due to having been worn by the great elven king Turgon, but I don’t think Narsin/Andùril can be seen as significantly “lesser”; maybe also due to the fact that where Glamdring is related to a grave defeat, Narsil was a symbol of a decisive victory. And as someone else noted, the Sword that was Broken held higher significance for Men in particular. 
  0 
  Reply 
@@ -395,26 +395,26 @@ aware, cunning
  Fernhunter 
  5 years ago
  @@@@@ 0, Kate Nepveu: 
- Wormtongue. I hadn’t noticed before that his physical description, upon introduction, contains a small amount of ambiguity: “a wizened figure of a man, with a pale wise face and heavy-lidded eyes.” Unless this is some archaic non-positive use of “wise”? 
+ Wormtongue. I hadn’t noticed before that his physical description, upon introduction, contains a small amount of ambiguity: “a wizened figure of a man, with a pale wise face and heavy-lidded eyes.” Unless this is some archaic non-positive use of “wise”? 
  One definition of wise in the OED runs: 
- With general adjectives, often forming an equivalent of  -ly suffix2 , as † humble wise  = humbly,  despiteful-wise  = despitefully: in later use hyphenated or as one word.Cf. Middle High German glîcher wîse (German gleicherweise), German glücklicherweise, irrtümlicherweise, törichterweise, zufälligerweise, etc.; normaler weise, etc. 
- OE   Beowulf 1865   Ic þa leode wat..fæste geworhte, æghwæs untæle ealde wisan. 
- c1386   G. Chaucer Knight’s Tale 480   The nyghtes longe Encressen double wise the peynes stronge. 
- a1400  ( ▸a1325)    Cursor Mundi (Vesp.) l. 21277   Þe queles er draun diuerse wise. 
- 1475   Rolls of Parl. VI. 129/1   Service, the which the seid Galiard..had doon dyvers wise to your goode grace. 
- 1572  ( ▸a1500)    Taill of Rauf Coilȝear (1882) 932   Thus may thow, and thow will, wirk the best wise. 
- 1592   H. Constable Diana i. i. sig. B1   Humble wise To thee my sighes in verse I sacrifise. 
- 1635   J. Hayward tr. G. F. Biondi Donzella Desterrada 157   It was formed hooked-wise. 
- 1866   Church & State Rev. 11 May 298/2   It is no dull good-boy book, to be taken teetotalwise. 
- 1876   E. C. Stedman Victorian Poets vi. 220   ‘The Princess’ and ‘The Idylls of the King’, are written Dorian-wise. 
- 1903   R. Kipling S. Afr. in Five Nations vi   She..Treated them despiteful-wise. 
- I suggest that, for a people who work and play outdoors, pale wise would not be a compliment. What kind of man doesn’t ever get out in the sun? 
+ With general adjectives, often forming an equivalent of -ly suffix2 , as † humble wise = humbly, despiteful-wise = despitefully: in later use hyphenated or as one word.Cf. Middle High German glîcher wîse (German gleicherweise), German glücklicherweise, irrtümlicherweise, törichterweise, zufälligerweise, etc.; normaler weise, etc. 
+ OE Beowulf 1865 Ic þa leode wat..fæste geworhte, æghwæs untæle ealde wisan. 
+ c1386 G. Chaucer Knight’s Tale 480 The nyghtes longe Encressen double wise the peynes stronge. 
+ a1400 ( ▸a1325) Cursor Mundi (Vesp.) l. 21277 Þe queles er draun diuerse wise. 
+ 1475 Rolls of Parl. VI. 129/1 Service, the which the seid Galiard..had doon dyvers wise to your goode grace. 
+ 1572 ( ▸a1500) Taill of Rauf Coilȝear (1882) 932 Thus may thow, and thow will, wirk the best wise. 
+ 1592 H. Constable Diana i. i. sig. B1 Humble wise To thee my sighes in verse I sacrifise. 
+ 1635 J. Hayward tr. G. F. Biondi Donzella Desterrada 157 It was formed hooked-wise. 
+ 1866 Church & State Rev. 11 May 298/2 It is no dull good-boy book, to be taken teetotalwise. 
+ 1876 E. C. Stedman Victorian Poets vi. 220 ‘The Princess’ and ‘The Idylls of the King’, are written Dorian-wise. 
+ 1903 R. Kipling S. Afr. in Five Nations vi She..Treated them despiteful-wise. 
+ I suggest that, for a people who work and play outdoors, pale wise would not be a compliment. What kind of man doesn’t ever get out in the sun? 
  The modern equivalent might be something like pencil neck . 
  0 
  Reply 
  pomegranate 
  3 years ago
-  Wormtongue reminds me of the odious Mr.Slope in Barchester Towers, claiming the Bishop’s orders for his own wishes. 
+ Wormtongue reminds me of the odious Mr.Slope in Barchester Towers, claiming the Bishop’s orders for his own wishes. 
  Also, it worried me that Aragorn, Gimli & Legolas, after days of running & riding , never get time for a wash. Not enough time for a sauna, but surely Eowyn could have found them clean shirts? 
  0 
  Reply 
