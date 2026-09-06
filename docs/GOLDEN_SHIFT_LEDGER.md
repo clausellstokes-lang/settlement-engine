@@ -2173,3 +2173,114 @@ once more: an isolated, food-deficit settlement whose variant key selects #1.
 Everything else is byte-identical. This is a copy repair, not a widening — no
 variant was added, removed, or re-pointed, and the pool is still eight arms of
 five.
+
+---
+
+# GOLDEN SHIFT LEDGER — LGT-C2-DEFAULT hunk 1 "THE DEFAULT PRESET TAKES CLASS C+D"
+
+*Lane L-DEFAULT (seat Opus 5 — Fable-unvalidated), 2026-09-06, on the §902 tip `fd36f0298`.*
+
+## HEADLINE RESULT — exactly ONE row of ONE surface moved, and the row that matters most did not
+
+The lighting wave lit the DEFAULT preset `realistic_regional` with twenty-one VIRTUAL
+keys (`disastersEnabled`, `commodityFlowEnabled`, `allyIntelSharingEnabled`, the nine
+`...WAVES`, the nine `...ONE_REGEN`). One same-seed surface in the estate moved:
+`tests/fixtures/preset-lighting-witness-golden.json`, one row of eight.
+
+## THE STATED LEGITIMATE CAUSE
+
+The owner's word of 2026-09-02 was to light everything, the shipped default included, as
+declared shifts. Hunk 1 (`432ff6441`) is that act reaching the preset table. The witness
+is the estate's only bit-level answer to "which world does a new campaign get", so it is
+the surface that is *supposed* to move here; an UNMOVED row would have been the finding.
+
+## THE ROW DIFF — every field, and what each one means
+
+| field | before | after | reading |
+|---|---|---|---|
+| `ruleKeyCount` | 37 | 58 | +21, exactly the keys lit |
+| `litFlagCount` | 12 | 33 | +21, exactly the keys lit |
+| `darkFlagCount` | 13 | 13 | unmoved — nothing was darkened |
+| `rulesSha256` | `46919e4d…` | `5cf7363c…` | the resolved rules object |
+| `bornWorldSha256` | `647715f7…` | `df3ba1e5…` | the world at birth |
+| `worldStateSha256` | `934feeda…` | `c0654348…` | 52 ticks of pulse |
+| `wizardNewsSha256` | `4a570ba5…` | `46aa886c…` | the year's news |
+| `settlementUpdatesSha256` | `dff229fb…` | `fdc74c10…` | the year's settlement moves |
+| `regionalGraphSha256` | `ccc6ccbf…` | `ccc6ccbf…` | **unmoved** — the realm is hand-built, not generated |
+| `resolvesBirthConstant` | false | false | unmoved |
+| `advanceEpochLit` | false | false | unmoved — the epoch key is NOT lit by this hunk |
+| `observedTicks` / `status` | 52 / complete | 52 / complete | unmoved |
+
+The other seven rows — `__birth_default__`, `quiet_local`, `dramatic_campaign`,
+`static_campaign`, `narrative_campaign`, `living_realm`, `full_simulation` — are
+byte-identical, verified field-by-field against the committed bytes, not by eye.
+
+## ⭐ THE SHARPEST FACT: `__birth_default__` DID NOT MOVE, AND THAT IS CORRECT
+
+`__birth_default__` is born with no preset id, so it resolves
+`NEW_CAMPAIGN_SIMULATION_PRESET_ID`, which is still `null`. Its row is unchanged, and the
+one plain campaign-birth call in the tree — `campaignImportedCreation.js:56`,
+`createNewCampaignWorldState({ id, name })` with no preset id — therefore still receives
+the plain normalized default carrying NONE of the twenty-one keys.
+
+So hunk 1's live reach is narrower than "every new world", and it is worth writing down
+because the hunk's own source comment does not draw the line:
+
+- **MOVED (live today).** Instant-world composition, which reaches the preset by its
+  LITERAL id, not through `DEFAULT_SIMULATION_PRESET_ID`: `composeInstantWorld.js:402`
+  falls back to `SIMULATION_RULE_PRESETS.realistic_regional`, and `worldPlan.js:92`
+  makes `realistic_regional` the `DEFAULT_TONE`. Also the two curated temperaments
+  `steady_realm` and `the_long_winter` (`temperamentPresets.js:38,42`), and any explicit
+  pick of "Realistic" in the rules dialog or the map toolbar.
+- **NOT MOVED (still dark).** The plain `buildNewCampaign` birth path. It lights at
+  hunk 2, when the O-1 birth constant names a lit successor — and `__birth_default__` is
+  the row that will move then.
+
+`DEFAULT_SIMULATION_PRESET_ID` has ZERO consumers in `src/` outside its own defining
+file: it is the INFERENCE fallback, never a birth selector. That is why identity held.
+
+## IDENTITY HELD — measured three ways, not argued
+
+All twenty-one keys are absent from `DEFAULT_SIMULATION_RULES`, and `RULE_COMPARISON_KEYS`
+is *derived* from that surface (`simulationRules.js:1156-1167`), so absence there is
+absence from identity by construction rather than by claim. Executed: a keyless copy of
+the lit preset re-infers `realistic_regional`; an installed save carrying the DEFAULT
+surface and none of the twenty-one still re-infers `realistic_regional`;
+`normalizeSimulationRules({})` still returns `realistic_regional`. No installed campaign
+is re-labelled and none gains a byte.
+
+## THE BIRTH PRICE MOVED, AND IS RECORDED AS A SPLIT
+
+Naming this preset now materializes **28** keys (30 → 58): the seven profile axes plus the
+twenty-one gates, up from **7** (30 → 37) while the preset was dark. CAR 1's tripwire in
+`presetLightingWitness` fired one hunk EARLIER than its own paragraph predicted — at the
+lighting, not at the naming — because the price is a property of the PRESET, not of the
+constant that names it. The old figure is kept verbatim beside the new one in
+`simulationRulesPreset.stability.test.js`; the split is asserted separately so a future
+drift cannot hide inside a single total.
+
+## SURFACES THAT DID **NOT** MOVE
+
+- `generatorGoldenMaster`: 525 rows moved at BASE `fd36f0298` and 525 with the hunk —
+  identical counts, so this hunk causes none of it. That red is pre-existing and banked
+  by the chair since §901; it is not this lane's and not a STOP.
+- The mechanism lit-coverage denominator: the `*Enabled` token set of
+  `simulationRules.js` raw source is 95 before and 95 after, zero added, zero removed.
+- Every pulse HASH golden: they drive literal rules objects, so a preset-table change
+  cannot reach them. Predicted before measuring and held.
+
+## HOW THIS RE-RECORD WAS TAKEN — and the one discipline it missed
+
+By hand, through the manifest's own documented recipe (`_doc`, "THE RE-RECORD RECIPE"),
+which re-runs `presetLightingWitnessRun.js` — the single writer of these figures, shared
+with the asserting suite. **No register act:** this surface has no capture arm and no env
+spelling, `tests/fixtures/.golden-freeze-register.json` is still UNFROZEN (`frozenAt`
+null), and its `preset-lighting-witness` row was not touched, so every recorded value on
+it stays null as the freeze discipline requires.
+
+⚠ **The discipline says "in the same commit as the change that moved it", and this
+re-record is one commit LATER.** The cause: the predecessor session composing hunk 1 hit
+its usage-window limit before it measured this witness, and the lane's fences forbid
+`--amend`. The substance of the discipline — a stated legitimate cause, recorded here,
+by hand, with the row diff named field by field — is met; only the adjacency is not. It
+is flagged for the chair rather than papered over.
