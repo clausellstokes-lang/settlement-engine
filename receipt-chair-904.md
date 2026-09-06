@@ -1,5 +1,6 @@
 # RECEIPT — CHAIR-904 (Opus lane; Seat: Opus 5 — Fable-unvalidated; Lane: CHAIR-904)
-## STATUS: ⏳ PARTIAL — written on arrival, updated after every proof. A session can die with no notice.
+## STATUS: ✅ COMPLETE — car `89ff7b03b` landed; all six premises re-derived; all owed gates green.
+(Written as a PARTIAL header on arrival and updated after every proof, per the preamble.)
 
 Dock `$SC/laneLUIMAT`. **Arrival verified:** HEAD `c2337220a965e1eea02815c194df393c61d28e35`
 (= the brief's sha), `git status --porcelain` **EMPTY (exit 0)**, detached HEAD, parent `dd5f13218`.
@@ -82,3 +83,68 @@ returns **exactly one** hit in the entire repo — `founderTileRestore.test.jsx:
 
 **FAILING ARMS ACROSS ALL SEVEN FILES: NONE.** 79 tests, 0 failures.
 No register door was taken: the OSR ran with **no flag at all** (no `--write`, `--update`, `--genesis`, `--rebank`, no `*_REFREEZE`/`UPDATE_*`).
+
+---
+## THE COMMIT
+**`89ff7b03b7b16a0892800969c421aa1b6957cdea`** — single-parent (`c2337220a`), four files staged **BY NAME**
+(never `-A`/`-u`/`.`); the full `git diff --cached` was read hunk-by-hunk before committing and every hunk was mine.
+Porcelain **0** after. Trailers verified by `git log -1 --format='%(trailers)'`:
+`Seat: Opus 5 — Fable-unvalidated` · `Lane: CHAIR-904` · `Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>`.
+`npx eslint src/lib/flagRegistry.js src/lib/flags.js` → **EXIT=0**.
+⚠ **NO git hook runs in this repo or any dock** (hooksPath unset, `.husky/_` absent), so the lint was run BY HAND
+and this commit was NOT hook-processed. Saying so because "committed with the pre-commit hook" would be false here.
+
+---
+## THE OWED GATES — every exit captured in-shell
+
+### `tests/lint/` DIRECTORY RUN — ✅ **EXIT=0**
+`GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/ --maxWorkers=2`
+```
+ Test Files  140 passed (140)
+      Tests  2194 passed (2194)
+   Duration  163.14s
+```
+**FAILING ARMS: NONE** (reported even though green, per the preamble).
+**PREDICTION HIT EXACTLY: 140 / 2194**, identical to the L-UI-MAT baseline — no test file was added, renamed or
+deleted by this car, so the scanner family could not move. Load avg 5.02 → 5.44 (two research workflows alive under
+the owner's cap) — but the run is GREEN, and a green under load is trustworthy; **no load-starved red was banked.**
+
+### `npm run typecheck:domain:strict` (the REAL script, not the injected-input test) — ✅ **EXIT=0**
+`[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).` — ceiling unchanged, as predicted.
+
+### `npm run typecheck:ratchet` — ✅ **EXIT=0**
+`[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).`
+**0** of the baselined errors name `src/lib/flagRegistry.js` or `src/lib/flags.js`. My car added none.
+I did **not** run `npm run typecheck`; had I, it exits **2 at ceiling 173 BY DESIGN** — never green, never a regression.
+
+### Register predictions vs. reality — NO DOOR WAS TAKEN
+No test file added / renamed / deleted and no `it(` title added ⇒ the lighting census cannot move
+(files 2543 / parked 373 / credited 2170 / titles 23653 / suiteTitles 6333); test-ratchet totals unchanged
+(totalTests 31970 / totalFiles 2489 / entries 3); no writer string changed; prose-numerics 225; observed-shape
+**1972 exact, MEASURED** by the dry read. **The chair re-takes every register at the landing.**
+
+---
+# RETROVALIDATION ROW (for the Fable chair)
+
+| # | WHAT WAS JUDGED | WHAT THE CHAIR MUST RE-DERIVE | RECEIPTS BY PATH | PRIORITY |
+|---|---|---|---|---|
+| R1 | **The retirement LANDED as ruled.** L-UI-MAT's R1 is answered: `mobileSingleChrome` is gone from `FLAG_DEFAULTS` (39→38) and `FLAG_DESCRIPTIONS` (39→38), paired, with the docs corrected to the measured truth. | That `git grep mobileSingleChrome` now returns **4 prose-only hits** (2 comment lines in flagRegistry, 2 doc sentences) and **0 bindings**; that both maps are 38 with no orphan on either side. | commit `89ff7b03b` · `$SC/chair904-scratch/*.txt` | **HIGH** — closes R1 |
+| R2 | ⛔ **THE OWNER ROW IS NOT ANSWERED BY THIS CAR.** I retired an entry; I did **not** decide the feature should not exist. The single-chrome mobile nav (top header suppressed, auth chip as a 6th slot, ~52px reclaimed on every mobile screen) is now recorded in TWO docs as an owner row and nowhere else. | That ODQ §904 actually carries the row. **If the chair does not write it, the capability is now invisible** — the last in-code trace of the idea is a six-line comment. | `src/lib/flagRegistry.js:78-83` · `docs/critique-implementation-status.md:71` · `docs/UIUX_AUDIT_AND_PLAN.md:1960` | **HIGH** — the whole justification for retiring rather than rebuilding |
+| R3 | ⚠️ **THE CHAIR'S P5 MECHANISM IS WRONG; the conclusion survives.** The brief said `flagConstraints.mjs` reads `liveCensus()` and the key "leaves the union". It reads neither `liveCensus` (0) nor `FLAG_DEFAULTS` (0); `liveCensus` is defined in the TEST over `DEFAULT_SIMULATION_RULES` — the **simulation-rules** domain. The key was never in that union. | That the soak/covering-array census and the UI flag registry are **two disjoint domains**. Any future brief reasoning "a UI flag moves the soak census" inherits this error. | `scripts/soak/flagConstraints.mjs` · `tests/soak-harness/coveringArrayCoverage.test.js:44` · `scripts/audit/soakRules.mjs:52` · `src/domain/worldPulse/simulationRules.js` | **HIGH** — a reusable wrong mechanism in the chair's model |
+| R4 | **A RETIREMENT ANCHOR WAS DELIBERATELY NOT WRITTEN** — and this is the one judgment I most want vetoed. `tests/lib/flags.test.js:98-100` already carries the precedent (`expect(FLAGS).not.toHaveProperty('loadingJourneySetBg')` for a previously retired flag). The parallel anchor for `mobileSingleChrome` would make the retirement structurally permanent. I did not write it: it is a FIFTH file, and `negativeAssertionAnchor.walker.test.js:620` baselines `tests/lib/flags.test.js` at **1** negative assertion — the anchor moves it to **2**, a ratchet act my brief forbids. | Whether to commission a follow-on car: add the anchor **and** move that baseline 1→2 in the same commit. Cheap, and it converts a comment into a test. | `tests/lib/flags.test.js:98-100` · `tests/lint/negativeAssertionAnchor.walker.test.js:620` | **MEDIUM** — recommended follow-on |
+| R5 | **Two stale sites left standing, named not hidden.** (a) `flagRegistry.js:176` uses `VITE_FLAG_MOBILE_SINGLE_CHROME` as the env-convention EXAMPLE — now naming a retired flag. Harmless: the key is derived generically at `:179` and `grep -rn VITE_FLAG scripts/ tests/` = **0 hits**, so the index hazard "a flag name in a comment is minted into the denominator" **does not fire here** — I checked rather than assumed. (b) `UIUX_AUDIT_AND_PLAN.md:1969` still describes the flag-on auth slot as live. | That both are genuinely out of the four-file scope, and whether a docs-corpus car should sweep them. | `src/lib/flagRegistry.js:176,179` · `docs/UIUX_AUDIT_AND_PLAN.md:1969` | **MEDIUM** |
+| R6 | ⚠️ **A DOC LINE CITATION IS STALE AND I LEFT IT, PER THE BRIEF.** `UIUX_AUDIT_AND_PLAN.md:1959` cites `src/App.jsx:358-424, 661-726`. Measured: App.jsx is 947 lines, the mobile header is at **:533**, the bottom nav at **:733**. The cited ranges are wrong. The same section cites :318, :482, :492, :681, :684-687, :700-723, :703, :713 — most predate several rewrites. | That a docs-corpus car re-derives that whole section's line citations. Per the brief this was "a docs-corpus act of its own", so I left the line untouched and recorded it. | `docs/UIUX_AUDIT_AND_PLAN.md:1959,1965-1969` · `src/App.jsx` (947 lines) | **MEDIUM** |
+| R7 | **P4's mechanism confirmed, but note my OWN first probe was wrong** and would have produced a false "flagRegistry is in no manifest" finding: `baseline.manifests[k]` is an OBJECT (`{algorithm, digest, entries}`), so `Object.keys()` on it reads length 3, not the entry count. The entries live under `.entries` (2201 / 2176 / 2190). | Nothing owed — recorded so the next lane probing that baseline does not repeat the error. | `scripts/.observed-shape-readers-baseline.json` · `scripts/check-observed-shape-readers.mjs:2442` | LOW |
+
+---
+# DOCK TIP
+**sha `89ff7b03b7b16a0892800969c421aa1b6957cdea`** · **2 cars** over `dd5f1321825b58fed2db54e9473440a310195eed`
+(`c2337220a` L-UI-MAT, then `89ff7b03b` this chair car) · **porcelain 0** · single-parent (`c2337220a`)
+· trailers present and correct (`Seat: Opus 5 — Fable-unvalidated` + `Lane: CHAIR-904` + the Fable co-author line).
+**Integrity:** `node_modules` symlinks still **453** (never materialised; raw `ls -A` reads 455 — `.vite` and
+`.vite-temp` are vitest's caches, exactly as the L-UI-MAT receipt warned). `package.json` / `package-lock.json`
+**untouched across both cars** (empty diff). No register door, no ref write, no push, no rebase, no stash,
+no `git checkout --`, no `git show HEAD:<path> >`, no build, no `npm run check`, no subagents.
+Scratch and every log: `$SC/chair904-scratch/`.
+
+## STATUS: ✅ COMPLETE — 1 car landed, all six premises re-derived, all owed gates green.

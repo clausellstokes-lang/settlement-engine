@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 17:57:40 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 18:03:45 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -216,10 +216,11 @@
 | hobb | finder | translators | result | 47 | — | 74 claims, complete=True @17:25:57 | 19:25:55 |
 | hobb | regrade | regrade-r4 | result | 0 | — | — | 17:37:59 |
 | hobb | regrade | regrade-r6 | failed | 0 | — | — | 19:45:55 |
-| hobb | regrade | regrade-r7 | in-flight | 0 | — | — | 21:56:34 |
+| hobb | regrade | regrade-r7 | result | 0 | build-r7.mjs | — | 22:00:30 |
 | hobb | synth |  | failed | 0 | — | — | 19:45:56 |
 | hobb | synth |  | result | 0 | section-hobb.md | — | 18:17:47 |
 | hobb | synth |  | in-flight | 0 | — | — | 17:48:45 |
+| hobb | synth |  | in-flight | 0 | — | — | 22:03:26 |
 | hobb | verifier | i0-14 | result | 4 | — | verdict file WRITTEN | 16:56:40 |
 | hobb | verifier | i105-119 | result | 5 | — | verdict file WRITTEN | 17:03:33 |
 | hobb | verifier | i120-134 | result | 9 | — | verdict file WRITTEN | 17:10:40 |
@@ -419,12 +420,12 @@
 | leguin | verifier | i541-555 | failed | 0 | — | verdict file absent | 19:45:44 |
 | leguin | verifier | i556-570 | failed | 0 | — | verdict file absent | 19:45:44 |
 | leguin | verifier | i571-585 | failed | 0 | — | verdict file absent | 19:45:44 |
-| leguin | verifier | i573-627 | in-flight | 38 | — | verdict file absent | 21:57:21 |
+| leguin | verifier | i573-627 | result | 38 | — | verdict file WRITTEN | 22:00:40 |
 | leguin | verifier | i586-600 | failed | 0 | — | verdict file absent | 19:45:44 |
 | leguin | verifier | i60-74 | result | 10 | — | verdict file WRITTEN | 16:57:55 |
 | leguin | verifier | i601-615 | failed | 0 | — | verdict file absent | 19:45:44 |
 | leguin | verifier | i616-630 | failed | 0 | — | verdict file absent | 19:45:44 |
-| leguin | verifier | i628-708 | in-flight | 17 | — | verdict file absent | 21:57:10 |
+| leguin | verifier | i628-708 | result | 17 | — | verdict file WRITTEN | 21:58:54 |
 | leguin | verifier | i631-645 | failed | 0 | — | verdict file absent | 19:45:44 |
 | leguin | verifier | i646-660 | failed | 0 | — | verdict file absent | 19:45:44 |
 | leguin | verifier | i661-675 | failed | 0 | — | verdict file absent | 19:45:52 |
@@ -440,12 +441,15 @@
 | leguin | verifier | i766-780 | failed | 0 | — | verdict file absent | 19:45:53 |
 | leguin | verifier | i781-795 | failed | 0 | — | verdict file absent | 19:45:57 |
 | leguin | verifier | i796-810 | failed | 0 | — | verdict file absent | 19:46:02 |
+| leguin | verifier | i808-842 | result | 2 | — | verdict file WRITTEN | 22:03:27 |
 | leguin | verifier | i811-825 | failed | 0 | — | verdict file absent | 19:45:57 |
 | leguin | verifier | i826-840 | failed | 0 | — | verdict file absent | 19:45:57 |
 | leguin | verifier | i841-855 | failed | 0 | — | verdict file absent | 19:46:02 |
+| leguin | verifier | i843-885 | in-flight | 7 | — | verdict file absent | 22:03:41 |
 | leguin | verifier | i856-870 | failed | 0 | — | verdict file absent | 19:46:02 |
 | leguin | verifier | i871-885 | failed | 0 | — | verdict file absent | 19:46:02 |
 | leguin | verifier | i886-900 | failed | 0 | — | verdict file absent | 19:46:02 |
+| leguin | verifier | i889-923 | in-flight | 8 | — | verdict file absent | 22:03:24 |
 | leguin | verifier | i90-104 | result | 9 | — | verdict file WRITTEN | 16:57:40 |
 | leguin | verifier | i901-915 | failed | 0 | — | verdict file absent | 19:46:03 |
 | leguin | verifier | i916-923 | failed | 0 | — | verdict file absent | 19:46:07 |

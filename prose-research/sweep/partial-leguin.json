@@ -956,6 +956,30 @@
   }
  },
  {
+  "index": 609,
+  "feature": "other: reversal as structure",
+  "claim": "Le Guin, quoted by Kate Nepveu, calls two closing sentences of straightforward narrative description full of rapid reversals and says they are like drumbeats.",
+  "source": "Ursula K. Le Guin, 'Rhythmic Pattern in The Lord of the Rings', quoted in Kate Nepveu, LiveJournal, 4 June 2006",
+  "url": "https://kate-nepveu.livejournal.com/180011.html",
+  "quote": "full of rapid reversals",
+  "page": "analysis of the closing sentences of 'Fog on the Barrow-Downs'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2001",
+  "routeHint": "live URL, browser UA",
+  "registerHint": "chronicle-line",
+  "confidence": "medium — relayed quotation",
+  "angle": "close",
+  "verdict": {
+   "index": 609,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the passage is TWO closing sentences - the page prints three, and Le Guin calls them 'These few lines', not two sentences",
+   "trueWording": "\"full of rapid reversals\"; \"They are like drumbeats\"",
+   "note": "Raw post fetched from kate-nepveu.livejournal.com/180011.html (HTTP 200), kate_nepveu, June 4 2006, discussing Le Guin's 'Rhythmic Pattern in The Lord of the Rings'. The quoted closing passage of 'Fog on the Barrow Downs' is THREE sentences, and Le Guin's comment opens 'These few lines of straightforward narrative description...' before the quoted fragment, then adds that they are like drumbeats. The fragment, the 'straightforward narrative description' limb and the drumbeats limb are all verbatim; only the count 'two closing sentences' fails, hence PARTIAL.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  }
+ },
+ {
   "index": 628,
   "feature": "other: formula and homogenisation",
   "claim": "Le Guin wrote to Michael Cunningham that when the characteristics of a genre are controlled and insisted upon by publishers, salability, repeatability and expectability replace quality and a literary form degenerates into a formula.",

@@ -17245,6 +17245,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "573": {
+   "index": 573,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Yes, the essay holds up extremely well\"",
+   "note": "Raw post fetched from floggingbabel.blogspot.com (HTTP 200), bylined Michael Swanwick, Thursday October 14 2010. The quote is verbatim in the paragraph beginning 'To answer the question I first asked yesterday', whose next sentence says the essay would still be a very good starting place for someone trying to learn to write fantasy. The 'thirty-seven years after it was first published' limb is verbatim in the opening paragraph. Every limb supported.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
+  "574": {
+   "index": 574,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"has been, ironically enough, disproved\"",
+   "note": "Same raw post. Its second paragraph states the title's central conceit - Poughkeepsie standing in for everything fantasy is not - has been, ironically enough, disproved; it names Rachel Pollack's 1988 Unquenchable Fire, calls it core fantasy, and the following paragraph says the novel is set in Poughkeepsie. All limbs supported.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
   "575": {
    "index": 575,
    "verdict": "SKIPPED_TRIAGE",
@@ -17287,6 +17301,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "581": {
+   "index": 581,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"trappings of fantasy without ever actually imagining anything\"",
+   "note": "Raw post fetched from fairyspell.wordpress.com (HTTP 200), bylined John Pyle, 23 November 2012, on Le Guin's 'From Elfland to Poughkeepsie'. Pyle quotes Le Guin's sentence about a writer using all the trappings of fantasy without ever actually imagining anything; the fragment matches word for word. Only locator drift: it sits in the paragraph after the one beginning 'As I mentioned above'. All claim limbs supported.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
   "582": {
    "index": 582,
    "verdict": "SKIPPED_TRIAGE",
@@ -17308,6 +17329,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "585": {
+   "index": 585,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"inclined to elevate the tone of the phrase\"",
+   "note": "PDF fetched raw from journals.pan.pl (HTTP 200, 7pp) and extracted with pdftotext. The section headed 'As regards style issues' says Baranczak generally respects and reproduces the novel's different linguistic registers yet is inclined to elevate the tone of the phrase by an ennobling strategy, frequently accompanied by expansion and amplification, then gives a six-row EN/PL example table. The abstract names the translator Stanislaw Baranczak. Content limbs all supported; only the citation's page is off - the passage is on p. 283 (running head), not p. 282.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
+  "586": {
+   "index": 586,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"generally respects and reproduces the different linguistic registers\"",
+   "note": "Same raw PDF, same 'As regards style issues' section; the fragment matches word for word across a line break. Both limbs - that different registers are employed in the novel, and that the Polish translator generally respects and reproduces them - are supported.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
   "587": {
    "index": 587,
    "verdict": "SKIPPED_TRIAGE",
@@ -17321,6 +17356,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "589": {
+   "index": 589,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"usually borrowed without any adaptation, for instance perriot, corly, gebbeth\"",
+   "note": "Same raw PDF. The sentence starts on p. 281 (neologisms for plants, animals, fantastic creatures or objects usually borrowed without any adaptation, listing perriot, corly, gebbeth) and runs over the page break to pellawi, otak, harrekki on p. 282, so the cited p. 281 is right and the given fragment is verbatim. 'Into Polish' is the article's subject throughout.",
+   "fromFile": "verdicts-leguin-i573-627.json"
   },
   "590": {
    "index": 590,
@@ -17399,6 +17441,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "601": {
+   "index": 601,
+   "verdict": "BLOCKED",
+   "trueWording": "raw page not reached - caption track refused by every route",
+   "note": "Video confirmed as Philip Chase, uploadDate 2021-11-16, title 'What is good fantasy prose?: a look at Ursula Le Guin's From Elfland to Poughkeepsie' - but the spoken quotation cannot be checked. Watch page fetched raw (HTTP 200, browser UA); it confirms author and upload date only. Spoken content unreachable: youtube /api/timedtext returns Google's 'Sorry...' abuse page with and without cookies/Referer and with fmt=json3; youtube_transcript_api reports IpBlocked; the Wayback capture's archived captionTracks URL returns the same Sorry page and timedtext itself is unarchived; Invidious (inv.nadeko.net empty body; f5.si, tiekoetter, chocolatemoo53 bot-walled), Piped, youtubetotranscript and filmot (Cloudflare), tactiq (App Check), kome.ai (522), notegpt (login expired), youtubetranscript.com (reports YouTube blocking it), allorigins/codetabs/corsproxy/r.jina.ai all refused; browser-pane navigation to youtube.com denied. No routeHints on this claim. All three mandated recovery routes were tried.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
+  "602": {
+   "index": 602,
+   "verdict": "BLOCKED",
+   "trueWording": "raw page not reached - caption track refused by every route",
+   "note": "Same video as index 601 (Philip Chase, 2021-11-16). The closing quotation is audio-only; the watch-page HTML contains no occurrence of 'joint and seam' or 'synopsis'. Watch page fetched raw (HTTP 200, browser UA); it confirms author and upload date only. Spoken content unreachable: youtube /api/timedtext returns Google's 'Sorry...' abuse page with and without cookies/Referer and with fmt=json3; youtube_transcript_api reports IpBlocked; the Wayback capture's archived captionTracks URL returns the same Sorry page and timedtext itself is unarchived; Invidious (inv.nadeko.net empty body; f5.si, tiekoetter, chocolatemoo53 bot-walled), Piped, youtubetotranscript and filmot (Cloudflare), tactiq (App Check), kome.ai (522), notegpt (login expired), youtubetranscript.com (reports YouTube blocking it), allorigins/codetabs/corsproxy/r.jina.ai all refused; browser-pane navigation to youtube.com denied. No routeHints on this claim. All three mandated recovery routes were tried.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
+  "603": {
+   "index": 603,
+   "verdict": "BLOCKED",
+   "trueWording": "raw page not reached - caption track refused by every route",
+   "note": "Video confirmed as Tooky's Mag, 'How Le Guin Wrote Fantasy', uploadDate 2024-04-12; the watch-page HTML contains no occurrence of 'world building'. Watch page fetched raw (HTTP 200, browser UA); it confirms author and upload date only. Spoken content unreachable: youtube /api/timedtext returns Google's 'Sorry...' abuse page with and without cookies/Referer and with fmt=json3; youtube_transcript_api reports IpBlocked; the Wayback capture's archived captionTracks URL returns the same Sorry page and timedtext itself is unarchived; Invidious (inv.nadeko.net empty body; f5.si, tiekoetter, chocolatemoo53 bot-walled), Piped, youtubetotranscript and filmot (Cloudflare), tactiq (App Check), kome.ai (522), notegpt (login expired), youtubetranscript.com (reports YouTube blocking it), allorigins/codetabs/corsproxy/r.jina.ai all refused; browser-pane navigation to youtube.com denied. No routeHints on this claim. All three mandated recovery routes were tried.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
   "604": {
    "index": 604,
    "verdict": "SKIPPED_TRIAGE",
@@ -17434,6 +17497,14 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "609": {
+   "index": 609,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the passage is TWO closing sentences - the page prints three, and Le Guin calls them 'These few lines', not two sentences",
+   "trueWording": "\"full of rapid reversals\"; \"They are like drumbeats\"",
+   "note": "Raw post fetched from kate-nepveu.livejournal.com/180011.html (HTTP 200), kate_nepveu, June 4 2006, discussing Le Guin's 'Rhythmic Pattern in The Lord of the Rings'. The quoted closing passage of 'Fog on the Barrow Downs' is THREE sentences, and Le Guin's comment opens 'These few lines of straightforward narrative description...' before the quoted fragment, then adds that they are like drumbeats. The fragment, the 'straightforward narrative description' limb and the drumbeats limb are all verbatim; only the count 'two closing sentences' fails, hence PARTIAL.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
   "610": {
    "index": 610,
    "verdict": "SKIPPED_TRIAGE",
@@ -17447,6 +17518,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "612": {
+   "index": 612,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"let the pedants and pundits squeak and gibber in the streets\"",
+   "note": "Raw article fetched from reactormag.com (HTTP 200), by Mary Anne Mohanraj, dated 2018-11-01. It block-quotes Le Guin's bracketed insertion, which says the generic he/him/his was an invention of male grammarians, that until the sixteenth century the English generic singular pronoun was they/them/their, that it should be restored to the written language, and closes with the quoted clause - verbatim. The article separately dates the piece 'Is Gender Necessary? Redux (1976/1987)' from Dancing at the Edge of the World and describes its running commentary in bracketed italics, so the '1987 bracketed revision' limb holds. Every limb supported.",
+   "fromFile": "verdicts-leguin-i573-627.json"
   },
   "613": {
    "index": 613,
@@ -17497,6 +17575,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "620": {
+   "index": 620,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"if you don't have to mention the doorknob you don't\"",
+   "note": "Raw interview fetched from themillions.com (HTTP 200), by Paul Morton, January 31 2013. Asked about imagining chairs and doorknobs in her invented worlds, Le Guin answers with the quoted clause verbatim and continues that in science-fiction movies you do have to imagine and design the doorknob, and every single visual object has to be designed. Both limbs supported.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
   "621": {
    "index": 621,
    "verdict": "SKIPPED_TRIAGE",
@@ -17511,6 +17596,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "623": {
+   "index": 623,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"They talk too much. They explain things too much.\"",
+   "note": "Same raw Millions interview, in the answer about doing as little as possible: she says she was re-reading The Lathe of Heaven and, though still fond of it, would cut it if she could, then the quoted two sentences appear verbatim. Rereading, the would-cut limb and both reasons are present.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
   "624": {
    "index": 624,
    "verdict": "SKIPPED_TRIAGE",
@@ -17518,12 +17610,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "625": {
+   "index": 625,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I find it a little affected and foolish\"",
+   "note": "Same raw Millions interview. The interviewer's question names For Whom the Bell Tolls and Hemingway's 'Spanishfied English'; Le Guin replies that she does not do it the way Hemingway does with a Spanish accent, that she dislikes it, and then the quoted clause appears verbatim. Both limbs supported.",
+   "fromFile": "verdicts-leguin-i573-627.json"
+  },
   "626": {
    "index": 626,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "627": {
+   "index": 627,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If you believe that words are acts, as I do\"",
+   "note": "Raw page fetched from peterschmidt.domains.swarthmore.edu (HTTP 200): 'Coming Back From the Silence, an interview with Ursula Le Guin, by Jonathan White'. Answering the question about language as a tool of forgetting, Le Guin's sentence opens with the quoted clause verbatim and concludes that one must hold writers responsible for what their words do. Both limbs supported.",
+   "fromFile": "verdicts-leguin-i573-627.json"
   },
   "628": {
    "index": 628,
@@ -18789,6 +18895,41 @@
    "note": "Page 8 of the PDF. The next sentence says they retain the directness of their oral forebears, supporting the claim's second limb; the paragraph goes on to Homer, Roland and the sagas.",
    "fromFile": "verdicts-leguin-i763-807.json"
   },
+  "808": {
+   "index": 808,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Song of Roland has four thousand lines, containing one simile",
+   "note": "Raw PDF p.8 (epic-language paragraph): sentence ends '...and no metaphors.' Quote word for word; both limbs (four thousand lines; one simile, no metaphors) on the page.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
+  "809": {
+   "index": 809,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Homer's metaphors may be extended, but they are neither static nor ornate",
+   "note": "Raw PDF p.8, same paragraph, sentence immediately before the Roland sentence. Quote 'they are neither static nor ornate' verbatim; 'may be extended' limb also present.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
+  "810": {
+   "index": 810,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The style, of course, is the book ... absolutely true of fantasy",
+   "note": "Raw PDF p.9 (cake/frosting paragraph). Quote verbatim; the second limb is carried by the following paragraph, 'This is partly true of history; largely true of fiction; and absolutely true of fantasy.'",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
+  "811": {
+   "index": 811,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If you remove the style, all you have left is a synopsis",
+   "note": "Raw PDF p.9, same paragraph as 810; sentence ends 'of the plot.' Quote verbatim.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
+  "812": {
+   "index": 812,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "From the writer's point of view, the style is the writer",
+   "note": "Raw PDF p.9, paragraph beginning 'In saying that the style is the book.' Quote verbatim; reader/writer contrast intact.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
   "813": {
    "index": 813,
    "verdict": "SKIPPED_TRIAGE",
@@ -18824,6 +18965,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "818": {
+   "index": 818,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they tend to be very brief, as they do in the Bible",
+   "note": "Raw PDF p.5, Dunsany paragraph: 'Genuine give-and-take conversations are quite rare ... and when they occur they tend to be very brief, as they do in the Bible.' Quote verbatim; the Dunsany attribution limb is on the page.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
   "819": {
    "index": 819,
    "verdict": "SKIPPED_TRIAGE",
@@ -18845,12 +18993,40 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "822": {
+   "index": 822,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The touchstone to plausibility in imaginative fiction is probably coherence",
+   "note": "Raw page, paragraph beginning 'The touchstone to plausibility'. Quote verbatim. Minor: the claim paraphrase says 'touchstone OF plausibility' where the page reads 'touchstone TO plausibility' - the quoted string itself matches.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
+  "823": {
+   "index": 823,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in the imagined world cannot be changed during the story",
+   "note": "Raw page, last sentence of the coherence paragraph: 'The rules that govern how things work in the imagined world cannot be changed during the story.' Quote verbatim; all limbs present.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
   "824": {
    "index": 824,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "825": {
+   "index": 825,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most notably through accurate, honest observation of the world it creates",
+   "note": "Raw page, second body paragraph: 'What validates fiction is plausibility, which it creates for itself, most notably through...'. Quote verbatim. The claim compresses two steps (plausibility validates; fiction creates that plausibility itself) into 'fiction validates itself' - supported, not overstated.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
+  "826": {
+   "index": 826,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "plausibility in fantasy is the coherence of the story, its consistent self-reference",
+   "note": "Raw page, fantasy paragraph, final sentence beginning 'What constitutes...'. Quote verbatim; both limbs (coherence; consistent self-reference) present.",
+   "fromFile": "verdicts-leguin-i808-842.json"
   },
   "827": {
    "index": 827,
@@ -18873,12 +19049,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "830": {
+   "index": 830,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "why nobody there ever feeds or waters their horses",
+   "note": "Raw page, Assumption 2 ('Fantasy Land is the Middle Ages'), sentence ends '...which run all day and night just like a Prius.' Quote verbatim; the 'world not imagined' limb is carried by the same paragraph's contrast between 'a genuinely imagined society and culture' and 'this lazy-minded, recycled hokum'.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
+  "831": {
+   "index": 831,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the meaning of the story might lie in the language itself",
+   "note": "Raw page: 'Does it ever occur to such reviewers that ... rather than a tidy bit of advice?' Quote verbatim; interrogative form and the 'tidy bit of advice' limb both present. Locator drift only: it is the SECOND body paragraph, not the third.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
   "832": {
    "index": 832,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "833": {
+   "index": 833,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Most such rules are hogwash",
+   "note": "Raw page, paragraph beginning 'On the other hand, the pressure of opinion'. Quote verbatim; 'such rules' refers back in the same paragraph to 'the rules of what's currently trendy, the rules of what's supposed to be salable', so both limbs hold.",
+   "fromFile": "verdicts-leguin-i808-842.json"
   },
   "834": {
    "index": 834,
@@ -18929,6 +19126,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "841": {
+   "index": 841,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a thousand orcs in agony leave us unmoved",
+   "note": "Raw page, answer to Lauren (question 5). Quote verbatim, preceded by 'a mutilated corpse or two may make us flinch'. One modality gap worth flagging: Le Guin hedges - 'There seems to be a relationship' and 'if the magnitude ... dilutes its emotional effect' - where the claim asserts the dilution flatly.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
+  "842": {
+   "index": 842,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the beginning will imply the end",
+   "note": "Raw page, answer to Isaac (question 2): 'I recommend thinking of a story as an organic whole, in which the beginning will imply the end and the end will fulfill the beginning.' Quote verbatim; recommendation, organic-whole and both directional limbs all present.",
+   "fromFile": "verdicts-leguin-i808-842.json"
+  },
+  "843": {
+   "index": 843,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "relating, finding, losing, bearing, discovering, parting, changing",
+   "note": "Raw page fetched (curl, browser UA, HTTP 200). Answer to Anthony, question 3, quotes Steering the Craft p.123 exactly as cited; the block names conflict as one kind of behavior and the listed seven as others equally important in any human life. Every limb supported.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
   "844": {
    "index": 844,
    "verdict": "SKIPPED_TRIAGE",
@@ -18957,6 +19175,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "848": {
+   "index": 848,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Nobody has to do any thinking about it at all",
+   "note": "Raw page fetched (HTTP 200). In the Nicole/Bayla answer, under 'How much to rely on the way cultures in our world work?', the specimen sentence has Vig spurring his horse through Horb's streets and drawing rein at the Palace gate; Le Guin then places the reader in Horb in the European Middle Ages, cozy and feudal, followed by the quoted sentence verbatim. Post date on page: March 21, 2016.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
   "849": {
    "index": 849,
    "verdict": "SKIPPED_TRIAGE",
@@ -18970,6 +19195,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "851": {
+   "index": 851,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Yes. I do.",
+   "note": "Raw page fetched (HTTP 200). The sub-heading in the Nicole/Bayla answer reads 'Do you spend a lot of time building the world before writing the story?' and the whole answer beneath it opens with the quoted three words, then explains that differences from the world-as-we-know-it must be thought through beforehand. Verbatim.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
+  "852": {
+   "index": 852,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I tried to write good ones",
+   "note": "Raw page fetched (HTTP 200), Session 1 Part 4, dated September 21, 2015 on the page. In the answer to Esme, Le Guin distinguishes recognition from achievement, disclaims having set out to write successful books in the immediately preceding sentence, and follows with the quoted words verbatim. Both limbs of the claim supported.",
+   "fromFile": "verdicts-leguin-i843-885.json"
   },
   "853": {
    "index": 853,
@@ -19013,6 +19252,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "859": {
+   "index": 859,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't have plots; I have situations, I have stories",
+   "note": "Raw page fetched from locusmag.com (HTTP 200), 'Ursula K. Le Guin: A Return to Earthsea', September 2001 interview excerpts. The second excerpt opens by calling her books character-driven and continues with the quoted sentence verbatim (the page's curly apostrophes render as mojibake in the raw byte stream; the wording is identical). Both limbs supported.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
   "860": {
    "index": 860,
    "verdict": "SKIPPED_TRIAGE",
@@ -19020,12 +19266,40 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "861": {
+   "index": 861,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are some facts, and you want to get 'em right",
+   "note": "Raw page fetched from locusmag.com (HTTP 200), 'The Age of Saturn', posted 24 October 2008. The second excerpt denies a great difference between her science fiction and Lavinia, gives the quoted clause verbatim followed by the cutting-loose clause, and then states that a historical novel requires getting the facts right the way science fiction does. Every limb supported.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
+  "862": {
+   "index": 862,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You use what is known to be known.",
+   "note": "Raw page fetched (same locusmag 2008 page, HTTP 200). The quoted sentence appears word for word inside the Lavinia excerpt, introduced as something Delany said. NOTE ON THE ATTRIBUTION LIMB: the page names him 'Chip Delany', not 'Samuel' - Chip is Samuel R. Delany's long-standing nickname, so the person is the same, but the given name in the claim comes from outside the page.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
   "863": {
    "index": 863,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "864": {
+   "index": 864,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the book says best in its own words",
+   "note": "Raw page fetched from books.guardian.co.uk (HTTP 200, redirected to the Guardian's current host; page title 'Chronicles of Earthsea', byline date Mon 9 Feb 2004). The full quoted sentence appears verbatim in her reply to a reader asking whether Tehanu and the last Earthsea books mean women cannot be owned; she says she cannot or will not answer and calls interpreting her own book into generalities and abstractions perverse and foolish. Claim limbs all supported. LOCATOR CORRECTION: this is not the 'final answer' - it sits about two-thirds through, and the transcript's last exchange is about favourite invented worlds.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
+  "865": {
+   "index": 865,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stylistically ordinary, imaginatively derivative, and ethically rather mean-spirited",
+   "note": "Raw page fetched (same Guardian Q&A, HTTP 200). Answering a question about J.K. Rowling's style, Le Guin says she read the first Harry Potter book after adult critics praised its originality, and closes with the quoted phrase verbatim. All three judgements and the 'first Harry Potter book' limb supported. Context worth carrying: the same sentence first calls it a lively kid's fantasy crossed with a school novel and good fare for its age group.",
+   "fromFile": "verdicts-leguin-i843-885.json"
   },
   "866": {
    "index": 866,
@@ -19048,6 +19322,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "869": {
+   "index": 869,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "whose societies no longer exist, are written in the present tense",
+   "note": "Raw page fetched from ebin.pub (HTTP 200, 612KB OCR scan of the 1989 Grove edition). In 'Some Thoughts on Narrative' (1980), between the scan's page markers 38 and 39 - so p.38 as cited - the sentence runs: anthropological reports concerning people who died decades ago, whose societies no longer exist, are written in the present tense; this paper is too. Minor drift: the claim splits one class into two ('about people... and about societies'), where the original makes the vanished societies belong to those same people. No limb unsupported.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
+  "870": {
+   "index": 870,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The present tense takes the story out of time.",
+   "note": "Raw page fetched (same ebin.pub scan, HTTP 200). Sentence appears word for word on p.38 of 'Some Thoughts on Narrative', immediately after the observation that the present tense, used to make telling 'more actual', actually distances the story.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
   "871": {
    "index": 871,
    "verdict": "SKIPPED_TRIAGE",
@@ -19055,12 +19343,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "872": {
+   "index": 872,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "does not normally use the present tense except for special effect",
+   "note": "Raw page fetched (same ebin.pub scan, HTTP 200). On p.38 of 'Some Thoughts on Narrative' the full clause - narrative does not normally use the present tense except for special effect or out of affectation - appears verbatim, including the 'or out of affectation' tail the claim asserts. The sentence opens 'This might be why', which hedges the causal explanation (narrative's forward movement through time), not the observation itself, so the claim's limb stands.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
   "873": {
    "index": 873,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "874": {
+   "index": 874,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "narrative is language used to connect events in time",
+   "note": "Raw page fetched (same ebin.pub scan, HTTP 200). On p.38 of 'Some Thoughts on Narrative', drawn as a conclusion from Aristotle on beginning-middle-end, the sentence appears verbatim (prefixed 'So'). It functions as the essay's working definition, matching the claim's 'defines'.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
+  "875": {
+   "index": 875,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Narrative is a stratagem of mortality.",
+   "note": "Raw page fetched (same ebin.pub scan, HTTP 200). Sentence appears word for word between the scan's page markers 39 and 40 - so p.39 as cited - in 'Some Thoughts on Narrative', following the passage on the immortal gene having no story and the once-upon-a-time king who does not live forever.",
+   "fromFile": "verdicts-leguin-i843-885.json"
   },
   "876": {
    "index": 876,
@@ -19125,6 +19434,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "885": {
+   "index": 885,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a novel, just as much as a poem, is its words",
+   "note": "Raw page fetched (same ebin.pub scan, HTTP 200). In 'Reciprocity of Prose and Poetry' (1983), after the page marker following 111 - consistent with the cited p.112 - Le Guin writes that she believes it while also believing translation to be mysterious; the clause appears verbatim and the claim's 'she believes' limb is explicit in the original.",
+   "fromFile": "verdicts-leguin-i843-885.json"
+  },
   "886": {
    "index": 886,
    "verdict": "SKIPPED_TRIAGE",
@@ -19145,6 +19461,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "889": {
+   "index": 889,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"and to rewrite Silas's speech, all broken monosyllables\"",
+   "note": "Raw page fetched: ebin.pub scan of Dancing at the Edge of the World, essay \"Reciprocity of Prose and Poetry\" (1983). Quote \"all broken monosyllables\" appears word for word in the paragraph beginning \"That the subject of that passage has an identity and interest apart from the words is true...\". Every limb holds: the passage is George Eliot's (endnote 4 cites Silas Marner, Harcourt 1962, p.140), the speaker is Silas, and Le Guin's argument there is precisely inseparability of word and idea -- she offers the rewrite as something that ought to be easy if word and idea were separable, then denies it is easy or possible and calls tampering with the passage offensive. Locator quibble only, not a claim limb: the sentence sits below the running head \"io8 URSULA K. LEGUIN\" and above the running head \"RECIPROCITY OF PROSE AND POETRY 109\", so it is p.108, one page earlier than the chunk's \"p.109\".",
+   "fromFile": "verdicts-leguin-i889-923.json"
   },
   "890": {
    "index": 890,
@@ -19167,6 +19490,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "893": {
+   "index": 893,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"They talk too much. They explain things too much.\"",
+   "note": "Raw page fetched from themillions.com (HTTP 200); byline and date on the page are Paul Morton, January 31, 2013, matching the source field. Quote appears word for word, immediately after \"I was re-reading The Lathe of Heaven -- which I'm still fond of, which I still think is funny -- but, boy would I cut it if I could.\" The referent of \"They\" is the novel's characters, and Le Guin's own earlier novel is named on the page, so both limbs hold. Minor locator quibble only: it falls in the answer about Taoist \"doing not-doing\", roughly two-thirds through, not \"near the end\".",
+   "fromFile": "verdicts-leguin-i889-923.json"
+  },
   "894": {
    "index": 894,
    "verdict": "SKIPPED_TRIAGE",
@@ -19181,12 +19511,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "896": {
+   "index": 896,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"in the most conventional, banal prose, if the writer has the gift\"",
+   "note": "Raw page fetched from ursulakleguin.com blog 51, \"The Narrative Gift as a Moral Conundrum\" (HTTP 200). The full sentence in the paragraph beginning \"Inept writing lames or cripples good narrative only if it's truly inept\" reads word for word as the chunk quotes it, continuing \", if the writer has the gift.\" The claim's \"narrative gift\" limb is supported: the page says \"the gift\" and the essay's title and opening line (\"The narrative gift, is that what to call it?\") fix the referent. Source-metadata correction, not a claim limb: the post is dated May 2012 on the page (byline \"May 1, 2012\", opening \"May 2012 (Reading, Seeing ii)\"), not 2011.",
+   "fromFile": "verdicts-leguin-i889-923.json"
+  },
   "897": {
    "index": 897,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "898": {
+   "index": 898,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Art isn't explanation. Art is what an artist does\"",
+   "note": "Raw page fetched from ursulakleguin.com blog 36, \"Readers' Questions\", dated October 2011 on the page, matching the source field. The quoted words appear verbatim (curly apostrophe in the original) and the very next clause supplies the claim's second limb: \"Art is what an artist does, not what an artist explains.\" It sits in the paragraph contrasting a reviewer's job with a fiction writer's, just before the potter analogy.",
+   "fromFile": "verdicts-leguin-i889-923.json"
+  },
+  "899": {
+   "index": 899,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I wasn't choosing the way as an author, I was taking dictation\"",
+   "note": "Raw page fetched from lithub.com (HTTP 200); byline Euan Monaghan, April 1, 2016, matching the source field (the page also states the interview first appeared in Structo Magazine issue 14). The quote is word for word in Le Guin's answer to the opening question \"Lavinia was your most recent novel... how it came about\", so the Lavinia limb holds. The page continues \", as it were -- finding the story as it happened\", a hedge the claim does not carry but does not contradict.",
+   "fromFile": "verdicts-leguin-i889-923.json"
   },
   "900": {
    "index": 900,
@@ -19244,6 +19595,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "908": {
+   "index": 908,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Galt tells without showing\"",
+   "note": "Raw page fetched from publicbooks.org (HTTP 200). The sentence appears twice, as a pull quote and in the body: \"In pure, ignorant defiance of the decree of the Iowa Writing School that controls almost all modern fiction, Galt tells without showing.\" Both limbs hold -- the Iowa Writing School decree is Le Guin's own phrasing, and the praise limb is explicit in the preceding sentence, \"Having read that sentence, I was in love with the book\", as well as in the article's standfirst about a novel that \"blissfully tells without showing\".",
+   "fromFile": "verdicts-leguin-i889-923.json"
+  },
   "909": {
    "index": 909,
    "verdict": "SKIPPED_TRIAGE",
@@ -19272,12 +19630,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "913": {
+   "index": 913,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a hard and sore time of it with such an outstrapolous people\"",
+   "note": "Raw page fetched from publicbooks.org. Le Guin writes: \"All he says about it is, 'I thought I would have a hard and sore time of it with such an outstrapolous people.'\" The quoted words are verbatim and the \"entire account\" limb is supported by her own framing \"All he says about it is\". Nuance worth recording, not a defect in the claim: she then adds a second Galt quotation (\"And: 'After the ceremony, we then got out at the window...'\"), so \"entire account of the riot\" is her characterisation of Balwhidder's comment on the riot itself, not a count of every Galt sentence she reproduces. The riot is at his installation as minister of Dalmailing, as the claim says.",
+   "fromFile": "verdicts-leguin-i889-923.json"
+  },
+  "914": {
+   "index": 914,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"without even a period, only a semicolon\"",
+   "note": "Raw page fetched from publicbooks.org. The paragraph after the block quotation reads \"And immediately, without even a period, only a semicolon, 'we went to the manse, and there we had an excellent dinner ...'\", following Galt's \"We then got out at the window, and it was a heavy day to me.\" Quote is verbatim and both limbs hold: the annalist is Mr. Balwhidder, whose year-by-year annals Le Guin is describing, and the movement is from the riot's aftermath straight to the dinner.",
+   "fromFile": "verdicts-leguin-i889-923.json"
+  },
   "915": {
    "index": 915,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "916": {
+   "index": 916,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"dry, subtle, morally loaded, and really funny\"",
+   "note": "Raw page fetched from publicbooks.org. Verbatim in the Austen-comparison paragraph: \"But his humor, though softer, is like hers -- dry, subtle, morally loaded, and really funny.\" The page locator in the chunk is exact; \"hers\" is Jane Austen's, and the four adjectives are applied to Galt's humour as the claim states.",
+   "fromFile": "verdicts-leguin-i889-923.json"
   },
   "917": {
    "index": 917,
@@ -19293,6 +19672,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "919": {
+   "index": 919,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"it becomes a jargon, meaningful only to an ingroup\"",
+   "note": "Raw page fetched from theguardian.com (HTTP 200), article \"The stars of modern SF pick the best science fiction\". Le Guin's contribution, headed \"Virginia Woolf (1882-1941)\", carries the whole claim verbatim in its first paragraph: \"Genre is a rich dialect, in which you can say certain things in a particularly satisfying way, but if it gives up connection with the general literary language it becomes a jargon, meaningful only to an ingroup.\" All limbs supported. The page's timestamp reads Fri 13 May 2011 19.06 EDT, i.e. 14 May 2011 UK time as the source field gives.",
+   "fromFile": "verdicts-leguin-i889-923.json"
+  },
   "920": {
    "index": 920,
    "verdict": "SKIPPED_TRIAGE",
@@ -19306,6 +19692,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "922": {
+   "index": 922,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a matter of language and names; it has rules\"",
+   "note": "Raw page fetched from locusmag.com (HTTP 200), \"Frankenstein's Earthsea\", Locus January 2005 (mailing date 30 December 2004 on the page). Verbatim in the second of the three assumptions she attacks: \"In the 'Earthsea' books the way magic works is quite specific, a matter of language and names; it has rules, which give it a necessary limitation; and the nature of this magic is one of the fundamental metaphors on which the story is built.\" Both limbs supported, and the location is indeed the discussion of the film's changes.",
+   "fromFile": "verdicts-leguin-i889-923.json"
+  },
+  "923": {
+   "index": 923,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"which give it a necessary limitation\"",
+   "note": "Raw page fetched from locusmag.com, same sentence as index 922. The relative clause attaches to \"it has rules\", so the claim's limb -- that it is the rules that give the magic a necessary limitation -- is exactly what the page says. Verbatim.",
+   "fromFile": "verdicts-leguin-i889-923.json"
   }
  }
 }

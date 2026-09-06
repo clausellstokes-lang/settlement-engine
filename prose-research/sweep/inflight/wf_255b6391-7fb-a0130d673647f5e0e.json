@@ -1,0 +1,21 @@
+{
+ "role": "synth",
+ "name": "hobb",
+ "angle": null,
+ "tag": null,
+ "lines": 58,
+ "firstTs": "2026-09-06T22:00:30.872Z",
+ "lastTs": "2026-09-06T22:03:26.932Z",
+ "tools": {
+  "Bash": 11,
+  "Read": 3
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The merge landed 363 kept and 174 partial rows from 696 claims. Now I'll list the input files and read the outputs.",
+ "run": "wf_255b6391-7fb",
+ "agent": "a0130d673647f5e0e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_255b6391-7fb/agent-a0130d673647f5e0e.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
