@@ -1,25 +1,25 @@
-### [936] VERIFIED_VERBATIM
+### [936] VERIFIED_VERBATIM  {uniform rhythm (low burstiness)}
 CLAIM: Williams states that AI models optimised for coherence tend toward uniform sentence lengths, typically fifteen to twenty-five words, with consistent grammatical structures.
 SRC: Mark Williams, editor of The New Publishing Standard, 2026 | https://thenewpublishingstandard.com/2026/06/09/david-shelley-ai-detection-publishing/
 QUOTE: typically fifteen to twenty-five words
 TRUE: AI models ... tend toward uniform sentence lengths
 NOTE: Page, in the burstiness explanation under 'How The Tools Actually Work': 'AI models, trained on vast corpora of text and optimised for coherence, tend toward uniform sentence lengths - typically fifteen to twenty-five words - with consistent grammatical structures.' Quote verbatim and every limb of the claim is that one sentence.
 
-### [937] VERIFIED_VERBATIM
+### [937] VERIFIED_VERBATIM  {counter-evidence}
 CLAIM: Williams argues that highly polished, professionally edited, obsessively revised human prose looks like AI prose to perplexity-and-burstiness detectors, so the very qualities writing teachers praise produce the flagged signature.
 SRC: Mark Williams, editor of The New Publishing Standard, 2026 | https://thenewpublishingstandard.com/2026/06/09/david-shelley-ai-detection-publishing/
 QUOTE: Highly polished, professionally edited, obsessively revised human prose looks like AI prose
 TRUE: produces exactly the statistical signature the tools are trained to flag
 NOTE: Page: 'Highly polished, professionally edited, obsessively revised human prose looks like AI prose to these tools. Decades of craft, the ruthless elimination of unnecessary words, the achievement of syntactic consistency that every good writing teacher praises - all of this produces exactly the statistical signature the tools are trained to flag.' Quote verbatim; 'these tools' are, in the two preceding paragraphs, defined as measuring perplexity and burstiness, so the claim's 'perplexity-and-burstiness detectors' limb is supported.
 
-### [938] VERIFIED_VERBATIM
+### [938] VERIFIED_VERBATIM  {detection and its failures}
 CLAIM: Williams reports that The Gettysburg Address scores as high-probability AI-generated on multiple mainstream detection tools.
 SRC: Mark Williams, editor of The New Publishing Standard, 2026 | https://thenewpublishingstandard.com/2026/06/09/david-shelley-ai-detection-publishing/
 QUOTE: The Gettysburg Address scores as high-probability AI-generated on multiple mainstream detection tools.
 TRUE: The Gettysburg Address scores as high-probability AI-generated
 NOTE: The claim's quote is a complete sentence of the article and appears verbatim in the 'How The Tools Actually Work' section, alongside 'Cormac McCarthy has been flagged by these tools.' Note it is Williams's assertion, not a test he reports running (unlike the Cuckoo's Calling and anthem runs); the claim's 'Williams reports that' is neutral enough to stand.
 
-### [939] VERIFIED_VERBATIM
+### [939] VERIFIED_VERBATIM  {detection and its failures}
 CLAIM: Williams states that detection tools are not reading and not evaluating authorial intent but measuring two mathematical properties of text, perplexity and burstiness.
 SRC: Mark Williams, editor of The New Publishing Standard, 2026 | https://thenewpublishingstandard.com/2026/06/09/david-shelley-ai-detection-publishing/
 QUOTE: They are not reading.

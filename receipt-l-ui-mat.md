@@ -341,4 +341,11 @@ Cars: `c2337220a` CAR A (L-UI, 2 flips of 3). CAR B: **refused, zero bytes writt
 No register act, no ref write, no push, no rebase, no stash, no build, no `node_modules` materialisation,
 no `package.json` byte. `$SC/luimat-scratch/` holds every probe and log.
 
+## ⚠ ONE HONEST NOTE ON THE DOCK'S `node_modules` COUNT
+`ls -A node_modules | wc -l` now reads **455**, not the 453 verified on arrival. **Nothing was materialised.**
+`find node_modules -maxdepth 1 -type l | wc -l` is still exactly **453** — every package is still a symlink.
+The two extra entries are `.vite` and `.vite-temp`, vitest's own transform cache, created by my test runs.
+Recorded because a successor comparing the raw `ls` count against the brief's 453 would otherwise read a
+false materialisation and stop.
+
 ## STATUS: COMPLETE (1 car landed, 1 car refused with measurement)

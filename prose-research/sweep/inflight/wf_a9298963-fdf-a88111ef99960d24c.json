@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i559-573",
+ "lines": 48,
+ "firstTs": "2026-09-06T18:31:13.228Z",
+ "lastTs": "2026-09-06T18:32:28.574Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 11
+ },
+ "urlsFetched": [
+  "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+  "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+  "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+  "https://web.archive.org/web/20260205123012id_/https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_a9298963-fdf",
+ "agent": "a88111ef99960d24c",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-a88111ef99960d24c.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i559-573.json",
+  "exists": false
+ }
+}

@@ -3,6 +3,10 @@
 // v2 (lane S12A-CHECKPAIR, 2026-09-06): closes the two gaps the illustration refuter measured —
 //   (1) R4-BAND, a WITHHELD verdict class for a contrast cut in a pool that has sibling bands (A8's band half);
 //   (2) A11, the pool-spread arm (sentence-count spread + two-word openers), measured with the pool's OTHER variants.
+// R2 (chair ruling 2026-09-06 14:50, applied by lane S12A-R2): MARKS moved from the FAIL channel to the NOTE
+//   channel — a mark is a property the AFTER inherits, not a defect of the pair. 654 of 2,734 variants (23.9%)
+//   carry a mark and only 89 of those are `dm-only`; the rest are role labels. The dm-only sentence about the
+//   audience law is kept verbatim, now as a NOTE. Nothing else moved; the arm never enters the fail list again.
 import { readdirSync } from 'node:fs'; import { readFileSync } from 'node:fs'; import path from 'node:path'; import { pathToFileURL } from 'node:url';
 const [,, D, PAIRS] = process.argv;
 const corpus = [];

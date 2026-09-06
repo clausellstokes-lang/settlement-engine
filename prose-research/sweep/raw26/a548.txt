@@ -1,0 +1,386 @@
+ 
+ The Alexandrian » Thinking About Urbancrawls – Part 4: Experimental City Hexes 
+ Thinking About Urbancrawls – Part 4: Experimental City Hexes 
+ January 14th, 2015 
+ Go to Part 1 
+ So what we’re going to do here is take a map of Monte Cook’s Ptolus and drape a hex map over it. Then we’re going to pull existing location keys from Cook’s description of the city and we’re going to use them to key the hexes.
+ I’m choosing Ptolus for this exercise because the city is densely packed with existing material that’s both utilitarian (apothecaries, marketplaces, and the like) and also studded with adventuring potential. The goal is to see if simply creating an urban-themed hexcrawl will provide any insight into an urbancrawling structure.
+ As I’m writing this, I have absolutely no idea if this is going to work. (And perhaps a secret little hope that it will miraculously turn into a fully functional urbancrawl and solve all my problems.)
+ THE MAP
+ ( click for larger image )
+ THE KEY
+ As you’re looking through this key, remember that the urbancrawl key doesn’t represent all the information that you might prep about the city. For example, you might also prep a list of shop where potions are sold. Or make a note of where the popular (and unpopular) taverns are. (These would all obviously be things that would reside within the boundaries of the hexes, but they wouldn’t be interacted with through the urbancrawl structure.)
+ It should also be noted that this isn’t a complete key. For example, some of these locations would need full maps along with map keys. I’m not going to bother doing that right now, though, because the primary goal of this exercise is to look at what you’re keying.
+ A1. ZELLATH KORY’S HOUSE : A small house serving as the homebase for a Sorn cell. (The Sorns are a decentralized assassins’ and mages’ guild.) Zellath Kory is the cell leader.
+ A2. CASTLE SHARD : A huge castle made from purple stone, housing a massive crystal with strange magical properties. It is ruled by Lord Zavere and Lady Rill.
+ A3. KADAVER’S : A secret bar for criminals hidden beneath a dilapidated manse.
+ A4. VLADAAM ESTATE : The noble estate of the Vladaam family. The Vladaams rule over a vast criminal network. The grounds are defended by a pack of warhounds.
+ B2. PYTHONESS HOUSE : A haunted castle. (Standard dungeon crawl described in the Night of Dissolution adventure.)
+ B3. CLOCK TOWER : A major landmark in Oldtown, the Clock Tower no longer works. A cellar below the Clock Tower leads to a very old family crypt that once lay under the manor that was built on this previous built on this spot. The crypt provides access to an underground complex known as the Buried City.
+ B4 . SKULK ALLEY : An innocuous looking dead-end alleyway between a pair of buildings. Scrawled on the wall is the skulk symbol. Those who wait in the alley for at least half an hour are approached by Shim, a skulk willing to serve as an information broker and private detective.
+ B5 . THE BOILING POT : A large and well-established slophouse run by a jovial fellow named Dellam Koll.
+ C1 . WELL OF THE SHADOW EYES : A dry and disused well in a dead-end Rivergate alley. At the bottom of the well there’s a secret door leading to the underground Ravenstroke complex, a magical lair created by the wizard Aelian Fardream. It is now controlled by the Shadow Eyes, a magical clone of Fardream.
+ C2 . CHAPEL OF ST. THESSINA : One of the many temples of Lothian found throughout the city. The chapel has been secretly taken over by the Pactlords of the Quaan (who have replaced the priests with doppelgangers and are using the upper levels for a variety of purposes).
+ C3 . GALLOWS SQUARE : A public square where the city’s executions are held.
+ C4 . ROGUE MOON TRADING COMPANY : A three-story building serving as the base of operations for the largest merchant company in Ptolus. (Some people call it the Star of the South Market.) Tamora Riagin runs the office here.
+ C5 . CHON : A clothier/tailor.
+ D2 . RED STALLION PUB : The largest, most popular alehouse in the North Market. Co-owned by Yallis Kether and Utha Aryen. At night, the Red Stallion holds contests for drinking, singing, and throwing darts. (The winners get free drinks the following night.) A former delver named Jurgen Yath can also be found there, willing to sell information about the Dungeon beneath the city.
+ D3 . SADIE’S REST : A memorial park dedicated to Sadie of the Moors. Bron Higger is the caretaker.
+ D4 . RAMORO’S BAKERY : Ramoro Udelis and his wife Carlatia run this South Market bakery. The house itself is old and ill-kept, but the baked goods are excellent. Ramoro’s brother, Pauthan, is a pickpocket who “works” among the bakery’s customers.
+ D5 . THE MYSTERY PUB : A tavern known for elaborate, bizarre, and magical games and entertainments.
+ E1 . KILLRAVEN’S TOWER : An old stone tower that leans precariously to one side and appears to be abandoned. Word on the street is that it’s actually the secret entrance to Kellris Killraven’s underground stronghold. (Killraven is attempting to establish a new crime family in Ptolus.) In reality, however, it has nothing to do with Killraven.
+ E2 . TEMPLE OBSERVATORY OF THE WATCHER OF THE SKIES : The most distinctive portion of this temple is the cylindrical observatory with its giant telescope, used to observe significant events and omens in the skies, particularly the night sky. The temple is run by Helmut Itlestein, also known for being the head of the controversial Republican movement.
+ E3 . GHOSTLY MINSTREL : An inn, pub, and restaurant all in one. It’s become the meeting place of choice for delvers and adventurers. The Minstrel is haunted by an actual undead bard.
+ E4 . BLACKSTOCK PRINTING : Blackstock is one of the few businesses in the city with a functioning, large-scale movable type printing press. (Many of the city’s newssheets are printed here.) What is not widely known is that the press is controlled by six of Aelian Fardream’s clones (who were awakened from temporal stasis due to a strange magical surge several years ago).
+ E5 . COCK PIT : An underground cockfighting arena which has grown into one of the largest illegal gambling dens in Ptolus.
+ F2 . CATTY’S HOUSE : A small house serving as the homebase for a Sorn cell. (The Sorns are a decentralized assassins’ and mages’ guild.) Katrin “Catty” Salla is the cell leader.
+ F3 . TEMPLE OF THE FROG : An abandoned ruin. The vile cultists who once ran this temple were driven out by adventurers six years ago.
+ F4 . KERRIK’S : The proprietor of this bar, Kerrik Tanner, is also a contact point for the Vai assassins.
+ F5 . WOODWORKER’S GUILDHALL : Run by Guildmaster Falen Jenn.
+ G1 . NALL HALL : A cultural center for people from the northern wasteland of Nall or those who have descended from Nallish folk. They hold dances, feasts, and festivals to preserve their traditions – but all are welcome. (At the festival, PCs will be approached by a young woman named Sanne who is trying to find someone to look for her husband, Sebastin. Sebastin disappeared on a delving mission in the Dungeon below the city while using a map that he purchased from someone at the Red Stallion Pub.)
+ G2 . SMOKE SHOP : The Shuul mechanists’ guild sells cutting-edge technological items here – spectacles, watches, spyglasses, magnifying lenses, goggles, precision tools, pills of various kinds, and (their newest creation) the aelectrical lantern. They also sell all manner of firearms and technological weaponry. Crimson Coil cultists have been stealing gunpowder from the shop in order to construct a huge bomb.
+ G3. TERREK NAL’S HOUSE : Terrek Nal was apprenticed to the mage Golathan Naddershrike. Naddershrike proved a cruel master cursed him with a monstrous appearance, Nal murdered him in rage. After the murder, Nal returned to his family home and remains there in seclusion: The right half of his body is a glaring red and pink, slick with pus and strange excretions. He emits a foul stench too powerful to cover with perfumes. The greatest, change, however, is not physical: Nal now gains sustenance from fear instead of food and drink. When driven to desperation, he ventures out of his house and terrorizes people – he doesn’t harm them, merely frightens them in order to survive. A wealthy businessman who was assaulted three days ago has put a bounty of 500 gp on the monster’s head, describing his assailant as “a twisted man-thing with melted flesh”.
+ G4. POTIONS AND ELIXIRS : A well-stoked alchemical supply and potion store. The sole proprietor is a half-elf sorcerer named Buele Nox.
+ G5. MIDDEN HEAPS : A huge trash dump backed up against the southern city wall. The merchants in charge of the heaps charge a small fee for the dumping of trash (and for a little extra won’t bother inspecting it too closely). They’ll also sell scrap and broken items for 5cp per pound. Ratmen, goblins, and even otyughs are known to make their homes amidst the towering piles.
+ H3. DAYKEEPER’S CHAPEL : The Daykeeper’s Chapel is charged with beginning the ringing of the dawn bells each day (the other chapels take their cue from its beginning). Sister Arsagra Callinthan also oversees a variety of charitable outreach programs into the warrens. At the moment, Sister Arsagra has offered sanctuary to a man named Kobal who is being hunted by the Pale Dogs. (Kobal has discovered that Jirraith is a doppelganger.)
+ H4. JIRRAITH’S LAIR : The Pale Dogs are the most prominent of the gangs in the Warrens. They’re led by a mysterious man named Jirraith who keeps his “headquarters” in the top floor of an average-looking tenement. He has no bodyguards there, but he has a trained gibbering mouther. Even his lieutenants don’t know that Jirraith is actually a doppelganger.
+ H5. PORPHYRY HOUSE : A vile whorehouse secretly run by naga mistresses. The whores are actually polymorphed hydra hatchlings.
+ I2. DOCKMASTER’S TOWER : A strangely-shaped tower that looks out across the Docks. The Dockmaster who lives within maintains all the crew and cargo manifests, inspection reports, and shipping information that pertains to any craft that enters or leaves Ptolus. In fact, an officer from each ship must check in with the Dockmaster immediately upon arrival and immediately before departure. The Dockmaster, however, is grotesquely obese and never leaves the upper level of the tower: He transfers paperwork and messages via a basket on a string outside one window. For anything more, he has a small girl named Secki (age 8) who works for him.
+ I3. ENNIN HEADQUARTERS : The headquarters of the Ennin slavers (who work with the Pactlords of the Quaan).
+ Go to Part 5: Using the Ptolus Hexmap 
+ Filed under: Roleplaying Games Comments (9) 
+ Article tags: thinking about urbancrawls 
+ 9 Responses to “Thinking About Urbancrawls – Part 4: Experimental City Hexes”
+ S Robertson says: 
+ Interesting stuff. When you’re doing a normal hexcrawl you need to move from hex to hex (no skipping), you have a movement rate, and there is a roll for random encounters. Do you see that applying here as well?
+ January 14th, 2015 - 1:47 pm 
+ Justin Alexander says: 
+ One system I’ve played around with — although this was more heavily influenced by City State of the Invincible Overlord — is the idea of integrating targeted movement into the urbancrawl by generating encounters in the origin and/or destination locations.
+ You could try to check for encounters in every hex you pass through along the way, but think it probably ends up feeling kludgy in play.
+ The published version of Ptolus, though, does include a really handy table listing how long it takes to get from Neighborhood A to Neighborhood B. I wonder if you could integrate that with pre-baked encounter charts that would take into account which hexes you’d be passing through?
+ January 14th, 2015 - 5:49 pm 
+ Mike says: 
+ How did you make that Ptolus hexmap? It looks great! I’ve been trying to do something like that with several maps in photoshop with terrible results. If it was just starting with a good transparent hex overlay, could you please upload and link? Would love to use it too. 
+ Very interested to see where this series ends up.
+ January 14th, 2015 - 10:23 pm 
+ Justin Alexander says: 
+ @Mike: I actually started with a craptacular hex overlay. If I was going to do it again, I’d start with a cleaner hex overlay like the ones found here .
+ The trick to make the hex grid “pop” is to shadow it in white. After you have your hex layer, select the layer (CTRL + click on the layer), then expand your selection by a few pixels and fill with white.
+ To provide a clean look, fill the hexes on the border of your image with white (as seen in the Ptolus image) and add labels for utility.
+ January 15th, 2015 - 3:12 pm 
+ Joe says: 
+ Very interesting idea. BTW, if somebody doesn’t want to pay $120+ for Ptolus, DriveThruRPG has it in e-format for $60, or you can get various individual pieces for much less. There’s a free Player’s Guide too, in case somebody wants to check it out before committing.
+ (I’m not associated with DTRPG except as a customer.)
+ January 17th, 2015 - 1:47 pm 
+ d47 says: 
+ I’m not sure I understand the purpose of doing this with an existing, highly detailed urban setting. I can see the utility of doing it with a developing campaign city. Give most of the city hexes one notable feature. As the campaign develops more locations and events could be added to each hex. No need to map out and key the entire city that way.
+ January 19th, 2015 - 12:50 am 
+ Kevil says: 
+ I believe in case of urban-crawl you should use some mix. What I suggest on this stage (page) is to divide city on some neighborhoods (like rooms in a dungeon) which has their own random encounter table. But inside every neighborhood create hex-crawl with its own scale (like squares in the room of the dungeon). It may be little complex to have different scale in different neighborhood but it remove the problem with keying every hex. After all, some neighborhood can be very tight with key-location (downtown for example) and some are typical sleeping neighborhood with common houses.
+ December 18th, 2019 - 10:10 am 
+ Michael Schmahl says: 
+ Sorry for the necromancy.
+ My impression is that urban encounters are heavily tilted toward political intrigue and/or mysteries. E.g. “Who is bribing/extorting/threatening the blacksmith in location C3?”
+ Dungeoncrawls are generally about killing things and taking their stuff. Hexcrawls are generally about unlocking new dungeoncrawls.
+ (Of course there are exceptions to all these generalities.)
+ July 4th, 2021 - 10:45 pm 
+ John says: 
+ Every time I read one of these articles I realise how much I have to learn, great stuff !
+ March 3rd, 2023 - 5:07 am 
+ Leave a Reply
+ Name (required) 
+ Mail (will not be published) (required) 
+ Website 
+ XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> 
+-->
+ you MUST enable javascript to be able to comment 
+ Δ 
+ JUSTIN ALEXANDER
+ About - Bibliography 
+ Acting Resume 
+ROLEPLAYING GAMES
+ Gamemastery 101 
+ RPG Scenarios 
+ RPG Cheat Sheets 
+ RPG Miscellaneous 
+ Dungeons & Dragons 
+ Ptolus: Shadow of the Spire 
+ Alexandrian Auxiliary 
+ Check These Out 
+ Essays 
+ Other Games 
+ Reviews 
+ Shakespeare Sunday 
+ Thoughts of the Day 
+ Videos 
+ Patrons 
+ Open Game License 
+ Bluesky • Mastodon • Twitter 
+ Archives
+ Archives 
+ Select Month 
+ August 2026 (13) 
+ July 2026 (13) 
+ June 2026 (10) 
+ May 2026 (10) 
+ April 2026 (13) 
+ March 2026 (8) 
+ February 2026 (10) 
+ January 2026 (9) 
+ December 2025 (16) 
+ November 2025 (12) 
+ October 2025 (16) 
+ September 2025 (14) 
+ August 2025 (11) 
+ July 2025 (17) 
+ June 2025 (16) 
+ May 2025 (11) 
+ April 2025 (14) 
+ March 2025 (14) 
+ February 2025 (16) 
+ January 2025 (16) 
+ December 2024 (13) 
+ November 2024 (11) 
+ October 2024 (13) 
+ September 2024 (14) 
+ August 2024 (16) 
+ July 2024 (16) 
+ June 2024 (14) 
+ May 2024 (16) 
+ April 2024 (17) 
+ March 2024 (17) 
+ February 2024 (16) 
+ January 2024 (18) 
+ December 2023 (15) 
+ November 2023 (16) 
+ October 2023 (14) 
+ September 2023 (16) 
+ August 2023 (12) 
+ July 2023 (12) 
+ June 2023 (13) 
+ May 2023 (19) 
+ April 2023 (15) 
+ March 2023 (15) 
+ February 2023 (13) 
+ January 2023 (16) 
+ December 2022 (14) 
+ November 2022 (15) 
+ October 2022 (13) 
+ September 2022 (15) 
+ August 2022 (15) 
+ July 2022 (16) 
+ June 2022 (17) 
+ May 2022 (19) 
+ April 2022 (19) 
+ March 2022 (12) 
+ February 2022 (9) 
+ January 2022 (14) 
+ December 2021 (10) 
+ November 2021 (13) 
+ October 2021 (11) 
+ September 2021 (13) 
+ August 2021 (13) 
+ July 2021 (11) 
+ June 2021 (14) 
+ May 2021 (12) 
+ April 2021 (12) 
+ March 2021 (14) 
+ February 2021 (14) 
+ January 2021 (18) 
+ December 2020 (16) 
+ November 2020 (13) 
+ October 2020 (16) 
+ September 2020 (13) 
+ August 2020 (11) 
+ July 2020 (12) 
+ June 2020 (12) 
+ May 2020 (15) 
+ April 2020 (13) 
+ March 2020 (13) 
+ February 2020 (12) 
+ January 2020 (13) 
+ December 2019 (7) 
+ November 2019 (6) 
+ October 2019 (8) 
+ September 2019 (15) 
+ August 2019 (9) 
+ July 2019 (8) 
+ June 2019 (9) 
+ May 2019 (15) 
+ April 2019 (20) 
+ March 2019 (11) 
+ February 2019 (13) 
+ January 2019 (12) 
+ December 2018 (5) 
+ November 2018 (19) 
+ October 2018 (20) 
+ September 2018 (16) 
+ August 2018 (18) 
+ July 2018 (20) 
+ June 2018 (17) 
+ May 2018 (18) 
+ April 2018 (7) 
+ March 2018 (14) 
+ February 2018 (16) 
+ January 2018 (19) 
+ December 2017 (1) 
+ October 2017 (1) 
+ September 2017 (2) 
+ August 2017 (4) 
+ July 2017 (4) 
+ June 2017 (2) 
+ April 2017 (7) 
+ February 2017 (1) 
+ December 2016 (1) 
+ November 2016 (5) 
+ October 2016 (12) 
+ September 2016 (7) 
+ August 2016 (8) 
+ June 2016 (1) 
+ May 2016 (8) 
+ April 2016 (5) 
+ March 2016 (5) 
+ February 2016 (15) 
+ January 2016 (3) 
+ December 2015 (2) 
+ November 2015 (12) 
+ October 2015 (12) 
+ September 2015 (6) 
+ August 2015 (14) 
+ July 2015 (13) 
+ June 2015 (14) 
+ May 2015 (19) 
+ April 2015 (18) 
+ March 2015 (25) 
+ February 2015 (28) 
+ January 2015 (29) 
+ December 2014 (20) 
+ November 2014 (13) 
+ October 2014 (10) 
+ September 2014 (11) 
+ August 2014 (8) 
+ July 2014 (7) 
+ June 2014 (3) 
+ May 2014 (6) 
+ April 2014 (3) 
+ February 2014 (4) 
+ January 2014 (1) 
+ December 2013 (3) 
+ November 2013 (1) 
+ October 2013 (7) 
+ September 2013 (11) 
+ August 2013 (20) 
+ July 2013 (27) 
+ June 2013 (2) 
+ April 2013 (4) 
+ March 2013 (6) 
+ February 2013 (11) 
+ January 2013 (5) 
+ December 2012 (7) 
+ November 2012 (14) 
+ October 2012 (12) 
+ September 2012 (3) 
+ August 2012 (6) 
+ July 2012 (2) 
+ June 2012 (14) 
+ May 2012 (21) 
+ April 2012 (22) 
+ March 2012 (4) 
+ February 2012 (17) 
+ January 2012 (31) 
+ December 2011 (18) 
+ November 2011 (25) 
+ October 2011 (28) 
+ September 2011 (27) 
+ August 2011 (27) 
+ July 2011 (8) 
+ June 2011 (16) 
+ May 2011 (22) 
+ April 2011 (28) 
+ March 2011 (38) 
+ February 2011 (29) 
+ January 2011 (14) 
+ November 2010 (6) 
+ September 2010 (4) 
+ August 2010 (7) 
+ July 2010 (20) 
+ June 2010 (22) 
+ May 2010 (17) 
+ April 2010 (1) 
+ January 2010 (11) 
+ December 2009 (3) 
+ November 2009 (2) 
+ September 2009 (1) 
+ August 2009 (2) 
+ July 2009 (3) 
+ June 2009 (3) 
+ May 2009 (2) 
+ April 2009 (8) 
+ March 2009 (30) 
+ February 2009 (29) 
+ January 2009 (11) 
+ December 2008 (1) 
+ November 2008 (4) 
+ October 2008 (22) 
+ September 2008 (23) 
+ August 2008 (9) 
+ July 2008 (23) 
+ June 2008 (23) 
+ May 2008 (31) 
+ April 2008 (1) 
+ March 2008 (7) 
+ February 2008 (2) 
+ January 2008 (2) 
+ December 2007 (1) 
+ November 2007 (4) 
+ October 2007 (7) 
+ September 2007 (7) 
+ August 2007 (10) 
+ July 2007 (13) 
+ June 2007 (7) 
+ May 2007 (11) 
+ April 2007 (6) 
+ March 2007 (5) 
+ February 2007 (4) 
+ January 2007 (2) 
+ December 2006 (5) 
+ November 2006 (6) 
+ June 2006 (9) 
+ May 2006 (5) 
+ April 2006 (9) 
+ March 2006 (25) 
+ November 2005 (6) 
+ October 2005 (3) 
+ August 2005 (17) 
+ July 2005 (25) 
+ Recent Posts
+ Chaos Lorebook: The Magi of Chaos 
+ Ex-RPGNet Review: A Song of Ice and Fire 
+ Chaos Lorebook: The Earthbound Demons 
+ Ex-RPGNet Review: Penumbra Backdrops 
+ Chaos Lorebook: The Assassins of Chaos 
+ Recent Comments
+ Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) 
+ On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal 
+ Robert on Chaos Lorebook: The Magi of Chaos 
+ Justin Alexander on Ptolus: Running the Campaign – From Table to Page 
+ BP on Ex-RPGNet Review: A Song of Ice and Fire 
+ Remus on Some Thoughts on Swords & Sorcery 
+ BP on Ex-RPGNet Review: A Song of Ice and Fire 
+ Ben Ferguson on Ptolus: Running the Campaign – From Table to Page 
+ Jake on Ex-RPGNet Review: A Song of Ice and Fire 
+ William on Ex-RPGNet Review: A Song of Ice and Fire 
+ Author
+ Read Now! - Audio Book 
+Author
+ PDF Edition 
+ City Supplement 1: Dweredell 
+ City Supplement 2: Aerie 
+ City Supplement 3: Anyoc 
+ Rule Supplement 1: Mounted Combat 
+ Adventure: Complex of Zombies 
+ Adventure: The Black Mist 
+ Spells of Light and Darkness 
+ Mythos Audio Library: Call of Cthulhu 
+ Copyright © The Alexandrian . All rights reserved.
+ 
