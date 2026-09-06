@@ -3,13 +3,13 @@
  "name": "dnd",
  "angle": null,
  "tag": "i604-618",
- "lines": 22,
+ "lines": 62,
  "firstTs": "2026-09-06T18:33:57.831Z",
- "lastTs": "2026-09-06T18:34:31.297Z",
+ "lastTs": "2026-09-06T18:36:32.140Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 2
+  "Bash": 12
  },
  "urlsFetched": [
   "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
