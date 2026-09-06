@@ -3,19 +3,33 @@
  "name": "wolfe",
  "angle": "primary-on-disk",
  "tag": null,
- "lines": 75,
+ "lines": 132,
  "firstTs": "2026-09-06T19:25:33.190Z",
- "lastTs": "2026-09-06T19:28:13.583Z",
+ "lastTs": "2026-09-06T19:32:34.044Z",
  "tools": {
-  "Read": 2,
-  "Bash": 18
+  "Read": 5,
+  "Bash": 30
  },
- "urlsFetched": [],
+ "urlsFetched": [
+  "https://gwern.net/doc/culture/2007-wolfe",
+  "https://gwern.net/doc/fiction/gene-wolfe/1987-wolfe.pdf",
+  "https://gwern.net/doc/fiction/gene-wolfe/2015-genewolfe-sf-chatchannel-interview.txt",
+  "https://davoortwilbo.blogspot.com/2015/07/2005-interview-i-did-with-gene-wolfe.html",
+  "https://www.middletownlibrary.org/",
+  "https://lareviewofbooks.org/article/the-haunted-library-of-gene-wolfe",
+  "https://www.blackgate.com/2018/11/20/i-severian-the-book-of-the-new-sun-by-gene-wolfe/",
+  "https://www.theguardian.com/books/2011/may/13/gene-wolfe-hero-neil-gaiman-sf"
+ ],
  "filesWritten": [],
- "lastAssistantText": "Strong source. Let me continue through the roster.",
+ "lastAssistantText": "Now checkpointing all claims from the 13 on-disk roster sources.",
  "run": "wf_5c6be9e9-17f",
  "agent": "a90e72cb539bcb479",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_5c6be9e9-17f/agent-a90e72cb539bcb479.jsonl",
  "journal": "in-flight",
- "checkpointFile": null
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-primary-on-disk.json",
+  "claims": 0,
+  "complete": false,
+  "mtime": "15:30:22"
+ }
 }

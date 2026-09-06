@@ -11,3 +11,8 @@
 8. Katherine Olley, "Verse and Prose in Fantasy Literature", Oxford, 16 Dec 2020 -> SRT transcript fetched
 9. brightweavings Beyond this Dark House page (Penguin Canada Q&A, Kay own words)
 10. brightweavings professional scholarship index
+
+## FINAL
+113 claims, 37 sources logged (25 substantive). All quotations script-verified verbatim against the fetched text.
+Blocked: YouTube caption track for the 2021 Tolkien Lecture (429 twice), Tor.com write-up (403), academia.edu Whispering Gallery paper (403).
+Best single find: Kay's Locus "In Memoriam - Dorothy Dunnett" (Dec 2001) — he met Dunnett in spring 1975 because of a letter inside the Tolkien correspondence he was editing. It joins angle 1 and angle 3.

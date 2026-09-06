@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "in progress",
+ "complete": true,
+ "coverage": "Named roster: Vonarburg FETCHED (Diacritik 2021 entretien, the only place she speaks about translating Kay; no Elbakin or ActuSF translator interview with her exists), Cabon FETCHED (his own site's nine per-book pages plus his signed L'Atalante piece 'Les Chevaux célestes pour \"les cancres\"'; verified as Kay's L'Atalante translator and as the interpreter at Nantes 2025), justaword.fr BLOCKED (403 live, scribe.rip 404, freedium fail, r.jina.ai 403, no Wayback capture), ActuSF BLOCKED (article bodies empty in curl, in the Wayback capture and in a full browser render), AudioFile Magazine BLOCKED (review URLs now redirect into kirkusreviews.com, no archive), Utopiales 2017 'L'auteur et son ombre' with Kay and Cabon BLOCKED (audio/video only, empty caption track); Simon Vance VERIFIED as narrator of most but not all of the catalogue (Holter Graham read Last Light of the Sun, Euan Morton A Song for Arbonne). Substantive sources by route: named roster 6; lateral search 9 (Brightweavings journals and news, Fréchette's Laval mémoire, the two Elbakin critiques, the two Elbakin forum threads, the Goodreads/Spun Stories audiobook review); bibliography chasing 3 (Cabon's own reference lists led to the Kattnig piece and the L'Atalante translator rubric). Shortfall: no translator in any language is on record about Kay's SENTENCE — clause order, length, the withheld subject, the pause; the translator record is entirely about lexicon and research, so the sentence-level close-reader evidence had to come from Kay's copy-editor fights and from the narrator's reported pause. WebSearch budget was exhausted mid-sweep; the last third of discovery ran through browser-rendered DuckDuckGo and direct site navigation.",
  "sourcesRead": [
   {
    "title": "Guy Gavriel Kay et sa façon d'écrire… (interview traduite par NAK)",
@@ -216,15 +216,76 @@
    "kind": "reception",
    "substantive": false,
    "route": "live"
+  },
+  {
+   "title": "Brightweavings — journal index / essays index (navigation only)",
+   "url": "https://brightweavings.com/essays/",
+   "kind": "vendor",
+   "substantive": false,
+   "route": "live"
+  },
+  {
+   "title": "Gillossen, critique of Les Derniers Feux du soleil, Elbakin.net",
+   "url": "https://www.elbakin.net/fantasy/roman/les-derniers-feux-du-soleil-961",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2009-04-19",
+   "route": "live, browser UA"
+  },
+  {
+   "title": "Siriane, critique of Children of Earth and Sky, Elbakin.net",
+   "url": "https://www.elbakin.net/fantasy/roman/enfants-de-la-terre-et-du-ciel-5099",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2017-01-20",
+   "route": "live, browser UA"
+  },
+  {
+   "title": "Cynthia Sally Haggard, review of The Summer Tree narrated by Simon Vance (Spun Stories, via Goodreads blog)",
+   "url": "https://www.goodreads.com/author_blog_posts/19910169-the-summer-tree-fionavar-tapestry-1-by-guy-gavriel-kay-narrated-by-si",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2020-05-24",
+   "route": "live"
+  },
+  {
+   "title": "Interview 2017: Guy Gavriel Kay aux Utopiales, ActuSF",
+   "url": "https://www.actusf.com/detail-d-un-article/Interview-2017-Guy-Gavriel-Kay-aux",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2017-11-23",
+   "route": "BLOCKED — body empty in curl, in the Wayback capture, and in a full browser render"
+  },
+  {
+   "title": "Interview Guy Gavriel Kay, L'historien de la fantasy — Just A Word (Nicolas Winter)",
+   "url": "https://justaword.fr/interview-guy-gavriel-kay-c3dd95364b35",
+   "kind": "own-words",
+   "substantive": false,
+   "route": "BLOCKED — 403 live, scribe.rip 404, freedium fail, r.jina.ai 403, no Wayback capture"
+  },
+  {
+   "title": "TIGANA by Guy Gavriel Kay read by Simon Vance — AudioFile Magazine review",
+   "url": "https://www.audiofilemagazine.com/reviews/read/63229/tigana-by-guy-gavriel-kay-read-by-simon-vance/",
+   "kind": "reception",
+   "substantive": false,
+   "route": "BLOCKED — redirects to kirkusreviews.com in curl and in a browser render; no Wayback capture of the review id"
+  },
+  {
+   "title": "Utopiales 2017 : L'auteur et son ombre — Guy Gavriel Kay et Mikael Cabon (video)",
+   "url": "https://www.youtube.com/watch?v=N5O69O92ckQ",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2017-11-02",
+   "route": "BLOCKED — only an auto-ASR English caption track is listed and the timedtext endpoint returns empty"
   }
  ],
  "claims": [
   {
    "feature": "naming and forms of address",
-   "claim": "Fréchette states that Élisabeth Vonarburg translated Kay's English name Guinevere by the modern French Geneviève rather than the older Guenièvre.",
+   "claim": "Fréchette states that Vonarburg rendered Kay's Guinevere by the modern French form rather than the older Guenièvre.",
    "source": "Amélie Fréchette, mémoire de maîtrise, Université Laval, 2013, note 42",
    "url": "https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/QQLA/TC-QQLA-29596.pdf",
-   "quote": "a traduit le nom anglais",
+   "quote": "par le nom français moderne",
    "page": "note 42, p. 31",
    "kind": "analysis",
    "polarity": "asserts",
@@ -417,7 +478,7 @@
   },
   {
    "feature": "translation and register",
-   "claim": "Kay says he has had readers report that a given book's translation in a given language is terrible.",
+   "claim": "Kay describes the people who carry his work over into another language as felt alternately as a gift or a burden.",
    "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, October 2006",
    "url": "https://brightweavings.com/books/ysabel-journal/",
    "quote": "the gift or the burden of the people who carry my work",
@@ -427,7 +488,7 @@
    "date": "2006-10",
    "routeHint": "live fetch, browser UA",
    "registerHint": "none",
-   "confidence": "medium — the quotation supports the surrounding passage on translators rather than the reader reports sentence itself"
+   "confidence": "high"
   },
   {
    "feature": "point of view and distance",
@@ -540,7 +601,7 @@
    "confidence": "high"
   },
   {
-   "feature": "naming and forms of address",
+   "feature": "other: retranslation",
    "claim": "Elbakin forum readers record that A Brightness Long Ago exists in two French versions, Vonarburg's Un éclat d'antan for Alire and Cabon's Comme un diamant dans ma mémoire for L'Atalante.",
    "source": "Elbakin.net forum thread on Comme un diamant dans ma mémoire (reader posts)",
    "url": "https://www.forum-elbakin.net/viewtopic.php?t=9311&start=60",
@@ -551,6 +612,159 @@
    "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "medium — forum posts, unsigned readers"
+  },
+  {
+   "feature": "other: narrator roster",
+   "claim": "Kay's site records that The Last Light of the Sun audiobook was read by Holter Graham, not by Simon Vance.",
+   "source": "Brightweavings News archive, 18 May 2009",
+   "url": "https://brightweavings.com/news/",
+   "quote": "Last Light of the Sun is wrapped, read by Holter Graham",
+   "page": "News, 18 May 2009 entry",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "date": "2009-05-18",
+   "routeHint": "live fetch, browser UA; grep 'Vance'",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: narrator roster",
+   "claim": "Kay's site records that A Song for Arbonne was read by Euan Morton, who also sang the songs.",
+   "source": "Brightweavings News archive, 18 May 2009",
+   "url": "https://brightweavings.com/news/",
+   "quote": "read by Euan Morton (who sang the songs, as well)",
+   "page": "News, 18 May 2009 entry",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "date": "2009-05-18",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "register modulation",
+   "claim": "Gillossen asserts that Kay's style seems to merge with the people he is treating, according to that people's own characteristics.",
+   "source": "Gillossen, critique of Les Derniers Feux du soleil, Elbakin.net, 19 April 2009",
+   "url": "https://www.elbakin.net/fantasy/roman/les-derniers-feux-du-soleil-961",
+   "quote": "Son style semble se confondre avec le peuple qu'il aborde",
+   "page": "body of the review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009-04-19",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "register modulation",
+   "claim": "Gillossen argues that the prose of The Last Light of the Sun becoming less subtle is a deliberate move to sharpen the contrast with the sophisticated culture of Sarantium.",
+   "source": "Gillossen, critique of Les Derniers Feux du soleil, Elbakin.net, 19 April 2009",
+   "url": "https://www.elbakin.net/fantasy/roman/les-derniers-feux-du-soleil-961",
+   "quote": "sa prose se fait moins subtile",
+   "page": "body of the review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009-04-19",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "archaism",
+   "claim": "Gillossen calls Kay's multiplication of period terms in The Last Light of the Sun sometimes incidental to what it actually adds to the story.",
+   "source": "Gillossen, critique of Les Derniers Feux du soleil, Elbakin.net, 19 April 2009",
+   "url": "https://www.elbakin.net/fantasy/roman/les-derniers-feux-du-soleil-961",
+   "quote": "une multiplication de termes \"d'époque\"",
+   "page": "body of the review",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2009-04-19",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: competing memories of one event",
+   "claim": "Siriane observes that in Children of Earth and Sky the same events can be examined from the points of view of different characters, which she calls a kaleidoscopic effect.",
+   "source": "Siriane, critique of Children of Earth and Sky, Elbakin.net, 20 January 2017",
+   "url": "https://www.elbakin.net/fantasy/roman/enfants-de-la-terre-et-du-ciel-5099",
+   "quote": "ce qui donne un intéressant effet kaléidoscopique",
+   "page": "body of the review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2017-01-20",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "Siriane describes Kay's tendency to cut the narration in the middle of a scene in order to pull back into more philosophical considerations.",
+   "source": "Siriane, critique of Children of Earth and Sky, Elbakin.net, 20 January 2017",
+   "url": "https://www.elbakin.net/fantasy/roman/enfants-de-la-terre-et-du-ciel-5099",
+   "quote": "couper la narration sur le vif de telle ou telle scène",
+   "page": "body of the review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2017-01-20",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "consequence on a household",
+   "claim": "Siriane writes that in this book Kay seems less interested in the events themselves than in their impact.",
+   "source": "Siriane, critique of Children of Earth and Sky, Elbakin.net, 20 January 2017",
+   "url": "https://www.elbakin.net/fantasy/roman/enfants-de-la-terre-et-du-ciel-5099",
+   "quote": "moins intéressé par les évènements eux-mêmes que leur impact",
+   "page": "body of the review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2017-01-20",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: retranslation",
+   "claim": "Elbakin.net records that after a first publication at Le Pré aux Clercs the novel was reissued by L'Atalante with a translation by Mikael Cabon.",
+   "source": "Elbakin.net, update of 20 August 2021 appended to the Les Derniers Feux du soleil page",
+   "url": "https://www.elbakin.net/fantasy/roman/les-derniers-feux-du-soleil-961",
+   "quote": "avec cette fois une traduction de Mikael Cabon",
+   "page": "Mise à jour du 20 aout 2021",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "date": "2021-08-20",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: exposition halting the action",
+   "claim": "Haggard criticises The Summer Tree for having characters stop the action dead to make a flowery speech.",
+   "source": "Cynthia Sally Haggard, review of the Simon Vance audiobook of The Summer Tree, 24 May 2020",
+   "url": "https://www.goodreads.com/author_blog_posts/19910169-the-summer-tree-fionavar-tapestry-1-by-guy-gavriel-kay-narrated-by-si",
+   "quote": "stops the action dead in order to make a flowery speech",
+   "page": "body of the blog post",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2020-05-24",
+   "routeHint": "live fetch",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "cadence and rhythm",
+   "claim": "Simon Vance names Guy Gavriel Kay's work among his favourite narration projects.",
+   "source": "Simon Vance, interviewed for Vocal Media's Interview channel",
+   "url": "https://vocal.media/interview/talking-with-audiobook-narrator-extraordinaire-simon-vance",
+   "quote": "I have always loved narrating the work of Guy Gavriel Kay",
+   "page": "answer to the favourite-narration-project question",
+   "kind": "own-words",
+   "polarity": "mentions",
+   "routeHint": "live fetch",
+   "registerHint": "none",
+   "confidence": "medium — the source is a preference statement and says nothing about Kay's sentences"
   }
  ]
 }

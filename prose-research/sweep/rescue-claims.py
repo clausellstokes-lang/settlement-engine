@@ -1,5 +1,5 @@
-COMPLETE=False
-COVERAGE="in progress"
+COMPLETE=True
+COVERAGE=("Named roster: FETCHED RAW - Cheryl Morgan's Emerald City 'Pieces of History' and her Emerald City review of The Last Light of the Sun (both BrightWeavings reprints); Mohanraj and Cobb's two Strange Horizons pieces of 13 Nov 2000 plus their 'History behind the Books' companion (live URL dead, recovered at the Wayback raw capture 20160319104019id_); Kirkus at the primary (seven reviews, Tigana 1990 through A Brightness Long Ago 2019); Publishers Weekly at the primary (six reviews, Tigana 1990 through A Brightness Long Ago); the Infinity Plus interview and three Infinity Plus reviews - which turn out to be by Sandy Auden and Simeon Shoul, NOT Nick Gevers, and are recorded under their true bylines; and Brian Attebery's Strategies of Fantasy, whose complete OCR text was downloaded from an open archive.org item and measured. NOT FOUND - John Clute's SFE entry (sf-encyclopedia.com/entry/kay_guy_gavriel and three variants all 404; SFE's own Canada entry names Kay without linking any entry, so SFE appears to carry none); the 1997 Encyclopedia of Fantasy entry (the /fe/ namespace is 404), survived only as a seven-word quotation relayed on BrightWeavings; Faren Miller's Locus reviews (the Locus September 1992 table of contents confirms her A Song for Arbonne review at page 17, but Locus print reviews of that era are not online and BrightWeavings reprints none); any New York Times review (nytimes.com/search returns 403 to this host, Wayback wildcard CDX requires authorization, and no Kay Wikipedia article cites one). BLOCKED - Farah Mendlesohn's Rhetorics of Fantasy (the only archive.org copy is lending-restricted: fulltext/inside.php returns Item not available, _djvu.txt 302s, HathiTrust 403s, Google Books API returns no totals); Booklist Online and Library Journal (both serve JavaScript shells, 67 characters of body text and 502 respectively); the session's web-search budget was exhausted mid-run and DuckDuckGo, Mojeek and lite endpoints returned captchas or nothing, so lateral searching was replaced by sitemap and Wikipedia-wikitext discovery. Substantive sources per route: 24 by direct fetch with a browser user agent (BrightWeavings, Strange Horizons, Infinity Plus, Kirkus, Publishers Weekly, Locus), 5 by Wayback raw id_ capture (the Strange Horizons companion and four SF Site reviews, sfsite.com being unreachable from this host), 1 by open archive.org full text (Attebery, measured to zero mentions of Kay), and 4 further BrightWeavings reprint pages found by diffing the site sitemap against the 153 distinct URLs already in state-kay.json - which yielded the run's richest register evidence: Jo Walton's 'veiled omniscient', Rob Kilheffer in F&SF on withheld information and off-stage action, Dave Langford in SFX, Michelle Sagara in Quill & Quire, and John H. Riskind in the Washington Post Book World.")
 
 BW="https://brightweavings.com/pieces-of-history-2/"
 S(title="Pieces of History - review by Cheryl Morgan for Emerald City (reprinted at BrightWeavings)",url=BW,kind="reception",substantive=True,date="reprint posted 2016-05-07; Emerald City review of the Sarantine Mosaic",route="direct fetch, browser user agent")
@@ -12,7 +12,7 @@ C(file='bw-pieces',feature="point of view and distance",
   source="Cheryl Morgan, 'Pieces of History', Emerald City (reprinted BrightWeavings, posted 2016-05-07)",url=BW,
   quote="a lowly but conveniently placed observer",page="body, on Crispin",kind="reception",polarity="asserts",date="2016-05-07 reprint",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
 C(file='bw-pieces',feature="other: unreliable chronicler inside the fiction",
-  claim="Morgan reports Kay's note that the historian Procopius, who appears in the novels as Pertennius, is so unpleasant about Theodora that his testimony must be suspect.",
+  claim="Cheryl Morgan reports Kay's note that the historian Procopius is so unpleasant about Theodora that his testimony must be suspect.",
   source="Cheryl Morgan, 'Pieces of History', Emerald City (reprinted BrightWeavings), paraphrasing Kay",url=BW,
   quote="his testimony must be suspect",page="body, on the real history",kind="reception",polarity="asserts",date="2016-05-07 reprint",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="medium: Morgan paraphrases Kay rather than quoting him")
 C(file='bw-pieces',feature="other: court politics rendered without dominating the book",
@@ -23,7 +23,7 @@ C(file='bw-pieces',feature="other: court politics rendered without dominating th
 SHT="https://strangehorizons.com/wordpress/non-fiction/articles/from-tapestry-to-mosaic-the-fantasy-novels-of-guy-gavriel-kay/"
 S(title="From Tapestry to Mosaic: The Fantasy Novels of Guy Gavriel Kay - Christopher Cobb and Mary Anne Mohanraj, Strange Horizons",url=SHT,kind="analysis",substantive=True,date="2000-11-13",route="direct fetch, browser user agent")
 C(file='sh-tapestry',feature="withheld information and inference",
-  claim="Christopher Cobb argues Devin works as an entry-character because, knowing nothing of his land's true history, he lets the reader learn that history as he does.",
+  claim="Christopher Cobb says Devin knows nothing of his land's true history, so the reader can learn that history as he learns it.",
   source="Christopher Cobb, in Cobb and Mohanraj, 'From Tapestry to Mosaic', Strange Horizons, 13 November 2000",url=SHT,
   quote="the reader can learn that history as he learns it",page="Tigana section, CC turn",kind="analysis",polarity="asserts",date="2000-11-13",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
 C(file='sh-tapestry',feature="withheld information and inference",
@@ -102,7 +102,7 @@ C(file='ip-lordofemperors',feature="other: ordinary trades as the vantage on pow
 IPL="https://www.infinityplus.co.uk/nonfiction/lastlightofthesun.htm"
 S(title="The Last Light of the Sun by Guy Gavriel Kay - review by Sandy Auden, infinity plus",url=IPL,kind="reception",substantive=True,date="review of the 2004 novel",route="direct fetch, browser user agent")
 C(file='ip-lastlightofthesun',feature="concrete sensory noun",
-  claim="Sandy Auden says the historical detail arrives with no dry technical facts, so that the reader can smell the horse dung on the roads.",
+  claim="Sandy Auden says Kay delivers his historical detail with no dry technical facts.",
   source="Sandy Auden, review of The Last Light of the Sun, infinity plus",url=IPL,
   quote="There are no dry technical facts",page="body, on Kay's love of history",kind="reception",polarity="asserts",date="review of the 2004 novel",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
 C(file='ip-lastlightofthesun',feature="naming and forms of address",
@@ -151,7 +151,7 @@ C(file='kirkus-a-song-for-arbonne',feature="other: history as material rather th
 KL="https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/the-lion-of-al-rassan/"
 S(title="THE LION[S] OF AL-RASSAN - Kirkus Reviews",url=KL,kind="reception",substantive=True,date="Kirkus review of the 1995 novel",route="direct fetch, browser user agent")
 C(file='kirkus-the-lion-of-al-rassan',feature="closing sentence",
-  claim="Kirkus says the final pages step back from the action and leave the impression that the novel's events have abruptly receded into some long-forgotten history.",
+  claim="Kirkus says the final pages leave the reader with the impression that the novel's events have abruptly receded into some long-forgotten history.",
   source="Kirkus Reviews, unsigned review of The Lions of Al-Rassan",url=KL,
   quote="abruptly receded into some long-forgotten history",page="review body, near the end",kind="reception",polarity="asserts",date="Kirkus review of the 1995 novel",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
 C(file='kirkus-the-lion-of-al-rassan',feature="place and institution description",
@@ -162,7 +162,7 @@ C(file='kirkus-the-lion-of-al-rassan',feature="place and institution description
 KR="https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/river-of-stars/"
 S(title="RIVER OF STARS - Kirkus Reviews",url=KR,kind="reception",substantive=True,date="Kirkus review of the 2013 novel",route="direct fetch, browser user agent")
 C(file='kirkus-river-of-stars',feature="annalist voice and deep time",
-  claim="Kirkus says Kay tells the outcome drawing straight from the annals, quoting a passage that dates the peace at more than two hundred years.",
+  claim="Kirkus says Kay narrates the empire's outcome drawing straight from the annals.",
   source="Kirkus Reviews, unsigned review of River of Stars",url=KR,
   quote="drawing straight from the annals",page="review body",kind="reception",polarity="asserts",date="Kirkus review of the 2013 novel",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
 C(file='kirkus-river-of-stars',feature="plainness and economy",
@@ -343,3 +343,175 @@ NYTS="https://www.nytimes.com/search?query=Guy%20Gavriel%20Kay"
 S(title="New York Times search for Guy Gavriel Kay - 403 to this host; no NYT review cited by any Kay Wikipedia article",url=NYTS,kind="reception",substantive=False,date="checked 2026-09-06",route="direct fetch 403; Wayback CDX wildcard needs authorization; web search budget exhausted")
 MEN="https://archive.org/details/rhetoricsoffanta0000mend"
 S(title="Farah Mendlesohn, Rhetorics of Fantasy (2008) - lending-restricted at the Internet Archive; full text not readable",url=MEN,kind="analysis",substantive=False,date="checked 2026-09-06",route="archive.org metadata found the item; fulltext/inside.php returns Item not available; _djvu.txt 302; HathiTrust 403; Google Books API returned no totals")
+
+RL="https://brightweavings.com/revlions/"
+S(title="Reviews of The Lions of Al-Rassan - BrightWeavings reprint page (Quill & Quire, Edmonton Journal, Washington Post Book World, F&SF, SFX)",url=RL,kind="reception",substantive=True,date="page posted 2014-11-15; the five reviews date from 1995",route="direct fetch, browser user agent; found by diffing the BrightWeavings sitemap against the 153 urls already in state-kay.json")
+C(file='bw2-revlions',feature="plainness and economy",
+  claim="Michelle Sagara says Kay doesn't waste a word or a scene in The Lions of Al-Rassan and that there is no self-indulgent bloating.",
+  source="Michelle Sagara (Michelle West), review of The Lions of Al-Rassan for Quill & Quire (reprinted BrightWeavings)",url=RL,
+  quote="Kay doesn't waste a word or a scene",page="Quill & Quire review, penultimate paragraph",kind="reception",polarity="asserts",date="1995 review; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw2-revlions',feature="annalist voice and deep time",
+  claim="Sagara says the possibilities of civilization developed at the height of the great cities are echoed bitterly by their fall.",
+  source="Michelle Sagara (Michelle West), review of The Lions of Al-Rassan for Quill & Quire (reprinted BrightWeavings)",url=RL,
+  quote="are echoed bitterly by their fall",page="Quill & Quire review",kind="reception",polarity="asserts",date="1995 review; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
+C(file='bw2-revlions',feature="withheld information and inference",
+  claim="Doug Barbour says Kay creates rounded characters precisely by implying the social and psychological baggage they carry into every situation.",
+  source="Doug Barbour, review of The Lions of Al-Rassan for The Edmonton Journal (reprinted BrightWeavings)",url=RL,
+  quote="precisely by implying all the social, as well as psychological, baggage",page="Edmonton Journal review",kind="reception",polarity="asserts",date="1995 review; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw2-revlions',feature="other: architecture of the whole narrative",
+  claim="Barbour says the overarching plan of the narrative is grand but not grandiose, complex but not needlessly complicated.",
+  source="Doug Barbour, review of The Lions of Al-Rassan for The Edmonton Journal (reprinted BrightWeavings)",url=RL,
+  quote="grand but not grandiose, complex but not needlessly complicated",page="Edmonton Journal review",kind="reception",polarity="asserts",date="1995 review; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+C(file='bw2-revlions',feature="place and institution description",
+  claim="John H. Riskind says Kay's fantasy world has the ambience and sense of place of a fine historical novel.",
+  source="John H. Riskind, 'History with a Fantasy Spin', The Washington Post Book World (reprinted BrightWeavings)",url=RL,
+  quote="the ambience and sense of place of a fine historical novel",page="Washington Post Book World review",kind="reception",polarity="asserts",date="1995 review; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw2-revlions',feature="metaphor discipline",
+  claim="Riskind says that in Kay's recent novels the supernatural or fantastic is subdued and relatively subtle, merely providing a backdrop.",
+  source="John H. Riskind, 'History with a Fantasy Spin', The Washington Post Book World (reprinted BrightWeavings)",url=RL,
+  quote="subdued and relatively subtle, merely providing a backdrop",page="Washington Post Book World review",kind="reception",polarity="asserts",date="1995 review; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+C(file='bw2-revlions',feature="civic record register",
+  claim="In a passage Riskind quotes, Kay reports an event becoming legend by being retold among physicians, courts, military companies, universities, taverns and places of worship.",
+  source="Guy Gavriel Kay, The Lions of Al-Rassan, quoted in John H. Riskind's Washington Post Book World review (reprinted BrightWeavings)",url=RL,
+  quote="told so often among physicians, courts, military companies, in universities",page="Washington Post Book World review, quoted passage",kind="reception",polarity="asserts",date="1995 review of the 1995 novel",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
+C(file='bw2-revlions',feature="diction (native vs latinate)",
+  claim="Rob Kilheffer says Kay's contemporary outlook leads to some trouble with the tone of his prose.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="some trouble with the tone of Kay's prose",page="F&SF review",kind="reception",polarity="disputes",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+C(file='bw2-revlions',feature="archaism",
+  claim="Kilheffer names the sentence 'They had been dealt with' on the first page as a line with a distinctly contemporary feel.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="a line with a distinctly contemporary feel",page="F&SF review",kind="reception",polarity="disputes",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw2-revlions',feature="diction (native vs latinate)",
+  claim="Kilheffer says Kay mostly has the tone down well but every now and then his ear is a little off.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="every now and then his ear is a little off",page="F&SF review",kind="reception",polarity="disputes",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+C(file='bw2-revlions',feature="civic record register",
+  claim="Kilheffer praises a scene in which King Ramiro converts his role using a reliance on written law and formal court hearings, general taxation and building projects.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="a reliance on written law and formal court hearings",page="F&SF review",kind="reception",polarity="asserts",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw2-revlions',feature="naming and forms of address",
+  claim="Kilheffer notes Kay shows the characteristic mangling of Asharite names in the mouths of Jaddites, ibn Musa becoming Abenmuza.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="mangling of Arabic (Asharite) names in the mouths of Europeans",page="F&SF review",kind="reception",polarity="asserts",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw2-revlions',feature="withheld information and inference",
+  claim="Kilheffer says Kay is overly fond of withholding information from the reader longer than might seem natural.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="withholding information from the reader longer than might seem natural",page="F&SF review",kind="reception",polarity="disputes",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+C(file='bw2-revlions',feature="omission as information",
+  claim="Kilheffer says Kay leaves the show-duel off-stage and lets the reader glean what is known of it from scattered offhand references thereafter.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="glean what we know of it from scattered offhand references",page="F&SF review",kind="reception",polarity="asserts",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw2-revlions',feature="omission as information",
+  claim="Kilheffer says that by so conspicuously leaving the action out Kay draws the reader's attention to the event more strongly than showing it entire.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="by so conspicuously leaving the action out",page="F&SF review",kind="reception",polarity="asserts",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw2-revlions',feature="dialogue register",
+  claim="Kilheffer says Kay is exceedingly adept at staging taut verbal exchanges, from courtly politicking to flirtatious innuendo.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="exceedingly adept at staging taut verbal exchanges",page="F&SF review",kind="reception",polarity="asserts",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+C(file='bw2-revlions',feature="point of view and distance",
+  claim="Kilheffer says Kay handles the multiple viewpoints skilfully and uses them to add complexity to the world and the plot.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="Kay handles these multiple viewpoints skilfully",page="F&SF review",kind="reception",polarity="asserts",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+C(file='bw2-revlions',feature="consequence on a household",
+  claim="Rob Kilheffer says there are no disposable people in The Lions of Al-Rassan, no fodder for the swords of the heroes.",
+  source="Rob Kilheffer, review of The Lions of Al-Rassan for Fantasy & Science Fiction (reprinted BrightWeavings)",url=RL,
+  quote="there are no disposable people here",page="F&SF review",kind="reception",polarity="asserts",date="copyright 1995 Mercury Press; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw2-revlions',feature="plainness and economy",
+  claim="Dave Langford says that instead of prolonged generalized battle scenes Kay indicates the horror of war and tyranny in short, sharp scenes of atrocity.",
+  source="Dave Langford, review of The Lions of Al-Rassan for SFX Magazine (reprinted BrightWeavings)",url=RL,
+  quote="in short, sharp scenes of atrocity",page="SFX review",kind="reception",polarity="asserts",date="copyright 1995 Dave Langford; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw2-revlions',feature="point of view and distance",
+  claim="Langford says Kay's attention is always on individuals.",
+  source="Dave Langford, review of The Lions of Al-Rassan for SFX Magazine (reprinted BrightWeavings)",url=RL,
+  quote="His attention is always on individuals",page="SFX review",kind="reception",polarity="asserts",date="copyright 1995 Dave Langford; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+
+LB="https://brightweavings.com/leatherboundtiganaintro/"
+S(title="Tigana (leather bound intro) - BrightWeavings stub quoting The Encyclopedia of Fantasy on Kay",url=LB,kind="relay",substantive=True,date="page posted 2014-11-15; the introduction is to the Leather-Bound Masterpieces of Fantasy edition of Tigana",route="direct fetch, browser user agent; the only reachable trace of the Encyclopedia of Fantasy entry, the sf-encyclopedia.com /fe/ namespace being 404")
+C(file='bw2-leatherboundtiganaintro',feature="other: apprenticeship on The Silmarillion",
+  claim="The Encyclopedia of Fantasy, as quoted on this page, says of Kay's work on The Silmarillion that he seems to have learned from the experience.",
+  source="Wikipedia-style relay: BrightWeavings quoting The Encyclopedia of Fantasy (attributed on the page to Peter Kuzca)",url=LB,
+  quote="seems to have learned from the experience",page="introduction, first paragraph",kind="relay",polarity="asserts",date="quoted from the 1997 Encyclopedia of Fantasy; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="low: the page is a truncated stub and its attribution to 'Peter Kuzca' is unverified against the printed encyclopedia")
+
+WOD="https://brightweavings.com/reviews-of-written-on-the-dark/"
+S(title="Reviews of Written on the Dark - BrightWeavings link index",url=WOD,kind="reception",substantive=False,date="posted 2025-06-09",route="direct fetch")
+BWSCH="https://brightweavings.com/faire-ladies-re-imagined-female-characters-in-guy-gavriel-kays-a-song-for-arbonne-by-sylwia-borowska-szerszun/"
+S(title="Faire Ladies Re-imagined: Female Characters in Guy Gavriel Kay's A Song for Arbonne - Sylwia Borowska-Szerszun (BrightWeavings abstract)",url=BWSCH,kind="analysis",substantive=False,date="page posted on BrightWeavings",route="direct fetch; the page carries only an abstract, not the article")
+
+RS="https://brightweavings.com/revsarantium/"
+S(title="Reviews of the Sarantine Mosaic - BrightWeavings reprint page (includes Jo Walton's Tor.com reread and Bill Sheehan for Barnes & Noble)",url=RS,kind="reception",substantive=True,date="page posted 2014-11-15; Walton's review first appeared at tor.com",route="direct fetch, browser user agent; found by diffing the BrightWeavings sitemap against state-kay.json")
+C(file='bw3-revsarantium',feature="point of view and distance",
+  claim="Jo Walton calls the Sarantine Mosaic's style an odd, distanced, elegaic style that she wants to call veiled omniscient.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="an odd, distanced, elegaic style that I want to call",page="Walton review, paragraph beginning These are weird books",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
+C(file='bw3-revsarantium',feature="point of view and distance",
+  claim="Walton says the omniscient narrator knows what will happen and what everyone thinks but does not like to approach too closely.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="but doesn't like to approach too closely",page="Walton review",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
+C(file='bw3-revsarantium',feature="omission as information",
+  claim="Walton says of Kay's narrator that he draws and lifts veils.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="He draws and lifts veils",page="Walton review",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
+C(file='bw3-revsarantium',feature="withheld information and inference",
+  claim="Walton dislikes Kay's trick of describing a character without saying who it is, and says she hates it when Dorothy Dunnett does it too.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="he described but doesn't say who is who",page="Walton review",kind="reception",polarity="disputes",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+C(file='bw3-revsarantium',feature="point of view and distance",
+  claim="Walton says there is a sense that we are always looking through the wrong end of the telescope, that these people are far away.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="looking through the wrong end of the telescope",page="Walton review",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
+C(file='bw3-revsarantium',feature="point of view and distance",
+  claim="Walton says the distanced manner sometimes makes for very beautiful writing but that there is always a pulling back.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="but there's always a pulling back",page="Walton review",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
+C(file='bw3-revsarantium',feature="concrete sensory noun",
+  claim="Jo Walton says the physical details of the Sarantine Mosaic are all real enough to bite.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="The details are all real enough to bite",page="Walton review",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw3-revsarantium',feature="place and institution description",
+  claim="Walton says the details are right for sixth century Byzantium and that even where Kay has made them up they feel right.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="even where he's made them up they feel right",page="Walton review",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw3-revsarantium',feature="place and institution description",
+  claim="Walton says Kay mediates the world through the chariot races and the making of mosaics and often describes it in those terms.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="mediates the world through the chariot races and the making",page="Walton review",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw3-revsarantium',feature="other: pluperfect tense density",
+  claim="Walton says there is more use of the pluperfect tense in these two books than in anything else she can think of.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="more use of the pluperfect tense in these than anything",page="Walton review, on pacing",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
+C(file='bw3-revsarantium',feature="point of view and distance",
+  claim="Walton says a chariot race is seen from the point of view of a driver, someone in the crowd, and an undercook for the Blue faction making soup.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="an undercook for the Blue faction making soup",page="Walton review, on pacing",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw3-revsarantium',feature="metaphor discipline",
+  claim="Walton says the small amount of magic runs glinting through everything else like the silver threads in shot silk.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="like the silver threads in shot silk",page="Walton review, closing",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+C(file='bw3-revsarantium',feature="other: naming that does not hide its original",
+  claim="Walton says Kay is not trying to hide that Sarantium is Byzantium, Varena is Ravenna, Valerius is Justinian and Pertennius is Procopius.",
+  source="Jo Walton, reread of the Sarantine Mosaic (originally Tor.com, reprinted BrightWeavings)",url=RS,
+  quote="Kay isn't trying to hide the fact that Sarantium is Byzantium",page="Walton review, opening",kind="reception",polarity="asserts",date="page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+
+RLL="https://brightweavings.com/revlastlight/"
+S(title="Reviews of The Last Light of the Sun - BrightWeavings reprint page (Challenging Destiny; Cheryl Morgan for Emerald City)",url=RLL,kind="reception",substantive=True,date="page posted 2014-11-15; Morgan's review is of the 2004 novel",route="direct fetch, browser user agent")
+C(file='bw3-revlastlight',feature="place and institution description",
+  claim="Cheryl Morgan says the bulk of The Last Light of the Sun is about people and about a developing society.",
+  source="Cheryl Morgan, review of The Last Light of the Sun, Emerald City (reprinted BrightWeavings)",url=RLL,
+  quote="and about a developing society",page="Morgan review, later section",kind="reception",polarity="asserts",date="review of the 2004 novel; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='bw3-revlastlight',feature="annalist voice and deep time",
+  claim="Morgan says the title refers not only to the sun setting on the lands of the Cyngael but to the sun setting on a whole lifestyle.",
+  source="Cheryl Morgan, review of The Last Light of the Sun, Emerald City (reprinted BrightWeavings)",url=RLL,
+  quote="the sun setting on a whole lifestyle",page="Morgan review, later section",kind="reception",polarity="asserts",date="review of the 2004 novel; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="chronicle-line",confidence="high")
+C(file='bw3-revlastlight',feature="per-speaker register",
+  claim="In a passage Morgan reproduces, Kay marks a fairy's antiquity by having a character notice that she speaks Cyngael the way his grandfather had.",
+  source="Guy Gavriel Kay, The Last Light of the Sun, quoted in Cheryl Morgan's Emerald City review (reprinted BrightWeavings)",url=RLL,
+  quote="She spoke Cyngael the way his grandfather had",page="Morgan review, block quotation",kind="reception",polarity="asserts",date="2004 novel; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="herald-pools",confidence="high")
+
+RAB="https://brightweavings.com/revarbonne/"
+S(title="Reviews of A Song for Arbonne - BrightWeavings reprint page (Douglas Barbour, 'Fantasy from on High', Books in Canada)",url=RAB,kind="reception",substantive=True,date="page posted 2014-11-15; Barbour's review is of the 1992 novel",route="direct fetch, browser user agent")
+C(file='bw3-revarbonne',feature="other: refusal to repeat a previous book",
+  claim="Douglas Barbour says what makes Kay the most interesting writer of high fantasy is his willingness and ability to explore new territory in each new book.",
+  source="Douglas Barbour, 'Fantasy from on High', Books in Canada (reprinted BrightWeavings)",url=RAB,
+  quote="explore new territory in each new book",page="Books in Canada review, first sentence",kind="reception",polarity="asserts",date="review of the 1992 novel; page posted 2014-11-15",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")

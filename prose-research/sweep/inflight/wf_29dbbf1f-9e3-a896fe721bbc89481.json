@@ -3,12 +3,12 @@
  "name": "leguin",
  "angle": "academic-2",
  "tag": null,
- "lines": 206,
+ "lines": 229,
  "firstTs": "2026-09-06T18:59:47.841Z",
- "lastTs": "2026-09-06T19:27:25.425Z",
+ "lastTs": "2026-09-06T19:32:54.317Z",
  "tools": {
   "Read": 1,
-  "Bash": 49,
+  "Bash": 56,
   "ToolSearch": 1,
   "WebFetch": 5,
   "WebSearch": 1
@@ -28,18 +28,31 @@
   "https://api.crossref.org/works?query.bibliographic=Le+Guin+prose+style&rows=25&select=title,author,issued,container-title,DOI,URL",
   "https://web.archive.org/cdx/search/cdx?url=depauw.edu/sfs/backissues/8/*&fl=original,timestamp&collapse=urlkey&limit=200",
   "https://api.semanticscholar.org/graph/v1/paper/search",
-  "https://api.crossref.org/works/10.1080/02564719908530238"
+  "https://api.crossref.org/works/10.1080/02564719908530238",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aunderstandingurs0000cumm",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aapproachestofict0000bitt",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Afarthestshoresof0000slus",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00bloo",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinsle0000unse",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00olan",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Afantasytradition0000atte",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinvoy0000unse",
+  "https://openlibrary.org/search/inside.json?q=%22wryly+cataloging+a+weird+matter%22",
+  "https://openlibrary.org/search.json?q=Dancing+with+dragons+Le+Guin+critics&fields=title,author_name,first_publish_year,ia&limit=5"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now writing the checkpoint with the claims harvested so far.",
+ "lastAssistantText": "Pre-verifying every new quotation against its own URL.",
  "run": "wf_29dbbf1f-9e3",
  "agent": "a896fe721bbc89481",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_29dbbf1f-9e3/agent-a896fe721bbc89481.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-leguin-academic-2.json",
-  "claims": 30,
+  "claims": 86,
   "complete": false,
-  "mtime": "14:37:34"
+  "mtime": "15:29:09"
  }
 }

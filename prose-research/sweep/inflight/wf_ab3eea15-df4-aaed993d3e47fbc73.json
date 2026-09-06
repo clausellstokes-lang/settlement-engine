@@ -1,0 +1,33 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i386-400",
+ "lines": 82,
+ "firstTs": "2026-09-06T19:27:02.286Z",
+ "lastTs": "2026-09-06T19:30:47.813Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 20,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.phantastik-couch.de/magazin/interview/10-2017-robin-hobb-engl-ov/",
+  "https://www.phantastik-couch.de/magazin/interview/10-2017-robin-hobb/",
+  "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+  "https://studenttheses.uu.nl/server/api/pid/find?id=hdl:20.500.12932/11119",
+  "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/bundles",
+  "https://studenttheses.uu.nl/server/api/core/bundles/a38c05ee-a79b-4582-9472-cc0a4eb19c50/bitstreams",
+  "https://studenttheses.uu.nl/server/api/core/bitstreams/f473796a-a2a2-4791-95bd-f039a6c27af8/content"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and read back (15 claims, 15 verdicts, max trueWording 12 words).",
+ "run": "wf_ab3eea15-df4",
+ "agent": "aaed993d3e47fbc73",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_ab3eea15-df4/agent-aaed993d3e47fbc73.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i386-400.json",
+  "exists": true
+ }
+}

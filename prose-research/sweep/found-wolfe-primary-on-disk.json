@@ -1,0 +1,15 @@
+{
+  "complete": false,
+  "coverage": "IN PROGRESS after 8 of the named roster.",
+  "sourcesRead": [
+    {"title":"Gene Wolfe, \"Nor the Summers as Golden: Writing Multivolume Works\" (in Shadows of the New Sun, ed. Peter Wright, 2007, pp. 208-213), full text at Gwern.net","url":"https://gwern.net/doc/culture/2007-wolfe","kind":"own-words","substantive":true,"date":"2007 (essay); Gwern transcription page","route":"already on disk: sweep/wolfe-raw/gw-culture-2007.txt (17 KB)"},
+    {"title":"Gene Wolfe, \"Elfland\" (1987 travelogue-in-persona guide to the fantasy field)","url":"https://gwern.net/doc/fiction/gene-wolfe/1987-wolfe.pdf","kind":"own-words","substantive":true,"date":"1987","route":"already on disk: sweep/wolfe-raw/gw-wolfe-1987.txt, OCR of the PDF (11 KB)"},
+    {"title":"Gene Wolfe, live chat channel Q&A transcript (Gwern file labelled 2015; internal timestamp 11/02/96)","url":"https://gwern.net/doc/fiction/gene-wolfe/2015-genewolfe-sf-chatchannel-interview.txt","kind":"own-words","substantive":true,"date":"transcript timestamped 11/02/96 within the log; Gwern filename says 2015","route":"already on disk: sweep/wolfe-raw/gw-chat-2015.txt (22 KB)"},
+    {"title":"David Wilbanks, \"2005 interview I did with Gene Wolfe for Hellnotes\"","url":"https://davoortwilbo.blogspot.com/2015/07/2005-interview-i-did-with-gene-wolfe.html","kind":"own-words","substantive":true,"date":"interview 2005; blog repost 26 July 2015","route":"already on disk: sweep/wolfe/davoortwilbo.txt (8 KB)"},
+    {"title":"Marc Aramini, Science Fiction Book Club interview (September 2020), conducted by John Grayshaw","url":"https://www.middletownlibrary.org/","kind":"analysis","substantive":true,"date":"September 2020","route":"already on disk: sweep/wolfe/middletown-aramini.txt, PDF text (32 KB)"},
+    {"title":"Joan Gordon, \"The Haunted Library of Gene Wolfe\", Los Angeles Review of Books","url":"https://lareviewofbooks.org/article/the-haunted-library-of-gene-wolfe","kind":"analysis","substantive":true,"date":"3 March 2016","route":"already on disk: sweep/wolfe-raw/larb-haunted-library.txt (11 KB)"},
+    {"title":"Fletcher Vredenburgh, \"I, Severian: The Book of the New Sun by Gene Wolfe\", Black Gate","url":"https://www.blackgate.com/2018/11/20/i-severian-the-book-of-the-new-sun-by-gene-wolfe/","kind":"analysis","substantive":true,"date":"20 November 2018","route":"already on disk: sweep/wolfe-raw/blackgate-severian.txt"},
+    {"title":"Neil Gaiman, \"My hero: Gene Wolfe\", The Guardian","url":"https://www.theguardian.com/books/2011/may/13/gene-wolfe-hero-neil-gaiman-sf","kind":"reception","substantive":true,"date":"13 May 2011","route":"already on disk: sweep/wolfe/guardian-gaiman.txt"}
+  ],
+  "claims": []
+}

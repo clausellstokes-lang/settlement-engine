@@ -3,12 +3,12 @@
  "name": "kay",
  "angle": "academic-routes",
  "tag": null,
- "lines": 262,
+ "lines": 288,
  "firstTs": "2026-09-06T19:09:46.390Z",
- "lastTs": "2026-09-06T19:27:57.609Z",
+ "lastTs": "2026-09-06T19:32:55.830Z",
  "tools": {
-  "Read": 1,
-  "Bash": 74,
+  "Read": 2,
+  "Bash": 81,
   "ToolSearch": 1,
   "WebSearch": 1
  },
@@ -100,7 +100,17 @@
   "https://web.archive.org/web/20150917090646id_/https://www.questia.com/library/journal/1G1-223225904/guy-gavriel-kay-an-introduction",
   "https://brightweavings.com/privacy/",
   "https://repozytorium.uwb.edu.pl/jspui/bitstream/11320/8028/1/When_Gods_are_Absent_from_Fantasy.pdf",
-  "https://api.openalex.org/works?filter=primary_location.source.issn:0897-0521,publication_year:2009&per-page=100"
+  "https://api.openalex.org/works?filter=primary_location.source.issn:0897-0521,publication_year:2009&per-page=100",
+  "https://www.degruyterbrill.com/document/doi/10.1515/9781802703696/html",
+  "https://www.degruyter.com/document/doi/10.1515/9781802703696-006/html",
+  "https://arc-humanities.org/sitemap.xml",
+  "https://ruor.uottawa.ca/server/api/discover/search/objects?query=%22Worlds%20of%20Wonder%22&size=10",
+  "https://openlibrary.org/search/inside.json?q=%22Successful+Quest+for+Voice%22",
+  "https://www.cambridge.org/core/product/identifier/9781805435631%23c9/type/book_part",
+  "https://www.cambridge.org/core/product/identifier/9781787448858%23c11/type/book_part",
+  "https://onlinelibrary.wiley.com/doi/10.1111/oli.70057",
+  "https://www.aup.nl/en/book/9781802703696/medievalism-in-english-canadian-identity-and-literature",
+  "http://web.archive.org/cdx/search/cdx?url=questia.com*&filter=original:.*fantastic-in-the-arts.*&limit=60&fl=timestamp,original&collapse=original"
  ],
  "filesWritten": [],
  "lastAssistantText": "Wolfe recovered. Let me build and pre-verify the claim set.",
@@ -108,5 +118,10 @@
  "agent": "a7ce26cfdf8b0a937",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_b55db7cd-25f/agent-a7ce26cfdf8b0a937.jsonl",
  "journal": "in-flight",
- "checkpointFile": null
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-kay-academic-routes.json",
+  "claims": 30,
+  "complete": false,
+  "mtime": "15:29:20"
+ }
 }

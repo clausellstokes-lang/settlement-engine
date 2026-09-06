@@ -871,5 +871,120 @@
    "fromFile": "verdicts-hobb-i375-385.json"
   },
   "fullSentence": true
+ },
+ {
+  "index": 399,
+  "feature": "register modulation",
+  "claim": "Duits's central criticism of the Dutch translators is that they do not change their style in the rest of the translation after the encyclopaedic opening.",
+  "source": "Iris Duits, BA thesis, Utrecht University, April 2012",
+  "url": "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+  "quote": "Feberwee and Cuijpers do not change their style in the rest",
+  "page": "section 6, p.15",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2012-04",
+  "routeHint": "DSpace REST bitstream content endpoint, pypdf text",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 399,
+   "verdict": "PARTIAL",
+   "trueWording": "Feberwee and Cuijpers do not change their style in the rest",
+   "note": "Quote exact on printed p.15 ('...in the rest of their translation'), and the 'after the encyclopaedic opening' limb is supported by its position right after the archaism remark. But the page presents this as one item in a run of criticisms (over-complex sentences, omitted clauses, added information, the stigmatised 'hun'), and the thesis's introduction instead names sentence structure and word order as the most important change she would make.",
+   "unsupportedLimb": "that this is Duits's central criticism — the thesis frames it as one of several",
+   "fromFile": "verdicts-hobb-i386-400.json"
+  }
+ },
+ {
+  "index": 403,
+  "feature": "concrete sensory noun",
+  "claim": "Hobb's description of the Chyurda ends on the humblest of them wearing fine furs as if they were homespun.",
+  "source": "Robin Hobb, Assassin's Apprentice p.383, quoted in Iris Duits, BA thesis, Utrecht University, April 2012",
+  "url": "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+  "quote": "even the humblest wore fine furs as if they were",
+  "page": "section 2, p.6",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "2012-04",
+  "routeHint": "DSpace REST bitstream content endpoint, pypdf text",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 403,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the description ends on the fine-furs clause — one further sentence closes the block quote after it",
+   "trueWording": "They strode alongside us, mounted as we were",
+   "note": "The quoted words are verbatim on printed p.6 (full form: wore fine furs as if they were no more than homespun, Hobb 383). But the furs clause is second-to-last, not last: the block quote closes with the striding sentence above, ending 'no difficulty keeping up with the horses all day.' Use 'ends on' only of the Chyurda's dress, not of the passage.",
+   "fromFile": "verdicts-hobb-i401-415.json"
+  }
+ },
+ {
+  "index": 429,
+  "feature": "naming and forms of address",
+  "claim": "Paola Cartoceti, Hobb's Italian translator, says the main problem of the job was the names.",
+  "source": "Paola Cartoceti, 'TRADUZIONE ROBIN HOBB', Sane Inside Insanity, last updated March 2011",
+  "url": "https://sbcreations.blogspot.com/p/traduzione-robin-hobb.html",
+  "quote": "Il problema principale sono stati i nomi",
+  "page": "opening paragraphs",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2011-03",
+  "routeHint": "direct curl with browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 429,
+   "verdict": "PARTIAL",
+   "trueWording": "Il problema principale sono stati i nomi",
+   "unsupportedLimb": "the given name 'Paola' — the page carries no byline for the post",
+   "note": "Raw HTML fetched direct (HTTP 200). The quote is exact in the opening paragraphs and the substance is fully supported: the writer says in the first person that she translated the Farseer, Liveship Traders and Tawny Man cycles for Fanucci, that it was the most demanding work of her career, and then that the main problem was the names. But the page never prints 'Paola': the only naming evidence is the sidebar 'MY OTHER BLOGS' link PBCartoceti, so the surname holds and the given name does not.",
+   "fromFile": "verdicts-hobb-i416-430.json"
+  }
+ },
+ {
+  "index": 443,
+  "feature": "civic record register",
+  "claim": "Tkach quotes a chapter epigraph in which Hobb warns that to speak of the Mountain Kingdom as a kingdom is to start from a basic misunderstanding of the area and its folk.",
+  "source": "Robin Hobb, chapter epigraph, quoted in Ткач П. Б., Науковий вісник МГУ, Сер. Філологія, 2021 № 52 том 2, с. 184",
+  "url": "https://vestnik-philology.mgu.od.ua/archive/v52/part_2/43.pdf",
+  "quote": "To speak of the Mountain Kingdom as a kingdom is to start out",
+  "page": "p.184, section on калькування",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "2021",
+  "routeHint": "Wayback raw capture 20231020191431id_ of the journal PDF, pypdf",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 443,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'a chapter epigraph' — the article never calls the quoted passage an epigraph; it presents it only as a translation example",
+   "trueWording": "\"is to start out with a basic misunderstanding of the area\"",
+   "note": "PDF fetched through the Wayback raw capture named in the routeHint (HTTP 200, 398,592 bytes) and extracted with pdftotext. The English sentence is verbatim on PDF page 3, printed p.184, introduced by the definition of калькування, exactly as cited, and the misunderstanding-of-the-area-and-folk limb is supported word for word. What the page does not support is the genre label: the word epigraph (or епіграф) appears nowhere in the article, which quotes the passage as an unlabelled source example beside its Ukrainian rendering.",
+   "fromFile": "verdicts-hobb-i431-445.json"
+  }
+ },
+ {
+  "index": 444,
+  "feature": "annalist voice and deep time",
+  "claim": "Tkach quotes a Hobb epigraph attributing the Farseer naming custom to accident according to a more ancient tradition.",
+  "source": "Robin Hobb, chapter epigraph, quoted in Ткач П. Б., Науковий вісник МГУ, 2021 № 52 том 2, с. 183",
+  "url": "https://vestnik-philology.mgu.od.ua/archive/v52/part_2/43.pdf",
+  "quote": "A more ancient tradition attributes such names to accident",
+  "page": "p.183, section on семантична експлікація",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "2021",
+  "routeHint": "Wayback raw capture 20231020191431id_ of the journal PDF, pypdf",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "verdict": {
+   "index": 444,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'a Hobb epigraph' attributing 'the Farseer naming custom' — the article never says epigraph, and the excerpt names no Farseers",
+   "trueWording": "\"A more ancient tradition attributes such names to accident, at least initially\"",
+   "note": "Verbatim on PDF page 3, printed p.184, in the семантична експлікація section — the section is right but the cited p.183 is off by one. Two limbs fail: the article never labels the passage an epigraph, and the excerpt's antecedent is only 'such names', continuing with King Taker and King Ruler as the first two Outislanders to rule what became the Six Duchies; the Farseers are named on the same page but in a separate, unrelated функціональний аналог example.",
+   "fromFile": "verdicts-hobb-i431-445.json"
+  }
  }
 ]

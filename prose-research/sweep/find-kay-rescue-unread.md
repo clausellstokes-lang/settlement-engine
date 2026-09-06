@@ -24,3 +24,13 @@ Angle: claim the roster already named but never read; the well-known critics wit
 
 ## Still to do
 PW, Booklist, Library Journal, NYT at the primary; Faren Miller's Locus reviews; Locus at locusmag primary; retry archive.org for kayhistory + IA full-text (Mendlesohn/Attebery); Encyclopedia.com "Kay, Guy Gavriel" (Contemporary Authors relay).
+
+## FINAL (run closed)
+found-kay-rescue-unread.json written with complete:true — 40 sources (30 substantive), 100 claims, every quotation re-searched verbatim against the fetched text by build-rescue.py before writing (zero misses).
+
+Roster outcomes: FETCHED — Morgan x2, Cobb/Mohanraj x3 (one via Wayback), Kirkus x7, PW x6, Infinity Plus x4 (Auden/Shoul, NOT Gevers), Attebery full OCR text.
+NOT FOUND — SFE Clute entry (404 on four URL forms; SFE has no Kay entry), Encyclopedia of Fantasy 1997 (only a seven-word relay quotation survives on BrightWeavings), Faren Miller's Locus reviews (Sept 1992 TOC confirms the Arbonne review at p.17; the text is not online), any NYT review.
+BLOCKED — Mendlesohn Rhetorics of Fantasy (lending-restricted everywhere tried), Booklist Online, Library Journal.
+BONUS (sitemap diff against state-kay.json's 153 urls): Jo Walton's "veiled omniscient", Rob Kilheffer (F&SF) on withheld information and off-stage action, Dave Langford (SFX), Michelle Sagara (Quill & Quire), John H. Riskind (Washington Post Book World), plus four SF Site reviews via Wayback (Hromic on history as residue).
+
+Session limits hit: WebSearch budget exhausted (200/200) mid-run; DuckDuckGo captcha, Mojeek empty, HathiTrust 403, sfsite.com and washingtonpost.com unreachable directly. Discovery continued via site sitemaps, Wikipedia wikitext reference-harvesting, and the Wayback availability API.
