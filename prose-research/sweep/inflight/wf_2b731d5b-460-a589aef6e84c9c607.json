@@ -66,8 +66,8 @@
  "journal": "failed",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-leguin-academic-2.json",
-  "claims": 102,
-  "complete": false,
-  "mtime": "15:35:57"
+  "claims": 108,
+  "complete": true,
+  "mtime": "15:40:43"
  }
 }

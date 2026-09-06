@@ -988,6 +988,29 @@
   }
  },
  {
+  "index": 460,
+  "feature": "other: style resists the short form",
+  "claim": "Hobb says her Robin Hobb style itself, not her choice of subject, is what prevents her writing anything shorter than a novella.",
+  "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+  "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+  "quote": "Something about the style does not lend itself to shorter tales",
+  "page": "opening paragraph",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2004",
+  "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 460,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'not her choice of subject' — the essay names only the style and never contrasts it with subject matter",
+   "trueWording": "Something about the style does not lend itself to shorter tales",
+   "note": "Wayback raw id_ capture fetched; quote verbatim in the opening paragraph, preceded by 'Robin Hobb seems unable to write anything that is less than a novella in length', so the novella limb holds. But the exclusive contrast is added by the claim: Hobb never sets style against subject, and a few lines later she attributes short-story difficulty to inspiration ('Either I get a wonderful idea for a short story, and I write it, or I don't'), which cuts against 'not her choice of subject'. Drop the contrast and the claim verifies.",
+   "fromFile": "verdicts-hobb-i446-460.json"
+  }
+ },
+ {
   "index": 464,
   "feature": "point of view and distance",
   "claim": "Hobb says she decided to write the first Farseer book in the first person and to attempt a completely different sort of voice and telling.",

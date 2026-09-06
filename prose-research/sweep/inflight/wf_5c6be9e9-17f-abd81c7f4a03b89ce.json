@@ -3,13 +3,13 @@
  "name": "wolfe",
  "angle": "monographs",
  "tag": null,
- "lines": 318,
+ "lines": 365,
  "firstTs": "2026-09-06T19:25:33.191Z",
- "lastTs": "2026-09-06T19:38:54.363Z",
+ "lastTs": "2026-09-06T19:42:29.356Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 73,
+  "Bash": 85,
   "WebFetch": 2,
   "WebSearch": 2,
   "mcp__Claude_Browser__browser_batch": 3
@@ -72,7 +72,13 @@
   "https://ultan.org.uk/micro-wolfenomics-joan-gordon-reviews-gene-wolfes-first-four-novels-a-chapter-guide-by-michael-andre-driussi/",
   "https://ultan.org.uk/lexicon-urthus-second-edition/",
   "https://sf-encyclopedia.com/entry/wolfe_gene",
-  "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29B0D31A5A0EE9BB4B0D1"
+  "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29B0D31A5A0EE9BB4B0D1",
+  "http://web.archive.org/cdx/search/cdx?url=depauw.edu/sfs/reviews_pages/r95.htm&fl=original,timestamp,statuscode&limit=5",
+  "http://web.archive.org/cdx/search/cdx?url=depauw.edu/sfs/&fl=original,timestamp&limit=3",
+  "http://web.archive.org/cdx/search/cdx?url=depauw.edu%2Fsfs&matchType=domain&fl=original&collapse=urlkey&limit=200&filter=original:.*r95.*",
+  "https://web.archive.org/web/${ts}id_/http://www.depauw.edu/sfs/$p",
+  "http://web.archive.org/cdx/search/cdx?url=depauw.edu%2Fsfs%2Fbirs*&fl=original&collapse=urlkey&limit=500",
+  "https://web.archive.org/web/${ts}id_/http://www.depauw.edu/sfs/birs/bir$n.htm"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",

@@ -1,4 +1,4 @@
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 51242 Killed: 9               python3 - "$BLOCK"  <<'PY'
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 52330 Killed: 9               python3 - "$BLOCK"  <<'PY'
 import sys,io,re
 p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
 s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]

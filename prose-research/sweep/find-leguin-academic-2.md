@@ -65,3 +65,18 @@ plus ursulakleguinvoy0000unse (De Bolt 1979), found laterally.
 - **Cadden (FID)**: "...in much of Le Guin's stories, is a steady use of free indirect discourse."; "Le Guin uses free indirect discourse to help put speakers on a more equal ideological footing with other characters"
 - **De Bolt ed. (Pfeiffer quoting Woodcock)**: "Le Guin's prose style draws Woodcock's attention: it is 'a style of crystalline clarity and functional flexibility that has always reminded me...'"
 - **Bittner / Bloom**: LHD is interleaved "with extracts from Estraven's journal, an anthropological report, and Gethenian legends, folktales, religious..."
+
+### Session-2 route ledger (final)
+- **WORKED**: openlibrary.org/search/inside.json with `identifier:<id> AND "<phrase>"` — opened all ten blocked roster monographs plus five lateral scans.
+- **WORKED**: live fetch with a browser UA — Strange Horizons (Burt on Plotz), Public Books (Plotz's 2015 Le Guin interview), paradoxa.com ToC.
+- **WORKED**: Crossref REST — Trimarco 1999 metadata, Kuts & Uholkova 2020 publisher JATS abstract, and the DOI for Myers 1983.
+- **DIED MID-SESSION**: Wayback Machine (CDX and /web/ both returned "Internet Archive services are temporarily offline"), closing the SFS route the predecessor used. archive.org /metadata/ and the Open Library FTS proxy stayed up throughout.
+- **BLOCKED ALL SESSION**: OpenAlex (429, Retry-After 16719s), Semantic Scholar (429), JSTOR (page will not render), online.ucpress.edu (403), Google Books, HathiTrust.
+- **NOT DIGITISED ANYWHERE REACHABLE**: Donna R. White, *Dancing with Dragons* (1999) — Open Library has the edition record, no scan; it survives only as a bibliography line in other books. T. A. Shippey, "The Magic Art and the Evolution of Words" (Mosaic 10.2, 1977) — same.
+- **CORRECTION TO THE BRIEF**: Paradoxa's Le Guin issue (no. 21, ed. Sylvia Kelso) is dated **2009**, not 2008. Its two register-relevant articles are Erlich, "Always Coming Home: 'Ethnography, unBible, and Utopian Satire'" (pp. 137-166) and Rochelle, "A Wave in My Mind" (pp. 293-309). Both are sold as individual PDFs and were not fetched.
+
+### Coverage gap worth the chair's attention
+Across the entire reachable scanned corpus, **Mike Cadden is the only critic who discusses "A Description of Earthsea"** — the ~30-page gazetteer appendix to *Tales from Earthsea*, the single closest thing in Le Guin to a settlement dossier. Three of his sentences about it (neither story nor afterword; told from outside the world; the anthropologist's voice) are the highest-value claims this angle produced.
+
+### Pre-verification
+Every archive.org quotation was re-queried against its own scoped url before writing — 62 of 62 passed. The ten web quotations were grepped against the stripped HTML of the fetched page. No quotation was written from memory.

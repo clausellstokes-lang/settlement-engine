@@ -3,12 +3,12 @@
  "name": "leguin",
  "angle": "academic-2",
  "tag": null,
- "lines": 295,
+ "lines": 322,
  "firstTs": "2026-09-06T18:59:47.841Z",
- "lastTs": "2026-09-06T19:38:29.480Z",
+ "lastTs": "2026-09-06T19:41:36.469Z",
  "tools": {
   "Read": 1,
-  "Bash": 72,
+  "Bash": 78,
   "ToolSearch": 1,
   "WebFetch": 8,
   "WebSearch": 2
@@ -57,18 +57,24 @@
   "https://online.ucpress.edu/sfs/article/10/3/306",
   "https://www.sfrareview.org/",
   "https://www.google.com/search?q=%22Coyote%27s+Song%22+Erlich+Le+Guin",
-  "https://sfrareviewarchive.wordpress.com/"
+  "https://sfrareviewarchive.wordpress.com/",
+  "https://archive.org/metadata/childrensliterat28gera",
+  "https://archive.org/metadata/ursulakleguinpri0000coge",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Achildrensliterat28gera",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinpri0000coge",
+  "https://doi.org/10.1525/sfs.10.3.0306",
+  "https://openlibrary.org/search/inside.json?q=%22The+Magic+Art+and+the+Evolution+of+Words%22"
  ],
  "filesWritten": [],
- "lastAssistantText": "Pre-verifying every new quotation against its own URL.",
+ "lastAssistantText": "The checkpoint file is written with `complete: true`. Returning the structured result now.",
  "run": "wf_29dbbf1f-9e3",
  "agent": "a896fe721bbc89481",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_29dbbf1f-9e3/agent-a896fe721bbc89481.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-leguin-academic-2.json",
-  "claims": 102,
-  "complete": false,
-  "mtime": "15:35:57"
+  "claims": 108,
+  "complete": true,
+  "mtime": "15:40:43"
  }
 }

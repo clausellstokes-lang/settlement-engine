@@ -3,14 +3,15 @@
  "name": "kay",
  "angle": "academic-routes",
  "tag": null,
- "lines": 360,
+ "lines": 363,
  "firstTs": "2026-09-06T19:09:46.390Z",
- "lastTs": "2026-09-06T19:37:46.045Z",
+ "lastTs": "2026-09-06T19:40:35.565Z",
  "tools": {
   "Read": 3,
   "Bash": 101,
   "ToolSearch": 1,
-  "WebSearch": 1
+  "WebSearch": 1,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://api.crossref.org/journals/0897-0521/works?filter=from-pub-date:2009-01-01,until-pub-date:2010-12-31&rows=100&select=DOI,title,author,volume,issue,page,published-print",
@@ -128,7 +129,7 @@
  "run": "wf_b55db7cd-25f",
  "agent": "a7ce26cfdf8b0a937",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_b55db7cd-25f/agent-a7ce26cfdf8b0a937.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-kay-academic-routes.json",
   "claims": 46,

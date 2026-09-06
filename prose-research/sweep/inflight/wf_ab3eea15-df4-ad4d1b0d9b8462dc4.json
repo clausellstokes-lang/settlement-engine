@@ -3,12 +3,13 @@
  "name": "hobb",
  "angle": null,
  "tag": "i446-460",
- "lines": 110,
+ "lines": 121,
  "firstTs": "2026-09-06T19:34:11.998Z",
- "lastTs": "2026-09-06T19:38:51.268Z",
+ "lastTs": "2026-09-06T19:40:50.862Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 25
+  "Bash": 27,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://verlorene-werke.blogspot.com/2017/07/neuauflage-robin-hobb-weitseher-mit.html",
@@ -22,16 +23,18 @@
   "https://web.archive.org/web/20231020191431id_/https://vestnik-philology.mgu.od.ua/archive/v52/part_2/43.pdf",
   "https://studenttheses.uu.nl/server/api/core/bitstreams/232bf1b5-ecab-49c6-9f70-39f67fb9c119/content",
   "https://studenttheses.uu.nl/server/api/core/items?embed=bundles",
-  "https://studenttheses.uu.nl/rest/handle/20.500.12932/10046"
+  "https://studenttheses.uu.nl/rest/handle/20.500.12932/10046",
+  "https://vestnik-philology.mgu.od.ua/archive/v52/part_2/43.pdf",
+  "https://studenttheses.uu.nl/handle/20.500.12932/10046"
  ],
  "filesWritten": [],
- "lastAssistantText": "All 15 verified against raw pages. Writing the checkpoint.",
+ "lastAssistantText": "Checkpoint written and read back (18,801 bytes, 15 claims / 15 verdicts, max trueWording 11 words). All ten distinct sources were reached as raw text — no summarizer, no BLOCKED.",
  "run": "wf_ab3eea15-df4",
  "agent": "ad4d1b0d9b8462dc4",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_ab3eea15-df4/agent-ad4d1b0d9b8462dc4.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i446-460.json",
-  "exists": false
+  "exists": true
  }
 }
