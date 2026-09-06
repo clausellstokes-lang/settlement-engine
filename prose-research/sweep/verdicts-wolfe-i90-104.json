@@ -1,0 +1,236 @@
+{
+ "name": "wolfe",
+ "chunk": 6,
+ "claims": [
+  {
+   "index": 90,
+   "feature": "indirection deciphered by the reader",
+   "claim": "The true story is conveyed by indirection and reveals itself through the reader's ultimate decipherment.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "conveyed by indirection",
+   "page": ""
+  },
+  {
+   "index": 91,
+   "feature": "subliminal clues lucid in retrospect",
+   "claim": "Fifth Head's clues are almost subliminal on first pass but in retrospect or after rereading lucid and inevitable, and the key twists are extractable from the manuscript that tells the story.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "in retrospect or after rereading almost invariably lucid",
+   "page": ""
+  },
+  {
+   "index": 92,
+   "feature": "recursive retrospect",
+   "claim": "Clute names the structure shared by the major works 'recursive retrospect': a narrator looking back on events whose meaning loops back on the telling.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "recursive retrospect",
+   "page": ""
+  },
+  {
+   "index": 93,
+   "feature": "taxing reticences of presentation",
+   "claim": "Wolfe's reticences of presentation make the work very nearly opaque, combining the utterly present and the implacably remote.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "taxing reticences of presentation",
+   "page": ""
+  },
+  {
+   "index": 94,
+   "feature": "confessional mode under question",
+   "claim": "Peace is a childhood narrated all unknowingly from beyond the grave, its truth value unrelentingly put under the question.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "unrelentingly put under the question",
+   "page": ""
+  },
+  {
+   "index": 95,
+   "feature": "sins of omission with visible gaps",
+   "claim": "Severian's unreliability is mostly omission; the gaps are not hidden but catch gently on first reading and insistently on rereading.",
+   "source": "Evenson, Reactor 2021",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "more sins of omission than outright deception",
+   "page": ""
+  },
+  {
+   "index": 96,
+   "feature": "telling order differs from event order",
+   "claim": "The rearranged order of recounting, combined with gaps, leaves it uncertain whether Severian hides things or merely tells what he wants in the order he wants, making the unreliability feel human rather than literary.",
+   "source": "Evenson, Reactor 2021",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "less literarily motivated, more informal and human",
+   "page": ""
+  },
+  {
+   "index": 97,
+   "feature": "hint placed before its explanation",
+   "claim": "Severian's obscure wish to carry the moon-landing picture to a forest reads as random until pages later we learn the moon is now forested; Wolfe often passes such moments in silence.",
+   "source": "Evenson, Reactor 2021",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "we later discover that it's exactly right",
+   "page": ""
+  },
+  {
+   "index": 98,
+   "feature": "overlapping selves narrate as one",
+   "claim": "After absorbing Thecla and the Autarch the narrator is a multiplicity speaking as a oneness; a parenthetical memory of torturing for fun turns out to be Thecla's.",
+   "source": "Evenson, Reactor 2021",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "a multiplicity trying to speak as if it were a oneness",
+   "page": ""
+  },
+  {
+   "index": 99,
+   "feature": "chapter ends in muddle explained next chapter (reader comment)",
+   "claim": "A commenter observes that chapters tend to end in an incoherent hugger-mugger that the next chapter's opening explains.",
+   "source": "Evenson, Reactor 2021 (comment by NancyLebovitz)",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "explained at the beginning of the next chapter",
+   "page": "comments"
+  },
+  {
+   "index": 100,
+   "feature": "miracle never acknowledged by the narrator (reader comment)",
+   "claim": "Commenters note Severian resurrects Dorcas with the Claw and never states that he did so, even after he learns the Claw's power.",
+   "source": "Evenson, Reactor 2021 (comments by AndyLove, pfsmith)",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "",
+   "page": "comments"
+  },
+  {
+   "index": 101,
+   "feature": "three-level diction",
+   "claim": "Wolfe eschews neologism; his obscure real words work at a surface level, a mystery-clue level and an allusive level, which drives close reading and rereading.",
+   "source": "Gerwel 2014",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "quote": "Wolfe eschews the use of neologism",
+   "page": ""
+  },
+  {
+   "index": 102,
+   "feature": "unstated premise solved from clues (Peace)",
+   "claim": "Peace never states that its narrator is dead, in a memory-palace purgatory, and probably a multiple murderer; the reader must identify and solve the puzzle from clues.",
+   "source": "Gerwel 2014",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "quote": "a puzzle which must be identified and then solved",
+   "page": ""
+  },
+  {
+   "index": 103,
+   "feature": "first sentence paid off by one later line",
+   "claim": "The opening sentence about the fallen elm becomes clear only when connected to a single, seemingly unrelated line of dialogue in the novel's final third.",
+   "source": "Gerwel 2014",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "quote": "a different, single, and seemingly unrelated line",
+   "page": ""
+  },
+  {
+   "index": 104,
+   "feature": "forgetting-yet-consistent vs remembering-yet-lying",
+   "claim": "Severian cannot forget yet lies and is inconsistent; Latro cannot remember yet his narrative is consistent, an inversion that asks which narrator is trustworthy.",
+   "source": "Gerwel 2014",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "quote": "his narrative is consistent throughout",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 90,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the true story within is generally conveyed by indirection, revealing itself through the reader's ultimate decipherment",
+   "note": "SFE (Clute), Archipelago paragraph: 'for although the surface is nearly always described with precision in a Wolfe tale, the true story within is generally conveyed by indirection, revealing itself through the reader's ultimate decipherment and comprehension of the proper and hierarchical sorting of its parts.' Quote verbatim; both limbs on the page; the sentence is framed generally ('in a Wolfe tale'), so the claim's generalisation holds. Fetched raw via curl with a browser UA, HTTP 200."
+  },
+  {
+   "index": 91,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "almost subliminal - but in retrospect or after rereading almost invariably lucid and inevitable - clues",
+   "note": "SFE, Fifth Head paragraph, quote verbatim inside 'the almost subliminal - but in retrospect or after rereading almost invariably lucid and inevitable - clues laid down in the text to govern its comprehension.' Second limb also verbatim on the same page: 'the evidence for the transfer (as very frequently in Wolfe) being extractable through an examination of the manuscript that tells the story.' Raw page."
+  },
+  {
+   "index": 92,
+   "verdict": "PARTIAL",
+   "trueWording": "it is a structure of unreliable Recursive retrospect ... for almost all his major book-length texts",
+   "note": "The naming limb is verbatim (capital R, 'Recursive' being an SFE cross-reference): 'it is a structure of unreliable Recursive retrospect, as noted above, that Wolfe has employed for almost all his major book-length texts.' The page never glosses what recursive retrospect means; its only nearby context is that each novel is 'presented as a manuscript written down and presented to us by the protagonist of the tale, or a figure whose relationship to the protagonist is intimate'. The claim also drops 'unreliable', which is part of Clute's phrase. Grep of the whole raw page finds no second occurrence of 'retrospect' in this sense.",
+   "unsupportedLimb": "the gloss 'a narrator looking back on events whose meaning loops back on the telling' - the page offers no definition of the term"
+  },
+  {
+   "index": 93,
+   "verdict": "PARTIAL",
+   "trueWording": "reticences ... make his work very nearly opaque TO THE SIMPLISTIC DISCOURSE-CRITICISM",
+   "note": "Quote 'taxing reticences of presentation' is verbatim: 'Unfortunately the taxing reticences of presentation that monitor access to his core meanings make his work very nearly opaque to the simplistic discourse-criticism whose dominant position in sf academic work may only now be fading.' Clute's point is that a school of criticism cannot read him, not that the work is opaque per se. Separately, 'utterly present and implacably remote' IS on the page but in a different paragraph and attached to a different subject: 'his greatest texts are Modernist in a central understanding of the term: they are at one and the same time utterly present and implacably remote' - a statement about his Modernism, not about the reticences. The claim welds two independent sentences into one causal claim.",
+   "unsupportedLimb": "'make the work very nearly opaque' unqualified - the page says opaque to the simplistic discourse-criticism dominant in sf academia, not opaque as such"
+  },
+  {
+   "index": 94,
+   "verdict": "PARTIAL",
+   "trueWording": "who tells the story of his childhood and young manhood, all unknowingly, from beyond the grave",
+   "note": "The 'beyond the grave' limb is near-verbatim in the Peace paragraph: 'The protagonist of the book - who tells the story of his childhood and young manhood, all unknowingly, from beyond the grave.' The quoted phrase, however, occurs only in the preceding Fifth Head paragraph: 'a formalizing of the confessional mode whose truth value is unrelentingly put under the question', introduced by 'As with all his most important work to date' - a generalisation that arguably reaches Peace but is never applied to Peace on the page. Cross-paragraph transfer, so PARTIAL rather than VERIFIED.",
+   "unsupportedLimb": "'its truth value unrelentingly put under the question' as a statement about Peace - the quoted phrase sits in the Fifth Head of Cerberus paragraph"
+  },
+  {
+   "index": 95,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unreliability often being more sins of omission than outright deception; gaps catch gently, then insistently",
+   "note": "Reactor/Evenson, raw page: 'with his unreliability often being more sins of omission than outright deception. There are deliberate gaps in his narrative, but he does little to hide these gaps: they seem meant to catch gently on the reader's attention upon first read, and more insistently as you reread.' Quote verbatim; every limb present."
+  },
+  {
+   "index": 96,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not so much to veil the unreliability as to make it seem less literarily motivated, more informal and human",
+   "note": "Same paragraph: 'There's also a significant disjunction in the order in which events happen and the order in which Severian chooses to recount them, and this rearrangement, combined with the gaps, makes it so that it is difficult to say at times ... if Severian is hiding something or simply telling the bits he wants to tell in the order he wants to tell them. That uncertainty is something Wolfe uses not so much to veil the unreliability as to make it seem less literarily motivated, more informal and human.' All limbs verbatim."
+  },
+  {
+   "index": 97,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "feels wrong or random to us, when in fact we later discover that it's exactly right",
+   "note": "Reactor: Severian 'says that \"in some obscure way\" he feels he wants to take the picture off the wall and carry it to a mountain forest. Only a few pages later are we told that the moon is now covered with trees ... So Severian's obscure desire to put the moon in the forest feels wrong or random to us, when in fact we later discover that it's exactly right.' The silence limb is also there: 'at least as often Wolfe passes over them in silence.' Quote verbatim (curly apostrophe on the page)."
+  },
+  {
+   "index": 98,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is a multiplicity trying to speak as if it were a oneness",
+   "note": "Reactor: after the alzabo feast Severian acquires Thecla, and 'Late in the tetralogy Severian encounters the dying Autarch, who encourages him to eat his forebrain ... Severian, once he consumes the Autarch's forebrain, is, in one body, a thousand and two.' Then: 'a multiform and unstable personality is telling a story as if it were stable and unified. It is a multiplicity trying to speak as if it were a oneness.' The parenthetical limb is verbatim too: 'Severian, in a parenthetical, recalls laughing with five other people ... as he plays with torture equipment ... only upon rereading did I realize that he has slipped into Thecla's memories here ... she and her wealthy friends used to sneak into the prison through a secret door and torture people for fun.'"
+  },
+  {
+   "index": 99,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "chapters tend to end with an incoherent hugger-mugger, which is explained at the beginning of the next chapter",
+   "note": "Comment thread on the raw page (9 comments were served in the HTML, no JS needed). Attribution confirmed: the comment sits directly under the byline 'NancyLebovitz', 4 years ago. Quote verbatim; the claim's hedge 'tend to' matches the commenter's own 'I think I noticed'."
+  },
+  {
+   "index": 100,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "never acknowledges the Claw raised Dorcas, though he knows its power",
+   "note": "No quote was supplied, so graded on substance. pfsmith: 'Severian indeed \"resurrects\" Dorcas with the Claw while traveling in the Botanic Gardens ... Severian is clearly aware of the Claw's power to resurrect others, because he uses it for this purpose several times later on. However, it seems very odd that nowhere in the text ... does Severian acknowledge that it was the Claw that raised Dorcas from the lake ... But Severian never explicitly states that he realizes he used the Claw on her.' AndyLove raised it first: 'Severian brings someone back to life accidentally (via the Claw ...) and never figures out that he's done so.' Both attributions verified against the comment bylines. One nuance short of verbatim: AndyLove says Severian never figures it out, pfsmith says he knows the Claw's power but never states it of Dorcas - the claim follows pfsmith."
+  },
+  {
+   "index": 101,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prose works on at least three levels: superficial, a story-mystery layer, and an allusive layer",
+   "note": "Gerwel/Moher, raw page: 'Wolfe eschews the use of neologism. The words that he uses ... are real English, Greek, or Latinate words, however obscure.' Then: 'its effect is to make the prose work on at least three different levels: There is a superficial meaning ... Below that, there is a deeper meaning which ties to one or another of the story's central mysteries, and below still that there is an allusive layer ...' and 'It is this density of language and its multiplicity of meanings which encourage close readings of Wolfe's texts, and which encourage multiple re-readings of his work.' Every limb verbatim."
+  },
+  {
+   "index": 102,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "what Wolfe never states explicitly - a puzzle which must be identified and then solved by the reader's own effort from clues in the text",
+   "note": "Gerwel: 'what Wolfe never states explicitly - a puzzle which must be identified and then solved by the reader's own effort from clues in the text - is that the narrator is dead (the story is told by his ghost), that the setting from which he is reminiscing is Purgatory in the form of a memory palace, and that he is in all probability a multiple murderer.' All three unstated premises and the solve-from-clues limb are verbatim."
+  },
+  {
+   "index": 103,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the first sentence ... suddenly becomes clear (when a connection is made to a different, single, and seemingly unrelated line of dialog in the novel's latter third)",
+   "note": "Gerwel: 'on re-reading Peace, the significance of individual words (such as a the first sentence \"The elm tree planted by Eleanor Bold, the judge's daughter, fell last night.\") suddenly becomes clear (when a connection is made to a different, single, and seemingly unrelated line of dialog in the novel's latter third).' Quote verbatim; 'final third' vs the page's 'latter third' is the same sense."
+  },
+  {
+   "index": 104,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Latro has an inability to remember anything, yet his narrative is consistent throughout",
+   "note": "Gerwel: 'the Latro sequence ... can be read as a inversion of the Book of the New Sun. At the most basic level, Severian has a stated inability to forget anything, though he can choose to lie and is inconsistent in his narrative. While Latro, by contrast, has an inability to remember anything, yet his narrative is consistent throughout. Which story, then, is the more stable? Which narrator the more trustworthy?' Quote verbatim; the inversion and the trustworthiness question are both on the page."
+  }
+ ]
+}

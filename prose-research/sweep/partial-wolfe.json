@@ -103,5 +103,227 @@
    "unsupportedLimb": "the name 'Severian' — the page names only the New Sun series, never the character",
    "fromFile": "verdicts-wolfe-i30-44.json"
   }
+ },
+ {
+  "index": 70,
+  "feature": "refusal to explicate origins",
+  "claim": "Asked how he came to write dimly-seen higher powers behind human events, Wolfe answers only 'No comment', leaving discovery to the reader.",
+  "source": "Infinity Plus 2003",
+  "url": "https://www.infinityplus.co.uk/nonfiction/intgw.htm",
+  "quote": "No comment.",
+  "angle": "voice",
+  "verdict": {
+   "index": 70,
+   "verdict": "PARTIAL",
+   "trueWording": "GW: \"No comment.\"",
+   "unsupportedLimb": "'leaving discovery to the reader' -- the page records only the two-word refusal and gives no reason for it",
+   "note": "The question limb is exact: Jordan asks about 'a dimly-seen conflict or at least interaction of \"higher powers\" that is in part \"behind\" the human events' and 'how you came to think of writing this way'; the answer is 'No comment.' verbatim. But the page attaches no motive to the refusal. The nearest support is Gevers's introduction ('they will speak for themselves, or not at all'), which is the interviewer's characterisation of Wolfe generally, not Wolfe's account of this answer -- so the reader-discovery limb is the claim-writer's gloss, not the source's.",
+   "fromFile": "verdicts-wolfe-i60-74.json"
+  }
+ },
+ {
+  "index": 82,
+  "feature": "rereading as reading discipline",
+  "claim": "He describes rationing The Fellowship to one chapter an evening while permitting himself to reread earlier chapters endlessly, the habit of the rereader he later writes for.",
+  "source": "The Best Introduction to the Mountains (2001)",
+  "url": "https://web.archive.org/web/2004/http://home.clara.net/andywrobertson/wolfemountains.html",
+  "quote": "no more than a single chapter each evening",
+  "angle": "voice",
+  "verdict": {
+   "index": 82,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that this rationing is 'the habit of the rereader he later writes for' - the essay says nothing about Wolfe's own writing, his readers, or rereading his own books",
+   "trueWording": "forcing myself to read no more than a single chapter each evening",
+   "note": "Quote verbatim, and the rationing limbs are fully supported: the book is The Fellowship of the Ring, and 'The catch, my out, the stratagem by which I escaped the bonds of my own law, was that I could read that chapter as many times as I wished; and that I could also return to the chapter I had read the night before... There were evenings on which I reread the entire book up the point -- The Council of Elrond, let us say -- at which I had forced myself to stop.' Only the closing gloss tying the habit to his own later authorship is absent from the page.",
+   "fromFile": "verdicts-wolfe-i75-89.json"
+  }
+ },
+ {
+  "index": 83,
+  "feature": "etymology inside and outside the story",
+  "claim": "Tolkien's reply to Wolfe's fan letter distinguishes a word's etymology within the story from the author's source for it, a distinction Wolfe's own Latinate diction depends on.",
+  "source": "The Best Introduction to the Mountains (2001)",
+  "url": "https://web.archive.org/web/2004/http://home.clara.net/andywrobertson/wolfemountains.html",
+  "quote": "two sides",
+  "page": "Tolkien letter, 7 Nov 1966",
+  "angle": "voice",
+  "verdict": {
+   "index": 83,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that this is 'a distinction Wolfe's own Latinate diction depends on' - the essay never discusses Wolfe's diction or vocabulary",
+   "trueWording": "The etymology of words and names in my story has two sides.",
+   "note": "The Tolkien letter is reproduced in full on the page, dated 7th November 1966 and addressed 'Dear Mr Wolfe', after Wolfe writes 'ten years later I wrote J. R. R. Tolkien a fan letter. He answered it'. The distinction limb is exact: '(1) their etymology within the story; and (2) the sources from which I, as an author, derive them.' 'two sides' appears word for word. Only the trailing claim about Wolfe's own diction is unsupported.",
+   "fromFile": "verdicts-wolfe-i75-89.json"
+  }
+ },
+ {
+  "index": 88,
+  "feature": "engineer's mind, clue-reading",
+  "claim": "Gaiman reports Wolfe solving a ninety-year-old murder from a press clipping (the matches by the railway tracks), evidence of the engineer's mind behind the clue-planting.",
+  "source": "Gaiman, How to Read Gene Wolfe / journal",
+  "url": "https://journal.neilgaiman.com/2007/03/gene-wolves.html",
+  "quote": "He has an engineer's mind",
+  "angle": "voice",
+  "verdict": {
+   "index": 88,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the anecdote is 'evidence of the engineer's mind behind the clue-planting' - the post never connects it to clue-planting or any technique in Wolfe's fiction (the clues in the anecdote are the police's, in a real murder case)",
+   "trueWording": "He has an engineer's mind that takes things apart to see how they work and then puts them back together.",
+   "note": "Fetched the journal URL itself (HTTP 200, live host). Quote verbatim, and every factual limb is on the page: 'I once read him an account of a baffling murder, committed ninety years ago... proceeded off-handedly to offer a simple and likely explanation', plus the closing parenthesis '(It was the matches on the ground, by the railway tracks, that Gene pointed to, in the old press clipping murder case, that cracked it; but of course by then the tramp was ninety years dead...)'. The post also identifies these as the first two paragraphs of the How to Read Gene Wolfe essay. Only the clue-planting gloss is the researcher's inference.",
+   "fromFile": "verdicts-wolfe-i75-89.json"
+  }
+ },
+ {
+  "index": 92,
+  "feature": "recursive retrospect",
+  "claim": "Clute names the structure shared by the major works 'recursive retrospect': a narrator looking back on events whose meaning loops back on the telling.",
+  "source": "Clute, SFE entry",
+  "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+  "quote": "recursive retrospect",
+  "angle": "voice",
+  "verdict": {
+   "index": 92,
+   "verdict": "PARTIAL",
+   "trueWording": "it is a structure of unreliable Recursive retrospect ... for almost all his major book-length texts",
+   "note": "The naming limb is verbatim (capital R, 'Recursive' being an SFE cross-reference): 'it is a structure of unreliable Recursive retrospect, as noted above, that Wolfe has employed for almost all his major book-length texts.' The page never glosses what recursive retrospect means; its only nearby context is that each novel is 'presented as a manuscript written down and presented to us by the protagonist of the tale, or a figure whose relationship to the protagonist is intimate'. The claim also drops 'unreliable', which is part of Clute's phrase. Grep of the whole raw page finds no second occurrence of 'retrospect' in this sense.",
+   "unsupportedLimb": "the gloss 'a narrator looking back on events whose meaning loops back on the telling' - the page offers no definition of the term",
+   "fromFile": "verdicts-wolfe-i90-104.json"
+  }
+ },
+ {
+  "index": 93,
+  "feature": "taxing reticences of presentation",
+  "claim": "Wolfe's reticences of presentation make the work very nearly opaque, combining the utterly present and the implacably remote.",
+  "source": "Clute, SFE entry",
+  "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+  "quote": "taxing reticences of presentation",
+  "angle": "voice",
+  "verdict": {
+   "index": 93,
+   "verdict": "PARTIAL",
+   "trueWording": "reticences ... make his work very nearly opaque TO THE SIMPLISTIC DISCOURSE-CRITICISM",
+   "note": "Quote 'taxing reticences of presentation' is verbatim: 'Unfortunately the taxing reticences of presentation that monitor access to his core meanings make his work very nearly opaque to the simplistic discourse-criticism whose dominant position in sf academic work may only now be fading.' Clute's point is that a school of criticism cannot read him, not that the work is opaque per se. Separately, 'utterly present and implacably remote' IS on the page but in a different paragraph and attached to a different subject: 'his greatest texts are Modernist in a central understanding of the term: they are at one and the same time utterly present and implacably remote' - a statement about his Modernism, not about the reticences. The claim welds two independent sentences into one causal claim.",
+   "unsupportedLimb": "'make the work very nearly opaque' unqualified - the page says opaque to the simplistic discourse-criticism dominant in sf academia, not opaque as such",
+   "fromFile": "verdicts-wolfe-i90-104.json"
+  }
+ },
+ {
+  "index": 94,
+  "feature": "confessional mode under question",
+  "claim": "Peace is a childhood narrated all unknowingly from beyond the grave, its truth value unrelentingly put under the question.",
+  "source": "Clute, SFE entry",
+  "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+  "quote": "unrelentingly put under the question",
+  "angle": "voice",
+  "verdict": {
+   "index": 94,
+   "verdict": "PARTIAL",
+   "trueWording": "who tells the story of his childhood and young manhood, all unknowingly, from beyond the grave",
+   "note": "The 'beyond the grave' limb is near-verbatim in the Peace paragraph: 'The protagonist of the book - who tells the story of his childhood and young manhood, all unknowingly, from beyond the grave.' The quoted phrase, however, occurs only in the preceding Fifth Head paragraph: 'a formalizing of the confessional mode whose truth value is unrelentingly put under the question', introduced by 'As with all his most important work to date' - a generalisation that arguably reaches Peace but is never applied to Peace on the page. Cross-paragraph transfer, so PARTIAL rather than VERIFIED.",
+   "unsupportedLimb": "'its truth value unrelentingly put under the question' as a statement about Peace - the quoted phrase sits in the Fifth Head of Cerberus paragraph",
+   "fromFile": "verdicts-wolfe-i90-104.json"
+  }
+ },
+ {
+  "index": 105,
+  "feature": "found-manuscript translator apparatus",
+  "claim": "The Latro books frame the scrolls through a translator who notes the narrator's limited ability to write and the haste of composition, layering unreliability.",
+  "source": "Gerwel 2014",
+  "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+  "quote": "limited ability to write",
+  "angle": "voice",
+  "verdict": {
+   "index": 105,
+   "verdict": "PARTIAL",
+   "trueWording": "Latro writes with limited ability per the scrolls' translator",
+   "note": "Raw page (aidanmoher.com, HTTP 200). Verbatim: 'he is an otherwise uneducated mercenary with limited ability to write (per the \"translator\" of the found scrolls) ... and who would have been writing his recollections in haste in often difficult circumstances'. The parenthetical attributes only the writing-ability limb to the translator; the haste is Gerwel's own inference. Translator-framed scrolls and layered unreliability ('Latro is unreliable on many levels') are supported.",
+   "unsupportedLimb": "the translator, rather than the essayist, noting the haste of composition",
+   "fromFile": "verdicts-wolfe-i105-119.json"
+  }
+ },
+ {
+  "index": 106,
+  "feature": "depth by omission",
+  "claim": "Wolfe's density comes from what he leaves out rather than elaborate description; suggestion through omission gives the prose its depth.",
+  "source": "Ewing 2010",
+  "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+  "quote": "what Wolfe's leaves out that gives it its depth",
+  "angle": "voice",
+  "verdict": {
+   "index": 106,
+   "verdict": "PARTIAL",
+   "trueWording": "Wolfe's prose is not dense; omission gives it its depth",
+   "note": "Raw page (murrayewing.co.uk, HTTP 200). Verbatim: \"It's what Wolfe's leaves out that gives it its depth.\" But the preceding sentences read 'I don't think Wolfe's prose is particularly dense. In fact, it's quite cut back and simplified'. The page attributes DEPTH, not density, to omission, and the 'rather than elaborate description' limb is supported ('cut back and simplified').",
+   "unsupportedLimb": "that the prose has density - the page explicitly denies Wolfe's prose is particularly dense",
+   "fromFile": "verdicts-wolfe-i105-119.json"
+  }
+ },
+ {
+  "index": 108,
+  "feature": "narrator who knows nothing",
+  "claim": "Wolfe's narrators often know little, placing them in the reader's position; 'Tracking Song' opens by telling its narrator he knows nothing.",
+  "source": "Ewing 2010",
+  "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+  "quote": "You know nothing.",
+  "angle": "voice",
+  "verdict": {
+   "index": 108,
+   "verdict": "PARTIAL",
+   "trueWording": "'The key to Wolfe's narrators ... is this passage from Tracking Song'",
+   "note": "Raw page (murrayewing.co.uk). 'You know nothing.' is verbatim, as the first words of a block quotation introduced only as 'this passage from \"Tracking Song\"'. The knowing-little limb is fully supported: they're 'unreliable' mainly because they know so little' and amnesiac narrators are 'putting them in exactly the same position as the reader'.",
+   "unsupportedLimb": "that the passage OPENS 'Tracking Song' and is addressed to its narrator - the page gives it no position in the story and names no addressee",
+   "fromFile": "verdicts-wolfe-i105-119.json"
+  }
+ },
+ {
+  "index": 116,
+  "feature": "interpolated tales comment on the frame",
+  "claim": "The embedded tales comment in various ways on the events Weer narrates, and the reader must decide which ones do.",
+  "source": "Jacobs 2024",
+  "url": "https://blog.ayjay.org/peace-peace/",
+  "quote": "comment in various ways on the events",
+  "angle": "voice",
+  "verdict": {
+   "index": 116,
+   "verdict": "PARTIAL",
+   "trueWording": "Interpolated tales comment on events Weer narrates and people he knew",
+   "note": "Raw page (blog.ayjay.org). Verbatim: 'The various interpolated tales in Peace comment in various ways on the events that Weer narrates and the people that he knew.' Jacobs then supplies his own identifications ('one story about a princess and her suitors clearly mirrors Aunt Olivia'; a tale 'I think is meant to describe to Weer his own situation') without saying the reader must decide. The nearest reader-task line, 'we are left to draw inferences', is about Weer's unfinished stories, not about which tales comment.",
+   "unsupportedLimb": "that the reader must decide WHICH tales comment on the frame - the page asserts no such reader task and instead states its own examples",
+   "fromFile": "verdicts-wolfe-i105-119.json"
+  }
+ },
+ {
+  "index": 118,
+  "feature": "lie in dialogue, not in narration",
+  "claim": "Wolfe's characters will lie in dialogue but not in narration, so narrative statements can be trusted while speech cannot.",
+  "source": "The Solute 2017",
+  "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+  "quote": "characters will lie in dialogue but not in narration",
+  "angle": "voice",
+  "verdict": {
+   "index": 118,
+   "verdict": "PARTIAL",
+   "trueWording": "Key rule: characters lie in dialogue but not in narration",
+   "note": "Raw page (the-solute.com, HTTP 200). The rule is verbatim (capitalised on the page): '(Key rules: Characters will lie in dialogue but not in narration.)'. The page supports only the narrower point that the narration does not fabricate - 'he is not making up events which did not happen, though his perspective is heavily biased' - and wallflower's method is to check 'if he's being honest about the what and the why', i.e. narration is not to be trusted wholesale.",
+   "unsupportedLimb": "that narrative statements can therefore be TRUSTED - the same page says 'when a Wolfe narrator lies to you or tricks you' and calls Weer's narration 'essentially utter manipulation', biased and evasive",
+   "fromFile": "verdicts-wolfe-i105-119.json"
+  }
+ },
+ {
+  "index": 123,
+  "feature": "perfect-memory claim contradicted",
+  "claim": "Weer prides himself on remembering everything yet cannot remember the librarian's name, a self-contradiction the text leaves standing.",
+  "source": "Fernandes, Reactor 2019",
+  "url": "https://reactormag.com/peace-wolfes-masterful-rumination-on-nostalgia-memory-and-uncertainty/",
+  "quote": "I who pride myself upon remembering everything",
+  "angle": "voice",
+  "verdict": {
+   "index": 123,
+   "verdict": "PARTIAL",
+   "trueWording": "pride belongs to the old narrator, not young Weer",
+   "note": "Quote is verbatim and the first two limbs hold: 'a librarian—a woman whose name Weer can't remember, something that upsets him very much, because, as he himself claims, “I who pride myself upon remembering everything.”' But the page does not call this a self-contradiction left standing — it immediately offers a reconciliation: 'This total capacity for remembrance, of course, does not belong to the young Weer, but to the old man, the narrator himself.' Nearest general support is a separate line: 'all his narrators are unreliable.'",
+   "unsupportedLimb": "'a self-contradiction the text leaves standing' — the page glosses the tension rather than leaving it unresolved",
+   "fromFile": "verdicts-wolfe-i120-134.json"
+  }
  }
 ]

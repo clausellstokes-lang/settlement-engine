@@ -100,5 +100,80 @@
    "unsupportedLimb": "that the writing log records these tasks -- the post presents them as what the log's word count does NOT reflect",
    "fromFile": "verdicts-hobb-i45-59.json"
   }
+ },
+ {
+  "index": 70,
+  "feature": "household catalogue as characterisation",
+  "claim": "Character is shown through inventories of the mundane on the mantel and the desk.",
+  "source": "The Huntress and the Wolf (Substack essay)",
+  "url": "https://thehuntressandthewolf.substack.com/p/how-robin-hobb-created-a-legendary",
+  "quote": "medicinal unguents on the mantel, two pens at the ready",
+  "angle": "voice",
+  "verdict": {
+   "index": 70,
+   "verdict": "PARTIAL",
+   "trueWording": "cataloged the medicinal unguents on the mantel, the two pens at the ready",
+   "unsupportedLimb": "the desk - the page names no desk anywhere (grep for \"desk\" returns zero hits); the catalogue is the mantel, the two pens, and \"the Stones puzzle on the table\"",
+   "note": "Also note the supplied quote is not word-for-word: the page reads \"the two pens at the ready\" (definite article dropped in the claim). The mantel/inventory-as-characterisation core is supported - Fitz cataloguing Lant's room as evidence of training that \"is still running beneath the surface constantly and automatically\".",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  }
+ },
+ {
+  "index": 72,
+  "feature": "adverb overreliance (critic's negative)",
+  "claim": "A sympathetic critic finds overreliance on adverbs stunts the Liveship novels' flow.",
+  "source": "Fantasy-Faction Liveship Traders overview (2014)",
+  "url": "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+  "quote": "overreliance on adverbs often stunts the novel's flow",
+  "angle": "voice",
+  "verdict": {
+   "index": 72,
+   "verdict": "PARTIAL",
+   "trueWording": "Her overreliance on adverbs often stunts the novel's flow",
+   "unsupportedLimb": "the plural \"the Liveship novels'\" - the page says \"the novel's flow\" (singular), inside its Ship of Magic discussion; it makes no such charge against The Mad Ship or Ship of Destiny",
+   "note": "Quotation verbatim. \"Sympathetic critic\" is supported: the piece (Lew Kelly, Fantasy-Faction, 19 Aug 2014) opens \"Credit goes to Robin Hobb for doing something new and challenging\" and calls the trilogy \"wonderfully plotted with plenty of deeply created characters\".",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  }
+ },
+ {
+  "index": 73,
+  "feature": "loss as what is not received",
+  "claim": "Loss is rendered through what Fitz does not get, and compressed with 'After a time'.",
+  "source": "Jeffrey David Outcalt, Substack close reading",
+  "url": "https://jeffreydavidoutcalt.substack.com/p/lies-are-what-a-man-needs-most-masculinity",
+  "quote": "no princess saved, no true love",
+  "angle": "voice",
+  "verdict": {
+   "index": 73,
+   "verdict": "PARTIAL",
+   "trueWording": "There is no princess saved, no true love. The hero is not lauded by the realm and given riches",
+   "unsupportedLimb": "compressed with 'After a time' - the essay never discusses that phrase as a device; \"After a time\" occurs exactly once on the page, inside a block quotation of Hobb's novel (Starling's kiss), with no analytic comment on it",
+   "note": "The loss-as-absence limb is supported verbatim. Jeffrey O, \"Lies Are What A Man Needs Most\", 20 Jan 2025.",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  }
+ },
+ {
+  "index": 116,
+  "feature": "place and institution description",
+  "claim": "Elliott notes that Hobb introduces the ruined city Kelsingra through what Fitz fails to perceive there.",
+  "source": "Geoffrey B. Elliott, 'Sites of Memory in Robin Hobb's Realm of the Elderlings' (ICMS 2021)",
+  "url": "https://elliottrwi.com/2021/05/19/sites-of-memory-in-robin-hobbs-realm-of-the-elderlings/",
+  "quote": "he finds it empty, perceiving no signs of life around him",
+  "page": "section 'The Typical Sites of Memory'",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2021-05-19",
+  "routeHint": "live elliottrwi.com fetch",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "academic",
+  "verdict": {
+   "index": 116,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that Elliott presents this as how Hobb *introduces* Kelsingra, i.e. through Fitz's non-perception",
+   "trueWording": "\"When FitzChivalry first encounters Kelsingra, he finds it empty\"",
+   "note": "The quotation is on the page word for word: \"When FitzChivalry first encounters Kelsingra, he finds it empty, perceiving no signs of life around him;\". But Elliott makes no claim about Hobb's technique of introduction, and the same sentence continues into positive perception, not absence: \"as he searches it, he finds that 'Whole domes of roofs had fallen in...outer walls had fallen away entirely' ... and sees, among others, 'the tatters of ancient hangings, a collapsed wooden bench.'\" Elliott also introduces Kelsingra two sentences earlier in his own descriptive voice ('That city is itself a silent memorial of a bygone civilization'), and later notes the city 'replays' its memories to Fitz, 'immersing him in images of the daily lives of inhabitants' -- so the city is not rendered through what Fitz fails to perceive. Grade is PARTIAL, not VERIFIED: the narrative-craft limb is the claim's gloss, not Elliott's.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  }
  }
 ]

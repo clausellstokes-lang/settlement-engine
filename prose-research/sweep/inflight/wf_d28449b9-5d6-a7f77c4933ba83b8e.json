@@ -1,0 +1,41 @@
+{
+ "role": "finder",
+ "name": "ai",
+ "angle": "critics-direct",
+ "tag": null,
+ "lines": 105,
+ "firstTs": "2026-09-06T17:01:00.667Z",
+ "lastTs": "2026-09-06T17:05:09.630Z",
+ "tools": {
+  "Read": 1,
+  "Bash": 25,
+  "ToolSearch": 1,
+  "WebSearch": 2
+ },
+ "urlsFetched": [
+  "https://dramatica.com/blog/the-ai-tells-are-in-the-story|dramatica-tells",
+  "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/|foxprint-canaiedit",
+  "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/|wendig-2024",
+  "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters|reuters-diverges",
+  "https://arxiv.org/abs/2604.03136",
+  "https://arxiv.org/html/2604.03136v6",
+  "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+  "https://web.archive.org/web/20260606000920id_/https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+  "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+  "https://www.itsnicethat.com/articles/elizabeth-goodspeed-designers-who-write-creative-industry-020426",
+  "https://web.archive.org/web/20260615085614id_/https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+  "https://web.archive.org/web/20260715020203id_/https://www.itsnicethat.com/articles/elizabeth-goodspeed-designers-who-write-creative-industry-020426"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the finder method file.",
+ "run": "wf_d28449b9-5d6",
+ "agent": "a7f77c4933ba83b8e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-a7f77c4933ba83b8e.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-critics-direct.json",
+  "claims": 106,
+  "complete": false,
+  "mtime": "08:26:12"
+ }
+}

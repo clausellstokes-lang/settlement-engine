@@ -541,5 +541,124 @@
    "note": "Live host Cloudflare-blocked; raw Wayback capture https://web.archive.org/web/20251203174904id_/https://tolkiengateway.net/wiki/The_Appendix_on_Languages used. The quotation is verbatim: '(the published version is only about one-third as long as F2)'. The 'deliberate reduction' limb is not supported and leans the other way: the page says Christopher found it 'unknown' whether the Westron exemplifications were cut by Tolkien's judgement or 'because of the constraints on space for publication', and that 'had his father not been facing severe space constraints the form of Appendix F would have been considerably different'. The page also credits the one-third cut to the intermediate typescript F3.",
    "fromFile": "verdicts-tolkien-i613-627.json"
   }
+ },
+ {
+  "index": 629,
+  "feature": "tongue and tale coeval",
+  "claim": "The incarnate mind, the tongue and the tale are coeval; sub-creation is a birthright because we make as we are made.",
+  "source": "Tolkien Estate, Verlyn Flieger, 'On Fairy Stories'",
+  "url": "https://www.tolkienestate.com/scholarship/verlyn-flieger-on-fairy-stories/",
+  "quote": "We make, because we are made",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 629,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "‘sub-creation is a birthright’ — the page never says sub-creation is a right or birthright (the word does not occur); it says only that we make because we are made in a Maker’s image",
+   "trueWording": "The incarnate mind, the tongue, and the tale, are coeval",
+   "note": "Raw HTML fetched. Coeval limb verbatim: ‘The incarnate mind, the tongue, and the tale, are in our world coeval’. The supplied quote is NOT contiguous on the page — it reads ‘We make, he said, “because we are made”’. Grep for birthright/right/inalienable across the whole page: zero hits.",
+   "fromFile": "verdicts-tolkien-i628-642.json"
+  }
+ },
+ {
+  "index": 631,
+  "feature": "consistent per-character speech (secondary)",
+  "claim": "A reader's essay argues Elrond's age is implied by archaic word order and that each character's speech stays consistent throughout, conveying culture and rank.",
+  "source": "K.G., 'To Make a Soul: Tolkien and Variations of Speech' (tolkienmedievalandmodern blog)",
+  "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/to-make-soul-tolkien-and-variations-of.html",
+  "quote": "Elrond's age and sagacity implied through archaic word order",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 631,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "‘conveying … rank’ — the essay speaks of culture, nationality and personality; rank/status/class/station appear nowhere on the page",
+   "trueWording": "Elrond’s age and sagacity are implied through his archaic word order",
+   "note": "Raw HTML fetched (blogspot, live, 200). Author is a student signed ‘-- K.G.’, posted 18 April 2014 on the course blog Tolkien: Medieval and Modern — matches the source label. Consistency limb verbatim: ‘each character’s own speech is consistent throughout the entirety of The Lord of the Rings’. The supplied quote is a near-quote, not word for word (page has ‘are implied through his’).",
+   "fromFile": "verdicts-tolkien-i628-642.json"
+  }
+ },
+ {
+  "index": 632,
+  "feature": "NEGATION: nursery-room prose charge",
+  "claim": "Moorcock holds that high fantasy's prose is the prose of the nursery-room, a lullaby meant to soothe, and that this is the predominant tone of The Lord of the Rings — the direct counter to Tolkien's claim to have shed the children's manner.",
+  "source": "Michael Moorcock, 'Epic Pooh' (1978; revolutionsf copy via Wayback)",
+  "url": "http://www.revolutionsf.com/article.php?id=953",
+  "quote": "the prose of the nursery-room",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 632,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "‘the direct counter to Tolkien’s claim to have shed the children’s manner’ — Moorcock’s page never mentions any such Tolkien claim; that clause is the researcher’s framing, not the source",
+   "trueWording": "prose of the nursery-room. It is a lullaby",
+   "note": "Live revolutionsf.com returns a 1-byte body (recovery route 1 failed); the 2026 Wayback capture is also empty; recovered via Wayback raw capture 20130328111451id_ (route 2), 42.8 KB of text, page header ‘Epic Pooh © Michael Moorcock’. Verbatim on the page: ‘The sort of prose most often identified with “high” fantasy is the prose of the nursery-room. It is a lullaby; it is meant to soothe and console.’ and ‘It is the predominant tone of The Lord of the Rings and Watership Down’. Every Moorcock-attributed limb is verbatim; only the trailing gloss is unsourced.",
+   "fromFile": "verdicts-tolkien-i628-642.json"
+  }
+ },
+ {
+  "index": 634,
+  "feature": "hobbit-viewpoint share (85 per cent)",
+  "claim": "Kullmann states on p. 111 that 85 per cent of the non-direct-speech (narrative) sections follow the point-of-view conventions of the nineteenth-century novel, i.e. are told from a hobbit's limited point of view.",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "85 per cent, of the non-direct-speech sections of the narrative",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 634,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "raw page not reached — Google Books returns ‘Restricted Page / You have reached your viewing limit’; verdict rests on a search-within-volume snippet. Two further limbs are absent from that snippet: ‘point-of-view conventions’ (the snippet reads only ‘the conventions of the nineteenth-century novel’; phrase search for ‘point-of-view conventions’ returns 0) and the gloss ‘i.e. are told from a hobbit’s limited point of view’",
+   "trueWording": "85 per cent, of the non-direct-speech sections of the narrative",
+   "note": "Google Books SearchWithinVolume on id=9uAsEAAAQBAJ returns 1 hit, page_number 111: ‘… 85 per cent, of the non-direct-speech sections of the narrative) follow the conventions of the nineteenth-century novel, as found in Ann Radcliffe and the Gothic novelists, in the novels of Walter Scott, Charles Dickens, George Eliot, Thomas Hardy…’. So the figure, the page number and the nineteenth-century-novel limb are corroborated; the snippet is truncated before the sentence’s subject, so the POV gloss cannot be checked. The volume TOC on the same page confirms ‘Points of View’ begins at p. 89, so p. 111 is inside ch. 4.",
+   "fromFile": "verdicts-tolkien-i628-642.json"
+  }
+ },
+ {
+  "index": 635,
+  "feature": "85-per-cent figure traced",
+  "claim": "Wikipedia's sentence that the narrative is told '85% of the time' from one of the four hobbits' viewpoints is footnoted to Kullmann & Siepmann 2021 pp. 90-122; the figure itself sits on p. 111 of the 'Points of View' chapter.",
+  "source": "Wikipedia, Storytelling in The Lord of the Rings",
+  "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+  "quote": "85% of the time",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 635,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "‘the figure itself sits on p. 111 of the “Points of View” chapter’ — the Wikipedia page says only pp. 90–122 and never mentions p. 111 (independently corroborated off-page via the Google Books p. 111 snippet, see index 634)",
+   "trueWording": "85% of the time – one of the four Hobbit protagonists",
+   "note": "Raw HTML fetched. Sentence verbatim: ‘…most often – 85% of the time – one of the four Hobbit protagonists, Frodo, Sam, Merry, and Pippin.’ Footnote limb CONFIRMED from the HTML: the ref marker on that sentence carries id ‘cite_ref-FOOTNOTEKullmannSiepmann202190–122_7-0’ and the reference list entry reads ‘Kullmann & Siepmann 2021, pp. 90–122’.",
+   "fromFile": "verdicts-tolkien-i628-642.json"
+  }
+ },
+ {
+  "index": 637,
+  "feature": "dialogue proportion (c. 50 per cent)",
+  "claim": "Kullmann finds about 50 per cent of the text is dialogue, exclamations, embedded stories and recited poems, whereas in a novel direct speech would usually take up about 20 to 30 per cent (p. 90; repeated at p. 159).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "usually take up ca. 20 to 30 per cent",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 637,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "raw page not reached — Google Books shows ‘Restricted Page / You have reached your viewing limit’; the verdict rests on search-within-volume snippets, not the page itself",
+   "trueWording": "usually take up ca. 20 to 30 per cent of the text",
+   "note": "Every limb is corroborated by snippets, all on the claimed pages. p. 90: ‘… 50 per cent of the text is taken up by dialogues and exclamations as well as by stories told or poems recited by the characters.’ p. 90: ‘… usually take up ca. 20 to 30 per cent of the text.’ — the supplied quote word for word. p. 159: ‘… 50 per cent of the text is taken up by direct speech’, confirming the ‘repeated at p. 159’ limb. Downgraded solely by the snippet rule.",
+   "fromFile": "verdicts-tolkien-i628-642.json"
+  }
+ },
+ {
+  "index": 641,
+  "feature": "omniscient narration rare",
+  "claim": "Omniscient narration is comparatively rare; the reader is most commonly given the point of view of a group of characters, usually hobbits, before it narrows to an individual (p. 90).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "omniscient narration is comparatively rare",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 641,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "raw page not reached — Google Books shows only a search snippet; and within it the quoted opening word ‘omniscient’ is unconfirmed: ‘narration is comparatively rare’ hits p. 90, but ‘omniscient narration is comparatively rare’ returns 0 and ‘omniscient narration’ hits only pp. 103, 121, 123",
+   "trueWording": "narration is comparatively rare, the reader is most commonly treated",
+   "note": "Snippet, p. 90: ‘… narration is comparatively rare, the reader is most commonly treated to the point of view of a group of characters—hobbits, usually—before the perspective is narrowed down to a single person. The beginning of Chap. 1 provides an apt example…’ The substance of both limbs and the p. 90 citation are corroborated; the adjective before ‘narration’ is cut by the snippet’s leading ellipsis. Caution: Google’s phrase index here is demonstrably unreliable (‘comparatively rare’ returned 0 with the default index but 4 hits with newbks=0), so the 0-result is weak evidence of absence rather than a contradiction.",
+   "fromFile": "verdicts-tolkien-i628-642.json"
+  }
  }
 ]

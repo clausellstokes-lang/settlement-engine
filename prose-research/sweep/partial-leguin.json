@@ -72,6 +72,24 @@
   }
  },
  {
+  "index": 47,
+  "feature": "restrained immanence",
+  "claim": "Searoad's nonfantastic stories convey 'the same capably restrained immanence' — restraint named as a constant of her manner.",
+  "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+  "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+  "quote": "capably restrained immanence",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 47,
+   "verdict": "PARTIAL",
+   "trueWording": "conveys some of the same capably restrained immanence",
+   "note": "Quote is verbatim on the raw page, of Searoad's nonfantastic Oregon-coast stories: 'Searoad: The Chronicles of Klatsand (coll 1991), assembling nonfantastic stories set on the Oregon coast, conveys some of the same capably restrained immanence.' But the page hedges ('some of the same') and applies it only backward to the Orsinia nonfantastic work; 'restrained' occurs exactly once in the whole entry (grep: 1 hit), so restraint is never named as a constant of her manner.",
+   "unsupportedLimb": "restraint named as a constant of her manner — the page says only 'some of the same' immanence, of the Orsinian nonfantastic work",
+   "fromFile": "verdicts-leguin-i45-59.json"
+  }
+ },
+ {
   "index": 61,
   "feature": "absorbed Tolkien, own direction",
   "claim": "Attebery (quoted by Garth) distinguishes her from Tolkien copyists as one who absorbed Tolkien, comprehended him and went her own direction.",
@@ -177,6 +195,54 @@
    "unsupportedLimb": "'(Barry & Prescott 1992)' as what Weyant's bibliography shows - the page lists that rhythm article under 'Bary, Nora' alone: the surname is misspelled and co-author Mary Prescott is not named there (Crossref, checked at index 95, confirms Barry & Prescott is the true attribution, but this page does not show it)",
    "note": "curtisweyant.com fetched live (200, 253 KB HTML -> 30 KB text; list runs A-W in both the scholarly and the blog sections, so it is complete, not lazy-loaded). Confirmed on the page: Adams, Rebecca, 'Narrative Voice and Unimaginability of the Utopian Feminine...', Utopian Studies 2.1-2 (1991): 35-47; Jose, Jim, 'Reflections on the Politics of Le Guin's Narrative Shifts', SFS 18.2 (1991): 180-97; Castleman, Samantha, 'Narrative Organization as Cultural Training in the Left Hand of Darkness', Femspec 19.2 (2020): 10-24; Pegg, Barry, 'Down to Earth: Terrain, Territory, and the Language of Realism...', Michigan Academician 27 (1995): 481-92 ('Language of Realism' verbatim). The negative limb also holds: case-insensitive search of the whole page returns 0 hits for 'styl' (so no style/stylistic/stylometry), 0 for 'corpus', 0 for 'quantitative', 0 for 'diction', 0 for 'prose'.",
    "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 124,
+  "feature": "place and institution description",
+  "claim": "Le Guin prescribes the opening chapter of The Return of the Native, a landscape description in which nothing happens, as the cure for that fear.",
+  "source": "Ursula K. Le Guin, 'On Rules of Writing, or, Riffing on Rechy' (Los Angeles Times, 5 Jan 2003), on ursulakleguin.com",
+  "url": "https://www.ursulakleguin.com/on-rules-of-writing",
+  "quote": "a description of a landscape, in which absolutely nothing happens",
+  "page": "parenthesis in the 'show don't tell' paragraph",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2003-01-05",
+  "routeHint": "direct fetch, HTML stripped to text",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 124,
+   "verdict": "PARTIAL",
+   "trueWording": "landscape description where nothing happens until a man appears",
+   "note": "Quote is verbatim on the raw page and the prescription limb holds ('I make them read the first chapter of The Return of the Native'; 'If that won't cure them nothing will'). But the source sentence continues past the quoted cut: '...in which absolutely nothing happens UNTIL IN THE LAST PARAGRAPH A MAN IS SEEN, from far away, walking along a road.' The claim's unqualified 'in which nothing happens' drops that, and the quote as recorded is a mid-sentence truncation that must not be reused without the continuation or an ellipsis.",
+   "unsupportedLimb": "the claim's 'in which nothing happens' — the page says nothing happens *until in the last paragraph a man is seen walking along a road*",
+   "fromFile": "verdicts-leguin-i120-134.json"
+  }
+ },
+ {
+  "index": 156,
+  "feature": "edition and house style",
+  "claim": "The 1989 revised Women's Press text quoted by Carey reads 'the careless reader's even noticing' where the 1973 Pendragon text reads 'the careless readers even noticing'.",
+  "source": "Stan Carey quoting the 1989 revised edition of 'From Elfland to Poughkeepsie', Sentence first",
+  "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+  "quote": "without the careless reader's even noticing",
+  "page": "quotation from 'From Elfland to Poughkeepsie'",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "2024-10-16",
+  "routeHint": "direct fetch; compared against the 1973 Pendragon PDF read in this sweep",
+  "registerHint": "none",
+  "confidence": "medium",
+  "angle": "craft",
+  "verdict": {
+   "index": 156,
+   "verdict": "PARTIAL",
+   "trueWording": "without the careless reader's even noticing",
+   "note": "The quotation is verbatim on the page, and Carey's copy is identified as the revised 1989 Women's Press edition. But the page never mentions a Pendragon edition, a 1973 text, or any variant reading: 'Pendragon' appears zero times and the only 1973 dates are essay composition dates. The edition-comparison is the verifier's, not the source's.",
+   "unsupportedLimb": "the 1973 Pendragon text's reading 'the careless readers even noticing' - no variant, no Pendragon edition, and no textual comparison appears on the page",
+   "fromFile": "verdicts-leguin-i150-164.json"
   }
  }
 ]

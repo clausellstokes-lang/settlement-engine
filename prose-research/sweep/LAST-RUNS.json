@@ -1,9 +1,51 @@
-{"_doc": "the LAST launch of every sweep (chair, 2026-09-06 08:10): runId (this session's; dies with it), argsFile (the args it was launched with), tag, script. resume-research.sh reads this to rebuild the next round from the files.",
- "tolkien": {"runId": "wf_d8edf077-aca", "argsFile": "args-tolkien-r3c.json", "tag": "r3c", "script": "research-workflow-v3.js"},
- "kay":     {"runId": "wf_d3dd5573-480", "argsFile": "args-kay-r3c.json",     "tag": "r3c", "script": "research-workflow-v3.js"},
- "leguin":  {"runId": "wf_82a424f3-15a", "argsFile": "args-leguin-r3c.json",  "tag": "r3c", "script": "research-workflow-v3.js"},
- "wolfe":   {"runId": "wf_97888015-461", "argsFile": "args-wolfe-r3c.json",   "tag": "r3c", "script": "research-workflow-v3.js"},
- "martin":  {"runId": "wf_faf66625-17e", "argsFile": "args-martin-r3c.json",  "tag": "r3c", "script": "research-workflow-v3.js"},
- "hobb":    {"runId": "wf_914a589e-da6", "argsFile": "args-hobb-r3c.json",    "tag": "r3c", "script": "research-workflow-v3.js"},
- "dnd":     {"runId": "wf_4f47327c-3fe", "argsFile": "args-dnd-r3c.json",     "tag": "r3c", "script": "research-workflow-v3.js"},
- "ai":      {"runId": "wf_06e82de3-dcd", "argsFile": "args-ai-r3c.json",      "tag": "r3c", "script": "research-workflow-v3.js"}}
+{
+ "_doc": "the LAST launch of every sweep (chair, 2026-09-06 12:58 (round 4 launched 12:57\u201312:58 beside the \u00a7903 gate, on the owner's word)): runId (this session's; dies with it), argsFile (the args it was launched with), tag, script. resume-research.sh reads this to rebuild the next round from the files.",
+ "tolkien": {
+  "runId": "wf_61555b6a-d7c",
+  "argsFile": "args-tolkien-r4.json",
+  "tag": "r4",
+  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+ },
+ "kay": {
+  "runId": "wf_ae11ef1d-bb8",
+  "argsFile": "args-kay-r4.json",
+  "tag": "r4",
+  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+ },
+ "leguin": {
+  "runId": "wf_5e5c7e72-458",
+  "argsFile": "args-leguin-r4.json",
+  "tag": "r4",
+  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+ },
+ "wolfe": {
+  "runId": "wf_58e1616d-d5f",
+  "argsFile": "args-wolfe-r4.json",
+  "tag": "r4",
+  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+ },
+ "martin": {
+  "runId": "wf_c7cc5b15-ee7",
+  "argsFile": "args-martin-r4.json",
+  "tag": "r4",
+  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+ },
+ "hobb": {
+  "runId": "wf_22752bb0-128",
+  "argsFile": "args-hobb-r4.json",
+  "tag": "r4",
+  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+ },
+ "dnd": {
+  "runId": "wf_f9424af6-fcf",
+  "argsFile": "args-dnd-r4.json",
+  "tag": "r4",
+  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+ },
+ "ai": {
+  "runId": "wf_d28449b9-5d6",
+  "argsFile": "args-ai-r4.json",
+  "tag": "r4",
+  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+ }
+}

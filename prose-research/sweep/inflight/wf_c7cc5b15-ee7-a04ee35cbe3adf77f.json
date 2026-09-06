@@ -3,14 +3,15 @@
  "name": "martin",
  "angle": "measurement",
  "tag": null,
- "lines": 38,
+ "lines": 159,
  "firstTs": "2026-09-06T16:56:32.300Z",
- "lastTs": "2026-09-06T16:58:15.484Z",
+ "lastTs": "2026-09-06T17:06:52.861Z",
  "tools": {
   "Read": 1,
-  "Bash": 7,
+  "Bash": 36,
   "ToolSearch": 1,
-  "WebSearch": 2
+  "WebSearch": 5,
+  "WebFetch": 3
  },
  "urlsFetched": [
   "https://archive.org/advancedsearch.php?q=title%3A%22Nabokov%27s+favorite+word+is+mauve%22&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=10&output=json",
@@ -20,7 +21,30 @@
   "http://prosecraft.io/library/george-r-r-martin/a-storm-of-swords/",
   "http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/",
   "https://api.archivelab.org/books/nabokovsfavorite0000blat/searchinside?q=Martin",
-  "https://api.archivelab.org/books/artoflanguageinv0000pete/searchinside?q=Martin"
+  "https://api.archivelab.org/books/artoflanguageinv0000pete/searchinside?q=Martin",
+  "https://web.archive.org/cdx/search/cdx?url=prosecraft.io/library/george-r-r-martin*&output=text&fl=timestamp,original,statuscode&collapse=urlkey&limit=60",
+  "https://archive.org/metadata/$id",
+  "https://ia800108.us.archive.org/fulltext/inside.php?item_id=nabokovsfavorite0000blat&doc=nabokovsfavorite0000blat&path=/16/items/nabokovsfavorite0000blat&q=Martin",
+  "https://web.archive.org/cdx/search/cdx?url=prosecraft.io*&output=text&fl=timestamp,original&collapse=urlkey&limit=200&filter=original:.*martin.*",
+  "https://web.archive.org/cdx/search/cdx?url=prosecraft.io/library*&output=text&fl=timestamp,original&collapse=urlkey&limit=80",
+  "https://web.archive.org/web/20181027143335id_/http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/",
+  "https://www.googleapis.com/books/v1/volumes?q=intitle:%22Nabokov%27s+Favorite+Word+Is+Mauve%22",
+  "https://www.googleapis.com/books/v1/volumes?q=intitle:%22The+Art+of+Language+Invention%22",
+  "https://www.googleapis.com/books/v1/volumes?q=intitle:%22Art+of+Language+Invention%22",
+  "https://ia-fts.archive.org/api/v1/search/hits?q=Dothraki&identifier=artoflanguageinv0000pete",
+  "https://api.archivelab.org/books/artoflanguageinv0000pete/searchinside?q=Dothraki",
+  "https://ia902905.us.archive.org/BookReader/BookReaderSearch.php?url=ia902905.us.archive.org/fulltext/inside.php%3Fitem_id%3Dartoflanguageinv0000pete%26doc%3Dartoflanguageinv0000pete%26path%3D/12/items/artoflanguageinv0000pete%26q%3DDothraki",
+  "https://wordsrated.com/a-song-of-ice-and-fire-statistics/",
+  "https://archive.org/download/pdfcoffee.com-the-art-of-language-invention-from-horse-lords-to-dark-elves-the-w/pdfcoffee.com_the-art-of-language-invention-from-horse-lords-to-dark-elves-the-words-behind-world-building-pdfdrive-pdf-free%20(1",
+  "https://nineworldsacademia.wordpress.com/2014/08/15/writing-westeros-a-corpus-linguistic-study-of-a-song-of-ice-and-fire/",
+  "https://ia800806.us.archive.org/33/items/pdfcoffee.com-the-art-of-language-invention-from-horse-lords-to-dark-elves-the-w/pdfcoffee.com_the-art-of-language-invention-from-horse-lords-to-dark-elves-the-words-behind-world-building-pdfdrive-pdf-free%20%281%29_djvu.txt",
+  "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+  "https://books.google.com/books?vid=ISBN9781501105388",
+  "https://iceandfire.fandom.com/wiki/A_Game_of_Thrones/Statistical_Analysis",
+  "https://iceandfire.fandom.com/wiki/A_Game_of_Thrones/Statistical_Analysis?action=raw",
+  "https://books.google.com/books?id=0AhHDgAAQBAJ",
+  "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=$q",
+  "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=$1"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method, then work the roster.",
@@ -30,8 +54,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-martin-measurement.json",
-  "claims": 49,
+  "claims": 72,
   "complete": false,
-  "mtime": "08:25:22"
+  "mtime": "13:05:33"
  }
 }

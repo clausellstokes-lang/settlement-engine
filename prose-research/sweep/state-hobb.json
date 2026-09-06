@@ -7958,6 +7958,430 @@
    "trueWording": "Rather than being of battle or intrigue, conversations turn to the uses of herbs, the seasons for crops, and fair treatment of servants.",
    "note": "lareviewofbooks.org, same review, sentence immediately after the Withywoods passage. Quote verbatim and every limb -- herbs, crop seasons, fair treatment of servants, rather than battle -- is in that one sentence.",
    "fromFile": "verdicts-hobb-i45-59.json"
+  },
+  "60": {
+   "index": 60,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "revving the engine in the hundred pages before the end",
+   "note": "LARB (Teitelbaum, 8 Sep 2014) verbatim; continues \"By doing so only after she has taken care to ensconce the reader ... she increases the payoff (and the heartbreak) at the end exponentially\" - every limb supported.",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "61": {
+   "index": 61,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "what is most important is what is not said",
+   "note": "Verbatim on the LARB page, applied to \"much of the character development in the series\" and illustrated by the Chade/Fitz exchange, so the \"between characters\" limb holds.",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "62": {
+   "index": 62,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no magic moment of overcoming the past",
+   "note": "Verbatim, and the sentence continues \"the traumas of childhood abandonment and abuse linger and take new shapes as Fitz matures to adulthood\" - both limbs supported word for word.",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "63": {
+   "index": 63,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "magic and brutal violence are fuel for the psychological dimension, not the other way around",
+   "note": "Verbatim on the LARB page including the \"not the other way around\" clause.",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "64": {
+   "index": 64,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "couched in the form of a painfully confessional memoir written and presented as a manuscript for future perusal",
+   "note": "SFE entry \"Hobb, Robin\" (updated 6 Oct 2025), signed [JC] = John Clute, so the attribution holds; scoped to \"especially in the first volumes\", matching the claim's \"early Farseer volumes\".",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "65": {
+   "index": 65,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You feel every blow, sword-cut and fever suffered by the hapless Fitz",
+   "note": "Ansible 1997 SFX Reviews, stated header: \"reviews written by David Langford for SFX magazine in 1997\". The #assassin section is Assassin's Quest (SFX #24, April 1997).",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "66": {
+   "index": 66,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "How Fitz reacts to things is the story, is the point of the things that go on around him",
+   "note": "Quote verbatim (only a sentence-initial capital differs). Second limb supported on the same page: the review opens with the \"4/5ths of the book was pointless filler\" charge it rejects, and later says \"The bulk of this book is probably my favourite and almost certainly the best of Hobb's novels\", alongside \"I'd be quite happy just reading three books of the man sitting around, hanging out, having tea with people, deciding which clothes to buy\".",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "67": {
+   "index": 67,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "even when Fitz is calm and happy, he is having to work hard at being calm and happy",
+   "note": "Verbatim; the page frames it as \"There is a strong feeling that ...\", which supports the claim's \"the prose shows him working hard to stay so\".",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "68": {
+   "index": 68,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His prose feels natural because it is intimate, but intimacy should not be mistaken for simplicity",
+   "note": "Verbatim, and the next sentence supplies the second limb: \"The clarity with which he renders character, politics, landscape, memory, and moral conflict is itself evidence of extraordinary literary intelligence.\"",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "69": {
+   "index": 69,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He narrates his doubts, failures, grief, and shame",
+   "note": "Verbatim, and the asymmetry limb is the next sentence: \"The moments where he is operating at full capacity pass without comment because, to him, they are simply what he does.\"",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "70": {
+   "index": 70,
+   "verdict": "PARTIAL",
+   "trueWording": "cataloged the medicinal unguents on the mantel, the two pens at the ready",
+   "unsupportedLimb": "the desk - the page names no desk anywhere (grep for \"desk\" returns zero hits); the catalogue is the mantel, the two pens, and \"the Stones puzzle on the table\"",
+   "note": "Also note the supplied quote is not word-for-word: the page reads \"the two pens at the ready\" (definite article dropped in the claim). The mantel/inventory-as-characterisation core is supported - Fitz cataloguing Lant's room as evidence of training that \"is still running beneath the surface constantly and automatically\".",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "71": {
+   "index": 71,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "her characters are so real and so engaging that you can't help but to be fascinated by them, even when they are performing the most routine tasks",
+   "note": "Verbatim on the Hippogriff's Aerie Fool's Assassin review; the page continues \"or having pages of conversations\".",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "72": {
+   "index": 72,
+   "verdict": "PARTIAL",
+   "trueWording": "Her overreliance on adverbs often stunts the novel's flow",
+   "unsupportedLimb": "the plural \"the Liveship novels'\" - the page says \"the novel's flow\" (singular), inside its Ship of Magic discussion; it makes no such charge against The Mad Ship or Ship of Destiny",
+   "note": "Quotation verbatim. \"Sympathetic critic\" is supported: the piece (Lew Kelly, Fantasy-Faction, 19 Aug 2014) opens \"Credit goes to Robin Hobb for doing something new and challenging\" and calls the trilogy \"wonderfully plotted with plenty of deeply created characters\".",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "73": {
+   "index": 73,
+   "verdict": "PARTIAL",
+   "trueWording": "There is no princess saved, no true love. The hero is not lauded by the realm and given riches",
+   "unsupportedLimb": "compressed with 'After a time' - the essay never discusses that phrase as a device; \"After a time\" occurs exactly once on the page, inside a block quotation of Hobb's novel (Starling's kiss), with no analytic comment on it",
+   "note": "The loss-as-absence limb is supported verbatim. Jeffrey O, \"Lies Are What A Man Needs Most\", 20 Jan 2025.",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "74": {
+   "index": 74,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hobb never shies away from the exhausting reality of traveling, hunting, dealing with other people",
+   "note": "Verbatim (page continues \"-- and dealing with dragons\"). Molly Templeton, Reactor, published 7 June 2019, originally May 2017; the sentence sits in the Rain Wild Chronicles section but is phrased as a general statement about Hobb.",
+   "fromFile": "verdicts-hobb-i60-74.json"
+  },
+  "75": {
+   "index": 75,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hobb writes epic fantasy, Lindholm writes more to the point.",
+   "note": "Raw HTML fetched with a browser UA (curl, 200). Sentence appears verbatim in the body of the 2011-04 review of The Inheritance: 'this is one of the main differences between Hobb and Lindholm. Hobb writes epic fantasy, Lindholm writes more to the point.' Both limbs (Hobb epic, Lindholm more to the point) on the page.",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "76": {
+   "index": 76,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you don't so much read them as live them",
+   "note": "Raw HTML fetched with a browser UA (curl, 200). Opening paragraph, dated 01 August 2015: 'And the trouble with Robin Hobb's books is that you don't so much read them as live them.' Quote verbatim apart from the page's curly apostrophe. The page is one reader (Jackie Morris), but the generalized second person 'you' carries the claim's plural 'Readers'.",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "77": {
+   "index": 77,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each chapter of the novel begins with a lengthy epigraph selected from a history of the kingdom, the Six Duchies",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Quote verbatim on journal p.45 (PDF p.4), matching the cited page. Every limb supported: 'Each chapter', 'lengthy epigraph', 'selected from a history of the kingdom, the Six Duchies, also written by Fitz' (in-world).",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "78": {
+   "index": 78,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "largely a formal history written in a distant, scholarly voice",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.45: 'The chapter epigraphs are excerpts from a public document, largely a formal history written in a distant, scholarly voice. The main narrative, on the other hand, is undefined, perhaps a private text or even an internal monologue, filled with Fitz's reminiscences instead of \"objective\" history.' The 'first-person' limb is carried by the article's own abstract: 'before giving a first-person personal narrative'.",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "79": {
+   "index": 79,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57 (PDF p.16), matching the cited page: 'The \"marginalia\" here (that is, the main text) feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter, as it allows the reader to more fully imagine her.' Both limbs on the page; note Oliver adds 'but objective', and makes the assessment at the chapter-13 instance.",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "80": {
+   "index": 80,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This lengthy excerpt contains no hint of the author's relationship to her",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.56 (PDF p.15), matching the cited page: 'Chapter 13, for instance, opens with an epigraph describing his father's widow, Patience. This lengthy excerpt contains no hint of the author's relationship to her or that any information in it came from his experience of her.' Oliver's wording is 'his father's widow' rather than 'stepmother' — the same relation, entailed by the page.",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "81": {
+   "index": 81,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Instead, he includes evidentiary quotes from her nursemaids and publicly available information.",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.56, matching the cited page. The 'in place of personal knowledge' limb is supported by the immediately preceding sentence: 'contains no hint ... that any information in it came from his experience of her. Instead, ...'",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "82": {
+   "index": 82,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Perhaps the most striking stylistic element of this book is its continual insistence on describing what is not happening",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57, matching the cited page. Oliver hedges with 'Perhaps', which the claim drops; the feature named is otherwise identical, and the sentence continues 'instead of or before describing what is happening, a style we might think of as \"negative narration.\"'",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "83": {
+   "index": 83,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in sentences that start by telling what a character is not doing or feeling",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57, matching the cited page: 'a style we might think of as \"negative narration.\" This manifests not just in double negatives (of which there are many) but in sentences that start by telling what a character is not doing or feeling.' Both limbs — the label and the mechanism — on the page.",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "84": {
+   "index": 84,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "particularly frequent in the early chapters, where scarcely a page goes by without obvious examples",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57, matching the cited page, followed by quoted examples from pp.6, 7 and 9 of the novel.",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "85": {
+   "index": 85,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "While the frequency of such negative constructions lessens as the novel continues, it remains one of the predominant modes throughout.",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57, matching the cited page. Both limbs — the falling-off and the persistence — in one sentence.",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "86": {
+   "index": 86,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "particularly extensive parataxis, elevated figurative language, and parallelism",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.59 (PDF p.18), matching the cited page: 'a shift in style as Fitz narrates his \"dream.\" His description employs several syntactic patterns typical of the elevated style associated with fantasy novels, particularly extensive parataxis, elevated figurative language, and parallelism.' The persuasion limb is supported on the same page — 'he convinces her ... by claiming he has had a prophetic dream, \"a vision\"' — and the addressee is a duchess ('she was no longer a common girl, but a duchess').",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "87": {
+   "index": 87,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Fitz marks his shift from a discourse of history to a discourse of fantasy with a shift in style.",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.60 (PDF p.19), matching the cited page: 'Thus, at this key moment in Fitz's development, Fitz marks his shift from a discourse of history to a discourse of fantasy with a shift in style.'",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "88": {
+   "index": 88,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the epigraphs become increasingly infected by the style of imaginative fiction in place of the style of scholarly discourse",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.62 (PDF p.21), matching the cited page: 'This seeming shift late in the novel ... Even as the narrator starts to shift the burden of constructing events to the reader, the epigraphs become increasingly infected by the style of imaginative fiction in place of the style of scholarly discourse.' pypdf renders it 'imag inative' — a line-break extraction artifact, not the page's text; whitespace-insensitive matching confirms the run.",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "89": {
+   "index": 89,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "here a poetic lyricism creeps into his style in the epigraph",
+   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.62, matching the cited page: 'the best example ... occurs at the start of the \"misted\" section in chapter 15, which begins with an epigraph describing the experience of using the Skill ... whereas in the earlier epigraphs Fitz has largely kept the style of the epigraphs and the main text separate, here a poetic lyricism creeps into his style in the epigraph.' The 'supposedly scholarly history' limb is the article's standing characterisation of the epigraphs (p.45).",
+   "fromFile": "verdicts-hobb-i75-89.json"
+  },
+  "90": {
+   "index": 90,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Two sentences use inverted syntax (the first and the last)",
+   "note": "Mythlore PDF p.63 (Wayback capture of dc.swosu.edu viewcontent; live PDF 403). Full sentence: 'Two sentences use inverted syntax (the first and the last), in addition to the parataxis across sentence boundaries (\"And this is the thing\") and the listing of parallel phrases (\"a keenness of life, an uplifting of being\"; \"Compelling is this feeling [...] and addictive\").' Preceded by 'the tonal dissonance of this passage is striking', which supports the 'drift' limb; Oliver's conclusion is that Fitz's personal experience leaks into the scholarly epigraph style.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "91": {
+   "index": 91,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this entire lengthy section is marked by the absence of a key detail",
+   "note": "Mythlore p.61. 'Thus, this entire lengthy section of narrative is marked by the absence of a key detail-Galen's tampering with Fitz's mind-a key detail that is nearly always present to the reader but never overtly stated.' The seventy-page limb is supported on the same page: 'Then Verity finally explicates what has been happening for the past 70 pages of the novel.' Both sentences refer to the same 'misted' section.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "92": {
+   "index": 92,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we are told what they are not doing, but it only leaves implied what they are doing",
+   "note": "Mythlore p.61. Context: the Skill breakthrough with Verity - 'And in that moment I realized we were not speaking aloud, and sat bolt upright and looked at him' (338). Oliver: 'What is striking about this sentence is that it does not explain what the breakthrough is: we are told what they are not doing, but it only leaves implied what they are doing (speaking using the Skill).' Both men (Fitz and Verity) and the magic-returns limb are supported.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "93": {
+   "index": 93,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "training the reader to see what is not there, to imagine the connections",
+   "note": "Mythlore p.62. 'Thus, we could see this entire section of the novel as training the reader to see what is not there, to imagine the connections, the same mental process required of the historian constructing a narrative of the past based on evidence.' 'Supply the connections' = 'imagine the connections'.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "94": {
+   "index": 94,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "recollection and gossip masquerading as an accurate description of the past",
+   "note": "Mythlore p.63, block quotation of Mendlesohn (16), attributed 'Mendlesohn's argument that this novel (and other epic fantasy like it) assumes...'; Works Cited confirms 'Mendlesohn, Farah. Rhetorics of Fantasy. Wesleyan UP, 2008.' Quote verbatim: 'Each chapter begins with a memoir not dissimilar to the Venerable Bede's history: recollection and gossip masquerading as an accurate description of the past.' Fair-reading caveat, not a defect: Mendlesohn calls the circular argument 'nonetheless valid', and Oliver replies that she 'misses how the structure of epigraph and negative space precisely draw attention to the \"masquerade\", undermining its authority even as it is instated' (p.64) - so the disputing-authority gloss is Oliver's reading of her as much as hers.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "95": {
+   "index": 95,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The conjunction 'but' here violates the conventional separation",
+   "note": "Mythlore p.55. 'Thus, in the second chapter, Fitz follows up a historical narrative in the epigraph by starting the main text with \"But family rumor says\" (24). The conjunction \"but\" here violates the conventional separation of epigraph from text, drawing attention to that relation rather than allowing the paratext to function invisibly.' Chapter-two and the 'But' limbs both explicit.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "96": {
+   "index": 96,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Chapter 22 has an inexplicable narrative intrusion into the epigraphs",
+   "note": "Mythlore p.62. 'Chapter 20 has epigraph text from the subjective perspective of another culture while the \"objective\" scholarly attribution is relocated to the main text at the start of the chapter, and Chapter 22 has an inexplicable narrative intrusion into the epigraphs, as the epigraph describes a dream-vision Fitz has'. Both named breaches verbatim. Context caveat, not an unsupported limb: Oliver introduces them as part of 'several instances' of heightened blurring and calls the chapter-15 epigraph 'the best example', so 'two' is not an exhaustive count of the breaches he records.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "97": {
+   "index": 97,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Naming customs, titles, and social positions, and what text genres exist",
+   "note": "Ekman & Taylor, JFA 32.2, p.253, 'Function Two: Adding Details' (Wayback raw capture of the DiVA PDF; live diva-portal.org timed out twice, curl exit 28). 'The epigraph source, as well as the epigraph itself, can provide information that indicates a way to approach a secondary world. Naming customs, titles, and social positions, and what text genres exist in the world can be determined from the sources given.' Note the page says the source AND the epigraph itself provide this; the claim's narrower 'source line' reading is still covered by 'can be determined from the sources given'.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "98": {
+   "index": 98,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Even without reading the texts of the epigraphs, it is possible to determine",
+   "note": "Ekman & Taylor p.253. Cherryh 'Gate of Ivrel' example, three source lines only: 'Even without reading the texts of the epigraphs, it is possible to determine that the secondary world contains a conflict between science and tradition, suggesting that mix of genres sometimes referred to as \"science fantasy.\"' Generalized in the next sentence: 'Regardless of how the text portrays the world, the epigraph points out the generic context in which the world should be constructed for analysis.'",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "99": {
+   "index": 99,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the writing suggests a philosophical treatise and thus hints at a form of society",
+   "note": "Ekman & Taylor p.252, on the Bakker epigraph (Ajencis, Discourse on War). 'Through linguistic markers such as \"further argument,\" \"supposition,\" and \"discourse,\" the writing suggests a philosophical treatise and thus hints at a form of society in which such treatises are written.' All three lexical markers verbatim; 'linguistic markers' rather than 'lexical markers'.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "100": {
+   "index": 100,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The style is that of a scholarly treatise that emerges from within the fictional world",
+   "note": "Ekman & Taylor p.256, 'Function Three: Adding Perspectives', on McKillip's The Bards of Bone Plain chapter-two epigraph. Continues: 'The text sets itself up as an authoritative source while at the same time suggesting that the poems, ballads, and tales by or about Nairn do not convey a true picture.' Both limbs verbatim.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "101": {
+   "index": 101,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in which the epigraph is a more objective account ... the main text is more biased",
+   "note": "Ekman & Taylor p.256. 'Epigraphs can determine the reliability of the main text (or its narrator) by either implying that the epigraph is the less reliable retelling (a ballad, prophesy, or tale for instance) and the main text is a more reliable version of events; or vice versa, in which the epigraph is a more objective account (for instance a scholarly or even scientific text) and the main text is more biased.'",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "102": {
+   "index": 102,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "mimicking text genres that are not fiction, such as the research paper, the parliamentary debate, the historical treatise",
+   "note": "Ekman & Taylor p.258. 'The epigraphs are parts of the work of fiction while mimicking text genres that are not fiction, such as the research paper, the parliamentary debate, the historical treatise. Their many voices can thus rely on both polyphony and mimicry to build a more complex world.' Sentence is scoped to McKillip's, Fforde's and Erikson's epigraphs, but the mimicry mechanism is stated generally.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "103": {
+   "index": 103,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ship of Magic (1998) is a pure figural narrative formally similar to Martin's",
+   "note": "Lagus thesis, helda.helsinki.fi PDF fetched live (200, 143pp). Printed p.125 (PDF page 127): 'By comparison, Robin Hobb's (1952-) Ship of Magic (1998) is a pure figural narrative formally similar to Martin's. Its internal focalization is immersive and often pronounced, and its strong figurality is on a par with the figurality in Martin and Donaldson.' Metadata correction only, no bearing on the claim: p.125 sits in section 4.3 ('From the 1980s to the 2000s', pp.116-131), not ch. 5 (Conclusion, p.134).",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "104": {
+   "index": 104,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Like Martin, Hobb uses consonant psychonarration and empathic FID to great effect",
+   "note": "Lagus, printed p.125, the sentence immediately following the claim-103 passage: 'Like Martin, Hobb uses consonant psychonarration and empathic FID to great effect. External focalization ... is negligible.' Lagus defines FID as free indirect discourse at 3.1/1.5. Same metadata correction as 103: the passage is in section 4.3, not ch. 5.",
+   "fromFile": "verdicts-hobb-i90-104.json"
+  },
+  "105": {
+   "index": 105,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Its internal focalization is immersive and often pronounced\"",
+   "note": "Raw PDF (698 KB, 143 pp.) extracted with pypdf. Verbatim on printed p.125 (PDF p.127): \"Robin Hobb's (1952-) Ship of Magic (1998) is a pure figural narrative formally similar to Martin's. Its internal focalization is immersive and often pronounced, and its strong figurality is on a par with the figurality in Martin and Donaldson.\" Both limbs (Lagus; Ship of Magic) supported. Metadata nit: p.125 falls in ch. 4 (4.3 'From the 1980s to the 2000s: Toward Figural Fantasy', pp.116-131), not ch. 5 (Conclusion, p.134) as the claim's page field says. Author/venue confirmed on the title page: Timo Lagus, Master's Thesis, Department of English, University of Helsinki, 5 December 2006.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "106": {
+   "index": 106,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Sitting by her dying husband's bedside, Ronica Vestrit, the matriarch\"",
+   "note": "Verbatim (curly apostrophe) on printed p.127: \"Sitting by her dying husband's bedside, Ronica Vestrit, the matriarch of a once-powerful Liveship trader family from Bingtown, reflects on her grief, her husband, and the maid Rache in Hobb's Ship of Magic:\" followed by a block quotation (pp.127-128, cited '(50-51)'). Every limb holds: the exemplification frame is Lagus's own sentence on p.125 -- \"The following excerpts exemplify the characteristic figural perspectivism in the three novels\"; the reprinted passage has Ronica weighing whether to send Rache back to Davad, and the text names her status -- \"While she remained in Bingtown, she was nominally an indentured servant.\" Metadata nit: the passage begins on p.127 and runs to p.128 (ch. 4), not pp.126-127 / ch. 5.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "107": {
+   "index": 107,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"that of a historian getting distracted by their own role\"",
+   "note": "Raw PDF (1.5 MB, 151 pp.) extracted with pypdf. Verbatim on printed p.56: \"The narrator version of Fitz inevitably ends up focusing on the big-picture repercussions of his existence: as a narrator, Fitz's perspective is that of a historian getting distracted by their own role in the history.\" 'Older narrating Fitz' is supported -- the thesis uses 'older/narrator-Fitz' at p.92. TWO metadata errors, neither a limb of the claim sentence: (1) the thesis title page reads 'Caitlyn Moon', not 'Emily Moon' (title, degree, Kent and October 2024 all otherwise confirmed); (2) the quote is on p.56 in Chapter One ('Wit and Skill', p27-63), not ch. 2 p.55.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "108": {
+   "index": 108,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the abrupt addition and disappearance of quotation marks\"",
+   "note": "Verbatim on printed p.92: \"The dichotomy between the comfortable use of she/her pronouns versus the abrupt addition and disappearance of quotation marks around the pronoun demonstrates a difference between the automatic acceptance of a child versus the learnt disdain of an adult.\" The 'seam' limb is supported by the immediately preceding sentence: \"the first half of the quote could easily be read as from the young Fitz ... whereas the second quote more clearly comes from the older/narrator-Fitz\"; the marked pronoun is Chade-as-Lady-Thyme's \"'She'.\" Metadata: p.92, not p.88; and the author is Caitlyn Moon, not Emily Moon.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "109": {
+   "index": 109,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"casts the fantastic as an unquestioned, familiar aspect of the setting\"",
+   "note": "Fetched the article wikitext raw (action=raw, 52 KB). Style section, verbatim: \"Hobb uses a style within the fantasy genre that casts the fantastic as an unquestioned, familiar aspect of the setting: this creates an 'illusion of familiarity' for the reader, according to scholar Susan Mandala.\" Cited {{sfnp|Mandala|2010|pp=100-102}}, matching the claim's source line exactly. Both limbs (the framing; the illusion of familiarity) supported.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "110": {
+   "index": 110,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the narration matches how he experiences the dream\"",
+   "note": "Style section, verbatim: \"When Fitz first shares a dream with a dog, the narration matches how he experiences the dream - as a perfectly natural, as opposed to fantastic, event - through language that is 'lexically coherent' across the human and animal segments, in Mandala's view.\" The 'lexically coherent across the human and the animal parts' limb is on the page word for word as 'across the human and animal segments'; cited {{sfnp|Mandala|2010|p=102}} plus Larsson 2021 pp.130-131 (claim's source line says Mandala 101-102; the article gives p.102 here and pp.101-102 for the adjacent Skill sentence).",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "111": {
+   "index": 111,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the narrative does not address the term directly\"",
+   "note": "Style section, verbatim: \"Similarly, when Fitz first mentions the telepathic Skill, the narrative does not address the term directly, assuming that its meaning is known in-world, but instead focuses on the Skill's potential effect on Fitz's memory, and its addictive qualities.\" Both limbs supported -- 'does not explain the term' = 'does not address the term directly'; 'treating its meaning as known inside the world' = 'assuming that its meaning is known in-world'. Cited {{sfnp|Mandala|2010|pp=101-102}}.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "112": {
+   "index": 112,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Fitz describes his immediate family in the same terms as the\"",
+   "note": "Style section, verbatim: \"For instance, Fitz describes his immediate family in the same terms as the strangers he meets: his grandfather becomes 'the tall man', and his mother is 'a voice' that is distant and unfamiliar, signifying his emotional distance from them.\" Both named details ('the tall man', 'a voice') present; attributed on the page to Mandala, cited {{sfnp|Mandala|2010|pp=128-130}}, matching the claim's source line.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "113": {
+   "index": 113,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"short memoirs prefacing each chapter that narrate a fictional history\"",
+   "note": "Style section, verbatim: \"The novels contain short memoirs prefacing each chapter that narrate a fictional history of the setting: these excerpts are also unreliable narratives, relaying 'recollection and gossip'.\" Both limbs supported. The claim correctly attributes this to the Wikipedia article as such; on the page it carries {{sfnp|Mendlesohn|2014|p=16}}.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "114": {
+   "index": 114,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the all-too-human factors of avarice and pettiness\"",
+   "note": "Fetched the live page (205 KB HTML, 200) and stripped tags. Section 'The Typical Sites of Memory: The Stone Quarry, the Dragon Garden, and Kelsingra', verbatim: \"Attention to such concerns-the all-too-human factors of avarice and pettiness-is a hallmark of Hobb's writing\". The looting limb is supported two sentences earlier: \"Kelsingra, and presumably the quarry and garden with which they are linked, end up subject to looting-not only by FitzChivalry ... but also by avaricious merchants.\" Kelsingra is a memorial city on the page: \"That city is itself a silent memorial of a bygone civilization\" and \"serving as a necropolis\".",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "115": {
+   "index": 115,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a multi-generational loan, secured by potential marriages, to purchase one\"",
+   "note": "Section 'The Strange Sites of Memory: The Liveships', verbatim: \"As such, they are highly prized-such that a multi-generational loan, secured by potential marriages, to purchase one is not at all uncommon-and, in some ways, are regarded as both enduring members of their owning families and the defining emblems of those same families.\" Bingtown limb supported ('Peculiar to the Bingtown Traders'), family limb supported ('owning families'). One wording nit that does not change the grade: the page says 'is not at all uncommon' (litotes), which the claim renders as 'commonly takes'.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "116": {
+   "index": 116,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that Elliott presents this as how Hobb *introduces* Kelsingra, i.e. through Fitz's non-perception",
+   "trueWording": "\"When FitzChivalry first encounters Kelsingra, he finds it empty\"",
+   "note": "The quotation is on the page word for word: \"When FitzChivalry first encounters Kelsingra, he finds it empty, perceiving no signs of life around him;\". But Elliott makes no claim about Hobb's technique of introduction, and the same sentence continues into positive perception, not absence: \"as he searches it, he finds that 'Whole domes of roofs had fallen in...outer walls had fallen away entirely' ... and sees, among others, 'the tatters of ancient hangings, a collapsed wooden bench.'\" Elliott also introduces Kelsingra two sentences earlier in his own descriptive voice ('That city is itself a silent memorial of a bygone civilization'), and later notes the city 'replays' its memories to Fitz, 'immersing him in images of the daily lives of inhabitants' -- so the city is not rendered through what Fitz fails to perceive. Grade is PARTIAL, not VERIFIED: the narrative-craft limb is the claim's gloss, not Elliott's.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "117": {
+   "index": 117,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the forty-seven best-selling books\"",
+   "note": "Fetched the PLOS article page (224 KB HTML, 200) and stripped tags -- full text present. Verbatim in the Introduction: \"the results will be presented and discussed for the forty-seven best-selling books in terms of typical network measures\" (and Methods: 'We have arbitrarily restricted our analysis to forty-seven books'). The Hobb limb is verbatim in the same section's corpus list: \"the three 'Liveship Traders' [25-27] and four 'Rain Wild Chronicles' [28-31] books by Robin Hobb\", and the reference list carries exactly seven Hobb titles (Ship of Magic, The Mad Ship, Ship of Destiny, The Dragon Keeper, Dragon Haven, City of Dragons, Blood of Dragons). Nit: the 47 also include Les Miserables, which the paper itself calls 'one classic' rather than a best-seller.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "118": {
+   "index": 118,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"relevant in the identification of the author's style like the dialog\"",
+   "note": "Verbatim under the heading 'Conclusion and future work' (curly apostrophe in 'author's'): \"Finally, some features were identified that might be relevant in the identification of the author's style like the dialog spacing and alias network topology.\" Both named features and the hedge ('might be relevant' -> 'may identify') are supported, and the section field matches the page's own heading.",
+   "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "119": {
+   "index": 119,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The dendrogram shows a good clustering of certain series\"",
+   "note": "Verbatim in Results, immediately after 'Fig 21. Dendrogram for the hierarchical clustering of the books using the Ward variance minimization algorithm.': \"The dendrogram shows a good clustering of certain series: 'Harry Potter', 'The Rain Wild Chronicles', 'The Lunar Chronicles' and 'The Mortal Instruments', for instance, appear to be clustered. Other series are more scattered, which can be attributed to a fluctuation of style: for instance, 'The Wheel of Time' is separated in three sub-clusters.\" Rain Wild limb explicit. The 'absence of style fluctuation' limb rests on the authors' own two-sentence contrast (scattered = fluctuation of style, Wheel of Time named) rather than on a separate positive sentence -- close enough to stand, and the paper says nothing to the contrary.",
+   "fromFile": "verdicts-hobb-i105-119.json"
   }
  },
  "assembledFrom": [

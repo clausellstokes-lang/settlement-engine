@@ -1,0 +1,32 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i105-119",
+ "lines": 93,
+ "firstTs": "2026-09-06T16:57:42.834Z",
+ "lastTs": "2026-09-06T17:03:33.689Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 22,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://helda.helsinki.fi/server/api/core/bitstreams/ae370f8d-eafe-41e3-8eb9-79b245702b82/content",
+  "https://kar.kent.ac.uk/108514/1/97moon2024maresfinal.pdf",
+  "https://en.wikipedia.org/w/index.php?title=Farseer_trilogy&action=raw",
+  "https://elliottrwi.com/2021/05/19/sites-of-memory-in-robin-hobbs-realm-of-the-elderlings/",
+  "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0126470"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and re-read successfully (19,927 bytes, 15 claims / 15 verdicts). All five sources reached as raw text on the first route — no BLOCKED, no Wayback needed.",
+ "run": "wf_22752bb0-128",
+ "agent": "a4a8fb2443409ad27",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-a4a8fb2443409ad27.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i105-119.json",
+  "exists": true
+ }
+}
