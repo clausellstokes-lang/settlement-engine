@@ -211,6 +211,117 @@ EXTRA_SOURCES2 = [
  dict(title='Dancing at the Edge of the World: Thoughts on Words, Women, Places (Grove Press) \u2014 full text scan',url=U_DANCE,kind='own-words',substantive=True,date='1989 (essays 1976-1988)',route='live URL + browser UA; ebin.pub full-text scan'),
 ]
 
+
+# ==== ROUND 2 BATCH D ====
+U_MIL='https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html'
+U_UOU='https://www.ursulakleguin.com/ursula-on-ursula'
+U_B51='https://www.ursulakleguin.com/blog/51-the-narrative-gift-as-a-moral-conundrum'
+U_B36='https://www.ursulakleguin.com/blog/36-readers-questions'
+U_LH16='https://lithub.com/ursula-k-le-guin-on-racism-anarchy-and-hearing-her-characters-speak/'
+reg(U_MIL,'x-millions2013.txt'); reg(U_UOU,'ukl-ursula-on-ursula.txt'); reg(U_B51,'ukl-blog_51-the-narrative-gift-as-a-moral-conundrum.txt')
+reg(U_B36,'ukl-blog_36-readers-questions.txt'); reg(U_LH16,'x-lithub2016.txt')
+for u in [U_MIL,U_UOU,U_B51,U_B36,U_LH16]: TEXT[u]=open(FILES[u],encoding='utf-8',errors='replace').read()
+RT='live URL, curl with browser UA, tags stripped locally'
+
+MIL='Ursula K. Le Guin interviewed by Paul Morton, "Getting Away with Murder: The Millions Interviews Ursula K. Le Guin", The Millions, 31 January 2013'
+add('plainness and economy','Le Guin says what she has learned as a writer, as she has gone on, is that you do as little as possible.',MIL,U_MIL,'you do as little as possible','answer near the end of the interview','own-words','asserts','2013',RT,'dossier-archivist','high')
+add('withheld information and inference','Le Guin says part of doing as little as possible is leaving a lot of it up to the reader.',MIL,U_MIL,'leaving a lot of it up to the reader','answer near the end of the interview','own-words','asserts','2013',RT,'dossier-archivist','high')
+add('plainness and economy','Le Guin says her writing has tended to become shorter and more allusive than it used to be.',MIL,U_MIL,'shorter and more allusive than it used to be','answer near the end of the interview','own-words','asserts','2013',RT,'dossier-archivist','high')
+add('gloss and over-explaining','Le Guin says of her own earlier novel The Lathe of Heaven that the characters talk too much and explain things too much.',MIL,U_MIL,'They talk too much. They explain things too much.','answer near the end of the interview','own-words','rejects','2013',RT,'dossier-archivist','high')
+add('cadence and rhythm','Le Guin says she loves the sound of language and plays with word sounds in her head.',MIL,U_MIL,'I love language, I love the sound of language.','answer on invented languages','own-words','asserts','2013',RT,'none','high')
+
+UOU='Ursula K. Le Guin, "Ursula on Ursula" (pronunciation guide and reader notes), ursulakleguin.com'
+add('naming and forms of address','Le Guin gives pronunciation guidelines for her invented names because how a name is said affects the sound and rhythm of a sentence.',UOU,U_UOU,'this does affect the sound and rhythm of a sentence','pronunciation section','own-words','asserts','undated site page','live URL, curl with browser UA','dossier-archivist','high')
+
+B51='Ursula K. Le Guin, blog 51, "The Narrative Gift as a Moral Conundrum", 2011 (text at ursulakleguin.com)'
+add('other: counter-evidence on style','Le Guin says an irresistibly readable story can be told in the most conventional, banal prose if the writer has the narrative gift.',B51,U_B51,'An irresistibly readable story can be told in the most conventional, banal prose','blog post body','own-words','disputes','2011',RT,'none','high')
+add('plainness and economy','Le Guin praises a book she admires by calling its prose of unobtrusive excellence.',B51,U_B51,'The prose is of unobtrusive excellence.','blog post body','own-words','asserts','2011',RT,'dossier-archivist','high')
+
+B36='Ursula K. Le Guin, blog 36, "Readers\u2019 Questions", 2011 (text at ursulakleguin.com)'
+add('other: style as substance','Le Guin says art is not explanation but what an artist does.',B36,U_B36,'Art isn\u2019t explanation.','blog post body','own-words','asserts','2011',RT,'none','high')
+
+LH16='Ursula K. Le Guin interviewed by Euan Monaghan, Literary Hub, 1 April 2016'
+add('other: composition process','Le Guin says that in writing Lavinia she was not choosing the way as an author but taking dictation.',LH16,U_LH16,'I wasn\u2019t choosing the way as an author, I was taking dictation','answer on the origin of Lavinia','own-words','asserts','2016',RT,'none','high')
+
+EXTRA_SOURCES3 = [
+ dict(title='Getting Away with Murder: The Millions Interviews Ursula K. Le Guin (Paul Morton)',url=U_MIL,kind='own-words',substantive=True,date='31 January 2013',route='live URL + browser UA'),
+ dict(title='Ursula on Ursula \u2014 pronunciation guide and reader notes',url=U_UOU,kind='own-words',substantive=True,date='undated site page',route='live URL + browser UA'),
+ dict(title='Blog 51: The Narrative Gift as a Moral Conundrum',url=U_B51,kind='own-words',substantive=True,date='2011',route='live URL + browser UA'),
+ dict(title='Blog 36: Readers\u2019 Questions',url=U_B36,kind='own-words',substantive=True,date='2011',route='live URL + browser UA'),
+ dict(title='Ursula K. Le Guin on Racism, Anarchy, and Hearing Her Characters Speak (Euan Monaghan), Literary Hub',url=U_LH16,kind='own-words',substantive=True,date='1 April 2016',route='live URL + browser UA'),
+ dict(title='Ursula K. Le Guin talks to Michael Cunningham (Electric Literature)',url='https://electricliterature.com/ursula-k-le-guin-talks-to-michael-cunningham-about-genres-gender-and-broadening-fiction/',kind='own-words',substantive=False,date='1 April 2016',route='live URL + browser UA \u2014 read in full; on genre politics, not prose style'),
+ dict(title='Blog 95: Are They Going to Say This is Fantasy? / Blog 27: Exercises / interview-karabatak / author-hour transcript',url='https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy',kind='own-words',substantive=False,date='2011-2015',route='live URL + browser UA \u2014 read; nothing on prose register'),
+ dict(title='Afterword to A Wizard of Earthsea (2012) quoted on Tumblr \u2014 quotation is an image, text unreachable',url='https://elodieunderglass.tumblr.com/post/652816227234971648/perkwunos-ursula-k-le-guin-afterword-to-a',kind='relay',substantive=False,date='2012 afterword',route='live URL + browser UA \u2014 BLOCKED (image, no text)'),
+ dict(title='SF Site: Driven By A Different Chauffeur (Nick Gevers interview, 2001)',url='http://www.sfsite.com/03a/ul123.htm',kind='own-words',substantive=False,date='November/December 2001',route='NOT FOUND \u2014 domain suspended; Wayback CDX temporarily offline, latest snapshot is the suspension page'),
+]
+
+
+# ==== ROUND 2 BATCH E: the Naimon poetry conversation (LitHub excerpt of Conversations on Writing) ====
+U_LHD='https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/'
+U_MAS='https://theanarchistlibrary.org/library/rob-maslen-towards-an-archaeology-of-the-future-theodora-kroeber-and-ursula-k-le-guin'
+reg(U_LHD,'y-lh-dictators.txt'); reg(U_MAS,'y-maslen.txt')
+for u in [U_LHD,U_MAS]: TEXT[u]=open(FILES[u],encoding='utf-8',errors='replace').read()
+NRT='live URL, curl with browser UA; the page carries letter-spacing artefacts, so quotations are taken from clean contiguous stretches'
+
+NSRC='Ursula K. Le Guin in conversation with David Naimon, excerpted from Ursula K. Le Guin: Conversations on Writing (Tin House, 2018), published at Literary Hub'
+add('cadence and rhythm','Le Guin says the sound and rhythm of prose is so different from poetry, being in a way much coarser.',NSRC,U_LHD,'the sound in the rhythm of prose, it is so different from poetry','the poetry conversation, answer on Woolf and sound','own-words','asserts','2018',NRT,'chronicle-line','high')
+add('cadence and rhythm','Le Guin says the rhythms of a prose work are a very long beat.',NSRC,U_LHD,'long beat, the rhythms of a prose work','the poetry conversation, answer on Woolf and sound','own-words','asserts','2018',NRT,'chronicle-line','high')
+add('cadence and rhythm','Le Guin says that, besides the long beat of the whole work, the sentence has its rhythms too.',NSRC,U_LHD,'Of course, the sentence has its rhythms too.','the poetry conversation, answer on Woolf and sound','own-words','asserts','2018',NRT,'dossier-archivist','high')
+add('cadence and rhythm','Le Guin says the deeper meaning that poetry shares with music is carried by the rhythm and the beat, the music of the sound.',NSRC,U_LHD,'it is the rhythm and the beat, the music of the sound that carries it','the poetry conversation, answer on Macaulay and Swinburne','own-words','asserts','2018',NRT,'herald-pools','high')
+add('cadence and rhythm','Le Guin says she does not think syllabically but rhythmically.',NSRC,U_LHD,'I don\u2019t think syllabically, I think rhythmically.','the poetry conversation, answer on haiku','own-words','asserts','2018',NRT,'none','high')
+
+MAS_SRC='Rob Maslen, "Towards an Archaeology of the Future: Theodora Kroeber and Ursula K Le Guin", Foundation: The Review of Science Fiction No. 67 (Summer 1996), text at The Anarchist Library'
+add('register modulation','Maslen argues that recording a diversity of understandings and ways of speaking inside a text written in a single language is the principal problem confronting Le Guin as a writer.',MAS_SRC,U_MAS,'recording a diversity of different understandings and ways of speaking','essay body, section on Semley\u2019s necklace','analysis','asserts','1996 (text posted at theanarchistlibrary.org)','live URL, curl with browser UA','dossier-archivist','high')
+
+EXTRA_SOURCES4 = [
+ dict(title='Ursula K. Le Guin: Dictators are Always Afraid of Poets \u2014 excerpt from Conversations on Writing (Naimon)',url=U_LHD,kind='own-words',substantive=True,date='2018',route='live URL + browser UA'),
+ dict(title='Ursula K. Le Guin, Editing to the End (David Naimon\u2019s memoir of the collaboration), Literary Hub',url='https://lithub.com/ursula-k-le-guin-editing-to-the-end/',kind='reception',substantive=False,date='2018',route='live URL + browser UA'),
+ dict(title='Rob Maslen, Towards an Archaeology of the Future: Theodora Kroeber and Ursula K Le Guin',url=U_MAS,kind='analysis',substantive=True,date='Summer 1996',route='live URL + browser UA'),
+]
+
+
+# ==== ROUND 2 BATCH F: the annalist source ====
+U_GALT='https://www.publicbooks.org/b-sides-john-galts-annals-parish/'
+U_W11='https://www.theguardian.com/books/2011/may/14/science-fiction-authors-choice'
+U_FRK='http://locusmag.com/2005/Issues/01LeGuin.html'
+U_SLATE='https://slate.com/culture/2004/12/ursula-k-le-guin-on-the-tv-earthsea.html'
+reg(U_GALT,'w-galt.txt'); reg(U_W11,'w-woolf2011.txt'); reg(U_FRK,'w-frankenstein.txt'); reg(U_SLATE,'w-whitewashed.txt')
+for u in [U_GALT,U_W11,U_FRK,U_SLATE]: TEXT[u]=open(FILES[u],encoding='utf-8',errors='replace').read()
+RT2='live URL, curl with browser UA, tags stripped locally'
+
+GSRC='Ursula K. Le Guin, "B-Sides: John Galt\u2019s Annals of the Parish", Public Books, 23 January 2017'
+add('civic record register','Le Guin describes Annals of the Parish as the annual records of a parish minister, kept and dated year by year for 50 years, from 1760 to 1810.',GSRC,U_GALT,'kept and dated year by year for 50 years','essay body, paragraph on the book\u2019s form','own-words','asserts','2017',RT2,'chronicle-line','high')
+add('point of view and distance','Le Guin calls the annalist narrator of that book a very old-fashioned narrator, and therefore reliable.',GSRC,U_GALT,'a very old-fashioned narrator, and therefore reliable','essay body, paragraph on Mr. Balwhidder','own-words','asserts','2017',RT2,'dossier-archivist','high')
+add('other: showing versus telling','Le Guin praises Galt for telling without showing, in defiance of what she calls the decree of the Iowa Writing School.',GSRC,U_GALT,'Galt tells without showing','essay body, pull quote and following paragraph','own-words','asserts','2017',RT2,'dossier-archivist','high')
+add('omission as information','Le Guin says that in these annals violence is witnessed without participation.',GSRC,U_GALT,'Violence is witnessed without participation','essay body, paragraph on the riot at the kirk','own-words','asserts','2017',RT2,'chronicle-line','high')
+add('withheld information and inference','Le Guin says the annalist leaves it up to the reader to hear what is being told, to imagine it and to feel it.',GSRC,U_GALT,'It\u2019s left up to us to hear what\u2019s being told','essay body, paragraph on the riot at the kirk','own-words','asserts','2017',RT2,'dossier-archivist','high')
+add('plainness and economy','Le Guin says all the material the reader needs to hear, imagine and feel the scene is in those few words, in their choice and in their cadence.',GSRC,U_GALT,'in those few words, in their choice and in their cadence','essay body, paragraph on the riot at the kirk','own-words','asserts','2017',RT2,'dossier-archivist','high')
+add('plainness and economy','Le Guin says Galt\u2019s prose works like poetry because every word tells.',GSRC,U_GALT,'Galt\u2019s prose works like poetry: every word tells','essay body, paragraph on the riot at the kirk','own-words','asserts','2017',RT2,'dossier-archivist','high')
+add('consequence on a household','Le Guin quotes the minister\u2019s entire account of the riot at his installation, which reads that he thought he would have a hard and sore time of it with such an outstrapolous people.',GSRC+' (quoting John Galt, Annals of the Parish, 1821)',U_GALT,'a hard and sore time of it with such an outstrapolous people','essay body, block quotation from Galt','own-words','applies','2017',RT2,'chronicle-line','high')
+add('parataxis vs hypotaxis','Le Guin notes that the annalist moves from the riot to the dinner without even a period, only a semicolon.',GSRC,U_GALT,'without even a period, only a semicolon','essay body, paragraph following the block quotation','own-words','asserts','2017',RT2,'chronicle-line','high')
+add('place and institution description','Le Guin says intimate knowledge of one small community may yield psychological and anthropological insights of universal value.',GSRC,U_GALT,'may yield psychological and anthropological insights of universal value','essay body, paragraph on small-town novels','own-words','asserts','2017',RT2,'dossier-archivist','high')
+add('humour','Le Guin describes Galt\u2019s humour as dry, subtle, morally loaded, and really funny.',GSRC,U_GALT,'dry, subtle, morally loaded, and really funny','essay body, paragraph comparing Galt to Austen','own-words','asserts','2017',RT2,'chronicle-line','high')
+add('place and institution description','Le Guin says small-town novels are intensely grounded and rich in satire, humour and character.',GSRC,U_GALT,'small-town novels are intensely grounded','essay body, paragraph on small-town novels','own-words','asserts','2017',RT2,'dossier-archivist','high')
+add('point of view and distance','Le Guin says of the annalist narrator that he will not and cannot mislead the reader, and that he is transparent.',GSRC,U_GALT,'He will not, he cannot, mislead you. He is transparent.','essay body, paragraph on Mr. Balwhidder','own-words','asserts','2017',RT2,'dossier-archivist','high')
+
+W11='Ursula K. Le Guin, contribution on Virginia Woolf to "The stars of modern SF pick the best science fiction", The Guardian, 14 May 2011'
+add('other: genre as dialect','Le Guin says genre is a rich dialect that becomes a jargon meaningful only to an ingroup if it gives up connection with the general literary language.',W11,U_W11,'it becomes a jargon, meaningful only to an ingroup','her contribution, first paragraph','own-words','asserts','2011',RT2,'none','high')
+add('place and institution description','Le Guin says Woolf\u2019s Orlando gave her the authentic thrill of being taken absolutely elsewhere.',W11,U_W11,'the authentic thrill of being taken absolutely elsewhere','her contribution, second paragraph','own-words','asserts','2011',RT2,'dossier-archivist','high')
+add('plainness and economy','Kim Stanley Robinson says Le Guin\u2019s language is clear and clean.','Kim Stanley Robinson, contribution on The Left Hand of Darkness to "The stars of modern SF pick the best science fiction", The Guardian, 14 May 2011',U_W11,"Le Guin's language is clear and clean",'Kim Stanley Robinson\u2019s contribution','reception','asserts','2011',RT2,'dossier-archivist','high')
+
+FRK='Ursula K. Le Guin, "Frankenstein\u2019s Earthsea", Locus, January 2005'
+add('terminology consistency','Le Guin says the way magic works in the Earthsea books is a matter of language and names and has rules.',FRK,U_FRK,'a matter of language and names; it has rules','essay body, on the film\u2019s changes','own-words','asserts','2005',RT2,'dossier-archivist','high')
+add('other: coherence','Le Guin says the rules of Earthsea magic give it a necessary limitation.',FRK,U_FRK,'which give it a necessary limitation','essay body, on the film\u2019s changes','own-words','asserts','2005',RT2,'dossier-archivist','high')
+
+EXTRA_SOURCES5 = [
+ dict(title='National Book Foundation Medal acceptance speech (transcript)',url='https://www.ursulakleguin.com/nbf-medal',kind='own-words',substantive=False,date='19 November 2014',route='live URL + browser UA \u2014 read; on publishing economics, not prose register'),
+ dict(title='B-Sides: John Galt\u2019s "Annals of the Parish" \u2014 Le Guin on a novel written as parish annals',url=U_GALT,kind='own-words',substantive=True,date='23 January 2017',route='live URL + browser UA'),
+ dict(title='The stars of modern SF pick the best science fiction (Le Guin on Woolf; Robinson on Le Guin), The Guardian',url=U_W11,kind='own-words',substantive=True,date='14 May 2011',route='live URL + browser UA'),
+ dict(title='Frankenstein\u2019s Earthsea, Locus',url=U_FRK,kind='own-words',substantive=True,date='January 2005',route='live URL + browser UA'),
+ dict(title='Whitewashed Earthsea: How the Sci Fi Channel wrecked my books, Slate',url=U_SLATE,kind='own-words',substantive=False,date='16 December 2004',route='live URL + browser UA \u2014 read; on casting, not prose register'),
+ dict(title='Ursula K. Le Guin \u2014 Selected Speeches index / Essays and Criticism index',url='https://www.ursulakleguin.com/essays-and-criticism',kind='relay',substantive=False,date='site index',route='live URL + browser UA \u2014 the route by which the Galt essay was found'),
+]
+
 # ---- verification ----
 bad=[]
 for i,c in enumerate(claims):
@@ -242,7 +353,7 @@ sources=[
  dict(title='archive.org item metadata: Conversations on Writing (ursulakleguincon0000legu)',url='https://archive.org/metadata/ursulakleguincon0000legu',kind='relay',substantive=False,date='2018 edition',route='archive.org metadata API; full text access-restricted'),
 ]
 
-sources += EXTRA_SOURCES + EXTRA_SOURCES2
+sources += EXTRA_SOURCES + EXTRA_SOURCES2 + EXTRA_SOURCES3 + EXTRA_SOURCES4 + EXTRA_SOURCES5
 json.dump(dict(complete=False,coverage='in progress — round 2 of the voice angle',sourcesRead=sources,claims=claims),
           open(OUT,'w',encoding='utf-8'),ensure_ascii=False,indent=1)
 print('claims',len(claims),'sources',len(sources),'bad',len(bad))

@@ -3,15 +3,16 @@
  "name": "wolfe",
  "angle": "counter",
  "tag": null,
- "lines": 336,
+ "lines": 358,
  "firstTs": "2026-09-06T18:56:25.553Z",
- "lastTs": "2026-09-06T19:16:41.351Z",
+ "lastTs": "2026-09-06T19:22:08.334Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 75,
+  "Bash": 80,
   "WebSearch": 17,
-  "WebFetch": 2
+  "WebFetch": 2,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://efanzines.com/ASFR/",
@@ -88,11 +89,11 @@
  "run": "wf_5c6be9e9-17f",
  "agent": "aa5e7e507924538b5",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_5c6be9e9-17f/agent-aa5e7e507924538b5.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-counter.json",
   "claims": 114,
   "complete": true,
-  "mtime": "15:16:35"
+  "mtime": "15:17:10"
  }
 }

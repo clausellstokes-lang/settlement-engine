@@ -1,0 +1,315 @@
+{
+ "complete": false,
+ "coverage": "in progress — roster partly fetched; ActuSF, justaword.fr and AudioFile blocked so far",
+ "sourcesRead": [
+  {
+   "title": "Guy Gavriel Kay et sa façon d'écrire… (interview traduite par NAK)",
+   "url": "https://www.elbakin.net/interview/traduction/Guy-Gavriel-Kay-et-sa-facon-d-ecrire",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2012-02-17",
+   "route": "wayback raw 20250423041935id_"
+  },
+  {
+   "title": "Rencontre avec Guy Gavriel Kay — Fondu au noir",
+   "url": "https://fonduaunoir.fr/2025/04/24/rencontre-avec-guy-gavriel-kay/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2025-04-24",
+   "route": "live, browser UA"
+  },
+  {
+   "title": "Amélie Fréchette, La Tapisserie de Fionavar de Guy Gavriel Kay (mémoire M.A., Université Laval)",
+   "url": "https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/QQLA/TC-QQLA-29596.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013",
+   "route": "PDF binary + pypdf text extraction"
+  },
+  {
+   "title": "Mikael Cabon — Éditions L'Atalante (translator page)",
+   "url": "https://www.l-atalante.com/auteurs/mikael-cabon/",
+   "kind": "vendor",
+   "substantive": false,
+   "date": "2026",
+   "route": "live"
+  },
+  {
+   "title": "Mikael Cabon, traducteur — bibliographie",
+   "url": "https://mikaelcabon.fr/",
+   "kind": "vendor",
+   "substantive": false,
+   "date": "2026",
+   "route": "live"
+  },
+  {
+   "title": "Talking With Audiobook Narrator Extraordinaire Simon Vance",
+   "url": "https://vocal.media/interview/talking-with-audiobook-narrator-extraordinaire-simon-vance",
+   "kind": "own-words",
+   "substantive": true,
+   "route": "live"
+  },
+  {
+   "title": "Elbakin forum — Critique ! [Comme un diamant dans ma mémoire]",
+   "url": "https://www.forum-elbakin.net/viewtopic.php?t=9311&start=60",
+   "kind": "reader",
+   "substantive": true,
+   "route": "live"
+  },
+  {
+   "title": "Elbakin forum — Critique ! [Les Chevaux célestes / Sous le ciel]",
+   "url": "https://www.forum-elbakin.net/viewtopic.php?t=6436&start=160",
+   "kind": "reader",
+   "substantive": true,
+   "route": "live"
+  },
+  {
+   "title": "Brightweavings — Children of Earth and Sky journal (Guy Gavriel Kay's own journal)",
+   "url": "http://brightweavings.com/journal/category/children-of-earth-and-sky/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015-2016",
+   "route": "live, browser UA"
+  },
+  {
+   "title": "Brightweavings — Under Heaven tour journal",
+   "url": "https://brightweavings.com/books/under-heaven-tour-journal/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2009-2010",
+   "route": "live, browser UA"
+  },
+  {
+   "title": "Brightweavings — Ysabel journal",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2006-2007",
+   "route": "live, browser UA"
+  },
+  {
+   "title": "Brightweavings — Last Light of the Sun tour journal",
+   "url": "https://brightweavings.com/books/last-light-of-the-sun-tour-journal/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2004",
+   "route": "live, browser UA"
+  },
+  {
+   "title": "Brightweavings — News archive",
+   "url": "https://brightweavings.com/news/",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2004-2016",
+   "route": "live, browser UA"
+  },
+  {
+   "title": "Brightweavings — River of Stars journal (praise sheet)",
+   "url": "http://brightweavings.com/journal/category/river-of-stars/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2013",
+   "route": "live, browser UA"
+  },
+  {
+   "title": "Interview with Guy Gavriel Kay, Challenging Destiny (Schellenberg & Switzer)",
+   "url": "https://www.challengingdestiny.com/interviews/kay.htm",
+   "kind": "own-words",
+   "substantive": false,
+   "route": "live"
+  },
+  {
+   "title": "Locus Online: Guy Gavriel Kay interview excerpts, May 2000",
+   "url": "https://www.locusmag.com/2000/Issues/05/Kay.html",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2000-05",
+   "route": "live"
+  },
+  {
+   "title": "Book Cougars Podcast Episode 157 — A Chat with Audiobook Narrator Simon Vance (show notes)",
+   "url": "https://www.bookcougars.com/blog-1/2022/episode157",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2022",
+   "route": "live"
+  },
+  {
+   "title": "Working Actors Journey — Narrator Simon Vance episode page",
+   "url": "https://workingactorsjourney.com/podcast/episodes/simon-vance/",
+   "kind": "own-words",
+   "substantive": false,
+   "route": "live"
+  }
+ ],
+ "claims": [
+  {
+   "feature": "naming and forms of address",
+   "claim": "Fréchette states that Élisabeth Vonarburg translated Kay's English name Guinevere by the modern French Geneviève rather than the older Guenièvre.",
+   "source": "Amélie Fréchette, mémoire de maîtrise, Université Laval, 2013, note 42",
+   "url": "https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/QQLA/TC-QQLA-29596.pdf",
+   "quote": "a traduit le nom anglais",
+   "page": "note 42, p. 31",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2013",
+   "routeHint": "PDF binary, pypdf text extraction",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "translation and register",
+   "claim": "Fréchette judges that this translation choice diminishes the effect the legendary name can produce in the reader's imagination.",
+   "source": "Amélie Fréchette, mémoire de maîtrise, Université Laval, 2013, note 42",
+   "url": "https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/QQLA/TC-QQLA-29596.pdf",
+   "quote": "ce choix de traduction diminue à mon avis l’effet",
+   "page": "note 42, p. 31",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2013",
+   "routeHint": "PDF binary, pypdf text extraction",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "cadence and rhythm",
+   "claim": "Kay writes that the narrator Simon Vance sent him a note about needing to pause at times to control emotion while reading Children of Earth and Sky aloud.",
+   "source": "Guy Gavriel Kay, Brightweavings journal, Children of Earth and Sky (author's post, c. April 2016)",
+   "url": "http://brightweavings.com/journal/category/children-of-earth-and-sky/",
+   "quote": "needing to pause at times to control emotion as he read",
+   "page": "Children of Earth and Sky journal, post announcing the finished audiobook",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2016",
+   "routeHint": "live fetch with browser UA; grep 'Vance'",
+   "registerHint": "none",
+   "confidence": "medium — Kay paraphrasing Vance's private note, not Vance's own transcribed words"
+  },
+  {
+   "feature": "cadence and rhythm",
+   "claim": "Kay says he often makes adjustments to his text after reading his writing aloud.",
+   "source": "Guy Gavriel Kay, Brightweavings journal, Children of Earth and Sky (author's post on proofing typeset pages)",
+   "url": "http://brightweavings.com/journal/category/children-of-earth-and-sky/",
+   "quote": "I often make adjustments after doing that.",
+   "page": "Children of Earth and Sky journal, post on typesetting and page proofs",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2015",
+   "routeHint": "live fetch with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: punctuation as rhythm control",
+   "claim": "Kay says he uses punctuation variably depending on context, speaker and rhythms.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "I’ll use punctuation varaibly depending on context, speaker, rhythms.",
+   "page": "Ysabel journal, post on proofreading (Sept./Oct. 2006)",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2006",
+   "routeHint": "live fetch with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: punctuation as rhythm control",
+   "claim": "Kay states that The Last Light of the Sun is punctuated differently from the Sarantine Mosaic.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "LAST LIGHT is punctuated differently than the MOSAIC was.",
+   "page": "Ysabel journal, post on proofreading (2006)",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2006",
+   "routeHint": "live fetch with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "per-speaker register",
+   "claim": "Kay says that adding a semi-colon or too many technically viable commas to a passage of rapid, stressed speech undermines the effect of the passage.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "undermines the EFFECT of the passage",
+   "page": "Ysabel journal, post on the proofreader over-punctuating speech",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2006",
+   "routeHint": "live fetch with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: copy-editor as close reader",
+   "claim": "Kay describes his exchanges with his copy-editor as comma, semi-colon, paragraph break, tense shift and word-choice wars.",
+   "source": "Guy Gavriel Kay, Brightweavings journal, Children of Earth and Sky",
+   "url": "http://brightweavings.com/journal/category/children-of-earth-and-sky/",
+   "quote": "comma, semi-colon, paragraph break, tense shift, word-choice wars",
+   "page": "Children of Earth and Sky journal, post on copy-editing",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2015",
+   "routeHint": "live fetch with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: reading aloud",
+   "claim": "Kay states that hearing a reading aloud is not the same as reading a book.",
+   "source": "Guy Gavriel Kay, Brightweavings Under Heaven tour journal, 2010",
+   "url": "https://brightweavings.com/books/under-heaven-tour-journal/",
+   "quote": "Hearing a reading aloud isn’t reading a book.",
+   "page": "Under Heaven tour journal, post on touring and sharing",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2010",
+   "routeHint": "live fetch with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: reading aloud",
+   "claim": "Kay says what works when reading alone to yourself is not the same as what works when listening in public.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, November 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "what works when you are reading alone to yourself is not",
+   "page": "Ysabel journal, 20 November 2006 post on his first public reading from Ysabel",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2006-11-20",
+   "routeHint": "live fetch with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: narrator roster",
+   "claim": "Kay's site records that Simon Vance read Under Heaven for the audiobook as he had for Tigana and the Fionavar trilogy.",
+   "source": "Guy Gavriel Kay, Brightweavings Under Heaven tour journal, 18 February 2010",
+   "url": "https://brightweavings.com/books/under-heaven-tour-journal/",
+   "quote": "do the reading, as he did for Tigana and the Fionavar trilogy",
+   "page": "Under Heaven tour journal, 18 February 2010",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2010-02-18",
+   "routeHint": "live fetch with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: narrator roster",
+   "claim": "Kay states he is not an audio book person.",
+   "source": "Guy Gavriel Kay, Brightweavings Under Heaven tour journal, 18 February 2010",
+   "url": "https://brightweavings.com/books/under-heaven-tour-journal/",
+   "quote": "I’m not an audio book person",
+   "page": "Under Heaven tour journal, 18 February 2010",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2010-02-18",
+   "routeHint": "live fetch with browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  }
+ ]
+}

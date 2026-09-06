@@ -3,14 +3,14 @@
  "name": "leguin",
  "angle": "academic-2",
  "tag": null,
- "lines": 132,
+ "lines": 180,
  "firstTs": "2026-09-06T18:59:47.841Z",
- "lastTs": "2026-09-06T19:15:52.390Z",
+ "lastTs": "2026-09-06T19:22:34.180Z",
  "tools": {
   "Read": 1,
-  "Bash": 30,
+  "Bash": 43,
   "ToolSearch": 1,
-  "WebFetch": 4,
+  "WebFetch": 5,
   "WebSearch": 1
  },
  "urlsFetched": [
@@ -22,7 +22,12 @@
   "https://web.archive.org/web/2024/https://www.depauw.edu/sfs/backissues/31/myers31.htm",
   "https://archive.org/advancedsearch.php",
   "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
-  "https://www.publicbooks.org/john-plotz-on-earthsea-anarchism-and-ursula-k-le-guin/"
+  "https://www.publicbooks.org/john-plotz-on-earthsea-anarchism-and-ursula-k-le-guin/",
+  "https://api.openalex.org/works?filter=title_and_abstract.search:%22Le%20Guin%22%20AND%20(style%20OR%20stylistic%20OR%20rhythm%20OR%20syntax%20OR%20%22free%20indirect%22%20OR%20diction)&per-page=50",
+  "https://api.openalex.org/works?filter=title_and_abstract.search:%22Le+Guin%22+AND+(style+OR+stylistic+OR+rhythm+OR+syntax+OR+%22free+indirect%22+OR+diction",
+  "https://api.crossref.org/works?query.bibliographic=Le+Guin+prose+style&rows=25&select=title,author,issued,container-title,DOI,URL",
+  "https://web.archive.org/cdx/search/cdx?url=depauw.edu/sfs/backissues/8/*&fl=original,timestamp&collapse=urlkey&limit=200",
+  "https://api.semanticscholar.org/graph/v1/paper/search"
  ],
  "filesWritten": [],
  "lastAssistantText": "Snippet-walking to extend the key passages.",

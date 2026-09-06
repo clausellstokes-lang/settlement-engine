@@ -3,14 +3,14 @@
  "name": "hobb",
  "angle": "dropped-and-routes",
  "tag": null,
- "lines": 333,
+ "lines": 396,
  "firstTs": "2026-09-06T18:57:44.696Z",
- "lastTs": "2026-09-06T19:16:44.133Z",
+ "lastTs": "2026-09-06T19:22:39.598Z",
  "tools": {
   "Read": 1,
-  "Bash": 78,
+  "Bash": 91,
   "ToolSearch": 1,
-  "WebSearch": 7,
+  "WebSearch": 9,
   "WebFetch": 2
  },
  "urlsFetched": [
@@ -67,18 +67,32 @@
   "https://shareok.org/server/api/discover/search/objects?query=Geographic%20Realism%20Genre%20Fiction",
   "https://api.semanticscholar.org/graph/v1/paper/DOI:10.3828/extr.2019.2?fields=title,abstract,year,venue,openAccessPdf,externalIds",
   "https://www.youtube.com/results?search_query=$q",
-  "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=$v&format=json"
+  "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=$v&format=json",
+  "https://openlibrary.org/search/inside?q=%22Robin+Hobb%22+%22portal-quest%22",
+  "https://openlibrary.org/search/inside?q=$1",
+  "https://openlibrary.org/search/inside?q=%22Patricia+McKillip+and+Robin+Hobb%22",
+  "https://www.youtube.com/watch?v=EYT3NeS_mVQ",
+  "https://www.youtube.com/watch?v=H02ZPoR3tlI",
+  "https://www.youtube.com/watch?v=-9T-BlR5io0",
+  "https://www.youtube.com/watch?v=jfhl1jnaAPY",
+  "https://www.youtube.com/watch?v=fIw6lHNEwcc",
+  "https://web.archive.org/cdx/search/cdx?url=reddit.com%2Fr%2FFantasy%2Fcomments%2F*&output=text&fl=original&collapse=urlkey&limit=60000&filter=original:.*(hobb|ama_",
+  "https://web.archive.org/cdx/search/cdx?url=reddit.com%2Fr%2FFantasy%2Fcomments%2F&matchType=prefix&output=text&fl=original&collapse=urlkey&limit=40000",
+  "https://api.crossref.org/works?query.bibliographic=Robin+Hobb+style+narration+landscape&rows=20&select=title,container-title,issued,DOI",
+  "https://api.openalex.org/works?search=%22Robin%20Hobb%22&per-page=25&sort=publication_year:desc",
+  "https://api.openalex.org/works?filter=title_and_abstract.search:%22Robin%20Hobb%22&per-page=30&sort=publication_year:desc&mailto=settlementforge@gmail.com",
+  "https://elliottrwi.com/research/hobb-bibliography/"
  ],
  "filesWritten": [],
- "lastAssistantText": "All five transcripts pulled. Let me read them.",
+ "lastAssistantText": "Both records are on disk. Let me print the exact content to transcribe into the structured return.",
  "run": "wf_ab3eea15-df4",
  "agent": "afda9803e3808cd99",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_ab3eea15-df4/agent-afda9803e3808cd99.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-hobb-dropped-and-routes.json",
-  "claims": 68,
-  "complete": false,
-  "mtime": "15:05:58"
+  "claims": 94,
+  "complete": true,
+  "mtime": "15:21:57"
  }
 }

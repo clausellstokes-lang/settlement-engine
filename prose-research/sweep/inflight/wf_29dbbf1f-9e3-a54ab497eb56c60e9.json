@@ -3,14 +3,14 @@
  "name": "leguin",
  "angle": "record-register",
  "tag": null,
- "lines": 238,
+ "lines": 329,
  "firstTs": "2026-09-06T18:59:47.841Z",
- "lastTs": "2026-09-06T19:16:47.881Z",
+ "lastTs": "2026-09-06T19:22:36.560Z",
  "tools": {
   "Read": 1,
-  "Bash": 51,
+  "Bash": 72,
   "ToolSearch": 1,
-  "WebSearch": 13
+  "WebSearch": 19
  },
  "urlsFetched": [
   "https://www.coursehero.com/file/60886041/A-Description-of-Earthseapdf/",
@@ -54,7 +54,18 @@
   "https://www.bookreporter.com/reviews/tales-from-earthsea-the-earthsea-cycle-book-5",
   "https://en.wikipedia.org/wiki/Tales_from_Earthsea",
   "https://en.wikipedia.org/wiki/Always_Coming_Home",
-  "https://openlibrary.org/search/inside?q=%22A+Description+of+Earthsea%22"
+  "https://openlibrary.org/search/inside?q=%22A+Description+of+Earthsea%22",
+  "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+  "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
+  "https://journals.sagepub.com/doi/10.1177/02632764211051780",
+  "https://www.sapiens.org/culture/ursula-le-guin/",
+  "http://anthrodendum.org/2018/01/26/ursula-ak-le-guin-interplanetary-anthropologist-2/",
+  "https://www.ursulakleguin.com/tales-from-earthsea",
+  "https://www.ursulakleguin.com/the-left-hand-of-darkness-1",
+  "https://www.torforgeblog.com/2021/11/17/excerpt-worlds-of-exile-and-illusion-by-ursula-k-le-guin/",
+  "https://en.wikipedia.org/wiki/Rocannon%27s_World",
+  "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "https://archive.org/details/ursulakleguinbey0000cadd"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -64,8 +75,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-leguin-record-register.json",
-  "claims": 71,
+  "claims": 106,
   "complete": false,
-  "mtime": "15:16:47"
+  "mtime": "15:21:43"
  }
 }

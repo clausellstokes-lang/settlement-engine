@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 15:17:00 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 15:22:36 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -87,12 +87,12 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 ## WORKFLOW RUNS of chair session 059d4243-f837-4b07-8096-8c9ca76b03fb (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_004aff7a-269: 1 journal lines, 1 agents
 - wf_29dbbf1f-9e3: 4 journal lines, 4 agents
-- wf_5c6be9e9-17f: 4 journal lines, 4 agents
+- wf_5c6be9e9-17f: 7 journal lines, 4 agents
 - wf_6aaded2c-7c9: 2 journal lines, 1 agents
-- wf_ab3eea15-df4: 4 journal lines, 4 agents
+- wf_ab3eea15-df4: 5 journal lines, 4 agents
 - wf_b55db7cd-25f: 4 journal lines, 4 agents
 - wf_df0a321b-0f2: 11 journal lines, 6 agents
 - wf_e04d8c44-23e: 1 journal lines, 1 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.44 2.79 2.94
+load: 2.13 2.75 2.91

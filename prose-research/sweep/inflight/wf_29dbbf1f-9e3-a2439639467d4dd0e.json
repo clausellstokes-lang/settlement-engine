@@ -3,14 +3,14 @@
  "name": "leguin",
  "angle": "voice-2",
  "tag": null,
- "lines": 276,
+ "lines": 387,
  "firstTs": "2026-09-06T18:59:47.841Z",
- "lastTs": "2026-09-06T19:16:47.272Z",
+ "lastTs": "2026-09-06T19:22:49.752Z",
  "tools": {
   "Read": 1,
-  "Bash": 63,
+  "Bash": 90,
   "ToolSearch": 1,
-  "WebSearch": 9
+  "WebSearch": 13
  },
  "urlsFetched": [
   "https://archive.org/advancedsearch.php?q=title%3A%28${q//+/%20}%29+AND+creator%3A%28le+guin%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=15&output=json",
@@ -56,7 +56,29 @@
   "https://vermontsoftworks.com/post/2023/leguin-rhythmic-pattern-in-lotr/",
   "https://www.ursulakleguin.com/interviews-ursula",
   "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
-  "https://elodieunderglass.tumblr.com/post/652816227234971648/perkwunos-ursula-k-le-guin-afterword-to-a/amp"
+  "https://elodieunderglass.tumblr.com/post/652816227234971648/perkwunos-ursula-k-le-guin-afterword-to-a/amp",
+  "https://elodieunderglass.tumblr.com/post/652816227234971648/perkwunos-ursula-k-le-guin-afterword-to-a",
+  "https://lithub.com/ursula-k-le-guin-on-racism-anarchy-and-hearing-her-characters-speak/",
+  "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+  "https://electricliterature.com/ursula-k-le-guin-talks-to-michael-cunningham-about-genres-gender-and-broadening-fiction/",
+  "https://web.archive.org/web/${ts}id_/http://www.sfsite.com/03a/ul123.htm",
+  "https://web.archive.org/web/20260421123219id_/http://www.sfsite.com/03a/ul123.htm",
+  "http://web.archive.org/cdx/search/cdx?url=sfsite.com/03a/ul123.htm&output=text&limit=8&filter=statuscode:200&from=2002&to=2020",
+  "https://www.ursulakleguin.com/ursula-on-ursula",
+  "https://www.ursulakleguin.com/blog/51-the-narrative-gift-as-a-moral-conundrum",
+  "https://www.ursulakleguin.com/blog/36-readers-questions",
+  "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+  "https://lithub.com/ursula-k-le-guin-editing-to-the-end/",
+  "https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/",
+  "https://theanarchistlibrary.org/library/rob-maslen-towards-an-archaeology-of-the-future-theodora-kroeber-and-ursula-k-le-guin",
+  "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+  "https://www.theguardian.com/books/2011/may/14/science-fiction-authors-choice",
+  "http://locusmag.com/2005/Issues/01LeGuin.html",
+  "https://slate.com/culture/2004/12/ursula-k-le-guin-on-the-tv-earthsea.html",
+  "https://www.ursulakleguin.com/where-do-you-get-your-ideas-from",
+  "https://www.ursulakleguin.com/introduction-selected-stories-hg-wells",
+  "https://www.ursulakleguin.com/essays-and-criticism",
+  "https://www.ursulakleguin.com/nbf-medal"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method, then check the prior checkpoint state.",
@@ -66,8 +88,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-leguin-voice-2.json",
-  "claims": 98,
+  "claims": 132,
   "complete": false,
-  "mtime": "15:16:25"
+  "mtime": "15:22:17"
  }
 }

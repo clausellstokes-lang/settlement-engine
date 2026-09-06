@@ -49,3 +49,27 @@
   "To speak of the Mountain Kingdom as a kingdom is to start out with a basic misunderstanding
   of the area and the folk who people it" and "A more ancient tradition attributes such names
   to accident, at least initially."
+
+## FINAL (complete). 21 sources, 17 substantive, 74 claims.
+THE HEADLINE FIND: Hobb's own English words, Phantastik-Couch 2017 (English original at
+/10-2017-robin-hobb-engl-ov/, linked from the German page):
+  "sentence length is very different from language to language"
+  "Often Arnaud has to join several English sentences together" [to make one French sentence]
+  "A direct translation would be choppy, dreadful French"
+That is the angle's asked-for atom: what a translator HAS TO DO to a Hobb sentence. It also
+measures the English: her sentences are short enough that a one-to-one French rendering is choppy.
+
+THE SECOND: Duits 2012 on the Dutch — the italic chapter epigraphs read like an encyclopaedia and
+are archaic even in English, and Feberwee & Cuijpers carried that same formal register into the
+first-person narration, which is why the Dutch is effortful. Register modulation, seen from the
+outside by someone who had to redo it. Oliver 2022 confirms the two registers from the inside:
+"excerpts from a public document, largely a formal history" "written in a distant, scholarly voice",
+kept deliberately separate from the main text until chapter 15.
+
+THE THIRD: Cartoceti (Italian translator, own page) on PLACE names — she translated all Six Duchies
+by assonance (Shoaks -> Costabassa via "shoals") but left Chalced alien on purpose, because a less
+familiar name helps the impression of a bordering country always regarded as foreign.
+
+Blocked: Chandarana & Choudhary full text (Downloader returns the site shell; no Wayback capture).
+Non-substantive after a full read: Ekman & Taylor 2021 (does not treat Hobb), the second de los
+Reyes interview, the Elbakin Hobb interview.

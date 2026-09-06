@@ -3,14 +3,15 @@
  "name": "wolfe",
  "angle": "editors",
  "tag": null,
- "lines": 336,
+ "lines": 339,
  "firstTs": "2026-09-06T18:56:25.554Z",
- "lastTs": "2026-09-06T19:14:27.194Z",
+ "lastTs": "2026-09-06T19:17:55.527Z",
  "tools": {
   "Read": 2,
   "Bash": 73,
   "ToolSearch": 1,
-  "WebSearch": 19
+  "WebSearch": 19,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://ultan.org.uk/plant-engineering/",
@@ -54,7 +55,7 @@
  "run": "wf_5c6be9e9-17f",
  "agent": "ab244558931116566",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_5c6be9e9-17f/agent-ab244558931116566.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-editors.json",
   "claims": 78,
