@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 16:30:16 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 16:35:47 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -95,4 +95,4 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - wf_e04d8c44-23e: 4 journal lines, 2 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.64 2.30 2.27
+load: 2.84 2.29 2.24
