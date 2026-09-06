@@ -7,7 +7,7 @@
 //   node sweep-state.mjs summary                          one JSON line per sweep: claims / verdicts / kept (for AUTOSTATUS).
 // Why a file and not the journal: a workflow run id dies with its session and a 400 KB verbatim structured return exceeds an
 // agent's output ceiling; so every verifier writes its chunk's claims+verdicts to disk and this tool is the only reader.
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -18,7 +18,7 @@ function merge(name, update) {
   const sp = join(OUT, `state-${name}.json`);
   const state = existsSync(sp) ? load(sp) : { name, claims: [], sources: [], verdicts: {} };
   const claims = state.claims.slice(); const verdicts = { ...(state.verdicts || {}) };
-  const files = readdirSync(OUT).filter(f => f.startsWith(`verdicts-${name}-`) && f.endsWith('.json')).sort();   // chunk-NN (the first resumed runs) and iA-B (index-range, every run after)
+  const files = readdirSync(OUT).filter(f => f.startsWith(`verdicts-${name}-`) && f.endsWith('.json')).sort((a, b) => (a.includes('-regrade-') - b.includes('-regrade-')) || (statSync(join(OUT, a)).mtimeMs - statSync(join(OUT, b)).mtimeMs) || a.localeCompare(b));   // chronological (mtime) so a later re-verification of the same claim wins; every -regrade- file LAST so a downgrade wins over both
   let fromFiles = 0;
   for (const f of files) {
     let d; try { d = load(join(OUT, f)); } catch (e) { console.error(`SKIP ${f}: ${e.message}`); continue; }
@@ -37,15 +37,16 @@ function merge(name, update) {
       verdicts[ni] = { ...v, index: ni, fromFile: f }; fromFiles++;
     }
   }
-  const kept = [];
-  for (let i = 0; i < claims.length; i++) { const v = verdicts[i]; if (v && (v.verdict === 'VERIFIED_VERBATIM' || v.verdict === 'VERIFIED_SUBSTANCE')) kept.push({ index: i, ...claims[i], verdict: v }); }
+  const kept = []; const partial = [];
+  for (let i = 0; i < claims.length; i++) { const v = verdicts[i]; if (!v) continue; if (v.verdict === 'VERIFIED_VERBATIM' || v.verdict === 'VERIFIED_SUBSTANCE') kept.push({ index: i, ...claims[i], verdict: v }); else if (v.verdict === 'PARTIAL') partial.push({ index: i, ...claims[i], verdict: v }); }
+  writeFileSync(join(OUT, `partial-${name}.json`), JSON.stringify(partial, null, 1));
   writeFileSync(join(OUT, `merged-${name}.json`), JSON.stringify({ name, claims, verdicts }, null, 1));
   writeFileSync(join(OUT, `kept-${name}.json`), JSON.stringify(kept, null, 1));
   if (update) writeFileSync(sp, JSON.stringify({ ...state, name, claims, verdicts, mergedAt: 'see autosave.log' }, null, 1));
-  const s = { name, claims: claims.filter(Boolean).length, verdicts: Object.keys(verdicts).length, kept: kept.length, chunkFiles: files.length, verdictsFromFiles: fromFiles };
+  const s = { name, claims: claims.filter(Boolean).length, verdicts: Object.keys(verdicts).length, kept: kept.length, partial: partial.length, chunkFiles: files.length, verdictsFromFiles: fromFiles };
   return s;
 }
 const [cmd, name, flag] = process.argv.slice(2);
 if (cmd === 'merge') { console.log(JSON.stringify(merge(name, flag === '--update-state'))); }
-else if (cmd === 'summary') { const o = {}; for (const n of NAMES) { if (existsSync(join(OUT, `state-${n}.json`)) || readdirSync(OUT).some(f => f.startsWith(`verdicts-${n}-`))) { const s = merge(n, true); o[n] = { claims: s.claims, verdicts: s.verdicts, kept: s.kept }; } } console.log(JSON.stringify(o)); }
+else if (cmd === 'summary') { const o = {}; for (const n of NAMES) { if (existsSync(join(OUT, `state-${n}.json`)) || readdirSync(OUT).some(f => f.startsWith(`verdicts-${n}-`))) { const s = merge(n, true); o[n] = { claims: s.claims, verdicts: s.verdicts, kept: s.kept, partial: s.partial }; } } console.log(JSON.stringify(o)); }
 else { console.error('usage: merge <name> [--update-state] | summary'); process.exit(2); }
