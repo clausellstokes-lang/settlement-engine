@@ -3,15 +3,15 @@
  "name": "wolfe",
  "angle": "measure",
  "tag": null,
- "lines": 268,
+ "lines": 332,
  "firstTs": "2026-09-06T18:56:24.437Z",
- "lastTs": "2026-09-06T19:10:38.618Z",
+ "lastTs": "2026-09-06T19:16:16.169Z",
  "tools": {
   "Read": 1,
-  "Bash": 58,
+  "Bash": 74,
   "ToolSearch": 1,
   "WebSearch": 12,
-  "Write": 3,
+  "Write": 4,
   "Edit": 1
  },
  "urlsFetched": [
@@ -46,7 +46,11 @@
   "https://api.crossref.org/works?query.bibliographic=Gene+Wolfe+stylometry&rows=5&mailto=settlementforge@gmail.com",
   "https://www.mla.org/Publications/MLA-International-Bibliography",
   "https://api.semanticscholar.org/graph/v1/paper/search?query=Gene+Wolfe+prose+style&limit=8&fields=title,year,venue",
-  "https://web.archive.org/web/2023id_/https://www.torforgeblog.com/2020/05/08/excerpt-interlibrary-loan-by-gene-wolfe/"
+  "https://web.archive.org/web/2023id_/https://www.torforgeblog.com/2020/05/08/excerpt-interlibrary-loan-by-gene-wolfe/",
+  "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+  "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+  "https://www.torforgeblog.com/2020/05/08/excerpt-interlibrary-loan-by-gene-wolfe/",
+  "https://www.depauw.edu/sfs/interviews/wolfe46interview.htm"
  ],
  "filesWritten": [
   "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/find-wolfe-measure.md",
@@ -60,8 +64,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-measure.json",
-  "claims": 20,
-  "complete": false,
-  "mtime": "15:06:37"
+  "claims": 38,
+  "complete": true,
+  "mtime": "15:15:21"
  }
 }

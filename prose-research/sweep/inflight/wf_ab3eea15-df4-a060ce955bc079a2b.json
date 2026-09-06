@@ -3,14 +3,14 @@
  "name": "hobb",
  "angle": "translators",
  "tag": null,
- "lines": 266,
+ "lines": 344,
  "firstTs": "2026-09-06T18:57:44.695Z",
- "lastTs": "2026-09-06T19:10:43.146Z",
+ "lastTs": "2026-09-06T19:15:56.740Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 65,
-  "WebSearch": 12
+  "Bash": 81,
+  "WebSearch": 20
  },
  "urlsFetched": [
   "https://www.actusf.com/detail-d-un-article/Interview-de-Arnaud-Mousnier",
@@ -41,7 +41,22 @@
   "https://verlorene-werke.blogspot.com/2017/07/neuauflage-robin-hobb-weitseher-mit.html",
   "https://www.phantastik-couch.de/magazin/interview/10-2017-robin-hobb-engl-ov/",
   "https://studenttheses.uu.nl/handle/20.500.12932/10046",
-  "https://hrdc.gujaratuniversity.ac.in/Publication/article?id=10089"
+  "https://hrdc.gujaratuniversity.ac.in/Publication/article?id=10089",
+  "https://hrdc.gujaratuniversity.ac.in/Publication/Downloader?id=10089",
+  "https://hrdc.gujaratuniversity.ac.in/Uploads/EJournalDetail/32/1030/13.pdf",
+  "https://www.hrdcgujarat.ac.in/Publication/Downloader?id=10089",
+  "https://api.crossref.org/works/10.32841/2409-1154.2021.52-2.43",
+  "https://api.openalex.org/works?filter=title.search:epigraphs%20negative%20space%20Robin%20Hobb",
+  "http://sbcreations.blogspot.com/p/traduzione-robin-hobb.html",
+  "https://www.elbakin.net/interview/traduction/Interview-de-Robin-Hobb-pour-Dragon-Keeper",
+  "https://web.archive.org/web/20250425063956id_/https://www.elbakin.net/interview/traduction/Interview-de-Robin-Hobb-pour-Dragon-Keeper",
+  "https://caballerodelarbolsonriente.blogspot.com/2024/12/robin-hobb-volvera-publicarse-en.html",
+  "https://tienda.nocturnaediciones.com/products/aprendiz-de-asesino-robin-hobb",
+  "http://www.manueldelosreyes.com/p/resenas.html",
+  "https://www.elrastreadordeletras.com/2018/07/entrevista-manuel-de-los-reyes-traductor.html",
+  "https://athnecdotario.wordpress.com/2016/11/14/entrevista-a-manuel-de-los-reyes-traductor/",
+  "https://carlabatallerestruch.com/2016/05/27/la-trilogia-del-vatidico-de-robin-hobb/",
+  "https://www.diva-portal.org/smash/get/diva2:1659740/FULLTEXT01.pdf"
  ],
  "filesWritten": [],
  "lastAssistantText": "Checkpoint written (38 claims, 6 sources). Continuing with the last roster item and lateral expansion.",

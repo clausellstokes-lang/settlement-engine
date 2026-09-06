@@ -37,8 +37,8 @@
  "journal": "failed",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-leguin-record-register.json",
-  "claims": 53,
+  "claims": 71,
   "complete": false,
-  "mtime": "15:10:16"
+  "mtime": "15:16:47"
  }
 }

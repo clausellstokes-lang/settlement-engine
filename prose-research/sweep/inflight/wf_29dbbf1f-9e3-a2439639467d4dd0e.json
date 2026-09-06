@@ -3,14 +3,14 @@
  "name": "leguin",
  "angle": "voice-2",
  "tag": null,
- "lines": 173,
+ "lines": 276,
  "firstTs": "2026-09-06T18:59:47.841Z",
- "lastTs": "2026-09-06T19:10:42.444Z",
+ "lastTs": "2026-09-06T19:16:47.272Z",
  "tools": {
   "Read": 1,
-  "Bash": 37,
+  "Bash": 63,
   "ToolSearch": 1,
-  "WebSearch": 7
+  "WebSearch": 9
  },
  "urlsFetched": [
   "https://archive.org/advancedsearch.php?q=title%3A%28${q//+/%20}%29+AND+creator%3A%28le+guin%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=15&output=json",
@@ -50,7 +50,13 @@
   "https://lareviewofbooks.org/article/writing-nameless-things-an-interview-with-ursula-k-le-guin/",
   "https://www.publicbooks.org/the-storys-where-i-go-an-interview-with-ursula-k-le-guin/",
   "https://www.awpwriter.org/magazine_media/writers_chronicle_view/2293/an_interview_with_ursula_k._le_guin",
-  "http://books.guardian.co.uk/departments/sciencefiction/story/0,6000,1144428,00.html"
+  "http://books.guardian.co.uk/departments/sciencefiction/story/0,6000,1144428,00.html",
+  "https://openlibrary.org/search/inside?q=$1",
+  "https://www.ursulakleguin.com/book-view-cafe-posts",
+  "https://vermontsoftworks.com/post/2023/leguin-rhythmic-pattern-in-lotr/",
+  "https://www.ursulakleguin.com/interviews-ursula",
+  "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+  "https://elodieunderglass.tumblr.com/post/652816227234971648/perkwunos-ursula-k-le-guin-afterword-to-a/amp"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method, then check the prior checkpoint state.",
@@ -60,8 +66,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-leguin-voice-2.json",
-  "claims": 61,
+  "claims": 98,
   "complete": false,
-  "mtime": "15:09:18"
+  "mtime": "15:16:25"
  }
 }

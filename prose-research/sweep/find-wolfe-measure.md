@@ -82,3 +82,46 @@ The blogger's own frame: she had to read sentence A "nearly ten times" before gr
 
 ## Existing stylometry on Wolfe — search log
 (see below, appended as searched)
+
+## FIFTH SAMPLE (added to test the trend): Interlibrary Loan, 2020
+Tor/Forge Blog, "Excerpt: Interlibrary Loan", 2020-05-08; live 403, Wayback raw capture 20260114144551 (28,337 bytes). Body = ill.txt lines 8-38 (line 39 is "Copyright (c) 2020 by Gene Wolfe"). Only 1,663 words of body exist, so the sample is the whole excerpt, not a 2,000-word slice.
+
+All sentences: 113 sentences / 1,663 words; mean 14.72, SD 12.35, CV 0.839, median 11, longest 67; 2.7% over 40 w; 37.2% under 8 w; 0.67 subordinate markers per sentence; 6.2% with a parenthetical; 16.8% carry quoted speech; rare rate 12.63% / 8.72%; out-of-dictionary 4.21%.
+Narration only: 94 sentences / 1,500 words; **mean 15.96**, SD 12.58, CV 0.788, median 12.0; 7.4% with a parenthetical; rare rate 12.20% / 8.13%.
+
+## The trend, tested (narration-only sentence lengths, Welch two-sample t)
+| pair | difference in mean words | SE | Welch t |
+|---|---|---|---|
+| 1972 5HC vs 1980 Shadow | 15.70 | 2.76 | **5.68** |
+| 1980 Shadow vs 2013 Land Across | 2.67 | 1.41 | 1.89 (not significant) |
+| 2013 Land Across vs 2015 Borrowed Man | 3.62 | 0.88 | **4.12** |
+| 2015 Borrowed Man vs 2020 Interlibrary Loan | **-4.97** | 1.41 | **-3.52** |
+
+⛔ **The monotone story is wrong once a fifth sample is added.** The one large, decisive shift is 1972 -> 1980 (a fall of 15.7 words per sentence). After 1980 the level sits in a 11-17 word band and moves both ways: the SAME narrator (E. A. Smithe) is 10.99 words per sentence in 2015 and 15.96 in 2020, a significant RISE. Report the 1972->1980 shift as the finding; report the post-1980 numbers as a band with book-to-book noise of about +/- 5 words, not a career decline.
+
+## Existing stylometry on Wolfe — SEARCH LOG (the answer is: there is none)
+- **OpenAlex** (api.openalex.org, 2026-09-06): `gene wolfe stylometry` -> 3 works, none about Gene Wolfe (Shakespeare authorship clustering, a Spanish NLP corpus, a DH social-network poster). `gene wolfe stylistics corpus` -> 14, none about him. `"Gene Wolfe" sentence length` -> 14; the only on-topic item is a 2019 Lund student thesis. `gene wolfe authorship attribution`, `gene wolfe readability prose`, `gene wolfe computational literary` -> nothing about him. **No stylometric or corpus study of Gene Wolfe exists in OpenAlex.**
+- **Google Scholar** (live HTML, desktop UA, 2026-09-06): `"Gene Wolfe" stylometry` -> the page literally reads *Your search - "Gene Wolfe" stylometry - did not match any articles*. `"Gene Wolfe" "sentence length"` -> 3 hits, all writing-craft handbooks (Kress, *Magic Words Magic Worlds*, a Teach Yourself guide), none a study of Wolfe. `"Gene Wolfe" corpus stylistics`, `"Gene Wolfe" computational stylistics`, `"Gene Wolfe" quantitative prose style` -> the only quantitative item is Nichols, Lynn & Purzycki 2014, whose corpus **does not contain Gene Wolfe** (0 occurrences of "wolfe" in the full draft text).
+- **Crossref** (api.crossref.org): `Gene Wolfe stylometry` returns only interviews and introductions; no quantitative item.
+- **Semantic Scholar** graph API: 429 on every attempt (rate-limited, no key). Route recorded as blocked.
+- **MLA International Bibliography**: subscription-gated; the public mla.org page carries no search. Not searchable from here — logged as blocked.
+- **Lateral**: `"Gene Wolfe" "words per sentence" / "average sentence"` returns only calculator sites and unrelated arXiv papers. Two consecutive searches surfaced nothing new -> stop condition met.
+- Wright himself frames the field this way in the Attending Daedalus preface (Cambridge Core, fetched live): "the paucity of detailed analyses available".
+
+## Other sources read (bibliography chasing / lateral)
+- **Lund University student thesis**, "Making Myth: Narrative Discourse in The Shadow of the Torturer" (2019), lup.lub.lu.se record 9040746, PDF 58 pp, 24,048 words extracted with pypdf. Genette-based narrative-discourse analysis; NOT stylometry, but it makes one sentence-level generalisation.
+- **Xeno Swarm**, "GENE WOLFE AND NOETIC ESTRANGEMENT: the incipit to The Shadow of the Torturer", 2020-02-29 — a numbered close reading of the first paragraph.
+- **Ultan's Library**, "Tell me about the Lexicon Urthus: an interview with Michael Andre-Driussi" (n.d., after the 2nd edition, so 2008) — the diction question answered at the source.
+- **David Langford**, "Odyssey" column reprinted at ansible.co.uk/writing/odyss03.html (1998) on the first-edition Lexicon Urthus.
+- **Larry McCaffery interview with Gene Wolfe**, Science Fiction Studies 46 (Nov 1988) — already on disk from the academic angle (depauw-mccaffery-wb.txt); Wolfe's OWN WORDS on why the vocabulary is real rather than coined. Canonical URL depauw.edu/sfs/interviews/wolfe46interview.htm is dead live; Wayback id_ capture 20260117042947 is the route.
+- **Murray Ewing**, "The Secret to Reading Gene Wolfe", 2010-09-11 — DISPUTES the "dense allusive prose" reputation in so many words.
+- **Peter Wright**, Attending Daedalus preface, Cambridge Core (book 2003) — fetched live, 200.
+
+## Housekeeping
+Raw HTML/PDF and every extracted text file under `sweep/wolfe-measure-raw/` are deleted at the end of the run; `metrics-out.json`, `metrics-narration.json` and this file carry the derived numbers. No excerpt text is retained.
+
+## Reproduction kit (what survives this run)
+- `sweep/metrics-wolfe-measure.json` — every figure, all-sentence and narration-only, five samples, plus the four Welch tests and the two Peace sentence counts.
+- `sweep/metrics-wolfe-measure.py` — the measuring script exactly as run. It expects `freq10k.txt` in the working directory: fetch it from https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-usa.txt (9,999 lines as fetched 2026-09-06) and `/usr/share/dict/web2`.
+- `sweep/wolfe-measure-raw/extract.py` — the paragraph extractor.
+- Every quotation in `found-wolfe-measure.json` was searched in the fetched bytes before the text was deleted: 38 claims, every non-empty quotation matched verbatim, zero misses.

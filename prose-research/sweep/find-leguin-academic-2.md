@@ -25,3 +25,43 @@ Opus finder, 2026-09-06.
 9. Watson, SFS #7 — "a neural simile".
 10. Nudelman, SFS #7 — "thorough iconicity".
 11. Porter, SFS #7 — read; political, nothing on prose. Non-substantive for this angle.
+
+## SESSION 2 (2026-09-06, successor finder) — THE ROUTE THAT OPENED THE BLOCKED MONOGRAPHS
+
+**FIND OF THIS SESSION: archive.org full-text search-inside is reachable, scoped per item, through Open Library.**
+The predecessor recorded the lending items as BLOCKED (`_djvu.txt` 403; `fulltext/inside.php` "Item not available").
+Both are true. But the Elasticsearch FTS behind them answers unauthenticated at:
+
+    https://openlibrary.org/search/inside.json?q=<urlencoded lucene query>
+
+and it accepts a **scoped** query: `identifier:<ia-id> AND "<phrase>"`.
+The response gives `hits.hits[].highlight.text[]` — verbatim contiguous snippets (~90-110 chars, the match
+centred) — plus `fields.page_num`, `meta_title`, `meta_creator`, `meta_year`.
+⚠ `page_num` is returned once per *item*, not per highlight, so it is NOT a reliable page cite; I record
+`page` as "archive.org search-inside snippet" rather than assert a page number.
+
+**SNIPPET WALKING.** A single snippet is ~15 words. Re-querying the *tail* of a snippet as the new phrase
+re-centres the window and yields the next ~8 words. Three to five hops reconstructs a sentence. Helper
+scripts: `leguin-acad2-raw/si.py` (cached scoped query), `batch.py` (id x term matrix), `walk.py`
+(tab-separated `id<TAB>phrase` on stdin). Cache in `leguin-acad2-raw/si-cache/`.
+All claims from this route are marked **snippet-only** (`confidence` medium at best, route in routeHint).
+
+### Roster items OPENED by this route (all ten previously "blocked")
+understandingurs0000cumm (Cummins 1990) · approachestofict0000bitt (Bittner 1984) ·
+farthestshoresof0000slus (Slusser 1976) · ursulakleguin00bloo (Bloom 1986) ·
+ursulakleguinsle0000unse (Bloom LHD 1987) · ursulakleguinbey0000cadd (Cadden 2005) ·
+ursulakleguin00olan (Olander & Greenberg 1979) · ursulakleguin0453spiv (Spivack 1984) ·
+ursulakleguin00buck (Bucknall 1981) · fantasytradition0000atte (Attebery 1980) ·
+plus ursulakleguinvoy0000unse (De Bolt 1979), found laterally.
+
+### Sentences reconstructed (each by 3-5 walk hops)
+- **Cummins**: "Her style, often called lyrical, results from her sensitivity to sound and syntax, from her wit and wisdom as she plays with and invents language"
+- **Spivack**: "The style of A Wizard of Earthsea is suitable to its subject of mythic magery. Artful yet simple, the language is largely Anglo-Saxon in diction, strongly alliterative, and suggestively resonant of an austere but heroic age."
+- **Bucknall**: "...vividly, and poetically while resisting the temptation to overwrite. Her style, which varies from book to book and from character to character, does not have the stately and heroic tone of The Lord of the Rings."
+- **Bloom (index + text)**: "Finally, her style mirrors the balance of her themes. Her writing moves gently but inexorably." + "this flowing quality, a skillful use of cadence and sound patterns, and a flexible use of..."
+- **Bittner**: "One of the distinctive qualities of Le Guin's prose style in the Earthsea trilogy makes its appearance in 'The Rule of Names': her uncanny knack for interweaving the familiar..."
+- **Bittner (archaism)**: "The very word tale has an archaic, distant tone missing from the common story."
+- **Cadden (THE DOSSIER FIND)**: Tales from Earthsea "concludes with 'A Description of Earthsea,' almost thirty pages of Earthsea lore and history"; it is "a text that is neither story nor afterword"; "is true to the voice of the anthropologist examining the ways of the Kesh"; "'A Description of Earthsea' is told from outside the world of Earthsea rather than by the historian from..."
+- **Cadden (FID)**: "...in much of Le Guin's stories, is a steady use of free indirect discourse."; "Le Guin uses free indirect discourse to help put speakers on a more equal ideological footing with other characters"
+- **De Bolt ed. (Pfeiffer quoting Woodcock)**: "Le Guin's prose style draws Woodcock's attention: it is 'a style of crystalline clarity and functional flexibility that has always reminded me...'"
+- **Bittner / Bloom**: LHD is interleaved "with extracts from Estraven's journal, an anthropological report, and Gethenian legends, folktales, religious..."

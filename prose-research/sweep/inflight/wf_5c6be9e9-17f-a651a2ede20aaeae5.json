@@ -3,14 +3,14 @@
  "name": "wolfe",
  "angle": "le-guin",
  "tag": null,
- "lines": 224,
+ "lines": 299,
  "firstTs": "2026-09-06T18:56:25.554Z",
- "lastTs": "2026-09-06T19:10:45.982Z",
+ "lastTs": "2026-09-06T19:16:10.882Z",
  "tools": {
   "Read": 2,
-  "Bash": 49,
+  "Bash": 68,
   "ToolSearch": 1,
-  "WebSearch": 11
+  "WebSearch": 15
  },
  "urlsFetched": [
   "https://www.ursulakleguin.com/edges",
@@ -36,7 +36,18 @@
   "https://ia601500.us.archive.org/fulltext/inside.php?item_id=languageofnighte0000ursu&doc=languageofnighte0000ursu&path=/13/items/languageofnighte0000ursu&q=Wolfe",
   "https://www.googleapis.com/books/v1/volumes?q=$E&maxResults=5",
   "https://www.ursulakleguin.com/words-are-my-matter",
-  "https://www.ursulakleguin.com/$s"
+  "https://www.ursulakleguin.com/$s",
+  "https://kpfa.org/episode/bookwaves-artwaves-september-3-2026/",
+  "https://newrepublic.com/article/153615/gene-wolfe-proust-science-fiction",
+  "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "https://torpublishinggroup.com/the-urth-of-the-new-sun/?isbn=9781250305169&format=digital",
+  "https://us.macmillan.com/books/9780312863944/theurthofthenewsun",
+  "https://www.mcnallyrobinson.com/9780312863944/gene-wolfe/the-urth-of-the-new-sun",
+  "https://chevaliersbooks.com/book/9780312863944",
+  "https://torpublishinggroup.com/the-urth-of-the-new-sun/",
+  "https://web.archive.org/web/20230527084143id_/https://us.macmillan.com/books/9780312863944/theurthofthenewsun",
+  "https://web.archive.org/web/20251125070019id_/https://torpublishinggroup.com/the-urth-of-the-new-sun/",
+  "https://www.ursulakleguin.com/interfaces"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method, then work the angle.",

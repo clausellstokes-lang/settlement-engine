@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 15:11:29 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 15:17:00 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -76,7 +76,7 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-05 20:41 · critic 09-05 21:01
-- **dnd**: claims 872 · verdicts 872 (todo 0) · kept 705 · partial 63 · verdict files 54 (triage 1, regrade none) · section 09-05 20:56 · critic 09-05 21:12
+- **dnd**: claims 872 · verdicts 872 (todo 0) · kept 619 · partial 147 · verdict files 55 (triage 1, regrade r6) · section 09-05 20:56 · critic 09-05 21:12
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 00:39 · critic 09-06 00:55
 - **kay**: claims 713 · verdicts 713 (todo 0) · kept 448 · partial 48 · verdict files 36 (triage 1, regrade r5) · section 09-06 14:42 · critic 09-06 15:04
 - **leguin**: claims 541 · verdicts 491 (todo 50) · kept 342 · partial 42 · verdict files 28 (triage 1, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
@@ -91,8 +91,8 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - wf_6aaded2c-7c9: 2 journal lines, 1 agents
 - wf_ab3eea15-df4: 4 journal lines, 4 agents
 - wf_b55db7cd-25f: 4 journal lines, 4 agents
-- wf_df0a321b-0f2: 9 journal lines, 5 agents
+- wf_df0a321b-0f2: 11 journal lines, 6 agents
 - wf_e04d8c44-23e: 1 journal lines, 1 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.01 2.72 3.04
+load: 3.44 2.79 2.94

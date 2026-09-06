@@ -1,0 +1,21 @@
+{
+ "role": "synth",
+ "name": "dnd",
+ "angle": null,
+ "tag": null,
+ "lines": 76,
+ "firstTs": "2026-09-06T19:13:50.375Z",
+ "lastTs": "2026-09-06T19:16:46.912Z",
+ "tools": {
+  "Bash": 13,
+  "Read": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by running the merge step and inspecting the inputs.",
+ "run": "wf_df0a321b-0f2",
+ "agent": "ac3f653e0af62aac0",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_df0a321b-0f2/agent-ac3f653e0af62aac0.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

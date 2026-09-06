@@ -3,14 +3,14 @@
  "name": "wolfe",
  "angle": "editors",
  "tag": null,
- "lines": 282,
+ "lines": 336,
  "firstTs": "2026-09-06T18:56:25.554Z",
- "lastTs": "2026-09-06T19:10:43.471Z",
+ "lastTs": "2026-09-06T19:14:27.194Z",
  "tools": {
-  "Read": 1,
-  "Bash": 61,
+  "Read": 2,
+  "Bash": 73,
   "ToolSearch": 1,
-  "WebSearch": 17
+  "WebSearch": 19
  },
  "urlsFetched": [
   "https://ultan.org.uk/plant-engineering/",
@@ -41,7 +41,13 @@
   "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
   "https://gwern.net/doc/fiction/gene-wolfe/2002-01-nickgevers-amagusofmanysuns.html",
   "https://gwern.net/doc/fiction/gene-wolfe/2015-genewolfe-sf-chatchannel-interview.txt",
-  "https://gwern.net/doc/fiction/gene-wolfe/2010-02-25-gale-genewolfebiography.txt"
+  "https://gwern.net/doc/fiction/gene-wolfe/2010-02-25-gale-genewolfebiography.txt",
+  "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+  "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+  "https://gwern.net/doc/fiction/gene-wolfe/2005-wolfe-thefatmagician.pdf",
+  "https://clarkesworldmagazine.com/wolfe_interview/",
+  "https://www.shortsf.com/reviews/orbit2",
+  "https://sf-encyclopedia.com/entry/wolfe_gene"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -51,8 +57,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-editors.json",
-  "claims": 58,
-  "complete": false,
-  "mtime": "15:10:18"
+  "claims": 78,
+  "complete": true,
+  "mtime": "15:13:40"
  }
 }

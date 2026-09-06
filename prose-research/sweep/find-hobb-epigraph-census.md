@@ -94,3 +94,27 @@ Rules 2, 4, 21, 27 rest on a COUNT now, not a metaphor: the dominant register of
 Fitz books is an unattributed impersonal in-world commentary of a few sentences (138/314, 44%), with named document
 forms (letter, journal, treatise, scroll, song) rare and CLUSTERED — journals appear only in Fitz and the Fool
 (21/21), letters never in Farseer (0/100), treatises twice in 314.
+
+## 9. PLACE / INSTITUTION / TITLING AXIS (added after the first tally — the axis the method values most)
+- Elliott's opening description names a PLACE (duchy, town, kingdom, river, harbour, named settlement) in
+  **86 of 314** — Farseer 42/100, Tawny Man 26/94, Fitz and the Fool 18/120. The place-record share HALVES
+  across the arc.
+- It names an INSTITUTION, order or magic discipline in **46 of 314**, and that count is flat: 15 / 16 / 15.
+- It names a TITLED in-world work in only **10 of 314** (Farseer 4, Tawny Man 4, Fitz and the Fool 2).
+  **304 of 314 opening documents are described without a title.** With 71 naming any personal author or
+  addressee, the default chapter-opening record in these books is UNTITLED and UNATTRIBUTED.
+
+## 10. DISCOVERY LOG (roster / expansion / stop)
+FETCHED: Elliott corpus (541 posts, REST route), elliottrwi sitemap.xml (200), Oliver Mythlore (on disk, read
+entire), Ekman & Taylor JFA 32.2 (on disk, read for the four functions — it does NOT discuss Hobb), the Fedwren
+Project bibliography (200), Outcalt Substack (200), rpgstorytellers (200, uncredited house byline — its claim of
+"herbalist journals" in the Farseer epigraphs is contradicted by the census: 0 journals in the 100 Farseer entries),
+Page by Paige (200, 0 'epigraph'), Reactor's epigraph essay (200, 68 'epigraph' / 0 'Hobb'), nerds-of-a-feather
+Fool's Errand reread (200, 0 'epigraph'), Elliott's own Sites of Memory / Words like Coins / Tolkien 2026 papers
+(on disk, 0 'epigraph' in all three).
+NOT FOUND / BLOCKED: none — every item the angle named was read.
+STOP: the last two searches surfaced nothing new that mentions both Hobb and the epigraphs.
+OUTPUT: 76 claims, 44 sources (39 substantive), every quotation string re-searched in the fetched text before
+writing; two quotes were shortened because a WordPress drop-cap splits the first letter of the first word on the
+page as fetched ("A n extended excerpt", "T estimony from a Skill"), and four more were lengthened past a bare
+proper name.

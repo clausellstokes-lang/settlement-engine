@@ -119,6 +119,98 @@ add('other: worldbuilding before writing','Le Guin answers that yes, she does sp
 S1P4_SRC='Ursula K. Le Guin, "Navigating the Ocean of Story: Session 1, Part 4", Book View Café, 21 September 2015 (text at ursulakleguin.com)'
 add('other: the writer’s aim','Le Guin says she did not set out to write successful books but tried to write good ones.',S1P4_SRC,U_S1P4,'I tried to write good ones','answer to Esme','own-words','asserts','2015',PL_RT,'none','high')
 
+
+# ==== ROUND 2 BATCH B ====
+U_PB='https://www.publicbooks.org/the-storys-where-i-go-an-interview-with-ursula-k-le-guin/'
+U_L01='https://www.locusmag.com/2001/Issue09/LeGuin.html'
+U_L08='http://www.locusmag.com/2008/Issue10_LeGuin.html'
+U_G04='http://books.guardian.co.uk/departments/sciencefiction/story/0,6000,1144428,00.html'
+U_VSW='https://vermontsoftworks.com/post/2023/leguin-rhythmic-pattern-in-lotr/'
+U_LARB='https://lareviewofbooks.org/article/writing-nameless-things-an-interview-with-ursula-k-le-guin/'
+reg(U_PB,'iv-publicbooks.txt'); reg(U_L01,'iv-locus2001.txt'); reg(U_L08,'iv-locus2008.txt')
+reg(U_G04,'iv-guardian2004.txt'); reg(U_VSW,'vsw.html'); reg(U_LARB,'iv-larb2017.txt')
+TEXT.update({u:open(FILES[u],encoding='utf-8',errors='replace').read() for u in [U_PB,U_L01,U_L08,U_G04,U_VSW,U_LARB]})
+
+PB_SRC='Ursula K. Le Guin interviewed by John Plotz, "The Story\u2019s Where I Go", Public Books, 15 June 2015'
+PB_RT='live URL, curl with browser UA, tags stripped locally'
+add('concrete sensory noun','Le Guin says of her own practice that she is very strong on accuracy and exactitude.',PB_SRC,U_PB,'I\u2019m very strong on accuracy and exactitude.','answer on describing an invented world','own-words','asserts','2015',PB_RT,'dossier-archivist','high')
+add('place and institution description','Le Guin says that with an invented world you have to describe more than a realist does.',PB_SRC,U_PB,'you have to describe more than a realist does','answer on describing an invented world','own-words','asserts','2015',PB_RT,'dossier-archivist','high')
+add('omission as information','Le Guin says that in describing an invented world the leaving-out is half the art, and the reader fills the white spaces.',PB_SRC,U_PB,'the leaving-out is half the art','answer on describing an invented world','own-words','asserts','2015',PB_RT,'dossier-archivist','high')
+add('plainness and economy','Le Guin says you cannot describe everything because that would be very boring.',PB_SRC,U_PB,'You can\u2019t describe everything','answer on describing an invented world','own-words','asserts','2015',PB_RT,'dossier-archivist','high')
+
+L01_SRC='Ursula K. Le Guin, interview excerpts, "A Return to Earthsea", Locus Magazine, September 2001 (Locus Online excerpts page)'
+add('plainness and economy','Le Guin says she has learned to stop fiddling and twiddling because fiction needs a certain roughness.',L01_SRC,U_L01,'Fiction needs a certain roughness.','excerpt on composition and revision','own-words','asserts','2001',PB_RT+'; cp1252 decoding','none','high')
+add('plainness and economy','Le Guin says she has read overpolished fiction and found it kind of a bore.',L01_SRC,U_L01,'I\u2019ve read overpolished fiction, and it\u2019s kind of a bore.','excerpt on composition and revision','own-words','asserts','2001',PB_RT+'; cp1252 decoding','none','high')
+add('other: plot versus situation','Le Guin says her books are character-driven and that she does not have plots but situations and stories.',L01_SRC,U_L01,'I don\u2019t have plots; I have situations, I have stories.','excerpt on plotting','own-words','asserts','2001',PB_RT+'; cp1252 decoding','none','high')
+add('annalist voice and deep time','Le Guin describes researching the history of Earthsea as going into the archives, which are all in her head.',L01_SRC,U_L01,'I went into the archives','excerpt on returning to Earthsea','own-words','asserts','2001',PB_RT+'; cp1252 decoding','chronicle-line','high')
+
+L08_SRC='Ursula K. Le Guin, interview excerpts, "The Age of Saturn", Locus Magazine, October 2008 (Locus Online excerpts page)'
+add('other: research and factual accuracy','Le Guin says that in a historical novel, as in science fiction, there are some facts you want to get right before you cut loose.',L08_SRC,U_L08,"There are some facts, and you want to get 'em right",'excerpt on Lavinia','own-words','asserts','2008',PB_RT+'; cp1252 decoding','dossier-archivist','high')
+add('other: research and factual accuracy','Le Guin quotes Samuel Delany\u2019s rule that you use what is known to be known.',L08_SRC,U_L08,'You use what is known to be known.','excerpt on Lavinia','own-words','asserts','2008',PB_RT+'; cp1252 decoding','dossier-archivist','high')
+
+G04_SRC='Ursula K. Le Guin, "Chronicles of Earthsea" reader Q&A, The Guardian, 9 February 2004'
+add('point of view and distance','Le Guin says that to write Tehanu all she had to do was describe Earthsea from the point of view of the powerless and disempowered.',G04_SRC,U_G04,'describe it from the point of view of the powerless','answer on the gap between The Farthest Shore and Tehanu','own-words','asserts','2004',PB_RT,'dossier-archivist','high')
+add('other: style as substance','Le Guin refuses to paraphrase her own book, saying what the book says it says best in its own words.',G04_SRC,U_G04,'What the book says, the book says best in its own words.','final answer','own-words','asserts','2004',PB_RT,'none','high')
+add('other: judgement of another style','Le Guin judges the first Harry Potter book stylistically ordinary, imaginatively derivative and ethically rather mean-spirited.',G04_SRC,U_G04,'stylistically ordinary, imaginatively derivative, and ethically rather mean-spirited','answer on J.K. Rowling','own-words','rejects','2004',PB_RT,'none','high')
+
+VSW_SRC='Erik D. Mueller-Harder, Vermont Softworks blog, 28 September 2023, quoting Le Guin, "Rhythmic Pattern in The Lord of the Rings" (Meditations on Middle-earth, 2001)'
+VSW_RT='live URL, curl with browser UA; a blog quoting the essay \u2014 relay, the primary essay text was not reached'
+add('cadence and rhythm','Le Guin, quoted by a blogger, says that even when Tolkien\u2019s sentences are long their flow is clear and punctuation comes just where you need to pause.',VSW_SRC,U_VSW,'punctuation comes just where you need to pause','blog post body, block quotation from the essay','relay','asserts','2023 (essay 2001)',VSW_RT,'chronicle-line','medium')
+add('cadence and rhythm','Le Guin, quoted by a blogger, calls the cadences of Tolkien\u2019s prose graceful and inevitable.',VSW_SRC,U_VSW,'the cadences are graceful and inevitable','blog post body, block quotation from the essay','relay','asserts','2023 (essay 2001)',VSW_RT,'chronicle-line','medium')
+add('cadence and rhythm','Le Guin, quoted by a blogger, concludes that Tolkien must have heard what he wrote.',VSW_SRC,U_VSW,'Tolkien must have heard what he wrote','blog post body, quotation from the essay','relay','asserts','2023 (essay 2001)',VSW_RT,'chronicle-line','medium')
+
+EXTRA_SOURCES = [
+ dict(title='The Story\u2019s Where I Go: An Interview With Ursula K. Le Guin (John Plotz)',url=U_PB,kind='own-words',substantive=True,date='15 June 2015',route='live URL + browser UA'),
+ dict(title='Ursula K. Le Guin: A Return to Earthsea \u2014 Locus interview excerpts',url=U_L01,kind='own-words',substantive=True,date='September 2001',route='live URL + browser UA, cp1252 decoding'),
+ dict(title='Ursula K. Le Guin: The Age of Saturn \u2014 Locus interview excerpts',url=U_L08,kind='own-words',substantive=True,date='October 2008',route='live URL + browser UA, cp1252 decoding'),
+ dict(title='Chronicles of Earthsea \u2014 reader Q&A, The Guardian',url=U_G04,kind='own-words',substantive=True,date='9 February 2004',route='live URL + browser UA'),
+ dict(title='Vermont Softworks blog quoting "Rhythmic Pattern in The Lord of the Rings"',url=U_VSW,kind='relay',substantive=True,date='28 September 2023 (essay 2001)',route='live URL + browser UA'),
+ dict(title='Writing Nameless Things: An Interview with Ursula K. Le Guin (David Streitfeld), LARB',url=U_LARB,kind='own-words',substantive=False,date='17 November 2017',route='live URL + browser UA \u2014 read in full; little on prose style'),
+ dict(title='Ursula K. Le Guin \u2014 Interviews with Ursula (index of interviews)',url='https://www.ursulakleguin.com/interviews-ursula',kind='relay',substantive=False,date='site index',route='live URL + browser UA'),
+ dict(title='Ursula at Book View Caf\u00e9: Navigating the Ocean of Story (index)',url='https://www.ursulakleguin.com/book-view-cafe-posts',kind='relay',substantive=False,date='site index',route='live URL + browser UA'),
+]
+
+
+# ==== ROUND 2 BATCH C: Dancing at the Edge of the World (1989), full text ====
+U_DANCE='https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html'
+reg(U_DANCE,'ebin-dancing.txt'); TEXT[U_DANCE]=open(FILES[U_DANCE],encoding='utf-8',errors='replace').read()
+D_RT='live URL, curl with browser UA; a full-text scan of the Grove Press edition hosted at ebin.pub, tags stripped locally (OCR artefacts present)'
+
+STN='Ursula K. Le Guin, "Some Thoughts on Narrative" (1980), in Dancing at the Edge of the World (1989)'
+add('other: tense and register','Le Guin observes that anthropological reports about people who died decades ago and about societies that no longer exist are written in the present tense.',STN,U_DANCE,'whose societies no longer exist, are written in the present tense','"Some Thoughts on Narrative", p.38','own-words','asserts','1980',D_RT,'dossier-archivist','high')
+add('other: tense and register','Le Guin says the present tense takes the story out of time.',STN,U_DANCE,'The present tense takes the story out of time.','"Some Thoughts on Narrative", p.38','own-words','asserts','1980',D_RT,'dossier-archivist','high')
+add('point of view and distance','Le Guin says the present tense, used by some writers to make the telling more actual, actually distances the story.',STN,U_DANCE,'actually distances the story','"Some Thoughts on Narrative", p.38','own-words','asserts','1980',D_RT,'dossier-archivist','high')
+add('other: tense and register','Le Guin says narrative does not normally use the present tense except for special effect or out of affectation.',STN,U_DANCE,'narrative does not normally use the present tense except for special effect','"Some Thoughts on Narrative", p.38','own-words','asserts','1980',D_RT,'chronicle-line','high')
+add('point of view and distance','Le Guin says narrative locates itself in the past in order to allow itself forward movement.',STN,U_DANCE,'It locates itself in the past','"Some Thoughts on Narrative", p.38','own-words','asserts','1980',D_RT,'chronicle-line','high')
+add('other: definition of narrative','Le Guin defines narrative as language used to connect events in time.',STN,U_DANCE,'narrative is language used to connect events in time','"Some Thoughts on Narrative", p.38','own-words','asserts','1980',D_RT,'chronicle-line','high')
+add('other: definition of narrative','Le Guin calls narrative a stratagem of mortality.',STN,U_DANCE,'Narrative is a stratagem of mortality.','"Some Thoughts on Narrative", p.39','own-words','asserts','1980',D_RT,'none','high')
+
+DSN='Ursula K. Le Guin, "It Was a Dark and Stormy Night; or, Why Are We Huddling about the Campfire?" (1979), in Dancing at the Edge of the World (1989)'
+add('civic record register','Le Guin presents a single line of runes carved in Carlisle Cathedral, reading that Tolfink carved these runes in this stone, as a whole story.',DSN,U_DANCE,'Tolfink carved these runes in this stone.','"It Was a Dark and Stormy Night", p.29','own-words','asserts','1979',D_RT,'chronicle-line','high')
+add('annalist voice and deep time','Le Guin says that runic inscription is pretty close to Barbara Herrnstein Smith\u2019s earliest form of historiography, notch-cutting.',DSN,U_DANCE,'Barbara Herrnstein Smith\u2019s earliest form of historiography','"It Was a Dark and Stormy Night", p.29','own-words','asserts','1979',D_RT,'chronicle-line','high')
+add('civic record register','Le Guin says the inscription does not really meet the requirement of Minimal Connexity and has little beginning or end.',DSN,U_DANCE,'it does not really meet the requirement of Minimal Connexity','"It Was a Dark and Stormy Night", p.29','own-words','asserts','1979',D_RT,'chronicle-line','high')
+add('civic record register','Le Guin nonetheless judges the carver of that inscription a reliable narrator who bore witness to his own existence.',DSN,U_DANCE,'Tolfink was a reliable narrator','"It Was a Dark and Stormy Night", p.29','own-words','asserts','1979',D_RT,'chronicle-line','high')
+add('omission as information','Le Guin explains the extreme brevity of the runic record by saying the material was obdurate and life is short.',DSN,U_DANCE,'The material was obdurate, and life is short.','"It Was a Dark and Stormy Night", p.29','own-words','asserts','1979',D_RT,'chronicle-line','high')
+
+WM='Ursula K. Le Guin, "World-Making" (1981), in Dancing at the Edge of the World (1989)'
+add('place and institution description','Le Guin says what artists do is make a particularly skillful selection of fragments of cosmos, chosen and arranged to give an illusion of coherence and duration.',WM,U_DANCE,'a particularly skillful selection of fragments of cosmos','"World-Making", p.46','own-words','asserts','1981',D_RT,'dossier-archivist','high')
+add('place and institution description','Le Guin says that all a work of art is, is an explorer\u2019s sketch-map.',WM,U_DANCE,'all it is is an explorer\u2019s sketch-map','"World-Making", p.47','own-words','asserts','1981',D_RT,'dossier-archivist','high')
+add('civic record register','Le Guin reproduces a sentence from her father\u2019s Handbook of the Indians of California declaring a people extinct so far as all practical purposes are concerned.',WM+' (quoting A. L. Kroeber, Handbook of the Indians of California, 1918)',U_DANCE,'so far as all practical purposes are concerned','"World-Making", p.47-48, block quotation from her father','own-words','applies','1981',D_RT,'dossier-archivist','medium')
+
+PN='Ursula K. Le Guin, "Places Names" (1981), in Dancing at the Edge of the World (1989)'
+add('place and institution description','Le Guin\u2019s own travel piece renders a stretch of country as bare noun phrases with a repeated frame, writing that sagebrush is at its intervals and power poles at their intervals.',PN,U_DANCE,'Sagebrush at its intervals. Power poles at their intervals.','"Places Names", section I, To the Little Bighorn, p.52','own-words','applies','1981',D_RT,'dossier-archivist','high')
+
+RC='Ursula K. Le Guin, "Reciprocity of Prose and Poetry" (1983), in Dancing at the Edge of the World (1989)'
+add('other: style as substance','Le Guin says she believes that a novel, just as much as a poem, is its words.',RC,U_DANCE,'a novel, just as much as a poem, is its words','"Reciprocity of Prose and Poetry", p.112','own-words','asserts','1983',D_RT,'none','high')
+add('cadence and rhythm','Le Guin says the job of composition is getting the right words in the right order and getting the measure right.',RC,U_DANCE,'the right order, getting the measure right, is the same','"Reciprocity of Prose and Poetry", p.112-113','own-words','asserts','1983',D_RT,'none','high')
+add('cadence and rhythm','Le Guin says prose could have its own proper, looser rhythms and measures, distinct from metre.',RC,U_DANCE,'prose could have its own proper, looser rhythms and measures','"Reciprocity of Prose and Poetry", p.111','own-words','asserts','1983',D_RT,'none','high')
+add('cadence and rhythm','Le Guin says a novel gains its power less from the sound of any single sentence than from the pacing and rhythm of paragraphs and chapters.',RC,U_DANCE,'the pacing and rhythm of paragraphs and chapters','"Reciprocity of Prose and Poetry", p.109','own-words','asserts','1983',D_RT,'chronicle-line','high')
+add('dialogue register','Le Guin points to the broken monosyllables of Silas Marner\u2019s speech in George Eliot as an inseparable part of the passage\u2019s meaning.',RC,U_DANCE,'all broken monosyllables','"Reciprocity of Prose and Poetry", p.109','own-words','asserts','1983',D_RT,'none','high')
+
+EXTRA_SOURCES2 = [
+ dict(title='Dancing at the Edge of the World: Thoughts on Words, Women, Places (Grove Press) \u2014 full text scan',url=U_DANCE,kind='own-words',substantive=True,date='1989 (essays 1976-1988)',route='live URL + browser UA; ebin.pub full-text scan'),
+]
+
 # ---- verification ----
 bad=[]
 for i,c in enumerate(claims):
@@ -150,6 +242,7 @@ sources=[
  dict(title='archive.org item metadata: Conversations on Writing (ursulakleguincon0000legu)',url='https://archive.org/metadata/ursulakleguincon0000legu',kind='relay',substantive=False,date='2018 edition',route='archive.org metadata API; full text access-restricted'),
 ]
 
+sources += EXTRA_SOURCES + EXTRA_SOURCES2
 json.dump(dict(complete=False,coverage='in progress — round 2 of the voice angle',sourcesRead=sources,claims=claims),
           open(OUT,'w',encoding='utf-8'),ensure_ascii=False,indent=1)
 print('claims',len(claims),'sources',len(sources),'bad',len(bad))

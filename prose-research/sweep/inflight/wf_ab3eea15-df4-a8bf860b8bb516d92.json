@@ -3,14 +3,14 @@
  "name": "hobb",
  "angle": "critics-absent",
  "tag": null,
- "lines": 212,
+ "lines": 296,
  "firstTs": "2026-09-06T18:57:44.696Z",
- "lastTs": "2026-09-06T19:10:40.126Z",
+ "lastTs": "2026-09-06T19:16:27.301Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 45,
-  "WebSearch": 11,
+  "Bash": 65,
+  "WebSearch": 19,
   "WebFetch": 7
  },
  "urlsFetched": [
@@ -63,7 +63,27 @@
   "https://web.archive.org/web/20231113190246id_/https://www.tor.com/2014/08/12/book-review-the-fools-assassin-robin-hobb/",
   "https://web.archive.org/web/20240114133121id_/https://www.tor.com/2015/07/10/character-is-in-the-details-robin-hobbs-golden-fool/",
   "https://web.archive.org/web/20250725002840id_/https://www.telegraph.co.uk/culture/books/bookreviews/11048552/Fools-Assassin-by-Robin-Hobb-review-high-art.html",
-  "http://sf-encyclopedia.uk/fe.php?nm=lindholm_megan"
+  "http://sf-encyclopedia.uk/fe.php?nm=lindholm_megan",
+  "https://www.tor.com/2010/06/02/facts-universally-acknowledged-being-a-review-of-robin-hobbs-ligdragon-havenlig/",
+  "https://locusmag.com/?s=Robin+Hobb",
+  "https://locusmag\\.com/20[0-9",
+  "https://locusmag.com/2017/10/88981/",
+  "https://www.locusmag.com/2005/Issues/12Hobb.html",
+  "https://locusmag.com/interviews/",
+  "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+  "https://www.tor.com/author/liz-bourke/",
+  "https://www.tor.com/author/niall-alexander/",
+  "https://lizbourke.wordpress.com/?s=Hobb",
+  "https://lizbourke\\.wordpress\\.com/20[0-9",
+  "https://web.archive.org/web/20240114133029id_/https://www.tor.com/author/niall-alexander/",
+  "https://web.archive.org/web/20231129110416id_/https://www.tor.com/author/liz-bourke/",
+  "https://web.archive.org/web/20240104183440id_/https://www.tor.com/author/jo-walton/",
+  "https://archive.org/advancedsearch.php?q=meditations+on+middle-earth&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=20&output=json",
+  "https://lite.duckduckgo.com/lite/?q=%22Jo+Walton%22+%22Robin+Hobb%22+tor.com",
+  "https://archive.org/advancedsearch.php?q=title%3A%28%22meditations+on+middle-earth%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=20&output=json",
+  "https://api.archivelab.org/books/meditationsonmid0000unse/searchinside?q=quest",
+  "https://archive.org/metadata/meditationsonmid0000unse",
+  "https://theplentynet.tumblr.com/post/703191034788724736/john-howe-interviews-robin-hobb"
  ],
  "filesWritten": [],
  "lastAssistantText": "Let me write the checkpoint now with claims verified against the fetched text.",
@@ -71,5 +91,10 @@
  "agent": "a8bf860b8bb516d92",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_ab3eea15-df4/agent-a8bf860b8bb516d92.jsonl",
  "journal": "in-flight",
- "checkpointFile": null
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-hobb-critics-absent.json",
+  "claims": 42,
+  "complete": false,
+  "mtime": "15:13:06"
+ }
 }

@@ -3,14 +3,14 @@
  "name": "leguin",
  "angle": "record-register",
  "tag": null,
- "lines": 159,
+ "lines": 238,
  "firstTs": "2026-09-06T18:59:47.841Z",
- "lastTs": "2026-09-06T19:10:40.438Z",
+ "lastTs": "2026-09-06T19:16:47.881Z",
  "tools": {
   "Read": 1,
-  "Bash": 31,
+  "Bash": 51,
   "ToolSearch": 1,
-  "WebSearch": 11
+  "WebSearch": 13
  },
  "urlsFetched": [
   "https://www.coursehero.com/file/60886041/A-Description-of-Earthseapdf/",
@@ -40,7 +40,21 @@
   "https://booksongif.substack.com/p/left-hand-of-darkness-ursula-le-guin",
   "https://www.googleapis.com/books/v1/volumes",
   "https://ray.yorksj.ac.uk/id/eprint/6566/8/14744740221126984.pdf",
-  "https://www.scielo.br/j/ha/a/H99XmCRXgwSSQmtYqmhwcMy/?format=pdf&lang=en"
+  "https://www.scielo.br/j/ha/a/H99XmCRXgwSSQmtYqmhwcMy/?format=pdf&lang=en",
+  "https://libcom.org/article/four-ways-forgiveness-ursula-le-guin",
+  "https://gel.sites.uiowa.edu/le-guin-ursula-k-left-hand-darkness",
+  "https://sites.middlebury.edu/sciencefiction2017/2019/10/09/le-guin/",
+  "https://vector-bsfa.com/2020/12/24/review-the-left-hand-of-darkness-by-ursula-k-le-guin/",
+  "https://www.arts.gov/initiatives/nea-big-read/left-hand-darkness",
+  "https://www.arts.gov/sites/default/files/LeftHandOfDarkness-Reader-Resource.pdf",
+  "https://api.openalex.org/works?search=Always%20Coming%20Home%20Le%20Guin%20ethnography&per-page=15",
+  "https://api.openalex.org/works?search=Le%20Guin%20Seggri&per-page=15",
+  "https://api.crossref.org/works?query.bibliographic=Le+Guin+Always+Coming+Home+ethnography&rows=15&select=title,DOI,issued,container-title,URL",
+  "https://api.semanticscholar.org/graph/v1/paper/search?query=Le%20Guin%20Always%20Coming%20Home%20ethnography&limit=15&fields=title,year,externalIds,openAccessPdf,venue",
+  "https://www.bookreporter.com/reviews/tales-from-earthsea-the-earthsea-cycle-book-5",
+  "https://en.wikipedia.org/wiki/Tales_from_Earthsea",
+  "https://en.wikipedia.org/wiki/Always_Coming_Home",
+  "https://openlibrary.org/search/inside?q=%22A+Description+of+Earthsea%22"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -50,8 +64,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-leguin-record-register.json",
-  "claims": 53,
+  "claims": 71,
   "complete": false,
-  "mtime": "15:10:16"
+  "mtime": "15:16:47"
  }
 }
