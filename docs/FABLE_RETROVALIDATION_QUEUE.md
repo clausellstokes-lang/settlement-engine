@@ -3691,3 +3691,7 @@ The rulings themselves are inline, one `*RULED (§892.x, Fable 5.1):*` paragraph
 ### R63 — lane L-CHAIR-901 (1 car f2ab6c802; receipt `receipt-l-chair-901`; HIGH: two base reds cured; four dead citations; the content-keyed golden roster arm; the plant harness that destroyed its own files once) — OWED
 ### R64 — lanes L-HOMES-5 (LGT-P6-ESPWIRE) and L-HOMES-7 (LGT-P7-DRIFTDOOR), REFUSED with measurement, zero bytes (receipts `receipt-lgt-p6-espwire`, `receipt-lgt-p7-driftdoor`); the refusals themselves are Opus judgments the chair ratified — OWED (walk the refusal, not a car)
 **Status:** enrolled, not ruled.
+## §902 — THE OSR RUNG-18 LANDING (SEAT: Fable 5.1 — validated)
+
+### R65 — lane OSR-SCHEMA18 (2 cars f20d5dd48 + a05a4646e; receipt `receipt-osr-schema18`; HIGH: the brief's line 17 was WRONG (the whole CLI was dark, not only the write); F1 the ninth exemption never retired at §900 and costs rung 19; the rename refused at 119 sites) — OWED
+**Status:** enrolled, not ruled.

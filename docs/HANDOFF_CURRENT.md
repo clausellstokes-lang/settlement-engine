@@ -8,7 +8,11 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §901 — **THE LIGHTING CONSIST IS DOWN; the nine lighting lanes' cars are on one tip; next is OSR rung 18, then L-DEFAULT** (`04bb92d19` -> `b0cbc67a1`).
+## ⭐⭐⭐⭐⭐ PICKUP AT §902 — **THE OSR REGISTER IS RE-ANCHORED AND ITS DOOR IS OPEN; the two writer-reach owed rows are retired; next is L-DEFAULT** (`b0cbc67a1` -> `fd36f0298`).
+
+Product `claude/composite-r4` = fd36f0298 (sealed `landing-osr18-2026-09-05`, 8 cars over b0cbc67a1, landed by fast-forward). Owed to the next chair: L-DEFAULT (`briefs/brief-L-DEFAULT.md`; the preset table is the car that lights the lighting consist) → the golden control on a quiet machine, HORIZON-B6's soak → the retrovalidation walk → the FULL STOP before the soak. Rung 19 is spoken for by the ninth exemption's retirement (owner row). The prose program (owner ask 09-05, EXHAUSTIVE; 09-06: the structure is a LATENT GRAMMAR, never a visible template) runs in the chair kit `prose-research/` — the sweeps, rounds and the reconciliation queue are `LANE-QUEUE.md` S1–S12; nothing in the corpus changes before the owner's walk of a refuted-and-cured taste sample.
+
+## (superseded) PICKUP AT §901 — **THE LIGHTING CONSIST IS DOWN; the nine lighting lanes' cars are on one tip; next is OSR rung 18, then L-DEFAULT** (`04bb92d19` -> `b0cbc67a1`).
 
 Product `claude/composite-r4` = b0cbc67a1 (sealed `landing-lighting-2026-09-05`, 25 cars over 04bb92d19). Lit: nothing yet — every lighting car lands DARK behind its door; L-DEFAULT (the preset table) is the car that lights. Owed to the next chair: OSR rung 18 first (the schema-17 receipt's subjectSha lies outside the product lineage since the §900 replay, so the OSR `--write`, the capsule and two writer-reach census rows all wait on it); then L-DEFAULT's six hunks; then the golden control on a quiet machine, HORIZON-B6's soak, and the retrovalidation walk before the FULL STOP. The prose program (owner ask 09-05) is owner-gated on a VERIFIED taste sample: the chair kit `prose-research/` holds the dossier, the corpus inventory and probe, the fingerprints, RULES v2, the checker, and the four critic sweeps' exported state.
 
