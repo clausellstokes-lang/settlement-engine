@@ -1966,5 +1966,238 @@
    "note": "Verbatim, continuing 'Otherwise, readers get bored.' Both halves of the claim are the article's own: 'The basic training objective of a language model is least surprise' and 'Good stories evolve from beginning to end, but they don't drift' / 'AI writing, on the other hand, drifts aimlessly.'",
    "fromFile": "verdicts-ai-i120-134.json"
   }
+ },
+ {
+  "index": 135,
+  "feature": "coherence at length",
+  "claim": "Coherence begins to fall apart within a few hundred words, and when asked for a style the model over-applies it.",
+  "source": "Michael O. Church (2025-05-28)",
+  "url": "https://antipodes.substack.com/p/how-to-make-ai-write-a-bestsellerand",
+  "page": "How to make AI write a bestseller—and why you can't",
+  "quote": "It will often overdo the style you ask for",
+  "angle": "novelists,",
+  "verdict": {
+   "index": 135,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The issue is that it will often overdo the style you ask for.",
+   "note": "Quote verbatim as a clause (source has lowercase 'it' mid-sentence). Coherence half also confirmed: 'Remember, coherence starts to fall apart at ~250 words.' and 'treat LLM output as suspect at 250 words; beyond 500, it'll be downright bad.'",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 136,
+  "feature": "voice flattening",
+  "claim": "AI tools flatten authorial voice, homogenise, and eradicate creative risk-taking by applying blanket rules without understanding purpose.",
+  "source": "Sophie Playle, fiction editor, Liminal Pages (2026-05-06)",
+  "url": "https://www.liminalpages.com/ai-and-fiction-editing/",
+  "page": "AI and Fiction Editing: Should You Use It, Can You Trust It and Will It Take Your Job?",
+  "quote": "They flatten voice and eradicate creative risk-taking.",
+  "angle": "novelists,",
+  "verdict": {
+   "index": 136,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They flatten voice and eradicate creative risk-taking.",
+   "note": "Exact sentence, punctuation included. Rest of claim also on page: 'They apply blanket rules, with no understanding of context or purpose.' and 'it flattens and homogenises.'",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 137,
+  "feature": "lyrical nonsense",
+  "claim": "The Granta AI story is lyrical nonsense with no narrative, reading like a parody of poet-turned-novelist fiction despite judges praising its 'lyrical precision'.",
+  "source": "Lincoln Michel, novelist, Substack note (2026-05-19)",
+  "url": "https://substack.com/@thelincoln/note/c-261333774",
+  "page": "Lincoln Michel note on the Granta AI story",
+  "quote": "it does not have a story. There's no narrative.",
+  "angle": "novelists,",
+  "verdict": {
+   "index": 137,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "man, it does not have a story. There's no narrative.",
+   "note": "Quote verbatim. All three other elements confirmed: 'a particular brand of lyrical nonsense that is quite literally nonsensical', 'It does read like a parody of a certain type of poet-turned-novelist fiction', and 'Certainly extra embarrassing that \"lyrical precision\" was highlighted by the judges.' Note dated May 19, matching.",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 138,
+  "feature": "rule of three",
+  "claim": "Tricolon and stacked triplets of descriptors are overused as a default rhetorical shape.",
+  "source": "tropes.fyi AI Writing Pattern Directory",
+  "url": "https://tropes.fyi/directory",
+  "page": "Tropes - AI Writing Pattern Directory",
+  "quote": "Products impress; platforms empower",
+  "angle": "novelists,",
+  "verdict": {
+   "index": 138,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Products impress people; platforms empower them.",
+   "note": "Quote is ALTERED, not verbatim - 'people' and 'them' were dropped. Claim substance holds: entry reads 'Overuse of the rule-of-three pattern, often extended to four or five' and 'A single tricolon is elegant; three back-to-back tricolons (tri-tricolons) are a pattern recognition failure.' Source says stacked tricolons, not 'triplets of descriptors'.",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 139,
+  "feature": "repetition persistence",
+  "claim": "AI keeps repeating a shape or cliché where even a bad human writer would notice and rest it, because its instinct is to keep obeying the instruction.",
+  "source": "Makin, Record Crash (2025-11-27)",
+  "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+  "page": "How to Identify AI-Written Web Fiction",
+  "quote": "Even bad human writers give it a rest when noticing repetition",
+  "angle": "novelists,",
+  "verdict": {
+   "index": 139,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "even bad ones will 'give it a rest' when they notice",
+   "note": "Quote is a paraphrase, not verbatim. Full source sentence: 'A human writer might reuse words, but even bad ones will \"give it a rest\" when they notice.' The persistence half is verbatim-supported: 'Current AIs have the opposite instinct, to stick to instructions and generate text that seems to fit the previous paragraph.'",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 140,
+  "feature": "em-dashes",
+  "claim": "Em-dashes are overused, roughly one per paragraph, and used for thought continuation rather than breaks.",
+  "source": "Carrie Jones (2026-03-21)",
+  "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
+  "page": "What Makes a Story \"Look\" Like AI Wrote It?",
+  "quote": "AI does this on a sentence level often with those em-dashes",
+  "angle": "novelists,",
+  "verdict": {
+   "index": 140,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI does this on a sentence level often with those em-dashes, declarative sentences.",
+   "note": "Quote appears word for word as the opening of that sentence, BUT in the emotional-resonance/deep-POV section, not the em-dash-overuse section - it is not the source's support for the claim. The claim itself is separately confirmed verbatim elsewhere: 'There's one in every paragraph.' and 'That's not a break in thought. It's a continuation of thought. That's an AI tell.'",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 141,
+  "feature": "POV / pacing",
+  "claim": "AI holds an unnaturally locked point of view across scenes and paces every scene at the same rate.",
+  "source": "Matthew Vollmer (2026-04-24)",
+  "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+  "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+  "quote": "",
+  "angle": "novelists,",
+  "verdict": {
+   "index": 141,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Pacing flatness: scenes unfold at a constant rate.",
+   "note": "No quote was supplied, so verbatim is not assessable; both halves are on the page. POV half: 'POV lock: LLMs \"pick a lane and stay in it with unnatural consistency\" - no drift between free indirect style, interior monologue, and exterior scene', which Vollmer attributes to Charlie Guo rather than observing himself. Pacing line continues 'No elision, no selective summary.'",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 143,
+  "feature": "counter-evidence",
+  "claim": "MFA readers strongly disfavored prompted AI pastiches on stylistic fidelity (OR 0.16), but after fine-tuning on the author's corpus both MFA and general readers preferred the AI, and it was flagged as AI only 3% of the time; the tells above characterize prompted default-register output.",
+  "source": "Chakrabarty, Ginsburg, Dhillon, arXiv 2510.13939 (2025-10-15, rev 2026-03-17)",
+  "url": "https://arxiv.org/abs/2510.13939",
+  "page": "Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers",
+  "quote": "Fine-tuned outputs were rarely flagged as AI-generated (3% vs. 97%)",
+  "angle": "novelists,",
+  "verdict": {
+   "index": 143,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Fine-tuned outputs were rarely flagged as AI-generated (3% vs. 97% for prompting) by leading detectors.",
+   "note": "Verified against raw arXiv abstract HTML, not just the fetch layer. Quote verbatim but truncated mid-parenthetical (drops 'for prompting'). OR=0.16 for MFA fidelity confirmed; 'Both groups preferred fine-tuned AI' confirmed. The trailing clause 'the tells above characterize prompted default-register output' is the analyst's own inference and is not in the paper.",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 144,
+  "feature": "counter-evidence",
+  "claim": "2,587 lay readers rated ChatGPT rewrites of three published short stories higher on quality and absorption than the originals and identified authorship at chance; the researchers attribute this to AI being clearer and more predictable, which is the same property editors name as the gloss.",
+  "source": "Sears and Weisberg (Villanova) via earth.com report (2026-08-04)",
+  "url": "https://earth.com/news/readers-prefer-ai-generated-stories",
+  "page": "Readers rated AI stories higher than human fiction in study of 2,587 adults",
+  "quote": "People generally prefer predictability",
+  "angle": "novelists,",
+  "verdict": {
+   "index": 144,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Perhaps people generally prefer predictability",
+   "note": "Quote strips the hedge 'Perhaps', which carries the speculative force: 'Perhaps people generally prefer predictability, because difficult or subtle material requires more brain power.' Everything else confirmed: 2,587 adults, Sears and Deena Skolnick Weisberg at Villanova, three published stories rewritten by ChatGPT, higher quality and Story World Absorption Scale ratings, and the gloss link 'AI writing tends to be clearer, more direct and easier to process' plus 'the AI versions of our stories usually stated their themes explicitly'. One imprecision: 'at chance' is loose - experiment 2 was 39.93%, below chance ('worse than a coin flip'); only experiment 3 (51.97%) was at chance.",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 145,
+  "feature": "theme over-explanation",
+  "claim": "AI stories state their moral meaning directly instead of dramatizing it, favoring tidy single-track plots.",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136, 2026-04-03 rev 2026-08-10)",
+  "url": "https://arxiv.org/abs/2604.03136",
+  "quote": "over-explain themes and favor tidy, single-track plots",
+  "angle": "publishing",
+  "verdict": {
+   "index": 145,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI stories over-explain themes and favor tidy, single-track plots",
+   "note": "Verified against raw arXiv abstract HTML. Paper exists: arXiv:2604.03136, 'StoryScope: Investigating idiosyncrasies in AI fiction', Russell, Rajendhran, Pham, Iyyer, Wieting, submitted 2026/04/03.",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 146,
+  "feature": "flat escalation",
+  "claim": "Claude-generated stories in particular show flat event escalation compared with human fiction.",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+  "url": "https://arxiv.org/abs/2604.03136",
+  "quote": "Claude produces notably flat event escalation",
+  "angle": "publishing",
+  "verdict": {
+   "index": 146,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Claude produces notably flat event escalation",
+   "note": "Verified against raw arXiv abstract HTML. In the abstract it is one of three per-model fingerprints, alongside 'GPT over-indexes on dream sequences, and Gemini defaults to external character description' - the 'in particular' framing is fair.",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 147,
+  "feature": "moral ambiguity absent",
+  "claim": "Human stories frame protagonist choices as morally ambiguous; AI stories resolve into clean internal acceptance.",
+  "source": "Russell et al., StoryScope; Dramatica gloss 2026-05-29",
+  "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+  "quote": "cleaner internal acceptance",
+  "angle": "publishing",
+  "verdict": {
+   "index": 147,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI stories show tighter causal chains, more protagonist-driven resolutions, fewer subplots, and cleaner internal acceptance.",
+   "note": "Quote verbatim in the Dramatica article. Human-side half also present: 'more morally ambiguous protagonist choices' and 'Human stories are more likely to leave endings ambiguous, complicate responsibility, fracture time'. Article does cite Russell et al. StoryScope explicitly.",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 148,
+  "feature": "subplot absence / causal tidiness",
+  "claim": "AI fiction runs one tight causal chain with far fewer subplots and more protagonist-driven resolutions than human fiction.",
+  "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+  "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+  "quote": "tighter causal chains, more protagonist-driven resolutions",
+  "angle": "publishing",
+  "verdict": {
+   "index": 148,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI stories show tighter causal chains, more protagonist-driven resolutions, fewer subplots, and cleaner internal acceptance.",
+   "note": "Quote verbatim (same sentence as 147). Minor drift: the claim's intensifier 'far fewer subplots' is not in the source, which says only 'fewer subplots' with no magnitude. This is a secondary source glossing StoryScope, not the paper itself.",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
+ },
+ {
+  "index": 149,
+  "feature": "temporal flatness",
+  "claim": "Human stories use more time jumps, flashbacks and nonlinear delay of revelation; AI stories stay chronological.",
+  "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+  "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+  "quote": "more temporal discontinuity",
+  "angle": "publishing",
+  "verdict": {
+   "index": 149,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They use more temporal discontinuity, more flashbacks and nonlinear movement",
+   "note": "Quote verbatim. Delay-of-revelation half also present: 'more willing to let a revelation reshape earlier material rather than simply deliver the next clean cause in a line.' Drift: the source is strictly comparative (human stories use MORE); it never asserts the claim's absolute 'AI stories stay chronological.'",
+   "fromFile": "verdicts-ai-i135-149.json"
+  }
  }
 ]
