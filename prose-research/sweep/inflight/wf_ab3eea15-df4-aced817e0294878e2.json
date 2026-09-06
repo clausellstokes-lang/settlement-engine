@@ -3,12 +3,12 @@
  "name": "hobb",
  "angle": null,
  "tag": "i551-565",
- "lines": 50,
+ "lines": 64,
  "firstTs": "2026-09-06T19:40:50.874Z",
- "lastTs": "2026-09-06T19:42:18.567Z",
+ "lastTs": "2026-09-06T19:42:58.397Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 10
+  "Bash": 14
  },
  "urlsFetched": [
   "https://www.tor.com/2010/02/05/the-golden-age-of-epic-fantasy-a-review-of-robin-hobbs-ligdragon-keeperlig/:dk.html",

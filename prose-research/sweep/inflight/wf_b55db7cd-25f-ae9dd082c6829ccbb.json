@@ -3,12 +3,12 @@
  "name": "kay",
  "angle": "transcripts-and-readers",
  "tag": null,
- "lines": 71,
+ "lines": 85,
  "firstTs": "2026-09-06T19:40:35.615Z",
- "lastTs": "2026-09-06T19:42:27.389Z",
+ "lastTs": "2026-09-06T19:42:58.757Z",
  "tools": {
   "Read": 1,
-  "Bash": 15,
+  "Bash": 19,
   "ToolSearch": 1,
   "WebSearch": 2
  },
@@ -18,7 +18,10 @@
   "https://www.mojeek.com/search?q=%22Just+Enough+Light%22+Guy+Gavriel+Kay+Tolkien+Lecture",
   "https://www.youtube.com/watch?v=z1TgX0alFuM",
   "https://www.youtube.com/watch?v=$1",
-  "https://old.reddit.com/r/Fantasy/search.json?q=Guy+Gavriel+Kay+prose&restrict_sr=on&sort=relevance&t=all&limit=50"
+  "https://old.reddit.com/r/Fantasy/search.json?q=Guy+Gavriel+Kay+prose&restrict_sr=on&sort=relevance&t=all&limit=50",
+  "https://api.pullpush.io/reddit/search/submission/?q=Guy%20Gavriel%20Kay%20prose&subreddit=Fantasy&size=60&sort=desc&sort_type=num_comments",
+  "https://www.mojeek.com/search?q=site%3Areddit.com+%22Guy+Gavriel+Kay%22+prose",
+  "https://[a-z"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",

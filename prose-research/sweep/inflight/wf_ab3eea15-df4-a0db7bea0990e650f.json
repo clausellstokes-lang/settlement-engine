@@ -3,16 +3,20 @@
  "name": "hobb",
  "angle": null,
  "tag": "i536-550",
- "lines": 41,
+ "lines": 57,
  "firstTs": "2026-09-06T19:40:50.873Z",
- "lastTs": "2026-09-06T19:42:16.299Z",
+ "lastTs": "2026-09-06T19:42:57.507Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 8
+  "Bash": 12,
+  "mcp__Claude_Browser__navigate": 1
  },
  "urlsFetched": [
   "https://www.youtube.com/watch?v=H02ZPoR3tlI",
-  "https://www.youtube.com/watch?v={vid}"
+  "https://www.youtube.com/watch?v={vid}",
+  "https://youtubetotranscript.com/transcript?v=H02ZPoR3tlI",
+  "https://www.youtube-transcript.io/api/transcripts?ids=H02ZPoR3tlI",
+  "https://www.youtube.com/youtubei/v1/player?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll fetch each unique URL once. There are 4 unique URLs across the 15 claims.",

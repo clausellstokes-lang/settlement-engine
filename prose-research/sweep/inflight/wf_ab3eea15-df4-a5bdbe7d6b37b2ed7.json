@@ -3,12 +3,12 @@
  "name": "hobb",
  "angle": null,
  "tag": "i506-520",
- "lines": 55,
+ "lines": 63,
  "firstTs": "2026-09-06T19:40:50.873Z",
- "lastTs": "2026-09-06T19:42:19.940Z",
+ "lastTs": "2026-09-06T19:42:59.107Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 14
+  "Bash": 16
  },
  "urlsFetched": [
   "https://web.archive.org/web/20201111180135id_/https://www.tor.com/2012/02/07/youve-never-read-anything-like-sff-before-robin-hobb-talks-with-peter-orullian/",
