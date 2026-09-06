@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 10,
+ "indices": [
+  199,
+  200,
+  201,
+  202,
+  203,
+  204,
+  205,
+  206,
+  207,
+  208,
+  209,
+  210,
+  211,
+  212,
+  213
+ ],
+ "claims": [
+  {
+   "index": 199,
+   "feature": "embedded humor",
+   "claim": "Perkins tells adventure writers to put puns, little laughs and Easter eggs in their text, embedded naturally rather than forced.",
+   "source": "Chris Perkins on Writing your own Adventures (D&D Beyond, 2018-04-19, Todd Kenreck transcript)",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+   "quote": "Put puns in your adventure.",
+   "page": "official interview transcript"
+  },
+  {
+   "index": 200,
+   "feature": "not a novel",
+   "claim": "Perkins warns against writing an adventure like a novel that dictates how each encounter must resolve; the text must survive unexpected choices and dice.",
+   "source": "Chris Perkins on Writing your own Adventures (D&D Beyond, 2018-04-19, Todd Kenreck transcript)",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+   "quote": "",
+   "page": "official interview transcript"
+  },
+  {
+   "index": 201,
+   "feature": "economical originals",
+   "claim": "Perkins characterizes the original 1983 Ravenloft as economical in its writing yet rich in characterization, the model he expanded.",
+   "source": "Ex D&D boss Chris Perkins tells us why Strahd is the RPG's most successful villain (Wargamer, 2026-03-19)",
+   "url": "https://www.wargamer.com/dnd/chris-perkins-strahd",
+   "quote": "economical",
+   "page": "interview"
+  },
+  {
+   "index": 202,
+   "feature": "helpful teaching tone",
+   "claim": "Wyatt set out to recapture the welcoming, teaching tone of the 4e DMG that the 2014 DMG lacked.",
+   "source": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "quote": "the helpful tone to ease you in",
+   "page": "interview"
+  },
+  {
+   "index": 203,
+   "feature": "surfacing information",
+   "claim": "Perkins found DMs did not know material existed in the 2014 DMG, so the 2024 text is organized to surface what is there.",
+   "source": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "quote": "they didn't even know it was there",
+   "page": "interview"
+  },
+  {
+   "index": 204,
+   "feature": "examples of play as scripts",
+   "claim": "Wyatt wrote the 2024 DMG's examples of play as scripts of the game unfolding to show how it functions.",
+   "source": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "quote": "presenting the scripts of that unfolding in play",
+   "page": "interview"
+  },
+  {
+   "index": 205,
+   "feature": "front-loaded basics",
+   "claim": "The 2024 DMG front-loads basic information about DMing and moves world creation to the middle, mirroring the PHB's structure.",
+   "source": "Chris Perkins and James Wyatt Answer Burning Questions About the 2024 DMG, page 2 (EN World, 2024-10-25)",
+   "url": "https://www.enworld.org/threads/chris-perkins-and-james-wyatt-answer-burning-questions-about-the-2024-dungeon-masters-guide.707569/page-2",
+   "quote": "front-loading all of the basic information",
+   "page": "interview transcript + forum"
+  },
+  {
+   "index": 206,
+   "feature": "organization as the 2014 flaw",
+   "claim": "Wyatt names the 2014 DMG's organization as its biggest drawback and says a DMG should guide you on how to be a DM.",
+   "source": "Chris Perkins and James Wyatt Answer Burning Questions About the 2024 DMG, page 2 (EN World, 2024-10-25)",
+   "url": "https://www.enworld.org/threads/chris-perkins-and-james-wyatt-answer-burning-questions-about-the-2024-dungeon-masters-guide.707569/page-2",
+   "quote": "the organization of the 2014 DMG was its biggest drawback",
+   "page": "interview transcript + forum"
+  },
+  {
+   "index": 207,
+   "feature": "boxed-text boilerplate",
+   "claim": "Every published WotC adventure opens by explaining what boxed text is; with the 2024 DMG defining it on p. 9, Wyatt wants to drop that boilerplate.",
+   "source": "After DM's Guide Preview, Future D&D Adventures Will Drop These Two Repetitive Features (Screen Rant, 2024-10-29)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-future-campaigns/",
+   "quote": "tells you what boxed text is",
+   "page": "interview report"
+  },
+  {
+   "index": 208,
+   "feature": "door boilerplate",
+   "claim": "Perkins says re-explaining doors in every adventure bothered him for a decade; the 2024 DMG's doors page lets adventures stop repeating it.",
+   "source": "After DM's Guide Preview, Future D&D Adventures Will Drop These Two Repetitive Features (Screen Rant, 2024-10-29)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-future-campaigns/",
+   "quote": "super, super important",
+   "page": "interview report"
+  },
+  {
+   "index": 209,
+   "feature": "information reach over format",
+   "claim": "Abadia (AL admin): dropping boxed text does not remove the need to tell the DM what to convey; the test is whether information reaches the DM.",
+   "source": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "the DM still needs some way to understand what to convey",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "index": 210,
+   "feature": "fragmented templated encounters",
+   "claim": "AL Season 8's rigid template scattered one animated door's description across Dimensions & Terrain, Door and Creatures/NPCs sections, obscuring intent.",
+   "source": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "You must read both places",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "index": 211,
+   "feature": "ritual sidebars",
+   "claim": "The AL 'Playing the Pillars' sidebars existed to exist and added little value.",
+   "source": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "It exists sort of just to exist",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "index": 212,
+   "feature": "2025 lore contraction",
+   "claim": "Abadia finds the 2025 Monster Manual devotes far fewer words to describing monsters and less actionable encounter information than 2014's inspiring lore.",
+   "source": "Best and Worst of the Revised Monster Manual (Teos Abadia, Alphastream, 2025-03-13)",
+   "url": "https://alphastream.org/index.php/2025/03/13/best-and-worst-of-the-revised-monster-manual/",
+   "quote": "far fewer words devoted to describing the monster",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "index": 213,
+   "feature": "stat-block phrasing inconsistency",
+   "claim": "2025 Multiattack lines inconsistently include 'in any combination', and the gelatinous cube's codified wording is harder to understand than before.",
+   "source": "Best and Worst of the Revised Monster Manual (Teos Abadia, Alphastream, 2025-03-13)",
+   "url": "https://alphastream.org/index.php/2025/03/13/best-and-worst-of-the-revised-monster-manual/",
+   "quote": "a fair lack of clarity in monster stat blocks",
+   "page": "AL admin/designer blog"
+  }
+ ]
+}

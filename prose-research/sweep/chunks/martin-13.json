@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 13,
+ "indices": [
+  525,
+  526,
+  527,
+  528,
+  529,
+  530,
+  531,
+  532,
+  533,
+  534,
+  535,
+  536,
+  537,
+  538,
+  539
+ ],
+ "claims": [
+  {
+   "index": 525,
+   "feature": "literal dwarf, not Gimli",
+   "claim": "Tyrion is an actual dwarf, a joke to passers-by, not a hearty axe-wielding fantasy dwarf.",
+   "source": "Lev Grossman, 'G.R.R. Martin's Complex Epic for an Ambivalent Age', NPR, 7 Jul 2011",
+   "url": "https://www.npr.org/2011/07/11/137652436/r-r-martins-sardonic-epic-for-an-ambivalent-age",
+   "quote": "Tyrion is an actual dwarf",
+   "page": ""
+  },
+  {
+   "index": 526,
+   "feature": "plotting",
+   "claim": "Martin is a tense, surging, insomnia-inflicting plotter.",
+   "source": "Lev Grossman, 'The American Tolkien', Time, 13 Nov 2005",
+   "url": "https://content.time.com/time/subscriber/article/0,33009,1129596,00.html",
+   "quote": "a tense, surging, insomnia-inflicting plotter",
+   "page": ""
+  },
+  {
+   "index": 527,
+   "feature": "characterization",
+   "claim": "Martin is a deft and inexhaustible sketcher of personalities.",
+   "source": "Lev Grossman, 'The American Tolkien', Time, 13 Nov 2005",
+   "url": "https://content.time.com/time/subscriber/article/0,33009,1129596,00.html",
+   "quote": "a deft and inexhaustible sketcher of personalities",
+   "page": ""
+  },
+  {
+   "index": 528,
+   "feature": "multi-angle narration",
+   "claim": "Martin shoots the action from many angles with a dozen narrators to reflect its many-sided nature.",
+   "source": "Lev Grossman, 'The American Tolkien', Time, 13 Nov 2005",
+   "url": "https://content.time.com/time/subscriber/article/0,33009,1129596,00.html",
+   "quote": "shoots the action from many angles, with a dozen narrators",
+   "page": ""
+  },
+  {
+   "index": 529,
+   "feature": "grit",
+   "claim": "It is men and women slugging it out in the muck for money, power, lust and love, not elves against orcs.",
+   "source": "Lev Grossman, 'The American Tolkien', Time, 13 Nov 2005",
+   "url": "https://content.time.com/time/subscriber/article/0,33009,1129596,00.html",
+   "quote": "men and women slugging it out in the muck",
+   "page": ""
+  },
+  {
+   "index": 530,
+   "feature": "moral complexity vs Tolkien",
+   "claim": "Tolkien has imaginative force but one must go elsewhere for moral complexity; Martin's wars are multifaceted and ambiguous.",
+   "source": "Lev Grossman, 'The American Tolkien', Time, 13 Nov 2005",
+   "url": "https://content.time.com/time/subscriber/article/0,33009,1129596,00.html",
+   "quote": "you have to go elsewhere for moral complexity",
+   "page": ""
+  },
+  {
+   "index": 531,
+   "feature": "ponderousness and bodily functions",
+   "claim": "Tolkien was never so ponderous nor so obsessed with bodily functions (the Grand Maester befouling himself).",
+   "source": "Kirkus Reviews, 'A Dance with Dragons', 26 Sep 2011",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/dance-dragons/",
+   "quote": "Tolkien was never quite so ponderous",
+   "page": ""
+  },
+  {
+   "index": 532,
+   "feature": "tone",
+   "claim": "Book five is cynical, dark, with few laughs and not much action, mostly exposition.",
+   "source": "Kirkus Reviews, 'A Dance with Dragons', 26 Sep 2011",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/dance-dragons/",
+   "quote": "a little cynical, plenty dark, with not many laughs",
+   "page": ""
+  },
+  {
+   "index": 533,
+   "feature": "introspective viewpoint",
+   "claim": "Jon Snow's chapters go 'all Hamlety', soliciting input and keeping his own counsel.",
+   "source": "Kirkus Reviews, 'A Dance with Dragons', 26 Sep 2011",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/dance-dragons/",
+   "quote": "comes over all Hamlety, wondering what to do",
+   "page": ""
+  },
+  {
+   "index": 534,
+   "feature": "authorial fatigue",
+   "claim": "On the evidence one wonders whether Martin is getting tired of the series.",
+   "source": "Kirkus Reviews, 'A Dance with Dragons', 26 Sep 2011",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/dance-dragons/",
+   "quote": "one wonders if Martin isn’t getting a little tired",
+   "page": ""
+  },
+  {
+   "index": 535,
+   "feature": "shifting perspectives",
+   "claim": "The series is told through an array of constantly shifting perspectives across many locales.",
+   "source": "Bill Sheehan, 'A Dance with Dragons worth the long long wait', Washington Post, 12 Jul 2011 (read via Wayback)",
+   "url": "https://www.washingtonpost.com/entertainment/books/book-review-george-rr-martins-a-dance-with-dragons/2011/06/20/gIQAuJ1z9H_story.html",
+   "quote": "an array of constantly shifting perspectives",
+   "page": ""
+  },
+  {
+   "index": 536,
+   "feature": "set pieces",
+   "claim": "Vividly rendered set pieces, cliffhangers and appalling cruelty make it epic fantasy as it should be written.",
+   "source": "Bill Sheehan, 'A Dance with Dragons worth the long long wait', Washington Post, 12 Jul 2011 (read via Wayback)",
+   "url": "https://www.washingtonpost.com/entertainment/books/book-review-george-rr-martins-a-dance-with-dragons/2011/06/20/gIQAuJ1z9H_story.html",
+   "quote": "passionate, compelling, convincingly detailed and thoroughly imagined",
+   "page": ""
+  },
+  {
+   "index": 537,
+   "feature": "grounded medieval realism",
+   "claim": "The book feels grounded in brutal medieval reality, closer to the Wars of the Roses than to Lord of the Rings.",
+   "source": "Bill Sheehan, 'A Dance with Dragons worth the long long wait', Washington Post, 12 Jul 2011 (read via Wayback)",
+   "url": "https://www.washingtonpost.com/entertainment/books/book-review-george-rr-martins-a-dance-with-dragons/2011/06/20/gIQAuJ1z9H_story.html",
+   "quote": "grounded in the brutal reality of medieval times",
+   "page": ""
+  },
+  {
+   "index": 538,
+   "feature": "motto repetition",
+   "claim": "Characters repeatedly remind the reader that 'Winter is coming'.",
+   "source": "Bill Sheehan, 'A Dance with Dragons worth the long long wait', Washington Post, 12 Jul 2011 (read via Wayback)",
+   "url": "https://www.washingtonpost.com/entertainment/books/book-review-george-rr-martins-a-dance-with-dragons/2011/06/20/gIQAuJ1z9H_story.html",
+   "quote": "as the characters repeatedly remind us",
+   "page": ""
+  },
+  {
+   "index": 539,
+   "feature": "sensory concreteness",
+   "claim": "Martin writes as convincingly of tart apple juice as of mountain sleet; the book is an adventure of the senses.",
+   "source": "Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (author's 2011 repost)",
+   "url": "http://paullevinson.blogspot.com/2011/03/game-of-thrones-my-fall-2006-review-of.html",
+   "quote": "tart juices oozing from an apple as of sleet",
+   "page": ""
+  }
+ ]
+}

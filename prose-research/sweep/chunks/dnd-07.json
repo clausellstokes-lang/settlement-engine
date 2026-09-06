@@ -4,7 +4,19 @@
  "indices": [
   154,
   155,
-  156
+  156,
+  157,
+  158,
+  159,
+  160,
+  161,
+  162,
+  163,
+  164,
+  165,
+  166,
+  167,
+  168
  ],
  "claims": [
   {
@@ -33,6 +45,114 @@
    "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
    "quote": "",
    "page": "essay"
+  },
+  {
+   "index": 157,
+   "feature": "two-sentence attention budget",
+   "claim": "Noonan's undercover Gen Con 2005 observation was that players attend to only the first two sentences of read-aloud boxed text before they start stacking dice or talking.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "If you're the DM, you get two sentences. Period.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 158,
+   "feature": "oration versus conversation",
+   "claim": "Boxed text fails because it replaces the game's native conversational exchange (player asks, DM answers) with oration, which players are not used to listening to.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text replaces that conversation with oration.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 159,
+   "feature": "load-bearing facts lost in boxes",
+   "claim": "Players repeatedly missed the concrete data embedded in boxed text (room dimensions, number of exits, number of monsters, who is a corpse), forcing DMs to repeat it mid-action.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "basic stuff, like room dimensions, how many doors exit the room",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 160,
+   "feature": "cold reading of scripted prose",
+   "claim": "DMs read boxed text cold, from a script they have never spoken aloud, so even dynamic DMs deliver it flatly.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Not a recipe for compelling delivery.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 161,
+   "feature": "historical shrinkage of boxed text",
+   "claim": "Noonan documents that WotC boxed text had already shortened by 2005, contrasting a three-sentence Sons of Gruumsh door entry with a paragraph-long 1999 Return to the Keep on the Borderlands cave entry.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text in adventures used to be a lot longer",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 162,
+   "feature": "paraphrase over verbatim",
+   "claim": "Noonan's advice to DMs is to ditch the boxed text and give the initial room description in their own words to keep the players in a conversation.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "ditch the boxed text and use your own words",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 163,
+   "feature": "format experimentation at WotC",
+   "claim": "In 2005 WotC R&D was actively testing alternatives to boxed text at the table, to appear in products if they played better.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "We're goofing around with some alternatives right now.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 164,
+   "feature": "read-versus-play gap",
+   "claim": "Noonan states an RPG book is first experienced by reading but lived by playing, so reading only yields an educated guess about quality.",
+   "source": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "quote": "Reading a roleplaying book just lets you make an educated guess",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "index": 165,
+   "feature": "metaplot prose reads well, plays badly",
+   "claim": "Mid-1990s campaign settings with intertwined factions and metaplots were great reads but hard to run because PCs became bit players.",
+   "source": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "quote": "In short, they read good, played bad.",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "index": 166,
+   "feature": "stat blocks as table-only prose",
+   "claim": "Pregenerated NPC stat blocks are no fun on a read-through but save the busy DM at the table, and WotC was working to make such material easier to find and use.",
+   "source": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "quote": "They're no fun on a read-through.",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "index": 167,
+   "feature": "no second person in read-aloud",
+   "claim": "RPGA/Living Greyhawk guidance forbids 'you', 'your' and 'you're' in read-aloud text because they seize control of the characters.",
+   "source": "Living Greyhawk, Intro to Writing: Dire Boxed Text (Craig Heir, RPGA/WotC, 2004-04-13)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+   "quote": "Avoid the word \"you\" like the plague",
+   "page": "RPGA editor column on WotC site (read via Wayback)"
+  },
+  {
+   "index": 168,
+   "feature": "no assigned emotions or actions",
+   "claim": "Boxed text must not tell characters what they feel or do (crying babies bringing a tear to your eyes; grabbing your sword in fear); rewrite as a neutral scene the players react to.",
+   "source": "Living Greyhawk, Intro to Writing: Dire Boxed Text (Craig Heir, RPGA/WotC, 2004-04-13)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+   "quote": "read aloud text does not run the character",
+   "page": "RPGA editor column on WotC site (read via Wayback)"
   }
  ]
 }

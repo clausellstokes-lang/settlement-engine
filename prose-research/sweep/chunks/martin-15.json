@@ -1,0 +1,48 @@
+{
+ "name": "martin",
+ "chunk": 15,
+ "indices": [
+  555,
+  556,
+  557,
+  558
+ ],
+ "claims": [
+  {
+   "index": 555,
+   "feature": "chivalric cake (Roberts via Burt)",
+   "claim": "Adam Roberts's Fantasy: A Short History says Martin lets readers have their chivalric cake and eat it too, thrilling at poisonings, rapes and betrayals while enamoured of noble houses and titles; no sentence-level prose judgment is reported.",
+   "source": "Stephanie Burt reviewing Adam Roberts, Fantasy: A Short History, Strange Horizons, 2026 (Roberts's judgments as quoted by Burt)",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/fantasy-a-short-history-by-adam-roberts/",
+   "quote": "have their chivalric cake and eat it too",
+   "page": ""
+  },
+  {
+   "index": 556,
+   "feature": "1996 Washington Post dissent",
+   "claim": "The Washington Post's 1996 review faulted one-dimensional characters and less than memorable imagery.",
+   "source": "Bookmarks Reviews roundup of 1996 reviews of A Game of Thrones (quoting John H. Riskind, Washington Post, 28 Jul 1996)",
+   "url": "https://bookmarks.reviews/the-first-reviews-of-george-r-r-martins-a-game-of-thrones/",
+   "quote": "one-dimensional characters and less than memorable imagery",
+   "page": ""
+  },
+  {
+   "index": 557,
+   "feature": "serial cliffhanger structure (NYT)",
+   "claim": "Dana Jennings's Times review says the book, like all proper serials, gives no emotional respite and ends on razor-sharp question marks.",
+   "source": "BookBrowse review roundup for A Dance with Dragons (quoting Dana Jennings, New York Times, Jul 2011), read via Wayback",
+   "url": "https://www.bookbrowse.com/bb_briefs/detail/index.cfm/ezine_preview_number/6550/a-dance-with-dragons",
+   "quote": "ending with several razor-sharp question marks",
+   "page": ""
+  },
+  {
+   "index": 558,
+   "feature": "commercial prose grade",
+   "claim": "Martin's writing is well above average for commercial prose, but he is not a seven-drafts literary reviser.",
+   "source": "Michael O. Church, 'The Tragedy of George R. R. Martin', Substack, 19 Jun 2025",
+   "url": "https://antipodes.substack.com/p/the-tragedy-of-george-r-r-martin",
+   "quote": "well above average for commercial prose",
+   "page": ""
+  }
+ ]
+}

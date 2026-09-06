@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 2,
+ "indices": [
+  360,
+  361,
+  362,
+  363,
+  364,
+  365,
+  366,
+  367,
+  368,
+  369,
+  370,
+  371,
+  372,
+  373,
+  374
+ ],
+ "claims": [
+  {
+   "index": 360,
+   "feature": "transcription conceit",
+   "claim": "The framing joke is that Gyldayn's manuscript came handwritten on vellum with a quill and Martin merely transcribed it.",
+   "source": "George R.R. Martin, Not a Blog, 25 Apr 2018",
+   "url": "https://georgerrmartin.com/notablog/2018/04/25/fire-blood-on-the-way/",
+   "quote": "handwritten on vellum with a quill pen",
+   "page": "FIRE & BLOOD : On The Way"
+  },
+  {
+   "index": 361,
+   "feature": "regnal-year sentence openers",
+   "claim": "The Jaehaerys excerpt dates its action to a regnal year (58 AC) and advances by chronology rather than by scene.",
+   "source": "George R.R. Martin, Not a Blog excerpt post, 27 Sep 2018",
+   "url": "https://georgerrmartin.com/notablog/2018/09/27/a-fire-blood-excerpt-just-for-you/",
+   "quote": "plans were laid in 58 AC",
+   "page": "A FIRE & BLOOD Excerpt just for YOU!"
+  },
+  {
+   "index": 362,
+   "feature": "reported-speech hedges",
+   "claim": "Speech in the chronicle is mediated through testimony hedges such as 'is reported to have said' and 'would later tell the king'.",
+   "source": "George R.R. Martin, Not a Blog excerpt post, 27 Sep 2018",
+   "url": "https://georgerrmartin.com/notablog/2018/09/27/a-fire-blood-excerpt-just-for-you/",
+   "quote": "is reported to have said",
+   "page": "A FIRE & BLOOD Excerpt just for YOU!"
+  },
+  {
+   "index": 363,
+   "feature": "courtly titles hold the register",
+   "claim": "Consistent formal designations (His Grace, the queen, Lord Stark) and archaic diction sustain a courtly register with occasional colloquial flourishes.",
+   "source": "George R.R. Martin, Not a Blog excerpt post, 27 Sep 2018",
+   "url": "https://georgerrmartin.com/notablog/2018/09/27/a-fire-blood-excerpt-just-for-you/",
+   "quote": "His Grace",
+   "page": "A FIRE & BLOOD Excerpt just for YOU!"
+  },
+  {
+   "index": 364,
+   "feature": "embedded direct speech in chronicle",
+   "claim": "Even the chronicle register carries substantial direct speech embedded in the narrative and compresses a family's history into a single sentence.",
+   "source": "George R.R. Martin, Not a Blog excerpt post, 27 Sep 2018",
+   "url": "https://georgerrmartin.com/notablog/2018/09/27/a-fire-blood-excerpt-just-for-you/",
+   "quote": "",
+   "page": "A FIRE & BLOOD Excerpt just for YOU!"
+  },
+  {
+   "index": 365,
+   "feature": "popular-history aim",
+   "claim": "Martin says he loves reading popular histories and that is what he was aiming for.",
+   "source": "George R.R. Martin, georgerrmartin.com Fire & Blood page",
+   "url": "https://georgerrmartin.com/fireandblood/",
+   "quote": "that's what I was aiming for here",
+   "page": "Fire and Blood | George R.R. Martin"
+  },
+  {
+   "index": 366,
+   "feature": "narrator's incomplete knowledge as design",
+   "claim": "Because Gyldayn 'writes' the book, Martin says it makes sense he would not have all the information, and its mysteries are possible answers, not definitive ones.",
+   "source": "Winter Is Coming digest of Martin's Not a Blog comments, 3 May 2018",
+   "url": "https://winteriscoming.net/2018/05/03/george-r-r-martin-misconceptions-fire-and-blood-dance-with-dragons-not-a-blog/",
+   "quote": "he wouldn't have all the information",
+   "page": "George R.R. Martin clears up misconceptions about Fire & Blood"
+  },
+  {
+   "index": 367,
+   "feature": "long descriptive title",
+   "claim": "The Gyldayn document opens with a long early-modern-style descriptive title ('Being A History of the Causes, Origins, Battles, and Betrayals...') plus a transcription credit.",
+   "source": "George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com",
+   "url": "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/",
+   "quote": "Being A History of the Causes",
+   "page": "Dangerous Women: The Princess and The Queen (Excerpt)"
+  },
+  {
+   "index": 368,
+   "feature": "chronicler's editorial aside",
+   "claim": "The first paragraph is the historian objecting to the received name of the war and deferring to tradition anyway.",
+   "source": "George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com",
+   "url": "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/",
+   "quote": "we must dance along with the rest",
+   "page": "Dangerous Women: The Princess and The Queen (Excerpt)"
+  },
+  {
+   "index": 369,
+   "feature": "period summary before scene",
+   "claim": "Before any scene, four abstract paragraphs summarize the war's claimants, scale, character and consequences; only then does the narrative descend to a dated day.",
+   "source": "George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com",
+   "url": "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/",
+   "quote": "",
+   "page": "Dangerous Women: The Princess and The Queen (Excerpt)"
+  },
+  {
+   "index": 370,
+   "feature": "triads and polysyndeton",
+   "claim": "Sentences lean on triadic lists and 'and'-chains ('lords, knights, and smallfolk'; 'knives and lies and poison').",
+   "source": "George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com",
+   "url": "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/",
+   "quote": "knives and lies and poison",
+   "page": "Dangerous Women: The Princess and The Queen (Excerpt)"
+  },
+  {
+   "index": 371,
+   "feature": "archaic diction markers",
+   "claim": "Archaic markers ('whilst', 'alarum', 'a moon's turn', 'the hour of the bat/owl') set the register without heavy Latinate vocabulary.",
+   "source": "George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com",
+   "url": "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/",
+   "quote": "the hour of the bat",
+   "page": "Dangerous Women: The Princess and The Queen (Excerpt)"
+  },
+  {
+   "index": 372,
+   "feature": "footnoted gloss",
+   "claim": "An asterisked footnote glosses how 'greens' and 'blacks' got their names at a tourney, importing scholarly apparatus into the narrative.",
+   "source": "George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com",
+   "url": "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/",
+   "quote": "",
+   "page": "Dangerous Women: The Princess and The Queen (Excerpt)"
+  },
+  {
+   "index": 373,
+   "feature": "blaming lore on singers",
+   "claim": "The chronicler attributes the war's poetic name to some singer, the chronicle's habit of assigning romance to song and sobriety to record.",
+   "source": "George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com",
+   "url": "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/",
+   "quote": "No doubt the phrase originated with some singer.",
+   "page": "Dangerous Women: The Princess and The Queen (Excerpt)"
+  },
+  {
+   "index": 374,
+   "feature": "precise calendar dating",
+   "claim": "A king's death is dated to the day and moon of a year and to a named hour, precision that reads as record rather than scene.",
+   "source": "George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com",
+   "url": "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/",
+   "quote": "third day of third moon",
+   "page": "Dangerous Women: The Princess and The Queen (Excerpt)"
+  }
+ ]
+}

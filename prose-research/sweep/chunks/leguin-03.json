@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 3,
+ "indices": [
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59
+ ],
+ "claims": [
+  {
+   "index": 45,
+   "feature": "clarity and evocative precision",
+   "claim": "The Left Hand of Darkness is told in a prose notable for its clarity and evocative precision.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "a prose notable for its clarity and evocative precision",
+   "page": ""
+  },
+  {
+   "index": 46,
+   "feature": "motifs as story",
+   "claim": "Archetypal motif pairs (darkness/light, root/branch, language/silence) are woven until the motifs are the story, treated as balanced twins rather than polarities.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "the motifs are the story",
+   "page": ""
+  },
+  {
+   "index": 47,
+   "feature": "restrained immanence",
+   "claim": "Searoad's nonfantastic stories convey 'the same capably restrained immanence' — restraint named as a constant of her manner.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "capably restrained immanence",
+   "page": ""
+  },
+  {
+   "index": 48,
+   "feature": "sad, powerful, quiet (Tehanu)",
+   "claim": "Tehanu is described as a sad, powerful, quiet book about the strength of women.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "a sad, powerful, quiet book",
+   "page": ""
+  },
+  {
+   "index": 49,
+   "feature": "magus-root neologisms",
+   "claim": "Le Guin avoids 'magician' (tainted by stage illusion) and coins Archmage, magelight, magewind and magery from Latin magus — none in the OED — so that the vocabulary itself resets the reader's assumptions about magic.",
+   "source": "Tom Shippey, 'The Magic Art and the Evolution of Words' (Hard Reading, Liverpool UP 2016; orig. Mosaic 1977) — chapter abstract",
+   "url": "https://academic.oup.com/liverpool-scholarship-online/book/43316/chapter/363083559",
+   "quote": "based on a semantic point",
+   "page": ""
+  },
+  {
+   "index": 50,
+   "feature": "true-name semantics",
+   "claim": "The magic system rests on a 'Rumpelstiltskin theory' in which every thing has a true name distinct from ordinary language, and knowing it gives power — a linguistic premise that carries plot and theme.",
+   "source": "Tom Shippey, 'The Magic Art and the Evolution of Words' (Hard Reading, Liverpool UP 2016; orig. Mosaic 1977) — chapter abstract",
+   "url": "https://academic.oup.com/liverpool-scholarship-online/book/43316/chapter/363083559",
+   "quote": "Rumpelstiltskin theory",
+   "page": ""
+  },
+  {
+   "index": 51,
+   "feature": "sentence rhythm foreshadows the whole",
+   "claim": "Kelso reads the Lathe of Heaven jellyfish sentence's four opposing blocks (two compound adjectives, two clauses) as an ocean-on-beach here-and-back rhythm that foreshadows the novel's yin/yang structure of recurrence.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "rhythm at sentence level foreshadows the tenor",
+   "page": "pp. 14–15"
+  },
+  {
+   "index": 52,
+   "feature": "move toward austerity",
+   "claim": "Like Yeats, Le Guin moves toward simplicity or austerity in both rhythm and content of later work; Tehanu begins in farm life and ends among a few goats and bean vines.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "move toward simplicity, or at least austerity",
+   "page": "p. 16"
+  },
+  {
+   "index": 53,
+   "feature": "stage business as rhythmic punctuation",
+   "claim": "In the Tenar–Moss rush-splitting scene the 'business' works as a suite of variations for pause and emphasis: the leisurely 'They split rushes for a while in silence' quickens to the snaps of 'neatly, quickly, with her nail' and is cut by the bare 'They split rushes.'",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "a suite of variations to indicate pause and emphasis",
+   "page": "pp. 16–17"
+  },
+  {
+   "index": 54,
+   "feature": "long smooth sentence, triple repetition, assonance",
+   "claim": "Kalessin's arrival pairs an extraordinarily long comma-weighted sentence (weighting 'sinuous', 'claws', 'fire') with a classic triple repetition whose final word links by assonance to the previous paragraph, approaching actual poetry.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "almost somnambulistically smooth",
+   "page": "p. 17"
+  },
+  {
+   "index": 55,
+   "feature": "rhythm as enabler (dragon wingbeats)",
+   "claim": "Kelso quotes Le Guin ('Collectors, Rhymesters and Drummers'): holding to the rhythm of the dragon's flight let Tehanu tell itself, and when she lost the beat she fell off and had to wait.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "the very large, long wingbeats",
+   "page": "pp. 17–18"
+  },
+  {
+   "index": 56,
+   "feature": "vocabulary as rhythm's twin",
+   "claim": "Rhythm analysis slides into vocabulary, 'rhythm's Siamese twin': Lathe's 'tugged hugely' and 'tidal abyss' lean embroidered, while elsewhere the same book reaches a homely simile of love made like bread.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "rhythm's Siamese twin",
+   "page": "p. 14"
+  },
+  {
+   "index": 57,
+   "feature": "less doing more",
+   "claim": "Tehanu shows 'the skill of experience making less do more, rather than more do more' — the late style compresses.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "making less do more",
+   "page": "p. 16"
+  },
+  {
+   "index": 58,
+   "feature": "lyrical unruly critical voice",
+   "claim": "The Language of the Night established Le Guin's lyrical, unruly and individual critical voice with 'From Elfland to Poughkeepsie' among its essays.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "lyrical, unruly, and individual critical voice",
+   "page": "p. 8"
+  },
+  {
+   "index": 59,
+   "feature": "paragraph shaping by clause length",
+   "claim": "In the Always Coming Home vision paragraph, a long opening clause checks into shortening phrases, brakes at a colon, then returns through a triple of lengthening units to a singing polysyllable ('over the Obsidian').",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "Here there are no rhythmic superfluities.",
+   "page": "p. 15"
+  }
+ ]
+}

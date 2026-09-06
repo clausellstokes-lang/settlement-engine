@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 3,
+ "indices": [
+  375,
+  376,
+  377,
+  378,
+  379,
+  380,
+  381,
+  382,
+  383,
+  384,
+  385,
+  386,
+  387,
+  388,
+  389
+ ],
+ "claims": [
+  {
+   "index": 375,
+   "feature": "diegetic double",
+   "claim": "Fire and Blood doubles as a diegetic chronicle written by Maester Gyldayn whose in-world publication year is unclear.",
+   "source": "Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182",
+   "url": "https://dc.swosu.edu/mythlore/vol43/iss2/11/",
+   "quote": "doubles as a diegetic chronicle",
+   "page": "Book Culture and Narrative in Martin's A Song of Ice and Fire"
+  },
+  {
+   "index": 376,
+   "feature": "history-writing enclaved in the Citadel",
+   "claim": "The book's opening sentence assigns history-keeping to the maesters of the Citadel, implying historiography confined to an ivory tower, unfunded and unnoticed by rulers.",
+   "source": "Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182",
+   "url": "https://dc.swosu.edu/mythlore/vol43/iss2/11/",
+   "quote": "confined to the ivory tower",
+   "page": "Book Culture and Narrative in Martin's A Song of Ice and Fire"
+  },
+  {
+   "index": 377,
+   "feature": "hidden truth untrustworthy",
+   "claim": "Contemporary fantasy assumes knowledge must be sought where it is hidden, and that the hidden truth may not in the end be trustworthy, so transmission itself is threatened.",
+   "source": "Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182",
+   "url": "https://dc.swosu.edu/mythlore/vol43/iss2/11/",
+   "quote": "might not, in the end, be trustworthy",
+   "page": "Book Culture and Narrative in Martin's A Song of Ice and Fire"
+  },
+  {
+   "index": 378,
+   "feature": "propagandistic in-world histories",
+   "claim": "In-world histories such as Daeron's Conquest of Dorne are remembered for their inaccuracy ('vainglorious', 'boastful'), and propagandistic history-writing has otherwise died out in Westeros.",
+   "source": "Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182",
+   "url": "https://dc.swosu.edu/mythlore/vol43/iss2/11/",
+   "quote": "still discussed for its inaccuracy",
+   "page": "Book Culture and Narrative in Martin's A Song of Ice and Fire"
+  },
+  {
+   "index": 379,
+   "feature": "White Book as Froissart echo",
+   "claim": "The Kingsguard's White Book, a list of knights and deeds, echoes warrior chronicles such as Froissart's.",
+   "source": "Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182",
+   "url": "https://dc.swosu.edu/mythlore/vol43/iss2/11/",
+   "quote": "echoes of the warrior chronicles",
+   "page": "Book Culture and Narrative in Martin's A Song of Ice and Fire"
+  },
+  {
+   "index": 380,
+   "feature": "deep time hostile to books",
+   "claim": "Deep time is hostile to book knowledge, and the loss of knowledge is the greatest challenge to fantasy realms concerned with the distant past.",
+   "source": "Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182",
+   "url": "https://dc.swosu.edu/mythlore/vol43/iss2/11/",
+   "quote": "Deep time is hostile to book knowledge",
+   "page": "Book Culture and Narrative in Martin's A Song of Ice and Fire"
+  },
+  {
+   "index": 381,
+   "feature": "chronicle to reminiscence to fairy tale",
+   "claim": "The Harrenhal tourney exists in three registers: the World of Ice and Fire chronicle, scattered eyewitness reminiscences, and Meera Reed's fairy-tale retelling, tracing how history becomes tale.",
+   "source": "Bartlomiej Blaszkiewicz, 'From Chronicle to Fairy Tale', in Marchen und Gesellschaft (WUW, 2024), pp. 163-175",
+   "url": "https://www.ceeol.com/search/chapter-detail?id=1266561",
+   "quote": "scattered personal reminiscences of various eyewitness characters",
+   "page": "CEEOL chapter detail"
+  },
+  {
+   "index": 382,
+   "feature": "imitated chronicle style plus modern simplification",
+   "claim": "The real authors of The World of Ice and Fire imitated the style of the medieval chronicle and synthesized it with modern simplistic historical representations.",
+   "source": "Maksim Kyrchanoff (Kirchanov), Journal of Frontier Studies 2018 no. 1",
+   "url": "https://jfs.today/index.php/jfs/article/view/34",
+   "quote": "imitated the style of the medieval chronicle",
+   "page": "Historical grand narratives of the Seven kingdoms of Westeros"
+  },
+  {
+   "index": 383,
+   "feature": "linear, periodized time",
+   "claim": "The imagined author orders events chronologically and periodizes into named ages (Dawn Age, Age of Heroes, Long Night, Doom of Valyria), linear yet imagined as torn apart.",
+   "source": "Maksim Kyrchanoff (Kirchanov), Journal of Frontier Studies 2018 no. 1",
+   "url": "https://jfs.today/index.php/jfs/article/view/34",
+   "quote": "imagined his \"linear time\" as torn apart",
+   "page": "Historical grand narratives of the Seven kingdoms of Westeros"
+  },
+  {
+   "index": 384,
+   "feature": "chronicler's enormous hedge",
+   "claim": "The imagined chronicler allows himself estimates of the world's age ranging from 40 to 500 thousand years, a hedge of enormous width stated flatly.",
+   "source": "Maksim Kyrchanoff (Kirchanov), Journal of Frontier Studies 2018 no. 1",
+   "url": "https://jfs.today/index.php/jfs/article/view/34",
+   "quote": "ranged from 40 to 500 thousand years",
+   "page": "Historical grand narratives of the Seven kingdoms of Westeros"
+  },
+  {
+   "index": 385,
+   "feature": "three named sources",
+   "claim": "Gyldayn's Dance history rests on three fictional primary sources: Septon Eustace, Maester Munkun, and the Testimony of Mushroom.",
+   "source": "Ken Mondschein, Medievalists.net, Aug 2022",
+   "url": "https://www.medievalists.net/2022/08/historiography-outsiders-house-of-the-dragon/",
+   "quote": "three fictional accounts",
+   "page": "Badgering on Mushroom: Historiography and Outsiders in House of the Dragon"
+  },
+  {
+   "index": 386,
+   "feature": "Mushroom's ribald register",
+   "claim": "Mushroom peppers his account with debauchery and ribald humor and is by far the most amusing of the three chroniclers.",
+   "source": "Ken Mondschein, Medievalists.net, Aug 2022",
+   "url": "https://www.medievalists.net/2022/08/historiography-outsiders-house-of-the-dragon/",
+   "quote": "debauchery and ribald humor",
+   "page": "Badgering on Mushroom: Historiography and Outsiders in House of the Dragon"
+  },
+  {
+   "index": 387,
+   "feature": "real chronicle analogues",
+   "claim": "The device mirrors real premodern sources (Procopius, the Anglo-Saxon Chronicle, Froissart), which are later compilations, paraphrases and unreliable narrators.",
+   "source": "Ken Mondschein, Medievalists.net, Aug 2022",
+   "url": "https://www.medievalists.net/2022/08/historiography-outsiders-house-of-the-dragon/",
+   "quote": "later compilations, paraphrases, and unreliable narrators",
+   "page": "Badgering on Mushroom: Historiography and Outsiders in House of the Dragon"
+  },
+  {
+   "index": 388,
+   "feature": "adaptation dropped the Rashomon",
+   "claim": "Showrunner Condal says the show left the Rashomon-style telling to the book and instead defined an objective truth, which Mondschein calls a category error about real history.",
+   "source": "Ken Mondschein, Medievalists.net, Aug 2022",
+   "url": "https://www.medievalists.net/2022/08/historiography-outsiders-house-of-the-dragon/",
+   "quote": "we kind of left that to the book",
+   "page": "Badgering on Mushroom: Historiography and Outsiders in House of the Dragon"
+  },
+  {
+   "index": 389,
+   "feature": "narrator admits the muddle",
+   "claim": "The narrator openly admits where the history gets muddled between Eustace's sober account and Mushroom's sensational one and leaves the reader to decide.",
+   "source": "Nerdist",
+   "url": "https://nerdist.com/article/house-of-the-dragon-leaves-out-fire-and-blood-unreliable-history-game-of-thrones/",
+   "quote": "the history gets muddled",
+   "page": "House of the Dragon Misses One of the Best Aspects of Fire & Blood"
+  }
+ ]
+}

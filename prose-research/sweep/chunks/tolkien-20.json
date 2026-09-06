@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 20,
+ "indices": [
+  673,
+  674,
+  675,
+  676,
+  677,
+  678,
+  679,
+  680,
+  681,
+  682,
+  683,
+  684,
+  685,
+  686,
+  687
+ ],
+ "claims": [
+  {
+   "index": 673,
+   "feature": "reference by name over pronoun",
+   "claim": "Pronoun reference is a dispreferred strategy; given the unusually large cast, reference by name becomes a frequent necessity (p. 75).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "reference by name becomes a frequent necessity",
+   "page": ""
+  },
+  {
+   "index": 674,
+   "feature": "underuse of modal verbs",
+   "claim": "At word level Tolkien underuses modal verbs relative to post-war fiction (p. 72).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "underuse of modal verbs",
+   "page": ""
+  },
+  {
+   "index": 675,
+   "feature": "dispreferred adverb-led participle clauses",
+   "claim": "Clause-initial participle clauses introduced by an adverb and followed by a main clause ('Already cringing ..., she suddenly felt') are comparatively rare in The Lord of the Rings (p. 75).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 676,
+   "feature": "fronting of adverbials",
+   "claim": "The most conspicuous clause-level idiosyncrasy is the fronting of adverbials, as in 'to a (N) they came' (p. 78).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "the fronting of adverbials",
+   "page": ""
+  },
+  {
+   "index": 677,
+   "feature": "clause-initial then/presently/suddenly",
+   "claim": "Tolkien overuses 'then', 'presently' and 'suddenly' in clause-initial position (p. 78).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "overuse of then, presently or suddenly in clause-initial position",
+   "page": ""
+  },
+  {
+   "index": 678,
+   "feature": "inversion types",
+   "claim": "Even a casual reader notices Tolkien's fondness for inverted constructions, most commonly fronted subject complements followed by copular be and the subject ('beautiful was its colour'), and fronted prepositional phrases with other verbs (p. 81).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "fronted subject complements followed by copular be and the subject",
+   "page": ""
+  },
+  {
+   "index": 679,
+   "feature": "inversion vs fronting terminology",
+   "claim": "Turner notes Siepmann distinguishes linguistically between inversion and fronting whereas Kullmann uses 'inversion' for both in the rhetorical sense.",
+   "source": "Allan Turner, review of Kullmann & Siepmann, Journal of Inklings Studies 12.1 (2022)",
+   "url": "https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144",
+   "quote": "between inversion and fronting",
+   "page": ""
+  },
+  {
+   "index": 680,
+   "feature": "passive plus prepositional complement",
+   "claim": "An overused clause variant is a passive verb followed by a prepositional complement ('Her shield was shivered in many pieces'), with passive slots filled by original or obsolescent material; the stative passive is far more common than the eventive (pp. 79-80, 83).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "the stative passive is far more common than the eventive",
+   "page": ""
+  },
+  {
+   "index": 681,
+   "feature": "clause-initial participles and bare participles",
+   "claim": "Tolkien, unlike many novelists, clearly prefers clause-initial over clause-final participial clauses, sometimes reduced to a bare absolute participle ('he, bowing low to the fallen, bade them'), though participial constructions are generally underused (p. 80).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "clear preference for clause-initial participial clauses",
+   "page": ""
+  },
+  {
+   "index": 682,
+   "feature": "existential there for events",
+   "claim": "Tolkien uses existential clauses with a wide variety of verbs to describe events ('there came ...'), fronted prepositional phrases with existential there, and existential there with passives ('there was held the highest feast'), but hardly ever for mere presence or absence (pp. 76, 82-83).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "existential clauses with a wide variety of verbs",
+   "page": ""
+  },
+  {
+   "index": 683,
+   "feature": "coordination by and / polysyndeton",
+   "claim": "Clauses and phrases coordinated by 'and' feature prominently; Tolkien uses 'and' with high frequency but sometimes differently from other writers (Table 3.1 'Use of and'; pp. 76, 86).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "Clauses and phrases coordinated by and feature prominently",
+   "page": ""
+  },
+  {
+   "index": 684,
+   "feature": "dialogue-framing inversion",
+   "claim": "Dialogue-framing sentences of the type 'said Frodo' (verb before name) are a recurrent feature of the narrative syntax (pp. 84-85).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "dialogue-framing sentences (said Frodo)",
+   "page": ""
+  },
+  {
+   "index": 685,
+   "feature": "sentence-initial 'at last'",
+   "claim": "Sentence-initial 'at last' combined with a short verb, and fronted adjectives functioning as subject complements, are typical sentence openers (p. 84).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 686,
+   "feature": "descriptive verbs and intensifiers",
+   "claim": "Key verbs shared with modern fiction are highly descriptive (clutch, cower, crawl, flicker, gape, gasp, gaze, gleam), while Tolkien overuses the emphasizers very, so and too and the adverb 'even', about seven times more common than in modern fiction (pp. 47, 49, 59).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "around seven times more common than in modern fiction",
+   "page": ""
+  },
+  {
+   "index": 687,
+   "feature": "descriptivity distribution",
+   "claim": "The first half of the book is less densely descriptive; tight clusters of high descriptivity peak in Book Four, chapters II and VII (p. 48).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "three outstanding peaks in Book Four",
+   "page": ""
+  }
+ ]
+}

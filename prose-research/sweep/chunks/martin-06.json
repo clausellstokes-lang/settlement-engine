@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 6,
+ "indices": [
+  420,
+  421,
+  422,
+  423,
+  424,
+  425,
+  426,
+  427,
+  428,
+  429,
+  430,
+  431,
+  432,
+  433,
+  434
+ ],
+ "claims": [
+  {
+   "index": 420,
+   "feature": "dialogue only at big events",
+   "claim": "Conversations appear only when a massive event occurs, which the reviewer finds produces a choppy dialogue texture.",
+   "source": "Book Analysis review",
+   "url": "https://bookanalysis.com/george-r-r-martin/fire-and-blood/review/",
+   "quote": "",
+   "page": "Fire and Blood Review: The Reign of Dragons and Fire"
+  },
+  {
+   "index": 421,
+   "feature": "history book in a history book's style",
+   "claim": "It is a history book written in the style of a history book, with no storyline to speak of, best read a chapter or two at a time.",
+   "source": "narfna, Cannonball Read, 29 Jan 2019",
+   "url": "https://cannonballread.com/2019/01/fire-blood-a-targaryen-history-1-narfna/",
+   "quote": "written in the style of a history book",
+   "page": "Fire & Blood (A Targaryen History, #1) – narfna Book Review"
+  },
+  {
+   "index": 422,
+   "feature": "no plotlines, little dialogue",
+   "claim": "There are no overarching plotlines and little in the way of dialogue or character development; it reads like densely researched non-fiction.",
+   "source": "Bookshelf Fantasies, 25 Dec 2018",
+   "url": "https://bookshelffantasies.com/2018/12/25/book-review-fire-blood-by-george-r-r-martin/",
+   "quote": "little in the way of dialogue",
+   "page": "Book Review: Fire & Blood by George R. R. Martin"
+  },
+  {
+   "index": 423,
+   "feature": "rhythm once acquired",
+   "claim": "Once the reader gets into the rhythm of the dense chronicle it reads faster than expected.",
+   "source": "Bookshelf Fantasies, 25 Dec 2018",
+   "url": "https://bookshelffantasies.com/2018/12/25/book-review-fire-blood-by-george-r-r-martin/",
+   "quote": "once I got into the rhythm of it",
+   "page": "Book Review: Fire & Blood by George R. R. Martin"
+  },
+  {
+   "index": 424,
+   "feature": "no interiority",
+   "claim": "A dry omniscient narrator gives basic reports of actions with no personal thoughts or motives, so no character's inner feelings are revealed.",
+   "source": "Luna Gauthier, The Cosmic Circus, 14 Aug 2022",
+   "url": "https://thecosmiccircus.com/fire-and-blood-by-george-r-r-martin/",
+   "quote": "just basic reports of their actions",
+   "page": "Book Review: 'Fire and Blood' by George R.R. Martin"
+  },
+  {
+   "index": 425,
+   "feature": "lists of lords as filler",
+   "claim": "Long lists of lords and knights dominate pages and bloat the narrative with unnecessary detail.",
+   "source": "Luna Gauthier, The Cosmic Circus, 14 Aug 2022",
+   "url": "https://thecosmiccircus.com/fire-and-blood-by-george-r-r-martin/",
+   "quote": "Long lists of lords and knights",
+   "page": "Book Review: 'Fire and Blood' by George R.R. Martin"
+  },
+  {
+   "index": 426,
+   "feature": "Mushroom enlivens",
+   "claim": "Mushroom's contested testimony brings the stories to life more than almost any other source even though its reliability is up for debate.",
+   "source": "Blast from the Past Bookshelf (Substack), 20 Nov 2025",
+   "url": "https://blastfromthepastshelf.substack.com/p/review-fire-and-blood-by-george-rr",
+   "quote": "up for debate",
+   "page": "Review: Fire and Blood by George R.R. Martin"
+  },
+  {
+   "index": 427,
+   "feature": "legends, myths and records woven",
+   "claim": "The format lets Martin cover centuries and dozens of figures, reading like legends, myths and historical records woven together into a Westerosi textbook.",
+   "source": "Matt Diddy, Books of Brilliance, 8 Aug 2026",
+   "url": "https://booksofbrilliance.com/2026/06/12/book-review-fire-and-blood/",
+   "quote": "an actual textbook from Westeros",
+   "page": "Fire & Blood by George R.R. Martin Review"
+  },
+  {
+   "index": 428,
+   "feature": "in-world knowledge limits (Yandel)",
+   "claim": "Antonsson: WOIAF is written by a maester with only in-world knowledge, so he could be wrong on some points and chose to leave things out.",
+   "source": "Euronews, 16 Oct 2014 (quoting Antonsson and Garcia)",
+   "url": "https://www.euronews.com/2014/10/16/what-to-expect-in-george-r-r-martins-new-book-the-world-of-ice-and-fire-got",
+   "quote": "he could be wrong on some points",
+   "page": "What to expect in George R.R. Martin's new book The World of Ice and Fire"
+  },
+  {
+   "index": 429,
+   "feature": "offer explanations, then dismiss",
+   "claim": "A reader notes the authors offer several potential explanations for disputed events before dismissing one as silly or mischievously skipping the material.",
+   "source": "Euronews, 16 Oct 2014 (quoting a Reddit reviewer)",
+   "url": "https://www.euronews.com/2014/10/16/what-to-expect-in-george-r-r-martins-new-book-the-world-of-ice-and-fire-got",
+   "quote": "mischievously skipping over material",
+   "page": "What to expect in George R.R. Martin's new book The World of Ice and Fire"
+  },
+  {
+   "index": 430,
+   "feature": "careful line on dishonorable founders",
+   "claim": "Yandel must walk a careful line describing Great House founders who were not honorable warriors.",
+   "source": "Donald McCarthy, Drunk Monkeys, 20 Feb 2015",
+   "url": "https://www.drunkmonkeys.us/book-reviews/2015/2/18/the-world-of-ice-and-fire-by-elio-m-garcia-jr-linda-antonsson",
+   "quote": "forced to walk a careful line",
+   "page": "The World of Ice and Fire review"
+  },
+  {
+   "index": 431,
+   "feature": "'Glorious Reign' bias flag",
+   "claim": "Labeling Robert's rule 'The Glorious Reign' flags the narrator's political bias and complicates how reliably the text should be taken.",
+   "source": "Donald McCarthy, Drunk Monkeys, 20 Feb 2015",
+   "url": "https://www.drunkmonkeys.us/book-reviews/2015/2/18/the-world-of-ice-and-fire-by-elio-m-garcia-jr-linda-antonsson",
+   "quote": "The Glorious Reign",
+   "page": "The World of Ice and Fire review"
+  },
+  {
+   "index": 432,
+   "feature": "admits contradictory records",
+   "claim": "The maester acknowledges it is impossible to fully know all events and that some records contradict one another, leaving some points ambiguous.",
+   "source": "Donald McCarthy, Drunk Monkeys, 20 Feb 2015",
+   "url": "https://www.drunkmonkeys.us/book-reviews/2015/2/18/the-world-of-ice-and-fire-by-elio-m-garcia-jr-linda-antonsson",
+   "quote": "some records contradict one another",
+   "page": "The World of Ice and Fire review"
+  },
+  {
+   "index": 433,
+   "feature": "textbook difficulty (WOIAF)",
+   "claim": "The World of Ice and Fire reads basically as a textbook the reader has to plough through.",
+   "source": "litcritpop, 5 Aug 2017",
+   "url": "https://litcritpop.com/2017/08/05/george-r-r-martin-elio-m-garcia-jr-and-linda-antonsson-the-world-of-ice-and-fire-book-review/",
+   "quote": "basically as a textbook",
+   "page": "The World of Ice and Fire – book review"
+  },
+  {
+   "index": 434,
+   "feature": "point-of-view rotation",
+   "claim": "The books tell the story by hopping between a large repertory company of viewpoint characters spread across Westeros, most of them afraid for their lives.",
+   "source": "John Lanchester, 'When did you get hooked?', London Review of Books v35 n7, 11 Apr 2013",
+   "url": "https://www.lrb.co.uk/the-paper/v35/n07/john-lanchester/when-did-you-get-hooked",
+   "quote": "hopping about from person to person across the wide geography",
+   "page": ""
+  }
+ ]
+}

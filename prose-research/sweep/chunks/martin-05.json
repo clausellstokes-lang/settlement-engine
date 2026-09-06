@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 5,
+ "indices": [
+  405,
+  406,
+  407,
+  408,
+  409,
+  410,
+  411,
+  412,
+  413,
+  414,
+  415,
+  416,
+  417,
+  418,
+  419
+ ],
+ "claims": [
+  {
+   "index": 405,
+   "feature": "scholarly treatise with competing sources",
+   "claim": "Fire & Blood is a scholarly treatise citing competing fictional primary sources whose conflicts reflect medieval historiography and make Gyldayn unreliable.",
+   "source": "Wikipedia, 'Fire & Blood (novel)'",
+   "url": "https://en.wikipedia.org/wiki/Fire_%26_Blood_(novel)",
+   "quote": "",
+   "page": "Fire & Blood (novel)"
+  },
+  {
+   "index": 406,
+   "feature": "reception split summary",
+   "claim": "Rifkind (Times) called it interminable self-indulgent crap, Dan Jones (Sunday Times) a masterpiece of popular historical fiction, and Chris Lough (Tor.com) the best Song of Ice and Fire book in 18 years.",
+   "source": "Wikipedia, 'Fire & Blood (novel)' (secondhand for the paywalled Times pieces and the 404'd Tor.com review)",
+   "url": "https://en.wikipedia.org/wiki/Fire_%26_Blood_(novel)",
+   "quote": "a masterpiece of popular historical fiction",
+   "page": "Fire & Blood (novel)"
+  },
+  {
+   "index": 407,
+   "feature": "epochal naming",
+   "claim": "The chronicle leans on eldritch epochal names such as the Doom of Valyria and the Dance of the Dragons.",
+   "source": "Kirkus Reviews, 20 Jan 2019",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/fire-blood/",
+   "quote": "eldritch epochal terms",
+   "page": "FIRE & BLOOD | Kirkus Reviews"
+  },
+  {
+   "index": 408,
+   "feature": "brisk despite length",
+   "claim": "The storyline moves briskly across 700 pages, fed by dragons, impaled bodies and betrayals.",
+   "source": "Kirkus Reviews, 20 Jan 2019",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/fire-blood/",
+   "quote": "moving along briskly",
+   "page": "FIRE & BLOOD | Kirkus Reviews"
+  },
+  {
+   "index": 409,
+   "feature": "personalities without dialogue",
+   "claim": "Martin creates vivid personalities that leap from the page even when they have no dialogue or on-page appearance, only description.",
+   "source": "C.T. Phipps, Grimdark Magazine, 6 Aug 2022",
+   "url": "https://www.grimdarkmagazine.com/review-fire-and-blood-by-george-r-r-martin/",
+   "quote": "even when they don't have any dialogue",
+   "page": "REVIEW: Fire and Blood by George R.R Martin"
+  },
+  {
+   "index": 410,
+   "feature": "mystery-box breadcrumbs",
+   "claim": "The history seeds unanswered questions (was Aegon's heir a singer's? was Maegor resurrected?) and often offers its own suggestions as to what happened.",
+   "source": "C.T. Phipps, Grimdark Magazine, 6 Aug 2022",
+   "url": "https://www.grimdarkmagazine.com/review-fire-and-blood-by-george-r-r-martin/",
+   "quote": "leaves all manner of breadcrumbs",
+   "page": "REVIEW: Fire and Blood by George R.R Martin"
+  },
+  {
+   "index": 411,
+   "feature": "summary of the good parts",
+   "claim": "It is a pseudo-history that keeps the salacious details real history downplays, a summary of the good parts in an entertaining, well-formatted style.",
+   "source": "C.T. Phipps, Grimdark Magazine, 6 Aug 2022",
+   "url": "https://www.grimdarkmagazine.com/review-fire-and-blood-by-george-r-r-martin/",
+   "quote": "A summary of the good parts",
+   "page": "REVIEW: Fire and Blood by George R.R Martin"
+  },
+  {
+   "index": 412,
+   "feature": "reads like real history, not fable",
+   "claim": "Fire and Blood reads like a real work of history, whereas The Silmarillion reads like a collection of interlinked fables and myths.",
+   "source": "Speculiction, Oct 2022",
+   "url": "http://speculiction.blogspot.com/2022/10/review-of-fire-and-blood-by-george-rr.html",
+   "quote": "more like a real work of history",
+   "page": "Review of Fire and Blood by George R.R. Martin"
+  },
+  {
+   "index": 413,
+   "feature": "tight end to end",
+   "claim": "Technique-wise the narrative is tight end to end with clear goals and movement, the Martin of old rather than of Feast or Dance.",
+   "source": "Speculiction, Oct 2022",
+   "url": "http://speculiction.blogspot.com/2022/10/review-of-fire-and-blood-by-george-rr.html",
+   "quote": "The narrative is tight, end to end",
+   "page": "Review of Fire and Blood by George R.R. Martin"
+  },
+  {
+   "index": 414,
+   "feature": "gossipy loyal maester as filter",
+   "claim": "The conceit is a history told by a crown-loyal maester who decides what to tell or merely suggest, and who is gossipy about it, adding a layer of interpretation.",
+   "source": "Jeroen, A Sky of Books and Movies, 30 Nov 2022",
+   "url": "https://jeroenthoughts.wordpress.com/2022/11/30/george-r-r-martin-fire-blood-2018-review/",
+   "quote": "he is being gossipy about it too",
+   "page": "George R.R. Martin – Fire & Blood (2018) Review"
+  },
+  {
+   "index": 415,
+   "feature": "gossipy historian, not King James",
+   "claim": "Tonally it is unlike The Silmarillion's mythopoetic mode: not written as if it were the King James Bible but as the work of a gossipy historian.",
+   "source": "Jeroen, A Sky of Books and Movies, 30 Nov 2022",
+   "url": "https://jeroenthoughts.wordpress.com/2022/11/30/george-r-r-martin-fire-blood-2018-review/",
+   "quote": "as a work by a gossipy historian",
+   "page": "George R.R. Martin – Fire & Blood (2018) Review"
+  },
+  {
+   "index": 416,
+   "feature": "characters in a couple of lines",
+   "claim": "Martin sketches loads of colorful, lively characters with just a couple of lines and details.",
+   "source": "Jeroen, A Sky of Books and Movies, 30 Nov 2022",
+   "url": "https://jeroenthoughts.wordpress.com/2022/11/30/george-r-r-martin-fire-blood-2018-review/",
+   "quote": "with just a couple of lines and details",
+   "page": "George R.R. Martin – Fire & Blood (2018) Review"
+  },
+  {
+   "index": 417,
+   "feature": "wash of names",
+   "claim": "Battle rosters of lords and knights make the eyes glaze; the impact of battles muddles into a wash of names.",
+   "source": "Jeroen, A Sky of Books and Movies, 30 Nov 2022",
+   "url": "https://jeroenthoughts.wordpress.com/2022/11/30/george-r-r-martin-fire-blood-2018-review/",
+   "quote": "a wash of names",
+   "page": "George R.R. Martin – Fire & Blood (2018) Review"
+  },
+  {
+   "index": 418,
+   "feature": "hint, never tell",
+   "claim": "Many things are only hinted (a queen rumored a witch whose rivals die mysteriously) and never stated outright, so hidden plot threads slip past inattentive readers.",
+   "source": "Jeroen, A Sky of Books and Movies, 30 Nov 2022",
+   "url": "https://jeroenthoughts.wordpress.com/2022/11/30/george-r-r-martin-fire-blood-2018-review/",
+   "quote": "only hints at",
+   "page": "George R.R. Martin – Fire & Blood (2018) Review"
+  },
+  {
+   "index": 419,
+   "feature": "opposing stories side by side",
+   "claim": "Gyldayn sometimes places two opposing accounts side by side rather than adjudicating between them.",
+   "source": "Book Analysis review",
+   "url": "https://bookanalysis.com/george-r-r-martin/fire-and-blood/review/",
+   "quote": "placed two opposing stories side by side",
+   "page": "Fire and Blood Review: The Reign of Dragons and Fire"
+  }
+ ]
+}

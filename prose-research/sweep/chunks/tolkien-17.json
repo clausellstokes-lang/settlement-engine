@@ -7,7 +7,16 @@
   630,
   631,
   632,
-  633
+  633,
+  634,
+  635,
+  636,
+  637,
+  638,
+  639,
+  640,
+  641,
+  642
  ],
  "claims": [
   {
@@ -62,6 +71,87 @@
    "source": "Wikipedia, 'Epic Pooh'",
    "url": "https://en.wikipedia.org/wiki/Epic_Pooh",
    "quote": "one wonders what book Moorcock read",
+   "page": ""
+  },
+  {
+   "index": 634,
+   "feature": "hobbit-viewpoint share (85 per cent)",
+   "claim": "Kullmann states on p. 111 that 85 per cent of the non-direct-speech (narrative) sections follow the point-of-view conventions of the nineteenth-century novel, i.e. are told from a hobbit's limited point of view.",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "85 per cent, of the non-direct-speech sections of the narrative",
+   "page": ""
+  },
+  {
+   "index": 635,
+   "feature": "85-per-cent figure traced",
+   "claim": "Wikipedia's sentence that the narrative is told '85% of the time' from one of the four hobbits' viewpoints is footnoted to Kullmann & Siepmann 2021 pp. 90-122; the figure itself sits on p. 111 of the 'Points of View' chapter.",
+   "source": "Wikipedia, Storytelling in The Lord of the Rings",
+   "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+   "quote": "85% of the time",
+   "page": ""
+  },
+  {
+   "index": 636,
+   "feature": "85-per-cent figure restated by reviewer",
+   "claim": "Holmes reports that Kullmann measures the dominance of the hobbit point of view as 85% of all non-direct speech representing hobbits, and that the hobbits are the foci of 'psychonarration' (p. 105).",
+   "source": "John R. Holmes, review of Kullmann & Siepmann, Journal of Tolkien Research 14.1 (2022)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol14/iss1/7",
+   "quote": "85% of all “non-direct” speech",
+   "page": ""
+  },
+  {
+   "index": 637,
+   "feature": "dialogue proportion (c. 50 per cent)",
+   "claim": "Kullmann finds about 50 per cent of the text is dialogue, exclamations, embedded stories and recited poems, whereas in a novel direct speech would usually take up about 20 to 30 per cent (p. 90; repeated at p. 159).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "usually take up ca. 20 to 30 per cent",
+   "page": ""
+  },
+  {
+   "index": 638,
+   "feature": "dialogue proportion",
+   "claim": "Wikipedia summarises K&S: about half of the novel is dialogue, poetry and song or embedded stories, against roughly 25% dialogue in a typical modern novel.",
+   "source": "Wikipedia, Storytelling in The Lord of the Rings",
+   "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 639,
+   "feature": "dialogue proportion",
+   "claim": "Bolding's review reports Kullmann's finding that direct speech comprises 50 percent of the text (K&S p. 90), with narrative oversight from the hobbits' point of view while keeping the third person.",
+   "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23",
+   "quote": "using direct speech to comprise 50 percent of the text",
+   "page": ""
+  },
+  {
+   "index": 640,
+   "feature": "dialogue proportion",
+   "claim": "Turner notes Kullmann's point that the proportion of direct speech is higher than usual in nineteenth- or twentieth-century novels because it serves purposes beyond social conversation and evokes older pre-texts.",
+   "source": "Allan Turner, review of Kullmann & Siepmann, Journal of Inklings Studies 12.1 (2022)",
+   "url": "https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 641,
+   "feature": "omniscient narration rare",
+   "claim": "Omniscient narration is comparatively rare; the reader is most commonly given the point of view of a group of characters, usually hobbits, before it narrows to an individual (p. 90).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "omniscient narration is comparatively rare",
+   "page": ""
+  },
+  {
+   "index": 642,
+   "feature": "hobbit focalisers",
+   "claim": "The 'Points of View' chapter abstract: the narrator mostly presents the point of view of hobbits as a group or of Frodo, Sam, Pippin or Merry, and only to a far lesser extent Aragorn, Gimli, Legolas and Éowyn.",
+   "source": "Kullmann & Siepmann, 'Points of View' (ch. 4) abstract, Springer",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "to a far lesser extent Aragorn, Gimli, Legolas and Éowyn",
    "page": ""
   }
  ]

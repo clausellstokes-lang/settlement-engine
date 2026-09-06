@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 25,
+ "indices": [
+  748,
+  749,
+  750,
+  751,
+  752,
+  753,
+  754,
+  755,
+  756,
+  757,
+  758,
+  759,
+  760,
+  761,
+  762
+ ],
+ "claims": [
+  {
+   "index": 748,
+   "feature": "Rohirric as Old English distance",
+   "claim": "Honegger explains that Tolkien equated Rohirric with Old English to keep linguistic distance while suggesting kinship, a choice translators cannot easily mirror.",
+   "source": "Translating Tolkien: Text and Film (Cormarë 6) — Nagel and Honegger chapters (epdf mirror)",
+   "url": "https://epdf.pub/translating-tolkien-text-and-film-cormare-series-no-6.html",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 749,
+   "feature": "reader verdict: register equated with ours",
+   "claim": "SpacePub readers objected that 'Chef' equates the hobbits' social circumstances with ours and that 'Penner', 'Imbissbude' and 'Stuss erzählen' break immersion, while supporters praised readability and regional differentiation of hobbit, Rohirric and Elvish speech.",
+   "source": "Der Herr der Ringe — die neue Übersetzung beurteilt (SpacePub forum archive)",
+   "url": "https://www.spacepub.net/archive/index.php/t-6815.html",
+   "quote": "Imbissbude",
+   "page": ""
+  },
+  {
+   "index": 750,
+   "feature": "reader poll on register",
+   "claim": "In the SF-Fan thread all twelve poll votes called the Krege translation an absolute failure, and one reader said the Middle-earth medieval atmosphere was gone, replaced by soap-opera modernity.",
+   "source": "Herr der Ringe — Krege-Übersetzung (SF-Fan forum)",
+   "url": "https://forum.sf-fan.de/viewtopic.php?p=17102",
+   "quote": "die Stimmung ist nicht mehr die Mittelerde-Mittelalter-Atmosphäre",
+   "page": ""
+  },
+  {
+   "index": 751,
+   "feature": "archaic language as intended device",
+   "claim": "Literaturschock readers argued Tolkien's archaic language is used deliberately as a stylistic device, so modernisation destroys the novel, citing 'Chef' and an alleged 'beim Fundbüro' as anachronisms.",
+   "source": "Tolkiens Der Herr der Ringe — Carroux vs. Krege (Literaturschock forum)",
+   "url": "https://literaturschock-forum.de/forum/thread/429-tolkiens-der-herr-der-ringe-carroux-vs-krege/?pageNo=2",
+   "quote": "altertümliche Sprache gezielt als Stilmittel verwendet wird",
+   "page": ""
+  },
+  {
+   "index": 752,
+   "feature": "reader verdict blog",
+   "claim": "Redaktion42 holds that Carroux keeps elevated, formal dialogue across all characters while Krege's naturalistic hobbit speech brought jarring modern vocabulary, and that the 2012 edition struck out the first edition's sins.",
+   "source": "Welche Herr der Ringe-Übersetzung ist die beste? (redaktion42)",
+   "url": "https://redaktion42.com/2013/01/02/welche-herr-der-ringe-ubersetzung-ist-die-beste/",
+   "quote": "die Sünden der ersten Übersetzung herausgestrichen",
+   "page": ""
+  },
+  {
+   "index": 753,
+   "feature": "fan preference for archaic register",
+   "claim": "The Deutsche Tolkien Gesellschaft states Carroux's translation is the more popular among many Tolkien fans, and Klett-Cotta reissued it in a 2019 boxed set.",
+   "source": "Drei Mal Carroux im Schuber (Deutsche Tolkien Gesellschaft)",
+   "url": "https://www.tolkiengesellschaft.de/31199/drei-mal-carroux-im-schuber/",
+   "quote": "bei vielen Tolkienfans die beliebtere",
+   "page": ""
+  },
+  {
+   "index": 754,
+   "feature": "divided readership",
+   "claim": "Twenty years after Krege the two translations still split German fans like almost no other topic, per the DTG's 2021 panel announcement.",
+   "source": "20 Jahre nach Krege: Was taugen die deutschen Übersetzungen? (Deutsche Tolkien Gesellschaft)",
+   "url": "https://www.tolkiengesellschaft.de/45883/20-jahre-nach-krege-was-taugen-die-deutschen-uebersetzungen/",
+   "quote": "spalten die Fans wie kaum ein anderes Thema",
+   "page": ""
+  },
+  {
+   "index": 755,
+   "feature": "uniform register criticised by retranslator",
+   "claim": "Krege criticised Carroux for using a similar linguistic style for the speech of both elves and hobbits despite the marked differences in the original.",
+   "source": "Guide to the Names in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Guide_to_the_Names_in_The_Lord_of_the_Rings",
+   "quote": "similar linguistic style for the speech of both elves and hobbits",
+   "page": ""
+  },
+  {
+   "index": 756,
+   "feature": "non-standard grammar as class marker",
+   "claim": "Domènech's Spanish rendered working-class hobbits in grammatically correct Spanish, losing Tolkien's double negatives, altered agreement and subject duplication.",
+   "source": "Guide to the Names in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Guide_to_the_Names_in_The_Lord_of_the_Rings",
+   "quote": "grammatically correct Spanish",
+   "page": ""
+  },
+  {
+   "index": 757,
+   "feature": "three-language hierarchy",
+   "claim": "Tolkien's scheme maps Modern English to Westron, Old English to Rohirric and Old Norse to Dale, and Honegger suggests leaving Old English passages untranslated is probably best.",
+   "source": "Guide to the Names in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Guide_to_the_Names_in_The_Lord_of_the_Rings",
+   "quote": "probably best",
+   "page": ""
+  },
+  {
+   "index": 758,
+   "feature": "nomenclature not to be translated freely",
+   "claim": "Tolkien objected as strongly as possible to free translation of his nomenclature, writing the Guide after the Dutch and Swedish versions.",
+   "source": "Guide to the Names in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Guide_to_the_Names_in_The_Lord_of_the_Rings",
+   "quote": "as strongly as is possible",
+   "page": ""
+  },
+  {
+   "index": 759,
+   "feature": "embroidered description",
+   "claim": "Tolkien called Bilbo's wealth 'a legend' and Ohlmarks added that his travels were legendary too, an instance of embroidering every description.",
+   "source": "Guide to the Names in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Guide_to_the_Names_in_The_Lord_of_the_Rings",
+   "quote": "propensity for embroidering every description",
+   "page": ""
+  },
+  {
+   "index": 760,
+   "feature": "fronting as archaism",
+   "claim": "Tolkien's archaic fronting ('Weapons they have laid at your doors') cannot be done in French and is unmarked in German, so its archaic effect is lost in translation.",
+   "source": "Translating The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+   "quote": "Weapons they have laid at your doors",
+   "page": "Archaism"
+  },
+  {
+   "index": 761,
+   "feature": "idiolect",
+   "claim": "Gollum's non-standard syntax and plurals like 'pocketses' resist translation; Ledoux's French diminishes both Gollum's and the Gaffer's peculiarities.",
+   "source": "Translating The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+   "quote": "pocketses",
+   "page": "Idiolect"
+  },
+  {
+   "index": 762,
+   "feature": "mixed register in revision",
+   "claim": "Livnit's Hebrew used a high Biblical register, and Lottem's revision mixed in technical modern Hebrew to an odd result.",
+   "source": "Translating The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+   "quote": "odd result",
+   "page": "Hebrew"
+  }
+ ]
+}

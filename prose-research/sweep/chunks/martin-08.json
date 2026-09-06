@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 8,
+ "indices": [
+  450,
+  451,
+  452,
+  453,
+  454,
+  455,
+  456,
+  457,
+  458,
+  459,
+  460,
+  461,
+  462,
+  463,
+  464
+ ],
+ "claims": [
+  {
+   "index": 450,
+   "feature": "sex-scene register",
+   "claim": "The fornication is unsentimental but has a certain imaginative élan (the purple-bearded drunk lapping wine off a wench's breasts).",
+   "source": "Daniel Mendelsohn, 'The Women and the Thrones', New York Review of Books, 7 Nov 2013 issue",
+   "url": "https://www.nybooks.com/articles/2013/11/07/women-and-thrones/",
+   "quote": "unsentimental fornication that is not without a certain imaginative élan",
+   "page": ""
+  },
+  {
+   "index": 451,
+   "feature": "irreversible consequences",
+   "claim": "Brutal, irreversible consequences for characters' actions are part of the epic's distinctive tone and feel more 'literary' than any television series.",
+   "source": "Daniel Mendelsohn, 'The Women and the Thrones', New York Review of Books, 7 Nov 2013 issue",
+   "url": "https://www.nybooks.com/articles/2013/11/07/women-and-thrones/",
+   "quote": "brutal, irreversible real-life consequences",
+   "page": ""
+  },
+  {
+   "index": 452,
+   "feature": "A Feast for Crows misstep",
+   "claim": "Abandoning the core characters for new ones in the fourth book was a serious misstep; the reviewer took a month because he did not care about the strangers.",
+   "source": "Daniel Mendelsohn, 'The Women and the Thrones', New York Review of Books, 7 Nov 2013 issue",
+   "url": "https://www.nybooks.com/articles/2013/11/07/women-and-thrones/",
+   "quote": "I simply didn’t care about these strangers",
+   "page": ""
+  },
+  {
+   "index": 453,
+   "feature": "thematic monologue",
+   "claim": "Cersei's sword-versus-moonblood speech is an arresting echo of the Greek notion that childbirth is for women what war is for men; Martin carries argument in character monologue.",
+   "source": "Daniel Mendelsohn, 'The Women and the Thrones', New York Review of Books, 7 Nov 2013 issue",
+   "url": "https://www.nybooks.com/articles/2013/11/07/women-and-thrones/",
+   "quote": "an arresting echo of the Greek notion",
+   "page": ""
+  },
+  {
+   "index": 454,
+   "feature": "limits of literary reach",
+   "claim": "The theological preoccupations do not raise the books to Lord of the Rings' level of parable; the appeal is thematic ambition plus richly satisfying details.",
+   "source": "Daniel Mendelsohn, 'The Women and the Thrones', New York Review of Books, 7 Nov 2013 issue",
+   "url": "https://www.nybooks.com/articles/2013/11/07/women-and-thrones/",
+   "quote": "richly satisfying details",
+   "page": ""
+  },
+  {
+   "index": 455,
+   "feature": "third-person single-viewpoint chapters",
+   "claim": "Each chapter is narrated in the third person from one character's point of view; eight major viewpoint characters in book one grew to seventeen by A Feast for Crows.",
+   "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+   "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+   "quote": "Each chapter is narrated in the third person",
+   "page": ""
+  },
+  {
+   "index": 456,
+   "feature": "gardener vs architect (Martin's own words)",
+   "claim": "Martin calls himself a 'gardener' who has a rough destination but improvises, in contrast to Tolkien the 'architect' who built languages and histories first.",
+   "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+   "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+   "quote": "he has a rough idea where he’s going but improvises",
+   "page": ""
+  },
+  {
+   "index": 457,
+   "feature": "minimal invented language",
+   "claim": "Martin fleshes out only as much world as the story needs and has invented only seven words of High Valyrian.",
+   "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+   "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+   "quote": "I’ve invented seven words of High Valyrian",
+   "page": ""
+  },
+  {
+   "index": 458,
+   "feature": "history over myth, little magic",
+   "claim": "Martin drew on the Wars of the Roses rather than mythology, used relatively little magic, and the result felt dangerous, lusty and real.",
+   "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+   "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+   "quote": "it felt dangerous, lusty, and real",
+   "page": ""
+  },
+  {
+   "index": 459,
+   "feature": "rewriting and perfectionism (Martin's own words)",
+   "claim": "Martin suspects he rewrites too much, ripping one Tyrion chapter out and putting it back for ten years, even trying it as a dream sequence.",
+   "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+   "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+   "quote": "Maybe I’m rewriting too much",
+   "page": ""
+  },
+  {
+   "index": 460,
+   "feature": "multi-viewpoint chronology",
+   "claim": "Aligning the chronologies of seventeen viewpoint characters' travel times across two books bedevils the writing.",
+   "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+   "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+   "quote": "The ‘Dance’ timeline alone is a bitch and a half",
+   "page": ""
+  },
+  {
+   "index": 461,
+   "feature": "continuity errors under fan scrutiny",
+   "claim": "Fans catch small continuity slips (a horse that changes sex, eyes green then blue) because every line is analysed.",
+   "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+   "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+   "quote": "People are analyzing every goddam line in these books",
+   "page": ""
+  },
+  {
+   "index": 462,
+   "feature": "intricate racy narrative",
+   "claim": "The narrative is intricate and racy, practically custom-built for HBO ('The Sopranos in Middle-earth').",
+   "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+   "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+   "quote": "the book’s intricate, racy narrative",
+   "page": ""
+  },
+  {
+   "index": 463,
+   "feature": "pageantry and colour",
+   "claim": "Martin's taste for pageantry and colour (his medieval miniature dioramas) carries into the fiction.",
+   "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+   "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+   "quote": "I like the pageantry and the color",
+   "page": ""
+  },
+  {
+   "index": 464,
+   "feature": "scale of cast",
+   "claim": "More than a thousand named characters exist by a superfan's count; Martin quotes Tolkien that the tale grew in the telling.",
+   "source": "Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011",
+   "url": "https://www.newyorker.com/magazine/2011/04/11/just-write-it",
+   "quote": "The tale grew in the telling",
+   "page": ""
+  }
+ ]
+}

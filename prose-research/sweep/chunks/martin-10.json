@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 10,
+ "indices": [
+  480,
+  481,
+  482,
+  483,
+  484,
+  485,
+  486,
+  487,
+  488,
+  489,
+  490,
+  491,
+  492,
+  493,
+  494
+ ],
+ "claims": [
+  {
+   "index": 480,
+   "feature": "one-off POV chapters",
+   "claim": "Single-chapter viewpoint characters feel hobbled by their brevity; Kain wants established characters, not new ones.",
+   "source": "Erik Kain, 'Review: A Dance with Dragons', Ordinary Times, 8 Aug 2011",
+   "url": "https://ordinary-times.com/2011/08/08/review-a-dance-with-dragons-by-george-r-r-martin/",
+   "quote": "so hobbled by their brevity",
+   "page": ""
+  },
+  {
+   "index": 481,
+   "feature": "uneven chapters",
+   "claim": "The book oscillates between excellent Northern chapters and the most boring moments in any fantasy series, with Dany's chapters actively hurting the books.",
+   "source": "Erik Kain, 'Review: A Dance with Dragons', Ordinary Times, 8 Aug 2011",
+   "url": "https://ordinary-times.com/2011/08/08/review-a-dance-with-dragons-by-george-r-r-martin/",
+   "quote": "It oscillates wildly between excellent chapters in the North",
+   "page": ""
+  },
+  {
+   "index": 482,
+   "feature": "hearsay as alternative to POV",
+   "claim": "Most of Dany's events could have been reported as hearsay in other viewpoint characters' chapters and been more interesting.",
+   "source": "Erik Kain, 'Review: A Dance with Dragons', Ordinary Times, 8 Aug 2011",
+   "url": "https://ordinary-times.com/2011/08/08/review-a-dance-with-dragons-by-george-r-r-martin/",
+   "quote": "could have been written as hearsay in other POV characters’ chapters",
+   "page": ""
+  },
+  {
+   "index": 483,
+   "feature": "cartoon villain, real victims",
+   "claim": "Ramsay Bolton is a cartoon villain but his victims are very real and the torture is disturbing as it should be.",
+   "source": "Erik Kain, 'Review: A Dance with Dragons', Ordinary Times, 8 Aug 2011",
+   "url": "https://ordinary-times.com/2011/08/08/review-a-dance-with-dragons-by-george-r-r-martin/",
+   "quote": "Ramsay Bolton is a cartoon villain",
+   "page": ""
+  },
+  {
+   "index": 484,
+   "feature": "NYT reviewer's phrasing (Dana Jennings)",
+   "claim": "Kain quotes and ridicules the New York Times review's opening ('flagons 'n' dragons') while noting it calls Martin 'much better' than Tolkien.",
+   "source": "Erik Kain, 'Review: A Dance with Dragons', Ordinary Times, 8 Aug 2011",
+   "url": "https://ordinary-times.com/2011/08/08/review-a-dance-with-dragons-by-george-r-r-martin/",
+   "quote": "flagons ’n’ dragons, and swords ’n’ sorcerers",
+   "page": ""
+  },
+  {
+   "index": 485,
+   "feature": "POV accretion",
+   "claim": "Instead of focusing, book five adds points of view and conflicts, which is exhausting.",
+   "source": "Alyssa Rosenberg, 'On A Dance With Dragons', ThinkProgress, 15 Jul 2011 (read via Wayback)",
+   "url": "http://thinkprogress.org/alyssa/2011/07/15/270611/on-a-dance-with-dragons/",
+   "quote": "Instead of focusing, the story adds points of view and conflicts",
+   "page": ""
+  },
+  {
+   "index": 486,
+   "feature": "descriptive digression",
+   "claim": "The book gets tangled in a comparative anthropology of sellsword companies.",
+   "source": "Alyssa Rosenberg, 'On A Dance With Dragons', ThinkProgress, 15 Jul 2011 (read via Wayback)",
+   "url": "http://thinkprogress.org/alyssa/2011/07/15/270611/on-a-dance-with-dragons/",
+   "quote": "a comparative anthropology of sellsword companies. It’s exhausting",
+   "page": ""
+  },
+  {
+   "index": 487,
+   "feature": "name-punning as repetition device",
+   "claim": "The constant punning on 'Reek' is irritating but illustrates how constant the reinforcement must be to brainwash oneself into a new identity.",
+   "source": "Alyssa Rosenberg, 'On A Dance With Dragons', ThinkProgress, 15 Jul 2011 (read via Wayback)",
+   "url": "http://thinkprogress.org/alyssa/2011/07/15/270611/on-a-dance-with-dragons/",
+   "quote": "The constant punning on Reek",
+   "page": ""
+  },
+  {
+   "index": 488,
+   "feature": "villain seen from victim's POV",
+   "claim": "Ramsay is a cartoon psychopath made effective because he is seen from the perspective of the man he has broken.",
+   "source": "Alyssa Rosenberg, 'On A Dance With Dragons', ThinkProgress, 15 Jul 2011 (read via Wayback)",
+   "url": "http://thinkprogress.org/alyssa/2011/07/15/270611/on-a-dance-with-dragons/",
+   "quote": "a cartoon psychopath, but a genuinely effective one",
+   "page": ""
+  },
+  {
+   "index": 489,
+   "feature": "naming leitmotif across POVs",
+   "claim": "Theon, Arya and Tyrion all must forget their names and learn new ones, an identity motif binding separate viewpoints.",
+   "source": "Alyssa Rosenberg, 'On A Dance With Dragons', ThinkProgress, 15 Jul 2011 (read via Wayback)",
+   "url": "http://thinkprogress.org/alyssa/2011/07/15/270611/on-a-dance-with-dragons/",
+   "quote": "have to forget their names and learn new ones",
+   "page": ""
+  },
+  {
+   "index": 490,
+   "feature": "cliffhanger plotting",
+   "claim": "The plotty, cliffhangery reversals (dead! alive! dying! a zombie! in disguise!) are conceded as the selling point.",
+   "source": "Sady Doyle, 'Enter Ye Myne Mystic World of Gayng-Raype', Tiger Beatdown, 26 Aug 2011",
+   "url": "https://tigerbeatdown.com/2011/08/26/enter-ye-myne-mystic-world-of-gayng-raype-what-the-r-stands-for-in-george-r-r-martin/",
+   "quote": "the plotty, cliffhangery aspects of Martin’s writing",
+   "page": ""
+  },
+  {
+   "index": 491,
+   "feature": "mock-archaic register",
+   "claim": "Doyle parodies the faux-archaic register and unpronounceable invented names in her opening ('yon Good Queen Sady').",
+   "source": "Sady Doyle, 'Enter Ye Myne Mystic World of Gayng-Raype', Tiger Beatdown, 26 Aug 2011",
+   "url": "https://tigerbeatdown.com/2011/08/26/enter-ye-myne-mystic-world-of-gayng-raype-what-the-r-stands-for-in-george-r-r-martin/",
+   "quote": "In days of yore, before the Striding Elves sailed West",
+   "page": ""
+  },
+  {
+   "index": 492,
+   "feature": "repetition of incident",
+   "claim": "Arya's plot is a loop of kidnapped/escapes/runs away, and A Clash of Kings is 'The One That Was Really Boring'.",
+   "source": "Sady Doyle, 'Enter Ye Myne Mystic World of Gayng-Raype', Tiger Beatdown, 26 Aug 2011",
+   "url": "https://tigerbeatdown.com/2011/08/26/enter-ye-myne-mystic-world-of-gayng-raype-what-the-r-stands-for-in-george-r-r-martin/",
+   "quote": "She gets kidnapped! She escapes! She runs away!",
+   "page": ""
+  },
+  {
+   "index": 493,
+   "feature": "orientalised naming",
+   "claim": "Eastern names are othered against plain Westerosi names like 'Ned', 'Catelyn' and 'Jon'.",
+   "source": "Sady Doyle, 'Enter Ye Myne Mystic World of Gayng-Raype', Tiger Beatdown, 26 Aug 2011",
+   "url": "https://tigerbeatdown.com/2011/08/26/enter-ye-myne-mystic-world-of-gayng-raype-what-the-r-stands-for-in-george-r-r-martin/",
+   "quote": "names like “Pyat,” “Xaro Xhoan,” and “Jhogo,”",
+   "page": ""
+  },
+  {
+   "index": 494,
+   "feature": "frequency of rape scenes",
+   "claim": "The essay's core objection is the count of gratuitous rape, molestation and domestic-violence scenes, tallied book by book.",
+   "source": "Sady Doyle, 'Enter Ye Myne Mystic World of Gayng-Raype', Tiger Beatdown, 26 Aug 2011",
+   "url": "https://tigerbeatdown.com/2011/08/26/enter-ye-myne-mystic-world-of-gayng-raype-what-the-r-stands-for-in-george-r-r-martin/",
+   "quote": "TWENTY THOUSAND MILLION GRATUITOUS RAPE",
+   "page": ""
+  }
+ ]
+}

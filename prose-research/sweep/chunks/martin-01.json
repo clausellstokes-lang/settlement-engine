@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 1,
+ "indices": [
+  345,
+  346,
+  347,
+  348,
+  349,
+  350,
+  351,
+  352,
+  353,
+  354,
+  355,
+  356,
+  357,
+  358,
+  359
+ ],
+ "claims": [
+  {
+   "index": 345,
+   "feature": "evocative style absent",
+   "claim": "Martin's evocative storytelling style and gift for gripping narrative are mostly absent from the dry history.",
+   "source": "Publishers Weekly review, 19 Nov 2018",
+   "url": "https://www.publishersweekly.com/978-1-5247-9628-0",
+   "quote": "mostly absent from this dry history",
+   "page": "Fire & Blood (PW review)"
+  },
+  {
+   "index": 346,
+   "feature": "textbook framing",
+   "claim": "The Gyldayn attribution conjures unhappy Westerosi schoolchildren forced to study a weighty textbook.",
+   "source": "Publishers Weekly review, 19 Nov 2018",
+   "url": "https://www.publishersweekly.com/978-1-5247-9628-0",
+   "quote": "unhappy Westerosi schoolchildren",
+   "page": "Fire & Blood (PW review)"
+  },
+  {
+   "index": 347,
+   "feature": "vivid single image amid summary",
+   "claim": "Even the summary voice lands concrete, countable images, such as a dragon devouring a queen in six bites.",
+   "source": "Publishers Weekly review, 19 Nov 2018",
+   "url": "https://www.publishersweekly.com/978-1-5247-9628-0",
+   "quote": "devoured the queen in six bites",
+   "page": "Fire & Blood (PW review)"
+  },
+  {
+   "index": 348,
+   "feature": "narrator as opinionated character",
+   "claim": "Martin says Gyldayn is an opinionated man whose prejudices, gripes and cavils leak into the text, so the reader must remember they are reading the voice of a character.",
+   "source": "George R.R. Martin interviewed by Lenny Picker, Publishers Weekly, 16 Jul 2018",
+   "url": "https://www.publishersweekly.com/pw/by-topic/authors/interviews/article/77516-pw-talks-with-george-r-r-martin.html",
+   "quote": "prejudices and gripes and his own cavils",
+   "page": "Imaginary History: PW Talks With George R.R. Martin"
+  },
+  {
+   "index": 349,
+   "feature": "'imaginary history' not 'fake history'",
+   "claim": "Martin dropped his own term 'fake history' for 'imaginary history' after readers took umbrage at the demeaning label.",
+   "source": "George R.R. Martin interviewed by Lenny Picker, Publishers Weekly, 16 Jul 2018",
+   "url": "https://www.publishersweekly.com/pw/by-topic/authors/interviews/article/77516-pw-talks-with-george-r-r-martin.html",
+   "quote": "some of my readers actually took umbrage",
+   "page": "Imaginary History: PW Talks With George R.R. Martin"
+  },
+  {
+   "index": 350,
+   "feature": "popular-history model",
+   "claim": "Martin calls the book essentially a popular history, not a novel, modelled on Costain's four-volume Plantagenet history and readable without prior knowledge.",
+   "source": "George R.R. Martin interviewed by Lenny Picker, Publishers Weekly, 16 Jul 2018",
+   "url": "https://www.publishersweekly.com/pw/by-topic/authors/interviews/article/77516-pw-talks-with-george-r-r-martin.html",
+   "quote": "it's essentially a popular history",
+   "page": "Imaginary History: PW Talks With George R.R. Martin"
+  },
+  {
+   "index": 351,
+   "feature": "GRRMarillion / Tolkien appendices",
+   "claim": "Martin accepts the comparison to Tolkien's appendices and jokingly calls the book the GRRMarillion.",
+   "source": "George R.R. Martin interviewed by Lenny Picker, Publishers Weekly, 16 Jul 2018",
+   "url": "https://www.publishersweekly.com/pw/by-topic/authors/interviews/article/77516-pw-talks-with-george-r-r-martin.html",
+   "quote": "the GRRMarillion",
+   "page": "Imaginary History: PW Talks With George R.R. Martin"
+  },
+  {
+   "index": 352,
+   "feature": "textbook style, deliberate",
+   "claim": "Martin insists the book is written in the style of a textbook, a quite different style adopted deliberately, and is not a traditional novel.",
+   "source": "George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018",
+   "url": "https://ew.com/author-interviews/2018/11/19/george-rr-martin-interview/",
+   "quote": "written in the style of a textbook",
+   "page": "George R.R. Martin gets candid about new book"
+  },
+  {
+   "index": 353,
+   "feature": "one voice: crotchety old academic",
+   "claim": "The history needs only one voice, Gyldayn's, whom Martin describes as a crotchety old academic, whereas the novels switch voice every chapter.",
+   "source": "George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018",
+   "url": "https://ew.com/author-interviews/2018/11/19/george-rr-martin-interview/",
+   "quote": "he's a crotchety old academic",
+   "page": "George R.R. Martin gets candid about new book"
+  },
+  {
+   "index": 354,
+   "feature": "linear annalistic order",
+   "claim": "Martin found the book easy because it is linear: here is what happened in year 30, here is what happened in 25, with no juggling of parallel timelines.",
+   "source": "George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018",
+   "url": "https://ew.com/author-interviews/2018/11/19/george-rr-martin-interview/",
+   "quote": "here's what happened in the year 30",
+   "page": "George R.R. Martin gets candid about new book"
+  },
+  {
+   "index": 355,
+   "feature": "same events told three ways",
+   "claim": "Martin invented contradictory imaginary primary sources, especially for the Dance of the Dragons, so he could tell the same events three different ways.",
+   "source": "George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018",
+   "url": "https://ew.com/author-interviews/2018/11/19/george-rr-martin-interview/",
+   "quote": "three different ways",
+   "page": "George R.R. Martin gets candid about new book"
+  },
+  {
+   "index": 356,
+   "feature": "generational cast churn",
+   "claim": "It is a generational story over 150 years in which a large cast are born, grow up, die and are succeeded by their children.",
+   "source": "George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018",
+   "url": "https://ew.com/author-interviews/2018/11/19/george-rr-martin-interview/",
+   "quote": "born, grow up and die",
+   "page": "George R.R. Martin gets candid about new book"
+  },
+  {
+   "index": 357,
+   "feature": "historian-at-distance analogy",
+   "claim": "Martin likens Gyldayn to a modern historian of the Civil War who was not present and must reconstruct from memories and court records that sometimes contradict.",
+   "source": "George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018",
+   "url": "https://ew.com/author-interviews/2018/11/19/george-rr-martin-interview/",
+   "quote": "sometimes there are contradictory accounts",
+   "page": "George R.R. Martin gets candid about new book"
+  },
+  {
+   "index": 358,
+   "feature": "origin as sidebars",
+   "claim": "The text began as sidebars for The World of Ice and Fire that ballooned to 300,000 words and were pulled out to become the GRRM-arillion.",
+   "source": "George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018",
+   "url": "https://ew.com/author-interviews/2018/11/19/george-rr-martin-interview/",
+   "quote": "300,000 words of sidebars",
+   "page": "George R.R. Martin gets candid about new book"
+  },
+  {
+   "index": 359,
+   "feature": "the 'history' part is essential",
+   "claim": "Martin stresses that the book is imaginary history, the essential point being the history part, and compares it to Costain's Plantagenets with dragons.",
+   "source": "George R.R. Martin, Not a Blog, 25 Apr 2018",
+   "url": "https://georgerrmartin.com/notablog/2018/04/25/fire-blood-on-the-way/",
+   "quote": "The essential point being the 'history' part.",
+   "page": "FIRE & BLOOD : On The Way"
+  }
+ ]
+}

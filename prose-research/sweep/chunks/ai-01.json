@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 1,
  "indices": [
-  210,
-  211,
-  212,
-  213,
-  214,
-  215,
-  216,
-  217,
-  218,
-  219,
-  220,
-  221,
-  222,
-  223,
-  224
+  269,
+  270,
+  271,
+  272,
+  273,
+  274,
+  275,
+  276,
+  277,
+  278,
+  279,
+  280,
+  281,
+  282,
+  283
  ],
  "claims": [
   {
-   "index": 210,
-   "feature": "genre and tone misalignment",
-   "claim": "Narrative-design experts list AI game narrative failures: unconvincing or repetitive content, wrong genre, uneven quality across sessions, and a bias toward overly positive endings.",
-   "source": "Valdivia & Burelli, arXiv 2509.04239, 2025-09-04",
-   "url": "https://arxiv.org/html/2509.04239",
-   "quote": "overly positive or uninspired endings",
-   "page": ""
+   "index": 269,
+   "feature": "rarity cliff",
+   "claim": "ChatGPT's precision fell from about 80% on frequently-mentioned people to about 16% on rare ones; the pattern held for every model.",
+   "source": "Min et al. 2023 — FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation (arXiv 2305.14251)",
+   "url": "https://arxiv.org/html/2305.14251",
+   "quote": "error rates are higher for rarer entities",
+   "page": "Min et al. 2023 — FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation (arXiv 2305.14251)"
   },
   {
-   "index": 211,
-   "feature": "industry sentiment",
-   "claim": "63% of game design and narrative workers say generative AI harms the industry (GDC 2026, n>2,300); positive views fell to 7%.",
-   "source": "Game Developer, 2026-02-03",
-   "url": "https://www.gamedeveloper.com/business/one-third-of-game-workers-use-generative-ai-but-half-think-it-s-bad-for-the-industry",
-   "quote": "a regurgitated amalgamation of everything that's come before",
-   "page": ""
+   "index": 270,
+   "feature": "late-sentence decay",
+   "claim": "Facts stated later in a generation are less accurate than those stated early.",
+   "source": "Min et al. 2023 — FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation (arXiv 2305.14251)",
+   "url": "https://arxiv.org/html/2305.14251",
+   "quote": "error rates are higher for facts mentioned later",
+   "page": "Min et al. 2023 — FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation (arXiv 2305.14251)"
   },
   {
-   "index": 212,
-   "feature": "middle-of-the-road adventure text",
-   "claim": "ChatGPT-written RPG adventures land at the most ordinary text possible; the quality floor comes with an equal ceiling.",
-   "source": "H. Tucker Cobey, Epic Table Games, 2023-07-24",
-   "url": "https://epictablegames.com/onebookshelf-aka-drivethrurpg-bans-primarily-ai-generated-content/",
-   "quote": "the most ordinary, middle-of-the-road adventure text",
-   "page": ""
-  },
-  {
-   "index": 213,
-   "feature": "marketplace ban wording",
-   "claim": "DMs Guild and DriveThruRPG refuse commercial content primarily written by AI language generators (effective 2023-07-31) while allowing tagged AI art.",
-   "source": "OneBookShelf policy via EN World thread",
-   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
-   "quote": "primarily written by AI language generators",
-   "page": ""
-  },
-  {
-   "index": 214,
-   "feature": "publisher pledge",
-   "claim": "Kobold Press pledges no AI-generated text in game design, framing LLM text as fine for chatbots but not for play with friends.",
-   "source": "Wolfgang Baur, Kobold Press 'No AI Pledge'",
-   "url": "https://koboldpress.com/state-of-play-kobold-press-issues-the-no-ai-pledge/",
-   "quote": "we don't use AI to generate text",
-   "page": ""
-  },
-  {
-   "index": 215,
-   "feature": "publisher bans are ethical not qualitative",
-   "claim": "Paizo, Chaosium, WotC, Renegade, Stonemaier, Free League ban AI text/art on ethics and livelihood grounds; only Monte Cook Games gives a quality verdict.",
-   "source": "Geeknative roundup",
-   "url": "https://www.geeknative.com/221420/the-human-touch-the-growing-list-of-tabletop-companies-banning-ai/",
-   "quote": "exact opposite of inspiration",
-   "page": ""
-  },
-  {
-   "index": 216,
-   "feature": "AI RPG text stagnant and obvious",
-   "claim": "RPG crowdfunding backers report AI-written project text is easy to catch and has not improved in three years; human creators now fear tripping the same alarm.",
-   "source": "EN World, 'AI is destroying crowdfunding' (user Agamon, 2026-08-25)",
-   "url": "https://www.enworld.org/threads/ai-is-destroying-crowdfunding.720435/",
-   "quote": "it's been at the same level for three years",
-   "page": ""
-  },
-  {
-   "index": 217,
-   "feature": "series-level beat repetition",
-   "claim": "Letting AI draft sequels from the same source documents reproduced the first book's story beats; prose stayed 'competent but slightly mechanical' with 'not X but Y'.",
-   "source": "Jon Del Arroz, 2026-03-16",
-   "url": "https://substack.aicentral.blog/p/i-let-ai-write-three-complete-novels",
-   "quote": "producing repetitive story beats",
-   "page": ""
-  },
-  {
-   "index": 218,
-   "feature": "prompt shipped in a published novel",
-   "claim": "A Kindle Unlimited novel (Darkhollow Academy: Year 2, June 2025) went out with an AI rewrite prompt still in the text; Amazon's AI disclosure is not shown to readers.",
-   "source": "Book Riot, 'Can Kindle Unlimited Survive AI?'",
-   "url": "https://bookriot.com/can-kindle-unlimited-survive-ai/",
+   "index": 271,
+   "feature": "citations do not predict truth",
+   "claim": "36% of both supported and unsupported PerplexityAI sentences carried citations, so a citation mark is no evidence of accuracy.",
+   "source": "Min et al. 2023 — FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation (arXiv 2305.14251)",
+   "url": "https://arxiv.org/html/2305.14251",
    "quote": "",
-   "page": ""
+   "page": "Min et al. 2023 — FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation (arXiv 2305.14251)"
   },
   {
-   "index": 219,
-   "feature": "reader-side identification criteria",
-   "claim": "Goodreads readers flag ~296 books as obviously AI-generated on the basis of AI cover art plus stereotypical text patterns at slop-level frequency.",
-   "source": "Goodreads list 'Obviously AI-generated'",
-   "url": "https://www.goodreads.com/list/show/221372.Obviously_AI_generated",
-   "quote": "stereotypical text patterns",
-   "page": ""
+   "index": 272,
+   "feature": "obscurity multiplies fabrication",
+   "claim": "GPT-4o citation fabrication rose from 6% for major depressive disorder to 28% for binge eating disorder and 29% for body dysmorphic disorder as topic visibility fell.",
+   "source": "Influence of Topic Familiarity and Prompt Specificity on Citation Fabrication in Mental Health Research Using LLMs (JMIR 2025; PMC12658395)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12658395/",
+   "quote": "more prone to citation-related hallucinations",
+   "page": "Influence of Topic Familiarity and Prompt Specificity on Citation Fabrication in Mental Health Research Using LLMs (JMIR 2025; PMC12658395)"
   },
   {
-   "index": 220,
-   "feature": "false-positive hazard",
-   "claim": "A human-written indie RPG was review-bombed as ChatGPT slop because the story 'felt artificial'; reader tells fire on human work too.",
-   "source": "Outlook Respawn on Shrine's Legacy, 2025-12-15",
-   "url": "https://respawn.outlookindia.com/gaming/gaming-news/shrines-legacy-devs-deny-ai-slop-chatgpt-rumors",
-   "quote": "the story felt artificial",
-   "page": ""
+   "index": 273,
+   "feature": "obscure biography wholly wrong",
+   "claim": "Asked for a biography of an obscure man (John Peter Kingery) with no context, ChatGPT produced a fluent life story with nothing correct in it.",
+   "source": "Amy Johnson Crow — Using ChatGPT for Genealogy, Accurately",
+   "url": "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
+   "quote": "There's nothing in this biography that's correct.",
+   "page": "Amy Johnson Crow — Using ChatGPT for Genealogy, Accurately"
   },
   {
-   "index": 221,
-   "feature": "em dash",
-   "claim": "There is no hard evidence that chatbots use more em dashes than professional human writers; their prevalence in AI output reflects training on human prose.",
-   "source": "The Ringer — Brian Phillips, 2025-08-20",
-   "url": "https://www.theringer.com/2025/08/20/pop-culture/em-dash-use-ai-artificial-intelligence-chatgpt-google-gemini",
-   "quote": "how reliant the AI companies are on the human writers",
-   "page": "Stop AI-Shaming Our Precious, Kindly Em Dashes—Please"
+   "index": 274,
+   "feature": "wrong administrative dates",
+   "claim": "Asked when Ohio birth records began, ChatGPT returned inaccurate dates for a basic record-keeping fact.",
+   "source": "Amy Johnson Crow — Using ChatGPT for Genealogy, Accurately",
+   "url": "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
+   "quote": "",
+   "page": "Amy Johnson Crow — Using ChatGPT for Genealogy, Accurately"
   },
   {
-   "index": 222,
-   "feature": "em dash",
-   "claim": "The em dash was Emily Dickinson's signature mark, restored by later editors after publishers stripped it; treating it as an AI tell confuses the tool with the intent behind it.",
-   "source": "Focus Lab — Nadine Kavanaugh, 2026-02-09",
-   "url": "https://www.focuslab.agency/blog/the-em-dash-is-not-an-ai-tell",
-   "quote": "Machines use it because great writers always have.",
-   "page": "The Em Dash Is Not an AI Tell"
+   "index": 275,
+   "feature": "improper inferential linking",
+   "claim": "The commonest citation error is a source that supports a neighbouring fact but not the inference drawn from it; then inaccurate paraphrase, then irrelevant sources.",
+   "source": "Shao et al. 2024 — Assisting in Writing Wikipedia-like Articles From Scratch with LLMs (STORM, arXiv 2402.14207, NAACL 2024)",
+   "url": "https://arxiv.org/html/2402.14207",
+   "quote": "surpassing basic fact-checking",
+   "page": "Shao et al. 2024 — Assisting in Writing Wikipedia-like Articles From Scratch with LLMs (STORM, arXiv 2402.14207, NAACL 2024)"
   },
   {
-   "index": 223,
-   "feature": "em dash",
-   "claim": "Google Books Ngram data show em dash frequency in published books has stayed high for centuries, so ChatGPT is mirroring professional convention rather than exhibiting a machine signature.",
-   "source": "SALT.agency — Sarah Mitchell, 2026-01-29",
-   "url": "https://salt.agency/blog/in-defence-of-the-em-dash-what-the-ai-writing-debate-gets-wrong/",
-   "quote": "There is no simple formula for detecting AI writing.",
-   "page": "In Defence of the em dash"
+   "index": 276,
+   "feature": "over-association of unrelated facts",
+   "claim": "Generated articles connect separate facts into unverifiable relationships (red-herring / overspeculation), a failure distinct from outright hallucination.",
+   "source": "Shao et al. 2024 — Assisting in Writing Wikipedia-like Articles From Scratch with LLMs (STORM, arXiv 2402.14207, NAACL 2024)",
+   "url": "https://arxiv.org/html/2402.14207",
+   "quote": "introduce unverifiable connections between different pieces of information",
+   "page": "Shao et al. 2024 — Assisting in Writing Wikipedia-like Articles From Scratch with LLMs (STORM, arXiv 2402.14207, NAACL 2024)"
   },
   {
-   "index": 224,
-   "feature": "em dash",
-   "claim": "An AP Stylebook editor confirms em dashes are ubiquitous in professional journalism and predate AI; avoiding them to dodge suspicion lets machines dictate human style in a feedback loop.",
-   "source": "Writer's Guide (Substack) — Robert Roy Britt, 2026-07-28",
-   "url": "https://writersguide.substack.com/p/dont-let-ai-ban-the-em-dash",
-   "quote": "Em dashes aren't the problem.",
-   "page": "AI's Assault on the Em Dash Should Worry All Writers"
+   "index": 277,
+   "feature": "source bias transfer",
+   "claim": "7 of 10 experienced Wikipedia editors found STORM articles emotional or unneutral, importing bias from the web sources retrieved.",
+   "source": "Shao et al. 2024 — Assisting in Writing Wikipedia-like Articles From Scratch with LLMs (STORM, arXiv 2402.14207, NAACL 2024)",
+   "url": "https://arxiv.org/html/2402.14207",
+   "quote": "",
+   "page": "Shao et al. 2024 — Assisting in Writing Wikipedia-like Articles From Scratch with LLMs (STORM, arXiv 2402.14207, NAACL 2024)"
+  },
+  {
+   "index": 278,
+   "feature": "verification is the only reliable detector",
+   "claim": "Stylistic signs only prioritise which sentences to check; the reliable test is whether the cited sources support the text.",
+   "source": "Wikipedia:WikiProject AI Cleanup/Guide and resources",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup/Guide",
+   "quote": "check whether the sources support the text",
+   "page": "Wikipedia:WikiProject AI Cleanup/Guide and resources"
+  },
+  {
+   "index": 279,
+   "feature": "frequency mistaken for truth",
+   "claim": "The model treats the most-repeated version of a history as the mainstream one, amplifying dominant narratives and marginalising minority and Indigenous accounts.",
+   "source": "Index on Censorship 2025-11 — History is being written by the AI victors",
+   "url": "https://www.indexoncensorship.org/2025/11/history-is-being-written-by-the-ai-victors/",
+   "quote": "if it finds a particular version cited more often",
+   "page": "Index on Censorship 2025-11 — History is being written by the AI victors"
+  },
+  {
+   "index": 280,
+   "feature": "misquoted primary sources",
+   "claim": "Instructed to cite primary sources, Copilot fabricated a paper the historian had never seen and misquoted real sources.",
+   "source": "Index on Censorship 2025-11 — History is being written by the AI victors",
+   "url": "https://www.indexoncensorship.org/2025/11/history-is-being-written-by-the-ai-victors/",
+   "quote": "Large language models are trained to seem helpful",
+   "page": "Index on Censorship 2025-11 — History is being written by the AI victors"
+  },
+  {
+   "index": 281,
+   "feature": "hallucination families in history",
+   "claim": "History hallucinations come as invented events, fake citations, misquoted archival material and fictional interpretations, delivered without qualifiers.",
+   "source": "Historica.org — AI Hallucinations and the Risks to Historical Research Integrity",
+   "url": "https://www.historica.org/blog/ai-fictions-historiography-misinformation",
+   "quote": "invented events, fake citations, misquoted archival material, or fictional interpretations",
+   "page": "Historica.org — AI Hallucinations and the Risks to Historical Research Integrity"
+  },
+  {
+   "index": 282,
+   "feature": "dominant-perspective reinforcement",
+   "claim": "Hallucinations replicate training-data bias, reinforcing dominant perspectives while marginalising underrepresented voices.",
+   "source": "Historica.org — AI Hallucinations and the Risks to Historical Research Integrity",
+   "url": "https://www.historica.org/blog/ai-fictions-historiography-misinformation",
+   "quote": "",
+   "page": "Historica.org — AI Hallucinations and the Risks to Historical Research Integrity"
+  },
+  {
+   "index": 283,
+   "feature": "polarisation motive",
+   "claim": "8 of 45 inspected flagged articles pushed a side; one user flipped battle outcomes from Mixed Results to Victory then generated related Albanian-history articles.",
+   "source": "Brooks, Eggert & Peskoff 2024 — The Rise of AI-Generated Content in Wikipedia (arXiv 2410.08044, WikiNLP/EMNLP 2024)",
+   "url": "https://arxiv.org/html/2410.08044",
+   "quote": "partial towards a specific viewpoint",
+   "page": "Brooks, Eggert & Peskoff 2024 — The Rise of AI-Generated Content in Wikipedia (arXiv 2410.08044, WikiNLP/EMNLP 2024)"
   }
  ]
 }

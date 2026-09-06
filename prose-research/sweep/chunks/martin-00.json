@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 0,
+ "indices": [
+  330,
+  331,
+  332,
+  333,
+  334,
+  335,
+  336,
+  337,
+  338,
+  339,
+  340,
+  341,
+  342,
+  343,
+  344
+ ],
+ "claims": [
+  {
+   "index": 330,
+   "feature": "deliberately dry register",
+   "claim": "Because the book masquerades as a historical document, its prose is deliberately dry and staid.",
+   "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
+   "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
+   "quote": "dry and staid",
+   "page": "Fire and Blood review: Don't expect a novel"
+  },
+  {
+   "index": 331,
+   "feature": "whole lives in a paragraph",
+   "claim": "Events are relayed so densely that characters can live full lives in the space of a single paragraph.",
+   "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
+   "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
+   "quote": "live full lives in the space of a single paragraph",
+   "page": "Fire and Blood review: Don't expect a novel"
+  },
+  {
+   "index": 332,
+   "feature": "unreliable-narrator distance",
+   "claim": "Gyldayn is framed as an extremely unreliable narrator, and that distance keeps readers from investing in characters who rarely stay long enough to be known.",
+   "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
+   "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
+   "quote": "an extremely unreliable narrator",
+   "page": "Fire and Blood review: Don't expect a novel"
+  },
+  {
+   "index": 333,
+   "feature": "Silmarillion test",
+   "claim": "Nugent's rule of thumb: readers who enjoyed The Silmarillion will like this; others should steer clear.",
+   "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
+   "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
+   "quote": "If not, steer clear.",
+   "page": "Fire and Blood review: Don't expect a novel"
+  },
+  {
+   "index": 334,
+   "feature": "set-piece chapters inside the annal",
+   "claim": "At least three chapters are packed densely enough with intrigue and set-pieces that each could sustain a series of its own.",
+   "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
+   "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
+   "quote": "so packed with Machiavellian machinations",
+   "page": "Fire and Blood review: Don't expect a novel"
+  },
+  {
+   "index": 335,
+   "feature": "critical split on the dry voice",
+   "claim": "Critics divided sharply on the register: the Independent, GQ and Rifkind found the dry historical voice flat or a synopsis, while Dan Jones found the chronological telling propulsive and Lough called it the best book in the series in 18 years.",
+   "source": "Winter Is Coming critics roundup, 23 Nov 2018",
+   "url": "https://winteriscoming.net/2018/11/23/george-rr-martin-critics-fire-and-blood/",
+   "quote": "",
+   "page": "What are the critics saying about Fire & Blood?"
+  },
+  {
+   "index": 336,
+   "feature": "roundup link set",
+   "claim": "The roundup links the Independent, Publishers Weekly, GQ, The Times, the Sunday Times, Tor.com and Mental Floss; it does not link NYT, Guardian or Vox reviews, and none were found.",
+   "source": "Winter Is Coming critics roundup, 23 Nov 2018",
+   "url": "https://winteriscoming.net/2018/11/23/george-rr-martin-critics-fire-and-blood/",
+   "quote": "",
+   "page": "What are the critics saying about Fire & Blood?"
+  },
+  {
+   "index": 337,
+   "feature": "dry and clinical historical writing",
+   "claim": "Martin assumes historical writing should be dry and clinical and lets events do the talking, so even an aerial dragon duel between brothers falls flat.",
+   "source": "Roisin O'Connor, The Independent, Nov 2018",
+   "url": "https://www.independent.co.uk/arts-entertainment/books/reviews/fire-and-blood-review-george-rr-martin-game-of-thrones-targaryens-winds-of-winter-a8640791.html",
+   "quote": "historical writing should be dry and clinical",
+   "page": "Fire and Blood review"
+  },
+  {
+   "index": 338,
+   "feature": "homework effect",
+   "claim": "The dense, name-heavy history reads like a mildly interesting but tedious assigned piece of homework.",
+   "source": "Roisin O'Connor, The Independent, Nov 2018",
+   "url": "https://www.independent.co.uk/arts-entertainment/books/reviews/fire-and-blood-review-george-rr-martin-game-of-thrones-targaryens-winds-of-winter-a8640791.html",
+   "quote": "a mildly interesting, but often tedious, piece of homework",
+   "page": "Fire and Blood review"
+  },
+  {
+   "index": 339,
+   "feature": "name-repetition burden",
+   "claim": "The difficulty is complexity rather than length: at least six characters are named Aegon and the reader struggles after the first hundred pages.",
+   "source": "Roisin O'Connor, The Independent, Nov 2018",
+   "url": "https://www.independent.co.uk/arts-entertainment/books/reviews/fire-and-blood-review-george-rr-martin-game-of-thrones-targaryens-winds-of-winter-a8640791.html",
+   "quote": "at least six are called Aegon",
+   "page": "Fire and Blood review"
+  },
+  {
+   "index": 340,
+   "feature": "Gibbon comparison (publisher copy)",
+   "claim": "The publisher pitches the in-universe account as having the scope and grandeur of Gibbon's Decline and Fall.",
+   "source": "Roisin O'Connor, The Independent, Nov 2018",
+   "url": "https://www.independent.co.uk/arts-entertainment/books/reviews/fire-and-blood-review-george-rr-martin-game-of-thrones-targaryens-winds-of-winter-a8640791.html",
+   "quote": "scope and grandeur of Gibbon's",
+   "page": "Fire and Blood review"
+  },
+  {
+   "index": 341,
+   "feature": "dry, dusty historical screed",
+   "claim": "Martin is wholly committed to a dry, dusty historical screed as the book's style.",
+   "source": "David Levesley, GQ (UK), Nov 2018",
+   "url": "https://www.gq-magazine.co.uk/article/fire-and-blood-review",
+   "quote": "a dry, dusty historical screed",
+   "page": "Fire and Blood review (GQ rolling review)"
+  },
+  {
+   "index": 342,
+   "feature": "maester's voice erases women",
+   "claim": "The maester's voice compresses women's diplomatic parleys into sentences while indistinguishable men get pages of bluster, which Levesley reads as Martin's deliberate statement on how history brushes over women.",
+   "source": "David Levesley, GQ (UK), Nov 2018",
+   "url": "https://www.gq-magazine.co.uk/article/fire-and-blood-review",
+   "quote": "these fascinating situations are over in sentences",
+   "page": "Fire and Blood review (GQ rolling review)"
+  },
+  {
+   "index": 343,
+   "feature": "Homeric roll-call without tension",
+   "claim": "Like Homer, Martin relishes a pageant of near-indistinguishable names to convey the scope of combat, but unlike Homer generates little narrative tension.",
+   "source": "David Levesley, GQ (UK), Nov 2018",
+   "url": "https://www.gq-magazine.co.uk/article/fire-and-blood-review",
+   "quote": "a pageant of almost indistinguishable names",
+   "page": "Fire and Blood review (GQ rolling review)"
+  },
+  {
+   "index": 344,
+   "feature": "brisk summary with brief dramatic bursts",
+   "claim": "Dramatic passages with snatches of dialogue and detailed battles last only a few pages before the text returns to brisk summary.",
+   "source": "Publishers Weekly review, 19 Nov 2018",
+   "url": "https://www.publishersweekly.com/978-1-5247-9628-0",
+   "quote": "a return to brisk summary",
+   "page": "Fire & Blood (PW review)"
+  }
+ ]
+}

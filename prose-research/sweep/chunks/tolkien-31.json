@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 31,
+ "indices": [
+  838,
+  839,
+  840,
+  841,
+  842,
+  843,
+  844,
+  845,
+  846,
+  847,
+  848,
+  849,
+  850,
+  851,
+  852
+ ],
+ "claims": [
+  {
+   "index": 838,
+   "feature": "language intact by speaker",
+   "claim": "The Tolkien Library review states Tolkien's language is left intact in the mouths of the proper characters, delivered with highly trained diction that keeps the subtle differences in accents of the book.",
+   "source": "Review: The BBC Lord of the Rings Dramatization (Tolkien Library)",
+   "url": "https://tolkienlibrary.com/press/850-lord-of-the-rings-bbc-dramatization.php",
+   "quote": "left intact in the mouths of the proper characters",
+   "page": ""
+  },
+  {
+   "index": 839,
+   "feature": "poems set to music",
+   "claim": "The production set many poems to music, with Bill Nighy singing the fall of Gil-galad and Bilbo's Last Song and Douglas Livingstone reciting the Khazad-dûm poem.",
+   "source": "Review: The BBC Lord of the Rings Dramatization (Tolkien Library)",
+   "url": "https://tolkienlibrary.com/press/850-lord-of-the-rings-bbc-dramatization.php",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 840,
+   "feature": "Aragorn's dual register",
+   "claim": "Brunstrom hears Robert Stephens's Prancing-Pony rusticity remain a leitmotif against his later kingly majesty, and notes Sibley keeps as much of Tolkien's dialogue as possible.",
+   "source": "The 1981 BBC Lord of the Rings radio adaptation reviewed (Conrad Brunstrom)",
+   "url": "https://conradbrunstrom.wordpress.com/2020/12/05/the-1981-bbc-lord-of-the-rings-radio-adaptation-reviewed/",
+   "quote": "remains a leitmotif",
+   "page": ""
+  },
+  {
+   "index": 841,
+   "feature": "description moved into dialogue",
+   "claim": "To spare the narrator, descriptions were transferred into dialogue, so that Sam is awkwardly forced to narrate his Shelob fight in real time.",
+   "source": "The 1981 BBC Lord of the Rings radio adaptation reviewed (Conrad Brunstrom)",
+   "url": "https://conradbrunstrom.wordpress.com/2020/12/05/the-1981-bbc-lord-of-the-rings-radio-adaptation-reviewed/",
+   "quote": "awkwardly forced to narrate",
+   "page": ""
+  },
+  {
+   "index": 842,
+   "feature": "battle told between verses",
+   "claim": "The Pelennor Fields sequence interweaves battle dialogue between verses of a Rohan lay written afterwards.",
+   "source": "The 1981 BBC Lord of the Rings radio adaptation reviewed (Conrad Brunstrom)",
+   "url": "https://conradbrunstrom.wordpress.com/2020/12/05/the-1981-bbc-lord-of-the-rings-radio-adaptation-reviewed/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 843,
+   "feature": "Tolkien's words almost exclusively",
+   "claim": "Brundige reports Sibley and Bakewell use Tolkien's words almost exclusively except for stage directions, and shun flashback and the narrator's voice as much as possible.",
+   "source": "The BBC Radio Play of LOTR — a Fan's Review (Ellen Brundige, istad.org)",
+   "url": "http://www.istad.org/tolkien/sibley.html",
+   "quote": "use Tolkien's words almost exclusively",
+   "page": "Appendix A"
+  },
+  {
+   "index": 844,
+   "feature": "alliterative lines adapted from prose",
+   "claim": "For the Pelennor the adapters combed Tolkien's prose and recast lines of it in metre and alliteration as extra ballad stanzas, e.g. 'crashed to the ground with the king crushed beneath him'.",
+   "source": "The BBC Radio Play of LOTR — a Fan's Review (Ellen Brundige, istad.org)",
+   "url": "http://www.istad.org/tolkien/sibley.html",
+   "quote": "with the king crushed beneath him",
+   "page": ""
+  },
+  {
+   "index": 845,
+   "feature": "courtly speech made flesh",
+   "claim": "Brundige praises a Faramir whose courtly speech shows his quality and an Aragorn whose manner of speech is altered not a jot, as proof that Tolkien's heroes can sound like flesh-and-blood people.",
+   "source": "The BBC Radio Play of LOTR — a Fan's Review (Ellen Brundige, istad.org)",
+   "url": "http://www.istad.org/tolkien/sibley.html",
+   "quote": "manner of speech altered not a jot",
+   "page": ""
+  },
+  {
+   "index": 846,
+   "feature": "language given wings by radio",
+   "claim": "Brundige argues that language is part of what makes the book stand out and radio gives it full wings to fly.",
+   "source": "The BBC Radio Play of LOTR — a Fan's Review (Ellen Brundige, istad.org)",
+   "url": "http://www.istad.org/tolkien/sibley.html",
+   "quote": "radio gives it full wings to fly",
+   "page": ""
+  },
+  {
+   "index": 847,
+   "feature": "narrator as authorial voice",
+   "claim": "Sibley (2019) said he used a narrator because it lets you capture the authorial voice of the book, convey place and passing time, and move across scenes when the Fellowship splits.",
+   "source": "Stuart D. Lee, 'A Milestone in BBC History? The 1955-56 Radio Dramatization of The Lord of the Rings' (Oxford ORA)",
+   "url": "https://ora.ox.ac.uk/objects/uuid:fd07c3e1-c729-47f3-ba24-f568968eedce/files/rbv73c0908",
+   "quote": "capture the authorial voice of the book",
+   "page": "footnote 7"
+  },
+  {
+   "index": 848,
+   "feature": "pronunciation and Elvish speech",
+   "claim": "Contains Moderate Peril notes great care was taken with pronunciation and with dialogue spoken in Elvish and the Black Speech, and that characterisations and dialogue were extremely well realised.",
+   "source": "The Lord of the Rings — BBC Radio Adaptation (1981) (Contains Moderate Peril)",
+   "url": "https://www.containsmoderateperil.com/blog/2015/11/24/the-lord-of-the-rings-bbc-radio-adaptation-1981",
+   "quote": "the delivery of dialogue spoken in Elvish",
+   "page": ""
+  },
+  {
+   "index": 849,
+   "feature": "narrator's strong voice",
+   "claim": "Sibley's own page credits Gerard Murphy with the series' strong narrative voice, notes Christopher Tolkien's pronunciation cassette, and concedes that Tolkien's interlaced chronology could not be applied to a dramatic presentation.",
+   "source": "Brian Sibley: The Works — The Lord of the Rings (BBC Radio 1981)",
+   "url": "http://briansibleytheworks.blogspot.com/2008/01/this-page-is-still-under-construction_23.html",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 850,
+   "feature": "dialogue without its setting",
+   "claim": "Tolkien told Tiller in 1956 that dramatisation results in too great an emphasis on dialogue, mostly with its setting removed.",
+   "source": "The Lord of the Rings (1955 radio series) (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1955_radio_series)",
+   "quote": "too great an emphasis on dialogue",
+   "page": ""
+  },
+  {
+   "index": 851,
+   "feature": "sillification",
+   "claim": "In 1957 Tolkien wrote he would find vulgarisation less painful than the sillification achieved by the BBC.",
+   "source": "The Lord of the Rings (1955 radio series) (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1955_radio_series)",
+   "quote": "sillification",
+   "page": ""
+  },
+  {
+   "index": 852,
+   "feature": "cutting versus compressing",
+   "claim": "Series One, which cut scenes, was welcomed (appreciation 64/100); Series Two, which compressed them, was heard as a footling and ridiculous-sounding adventure story.",
+   "source": "The Lord of the Rings (1955 radio series) (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1955_radio_series)",
+   "quote": "",
+   "page": ""
+  }
+ ]
+}

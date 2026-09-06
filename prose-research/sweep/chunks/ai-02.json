@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 2,
  "indices": [
-  225,
-  226,
-  227,
-  228,
-  229,
-  230,
-  231,
-  232,
-  233,
-  234,
-  235,
-  236,
-  237,
-  238,
-  239
+  284,
+  285,
+  286,
+  287,
+  288,
+  289,
+  290,
+  291,
+  292,
+  293,
+  294,
+  295,
+  296,
+  297,
+  298
  ],
  "claims": [
   {
-   "index": 225,
-   "feature": "em dash",
-   "claim": "Measured human em dash density (mean 3.23, range 0.33–17.12 per 1,000 words) envelops the LLM range (0.0–10.62 across twelve models), and the rate is a provider-specific fine-tuning artifact, with Llama's RLHF suppressing it to zero.",
-   "source": "arXiv 2603.27006 — E. M. Freeburg, The Last Fingerprint",
-   "url": "https://arxiv.org/html/2603.27006v1",
-   "quote": "a diagnostic signature of how a model was fine-tuned",
-   "page": "How Markdown Training Shapes LLM Prose"
-  },
-  {
-   "index": 226,
-   "feature": "em dash",
-   "claim": "Readers who relied on em dashes to spot ChatGPT text performed only marginally better than chance, and no single lexical or punctuation feature is definitive.",
-   "source": "The Conversation — Roger J. Kreuz, 2025-07-30",
-   "url": "https://theconversation.com/too-many-em-dashes-weird-words-like-delves-spotting-text-written-by-chatgpt-is-still-more-art-than-science-259629",
-   "quote": "only marginally better than chance",
-   "page": "Spotting text written by ChatGPT is still more art than science"
-  },
-  {
-   "index": 227,
-   "feature": "em dash",
-   "claim": "Heavy em dash use in contemporary fiction has been taught by New York editors since the 1990s, and the tells cited against Shy Girl (flat voice, improbable similes, em dashes) equally fit unedited, neurodivergent or ESL human writing.",
-   "source": "Anne R. Allen, 2026-03-28",
-   "url": "https://annerallen.com/2026/03/does-the-shy-girl-ai-accusation-mean-writers-should-stop-using-the-em-dash/",
-   "quote": "also be attributed to amateurish or unedited writing",
-   "page": "Does the Shy Girl Mess Mean We Give Up the Em Dash?"
-  },
-  {
-   "index": 228,
-   "feature": "em dash; triads; Oxford comma",
-   "claim": "Em dashes, serial commas and the rule of three are basic tenets of fiction that a human author can deploy in a single self-written sentence, so their presence is not evidence of generation.",
-   "source": "Sarah Goehrke (Substack), 2026-08-21",
-   "url": "https://sarahgoehrke.substack.com/p/ai-em-dashes-and-witch-hunts",
-   "quote": "touted as being 'clear indicators of AI usage'",
-   "page": "AI, Em-Dashes, and Witch Hunts"
-  },
-  {
-   "index": 229,
-   "feature": "triads / rule of three",
-   "claim": "The tricolon is a canonical human device — Caesar, Lincoln, Churchill, King, fairy tales, Aristotle's beginning-middle-end — because three is the smallest count that makes a pattern.",
-   "source": "Wikipedia — Rule of three (writing)",
-   "url": "https://en.wikipedia.org/wiki/Rule_of_three_(writing)",
-   "quote": "combines both brevity and rhythm",
-   "page": "Rule of three (writing)"
-  },
-  {
-   "index": 230,
-   "feature": "triads / rule of three",
-   "claim": "Craft guidance for novelists teaches deliberate use of triads (omne trium perfectum, Dickens' three spirits, three-act structure), with the only caution being restraint.",
-   "source": "Jericho Writers — Amy de la Force, 2022",
-   "url": "https://jerichowriters.com/the-rule-of-three-in-writing/",
-   "quote": "Don't overdo it.",
-   "page": "The Rule Of Three In Writing: Our Guide"
-  },
-  {
-   "index": 231,
-   "feature": "triads / rule of three",
-   "claim": "A detector vendor concedes that LLM triads are a reflection of effective communication strategies in human training data and that professional writing employs the rule of three for clarity.",
-   "source": "GPTZero blog — Faizan Mehdi, 2024-03-04",
-   "url": "https://gptzero.me/news/the-rule-of-three/",
-   "quote": "a reflection of effective communication strategies embedded within their training data",
-   "page": "How to Break Free from GPT's Rule of Three in Writing"
-  },
-  {
-   "index": 232,
-   "feature": "antithesis / not X but Y",
-   "claim": "Even a writer who calls 'It's not X; it's Y' the biggest ChatGPT tell concedes contrastive antithesis is concise, was stylish before saturation, and is failing as a fashion cycle rather than as a device.",
-   "source": "Hardly Working (Substack) — Harjas Sandhu, 2026-01-11",
-   "url": "https://hardlyworking1.substack.com/p/how-to-avoid-sounding-like-a-stupid",
-   "quote": "contrastive antithesis is part of ChatGPT's lexicon for a reason.",
-   "page": "Some alternatives to \"It's not X; it's Y\""
-  },
-  {
-   "index": 233,
-   "feature": "parallel constructions / antithesis",
-   "claim": "Wikipedia's own AI-cleanup guide states parallel constructions are common among human writers (myth-busting listicles), that none of its signs prove AI authorship, and that human writing is converging on LLM style.",
-   "source": "Wikipedia:Signs of AI writing",
+   "index": 284,
+   "feature": "undue significance and legacy",
+   "claim": "Generic sentences inflate importance by asserting legacy, pivotal moments and broader trends the sources do not support.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
    "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
-   "quote": "Not all text featuring these indicators is AI-generated",
-   "page": "Signs of AI writing"
+   "quote": "marking a pivotal moment in the evolution of regional statistics",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
   },
   {
-   "index": 234,
-   "feature": "detection heuristics",
-   "claim": "Wikipedia's guide warns that automated detectors have non-trivial error rates and cites a 2025 study finding human discrimination of LLM text no better than chance.",
-   "source": "Wikipedia:Signs of AI writing",
+   "index": 285,
+   "feature": "promotional travel-brochure register",
+   "claim": "Superlatives and brochure adjectives (nestled, breathtaking, vibrant) leak into what should be neutral description.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
    "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
-   "quote": "Human speech and writing is being influenced by LLMs",
-   "page": "Signs of AI writing"
+   "quote": "Nestled within the breathtaking region of Gonder in Ethiopia",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
   },
   {
-   "index": 235,
-   "feature": "vocabulary (delve)",
-   "claim": "Nigerian and other British-colonial-educated English speakers use 'delve' as an ordinary word from school onward, so a single-word tell convicts entire human dialects.",
-   "source": "Vanguard (Nigeria), 2024-04",
-   "url": "https://www.vanguardngr.com/2024/04/nigerians-tackle-american-author-for-claiming-delve-is-only-used-by-chatgpt/",
-   "quote": "no one used basic words like 'delve'",
-   "page": "Nigerians tackle American author for claiming 'delve' is only used by ChatGPT"
+   "index": 286,
+   "feature": "participial gloss tail",
+   "claim": "Sentences end in a present-participle clause asserting significance with no supporting substance.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "further enhancing its significance as a dynamic hub",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
   },
   {
-   "index": 236,
-   "feature": "vocabulary (delve) — counter-counter",
-   "claim": "Corpus analysis finds the 21 LLM focal words (delve, intricate, underscore, realm...) are probably not overrepresented in training data and not especially prevalent in any human English variety, undercutting the 'it's Nigerian English' defence while confirming the base-rate shift in LLM output is real and likely post-training.",
-   "source": "arXiv 2412.11385 — Juzek & Ward, Why Does ChatGPT 'Delve' So Much? (COLING 2025)",
-   "url": "https://arxiv.org/html/2412.11385v1",
-   "quote": "probably not overrepresented in the training data",
-   "page": "Sources of Lexical Overrepresentation in LLMs"
+   "index": 287,
+   "feature": "vague attribution",
+   "claim": "Claims are hung on undefined authorities (industry reports, experts, some critics) instead of named sources.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Industry reports suggest",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
   },
   {
-   "index": 237,
-   "feature": "machine detectors (perplexity)",
-   "claim": "Seven commercial detectors flagged 61.22% of 91 human-written TOEFL essays as AI (19.78% unanimously, 97.80% by at least one) while scoring near-perfectly on US 8th-grade essays, because they punish low-perplexity plain prose.",
-   "source": "arXiv 2304.02819 — Liang, Yuksekgonul, Mao, Wu, Zou, 2023",
-   "url": "https://arxiv.org/abs/2304.02819",
-   "quote": "average false positive rate: 61.22%",
-   "page": "GPT detectors are biased against non-native English writers"
+   "index": 288,
+   "feature": "canned notability emphasis",
+   "claim": "Text characterises the independence and reach of its coverage instead of stating what happened.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
   },
   {
-   "index": 238,
-   "feature": "machine detectors (evasion)",
-   "claim": "A single 'employ literary language' self-edit prompt dropped detection of ChatGPT essays from up to 100% to up to 13% and of abstracts from 68% to 28%, so ornate prose evades detectors — the inverse of the folk tells.",
-   "source": "arXiv 2304.02819 — Liang et al., 2023",
-   "url": "https://arxiv.org/abs/2304.02819",
-   "quote": "detection rates dropping from up to 100% to up to 13%",
-   "page": "GPT detectors are biased against non-native English writers"
+   "index": 289,
+   "feature": "outline-like closer",
+   "claim": "Formulaic 'Despite X, faces challenges... future prospects' paragraphs close sections with vague solutions.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Despite its success, the Panama Canal faces challenges",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
   },
   {
-   "index": 239,
-   "feature": "machine detectors (bias)",
-   "claim": "Detectors learn that predictable word choice and simple sentences mean AI, so non-native writers' restricted vocabulary is misread as machine output.",
-   "source": "The Markup — Tara García Mathewson, 2023-08-14",
-   "url": "https://themarkup.org/machine-learning/2023/08/14/ai-detection-tools-falsely-accuse-international-students-of-cheating",
-   "quote": "inherently discriminates against non-native authors",
-   "page": "AI Detection Tools Falsely Accuse International Students of Cheating"
+   "index": 290,
+   "feature": "AI-vocabulary density",
+   "claim": "Abnormal concentration of delve, pivotal, underscore, testament, enduring, tapestry within a short span.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "enduring testament to the influence",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 291,
+   "feature": "copula avoidance",
+   "claim": "Plain 'is/are' is replaced by serves as, functions as, stands as, marks.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "serves as LAAA's exhibition space for contemporary art",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 292,
+   "feature": "vague connection wording",
+   "claim": "'Associated with', 'in connection with' replaces a named relation between people and events.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "being associated with leadership",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 293,
+   "feature": "negative parallelism",
+   "claim": "'Not only X but also Y' and 'not X but Y' contrasts recur far above human frequency.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "not only a work of self-representation, but a visual document",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 294,
+   "feature": "title treated as proper noun",
+   "claim": "Lead sentences treat a list or descriptive title as if it named an entity.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "EuroGames editions is the chronological list",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 295,
+   "feature": "templated Awards and recognition section",
+   "claim": "A near-ubiquitous 'Awards and recognition' section appears in generated biographies regardless of subject.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 296,
+   "feature": "rule of three",
+   "claim": "Items are grouped in threes for rhythm rather than because the record has three.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 297,
+   "feature": "em-dash overuse",
+   "claim": "Em dashes separate clauses at an abnormally high rate.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 298,
+   "feature": "section-summary recap",
+   "claim": "A redundant sentence summarising the section it closes (a 2022-2024 marker now mostly gone).",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
   }
  ]
 }

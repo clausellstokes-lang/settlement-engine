@@ -1,0 +1,128 @@
+{
+ "name": "ai",
+ "chunk": 5,
+ "indices": [
+  329,
+  330,
+  331,
+  332,
+  333,
+  334,
+  335,
+  336,
+  337,
+  338,
+  339,
+  340
+ ],
+ "claims": [
+  {
+   "index": 329,
+   "feature": "compound plausibility layering",
+   "claim": "Every fabricated citation showed multiple failure modes at once; 76% of total fabrications layered semantic plausibility over invention.",
+   "source": "Ansari 2026 — Compound Deception in Elite Peer Review: A Failure Mode Taxonomy of 100 Fabricated Citations at NeurIPS 2025 (arXiv 2602.05930)",
+   "url": "https://arxiv.org/html/2602.05930",
+   "quote": "",
+   "page": "Ansari 2026 — Compound Deception in Elite Peer Review: A Failure Mode Taxonomy of 100 Fabricated Citations at NeurIPS 2025 (arXiv 2602.05930)"
+  },
+  {
+   "index": 330,
+   "feature": "invented attraction among real ones",
+   "claim": "'Weldborough Hot Springs' was listed beside real Tasmanian springs with AI images; coach parties detoured to a village with no springs for months.",
+   "source": "Euronews Travel 2026-01-30 — How an AI-generated travel website sent tourists to a non-existent hot spring attraction",
+   "url": "https://euronews.com/travel/2026/01/30/how-an-ai-generated-travel-website-sent-tourists-to-a-non-existent-hot-spring-attraction",
+   "quote": "If you find the hot springs, come back",
+   "page": "Euronews Travel 2026-01-30 — How an AI-generated travel website sent tourists to a non-existent hot spring attraction"
+  },
+  {
+   "index": 331,
+   "feature": "invented landmark and wrong hours",
+   "claim": "A 'Sacred Canyon of Humantay' sent tourists up a road to nothing; ChatGPT ropeway hours stranded hikers after dark.",
+   "source": "Euronews Travel 2026-01-30 — How an AI-generated travel website sent tourists to a non-existent hot spring attraction",
+   "url": "https://euronews.com/travel/2026/01/30/how-an-ai-generated-travel-website-sent-tourists-to-a-non-existent-hot-spring-attraction",
+   "quote": "",
+   "page": "Euronews Travel 2026-01-30 — How an AI-generated travel website sent tourists to a non-existent hot spring attraction"
+  },
+  {
+   "index": 332,
+   "feature": "hallucinated toponyms",
+   "claim": "An AI-generated NWS map invented the towns 'Orangeotild' and 'Whata Bod'.",
+   "source": "Vice — An AI-Generated NWS Map Hallucinated Fake Towns in Idaho",
+   "url": "https://www.vice.com/en/article/an-ai-generated-nws-map-hallucinated-fake-towns-in-idaho/",
+   "quote": "Whata Bod",
+   "page": "Vice — An AI-Generated NWS Map Hallucinated Fake Towns in Idaho"
+  },
+  {
+   "index": 333,
+   "feature": "invented record collections",
+   "claim": "AI tools fabricate citations and invent whole record collections that do not exist.",
+   "source": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about",
+   "url": "https://denyseallen.substack.com/p/ai-safety-family-historians-genealogy",
+   "quote": "They invent record collections.",
+   "page": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about"
+  },
+  {
+   "index": 334,
+   "feature": "fictional ancestors with confidence",
+   "claim": "Fabricated sources, invented dates and fictional ancestors are presented with total confidence.",
+   "source": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about",
+   "url": "https://denyseallen.substack.com/p/ai-safety-family-historians-genealogy",
+   "quote": "fictional ancestors with total confidence",
+   "page": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about"
+  },
+  {
+   "index": 335,
+   "feature": "gap-filling agents",
+   "claim": "Agents told to fill gaps generate fake marriage records, invented census entries and people who never existed.",
+   "source": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about",
+   "url": "https://denyseallen.substack.com/p/ai-safety-family-historians-genealogy",
+   "quote": "",
+   "page": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about"
+  },
+  {
+   "index": 336,
+   "feature": "summaries worse than human on every criterion",
+   "claim": "In ASIC's trial, AI summaries of five parliamentary-inquiry submissions scored below human summaries on every criterion and might create extra work.",
+   "source": "Crikey 2024-09-03 — AI worse than humans in every way at summarising information, government trial finds",
+   "url": "https://www.crikey.com.au/2024/09/03/ai-worse-summarising-information-humans-government-trial/",
+   "quote": "might actually create additional work for people",
+   "page": "Crikey 2024-09-03 — AI worse than humans in every way at summarising information, government trial finds"
+  },
+  {
+   "index": 337,
+   "feature": "detector unreliability",
+   "claim": "The Signpost review found the detectors black-box, disagreeing across languages, uncorrected for concept drift, with human editing reportedly raising AI scores.",
+   "source": "Wikipedia Signpost 2024-10-19 Recent research — review of Brooks et al.",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/2024-10-19/Recent_research",
+   "quote": "concept drift",
+   "page": "Wikipedia Signpost 2024-10-19 Recent research — review of Brooks et al."
+  },
+  {
+   "index": 338,
+   "feature": "rejected sign: citation placement",
+   "claim": "End-of-paragraph citation placement was rejected as an AI sign because humans have written that way for two decades.",
+   "source": "Wikipedia talk:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
+   "quote": "not a reliable indicator",
+   "page": "Wikipedia talk:Signs of AI writing"
+  },
+  {
+   "index": 339,
+   "feature": "tells are non-stationary",
+   "claim": "The Markdown sign was downgraded 2026-08-27 while 'vague expression of connection' (2026-08-19) and 'pro-authoritarian bias' (2026-08-20) were added; a tell list is a dated snapshot.",
+   "source": "Wikipedia:Signs of AI writing — revision history (2026-08-12 to 2026-09-06)",
+   "url": "https://en.wikipedia.org/w/index.php?title=Wikipedia:Signs_of_AI_writing&action=history&limit=100",
+   "quote": "LLMs aren't bad at wikitext to this extent anymore",
+   "page": "Wikipedia:Signs of AI writing — revision history (2026-08-12 to 2026-09-06)"
+  },
+  {
+   "index": 340,
+   "feature": "task-specific text is closer to human",
+   "claim": "Wikipedia-task generations (paragraph writing, lead summarisation, neutralisation) resemble editor text more than open-ended generation; detectors average 58-78%.",
+   "source": "WETBench 2025 — A Benchmark for Detecting Task-Specific Machine-Generated Text on Wikipedia (arXiv 2507.03373)",
+   "url": "https://arxiv.org/html/2507.03373v1",
+   "quote": "detectors struggle with MGT in realistic generation scenarios",
+   "page": "WETBench 2025 — A Benchmark for Detecting Task-Specific Machine-Generated Text on Wikipedia (arXiv 2507.03373)"
+  }
+ ]
+}

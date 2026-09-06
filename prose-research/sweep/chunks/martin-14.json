@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 14,
+ "indices": [
+  540,
+  541,
+  542,
+  543,
+  544,
+  545,
+  546,
+  547,
+  548,
+  549,
+  550,
+  551,
+  552,
+  553,
+  554
+ ],
+ "claims": [
+  {
+   "index": 540,
+   "feature": "descriptive passages",
+   "claim": "The descriptive passages are marvellous; you can smell the spice and taste every cup of wine.",
+   "source": "Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (author's 2011 repost)",
+   "url": "http://paullevinson.blogspot.com/2011/03/game-of-thrones-my-fall-2006-review-of.html",
+   "quote": "you can smell the spice",
+   "page": ""
+  },
+  {
+   "index": 541,
+   "feature": "accomplished prose",
+   "claim": "The 1996 trade review credits superbly developed characters and accomplished prose.",
+   "source": "Publishers Weekly, review of A Game of Thrones, 29 Jul 1996",
+   "url": "https://www.publishersweekly.com/978-0-553-10354-0",
+   "quote": "superbly developed characters, accomplished prose",
+   "page": ""
+  },
+  {
+   "index": 542,
+   "feature": "no progression",
+   "claim": "Across four books there is no development, progression or climax; the plot is like banging unrelated chords on a piano.",
+   "source": "Matt Hilliard, 'A Song of Ice and Fire 1–4', Yet There Are Statues, 14 Aug 2010",
+   "url": "https://matthilliard.wordpress.com/2010/08/14/a-song-of-ice-and-fire-by-george-r-r-martin/",
+   "quote": "banging an endless series of chords",
+   "page": ""
+  },
+  {
+   "index": 543,
+   "feature": "social rather than physical landscape",
+   "claim": "Martin's world is a social landscape built from people rather than physical description.",
+   "source": "Matt Hilliard, 'A Song of Ice and Fire 1–4', Yet There Are Statues, 14 Aug 2010",
+   "url": "https://matthilliard.wordpress.com/2010/08/14/a-song-of-ice-and-fire-by-george-r-r-martin/",
+   "quote": "he has constructed a social landscape",
+   "page": ""
+  },
+  {
+   "index": 544,
+   "feature": "intrigue over elevated prose",
+   "claim": "The series' approach emphasised intrigue and realism over magic and elevated prose.",
+   "source": "Matt Hilliard, 'A Song of Ice and Fire 1–4', Yet There Are Statues, 14 Aug 2010",
+   "url": "https://matthilliard.wordpress.com/2010/08/14/a-song-of-ice-and-fire-by-george-r-r-martin/",
+   "quote": "intrigue and realism over magic and elevated prose",
+   "page": ""
+  },
+  {
+   "index": 545,
+   "feature": "titled viewpoint chapters",
+   "claim": "Naming each chapter for its viewpoint character solves the confusion that shifting POV can cause.",
+   "source": "Shannon Roberts, 'Reviewing A Game of Thrones: a first-50 review', The Editorial Department (20th-anniversary piece; page stamped 2024-01-07)",
+   "url": "https://www.editorialdepartment.com/a-game-of-thrones/",
+   "quote": "a clearly titled chapter solves the problem admirably",
+   "page": ""
+  },
+  {
+   "index": 546,
+   "feature": "opening pace",
+   "claim": "A swift pace and plenty of action introduce three conflicts within the first fifty pages.",
+   "source": "Shannon Roberts, 'Reviewing A Game of Thrones: a first-50 review', The Editorial Department (20th-anniversary piece; page stamped 2024-01-07)",
+   "url": "https://www.editorialdepartment.com/a-game-of-thrones/",
+   "quote": "a swift pace and plenty of action",
+   "page": ""
+  },
+  {
+   "index": 547,
+   "feature": "restrained magic",
+   "claim": "Keeping magic to small, measured doses maintains suspense.",
+   "source": "Shannon Roberts, 'Reviewing A Game of Thrones: a first-50 review', The Editorial Department (20th-anniversary piece; page stamped 2024-01-07)",
+   "url": "https://www.editorialdepartment.com/a-game-of-thrones/",
+   "quote": "keeping the magic to small, measured doses",
+   "page": ""
+  },
+  {
+   "index": 548,
+   "feature": "chapters as short stories",
+   "claim": "Individual chapters are good enough to stand as award-worthy short stories.",
+   "source": "Thomas M. Wagner, SFF180 review of A Dance with Dragons (undated, c. 2011)",
+   "url": "https://sff180.com/reviews/m/martin_george_rr/dance_with_dragons.html",
+   "quote": "good enough to function on their own as award-worthy short stories",
+   "page": ""
+  },
+  {
+   "index": 549,
+   "feature": "out-of-order composition",
+   "claim": "Martin writes chapters out of order and sequences them later, like a film editor.",
+   "source": "Thomas M. Wagner, SFF180 review of A Dance with Dragons (undated, c. 2011)",
+   "url": "https://sff180.com/reviews/m/martin_george_rr/dance_with_dragons.html",
+   "quote": "he writes chapters out of order, and then sequences them later",
+   "page": ""
+  },
+  {
+   "index": 550,
+   "feature": "craft standard",
+   "claim": "The writing never falls below the highest standards of literary craft.",
+   "source": "Thomas M. Wagner, SFF180 review of A Dance with Dragons (undated, c. 2011)",
+   "url": "https://sff180.com/reviews/m/martin_george_rr/dance_with_dragons.html",
+   "quote": "the highest standards of literary craft",
+   "page": ""
+  },
+  {
+   "index": 551,
+   "feature": "detailed realism of prose",
+   "claim": "Martin's uncanny prose style contains a detailed realism that brings Tyrion to life on the page.",
+   "source": "Nicholas Pompella, '25 Years On, a Mixed Legacy for A Game of Thrones', National Review, 7 Aug 2021 (read via Wayback)",
+   "url": "https://www.nationalreview.com/2021/08/25-years-on-a-mixed-legacy-for-a-game-of-thrones/",
+   "quote": "Martin’s uncanny prose style contains a detailed realism",
+   "page": ""
+  },
+  {
+   "index": 552,
+   "feature": "politics to the exclusion of all else",
+   "claim": "The book is coarsely obsessed with politics to the exclusion of almost everything but sex and violence.",
+   "source": "Nicholas Pompella, '25 Years On, a Mixed Legacy for A Game of Thrones', National Review, 7 Aug 2021 (read via Wayback)",
+   "url": "https://www.nationalreview.com/2021/08/25-years-on-a-mixed-legacy-for-a-game-of-thrones/",
+   "quote": "coarsely obsessed with politics",
+   "page": ""
+  },
+  {
+   "index": 553,
+   "feature": "fantasy as window dressing",
+   "claim": "The fantasy trappings dress a bloated Agatha Christie whodunit plotline that goes nowhere.",
+   "source": "Nicholas Pompella, '25 Years On, a Mixed Legacy for A Game of Thrones', National Review, 7 Aug 2021 (read via Wayback)",
+   "url": "https://www.nationalreview.com/2021/08/25-years-on-a-mixed-legacy-for-a-game-of-thrones/",
+   "quote": "a type of bloated Agatha Christie plotline",
+   "page": ""
+  },
+  {
+   "index": 554,
+   "feature": "predictability via cynicism",
+   "claim": "The book becomes predictable once the reader reads every event through cynical Machiavellianism.",
+   "source": "Nicholas Pompella, '25 Years On, a Mixed Legacy for A Game of Thrones', National Review, 7 Aug 2021 (read via Wayback)",
+   "url": "https://www.nationalreview.com/2021/08/25-years-on-a-mixed-legacy-for-a-game-of-thrones/",
+   "quote": "the book becomes predictable as the reader grows accustomed",
+   "page": ""
+  }
+ ]
+}
