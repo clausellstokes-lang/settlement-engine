@@ -1,11 +1,11 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 14:36:33 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 14:40:35 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | failed | 0 | — | — | 17:50:58 |
 | ai | finder | critics-direct | result | 45 | — | 128 claims, complete=True @14:02:13 | 17:26:31 |
 | ai | regrade | regrade-r4 | failed | 0 | — | — | 17:50:56 |
-| ai | regrade | regrade-r5 | in-flight | 0 | — | — | 18:36:13 |
+| ai | regrade | regrade-r5 | in-flight | 0 | — | — | 18:40:26 |
 | ai | synth |  | failed | 0 | — | — | 17:50:57 |
 | ai | verifier | i254-268 | result | 6 | — | verdict file WRITTEN | 17:32:27 |
 | ai | verifier | i269-283 | result | 8 | — | verdict file WRITTEN | 17:33:15 |
@@ -148,20 +148,26 @@
 | dnd | verifier | i544-558 | failed | 0 | — | verdict file WRITTEN | 17:51:05 |
 | dnd | verifier | i559-573 | result | 4 | — | verdict file WRITTEN | 18:34:45 |
 | dnd | verifier | i559-573 | failed | 0 | — | verdict file WRITTEN | 17:51:05 |
-| dnd | verifier | i574-588 | in-flight | 18 | — | verdict file absent | 18:36:25 |
-| dnd | verifier | i574-588 | failed | 0 | — | verdict file absent | 17:51:05 |
+| dnd | verifier | i574-588 | result | 19 | — | verdict file WRITTEN | 18:39:16 |
+| dnd | verifier | i574-588 | failed | 0 | — | verdict file WRITTEN | 17:51:05 |
 | dnd | verifier | i589-603 | result | 4 | — | verdict file WRITTEN | 18:34:43 |
 | dnd | verifier | i589-603 | failed | 0 | — | verdict file WRITTEN | 17:51:05 |
-| dnd | verifier | i604-618 | in-flight | 6 | — | verdict file absent | 18:36:32 |
-| dnd | verifier | i604-618 | failed | 0 | — | verdict file absent | 17:51:05 |
-| dnd | verifier | i619-633 | in-flight | 5 | — | verdict file absent | 18:36:24 |
-| dnd | verifier | i619-633 | failed | 0 | — | verdict file absent | 17:51:05 |
+| dnd | verifier | i604-618 | result | 6 | — | verdict file WRITTEN | 18:38:43 |
+| dnd | verifier | i604-618 | failed | 0 | — | verdict file WRITTEN | 17:51:05 |
+| dnd | verifier | i619-633 | result | 5 | — | verdict file WRITTEN | 18:38:26 |
+| dnd | verifier | i619-633 | failed | 0 | — | verdict file WRITTEN | 17:51:05 |
+| dnd | verifier | i634-648 | in-flight | 3 | — | verdict file absent | 18:40:27 |
 | dnd | verifier | i634-648 | failed | 0 | — | verdict file absent | 17:51:05 |
 | dnd | verifier | i64-78 | result | 5 | — | verdict file WRITTEN | 17:40:23 |
+| dnd | verifier | i649-663 | in-flight | 4 | — | verdict file absent | 18:40:33 |
 | dnd | verifier | i649-663 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i664-678 | in-flight | 3 | — | verdict file absent | 18:40:14 |
 | dnd | verifier | i664-678 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i679-693 | in-flight | 5 | — | verdict file absent | 18:40:34 |
 | dnd | verifier | i679-693 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i694-708 | in-flight | 5 | — | verdict file absent | 18:40:34 |
 | dnd | verifier | i694-708 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i709-723 | in-flight | 4 | — | verdict file absent | 18:40:30 |
 | dnd | verifier | i709-723 | failed | 0 | — | verdict file absent | 17:51:06 |
 | dnd | verifier | i724-738 | failed | 0 | — | verdict file absent | 17:51:06 |
 | dnd | verifier | i739-753 | failed | 0 | — | verdict file absent | 17:51:06 |
@@ -210,7 +216,7 @@
 | kay | finder | craft | result | 112 | — | 163 claims, complete=True @14:02:12 | 17:25:51 |
 | kay | regrade | regrade-r4 | failed | 0 | — | — | 17:51:50 |
 | kay | regrade | regrade-r5 | result | 0 | build-kay-regrade.mjs | — | 18:26:34 |
-| kay | synth |  | in-flight | 0 | kay-stats.mjs | — | 18:33:37 |
+| kay | synth |  | in-flight | 0 | kay-stats.mjs | — | 18:38:41 |
 | kay | synth |  | failed | 0 | — | — | 17:51:50 |
 | kay | verifier | i0-14 | result | 2 | — | verdict file WRITTEN | 17:29:44 |
 | kay | verifier | i105-119 | result | 4 | — | verdict file WRITTEN | 17:32:58 |
@@ -272,10 +278,10 @@
 | kay | verifier | i90-104 | result | 4 | — | verdict file WRITTEN | 17:34:44 |
 | leguin | critic |  | result | 32 | critic-leguin.md | — | 18:21:42 |
 | leguin | critic |  | failed | 0 | — | — | 17:51:02 |
-| leguin | finder | academic-2 | in-flight | 20 | — | — | 18:35:51 |
-| leguin | finder | close-2 | in-flight | 25 | — | — | 18:35:27 |
-| leguin | finder | record-register | in-flight | 8 | — | — | 18:35:40 |
-| leguin | finder | voice-2 | in-flight | 16 | — | — | 18:35:33 |
+| leguin | finder | academic-2 | in-flight | 44 | — | 30 claims, complete=False @14:37:34 | 18:40:31 |
+| leguin | finder | close-2 | in-flight | 37 | — | 43 claims, complete=False @14:37:08 | 18:39:41 |
+| leguin | finder | record-register | in-flight | 15 | — | 26 claims, complete=False @14:36:43 | 18:40:34 |
+| leguin | finder | voice-2 | in-flight | 30 | — | 35 claims, complete=False @14:36:52 | 18:40:17 |
 | leguin | regrade | regrade-r4 | result | 0 | build-leguin-r4.mjs | — | 17:31:56 |
 | leguin | synth |  | result | 0 | section-leguin.md | — | 17:50:43 |
 | leguin | verifier | i105-119 | result | 2 | — | verdict file WRITTEN | 17:03:23 |
@@ -362,7 +368,7 @@
 | martin | verifier | i962-983 | result | 5 | — | verdict file WRITTEN | 18:14:43 |
 | martin | verifier | i977-989 | failed | 0 | — | verdict file absent | 17:51:22 |
 | martin | verifier | i984-989 | result | 8 | — | verdict file WRITTEN | 18:19:21 |
-| tolkien | critic |  | in-flight | 0 | — | — | 18:36:32 |
+| tolkien | critic |  | in-flight | 0 | — | — | 18:40:07 |
 | tolkien | critic |  | failed | 0 | — | — | 17:51:50 |
 | tolkien | regrade | regrade-r4 | result | 0 | — | — | 17:47:06 |
 | tolkien | synth |  | result | 0 | section-tolkien.md | — | 18:27:18 |

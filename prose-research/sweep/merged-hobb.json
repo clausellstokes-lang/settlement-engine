@@ -6229,58 +6229,58 @@
   "137": {
    "index": 137,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The first chapter's introduction almost reads like an encyclopaedia about the Six Duchies",
-   "note": "Utrecht thesis PDF fetched and extracted (45 pp.); title page confirms \"Translating Robin Hobb's Assassin's Apprentice\", BA Thesis, Utrecht University, Iris Duits, April 2012. Text: \"In the introduction of the first chapter, this is not yet a major problem, since this part almost reads like an encyclopaedia, offering factual information on the Six Duchies.\" Quote exact, all limbs supported. Locator note: the passage sits on printed p. 15 in ch. 6 (Translation criticism - Translation strategies), not ch. 3 as the claim's page field says.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "this part almost reads like an encyclopaedia, offering factual information",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "138": {
    "index": 138,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Even in English the language seems archaic; long, complex sentences occur",
-   "note": "Same Duits PDF, same paragraph as #137 (printed p. 15): \"Even in English, the language seems a bit archaic, and long, complex sentences occur.\" Quote exact; the sentence immediately follows the encyclopaedia remark, so \"in that encyclopaedic opening\" is supported.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "Even in English, the language seems a bit archaic, and long",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "139": {
    "index": 139,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "English sentence clear and to the point; Dutch seems formal and wordy",
-   "note": "Duits PDF, printed p. 15: comparing Hobb's \"I have spoiled another leaf of the fine stuff...\" with Feberwee and Cuijpers' Dutch - \"The English sentence is clear and to the point, whereas the Dutch sentence seems formal and wordy.\" Quote exact; both limbs on the page.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "The English sentence is clear and to the point",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "140": {
    "index": 140,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Proper names have an important role; translating them well is very important",
-   "note": "Duits PDF, Introduction (printed p. 3): \"Proper names have an important role in this novel, so translating them well is very important.\" Quote exact. \"Central problem\" is supported: the thesis gives proper names two of its nine sections (ch. 4 and ch. 5).",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "Proper names have an important role in this novel",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "141": {
    "index": 141,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Six Duchies nobles name children after virtues, hoping they emulate them",
-   "note": "Kok thesis PDF fetched and extracted (110 pp.); title page confirms \"The Boundaries of Imagination / Important aspects of fantasy translation\", Marlies Kok, Translation Master Thesis, Utrecht readers Naaijkens and Koster. Printed p. 27: \"The nobles of the land called the Six Duchies have the custom to name their children after virtues or traits, in hopes of them emulating that which they were named after in later life...\" Quote exact; every limb supported.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "have the custom to name their children after virtues or traits",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "142": {
    "index": 142,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Readers might not realise the names are English words, not fantastical-sounding",
-   "note": "Kok PDF, printed p. 27: \"...the reader of the translation, who might not realise the names are not fantastical-sounding but English words.\" Quote exact. Context is the Farseer noble names (Shrewd, Chivalry, Verity, Regal, Patience, Desire), so \"Hobb's noble names\" is supported; \"ordinary\" is the claim's own gloss on \"English words\".",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "the names are not fantastical-sounding but English words",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "143": {
    "index": 143,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Half-translating loses the habit; it seems too infrequent to signify",
-   "note": "Kok PDF, printed p. 28: \"By only translating half of the noble names to something of similar meaning in the target language, the underlying cultural habit of naming noble children after virtues is lost on the reader of the translation, since in translation it does not seem to happen often enough to be of significance in the setting's culture while it actually is.\" Quote exact; both the half-translation limb and the frequency-of-significance reason are on the page.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "the underlying cultural habit of naming noble children after virtues is",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "144": {
    "index": 144,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Native-speaker utterances, among them a selection from Hobb's Royal Assassin, the only novel referenced",
-   "note": "Raw HTML of elliottrwi.com/research/hobb-bibliography/ (\"The Fedwren Project: A Robin Hobb Annotated Bibliography\") fetched with a browser UA. Bruening entry cites NLLT vol. 32, no. 2, May 2014, pp. 363-422, matching the claim, and the annotation reads: \"...utterances by native speakers of English (among which is a selection from Hobb's Royal Assassin, notably the only novel referenced) do not make the distinctions that theorists posit...\" Quote exact; every limb supported.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "among which is a selection from Hobb's",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "145": {
    "index": 145,
@@ -6300,23 +6300,23 @@
   "147": {
    "index": 147,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Le Guin and Hobb have in later works begun to question the male/king package",
-   "note": "UTS PDF (02whole.pdf) fetched and extracted (86 pp.); running head confirms \"Kings. What a good idea. Pamela Freeman\", printed p. 42: \"Other women writers have kept the whole male/king package, although some, like Ursula Le Guin and Robin Hobb, have in their later works begun to question this. (See, for example, the difference in attitudes to monarchy between Hobb's Assassin's Apprentice series, 1996-1998, and her Liveship Traders books, 1999-2001.)\" Quote exact; every limb, including the Farseer/Liveship citation, is on the page.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "have in their later works begun to question this",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "148": {
    "index": 148,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "40 novels - 20 classic, 20 modern; first chapter of each manually annotated",
-   "note": "peerj.com returned Cloudflare 403 to both a plain and a browser-UA request (and to the .pdf); reached the raw page through the Wayback capture https://web.archive.org/web/20260208122918id_/https://peerj.com/articles/cs-189/ , which carries the full text. \"20 classic and 20 modern novels\" appears verbatim several times, incl. contribution (4) \"an annotated gold standard dataset with entities and coreferences of 20 classic and 20 modern novels\"; \"In each of these novels, the first chapter is manually annotated with named entities and coreference relations\"; Table A2 lists Assassin's Apprentice, Robin Hobb (1995) under Modern.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "20 classic and 20 modern novels",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "149": {
    "index": 149,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "3rd-person novels perform significantly better than 1st-person ones",
-   "note": "Same Wayback raw capture. Conclusion and Future Work: \"We did find that novels written in 3rd person perspective perform significantly better than those written in 1st person, which is in line with findings in related studies.\" Quote exact; the body gives p < 0.01, and Tables 3-4 mark Assassin's Apprentice with the symbol whose legend reads \"Novels written in 1st person are marked with the circled dot\", so the first-person class does include it.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "trueWording": "novels written in 3rd person perspective perform significantly better than",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "150": {
    "index": 150,
@@ -7380,107 +7380,107 @@
   "300": {
    "index": 300,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Transcript: 'a tremendous amount of my work is first person, because I think it's the natural storytelling voice' and later 'So to me, first person is the natural storytelling voice.' The home-recounting likeness is explicit: kid runs up asking 'What did you do today?' / 'How was school?' Every limb supported.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "first person is the natural storytelling voice",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "301": {
    "index": 301,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "'If you're writing from the first person, if you are an assassin and you walk into the room and there's three people there, what he notices is going to be very different from the child character who runs in the room and is totally fixed on finding the toy they left there earlier.' 'Lost toy' = 'the toy they left there earlier'; both contrast limbs present.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "what he notices is going to be very different",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "302": {
    "index": 302,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "'Why is she so pennypinching?' ... 'Charlotte grew up in a family with a very tight budget. So she always had to make choices. So this has affected her personality... All choices are very important and very dire for her.' Household-economy derivation and the consequential-choice limb both explicit.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "Charlotte grew up in a family with a very tight budget",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "303": {
    "index": 303,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "'For me, the character has to be generated by the world. I don't think I could take a 21st century any person and believably insert them into a fantasy.' Both limbs verbatim.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "the character has to be generated by the world",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "304": {
    "index": 304,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "'We're in an inn, and the serving boy is late coming... Whether that's even noticed or whether you're annoyed because somebody else is yelling at the serving boy or whether you're embarrassed or whether you quietly tip the kid.' All four listed reactions present in order.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "whether you quietly tip the kid",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "305": {
    "index": 305,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Opening section: 'While many authors provide an interpretive frame through witnesses that highlights the hero's capabilities, Hobb places you inside Fitz's perspective and leaves you there.' The no-outside-witness limb rides on that contrastive clause (the essay denies the framing function of witnesses, not their existence -- it later cites others noticing him); read as 'no witness supplied to frame him', it is supported.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "Hobb places you inside Fitz’s perspective and leaves you there",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "306": {
    "index": 306,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Section 'A Wild Soul': 'The difficulty in seeing Fitz clearly is that he almost never narrates his own power. He narrates his doubts, failures, grief, and shame.' Inference limb supported by 'His power and greatest gifts are invisible... and thus neither do we' plus 'always there, noticed by others and shaping the outcomes'.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "he almost never narrates his own power",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "307": {
    "index": 307,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Section 'A Master of His Craft': 'the training is still running beneath the surface constantly and automatically. When he enters Lant's room, within moments he has cataloged the medicinal unguents on the mantel, the two pens at the ready, the Stones puzzle on the table...' All three objects and the training framing present.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "the medicinal unguents on the mantel, the two pens",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "308": {
    "index": 308,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Section 'A Writer, Historian, and Chronicler of His Age': 'Fitz knew what official chroniclers could not' and 'He understands that history is not made only in councils and battles, but in bedrooms, kitchens, stables, sickrooms, and moments of private choice.' Source says Fitz 'knew' and 'records not only the public history... but his own place within it'; the records limb holds in substance.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "history is not made only in councils and battles",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "309": {
    "index": 309,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Same section: 'His prose feels natural because it is intimate, but intimacy should not be mistaken for simplicity. The clarity with which he renders character, politics, landscape, memory, and moral conflict is itself evidence of extraordinary literary intelligence.' Both limbs verbatim, list matches exactly.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "intimacy should not be mistaken for simplicity",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "310": {
    "index": 310,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Opening section: 'She hides his magnificence in plain sight.' followed by 'Whether the reader sees past his harsh self-assessment is entirely up to the reader.' Both limbs verbatim.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "She hides his magnificence in plain sight",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "311": {
    "index": 311,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Reached via Wayback raw capture 20260212161207id_ (live newstatesman.com returns 403 to curl even with a browser UA). Paragraph beginning 'Like Game of Thrones': 'I try to express how horrifying and ugly violence is', Hobb says. 'I have read descriptions of violence in which it is almost like a beautiful, or a satisfying, or almost a sexual thing, and that always makes me uncomfortable as a reader.' Both limbs verbatim.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "I try to express how horrifying and ugly violence is",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "312": {
    "index": 312,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Wayback raw capture. 'In her universe, names can embody a character's virtues - like the noble brothers Chivalry, Nimble, Swift, Steady, Just and Hearth'. Six names match exactly, in order, and are called brothers.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "names can embody a character’s virtues",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "313": {
    "index": 313,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Wayback raw capture, same paragraph: names '...or make them reflect poorly on their actions - like the captain Kyle Haven, whose greediness creates endless troubles for his ship and family's business.' Source reads 'reflect poorly on their actions' where the claim says 'reflects poorly on its bearer'; same clause, substance intact.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "whose greediness creates endless troubles for his ship and family’s business",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "314": {
    "index": 314,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Wayback raw capture, paragraph beginning 'Her books tell tales of dragons and pirates': 'the matriarchal, business-oriented Bingtown; the macho, warring state of Chalced; the rough land of the Six Duchies'. Single-clause-each structure and both named societies verbatim; 'by their institutions' is the claim's gloss on matriarchal/business/warring-state descriptors.",
-   "fromFile": "verdicts-hobb-i300-314.json"
+   "trueWording": "the matriarchal, business-oriented Bingtown",
+   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "fromFile": "verdicts-hobb-retake-r6.json"
   },
   "315": {
    "index": 315,

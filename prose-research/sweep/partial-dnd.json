@@ -1114,6 +1114,81 @@
   "fullSentence": true
  },
  {
+  "index": 579,
+  "feature": "other: named trait paragraph",
+  "claim": "The 5e half-orc entry carries a bolded named paragraph, 'Grudging Acceptance', describing how half-orcs are received by others.",
+  "source": "D&D 5e Player's Handbook (2014) p. 41, quoted by Antero Garcia (2017)",
+  "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
+  "quote": "Grudging Acceptance",
+  "page": "p. 240",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "2017 (quoting 2014)",
+  "routeHint": "PDF mirror i.4pcdn.org/tg/1565719003240.pdf",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "scholarship-history",
+  "verdict": {
+   "index": 579,
+   "verdict": "PARTIAL",
+   "trueWording": "Grudging Acceptance: Each half-orc finds a way to gain acceptance from those who hate orcs.",
+   "note": "Same recovered full text. 'Grudging Acceptance' is verbatim and Garcia introduces the block with 'half-orcs have been largely despised by others' (PHB p. 41), so the named paragraph and the reception limb hold. The typographic limb 'bolded' is not attested: the recovered page carries no bold markup and no statement about how the heading is set (it may well be bold in the printed PHB, but the cited source does not say so).",
+   "unsupportedLimb": "bolded — the article quotes the paragraph as plain running text and never describes its typography",
+   "fromFile": "verdicts-dnd-i574-588.json"
+  },
+  "fullSentence": true
+ },
+ {
+  "index": 582,
+  "feature": "edition and house style",
+  "claim": "An RPGA interviewer in 1981 characterised Holmes's Basic Set as easier reading than the original set and Mentzer's as understandable by anyone willing to read it.",
+  "source": "RPGA interviewer (presumed Frank Mentzer), Polyhedron #1 (1981), compiled by Zach Howard",
+  "url": "https://zenopusarchives.blogspot.com/2013/03/gygax-on-holmes.html",
+  "quote": "a little bit easier",
+  "page": "Summer of 1981 entry",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "1981 (compiled 2013)",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "none",
+  "confidence": "medium: the compiler marks the interviewer's identity as presumed",
+  "angle": "scholarship-history",
+  "verdict": {
+   "index": 582,
+   "verdict": "PARTIAL",
+   "trueWording": "The version written by J. Eric Holmes was a little bit easier, and now the latest version is easily understandable by anyone willing just to spend the time to read it",
+   "note": "Live page, Summer of 1981 entry (Polyhedron #1 p. 5, RPGA interview with Gygax, interviewer 'presumably Frank Mentzer'). Quote 'a little bit easier' verbatim, and the contrast with the first set 'for hard-core gamers' supports the easier-than-the-original limb. The page nowhere attributes the latest version to Mentzer.",
+   "unsupportedLimb": "Mentzer's — the interviewer says only 'the latest version'; Mentzer is named merely as the presumed interviewer, and the latest Basic Set in summer 1981 was Moldvay's, not Mentzer's 1983 revision",
+   "fromFile": "verdicts-dnd-i574-588.json"
+  },
+  "fullSentence": true
+ },
+ {
+  "index": 586,
+  "feature": "place and institution description",
+  "claim": "Trammell shows Oriental Adventures gives elite occupations far more specific named detail than commoner ones.",
+  "source": "Aaron Trammell, Analog Game Studies III:1, January 2016",
+  "url": "https://analoggamestudies.org/2016/01/how-dungeons-dragons-appropriated-the-orient/",
+  "quote": "the culture of the common people is barely distinguishable",
+  "page": "non-weapon proficiencies section",
+  "kind": "analysis",
+  "polarity": "rejects",
+  "date": "2016-01",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "scholarship-history",
+  "verdict": {
+   "index": 586,
+   "verdict": "PARTIAL",
+   "trueWording": "the culture of the common people is barely distinguishable from that of the Western common folk",
+   "note": "Live page, non-weapon proficiencies section. Quote verbatim, and 'the distinction of specificity between those proficiencies known by nobles and those by commoners' supports the elite-versus-commoner specificity limb (Calligraphy, Falconry, Flower Arranging, Noh, Tea Ceremony against Agriculture, Cooking, Fishing, Hunting). But the compared items are proficiencies, not occupations, and by count the common list is the longer of the two (17 entries against 12) - the article's point is specificity, not quantity.",
+   "unsupportedLimb": "occupations — the page contrasts non-weapon proficiencies (skills), Court Proficiencies against Common Proficiencies, not occupations",
+   "fromFile": "verdicts-dnd-i574-588.json"
+  },
+  "fullSentence": true
+ },
+ {
   "index": 599,
   "feature": "edition and house style",
   "claim": "Hartlage observes that Storm King's Thunder (2016) omits almost all read-aloud text, unlike Curse of Strahd which boxes every location.",
@@ -1136,5 +1211,78 @@
    "note": "Quote exact and the contrast limb is exact too ('Curse of Strahd includes it for every location'), but the page gives no publication year for Storm King's Thunder; its only 2016 dates are the post's own date (November 21, 2016) and archive-sidebar labels. The year is independently correct but is not evidence from this page.",
    "fromFile": "verdicts-dnd-i589-603.json"
   }
+ },
+ {
+  "index": 619,
+  "feature": "concrete sensory noun",
+  "claim": "Hewitt argues that a Curse of Strahd room's gothic atmosphere is established by the physical objects in its description rather than by naming the mood.",
+  "source": "Meghan Hewitt, Analog Game Studies, 15 Dec 2024",
+  "url": "https://analoggamestudies.org/2024/12/mechanical-storytelling-in-dungeons-and-dragons-strahd-in-relation-to-the-gothic/",
+  "quote": "gothic atmosphere is clearly set through the daunting presence of the statue",
+  "page": "Death House section",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2024-12-15",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "herald-pools",
+  "confidence": "medium: Hewitt names the statue and the skeletal remains as the carriers; the inference that mood is never named is mine unless the verifier reads the surrounding sentences",
+  "angle": "scholarship-history",
+  "verdict": {
+   "index": 619,
+   "verdict": "PARTIAL",
+   "trueWording": "gothic atmosphere is clearly set through the daunting presence of the statue",
+   "unsupportedLimb": "'rather than by naming the mood' - Hewitt draws no such contrast",
+   "note": "Raw page fetched (Meghan Hewitt, 15 Dec 2024 byline confirmed). Quote is verbatim: 'The gothic atmosphere is clearly set through the daunting presence of the statue, as well as the skeletal remains lurking in the corners of the room.' The room is the Strahd shrine in the Death House module of Curse of Strahd, and the module description she quotes is all physical objects (moldy skeletons, rusty shackles, painted wooden statue). But Hewitt never contrasts object-description with mood-naming; that contrastive limb is the claimant's inference, not her argument.",
+   "fromFile": "verdicts-dnd-i619-633.json"
+  }
+ },
+ {
+  "index": 622,
+  "feature": "civic record register",
+  "claim": "Peterson reports that economics dominate the events reported in Arneson's 1971 in-world campaign newsletter.",
+  "source": "Jon Peterson, Playing at the World, 3 Aug 2012",
+  "url": "https://playingattheworld.blogspot.com/2012/08/blackmoor-gazette-and-rumormonger-1.html",
+  "quote": "Economics play a large role in the events described",
+  "page": "paragraph 4",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2012-08-03",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "scholarship-history",
+  "verdict": {
+   "index": 622,
+   "verdict": "PARTIAL",
+   "trueWording": "Economics play a large role in the events described",
+   "unsupportedLimb": "'dominate' - Peterson says only that economics 'play a large role'",
+   "note": "Raw page. Quote verbatim, and the 1971 dating is on the page ('it seems safe to accept 1071 as 1971 ... late in the fall of that year'). But Peterson does not claim economics dominate: the same post gives comparable weight to the wargame component ('several thousand enemy troops') and to fantastic elements (dragons, 'evil creatures overrunning the region'). 'Dominate' overstates 'play a large role'.",
+   "fromFile": "verdicts-dnd-i619-633.json"
+  }
+ },
+ {
+  "index": 636,
+  "feature": "edition and house style",
+  "claim": "Alexander calls the fourth edition delve format the culmination of rigid formatting and says such a format forces information out of sequence.",
+  "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+  "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
+  "quote": "forces information to be presented out-of-sequence",
+  "page": "Adventure Formatting Guides",
+  "kind": "analysis",
+  "polarity": "rejects",
+  "date": "2014-05-19",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dm-page",
+  "confidence": "high",
+  "angle": "scholarship-history",
+  "verdict": {
+   "index": 636,
+   "verdict": "PARTIAL",
+   "trueWording": "the culmination of this approach is the infamous “delve” format … the rigid adventure format forces information to be presented out-of-sequence",
+   "note": "Quote verbatim and the 'culmination of rigid formatting' limb is supported ('This sort of one-size-fits-all formatting becomes both a straitjacket and an excess. And the culmination of this approach is the infamous “delve” format'). But the page never ties the delve format to 4th Edition: its only edition markers are '2nd Edition' (Apocalypse Stone) and 'When 3rd Edition arrived'; grep for '4th'/'fourth' on the page returns nothing, and the delve discussion is deferred to another article ('which I’ve talked about extensively elsewhere').",
+   "unsupportedLimb": "the page never identifies the delve format as fourth edition's",
+   "fromFile": "verdicts-dnd-i634-648.json"
+  },
+  "fullSentence": true
  }
 ]
