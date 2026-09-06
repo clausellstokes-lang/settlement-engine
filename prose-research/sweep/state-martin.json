@@ -5438,6 +5438,111 @@
    "trueWording": "\"With a limited point of view, the reader only knows what the main character knows.\"",
    "note": "Exact substring. Both other elements are explicit: \"the POV character gets his or her chapter named after them\" and \"he or she could be an unreliable witness\".",
    "fromFile": "verdicts-martin-i300-314.json"
+  },
+  "315": {
+   "index": 315,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "While shifting POV can occasionally lead to confusion, giving each character a clearly titled chapter solves the problem admirably.",
+   "note": "Quote exact. Exposition-in-scene praise also present: 'By giving us needed information in the form of dialogue and scenes, Martin holds our attention.' Byline Shannon Roberts confirmed; piece marks AGOT's 20th anniversary (=2016), though the page footer stamp reads 2024-01-07.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "316": {
+   "index": 316,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "accounts of the mythic world unfold with fluid lyricism, without ever lapsing into Tolkienesque descriptive tedium",
+   "note": "Quote exact. Distinct-voice half confirmed in the same paragraph: Martin gives 'each character their own unique voice'. Date 2012-06-07 matches the URL path.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "317": {
+   "index": 317,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "naming his viewpoint character Bran Stark in the first chapter of A Game of Thrones is a tone promise. The name Stark implies a bleak and grim mood",
+   "note": "Quote exact and the bleakness gloss is explicit. Byline Heba Hallak, Apr 15 2026, confirmed on the page; it reports Sanderson's BYU lecture.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "318": {
+   "index": 318,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which is Martin's archaic-sounding amendment of turncoat",
+   "note": "Quote exact. Every other element confirmed on the page: 'Ser for Sir, Southron for Southern, and craven meaning cowardly all date from 1451, 1488, and 1400 respectively, according to the Oxford English Dictionary', and 'modern-sounding terms such as butt and ass jarring'.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "319": {
+   "index": 319,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "portrayed through a number of colloquial phrases",
+   "note": "No quote was supplied, so substance only. Page: the flavour of the different languages of the seven kingdoms is 'portrayed through a number of colloquial phrases', and '\"Words are wind\" is another aphorism used by the characters'. Page says languages/kingdoms where the claim says cultures.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "320": {
+   "index": 320,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin hits a sweet spot between Modern and Middle English",
+   "note": "Quote exact. Rest confirmed verbatim: 'While choosing not to use Middle English pronouns and using mostly modern syntax, Martin gives A Game of Thrones a historical feel by using accurate 1400s archaic diction'; 'Martin uses these words sparingly'. Author Delane Just, Jan 22 2018.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "321": {
+   "index": 321,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "For instance, terms like \"elsewise\" (A Feast For Crows, p. 2742) could hardly be found in any story set in modern times",
+   "note": "Words match exactly; only the capital T and the single-quote style differ from the page's mid-sentence 'terms like \"elsewise\"'. All four sub-claims confirmed: lexical cohesion via the repeated insult ('repeated five times', 'ties parts of a text'); 'without' in 'the old English meaning \"outside [the wall]\"'; m'Lord vs my Lord by birth; density 'between 4 and 4.5'; 'The ARI score for A Game of Thrones is sixth-grade, or 11-12 years old'.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "322": {
+   "index": 322,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What does this chart tell us? That George R.R. Martin hates adverbs.",
+   "note": "Quote exact. Four series confirmed (LOTR, Harry Potter, Hunger Games, ASOIAF) and 'you only need to be 10 years old to understand A Song of Ice and Fire'. Caveat: the page never says '-ly' adverbs nor the word 'least' - it credits an adverb chart hosted on Spathis' own Medium post.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "323": {
+   "index": 323,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a Game of Thrones comes in with a Flesch Reading Ease score of 87",
+   "note": "Quote exact and all three further figures confirmed: 'a comparatively small 851 sentences containing more than 30 words'; 'A tiny 3.39% of A Game of Thrones is detected as slower in pace'; 'having almost the same number of alternative dialogue tags as we do the standard two is a little alarming'; and a section flagging 'Martin's use of adverbs in dialogue tags'.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "324": {
+   "index": 324,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "seriously, the phrase comes up at least ten times in every book",
+   "note": "Quote exact, about 'mummer's farce'. 'Jape' confirmed: 'Jape, aside from its pretentiousness, is a singularly displeasing word.' The prose verdict is on the page but differently worded and misspelled there: 'Most of the time his prose borders on the servicable' - the claim's 'borders on serviceable' is a paraphrase, not a quotation.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "325": {
+   "index": 325,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Annoying speech mannerisms... sometimes his choices are inexplicable",
+   "note": "No quote was supplied. Page devotes a section to Hodor's one-word dialogue (a mock exchange ending 'HOOOOOOODOOOOOOOOR') and to Reek's rhyme, 'Reek, my name is Reek, it rhymes with [random word]', framing both as mechanical repetition rather than characterisation.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "326": {
+   "index": 326,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "George R.R. Martin is good at writing about violence and heraldry. He is not good at writing about sex.",
+   "note": "Quote exact. Nipples confirmed: 'Nipples of massive girth, darkness, and circumference: Martin is obsessed with them', with 'big dark', 'huge dark', 'fat'/'brown', 'wide pink circles'. Crude similes confirmed: 'Myrish swamp', 'fat pink mast'. Byline Joe Streckert, April 2 2014; note the live URL now redirects to portlandmercury.com/general/the-erotica-of-westeros-12111961/.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "327": {
+   "index": 327,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tonight all the food was flavored with fear",
+   "note": "Quote exact (Martin's line as quoted in the piece). Course-by-course cataloguing confirmed ('All the while the courses came and went... Then came trout fresh from the river'), and the appetite claim is explicit: 'Martin uses people's reaction to food a lot to show state of mind.'",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "328": {
+   "index": 328,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "uses food to establish the emotional states of his characters",
+   "note": "No quote was supplied. Belonging/class confirmed ('a sign of brotherhood, of the sense of fraternity'; Jon as bastard 'not fit to sit in the main hall'), culture confirmed ('Dothraki food, drink, and the way they celebrate tell us quite a bit about them as a group'). 'Sensory verbs' is the analyst's gloss, not the page's wording. Byline note: page credits 'By Andrea Guzman' in the body under poster Isabel Carrasco, translated by Oliver G. Alvar; date April 9 2019 matches.",
+   "fromFile": "verdicts-martin-i315-329.json"
+  },
+  "329": {
+   "index": 329,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I wrote a Tyrion chapter I just loved... Then I looked at it and said: 'I can't do this, it will change the whole book.'",
+   "note": "Quote exact. The 'reread and decided it failed' half is the page's next clause. Author 'Matt', Jan 30 2026, confirmed on the page; it quotes Martin on The Winds of Winter.",
+   "fromFile": "verdicts-martin-i315-329.json"
   }
  },
  "mergedAt": "see autosave.log"
