@@ -286,5 +286,77 @@
   "substantive": false,
   "date": "2020",
   "route": "Crossref + Unpaywall + Semantic Scholar records; all three return no abstract and no OA full text"
+ },
+ {
+  "title": "Gene Wolfe, interview with James B. Jordan (conducted 1992; printed in Shadows of the New Sun, 2007) -- 31-page PDF read in full",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+  "kind": "own-words",
+  "substantive": true,
+  "date": "1992",
+  "route": "PDF fetched from gwern.net, text extracted with pdftotext -layout"
+ },
+ {
+  "title": "Michael Andre-Driussi, 'What Gene Wolfe Expects of His Readers', Internet Review of Science Fiction, April 2009",
+  "url": "https://web.archive.org/web/20090406143511id_/http://www.irosf.com/q/zine/article/10536",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2009-04",
+  "route": "Wayback raw capture (id_) of the defunct irosf.com article"
+ },
+ {
+  "title": "Google Books record and iUniverse publisher description for Borski, Solar Labyrinth (2004) -- description, page count and full table of contents",
+  "url": "https://books.google.com/books/about/Solar_Labyrinth.html?id=xGjSBAAAQBAJ",
+  "kind": "vendor",
+  "substantive": true,
+  "date": "2004",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Google Books record and iUniverse publisher description for Borski, The Long and the Short of It (2006) -- description, page count and chapter list",
+  "url": "https://books.google.com/books/about/THE_LONG_AND_THE_SHORT_OF_IT.html?id=7y1jBrpx4loC",
+  "kind": "vendor",
+  "substantive": true,
+  "date": "2006",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Cold Tonnage Books catalogue entry for Lexicon Urthus, first edition (Sirius Fiction, 1994)",
+  "url": "https://www.coldtonnage.com/product/599089/Lexicon-Urthus-A-Dictionary-For-The-Urth-Cycle-Wolfe--Gene-by-Michael-Andre-Driussi",
+  "kind": "vendor",
+  "substantive": true,
+  "date": "1994",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Wikipedia, 'The Book of the New Sun' -- relay only; quotes Wolfe's appendix and cites Wright p. 91, Gordon p. 96, Borski p. 85, Andre-Driussi",
+  "url": "https://en.wikipedia.org/wiki/The_Book_of_the_New_Sun",
+  "kind": "relay",
+  "substantive": true,
+  "date": "2026",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Peter Wright, Attending Daedalus -- Internet Archive lending copy (access-restricted; full text not retrievable)",
+  "url": "https://archive.org/details/attendingdaedalu0000wrig",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2003",
+  "route": "IA metadata reachable; item is lending-restricted"
+ },
+ {
+  "title": "Robert Borski, Solar Labyrinth -- Google Books search-inside returns no snippet text (JS-gated) and the Books API is over quota",
+  "url": "https://books.google.com/books?id=xGjSBAAAQBAJ&q=guild",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2004",
+  "route": "Google Books preview page; no text served"
+ },
+ {
+  "title": "Joan Gordon, Gene Wolfe (Starmont, 1986) -- the scanned text layer on disk is column-interleaved OCR too corrupt for verbatim quotation",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "1986",
+  "route": "local PDF text layer; two independent extractions both unusable, so no new quotes taken (the predecessor's Gordon claims stand)"
  }
 ]

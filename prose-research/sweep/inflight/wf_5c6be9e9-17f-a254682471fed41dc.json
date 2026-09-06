@@ -65,8 +65,8 @@
  "journal": "failed",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-close-continued.json",
-  "claims": 126,
-  "complete": false,
-  "mtime": "19:23:29"
+  "claims": 136,
+  "complete": true,
+  "mtime": "19:26:41"
  }
 }

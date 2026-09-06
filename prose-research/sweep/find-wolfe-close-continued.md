@@ -49,3 +49,36 @@ Mulder; 002995 Robin Hankin; 003008 b sharp; 058579 Wesley Parsons; 058600 Jack 
   his narrative choices."
 - 002938 nastler: chapter one's "green moonlight" — a world-changing fact planted as scenery, missed.
 - 002936 nastler: the recurring "tableau" of a beast man, an armed man and a woman.
+
+## RUN 2 (successor finder, 2026-09-06 19:0x) — what was added
+Routes and outcomes:
+- Urth October 2006: 40 messages fetched via `https://web.archive.org/web/2021id_/http://lists.urth.net/pipermail/urth-urth.net/2006-October/<N>.html`
+  (2.5s inter-request sleep, wcc3/f.py). 31 claims. Load-bearing:
+  * 058684+003067 THE GREEN BOOK: an apparent continuity error found by comparing two incidental
+    physical measurements (a book "hardly larger than my hand" vs a cell-door slot too narrow) is
+    resolved by Lackey as a deliberate concealment — there are TWO green books, and the one that
+    shares the tetralogy's title is mentioned once, obliquely. The device in miniature.
+  * 058679 Lackey: "Nothing at all was mentioned about Catherine's height, which is unusual for
+    Severian to omit" — the ABSENCE of a habitually-supplied detail read as evidence.
+  * 003175 Lackey: one ordinary noun ("maid") counted ten times in about three pages, read as planted.
+  * 058830 Lackey: a RUINED CHAPEL still in ceremonial use is physical evidence that a cult once held
+    official sanction; and "the guild masters knew damn well" the fact the narrative withholds.
+  * 003166 Lackey: the manuscript is one late retrospective composition, not a journal — every
+    sentence carries knowledge acquired years after the event.
+  * 003230: a fact of parentage turns on "borne" vs "born"; 003266: on the direction of one "for".
+- Dirda (WaPo) — live + WebFetch both 403; Wayback raw worked. 1989 review is the single best
+  statement of the device: "he gives you the names of things, but not what they are".
+- Wolfe PRIMARY: technologyreview.com 2014 Q&A read raw (live, browser UA). "the style changes from
+  one letter writer to another"; "They're all unreliable"; and his praise of Wells for mentioning
+  "just in passing" that the narrator never learned the sailor's name.
+- Gary K. Wolfe / Locus x2 (live): "the vernacular rhythms of good old boys to the measured cadences
+  of Victorian gentlemen"; a narrator's voice "almost pointedly flat and restricted".
+- Reactor: the "Rereading Gene Wolfe" column is FABIO FERNANDES, not Jo Walton. Six instalments read
+  via Wayback. Plus Polansky 2015 and Knode 2012 on Peace — Knode WORKS the device on the page
+  (first line + a later line under a married name ⇒ the narrator is dead).
+- r/genewolfe via `.rss?limit=100` (5 threads; 3 more 429'd). The pastiche thread (rpsv1l) is a
+  demonstration passage plus critique: the imitation reads "very mannered and arch"; its author
+  diagnoses his own failure as "bland modern writing with a superficial 'old fashioned' sound".
+- BLOCKED: podcast auto-subs (yt-dlp HTTP 429 / PO-token bot check; web client reports no captions).
+- NOT FOUND: scatterings1976, lofkin (WordPress.com placeholders; Wayback CDX offline all run).
+- NOT FOUND: any Jo Walton piece on Wolfe (author archive + two searches).

@@ -28,8 +28,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-monographs.json",
-  "claims": 174,
+  "claims": 201,
   "complete": false,
-  "mtime": "19:25:27"
+  "mtime": "19:30:35"
  }
 }

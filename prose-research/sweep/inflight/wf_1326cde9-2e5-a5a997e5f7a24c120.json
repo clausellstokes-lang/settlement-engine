@@ -3,13 +3,13 @@
  "name": "wolfe",
  "angle": "monographs",
  "tag": null,
- "lines": 239,
+ "lines": 342,
  "firstTs": "2026-09-06T22:59:58.344Z",
- "lastTs": "2026-09-06T23:25:27.349Z",
+ "lastTs": "2026-09-06T23:31:30.562Z",
  "tools": {
-  "Bash": 57,
+  "Bash": 81,
   "ToolSearch": 1,
-  "WebSearch": 6
+  "WebSearch": 12
  },
  "urlsFetched": [
   "https://archive.org/advancedsearch.php?q=creator%3A%28Manlove%29+AND+title%3A%28science+fiction%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=20&output=json",
@@ -59,7 +59,24 @@
   "https://ultan.org.uk/lexicon-urthus-second-edition/",
   "https://ultan.org.uk/the-reader-as-augur/",
   "https://ultan.org.uk/review-botns/",
-  "https://doi.org/10.1111/criq.12563"
+  "https://doi.org/10.1111/criq.12563",
+  "https://www.coldtonnage.com/product/599089/Lexicon-Urthus-A-Dictionary-For-The-Urth-Cycle-Wolfe--Gene-by-Michael-Andre-Driussi",
+  "https://www.iuniverse.com/BookStore/BookDetails/127571-THE-LONG-AND-THE-SHORT-OF-IT",
+  "https://books.google.com/books/about/Solar_Labyrinth.html?id=xGjSBAAAQBAJ",
+  "https://books.google.com/books/about/THE_LONG_AND_THE_SHORT_OF_IT.html?id=7y1jBrpx4loC",
+  "https://books.google.com/books?id=xGjSBAAAQBAJ&q=guild",
+  "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+  "https://en.wikipedia.org/wiki/The_Book_of_the_New_Sun",
+  "https://archive.org/metadata/attendingdaedalu0000wrig",
+  "https://www.liverpooluniversitypress.co.uk/doi/book/10.3828/9781846312335",
+  "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+  "https://www.gwern.net/docs/fiction/1992-jordan.pdf",
+  "https://web.archive.org/web/20090406143511id_/http://www.irosf.com/q/zine/article/10536",
+  "https://archive.org/details/attendingdaedalu0000wrig",
+  "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+  "https://gwern.net/doc/fiction/gene-wolfe/index",
+  "http://www.johnclute.co.uk/bibliography/?paged=2",
+  "https://gwern.net/doc/fiction/gene-wolfe/$p"
  ],
  "filesWritten": [],
  "lastAssistantText": "Now I'll write the checkpoint with all sources so far.",
@@ -69,8 +86,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-monographs.json",
-  "claims": 174,
+  "claims": 201,
   "complete": false,
-  "mtime": "19:25:27"
+  "mtime": "19:30:35"
  }
 }

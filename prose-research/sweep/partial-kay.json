@@ -1022,5 +1022,125 @@
    "fromFile": "verdicts-kay-regrade-r5.json"
   },
   "fullSentence": true
+ },
+ {
+  "index": 717,
+  "feature": "other: fantasy as a method for history",
+  "claim": "Kay tells the ICFA audience that his address will connect his argument about privacy to a defence of fantasy literature as a way of writing about history.",
+  "source": "Guy Gavriel Kay, \"The Fiction of Privacy: Fantasy and the Past\", Journal of the Fantastic in the Arts 20.2 (2009)",
+  "url": "https://web.archive.org/web/20181019170915id_/https://www.questia.com/library/journal/1G1-223225905/the-fiction-of-privacy-fantasy-and-the-past",
+  "quote": "a defense of fantasy literature as a way of addressing history",
+  "page": "opening section, p. 240",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2009",
+  "routeHint": "Wayback raw id_ capture of the Questia page; article excerpt only",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "academic-routes",
+  "verdict": {
+   "index": 717,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the ICFA audience' - the page never names ICFA or the International Conference on the Fantastic in the Arts",
+   "trueWording": "a defense of fantasy literature as a way of addressing history",
+   "note": "Wayback raw capture reached and read directly. The quotation is verbatim, inside 'I'm then going to perform poised arabesques ... and connect this to a defense of fantasy literature as a way of addressing history and avoiding these ethical concerns', immediately after the privacy/autonomy thesis - so the privacy-to-fantasy connection limb is fully supported. The venue is given only circumstantially: 'guests of honor', Farah Mendlesohn and Christine Mains, 'spring training here in Florida'. grep for 'ICFA', 'IAFA' and 'international conference' on the fetched page returns zero hits, so the ICFA identification is an inference, not the page's own wording.",
+   "fromFile": "verdicts-kay-i715-749.json"
+  }
+ },
+ {
+  "index": 736,
+  "feature": "other: history as consequence",
+  "claim": "Kay names the ripple effects of the An Lushan Rebellion, rather than the events themselves, as part of what drew him to Tang China.",
+  "source": "Guy Gavriel Kay interviewed by Sandra Alvarez, Medievalists.net (2016)",
+  "url": "https://www.medievalists.net/2016/08/book-talk-a-conversation-with-guy-gavriel-kay/",
+  "quote": "the colossal scale and consequence (through ripple effects)",
+  "page": "answer on which place he most enjoyed researching",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2016-08-04",
+  "routeHint": "live HTML, full text",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "academic-routes",
+  "verdict": {
+   "index": 736,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'rather than the events themselves' - Kay names the rebellion's colossal scale alongside its consequence, not consequence instead of the events",
+   "trueWording": "colossal scale and consequence (through ripple effects)",
+   "note": "medievalists.net fetched live (HTTP 200) and read directly. Answering which place he most enjoyed researching, Kay says he found Tang China mesmerizing 'partly because my gateway was the astonishingly great poets of that time, partly because of the colossal scale and consequence (through ripple effects) of the An Lushan Rebellion in the middle of the 8th century.' The quotation and the 'part of what drew him' limb are exact, but the source couples scale with consequence rather than setting ripple effects against the events, so the contrastive limb is the claim's own addition.",
+   "fromFile": "verdicts-kay-i715-749.json"
+  }
+ },
+ {
+  "index": 742,
+  "feature": "other: bibliographic correction",
+  "claim": "The Siourbas chapter's full title names two works, Kay's Tigana and Randy Bradshaw's The Song Spinner, and it runs to eight pages.",
+  "source": "Project MUSE record for Worlds of Wonder, ed. Leroux and La Bossiere (University of Ottawa Press, 2004)",
+  "url": "https://muse.jhu.edu/book/6623",
+  "quote": "Kay's Tigana and Randy Bradshaw's The Song Spinner",
+  "page": "Table of Contents, pp. 73-80",
+  "kind": "relay",
+  "polarity": "mentions",
+  "date": "2004",
+  "routeHint": "live HTML book record on Project MUSE",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "academic-routes",
+  "verdict": {
+   "index": 742,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the attribution to Siourbas - the MUSE table of contents lists chapter titles and page ranges only, with no author names",
+   "trueWording": "Kay's Tigana and Randy Bradshaw's The Song Spinner",
+   "note": "muse.jhu.edu/book/6623 fetched live (HTTP 200) and read directly. The table of contents carries 'More Than Just Survival: The Successful Quest for Voice in Guy Gavriel Kay's Tigana and Randy Bradshaw's The Song Spinner', 'pp. 73-80', so the two-work title limb is verbatim and the eight-page limb is exact. But grep for 'Siourbas' returns zero hits in both the rendered text and the raw HTML: every entry is rendered as a bare h3 title plus a page div, with the .toc .entry .author slot empty, so this page cannot confirm who wrote the chapter.",
+   "fromFile": "verdicts-kay-i715-749.json"
+  }
+ },
+ {
+  "index": 809,
+  "feature": "stylometry",
+  "claim": "The only occurrence of the surname Kay in Attebery's Strategies of Fantasy is an index entry for the folklorist Kay Stone at page ninety-three.",
+  "source": "Brian Attebery, Strategies of Fantasy (Indiana University Press, 1992), index",
+  "url": "https://archive.org/download/strategies-of-fantasy/strategies-of-fantasy_djvu.txt",
+  "quote": "",
+  "page": "index",
+  "kind": "measurement",
+  "polarity": "mentions",
+  "date": "1992 edition, counted 2026-09-06",
+  "routeHint": "archive.org open item _djvu.txt; grep -in 'Kay,'",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "rescue-unread",
+  "verdict": {
+   "index": 809,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the only occurrence' - there are TWO occurrences of 'Kay' in the text, and 'Kay' is Kay Stone's forename, not a surname",
+   "trueWording": "Index: 'Stone, Kay, 93'; Works Cited also lists 'Stone, Kay.'",
+   "note": "Same raw OCR, grep -nE '\\bKay\\b' returns exactly two lines: 8507 in Works Cited (a Kay Stone entry on Walt Disney, in Women and Folklore) and 9168 in the Index ('Stone, Kay, 93'). So the page-93 index entry for the folklorist Kay Stone is real and is the only INDEX occurrence, but not the only occurrence in the book, and 'Kay' there is a given name, not a surname.",
+   "fromFile": "verdicts-kay-i784-854.json"
+  }
+ },
+ {
+  "index": 868,
+  "feature": "other: biography of the Silmarillion year",
+  "claim": "Olley, an Oxford medievalist, introduces Kay to a Tolkien audience primarily as one of the editors of The Silmarillion.",
+  "source": "Katherine Olley, 'Guy Gavriel Kay: A Short Introduction', University of Oxford / Great Writers Inspire, 16 December 2020 (auto-generated subtitle file)",
+  "url": "https://writersinspire.org/content/guy-gavriel-kay-short-introduction",
+  "quote": "known to many fans of Tolkien as one of the editors",
+  "page": "subtitle transcript, opening",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2020-12-16",
+  "routeHint": "writersinspire page, then the linked .srt at media.podcasts.ox.ac.uk/engfac/fantasy_lit/introduction-guy-gavriel-kaydefault.srt",
+  "registerHint": "none",
+  "confidence": "medium",
+  "angle": "silmarillion-and-verse",
+  "verdict": {
+   "index": 868,
+   "verdict": "PARTIAL",
+   "trueWording": "known to many fans of Tolkien as one of the editors",
+   "note": "Raw subtitle file fetched (200) from media.podcasts.ox.ac.uk (the .srt linked off the writersinspire.org page); the landing page itself carries no transcript. Quote is verbatim at cue 4, and the medievalist limb holds - cue 2 has her as a 'junior research fellow in mediaeval studies here at Oxford' (auto-transcribed as 'Catherine Oli'; the page credits Katherine Olley). But the framing limb fails: cue 1 introduces Kay as 'one of modem [sic] fantasy's best selling authors' and cue 4 as 'a Canadian born novelist', with the editorship as the recognition hook, not the primary identification; the talk sits in the 'Fantasy Literature: An Introduction' collection, addressed to a fantasy-literature audience rather than a Tolkien one.",
+   "unsupportedLimb": "that she introduces him to a Tolkien audience 'primarily' as a Silmarillion editor",
+   "fromFile": "verdicts-kay-i858-894.json"
+  }
  }
 ]
