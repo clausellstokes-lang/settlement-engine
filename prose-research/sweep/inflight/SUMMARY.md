@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 11:12:26 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 11:18:28 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -9,7 +9,6 @@
 | ai | finder | critics-direct | failed | 0 | — | 106 claims, complete=False @08:26:12 | 09:51:39 |
 | ai | finder | critics-direct | failed | 42 | extra_a.py, extra_b.py, extra_c.py, claims_data.py | 106 claims, complete=False @08:26:12 | 12:26:52 |
 | ai | finder | games-practice | failed | 69 | — | 104 claims, complete=True @05:50:22 | 09:51:39 |
-| ai | finder | peer-reviewed-absentees | in-flight | 9 | — | 106 claims, complete=True @05:49:56 | 09:19:24 |
 | ai | finder | peer-reviewed-absentees | failed | 38 | — | 106 claims, complete=True @05:49:56 | 09:50:14 |
 | ai | finder | steerability-mechanism | failed | 72 | — | 72 claims, complete=True @08:26:06 | 09:50:49 |
 | ai | finder | steerability-mechanism | result | 46 | — | 72 claims, complete=True @08:26:06 | 12:30:07 |
@@ -58,7 +57,6 @@
 | dnd | critic |  | failed | 0 | — | — | 09:52:37 |
 | dnd | critic |  | failed | 0 | — | — | 12:30:57 |
 | dnd | finder | close | failed | 82 | — | 90 claims, complete=True @08:23:18 | 09:47:50 |
-| dnd | finder | close | in-flight | 0 | — | 90 claims, complete=True @08:23:18 | 09:19:24 |
 | dnd | finder | close | result | 51 | — | 90 claims, complete=True @08:23:18 | 12:26:47 |
 | dnd | finder | house-style-2019 | failed | 60 | find-dnd-house-style-2019.md | 152 claims, complete=True @05:50:04 | 09:51:06 |
 | dnd | finder | place-register | failed | 106 | — | 82 claims, complete=True @08:21:33 | 09:46:48 |
