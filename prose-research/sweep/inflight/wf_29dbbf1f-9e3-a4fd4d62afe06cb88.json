@@ -1,0 +1,21 @@
+{
+ "role": "verifier",
+ "name": "leguin",
+ "angle": null,
+ "tag": "i856-870",
+ "lines": 8,
+ "firstTs": "2026-09-06T19:46:02.592Z",
+ "lastTs": "2026-09-06T19:46:02.860Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 7:40pm (America/New_York)",
+ "run": "wf_29dbbf1f-9e3",
+ "agent": "a4fd4d62afe06cb88",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_29dbbf1f-9e3/agent-a4fd4d62afe06cb88.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i856-870.json",
+  "exists": false
+ }
+}

@@ -3,15 +3,16 @@
  "name": "wolfe",
  "angle": "primary-on-disk",
  "tag": null,
- "lines": 293,
+ "lines": 301,
  "firstTs": "2026-09-06T19:25:33.190Z",
- "lastTs": "2026-09-06T19:44:31.295Z",
+ "lastTs": "2026-09-06T19:50:37.679Z",
  "tools": {
   "Read": 5,
-  "Bash": 73,
+  "Bash": 74,
   "ToolSearch": 1,
   "WebSearch": 1,
-  "WebFetch": 2
+  "WebFetch": 2,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://gwern.net/doc/culture/2007-wolfe",
@@ -59,11 +60,11 @@
   "https://archive.org/details/castleofdays00wolf"
  ],
  "filesWritten": [],
- "lastAssistantText": "All 152 quotations verified. Writing the raw notes file, then returning.",
+ "lastAssistantText": "All 152 quotations machine-verified; both the notes file and the JSON record are written with `complete: true`.",
  "run": "wf_5c6be9e9-17f",
  "agent": "a90e72cb539bcb479",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_5c6be9e9-17f/agent-a90e72cb539bcb479.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-primary-on-disk.json",
   "claims": 152,
