@@ -3,13 +3,14 @@
  "name": "leguin",
  "angle": null,
  "tag": "i889-923",
- "lines": 56,
+ "lines": 67,
  "firstTs": "2026-09-06T22:00:40.145Z",
- "lastTs": "2026-09-06T22:03:24.163Z",
+ "lastTs": "2026-09-06T22:04:42.896Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 10
+  "Bash": 12,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
@@ -22,13 +23,13 @@
   "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html"
  ],
  "filesWritten": [],
- "lastAssistantText": "All twelve claims located on their raw pages. Writing the checkpoint file.",
+ "lastAssistantText": "All eight source pages fetched live at HTTP 200 as raw HTML (browser UA, curl), stripped to text locally, and each quotation matched against the raw page — no summarizer, no Wayback fallback needed, no BLOCKED verdicts.",
  "run": "wf_e95fca37-bb5",
  "agent": "a7a29ad99767781ff",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_e95fca37-bb5/agent-a7a29ad99767781ff.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i889-923.json",
-  "exists": false
+  "exists": true
  }
 }

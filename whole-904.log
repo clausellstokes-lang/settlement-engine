@@ -1,0 +1,14 @@
+PROOF_HEAD=89ff7b03b7b16a0892800969c421aa1b6957cdea start 18:07:47 load=3.04 3.26 3.07
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 86468 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLUIMAT
+
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 6026ms
+     × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 20ms
+ ❯ tests/docs/enforcement-claims.test.js (21 tests | 1 failed) 1633ms
+     × every completeness claim carries an @enforced-by tag with ≥1 target 8ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package

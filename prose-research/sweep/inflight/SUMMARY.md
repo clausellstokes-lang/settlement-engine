@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 18:03:45 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 18:09:50 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -220,7 +220,7 @@
 | hobb | synth |  | failed | 0 | — | — | 19:45:56 |
 | hobb | synth |  | result | 0 | section-hobb.md | — | 18:17:47 |
 | hobb | synth |  | in-flight | 0 | — | — | 17:48:45 |
-| hobb | synth |  | in-flight | 0 | — | — | 22:03:26 |
+| hobb | synth |  | in-flight | 0 | — | — | 22:09:11 |
 | hobb | verifier | i0-14 | result | 4 | — | verdict file WRITTEN | 16:56:40 |
 | hobb | verifier | i105-119 | result | 5 | — | verdict file WRITTEN | 17:03:33 |
 | hobb | verifier | i120-134 | result | 9 | — | verdict file WRITTEN | 17:10:40 |
@@ -382,6 +382,7 @@
 | leguin | regrade | regrade-r4 | result | 0 | build-leguin-r4.mjs | — | 17:31:56 |
 | leguin | regrade | regrade-r6 | failed | 0 | — | — | 18:42:14 |
 | leguin | regrade | regrade-r7 | failed | 0 | — | — | 19:46:12 |
+| leguin | regrade | regrade-r8 | in-flight | 0 | — | — | 22:09:33 |
 | leguin | synth |  | failed | 0 | — | — | 19:46:18 |
 | leguin | synth |  | failed | 0 | — | — | 18:42:14 |
 | leguin | synth |  | result | 0 | section-leguin.md | — | 17:50:43 |
@@ -445,11 +446,11 @@
 | leguin | verifier | i811-825 | failed | 0 | — | verdict file absent | 19:45:57 |
 | leguin | verifier | i826-840 | failed | 0 | — | verdict file absent | 19:45:57 |
 | leguin | verifier | i841-855 | failed | 0 | — | verdict file absent | 19:46:02 |
-| leguin | verifier | i843-885 | in-flight | 7 | — | verdict file absent | 22:03:41 |
+| leguin | verifier | i843-885 | result | 7 | — | verdict file WRITTEN | 22:04:49 |
 | leguin | verifier | i856-870 | failed | 0 | — | verdict file absent | 19:46:02 |
 | leguin | verifier | i871-885 | failed | 0 | — | verdict file absent | 19:46:02 |
 | leguin | verifier | i886-900 | failed | 0 | — | verdict file absent | 19:46:02 |
-| leguin | verifier | i889-923 | in-flight | 8 | — | verdict file absent | 22:03:24 |
+| leguin | verifier | i889-923 | result | 8 | — | verdict file WRITTEN | 22:04:42 |
 | leguin | verifier | i90-104 | result | 9 | — | verdict file WRITTEN | 16:57:40 |
 | leguin | verifier | i901-915 | failed | 0 | — | verdict file absent | 19:46:03 |
 | leguin | verifier | i916-923 | failed | 0 | — | verdict file absent | 19:46:07 |

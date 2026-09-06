@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 18:04:17 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 18:09:50 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -96,7 +96,7 @@ KeyError: 'tag'
 - wf_3d71f708-fe3: 1 journal lines, 1 agents
 - wf_b15831a8-df4: 1 journal lines, 1 agents
 - wf_d76e605d-6d1: 1 journal lines, 1 agents
-- wf_e95fca37-bb5: 24 journal lines, 15 agents
+- wf_e95fca37-bb5: 27 journal lines, 16 agents
 
-## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.55 3.94 3.22
+## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;86204 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;86240 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;
+load: 17.73 8.20 5.02
