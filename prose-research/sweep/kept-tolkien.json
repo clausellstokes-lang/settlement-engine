@@ -5483,5 +5483,243 @@
    "note": "Register grading present: \"allow our First Age elves to be one step down from the Valar in their archaicism, as the text does.\" Two divergences: the page ranks Iluvatar most archaic with \"the close runner-up of the Valar\", not the Valar at the top; and \"cheap archaism\" is the summarizer's word - the page calls Yea/Nay \"another good archaicism\" that \"can appear all the time\".",
    "fromFile": "verdicts-tolkien-chunk-05.json"
   }
+ },
+ {
+  "index": 345,
+  "feature": "momentum through sentence shape",
+  "claim": "Nepveu singles out the opening sentences of the chapter's last paragraph, whose repeated 'but he outpaced it / but he was ever before them' convey momentum.",
+  "source": "Kate Nepveu, LotR re-read: The Ride of the Rohirrim (2010-05-07)",
+  "url": "https://reactormag.com/lotr-re-read-return-of-the-king-v5-the-ride-of-the-rohirrim/",
+  "page": "LotR re-read: Return of the King V.5, The Ride of the Rohirrim",
+  "quote": "but he was ever before them",
+  "angle": "close",
+  "verdict": {
+   "index": 345,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "but he was ever before them",
+   "note": "Nepveu: 'I didn't quote all of the last paragraph of the chapter ... but look at the opening sentences:', quotes them, then 'Isn't that a great way to convey momentum?' Both 'but he outpaced it' and 'but he was ever before them' present verbatim.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 346,
+  "feature": "comma withheld for pace; spearpoint ending",
+  "claim": "Commenters on the Grey Havens re-read note that Tolkien left 'a far green country' without a comma so as not to slow the prose, and that 'Well, I'm back' works as a spearpoint driven home by everything before it.",
+  "source": "Kate Nepveu, LotR re-read: The Grey Havens (2011-01-13) and comments",
+  "url": "https://reactormag.com/2011/01/13/rotk-vi-9/",
+  "page": "LotR re-read: Return of the King VI.9, The Grey Havens",
+  "quote": "didn't want to slow down his prose with a comma",
+  "angle": "close",
+  "verdict": {
+   "index": 346,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "didn't want to slow down his prose with a comma",
+   "note": "Cited URL reactormag.com/2011/01/13/rotk-vi-9/ returns HTTP 403; same post fetched at reactormag.com/rotk-vi-9/ (Wayback snapshot of the tor.com original exists but carries no comments). Comment: 'the far, green country (except Tolkien didn't want to slow down his prose with a comma)'. Second comment: \"'Well, I'm back' ... It's Jo Walton's 'spearpoint theory': those three small words are the 'spearpoint' driven home by the weight of everything that precedes them.\" Both are commenters, as the claim states; the spearpoint idea is attributed on-page to Jo Walton.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 347,
+  "feature": "ambiguous archaic word senses",
+  "claim": "Wormtongue's 'pale wise face' exploits the older non-positive sense of 'wise', 'froward tongue' is King James Proverbs diction, and Tolkien changed 'fire and flood' to 'fire and death' to remove ambiguity.",
+  "source": "Kate Nepveu, LotR re-read: The King of the Golden Hall, and comments",
+  "url": "https://reactormag.com/lotr-re-read-two-towers-iii6-the-king-of-the-golden-hall/",
+  "page": "LotR re-read: Two Towers III.6, The King of the Golden Hall",
+  "quote": "a pale wise face and heavy-lidded eyes",
+  "angle": "close",
+  "verdict": {
+   "index": 347,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a pale wise face and heavy-lidded eyes",
+   "note": "All three elements on the page. Post: 'a small amount of ambiguity: \"a wizened figure of a man, with a pale wise face and heavy-lidded eyes.\" Unless this is some archaic non-positive use of \"wise\"?' Commenter supplies the sense ('Not necessarily a positive connotation'). Commenter: 'The phrase which Tolkien uses, \"froward tongue\", occurs in the King James Bible's translation of the book of Proverbs.' Commenter: 'In the original text this was \"fire and flood.\" Tolkien changed it precisely to remove the ambiguity. See Letters p. 201.' Two of the three come from comments, which the source line credits.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 348,
+  "feature": "two-beat stress/release rhythm",
+  "claim": "Le Guin's close reading of 'Fog on the Barrow-downs' finds a two-beat rhythm of stress and release, with the chapter's final plain sentences full of rapid reversals that fall like drumbeats in quiet simple language.",
+  "source": "Kate Nepveu, LotR re-read: Fog on the Barrow-downs (quoting Le Guin's Rhythmic Pattern)",
+  "url": "https://reactormag.com/lotr-re-read-fellowship-i8-fog-on-the-barrow-downs/",
+  "page": "LotR re-read: Fellowship I.8, Fog on the Barrow-downs",
+  "quote": "They are like drumbeats.",
+  "angle": "close",
+  "verdict": {
+   "index": 348,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They are like drumbeats.",
+   "note": "Page quotes Le Guin: 'two beats. Stress, release.' and, of the chapter's close, 'These are the final sentences:' followed by 'These few lines of straightforward narrative description are full of rapid reversals ... They are like drumbeats ... Yet the tone is quiet, the language simple.' Every element of the claim matches.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 349,
+  "feature": "intrusive omniscient narrator in LotR",
+  "claim": "The omniscient narrator reappears on the Downs to raise and simultaneously discount supernatural possibility, calling the standing stone 'more like a warning'.",
+  "source": "Kate Nepveu, LotR re-read: Fog on the Barrow-downs",
+  "url": "https://reactormag.com/lotr-re-read-fellowship-i8-fog-on-the-barrow-downs/",
+  "page": "LotR re-read: Fellowship I.8, Fog on the Barrow-downs",
+  "quote": "more like a warning",
+  "angle": "close",
+  "verdict": {
+   "index": 349,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The intrusive omniscient narrator makes a reappearance on the Downs",
+   "note": "First half verbatim in Nepveu's post: 'The intrusive omniscient narrator makes a reappearance on the Downs, first to raise and, simultaneously, discount a possibility of supernatural doings'. CAVEAT: the passage she then quotes is the warm-sun/lying-too-long one, NOT the standing stone. 'more like a warning' appears only in a reader comment: 'I noticed the interjection of the omniscient voice as well with the statement that the standing stone they lunch under was \"more like a warning.\"' The claim's source line credits only Nepveu, not comments, so the standing-stone half is mis-attributed.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 350,
+  "feature": "depths of time in a chapter",
+  "claim": "Dunharrow's Púkel-men and the Baldor episode make 'The Muster of Rohan' a chapter full of history and the depths of time, seen through Merry's wonder and pity.",
+  "source": "Kate Nepveu, LotR re-read: The Muster of Rohan",
+  "url": "https://reactormag.com/lotr-re-read-return-of-the-king-v3-the-muster-of-rohan/",
+  "page": "LotR re-read: Return of the King V.3, The Muster of Rohan",
+  "quote": "the depths of time",
+  "angle": "close",
+  "verdict": {
+   "index": 350,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this is a chapter full of history and the depths of time",
+   "note": "One sentence carries the whole claim: Puekel-men 'still sitting at the turnings of the road', Merry looking at them 'with wonder and a feeling almost of pity', 'Between these and Baldor, below, this is a chapter full of history and the depths of time.' Baldor's story is discussed at length further down the post.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 351,
+  "feature": "polarities that reverse",
+  "claim": "Le Guin's essay, as summarised, reads the narrative as pulsing between polarities (darkness/daylight, confusion/clarity, imprisonment/freedom), each reversal recurring three or four times per chapter, and hears a Beethoven finale when the closing lines are read aloud.",
+  "source": "Kate Nepveu, LotR re-read: Le Guin, Rhythmic Pattern in The Lord of the Rings (LiveJournal)",
+  "url": "https://kate-nepveu.livejournal.com/180011.html",
+  "page": "LotR re-read: Le Guin, Rhythmic Pattern in The Lord of the Rings",
+  "quote": "Stress, release. Inbreath, outbreath. A heartbeat.",
+  "angle": "close",
+  "verdict": {
+   "index": 351,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stress, release. Inbreath, outbreath. A heartbeat.",
+   "note": "Quote verbatim. Polarities verbatim as \"darkness/daylight,\" \"confusion of thought/clarity,\" and \"imprisonment or a trap/freedom\" within 'a pulsation back and forth between polarities'. Beethoven verbatim: 'Reading the lines aloud I can't help thinking of a Beethoven finale'. UNSUPPORTED SUB-CLAIM: 'each reversal recurring three or four times per chapter' is nowhere on the page - grep for 'three or four' returns zero hits in both this page and the Reactor post that summarises the same essay. Drop or re-source that frequency.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 352,
+  "feature": "cadence that follows the breath",
+  "claim": "Le Guin (2001, quoted by Fisher) says even long sentences flow clearly and follow the breath, punctuation falls where one needs to pause, the cadences are graceful and inevitable, and the prose wants the living voice.",
+  "source": "Jason Fisher, Reading The Lord of the Rings aloud (Lingwë, 2010-09-23)",
+  "url": "http://lingwe.blogspot.com/2010/09/reading-lord-of-rings-aloud.html",
+  "page": "Reading The Lord of the Rings aloud",
+  "quote": "the cadences are graceful and inevitable",
+  "angle": "close",
+  "verdict": {
+   "index": 352,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the cadences are graceful and inevitable",
+   "note": "Fisher's post opens with the Le Guin block quote entire: 'Even when the sentences are long, their flow is perfectly clear, and follows the breath; punctuation comes just where you need to pause; the cadences are graceful and inevitable ... it wants the living voice to speak it.' Footnote sources it to Le Guin, 'Rhythmic Pattern in The Lord of the Rings', Meditations on Middle-earth, 2001, pp. 101-2. Every element of the claim matches, including the 2001 date.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 353,
+  "feature": "language shifts with atmosphere",
+  "claim": "In the Barrow-downs the prose moves from heavy heat to wet fog to sudden violence as the mist is 'rolled up and thrust aside', with conflicting sensations that make even the stars ominous.",
+  "source": "Katie, LotR Re-Read: Fog on the Barrow Downs (The Fandomentals, 2016-05-11)",
+  "url": "https://www.thefandomentals.com/lord-rings-re-read-fog-barrow-downs/",
+  "page": "Lord of the Rings Re-Read: Fog on the Barrow Downs",
+  "quote": "the mist was rolled up and thrust aside",
+  "angle": "close",
+  "verdict": {
+   "index": 353,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the mist was rolled up and thrust aside",
+   "note": "Page: 'It's interesting how Tolkien's language changes along with the atmosphere, and how many conflicting sensations arise', then the Tolkien passage containing 'the mist was rolled up and thrust aside', then 'We've moved from heavy heat to wet fog, and then suddenly the fog itself gets shredded. At this point even the starry sky ... feels ominous and sharp.' Full match.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 354,
+  "feature": "simple short sentences at high drama",
+  "claim": "The Cirith Ungol escape pairs drama with a simplicity of prose: short plain sentences such as 'There was a crack.' and 'Then they ran.'",
+  "source": "Katie, The Tower of Cirith Ungol (The Fandomentals, 2018-09-12)",
+  "url": "https://www.thefandomentals.com/the-tower-of-cirith-ungol/",
+  "page": "The Tower of Cirith Ungol",
+  "quote": "pairs nicely with a simplicity of prose",
+  "angle": "close",
+  "verdict": {
+   "index": 354,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pairs nicely with a simplicity of prose",
+   "note": "Under 'Prose Prize': 'The drama of what's occurring pairs nicely with a simplicity of prose.' The block quote that follows contains both 'Then they ran.' and 'There was a crack.' verbatim. Full match.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 356,
+  "feature": "opening-sentence metre",
+  "claim": "'In a hole in the ground there lived a hobbit' runs on three-syllable feet with the iamb 'there lived' acting as an invisible colon and the last foot inverting the rhythm, while the hole is described by negation.",
+  "source": "John Sanders, Of Feet and Hobbit-Holes (Broadly Textual, 2019-10-15)",
+  "url": "https://broadlytextual.com/2019/10/15/of-feet-and-hobbit-holes-lessons-learned-from-a-literary-intro/",
+  "page": "Of Feet and Hobbit-Holes: Lessons Learned from a Literary Intro",
+  "quote": "not a nasty, dirty, wet hole",
+  "angle": "close",
+  "verdict": {
+   "index": 356,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Not a nasty, dirty, wet hole (sentence-initial capital on page)",
+   "note": "All elements verbatim: 'three syllable units (feet)'; 'the two-syllable iamb \"there lived\" ... to basically function as an invisible colon'; 'this final three-syllable foot inverts the rhythm of the first two'. Negation: 'The first hole Tolkien describes -- \"nasty, dirty, wet\"'. Quote differs from the page only by sentence-initial capitalisation of 'Not'.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 357,
+  "feature": "opening-sentence sequencing",
+  "claim": "The Hobbit's first sentence is a portal of words whose two-to-three-word units are successive steps of entry, withholding the definition of 'hole' until context reframes it.",
+  "source": "Shawn Marchese, Down the Hobbit Hole (Prancing Pony Ponderings, 2017-09-17)",
+  "url": "https://theprancingponypodcast.com/2017/09/17/down-the-hobbit-hole/",
+  "page": "Down the Hobbit Hole",
+  "quote": "a portal of words",
+  "angle": "close",
+  "verdict": {
+   "index": 357,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a well-constructed portal of words",
+   "note": "Page: 'The first sentence of The Hobbit is a well-constructed portal of words, a tunnel right through the wall ... every two or three words representing a different point along the path of entry', then walks the four units. On withholding: 'We don't know yet that the word hole has a meaning in hobbit-vernacular roughly equivalent to our word house. Tolkien plays on this by not defining it.' Full match.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 358,
+  "feature": "intrusive avuncular narrator (Hobbit)",
+  "claim": "The Hobbit's narrator comments and converses with the reader in an avuncular, almost condescending voice Tolkien later called a bad style and dropped for the uncommenting omniscience of LotR.",
+  "source": "Nasrullah Mambrol, Analysis of Tolkien's The Hobbit (Literariness, 2021-02-18)",
+  "url": "https://literariness.org/2021/02/18/analysis-of-tolkiens-the-hobbit/",
+  "page": "Analysis of Tolkien's The Hobbit",
+  "quote": "well, you will see",
+  "angle": "close",
+  "verdict": {
+   "index": 358,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "well, you will see",
+   "note": "Page: the narrator 'is an intrusive voice that consistently comments on the actions of the story and engages in a kind of conversation with the reader. The narrator's tone, however, is avuncular, and his relationship to the reader almost condescending'; the 'well, you will see' passage is one of its two cited examples; and Tolkien in a 1967 interview: 'The Hobbit was written in what I should now regard as a bad style'. LotR contrast on-page: 'an omniscient narrator who presents the material objectively and without comment'. Full match.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
+ },
+ {
+  "index": 359,
+  "feature": "narrator persistence in LotR",
+  "claim": "The LotR narrator is less explicit than The Hobbit's but still present in offhand foreknowledge and poetic interludes, and the hobbit viewpoint is held whenever a hobbit is on stage.",
+  "source": "Evan Þ, Narrators and Perspectives (Papyrus Rampant, 2023-10-07)",
+  "url": "https://papyrusrampant.substack.com/p/narrators-and-perspectives",
+  "page": "Narrators and Perspectives",
+  "quote": "the narrator's voice isn't as explicit",
+  "angle": "close",
+  "verdict": {
+   "index": 359,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the narrator's voice isn't as explicit, but it's still definitely present",
+   "note": "Page: 'In Lord of the Rings, the narrator's voice isn't as explicit, but it's still definitely present', with the two examples the claim generalises - 'the offhand mention that Aragorn would never return to Cerin Amroth' (foreknowledge) and 'the jump into poetry as Theoden is riding to Gondor'. Viewpoint: 'Almost whenever there's a hobbit onstage, we see the hobbit's thoughts and no one else's.' Full match.",
+   "fromFile": "verdicts-tolkien-i345-359.json"
+  }
  }
 ]
