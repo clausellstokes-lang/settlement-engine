@@ -21,3 +21,20 @@ OSR_WALKER_PLAIN_EXIT=0 (must be 0 — the drift arm absorbed)
 MOUNTS_DOOR_EXIT=0
   changed: [scripts/.observed-shape-readers-baseline.json ]
 === 3. PROSE-NUMERICS re-key (dry, then --write):
+PN_DRY_EXIT=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+PN_WRITE_EXIT=0
+  written: 0 snippets re-keyed, 0 lines moved; 0 FELL rows left for review
+=== 4. WRITER-REACH --write (shrink-only; predicted NO refresh — the lane changed no writer string; the dry run decides):
+WR_DRY_EXIT=0 (read the refusal text if any)
+WRITER_REACH_WRITE_EXIT=0
+writer-reach WRITE — cohort 1322 → 1322; 0 stale folded out; 0 registered rows now lit.
+WRWALKER HOLD — judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326 (reviewable 526) · pending-surface debt: isolationSupport on settlement → web-display (§12 WRW-2, the owner row that rules wh
+WR_PLAIN_EXIT=0 (must be 0)
+=== 5. TUNING INVENTORY refreeze:
+TUNING_DOOR_EXIT=1 (non-zero EXPECTED)
+=== 6b. REALM-SCALE sourceFingerprint: MEASURED — a LIVE comparison between a certification plan and the tree (no committed product register; tests/ops/realmScaleCertification.test.js 10/10 green after the banner car). No door here; the kit's L-PROBE certification receipts predate the banner car and are re-run at the lighting landing (§901).
+=== 7. WIZARD-NEWS re-sign:
+  (hand act: python3 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/wizard-resign.py <log> tests/lint/.wizard-news-authoring-baseline.json --write — run after reading its usage; NOT automated here)
+REGISTER_PORCELAIN=[scripts/.observed-shape-readers-baseline.json scripts/.writer-reach-baseline.json ]
+NEXT: review each changed register against PREDICTIONS; commit register car 2 (OSR re-freeze, mounts, prose-numerics, writer-reach, tuning inventory); the wizard re-sign by hand as register car 3; plain re-runs of every walker as receipts; then the capsule car (--runtime-tests from the ratchet), the kit, the ratchet, totals, owed-ledger, the gate.
