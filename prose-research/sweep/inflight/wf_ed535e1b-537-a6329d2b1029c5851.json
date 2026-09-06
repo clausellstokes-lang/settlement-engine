@@ -1,0 +1,39 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i897-935",
+ "lines": 81,
+ "firstTs": "2026-09-06T18:09:54.150Z",
+ "lastTs": "2026-09-06T18:13:58.125Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 17
+ },
+ "urlsFetched": [
+  "https://www.wildcardsworld.com/intervew/interview-with-george-r-r-martin-from-sff-world/",
+  "https://www.publishersweekly.com/978-1-5247-9628-0",
+  "https://www.tor.com/2018/11/21/grrm-fire-and-blood-review/",
+  "https://www.publishersweekly.com/pw/by-topic/authors/interviews/article/77516-pw-talks-with-george-r-r-martin.html",
+  "https://www.bookpage.com/interviews/17465-george-r-r-martin-fiction/",
+  "https://authorarrivera.com/2023/09/10/a-brief-linguistic-exam-of-a-song-of-ice-and-fire/",
+  "https://nineworldsacademia.wordpress.com/2014/08/15/writing-westeros-a-corpus-linguistic-study-of-a-song-of-ice-and-fire/",
+  "https://www.fictionadvocate.com/2015/01/28/how-to-write-like-george-r-r-martin/",
+  "http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/",
+  "http://web.archive.org/cdx/search/cdx?url=prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/&output=text&limit=20&fl=timestamp,statuscode,mimetype",
+  "http://web.archive.org/cdx/search/cdx?url=prosecraft.io*&output=text&limit=40&fl=timestamp,original,statuscode&filter=original:.*knight.*",
+  "https://web.archive.org/web/20200116004102id_/https://www.tor.com/2018/11/21/grrm-fire-and-blood-review/",
+  "https://web.archive.org/web/20181027143335id_/http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint file written and validated (15 claims, 15 verdicts, indices aligned).",
+ "run": "wf_ed535e1b-537",
+ "agent": "a6329d2b1029c5851",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_ed535e1b-537/agent-a6329d2b1029c5851.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i897-935.json",
+  "exists": true
+ }
+}

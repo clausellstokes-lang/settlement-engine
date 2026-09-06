@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i169-183",
- "lines": 62,
+ "lines": 69,
  "firstTs": "2026-09-06T18:04:54.970Z",
- "lastTs": "2026-09-06T18:08:04.859Z",
+ "lastTs": "2026-09-06T18:09:00.884Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 14
+  "Bash": 15,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
@@ -23,9 +24,9 @@
  "run": "wf_a9298963-fdf",
  "agent": "a9a17cbcde5d4520c",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-a9a17cbcde5d4520c.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i169-183.json",
-  "exists": false
+  "exists": true
  }
 }

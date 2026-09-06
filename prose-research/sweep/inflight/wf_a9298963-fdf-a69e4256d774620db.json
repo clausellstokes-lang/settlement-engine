@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i184-198",
- "lines": 72,
+ "lines": 109,
  "firstTs": "2026-09-06T18:04:54.970Z",
- "lastTs": "2026-09-06T18:08:16.398Z",
+ "lastTs": "2026-09-06T18:11:47.177Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 14
+  "Bash": 22,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
@@ -23,13 +24,13 @@
   "https://web.archive.org/web/20200812035704id_/https://www.enworld.org/threads/legend-lore-says-story-not-rules-3-4.334907/"
  ],
  "filesWritten": [],
- "lastAssistantText": "The EN World URL resolves to a different thread entirely. Running recovery routes.",
+ "lastAssistantText": ". All seven sources reached as raw text (no summarizer, no search snippets): the Paizo PDF via binary fetch + pypdf extraction, five HTML pages via a browser-UA curl and local tag stripping, and the EN World thread via the Wayback raw capture after the live URL was found to serve a different thread.",
  "run": "wf_a9298963-fdf",
  "agent": "a69e4256d774620db",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-a69e4256d774620db.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i184-198.json",
-  "exists": false
+  "exists": true
  }
 }

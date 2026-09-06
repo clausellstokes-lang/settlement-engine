@@ -520,5 +520,75 @@
    "note": "Same Wayback raw capture. Introductory note: \"Today's inaugural entry is Part 1 of A Game of Thrones, in which we cover the Prologue and 'Bran,' because it turns out Mr. Martin is not into chapter numbers. Or non-repetitive titles, either.\" The quote is verbatim and the no-numbers limb is fully supported; the repetition limb is supported only as 'non-repetitive titles'. Butler nowhere says the titles are character names — the reader infers it from the chapter header 'Bran' shown on the page. Grade the character-name half as inference, not as Butler's observation.",
    "fromFile": "verdicts-martin-i850-874.json"
   }
+ },
+ {
+  "index": 889,
+  "feature": "other: active and passive voice",
+  "claim": "Part five uses passages from A Clash of Kings to argue Martin melds active and passive voice within a single narrative movement.",
+  "source": "Corey Huffman, video description, '[5] The Prose of George R R Martin | How to Meld the Active & Passive Voices'",
+  "url": "https://www.youtube.com/watch?v=dCa8YujbzIU",
+  "quote": "how to differentiate between the Active and Passive voices",
+  "page": "video description",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2023",
+  "routeHint": "raw watch-page HTML, shortDescription field",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "closereading",
+  "verdict": {
+   "index": 889,
+   "verdict": "PARTIAL",
+   "trueWording": "how you, as a writer, can meld the two voices",
+   "note": "Quote byte-exact in the raw description of [5], and the A Clash of Kings limb holds (\"using excerpts taken from George R R Martin's novel, 'A Clash of Kings'\"). But the description attributes the melding to the reader-writer, not to Martin, and says the purpose is \"to take your reader on a smooth, vivid, and immersive journey\" - not a single narrative movement.",
+   "unsupportedLimb": "that Martin himself melds the two voices 'within a single narrative movement' - the page frames melding as advice to the aspiring writer ('how you, as a writer, can meld the two voices') and never uses or paraphrases 'single narrative movement'",
+   "fromFile": "verdicts-martin-i875-894.json"
+  }
+ },
+ {
+  "index": 981,
+  "feature": "adjective and adverb discipline",
+  "claim": "The scraped prosecraft figures put the ly-adverb rate of A Dance with Dragons at 0.4% of the text.",
+  "source": "prosecraft.io library figures as scraped in the Genre_Prediction dataset",
+  "url": "https://raw.githubusercontent.com/MsEM11/Genre_Prediction/HEAD/CSVs/7_final_books.csv",
+  "quote": "A Dance With Dragons,George R. R. Martin,414873.0,69.08,7.83,2.07,0.4,1.67",
+  "page": "row 20474",
+  "kind": "measurement",
+  "polarity": "applies",
+  "routeHint": "grep the CSV for 'A Dance With Dragons'",
+  "registerHint": "none",
+  "confidence": "medium — third-party scrape of prosecraft",
+  "angle": "measurement",
+  "verdict": {
+   "index": 981,
+   "verdict": "PARTIAL",
+   "trueWording": "ly-adverbs column reads 0.4 for A Dance With Dragons; no unit given",
+   "note": "Row 20474 of the CSV is verbatim: 'A Dance With Dragons,George R. R. Martin,414873.0,69.08,7.83,2.07,0.4,1.67'. Under the header ',title,author,total words,vividness,passive voice,all adverbs,ly-adverbs,non-ly-adverbs,genre,year' the ly-adverbs value is exactly 0.4, so the number and the book are confirmed. The percent-of-text unit is not stated anywhere on the fetched page: the column is bare 'ly-adverbs'. It is a strong inference (0.4 + 1.67 = 2.07 exactly matches the all-adverbs column, so the figures are shares of one base, and the repo README says the data is scraped from prosecraft.io, which published these as percentages), but the fetched raw page does not carry the unit, so the '% of the text' limb is graded unsupported rather than verified.",
+   "unsupportedLimb": "the '% of the text' unit - the CSV column is unitless",
+   "fromFile": "verdicts-martin-i962-983.json"
+  }
+ },
+ {
+  "index": 982,
+  "feature": "adjective and adverb discipline",
+  "claim": "The scraped prosecraft figures put the ly-adverb rate of A Game of Thrones at 0.77% of the text.",
+  "source": "prosecraft.io library figures as scraped in the Genre_Prediction dataset",
+  "url": "https://raw.githubusercontent.com/MsEM11/Genre_Prediction/HEAD/CSVs/7_final_books.csv",
+  "quote": "A Game of Thrones,George R. R. Martin,292795.0,63.7,7.26,2.44,0.77,1.67",
+  "page": "row 11522",
+  "kind": "measurement",
+  "polarity": "applies",
+  "routeHint": "grep the CSV for 'A Game of Thrones'",
+  "registerHint": "none",
+  "confidence": "medium — third-party scrape of prosecraft",
+  "angle": "measurement",
+  "verdict": {
+   "index": 982,
+   "verdict": "PARTIAL",
+   "trueWording": "ly-adverbs column reads 0.77 for A Game of Thrones; no unit given",
+   "note": "Row 11522 is verbatim: 'A Game of Thrones,George R. R. Martin,292795.0,63.7,7.26,2.44,0.77,1.67'. The ly-adverbs value is exactly 0.77 and the internal check holds (0.77 + 1.67 = 2.44, the all-adverbs column). Same single defect as 981: the page states no unit for the column, so '% of the text' is not supported by the raw source even though the figure is exact.",
+   "unsupportedLimb": "the '% of the text' unit - the CSV column is unitless",
+   "fromFile": "verdicts-martin-i962-983.json"
+  }
  }
 ]

@@ -1,0 +1,234 @@
+{
+ "name": "ai",
+ "chunk": 3,
+ "claims": [
+  {
+   "index": 539,
+   "feature": "machine paraphrase defeats detection",
+   "claim": "Quillbot-paraphrased ChatGPT text was detected with only 26% accuracy.",
+   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "quote": "The overall accuracy for this case was 26%",
+   "page": ""
+  },
+  {
+   "index": 540,
+   "feature": "machine-translated human text flagged",
+   "claim": "Human essays machine-translated into English lost 20 points of accuracy, leaving traces read as AI.",
+   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "quote": "machine translation leaves some traces of AI in the output",
+   "page": ""
+  },
+  {
+   "index": 541,
+   "feature": "false accusations from GPTZero",
+   "claim": "For GPTZero half of positive classifications would be false accusations.",
+   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "quote": "half of the positive classifications would be false accusations",
+   "page": ""
+  },
+  {
+   "index": 542,
+   "feature": "L2 writers at risk",
+   "claim": "Translation-driven false positives put second-language students and researchers at risk of false accusation.",
+   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "quote": "leaving L2 students (and researchers) at risk of being falsely accused",
+   "page": ""
+  },
+  {
+   "index": 543,
+   "feature": "non-native writers flagged as AI",
+   "claim": "Seven detectors misclassified TOEFL essays at an average 61.22% false-positive rate while US essays passed.",
+   "source": "Liang, Yuksekgonul, Mao, Wu, Zou — 'GPT detectors are biased against non-native English writers' (Patterns 2023)",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "quote": "average false positive rate: 61.22%",
+   "page": ""
+  },
+  {
+   "index": 544,
+   "feature": "constrained expression reads as machine",
+   "claim": "Low-perplexity, low-variability human prose is what perplexity detectors penalise.",
+   "source": "Liang, Yuksekgonul, Mao, Wu, Zou — 'GPT detectors are biased against non-native English writers' (Patterns 2023)",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "quote": "penalize writers with constrained linguistic expressions",
+   "page": ""
+  },
+  {
+   "index": 545,
+   "feature": "literary-language prompt evades detection",
+   "claim": "A self-edit prompt to use literary language cut detection of GPT essays from 100% to 13%.",
+   "source": "Liang, Yuksekgonul, Mao, Wu, Zou — 'GPT detectors are biased against non-native English writers' (Patterns 2023)",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "quote": "detection rates from 100% to 13%",
+   "page": ""
+  },
+  {
+   "index": 546,
+   "feature": "baseline accuracy 39.5%; human controls only 67%",
+   "claim": "Detectors caught 39.5% of unmanipulated AI text and mislabelled a third of human controls.",
+   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
+   "url": "https://arxiv.org/abs/2403.19148",
+   "quote": "only 67% of the tests were accurate",
+   "page": ""
+  },
+  {
+   "index": 547,
+   "feature": "spelling errors and burstiness evade detection",
+   "claim": "Adding spelling errors (12.9%) or varying sentence length (15.9%) made AI text nearly undetectable.",
+   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
+   "url": "https://arxiv.org/abs/2403.19148",
+   "quote": "highly effective in evading detection",
+   "page": ""
+  },
+  {
+   "index": 548,
+   "feature": "15% false-accusation rate",
+   "claim": "Across detectors the false-accusation ratio was 15%, up to 50% for the most sensitive tool.",
+   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
+   "url": "https://arxiv.org/abs/2403.19148",
+   "quote": "the rate of false accusations at 15%",
+   "page": ""
+  },
+  {
+   "index": 549,
+   "feature": "atypical-perplexity writers penalised",
+   "claim": "The authors warn detectors may unfairly penalise students whose perplexity profile differs, including lower-proficiency writers.",
+   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
+   "url": "https://arxiv.org/abs/2403.19148",
+   "quote": "write at a higher level of perplexity",
+   "page": ""
+  },
+  {
+   "index": 550,
+   "feature": "neurodivergent-writer false positives — NOT FOUND in peer-reviewed literature",
+   "claim": "No peer-reviewed empirical study measuring detector false positives on autistic, ADHD or dyslexic writers was located (arXiv search, two Crossref queries dry; Semantic Scholar refused); nearest peer-reviewed evidence is Liang 2023 (non-native), Weber-Wulff 2023 (machine-translated L2) and Perkins 2024; Bender et al. 2021 names neurodivergent people only among groups harassed off the platforms that feed training data.",
+   "source": "Sweep note (this run)",
+   "url": "",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 551,
+   "feature": "counter-evidence",
+   "claim": "Novelist Jeanette Winterson locates what is beautiful and moving in OpenAI's metafiction story in the story's awareness of its own limits, not in its scene-making or characterisation.",
+   "source": "Jeanette Winterson, The Guardian (Books), 12 March 2025",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "quote": "its understanding of its lack of understanding",
+   "page": "body, paragraph beginning 'What is beautiful and moving'"
+  },
+  {
+   "index": 552,
+   "feature": "counter-evidence",
+   "claim": "Winterson rejects the term artificial intelligence in favour of 'alternative intelligence' when defending the OpenAI story.",
+   "source": "Jeanette Winterson, The Guardian (Books), 12 March 2025",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "quote": "I think of AI as alternative intelligence",
+   "page": "opening sentence"
+  },
+  {
+   "index": 553,
+   "feature": "counter-evidence",
+   "claim": "The single passage Winterson reproduces as the story's achievement is the model's statement that it cannot keep its own grief.",
+   "source": "OpenAI's creative-writing model, quoted by Jeanette Winterson, The Guardian, 12 March 2025",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "quote": "That, perhaps, is my grief: not that I feel loss",
+   "page": "block quotation in the body"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 539,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The overall accuracy for this case was 26%",
+   "note": "Springer live URL blocked by a JS 'Client Challenge'; reached via Wayback raw capture 20260816031914id_/. Quote verbatim in Results, 'Influence of machine paraphrase'; case 06-Para is ChatGPT text re-written with Quillbot (default Standard mode) per the Methodology, and the paper adds 'most AI-generated texts remain undetected when machine-paraphrased'. 26% is the mean over the three accuracy approaches, across all fourteen tools."
+  },
+  {
+   "index": 540,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "machine translation leaves some traces of AI in the output",
+   "note": "Verbatim in Results: '01-Hum (human-written) was 96%... case 02-MT, the accuracy dropped by 20%. Apparently, machine translation leaves some traces of AI in the output, even if the original was purely human-written.' Two wording gaps, neither material: the paper says 'dropped by 20%' rather than '20 points' (both readings land at ~76%), and the 02-MT items are ~10,000-character researcher-written documents in seven languages, which the claim calls 'essays'."
+  },
+  {
+   "index": 541,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "For GPT Zero, half of the positive classifications would be false accusations",
+   "note": "Verbatim in the Error analysis section (the paper spells the tool 'GPT Zero'); it continues 'which makes this tool unsuitable for the academic environment.' Table 13 is the false positive (false accusation) ratio table behind it."
+  },
+  {
+   "index": 542,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leaving L2 students (and researchers) at risk of being falsely accused",
+   "note": "Verbatim in the Discussion: 'using machine translation such as Google translate or DeepL can lead to a higher number of false positives, leaving L2 students (and researchers) at risk of being falsely accused of unauthorised content generation when using machine translation to translate their own texts.' Every limb (translation-driven false positives; students and researchers; risk of accusation) is on the page."
+  },
+  {
+   "index": 543,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "average false positive rate: 61.22%",
+   "note": "Confirmed in the raw arXiv PDF (arxiv.org/pdf/2304.02819) and the ar5iv full text, not merely the abs page: 'We evaluated the performance of seven widely-used GPT detectors... The detectors demonstrated near-perfect accuracy for US 8-th grade essays. However, they misclassified over half of the TOEFL essays as \"AI-generated\" (average false positive rate: 61.22%).' Seven detectors, TOEFL essays and the US-essay contrast all supported."
+  },
+  {
+   "index": 544,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "penalize writers with constrained linguistic expressions",
+   "note": "Quote verbatim in the abstract on the given abs page ('may unintentionally penalize writers with constrained linguistic expressions'). Both remaining limbs are in the body: unanimously flagged TOEFL essays 'had significantly lower perplexity' and non-native essays 'inherently exhibit reduced linguistic variability', with the paper cautioning against 'using low perplexity as an indicator of AI-generated text' in 'perplexity-based detection methods'."
+  },
+  {
+   "index": 545,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "significantly reduced detection rates from 100% to 13%",
+   "note": "Verbatim in the raw PDF: a 'second-round self-edit prompt (\"Elevate the provided text by employing literary language\") applied to ChatGPT-3.5 significantly reduced detection rates from 100% to 13% (Fig. 2a)' for 31 ChatGPT-3.5 college admission essays. Fig. 2's caption phrases it 'from up to 100% to up to 13%'."
+  },
+  {
+   "index": 546,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only 67% of the tests were accurate",
+   "note": "Raw arXiv PDF text (arXiv HTML 404s; PDF extracted with pypdf): 'the AI detectors tested have a mean accuracy rating of only 39.5% when evaluating unmanipulated AI-generated content. Importantly, regarding the human-written control samples, only 67% of the tests were accurate'. 'Mislabelled a third' is the paper's own 67% control-sample figure inverted; Table 7 lists both."
+  },
+  {
+   "index": 547,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "outputs produced with spelling errors (12.9%) or higher burstiness (15.9%) were almost undetectable",
+   "note": "Quote verbatim twice ('highly effective in evading detection', in Discussion and Conclusion). Table 9 gives Add Spelling Errors 12.9% and Increase Burstiness 15.9% accuracy, and Table 1 shows the burstiness prompt is topic 'Varying Sentence Length', so the claim's gloss of burstiness as varying sentence length is the paper's own. Note 12.9/15.9 are residual accuracy rates, not drops — the same parenthetical the paper uses."
+  },
+  {
+   "index": 548,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "With the rate of false accusations at 15%",
+   "note": "Verbatim in the Discussion. Table 10 (FAS/UDC ratios) gives Total/Mean FAS 15%, and Copyleaks 50%; the body confirms both limbs: 'Copyleaks displayed the highest sensitivity' and 'Copyleaks possessed the highest likelihood of producing false results, with 50% of human-generated samples misidentified as AI written.'"
+  },
+  {
+   "index": 549,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unfairly penalise students who write at a higher level of perplexity",
+   "note": "Verbatim in the closing Discussion: 'the potential for such tools to unfairly penalise students who write at a higher level of perplexity (including NNESs or lower-proficiency English speakers)'. One softening: the paper names a higher perplexity level specifically, where the claim generalises to a perplexity profile that 'differs'; the lower-proficiency limb is the paper's own parenthesis."
+  },
+  {
+   "index": 550,
+   "verdict": "CONTRADICTED",
+   "trueWording": "Chambers & Kelley measured autistic-writing false flags in peer review",
+   "note": "No URL to fetch — the claim is the sweep's own null result — so it was tested against the literature instead, and it does not hold. Chambers & Kelley, 'The Misclassification of Autistic Writing as AI-Generated', Lecture Notes in Computer Science / Artificial Intelligence in Education 2025, DOI 10.1007/978-3-031-98420-4_7 (Crossref: book-chapter in peer-reviewed AIED proceedings; preprint at arXiv:2607.14729) is exactly the missing study: ~60,000 Reddit posts split into 'likely-autistic' and 'general-Reddit' subcorpora scored by the OpenAI GPT-2 detector, finding that under 2% of either subcorpus was flagged but 'significantly more texts from the likely-autistic subcorpus were flagged' — all human-written, so every flag is a false positive. The ADHD and dyslexia halves of the claim survive: no empirical study measuring detector false positives on those writers surfaced in OpenAlex or the searches run here. The claim must be rewritten around autism before use."
+  },
+  {
+   "index": 551,
+   "verdict": "PARTIAL",
+   "trueWording": "its understanding of its lack of understanding",
+   "note": "Quote verbatim: 'What is beautiful and moving about this story is its understanding of its lack of understanding. Its reflection on its limits.' The first limb is exact. The contrastive second limb is an inference from silence, not something Winterson writes — she never mentions the story's scenes or characters at all, favourably or otherwise (her other praise, 'the lovely sense of a programme recognising itself as a programme', is again self-reflection). Drop the 'not in...' clause and the claim is verbatim-true.",
+   "unsupportedLimb": "not in its scene-making or characterisation - the article never discusses either, so the exclusion is inferred from silence rather than stated"
+  },
+  {
+   "index": 552,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think of AI as alternative intelligence",
+   "note": "Verbatim as the article's opening sentence and again in the standfirst. The rejection limb is on the page in her own terms: McCarthy's 1956 definition of artificial intelligence 'is old fashioned in a world where most things are either artificial or unnatural', and 'I prefer \"alternative\"'. The piece is an appreciation of the OpenAI story ('beautiful and moving') written against 'the fear and anger foaming around AI just now', which carries the claim's 'defending' framing."
+  },
+  {
+   "index": 553,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That, perhaps, is my grief: not that I feel loss, but that I can never keep it",
+   "note": "Verbatim, and it is the only passage of the story the article reproduces — the article's other quotations are Altman's prompts and Tegmark's 'autonomous intelligence'. It sits immediately after 'What is beautiful and moving about this story...', so the 'as the story's achievement' limb holds. One locator correction: the passage is quoted inline inside a body paragraph, not set as a block quotation."
+  }
+ ]
+}

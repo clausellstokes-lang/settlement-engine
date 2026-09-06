@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i109-123",
- "lines": 63,
+ "lines": 81,
  "firstTs": "2026-09-06T18:04:54.970Z",
- "lastTs": "2026-09-06T18:08:03.411Z",
+ "lastTs": "2026-09-06T18:11:17.284Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 12
+  "Bash": 15,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://baatag.blogspot.com/2026/04/elements-of-key-4-rules-for-key-writing.html",
@@ -25,13 +26,13 @@
   "https://alldeadgenerations.blogspot.com/2022/12/dungeon-design-process-and-keys.html"
  ],
  "filesWritten": [],
- "lastAssistantText": "All 11 pages fetched HTTP 200. Now converting to text and searching for each claim's limbs.",
+ "lastAssistantText": "Checkpoint written and re-parsed clean. All 11 URLs fetched raw (curl, browser UA, HTTP 200 on every one) — no summarizer, no Wayback needed, no BLOCKED.",
  "run": "wf_a9298963-fdf",
  "agent": "ac7fcd9508660bfc2",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-ac7fcd9508660bfc2.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i109-123.json",
-  "exists": false
+  "exists": true
  }
 }

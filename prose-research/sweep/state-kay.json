@@ -18805,6 +18805,13 @@
    "note": "Live fetch, Speculiction, Tuesday May 6 2014, posted by Jesse, paragraph beginning 'Forever utilizing the patient voice of the storyteller': 'As is also Kay's habit in the middle stage of his oeuvre, there are numerous throwaway lines to the effect \"Later, he, too, would have cause to be privately grateful - amid chaos - that a wager had not taken place that day.\"' The flash-forward limb is carried by that example.",
    "fromFile": "verdicts-kay-i441-485.json"
   },
+  "486": {
+   "index": 486,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Thankfully, however, there are not as many A Song for Arbonne, and by the time Crispin arrives in Sarantium they all but dry up.",
+   "note": "Raw live page (blogspot, HTTP 200). Quote exact. The preceding sentence supplies both other limbs: 'there are numerous throwaway lines to the effect \"Later, he, too, would have cause to be privately grateful...\"' (the proleptic aside) and 'there are not as many A Song for Arbonne' (fewer than in Arbonne). Byline 'Jesse', dated Tuesday, May 6, 2014, in the paragraph beginning 'Forever utilizing the patient voice of the storyteller'.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
   "487": {
    "index": 487,
    "verdict": "SKIPPED_TRIAGE",
@@ -18833,6 +18840,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "491": {
+   "index": 491,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "such as having two moons or changing the landscape, but these are mere cosmetic changes. Kay's craft is much more subtle.",
+   "note": "Live tor.com returned HTTP 403; recovered via Wayback raw capture https://web.archive.org/web/20181116160422id_/https://www.tor.com/2016/07/06/altering-the-familiar-tigana-by-guy-gavriel-kay/ (raw HTML, not a summarizer). Quote exact. Both limbs supported in one sentence, and the next sentence locates the craft in subtler alteration. Byline Joshua Palmatier, 'Wed Jul 6, 2016 12:30pm', paragraph beginning 'How he does is it arcane in and of itself'.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
+  "492": {
+   "index": 492,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But for me, the true art of Kay's work is not in the use of language, but in the subtle way he skews what is so obviously a familiar setting.",
+   "note": "Same Wayback raw capture. Quote exact. 'for him' = 'for me'; the skewing-of-a-familiar-setting limb is the same sentence's second half. It is the final body paragraph, immediately before the author bio, as the claim states.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
   "493": {
    "index": 493,
    "verdict": "SKIPPED_TRIAGE",
@@ -18847,12 +18868,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "495": {
+   "index": 495,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sometimes it remains tied to a character we've just been in tight with, a simple, quick in and out flash forward.",
+   "note": "Live fantasyliterature.com returned HTTP 403; recovered via Wayback raw capture https://web.archive.org/web/20250624011037id_/https://fantasyliterature.com/reviews/written-on-the-dark/ (raw HTML). Quote exact. The 'character the narration has just been close to' limb is verbatim in the same sentence; the one-sentence-whole-life limb is the block quote that follows: 'All his life, and he lived a very long time, and even saw Sarantium again, Gauvard Colle would remember that afternoon, that room.' Review by Bill Capossere, dated May 20th, 2025.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
   "496": {
    "index": 496,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "497": {
+   "index": 497,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The story, therefore, is not a seamless narrative but more a series of situations.",
+   "note": "Same Wayback raw capture. Quote exact. The pausing/jumping limb is the immediately preceding clause: 'the way it pauses for a while to focus on a time, then jumps ahead to detail another period, skipping over whatever intervening months/years took place.'",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
+  "498": {
+   "index": 498,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "small decisions can have major impact... by those often overlooked by the history books: the tavern poets, the bartenders, the guardsmen.",
+   "note": "Same Wayback raw capture. Quote exact, in the paragraph opening 'Thematically, Kay brings in a number of subjects. A major one...' — so 'major theme' is supported. The page's sentence is broader than the claim (it also covers decisions by 'kings and queens and other \"greats\"'), but the claim asserts nothing the page does not; it is narrower, not contrary.",
+   "fromFile": "verdicts-kay-i486-517.json"
   },
   "499": {
    "index": 499,
@@ -18875,12 +18917,40 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "502": {
+   "index": 502,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Here be smeerps! We have trialla and grele instead of nightingales and partridges.",
+   "note": "Raw live page (LiveJournal, HTTP 200). Quote exact. All limbs present in one sentence, in the section headed 'WORLD-BUILDING'. Post titled 'Tigana: Head Smashing', by lepusdomesticus, dated March 31 2014; the author is addressed as 'Susie' in the post's own text. The page notes grele is actually from Chapter 2.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
+  "503": {
+   "index": 503,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in practice it is distracting, since a fantasy world by its very nature will not mesh with the rules of accepted Reality, so no amount of this kind of invention will actually increase its verisimilitude",
+   "note": "Same raw live page. Quote exact. Both limbs — distracting rather than verisimilitude-increasing, and the not-meshing-with-accepted-Reality reason — are in the same sentence, in section 'WORLD-BUILDING'. Its subject is 'endemic species' names.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
+  "504": {
+   "index": 504,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "where it seems that these changes will have no bearing on the plot or the rest of the story... it feels completely arbitrary",
+   "note": "Same raw live page, same sentence as index 503 (section 'WORLD-BUILDING'). Quote exact, and the causal 'because... no bearing on the plot or the rest of the story' limb is the page's own subordinate clause.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
   "505": {
    "index": 505,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "506": {
+   "index": 506,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Indeed, both the Prologue and Chapter One of the novel are false beginnings... we are introduced by name to a lot of characters who are never going to show up again",
+   "note": "Same raw live page, in the section headed 'PROLOGUES'. Quote exact. Both limbs supported. Minor nuance recorded, not deducted: the page hedges the never-reappearing limb with a bracketed spoiler, '[Spoiler! Until a couple of them turn out to be Not Really Dead After All!]', and the claim's 'many characters' = the page's 'a lot of characters'.",
+   "fromFile": "verdicts-kay-i486-517.json"
   },
   "507": {
    "index": 507,
@@ -18903,6 +18973,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "510": {
+   "index": 510,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "half of the group had scores of nine or above and the other half of the group had scores below 5... average for the group was a solid seven",
+   "note": "Raw live page (HTTP 200). Quote exact, in the opening paragraph. All three limbs — nine-or-above half, below-five half, 'a solid seven' average — are in consecutive sentences. Post by Andrew (Andrew Mather), March 17, 2016; the page also gives 'Bookclub - 7.0/10'.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
   "511": {
    "index": 511,
    "verdict": "SKIPPED_TRIAGE",
@@ -18924,6 +19001,34 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "514": {
+   "index": 514,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay works in a very epic style where everything that happens is somehow important or represented. This can come across as contrived.",
+   "note": "Raw live page (HTTP 200, full thread rendered without login). Quote exact. Both limbs are consecutive sentences. Post #5 by Erfael, Dec 6, 2011, as attributed. The page qualifies the contrived limb with 'if you're looking for more traditional fantasy storytelling'.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
+  "515": {
+   "index": 515,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The book is almost written like a play. It's almost all long conversation of pure dialogue after another with little of anything else.",
+   "note": "Same raw live page. Quote exact including the full stop. Both limbs are consecutive sentences. Post #1 by taoofjord, the thread starter, Dec 5, 2011 — 'thread's opening poster' confirmed by the 'Thread starter taoofjord / Start date Dec 5, 2011' header.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
+  "516": {
+   "index": 516,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He also tends to use flashbacks and internal monologues a lot... The way he blends history into the narrative sometimes flat out amazes me.",
+   "note": "Same raw live page, post #6 by chokipokilo, Dec 6, 2011. Quote exact. Claim's 'a great deal' = page's 'a lot'; claim's 'amazes him' = page's 'sometimes flat out amazes me'. Both limbs supported.",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
+  "517": {
+   "index": 517,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "As far as coincidental revelations, that's a device GGK uses in all his works. After reading a few you'll start to see it coming ahead of time.",
+   "note": "Same raw live page, same post #6 by chokipokilo, Dec 6, 2011. Quote exact (page renders a curly apostrophe in \"that's\"). Both limbs are consecutive sentences; 'after a few books a reader starts to see it coming' = 'After reading a few you'll start to see it coming ahead of time.'",
+   "fromFile": "verdicts-kay-i486-517.json"
+  },
   "518": {
    "index": 518,
    "verdict": "SKIPPED_TRIAGE",
@@ -18937,6 +19042,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "520": {
+   "index": 520,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Once events become inevitable, he largely leaves them to be supplied by the imagination of the reader.",
+   "note": "Live page carries no inline transcript; the official .srt subtitle file linked from the page (media.podcasts.ox.ac.uk/engfac/fantasy_lit/introduction-guy-gavriel-kaydefault.srt) was fetched raw and flattened. Quote present word for word, in the Under Heaven section, immediately after the epilogue discussion. Every limb supported.",
+   "fromFile": "verdicts-kay-i520-563.json"
   },
   "521": {
    "index": 521,
@@ -18952,6 +19064,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "523": {
+   "index": 523,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The nature of history is retrospective construction, and its many ironies is one of his chief thematic concerns across all of his works.",
+   "note": "Raw .srt transcript. Quote verbatim; the sentence continues exactly as the claim states (many ironies, chief thematic concerns, across all his works). The page's own blurb independently corroborates: 'his reflections on the retrospective construction of history'.",
+   "fromFile": "verdicts-kay-i520-563.json"
+  },
   "524": {
    "index": 524,
    "verdict": "SKIPPED_TRIAGE",
@@ -18959,12 +19078,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "525": {
+   "index": 525,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "so closely inspired by real world events that he sometimes seems not to rewrite history but to write around it",
+   "note": "Raw .srt transcript: 'Indeed, so well researched a casebooks [ASR garble of \"are Kay's books\"] and so closely inspired by real world events that he sometimes seems not to rewrite history but to write around it.' Quote verbatim; every limb supported.",
+   "fromFile": "verdicts-kay-i520-563.json"
+  },
+  "526": {
+   "index": 526,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay's ability to find power in these quiet moments, as well as ... the brash, heroic moments or the sweeping romantic moments ... gives his work a really unique style and tone.",
+   "note": "Raw .srt transcript, after the mosaicist/iconoclasm passage. Quote verbatim, and all three limbs (quiet moments, brash heroic and sweeping romantic moments, unique style and tone) are in the same sentence.",
+   "fromFile": "verdicts-kay-i520-563.json"
+  },
   "527": {
    "index": 527,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "528": {
+   "index": 528,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Breaking into poetry here heightens the pathos of the moment ... and it allows Kay to impart a sense of closure.",
+   "note": "Raw .srt of the companion lecture 'Verse and Prose in Fantasy Literature' (verse-and-prose-fantasy-literaturedefault.srt). Quote verbatim, and 'allows Kay to impart a sense of closure' follows in the same sentence. The auto-caption garbles the title ('The Lions of Other Ascend', 'our Rassam') but the verse she reads is Al-Rassan's closing lament ('the ending of our Rassam, the beloved'), so the title limb is unambiguous.",
+   "fromFile": "verdicts-kay-i520-563.json"
   },
   "529": {
    "index": 529,
@@ -19057,6 +19197,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "542": {
+   "index": 542,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "songs and poetry are not prophetic ... unlike Middle Earth ... nevertheless acts only as a cue for action",
+   "note": "brightweavings.com/legislatorsarbonne/ fetched raw (HTTP 200). Header confirms 'an undergraduate paper by James Allard written when he was at the University of Waterloo... presented at the 1997 Academic Conference of Canadian Science Fiction and Fantasy.' Quote verbatim in the opening argument; the 'cue for action' clause is grammatically about 'language', which in context is the songs and poetry of Arbonne, and the sentence ends 'providing direction for action, but never supplying the action itself.'",
+   "fromFile": "verdicts-kay-i520-563.json"
+  },
   "543": {
    "index": 543,
    "verdict": "SKIPPED_TRIAGE",
@@ -19070,6 +19217,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "545": {
+   "index": 545,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "magic in Arbonne was ... Confined to small things, the coinage of hearth and heart",
+   "note": "brightweavings.com/kaysprovence/ fetched raw. Byline confirms Faye Ringel, Ph.D., versions presented March 2009 and August 2009. Quote verbatim; Ringel quotes Beatritz's line and frames it 'in keeping with the relatively small amount of \"merveilleux paien\" [pagan miracles or marvels] ... in the real Medieval romances', supporting the pagan-marvel limb.",
+   "fromFile": "verdicts-kay-i520-563.json"
   },
   "546": {
    "index": 546,
@@ -19092,6 +19246,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "549": {
+   "index": 549,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay's position often seems to me to be compassion that is deeper because of the terribleness.",
+   "note": "Live reddit.com returned HTTP 403 (both .json and old.reddit interstitial), so recovered via the Wayback raw capture https://web.archive.org/web/20250304145029id_/... . Quote verbatim; the page's JSON-LD attributes the comment to author name 'newtothegarden' (t2_doybtw0f, t1_jwnbsp8, 2023-08-17), and the next sentence ('Humans do terrible things because we're human') supports the 'of what people do' limb.",
+   "fromFile": "verdicts-kay-i520-563.json"
+  },
   "550": {
    "index": 550,
    "verdict": "SKIPPED_TRIAGE",
@@ -19105,6 +19266,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "552": {
+   "index": 552,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay's writings are suffused with an elegiac tone and the gentle melancholy of farewells.",
+   "note": "c2cjournal.ca fetched raw (HTTP 200); JSON-LD confirms author Bob Tarantino, datePublished 2016-09-07. Quote verbatim in the paragraph beginning 'These are novels about the importance and impacts of history', exactly as cited. 'Pervading' maps to 'suffused with' and 'quietly valedictory' to 'the gentle melancholy of farewells'.",
+   "fromFile": "verdicts-kay-i520-563.json"
+  },
+  "553": {
+   "index": 553,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They are meditative rather than bombastic.",
+   "note": "Same raw c2cjournal.ca fetch, closing section as cited: 'Guy Gavriel Kay tells stories which are true... They are meditative rather than bombastic.' Quote verbatim including the full stop; both limbs (contrast with bombast, stories called meditative) supported.",
+   "fromFile": "verdicts-kay-i520-563.json"
   },
   "554": {
    "index": 554,
@@ -19120,12 +19295,40 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "556": {
+   "index": 556,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "many other readers find it to be annoying. I am in the latter camp!",
+   "note": "metastellar.com fetched raw (HTTP 200); byline Amira Loutfi present. Under the cited heading '3. Beautiful Prose is a double-edged Sword': 'many people love Kay's prose, but many other readers find it to be annoying. I am in the latter camp!' Quote verbatim, and 'I am in the latter camp' supplies the personal-dislike limb.",
+   "fromFile": "verdicts-kay-i520-563.json"
+  },
   "557": {
    "index": 557,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "558": {
+   "index": 558,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "No sentence fragments. One narrator only. (Yes, I've broken all of these.)",
+   "note": "lithub.com fetched raw (HTTP 200). Quote verbatim, curly apostrophe included, in the paragraph beginning 'But there might be harm', within the list 'Never revise until you are done with the book. Never use a prologue. Short chapters. No sentence fragments. One narrator only.' Both named rules and the broken-them-all limb supported.",
+   "fromFile": "verdicts-kay-i520-563.json"
+  },
+  "559": {
+   "index": 559,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But there might be harm in the very notion that there are rules to be followed in art.",
+   "note": "Same raw lithub fetch, opening the cited paragraph. Quote verbatim; the sentence completes with 'to be followed in art', supplying the art limb of the claim.",
+   "fromFile": "verdicts-kay-i520-563.json"
+  },
+  "560": {
+   "index": 560,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The rules of smart commerce are not identical to the rules of good writing.",
+   "note": "Same raw lithub fetch, in the paragraph beginning 'And there is nothing wrong with it, at all' as cited. Quote verbatim; the preceding sentence, 'this is still not the same thing as writing as best one can', supports the claim's 'writing as well as one can' phrasing.",
+   "fromFile": "verdicts-kay-i520-563.json"
   },
   "561": {
    "index": 561,
@@ -19140,6 +19343,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "563": {
+   "index": 563,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the language - as though ever mindful of the inspirational influence of the T'ang poets - is sensual and vivid",
+   "note": "brightweavings.com/review-by-novelist-midori-snyder/ fetched raw (HTTP 200); header confirms 'Review by novelist Midori Snyder' of Under Heaven, reproduced with permission. Quote verbatim (curly apostrophe in T'ang) in the final paragraphs; 'is sensual and vivid' closes the same sentence.",
+   "fromFile": "verdicts-kay-i520-563.json"
   },
   "564": {
    "index": 564,
@@ -19176,12 +19386,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "569": {
+   "index": 569,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Everything quietly, ineluctably fades into history",
+   "note": "Final paragraph of the Dirda review, raw HTML fetched from brightweavings.com (HTTP 200): “‘Under Heaven’ ends where it began, among ghosts. Everything quietly, ineluctably fades into history, as into those mists one sees on Chinese scroll paintings.” Page byline confirms Michael Dirda of The Washington Post, reproduced with permission.",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
+  "570": {
+   "index": 570,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "told with flair, passion and elegant prose",
+   "note": "Final paragraph: “River of Stars (*****) … is told with flair, passion and elegant prose.” Page title/byline confirm Adam Whitehead of The Wertzone and that the book reviewed is River of Stars.",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
   "571": {
    "index": 571,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "572": {
+   "index": 572,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In six hundred plus pages, not a word of this novel feels gratuitous",
+   "note": "Quote verbatim on the page; the ‘over six hundred pages’ limb is carried by the page’s own ‘In six hundred plus pages’ in the same sentence. Byline confirms Indrapramit Das for Strange Horizons, reviewing River of Stars.",
+   "fromFile": "verdicts-kay-i569-623.json"
   },
   "573": {
    "index": 573,
@@ -19295,6 +19526,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "589": {
+   "index": 589,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sentences are often convoluted, meanings often obscured",
+   "note": "In the ‘What to say?’ paragraph, of Kay’s prose: “his style is very involved and requires a certain level of concentration from his reader; sentences are often convoluted, meanings often obscured.” Byline: Victoria Hoyle of Eve’s Alexandria, reviewing Sailing to Sarantium.",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
+  "590": {
+   "index": 590,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "flavoured with an archaism that prompts a second glance and a slower read",
+   "note": "Same paragraph, next sentence: “The phrasing is sometimes flavoured with an archaism that prompts a second glance and a slower read” — the ‘makes the reader slow down’ limb is the page’s own ‘and a slower read’.",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
   "591": {
    "index": 591,
    "verdict": "SKIPPED_TRIAGE",
@@ -19358,6 +19603,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "600": {
+   "index": 600,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "giving us elaborate foreshadowing with a sort of detached amusement",
+   "note": "Paragraph beginning ‘First, Kay likes exercising tricks of the narrator’s trade’. Byline: Joe Milicia, New York Review of Science Fiction, reprinted at BrightWeavings; the book under review is Sailing to Sarantium.",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
+  "601": {
+   "index": 601,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This, in turn, might have occasioned a significant change in various affairs",
+   "note": "The parenthetical sample of Kay’s text reads: “Had he arrived back at the inn after the racing, as he had intended…, Crispin would almost certainly have conducted himself differently in certain matters that followed. This, in turn, might have occasioned a significant change in various affairs, both personal and of much wider import.” Counterfactual conditional about consequences of an arrival that did not occur; Milicia adds ‘And so on for another whole paragraph.’",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
   "602": {
    "index": 602,
    "verdict": "SKIPPED_TRIAGE",
@@ -19372,12 +19631,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "604": {
+   "index": 604,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an intricately rearranged chronology and a wittily drawn-out suspense",
+   "note": "Paragraph beginning ‘Kay is also extremely skilled’: “Also brilliant is Kay’s virtuoso handling of structure in the chapter that follows … but all with an intricately rearranged chronology and a wittily drawn-out suspense.” Praise limb (‘Also brilliant’, ‘virtuoso’) and ‘a chapter’ limb both on the page; the reviewed book is Sailing to Sarantium (opening paragraph).",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
+  "605": {
+   "index": 605,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the long Prologue is a bit plodding",
+   "note": "Parenthetical in the same paragraph: “Kay is also extremely skilled, especially in the later chapters (the long Prologue is a bit plodding), in building a lengthy scene to a dramatic climax.” Book confirmed as Sailing to Sarantium.",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
   "606": {
    "index": 606,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "607": {
+   "index": 607,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Here is Kay at his most historical, reshaping the reign of Justinian and Theodora",
+   "note": "Paragraph beginning ‘As a first volume’. Header confirms the piece is by Dena Taylor and ‘part of an upcoming book on GGK being published by NIMROD PRESS … in the BABEL HANDBOOKS series’, on Sailing to Sarantium.",
+   "fromFile": "verdicts-kay-i569-623.json"
   },
   "608": {
    "index": 608,
@@ -19392,6 +19672,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "610": {
+   "index": 610,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The language in Last Light … is harder, terser, less lyric than the books before",
+   "note": "Answer to question 6: “The language in Last Light , for example, is harder, terser, less lyric than the books before (and some reviewers and scholars have commented on this).” The same page names the book in full as The Last Light of the Sun in several other answers.",
+   "fromFile": "verdicts-kay-i569-623.json"
   },
   "611": {
    "index": 611,
@@ -19421,6 +19708,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "615": {
+   "index": 615,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Certainly not a linguistic attempt to echo anyone else.",
+   "note": "Opening of the same answer to question 6, replying to Marcus’s ‘Was this style inspired by anyone in particular’; Kay goes on to describe operatic rhythms and mythic, Biblical cadences in Fionavar as his own device, not an echo of another writer.",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
+  "616": {
+   "index": 616,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the almost opulence of your language … elevate everything above the mundane",
+   "note": "Question 6, verbatim: “One of the elements I’ve always been particularly fond of … has been the almost opulence of your language. It lends a splendour to events, but it also seems to elevate everything above the mundane.” The page says ‘everything’ where the claim says ‘events’, but ‘lends a splendour to events’ sits in the same sentence, so the limb holds. Header confirms Richard Marcus of ‘Leap in the Dark’ as interviewer.",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
   "617": {
    "index": 617,
    "verdict": "SKIPPED_TRIAGE",
@@ -19442,6 +19743,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "620": {
+   "index": 620,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you don’t blend colours – you contrast them to form an illusion of blending when you back away",
+   "note": "Answer on the prologue of Sailing to Sarantium written as a mosaic: “That’s the art form of mosaic; you don’t blend colours – you contrast them to form an illusion of blending when you back away. When you get too close you can’t see it clearly…” — the ‘only at a distance’ limb is the page’s ‘when you back away’. Header confirms Peter Halasz, NYRSF, 2000.",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
   "621": {
    "index": 621,
    "verdict": "SKIPPED_TRIAGE",
@@ -19456,12 +19764,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "623": {
+   "index": 623,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Lions is elegiac in nature because it is really … about the demise of a civilisation",
+   "note": "Answer on style and tone changing between books: “Lions is elegiac in nature because it is really, as much as anything else, about the demise of a civilisation. The demise of the Arab civilisation in Spain.” Same Halasz/NYRSF interview page.",
+   "fromFile": "verdicts-kay-i569-623.json"
+  },
   "624": {
    "index": 624,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "625": {
+   "index": 625,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And it's layered up, sometimes ten or fifteen times for a scene.",
+   "note": "Raw HTML fetched with a browser UA (HTTP 200, 72KB). Quote is verbatim in GGK's answer describing his 'painterly' layering method; speaker label 'GGK:' confirms Kay. Page header confirms Peter Halasz interviewed GGK for NYRSF during 2000.",
+   "fromFile": "verdicts-kay-i625-678.json"
   },
   "626": {
    "index": 626,
@@ -19470,12 +19792,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "627": {
+   "index": 627,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "PH: Reading your work, the punctilious choice of word and image",
+   "note": "Verbatim, and spoken by the interviewer: the line is prefixed 'PH:' and the page's introduction states 'This interview appears courtesy of Peter Halasz, who interviewed GGK for the New York Review of Science Fiction during 2000.' It is indeed the question preceding the answer on rewriting ('A tremendous amount').",
+   "fromFile": "verdicts-kay-i625-678.json"
+  },
   "628": {
    "index": 628,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "629": {
+   "index": 629,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't like books, as a reader, where I feel hammered on the head with the author's didactic or pedantic point",
+   "note": "Verbatim (curly apostrophe matches). In Kay's answer, not the interviewer's question — the following paragraph switches to second person ('your plotting technique'). Page header confirms Jean-Louis Trudel, Solaris, 1995. The claim's 'didactic point' drops 'or pedantic', which narrows but does not misstate.",
+   "fromFile": "verdicts-kay-i625-678.json"
   },
   "630": {
    "index": 630,
@@ -19490,6 +19826,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "632": {
+   "index": 632,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "readers would...probably not pick up on the specific myths...but my hope was that an ambience, a generally mythic flavour and realm would emerge",
+   "note": "Verbatim, in Kay's answer within the Tolkien/mythic-sources exchange. Both limbs supported: he expected readers to miss the specific sources, and hoped for ambience. Minor nuance: the sentence continues 'so that one reader might know that the ravens...are in fact the ravens of Odin', so 'hoped only' is a shade stronger than the page — the substance still holds.",
+   "fromFile": "verdicts-kay-i625-678.json"
   },
   "633": {
    "index": 633,
@@ -19539,6 +19882,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "640": {
+   "index": 640,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "(Guy Gavriel Kay, The Summer Tree, Toronto, 1984; ... The Wandering Fire, New York, 1986; ... The Darkest Road, New York, 1986)",
+   "note": "Verbatim and it is the entry's last line — only WordPress chrome ('This entry was posted in...') follows. All three Fionavar novels are listed, each with city and year. Page header confirms the entry is from The Dictionary of Imaginary Places by Alberto Manguel and Gianni Guadalupi, reprinted with permission.",
+   "fromFile": "verdicts-kay-i625-678.json"
   },
   "641": {
    "index": 641,
@@ -19645,6 +19995,41 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "656": {
+   "index": 656,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "his choice of tense, depending on which character the novel is following at the time",
+   "note": "Verbatim. Page title is 'Review by Desi Stern for Petrichor Machine'; the sentence sits in the paragraph beginning 'Another way that Kay's mastery of craft is working at its best', exactly as the claim's page field says.",
+   "fromFile": "verdicts-kay-i625-678.json"
+  },
+  "657": {
+   "index": 657,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Most sections are written in the past tense, except for those following the character of Shan",
+   "note": "Verbatim, and the present-tense limb is explicit further on: 'her present-tense tale' and 'The present-tense narration really enhances the reader's experience of Shan's awareness'. The review names the book: 'I just finished reading River of Stars'.",
+   "fromFile": "verdicts-kay-i625-678.json"
+  },
+  "658": {
+   "index": 658,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a male character...decides to purposefully think in a more feminine state of mind...and his narration shifts to present tense for the scene",
+   "note": "Verbatim, and it is indeed the parenthetical paragraph immediately after the Shan discussion, as the claim's page field states.",
+   "fromFile": "verdicts-kay-i625-678.json"
+  },
+  "659": {
+   "index": 659,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The language in River of Stars is formal and poetic",
+   "note": "Verbatim. Page title confirms 'Review by Natalie Zina Walschots for National Post'; the sentence opens the paragraph the claim names.",
+   "fromFile": "verdicts-kay-i625-678.json"
+  },
+  "660": {
+   "index": 660,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the sentences laid out like layers of diaphanous fabric",
+   "note": "Verbatim, in the same sentence as index 659: 'The language in River of Stars is formal and poetic, the sentences laid out like layers of diaphanous fabric, becoming a solid narrative through the interplay of their layers.'",
+   "fromFile": "verdicts-kay-i625-678.json"
+  },
   "661": {
    "index": 661,
    "verdict": "SKIPPED_TRIAGE",
@@ -19672,6 +20057,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "665": {
+   "index": 665,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is narration of a high quality, indeed.",
+   "note": "Verbatim, including the comma and 'indeed'. Page title confirms 'Review by Doug Barbour, for The Edmonton Journal'; the review is of Sailing to Sarantium. The sentence follows Barbour's point that Kay 'represents the ways many of them think as they act', so 'the telling of the novel' is a fair gloss.",
+   "fromFile": "verdicts-kay-i625-678.json"
+  },
+  "666": {
+   "index": 666,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he has quietly but consistently moved his narratives ever further away from the easy magic",
+   "note": "Verbatim as quoted. One connective differs in the claim's paraphrase — the page reads 'quietly but consistently', the claim says 'quietly and consistently' — but both limbs (quietly; consistently; away from easy magic) are supported by the page.",
+   "fromFile": "verdicts-kay-i625-678.json"
   },
   "667": {
    "index": 667,
@@ -19701,6 +20100,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "671": {
+   "index": 671,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to have figures emote or react as we might, ourselves...feels like a betrayal (even a large one) of the characters and the culture",
+   "note": "Verbatim, in a first-person entry by Kay ('as a writer, if I'm developing characters in a setting meant to evoke a...much more controlled society'), inside the Under Heaven tour journal on the craft-of-emotion topic. The page adds 'and the culture' after 'the characters'; the claim's 'of them' is narrower but not wrong.",
+   "fromFile": "verdicts-kay-i625-678.json"
+  },
   "672": {
    "index": 672,
    "verdict": "SKIPPED_TRIAGE",
@@ -19729,12 +20135,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "676": {
+   "index": 676,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he forges his own rules when it comes to punctuation",
+   "note": "Verbatim. The guest post opens 'As Guy Gavriel Kay's production editor at Penguin Group (Canada), I am responsible for overseeing the copyediting...'; Kay's own preamble names her ('Sandra Tooze, the production editor for Under Heaven takes the podium'), confirming both the role and the venue.",
+   "fromFile": "verdicts-kay-i625-678.json"
+  },
   "677": {
    "index": 677,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "678": {
+   "index": 678,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's exactly as he wants it when he submits the manuscript.",
+   "note": "Verbatim, two sentences after the punctuation line in the same production editor's guest post; the surrounding sentences ('Most authors leave that “small stuff” to editors to fix—not Guy') confirm the punctuation referent.",
+   "fromFile": "verdicts-kay-i625-678.json"
   },
   "682": {
    "index": 682,
@@ -19854,6 +20274,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "711": {
+   "index": 711,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It was a gift to me, understanding that a bad draft was not a death sentence to a work.",
+   "note": "Raw HTML fetched with a browser UA (curl, 64,028 bytes) and stripped to text; no summarizer in the verdict path. Page dated April 28, 2019. The quote appears word for word in Kay's answer to the first question: 'One major specific ‘lesson’ from the Tolkien year was realizing how many false starts and outright errors exist in the early stages of even a masterpiece. It was a gift to me, understanding that a bad draft was not a death sentence to a work. That you just stayed with it, thought more, revised, worked harder.' Every limb holds: the speaker is Kay; the referent is the year in question, which the interviewer's question frames as 'the experience of working on “The Silmarillion”' and the article's preamble fixes as 1974–75 in Oxford helping Christopher Tolkien assemble The Silmarillion. Only nominal difference: the page calls it 'the Tolkien year' / 'that year', not 'the Silmarillion year' — the same year under a different label, tied by the question it answers, so this is not an unsupported limb.",
+   "fromFile": "verdicts-kay-i711-711.json"
   },
   "712": {
    "index": 712,

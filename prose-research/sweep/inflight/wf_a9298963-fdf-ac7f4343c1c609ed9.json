@@ -1,0 +1,32 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i289-303",
+ "lines": 53,
+ "firstTs": "2026-09-06T18:13:04.246Z",
+ "lastTs": "2026-09-06T18:14:17.448Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 12
+ },
+ "urlsFetched": [
+  "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "https://adventurersleague.files.wordpress.com/2018/10/1765690-dnd_house_style_guide.pdf",
+  "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+  "http://schemas.openxmlformats.org/wordprocessingml/2006/main}p",
+  "http://schemas.openxmlformats.org/wordprocessingml/2006/main}t"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Now let me extract the docx body text.",
+ "run": "wf_a9298963-fdf",
+ "agent": "ac7f4343c1c609ed9",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-ac7f4343c1c609ed9.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i289-303.json",
+  "exists": false
+ }
+}

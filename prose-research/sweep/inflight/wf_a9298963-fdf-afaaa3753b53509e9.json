@@ -1,0 +1,29 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i349-363",
+ "lines": 38,
+ "firstTs": "2026-09-06T18:13:04.246Z",
+ "lastTs": "2026-09-06T18:14:14.114Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 6
+ },
+ "urlsFetched": [
+  "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dd_ip_guide.pdf",
+  "http://theadventurerleagues.com/vault/2024/07/Dungeoncraft__CCv1.9c.pdf"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All three PDFs fetched successfully. Now extracting text.",
+ "run": "wf_a9298963-fdf",
+ "agent": "afaaa3753b53509e9",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-afaaa3753b53509e9.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i349-363.json",
+  "exists": false
+ }
+}

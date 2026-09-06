@@ -1,0 +1,37 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i945-961",
+ "lines": 72,
+ "firstTs": "2026-09-06T18:09:54.150Z",
+ "lastTs": "2026-09-06T18:14:16.306Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 16
+ },
+ "urlsFetched": [
+  "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+  "https://iceandfire.fandom.com/wiki/A_Game_of_Thrones/Statistical_Analysis",
+  "https://iceandfire.fandom.com/wiki/A_Game_of_Thrones/Statistical_Analysis?action=raw",
+  "https://iceandfire.fandom.com/api.php?action=parse&page=A%20Game%20of%20Thrones/Statistical%20Analysis&prop=wikitext&format=json",
+  "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=George+R.+R.+Martin",
+  "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=unsullied",
+  "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=%22fifty+authors%22",
+  "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=adverbs+per+10%2C000+words",
+  "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=Martin",
+  "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=$1",
+  "https://web.archive.org/web/20250521205534id_/https://iceandfire.fandom.com/wiki/A_Game_of_Thrones/Statistical_Analysis"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_ed535e1b-537",
+ "agent": "acd46e8273be825d4",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_ed535e1b-537/agent-acd46e8273be825d4.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i945-961.json",
+  "exists": false
+ }
+}

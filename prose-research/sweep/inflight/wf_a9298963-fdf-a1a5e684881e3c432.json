@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i214-228",
- "lines": 74,
+ "lines": 91,
  "firstTs": "2026-09-06T18:04:54.970Z",
- "lastTs": "2026-09-06T18:08:12.150Z",
+ "lastTs": "2026-09-06T18:10:15.366Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 15
+  "Bash": 18,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.enworld.org/threads/compiling-wolfgang-baurs-ama.663114/",
@@ -25,13 +26,13 @@
   "https://web.archive.org/web/20140106064951id_/http://www.wizards.com/default.asp?x=dnd/dd/20070727a"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now a mechanical verbatim check of every quote against its page text.",
+ "lastAssistantText": "Checkpoint written and re-read (15 claims, 15 verdicts). All eight source URLs were reached as raw pages — five live with a browser UA, three dead wizards.com columns via Wayback `id_` raw captures — so no BLOCKED verdicts and no summarizer-mediated readings.",
  "run": "wf_a9298963-fdf",
  "agent": "a1a5e684881e3c432",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-a1a5e684881e3c432.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i214-228.json",
-  "exists": false
+  "exists": true
  }
 }

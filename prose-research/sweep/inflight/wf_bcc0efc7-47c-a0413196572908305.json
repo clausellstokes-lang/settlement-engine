@@ -3,13 +3,14 @@
  "name": "ai",
  "angle": null,
  "tag": "i509-523",
- "lines": 75,
+ "lines": 88,
  "firstTs": "2026-09-06T18:05:24.986Z",
- "lastTs": "2026-09-06T18:08:14.729Z",
+ "lastTs": "2026-09-06T18:09:53.778Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 18
+  "Bash": 20,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://aclanthology.org/2020.acl-main.164.pdf",
@@ -20,13 +21,13 @@
   "https://web.archive.org/web/20260526034811id_/https://dl.acm.org/doi/pdf/10.1145/3442188.3445922"
  ],
  "filesWritten": [],
- "lastAssistantText": "I'll fetch the sources as raw text directly rather than via a summarizer.",
+ "lastAssistantText": "2188.3445922` — ACM DL returned Cloudflare 403 on a browser UA; recovered the publisher PDF via mirror and **verified it byte-identical to the Wayback raw capture** of `dl.acm.org/doi/pdf/10.1145/3442188.3445922` (sha256 `e283b37a…6c1d6`, 304,472 bytes on both) — 521–523. No BLOCKED verdicts needed.",
  "run": "wf_bcc0efc7-47c",
  "agent": "a0413196572908305",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a0413196572908305.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i509-523.json",
-  "exists": false
+  "exists": true
  }
 }

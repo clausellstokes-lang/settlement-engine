@@ -162,6 +162,60 @@
   }
  },
  {
+  "index": 113,
+  "feature": "present vs future tense (editor)",
+  "claim": "Ray Vallese's editor's guide devotes a section to 'using present tense instead of future tense' and to 'avoiding rampant capitalization' — two habits of RPG manuscripts an editor corrects.",
+  "source": "Ray Vallese — Writing With Style: An Editor's Advice for RPG Writers (book page)",
+  "url": "https://rayvallese.com/writing-with-style/",
+  "quote": "using present tense instead of future tense",
+  "page": "book page, topics list",
+  "angle": "craft",
+  "verdict": {
+   "index": 113,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'devotes a section to' — the page lists both only as topics the guide covers, never as sections",
+   "trueWording": "It covers such topics as avoiding rampant capitalization, present tense",
+   "note": "Raw page (curl, HTTP 200). Both quoted phrases appear verbatim inside a single sentence: 'It covers such topics as using gender-neutral language, ... avoiding rampant capitalization, ... using present tense instead of future tense, changing passive voice to active voice...'. The page is the book's marketing page for 'Writing With Style: An Editor's Advice for RPG Writers' (45 pages, by Ray Vallese, 20+ years editing games), so the editor-corrects-RPG-manuscripts limb holds. Nothing on the page states either topic gets its own section; the only mention of sections is inside a reader review ('Each section gives solid advice'). No table of contents is published on this page.",
+   "fromFile": "verdicts-dnd-i109-123.json"
+  }
+ },
+ {
+  "index": 119,
+  "feature": "evocative not conclusory",
+  "claim": "Lynch's most-cited rule as summarized: replace the abstract judgment ('a cruel bully') with the concrete action ('Manfred takes a leak on Tobias's bedroll'); aim for 'the telltale sensory detail, rather than the generic abstract trait'; specificity, not mere detail.",
+  "source": "Into the Dark — Bryce Lynch's Adventure Design Tips Summarized and Explained, Mark 2 (Jon Miller, 2016-07-25)",
+  "url": "http://into-the-dark-rpg.blogspot.com/2016/07/bryce-lynchs-adventure-design-tips.html",
+  "quote": "the telltale sensory detail, rather than the generic abstract trait",
+  "page": "post",
+  "angle": "craft",
+  "verdict": {
+   "index": 119,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'Lynch's most-cited rule' — the page nowhere ranks this rule's prominence or citation frequency",
+   "trueWording": "Go for the telltale sensory detail, rather than the generic abstract trait.",
+   "note": "Raw page (curl, HTTP 200). Quote verbatim in item 21 of Jon Miller's summary, followed by the exact example the claim gives: 'Instead of stating \"One of the guards in the camp is a cruel bully,\" say \"The burly Manfred takes a leak on Tobias's bedroll, and then snatches Tobias's roasted chicken from his hand and quickly gobbles it down.\"' The 'specificity, not mere detail' limb IS on the page but NOT in the post the claim cites — it is a 2021 comment by 'Clever Munkey' ('Try for specificity not simply detail'), which Jon Miller endorses in reply ('Specific but not verbose'). The superlative 'most-cited' is the researcher's own framing, unverifiable from this page.",
+   "fromFile": "verdicts-dnd-i109-123.json"
+  }
+ },
+ {
+  "index": 120,
+  "feature": "terse-and-evocative register (critic's scale)",
+  "claim": "tenfootpole grades language on a four-point scale topped by 'Succinct and evocative', lists 'Terse writing style' and 'Evocative atmosphere' as requirements, and states 'Boxed text is usually not a good thing'.",
+  "source": "tenfootpole.org — Review Standards (Bryce Lynch)",
+  "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+  "quote": "Succinct and evocative",
+  "page": "standards page",
+  "angle": "craft",
+  "verdict": {
+   "index": 120,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'as requirements', and the four-point Language scale is not Bryce Lynch's — it belongs to a second reviewer, 'The Pretty Girl'",
+   "trueWording": "What I'm looking for in an adventure module; Language 4 - Succinct and evocative",
+   "note": "Raw page (curl, HTTP 200). Third limb verbatim: 'Boxed text is usually not a good thing.' Both phrases verbatim as standalone bullets: 'Evocative atmosphere.' and 'Terse writing style'. But Bryce's list is prefaced 'What I'm looking for in an adventure module may not be what you are looking for. I try to avoid giving a module a rating' — and the same list explicitly grades requirement status elsewhere ('Wandering monster tables are generally required'; an overland portion is 'nice, but not required'), so neither of these two is labelled a requirement. Separately, the Language rubric (4 - Succinct and evocative / 2 - Conversational but clear / 1 - You should have hired an English Major to edit this / 0 - Very wordy/incomprehensible) sits in a later section headed 'The Pretty Girl', a second reviewer who introduces herself as 'not the gourmand that Bryce is' and calls it 'My ratings system'. It is on tenfootpole's standards page, so 'tenfootpole grades' holds, but the claim's source attribution to Bryce Lynch does not. Note also the rubric spans 0-4 with four defined rungs (no 3), so 'four-point scale' is loose.",
+   "fromFile": "verdicts-dnd-i109-123.json"
+  }
+ },
+ {
   "index": 127,
   "feature": "newspaper-lead ordering",
   "claim": "Chris Doyle's essay (as reported): write read-aloud like a newspaper lead — immediate threat first ('GIANT SLAVERING OGRE'), secondary details after, lower-level details left for searching.",
@@ -285,6 +339,114 @@
    "note": "Quote verbatim: 'The editors greatly dislike printing the words \"This room is empty\" in DUNGEON.' The section names and the omit-don't-fill rule are fully supported ('Do not include sections that are unnecessary for a given encounter... the area is not an encounter and should not be assigned an encounter number'). But the page never prescribes an ORDER: it says each encounter 'can include any or all of the following sections', and read-aloud only 'generally precedes the other entries of an encounter'. The enumeration is also eight items, not seven - the claim drops 'Ad-Hoc XP Adjustment'.",
    "unsupportedLimb": "fixed order - the guidelines say encounters 'can include any or all of the following sections' and never mandate an order (read-aloud merely 'generally precedes'); the list is also eight sections, the claim names seven",
    "fromFile": "verdicts-dnd-i169-183.json"
+  }
+ },
+ {
+  "index": 195,
+  "feature": "overwriting and editorial cutting",
+  "claim": "Perkins says he almost always overwrites; his first Dungeon adventure was cut from 28,000 to 16,000 words.",
+  "source": "An Interview with Chris Perkins, designer of Warriors of Heaven (Mimir.net, 1999)",
+  "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+  "quote": "I almost always overwrite",
+  "page": "interview",
+  "angle": "voice",
+  "verdict": {
+   "index": 195,
+   "verdict": "PARTIAL",
+   "trueWording": "asked to trim the 28,000-word adventure to a more manageable 16,000 words",
+   "note": "Quote 'I almost always overwrite' is verbatim ('Anyone who has edited my work knows that I almost always overwrite'), so the first limb holds. The second limb fails on the same page twice. (a) Outcome: 'I was asked to trim the 28,000-word adventure to a more manageable 16,000 words. I was not entirely successful; I think the final adventure came in at 21,000 words, still making it the longest module ever published in DUNGEON Adventures.' It was not cut to 16,000. (b) 'Umbra' (Issue #55) is called 'My first PLANESCAPE adventure', while the page names his first published Dungeon work as 'Wards of Witching Ways,' Issue #11. Cross-check: the Fraternity of Shadows interview in this same chunk has him in Dungeon #38 in 1992, well before #55.",
+   "unsupportedLimb": "his first Dungeon adventure was cut from 28,000 to 16,000 words - the page says he was ASKED to cut to 16,000 but landed at 21,000, and names Issue #11 'Wards of Witching Ways' as his first Dungeon adventure, not #55 'Umbra'",
+   "fromFile": "verdicts-dnd-i184-198.json"
+  }
+ },
+ {
+  "index": 224,
+  "feature": "module unit",
+  "claim": "WotC scheduled adventure writing in 'MU' units of 32 pages or 20,000-22,000 words, about one designer-month each.",
+  "source": "Baker's Field: Twenty-Eight Adventures (Part 1) (Richard Baker, 2015-03-09)",
+  "url": "http://richard-baker.blogspot.com/2015/03/twenty-eight-adventures-part-1.html",
+  "quote": "20,000 to 22,000 words",
+  "page": "designer blog",
+  "angle": "voice",
+  "verdict": {
+   "index": 224,
+   "verdict": "PARTIAL",
+   "trueWording": "MU was the scheduling unit used at TSR, not WotC.",
+   "note": "Live blogspot page. Page: 'A \"MU\" was the scheduling unit used at TSR for RPG work. It stood for \"module unit\" and represented 32 pages of writing/design, or 20,000 to 22,000 words. When I first started at TSR, the standard was that a designer like me would be scheduled for 1 month per MU.' Quote verbatim and the 32 pages / 20,000-22,000 words / one designer-month limbs are all exact - but the page attributes the unit to TSR (Baker joined TSR in Oct 1991; this is the 1992 Dark Sun project), five years before WotC acquired TSR. The claim's 'WotC' is the page's 'TSR'.",
+   "unsupportedLimb": "'WotC scheduled' - the page says the MU was TSR's scheduling unit",
+   "fromFile": "verdicts-dnd-i214-228.json"
+  }
+ },
+ {
+  "index": 226,
+  "feature": "here-and-now focus",
+  "claim": "The WotC Adventure Guide, as quoted by Shea, instructs writers to focus on the here and now and omit verbose backstories.",
+  "source": "On Writing Adventures (Mike Shea, Sly Flourish, 2019-06-17)",
+  "url": "https://slyflourish.com/on_writing_adventures.html",
+  "quote": "Focus on the here and now. Omit verbose backstories",
+  "page": "compilation of designer advice incl. WotC Adventure Guide",
+  "angle": "voice",
+  "verdict": {
+   "index": 226,
+   "verdict": "PARTIAL",
+   "trueWording": "D&D House Style Guide - WotC docs given to freelancers.",
+   "note": "Live slyflourish.com page fetched raw. The bullet 'Focus on the here and now. Omit verbose backstories.' appears verbatim, but under the heading 'D&D House Style Guide', described as 'This free set of documents from Wizards of the Coast includes the house styles the D&D team gives to freelancers. It includes a short paper on adventure writing.' The WotC origin, the freelancer audience and the adventure-writing paper are all supported; the document name 'Adventure Guide' never appears anywhere on the page.",
+   "unsupportedLimb": "the source document's name - the page calls it the D&D House Style Guide, never 'Adventure Guide'",
+   "fromFile": "verdicts-dnd-i214-228.json"
+  }
+ },
+ {
+  "index": 240,
+  "feature": "house style exists",
+  "claim": "Mearls (2025) credits a collaborator with making sure a third-party manuscript matched the D&D house style, confirming an internal style exists even where none is published.",
+  "source": "Grognardia: Interview: Mike Mearls (2025-08-27)",
+  "url": "http://grognardia.blogspot.com/2025/08/interview-mike-mearls.html",
+  "quote": "everything matched the D&D house style",
+  "page": "interview",
+  "angle": "voice",
+  "verdict": {
+   "index": 240,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that no D&D house style guide is published — the page says nothing about whether the style is published or unpublished",
+   "trueWording": "making sure that everything matched the D&D house style",
+   "note": "Grognardia fetched raw, HTTP 200; 'Wednesday, August 27, 2025', 'Interview: Mike Mearls'. Answer 8: \"Ian Pace developed the rules and nailed down the technical end of the manuscript, making sure that everything matched the D&D house style and that our rules synched with the D&D rulebooks.\" Quote verbatim; the collaborator, the manuscript (Cthulhu by Torchlight, a Chaosium/non-WotC 5e product per the introduction) and the existence of a D&D house style are all supported. The trailing inference 'even where none is published' is the researcher's gloss — the page makes no statement about publication of the style, and items 241-243 of this same chunk cite a circulating WotC style guide.",
+   "fromFile": "verdicts-dnd-i229-243.json"
+  }
+ },
+ {
+  "index": 257,
+  "feature": "emphasis discipline",
+  "claim": "Bold is the only emphasis device, and a term already in the section heading gets no emphasis in running text.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "Use bold for such emphasis",
+  "page": "p.3",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 257,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that bold is the ONLY emphasis device - the page prescribes bold for emphasis in place of an inline subhead, and nowhere states or implies that it is the sole permitted emphasis device",
+   "trueWording": "Use bold for such emphasis, unless it's in the heading",
+   "note": "p.3: 'Finally, don't use an inline subhead when you simply want to emphasize a word or phrase. Use bold for such emphasis, unless the emphasized term or phrase appears in the section's heading. Then, no emphasis is required. For example, if a Heading 3 says \"Ki Points,\" don't bold \"ki points\" in the associated running text.' Quote verbatim and the heading-term limb fully supported; the exclusivity quantifier 'only' is the claim's, not the guide's - the guide's italics rules elsewhere (pp.4, 6-7) govern titles, spells, words-as-words and unspoken discourse, and it never rules italics out for emphasis in so many words.",
+   "fromFile": "verdicts-dnd-i244-258.json"
+  }
+ },
+ {
+  "index": 271,
+  "feature": "unspoken discourse (thoughts, telepathy)",
+  "claim": "In D&D fiction, thoughts and psionic speech may be set in italics, quotes, or plain type at the author's discretion, a reversal of the older policy.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "Aesthetics and clarity should dictate appropriate usage",
+  "page": "p.6",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 271,
+   "verdict": "PARTIAL",
+   "trueWording": "a change from our previous policy",
+   "note": "Quote 'Aesthetics and clarity should dictate appropriate usage' is verbatim on p.6, and the discretion limbs are fully supported: 'In D&D fiction, authors are free to use italics, quotation marks, or no distinguishing typography to present a character's thoughts or psionic communication (see Chicago 13.43).' But the page says only '(This is a change from our previous policy.)' — the word 'reversal' is absent, and the guide never states what the previous policy was, so the claim's characterization of the direction of the change is not established by the page.",
+   "unsupportedLimb": "'a reversal of the older policy' — page says only 'a change from our previous policy' and never states the prior rule",
+   "fromFile": "verdicts-dnd-i259-273.json"
   }
  }
 ]
