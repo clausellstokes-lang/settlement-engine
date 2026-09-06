@@ -377,7 +377,16 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     'constructiveFlowsEnabled',
   ];
   const WORLD_ALIVE_PRESET_IDS = ['dramatic_campaign', 'living_realm', 'full_simulation'];
-  const WAVE_DARK_PRESET_IDS = ['quiet_local', 'realistic_regional', 'static_campaign', 'narrative_campaign'];
+  // ⭐ DECLARED EDIT, NEVER A RE-RECORD (lighting wave, L-DEFAULT hunk 1, 2026-09-06).
+  // `realistic_regional` moved from the dark roster to the lit one because the wave
+  // lit the DEFAULT preset with the class C+D virtual keys. This roster is the
+  // instrument that announces that shift, so it is edited in the same commit as the
+  // source and its old membership is stated here rather than erased: the dark roster
+  // read ['quiet_local', 'realistic_regional', 'static_campaign', 'narrative_campaign'].
+  // The identity assertions below are UNCHANGED and still green, which is the whole
+  // point of lighting only virtual keys on a legacy id.
+  const WAVE_LIT_PRESET_IDS = [...WORLD_ALIVE_PRESET_IDS, 'realistic_regional'];
+  const WAVE_DARK_PRESET_IDS = ['quiet_local', 'static_campaign', 'narrative_campaign'];
 
   test('the nine engine-wave flags are VIRTUAL (absent from the default surface + comparison keys)', () => {
     // Anti-vacuity: exactly nine, no dupes.
@@ -390,8 +399,14 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     }
   });
 
-  test('the three world-alive presets light ALL NINE waves; the other four keep them dark', () => {
-    for (const id of WORLD_ALIVE_PRESET_IDS) {
+  test('the world-alive presets and the lit default light ALL NINE waves; the rest keep them dark', () => {
+    // Anti-vacuity on the rosters themselves: four lit, three dark, no overlap, and
+    // together they are every preset in the catalog — so neither list can quietly
+    // shed a preset and take its assertion with it.
+    expect(WAVE_LIT_PRESET_IDS.length).toBe(4);
+    expect(WAVE_DARK_PRESET_IDS.length).toBe(3);
+    expect([...WAVE_LIT_PRESET_IDS, ...WAVE_DARK_PRESET_IDS].sort()).toEqual([...PRESET_IDS].sort());
+    for (const id of WAVE_LIT_PRESET_IDS) {
       for (const flag of ENGINE_WAVE_FLAGS) {
         expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} must be lit`).toBe(true);
       }
@@ -405,7 +420,7 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     // Identity is UNTOUCHED by the new virtual keys: every lit preset (and a keyless
     // copy of its rules) still round-trips to itself — this is the byte-stability
     // property (legacy saves missing the waves keep their preset id).
-    for (const id of WORLD_ALIVE_PRESET_IDS) {
+    for (const id of WAVE_LIT_PRESET_IDS) {
       const keyless = { ...SIMULATION_RULE_PRESETS[id].rules };
       delete keyless.presetId;
       expect(normalizeSimulationRules(keyless).presetId, `${id} keyless re-infers itself`).toBe(id);
@@ -450,8 +465,8 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     }
   });
 
-  test('exactly the three world-alive presets light every One-Regen flag', () => {
-    for (const id of WORLD_ALIVE_PRESET_IDS) {
+  test('exactly the world-alive presets and the lit default light every One-Regen flag', () => {
+    for (const id of WAVE_LIT_PRESET_IDS) {
       for (const flag of ONE_REGEN_FLAGS) {
         expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag}`).toBe(true);
       }
@@ -512,6 +527,13 @@ describe('simulation rules preset — stability under future-flag churn', () => 
 // discovered there: +7 persisted rule keys per new campaign (30 -> 37 at
 // realistic_regional), because every preset spreads DEFAULT_SIMULATION_RULES, which
 // carries PROFILE_DEFAULTS, so the normalizer's materialize branch fires.
+// ⭐ AND THE TRIPWIRE EARNED ITS KEEP ON ITS FIRST DAY, WHICH IS WHY THE OLD FIGURE
+// IS KEPT ABOVE VERBATIM RATHER THAN OVERWRITTEN. It fired one hunk EARLIER than the
+// paragraph expected — not at the naming, but at L-DEFAULT hunk 1, which lit the
+// default preset. The price is a property of the PRESET, not of the constant that
+// names it, so lighting twenty-one virtual keys into that preset raised it from
+// +7 (30 -> 37) to +28 (30 -> 58) before any successor was named at all. Whoever
+// next prices a birth should price the preset's key count, not this sentence.
 //
 // ⛔ THE SOURCE SCANS BELOW READ EXECUTABLE TEXT, NOT RAW TEXT, AND THAT IS NOT A
 // STYLE CHOICE. Both negatives reddened on their first run because the seam's own
@@ -549,10 +571,23 @@ describe('new-campaign birth seam — one address, dark today, proven live', () 
     for (const key of ['worldProgression', 'politicalAutonomy', 'spatialMode', 'travelMode', 'infoMode', 'profileVersion', 'narrativeTempo']) {
       expect(key in born, `${key} must stay virtual at a dark birth`).toBe(false);
     }
-    // ... and the SAME seven are exactly what a named preset would materialize.
-    // This is the price of naming a successor, asserted rather than remembered.
+    // ... and those seven are the FIRST half of what a named preset materializes.
+    // ⭐ THE PRICE MOVED, AND IT MOVED BY THE WAVE'S OWN ACT (L-DEFAULT hunk 1,
+    // 2026-09-06). It read 7 (30 -> 37) while the default preset was dark. Hunk 1
+    // lit that preset with the twenty-one class C+D virtual keys, and a preset's
+    // keys are what a birth INTO it persists, so the measured price of naming this
+    // successor is now 28 (30 -> 58): the seven above plus those twenty-one. The
+    // number is re-derived here rather than carried, and the split is asserted
+    // separately so a future drift cannot hide inside a single total.
     const lit = newCampaignSimulationRules(DEFAULT_SIMULATION_PRESET_ID);
-    expect(Object.keys(lit).length - Object.keys(born).length).toBe(7);
+    const added = Object.keys(lit).filter(key => !(key in born));
+    expect(added.length).toBe(28);
+    expect(Object.keys(lit).length).toBe(58);
+    // The profile half is exactly the seven asserted absent above; everything else
+    // is a virtual gate key, never a profile axis, which is what keeps the CL-0
+    // constitutional law intact for the campaigns that never name a preset at all.
+    expect(added.filter(key => key.endsWith('Enabled')).length).toBe(21);
+    expect(Object.keys(born).length).toBe(30);
   });
 
   test('FORCED DOOR: naming a preset makes the resolver return THAT preset', () => {

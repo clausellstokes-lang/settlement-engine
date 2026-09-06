@@ -369,9 +369,16 @@ describe("the soak script's extracted seams", () => {
       const own = new Set(Object.keys(SIMULATION_RULE_PRESETS[id].rules));
       return [id, fullKeys.filter((key) => !own.has(key)).length];
     }));
+    // ⭐ DECLARED EDIT, NOT A RE-RECORD (lighting wave, L-DEFAULT hunk 1, 2026-09-06).
+    // `realistic_regional` read 33 here while the default preset was dark. Hunk 1 lit it
+    // with the twenty-one class C+D virtual keys, and every one of those keys was already
+    // a full_simulation key — so the count it can leak fell by exactly twenty-one, to 12.
+    // The figure is arithmetic on the two key sets, not a captured hash: 33 - 21 = 12,
+    // and it is stated that way here so the next lighting car can predict its own move
+    // instead of running the arm to discover it.
     expect(leakedUnderOverlay).toEqual({
       quiet_local: 33,
-      realistic_regional: 33,
+      realistic_regional: 12,
       narrative_campaign: 33,
       static_campaign: 34,
       living_realm: 15,

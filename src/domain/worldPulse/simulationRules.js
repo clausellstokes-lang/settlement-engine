@@ -627,8 +627,8 @@ const OPEN = Object.freeze({
 });
 
 // ── THE NINE ENGINE-WAVE GATES (W-R2-LIGHT owner ruling, 2026-07-16) ──────────
-// The post-close anti-stasis stack's virtual gate flags, lit TOGETHER in the
-// three world-alive presets (dramatic_campaign / living_realm / full_simulation).
+// The post-close anti-stasis stack's virtual gate flags, lit TOGETHER in the three
+// world-alive presets AND, since L-DEFAULT hunk 1, in the lit default beneath them.
 // Like disastersEnabled / commodityFlowEnabled, these keys are ABSENT from
 // DEFAULT_SIMULATION_RULES — VIRTUAL, so they ride the ...overrides spread and add
 // NO persisted bytes to an existing campaign (normalize({}) carries none; the
@@ -745,6 +745,31 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
   }),
   realistic_regional: preset(DEFAULT_SIMULATION_PRESET_ID, 'Realistic Regional', {
     narrativeTempo: 'realistic_regional',
+    // ⭐ THE LIT DEFAULT (lighting wave, L-DEFAULT hunk 1, 2026-09-06). The owner's
+    // word of 2026-09-02 — light everything, including the default, as declared
+    // shifts — reaches the preset a world is actually born into. The twenty-one keys
+    // below are the wave's class C+D: every one of them was already lit in some
+    // richer preset and dark in this one, and every one is VIRTUAL — no entry in
+    // DEFAULT_SIMULATION_RULES, therefore no entry in RULE_COMPARISON_KEYS.
+    //
+    // ⛔ WHY A LEGACY ID MAY TAKE THESE AND NOT THE OTHERS. Preset identity compares
+    // the boolean surface of the defaults; a key absent from that surface is
+    // invisible to it. So an installed Realistic Regional save — which carries none
+    // of these keys — still matches this entry, still re-infers its own id, and is
+    // not re-labelled, gains no byte, and mints no receipt it did not have. The
+    // eight war sub-flags are the opposite case in every particular, which is why
+    // the O-12 block above sends them to a lit successor and this comment does not.
+    //
+    // ⚠ WHAT DOES MOVE, DECLARED RATHER THAN DISCOVERED: a world BORN into this
+    // preset. The instant-world composer applies it as its fallback tone and the
+    // realm dialog offers it as the default chip, so a new realm now runs the
+    // anti-stasis stack and the One Regen from its first tick instead of standing
+    // still. That is a same-seed shift for NEW worlds and for them only.
+    disastersEnabled: true,
+    commodityFlowEnabled: true,
+    allyIntelSharingEnabled: true,
+    ...WAVES,
+    ...ONE_REGEN,
   }),
   dramatic_campaign: preset('dramatic_campaign', 'Dramatic Campaign', {
     ...OPEN,
@@ -897,8 +922,8 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): the ceiling
     // runs the calamity mover. disastersEnabled is an opt-in key ABSENT from
     // DEFAULT_SIMULATION_RULES (like commodityFlowEnabled), so it rides the
-    // ...overrides spread; off in every other preset ⇒ the calamity kernel stays a
-    // complete no-op there (aspatial + spatial goldens byte-identical).
+    // ...overrides spread. ⭐ IT IS NO LONGER OFF EVERYWHERE ELSE: the drama preset
+    // took it at O-12 and the lit default at L-DEFAULT hunk 1 (see that entry).
     disastersEnabled: true,
     // M10a (CL-3): the full sim completes the info ladder — the 'full' ceiling
     // (factional beliefs + reconciliation, carried at the unreliable distortion).
@@ -908,7 +933,7 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // built M6a/M9b features a preset must enable). commodityFlowEnabled/
     // allyIntelSharingEnabled are opt-in keys ABSENT from DEFAULT_SIMULATION_RULES,
     // so they ride the ...input spread and touch NO pinned fixture (byte-identical
-    // off; lit only for a Full Simulation campaign).
+    // off). ⭐ The lit default carries both since L-DEFAULT hunk 1; see that entry.
     worldProgression: 'autonomous',
     commodityFlowEnabled: true,
     allyIntelSharingEnabled: true,
