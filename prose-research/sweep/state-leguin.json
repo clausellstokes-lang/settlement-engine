@@ -24388,6 +24388,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "385": {
+   "index": 385,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "objective-sounding layering of didactic essay upon essay",
+   "note": "Raw Wayback capture of sluss53.htm read in full (curl, 200). Quote exact in the Tristram-Shandy sentence. Note: that sentence describes Always Coming Home and Heinlein's Number of the Beast jointly ('they'), and names two devices, the stories-within-stories profusion plus this layering; the vision Slusser calls 'increasingly subjective'. ACH is squarely one of the two referents, so every limb holds.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "386": {
+   "index": 386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a strong sense of identity speaking through a controlled polyphony",
+   "note": "Exact on the raw page, in the paragraph contrasting Cummins with Selinger: Cummins' explication gave Slusser 'precisely the opposite feel' from Selinger's. Claim's 'strong identity' = page's 'strong sense of identity'. Subject is Coming Home. Locator correct.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "387": {
+   "index": 387,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a superbly imaginative creator and major stylist",
+   "note": "Exact, inside Slusser's quotation of Bloom's introduction to his 1986 Modern Critical Views volume on Le Guin. Both the 1986 date and 'introduction' are on the page. Minor locator drift only: the Bloom quotation sits in the second body paragraph ('Increasingly, Le Guin's work...'), not the third.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
   "388": {
    "index": 388,
    "verdict": "SKIPPED_TRIAGE",
@@ -24430,6 +24451,14 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "394": {
+   "index": 394,
+   "verdict": "PARTIAL",
+   "trueWording": "she delineates ever more precisely the same object",
+   "note": "Quote is exact, but only in the ABSTRACT block appended after Suvin's footnotes; grep of the whole article body (lines 1-565) finds no 'centripetal' or 'delineat' anywhere. That abstract's first paragraph speaks in issue-editorial voice ('argued abundantly in this special issue', 'no contributor attempts to integrate the Earthsea trilogy'), and is unsigned; the second paragraph is the genuine article abstract, matching Suvin's opening line. So 'Le Guin writes centripetally... delineates ever more precisely the same object' is verbatim on Suvin's SFS page but is not shown to be Suvin's own writing. Suvin co-edited the issue, so it is likely his, but the page does not say so.",
+   "unsupportedLimb": "attribution to Suvin as the writer of the sentence",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
   "395": {
    "index": 395,
    "verdict": "SKIPPED_TRIAGE",
@@ -24437,12 +24466,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "396": {
+   "index": 396,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Beautiful, polished, and self-enclosed like a diamond necklace",
+   "note": "Exact in the article body, section 1 ('The Dispossessing'), applied directly to The Earthsea Trilogy. Locator says 'section on the Earthsea Trilogy'; there is no separate Earthsea section, the passage sits inside section 1, but the sentence is Suvin's own and the characterisation is exact.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "397": {
+   "index": 397,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "all the weightier for consisting of only three sentences",
+   "note": "Exact in section 2, 'The New Atlantis' (NA is defined as that story earlier in the same section). Page calls it 'the Atlanteans' last question-segment - the end of their strand and of the whole NA', which supports the claim's 'closing segment'. Suvin's own body text.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
   "398": {
    "index": 398,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "399": {
+   "index": 399,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "account for much of her stylistic power and accessibility",
+   "note": "Exact in the closing section (section 3), before the footnotes. All three ingredients are on the page: '19th-Century Realism', a 'Virginia-Woolf-type adoption of some techniques of lyric poetry', and 'the ethical abstraction of American romances'. Suvin hedges - the blend 'may account for' - where the claim says 'attributes'; the hedge is a softening, not a different proposition.",
+   "fromFile": "verdicts-leguin-i385-415.json"
   },
   "400": {
    "index": 400,
@@ -24486,6 +24536,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "406": {
+   "index": 406,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Everywhere the sententiae that are her style prepare us",
+   "note": "Exact, in the ansible paragraph as the locator says. 'Everywhere' supports the claim's 'constant', and the page's construction is stronger still - the sententiae are her style, not merely a feature of it. Scoping to The Dispossessed holds: the essay is on TD, and later Bierman writes that TD 'is signed with the same moral sententiae'.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
   "407": {
    "index": 407,
    "verdict": "SKIPPED_TRIAGE",
@@ -24500,12 +24557,75 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "409": {
+   "index": 409,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "One major local image-a brilliantly ambiguous one-is the wall",
+   "note": "Exact, third paragraph as the locator says. The same sentence carries 'introduced on the first page of the novel', and the next clause supports 'running through the novel': the wall is connected to the prison image 'throughout', 'time after time'.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "410": {
+   "index": 410,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Where are the poor, the people who work hard",
+   "note": "Exact, fourth paragraph as the locator says (the social-Alien paragraph). The 'never made into persons' limb is the page's own next two sentences - it asks whether they are ever persons in SF and answers 'No.'",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "411": {
+   "index": 411,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They are masses, existing for one purpose: to be led",
+   "note": "Exact, fifth paragraph as the locator says. The full sentence on the page is 'The people, in SF, are not people. They are masses, existing for one purpose: to be led by their superiors.' - every limb of the claim, including 'by their superiors', is present.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "412": {
+   "index": 412,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a neural simile which supports the impression",
+   "note": "Exact, early in the essay in the light/darkness metaphorical-structure paragraph. Le Guin's phrase is quoted there as the forest paths being 'devious as nerves', and the page continues 'the impression that the forest itself is conscious' - both limbs supported.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "413": {
+   "index": 413,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the essential structural principle of this SF-its thorough iconicity",
+   "note": "Exact, in the passage on the radial type of linkage as the locator says. 'this SF' is Le Guin's SF (the article's subject and title). The each-episode limb is supported on the same page: a structural analogy 'of the part (episode) to the whole', the lower narrative level being 'a similarity, an image, the isomorphic sign' of the higher.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "414": {
+   "index": 414,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Metaphors and similes are scarce enough to burn vividly",
+   "note": "Live Guardian URL fetched raw with a browser user agent (200, full body text). Exact in the style-and-voice stretch. The page continues 'when they do appear', and the 'scarce enough to burn vividly' construction makes the scarcity the cause, as the claim says. Byline David Mitchell, Fri 23 Oct 2015, matching the citation.",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "415": {
+   "index": 415,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "dialogue is sparing",
+   "note": "Exact, same sentence as index 414, in the style-and-voice stretch of the same Guardian piece. Subject is A Wizard of Earthsea throughout that paragraph, and the surrounding sentences corroborate (accents 'referred to but not reproduced', no wide variations of tone or register).",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "416": {
+   "index": 416,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "accents and dialects are referred to but not reproduced on the page",
+   "note": "Guardian live URL fetched raw (HTTP 200, browser UA), byline David Mitchell. Sentence sits in the style paragraph beginning 'Metaphors and similes are scarce...'. Claim's 'phonetically' is narrower than the source's 'not reproduced', so it is entailed.",
+   "fromFile": "verdicts-leguin-i416-475.json"
+  },
   "417": {
    "index": 417,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "418": {
+   "index": 418,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Dialogue contains warmth and humour, but no knowing wisecracks",
+   "note": "Same Guardian paragraph as 416, one sentence later; context is explicitly A Wizard of Earthsea. Raw page reached, not a summarizer.",
+   "fromFile": "verdicts-leguin-i416-475.json"
   },
   "419": {
    "index": 419,
@@ -24591,6 +24711,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "431": {
+   "index": 431,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The story-and the book-ends with a minimalist dance",
+   "note": "NYRB live URL fetched raw, byline Margaret Atwood, 'September 26, 2002 issue'. Final body paragraph; Atwood then quotes the closing lines ('Swaying, she lifted her bare feet...'), presenting them as how story and book end. She does not use the phrase 'last words' herself.",
+   "fromFile": "verdicts-leguin-i416-475.json"
+  },
+  "432": {
+   "index": 432,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In this foreword, Le Guin describes process rather than theory",
+   "note": "Same NYRB article, in the paragraph comparing the 1976 Left Hand of Darkness introduction with the new Birthday of the World foreword; continues 'the genesis of each story, the problems she had to think her way through'.",
+   "fromFile": "verdicts-leguin-i416-475.json"
+  },
   "433": {
    "index": 433,
    "verdict": "SKIPPED_TRIAGE",
@@ -24598,12 +24732,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "434": {
+   "index": 434,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the action moves slowly as Le Guin explores her themes",
+   "note": "Kirkus live URL fetched raw; review body is unsigned, headed TEHANU / Ursula K. Le Guin. Page shows 'Pub Date: Feb. 1, 1990' and 'Kirkus Reviews Issue: Jan. 15, 1990' - the 1 Feb 1990 in the source line is the book pub date, not the review issue date.",
+   "fromFile": "verdicts-leguin-i416-475.json"
+  },
   "435": {
    "index": 435,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "436": {
+   "index": 436,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the philosophy expressed in thoughtful, potent metaphor",
+   "note": "Same unsigned Kirkus Tehanu review, same sentence as 434 ('...beguiled by the flawless, poetic prose, the philosophy expressed in thoughtful, potent metaphor').",
+   "fromFile": "verdicts-leguin-i416-475.json"
   },
   "437": {
    "index": 437,
@@ -24647,6 +24795,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "443": {
+   "index": 443,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is a restless book with very strange pacing",
+   "note": "Reactor live URL fetched raw, 'By Jo Walton', 'Published on October 25, 2011'. Closing sentence of the paragraph on Le Guin speaking with a double tongue.",
+   "fromFile": "verdicts-leguin-i416-475.json"
+  },
+  "444": {
+   "index": 444,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I didn't quite believe in Tenar's life as a farmwife",
+   "note": "Same Walton essay: 'I didn't quite believe in Tenar's life as a farmwife on Gont-there's something false about it.' Quote verbatim; note the source hedges with 'quite', which the claim's 'did not believe' drops.",
+   "fromFile": "verdicts-leguin-i416-475.json"
+  },
   "445": {
    "index": 445,
    "verdict": "SKIPPED_TRIAGE",
@@ -24660,6 +24822,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "447": {
+   "index": 447,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "she is described as 'like a child coming home'",
+   "note": "Reactor Tombs of Atuan essay fetched raw, 'By Jo Walton', published October 11, 2011 (source line says only 2011). Both limbs present: 'The text at the end describes him as a \"young wizard\"' and Tenar at Havnor 'like a child coming home'.",
+   "fromFile": "verdicts-leguin-i416-475.json"
   },
   "448": {
    "index": 448,
@@ -24682,12 +24851,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "451": {
+   "index": 451,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "seemed to some readers too oblique and metaphorical",
+   "note": "New Yorker live URL fetched raw, 'By Julie Phillips'. Full sentence continues 'her sense of play not illuminating but evasive', in the paragraph about the period beginning after The Dispossessed was published in 1974 - so the post-1974 limb is supported.",
+   "fromFile": "verdicts-leguin-i416-475.json"
+  },
+  "452": {
+   "index": 452,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fairly exhaustive ethnography: having all those voices speaking the world",
+   "note": "Wayback raw capture (20151107114510id_) of sfra.org/Coyote/alwayshome.htm. Source sentence: 'The change in Le Guin's method in Always Coming Home generally, is the scientific method, so to speak, of fairly exhaustive ethnography...'. Locator correction: it is main body text immediately after endnote marker [36], not inside endnote 36 (endnote 36 reads 'Liminal:').",
+   "fromFile": "verdicts-leguin-i416-475.json"
+  },
   "453": {
    "index": 453,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "454": {
+   "index": 454,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sentence marked by no transition but set off in a paragraph",
+   "note": "Wayback raw capture of sfra.org/Coyote/earthsea.htm. Context supports every limb: the 'And therefore' sentence, 'with no explanation of what \"the easy thing\" might refer to', set off in a paragraph by itself; Tehanu ch. 10 'The Dolphin', p. 138.",
+   "fromFile": "verdicts-leguin-i416-475.json"
   },
   "455": {
    "index": 455,
@@ -24724,6 +24914,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "460": {
+   "index": 460,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin's writing has grown windy and soft, too feminist",
+   "note": "Live washingtonpost.com timed out (curl exit 000); recovered via Wayback raw capture 20170827235846id_. Byline 'By Michael Dirda February 25, 1990', heading TEHANU / The Last Book of Earthsea. Source sentence: 'Some critics feel that in recent books Le Guin's writing has grown windy and soft, too feminist, too mythic, too preachy.'",
+   "fromFile": "verdicts-leguin-i416-475.json"
+  },
   "461": {
    "index": 461,
    "verdict": "SKIPPED_TRIAGE",
@@ -24758,6 +24955,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "466": {
+   "index": 466,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a superbly imaginative creator and major stylist",
+   "note": "Live nytimes.com returned HTTP 403; recovered via Wayback raw capture 20260111213522id_ (raw page, not a summary). Byline 'By Gerald Jonas', 'Jan. 23, 2018'. Text: the critic Harold Bloom lauded her as this, 'who \"has raised fantasy into high literature for our time.\"'",
+   "fromFile": "verdicts-leguin-i416-475.json"
   },
   "467": {
    "index": 467,
@@ -24815,12 +25019,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "475": {
+   "index": 475,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Where playwrights can score dialogue with significant silences",
+   "note": "Paradoxa PDF fetched (200, 340 KB) and text-extracted with pdftotext. Quote spans pp. 16-17; continues 'writers have to rely on \"business\"'. The passage follows the block quote Kelso calls 'a key \"data dump\" between Tenar and Moss', and analyses 'They split rushes for a while in silence' / 'They split rushes' as pause-and-emphasis business. Metadata correction: the PDF masthead reads 'Paradoxa, No. 21, 2008', not 2009.",
+   "fromFile": "verdicts-leguin-i416-475.json"
+  },
   "476": {
    "index": 476,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "477": {
+   "index": 477,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "actually detract slightly from the antithesis of bread and stone",
+   "note": "Raw PDF (pdftotext -layout), p.15 (page header 'New Writing on the Works of Ursula K. Le Guin 15'). Sentence runs 'But the closing clauses, rhythmically necessary, actually detract slightly from' + next line 'the antithesis of bread and stone, and the entirely homely simile.' The preceding block quote is the love/bread/stone passage cited to Lathe of Heaven p.136; running head confirms Sylvia A. Kelso as author. Every limb (Kelso, Lathe, closing clauses, rhythmically necessary, weakened antithesis and homely simile) is on the page.",
+   "fromFile": "verdicts-leguin-i477-528.json"
   },
   "478": {
    "index": 478,
@@ -24871,12 +25089,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "485": {
+   "index": 485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "As of the date of this report the Seggri have not",
+   "note": "Raw HTML from sfsfss.com. In the closing historical/frame narration after Merriment's departure and the Iyoo/Wu mission: the sentence continues 'undertaken major genetic alteration'. No calendar year is attached anywhere in that frame paragraph, so the self-dating limb holds.",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  },
   "486": {
    "index": 486,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "487": {
+   "index": 487,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They made Resehavanar's Choice as \"all the truth slowly.\"",
+   "note": "Raw page, same closing frame paragraph (immediately before the 'As of the date of this report' sentence). Capitalised proper term, no definition offered in the frame; the term also appears twice inside the Mobile's field notes ('we are facing Resehavanar's Choice here'; 'I chose the option: Less than the truth'), which is where the procedure's options are implied - the frame itself never explains it, so the 'unglossed' limb stands as claimed.",
+   "fromFile": "verdicts-leguin-i477-528.json"
   },
   "488": {
    "index": 488,
@@ -24899,6 +25131,42 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "491": {
+   "index": 491,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They are ordinary drudges, living in towns which belong",
+   "note": "Raw page, under the heading 'CAPTAIN AOLAO-OLAO'S REPORT'. Archaic register in the same section: 'consonant with their unregenerate state', 'They evinced great fear', 'it were best for us'. The frame/editorial narrator elsewhere writes plain modern prose (e.g. the 'As of the date of this report' paragraph), supporting the contrast limb.",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  },
+  "492": {
+   "index": 492,
+   "verdict": "PARTIAL",
+   "trueWording": "my record is herewith enclosed",
+   "note": "Quote is verbatim in the closing autobiographical sketch, and the application limb is supported ('as part of my application to return to Seggri as a Mobile of the Ekumen'). But the memoir does not END there: the filing formula sits three sentences from the close, and the last sentence is reflective, ending on knowing 'with at least an uncertain certainty who I am'. Confirmed against the tail of the raw file.",
+   "unsupportedLimb": "ends on a filing formula - the formula is mid-paragraph; the memoir's final sentence is reflective, not bureaucratic",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  },
+  "493": {
+   "index": 493,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the final section, some 100 pages, called",
+   "note": "Raw blogspot HTML; byline 'by Rich Horton', blog masthead 'Strange at Ecbatan', dated Wednesday, April 24, 2024. Sentence: it seemed a case of a writer including her study notes '(And, to be sure, she literally does -- in the final section, some 100 pages, called \"The Back of the Book\"...)'. The page's own label for the closing section is The Back of the Book; Horton's final paragraph calls the same material 'ethnographic'.",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  },
+  "494": {
+   "index": 494,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "intellectually intriguing, but, really, often a struggle to read",
+   "note": "Raw page, final-verdict paragraph beginning 'What's my final verdict?'. Subject is 'The ethnographic bits -- and they are not just \"bits\"'. Claim's 'intellectually interesting' paraphrases the page's 'intriguing'; 'hard to read' matches 'a struggle to read'.",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  },
+  "495": {
+   "index": 495,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "like a writer deciding to include all her notes",
+   "note": "Raw page, paragraph beginning 'But no longer!': 'It does read, to a great extent, like a writer deciding to include all her notes.' The deliberateness limb is carried by the next sentence, in which Horton says he is certain Le Guin did this with full intention.",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  },
   "496": {
    "index": 496,
    "verdict": "SKIPPED_TRIAGE",
@@ -24912,6 +25180,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "498": {
+   "index": 498,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The encyclopedic form of Always Coming Home",
+   "note": "Raw loa.org page. The sentence ('...was exactly what she needed at the time, to do the job she wanted to do') closes the answer prefixed 'Attebery:' about nonlinear form; the intro paragraph identifies 'The editor of the new LOA volume is Brian Attebery'. Note the quoted line is the fourth Q&A block, not the third answer as the claim's page field says - a locator slip, not a claim limb.",
+   "fromFile": "verdicts-leguin-i477-528.json"
   },
   "499": {
    "index": 499,
@@ -24927,12 +25202,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "501": {
+   "index": 501,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin's mode is ethnography, not epic.",
+   "note": "Raw reactormag.com page; byline 'By Matthew Keeley'. Closes the paragraph beginning 'The interrupted story which resumes 150 pages later', which contrasts the novelistic Stone Telling narrative with an anthropologist's carrier bag of documents.",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  },
   "502": {
    "index": 502,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "503": {
+   "index": 503,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "where those who want narrative can ignore them",
+   "note": "Same raw Reactor page, paragraph beginning 'The table of contents for this book is several pages long'. Keeley reports that the author announces on the first page that some of the more explanatory, descriptive pieces are relegated to The Back of the Book, with the quoted clause plus 'and those who enjoy explanations can find them.' First-page, set-apart and skippable limbs all present.",
+   "fromFile": "verdicts-leguin-i477-528.json"
   },
   "504": {
    "index": 504,
@@ -24997,6 +25286,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "513": {
+   "index": 513,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "To me the style is the book, to a large extent",
+   "note": "Wayback raw capture (20140118190325id_) of the Paris Review interview; header 'Ursula K. Le Guin, The Art of Fiction No. 221 / Interviewed by John Wray'. Sentence sits in a block prefixed 'LE GUIN' about idea-writers who scorned style, and continues 'Take Borges.', matching the claim's locator.",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  },
   "514": {
    "index": 514,
    "verdict": "SKIPPED_TRIAGE",
@@ -25046,6 +25342,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "521": {
+   "index": 521,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Showing can be quite static, after all",
+   "note": "Raw ursulakleguin.com page, Session 1. Full sentence: the quoted clause then '; but telling always involves moving on.' It closes the reply prefixed 'UKL :' to the questioner named Paige, whose question is the show-don't-tell one.",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  },
   "522": {
    "index": 522,
    "verdict": "SKIPPED_TRIAGE",
@@ -25080,6 +25383,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "527": {
+   "index": 527,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reflection and action, character and action, are not opposites",
+   "note": "Raw ursulakleguin.com page, Session 1 Continued, under the heading 'SOME FALSE DICHOTOMIES', in a reply prefixed 'Ursula :'. On the page the clause is preceded by 'Above all,' and followed by an exclamation mark, then 'What people do arises from what they think and who they are.'",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  },
+  "528": {
+   "index": 528,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "neither is an obligatory ingredient of narrative",
+   "note": "Same raw page and 'SOME FALSE DICHOTOMIES' section, same paragraph as index 527: conflict is called one possible element of a story, intense suspensefulness another, and then the quoted clause. Both limbs of the claim are on the page.",
+   "fromFile": "verdicts-leguin-i477-528.json"
   },
   "529": {
    "index": 529,

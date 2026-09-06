@@ -882,5 +882,53 @@
    "unsupportedLimb": "'identifies the most famous sentence' stated flatly, and 'four-word' — the note records that Vest hedges with 'Perhaps Left Hand's most famous sentence' and that 'four-word' is the verifier's own count, not the page's wording.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
   }
+ },
+ {
+  "index": 394,
+  "feature": "other: centripetal narrowing description",
+  "claim": "Suvin writes that Le Guin delineates ever more precisely the same object, describing her method as centripetal.",
+  "source": "Darko Suvin, 'Parables of De-Alienation', Science Fiction Studies #7 (November 1975), abstract as printed on the SFS page",
+  "url": "https://web.archive.org/web/20260206193435id_/https://www.depauw.edu/sfs/backissues/7/suvin7art.htm",
+  "quote": "she delineates ever more precisely the same object",
+  "page": "ABSTRACT",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1975-11",
+  "routeHint": "Wayback raw capture (web.archive.org/web/<ts>id_/) of the DePauw SFS page; the live DePauw URL now 404s",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 394,
+   "verdict": "PARTIAL",
+   "trueWording": "she delineates ever more precisely the same object",
+   "note": "Quote is exact, but only in the ABSTRACT block appended after Suvin's footnotes; grep of the whole article body (lines 1-565) finds no 'centripetal' or 'delineat' anywhere. That abstract's first paragraph speaks in issue-editorial voice ('argued abundantly in this special issue', 'no contributor attempts to integrate the Earthsea trilogy'), and is unsigned; the second paragraph is the genuine article abstract, matching Suvin's opening line. So 'Le Guin writes centripetally... delineates ever more precisely the same object' is verbatim on Suvin's SFS page but is not shown to be Suvin's own writing. Suvin co-edited the issue, so it is likely his, but the page does not say so.",
+   "unsupportedLimb": "attribution to Suvin as the writer of the sentence",
+   "fromFile": "verdicts-leguin-i385-415.json"
+  }
+ },
+ {
+  "index": 492,
+  "feature": "other: bureaucratic idiom",
+  "claim": "The closing personal memoir of 'The Matter of Seggri' ends on a filing formula borrowed from an application form.",
+  "source": "Ursula K. Le Guin, 'The Matter of Seggri' (1994), full text transcription, sfsfss.com",
+  "url": "https://www.sfsfss.com/stories2/Le%20Guin,%20Ursula%20K.%20-%20The%20Matter%20of%20Seggri.html",
+  "quote": "my record is herewith enclosed",
+  "page": "final section, autobiographical sketch",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "1994",
+  "routeHint": "direct curl; quote spans the page's hard line wrap",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 492,
+   "verdict": "PARTIAL",
+   "trueWording": "my record is herewith enclosed",
+   "note": "Quote is verbatim in the closing autobiographical sketch, and the application limb is supported ('as part of my application to return to Seggri as a Mobile of the Ekumen'). But the memoir does not END there: the filing formula sits three sentences from the close, and the last sentence is reflective, ending on knowing 'with at least an uncertain certainty who I am'. Confirmed against the tail of the raw file.",
+   "unsupportedLimb": "ends on a filing formula - the formula is mid-paragraph; the memoir's final sentence is reflective, not bureaucratic",
+   "fromFile": "verdicts-leguin-i477-528.json"
+  }
  }
 ]

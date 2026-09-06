@@ -19,7 +19,7 @@
   "argsFile": "args-leguin-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--leguin-r8.js",
-  "status": "PAUSED ~17:30 (stopped ~3 min in) — 2nd",
+  "status": "RUNNING since 17:41 (resumed from wf_e95fca37-bb5 — 2nd research slot)",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--leguin-r8.js"
  },
  "wolfe": {
@@ -63,7 +63,7 @@
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--ai-r7.js"
  },
  "_queue": {
-  "ruling": "OWNER 2026-09-06 ~17:30: one research sweep at a time; pause all others",
+  "ruling": "OWNER 2026-09-06 ~17:30: one research sweep at a time; AMENDED 17:40: \"up to two lanes for research and one additional third lane for implementation\" → TWO research runs alive at once + ONE build lane",
   "order": [
    "hobb",
    "leguin",
@@ -73,7 +73,10 @@
    "martin",
    "ai"
   ],
-  "running": "hobb",
-  "resume": "Workflow({scriptPath: d[<next>].scriptPath, resumeFromRunId: d[<next>].runId}) after the running one completes; then set status RUNNING here"
+  "running": [
+   "hobb",
+   "leguin"
+  ],
+  "resume": "keep TWO research runs alive: when one completes (its task notification), resume the next in `order` by Workflow({scriptPath: d[<next>].scriptPath, resumeFromRunId: d[<next>].runId}); set its status RUNNING here"
  }
 }

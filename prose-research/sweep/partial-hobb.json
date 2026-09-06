@@ -1103,6 +1103,29 @@
   }
  },
  {
+  "index": 620,
+  "feature": "other: moral legibility",
+  "claim": "A reader disputes the common description of Hobb's characters as morally grey, saying she knows exactly who the good guys and the bad guys are.",
+  "source": "Allison Annotated, 'Robin Hobb Doesn't Write \"Morally Grey\" Characters (And Other Farseer Musings)', YouTube",
+  "url": "https://www.youtube.com/watch?v=fIw6lHNEwcc",
+  "quote": "I know exactly who the good guys and the bad",
+  "page": "opening argument",
+  "kind": "reader",
+  "polarity": "disputes",
+  "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text quoted as fetched",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "dropped-and-routes",
+  "verdict": {
+   "index": 620,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the quoted words 'I know exactly who the good guys and the bad' — spoken-only, caption track unreachable (HTTP 429 on every route), so the quotation itself is unverified",
+   "trueWording": "why the internet is wrong about Hobb's characters being morally grey",
+   "note": "The raw watch page was reached (200) and its own title and description support the claim's substantive limb: title 'Robin Hobb Doesn't Write \"Morally Grey\" Characters (And Other Farseer Musings)', channel 'Allison Annotated', description says the essay 'discusses why the internet is wrong about Hobb's characters being morally grey' — i.e. a reader disputing the common morally-grey description, which is what the claim asserts. The second limb, the quoted sentence about knowing who the good guys and the bad guys are, is spoken narration and could not be checked: timedtext 429 (signed, cookie-jar+Referer, legacy, unsigned, and via WebFetch from a different IP), youtubei get_transcript 400, yt-dlp with curl_cffi impersonation 429, Invidious empty, Piped 5xx, no Wayback capture. Graded PARTIAL rather than BLOCKED because a raw page was reached and does carry the claim's main assertion.",
+   "fromFile": "verdicts-hobb-i531-639.json"
+  }
+ },
+ {
   "index": 644,
   "feature": "repetition and refrain",
   "claim": "Elliott records that a Royal Assassin chapter opens with two stanzas from an in-milieu song, \"The Vixen Queen's Hunt\".",
