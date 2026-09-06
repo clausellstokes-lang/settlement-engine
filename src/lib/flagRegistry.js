@@ -75,6 +75,21 @@ export const FLAG_DEFAULTS = Object.freeze({
   heroV2: true,
   wizardChromeDiet: true,
   narrativeLayerStrip: true,
+  // ⛔ NOT FLIPPED, AND THE REASON IS A MEASUREMENT, NOT A DOUBT (lane L-UI-MAT,
+  // 2026-09-06). O-13 ratified flipping this flag with `warEconomySurfacing` and
+  // `handbookVoice`. The permission is sound; the MECHANISM is gone. This flag has
+  // NO READER: `git grep mobileSingleChrome` over the whole tracked tree returns
+  // four hits and not one is a `flag()`/`useFlag()` call — this line, its
+  // description in flags.js, and two doc sentences. Its one consumer was
+  // src/App.jsx and `8bf493d05` (fix(nav)) deleted all three of its read sites:
+  // the nav slice is now a hard-coded `.slice(0, 5)`, the mobile top header
+  // renders unconditionally, and the auth-chip 6th slot no longer exists. The
+  // flag-ON behaviour is not in source, so flipping this to `true` would change
+  // NOTHING except to advertise a capability the build cannot render (dev flag
+  // panel + crash-forensics `flags_on`). This is the same shape the lighting plan
+  // itself confirmed for `generationWorker` — "0 hits — nothing to flip" — and
+  // correctly classed a BLOCKED RESIDUE. Chair row: rebuild the feature or retire
+  // the entry; a lane may not decide which, because retiring it moves the flag census.
   mobileSingleChrome: false,
   compendiumInlineHelp: true,
   summaryMagazineV2: true,
@@ -84,8 +99,33 @@ export const FLAG_DEFAULTS = Object.freeze({
   simAdvanceWorker: true,
   advanceWorkerParanoia: false,
   generationWorker: false,
-  handbookVoice: false,
-  warEconomySurfacing: false,
+  // ⭐ LIT 2026-09-06 — lane L-UI-MAT, lighting wave POSITION 4 (L-UI / `C4-UI`),
+  // under owner row **O-13**, RATIFIED by the chair at ODQ §882.1: "O-13 three
+  // product flags flip in L-UI (`warEconomySurfacing`, `handbookVoice`,
+  // `mobileSingleChrome`) … RATIFIED". Two of the three land here; the third is
+  // refused above with its measurement.
+  //
+  // THIS IS A DECLARED DISPLAY-ONLY SHIFT, AND IT WAS PROVEN RATHER THAN ASSERTED:
+  //   • STRUCTURAL — no module under `src/domain/` or `src/generators/` imports
+  //     `lib/flags.js` or `lib/flagRegistry.js` at all (measured: zero hits), so a
+  //     flag value cannot reach a generator, a seed, a hash or a persisted config.
+  //     Every one of the 36 importers is a component, hook, store action or pdf
+  //     view-model — all render-time.
+  //   • EXECUTED — the 525-row generator golden-master corpus was hashed with an
+  //     independent probe before and after this flip: aggregate
+  //     `92ef697dbea663df6d72c9e584a36595b6fd52b0d4bad4ba3f38272c8b146d8d`
+  //     UNMOVED, 0 of 525 rows changed, with a planted-field negative control
+  //     proving the comparator could see (it moved the aggregate to `d72c1ea7…`).
+  //
+  // `handbookVoice` (V-26b): the Keeper's Handbook header + concept essay now
+  // render in the house voice. The numbered steps and the Compendium lifeline stay
+  // plain in both states — THE CLARITY CLAUSE, pinned in handbookVoice.test.jsx.
+  // `warEconomySurfacing`: the read-only "War & Resolve" fold-in surfaces inside the
+  // Herald's War door. Its DATA stays premium/campaign-gated exactly as before — a
+  // flag-on reader with no campaign gets the empty state, never war data — so no
+  // paid-surface entitlement moves; only the door becomes reachable.
+  handbookVoice: true,
+  warEconomySurfacing: true,
   sessionMode: true,
   foundryExport: true,
   pricingSimulationCopy: true,
