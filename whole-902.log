@@ -10,3 +10,7 @@ Not implemented: HTMLCanvasElement's toDataURL() method: without installing the 
      × every completeness claim carries an @enforced-by tag with ≥1 target 12ms
  ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 5534ms
      × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 18ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
