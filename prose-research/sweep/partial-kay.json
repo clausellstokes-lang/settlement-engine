@@ -1,1 +1,53 @@
-[]
+[
+ {
+  "index": 10,
+  "feature": "zero focalization used sparingly",
+  "claim": "Randall identifies the few zero-focalized (omniscient) passages as the mythic set pieces perceived by no character, e.g. the Arthurian trio's departure.",
+  "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+  "url": "https://brightweavings.com/randallfionavar/",
+  "quote": "shifts to an unspecified focalizant, to omniscience",
+  "angle": "academic",
+  "verdict": {
+   "index": 10,
+   "verdict": "PARTIAL",
+   "trueWording": "perceived by minds capable of comprehending magnificence",
+   "note": "Quote is verbatim: 'The departure of the Arthurian trio is one of several brief passages in the trilogy that shifts to an unspecified focalizant, to omniscience, to what Genette calls zero focalization'. But the page says the OPPOSITE of 'perceived by no character' for this passage - 'The departure of the trio is more magnificent because it is perceived by minds capable of comprehending magnificence' (and the text itself: 'it seemed to those that watched from the plain'). 'because in his case there are no observers' is said of Darien's death, which is strictly focalized, NOT zero-focalized. The 'mythic set pieces' limb is also weakened: Randall says the departure 'represents, of course, myth in the making, but for Fionavar the incident is less mythically significant than Darien's death.' Zero focalization means an UNSPECIFIED focalizant, not an unperceived event.",
+   "unsupportedLimb": "that the zero-focalized passages are perceived by no character",
+   "fromFile": "verdicts-kay-i0-14.json"
+  }
+ },
+ {
+  "index": 14,
+  "feature": "prologue as mosaic of focalizations",
+  "claim": "Kleander quotes Kay that the prologue of Sailing to Sarantium was written as a mosaic of different focalizations.",
+  "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+  "url": "https://brightweavings.com/presentreality/",
+  "quote": "the prologue of Sailing to Sarantium was written as a mosaic",
+  "angle": "academic",
+  "verdict": {
+   "index": 14,
+   "verdict": "PARTIAL",
+   "trueWording": "Kay is quoted only for ‘written as a mosaic’",
+   "note": "Raw page: \"Kay's novels heavily rely on this technique, for example 'the prologue of Sailing to Sarantium was written as a mosaic' (Kay in New York Review of Science Fiction Interview 2000, url) of different focalizations.\" The quotation marks CLOSE after 'a mosaic' and the citation follows; 'of different focalizations' is Kleander's own completion of her sentence, not part of what she quotes from Kay. Kleander does assert the mosaic is of focalizations, but Kay must not be re-quoted as having said 'a mosaic of different focalizations'.",
+   "unsupportedLimb": "that Kay's quoted words include 'of different focalizations'",
+   "fromFile": "verdicts-kay-i0-14.json"
+  }
+ },
+ {
+  "index": 20,
+  "feature": "historian as unreliable narrator-in-text",
+  "claim": "Kleander reads Pertennius (Procopius) as Kay's illustration that history is carved and chosen, with the narrator's opening line that writers of history seek the dramatic over the truth.",
+  "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+  "url": "https://brightweavings.com/presentreality/",
+  "quote": "exquisitely phrased vituperation",
+  "angle": "academic",
+  "verdict": {
+   "index": 20,
+   "verdict": "PARTIAL",
+   "trueWording": "Pertennius sets out to ‘choose, sever and carve’ among events",
+   "unsupportedLimb": "that 'writers of history seek the dramatic over the truth' is the narrator's opening line, and that Kleander attaches it to the Pertennius reading — the dissertation quotes 'seek the dramatic over the truth' (StS, 3) in a later, separate passage about Kay's own licence ('Being thus free to ‘seek the dramatic over the truth’ Kay teaches that there is no such thing as an ‘objective truth’'), never calls it an opening line or a narrator's line, and the word 'narrator' appears only twice on the page, both times about focalization theory",
+   "note": "Quote 'exquisitely phrased vituperation' is verbatim ('depicts Crispin reading Pertennius’ ‘exquisitely phrased vituperation’ (LoE, 154)'). Supported limbs: Pertennius is 'Kay’s most obvious illustration of how ‘history can become dangerous when the creative aspect of its construction is concealed or unknown’'; 'Pertennius is modelled on Procopius'; 'As Pertennius sets out to ‘choose, sever and carve’ (White 1973, 288) among events'. Searched raw text for 'opening line', 'first line', 'writers of history': zero hits.",
+   "fromFile": "verdicts-kay-i15-29.json"
+  }
+ }
+]

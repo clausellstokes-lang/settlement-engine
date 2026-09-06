@@ -886,5 +886,239 @@
    "unsupportedLimb": "that Krege defended his version as 'assimilating the alien' - on this page the phrase is Nagel's chapter title, not Krege's words, and appears only as 'Assimilate the Alien'",
    "fromFile": "verdicts-tolkien-i733-747.json"
   }
+ },
+ {
+  "index": 748,
+  "feature": "Rohirric as Old English distance",
+  "claim": "Honegger explains that Tolkien equated Rohirric with Old English to keep linguistic distance while suggesting kinship, a choice translators cannot easily mirror.",
+  "source": "Translating Tolkien: Text and Film (Cormarë 6) — Nagel and Honegger chapters (epdf mirror)",
+  "url": "https://epdf.pub/translating-tolkien-text-and-film-cormare-series-no-6.html",
+  "page": "",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 748,
+   "verdict": "PARTIAL",
+   "trueWording": "linguistic transposition (e.g. Rohirric = Old English)",
+   "unsupportedLimb": "the stated purpose — keeping linguistic distance while suggesting kinship",
+   "note": "Raw epdf.pub page fetched (612 KB HTML, 359 KB text). Honegger's chapter abstract is present verbatim: 'reproduce the relationship between the various languages of Middle-earth by means of linguistic transposition (e.g. Rohirric = Old English, Language of Dale = Old Norse)' and 'poses an additional challenge to every translator' — which supports the equation limb and the translators-cannot-easily-mirror limb. But the mirror's OCR text of that chapter breaks off mid-sentence on p.6 (thou/ye excursus) and jumps to Nagel's chapter at p.93+, so the rationale limb (distance while suggesting kinship) is nowhere on the reachable text: zero hits for 'kinship', 'archaic', 'Old High German', 'Medieval Latin', 'Éomer' inside the chapter. The page's DOWNLOAD PDF link (epdf.pub/download/...) returns the same HTML, not a PDF, so no fuller text is reachable by that route.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  }
+ },
+ {
+  "index": 749,
+  "feature": "reader verdict: register equated with ours",
+  "claim": "SpacePub readers objected that 'Chef' equates the hobbits' social circumstances with ours and that 'Penner', 'Imbissbude' and 'Stuss erzählen' break immersion, while supporters praised readability and regional differentiation of hobbit, Rohirric and Elvish speech.",
+  "source": "Der Herr der Ringe — die neue Übersetzung beurteilt (SpacePub forum archive)",
+  "url": "https://www.spacepub.net/archive/index.php/t-6815.html",
+  "page": "",
+  "quote": "Imbissbude",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 749,
+   "verdict": "PARTIAL",
+   "trueWording": "'Penner', 'Chef', 'Imbißbude' werfen den Leser aus der Welt des Buches",
+   "unsupportedLimb": "'Stuss erzählen' as part of the immersion-breaking objection",
+   "note": "Raw archive page fetched and decoded from its declared ISO-8859-1. Poster 'Hmpf' (ex-member of the DTG working group on the Krege translation) writes that 'Chef' as address for Frodo means 'damit werden die sozialen Umstände der Hobbits den unseren gleichgesetzt' — the equates-social-circumstances limb, exact. The same post lists '\"Penner\", \"Chef\", sogar \"Imbißbude\"' as words that 'den Leser völlig aus der Welt des Buches werfen' — immersion, exact. Supporter limb exact too: 'Reiner' praises 'gelungene Optimierung der Lesbarkeit' / 'endlich ein lesbarer Herr der Ringe' and 'Man merkt deutlich, dass die Sprache im Auenland anders ist als bei den Reitern von Rohan und die Sprache der Elben ist wieder eine Andere.' The failing limb: 'Stuss erzählen' occurs exactly once on the page, in Reiner's PRO-Krege post ('Eher der Kritk auszusetzen sind da Begriffe wie Stuss erzählen ... die sind dann vielleicht weniger aus der Zeit der Entstehung'), i.e. flagged as un-period, not as immersion-breaking and not by an objector. Also note the quote token 'Imbissbude' matches verbatim only in a later pro-Krege post ('Weder fande ich dieses Wort noch Imbissbude in irgendeiner Weise schlimm'); the objecting post spells it 'Imbißbude'.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  }
+ },
+ {
+  "index": 752,
+  "feature": "reader verdict blog",
+  "claim": "Redaktion42 holds that Carroux keeps elevated, formal dialogue across all characters while Krege's naturalistic hobbit speech brought jarring modern vocabulary, and that the 2012 edition struck out the first edition's sins.",
+  "source": "Welche Herr der Ringe-Übersetzung ist die beste? (redaktion42)",
+  "url": "https://redaktion42.com/2013/01/02/welche-herr-der-ringe-ubersetzung-ist-die-beste/",
+  "page": "",
+  "quote": "die Sünden der ersten Übersetzung herausgestrichen",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 752,
+   "verdict": "PARTIAL",
+   "trueWording": "beim Krege wurden die Sünden der ersten Übersetzung herausgestrichen",
+   "unsupportedLimb": "that redaktion42 (the post's author) holds Carroux keeps one elevated register across all characters and that Krege gave hobbits naturalistic speech — that judgement is a reader's comment on the page, not the blog's",
+   "note": "Raw post fetched. Quote exact, in the blog author's own text about the 2012 reissues: 'Im Jahre 2012 wurden sowohl die Carroux- als auch die Krege-Übersetzung überarbeitet und neu veröffentlicht ... beim Krege wurden die Sünden der ersten Übersetzung herausgestrichen.' The author also supports the jarring-modern-vocabulary limb ('Die Sprache wurde an die moderne Zeit angepasst und es fanden sich ... zu viele flapsige Übersetzungen darin. So wurde Master Frodo (Englisch) mit Chef übersetzt. Nein, das geht nicht.'). But the register contrast the claim attributes to redaktion42 appears only in the reblogged comment by R. M. Beyer: 'Und doch atmet man Staub, wenn man erst einmal die altertümliche Dialogsprache liest. Da spricht der Bauer wie der König. Das ist bei Krege deutlich besser gelöst. Er gab vor allem den Hobbits eine natürlichere Sprache, wenn sich dort auch einige unpassende Begriffe finden wie z.B. „Chef“ und „Firma“.' The blog post itself never says Carroux levels all characters into one formal register.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  }
+ },
+ {
+  "index": 770,
+  "feature": "name misreadings",
+  "claim": "Ohlmarks's interpretive names include Vattnadal (confusing 'riven' with 'river'), Lavskägge (reading 'beam' as light) and Björnavad (from 'Bruin').",
+  "source": "Translation of The Lord of the Rings into Swedish (Wikipedia)",
+  "url": "https://en.wikipedia.org/wiki/Translation_of_The_Lord_of_the_Rings_into_Swedish",
+  "page": "",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 770,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "Lavskägge (reading 'beam' as light)",
+   "trueWording": "Lavskägge = 'Lichenbeard'; beam-as-light is Quickbeam → Snabba solstrålen",
+   "note": "Same page. Two of three examples are supported: \"Ohlmarks used Vattnadal ('Water-dale') for Rivendell, apparently, Tolkien commented, by way of taking riven for river\"; and the names table gives Ford of Bruinen -> Björnavad ('Bear Ford'), \"A guess, using English 'Bruin', a brown bear\". The third is a conflation: the page glosses Lavskägge as 'Lichenbeard', Ohlmarks's rendering of Treebeard, while the beam-as-light misreading belongs to a different name entirely - \"The Ent Quickbeam becomes Snabba solstrålen ('Swift Sunbeam'), apparently taking beam in the sense of 'beam of light' instead of 'tree'\".",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  }
+ },
+ {
+  "index": 776,
+  "feature": "deliberate archaising rewrite",
+  "claim": "Ohlmarks stated in 1978 that he rewrote after a plain draft to make the world feel ancient and distant from England.",
+  "source": "Översättning av Sagan om ringen till svenska (sv.wikipedia)",
+  "url": "https://sv.wikipedia.org/wiki/%C3%96vers%C3%A4ttning_av_Sagan_om_ringen_till_svenska",
+  "page": "",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 776,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "to make the world feel ancient",
+   "trueWording": "\"en levande sagovärld\" with as little to do with England as possible",
+   "note": "Same sv.wikipedia page. Supported: \"I Ohlmarks bok Tolkiens arv uppger denne att den egna uppgiften varit att göra en tolkning av Tolkien\" (Tolkiens arv is 1978 in the page's source list), and the block quote \"Jag gjorde först en noggrann slätöversättning av hela boken och skrev sedan radikalt om den, hela tiden ledd av en strävan att söka skildra en levande sagovärld som hade precis så lite att göra med England och engelskan som Tolkien tydligen avsett.\" The plain-draft-then-rewrite limb and the distance-from-England limb are exact. The 'feel ancient' limb is not in Ohlmarks's stated aim - he says a LIVING saga-world ('levande sagovärld'); the only 'ålderdomlig känsla' (archaic feeling) on the page is Brunner's description of what TOLKIEN wanted, of which he says Ohlmarks did the opposite.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  }
+ },
+ {
+  "index": 777,
+  "feature": "errors and inconsistency",
+  "claim": "Malte Persson found the Ohlmarks text packed with misunderstandings, misreadings, inconsistencies and arbitrary additions, including Merry credited with the Witch-king's death-blow and two names for the Prancing Pony.",
+  "source": "Översättning av Sagan om ringen till svenska (sv.wikipedia)",
+  "url": "https://sv.wikipedia.org/wiki/%C3%96vers%C3%A4ttning_av_Sagan_om_ringen_till_svenska",
+  "page": "",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 777,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "attributing the Merry death-blow and the two Prancing Pony names to Malte Persson",
+   "trueWording": "Persson: \"missförstånd, felsyftningar, inkonsekvenser och godtyckliga tillägg\"",
+   "note": "Same sv.wikipedia page. The first half is verbatim from Persson (Göteborgs-Posten, 2004): \"Den är så späckad med missförstånd, felsyftningar, inkonsekvenser och godtyckliga tillägg...\" Both examples exist on the page but neither is credited to Persson: the Witch-king error is unattributed article text in its own section ('Häxmästarens död' - \"I de flesta upplagor… är det felaktigt hoben Meriadoc som ger Häxmästaren av Angmar det dödande hugget, medan det i själva verket är Éowyn\"), and the inn's two names ('Den dansande ponnyn' in the prologue vs 'Den stegrande ponnyn' in the text) is sourced to Jacobsen and to the book itself. The 'including' limb therefore misattributes.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  }
+ },
+ {
+  "index": 778,
+  "feature": "flattened key word",
+  "claim": "Henrik Williams argued Andersson's 'Min dyrgrip' for 'precious' is lexically correct but loses the corrupting allure that Ohlmarks's 'älskade' caught.",
+  "source": "Översättning av Sagan om ringen till svenska (sv.wikipedia)",
+  "url": "https://sv.wikipedia.org/wiki/%C3%96vers%C3%A4ttning_av_Sagan_om_ringen_till_svenska",
+  "page": "",
+  "quote": "Min dyrgrip",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 778,
+   "verdict": "PARTIAL",
+   "trueWording": "Williams calls 'Min dyrgrip' the single greatest translation blunder",
+   "unsupportedLimb": "'lexically correct' — Williams says the dictionary rendering is 'min alskling'/'min skatt' and calls Andersson's 'Min dyrgrip' \"den allra storsta oversattningsgrodan\"",
+   "note": "sv.wikipedia raw HTML fetched. Quote 'Min dyrgrip' appears verbatim in the blockquoted Williams (DN) passage. The corrupting-allure limb is supported in substance: 'Ohlmarks valde ”alskade” vilket visar att han forstod Gollums forhallande till guldsmycket' and the dictionary rendering is 'sann mot Tolkiens genomgaende avsikt att framstalla hur karleken till jordiska ting och jordisk makt binder sjalen och leder till dess undergang'. But the page frames Andersson's choice as a blunder, not as lexically correct.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  }
+ },
+ {
+  "index": 779,
+  "feature": "nostalgia for ornate phrasing",
+  "claim": "Petter Lindgren expressed nostalgia for Ohlmarks's almost comically elaborate phrasing against Andersson's terse rendering.",
+  "source": "Översättning av Sagan om ringen till svenska (sv.wikipedia)",
+  "url": "https://sv.wikipedia.org/wiki/%C3%96vers%C3%A4ttning_av_Sagan_om_ringen_till_svenska",
+  "page": "",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 779,
+   "verdict": "PARTIAL",
+   "trueWording": "Ohlmarks nastan rart omstandliga svenska",
+   "unsupportedLimb": "'almost comically elaborate' — Lindgren wrote 'nastan rart omstandliga' (almost endearingly long-winded); 'komiska bitoner' on the same page belongs to Spjuth, not Lindgren",
+   "note": "Nostalgia and the terse contrast are supported: 'jag har svart att separera fran Ohlmarks nastan rart omstandliga svenska', framed by 'Flera jamforde Ohlmarks ordrika text med Anderssons mer korthuggna', and closing 'Visst blir man mer partysugen av Ohlmarks version.' Attribution to Petter Lindgren (Aftonbladet) is explicit. No quote field supplied.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  }
+ },
+ {
+  "index": 788,
+  "feature": "heroic register hardest",
+  "claim": "Andersson said the heroic register, especially in Book V, was the hardest to translate, and that names allow no room to manoeuvre.",
+  "source": "Intervju: Erik Andersson — om Ringens brödraskap (Tolkiens Arda)",
+  "url": "https://tolkiensarda.se/new/nummer/magsidor/art28_1.php",
+  "page": "",
+  "quote": "Det finns inget svängrum i ett namn",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 788,
+   "verdict": "PARTIAL",
+   "trueWording": "Den heroiska stilen, sarskilt i bok V, har varit extremt svar",
+   "unsupportedLimb": "'the hardest to translate' — asked for the hardest task so far, Andersson answered 'namnen', not the heroic register, which he called only 'extremt svar'",
+   "note": "tolkiensarda.se art28_1 fetched raw. Quote 'Det finns inget svangrum i ett namn' verbatim, and it is his answer to 'Vad har varit den svaraste oversattningsuppgiften hittills? — Dar maste jag anda svara: namnen.' The heroic-style sentence answers a separate question about what is difficult.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  }
+ },
+ {
+  "index": 801,
+  "feature": "critics silent on prose",
+  "claim": "Contemporary critics of Shannara focused almost exclusively on plot and world-building parallels rather than prose, with Choice calling it exceptionally well-written.",
+  "source": "The Sword of Shannara: The Critics Fifty Years Later (Dark Worlds Quarterly)",
+  "url": "https://gwthomas.org/the-sword-of-shannara-the-critics-fifty-years-later/",
+  "page": "",
+  "quote": "exceptionally well-written, very readable",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 801,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Choice (July-August 1977) said the book was \\u201cexceptionally well-written, very readable\\u201d\"",
+   "note": "Quote is verbatim on the page. But the page does not say critics focused almost exclusively on plot and world-building parallels rather than prose - it splits them into pro and con camps and several of the cited critics address the writing itself: MacRae \"looked to Brooks' driving prose\", Tymn is listed as positive, and Choice praises the writing. The parallels point is attached only to Schlobin (\"notes the similarities ... as do most reviewers\") and Shippey (\"goes the whole way listing a point-for-point imitation\"). Live URL returned 403 to a plain curl; recovered on route (1), a browser user agent plus Accept/Referer headers, HTTP 200, 107,233 bytes, article by G. W. Thomas dated 2 May 2026.",
+   "unsupportedLimb": "that contemporary critics focused almost exclusively on plot and world-building parallels rather than prose",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  }
+ },
+ {
+  "index": 805,
+  "feature": "modifier density",
+  "claim": "The Big Bad Book Blog counts adjectives and adverbs at 21% of words in a sample passage, calls the prose wooden yet lightweight, and notes dialogue tags like 'blazed up angrily' replacing 'said'.",
+  "source": "The Sword of Shannara by Terry Brooks (The Big Bad Book Blog)",
+  "url": "https://bookblog.kjodle.net/2015/01/28/sword-of-shannara-by-terry-brooks/",
+  "page": "",
+  "quote": "wooden yet lightweight",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 805,
+   "verdict": "PARTIAL",
+   "trueWording": "\"the dialogue wooden yet lightweight, like a foundation with dry rot\"",
+   "note": "Two limbs confirmed verbatim: \"That passage comprises 83 words, of which 17 are either adjectives or adverbs. That means 21% - one word in five - is a modifier\", and the dialogue-tag section quoting \"\\u201cThat's fine, coming from you,\\u201d Flick blazed up angrily\" against \"the best form of dialogue attribution is \\u201che said, she said\\u201d\". The site is indeed The Big Bad Book Blog. The quoted phrase is on the page but is predicated of the dialogue, not of the prose: \"The plot is thin, the characters stereotypes, and the dialogue wooden yet lightweight\" - a three-item list in which dialogue is the distinct item. The blog's general prose verdict is worded differently (\"Brooks can't (or won't) write a decent line of prose\").",
+   "unsupportedLimb": "that the blog calls the prose 'wooden yet lightweight' - the phrase is predicated of the dialogue, a distinct item in its list",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  }
+ },
+ {
+  "index": 839,
+  "feature": "poems set to music",
+  "claim": "The production set many poems to music, with Bill Nighy singing the fall of Gil-galad and Bilbo's Last Song and Douglas Livingstone reciting the Khazad-dûm poem.",
+  "source": "Review: The BBC Lord of the Rings Dramatization (Tolkien Library)",
+  "url": "https://tolkienlibrary.com/press/850-lord-of-the-rings-bbc-dramatization.php",
+  "page": "",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 839,
+   "verdict": "PARTIAL",
+   "trueWording": "Nighy sings Gil-galad; Le Mesurier sings Bilbo's Last Song",
+   "note": "Verified: 'putting many of the poems and songs to music'; 'William Nighy as Sam singing a part of the fall of Gil-Galad'; 'Douglas Livingstone does a splendid job with Gimli's Khazad-dum poem'. But the page attributes Bilbo's Last Song to John Le Mesurier ('a demo version of John Le Mesurier singing Bilbo's Last Song'); its own sentence names Nighy's second song as 'his song in the tower of Minas Morgul', not Bilbo's Last Song.",
+   "unsupportedLimb": "that Bill Nighy sings Bilbo's Last Song - the page credits John Le Mesurier",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  }
+ },
+ {
+  "index": 849,
+  "feature": "narrator's strong voice",
+  "claim": "Sibley's own page credits Gerard Murphy with the series' strong narrative voice, notes Christopher Tolkien's pronunciation cassette, and concedes that Tolkien's interlaced chronology could not be applied to a dramatic presentation.",
+  "source": "Brian Sibley: The Works — The Lord of the Rings (BBC Radio 1981)",
+  "url": "http://briansibleytheworks.blogspot.com/2008/01/this-page-is-still-under-construction_23.html",
+  "page": "",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 849,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien wanted the threads NOT interwoven but on individual chronology",
+   "note": "Verified on Sibley's blog: 'Gerard Murphy, who gave the series its strong narrative voice'; Christopher Tolkien's help 'included recording an audiocassette of the acceptable pronunciation of Middle-earth words and names'. But the chronology sentence reads: Tolkien 'had been adamant that the two main threads ... should not be interwoven, but should follow their own individual chronology, as they do in the book', which Sibley concluded could not 'be applied to a dramatic presentation'. The page's word is un-interwoven/individual, the opposite of the claim's 'interlaced'.",
+   "unsupportedLimb": "calling the chronology Sibley rejected 'interlaced' - the page says Tolkien insisted the threads NOT be interwoven, each on its own chronology",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  }
  }
 ]

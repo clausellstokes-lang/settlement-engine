@@ -1,0 +1,36 @@
+{
+ "role": "verifier",
+ "name": "tolkien",
+ "angle": null,
+ "tag": "i823-837",
+ "lines": 74,
+ "firstTs": "2026-09-06T17:26:20.841Z",
+ "lastTs": "2026-09-06T17:29:17.139Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 16
+ },
+ "urlsFetched": [
+  "https://en.wikipedia.org/wiki/Special:Export/Bored_of_the_Rings",
+  "https://en.wikipedia.org/wiki/Special:Export/The_Tough_Guide_to_Fantasyland",
+  "https://en.wikipedia.org/wiki/Special:Export/The_Lord_of_the_Rings_(1981_radio_series",
+  "https://phuulishfellow.wordpress.com/2023/07/12/review-bored-of-the-rings-1969/|phuulish.html",
+  "https://mytolkienarchive.wordpress.com/2024/12/18/bored-of-the-rings-a-parody-of-j-r-r-tolkiens-lord-of-the-rings/|mytolkien.html",
+  "https://pecheyponderings.wordpress.com/2017/10/19/bored-of-the-rings-a-parody-of-j-r-r-tolkiens-lord-of-the-rings-by-henry-beard-and-douglas-kenney/|pechey.html",
+  "https://www.swantower.com/2011/11/19/the-dwj-project-tough-guide-to-fantasyland/|swantower.html",
+  "https://hearwritenow.com/writing/reviews/tough-guide-fantasyland/|hearwritenow.html",
+  "https://bactra.org/reviews/tough-guide-to-fantasyland/|bactra.html",
+  "https://englishstudens.com/2016/01/29/review-the-tough-guide-to-fantasyland/|englishstudent.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All 10 sources fetched. Now converting to text and checking each claim.",
+ "run": "wf_61555b6a-d7c",
+ "agent": "abbcd4421c3ec55fb",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_61555b6a-d7c/agent-abbcd4421c3ec55fb.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i823-837.json",
+  "exists": false
+ }
+}

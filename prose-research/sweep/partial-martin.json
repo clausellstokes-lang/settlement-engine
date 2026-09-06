@@ -1,1 +1,197 @@
-[]
+[
+ {
+  "index": 332,
+  "feature": "unreliable-narrator distance",
+  "claim": "Gyldayn is framed as an extremely unreliable narrator, and that distance keeps readers from investing in characters who rarely stay long enough to be known.",
+  "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
+  "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
+  "quote": "an extremely unreliable narrator",
+  "page": "Fire and Blood review: Don't expect a novel",
+  "angle": "chronicle",
+  "verdict": {
+   "index": 332,
+   "verdict": "PARTIAL",
+   "trueWording": "It's hard to root for anyone as they rarely stick around",
+   "note": "Quote 'an extremely unreliable narrator' is verbatim (\"purportedly written by Archmaester Gyldayn, an extremely unreliable narrator\"), and the not-investing limb is on the page (\"It's hard to root for anyone as they rarely stick around long enough for us to get to know them\"). But the review attributes that difficulty to the events' density, not to narratorial distance; the two facts sit in adjacent sentences with no causal link drawn.",
+   "unsupportedLimb": "the causal limb 'that distance keeps readers from investing' - Nugent attributes the failure to root to characters not sticking around, never to the unreliable narrator's distance",
+   "fromFile": "verdicts-martin-i330-344.json"
+  }
+ },
+ {
+  "index": 336,
+  "feature": "roundup link set",
+  "claim": "The roundup links the Independent, Publishers Weekly, GQ, The Times, the Sunday Times, Tor.com and Mental Floss; it does not link NYT, Guardian or Vox reviews, and none were found.",
+  "source": "Winter Is Coming critics roundup, 23 Nov 2018",
+  "url": "https://winteriscoming.net/2018/11/23/george-rr-martin-critics-fire-and-blood/",
+  "quote": "",
+  "page": "What are the critics saying about Fire & Blood?",
+  "angle": "chronicle",
+  "verdict": {
+   "index": 336,
+   "verdict": "PARTIAL",
+   "trueWording": "links Independent, PW, GQ, The Times, Sunday Times, Tor.com, Mental Floss",
+   "note": "The link set is exactly right, confirmed by parsing every href in the raw HTML: independent.co.uk (O'Connor), publishersweekly.com/978-1-5247-9628-0, gq-magazine.co.uk/article/fire-and-blood-review, thetimes.co.uk (Rifkind), thetimes.co.uk/magazine (Dan Jones, Sunday Times), tor.com/2018/11/21, mentalfloss.com - and no nytimes.com, theguardian.com or vox.com link anywhere on the page. The final limb is the problem: a roundup page cannot attest that no such reviews exist or that a search failed to find them. WebSearch could not settle it either (those three domains are blocked to the agent), so the limb stays unverified rather than contradicted.",
+   "unsupportedLimb": "'and none were found' - an assertion about the researcher's own search, which the roundup page cannot support either way",
+   "fromFile": "verdicts-martin-i330-344.json"
+  }
+ },
+ {
+  "index": 347,
+  "feature": "vivid single image amid summary",
+  "claim": "Even the summary voice lands concrete, countable images, such as a dragon devouring a queen in six bites.",
+  "source": "Publishers Weekly review, 19 Nov 2018",
+  "url": "https://www.publishersweekly.com/978-1-5247-9628-0",
+  "quote": "devoured the queen in six bites",
+  "page": "Fire & Blood (PW review)",
+  "angle": "chronicle",
+  "verdict": {
+   "index": 347,
+   "verdict": "PARTIAL",
+   "trueWording": "Brief sections are dramatic ('the golden dragon devoured the queen in six bites')",
+   "note": "Quote is verbatim on the raw PW page, but the review assigns that image to the BRIEF DRAMATIC sections and explicitly contrasts them with summary: 'they only last a few pages before a return to brisk summary.' The page does not say the summary voice lands such images; it says the opposite relation.",
+   "unsupportedLimb": "that the SUMMARY voice lands these concrete images - the review credits them to brief dramatic sections set against 'brisk summary'",
+   "fromFile": "verdicts-martin-i345-359.json"
+  }
+ },
+ {
+  "index": 361,
+  "feature": "regnal-year sentence openers",
+  "claim": "The Jaehaerys excerpt dates its action to a regnal year (58 AC) and advances by chronology rather than by scene.",
+  "source": "George R.R. Martin, Not a Blog excerpt post, 27 Sep 2018",
+  "url": "https://georgerrmartin.com/notablog/2018/09/27/a-fire-blood-excerpt-just-for-you/",
+  "quote": "plans were laid in 58 AC",
+  "page": "A FIRE & BLOOD Excerpt just for YOU!",
+  "angle": "chronicle",
+  "verdict": {
+   "index": 361,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "advances by chronology rather than by scene — the excerpt renders full dramatised scenes with dialogue",
+   "trueWording": "plans were laid in 58 AC for Jaehaerys and Alysanne",
+   "note": "Quote \"plans were laid in 58 AC\" is verbatim (once, mid-sentence, not as a sentence opener despite the feature label 'regnal-year sentence openers'). 58 AC is the only regnal year in the entire excerpt; later transitions are relative ('A few days later', 'After taking leave of White Harbor', 'The longer the queen stayed'). The second limb fails: the excerpt descends into extended scenes at Winterfell built from direct dialogue (Alaric Stark's \"I hope you brought something warmer than that\", the exchange at the Wall), which the sibling claim 364 itself asserts.",
+   "fromFile": "verdicts-martin-i360-374.json"
+  }
+ },
+ {
+  "index": 366,
+  "feature": "narrator's incomplete knowledge as design",
+  "claim": "Because Gyldayn 'writes' the book, Martin says it makes sense he would not have all the information, and its mysteries are possible answers, not definitive ones.",
+  "source": "Winter Is Coming digest of Martin's Not a Blog comments, 3 May 2018",
+  "url": "https://winteriscoming.net/2018/05/03/george-r-r-martin-misconceptions-fire-and-blood-dance-with-dragons-not-a-blog/",
+  "quote": "he wouldn't have all the information",
+  "page": "George R.R. Martin clears up misconceptions about Fire & Blood",
+  "angle": "chronicle",
+  "verdict": {
+   "index": 366,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "Martin says it makes sense he would not have all the information — that sentence is the Winter Is Coming writer's own gloss, not a Martin quote",
+   "trueWording": "it is all possible answers, not meant to be definitive",
+   "note": "Quote \"he wouldn't have all the information\" is verbatim on the page, but I checked the raw HTML: it sits in the article's own <p id=\"inline-text-4\"> body paragraph (\"Fire & Blood is 'written' by Archmaester Gyldayn of the Citadel, so it makes sense that he wouldn't have all the information.\"), authored by Dan Selcke — NOT inside the adjacent <blockquote> carrying Martin's words. The second limb IS Martin verbatim in that blockquote: \"in the case of things like Valyria and the dragon eggs, it is all possible answers, not meant to be definitive.\" So the mysteries limb verifies and the attribution limb does not.",
+   "fromFile": "verdicts-martin-i360-374.json"
+  }
+ },
+ {
+  "index": 371,
+  "feature": "archaic diction markers",
+  "claim": "Archaic markers ('whilst', 'alarum', 'a moon's turn', 'the hour of the bat/owl') set the register without heavy Latinate vocabulary.",
+  "source": "George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com",
+  "url": "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/",
+  "quote": "the hour of the bat",
+  "page": "Dangerous Women: The Princess and The Queen (Excerpt)",
+  "angle": "chronicle",
+  "verdict": {
+   "index": 371,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "without heavy Latinate vocabulary — the excerpt's opening sentence is \"the savage internecine struggle for the Iron Throne\"",
+   "trueWording": "at the hour of the bat; a general alarum; a moon's turn",
+   "note": "All four archaic markers verify verbatim: \"whilst\"/\"Whilst\", \"without raising a general alarum\", \"for a fortnight or a moon's turn\", \"at the hour of the bat\" and \"It was the hour of the owl.\" The negative limb is the failure: the same excerpt reaches for markedly Latinate diction — \"savage internecine struggle\", \"strikes us as grotesquely inappropriate\", \"two principal claimants\", \"became embroiled\" — so the page does not support 'without heavy Latinate vocabulary' as stated.",
+   "fromFile": "verdicts-martin-i360-374.json"
+  }
+ },
+ {
+  "index": 374,
+  "feature": "precise calendar dating",
+  "claim": "A king's death is dated to the day and moon of a year and to a named hour, precision that reads as record rather than scene.",
+  "source": "George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com",
+  "url": "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/",
+  "quote": "third day of third moon",
+  "page": "Dangerous Women: The Princess and The Queen (Excerpt)",
+  "angle": "chronicle",
+  "verdict": {
+   "index": 374,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the named hour dates the discovery of the body, not the death — \"His body was discovered by a serving man at the hour of the bat\"",
+   "trueWording": "on the third day of third moon of 129 AC",
+   "note": "\"third day of third moon\" is verbatim, in \"the conflict burst into the open on the third day of third moon of 129 AC, when the ailing, bedridden King Viserys I Targaryen closed his eyes for a nap in the Red Keep of King's Landing, and died without waking.\" Day, moon and year all present. But the page attaches no hour to the death itself: the hour of the bat marks the serving man's discovery of the body, and \"It was the hour of the owl\" marks the summoning of the small council. The calendar-precision reading holds; the specific limb dating the death to a named hour does not.",
+   "fromFile": "verdicts-martin-i360-374.json"
+  }
+ },
+ {
+  "index": 401,
+  "feature": "rhetorical question as hedge",
+  "claim": "Gyldayn's line on the dragon Tessarion shows the chronicler's habit of closing an unknowable with a rhetorical question.",
+  "source": "A Wiki of Ice and Fire, 'Gyldayn'",
+  "url": "https://awoiaf.westeros.org/index.php/Gyldayn",
+  "quote": "Who can know the heart of a dragon?",
+  "page": "Gyldayn - A Wiki of Ice and Fire",
+  "angle": "chronicle",
+  "verdict": {
+   "index": 401,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Who can know the heart of a dragon?\" - Gyldayn writing about Tessarion",
+   "unsupportedLimb": "that this is the chronicler's HABIT - the page carries exactly one such line (a single entry in its Quotes section) and says nothing about a recurring pattern of closing unknowables with rhetorical questions",
+   "note": "Same AWOIAF capture. The quote and its attribution to Gyldayn writing about Tessarion are verbatim on the page (Quotes section, cited to Fire & Blood, 'The Dying of the Dragons - Rhaenyra Overthrown'). The generalisation to a habit is an inference the page does not evidence, so the claim is graded PARTIAL rather than verified.",
+   "fromFile": "verdicts-martin-i390-404.json"
+  }
+ },
+ {
+  "index": 435,
+  "feature": "killing viewpoint characters",
+  "claim": "Martin kills off central characters who are richly imagined, three-dimensional portraits, which most writers could not bear to lose.",
+  "source": "John Lanchester, 'When did you get hooked?', London Review of Books v35 n7, 11 Apr 2013",
+  "url": "https://www.lrb.co.uk/the-paper/v35/n07/john-lanchester/when-did-you-get-hooked",
+  "quote": "richly imagined, textured, three-dimensional portraits of central characters",
+  "angle": "longform",
+  "verdict": {
+   "index": 435,
+   "verdict": "PARTIAL",
+   "trueWording": "the kind many writers couldn't bear to kill off",
+   "unsupportedLimb": "'most writers' — the page says 'many writers', not most",
+   "note": "Quote 'richly imagined, textured, three-dimensional portraits of central characters' is verbatim on the LRB page, in the paragraph listing Renly, Tywin, Robb and Joffrey ('He dies' x4), closing 'the kind many writers couldn't bear to kill off. Nobody needs to give Martin any advice about how he needs to slaughter his darlings.' The kill-off limb and the three-dimensional-portrait limb are fully supported; only the quantifier is inflated from 'many' to 'most'.",
+   "fromFile": "verdicts-martin-i435-449.json"
+  }
+ },
+ {
+  "index": 438,
+  "feature": "viewpoint stakes at chapter end",
+  "claim": "The Bran defenestration lands harder in the book than on screen because Bran has already been established as a viewpoint character.",
+  "source": "John Lanchester, 'When did you get hooked?', London Review of Books v35 n7, 11 Apr 2013",
+  "url": "https://www.lrb.co.uk/the-paper/v35/n07/john-lanchester/when-did-you-get-hooked",
+  "quote": "even more of an impact, perhaps",
+  "angle": "longform",
+  "verdict": {
+   "index": 438,
+   "verdict": "PARTIAL",
+   "trueWording": "equivalent impact in the books; even more of an impact, perhaps",
+   "unsupportedLimb": "the flat comparative 'lands harder in the book than on screen' — Lanchester hedges ('equivalent impact ... even more of an impact, perhaps')",
+   "note": "Page: 'It has an equivalent impact in the books; even more of an impact, perhaps, because Bran has already been established as one of the characters from whose viewpoint the story is told.' The causal limb (already a viewpoint character) is verbatim-supported; the claim strips the source's hedge and asserts the comparison outright.",
+   "fromFile": "verdicts-martin-i435-449.json"
+  }
+ },
+ {
+  "index": 447,
+  "feature": "descriptive set piece as self-reference",
+  "claim": "The three-walled description of Qarth (animals, war, sex) reads as a sly reference to the series' own layered decor.",
+  "source": "Daniel Mendelsohn, 'The Women and the Thrones', New York Review of Books, 7 Nov 2013 issue",
+  "url": "https://www.nybooks.com/articles/2013/11/07/women-and-thrones/",
+  "quote": "a sly reference to the series itself",
+  "angle": "longform",
+  "verdict": {
+   "index": 447,
+   "verdict": "PARTIAL",
+   "trueWording": "in the Qartheen decor a sly reference to the series itself",
+   "unsupportedLimb": "'the series' own layered decor' — Mendelsohn grounds the joke in the epic's 'slowly metastasizing' length (trilogy to five of a projected seven, each ~1,000 pages), not in any decor of the series",
+   "note": "The quoted Qarth passage does run animals (outer red sandstone), war (middle grey granite) and sex (innermost black marble), so the three-walled/animals-war-sex limb is exactly right, and 'a sly reference to the series itself' is verbatim. What the page does not say is that the referent is the series' decor; the tenor of the comparison there is scale — 'anyone familiar with Martin's slowly metastasizing epic—it began as a trilogy in 1996 and now runs to five volumes of a projected seven, each around a thousand pages long—will find it hard not to see in the Qartheen decor a sly reference to the series itself.'",
+   "fromFile": "verdicts-martin-i435-449.json"
+  }
+ }
+]

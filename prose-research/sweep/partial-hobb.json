@@ -343,5 +343,76 @@
    "unsupportedLimb": "the narrator's age — 'six-year-old' is nowhere on the page; the blogger says only 'at that early point'",
    "fromFile": "verdicts-hobb-i270-284.json"
   }
+ },
+ {
+  "index": 323,
+  "feature": "withheld information and inference",
+  "claim": "Hobb says she planted clues at the end of the Tawny Man trilogy that only readers attending to every detail of the book would have picked up as signalling more story to come.",
+  "source": "Robin Hobb, interviewed by Rebecca Lovatt, The Arched Doorway, 24 November 2014 (transcript)",
+  "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+  "quote": "readers who were really reading every detail of the book",
+  "page": "answer to 'Did you know you’d be coming back all these years later'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2014-11-24",
+  "routeHint": "Wayback raw capture (web.archive.org /<ts>id_/)",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 323,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the exclusivity — that ONLY readers attending to every detail would have picked the clues up; the page says 'some readers who were really reading every detail of the book would definitely have picked up that there was more to come', and immediately before that 'a lot of very astute readers picked up on all the clues that were left' and 'I got a lot of emails about that', which asserts no such restriction",
+   "trueWording": "“some readers who were really reading every detail” would definitely have noticed",
+   "note": "Wayback raw capture of the Arched Doorway transcript; quote exact in the answer to 'Did you know you’d be coming back all these years later'. The clue-planting limb is supported ('all the clues that were left'; 'There’s even a phrase toward the end where I speak about how the minstrel pauses to catch his breath before he sweeps into the final chorus'). Secondary softness: 'the Tawny Man trilogy' is never named on the page — the referent is the interviewer’s 'you last wrote about Fitz and the Fool in 2003' and Hobb’s 'When I ended it' — correct externally but identified only by context.",
+   "fromFile": "verdicts-hobb-i315-329.json"
+  }
+ },
+ {
+  "index": 326,
+  "feature": "consequence on a household",
+  "claim": "Kelly names morality as the trilogy's major theme and states its recurring form as a household choice between the morally correct action and the profitable one.",
+  "source": "Lew Kelly, Fantasy-Faction, 19 August 2014",
+  "url": "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+  "quote": "a choice between a morally correct action or a profitable one",
+  "page": "paragraph beginning 'Hobb’s major theme in the trilogy is morality'",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2014-08-19",
+  "routeHint": "raw curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 326,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the choice is a HOUSEHOLD one — the page says 'Many of the characters face a choice between a morally correct action or a profitable one', attributing it to characters generally (Kennit, Wintrow and others as well as the Vestrits), never to a household",
+   "trueWording": "“Many of the characters face a choice” between moral and profitable",
+   "note": "Live fantasy-faction.com. Quote exact and the first limb fully supported: 'Hobb’s major theme in the trilogy is morality.' Only the 'household' framing is the claim author’s addition (it matches the chunk’s 'consequence on a household' feature bucket, not the review’s wording).",
+   "fromFile": "verdicts-hobb-i315-329.json"
+  }
+ },
+ {
+  "index": 377,
+  "feature": "plainness and economy",
+  "claim": "The same reviewer dissents from the general praise of Hobb's prose, calling it unremarkable and saying the flashes of beautiful imagery are balanced by her willingness to describe the horrific and the ugly.",
+  "source": "Vacuous Wastrel blog, review of a later Elderlings novel",
+  "url": "https://vacuouswastrel.wordpress.com/tag/robin-hobb/",
+  "quote": "As is usually the case with Hobb, her prose is unremarkable",
+  "page": "Beauty 3/5 rating paragraph",
+  "kind": "analysis",
+  "polarity": "disputes",
+  "routeHint": "raw curl with browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 377,
+   "verdict": "PARTIAL",
+   "trueWording": "Beauty: 3/5. As is usually the case with Hobb, her prose is unremarkable, and the flashes of beautiful imagery are balanced by her willingness to describe the horrific and the ugly.",
+   "unsupportedLimb": "that the reviewer 'dissents from the general praise of Hobb's prose' — the page never mentions any general or received praise of her prose, so no dissent is stated or implied; 'as is usually the case with Hobb' means 'across her books', not 'contrary to what others say'",
+   "note": "Quote is verbatim and the rest of the claim is verbatim too: the Beauty 3/5 line is in the 'Dragon Keeper, by Robin Hobb' review (13 Apr 2014), a later Elderlings novel as the claim says (the page itself calls it 'essentially the tenth novel of the combined Realm of Elderlings cycle'). The dissent framing is the claim-writer's, not the page's; the nearest thing on the page runs the other way — in the Fool's Quest review he notes 'Literary afficionados will complain that it is not a prose poem'. Graded PARTIAL on that limb alone.",
+   "fromFile": "verdicts-hobb-i375-385.json"
+  }
  }
 ]

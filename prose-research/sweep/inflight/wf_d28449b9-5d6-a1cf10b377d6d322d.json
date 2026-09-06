@@ -1,0 +1,27 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i284-298",
+ "lines": 69,
+ "firstTs": "2026-09-06T17:26:31.147Z",
+ "lastTs": "2026-09-06T17:29:22.978Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 14
+ },
+ "urlsFetched": [
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing?action=raw"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Raw wikitext fetched (220 KB). Now searching for each claim's quote and surrounding context.",
+ "run": "wf_d28449b9-5d6",
+ "agent": "a1cf10b377d6d322d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-a1cf10b377d6d322d.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i284-298.json",
+  "exists": false
+ }
+}

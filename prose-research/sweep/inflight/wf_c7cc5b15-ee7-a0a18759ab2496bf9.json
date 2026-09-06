@@ -3,13 +3,14 @@
  "name": "martin",
  "angle": null,
  "tag": "i360-374",
- "lines": 54,
+ "lines": 57,
  "firstTs": "2026-09-06T17:19:44.669Z",
- "lastTs": "2026-09-06T17:23:29.936Z",
+ "lastTs": "2026-09-06T17:24:07.563Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 10
+  "Bash": 10,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://georgerrmartin.com/notablog/2018/04/25/fire-blood-on-the-way/",
@@ -23,7 +24,7 @@
  "run": "wf_c7cc5b15-ee7",
  "agent": "a0a18759ab2496bf9",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-a0a18759ab2496bf9.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i360-374.json",
   "exists": true

@@ -3,15 +3,15 @@
  "name": "dnd",
  "angle": "scholarship-history",
  "tag": null,
- "lines": 378,
+ "lines": 484,
  "firstTs": "2026-09-06T16:58:52.736Z",
- "lastTs": "2026-09-06T17:23:35.021Z",
+ "lastTs": "2026-09-06T17:29:40.792Z",
  "tools": {
   "Read": 1,
-  "Bash": 82,
+  "Bash": 106,
   "ToolSearch": 1,
   "WebFetch": 1,
-  "WebSearch": 19
+  "WebSearch": 26
  },
  "urlsFetched": [
   "https://api.crossref.org/works?filter=isbn:9780262547604&rows=60&select=title,DOI,author,page,abstract",
@@ -100,7 +100,15 @@
   "https://journals.uu.se/IJRP/article/download/1197/1052/4802",
   "https://analoggamestudies.org/2022/01/book-review-dread-trident/",
   "https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/",
-  "https://sfrareview.org/2022/01/10/review-of-dread-trident-tabletop-role-playing-games-and-the-modern-fantastic/"
+  "https://sfrareview.org/2022/01/10/review-of-dread-trident-tabletop-role-playing-games-and-the-modern-fantastic/",
+  "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+  "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+  "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+  "http://web.archive.org/cdx/search/cdx?url=wizards.com/default.asp&filter=original:.*20050916a.*&limit=20&output=json",
+  "https://web.archive.org/web/20140530180347id_/http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+  "https://journals.uu.se/IJRP/article/download/228/252",
+  "http://doomslakers.blogspot.com/2022/01/tsr-style-guides.html",
+  "https://www.stuartellisgorman.com/blog/fifty-years-of-dungeons-and-dragons-ed-premeet-sidhu-marcus-carter-and-jos-p-zagal"
  ],
  "filesWritten": [],
  "lastAssistantText": "Now let me add these to the checkpoint and write raw notes.",
@@ -110,8 +118,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-scholarship-history.json",
-  "claims": 79,
+  "claims": 112,
   "complete": false,
-  "mtime": "13:18:18"
+  "mtime": "13:29:13"
  }
 }

@@ -1,0 +1,275 @@
+### [0] VERIFIED_VERBATIM  |feature: style is the book
+CLAIM: Le Guin holds that style is not an ingredient added to a fantasy but the book itself; strip it and only a plot synopsis remains, a claim she calls 'absolutely true of fantasy'.
+QUOTE: The style, of course, is the book.
+TRUE: The style, of course, is the book.
+NOTE: p.9 verbatim; all limbs on page: 'as if it were an ingredient of a book... something added onto the book'; 'If you remove the style, all you have left is a synopsis of the plot'; 'partly true of history; largely true of fiction; and absolutely true of fantasy.'
+
+### [1] VERIFIED_VERBATIM  |feature: plain noble style
+CLAIM: She argues most epics, the Mabinogion and the sagas use straightforward language that keeps oral directness, and that plainness is the noblest and hardest register for heroic fantasy.
+QUOTE: A plain language is the noblest of all.
+TRUE: A plain language is the noblest of all.
+NOTE: p.8 verbatim, followed by 'It is also the most difficult.' Limbs on page: 'Most epics are in straightforward language... They retain the directness of their oral forebears'; 'The Mabinogian and the Norse sagas are as plainspoken as they could well be.' Context is explicitly heroic fantasy: 'We are discussing a modern descendant of the epic.' (Essay spells it 'Mabinogian'.)
+
+### [2] VERIFIED_VERBATIM  |feature: fake plainness (journalistic prose)
+CLAIM: She separates true plainness from the flat, inexact 'Poughkeepsie' prose of commercial fantasy, which is journalism's deliberate suppression of sensibility applied to the remote and elemental.
+QUOTE: It is not really simple, but flat.
+TRUE: It is a fake plainness. It is not really simple, but flat.
+NOTE: p.8 verbatim. Limbs on page: 'It is not really clear, but inexact. Its directness is specious'; 'It is journalistic prose. In journalism, the suppression of the author's personality and sensibility is deliberate'; 'A language intended to express the immediate and the trivial is applied to the remote and the elemental.' Commercial framing on same page: 'Fantasy is selling well, so let's all grind out a fantasy. The Old Baloney Factory.'
+
+### [3] VERIFIED_VERBATIM  |feature: sensory specificity
+CLAIM: Sensory cues are 'extremely important in imaginative writing'; when rocks, wind and trees are vague and generalized the scene is not felt.
+QUOTE: the scenery is cardboard, or plastic
+TRUE: the scenery is cardboard, or plastic
+NOTE: p.8 verbatim, inside 'Its sensory cues--extremely important in imaginative writing--are vague and generalized; the rocks, the wind, the trees are not there, are not felt; the scenery is cardboard, or plastic.' Every limb, including the parenthetical quotation, is on the page.
+
+### [4] VERIFIED_VERBATIM  |feature: archaism as high wire
+CLAIM: The archaic manner is a perfect distancer only when done perfectly; botched thee/thou verbs, subjunctives, 'mayhap' and 'ichor' are the touchstones of failure.
+QUOTE: It's a high wire: one slip spoils all.
+TRUE: It's a high wire: one slip spoils all.
+NOTE: p.6 verbatim, preceded by 'The archaic manner is indeed a perfect distancer, but you have to do it perfectly.' The four failure markers are all on pp.5-6: botched thee/thou verbs ('Whithersoever thou goest there also I goest'), the subjunctive ('All the was's turn into were's'), 'Mayhap', and 'the final test, the infallible touchstone of the seventh-rate: Ichor.' Minor: the word 'touchstone' is applied literally only to ichor; the other three are catalogued as novice traps, not called touchstones.
+
+### [5] VERIFIED_VERBATIM  |feature: distance without archaism
+CLAIM: Archaisms are inessential to distancing from the ordinary: Jack Vance's aloof, restrained, consistent narrative and dialogue prose is an achieved style with none.
+QUOTE: And it contains no archaisms at all.
+TRUE: And it contains no archaisms at all.
+NOTE: p.7 verbatim, closing the Vance paragraph after 'It is an achieved style.' Limbs on page: 'The conversation of his characters is aloof and restrained, very like his own narrative prose'; p.8 opens 'After all, archaisms are not essential'; the distancing purpose is stated on p.5 ('what is wanted in fantasy is a distancing from the ordinary'). 'Consistent' is carried by 'very like his own narrative prose' and 'he never shows a tin ear for tone' -- the phrase 'His tone is perfectly consistent' belongs to Cabell, not Vance.
+
+### [6] VERIFIED_VERBATIM  |feature: register consistency
+CLAIM: Alternating colloquial American for humour with formal usage for earnest moments (Leiber, Zelazny) jerks the reader between Elfland and Poughkeepsie and dissolves the characters' coherence.
+QUOTE: the characters lose coherence in my mind
+TRUE: the characters lose coherence in my mind
+NOTE: p.7 verbatim, inside 'I am jerked back and forth between Elland [sic: Elfland] and Poughkeepsie; the characters lose coherence in my mind, and I lose confidence in them.' Limbs on page: 'Fritz Leiber and Roger Zelazny... they alternate the two styles. When humor is intended the characters talk colloquial American English, or even slang, and at earnest moments they revert to old formal usages.'
+
+### [7] VERIFIED_VERBATIM  |feature: dialogue diction as the test
+CLAIM: Speech reveals character whether the author knows it or not; a lord who says 'I could have told you that' can never be a hero, and genuine Elfland dialogue cannot be relocated to Capitol Hill by changing four words.
+QUOTE: Speech expresses character.
+TRUE: Speech expresses character.
+NOTE: p.4 verbatim, followed by 'It does so whether the speaker or the author knows it or not.' Limbs on page: 'When I hear a man say, "I could have told you that at Cardosa"... He is the kind who says, "I told you so." Nobody who says, "I told you so" has ever been, or will ever be, a hero'; and 'You could not pull the trick on them that I pulled on Morgan and Nigel--not unless you changed half the words in every sentence. You could not possibly mistake them for anyone on Capitol Hill' (the trick being the four-word change of p.2).
+
+### [8] VERIFIED_VERBATIM  |feature: flexible plain range (Tolkien model)
+CLAIM: Tolkien's plain clear English is praised for flexibility and variety, moving from commonplace to stately and sliding into metre unnoticed, with an unremarkable vocabulary and everything direct, concrete and simple.
+QUOTE: Its outstanding virtue is its flexibility, its variety.
+TRUE: Its outstanding virtue is its flexibility, its variety.
+NOTE: p.8 verbatim. Limbs on page: 'Tolkien writes a plain, clear English'; 'It ranges easily from the commonplace to the stately, and can slide into metrical poetry, as in the Tom Bombadil episode, without the careless readers even noticing'; 'Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete, and simple.'
+
+### [9] VERIFIED_VERBATIM  |feature: musical test: sound, syntax, rhythm
+CLAIM: Good prose, even archaic (Eddison), is judged visually for precision and musically for the sound of words, the movement of syntax and the rhythm of sentences, with nothing faked or blurred.
+QUOTE: the movement of the syntax, and the rhythm of the sentences
+TRUE: the movement of the syntax, and the rhythm of the sentences
+NOTE: p.6 verbatim. Limbs on page: 'That prose, in spite of or because of its archaisms, is good prose: exact, clear, powerful. Visually it is precise and vivid; musically--that is, in the sound of the words, the movement of the syntax, and the rhythm of the sentences--it is subtle and very strong. Nothing in it is faked or blurred.' The subject is Eddison's Worm Ouroboros passage.
+
+### [10] VERIFIED_VERBATIM  |feature: every word counts (exposed construct)
+CLAIM: In fantasy there is no borrowed reality to hide flaws, only a construct built in a void with every seam exposed, so every word counts and the only voice is the creator's.
+QUOTE: And every word counts.
+TRUE: And every word counts.
+NOTE: p.10 verbatim. Limbs on page: 'There is no borrowed reality of history, or current events... to disguise flaws and failures of creation'; 'There is only a construct built in a void, with every joint and seam and nail exposed'; 'The only voice that speaks there is the creator's voice.'
+
+### [11] VERIFIED_VERBATIM  |feature: passion invests trivial acts
+CLAIM: The Eddison and Morris dialogue passages show nothing happening (reading a book, dividing a rabbit) yet invest trivial acts with importance, emotion and vitality — the elevation lies in the speech, not the event.
+QUOTE: with what importance they invest these trivial acts
+TRUE: with what importance they invest these trivial acts
+NOTE: p.4 verbatim, inside 'But with what importance they invest these trivial acts, what emotion, what vitality!' Limbs on page: 'Nothing is really going on, in those first two passages: in one case they're reading a book, in the other they're dividing a cold leg of rabbit' -- and the first two passages are footnoted to Eddison (Worm Ouroboros) and Kenneth Morris (Book of the Three Dragons). 'Elevation lies in the speech, not the event' is the paragraph's own argument ('All of them are heroic, eloquent, passionate... greatness of soul shows when a man speaks').
+
+### [12] VERIFIED_VERBATIM  |feature: simple timelessness (Tolkien dialogue)
+CLAIM: Tolkien's speakers use 'an English extraordinary for its simple timelessness' with sobriety, wit and force — the language of men of character rather than mannered archaism.
+QUOTE: an English extraordinary for its simple timelessness
+TRUE: an English extraordinary for its simple timelessness
+NOTE: p.4 verbatim. Limbs on page: 'It has sobriety, wit, and force. It is the language of men of character.' The third passage is footnoted to Tolkien, Fellowship of the Ring (Aragorn, Boromir, Elrond). 'Rather than mannered archaism' is carried by the contrast drawn in the same sentence: 'the speakers are quieter, and use a less extraordinary English' than the Eddison and Morris passages.
+
+### [13] VERIFIED_VERBATIM  |feature: style as fantasy's authenticity test
+CLAIM: The Wikipedia synthesis reads the essay as claiming fantastic creation must reach into words and grammar, and cites Peter S. Beagle calling it the definitive piece on why sprinkling thees and thous fails.
+QUOTE: reach to the very words and grammar
+TRUE: fantastic creation should reach to the very words and grammar
+NOTE: Wikipedia article fetched raw (wikitext via ?action=raw and rendered HTML, oldid 1352490882, last edited 4 May 2026). Verbatim: 'In her argument that fantastic creation should reach to the very words and grammar in fantasy writers, she holds up Lord Dunsany, E. R. Eddison...' Beagle limb verbatim: 'The novelist Peter S. Beagle called it "the definitive piece on fantasy, and on why simply sprinkling goblins, magic swords, and assorted thees and thous through your story will not get you a step closer to that vast and beautiful realm."' Note the page frames the work as a 1972 speech published 1973.
+
+### [14] VERIFIED_SUBSTANCE  |feature: praised stylists
+CLAIM: The article lists Dunsany, Eddison, Kenneth Morris, Tolkien, Cabell, Evangeline Walton and Jack Vance as the essay's models of style that fits its world.
+QUOTE: 
+TRUE: holds up those seven writers as successful examples
+NOTE: Raw wikitext + rendered plaintext (Special:Export + action=query prop=extracts). Page: 'In her argument that fantastic creation should reach to the very words and grammar in fantasy writers, she holds up Lord Dunsany, E. R. Eddison, Kenneth Morris, J. R. R. Tolkien, James Branch Cabell, Evangeline Walton, and Jack Vance as successful examples.' All seven names match in order; the claim's gloss 'models of style that fits its world' is a paraphrase of 'fantastic creation should reach to the very words and grammar', hence SUBSTANCE not VERBATIM (claim carried no quote).
+
+### [15] VERIFIED_VERBATIM  |feature: clarity and directness
+CLAIM: Le Guin said fantasy must be clear and direct with language because the reader has no known framework to rest on.
+QUOTE: there is no known framework for the reader's mind
+TRUE: because there is no known framework for the reader's mind to rest upon
+NOTE: Raw wikitext, Style-and-mood section: 'Le Guin herself said that in fantasy it was necessary to be clear and direct with language, because there is no known framework for the reader's mind to rest upon.' Quoted fragment is word-for-word; both limbs (clear and direct; no framework for the reader) supported. Cited to Slusser 1976 pp.32-35.
+
+### [16] VERIFIED_VERBATIM  |feature: assumed familiarity, no exposition
+CLAIM: The narration assumes the reader already knows Earthsea's geography and history, avoiding heavy exposition, and moves between looking ahead into Ged's future and back into Earthsea's past.
+QUOTE: switches from looking ahead into Ged's future
+TRUE: the narration switches from looking ahead into Ged's future
+NOTE: Raw wikitext: 'The story often appears to assume that readers are familiar with the geography and history of Earthsea, a technique which allowed Le Guin to avoid exposition ... In keeping with the notion of an epic, the narration switches from looking ahead into Ged's future and looking back into the past of Earthsea.' Quote verbatim; all limbs present. Minor hedge: the page says 'often appears to assume' where the claim asserts it flatly.
+
+### [17] VERIFIED_VERBATIM  |feature: depth without backstory
+CLAIM: A reviewer credits this method with giving the world Tolkien's mysterious depths 'without his tiresome back-stories'.
+QUOTE: without his tiresome back-stories
+TRUE: gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying
+NOTE: Raw wikitext: 'a reviewer wrote that this method "gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying"', ref name='Craig 2003' (Amanda Craig, The Guardian, 24 Sep 2003). Quote verbatim; 'a reviewer' and the crediting of the no-exposition method both supported.
+
+### [18] VERIFIED_VERBATIM  |feature: dreamlike mood
+CLAIM: George Slusser described the book's mood as strange and dreamlike, fluctuating between objective reality and Ged's inner thoughts.
+QUOTE: strange and dreamlike
+TRUE: Slusser described the mood of the novel as "strange and dreamlike"
+NOTE: Raw wikitext: 'Slusser described the mood of the novel as "strange and dreamlike", fluctuating between objective reality and the thoughts in Ged's mind'. Quote verbatim; the fluctuation limb is present word for word; 'George Slusser' is given in full earlier in the same section, cited to Slusser 1976 pp.35-38.
+
+### [19] VERIFIED_VERBATIM  |feature: taut clean prose
+CLAIM: Amanda Craig (Guardian) praised prose 'as taut and clean as a ship's sail'.
+QUOTE: prose as taut and clean as a ship's sail
+TRUE: in prose as taut and clean as a ship's sail
+NOTE: Raw wikitext, Reception: 'a review in The Guardian by author and journalist Amanda Craig said it was "The most thrilling, wise and beautiful children's novel ever, [written] in prose as taut and clean as a ship's sail."' Quote verbatim; Craig and The Guardian both named on the page.
+
+### [20] VERIFIED_VERBATIM  |feature: exact word placement, resonance
+CLAIM: Harold Bloom called Le Guin an exquisite stylist with every word exactly in place and every sentence resonant.
+QUOTE: Every word was exactly in place
+TRUE: Every word was exactly in place and every sentence or line had resonance
+NOTE: Raw wikitext: 'literary critic Harold Bloom described Le Guin as an "exquisite stylist", saying that in her writing, "Every word was exactly in place and every sentence or line had resonance".' Quote verbatim; 'exquisite stylist', exact placement and resonance all present.
+
+### [21] VERIFIED_VERBATIM  |feature: lean but lyrical
+CLAIM: The New York Times characterized her prose as a lean but lyrical style used to explore moral issues.
+QUOTE: lean but lyrical style
+TRUE: described her as using "a lean but lyrical style" to explore issues of moral relevance
+NOTE: Raw wikitext: 'The New York Times described her as using "a lean but lyrical style" to explore issues of moral relevance.' Quote verbatim; the moral-issues limb is supported as 'issues of moral relevance'. The page attributes the style to her writing rather than the word 'prose', a wording difference only.
+
+### [22] VERIFIED_VERBATIM  |feature: elegance
+CLAIM: Zadie Smith called her prose as elegant and beautiful as any written in the twentieth century.
+QUOTE: as elegant and beautiful as any written
+TRUE: Her prose, according to Zadie Smith, was "as elegant and beautiful as any written in the twentieth century"
+NOTE: Raw wikitext: exact sentence present, ref 'Fellow Writers' (Library of America, 26 Jan 2018). Quote verbatim; every limb supported.
+
+### [23] VERIFIED_VERBATIM  |feature: collage narrative structure
+CLAIM: The Left Hand of Darkness is assembled from ethnological reports, myths, diary entries and personal narration, a structure called distinctly post-modern.
+QUOTE: distinctly post-modern
+TRUE: personal narration, diary extracts, Gethenian myths, and ethnological reports; "distinctly post-modern"
+NOTE: Raw wikitext, same paragraph: 'The heterogeneous structure of The Left Hand of Darkness, described as "distinctly post-modern", was unusual for the time of its publication' and '... the material, consisting of personal narration, diary extracts, Gethenian myths, and ethnological reports.' Quote verbatim; all four components present.
+
+### [24] VERIFIED_VERBATIM  |feature: restrained pathos
+CLAIM: Bloom described the Left Hand prose as precise, dialectical and always evocative in its restrained pathos.
+QUOTE: precise, dialectical—always evocative in its restrained pathos
+TRUE: described by Bloom as "precise, dialectical-always evocative in its restrained pathos"
+NOTE: Raw wikitext has 'restrained [[pathos]]' (wikilink), so the quote was confirmed against the RENDERED plaintext extract via action=query&prop=extracts&explaintext, where the exact string 'precise, dialectical—always evocative in its restrained pathos' is present (em dash, as in the claim). Attributed to Bloom 1987 and applied to Le Guin's writing style in this novel.
+
+### [25] VERIFIED_SUBSTANCE  |feature: myth-chapter interleaving
+CLAIM: Gethenian myths and legends are placed before chapters in which Genly Ai meets similar situations, so the embedded texts explain both cultural detail and philosophy.
+QUOTE: 
+TRUE: tales immediately precede chapters describing Ai's similar experience; explain culture and philosophy
+NOTE: Raw wikitext: 'The myths and legends serve to explain specific features about Gethenian culture, as well as larger philosophical aspects of society. Many of the tales used in the novel immediately precede chapters describing Ai's experience with a similar situation.' Claim carried no quote and is a paraphrase; both limbs supported. Page hedges with 'Many of the tales' where the claim generalises.
+
+### [26] VERIFIED_SUBSTANCE  |feature: naive first-person that learns
+CLAIM: Ai's first-person report reflects a gradually evolving worldview so the reader's understanding develops with his; the structure was initially found confusing by reviewers (Donna White).
+QUOTE: 
+TRUE: first-person narration reflects his slowly developing view; White: initially confusing to reviewers
+NOTE: Raw wikitext: 'Ai's first-person narration reflects his slowly developing view, and the reader's knowledge and understanding of the Gethens evolves with Ai's awareness. He begins in naivety, gradually discovering his profound errors in judgement.' And: 'In 1999, literary scholar Donna White wrote that the unorthodox structure of the novel made it initially confusing to reviewers, before it was interpreted as an attempt to follow the trajectory of Ai's changing views.' Both limbs supported; claim carried no quote, hence SUBSTANCE.
+
+### [27] VERIFIED_VERBATIM  |feature: limited third person
+CLAIM: Much of Tombs unfolds from Tenar's perspective, the reader feeling the undertomb's fear through her eyes; Cadden's free indirect discourse makes the narrator seem sympathetic to the characters.
+QUOTE: the narrator seem sympathetic to the characters
+TRUE: 
+NOTE: Live en.wikipedia.org/wiki/The_Tombs_of_Atuan (rendered page + Special:Export wikitext). Quote verbatim: 'making the narrator seem sympathetic to the characters' (cited Cadden 2005 p.92). Both other limbs verbatim too: 'In The Tombs of Atuan, much of the story is told from Tenar's perspective; for instance, the reader sees Tenar's fear of the undertomb through her own eyes, creating an empathy for her' (Cadden 2005 p.94). Minor scope point, not a limb of the claim: the page attributes free indirect discourse to the Earthsea trilogy generally, not to Tombs specifically.
+
+### [28] VERIFIED_VERBATIM  |feature: grounding coda
+CLAIM: Jo Walton credits the final travel section with grounding the narrative after the earthquake, 'solid and well rooted as ever'.
+QUOTE: solid and well rooted as ever
+TRUE: 
+NOTE: Same page. Verbatim: 'Science fiction writer Jo Walton said that it was a "beautifully written" book. She went on to write that a "lesser writer" would have ended the novel after the earthquake and the collapse of the Tombs, but that the last section of the story, about Ged and Tenar's travel, "do a lot to ground it", making it "solid and well rooted as ever".' Every limb (Walton, final travel section, grounding, after the earthquake) supported.
+
+### [29] VERIFIED_VERBATIM  |feature: flawless poetic prose with metaphor
+CLAIM: Kirkus praised Tehanu's flawless, poetic prose and its thoughtful, potent metaphor.
+QUOTE: flawless, poetic prose
+TRUE: 
+NOTE: Live en.wikipedia.org/wiki/Tehanu. Verbatim: Kirkus Reviews '...even young readers will be beguiled by the flawless, poetic prose, the philosophy expressed in thoughtful, potent metaphor, and the consummately imagined world' (ref Kirkus, January 15, 1990). Both limbs — flawless poetic prose and thoughtful, potent metaphor — supported.
+
+### [30] VERIFIED_VERBATIM  |feature: darker realistic edge
+CLAIM: Michael Dirda found Tehanu less sheerly exciting but perhaps the most moving, with a darker, more realistic edge and a woman's point of view.
+QUOTE: a darker, more realistic edge
+TRUE: 
+NOTE: Same page. Verbatim: Dirda in The Washington Post — Tehanu is 'less sheerly exciting' but perhaps 'the most moving'; the book gives the Earthsea themes 'a darker, more realistic edge'; and 'Further, Tehanu presents the world from a woman's point of view...' all carrying ref name 'Dirda 1990' ('The Twilight of an Age of Magic', February 25, 1990). All four limbs supported, and the claim correctly preserves Dirda's 'perhaps'.
+
+### [31] VERIFIED_VERBATIM  |feature: strange pacing
+CLAIM: Jo Walton calls Tehanu a restless book with very strange pacing, torn between plot and women's domestic lives.
+QUOTE: a restless book with very strange pacing
+TRUE: 
+NOTE: Same page. Verbatim: 'Jo Walton finds Tehanu "problematic", writing that it is "a restless book with very strange pacing", but that it is surprising that it "works as well as it does", given the competing demands of "the force of story" - plot, action - and Le Guin's evident intention to place "women's domestic lives" at the novel's centre.' The 'torn between plot and women's domestic lives' limb is supported by that competing-demands sentence; note the page frames it as competing demands the book nonetheless survives, not as a failure.
+
+### [32] VERIFIED_VERBATIM  |feature: plain strong exact diction; grave formal tone
+CLAIM: The guide characterizes the language as plain, strong and exact, the tone grave and slightly formal.
+QUOTE: plain, strong, and exact
+TRUE: 
+NOTE: NEA PDF fetched live (HTTP 200, 515,637 bytes, 12 pages), text extracted with pypdf. Printed page 4, 'The Language of Fantasy': 'Throughout A Wizard of Earthsea Le Guin's language is plain, strong, and exact; her tone grave and slightly formal; and the rhythm of her sentences carefully balanced and musical.' Quote verbatim; both limbs (diction and tone) supported. Page attribution p.4 is correct.
+
+### [33] VERIFIED_VERBATIM  |feature: balanced musical sentence rhythm
+CLAIM: The rhythm of her sentences is described as carefully balanced and musical.
+QUOTE: carefully balanced and musical
+TRUE: 
+NOTE: Same sentence, same printed page 4: 'the rhythm of her sentences carefully balanced and musical'. Quote verbatim, limb supported. Page attribution p.4 correct.
+
+### [34] VERIFIED_VERBATIM  |feature: Old English alliteration and assonance
+CLAIM: It notes occasional alliteration and assonance reminiscent of Old English verse, citing 'Forest rises ridge behind ridge to the stone and snow of the heights'.
+QUOTE: reminiscent of Old English verse
+TRUE: 
+NOTE: Printed page 4, immediately following: 'Note the occasional touches of alliteration and assonance-reminiscent of Old English verse-in such phrases as this: "Forest rises ridge behind ridge to the stone and snow of the heights."' Quote verbatim; the alliteration/assonance limb and the cited example sentence both verbatim. Page attribution p.4 correct.
+
+### [35] VERIFIED_VERBATIM  |feature: wizard as writer
+CLAIM: Le Guin (2008 interview): what a wizard does is like what a writer does — making things out of words and making things happen with words.
+QUOTE: He or she is making things out of words
+TRUE: 
+NOTE: Printed page 5, 'An Interview with Ursula K. Le Guin': header reads 'On January 7, 2008, Dan Stone of the National Endowment for the Arts interviewed Ursula K. Le Guin at her home in Oregon' - the 2008 limb is confirmed on the page. UKL: 'What a wizard does is like what a writer does. He or she is making things out of words and making things happen with words.' Quote verbatim; every limb supported. Page attribution p.5 correct (the answer sits on p.5, the interview continues onto p.6).
+
+### [36] VERIFIED_VERBATIM  |feature: gravely austere tone
+CLAIM: The guide says The Left Hand of Darkness is written in a tone even more gravely austere than A Wizard of Earthsea.
+QUOTE: a tone even more gravely austere
+TRUE: 
+NOTE: Printed page 9, 'Le Guin and Her Other Works': 'Perhaps the best-known and most taught of all modern science fiction novels, The Left Hand of Darkness is written in a tone even more gravely austere than A Wizard of Earthsea.' Quote verbatim; both limbs supported. Page attribution p.9 correct.
+
+### [37] VERIFIED_VERBATIM  |feature: quietly poetic language
+CLAIM: A discussion question calls the novel's language 'often quietly poetic'.
+QUOTE: often quietly poetic
+TRUE: 
+NOTE: Printed page 10, Discussion Questions, question 4: 'The language of A Wizard of Earthsea is often quietly poetic. Comment on three sentences that you find particularly beautiful or moving.' Quote verbatim, and it is indeed a discussion question. Page attribution p.10 correct.
+
+### [38] VERIFIED_VERBATIM  |feature: elegant diction
+CLAIM: The introduction credits the book's elegant diction, geographical sweep and mounting suspense.
+QUOTE: elegant diction, geographical sweep, and mounting suspense
+TRUE: 
+NOTE: Printed page 3, 'Introduction to the Book': 'The book's elegant diction, geographical sweep, and mounting suspense are quite irresistible.' Quote verbatim, all three limbs supported, and it does sit under the heading 'Introduction to the Book'. Page attribution p.3 correct.
+
+### [39] VERIFIED_VERBATIM  |feature: austere but vivid
+CLAIM: The SFE calls the initial Earthsea trilogy austere but vivid, a major work reaching beyond its Young Adult audience.
+QUOTE: austere but vivid
+TRUE: 
+NOTE: Live sf-encyclopedia.com/entry/le_guin_ursula_k fetched (HTTP 200, 101,578 bytes). Verbatim: 'The initial Earthsea trilogy, austere but vivid, is a major work whose appeal goes far beyond the Young Adult audience at whom in the first instance it was aimed'. Quote verbatim; all three limbs (austere but vivid, major work, reaching beyond the Young Adult audience) supported.
+
+### [40] VERIFIED_VERBATIM  |feature: grave joyfulness
+CLAIM: The SFE says a grave joyfulness pervades the trilogy, more maturely thoughtful than Narnia while remaining exciting.
+QUOTE: A grave joyfulness pervades the trilogy
+TRUE: 
+NOTE: Same page: 'A grave joyfulness pervades the trilogy, which is perhaps more maturely thoughtful (while remaining exciting) than the comparable Narnia series of C S Lewis.' Quote verbatim and every limb present. FLAG for downstream use: the claim drops SFE's hedge 'perhaps' - the source qualifies the Narnia comparison, so restore 'perhaps' if the sentence is quoted as SFE's position.
+
+### [41] VERIFIED_VERBATIM  |feature: clarity and evocative precision
+CLAIM: The Left Hand of Darkness is told in a prose notable for its clarity and evocative precision.
+QUOTE: a prose notable for its clarity and evocative precision
+TRUE: in a prose notable for its clarity and evocative precision
+NOTE: SFE entry fetched raw (curl, HTTP 200). Exact sentence: 'The story is told, in a prose notable for its clarity and evocative precision, as a report back to his home planet...' Every limb (Left Hand of Darkness, prose so described) on the page.
+
+### [42] VERIFIED_VERBATIM  |feature: motifs as story
+CLAIM: Archetypal motif pairs (darkness/light, root/branch, language/silence) are woven until the motifs are the story, treated as balanced twins rather than polarities.
+QUOTE: the motifs are the story
+TRUE: until it might almost be said that the motifs are the story
+NOTE: Raw SFE page: 'shaping a story around recurrent motifs... until it might almost be said that the motifs are the story. Many of them are the simple archetypal symbols... darkness and light, root and branch, winter and summer, submission and arrogance, language and silence. These are not seen by Le Guin as polarities or opposed forces; rather, they are twin parts of a balanced whole.' All three named pairs and the twins-not-polarities limb present. Two fidelity notes, not limb failures: the SFE hedges with 'it might almost be said', and says this of the first three Hainish novels as the 'typical Le Guin strategy'.
+
+### [43] VERIFIED_VERBATIM  |feature: sad, powerful, quiet (Tehanu)
+CLAIM: Tehanu is described as a sad, powerful, quiet book about the strength of women.
+QUOTE: a sad, powerful, quiet book
+TRUE: It is a sad, powerful, quiet book about the strength of women
+NOTE: Raw SFE page, of Tehanu: The Last Book of Earthsea (1990): 'It is a sad, powerful, quiet book about the strength of women (and the ultimate impotence of Ged); it won a Nebula.' Quote and every limb present.
+
+### [44] VERIFIED_VERBATIM  |feature: magus-root neologisms
+CLAIM: Le Guin avoids 'magician' (tainted by stage illusion) and coins Archmage, magelight, magewind and magery from Latin magus — none in the OED — so that the vocabulary itself resets the reader's assumptions about magic.
+QUOTE: based on a semantic point
+TRUE: Significantly enough, it is based on a semantic point
+NOTE: OUP live page reached raw in a real browser after the Cloudflare interstitial cleared on reload (curl 403; Wayback holds only the challenge page); the page carries the chapter's full text. Verbatim: 'Significantly enough, it is based on a semantic point'; 'a worker of magic is never described as a magician'; that term is 'deprecatory if not pejorative, a practitioner of legerdemain... rabbits up sleeves and deceptive mirrors'; 'she makes consistent use of the base-form... mage, from Latin magus; and from it she creates a series of compounds not recorded in the Oxford English Dictionary at all: Archmage, magelight, magewind, magery'; and the vocabulary limb: 'reminds them to suspend their judgement: their ideas, like their vocabulary, may be inadequate, or wrong.'
+
+### [45] VERIFIED_VERBATIM  |feature: true-name semantics
+CLAIM: The magic system rests on a 'Rumpelstiltskin theory' in which every thing has a true name distinct from ordinary language, and knowing it gives power — a linguistic premise that carries plot and theme.
+QUOTE: Rumpelstiltskin theory
+TRUE: what one might call the 'Rumpelstiltskin theory'
+NOTE: Same raw OUP page: 'the basic processes of magic in Earthsea depend on a concept... what one might call the Rumpelstiltskin theory. This is, that every person, place or thing possesses a true name distinct from its name in ordinary human language; and that knowing the true name, the signifiant, gives the mage power over the thing itself, the signifie.' The plot/theme limb is carried by 'expressed in many ways and at some length all the way through A Wizard of Earthsea' and 'the semantics and the explanations and the detailed apprenticeship of Ged are all necessary preparations to allow the author to approach a theme'.

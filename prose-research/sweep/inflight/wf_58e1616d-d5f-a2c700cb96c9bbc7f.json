@@ -1,0 +1,35 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i435-449",
+ "lines": 63,
+ "firstTs": "2026-09-06T17:27:18.842Z",
+ "lastTs": "2026-09-06T17:29:40.015Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 15,
+  "WebFetch": 1
+ },
+ "urlsFetched": [
+  "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+  "https://ultan.org.uk/five-steps-towards-briah/",
+  "https://ultan.org.uk/torture-and-confession-in-wolfes-book-of-the-new-sun/",
+  "https://www.sfsite.com/fsf/2007/gwng0704.htm",
+  "https://lareviewofbooks.org/article/we-read-things-differently/",
+  "https://sfsite.com/fsf/2007/gwng0704.htm",
+  "https://web.archive.org/web/20250904091940id_/https://www.sfsite.com/fsf/2007/gwng0704.htm",
+  "https://web.archive.org/cdx/search/cdx?url=sfsite.com/fsf/2007/gwng0704.htm&output=text&limit=20&filter=statuscode:200&collapse=timestamp:6"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Now let me verify bylines and recover the sfsite page via Wayback.",
+ "run": "wf_58e1616d-d5f",
+ "agent": "a2c700cb96c9bbc7f",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_58e1616d-d5f/agent-a2c700cb96c9bbc7f.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i435-449.json",
+  "exists": false
+ }
+}

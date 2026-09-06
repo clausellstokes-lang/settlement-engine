@@ -3,15 +3,16 @@
  "name": "kay",
  "angle": "craft",
  "tag": null,
- "lines": 330,
+ "lines": 333,
  "firstTs": "2026-09-06T16:54:17.208Z",
- "lastTs": "2026-09-06T17:19:47.211Z",
+ "lastTs": "2026-09-06T17:25:51.388Z",
  "tools": {
   "Read": 1,
   "Bash": 71,
   "ToolSearch": 1,
   "WebSearch": 16,
-  "WebFetch": 1
+  "WebFetch": 1,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://c2cjournal.ca/2016/09/the-fantastic-fiction-of-guy-gavriel-kay/",
@@ -132,7 +133,7 @@
  "run": "wf_ae11ef1d-bb8",
  "agent": "a830b9ab89fcecd07",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_ae11ef1d-bb8/agent-a830b9ab89fcecd07.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-kay-craft.json",
   "claims": 283,

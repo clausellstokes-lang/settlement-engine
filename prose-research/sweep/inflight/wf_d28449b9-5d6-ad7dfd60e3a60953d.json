@@ -1,0 +1,34 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i299-313",
+ "lines": 71,
+ "firstTs": "2026-09-06T17:26:31.148Z",
+ "lastTs": "2026-09-06T17:29:37.589Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 14
+ },
+ "urlsFetched": [
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Signs_of_AI_writing&action=raw",
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia_talk:Signs_of_AI_writing&action=raw",
+  "https://arxiv.org/html/2404.01268v1",
+  "https://arxiv.org/html/2404.08627v2",
+  "https://arxiv.org/html/2406.07016v1",
+  "https://arxiv.org/html/2503.02879v1",
+  "https://www.404media.co/email/d516cf7f-3b5f-4bf4-93da-325d9522dd79/",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "The 404 Media page confirms 302. Now the arXiv papers.",
+ "run": "wf_d28449b9-5d6",
+ "agent": "ad7dfd60e3a60953d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-ad7dfd60e3a60953d.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i299-313.json",
+  "exists": false
+ }
+}

@@ -12785,6 +12785,544 @@
    "trueWording": "creating stylistic levelling; modernisation 'in fact a reduction of vocabulary'",
    "note": "No quote supplied. Nagel ch.1 (p.26): the omissions 'simply narrow down the tone of passage as given in OV ..., creating stylistic levelling not too far removed from what Wolfgang Krege might have meant by OT's \"uniform\" language' - i.e. the paradox that modernisation reproduces the uniformity Krege charged the old version with. Vocabulary limb: 'such \"modernisation\" (in fact a reduction of vocabulary and stylistic level)'. Simplification limb: 'a tendency of simplifying speech patterns'; 'simplified sentence structure'; conclusion cites 'NT's syntactic simplification' and 'NT's over-simplification of OV's lexical structures and stylistic devices'. 'New uniformity' is Nagel's inference-by-comparison rather than his phrase, hence SUBSTANCE not VERBATIM.",
    "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "748": {
+   "index": 748,
+   "verdict": "PARTIAL",
+   "trueWording": "linguistic transposition (e.g. Rohirric = Old English)",
+   "unsupportedLimb": "the stated purpose — keeping linguistic distance while suggesting kinship",
+   "note": "Raw epdf.pub page fetched (612 KB HTML, 359 KB text). Honegger's chapter abstract is present verbatim: 'reproduce the relationship between the various languages of Middle-earth by means of linguistic transposition (e.g. Rohirric = Old English, Language of Dale = Old Norse)' and 'poses an additional challenge to every translator' — which supports the equation limb and the translators-cannot-easily-mirror limb. But the mirror's OCR text of that chapter breaks off mid-sentence on p.6 (thou/ye excursus) and jumps to Nagel's chapter at p.93+, so the rationale limb (distance while suggesting kinship) is nowhere on the reachable text: zero hits for 'kinship', 'archaic', 'Old High German', 'Medieval Latin', 'Éomer' inside the chapter. The page's DOWNLOAD PDF link (epdf.pub/download/...) returns the same HTML, not a PDF, so no fuller text is reachable by that route.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "749": {
+   "index": 749,
+   "verdict": "PARTIAL",
+   "trueWording": "'Penner', 'Chef', 'Imbißbude' werfen den Leser aus der Welt des Buches",
+   "unsupportedLimb": "'Stuss erzählen' as part of the immersion-breaking objection",
+   "note": "Raw archive page fetched and decoded from its declared ISO-8859-1. Poster 'Hmpf' (ex-member of the DTG working group on the Krege translation) writes that 'Chef' as address for Frodo means 'damit werden die sozialen Umstände der Hobbits den unseren gleichgesetzt' — the equates-social-circumstances limb, exact. The same post lists '\"Penner\", \"Chef\", sogar \"Imbißbude\"' as words that 'den Leser völlig aus der Welt des Buches werfen' — immersion, exact. Supporter limb exact too: 'Reiner' praises 'gelungene Optimierung der Lesbarkeit' / 'endlich ein lesbarer Herr der Ringe' and 'Man merkt deutlich, dass die Sprache im Auenland anders ist als bei den Reitern von Rohan und die Sprache der Elben ist wieder eine Andere.' The failing limb: 'Stuss erzählen' occurs exactly once on the page, in Reiner's PRO-Krege post ('Eher der Kritk auszusetzen sind da Begriffe wie Stuss erzählen ... die sind dann vielleicht weniger aus der Zeit der Entstehung'), i.e. flagged as un-period, not as immersion-breaking and not by an objector. Also note the quote token 'Imbissbude' matches verbatim only in a later pro-Krege post ('Weder fande ich dieses Wort noch Imbissbude in irgendeiner Weise schlimm'); the objecting post spells it 'Imbißbude'.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "750": {
+   "index": 750,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Die Stimmung ist nicht mehr die Mittelerde-Mittelalter-Atmosphäre",
+   "note": "Raw phpBB page (thread p.2) fetched. Poll block reads: 'besser als die Carroux-Übersetzung 0 Keine Stimmen / genauso gut wie die Carroux-Übersetzung 0 Keine Stimmen / absolut mißlungen 12 100% / Insgesamt abgegebene Stimmen: 12' — all twelve votes call it an absolute failure. Kringel (12 Feb 2004): 'Die Stimmung ist nicht mehr die Mittelerde-Mittelalter-Atmosphäre, die ich kenne und liebe ... sondern eine GZSZ-Stimmung, das einfach \"zu modern\" klingt' — GZSZ is the German daily soap, so 'soap-opera modernity' is exact. Quote matches word for word; only the sentence-initial capital differs ('Die' on the page vs 'die' in the claim).",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "751": {
+   "index": 751,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"altertümliche\" Sprache gezielt als Stilmittel verwendet wird",
+   "note": "Raw forum page (thread 429, page 2) fetched. Kringel, post #24: 'ein Roman wie \"Der Herr der Ringe\", in dem \"altertümliche\" Sprache gezielt als Stilmittel verwendet wird, braucht keine \"Modernisierung\". Im Gegenteil - derartige Bestrebungen zerstören den gesamten Roman' — every limb of the claim is supported, and the quoted words are on the page in exactly that order; graded SUBSTANCE only because the source puts quotation marks round 'altertümliche', so a strict string match on the claim's quote fails. 'Chef' cited by melanie, post #26 ('Schon allein weil Frode dauernd mit \"Chef\" angeredet wird'); the 'beim Fündburo' line is cited by Wendy, post #33 ('Ich hoffe Aragorn holt uns bald beim Fundbüro ab'), and sandhofer #34 doubts it as one of those 'urban legends' while Kringel #35 insists it is real — so 'alleged' is right.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "752": {
+   "index": 752,
+   "verdict": "PARTIAL",
+   "trueWording": "beim Krege wurden die Sünden der ersten Übersetzung herausgestrichen",
+   "unsupportedLimb": "that redaktion42 (the post's author) holds Carroux keeps one elevated register across all characters and that Krege gave hobbits naturalistic speech — that judgement is a reader's comment on the page, not the blog's",
+   "note": "Raw post fetched. Quote exact, in the blog author's own text about the 2012 reissues: 'Im Jahre 2012 wurden sowohl die Carroux- als auch die Krege-Übersetzung überarbeitet und neu veröffentlicht ... beim Krege wurden die Sünden der ersten Übersetzung herausgestrichen.' The author also supports the jarring-modern-vocabulary limb ('Die Sprache wurde an die moderne Zeit angepasst und es fanden sich ... zu viele flapsige Übersetzungen darin. So wurde Master Frodo (Englisch) mit Chef übersetzt. Nein, das geht nicht.'). But the register contrast the claim attributes to redaktion42 appears only in the reblogged comment by R. M. Beyer: 'Und doch atmet man Staub, wenn man erst einmal die altertümliche Dialogsprache liest. Da spricht der Bauer wie der König. Das ist bei Krege deutlich besser gelöst. Er gab vor allem den Hobbits eine natürlichere Sprache, wenn sich dort auch einige unpassende Begriffe finden wie z.B. „Chef“ und „Firma“.' The blog post itself never says Carroux levels all characters into one formal register.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "753": {
+   "index": 753,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Die Übersetzung von Margaret Carroux ist bei vielen Tolkienfans die beliebtere",
+   "note": "Raw DTG article fetched (Tobias M. Eckrich, 26 August 2019). Quote exact. Boxed-set limb exact too: 'hat Klett-Cotta nach Jahren eine dreibändige Herr der Ringe Ausgabe in der Übersetzung von Margaret Carroux veröffentlicht' / 'Jetzt gibt es wieder eine dreibändige Ausgabe im Schuber', published alongside the 24 August 2019 Howe book, ISBN 978-3-608-96429-5, Übersetzung: Margaret Carroux.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "754": {
+   "index": 754,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "spalten die Fans wie kaum ein anderes Thema",
+   "note": "Raw DTG announcement fetched (Maria Zielenbach, 15 October 2021, panel of 20 October 2021), headline '20 Jahre nach Krege: Was taugen die deutschen Übersetzungen?'. Body: 'Kann man sich in der deutschsprachigen Tolkien-Szene bewegen und nicht schonmal über „Carroux vs. Krege“ diskutiert haben? Vermutlich nicht! Die beiden deutschsprachigen Übersetzungen des Herrn der Ringe spalten die Fans wie kaum ein anderes Thema.' Krege dated on the page to 2000, so 'twenty years after' holds.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "755": {
+   "index": 755,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "criticised by Wolfgang Krege ... for using a similar linguistic style",
+   "note": "URL 'Guide to the Names in The Lord of the Rings' is a hard redirect to 'Translating The Lord of the Rings#Tolkien's \"Guide to the Names...\"'; raw wikitext of the redirect target fetched via ?action=raw. Lead: 'Margaret Carroux's careful German version was criticised by Wolfgang Krege, who made a new translation, for using a similar linguistic style for the speech of both elves and hobbits, despite the marked differences in the original'. Quote exact; both limbs exact.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "756": {
+   "index": 756,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "renders the speech of ... working-class hobbits in grammatically correct Spanish",
+   "note": "Same redirect target, raw wikitext. Spanish (Domènech) 1977–80 section, citing Sandra Bayona: the translation 'often renders the speech of characters such as working-class hobbits in grammatically correct Spanish, where Tolkien used non-standard English'; the listed non-standard forms include 'duplicating the subject (\"Mr. Drogo, he married...\")', 'double negatives (\"Talking won't mend nothing\")' and 'altered subject-verb agreement'; the translation 'either omits these effects altogether, or, as with double negatives, renders them accurately in standard Spanish'. All three named features and the loss limb are on the page.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "757": {
+   "index": 757,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "small amount of Old English is probably best left untranslated",
+   "note": "Same redirect target, raw wikitext, lead paragraph: 'Westron, the common speech of Middle-earth, is \"translated\" as modern English; this stands in relation to Rohirric, an archaic language, which is represented by Old English, and the language of Dale, translated as Old Norse ... Thomas Honegger gives possible solutions for this in French and German, but suggests that the small amount of Old English is probably best left untranslated.' Body repeats it: 'the best answer is probably to leave the Old English names and quoted speech untranslated'. Quote exact; every limb exact.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "758": {
+   "index": 758,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I object as strongly as is possible to the 'translation' of the nomenclature",
+   "note": "Same redirect target, raw wikitext. Blockquote from Letters #190 (to Rayner Unwin, 3 July 1956) on Schuchart's Dutch version: 'In principle I object as strongly as is possible to the \"translation\" of the nomenclature at all (even by a competent person).' The Guide section opens 'Frustrated by his experience with Schuchart's Dutch and Ohlmarks's Swedish translations, Tolkien asked that...', and the lead dates the Guide to 1967, after the Dutch (1956–57) and Swedish (1959–61) versions — so the after-Dutch-and-Swedish limb holds. Note the source objects to translating the nomenclature 'at all', which is if anything stronger than the claim's 'free translation'.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "759": {
+   "index": 759,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien calls Bilbo's wealth 'a legend'; Ohlmarks added his travels were legendary",
+   "note": "Same redirect target, raw wikitext, Swedish (Ohlmarks) section: 'A much more widespread issue was Ohlmarks's \"propensity for embroidering every description\". Thus, Beregond notes, Tolkien calls Bilbo's wealth \"a legend\"; Ohlmarks went beyond Tolkien's text to assert that \"his travels are sägonomsusade (‘legendary’) as well.\"' Quote exact; all limbs exact (the judgement is Beregond's, reported by the article).",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "760": {
+   "index": 760,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cannot be done in French ... in German ... doesn't give an archaic effect",
+   "note": "Raw wikitext of Translating The Lord of the Rings, 'Archaism' section: 'Allan Turner gives the example of fronting, where Tolkien puts the object at the start of a sentence rather than after the verb: \"Weapons they have laid at your doors\". Turner points out that this cannot be done in French, while in German it remains a common construction and doesn't give an archaic effect.' Quote exact; French, German-unmarked and lost-effect limbs all exact.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "761": {
+   "index": 761,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the translation \"diminishes the peculiarities\" of both Gaffer Gamgee and Gollum",
+   "note": "Raw wikitext, 'Idiolect' section plus the French (Ledoux) 1972–73 section. Idiolect: Gollum's 'simple but ungrammatical syntax', 'Gollum's incorrect plurals, subject-verb agreement, and verb tenses impact translation', with 'pocketses' given as the example of excessive pluralisation (the word appears twice on the page, also inside the Ledoux comparison). Ledoux section, citing Ferré: 'Ferré comments that the translation \"diminishes the peculiarities\" of the speech of both Gaffer Gamgee and of Gollum'. Quote exact; both limbs exact.",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "762": {
+   "index": 762,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "creating an \"odd\" result",
+   "note": "Raw wikitext, Hebrew section. Livnit's high register: 'older Tolkien fans like Livnit's \"old, traditional, and literary Hebrew\" full of mythological, \"mostly Biblical\" terms ... Such language gave the translation an impressively \"high register\"'. Lottem: 'Lottem, charged with editing Livnit's version, mixed his preferred, rather technical, modern Hebrew with Livnit's \"archaic and rich diction\", creating an \"odd\" result.' Every limb supported; graded SUBSTANCE rather than VERBATIM only because the claim's quote 'odd result' is not a contiguous string on the page — the source quotes the single word \"odd\".",
+   "fromFile": "verdicts-tolkien-i748-762.json"
+  },
+  "763": {
+   "index": 763,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"sound like a traditional Chinese wuxia [martial arts fiction] story\"",
+   "note": "Raw wikitext of en.wikipedia Translating_The_Lord_of_the_Rings, Chinese section, reached via action=raw. Page: \"Li states that Ding et al's version may be more literary, at the cost of making it 'sound like a traditional Chinese wuxia [martial arts fiction] story'. In contrast, Chu, more familiar with Western fantasy, has written a far more popular version.\" Both limbs supported. Not VERBATIM: the supplied quote 'sounds like traditional Chinese wuxia' differs from the page ('sound like a traditional Chinese wuxia'), and the page hedges the judgement as Li Hong-man's ('may be').",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "764": {
+   "index": 764,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"fer que els orcs tinguessin un parlar com més desballestat millor\"",
+   "note": "PDF fetched from ddd.uab.cat and text-extracted with pdfminer (17pp). Quote present verbatim. Limb 1: \"Sabia, això sí, que el llibre es publicaria en una col·lecció escolar... Per això, prou curiosament, El hòbbit és més farcit de cultismes o formes potser un xic arcaiques o desuetes que no pas d'altres traduccions.\" Limb 2: \"els únics detalls lingüístics... van ser alguns trets peculiars emprats pels homes del sud (Bóromir, Fàramir…): aqueix, son/seua, naltros, mos/vos...\" Limb 3 is the quoted orc clause. All three limbs supported.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "765": {
+   "index": 765,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"el cas de les dues traduccions alemanyes existents és invers\"",
+   "note": "Same PDF. Page: \"Segons que sembla, el cas de les dues traduccions alemanyes existents és invers: la primera, de Margaret Carroux, publicada entre 1969 i 1970, gaudeix de més «prestigi» que no pas la segona, de l'any 2000...\" The immediately preceding section is the Swedish case (Ohlmarks 1959-61 superseded by the orthodox Andersson/Olsson 2005), so 'invers' does refer to the Swedish. No quote was supplied, hence SUBSTANCE not VERBATIM; the page hedges with 'Segons que sembla' (apparently).",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "766": {
+   "index": 766,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"adding words and indulging in lengthy paraphrases... more complicated and high-faluting\"",
+   "note": "Raw wikitext of en.wikipedia Translation_of_The_Lord_of_the_Rings_into_Swedish. 'high-faluting' appears verbatim in the Strömbom footnote translation: \"by embroidering Tolkien's text, adding words and indulging in lengthy paraphrases, by frankly stubbornly turning the simple language into a more complicated and high-faluting one\". The 'hyperbolic' limb is supported separately on the same page: \"Andreas Brunner commented... that Ohlmarks' prose is hyperbolic in style, where the original uses simple or even laconic language.\" All limbs supported.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "767": {
+   "index": 767,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"he had intentionally created an interpretation of Tolkien, not a straight translation\"",
+   "note": "Same page. Lead: \"Ohlmarks rejected all criticism, stating that he had intentionally created an interpretation of Tolkien, not a straight translation.\" Quote is an exact substring. Refusal-of-revision limb: \"He ignored complaints and calls for revision from readers\" and \"Ohlmarks remained impervious to the numerous complaints and calls for revision\".",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "768": {
+   "index": 768,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Sample table: Ohlmarks 42 words, Andersson and Olsson 24 words",
+   "note": "Same page, 'Prose' section. Strömbom's comparison table gives Tolkien 20 words, Ohlmarks 1959-1961 42 words, Andersson and Olsson 2005 24 words for 'Indeed, few Hobbits had ever seen or sailed upon the Sea...'. The laconic limb is supported: \"Commentators including Petter Lindgren in Aftonbladet have remarked on Ohlmarks's wordy text compared to Andersson's more laconic version\", and the page calls Tolkien's own language 'simple or even laconic'. No quote supplied, so SUBSTANCE; 'matched Tolkien's laconic tone' is the claim's phrasing, the page says only 'more laconic' than Ohlmarks.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "769": {
+   "index": 769,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a readable, even and in large part correct translation\"",
+   "note": "Same page. Henrik Williams in Dagens Nyheter: \"Let me say that Andersson & Olsson have prepared a readable, even and in large part correct translation...\" - quote is an exact substring. Second limb, Malte Persson in Göteborgsposten: \"the new translation follows the original's fluent prose very closely, and only a linguistic pedant could find anything to object to\". Both reviews are dated 27 September 2004 on the page although the article labels the version 2005.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "770": {
+   "index": 770,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "Lavskägge (reading 'beam' as light)",
+   "trueWording": "Lavskägge = 'Lichenbeard'; beam-as-light is Quickbeam → Snabba solstrålen",
+   "note": "Same page. Two of three examples are supported: \"Ohlmarks used Vattnadal ('Water-dale') for Rivendell, apparently, Tolkien commented, by way of taking riven for river\"; and the names table gives Ford of Bruinen -> Björnavad ('Bear Ford'), \"A guess, using English 'Bruin', a brown bear\". The third is a conflation: the page glosses Lavskägge as 'Lichenbeard', Ohlmarks's rendering of Treebeard, while the beam-as-light misreading belongs to a different name entirely - \"The Ent Quickbeam becomes Snabba solstrålen ('Swift Sunbeam'), apparently taking beam in the sense of 'beam of light' instead of 'tree'\".",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "771": {
+   "index": 771,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Dr. Ohlmarks is a conceited person, less competent than charming Max Schuchart\"",
+   "note": "Same page. Letter 263 blockquote: \"The enclosure that you brought from Almqvist &c. was both puzzling and irritating. A letter in Swedish from fil. dr. Åke Ohlmarks, and a huge list (9 pages foolscap) of names in the L.R. which he had altered... the impression remains, nonetheless, that Dr. Ohlmarks is a conceited person...\" - covers the nine-page altered-name list and 'both puzzling and irritating'. The Dutch limb is supported by the running text: \"He thought Ohlmarks's version was even worse than Schuchart's 1956-57 Dutch translation\". All limbs supported.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "772": {
+   "index": 772,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "his Vidstige \"even outdoes the original's Strider\"",
+   "note": "Same page: \"Stefan Spjut, reviewing the new translation in Svenska Dagbladet, commented that Ohlmarks's version had its merits, and that his Vidstige 'even outdoes the original's Strider', but that people would probably get used to the new version.\" Word for word; the page uses a curly apostrophe in original's where the supplied quote uses an ASCII one - a typographic difference only. 'One reviewer conceded' matches Spjut allowing merits to a version he is otherwise superseding.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "773": {
+   "index": 773,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"prompting him to compile his Guide to the Names\"; 1982 book, hostility from late 1970s",
+   "note": "Raw wikitext of en.wikipedia %C3%85ke_Ohlmarks. \"Ohlmarks translation of Tolkien's The Lord of the Rings was strongly disliked by the author, prompting him to compile his 'Guide to the Names in The Lord of the Rings'.\" And: \"As a result of the severe criticism... Ohlmarks in the late 1970s began to display hostility towards the 'Tolkien phenomenon', and in 1982 published a book titled Tolkien and Black Magic\" (Tolkien och den svarta magin, 1982). Both limbs supported; no quote was supplied, hence SUBSTANCE.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "774": {
+   "index": 774,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"lade till adjektiv och piffade upp dialogen... en helt annan bok\"",
+   "note": "Raw wikitext of sv.wikipedia %C3%96vers%C3%A4ttning_av_Sagan_om_ringen_till_svenska. \"I Sydsvenska Dagbladet (2004) ger Andreas Brunner försiktig beröm: 'Tolkien ville få fram en ålderdomlig känsla med ett avskalat språk. Ohlmarks gjorde precis tvärtom, lade till adjektiv och piffade upp dialogen. Resultatet blev en förtjusande bok, men också en helt annan bok än den Tolkien hade skrivit'.\" Added adjectives, spruced-up dialogue, delightful but quite different book - all three limbs supported; no quote supplied, so SUBSTANCE.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "775": {
+   "index": 775,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"six meals a day\" blev \"sex vällagade måltider om dagen\"",
+   "note": "Same sv.wikipedia page. \"Leif Jacobsen har granskat Ohlmarks översättning... Dessutom menar han att översättaren genomgående broderar ut texten och lägger till information som inte finns i originalet. Exempel som han lyfter fram är 'six meals a day' som i Ohlmarks översättning blev 'sex vällagade måltider om dagen'.\" Quote present verbatim; the padding limb and the attribution to Jacobsen are both supported.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "776": {
+   "index": 776,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "to make the world feel ancient",
+   "trueWording": "\"en levande sagovärld\" with as little to do with England as possible",
+   "note": "Same sv.wikipedia page. Supported: \"I Ohlmarks bok Tolkiens arv uppger denne att den egna uppgiften varit att göra en tolkning av Tolkien\" (Tolkiens arv is 1978 in the page's source list), and the block quote \"Jag gjorde först en noggrann slätöversättning av hela boken och skrev sedan radikalt om den, hela tiden ledd av en strävan att söka skildra en levande sagovärld som hade precis så lite att göra med England och engelskan som Tolkien tydligen avsett.\" The plain-draft-then-rewrite limb and the distance-from-England limb are exact. The 'feel ancient' limb is not in Ohlmarks's stated aim - he says a LIVING saga-world ('levande sagovärld'); the only 'ålderdomlig känsla' (archaic feeling) on the page is Brunner's description of what TOLKIEN wanted, of which he says Ohlmarks did the opposite.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "777": {
+   "index": 777,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "attributing the Merry death-blow and the two Prancing Pony names to Malte Persson",
+   "trueWording": "Persson: \"missförstånd, felsyftningar, inkonsekvenser och godtyckliga tillägg\"",
+   "note": "Same sv.wikipedia page. The first half is verbatim from Persson (Göteborgs-Posten, 2004): \"Den är så späckad med missförstånd, felsyftningar, inkonsekvenser och godtyckliga tillägg...\" Both examples exist on the page but neither is credited to Persson: the Witch-king error is unattributed article text in its own section ('Häxmästarens död' - \"I de flesta upplagor… är det felaktigt hoben Meriadoc som ger Häxmästaren av Angmar det dödande hugget, medan det i själva verket är Éowyn\"), and the inn's two names ('Den dansande ponnyn' in the prologue vs 'Den stegrande ponnyn' in the text) is sourced to Jacobsen and to the book itself. The 'including' limb therefore misattributes.",
+   "fromFile": "verdicts-tolkien-i763-777.json"
+  },
+  "778": {
+   "index": 778,
+   "verdict": "PARTIAL",
+   "trueWording": "Williams calls 'Min dyrgrip' the single greatest translation blunder",
+   "unsupportedLimb": "'lexically correct' — Williams says the dictionary rendering is 'min alskling'/'min skatt' and calls Andersson's 'Min dyrgrip' \"den allra storsta oversattningsgrodan\"",
+   "note": "sv.wikipedia raw HTML fetched. Quote 'Min dyrgrip' appears verbatim in the blockquoted Williams (DN) passage. The corrupting-allure limb is supported in substance: 'Ohlmarks valde ”alskade” vilket visar att han forstod Gollums forhallande till guldsmycket' and the dictionary rendering is 'sann mot Tolkiens genomgaende avsikt att framstalla hur karleken till jordiska ting och jordisk makt binder sjalen och leder till dess undergang'. But the page frames Andersson's choice as a blunder, not as lexically correct.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "779": {
+   "index": 779,
+   "verdict": "PARTIAL",
+   "trueWording": "Ohlmarks nastan rart omstandliga svenska",
+   "unsupportedLimb": "'almost comically elaborate' — Lindgren wrote 'nastan rart omstandliga' (almost endearingly long-winded); 'komiska bitoner' on the same page belongs to Spjuth, not Lindgren",
+   "note": "Nostalgia and the terse contrast are supported: 'jag har svart att separera fran Ohlmarks nastan rart omstandliga svenska', framed by 'Flera jamforde Ohlmarks ordrika text med Anderssons mer korthuggna', and closing 'Visst blir man mer partysugen av Ohlmarks version.' Attribution to Petter Lindgren (Aftonbladet) is explicit. No quote field supplied.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "780": {
+   "index": 780,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "later som en ort hamtat ur svenska MAD",
+   "note": "Page: 'I Svenska Dagbladet anmarkte Stefan Spjuth pa oversattningen av namn: ... Fylkes huvudstad, i originalet ”Michel Delving”, kallar Andersson for Mocklegrava, vilket later som en ort hamtat ur svenska MAD.' Every limb supported. No quote field supplied, hence SUBSTANCE. Minor: the body says 'Stefan Spjuth' (as the claim does) while the reference list spells him 'Spjuth, Staffan'.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "781": {
+   "index": 781,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "praktiskt taget var fraga om tva olika verk",
+   "note": "vetsaga.se/?p=50 fetched raw (TLS verification had to be relaxed; page bytes are double-encoded UTF-8, repaired before matching). Stroembom (bylined author): 'Min upplevelse var dock att berattarens rost var fullstandigt forandrad i den nya utgavan, och att det praktiskt taget var fraga om tva olika verk.' Quote verbatim; both limbs supported.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "782": {
+   "index": 782,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bade Tolkien och Andersson anvander sig av ett enkelt sprak, men det gor inte Ohlmarks",
+   "note": "Quote 'en nagorlunda klar bild av' verbatim, twice. Directly after the three prologue-first-sentence quotations the essay writes the simple-language sentence; the next paragraph gives the exact comparison: 'Jamfor exempelvis ”a little” med ”en nagorlunda klar bild av”, och vidare med Anderssons ordagranna losning ”litet”.' The passage is identified elsewhere as 'prologens forsta mening'.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "783": {
+   "index": 783,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hans meningar ar i regel langre och mer komplicerade i sin uppbyggnad an originalets",
+   "note": "Quote 'nagot hogre stilvalor' verbatim: 'Medan Tolkiens ordval ofta ar av en enkel och oppen karaktar tycks Ohlmarks ha en forkarlek for begrepp som ringar in och avgransar och har en nagot hogre stilvalor.' Both limbs supported.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "784": {
+   "index": 784,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ohlmarks ordval tycks genomgaende strava efter en hogre dramatik",
+   "note": "Quote 'den dodsbleke konungen' verbatim. Page: 'Sa blir exempelvis ”bathed Frodo’s shoulder” i Ohlmarks oversattning ”baddade Frodos skuldra med dekokten”, medan Andersson ratt och slatt skriver: ”baddade Frodos axel”. En annan liten men typisk Ohlmarksforstarkning ar oversattningen av ”the pale king” med ”den dodsbleke konungen”.' Drama limb: 'strava efter att uppna en hogre grad av dramatik an originalet'.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "785": {
+   "index": 785,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "uttrycker Ohlmarks mening aven en frenesi som inte aterfinns hos Tolkiens eller Anderssons relativt sakliga yttranden",
+   "note": "Quote 'trottnade aldrig pa att inskarpa vikten av' verbatim, in the passage explicitly introduced as 'kapitel XII, eller ”Flight to the Ford”'. All limbs supported.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "786": {
+   "index": 786,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Andersson ibland odlar en stil som ar annu nagot enklare an Tolkiens",
+   "note": "Quote 'annu nagot enklare an Tolkiens' appears verbatim: 'Man skulle mojligen kunna havda att Andersson ibland odlar en stil som ar annu nagot enklare an Tolkiens, men detta aterkommer jag till senare.' Restated later as 'Jag tycker mig ana att Andersson ibland odlar en annu enklare stil an Tolkien'. Hedged ('man skulle mojligen kunna havda'), which the claim's 'suggests' matches.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "787": {
+   "index": 787,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ett svulstigt sprak som svaller over stor berattelsen",
+   "note": "tolkiensarda.se art31_2 (review by Patrik Centerwall) fetched raw, decoded iso-8859-1. Quote 'originell lustigkurre' verbatim, in Ohlmarks's rendering of Bilbo's birthday speech ('ja-rop -- och ett enstaka nej av nagon originell lustigkurre'), presented as one of Ohlmarks's 'egna, vidlyftiga tolkningar'. Faithfulness limb: 'Andersson pa manga olika satt ar trognare det engelska originalet an Ohlmarks'. Ornate-language limb: the svulstigt sentence above.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "788": {
+   "index": 788,
+   "verdict": "PARTIAL",
+   "trueWording": "Den heroiska stilen, sarskilt i bok V, har varit extremt svar",
+   "unsupportedLimb": "'the hardest to translate' — asked for the hardest task so far, Andersson answered 'namnen', not the heroic register, which he called only 'extremt svar'",
+   "note": "tolkiensarda.se art28_1 fetched raw. Quote 'Det finns inget svangrum i ett namn' verbatim, and it is his answer to 'Vad har varit den svaraste oversattningsuppgiften hittills? — Dar maste jag anda svara: namnen.' The heroic-style sentence answers a separate question about what is difficult.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "789": {
+   "index": 789,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sometimes the language he uses gives a glimpse of his identity as the great king Aragorn",
+   "note": "theonering.net page fetched raw. Quote verbatim: 'It starts out as a children’s book, as a continuation of “Bilbo”, with a Birthday party. Then the story progresses into a more sinister mode.' Register limb supported: 'Take the Vidstige (Strider/ P.) character, for instance, he changes all the time. Sometimes the language he uses gives a glimpse of his identity as the great king Aragorn.' The page says Strider/Vidstige, never the word 'ranger'; the page is TORn's fan translation of a Svenska Dagbladet article, not a TORn-conducted interview.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "790": {
+   "index": 790,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "As a creation in its own right it is excellent, even if it does not always follow Tolkien",
+   "note": "Same page, verbatim: '– As a creation in its own right it is excellent, even if it does not always follow Tolkien; you have to be modest when you criticise careless mistakes and such.' Attributed to Erik Andersson.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "791": {
+   "index": 791,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "dessa sma andringar, alla i samma riktning, upprepas gang efter gang",
+   "note": "tolkien.mbor.se/omandersson.php fetched raw. Quote 'alla i samma riktning' verbatim. All four limbs on the page: 'att tona ner skillnaderna mellan originalets olika sprakbruk'; 'Dessutom har Andersson har trollat bort det hovliga tilltalet Mr. Pippin' in Sam's line (the essay explains Sam is Frodo's servant and lower in rank); 'Kort sagt kravs det ett ora for poesin i Tolkiens sprak. Andersson hade inte det orat.'",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "792": {
+   "index": 792,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "lika viktigt hur nagot sags som sjalva handlingen",
+   "note": "Same page: 'I Tolkiens text ar det lika viktigt hur nagot sags som sjalva handlingen.' The comparand on the page is the plot/action itself rather than 'what is said'; the claim's substance (manner weighs as much as content) holds. No quote field supplied.",
+   "fromFile": "verdicts-tolkien-i778-792.json"
+  },
+  "793": {
+   "index": 793,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"pages\" blir \"den\", \"reader\" blir \"man\", \"discover\" blir \"fa reda pa\"",
+   "note": "Groth: Andersson skar hart med osthyveln, the three reductions listed exactly as claimed; and \"Ohlmarks later ... sin prunkande stil vaxa over alla bredder\" - quote \"prunkande stil\" verbatim. Raw page fetched direct (gogab.se, 200).",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "794": {
+   "index": 794,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"anglicismspoket, den formodligen mest dodliga faran for en oversattare\"",
+   "note": "Diary entry 21 Jan 2004 stages the anglicism ghost as a wraith rising in the dark (fear rendered as an icy draft, unable to breathe). Riftedal entries 26 Oct 2003 / 18-19 Jan 2004: \"Namnet syns mig helt idealiskt, det later till och med snarlikt det engelska namnet\"; the Swedish-reading limb rests on the diary noting \"rift\" as a Swedish noun of \"riva\" (ramna, spricka) treated in Helsingborgs Dagblad, not on an explicit \"reads as Swedish\" sentence. Raw page fetched direct (tolkien.mbor.se, 200).",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "795": {
+   "index": 795,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"considers what they don't imitate, such as language-building and the interlacing storylines\"",
+   "note": "Blogger Jenna on the afterword: \"I also enjoyed the afterwards of the book, in which Shippey considers Tolkien's imitators but also considers what they don't imitate, such as language-building and the interlacing storylines.\" Claim matches near word-for-word; graded SUBSTANCE only because the claim carries an empty quote field, so there is no quotation to verify verbatim. Raw page fetched direct (fallingletters.ca, 200).",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "796": {
+   "index": 796,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no \"modern writer of fantasy has managed to escape the mark of Tolkien\"",
+   "note": "Wikipedia raw wikitext (action=raw): \"Shippey notes that no 'modern writer of fantasy has managed to escape the mark of Tolkien'.\" in the Afterword paragraph, cited to Shippey 2001 pp. 305-328.",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "797": {
+   "index": 797,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the dogged way in which it follows Tolkien point for point\"",
+   "note": "Wikipedia raw wikitext: Shippey \"writes that the novel is distinctive for 'the dogged way in which it follows Tolkien point for point'\" and located analogues \"such as Sauron (Brona), Gandalf (Allanon), the Hobbits (Shea and Flick)\" - all three named pairs present verbatim.",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "798": {
+   "index": 798,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"wasn't trying to imitate Tolkien's prose, just steal his story line and complete cast\"",
+   "note": "Wikipedia raw wikitext: Carter (1978) \"denounced ... as 'the single most cold-blooded, complete rip-off of another book that I have ever read'\" and further wrote \"Terry Brooks wasn't trying to imitate Tolkien's prose, just steal his story line and complete cast of characters\". Both limbs verbatim.",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "799": {
+   "index": 799,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"undigested Tolkien\" ... \"especially blatant in its point-for-point correspondence\"",
+   "note": "Wikipedia raw wikitext: Attebery \"accused ... of being 'undigested Tolkien' which was 'especially blatant in its point-for-point correspondence'\"; separately ''Choice'' \"stated that the novel was 'exceptionally well-written, very readable'\". Both limbs on the same page.",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "800": {
+   "index": 800,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"I'm a popular fiction writer, that's the way I approached it\"",
+   "note": "Wikipedia raw wikitext: \"He admits that he was very influenced by The Lord of the Rings when writing it, being his first novel\", plus the 2012 interview blockquote \"Tolkien approached it as an academic ... not as popular fiction. I'm a popular fiction writer, that's the way I approached it. ... I was heavily under the influence of Tolkien when I wrote Sword of Shannara\". Graded SUBSTANCE because the claim carries an empty quote field; note the page frames the popular-fiction approach as how he wrote Sword, not as something adopted afterwards.",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "801": {
+   "index": 801,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Choice (July-August 1977) said the book was \\u201cexceptionally well-written, very readable\\u201d\"",
+   "note": "Quote is verbatim on the page. But the page does not say critics focused almost exclusively on plot and world-building parallels rather than prose - it splits them into pro and con camps and several of the cited critics address the writing itself: MacRae \"looked to Brooks' driving prose\", Tymn is listed as positive, and Choice praises the writing. The parallels point is attached only to Schlobin (\"notes the similarities ... as do most reviewers\") and Shippey (\"goes the whole way listing a point-for-point imitation\"). Live URL returned 403 to a plain curl; recovered on route (1), a browser user agent plus Accept/Referer headers, HTTP 200, 107,233 bytes, article by G. W. Thomas dated 2 May 2026.",
+   "unsupportedLimb": "that contemporary critics focused almost exclusively on plot and world-building parallels rather than prose",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "802": {
+   "index": 802,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sword \"talks when it should at least be trying to sing\" ... \"bereft of atmosphere\"",
+   "note": "Fletcher Vredenburgh, Black Gate, 2 Nov 2025: \"Last time around, I wrote Sword 'talks when it should at least be trying to sing,' and I stand by that\" (verbatim, with \"at least\"), and \"a book that talks when it should be trying to sing, a bereft of atmosphere. I think all those things hold true.\" Third limb is composite rather than a single sentence: his own words give the story side (\"a story that tracks so closely to the LotR in so many places\") and the prose side separately (\"it rarely finds any of the fantastical transcendence of Tolkien\"); the explicit story-not-prose contrast appears on the page verbatim only inside the quoted Lin Carter passage.",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "803": {
+   "index": 803,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"he alternates between expository lumps as such, and expository lumps feebly disguised as dialogue\"",
+   "note": "Tom Simon (bondwine.com, 22 January 2007, byline present): quote verbatim; \"726 mind-numbing and turgid pages\"; the summary verdict \"in prose, stilted\"; and \"The names in The Sword of Shannara are uniformly slipshod\". Every limb on the page.",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "804": {
+   "index": 804,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"they would take any substitute, no matter how diluted\"",
+   "note": "The sentence is a block quotation Simon explicitly attributes to Shippey's J.R.R. Tolkien: Author of the Century (\"he recovers his usual perspicacity, and puts his finger on the secret of Terry Brooks's commercial success\"). Del Rey limb: \"del Rey bought the book and skilfully marketed it to the demographic group least likely to turn up its nose at the quality of the writing\", with the young named as that group (\"it was to the young that the Shannara books chiefly appealed\"; \"Some people simply do not notice the badness of the prose ... most common among young readers\").",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "805": {
+   "index": 805,
+   "verdict": "PARTIAL",
+   "trueWording": "\"the dialogue wooden yet lightweight, like a foundation with dry rot\"",
+   "note": "Two limbs confirmed verbatim: \"That passage comprises 83 words, of which 17 are either adjectives or adverbs. That means 21% - one word in five - is a modifier\", and the dialogue-tag section quoting \"\\u201cThat's fine, coming from you,\\u201d Flick blazed up angrily\" against \"the best form of dialogue attribution is \\u201che said, she said\\u201d\". The site is indeed The Big Bad Book Blog. The quoted phrase is on the page but is predicated of the dialogue, not of the prose: \"The plot is thin, the characters stereotypes, and the dialogue wooden yet lightweight\" - a three-item list in which dialogue is the distinct item. The blog's general prose verdict is worded differently (\"Brooks can't (or won't) write a decent line of prose\").",
+   "unsupportedLimb": "that the blog calls the prose 'wooden yet lightweight' - the phrase is predicated of the dialogue, a distinct item in its list",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "806": {
+   "index": 806,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The book is long, the prose is flat, and the characters are dull and forgettable\"",
+   "note": "Dial H For Houston, 18 Nov 2014: quote verbatim; the contrast is explicit - \"Tolkien plotted out histories, wrote songs, hell, made up entire languages when he created Middle Earth. Brooks, on the other hand ... let's look at the map\", then \"You can name one corner of the map after a direction. One. Anything more is just lazy.\"",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "807": {
+   "index": 807,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"to evoke wonder without engaging the mind or emotions\" ... \"to a bare formula\"",
+   "note": "Wikipedia raw wikitext: \"Attebery wrote that it attempted 'to evoke wonder without engaging the mind or emotions', reducing Tolkien's artistry 'to a bare formula'\"; Yolen on Tolkienesque books: \"what began in grace and power easily degenerated into a kind of mythic silliness\", with \"pastel unicorns, coy talking swords, and a paint-by-number medieval setting\" - the claim's quote verbatim.",
+   "fromFile": "verdicts-tolkien-i793-807.json"
+  },
+  "838": {
+   "index": 838,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Collier: 'tolkien's language is left intact in the mouths of the proper characters'; separately 'still highly trained in diction ... while still retaining all subtle differences in accents', and 'subtle varieties in accents, which one also finds in the books'. Every limb on the raw page.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "839": {
+   "index": 839,
+   "verdict": "PARTIAL",
+   "trueWording": "Nighy sings Gil-galad; Le Mesurier sings Bilbo's Last Song",
+   "note": "Verified: 'putting many of the poems and songs to music'; 'William Nighy as Sam singing a part of the fall of Gil-Galad'; 'Douglas Livingstone does a splendid job with Gimli's Khazad-dum poem'. But the page attributes Bilbo's Last Song to John Le Mesurier ('a demo version of John Le Mesurier singing Bilbo's Last Song'); its own sentence names Nighy's second song as 'his song in the tower of Minas Morgul', not Bilbo's Last Song.",
+   "unsupportedLimb": "that Bill Nighy sings Bilbo's Last Song - the page credits John Le Mesurier",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "840": {
+   "index": 840,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Brunstrom: 'the rusticity of Strider remains a leitmotif that interrupts the steady majesty of King Elessar', after 'When you hear him for the first time in the Prancing Pony, he sounds rustic'; and 'His dramatisation keeps as much of Tolkien's dialogue as possible.' Quoted phrase 'remains a leitmotif' word for word.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "841": {
+   "index": 841,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Brunstrom: 'a tendency not to want to work the narrator (Gerard Murphy) too hard, and to attempt to transfer some of the descriptions into dialogue'; 'Sam (Bill Nighy) is rather awkwardly forced to narrate the process of his battle with Shelob in real time.' Quoted phrase present verbatim.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "842": {
+   "index": 842,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "singing the Rohan lay written in its wake, battle dialogue between verses",
+   "note": "Brunstrom: 'The Battle of the Pelennor Fields is developed cleverly by singing the Rohan lay written in its wake and inserting battle dialogue in between its verses.' Claim carries no quote field; 'written afterwards' is the page's 'written in its wake' in other words, hence SUBSTANCE not VERBATIM.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "843": {
+   "index": 843,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Brundige, Appendix A: 'Sibley and Bakewell use Tolkien's words almost exclusively, except for stage directions (e.g. Frodo exclaiming, \"the river is rising!\")'; 'The radio play shuns flashback and the narrator's voice as much as possible.' Both limbs and the quote on the raw page; page label 'Appendix A' correct.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "844": {
+   "index": 844,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Brundige: 'Sibley and Bakewell meticulously combed through Tolkien's narrative of the battle and adapted lines of its description, in meter, with appropriate alliteration ... lines had been added ... which in fact were not originally part of these songs'; the example 'crashed to the ground with the king crushed beneath him' appears verbatim, and narrative there 'is provided by stanzas of the ballad'.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "845": {
+   "index": 845,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Brundige: 'a Faramir whose voice and courtly speech \"show his quality\" as much as his deeds: proof that one can capture Tolkien's larger-than-life heroes faithfully yet have them sound like flesh-and-blood people. Aragorn, too, is both human and hero, his manner of speech altered not a jot.' Quote verbatim.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "846": {
+   "index": 846,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Brundige: 'Language is part of what makes the Lord of the Rings stand out, and radio gives it full wings to fly.' Quoted phrase word for word.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "847": {
+   "index": 847,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Lee PDF (fetched as binary, text extracted with pypdf), footnote 7: Sibley 'used one in 1981 (Gerard Murphy) as it allowed you to \"capture the authorial voice of the book\", convey a sense of place and passing of time, move you across scenes (especially useful when the Fellowship splits up)', cited '(Sibley, 2019)'. Every limb, in footnote 7 as claimed.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "848": {
+   "index": 848,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Roger Edwards: 'Great care was taken with pronunciation of words and the delivery of dialogue spoken in Elvish and the Black Speech.' and 'The characterisations and dialogue were extremely well realised'. Quote verbatim; the fetched page is the 24 Nov post itself, not a snippet.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "849": {
+   "index": 849,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien wanted the threads NOT interwoven but on individual chronology",
+   "note": "Verified on Sibley's blog: 'Gerard Murphy, who gave the series its strong narrative voice'; Christopher Tolkien's help 'included recording an audiocassette of the acceptable pronunciation of Middle-earth words and names'. But the chronology sentence reads: Tolkien 'had been adamant that the two main threads ... should not be interwoven, but should follow their own individual chronology, as they do in the book', which Sibley concluded could not 'be applied to a dramatic presentation'. The page's word is un-interwoven/individual, the opposite of the claim's 'interlaced'.",
+   "unsupportedLimb": "calling the chronology Sibley rejected 'interlaced' - the page says Tolkien insisted the threads NOT be interwoven, each on its own chronology",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "850": {
+   "index": 850,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Wikipedia quotes Tolkien to Tiller, November 1956: 'it requires rather the older art of the reading \"mime\", than the more nearly dramatic, which results in too great an emphasis on dialogue (mostly with its setting removed)'. Quote verbatim; date and addressee both on the page (ref #194 to Terence Tiller, 6 November 1956).",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "851": {
+   "index": 851,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Wikipedia: 'Replying to Rayner Unwin in 1957 ... he wrote: \"I think I should find vulgarization less painful than the sillification achieved by the B.B.C.\"' Quoted word 'sillification' verbatim; year and sense exact (page spells vulgarization with a z).",
+   "fromFile": "verdicts-tolkien-i838-852.json"
+  },
+  "852": {
+   "index": 852,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "first series welcomed, 64/100 by last episode; second compressed, criticised",
+   "note": "Wikipedia: 'audience appreciation had by the last episode reached 64 out of 100 from an initial score of 56'; listeners 'enjoyed the first series, where Tiller had followed Tolkien's advice to make a selection of scenes and cut the rest. They were far more critical of the second series, where Tiller had compressed many scenes, resulting in what a self-described \"Civil Servant\" called \"a footling and ridiculous sounding adventure story\"'. Two caveats short of VERBATIM: 64 is the last-episode score (initial 56), and the footling phrase is one named listener's, quoted by the page as the result of the compression, not a general verdict.",
+   "fromFile": "verdicts-tolkien-i838-852.json"
   }
  },
  "mergedAt": "see autosave.log",

@@ -1,0 +1,39 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i390-404",
+ "lines": 70,
+ "firstTs": "2026-09-06T17:25:24.059Z",
+ "lastTs": "2026-09-06T17:29:14.792Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 18
+ },
+ "urlsFetched": [
+  "https://nerdist.com/article/house-of-the-dragon-leaves-out-fire-and-blood-unreliable-history-game-of-thrones/",
+  "https://collider.com/house-of-the-dragon-fire-and-blood-unreliable-narrator-writer-sara-hess-comments/|collider1.html",
+  "https://collider.com/house-of-dragon-fire-and-blood-mushroom-alternate-history/|collider2.html",
+  "https://tvtropes.org/pmwiki/pmwiki.php/Literature/ArchmaesterGyldaynsHistories|tvtropes.html",
+  "https://awoiaf.westeros.org/index.php/Gyldayn|awoiaf.html",
+  "https://reactormag.com/6-mysteries-to-ponder-when-youve-finished-george-r-r-martins-fire-blood/|react6.html",
+  "https://reactormag.com/the-world-of-ice-and-fire-george-rr-martin-book-review/|react19.html",
+  "https://tvtropes.org/pmwiki/pmwiki.php/Literature/ArchmaesterGyldaynsHistories",
+  "https://awoiaf.westeros.org/index.php/Gyldayn",
+  "https://web.archive.org/web/20260322132616id_/https://tvtropes.org/pmwiki/pmwiki.php/Literature/ArchmaesterGyldaynsHistories",
+  "https://web.archive.org/web/20260801014239id_/https://awoiaf.westeros.org/index.php/Gyldayn",
+  "https://web.archive.org/web/20260322132616id_/...",
+  "https://web.archive.org/web/20260801014239id_/..."
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All 7 URLs reached (two via Wayback after Cloudflare 403). Now writing the checkpoint from the source chunk file directly.",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "a356237e84a48f616",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-a356237e84a48f616.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i390-404.json",
+  "exists": true
+ }
+}

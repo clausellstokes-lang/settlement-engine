@@ -1,0 +1,28 @@
+{
+ "role": "verifier",
+ "name": "kay",
+ "angle": null,
+ "tag": "i0-14",
+ "lines": 51,
+ "firstTs": "2026-09-06T17:25:51.646Z",
+ "lastTs": "2026-09-06T17:29:10.341Z",
+ "tools": {
+  "Read": 2,
+  "ToolSearch": 1,
+  "Bash": 8
+ },
+ "urlsFetched": [
+  "https://brightweavings.com/randallfionavar/",
+  "https://brightweavings.com/presentreality/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "eckpoint written and read back (15 claims, 15 verdicts). Both source pages fetched live at HTTP 200 with a browser user agent and verified against the raw HTML-stripped text — no summarizer, no Wayback route needed, and every one of the 15 supplied quote strings appears exactly once in the raw text.",
+ "run": "wf_ae11ef1d-bb8",
+ "agent": "a45eb0a2dbd3df340",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_ae11ef1d-bb8/agent-a45eb0a2dbd3df340.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i0-14.json",
+  "exists": true
+ }
+}

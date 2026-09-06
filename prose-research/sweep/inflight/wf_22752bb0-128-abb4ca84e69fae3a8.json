@@ -3,13 +3,14 @@
  "name": "hobb",
  "angle": null,
  "tag": "i345-359",
- "lines": 65,
+ "lines": 75,
  "firstTs": "2026-09-06T17:20:45.103Z",
- "lastTs": "2026-09-06T17:23:32.357Z",
+ "lastTs": "2026-09-06T17:25:02.358Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 15
+  "Bash": 16,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore",
@@ -18,13 +19,13 @@
   "https://dc.swosu.edu/mythlore/vol41/iss1/4/"
  ],
  "filesWritten": [],
- "lastAssistantText": "All four sources fetched. Extracting the PDF text.",
+ "lastAssistantText": "chpad/prose-research/sweep/verdicts-hobb-i345-359.json`. All four distinct sources were reached as raw pages (two live elliottrwi.com posts, the Wayback raw PDF capture of the Mythlore article extracted with pypdf, and the dc.swosu.edu abstract landing page); no route failed, so no BLOCKED verdicts.",
  "run": "wf_22752bb0-128",
  "agent": "abb4ca84e69fae3a8",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-abb4ca84e69fae3a8.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i345-359.json",
-  "exists": false
+  "exists": true
  }
 }
