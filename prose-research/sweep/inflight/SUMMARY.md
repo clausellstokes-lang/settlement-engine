@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 17:35:26 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 17:41:30 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -252,7 +252,7 @@
 | hobb | verifier | i491-505 | result | 3 | claims_in.json | verdict file WRITTEN | 19:39:08 |
 | hobb | verifier | i506-520 | result | 3 | — | verdict file WRITTEN | 19:44:45 |
 | hobb | verifier | i521-535 | failed | 7 | — | verdict file absent | 19:45:45 |
-| hobb | verifier | i531-639 | in-flight | 20 | — | verdict file absent | 21:35:18 |
+| hobb | verifier | i531-639 | in-flight | 37 | — | verdict file absent | 21:41:25 |
 | hobb | verifier | i536-550 | failed | 16 | — | verdict file absent | 19:45:33 |
 | hobb | verifier | i551-565 | failed | 13 | — | verdict file absent | 19:45:39 |
 | hobb | verifier | i566-580 | failed | 0 | — | verdict file absent | 19:45:45 |
