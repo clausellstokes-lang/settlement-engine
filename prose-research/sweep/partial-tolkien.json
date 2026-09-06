@@ -70,5 +70,41 @@
    "unsupportedLimb": "'real Oxfordshire places' - Shippey puts Thame in Buckinghamshire, Farthingho in Northamptonshire, and Tamworth as the Mercian capital",
    "fromFile": "verdicts-tolkien-i373-387.json"
   }
+ },
+ {
+  "index": 390,
+  "feature": "narrator evolution to scholarly tone",
+  "claim": "The tale's narrator was 'Daddy' in the oral original, became 'the family jester', and took on a formal scholarly tone when the story was enlarged by half for an academic essay club in 1938.",
+  "source": "Hammond & Scull, 'Farmer Giles of Ham' (Tolkien Estate)",
+  "url": "https://www.tolkienestate.com/writing/farmer-giles-of-ham/",
+  "page": "main text",
+  "quote": "the family jester",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 390,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the narrator took on a formal scholarly tone at the 1938 enlargement — the page dates the mock-scholarly voice to the 1949 revision instead",
+   "trueWording": "For this larger, more academic audience, he added many proper names, jokes, and allusions",
+   "note": "Raw page fetched (200, live). Quote 'the family jester' is verbatim: 'In the second version of the story, the narrator is \"the family jester\"'. Supported: narrated by 'Daddy' in the first version; 'enlarging it by some fifty per cent' in January 1938 for the Lovelace Society, 'an undergraduate essay club at Oxford's Worcester College'. NOT supported: any narratorial shift to scholarly tone at that 1938 stage — the page says the 1938 additions were 'proper names, jokes, and allusions', and places the apparatus later: 'Tolkien again revised the text, and added a mock foreword' before the 1949 publication. Second minor slip: 'Daddy' narrates the first written version, not the oral original.",
+   "fromFile": "verdicts-tolkien-i388-402.json"
+  }
+ },
+ {
+  "index": 400,
+  "feature": "native word plus Latin hedge",
+  "claim": "The Prologue says 'pipe-weed' rather than tobacco because the imported word would sound wrong, and hedges its botany with a Latin binomial instead.",
+  "source": "Tom Shippey, The Road to Middle-earth",
+  "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+  "page": "pipe-weed passage (ch. 3)",
+  "quote": "a variety probably of Nicotiana",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 400,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'a Latin binomial' — the page shows only the genus name, Tolkien's hedge 'a variety probably of Nicotiana', which is a uninomial, not a binomial",
+   "trueWording": "Why not say 'tobacco', since the plant is 'a variety probably of Nicotiana'? Because the word would sound wrong",
+   "note": "Same raw book text, ch. 3 'The Bourgeois Burglar', around the p. 63-64 running heads. Quote 'a variety probably of Nicotiana' verbatim, and the pipe-weed-not-tobacco reason is verbatim ('Because the word would sound wrong ... It is an import from some unknown Caribbean language via Spanish'). The only defective limb is the botanical label: a binomial needs genus plus species, and neither Shippey nor the Prologue supplies one.",
+   "fromFile": "verdicts-tolkien-i388-402.json"
+  }
  }
 ]
