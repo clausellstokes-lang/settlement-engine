@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 12,
+ "indices": [
+  553,
+  554,
+  555,
+  556,
+  557,
+  558,
+  559,
+  560,
+  561,
+  562,
+  563,
+  564,
+  565,
+  566,
+  567
+ ],
+ "claims": [
+  {
+   "index": 553,
+   "feature": "pleasure in articulate sound",
+   "claim": "Pleasure in articulate sound and its symbolic use is independent of communication though entangled with it, and must never be forgotten in language-making.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "pleasure in articulate sound",
+   "page": ""
+  },
+  {
+   "index": 554,
+   "feature": "language breeds mythology",
+   "claim": "An invented language with individual flavour must have a mythology woven into it, and conversely language construction will breed a mythology — names and tongue come first, the world grows to fit.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "your language construction will breed a mythology",
+   "page": ""
+  },
+  {
+   "index": 555,
+   "feature": "word-form in relation to meaning",
+   "claim": "Tolkien's chief interest is word-form in itself and word-form in relation to meaning, the so-called phonetic fitness.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "word-form in relation to meaning",
+   "page": ""
+  },
+  {
+   "index": 556,
+   "feature": "verse as the test of an invented language",
+   "claim": "The final fruition of an invented language is verse, which both expresses and fixes the maker's personal taste in sound.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "this final fruition: verse",
+   "page": ""
+  },
+  {
+   "index": 557,
+   "feature": "word-music consciously weighed",
+   "claim": "In modern poetry word-form is seldom consciously marked and its effects are miscalled 'authentic magic'; Tolkien wants sound-pattern deliberately constructed to give pleasure.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "the word-form is seldom consciously marked",
+   "page": ""
+  },
+  {
+   "index": 558,
+   "feature": "beauty of word-form (Greek, Finnish, Welsh)",
+   "claim": "Word-form even unassociated with notions can give a perception of beauty; Greek, Finnish and Welsh are named as languages with characteristically beautiful word-form.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "capable of giving pleasure - a perception of beauty",
+   "page": ""
+  },
+  {
+   "index": 559,
+   "feature": "association of form and sense (cellar door)",
+   "claim": "'Cellar door' is beautiful dissociated from its sense, and the higher pleasure lies in words where form and sense associate — a phonaesthetic test the prose can be held to.",
+   "source": "Tolkien Gateway, 'Cellar door' (quoting 'English and Welsh')",
+   "url": "https://tolkiengateway.net/wiki/Cellar_door",
+   "quote": "the association of form and sense",
+   "page": ""
+  },
+  {
+   "index": 560,
+   "feature": "inherent linguistic predilections",
+   "claim": "Linguistic taste is partly inborn (the 'native tongue' as distinct from the cradle-tongue), so a writer's phonaesthetic choices express inherent predilections rather than fashion.",
+   "source": "Anna Smol, 'Tolkien's cellar door' (quoting 'English and Welsh' pp.190-1)",
+   "url": "https://annasmol.net/2019/04/13/tolkiens-cellar-door/",
+   "quote": "inherent linguistic predilections",
+   "page": ""
+  },
+  {
+   "index": 561,
+   "feature": "illusion of historical truth and perspective",
+   "claim": "The illusion of historical truth and perspective in Beowulf is largely a product of art — an instinctive historical sense used with a poetical, not historical, object.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics' (full text PDF)",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "largely a product of art",
+   "page": ""
+  },
+  {
+   "index": 562,
+   "feature": "impression of depth (darker background)",
+   "claim": "The impression of depth is the effect and justification of episodes and allusions to old tales that are darker and more desperate than the foreground — the background must be grimmer than the story.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "mostly darker, more pagan, and desperate than the foreground",
+   "page": ""
+  },
+  {
+   "index": 563,
+   "feature": "tower allegory (sources are for building)",
+   "claim": "Old stones (sources) exist to build the tower from whose top one sees the sea; the work is art, not a quarry, and its sources must not be dug for at the tower's expense.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "look out upon the sea",
+   "page": ""
+  },
+  {
+   "index": 564,
+   "feature": "balance of ends and beginnings",
+   "claim": "The poem's structure is a balance, an opposition of ends and beginnings (youth against age), not a steadily advancing narrative.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "an opposition of ends and beginnings",
+   "page": ""
+  },
+  {
+   "index": 565,
+   "feature": "masonry not music (line and structure)",
+   "claim": "Old English lines are founded on a balance of two opposed halves, more like masonry than music, and the whole is a composition not a tune.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "more like masonry than music",
+   "page": ""
+  },
+  {
+   "index": 566,
+   "feature": "heroic-elegiac mode",
+   "claim": "Beowulf is not an epic but an heroic-elegiac poem whose first 3,136 lines are the prelude to a dirge — the elegiac is the governing tone.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "the prelude to a dirge",
+   "page": ""
+  },
+  {
+   "index": 567,
+   "feature": "late, antiquarian voice (echo of an echo)",
+   "claim": "The poem is late not primitive: its maker told of things already old and weighted with regret, producing sorrows both poignant and remote.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "an echo of an echo",
+   "page": ""
+  }
+ ]
+}

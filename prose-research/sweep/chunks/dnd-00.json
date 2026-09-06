@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 0,
+ "indices": [
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59,
+  60,
+  61,
+  62,
+  63
+ ],
+ "claims": [
+  {
+   "index": 49,
+   "feature": "house style guide (existence and scope)",
+   "claim": "A written WotC house style guide exists — 'D&D Style Guide: Writing and Editing' v1.04a (©2013), built on Chicago 16 and Merriam-Webster 11 — and it governs typography, numerals, verb collocations, capitalization and tone, with no rule at all on boxed/read-aloud text.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "D&D Style Guide: Writing and Editing",
+   "page": "v1.04a PDF, p.1"
+  },
+  {
+   "index": 50,
+   "feature": "house style guide (revision v1.08a)",
+   "claim": "A later revision, v1.08a (©2018, circulated as 'updated January 2019'), keeps the same structure (Chicago 17 now) and adds headings hierarchy, sidebar, gender-suffix, 'fellowship vs party' and edition-naming rules; it still contains nothing on boxed text or read-aloud prose.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.08a (©2018, 'updated January 2019'; PDF mirror)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Avoid overusing sidebars.",
+   "page": "v1.08a PDF, pp.1-4"
+  },
+  {
+   "index": 51,
+   "feature": "house style guide (public release window)",
+   "claim": "The style guide was released publicly on DMs Guild around October 2018 as one of four free PDFs (IP guide, adventure guide, style guide, Forgotten Realms guide) that had previously gone only to official-play writers.",
+   "source": "EN World — DMsGuild: D&D Style-Guides give a unique insight into the game (thread, 2018-11-25)",
+   "url": "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/",
+   "quote": "",
+   "page": "thread page 1"
+  },
+  {
+   "index": 52,
+   "feature": "house style guide (public release window)",
+   "claim": "On 2019-02-22 the DMs Guild account announced an updated House Style Guide listing for creators, noting it adds tips on gender-neutral language.",
+   "source": "D&D Sage Advice (sageadvice.eu) — 'Creators: Style Guide is now on DMsGuild!' (@dms_guild, 2019-02-22)",
+   "url": "https://www.sageadvice.eu/style-guide-is-now-on-dmsguild-creators/",
+   "quote": "An updated #DnD House Style Guide is now on #DMsGuild",
+   "page": "archived tweet"
+  },
+  {
+   "index": 53,
+   "feature": "house style guide (availability lapsed)",
+   "claim": "The Kind GM's post on the creator resource carries a May 2020 commenter report that the material was no longer available, which the author acknowledged — so the public window was roughly 2018–2020.",
+   "source": "The Kind GM — DMs Guild Style Guide Resources (2018-10-24)",
+   "url": "https://thekindgm.com/2018/10/24/dmsguild-style-guide-resources/",
+   "quote": "",
+   "page": "post + comments"
+  },
+  {
+   "index": 54,
+   "feature": "house style guide (community says none published)",
+   "claim": "Community writers on either side of that window report no official guide: Half-Cover (2017) says WotC 'has not yet published the official style guide', Old Dungeon Master (2015) compiled one from 3.5/4e guides ('Perhaps they have one and I just couldn't find it'), and Blog of Holding (2025) says of the 2024 rules 'it annoys me not to have an official style guide'.",
+   "source": "Half-Cover — How to Follow the Writing Style of D&D (Michael, 2017-09-02)",
+   "url": "https://half-cover.com/blogs/find-the-path/importance-following-writing-style-dd-manuals/",
+   "quote": "has not yet published the official style guide",
+   "page": "blog post"
+  },
+  {
+   "index": 55,
+   "feature": "house style guide (community says none published, 2024 rules)",
+   "claim": "Paul Hughes built an unofficial 2024 style guide because no official one for the 2024 rules is available to the public.",
+   "source": "Blog of Holding — Unofficial D&D 2024 Style Guide (Paul Hughes, 2025-01-07)",
+   "url": "https://www.blogofholding.com/?p=8463",
+   "quote": "it annoys me not to have an official style guide",
+   "page": "blog post"
+  },
+  {
+   "index": 56,
+   "feature": "house style guide (freelancer distribution)",
+   "claim": "Work-for-hire WotC freelancers receive the D&D House Style Guide, the 5e Word template, pitch examples and lore documents at contract start, and drafts are formatted with them.",
+   "source": "POCGamer — What happened? Writing for Wizards, Part 1 (Graeme Barber, 2021-03-23)",
+   "url": "https://pocgamer.com/archives/1426",
+   "quote": "",
+   "page": "blog post"
+  },
+  {
+   "index": 57,
+   "feature": "house style guide (organized-play distribution)",
+   "claim": "The official Adventurers League Dungeoncraft guide tells authors they must use the provided template and 'formatting standards as presented in the template' and be familiar with the D&D Style Guide, which it says is also provided.",
+   "source": "Wizards of the Coast — D&D Adventurers League Dungeoncraft Design Guide: The Wild Beyond the Witchlight, v1.2 (media.wizards.com)",
+   "url": "https://media.wizards.com/2021/dnd/downloads/Dungeoncraft_Wild_Beyond_the_Witchlight_v1.2.pdf",
+   "quote": "You should be familiar with the D&D Style Guide",
+   "page": "PDF p.1, Technical Information"
+  },
+  {
+   "index": 58,
+   "feature": "house style guide (organized-play distribution)",
+   "claim": "The 2023 Dungeoncraft Design Guide (effective 2023-11-09) again requires a specific template and familiarity with the D&D Style Guide; a poster frames this as organized play needing 'more guiderails than your usual table does'.",
+   "source": "EN World — D&D Adventurers League Unveils New DungeonCraft Document with Planescape In Focus (Raddu, 2023-11)",
+   "url": "https://www.enworld.org/threads/d-d-adventurers-league-unveils-new-dungeoncraft-document-with-planescape-in-focus.700991/",
+   "quote": "more guiderails than your usual table does",
+   "page": "article + thread"
+  },
+  {
+   "index": 59,
+   "feature": "house style guide (third-party use)",
+   "claim": "Kobold Press ran a 'Designing with Style' series that explicitly 'breaks down the official 5th-edition style guide', quoting its Common Pitfalls section verbatim — evidence the guide was public and treated as canonical by third-party 5e designers.",
+   "source": "Kobold Press — Designing with Style: Ability Checks and Saving Throws (Hannah Rose, 2019-05-31)",
+   "url": "https://koboldpress.com/designing-with-style-ability-checks-and-saving-throws/",
+   "quote": "breaks down the official 5th-edition style guide",
+   "page": "blog post"
+  },
+  {
+   "index": 60,
+   "feature": "second person in rules text",
+   "claim": "The guide's stated reason for second person in rules text is gender neutrality: 'In rules text, we often achieve gender neutrality by writing in the second person.'",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "writing in the second person",
+   "page": "v1.04a p.2, Gender"
+  },
+  {
+   "index": 61,
+   "feature": "singular they (2013 vs 2018 policy)",
+   "claim": "v1.04a forbids 'they'/'their' as singular pronouns except in dialogue; v1.08a reverses this 'in a departure from our past usage' but tells writers to rely on it only when no pleasing alternative exists.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.08a (©2018, 'updated January 2019'; PDF mirror)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "but don't abuse this liberty",
+   "page": "v1.08a p.2, Gender"
+  },
+  {
+   "index": 62,
+   "feature": "verb–object collocations",
+   "claim": "The guide fixes the game's verb idiom in a list: you cast a spell, deal damage, make a saving throw that succeeds or fails, make an attack that hits or misses, take damage, regain hit points, score a critical hit, use a feature.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "You make a saving throw, and it succeeds or fails",
+   "page": "v1.04a p.6, Verb Usage"
+  },
+  {
+   "index": 63,
+   "feature": "'must succeed on' vs 'must make'",
+   "claim": "Common Pitfalls: never write 'must make a DC 15 Strength check' unless success and failure are described next; the canonical form is 'must succeed on'.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "You must succeed on a DC 15 Strength check",
+   "page": "v1.04a p.6, Common Pitfalls"
+  }
+ ]
+}

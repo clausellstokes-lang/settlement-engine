@@ -1,0 +1,68 @@
+{
+ "name": "tolkien",
+ "chunk": 17,
+ "indices": [
+  628,
+  629,
+  630,
+  631,
+  632,
+  633
+ ],
+ "claims": [
+  {
+   "index": 628,
+   "feature": "mythology woven into a language",
+   "claim": "To give a language individual flavour it must have woven into it the threads of an individual mythology.",
+   "source": "Tolkien Estate, Carl Hostetter, 'Tolkien's Invented Languages'",
+   "url": "https://www.tolkienestate.com/scholarship/carl-hostetter-tolkiens-invented-languages/",
+   "quote": "the threads of an individual mythology",
+   "page": ""
+  },
+  {
+   "index": 629,
+   "feature": "tongue and tale coeval",
+   "claim": "The incarnate mind, the tongue and the tale are coeval; sub-creation is a birthright because we make as we are made.",
+   "source": "Tolkien Estate, Verlyn Flieger, 'On Fairy Stories'",
+   "url": "https://www.tolkienestate.com/scholarship/verlyn-flieger-on-fairy-stories/",
+   "quote": "We make, because we are made",
+   "page": ""
+  },
+  {
+   "index": 630,
+   "feature": "deliberate stylistic variation",
+   "claim": "The Lord of the Rings shows far more deliberate stylistic variation than any other novel, with sixty poems and songs in many styles and several languages.",
+   "source": "Tolkien Estate, Tom Shippey, 'The Lord of the Rings, Book of the Century'",
+   "url": "https://www.tolkienestate.com/writing/tom-shippey-the-lord-of-the-rings-book-of-the-century/",
+   "quote": "far more deliberate stylistic variation",
+   "page": ""
+  },
+  {
+   "index": 631,
+   "feature": "consistent per-character speech (secondary)",
+   "claim": "A reader's essay argues Elrond's age is implied by archaic word order and that each character's speech stays consistent throughout, conveying culture and rank.",
+   "source": "K.G., 'To Make a Soul: Tolkien and Variations of Speech' (tolkienmedievalandmodern blog)",
+   "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/to-make-soul-tolkien-and-variations-of.html",
+   "quote": "Elrond's age and sagacity implied through archaic word order",
+   "page": ""
+  },
+  {
+   "index": 632,
+   "feature": "NEGATION: nursery-room prose charge",
+   "claim": "Moorcock holds that high fantasy's prose is the prose of the nursery-room, a lullaby meant to soothe, and that this is the predominant tone of The Lord of the Rings — the direct counter to Tolkien's claim to have shed the children's manner.",
+   "source": "Michael Moorcock, 'Epic Pooh' (1978; revolutionsf copy via Wayback)",
+   "url": "http://www.revolutionsf.com/article.php?id=953",
+   "quote": "the prose of the nursery-room",
+   "page": ""
+  },
+  {
+   "index": 633,
+   "feature": "NEGATION rebutted",
+   "claim": "Bratman and Williams reject Moorcock's reading of the prose as out of context and uninformed.",
+   "source": "Wikipedia, 'Epic Pooh'",
+   "url": "https://en.wikipedia.org/wiki/Epic_Pooh",
+   "quote": "one wonders what book Moorcock read",
+   "page": ""
+  }
+ ]
+}

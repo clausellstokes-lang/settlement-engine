@@ -3262,6 +3262,2182 @@
    "page": "The Lords Of The Rings, Chapter By Chapter: The Grey Havens",
    "quote": "Well, I'm back",
    "angle": "close"
+  },
+  {
+   "feature": "mock-editorial foreword",
+   "claim": "Tolkien's Foreword to Farmer Giles poses as the editor and translator of an ancient legend of the Little Kingdom, so the tale opens in the voice of a scholarly apparatus rather than a storyteller.",
+   "source": "Hammond & Scull, 'Farmer Giles of Ham' (Tolkien Estate)",
+   "url": "https://www.tolkienestate.com/writing/farmer-giles-of-ham/",
+   "page": "main text",
+   "quote": "pretends to be the editor and translator of an ancient legend",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "pseudotranslation from Latin",
+   "claim": "The Foreword declares the tale a translation from 'very insular Latin' of a compilation of old legends, establishing false provenance before any narrative begins.",
+   "source": "Wikipedia, 'Farmer Giles of Ham'",
+   "url": "https://en.wikipedia.org/wiki/Farmer_Giles_of_Ham",
+   "page": "§ Pseudo-translation from Latin",
+   "quote": "very insular Latin",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "Latin honorific title-string",
+   "claim": "The full Latin subtitle stacks offices and titles chancery-style (Lord of Tame, Count of Worminghall, King of the Little Kingdom), presaging the Latin-based jokes throughout.",
+   "source": "Wikipedia, 'Farmer Giles of Ham'",
+   "url": "https://en.wikipedia.org/wiki/Farmer_Giles_of_Ham",
+   "page": "§ Pseudo-translation from Latin",
+   "quote": "Count of Worminghall and King of the Little Kingdom",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "solemn source-criticism",
+   "claim": "The Foreword solemnly discusses the document's nature (a late compilation from popular lays), its author (a local inhabitant writing long after the events, shown by his geographical knowledge) and the kingdom's boundaries in time and place, in the manner of a medieval-text editor's preface.",
+   "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+   "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+   "page": "ch. VII, essay 3",
+   "quote": "Solemnly he discusses the nature of the document",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "dating by legendary chronology",
+   "claim": "The Foreword fixes the Little Kingdom's date by placement within Geoffrey of Monmouth's chronology of Britain's partitions after Brutus and before Arthur, rather than by a number.",
+   "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+   "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+   "page": "ch. VII, essay 3",
+   "quote": "for a chronology of the many divisions within the island",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "scholar's pious-hope formula",
+   "claim": "Tolkien-as-translator voices the stock scholarly hope that the document will throw light on a dark period of history and on the origin of difficult place-names.",
+   "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+   "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+   "page": "ch. VII, essay 3",
+   "quote": "the usual pious hope of the scholar",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "compiler's nostalgic preamble",
+   "claim": "The fictional compiler opens by looking back to a simpler past when there was more time, folk were fewer and villages were proud and independent, so the record voice is itself retrospective.",
+   "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+   "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+   "page": "ch. VII, essay 3",
+   "quote": "villages were proud and independent still in those days",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "dictionary definition as in-world citation",
+   "claim": "When the record needs to say what a blunderbuss is, the compiler refers the question to the Four Wise Clerks of Oxenford, whose reply reproduces the Oxford English Dictionary definition word for word, embedding a modern reference-work register inside the chronicle.",
+   "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+   "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+   "page": "ch. VII, essay 3",
+   "quote": "corresponds word for word with the definition",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "irony turned on the cited authority",
+   "claim": "The narrator catches the OED's parenthesis about the blunderbuss being superseded 'in civilized countries' and remarks that Ham was not yet civilized enough for other weapons, turning the joke against the authorities cited.",
+   "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+   "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+   "page": "ch. VII, essay 3",
+   "quote": "rather turns the joke against the Dictionary editors",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "false etymology as afterword",
+   "claim": "The tale closes with mock-learned derivations of Thame and Worminghall attributed to 'the learned in such matters', so place-name philology is the record's final word.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "pp. 90–91",
+   "quote": "Thame with an h is a folly without warrant",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "editor criticising imagined author",
+   "claim": "Farmer Giles carries a two-layer apparatus in one short foreword: an imagined editor faults an imagined author's geography, though that author 'lived himself in the lands of the Little Kingdom'.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "p. 90",
+   "quote": "the imagined 'editor' of Farmer Giles to criticise its imagined 'author'",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "parochial precision of scale",
+   "claim": "Distances and directions in the tale map onto real Oxfordshire places (Ham/Thame, Tamworth, Farthingho, the Rollright Stones) at a parochial scale, so the Little Kingdom is measured like a real county.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "p. 90",
+   "quote": "proof of the 'Little Kingdom's' lack of territorial ambition",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "vernacular over Book-latin",
+   "claim": "The story's triumph of native over foreign is marked linguistically: in Giles's court the vulgar tongue came into fashion and none of his speeches were in Book-latin.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "p. 90",
+   "quote": "the vulgar tongue came into fashion",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "linguistic humour as engine",
+   "claim": "Throughout Farmer Giles linguistic humour is paramount, from Sunny Sam's gloomy proverbs and his misprision of the names Hilarius and Felix to Giles's own native errors of grammar.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "p. 90",
+   "quote": "linguistic humour is paramount",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "Farthings from Farthingho",
+   "claim": "The Shire's Farthings descend from Farthingho in the Little Kingdom, and Thame and Worminghall are a long step beyond The Hobbit's bare 'The Hill' and 'The Water' toward the 600-plus named persons and places of The Lord of the Rings.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "p. 91",
+   "quote": "Farthingho set Tolkien thinking about the Farthings",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "chronicle dating by feast days",
+   "claim": "The Farmer Giles chronicle fixes its events by the church calendar (St Nicholas' Day, Christmas Eve, 14 January) inside a legendary span 'between Brutus and King Arthur'.",
+   "source": "Noah Huisman, 'On Farmer Giles' (The Lumenorean)",
+   "url": "https://noahhuisman.substack.com/p/on-farmer-giles",
+   "page": "main text",
+   "quote": "",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "parody of its own Prologue",
+   "claim": "Farmer Giles's pose as a translated manuscript with commentary on its origins and dubious place-name etymology parodies scholarly works including the Prologue to Tolkien's own Lord of the Rings, mocking the medieval appeal to authority.",
+   "source": "eNotes, 'Farmer Giles of Ham Analysis'",
+   "url": "https://www.enotes.com/topics/farmer-giles/in-depth",
+   "page": "Style and Technique",
+   "quote": "parody of scholarly works, including the prologue",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "narrator evolution to scholarly tone",
+   "claim": "The tale's narrator was 'Daddy' in the oral original, became 'the family jester', and took on a formal scholarly tone when the story was enlarged by half for an academic essay club in 1938.",
+   "source": "Hammond & Scull, 'Farmer Giles of Ham' (Tolkien Estate)",
+   "url": "https://www.tolkienestate.com/writing/farmer-giles-of-ham/",
+   "page": "main text",
+   "quote": "the family jester",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "apparatus as late overlay",
+   "claim": "By its 1949 publication the children's tale had acquired the mock-scholarly foreword, so the record register was a deliberate late addition rather than the story's native voice.",
+   "source": "Philip Irving Mitchell, 'Farmer Giles of Ham: Comedy in Faërie?' (DBU)",
+   "url": "https://www.dbu.edu/mitchell/tolkien-medieval-tradition-resources/giles.html",
+   "page": "main text",
+   "quote": "had acquired the mock-scholarly forward",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "Middle Kingdom as Mercia calque",
+   "claim": "Shippey identifies the Middle Kingdom of Farmer Giles with early Mercia, its capital possibly Tamworth, so the record's geography is a calque on real English history.",
+   "source": "Wikipedia, 'Farmer Giles of Ham'",
+   "url": "https://en.wikipedia.org/wiki/Farmer_Giles_of_Ham",
+   "page": "§ Quasi-realistic geographical setting",
+   "quote": "based on early Mercia",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "ethnographic pre-text",
+   "claim": "Kullmann finds the Prologue imitates the non-fictional prose of nineteenth- and early-twentieth-century ethnography, while the Note on the Shire Records mimics works of historiography.",
+   "source": "Wikipedia, 'Editorial framing of The Lord of the Rings' (citing Kullmann & Siepmann 2021, pp. 46–47)",
+   "url": "https://en.wikipedia.org/wiki/Editorial_framing_of_The_Lord_of_the_Rings",
+   "page": "§ Multiple elements",
+   "quote": "non-fictional prose of nineteenth- and early twentieth-century ethnography",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "antiquarian mode signal",
+   "claim": "'Concerning Hobbits' places the text in the stylistic mode of nineteenth-century English antiquarianism, like a treatise on regional folklore, signalling to the reader a departure from modern novelistic conventions.",
+   "source": "John Halbrooks, 'Tolkienian Style' (Substack, 13 Mar 2024)",
+   "url": "https://johnhalbrooks.substack.com/p/tolkienian-style",
+   "page": "main text",
+   "quote": "a certain strain of nineteenth-century English antiquarianism",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "register modulation by circumstance",
+   "claim": "Halbrooks argues Tolkien's greatest strength is that he very carefully adjusts his prose style and even his generic conventions according to the narrative circumstances.",
+   "source": "John Halbrooks, 'Tolkienian Style' (Substack, 13 Mar 2024)",
+   "url": "https://johnhalbrooks.substack.com/p/tolkienian-style",
+   "page": "main text",
+   "quote": "he very carefully adjusts his prose style",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "Shire calqued on England",
+   "claim": "The Shire is 'calqued' on England element by element: three founding tribes, a forgotten origin, founding brothers with horse-names, and a 272-year peace between battles matching the 270 years since Sedgemoor.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "pp. 92–93",
+   "quote": "the Shire is 'calqued' on England",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "offices as idealised English institutions",
+   "claim": "Organisationally the Shire, with its mayors, musters, moots and Shirriffs, is an old-fashioned and idealised England.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "p. 93",
+   "quote": "mayors, musters, moots and Shirriffs",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "names as one-to-one labels",
+   "claim": "Modern names are perceived as labels isomorphic with reality, so a dense name-stock weighs fantasy down with repeated implicit assurances that the things labelled exist; this is strongest in the Shire's map, account and history.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "p. 92",
+   "quote": "repeated implicit assurances of the existence of the things",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "characters talk like maps",
+   "claim": "Speakers in The Lord of the Rings have a strong tendency to talk like historical maps, reeling off names and river courses, a habit shared by Aragorn, Celeborn, Gimli, Gandalf and Meriadoc.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "p. 91",
+   "quote": "talk like maps, historical ones at that",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "native word plus Latin hedge",
+   "claim": "The Prologue says 'pipe-weed' rather than tobacco because the imported word would sound wrong, and hedges its botany with a Latin binomial instead.",
+   "source": "Tom Shippey, The Road to Middle-earth",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "page": "pipe-weed passage (ch. 3)",
+   "quote": "a variety probably of Nicotiana",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "in-world bibliography",
+   "claim": "The Note on the Shire Records credits Meriadoc with a Herblore of the Shire, a Reckoning of Years comparing calendars, and a treatise on Old Words and Names, so the record cites fictional reference works by title.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), quoting the Note",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "page": "§1.7, pp. 11–12",
+   "quote": "Old Words and Names in the Shire",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "speech converted to record",
+   "claim": "'Concerning Pipe-weed' began as a lengthy speech by Merry in a draft of 'The Road to Isengard' that was removed and reworked into the Prologue, so dialogue was converted into record.",
+   "source": "Tolkien Gateway, 'Prologue (The Lord of the Rings)'",
+   "url": "https://tolkiengateway.net/wiki/Prologue_(The_Lord_of_the_Rings)",
+   "page": "§ History of composition",
+   "quote": "a lengthy speech of Merry about pipe-weed",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "record trimmed for length",
+   "claim": "A planned Prologue section on hobbit gift-giving customs and the ribadyan (birthday celebrant) was dropped as too lengthy.",
+   "source": "Tolkien Gateway, 'Prologue (The Lord of the Rings)'",
+   "url": "https://tolkiengateway.net/wiki/Prologue_(The_Lord_of_the_Rings)",
+   "page": "§ History of composition",
+   "quote": "being too lengthy",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "offices defined by what they actually do",
+   "claim": "The Prologue describes each office by its real function rather than its title: the Thain's office is largely ceremonial, the Mayor of Michel Delving is in practice Mayor of the Shire, and the Shirriffs' chief duty is rounding up stray livestock.",
+   "source": "Wikipedia, 'The Shire'",
+   "url": "https://en.wikipedia.org/wiki/The_Shire",
+   "page": "§ Government",
+   "quote": "rounding up stray livestock",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "upheaval registered as headcount",
+   "claim": "The record marks the War of the Ring by a quantitative index, the rising number of Bounders, described as one of the few signs the hobbits had of the troubled time.",
+   "source": "Wikipedia, 'The Shire'",
+   "url": "https://en.wikipedia.org/wiki/The_Shire",
+   "page": "§ Government",
+   "quote": "one of the few signs for the hobbits",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "calendar arithmetic",
+   "claim": "The Shire calendar is specified arithmetically: twelve months of thirty days plus five extra days, seven-day weeks, with Shire year 1 fixed to the founding in Third Age 1601.",
+   "source": "Wikipedia, 'The Shire'",
+   "url": "https://en.wikipedia.org/wiki/The_Shire",
+   "page": "§ Calendar",
+   "quote": "",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "institution defined then hollowed",
+   "claim": "The Prologue defines the Thain by three institutions (Shire-moot, Shire-muster, Hobbitry-in-arms) and then hollows the office by noting that moots and musters had almost ceased to exist.",
+   "source": "A Tolkienist's Perspective, 'The Shire's Military Structure?'",
+   "url": "https://atolkienistperspective.wordpress.com/2014/08/10/the-shires-military-structure/",
+   "page": "main text",
+   "quote": "had almost ceased to exist",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "Prologue as anthropology",
+   "claim": "The Prologue is a richly textured anthropology of the hobbits, delivered in an editorial voice of scholarly distance, and notes that hobbits liked books that set out what they already knew fair and square with no contradictions.",
+   "source": "Thomas J. West III, 'Tolkien Tuesdays: Re-Reading The Lord of the Rings: Prologue'",
+   "url": "https://omnivorous.substack.com/p/tolkien-tuesdays-re-reading-the-lord",
+   "page": "main text",
+   "quote": "a richly-textured anthropology about the hobbits",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "Tolkien's persona inside the Prologue",
+   "claim": "In the Note on the Shire Records, as in the Prologue generally, Tolkien speaks in his own authorial persona as compiler and translator, stating that the account 'is drawn mainly from the Red Book' and that The Hobbit was 'already published'.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018)",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "page": "§1.8, p. 12",
+   "quote": "speaking in his own authorial (hobbit) persona",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "editorial device absorbs revision",
+   "claim": "Rather than silently changing The Hobbit's Gollum episode, Tolkien folded the revision into the record: the Red Book's first version rests on Bilbo's false account and later copies on the corrected one.",
+   "source": "CliffsNotes, 'Maps, Prologue, and Note on Shire Records'",
+   "url": "https://www.cliffsnotes.com/literature/l/the-lord-of-the-rings/summary-and-analysis-the-fellowship-of-the-ring/maps-prologue-and-note-on-shire-records",
+   "page": "Analysis",
+   "quote": "incorporated the revisions directly into the story",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "Prologue's realism function",
+   "claim": "The Prologue's rich historical detail and the convention of editing and translating a prior record ground the fantastic elements in realism and help the reader suspend disbelief.",
+   "source": "CliffsNotes, 'Maps, Prologue, and Note on Shire Records'",
+   "url": "https://www.cliffsnotes.com/literature/l/the-lord-of-the-rings/summary-and-analysis-the-fellowship-of-the-ring/maps-prologue-and-note-on-shire-records",
+   "page": "Analysis",
+   "quote": "the feeling of rich historical detail",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "ethnography in the Stukeley/Percy line",
+   "claim": "The Prologue's imitation of ethnography, comparable to eighteenth-century antiquarians such as William Stukeley and Thomas Percy, uses non-fiction techniques to make Middle-earth feel objectively real as well as subjectively experienced.",
+   "source": "Wikipedia, 'Storytelling in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+   "page": "§ Points of view",
+   "quote": "",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "transmission chain with dates",
+   "claim": "The Note traces the Red Book through dated copies (the Thain's Book, IV 64; Findegil's exact copy, IV 172) and records the Minas Tirith annotations and corrections 'especially of names, words and quotations', a stemma written as prose.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), quoting the Note",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "page": "§1.7, pp. 11–12",
+   "quote": "Findegil, King's Writer, finished this work in IV 172",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "dual-era dating",
+   "claim": "Every stage of the Red Book's fictional transmission carries two datings, an Age-date and a Shire-reckoning equivalent, so the records cross-reference two calendars.",
+   "source": "Alexander Schmitt, 'Stages and Logic of the fictitious tradition of Tolkien's Legendarium' (schematax.org, 2021)",
+   "url": "https://www.schematax.org/schemata/tolkien/schematax_tolkien_tradition-legendarium.pdf",
+   "page": "pp. 1–3",
+   "quote": "IV 172 / S.R. 1592",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "conjectural dates flagged",
+   "claim": "The Note states that the Tale of Years' dates are often conjectural, especially for the Second Age, so the record marks the limits of its own precision.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), quoting the Note",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "page": "§1.7, p. 12",
+   "quote": "the dates given are often conjectural",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "library provenance of sources",
+   "claim": "The Note localises its sources to specific libraries: Brandy Hall for Eriador and Rohan, Great Smials for Gondorian copies and summaries and as the place where the Tale of Years was put together.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), quoting the Note",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "page": "§1.7, p. 12",
+   "quote": "the libraries at Bucklebury and Tuckborough",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "final transmitter/redactor",
+   "claim": "Flieger holds that Tolkien inserted his own name on the title-page not as author but as the final transmitter/redactor, last in a line of transmitters, translators, redactors, scribes and copyists.",
+   "source": "Will Sherwood, 'Tolkien and the Age of Forgery', JTR 11.1 (2020), citing Flieger 2012",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4/",
+   "page": "p. 18",
+   "quote": "transmitters, translators, redactors, scribes, and copyists",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "antiquarian verbs on the title page",
+   "claim": "The Red Book's title-page vocabulary of 'compiled', 'observations', 'accounts' and 'translated' gives it the antiquarian air of Percy's Reliques, Macpherson's translations and Chatterton's Antiquities.",
+   "source": "Will Sherwood, 'Tolkien and the Age of Forgery', JTR 11.1 (2020)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4/",
+   "page": "p. 23",
+   "quote": "'compiled', 'observations', 'accounts' and 'translated'",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "many-hands effect of age",
+   "claim": "The Red Book's history of interwoven, identifiable source-traditions and voices produces the effect of age and lends the text antiquarian authenticity.",
+   "source": "Will Sherwood, 'Tolkien and the Age of Forgery', JTR 11.1 (2020), citing Painter 2016",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4/",
+   "page": "p. 24",
+   "quote": "produce the effect of age",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "forger's paratext kit",
+   "claim": "The antiquarian forger's toolkit that Groom lists for Chatterton (calligraphy, manuscripts, maps, heraldry, prefaces, footnotes, appendices, glossaries) is the same kit Tolkien uses to immerse readers in Arda.",
+   "source": "Will Sherwood, 'Tolkien and the Age of Forgery', JTR 11.1 (2020), citing Groom 2014",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4/",
+   "page": "p. 18",
+   "quote": "prefaces, footnotes, appendices, and glossaries",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "spurious source by scholarly mystique",
+   "claim": "Richard C. West calls the Red Book a spurious source whose authority appeals not to the old and familiar but to the modern mystique of scholarly research.",
+   "source": "Wikipedia, 'Red Book of Westmarch'",
+   "url": "https://en.wikipedia.org/wiki/Red_Book_of_Westmarch",
+   "page": "§ Analysis",
+   "quote": "the modern mystique of scholarly research",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "found-manuscript lineage",
+   "claim": "Kristin Thompson identifies the Red Book as a found-manuscript conceit in the line running back to Samuel Richardson's eighteenth-century novels.",
+   "source": "Wikipedia, 'Red Book of Westmarch'",
+   "url": "https://en.wikipedia.org/wiki/Red_Book_of_Westmarch",
+   "page": "§ Analysis",
+   "quote": "found manuscript conceit",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "four levels of presentation",
+   "claim": "Flieger describes The Lord of the Rings as presented at four levels at once: the story itself, a version referencing other versions, a historical artifact (the Red Book), and a modern edition complete with scholarly and critical apparatus.",
+   "source": "Wikipedia, 'Interrupted Music'",
+   "url": "https://en.wikipedia.org/wiki/Interrupted_Music",
+   "page": "§ Part 2",
+   "quote": "complete with scholarly and critical apparatus",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "credible book tradition",
+   "claim": "Tolkien went to elaborate lengths to construct a credible book tradition, with repeated mentions of Bilbo's diary, his Translations from the Elvish, and masses of notes in his room at Rivendell.",
+   "source": "Wikipedia, 'Tolkien's frame stories' (citing Flieger)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_frame_stories",
+   "page": "§ Red Book of Westmarch",
+   "quote": "credible book tradition",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "fragile vs embedded frame",
+   "claim": "Flieger finds The Hobbit's frame rather fragile because its narrator often speaks in a voice that cannot be Bilbo's, whereas The Lord of the Rings has the frame carefully embedded from the earliest drafts.",
+   "source": "Wikipedia, 'Tolkien's frame stories' (citing Flieger)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_frame_stories",
+   "page": "§ The Hobbit and The Lord of the Rings",
+   "quote": "rather fragile",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "annalistic headings and editor footnotes",
+   "claim": "Appendix A's Kings of the Mark section uses annalistic headings, dates recording great events, and later editor's footnotes (such as identifying Holdwine as Meriadoc), giving the look of authentic historical documentation.",
+   "source": "Wikipedia, 'Tolkien's frame stories'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_frame_stories",
+   "page": "§ Paratexts",
+   "quote": "",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "cornerstone of mature work",
+   "claim": "Brljak argues that the pseudo-editorial, pseudo-philological and pseudo-translational framework is both the cornerstone and crowning achievement of Tolkien's mature literary work, modelled on the impression of depth he admired in Beowulf.",
+   "source": "Wikipedia, 'Editorial framing of The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Editorial_framing_of_The_Lord_of_the_Rings",
+   "page": "§ An external editorial frame",
+   "quote": "pseudo-editorial, pseudo-philological, and pseudo-translational",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "two-level frame",
+   "claim": "Turner notes the frame works at two levels at once, treating the world of the story as historical fact while creating for the reader the illusion of a direct link through time and space.",
+   "source": "Wikipedia, 'Editorial framing of The Lord of the Rings' (citing Turner)",
+   "url": "https://en.wikipedia.org/wiki/Editorial_framing_of_The_Lord_of_the_Rings",
+   "page": "§ Multiple levels",
+   "quote": "the world of the story as historical fact",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "frame permits contrasting styles",
+   "claim": "Pezzini argues the meta-textual frame lets Tolkien write in contrasting styles, alternating between high and low, and to dignify the humble while writing in the low style.",
+   "source": "Bradley Birzer, 'How Did Tolkien Write Great Books?' (Law & Liberty, reviewing Pezzini)",
+   "url": "https://lawliberty.org/book-review/how-did-tolkien-write-great-books/",
+   "page": "main text",
+   "quote": "alternating between high and low, transcendent and earthy",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "authorial mosaic and remembering formulas",
+   "claim": "Pezzini describes the Red Book as an authorial mosaic (Bilbo, Frodo, Sam as last hand) stitched into the narration by 'remembering formulas' such as 'Pippin afterwards recalled little' and by reportorial scenes where separated hobbits recount what they witnessed.",
+   "source": "Erik Jampa Andersson, 'The Red Book: Giuseppe Pezzini on Tolkien's Meta-Textual Frame' (Substack, lecture notes)",
+   "url": "https://erikjampa.substack.com/p/the-red-book-giuseppe-pezzini-on",
+   "page": "main text",
+   "quote": "Pippin afterwards recalled little",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "translator's neologism policy",
+   "claim": "The translator persona of Appendix F would rather change the English language and coin new words than deliver a substandard translation, so consistency of rendering governs the whole record.",
+   "source": "N. Lurquin, 'Translating the Red Book of Westmarch' (Tolkien: Medieval and Modern blog)",
+   "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/translating-red-book-of-westmarch.html",
+   "page": "main text",
+   "quote": "rather change the English language and make new words",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "antiquarian aesthetics and improved forgery",
+   "claim": "Groom places Tolkien in the English antiquarian line of Swift, Chatterton and Stukeley as one who enlists the aesthetics of antiquarianism, and Sherwood reads the non-narrative elements as Tolkien improving on antiquarian forgery to create modern fantasy's conventions.",
+   "source": "Wikipedia, 'Tolkien and antiquarianism'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien_and_antiquarianism",
+   "page": "§ Tolkien in the English antiquarian tradition",
+   "quote": "enlists the aesthetics of antiquarianism",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "heraldry in plain English",
+   "claim": "Tolkien describes heraldic devices for characters and nations in simple English rather than technical blazon, keeping the record's technical matter in ordinary diction.",
+   "source": "Wikipedia, 'Tolkien and antiquarianism'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien_and_antiquarianism",
+   "page": "§ Heraldry",
+   "quote": "",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "Appendix F rationale for register layering",
+   "claim": "In Appendix F the translator explains that Westron is rendered as English to preserve the contrast between a widespread language and the living remains of far older and more reverend tongues, with the analogy that calling Rivendell Imladris would be like speaking of Winchester as Camelot.",
+   "source": "Wikipedia, 'Pseudotranslation in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Pseudotranslation_in_The_Lord_of_the_Rings",
+   "page": "§ Implementation",
+   "quote": "far older and more reverend tongues",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "fiction/reality blur",
+   "claim": "Turner observes that Tolkien's Winchester/Camelot analogy further blurs the already confused distinction between fiction and reality that the pseudotranslation sets up.",
+   "source": "Wikipedia, 'Pseudotranslation in The Lord of the Rings' (citing Turner)",
+   "url": "https://en.wikipedia.org/wiki/Pseudotranslation_in_The_Lord_of_the_Rings",
+   "page": "§ Complex implications",
+   "quote": "further blurs the already confused distinction",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "typographic key to provenance",
+   "claim": "Appendix A opens with a key to its own apparatus: actual extracts from longer annals and tales are placed within quotation marks, later insertions in brackets, notes within quotation marks come from the sources and others are editorial.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), n. 35 quoting Appendix A",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "page": "n. 35, p. 12",
+   "quote": "Insertions of later date are enclosed in brackets",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "narrative formulas imply hobbit or Gondorian authorship",
+   "claim": "Formulas such as 'before we came to the Shire' imply parts of the Appendices are written by hobbits, while 'as we have learned from the King' points to Gondor and the scribe Findegil, so the annal's first person shifts with its source.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018)",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "page": "n. 35, p. 12",
+   "quote": "as we have learned from the King",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "record announces its own abridgement",
+   "claim": "Appendix A declares that only selections from its sources, in most places much abridged, are presented, so the annal frames itself as an epitome of fuller documents.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), n. 34 quoting Appendix A",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "page": "n. 34, p. 12",
+   "quote": "in most places much abridged",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "scribal glosses harmonise the frame",
+   "claim": "The appendices are full of scribal glosses, later notes and editorial references deliberately matched to the textual history in the Note on the Shire Records, so the frame is realised by formal features rather than asserted.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018)",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "page": "§1.7, p. 11",
+   "quote": "full of scribal glosses, later notes, and editorial references",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "ancient annals with scribal footnotes",
+   "claim": "Turner describes the prologue and appendices as an elaborate apparatus containing genealogies and ancient annals complete with scribal footnotes and editorial comments, even a discussion 'On Translation'.",
+   "source": "Wikipedia, 'Literary devices in The Lord of the Rings' (citing Turner 2011)",
+   "url": "https://en.wikipedia.org/wiki/Literary_devices_in_The_Lord_of_the_Rings",
+   "page": "§ Pseudotranslation and editorial framing",
+   "quote": "",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "quotation marks as sole source-marker",
+   "claim": "Passages of Appendix A translated from Fourth-Age hobbit or Gondorian writers are marked only by surrounding quotation marks, expecting the reader to recall the Prologue's discussion of sources.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "page": "main text",
+   "quote": "only marked by surrounding quotation marks",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "hedged suggestion idiom",
+   "claim": "Some quoted passages in Appendix A let Tolkien suggest things without committing to them, in the chronicle idiom 'some say he dwells there still'.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "page": "main text",
+   "quote": "some say he dwells there still",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "annals versus year-list split",
+   "claim": "Appendix A's narrative annals and Appendix B's year-list divide one history so that a reader loses orientation in A and finds B redundant, wanting something more like A and B combined.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "page": "main text",
+   "quote": "something more like A & B combined",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "year-lists with brief narrative islands",
+   "claim": "Appendix B primarily contains timelines (lists of years) for the Second, Third and Fourth Ages with only a few brief narrative sections, such as the account of the Wizards.",
+   "source": "Tolkien Gateway, 'Appendix B'",
+   "url": "https://tolkiengateway.net/wiki/Appendix_B",
+   "page": "main text",
+   "quote": "a few brief narrative sections",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "compiler's calendar",
+   "claim": "The Fourth-Age section of the Tale of Years gives its dates in Shire-reckoning and follows primarily what happened to the hobbits, so the calendar and focus track the compiler's own community.",
+   "source": "Tolkien Gateway, 'Appendix B'",
+   "url": "https://tolkiengateway.net/wiki/Appendix_B",
+   "page": "§ Synopsis",
+   "quote": "dates are given in the Shire-reckoning",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "annal definition and gaps",
+   "claim": "Annals are lists of years or spans with brief summaries, and Tolkien's Second Age annals have significant gaps, a single entry covering the years 2000 to 3000.",
+   "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+   "page": "p. 8",
+   "quote": "lists of years or spans with brief summaries",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "record declares its own scarcity",
+   "claim": "Appendix B's Second Age opens by declaring that of events in Middle-earth the records are few and brief and their dates often uncertain, so the annalist states the limits of his sources before listing them.",
+   "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022), quoting Appendix B",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+   "page": "p. 7",
+   "quote": "the records are few and brief",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "annals versus Tales as two modes",
+   "claim": "Tolkien told Waldman that the Rings of Power and the Downfall of Númenor were dealt with annalistically and in two Tales or Accounts, naming a two-mode scheme of compressed annal and expanded tale.",
+   "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022), quoting Letter 131",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+   "page": "p. 8",
+   "quote": "dealt with annalistically, and in two Tales or Accounts",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "Anglo-Saxon Chronicle model",
+   "claim": "Tolkien's annals are modelled on the Anglo-Saxon Chronicle, with entries opening 'Here' or 'In this year', and his Old English versions use the early West Saxon dialect of the Chronicle's earliest parts.",
+   "source": "Himring, 'Fingon's rescue of Maedhros in Old English' (Silmarillion Writers' Guild)",
+   "url": "https://www.silmarillionwritersguild.org/node/1854/single?page=0",
+   "page": "notes",
+   "quote": "early West Saxon (second half of the ninth century)",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "annalistic compression",
+   "claim": "The Silmarillion uses a compressed style in which events are briefly documented as if in annals recording history and legend, with minimal dialogue, which makes it feel more distant and difficult.",
+   "source": "Wikipedia, 'Tolkien's prose style'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "page": "§ The Silmarillion",
+   "quote": "as if in annals recording history and legend",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "varying styles as a depth factor",
+   "claim": "Drout, Hitotsubashi and Scavera identify four factors behind the impression of depth, the fourth being different texts written in varying styles as if by different hands.",
+   "source": "Wikipedia, 'Literary devices in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Literary_devices_in_The_Lord_of_the_Rings",
+   "page": "§ Impression of depth",
+   "quote": "Different texts written in varying styles",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "multiple-manuscripts device",
+   "claim": "Sipahi highlights the Prologue's device of multiple manuscripts, redactions and translations of the Red Book as the framework that establishes authenticity, while Brooke-Rose dismissed the genealogies and histories as unnecessary to the narrative.",
+   "source": "Wikipedia, 'Impression of depth in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "page": "§ Factors; § Reception",
+   "quote": "",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "history true or feigned",
+   "claim": "Bowman shows Tolkien blurring the line between story and history in the Appendices, following his stated preference for history, true or feigned.",
+   "source": "Wikipedia, 'The Tale of Aragorn and Arwen'",
+   "url": "https://en.wikipedia.org/wiki/The_Tale_of_Aragorn_and_Arwen",
+   "page": "§ History, true or feigned",
+   "quote": "history, true or feigned",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "record names its own scribes",
+   "claim": "The Tale of Aragorn and Arwen is attributed within the frame to Barahir, grandson of Faramir, writing after Aragorn's death, with an abbreviated version entered in the Thain's Book by Findegil.",
+   "source": "Wikipedia, 'The Tale of Aragorn and Arwen'",
+   "url": "https://en.wikipedia.org/wiki/The_Tale_of_Aragorn_and_Arwen",
+   "page": "§ Frame story",
+   "quote": "written after Aragorn's death by Barahir",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "embedded first-person witnesses in annals",
+   "claim": "Barkley argues the main part of the Tale is narrated by Aragorn and Armstrong considers Arwen as narrator after his death, so the annal admits embedded first-person witnesses within an editorial frame.",
+   "source": "Wikipedia, 'The Tale of Aragorn and Arwen'",
+   "url": "https://en.wikipedia.org/wiki/The_Tale_of_Aragorn_and_Arwen",
+   "page": "§ Analysis",
+   "quote": "narrated by Aragorn",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "historian's narrative style",
+   "claim": "Appendix A reads like a real history because its narrative style is that of a historian summarising primary documents rather than a novelist.",
+   "source": "Tolkien Geek, 'Appendix A (Part One)'",
+   "url": "https://tolkiengeek.blogspot.com/2006/02/appendix-part-one.html",
+   "page": "main text",
+   "quote": "reads like a real history",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "appendices as guidebook",
+   "claim": "The Appendices function as a guidebook to the relics of Middle-earth's history and, in Tolkien's own words quoted by Gray, played a very large part in readers' pleasure.",
+   "source": "Richard Gray, 'The Read Goes Ever On: Appendices' (The Reel Bits)",
+   "url": "https://thereelbits.com/2021/11/25/the-read-goes-ever-on-appendices/",
+   "page": "main text",
+   "quote": "a guidebook to those relics",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "modern words in nineteenth-century structures",
+   "claim": "Siepmann's corpus comparison finds Tolkien uses roughly twice the nineteenth-century key words of his baseline and sets modern words inside nineteenth-century structural patterns so that common English words are rendered strange.",
+   "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23/",
+   "page": "pp. 3–4",
+   "quote": "common English words are rendered strange",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "per-character registers",
+   "claim": "Kullmann's character-by-character stylistics finds Gandalf and Frodo the most flexible registers, Sam the most evolving, Gimli and Legolas the most traditional, and Merry and Pippin speaking common English as reality-based touchstones.",
+   "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23/",
+   "page": "p. 8",
+   "quote": "reality-based touchstones",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "names generate story",
+   "claim": "Shippey reports Tolkien's working rule that one should always start with a name, because a name produces a story, which underlies the place-name etymologies that open and close his civic records.",
+   "source": "Tom Shippey, 'J.R.R. Tolkien and Philology' (Tolkien Estate)",
+   "url": "https://www.tolkienestate.com/scholarship/tom-shippey-j-r-r-tolkien-and-philology/",
+   "page": "main text",
+   "quote": "Give me a name and it produces a story",
+   "angle": "civic-record"
+  },
+  {
+   "feature": "register modulation / narrator intrusion",
+   "claim": "The fox's thoughts in Fellowship ch. 3 are a failure of tone, an intrusive narrator jarring the reader after ch. 2's seriousness.",
+   "source": "Michael Drout, Wormtalk, 'How to Critique Tolkien's Prose Style' (2007-04-12)",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "moving us back towards the intrusive narrator of The Hobbit",
+   "angle": "primaries"
+  },
+  {
+   "feature": "ornamental vs functional archaism",
+   "claim": "'thrawn' is decorative archaism, whereas eyot, laving, louver and dwimmerlaik are precise technical words with a function.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "merely an ornamental archaism",
+   "angle": "primaries"
+  },
+  {
+   "feature": "landscape-description density",
+   "claim": "Drout estimates that over half the novel is landscape description and asks whether fewer words would have been as effective.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "",
+   "angle": "primaries"
+  },
+  {
+   "feature": "apo koinou syntax",
+   "claim": "A phrase like 'speeding along with little hope of stopping or turning' attaches two ways at once, forcing the reader into small re-parsings of the sentence.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "tiny re-constructions of sentence meaning",
+   "angle": "primaries"
+  },
+  {
+   "feature": "deliberate repetition as myth-making",
+   "claim": "The rain-as-grey-curtain image is justified by its recurrence across the book rather than by novelty, producing a mythic feel.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "The recurrent image of the rain as a curtain is significant",
+   "angle": "primaries"
+  },
+  {
+   "feature": "critical method",
+   "claim": "Hand-waving about undefined 'depth' is worthless; a real critique of Tolkien's prose must be specific and detailed at the sentence level.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "useless as criticism",
+   "angle": "primaries"
+  },
+  {
+   "feature": "lexical depth by literary reference",
+   "claim": "Tolkien's rare words (eyot, laving, louver, ninnyhammer, dwimmerlaik) are precise terms that link back through literary reference to earlier works.",
+   "source": "Drout, Wormtalk, 'Children of Húrin or, Tolkien: The Scholars and the Critics' (2007-04-08)",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-or-tolkien-scholars.html",
+   "quote": "precise technical terms",
+   "angle": "primaries"
+  },
+  {
+   "feature": "syntactic archaism as allusion",
+   "claim": "The inverted imperative 'Come not between the Nazgûl and his prey' invokes larger literary contexts through traditional referentiality.",
+   "source": "Drout, Wormtalk 2007-04-08",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-or-tolkien-scholars.html",
+   "quote": "makes use of traditional referentiality",
+   "angle": "primaries"
+  },
+  {
+   "feature": "modernist misreading of surface",
+   "claim": "The prose is not shallow; the depths it references are simply not the ones the modernist critic knows.",
+   "source": "Drout, Wormtalk 2007-04-08",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-or-tolkien-scholars.html",
+   "quote": "not the depths that the critic knows",
+   "angle": "primaries"
+  },
+  {
+   "feature": "annalistic vs novelistic voice",
+   "claim": "The Children of Húrin is a hybrid between the historic/annalistic style of The Silmarillion and the novelistic style of The Lord of the Rings.",
+   "source": "Drout, Wormtalk, 'The Children of Húrin Review' (2007-04-17)",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-review-below-contains.html",
+   "quote": "historic/annalistic style of The Silmarillion",
+   "angle": "primaries"
+  },
+  {
+   "feature": "mythopoeic bricolage",
+   "claim": "Reusing annals, key turns of phrase and stock tableaux from Tolkien's own earlier texts makes the writing feel like inherited myth rather than invention.",
+   "source": "Drout, Wormtalk 2007-04-17",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-review-below-contains.html",
+   "quote": "bricolage of previously existing texts",
+   "angle": "primaries"
+  },
+  {
+   "feature": "sentence-level criticism (gap)",
+   "claim": "The biggest failing in Tolkien criticism is the absence of discussion of his sentence-level writing, word choice and syntax.",
+   "source": "Drout & Wynne, Envoi 9.2 (2000), p. 123",
+   "url": "https://ora.ox.ac.uk/objects/uuid:f0131cce-4e2e-4ac6-9d86-5bd7df17ed40/files/rsx61dm627",
+   "quote": "his sentence-level writing, his word choice and syntax",
+   "angle": "primaries"
+  },
+  {
+   "feature": "shifting voice / archaism / diction",
+   "claim": "Shippey's Author of the Century addresses head-on the archaism, diction and shifting voice that characterise The Lord of the Rings.",
+   "source": "Drout & Wynne, Envoi 9.2 (2000), p. 123",
+   "url": "https://ora.ox.ac.uk/objects/uuid:f0131cce-4e2e-4ac6-9d86-5bd7df17ed40/files/rsx61dm627",
+   "quote": "the issues of archaism, diction, and shifting voice",
+   "angle": "primaries"
+  },
+  {
+   "feature": "per-speaker register (Gaffer baseline)",
+   "claim": "Inside Gandalf's monologue at the Council of Elrond, Gaffer Gamgee's speech ('changes for the worst', 'abide') functions as the base-line of ordinary, semantically empty modern talk.",
+   "source": "Tom Shippey, The Road to Middle-earth, pp. 107–8",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "a kind of base-line of normality",
+   "angle": "primaries"
+  },
+  {
+   "feature": "per-speaker register (political voice)",
+   "claim": "Saruman's habit of balancing phrases so incompatibles are resolved, and his empty words 'deploring', 'ultimate', 'real', mark him by style and lexis as a politician.",
+   "source": "Shippey, The Road to Middle-earth, p. 108",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "Saruman talks like a politician",
+   "angle": "primaries"
+  },
+  {
+   "feature": "archaic syntax (Elrond)",
+   "claim": "Elrond's Council speech is full of old-fashioned syntactic inversions and words like weregild, esquire, shards, suited to his age.",
+   "source": "Shippey, The Road to Middle-earth, p. 109",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "full of old-fashioned inversions of syntax",
+   "angle": "primaries"
+  },
+  {
+   "feature": "authenticating archaism (Gandalf, Isildur)",
+   "claim": "Gandalf uses an older vocabulary than usual at the Council, and Isildur's scroll combines ancient words and endings ('glede', 'fadeth', 'loseth') with Gollum-like phrasing.",
+   "source": "Shippey, The Road to Middle-earth, pp. 109–10",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "as if to authenticate himself",
+   "angle": "primaries"
+  },
+  {
+   "feature": "per-speaker register (Aragorn vs Boromir)",
+   "claim": "Aragorn's language is deceptively modern and easy-going but wider in range than Boromir's stiff magniloquence, and the contrast carries their rivalry.",
+   "source": "Shippey, The Road to Middle-earth, p. 110",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "Boromir's slightly wooden magniloquence",
+   "angle": "primaries"
+  },
+  {
+   "feature": "dwarvish understatement",
+   "claim": "Dwarf dialogues (Dáin and Sauron's messenger, Elrond and Gimli, Théoden) delight in cool polite surface over passionate interior, so 'not too long' means 'extremely rapidly'.",
+   "source": "Shippey, The Road to Middle-earth, p. 110",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "passionate interior and polite or rational expression",
+   "angle": "primaries"
+  },
+  {
+   "feature": "language variation as ethical dramatisation",
+   "claim": "Stylistic variation between speakers is Tolkien's thorough and economical way of dramatising ethical debate.",
+   "source": "Shippey, The Road to Middle-earth, p. 111",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "a thorough and economical way of dramatising ethical debate",
+   "angle": "primaries"
+  },
+  {
+   "feature": "whole book as stylistic contrast",
+   "claim": "The whole of The Lord of the Rings works on its larger scale like the Council of Elrond, depending on relished stylistic variation and separate tableaux more than on plot.",
+   "source": "Shippey, The Road to Middle-earth, p. 111",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "the relishing of stylistic variation",
+   "angle": "primaries"
+  },
+  {
+   "feature": "loose semantic fit",
+   "claim": "Tolkien deliberately emulates Malory's medieval tolerance of semantically loose phrasing ('by stock or by stone', echoing Pearl), which puzzles readers trained on modern exactness.",
+   "source": "Shippey, The Road to Middle-earth, pp. 160–1",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "His emulation of 'loose semantic fit'",
+   "angle": "primaries"
+  },
+  {
+   "feature": "register rise in elvish speech",
+   "claim": "Galadriel's farewell to Treebeard suddenly shifts to less plain language with an elvish place-name, against Treebeard's triple 'feel ... feel ... smell'.",
+   "source": "Shippey, The Road to Middle-earth, p. 161",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "sudden change to less plain language",
+   "angle": "primaries"
+  },
+  {
+   "feature": "archaic effect without archaic words",
+   "claim": "In an exchange containing no archaic word except perhaps 'naught', a strong archaic effect is produced by inverting nouns and adjectives and by adverbs of time such as 'yet' and 'seldom'.",
+   "source": "Shippey, The Road to Middle-earth (chapter on style, 'hovering between styles')",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "by inversion of nouns and adjectives",
+   "angle": "primaries"
+  },
+  {
+   "feature": "modern rewrite would ring false",
+   "claim": "Tolkien could have written the same exchange in modern English, but the discrepancy between modern usage and archaic thought would have sounded bogus, a disunion of word and meaning.",
+   "source": "Shippey, The Road to Middle-earth",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "would simply have sounded bogus",
+   "angle": "primaries"
+  },
+  {
+   "feature": "overworked cadence (hostile)",
+   "claim": "Manlove condemns the Treebeard/Galadriel farewell for over-worked cadences and a droning monotonous pitch offering only sentimental indulgence or embarrassment.",
+   "source": "C. N. Manlove, Modern Fantasy (1975), quoted verbatim in Shippey, Road to Middle-earth p. 160 (Google Books confirms 'overworked' on p. 188 of the 2020 edition)",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "The overworked cadences, the droning, monotonous pitch",
+   "angle": "primaries"
+  },
+  {
+   "feature": "elegiac register (hostile comparison)",
+   "claim": "Manlove sets Ector's lament in Malory and the Ubi sunt of The Wanderer against Tolkien's farewell as real elegy with something to be elegiac about.",
+   "source": "Manlove 1975, quoted in Shippey, Road to Middle-earth p. 160",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "This is real elegy",
+   "angle": "primaries"
+  },
+  {
+   "feature": "'not literature' verdict (hostile)",
+   "claim": "Raffel grants The Lord of the Rings magnificence but denies it the status of literature, on grounds including style.",
+   "source": "Burton Raffel 1968, p. 218, as quoted in Kullmann & Siepmann, Tolkien as a Literary Artist, Introduction n. 11",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_1",
+   "quote": "is not literature",
+   "angle": "primaries"
+  },
+  {
+   "feature": "professorial amateurishness (hostile)",
+   "claim": "Edmund Wilson judged Tolkien's prose and verse to be on the same level of professorial amateurishness.",
+   "source": "Edmund Wilson 1956, as quoted in Siepmann, 'Tolkien as a stylist' (CL2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "the same level of professorial amateurishness",
+   "angle": "primaries"
+  },
+  {
+   "feature": "ordinary yet dignified diction",
+   "claim": "Siepmann characterises Kirk's 1971 essay as praise of Tolkien's ordinary yet dignified diction, against Wilson's scorn.",
+   "source": "Elizabeth Kirk 1971 (1977 reprint), as characterised in Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "Tolkien's ordinary yet dignified diction",
+   "angle": "primaries"
+  },
+  {
+   "feature": "unironic high style",
+   "claim": "Anthony Lane observed that Tolkien's high style had hardly been used without irony since Tennyson's Idylls, so reverting to it in the 1950s challenged modernity head-on.",
+   "source": "Anthony Lane 2001, as quoted in Patrick Curry, 'The Critical Response to Tolkien's Fiction'",
+   "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+   "quote": "Hardly anyone had used it unironically since Tennyson",
+   "angle": "primaries"
+  },
+  {
+   "feature": "archaic 'high' style as taste barrier",
+   "claim": "Curry concedes Tolkien's tone is sometimes sentimental and that the occasional archaic and high style will never suit some readers.",
+   "source": "Patrick Curry, 'The Critical Response to Tolkien's Fiction' (Companion ch. 25)",
+   "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+   "quote": "its occasional archaic and 'high' style",
+   "angle": "primaries"
+  },
+  {
+   "feature": "dismissal of prose style (hostile)",
+   "claim": "Jenny Turner's 2001 LRB essay dismisses Tolkien's prose style in passing without analysis.",
+   "source": "Jenny Turner 2001, as reported in Curry, 'The Critical Response to Tolkien's Fiction'",
+   "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+   "quote": "dreadful prose style",
+   "angle": "primaries"
+  },
+  {
+   "feature": "three lexical causes of archaicity",
+   "claim": "The reader's impression of archaicity comes partly from over-use of nineteenth-century fiction words, avoidance of modern-world words, and dense coinages, unusual grammar and rare or obsolescent words.",
+   "source": "Dirk Siepmann, 'Tolkien as a stylist: a corpus-based investigation into The Lord of the Rings' (CL2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "three simple lexical causes",
+   "angle": "primaries"
+  },
+  {
+   "feature": "nineteenth-century keyword sets",
+   "claim": "Keywords shared with nineteenth-century novels cluster in landscape, position/direction (whither, thither, thence, yonder, afar), warfare, and descriptive verbs/adjectives, many obsolete when Tolkien wrote.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "so many of the keywords used to describe its settings",
+   "angle": "primaries"
+  },
+  {
+   "feature": "Beowulf-translation diction",
+   "claim": "Tolkien borrows words such as valour, valiant and corslet from his Beowulf translation and stretches them beyond their Old and Middle English range.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "Tolkien borrows a host of words from his translation of Beowulf",
+   "angle": "primaries"
+  },
+  {
+   "feature": "modern words in old grammatical patterns",
+   "claim": "Even core modern words are used in nineteenth-century patterns, e.g. 'a black smoke' with the indefinite article, rare in modern fiction.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "tends to use many of these words in nineteenth-century patterns",
+   "angle": "primaries"
+  },
+  {
+   "feature": "descriptive verbs (modernist streak)",
+   "claim": "Tolkien follows a modernist tendency in his abundant manner-laden verbs: clutch, cower, flicker, gleam, glimmer, loom, peer, plod, stride, twist.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "abundant use of descriptive verbs",
+   "angle": "primaries"
+  },
+  {
+   "feature": "Tolkien-exclusive keywords",
+   "claim": "Words key only to Tolkien (dingle, fen, glades, starless, lore-masters, wolf-riders, yesteryear, yuledays, along/among/outwards) are rare but not archaic and together create otherworldliness.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "an atmosphere of medievalism or otherworldliness",
+   "angle": "primaries"
+  },
+  {
+   "feature": "homely collocation and hyperbole",
+   "claim": "Tolkien prefers the most homely collocations available yet uses everyday adjectives like 'great' in unusual pairings, and his key semantic domains (speed, size, loudness) point to hyperbole.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "a marked preference for the most homely collocations available",
+   "angle": "primaries"
+  },
+  {
+   "feature": "linguistic postmodernism",
+   "claim": "Far from amateurish, the prose deploys several centuries of linguistic development, putting old words to new uses and vice versa.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "he is a linguistic postmodernist",
+   "angle": "primaries"
+  },
+  {
+   "feature": "dependence on the nineteenth-century novel",
+   "claim": "Keyword, n-gram and collocation methods show the style of The Lord of the Rings relies heavily on nineteenth-century novels and on Tolkien's Beowulf translation.",
+   "source": "Kullmann & Siepmann, 'Tolkien as a Stylist: Key Words and Key Collocations' (2021), ch. 2",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_2",
+   "quote": "relies heavily on the nineteenth-century novel",
+   "angle": "primaries"
+  },
+  {
+   "feature": "collocational subtlety",
+   "claim": "The full subtlety of Tolkien's collocations has escaped both casual readers and literary critics.",
+   "source": "Kullmann & Siepmann 2021, ch. 2",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_2",
+   "quote": "escaped both the casual reader's and the literary critic's notice",
+   "angle": "primaries"
+  },
+  {
+   "feature": "hobbit focalisation in ordinary language",
+   "claim": "The third-person narrator presents the point of view of a group of characters, usually hobbits, recorded in ordinary language.",
+   "source": "Kullmann & Siepmann 2021, ch. 4 'Points of View'",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "usually hobbits",
+   "angle": "primaries"
+  },
+  {
+   "feature": "archaic diction for epic characters",
+   "claim": "Other passages carry an archaic diction reminiscent of ancient epic and Macpherson's Ossian, conveying an omniscient point of view tied to epic characters like Aragorn.",
+   "source": "Kullmann & Siepmann 2021, ch. 4",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "archaic diction, reminiscent of ancient epic poetry",
+   "angle": "primaries"
+  },
+  {
+   "feature": "nineteenth-century focalisation practice",
+   "claim": "Limiting point of view to certain characters' perceptions, thoughts and feelings follows nineteenth-century novelistic practice.",
+   "source": "Kullmann & Siepmann 2021, ch. 4",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "follows nineteenth-century novelistic practice",
+   "angle": "primaries"
+  },
+  {
+   "feature": "self-effacing narrator",
+   "claim": "Thomas calls the narrator of The Lord of the Rings self-effacing, unintrusive and vanishing, and counts ten different viewpoints in the opening chapter.",
+   "source": "Paul Edmund Thomas, 'Some of Tolkien's Narrators' (2000), as quoted in Kullmann & Siepmann 2021, ch. 4",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "ten different viewpoints",
+   "angle": "primaries"
+  },
+  {
+   "feature": "intrusive-to-self-effacing arc",
+   "claim": "The Hobbit opens with a very intrusive narrator who recedes as the book grows serious; by The Lord of the Rings the narrator is impartial and multi-viewpoint, measured on Wayne Booth's scale.",
+   "source": "Thomas 2000, as summarised in kate_nepveu's reading notes",
+   "url": "https://kate-nepveu.livejournal.com/181350.html",
+   "quote": "impartial and self-effacing",
+   "angle": "primaries"
+  },
+  {
+   "feature": "discourse juxtaposition in The Hobbit",
+   "claim": "In The Hobbit fairy-tale and epic discourses are set against everyday speech through irony and parody.",
+   "source": "Thomas Kullmann, 'Intertextual Patterns in J.R.R. Tolkien's The Hobbit and The Lord of the Rings', NJES 8(2) 2009 (abstract via Semantic Scholar API)",
+   "url": "https://api.semanticscholar.org/graph/v1/paper/ef4bbee7b8993086ff7315388bece6038fa6241d?fields=title,abstract,year,venue,openAccessPdf,externalIds",
+   "quote": "juxtaposed with everyday speech through irony and parody",
+   "angle": "primaries"
+  },
+  {
+   "feature": "realism plus archaic rhetoric",
+   "claim": "In The Lord of the Rings nineteenth-century circumstantial realism and pathetic fallacy combine with archaic rhetorical patterns.",
+   "source": "Kullmann 2009 (abstract)",
+   "url": "https://api.semanticscholar.org/graph/v1/paper/ef4bbee7b8993086ff7315388bece6038fa6241d?fields=title,abstract,year,venue,openAccessPdf,externalIds",
+   "quote": "circumstantial realism and pathetic fallacy combine with archaic rhetorical patterns",
+   "angle": "primaries"
+  },
+  {
+   "feature": "Elfland register in dialogue",
+   "claim": "The Aragorn/Boromir/Elrond exchange is a quieter English, extraordinary for simple timelessness, with sobriety, wit and force — the language of men of character.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "It has sobriety, wit, and force",
+   "angle": "primaries"
+  },
+  {
+   "feature": "plain style with range",
+   "claim": "Tolkien writes a plain, clear English whose outstanding virtue is flexibility and variety, from the commonplace to the stately.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "ranges easily from the commonplace to the stately",
+   "angle": "primaries"
+  },
+  {
+   "feature": "unstriking vocabulary",
+   "claim": "Tolkien's vocabulary is not striking; everything is direct, concrete and simple, with no 'ichor'.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "Tolkien's vocabulary is not striking; he has no ichor",
+   "angle": "primaries"
+  },
+  {
+   "feature": "prose sliding into metre",
+   "claim": "The prose can slide into metrical poetry, as in the Bombadil episode, without careless readers noticing.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "can slide into metrical poetry",
+   "angle": "primaries"
+  },
+  {
+   "feature": "archaism as distancer",
+   "claim": "The archaic manner is a perfect distancer but a high wire on which one slip spoils all; Eddison did it perfectly, novices fake it with -est and mayhap.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "The archaic manner is indeed a perfect distancer",
+   "angle": "primaries"
+  },
+  {
+   "feature": "register alternation as failure",
+   "claim": "Alternating colloquial American for humour and old formal usage for earnest moments (Leiber, Zelazny) jerks the reader between Elfland and Poughkeepsie and breaks character coherence.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "the characters lose coherence in my mind",
+   "angle": "primaries"
+  },
+  {
+   "feature": "fake plainness",
+   "claim": "The journalistic plainness of bad fantasy is flat not simple, inexact not clear, with vague sensory cues; Tolkien's plainness is the real thing.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "is not really simple, but flat",
+   "angle": "primaries"
+  },
+  {
+   "feature": "two-beat narrative rhythm",
+   "claim": "The rhythm shaping the narrative is stress/release, a walking gait, carried without faltering across the whole book.",
+   "source": "Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (2001), quoted in kate_nepveu's reading notes",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "quote": "as simple as a rhythm can be: two beats",
+   "angle": "primaries"
+  },
+  {
+   "feature": "polarities of mood",
+   "claim": "'Fog on the Barrow-downs' pulses between polarities — darkness/daylight, confusion/clarity, trap/freedom — and each pole grows out of its opposite.",
+   "source": "Le Guin 2001, via kate_nepveu",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "quote": "a pulsation back and forth between polarities",
+   "angle": "primaries"
+  },
+  {
+   "feature": "sentence-level reversals",
+   "claim": "The chapter's closing sentences reverse darkness/lights, downhill/up, hill/village, fire/night in quiet simple language, like drumbeats.",
+   "source": "Le Guin 2001, via kate_nepveu",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "quote": "They are like drumbeats",
+   "angle": "primaries"
+  },
+  {
+   "feature": "trochaic beat",
+   "claim": "On the irreducible simplicity of the trochaic beat Tolkien builds a complex, stable rhythmic pattern in imagined space and time.",
+   "source": "Le Guin 2001, via kate_nepveu (Google Books confirms 'trochaic' on p. 106 of The Wave in the Mind)",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "quote": "Relying on the irreducible simplicity of the trochaic beat",
+   "angle": "primaries"
+  },
+  {
+   "feature": "read-aloud cadence",
+   "claim": "Even long sentences follow the breath, punctuation falls where one needs to pause, and the cadences are graceful and inevitable.",
+   "source": "Le Guin, quoted in Jason Fisher, 'Reading The Lord of the Rings aloud' (Lingwë, 2010)",
+   "url": "http://lingwe.blogspot.com/2010/09/reading-lord-of-rings-aloud.html",
+   "quote": "the cadences are graceful and inevitable",
+   "angle": "primaries"
+  },
+  {
+   "feature": "deep time",
+   "claim": "In Middle-earth one can hardly put a foot down without stirring the dust of history; the world is heavy with past.",
+   "source": "C. S. Lewis, 'The Gods Return to Earth' (Time and Tide, 1954), reproduced at TheOneRing.com",
+   "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+   "quote": "without stirring the dust of history",
+   "angle": "primaries"
+  },
+  {
+   "feature": "nomenclature",
+   "claim": "The invented names alone are a feast.",
+   "source": "Lewis 1954",
+   "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+   "quote": "The names alone are a feast",
+   "angle": "primaries"
+  },
+  {
+   "feature": "heroic-romance register",
+   "claim": "The book marks the unashamed return of gorgeous, eloquent heroic romance in an anti-romantic age.",
+   "source": "Lewis 1954",
+   "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+   "quote": "heroic romance, gorgeous, eloquent, and unashamed",
+   "angle": "primaries"
+  },
+  {
+   "feature": "elvish beauty in prose",
+   "claim": "No other prose writer has captured the piercing, high, elvish beauty Tolkien achieves.",
+   "source": "Lewis 1954",
+   "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+   "quote": "piercing, high, elvish beauty",
+   "angle": "primaries"
+  },
+  {
+   "feature": "interlaced narration",
+   "claim": "Keeping the reader aware of parallel story-lines adds immensely to pathos, irony and grandeur.",
+   "source": "C. S. Lewis, 'The Dethronement of Power' (1955), via kate_nepveu's reading notes",
+   "url": "https://kate-nepveu.livejournal.com/187276.html",
+   "quote": "adds immensely to the pathos, irony, and grandeur",
+   "angle": "primaries"
+  },
+  {
+   "feature": "opening archness fades",
+   "claim": "The first chapter is a little shy-making, but once the story moves the initial archness disappears.",
+   "source": "W. H. Auden, 'The Hero Is a Hobbit' (NYT, 1954), excerpted at Epistle of Dude",
+   "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+   "quote": "this initial archness disappears",
+   "angle": "primaries"
+  },
+  {
+   "feature": "exact description and naming",
+   "claim": "Tolkien possesses an amazing gift for naming and a wonderfully exact eye for description.",
+   "source": "Auden 1954",
+   "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+   "quote": "a wonderfully exact eye for description",
+   "angle": "primaries"
+  },
+  {
+   "feature": "deep history",
+   "claim": "By the end one knows the histories of Hobbits, Elves, Dwarves and their landscape as well as one's own childhood.",
+   "source": "Auden 1954",
+   "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+   "quote": "as well as one knows one's own childhood",
+   "angle": "primaries"
+  },
+  {
+   "feature": "hobbit rustic register",
+   "claim": "The hobbits closely resemble the arcadian rustics of British detective fiction.",
+   "source": "Auden 1954",
+   "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+   "quote": "those arcadian rustics",
+   "angle": "primaries"
+  },
+  {
+   "feature": "descriptive elaboration of the portal-quest",
+   "claim": "The language of portal-quest fantasy is elaborate in the anthropologist's or pre-Raphaelite painter's way, intensely descriptive and exploratory.",
+   "source": "Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction",
+   "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+   "quote": "the elaboration of the anthropologist or the pre-Raphaelite painter",
+   "angle": "primaries"
+  },
+  {
+   "feature": "reader positioned at a point of entry",
+   "claim": "Mendlesohn treats The Lord of the Rings as portal-quest rhetoric in which the reader learns the world from a point of entry, the process traced in her chapter one.",
+   "source": "Mendlesohn 2008, Introduction",
+   "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+   "quote": "we learn from a point of entry",
+   "angle": "primaries"
+  },
+  {
+   "feature": "invitational vagueness",
+   "claim": "Descriptions sound vividly detailed but give an open-ended outline the reader fills in, so readers feel they helped make the world.",
+   "source": "Steve Walker, interview on The Power of Tolkien's Prose (Tolkien Library)",
+   "url": "https://tolkienlibrary.com/press/905-power-of-tolkien-prose.php",
+   "quote": "invitational quality",
+   "angle": "primaries"
+  },
+  {
+   "feature": "style off the critical radar",
+   "claim": "Scholars missed Tolkien's style because sentence-level style is not on the sociological critic's radar, though it mattered greatly to Tolkien.",
+   "source": "Walker interview",
+   "url": "https://tolkienlibrary.com/press/905-power-of-tolkien-prose.php",
+   "quote": "isn't on our scholarly radar",
+   "angle": "primaries"
+  },
+  {
+   "feature": "multiple versions in differing styles",
+   "claim": "Like a folk mythology the legendarium comes in many forms, with multiple versions in differing styles and levels of detail (Bratman's Estate essay does not name the four modes attributed to him elsewhere).",
+   "source": "David Bratman, 'The History of Middle-earth' (Tolkien Estate)",
+   "url": "https://www.tolkienestate.com/writing/david-bratman-the-history-of-middle-earth/",
+   "quote": "multiple versions in differing styles and levels of detail",
+   "angle": "primaries"
+  },
+  {
+   "feature": "tone rising with stakes",
+   "claim": "Olsen's close reading tracks changes in tone as The Hobbit's stakes grow and distinguishes High Elves from Mirkwood elves through their speech.",
+   "source": "David Oberhelman, Mythopoeic Society review of Corey Olsen, Exploring J.R.R. Tolkien's The Hobbit",
+   "url": "https://www.mythsoc.org/reviews/exploring-j-r-r-tolkiens-the-hobbit.htm",
+   "quote": "changes in tone as the stakes become greater",
+   "angle": "primaries"
+  },
+  {
+   "feature": "sentence-by-sentence method",
+   "claim": "Mythgard's Exploring The Lord of the Rings is an explicitly sentence-level reading, but no transcripts or notes are published; only titles are public.",
+   "source": "Mythgard Institute, Exploring the Lord of the Rings project page",
+   "url": "https://mythgard.org/lotro/exlotr/",
+   "quote": "sentence by sentence",
+   "angle": "primaries"
+  },
+  {
+   "feature": "polyglossia at the Council",
+   "claim": "The Council of Elrond succeeds by representing many tongues, with Gandalf performing the voice of each speaker he reports, from Saruman to the Gaffer and Butterbur.",
+   "source": "John Halbrooks, 'Could The Council of Elrond Have Been an Email?'",
+   "url": "https://johnhalbrooks.substack.com/p/could-the-council-of-elrond-have-7cd",
+   "quote": "of polyglossia",
+   "angle": "primaries"
+  },
+  {
+   "feature": "inner consistency of reality",
+   "claim": "Art is the achievement of expression that gives a Secondary World the inner consistency of reality; consistency, not novelty, is what earns belief.",
+   "source": "Tolkien, 'On Fairy-stories' (full text, coolcalvary PDF)",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "the inner consistency of reality",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Secondary Belief vs suspension of disbelief",
+   "claim": "Inside a successful Secondary World what is related is 'true' by that world's own laws, and the instant a reader's disbelief arises the art has failed — suspension of disbelief is only a substitute for genuine Secondary Belief.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "The moment disbelief arises, the spell is broken",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "arresting strangeness",
+   "claim": "Fantasy's native advantage is arresting strangeness, which must be married to consistency or it decays into the merely fanciful and decorative.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "arresting strangeness",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "difficulty scales with unlikeness (sober material)",
+   "claim": "The more the images depart from the Primary World the harder inner consistency is to produce, so fantastic material demands more labour than sober material, not less.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "easier to produce this kind of “reality” with more “sober” material",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "the green sun",
+   "claim": "Anyone can say 'the green sun'; building a world in which it commands Secondary Belief requires labour, thought and a special elvish craft — narrative art in its most potent mode.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "a kind of elvish craft",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "adjective as mythical grammar",
+   "claim": "The adjective is the root spell of Faërie: to take green from grass or red from blood is already an enchanter's power, so fantasy is built at the level of the word.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "a part of speech in a mythical grammar",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Recovery (defamiliarisation)",
+   "claim": "Fantasy's function of Recovery is regaining a clear view, freeing familiar things from the triteness of appropriation — the prose must make the known strange again.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "the drab blur of triteness or familiarity",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "fantasy belongs to words, not pictures or drama",
+   "claim": "Fantasy is best left to words because painting makes the fantastic technically too easy and Drama is naturally hostile to Fantasy — the verbal medium is the proper one.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "Fantasy is a thing best left to words",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Faërie indescribable (glimpse, not definition)",
+   "claim": "Faërie is indescribable though not imperceptible; the writer gives glimpses rather than definitions, and analysis will not discover the secret of the whole.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "cannot be caught in a net of words",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "no condescension to children",
+   "claim": "The association of fairy-stories with children is a historical accident, so the register must not be pitched down to a nursery audience.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "an accident of our domestic history",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "eucatastrophe (joy poignant as grief)",
+   "claim": "The fairy-story's true form is the sudden joyous turn that denies universal defeat without denying sorrow, so the prose must carry grief and joy in one register.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "poignant as grief",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "no frame of illusion",
+   "claim": "A fairy-story must be presented as true and cannot tolerate any frame or machinery suggesting the whole is a figment or illusion.",
+   "source": "Wikipedia, 'On Fairy-Stories'",
+   "url": "https://en.wikipedia.org/wiki/On_Fairy-Stories",
+   "quote": "presented as 'true'",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "phonaesthetic fitness (notion to symbol)",
+   "claim": "The instinct of linguistic invention is the fitting of notion to oral symbol and pleasure in contemplating the relation — words must sound like what they mean.",
+   "source": "Tolkien, 'A Secret Vice' (full text, gwern PDF)",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "the fitting of notion to oral symbol",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "pleasure in articulate sound",
+   "claim": "Pleasure in articulate sound and its symbolic use is independent of communication though entangled with it, and must never be forgotten in language-making.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "pleasure in articulate sound",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "language breeds mythology",
+   "claim": "An invented language with individual flavour must have a mythology woven into it, and conversely language construction will breed a mythology — names and tongue come first, the world grows to fit.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "your language construction will breed a mythology",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "word-form in relation to meaning",
+   "claim": "Tolkien's chief interest is word-form in itself and word-form in relation to meaning, the so-called phonetic fitness.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "word-form in relation to meaning",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "verse as the test of an invented language",
+   "claim": "The final fruition of an invented language is verse, which both expresses and fixes the maker's personal taste in sound.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "this final fruition: verse",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "word-music consciously weighed",
+   "claim": "In modern poetry word-form is seldom consciously marked and its effects are miscalled 'authentic magic'; Tolkien wants sound-pattern deliberately constructed to give pleasure.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "the word-form is seldom consciously marked",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "beauty of word-form (Greek, Finnish, Welsh)",
+   "claim": "Word-form even unassociated with notions can give a perception of beauty; Greek, Finnish and Welsh are named as languages with characteristically beautiful word-form.",
+   "source": "Tolkien, 'A Secret Vice'",
+   "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+   "quote": "capable of giving pleasure - a perception of beauty",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "association of form and sense (cellar door)",
+   "claim": "'Cellar door' is beautiful dissociated from its sense, and the higher pleasure lies in words where form and sense associate — a phonaesthetic test the prose can be held to.",
+   "source": "Tolkien Gateway, 'Cellar door' (quoting 'English and Welsh')",
+   "url": "https://tolkiengateway.net/wiki/Cellar_door",
+   "quote": "the association of form and sense",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "inherent linguistic predilections",
+   "claim": "Linguistic taste is partly inborn (the 'native tongue' as distinct from the cradle-tongue), so a writer's phonaesthetic choices express inherent predilections rather than fashion.",
+   "source": "Anna Smol, 'Tolkien's cellar door' (quoting 'English and Welsh' pp.190-1)",
+   "url": "https://annasmol.net/2019/04/13/tolkiens-cellar-door/",
+   "quote": "inherent linguistic predilections",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "illusion of historical truth and perspective",
+   "claim": "The illusion of historical truth and perspective in Beowulf is largely a product of art — an instinctive historical sense used with a poetical, not historical, object.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics' (full text PDF)",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "largely a product of art",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "impression of depth (darker background)",
+   "claim": "The impression of depth is the effect and justification of episodes and allusions to old tales that are darker and more desperate than the foreground — the background must be grimmer than the story.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "mostly darker, more pagan, and desperate than the foreground",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "tower allegory (sources are for building)",
+   "claim": "Old stones (sources) exist to build the tower from whose top one sees the sea; the work is art, not a quarry, and its sources must not be dug for at the tower's expense.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "look out upon the sea",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "balance of ends and beginnings",
+   "claim": "The poem's structure is a balance, an opposition of ends and beginnings (youth against age), not a steadily advancing narrative.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "an opposition of ends and beginnings",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "masonry not music (line and structure)",
+   "claim": "Old English lines are founded on a balance of two opposed halves, more like masonry than music, and the whole is a composition not a tune.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "more like masonry than music",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "heroic-elegiac mode",
+   "claim": "Beowulf is not an epic but an heroic-elegiac poem whose first 3,136 lines are the prelude to a dirge — the elegiac is the governing tone.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "the prelude to a dirge",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "late, antiquarian voice (echo of an echo)",
+   "claim": "The poem is late not primitive: its maker told of things already old and weighted with regret, producing sorrows both poignant and remote.",
+   "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+   "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+   "quote": "an echo of an echo",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "literary and traditional diction",
+   "claim": "A translation must avoid colloquialism and false modernity and be literary and traditional, because the original's diction was poetical, archaic and artificial in its own day.",
+   "source": "Wikipedia, 'On Translating Beowulf'",
+   "url": "https://en.wikipedia.org/wiki/On_Translating_Beowulf",
+   "quote": "colloquialism and false modernity",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "neither colloquial nor obscure",
+   "claim": "The language should be intentionally antiquated but not arcane — words still in literary use among educated people — avoiding both the colloquial and the obscure.",
+   "source": "Philip Irving Mitchell (DBU), outline of 'On Translating Beowulf'",
+   "url": "https://www.dbu.edu/mitchell/tolkien-medieval-tradition-resources/beowulf-translate.html",
+   "quote": "avoid both the colloquial and the obscure",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "modern literary, not colloquial English",
+   "claim": "The translator owes allegiance to the original's meaning and style and renders it into modern literary English, not present-day colloquial English.",
+   "source": "Tolkien Estate, J.R.R. Tolkien 'Thoughts on Translation (Beowulf)'",
+   "url": "https://www.tolkienestate.com/scholarship/j-r-r-tolkien-thoughts-on-translation-beowulf/",
+   "quote": "modern literary, not present-day colloquial",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "compact compounds",
+   "claim": "Resolving Old English compounds into phrases keeps colour but loosens and weakens the texture; compact naming is preferred.",
+   "source": "Wikipedia, 'On Translating Beowulf'",
+   "url": "https://en.wikipedia.org/wiki/On_Translating_Beowulf",
+   "quote": "loosens and weakens the texture",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "children's-book manner regretted (Letter 215)",
+   "claim": "Publishing The Hobbit under the convention that fairy-stories are for children had unfortunate effects on its mode of expression and narrative method, which he would have corrected if not rushed.",
+   "source": "Carpenter (ed.), The Letters of J.R.R. Tolkien, no. 215 to Walter Allen (April 1959, unsent draft)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "unfortunate effects on the mode of expression and narrative method",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "address-to-children as blemish",
+   "claim": "Intelligent children of good taste single out the points in manner where the address is to children as blemishes.",
+   "source": "Tolkien Gateway, 'Letter 215'",
+   "url": "https://tolkiengateway.net/wiki/Letter_215",
+   "quote": "singled out the places where the address was to children",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "whimsy to historical (register arc of The Hobbit)",
+   "claim": "The Hobbit begins in a whimsy, even facetious, mode and moves steadily to a more serious, consistent and historical one — and he regrets much of the early manner.",
+   "source": "The Letters of J.R.R. Tolkien, no. 215",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "more consistent and historical",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "LotR addressed to no class of reader",
+   "claim": "The Lord of the Rings was not specially addressed to children or any other class but to anyone who enjoys a long exciting story; adult language is assumed.",
+   "source": "The Letters of J.R.R. Tolkien, no. 215",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "a long exciting story",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "regret of 'for children' style (Letter 165)",
+   "claim": "In so far as The Hobbit was dressed up as for children in style or manner, Tolkien regrets it, and so, he says, do the children.",
+   "source": "The Letters of J.R.R. Tolkien, no. 165 to Houghton Mifflin (June 1955)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "in style or manner, I regret it",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "sound before sense (fine words)",
+   "claim": "Words like plenilune and argent are beautiful before they are understood; limiting vocabulary to a child's supposed reach cuts off the gifted from extending it.",
+   "source": "The Letters of J.R.R. Tolkien, no. 234 to Jane Neave (22 Nov 1961)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "beautiful words before they are understood",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "first meeting in a living context",
+   "claim": "A fine word should first be met in a living context, not a dictionary; 'argent' does not mean 'silver' because its phonetic incarnation and heraldic overtones differ.",
+   "source": "The Letters of J.R.R. Tolkien, no. 234",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "in a living context, and not in a dictionary",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "flattening (writing down) deprecated",
+   "claim": "Tolkien deprecated the writing-down, flattening attitude that leaves children with little respect and no love for words; The Hobbit's early part was his one such mistake.",
+   "source": "Tolkien Gateway, 'Letter 234'",
+   "url": "https://tolkiengateway.net/wiki/Letter_234",
+   "quote": "writing down, flattening attitude",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "full register span (Letter 131)",
+   "claim": "The Lord of the Rings is meant to include, even in style, the colloquialism and vulgarity of hobbits, poetry, and the highest style of prose.",
+   "source": "The Letters of J.R.R. Tolkien, no. 131 to Milton Waldman (1951)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "the colloquialism and vulgarity of Hobbits",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "tone rises with the hero's development",
+   "claim": "In The Hobbit the tone and style change with the hobbit's development, passing from fairy-tale to the noble and high and relapsing on the return.",
+   "source": "The Letters of J.R.R. Tolkien, no. 131",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "passing from fairy-tale to the noble and high",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "lesser tales against vast backcloths",
+   "claim": "The legendarium ranges from the cosmogonic to the fairy-story level, the larger founded on the lesser and the lesser drawing splendour from the vast backcloths.",
+   "source": "Wikipedia, 'Impression of depth in The Lord of the Rings' (citing Letter 131)",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "the lesser drawing splendour from the vast backcloths",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "translation scheme: register per language",
+   "claim": "Westron is equated with English and everything in it translated with differentiation of style for dialect; related tongues become English-related forms (Rohan like Old English, Dale Scandinavian); alien tongues are left alone.",
+   "source": "The Letters of J.R.R. Tolkien, no. 144 to Naomi Mitchison (25 Apr 1954)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "some differentiation of style to represent dialectal differences",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Gondor's antique register",
+   "claim": "In Gondor the Common Speech is spoken in a nobler and more antique style, which the Elves also adopt when they use it.",
+   "source": "The Letters of J.R.R. Tolkien, no. 144",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "nobler and rather more antique style",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "leave things unexplained",
+   "claim": "As a story it is good that many things stay unexplained (especially if an explanation exists); Tolkien fears he erred by explaining too much, and readers stuck at the Council of Elrond.",
+   "source": "The Letters of J.R.R. Tolkien, no. 144",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "a lot of things unexplained",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "phonaesthetic pleasure in Elvish",
+   "claim": "Quenya is built on a Latin basis with Finnish and Greek because they give him phonaesthetic pleasure; Sindarin is devised to resemble British-Welsh because that character fits Celtic-type legends.",
+   "source": "The Letters of J.R.R. Tolkien, no. 144",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "give me ‘phonaesthetic’ pleasure",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "languages the foundation; name first",
+   "claim": "The invention of languages is the foundation, the stories were made to provide a world for the languages, a name comes first and the story follows, and the book is largely an essay in linguistic aesthetic.",
+   "source": "The Letters of J.R.R. Tolkien, no. 165",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "largely an essay in ‘linguistic aesthetic’",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "linguistic apparatus edited down",
+   "claim": "Only as much 'language' was left in The Lord of the Rings as readers could be expected to stomach — the visible Elvish is a deliberate restraint.",
+   "source": "The Letters of J.R.R. Tolkien, no. 165",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "as I thought would be stomached by readers",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "sensibility to linguistic pattern",
+   "claim": "The sensibility to linguistic pattern affects Tolkien emotionally like colour or music; Gothic taught him aesthetic pleasure in a language for its own sake.",
+   "source": "The Letters of J.R.R. Tolkien, no. 163 to W.H. Auden (7 Jun 1955)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "affects me emotionally like colour or music",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "North-western air (consult your roots)",
+   "claim": "A tale of this sort must consult the writer's roots: a man of the North-west sets it in a world with the Shoreless Sea to the West and endless enemy lands to the East.",
+   "source": "The Letters of J.R.R. Tolkien, no. 163",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "consult your roots",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "tushery vs real archaism",
+   "claim": "Tushery is bogus medieval stuff coloured with expletives like tush, pish, zounds; real archaic English is far terser than modern and says things the slack modern idiom cannot.",
+   "source": "The Letters of J.R.R. Tolkien, no. 171 to Hugh Brogan (Sept 1955, unsent draft)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "far more terse than modern",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "disunion of word and meaning",
+   "claim": "Putting Théoden's thought into modern idiom would be an insincerity, a disunion of word and meaning, because people who think like that do not talk a modern idiom.",
+   "source": "The Letters of J.R.R. Tolkien, no. 171",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "a disunion of word and meaning",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "archaic narration in heroic scenes",
+   "claim": "Narrative (not only dialogue) archaism is defended because heroic scenes do not occur in a modern setting; changing the idiom would be like changing helms and hauberks into modern uniforms.",
+   "source": "The Letters of J.R.R. Tolkien, no. 171",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "helms, shields, hauberks into modern uniforms",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "fronting for emphasis",
+   "claim": "'Helms too they chose' puts the emphasised word in prominent first place without a clutter of empty words, a trick modern English should relearn by example.",
+   "source": "The Letters of J.R.R. Tolkien, no. 171",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "a lot of little ‘empty’ words",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "choice of styles without unintelligibility",
+   "claim": "English's wealth leaves a choice of styles without any risk of unintelligibility, and refusing to use it is a parochialism of time.",
+   "source": "The Letters of J.R.R. Tolkien, no. 171",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "a choice of styles",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Elrond's archaism by grammar and vocabulary",
+   "claim": "The Gateway summary of the Brogan draft records Tolkien rejecting 'tushery' as applying only to low-quality pastiche rather than real archaic English, with the Théoden passage as his sample.",
+   "source": "Tolkien Gateway, 'Letter 171'",
+   "url": "https://tolkiengateway.net/wiki/Letter_171",
+   "quote": "slack and often frivolous idiom",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "legends and language share a taste",
+   "claim": "Legends depend on the language they belong to and a living language on its legends; Esperanto is dead for lack of legends, and Tolkien's legends were invented to match his languages' taste.",
+   "source": "The Letters of J.R.R. Tolkien, no. 180 to 'Mr Thompson' (14 Jan 1956)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "legends of the same ‘taste’",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "differentiation by diction and idiom, not accent",
+   "claim": "No vowel/consonant accent-marking is wanted; Orcs deliberately never drop aitches in the text; the linguistic differentiation Tolkien built is in diction and idiom.",
+   "source": "The Letters of J.R.R. Tolkien, no. 193 to Terence Tiller (2 Nov 1956)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "in diction, idiom, and so on",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Minas Tirith as the standard register",
+   "claim": "Minas Tirith is to the Common Speech as London is to modern English — the standard of comparison, whose people have no accent.",
+   "source": "The Letters of J.R.R. Tolkien, no. 193",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "as London is to modern English",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Rohirric tempo and sonority",
+   "claim": "The Rohirrim spoke with a slower tempo and more sonorous articulation than modern urbans, and in Common Speech speak the best Minas Tirith, perhaps a little too carefully as a learned tongue.",
+   "source": "The Letters of J.R.R. Tolkien, no. 193",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "a slower tempo and more sonorous articulation",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Orcs nasty by delivery not vulgarism",
+   "claim": "Orcs are to sound nasty through intonation, articulation and tempo, not through conventional features of modern vulgar English.",
+   "source": "Tolkien Gateway, 'Letter 193'",
+   "url": "https://tolkiengateway.net/wiki/Letter_193",
+   "quote": "intonation, articulation, and tempo",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "reading, not drama (necklace on a thread)",
+   "claim": "The book needs the older art of the reading mime; dramatization flattens scenery and characters, whereas passages read as a necklace upon a thread of narration would be fairer.",
+   "source": "The Letters of J.R.R. Tolkien, no. 194 to Terence Tiller (6 Nov 1956)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "as a necklace upon a thread of narration",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "epic not dramatic conception",
+   "claim": "The tale was conceived epically rather than dramatically, so dramatizing it without liberties strips setting from dialogue and leaves both flat.",
+   "source": "Tolkien Gateway, 'Letter 194'",
+   "url": "https://tolkiengateway.net/wiki/Letter_194",
+   "quote": "a tale told epically",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "verse triggers archaic style; no modern rusticity",
+   "claim": "A speaker who breaks into formal verse uses an archaic style as anyone capable of verse then would; where dialect marked place not rank, avoid any modern rusticity.",
+   "source": "The Letters of J.R.R. Tolkien, no. 152 to Rayner Heppenstall (22 Sept 1954)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "avoid any modern rusticity",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "miles are miles (literal geography and season)",
+   "claim": "Though a fairy-story, the tale takes place in this earth's northern hemisphere: miles, days and weather are literal, and seasons are pictorial and basic to the tone.",
+   "source": "The Letters of J.R.R. Tolkien, no. 210 to Forrest J. Ackerman (June 1958)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "miles are miles, days are days, and weather is weather",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "tone not to be lowered to childish fairy-tale",
+   "claim": "'Old scamp!' exemplifies the treatment's tendency to lower the tone toward a childish fairy-tale; the setting is not fairy-land but real river-lands in autumn.",
+   "source": "The Letters of J.R.R. Tolkien, no. 210",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "in real river-lands in autumn",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "neither contes de fées nor scientification",
+   "claim": "Any pull toward French fairy-tale style or toward science-fiction diction ('food concentrate' for lembas) is alien to the story; both modes are rejected.",
+   "source": "The Letters of J.R.R. Tolkien, no. 210",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "Both modes are alien to my story",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "characters kept in style and sentiment",
+   "claim": "Speeches must represent the characters as written, in style and sentiment; perverting a character is resented more than spoiling plot or scenery.",
+   "source": "The Letters of J.R.R. Tolkien, no. 210",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "in style and sentiment",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "anticipation and assimilation flatten",
+   "claim": "Anticipating later devices and assimilating one incident to another have a flattening effect; a scene of gloom and silence beats yet another scene of screams and slashings.",
+   "source": "The Letters of J.R.R. Tolkien, no. 210",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "flattening the tale out",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "two branches, two tones",
+   "claim": "The Ringbearers' action and the heroic matter are totally different in tone and scenery and must each be kept in coherent sequence; jumbling destroys both.",
+   "source": "The Letters of J.R.R. Tolkien, no. 210",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "totally different in tone and scenery",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "heroic-age material culture honoured",
+   "claim": "Rohan is a dwelling of Men in a heroic age: no private chambers, the king receiving on the dais of his hall — details must fit the world described.",
+   "source": "The Letters of J.R.R. Tolkien, no. 210",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "a dwelling of Men in an ‘heroic age’",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "dignity of high characters",
+   "claim": "Gandalf must not splutter: despite humour and an avuncular manner he is a person of high and noble authority and great dignity.",
+   "source": "Tolkien Gateway, 'Letter 210'",
+   "url": "https://tolkiengateway.net/wiki/Letter_210",
+   "quote": "Gandalf was to be spluttering. Tolkien disapproved",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "a world for the languages (personal aesthetic)",
+   "claim": "The long book was an attempt to create a world for languages that agreed with his personal aesthetic — a situation in which an Elvish greeting would be ordinary.",
+   "source": "Tolkien Gateway, 'Letter 205'",
+   "url": "https://tolkiengateway.net/wiki/Letter_205",
+   "quote": "create a world for languages",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "glimpses of a large history; unattainable vistas",
+   "claim": "Part of the attraction is the glimpses of a large history in the background, like a distant city in sunlit mist; to go there destroys the magic unless new unattainable vistas open.",
+   "source": "The Letters of J.R.R. Tolkien, no. 247 to Colonel Worskett (20 Sept 1963)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "unless new unattainable vistas are again revealed",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "language requires a habitation and history",
+   "claim": "Anyone who carries language invention far discovers that a language requires a suitable habitation and a history in which it can develop — the origin of the imaginary histories.",
+   "source": "The Letters of J.R.R. Tolkien, no. 294 to the Plimmers (8 Feb 1967)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "a suitable habitation, and a history",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "nomenclature as verisimilitude",
+   "claim": "The nomenclature, built from pre-existing invented languages, achieves a verisimilitude that assists literary belief in the story as historical; name-meanings are relevant solely to the fiction.",
+   "source": "The Letters of J.R.R. Tolkien, no. 297 drafts to 'Mr Rang' (Aug 1967)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "the ‘literary belief in the story as historical",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Anglo-Saxon as translation device for Rohan only",
+   "claim": "Anglo-Saxon is used for the Mark's names and glimpses of its speech purely as a device of translation, and is the sole field for those names — delusory anywhere else.",
+   "source": "The Letters of J.R.R. Tolkien, no. 297",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "as a device of ‘translation’",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "hobbit and personal names untouched",
+   "claim": "Tolkien objected to translating personal nomenclature and insisted the word hobbit stay unaltered; the Shire is a parody of rural England whose toponymy is not Dutch.",
+   "source": "Tolkien Gateway, 'Letter 190'",
+   "url": "https://tolkiengateway.net/wiki/Letter_190",
+   "quote": "the word hobbit stayed unaltered",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Shire names meaningful, worn-down English",
+   "claim": "Shire names are not meaningless but English in form, built from elements now obsolete, dialectal, or worn-down and obscured.",
+   "source": "Tolkien, 'Guide to the Names in The Lord of the Rings' (Nomenclature, full text)",
+   "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+   "quote": "obsolete or dialectal",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "euphonious names of familiar English style",
+   "claim": "Common-Speech renderings of Elvish names (Rivendell for Imladris) are made to be both a translation and a euphonious name of familiar English style.",
+   "source": "Tolkien, 'Guide to the Names in The Lord of the Rings'",
+   "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+   "quote": "a euphonious name of familiar English style",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "feigned linguistic history",
+   "claim": "Leaving such names untranslated would introduce an unexplained element with no place in the feigned linguistic history of the period — the nomenclature is a single designed scheme.",
+   "source": "Tolkien, 'Guide to the Names in The Lord of the Rings'",
+   "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+   "quote": "the feigned linguistic history of the period",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "hobbits adopt the style of those they meet",
+   "claim": "Appendix F explains varied hobbit speech by saying the more learned hobbits knew book-language and were quick to adopt the style of those they met.",
+   "source": "Wikipedia, 'Tolkien's prose style' (quoting Appendix F)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "quick to note and adopt the style",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "Appendix F cut to a third",
+   "claim": "The published Appendix F is only about one-third as long as its draft F2 — the visible linguistic apparatus is a deliberate reduction.",
+   "source": "Tolkien Gateway, 'The Appendix on Languages'",
+   "url": "https://tolkiengateway.net/wiki/The_Appendix_on_Languages",
+   "quote": "only about one-third as long",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "four techniques of depth",
+   "claim": "Scholars summarise the depth effect as four techniques: enormous background scale, casual incomplete mentions, multiple accounts with apparent contradictions (Red Book frame), and varying literary styles.",
+   "source": "Wikipedia, 'Impression of depth in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "casual, incomplete mentions",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "editorial frame (last of the philological editors)",
+   "claim": "Tolkien positioned himself as the last of a line of philological editors of the Red Book, so the paratexts make the text seem annotated by many hands over ages.",
+   "source": "Wikipedia, 'Tolkien's frame stories'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_frame_stories",
+   "quote": "the last of a line of philological editors",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "philology as method (single sentence)",
+   "claim": "In the Valedictory Address Tolkien says he would rather wring the juice out of a single sentence or explore one word than survey — the sentence-level craft is the method.",
+   "source": "Tolkien Estate, Tom Shippey on 'The Monsters and the Critics and other essays'",
+   "url": "https://www.tolkienestate.com/scholarship/tom-shippey-the-monsters-and-the-critics-and-other-essays/",
+   "quote": "wring the juice out of a single sentence",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "singularised speech for social difference",
+   "claim": "Tolkien singularised the speech of important characters to show social and cultural differences and asked why one should refuse to use the wealth of English.",
+   "source": "Tolkien Estate, Ferré, Lauzon and Riggs, 'Translating Tolkien'",
+   "url": "https://www.tolkienestate.com/writing/vincent-ferre-daniel-lauzon-and-david-riggs-translating-tolkien/",
+   "quote": "refuse to use the wealth of English",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "mythology woven into a language",
+   "claim": "To give a language individual flavour it must have woven into it the threads of an individual mythology.",
+   "source": "Tolkien Estate, Carl Hostetter, 'Tolkien's Invented Languages'",
+   "url": "https://www.tolkienestate.com/scholarship/carl-hostetter-tolkiens-invented-languages/",
+   "quote": "the threads of an individual mythology",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "tongue and tale coeval",
+   "claim": "The incarnate mind, the tongue and the tale are coeval; sub-creation is a birthright because we make as we are made.",
+   "source": "Tolkien Estate, Verlyn Flieger, 'On Fairy Stories'",
+   "url": "https://www.tolkienestate.com/scholarship/verlyn-flieger-on-fairy-stories/",
+   "quote": "We make, because we are made",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "deliberate stylistic variation",
+   "claim": "The Lord of the Rings shows far more deliberate stylistic variation than any other novel, with sixty poems and songs in many styles and several languages.",
+   "source": "Tolkien Estate, Tom Shippey, 'The Lord of the Rings, Book of the Century'",
+   "url": "https://www.tolkienestate.com/writing/tom-shippey-the-lord-of-the-rings-book-of-the-century/",
+   "quote": "far more deliberate stylistic variation",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "consistent per-character speech (secondary)",
+   "claim": "A reader's essay argues Elrond's age is implied by archaic word order and that each character's speech stays consistent throughout, conveying culture and rank.",
+   "source": "K.G., 'To Make a Soul: Tolkien and Variations of Speech' (tolkienmedievalandmodern blog)",
+   "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/to-make-soul-tolkien-and-variations-of.html",
+   "quote": "Elrond's age and sagacity implied through archaic word order",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "NEGATION: nursery-room prose charge",
+   "claim": "Moorcock holds that high fantasy's prose is the prose of the nursery-room, a lullaby meant to soothe, and that this is the predominant tone of The Lord of the Rings — the direct counter to Tolkien's claim to have shed the children's manner.",
+   "source": "Michael Moorcock, 'Epic Pooh' (1978; revolutionsf copy via Wayback)",
+   "url": "http://www.revolutionsf.com/article.php?id=953",
+   "quote": "the prose of the nursery-room",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "feature": "NEGATION rebutted",
+   "claim": "Bratman and Williams reject Moorcock's reading of the prose as out of context and uninformed.",
+   "source": "Wikipedia, 'Epic Pooh'",
+   "url": "https://en.wikipedia.org/wiki/Epic_Pooh",
+   "quote": "one wonders what book Moorcock read",
+   "angle": "tolkien-own-theory"
   }
  ],
  "verdicts": {

@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 8,
+ "indices": [
+  493,
+  494,
+  495,
+  496,
+  497,
+  498,
+  499,
+  500,
+  501,
+  502,
+  503,
+  504,
+  505,
+  506,
+  507
+ ],
+ "claims": [
+  {
+   "index": 493,
+   "feature": "dismissal of prose style (hostile)",
+   "claim": "Jenny Turner's 2001 LRB essay dismisses Tolkien's prose style in passing without analysis.",
+   "source": "Jenny Turner 2001, as reported in Curry, 'The Critical Response to Tolkien's Fiction'",
+   "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+   "quote": "dreadful prose style",
+   "page": ""
+  },
+  {
+   "index": 494,
+   "feature": "three lexical causes of archaicity",
+   "claim": "The reader's impression of archaicity comes partly from over-use of nineteenth-century fiction words, avoidance of modern-world words, and dense coinages, unusual grammar and rare or obsolescent words.",
+   "source": "Dirk Siepmann, 'Tolkien as a stylist: a corpus-based investigation into The Lord of the Rings' (CL2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "three simple lexical causes",
+   "page": ""
+  },
+  {
+   "index": 495,
+   "feature": "nineteenth-century keyword sets",
+   "claim": "Keywords shared with nineteenth-century novels cluster in landscape, position/direction (whither, thither, thence, yonder, afar), warfare, and descriptive verbs/adjectives, many obsolete when Tolkien wrote.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "so many of the keywords used to describe its settings",
+   "page": ""
+  },
+  {
+   "index": 496,
+   "feature": "Beowulf-translation diction",
+   "claim": "Tolkien borrows words such as valour, valiant and corslet from his Beowulf translation and stretches them beyond their Old and Middle English range.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "Tolkien borrows a host of words from his translation of Beowulf",
+   "page": ""
+  },
+  {
+   "index": 497,
+   "feature": "modern words in old grammatical patterns",
+   "claim": "Even core modern words are used in nineteenth-century patterns, e.g. 'a black smoke' with the indefinite article, rare in modern fiction.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "tends to use many of these words in nineteenth-century patterns",
+   "page": ""
+  },
+  {
+   "index": 498,
+   "feature": "descriptive verbs (modernist streak)",
+   "claim": "Tolkien follows a modernist tendency in his abundant manner-laden verbs: clutch, cower, flicker, gleam, glimmer, loom, peer, plod, stride, twist.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "abundant use of descriptive verbs",
+   "page": ""
+  },
+  {
+   "index": 499,
+   "feature": "Tolkien-exclusive keywords",
+   "claim": "Words key only to Tolkien (dingle, fen, glades, starless, lore-masters, wolf-riders, yesteryear, yuledays, along/among/outwards) are rare but not archaic and together create otherworldliness.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "an atmosphere of medievalism or otherworldliness",
+   "page": ""
+  },
+  {
+   "index": 500,
+   "feature": "homely collocation and hyperbole",
+   "claim": "Tolkien prefers the most homely collocations available yet uses everyday adjectives like 'great' in unusual pairings, and his key semantic domains (speed, size, loudness) point to hyperbole.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "a marked preference for the most homely collocations available",
+   "page": ""
+  },
+  {
+   "index": 501,
+   "feature": "linguistic postmodernism",
+   "claim": "Far from amateurish, the prose deploys several centuries of linguistic development, putting old words to new uses and vice versa.",
+   "source": "Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "he is a linguistic postmodernist",
+   "page": ""
+  },
+  {
+   "index": 502,
+   "feature": "dependence on the nineteenth-century novel",
+   "claim": "Keyword, n-gram and collocation methods show the style of The Lord of the Rings relies heavily on nineteenth-century novels and on Tolkien's Beowulf translation.",
+   "source": "Kullmann & Siepmann, 'Tolkien as a Stylist: Key Words and Key Collocations' (2021), ch. 2",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_2",
+   "quote": "relies heavily on the nineteenth-century novel",
+   "page": ""
+  },
+  {
+   "index": 503,
+   "feature": "collocational subtlety",
+   "claim": "The full subtlety of Tolkien's collocations has escaped both casual readers and literary critics.",
+   "source": "Kullmann & Siepmann 2021, ch. 2",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_2",
+   "quote": "escaped both the casual reader's and the literary critic's notice",
+   "page": ""
+  },
+  {
+   "index": 504,
+   "feature": "hobbit focalisation in ordinary language",
+   "claim": "The third-person narrator presents the point of view of a group of characters, usually hobbits, recorded in ordinary language.",
+   "source": "Kullmann & Siepmann 2021, ch. 4 'Points of View'",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "usually hobbits",
+   "page": ""
+  },
+  {
+   "index": 505,
+   "feature": "archaic diction for epic characters",
+   "claim": "Other passages carry an archaic diction reminiscent of ancient epic and Macpherson's Ossian, conveying an omniscient point of view tied to epic characters like Aragorn.",
+   "source": "Kullmann & Siepmann 2021, ch. 4",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "archaic diction, reminiscent of ancient epic poetry",
+   "page": ""
+  },
+  {
+   "index": 506,
+   "feature": "nineteenth-century focalisation practice",
+   "claim": "Limiting point of view to certain characters' perceptions, thoughts and feelings follows nineteenth-century novelistic practice.",
+   "source": "Kullmann & Siepmann 2021, ch. 4",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "follows nineteenth-century novelistic practice",
+   "page": ""
+  },
+  {
+   "index": 507,
+   "feature": "self-effacing narrator",
+   "claim": "Thomas calls the narrator of The Lord of the Rings self-effacing, unintrusive and vanishing, and counts ten different viewpoints in the opening chapter.",
+   "source": "Paul Edmund Thomas, 'Some of Tolkien's Narrators' (2000), as quoted in Kullmann & Siepmann 2021, ch. 4",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "ten different viewpoints",
+   "page": ""
+  }
+ ]
+}

@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 16,
+ "indices": [
+  613,
+  614,
+  615,
+  616,
+  617,
+  618,
+  619,
+  620,
+  621,
+  622,
+  623,
+  624,
+  625,
+  626,
+  627
+ ],
+ "claims": [
+  {
+   "index": 613,
+   "feature": "a world for the languages (personal aesthetic)",
+   "claim": "The long book was an attempt to create a world for languages that agreed with his personal aesthetic — a situation in which an Elvish greeting would be ordinary.",
+   "source": "Tolkien Gateway, 'Letter 205'",
+   "url": "https://tolkiengateway.net/wiki/Letter_205",
+   "quote": "create a world for languages",
+   "page": ""
+  },
+  {
+   "index": 614,
+   "feature": "glimpses of a large history; unattainable vistas",
+   "claim": "Part of the attraction is the glimpses of a large history in the background, like a distant city in sunlit mist; to go there destroys the magic unless new unattainable vistas open.",
+   "source": "The Letters of J.R.R. Tolkien, no. 247 to Colonel Worskett (20 Sept 1963)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "unless new unattainable vistas are again revealed",
+   "page": ""
+  },
+  {
+   "index": 615,
+   "feature": "language requires a habitation and history",
+   "claim": "Anyone who carries language invention far discovers that a language requires a suitable habitation and a history in which it can develop — the origin of the imaginary histories.",
+   "source": "The Letters of J.R.R. Tolkien, no. 294 to the Plimmers (8 Feb 1967)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "a suitable habitation, and a history",
+   "page": ""
+  },
+  {
+   "index": 616,
+   "feature": "nomenclature as verisimilitude",
+   "claim": "The nomenclature, built from pre-existing invented languages, achieves a verisimilitude that assists literary belief in the story as historical; name-meanings are relevant solely to the fiction.",
+   "source": "The Letters of J.R.R. Tolkien, no. 297 drafts to 'Mr Rang' (Aug 1967)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "the ‘literary belief in the story as historical",
+   "page": ""
+  },
+  {
+   "index": 617,
+   "feature": "Anglo-Saxon as translation device for Rohan only",
+   "claim": "Anglo-Saxon is used for the Mark's names and glimpses of its speech purely as a device of translation, and is the sole field for those names — delusory anywhere else.",
+   "source": "The Letters of J.R.R. Tolkien, no. 297",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "as a device of ‘translation’",
+   "page": ""
+  },
+  {
+   "index": 618,
+   "feature": "hobbit and personal names untouched",
+   "claim": "Tolkien objected to translating personal nomenclature and insisted the word hobbit stay unaltered; the Shire is a parody of rural England whose toponymy is not Dutch.",
+   "source": "Tolkien Gateway, 'Letter 190'",
+   "url": "https://tolkiengateway.net/wiki/Letter_190",
+   "quote": "the word hobbit stayed unaltered",
+   "page": ""
+  },
+  {
+   "index": 619,
+   "feature": "Shire names meaningful, worn-down English",
+   "claim": "Shire names are not meaningless but English in form, built from elements now obsolete, dialectal, or worn-down and obscured.",
+   "source": "Tolkien, 'Guide to the Names in The Lord of the Rings' (Nomenclature, full text)",
+   "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+   "quote": "obsolete or dialectal",
+   "page": ""
+  },
+  {
+   "index": 620,
+   "feature": "euphonious names of familiar English style",
+   "claim": "Common-Speech renderings of Elvish names (Rivendell for Imladris) are made to be both a translation and a euphonious name of familiar English style.",
+   "source": "Tolkien, 'Guide to the Names in The Lord of the Rings'",
+   "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+   "quote": "a euphonious name of familiar English style",
+   "page": ""
+  },
+  {
+   "index": 621,
+   "feature": "feigned linguistic history",
+   "claim": "Leaving such names untranslated would introduce an unexplained element with no place in the feigned linguistic history of the period — the nomenclature is a single designed scheme.",
+   "source": "Tolkien, 'Guide to the Names in The Lord of the Rings'",
+   "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+   "quote": "the feigned linguistic history of the period",
+   "page": ""
+  },
+  {
+   "index": 622,
+   "feature": "hobbits adopt the style of those they meet",
+   "claim": "Appendix F explains varied hobbit speech by saying the more learned hobbits knew book-language and were quick to adopt the style of those they met.",
+   "source": "Wikipedia, 'Tolkien's prose style' (quoting Appendix F)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "quick to note and adopt the style",
+   "page": ""
+  },
+  {
+   "index": 623,
+   "feature": "Appendix F cut to a third",
+   "claim": "The published Appendix F is only about one-third as long as its draft F2 — the visible linguistic apparatus is a deliberate reduction.",
+   "source": "Tolkien Gateway, 'The Appendix on Languages'",
+   "url": "https://tolkiengateway.net/wiki/The_Appendix_on_Languages",
+   "quote": "only about one-third as long",
+   "page": ""
+  },
+  {
+   "index": 624,
+   "feature": "four techniques of depth",
+   "claim": "Scholars summarise the depth effect as four techniques: enormous background scale, casual incomplete mentions, multiple accounts with apparent contradictions (Red Book frame), and varying literary styles.",
+   "source": "Wikipedia, 'Impression of depth in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "casual, incomplete mentions",
+   "page": ""
+  },
+  {
+   "index": 625,
+   "feature": "editorial frame (last of the philological editors)",
+   "claim": "Tolkien positioned himself as the last of a line of philological editors of the Red Book, so the paratexts make the text seem annotated by many hands over ages.",
+   "source": "Wikipedia, 'Tolkien's frame stories'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_frame_stories",
+   "quote": "the last of a line of philological editors",
+   "page": ""
+  },
+  {
+   "index": 626,
+   "feature": "philology as method (single sentence)",
+   "claim": "In the Valedictory Address Tolkien says he would rather wring the juice out of a single sentence or explore one word than survey — the sentence-level craft is the method.",
+   "source": "Tolkien Estate, Tom Shippey on 'The Monsters and the Critics and other essays'",
+   "url": "https://www.tolkienestate.com/scholarship/tom-shippey-the-monsters-and-the-critics-and-other-essays/",
+   "quote": "wring the juice out of a single sentence",
+   "page": ""
+  },
+  {
+   "index": 627,
+   "feature": "singularised speech for social difference",
+   "claim": "Tolkien singularised the speech of important characters to show social and cultural differences and asked why one should refuse to use the wealth of English.",
+   "source": "Tolkien Estate, Ferré, Lauzon and Riggs, 'Translating Tolkien'",
+   "url": "https://www.tolkienestate.com/writing/vincent-ferre-daniel-lauzon-and-david-riggs-translating-tolkien/",
+   "quote": "refuse to use the wealth of English",
+   "page": ""
+  }
+ ]
+}

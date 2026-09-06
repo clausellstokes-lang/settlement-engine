@@ -1,0 +1,38 @@
+{
+ "name": "dnd",
+ "chunk": 7,
+ "indices": [
+  154,
+  155,
+  156
+ ],
+ "claims": [
+  {
+   "index": 154,
+   "feature": "read-aloud cadence problem",
+   "claim": "'When most speakers read something aloud, their voice takes a different tone and cadence than when they speak extemporaneously', so attention wanders; boxed text also dwells on 'the color of the sunset'.",
+   "source": "DMDavid — Picturing the dungeon: boxed text (David Hartlage, 2012-11-15)",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "their voice takes a different tone and cadence",
+   "page": "blog post"
+  },
+  {
+   "index": 155,
+   "feature": "reading vs paraphrasing (1980s attitude)",
+   "claim": "Gnome Stew (2008): in the 1980s reading boxed text aloud was 'considered a cardinal sin' among GMs, who were expected to paraphrase; the author later found reading helped immersion; commenters: 'Short box text is fine, long box text is a challenge.'",
+   "source": "Gnome Stew — Hot Button: Reading the Boxed Text (Walt Ciechanowski, 2008-12-18)",
+   "url": "https://gnomestew.com/hot-button-reading-the-boxed-text/",
+   "quote": "considered a cardinal sin",
+   "page": "post + comments"
+  },
+  {
+   "index": 156,
+   "feature": "rehearsed delivery",
+   "claim": "DM's Workshop: practice reading text aloud between sessions and match pacing to conversational speech; boxed text is a tool to adapt, not a script to recite.",
+   "source": "Dungeon Master's Workshop — DM 101: Mastering the Boxed Text (2019-09-27)",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "quote": "",
+   "page": "essay"
+  }
+ ]
+}

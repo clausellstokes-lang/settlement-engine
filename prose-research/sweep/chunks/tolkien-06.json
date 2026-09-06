@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 6,
+ "indices": [
+  463,
+  464,
+  465,
+  466,
+  467,
+  468,
+  469,
+  470,
+  471,
+  472,
+  473,
+  474,
+  475,
+  476,
+  477
+ ],
+ "claims": [
+  {
+   "index": 463,
+   "feature": "landscape-description density",
+   "claim": "Drout estimates that over half the novel is landscape description and asks whether fewer words would have been as effective.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 464,
+   "feature": "apo koinou syntax",
+   "claim": "A phrase like 'speeding along with little hope of stopping or turning' attaches two ways at once, forcing the reader into small re-parsings of the sentence.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "tiny re-constructions of sentence meaning",
+   "page": ""
+  },
+  {
+   "index": 465,
+   "feature": "deliberate repetition as myth-making",
+   "claim": "The rain-as-grey-curtain image is justified by its recurrence across the book rather than by novelty, producing a mythic feel.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "The recurrent image of the rain as a curtain is significant",
+   "page": ""
+  },
+  {
+   "index": 466,
+   "feature": "critical method",
+   "claim": "Hand-waving about undefined 'depth' is worthless; a real critique of Tolkien's prose must be specific and detailed at the sentence level.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "useless as criticism",
+   "page": ""
+  },
+  {
+   "index": 467,
+   "feature": "lexical depth by literary reference",
+   "claim": "Tolkien's rare words (eyot, laving, louver, ninnyhammer, dwimmerlaik) are precise terms that link back through literary reference to earlier works.",
+   "source": "Drout, Wormtalk, 'Children of Húrin or, Tolkien: The Scholars and the Critics' (2007-04-08)",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-or-tolkien-scholars.html",
+   "quote": "precise technical terms",
+   "page": ""
+  },
+  {
+   "index": 468,
+   "feature": "syntactic archaism as allusion",
+   "claim": "The inverted imperative 'Come not between the Nazgûl and his prey' invokes larger literary contexts through traditional referentiality.",
+   "source": "Drout, Wormtalk 2007-04-08",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-or-tolkien-scholars.html",
+   "quote": "makes use of traditional referentiality",
+   "page": ""
+  },
+  {
+   "index": 469,
+   "feature": "modernist misreading of surface",
+   "claim": "The prose is not shallow; the depths it references are simply not the ones the modernist critic knows.",
+   "source": "Drout, Wormtalk 2007-04-08",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-or-tolkien-scholars.html",
+   "quote": "not the depths that the critic knows",
+   "page": ""
+  },
+  {
+   "index": 470,
+   "feature": "annalistic vs novelistic voice",
+   "claim": "The Children of Húrin is a hybrid between the historic/annalistic style of The Silmarillion and the novelistic style of The Lord of the Rings.",
+   "source": "Drout, Wormtalk, 'The Children of Húrin Review' (2007-04-17)",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-review-below-contains.html",
+   "quote": "historic/annalistic style of The Silmarillion",
+   "page": ""
+  },
+  {
+   "index": 471,
+   "feature": "mythopoeic bricolage",
+   "claim": "Reusing annals, key turns of phrase and stock tableaux from Tolkien's own earlier texts makes the writing feel like inherited myth rather than invention.",
+   "source": "Drout, Wormtalk 2007-04-17",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-review-below-contains.html",
+   "quote": "bricolage of previously existing texts",
+   "page": ""
+  },
+  {
+   "index": 472,
+   "feature": "sentence-level criticism (gap)",
+   "claim": "The biggest failing in Tolkien criticism is the absence of discussion of his sentence-level writing, word choice and syntax.",
+   "source": "Drout & Wynne, Envoi 9.2 (2000), p. 123",
+   "url": "https://ora.ox.ac.uk/objects/uuid:f0131cce-4e2e-4ac6-9d86-5bd7df17ed40/files/rsx61dm627",
+   "quote": "his sentence-level writing, his word choice and syntax",
+   "page": ""
+  },
+  {
+   "index": 473,
+   "feature": "shifting voice / archaism / diction",
+   "claim": "Shippey's Author of the Century addresses head-on the archaism, diction and shifting voice that characterise The Lord of the Rings.",
+   "source": "Drout & Wynne, Envoi 9.2 (2000), p. 123",
+   "url": "https://ora.ox.ac.uk/objects/uuid:f0131cce-4e2e-4ac6-9d86-5bd7df17ed40/files/rsx61dm627",
+   "quote": "the issues of archaism, diction, and shifting voice",
+   "page": ""
+  },
+  {
+   "index": 474,
+   "feature": "per-speaker register (Gaffer baseline)",
+   "claim": "Inside Gandalf's monologue at the Council of Elrond, Gaffer Gamgee's speech ('changes for the worst', 'abide') functions as the base-line of ordinary, semantically empty modern talk.",
+   "source": "Tom Shippey, The Road to Middle-earth, pp. 107–8",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "a kind of base-line of normality",
+   "page": ""
+  },
+  {
+   "index": 475,
+   "feature": "per-speaker register (political voice)",
+   "claim": "Saruman's habit of balancing phrases so incompatibles are resolved, and his empty words 'deploring', 'ultimate', 'real', mark him by style and lexis as a politician.",
+   "source": "Shippey, The Road to Middle-earth, p. 108",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "Saruman talks like a politician",
+   "page": ""
+  },
+  {
+   "index": 476,
+   "feature": "archaic syntax (Elrond)",
+   "claim": "Elrond's Council speech is full of old-fashioned syntactic inversions and words like weregild, esquire, shards, suited to his age.",
+   "source": "Shippey, The Road to Middle-earth, p. 109",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "full of old-fashioned inversions of syntax",
+   "page": ""
+  },
+  {
+   "index": 477,
+   "feature": "authenticating archaism (Gandalf, Isildur)",
+   "claim": "Gandalf uses an older vocabulary than usual at the Council, and Isildur's scroll combines ancient words and endings ('glede', 'fadeth', 'loseth') with Gollum-like phrasing.",
+   "source": "Shippey, The Road to Middle-earth, pp. 109–10",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "as if to authenticate himself",
+   "page": ""
+  }
+ ]
+}

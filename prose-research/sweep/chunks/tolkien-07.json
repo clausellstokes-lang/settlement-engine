@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 7,
+ "indices": [
+  478,
+  479,
+  480,
+  481,
+  482,
+  483,
+  484,
+  485,
+  486,
+  487,
+  488,
+  489,
+  490,
+  491,
+  492
+ ],
+ "claims": [
+  {
+   "index": 478,
+   "feature": "per-speaker register (Aragorn vs Boromir)",
+   "claim": "Aragorn's language is deceptively modern and easy-going but wider in range than Boromir's stiff magniloquence, and the contrast carries their rivalry.",
+   "source": "Shippey, The Road to Middle-earth, p. 110",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "Boromir's slightly wooden magniloquence",
+   "page": ""
+  },
+  {
+   "index": 479,
+   "feature": "dwarvish understatement",
+   "claim": "Dwarf dialogues (Dáin and Sauron's messenger, Elrond and Gimli, Théoden) delight in cool polite surface over passionate interior, so 'not too long' means 'extremely rapidly'.",
+   "source": "Shippey, The Road to Middle-earth, p. 110",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "passionate interior and polite or rational expression",
+   "page": ""
+  },
+  {
+   "index": 480,
+   "feature": "language variation as ethical dramatisation",
+   "claim": "Stylistic variation between speakers is Tolkien's thorough and economical way of dramatising ethical debate.",
+   "source": "Shippey, The Road to Middle-earth, p. 111",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "a thorough and economical way of dramatising ethical debate",
+   "page": ""
+  },
+  {
+   "index": 481,
+   "feature": "whole book as stylistic contrast",
+   "claim": "The whole of The Lord of the Rings works on its larger scale like the Council of Elrond, depending on relished stylistic variation and separate tableaux more than on plot.",
+   "source": "Shippey, The Road to Middle-earth, p. 111",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "the relishing of stylistic variation",
+   "page": ""
+  },
+  {
+   "index": 482,
+   "feature": "loose semantic fit",
+   "claim": "Tolkien deliberately emulates Malory's medieval tolerance of semantically loose phrasing ('by stock or by stone', echoing Pearl), which puzzles readers trained on modern exactness.",
+   "source": "Shippey, The Road to Middle-earth, pp. 160–1",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "His emulation of 'loose semantic fit'",
+   "page": ""
+  },
+  {
+   "index": 483,
+   "feature": "register rise in elvish speech",
+   "claim": "Galadriel's farewell to Treebeard suddenly shifts to less plain language with an elvish place-name, against Treebeard's triple 'feel ... feel ... smell'.",
+   "source": "Shippey, The Road to Middle-earth, p. 161",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "sudden change to less plain language",
+   "page": ""
+  },
+  {
+   "index": 484,
+   "feature": "archaic effect without archaic words",
+   "claim": "In an exchange containing no archaic word except perhaps 'naught', a strong archaic effect is produced by inverting nouns and adjectives and by adverbs of time such as 'yet' and 'seldom'.",
+   "source": "Shippey, The Road to Middle-earth (chapter on style, 'hovering between styles')",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "by inversion of nouns and adjectives",
+   "page": ""
+  },
+  {
+   "index": 485,
+   "feature": "modern rewrite would ring false",
+   "claim": "Tolkien could have written the same exchange in modern English, but the discrepancy between modern usage and archaic thought would have sounded bogus, a disunion of word and meaning.",
+   "source": "Shippey, The Road to Middle-earth",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "would simply have sounded bogus",
+   "page": ""
+  },
+  {
+   "index": 486,
+   "feature": "overworked cadence (hostile)",
+   "claim": "Manlove condemns the Treebeard/Galadriel farewell for over-worked cadences and a droning monotonous pitch offering only sentimental indulgence or embarrassment.",
+   "source": "C. N. Manlove, Modern Fantasy (1975), quoted verbatim in Shippey, Road to Middle-earth p. 160 (Google Books confirms 'overworked' on p. 188 of the 2020 edition)",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "The overworked cadences, the droning, monotonous pitch",
+   "page": ""
+  },
+  {
+   "index": 487,
+   "feature": "elegiac register (hostile comparison)",
+   "claim": "Manlove sets Ector's lament in Malory and the Ubi sunt of The Wanderer against Tolkien's farewell as real elegy with something to be elegiac about.",
+   "source": "Manlove 1975, quoted in Shippey, Road to Middle-earth p. 160",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "This is real elegy",
+   "page": ""
+  },
+  {
+   "index": 488,
+   "feature": "'not literature' verdict (hostile)",
+   "claim": "Raffel grants The Lord of the Rings magnificence but denies it the status of literature, on grounds including style.",
+   "source": "Burton Raffel 1968, p. 218, as quoted in Kullmann & Siepmann, Tolkien as a Literary Artist, Introduction n. 11",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_1",
+   "quote": "is not literature",
+   "page": ""
+  },
+  {
+   "index": 489,
+   "feature": "professorial amateurishness (hostile)",
+   "claim": "Edmund Wilson judged Tolkien's prose and verse to be on the same level of professorial amateurishness.",
+   "source": "Edmund Wilson 1956, as quoted in Siepmann, 'Tolkien as a stylist' (CL2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "the same level of professorial amateurishness",
+   "page": ""
+  },
+  {
+   "index": 490,
+   "feature": "ordinary yet dignified diction",
+   "claim": "Siepmann characterises Kirk's 1971 essay as praise of Tolkien's ordinary yet dignified diction, against Wilson's scorn.",
+   "source": "Elizabeth Kirk 1971 (1977 reprint), as characterised in Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "Tolkien's ordinary yet dignified diction",
+   "page": ""
+  },
+  {
+   "index": 491,
+   "feature": "unironic high style",
+   "claim": "Anthony Lane observed that Tolkien's high style had hardly been used without irony since Tennyson's Idylls, so reverting to it in the 1950s challenged modernity head-on.",
+   "source": "Anthony Lane 2001, as quoted in Patrick Curry, 'The Critical Response to Tolkien's Fiction'",
+   "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+   "quote": "Hardly anyone had used it unironically since Tennyson",
+   "page": ""
+  },
+  {
+   "index": 492,
+   "feature": "archaic 'high' style as taste barrier",
+   "claim": "Curry concedes Tolkien's tone is sometimes sentimental and that the occasional archaic and high style will never suit some readers.",
+   "source": "Patrick Curry, 'The Critical Response to Tolkien's Fiction' (Companion ch. 25)",
+   "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+   "quote": "its occasional archaic and 'high' style",
+   "page": ""
+  }
+ ]
+}

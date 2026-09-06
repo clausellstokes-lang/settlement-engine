@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 4,
+ "indices": [
+  109,
+  110,
+  111,
+  112,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  119,
+  120,
+  121,
+  122,
+  123
+ ],
+ "claims": [
+  {
+   "index": 109,
+   "feature": "perspective-neutral, compass directions",
+   "claim": "Key-writing rule: 'Write without assumption of perspective' about entry point; use compass directions ('east wall'), never relative ones ('far side').",
+   "source": "Being An Asshole To A Goblin — Elements of a Key 4: Rules for Key-Writing (Misha F, 2026-04-28)",
+   "url": "https://baatag.blogspot.com/2026/04/elements-of-key-4-rules-for-key-writing.html",
+   "quote": "Write without assumption of perspective",
+   "page": "Rule 8"
+  },
+  {
+   "index": 110,
+   "feature": "no emotional direction, cardinal directions",
+   "claim": "Designing Dungeons: keep descriptions 'short and punchy', don't tell players what to feel, use east/west not left/right, and let the map carry redundant door descriptions.",
+   "source": "Designing Dungeons — Chapter 10: Formatting Room Descriptions (Josh McCrowell & Warren D)",
+   "url": "https://dungeons.hismajestytheworm.games/docs/chapter10/",
+   "quote": "short and punchy",
+   "page": "chapter 10"
+  },
+  {
+   "index": 111,
+   "feature": "no 'if/then' or direct address (critic)",
+   "claim": "Readers summarizing Lynch's standards: don't provide conclusions, avoid 'if/then' constructs as padding, and don't address the party directly in read-aloud.",
+   "source": "Into the Dark — Bryce Lynch's Adventure Design Tips Summarized and Explained, Mark 2 (Jon Miller, 2016-07-25)",
+   "url": "http://into-the-dark-rpg.blogspot.com/2016/07/bryce-lynchs-adventure-design-tips.html",
+   "quote": "",
+   "page": "post + comments (noisician, 2022-12)"
+  },
+  {
+   "index": 112,
+   "feature": "present tense in conditionals (drop 'will')",
+   "claim": "Robin D. Laws: in hypothetical RPG text drop 'will' — 'If the agents reach the safe house, Keletny burns the car'; also avoid passive voice and 'to be' + verb pairs.",
+   "source": "Pelgrane Press — Five Keys to Punchier Prose (Robin D. Laws, 2012-02-01)",
+   "url": "https://pelgranepress.com/2012/02/01/five-keys-to-punchier-prose/",
+   "quote": "Keletny burns the car",
+   "page": "essay, key 4"
+  },
+  {
+   "index": 113,
+   "feature": "present vs future tense (editor)",
+   "claim": "Ray Vallese's editor's guide devotes a section to 'using present tense instead of future tense' and to 'avoiding rampant capitalization' — two habits of RPG manuscripts an editor corrects.",
+   "source": "Ray Vallese — Writing With Style: An Editor's Advice for RPG Writers (book page)",
+   "url": "https://rayvallese.com/writing-with-style/",
+   "quote": "using present tense instead of future tense",
+   "page": "book page, topics list"
+  },
+  {
+   "index": 114,
+   "feature": "describe what can be sensed, not what can't",
+   "claim": "Merwin's epistemic rule: 'Describe everything the characters can sense, but not what they cannot' — no crate contents, but never omit the 50-foot chasm.",
+   "source": "Critical Hits — Thinking Outside the Boxed Text (Shawn Merwin, 2010-08-27)",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "quote": "Describe everything the characters can sense, but not what they cannot",
+   "page": "essay"
+  },
+  {
+   "index": 115,
+   "feature": "'seems/appears' hedges banned",
+   "claim": "Words like 'seems' and 'appears' telegraph tricks: 'If something \"appears to be\" to the characters, it \"is\"' — let Perception checks, not hedges, create the distinction.",
+   "source": "Critical Hits — Thinking Outside the Boxed Text (Shawn Merwin, 2010-08-27)",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "quote": "If something 'appears to be' to the characters, it 'is'",
+   "page": "essay"
+  },
+  {
+   "index": 116,
+   "feature": "Chekhov relevance filter",
+   "claim": "Include only environmental details PCs will interact with; the smell of flowers can go 'unless you happen to be DMing for a party comprised solely of elves or florists'.",
+   "source": "Critical Hits — Thinking Outside the Boxed Text (Shawn Merwin, 2010-08-27)",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "quote": "a party comprised solely of elves or florists",
+   "page": "essay"
+  },
+  {
+   "index": 117,
+   "feature": "no novelistic urge / monologues",
+   "claim": "'Avoid the novelist/dramatist urge': no evil soliloquies, no coronation cutscenes; keep passages short and let PCs act.",
+   "source": "Critical Hits — Thinking Outside the Boxed Text (Shawn Merwin, 2010-08-27)",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "quote": "Avoid the novelist/dramatist urge",
+   "page": "essay"
+  },
+  {
+   "index": 118,
+   "feature": "read aloud to test",
+   "claim": "'Read your boxed text aloud to check readability' — tongue-twisters, unintended alliteration and odd phrasing are invisible on the page.",
+   "source": "D&D Beyond — Let's Design an Adventure: Boxed Text (Shawn Merwin, 2019-11-06)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Read your boxed text aloud to check readability",
+   "page": "column"
+  },
+  {
+   "index": 119,
+   "feature": "evocative not conclusory",
+   "claim": "Lynch's most-cited rule as summarized: replace the abstract judgment ('a cruel bully') with the concrete action ('Manfred takes a leak on Tobias's bedroll'); aim for 'the telltale sensory detail, rather than the generic abstract trait'; specificity, not mere detail.",
+   "source": "Into the Dark — Bryce Lynch's Adventure Design Tips Summarized and Explained, Mark 2 (Jon Miller, 2016-07-25)",
+   "url": "http://into-the-dark-rpg.blogspot.com/2016/07/bryce-lynchs-adventure-design-tips.html",
+   "quote": "the telltale sensory detail, rather than the generic abstract trait",
+   "page": "post"
+  },
+  {
+   "index": 120,
+   "feature": "terse-and-evocative register (critic's scale)",
+   "claim": "tenfootpole grades language on a four-point scale topped by 'Succinct and evocative', lists 'Terse writing style' and 'Evocative atmosphere' as requirements, and states 'Boxed text is usually not a good thing'.",
+   "source": "tenfootpole.org — Review Standards (Bryce Lynch)",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "Succinct and evocative",
+   "page": "standards page"
+  },
+  {
+   "index": 121,
+   "feature": "overwritten fantasy register",
+   "claim": "Lynch praises one 5e read-aloud for avoiding 'the overwritten fantasy drivil that is present in most read aloud' and for capturing a social scene in progress.",
+   "source": "tenfootpole.org — (5e) Death in the Wood review (Bryce Lynch, 2019-02-09)",
+   "url": "https://tenfootpole.org/ironspike/?p=5395",
+   "quote": "the overwritten fantasy drivil that is present in most read aloud",
+   "page": "review"
+  },
+  {
+   "index": 122,
+   "feature": "filler-adjective purge",
+   "claim": "Skerples: use find-and-replace to hunt filler words ('little, big, grand, tall, dark') and swap in evocative choices; 'Every sentence needs to fight for its life in a dungeon key.'",
+   "source": "Coins and Scrolls — OSR: Sharpening the Axe: How I Plan and Write RPG Books (Skerples, 2019-09-05)",
+   "url": "https://coinsandscrolls.blogspot.com/2019/09/osr-sharpening-axe-how-i-plan-and-write.html",
+   "quote": "Every sentence needs to fight for its life",
+   "page": "essay"
+  },
+  {
+   "index": 123,
+   "feature": "concrete over generic descriptors",
+   "claim": "Gus L.: not 'evil idol' but 'toothy glare' or 'sharp edged obsidian'; include non-visual senses but never room history, future or emotions.",
+   "source": "All Dead Generations — Dungeon Design, Process and Keys (Gus L., 2022-12-19)",
+   "url": "https://alldeadgenerations.blogspot.com/2022/12/dungeon-design-process-and-keys.html",
+   "quote": "sharp edged obsidian",
+   "page": "essay"
+  }
+ ]
+}

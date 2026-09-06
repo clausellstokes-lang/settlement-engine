@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 4,
+ "indices": [
+  433,
+  434,
+  435,
+  436,
+  437,
+  438,
+  439,
+  440,
+  441,
+  442,
+  443,
+  444,
+  445,
+  446,
+  447
+ ],
+ "claims": [
+  {
+   "index": 433,
+   "feature": "heraldry in plain English",
+   "claim": "Tolkien describes heraldic devices for characters and nations in simple English rather than technical blazon, keeping the record's technical matter in ordinary diction.",
+   "source": "Wikipedia, 'Tolkien and antiquarianism'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien_and_antiquarianism",
+   "quote": "",
+   "page": "§ Heraldry"
+  },
+  {
+   "index": 434,
+   "feature": "Appendix F rationale for register layering",
+   "claim": "In Appendix F the translator explains that Westron is rendered as English to preserve the contrast between a widespread language and the living remains of far older and more reverend tongues, with the analogy that calling Rivendell Imladris would be like speaking of Winchester as Camelot.",
+   "source": "Wikipedia, 'Pseudotranslation in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Pseudotranslation_in_The_Lord_of_the_Rings",
+   "quote": "far older and more reverend tongues",
+   "page": "§ Implementation"
+  },
+  {
+   "index": 435,
+   "feature": "fiction/reality blur",
+   "claim": "Turner observes that Tolkien's Winchester/Camelot analogy further blurs the already confused distinction between fiction and reality that the pseudotranslation sets up.",
+   "source": "Wikipedia, 'Pseudotranslation in The Lord of the Rings' (citing Turner)",
+   "url": "https://en.wikipedia.org/wiki/Pseudotranslation_in_The_Lord_of_the_Rings",
+   "quote": "further blurs the already confused distinction",
+   "page": "§ Complex implications"
+  },
+  {
+   "index": 436,
+   "feature": "typographic key to provenance",
+   "claim": "Appendix A opens with a key to its own apparatus: actual extracts from longer annals and tales are placed within quotation marks, later insertions in brackets, notes within quotation marks come from the sources and others are editorial.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), n. 35 quoting Appendix A",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "quote": "Insertions of later date are enclosed in brackets",
+   "page": "n. 35, p. 12"
+  },
+  {
+   "index": 437,
+   "feature": "narrative formulas imply hobbit or Gondorian authorship",
+   "claim": "Formulas such as 'before we came to the Shire' imply parts of the Appendices are written by hobbits, while 'as we have learned from the King' points to Gondor and the scribe Findegil, so the annal's first person shifts with its source.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018)",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "quote": "as we have learned from the King",
+   "page": "n. 35, p. 12"
+  },
+  {
+   "index": 438,
+   "feature": "record announces its own abridgement",
+   "claim": "Appendix A declares that only selections from its sources, in most places much abridged, are presented, so the annal frames itself as an epitome of fuller documents.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), n. 34 quoting Appendix A",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "quote": "in most places much abridged",
+   "page": "n. 34, p. 12"
+  },
+  {
+   "index": 439,
+   "feature": "scribal glosses harmonise the frame",
+   "claim": "The appendices are full of scribal glosses, later notes and editorial references deliberately matched to the textual history in the Note on the Shire Records, so the frame is realised by formal features rather than asserted.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018)",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "quote": "full of scribal glosses, later notes, and editorial references",
+   "page": "§1.7, p. 11"
+  },
+  {
+   "index": 440,
+   "feature": "ancient annals with scribal footnotes",
+   "claim": "Turner describes the prologue and appendices as an elaborate apparatus containing genealogies and ancient annals complete with scribal footnotes and editorial comments, even a discussion 'On Translation'.",
+   "source": "Wikipedia, 'Literary devices in The Lord of the Rings' (citing Turner 2011)",
+   "url": "https://en.wikipedia.org/wiki/Literary_devices_in_The_Lord_of_the_Rings",
+   "quote": "",
+   "page": "§ Pseudotranslation and editorial framing"
+  },
+  {
+   "index": 441,
+   "feature": "quotation marks as sole source-marker",
+   "claim": "Passages of Appendix A translated from Fourth-Age hobbit or Gondorian writers are marked only by surrounding quotation marks, expecting the reader to recall the Prologue's discussion of sources.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "quote": "only marked by surrounding quotation marks",
+   "page": "main text"
+  },
+  {
+   "index": 442,
+   "feature": "hedged suggestion idiom",
+   "claim": "Some quoted passages in Appendix A let Tolkien suggest things without committing to them, in the chronicle idiom 'some say he dwells there still'.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "quote": "some say he dwells there still",
+   "page": "main text"
+  },
+  {
+   "index": 443,
+   "feature": "annals versus year-list split",
+   "claim": "Appendix A's narrative annals and Appendix B's year-list divide one history so that a reader loses orientation in A and finds B redundant, wanting something more like A and B combined.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "quote": "something more like A & B combined",
+   "page": "main text"
+  },
+  {
+   "index": 444,
+   "feature": "year-lists with brief narrative islands",
+   "claim": "Appendix B primarily contains timelines (lists of years) for the Second, Third and Fourth Ages with only a few brief narrative sections, such as the account of the Wizards.",
+   "source": "Tolkien Gateway, 'Appendix B'",
+   "url": "https://tolkiengateway.net/wiki/Appendix_B",
+   "quote": "a few brief narrative sections",
+   "page": "main text"
+  },
+  {
+   "index": 445,
+   "feature": "compiler's calendar",
+   "claim": "The Fourth-Age section of the Tale of Years gives its dates in Shire-reckoning and follows primarily what happened to the hobbits, so the calendar and focus track the compiler's own community.",
+   "source": "Tolkien Gateway, 'Appendix B'",
+   "url": "https://tolkiengateway.net/wiki/Appendix_B",
+   "quote": "dates are given in the Shire-reckoning",
+   "page": "§ Synopsis"
+  },
+  {
+   "index": 446,
+   "feature": "annal definition and gaps",
+   "claim": "Annals are lists of years or spans with brief summaries, and Tolkien's Second Age annals have significant gaps, a single entry covering the years 2000 to 3000.",
+   "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+   "quote": "lists of years or spans with brief summaries",
+   "page": "p. 8"
+  },
+  {
+   "index": 447,
+   "feature": "record declares its own scarcity",
+   "claim": "Appendix B's Second Age opens by declaring that of events in Middle-earth the records are few and brief and their dates often uncertain, so the annalist states the limits of his sources before listing them.",
+   "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022), quoting Appendix B",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+   "quote": "the records are few and brief",
+   "page": "p. 7"
+  }
+ ]
+}

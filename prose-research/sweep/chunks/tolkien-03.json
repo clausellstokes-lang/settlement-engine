@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 3,
+ "indices": [
+  418,
+  419,
+  420,
+  421,
+  422,
+  423,
+  424,
+  425,
+  426,
+  427,
+  428,
+  429,
+  430,
+  431,
+  432
+ ],
+ "claims": [
+  {
+   "index": 418,
+   "feature": "antiquarian verbs on the title page",
+   "claim": "The Red Book's title-page vocabulary of 'compiled', 'observations', 'accounts' and 'translated' gives it the antiquarian air of Percy's Reliques, Macpherson's translations and Chatterton's Antiquities.",
+   "source": "Will Sherwood, 'Tolkien and the Age of Forgery', JTR 11.1 (2020)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4/",
+   "quote": "'compiled', 'observations', 'accounts' and 'translated'",
+   "page": "p. 23"
+  },
+  {
+   "index": 419,
+   "feature": "many-hands effect of age",
+   "claim": "The Red Book's history of interwoven, identifiable source-traditions and voices produces the effect of age and lends the text antiquarian authenticity.",
+   "source": "Will Sherwood, 'Tolkien and the Age of Forgery', JTR 11.1 (2020), citing Painter 2016",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4/",
+   "quote": "produce the effect of age",
+   "page": "p. 24"
+  },
+  {
+   "index": 420,
+   "feature": "forger's paratext kit",
+   "claim": "The antiquarian forger's toolkit that Groom lists for Chatterton (calligraphy, manuscripts, maps, heraldry, prefaces, footnotes, appendices, glossaries) is the same kit Tolkien uses to immerse readers in Arda.",
+   "source": "Will Sherwood, 'Tolkien and the Age of Forgery', JTR 11.1 (2020), citing Groom 2014",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4/",
+   "quote": "prefaces, footnotes, appendices, and glossaries",
+   "page": "p. 18"
+  },
+  {
+   "index": 421,
+   "feature": "spurious source by scholarly mystique",
+   "claim": "Richard C. West calls the Red Book a spurious source whose authority appeals not to the old and familiar but to the modern mystique of scholarly research.",
+   "source": "Wikipedia, 'Red Book of Westmarch'",
+   "url": "https://en.wikipedia.org/wiki/Red_Book_of_Westmarch",
+   "quote": "the modern mystique of scholarly research",
+   "page": "§ Analysis"
+  },
+  {
+   "index": 422,
+   "feature": "found-manuscript lineage",
+   "claim": "Kristin Thompson identifies the Red Book as a found-manuscript conceit in the line running back to Samuel Richardson's eighteenth-century novels.",
+   "source": "Wikipedia, 'Red Book of Westmarch'",
+   "url": "https://en.wikipedia.org/wiki/Red_Book_of_Westmarch",
+   "quote": "found manuscript conceit",
+   "page": "§ Analysis"
+  },
+  {
+   "index": 423,
+   "feature": "four levels of presentation",
+   "claim": "Flieger describes The Lord of the Rings as presented at four levels at once: the story itself, a version referencing other versions, a historical artifact (the Red Book), and a modern edition complete with scholarly and critical apparatus.",
+   "source": "Wikipedia, 'Interrupted Music'",
+   "url": "https://en.wikipedia.org/wiki/Interrupted_Music",
+   "quote": "complete with scholarly and critical apparatus",
+   "page": "§ Part 2"
+  },
+  {
+   "index": 424,
+   "feature": "credible book tradition",
+   "claim": "Tolkien went to elaborate lengths to construct a credible book tradition, with repeated mentions of Bilbo's diary, his Translations from the Elvish, and masses of notes in his room at Rivendell.",
+   "source": "Wikipedia, 'Tolkien's frame stories' (citing Flieger)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_frame_stories",
+   "quote": "credible book tradition",
+   "page": "§ Red Book of Westmarch"
+  },
+  {
+   "index": 425,
+   "feature": "fragile vs embedded frame",
+   "claim": "Flieger finds The Hobbit's frame rather fragile because its narrator often speaks in a voice that cannot be Bilbo's, whereas The Lord of the Rings has the frame carefully embedded from the earliest drafts.",
+   "source": "Wikipedia, 'Tolkien's frame stories' (citing Flieger)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_frame_stories",
+   "quote": "rather fragile",
+   "page": "§ The Hobbit and The Lord of the Rings"
+  },
+  {
+   "index": 426,
+   "feature": "annalistic headings and editor footnotes",
+   "claim": "Appendix A's Kings of the Mark section uses annalistic headings, dates recording great events, and later editor's footnotes (such as identifying Holdwine as Meriadoc), giving the look of authentic historical documentation.",
+   "source": "Wikipedia, 'Tolkien's frame stories'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_frame_stories",
+   "quote": "",
+   "page": "§ Paratexts"
+  },
+  {
+   "index": 427,
+   "feature": "cornerstone of mature work",
+   "claim": "Brljak argues that the pseudo-editorial, pseudo-philological and pseudo-translational framework is both the cornerstone and crowning achievement of Tolkien's mature literary work, modelled on the impression of depth he admired in Beowulf.",
+   "source": "Wikipedia, 'Editorial framing of The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Editorial_framing_of_The_Lord_of_the_Rings",
+   "quote": "pseudo-editorial, pseudo-philological, and pseudo-translational",
+   "page": "§ An external editorial frame"
+  },
+  {
+   "index": 428,
+   "feature": "two-level frame",
+   "claim": "Turner notes the frame works at two levels at once, treating the world of the story as historical fact while creating for the reader the illusion of a direct link through time and space.",
+   "source": "Wikipedia, 'Editorial framing of The Lord of the Rings' (citing Turner)",
+   "url": "https://en.wikipedia.org/wiki/Editorial_framing_of_The_Lord_of_the_Rings",
+   "quote": "the world of the story as historical fact",
+   "page": "§ Multiple levels"
+  },
+  {
+   "index": 429,
+   "feature": "frame permits contrasting styles",
+   "claim": "Pezzini argues the meta-textual frame lets Tolkien write in contrasting styles, alternating between high and low, and to dignify the humble while writing in the low style.",
+   "source": "Bradley Birzer, 'How Did Tolkien Write Great Books?' (Law & Liberty, reviewing Pezzini)",
+   "url": "https://lawliberty.org/book-review/how-did-tolkien-write-great-books/",
+   "quote": "alternating between high and low, transcendent and earthy",
+   "page": "main text"
+  },
+  {
+   "index": 430,
+   "feature": "authorial mosaic and remembering formulas",
+   "claim": "Pezzini describes the Red Book as an authorial mosaic (Bilbo, Frodo, Sam as last hand) stitched into the narration by 'remembering formulas' such as 'Pippin afterwards recalled little' and by reportorial scenes where separated hobbits recount what they witnessed.",
+   "source": "Erik Jampa Andersson, 'The Red Book: Giuseppe Pezzini on Tolkien's Meta-Textual Frame' (Substack, lecture notes)",
+   "url": "https://erikjampa.substack.com/p/the-red-book-giuseppe-pezzini-on",
+   "quote": "Pippin afterwards recalled little",
+   "page": "main text"
+  },
+  {
+   "index": 431,
+   "feature": "translator's neologism policy",
+   "claim": "The translator persona of Appendix F would rather change the English language and coin new words than deliver a substandard translation, so consistency of rendering governs the whole record.",
+   "source": "N. Lurquin, 'Translating the Red Book of Westmarch' (Tolkien: Medieval and Modern blog)",
+   "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/translating-red-book-of-westmarch.html",
+   "quote": "rather change the English language and make new words",
+   "page": "main text"
+  },
+  {
+   "index": 432,
+   "feature": "antiquarian aesthetics and improved forgery",
+   "claim": "Groom places Tolkien in the English antiquarian line of Swift, Chatterton and Stukeley as one who enlists the aesthetics of antiquarianism, and Sherwood reads the non-narrative elements as Tolkien improving on antiquarian forgery to create modern fantasy's conventions.",
+   "source": "Wikipedia, 'Tolkien and antiquarianism'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien_and_antiquarianism",
+   "quote": "enlists the aesthetics of antiquarianism",
+   "page": "§ Tolkien in the English antiquarian tradition"
+  }
+ ]
+}

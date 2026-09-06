@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 5,
+ "indices": [
+  124,
+  125,
+  126,
+  127,
+  128,
+  129,
+  130,
+  131,
+  132,
+  133,
+  134,
+  135,
+  136,
+  137,
+  138
+ ],
+ "claims": [
+  {
+   "index": 124,
+   "feature": "one sensory hook",
+   "claim": "Celeste Conowitch: 'keep it simple with a few powerful details' — the facts plus one detail ('reeks of garlic') that gives the room a story; never name the monster in narration.",
+   "source": "Kobold Press — Run your best actual play: Paint Me a Picture (Celeste Conowitch, 2026-07-20)",
+   "url": "https://koboldpress.com/run-your-best-actual-play-paint-me-a-picture-july-20-2026/",
+   "quote": "keep it simple with a few powerful details",
+   "page": "essay"
+  },
+  {
+   "index": 125,
+   "feature": "three-of-five senses formula",
+   "claim": "Alexander's room formula: list notable things with positions, tag them with three of the five senses ('Try to include three of them'), then add a verb; NPCs get an action, clothing and one trait — 'you're not describing their headshot'.",
+   "source": "The Alexandrian — Random GM Tip: Description Formulas (2022-02-08)",
+   "url": "https://thealexandrian.net/wordpress/47328/roleplaying-games/random-gm-tip-description-formulas",
+   "quote": "Try to include three of them",
+   "page": "essay"
+  },
+  {
+   "index": 126,
+   "feature": "five-senses show-don't-tell",
+   "claim": "Anne K. Brown's essay (as reported): use all five senses and show rather than tell ('you detect orcs' is the failure), but don't over-invest in sensory prose players can't use.",
+   "source": "Gaming Ballistic — Ballistic's Report: How to Write Adventure Modules that Don't Suck (2017-07-19)",
+   "url": "https://gamingballistic.com/2017/07/19/ballistics-report-how-to-write-adventure-modules-that-dont-suck/",
+   "quote": "",
+   "page": "report on Brown, 'Listen! Do You Smell Something?'"
+  },
+  {
+   "index": 127,
+   "feature": "newspaper-lead ordering",
+   "claim": "Chris Doyle's essay (as reported): write read-aloud like a newspaper lead — immediate threat first ('GIANT SLAVERING OGRE'), secondary details after, lower-level details left for searching.",
+   "source": "Gaming Ballistic — Ballistic's Report: How to Write Adventure Modules that Don't Suck (2017-07-19)",
+   "url": "https://gamingballistic.com/2017/07/19/ballistics-report-how-to-write-adventure-modules-that-dont-suck/",
+   "quote": "GIANT SLAVERING OGRE",
+   "page": "report on Doyle, 'How to Write Encounters that Don't Suck'"
+  },
+  {
+   "index": 128,
+   "feature": "fantastical vs instruction-manual register",
+   "claim": "Sly Flourish: use fantastical language — 'quit writing read-aloud text that sounds like it came from Ikea instructions' — and make sure 'every word has a place in it'.",
+   "source": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08)",
+   "url": "https://slyflourish.com/writing_awesome_readaloud_text.html",
+   "quote": "sounds like it came from Ikea instructions",
+   "page": "essay"
+  },
+  {
+   "index": 129,
+   "feature": "punchy, emotionally slanted commercial boxed text",
+   "claim": "A review of dScryb's commercial boxed text finds it 'very punchy and to the point', carrying 'emotional information, motivations, or default assumptions' and sometimes 'selling' the creature or place.",
+   "source": "Gnome Stew — dScryb First Impressions (Rascher, 2021-07)",
+   "url": "https://gnomestew.com/dscryb-first-impressions/",
+   "quote": "very punchy and to the point",
+   "page": "review"
+  },
+  {
+   "index": 130,
+   "feature": "active voice and expletive cuts (editor via critic)",
+   "claim": "Vallese's book, per Lynch: cut 'there is/are' openings ('An old wise man watches over the children'), prefer active constructions, and reorder stacked modifiers ('Its wormlike body is thin and scaly').",
+   "source": "tenfootpole.org — Writing with Style: An Editor's Advice for RPG Writers review (Bryce Lynch, 2018-08-13)",
+   "url": "https://tenfootpole.org/ironspike/?p=4366",
+   "quote": "Its wormlike body is thin and scaly",
+   "page": "review"
+  },
+  {
+   "index": 131,
+   "feature": "rules are for breaking (editor)",
+   "claim": "Vallese: 'Do you have to follow all of these tips all the time? Nope… Just be sure you understand the rules before you break them' — vary to keep flavor and voice.",
+   "source": "Gnome Stew — Review: Writing with Style (J.T. Evans, 2017-10-23)",
+   "url": "https://gnomestew.com/review-writing-with-style/",
+   "quote": "Just be sure you understand the rules before you break them",
+   "page": "review quoting Vallese"
+  },
+  {
+   "index": 132,
+   "feature": "plural constructions for neutrality",
+   "claim": "Laws' fifth key: use plurals to dodge gendered pronouns — 'Characters can leave their pistols at the door.'",
+   "source": "Pelgrane Press — Five Keys to Punchier Prose (Robin D. Laws, 2012-02-01)",
+   "url": "https://pelgranepress.com/2012/02/01/five-keys-to-punchier-prose/",
+   "quote": "Characters can leave their pistols at the door",
+   "page": "essay, key 5"
+  },
+  {
+   "index": 133,
+   "feature": "'to be' replacement / show through play",
+   "claim": "BAATAG rule 7: replace 'to be' verbs with active ones and show rather than tell — describe details that reveal information through play.",
+   "source": "Being An Asshole To A Goblin — Elements of a Key 4: Rules for Key-Writing (Misha F, 2026-04-28)",
+   "url": "https://baatag.blogspot.com/2026/04/elements-of-key-4-rules-for-key-writing.html",
+   "quote": "",
+   "page": "Rule 7"
+  },
+  {
+   "index": 134,
+   "feature": "boxed text as prompts ('narrative text')",
+   "claim": "Merwin prefers the term 'narrative text': 'a series of prompts that can help your game flow more smoothly'; 'Excellent boxed text does a lot of heavy lifting' for atmosphere.",
+   "source": "D&D Sage Advice (sageadvice.eu) — 'This is exactly why boxed text is important' (Shawn Merwin, 2021-11)",
+   "url": "https://www.sageadvice.eu/this-is-exactly-why-boxed-text-is-important/",
+   "quote": "Excellent boxed text does a lot of heavy lifting",
+   "page": "archived tweets"
+  },
+  {
+   "index": 135,
+   "feature": "market demand for boxed text",
+   "claim": "Merwin (2019): 'A majority of DMs out there WANT boxed text (well-written hopefully)' — omitting it is 'a risk', even though streamers rarely read it.",
+   "source": "D&D Sage Advice (sageadvice.eu) — 'What are your thoughts on boxed text?' (Shawn Merwin tweet, 2019-04-14)",
+   "url": "https://www.sageadvice.eu/what-are-your-thoughts-on-boxed-text/",
+   "quote": "A majority of DMs out there WANT boxed text",
+   "page": "archived tweet"
+  },
+  {
+   "index": 136,
+   "feature": "sequencing over format",
+   "claim": "Alexander rejects 3e's Traps/Creatures/Tactics/Development/Treasure key format because writers 'fill the format' and information lands out of play sequence: the ogre in the middle comes first, the goblin behind the tapestry does not.",
+   "source": "The Alexandrian — The Art of the Key (2014)",
+   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
+   "quote": "fill the format",
+   "page": "essay"
+  },
+  {
+   "index": 137,
+   "feature": "essential key components",
+   "claim": "The essential key: room title, boxed text ('seen in a glance'), reactive checks front-loaded, bold-titled significant elements, developing details from general to specific, a GM-background tag — and 'Complete sentences are overrated'.",
+   "source": "The Alexandrian — The Art of the Key, Part 2: The Essential Key (2014-05-21)",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "quote": "Complete sentences are overrated",
+   "page": "essay"
+  },
+  {
+   "index": 138,
+   "feature": "bold interactables, monsters last",
+   "claim": "Designing Dungeons: first paragraph describes 'everything immediately observable' with interactables in bold; list contents in the order described; monsters go last in the first description but first in later keying.",
+   "source": "Designing Dungeons — Chapter 10: Formatting Room Descriptions (Josh McCrowell & Warren D)",
+   "url": "https://dungeons.hismajestytheworm.games/docs/chapter10/",
+   "quote": "Write a paragraph that describes everything immediately observable",
+   "page": "chapter 10"
+  }
+ ]
+}

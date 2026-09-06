@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 1,
+ "indices": [
+  388,
+  389,
+  390,
+  391,
+  392,
+  393,
+  394,
+  395,
+  396,
+  397,
+  398,
+  399,
+  400,
+  401,
+  402
+ ],
+ "claims": [
+  {
+   "index": 388,
+   "feature": "chronicle dating by feast days",
+   "claim": "The Farmer Giles chronicle fixes its events by the church calendar (St Nicholas' Day, Christmas Eve, 14 January) inside a legendary span 'between Brutus and King Arthur'.",
+   "source": "Noah Huisman, 'On Farmer Giles' (The Lumenorean)",
+   "url": "https://noahhuisman.substack.com/p/on-farmer-giles",
+   "quote": "",
+   "page": "main text"
+  },
+  {
+   "index": 389,
+   "feature": "parody of its own Prologue",
+   "claim": "Farmer Giles's pose as a translated manuscript with commentary on its origins and dubious place-name etymology parodies scholarly works including the Prologue to Tolkien's own Lord of the Rings, mocking the medieval appeal to authority.",
+   "source": "eNotes, 'Farmer Giles of Ham Analysis'",
+   "url": "https://www.enotes.com/topics/farmer-giles/in-depth",
+   "quote": "parody of scholarly works, including the prologue",
+   "page": "Style and Technique"
+  },
+  {
+   "index": 390,
+   "feature": "narrator evolution to scholarly tone",
+   "claim": "The tale's narrator was 'Daddy' in the oral original, became 'the family jester', and took on a formal scholarly tone when the story was enlarged by half for an academic essay club in 1938.",
+   "source": "Hammond & Scull, 'Farmer Giles of Ham' (Tolkien Estate)",
+   "url": "https://www.tolkienestate.com/writing/farmer-giles-of-ham/",
+   "quote": "the family jester",
+   "page": "main text"
+  },
+  {
+   "index": 391,
+   "feature": "apparatus as late overlay",
+   "claim": "By its 1949 publication the children's tale had acquired the mock-scholarly foreword, so the record register was a deliberate late addition rather than the story's native voice.",
+   "source": "Philip Irving Mitchell, 'Farmer Giles of Ham: Comedy in Faërie?' (DBU)",
+   "url": "https://www.dbu.edu/mitchell/tolkien-medieval-tradition-resources/giles.html",
+   "quote": "had acquired the mock-scholarly forward",
+   "page": "main text"
+  },
+  {
+   "index": 392,
+   "feature": "Middle Kingdom as Mercia calque",
+   "claim": "Shippey identifies the Middle Kingdom of Farmer Giles with early Mercia, its capital possibly Tamworth, so the record's geography is a calque on real English history.",
+   "source": "Wikipedia, 'Farmer Giles of Ham'",
+   "url": "https://en.wikipedia.org/wiki/Farmer_Giles_of_Ham",
+   "quote": "based on early Mercia",
+   "page": "§ Quasi-realistic geographical setting"
+  },
+  {
+   "index": 393,
+   "feature": "ethnographic pre-text",
+   "claim": "Kullmann finds the Prologue imitates the non-fictional prose of nineteenth- and early-twentieth-century ethnography, while the Note on the Shire Records mimics works of historiography.",
+   "source": "Wikipedia, 'Editorial framing of The Lord of the Rings' (citing Kullmann & Siepmann 2021, pp. 46–47)",
+   "url": "https://en.wikipedia.org/wiki/Editorial_framing_of_The_Lord_of_the_Rings",
+   "quote": "non-fictional prose of nineteenth- and early twentieth-century ethnography",
+   "page": "§ Multiple elements"
+  },
+  {
+   "index": 394,
+   "feature": "antiquarian mode signal",
+   "claim": "'Concerning Hobbits' places the text in the stylistic mode of nineteenth-century English antiquarianism, like a treatise on regional folklore, signalling to the reader a departure from modern novelistic conventions.",
+   "source": "John Halbrooks, 'Tolkienian Style' (Substack, 13 Mar 2024)",
+   "url": "https://johnhalbrooks.substack.com/p/tolkienian-style",
+   "quote": "a certain strain of nineteenth-century English antiquarianism",
+   "page": "main text"
+  },
+  {
+   "index": 395,
+   "feature": "register modulation by circumstance",
+   "claim": "Halbrooks argues Tolkien's greatest strength is that he very carefully adjusts his prose style and even his generic conventions according to the narrative circumstances.",
+   "source": "John Halbrooks, 'Tolkienian Style' (Substack, 13 Mar 2024)",
+   "url": "https://johnhalbrooks.substack.com/p/tolkienian-style",
+   "quote": "he very carefully adjusts his prose style",
+   "page": "main text"
+  },
+  {
+   "index": 396,
+   "feature": "Shire calqued on England",
+   "claim": "The Shire is 'calqued' on England element by element: three founding tribes, a forgotten origin, founding brothers with horse-names, and a 272-year peace between battles matching the 270 years since Sedgemoor.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "quote": "the Shire is 'calqued' on England",
+   "page": "pp. 92–93"
+  },
+  {
+   "index": 397,
+   "feature": "offices as idealised English institutions",
+   "claim": "Organisationally the Shire, with its mayors, musters, moots and Shirriffs, is an old-fashioned and idealised England.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "quote": "mayors, musters, moots and Shirriffs",
+   "page": "p. 93"
+  },
+  {
+   "index": 398,
+   "feature": "names as one-to-one labels",
+   "claim": "Modern names are perceived as labels isomorphic with reality, so a dense name-stock weighs fantasy down with repeated implicit assurances that the things labelled exist; this is strongest in the Shire's map, account and history.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "quote": "repeated implicit assurances of the existence of the things",
+   "page": "p. 92"
+  },
+  {
+   "index": 399,
+   "feature": "characters talk like maps",
+   "claim": "Speakers in The Lord of the Rings have a strong tendency to talk like historical maps, reeling off names and river courses, a habit shared by Aragorn, Celeborn, Gimli, Gandalf and Meriadoc.",
+   "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "quote": "talk like maps, historical ones at that",
+   "page": "p. 91"
+  },
+  {
+   "index": 400,
+   "feature": "native word plus Latin hedge",
+   "claim": "The Prologue says 'pipe-weed' rather than tobacco because the imported word would sound wrong, and hedges its botany with a Latin binomial instead.",
+   "source": "Tom Shippey, The Road to Middle-earth",
+   "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+   "quote": "a variety probably of Nicotiana",
+   "page": "pipe-weed passage (ch. 3)"
+  },
+  {
+   "index": 401,
+   "feature": "in-world bibliography",
+   "claim": "The Note on the Shire Records credits Meriadoc with a Herblore of the Shire, a Reckoning of Years comparing calendars, and a treatise on Old Words and Names, so the record cites fictional reference works by title.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), quoting the Note",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "quote": "Old Words and Names in the Shire",
+   "page": "§1.7, pp. 11–12"
+  },
+  {
+   "index": 402,
+   "feature": "speech converted to record",
+   "claim": "'Concerning Pipe-weed' began as a lengthy speech by Merry in a draft of 'The Road to Isengard' that was removed and reworked into the Prologue, so dialogue was converted into record.",
+   "source": "Tolkien Gateway, 'Prologue (The Lord of the Rings)'",
+   "url": "https://tolkiengateway.net/wiki/Prologue_(The_Lord_of_the_Rings)",
+   "quote": "a lengthy speech of Merry about pipe-weed",
+   "page": "§ History of composition"
+  }
+ ]
+}
