@@ -818,18 +818,13 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // The discharge itself is recorded in OWNER_GATED_DISCHARGE at the top of this file,
   // where the pin that used to refuse it now checks the cure is still in the tree.
   const WALKER_ROWS_OWED = Object.freeze({
-    // ⭐ 2026-09-05, THE DESK LANDING (§900) — TWO writer-reach arms ENTER OWED, declared: the writer-reach register was
-    // re-taken at the composed tip (register car 2, `--rebank --charter=§900`) and measures corpusMeta.simulationFlagsLit
-    // = 81 (the walker corpus lights every simulation flag; SEAT-78 minted `irregularForceEnabled`), while the observed-shape
-    // register still carries 80: its schema-17 migration receipt's subjectSha (0742f8ff5, OSR-SCHEMA17's own dock) is not an
-    // ancestor of the composed lineage after the cherry-pick replay (fea88e5b1), so the OSR CLI `--write` REFUSES to re-take
-    // it (chair kit: rulings/RULING-OSR-900-NO-WRITE.md). The two walkers disagree by exactly that one flag until rung 18
-    // re-executes the migration with a subject commit inside the lineage. The census rows carry a `capture` magnitude on
-    // the lit count (ceiling 81) so a SECOND new flag reds by figure. OWED_CEILING moves 3 → 5 with them; both retire at rung 18.
-    'tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers':
-      'NOT FREED — the OSR receipt lies outside the landing lineage; rung 18 (lane OSR-SCHEMA18) re-anchors it and both walkers read 81.',
-    'tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count':
-      'NOT FREED — the same one-flag disagreement (the arm re-asserts simulationFlagsLit against OSR before it compares digests); retires with the row above at rung 18.',
+    // ⭐⭐ 2026-09-06, THE OSR RUNG-18 LANDING (§902) — THE TWO WRITER-REACH ROWS ARE FREED, NOT FORGIVEN. They entered at §900 as
+    // declared debt: the writer-reach register measured corpusMeta.simulationFlagsLit = 81 while the observed-shape register
+    // carried 80, because its schema-17 migration receipt's subjectSha lay outside the product lineage after a cherry-pick replay
+    // and the OSR CLI refused every --write. OSR-SCHEMA18 (cars f20d5dd48 + a05a4646e) re-executed the governed migration with a
+    // SUBJECT COMMIT INSIDE THE LINEAGE; the genesis froze 81 on the OSR side, both arms went green by title in the whole-suite
+    // proof at a05a4646e, and a remove-only --update retired both census rows; these two ledger entries leave with them and
+    // OWED_CEILING drops by exactly two. The voice per-file row, enforcement-claims and the owner-gated golden-master stay.
     // ⭐ 2026-09-05, THE DESK LANDING (§900) — the Tier-2 voice per-file arm RE-ENTERS as OWED, declared: two src/domain
     // files spell a producer's authored dashed vocabulary (a total map's keys and two parsed delimiters); the shrink-only door
     // refuses the 311 → 319 rise and the generator import is forbidden in writing. Structural cure: an authored-vocabulary
@@ -926,7 +921,9 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // 5 → 2 on 2026-09-05 (§899): the two Tier-3 JSX voice rows and the clamp-primitive row FREED by the composed
   // landing (VOICE-JSX + the CLAMP-W3 ceiling car); enforcement-claims and the owner-gated golden-master remain.
   // 2 → 3 on 2026-09-05 (§900): the Tier-2 voice per-file row re-enters OWED (declared, attributed) — see WALKER_ROWS_OWED.
-  const OWED_CEILING = 5; // 3 → 5 on 2026-09-05 (§900): the two writer-reach ↔ OSR one-flag rows enter OWED, declared (see WALKER_ROWS_OWED); both retire at OSR rung 18.
+  // 5 → 3 on 2026-09-06 (§902): the two writer-reach rows FREED by the rung-18 re-anchoring (OSR-SCHEMA18); the voice
+  // per-file row, enforcement-claims and the owner-gated golden-master stay.
+  const OWED_CEILING = 3; // 3 → 5 on 2026-09-05 (§900): the two writer-reach ↔ OSR one-flag rows enter OWED, declared (see WALKER_ROWS_OWED); both retire at OSR rung 18.
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
