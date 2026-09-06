@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 10,
+ "indices": [
+  150,
+  151,
+  152,
+  153,
+  154,
+  155,
+  156,
+  157,
+  158,
+  159,
+  160,
+  161,
+  162,
+  163,
+  164
+ ],
+ "claims": [
+  {
+   "index": 150,
+   "feature": "ninety-percent familiar base",
+   "claim": "Palmatier argues Kay's worlds are essentially ninety percent familiar, altered through everyday rituals and lore (riselka) so each change informs the whole.",
+   "source": "Joshua Palmatier, 'Altering the Familiar: Tigana by Guy Gavriel Kay', Tor.com/Reactor (2016-07-06)",
+   "url": "https://reactormag.com/altering-the-familiar-tigana-by-guy-gavriel-kay/",
+   "quote": "essentially 90 percent familiar",
+   "page": ""
+  },
+  {
+   "index": 151,
+   "feature": "impressionistic language",
+   "claim": "Palmatier calls Kay's writing evocative, even impressionistic in places, transporting through simple word choices and turns of phrase.",
+   "source": "Joshua Palmatier, 'Altering the Familiar: Tigana by Guy Gavriel Kay', Tor.com/Reactor (2016-07-06)",
+   "url": "https://reactormag.com/altering-the-familiar-tigana-by-guy-gavriel-kay/",
+   "quote": "evocative, even impressionistic in places",
+   "page": ""
+  },
+  {
+   "index": 152,
+   "feature": "prolepsis",
+   "claim": "Hood says Kay relies heavily on prolepsis, revealing outcomes first so reading becomes a countdown scanning every sentence for tripwires of fate.",
+   "source": "J.S. Hood, 'The Lions of Al-Rassan: A Masterclass in Weaving the Slow Burn', LitStack (2026-05-30)",
+   "url": "https://www.litstack.com/the-lions-of-al-rassan-by-guy-gavriel-kay/",
+   "quote": "Kay relies heavily on prolepsis",
+   "page": ""
+  },
+  {
+   "index": 153,
+   "feature": "obstructed climactic view",
+   "claim": "Hood notes the final duel is seen through Jehane's eyes, obstructed by a veil of sunlight showing only silhouettes, identity withheld to the end.",
+   "source": "J.S. Hood, 'The Lions of Al-Rassan: A Masterclass in Weaving the Slow Burn', LitStack (2026-05-30)",
+   "url": "https://www.litstack.com/the-lions-of-al-rassan-by-guy-gavriel-kay/",
+   "quote": "obstructed by a veil of sunlight",
+   "page": ""
+  },
+  {
+   "index": 154,
+   "feature": "momentum by subtleties",
+   "claim": "Hood says the novel's momentum is driven by subtleties: a shared look, a double-meaning line of poetry, a change of stance.",
+   "source": "J.S. Hood, 'The Lions of Al-Rassan: A Masterclass in Weaving the Slow Burn', LitStack (2026-05-30)",
+   "url": "https://www.litstack.com/the-lions-of-al-rassan-by-guy-gavriel-kay/",
+   "quote": "The novel’s momentum is driven by subtleties",
+   "page": ""
+  },
+  {
+   "index": 155,
+   "feature": "telling not showing (criticism)",
+   "claim": "Hobbs (Globe and Mail, via Wikipedia) finds Kay's prose an obstacle, describing a character as unconventional rather than enacting it, with bothersome Tolkien-like sentence structures.",
+   "source": "Wikipedia: Children of Earth and Sky (Reception section citing Hobbs, Wolfe, Kirkus, Capossere/Jones, Alexander)",
+   "url": "https://en.wikipedia.org/wiki/Children_of_Earth_and_Sky",
+   "quote": "stop finding bothersome sentence structures",
+   "page": ""
+  },
+  {
+   "index": 156,
+   "feature": "restrained supernatural",
+   "claim": "Wolfe and Kirkus (via Wikipedia) describe Kay's supernatural as intentionally restrained, a light touch with the fantasy.",
+   "source": "Wikipedia: Children of Earth and Sky (Reception section citing Hobbs, Wolfe, Kirkus, Capossere/Jones, Alexander)",
+   "url": "https://en.wikipedia.org/wiki/Children_of_Earth_and_Sky",
+   "quote": "light touch with the fantasy",
+   "page": ""
+  },
+  {
+   "index": 157,
+   "feature": "macro-to-micro scaling",
+   "claim": "Capossere (via Wikipedia) says the story shifts seamlessly from macro to micro, scaling down epic events so history becomes humanized.",
+   "source": "Wikipedia: Children of Earth and Sky (Reception section citing Hobbs, Wolfe, Kirkus, Capossere/Jones, Alexander)",
+   "url": "https://en.wikipedia.org/wiki/Children_of_Earth_and_Sky",
+   "quote": "scaling down epic events so that history becomes humanized",
+   "page": ""
+  },
+  {
+   "index": 158,
+   "feature": "slow pace, journeys",
+   "claim": "Alexander (via Wikipedia) says Kay never races to a destination; the joy is in the journeys; the slow pace is typical.",
+   "source": "Wikipedia: Children of Earth and Sky (Reception section citing Hobbs, Wolfe, Kirkus, Capossere/Jones, Alexander)",
+   "url": "https://en.wikipedia.org/wiki/Children_of_Earth_and_Sky",
+   "quote": "joy of his novels is invariably in the journeys",
+   "page": ""
+  },
+  {
+   "index": 159,
+   "feature": "carried-away prose (criticism)",
+   "claim": "Kirkus (via Wikipedia) notes writing that sometimes gets carried away with itself among Kay's usual elements.",
+   "source": "Wikipedia: A Brightness Long Ago (Reception citing Domise, Wolfe, Capossere/Jones, Alexander, Kirkus)",
+   "url": "https://en.wikipedia.org/wiki/A_Brightness_Long_Ago",
+   "quote": "that sometimes gets carried away with itself",
+   "page": ""
+  },
+  {
+   "index": 160,
+   "feature": "fringe characters given depth",
+   "claim": "Alexander (via Wikipedia) praises fringe characters created with depth, tenderness and intelligence, the insignificant given significance.",
+   "source": "Wikipedia: A Brightness Long Ago (Reception citing Domise, Wolfe, Capossere/Jones, Alexander, Kirkus)",
+   "url": "https://en.wikipedia.org/wiki/A_Brightness_Long_Ago",
+   "quote": "depth and tenderness and intelligence",
+   "page": ""
+  },
+  {
+   "index": 161,
+   "feature": "gift with language",
+   "claim": "De Lint (via Wikipedia) credits small telling historical insights and Kay's sheer gift with language.",
+   "source": "Wikipedia: The Sarantine Mosaic (Reception citing Charles de Lint; Further reading Borowska-Szerszun)",
+   "url": "https://en.wikipedia.org/wiki/The_Sarantine_Mosaic",
+   "quote": "Kay’s sheer gift with language",
+   "page": ""
+  },
+  {
+   "index": 162,
+   "feature": "appealing minor characters",
+   "claim": "Dirda (via Wikipedia) notes Under Heaven is leavened with appealing minor characters.",
+   "source": "Wikipedia: Under Heaven (novel) (author's letter; Reception citing Wiersema, Dirda)",
+   "url": "https://en.wikipedia.org/wiki/Under_Heaven_(novel)",
+   "quote": "appealing minor characters",
+   "page": ""
+  },
+  {
+   "index": 163,
+   "feature": "right to telescope events",
+   "claim": "Kay's author's letter for Under Heaven (quoted on Wikipedia) reserves the right to change or telescope events so a history-knowing reader still cannot predict the story.",
+   "source": "Wikipedia: Under Heaven (novel) (author's letter; Reception citing Wiersema, Dirda)",
+   "url": "https://en.wikipedia.org/wiki/Under_Heaven_(novel)",
+   "quote": "I reserve the right to change, or telescope events",
+   "page": ""
+  },
+  {
+   "index": 164,
+   "feature": "many characters slow the tale (criticism)",
+   "claim": "Dusmann (via Wikipedia) says the in-depth examination of so many characters slows The Last Light of the Sun with little left to wonder about.",
+   "source": "Wikipedia: The Last Light of the Sun (Reception citing Hromic, Dusmann)",
+   "url": "https://en.wikipedia.org/wiki/The_Last_Light_of_the_Sun",
+   "quote": "in-depth examination of so many characters slows the tale down",
+   "page": ""
+  }
+ ]
+}

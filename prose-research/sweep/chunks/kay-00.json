@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 0,
+ "indices": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14
+ ],
+ "claims": [
+  {
+   "index": 0,
+   "feature": "shifting-focalization density",
+   "claim": "Randall counts that only three chapters of the Fionavar Tapestry are focalized through a single character while chapter 8 of The Summer Tree shifts focalization twenty-one times in twenty-four pages, which he reads as strategy rather than ineptness.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "shifts focalization twenty-one times",
+   "page": ""
+  },
+  {
+   "index": 1,
+   "feature": "focalizant roster",
+   "claim": "Randall counts twenty-six distinct focalizants in the trilogy plus, in a very few places, an unspecified omniscient focalizant.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "employs twenty-six different agents of focalization (focalizants)",
+   "page": ""
+  },
+  {
+   "index": 2,
+   "feature": "Victorian / Dunnett lineage",
+   "claim": "Randall places Kay's multi-focalized technique with the richly populated Victorian novel and the thick historical novel of Dorothy Dunnett rather than with single-focalizer fantasies like Tolkien, Donaldson or Wolfe.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "closest correlation is to the thick historical novel",
+   "page": ""
+  },
+  {
+   "index": 3,
+   "feature": "four effects of shifting focalization",
+   "claim": "Randall argues the shifts (1) let the reader assimilate the secondary world, (2) build knowledge of character, (3) move the story from kernel to kernel, and (4) delay the unfolding of each plot-line, all serving a rhetoric of grandeur and scope.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "the shifts delay the unfolding of the story",
+   "page": ""
+  },
+  {
+   "index": 4,
+   "feature": "strategy of delay",
+   "claim": "Randall shows Darien's climactic line being deferred: his maturation is postponed by six other kernels across sixty pages, and during his search for Rakoth the narrative shifts focalization eighty-seven times with Darien as focalizant only nine.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "shifts focalization eighty-seven times, with Darien as focalizant only nine",
+   "page": ""
+  },
+  {
+   "index": 5,
+   "feature": "register contrast: plain vs high style",
+   "claim": "Randall contrasts Darien's death (short sentences, concrete description, matter-of-fact tone, strictly focalized) with the zero-focalized 'high style' of the Arthurian departure, arguing the register tracks who is perceiving.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "Sentences are short, description is concrete.",
+   "page": ""
+  },
+  {
+   "index": 6,
+   "feature": "high-style set pieces",
+   "claim": "Randall notes that Kevin's death, Paul's death on the Summer Tree, Diarmuid's death and the Arthurian departure are written as an obvious attempt at rhetorical high style, i.e. myth-in-the-making passages.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "an obvious attempt at rhetorical",
+   "page": ""
+  },
+  {
+   "index": 7,
+   "feature": "pathos / sentimental register",
+   "claim": "Randall reads the Darien plot as carried by a rhetoric of the sentimental, with attempts at child-like thought and pathos in both the classical and common senses.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "contains a rhetoric of the sentimental",
+   "page": ""
+  },
+  {
+   "index": 8,
+   "feature": "typographic sectioning",
+   "claim": "Randall documents the trilogy's hierarchy of Book > Chapter > Section (marked by a graphic symbol from the jacket painting) > Subsection (marked by blank space), the units within which focalization shifts occur.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "Sections are distinguished by a graphic symbol",
+   "page": ""
+  },
+  {
+   "index": 9,
+   "feature": "tightly-knit kernels, no off-stage surprise",
+   "claim": "Randall contrasts Kay with Tolkien's off-stage Aragorn: Kay keeps important events from surprising the reader by shifting attention among characters far more frequently.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "determined not to have important events surprise us",
+   "page": ""
+  },
+  {
+   "index": 10,
+   "feature": "zero focalization used sparingly",
+   "claim": "Randall identifies the few zero-focalized (omniscient) passages as the mythic set pieces perceived by no character, e.g. the Arthurian trio's departure.",
+   "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/randallfionavar/",
+   "quote": "shifts to an unspecified focalizant, to omniscience",
+   "page": ""
+  },
+  {
+   "index": 11,
+   "feature": "focalization census (Tigana)",
+   "claim": "Kleander's count: twenty-one focalizants and more than 150 focalizations in Tigana, Devin focalized forty-one times, Dianora twenty-seven, plus twenty-one separate non-focalized passages.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "twenty-one separate focalizants in Tigana, and more than 150 separate focalizations",
+   "page": ""
+  },
+  {
+   "index": 12,
+   "feature": "delayed counter-focalizant",
+   "claim": "Kleander shows Part One's twenty-two focalizations (twelve through Devin) uphold a simple good/evil quest before Part Two hands nine of twelve sections to Dianora and demolishes the image of Brandin as evil.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "made up of twenty-two separate focalizations",
+   "page": ""
+  },
+  {
+   "index": 13,
+   "feature": "antagonist focalized once, late",
+   "claim": "Kleander notes Brandin, who originates the whole fabula, is focalized through only once, for about a page at the end of the battle, after the reader has already formed a judgment.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "No more than a page long, Brandin’s focalization",
+   "page": ""
+  },
+  {
+   "index": 14,
+   "feature": "prologue as mosaic of focalizations",
+   "claim": "Kleander quotes Kay that the prologue of Sailing to Sarantium was written as a mosaic of different focalizations.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "the prologue of Sailing to Sarantium was written as a mosaic",
+   "page": ""
+  }
+ ]
+}

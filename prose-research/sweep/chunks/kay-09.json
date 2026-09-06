@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 9,
+ "indices": [
+  135,
+  136,
+  137,
+  138,
+  139,
+  140,
+  141,
+  142,
+  143,
+  144,
+  145,
+  146,
+  147,
+  148,
+  149
+ ],
+ "claims": [
+  {
+   "index": 135,
+   "feature": "present tense for women's viewpoints",
+   "claim": "Harrison (in comments) states Under Heaven's sections with women viewpoint characters are in present tense while male-viewpoint sections are in past tense.",
+   "source": "Niall Harrison, 'Under Heaven' (review), Vector / BSFA (2010-08-18)",
+   "url": "https://vector-bsfa.com/2010/08/18/under-heaven/",
+   "quote": "are in present tense",
+   "page": ""
+  },
+  {
+   "index": 136,
+   "feature": "narrator on coincidence and historians",
+   "claim": "Harrison quotes the narrator's remark that only a patient historian or a story-shaper would note such conjunctions, as Kay's self-reflexive use of history.",
+   "source": "Niall Harrison, 'Under Heaven' (review), Vector / BSFA (2010-08-18)",
+   "url": "https://vector-bsfa.com/2010/08/18/under-heaven/",
+   "quote": "Only a patient historian with access to records",
+   "page": ""
+  },
+  {
+   "index": 137,
+   "feature": "veiled omniscient",
+   "claim": "Walton names Kay's Sarantine style an odd, distanced, elegiac 'veiled omniscient': a narrator who knows everything but draws and lifts veils.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "odd, distanced, elegaic style that I want to call veiled omniscient",
+   "page": ""
+  },
+  {
+   "index": 138,
+   "feature": "withheld identity trick (criticism)",
+   "claim": "Walton dislikes Kay's Dunnett-like trick of describing a character for pages without saying who is who.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "plays tricks where he described but doesn’t say who is who",
+   "page": ""
+  },
+  {
+   "index": 139,
+   "feature": "pulling back / artifice",
+   "claim": "Walton says there is always a pulling back, events interpreted through a consciousness of artifice, like the wrong end of a telescope.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "there’s always a pulling back",
+   "page": ""
+  },
+  {
+   "index": 140,
+   "feature": "no throwaway viewpoints",
+   "claim": "Walton notes many points of view but Kay never takes up a character just to throw them away; ironic omniscient linking underlines everything.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "he never takes up a character just to throw them away",
+   "page": ""
+  },
+  {
+   "index": 141,
+   "feature": "single-day compression and pluperfect",
+   "claim": "Walton observes the books concentrate on single days with heavy flashback, using more pluperfect than anything she can think of, almost like Ulysses.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "more use of the pluperfect tense in these than anything else",
+   "page": ""
+  },
+  {
+   "index": 142,
+   "feature": "one event from many strata",
+   "claim": "Walton notes a chariot race is seen from a driver, someone in the crowd and an undercook making soup.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "an undercook for the Blue faction making soup",
+   "page": ""
+  },
+  {
+   "index": 143,
+   "feature": "mediating metaphors",
+   "claim": "Walton says Kay mediates the world through chariot races and mosaic-making, describing heresy and empire in those terms.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "mediates the world through the chariot races",
+   "page": ""
+  },
+  {
+   "index": 144,
+   "feature": "details that bite",
+   "claim": "Walton praises details real enough to bite: tesserae quality, mud, fish sauces, the arrow-extraction tool.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "The details are all real enough to bite",
+   "page": ""
+  },
+  {
+   "index": 145,
+   "feature": "historical fantasy is open",
+   "claim": "Walton argues renaming reshuffles the deck so no reader knows the ending: a historical novel is inevitably tragedy, a historical fantasy is open.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "a historical fantasy is open",
+   "page": ""
+  },
+  {
+   "index": 146,
+   "feature": "sparse glinting magic",
+   "claim": "Walton says the little magic runs glinting through everything like silver threads in shot silk.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "like the silver threads in shot silk",
+   "page": ""
+  },
+  {
+   "index": 147,
+   "feature": "mannered and distanced (criticism)",
+   "claim": "Walton finds Arbonne mannered, distanced and held at arm's length, its world denser than its gossamer characters.",
+   "source": "Jo Walton, 'Provencal Fantasy: Guy Gavriel Kay's A Song for Arbonne', Tor.com/Reactor (2010-08-06)",
+   "url": "https://reactormag.com/provencal-fantasy-guy-gavriel-kays-a-song-for-arbonne/",
+   "quote": "mannered and distanced and held at arm’s length",
+   "page": ""
+  },
+  {
+   "index": 148,
+   "feature": "set-piece moments",
+   "claim": "Walton remembers Arbonne chiefly through set-piece moments of the kind Kay does so well.",
+   "source": "Jo Walton, 'Provencal Fantasy: Guy Gavriel Kay's A Song for Arbonne', Tor.com/Reactor (2010-08-06)",
+   "url": "https://reactormag.com/provencal-fantasy-guy-gavriel-kays-a-song-for-arbonne/",
+   "quote": "a few set-piece moments, of the kind Kay does so well",
+   "page": ""
+  },
+  {
+   "index": 149,
+   "feature": "trajectory away from magic",
+   "claim": "Walton traces a trajectory away from magic from Fionavar through Tigana and Arbonne to Lions.",
+   "source": "Jo Walton, 'Provencal Fantasy: Guy Gavriel Kay's A Song for Arbonne', Tor.com/Reactor (2010-08-06)",
+   "url": "https://reactormag.com/provencal-fantasy-guy-gavriel-kays-a-song-for-arbonne/",
+   "quote": "a trajectory away from magic",
+   "page": ""
+  }
+ ]
+}

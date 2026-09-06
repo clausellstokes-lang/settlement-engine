@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 1,
+ "indices": [
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29
+ ],
+ "claims": [
+  {
+   "index": 15,
+   "feature": "telescoping of events",
+   "claim": "Kleander documents Kay's admitted 'telescoping' (iconoclasm moved centuries earlier; a 750-year Reconquista compressed to one lifetime) so that historical loss lands on the same set of characters and intensifies emotional response.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "intensify the emotional and intellectual response to what really happened",
+   "page": ""
+  },
+  {
+   "index": 16,
+   "feature": "accumulation of detail",
+   "claim": "Kleander quotes Kay's stated method of a quiet, steady accumulation of detail and complexity that reaches readers subliminally and builds trust.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "quiet, steady accumulation of detail and complexity",
+   "page": ""
+  },
+  {
+   "index": 17,
+   "feature": "retrospective hints",
+   "claim": "Kleander observes that Kay plants hints to Valentin's identity as Rhun throughout Tigana which only make sense in retrospect.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "the hints only make sense in retrospect",
+   "page": ""
+  },
+  {
+   "index": 18,
+   "feature": "withheld duel outcome",
+   "claim": "Kleander notes that who survived the Ammar–Rodrigo duel is not revealed until halfway through the epilogue, by which point the outcome is 'strangely unimportant'.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "not until halfway through the epilogue that Kay reveals who survived",
+   "page": ""
+  },
+  {
+   "index": 19,
+   "feature": "parallel-structured prayer passages",
+   "claim": "Kleander sets side by side two near-identical prayer paragraphs (Asharite and Jaddite) as the clearest example of Kay using structural repetition to show how alike the religions are.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "the clearest example of how alike the religions are",
+   "page": ""
+  },
+  {
+   "index": 20,
+   "feature": "historian as unreliable narrator-in-text",
+   "claim": "Kleander reads Pertennius (Procopius) as Kay's illustration that history is carved and chosen, with the narrator's opening line that writers of history seek the dramatic over the truth.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "exquisitely phrased vituperation",
+   "page": ""
+  },
+  {
+   "index": 21,
+   "feature": "juxtaposed ideological orientations",
+   "claim": "Kleander (via Toolan) argues Kay's structure leaves the reader torn between different views rather than resolved.",
+   "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
+   "url": "https://brightweavings.com/presentreality/",
+   "quote": "left them ‘torn between different views’",
+   "page": ""
+  },
+  {
+   "index": 22,
+   "feature": "chronicle-register opening",
+   "claim": "Rettino reads Tigana's first sentence ('In the autumn season of wine, word went forth...') as an entry in a chronicle lending historical flavour, then subverted when the reported death proves faked.",
+   "source": "Matthew Rettino, 'Fantasies of History: Guy Gavriel Kay's Synthesis of the Historical Fantasy Novel' (Honours thesis, McGill University, 2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "reads like an entry in a chronicle",
+   "page": ""
+  },
+  {
+   "index": 23,
+   "feature": "speculative narrator-historian persona",
+   "claim": "Rettino notes the narrator adopts a cautious, guessing persona ('perhaps because...') whose judgments the naive reader must nonetheless accept, the club-story authority of portal-quest fantasy.",
+   "source": "Matthew Rettino, 'Fantasies of History: Guy Gavriel Kay's Synthesis of the Historical Fantasy Novel' (Honours thesis, McGill University, 2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "The narrator’s speculative persona supposedly only guesses",
+   "page": ""
+  },
+  {
+   "index": 24,
+   "feature": "omniscient historian breaches immersion",
+   "claim": "Rettino cites the Lions passage 'One hundred and thirty-nine citizens of Fezana... This was the way of it' as the omniscient historian's voice breaking the immersive character perspective.",
+   "source": "Matthew Rettino, 'Fantasies of History: Guy Gavriel Kay's Synthesis of the Historical Fantasy Novel' (Honours thesis, McGill University, 2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "the narrator’s omniscient historian’s voice",
+   "page": ""
+  },
+  {
+   "index": 25,
+   "feature": "exposition disguised as thought",
+   "claim": "Rettino shows the narrator's voice and Jehane's thoughts intersecting so that distanced background exposition is disguised as the character's reflections.",
+   "source": "Matthew Rettino, 'Fantasies of History: Guy Gavriel Kay's Synthesis of the Historical Fantasy Novel' (Honours thesis, McGill University, 2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "disguising it as Jehane’s thoughts",
+   "page": ""
+  },
+  {
+   "index": 26,
+   "feature": "free indirect discourse for world-information",
+   "claim": "Rettino notes Jehane's noticing what is unusual, in free indirect discourse, dispenses world information without a guide figure.",
+   "source": "Matthew Rettino, 'Fantasies of History: Guy Gavriel Kay's Synthesis of the Historical Fantasy Novel' (Honours thesis, McGill University, 2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "she notes, in free indirect discourse",
+   "page": ""
+  },
+  {
+   "index": 27,
+   "feature": "exposed seams / prophecy",
+   "claim": "Rettino argues that riselka prophecies foreshadow and expose the structural lines of Tigana, seams a mimetic novelist would hide.",
+   "source": "Matthew Rettino, 'Fantasies of History: Guy Gavriel Kay's Synthesis of the Historical Fantasy Novel' (Honours thesis, McGill University, 2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "foreshadow and expose the structural lines in his novel",
+   "page": ""
+  },
+  {
+   "index": 28,
+   "feature": "later-dynasty historian voice",
+   "claim": "Rettino documents that Under Heaven's narrator speaks in several scenes in the voice of a later-dynasty historian, citing chroniclers' consensus and then departing from it with knowing irony.",
+   "source": "Matthew Rettino, 'Fantasies of History: Guy Gavriel Kay's Synthesis of the Historical Fantasy Novel' (Honours thesis, McGill University, 2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "speaks in several scenes in the voice of a historian",
+   "page": ""
+  },
+  {
+   "index": 29,
+   "feature": "ironic exclamation in narratorial voice",
+   "claim": "Rettino points to the narrator's exclamation that Shen Tai 'hadn't even passed the examinations at that point!' as the moment author and historian-narrator blend.",
+   "source": "Matthew Rettino, 'Fantasies of History: Guy Gavriel Kay's Synthesis of the Historical Fantasy Novel' (Honours thesis, McGill University, 2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "The exclamation point is telling",
+   "page": ""
+  }
+ ]
+}

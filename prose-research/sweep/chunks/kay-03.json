@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 3,
+ "indices": [
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59
+ ],
+ "claims": [
+  {
+   "index": 45,
+   "feature": "smaller, oblique work that lasts",
+   "claim": "Cobb notes Crispin's surviving second mosaic is on a smaller scale and more obliquely expressed, the novel implying that is why it lasts.",
+   "source": "Christopher Cobb, 'Guy Gavriel Kay and the Psychology of History', Foundation (Summer 2005), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/hspsychologyhistory/",
+   "quote": "on a smaller scale and more obliquely expressed",
+   "page": ""
+  },
+  {
+   "index": 46,
+   "feature": "human smallness before history",
+   "claim": "Cobb contrasts Kay's sense of proportion, the smallness of the human being in relation to the world, with Silverberg's hero who masters history.",
+   "source": "Christopher Cobb, 'Guy Gavriel Kay and the Psychology of History', Foundation (Summer 2005), reprinted on Bright Weavings",
+   "url": "https://brightweavings.com/hspsychologyhistory/",
+   "quote": "the smallness of the human being in relation to the world",
+   "page": ""
+  },
+  {
+   "index": 47,
+   "feature": "variable internal focalization share",
+   "claim": "Töyrylä estimates about sixty per cent of Tigana is focalized through Devin or Dianora, with at least nineteen other identifiable focal characters and most chapters alternating three or more perspectives.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "About sixty per cent of the text",
+   "page": ""
+  },
+  {
+   "index": 48,
+   "feature": "narrated monologue amplifies emotion",
+   "claim": "Töyrylä shows Dianora's passages use free indirect thought with the character's own metaphors, deictics and incomplete sentences, amplifying the emotional notes.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "incomplete sentences point in the direction of the character",
+   "page": ""
+  },
+  {
+   "index": 49,
+   "feature": "polysyndetic verb chains",
+   "claim": "Töyrylä points to the long list of verbs ('battered and levelled and burned... and killed... and taken away') as the character's voice inside the narration.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "the long list of verbs",
+   "page": ""
+  },
+  {
+   "index": 50,
+   "feature": "antagonist as focal character",
+   "claim": "Töyrylä notes Alberico is a regular focal character, which humanises him with frustration and fear without making him sympathetic.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "Using the antagonist as a focal character makes him",
+   "page": ""
+  },
+  {
+   "index": 51,
+   "feature": "multiple focalization of one scene",
+   "claim": "Töyrylä analyses the Ring Dive as narrated twice or thrice through Devin, Dianora and Alessan, with contradictory readings of Brandin's expressionless face.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "some of the events are narrated twice or even thrice",
+   "page": ""
+  },
+  {
+   "index": 52,
+   "feature": "withheld focal character",
+   "claim": "Töyrylä shows Rhun is never a focal character until the final pages, enabling the Valentin twist while other focalizants register him in passing.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "the focalization unexpectedly shifts to him",
+   "page": ""
+  },
+  {
+   "index": 53,
+   "feature": "minor focalizant then flat execution",
+   "claim": "Töyrylä reads the innkeeper Ettocio: focalized for a few pages, then a shift to narratorial focalization enables the matter-of-fact description of his execution.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "enables the matter-of-fact description of his execution",
+   "page": ""
+  },
+  {
+   "index": 54,
+   "feature": "indifferent narrator, minimal commentary",
+   "claim": "Töyrylä finds narratorial passages are matter-of-fact description with only minimal commentary (e.g. 'Unfortunately'), denying readers a guiding moral voice.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "matter-of-fact description with only minimal commentary",
+   "page": ""
+  },
+  {
+   "index": 55,
+   "feature": "report-style summary of violence",
+   "claim": "Töyrylä notes the Senzio courtyard slaughter is narrated in summary with 'according to most reports later' and approximate casualties, the narrator restricting omniscience to what becomes known.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "the narrator is merely reporting what happened, without any commentary",
+   "page": ""
+  },
+  {
+   "index": 56,
+   "feature": "'as everyone knows' communal viewpoint",
+   "claim": "Töyrylä identifies a narrator who reports what the world seems like to an average inhabitant, adopting the Palm's religious stance ('as everyone knows') and using 'word went forth' to mislead truthfully.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "reporting what the world seems like to an average person",
+   "page": ""
+  },
+  {
+   "index": 57,
+   "feature": "intermental / group focalization with irony",
+   "claim": "Töyrylä analyses tavern-patron and Astibar-town passages focalized through a group, combining sardonic tone with dramatic irony since readers know more.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "a sardonic tone is combined with the deeper level irony",
+   "page": ""
+  },
+  {
+   "index": 58,
+   "feature": "truthful misdirection at the opening",
+   "claim": "Töyrylä argues Kay's 'outright lie' opening is not a lie: the narrator says only that word went forth of Sandre's death.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "the narrator does not claim that Sandre is dead",
+   "page": ""
+  },
+  {
+   "index": 59,
+   "feature": "authorial aim: ambiguities and divided loyalties",
+   "claim": "Töyrylä quotes Kay's afterword that Tigana aimed to stretch the reader with ambiguities and divided loyalties in a genre that tends not to work that way.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "to stretch the reader with ambiguities and divided loyalties",
+   "page": ""
+  }
+ ]
+}

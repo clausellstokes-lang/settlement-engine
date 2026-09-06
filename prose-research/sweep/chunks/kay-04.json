@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 4,
+ "indices": [
+  60,
+  61,
+  62,
+  63,
+  64,
+  65,
+  66,
+  67,
+  68,
+  69,
+  70,
+  71,
+  72,
+  73,
+  74
+ ],
+ "claims": [
+  {
+   "index": 60,
+   "feature": "hidden identity in minor-character scene",
+   "claim": "Töyrylä notes the Ettocio scene describes Alessan, Devin and the disguised Sandre without naming them, so readers half-recognise what the focalizant cannot.",
+   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "readers are not directly told who the characters are",
+   "page": ""
+  },
+  {
+   "index": 61,
+   "feature": "internalised magic, no talismans",
+   "claim": "Webb notes Tigana's magic correlates with psychological strength and the text contains no talismanic objects, staffs or reforged swords.",
+   "source": "Janeen Webb, 'Myth and the New High Fantasy: Guy Gavriel Kay's Tigana', The Ring Bearer 8.2 (Spring 1991)",
+   "url": "https://brightweavings.com/webbtigana/",
+   "quote": "the text contains no talismanic objects",
+   "page": ""
+  },
+  {
+   "index": 62,
+   "feature": "three plaited strands",
+   "claim": "Webb describes three major narrative strands plaited toward one outcome whose players never see the whole; the gods and the reader do.",
+   "source": "Janeen Webb, 'Myth and the New High Fantasy: Guy Gavriel Kay's Tigana', The Ring Bearer 8.2 (Spring 1991)",
+   "url": "https://brightweavings.com/webbtigana/",
+   "quote": "The gods, and the reader, may see the whole tapestry",
+   "page": ""
+  },
+  {
+   "index": 63,
+   "feature": "Ember-day timing as weave",
+   "claim": "Webb observes that decisive freely-willed acts are timed to the Ember Days, which interweaves the separate strands.",
+   "source": "Janeen Webb, 'Myth and the New High Fantasy: Guy Gavriel Kay's Tigana', The Ring Bearer 8.2 (Spring 1991)",
+   "url": "https://brightweavings.com/webbtigana/",
+   "quote": "It is this timing that helps to interweave the narrative strands",
+   "page": ""
+  },
+  {
+   "index": 64,
+   "feature": "punning names",
+   "claim": "Webb reads Rhun as a deliberate pun on 'ruin' and a Welsh reference, naming being crucial to the text.",
+   "source": "Janeen Webb, 'Myth and the New High Fantasy: Guy Gavriel Kay's Tigana', The Ring Bearer 8.2 (Spring 1991)",
+   "url": "https://brightweavings.com/webbtigana/",
+   "quote": "a deliberate pun on ruin",
+   "page": ""
+  },
+  {
+   "index": 65,
+   "feature": "closing on in-world prophecy",
+   "claim": "Webb notes Tigana ends with a riselka whose presence is a prophecy in itself.",
+   "source": "Janeen Webb, 'Myth and the New High Fantasy: Guy Gavriel Kay's Tigana', The Ring Bearer 8.2 (Spring 1991)",
+   "url": "https://brightweavings.com/webbtigana/",
+   "quote": "whose presence is a prophecy in itself",
+   "page": ""
+  },
+  {
+   "index": 66,
+   "feature": "nineteenth-century romance sentence structure",
+   "claim": "Webb argues Kay keeps, line by line, the sentence structure, ambience and style of nineteenth-century romance while repudiating its cosy certainties.",
+   "source": "Janeen Webb, 'Post-Romantic Romance: Guy Gavriel Kay's Tigana and A Song for Arbonne', New York Review of Science Fiction 77 (Jan 1995)",
+   "url": "https://brightweavings.com/webbarbonne/",
+   "quote": "the sentence structure, the ambience, the style of nineteenth century romance",
+   "page": ""
+  },
+  {
+   "index": 67,
+   "feature": "myth to faith to religion",
+   "claim": "Webb traces a progression from Homeric gods (Fionavar) to intercessory gods (Tigana) to off-stage gods and engineered miracles (Arbonne).",
+   "source": "Janeen Webb, 'Post-Romantic Romance: Guy Gavriel Kay's Tigana and A Song for Arbonne', New York Review of Science Fiction 77 (Jan 1995)",
+   "url": "https://brightweavings.com/webbarbonne/",
+   "quote": "a clear progression from myth through faith to religion",
+   "page": ""
+  },
+  {
+   "index": 68,
+   "feature": "historical-romance rootstock",
+   "claim": "Webb calls A Song for Arbonne a meta-fantasy bred from nineteenth-century historical romance crossed with late-twentieth-century cynicism.",
+   "source": "Janeen Webb, 'Post-Romantic Romance: Guy Gavriel Kay's Tigana and A Song for Arbonne', New York Review of Science Fiction 77 (Jan 1995)",
+   "url": "https://brightweavings.com/webbarbonne/",
+   "quote": "bred from the root stock of nineteenth century historical romance",
+   "page": ""
+  },
+  {
+   "index": 69,
+   "feature": "Dunnett's Lymond as model",
+   "claim": "Webb sees Bertran de Talair as reminiscent of Dunnett's Francis Crawford of Lymond, musician and strategist.",
+   "source": "Janeen Webb, 'Post-Romantic Romance: Guy Gavriel Kay's Tigana and A Song for Arbonne', New York Review of Science Fiction 77 (Jan 1995)",
+   "url": "https://brightweavings.com/webbarbonne/",
+   "quote": "reminiscent of Dunnett’s Francis Crawford of Lymond",
+   "page": ""
+  },
+  {
+   "index": 70,
+   "feature": "dark/light hair symbolism",
+   "claim": "Webb notes a colour symbolism of darkness and light in the female characters carried from Tigana into Arbonne.",
+   "source": "Janeen Webb, 'Post-Romantic Romance: Guy Gavriel Kay's Tigana and A Song for Arbonne', New York Review of Science Fiction 77 (Jan 1995)",
+   "url": "https://brightweavings.com/webbarbonne/",
+   "quote": "The colour symbolism of darkness and light has been retained",
+   "page": ""
+  },
+  {
+   "index": 71,
+   "feature": "author's dissent noted in text",
+   "claim": "Webb's essay carries an appended 'GGK NOTE' in which Kay disputes her reading of Arbonne's gender balance, a rare author–critic exchange in the record.",
+   "source": "Janeen Webb, 'Post-Romantic Romance: Guy Gavriel Kay's Tigana and A Song for Arbonne', New York Review of Science Fiction 77 (Jan 1995)",
+   "url": "https://brightweavings.com/webbarbonne/",
+   "quote": "Janeen Webb takes the unusual and generous step",
+   "page": ""
+  },
+  {
+   "index": 72,
+   "feature": "modernised detail",
+   "claim": "Ordway shows Kay converting the Cid's beard-pulling into a whip-scar because the scarring impresses a modern reader.",
+   "source": "Holly E. Ordway, 'The World-Building of Guy Gavriel Kay' (UMass Amherst independent study, 1998; presented at the 1998 Academic Conference on Canadian SF&F)",
+   "url": "https://brightweavings.com/worldbuilding/",
+   "quote": "unlikely to impress a modern reader, whereas the scarring does",
+   "page": ""
+  },
+  {
+   "index": 73,
+   "feature": "compressed reconquest for felt complexity",
+   "claim": "Ordway argues the twenty-year reconquest lets the reader experience victory through characters tied to both sides, so complexities are brought home rather than stated in an epilogue.",
+   "source": "Holly E. Ordway, 'The World-Building of Guy Gavriel Kay' (UMass Amherst independent study, 1998; presented at the 1998 Academic Conference on Canadian SF&F)",
+   "url": "https://brightweavings.com/worldbuilding/",
+   "quote": "the complexities of the reconquest are brought home",
+   "page": ""
+  },
+  {
+   "index": 74,
+   "feature": "one primary source per standalone",
+   "claim": "Ordway contrasts Fionavar's many myths with the standalone novels' focus on a single source each.",
+   "source": "Holly E. Ordway, 'The World-Building of Guy Gavriel Kay' (UMass Amherst independent study, 1998; presented at the 1998 Academic Conference on Canadian SF&F)",
+   "url": "https://brightweavings.com/worldbuilding/",
+   "quote": "he focuses on a single source for each novel",
+   "page": ""
+  }
+ ]
+}

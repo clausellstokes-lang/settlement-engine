@@ -5,7 +5,11 @@ matched against the run's args file sweep/args-<name>*.json extraAngles/ANGLES),
 For runs launched before finders checkpointed to disk (2026-09-05 21:15), or killed by a session limit mid-run."""
 import json,sys,os,glob,io,re
 SC=os.path.dirname(os.path.abspath(__file__))
-WF='/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/'
+import glob as _g
+def _wf(run):
+    hits=_g.glob('/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/*/subagents/workflows/'+run)
+    return (hits[0]+'/') if hits else '/nonexistent/'
+WF=None  # resolved per run by _wf(run) (2026-09-06 08:00: run ids now live in more than one session dir)
 STD={'academic':'academic and scholarly criticism','craft':'craft essays and writing-advice pieces','voice':"the author's or designers' OWN words",'close':'close readings and line-level analyses','studies':'peer-reviewed and arXiv studies','industry':'publishing and games industry','counter':'the case AGAINST the common tells'}
 name=sys.argv[1]; runs=sys.argv[2:]
 prompts=dict(STD)
@@ -15,7 +19,7 @@ for f in glob.glob(os.path.join(SC,'args-%s*.json'%name)):
         for e in a.get('extraAngles') or []: prompts[e['key']]=e['prompt']
     except Exception: pass
 def angle_of(run,agent):
-    p=WF+run+'/agent-'+agent+'.jsonl'
+    p=_wf(run)+'agent-'+agent+'.jsonl'
     if not os.path.exists(p): return None
     for line in io.open(p,encoding='utf-8'):
         try: j=json.loads(line)
@@ -30,7 +34,7 @@ def angle_of(run,agent):
     return None
 written=[]; regrade=False; verd=0
 for run in runs:
-    j=WF+run+'/journal.jsonl'
+    j=_wf(run)+'journal.jsonl'
     if not os.path.exists(j): print('no journal for',run); continue
     for line in io.open(j,encoding='utf-8'):
         try: d=json.loads(line)

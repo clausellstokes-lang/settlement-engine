@@ -1,0 +1,68 @@
+{
+ "name": "kay",
+ "chunk": 11,
+ "indices": [
+  165,
+  166,
+  167,
+  168,
+  169,
+  170
+ ],
+ "claims": [
+  {
+   "index": 165,
+   "feature": "glimpsed threads of a larger tapestry",
+   "claim": "Hromic (via Wikipedia) describes the usual sense of far more in the background than told, glimpsing a few shining threads in a larger tapestry.",
+   "source": "Wikipedia: The Last Light of the Sun (Reception citing Hromic, Dusmann)",
+   "url": "https://en.wikipedia.org/wiki/The_Last_Light_of_the_Sun",
+   "quote": "glimpsing a few shining threads in a larger tapestry",
+   "page": ""
+  },
+  {
+   "index": 166,
+   "feature": "weak magic keyed to romance sources",
+   "claim": "Ringel notes magic in Arbonne is weak, no wizard's duels, in keeping with the scarcity of pagan marvels in real medieval romances.",
+   "source": "Faye Ringel, 'Kay's Provence: From Arbonne to Ysabel' (ICFA 2009 / Anticipation 2009 paper)",
+   "url": "https://brightweavings.com/kaysprovence/",
+   "quote": "there are no wizard’s duels",
+   "page": ""
+  },
+  {
+   "index": 167,
+   "feature": "palimpsest of time",
+   "claim": "Ringel reads Arbonne and Ysabel as portraying Provence as a palimpsest where older history bleeds through into the present.",
+   "source": "Faye Ringel, 'Kay's Provence: From Arbonne to Ysabel' (ICFA 2009 / Anticipation 2009 paper)",
+   "url": "https://brightweavings.com/kaysprovence/",
+   "quote": "a palimpsest of time and space",
+   "page": ""
+  },
+  {
+   "index": 168,
+   "feature": "centuries collapsed (Bethune)",
+   "claim": "Ringel quotes Bethune that events separated by centuries are often collapsed into a single era while only the cultural milieu is kept.",
+   "source": "Faye Ringel, 'Kay's Provence: From Arbonne to Ysabel' (ICFA 2009 / Anticipation 2009 paper)",
+   "url": "https://brightweavings.com/kaysprovence/",
+   "quote": "often collapsed into a single era",
+   "page": ""
+  },
+  {
+   "index": 169,
+   "feature": "troubadour poems transformed",
+   "claim": "Ringel shows Kay transforming troubadour poems (Peire Vidal, Bernart de Ventadorn) into the in-world song of the title.",
+   "source": "Faye Ringel, 'Kay's Provence: From Arbonne to Ysabel' (ICFA 2009 / Anticipation 2009 paper)",
+   "url": "https://brightweavings.com/kaysprovence/",
+   "quote": "transforms these and other troubadour poems",
+   "page": ""
+  },
+  {
+   "index": 170,
+   "feature": "elegiac tone and consequence",
+   "claim": "Tarantino's essay characterises Kay's writing as elegiac and gently melancholy, turning on memory, continuity and the consequences of conduct (read via summary; quote withheld).",
+   "source": "Bob Tarantino, 'The fantastic fiction of Guy Gavriel Kay', C2C Journal (2016-09-07)",
+   "url": "https://c2cjournal.ca/2016/09/the-fantastic-fiction-of-guy-gavriel-kay/",
+   "quote": "",
+   "page": ""
+  }
+ ]
+}
