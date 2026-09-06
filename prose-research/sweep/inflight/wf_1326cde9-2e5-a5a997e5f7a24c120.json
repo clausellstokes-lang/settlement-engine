@@ -3,14 +3,15 @@
  "name": "wolfe",
  "angle": "monographs",
  "tag": null,
- "lines": 409,
+ "lines": 412,
  "firstTs": "2026-09-06T22:59:58.344Z",
- "lastTs": "2026-09-06T23:35:51.334Z",
+ "lastTs": "2026-09-06T23:43:23.946Z",
  "tools": {
   "Bash": 95,
   "ToolSearch": 1,
   "WebSearch": 14,
-  "Read": 2
+  "Read": 2,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://archive.org/advancedsearch.php?q=creator%3A%28Manlove%29+AND+title%3A%28science+fiction%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=20&output=json",
@@ -88,7 +89,7 @@
  "run": "wf_1326cde9-2e5",
  "agent": "a5a997e5f7a24c120",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a5a997e5f7a24c120.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-monographs.json",
   "claims": 238,

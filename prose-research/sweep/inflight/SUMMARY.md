@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:41:47 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:47:51 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -262,9 +262,13 @@
 | kay | synth |  | failed | 0 | kay-stats.mjs, section-kay.md | — | 18:42:12 |
 | kay | synth |  | failed | 0 | — | — | 17:51:50 |
 | kay | verifier | i0-14 | result | 2 | — | verdict file WRITTEN | 17:29:44 |
-| kay | verifier | i1007-1021 | in-flight | 4 | — | verdict file absent | 23:41:30 |
-| kay | verifier | i1022-1036 | in-flight | 10 | — | verdict file absent | 23:41:30 |
+| kay | verifier | i1007-1021 | result | 10 | — | verdict file WRITTEN | 23:43:41 |
+| kay | verifier | i1022-1036 | result | 10 | — | verdict file WRITTEN | 23:42:38 |
+| kay | verifier | i1037-1051 | in-flight | 5 | — | verdict file WRITTEN | 23:47:38 |
 | kay | verifier | i105-119 | result | 4 | — | verdict file WRITTEN | 17:32:58 |
+| kay | verifier | i1052-1066 | in-flight | 5 | — | verdict file absent | 23:47:38 |
+| kay | verifier | i1067-1081 | in-flight | 5 | — | verdict file WRITTEN | 23:47:39 |
+| kay | verifier | i1082-1096 | in-flight | 3 | — | verdict file WRITTEN | 23:47:50 |
 | kay | verifier | i120-134 | result | 8 | — | verdict file WRITTEN | 17:38:32 |
 | kay | verifier | i135-149 | result | 7 | — | verdict file WRITTEN | 17:38:11 |
 | kay | verifier | i15-29 | result | 2 | — | verdict file WRITTEN | 17:29:34 |
@@ -540,7 +544,7 @@
 | wolfe | finder | le-guin | result | 56 | — | 31 claims, complete=True @17:25:54 | 19:25:33 |
 | wolfe | finder | measure | result | 36 | find-wolfe-measure.md, found-wolfe-measure.json, metrics.py | 38 claims, complete=True @17:25:54 | 19:18:11 |
 | wolfe | finder | monographs | failed | 71 | — | 238 claims, complete=True @19:34:41 | 19:46:26 |
-| wolfe | finder | monographs | in-flight | 69 | — | 238 claims, complete=True @19:34:41 | 23:35:51 |
+| wolfe | finder | monographs | result | 69 | — | 238 claims, complete=True @19:34:41 | 23:43:23 |
 | wolfe | finder | monographs | in-flight | 8 | — | 238 claims, complete=True @19:34:41 | 21:31:03 |
 | wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
 | wolfe | regrade | regrade-r4 | result | 0 | — | — | 17:43:04 |
@@ -578,15 +582,19 @@
 | wolfe | verifier | i450-464 | result | 8 | — | verdict file WRITTEN | 17:35:21 |
 | wolfe | verifier | i465-467 | result | 7 | verdicts-wolfe-i465-467.json | verdict file WRITTEN | 17:34:00 |
 | wolfe | verifier | i468-482 | failed | 0 | — | verdict file absent | 19:50:38 |
+| wolfe | verifier | i468-507 | result | 8 | — | verdict file WRITTEN | 23:47:17 |
 | wolfe | verifier | i483-497 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i498-512 | failed | 0 | — | verdict file absent | 19:50:38 |
+| wolfe | verifier | i508-542 | result | 9 | — | verdict file WRITTEN | 23:47:47 |
 | wolfe | verifier | i513-527 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i528-542 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i543-557 | failed | 0 | — | verdict file absent | 19:50:38 |
+| wolfe | verifier | i545-598 | in-flight | 15 | — | verdict file absent | 23:47:42 |
 | wolfe | verifier | i558-572 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i573-587 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i588-602 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i60-74 | result | 3 | — | verdict file WRITTEN | 17:00:27 |
+| wolfe | verifier | i602-628 | in-flight | 10 | — | verdict file absent | 23:47:45 |
 | wolfe | verifier | i603-617 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i618-632 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i633-647 | failed | 0 | — | verdict file absent | 19:50:38 |

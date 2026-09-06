@@ -1261,5 +1261,51 @@
    "unsupportedLimb": "singles out settings description as the book's STRONGEST element — it is one of five co-equal Pros, and 'stellar' is reserved for the Alberico POV",
    "fromFile": "verdicts-kay-i1007-1021.json"
   }
+ },
+ {
+  "index": 1068,
+  "feature": "plainness and economy",
+  "claim": "The dissenting half of that book club called the writing pretentious and said they preferred more austere prose.",
+  "source": "Andrew Mather reporting the club's 'con' group, The Quill to Live, 17 Mar 2016",
+  "url": "https://thequilltolive.com/2016/03/17/book-club-discussion-tigana-by-guy-gabriel-kay/",
+  "quote": "found the writing pretentious and that they preferred more austere prose",
+  "page": "post body, 'Team Anti-Tigana'",
+  "kind": "reader",
+  "polarity": "rejects",
+  "date": "2016-03-17",
+  "routeHint": "browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 1068,
+   "verdict": "PARTIAL",
+   "trueWording": "A few of the “con” group ... found the writing pretentious",
+   "note": "Quote exact in the 'Team Anti-Tigana' paragraph, including 'preferred more austere prose'; but the page scopes it to a few of the con group, not the dissenting half, so the reader-count limb overstates the source.",
+   "unsupportedLimb": "attribution to the whole dissenting half: page attributes it only to 'A few of the “con” group'",
+   "fromFile": "verdicts-kay-i1067-1081.json"
+  }
+ },
+ {
+  "index": 1069,
+  "feature": "point of view and distance",
+  "claim": "The same dissenting group found the pacing jarring because the perspective jumps from point-of-view to point-of-view.",
+  "source": "Andrew Mather reporting the club's 'con' group, The Quill to Live, 17 Mar 2016",
+  "url": "https://thequilltolive.com/2016/03/17/book-club-discussion-tigana-by-guy-gabriel-kay/",
+  "quote": "the perspective often jumps from point-of-view to point-of-view",
+  "page": "post body, 'Team Anti-Tigana'",
+  "kind": "reader",
+  "polarity": "rejects",
+  "date": "2016-03-17",
+  "routeHint": "browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 1069,
+   "verdict": "PARTIAL",
+   "trueWording": "Some found the pacing jarring as the perspective often jumps",
+   "note": "Quote exact in the 'Team Anti-Tigana' paragraph; the causal limb ('as the perspective often jumps from point-of-view to point-of-view') is supported, only the scope of who held the view is overstated.",
+   "unsupportedLimb": "unanimity: page says 'Some' found the pacing jarring, not the dissenting group as a whole",
+   "fromFile": "verdicts-kay-i1067-1081.json"
+  }
  }
 ]

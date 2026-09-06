@@ -16882,6 +16882,13 @@
    "note": "Raw page reached via Wayback raw capture https://web.archive.org/web/20210416053700id_/http://lists.urth.net/pipermail/urth-urth.net/2006-September/003007.html (live host down as above). Byline and date on the page: Roy C. Lackey, rclackey at stic.net, Sun Sep 10 23:43:34 PDT 2006. The quote \"had no business being on that beach.\" is on the page word for word, and the out-of-place-physical-detail limb (two-wheeled cart tracks on a beach) is fully supported. What the page does not support is the weight the claim assigns it: the tracks are the sharpest concrete correspondence in a list of correspondences, not stated to be the evidence the link rests on.",
    "fromFile": "verdicts-wolfe-i465-467.json"
   },
+  "468": {
+   "index": 468,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fluently rendered, baroquely iterated and patterned",
+   "note": "Live Medium returned 403 with a browser UA; read on the Wayback raw capture 20240913053715id_ (byline Adam Roberts, Adam's Notebook, Jul 3 2023). The quoted words sit in the paragraph on the texture of Wolfe's four-part novel, and the surrounding clauses (detailed to a purpose; no detail merely arbitrary, each placed in the book's larger pattern) plus the later Deleuze/fold section, which insists cryptography is not obscurity, carry the virtue-not-fault limb.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
   "469": {
    "index": 469,
    "verdict": "SKIPPED_TRIAGE",
@@ -16916,6 +16923,27 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "474": {
+   "index": 474,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a full summary here would be dense, overbusy, baffling",
+   "note": "Same Wayback raw capture of the Roberts essay. The sentence follows the description of the plot's digressions, inset stories and re-met characters, so the claim's 'of the plot' limb is supported by its own sentence's subject.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
+  "475": {
+   "index": 475,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "far more people own a copy than have read it",
+   "note": "Live newyorker.com fetched 200. Quote is exact, in the paragraph comparing the tetralogy to Ulysses for science-fiction readers; the sentence continues with the phrase about reading it all the way through, so every limb of the claim holds.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
+  "476": {
+   "index": 476,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The four books that make up the series are sometimes vexing",
+   "note": "Live New Yorker page, opening sentence of the paragraph on obscure vocabulary. Word-for-word match; attribution to Bebergal correct (byline Peter Bebergal, April 24, 2015).",
+   "fromFile": "verdicts-wolfe-i468-507.json"
   },
   "477": {
    "index": 477,
@@ -16952,6 +16980,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "482": {
+   "index": 482,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "rarely, if ever, been considered fully within the larger context",
+   "note": "Live New Yorker page, in the paragraph on Wolfe's awards and genre trappings; the sentence ends with the words naming literature, so the claim's full limb is present.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
   "483": {
    "index": 483,
    "verdict": "SKIPPED_TRIAGE",
@@ -16966,12 +17001,55 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "485": {
+   "index": 485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is there a story or a concept of any stature?",
+   "note": "Live ultan.org.uk fetched 200. The block quotation is introduced as Baird Searles posing a provocative question and is keyed to footnote 5 (Searles, review of The Citadel of the Autarch, Isaac Asimov's SF Magazine, May 1983, p. 167). The 'glittering edifice of surprising words' wording is on the page in the same sentence.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
+  "486": {
+   "index": 486,
+   "verdict": "PARTIAL",
+   "trueWording": "one that perhaps marks the turning point of science fiction",
+   "note": "Quotation 'from content to style, from matter to manner' is on the ultan.org.uk page verbatim, inside the same Searles block quotation, correctly footnoted. But Searles frames it as a hedged prediction about reception rather than a delivered judgement: the work will be considered a landmark, one that PERHAPS marks the turn. The claim states it flatly.",
+   "unsupportedLimb": "the flat 'marks a turning point' — the page hedges it as 'perhaps marks', inside a forecast of how the work will be considered",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
+  "487": {
+   "index": 487,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Rather than engaging with the text to any meaningful degree",
+   "note": "Live Ultan's Library page, in the paragraph after the awards and Searles-prophecy passage. Wright's sentence names fluidity of style first among the things critics extol (also the world-conception and characterisation); the claim's subset does not overstate.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
+  "488": {
+   "index": 488,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "somewhat flimsy and subjective",
+   "note": "Live Ultan's Library page, same paragraph as index 487: Wright's sentence says claims for viewing the tetralogy as a masterpiece are somewhat flimsy and subjective, which is exactly the claim's assertion.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
   "489": {
    "index": 489,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "490": {
+   "index": 490,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "three thousand words ... without providing a single example",
+   "note": "Live Ultan's Library comment thread. The comment is signed 'Charles L' and dated 9 May 2015 (comments render name, text, then date; the preceding date belongs to Gerald Leb). Its first sentence complains Wright spent three thousand words saying how dense and wonderful the books are, without providing a single example.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
+  "491": {
+   "index": 491,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the work as a whole has not",
+   "note": "Live waggish.org fetched 200; post dated 23 November 2007, byline David Auerbach. Opening paragraph: striking bits and pieces have stayed with him, but the work as a whole has not. Exact match, both limbs present.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
   },
   "492": {
    "index": 492,
@@ -17043,6 +17121,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "502": {
+   "index": 502,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "why I never got into Wolfe",
+   "note": "Live Waggish page, first comment, signed 'mrs gaw', 25 November 2007. She says the post nailed why she never got into Wolfe, and the huge-effort clause is on the page (he was so plainly making a HUGE effort). The claim compresses out her middle clause about him not seeming to make an effort, but asserts nothing the page lacks.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
   "503": {
    "index": 503,
    "verdict": "SKIPPED_TRIAGE",
@@ -17056,6 +17141,42 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "505": {
+   "index": 505,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I try not to leave a clue more than once",
+   "note": "Live waggish.org 'More on Gene Wolfe' (7 December 2007) fetched 200. The sentence opens Wolfe's answer in the block Auerbach attributes to the James B. Jordan interview; exact match.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
+  "506": {
+   "index": 506,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I can't figure out what this book is about",
+   "note": "Same Waggish post. Jordan's question relays Orson Scott Card's review (placed by Jordan in Analog or Astounding) of The Soldier of Arete, quoting Card that nobody reads Wolfe with more care and affection, but he cannot figure out what the book is about. The quoted words match apart from the page's curly apostrophe.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
+  "507": {
+   "index": 507,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only when looking for the animating spirit",
+   "note": "Same Waggish post, the closing bracketed paragraph: Auerbach calls Wolfe's books machines and says it is only when looking for the animating spirit that one runs into trouble with them. Both limbs of the claim present verbatim.",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  },
+  "508": {
+   "index": 508,
+   "verdict": "PARTIAL",
+   "trueWording": "he's simply not managing to do the job he wants",
+   "unsupportedLimb": "'Critic' — the page identifies Ray Davis only as a commenter, never as a critic",
+   "note": "Live page fetched raw (HTTP 200). Quote is word-for-word in the comment signed 'Ray Davis 8 December 2007 at 06:47' under David Auerbach's 7 December 2007 post, in the 6-comment thread. Only the appositive 'Critic' is unsupported by this page; the substance and attribution to Ray Davis are exact.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  },
+  "509": {
+   "index": 509,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I have to admit that to a certain extent is was",
+   "note": "Live page fetched raw (HTTP 200), post 'Posted on May 16, 2021'. Opening section: he feared the book would be a lesser affair than remembered and admits it partly was. Page's own typo 'is was' reproduced. Context limb not in claim: he adds it did not become a bad book and still ranks among his favourite reads.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
   },
   "510": {
    "index": 510,
@@ -17071,12 +17192,47 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "512": {
+   "index": 512,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "has written a rather hagiographic text on the subject",
+   "note": "Live page raw. Sentence reads 'Peter Wright has written a rather hagiographic text on the subject', in the section on obscure diction/lexicons. The page word is 'article', hyperlinked to https://ultan.org.uk/review-botns/ — i.e. the Ultan's Library piece — so the claim's 'Ultan's Library review' is carried by the href on the raw page rather than by the visible text.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  },
   "513": {
    "index": 513,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "514": {
+   "index": 514,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "how infrequently any two people will agree with each other",
+   "note": "Live page raw. Appears twice, both times as bormgans quoting 'Wolfe scholar Marc Aramini' from his review of Michael Andre-Driussi's 'Gene Wolfe: The Book of the New Sun: A Chapter Guide (2019)'. Every limb (relay, Aramini, critical discourse, 2019 Chapter Guide review) is on the page.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  },
+  "515": {
+   "index": 515,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there's something of a one-trick pony vibe to his writing",
+   "note": "Live page raw. In the comment signed 'bormgans | May 17, 2021 at 14:35', replying to Riders of Skaith; sentence ends '...to his writing too.' A separate bormgans comment (14:53) uses the near-variant 'one-trick pony quality to certain aspects of his writing' — the claim's wording matches the 14:35 comment.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  },
+  "516": {
+   "index": 516,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reviews like like this that keep me shying away",
+   "note": "Live page raw. Comment signed 'Riders of Skaith | May 17, 2021 at 14:29': the doubled 'like like' is the page's own. Full sentence names Gene Wolfe. Claim's generic 'A commenter' is supported.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  },
+  "517": {
+   "index": 517,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Divisive for its relative opacity",
+   "note": "Live page raw (blogspot, HTTP 200), post dated Monday, July 9, 2012, 'Posted by Jesse'. Opening paragraph: after naming the four volumes it runs 'Divisive for its relative opacity, there remains a very simple formula...'. Subject is Wolfe's Book of the New Sun; reviewer name and date both on the page.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
   },
   "518": {
    "index": 518,
@@ -17091,6 +17247,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "520": {
+   "index": 520,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "themes are so buried in long-winded sentences",
+   "note": "Live page raw. Byline 'by Alex Keller', dated August 31, 2009. Opening paragraph: 'Wolfe's themes are so buried in long-winded sentences, and are so over-intellectualized...'. All limbs supported.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
   },
   "521": {
    "index": 521,
@@ -17112,6 +17275,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "524": {
+   "index": 524,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "burying it in dense descriptions and slowing adjectives",
+   "note": "Live page raw. In the section on 'The Death of Doctor Island', immediately after a quoted sample sentence: 'I find it detracts from, rather than enhances, the story, burying it in dense descriptions and slowing adjectives that make the text difficult to read.' The antecedent 'This style' is the style of the quoted descriptive passage, so the claim's 'descriptive style' is fair.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
   },
   "525": {
    "index": 525,
@@ -17176,6 +17346,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "534": {
+   "index": 534,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no one part is whole",
+   "note": "enotes.com returned HTTP 403 to both plain and browser-UA requests; recovered via Wayback raw capture 20241114002444id_ (HTTP 200, full criticism text). Page: 'The difficulty with taking full satisfaction with The Shadow of the Torturer is that one can't; ... no one part is whole.' Citation block confirms F&SF Vol. 58 No. 5, May 1980, pp. 26-7, in CLC Vol. 25. Nuance: Budrys resists the word 'tetralogy', calling it 'one book with four aspects'.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  },
+  "535": {
+   "index": 535,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a quarter-million words while waiting for the full reward",
+   "note": "Same Wayback raw capture (20241114002444id_). Page: 'he is asking us to read what will no doubt eventually be a quarter-million words while waiting for the full reward.' Claim's 'eventually' and 'full reward' both on the page; Budrys then adds he thinks Wolfe deserves that trust.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  },
   "536": {
    "index": 536,
    "verdict": "SKIPPED_TRIAGE",
@@ -17196,6 +17380,34 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "539": {
+   "index": 539,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "science fantasy strikes me as inauthentic, coy, and trivial",
+   "note": "enotes.com HTTP 403 live; recovered via Wayback raw capture 20250914044440id_ (HTTP 200). Page: 'Even when practiced by writers I ordinarily admire—Ursula Le Guin, Michael Moorcock, Brian Aldiss—science fantasy strikes me as inauthentic, coy, and trivial...'. Citation confirms Book World—The Washington Post, March 22, 1981, p. 11.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  },
+  "540": {
+   "index": 540,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "venture perilously close to pulp magazine hugger-mugger",
+   "note": "Same Wayback raw capture (20250914044440id_). Page: 'There are chapters in The Claw of the Conciliator that venture perilously close to pulp magazine hugger-mugger'. Framed by Disch's concession that any tetralogy's second volume comes off second-best.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  },
+  "541": {
+   "index": 541,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "too archly Significant, after the manner of Thornton Wilder's",
+   "note": "Same Wayback raw capture. Page: 'other chapters—one long interpolated masque, in particular—that are too archly Significant, after the manner of Thornton Wilder's The Skin of Our Teeth.' Capital S on 'Significant' is the page's own; Disch adds that Wolfe resembles Wilder in happier respects.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  },
+  "542": {
+   "index": 542,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "bears a weight of meditated meaning that intensifies and deepens",
+   "note": "Same Wayback raw capture. Page: intensity and depth in allegorical fantasy are possible only if each element 'bears a weight of meditated meaning that intensifies and deepens as the tale progresses'. The second limb is supported two sentences on: 'Wolfe, however, is a Wagnerian, not a tree trimmer; his allegory actually has something to say.'",
+   "fromFile": "verdicts-wolfe-i508-542.json"
   },
   "543": {
    "index": 543,

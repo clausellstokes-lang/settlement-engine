@@ -1,0 +1,234 @@
+{
+ "name": "wolfe",
+ "chunk": 0,
+ "claims": [
+  {
+   "index": 468,
+   "feature": "other: baroque ornament",
+   "claim": "Adam Roberts characterises Wolfe's four-part novel as baroquely iterated and patterned, treating the baroque quality as a virtue rather than a fault.",
+   "source": "Adam Roberts, 'Gene Wolfe, The Book of the New Sun (1980-83)', Adam's Notebook (Medium), 3 July 2023",
+   "url": "https://medium.com/adams-notebook/gene-wolfe-the-book-of-the-new-sun-1980-83-ee4cc6d18410",
+   "quote": "fluently rendered, baroquely iterated and patterned",
+   "page": "body, after the plot summary opening"
+  },
+  {
+   "index": 474,
+   "feature": "other: summary resistance",
+   "claim": "Roberts says a full summary of the plot here would be dense, overbusy and baffling.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 3 July 2023",
+   "url": "https://medium.com/adams-notebook/gene-wolfe-the-book-of-the-new-sun-1980-83-ee4cc6d18410",
+   "quote": "a full summary here would be dense, overbusy, baffling",
+   "page": "body, third paragraph"
+  },
+  {
+   "index": 475,
+   "feature": "other: reader completion",
+   "claim": "Bebergal writes that far more people own a copy of The Book of the New Sun than have read it all the way through.",
+   "source": "Peter Bebergal, 'Sci-Fi's Difficult Genius', The New Yorker, 24 April 2015",
+   "url": "https://www.newyorker.com/books/page-turner/sci-fis-difficult-genius",
+   "quote": "far more people own a copy than have read it",
+   "page": "body, paragraph comparing the book to Ulysses"
+  },
+  {
+   "index": 476,
+   "feature": "other: reader difficulty",
+   "claim": "Bebergal describes the four books of the series as sometimes vexing.",
+   "source": "Peter Bebergal, The New Yorker, 24 April 2015",
+   "url": "https://www.newyorker.com/books/page-turner/sci-fis-difficult-genius",
+   "quote": "The four books that make up the series are sometimes vexing",
+   "page": "body"
+  },
+  {
+   "index": 482,
+   "feature": "other: canon placement",
+   "claim": "Bebergal writes that Wolfe has rarely if ever been considered fully within the larger context of literature.",
+   "source": "Peter Bebergal, The New Yorker, 24 April 2015",
+   "url": "https://www.newyorker.com/books/page-turner/sci-fis-difficult-genius",
+   "quote": "rarely, if ever, been considered fully within the larger context",
+   "page": "body"
+  },
+  {
+   "index": 485,
+   "feature": "other: substance beneath style",
+   "claim": "Peter Wright relays Baird Searles asking whether under the glittering edifice of surprising words there is a story or a concept of any stature.",
+   "source": "Peter Wright relaying Baird Searles, review of The Citadel of the Autarch, Isaac Asimov's Science Fiction Magazine, May 1983, p. 167; Ultan's Library, 28 August 2002",
+   "url": "https://ultan.org.uk/review-botns/",
+   "quote": "is there a story or a concept of any stature?",
+   "page": "opening section; footnote 5"
+  },
+  {
+   "index": 486,
+   "feature": "other: substance beneath style",
+   "claim": "Peter Wright relays Baird Searles's judgement that The Book of the New Sun marks a turning point of science fiction from content to style, from matter to manner.",
+   "source": "Peter Wright relaying Baird Searles, Isaac Asimov's Science Fiction Magazine, May 1983, p. 167; Ultan's Library, 28 August 2002",
+   "url": "https://ultan.org.uk/review-botns/",
+   "quote": "from content to style, from matter to manner",
+   "page": "opening section; footnote 5"
+  },
+  {
+   "index": 487,
+   "feature": "other: critical thinness",
+   "claim": "Peter Wright argues that critics have extolled The Book of the New Sun for its fluidity of style rather than engaging with the text to any meaningful degree.",
+   "source": "Peter Wright, 'Mapping a Masterwork', Ultan's Library, 28 August 2002",
+   "url": "https://ultan.org.uk/review-botns/",
+   "quote": "Rather than engaging with the text to any meaningful degree",
+   "page": "section following the awards summary"
+  },
+  {
+   "index": 488,
+   "feature": "other: critical thinness",
+   "claim": "Peter Wright calls the existing claims for viewing Wolfe's tetralogy as a masterpiece somewhat flimsy and subjective.",
+   "source": "Peter Wright, 'Mapping a Masterwork', Ultan's Library, 28 August 2002",
+   "url": "https://ultan.org.uk/review-botns/",
+   "quote": "somewhat flimsy and subjective",
+   "page": "section following the awards summary"
+  },
+  {
+   "index": 490,
+   "feature": "other: critical thinness",
+   "claim": "A reader commenting under Wright's review objects that Wright spent three thousand words on the books' density without providing a single example.",
+   "source": "commenter 'Charles L' on Peter Wright's review, Ultan's Library, 9 May 2015",
+   "url": "https://ultan.org.uk/review-botns/",
+   "quote": "without providing a single example",
+   "page": "comments"
+  },
+  {
+   "index": 491,
+   "feature": "other: overall verdict",
+   "claim": "David Auerbach writes that striking bits and pieces of The Book of the New Sun stayed with him but the work as a whole has not.",
+   "source": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish, 23 November 2007",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "the work as a whole has not",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 502,
+   "feature": "reader and expert judgment",
+   "claim": "A commenter on Auerbach's post says the analysis names why they never got into Wolfe despite Wolfe plainly making a huge effort.",
+   "source": "commenter 'mrs gaw' on Waggish, 25 November 2007",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "why I never got into Wolfe",
+   "page": "comments"
+  },
+  {
+   "index": 505,
+   "feature": "other: clue economy",
+   "claim": "Auerbach quotes Wolfe's own statement that he tries not to leave a clue more than once.",
+   "source": "David Auerbach quoting Gene Wolfe from the James B. Jordan interview, Waggish, 7 December 2007",
+   "url": "https://www.waggish.org/2007/more-on-gene-wolfe/",
+   "quote": "I try not to leave a clue more than once",
+   "page": "body, quoted Jordan interview"
+  },
+  {
+   "index": 506,
+   "feature": "reader and expert judgment",
+   "claim": "Auerbach relays James B. Jordan's report that Orson Scott Card reviewed a Wolfe soldier novel saying he could not figure out what the book was about.",
+   "source": "David Auerbach quoting James B. Jordan's interview question relaying Orson Scott Card, Waggish, 7 December 2007",
+   "url": "https://www.waggish.org/2007/more-on-gene-wolfe/",
+   "quote": "I can’t figure out what this book is about",
+   "page": "body, quoted Jordan interview"
+  },
+  {
+   "index": 507,
+   "feature": "other: authorial machinery",
+   "claim": "Auerbach describes Wolfe's books as machines that give trouble only when one looks for the animating spirit.",
+   "source": "David Auerbach, 'More on Gene Wolfe', Waggish, 7 December 2007",
+   "url": "https://www.waggish.org/2007/more-on-gene-wolfe/",
+   "quote": "it is only when looking for the animating spirit",
+   "page": "closing bracketed paragraph"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 468,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fluently rendered, baroquely iterated and patterned",
+   "note": "Live Medium returned 403 with a browser UA; read on the Wayback raw capture 20240913053715id_ (byline Adam Roberts, Adam's Notebook, Jul 3 2023). The quoted words sit in the paragraph on the texture of Wolfe's four-part novel, and the surrounding clauses (detailed to a purpose; no detail merely arbitrary, each placed in the book's larger pattern) plus the later Deleuze/fold section, which insists cryptography is not obscurity, carry the virtue-not-fault limb."
+  },
+  {
+   "index": 474,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a full summary here would be dense, overbusy, baffling",
+   "note": "Same Wayback raw capture of the Roberts essay. The sentence follows the description of the plot's digressions, inset stories and re-met characters, so the claim's 'of the plot' limb is supported by its own sentence's subject."
+  },
+  {
+   "index": 475,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "far more people own a copy than have read it",
+   "note": "Live newyorker.com fetched 200. Quote is exact, in the paragraph comparing the tetralogy to Ulysses for science-fiction readers; the sentence continues with the phrase about reading it all the way through, so every limb of the claim holds."
+  },
+  {
+   "index": 476,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The four books that make up the series are sometimes vexing",
+   "note": "Live New Yorker page, opening sentence of the paragraph on obscure vocabulary. Word-for-word match; attribution to Bebergal correct (byline Peter Bebergal, April 24, 2015)."
+  },
+  {
+   "index": 482,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "rarely, if ever, been considered fully within the larger context",
+   "note": "Live New Yorker page, in the paragraph on Wolfe's awards and genre trappings; the sentence ends with the words naming literature, so the claim's full limb is present."
+  },
+  {
+   "index": 485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is there a story or a concept of any stature?",
+   "note": "Live ultan.org.uk fetched 200. The block quotation is introduced as Baird Searles posing a provocative question and is keyed to footnote 5 (Searles, review of The Citadel of the Autarch, Isaac Asimov's SF Magazine, May 1983, p. 167). The 'glittering edifice of surprising words' wording is on the page in the same sentence."
+  },
+  {
+   "index": 486,
+   "verdict": "PARTIAL",
+   "trueWording": "one that perhaps marks the turning point of science fiction",
+   "note": "Quotation 'from content to style, from matter to manner' is on the ultan.org.uk page verbatim, inside the same Searles block quotation, correctly footnoted. But Searles frames it as a hedged prediction about reception rather than a delivered judgement: the work will be considered a landmark, one that PERHAPS marks the turn. The claim states it flatly.",
+   "unsupportedLimb": "the flat 'marks a turning point' — the page hedges it as 'perhaps marks', inside a forecast of how the work will be considered"
+  },
+  {
+   "index": 487,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Rather than engaging with the text to any meaningful degree",
+   "note": "Live Ultan's Library page, in the paragraph after the awards and Searles-prophecy passage. Wright's sentence names fluidity of style first among the things critics extol (also the world-conception and characterisation); the claim's subset does not overstate."
+  },
+  {
+   "index": 488,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "somewhat flimsy and subjective",
+   "note": "Live Ultan's Library page, same paragraph as index 487: Wright's sentence says claims for viewing the tetralogy as a masterpiece are somewhat flimsy and subjective, which is exactly the claim's assertion."
+  },
+  {
+   "index": 490,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "three thousand words ... without providing a single example",
+   "note": "Live Ultan's Library comment thread. The comment is signed 'Charles L' and dated 9 May 2015 (comments render name, text, then date; the preceding date belongs to Gerald Leb). Its first sentence complains Wright spent three thousand words saying how dense and wonderful the books are, without providing a single example."
+  },
+  {
+   "index": 491,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the work as a whole has not",
+   "note": "Live waggish.org fetched 200; post dated 23 November 2007, byline David Auerbach. Opening paragraph: striking bits and pieces have stayed with him, but the work as a whole has not. Exact match, both limbs present."
+  },
+  {
+   "index": 502,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "why I never got into Wolfe",
+   "note": "Live Waggish page, first comment, signed 'mrs gaw', 25 November 2007. She says the post nailed why she never got into Wolfe, and the huge-effort clause is on the page (he was so plainly making a HUGE effort). The claim compresses out her middle clause about him not seeming to make an effort, but asserts nothing the page lacks."
+  },
+  {
+   "index": 505,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I try not to leave a clue more than once",
+   "note": "Live waggish.org 'More on Gene Wolfe' (7 December 2007) fetched 200. The sentence opens Wolfe's answer in the block Auerbach attributes to the James B. Jordan interview; exact match."
+  },
+  {
+   "index": 506,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I can't figure out what this book is about",
+   "note": "Same Waggish post. Jordan's question relays Orson Scott Card's review (placed by Jordan in Analog or Astounding) of The Soldier of Arete, quoting Card that nobody reads Wolfe with more care and affection, but he cannot figure out what the book is about. The quoted words match apart from the page's curly apostrophe."
+  },
+  {
+   "index": 507,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only when looking for the animating spirit",
+   "note": "Same Waggish post, the closing bracketed paragraph: Auerbach calls Wolfe's books machines and says it is only when looking for the animating spirit that one runs into trouble with them. Both limbs of the claim present verbatim."
+  }
+ ]
+}

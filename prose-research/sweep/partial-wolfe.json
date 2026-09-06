@@ -1396,5 +1396,53 @@
    "fromFile": "verdicts-wolfe-i465-467.json"
   },
   "fullSentence": true
+ },
+ {
+  "index": 486,
+  "feature": "other: substance beneath style",
+  "claim": "Peter Wright relays Baird Searles's judgement that The Book of the New Sun marks a turning point of science fiction from content to style, from matter to manner.",
+  "source": "Peter Wright relaying Baird Searles, Isaac Asimov's Science Fiction Magazine, May 1983, p. 167; Ultan's Library, 28 August 2002",
+  "url": "https://ultan.org.uk/review-botns/",
+  "quote": "from content to style, from matter to manner",
+  "page": "opening section; footnote 5",
+  "kind": "relay",
+  "polarity": "relays a sceptical framing of the book's stylistic turn",
+  "date": "2002-08-28",
+  "routeHint": "direct fetch of ultan.org.uk",
+  "registerHint": "none",
+  "confidence": "medium",
+  "angle": "counter",
+  "verdict": {
+   "index": 486,
+   "verdict": "PARTIAL",
+   "trueWording": "one that perhaps marks the turning point of science fiction",
+   "note": "Quotation 'from content to style, from matter to manner' is on the ultan.org.uk page verbatim, inside the same Searles block quotation, correctly footnoted. But Searles frames it as a hedged prediction about reception rather than a delivered judgement: the work will be considered a landmark, one that PERHAPS marks the turn. The claim states it flatly.",
+   "unsupportedLimb": "the flat 'marks a turning point' — the page hedges it as 'perhaps marks', inside a forecast of how the work will be considered",
+   "fromFile": "verdicts-wolfe-i468-507.json"
+  }
+ },
+ {
+  "index": 508,
+  "feature": "reader and expert judgment",
+  "claim": "Critic Ray Davis comments that Wolfe is simply not managing to do the job he wants to do.",
+  "source": "Ray Davis in comments on Waggish, 8 December 2007",
+  "url": "https://www.waggish.org/2007/more-on-gene-wolfe/",
+  "quote": "he’s simply not managing to do the job he wants to do",
+  "page": "comments",
+  "kind": "reader",
+  "polarity": "endorses the counter-case",
+  "date": "2007-12-08",
+  "routeHint": "direct fetch of waggish.org",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "counter",
+  "verdict": {
+   "index": 508,
+   "verdict": "PARTIAL",
+   "trueWording": "he's simply not managing to do the job he wants",
+   "unsupportedLimb": "'Critic' — the page identifies Ray Davis only as a commenter, never as a critic",
+   "note": "Live page fetched raw (HTTP 200). Quote is word-for-word in the comment signed 'Ray Davis 8 December 2007 at 06:47' under David Auerbach's 7 December 2007 post, in the 6-comment thread. Only the appositive 'Critic' is unsupported by this page; the substance and attribution to Ray Davis are exact.",
+   "fromFile": "verdicts-wolfe-i508-542.json"
+  }
  }
 ]
