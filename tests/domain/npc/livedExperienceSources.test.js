@@ -159,13 +159,19 @@ describe('THE REGISTRY — one row per receipted kind, and the law is a load-tim
 });
 
 describe('⭐ THE PRESET CENSUS — EXECUTED, and it corrected five of L3\'s verdicts', () => {
-  test('festival_kept is NOT dark: traditionsEnabled is lit in the same three presets as roads', () => {
+  test('festival_kept is NOT dark: traditionsEnabled is lit in the same FOUR presets as roads', () => {
+    // ⭐ DECLARED EDIT, NOT A RE-RECORD (lighting wave, L-DEFAULT hunk 1, 2026-09-06). The
+    // roster read THREE — dramatic_campaign, full_simulation, living_realm — until hunk 1 lit
+    // the DEFAULT preset with the ONE_REGEN fragment. The old membership is stated here rather
+    // than erased. What this test actually protects is UNTOUCHED and still green: the two
+    // assertions below say traditions, roads and the ladder light in the SAME presets, whatever
+    // that set is, and they moved together precisely because they share one fragment.
     const lit = presetsLighting('traditionsEnabled');
-    expect(lit).toEqual(['dramatic_campaign', 'full_simulation', 'living_realm']);
+    expect(lit).toEqual(['dramatic_campaign', 'full_simulation', 'living_realm', 'realistic_regional']);
     expect(lit).toEqual(presetsLighting('roadsEnabled'));
     expect(lit).toEqual(presetsLighting('npcLadderEnabled'));
     expect(EXPERIENCE_TABLE.festival_kept.receiptDark).toBe(false);
-    // anchored: the lit list is pinned to three named presets two lines above
+    // anchored: the lit list is pinned to four named presets above
     expect(RECEIPT_DARK_KINDS).not.toContain('festival_kept');
   });
 

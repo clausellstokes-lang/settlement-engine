@@ -947,7 +947,7 @@ export const SOURCE_PROVENANCE = Object.freeze({
   // Walked against THIS tree, and each one moves a verdict L3's census recorded.
   // Carried in code because a receipt rots and the next car will read this file.
   censusCorrections: Object.freeze([
-    'festival_kept is NOT receipt-dark: traditionsEnabled sits in the ONE_REGEN fragment (simulationRules.js:499) and is lit in dramatic_campaign, living_realm and full_simulation — the same three presets as roads and the ladder',
+    'festival_kept is NOT receipt-dark: traditionsEnabled sits in the ONE_REGEN fragment (simulationRules.js:666) and is lit in dramatic_campaign, living_realm, full_simulation AND, since the lighting wave lit the default preset (L-DEFAULT hunk 1, 2026-09-06), realistic_regional — the same FOUR presets as roads and the ladder, which share that one fragment and therefore move together. This row read THREE until that hunk. Its address read :499, which was ALREADY stale before the hunk and is corrected here by measurement',
     'coup_at_home is DEFAULT-ON: stressorsEnabled is true in DEFAULT_SIMULATION_RULES, making it the FIFTH default-on kind, which L3 counted as four',
     'home_occupied and home_liberated are lit in TWO presets, not three: warLayerEnabled is false in the defaults and true only in dramatic_campaign and full_simulation — living_realm inherits it false deliberately',
     'faction_cleansed is NOT readable from the news entry: its tags carry `to` and never `from`, so a cleansing is indistinguishable there from a de-escalation. The record projection pulseRecord.factionCaptureEvents keeps both ends and is the only honest surface',

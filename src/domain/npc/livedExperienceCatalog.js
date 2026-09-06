@@ -473,9 +473,13 @@ export const EXPERIENCE_TABLE = Object.freeze({
     [pull('CHEER', 'virtue', 'faint'), pull('COURAGE', 'virtue', 'faint')], null),
   // ⭐ NOT DARK — CORRECTED BY CAR L4's EXECUTED PRESET CENSUS. This row was drafted
   // `receiptDark: true`; running the real preset table shows `traditionsEnabled`
-  // sits in the ONE_REGEN fragment (`simulationRules.js:499`) and is therefore lit
-  // in dramatic_campaign, living_realm and full_simulation — the SAME three presets
-  // as roads and the ladder. It is preset-gated, exactly like `captured_held` and
+  // sits in the ONE_REGEN fragment (`simulationRules.js:666`) and is therefore lit
+  // in dramatic_campaign, living_realm and full_simulation — and, SINCE THE LIGHTING
+  // WAVE LIT THE DEFAULT PRESET (L-DEFAULT hunk 1, 2026-09-06), in realistic_regional
+  // too: the SAME four presets as roads and the ladder, which share that one fragment.
+  // The count read THREE until that hunk and is kept visible here rather than erased;
+  // the address read :499, already stale before the hunk, corrected by measurement.
+  // It is preset-gated, exactly like `captured_held` and
   // `promotion_won`, and not dark at all.
   // AGGREGATE by its own header, though — "the town's festival, never a named
   // soul's fate". The per-soul join EXISTS and the adapter uses it: the roads
