@@ -3,14 +3,14 @@
  "name": "kay",
  "angle": "transcripts-and-readers",
  "tag": null,
- "lines": 448,
+ "lines": 505,
  "firstTs": "2026-09-06T22:40:03.727Z",
- "lastTs": "2026-09-06T23:15:29.188Z",
+ "lastTs": "2026-09-06T23:19:31.116Z",
  "tools": {
-  "Read": 1,
-  "Bash": 110,
+  "Read": 2,
+  "Bash": 121,
   "ToolSearch": 1,
-  "WebSearch": 13,
+  "WebSearch": 16,
   "mcp__Claude_Browser__navigate": 1
  },
  "urlsFetched": [
@@ -111,7 +111,13 @@
   "https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/",
   "https://www.goodreads.com/topic/show/111082-guy-gavriel-kay",
   "https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/",
-  "https://fantasy-faction.com/2013/tigana-by-guy-gavriel-kay"
+  "https://fantasy-faction.com/2013/tigana-by-guy-gavriel-kay",
+  "https://therowanwoodchronicles.blog/2025/12/24/fantasy-as-memory-the-historical-imagination-of-guy-gavriel-kay/",
+  "https://scribe.rip/@patswritings/review-written-on-the-dark-by-guy-gavriel-kay-0243cc5bae10",
+  "https://www.goodreads.com/book/show/218153843-written-on-the-dark",
+  "https://colony.litopia.com/threads/guy-gavriel-kay-just-enough-light-some-thoughts-on-fantasy-and-literature.12296/",
+  "https://superstardrifter.com/2022/05/09/review-all-the-seas-of-the-world-by-guy-gavriel-kay/",
+  "https://www.grimdarkmagazine.com/review-all-the-seas-of-the-world-by-guy-gavriel-kay/"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method, then work the roster.",
@@ -121,8 +127,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-kay-transcripts-and-readers.json",
-  "claims": 77,
-  "complete": false,
-  "mtime": "19:15:24"
+  "claims": 96,
+  "complete": true,
+  "mtime": "19:18:57"
  }
 }

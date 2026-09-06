@@ -466,6 +466,112 @@ C('ff.txt','place and institution description',
   "Alister, 'Tigana by Guy Gavriel Kay', Fantasy-Faction, 2013", FF,
   "the prose flowing and lyrical, making the world vivid and real","review body",'reader','asserts','2013','browser user agent','dossier-archivist','high')
 
+# ================= fifth batch: a reader blog on the register itself =================
+ROW="https://therowanwoodchronicles.blog/2025/12/24/fantasy-as-memory-the-historical-imagination-of-guy-gavriel-kay/"
+C('rowan.txt','metaphor discipline',
+  "A reader-blogger says Kay does not bury the reader in invented terminology or ornate description.",
+  "Chris McBean, 'Fantasy as Memory: The Historical Imagination of Guy Gavriel Kay', The Rowanwood Chronicles, 24 Dec 2025", ROW,
+  "he does not bury the reader in invented terminology or ornate description","post body",'reader','asserts','2025-12-24','browser user agent',"dossier-archivist","medium (an uncredentialed 2025 blog post whose own prose reads formulaic; treat it as one reader's summary, not as criticism)")
+
+C('rowan.txt','cadence and rhythm',
+  "The same blogger says Kay favours cadence, balance and chosen imagery over density or excess.",
+  "Chris McBean, 'Fantasy as Memory: The Historical Imagination of Guy Gavriel Kay', The Rowanwood Chronicles, 24 Dec 2025", ROW,
+  "He favours cadence, balance, and carefully chosen imagery over density or excess","post body",'reader','asserts','2025-12-24','browser user agent','none',"medium (an uncredentialed 2025 blog post whose own prose reads formulaic; treat it as one reader's summary, not as criticism)")
+
+C('rowan.txt','dialogue register',
+  "The same blogger describes Kay's dialogue as formal without being stiff and shaped by the social world of the speaker.",
+  "Chris McBean, 'Fantasy as Memory: The Historical Imagination of Guy Gavriel Kay', The Rowanwood Chronicles, 24 Dec 2025", ROW,
+  "His dialogue is formal without being stiff","post body",'reader','asserts','2025-12-24','browser user agent','none',"medium (an uncredentialed 2025 blog post whose own prose reads formulaic; treat it as one reader's summary, not as criticism)")
+
+C('rowan.txt','other: history as residue on ordinary people',
+  "The same blogger says the writing turns away from grand national mythmaking towards human cost and quiet endurance.",
+  "Chris McBean, 'Fantasy as Memory: The Historical Imagination of Guy Gavriel Kay', The Rowanwood Chronicles, 24 Dec 2025", ROW,
+  "resists grand national mythmaking and instead focuses on human cost","post body",'reader','asserts','2025-12-24','browser user agent','chronicle-line',"medium (an uncredentialed 2025 blog post whose own prose reads formulaic; treat it as one reader's summary, not as criticism)")
+
+# ================= sixth batch: Written on the Dark (2025) readers =================
+GW="https://www.goodreads.com/book/show/218153843-written-on-the-dark"
+
+C('gr-wotd.reviews.json','sentence length variation',
+  "A Goodreads reviewer of Written on the Dark reports that the average phrase length in it is shorter than in Kay's other books.",
+  "Jake Bishop, Goodreads review of Written on the Dark, 3 May 2025 (60 likes)", GW,
+  "the average phrase length in this was shorter than most other","reviews list",'reader','asserts','2025-05-03',GRR,'chronicle-line','high')
+
+C('gr-wotd.reviews.json','per-speaker register',
+  "The same reviewer says that late in Kay's career too many characters' voices and dialogue sound slightly too similar to the narrator's.",
+  "Jake Bishop, Goodreads review of Written on the Dark, 3 May 2025 (60 likes)", GW,
+  "too many characters voices, and dialogue, sound slightly too similar","reviews list",'reader','rejects','2025-05-03',GRR,'herald-pools','high')
+
+C('gr-wotd.reviews.json','register modulation',
+  "A Goodreads reviewer of Written on the Dark says the writing here uses cut-short sentences rather than the flowing prose he expected.",
+  "Ben Coleman, Goodreads review of Written on the Dark, 3 May 2025 (23 likes)", GW,
+  "making use of cut-short sentences rather than using flowing, beautiful prose","reviews list",'reader','asserts','2025-05-03',GRR,'chronicle-line','high')
+
+C('gr-wotd.reviews.json','plainness and economy',
+  "A two-star Goodreads reviewer of Written on the Dark calls the writing downright spare and says that is not an improvement.",
+  "Morgan, Goodreads review of Written on the Dark, 9 Jun 2025 (13 likes)", GW,
+  "the writing is downright spare in this","reviews list",'reader','rejects','2025-06-09',GRR,'none','high')
+
+C('gr-wotd.reviews.json','other: divided reader verdict on the prose',
+  "The same reviewer says she read the other reviews first and was surprised at the glowing praise for the prose.",
+  "Morgan, Goodreads review of Written on the Dark, 9 Jun 2025 (13 likes)", GW,
+  "surprised at the glowing praise for the prose in this book","reviews list",'reader','disputes','2025-06-09',GRR,'none','high')
+
+C('gr-wotd.reviews.json','other: divided reader verdict on the prose',
+  "A two-star Goodreads reviewer of Written on the Dark writes that some readers will call this style rich and full of weight, while he finds it rambling.",
+  "Gyan K, Goodreads review of Written on the Dark, 6 Jul 2025 (59 likes)", GW,
+  "Some will call this style rich, full of weight","reviews list",'reader','disputes','2025-07-06',GRR,'none','high')
+
+C('gr-wotd.reviews.json','withheld information and inference',
+  "The same reviewer objects that the book leans on voice rather than deeds and tells the reader what a character feels, dreams and fears.",
+  "Gyan K, Goodreads review of Written on the Dark, 6 Jul 2025 (59 likes)", GW,
+  "much is told to us: what one feels, what one dreams","reviews list",'reader','rejects','2025-07-06',GRR,'none','high')
+
+C('gr-wotd.reviews.json','other: divided reader verdict on the prose',
+  "A two-star Goodreads reviewer of Written on the Dark nevertheless ranks Kay's flowery prose with the greats of the genre.",
+  "Moby D, Goodreads review of Written on the Dark, 12 Jun 2025 (13 likes)", GW,
+  "His flowery prose rivals that of the very greats of the genre","reviews list",'reader','asserts','2025-06-12',GRR,'none','high')
+
+C('gr-wotd.reviews.json','other: divided reader verdict on the prose',
+  "A one-star Goodreads reviewer of Written on the Dark dismisses the prose as elegance, French names and wannabe poetry.",
+  "Jonathan Maki, Goodreads review of Written on the Dark, 3 Jul 2025 (8 likes)", GW,
+  "fancy french names and wannabe poetry","reviews list",'reader','rejects','2025-07-03',GRR,'none','high')
+
+C('gr-wotd.reviews.json','consequence on a household',
+  "A Goodreads reviewer of Written on the Dark praises Kay for granting even the most minor characters a narrative arc, sometimes in a single sentence or paragraph.",
+  "The Speculative Shelf, Goodreads review of Written on the Dark, 13 Feb 2025 (70 likes)", GW,
+  "grants even the most minor characters narrative arcs","reviews list",'reader','asserts','2025-02-13',GRR,'dossier-archivist','high')
+
+C('gr-wotd.reviews.json','place and institution description',
+  "A five-star Goodreads reviewer of Written on the Dark says the lyrical style gives the setting weight and beauty alongside its costs.",
+  "Chris, Goodreads review of Written on the Dark, 9 Jan 2025 (18 likes)", GW,
+  "lyrical prose style, which provides his setting with weight, and beauty","reviews list",'reader','asserts','2025-01-09',GRR,'dossier-archivist','high')
+
+C('gr-wotd.reviews.json','plainness and economy',
+  "A four-star Goodreads reviewer of Written on the Dark calls its prose more accessible than that of Kay's other works.",
+  "The Speculative Shelf, Goodreads review of Written on the Dark, 13 Feb 2025 (70 likes)", GW,
+  "featuring more accessible prose and POVs that stay close","reviews list",'reader','asserts','2025-02-13',GRR,'none','high')
+
+# ================= seventh batch =================
+GDM="https://www.grimdarkmagazine.com/review-all-the-seas-of-the-world-by-guy-gavriel-kay/"
+C('gdm.txt','other: divided reader verdict on the prose',
+  "A magazine reviewer states that Kay's way of writing fantasy will make him either a reader's absolute favourite or of no interest at all.",
+  "reviewer, 'REVIEW: All The Seas of The World by Guy Gavriel Kay', Grimdark Magazine, 2022", GDM,
+  "your absolute favorite authors, or you may not care","review body",'reception','asserts','2022',
+  'browser user agent','none','high')
+
+C('gdm.txt','metaphor discipline',
+  "The same reviewer describes the prose as filled with borderline-poetic lines about fate, faith and connection.",
+  "reviewer, 'REVIEW: All The Seas of The World by Guy Gavriel Kay', Grimdark Magazine, 2022", GDM,
+  "filled with borderline-poetic lines that question the capricious nature","review body",'reception','asserts','2022',
+  'browser user agent','none','high')
+
+SSD="https://superstardrifter.com/2022/05/09/review-all-the-seas-of-the-world-by-guy-gavriel-kay/"
+C('ssd.txt','place and institution description',
+  "A reader-blogger recommends All the Seas of the World to anyone who loves prose that carries the reader away to another world.",
+  "superstardrifter, 'Review: All the Seas of the World by Guy Gavriel Kay', 9 May 2022", SSD,
+  "loves beautiful prose that takes you away to another world","review body",'reader','asserts','2022-05-09',
+  'browser user agent','dossier-archivist','high')
+
 SOURCES=[
  dict(title="Guy Gavriel Kay, 'Just Enough Light: Some Thoughts on Fantasy and Literature,' Tolkien Lecture 2021 (YouTube video, metadata + caption-track listing only)",
       url="https://www.youtube.com/watch?v=z1TgX0alFuM", kind="own-words", substantive=False, date="2021-05-11",
@@ -516,6 +622,16 @@ SOURCES=[
       url="https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/", kind="reader", substantive=True, date="2011-12-12", route="browser user agent"),
  dict(title="Alister, 'Tigana by Guy Gavriel Kay' - Fantasy-Faction review",
       url="https://fantasy-faction.com/2013/tigana-by-guy-gavriel-kay", kind="reader", substantive=True, date="2013", route="browser user agent"),
+ dict(title="Chris McBean, 'Fantasy as Memory: The Historical Imagination of Guy Gavriel Kay', The Rowanwood Chronicles",
+      url="https://therowanwoodchronicles.blog/2025/12/24/fantasy-as-memory-the-historical-imagination-of-guy-gavriel-kay/", kind="reader", substantive=True, date="2025-12-24", route="browser user agent"),
+ dict(title="Written on the Dark (2025) - Goodreads book page (30 reviews read from __NEXT_DATA__; the newest cohort of Kay readers)",
+      url="https://www.goodreads.com/book/show/218153843-written-on-the-dark", kind="reader", substantive=True, date="2026-09-06", route="browser user agent; apolloState Review: nodes"),
+ dict(title="Litopia Colony forum thread on the 2021 Tolkien Lecture",
+      url="https://colony.litopia.com/threads/guy-gavriel-kay-just-enough-light-some-thoughts-on-fantasy-and-literature.12296/", kind="reader", substantive=False, date="2023-02-26", route="browser user agent; two posts only"),
+ dict(title="REVIEW: All The Seas of The World by Guy Gavriel Kay - Grimdark Magazine",
+      url="https://www.grimdarkmagazine.com/review-all-the-seas-of-the-world-by-guy-gavriel-kay/", kind="reception", substantive=True, date="2022", route="browser user agent"),
+ dict(title="superstardrifter, 'Review: All the Seas of the World by Guy Gavriel Kay'",
+      url="https://superstardrifter.com/2022/05/09/review-all-the-seas-of-the-world-by-guy-gavriel-kay/", kind="reader", substantive=True, date="2022-05-09", route="browser user agent"),
  dict(title="Brok3n Engines, 'Tigana, by Guy Gavriel Kay - GGK in transition' (Substack review)",
       url="https://b3en.substack.com/p/ggk-in-transition", kind="reader", substantive=True, date="2025-04-16", route="browser user agent"),
  dict(title="r/Fantasy, 'Tigana - A Review' (u/aroseandawritingdesk) with comment thread",

@@ -63,3 +63,19 @@ Identified from Kay's own site (brightweavings.com/category/ggks-words/interview
   - /r/Fantasy/comments/fkdpfg/review_tigana_a_misguided_masterpiece/ @20230608133320
   - /r/Fantasy/comments/7p5ro9/tigana_by_ggk_should_i_keep_going/ @20230607111129
   - /r/Fantasy/comments/15u1pk0/comment/jwnbsp8/ @20230910041956
+
+## Expansion beyond the roster (bibliography / lateral routes)
+- Goodreads GROUP TOPICS: 917171 (Kay vs Martin, 72 messages), 565852 (where should I start), 111082 (Fantasy Book Club, 2009).
+- A FIFTH Goodreads book page added for recency: Written on the Dark (218153843, 2025) - the sharpest register evidence in the whole
+  angle comes from it (a reader measuring shorter average phrase length; a reader complaining every voice sounds like the narrator;
+  a reader saying the writing here is "downright spare ... and not for the better").
+- Reader blogs and forums: The Quill to Live book club (a SECOND book club, and the only source with figures: half the club scored
+  it 9+, half below 5, average 7); SFFWorld thread 32913; One Last Sketch book-by-book run; Fantasy-Faction Tigana review;
+  The Rowanwood Chronicles (2025, flagged medium - its own prose reads formulaic); superstardrifter; Brok3n Engines; Grimdark Magazine.
+- Blocked or empty on this angle: LibraryThing (Cloudflare 403), Medium/scribe.rip for the Pat's Writings review (404),
+  DuckDuckGo/Mojeek HTML search (challenge pages), Litopia thread (two posts, nothing about the sentences).
+
+## Stopping
+The named roster is exhausted (every item fetched, not-found or blocked with the reason recorded) and the last two open searches
+surfaced only sources already read or a single blog each, which were then read. 96 claims / 36 sources / 29 substantive.
+Final file written with "complete": true.

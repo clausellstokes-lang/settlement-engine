@@ -3,13 +3,13 @@
  "name": "wolfe",
  "angle": "monographs",
  "tag": null,
- "lines": 134,
+ "lines": 177,
  "firstTs": "2026-09-06T22:59:58.344Z",
- "lastTs": "2026-09-06T23:15:25.907Z",
+ "lastTs": "2026-09-06T23:19:26.470Z",
  "tools": {
-  "Bash": 32,
+  "Bash": 42,
   "ToolSearch": 1,
-  "WebSearch": 2
+  "WebSearch": 4
  },
  "urlsFetched": [
   "https://archive.org/advancedsearch.php?q=creator%3A%28Manlove%29+AND+title%3A%28science+fiction%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=20&output=json",
@@ -29,18 +29,31 @@
   "https://api.crossref.org/works/10.1007/978-1-349-07259-0_11",
   "http://web.archive.org/web/20180618115401id_/https://link.springer.com/chapter/10.1007%2F978-1-349-07259-0_11",
   "https://www.cambridge.org/core/books/shadows-of-the-new-sun/$p",
-  "https://www.cambridge.org/core/books/"
+  "https://www.cambridge.org/core/books/",
+  "https://www.cambridge.org/core/books/attending-daedalus/",
+  "https://www.cambridge.org/core/books/shadows-of-the-new-sun/",
+  "https://api.crossref.org/works/10.1111/criq.12563",
+  "https://api.openalex.org/works/doi:10.1111/criq.12563",
+  "https://api.unpaywall.org/v2/10.1111/criq.12563?email=settlementforge@gmail.com",
+  "https://www.cambridge.org/core/books/shadows-of-the-new-sun/special-problems-of-science-fiction/FAFB20D199B4188847C6F7D75F21F872",
+  "https://onlinelibrary.wiley.com/doi/10.1111/criq.12563",
+  "https://www.academia.edu/91977018/Time_After_Time_On_the_speculative_fiction_of_Gene_Wolfe",
+  "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1111/criq.12563?fields=title,abstract,year,venue,openAccessPdf,externalIds",
+  "https://www.thefreelibrary.com/Art+and+allegory:+a+method+to+read+The+Book+of+the+New+Sun+by+Gene...-a0430496872",
+  "https://scifiwright.com/2021/03/and-a-sword-in-the-last/",
+  "https://muse.jhu.edu/article/593784/summary",
+  "https://ultan.org.uk/$s/"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now let me write raw notes and verify quotes against the fetched text before checkpointing.",
+ "lastAssistantText": "Now the pre-verification pass — checking every quote against the fetched text.",
  "run": "wf_1326cde9-2e5",
  "agent": "a5a997e5f7a24c120",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a5a997e5f7a24c120.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-monographs.json",
-  "claims": 54,
+  "claims": 115,
   "complete": false,
-  "mtime": "15:46:26"
+  "mtime": "19:17:49"
  }
 }
