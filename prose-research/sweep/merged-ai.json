@@ -3102,6 +3102,111 @@
    "trueWording": "They use more temporal discontinuity, more flashbacks and nonlinear movement",
    "note": "Quote verbatim. Delay-of-revelation half also present: 'more willing to let a revelation reshape earlier material rather than simply deliver the next clean cause in a line.' Drift: the source is strictly comparative (human stories use MORE); it never asserts the claim's absolute 'AI stories stay chronological.'",
    "fromFile": "verdicts-ai-i135-149.json"
+  },
+  "150": {
+   "index": 150,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI dialogue more often turns into philosophical debate.",
+   "note": "Dramatica blog (May 29, 2026) para on theme over-explanation carries the quoted sentence word for word. Caveat: the claim's contrast 'rather than character-driven exchange' is the analyst's gloss; the page does not use that phrase.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "151": {
+   "index": 151,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the five AI models cluster together in narrative space while human stories are more dispersed",
+   "note": "Quote is an exact substring. Both numeric halves confirmed on the same page: 'Narrative features alone achieve 93.2% macro-F1 in human-vs-AI detection' and the corpus of 10,272 prompts x five models (Claude, DeepSeek, Gemini, GPT, Kimi). Page attributes to Russell et al. StoryScope, April 2026 arXiv preprint.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "152": {
+   "index": 152,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "show, don't tell",
+   "note": "Quote verbatim in section 4.4.2. Percentage confirmed: 'Unnecessary/Redundant Exposition (18%)'. Category defined as 'restating the obvious or providing details that add little value' and 'implied information' - matches the claim's 'restated what was already implied'.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "153": {
+   "index": 153,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Clichés (17%); 'unnecessary filler' is defined under Unnecessary/Redundant Exposition (18%)",
+   "note": "SPLIT SOURCING - the two halves come from different categories. 17% is confirmed for Clichés alone (defined as overused phrases losing original impact). The verbatim phrase 'unnecessary filler' is W2's gloss on 'fluff' inside section 4.4.2, the 18% exposition category already cited at index 152. So 'clichés and filler' at 17% conflates the 17% and 18% rows; recommend restating as clichés only.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "154": {
+   "index": 154,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is not technically wrong it's just inelegant",
+   "note": "Quote verbatim from W1's email in section 4.4.6, which does cite \"a very common phrasing in these excerpts is 'seem to _(verb)_'\". Largest-category claim confirmed: 'the most common categories being Awkward Word Choice and Phrasing (28%), Poor Sentence Structure (20%)...'. Minor: the paper's category name is 'Awkward Word Choice and Phrasing', not 'awkward phrasing'.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "155": {
+   "index": 155,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "abstract words, and excessive adjectives, adverbs, and metaphors",
+   "note": "No quote was supplied, so verbatim status is not assessable; every element checks out. Seven-category taxonomy (4.4.1-4.4.7) includes Purple Prose, Lack of Specificity and Detail, Poor Sentence Structure, Tense Inconsistency. Purple-prose definition matches the claim's gloss. 'Poor Sentence Structure (20%)' confirmed.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "156": {
+   "index": 156,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Grief, as I've learned, is a delta",
+   "note": "Exact capitalisation appears as a standalone pull-quote in the essay body. Michel's cash-out argument is on the page: 'Why is it good? If \"delta\" refers to the geographical delta then in what way is grief metaphorically a delta region...'. Note the line is the OpenAI story's text, quoted by Michel, not his own prose.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "157": {
+   "index": 157,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "protagonists cut from whole cloth, emotions dyed and draped over sentences",
+   "note": "Quote verbatim. Michel's own diagnosis follows immediately: 'This is a case of what I've called the five-car metaphor pile-up... Nails and scaffolding conjure construction. Cutting cloth, dying, and draping are tailoring metaphors. Plus, you have a magic spell.' All three metaphor families in the claim are named on the page.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "158": {
+   "index": 158,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "doesn't really go anywhere. It's flat.",
+   "note": "The two sentences are adjacent and exact ('...is that it doesn't really go anywhere. It's flat.'). Rest of claim confirmed in the same paragraph: 'The story lacks a traditional character arc or plot arc yet it also lacks an \"idea arc\"' and 'The central idea is just repeated with different flowery but incoherent metaphors.'",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "159": {
+   "index": 159,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They don't have a point of view",
+   "note": "Quote verbatim; full sentence is 'They don't have a point of view or the ability to think about how parts work together to tell a story' - which carries both halves of the claim. Corroborated earlier: 'The author is a program that does not have a background, point of view, or artistic intention.'",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "160": {
+   "index": 160,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The hardest and most time-consuming part of writing is shaping, honing, and refining",
+   "note": "Quote verbatim and is Michel's own sentence. PROVENANCE CAVEAT: the choices arithmetic is not Michel's - it is a block quotation from Ted Chiang's New Yorker piece 'Why A.I. Isn't Going to Make Art', reading 'a ten-thousand-word short story requires something on the order of ten thousand choices' and 'if you supply a hundred-word prompt, you have made on the order of a hundred choices'. Attribute the arithmetic to Chiang via Michel. Also, the page says a hundred choices, not 'almost none'.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "161": {
+   "index": 161,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the sentences don't originate from anywhere",
+   "note": "Quote verbatim. Full sentence supports both halves: 'There's no position for the reader to stand because the sentences don't originate from anywhere--you can't subsume yourself within the perspective of these sentences because they, remarkably, don't contain a perspective.' The claim's word 'sensibility' is a gloss on 'perspective'.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "162": {
+   "index": 162,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there's no trajectory in these sentences",
+   "note": "Quote verbatim. Reorderability claim confirmed in the same sentence run: 'You could, in fact, flip sentence number one with sentence number two and nothing would really change--there's no point of view, it is just a ceaseless, neutral, present tense, Nabokov replica.'",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "163": {
+   "index": 163,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no sense of narrative, no character development",
+   "note": "Quote verbatim from the PDF: \"There's no sense of narrative, no character development, and the 'plotting' is practically nonexistent.\" Preceded by 'There is absolutely no sign of originality or creativity in ChatGPT-generated works' and 'By now, I've seen hundreds, possibly thousands, of these \"stories\"' - so every element of the claim, including the 'hundreds of submissions' framing, is on the page.",
+   "fromFile": "verdicts-ai-i150-164.json"
+  },
+  "164": {
+   "index": 164,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ever read a story, heard some folklore",
+   "note": "Quote verbatim: 'There is no indication that the \"writers\" of these works ever read a story, heard some folklore, or watched a TV show.' The worse-than-human half is the next sentence: 'I have never read an original human-authored submission that was as poorly written or as uninteresting as these pieces are.' Minor: page says 'folklore', claim says 'folktale'.",
+   "fromFile": "verdicts-ai-i150-164.json"
   }
  }
 }
