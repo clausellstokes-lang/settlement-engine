@@ -660,5 +660,109 @@
    "note": "Snippet, p. 90: ‘… narration is comparatively rare, the reader is most commonly treated to the point of view of a group of characters—hobbits, usually—before the perspective is narrowed down to a single person. The beginning of Chap. 1 provides an apt example…’ The substance of both limbs and the p. 90 citation are corroborated; the adjective before ‘narration’ is cut by the snippet’s leading ellipsis. Caution: Google’s phrase index here is demonstrably unreliable (‘comparatively rare’ returned 0 with the default index but 4 hits with newbks=0), so the 0-result is weak evidence of absence rather than a contradiction.",
    "fromFile": "verdicts-tolkien-i628-642.json"
   }
+ },
+ {
+  "index": 653,
+  "feature": "limited POV raises tension and characterises",
+  "claim": "As in nineteenth-century novels, the limited point of view both characterises a person and raises tension; Frodo's viewpoint conveys what he is barely conscious of, e.g. 'finding' he has put on the Ring (p. 105).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 653,
+   "verdict": "PARTIAL",
+   "trueWording": "he found that he had put it back in his pocket",
+   "unsupportedLimb": "the example — 'finding' he has put ON the Ring; pp.104–105 give the opposite action, Frodo finding he had put the Ring back in his POCKET instead of casting it into the fire (LotR 60)",
+   "note": "Claim carries no quote field, so no verbatim match was possible. Supported limbs, verbatim at p.105: 'Frodo’s point of view thus serves to convey information about his mind of which Frodo himself is barely conscious. As in nineteenth-century novels, the limited point of view can both characterize a person and raise tension with regard to the story.' The unsupported limb is the illustration: p.104 quotes LotR 60 — 'he made a movement, as if to cast it away — but he found that he had put it back in his pocket' — and p.105 glosses 'Frodo “found” that he had done so; this had been an involuntary, almost unconscious action.' Nothing on p.105 has Frodo finding he has put the Ring on.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 655,
+  "feature": "epic style at battle crises",
+  "claim": "The 'epic style' first seen with the Riders of Rohan recurs particularly at moments when a battle's outcome is imminent: Helm's Deep, the siege of Gondor, and when the Ring falls into the Cracks of Doom (p. 113).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "at moments when the outcome of a battle is imminent",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 655,
+   "verdict": "PARTIAL",
+   "trueWording": "“epic style” which first appears here",
+   "unsupportedLimb": "'first seen with the Riders of Rohan' — pp.112–113 place the style's first appearance in a Rivendell passage ('The Sword of Elendil was forged anew by Elvish smiths…', LotR 276–277), contrasted with 'the previous accounts of the proceedings in the house of Elrond'; the Riders of Rohan are not reached until p.115",
+   "note": "The quotation itself is verbatim at p.113: '… will recur several times, particularly at moments when the outcome of a battle is imminent, as at Helm’s Deep (541), at the siege of Gondor (817) and when the Ring falls into the Cracks of Doom (948).' All three battle-crisis instances check out. Only the origin attribution fails: p.113 says the '“epic style” which first appears here' — 'here' being the p.112 Sword-of-Elendil passage — and adds that it will also be used where no hobbit is present, 'as in large parts of book 3'.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 676,
+  "feature": "fronting of adverbials",
+  "claim": "The most conspicuous clause-level idiosyncrasy is the fronting of adverbials, as in 'to a (N) they came' (p. 78).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "the fronting of adverbials",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 676,
+   "verdict": "PARTIAL",
+   "trueWording": "one of the most conspicuous ... is the fronting of adverbials",
+   "note": "p.78 raw snippet: 'idiosyncrasies of Tolkien's can be found at clause level, one of the most conspicuous of which even to the human reader is the fronting of adverbials: to a (N) they came.' The quote 'the fronting of adverbials', the clause-level siting and the example 'to a (N) they came' are all verbatim on p.78, but the page hedges with 'one of the most conspicuous', not a definite superlative.",
+   "unsupportedLimb": "that it is THE most conspicuous clause-level idiosyncrasy - the page says 'one of the most conspicuous'",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 687,
+  "feature": "descriptivity distribution",
+  "claim": "The first half of the book is less densely descriptive; tight clusters of high descriptivity peak in Book Four, chapters II and VII (p. 48).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "three outstanding peaks in Book Four",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 687,
+   "verdict": "PARTIAL",
+   "trueWording": "three outstanding peaks in Book Four, Chapters II and VII and Book Six, Chapter III",
+   "note": "p.48 raw snippet: 'the first half of the book is generally less densely descriptive, we find fairly tight clusters of high descriptivity in the second part, culminating in three outstanding peaks in Book Four, Chapters II (The Passing of the Marshes) and VII (Journey to the Crossroads) and Book Six, Chapter III (Mount Doom)'. The first-half limb and the two Book Four chapters are verbatim right, and the quote 'three outstanding peaks in Book Four' is a verbatim substring - but it is severed mid-sentence so that it reads as though all three peaks were in Book Four; the claim silently drops the third peak.",
+   "unsupportedLimb": "that the three peaks fall in Book Four - the third is Book Six, Chapter III (Mount Doom)",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 722,
+  "feature": "translator's stated register goal",
+  "claim": "Krege aimed to reproduce Tolkien's speech registers from Biblical language to 1940s British colloquialism, against what he saw as Carroux's uniform, artificially folksy German.",
+  "source": "Wolfgang Krege (Wikipedia)",
+  "url": "https://en.wikipedia.org/wiki/Wolfgang_Krege",
+  "page": "",
+  "quote": "highly disputed among fans",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 722,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'against what he saw as Carroux's ... artificially folksy German' — the page attributes 'artificially folksy' to unnamed critics ('according to some critics'), never to Krege's own view",
+   "trueWording": "Old translation uniform, 'according to some critics even artificially folksy'",
+   "note": "Quote 'highly disputed among fans' present verbatim on en.wikipedia. Supported: Krege's version 'tries stronger than the old Carroux version to reflect the different style of speech'; the original spans '16th-century Bible style to the rustic and urban, sometimes gross, common British English of the 1940s'; 'Krege tries to imitate this in German'. Unsupported: the judgement of Carroux as artificially folksy is the page's report of 'some critics' (tagged {{Who}}), not a stated position of Krege's. The page also states Krege 'used the German language of the 1990s as a reference rather than the 1940s', which the claim's phrasing elides.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 723,
+  "feature": "anachronistic lexis",
+  "claim": "Krege's 1998 Hobbit restored the poems Scherf had cut but interpreted sentences freely and admitted anachronisms such as 'Hurricane'.",
+  "source": "Wolfgang Krege (Wikipedia)",
+  "url": "https://en.wikipedia.org/wiki/Wolfgang_Krege",
+  "page": "",
+  "quote": "Hurricane",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 723,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'restored the poems Scherf had cut' — the page states only that Scherf 'left out or shortened most of the poems'; it never says Krege put them back",
+   "trueWording": "Scherf omitted the poems; Krege appeals to grown-up readership",
+   "note": "Quote 'Hurricane' present verbatim on en.wikipedia. Supported: free interpretation ('various sentences are interpreted in a way which cannot any more be regarded as translation but is clearly new script'); modern words ('Krege's version features a number of modern words like \"Hurricane\" which can easily be seen atypical for the medievally and European inspired Middle-earth'); the 1998 date from the works list ('Der Hobbit, Stuttgart 1998'), though the article body says only 'In the 1990s'. Two further precision points: the page says the modern words are seen as atypical, not that Krege 'admitted' (conceded) them; and Ardapedia — a source in this same chunk — dates the Hobbit retranslation to 1997 and does support the restoration limb ('Hier sind erstmals alle Lieder und Gedichte, sowie das Vorwort vollständig übersetzt und enthalten'). The restoration limb is thus true but not on the CITED page; re-cite it to Ardapedia.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
  }
 ]

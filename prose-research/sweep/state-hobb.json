@@ -8382,6 +8382,533 @@
    "trueWording": "\"The dendrogram shows a good clustering of certain series\"",
    "note": "Verbatim in Results, immediately after 'Fig 21. Dendrogram for the hierarchical clustering of the books using the Ward variance minimization algorithm.': \"The dendrogram shows a good clustering of certain series: 'Harry Potter', 'The Rain Wild Chronicles', 'The Lunar Chronicles' and 'The Mortal Instruments', for instance, appear to be clustered. Other series are more scattered, which can be attributed to a fluctuation of style: for instance, 'The Wheel of Time' is separated in three sub-clusters.\" Rain Wild limb explicit. The 'absence of style fluctuation' limb rests on the authors' own two-sentence contrast (scattered = fluctuation of style, Wheel of Time named) rather than on a separate positive sentence -- close enough to stand, and the paper says nothing to the contrary.",
    "fromFile": "verdicts-hobb-i105-119.json"
+  },
+  "120": {
+   "index": 120,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Twenty approximately one-page-long passages of text were selected... taken from works by Leigh Bardugo, Charles Dickens, Neil Gaiman, Robin Hobb, Derek Landy, Brandon Sanderson, and J. R. R. Tolkien.",
+   "note": "Raw journal PDF galley reached from the cited article record (www.ijcrsee.com/index.php/ijcrsee/article/download/238/290/1039); quote is verbatim in section 2 MATERIALS AND METHODS, p.44. The author list contains exactly seven names and includes Robin Hobb, so the 'seven authors including Robin Hobb' limb is confirmed by count. Note: the landing page at the cited URL carries only the abstract; the methods sentence is in that record's own full-text galley.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "121": {
+   "index": 121,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "...selections of the text perform particular expository and critiquing functions: establishing verisimilitude, criticizing social systems, denoting privilege and relative power, enabling and restricting intimate issues, and interrogating nations and governments.",
+   "note": "Quote verbatim in the Shropshire entry. The list holds exactly five functions, confirming the 'five functions' limb; the entry also states 'In a master's thesis in geography' and 'The Importance of Geographic Realism in Genre Fiction: How Landscape in Robin Hobb's Assassin's Quest Inspires Social Criticism. 2019. Oklahoma SU, MS thesis', and the page is signed 'Geoffrey B. Elliott 18 May 2026'. 'Codes' matches the entry's methodology gloss ('selection of passages for study, and coding').",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "122": {
+   "index": 122,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Crane and Fletcher address the Liveship Traders novels' figuration of their milieu as ... inverting the usual depiction of land as busy and sea as empty.",
+   "note": "Quote verbatim in the Crane and Fletcher entry (the claim's quote field is a truncation of the same sentence, which continues 'as empty'). Every limb supported.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "123": {
+   "index": 123,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hobb is presented as offering an example of the portal-quest fantasy in the Elderlings corpus.",
+   "note": "Quote verbatim at the close of the Mendlesohn, Rhetorics of Fantasy (2008) entry, whose body sets out her four-category taxonomy including 'portal-quest'. Source citation matches the entry ('Middletown, CT: Wesleyan UP, 2008').",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "124": {
+   "index": 124,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the onymic space of the Six Duchies is meticulously constructed upon the fundamental principle of national-cultural contrast",
+   "note": "Quote verbatim in the English abstract of the PDF (p.372). Authors, affiliations, issue 5(47) 2026 and pages 372-381 all match the cited source; the PDF's running title misspells the series as 'THE WORLD OF THE ELDERING', which does not affect the claim.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "125": {
+   "index": 125,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "representatives of neighboring nations ... are assigned names characterized by phonetic foreignness and an absolute lack of transparent semantics for the reader (e.g., Eyod, Rurisk, Kettricken)",
+   "note": "Quote verbatim in the abstract, and the three exemplars named in the claim are the abstract's own three exemplars. Every limb supported.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "126": {
+   "index": 126,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "socially significant anthroponyms represent the most dominant and structurally diverse group, which perfectly mirrors the early medieval setting ... where a person's social mask, status, and destiny are inextricably linked",
+   "note": "Quote verbatim in the abstract. Disclosure on one limb: the page says 'the most dominant and structurally diverse group'; the claim renders that as 'the largest group'. In context (a classification into three functional-semantic subgroups, after Belei) 'most dominant' carries the sense of predominant/largest, so the limb is supported, but the source does not use a size word.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "127": {
+   "index": 127,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "informational-evaluative charactonyms, including Shrewd, Desire, and Patience, are investigated as tools of direct psychological characterization that explicitly encapsulate the core inner nature",
+   "note": "Quote verbatim in the abstract, with exactly the three names the claim lists; 'carried by the name itself' is supported by 'explicitly encapsulate the core inner nature, behavioral patterns, and moral capacities of the characters'.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "128": {
+   "index": 128,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mother's description comes from other characters - chiefly Kennit and Paragon - and they always refer to her as Mother, never by her name",
+   "note": "Quote verbatim in section 3 'Violence, Trauma, and Naming' of the PDF, exactly the section the claim cites. The second limb (her name is never given) is separately supported two sentences later: 'As Mother's name is not known, neither are her personal or other identities'.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "129": {
+   "index": 129,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the novella Words like Coins, serves as a commentary on the craft of writing, noting the perils in sloppiness of language",
+   "note": "Quote verbatim in the first body paragraph of the blog post (the claim's 'para. 2' counts the students' preamble as para. 1). Both limbs - commentary on the craft of writing, and the warning against sloppiness - are in the same sentence.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "130": {
+   "index": 130,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Linguistic precision and frugality are repeatedly emphasized by the pecksie, and their lack repudiated.",
+   "note": "Quote verbatim. Minor wording gap, not a limb failure: the sentence has the singular 'the pecksie' (the one bound to Mirrifen) where the claim writes 'the pecksies'; the post elsewhere generalises ('Hobb's pecksies themselves are much concerned with the effects of language, and therefore with its exactitude').",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "131": {
+   "index": 131,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They are therefore at pains to ensure that their utterances are exacting, giving no more than is necessary to be clear so as to minimize the possibility of unintended consequences.",
+   "note": "Quote verbatim, and every limb of the claim (utterances kept exact; no more than needed to be clear; to limit unintended consequences) sits in that one sentence.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "132": {
+   "index": 132,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "How it goes is poorly, and all as a result of Mirrifen's lack of specificity.",
+   "note": "Quote verbatim. Supporting limbs are in the same passage: 'The primary textual example ... is in the birth of Jami's child'; Mirrifen (named earlier as 'the protagonist') builds the warding charm from 'person' and 'small' because 'She didn't know the charm symbol for pecksie'; the delivery leaves Jami 'weakened almost to the point of death', and 'it was through her lack of specificity in language that the near-fatality of the delivery came to be'.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "133": {
+   "index": 133,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "According to scholar Sylvia Borowska-Szerszun, Martin's work focuses on the brutality and violence of its realism, while Hobb's narrative focuses more on the psychological aspects of trauma, including that arising from violence and rape.",
+   "note": "Quote verbatim in the Style section of the live Wikipedia article; the sentence cites Borowska-Szerszun (2019) p.11, and the Sources list gives Extrapolation 60(1): 1-22, doi 10.3828/extr.2019.2, matching the claim's citation. Wikipedia spells the forename 'Sylvia' where the journal record has 'Sylwia'.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "134": {
+   "index": 134,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "reframe this pattern by shifting emphasis to the survivor",
+   "note": "Raw OpenAlex JSON fetched at the cited URL (W2942637364); abstract reconstructed from abstract_inverted_index. It reads: 'Hobb's novels seem to reframe this pattern by shifting emphasis to the survivor and actually redefining what rape is', where 'this pattern' is the '\"traditional\" rape script' named earlier in the same abstract. Graded SUBSTANCE not VERBATIM because the claim carries no quotation to match (quote field empty) and it drops the abstract's hedge 'seem to'.",
+   "fromFile": "verdicts-hobb-i120-134.json"
+  },
+  "135": {
+   "index": 135,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bee travels up the Rain Wild River, noting animals and plants matching North American flora/fauna",
+   "note": "Raw HTML of elliottrwi.com post (18 May 2026, by geoffreybelliott) fetched with a browser UA. Body text: \"In a yet later example, Bee travels up the Rain Wild River, noting animals and plants that seem to line up with North American flora and fauna.\" Quote exact; the paper is expressly on the Fitz and the Fool novels. Only softening: Elliott hedges \"seem to line up with\" where the claim says \"matching\".",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "136": {
+   "index": 136,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "20 test texts taken from works by Bardugo, Dickens, Gaiman, Hobb, Landy, Sanderson, Tolkien",
+   "note": "Sciendo PDF fetched and text-extracted (19 pp.); title/author/journal/DOI match (Slavova, CAIT 20.2, 2020, DOI 10.2478/cait-2020-0012). p. 13: \"We designated 20 texts, each about one page long, taken from works by Leigh Bardugo, Charles Dickens, Neil Gaiman, Robin Hobb, Derek Landy, Brandon Sanderson, and J. R. R. Tolkien.\" Quote exact. Nuance worth carrying: these are the validation \"experimental texts\", not the main EmoBank-derived corpus.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "137": {
+   "index": 137,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The first chapter's introduction almost reads like an encyclopaedia about the Six Duchies",
+   "note": "Utrecht thesis PDF fetched and extracted (45 pp.); title page confirms \"Translating Robin Hobb's Assassin's Apprentice\", BA Thesis, Utrecht University, Iris Duits, April 2012. Text: \"In the introduction of the first chapter, this is not yet a major problem, since this part almost reads like an encyclopaedia, offering factual information on the Six Duchies.\" Quote exact, all limbs supported. Locator note: the passage sits on printed p. 15 in ch. 6 (Translation criticism - Translation strategies), not ch. 3 as the claim's page field says.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "138": {
+   "index": 138,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Even in English the language seems archaic; long, complex sentences occur",
+   "note": "Same Duits PDF, same paragraph as #137 (printed p. 15): \"Even in English, the language seems a bit archaic, and long, complex sentences occur.\" Quote exact; the sentence immediately follows the encyclopaedia remark, so \"in that encyclopaedic opening\" is supported.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "139": {
+   "index": 139,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "English sentence clear and to the point; Dutch seems formal and wordy",
+   "note": "Duits PDF, printed p. 15: comparing Hobb's \"I have spoiled another leaf of the fine stuff...\" with Feberwee and Cuijpers' Dutch - \"The English sentence is clear and to the point, whereas the Dutch sentence seems formal and wordy.\" Quote exact; both limbs on the page.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "140": {
+   "index": 140,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Proper names have an important role; translating them well is very important",
+   "note": "Duits PDF, Introduction (printed p. 3): \"Proper names have an important role in this novel, so translating them well is very important.\" Quote exact. \"Central problem\" is supported: the thesis gives proper names two of its nine sections (ch. 4 and ch. 5).",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "141": {
+   "index": 141,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Six Duchies nobles name children after virtues, hoping they emulate them",
+   "note": "Kok thesis PDF fetched and extracted (110 pp.); title page confirms \"The Boundaries of Imagination / Important aspects of fantasy translation\", Marlies Kok, Translation Master Thesis, Utrecht readers Naaijkens and Koster. Printed p. 27: \"The nobles of the land called the Six Duchies have the custom to name their children after virtues or traits, in hopes of them emulating that which they were named after in later life...\" Quote exact; every limb supported.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "142": {
+   "index": 142,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Readers might not realise the names are English words, not fantastical-sounding",
+   "note": "Kok PDF, printed p. 27: \"...the reader of the translation, who might not realise the names are not fantastical-sounding but English words.\" Quote exact. Context is the Farseer noble names (Shrewd, Chivalry, Verity, Regal, Patience, Desire), so \"Hobb's noble names\" is supported; \"ordinary\" is the claim's own gloss on \"English words\".",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "143": {
+   "index": 143,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Half-translating loses the habit; it seems too infrequent to signify",
+   "note": "Kok PDF, printed p. 28: \"By only translating half of the noble names to something of similar meaning in the target language, the underlying cultural habit of naming noble children after virtues is lost on the reader of the translation, since in translation it does not seem to happen often enough to be of significance in the setting's culture while it actually is.\" Quote exact; both the half-translation limb and the frequency-of-significance reason are on the page.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "144": {
+   "index": 144,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Native-speaker utterances, among them a selection from Hobb's Royal Assassin, the only novel referenced",
+   "note": "Raw HTML of elliottrwi.com/research/hobb-bibliography/ (\"The Fedwren Project: A Robin Hobb Annotated Bibliography\") fetched with a browser UA. Bruening entry cites NLLT vol. 32, no. 2, May 2014, pp. 363-422, matching the claim, and the annotation reads: \"...utterances by native speakers of English (among which is a selection from Hobb's Royal Assassin, notably the only novel referenced) do not make the distinctions that theorists posit...\" Quote exact; every limb supported.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "145": {
+   "index": 145,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that 'nitterdy-natterdy' is Hobb's coinage - the article only cites the phrase as occurring in her novel, never says she invented it",
+   "trueWording": "English uses the expression nitterdy-natterdy, from Hobb's Assassin's Apprentice",
+   "note": "Estudios de Traduccion PDF fetched from revistas.ucm.es and extracted (15 pp.); article confirmed as Garnes, Estud. trad. 2016, 6: 39-53. Section 5.3 'Otros recursos lexicos', printed p. 47: example (9a) is quoted from Assassin's Apprentice and \"En ingles se utiliza la expresion nitterdy-natterdy.\" Quote exact, and the section's framing (\"otras expresiones que contienen la nocion semantica de iteracion o duracion de la accion y una evaluacion negativa\") supports 'English lexical resource for intensification'. Only the word 'coinage' is unsourced.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "146": {
+   "index": 146,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Two important data: insistence on the action and the speaker's weariness",
+   "note": "Garnes PDF, printed p. 47: the cited English expressions \"nos indican dos datos importantes para este analisis; insistencia en la accion y el hastio del hablante.\" Quote exact; 'two things at once' matches \"dos datos importantes\", and 'hastio' is weariness/tedium.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "147": {
+   "index": 147,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin and Hobb have in later works begun to question the male/king package",
+   "note": "UTS PDF (02whole.pdf) fetched and extracted (86 pp.); running head confirms \"Kings. What a good idea. Pamela Freeman\", printed p. 42: \"Other women writers have kept the whole male/king package, although some, like Ursula Le Guin and Robin Hobb, have in their later works begun to question this. (See, for example, the difference in attitudes to monarchy between Hobb's Assassin's Apprentice series, 1996-1998, and her Liveship Traders books, 1999-2001.)\" Quote exact; every limb, including the Farseer/Liveship citation, is on the page.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "148": {
+   "index": 148,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "40 novels - 20 classic, 20 modern; first chapter of each manually annotated",
+   "note": "peerj.com returned Cloudflare 403 to both a plain and a browser-UA request (and to the .pdf); reached the raw page through the Wayback capture https://web.archive.org/web/20260208122918id_/https://peerj.com/articles/cs-189/ , which carries the full text. \"20 classic and 20 modern novels\" appears verbatim several times, incl. contribution (4) \"an annotated gold standard dataset with entities and coreferences of 20 classic and 20 modern novels\"; \"In each of these novels, the first chapter is manually annotated with named entities and coreference relations\"; Table A2 lists Assassin's Apprentice, Robin Hobb (1995) under Modern.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "149": {
+   "index": 149,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "3rd-person novels perform significantly better than 1st-person ones",
+   "note": "Same Wayback raw capture. Conclusion and Future Work: \"We did find that novels written in 3rd person perspective perform significantly better than those written in 1st person, which is in line with findings in related studies.\" Quote exact; the body gives p < 0.01, and Tables 3-4 mark Assassin's Apprentice with the symbol whose legend reads \"Novels written in 1st person are marked with the circled dot\", so the first-person class does include it.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  },
+  "150": {
+   "index": 150,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cut out everything that does not describe the setting",
+   "note": "Raw page (ofblog.blogspot.com, HTTP 200, curl with browser UA), On writing Q2: 'In a short story, I'm the opposite. I ruthlessly edit and cut out everything that does not describe the setting, advance the plot or offer a character insight.' Quote verbatim; all three limbs present. Page says 'offer a character insight' where the claim says 'give a character insight' - synonymous paraphrase in the claim sentence, not in the quotation.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "151": {
+   "index": 151,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Prose as Megan Lindholm is much leaner than prose as Robin Hobb",
+   "note": "Raw page, On writing Q2, immediately after the sprawl/short-story passage: 'Prose as Megan Lindholm is much leaner than prose as Robin Hobb.' Verbatim, whole claim supported.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "152": {
+   "index": 152,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In a novel, I sprawl, and I know it",
+   "note": "Raw page, On writing Q2 opening: 'This depends on what I'm writing. In a novel, I sprawl, and I know it.' Verbatim; both limbs (sprawls, knows it) on the page.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "153": {
+   "index": 153,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Make your economy and geography make sense",
+   "note": "Raw page, On writing Q12 (advice to a young and aspiring writer): 'Make your economy and geography make sense.' Verbatim. The invented-place limb is carried by the surrounding fantasy context ('don't think that fantasy means you can write anything you want', the unicorn/magic-horse example).",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "154": {
+   "index": 154,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A tiny village isn't going to have an artisan who makes his living specializing in doorknockers",
+   "note": "Raw page, On writing Q12: 'A tiny village isn't going to have an artisan who makes his living specializing in doorknockers.' Quote verbatim as a prefix of that sentence; offered as an example of the foundation a writer must get under the writing.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "155": {
+   "index": 155,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A medieval farm family didn't harvest its entire farm in one afternoon",
+   "note": "Raw page, On writing Q12, the sentence immediately after the doorknocker example: verbatim, and framed there as an error of the same 'get a foundation under your writing' kind.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "156": {
+   "index": 156,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Every character is the main character",
+   "note": "Raw page, On writing Q10: 'Every character is the main character. Even if they only have a bit part, for the time they are on stage and moving around, the writer has to remember that for that character, \"Life is all about me.\"' Verbatim; the 'however small the part' and 'while on stage' limbs are both on the page.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "157": {
+   "index": 157,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Climb into a character, and suddenly even the villain is wondering what is for dinner tonight",
+   "note": "Raw page, On writing Q10: quote verbatim. The 'inside a villain's skin' limb is supported twice in the same paragraph - 'Climb into a character, and suddenly even the villain is wondering...' and 'If you put on the villain's skin, you have to love him or at least understand him.'",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "158": {
+   "index": 158,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Immediacy and reader identification",
+   "note": "Raw page, Specific questions Q14 ('What benefits to the story did you find when you chose to write Farseer in first person?'): the answer opens 'Immediacy and reader identification. But it isn't like I planned it.' Verbatim; question and answer match the claim exactly.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "159": {
+   "index": 159,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I could only tell the reader what Fitz knew at that moment",
+   "note": "Raw page, Specific questions Q14: 'It was horribly inconvenient at times, because I could never say, \"Meanwhile, back at the castle, thus and so was happening.\" I could only tell the reader what Fitz knew at that moment.' Verbatim; the confinement limb is explicit in the preceding sentence.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "160": {
+   "index": 160,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "To me, the first person voice is the natural voice for the story teller",
+   "note": "Raw page (aidanmoher.com, HTTP 200, curl with browser UA), Q on what draws her to first person: verbatim, prefixed on the page by the hedge 'To me,'.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "161": {
+   "index": 161,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the reader is privy to the characters innermost thoughts and feelings",
+   "note": "Raw page, same first-person answer: 'With first person, the reader gets to know the viewpoint character intimately because the reader is privy to the characters innermost thoughts and feelings.' Verbatim (the page omits the apostrophe in 'characters'); the viewpoint-character limb is in the same sentence.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "162": {
+   "index": 162,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When I write as Hobb, I tend to write longer, more detailed stories",
+   "note": "Raw page, Q on the two pen names: verbatim, and the page attributes it explicitly to writing as Hobb ('When I write as Hobb, ...'), followed by 'Often they are more emotionally complex as well.'",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "163": {
+   "index": 163,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Lindholm writing style is not as leisurely",
+   "note": "Raw page, Q on the two pen names, the sentence two after the Hobb one: verbatim. The 'than the Hobb style' comparand is not spelled out in that sentence but is the immediate antecedent ('When I write as Hobb, I tend to write longer, more detailed stories... The Lindholm writing style is not as leisurely.') in an answer whose whole subject is the difference between the two bylines.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "164": {
+   "index": 164,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they acquire baggage and later on it may affect what they do",
+   "note": "Raw page, Q on putting characters through hard situations: 'When my characters get hurt, physically or emotionally, they acquire baggage and later on it may affect what they do.' Verbatim; the hurt limb is in the same sentence.",
+   "fromFile": "verdicts-hobb-i150-164.json"
+  },
+  "165": {
+   "index": 165,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "As the reader experiences the story, he drags that same baggage through the reading.",
+   "note": "Raw page (curl, browser UA, HTTP 200) carries the quote word for word. Full context: characters 'acquire baggage' when hurt physically or emotionally, and the reader drags that same baggage through the reading. Both limbs (reader; character's accumulated baggage) supported.",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "166": {
+   "index": 166,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I often had to trust that the reader would make a leap and connect events even if Fitz was not seeing the connection.",
+   "note": "Quote verbatim on the raw page. The 'leap the narrator did not make' limb is explicit: 'even if Fitz was not seeing the connection' — Fitz is the first-person narrator, and the answer is the first-person-limits question.",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "167": {
+   "index": 167,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In Farseer, I coped with that by having little prologues at the beginning of each chapter that gave the reader additional information.",
+   "note": "Quote verbatim. Every limb supported: coping with first-person limitation ('the writer is limited to telling the reader what that character knows at that moment'), in Farseer, chapter-opening prologues, additional information.",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "168": {
+   "index": 168,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There is a fairly clean dividing line between the Robin Hobb voice and the Megan Lindholm voice in my writing.",
+   "note": "Quote verbatim in the first interview excerpt on the raw Locus Online page (December 2005 issue thread). Claim's 'in her writing' is the page's 'in my writing'.",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "169": {
+   "index": 169,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I would describe my writing style as both leisurely and intimate.",
+   "note": "Quote verbatim, first Q&A of the Fantasy Book Critic interview (post dated Monday, January 7, 2008).",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "170": {
+   "index": 170,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "For me, that means putting in details and incidents that may not directly move the plot forward.",
+   "note": "Quote verbatim in the characterization answer; the antecedent of 'that' is 'the key to strong characterization is taking the time to develop the character', so the 'characterisation means' limb holds.",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "171": {
+   "index": 171,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The pacing at the beginning of any of my books is usually a lot slower than towards the end of the book.",
+   "note": "Quote verbatim; the claim's completion ('a lot slower than towards the end') is the page's own continuation of the same sentence.",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "172": {
+   "index": 172,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "simply because so many words are given over to character construction",
+   "note": "Quote verbatim, and it is the causal clause attached directly to the slow-opening sentence ('The pacing at the beginning ... is usually a lot slower ..., simply because ...'), so the attribution limb holds.",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "173": {
+   "index": 173,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That seems more like a joke than a devastating occurrence.",
+   "note": "Quote verbatim. The illustration on the page is exactly two sentences — 'Joe had been Ed's best friend since childhood. One night Joe got drunk and accidentally ran over Ed.' — a friend killing a friend, offered as what happens without earned build-up.",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "174": {
+   "index": 174,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "when I propelled the reader directly into it, it lacked the impact and significance I wanted it to have",
+   "note": "Quote verbatim. The 'without building up to it' limb is the preceding clause on the page: 'when I didn't slow down and construct the ramps up to that exciting scene'.",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "175": {
+   "index": 175,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "For me, the story is really about how the events affect the characters rather than about the events themselves.",
+   "note": "Quote verbatim in answer 1 of the Pat's Fantasy Hotlist Q&A (posted Monday, July 11, 2005).",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "176": {
+   "index": 176,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "With every sentence, you narrow an infinite number of possibilities down to a single track.",
+   "note": "Quote verbatim in answer 2; the 'down to a single track' limb is the page's own sentence ending.",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "177": {
+   "index": 177,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Some characters speak in longer sentences, some speak in shorter sentences.",
+   "note": "Quote verbatim in the fan transcript of Writing Excuses 11.Bonus-01 (page header names the episode and links writingexcuses.com/2016/10/12). Spoken by [Robin]; the differentiation limb holds — the passage answers how to tell two similar characters apart and continues 'There's just a lot of ways to build that in.'",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "178": {
+   "index": 178,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So with your characters, it's a choice of vocabulary, it's a way of seeing things.",
+   "note": "Quote verbatim, attributed to [Robin] in the same transcript, and framed as how to differentiate characters (followed by the read-your-dialogue double-check).",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "179": {
+   "index": 179,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'm married to a sailor. In our house, we have a galley, we have a head, we have a deck. I happen to have like a kitchen and a bathroom and a floor.",
+   "note": "Quote verbatim. All limbs supported: her own household, occupational vocabulary (farmer vs sailing-ship background), and the same rooms under two names — the page adds 'But it's all in the same house.'",
+   "fromFile": "verdicts-hobb-i165-179.json"
+  },
+  "195": {
+   "index": 195,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Robin Hobb has created a number of small intimate settings centred around her characters",
+   "note": "Writers Write page (byline Christopher Luke Dean, posted 12 Feb 2020) carries the quote verbatim, prefaced 'Unlike Tolkien or Brandon Sanderson'; next sentence adds 'Sometimes, they are quite grand settings, but they are always intimate.'",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "196": {
+   "index": 196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hobb manages to make her readers care for her setting as much as her characters",
+   "note": "Verbatim in section 1 'What She Did', followed by the Bing Town / Badgerlock Manner illustration. Every limb supported.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "197": {
+   "index": 197,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Her characters grow or die or get worse. Nothing is stable in Hobb's world",
+   "note": "Verbatim in section 5 'Who she did it for'. The 'rather than remaining stable' limb is carried by the immediately following clause 'Nothing is stable in Hobb's world'.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "198": {
+   "index": 198,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The epigraphs at the beginning of each chapter will have historical facts",
+   "note": "Verbatim on the Substack essay (Jeffrey O / jeffreydavidoutcalt, 2 Jul 2024); full sentence continues 'about the history of the Six Duchies, like its kings, landmarks, and culture'.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "199": {
+   "index": 199,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A pretty informative, yet boring, introduction epigraph",
+   "note": "Verbatim, placed directly after the block-quoted first epigraph ('A history of the Six Duchies is of necessity, a history of its ruling family, the Farseers'), so the 'opening in-world history epigraph' limb is supported.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "200": {
+   "index": 200,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It reads as if we are reading from the same tome he actually scribed upon",
+   "note": "Verbatim in the metanarrative definition paragraph; 'he' is Fitz, the first-person narrator documenting the Six Duchies history, supporting the 'the narrator scribed' limb.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "201": {
+   "index": 201,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This should immediately alert us to the potential of an unreliable narrator",
+   "note": "Verbatim in the Chapter 7 Queen Desire discussion, preceded by 'there is a lot of bias and malice laced in Fitz's \"history\" of Queen Desire's death', supporting the 'bias' limb.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "202": {
+   "index": 202,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hobb leaves it up to the reader to do some light investigative work",
+   "note": "Verbatim; the sentence opens 'Rather than waffling between present day and flashbacks', which supports the 'rather than cutting to flashback' limb.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "203": {
+   "index": 203,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "details about the characters in ways that are NOT disclosed anywhere else in the book",
+   "note": "Verbatim. Page says 'All these epigraphs raise very important details...' of the chapter 9, 13 and 14 epigraphs; the claim's weaker 'some epigraphs' is a subset and is supported.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "204": {
+   "index": 204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the slow congealing of fact and fiction in the epigraphs",
+   "note": "Verbatim, in the paragraph following the Chapter 7 analysis; 'congealing ... in the epigraphs' supports the 'across the sequence of epigraphs' limb.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "205": {
+   "index": 205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hobb uses an unremitting rhythm of buts at all levels of the story",
+   "note": "Verbatim under the heading 'Making Lyrical Fantasy Interesting' in M Harold Page's Black Gate dissection of Fool's Assassin (9 Feb 2016), with the parenthetical '(note the single \"t\")' and the fractal-buts examples.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "206": {
+   "index": 206,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a death resulting from the Thriller has domestic and child-rearing implications",
+   "note": "Verbatim under 'First Person Slow Burn Thriller', introduced by 'She braids the plots together. For example,'.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "207": {
+   "index": 207,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the same duty manifests both domestically and politically",
+   "note": "Verbatim under 'First Person Slow Burn Thriller': 'She uses themes like duty, friendship, love and self-determination to link both plots, not just thematically but also practically: the same duty manifests both domestically and politically.'",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "208": {
+   "index": 208,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She only delivers description when it's part of a conflict",
+   "note": "Verbatim under 'Making Lyrical Fantasy Interesting'; the claim's 'only ... when it is part of a conflict' matches the page word for word, followed by the trousers / party / steam-room examples.",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "209": {
+   "index": 209,
+   "verdict": "PARTIAL",
+   "trueWording": "Hobb always serves up characterisation when it is immediately significant to choices or tactics",
+   "note": "Quote is verbatim, but the page says 'always ... when', not 'only ... when' — the converse. Page reserves the restrictive 'only' for description in the very next bullet ('She only delivers description when it's part of a conflict'), so the contrast is deliberate and the claim's 'only' is not on the page.",
+   "unsupportedLimb": "the restrictive 'only' — the page asserts 'always serves up characterisation when it is immediately significant', which does not exclude characterisation at other moments",
+   "fromFile": "verdicts-hobb-i195-209.json"
   }
  },
  "assembledFrom": [

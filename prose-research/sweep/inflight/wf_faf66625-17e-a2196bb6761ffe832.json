@@ -16,8 +16,8 @@
  "journal": "failed",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-martin-closereading.json",
-  "claims": 0,
-  "complete": false,
-  "mtime": "13:02:18"
+  "claims": 88,
+  "complete": true,
+  "mtime": "13:15:17"
  }
 }

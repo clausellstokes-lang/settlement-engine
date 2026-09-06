@@ -3,15 +3,15 @@
  "name": "dnd",
  "angle": "scholarship-history",
  "tag": null,
- "lines": 141,
+ "lines": 266,
  "firstTs": "2026-09-06T16:58:52.736Z",
- "lastTs": "2026-09-06T17:07:10.490Z",
+ "lastTs": "2026-09-06T17:15:16.958Z",
  "tools": {
   "Read": 1,
-  "Bash": 29,
+  "Bash": 55,
   "ToolSearch": 1,
   "WebFetch": 1,
-  "WebSearch": 6
+  "WebSearch": 15
  },
  "urlsFetched": [
   "https://api.crossref.org/works?filter=isbn:9780262547604&rows=60&select=title,DOI,author,page,abstract",
@@ -53,18 +53,42 @@
   "https://www.dndbeyond.com/posts/624-lets-design-an-adventure-adventure-hooks-and",
   "https://www.dndbeyond.com/posts/626-lets-design-an-adventure-encounter-basics",
   "https://www.dndbeyond.com/posts/624",
-  "https://www.dndbeyond.com/posts/626"
+  "https://www.dndbeyond.com/posts/626",
+  "https://spriggans-den.com/2016/08/19/reading-through-moldvay-basic-1981/",
+  "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+  "https://eprints.whiterose.ac.uk/id/eprint/147044/1/Deterding_Zagal_Many_Faces_RPG_Studies.pdf",
+  "https://merricb.com/2012/09/04/review-of-dd-basic-moldvay/",
+  "https://www.googleapis.com/books/v1/volumes?q=$q&maxResults=3",
+  "https://www.googleapis.com/books/v1/volumes?q=Playing+at+the+World",
+  "https://ia-fts.archive.org/api/v1/search/hits_inside?item=$ID&doc=$ID&path=/0/items/$ID&q=description&size=5",
+  "https://api.archivelab.org/books/$ID/searchinside?q=description",
+  "https://analoggamestudies.org/?s=%22flavor+text%22",
+  "https://analoggamestudies.org/?s=%22read+aloud%22",
+  "https://analoggamestudies.org/tag/dungeons-dragons/",
+  "https://analoggamestudies.org/20[0-9",
+  "https://analoggamestudies.org/[0-9",
+  "https://www.vintagerpg.com/2021/02/city-state-of-the-invincible-overlord-1976/",
+  "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+  "https://mystara.thorfmaps.com/product/gaz1/",
+  "https://playingattheworld.blogspot.com/search?q=Judges+Guild",
+  "https://playingattheworld.blogspot.com/search?q=description",
+  "https://playingattheworld\\.blogspot\\.com/20[0-9",
+  "https://playingattheworld.blogspot.com/2022/01/alistair-macintyres-1974-dungeon-designs.html",
+  "https://playingattheworld.blogspot.com/2020/04/dave-arnesons-origins-1977-tournament.html",
+  "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
+  "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+  "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/"
  ],
  "filesWritten": [],
- "lastAssistantText": "I'll start by reading the finder method document.",
+ "lastAssistantText": "Now let me add these to the checkpoint and write raw notes.",
  "run": "wf_f9424af6-fcf",
  "agent": "a5baef40f7ca4a1a6",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_f9424af6-fcf/agent-a5baef40f7ca4a1a6.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-scholarship-history.json",
-  "claims": 40,
+  "claims": 59,
   "complete": false,
-  "mtime": "13:07:10"
+  "mtime": "13:14:14"
  }
 }

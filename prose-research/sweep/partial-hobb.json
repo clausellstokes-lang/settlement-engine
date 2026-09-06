@@ -175,5 +175,53 @@
    "note": "The quotation is on the page word for word: \"When FitzChivalry first encounters Kelsingra, he finds it empty, perceiving no signs of life around him;\". But Elliott makes no claim about Hobb's technique of introduction, and the same sentence continues into positive perception, not absence: \"as he searches it, he finds that 'Whole domes of roofs had fallen in...outer walls had fallen away entirely' ... and sees, among others, 'the tatters of ancient hangings, a collapsed wooden bench.'\" Elliott also introduces Kelsingra two sentences earlier in his own descriptive voice ('That city is itself a silent memorial of a bygone civilization'), and later notes the city 'replays' its memories to Fitz, 'immersing him in images of the daily lives of inhabitants' -- so the city is not rendered through what Fitz fails to perceive. Grade is PARTIAL, not VERIFIED: the narrative-craft limb is the claim's gloss, not Elliott's.",
    "fromFile": "verdicts-hobb-i105-119.json"
   }
+ },
+ {
+  "index": 145,
+  "feature": "compounds and coinages",
+  "claim": "Garnes takes Hobb's coinage 'nitterdy-natterdy' as an English lexical resource for intensification in her contrastive corpus.",
+  "source": "Inmaculada Garnes, 'Analisis pragmatico contrastivo ingles/espanol de la intensificacion verbal en textos literarios', Estudios de Traduccion 6 (2016) 39-53",
+  "url": "https://revistas.ucm.es/index.php/ESTR/article/download/53002/48655",
+  "quote": "expresión nitterdy-natterdy",
+  "page": "section 5.3 Otros recursos lexicos, p. 47",
+  "kind": "analysis",
+  "polarity": "applies",
+  "date": "2016",
+  "routeHint": "open-access PDF at revistas.ucm.es (found via OpenAlex); the article is in Spanish and a running header splits the sentence around this phrase",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "angle": "academic",
+  "verdict": {
+   "index": 145,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that 'nitterdy-natterdy' is Hobb's coinage - the article only cites the phrase as occurring in her novel, never says she invented it",
+   "trueWording": "English uses the expression nitterdy-natterdy, from Hobb's Assassin's Apprentice",
+   "note": "Estudios de Traduccion PDF fetched from revistas.ucm.es and extracted (15 pp.); article confirmed as Garnes, Estud. trad. 2016, 6: 39-53. Section 5.3 'Otros recursos lexicos', printed p. 47: example (9a) is quoted from Assassin's Apprentice and \"En ingles se utiliza la expresion nitterdy-natterdy.\" Quote exact, and the section's framing (\"otras expresiones que contienen la nocion semantica de iteracion o duracion de la accion y una evaluacion negativa\") supports 'English lexical resource for intensification'. Only the word 'coinage' is unsourced.",
+   "fromFile": "verdicts-hobb-i135-149.json"
+  }
+ },
+ {
+  "index": 209,
+  "feature": "concrete sensory noun",
+  "claim": "Page says Hobb serves up characterisation only when it is immediately significant to a choice or tactic.",
+  "source": "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016",
+  "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+  "quote": "Hobb always serves up characterisation when it is immediately significant",
+  "page": "Making Lyrical Fantasy Interesting",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2016-02-09",
+  "routeHint": "curl browser-UA on live URL",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 209,
+   "verdict": "PARTIAL",
+   "trueWording": "Hobb always serves up characterisation when it is immediately significant to choices or tactics",
+   "note": "Quote is verbatim, but the page says 'always ... when', not 'only ... when' — the converse. Page reserves the restrictive 'only' for description in the very next bullet ('She only delivers description when it's part of a conflict'), so the contrast is deliberate and the claim's 'only' is not on the page.",
+   "unsupportedLimb": "the restrictive 'only' — the page asserts 'always serves up characterisation when it is immediately significant', which does not exclude characterisation at other moments",
+   "fromFile": "verdicts-hobb-i195-209.json"
+  }
  }
 ]

@@ -3,14 +3,14 @@
  "name": "ai",
  "angle": "critics-direct",
  "tag": null,
- "lines": 105,
+ "lines": 245,
  "firstTs": "2026-09-06T17:01:00.667Z",
- "lastTs": "2026-09-06T17:05:09.630Z",
+ "lastTs": "2026-09-06T17:14:39.966Z",
  "tools": {
   "Read": 1,
-  "Bash": 25,
+  "Bash": 62,
   "ToolSearch": 1,
-  "WebSearch": 2
+  "WebSearch": 5
  },
  "urlsFetched": [
   "https://dramatica.com/blog/the-ai-tells-are-in-the-story|dramatica-tells",
@@ -24,7 +24,26 @@
   "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
   "https://www.itsnicethat.com/articles/elizabeth-goodspeed-designers-who-write-creative-industry-020426",
   "https://web.archive.org/web/20260615085614id_/https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
-  "https://web.archive.org/web/20260715020203id_/https://www.itsnicethat.com/articles/elizabeth-goodspeed-designers-who-write-creative-industry-020426"
+  "https://web.archive.org/web/20260715020203id_/https://www.itsnicethat.com/articles/elizabeth-goodspeed-designers-who-write-creative-industry-020426",
+  "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+  "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+  "https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web",
+  "https://countercraft.substack.com/p/surfs-up-in-slop-city|michel-slopcity",
+  "https://countercraft.substack.com/p/art-without-intention|michel-intention",
+  "https://countercraft.substack.com/p/criticism-in-the-age-of-ai|michel-criticism",
+  "https://medium.com/design-bootcamp/why-nobody-has-cracked-ai-dialogue-in-games-and-a-thought-experiment-on-how-to-do-it-148a22330552",
+  "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+  "https://scribe.rip/design-bootcamp/why-nobody-has-cracked-ai-dialogue-in-games-and-a-thought-experiment-on-how-to-do-it-148a22330552",
+  "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+  "https://www.pcgamer.com/ai-generated-story-and-dialogue-is-not-going-to-work-says-dragon-age-creator-david-gaider-a-lot-of-effort-is-going-to-be-wasted-on-this/",
+  "https://www.pcgamer.com/games/puzzle/ai-is-just-a-plagiarism-machine-that-makes-people-lose-their-jobs-in-the-eyes-of-the-talos-principle-3s-writers/",
+  "https://countercraft.substack.com/p/art-without-intention",
+  "https://countercraft.substack.com/p/criticism-in-the-age-of-ai",
+  "https://countercraft.substack.com/p/surfs-up-in-slop-city",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+  "https://web.archive.org/web/20260127025121id_/https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+  "https://web.archive.org/web/20251221211413id_/https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method file.",
@@ -34,8 +53,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-critics-direct.json",
-  "claims": 106,
+  "claims": 191,
   "complete": false,
-  "mtime": "08:26:12"
+  "mtime": "13:13:28"
  }
 }

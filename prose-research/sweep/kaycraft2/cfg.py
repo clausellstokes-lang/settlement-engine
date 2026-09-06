@@ -1,2 +1,2 @@
 COMPLETE=False
-COVERAGE="IN PROGRESS (round 2 finder, resuming after a session cutoff): the angle names no explicit URL roster, so discovery ran as lateral search plus a full crawl of the BrightWeavings sitemap (549 URLs) against the 130 URLs the predecessor already read. 16 new sources fetched raw by curl with a browser user agent; 15 substantive. Continuing through the BrightWeavings critic-review vein and Kay's own craft essays."
+COVERAGE="IN PROGRESS."

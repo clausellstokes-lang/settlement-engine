@@ -244,5 +244,29 @@
    "unsupportedLimb": "the 1973 Pendragon text's reading 'the careless readers even noticing' - no variant, no Pendragon edition, and no textual comparison appears on the page",
    "fromFile": "verdicts-leguin-i150-164.json"
   }
+ },
+ {
+  "index": 249,
+  "feature": "naming and forms of address",
+  "claim": "Le Guin gives as her only rule for invented names that they avoid unpronounceable names, because the reader cannot pronounce them.",
+  "source": "Ursula K. Le Guin, interlineated reply to 'T.A.', 'Navigating the Ocean of Story - Session 1 part 3', Book View Cafe, 2015",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+  "quote": "avoid unpronounceable names",
+  "page": "Session 1 part 3, interlineated answer to T.A.",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2015",
+  "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200)",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice",
+  "verdict": {
+   "index": 249,
+   "verdict": "PARTIAL",
+   "trueWording": "My only 'rule': avoid unpronounceable names (like Qfwfq), because your reader can't pronounce them... and avoid sweet swoony names ending in -a (like Weena) for your heroine.",
+   "note": "Raw page, interlineated reply to T.A. 'avoid unpronounceable names' and the because-clause are verbatim, but her stated only 'rule' is a two-part one and the claim reports only the first half.",
+   "unsupportedLimb": "that her only rule is the pronounceability rule — the page's single 'rule' has a second, equally stated half: avoid sweet swoony names ending in -a",
+   "fromFile": "verdicts-leguin-i240-254.json"
+  }
  }
 ]

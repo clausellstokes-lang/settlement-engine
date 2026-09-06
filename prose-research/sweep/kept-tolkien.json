@@ -9711,6 +9711,214 @@
   }
  },
  {
+  "index": 643,
+  "feature": "ordinary language for hobbit viewpoint vs archaic omniscient passages",
+  "claim": "Hobbits' points of view are recorded in ordinary language, while other passages use an archaic diction reminiscent of ancient epic and Macpherson's Ossian and convey an omniscient point of view tied to 'epic characters' like Aragorn.",
+  "source": "Kullmann & Siepmann, 'Points of View' (ch. 4) abstract, Springer",
+  "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+  "quote": "recorded in “ordinary” language",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 643,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "recorded in “ordinary” language",
+   "note": "Raw link.springer.com chapter page reached with a real browser (curl got a 'Client Challenge'; no Wayback capture; Crossref/OpenAlex/S2 abstracts elided). Abstract verbatim: 'While the hobbits’ points of view are recorded in “ordinary” language, other passages are characterised by an archaic diction, reminiscent of ancient epic poetry as well as Macpherson’s Ossian. They convey an omniscient point of view, usually in connection with “epic characters” like Aragorn.' Every limb present. Independently corroborated by the colab.ws Crossref mirror carrying the same abstract.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 644,
+  "feature": "nineteenth-century POV lineage",
+  "claim": "Tolkien's limited point of view follows nineteenth-century novelistic practice; Kullmann traces the technique from Walpole's Castle of Otranto (1764) through Pride and Prejudice, Waverley, The Mill on the Floss, Tess, Mary Webb and Buchan's Witch Wood (p. 92).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "Emphasis is laid on subjective experience rather than facts",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 644,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Emphasis is laid on subjective experience rather than facts",
+   "note": "Google Books search-inside p.92 verbatim: '… Pride and Prejudice, Waverley, The Mill on the Floss and Tess of the d’Urbervilles; and continued by early twentieth-century novels, such as Mary Webb, Gone to Earth (1917), and John Buchan, Witch Wood (1926). Emphasis is laid on subjective experience rather than facts. One of the earliest examples of this point-of-view technique is certainly Horace Walpole’s The Castle of Otranto: A Gothic Story (1764)…'. Nineteenth-century-practice limb: Springer abstract 'Tolkien follows nineteenth-century novelistic practice' and p.95 'limited point of view (and thus a characteristic feature of nineteenth-century “realist” writing)'; Springer endnote 9 'from Walpole’s Castle of Otranto onwards'. Ordering nuance only: the page lists the novels first, then names Walpole as one of the earliest examples.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 645,
+  "feature": "hobbits as intermediaries / reader's representative",
+  "claim": "Like Scott's Waverley and Buchan's David Sempill, the hobbits act as intermediaries and, in Turner's phrase quoted by Kullmann, as representatives of the normality of the reader in a strange environment (pp. 95, 123).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "Tolkien's hobbits act as intermediaries",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 645,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's hobbits act as intermediaries",
+   "note": "Google Books p.95 verbatim: 'Edward Waverley and David Sempill, Tolkien’s hobbits act as intermediaries.' (Sempill introduced p.94 as Buchan’s parish minister, 'the reader’s representative in a strange and exotic environment'; Waverley is Scott’s, p.93). Turner limb confirmed on the raw Springer page, endnote 10 (= p.123): 'A comparison between Scott’s Edward Waverley and Tolkien’s hobbits as focalizers is also established by Turner. Like Waverley in the Scottish highlands, Tolkien’s hobbits act as “representative[s] of the normality of the reader” and “take the role of inexperienced strangers in a big wide, unknown world” (Turner, “One Pair of Eyes,” 24, 22).'",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 646,
+  "feature": "mediation as the function of limited POV",
+  "claim": "The function of the point-of-view technique is mediation: a strange environment and chain of events is brought close to the reader through the intermediate agency of characters whose point of view is recorded; the technique goes back to historical fiction (p. 119).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "brought close to the reader through the intermediate agency",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 646,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "brought close to the reader through the intermediate agency",
+   "note": "Google Books p.119 verbatim: '… mediation: a strange environment and chain of events is brought close to the reader through the intermediate agency of characters whose point of view is recorded. This technique apparently goes back to historical fiction, as can be seen by looking at Scott’s Waverley and Buchan’s Witch Wood.' All three limbs (mediation, strange environment/chain of events, historical-fiction ancestry) on the page.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 647,
+  "feature": "narrator withholds explanation",
+  "claim": "The narrator does not explain why an event has occurred; explanation is left to other characters such as Gandalf or Aragorn, or to the hobbits' own subjective conclusions (p. 91).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "left to other characters, such as Gandalf or Aragorn",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 647,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "left to other characters, such as Gandalf or Aragorn",
+   "note": "Google Books p.91 verbatim: '… why an event has occurred; this will be left to other characters, such as Gandalf or Aragorn, or to the hobbits’ own subjective conclusions.' Both limbs (narrator withholds the why; explanation devolved to Gandalf/Aragorn or the hobbits’ own conclusions) present.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 648,
+  "feature": "psychonarration reserved to Frodo",
+  "claim": "Psychonarration (Lanser's term) is reserved to Frodo; what Gandalf thinks or plans is left to Frodo's and the reader's speculation (p. 105).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "Psychonarration is reserved to Frodo",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 648,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Psychonarration is reserved to Frodo",
+   "note": "Google Books p.105 verbatim: 'Psychonarration is reserved to Frodo; what we learn about Gandalf is left open to his, and the reader’s speculation. Neither Frodo nor the reader know about Gandalf’s mind or Gandalf’s plans…'. Lanser attribution confirmed at p.93, where the term is introduced as '“psychonarration” (Lanser, 188)'; Lanser, The Narrative Act, is in the chapter’s Works Cited on the raw Springer page.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 649,
+  "feature": "Gandalf's mind withheld",
+  "claim": "Gandalf speaks a lot but his thoughts and feelings are hardly ever communicated to the reader in third-person narration (p. 118).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "hardly ever communicated to the reader",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 649,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "hardly ever communicated to the reader",
+   "note": "Google Books p.118 verbatim: '… he speaks a lot and easily converses with both the hobbits and the “heroes”, his thoughts and feelings are hardly ever communicated to the reader in the form of third-person narration. He obviously needs to remain enigmatic…'. Subject is Gandalf: p.105 makes Gandalf the withheld mind, and Springer endnote 31 says 'We only know about Gandalf’s feelings from what he speaks, so we do not know what he really thinks…'.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 650,
+  "feature": "Aragorn focalised perceptually not psychologically",
+  "claim": "When Aragorn's viewpoint is used we are told what he sees but learn little of his thoughts and feelings (p. 114); an omniscient passage gives way to a hobbit-limited one to lend Aragorn psychological depth via Merry's gaze (p. 102).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "we do not learn much about his thoughts and feelings",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 650,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we do not learn much about his thoughts and feelings",
+   "note": "Both limbs on the page. p.113: 'Aragorn’s point of view is usually confined to factual perceptions'; p.114 verbatim: '… we do not learn much about his thoughts and feelings.' p.102 verbatim: 'an omniscient point of view gives way to a passage limited to the point of view of the hobbit. This obviously enables the narrator to lend greater psychological depth to Aragorn’s appearance than to that of the other warriors. At the same time, we (as readers) can only guess at what really passes in Aragorn’s mind; our position is that of Merry, our representative in the story.'",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 651,
+  "feature": "Merry and Pippin as strand-followers",
+  "claim": "The narrative function of Merry and Pippin is to let the novelist take a hobbit's point of view on each spreading strand of the plot after Frodo and Sam leave the Company at the end of Book 2 (p. 99).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "a hobbit's point of view to each of the spreading strands",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 651,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a hobbit's point of view to each of the spreading strands",
+   "note": "Google Books p.99 verbatim: 'narrative function of Merry and Pippin, however, seems to consist in allowing the novelist to take a hobbit’s point of view to each of the spreading strands of the narrative. After Frodo and Sam leave the Company at the end of book 2 to set out to Mordor on their own, Pippin and Merry are captured by Orcs.' Page says 'strands of the narrative' where the claim paraphrases 'strand of the plot' — the quoted string itself is verbatim.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 652,
+  "feature": "focaliser shift from Frodo to Sam",
+  "claim": "In the first two books Frodo observes the world; later Frodo becomes the object of Sam's gaze, with Sam the focalizer in Books 4 and 6 (pp. 108, 119).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "the object of Sam's gaze",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 652,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the object of Sam's gaze",
+   "note": "Google Books p.108 verbatim: 'In the first two books, it was Frodo who observed and experienced the world around him. Now it is Frodo who is looked at from an outside point of view, as he becomes the object of Sam’s gaze. Frodo’s gradual fading away as a focalizer…'. Books 4 and 6 limb confirmed at p.119: '… focalizer in books 4 and 6.'",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 654,
+  "feature": "omniscient sections rare and paratextual",
+  "claim": "Sections told by an omniscient narrator are comparatively few, and some (the Prologue, the accounts of Bree and Minas Tirith) resemble a different text type, eighteenth-century antiquarianism such as Percy's Reliques (p. 111).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "comparatively few in number",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 654,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "comparatively few in number",
+   "note": "Google Books p.111 verbatim: '… comparatively few in number, and some of them resemble a different type of text altogether: The “prologue” (1–16) and the accounts of Bree (149–151) and Minas Tirith (751–752)…'. Percy limb also on p.111: '“eighteenth-century antiquarianism”, as found, for example, in the manifold paratexts of Thomas Percy’ Reliques of Ancient English Poetry (1765) (Groom 291–296)' (cross-referenced from p.34 n.43, '“eighteenth-century antiquarianism” found in these texts, see below, Chap. 4'). Note for completeness: the same page also likens those passages to 'ethnographic accounts or even of travel guides' and to ancient Greek romance — the claim reports only the antiquarianism comparandum, but every limb it does assert is on the page.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 656,
+  "feature": "Ossianic syntax in epic passages",
+  "claim": "The epic passages' short sentences, parataxis, inversion and repetition, with darkness and night motifs, are reminiscent of Macpherson's Poems of Ossian (p. 116).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "short sentences, parataxis, inversion and repetition",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 656,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "short sentences, parataxis, inversion and repetition",
+   "note": "Google Books p.116 verbatim: '… short sentences, parataxis, inver-sion and repetition, as well as motifs concerning darkness and night-time, are reminiscent of Macpherson’s Poems of Ossian, as in a passage in which Fingal, the hero, approaches his enemies…'. The only departures from the claim's quote are the printed line-break hyphens in 'inver- sion' and 'night- time'. Darkness/night-motif limb present in the same sentence; Macpherson's debt also noted in Springer endnote 29 (Groom 295).",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
+  "index": 657,
+  "feature": "Rohirrim passage syntax",
+  "claim": "In the Rohirrim passages sentences follow one another paratactically, more complex propositions are built with participles, there are few hypotactic sentences, and the effort of the journey is conveyed by inversions (p. 115).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "there are few hypotactical sentences",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 657,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there are few hypotactical sentences",
+   "note": "Google Books p.115 verbatim: '… paratactically. More complex propositions are constructed by means of participles, while there are few hypotactical sentences. The effort involved in the journey is conveyed by means of inversions (“swift and enduring”, “forty leagues or more”) and repetition (“many leagues”, “forty leagues”).' All four limbs present. Rohirrim context confirmed on the same and next page: p.115 'Riders of Rohan, as in the passage which depicts their setting off from Edoras to the battle of Helm’s Deep'; p.116 'The account of the riding is limited to the bare facts… the archaic language and sentence construction characterizes the Riders as epical warriors'.",
+   "fromFile": "verdicts-tolkien-i643-657.json"
+  }
+ },
+ {
   "index": 658,
   "feature": "inversion of showing/telling theory",
   "claim": "Kullmann inverts Lubbock/Friedman: the omniscient archaic passages are the vivid visual 'showing', while point-of-view passages mainly serve to show states of mind rather than to describe action (p. 120).",
@@ -9948,6 +10156,435 @@
    "trueWording": "p.74: \"the first thing to note is an evident underuse of personal pronouns in sentence-initial position. Typical sentence patterns found in contemporary fiction are the following: She longed to say it / He had expected to fight / It must have cost her ...\"",
    "note": "Route: Google Books search-inside on the cited volume; snippet page id confirms p.74, matching the citation, and the page's running foot reads '74 D. Siepmann 3.2.3 Clause Level', which supports the claim's 'At clause level' limb. The quoted phrase appears as 'an evident unde-ruse of personal pronouns in sentence-initial position' - the hyphen is a line-break artifact of the scanned page, so the phrase-search for the unbroken string returns zero and the match had to be made through the neighbouring phrase 'the first thing to note'; on the page itself it is word for word. Both contemporary-fiction examples are verbatim.",
    "fromFile": "verdicts-tolkien-i658-672.json"
+  }
+ },
+ {
+  "index": 673,
+  "feature": "reference by name over pronoun",
+  "claim": "Pronoun reference is a dispreferred strategy; given the unusually large cast, reference by name becomes a frequent necessity (p. 75).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "reference by name becomes a frequent necessity",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 673,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reference by name becomes a frequent necessity",
+   "note": "p.75 raw snippet (Google Books search-inside, vol 9uAsEAAAQBAJ): 'how Tolkien establishes back-reference or why pronominal substitution is a dispreferred strategy in The Lord of the Rings. One may speculate that this is to do with the unusually large number of characters Tolkien introduces, so that, to avoid confusion, reference by name becomes a frequent necessity'. Quote verbatim; every limb (dispreferred pronoun reference, unusually large cast, name-reference a frequent necessity, p.75) supported.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 674,
+  "feature": "underuse of modal verbs",
+  "claim": "At word level Tolkien underuses modal verbs relative to post-war fiction (p. 72).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "underuse of modal verbs",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 674,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "At the word level ... is the underuse of modal verbs",
+   "note": "p.72 raw snippet: '3.2.1 Word Level At the word level the only notable difference between The Lord of the Rings and general fiction is the underuse of modal verbs, as in sentences like these...'. Same page names the reference corpus: '(post-war fiction) and the British National Corpus as a reference' (corpus described p.42 as a post-war fiction corpus). Quote 'underuse of modal verbs' verbatim; word-level and post-war-fiction limbs both supported.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 675,
+  "feature": "dispreferred adverb-led participle clauses",
+  "claim": "Clause-initial participle clauses introduced by an adverb and followed by a main clause ('Already cringing ..., she suddenly felt') are comparatively rare in The Lord of the Rings (p. 75).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 675,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Equally underused are clause-initial participle clauses introduced by an adverb",
+   "note": "Claim carries no quote. p.75 raw snippet: 'Equally underused are clause-initial participle clauses introduced by an adverb and followed by a main clause: Already cringing under the hand in her hair, she suddenly felt terrifyingly weak.' All limbs supported; the book's word is 'underused' rather than the claim's 'comparatively rare' (that phrase on p.75 belongs to the next structure discussed), hence SUBSTANCE not VERBATIM.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 677,
+  "feature": "clause-initial then/presently/suddenly",
+  "claim": "Tolkien overuses 'then', 'presently' and 'suddenly' in clause-initial position (p. 78).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "overuse of then, presently or suddenly in clause-initial position",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 677,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the overuse of then, presently or suddenly in clause-initial position",
+   "note": "p.78 raw snippet: 'overused words or fixed lexical phrases include no more, and the overuse of then, presently or suddenly in clause-initial position: Then Frodo breathed a sigh of relief.' Quote verbatim (page has 'or', claim has 'and' in the list - same three items, same assertion); p.78 correct; section is 3.3 'Overused Constructions'.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 678,
+  "feature": "inversion types",
+  "claim": "Even a casual reader notices Tolkien's fondness for inverted constructions, most commonly fronted subject complements followed by copular be and the subject ('beautiful was its colour'), and fronted prepositional phrases with other verbs (p. 81).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "fronted subject complements followed by copular be and the subject",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 678,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "casual reader will notice ... Tolkien's fondness for inverted constructions",
+   "note": "p.81 raw snippet: '...casual reader will notice is Tolkien's fondness for inverted constructions of various types, most commonly fronted subject complements followed by copular be and the subject, but also fronted prepositional phrases followed by other verbs. and beautiful was its colour ... So deep and narrow was that chasm that...'. Quote verbatim; casual-reader, most-commonly, 'beautiful was its colour' and fronted-PP limbs all supported on p.81.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 679,
+  "feature": "inversion vs fronting terminology",
+  "claim": "Turner notes Siepmann distinguishes linguistically between inversion and fronting whereas Kullmann uses 'inversion' for both in the rhetorical sense.",
+  "source": "Allan Turner, review of Kullmann & Siepmann, Journal of Inklings Studies 12.1 (2022)",
+  "url": "https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144",
+  "quote": "between inversion and fronting",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 679,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Siepmann distinguishes, correctly from a linguistic point of view, between inversion and fronting",
+   "note": "Live euppublishing.com returned HTTP 403 with a browser UA; recovered via Wayback raw capture https://web.archive.org/web/20220615121435id_/https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144. Page text: 'There is also some inconsistency in the use of terminology: Siepmann distinguishes, correctly from a linguistic point of view, between inversion and fronting, whereas Kullmann uses inversion for both according to the traditional terminology of rhetoric.' Byline 'Allan Turner'; masthead 'Journal of Inklings Studies, Volume 12 Issue 1, Page 139-142', Apr 2022. Quote verbatim; all limbs supported.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 680,
+  "feature": "passive plus prepositional complement",
+  "claim": "An overused clause variant is a passive verb followed by a prepositional complement ('Her shield was shivered in many pieces'), with passive slots filled by original or obsolescent material; the stative passive is far more common than the eventive (pp. 79-80, 83).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "the stative passive is far more common than the eventive",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 680,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the stative passive is far more common than the eventive passive",
+   "note": "Three pages, all raw snippets. p.79: '...overused in The Lord of the Rings is a passive verb followed by a prepositional complement. Her shield was shivered in many pieces...'. p.80: 'filled by highly original (blotted from the sky) or obsolescent material (his memory was stored with).' p.83: 'the stative passive is far more common than the eventive passive.' Quote is a verbatim prefix of the p.83 sentence, which continues with the word 'passive'; every limb and every cited page supported.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 681,
+  "feature": "clause-initial participles and bare participles",
+  "claim": "Tolkien, unlike many novelists, clearly prefers clause-initial over clause-final participial clauses, sometimes reduced to a bare absolute participle ('he, bowing low to the fallen, bade them'), though participial constructions are generally underused (p. 80).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "clear preference for clause-initial participial clauses",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 681,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unlike many other writers of fiction, has a clear preference for clause-initial participial clauses",
+   "note": "p.80 raw snippet: '...unlike many other writers of fiction, has a clear prefer-ence for clause-initial participial clauses over clause-final ones. These are sometimes reduced to the bare participle (Table 3.2).' Quote matches word for word (the only difference is the line-break hyphen in 'prefer- ence'). Table 3.2 gives 'Tolkien: clause-initial, \"absolute\" present participles: he, bowing low to the fallen, bade them farewell' against 'BNC: clause-final participial clauses'. Underuse limb also on p.80: 'Although participial constructions are generally underused in The Lord of the Rings (see above)'.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 682,
+  "feature": "existential there for events",
+  "claim": "Tolkien uses existential clauses with a wide variety of verbs to describe events ('there came ...'), fronted prepositional phrases with existential there, and existential there with passives ('there was held the highest feast'), but hardly ever for mere presence or absence (pp. 76, 82-83).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "existential clauses with a wide variety of verbs",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 682,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "existential clauses with a wide variety of verbs to describe events",
+   "note": "p.76 raw snippet: 'existential clauses with a wide variety of verbs to describe events (there came ...), but there is hardly any evidence of such clauses used with nouns to indicate mere presence or absence'. p.82: 'existential there. About it he clasped a belt, at which there hung a short sheath...' (fronted PP examples). p.83: 'existential there with passive verbs: ... and there was held the highest feast that it had known since the'. Quote verbatim; all four limbs and all cited pages supported.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 683,
+  "feature": "coordination by and / polysyndeton",
+  "claim": "Clauses and phrases coordinated by 'and' feature prominently; Tolkien uses 'and' with high frequency but sometimes differently from other writers (Table 3.1 'Use of and'; pp. 76, 86).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "Clauses and phrases coordinated by and feature prominently",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 683,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Clauses and phrases coordinated by and feature prominently",
+   "note": "p.86 raw snippet opens exactly: 'Clauses and phrases coordinated by and feature prominently.' p.76 raw snippet: '...and with high frequency, he sometimes does so in a slightly different way from a great deal of other fiction. Whereas in the comparison corpus and is more commonly used to link two verbs with the same subject...'. Table 3.1 'Use of and' is confirmed at p.76 by both the List of Tables ('Use of and 76') and the p.76 snippet. All limbs supported.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 684,
+  "feature": "dialogue-framing inversion",
+  "claim": "Dialogue-framing sentences of the type 'said Frodo' (verb before name) are a recurrent feature of the narrative syntax (pp. 84-85).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "dialogue-framing sentences (said Frodo)",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 684,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "short dialogue-framing sentences (said Frodo)",
+   "note": "p.85 raw snippet: 'Other overused clausal features include relative clauses whose antecedent is those, all or many (those who, all who, many who) and short dialogue-framing sentences (said Frodo). 3.4 Narrative Syntax: Conclusion and Two Sample Paragraphs'. The p.84 snippet ends '...Other overused clausal features include relative clauses whose anteced- ent 84 D. Siepmann', so the sentence does span pp.84-85 as cited. Quote verbatim within 'short dialogue-framing sentences (said Frodo)'; chapter 3 is 'The Narrative Syntax of The Lord of the Rings'.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 685,
+  "feature": "sentence-initial 'at last'",
+  "claim": "Sentence-initial 'at last' combined with a short verb, and fronted adjectives functioning as subject complements, are typical sentence openers (p. 84).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 685,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Sentence-initial at last ... commonly combined with a short verb",
+   "note": "Claim carries no quote. p.84 raw snippet: 'Sentence-initial at last, in itself frequent, is commonly combined with a short verb, such as speak: At last she spoke again. Another typical sentence-initial feature is the use of fronted adjectives functioning as subject complements or as extraposed elements.' Both limbs and p.84 supported.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 686,
+  "feature": "descriptive verbs and intensifiers",
+  "claim": "Key verbs shared with modern fiction are highly descriptive (clutch, cower, crawl, flicker, gape, gasp, gaze, gleam), while Tolkien overuses the emphasizers very, so and too and the adverb 'even', about seven times more common than in modern fiction (pp. 47, 49, 59).",
+  "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+  "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "quote": "around seven times more common than in modern fiction",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 686,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "around seven times more common than in modern fiction",
+   "note": "p.47: 'The key verbs shared with modern fiction are the following: clutch, cower, crack, crawl, curl, flicker, frown, gape, gasp, gaze, gleam, ...' followed by 'The descriptive verbs in question are distributed quite thickly...' (so the page does call them descriptive; p.87 'highly descriptive verbs'). p.49: 'the adverb even, which is around seven times more common than in modern fiction and one and a half times as common as in nineteenth-century fiction.' p.59: 'there is a clear overuse of the empha-sizers very (+ tall, weary, hungry, heavy, fair, hot, etc.), so (heavy, strong, strong, eager, etc.) and too (long, great, many, late, etc.)' - the emphasizers limb needed a hyphenation-aware probe ('a clear overuse') because 'emphasizers' is split across a line. Quote verbatim; all three cited pages check out.",
+   "fromFile": "verdicts-tolkien-i673-687.json"
+  }
+ },
+ {
+  "index": 718,
+  "feature": "address term as class marker",
+  "claim": "Krege's rendering of Sam's 'Master' as 'Chef' (boss) was criticised as misrepresenting a rural gardener's relation to his employer, and the September 2012 revision removed it.",
+  "source": "Der Herr der Ringe — Übersetzungen (de.wikipedia)",
+  "url": "https://de.wikipedia.org/wiki/Der_Herr_der_Ringe",
+  "page": "Übersetzungen",
+  "quote": "Chef",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 718,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bei Krege 'Chef'; Anrede im September 2012 eliminiert",
+   "note": "de.wikipedia, section 'Übersetzung von Wolfgang Krege': 'Im Original lautet sie master, bei Carroux Herr, bei Krege Chef. Hierdurch wird nach Ansicht der Kritiker das Verhältnis eines ländlichen Gärtnergesellen zu seinem Herrn unzutreffend wiedergegeben.' and 'Im September 2012 ... wurde Sams ... Anrede Chef eliminiert'. Precision point: the page's word is 'seinem Herrn' (his master), not 'employer'; Weinreich (claim 731) argues explicitly that the relation is class standing rather than employment, so the 'employer' gloss imports the framing the critics reject. The page does not itself gloss 'Chef' as 'boss' (en.wikipedia does).",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 719,
+  "feature": "anchor date of colloquial register",
+  "claim": "Krege spanned registers from sixteenth-century Bible German to colloquial speech but anchored them to 1990s German rather than the 1940s of the original, and many readers rejected the differentiation as overdrawn.",
+  "source": "Der Herr der Ringe — Übersetzungen (de.wikipedia)",
+  "url": "https://de.wikipedia.org/wiki/Der_Herr_der_Ringe",
+  "page": "Übersetzungen",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 719,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Endpunkt das Deutsch der 1990er statt jenes der 1940er Jahre",
+   "note": "No quote supplied, so substance grade. de.wikipedia: the register span (16th-c. 'Bibelstil' to rustic/urban, partly coarse 1940s everyday English) is stated of the ENGLISH ORIGINAL; 'Krege wählte entsprechend verschiedene Färbungen des Deutschen, definierte aber als Endpunkt das Deutsch der 1990er statt jenes der 1940er Jahre.' Rejection limb: 'Viele deutschsprachige Leser lehnen die Kregesche Übersetzung ab, da sie deren sprachstilistische Unterscheidungen an verschiedenen Stellen für überzogen oder unzutreffend halten.' All limbs supported.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 720,
+  "feature": "elegiac image fidelity",
+  "claim": "Krege's 'unermüdlich wedelndem Laubwerk' for 'ever-moving leaves' was attacked for distorting the symbol of transience and Elvish departure.",
+  "source": "Der Herr der Ringe — Übersetzungen (de.wikipedia)",
+  "url": "https://de.wikipedia.org/wiki/Der_Herr_der_Ringe",
+  "page": "Übersetzungen",
+  "quote": "unermüdlich wedelndem Laubwerk",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 720,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "einem Symbol der Vergänglichkeit und des bevorstehenden Abschieds der Elben",
+   "note": "Quote 'unermüdlich wedelndem Laubwerk' present verbatim: 'beispielsweise wurde aus \"ever-moving leaves\" ... - einem Symbol der Vergänglichkeit und des bevorstehenden Abschieds der Elben - \"unermüdlich wedelndem Laubwerk\".' Introduced as 'Übersetzungen einzelner Ausdrücke werden außerdem als sinnentstellend kritisiert', which matches 'attacked for distorting'. Page cites Rüdiger Sturm, Der Spiegel, 3 Nov 2000.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 721,
+  "feature": "register choice in dubbing",
+  "claim": "The German film dubbing kept Carroux's version rather than Krege's, visible in the third film's title remaining 'Die Rückkehr des Königs'.",
+  "source": "Der Herr der Ringe — Übersetzungen (de.wikipedia)",
+  "url": "https://de.wikipedia.org/wiki/Der_Herr_der_Ringe",
+  "page": "Übersetzungen",
+  "quote": "Die Rückkehr des Königs",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 721,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Die deutsche Synchronisation ... nutzte daher die ältere Carroux-Fassung",
+   "note": "Quote 'Die Rückkehr des Königs' present verbatim. Page: 'Die deutsche Synchronisation der Verfilmung von Peter Jackson nutzte daher die ältere Carroux-Fassung, worauf bereits der Filmtitel des dritten Teils hinweist, der weiterhin Die Rückkehr des Königs heißt.' Both limbs (dubbing kept Carroux; third film's title as the visible sign) supported. Krege's own title was 'Die Wiederkehr des Königs'.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 724,
+  "feature": "translator's stated register goal",
+  "claim": "Krege said he wanted to translate as Tolkien would write in 1999, directly from Westron into German.",
+  "source": "Wolfgang Krege (Ardapedia)",
+  "url": "https://www.ardapedia.org/wiki/Wolfgang_Krege",
+  "page": "",
+  "quote": "directly from Westron to German",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 724,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "aus dem Westron direkt ins Deutsche, ohne den Umweg über das Englische",
+   "note": "Substance, not verbatim: the supplied English quote 'directly from Westron to German' is absent (checked as an exact substring); the page is German. Ardapedia quotes Krege's Nachwort (September 1999): 'Die neue Fassung maßt sich einen Versuch an, die Geschichte so vorzutragen, wie Tolkien es tun würde, wenn er heute, 1999, schriebe und wenn er sie aus dem Westron direkt ins Deutsche brächte, ohne den Umweg über das Englische.' Both limbs (as Tolkien would write in 1999; straight from Westron into German) supported, and attributed to Krege himself.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 725,
+  "feature": "slang that dates",
+  "claim": "Krege's slang such as 'Penner' (bum) and 'Dalli Dalli' (hurry up) dated quickly and read as anachronistic.",
+  "source": "Wolfgang Krege (Ardapedia)",
+  "url": "https://www.ardapedia.org/wiki/Wolfgang_Krege",
+  "page": "",
+  "quote": "Dalli Dalli",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 725,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Trendausdrücke, die in wenigen Jahren Patina angesetzt haben werden",
+   "note": "Quotes 'Dalli Dalli' and 'Penner' both present verbatim. Ardapedia carries the Rüdiger Sturm passage (Spiegel Online, 3 Nov 2000): 'anstatt manche Dialoge behutsam zu modernisieren, peppt er sie mit Trendausdrücken auf, die in wenigen Jahren Patina angesetzt haben werden, sofern das nicht jetzt schon der Fall ist. Charaktere werden ... als \"Penner\" beschimpft oder mit \"Dalli Dalli\" angefeuert.' Attribution note: the page carries this as a named critic's contention under 'Kritiker der Neuübersetzung geben jedoch folgendes zu bedenken', not in its own voice, and the German is 'Patina angesetzt' (dated) rather than the claim's 'anachronistic'.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 726,
+  "feature": "pronoun of address",
+  "claim": "Krege replaced the historical deferential 'Ihr' with modern 'Sie', creating an odd modern formality in a medieval society.",
+  "source": "Wolfgang Krege (Ardapedia)",
+  "url": "https://www.ardapedia.org/wiki/Wolfgang_Krege",
+  "page": "",
+  "quote": "Sie",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 726,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "konsequent statt des klassischen 'Ihr' das zeitgenössische 'Sie'",
+   "note": "Quote 'Sie' present (as 'das zeitgenössische „Sie“'). Ardapedia: 'So verwendete Wolfgang Krege konsequent statt des klassischen „Ihr“ das zeitgenössische „Sie“ ... Sobald sich jedoch die Romanhandlung innerhalb des Kulturkreises anderer Völker wie den Rohirrim und Gondorern bewegt, deren Gesellschaft im weitesten Sinne noch als „mittelalterlich“ dargestellt ist, wirkt das Siezen hingegen, zum Beispiel in der Anrede eines Truchsess' oder eines Königs, eher unpassend.' Both limbs supported and the page's qualification matches the claim's 'in a medieval society' exactly. Worth carrying forward: the same page holds that Siezen is 'richtig und nachvollziehbar' for Shire society, modelled on late-19th-century British bourgeoisie — the oddity is scoped to Rohan and Gondor.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 727,
+  "feature": "editorial defence of modernisation",
+  "claim": "Editor Ulrike Killer defended Krege's version as timely for the films and preferable to a monochromatic and dated Carroux.",
+  "source": "Wolfgang Krege (Ardapedia)",
+  "url": "https://www.ardapedia.org/wiki/Wolfgang_Krege",
+  "page": "",
+  "quote": "monochromatic and dated",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 727,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "sah sie die Carroux-Übersetzung als zu gleichtönend und veraltet an",
+   "note": "Substance, not verbatim: 'monochromatic and dated' is absent as an exact substring (the page is German); the true wording is 'zu gleichtönend und veraltet'. Ardapedia: the hostile reactions 'waren für die damals zuständige Lektorin Ulrike Killer nicht nachvollziehbar. Diese hatte in der neuen deutsche Übertragung im besonderen eine Chance gesehen, im Hinblick auf die damals in der Produktion befindliche Der-Herr-der-Ringe-Filmtrilogie (2001-2003) neue Leser zu gewinnen.' Both limbs (timeliness for the films; Carroux as monotone and outdated) supported; 'Lektorin' = editor.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 728,
+  "feature": "2012 revision scope",
+  "claim": "Lisa Kuppler's 2012 revision preserved Krege's stylistic approach but corrected orthography and restored the traditional address for Frodo.",
+  "source": "Wolfgang Krege (Ardapedia)",
+  "url": "https://www.ardapedia.org/wiki/Wolfgang_Krege",
+  "page": "",
+  "quote": "",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 728,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Kuppler behielt Kreges Stil bei und korrigierte vornehmlich orthographische Fehler",
+   "note": "No quote supplied, so substance grade. Ardapedia: '2012 erschien eine von Lisa Kuppler überarbeitete Version ... Kuppler behielt dabei Kreges Stil bei der Überarbeitung bei und korrigierte vornehmlich orthographische Fehler.' The address limb rests on the page's Anmerkung 1: 'In der überarbeiteten Übersetzung Wolfgang Kreges behielt Lisa Kuppler die Originalbezeichnung Master bei.' Precision point: the page says she kept Tolkien's ORIGINAL term 'Master', not that she restored Carroux's German 'Herr' — so 'the traditional address' is true only if read as Tolkien's own word. de.wikipedia (claim 718) states the complementary fact, that 'Chef' was eliminated in September 2012.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 729,
+  "feature": "translator's theory of colour and tempo",
+  "claim": "Krege (Tolkien Times, August 2000) set out to give the text its own life in the German language's room for 'Farbe, Tempo, Kontrasten'.",
+  "source": "Anmerkungen zu den deutschen Übersetzungen des HdR (Frank Weinreich, polyoinos)",
+  "url": "http://polyoinos.net/tolk_stuff/translation.htm",
+  "page": "",
+  "quote": "Farbe, Tempo, Kontrasten",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 729,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ein gewisses Eigenleben in den Spielräumen der deutschen Sprache gewinnen",
+   "note": "Quote 'Farbe, Tempo, Kontrasten' present verbatim. Weinreich (polyoinos): 'Krege ist angetreten, um den Text \"ein gewisses Eigenleben in den Spielräumen der deutschen Sprache gewinnen\" zu lassen hinsichtlich: \"Farbe, Tempo, Kontrasten\" (Krege in der Tolkien Times vom August 2000).' Every limb, including the Tolkien Times August 2000 attribution, appears on the page. Page signed 'F.W. (06/01)' with footer 'Dr. phil. Frank Weinreich, Bochum'; fetched live over HTTP, no archive route needed.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 730,
+  "feature": "faithful translation as levelling",
+  "claim": "Krege argued the old faithful translation inevitably makes the expression a little paler, the tempo slower and the style more uniform; Weinreich rejects 'paler' as nonsense but grants the rest.",
+  "source": "Anmerkungen zu den deutschen Übersetzungen des HdR (Frank Weinreich, polyoinos)",
+  "url": "http://polyoinos.net/tolk_stuff/translation.htm",
+  "page": "",
+  "quote": "ein wenig blasser, das Tempo langsamer",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 730,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Der Text wird 'Blasser'? - Unsinn! Aber sonst hat Krege recht",
+   "note": "Quote 'ein wenig blasser, das Tempo langsamer' present verbatim inside the Krege citation: 'Die alte Fassung ist nachvollziehend, sie bildet den fremden Text in der eigenen Sprache getreu ab, wobei als unvermeidlich in Kauf genommen wird, dass der Ausdruck ein wenig blasser, das Tempo langsamer, der Stil gleichförmiger wird' (Tolkien Times, August 2000). Weinreich's response follows immediately and supports both halves of the second limb — rejection of 'blasser' as Unsinn, concession of the rest, plus 'Die alte, ganz getreue Übersetzung mutet auch ältlich an und lässt sich nicht so ganz flüssig lesen.'",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 731,
+  "feature": "Master/Sir as class marker",
+  "claim": "Weinreich argues 'Master' and 'Sir' express Sam's working-class standing against Frodo's gentry more than an employment relation, so Carroux's 'Herr' is correct and Krege's 'Chef' means what 'Boss' would mean, which is not in Tolkien.",
+  "source": "Anmerkungen zu den deutschen Übersetzungen des HdR (Frank Weinreich, polyoinos)",
+  "url": "http://polyoinos.net/tolk_stuff/translation.htm",
+  "page": "",
+  "quote": "das steht bei Tolkien aber nicht",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 731,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stärker als das Arbeitsverhältnis wird ... der Standesunterschied betont",
+   "note": "Quote 'das steht bei Tolkien aber nicht' present verbatim. Weinreich: 'Sam ist Arbeiterklasse und Frodo entspricht ... der Gentry ... Stärker als das Arbeitsverhältnis wird durch \"Master\" und \"Sir\" der Standesunterschied betont. Carroux drückt das mit \"Herr\" vollkommen korrekt aus. Kreges \"Chef\" entspricht einer Beschreibung des Arbeitsverhältnisses, das ist, was das englische Wort \"Boss\" meinen würde - das steht bei Tolkien aber nicht und das meint er auch nicht.' Every limb supported, including 'more than an employment relation' (the page grants that the employment relation is also expressed, but ranks class above it) and the gentry definition quoted from the Oxford Dictionary.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 732,
+  "feature": "lexical precision in description",
+  "claim": "In the Aglarond sentence Carroux keeps Tolkien's 'make ... bend' construction at some cost to fluency, while Krege's 'Kräuter' for 'weed' is botanically wrong where 'Wasserpflanzen' is right.",
+  "source": "Anmerkungen zu den deutschen Übersetzungen des HdR (Frank Weinreich, polyoinos)",
+  "url": "http://polyoinos.net/tolk_stuff/translation.htm",
+  "page": "",
+  "quote": "Kräuter",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 732,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Kräuter' ist schlicht falsch, da 'Kraut' ... als Landpflanze definiert ist",
+   "note": "Quote 'Kräuter' present verbatim, as is the construction 'make ... bend': 'Man sieht, dass Carroux sich eng an die Vorlage hält. Das \\'kostet\\' den Text ein wenig an Flüssigkeit (lassen alle Türme sich verbeugen; wogen sie). Aber im Original heißt es schließlich auch nicht \"the towers are bend by the wrinkles\", sondern \"make ... bend\".' Botany limb: 'Also ist es eine \"Wasserpflanze\", und \"Kräuter\" ist schlicht falsch, da \"Kraut\" laut Brockhaus\\' Lexikon Biologie ... auf Seite 477 als Landpflanze definiert ist.' Naming point: the page never writes 'Aglarond' (checked as an exact substring) — it identifies the passage as Gimli in the caves of Helm's Deep, which is the same referent, so the label is a correct external identification rather than a page limb.",
+   "fromFile": "verdicts-tolkien-i718-732.json"
   }
  }
 ]
