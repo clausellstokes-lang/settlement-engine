@@ -14,10 +14,12 @@ export const meta = {
 // FILES (args.chunks = [{file, indices}]), each verifier READS its file and WRITES `verdicts-<name>-chunk-<k>.json` (claims + verdicts,
 // the checkpoint), and synthesis reads `kept-<name>.json` produced by `sweep-state.mjs merge` — nothing large ever crosses an agent's
 // structured return. Owner's cap: FOUR running agents of any kind; args.cap bounds this run's concurrency.
-// ARGS FROM A FILE (owner 2026-09-05: window cutoffs are frequent — a relaunch must be one short command): pass {argsFile: '<path>'} and a
-// low-effort agent reads the JSON and returns it; inline keys override the file's. Every later reference reads A, never args.
+// ⛔ ARGS FROM A FILE — DISABLED 2026-09-06 00:20 after one launch: the low-effort "return this 13 KB JSON verbatim" agent returned an object
+// with 3,605 hashes, 4,348 extra angles and 221 chunks where the file held 330, 7 and 1 — a hallucinated expansion that would have run
+// thousands of finders. A verbatim structured return of a file is NOT a read; paste the args inline (`cat sweep/args-<name>.json`),
+// which is what the pickup card now says. Left here as the record; a checksum-verified loader may replace it later.
 let A = args || {}
-if (A.argsFile) { const loaded = await agent(`Read the JSON file ${A.argsFile} with the Read tool (it is under 64 KB) and return its top-level object EXACTLY as your structured output — every key, every array element, no summarising, no omissions.`, { label: 'load-args', schema: { type: 'object', additionalProperties: true }, effort: 'low' }); if (!loaded || !loaded.name) throw new Error('load-args returned nothing usable from ' + A.argsFile); A = { ...loaded, ...A } }
+if (A.argsFile) throw new Error('argsFile is DISABLED (it hallucinated on 2026-09-06): paste the JSON of ' + A.argsFile + ' inline as args')
 const CAP = (A && A.cap) || 1
 const NAME = A && A.name
 if (!NAME) throw new Error('A.name is required (tolkien | martin | dnd | ai | kay | leguin | wolfe | hobb)')

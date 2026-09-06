@@ -2186,9 +2186,11 @@
   },
   "8": {
    "index": 8,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "far harder to \"humanize\"",
-   "note": "Quote verbatim in the Introduction (with 'humanize' in scare quotes). §4.2 confirms 93.9% macro-F1 on style-edited stories vs 95.5% unedited, a 1.6-point drop. One precision caveat: the rewriting is LAMP span-level artifact removal performed by Gemini itself using 25 few-shot examples from professional writers on 278 Gemini stories — not rewriting by professionals, so 'professional-style rewriting' is a loose gloss."
+   "note": "Quote verbatim in the Introduction (with 'humanize' in scare quotes). §4.2 confirms 93.9% macro-F1 on style-edited stories vs 95.5% unedited, a 1.6-point drop. One precision caveat: the rewriting is LAMP span-level artifact removal performed by Gemini itself using 25 few-shot examples from professional writers on 278 Gemini stories — not rewriting by professionals, so 'professional-style rewriting' is a loose gloss.",
+   "unsupportedLimb": "\"professional-style rewriting\" — the edit was Gemini's own LAMP span-level artifact removal, not rewriting by professionals.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "9": {
    "index": 9,
@@ -2198,21 +2200,27 @@
   },
   "10": {
    "index": 10,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "delves (r=28.0), showcasing (r=10.2), underscores (r=10.9); 66% verbs, 16% adjectives",
-   "note": "No quote supplied. Kobak et al. give delves r=28.0 and showcasing r=10.2 exactly, and 'hundreds of words have abruptly increased their frequency after ChatGPT became available'. The POS split is real but narrower than stated: 'Out of all 319 excess style words in 2024, 66% were verbs and 16% were adjectives' — style words, not all excess words. 'intricate' is the paper's own example of a style word; 'pivotal', 'realm' and 'meticulously' appear in the paper only as words identified by cited work (Liang et al. 2024b; Gray 2024) and in illustrative AI-style sentences, not in Kobak's own headline excess list."
+   "note": "No quote supplied. Kobak et al. give delves r=28.0 and showcasing r=10.2 exactly, and 'hundreds of words have abruptly increased their frequency after ChatGPT became available'. The POS split is real but narrower than stated: 'Out of all 319 excess style words in 2024, 66% were verbs and 16% were adjectives' — style words, not all excess words. 'intricate' is the paper's own example of a style word; 'pivotal', 'realm' and 'meticulously' appear in the paper only as words identified by cited work (Liang et al. 2024b; Gray 2024) and in illustrative AI-style sentences, not in Kobak's own headline excess list.",
+   "unsupportedLimb": "the 66%-verbs/16%-adjectives split holds only of the 319 excess STYLE words, and pivotal, realm and meticulously are not in Kobak's own excess list.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "11": {
    "index": 11,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "lexical overrepresentation remains a feature of current iterations of ChatGPT",
-   "note": "Quote verbatim in §7 (sentence-internal, so lowercase 'lexical'). Appendix A's table of 21 focal words contains every word named in the claim: delve/delves/delved/delving, showcasing, underscores, intricate, garnered, boasts, groundbreaking, realm, aligns. §4 and Appendix B confirm the words are not overrepresented in pre-LLM corpora (arXiv, LCC, PubMed, Wikipedia). One hedge: the paper reports 'mixed evidence' for RLHF — 'the model testing is consistent with RLHF playing a role', not a demonstrated source."
+   "note": "Quote verbatim in §7 (sentence-internal, so lowercase 'lexical'). Appendix A's table of 21 focal words contains every word named in the claim: delve/delves/delved/delving, showcasing, underscores, intricate, garnered, boasts, groundbreaking, realm, aligns. §4 and Appendix B confirm the words are not overrepresented in pre-LLM corpora (arXiv, LCC, PubMed, Wikipedia). One hedge: the paper reports 'mixed evidence' for RLHF — 'the model testing is consistent with RLHF playing a role', not a demonstrated source.",
+   "unsupportedLimb": "\"consistent with RLHF as the source\" — the paper reports mixed evidence, only that testing is \"consistent with RLHF playing a role\", not a demonstrated source.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "12": {
    "index": 12,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "wary of the word \"delve\"",
-   "note": "Verbatim in the Introduction ('participants became wary of the word \"delve\" in the first sentence of an abstract') and echoed in §6 as 'Wariness about the word \"delve\"'. Caveat on the second half: the paper's line about judging on words rather than content is a speculation about rushed, underpaid RLHF evaluators — 'Rushed human evaluators might base their evaluations on the presence of particular words rather than on content' — not a finding about readers generally."
+   "note": "Verbatim in the Introduction ('participants became wary of the word \"delve\" in the first sentence of an abstract') and echoed in §6 as 'Wariness about the word \"delve\"'. Caveat on the second half: the paper's line about judging on words rather than content is a speculation about rushed, underpaid RLHF evaluators — 'Rushed human evaluators might base their evaluations on the presence of particular words rather than on content' — not a finding about readers generally.",
+   "unsupportedLimb": "\"readers may judge a text on those words rather than its content\" — the paper says this of rushed RLHF evaluators, not of readers generally.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "13": {
    "index": 13,
@@ -2270,15 +2278,19 @@
   },
   "22": {
    "index": 22,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "tend to fall short in terms of novelty, surprise and diversity",
-   "note": "Quote matches word for word. The abstract also confirms the design (60 LLMs, 60 people, five-sentence cue-word task) and the comparison class ('average human writers'). Caveat: the p-value range (p<0.05 to p<0.0001) does not appear anywhere on this abstract-only page, and 'diversity' is not broken out into lexical vs semantic."
+   "note": "Quote matches word for word. The abstract also confirms the design (60 LLMs, 60 people, five-sentence cue-word task) and the comparison class ('average human writers'). Caveat: the p-value range (p<0.05 to p<0.0001) does not appear anywhere on this abstract-only page, and 'diversity' is not broken out into lexical vs semantic.",
+   "unsupportedLimb": "the p<0.05-to-p<0.0001 range and the lexical-vs-semantic split of diversity appear nowhere on the cited abstract page.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "23": {
    "index": 23,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "LLMs generate stylistically complex stories, but tend to fall short",
-   "note": "The quoted wording is not on the page. The core proposition — more complex yet less creative — is supported: the abstract says LLMs 'generate stylistically complex stories, but tend to fall short in terms of novelty, surprise and diversity,' and lists linguistic complexity among the measured dimensions. The specific verbosity evidence (unique words, dependency path length, noun and adjective counts) is absent; searches for 'verbos', 'unique words', 'dependency', 'noun', 'adjective' returned zero hits."
+   "note": "The quoted wording is not on the page. The core proposition — more complex yet less creative — is supported: the abstract says LLMs 'generate stylistically complex stories, but tend to fall short in terms of novelty, surprise and diversity,' and lists linguistic complexity among the measured dimensions. The specific verbosity evidence (unique words, dependency path length, noun and adjective counts) is absent; searches for 'verbos', 'unique words', 'dependency', 'noun', 'adjective' returned zero hits.",
+   "unsupportedLimb": "the verbosity evidence (more unique words, longer dependency paths, more nouns and adjectives) is absent from the page — zero hits on every search term.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "24": {
    "index": 24,
@@ -2288,9 +2300,11 @@
   },
   "25": {
    "index": 25,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "CONTRADICTED",
    "trueWording": "collectively a narrower scope of novel content is produced",
-   "note": "Quote matches word for word, and the page is confirmed as Doshi & Hauser (Science Advances, GPT-4 ideas). Concentration of individual gains among low-creativity writers is supported ('especially among less creative writers'). IMPORTANT CORRECTION: 10.7% is misdescribed. The paper says the similarity increase 'represents 10.7% and 8.9% of the total range' of similarity scores (an 8.10-point range) — not that stories were 10.7% more similar to one another. Separately, 5.2% more similar to the AI ideas is the ONE-idea condition; the five-idea condition is 5.0%. A different 10.7% elsewhere on the page refers to novelty gains for low-DAT writers, which may be the source of the conflation."
+   "note": "Quote matches word for word, and the page is confirmed as Doshi & Hauser (Science Advances, GPT-4 ideas). Concentration of individual gains among low-creativity writers is supported ('especially among less creative writers'). IMPORTANT CORRECTION: 10.7% is misdescribed. The paper says the similarity increase 'represents 10.7% and 8.9% of the total range' of similarity scores (an 8.10-point range) — not that stories were 10.7% more similar to one another. Separately, 5.2% more similar to the AI ideas is the ONE-idea condition; the five-idea condition is 5.0%. A different 10.7% elsewhere on the page refers to novelty gains for low-DAT writers, which may be the source of the conflation.",
+   "unsupportedLimb": "\"stories 10.7% more similar to one another\" — the paper's 10.7% is a share of the similarity score's total range, not a similarity increase, and 5.2% is the one-idea condition alone.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "26": {
    "index": 26,
@@ -2336,9 +2350,11 @@
   },
   "33": {
    "index": 33,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"informationally dense, noun-heavy style\"",
-   "note": "Quote appears verbatim twice. Figures confirmed: nominalizations 'at 1.5 to 2 times the rate of humans' generally, and for GPT-4o specifically ''that' clauses as subject 2.6 times as often (d=0.77), nominalizations 2.1 times as often (d=1.23), and phrasal coordination 1.9 times as often (d=0.81)'. Two glosses: the 2.6x and 1.9x figures are GPT-4o-specific, not all instruction-tuned models; and 'academic' is the claim's word, not the paper's, though the paper does attribute the style to instruction tuning across a diverse array of genres."
+   "note": "Quote appears verbatim twice. Figures confirmed: nominalizations 'at 1.5 to 2 times the rate of humans' generally, and for GPT-4o specifically ''that' clauses as subject 2.6 times as often (d=0.77), nominalizations 2.1 times as often (d=1.23), and phrasal coordination 1.9 times as often (d=0.81)'. Two glosses: the 2.6x and 1.9x figures are GPT-4o-specific, not all instruction-tuned models; and 'academic' is the claim's word, not the paper's, though the paper does attribute the style to instruction tuning across a diverse array of genres.",
+   "unsupportedLimb": "the 2.6x \"that\"-clause and 1.9x phrasal-coordination rates are GPT-4o-specific, not all instruction-tuned models, and \"academic\" is not the paper's word.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "34": {
    "index": 34,
@@ -2360,9 +2376,11 @@
   },
   "37": {
    "index": 37,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "\"a word like unspoken occurs in about 15% of LLM-generated responses\"",
-   "note": "No quote supplied, but both halves are explicit in Section 5.3: 'Figure 6 shows how a word like unspoken occurs in about 15% of LLM-generated responses. Similarly phrases such as weight of, sense of, mix of occur very rarely or not at all in original seed paragraphs... while they occur frequently in LLM-generated responses.' One imprecision: the paper reserves 'syntactic templates' for its part-of-speech n-gram analysis (Table 8) and files these three phrases under recurrent awkward words/phrases; the claim merges the two."
+   "note": "No quote supplied, but both halves are explicit in Section 5.3: 'Figure 6 shows how a word like unspoken occurs in about 15% of LLM-generated responses. Similarly phrases such as weight of, sense of, mix of occur very rarely or not at all in original seed paragraphs... while they occur frequently in LLM-generated responses.' One imprecision: the paper reserves 'syntactic templates' for its part-of-speech n-gram analysis (Table 8) and files these three phrases under recurrent awkward words/phrases; the claim merges the two.",
+   "unsupportedLimb": "\"templates\" — the paper files \"sense of / weight of / mix of\" under recurrent awkward words and phrases, reserving \"syntactic templates\" for its POS n-gram analysis.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "38": {
    "index": 38,
@@ -2378,9 +2396,11 @@
   },
   "40": {
    "index": 40,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "\"LLM-generated stories lead to 7–9 higher drop ratio than human-written ones\"",
-   "note": "No quote supplied. Figure confirmed in Section 5 (the page literally reads '7–9 higher drop ratio', the multiplication sign apparently lost in the HTML build). Mechanism supported: 'a high drop ratio indicates that the Sui Generis score decreases immediately after the peak at position i, without progressively unraveling the surprising plot,' associated with 'abrupt resolutions that leave key suspenseful plot elements unresolved.' Slight tension in the claim's gloss: the paper's drop measures a surprising element being dropped or hastily closed off, sometimes left unresolved, rather than strictly 'resolved'."
+   "note": "No quote supplied. Figure confirmed in Section 5 (the page literally reads '7–9 higher drop ratio', the multiplication sign apparently lost in the HTML build). Mechanism supported: 'a high drop ratio indicates that the Sui Generis score decreases immediately after the peak at position i, without progressively unraveling the surprising plot,' associated with 'abrupt resolutions that leave key suspenseful plot elements unresolved.' Slight tension in the claim's gloss: the paper's drop measures a surprising element being dropped or hastily closed off, sometimes left unresolved, rather than strictly 'resolved'.",
+   "unsupportedLimb": "\"resolved immediately after it peaks\" — the paper's drop measures an element dropped or hastily closed off, sometimes left unresolved, not strictly resolved.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "41": {
    "index": 41,
@@ -2390,9 +2410,11 @@
   },
   "42": {
    "index": 42,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "\"a substantial advancement (i.e., early occurrence) of TP4 and TP5\"",
-   "note": "The quote 'higher levels of suspense' IS verbatim ('human-written stories consistently exhibit higher levels of suspense'), as is the widening gap ('the gap begins to enlarge as the plot progresses from the midpoint (0.5 relative position) towards the end'). Downgraded from VERBATIM because the claim's magnitude is unsourced: the strings '10%' and '15%' appear nowhere in the paper, and the earlier arrival of Major Setback (TP4) and Climax (TP5) is reported only qualitatively plus a violin plot (Figure 2) with no numeric positions. The '10–15% earlier' figure appears to be eyeballed from that figure."
+   "note": "The quote 'higher levels of suspense' IS verbatim ('human-written stories consistently exhibit higher levels of suspense'), as is the widening gap ('the gap begins to enlarge as the plot progresses from the midpoint (0.5 relative position) towards the end'). Downgraded from VERBATIM because the claim's magnitude is unsourced: the strings '10%' and '15%' appear nowhere in the paper, and the earlier arrival of Major Setback (TP4) and Climax (TP5) is reported only qualitatively plus a violin plot (Figure 2) with no numeric positions. The '10–15% earlier' figure appears to be eyeballed from that figure.",
+   "unsupportedLimb": "\"about 10–15% earlier\" — the strings 10% and 15% appear nowhere in the paper; the advancement of TP4/TP5 is reported only qualitatively and in a violin plot.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "43": {
    "index": 43,
@@ -2420,9 +2442,11 @@
   },
   "47": {
    "index": 47,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "less conflict-driven social dynamics",
-   "note": "arXiv 2510.18932v1, Nonaka & Perry. Quote verbatim. Table 1 in the raw HTML confirms density 0.338–0.470 vs human 0.182, clustering 0.623–0.766 vs 0.485, human mean edge weight −0.061 ('the only negative average edge weight'). ONE CORRECTION: the LLM edge-weight range is 0.235–0.659 (GPT-4o Mini = 0.235), not 0.236–0.659. Human corpus is confirmed science fiction (Project Gutenberg, genre-filtered, n=168). 'Far less variability' is supported by the paper's framing — 'LLMs have connectivity measure scores that cluster closely, while human-written stories are dispersed' — though per-metric SDs are mixed (human density SD 0.056 is actually lower than every model's)."
+   "note": "arXiv 2510.18932v1, Nonaka & Perry. Quote verbatim. Table 1 in the raw HTML confirms density 0.338–0.470 vs human 0.182, clustering 0.623–0.766 vs 0.485, human mean edge weight −0.061 ('the only negative average edge weight'). ONE CORRECTION: the LLM edge-weight range is 0.235–0.659 (GPT-4o Mini = 0.235), not 0.236–0.659. Human corpus is confirmed science fiction (Project Gutenberg, genre-filtered, n=168). 'Far less variability' is supported by the paper's framing — 'LLMs have connectivity measure scores that cluster closely, while human-written stories are dispersed' — though per-metric SDs are mixed (human density SD 0.056 is actually lower than every model's).",
+   "unsupportedLimb": "the LLM edge-weight floor is 0.235 (GPT-4o Mini), not 0.236, and \"far less variability\" is not borne out per-metric — human density SD (0.056) is lower than every model's.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "48": {
    "index": 48,
@@ -2450,9 +2474,11 @@
   },
   "52": {
    "index": 52,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "roughly twice the human baseline",
-   "note": "arXiv 2609.02482v1, Rohrbacher, Nieth, Salin, Eskofier & Mahlberg. Verbatim: 'Whereas human-authored fiction shows normalized frequencies of around 0.19 in both languages, all four models exceed this level, with GPT 4.1 reaching around 0.47 in English and 0.38 in German, roughly twice the human baseline.' CAVEAT on the second half: the action-space deficit is not universal — 'GPT 4.1 is the only model that remains close to or above the human baseline'; Gemma 3, Mistral 3.2 and LlaMA 3.3 fall below it. The abstract's own framing does support the substitution claim: humans 'predominantly employ action space ... whereas LLMs systematically overproduce perceived space, emphasizing atmosphere and affect.'"
+   "note": "arXiv 2609.02482v1, Rohrbacher, Nieth, Salin, Eskofier & Mahlberg. Verbatim: 'Whereas human-authored fiction shows normalized frequencies of around 0.19 in both languages, all four models exceed this level, with GPT 4.1 reaching around 0.47 in English and 0.38 in German, roughly twice the human baseline.' CAVEAT on the second half: the action-space deficit is not universal — 'GPT 4.1 is the only model that remains close to or above the human baseline'; Gemma 3, Mistral 3.2 and LlaMA 3.3 fall below it. The abstract's own framing does support the substitution claim: humans 'predominantly employ action space ... whereas LLMs systematically overproduce perceived space, emphasizing atmosphere and affect.'",
+   "unsupportedLimb": "the action-space deficit is not universal — GPT 4.1 stays close to or above the human baseline; only Gemma 3, Mistral 3.2 and LlaMA 3.3 fall below it.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "53": {
    "index": 53,
@@ -2492,9 +2518,11 @@
   },
   "59": {
    "index": 59,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3",
-   "note": "arXiv 2407.01119v2, Marco, Gonzalo, Mateo & Ramón del Castillo. Quote verbatim ('In all dimensions, GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3.'). Verified: 'We recruited six literary experts'; the task is 600-word synopses of imaginary movie titles, so 'synopses' is correct; 'Pron's creativity score is particularly high (average of 1.94)'; 'GPT-4 scores are particularly low in style originality (0.36 in Spanish and 0.63 in English), where Pron gets 1.70'. CAVEAT: the two GPT-4 creativity figures (0.97 English, 0.88 Spanish) do NOT appear anywhere in the page text — the text says only that Pron's 1.94 'roughly doubles GPT-4 creativity scores in English and Spanish'. Those values presumably sit inside Figure 1, which is an image and not machine-readable, so they are consistent with but not confirmable from the page."
+   "note": "arXiv 2407.01119v2, Marco, Gonzalo, Mateo & Ramón del Castillo. Quote verbatim ('In all dimensions, GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3.'). Verified: 'We recruited six literary experts'; the task is 600-word synopses of imaginary movie titles, so 'synopses' is correct; 'Pron's creativity score is particularly high (average of 1.94)'; 'GPT-4 scores are particularly low in style originality (0.36 in Spanish and 0.63 in English), where Pron gets 1.70'. CAVEAT: the two GPT-4 creativity figures (0.97 English, 0.88 Spanish) do NOT appear anywhere in the page text — the text says only that Pron's 1.94 'roughly doubles GPT-4 creativity scores in English and Spanish'. Those values presumably sit inside Figure 1, which is an image and not machine-readable, so they are consistent with but not confirmable from the page.",
+   "unsupportedLimb": "the GPT-4 creativity figures 0.97 (English) and 0.88 (Spanish) do not appear anywhere in the page text; they sit inside a non-machine-readable figure.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "60": {
    "index": 60,
@@ -2528,9 +2556,11 @@
   },
   "65": {
    "index": 65,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Humans retain an edge in creativity",
-   "note": "Quote is word for word in the abstract on the ACL Anthology landing page. That page carries the abstract only — none of the numbers are on it — so I additionally pulled the paper PDF (aclanthology.org/2023.findings-emnlp.966.pdf), Table 2, which confirms every figure: chatgpt-gpt4 overall 80.2±7.3 vs human 70.1±17.4; item 7 (epic-genre habitation) 8.1±1.4 vs 4.9±2.1; item 5 (creativity/originality) human 8.0±2 vs 7.6±1; item 10 (dark humor) human 6.4±3.4 vs 6.0±2.8. Human stories were by five different writers. One imprecision: humans also edged GPT-4 on humor (6.4 vs 6.0), so 'led only on originality' is not strictly true, though the claim itself calls humor near-tied."
+   "note": "Quote is word for word in the abstract on the ACL Anthology landing page. That page carries the abstract only — none of the numbers are on it — so I additionally pulled the paper PDF (aclanthology.org/2023.findings-emnlp.966.pdf), Table 2, which confirms every figure: chatgpt-gpt4 overall 80.2±7.3 vs human 70.1±17.4; item 7 (epic-genre habitation) 8.1±1.4 vs 4.9±2.1; item 5 (creativity/originality) human 8.0±2 vs 7.6±1; item 10 (dark humor) human 6.4±3.4 vs 6.0±2.8. Human stories were by five different writers. One imprecision: humans also edged GPT-4 on humor (6.4 vs 6.0), so 'led only on originality' is not strictly true, though the claim itself calls humor near-tied.",
+   "unsupportedLimb": "\"humans led only on originality\" is not strictly true — humans also edged GPT-4 on humor, 6.4 vs 6.0.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "66": {
    "index": 66,
@@ -2546,21 +2576,27 @@
   },
   "68": {
    "index": 68,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "less variation when compared to human-generated sentences",
-   "note": "Quote is word for word. Same sentence continues: 'the models exhibit a higher frequency of sentence generation within the 10 to 30 token range compared to humans'. Caveat on the STTR pair: Table 2 gives Human 0.491 and six models at 0.452 / 0.424 / 0.460 / 0.457 / 0.461 / 0.466 — 0.424 is Falcon-7B alone, the lowest model, not an LLM-wide value; the LLM range is 0.424-0.466. Direction of the claim ('lexical richness is lower') holds for all six."
+   "note": "Quote is word for word. Same sentence continues: 'the models exhibit a higher frequency of sentence generation within the 10 to 30 token range compared to humans'. Caveat on the STTR pair: Table 2 gives Human 0.491 and six models at 0.452 / 0.424 / 0.460 / 0.457 / 0.461 / 0.466 — 0.424 is Falcon-7B alone, the lowest model, not an LLM-wide value; the LLM range is 0.424-0.466. Direction of the claim ('lexical richness is lower') holds for all six.",
+   "unsupportedLimb": "STTR 0.424 is Falcon-7B alone, the lowest model, not an LLM-wide value; the model range is 0.424–0.466.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "69": {
    "index": 69,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "Humans exhibit stronger fear and disgust, less joy",
-   "note": "No quotation supplied. Conclusion states: 'Humans tend to exhibit stronger negative emotions (such as fear and disgust) and less joy compared to text generated by LLMs'; 'LLM outputs use more numbers, symbols and auxiliaries ... as well as more pronouns'; 'The sexist bias prevalent in human text is also expressed by LLMs, and even magnified in all of them but' Falcon 7B. Table 9: human male-female pronoun ratio 1.71, exceeded by every model except Falcon 7B, which reduces the bias by 7.5% — the one exception the claim's blanket 'magnify' elides."
+   "note": "No quotation supplied. Conclusion states: 'Humans tend to exhibit stronger negative emotions (such as fear and disgust) and less joy compared to text generated by LLMs'; 'LLM outputs use more numbers, symbols and auxiliaries ... as well as more pronouns'; 'The sexist bias prevalent in human text is also expressed by LLMs, and even magnified in all of them but' Falcon 7B. Table 9: human male-female pronoun ratio 1.71, exceeded by every model except Falcon 7B, which reduces the bias by 7.5% — the one exception the claim's blanket 'magnify' elides.",
+   "unsupportedLimb": "the blanket \"magnify male-pronoun bias\" elides Falcon 7B, the one model that reduces the bias (by 7.5%).",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "70": {
    "index": 70,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a broader and flatter distribution",
-   "note": "Quote word for word: human texts 'exhibit greater variability in length, characterized by a broader and flatter distribution. In contrast, AI-generated texts ... are more uniform, clustering closely around the average.' Table 3 confirms all three ranges, but ONLY in the factual-news columns: informal -54.42/-55.99/-72.22%, posemo +114.19/+119.22/+132.96%, certain +152.49/+142.86/+111.00%. The fake-news columns are materially lower (posemo +69.96 to +78.95%, certain +21.43 to +39.11%), so the claim should be scoped to factual news. Source confirmed as Rodrigues, Sturm & Pinheiro, iScience 2026 Feb 12;29(3):114976, European Portuguese."
+   "note": "Quote word for word: human texts 'exhibit greater variability in length, characterized by a broader and flatter distribution. In contrast, AI-generated texts ... are more uniform, clustering closely around the average.' Table 3 confirms all three ranges, but ONLY in the factual-news columns: informal -54.42/-55.99/-72.22%, posemo +114.19/+119.22/+132.96%, certain +152.49/+142.86/+111.00%. The fake-news columns are materially lower (posemo +69.96 to +78.95%, certain +21.43 to +39.11%), so the claim should be scoped to factual news. Source confirmed as Rodrigues, Sturm & Pinheiro, iScience 2026 Feb 12;29(3):114976, European Portuguese.",
+   "unsupportedLimb": "the 54–72% / 114–133% / 111–152% ranges hold only in the factual-news columns; the fake-news columns are materially lower (posemo +70 to +79%, certain +21 to +39%).",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "71": {
    "index": 71,
@@ -2609,10 +2645,11 @@
   },
   "78": {
    "index": 78,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "illogical in hindsight",
    "note": "Quote is a verbatim annotation tag in the paper PDF. Body: 'as 32% of generations rated by at least one player are deemed illogical upon reading the next utterance' - the claim's '32% of GPT-4 game lines' drops the 'rated by at least one player' qualifier, a mild overstatement. Faction example confirmed: generation 'does not conform to the game's notion of an ultra-liberal character'.",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "\"32% of GPT-4 game lines\" drops the paper's \"rated by at least one player\" qualifier — a mild overstatement.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "79": {
    "index": 79,
@@ -2637,17 +2674,19 @@
   },
   "82": {
    "index": 82,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "preliminary end-to-end experiments revealed these shortcomings, say the authors",
    "note": "MISATTRIBUTION. The quoted string is verbatim on the page, but it describes the AUTHORS' OWN preliminary experiments: 'Our preliminary experiments with this end-to-end approach revealed suboptimal results. The generated screenplays often suffer from a lack of thematic focus, out-of-character dialogue, and insufficient character development.' The blind evaluation by 'over 20 experienced screenwriters' (professional Chinese television drama screenwriters) produced the Expert Score / 75% win rate, not this defect list. 'Mimicking screenplay style without conciseness or visual language' is also the authors' intro framing: 'outputs that superficially mimic screenplay style but lack the conciseness, visual language, and structural integrity'.",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "the defect list is misattributed — thematic focus, out-of-character dialogue and thin character development come from the authors' own preliminary experiments, not from the blind screenwriter evaluation.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "83": {
    "index": 83,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "some studies identifying trends toward overly positive or uninspired endings",
    "note": "MISATTRIBUTION. Quote is verbatim but is the authors citing prior literature in the introduction ('with some studies identifying trends toward overly positive or uninspired endings [13]'), not something the expert panel recorded. 'Unconvincing, repetitive, or misaligned with the desired tone or character development' is likewise the authors' framing in the introduction. Only the genre element is genuinely a panel finding: 'experts raised concerns about the degree to which the story aligns with, subverts, or engages with genre conventions'.",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "misattributed — \"unconvincing, repetitive, tonally misaligned\" and \"overly positive or uninspired endings\" are the authors citing prior literature; only the genre item is an expert-panel finding.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "84": {
    "index": 84,
@@ -2658,10 +2697,11 @@
   },
   "85": {
    "index": 85,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "The craft was polished ... but the humanity was difficult to find",
    "note": "No quote was supplied, so verbatim cannot apply. Mary Kole's guest post (August 13 2026) supports the substance: 'At first glance, both looked very polished'; 'The craft was polished ... but the humanity was difficult to find'; 'Instead of having an [author's intention to serve]'. Two attribution caveats: 'soulless' is Josh Bernoff quoted inside Kole's post ('They are also soulless'), and 'no subtext, no psychological reasoning behind it' is a reader comment by Sarah Chauncey that Kole endorses in reply ('No subtext is a great call').",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "\"soulless\" is Josh Bernoff quoted inside the post and \"no subtext, no psychological reasoning\" is a reader's comment, not the cited editor's own observations.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "86": {
    "index": 86,
@@ -2679,17 +2719,19 @@
   },
   "88": {
    "index": 88,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "No one has verbal tics, dialect, or pattern of evasion",
    "note": "No quote supplied. Page: 'Dialogue flattening: characters sound alike; no distinct idiolect. No one has verbal tics, dialect, or pattern of evasion' and 'As-you-know-Bob exposition: the model's default is to resolve mysteries with explanatory speech rather than action.' The clause 'everyone says what they mean' is the claimant's gloss - it is not stated on the page.",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "\"everyone says what they mean\" is the claimant's gloss and is not stated on the page.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "89": {
    "index": 89,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "AI dialogue serves philosophical debate more often (59% vs. 34%)",
    "note": "No quote supplied. The abs page carries the abstract only; the figures are in the full text of the same paper (arxiv.org/html/2604.03136v6): section 4.1 'AI dialogue serves philosophical debate more often (59% vs. 34%)' and Table 16 'Dialogue Function -> philosophical debate 34% [human] 59% [AI]'. Numbers exact. The claim's word 'expository' is a gloss; the paper's feature is 'philosophical debate' as a dialogue function.",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "\"expository\" is the claim's gloss; the paper's feature is \"philosophical debate\" as a dialogue function.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "90": {
    "index": 90,
@@ -2721,17 +2763,19 @@
   },
   "94": {
    "index": 94,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "that average is equivalent to the least interesting choices possible",
    "note": "ATTRIBUTION DEFECT. Quote is word for word on the LitReactor page, but the page presents it as Ted Chiang's, quoted from The New Yorker — not Nick Bailey's own wording: 'As Ted Chiang from The New Yorker puts it: \"AI has to fill in the choices you are not making... that average is equivalent to the least interesting choices possible.\"' Cite Chiang (via LitReactor), not Bailey.",
-   "fromFile": "verdicts-ai-chunk-01.json"
+   "unsupportedLimb": "attribution — the wording is Ted Chiang's, quoted by LitReactor from The New Yorker, not the cited author's own.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "95": {
    "index": 95,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "art is something that results from making a lot of choices",
    "note": "ATTRIBUTION DEFECT, same shape as index 94. Quote is word for word (source lowercases 'art') but it is Ted Chiang's line quoted inside Lincoln Michel's essay, not Michel's. The one-choice-per-word figure is also Chiang's: 'a ten-thousand-word short story requires something on the order of ten thousand choices... a hundred-word prompt, you have made on the order of a hundred choices.' Michel's own supporting wording is 'It produces automatically, without intention.'",
-   "fromFile": "verdicts-ai-chunk-01.json"
+   "unsupportedLimb": "attribution — both the quoted line and the one-choice-per-word arithmetic are Ted Chiang's, quoted inside Michel's essay, not Michel's.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "96": {
    "index": 96,
@@ -2756,10 +2800,11 @@
   },
   "99": {
    "index": 99,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "lacks emotional valence and could lull the reader to sleep",
    "note": "Quote word for word: 'This AI \"accent\" creates text that lacks emotional valence and could lull the reader to sleep.' One wording drift in the claim: Bernoff writes 'A boring, even tone' and 'AI text tends to be predictable' — he says even TONE, not even rhythm. Say tone if quoting him on this.",
-   "fromFile": "verdicts-ai-chunk-01.json"
+   "unsupportedLimb": "\"even rhythm\" — Bernoff writes \"a boring, even tone\", not even rhythm.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "100": {
    "index": 100,
@@ -2777,10 +2822,11 @@
   },
   "102": {
    "index": 102,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the rhythm is becoming recognizable as an AI pattern",
    "note": "QUOTE SPLICE. The quotation is word for word, but it belongs to a DIFFERENT tell: it closes the 'COMMA + LIKE or + AS IF' section and describes that construction's rhythm, not fragments or em-dashes. The claim's two structural elements are nonetheless supported elsewhere on the page: 'each sentence fragment is its own paragraph... Often these come at an end of a scene, right before a \"hook\" to read more' and, for em-dashes, 'There's one in every paragraph.' Do not attach this quote to the fragment/em-dash sentence.",
-   "fromFile": "verdicts-ai-chunk-01.json"
+   "unsupportedLimb": "the \"becoming recognizable as an AI pattern\" quote closes the COMMA + LIKE/AS IF section and does not attach to the fragment-paragraph or em-dash tells.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "103": {
    "index": 103,
@@ -2791,17 +2837,19 @@
   },
   "104": {
    "index": 104,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "AI rhythm is the mechanical, metronomic quality of text",
    "note": "Quote verbatim but truncated ('...of text generated by language models'). Figures confirmed on the page: 'GPT-4o generates approximately 85% of its sentences in the 15-28 word range' and 'Human prose, by contrast, typically spans from 4 to 55+ words without clustering around a central point.' The Gemini element is looser than the claim states: the page says 'Gemini Pro demonstrates paragraph-level rhythm... maintaining 4-5 sentences per paragraph consistently' — a sentence COUNT, not 'nearly identical length.' Vendor blog (TextSight, by its own founder/CEO), no method or sample disclosed; the unreplicated-vendor caveat in the claim is warranted and must survive.",
-   "fromFile": "verdicts-ai-chunk-01.json"
+   "unsupportedLimb": "\"Gemini paragraphs are nearly identical in length\" — the page reports a sentence COUNT (4–5 per paragraph), not paragraph length.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "105": {
    "index": 105,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The constant objective correlatives and choppy cadence",
    "note": "Quote is word-for-word (page drops leading 'The'). Enjambment is separately supported on the page: 'The terse, constantly enjambed lines lacked adjectives.' The claim's causal framing (cadence 'built from' correlatives and enjambment) is the summarizer's synthesis; the page lists them as co-occurring tells.",
-   "fromFile": "verdicts-ai-i105-119.json"
+   "unsupportedLimb": "the causal framing (cadence \"built from\" objective correlatives and enjambment) is the summarizer's synthesis; the page lists them as co-occurring tells.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "106": {
    "index": 106,
@@ -2833,17 +2881,19 @@
   },
   "110": {
    "index": 110,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "fiction repeatedly requires the significance of earlier details to be reinterpreted",
    "note": "Verbatim in the abstract. Surprise-then-inevitable is also supported: 'events must feel both surprising in the moment and retrospectively inevitable', with 'Standard autoregressive generation... creating a practical obstacle to coordinating' them. Minor overreach: the abstract pins autoregression to challenge one only; the revaluation failure is described as unreliable long-range reasoning, so 'coordinates neither' slightly overstates.",
-   "fromFile": "verdicts-ai-i105-119.json"
+   "unsupportedLimb": "\"coordinates neither well\" overstates — the abstract pins autoregression to the surprise/inevitability challenge only.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "111": {
    "index": 111,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "it loves contrived mic-drops like the last sentence",
    "note": "Quote verbatim within that sentence. 'Force closure' and 'final lines' are the summarizer's gloss - the source is a parenthetical self-referential joke about its own last sentence, listed among LLM-poetry tells.",
-   "fromFile": "verdicts-ai-i105-119.json"
+   "unsupportedLimb": "\"force closure\" and \"final lines\" are the summarizer's gloss on what the source offers as a parenthetical self-referential joke.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "112": {
    "index": 112,
@@ -2861,10 +2911,11 @@
   },
   "114": {
    "index": 114,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "The aforementioned \"not X; Y\" is still universal",
    "note": "No quote supplied. The page catalogues the construction and puts 'Lists of three' as the very next item in the same tell list, so the triplet adjacency holds. But the page says the construction is 'universal', never that it 'feels obligatory rather than natural' - that characterization is the summarizer's, and the nearest support is the essay calling such passages 'tryhard'.",
-   "fromFile": "verdicts-ai-i105-119.json"
+   "unsupportedLimb": "\"feels obligatory rather than natural\" is the summarizer's characterization; the page says only that the construction is \"universal\".",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "115": {
    "index": 115,
@@ -2875,10 +2926,11 @@
   },
   "116": {
    "index": 116,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "it says absolutely nothing at all",
    "note": "Words appear verbatim but as a clause, not a sentence: 'The kind you skim past, then return only to discover it says absolutely nothing at all.' Referent nuance - that line is the article's opener about nondescript machine prose generally; the 'isn't just X; it's Y' + metaphor + tricolon template is introduced separately, credited to Elizabeth Goodspeed as 'a particularly grating pattern' with the template spelled out verbatim.",
-   "fromFile": "verdicts-ai-i105-119.json"
+   "unsupportedLimb": "the \"says absolutely nothing at all\" line is the article's opener about machine prose generally, not about the \"isn't just X; it's Y\" + metaphor + tricolon template.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "117": {
    "index": 117,
@@ -2889,10 +2941,11 @@
   },
   "118": {
    "index": 118,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "AI explains. Humans imply.",
    "note": "Verbatim on the page, but second-hand: the Dramatica post quotes it from a reply by Mohammad Siam, X, May 27, 2026, not as its own formulation. The rest of the claim is the post's own thesis - it moves the conversation 'from punctuation to narrative construction' and quotes StoryScope's 'AI spells out meaning'.",
-   "fromFile": "verdicts-ai-i105-119.json"
+   "unsupportedLimb": "attribution — \"AI explains. Humans imply.\" is quoted from a Mohammad Siam reply on X, not the Dramatica post's own formulation.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "119": {
    "index": 119,
@@ -2924,10 +2977,11 @@
   },
   "123": {
    "index": 123,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "delve, intricate/intricacies, pivotal, tapestry, testament (realm absent)",
    "note": "The quotation is verbatim on the page ('An enduring testament to the influence of Italian colonial rule in Somalia'), but the claim's word cluster is not fully supported: a literal search of the raw wikitext finds NO occurrence of 'realm'. 'delve' is listed only for the 2023-mid-2024 era, noted as dropping off sharply in 2025. Downgraded from verbatim because the claim asserts an unsupported member.",
-   "fromFile": "verdicts-ai-i120-134.json"
+   "unsupportedLimb": "\"realm\" occurs zero times on the page, and \"delve\" is listed only for the 2023–mid-2024 era as dropping off sharply in 2025.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "124": {
    "index": 124,
@@ -2966,10 +3020,11 @@
   },
   "129": {
    "index": 129,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "metaphors spammed in the final sentence to describe a single concept",
    "note": "No quote was supplied. Stacking is the author's own Micro-tell wording. 'Eyeball Kicks' is named as AI overuse but the author credits Nostalgebraist for the analysis rather than arguing it himself, and notes newer models have improved at sensical metaphors - so the sensory-overload half rests on a citation, not this author's evidence.",
-   "fromFile": "verdicts-ai-i120-134.json"
+   "unsupportedLimb": "the sensory-overload (\"eyeball kicks\") half rests on the author's citation of Nostalgebraist rather than his own evidence, and he notes newer models have improved.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "130": {
    "index": 130,
@@ -2980,10 +3035,11 @@
   },
   "131": {
    "index": 131,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "AI overwhelmingly conveys emotion through physical sensations and bodily metaphors",
    "note": "Found in the paper's full text (arxiv.org/html/2604.03136v1), not on the /abs abstract page. Both figure pairs check out: '(81% vs. 38% human)' and 'Humans use explicit emotion labels 29% of the time versus just 8% for AI.' The 'inversion of the usual assumption' framing is the claim author's gloss, not the paper's phrasing.",
-   "fromFile": "verdicts-ai-i120-134.json"
+   "unsupportedLimb": "\"an inversion of the usual AI-tells-emotions assumption\" is the claim author's gloss, not the paper's framing.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "132": {
    "index": 132,
@@ -3029,10 +3085,11 @@
   },
   "138": {
    "index": 138,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "Products impress people; platforms empower them.",
    "note": "Quote is ALTERED, not verbatim - 'people' and 'them' were dropped. Claim substance holds: entry reads 'Overuse of the rule-of-three pattern, often extended to four or five' and 'A single tricolon is elegant; three back-to-back tricolons (tri-tricolons) are a pattern recognition failure.' Source says stacked tricolons, not 'triplets of descriptors'.",
-   "fromFile": "verdicts-ai-i135-149.json"
+   "unsupportedLimb": "\"triplets of descriptors\" — the source describes stacked tricolons (rule of three), not descriptor triplets.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "139": {
    "index": 139,
@@ -3064,17 +3121,19 @@
   },
   "143": {
    "index": 143,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Fine-tuned outputs were rarely flagged as AI-generated (3% vs. 97% for prompting) by leading detectors.",
    "note": "Verified against raw arXiv abstract HTML, not just the fetch layer. Quote verbatim but truncated mid-parenthetical (drops 'for prompting'). OR=0.16 for MFA fidelity confirmed; 'Both groups preferred fine-tuned AI' confirmed. The trailing clause 'the tells above characterize prompted default-register output' is the analyst's own inference and is not in the paper.",
-   "fromFile": "verdicts-ai-i135-149.json"
+   "unsupportedLimb": "the trailing clause \"the tells above characterize prompted default-register output\" is the analyst's own inference and is not in the paper.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "144": {
    "index": 144,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "Perhaps people generally prefer predictability",
    "note": "Quote strips the hedge 'Perhaps', which carries the speculative force: 'Perhaps people generally prefer predictability, because difficult or subtle material requires more brain power.' Everything else confirmed: 2,587 adults, Sears and Deena Skolnick Weisberg at Villanova, three published stories rewritten by ChatGPT, higher quality and Story World Absorption Scale ratings, and the gloss link 'AI writing tends to be clearer, more direct and easier to process' plus 'the AI versions of our stories usually stated their themes explicitly'. One imprecision: 'at chance' is loose - experiment 2 was 39.93%, below chance ('worse than a coin flip'); only experiment 3 (51.97%) was at chance.",
-   "fromFile": "verdicts-ai-i135-149.json"
+   "unsupportedLimb": "\"identified authorship at chance\" — experiment 2 was 39.93%, below chance; only experiment 3 (51.97%) was at chance.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "145": {
    "index": 145,
@@ -3099,24 +3158,27 @@
   },
   "148": {
    "index": 148,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "AI stories show tighter causal chains, more protagonist-driven resolutions, fewer subplots, and cleaner internal acceptance.",
    "note": "Quote verbatim (same sentence as 147). Minor drift: the claim's intensifier 'far fewer subplots' is not in the source, which says only 'fewer subplots' with no magnitude. This is a secondary source glossing StoryScope, not the paper itself.",
-   "fromFile": "verdicts-ai-i135-149.json"
+   "unsupportedLimb": "the intensifier \"far fewer subplots\" is not in the source, which says only \"fewer subplots\" with no magnitude.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "149": {
    "index": 149,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "They use more temporal discontinuity, more flashbacks and nonlinear movement",
    "note": "Quote verbatim. Delay-of-revelation half also present: 'more willing to let a revelation reshape earlier material rather than simply deliver the next clean cause in a line.' Drift: the source is strictly comparative (human stories use MORE); it never asserts the claim's absolute 'AI stories stay chronological.'",
-   "fromFile": "verdicts-ai-i135-149.json"
+   "unsupportedLimb": "\"AI stories stay chronological\" — the source is strictly comparative (humans use MORE) and never asserts the absolute.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "150": {
    "index": 150,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "AI dialogue more often turns into philosophical debate.",
    "note": "Dramatica blog (May 29, 2026) para on theme over-explanation carries the quoted sentence word for word. Caveat: the claim's contrast 'rather than character-driven exchange' is the analyst's gloss; the page does not use that phrase.",
-   "fromFile": "verdicts-ai-i150-164.json"
+   "unsupportedLimb": "\"rather than character-driven exchange\" is the analyst's gloss; the page does not use that phrase.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "151": {
    "index": 151,
@@ -3134,10 +3196,11 @@
   },
   "153": {
    "index": 153,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "Clichés (17%); 'unnecessary filler' is defined under Unnecessary/Redundant Exposition (18%)",
    "note": "SPLIT SOURCING - the two halves come from different categories. 17% is confirmed for Clichés alone (defined as overused phrases losing original impact). The verbatim phrase 'unnecessary filler' is W2's gloss on 'fluff' inside section 4.4.2, the 18% exposition category already cited at index 152. So 'clichés and filler' at 17% conflates the 17% and 18% rows; recommend restating as clichés only.",
-   "fromFile": "verdicts-ai-i150-164.json"
+   "unsupportedLimb": "\"clichés and filler\" at 17% conflates two categories — 17% is Clichés alone; filler sits under the 18% Unnecessary/Redundant Exposition row.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "154": {
    "index": 154,
@@ -3183,10 +3246,11 @@
   },
   "160": {
    "index": 160,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The hardest and most time-consuming part of writing is shaping, honing, and refining",
    "note": "Quote verbatim and is Michel's own sentence. PROVENANCE CAVEAT: the choices arithmetic is not Michel's - it is a block quotation from Ted Chiang's New Yorker piece 'Why A.I. Isn't Going to Make Art', reading 'a ten-thousand-word short story requires something on the order of ten thousand choices' and 'if you supply a hundred-word prompt, you have made on the order of a hundred choices'. Attribute the arithmetic to Chiang via Michel. Also, the page says a hundred choices, not 'almost none'.",
-   "fromFile": "verdicts-ai-i150-164.json"
+   "unsupportedLimb": "the ten-thousand-choices arithmetic is Ted Chiang's, block-quoted by Michel, and the page says a hundred choices, not \"almost none\".",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "161": {
    "index": 161,
@@ -3225,17 +3289,19 @@
   },
   "166": {
    "index": 166,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "It was didn't make much sense. And then it was overly narrative in places.",
    "note": "Quote exact. CAVEAT ON SCOPE: the example is a poem an AI generator wrote in a friend's style, posted for a laugh - NOT a slush submission. Hockaday says separately 'the poems are still bad' and that poetry submissions exist but 'there is nothing good'. Do not cite this as being about submissions.",
-   "fromFile": "verdicts-ai-i165-179.json"
+   "unsupportedLimb": "scope — the poem was an AI generator's pastiche of a friend's style posted for a laugh, not a slush submission.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "167": {
    "index": 167,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "among the worst submissions we've ever received and sometimes bad in entirely new ways",
    "note": "Quote exact. Precision note: Clarke wrote 'among the worst submissions we've ever received', not 'the worst ever received' - the claim slightly overstates.",
-   "fromFile": "verdicts-ai-i165-179.json"
+   "unsupportedLimb": "\"the worst ever received\" overstates Clarke's \"among the worst submissions we've ever received\".",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "168": {
    "index": 168,
@@ -3267,10 +3333,11 @@
   },
   "172": {
    "index": 172,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I can't stress enough that it creates a terrible, soulless product",
    "note": "Quote exact. 'We don't use AI detectors... AI garbage is fairly obvious' supports the no-detectors limb. Precision note: 2,800 submissions came from the open period August 25 to September 8 (15 days) and AI is called 'a big reason' for the volume, not the sole cause; page is issue Sixty-Seven as cited.",
-   "fromFile": "verdicts-ai-i165-179.json"
+   "unsupportedLimb": "\"they drove submissions to 2,800 in two weeks\" — AI is called \"a big reason\", not the sole cause, and the open period ran 15 days.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "173": {
    "index": 173,
@@ -3323,10 +3390,11 @@
   },
   "180": {
    "index": 180,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Alternating loquacious ponderous similes and tiny sentences",
    "note": "Exact substring in Makin's article (page continues 'made out of cliches?'). Makin writes it while deliberately imitating LLM tells; Gemini's own quoted reasoning corroborates the alternation as 'the tell-tale signature of an algorithm'. 'Without a governing restraint' is the researcher's gloss, not the page's words.",
-   "fromFile": "verdicts-ai-i180-194.json"
+   "unsupportedLimb": "\"without a governing restraint\" is the researcher's gloss, not the page's words.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "181": {
    "index": 181,
@@ -3393,17 +3461,19 @@
   },
   "190": {
    "index": 190,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a jaw that was, objectively, a jaw",
    "note": "Quote appears word for word twice on the thread page. ATTRIBUTION IS WRONG: it is in post #1 by Negrek (thread starter, Aug 18 2026), not Goolix. Negrek coins the phrase as a label ('the legendary phrase “a jaw that was, objectively, a jaw”'); the AI text itself reads 'a jaw that was, objectively, a really nice jaw', with Negrek's note 'a very very weird thing to write.' Goolix (post #4) does make a same-shape point about physically impossible description ('What kind of coat can conceal breadth?... its model of physical reality is wonky'), so the feature holds under Goolix too, but this quote is not his.",
-   "fromFile": "verdicts-ai-i180-194.json"
+   "unsupportedLimb": "attribution is wrong — the quoted phrase is Negrek's (thread starter, post #1), not Goolix's as the row's source states.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "191": {
    "index": 191,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Something he didn't have a good word for",
    "note": "Exact substring in Negrek's editorial note (post #1): 'Claude is often vague. Something he didn't have a good word for, something he couldn't name.' Attribution to Negrek is correct. CAVEAT: the source frames it as generic vagueness, not specifically emotional evasion; the narrated instance is 'Shane's brain did something he didn't have a good word for'. 'Declining to examine emotion with specificity' is the researcher's gloss.",
-   "fromFile": "verdicts-ai-i180-194.json"
+   "unsupportedLimb": "\"declining to examine emotion with specificity\" is the researcher's gloss; the source frames the tell as generic vagueness.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "192": {
    "index": 192,
@@ -3414,10 +3484,11 @@
   },
   "193": {
    "index": 193,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "starting a sentence with “not”–is common with LLMs",
    "note": "The cited three-fragment string is a COMPOSITE and appears nowhere contiguously (confirmed by raw-text scan and by independent WebFetch). The page has 'Not quite a smile.' in one excerpt and, ~10k chars later, a separate 'really Claude-y' example line: '“Not unkind. Not impatient. Just—waiting.”' The pattern claim itself is supported by Negrek's note: '[Note: This structure–starting a sentence with “not”–is common with LLMs.]' ATTRIBUTION IS WRONG: both passages are Negrek's post #1, not Goolix.",
-   "fromFile": "verdicts-ai-i180-194.json"
+   "unsupportedLimb": "the three-fragment string is a composite that appears nowhere contiguously, and both passages are Negrek's, not Goolix's.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "194": {
    "index": 194,
@@ -3442,10 +3513,11 @@
   },
   "197": {
    "index": 197,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "over-represented lexical patterns in LLM outputs",
    "note": "ADVERSARIAL DOWNGRADE. 'heart pounding chest' IS verbatim on the repo page, but only as a throwaway illustration of what a trigram is: 'Trigrams (three-word combinations not including stop-words, e.g., heart pounding chest)'. The three words the claim names -- fluorescent, humming, particular -- appear ZERO times on the GitHub page; they come from the Thousand Roads thread's sample text (fluorescent x8, humming x4 there). The repo supports only the mechanism half: 'Analyze a model's outputs for repetitive words, bigrams, trigrams... and slop scores' and 'Cluster models based on slop profile similarity'. The quote does not evidence the claim attached to it.",
-   "fromFile": "verdicts-ai-i195-209.json"
+   "unsupportedLimb": "fluorescent, humming and particular appear zero times on the cited repo page, and the quote illustrates only what a trigram is — the repo supports the mechanism half alone.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "198": {
    "index": 198,
@@ -3512,10 +3584,11 @@
   },
   "207": {
    "index": 207,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "they're undeniably robotic, not offering any sort of personality or charm",
    "note": "Verbatim. The 'structurally fine' half immediately precedes it: \"Jin's responses are functionally sound; there's nothing inherently wrong with them in terms of structure or grammar.\" It is the Nvidia/Convai demo (Riva, NeMo, Audio2Face) in a cyberpunk ramen diner; the page does not use the brand name 'ACE'. Bradly Shankar, May 29, 2023 -- matches.",
-   "fromFile": "verdicts-ai-i195-209.json"
+   "unsupportedLimb": "the page never uses the brand name \"ACE\"; it is the Nvidia/Convai demo (Riva, NeMo, Audio2Face).",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "208": {
    "index": 208,
@@ -3533,10 +3606,11 @@
   },
   "210": {
    "index": 210,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "trends toward overly positive or uninspired endings",
    "note": "arXiv 2509.04239 (Valdivia & Burelli). Quote exact in Sec. I: 'with some studies identifying trends toward overly positive or uninspired endings [13], or uneven output quality across sessions [14]'. 'unconvincing, repetitive, or misaligned with the desired tone' is also verbatim earlier in Sec. I. Wrong genre is Sec. V-A: 'producing a hard-boiled detective story when a fantasy narrative is requested, was identified as a significant quality failure' -- genre alignment is a 'must-be' requirement. CAVEAT ON ATTRIBUTION: only the genre item comes from the n=10 Delphi expert panel; the endings/uneven-quality items are the paper citing prior studies [13][14], and 'unconvincing, repetitive' is the authors' own intro framing. Cite the four items as documented failures, not as one expert list.",
-   "fromFile": "verdicts-ai-i210-224.json"
+   "unsupportedLimb": "only the genre item comes from the n=10 Delphi expert panel; the endings and uneven-quality items are the paper citing prior studies, and \"unconvincing, repetitive\" is the authors' intro framing.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "211": {
    "index": 211,
@@ -3568,17 +3642,19 @@
   },
   "215": {
    "index": 215,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "describe algorithmic generation as the 'exact opposite of inspiration'",
    "note": "Geeknative roundup by Andrew Girdwood, January 15, 2026. Quote verbatim; all six named publishers are on the page with bans on AI text and/or art (Free League's stated policy is against AI ART specifically). CAVEAT: 'ethics and livelihood grounds' is explicit for only two entries -- Free League 'citing ethical concerns regarding the livelihoods of professional illustrators' and Three Sale Studios 'considering it unethical'; Paizo, Chaosium, WotC, Renegade and Stonemaier are listed with policy content but no stated grounds, and the ethics framing otherwise comes from the article's intro and closing. 'Only Monte Cook Games gives a quality verdict' holds across the roster, though the intro separately credits Games Workshop with positioning 'human-made craftsmanship as the ultimate luxury'.",
-   "fromFile": "verdicts-ai-i210-224.json"
+   "unsupportedLimb": "\"on ethics and livelihood grounds\" is explicit for only two entries — Paizo, Chaosium, WotC, Renegade and Stonemaier are listed with no stated grounds, and Free League's stated policy is against AI art.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "216": {
    "index": 216,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "it's been at the same level for three years",
    "note": "EN World thread 'AI is destroying crowdfunding', post by Agamon dated Aug 25, 2026. Quote verbatim: 'Art, music, and I'm getting good at catching AI writing now, too. And it isn't getting any better, it's been at the same level for three years.' The second half of the claim is the same poster's earlier post: any product with 'that \"AI slop\" look to it may be instantly ignored, even when human artists are being used... I need to be very careful about art styles and anything that may trigger the AI \"spidey sense\".' Note that fear is voiced about ART styles specifically, not prose.",
-   "fromFile": "verdicts-ai-i210-224.json"
+   "unsupportedLimb": "\"human creators now fear tripping the same alarm\" — the voiced fear is about ART styles, not prose.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "217": {
    "index": 217,
@@ -3603,10 +3679,11 @@
   },
   "220": {
    "index": 220,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a 'vibe' that the story felt artificial",
    "note": "Outlook Respawn, Krishna Goswami, 15 Dec 2025. Quote verbatim. Shrine's Legacy by Positive Concept Games; devs state they 'worked exclusively with human talent for everything from writing to coding' and 'do not endorse generative AI and will never use it'. Page supplies the false-positive frame directly: 'A 2024 Microsoft study found that users can correctly identify AI-generated content only about 62% of the time, suggesting that \"gut feelings\" about art or dialogue are frequently wrong.' Precision note: the ChatGPT accusation came from one 'belligerent review' saying the narrative was 'made in ChatGPT'; the felt-artificial vibe is from OTHER reviews, so 'because' overstates a single causal chain.",
-   "fromFile": "verdicts-ai-i210-224.json"
+   "unsupportedLimb": "\"because the story felt artificial\" overstates a single causal chain — the ChatGPT accusation was one belligerent review; the felt-artificial vibe came from other reviews.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "221": {
    "index": 221,
@@ -3624,10 +3701,11 @@
   },
   "223": {
    "index": 223,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "CONTRADICTED",
    "trueWording": "em dash still far outstrips the semi-colon and exclamation mark",
    "note": "SALT.agency, Sarah Mitchell, January 29, 2026. The supplied quote IS on the page word for word, but it supports a DIFFERENT point (detector unreliability), not the Ngram claim -- so it cannot be cited as evidence for this claim. The Ngram substance is on the page: a 'Google Books Ngram graph comparing the frequencies of the em dash (in blue), semi-colon (red) and exclamation point (green) in books published between 1500 and 2022', plus 'precious little evidence that ChatGPT does use the em dash too frequently; or at least more frequently than the average professional writer' and the training-data argument about professionally edited pre-internet text. CONTRADICTS 'stayed high for centuries': the page states 'the frequency in usage of the em dash does drop away after the mid-'90s' -- what survives is relative dominance, not a flat curve. Re-cut the claim to the dominance wording.",
-   "fromFile": "verdicts-ai-i210-224.json"
+   "unsupportedLimb": "\"em dash frequency has stayed high for centuries\" is contradicted — the page states usage \"does drop away after the mid-'90s\"; only relative dominance survives (and the supplied quote supports detector unreliability, a different point).",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "224": {
    "index": 224,
@@ -3638,10 +3716,11 @@
   },
   "225": {
    "index": 225,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a diagnostic signature of how a model was fine-tuned",
    "note": "Quote exact. Every figure confirmed: 'weighted mean across our sample was 3.23 per 1,000 words (median 3.83; range 0.33-17.12)'; GPT-4.1 unconstrained 10.62; 'twelve models from five providers'; 'Meta's Llama models produce zero'; base-vs-instruct Llama 3.1 8B shows 'a latent tendency exists pre-RLHF, with the direction and magnitude of amplification determined by the fine-tuning procedure'. One loose word: 'envelops' overstates - the human range 0.33-17.12 does not reach the LLM floor of 0.0.",
-   "fromFile": "verdicts-ai-i225-239.json"
+   "unsupportedLimb": "\"envelops\" overstates — the human range 0.33–17.12 does not reach the LLM floor of 0.0.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "226": {
    "index": 226,
@@ -3652,10 +3731,11 @@
   },
   "227": {
    "index": 227,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "also be attributed to amateurish or unedited writing",
    "note": "Quote exact (Anne R. Allen quoting Mark Williams at TNPS). New York/1990s supported: 'Because New York publishing taught us to. I first heard the term \"em dash\" ... in the mid-1990s. I'd scored an in-person critique ... by a real New York editor.' Neurodivergent/ESL supported: 'these are also the \"tells\" of an autistic or ESL writer.' One gloss: the reported tells are 'the narrative voice was all over the place', 'no emotional engagement', 'improbable similes and superfluous verbiage' - 'flat voice' is the claim's paraphrase, not the article's word.",
-   "fromFile": "verdicts-ai-i225-239.json"
+   "unsupportedLimb": "\"flat voice\" is the claim's paraphrase; the reported tell is \"the narrative voice was all over the place\".",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "228": {
    "index": 228,
@@ -3708,17 +3788,19 @@
   },
   "235": {
    "index": 235,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "no one used basic words like 'delve'",
    "note": "Quote exact, inside a quoted tweet: 'Imagine after being force-fed colonial languages, being forced to speak it better than its owners then being told that no one used basic words like \\'delve\\' in real life. Habibi, come to Nigeria.' Ordinary-word usage is evidenced by a second tweet: 'As an ardent reader, I've been using \\'delve\\' since I was a teenager mostly in writing. Today as a teacher I use it a lot more in speaking.' 'From school onward' is the claim's gloss on that; the article never says 'school'.",
-   "fromFile": "verdicts-ai-i225-239.json"
+   "unsupportedLimb": "\"from school onward\" is the claim's gloss; the article never says school.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "236": {
    "index": 236,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "probably not overrepresented in the training data",
    "note": "Quote exact. '21 focal words' exact, and delve/intricate/underscore/realm are all in the Table 2 list. Variety claim exact in substance: 'we do not find evidence that the focal words are especially prevalent in any particular variety of English'; the Nigerian-English hypothesis is named and rejected - 'Our initial analysis of ICE does not support this hypothesis.' One hedge lost in the claim: the paper says only that 'the model testing is consistent with RLHF playing a role', weaker than 'likely post-training'.",
-   "fromFile": "verdicts-ai-i225-239.json"
+   "unsupportedLimb": "\"likely post-training\" overstates the paper's hedge, that testing is only \"consistent with RLHF playing a role\".",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "237": {
    "index": 237,
@@ -3729,10 +3811,11 @@
   },
   "238": {
    "index": 238,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "CONTRADICTED",
    "trueWording": "reduced detection rates from 100% to 13%",
    "note": "Quote is a paraphrase, not on the page in any form; the paper reads 'a second-round self-edit prompt (\"Elevate the provided text by employing literary language\") applied to ChatGPT-3.5 significantly reduced detection rates from 100% to 13%' - no 'up to' on either figure. The abstract figures are right (68% -> 28%: 'still identified up to 68% of fake abstracts ... lowered detection rates to up to 28%') but come from a DIFFERENT prompt, 'employing advanced technical language', so the claim's 'a single \\'employ literary language\\' self-edit prompt' covering both results is wrong. Same URL caveat as 237: figures are in the full text, not the /abs/ page.",
-   "fromFile": "verdicts-ai-i225-239.json"
+   "unsupportedLimb": "attributing both results to a single \"employ literary language\" prompt is wrong — the 68%→28% abstract figures come from a different prompt (\"employing advanced technical language\"), and the quote's \"up to\" phrasing is not on the page.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "239": {
    "index": 239,
@@ -3771,10 +3854,11 @@
   },
   "244": {
    "index": 244,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "our recursive paraphrasing method can significantly reduce detection rates",
    "note": "Quote appears word for word in the abstract, as do watermarking, neural network-based detectors, zero shot classifiers, retrieval-based detectors, and spoofing 'aimed at misclassifying human-written text as AI-generated'. Caveat: the current abstract states the theory only as 'a theoretical framework connecting the AUROC of the best possible detector to the Total Variation distance between human and AI text distributions' — the claim's gloss 'degrades toward random as distributions approach human ones' is the paper's result but is not spelled out in the abstract text now on the page.",
-   "fromFile": "verdicts-ai-i240-253.json"
+   "unsupportedLimb": "\"degrades toward random as LLM text distributions approach human ones\" is not spelled out in the abstract now on the page, which states only an AUROC/Total-Variation theoretical framework.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "245": {
    "index": 245,
@@ -3806,10 +3890,11 @@
   },
   "249": {
    "index": 249,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "misclassifies only 1 of 300 articles",
    "note": "Quote appears word for word: 'the majority vote among five such \"expert\" annotators misclassifies only 1 of 300 articles'. Also confirmed: robustness 'even in the presence of evasion tactics like paraphrasing and humanization', and reliance on 'specific lexical clues (\"AI vocabulary\")' plus 'formality, originality, clarity'. The claim's 'not punctuation counts' is the researcher's own contrast, not a source statement; the paper simply never cites punctuation.",
-   "fromFile": "verdicts-ai-i240-253.json"
+   "unsupportedLimb": "\"not punctuation counts\" is the researcher's own contrast; the paper never cites punctuation.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   },
   "250": {
    "index": 250,
@@ -3834,10 +3919,11 @@
   },
   "253": {
    "index": 253,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "LLM-generated stories pass 3-10X less TTCW tests than stories written by professionals",
    "note": "Quote appears word for word. Abstract confirms 'TTCW consists of 14 binary tests', 'We recruit 10 creative writers', and 'none of the LLMs positively correlate with the expert assessments'. Caveat: the dimensional gloss is only half supported - the paper states 'all models achieve their highest pass rate on the Fluency dimension' and Table 5 puts Originality lowest, but it does not single out Elaboration as a deficit (Elaboration tracks Flexibility), and it frames the gap as broad rather than concentrated.",
-   "fromFile": "verdicts-ai-i240-253.json"
+   "unsupportedLimb": "the dimensional gloss is only half supported — the paper does not single out Elaboration as a deficit and frames the gap as broad rather than concentrated.",
+   "fromFile": "verdicts-ai-regrade-r1.json"
   }
  },
  "mergedAt": "see autosave.log"
