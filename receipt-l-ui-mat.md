@@ -111,3 +111,61 @@ free** — i.e. a BUILD. My brief forbids `npm run build` ("unless the brief nam
 §882.13 verbatim: "**LIGHTING O-11 SIGN** the three persistence paths (publicSafe allowlist, accountImport
 id-resolution, provenance receiptHash)." The third — which the brief left for me to derive — is
 **provenance receiptHash**. Recorded; not built, because CAR B does not land (P4).
+
+---
+# ⛔⛔ FOREIGN RED FOUND AT BASE, BEFORE ANY EDIT — THE ENGINE GOLDEN MASTER IS 525/525 DRIFTED
+
+Found while establishing CAR A's engine-hash control. **I had made no edit; porcelain was 0.** This is
+FOREIGN to my consist and is reported, not banked as mine.
+
+`GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run tests/property/generatorGoldenMaster.test.js --maxWorkers=2`
+  EXIT=1 · `Test Files 1 failed (1)` · `Tests 1 failed | 2 passed (3)` · Duration **9.79s**
+  `AssertionError: expected [ …(525) ] to deeply equal []`
+(⚠ vitest prints ACTUAL first: the 525-element array is the RECEIVED drift list. Every row drifted.)
+
+⛔ IT IS NOT LOAD STARVATION. 9.79 s, an ASSERTION failure, not a timeout or a SCOPE SENTINEL line.
+Machine 1-min load at the time was 3.20.
+
+**Characterised with an independent probe** (`$SC/luimat-scratch/hashprobe.mjs` — plain node, replicates the
+suite's `corpus()`/`hashFor()` byte-for-byte, reads the dock, writes only to lane scratch):
+- rows computed **525**; key set vs committed manifest: **0 only-in-manifest, 0 only-in-computed** — the corpus
+  is not the problem, the VALUES are.
+- **525 of 525 values differ** from `tests/fixtures/generator-golden-master.json`.
+  e.g. `city|arabic|coastal|port|civilized|golden-master-v3`
+       manifest `3bd9db193001422bf90ef74333ad1672748dd90f9f6fd5c7686826db00d7cf65`
+       computed `135346c7590e659acfd1dd3dacdda7ecf36203cbaaa24c4c77ec41fabb2f0f34`
+- **DETERMINISTIC within the build**: two full runs produced byte-identical output files and the same
+  aggregate `92ef697dbea663df6d72c9e584a36595b6fd52b0d4bad4ba3f38272c8b146d8d`.
+  ⇒ this is a STALE/OWED MANIFEST or an unrecorded engine shift, NOT a nondeterministic generator.
+- **NEGATIVE CONTROL CONVICTS** (the comparator was proven able to see FIRST, per the suite's own D-4 law):
+  one planted enumerable field on the returned settlement moved the aggregate
+  `92ef697d…8b146d8d` → `d72c1ea762a02dad8601e4b2b090935cad7452d84305c2d36a19d8dfd180ed3d`.
+
+Last re-record of the fixture: `e4aebd28a` ("HYGIENE landing act: the golden re-records ONCE at the coupled tip").
+The surface IS enrolled in the freeze register (`tests/fixtures/.golden-freeze-register.json:323-325`).
+⇒ **CHAIR ROW, HIGH.** Either an owed re-record was never taken, or an engine shift landed undeclared between
+`e4aebd28a` and `dd5f13218`. A 525/525 drift is not a subtle logic drift; it has the shape of a field
+added to (or removed from) every settlement. ⛔ I did NOT re-record it — `UPDATE_GOLDEN` is a register door and
+my brief forbids one. Naming it is the act available to me.
+
+**CONSEQUENCE FOR MY OWN PROOF:** the committed manifest cannot serve as CAR A's control while it is stale.
+CAR A's engine-identity proof is therefore taken DIFFERENTIALLY — the probe's aggregate at BASE vs at TIP —
+which is immune to the manifest and strictly stronger (it compares the tree against itself).
+**BASE AGGREGATE (525 rows): `92ef697dbea663df6d72c9e584a36595b6fd52b0d4bad4ba3f38272c8b146d8d`**
+
+---
+# CAR A — PREDICTIONS WRITTEN BEFORE THE INSTRUMENTS RAN
+1. Engine aggregate at TIP: **UNMOVED**, `92ef697dbea663df6d72c9e584a36595b6fd52b0d4bad4ba3f38272c8b146d8d`,
+   **0 of 525** rows changed. Ground: zero `src/domain/**` or `src/generators/**` importers of the flag modules.
+2. `tests/components/handbookVoice.test.jsx` — **1 test REDS**: the case at `:39`
+   ("flag OFF (default): the original handbook copy renders") renders `<HowToUse standalone />` with NO
+   override and asserts `toContain(PLAIN_ONLY)` / `not.toContain(VOICED_ONLY)`. With the default now `true`
+   it receives the voiced copy. This is the DECLARED display shift, not a defect.
+3. Same file `:56` ("THE CLARITY CLAUSE") — **GREEN**. Its OFF half now renders voiced, but it asserts only
+   STEPS + LIFELINE, which the clarity clause keeps in BOTH states.
+4. `tests/components/warFaithSurfacing.test.jsx` — **GREEN**. It `vi.mock`s `src/lib/flags.js` wholesale with
+   `flagMock` and drives both ON and OFF explicitly; it never reads FLAG_DEFAULTS.
+5. `tests/ui/warResolveSection.test.jsx` — GREEN expected (same mocking idiom), UNVERIFIED before the run.
+6. The four HowToUse-rendering files (aboutSplit, howToInversion, howToUseLivingWorld, handbookClaimsParity)
+   — GREEN expected; they render HowToUse but I have not confirmed none asserts voiced-exclusive copy. If one
+   asserts plain essay text it will red and is part of the same declared shift.

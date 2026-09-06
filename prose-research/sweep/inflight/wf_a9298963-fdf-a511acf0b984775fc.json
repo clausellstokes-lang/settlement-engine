@@ -1,0 +1,36 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i379-393",
+ "lines": 52,
+ "firstTs": "2026-09-06T18:16:19.514Z",
+ "lastTs": "2026-09-06T18:18:22.153Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 12
+ },
+ "urlsFetched": [
+  "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+  "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/|enworld655198.html",
+  "https://www.enworld.org/threads/d-d-adventurers-league-unveils-new-dungeoncraft-document-with-planescape-in-focus.700991/|enworld700991.html",
+  "https://tenfootpole.org/ironspike/?page_id=1201|tenfootpole.html",
+  "https://www.dndbeyond.com/forums/dungeons-dragons-discussion/dungeon-masters-guild/224705-is-there-an-update-to-the-d-d-style-guide-writing|ddb224705.html",
+  "https://www.dndbeyond.com/forums/dungeons-dragons-discussion/d-d-organized-play/192532-d-d-adventurers-league-resources-links-updated-08|ddb192532.html",
+  "https://gizmodo.com/dungeons-dragons-team-announces-new-plans-to-address-1844084273|giz1.html",
+  "https://gizmodo.com/d-ds-culturally-sensitive-strahd-revamp-is-here-but-it-1844521228|giz2.html",
+  "https://en.wikipedia.org/wiki/Tomb_of_Annihilation|toa.html",
+  "https://en.wikipedia.org/wiki/Curse_of_Strahd|cos.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Let me fetch the sources as raw text, grouped by URL.",
+ "run": "wf_a9298963-fdf",
+ "agent": "a511acf0b984775fc",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-a511acf0b984775fc.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i379-393.json",
+  "exists": false
+ }
+}

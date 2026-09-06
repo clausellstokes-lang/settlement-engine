@@ -3,22 +3,22 @@
  "name": "hobb",
  "angle": null,
  "tag": null,
- "lines": 81,
+ "lines": 97,
  "firstTs": "2026-09-06T18:03:51.269Z",
- "lastTs": "2026-09-06T18:14:07.547Z",
+ "lastTs": "2026-09-06T18:17:47.874Z",
  "tools": {
-  "Bash": 13,
-  "Read": 4,
+  "Bash": 15,
+  "Read": 5,
   "Write": 1
  },
  "urlsFetched": [],
  "filesWritten": [
   "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/section-hobb.md"
  ],
- "lastAssistantText": "Now I'll read the kept rows in pieces. The listing is 1730 lines; I'll take it in four independent reads at once.",
+ "lastAssistantText": "aim that reached a verifier came back verified in whole or in part. The source roster in state-hobb.json lists 456 entries, 371 marked substantive, across kinds led by analysis (154), own-words (72) and interview (60). Fifteen verified rows (300 to 314) have an empty trueWording and were not quoted.",
  "run": "wf_06d7ffd7-48b",
  "agent": "a22bf29f3f015c1ce",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_06d7ffd7-48b/agent-a22bf29f3f015c1ce.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": null
 }

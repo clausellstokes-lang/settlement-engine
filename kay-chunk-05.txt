@@ -1,0 +1,274 @@
+### ROW 275 idx=284 V=VERIFIED_VERBATIM
+CLAIM: Kay says each reader makes the book they read.
+TW: "well, each reader makes the book they read"
+NOTE: Same raw page, same paragraph beginning 'And I found that I liked'. Quote verbatim.
+
+### ROW 276 idx=285 V=VERIFIED_VERBATIM
+CLAIM: Kay says the quarter turn means even a reader who knows the real history cannot be sure where the novel is going.
+TW: he or she cannot be sure they know where the novel they are reading is going
+NOTE: Quote verbatim in the paragraph beginning 'I had come to realize'; the sentence attributes it to 'this shift from following the events of history' i.e. the quarter-turn named in the same paragraph's opening line.
+
+### ROW 277 idx=286 V=VERIFIED_VERBATIM
+CLAIM: Kay says he telescoped the Reconquista in The Lions of Al-Rassan so a culture's demise plays out in one or two generations.
+TW: I telescoped the Reconquista in Lions. The tragedy of a culture's demise could play out in one or two generations
+NOTE: Quote verbatim; the very next sentence supplies the 'one or two generations' limb, in the paragraph beginning 'It was with Lions'.
+
+### ROW 278 idx=287 V=VERIFIED_VERBATIM
+CLAIM: Kay says the Sarantine Mosaic let him develop thoughts about Procopius the historian and about the writers of history and chroniclers.
+TW: About Procopius the historian, about the writers of history, chroniclers and artists
+NOTE: Quote verbatim; the paragraph beginning 'I suppose I've never looked back' names the Sarantine Mosaic as where he 'had thoughts I wanted to develop and explore that way'.
+
+### ROW 279 idx=288 V=VERIFIED_VERBATIM
+CLAIM: Kay names as a cost of his method that readers will never learn the year of the Treaty of Utrecht in his novels.
+TW: Readers will never learn the year of the Treaty of Utrecht in my novels
+NOTE: Quote verbatim in the paragraph beginning 'So, briefly told', which is explicitly introduced as 'downsides, or risks, to how I work'.
+
+### ROW 280 idx=289 V=VERIFIED_VERBATIM
+CLAIM: Kay says he believes in varying the tension, drama and type of scenes in a book, and even the language the story is told in.
+TW: the need to vary the tension, drama, the type of scenes a book has, even the langiuage in which the story is told
+NOTE: Quote verbatim in answer 4, misspelling 'langiuage' included, preceded by 'I really believe, as a writer, in what you are noting here'.
+
+### ROW 281 idx=290 V=VERIFIED_VERBATIM
+CLAIM: Kay says artists are the recorders and chroniclers of a time and can become the emblems of a day for later eras.
+TW: Artists are, more good or ill, the recorders, chroniclers of a time
+NOTE: Quote verbatim in answer 5; the next sentence carries the second limb: 'they can become, for later eras, the emblems of a day'.
+
+### ROW 282 idx=291 V=VERIFIED_VERBATIM
+CLAIM: Kay says he is interested in shaping a long view, a sense for the reader of time passing across periods.
+TW: I am interested in shaping a long view, a sense for the reader of time passing
+NOTE: Quote verbatim in answer 1; 'across periods' is carried by 'looking in on history at various moments and periods'.
+
+### ROW 283 idx=292 V=VERIFIED_VERBATIM
+CLAIM: Kay says knowing the themes of history does not necessarily mean the minutiae of dates and places.
+TW: That doesn't necessarily mean the minutiae of dates and places
+NOTE: Quote verbatim in answer 2; the antecedent of 'That' is the preceding sentence's 'ignorant of the themes of history'.
+
+### ROW 284 idx=293 V=VERIFIED_VERBATIM
+CLAIM: Kay says that if a book is done well readers can be moved by a single line, because they know why the character acted.
+TW: If a book is done well, readers can be moved by a single line ... because they know why he did that
+NOTE: Quote verbatim in answer 4; both the 'done well' condition and the 'because they know why' clause are on the page.
+
+### ROW 285 idx=294 V=VERIFIED_VERBATIM
+CLAIM: Kay says he is not a detached writer and is very much engaged as he writes intense or quietly moving scenes.
+TW: I am not a 'detached' writer ... I am very much engaged as I write them
+NOTE: Quote verbatim in answer 4, with 'when intense things happen to my characters, or even quietly moving ones' supplying both scene types.
+
+### ROW 286 idx=295 V=VERIFIED_VERBATIM
+CLAIM: Kay says Children of Earth and Sky was deliberately set up to be about people who are not important in the scheme of things.
+TW: Children of Earth and Sky was deliberately set up in my mind to be about people who are not important in the scheme of things
+NOTE: Quote verbatim in answer 5; claim omits only the phrase 'in my mind'.
+
+### ROW 287 idx=296 V=VERIFIED_VERBATIM
+CLAIM: Kay says catching something about our own lives, even if less dramatic, is what he is always trying to do in a book.
+TW: I think it catches something about our own lives, even if less dramatic, which is what I am always trying to do in a book
+NOTE: Quote verbatim in the paragraph beginning 'I went with my own feeling'; every limb of the claim is that one sentence.
+
+### ROW 288 idx=297 V=VERIFIED_VERBATIM
+CLAIM: Kay reports that an experienced early reader from the book trade objected that his two women connect awfully fast.
+TW: one of my earliest readers, an experienced man in the book trade, expressed doubts: 'They connect awfully fast, don't they?'
+NOTE: Quote verbatim in the paragraph beginning 'Here's where it got interesting'; 'objected' renders the page's 'expressed doubts', and the two women are Danica and Leonora.
+
+### ROW 289 idx=298 V=VERIFIED_VERBATIM
+CLAIM: Kay says he is focused on nuance and on letting readers decide what they find in or take away from a book.
+TW: I'm focused on complicating things, multiple ideas, on nuance, on letting readers decide what they find in or take away from a book
+NOTE: Quote verbatim in the paragraph beginning 'Truth is'; both the nuance limb and the readers-decide limb are in the same sentence.
+
+### ROW 290 idx=299 V=VERIFIED_VERBATIM
+CLAIM: Kay says he is offering a story and not giving a lecture, and does not write for lessons.
+TW: Not for lessons! I'm offering a story not giving a lecture
+NOTE: Quote verbatim in the paragraph beginning 'You can write about yesterday's snows'; 'Not for lessons!' immediately precedes it and supports the second limb.
+
+### ROW 291 idx=300 V=VERIFIED_VERBATIM
+CLAIM: Kay says a major novel can be made to sound trivial, silly or shallow if boiled down to a paragraph of sound bite.
+TW: War and Peace, LOTR or Song of Solomon 'can be made to sound trivial, silly, shallow if boiled down to a paragraph's worth of sound bite'
+NOTE: Raw page (whatever.scalzi.com, curl with browser UA, HTTP 200) carries the quote verbatim in Kay's signed Big Idea essay: 'Some of us (well, me?) take the considered view that War and Peace or The Lord of the Rings or Song of Solomon can be made to sound trivial, silly, shallow if boiled down to a paragraph's worth of sound bite.' 'A major novel' is the claim's generalisation of the three named novels; page says 'a paragraph's worth of sound bite' where the claim says 'a paragraph of sound bite'. All limbs supported.
+
+### ROW 292 idx=301 V=VERIFIED_VERBATIM
+CLAIM: Pembroke College reports that Kay's Tolkien Lecture discussed the vital importance of the unsaid and the unexplained in fiction.
+TW: the talk 'went on to discuss the vital importance of the unsaid and the unexplained in fiction'
+NOTE: Raw pmb.ox.ac.uk news item (HTTP 200) verbatim: 'The talk began with some of Kay's reflections from his time in Oxfordshire ... and went on to discuss the vital importance of the unsaid and the unexplained in fiction.' Item is Pembroke College's own report of the 11 May 2021 eighth annual JRR Tolkien Lecture delivered by Kay. Every limb supported.
+
+### ROW 293 idx=302 V=VERIFIED_VERBATIM
+CLAIM: Kay asked in the lecture how comfortable we are in our responses to art with mystery and with not knowing.
+TW: he grappled with 'how comfortable in our responses to art are we with mystery, with not knowing'
+NOTE: Same raw pmb.ox.ac.uk page, sentence following the one behind index 301: 'Drawing on quotations from both Tolkien and Bagehot, he grappled with the question of "how comfortable in our responses to art are we with mystery, with not knowing [and with] the presence of the numinous that we do not fully grasp?"' Quote verbatim; the page presents it as a direct quotation from Kay's lecture, supporting 'asked in the lecture'.
+
+### ROW 294 idx=303 V=VERIFIED_VERBATIM
+CLAIM: Kay's hundred-word Sarantine Mosaic Drabble opens with a ten-word sentence.
+TW: 'She is lying beside her love dreaming of her love.' opens the Sarantium Mosaic Drabble
+NOTE: Raw brightweavings.com/drabbles/ (HTTP 200). The first line of 'Aliana in the West (spoiler for The Sarantine Mosaic) / The Sarantium Mosaic Drabble / (c)2014: Guy Gavriel Kay' is the quoted sentence, verbatim. Counted: She/is/lying/beside/her/love/dreaming/of/her/love = 10 words. Counted the whole Drabble body from the page = exactly 100 words, and the page's editorial note defines a Drabble as 'a 100 word short story'. All limbs supported.
+
+### ROW 295 idx=304 V=VERIFIED_VERBATIM
+CLAIM: Bright Weavings records that Kay wrote two Drabbles in 2014, a Drabble being a 100 word short story.
+TW: 'In 2014 Guy Kay wrote two Drabbles ... A Drabble is a 100 word short story'
+NOTE: Raw brightweavings.com/drabbles/ editorial note above the stories, posted 4 October 2025 by Alec Lynch: 'In 2014 Guy Kay wrote two Drabbles in support of The Pixel Project ... A Drabble is a 100 word short story.' Quote verbatim; both limbs (two Drabbles, 2014, 100-word definition) supported.
+
+### ROW 296 idx=305 V=VERIFIED_VERBATIM
+CLAIM: That opening sentence of Kay's Drabble repeats the phrase 'her love' twice.
+TW: 'She is lying beside her love dreaming of her love.' — 'her love' occurs twice
+NOTE: Raw brightweavings.com/drabbles/ first line of 'Aliana in the West'. String 'her love' appears exactly twice in that opening sentence (positions 5-6 and 9-10 of ten words). Quotation verbatim; limb supported.
+
+### ROW 297 idx=306 V=VERIFIED_VERBATIM
+CLAIM: Wolfe says Kay deploys an impressive variety of narrative voices in All the Seas of the World.
+TW: 'As usual, Kay deploys an impressive variety of such narrative voices'
+NOTE: Raw locusmag.com review (HTTP 200), paragraph beginning 'As usual'. Quote verbatim. 'Such' refers back to the preceding paragraph's character voices (e.g. Guidanio Cerra's 'haunting and haunted voice'); the review is of All the Seas of the World, so the novel limb holds.
+
+### ROW 298 idx=307 V=VERIFIED_VERBATIM
+CLAIM: Wolfe says the occasional shift into first person has something of the effect of hearing a skilled soloist in a symphony.
+TW: 'the occasional shift into first-person has something of the effect of hearing a skilled soloist in a symphony'
+NOTE: Raw locusmag.com review, same 'As usual' paragraph, immediately after the index-306 clause. Full sentence continues '(for some reason, I think of oboes or bassoons, but maybe that's just me)'. Quote verbatim; every limb supported.
+
+### ROW 299 idx=308 V=VERIFIED_VERBATIM
+CLAIM: Wolfe says Kay's devoted readers have come to learn his invented nomenclature for nations, cities and geographical features.
+TW: 'devotees who have come to learn his invented nomenclature for nations, cities, geographical features'
+NOTE: Raw locusmag.com review, first body paragraph: '... including both devotees who have come to learn his invented nomenclature for nations, cities, geographical features, and religions, and first-time readers ...' Quote verbatim (page has a soft hyphen inside 'religions' only, outside the quoted span). Claim's 'devoted readers' = page's 'devotees'; the claim omits 'religions', which subtracts nothing from the supported limbs.
+
+### ROW 300 idx=309 V=VERIFIED_VERBATIM
+CLAIM: Wolfe says that despite an intimidating character list at the front, the on-the-ground tale is a model of clarity and focus.
+TW: 'the catalog ... at first might seem intimidating, the on-the-ground tale is a model of clarity and focus'
+NOTE: Raw locusmag.com review, final body paragraph: 'While the catalog of these characters offered at the beginning of the novel at first might seem intimidating (at least to me, but then I was terrified by the character list at the beginning of War and Peace), the on-the-ground tale is a model of clarity and focus ...' Quote verbatim; both limbs (intimidating list at the front, clarity and focus) supported.
+
+### ROW 301 idx=310 V=VERIFIED_VERBATIM
+CLAIM: Wolfe says even secondary figures gain a haunting presence when the reader is offered brief glimpses into their future lives.
+TW: 'even the secondary figures gain a haunting presence, especially when we are offered brief glimpses into their future lives'
+NOTE: Raw locusmag.com review; the sentence sits in the same paragraph as 'As his isolated and exiled figures ...' (Locus runs it as one paragraph beginning 'As usual'). Quote 'brief glimpses into their future lives' verbatim; 'even the secondary figures gain a haunting presence' also verbatim. All limbs supported.
+
+### ROW 302 idx=311 V=VERIFIED_VERBATIM
+CLAIM: Wolfe says the novel reminds the reader more than once that lives pivot on small things and accidents of timing.
+TW: ''Lives change, turn, pivot on small things, accidents of timing,'' we are reminded more than once
+NOTE: Raw locusmag.com review, paragraph beginning 'Not uncharacteristically'. Quote verbatim inside the review's own quotation marks, followed by Wolfe's 'we are reminded more than once' — so both the wording (the novel's) and the 'more than once' limb (Wolfe's) are supported on the page.
+
+### ROW 303 idx=312 V=VERIFIED_VERBATIM
+CLAIM: Whitehead says Kay's measured prose is sometimes minimalist and sometimes ornate.
+TW: 'his measured prose, sometimes minimalist, sometimes ornate'
+NOTE: Raw thewertzone.blogspot.com review (HTTP 200), paragraph beginning 'The traditional strengths of Kay are on full display'. Quote verbatim; attribution to Adam Whitehead confirmed by the post's byline. Every limb supported.
+
+### ROW 304 idx=313 V=VERIFIED_VERBATIM
+CLAIM: Whitehead says Kay knows when to deploy words like bludgeons and when like scalpels.
+TW: prose 'known [sic] when to deploy words like bludgeons and when like scalpels'
+NOTE: Raw thewertzone.blogspot.com review, same 'traditional strengths' sentence: '... his measured prose, sometimes minimalist, sometimes ornate, known when to deploy words like bludgeons and when like scalpels.' The supplied quote appears word for word. The page's verb is 'known' (an evident slip for 'knowing'/'knows') and the knowing is grammatically pinned to the prose rather than to Kay; the claim's 'Kay knows' is the same substance, so all limbs hold.
+
+### ROW 305 idx=314 V=VERIFIED_VERBATIM
+CLAIM: Whitehead says Kay provides a list of historical sources at the end of Written on the Dark.
+TW: 'Kay provides a list of historical sources at the end of the novel'
+NOTE: Raw thewertzone.blogspot.com review, paragraph beginning 'This book is set in the much-mentioned land of Ferrieres'. Quote verbatim; 'the novel' is Written on the Dark, the book under review, so the claim's substitution of the title is supported.
+
+### ROW 306 idx=315 V=VERIFIED_VERBATIM
+CLAIM: Whitehead says there is more humour in Written on the Dark than in some of Kay's previous books.
+TW: more humour in this book than perhaps some previous ones
+NOTE: Wertzone live fetch 200 (browser UA). Byline 'Adam Whitehead', dated Sunday 29 June 2025, post title 'Written on the Dark by Guy Gavriel Kay'. Quote byte-exact in the paragraph beginning 'The traditional strengths of Kay'. Source hedges with 'perhaps', which the claim drops; substance unchanged.
+
+### ROW 307 idx=316 V=VERIFIED_VERBATIM
+CLAIM: Capossere says Kay takes the suspense out of dangerous scenes with a flash-forward so the reader already knows the character survives.
+TW: quick flash-forward removes the 'will they survive' suspense
+NOTE: fantasyliterature.com returned 403 to both bare and www live fetches; reached via Wayback raw capture https://web.archive.org/web/20250803031327id_/... (route 2), not a summarizer. Full sentence: '...take the focus away from the usual suspense element of "will they survive" via a quick flash-forward (or an earlier one) so that the reader knows immediately, or already, that the character will do just that — survive.' Paragraph beginning 'But Kay more often than not' confirmed. Byline 'Posted by Bill Capossere', April 18th, 2022.
+
+### ROW 308 idx=317 V=VERIFIED_VERBATIM
+CLAIM: Capossere says Kay's plot evokes a who-are-they-now response rather than a what-happens-next one.
+TW: plot evokes not 'what happens next' but 'who are they now'
+NOTE: Same Wayback raw capture. Verbatim: 'the plot evokes not so much the more traditional "what happens next" response but a "who are they now" response.' Same paragraph as 316; both limbs (the evoked response and the contrast with what-happens-next) present.
+
+### ROW 309 idx=318 V=VERIFIED_VERBATIM
+CLAIM: Capossere quotes the novel's narrator saying in a meta-fictional aside that some tales are told and most are not.
+TW: narrator's meta-fictional aside: 'Some tales are told, most are not'
+NOTE: Verbatim on page: 'As our narrator says in one of the several meta-fictional asides, "Some tales are told, most are not"'. Every limb — narrator, meta-fictional aside, the words themselves — is on the page, in the paragraph beginning 'In a somewhat similar vein'.
+
+### ROW 310 idx=319 V=VERIFIED_VERBATIM
+CLAIM: Capossere says Kay gives the reader more of those untold tales than most authors do.
+TW: Kay gives us more of those untold tales than most authors
+NOTE: Clause immediately following the 318 quote in the same sentence: '...and that holds true here as well, but Kay gives us more of those untold tales than most authors.' Byte-exact.
+
+### ROW 311 idx=320 V=VERIFIED_VERBATIM
+CLAIM: Capossere says Danio Cerra's older recalling voice layers an aching sense of time's passage over the book's present moments.
+TW: Danio's elegiac older voice layers an aching sense of time's passage
+NOTE: Verbatim: 'Guidanio ("Danio") Cerra... though his softly elegiac older voice, as he recalls events from a later date layers over the book's present moments an aching sense of time's passage.' Paragraph beginning 'I could go on rapturously' confirmed; the recalling-from-later limb and the layering limb are both explicit.
+
+### ROW 312 idx=321 V=VERIFIED_VERBATIM
+CLAIM: Capossere reports that the novel opens with the line about the memory of home being too far away.
+TW: novel opens with 'The memory of home can be too far away'
+NOTE: Verbatim: 'The novel opens with the line "The memory of home can be too far away," introducing the twinned ideas of home and exile.' The reviewer does state it is the opening line, so the 'opens with' limb is Capossere's own report, not an inference. Paragraph beginning 'Beyond character and plot' confirmed.
+
+### ROW 313 idx=322 V=VERIFIED_VERBATIM
+CLAIM: Capossere names as a Kay-ism a few lines of gentle dignity granted to a character at the moment of death.
+TW: a favourite 'Kay-ism': a few lines of gentle dignity at death
+NOTE: Verbatim: 'Even when death strikes, it's leavened with what has become one of my favorite "Kay-isms" — the lingering of a spirit for a brief while in a few moments consideration of a life lived and now ended, a few lines of gentle dignity, of respect accorded by the author... granted to a wide range of characters'. Kay-ism limb, death-moment limb and granted-to-a-character limb all present. Paragraph beginning 'But Kay also is quick to show' confirmed.
+
+### ROW 314 idx=323 V=VERIFIED_VERBATIM
+CLAIM: Capossere says Kay drops many seeds into the text to prepare the reader for what is to come.
+TW: Kay drops into the text so many seeds to prepare us
+NOTE: Verbatim: 'The way Kay drops into the text so many seeds to carefully prepare us for what's to come.' Paragraph beginning 'Finally, the craft is' confirmed.
+
+### ROW 315 idx=324 V=VERIFIED_VERBATIM
+CLAIM: Capossere says characters or the narrator reflect repeatedly on how easily one could die.
+TW: Repeatedly characters or narrator reflect 'You could die so easily'
+NOTE: Verbatim: 'Repeatedly characters (or the narrator) reflect on how "You could die so easily" or "Death could be so swift."' The claim's 'how easily one could die' is exactly the quoted reflection. Paragraph beginning 'The world Kay creates' confirmed.
+
+### ROW 316 idx=325 V=VERIFIED_VERBATIM
+CLAIM: Capossere says some of Kay's characters are given just two or three paragraphs and are still richly drawn.
+TW: characters richly drawn whether central or given two or three paragraphs
+NOTE: Verbatim: 'the characters... are richly drawn and utterly compelling across the board, whether they take up the bulk of the pages, as with Rafel and Lenia, several strands of a few pages each... or are given just two or three paragraphs.' The 'still richly drawn' limb is carried by 'across the board'. Paragraph beginning 'What I'm trying to say here' confirmed.
+
+### ROW 317 idx=326 V=VERIFIED_VERBATIM
+CLAIM: Capossere says the novel is meticulously crafted in structure, pace, language and dialogue.
+TW: meticulously crafted in structure, pace, language, dialogue
+NOTE: Verbatim: 'The novel is meticulously crafted in structure, pace, language, dialogue.' Located in the review's last substantive paragraph, immediately before the publisher's jacket blurb — the cited page location holds.
+
+### ROW 318 idx=327 V=VERIFIED_VERBATIM
+CLAIM: A reader commenting on the review says she found Tigana on the whole to be telling rather than showing.
+TW: 'I found it on the whole to be telling rather than showing'
+NOTE: Comment thread on the same page, preserved in the Wayback capture. Commenter 'Ilana', April 19, 2022 at 7:30 pm, about Tigana: 'I didn't enjoy it – I found the female characters to be flat and underdeveloped... and I found it on the whole to be telling rather than showing.' Author, date and referent (Tigana, named in the same comment: 'I really didn't like Tigana') all confirmed. The claim's pronoun 'she' is inferred from the name and never stated on the page — incidental, not a substantive limb.
+
+### ROW 319 idx=328 V=VERIFIED_VERBATIM
+CLAIM: Ruffolo says All the Seas of the World takes in places a more explicit storytelling tone than he expects from Kay.
+TW: more explicit storytelling tone than I've come to expect
+NOTE: strangecurrencies.org live fetch 200. Byline 'Dan Ruffolo June 7, 2022'. First body paragraph, verbatim: 'Taking in places a more explicit storytelling tone than I've come to expect from Guy's work, All the Seas of the World nevertheless captures his scintillating prose...'. The 'in places' limb and the 'from Kay' limb ('from Guy's work') are both on the page.
+
+### ROW 320 idx=329 V=VERIFIED_VERBATIM
+CLAIM: Ruffolo says the narration lets the reader know the impacts the characters had and the lives they touched.
+TW: we can know through the narration of the impacts they had
+NOTE: Verbatim: '...people who feel much as we do can know, or we can know through the narration, of the impacts they had, the lives they touched, is a salve against that feeling of helplessness.' Both limbs (impacts had, lives touched) present. Paragraph beginning 'This theme feels especially important' confirmed.
+
+### ROW 321 idx=330 V=VERIFIED_VERBATIM
+CLAIM: Moscrop says Written on the Dark is equally impressive for its accessibility and its density.
+TW: "Written on the Dark is equally as impressive for its accessibility and its density"
+NOTE: Globe and Mail page fetched raw (curl, browser UA, HTTP 200). Sentence present word for word in the penultimate body paragraph, which continues "qualities that may seem to be at odds, but aren't." Byline David Moscrop, published June 6, 2025. Claim's 'equally impressive' drops only the source's 'as'.
+
+### ROW 322 idx=331 V=VERIFIED_VERBATIM
+CLAIM: Moscrop opens his review by citing the closing words of Written on the Dark.
+TW: "It's not giving away much to open this review with the closing words"
+NOTE: Raw page: the review's first body line is the quoted closing words, immediately followed by "It's not giving away much to open this review with the closing words of Written on the Dark, Guy Gavriel Kay's tale of a tavern poet...". Both limbs (opens; cites the closing words) supported.
+
+### ROW 323 idx=333 V=VERIFIED_VERBATIM
+CLAIM: Moscrop says the novel makes sense even for the mysteries it refuses to explain.
+TW: "even for the mysteries it refuses to explain, it makes sense"
+NOTE: Raw page, paragraph beginning "The brilliance of Written on the Dark": "Maybe that's the least realistic thing about this novel of fantasy, that even for the mysteries it refuses to explain, it makes sense." Quote verbatim; both limbs (makes sense; mysteries it refuses to explain) supported.
+
+### ROW 324 idx=334 V=VERIFIED_VERBATIM
+CLAIM: Fram calls Kay a master of telling small stories in a big world.
+TW: "A master of telling small stories in a big world, Kay reveals spots of hope"
+NOTE: BookPage page fetched raw (HTTP 200). Final review paragraph opens with the phrase word for word. Page also carries the 'STARRED REVIEW' flag, the May 17, 2022 date and 'Review by Noah Fram', so the attribution limbs hold too.
+
+### ROW 325 idx=335 V=VERIFIED_VERBATIM
+CLAIM: Fram says Kay's characters see their homes fade from the map and their lives taken for the pettiest of causes.
+TW: "his characters see their homes fade from the map and their own lives taken for the pettiest of causes"
+NOTE: First body paragraph of the raw BookPage review: "Kay's fictional worlds, while beautiful, are defined by this bleak inertia; his characters see their homes fade from the map and their own lives taken for the pettiest of causes." Quote verbatim; the claim's 'their lives' merely drops the source's 'own'.
+
+### ROW 326 idx=336 V=VERIFIED_VERBATIM
+CLAIM: Wilt reports Kay saying his seniority frees him from the modern rule against jumping from past tense to present tense.
+TW: "That means he doesn't have to play by the more restrictive rules of modern publishing"
+NOTE: Christianity Today page fetched raw (HTTP 200), paragraph beginning "It helps that Kay, 70, has been writing successfully for decades." The rule list, attributed with 'he told me', opens "Rules like: Don't jump from the past tense to the present tense." Seniority limb (age 70, decades of success) and the freedom limb both on the page.
+
+### ROW 327 idx=337 V=VERIFIED_VERBATIM
+CLAIM: Wilt reports Kay naming the rule against hopping between characters' heads as one he does not have to obey.
+TW: "Don't hop between characters' heads—just choose one perspective per chapter"
+NOTE: Same raw CT paragraph: "Don't hop between characters' heads—just choose one perspective per chapter or, ideally, one perspective for the entire book." Listed among the rules Kay told the reporter he need not play by, so the 'does not have to obey' limb holds.
+
+### ROW 328 idx=338 V=VERIFIED_VERBATIM
+CLAIM: Wilt reports Kay naming the rule against writing a whole chapter from the viewpoint of a plot-irrelevant medieval courier.
+TW: "don't write an entire chapter from the viewpoint of a grizzled medieval courier who is largely irrelevant to the plot"
+NOTE: Raw CT page, closing item of the same rule list: "And definitely don't write an entire chapter from the viewpoint of a grizzled medieval courier who is largely irrelevant to the plot." Quote verbatim; the 'plot-irrelevant' limb is the page's own 'largely irrelevant to the plot'.
+
+### ROW 329 idx=339 V=VERIFIED_VERBATIM
+CLAIM: Kay says simply that he trusts his readers.
+TW: "'I trust my readers,' he said simply."
+NOTE: Raw CT page, immediately after the one-line paragraph "Still, Kay has resisted.": "'I trust my readers,' he said simply. 'And at this stage, my readers—and I mean it when I say this is a gift—my readers let me get away with it.'" The claim's 'simply' is the page's own adverb.

@@ -3,13 +3,14 @@
  "name": "ai",
  "angle": null,
  "tag": "i631-645",
- "lines": 50,
+ "lines": 64,
  "firstTs": "2026-09-06T18:12:15.001Z",
- "lastTs": "2026-09-06T18:14:00.882Z",
+ "lastTs": "2026-09-06T18:15:53.988Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 11
+  "Bash": 13,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML",
@@ -17,13 +18,13 @@
   "https://www.nplusonemag.com/issue-44/essays/human_fallback/"
  ],
  "filesWritten": [],
- "lastAssistantText": "The New Yorker page came through in full. Now the PMC and n+1 pages.",
+ "lastAssistantText": "Checkpoint written and re-read back (15 claims, 15 verdicts). All three sources were reached as raw text on the first route — no summarizer, no Wayback fallback needed.",
  "run": "wf_bcc0efc7-47c",
  "agent": "a66baf0798a0067cf",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a66baf0798a0067cf.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i631-645.json",
-  "exists": false
+  "exists": true
  }
 }

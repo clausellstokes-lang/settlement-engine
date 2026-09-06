@@ -12608,6 +12608,644 @@
    "trueWording": "Action names {the Attack action, the Dash action}",
    "note": "Quote verbatim p.6 in the 'Terms to Capitalize' list. Every one of the eight categories the claim names is on that list: Ability scores {Strength, Intelligence}; Action names; Class features {Sneak Attack, Rage}; Feats {Loremaster}; Languages {Common, Dwarvish, Elvish}; Planes of existence {the Abyss, the Nine Hells}; Skills {Arcana, Perception}; Traits in races and monsters {Aquatic, Keen Senses}. Scoped on page to the RPG: 'In the RPG, certain terms receive special typographic treatment.'",
    "fromFile": "verdicts-dnd-i259-273.json"
+  },
+  "274": {
+   "index": 274,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Terms to Italicize: Artifacts, Magic items, Spells {magic missile}",
+   "note": "Quote exact on p.6 under 'Terms to Italicize' (artifacts, magic items, spells all listed). The second limb sits one page later, p.7: 'The italicized terms are treated as titles... Don't confuse one of these titles with an effect it creates (see Chicago 8.174). For example, the wall of fire spell produces a wall of fire, not a wall of fire (the latter would imply an infinite loop).' Both limbs supported; only the page cite (p.6) is narrow for the second limb.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "275": {
+   "index": 275,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bold only first appearance; no text between number and stat block name",
+   "note": "Quote exact on p.6. Both limbs explicit there: 'Set a monster's name in bold only the first time it appears in an encounter area or other subsection' and 'Make sure no text gets between the number of monsters appearing and the name of the stat block.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "276": {
+   "index": 276,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Numerals for points, damage, game durations, tactical distances",
+   "note": "Quote exact on p.7 under 'Numerals in Rules Text'. Every limb explicit: 'Use numerals for points, scores, damage expressions, and any game trait with a numerical value'; 'units of time that quantify the duration of a game effect'; 'units of distance that quantify the size or extent of game effects' plus 'dimensions and distances... on a tactical scale'. The narrative counterexamples are the guide's own: 'the characters slept for six hours' and 'The two cities are fifty miles apart.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "277": {
+   "index": 277,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Verb Usage list: cast, take damage, make a saving throw, finish a rest",
+   "note": "Quote exact on p.7. The 'Verb Usage' list carries all five pairings: 'You cast a spell.', 'You take damage.', 'You make a saving throw, and it succeeds or fails.', 'You finish a short or long rest.', 'You score a critical hit.' (guide's rest wording is 'a short or long rest').",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "278": {
+   "index": 278,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Succeed on a DC 15 Strength check, not make one, unless outcomes follow",
+   "note": "Quote exact on p.7 under 'Making a Roll vs. Succeeding on One'. The unless-clause is the guide's own: \"Don't write, 'You must make a DC 15 Strength check...' unless that sentence is immediately followed by a description of what happens on a success or failure.\" Claim drops the ability name (Strength) but adds nothing.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "279": {
+   "index": 279,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sparingly, preferably only in a stat block; 4E sense abandoned",
+   "note": "Quote exact on p.7 under 'Saving Throws'. Both limbs explicit: 'use it sparingly, preferably only in a stat block or when preceded by \"saving throw\"' and 'In 4E, we used \"save\" as a synonym for \"successful saving throw.\" We have abandoned that practice.' The claim omits the second permitted context (when preceded by 'saving throw'), which narrows rather than overstates.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "280": {
+   "index": 280,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Die-number sense abandoned; result = roll plus modifiers; total preferred",
+   "note": "Quote exact on p.8 under '\"Result\" and Die Rolls'. All three limbs: 'In 3E and 4E, the word \"result\" was sometimes used as a synonym for \"the number rolled on a die.\" We have abandoned that practice'; '\"Result\" can legitimately refer to the sum of a die roll and any modifiers'; 'We often prefer the word \"total\" in such a context.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "281": {
+   "index": 281,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Magic for objects; magical used more often for other things; never magical item",
+   "note": "Quote exact on p.8. Limbs 1 and 3 are verbatim rules ('a magic item, a magic sword, a magic trap'; 'should never be \"magical item\"'). Limb 2 is a preference, not an absolute, in the source: 'The adjective can be used for other things, but we use \"magical\" more often than \"magic\" for them' — the claim's clean split states the guide's default correctly but drops the 'more often' hedge.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "282": {
+   "index": 282,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Avoid points of damage: write 10 fire damage, not 10 points of fire damage",
+   "note": "Quote exact on p.8 under 'Points of Damage'. The guide's example is the claim verbatim: 'write, \"The spell deals 10 fire damage,\" not \"The spell deals 10 points of fire damage.\"' Claim's 'never' hardens the heading verb 'Avoid', but the worked example is a flat write-X-not-Y.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "283": {
+   "index": 283,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We like to keep the die expression with the damage type",
+   "note": "Quote exact on p.8 under 'Extra Damage'. Rationale limb explicit: 'We write \"an extra 1d4 fire damage,\" not \"1d4 extra fire damage.\" We like to keep the die expression with the damage type.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "284": {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Proficient in a skill/language/activity; with a tool/weapon/armor",
+   "note": "Quote exact on p.8 under 'Proficiency'. Both bullets match limb for limb: 'proficient... in a skill, language, or other activity that is learnable and repeatable' and 'proficient... with a tool, weapon, type of armor, or other object', with the example 'proficient in Elvish and Arcana... proficient with longswords and heavy armor.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "285": {
+   "index": 285,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Noun not verb; breakable in an informal context such as a blog",
+   "note": "Quote exact on p.8 under '\"Dungeon Master\" Isn't a Verb'. The exception in the source is broader than the claim's: 'This rule can be broken in an informal context, such as in a blog or a web article that has a conversational tone' — informal context generally, with blog/web article as examples. The claim is stricter than the guide, not unsupported.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "286": {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Week is ten days in the Realms, a tenday; use days, years allowed",
+   "note": "Quote exact on p.8 under 'Avoid \"Week\" and \"Month\"'. Every limb: 'The lengths of weeks and months vary in different D&D worlds. A week is ten days long in the Forgotten Realms, for instance, and is called a tenday'; \"don't express durations or other lengths of time in weeks or months when you're writing rules\"; 'The length of the year varies as well, but you may use years for durations and the like.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "287": {
+   "index": 287,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Beware human for mortal; be cautious with humanoid, a creature type",
+   "note": "Quote exact on p.8 under 'Misusing \"Human\" and \"Humanoid\"'. Second limb explicit: 'be cautious when using the word \"humanoid,\" given the fact that it refers to a creature type. For example, a giant has humanlike features, but it isn't a humanoid in the game.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "288": {
+   "index": 288,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Word list: dwarves (not dwarfs), mithral (not mithril), staffs, war band",
+   "note": "Quote exact on p.9. Every listed item found in the same word list on p.9: 'dwarves (not dwarfs)', 'mithral (not mithril)', 'staffs', 'war band (not warband)', 'drow (singular and plural)', 'kenku (singular and plural)', 'yuan-ti (singular and plural)'.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  },
+  "289": {
+   "index": 289,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "goodsir (a form of address, not capped)",
+   "note": "Raw PDF text extracted (pdfminer + pypdf). p.9 'Forgotten Realms Terms' list carries verbatim 'Goodman/Goodwoman (a title or form of address, usu. capped)', 'godsforsaken (established in the Realms...)', 'goodsir (a form of address, not capped)'; the list continues on p.10 with 'the Realms (should be preceded by “the Forgotten Realms”)'. All four limbs supported. Only hedge: source says 'usu. capped', claim says 'capped'.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "290": {
+   "index": 290,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "godsforsaken (established in the Realms, but not necessary in other polytheistic settings; “godforsaken” has no necessary connection to monotheism)",
+   "note": "Quote fragment appears word for word on p.9 of the v1.08a PDF; every limb of the claim (established Realms form, not necessary elsewhere, godforsaken has no necessary monotheistic connection) is the source's own wording.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "291": {
+   "index": 291,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "use “group,” “band,” “company,” or, especially, “party.”",
+   "note": "p.9 'Adventuring Parties' sidebar, verbatim: 'The word “fellowship” has strong connections with The Lord of the Rings and doesn’t represent the typical D&D adventuring party well... D&D adventuring companies are often fractious or more mercenary than the word “fellowship” implies. In most in-world contexts and all other contexts, use “group,” “band,” “company,” or, especially, “party.”' All three limbs (Tolkien association, fractious/mercenary, four preferred words) supported.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "292": {
+   "index": 292,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "NPC nonplayer character",
+   "note": "pypdf page-10 reconstruction gives the table row verbatim: 'HD Hit Die/Dice \\n hp hit points \\n NPC nonplayer character'. Every abbreviation named in the claim is present in the p.10 Abbreviations tables: PH, DMG, MM (Brand/Product), gp (Coin), d100 (Die), AC, DC, DM, XP, HD, hp, NPC (Other Term).",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "293": {
+   "index": 293,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Don’t use “they” or “their” as singular pronouns, except in an informal context like dialogue.",
+   "note": "v1.04a PDF confirmed (footer 'Version 1.04a ©2013 Wizards of the Coast'); quote is verbatim on p.2 under 'Achieving Gender Neutrality'. Both limbs (ban; informal-context/dialogue exception) supported.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "294": {
+   "index": 294,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We also assume that our readership includes both men and women.",
+   "note": "Quote verbatim on p.2 of v1.04a. The second limb checks out against v1.08a: the 2019 guide has zero occurrences of 'readership' and its Gender section instead reads 'We don’t assume that our readers are of a particular gender identity.' Note the claim's inline rendering 'we don’t assume a gender identity' is a compression, not the 2019 wording.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "295": {
+   "index": 295,
+   "verdict": "PARTIAL",
+   "trueWording": "Five of the six are new headings; 'Bulleted Lists' renames v1.04a's 'Vertical Lists'.",
+   "note": "Both raw texts extracted and grepped. Heading-string counts: Gender-Specific Suffixes 0/2, Headings 0/4, Sidebars 0/3, Bulleted Lists 0/1, Appendix References 0/1, Adventuring Parties 0/1 (2013/2019). v1.04a's full heading roster was enumerated and contains none of the six strings; its only 'sidebar'/'heading' mentions are passing references inside 'Subsection/Table References' and 'Inline Subheads', and it has zero occurrences of 'appendix', 'appendices', 'suffix' or 'fellowship'. So five limbs are genuinely new sections; the sixth is a rename, which the claim's word 'Sections' over-states even though its parenthetical scopes verification to heading presence. No quote field, so VERBATIM is inapplicable in any case.",
+   "unsupportedLimb": "“Bulleted Lists” as a section absent from v1.04a — v1.04a has “Vertical Lists” covering the same ground (complete-sentence lead-in + colon, capitalized items, closing punctuation only for complete sentences); it is a rename, not a new section.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "296": {
+   "index": 296,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "creator Kim Mohan; lastModifiedBy 'Bauer, Judy'; modified 2021-07-06; Company Wizards of the Coast.",
+   "note": "Zip fetched (HTTP 200, 1,624,152 bytes) and expanded; 'Dungeoncraft Pack/DnD House Style Guide.docx' present, zip entry dated 12-04-2023 matching the pack URL. docProps/core.xml verbatim: <dc:creator>Kim Mohan</dc:creator>, <cp:lastModifiedBy>Bauer, Judy</cp:lastModifiedBy>, <dcterms:created>2016-03-07T20:43:00Z</dcterms:created>, <dcterms:modified>2021-07-06T18:09:00Z</dcterms:modified>; docProps/app.xml <Company>Wizards of the Coast</Company>. 2021-07-06 postdates the v1.08a PDF (©2018, 'updated January 2019'). Empty quote field, so graded on substance.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "297": {
+   "index": 297,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "merriam-webster.com",
+   "note": "docx body line 5, in the two-primary-resources list: 'The Chicago Manual of Style, 17th edition / merriam-webster.com'. The contrast limb holds: the docx has zero occurrences of 'Collegiate', while v1.08a p.1 reads 'Merriam-Webster’s Collegiate Dictionary, 11th edition'.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "298": {
+   "index": 298,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we can write “dwarf man” or “gnome woman.”",
+   "note": "docx 'Gender and Fantasy Races': '“Man,” “woman,” and their plurals are fine for describing the gender of people. For example, we can write “dwarf man” or “gnome woman.”' The reversal limb is confirmed against v1.08a p.2, which reads 'reserved for describing humans only. For example, we write “male dwarf,” not “dwarf man” or “man dwarf.”' — the exact phrase the docx now permits.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "299": {
+   "index": 299,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you must ensure that the pronoun’s antecedent is clear",
+   "note": "docx: 'We allow the use of “they,” “their,” “them,” and “themself” when referring to a person whose gender is unknown. But you must ensure that the pronoun’s antecedent is clear if more than one person appears in the context.' All four pronouns present; docx has zero occurrences of 'abuse this liberty', which v1.08a carries ('but don’t abuse this liberty. Rely on this device only when you have no other reasonable or pleasing alternative').",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "300": {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In rules text, use “it.”",
+   "note": "docx 'Pronoun Preference' — 'Short Version: In running text, use a person’s preferred pronoun: he, she, or they. Whatever pronoun you use, ensure that its antecedent is clear. In rules text, use “it.”' Both limbs verbatim.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "301": {
+   "index": 301,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A beholder never keeps its promises.",
+   "note": "docx 'Pronouns for Generic Creatures', descriptive-text bullets: 'Use they/them pronouns for Humanoids and other sapient creatures that have gender identity, but when we don’t know their gender identity...'; 'Use “it” otherwise (animals, cosmic horrors, extraplanar creatures, etc.)'; and under '“They/them” in Descriptive Text' — 'But Also… vampires (Undead that retain their identity)'. The quote is the closing example under '“It” in Descriptive Text'. Every limb, vampires included, supported.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "302": {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If using they/them pronouns would be ambiguous, reword to avoid using pronouns.",
+   "note": "Quote verbatim in the docx. The plural limb is supported twice: the 'Avoid Ambiguity' example offers 'OR “Merfolk attack elves on sight.”', and 'Sidestep Edge Cases' gives 'Blorvents are friendly, but they rust easily. (switching to plural to avoid choosing between “they” and “it”)'. Worth noting the first-listed cure is repeating the noun ('the merfolk immediately attacks'), with the plural as the alternative.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "303": {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Such exceptions should be rare.",
+   "note": "docx 'Limited Exceptions': 'On occasion, we might make exceptions to the guidelines above to achieve a specific effect. For example, characters might use gendered pronouns to talk about an animated doll, or we might use “it” to emphasize the inhumanity of a horrible monster (example). Such exceptions should be rare.' The word 'sapient' is not literally used but is entailed — an 'it' is an exception only for a creature the guidelines above would otherwise give they/them.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  },
+  "304": {
+   "index": 304,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He/Him: Baphomet, Strahd; She/Her: Lolth, Tasha",
+   "note": "Raw docx (DnD House Style Guide.docx, sha256 5bbfff1c…) extracted from the pack ZIP. Under 'Pronouns for Specific Individuals': 'For a character in canon (famous hero, demon lord, powerful celestial, etc.), use the established pronouns for their identity, regardless of their species or type.' followed verbatim by 'He/Him: Baphomet, Strahd' and 'She/Her: Lolth, Tasha'. Every limb supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "305": {
+   "index": 305,
+   "verdict": "PARTIAL",
+   "trueWording": "Creature type (Humanoid, Fey, Undead)",
+   "note": "Quote is verbatim in the 'Terms to Capitalize' inventory of the 2021 docx (docProps/core.xml: created Kim Mohan 2016-03-07, lastModifiedBy 'Bauer, Judy', modified 2021-07-06 — source attribution confirmed). But the docx makes no comparison to any 2019 PDF, and the ZIP contains no 2019 style-guide PDF (only DnD Standards.pdf, PDF title 'D&D Standards', CreationDate D:20200716). The 'adds … a convention the 2019 PDF lacks' limb is unverifiable from this URL.",
+   "unsupportedLimb": "that this is an addition the 2019 PDF lacks",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "306": {
+   "index": 306,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bold stat block names … this indicates the term is a game object",
+   "note": "Verbatim: 'Bold stat block names in running text to indicate what stat block to use for an encounter—this indicates the term is a game object.' The facing examples list 'Roman' cases including 'Strahd likes to make vampire spawn in his free time.' Both limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "307": {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The word “attack” confuses many of our readers",
+   "note": "Section 'Attack vs. Attack Roll': 'When an effect is triggered by an attack roll hitting or missing, use the term “attack roll” in the effect’s text, not just “attack.” The word “attack” confuses many of our readers, who often read it with its English meaning instead of as a rules term.' Fireball limb also explicit: 'there are readers who think fireball hits targets'.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "308": {
+   "index": 308,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "use one of our official areas of effect: cone, cube, cylinder, line, or sphere",
+   "note": "Section '“Within X Feet”': 'that literally means the effect reaches anything within that area, even if there’s total cover in the way. If you want to limit the reach of such an effect, require that the target be able to see or hear the effect’s source or that the target can’t be behind total cover. Alternatively, use one of our official areas of effect…'. All limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "309": {
+   "index": 309,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When referring to a monster’s stat block, call it a stat block",
+   "note": "Section '“Statistics” vs. “Stat Block”': 'Don’t call it the creature’s statistics. Writing “game statistics” is acceptable if you’re referring to the monster’s crunch, rather than its story material, but use “stat block” when you mean that box of game information about the monster.' Both limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "310": {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We use letter-by-letter alphabetization. When comparing, ignore spaces",
+   "note": "Section 'Alphabetical Organization': 'lists, spells, stat blocks in a bestiary, etc. should all be organized alphabetically. We use letter-by-letter alphabetization. When comparing, ignore spaces…' plus 'Microsoft Word Warning. Microsoft Word’s handy alphabetization tool (Table < Sort) sorts paragraphs word-by-word, NOT letter-by-letter!' All three limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "311": {
+   "index": 311,
+   "verdict": "PARTIAL",
+   "trueWording": "insectile (not insectoid); blood red (contra Merriam-Websters)",
+   "note": "All eight items are verbatim in the docx word list: 'aasimar (singular and plural)', 'blood red (contra Merriam-Websters; we’re matching CMOS 7.89)', 'cyclopes (plural of cyclops)', 'gold (made of gold)' / 'golden (the color of gold)', 'insectile (not insectoid)', 'parlay (exploit or transform)' / 'parley (confer or negotiate)', 'tabaxi (singular and plural)', 'tenant' / 'tenet'. The 'adds' limb — that the 2019 PDF lacked them — is nowhere in this document and no 2019 style-guide PDF is in the pack.",
+   "unsupportedLimb": "that these entries are 2021 additions relative to the 2019 PDF",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "312": {
+   "index": 312,
+   "verdict": "PARTIAL",
+   "trueWording": "Anyone who touches the orb regains 3 hit points.",
+   "note": "Quote is verbatim under 'Numerals in Rules Text', lowercase 'hit points'; the abbreviations table likewise reads 'hp / hit points' lowercase, so the first limb is well supported. The comparison to the 2024 rules glossary — and therefore the conclusion that the 2021 guide 'predates 2024 house style' — is not on this page; the document is silent on 2024.",
+   "unsupportedLimb": "that the 2024 rules glossary capitalizes “Hit Points”",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "313": {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boxed text should be used very sparingly—only when a particularly important event truly calls for it",
+   "note": "Raw docx (DC Adventure Format v1.3.docx, sha256 73965593…; core.xml: creator Claire Hoffman, lastModifiedBy Ma'at Crook, created 2023-11-07, modified 2023-11-16 — attribution confirmed). Boxed-text instruction continues 'Don’t use it to describe rooms or normalcy.' The document is the D&D Adventurers League (Dungeoncraft, code '$$-DC-$$$-$$') adventure template, so the 'AL adventure format' framing holds.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "314": {
+   "index": 314,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no more than one or two brief and descriptive sentences",
+   "note": "Same boxed-text instruction: 'Additionally, it should be short and to the point, no more than one or two brief and descriptive sentences.'",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "315": {
+   "index": 315,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the boxed text should only provide a narrative for exciting events",
+   "note": "'The body of the counter [sic — encounter] should be found in the headings below; the boxed text should only provide a narrative for exciting events.' Both limbs supported; note the source's own typo 'counter' for 'encounter'.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "316": {
+   "index": 316,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Go away!” the puppet snaps.",
+   "note": "The only narrative boxed text in the template (area 'A. The Hidden Room') reads: 'A greasy, irate-looking dwarf in a stained leather apron with a bulging pocket stands between the contraptions. He clutches a handaxe in one hand and has a sock puppet on the other. “Go away!” the puppet snaps.' — exactly two descriptive sentences plus the one-line spoken tag, with concrete nouns (apron, pocket, handaxe, sock puppet).",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "317": {
+   "index": 317,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Keywords should be CAPITALIZED and BOLDED the FIRST time they appear in the Background",
+   "note": "In the 'Background' section: 'Keywords should be CAPITALIZED and BOLDED the FIRST time they appear in the Background. This alerts the DM to the adventure’s more important aspects.' All limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "318": {
+   "index": 318,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "doesn’t bloat the background with backstory that isn’t ultimately important",
+   "note": "'There’s a fine line between two little [sic] background and too much exposition. Try to stay on the side of the line that doesn’t bloat the background with backstory that isn’t ultimately important.' Both limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  },
+  "319": {
+   "index": 319,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each part gets one-to-two sentences; \"This is Story Objective A.\"",
+   "note": "Overview template, DC Adventure Format v1.3 p.'Adventure Primer': Parts 1-4 each read \"Each part of the adventure should have its own entry of one to two sentences describing the part. This is Story Objective A/B/C/D.\" A margin comment adds \"Each part should have a Story Objective entry that describes the objective as a single sentence.\" Quote verbatim; both limbs supported.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "320": {
+   "index": 320,
+   "verdict": "PARTIAL",
+   "trueWording": "NPC Snapshot \"is titled accordingly\"; examples \"Stoic Guardian\", \"Ruthless Conqueror\"",
+   "note": "Quote verbatim. The NPC block is exactly as claimed: an opening paragraph giving \"a brief glimpse into the NPC's backstory and physical appearance,\" then \"What They Want. This single-sentence paragraph...\" and \"NPC Snapshot. This single-sentence paragraph... and is titled accordingly.\" The document states only that the Snapshot is retitled to suit the NPC; it never prescribes a length. Both worked examples happen to be two words, so \"two-word\" is induced from the examples, not a stated rule.",
+   "unsupportedLimb": "the epithet is specifically two words - the page says only \"titled accordingly\" and gives two examples that happen to be two words",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "321": {
+   "index": 321,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Area Information entries: Dimensions and Terrain, Lighting, Sounds and Smells",
+   "note": "Quote \"Dimensions and Terrain.\" appears twice - in the worked example under an Area Information heading (followed by Lighting) and in the margin comment \"Area Information breaks down the area itself. There are usually three standard entries here: Dimensions and Terrain... Lighting... Sounds and Smells.\" Inline-subhead limb supported: \"If under a heading 3, use inline subheads without the Area/Creature Information headings.\"",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "322": {
+   "index": 322,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Creature names and keyed objects such as traps or secret doors are bold",
+   "note": "Quote \"Use boldface judiciously.\" verbatim, in: \"names of creatures or other significant game objects such as traps or secret doors are in bold. Use boldface judiciously. With the exception of creature names, it usually applies to important objects that are keyed on the map.\" Every limb supported, including the keyed-object restriction.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "323": {
+   "index": 323,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sidebar gives background to help run the location; Playing the Pillars excepted",
+   "note": "Quote verbatim: \"It should provide the DM with background information that may help run the location or event. With the exception of Playing the Pillars (see example, below), it shouldn't provide directly applicable information.\" The page's prohibition is on directly applicable *information*, which is broader than the claim's \"rules content\" and so entails it.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "324": {
+   "index": 324,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Playing the Pillars. Suggestions for this encounter:\" then Combat, Exploration, Social",
+   "note": "Quote verbatim in the worked encounter, followed by Combat / Exploration / Social entries. The optionality in \"can carry\" is supported by the margin comment \"If you include this entry, each pillar of play should be represented\" and \"99% of the time, these entries should be under a Creature Information heading.\"",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "325": {
+   "index": 325,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Cover: \"CONTENT WARNING: $\"; credits: \"Sensitivity Lead: TBD\"",
+   "note": "Quote verbatim. The cover block runs Adventure Title / Subtitle / description / \"A Two/Four -Hour Adventure for Tier $ Characters.\" / \"CONTENT WARNING: $\", then the Credits list containing \"Sensitivity Lead: TBD\" among Writer, Editor, Graphic Design. File metadata confirms the 2023 dating: created 2023-11-07 by Claire Hoffman, last modified 2023-11-16 by Ma'at Crook.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "326": {
+   "index": 326,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Consult Chicago 17th; preferred dictionary Merriam-Webster's Collegiate 11th",
+   "note": "No quote was supplied with the claim, so the verbatim grade cannot apply; the substance is stated almost word for word on the first page: \"Consult The Chicago Manual of Style (17th edition) if you have questions about punctuation, grammar, and other matters of writing style. Our preferred dictionary is Merriam-Webster's Collegiate Dictionary (11th edition).\"",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "327": {
+   "index": 327,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"This Boxed Text style is used only for text that a DM is meant to read to the players.\"",
+   "note": "Quote verbatim in the style-demonstration line of the .dotx. \"Solely\" matches the page's \"only\". Metadata confirms the source: dc:creator \"Crawford, Jeremy\", created 2019-09-30, modified 2019-10-08.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "328": {
+   "index": 328,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Unless excerpting a book where the quotes appear in the original",
+   "note": "Quote verbatim: \"An epigraph shouldn't be enclosed in quotation marks, unless you're excerpting a passage from a book and the quotes appear in the original.\" Both limbs supported.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "329": {
+   "index": 329,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If it must immediately follow something, don't make it a sidebar; integrate it into the body copy.\"",
+   "note": "Quote verbatim under Sidebar Body: \"ask yourself whether the sidebar must immediately follow a section of text or whether it can go anywhere on a spread. If it must immediately follow something, don't make it a sidebar; integrate it into the body copy.\" Both limbs supported.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "330": {
+   "index": 330,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Profanity. Don't use profanity.\" plus \"not without approval\"",
+   "note": "Quote verbatim in the standards list. The approval carve-out limb is supported by the RATING section: \"D&D products can violate certain standards, but not without approval,\" and \"PG-rated content allows things we normally don't, such as nudity and profanity.\"",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "331": {
+   "index": 331,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "G-rated, slides toward PG; Rick & Morty PG-13 needed approval",
+   "note": "Quote verbatim. Every limb on the page: \"When it deals with mature themes or features scenes of graphic violence, it slides toward being a PG-rated experience\" and \"The Rick & Morty boxed set, which contains profanity and glamorizes substance abuse, is an example of just such a product. It is rated PG-13,\" following \"can violate certain standards, but not without approval.\"",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "332": {
+   "index": 332,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"...to all members of a particular people, culture, religion, or sexuality.\"",
+   "note": "Quote verbatim under the Stereotypes standard, which opens \"Avoid stereotypes.\" All four categories in the claim appear on the page.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "333": {
+   "index": 333,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Villains can be sympathetic, but their evil should be called out as awful and wrong. Avoid depicting evil heroes.\"",
+   "note": "Quote verbatim under Glamorization of Evil. Both limbs on the page, including the evil-heroes limb.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  },
+  "334": {
+   "index": 334,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Don't use real-world religions as analogs for evil religions in D&D.\"",
+   "note": "Raw PDF reached: zip downloaded from media.dndbeyond.com (200, application/zip, 1,624,152 bytes), unzipped, 'Dungeoncraft Pack/DnD Standards.pdf' text-extracted with pypdf. Quote appears word for word under the 'Religion.' bullet; header line reads '(c)2020 Wizards of the Coast LLC. Confidential information.' Source attribution (2020 Standards inside the 2023-12-04 Dungeoncraft pack) is exact.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "335": {
+   "index": 335,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 2: \"An adventure needs a credible threat\"",
+   "note": "Raw PDF fetched by curl (200, application/pdf, 745,871 bytes) and extracted with pypdf. Byline reads 'By Chris Perkins & Greg Bilsland'; numbered principle 2 carries the quote verbatim, and the same paragraph adds that antagonists 'should have logical goals that the heroes can uncover and thwart in the course of the adventure.' Every limb supported.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "336": {
+   "index": 336,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 4: \"An adventure is about the here and now.\"",
+   "note": "Quote is word for word at principle 4, p.1. The backstory limb is supported by the next sentence: 'A little bit of history might be needed to set things up, but the less of it, the better.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "337": {
+   "index": 337,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 7: concise text \"to ease the burden on the DM\"",
+   "note": "Principle 7 reads 'An adventure should strive to present information as concisely as possible, to ease the burden on the DM,' then names the exceptions deserving special attention: 'NPCs, dungeon dressings, and treasure hoards.' Both limbs supported.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "338": {
+   "index": 338,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 6: \"present information in a logical order\"",
+   "note": "Principle 6 carries the quoted fragment verbatim, plus 'so that a DM reading it for the first time isn't confused,' 'make sure that an NPC is properly introduced before casually mentioning the NPC by name,' and 'shouldn't conceal or bury important information.' All three limbs supported.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "339": {
+   "index": 339,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"features, mannerisms, and quirks\" the DM uses to roleplay",
+   "note": "The sentence straddles the page break: p.1 ends 'describing his or her distinctive physical' and p.2 opens 'features, mannerisms, and quirks (which the DM can then use to roleplay the NPC effectively).' The cited quote and page (p.2) are correct.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "340": {
+   "index": 340,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Cliches are okay, as long as the adventure can still surprise\"",
+   "note": "Principle 3 carries the quote verbatim and names all three tropes: 'dragons, orcs, and insane wizards in towers' and beginning 'in a tavern,' closing with 'try to put your own clever “spin” on it.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "341": {
+   "index": 341,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The player characters (PCs) are the heroes, not mere spectators\"",
+   "note": "Principle 1 carries the quote verbatim; the merchant limb is explicit: 'Gathering animal pelts for a lazy merchant might be a tolerable MMO quest, but it makes for an underwhelming D&D experience.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "342": {
+   "index": 342,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"players will feel “railroaded” by the plot\"",
+   "note": "Principle 5 carries the quote verbatim (curly quotes around railroaded, as cited). Both limbs supported: 'it needs to allow for more than one preset outcome' and 'the text needs to account for the possibility that the heroes might slay or capture the villain.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "343": {
+   "index": 343,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 9: \"An adventure needs to rise above the humdrum\"",
+   "note": "Quote verbatim at principle 9, p.2. The list limb is supported item by item: 'odd monster pairings, unusual terrain, environmental hazards, traps, unexpected reinforcements, red herrings, atypical monster tactics, ruses and other deceptions, NPCs with complex motives, and the occasional plot twist.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "344": {
+   "index": 344,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The more good D&D adventures you read, the easier it will be\"",
+   "note": "Quote verbatim on p.2. The novelist analogy is the preceding sentence: 'To write good novels, you need to read good novels... The same is true for adventures.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "345": {
+   "index": 345,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Don't decide in advance how the adventure should end.\"",
+   "note": "Under 'Additional Principles for Organized Play' / 'When writing adventures for the D&D Adventurers League,' item 4 reads 'Just because an adventure is only 2 hours or 4 hours doesn't mean it should be linear or have a pre-established outcome. Don't decide in advance how the adventure should end.' All limbs supported.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "346": {
+   "index": 346,
+   "verdict": "PARTIAL",
+   "trueWording": "\"The Chicago Manual of Style (16th edition) and the D&D House Style Guide\"",
+   "note": "The quotation is on the page verbatim, in the closing line. The comparative limb is not: the design guide never mentions a 17th edition or any other bundle document's edition, so the 'one edition behind' contrast and the 'not synchronized' inference are the verifier's, not the page's. Corroboration from a sibling file (not the cited page): 'DnD House Style Guide.docx' inside the same Dungeoncraft pack does open with 'Chicago Manual of Style, 17th edition', and 'DC Adventure Format v1.3.docx' also cites the 17th - so the substance is true, but it is sourced from other documents and the claim as written overreaches its cited page.",
+   "unsupportedLimb": "that 16th is one edition behind the House Style Guide's 17th, and that this shows the bundle's documents were not synchronized - neither statement appears on the cited page",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "347": {
+   "index": 347,
+   "verdict": "PARTIAL",
+   "trueWording": "\"For adventure format, refer to the Adventure Format Template.\"",
+   "note": "The claim carries no quote field. The page's final two sentences support the first two limbs: 'For rules on grammar and punctuation, please see The Chicago Manual of Style (16th edition) and the D&D House Style Guide. For adventure format, refer to the Adventure Format Template.' Nothing on the page says what the template contains. Corroboration from a sibling file (not the cited page): 'DC Adventure Format v1.3.docx' in the same pack does carry boxed-text rules ('Boxed text should be used very sparingly'), so the limb is true in fact but unsupported by the cited source. Note also that the copy of the design guide bundled in the Dungeoncraft pack ends at the House Style Guide sentence and omits the Adventure Format Template sentence entirely; only the cyborgsandmages URL version verified here contains it.",
+   "unsupportedLimb": "that the Adventure Format Template is where boxed-text rules live - the page never describes the template's contents",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "348": {
+   "index": 348,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"hopeful setting. The good guys will eventually win.\"",
+   "note": "Raw PDF fetched by curl (200, application/pdf, 965,749 bytes), 29 pages, extracted with pypdf. Page 1, under 'Tone': 'The Forgotten Realms is a hopeful setting. The good guys will eventually win. This hopeful tone sets the Forgotten Realms apart from settings like Greyhawk (which is cynical) and Dragonlance (which is a setting of romance and tragedy).' Quote verbatim; every limb supported.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  },
+  "349": {
+   "index": 349,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stories should leave the Realms as they found them.",
+   "note": "p.1 'Replace Your Divots': quote exact. All limbs on page — 'should not definitively destroy or irrevocably change locations, people, gods, planes, races as a whole, or other established elements of the setting or brand without special dispensation.' Only shading: guide says 'should', claim says 'must'; guide also allows high stakes provided 'there must always be the option of things being restored to order.'",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "350": {
+   "index": 350,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Art must represent the Realms' real range of skin tones.",
+   "note": "p.1-2 header exact. Section enumerates skin tones (sun elves bronze, wild elves dark brown, gold dwarves brown, strongheart halflings dusky) and earth analogs (Chult/Turmish black, Kara-Tur Asian, Calimshan Arab, Amn/Tethyr Spaniard), and the cosmopolitan-city limb is explicit: 'When you set something in Waterdeep, the most cosmopolitan city in the world, there absolutely should be humans from all over the Realms.' Artists limb supported by 'art has failed to consistently and appropriately represent the people of the Forgotten Realms.'",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "351": {
+   "index": 351,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Males and females depicted in equal measure; two exceptions.",
+   "note": "p.2 'Gender Roles': quote exact. 'males and females should be depicted in equal measure and doing all the same jobs in equal status'; cliche list names 'the damsel in distress, the sexy barmaid'; 'There are two exceptions: orcs and Northlanders.' Guide word is 'Avoid', not 'banned'; the two exceptions as elaborated concern gendered division of labour (orc females stay behind, Northlander women stay home), not licence to use the cliches.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "352": {
+   "index": 352,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Keep it PG for both sex and gore.",
+   "note": "'Keep it PG.' appears twice, exact: p.2 'Sex and Sexuality' bullet (romance covered — 'Depictions of sex and romance between characters should be rare') and p.2 'Violence and Gore' ('As a rule of thumb, keep it PG'). Gore carries a stated exception: 'Occasionally more gore will be called for... but ask before you take gore into the R-rated range.'",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "353": {
+   "index": 353,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "People use loose times; clock hours are called bells.",
+   "note": "p.11 'Keeping Time': quote exact — 'People are accustomed to loose times like “mid morning” or “nigh sunset.”' Bells limb explicit: 'If a local temple or civic structure has a clock, people refer to hours as “bells,” as in “I’ll meet you at seven bells.”' The not-o'clock limb is confirmed by the p.25 Banned Words entry 'o’clock (should be “bells” but most people don’t reference time so specifically)'.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "354": {
+   "index": 354,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tenday days are counted; no concept of the weekend.",
+   "note": "p.11 'Time and the Calendar': quote exact. 'days of the tenday are denoted by counting from the beginning of the tenday. For example, “first day,” “second day,” “third day,” and so on (or alternatively “one-day,” “two-day” etc.). There is no concept of the weekend as a special time when businesses close or people stop work.' Both limbs exact.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "355": {
+   "index": 355,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Banned Words list carries every term the claim names.",
+   "note": "p.25 'Banned Words' list verbatim: a.m.; coffee (should be “kaeth” or “kaethae”); money (should be “coin”); restaurant (should be “feasting hall,” or more formally as “skaethar”); week (should be “tenday”); high elf (refer to the Forgotten Realms subraces); hill dwarf (should be “shield dwarf”); hourglass (should be “sandglass”); mountain dwarf (should be “gold dwarf”); o’clock (should be “bells”...); p.m. The generic-subrace limb = the high elf / hill dwarf / mountain dwarf entries. Provenance note only: the cited quote 'tenday (never week)' is verbatim but sits in the alphabetical Terms list (T section, p.27), not in the p.25 Banned Words block, which reads 'week (should be “tenday”)'.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "356": {
+   "index": 356,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "godsforsaken (replaces Godforsaken)",
+   "note": "Forgotten Realms Terms, G section: 'godsforsaken (replaces Godforsaken)' — exact, capital G on the replaced word. Adjacent entry 'gold (not money)' corroborates claim 355's money/coin limb.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "357": {
+   "index": 357,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "goodsir not capped; Goodman/Goodwoman usually capped.",
+   "note": "Forgotten Realms Terms, G section, two consecutive entries: 'Goodman/Goodwoman (a title or form of address, usu. capped)' and 'goodsir (a form of address, not capped)'. Both limbs exact, including the 'usu.' hedge the claim renders as 'usually'.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "358": {
+   "index": 358,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Common is a pidgin-derived trade tongue, simpler and less expressive.",
+   "note": "p.14 'The Common Tongue': quote exact. 'Common grew from a kind of pidgin Chondathan... but it is far simpler and less expressive. Nuances of speech, naming, and phrasing are better conveyed in the older, more mature languages, since Common is little more than a trade language.' Accent limb tracks the regional tongues, not Common: 'Other languages might be used to inform an accent or provide a necessary language barrier' — stated for electronic games and film, where Common is assumed to be English.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "359": {
+   "index": 359,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Forgotten Realms Phrases' lists greetings and farewells.",
+   "note": "p.14 section 'Forgotten Realms Phrases' — 'Below are some phrases common to speah [sic] in the Forgotten Realms.' Quote exact: 'Well met. The most often used greeting, particularly between strangers of a different race or those of whom one is unsure.' Farewell limb exact: 'Until swords part. Warriors’ farewell throughout the Realms.' Also lists Well again, Olore, Aluve, Amarast, Alavairthae, and racial farewells.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "360": {
+   "index": 360,
+   "verdict": "PARTIAL",
+   "trueWording": "Don't explain everything by exposition, but do inform players.",
+   "unsupportedLimb": "'not use exposition to explain the world' — the guide's ban is on explaining EVERYTHING, and in the same breath it requires the opposite of the claim's blanket: 'but do inform the players about the world. Don’t assume they come to the IP with complete knowledge.'",
+   "note": "p.1, guideline 3: 'Stay experiential. Don’t attempt to use exposition to explain everything in the IP, but do inform the players about the world.' The two-word quote is exact and the experiential limb holds, but the claim drops both the 'everything' quantifier and the mandatory counter-clause, converting a calibrated instruction into a blanket prohibition the page contradicts.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "361": {
+   "index": 361,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mostly, monsters are for killing, and their stuff is for taking.",
+   "note": "p.2 'Monsters': quote exact. Exception limb explicit: 'They can also occasionally play non-combat roles opposing or aiding the players (the helpful kobold, the hobgoblin informant, the doppelganger spy), but such instances are out of character for D&D and require explanation.' Also 'Monsters should be the bulk of combat foes players face.'",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "362": {
+   "index": 362,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Must use the template; should know the D&D Style Guide.",
+   "note": "p.1, 'TECHNICAL INFORMATION': quote exact. Version limb exact — 'Effective Date: May 2025. Version 1.9c (updated June 23, 2025)'. Template limb is the strongest — 'You must use this template and follow the formatting standards as presented in the template.' Style guide limb is 'You should be familiar with the D&D Style Guide (also provided) as well'; the DMsGuild limb is worded as review, not familiarity — 'Please review the Wizards and the DMsGuild Content Guidelines.'",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  },
+  "363": {
+   "index": 363,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Adventures must use the template provided.",
+   "note": "Quote exact, in 'THE FINE PRINT' (p.8), corroborated on p.1 by 'You must use this template' and 'Your adventure must follow the template provided for layout'. Accessible-version limb exact, p.1 'Accessibility': 'The template must be one of your downloads, adjusted to use tags, bookmarks, alt text... Additionally, you may create a version that does not use the template, using fonts, sizing, formatting, and layout as advised by accessibility experts.' — so the non-template version is permitted alongside, not instead of, the template.",
+   "fromFile": "verdicts-dnd-i349-363.json"
   }
  }
 }

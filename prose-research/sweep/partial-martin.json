@@ -546,6 +546,30 @@
   }
  },
  {
+  "index": 955,
+  "feature": "stylometry",
+  "claim": "Blatt states that the tables of clichés and favourite words in his book cover the fifty authors he has been using as examples throughout it.",
+  "source": "Ben Blatt, Nabokov's Favorite Word Is Mauve (2017), page 172",
+  "url": "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=%22fifty+authors%22",
+  "quote": "fifty authors I've been using as examples throughout this book",
+  "page": "p. 172",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2017",
+  "routeHint": "Google Books SearchWithinVolume2, query 'fifty authors' — snippet-only",
+  "registerHint": "none",
+  "confidence": "medium — snippet-only route",
+  "angle": "measurement",
+  "verdict": {
+   "index": 955,
+   "verdict": "PARTIAL",
+   "trueWording": "p.172: fifty example authors PLUS \"fifty more authors\"; clichés not mentioned",
+   "unsupportedLimb": "that the quoted sentence covers the clichés table, and that the favourite-words table stops at the fifty - p. 172's very next sentence adds \"fifty more authors of popular and critical acclaim\", so that table covers a hundred",
+   "note": "The quotation is verbatim on p. 172: \"...top three 'cinnamon words' and top three 'nod words' for each of the fifty authors I've been using as examples throughout this book. To add to the fun, I've also included fifty more authors of popular and critical acclaim.\" So the sentence is about the favourite-words (cinnamon/nod) table only - clichés are a different table on p. 158, worded differently (\"fifty authors I use as examples, Number of Clichés per 100,000 Words\"). The claim fuses two pages into one sentence and drops the second fifty. Route: books.google.com SearchWithinVolume2, the exact URL the claim names, fetched raw with a browser UA, HTTP 200 - Google Books' verbatim full-text index of the book, not a page image and not a third-party search snippet.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  }
+ },
+ {
   "index": 981,
   "feature": "adjective and adverb discipline",
   "claim": "The scraped prosecraft figures put the ly-adverb rate of A Dance with Dragons at 0.4% of the text.",
@@ -589,6 +613,29 @@
    "note": "Row 11522 is verbatim: 'A Game of Thrones,George R. R. Martin,292795.0,63.7,7.26,2.44,0.77,1.67'. The ly-adverbs value is exactly 0.77 and the internal check holds (0.77 + 1.67 = 2.44, the all-adverbs column). Same single defect as 981: the page states no unit for the column, so '% of the text' is not supported by the raw source even though the figure is exact.",
    "unsupportedLimb": "the '% of the text' unit - the CSV column is unitless",
    "fromFile": "verdicts-martin-i962-983.json"
+  }
+ },
+ {
+  "index": 985,
+  "feature": "register modulation",
+  "claim": "The Wild Cards novel Joker Moon, credited to Martin in the dataset, carries a ly-adverb rate of 1.28% and a vividness of 46.89, both far from the Westeros novels' figures.",
+  "source": "prosecraft.io library figures as scraped in the Genre_Prediction dataset",
+  "url": "https://raw.githubusercontent.com/MsEM11/Genre_Prediction/HEAD/CSVs/7_final_books.csv",
+  "quote": "Joker Moon,George R. R. Martin,171682.0,46.89,8.21,3.22,1.28,1.94",
+  "page": "row 20828",
+  "kind": "measurement",
+  "polarity": "applies",
+  "routeHint": "grep the CSV for 'Joker Moon'; Joker Moon is a Wild Cards mosaic novel edited by Martin, and the dataset credits it to him alone",
+  "registerHint": "none",
+  "confidence": "low — third-party scrape, and the dataset's author field does not distinguish Martin as editor from Martin as sole author",
+  "angle": "measurement",
+  "verdict": {
+   "index": 985,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'both far from the Westeros novels' figures' fails for vividness: the same file lists Fire and Blood (row 21259) at vividness 44.0, closer to Joker Moon's 46.89 than to the ASOIAF novels' 62.65-69.08",
+   "trueWording": "Joker Moon 46.89 vividness, 1.28 ly-adverbs, credited G.R.R. Martin",
+   "note": "Quoted row appears verbatim as a substring of line 20830 ('20828,Joker Moon,George R. R. Martin,171682.0,46.89,8.21,3.22,1.28,1.94,...'). Author field is 'George R. R. Martin' so 'credited to Martin in the dataset' is exact. The ly-adverb limb is strongly supported: 1.28 against A Game of Thrones 0.77, A Clash of Kings 0.68, A Storm of Swords 0.6, A Feast for Crows 0.47, A Dance With Dragons 0.4. The vividness limb holds only if 'the Westeros novels' means the five main-series books; the same page's Fire and Blood row (vividness 44.0) sits nearer Joker Moon's 46.89 than any ASOIAF novel does, so the 'both' is not safe as written.",
+   "fromFile": "verdicts-martin-i984-989.json"
   }
  }
 ]

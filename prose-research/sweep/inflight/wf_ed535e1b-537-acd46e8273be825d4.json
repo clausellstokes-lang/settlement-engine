@@ -3,13 +3,14 @@
  "name": "martin",
  "angle": null,
  "tag": "i945-961",
- "lines": 72,
+ "lines": 82,
  "firstTs": "2026-09-06T18:09:54.150Z",
- "lastTs": "2026-09-06T18:14:16.306Z",
+ "lastTs": "2026-09-06T18:15:54.812Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 16
+  "Bash": 18,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
@@ -29,9 +30,9 @@
  "run": "wf_ed535e1b-537",
  "agent": "acd46e8273be825d4",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_ed535e1b-537/agent-acd46e8273be825d4.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i945-961.json",
-  "exists": false
+  "exists": true
  }
 }

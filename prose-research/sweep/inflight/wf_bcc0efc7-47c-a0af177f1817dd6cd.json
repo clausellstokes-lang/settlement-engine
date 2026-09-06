@@ -3,13 +3,14 @@
  "name": "ai",
  "angle": null,
  "tag": "i585-600",
- "lines": 60,
+ "lines": 83,
  "firstTs": "2026-09-06T18:12:15.000Z",
- "lastTs": "2026-09-06T18:14:06.083Z",
+ "lastTs": "2026-09-06T18:16:13.788Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 15
+  "Bash": 19,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.npr.org/2023/02/24/1159286436/rise-of-ai-chatbot-programs-has-led-to-flood-of-fake-submissions-to-sci-fi-magazi",
@@ -17,16 +18,17 @@
   "https://www.nature.com/articles/s41598-024-76900-1",
   "https://help.drivethrurpg.com/hc/en-us/articles/26794784634007-Customer-Experience-with-AI-Generated-Content-Within-Titles",
   "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
-  "https://web.archive.org/web/20251005160536id_/https://help.drivethrurpg.com/hc/en-us/articles/26794784634007-Customer-Experience-with-AI-Generated-Content-Within-Titles"
+  "https://web.archive.org/web/20251005160536id_/https://help.drivethrurpg.com/hc/en-us/articles/26794784634007-Customer-Experience-with-AI-Generated-Content-Within-Titles",
+  "https://web.archive.org/web/20251005160536id_/..."
  ],
  "filesWritten": [],
- "lastAssistantText": "Now the EN World thread and the blocked DriveThruRPG page.",
+ "lastAssistantText": "EN World by direct curl with a browser UA; DriveThruRPG's help centre returned a Cloudflare 403 and was recovered through the Wayback raw capture (`.../20251005160536id_/...`). Every one of the 15 quotations was confirmed by exact substring match against the extracted page text, not by a summarizer.",
  "run": "wf_bcc0efc7-47c",
  "agent": "a0af177f1817dd6cd",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a0af177f1817dd6cd.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i585-600.json",
-  "exists": false
+  "exists": true
  }
 }

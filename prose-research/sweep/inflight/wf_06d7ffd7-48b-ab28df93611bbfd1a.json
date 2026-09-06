@@ -1,0 +1,21 @@
+{
+ "role": "critic",
+ "name": "hobb",
+ "angle": null,
+ "tag": null,
+ "lines": 33,
+ "firstTs": "2026-09-06T18:17:47.911Z",
+ "lastTs": "2026-09-06T18:18:12.325Z",
+ "tools": {
+  "Bash": 4,
+  "Read": 5
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "",
+ "run": "wf_06d7ffd7-48b",
+ "agent": "ab28df93611bbfd1a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_06d7ffd7-48b/agent-ab28df93611bbfd1a.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

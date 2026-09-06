@@ -4150,5 +4150,1399 @@
    "note": "Quote verbatim p.6 in the 'Terms to Capitalize' list. Every one of the eight categories the claim names is on that list: Ability scores {Strength, Intelligence}; Action names; Class features {Sneak Attack, Rage}; Feats {Loremaster}; Languages {Common, Dwarvish, Elvish}; Planes of existence {the Abyss, the Nine Hells}; Skills {Arcana, Perception}; Traits in races and monsters {Aquatic, Keen Senses}. Scoped on page to the RPG: 'In the RPG, certain terms receive special typographic treatment.'",
    "fromFile": "verdicts-dnd-i259-273.json"
   }
+ },
+ {
+  "index": 274,
+  "feature": "game-term typography: italics",
+  "claim": "Spells, magic items, and artifacts are italicized and treated as titles, and the effect a spell creates is not italicized.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "Spells {magic missile}",
+  "page": "p.6",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 274,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Terms to Italicize: Artifacts, Magic items, Spells {magic missile}",
+   "note": "Quote exact on p.6 under 'Terms to Italicize' (artifacts, magic items, spells all listed). The second limb sits one page later, p.7: 'The italicized terms are treated as titles... Don't confuse one of these titles with an effect it creates (see Chicago 8.174). For example, the wall of fire spell produces a wall of fire, not a wall of fire (the latter would imply an infinite loop).' Both limbs supported; only the page cite (p.6) is narrow for the second limb.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 275,
+  "feature": "game-term typography: bold stat-block names",
+  "claim": "A stat block name is bolded in running text only at its first appearance in an encounter area, and nothing may sit between the number and the name.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "write “four goblins,” not “four loud goblins”",
+  "page": "p.6",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 275,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bold only first appearance; no text between number and stat block name",
+   "note": "Quote exact on p.6. Both limbs explicit there: 'Set a monster's name in bold only the first time it appears in an encounter area or other subsection' and 'Make sure no text gets between the number of monsters appearing and the name of the stat block.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 276,
+  "feature": "numerals in rules text",
+  "claim": "Rules prose uses numerals for points, damage, durations of game effects, and tactical distances, but spells out narrative quantities (six hours, fifty miles).",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "The two cities are fifty miles apart.",
+  "page": "p.7",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 276,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Numerals for points, damage, game durations, tactical distances",
+   "note": "Quote exact on p.7 under 'Numerals in Rules Text'. Every limb explicit: 'Use numerals for points, scores, damage expressions, and any game trait with a numerical value'; 'units of time that quantify the duration of a game effect'; 'units of distance that quantify the size or extent of game effects' plus 'dimensions and distances... on a tactical scale'. The narrative counterexamples are the guide's own: 'the characters slept for six hours' and 'The two cities are fifty miles apart.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 277,
+  "feature": "canonical verb collocations",
+  "claim": "The guide fixes verb-noun pairings: you cast a spell, take damage, make a saving throw, finish a rest, score a critical hit.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "You take damage.",
+  "page": "p.7",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 277,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Verb Usage list: cast, take damage, make a saving throw, finish a rest",
+   "note": "Quote exact on p.7. The 'Verb Usage' list carries all five pairings: 'You cast a spell.', 'You take damage.', 'You make a saving throw, and it succeeds or fails.', 'You finish a short or long rest.', 'You score a critical hit.' (guide's rest wording is 'a short or long rest').",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 278,
+  "feature": "succeed vs make a check",
+  "claim": "Rules must say 'succeed on a DC 15 check', not 'make a DC 15 check', unless the outcomes follow immediately.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "“You must succeed on a DC 15 Strength check",
+  "page": "p.7",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 278,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Succeed on a DC 15 Strength check, not make one, unless outcomes follow",
+   "note": "Quote exact on p.7 under 'Making a Roll vs. Succeeding on One'. The unless-clause is the guide's own: \"Don't write, 'You must make a DC 15 Strength check...' unless that sentence is immediately followed by a description of what happens on a success or failure.\" Claim drops the ability name (Strength) but adds nothing.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 279,
+  "feature": "'save' as synonym",
+  "claim": "'Save' for 'saving throw' is used sparingly, mainly in stat blocks; the 4E sense of 'save' as a successful saving throw is abandoned.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "use it sparingly, preferably only in a stat block",
+  "page": "p.7",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 279,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sparingly, preferably only in a stat block; 4E sense abandoned",
+   "note": "Quote exact on p.7 under 'Saving Throws'. Both limbs explicit: 'use it sparingly, preferably only in a stat block or when preceded by \"saving throw\"' and 'In 4E, we used \"save\" as a synonym for \"successful saving throw.\" We have abandoned that practice.' The claim omits the second permitted context (when preceded by 'saving throw'), which narrows rather than overstates.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 280,
+  "feature": "'result' vs number rolled",
+  "claim": "'Result' no longer means the number on the die; it means the die roll plus modifiers, and 'total' is often preferred.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "We often prefer the word “total”",
+  "page": "p.8",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 280,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Die-number sense abandoned; result = roll plus modifiers; total preferred",
+   "note": "Quote exact on p.8 under '\"Result\" and Die Rolls'. All three limbs: 'In 3E and 4E, the word \"result\" was sometimes used as a synonym for \"the number rolled on a die.\" We have abandoned that practice'; '\"Result\" can legitimately refer to the sum of a die roll and any modifiers'; 'We often prefer the word \"total\" in such a context.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 281,
+  "feature": "magic vs magical",
+  "claim": "'Magic' is the adjective for objects (magic item, magic sword); 'magical' for other things; 'magical item' is forbidden.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "“magic item” and its variants should never be “magical item.”",
+  "page": "p.8",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 281,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Magic for objects; magical used more often for other things; never magical item",
+   "note": "Quote exact on p.8. Limbs 1 and 3 are verbatim rules ('a magic item, a magic sword, a magic trap'; 'should never be \"magical item\"'). Limb 2 is a preference, not an absolute, in the source: 'The adjective can be used for other things, but we use \"magical\" more often than \"magic\" for them' — the claim's clean split states the guide's default correctly but drops the 'more often' hedge.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 282,
+  "feature": "points of damage",
+  "claim": "Damage is written as '10 fire damage', never '10 points of fire damage'.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "Avoid referring to points of damage",
+  "page": "p.8",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 282,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Avoid points of damage: write 10 fire damage, not 10 points of fire damage",
+   "note": "Quote exact on p.8 under 'Points of Damage'. The guide's example is the claim verbatim: 'write, \"The spell deals 10 fire damage,\" not \"The spell deals 10 points of fire damage.\"' Claim's 'never' hardens the heading verb 'Avoid', but the worked example is a flat write-X-not-Y.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 283,
+  "feature": "extra damage phrasing",
+  "claim": "The die expression stays with the damage type: 'an extra 1d4 fire damage'.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "We write “an extra 1d4 fire damage,”",
+  "page": "p.8",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 283,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We like to keep the die expression with the damage type",
+   "note": "Quote exact on p.8 under 'Extra Damage'. Rationale limb explicit: 'We write \"an extra 1d4 fire damage,\" not \"1d4 extra fire damage.\" We like to keep the die expression with the damage type.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 284,
+  "feature": "proficiency prepositions",
+  "claim": "One is proficient 'in' a skill, language, or activity but 'with' a tool, weapon, or armor.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "proficient in Elvish and Arcana",
+  "page": "p.8",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Proficient in a skill/language/activity; with a tool/weapon/armor",
+   "note": "Quote exact on p.8 under 'Proficiency'. Both bullets match limb for limb: 'proficient... in a skill, language, or other activity that is learnable and repeatable' and 'proficient... with a tool, weapon, type of armor, or other object', with the example 'proficient in Elvish and Arcana... proficient with longswords and heavy armor.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 285,
+  "feature": "'Dungeon Master' is a noun",
+  "claim": "'Dungeon Master' is never a verb except in conversational web writing.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "This term is a noun, not a verb",
+  "page": "p.8",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 285,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Noun not verb; breakable in an informal context such as a blog",
+   "note": "Quote exact on p.8 under '\"Dungeon Master\" Isn't a Verb'. The exception in the source is broader than the claim's: 'This rule can be broken in an informal context, such as in a blog or a web article that has a conversational tone' — informal context generally, with blog/web article as examples. The claim is stricter than the guide, not unsupported.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 286,
+  "feature": "weeks and months banned in rules",
+  "claim": "Because week and month lengths vary by world (a Realms week is a tenday), rules durations are given in days or years, never weeks or months.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "say a game effect lasts for 7 days, not 1 week",
+  "page": "p.8",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Week is ten days in the Realms, a tenday; use days, years allowed",
+   "note": "Quote exact on p.8 under 'Avoid \"Week\" and \"Month\"'. Every limb: 'The lengths of weeks and months vary in different D&D worlds. A week is ten days long in the Forgotten Realms, for instance, and is called a tenday'; \"don't express durations or other lengths of time in weeks or months when you're writing rules\"; 'The length of the year varies as well, but you may use years for durations and the like.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 287,
+  "feature": "'human' vs 'mortal'; 'humanoid' as type",
+  "claim": "'Human' is not a synonym for 'mortal', and 'humanoid' is used cautiously because it names a creature type.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "Beware of using “human” as a synonym for “mortal.”",
+  "page": "p.8",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 287,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Beware human for mortal; be cautious with humanoid, a creature type",
+   "note": "Quote exact on p.8 under 'Misusing \"Human\" and \"Humanoid\"'. Second limb explicit: 'be cautious when using the word \"humanoid,\" given the fact that it refers to a creature type. For example, a giant has humanlike features, but it isn't a humanoid in the game.'",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 288,
+  "feature": "house word list",
+  "claim": "A word list fixes spellings and plurals: dwarves not dwarfs, mithral not mithril, staffs, war band, drow/kenku/yuan-ti unchanged in plural.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "mithral (not mithril)",
+  "page": "p.9",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 288,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Word list: dwarves (not dwarfs), mithral (not mithril), staffs, war band",
+   "note": "Quote exact on p.9. Every listed item found in the same word list on p.9: 'dwarves (not dwarfs)', 'mithral (not mithril)', 'staffs', 'war band (not warband)', 'drow (singular and plural)', 'kenku (singular and plural)', 'yuan-ti (singular and plural)'.",
+   "fromFile": "verdicts-dnd-i274-288.json"
+  }
+ },
+ {
+  "index": 289,
+  "feature": "Forgotten Realms terms in the general guide",
+  "claim": "The general guide carries a short Realms list: Goodman/Goodwoman capped, 'goodsir' lowercased, 'godsforsaken' as the Realms form of godforsaken, and 'the Realms' only after 'the Forgotten Realms'.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "goodsir (a form of address, not capped)",
+  "page": "p.9",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 289,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "goodsir (a form of address, not capped)",
+   "note": "Raw PDF text extracted (pdfminer + pypdf). p.9 'Forgotten Realms Terms' list carries verbatim 'Goodman/Goodwoman (a title or form of address, usu. capped)', 'godsforsaken (established in the Realms...)', 'goodsir (a form of address, not capped)'; the list continues on p.10 with 'the Realms (should be preceded by “the Forgotten Realms”)'. All four limbs supported. Only hedge: source says 'usu. capped', claim says 'capped'.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 290,
+  "feature": "'godsforsaken' rationale",
+  "claim": "'Godsforsaken' is the established Realms form but is not required in other polytheistic settings, since 'godforsaken' has no necessary monotheistic sense.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "godsforsaken (established in the Realms",
+  "page": "p.9",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 290,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "godsforsaken (established in the Realms, but not necessary in other polytheistic settings; “godforsaken” has no necessary connection to monotheism)",
+   "note": "Quote fragment appears word for word on p.9 of the v1.08a PDF; every limb of the claim (established Realms form, not necessary elsewhere, godforsaken has no necessary monotheistic connection) is the source's own wording.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 291,
+  "feature": "adventuring party vocabulary",
+  "claim": "'Fellowship' is avoided for a party because of its Tolkien association and because D&D parties are often fractious or mercenary; 'party', 'group', 'band', or 'company' are preferred.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "use “group,” “band,” “company,” or, especially, “party.”",
+  "page": "p.9",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 291,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "use “group,” “band,” “company,” or, especially, “party.”",
+   "note": "p.9 'Adventuring Parties' sidebar, verbatim: 'The word “fellowship” has strong connections with The Lord of the Rings and doesn’t represent the typical D&D adventuring party well... D&D adventuring companies are often fractious or more mercenary than the word “fellowship” implies. In most in-world contexts and all other contexts, use “group,” “band,” “company,” or, especially, “party.”' All three limbs (Tolkien association, fractious/mercenary, four preferred words) supported.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 292,
+  "feature": "abbreviation set",
+  "claim": "Standard abbreviations are fixed (PH, DMG, MM, gp, d100, AC, DC, DM, XP, HD, hp, NPC).",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "NPC nonplayer character",
+  "page": "p.10",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 292,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "NPC nonplayer character",
+   "note": "pypdf page-10 reconstruction gives the table row verbatim: 'HD Hit Die/Dice \\n hp hit points \\n NPC nonplayer character'. Every abbreviation named in the claim is present in the p.10 Abbreviations tables: PH, DMG, MM (Brand/Product), gp (Coin), d100 (Die), AC, DC, DM, XP, HD, hp, NPC (Other Term).",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 293,
+  "feature": "singular they (2013 rule)",
+  "claim": "The superseded 2013 guide banned singular they outside informal contexts like dialogue.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.04a (2013)",
+  "url": "https://adventurersleague.files.wordpress.com/2018/10/1765690-dnd_house_style_guide.pdf",
+  "quote": "Don’t use “they” or “their” as singular pronouns",
+  "page": "p.2",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 293,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Don’t use “they” or “their” as singular pronouns, except in an informal context like dialogue.",
+   "note": "v1.04a PDF confirmed (footer 'Version 1.04a ©2013 Wizards of the Coast'); quote is verbatim on p.2 under 'Achieving Gender Neutrality'. Both limbs (ban; informal-context/dialogue exception) supported.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 294,
+  "feature": "readership assumption (2013)",
+  "claim": "The 2013 guide framed gender neutrality as assuming a readership of both men and women, a framing dropped in 2019 for 'we don't assume a gender identity'.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.04a (2013)",
+  "url": "https://adventurersleague.files.wordpress.com/2018/10/1765690-dnd_house_style_guide.pdf",
+  "quote": "readership includes both men and women",
+  "page": "p.2",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 294,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We also assume that our readership includes both men and women.",
+   "note": "Quote verbatim on p.2 of v1.04a. The second limb checks out against v1.08a: the 2019 guide has zero occurrences of 'readership' and its Gender section instead reads 'We don’t assume that our readers are of a particular gender identity.' Note the claim's inline rendering 'we don’t assume a gender identity' is a compression, not the 2019 wording.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 296,
+  "feature": "existence of a post-2019 house style guide",
+  "claim": "A Word version of the house style guide, authored by Kim Mohan and last modified by Judy Bauer on 2021-07-06 at Wizards of the Coast, ships inside the Dungeoncraft Pack (2023-12-04) and postdates the public v1.08a PDF.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "",
+  "page": "docProps/core.xml",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 296,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "creator Kim Mohan; lastModifiedBy 'Bauer, Judy'; modified 2021-07-06; Company Wizards of the Coast.",
+   "note": "Zip fetched (HTTP 200, 1,624,152 bytes) and expanded; 'Dungeoncraft Pack/DnD House Style Guide.docx' present, zip entry dated 12-04-2023 matching the pack URL. docProps/core.xml verbatim: <dc:creator>Kim Mohan</dc:creator>, <cp:lastModifiedBy>Bauer, Judy</cp:lastModifiedBy>, <dcterms:created>2016-03-07T20:43:00Z</dcterms:created>, <dcterms:modified>2021-07-06T18:09:00Z</dcterms:modified>; docProps/app.xml <Company>Wizards of the Coast</Company>. 2021-07-06 postdates the v1.08a PDF (©2018, 'updated January 2019'). Empty quote field, so graded on substance.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 297,
+  "feature": "dictionary reference updated",
+  "claim": "The 2021 docx cites merriam-webster.com rather than the printed 11th edition Collegiate.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "merriam-webster.com",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 297,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "merriam-webster.com",
+   "note": "docx body line 5, in the two-primary-resources list: 'The Chicago Manual of Style, 17th edition / merriam-webster.com'. The contrast limb holds: the docx has zero occurrences of 'Collegiate', while v1.08a p.1 reads 'Merriam-Webster’s Collegiate Dictionary, 11th edition'.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 298,
+  "feature": "gender and fantasy races (2021 reversal)",
+  "claim": "The 2021 docx reverses the 2019 rule: 'man' and 'woman' may now describe the gender of any people, so 'dwarf man' and 'gnome woman' are fine.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "we can write “dwarf man” or “gnome woman.”",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 298,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we can write “dwarf man” or “gnome woman.”",
+   "note": "docx 'Gender and Fantasy Races': '“Man,” “woman,” and their plurals are fine for describing the gender of people. For example, we can write “dwarf man” or “gnome woman.”' The reversal limb is confirmed against v1.08a p.2, which reads 'reserved for describing humans only. For example, we write “male dwarf,” not “dwarf man” or “man dwarf.”' — the exact phrase the docx now permits.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 299,
+  "feature": "singular they (2021: unrationed)",
+  "claim": "The 2021 docx allows they/their/them/themself for a person of unknown gender without the 2019 'don't abuse this liberty' caveat, requiring only a clear antecedent.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "you must ensure that the pronoun’s antecedent is clear",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 299,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you must ensure that the pronoun’s antecedent is clear",
+   "note": "docx: 'We allow the use of “they,” “their,” “them,” and “themself” when referring to a person whose gender is unknown. But you must ensure that the pronoun’s antecedent is clear if more than one person appears in the context.' All four pronouns present; docx has zero occurrences of 'abuse this liberty', which v1.08a carries ('but don’t abuse this liberty. Rely on this device only when you have no other reasonable or pleasing alternative').",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 300,
+  "feature": "pronoun preference for people",
+  "claim": "In running text a person's preferred pronoun (he, she, or they) is used; in rules text 'it' is used.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "In rules text, use “it.”",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In rules text, use “it.”",
+   "note": "docx 'Pronoun Preference' — 'Short Version: In running text, use a person’s preferred pronoun: he, she, or they. Whatever pronoun you use, ensure that its antecedent is clear. In rules text, use “it.”' Both limbs verbatim.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 301,
+  "feature": "pronouns for generic creatures (descriptive text)",
+  "claim": "Descriptive text uses they/them for Humanoids and other sapient creatures of unknown gender (including vampires), and 'it' for animals, cosmic horrors, and extraplanar creatures.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "A beholder never keeps its promises.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 301,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A beholder never keeps its promises.",
+   "note": "docx 'Pronouns for Generic Creatures', descriptive-text bullets: 'Use they/them pronouns for Humanoids and other sapient creatures that have gender identity, but when we don’t know their gender identity...'; 'Use “it” otherwise (animals, cosmic horrors, extraplanar creatures, etc.)'; and under '“They/them” in Descriptive Text' — 'But Also… vampires (Undead that retain their identity)'. The quote is the closing example under '“It” in Descriptive Text'. Every limb, vampires included, supported.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 302,
+  "feature": "pronoun ambiguity rule",
+  "claim": "Where 'they' would be ambiguous the sentence is reworded to avoid pronouns, e.g. by switching to the plural.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "reword to avoid using pronouns",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If using they/them pronouns would be ambiguous, reword to avoid using pronouns.",
+   "note": "Quote verbatim in the docx. The plural limb is supported twice: the 'Avoid Ambiguity' example offers 'OR “Merfolk attack elves on sight.”', and 'Sidestep Edge Cases' gives 'Blorvents are friendly, but they rust easily. (switching to plural to avoid choosing between “they” and “it”)'. Worth noting the first-listed cure is repeating the noun ('the merfolk immediately attacks'), with the plural as the alternative.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 303,
+  "feature": "'it' for dehumanizing effect is an exception",
+  "claim": "Using 'it' for a sapient monster to emphasize inhumanity is allowed only as a rare deliberate effect.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "Such exceptions should be rare.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Such exceptions should be rare.",
+   "note": "docx 'Limited Exceptions': 'On occasion, we might make exceptions to the guidelines above to achieve a specific effect. For example, characters might use gendered pronouns to talk about an animated doll, or we might use “it” to emphasize the inhumanity of a horrible monster (example). Such exceptions should be rare.' The word 'sapient' is not literally used but is entailed — an 'it' is an exception only for a creature the guidelines above would otherwise give they/them.",
+   "fromFile": "verdicts-dnd-i289-303.json"
+  }
+ },
+ {
+  "index": 304,
+  "feature": "canon pronouns for named characters",
+  "claim": "Established characters keep their canonical pronouns regardless of species or type (Baphomet and Strahd he/him; Lolth and Tasha she/her).",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "He/Him: Baphomet, Strahd",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 304,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He/Him: Baphomet, Strahd; She/Her: Lolth, Tasha",
+   "note": "Raw docx (DnD House Style Guide.docx, sha256 5bbfff1c…) extracted from the pack ZIP. Under 'Pronouns for Specific Individuals': 'For a character in canon (famous hero, demon lord, powerful celestial, etc.), use the established pronouns for their identity, regardless of their species or type.' followed verbatim by 'He/Him: Baphomet, Strahd' and 'She/Her: Lolth, Tasha'. Every limb supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 306,
+  "feature": "bold marks a game object",
+  "claim": "Bold stat-block names are explained functionally: bold signals that the term is a game object to be looked up, so 'Strahd likes to make vampire spawn' stays roman.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "this indicates the term is a game object",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 306,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bold stat block names … this indicates the term is a game object",
+   "note": "Verbatim: 'Bold stat block names in running text to indicate what stat block to use for an encounter—this indicates the term is a game object.' The facing examples list 'Roman' cases including 'Strahd likes to make vampire spawn in his free time.' Both limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 307,
+  "feature": "attack vs attack roll",
+  "claim": "Effects triggered by hitting must say 'attack roll', because readers read 'attack' in its English sense and think fireball 'hits'.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "The word “attack” confuses many of our readers",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The word “attack” confuses many of our readers",
+   "note": "Section 'Attack vs. Attack Roll': 'When an effect is triggered by an attack roll hitting or missing, use the term “attack roll” in the effect’s text, not just “attack.” The word “attack” confuses many of our readers, who often read it with its English meaning instead of as a rules term.' Fireball limb also explicit: 'there are readers who think fireball hits targets'.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 308,
+  "feature": "'within X feet' precision",
+  "claim": "'Within X feet' literally reaches through total cover, so writers must add a sight/hearing/cover condition or use an official area of effect.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "use one of our official areas of effect",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 308,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "use one of our official areas of effect: cone, cube, cylinder, line, or sphere",
+   "note": "Section '“Within X Feet”': 'that literally means the effect reaches anything within that area, even if there’s total cover in the way. If you want to limit the reach of such an effect, require that the target be able to see or hear the effect’s source or that the target can’t be behind total cover. Alternatively, use one of our official areas of effect…'. All limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 309,
+  "feature": "'stat block' not 'statistics'",
+  "claim": "The box of game information is called a stat block; 'statistics' is reserved for the crunch in the abstract.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "call it a stat block",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 309,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When referring to a monster’s stat block, call it a stat block",
+   "note": "Section '“Statistics” vs. “Stat Block”': 'Don’t call it the creature’s statistics. Writing “game statistics” is acceptable if you’re referring to the monster’s crunch, rather than its story material, but use “stat block” when you mean that box of game information about the monster.' Both limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 310,
+  "feature": "letter-by-letter alphabetization",
+  "claim": "Lists, spells, and bestiary stat blocks are ordered letter-by-letter, ignoring spaces, with a warning that Word sorts word-by-word.",
+  "source": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "We use letter-by-letter alphabetization.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We use letter-by-letter alphabetization. When comparing, ignore spaces",
+   "note": "Section 'Alphabetical Organization': 'lists, spells, stat blocks in a bestiary, etc. should all be organized alphabetically. We use letter-by-letter alphabetization. When comparing, ignore spaces…' plus 'Microsoft Word Warning. Microsoft Word’s handy alphabetization tool (Table < Sort) sorts paragraphs word-by-word, NOT letter-by-letter!' All three limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 313,
+  "feature": "boxed text: rationing",
+  "claim": "The AL adventure format prescribes boxed text only for a particularly important event, never for rooms or normalcy.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "Boxed text should be used very sparingly",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boxed text should be used very sparingly—only when a particularly important event truly calls for it",
+   "note": "Raw docx (DC Adventure Format v1.3.docx, sha256 73965593…; core.xml: creator Claire Hoffman, lastModifiedBy Ma'at Crook, created 2023-11-07, modified 2023-11-16 — attribution confirmed). Boxed-text instruction continues 'Don’t use it to describe rooms or normalcy.' The document is the D&D Adventurers League (Dungeoncraft, code '$$-DC-$$$-$$') adventure template, so the 'AL adventure format' framing holds.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 314,
+  "feature": "boxed text: length",
+  "claim": "Boxed text is capped at one or two brief descriptive sentences.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "no more than one or two brief and descriptive sentences",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 314,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no more than one or two brief and descriptive sentences",
+   "note": "Same boxed-text instruction: 'Additionally, it should be short and to the point, no more than one or two brief and descriptive sentences.'",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 315,
+  "feature": "boxed text: function",
+  "claim": "Boxed text narrates exciting events only; the substance of an encounter lives under the headings beneath it.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "only provide a narrative for exciting events",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 315,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the boxed text should only provide a narrative for exciting events",
+   "note": "'The body of the counter [sic — encounter] should be found in the headings below; the boxed text should only provide a narrative for exciting events.' Both limbs supported; note the source's own typo 'counter' for 'encounter'.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 316,
+  "feature": "boxed text: worked example",
+  "claim": "The template's own sample boxed text is two descriptive sentences plus a one-line spoken tag ('Go away!'), with sensory and comic detail carried by concrete nouns.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "“Go away!” the puppet snaps.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 316,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Go away!” the puppet snaps.",
+   "note": "The only narrative boxed text in the template (area 'A. The Hidden Room') reads: 'A greasy, irate-looking dwarf in a stained leather apron with a bulging pocket stands between the contraptions. He clutches a handaxe in one hand and has a sock puppet on the other. “Go away!” the puppet snaps.' — exactly two descriptive sentences plus the one-line spoken tag, with concrete nouns (apron, pocket, handaxe, sock puppet).",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 317,
+  "feature": "background keywords in caps and bold",
+  "claim": "In the Background section, keywords are capitalized and bolded at first appearance to flag the adventure's important elements for the DM.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "Keywords should be CAPITALIZED and BOLDED the FIRST time",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 317,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Keywords should be CAPITALIZED and BOLDED the FIRST time they appear in the Background",
+   "note": "In the 'Background' section: 'Keywords should be CAPITALIZED and BOLDED the FIRST time they appear in the Background. This alerts the DM to the adventure’s more important aspects.' All limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 318,
+  "feature": "backstory restraint",
+  "claim": "Background must not bloat with backstory that is not ultimately important; the line between too little and too much exposition is explicit.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "doesn’t bloat the background with backstory that isn’t ultimately important",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 318,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "doesn’t bloat the background with backstory that isn’t ultimately important",
+   "note": "'There’s a fine line between two little [sic] background and too much exposition. Try to stay on the side of the line that doesn’t bloat the background with backstory that isn’t ultimately important.' Both limbs supported.",
+   "fromFile": "verdicts-dnd-i304-318.json"
+  }
+ },
+ {
+  "index": 319,
+  "feature": "overview granularity",
+  "claim": "Each part of an adventure gets a one-to-two-sentence overview entry tied to a Story Objective.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "its own entry of one to two sentences describing the part",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 319,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each part gets one-to-two sentences; \"This is Story Objective A.\"",
+   "note": "Overview template, DC Adventure Format v1.3 p.'Adventure Primer': Parts 1-4 each read \"Each part of the adventure should have its own entry of one to two sentences describing the part. This is Story Objective A/B/C/D.\" A margin comment adds \"Each part should have a Story Objective entry that describes the objective as a single sentence.\" Quote verbatim; both limbs supported.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 321,
+  "feature": "area information structure",
+  "claim": "Location text is organized under Area Information with inline subheads such as Dimensions and Terrain and Lighting.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "Dimensions and Terrain.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 321,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Area Information entries: Dimensions and Terrain, Lighting, Sounds and Smells",
+   "note": "Quote \"Dimensions and Terrain.\" appears twice - in the worked example under an Area Information heading (followed by Lighting) and in the margin comment \"Area Information breaks down the area itself. There are usually three standard entries here: Dimensions and Terrain... Lighting... Sounds and Smells.\" Inline-subhead limb supported: \"If under a heading 3, use inline subheads without the Area/Creature Information headings.\"",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 322,
+  "feature": "bold for keyed game objects",
+  "claim": "Bold in running text is reserved for creatures and significant keyed objects such as traps and secret doors, used judiciously.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "Use boldface judiciously.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 322,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Creature names and keyed objects such as traps or secret doors are bold",
+   "note": "Quote \"Use boldface judiciously.\" verbatim, in: \"names of creatures or other significant game objects such as traps or secret doors are in bold. Use boldface judiciously. With the exception of creature names, it usually applies to important objects that are keyed on the map.\" Every limb supported, including the keyed-object restriction.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 323,
+  "feature": "sidebar role in adventures",
+  "claim": "Adventure sidebars give background that helps run a location and, except Playing the Pillars, avoid directly applicable rules content.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "shouldn’t provide directly applicable information",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 323,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sidebar gives background to help run the location; Playing the Pillars excepted",
+   "note": "Quote verbatim: \"It should provide the DM with background information that may help run the location or event. With the exception of Playing the Pillars (see example, below), it shouldn't provide directly applicable information.\" The page's prohibition is on directly applicable *information*, which is broader than the claim's \"rules content\" and so entails it.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 324,
+  "feature": "Playing the Pillars",
+  "claim": "Encounters can carry a Combat / Exploration / Social triad of suggestions.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "Playing the Pillars.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 324,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Playing the Pillars. Suggestions for this encounter:\" then Combat, Exploration, Social",
+   "note": "Quote verbatim in the worked encounter, followed by Combat / Exploration / Social entries. The optionality in \"can carry\" is supported by the margin comment \"If you include this entry, each pillar of play should be represented\" and \"99% of the time, these entries should be under a Creature Information heading.\"",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 325,
+  "feature": "content warning and sensitivity credit",
+  "claim": "The 2023 AL template carries a CONTENT WARNING line on the cover and a Sensitivity Lead in the credits.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "Sensitivity Lead: TBD",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 325,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Cover: \"CONTENT WARNING: $\"; credits: \"Sensitivity Lead: TBD\"",
+   "note": "Quote verbatim. The cover block runs Adventure Title / Subtitle / description / \"A Two/Four -Hour Adventure for Tier $ Characters.\" / \"CONTENT WARNING: $\", then the Credits list containing \"Sensitivity Lead: TBD\" among Writer, Editor, Graphic Design. File metadata confirms the 2023 dating: created 2023-11-07 by Claire Hoffman, last modified 2023-11-16 by Ma'at Crook.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 326,
+  "feature": "style references for adventures",
+  "claim": "The adventure format defers to Chicago 17th and Merriam-Webster's Collegiate 11th for grammar and punctuation.",
+  "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 326,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Consult Chicago 17th; preferred dictionary Merriam-Webster's Collegiate 11th",
+   "note": "No quote was supplied with the claim, so the verbatim grade cannot apply; the substance is stated almost word for word on the first page: \"Consult The Chicago Manual of Style (17th edition) if you have questions about punctuation, grammar, and other matters of writing style. Our preferred dictionary is Merriam-Webster's Collegiate Dictionary (11th edition).\"",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 327,
+  "feature": "boxed text style definition",
+  "claim": "The Word template defines the Boxed Text style solely for text a DM reads to the players.",
+  "source": "1 - D&D AL Template.dotx (Jeremy Crawford, 2019-10) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "text that a DM is meant to read to the players",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 327,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"This Boxed Text style is used only for text that a DM is meant to read to the players.\"",
+   "note": "Quote verbatim in the style-demonstration line of the .dotx. \"Solely\" matches the page's \"only\". Metadata confirms the source: dc:creator \"Crawford, Jeremy\", created 2019-09-30, modified 2019-10-08.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 328,
+  "feature": "epigraph rule",
+  "claim": "Epigraphs are not enclosed in quotation marks unless quoting a book that had them.",
+  "source": "1 - D&D AL Template.dotx (Jeremy Crawford, 2019-10) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "An epigraph shouldn’t be enclosed in quotation marks",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 328,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Unless excerpting a book where the quotes appear in the original",
+   "note": "Quote verbatim: \"An epigraph shouldn't be enclosed in quotation marks, unless you're excerpting a passage from a book and the quotes appear in the original.\" Both limbs supported.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 329,
+  "feature": "sidebar test",
+  "claim": "A sidebar that must immediately follow a passage is not a sidebar; integrate it into body copy.",
+  "source": "1 - D&D AL Template.dotx (Jeremy Crawford, 2019-10) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "don’t make it a sidebar",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 329,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If it must immediately follow something, don't make it a sidebar; integrate it into the body copy.\"",
+   "note": "Quote verbatim under Sidebar Body: \"ask yourself whether the sidebar must immediately follow a section of text or whether it can go anywhere on a spread. If it must immediately follow something, don't make it a sidebar; integrate it into the body copy.\" Both limbs supported.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 330,
+  "feature": "profanity",
+  "claim": "WotC's content standards forbid profanity in D&D products absent special approval.",
+  "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "Don’t use profanity.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 330,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Profanity. Don't use profanity.\" plus \"not without approval\"",
+   "note": "Quote verbatim in the standards list. The approval carve-out limb is supported by the RATING section: \"D&D products can violate certain standards, but not without approval,\" and \"PG-rated content allows things we normally don't, such as nudity and profanity.\"",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 331,
+  "feature": "rating register",
+  "claim": "D&D is described as mostly G-rated, sliding toward PG for mature themes or graphic violence; PG-13 products (Rick & Morty) need approval.",
+  "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "D&D is, for the most part, a G-rated game.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 331,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "G-rated, slides toward PG; Rick & Morty PG-13 needed approval",
+   "note": "Quote verbatim. Every limb on the page: \"When it deals with mature themes or features scenes of graphic violence, it slides toward being a PG-rated experience\" and \"The Rick & Morty boxed set, which contains profanity and glamorizes substance abuse, is an example of just such a product. It is rated PG-13,\" following \"can violate certain standards, but not without approval.\"",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 332,
+  "feature": "stereotypes",
+  "claim": "Standards forbid attaching traits to all members of a people, culture, religion, or sexuality.",
+  "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "Don’t attach specific traits or attributes to all members",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 332,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"...to all members of a particular people, culture, religion, or sexuality.\"",
+   "note": "Quote verbatim under the Stereotypes standard, which opens \"Avoid stereotypes.\" All four categories in the claim appear on the page.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 333,
+  "feature": "glamorization of evil",
+  "claim": "Villains may be sympathetic but their evil must be called out as wrong; evil heroes are avoided.",
+  "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "their evil should be called out as awful and wrong",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 333,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Villains can be sympathetic, but their evil should be called out as awful and wrong. Avoid depicting evil heroes.\"",
+   "note": "Quote verbatim under Glamorization of Evil. Both limbs on the page, including the evil-heroes limb.",
+   "fromFile": "verdicts-dnd-i319-333.json"
+  }
+ },
+ {
+  "index": 334,
+  "feature": "real-world religion analogs",
+  "claim": "Real-world religions may not serve as analogs for evil D&D religions.",
+  "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+  "quote": "Don’t use real-world religions as analogs for evil religions",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 334,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Don't use real-world religions as analogs for evil religions in D&D.\"",
+   "note": "Raw PDF reached: zip downloaded from media.dndbeyond.com (200, application/zip, 1,624,152 bytes), unzipped, 'Dungeoncraft Pack/DnD Standards.pdf' text-extracted with pypdf. Quote appears word for word under the 'Religion.' bullet; header line reads '(c)2020 Wizards of the Coast LLC. Confidential information.' Source attribution (2020 Standards inside the 2023-12-04 Dungeoncraft pack) is exact.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 335,
+  "feature": "credible threat",
+  "claim": "Perkins and Bilsland's second principle is that an adventure needs a credible threat with logical goals the heroes can uncover and thwart.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "An adventure needs a credible threat",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 335,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 2: \"An adventure needs a credible threat\"",
+   "note": "Raw PDF fetched by curl (200, application/pdf, 745,871 bytes) and extracted with pypdf. Byline reads 'By Chris Perkins & Greg Bilsland'; numbered principle 2 carries the quote verbatim, and the same paragraph adds that antagonists 'should have logical goals that the heroes can uncover and thwart in the course of the adventure.' Every limb supported.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 336,
+  "feature": "here and now",
+  "claim": "Principle four: adventures are about the here and now; the less backstory needed to set things up, the better.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "An adventure is about the here and now.",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 336,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 4: \"An adventure is about the here and now.\"",
+   "note": "Quote is word for word at principle 4, p.1. The backstory limb is supported by the next sentence: 'A little bit of history might be needed to set things up, but the less of it, the better.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 337,
+  "feature": "concision for the DM",
+  "claim": "Principle seven: present information as concisely as possible to ease the DM's burden, reserving descriptive texture for NPCs, dungeon dressing, and treasure.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "to ease the burden on the DM",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 337,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 7: concise text \"to ease the burden on the DM\"",
+   "note": "Principle 7 reads 'An adventure should strive to present information as concisely as possible, to ease the burden on the DM,' then names the exceptions deserving special attention: 'NPCs, dungeon dressings, and treasure hoards.' Both limbs supported.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 338,
+  "feature": "logical order of information",
+  "claim": "Principle six: information appears in the order a first-time DM needs it, with an NPC introduced before being named casually and nothing important buried.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "An adventure needs to present information in a logical",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 338,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 6: \"present information in a logical order\"",
+   "note": "Principle 6 carries the quoted fragment verbatim, plus 'so that a DM reading it for the first time isn't confused,' 'make sure that an NPC is properly introduced before casually mentioning the NPC by name,' and 'shouldn't conceal or bury important information.' All three limbs supported.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 339,
+  "feature": "NPC description content",
+  "claim": "NPCs get character through distinctive physical features, mannerisms, and quirks the DM can roleplay.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "features, mannerisms, and quirks",
+  "page": "p.2",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 339,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"features, mannerisms, and quirks\" the DM uses to roleplay",
+   "note": "The sentence straddles the page break: p.1 ends 'describing his or her distinctive physical' and p.2 opens 'features, mannerisms, and quirks (which the DM can then use to roleplay the NPC effectively).' The cited quote and page (p.2) are correct.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 340,
+  "feature": "clichés with a spin",
+  "claim": "Familiar tropes (taverns, dragons, mad wizards) are acceptable if the adventure can still surprise; writers add their own spin.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "as long as the adventure can still surprise",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 340,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Cliches are okay, as long as the adventure can still surprise\"",
+   "note": "Principle 3 carries the quote verbatim and names all three tropes: 'dragons, orcs, and insane wizards in towers' and beginning 'in a tavern,' closing with 'try to put your own clever “spin” on it.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 341,
+  "feature": "PCs as heroes",
+  "claim": "The player characters are the heroes, not spectators; fetch quests for a lazy merchant are called out as underwhelming.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "The player characters (PCs) are the heroes",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 341,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The player characters (PCs) are the heroes, not mere spectators\"",
+   "note": "Principle 1 carries the quote verbatim; the merchant limb is explicit: 'Gathering animal pelts for a lazy merchant might be a tolerable MMO quest, but it makes for an underwhelming D&D experience.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 342,
+  "feature": "no railroading",
+  "claim": "Text must account for players' decisions and alternate outcomes, or players feel railroaded.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "players will feel “railroaded” by the plot",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 342,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"players will feel “railroaded” by the plot\"",
+   "note": "Principle 5 carries the quote verbatim (curly quotes around railroaded, as cited). Both limbs supported: 'it needs to allow for more than one preset outcome' and 'the text needs to account for the possibility that the heroes might slay or capture the villain.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 343,
+  "feature": "rise above the humdrum",
+  "claim": "Encounters are elevated by odd monster pairings, terrain, hazards, ruses, complex motives, and plot twists.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "An adventure needs to rise above the humdrum",
+  "page": "p.2",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 343,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 9: \"An adventure needs to rise above the humdrum\"",
+   "note": "Quote verbatim at principle 9, p.2. The list limb is supported item by item: 'odd monster pairings, unusual terrain, environmental hazards, traps, unexpected reinforcements, red herrings, atypical monster tactics, ruses and other deceptions, NPCs with complex motives, and the occasional plot twist.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 344,
+  "feature": "read adventures to write them",
+  "claim": "The guide's craft advice is to read many good adventures, as novelists read novels.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "The more good D&D adventures you read, the",
+  "page": "p.2",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 344,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The more good D&D adventures you read, the easier it will be\"",
+   "note": "Quote verbatim on p.2. The novelist analogy is the preceding sentence: 'To write good novels, you need to read good novels... The same is true for adventures.'",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 345,
+  "feature": "organized play: no preset ending",
+  "claim": "AL writers must not decide in advance how the adventure ends, even in a 2- or 4-hour slot.",
+  "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "how the adventure should end",
+  "page": "p.2",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 345,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Don't decide in advance how the adventure should end.\"",
+   "note": "Under 'Additional Principles for Organized Play' / 'When writing adventures for the D&D Adventurers League,' item 4 reads 'Just because an adventure is only 2 hours or 4 hours doesn't mean it should be linear or have a pre-established outcome. Don't decide in advance how the adventure should end.' All limbs supported.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 348,
+  "feature": "Realms tone: hopeful",
+  "claim": "The Forgotten Realms guide sets a hopeful tone in which the good guys eventually win, contrasted with cynical Greyhawk and tragic Dragonlance.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "The Forgotten Realms is a hopeful setting.",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 348,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"hopeful setting. The good guys will eventually win.\"",
+   "note": "Raw PDF fetched by curl (200, application/pdf, 965,749 bytes), 29 pages, extracted with pypdf. Page 1, under 'Tone': 'The Forgotten Realms is a hopeful setting. The good guys will eventually win. This hopeful tone sets the Forgotten Realms apart from settings like Greyhawk (which is cynical) and Dragonlance (which is a setting of romance and tragedy).' Quote verbatim; every limb supported.",
+   "fromFile": "verdicts-dnd-i334-348.json"
+  }
+ },
+ {
+  "index": 349,
+  "feature": "replace your divots",
+  "claim": "Stories must leave the Realms as found: no destroying or irrevocably changing established places, peoples, or gods without dispensation.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "(Pack it in. Pack it out.)",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 349,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stories should leave the Realms as they found them.",
+   "note": "p.1 'Replace Your Divots': quote exact. All limbs on page — 'should not definitively destroy or irrevocably change locations, people, gods, planes, races as a whole, or other established elements of the setting or brand without special dispensation.' Only shading: guide says 'should', claim says 'must'; guide also allows high stakes provided 'there must always be the option of things being restored to order.'",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 350,
+  "feature": "don't whitewash the Realms",
+  "claim": "The guide instructs writers and artists to represent the Realms' many skin tones and ethnic analogs, including in cosmopolitan cities.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "Don’t Whitewash the Realms",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 350,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Art must represent the Realms' real range of skin tones.",
+   "note": "p.1-2 header exact. Section enumerates skin tones (sun elves bronze, wild elves dark brown, gold dwarves brown, strongheart halflings dusky) and earth analogs (Chult/Turmish black, Kara-Tur Asian, Calimshan Arab, Amn/Tethyr Spaniard), and the cosmopolitan-city limb is explicit: 'When you set something in Waterdeep, the most cosmopolitan city in the world, there absolutely should be humans from all over the Realms.' Artists limb supported by 'art has failed to consistently and appropriately represent the people of the Forgotten Realms.'",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 351,
+  "feature": "gender roles",
+  "claim": "Men and women are depicted equally in all roles; sexist clichés (damsel, sexy barmaid) are banned, with orcs and Northlanders as the two exceptions.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "Avoid clichés that reinforce sexist",
+  "page": "p.2",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 351,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Males and females depicted in equal measure; two exceptions.",
+   "note": "p.2 'Gender Roles': quote exact. 'males and females should be depicted in equal measure and doing all the same jobs in equal status'; cliche list names 'the damsel in distress, the sexy barmaid'; 'There are two exceptions: orcs and Northlanders.' Guide word is 'Avoid', not 'banned'; the two exceptions as elaborated concern gendered division of labour (orc females stay behind, Northlander women stay home), not licence to use the cliches.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 352,
+  "feature": "PG register",
+  "claim": "Sex, romance, and gore are kept PG in Realms products.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "Keep it PG.",
+  "page": "p.2",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 352,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Keep it PG for both sex and gore.",
+   "note": "'Keep it PG.' appears twice, exact: p.2 'Sex and Sexuality' bullet (romance covered — 'Depictions of sex and romance between characters should be rare') and p.2 'Violence and Gore' ('As a rule of thumb, keep it PG'). Gore carries a stated exception: 'Occasionally more gore will be called for... but ask before you take gore into the R-rated range.'",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 353,
+  "feature": "loose timekeeping diction",
+  "claim": "In-world characters speak of time loosely ('mid morning', 'nigh sunset') and, where clocks exist, in 'bells', not o'clock.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "“mid morning” or “nigh sunset.”",
+  "page": "p.11",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 353,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "People use loose times; clock hours are called bells.",
+   "note": "p.11 'Keeping Time': quote exact — 'People are accustomed to loose times like “mid morning” or “nigh sunset.”' Bells limb explicit: 'If a local temple or civic structure has a clock, people refer to hours as “bells,” as in “I’ll meet you at seven bells.”' The not-o'clock limb is confirmed by the p.25 Banned Words entry 'o’clock (should be “bells” but most people don’t reference time so specifically)'.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 354,
+  "feature": "tenday diction",
+  "claim": "Days of the tenday are 'first day', 'second day', and so on; there is no weekend.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "“first day,” “second day,” “third day,”",
+  "page": "p.11",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 354,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tenday days are counted; no concept of the weekend.",
+   "note": "p.11 'Time and the Calendar': quote exact. 'days of the tenday are denoted by counting from the beginning of the tenday. For example, “first day,” “second day,” “third day,” and so on (or alternatively “one-day,” “two-day” etc.). There is no concept of the weekend as a special time when businesses close or people stop work.' Both limbs exact.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 355,
+  "feature": "banned words list",
+  "claim": "The Realms guide bans a.m./p.m., coffee (kaeth), money (coin), restaurant (feasting hall), week (tenday), hourglass (sandglass), o'clock (bells), and generic subrace names.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "tenday (never week)",
+  "page": "p.25",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 355,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Banned Words list carries every term the claim names.",
+   "note": "p.25 'Banned Words' list verbatim: a.m.; coffee (should be “kaeth” or “kaethae”); money (should be “coin”); restaurant (should be “feasting hall,” or more formally as “skaethar”); week (should be “tenday”); high elf (refer to the Forgotten Realms subraces); hill dwarf (should be “shield dwarf”); hourglass (should be “sandglass”); mountain dwarf (should be “gold dwarf”); o’clock (should be “bells”...); p.m. The generic-subrace limb = the high elf / hill dwarf / mountain dwarf entries. Provenance note only: the cited quote 'tenday (never week)' is verbatim but sits in the alphabetical Terms list (T section, p.27), not in the p.25 Banned Words block, which reads 'week (should be “tenday”)'.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 356,
+  "feature": "'godsforsaken' replaces 'godforsaken'",
+  "claim": "The Realms word list makes 'godsforsaken' the replacement for 'godforsaken'.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "godsforsaken (replaces Godforsaken)",
+  "page": "p.25",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 356,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "godsforsaken (replaces Godforsaken)",
+   "note": "Forgotten Realms Terms, G section: 'godsforsaken (replaces Godforsaken)' — exact, capital G on the replaced word. Adjacent entry 'gold (not money)' corroborates claim 355's money/coin limb.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 357,
+  "feature": "'goodsir' form of address",
+  "claim": "'Goodsir' is a lowercase form of address; Goodman/Goodwoman are usually capped titles.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "goodsir (a form of address, not capped)",
+  "page": "p.25",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 357,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "goodsir not capped; Goodman/Goodwoman usually capped.",
+   "note": "Forgotten Realms Terms, G section, two consecutive entries: 'Goodman/Goodwoman (a title or form of address, usu. capped)' and 'goodsir (a form of address, not capped)'. Both limbs exact, including the 'usu.' hedge the claim renders as 'usually'.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 358,
+  "feature": "Common as a trade tongue",
+  "claim": "Common is described as a pidgin trade language, less expressive than regional tongues, which may inform accents.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "Common is little more than a trade",
+  "page": "p.14",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 358,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Common is a pidgin-derived trade tongue, simpler and less expressive.",
+   "note": "p.14 'The Common Tongue': quote exact. 'Common grew from a kind of pidgin Chondathan... but it is far simpler and less expressive. Nuances of speech, naming, and phrasing are better conveyed in the older, more mature languages, since Common is little more than a trade language.' Accent limb tracks the regional tongues, not Common: 'Other languages might be used to inform an accent or provide a necessary language barrier' — stated for electronic games and film, where Common is assumed to be English.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 359,
+  "feature": "stock Realms phrases",
+  "claim": "The guide supplies stock greetings and farewells ('Well met', 'Until swords part') for in-world dialogue.",
+  "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+  "quote": "Well met. The most often used greeting",
+  "page": "p.14",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 359,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Forgotten Realms Phrases' lists greetings and farewells.",
+   "note": "p.14 section 'Forgotten Realms Phrases' — 'Below are some phrases common to speah [sic] in the Forgotten Realms.' Quote exact: 'Well met. The most often used greeting, particularly between strangers of a different race or those of whom one is unsure.' Farewell limb exact: 'Until swords part. Warriors’ farewell throughout the Realms.' Also lists Well again, Olore, Aluve, Amarast, Alavairthae, and racial farewells.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 361,
+  "feature": "monsters' narrative role",
+  "claim": "Monsters are mostly for killing and looting; non-combat monster roles are exceptions that need explanation.",
+  "source": "D&D IP Guide (Wizards of the Coast, bundle document)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dd_ip_guide.pdf",
+  "quote": "and their stuff is for taking",
+  "page": "p.2",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 361,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mostly, monsters are for killing, and their stuff is for taking.",
+   "note": "p.2 'Monsters': quote exact. Exception limb explicit: 'They can also occasionally play non-combat roles opposing or aiding the players (the helpful kobold, the hobgoblin informant, the doppelganger spy), but such instances are out of character for D&D and require explanation.' Also 'Monsters should be the bulk of combat foes players face.'",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 362,
+  "feature": "current AL requirement to follow the D&D Style Guide",
+  "claim": "The 2025 Dungeoncraft guide (v1.9c) requires the provided template and familiarity with the D&D Style Guide and DMsGuild content guidelines.",
+  "source": "D&D Adventurers League Dungeoncraft Design Guide v1.9c (effective May 2025, updated 2025-06-23)",
+  "url": "http://theadventurerleagues.com/vault/2024/07/Dungeoncraft__CCv1.9c.pdf",
+  "quote": "You should be familiar with the D&D Style Guide",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 362,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Must use the template; should know the D&D Style Guide.",
+   "note": "p.1, 'TECHNICAL INFORMATION': quote exact. Version limb exact — 'Effective Date: May 2025. Version 1.9c (updated June 23, 2025)'. Template limb is the strongest — 'You must use this template and follow the formatting standards as presented in the template.' Style guide limb is 'You should be familiar with the D&D Style Guide (also provided) as well'; the DMsGuild limb is worded as review, not familiarity — 'Please review the Wizards and the DMsGuild Content Guidelines.'",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
+ },
+ {
+  "index": 363,
+  "feature": "mandatory template",
+  "claim": "Dungeoncraft adventures must use the provided template, with an accessible non-template version permitted alongside.",
+  "source": "D&D Adventurers League Dungeoncraft Design Guide v1.9c (effective May 2025, updated 2025-06-23)",
+  "url": "http://theadventurerleagues.com/vault/2024/07/Dungeoncraft__CCv1.9c.pdf",
+  "quote": "Adventures must use the template provided.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 363,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Adventures must use the template provided.",
+   "note": "Quote exact, in 'THE FINE PRINT' (p.8), corroborated on p.1 by 'You must use this template' and 'Your adventure must follow the template provided for layout'. Accessible-version limb exact, p.1 'Accessibility': 'The template must be one of your downloads, adjusted to use tags, bookmarks, alt text... Additionally, you may create a version that does not use the template, using fonts, sizing, formatting, and layout as advised by accessibility experts.' — so the non-template version is permitted alongside, not instead of, the template.",
+   "fromFile": "verdicts-dnd-i349-363.json"
+  }
  }
 ]

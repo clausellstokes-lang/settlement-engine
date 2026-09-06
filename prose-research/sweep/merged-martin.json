@@ -18223,6 +18223,41 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
   },
+  "945": {
+   "index": 945,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a systematic exclusion from his vocabulary of almost all words\"",
+   "note": "Abstract, para 1, verbatim: \"distinguished not only by its pseudo-medieval setting... but by a systematic exclusion from his vocabulary of almost all words derived from Latin, Greek, French or other languages\". Every limb (Latin, Greek, French) supported. Live page fetched raw, HTTP 200, browser UA.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "946": {
+   "index": 946,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"his style shows a high frequency of words of Anglo-Saxon origin\"",
+   "note": "Abstract, para 2, verbatim: \"Instead, his style shows a high frequency of words of Anglo-Saxon origin, a tendency which is particularly conspicuous in his use of compound and combination words.\" Live page raw fetch.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "947": {
+   "index": 947,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Almost none of these are found in Martin's work.\"",
+   "note": "Section 'GRRM's PRACTICE / 1. George R.R. Martin's use of prefixes'. The page first reprints Dr Lam's Latin (ab-, ad-, inter-, intra-, post-, pre-, re-, sub-, super-) and Greek (a-, ana-, dia-, endo-, exo-, epi-, hyper-, hypo-) prefix lists, then says verbatim \"Almost none of these are found in Martin's work. There are hardly if any words starting ab, sub, super, post... Their absence speaks volumes.\" Claim's 'almost never' limb matches; the essay itself grants exceptions (re-, submit, intermittent, fornication).",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "948": {
+   "index": 948,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"deploying them carefully to distinguish scenes where he wants to accentuate\"",
+   "note": "Section 3 (combining forms), verbatim: \"...emphasises Martin's craft in deploying them carefully to distinguish scenes where he wants to accentuate the legalistic or learned character of the speaker or context of the setting.\" Both named venues are on the page: Maester Colemon's 'intercession' and the Oldtown maesters ('penetrate', 'complement', 'complaint'), and 'Fornication' in the chapter where Margaery is accused by the religious order of the septons (section 1 also cites 'chapters about the High Septon and his religious court').",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "949": {
+   "index": 949,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"he conspicuously deploys the archaic prefix 'a-' to denote position: atop, abed, ahorse\"",
+   "note": "Section 1, verbatim: \"And sometimes Martin goes to the other extreme... delving beyond common speech into archaic native forms: for example, he conspicuously deploys the archaic prefix 'a-' to denote position: atop, abed, ahorse\". All three exemplars and the native/archaic characterisation are on the page.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
   "950": {
    "index": 950,
    "verdict": "SKIPPED_TRIAGE",
@@ -18236,6 +18271,77 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
+  },
+  "952": {
+   "index": 952,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The result is to make his prose feel archaic.\"",
+   "note": "Section 'Some examples', verbatim, and the preceding sentence supplies the causal limb: \"And they feel that much more ubiquitous because there are so few words sourced from Latin, Greek or French, few if any neoclassical affixes, no foreign combining forms. The result is to make his prose feel archaic.\" Note the sentence sits in 'Some examples', not the essay's CONCLUSION section, but the abstract makes the same conclusion.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "953": {
+   "index": 953,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"George R. R. Martin-8 Novels Dying of the Light Fevre Dream\"",
+   "note": "books.google.com SearchWithinVolume2 (the URL the claim names) fetched raw, HTTP 200. p. 241 returns verbatim: \"George R. R. Martin—8 Novels Dying of the Light Fevre Dream The Armageddon Rag A Game of Thrones... A Clash of Kings A Storm of Swords A Feast for Crows A Dance [with Dragons]\" (the OCR interleaves the adjacent Cormac McCarthy column). 3 standalone novels + 5 ASOIAF volumes = the stated 8. p. 240 carries the running head of the same appendix. Evidence is Google Books' verbatim full-text index of pp. 240-241, not a page image.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "954": {
+   "index": 954,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"dragons, cloaks, unsullied\" - p. 175 CINNAMON WORDS column",
+   "note": "p. 175 returns the string \"dragons, cloaks, unsullied\" verbatim, and the page header \"CINNAMON WORDS NOD WORDS\". Attribution to Martin is by column alignment on the same page: the author column (returned by q=George+R.+R.+Martin) runs Martin, McCarthy, McEwan, Mead, Melville, Meyer, Mitchell, Morrison, Nabokov, Orwell...; the cinnamon column runs \"dragons, cloaks, unsullied / yessir, mam, upriver / lavatory, forwards, fridge / guardians, vampire, dorm / whale, forecastle, sperm / vampire, grimaced, flinched / mam, dint, piss / messed, navel, slop / mauve, banal, pun / beastly, quid, workhouse\" - anchored decisively by Melville=whale/forecastle/sperm and Nabokov=mauve/banal/pun, so the first triple is Martin's. 'most anomalously often' matches the book's own gloss of cinnamon words (p. 170 \"an approximation of their favorites\", p. 172 \"top three 'cinnamon words'\", p. 166 discusses anomalous use).",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "955": {
+   "index": 955,
+   "verdict": "PARTIAL",
+   "trueWording": "p.172: fifty example authors PLUS \"fifty more authors\"; clichés not mentioned",
+   "unsupportedLimb": "that the quoted sentence covers the clichés table, and that the favourite-words table stops at the fifty - p. 172's very next sentence adds \"fifty more authors of popular and critical acclaim\", so that table covers a hundred",
+   "note": "The quotation is verbatim on p. 172: \"...top three 'cinnamon words' and top three 'nod words' for each of the fifty authors I've been using as examples throughout this book. To add to the fun, I've also included fifty more authors of popular and critical acclaim.\" So the sentence is about the favourite-words (cinnamon/nod) table only - clichés are a different table on p. 158, worded differently (\"fifty authors I use as examples, Number of Clichés per 100,000 Words\"). The claim fuses two pages into one sentence and drops the second fifty. Route: books.google.com SearchWithinVolume2, the exact URL the claim names, fetched raw with a browser UA, HTTP 200 - Google Books' verbatim full-text index of the book, not a page image and not a third-party search snippet.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "956": {
+   "index": 956,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"155 are -ly adverbs. For Meyer the count is 134, while King averages 105\"",
+   "note": "p. 13 returns verbatim: \"...10,000 words E L James writes, 155 are -ly adverbs. For Meyer the count is 134, while King averages 105...\" All three figures and the per-10,000-words denominator are on the page; 'averages' for King is the page's own word. Route: books.google.com SearchWithinVolume2, the exact URL the claim names, fetched raw with a browser UA, HTTP 200 - Google Books' verbatim full-text index of the book, not a page image and not a third-party search snippet.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "957": {
+   "index": 957,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Adverbs per 10,000 Words - Steinbeck The Winter of Our Discontent\"",
+   "note": "Quote verbatim on p. 16. p. 15 carries the parallel \"Adverbs per 10,000 Words - Hemingway To Have and Have Not The Sun Also Rises...\", so both named per-book tables exist. Second limb reproduced independently: q=Martin over the volume returns 7 hits - pp. 156, 213, 232, 240, 241, 262, 269 - none inside pp. 9-27, and pp. 213/232/240/262 are other Martins (Martin Amis, Martin Chuzzlewit, Martin Eden). Caveat on method, not on the verdict: Google Books caps a result set at ten, and this query returned seven, so the enumeration is complete. Route: books.google.com SearchWithinVolume2, the exact URL the claim names, fetched raw with a browser UA, HTTP 200 - Google Books' verbatim full-text index of the book, not a page image and not a third-party search snippet.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "958": {
+   "index": 958,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Word Count (292,332)\" - and the chapter rows sum to exactly 292,332",
+   "note": "Two independent raw routes, the live host having returned 403 to curl: (1) the wiki's own api.php action=parse prop=wikitext, HTTP 200, and (2) the Wayback raw capture web/20250521205534id_/, HTTP 200. Both carry the header row verbatim: \"Character (9) | # of POVs (73) | % of Total POVs | Word Count (292,332) | % of Word Count\". Locational nuance: the figure is printed in the Unique POV Breakdown header, not in the Chapter by Chapter table - but I summed the rendered chapter table myself and it is 73 rows totalling exactly 292,332, so the claim's limb holds.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "959": {
+   "index": 959,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Character (9)!!# of POVs (73)\" - header of Unique POV Breakdown",
+   "note": "Verbatim in both routes: \"# of POVs (73)\" and \"Character (9)\" in the same header row. The table body lists exactly nine POV characters (Eddard, Catelyn, Daenerys, Tyrion, Jon, Bran, Sansa, Arya, Will) whose chapter counts 15+11+10+9+9+7+6+5+1 = 73, matching the chapter table's 73 rows (prologue + 72 chapters).",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "960": {
+   "index": 960,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Eddard Stark row: 15 | 20.55% | 53,467 | 18.29%",
+   "note": "Verbatim in both routes. All three limbs on the page: 15 POV chapters, 53,467 words, 18.29% of word count. Cross-checked against the chapter table, which contains Eddard I through Eddard XV = 15 chapters.",
+   "fromFile": "verdicts-martin-i945-961.json"
+  },
+  "961": {
+   "index": 961,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "1,696 (Chapter 17, Bran III); 7,334 (Chapter 34, Catelyn VI)",
+   "note": "\"1,696\" appears verbatim. I parsed all 73 rendered chapter rows: minimum 1,696 = Chapter 17 (Bran III), maximum 7,334 = Chapter 34 (Catelyn VI), exactly the two chapters the claim's page field names. Runners-up 7,214 (Eddard VII, ch. 30) and 7,100 (Tyrion VIII, ch. 62) confirm the maximum; the prologue's 3,801 is well above the minimum.",
+   "fromFile": "verdicts-martin-i945-961.json"
   },
   "962": {
    "index": 962,
@@ -18393,12 +18499,48 @@
    "note": "The quoted A Clash of Kings row is verbatim at index 13026. All five Martin ASOIAF rows are present and the ly-adverbs figures fall strictly monotonically in the CSV's own publication-year order: AGOT 0.77 (1996), ACOK 0.68 (1998), ASOS 0.6 (2000), AFFC 0.47 (2005), ADWD 0.4 (2011). Endpoints and years match the claim exactly. Unlike 981 and 982 this claim asserts no unit, so it carries no unsupported limb.",
    "fromFile": "verdicts-martin-i962-983.json"
   },
+  "984": {
+   "index": 984,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Nightflyers ly-adverbs 1.3; A Dance With Dragons 0.4",
+   "note": "Row 20451 of the raw CSV contains the quoted string verbatim as a substring (line begins '20451,'). ly-adverbs column = 1.3; genre list begins ['Science Fiction','Short Stories',...] so 'science-fiction collection' holds. Same file, row 20474, gives A Dance With Dragons ly-adverbs 0.4, so 1.3 is 3.25x - 'more than three times' is exact. Only nuance: the CSV prints bare numbers with no % sign; the percentage unit is prosecraft's convention, not stated on this page.",
+   "fromFile": "verdicts-martin-i984-989.json"
+  },
+  "985": {
+   "index": 985,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'both far from the Westeros novels' figures' fails for vividness: the same file lists Fire and Blood (row 21259) at vividness 44.0, closer to Joker Moon's 46.89 than to the ASOIAF novels' 62.65-69.08",
+   "trueWording": "Joker Moon 46.89 vividness, 1.28 ly-adverbs, credited G.R.R. Martin",
+   "note": "Quoted row appears verbatim as a substring of line 20830 ('20828,Joker Moon,George R. R. Martin,171682.0,46.89,8.21,3.22,1.28,1.94,...'). Author field is 'George R. R. Martin' so 'credited to Martin in the dataset' is exact. The ly-adverb limb is strongly supported: 1.28 against A Game of Thrones 0.77, A Clash of Kings 0.68, A Storm of Swords 0.6, A Feast for Crows 0.47, A Dance With Dragons 0.4. The vividness limb holds only if 'the Westeros novels' means the five main-series books; the same page's Fire and Blood row (vividness 44.0) sits nearer Joker Moon's 46.89 than any ASOIAF novel does, so the 'both' is not safe as written.",
+   "fromFile": "verdicts-martin-i984-989.json"
+  },
+  "986": {
+   "index": 986,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "22,449 data rows; six metric columns, none blank",
+   "note": "Parsed the raw CSV: 22,450 lines = 1 header + 22,449 data rows, index column running 0..22448. The quoted header string appears verbatim as a substring of the header line, which is ',title,author,total words,vividness,passive voice,all adverbs,ly-adverbs,non-ly-adverbs,genre,year' - i.e. an unnamed index column precedes it and genre/year follow, but the claim does not say 'only these'. 'each with' checks out: zero blank or NaN values across all six metric columns. Provenance limb ('scraped prosecraft dataset') is not attested on this page itself but is attested in the same repo's raw notebook 0_1_importing_data.ipynb, which I fetched (see index 987). One near-duplicate exists (Dead Man's Hand at rows 21892 and 22190, differing only by curly vs straight apostrophe), so 22,449 is the row count rather than 22,449 wholly distinct works.",
+   "fromFile": "verdicts-martin-i984-989.json"
+  },
+  "987": {
+   "index": 987,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'My first goal was to obtain a list of books from prosecraft.io'",
+   "note": "Parsed the raw .ipynb JSON: cell 0, the first markdown cell, reads '## Getting the book list\\nMy first goal was to obtain a list of books from prosecraft.io. To see what I had to work with, I chose the 50th percentile and checked what the HTML looked like.' - the quote is word for word. The scraping-mechanism limb is supported by cells 1-8: requests + BeautifulSoup against URL = 'http://prosecraft.io/analysis/word-count/percentile/', then the book list pulled out of a 'directory' variable in the first script tag. Nuance, not an unsupported limb: it was one word-count percentile URL, not a sweep of several pages - the single page's embedded script already held the whole directory (cell 12: 'all 24,997 books contained in Prosecraft's database').",
+   "fromFile": "verdicts-martin-i984-989.json"
+  },
   "988": {
    "index": 988,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
+  },
+  "989": {
+   "index": 989,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Lexile: 830' on A Game of Thrones; no Lexile field on Fire & Blood",
+   "note": "Raw HTML of the claim's URL renders 'A Game of Thrones: A Song of Ice and Fire: Book One Authors: Martin, George R. R. Lexile: 830 , Publisher: Random House Publishing Group'; its meta description reads 'lexile & reading level: 830'. The token 'Lexile:' occurs in that page's HTML. Second limb needed a second raw page, which I fetched directly (not from a search snippet): https://lightsailed.com/catalog/book/fire-blood-george-r-r-martin/9781524796297/ - its record runs 'Fire & Blood Authors: Martin, George R. R. Publisher: Random House Publishing Group' with no Lexile field at all, zero occurrences of 'Lexile:' in the body, page title ending 'Lexile & Reading Level:' with nothing after it, and meta description 'lexile & reading level: ,' left empty. Both limbs confirmed.",
+   "fromFile": "verdicts-martin-i984-989.json"
   }
  }
 }

@@ -1,0 +1,28 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i738-752",
+ "lines": 62,
+ "firstTs": "2026-09-06T18:16:13.810Z",
+ "lastTs": "2026-09-06T18:18:18.867Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 14
+ },
+ "urlsFetched": [
+  "https://arxiv.org/pdf/2310.06452",
+  "https://arxiv.org/pdf/2510.01171"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_bcc0efc7-47c",
+ "agent": "a1aeb77bac018a4c1",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a1aeb77bac018a4c1.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i738-752.json",
+  "exists": false
+ }
+}

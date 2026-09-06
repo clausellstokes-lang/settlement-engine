@@ -14264,6 +14264,27 @@
    "note": "Verbatim, two sentences after the punctuation line in the same production editor's guest post; the surrounding sentences ('Most authors leave that “small stuff” to editors to fix—not Guy') confirm the punctuation referent.",
    "fromFile": "verdicts-kay-i625-678.json"
   },
+  "679": {
+   "index": 679,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I get caught up in small tinkerings with the text, word changes, deletions, linking up paragraphs, dropping more italics.",
+   "note": "Raw live page (200, browser UA). Entry of Wed 13 Jan 2010: 'I am proofing, about 1/4 of the way through... I get caught up in small tinkerings with the text, word changes, deletions, linking up paragraphs, dropping more italics.' Quote verbatim. The 'page-proof stage' limb is carried by the same page: an earlier (December) entry says 'January is going to be busy. The page proofs will come in, and along with the proofreaders I'll have to read those carefully', and the entry itself discusses typesetters, orphaned ellipses and the approved section ornament (dingbat/fleuron), i.e. typeset pages.",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
+  "680": {
+   "index": 680,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'll use punctuation varaibly depending on context, speaker, rhythms.",
+   "note": "Raw live page (200). Exact match including the source's misspelling 'varaibly'; sits in the entry on the proofreader over-punctuating speech, as the claim's page field says.",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
+  "681": {
+   "index": 681,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Even a given book: LAST LIGHT is punctuated differently than the MOSAIC was.",
+   "note": "Raw live page (200). Quote verbatim. The title expansions are supported on the same page: its book navigation lists 'The Last Light of the Sun' and 'THE SARANTINE MOSAIC: Sailing to Sarantium / Lord of Emperors'.",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
   "682": {
    "index": 682,
    "verdict": "SKIPPED_TRIAGE",
@@ -14271,12 +14292,40 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "683": {
+   "index": 683,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I have certain characters speaking rapidly at times, under stress",
+   "note": "Raw live page (200). Verbatim, continuing '...tucking a semi-colon into such a passage, or even too many technically viable commas undermines the EFFECT of the passage.'",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
+  "684": {
+   "index": 684,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "italics look LOUDER in galleys than they do on my computer screen",
+   "note": "Raw live page (200). Both limbs verbatim in one entry: 'how consistently I am deleting italics in the galleys' and 'italics look LOUDER in galleys than they do on my computer screen or even in the printout I use for copyediting.'",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
   "685": {
    "index": 685,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "686": {
+   "index": 686,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is simply true that a colon better sets off the 'list' that follows. So the change is made.",
+   "note": "Raw live page (200). The 'opening sentence' limb is explicit above it: 'Here's an example or two from the Perologue [sic]... Catherine asked if I'd consider a colon after ‘property’ in the first sentence, instead of the semi-colon'; Kay first resisted, then 'So the change is made.'",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
+  "687": {
+   "index": 687,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the sentence simply read better after deleting the word 'taste'",
+   "note": "Raw live page (200). Verbatim; preceded by 'Catherine queried ‘taste again at twilight’ ... the sustained metaphor getting tangled, to her ear'. Catherine is identified on the same page as the copy-editor ('Catherine's cover letter for the copy-edited manuscript').",
+   "fromFile": "verdicts-kay-i679-710.json"
   },
   "688": {
    "index": 688,
@@ -14299,6 +14348,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "691": {
+   "index": 691,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If an author is overusing semi-colons they change some to colons or commas.",
+   "note": "Raw live page (200). Verbatim, inside the passage explaining what the copy-editor does ('The copy-editor is the one who makes sure...'), so the copy-editor subject is supported.",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
+  "692": {
+   "index": 692,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it also has a tag quote at the end, as LAST LIGHT did",
+   "note": "Raw live page (200). Verbatim: 'YSABEL has an epigraph from Robert Graves ... and it also has a tag quote at the end, as LAST LIGHT did'.",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
   "693": {
    "index": 693,
    "verdict": "SKIPPED_TRIAGE",
@@ -14319,6 +14382,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "696": {
+   "index": 696,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stories, he reminds us, are told, but novels are shaped.",
+   "note": "Raw live page (200). Verbatim, in the review's final paragraph, with 'he' = Kay from the preceding sentences about Kay's own aesthetic. Attribution confirmed on page: byline Gary K Wolfe and 'This review and more like it in the May 2019 issue of Locus.'",
+   "fromFile": "verdicts-kay-i679-710.json"
   },
   "697": {
    "index": 697,
@@ -14355,6 +14425,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "702": {
+   "index": 702,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "although these are presented in third person, so they are immediately distinct from Danio's musings",
+   "note": "Raw live page (200). Verbatim. The 'first-person' limb is supported in the same paragraph, which opens 'Danio's reflections are the major POV throughout the novel. First person is rare enough (in adult speculative fiction)...' — matching the claim's page field.",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
+  "703": {
+   "index": 703,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Even as a fan, I'm cognizant that his books tend towards a certain... sameness.",
+   "note": "Raw live page (200). Verbatim (the page's ellipsis is the '…' character). 'Self-described completist fan' is supported two sentences earlier: 'where I find myself as a Guy Gavriel Kay fan. I've been reading him for close to a decade now and I'm a completist'. Review posted May 14, 2019 by Jane Funk.",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
+  "704": {
+   "index": 704,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He works with archetypes — the poet, the warrior, the artist, the lover, the priest",
+   "note": "Raw live page (200). All five archetypes verbatim in the listed order; 'recurring' is carried by the same sentence's continuation, 'and continually revisits themes of fate and choice.'",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
   "705": {
    "index": 705,
    "verdict": "SKIPPED_TRIAGE",
@@ -14376,12 +14467,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "708": {
+   "index": 708,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His writing is lyrical without being flowery.",
+   "note": "Raw live page (200). Verbatim, in the paragraph beginning 'In spite of frequently hitting Canada's bestseller lists' exactly as the page field states. Article: 'The World of Guy Gavriel Kay' by Ashley Barnard, March 16, 2011, Fantasy-Faction.",
+   "fromFile": "verdicts-kay-i679-710.json"
+  },
   "709": {
    "index": 709,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "710": {
+   "index": 710,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a series of vignettes – key moments from Thierry's life that are not particularly connected",
+   "note": "Raw live page (200). Verbatim. The 'rather than a unifying plot' limb is explicit in the same paragraph: 'there isn't exactly a unifying plot'. Salon Futura, April 3, 2025, Cheryl Morgan, reviewing Written on the Dark.",
+   "fromFile": "verdicts-kay-i679-710.json"
   },
   "711": {
    "index": 711,
