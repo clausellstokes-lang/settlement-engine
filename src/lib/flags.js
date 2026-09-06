@@ -70,7 +70,6 @@ const FLAG_DESCRIPTIONS = Object.freeze({
   heroV2: "P117 / H-1: two-voice hero rewrite (anti-AI as H1 + italic deck translation).",
   wizardChromeDiet: "P119 / W-1: collapse 7 wizard chrome rows into one combined header.",
   narrativeLayerStrip: "P121 / D-4: lift narrative buttons into labeled strip below dossier title.",
-  mobileSingleChrome: "P123 / A-2: drop mobile top header; auth chip joins bottom nav.",
   compendiumInlineHelp: "P126 / CP-1: \"?\" affordance on every config control opens Compendium snippet. Promoted on.",
   summaryMagazineV2: "P129 / D-2: Summary tab as two-column magazine spread. Replaces single-column layout.",
   tableView: "P142 / D-6: 380px phone-optimized session-running view of a settlement.",

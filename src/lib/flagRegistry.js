@@ -75,22 +75,12 @@ export const FLAG_DEFAULTS = Object.freeze({
   heroV2: true,
   wizardChromeDiet: true,
   narrativeLayerStrip: true,
-  // ⛔ NOT FLIPPED, AND THE REASON IS A MEASUREMENT, NOT A DOUBT (lane L-UI-MAT,
-  // 2026-09-06). O-13 ratified flipping this flag with `warEconomySurfacing` and
-  // `handbookVoice`. The permission is sound; the MECHANISM is gone. This flag has
-  // NO READER: `git grep mobileSingleChrome` over the whole tracked tree returns
-  // four hits and not one is a `flag()`/`useFlag()` call — this line, its
-  // description in flags.js, and two doc sentences. Its one consumer was
-  // src/App.jsx and `8bf493d05` (fix(nav)) deleted all three of its read sites:
-  // the nav slice is now a hard-coded `.slice(0, 5)`, the mobile top header
-  // renders unconditionally, and the auth-chip 6th slot no longer exists. The
-  // flag-ON behaviour is not in source, so flipping this to `true` would change
-  // NOTHING except to advertise a capability the build cannot render (dev flag
-  // panel + crash-forensics `flags_on`). This is the same shape the lighting plan
-  // itself confirmed for `generationWorker` — "0 hits — nothing to flip" — and
-  // correctly classed a BLOCKED RESIDUE. Chair row: rebuild the feature or retire
-  // the entry; a lane may not decide which, because retiring it moves the flag census.
-  mobileSingleChrome: false,
+  // RETIRED 2026-09-06 (§904 chair car): `mobileSingleChrome` had no reader —
+  // src/App.jsx lost its three read sites at 8bf493d05 (fix(nav), 2026-06-22):
+  // the nav slice became a hard-coded `.slice(0, 5)`, the mobile top header
+  // renders unconditionally, and the auth-chip 6th slot was deleted. The entry
+  // was bookkeeping. Rebuilding the single-chrome mobile nav is an OWNER ROW
+  // (ODQ §904), not a flag flip.
   compendiumInlineHelp: true,
   summaryMagazineV2: true,
   tableView: true,
@@ -102,8 +92,8 @@ export const FLAG_DEFAULTS = Object.freeze({
   // ⭐ LIT 2026-09-06 — lane L-UI-MAT, lighting wave POSITION 4 (L-UI / `C4-UI`),
   // under owner row **O-13**, RATIFIED by the chair at ODQ §882.1: "O-13 three
   // product flags flip in L-UI (`warEconomySurfacing`, `handbookVoice`,
-  // `mobileSingleChrome`) … RATIFIED". Two of the three land here; the third is
-  // refused above with its measurement.
+  // `mobileSingleChrome`) … RATIFIED". Two of the three land here; the third
+  // was retired at §904 — its reader was deleted at 8bf493d05.
   //
   // THIS IS A DECLARED DISPLAY-ONLY SHIFT, AND IT WAS PROVEN RATHER THAN ASSERTED:
   //   • STRUCTURAL — no module under `src/domain/` or `src/generators/` imports

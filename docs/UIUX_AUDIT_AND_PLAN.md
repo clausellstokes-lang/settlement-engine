@@ -1957,8 +1957,8 @@ OVERALL VERDICT: the pricing surface is functional and the copy LAYER contains g
 
 #### Mobile Header + Bottom Nav + auth chip
 *File:* `src/App.jsx:358-424, 661-726`
-*Purpose:* Mobile chrome: slim top bar (brand + account chip) or, under mobileSingleChrome flag, a single bottom nav that also carries the auth/account slot.
-*Layout today:* Top: sticky brand button + AccountMenu(compact). Bottom: fixed gradient bar of up to 4-5 icon+label tabs from MOBILE_NAV_PRIORITY, plus an optional 6th auth slot when the flag is on.
+*Purpose:* Mobile chrome: a slim top bar (brand + account chip) above a fixed bottom nav. The single-chrome alternative — bottom nav only, carrying the auth/account slot — is NOT in the build: the `mobileSingleChrome` flag was retired 2026-09-06 after its read sites were deleted at `8bf493d05` (fix(nav), 2026-06-22); rebuilding it is an owner row.
+*Layout today:* Top: sticky brand button + AccountMenu(compact), rendered unconditionally on mobile. Bottom: fixed gradient bar of the first 5 icon+label tabs from MOBILE_NAV_PRIORITY (a hard-coded `.slice(0, 5)`). There is no auth slot in the bottom nav and no flag branch on either half.
 
 | Q | Verdict | Finding |
 |---|---|---|
