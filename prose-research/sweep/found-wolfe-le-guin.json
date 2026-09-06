@@ -1,256 +1,6 @@
 {
  "complete": true,
- "coverage": "Roster: noisms 2019 fetched (on disk, no Le Guin words in it); the Melville blurb traced past every relay to its printed text on The Urth of the New Sun and to a second, earlier Le Guin sentence in Pringle 1985; Guardian obituary NOT FOUND (the 2019 URL 404s, and Le Guin died 2018-01-22, fifteen months before Wolfe, so no Le Guin obituary of him can exist); Steering the Craft and The Language of the Night NOT CHECKABLE at the primary (their official pages carry no table of contents and the Internet Archive lending scans return 403 on fulltext search); Dancing at the Edge of the World, The Wave in the Mind and Words Are My Matter checked by their official tables of contents and contain no Wolfe item; From Elfland to Poughkeepsie read in full as a PDF and does not name Wolfe; public Wolfe-Le Guin correspondence NOT FOUND (part of the Le Guin papers' correspondence is closed until 2069 and the item-level inventory is not on the Archives West page; the Gene Wolfe Collection at Texas A&M holds galleys and one manuscript, no correspondence). Substantive sources by route: named roster 4; bibliography chasing 6 (Edges scan, Interfaces, Norton, Pringle x2, Clute 2009); lateral search 8 (Open Library search-inside, publisher captures, SFE, New Yorker, New Republic, Wikipedia, Archives West, Elfland PDF). Twenty substantive of thirty-one fetched. The literature is genuinely thin and that is the finding: Le Guin never published an essay or review on Wolfe. Her whole reachable record on him is one sentence in her 1980 Edges introduction, one three-sentence jacket blurb on The Urth of the New Sun, one sentence quoted by Pringle in 1985, and her editorial acts of selecting Wolfe for three anthologies.",
- "sourcesRead": [
-  {
-   "title": "Le Guin, \"Introduction\", Edges (Pocket Books, 1980) \u2014 full book scan",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/suzanne-delage/1980-leguin-edges13newtalesfromtheborderlandsoftheimagination.pdf",
-   "kind": "primary",
-   "substantive": true,
-   "date": "1980",
-   "route": "gwern.net scan PDF, pdfminer text layer"
-  },
-  {
-   "title": "gwern, Interpreting 'Suzanne Delage' as Dracula",
-   "url": "https://gwern.net/suzanne-delage",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2023-",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Ursula K. Le Guin Foundation \u2014 Edges",
-   "url": "https://www.ursulakleguin.com/edges",
-   "kind": "primary-adjacent",
-   "substantive": true,
-   "date": "2026",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Ursula K. Le Guin Foundation \u2014 Interfaces",
-   "url": "https://www.ursulakleguin.com/interfaces",
-   "kind": "primary-adjacent",
-   "substantive": true,
-   "date": "2026",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Ursula K. Le Guin Foundation \u2014 The Norton Book of Science Fiction",
-   "url": "https://www.ursulakleguin.com/the-norton-book-of-science-fiction",
-   "kind": "primary-adjacent",
-   "substantive": true,
-   "date": "2026",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Ursula K. Le Guin Foundation \u2014 Words Are My Matter",
-   "url": "https://www.ursulakleguin.com/words-are-my-matter",
-   "kind": "primary-adjacent",
-   "substantive": true,
-   "date": "2026",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Ursula K. Le Guin Foundation \u2014 Dancing at the Edge of the World",
-   "url": "https://www.ursulakleguin.com/dancing-at-the-edge-of-the-world",
-   "kind": "primary-adjacent",
-   "substantive": true,
-   "date": "2026",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Ursula K. Le Guin Foundation \u2014 The Language of the Night",
-   "url": "https://www.ursulakleguin.com/the-language-of-the-night",
-   "kind": "primary-adjacent",
-   "substantive": false,
-   "date": "2026",
-   "route": "direct fetch; page carries no table of contents so no negative can be drawn"
-  },
-  {
-   "title": "Ursula K. Le Guin Foundation \u2014 Steering the Craft",
-   "url": "https://www.ursulakleguin.com/steering-the-craft",
-   "kind": "primary-adjacent",
-   "substantive": false,
-   "date": "2026",
-   "route": "direct fetch; no table of contents on the page"
-  },
-  {
-   "title": "Le Guin, From Elfland to Poughkeepsie (1973), PDF",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "kind": "primary",
-   "substantive": true,
-   "date": "1973",
-   "route": "direct PDF fetch + pdfminer"
-  },
-  {
-   "title": "Macmillan, The Urth of the New Sun \u2014 Praise (Wayback capture)",
-   "url": "https://web.archive.org/web/20230527084143id_/https://us.macmillan.com/books/9780312863944/theurthofthenewsun",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "captured 2023-05-27",
-   "route": "Wayback raw id_ capture after the live page returned an empty body"
-  },
-  {
-   "title": "Tor Publishing Group, The Urth of the New Sun (Wayback capture)",
-   "url": "https://web.archive.org/web/20251125070019id_/https://torpublishinggroup.com/the-urth-of-the-new-sun/",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "captured 2025-11-25",
-   "route": "Wayback raw id_ capture"
-  },
-  {
-   "title": "Open Library search-inside, \"Wolfe is our Melville\"",
-   "url": "https://openlibrary.org/search/inside?q=%22Wolfe+is+our+Melville%22+Le+Guin",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "searched 2026-09-06",
-   "route": "openlibrary.org full-text search over IA scans (snippet-only)"
-  },
-  {
-   "title": "John Clute, SFE entry \"Wolfe, Gene\"",
-   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "accessed 2026-09-06",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Peter Bebergal, Sci-Fi's Difficult Genius, The New Yorker",
-   "url": "https://www.newyorker.com/books/page-turner/sci-fis-difficult-genius",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2015",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Wikipedia, Gene Wolfe (wikitext)",
-   "url": "https://en.wikipedia.org/w/index.php?title=Gene_Wolfe&action=raw",
-   "kind": "relay",
-   "substantive": true,
-   "date": "2026-09-06",
-   "route": "action=raw"
-  },
-  {
-   "title": "Jeet Heer, Gene Wolfe Was the Proust of Science Fiction, The New Republic",
-   "url": "https://newrepublic.com/article/153615/gene-wolfe-proust-science-fiction",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2019-04",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Archives West, Ursula K. Le Guin papers (Coll 270)",
-   "url": "https://archiveswest.orbiscascade.org/ark:/80444/xv926878",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2019 finding aid",
-   "route": "direct fetch"
-  },
-  {
-   "title": "noisms, Gene Wolfe, Ursula Le Guin, and Friendships Across the Divide",
-   "url": "https://monstersandmanuals.blogspot.com/2019/04/gene-wolfe-ursula-le-guin-and.html",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2019-04-16",
-   "route": "already on disk from an earlier sweep"
-  },
-  {
-   "title": "KPFA Bookwaves/Artwaves, Two Science Fiction Masters: Ursula K. Le Guin and Gene Wolfe",
-   "url": "https://kpfa.org/episode/bookwaves-artwaves-september-3-2026/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "2026-09-03",
-   "route": "direct fetch; two separate archival interviews (Le Guin 2000, Wolfe 1982), neither about the other"
-  },
-  {
-   "title": "The Guardian, Gene Wolfe obituary (attempted)",
-   "url": "https://www.theguardian.com/books/2019/apr/17/gene-wolfe-obituary",
-   "kind": "reception",
-   "substantive": false,
-   "date": "n/a",
-   "route": "404 not found"
-  },
-  {
-   "title": "Open Library search-inside, \"Wolfe is so good he leaves me speechless\"",
-   "url": "https://openlibrary.org/search/inside?q=%22Wolfe+is+so+good+he+leaves+me+speechless%22",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "searched 2026-09-06",
-   "route": "openlibrary.org full-text search (snippet-only); hits in David Pringle, Science Fiction: The 100 Best Novels and The Ultimate Guide to Science Fiction"
-  },
-  {
-   "title": "Open Library search-inside, Pringle's framing of the peer tributes",
-   "url": "https://openlibrary.org/search/inside?q=%22and+it+has+drawn+numerous+peer%22",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "searched 2026-09-06",
-   "route": "openlibrary.org full-text search (snippet-only)"
-  },
-  {
-   "title": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2009-04-06",
-   "route": "on disk from an earlier sweep"
-  },
-  {
-   "title": "Ursula K. Le Guin Foundation \u2014 The Wave in the Mind",
-   "url": "https://www.ursulakleguin.com/the-wave-in-the-mind",
-   "kind": "primary-adjacent",
-   "substantive": true,
-   "date": "2026",
-   "route": "direct fetch"
-  },
-  {
-   "title": "noisms, So. Farewell then...",
-   "url": "https://monstersandmanuals.blogspot.com/2019/04/so-farewell-then.html",
-   "kind": "reader",
-   "substantive": false,
-   "date": "2019-04-15",
-   "route": "fetched via the blog's April 2019 archive page"
-  },
-  {
-   "title": "SFWA, In Memoriam: Gene Wolfe",
-   "url": "https://sfwa.org/2019/04/15/in-memoriam-gene-wolfe/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "2019-04-15",
-   "route": "direct fetch; no Le Guin mention"
-  },
-  {
-   "title": "Nebula Awards, Grand Masters: Gene Wolfe",
-   "url": "https://nebulas.sfwa.org/grand-masters/gene-wolfe/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "accessed 2026-09-06",
-   "route": "direct fetch; quotes Swanwick, not Le Guin"
-  },
-  {
-   "title": "Locus Online, Gene Wolfe Named SFWA Grand Master",
-   "url": "https://locusmag.com/2012/12/gene-wolfe-named-sfwa-grand-master/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "2012-12",
-   "route": "direct fetch; Le Guin named only as a previous recipient"
-  },
-  {
-   "title": "Wikipedia, The Language of the Night (wikitext)",
-   "url": "https://en.wikipedia.org/w/index.php?title=The_Language_of_the_Night&action=raw",
-   "kind": "relay",
-   "substantive": false,
-   "date": "2026-09-06",
-   "route": "action=raw; article has no essay-level contents list, so no negative can be drawn about Wolfe"
-  },
-  {
-   "title": "Internet Archive lending items for Le Guin's essay collections (search-inside attempted)",
-   "url": "https://archive.org/metadata/languageofnighte0000ursu",
-   "kind": "measurement",
-   "substantive": false,
-   "date": "2026-09-06",
-   "route": "BLOCKED: fulltext/inside.php returns 403 Item not available for lending items; api.archivelab.org is dead"
-  }
- ],
+ "coverage": "Roster: noisms 2019 fetched (on disk, no Le Guin words in it); the Melville blurb traced past every relay to its printed text on The Urth of the New Sun and to a second, earlier Le Guin sentence in Pringle 1985; Guardian obituary NOT FOUND (the 2019 URL 404s, and Le Guin died 2018-01-22, fifteen months before Wolfe, so no Le Guin obituary of him can exist); Steering the Craft and The Language of the Night NOT CHECKABLE at the primary (their official pages carry no table of contents and the Internet Archive lending scans return 403 on fulltext search); Dancing at the Edge of the World, The Wave in the Mind and Words Are My Matter checked by their official tables of contents and contain no Wolfe item; From Elfland to Poughkeepsie read in full as a PDF and does not name Wolfe; public Wolfe-Le Guin correspondence NOT FOUND (part of the Le Guin papers' correspondence is closed until 2069 and the item-level inventory is not on the Archives West page; the Gene Wolfe Collection at Texas A&M holds galleys and one manuscript, no correspondence). Substantive sources by route: named roster 4; bibliography chasing 6 (Edges scan, Interfaces, Norton, Pringle twice, Clute 2009); lateral search 8 (Open Library search-inside, publisher captures, SFE, New Yorker, New Republic, Wikipedia, Archives West, Elfland PDF). Twenty substantive of thirty-one fetched. The literature is genuinely thin and that is the finding: Le Guin never published an essay or review on Wolfe; her whole reachable record on him is one sentence in her 1980 Edges introduction, one three-sentence jacket blurb on The Urth of the New Sun, one sentence quoted by Pringle in 1985, and her editorial acts of selecting Wolfe for three anthologies.",
  "claims": [
   {
    "feature": "other: what Le Guin says Wolfe's fiction is about",
@@ -311,7 +61,7 @@
   {
    "feature": "other: attribution correction",
    "claim": "The headnote calling Wolfe's Edges story a den of iniquity is Virginia Kidd's, not Le Guin's, since Kidd wrote the story introductions in that volume.",
-   "source": "Virginia Kidd, story headnote to \"Suzanne Delage\", Edges (Pocket Books, 1980), p. 96",
+   "source": "Virginia Kidd, story headnote to \"Suzanne Delage\", Edges (Pocket Books, 1980)",
    "url": "https://gwern.net/doc/fiction/gene-wolfe/suzanne-delage/1980-leguin-edges13newtalesfromtheborderlandsoftheimagination.pdf",
    "quote": "His short story hereunder is a den of",
    "page": "headnote to \"Suzanne Delage\"",
@@ -331,7 +81,7 @@
    "page": "Table of Contents",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "2026 (site); book 1980",
+   "date": "2026 site; book 1980",
    "routeHint": "direct fetch with browser user agent",
    "registerHint": "none",
    "confidence": "high"
@@ -345,7 +95,7 @@
    "page": "description and Table of Contents",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "2026 (site); book 1980",
+   "date": "2026 site; book 1980",
    "routeHint": "direct fetch with browser user agent",
    "registerHint": "none",
    "confidence": "high"
@@ -359,7 +109,7 @@
    "page": "Table of Contents",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "2026 (site); book 1993",
+   "date": "2026 site; book 1993",
    "routeHint": "direct fetch",
    "registerHint": "none",
    "confidence": "high"
@@ -394,7 +144,7 @@
   },
   {
    "feature": "cadence and rhythm",
-   "claim": "Le Guin describes the motion of Wolfe's prose in The Urth of the New Sun with three verbs of increasing release, soaring, falling free and running.",
+   "claim": "Le Guin describes the motion of Wolfe's book in The Urth of the New Sun with three verbs of increasing release, soaring, falling free and running.",
    "source": "Ursula K. Le Guin, publisher's praise for Gene Wolfe, The Urth of the New Sun (Tor/Macmillan)",
    "url": "https://web.archive.org/web/20230527084143id_/https://us.macmillan.com/books/9780312863944/theurthofthenewsun",
    "quote": "Gene Wolfe's new book soars, falls free, runs like",
@@ -404,7 +154,7 @@
    "date": "blurb undated; page captured 2023-05-27",
    "routeHint": "Wayback raw capture id_/",
    "registerHint": "none",
-   "confidence": "medium: the sentence describes the book's motion, and I read it as a description of its prose movement rather than of its plot"
+   "confidence": "medium: the sentence describes the book's motion, and reading it as a description of prose movement rather than of plot is my inference"
   },
   {
    "feature": "other: provenance of the Melville line",
@@ -414,7 +164,7 @@
    "quote": "",
    "page": "Praise for The Urth of the New Sun",
    "kind": "measurement",
-   "polarity": "n/a",
+   "polarity": "asserts",
    "date": "2023-05-27 capture",
    "routeHint": "Wayback raw capture id_/; grep for Melville in the captured page returns nothing",
    "registerHint": "none",
@@ -514,7 +264,7 @@
    "kind": "measurement",
    "polarity": "does not mention",
    "date": "1973 essay; PDF fetched 2026-09-06",
-   "routeHint": "direct PDF fetch, pdfminer extract (30,553 chars); regex search for 'Wolfe' returns zero hits while 'Vance' is present",
+   "routeHint": "direct PDF fetch, pdfminer extract of 30,553 characters; regex search for Wolfe returns zero hits while Vance is present",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -528,7 +278,7 @@
    "kind": "measurement",
    "polarity": "does not mention",
    "date": "book 2016; page fetched 2026-09-06",
-   "routeHint": "direct fetch; the page lists every talk, introduction and review in the book, and the string 'Wolfe' is absent",
+   "routeHint": "direct fetch; the page lists every talk, introduction and review in the book, and the string Wolfe is absent",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -542,7 +292,21 @@
    "kind": "measurement",
    "polarity": "does not mention",
    "date": "book 1989; page fetched 2026-09-06",
-   "routeHint": "direct fetch; the string 'Wolfe' is absent from the page",
+   "routeHint": "direct fetch; the string Wolfe is absent from the page",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: the thinness of the record",
+   "claim": "The table of contents of The Wave in the Mind lists appreciations of Cordwainer Smith and Borges but no piece on Gene Wolfe.",
+   "source": "The Ursula K. Le Guin Foundation, official site, page for The Wave in the Mind",
+   "url": "https://www.ursulakleguin.com/the-wave-in-the-mind",
+   "quote": "Thinking about Cordwainer Smith",
+   "page": "Table of Contents, Readings",
+   "kind": "measurement",
+   "polarity": "does not mention",
+   "date": "book 2004; page fetched 2026-09-06",
+   "routeHint": "direct fetch; the string Wolfe is absent from the page",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -584,9 +348,23 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2019-04-16",
-   "routeHint": "already on disk at prose-research/sweep/wolfe-craft-raw/noisms2019.txt (46 KB), fetched in an earlier sweep",
+   "routeHint": "already on disk at prose-research/sweep/wolfe-craft-raw/noisms2019.txt, 46 KB, fetched in an earlier sweep",
    "registerHint": "none",
    "confidence": "high"
+  },
+  {
+   "feature": "other: the friendship",
+   "claim": "The evidence noisms offers for the Wolfe and Le Guin friendship is a video interview with Wolfe, not any statement by Le Guin.",
+   "source": "noisms, \"So. Farewell then...\", Monsters and Manuals, 15 April 2019, the post linked from the friendship essay",
+   "url": "https://monstersandmanuals.blogspot.com/2019/04/so-farewell-then.html",
+   "quote": "This is a nice interview with him in the last year of his life.",
+   "page": "post body",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2019-04-15",
+   "routeHint": "fetched the April 2019 archive page monstersandmanuals.blogspot.com/2019/04/; the linked interview is an embedded YouTube video, id 0Pf-DyEEGlU",
+   "registerHint": "none",
+   "confidence": "medium: the quotation is from the linked post, and the video itself was not transcribed"
   },
   {
    "feature": "omission as information",
@@ -657,34 +435,256 @@
    "routeHint": "already on disk at prose-research/sweep/wolfe-raw/gw-clute-2009.txt from an earlier sweep",
    "registerHint": "none",
    "confidence": "high"
+  }
+ ],
+ "sourcesRead": [
+  {
+   "title": "Le Guin, \"Introduction\", Edges (Pocket Books, 1980) — full book scan",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/suzanne-delage/1980-leguin-edges13newtalesfromtheborderlandsoftheimagination.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1980",
+   "route": "gwern.net scan PDF, pdfminer text layer, 575,141 chars"
   },
   {
-   "feature": "other: the thinness of the record",
-   "claim": "The table of contents of The Wave in the Mind lists appreciations of Cordwainer Smith and Borges but no piece on Gene Wolfe.",
-   "source": "The Ursula K. Le Guin Foundation, official site, page for The Wave in the Mind",
-   "url": "https://www.ursulakleguin.com/the-wave-in-the-mind",
-   "quote": "Thinking about Cordwainer Smith",
-   "page": "Table of Contents, Readings",
+   "title": "gwern, Interpreting 'Suzanne Delage' as Dracula",
+   "url": "https://gwern.net/suzanne-delage",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2023-",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Ursula K. Le Guin Foundation — Edges",
+   "url": "https://www.ursulakleguin.com/edges",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Ursula K. Le Guin Foundation — Interfaces",
+   "url": "https://www.ursulakleguin.com/interfaces",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Ursula K. Le Guin Foundation — The Norton Book of Science Fiction",
+   "url": "https://www.ursulakleguin.com/the-norton-book-of-science-fiction",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Ursula K. Le Guin Foundation — Words Are My Matter",
+   "url": "https://www.ursulakleguin.com/words-are-my-matter",
    "kind": "measurement",
-   "polarity": "does not mention",
-   "date": "book 2004; page fetched 2026-09-06",
-   "routeHint": "direct fetch; the string 'Wolfe' is absent from the page",
-   "registerHint": "none",
-   "confidence": "high"
+   "substantive": true,
+   "date": "2026",
+   "route": "direct fetch"
   },
   {
-   "feature": "other: the friendship",
-   "claim": "The evidence noisms offers for the Wolfe and Le Guin friendship is a video interview with Wolfe, not any statement by Le Guin.",
-   "source": "noisms, \"So. Farewell then...\", Monsters and Manuals, 15 April 2019 (the post linked from the friendship essay)",
-   "url": "https://monstersandmanuals.blogspot.com/2019/04/so-farewell-then.html",
-   "quote": "This is a nice interview with him in the last year of his life.",
-   "page": "post body",
+   "title": "Ursula K. Le Guin Foundation — Dancing at the Edge of the World",
+   "url": "https://www.ursulakleguin.com/dancing-at-the-edge-of-the-world",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Ursula K. Le Guin Foundation — The Wave in the Mind",
+   "url": "https://www.ursulakleguin.com/the-wave-in-the-mind",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Ursula K. Le Guin Foundation — The Language of the Night",
+   "url": "https://www.ursulakleguin.com/the-language-of-the-night",
+   "kind": "measurement",
+   "substantive": false,
+   "date": "2026",
+   "route": "direct fetch; page carries no table of contents so no negative can be drawn"
+  },
+  {
+   "title": "Ursula K. Le Guin Foundation — Steering the Craft",
+   "url": "https://www.ursulakleguin.com/steering-the-craft",
+   "kind": "measurement",
+   "substantive": false,
+   "date": "2026",
+   "route": "direct fetch; no table of contents on the page"
+  },
+  {
+   "title": "Le Guin, From Elfland to Poughkeepsie (1973), PDF",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1973",
+   "route": "direct PDF fetch plus pdfminer, 30,553 chars, zero Wolfe hits"
+  },
+  {
+   "title": "Macmillan, The Urth of the New Sun — Praise (Wayback capture)",
+   "url": "https://web.archive.org/web/20230527084143id_/https://us.macmillan.com/books/9780312863944/theurthofthenewsun",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "captured 2023-05-27",
+   "route": "Wayback raw id_ capture after the live page returned an empty body"
+  },
+  {
+   "title": "Tor Publishing Group, The Urth of the New Sun (Wayback capture)",
+   "url": "https://web.archive.org/web/20251125070019id_/https://torpublishinggroup.com/the-urth-of-the-new-sun/",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "captured 2025-11-25",
+   "route": "Wayback raw id_ capture"
+  },
+  {
+   "title": "Open Library search-inside, \"Wolfe is our Melville\"",
+   "url": "https://openlibrary.org/search/inside?q=%22Wolfe+is+our+Melville%22+Le+Guin",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "searched 2026-09-06",
+   "route": "openlibrary.org full-text search over IA scans (snippet-only)"
+  },
+  {
+   "title": "Open Library search-inside, \"Wolfe is so good he leaves me speechless\"",
+   "url": "https://openlibrary.org/search/inside?q=%22Wolfe+is+so+good+he+leaves+me+speechless%22",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "searched 2026-09-06",
+   "route": "openlibrary.org full-text search (snippet-only); hits in David Pringle, Science Fiction: The 100 Best Novels and The Ultimate Guide to Science Fiction"
+  },
+  {
+   "title": "Open Library search-inside, Pringle's framing of the peer tributes",
+   "url": "https://openlibrary.org/search/inside?q=%22and+it+has+drawn+numerous+peer%22",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "searched 2026-09-06",
+   "route": "openlibrary.org full-text search (snippet-only)"
+  },
+  {
+   "title": "John Clute, SFE entry \"Wolfe, Gene\"",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "accessed 2026-09-06",
+   "route": "direct fetch"
+  },
+  {
+   "title": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2009-04-06",
+   "route": "on disk from an earlier sweep"
+  },
+  {
+   "title": "Peter Bebergal, Sci-Fi's Difficult Genius, The New Yorker",
+   "url": "https://www.newyorker.com/books/page-turner/sci-fis-difficult-genius",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2015",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Wikipedia, Gene Wolfe (wikitext)",
+   "url": "https://en.wikipedia.org/w/index.php?title=Gene_Wolfe&action=raw",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2026-09-06",
+   "route": "action=raw"
+  },
+  {
+   "title": "Jeet Heer, Gene Wolfe Was the Proust of Science Fiction, The New Republic",
+   "url": "https://newrepublic.com/article/153615/gene-wolfe-proust-science-fiction",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2019-04",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Archives West, Ursula K. Le Guin papers (Coll 270)",
+   "url": "https://archiveswest.orbiscascade.org/ark:/80444/xv926878",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019 finding aid",
+   "route": "direct fetch"
+  },
+  {
+   "title": "noisms, Gene Wolfe, Ursula Le Guin, and Friendships Across the Divide",
+   "url": "https://monstersandmanuals.blogspot.com/2019/04/gene-wolfe-ursula-le-guin-and.html",
    "kind": "reader",
-   "polarity": "asserts",
+   "substantive": true,
+   "date": "2019-04-16",
+   "route": "already on disk from an earlier sweep"
+  },
+  {
+   "title": "noisms, So. Farewell then...",
+   "url": "https://monstersandmanuals.blogspot.com/2019/04/so-farewell-then.html",
+   "kind": "reader",
+   "substantive": false,
    "date": "2019-04-15",
-   "routeHint": "fetched the April 2019 archive page monstersandmanuals.blogspot.com/2019/04/; the linked interview is an embedded YouTube video, id 0Pf-DyEEGlU",
-   "registerHint": "none",
-   "confidence": "medium: the quotation is from the linked post, and the video itself was not transcribed"
+   "route": "fetched via the blog's April 2019 archive page"
+  },
+  {
+   "title": "KPFA Bookwaves/Artwaves, Two Science Fiction Masters: Ursula K. Le Guin and Gene Wolfe",
+   "url": "https://kpfa.org/episode/bookwaves-artwaves-september-3-2026/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2026-09-03",
+   "route": "direct fetch; two separate archival interviews (Le Guin 2000, Wolfe 1982), neither about the other"
+  },
+  {
+   "title": "The Guardian, Gene Wolfe obituary (attempted)",
+   "url": "https://www.theguardian.com/books/2019/apr/17/gene-wolfe-obituary",
+   "kind": "reception",
+   "substantive": false,
+   "date": "n/a",
+   "route": "404 not found"
+  },
+  {
+   "title": "SFWA, In Memoriam: Gene Wolfe",
+   "url": "https://sfwa.org/2019/04/15/in-memoriam-gene-wolfe/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2019-04-15",
+   "route": "direct fetch; no Le Guin mention"
+  },
+  {
+   "title": "Nebula Awards, Grand Masters: Gene Wolfe",
+   "url": "https://nebulas.sfwa.org/grand-masters/gene-wolfe/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "accessed 2026-09-06",
+   "route": "direct fetch; quotes Swanwick, not Le Guin"
+  },
+  {
+   "title": "Locus Online, Gene Wolfe Named SFWA Grand Master",
+   "url": "https://locusmag.com/2012/12/gene-wolfe-named-sfwa-grand-master/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2012-12",
+   "route": "direct fetch; Le Guin named only as a previous recipient"
+  },
+  {
+   "title": "Wikipedia, The Language of the Night (wikitext)",
+   "url": "https://en.wikipedia.org/w/index.php?title=The_Language_of_the_Night&action=raw",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2026-09-06",
+   "route": "action=raw; article has no essay-level contents list, so no negative can be drawn about Wolfe"
+  },
+  {
+   "title": "Internet Archive lending items for Le Guin's essay collections (search-inside attempted)",
+   "url": "https://archive.org/metadata/languageofnighte0000ursu",
+   "kind": "measurement",
+   "substantive": false,
+   "date": "2026-09-06",
+   "route": "BLOCKED: fulltext/inside.php returns 403 Item not available for lending items; api.archivelab.org is dead"
   }
  ]
 }

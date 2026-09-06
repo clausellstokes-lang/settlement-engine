@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 6,
+ "indices": [
+  667,
+  668,
+  671,
+  672,
+  675,
+  676,
+  679,
+  680,
+  681,
+  682,
+  683,
+  688,
+  690,
+  691,
+  692
+ ],
+ "claims": [
+  {
+   "index": 667,
+   "feature": "other: institutional record versus fact",
+   "claim": "McCaffery's 1988 printing of the Fifth Head dedication reads 'who one night in 1966 grew me from a bean', where WolfeWiki prints 'who one well-remembered June evening in 1966 grew me from a bean'.",
+   "source": "Gene Wolfe, interviewed by Larry McCaffery, 'On Encompassing the Entire Universe', Science Fiction Studies #46 (vol. 15 part 3), November 1988",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
+   "quote": "1966 grew me from a bean",
+   "page": "interviewer's question on the dedication"
+  },
+  {
+   "index": 668,
+   "feature": "other: institutional record versus fact",
+   "claim": "WolfeWiki prints the Fifth Head dedication as 'To Damon Knight, who one well-remembered June evening in 1966 grew me from a bean.'",
+   "source": "Gene Wolfe, dedication to The Fifth Head of Cerberus, as printed on WolfeWiki",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Stories.TripTrap",
+   "quote": "who one well-remembered June evening in 1966 grew me from a bean",
+   "page": "'A note about the writing of the story'"
+  },
+  {
+   "index": 671,
+   "feature": "other: an editor commissioning the book",
+   "claim": "Wolfe says Damon Knight, to whom he had sold several short stories, was connected with a publisher and invited him to write a novel.",
+   "source": "Gene Wolfe, undated live chat transcript, SF chat channel (archived by gwern.net under 2015)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2015-genewolfe-sf-chatchannel-interview.txt",
+   "quote": "he invited me to write a novel for Berkely",
+   "page": "answer on unsolicited manuscripts"
+  },
+  {
+   "index": 672,
+   "feature": "other: an editor commissioning the book",
+   "claim": "Wolfe says Norbert Slepyan of Scribner's heard the title story at the Milford Conference and offered to publish it as a book if Wolfe wrote two more of roughly the same length.",
+   "source": "Gene Wolfe, interviewed by Larry McCaffery, 'On Encompassing the Entire Universe', Science Fiction Studies #46 (vol. 15 part 3), November 1988",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
+   "quote": "Norbert Slepyan of Scribner's was there at that",
+   "page": "answer on the structure of Cerberus"
+  },
+  {
+   "index": 675,
+   "feature": "other: dating a record",
+   "claim": "Gale's Major 21st-Century Writers gives Wolfe's Plant Engineering post as senior editor, 1972-84, agreeing with Ultan's Library against the magazine's own obituary.",
+   "source": "'Wolfe, Gene (Rodman)', Major 21st-Century Writers, ed. Tracey Matthews, vol. 5, Gale, 2005",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2010-02-25-gale-genewolfebiography.txt",
+   "quote": "Plant Engineering Magazine, Barrington, IL, senior editor, 1972-84",
+   "page": "CAREER"
+  },
+  {
+   "index": 676,
+   "feature": "other: editor relationship",
+   "claim": "DeLucci, a Tor colleague, states flatly that David Hartwell was Gene Wolfe's editor for The Book of the New Sun.",
+   "source": "Theresa DeLucci, 'David Hartwell's Last Gift to Me: Gene Wolfe's Book of the New Sun', Tor.com, 13 March 2017",
+   "url": "https://reactormag.com/davids-last-gift-to-me-gene-wolfes-book-of-the-new-sun/",
+   "quote": "David was Gene’s editor for The Book of the New Sun",
+   "page": "body, the World Horror Con 2002 passage"
+  },
+  {
+   "index": 679,
+   "feature": "other: an editor's letter as the turning point",
+   "claim": "The finding aid for the Damon Knight papers says Knight's rejection letters usually suggested how to change the story to make it acceptable, or where else it might be submitted.",
+   "source": "Joyce Griffith and Stephanie Kays, 'Guide to the Damon Knight papers', Archives West, 2015",
+   "url": "https://archiveswest.orbiscascade.org/ark:80444/xv31439",
+   "quote": "usually suggested how to change the story to make it acceptable",
+   "page": "Content Description"
+  },
+  {
+   "index": 680,
+   "feature": "other: an editor's letter as the turning point",
+   "claim": "The finding aid says the Orbit correspondence includes many letters from Gene Wolfe.",
+   "source": "Joyce Griffith and Stephanie Kays, 'Guide to the Damon Knight papers', Archives West, 2015",
+   "url": "https://archiveswest.orbiscascade.org/ark:80444/xv31439",
+   "quote": "Among them: Gene Wolfe, Vonda McIntyre, Gardner Dozois",
+   "page": "Content Description"
+  },
+  {
+   "index": 681,
+   "feature": "other: an editor's judgment",
+   "claim": "Kelly reports that In Search of Wonder ends with a 1966 coda in which Knight predicts a split of the field, placing Wolfe among the 'literary' SF writers with Le Guin and Aldiss.",
+   "source": "Mark R. Kelly, 'Damon Knight, IN SEARCH OF WONDER 3/e', Views from Crestmont Drive, 22 March 2018",
+   "url": "http://www.markrkelly.com/Blog/2018/03/22/damon-knight-in-search-of-wonder-3-e/",
+   "quote": "‘literary’ SF (by Le Guin, Aldiss, Wolfe, and others)",
+   "page": "review body, on the last chapter"
+  },
+  {
+   "index": 682,
+   "feature": "other: an editor's standing",
+   "claim": "Patrick Nielsen Hayden calls Hartwell the field's most consequential editor since John W. Campbell.",
+   "source": "Patrick Nielsen Hayden, 'David Geddes Hartwell, 1941-2016', Making Light, January 2016",
+   "url": "https://nielsenhayden.com/makinglight/archives/016423.html",
+   "quote": "our field’s most consequential editor since John W. Campbell",
+   "page": "post body, closing"
+  },
+  {
+   "index": 683,
+   "feature": "other: an editor as the whole market",
+   "claim": "Wolfe says that for years after 'Trip-Trap' the Orbit series was his main market and his other sales were the stories Damon Knight had turned down.",
+   "source": "Gene Wolfe, in conversation with Neil Gaiman, Locus #500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "were stories that Damon Knight had turned down.",
+   "page": "Locus, September 2002, pp. 80-82"
+  },
+  {
+   "index": 688,
+   "feature": "other: an editor's gate",
+   "claim": "Wolfe says Knight's Milford Writers' Conference was only for published writers, either people he was publishing in Orbit or people he would like to publish in Orbit.",
+   "source": "Gene Wolfe, in conversation with Neil Gaiman, Locus #500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "either people he was publishing in Orbit or",
+   "page": "Locus, September 2002, pp. 80-82"
+  },
+  {
+   "index": 690,
+   "feature": "other: an editor commissioning the book",
+   "claim": "In the 2002 telling the Scribners editor who commissioned The Fifth Head of Cerberus at Milford is left unnamed, where in 1988 Wolfe named him Norbert Slepyan.",
+   "source": "Gene Wolfe, in conversation with Neil Gaiman, Locus #500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "would write two more novellas like this, we would",
+   "page": "Locus, September 2002, pp. 80-82"
+  },
+  {
+   "index": 691,
+   "feature": "other: dating a record",
+   "claim": "The Locus biographical sidebar gives Wolfe as senior editor of Plant Engineering from 1972 to 84.",
+   "source": "Locus magazine biographical sidebar, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "editor ofPlant Engineeringfrom 1972 - 84",
+   "page": "Locus, September 2002, biographical sidebar"
+  },
+  {
+   "index": 692,
+   "feature": "other: the record that contradicts the fact",
+   "claim": "In the 2002 telling Wolfe quotes Pohl's acceptance as 'You know, I think the rewrite has really improved this', where in 1988 he quoted it as 'I'm glad you let me see this again. The re write has really improved it.'",
+   "source": "Gene Wolfe, in conversation with Neil Gaiman, Locus #500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "the rewrite has really improved this. I’m glad youlet",
+   "page": "Locus, September 2002, pp. 80-82"
+  }
+ ]
+}

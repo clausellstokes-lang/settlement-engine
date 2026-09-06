@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 1,
+ "indices": [
+  508,
+  509,
+  512,
+  514,
+  515,
+  516,
+  517,
+  520,
+  524,
+  534,
+  535,
+  539,
+  540,
+  541,
+  542
+ ],
+ "claims": [
+  {
+   "index": 508,
+   "feature": "reader and expert judgment",
+   "claim": "Critic Ray Davis comments that Wolfe is simply not managing to do the job he wants to do.",
+   "source": "Ray Davis in comments on Waggish, 8 December 2007",
+   "url": "https://www.waggish.org/2007/more-on-gene-wolfe/",
+   "quote": "he’s simply not managing to do the job he wants to do",
+   "page": "comments"
+  },
+  {
+   "index": 509,
+   "feature": "other: overall verdict",
+   "claim": "The reviewer bormgans reports that on rereading The Book of the New Sun was to a certain extent a lesser affair than he remembered.",
+   "source": "bormgans, 'THE BOOK OF THE NEW SUN - Gene Wolfe (1980-83)', Weighing a pig doesn't fatten it, 16 May 2021",
+   "url": "https://schicksalgemeinschaft.wordpress.com/2021/05/16/the-book-of-the-new-sun-gene-wolfe-1980-83/",
+   "quote": "I have to admit that to a certain extent is was",
+   "page": "opening section"
+  },
+  {
+   "index": 512,
+   "feature": "other: critical thinness",
+   "claim": "bormgans calls Peter Wright's Ultan's Library review a rather hagiographic text.",
+   "source": "bormgans on Peter Wright's review, Weighing a pig doesn't fatten it, 16 May 2021",
+   "url": "https://schicksalgemeinschaft.wordpress.com/2021/05/16/the-book-of-the-new-sun-gene-wolfe-1980-83/",
+   "quote": "has written a rather hagiographic text on the subject",
+   "page": "section on obscure diction"
+  },
+  {
+   "index": 514,
+   "feature": "reader and expert judgment",
+   "claim": "bormgans relays Marc Aramini's observation that critical discourse on Wolfe is marked by how infrequently any two people agree with each other.",
+   "source": "bormgans quoting Marc Aramini's review of Andre-Driussi's Chapter Guide (2019), Weighing a pig doesn't fatten it, 16 May 2021",
+   "url": "https://schicksalgemeinschaft.wordpress.com/2021/05/16/the-book-of-the-new-sun-gene-wolfe-1980-83/",
+   "quote": "how infrequently any two people will agree with each other",
+   "page": "section on the three reasons interpretation is difficult"
+  },
+  {
+   "index": 515,
+   "feature": "reader and expert judgment",
+   "claim": "bormgans writes in the comments that there is something of a one-trick pony vibe to Wolfe's writing.",
+   "source": "bormgans in comments, Weighing a pig doesn't fatten it, 17 May 2021",
+   "url": "https://schicksalgemeinschaft.wordpress.com/2021/05/16/the-book-of-the-new-sun-gene-wolfe-1980-83/",
+   "quote": "there’s something of a one-trick pony vibe to his writing",
+   "page": "comments"
+  },
+  {
+   "index": 516,
+   "feature": "reader and expert judgment",
+   "claim": "A commenter says reviews of this kind keep them shying away from Gene Wolfe.",
+   "source": "commenter 'Riders of Skaith', Weighing a pig doesn't fatten it, 17 May 2021",
+   "url": "https://schicksalgemeinschaft.wordpress.com/2021/05/16/the-book-of-the-new-sun-gene-wolfe-1980-83/",
+   "quote": "It’s reviews like like this that keep me shying away",
+   "page": "comments"
+  },
+  {
+   "index": 517,
+   "feature": "other: reader difficulty",
+   "claim": "The reviewer Jesse calls The Book of the New Sun divisive for its relative opacity.",
+   "source": "Jesse, Speculiction, 9 July 2012",
+   "url": "http://speculiction.blogspot.com/2012/07/review-of-book-of-new-sun-by-gene-wolfe.html",
+   "quote": "Divisive for its relative opacity",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 520,
+   "feature": "sentence length variation",
+   "claim": "Keller says Wolfe's themes are buried in long-winded sentences.",
+   "source": "Alex Keller, Innsmouth Free Press, 31 August 2009",
+   "url": "https://innsmouthfreepress.com/review-the-very-best-of-gene-wolfe/",
+   "quote": "themes are so buried in long-winded sentences",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 524,
+   "feature": "adjective and adverb discipline",
+   "claim": "Keller says Wolfe's descriptive style buries the story in dense descriptions and slowing adjectives that make the text difficult to read.",
+   "source": "Alex Keller, Innsmouth Free Press, 31 August 2009",
+   "url": "https://innsmouthfreepress.com/review-the-very-best-of-gene-wolfe/",
+   "quote": "burying it in dense descriptions and slowing adjectives",
+   "page": "section on The Death of Doctor Island"
+  },
+  {
+   "index": 534,
+   "feature": "other: deferred payoff",
+   "claim": "Algis Budrys wrote that one cannot take full satisfaction in The Shadow of the Torturer because no one part of the tetralogy is whole.",
+   "source": "Algis Budrys, \"Books: 'The Shadow of the Torturer'\", The Magazine of Fantasy and Science Fiction, vol. 58 no. 5, May 1980, pp. 26-7, reprinted in Contemporary Literary Criticism vol. 25",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/algis-budrys-2",
+   "quote": "no one part is whole",
+   "page": "pp. 26-7"
+  },
+  {
+   "index": 535,
+   "feature": "other: deferred payoff",
+   "claim": "Budrys wrote that Wolfe is asking readers to read what will eventually be a quarter-million words while waiting for the full reward.",
+   "source": "Algis Budrys, F&SF, vol. 58 no. 5, May 1980, pp. 26-7, reprinted in CLC vol. 25",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/algis-budrys-2",
+   "quote": "a quarter-million words while waiting for the full reward",
+   "page": "pp. 26-7"
+  },
+  {
+   "index": 539,
+   "feature": "other: genre suspicion",
+   "claim": "Thomas Disch wrote that science fantasy strikes him as inauthentic, coy and trivial even when practised by writers he admires.",
+   "source": "Thomas M. Disch, 'A Wizard of the Fabulous', Book World - The Washington Post, 22 March 1981, p. 11, reprinted in CLC vol. 25",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/thomas-m-disch",
+   "quote": "science fantasy strikes me as inauthentic, coy, and trivial",
+   "page": "p. 11"
+  },
+  {
+   "index": 540,
+   "feature": "other: overall verdict",
+   "claim": "Disch says chapters in The Claw of the Conciliator venture perilously close to pulp magazine hugger-mugger.",
+   "source": "Thomas M. Disch, Book World - The Washington Post, 22 March 1981, p. 11, reprinted in CLC vol. 25",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/thomas-m-disch",
+   "quote": "venture perilously close to pulp magazine hugger-mugger",
+   "page": "p. 11"
+  },
+  {
+   "index": 541,
+   "feature": "other: overall verdict",
+   "claim": "Disch says one long interpolated masque in The Claw of the Conciliator is too archly Significant, after the manner of Thornton Wilder's The Skin of Our Teeth.",
+   "source": "Thomas M. Disch, Book World - The Washington Post, 22 March 1981, p. 11, reprinted in CLC vol. 25",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/thomas-m-disch",
+   "quote": "that are too archly Significant, after the manner of Thornton",
+   "page": "p. 11"
+  },
+  {
+   "index": 542,
+   "feature": "metaphor discipline",
+   "claim": "Disch argues that in allegorical fantasy each element must bear a weight of meditated meaning that deepens as the tale progresses, and says Wolfe achieves this.",
+   "source": "Thomas M. Disch, Book World - The Washington Post, 22 March 1981, p. 11, reprinted in CLC vol. 25",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/thomas-m-disch",
+   "quote": "bears a weight of meditated meaning that intensifies and deepens",
+   "page": "p. 11"
+  }
+ ]
+}

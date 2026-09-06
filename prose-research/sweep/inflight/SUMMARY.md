@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 17:19:44 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 17:29:22 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -208,10 +208,10 @@
 | dnd | verifier | i94-108 | result | 14 | — | verdict file WRITTEN | 17:42:38 |
 | hobb | critic |  | failed | 0 | — | — | 19:45:57 |
 | hobb | critic |  | result | 0 | critic-hobb.md | — | 18:29:49 |
-| hobb | finder | critics-absent | result | 93 | — | 67 claims, complete=True @15:23:42 | 19:27:01 |
-| hobb | finder | dropped-and-routes | result | 68 | — | 94 claims, complete=True @15:21:57 | 19:27:00 |
-| hobb | finder | epigraph-census | result | 29 | — | 76 claims, complete=True @15:16:33 | 19:21:12 |
-| hobb | finder | translators | result | 47 | — | 74 claims, complete=True @15:22:30 | 19:25:55 |
+| hobb | finder | critics-absent | result | 93 | — | 67 claims, complete=True @17:25:57 | 19:27:01 |
+| hobb | finder | dropped-and-routes | result | 68 | — | 94 claims, complete=True @17:25:57 | 19:27:00 |
+| hobb | finder | epigraph-census | result | 29 | — | 76 claims, complete=True @17:25:57 | 19:21:12 |
+| hobb | finder | translators | result | 47 | — | 74 claims, complete=True @17:25:57 | 19:25:55 |
 | hobb | regrade | regrade-r4 | result | 0 | — | — | 17:37:59 |
 | hobb | regrade | regrade-r6 | failed | 0 | — | — | 19:45:55 |
 | hobb | synth |  | failed | 0 | — | — | 19:45:56 |
@@ -268,12 +268,12 @@
 | kay | critic |  | failed | 0 | — | — | 19:46:20 |
 | kay | critic |  | failed | 0 | — | — | 18:42:13 |
 | kay | critic |  | failed | 0 | — | — | 17:51:51 |
-| kay | finder | academic-routes | result | 109 | — | 46 claims, complete=True @15:37:17 | 19:40:35 |
+| kay | finder | academic-routes | result | 109 | — | 46 claims, complete=True @17:25:52 | 19:40:35 |
 | kay | finder | craft | result | 112 | — | 163 claims, complete=True @14:02:12 | 17:25:51 |
-| kay | finder | rescue-unread | result | 113 | — | 100 claims, complete=True @15:33:47 | 19:38:12 |
-| kay | finder | silmarillion-and-verse | result | 105 | — | 113 claims, complete=True @15:29:13 | 19:34:08 |
+| kay | finder | rescue-unread | result | 113 | — | 100 claims, complete=True @17:25:52 | 19:38:12 |
+| kay | finder | silmarillion-and-verse | result | 105 | — | 113 claims, complete=True @17:25:52 | 19:34:08 |
 | kay | finder | transcripts-and-readers | failed | 22 | — | — | 19:45:35 |
-| kay | finder | translators-and-ear | result | 80 | — | 35 claims, complete=True @15:31:38 | 19:33:40 |
+| kay | finder | translators-and-ear | result | 80 | — | 35 claims, complete=True @17:25:52 | 19:33:40 |
 | kay | regrade | regrade-r4 | failed | 0 | — | — | 17:51:50 |
 | kay | regrade | regrade-r5 | result | 0 | build-kay-regrade.mjs | — | 18:26:34 |
 | kay | regrade | regrade-r7 | failed | 0 | — | — | 19:46:19 |
@@ -364,14 +364,14 @@
 | leguin | critic |  | result | 32 | critic-leguin.md | — | 18:21:42 |
 | leguin | critic |  | failed | 0 | — | — | 18:42:15 |
 | leguin | critic |  | failed | 0 | — | — | 17:51:02 |
-| leguin | finder | academic-2 | result | 50 | — | 108 claims, complete=True @15:40:43 | 19:45:14 |
-| leguin | finder | academic-2 | failed | 44 | — | 108 claims, complete=True @15:40:43 | 18:42:07 |
+| leguin | finder | academic-2 | result | 50 | — | 78 claims, complete=True @17:25:53 | 19:45:14 |
+| leguin | finder | academic-2 | failed | 44 | — | 78 claims, complete=True @17:25:53 | 18:42:07 |
 | leguin | finder | close-2 | result | 125 | — | 159 claims, complete=True @15:28:10 | 19:33:00 |
 | leguin | finder | close-2 | failed | 48 | — | 159 claims, complete=True @15:28:10 | 18:42:06 |
-| leguin | finder | record-register | result | 53 | — | 106 claims, complete=True @15:24:11 | 19:27:29 |
-| leguin | finder | record-register | failed | 15 | — | 106 claims, complete=True @15:24:11 | 18:42:14 |
-| leguin | finder | voice-2 | result | 66 | — | 132 claims, complete=True @15:23:03 | 19:29:06 |
-| leguin | finder | voice-2 | failed | 31 | — | 132 claims, complete=True @15:23:03 | 18:42:07 |
+| leguin | finder | record-register | result | 53 | — | 80 claims, complete=True @17:25:53 | 19:27:29 |
+| leguin | finder | record-register | failed | 15 | — | 80 claims, complete=True @17:25:53 | 18:42:14 |
+| leguin | finder | voice-2 | result | 66 | — | 132 claims, complete=True @17:25:53 | 19:29:06 |
+| leguin | finder | voice-2 | failed | 31 | — | 132 claims, complete=True @17:25:53 | 18:42:07 |
 | leguin | regrade | regrade-r4 | result | 0 | build-leguin-r4.mjs | — | 17:31:56 |
 | leguin | regrade | regrade-r6 | failed | 0 | — | — | 18:42:14 |
 | leguin | regrade | regrade-r7 | failed | 0 | — | — | 19:46:12 |
@@ -521,12 +521,12 @@
 | wolfe | critic |  | result | 0 | critic-wolfe.md | — | 18:34:19 |
 | wolfe | critic |  | failed | 0 | — | — | 17:52:41 |
 | wolfe | finder | close-continued | failed | 42 | — | 43 claims, complete=False @15:45:44 | 19:45:45 |
-| wolfe | finder | counter | result | 68 | — | 114 claims, complete=True @15:17:10 | 19:22:08 |
-| wolfe | finder | editors | result | 35 | — | 78 claims, complete=True @15:13:40 | 19:17:55 |
-| wolfe | finder | le-guin | result | 56 | — | 31 claims, complete=True @15:23:20 | 19:25:33 |
-| wolfe | finder | measure | result | 36 | find-wolfe-measure.md, found-wolfe-measure.json, metrics.py | 38 claims, complete=True @15:15:21 | 19:18:11 |
+| wolfe | finder | counter | result | 68 | — | 114 claims, complete=True @17:25:54 | 19:22:08 |
+| wolfe | finder | editors | result | 35 | — | 78 claims, complete=True @17:25:54 | 19:17:55 |
+| wolfe | finder | le-guin | result | 56 | — | 31 claims, complete=True @17:25:54 | 19:25:33 |
+| wolfe | finder | measure | result | 36 | find-wolfe-measure.md, found-wolfe-measure.json, metrics.py | 38 claims, complete=True @17:25:54 | 19:18:11 |
 | wolfe | finder | monographs | failed | 71 | — | 54 claims, complete=False @15:46:26 | 19:46:26 |
-| wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @15:44:29 | 19:50:37 |
+| wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
 | wolfe | regrade | regrade-r4 | result | 0 | — | — | 17:43:04 |
 | wolfe | regrade | regrade-r6 | failed | 0 | — | — | 19:50:40 |
 | wolfe | synth |  | failed | 0 | — | — | 19:50:41 |

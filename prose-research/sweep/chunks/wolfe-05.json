@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 5,
+ "indices": [
+  649,
+  650,
+  652,
+  653,
+  656,
+  657,
+  658,
+  659,
+  660,
+  661,
+  662,
+  663,
+  664,
+  665,
+  666
+ ],
+ "claims": [
+  {
+   "index": 649,
+   "feature": "other: editor relationship",
+   "claim": "Hartwell says Gene Wolfe is the writer with whom he had an editorial relationship for the majority of his career.",
+   "source": "David G. Hartwell, tribute in the Chicago Literary Hall of Fame Fuller Award program for Gene Wolfe, 2012",
+   "url": "https://chicagoliteraryhof.org/images/uploads/pdfs/Gene_Wolfe_Fuller_Program.pdf",
+   "quote": "relationship for the majority of my career, longer than with any other",
+   "page": "Fuller Award program, tributes section (p. 18-19 of the program)"
+  },
+  {
+   "index": 650,
+   "feature": "other: editor relationship",
+   "claim": "Hartwell says part of his reputation as an editor derives from the fact that he is Gene Wolfe's editor.",
+   "source": "David G. Hartwell, tribute in the Chicago Literary Hall of Fame Fuller Award program for Gene Wolfe, 2012",
+   "url": "https://chicagoliteraryhof.org/images/uploads/pdfs/Gene_Wolfe_Fuller_Program.pdf",
+   "quote": "part of my reputation as an editor derives",
+   "page": "Fuller Award program, tributes section (p. 18-19 of the program)"
+  },
+  {
+   "index": 652,
+   "feature": "other: editorial letter form",
+   "claim": "Cooney says Wolfe's letter on her chapters named what she was doing well, dialogue and character, as well as the fault.",
+   "source": "C. S. E. Cooney, 'An Homage to my Honorary Grandfather', Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "what I was doing well (Dialogue! Character!)",
+   "page": "memoir, on the first letter"
+  },
+  {
+   "index": 653,
+   "feature": "other: editorial consent",
+   "claim": "Cooney reports Wolfe agreeing to read her novel while refusing to promise any comment on it.",
+   "source": "C. S. E. Cooney, 'An Homage to my Honorary Grandfather', Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "I can read it, but I can’t promise to say anything",
+   "page": "memoir, the dinner"
+  },
+  {
+   "index": 656,
+   "feature": "other: revision discipline",
+   "claim": "Cooney says Wolfe told her that he too overwrites his early drafts.",
+   "source": "C. S. E. Cooney, 'An Homage to my Honorary Grandfather', Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "Gene told me he does too",
+   "page": "memoir, on lumps of uncooked prose"
+  },
+  {
+   "index": 657,
+   "feature": "other: revision discipline",
+   "claim": "Cooney reports Wolfe describing the last pass on a finished story as grooming it before sending it out again.",
+   "source": "Gene Wolfe, quoted from memory by C. S. E. Cooney, Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "Scrub her face. Give her a new dress.",
+   "page": "memoir, closing"
+  },
+  {
+   "index": 658,
+   "feature": "other: market discipline",
+   "claim": "Cooney reports Wolfe's rule that writers who do not subscribe to the magazines they submit to are cutting their own throats.",
+   "source": "Gene Wolfe, quoted from memory by C. S. E. Cooney, Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "are cutting their own throats",
+   "page": "memoir, on submitting"
+  },
+  {
+   "index": 659,
+   "feature": "other: what an editor made of him",
+   "claim": "Phillips reports that Knight also brought Wolfe to the Milford Writer's Workshop, where Wolfe had writing peers for the first time.",
+   "source": "Brian Phillips, 'Gene Wolfe Turned Science Fiction Into High Art', The Ringer, 25 April 2019",
+   "url": "https://www.theringer.com/2019/04/25/books/gene-wolfe-science-fiction-author",
+   "quote": "Knight also brings him to the Milford",
+   "page": "body, the Orbit paragraph"
+  },
+  {
+   "index": 660,
+   "feature": "other: an editor's letter as the turning point",
+   "claim": "Wolfe says Damon Knight was the only person who helped him with his writing when he really needed help.",
+   "source": "Gene Wolfe, interviewed by Larry McCaffery, 'On Encompassing the Entire Universe', Science Fiction Studies #46 (vol. 15 part 3), November 1988",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
+   "quote": "the only person who helped me with my writing when I really",
+   "page": "answer on the Fifth Head dedication"
+  },
+  {
+   "index": 661,
+   "feature": "other: an editor's letter as the turning point",
+   "claim": "Wolfe says Knight's rejection letter for 'Trip Trap' told him where the story needed to change from one viewpoint to another and why.",
+   "source": "Gene Wolfe, interviewed by Larry McCaffery, 'On Encompassing the Entire Universe', Science Fiction Studies #46 (vol. 15 part 3), November 1988",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
+   "quote": "it needs to change here from viewpoint A to viewpoint",
+   "page": "answer on the Fifth Head dedication"
+  },
+  {
+   "index": 662,
+   "feature": "other: an editor's letter as the turning point",
+   "claim": "Wolfe describes Knight's letter as carrying a long list of very sensible suggestions.",
+   "source": "Gene Wolfe, interviewed by Larry McCaffery, 'On Encompassing the Entire Universe', Science Fiction Studies #46 (vol. 15 part 3), November 1988",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
+   "quote": "list of very sensible suggestions of that sort",
+   "page": "answer on the Fifth Head dedication"
+  },
+  {
+   "index": 663,
+   "feature": "other: an editor's letter as the turning point",
+   "claim": "Wolfe says that after reading Knight's letter he lay on the bed a long while and realised he was actually a writer now.",
+   "source": "Gene Wolfe, interviewed by Larry McCaffery, 'On Encompassing the Entire Universe', Science Fiction Studies #46 (vol. 15 part 3), November 1988",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
+   "quote": "on the bed for a long while, and I suddenly realized",
+   "page": "answer on the Fifth Head dedication"
+  },
+  {
+   "index": 664,
+   "feature": "other: an editor's letter as the turning point",
+   "claim": "Wolfe says the bean line was Knight's own, written back to him: 'I didn't know I had grown you from a bean.'",
+   "source": "Gene Wolfe, interviewed by Larry McCaffery, 'On Encompassing the Entire Universe', Science Fiction Studies #46 (vol. 15 part 3), November 1988",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
+   "quote": "I didn't know I had grown you from a bean",
+   "page": "answer on the Fifth Head dedication"
+  },
+  {
+   "index": 665,
+   "feature": "other: the record that contradicts the fact",
+   "claim": "Wolfe says Frederik Pohl accepted the resubmitted 'The Mountains are Mice' with a letter praising a rewrite that had never happened.",
+   "source": "Gene Wolfe, interviewed by Larry McCaffery, 'On Encompassing the Entire Universe', Science Fiction Studies #46 (vol. 15 part 3), November 1988",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
+   "quote": "My point is, of course, that there had been no re write",
+   "page": "answer on the Fifth Head dedication"
+  },
+  {
+   "index": 666,
+   "feature": "other: the record that contradicts the fact",
+   "claim": "Wolfe quotes the acceptance letter as reading 'I'm glad you let me see this again. The re write has really improved it.'",
+   "source": "Gene Wolfe, interviewed by Larry McCaffery, 'On Encompassing the Entire Universe', Science Fiction Studies #46 (vol. 15 part 3), November 1988",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
+   "quote": "I'm glad you let me see this again",
+   "page": "answer on the Fifth Head dedication"
+  }
+ ]
+}

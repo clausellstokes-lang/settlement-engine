@@ -1,184 +1,4 @@
 {
- "complete": true,
- "coverage": "Named roster: Adam Roberts (Medium) FETCHED via a Wayback raw id_ capture after a Cloudflare 403 and a dead scribe.rip; Bebergal's New Yorker piece FETCHED via a Wayback raw id_ capture after archive.ph returned a 429 CAPTCHA; Budrys's F&SF column on The Shadow of the Torturer (May 1980, vol. 58 no. 5, pp. 26-7) read in full as the Contemporary Literary Criticism vol. 25 reprint through a Wayback capture of eNotes, the F&SF issue scans themselves BLOCKED (archive.org 401/403, lending-restricted), plus one Budrys sentence on Claw relayed by Peter Wright; Disch's \"A Wizard of the Fabulous\" (Washington Post Book World, 22 March 1981, p. 11) read in full by the same CLC-reprint route; Gillespie's \"Gene Wolfe's Sleight of Hand\" (ASFR second series, March 1986) NOT FOUND (efanzines hosts no ASFR, fanac.org holds only the 1966-74 first series, the second series is undigitised, Broderick's Borgo selections return numFound 0 on archive.org, and the Google Books API was quota-exhausted at 429); Gwyneth Jones's Foundation review NOT FOUND (Foundation is not digitised; only Colin Greenland's Foundation 24 review surfaced, and only as Wright's relay); M. John Harrison on Wolfe NOT FOUND; Christopher Priest on Wolfe NOT FOUND (the Strange Horizons conversation names Kincaid's Wolfe reviews, not Priest's, and carries no prose judgement, so it is logged non-substantive) - Priest appears only as Auerbach's favourable contrast; Goodreads, StoryGraph and Reddit all BLOCKED (403 on old.reddit, the reddit JSON API, Goodreads and app.thestorygraph), substituted by the SFFWorld \"Gene Wolfe Sucks!\" thread and four blog comment threads; Joan Gordon's hostile SFS 32:1 (2005) review of Wright NOT FOUND (SFS Books in Review is print-only, and depauw.edu/sfs is 403 live and reachable only page-by-page through Wayback). Substantive sources by route: 4 from the named roster, 6 by bibliography chasing (Wright's footnotes to Searles, Greenland and Bishop; the eNotes/CLC criticism index reached from Disch; Auerbach reached from the schicksal review; Wright reached from Roberts), 12 by lateral search. 22 substantive sources and 1 non-substantive; two consecutive lateral searches surfaced nothing new before stopping.",
- "sourcesRead": [
-  {
-   "title": "Adam Roberts, 'Gene Wolfe, The Book of the New Sun (1980-83)', Adam's Notebook (Medium)",
-   "url": "https://medium.com/adams-notebook/gene-wolfe-the-book-of-the-new-sun-1980-83-ee4cc6d18410",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2023-07-03",
-   "route": "Wayback raw id_ capture 20240913053715 (live Medium = Cloudflare 403; scribe.rip 404)"
-  },
-  {
-   "title": "Peter Bebergal, 'Sci-Fi's Difficult Genius', The New Yorker",
-   "url": "https://www.newyorker.com/books/page-turner/sci-fis-difficult-genius",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2015-04-24",
-   "route": "Wayback raw id_ capture 20260904220132 (archive.ph returned 429 CAPTCHA)"
-  },
-  {
-   "title": "Peter Wright, 'Mapping a Masterwork: A Critical Review of Gene Wolfe's The Book of the New Sun', Ultan's Library",
-   "url": "https://ultan.org.uk/review-botns/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2002-08-28",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "bormgans, 'THE BOOK OF THE NEW SUN - Gene Wolfe (1980-83)', Weighing a pig doesn't fatten it.",
-   "url": "https://schicksalgemeinschaft.wordpress.com/2021/05/16/the-book-of-the-new-sun-gene-wolfe-1980-83/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2021-05-16",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish",
-   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2007-11-23",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "David Auerbach, 'More on Gene Wolfe', Waggish",
-   "url": "https://www.waggish.org/2007/more-on-gene-wolfe/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2007-12-07",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "Jesse (Speculiction), 'Review of The Book of the New Sun by Gene Wolfe'",
-   "url": "http://speculiction.blogspot.com/2012/07/review-of-book-of-new-sun-by-gene-wolfe.html",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2012-07-09",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "Alex Keller, 'Review: The Very Best of Gene Wolfe', Innsmouth Free Press",
-   "url": "https://innsmouthfreepress.com/review-the-very-best-of-gene-wolfe/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2009-08-31",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "Murray Ewing, 'The Secret to Reading Gene Wolfe', Mewsings",
-   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2010-09-11",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "Algis Budrys, \"Books: 'The Shadow of the Torturer'\", F&SF May 1980, reprinted in Contemporary Literary Criticism vol. 25 (Gale 1983), hosted by eNotes",
-   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/algis-budrys-2",
-   "kind": "relay",
-   "substantive": true,
-   "date": "1980-05",
-   "route": "Wayback raw id_ 20241114002444 of the eNotes page (live eNotes = Cloudflare 403; F&SF issue scans on archive.org are lending-restricted, 401)"
-  },
-  {
-   "title": "Thomas M. Disch, 'A Wizard of the Fabulous', Book World - The Washington Post, 22 March 1981, reprinted in CLC vol. 25, hosted by eNotes",
-   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/thomas-m-disch",
-   "kind": "relay",
-   "substantive": true,
-   "date": "1981-03-22",
-   "route": "Wayback raw id_ 20250914044440 of the eNotes page"
-  },
-  {
-   "title": "Joanna Russ, \"Books: 'Operation Ares'\", F&SF April 1971, reprinted in CLC, hosted by eNotes",
-   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/joanna-russ",
-   "kind": "relay",
-   "substantive": true,
-   "date": "1971-04",
-   "route": "Wayback raw id_ 2024 of the eNotes page"
-  },
-  {
-   "title": "Somtow Sucharitkul, \"A Certain Slant of 'I'\", Fantasy Newsletter Dec 1981, reprinted in CLC, hosted by eNotes",
-   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/somtow-sucharitkul",
-   "kind": "relay",
-   "substantive": true,
-   "date": "1981-12",
-   "route": "Wayback raw id_ 2024 of the eNotes page"
-  },
-  {
-   "title": "John Clute, 'The Urth and All Its Glory', reprinted in CLC, hosted by eNotes",
-   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/john-clute",
-   "kind": "relay",
-   "substantive": true,
-   "date": "1983",
-   "route": "Wayback raw id_ 2024 of the eNotes page"
-  },
-  {
-   "title": "Christopher Priest and Paul Kincaid, 'The Author and the Critic I', Strange Horizons",
-   "url": "https://strangehorizons.com/wordpress/non-fiction/the-author-and-the-critic-i-christopher-priest-and-paul-kincaid/",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2021",
-   "route": "direct; mentions Kincaid's Wolfe review only in passing, no prose judgement"
-  },
-  {
-   "title": "'Gene Wolfe Sucks!' discussion thread, SFFWorld forum",
-   "url": "https://www.sffworld.com/forum/threads/gene-wolfe-sucks.3581/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2002-09-25",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "Russ Allbery, 'Review: The Urth of the New Sun by Gene Wolfe'",
-   "url": "https://www.eyrie.org/~eagle/reviews/books/0-812-55817-0.html",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2004-09-10",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "Russ Allbery, 'Review: The Citadel of the Autarch by Gene Wolfe'",
-   "url": "https://www.eyrie.org/~eagle/reviews/books/0-671-49666-2.html",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2004-06-28",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "Brian Murphy, 'Gene Wolfe is intimidating. The Knight is not.', The Silver Key",
-   "url": "https://thesilverkey.blogspot.com/2025/03/gene-wolfe-is-intimidating-knight-is.html",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2025-03-29",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "Jesse (Speculiction), 'Weighing a Critique: The Book of the New Sun'",
-   "url": "http://speculiction.blogspot.com/2021/09/weighing-critique-book-of-new-sun.html",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2021-09",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "Tachy, 'Review: The Book of the New Sun'",
-   "url": "https://tachy.org/posts/botns/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "undated blog post",
-   "route": "direct, browser UA"
-  },
-  {
-   "title": "Matt Hilliard, 'Book of the New Sun by Gene Wolfe', Yet There Are Statues",
-   "url": "https://matthilliard.wordpress.com/2004/04/18/38/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2004-04-18",
-   "route": "direct, browser UA"
-  }
- ],
  "claims": [
   {
    "feature": "other: baroque ornament",
@@ -821,7 +641,7 @@
    "polarity": "rejects the charge that the diction blocks reading",
    "date": "2021-05-16",
    "routeHint": "direct fetch",
-   "registerHint": "none",
+   "registerHint": "dossier-archivist",
    "confidence": "high"
   },
   {
@@ -1246,7 +1066,7 @@
   },
   {
    "feature": "withheld information and inference",
-   "claim": "Russ says that in Operation Ares the explanations of events are often given long after the events themselves, and that the significance of many things only becomes apparent long afterwards.",
+   "claim": "Russ says that in Operation Ares the significance of many things only becomes apparent long afterwards.",
    "source": "Joanna Russ, F&SF, vol. 40 no. 4, April 1971, p. 69, reprinted in CLC",
    "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/joanna-russ",
    "quote": "the significance of many things only becomes apparent long afterwards",
@@ -1498,11 +1318,11 @@
   },
   {
    "feature": "other: overall verdict",
-   "claim": "Allbery rates The Urth of the New Sun 5 out of 10 and says he would not recommend it even to someone who read the original series.",
+   "claim": "Allbery says he would not recommend The Urth of the New Sun even to someone who read the original series.",
    "source": "Russ Allbery, review of The Urth of the New Sun, 10 September 2004",
    "url": "https://www.eyrie.org/~eagle/reviews/books/0-812-55817-0.html",
    "quote": "I don't think I would recommend this book even to someone",
-   "page": "closing paragraph and rating line",
+   "page": "closing paragraph",
    "kind": "reader",
    "polarity": "rejects the book",
    "date": "2004-09-10",
@@ -1568,7 +1388,7 @@
   },
   {
    "feature": "withheld information and inference",
-   "claim": "A commenter says he does not want to keep wracking his brain over what is really going on or triple-check details while reading.",
+   "claim": "A commenter says he does not want to keep wracking his brain over what is really going on while reading.",
    "source": "commenter Paul R. McNamee on The Silver Key, 29 March 2025",
    "url": "https://thesilverkey.blogspot.com/2025/03/gene-wolfe-is-intimidating-knight-is.html",
    "quote": "I don't want to keep wracking my brain with",
@@ -1582,7 +1402,7 @@
   },
   {
    "feature": "withheld information and inference",
-   "claim": "A commenter defending Wolfe says it is the stuff going on under the surface and never explicitly spelled out that makes the book rewarding.",
+   "claim": "A commenter defending Wolfe says it is the material never explicitly spelled out that makes the book rewarding.",
    "source": "commenter 'Andrew' on The Silver Key, 30 March 2025",
    "url": "https://thesilverkey.blogspot.com/2025/03/gene-wolfe-is-intimidating-knight-is.html",
    "quote": "that is never explicitly spelled out that makes it such",
@@ -1775,6 +1595,186 @@
    "routeHint": "direct fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
+  }
+ ],
+ "complete": true,
+ "coverage": "Named roster: Adam Roberts (Medium) FETCHED via a Wayback raw id_ capture after a Cloudflare 403 and a dead scribe.rip; Bebergal's New Yorker piece FETCHED via a Wayback raw id_ capture after archive.ph returned a 429 CAPTCHA; Budrys's F&SF column on The Shadow of the Torturer (May 1980, vol. 58 no. 5, pp. 26-7) read in full as the Contemporary Literary Criticism vol. 25 reprint through a Wayback capture of eNotes, the F&SF issue scans themselves BLOCKED (archive.org 401/403, lending-restricted), plus one Budrys sentence on Claw relayed by Peter Wright; Disch's \"A Wizard of the Fabulous\" (Washington Post Book World, 22 March 1981, p. 11) read in full by the same CLC-reprint route; Gillespie's \"Gene Wolfe's Sleight of Hand\" (ASFR second series, March 1986) NOT FOUND (efanzines hosts no ASFR, fanac.org holds only the 1966-74 first series, the second series is undigitised, Broderick's Borgo selections return numFound 0 on archive.org, and the Google Books API was quota-exhausted at 429); Gwyneth Jones's Foundation review NOT FOUND (Foundation is not digitised; only Colin Greenland's Foundation 24 review surfaced, and only as Wright's relay); M. John Harrison on Wolfe NOT FOUND; Christopher Priest on Wolfe NOT FOUND (the Strange Horizons conversation names Kincaid's Wolfe reviews, not Priest's, and carries no prose judgement, so it is logged non-substantive) - Priest appears only as Auerbach's favourable contrast; Goodreads, StoryGraph and Reddit all BLOCKED (403 on old.reddit, the reddit JSON API, Goodreads and app.thestorygraph), substituted by the SFFWorld \"Gene Wolfe Sucks!\" thread and four blog comment threads; Joan Gordon's hostile SFS 32:1 (2005) review of Wright NOT FOUND (SFS Books in Review is print-only, and depauw.edu/sfs is 403 live and reachable only page-by-page through Wayback). Substantive sources by route: 4 from the named roster, 6 by bibliography chasing (Wright's footnotes to Searles, Greenland and Bishop; the eNotes/CLC criticism index reached from Disch; Auerbach reached from the schicksal review; Wright reached from Roberts), 12 by lateral search. 22 substantive sources and 1 non-substantive; two consecutive lateral searches surfaced nothing new before stopping.",
+ "sourcesRead": [
+  {
+   "title": "Adam Roberts, 'Gene Wolfe, The Book of the New Sun (1980-83)', Adam's Notebook (Medium)",
+   "url": "https://medium.com/adams-notebook/gene-wolfe-the-book-of-the-new-sun-1980-83-ee4cc6d18410",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2023-07-03",
+   "route": "Wayback raw id_ capture 20240913053715 (live Medium = Cloudflare 403; scribe.rip 404)"
+  },
+  {
+   "title": "Peter Bebergal, 'Sci-Fi's Difficult Genius', The New Yorker",
+   "url": "https://www.newyorker.com/books/page-turner/sci-fis-difficult-genius",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2015-04-24",
+   "route": "Wayback raw id_ capture 20260904220132 (archive.ph returned 429 CAPTCHA)"
+  },
+  {
+   "title": "Peter Wright, 'Mapping a Masterwork: A Critical Review of Gene Wolfe's The Book of the New Sun', Ultan's Library",
+   "url": "https://ultan.org.uk/review-botns/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2002-08-28",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "bormgans, 'THE BOOK OF THE NEW SUN - Gene Wolfe (1980-83)', Weighing a pig doesn't fatten it.",
+   "url": "https://schicksalgemeinschaft.wordpress.com/2021/05/16/the-book-of-the-new-sun-gene-wolfe-1980-83/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2021-05-16",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2007-11-23",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "David Auerbach, 'More on Gene Wolfe', Waggish",
+   "url": "https://www.waggish.org/2007/more-on-gene-wolfe/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2007-12-07",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "Jesse (Speculiction), 'Review of The Book of the New Sun by Gene Wolfe'",
+   "url": "http://speculiction.blogspot.com/2012/07/review-of-book-of-new-sun-by-gene-wolfe.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2012-07-09",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "Alex Keller, 'Review: The Very Best of Gene Wolfe', Innsmouth Free Press",
+   "url": "https://innsmouthfreepress.com/review-the-very-best-of-gene-wolfe/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2009-08-31",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "Murray Ewing, 'The Secret to Reading Gene Wolfe', Mewsings",
+   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2010-09-11",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "Algis Budrys, \"Books: 'The Shadow of the Torturer'\", F&SF May 1980, reprinted in Contemporary Literary Criticism vol. 25 (Gale 1983), hosted by eNotes",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/algis-budrys-2",
+   "kind": "relay",
+   "substantive": true,
+   "date": "1980-05",
+   "route": "Wayback raw id_ 20241114002444 of the eNotes page (live eNotes = Cloudflare 403; archive.org F&SF issue scans 401/403, lending-restricted)"
+  },
+  {
+   "title": "Thomas M. Disch, 'A Wizard of the Fabulous', Book World - The Washington Post, 22 March 1981, reprinted in CLC vol. 25, hosted by eNotes",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/thomas-m-disch",
+   "kind": "relay",
+   "substantive": true,
+   "date": "1981-03-22",
+   "route": "Wayback raw id_ 20250914044440 of the eNotes page"
+  },
+  {
+   "title": "Joanna Russ, \"Books: 'Operation Ares'\", F&SF April 1971, reprinted in CLC, hosted by eNotes",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/joanna-russ",
+   "kind": "relay",
+   "substantive": true,
+   "date": "1971-04",
+   "route": "Wayback raw id_ 2024 of the eNotes page"
+  },
+  {
+   "title": "Somtow Sucharitkul, \"A Certain Slant of 'I'\", Fantasy Newsletter Dec 1981, reprinted in CLC, hosted by eNotes",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/somtow-sucharitkul",
+   "kind": "relay",
+   "substantive": true,
+   "date": "1981-12",
+   "route": "Wayback raw id_ 2024 of the eNotes page"
+  },
+  {
+   "title": "John Clute, 'The Urth and All Its Glory', reprinted in CLC, hosted by eNotes",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/john-clute",
+   "kind": "relay",
+   "substantive": true,
+   "date": "1983",
+   "route": "Wayback raw id_ 2024 of the eNotes page"
+  },
+  {
+   "title": "Christopher Priest and Paul Kincaid, 'The Author and the Critic I', Strange Horizons",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/the-author-and-the-critic-i-christopher-priest-and-paul-kincaid/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2021",
+   "route": "direct; mentions Kincaid's Wolfe review only in passing, no prose judgement"
+  },
+  {
+   "title": "'Gene Wolfe Sucks!' discussion thread, SFFWorld forum",
+   "url": "https://www.sffworld.com/forum/threads/gene-wolfe-sucks.3581/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2002-09-25",
+   "route": "direct, browser UA (Reddit and Goodreads both 403)"
+  },
+  {
+   "title": "Russ Allbery, 'Review: The Urth of the New Sun by Gene Wolfe'",
+   "url": "https://www.eyrie.org/~eagle/reviews/books/0-812-55817-0.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2004-09-10",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "Russ Allbery, 'Review: The Citadel of the Autarch by Gene Wolfe'",
+   "url": "https://www.eyrie.org/~eagle/reviews/books/0-671-49666-2.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2004-06-28",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "Brian Murphy, 'Gene Wolfe is intimidating. The Knight is not.', The Silver Key",
+   "url": "https://thesilverkey.blogspot.com/2025/03/gene-wolfe-is-intimidating-knight-is.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2025-03-29",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "Jesse (Speculiction), 'Weighing a Critique: The Book of the New Sun'",
+   "url": "http://speculiction.blogspot.com/2021/09/weighing-critique-book-of-new-sun.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2021-09",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "Tachy, 'Review: The Book of the New Sun'",
+   "url": "https://tachy.org/posts/botns/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "undated blog post",
+   "route": "direct, browser UA"
+  },
+  {
+   "title": "Matt Hilliard, 'Book of the New Sun by Gene Wolfe', Yet There Are Statues",
+   "url": "https://matthilliard.wordpress.com/2004/04/18/38/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2004-04-18",
+   "route": "direct, browser UA"
   }
  ]
 }

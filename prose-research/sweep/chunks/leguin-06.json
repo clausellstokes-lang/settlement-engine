@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 6,
+ "indices": [
+  709,
+  710,
+  711,
+  725,
+  728,
+  735,
+  736,
+  737,
+  738,
+  742,
+  750,
+  751,
+  752,
+  756,
+  759
+ ],
+ "claims": [
+  {
+   "index": 709,
+   "feature": "metaphor discipline",
+   "claim": "Kuts and Uholkova say conceptual metaphors play an important role in the novel.",
+   "source": "Kuts and Uholkova, Intelligence. Personality. Civilization 21:2 (2020), 27-37",
+   "url": "https://api.crossref.org/works/10.33274/2079-4835-2020-21-2-27-37",
+   "quote": "Conceptual metaphors play an important role in the work",
+   "page": "publisher abstract (Crossref JATS)"
+  },
+  {
+   "index": 710,
+   "feature": "other: polarity of imagery",
+   "claim": "Kuts and Uholkova say Le Guin does not set out to show the image of darkness as negative.",
+   "source": "Kuts and Uholkova, Intelligence. Personality. Civilization 21:2 (2020), 27-37",
+   "url": "https://api.crossref.org/works/10.33274/2079-4835-2020-21-2-27-37",
+   "quote": "does not set goals to show the image of darkness as negative",
+   "page": "publisher abstract (Crossref JATS)"
+  },
+  {
+   "index": 711,
+   "feature": "other: research-coverage gap",
+   "claim": "Paradoxa number 21 on Ursula K. Le Guin, edited by Sylvia Kelso, is dated 2009 and includes Richard D. Erlich on Always Coming Home as ethnography.",
+   "source": "Paradoxa, volume 21 table of contents, paradoxa.com",
+   "url": "https://paradoxa.com/volume-21-ursula-k-le-guin/",
+   "quote": "Always Coming Home: “Ethnography, unBible, and Utopian Satire”",
+   "page": "volume 21 contents listing"
+  },
+  {
+   "index": 725,
+   "feature": "humour",
+   "claim": "Saleem characterises the tone of an editorial note on a neighbouring people in Always Coming Home as dry.",
+   "source": "Mazin Saleem, Strange Horizons, 2018",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+   "quote": "a note dryly explains how",
+   "page": "section 'There and back again'"
+  },
+  {
+   "index": 728,
+   "feature": "translation and register",
+   "claim": "Saleem reports Le Guin's explanation that she withheld the accents on Kesh names until the Back of the Book.",
+   "source": "Mazin Saleem paraphrasing Le Guin, Strange Horizons, 2018",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+   "quote": "purposefully left the accents off Kesh names until the Back",
+   "page": "closing section on language"
+  },
+  {
+   "index": 735,
+   "feature": "other: ethnography without history",
+   "claim": "Danny Yee contrasts Le Guin's world as having no history with Tolkien's as having almost no ethnographic detail.",
+   "source": "Danny Yee, review of Always Coming Home, 1995",
+   "url": "https://dannyreviews.com/h/Always_Coming_Home.html",
+   "quote": "Tolkien's world has almost no ethnographic detail",
+   "page": "paragraph 1"
+  },
+  {
+   "index": 736,
+   "feature": "other: encyclopedic form",
+   "claim": "Danny Yee classes Always Coming Home as a fictional ethnography rather than a novel.",
+   "source": "Danny Yee, review of Always Coming Home, 1995",
+   "url": "https://dannyreviews.com/h/Always_Coming_Home.html",
+   "quote": "it is a fictional ethnography rather than a novel",
+   "page": "paragraph 1"
+  },
+  {
+   "index": 737,
+   "feature": "other: encyclopedic form",
+   "claim": "Troy Press describes 'A Description of Earthsea' as a descriptive essay written alongside the five stories of Tales from Earthsea.",
+   "source": "Troy Press, 'A History of Earthsea'",
+   "url": "https://troypress.com/a-history-of-earthsea/",
+   "quote": "she ended up writing five short stories plus a descriptive essay",
+   "page": "paragraph on world-building"
+  },
+  {
+   "index": 738,
+   "feature": "other: how the record is made",
+   "claim": "Le Guin states that research into a nonexistent history is done by telling the story and finding out what happened.",
+   "source": "Ursula K. Le Guin, Foreword to Tales from Earthsea, quoted by Troy Press",
+   "url": "https://troypress.com/a-history-of-earthsea/",
+   "quote": "research into nonexistent history is to tell the story",
+   "page": "paragraph on world-building"
+  },
+  {
+   "index": 742,
+   "feature": "other: figures in a record",
+   "claim": "The field notes give one interval as an exact decimal and the next as a two-number range in the same sentence.",
+   "source": "Le Guin, The Left Hand of Darkness ch. 7, quoted in Nick Hubble's BSFA Review notice",
+   "url": "https://vector-bsfa.com/2020/12/24/review-the-left-hand-of-darkness-by-ursula-k-le-guin/",
+   "quote": "the 8.4 month gestation period and the 6 to 8 month",
+   "page": "quoted block, cited to p. 91"
+  },
+  {
+   "index": 750,
+   "feature": "other: encyclopedic form",
+   "claim": "'A Description of Earthsea' is characterised as a reference narrative covering peoples, languages, history and magic.",
+   "source": "Wikipedia relaying Le Guin, Tales from Earthsea (2001)",
+   "url": "https://en.wikipedia.org/wiki/Tales_from_Earthsea",
+   "quote": "a reference narrative covering Earthsea's peoples, languages, history, and magic",
+   "page": "section on contents"
+  },
+  {
+   "index": 751,
+   "feature": "other: encyclopedic form",
+   "claim": "Michael Cadden's volume records that 'A Description of Earthsea' runs to almost thirty pages of Earthsea lore.",
+   "source": "Michael Cadden (ed.), Ursula K. Le Guin Beyond Genre (2005), via Open Library search-inside",
+   "url": "https://openlibrary.org/search/inside?q=%22A+Description+of+Earthsea%22",
+   "quote": "almost thirty pages of Earthsea lore",
+   "page": "search-inside snippet"
+  },
+  {
+   "index": 752,
+   "feature": "other: encyclopedic form",
+   "claim": "Cadden's volume classes 'A Description of Earthsea' as neither story nor afterword.",
+   "source": "Michael Cadden (ed.), Ursula K. Le Guin Beyond Genre (2005), via Open Library search-inside",
+   "url": "https://openlibrary.org/search/inside?q=%22A+Description+of+Earthsea%22",
+   "quote": "a text that is neither story nor afterword",
+   "page": "search-inside snippet"
+  },
+  {
+   "index": 756,
+   "feature": "other: encyclopedic form",
+   "claim": "Weissman credits Le Guin with constructing Earthsea with a scholar's seriousness and eye for detail.",
+   "source": "Kathy Weissman, review of Tales from Earthsea, Bookreporter.com, 2001",
+   "url": "https://www.bookreporter.com/reviews/tales-from-earthsea-the-earthsea-cycle-book-5",
+   "quote": "with a scholar's seriousness and eye for detail",
+   "page": "penultimate paragraph"
+  },
+  {
+   "index": 759,
+   "feature": "humour",
+   "claim": "Le Guin characterises the Hainish historians' relation to reports with a squirrels-and-nuts simile.",
+   "source": "Ursula K. Le Guin, Foreword to The Birthday of the World (2001)",
+   "url": "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+   "quote": "who are to reports as squirrels are to nuts",
+   "page": "paragraph on 'The Matter of Seggri'"
+  }
+ ]
+}

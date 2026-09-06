@@ -1,224 +1,4 @@
 {
- "complete": true,
- "coverage": "Named roster: FETCHED raw \u2014 Wolfe's own accounts of Damon Knight (McCaffery/Science Fiction Studies 1988, Dirda/Washington Post 1983, Locus-Gaiman 2002, the undated SF chat, WolfeWiki's transcription of Contemporary Authors Autobiography Series vol. 9), Hartwell (Wolfe's ranking of his editors in Nova Express 1998, the Urth-of-the-New-Sun paragraph, the Gevers 2002 answer on the Exodus ending, and Hartwell's OWN tribute in the 2012 Fuller Award program), Plant Engineering (Wolfe's 2013 written reply to Nigel Price at Ultan's Library, the magazine's own 2019 obituary, the Gale and Locus career lines), and C. S. E. Cooney's memoir read in full. NOT FOUND at any route: Knight's Orbit letters themselves (only the Archives West finding aid's description of them) and the text of In Search of Wonder (Wolfe appears only in its 1966 coda, reached through Mark R. Kelly's review; archive.org search-inside and the Google Books API both returned nothing). NO WOLFE CONTENT, though fetched: the Locus Hartwell obituary, Patrick Nielsen Hayden's Making Light memorial (which yielded only his judgment of Hartwell), Agranoff's In Search of Wonder review, and Patrick O'Leary's 'If Ever A Wiz There Was' \u2014 no Teresa Nielsen Hayden or Tor copyediting anecdote about Wolfe exists at any route tried, which is itself the finding. 27 sources read, 21 substantive: 10 by the named roster, 6 by bibliography chasing (the gwern.net Wolfe document index and the Ultan's Library article list), 5 by lateral search.",
- "sourcesRead": [
-  {
-   "title": "Gene Wolfe's time at Plant Engineering (Nigel Price, with Wolfe's written reply)",
-   "url": "https://ultan.org.uk/plant-engineering/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2013-07-27",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "Gene Wolfe: 1931-2019 (Bob Vavra, Plant Engineering)",
-   "url": "https://www.plantengineering.com/gene-wolfe-1931-2019/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2019-05-20",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "An Homage to my Honorary Grandfather (C. S. E. Cooney, Ultan's Library)",
-   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2016-06-10",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "Suns New, Long, and Short: An Interview with Gene Wolfe (Lawrence Person, Nova Express 1998)",
-   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "1998 / reprinted 2021-04-25",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "Gene Wolfe Talks About 'The Book of the New Sun' (Michael Dirda, Washington Post Book World)",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/1983-01-29-michaeldirda-thebookofthenewsun-interview.txt",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "1983-01-30",
-   "route": "gwern.net plain-text transcript"
-  },
-  {
-   "title": "WolfeWiki: Trip, Trap (quoting Contemporary Authors Autobiography Series Vol. 9)",
-   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Stories.TripTrap",
-   "kind": "relay",
-   "substantive": true,
-   "date": "page last modified 2023-07-22",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "An Evening To Honor Gene Wolfe: Fuller Award program (Chicago Literary Hall of Fame)",
-   "url": "https://chicagoliteraryhof.org/images/uploads/pdfs/Gene_Wolfe_Fuller_Program.pdf",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2012",
-   "route": "PDF binary, pypdf extraction"
-  },
-  {
-   "title": "Gene Wolfe Turned Science Fiction Into High Art (Brian Phillips, The Ringer)",
-   "url": "https://www.theringer.com/2019/04/25/books/gene-wolfe-science-fiction-author",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2019-04-25",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "Author and Grand Master Gene Wolfe, 1931-2019 (Tor.com / Reactor)",
-   "url": "https://reactormag.com/gene-wolfe-in-memoriam-1931-2019/",
-   "kind": "relay",
-   "substantive": true,
-   "date": "2019-04-15",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "SFE: Hartwell, David G",
-   "url": "https://sf-encyclopedia.com/entry/hartwell_david_g",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "entry updated 2026-03-23",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "David G. Hartwell (1941-2016) (Locus obituary)",
-   "url": "https://locusmag.com/2016/01/david-g-hartwell-1941-2016/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "2016-01-20",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "On Encompassing the Entire Universe: An Interview with Gene Wolfe (Larry McCaffery, Science Fiction Studies #46)",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "1988-11",
-   "route": "gwern.net mirror, live URL"
-  },
-  {
-   "title": "A Magus of Many Suns: An Interview with Gene Wolfe (Nick Gevers, SF Site)",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-01-nickgevers-amagusofmanysuns.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2002-01",
-   "route": "gwern.net mirror, live URL"
-  },
-  {
-   "title": "Gene Wolfe SF chat channel transcript (undated)",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/2015-genewolfe-sf-chatchannel-interview.txt",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "undated; archived under 2015",
-   "route": "gwern.net mirror, live URL"
-  },
-  {
-   "title": "Wolfe, Gene (Rodman) \u2014 Major 21st-Century Writers, Gale, 2005",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/2010-02-25-gale-genewolfebiography.txt",
-   "kind": "relay",
-   "substantive": true,
-   "date": "2005",
-   "route": "gwern.net mirror, live URL"
-  },
-  {
-   "title": "David Hartwell's Last Gift to Me: Gene Wolfe's Book of the New Sun (Theresa DeLucci, Tor.com)",
-   "url": "https://reactormag.com/davids-last-gift-to-me-gene-wolfes-book-of-the-new-sun/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2017-03-13",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "Guide to the Damon Knight papers (Archives West)",
-   "url": "https://archiveswest.orbiscascade.org/ark:80444/xv31439",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2015",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "David Geddes Hartwell, 1941-2016 (Patrick Nielsen Hayden, Making Light)",
-   "url": "https://nielsenhayden.com/makinglight/archives/016423.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2016-01",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "Damon Knight, IN SEARCH OF WONDER 3/e (Mark R. Kelly)",
-   "url": "http://www.markrkelly.com/Blog/2018/03/22/damon-knight-in-search-of-wonder-3-e/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2018-03-22",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "If Ever A Wiz There Was (Patrick O'Leary on Wolfe)",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/2000-03-29-patrickoleary-ifeverawiztherewas.txt",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2000-03-29",
-   "route": "gwern.net mirror, live URL"
-  },
-  {
-   "title": "Book Review: In Search of Wonder (David Agranoff)",
-   "url": "http://davidagranoff.blogspot.com/2020/03/book-review-in-search-of-wonder-essays.html",
-   "kind": "reception",
-   "substantive": false,
-   "date": "2020-03",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "Gene Wolfe in conversation with Neil Gaiman (Locus #500, September 2002)",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2002-09",
-   "route": "gwern.net PDF binary, pypdf extraction"
-  },
-  {
-   "title": "An Interview with Gene Wolfe (Lawrence Person, 2007) \u2014 PDF",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2007",
-   "route": "gwern.net PDF binary, pypdf extraction"
-  },
-  {
-   "title": "Gene Wolfe, 'The Fat Magician' (2005) \u2014 PDF",
-   "url": "https://gwern.net/doc/fiction/gene-wolfe/2005-wolfe-thefatmagician.pdf",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2005",
-   "route": "gwern.net PDF binary, pypdf extraction"
-  },
-  {
-   "title": "An Interview with Gene Wolfe by Jeremy L. C. Jones (Clarkesworld issue 23)",
-   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2008-08",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "SFE: Wolfe, Gene (John Clute)",
-   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "entry updated 2026",
-   "route": "live URL, browser UA"
-  },
-  {
-   "title": "Review: Orbit 2, edited by Damon Knight (Austin Beeman, Short SF)",
-   "url": "https://www.shortsf.com/reviews/orbit2",
-   "kind": "reception",
-   "substantive": true,
-   "date": "undated post",
-   "route": "live URL, browser UA"
-  }
- ],
  "claims": [
   {
    "feature": "other: the record is unrevisable once printed",
@@ -295,7 +75,7 @@
    "claim": "Ultan's Library dates Wolfe's Plant Engineering employment 1972 to 1984.",
    "source": "Nigel Price, 'Gene Wolfe's time at Plant Engineering', Ultan's Library, 2013",
    "url": "https://ultan.org.uk/plant-engineering/",
-   "quote": "worked (1972 \u2013 1984) as an editor",
+   "quote": "worked (1972 – 1984) as an editor",
    "page": "opening paragraph",
    "kind": "analysis",
    "polarity": "asserts",
@@ -505,7 +285,7 @@
    "claim": "Tor.com's obituary gives Wolfe's answer to Knight about his biggest influences as Chesterton and Marks' Standard Handbook for Mechanical Engineers, without the Tolkien that Wolfe named to Dirda in 1983.",
    "source": "Tor.com editorial staff, 'Author and Grand Master Gene Wolfe, 1931-2019', 15 April 2019 (Reactor)",
    "url": "https://reactormag.com/gene-wolfe-in-memoriam-1931-2019/",
-   "quote": "Chesterton and Marks\u2019 [Standard] Handbook for [Mechanical] Engineers",
+   "quote": "Chesterton and Marks’ [Standard] Handbook for [Mechanical] Engineers",
    "page": "obituary body",
    "kind": "relay",
    "polarity": "asserts",
@@ -617,7 +397,7 @@
    "claim": "Cooney reports Wolfe agreeing to read her novel while refusing to promise any comment on it.",
    "source": "C. S. E. Cooney, 'An Homage to my Honorary Grandfather', Ultan's Library, 2016",
    "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
-   "quote": "I can read it, but I can\u2019t promise to say anything",
+   "quote": "I can read it, but I can’t promise to say anything",
    "page": "memoir, the dinner",
    "kind": "analysis",
    "polarity": "asserts",
@@ -939,7 +719,7 @@
    "claim": "DeLucci, a Tor colleague, states flatly that David Hartwell was Gene Wolfe's editor for The Book of the New Sun.",
    "source": "Theresa DeLucci, 'David Hartwell's Last Gift to Me: Gene Wolfe's Book of the New Sun', Tor.com, 13 March 2017",
    "url": "https://reactormag.com/davids-last-gift-to-me-gene-wolfes-book-of-the-new-sun/",
-   "quote": "David was Gene\u2019s editor for The Book of the New Sun",
+   "quote": "David was Gene’s editor for The Book of the New Sun",
    "page": "body, the World Horror Con 2002 passage",
    "kind": "reception",
    "polarity": "asserts",
@@ -1009,7 +789,7 @@
    "claim": "Kelly reports that In Search of Wonder ends with a 1966 coda in which Knight predicts a split of the field, placing Wolfe among the 'literary' SF writers with Le Guin and Aldiss.",
    "source": "Mark R. Kelly, 'Damon Knight, IN SEARCH OF WONDER 3/e', Views from Crestmont Drive, 22 March 2018",
    "url": "http://www.markrkelly.com/Blog/2018/03/22/damon-knight-in-search-of-wonder-3-e/",
-   "quote": "\u2018literary\u2019 SF (by Le Guin, Aldiss, Wolfe, and others)",
+   "quote": "‘literary’ SF (by Le Guin, Aldiss, Wolfe, and others)",
    "page": "review body, on the last chapter",
    "kind": "analysis",
    "polarity": "asserts",
@@ -1023,7 +803,7 @@
    "claim": "Patrick Nielsen Hayden calls Hartwell the field's most consequential editor since John W. Campbell.",
    "source": "Patrick Nielsen Hayden, 'David Geddes Hartwell, 1941-2016', Making Light, January 2016",
    "url": "https://nielsenhayden.com/makinglight/archives/016423.html",
-   "quote": "our field\u2019s most consequential editor since John W. Campbell",
+   "quote": "our field’s most consequential editor since John W. Campbell",
    "page": "post body, closing",
    "kind": "analysis",
    "polarity": "asserts",
@@ -1051,7 +831,7 @@
    "claim": "Gaiman says the reader works out where the story is happening from the places where Wolfe's narrator contradicts himself or has to tell more than he would have liked.",
    "source": "Neil Gaiman, in conversation with Gene Wolfe, Locus #500, September 2002",
    "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
-   "quote": "than he would have liked. You have a narrator who\u2019s",
+   "quote": "than he would have liked. You have a narrator who’s",
    "page": "Locus, September 2002, pp. 80-82",
    "kind": "analysis",
    "polarity": "asserts",
@@ -1065,7 +845,7 @@
    "claim": "Wolfe answers Gaiman's point about the self-serving narrator by invoking his years as a journalist on the industrial magazine Plant Engineering.",
    "source": "Gene Wolfe, in conversation with Neil Gaiman, Locus #500, September 2002",
    "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
-   "quote": "trial magazine, Plant Engineering. I\u2019ve been in a ton",
+   "quote": "trial magazine, Plant Engineering. I’ve been in a ton",
    "page": "Locus, September 2002, pp. 80-82",
    "kind": "own-words",
    "polarity": "asserts",
@@ -1163,7 +943,7 @@
    "claim": "In the 2002 telling Wolfe quotes Pohl's acceptance as 'You know, I think the rewrite has really improved this', where in 1988 he quoted it as 'I'm glad you let me see this again. The re write has really improved it.'",
    "source": "Gene Wolfe, in conversation with Neil Gaiman, Locus #500, September 2002",
    "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
-   "quote": "the rewrite has really improved this. I\u2019m glad youlet",
+   "quote": "the rewrite has really improved this. I’m glad youlet",
    "page": "Locus, September 2002, pp. 80-82",
    "kind": "own-words",
    "polarity": "asserts",
@@ -1191,7 +971,7 @@
    "claim": "Wolfe says Pohl's acceptance offered two cents a word.",
    "source": "Gene Wolfe, in conversation with Neil Gaiman, Locus #500, September 2002",
    "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
-   "quote": "If you\u2019ll take 2\u00a2 a word, I will buy",
+   "quote": "If you’ll take 2¢ a word, I will buy",
    "page": "Locus, September 2002, pp. 80-82",
    "kind": "measurement",
    "polarity": "asserts",
@@ -1258,7 +1038,7 @@
   },
   {
    "feature": "other: editor as filter",
-   "claim": "Wolfe says novices never see their clich\u00e9d premise in print because editors are sick of seeing it in the slush.",
+   "claim": "Wolfe says novices never see their clichéd premise in print because editors are sick of seeing it in the slush.",
    "source": "Gene Wolfe, interviewed by Jeremy L. C. Jones, Clarkesworld Magazine issue 23, August 2008",
    "url": "https://clarkesworldmagazine.com/wolfe_interview/",
    "quote": "editors are so sick of seeing it in the slush",
@@ -1311,6 +1091,226 @@
    "routeHint": "live URL, browser user agent",
    "registerHint": "none",
    "confidence": "high: the same sentence is quoted independently at shortsf.com/reviews/orbit2, also fetched raw"
+  }
+ ],
+ "complete": true,
+ "coverage": "Named roster: FETCHED raw — Wolfe's own accounts of Damon Knight (McCaffery/Science Fiction Studies #46 1988, Dirda/Washington Post 1983, the Locus #500 Wolfe-Gaiman conversation 2002, an undated SF chat transcript, and WolfeWiki's transcription of Contemporary Authors Autobiography Series vol. 9); Hartwell (Wolfe's ranking of his editors in Nova Express 1998, the Urth-of-the-New-Sun paragraph, the Gevers 2002 answer on the Exodus ending, and Hartwell's OWN tribute in the 2012 Fuller Award program PDF); Plant Engineering (Wolfe's 2013 written reply to Nigel Price at Ultan's Library, the magazine's own 2019 obituary, and the Gale and Locus career lines); and C. S. E. Cooney's memoir read in full. NOT FOUND at any route: Knight's Orbit letters themselves (only the Archives West finding aid's description of them) and the text of In Search of Wonder (Wolfe appears only in its 1966 coda, reached through Mark R. Kelly's review; archive.org search-inside hosts do not resolve or time out, and the Google Books API returns nothing). FETCHED BUT WITH NO WOLFE CONTENT: the Locus Hartwell obituary, Patrick Nielsen Hayden's Making Light memorial (which yielded only his judgment of Hartwell), Agranoff's In Search of Wonder review, and Patrick O'Leary's 'If Ever A Wiz There Was' — no Teresa Nielsen Hayden or Tor copyediting anecdote about Wolfe exists at any route tried, which is itself the finding, and a search-engine summary asserting Wolfe's manuscripts were \"so clean\" was on none of the pages fetched and is not claimed. 27 sources read, 21 substantive: 10 by the named roster, 6 by bibliography chasing (the gwern.net Wolfe document index and the Ultan's Library article list), 5 by lateral search.",
+ "sourcesRead": [
+  {
+   "title": "Gene Wolfe's time at Plant Engineering (Nigel Price, with Wolfe's written reply)",
+   "url": "https://ultan.org.uk/plant-engineering/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2013-07-27",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "Gene Wolfe: 1931-2019 (Bob Vavra, Plant Engineering)",
+   "url": "https://www.plantengineering.com/gene-wolfe-1931-2019/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2019-05-20",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "An Homage to my Honorary Grandfather (C. S. E. Cooney, Ultan's Library)",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-06-10",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "Suns New, Long, and Short: An Interview with Gene Wolfe (Lawrence Person, Nova Express 1998)",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1998 / reprinted 2021-04-25",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "Gene Wolfe Talks About 'The Book of the New Sun' (Michael Dirda, Washington Post Book World)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1983-01-29-michaeldirda-thebookofthenewsun-interview.txt",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1983-01-30",
+   "route": "gwern.net plain-text transcript"
+  },
+  {
+   "title": "WolfeWiki: Trip, Trap (quoting Contemporary Authors Autobiography Series Vol. 9)",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Stories.TripTrap",
+   "kind": "relay",
+   "substantive": true,
+   "date": "page last modified 2023-07-22",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "An Evening To Honor Gene Wolfe: Fuller Award program (Chicago Literary Hall of Fame)",
+   "url": "https://chicagoliteraryhof.org/images/uploads/pdfs/Gene_Wolfe_Fuller_Program.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2012",
+   "route": "PDF binary, pypdf extraction"
+  },
+  {
+   "title": "Gene Wolfe Turned Science Fiction Into High Art (Brian Phillips, The Ringer)",
+   "url": "https://www.theringer.com/2019/04/25/books/gene-wolfe-science-fiction-author",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-04-25",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "Author and Grand Master Gene Wolfe, 1931-2019 (Tor.com / Reactor)",
+   "url": "https://reactormag.com/gene-wolfe-in-memoriam-1931-2019/",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2019-04-15",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "SFE: Hartwell, David G",
+   "url": "https://sf-encyclopedia.com/entry/hartwell_david_g",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "entry updated 2026-03-23",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "David G. Hartwell (1941-2016) (Locus obituary)",
+   "url": "https://locusmag.com/2016/01/david-g-hartwell-1941-2016/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2016-01-20",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "On Encompassing the Entire Universe: An Interview with Gene Wolfe (Larry McCaffery, Science Fiction Studies #46)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1988-11",
+   "route": "gwern.net mirror, live URL"
+  },
+  {
+   "title": "A Magus of Many Suns: An Interview with Gene Wolfe (Nick Gevers, SF Site)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-01-nickgevers-amagusofmanysuns.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2002-01",
+   "route": "gwern.net mirror, live URL"
+  },
+  {
+   "title": "Gene Wolfe SF chat channel transcript (undated)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2015-genewolfe-sf-chatchannel-interview.txt",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "undated; archived under 2015",
+   "route": "gwern.net mirror, live URL"
+  },
+  {
+   "title": "Wolfe, Gene (Rodman) — Major 21st-Century Writers, Gale, 2005",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2010-02-25-gale-genewolfebiography.txt",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2005",
+   "route": "gwern.net mirror, live URL"
+  },
+  {
+   "title": "David Hartwell's Last Gift to Me: Gene Wolfe's Book of the New Sun (Theresa DeLucci, Tor.com)",
+   "url": "https://reactormag.com/davids-last-gift-to-me-gene-wolfes-book-of-the-new-sun/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2017-03-13",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "Guide to the Damon Knight papers (Archives West)",
+   "url": "https://archiveswest.orbiscascade.org/ark:80444/xv31439",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "David Geddes Hartwell, 1941-2016 (Patrick Nielsen Hayden, Making Light)",
+   "url": "https://nielsenhayden.com/makinglight/archives/016423.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-01",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "Damon Knight, IN SEARCH OF WONDER 3/e (Mark R. Kelly)",
+   "url": "http://www.markrkelly.com/Blog/2018/03/22/damon-knight-in-search-of-wonder-3-e/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2018-03-22",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "If Ever A Wiz There Was (Patrick O'Leary on Wolfe)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2000-03-29-patrickoleary-ifeverawiztherewas.txt",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2000-03-29",
+   "route": "gwern.net mirror, live URL"
+  },
+  {
+   "title": "Book Review: In Search of Wonder (David Agranoff)",
+   "url": "http://davidagranoff.blogspot.com/2020/03/book-review-in-search-of-wonder-essays.html",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2020-03",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "Gene Wolfe in conversation with Neil Gaiman (Locus #500, September 2002)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2002-09",
+   "route": "gwern.net PDF binary, pypdf extraction"
+  },
+  {
+   "title": "An Interview with Gene Wolfe (Lawrence Person, 2007) — PDF",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2007",
+   "route": "gwern.net PDF binary, pypdf extraction"
+  },
+  {
+   "title": "Gene Wolfe, 'The Fat Magician' (2005) — PDF",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2005-wolfe-thefatmagician.pdf",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2005",
+   "route": "gwern.net PDF binary, pypdf extraction"
+  },
+  {
+   "title": "An Interview with Gene Wolfe by Jeremy L. C. Jones (Clarkesworld issue 23)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2008-08",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "SFE: Wolfe, Gene (John Clute)",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "entry updated 2026",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "Review: Orbit 2, edited by Damon Knight (Austin Beeman, Short SF)",
+   "url": "https://www.shortsf.com/reviews/orbit2",
+   "kind": "reception",
+   "substantive": true,
+   "date": "undated post",
+   "route": "live URL, browser UA"
   }
  ]
 }

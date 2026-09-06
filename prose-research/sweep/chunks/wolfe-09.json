@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 9,
+ "indices": [
+  726,
+  727,
+  728,
+  730,
+  731,
+  732,
+  734,
+  735,
+  736,
+  737,
+  738,
+  739,
+  740,
+  741,
+  742
+ ],
+ "claims": [
+  {
+   "index": 726,
+   "feature": "other: correspondence availability",
+   "claim": "Le Guin's correspondence with other authors is a named subseries of the University of Oregon collection, but the Archives West page gives no item-level list of correspondents.",
+   "source": "Archives West, finding aid for the Ursula K. Le Guin papers, Coll 270",
+   "url": "https://archiveswest.orbiscascade.org/ark:/80444/xv926878",
+   "quote": "Literary agents, publishers, fan letters, other authors",
+   "page": "Content Description"
+  },
+  {
+   "index": 727,
+   "feature": "other: the friendship",
+   "claim": "The blogger noisms asserts that Wolfe and Le Guin were friends and cites a Wolfe interview, not any statement by Le Guin, as his evidence.",
+   "source": "noisms, \"Gene Wolfe, Ursula Le Guin, and Friendships Across the Divide\", Monsters and Manuals, 16 April 2019",
+   "url": "https://monstersandmanuals.blogspot.com/2019/04/gene-wolfe-ursula-le-guin-and.html",
+   "quote": "Gene Wolfe and Ursula Le Guin were friends.",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 728,
+   "feature": "other: the friendship",
+   "claim": "The evidence noisms offers for the Wolfe and Le Guin friendship is a video interview with Wolfe, not any statement by Le Guin.",
+   "source": "noisms, \"So. Farewell then...\", Monsters and Manuals, 15 April 2019, the post linked from the friendship essay",
+   "url": "https://monstersandmanuals.blogspot.com/2019/04/so-farewell-then.html",
+   "quote": "This is a nice interview with him in the last year of his life.",
+   "page": "post body"
+  },
+  {
+   "index": 730,
+   "feature": "other: Le Guin's judgment of Wolfe's fiction",
+   "claim": "Le Guin is quoted as saying that Wolfe is so good he leaves her speechless.",
+   "source": "Ursula Le Guin, quoted by David Pringle, Science Fiction: The 100 Best Novels (1985), entry on Wolfe's Book of the New Sun",
+   "url": "https://openlibrary.org/search/inside?q=%22Wolfe+is+so+good+he+leaves+me+speechless%22",
+   "quote": "Wolfe is so good he leaves me speechless",
+   "page": "entry on The Book of the New Sun"
+  },
+  {
+   "index": 731,
+   "feature": "other: provenance of Le Guin's praise",
+   "claim": "Pringle presents Le Guin's sentence about Wolfe as one of the peer tributes drawn by the novel, printing it beside Algis Budrys's.",
+   "source": "David Pringle, Science Fiction: The 100 Best Novels (1985)",
+   "url": "https://openlibrary.org/search/inside?q=%22and+it+has+drawn+numerous+peer%22",
+   "quote": "and it has drawn numerous peer tributes",
+   "page": "entry on The Book of the New Sun"
+  },
+  {
+   "index": 732,
+   "feature": "other: provenance of Le Guin's praise",
+   "claim": "The Le Guin sentence that the 1980s and 1990s reference books quote about Wolfe is the speechless one, not the Melville one that the jackets carry.",
+   "source": "David Pringle, Science Fiction: The 100 Best Novels (1985) and The Ultimate Guide to Science Fiction, via Open Library search-inside",
+   "url": "https://openlibrary.org/search/inside?q=%22Wolfe+is+so+good+he+leaves+me+speechless%22",
+   "quote": "Wolfe is so good he leaves me speechless",
+   "page": "search-inside snippets, four hits across two Pringle titles"
+  },
+  {
+   "index": 734,
+   "feature": "stylometry",
+   "claim": "No stylometric or corpus-linguistic study of Gene Wolfe's prose is indexed in Google Scholar: the query for his name beside stylometry returns the zero-result message.",
+   "source": "Google Scholar results page for \"Gene Wolfe\" stylometry, fetched 2026-09-06",
+   "url": "https://scholar.google.com/scholar?q=%22Gene+Wolfe%22+stylometry",
+   "quote": "did not match any articles",
+   "page": "results area"
+  },
+  {
+   "index": 735,
+   "feature": "stylometry",
+   "claim": "OpenAlex returns three works for a search pairing Gene Wolfe with stylometry, and none of the three is about Gene Wolfe.",
+   "source": "OpenAlex works search API, queried 2026-09-06",
+   "url": "https://api.openalex.org/works?search=gene+wolfe+stylometry",
+   "quote": "",
+   "page": "meta.count and the three result titles"
+  },
+  {
+   "index": 736,
+   "feature": "stylometry",
+   "claim": "The 2014 quantitative genre study by Nichols, Lynn and Purzycki, the only quantitative science-fiction item Google Scholar surfaces beside Wolfe's name, does not contain Gene Wolfe in its corpus: the word Wolfe does not occur in the draft.",
+   "source": "Ryan Nichols, Justin Lynn & Benjamin Grant Purzycki, Scientific Study of Literature 4:1 (2014), author-hosted draft",
+   "url": "https://static1.squarespace.com/static/56b23f391bbee0832a71e819/t/5ebc7271ed9e7b0bfd86b635/1589408969872/Toward-a-science-of-science-fiction-draft.pdf",
+   "quote": "",
+   "page": "whole draft, 8,783 words extracted"
+  },
+  {
+   "index": 737,
+   "feature": "stylometry",
+   "claim": "Peter Wright opens Attending Daedalus by naming the paucity of detailed analyses of Wolfe available to him.",
+   "source": "Peter Wright, Attending Daedalus: Gene Wolfe, Artifice and the Reader, Preface (2003)",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+   "quote": "the paucity of detailed analyses available",
+   "page": "Preface"
+  },
+  {
+   "index": 738,
+   "feature": "stylometry",
+   "claim": "In the first 2,005 words of the 1972 novella The Fifth Head of Cerberus the mean sentence length is 32.34 words with a standard deviation of 18.18 words.",
+   "source": "Opus finder measurement over the Tor/Forge Blog excerpt of The Fifth Head of Cerberus (2022 reissue of the 1972 text)",
+   "url": "https://www.torforgeblog.com/2022/09/07/excerpt-reveal-the-fifth-head-of-cerberus-by-gene-wolfe/",
+   "quote": "When I was a boy my brother David and I had",
+   "page": "excerpt body, opening"
+  },
+  {
+   "index": 739,
+   "feature": "stylometry",
+   "claim": "In the first 2,007 words of The Shadow of the Torturer chapter one the mean sentence length is 13.75 words with a standard deviation of 10.66 words.",
+   "source": "Opus finder measurement over the Tor/Forge Blog 'Shadow & Claw' excerpt (1980 text)",
+   "url": "https://www.torforgeblog.com/2021/06/07/excerpt-shadow-claw/",
+   "quote": "It is possible I already had some presentiment of my future.",
+   "page": "excerpt body, opening sentence"
+  },
+  {
+   "index": 740,
+   "feature": "stylometry",
+   "claim": "In the first 2,002 words of the 2013 novel The Land Across the mean sentence length is 14.40 words with a standard deviation of 8.20 words.",
+   "source": "Opus finder measurement over the Reactor (Tor.com) excerpt of The Land Across",
+   "url": "https://reactormag.com/the-land-across-excerpt-gene-wolfe/",
+   "quote": "A porter who would not talk to me made the bed",
+   "page": "excerpt body"
+  },
+  {
+   "index": 741,
+   "feature": "stylometry",
+   "claim": "In the first 2,013 words of the 2015 novel A Borrowed Man the mean sentence length is 10.94 words with a standard deviation of 7.20 words.",
+   "source": "Opus finder measurement over the Reactor (Tor.com) excerpt of A Borrowed Man",
+   "url": "https://reactormag.com/excerpts-a-borrowed-man-gene-wolfe/",
+   "quote": "Murder is not always such a terrible thing.",
+   "page": "excerpt body, chapter one opening"
+  },
+  {
+   "index": 742,
+   "feature": "stylometry",
+   "claim": "In the whole 1,663-word Tor/Forge excerpt of the 2020 novel Interlibrary Loan the mean sentence length is 14.72 words with a standard deviation of 12.35 words.",
+   "source": "Opus finder measurement over the Tor/Forge Blog excerpt of Interlibrary Loan",
+   "url": "https://www.torforgeblog.com/2020/05/08/excerpt-interlibrary-loan-by-gene-wolfe/",
+   "quote": "In the evening, when the library has closed",
+   "page": "excerpt body, opening"
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 {
  "complete": true,
- "coverage": "Named roster: Vonarburg FETCHED (Diacritik 2021 entretien, the only place she speaks about translating Kay; no Elbakin or ActuSF translator interview with her exists), Cabon FETCHED (his own site's nine per-book pages plus his signed L'Atalante piece 'Les Chevaux célestes pour \"les cancres\"'; verified as Kay's L'Atalante translator and as the interpreter at Nantes 2025), justaword.fr BLOCKED (403 live, scribe.rip 404, freedium fail, r.jina.ai 403, no Wayback capture), ActuSF BLOCKED (article bodies empty in curl, in the Wayback capture and in a full browser render), AudioFile Magazine BLOCKED (review URLs now redirect into kirkusreviews.com, no archive), Utopiales 2017 'L'auteur et son ombre' with Kay and Cabon BLOCKED (audio/video only, empty caption track); Simon Vance VERIFIED as narrator of most but not all of the catalogue (Holter Graham read Last Light of the Sun, Euan Morton A Song for Arbonne). Substantive sources by route: named roster 6; lateral search 9 (Brightweavings journals and news, Fréchette's Laval mémoire, the two Elbakin critiques, the two Elbakin forum threads, the Goodreads/Spun Stories audiobook review); bibliography chasing 3 (Cabon's own reference lists led to the Kattnig piece and the L'Atalante translator rubric). Shortfall: no translator in any language is on record about Kay's SENTENCE — clause order, length, the withheld subject, the pause; the translator record is entirely about lexicon and research, so the sentence-level close-reader evidence had to come from Kay's copy-editor fights and from the narrator's reported pause. WebSearch budget was exhausted mid-sweep; the last third of discovery ran through browser-rendered DuckDuckGo and direct site navigation.",
+ "coverage": "Named roster: Vonarburg FETCHED (the Diacritik 2021 entretien is the only place she speaks about translating Kay; no Elbakin or ActuSF translator interview with her exists), Cabon FETCHED (his own site's per-book pages plus his signed L'Atalante piece, and he is verified as Kay's L'Atalante translator and as the interpreter at Nantes 2025-04-23); justaword.fr BLOCKED (403 live, scribe.rip 404, freedium fail, r.jina.ai 403, no Wayback capture); ActuSF BLOCKED (article bodies empty in curl, in the Wayback capture and in a full browser render); AudioFile Magazine BLOCKED (review URLs now redirect into kirkusreviews.com, no archive of the review id); Utopiales 2017 \"L'auteur et son ombre\" with Kay and Cabon BLOCKED (audio/video only, caption track returns empty); Simon Vance VERIFIED as narrator of most but not all of the catalogue (Holter Graham read The Last Light of the Sun, Euan Morton A Song for Arbonne). Substantive sources per route: named roster 6; lateral search 9 (Kay's own Brightweavings journals and news archive, Fréchette's Laval mémoire, two Elbakin critiques, two Elbakin forum threads, one audiobook review); bibliography chasing 3 (Cabon's own reference lists led to the Kattnig post and the L'Atalante translator rubric). Shortfall: no translator in any language is on record about Kay's SENTENCE — clause order, length, the withheld subject, the pause; the translator record is entirely lexical and documentary, so the sentence-level close-reader evidence had to come from Kay's copy-editor fights and from the narrator's reported pause. The WebSearch budget was exhausted mid-sweep and the last third of discovery ran through browser-rendered DuckDuckGo and direct site navigation.",
  "sourcesRead": [
   {
    "title": "Guy Gavriel Kay et sa façon d'écrire… (interview traduite par NAK)",
@@ -35,7 +35,7 @@
    "route": "live"
   },
   {
-   "title": "Mikael Cabon, traducteur — bibliographie",
+   "title": "Mikael Cabon, traducteur — bibliographie et parcours",
    "url": "https://mikaelcabon.fr/",
    "kind": "vendor",
    "substantive": false,
@@ -64,7 +64,7 @@
    "route": "live"
   },
   {
-   "title": "Brightweavings — Children of Earth and Sky journal (Guy Gavriel Kay's own journal)",
+   "title": "Brightweavings — Children of Earth and Sky journal (Kay's own journal)",
    "url": "http://brightweavings.com/journal/category/children-of-earth-and-sky/",
    "kind": "own-words",
    "substantive": true,
@@ -218,7 +218,7 @@
    "route": "live"
   },
   {
-   "title": "Brightweavings — journal index / essays index (navigation only)",
+   "title": "Brightweavings — essays / navigation index",
    "url": "https://brightweavings.com/essays/",
    "kind": "vendor",
    "substantive": false,
@@ -249,12 +249,12 @@
    "route": "live"
   },
   {
-   "title": "Interview 2017: Guy Gavriel Kay aux Utopiales, ActuSF",
+   "title": "Interview 2017 : Guy Gavriel Kay aux Utopiales, ActuSF",
    "url": "https://www.actusf.com/detail-d-un-article/Interview-2017-Guy-Gavriel-Kay-aux",
    "kind": "own-words",
    "substantive": false,
    "date": "2017-11-23",
-   "route": "BLOCKED — body empty in curl, in the Wayback capture, and in a full browser render"
+   "route": "BLOCKED — body empty in curl, in the Wayback capture and in a full browser render"
   },
   {
    "title": "Interview Guy Gavriel Kay, L'historien de la fantasy — Just A Word (Nicolas Winter)",
@@ -276,7 +276,7 @@
    "kind": "own-words",
    "substantive": false,
    "date": "2017-11-02",
-   "route": "BLOCKED — only an auto-ASR English caption track is listed and the timedtext endpoint returns empty"
+   "route": "BLOCKED — only an auto-ASR caption track is listed and the timedtext endpoint returns empty"
   }
  ],
  "claims": [
@@ -311,10 +311,10 @@
   {
    "feature": "cadence and rhythm",
    "claim": "Kay writes that the narrator Simon Vance sent him a note about needing to pause at times to control emotion while reading Children of Earth and Sky aloud.",
-   "source": "Guy Gavriel Kay, Brightweavings journal, Children of Earth and Sky (author's post, c. April 2016)",
+   "source": "Guy Gavriel Kay, Brightweavings journal, Children of Earth and Sky",
    "url": "http://brightweavings.com/journal/category/children-of-earth-and-sky/",
    "quote": "needing to pause at times to control emotion as he read",
-   "page": "Children of Earth and Sky journal, post announcing the finished audiobook",
+   "page": "post announcing the finished audiobook",
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2016",
@@ -325,10 +325,10 @@
   {
    "feature": "cadence and rhythm",
    "claim": "Kay says he often makes adjustments to his text after reading his writing aloud.",
-   "source": "Guy Gavriel Kay, Brightweavings journal, Children of Earth and Sky (author's post on proofing typeset pages)",
+   "source": "Guy Gavriel Kay, Brightweavings journal, Children of Earth and Sky",
    "url": "http://brightweavings.com/journal/category/children-of-earth-and-sky/",
    "quote": "I often make adjustments after doing that.",
-   "page": "Children of Earth and Sky journal, post on typesetting and page proofs",
+   "page": "post on typesetting and page proofs",
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2015",
@@ -342,7 +342,7 @@
    "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, 2006",
    "url": "https://brightweavings.com/books/ysabel-journal/",
    "quote": "I’ll use punctuation varaibly depending on context, speaker, rhythms.",
-   "page": "Ysabel journal, post on proofreading (Sept./Oct. 2006)",
+   "page": "Ysabel journal, post on proofreading (2006)",
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2006",
@@ -384,7 +384,7 @@
    "source": "Guy Gavriel Kay, Brightweavings journal, Children of Earth and Sky",
    "url": "http://brightweavings.com/journal/category/children-of-earth-and-sky/",
    "quote": "comma, semi-colon, paragraph break, tense shift, word-choice wars",
-   "page": "Children of Earth and Sky journal, post on copy-editing",
+   "page": "post on copy-editing",
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2015",
@@ -409,7 +409,7 @@
   {
    "feature": "other: reading aloud",
    "claim": "Kay says what works when reading alone to yourself is not the same as what works when listening in public.",
-   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, November 2006",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, 20 November 2006",
    "url": "https://brightweavings.com/books/ysabel-journal/",
    "quote": "what works when you are reading alone to yourself is not",
    "page": "Ysabel journal, 20 November 2006 post on his first public reading from Ysabel",
@@ -464,7 +464,7 @@
   },
   {
    "feature": "translation and register",
-   "claim": "Kay states that a translated work is a version and an interpretation of the original author's work rather than that author's own.",
+   "claim": "Kay states that a translated work is a version and an interpretation of the original author's work.",
    "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, October 2006",
    "url": "https://brightweavings.com/books/ysabel-journal/",
    "quote": "It is a version, an interpretation, of that person’s work.",
@@ -561,7 +561,7 @@
   },
   {
    "feature": "other: invented world as historical ethic",
-   "claim": "Cabon writes that one reason Kay sets fact-based plots in invented worlds is his refusal to betray historical figures by presuming their reactions and feelings.",
+   "claim": "Cabon writes that one reason Kay sets fact-based plots in invented worlds is his refusal to betray historical figures by presuming their reactions.",
    "source": "Mikael Cabon, « Les Chevaux célestes pour \"les cancres\" », Éditions L'Atalante, 11 July 2014",
    "url": "https://www.l-atalante.com/actualites/les-chevaux-celestes-pour-les-cancres/",
    "quote": "son refus de trahir les personnages historiques en présumant de leurs réactions",
@@ -589,8 +589,8 @@
   },
   {
    "feature": "other: retranslation",
-   "claim": "The translator's own pages for Voile vers Sarance and Le Seigneur des empereurs carry the line announcing Kay's Byzantine epic in a new translation.",
-   "source": "Mikael Cabon, translator's own pages for the Sarantine Mosaic (L'Atalante)",
+   "claim": "The translator's own page for Voile vers Sarance carries the line announcing Kay's Byzantine epic in a new translation.",
+   "source": "Mikael Cabon, translator's own page for Voile vers Sarance (L'Atalante)",
    "url": "https://mikaelcabon.fr/voileverssarance.html",
    "quote": "DANS UNE NOUVELLE TRADUCTION",
    "page": "back-cover text reproduced on the page",
@@ -602,7 +602,7 @@
   },
   {
    "feature": "other: retranslation",
-   "claim": "Elbakin forum readers record that A Brightness Long Ago exists in two French versions, Vonarburg's Un éclat d'antan for Alire and Cabon's Comme un diamant dans ma mémoire for L'Atalante.",
+   "claim": "Elbakin forum readers record that A Brightness Long Ago had already been translated by Élisabeth Vonarburg and published in 2020 before the L'Atalante version appeared.",
    "source": "Elbakin.net forum thread on Comme un diamant dans ma mémoire (reader posts)",
    "url": "https://www.forum-elbakin.net/viewtopic.php?t=9311&start=60",
    "quote": "Il avait déjà été traduit par Élisabeth Vonarburg et paru en 2020",
@@ -611,11 +611,11 @@
    "polarity": "asserts",
    "routeHint": "live fetch",
    "registerHint": "none",
-   "confidence": "medium — forum posts, unsigned readers"
+   "confidence": "medium — unsigned forum posts"
   },
   {
    "feature": "other: narrator roster",
-   "claim": "Kay's site records that The Last Light of the Sun audiobook was read by Holter Graham, not by Simon Vance.",
+   "claim": "Kay's site records that The Last Light of the Sun audiobook was read by Holter Graham.",
    "source": "Brightweavings News archive, 18 May 2009",
    "url": "https://brightweavings.com/news/",
    "quote": "Last Light of the Sun is wrapped, read by Holter Graham",
@@ -657,7 +657,7 @@
   },
   {
    "feature": "register modulation",
-   "claim": "Gillossen argues that the prose of The Last Light of the Sun becoming less subtle is a deliberate move to sharpen the contrast with the sophisticated culture of Sarantium.",
+   "claim": "Gillossen argues that the prose of The Last Light of the Sun becoming less subtle is deliberate, to sharpen the contrast with the sophisticated culture of Sarantium.",
    "source": "Gillossen, critique of Les Derniers Feux du soleil, Elbakin.net, 19 April 2009",
    "url": "https://www.elbakin.net/fantasy/roman/les-derniers-feux-du-soleil-961",
    "quote": "sa prose se fait moins subtile",
@@ -671,7 +671,7 @@
   },
   {
    "feature": "archaism",
-   "claim": "Gillossen calls Kay's multiplication of period terms in The Last Light of the Sun sometimes incidental to what it actually adds to the story.",
+   "claim": "Gillossen calls Kay's multiplication of period terms in The Last Light of the Sun sometimes incidental to what it adds to the story.",
    "source": "Gillossen, critique of Les Derniers Feux du soleil, Elbakin.net, 19 April 2009",
    "url": "https://www.elbakin.net/fantasy/roman/les-derniers-feux-du-soleil-961",
    "quote": "une multiplication de termes \"d'époque\"",
@@ -764,7 +764,7 @@
    "polarity": "mentions",
    "routeHint": "live fetch",
    "registerHint": "none",
-   "confidence": "medium — the source is a preference statement and says nothing about Kay's sentences"
+   "confidence": "medium — a preference statement that says nothing about Kay's sentences"
   }
  ]
 }

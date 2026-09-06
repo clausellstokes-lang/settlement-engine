@@ -1,6 +1,6 @@
 {
  "complete": true,
- "coverage": "Named on-disk roster: 10/10 FETCHED and fully claimed (they were on disk from an earlier round but NONE of their URLs appeared among the 386 existing verified claims, so all were virgin); note they live under sweep/hobb-raw and sweep/hobb-acad, not the paths the brief gave. Named second routes: Mendlesohn Rhetorics of Fantasy BLOCKED at the primary (archive.org search-inside answers 'Item not available' for the lending-restricted item; IA was also intermittently offline) - its relay via Elliott's bibliography was already claimed last round; Mandala NOT FOUND (no accessible full text; Elliott's exhaustive Hobb bibliography carries no Mandala entry); Ekman Here Be Dragons NOT FOUND for Hobb (no Elliott entry either, though Ekman & Taylor on epigraphs is already in the corpus); Oliver 'Magic Words, Magic Worlds' REACHED BY PROXY and shown to be a MISATTRIBUTION - a chapter-by-chapter review names thirteen authors and never Hobb, so the brief conflated the McFarland monograph with Oliver's separate Mythlore article on Hobb's epigraphs; Borowska-Szerszun ABSTRACT-ONLY (closed access per both Unpaywall and OpenAlex, absent from the UwB repository); Shropshire NOT FOUND (SHAREOK holds zero Hobb records, ProQuest-only); r/Fantasy AMAs BLOCKED (reddit.com is disallowed to this user agent, reddit's JSON API refuses unauthenticated clients, and three Wayback CDX enumerations for the AMA threads timed out or returned empty); video-essay transcripts FETCHED, 5/5. Substantive sources per route: 10 named on-disk, 5 video transcripts, 1 open-access review, 1 abstract-only record = 17 substantive, 94 claims; 8 further sources read and logged non-substantive (blocked, not found, snippet-only, or vendor). Stopping rule met: Crossref and OpenAlex sweeps both surfaced nothing not already on disk. Best finds: Peter Heck (Asimov's, Feb 1997) names the Farseer chapter epigraphs 'a brief historical memoir', the closest thing yet to a settlement-dossier register inside the novels; Chris Morgan (Interzone 98, Aug 1995) is the dissenting contemporary reviewer, who read the prose as historical fiction and thought Hobb was a man; and Hobb's own 2012 statement that a character, not a narrator, 'introduces setting, culture, conflict, government, economy'.",
+ "coverage": "Named on-disk roster: 10/10 FETCHED and fully claimed (they were on disk from an earlier round but NONE of their URLs appeared among the 386 existing verified claims, so all were virgin); note they live under sweep/hobb-raw and sweep/hobb-acad, not the paths the brief gave. Named second routes: Mendlesohn Rhetorics of Fantasy BLOCKED at the primary (archive.org search-inside answers \"Item not available\" for the lending-restricted item; IA was also intermittently offline) — its relay via Elliott's bibliography was already claimed last round; Mandala NOT FOUND (no accessible full text; Elliott's exhaustive Hobb bibliography carries no Mandala entry); Ekman Here Be Dragons NOT FOUND for Hobb (no Elliott entry either, though Ekman & Taylor on epigraphs is already in the corpus); Oliver \"Magic Words, Magic Worlds\" REACHED BY PROXY and shown to be a MISATTRIBUTION — a chapter-by-chapter review names thirteen authors and never Hobb, so the brief conflated the McFarland monograph with Oliver's separate Mythlore article on Hobb's epigraphs; Borowska-Szerszun ABSTRACT-ONLY (closed access per both Unpaywall and OpenAlex, absent from the UwB repository); Shropshire NOT FOUND (SHAREOK holds zero Hobb records, ProQuest-only); r/Fantasy AMAs BLOCKED (reddit.com is disallowed to this user agent, reddit's JSON API refuses unauthenticated clients, and three Wayback CDX enumerations for the AMA threads timed out or returned empty); video-essay transcripts FETCHED, 5/5. Substantive sources per route: 10 named on-disk, 5 video transcripts, 1 open-access review, 1 abstract-only record = 17 substantive, 94 claims; 8 further sources read and logged non-substantive (blocked, not found, snippet-only, or vendor). Stopping rule met: Crossref and OpenAlex sweeps both surfaced nothing not already on disk. Best finds: Peter Heck (Asimov's, Feb 1997) names the Farseer chapter epigraphs \"a brief historical memoir\", the closest thing yet to a settlement-dossier register inside the novels; Chris Morgan (Interzone 98, Aug 1995) is the dissenting contemporary reviewer, who read the prose as historical fiction and thought Hobb was a man; and Hobb's own 2012 statement that a character, not a narrator, \"introduces setting, culture, conflict, government, economy\".",
  "sourcesRead": [
   {
    "title": "5000 Words About Myself (Robin Hobb, for Alienisti / Finncon 2004)",
@@ -32,7 +32,7 @@
    "kind": "analysis",
    "substantive": true,
    "date": "2015",
-   "route": "on disk; live page"
+   "route": "on disk; live page. Reviewer identified: Amanda Craig (brief did not name her)"
   },
   {
    "title": "Pastoral Family Drama: Fool's Assassin by Robin Hobb (Justin Landon)",
@@ -40,7 +40,7 @@
    "kind": "analysis",
    "substantive": true,
    "date": "2014-08-12",
-   "route": "on disk; live page, tor.com URL now redirects to reactormag canonical"
+   "route": "on disk; live page, the 2014 tor.com URL now redirects to this reactormag canonical"
   },
   {
    "title": "Revolutionary Nautical Fantasy: Robin Hobb's Liveship Traders Series (Stephanie Dray)",
@@ -56,7 +56,7 @@
    "kind": "own-words",
    "substantive": true,
    "date": "2012-02-07",
-   "route": "on disk; live tor.com is Cloudflare 403, Wayback raw id_ capture"
+   "route": "on disk; live tor.com is Cloudflare 403, text is the Wayback raw id_ capture. Richest single source on this angle"
   },
   {
    "title": "First Fantasies (Chris Morgan), review of The Assassin's Apprentice, Interzone 98",
@@ -64,15 +64,15 @@
    "kind": "reception",
    "substantive": true,
    "date": "1995-08",
-   "route": "on disk; archive.org djvu OCR, item byte-verified (441642 bytes)"
+   "route": "on disk; archive.org djvu OCR, item byte-verified at 441642 bytes = local file exactly. Reviewer identified: CHRIS MORGAN, column 'First Fantasies'"
   },
   {
-   "title": "On Books (Peter Heck), Asimov's Science Fiction, February 1997",
+   "title": "On Books (Peter Heck), Asimov's Science Fiction, February 1997, pp. 157-158",
    "url": "https://archive.org/download/asimovsv21n02199702_201908/Asimovs_v21n02_1997-02_djvu.txt",
    "kind": "reception",
    "substantive": true,
    "date": "1997-02",
-   "route": "on disk; archive.org djvu OCR, item byte-verified (406311 bytes)"
+   "route": "on disk; archive.org djvu OCR, item byte-verified at 406311 bytes = local file exactly. Reviewer identified: PETER HECK"
   },
   {
    "title": "How the assistant becomes a hero, and how it affects a text: fantasy trilogy by R. Hobb 'Assassin' (Z. Hodunok)",
@@ -80,7 +80,7 @@
    "kind": "analysis",
    "substantive": true,
    "date": "2024",
-   "route": "on disk; PDF text extracted. Thin for prose style - character-function paper, no style section"
+   "route": "on disk; PDF text extracted. THIN for prose style - a monomyth/character-function paper with no style section; grepped for оповідач / першої особи / стиль / деталі / побут with zero hits, so both claims rest on the English abstract"
   },
   {
    "title": "Review: Matthew Oliver, Magic Words, Magic Worlds: Form and Style in Epic Fantasy (2022) (Marinette Grimbeek)",
@@ -96,42 +96,42 @@
    "kind": "analysis",
    "substantive": true,
    "date": "2019-04-01",
-   "route": "article closed access (Unpaywall + OpenAlex both 'closed', no repository copy); abstract reconstructed from OpenAlex abstract_inverted_index - ABSTRACT ONLY"
+   "route": "article closed access (Unpaywall and OpenAlex both report oa_status 'closed', no repository copy); abstract reconstructed from OpenAlex abstract_inverted_index - ABSTRACT ONLY"
   },
   {
    "title": "Robin Hobb is a literary genius. Here's why. (riddbook)",
    "url": "https://www.youtube.com/watch?v=EYT3NeS_mVQ",
    "kind": "reader",
    "substantive": true,
-   "route": "auto-generated caption track via youtube-transcript-api"
+   "route": "auto-generated caption track pulled with youtube-transcript-api"
   },
   {
    "title": "Robin Hobb: Writing Lessons (JD)",
    "url": "https://www.youtube.com/watch?v=H02ZPoR3tlI",
    "kind": "reader",
    "substantive": true,
-   "route": "auto-generated caption track via youtube-transcript-api"
+   "route": "auto-generated caption track pulled with youtube-transcript-api"
   },
   {
    "title": "Robin Hobb explains how writing is like 'chasing butterflies' (blinkbox Books)",
    "url": "https://www.youtube.com/watch?v=-9T-BlR5io0",
    "kind": "own-words",
    "substantive": true,
-   "route": "auto-generated caption track via youtube-transcript-api"
+   "route": "auto-generated caption track pulled with youtube-transcript-api"
   },
   {
-   "title": "Assassin's Apprentice by Robin Hobb | Fitz and the cost of identity, duty and honour (A Novel Review)",
+   "title": "Assassin's Apprentice by Robin Hobb | Fitz and the cost of identity, duty and honour (A Novel Review - Book Podcast)",
    "url": "https://www.youtube.com/watch?v=jfhl1jnaAPY",
    "kind": "reader",
    "substantive": true,
-   "route": "auto-generated caption track via youtube-transcript-api"
+   "route": "auto-generated caption track pulled with youtube-transcript-api"
   },
   {
    "title": "Robin Hobb Doesn't Write 'Morally Grey' Characters (Allison Annotated)",
    "url": "https://www.youtube.com/watch?v=fIw6lHNEwcc",
    "kind": "reader",
    "substantive": true,
-   "route": "auto-generated caption track via youtube-transcript-api"
+   "route": "auto-generated caption track pulled with youtube-transcript-api"
   },
   {
    "title": "The Fedwren Project: A Robin Hobb Annotated Bibliography (Geoffrey B. Elliott, rev. 18 May 2026)",
@@ -139,7 +139,7 @@
    "kind": "relay",
    "substantive": true,
    "date": "2026-05-18",
-   "route": "on disk (hobb-acad/fedwren.txt). Read for bibliography chasing. Its relay annotations of Mendlesohn, Shropshire and Crane & Fletcher were ALREADY claimed by an earlier round, so no new claims taken; it yielded the coverage determination that this exhaustive Hobb bibliography contains ZERO entries for Mandala, Ekman, 'Here Be Dragons' or 'Magic Words, Magic Worlds', and the NEW lead Crane & Fletcher 2017"
+   "route": "on disk; read for bibliography chasing. Its relay annotations of Mendlesohn, Shropshire and Crane & Fletcher were ALREADY claimed by an earlier round so no new claims taken; it yielded the coverage determination that this exhaustive Hobb bibliography contains ZERO entries for Mandala, Ekman, 'Here Be Dragons' or 'Magic Words, Magic Worlds', plus the new lead Crane & Fletcher 2017"
   },
   {
    "title": "Magic Words, Magic Worlds (McFarland product page)",
@@ -160,21 +160,21 @@
    "url": "https://ia903101.us.archive.org/fulltext/inside.php?item_id=rhetoricsoffanta0000mend&doc=rhetoricsoffanta0000mend&path=/0/items/rhetoricsoffanta0000mend&q=Hobb",
    "kind": "analysis",
    "substantive": false,
-   "route": "BLOCKED - endpoint answers 'Item not available' on both d1 and d2 servers for this lending-restricted item; api.archivelab.org and ia-fts.archive.org return nothing unauthenticated. Internet Archive was also intermittently 'Temporarily Offline' during the session"
+   "route": "BLOCKED - endpoint answers 'Item not available' on both d1 and d2 servers for this lending-restricted item; api.archivelab.org and ia-fts.archive.org return nothing unauthenticated; Internet Archive was also intermittently 'Temporarily Offline' during the session"
   },
   {
    "title": "OpenLibrary search-inside, 'Robin Hobb' + 'portal-quest'",
    "url": "https://openlibrary.org/search/inside?q=%22Robin+Hobb%22+%22portal-quest%22",
    "kind": "analysis",
    "substantive": false,
-   "route": "SNIPPET ONLY - surfaced a verbatim snippet from Mendlesohn & James, A Short History of Fantasy naming Hobb beside Patricia McKillip. NO CLAIM TAKEN: the finder method forbids claims from snippets. Also established the engine does not do exact phrase matching (a query for a phrase visible in its own snippet returned 0), so its nil results are NOT evidence of absence"
+   "route": "SNIPPET ONLY - surfaced verbatim text from Mendlesohn & James, A Short History of Fantasy naming Hobb beside Patricia McKillip. NO CLAIM TAKEN: the method forbids claims from snippets. Also established the engine does not do exact phrase matching (a query for a phrase visible in its own snippet returned 0), so its nil results are NOT evidence of absence"
   },
   {
    "title": "Bloomsbury Collections search for Mandala, Language in Science Fiction and Fantasy",
    "url": "https://www.bloomsburycollections.com/search?q=Mandala+Language+in+Science+Fiction",
    "kind": "analysis",
    "substantive": false,
-   "route": "NOT FOUND - no accessible monograph record; the direct docid guess returned Bloomsbury's 'page can't be found'"
+   "route": "NOT FOUND - no accessible monograph record; the direct docid attempt returned Bloomsbury's 'page can't be found'"
   },
   {
    "title": "UwB institutional repository search for Borowska-Szerszun",
@@ -202,7 +202,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -216,7 +216,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -230,7 +230,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -244,7 +244,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -258,7 +258,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -272,7 +272,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -286,7 +286,7 @@
    "kind": "own-words",
    "polarity": "applies",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -300,7 +300,7 @@
    "kind": "own-words",
    "polarity": "applies",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -314,7 +314,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -328,7 +328,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -342,7 +342,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2004",
-   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API (robinhobb.com*, 2005). Text has apostrophes stripped, so quotes avoid them.",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -370,7 +370,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2017-07-28",
-   "routeHint": "live page fetched with a browser user agent; canonical is 2017/jul/28",
+   "routeHint": "live page fetched with a browser user agent; the page uses curly apostrophes",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -384,7 +384,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2017-07-28",
-   "routeHint": "live page fetched with a browser user agent; canonical is 2017/jul/28",
+   "routeHint": "live page fetched with a browser user agent",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -398,7 +398,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2017-07-28",
-   "routeHint": "live page fetched with a browser user agent; canonical is 2017/jul/28",
+   "routeHint": "live page fetched with a browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -412,7 +412,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2017-07-28",
-   "routeHint": "live page fetched with a browser user agent; canonical is 2017/jul/28",
+   "routeHint": "live page fetched with a browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -426,7 +426,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2017-07-28",
-   "routeHint": "live page fetched with a browser user agent; canonical is 2017/jul/28",
+   "routeHint": "live page fetched with a browser user agent; this is the reporter's paraphrase, not transcribed speech",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -440,7 +440,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2017-07-28",
-   "routeHint": "live page fetched with a browser user agent; canonical is 2017/jul/28",
+   "routeHint": "live page fetched with a browser user agent",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -454,7 +454,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2017-07-28",
-   "routeHint": "live page fetched with a browser user agent; canonical is 2017/jul/28",
+   "routeHint": "live page fetched with a browser user agent",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -468,7 +468,7 @@
    "kind": "analysis",
    "polarity": "applies",
    "date": "2014-09-10",
-   "routeHint": "live page, browser user agent",
+   "routeHint": "live page, browser user agent; the quoted words are Hobb's novel as reproduced in the review",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -510,7 +510,7 @@
    "kind": "analysis",
    "polarity": "applies",
    "date": "2014-09-10",
-   "routeHint": "live page, browser user agent",
+   "routeHint": "live page, browser user agent; the quoted words are Hobb's novel as reproduced in the review",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -608,7 +608,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-08-12",
-   "routeHint": "live page; the 2014 tor.com URL now redirects to reactormag.com — this canonical",
+   "routeHint": "live page; the 2014 tor.com URL now redirects to this reactormag canonical",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -622,7 +622,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-08-12",
-   "routeHint": "live page; the 2014 tor.com URL now redirects to reactormag.com — this canonical",
+   "routeHint": "live page; the 2014 tor.com URL now redirects to this reactormag canonical",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -636,7 +636,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-08-12",
-   "routeHint": "live page; the 2014 tor.com URL now redirects to reactormag.com — this canonical",
+   "routeHint": "live page; the 2014 tor.com URL now redirects to this reactormag canonical",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -650,7 +650,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-08-12",
-   "routeHint": "live page; the 2014 tor.com URL now redirects to reactormag.com — this canonical",
+   "routeHint": "live page; the 2014 tor.com URL now redirects to this reactormag canonical",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -664,7 +664,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-08-12",
-   "routeHint": "live page; the 2014 tor.com URL now redirects to reactormag.com — this canonical",
+   "routeHint": "live page; the 2014 tor.com URL now redirects to this reactormag canonical",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -678,7 +678,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2014-08-12",
-   "routeHint": "live page; the 2014 tor.com URL now redirects to reactormag.com — this canonical",
+   "routeHint": "live page; this is a reader comment below the review, not the reviewer's text",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -692,7 +692,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2014-08-12",
-   "routeHint": "live page; the 2014 tor.com URL now redirects to reactormag.com — this canonical",
+   "routeHint": "live page; this is a reader comment below the review, not the reviewer's text",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -734,7 +734,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2001-11-05",
-   "routeHint": "live page, strangehorizons.com/wordpress/ path",
+   "routeHint": "live page; this section of the page uses straight apostrophes",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -916,7 +916,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2012-02-07",
-   "routeHint": "live tor.com URL returns Cloudflare 403; text is the Wayback raw capture 20201111180135id_",
+   "routeHint": "live tor.com URL returns Cloudflare 403; Wayback raw capture 20201111180135id_; the page uses curly apostrophes",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -944,7 +944,7 @@
    "kind": "reception",
    "polarity": "disputes",
    "date": "1995-08",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 441642 bytes. OCR uses DOUBLE spaces between words and a \"¬\" soft hyphen at line breaks — quote verified against a whitespace-normalised copy and chosen to contain no line break.",
+   "routeHint": "archive.org djvu OCR full text, item byte-verified at 441642 bytes. OCR uses DOUBLE spaces between words and a '¬' soft hyphen at line breaks; quote verified against a whitespace-normalised copy and chosen to contain no line break",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -958,7 +958,7 @@
    "kind": "reception",
    "polarity": "disputes",
    "date": "1995-08",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 441642 bytes. OCR uses DOUBLE spaces between words and a \"¬\" soft hyphen at line breaks — quote verified against a whitespace-normalised copy and chosen to contain no line break.",
+   "routeHint": "archive.org djvu OCR full text, item byte-verified at 441642 bytes; double-space and '¬' hazard, quote chosen to avoid both",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -972,7 +972,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "1995-08",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 441642 bytes. OCR uses DOUBLE spaces between words and a \"¬\" soft hyphen at line breaks — quote verified against a whitespace-normalised copy and chosen to contain no line break.",
+   "routeHint": "archive.org djvu OCR full text, item byte-verified at 441642 bytes; double-space and '¬' hazard, quote chosen to avoid both",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -986,7 +986,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "1995-08",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 441642 bytes. OCR uses DOUBLE spaces between words and a \"¬\" soft hyphen at line breaks — quote verified against a whitespace-normalised copy and chosen to contain no line break.",
+   "routeHint": "archive.org djvu OCR full text, item byte-verified at 441642 bytes; double-space and '¬' hazard, quote chosen to avoid both",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1000,7 +1000,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "1995-08",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 441642 bytes. OCR uses DOUBLE spaces between words and a \"¬\" soft hyphen at line breaks — quote verified against a whitespace-normalised copy and chosen to contain no line break.",
+   "routeHint": "archive.org djvu OCR full text, item byte-verified at 441642 bytes; double-space and '¬' hazard, quote chosen to avoid both",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1014,7 +1014,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "1995-08",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 441642 bytes. OCR uses DOUBLE spaces between words and a \"¬\" soft hyphen at line breaks — quote verified against a whitespace-normalised copy and chosen to contain no line break.",
+   "routeHint": "archive.org djvu OCR full text, item byte-verified at 441642 bytes; Morgan also refers to Hobb as 'he' throughout, believing the pseudonym male",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1028,7 +1028,7 @@
    "kind": "reception",
    "polarity": "disputes",
    "date": "1995-08",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 441642 bytes. OCR uses DOUBLE spaces between words and a \"¬\" soft hyphen at line breaks — quote verified against a whitespace-normalised copy and chosen to contain no line break.",
+   "routeHint": "archive.org djvu OCR full text, item byte-verified at 441642 bytes; double-space and '¬' hazard, quote chosen to avoid both",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1042,7 +1042,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "1997-02",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 406311 bytes. Same double-space/\"¬\" hazard as Interzone — quote chosen to contain no ¬ break.",
+   "routeHint": "archive.org djvu OCR full text, item byte-verified at 406311 bytes. Same double-space and '¬' soft-hyphen hazard as Interzone; quote chosen to contain no '¬' break",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1056,7 +1056,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "1997-02",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 406311 bytes. Same double-space/\"¬\" hazard as Interzone — quote chosen to contain no ¬ break.",
+   "routeHint": "archive.org djvu OCR, byte-verified at 406311 bytes; the quote is trimmed short because the OCR breaks 'convenient' as 'conve¬ nient' immediately before it",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1070,7 +1070,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "1997-02",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 406311 bytes. Same double-space/\"¬\" hazard as Interzone — quote chosen to contain no ¬ break.",
+   "routeHint": "archive.org djvu OCR, byte-verified at 406311 bytes; quote is short because the OCR breaks both 'tradition' ('tradi¬ tion') and 'royal' ('roy¬ al') around it",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1084,7 +1084,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "1997-02",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 406311 bytes. Same double-space/\"¬\" hazard as Interzone — quote chosen to contain no ¬ break.",
+   "routeHint": "archive.org djvu OCR, byte-verified at 406311 bytes; quote avoids the OCR breaks in 'For¬ mally' and 'New- boy'",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1098,7 +1098,7 @@
    "kind": "reception",
    "polarity": "applies",
    "date": "1997-02",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 406311 bytes. Same double-space/\"¬\" hazard as Interzone — quote chosen to contain no ¬ break.",
+   "routeHint": "archive.org djvu OCR, byte-verified at 406311 bytes; double-space and '¬' hazard, quote chosen to avoid both",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1112,7 +1112,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "1997-02",
-   "routeHint": "archive.org djvu OCR full text; item byte-verified at 406311 bytes. Same double-space/\"¬\" hazard as Interzone — quote chosen to contain no ¬ break.",
+   "routeHint": "archive.org djvu OCR, byte-verified at 406311 bytes; double-space and '¬' hazard, quote chosen to avoid both",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1126,7 +1126,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2024",
-   "routeHint": "PDF fetched and text extracted; the claim rests on the article's own English abstract",
+   "routeHint": "PDF fetched and text extracted; the claim rests on the article's own English abstract, since the Ukrainian body has no prose-style section (grep for оповідач / першої особи / стиль / деталі / побут returned zero hits)",
    "registerHint": "none",
    "confidence": "medium"
   },
@@ -1140,7 +1140,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2024",
-   "routeHint": "PDF fetched and text extracted; the claim rests on the article's own English abstract",
+   "routeHint": "PDF fetched and text extracted; abstract-supported only",
    "registerHint": "none",
    "confidence": "medium"
   },
@@ -1154,7 +1154,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-12-02",
-   "routeHint": "live page, browser user agent; the review is the only open-access chapter-by-chapter account of Oliver 2022 that could be reached (the Fafnir review is behind an Anubis bot challenge and the McFarland page carries only marketing copy)",
+   "routeHint": "live page, browser user agent; the only open-access chapter-by-chapter account of Oliver 2022 that could be reached (the Fafnir review is behind an Anubis bot challenge and the McFarland page carries only marketing copy)",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1168,7 +1168,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-12-02",
-   "routeHint": "live page, browser user agent; the review is the only open-access chapter-by-chapter account of Oliver 2022 that could be reached (the Fafnir review is behind an Anubis bot challenge and the McFarland page carries only marketing copy)",
+   "routeHint": "live page; these are Oliver's words as quoted inside Grimbeek's review, not Grimbeek's own",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1182,7 +1182,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-12-02",
-   "routeHint": "live page, browser user agent; the review is the only open-access chapter-by-chapter account of Oliver 2022 that could be reached (the Fafnir review is behind an Anubis bot challenge and the McFarland page carries only marketing copy)",
+   "routeHint": "live page, browser user agent",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1196,7 +1196,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-12-02",
-   "routeHint": "live page, browser user agent; the review is the only open-access chapter-by-chapter account of Oliver 2022 that could be reached (the Fafnir review is behind an Anubis bot challenge and the McFarland page carries only marketing copy)",
+   "routeHint": "live page, browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1210,7 +1210,7 @@
    "kind": "analysis",
    "polarity": "mentions",
    "date": "2022-12-02",
-   "routeHint": "live page, browser user agent; the review is the only open-access chapter-by-chapter account of Oliver 2022 that could be reached (the Fafnir review is behind an Anubis bot challenge and the McFarland page carries only marketing copy)",
+   "routeHint": "live page; verified by case-insensitive grep for 'hobb' over the extracted review text, which returned zero hits. This is a coverage finding about the brief's route, not a claim about Hobb's prose: the brief appears to have conflated this McFarland monograph with Oliver's separate Mythlore article on Hobb's epigraphs",
    "registerHint": "none",
    "confidence": "medium"
   },
@@ -1224,7 +1224,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2019-04-01",
-   "routeHint": "article is closed access (Unpaywall and OpenAlex both report oa_status \"closed\", no repository copy). Abstract reached through the OpenAlex work record: it is stored as abstract_inverted_index and must be reconstructed by ordering the word positions before the quote will match.",
+   "routeHint": "article is closed access (Unpaywall and OpenAlex both report oa_status 'closed', no repository copy, and it is absent from the UwB repository). Abstract reached through the OpenAlex work record, where it is stored as abstract_inverted_index and must be reconstructed by ordering the word positions before the quote will match. ABSTRACT ONLY",
    "registerHint": "none",
    "confidence": "medium"
   },
@@ -1238,7 +1238,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2019-04-01",
-   "routeHint": "article is closed access (Unpaywall and OpenAlex both report oa_status \"closed\", no repository copy). Abstract reached through the OpenAlex work record: it is stored as abstract_inverted_index and must be reconstructed by ordering the word positions before the quote will match.",
+   "routeHint": "closed access; abstract reconstructed from the OpenAlex abstract_inverted_index. ABSTRACT ONLY",
    "registerHint": "none",
    "confidence": "medium"
   },
@@ -1251,8 +1251,7 @@
    "page": "opening comparison of first chapters",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased in places, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1265,8 +1264,7 @@
    "page": "opening comparison of first chapters",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text, quoted verbatim from the caption track",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1279,8 +1277,7 @@
    "page": "opening comparison of first chapters",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text, quoted verbatim from the caption track",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1293,8 +1290,7 @@
    "page": "spoiler section",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text, quoted verbatim from the caption track",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1307,8 +1303,7 @@
    "page": "introduction",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text, quoted verbatim from the caption track",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1321,8 +1316,7 @@
    "page": "lesson five",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; the transcript is unpunctuated and renders Hobb's as 'hubs'. Quotes verbatim from the caption text. The video explicitly disclaims that its lessons are Hobb's own statements",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1335,8 +1329,7 @@
    "page": "lesson four",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text; the video disclaims that its lessons are Hobb's own statements",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -1349,8 +1342,7 @@
    "page": "lesson three",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text. Corroborates Peter Heck's independent 1997 observation of the same naming tradition",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1363,8 +1355,7 @@
    "page": "lesson three",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1377,8 +1368,7 @@
    "page": "lesson two",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; the ASR capitalisation in the quote is the caption track's own",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1391,8 +1381,7 @@
    "page": "lesson two",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api. Confidence medium: the essayist introduces this with 'I read that', so it is a report of an unnamed report, not Hobb's own words",
    "registerHint": "dossier-archivist",
    "confidence": "medium"
   },
@@ -1405,8 +1394,7 @@
    "page": "lesson one",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; this is the essayist's own extension of a Hobb remark, not Hobb's words",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1419,8 +1407,7 @@
    "page": "lesson one",
    "kind": "reader",
    "polarity": "applies",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1433,8 +1420,7 @@
    "page": "interview answer on revision",
    "kind": "own-words",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; the track is entirely lower-case and unpunctuated, so the quote is lower-case as fetched. These are Hobb's own spoken words in interview",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1447,8 +1433,7 @@
    "page": "interview answer on revision",
    "kind": "own-words",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; lower-case unpunctuated ASR text, quoted as fetched",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1461,8 +1446,7 @@
    "page": "podcast discussion of narration",
    "kind": "reader",
    "polarity": "disputes",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api. Counter-evidence against Landon's 'reliably unreliably' reading of the same narrator",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -1475,8 +1459,7 @@
    "page": "podcast discussion of the market",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text quoted as fetched",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1489,8 +1472,7 @@
    "page": "closing remarks",
    "kind": "reader",
    "polarity": "asserts",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api. The figure is the reader's own impression, reported here in her own unit and not rounded or re-expressed",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1503,8 +1485,7 @@
    "page": "opening argument",
    "kind": "reader",
    "polarity": "disputes",
-   "date": "",
-   "routeHint": "auto-generated YouTube caption track pulled with youtube-transcript-api; the transcript is lower-cased, unpunctuated and carries ASR mishearings (Jane Eyre as 'Janeire', Hobb's as 'hubs', Farseer as 'Far Seers'). Quotes are verbatim from that caption text, not from the spoken audio.",
+   "routeHint": "auto-generated YouTube caption track via youtube-transcript-api; ASR text quoted as fetched",
    "registerHint": "none",
    "confidence": "high"
   }

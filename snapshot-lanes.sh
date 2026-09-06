@@ -4,7 +4,7 @@
 # (chair, 2026-09-06 14:40, owner: "record all of the progress in each lane — I'm going to switch accounts").
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 REPO=/Users/cstokes/Desktop/settlement-engine
-SESS=${CHAIR_SESSION:-059d4243-f837-4b07-8096-8c9ca76b03fb}
+SESS=${CHAIR_SESSION:-cc123b6c-1961-44c5-b071-c5e5aee7ee80}
 O=$SC/LANE-STATUS.md; T=$O.tmp
 {
 echo "# LANE-STATUS — written $(date '+%Y-%m-%d %H:%M:%S') by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)"

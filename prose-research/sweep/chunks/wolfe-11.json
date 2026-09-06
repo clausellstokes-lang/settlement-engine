@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 11,
+ "indices": [
+  787,
+  788,
+  792,
+  796,
+  797,
+  799,
+  800,
+  802,
+  803,
+  811,
+  815,
+  820,
+  823,
+  824,
+  825
+ ],
+ "claims": [
+  {
+   "index": 787,
+   "feature": "other: didactic register suppresses the device",
+   "claim": "Gordon says that in Operation ARES the didactic purpose is so clear that ambiguity and an invitation to interpret have no place.",
+   "source": "Joan Gordon, Gene Wolfe (Starmont Reader's Guide 29, Starmont House, 1986)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+   "quote": "an invitation to interpret have no place",
+   "page": "ch. III, p. 14"
+  },
+  {
+   "index": 788,
+   "feature": "other: scale of the work",
+   "claim": "Gordon gives the length of the four volumes of The Book of the New Sun as 1222 pages in the first editions.",
+   "source": "Joan Gordon, Gene Wolfe (Starmont Reader's Guide 29, Starmont House, 1986)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+   "quote": "1222 pages in the first editions",
+   "page": "ch. VIII, p. 78"
+  },
+  {
+   "index": 792,
+   "feature": "compounds and coinages",
+   "claim": "Attebery says Wolfe generally invents by reusing what is forgotten rather than by coining.",
+   "source": "Brian Attebery, Strategies of Fantasy (Indiana University Press, 1992), ch. 7 'Science Fantasy'",
+   "url": "https://ia800901.us.archive.org/6/items/strategies-of-fantasy/strategies-of-fantasy_djvu.txt",
+   "quote": "Wolfe generally invents by reusing",
+   "page": "ch. 7 'Science Fantasy', p. 124"
+  },
+  {
+   "index": 796,
+   "feature": "other: reception scale",
+   "claim": "Andre-Driussi says it took him eight years to sell all 1,000 copies of the first edition of Lexicon Urthus.",
+   "source": "Michael Andre-Driussi, interview in Ultan's Library, 2008",
+   "url": "https://ultan.org.uk/tell-me-about-the-lexicon-urthus-an-interview-with-michael-andre-driussi/",
+   "quote": "it took me eight years to sell all 1,000 copies!",
+   "page": "interview, on reception"
+  },
+  {
+   "index": 797,
+   "feature": "other: critical method",
+   "claim": "Joan Gordon divides Wolfe criticism into macro and micro kinds and places her own work on the macro side.",
+   "source": "Joan Gordon, 'Micro-Wolfenomics', Ultan's Library, 2020",
+   "url": "https://ultan.org.uk/micro-wolfenomics-joan-gordon-reviews-gene-wolfes-first-four-novels-a-chapter-guide-by-michael-andre-driussi/",
+   "quote": "There are two kinds of Wolfeian criticism: macro and micro",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 799,
+   "feature": "register modulation",
+   "claim": "Gordon says Wolfe adjusts his style to suit an adolescent audience in The Devil in a Forest.",
+   "source": "Joan Gordon, Gene Wolfe (Starmont Reader's Guide 29, Starmont House, 1986)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+   "quote": "Wolfe adjusts his style to suit an adolescent audience",
+   "page": "ch. VI, p. 44"
+  },
+  {
+   "index": 800,
+   "feature": "register modulation",
+   "claim": "Gordon says Wolfe adjusts his style for the adolescent audience without condescension.",
+   "source": "Joan Gordon, Gene Wolfe (Starmont Reader's Guide 29, Starmont House, 1986)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+   "quote": "he does so without condescension",
+   "page": "ch. VI, p. 44"
+  },
+  {
+   "index": 802,
+   "feature": "terminology consistency",
+   "claim": "Gordon says Wolfe explains his unfamiliar words tactfully in the course of furthering plot or developing character rather than glossing them outright.",
+   "source": "Joan Gordon, Gene Wolfe (Starmont Reader's Guide 29, Starmont House, 1986)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+   "quote": "he tactfully explains them in the course of furthering",
+   "page": "ch. VI, p. 44"
+  },
+  {
+   "index": 803,
+   "feature": "cadence and rhythm",
+   "claim": "Gordon says Wolfe's emphasis on the number of stresses rather than the number of syllables parallels early English poetry.",
+   "source": "Joan Gordon, Gene Wolfe (Starmont Reader's Guide 29, Starmont House, 1986)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+   "quote": "number of stresses rather than upon number of syllables",
+   "page": "ch. VI, p. 45"
+  },
+  {
+   "index": 811,
+   "feature": "other: evidence inside a document",
+   "claim": "Clute says the evidence for the impostor's substitution in The Fifth Head of Cerberus is extractable through an examination of the manuscript that tells the story.",
+   "source": "John Clute, 'Wolfe, Gene', The Encyclopedia of Science Fiction (3rd edn, online; entry updated 13 July 2026, signed [JC])",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "extractable through an examination of the manuscript that tells the story",
+   "page": "SFE entry 'Wolfe, Gene', on The Fifth Head of Cerberus"
+  },
+  {
+   "index": 815,
+   "feature": "other: masks and appearances",
+   "claim": "Clute writes that in all of Wolfe's greatest works faces are masques.",
+   "source": "John Clute, 'Wolfe, Gene', The Encyclopedia of Science Fiction (3rd edn, online; entry updated 13 July 2026, signed [JC])",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "faces are masques",
+   "page": "SFE entry 'Wolfe, Gene', on The Fifth Head of Cerberus"
+  },
+  {
+   "index": 820,
+   "feature": "other: difficulty for critics",
+   "claim": "Joan Gordon says that as glorious as Wolfe's work is to read it is difficult to write about.",
+   "source": "Joan Gordon ('JG'), 'Wolfe Trap', review of Peter Wright's Attending Daedalus, Science Fiction Studies 32.1 (#95, March 2005), pp. 212-213",
+   "url": "https://web.archive.org/web/20230128055737id_/http://www.depauw.edu/sfs/birs/bir95b.htm",
+   "quote": "difficult to write about",
+   "page": "SFS 32.1, 'Wolfe Trap'"
+  },
+  {
+   "index": 823,
+   "feature": "other: critical programme",
+   "claim": "Manlove states that his book sets out to show how the deceptive surface of exciting adventures and exotic settings in science fiction may contain complex patterns of imagery and significance.",
+   "source": "C.N. Manlove, Science Fiction: Ten Explorations (1986), p. 4, quoted in Sarah Pell, 'Thematic Explorations', review of C.N. Manlove's Science Fiction: Ten Explorations, Science Fiction Studies #45 (July 1988)",
+   "url": "https://web.archive.org/web/20240727144048id_/http://www.depauw.edu/sfs/birs/bir45.htm",
+   "quote": "the deceptive surface of exciting adventures and exotic settings",
+   "page": "Manlove p. 4, quoted in SFS #45"
+  },
+  {
+   "index": 824,
+   "feature": "other: reception",
+   "claim": "Donald M. Hassler reports Baird Searles' objection that beneath Wolfe's stylistic glitter there may be no real speculative ideas.",
+   "source": "Donald M. Hassler, 'Throwing Down the Gauntlet', review of Joan Gordon's Gene Wolfe, Science Fiction Studies #41 (March 1987)",
+   "url": "https://web.archive.org/web/20250525020134id_/http://www.depauw.edu/sfs/birs/bir41.htm",
+   "quote": "underneath Wolfe's stylistic glitter and",
+   "page": "SFS #41, 'Throwing Down the Gauntlet'"
+  },
+  {
+   "index": 825,
+   "feature": "other: reception",
+   "claim": "Hassler credits Wolfe with a mastery of baroque complexity of reference.",
+   "source": "Donald M. Hassler, 'Throwing Down the Gauntlet', review of Joan Gordon's Gene Wolfe, Science Fiction Studies #41 (March 1987)",
+   "url": "https://web.archive.org/web/20250525020134id_/http://www.depauw.edu/sfs/birs/bir41.htm",
+   "quote": "mastery of baroque complexity of reference",
+   "page": "SFS #41, 'Throwing Down the Gauntlet'"
+  }
+ ]
+}

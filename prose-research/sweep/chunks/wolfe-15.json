@@ -1,0 +1,148 @@
+{
+ "name": "wolfe",
+ "chunk": 15,
+ "indices": [
+  947,
+  949,
+  951,
+  952,
+  956,
+  958,
+  961,
+  964,
+  965,
+  971,
+  974,
+  975,
+  976,
+  977
+ ],
+ "claims": [
+  {
+   "index": 947,
+   "feature": "other: influences",
+   "claim": "Wolfe says a writer develops his own voice but keeps some imprint of the writers who impressed him young.",
+   "source": "Gene Wolfe interviewed by Neil Gaiman, Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "you always bear some imprint of the people",
+   "page": "p.84"
+  },
+  {
+   "index": 949,
+   "feature": "other: exposition lump",
+   "claim": "Wolfe says that as long as a writer sticks to explaining he will have an explanatory lump somewhere in the story.",
+   "source": "Gene Wolfe interviewed by Robert Frazier, Thrust 19, Winter/Spring 1983",
+   "url": "https://archive.org/download/thrust19winspr1983/Thrust%2019%20%28Win-Spr%201983%29_djvu.txt",
+   "quote": "As long as you stick to explaining, you're going to",
+   "page": "p.7"
+  },
+  {
+   "index": 951,
+   "feature": "register modulation",
+   "claim": "Wolfe attributes the New Sun books' visual clarity to Severian's straightforwardness as against his earlier narrators.",
+   "source": "Gene Wolfe interviewed by Robert Frazier, Thrust 19, Winter/Spring 1983",
+   "url": "https://archive.org/download/thrust19winspr1983/Thrust%2019%20%28Win-Spr%201983%29_djvu.txt",
+   "quote": "Severian's straightforwardness, as opposed to someone like Number Five",
+   "page": "p.7"
+  },
+  {
+   "index": 952,
+   "feature": "compounds and coinages",
+   "claim": "Asked whether any of the archaic terms in The Book of the New Sun were invented, Wolfe answered that none were.",
+   "source": "Gene Wolfe interviewed by Robert Frazier, Thrust 19, Winter/Spring 1983",
+   "url": "https://archive.org/download/thrust19winspr1983/Thrust%2019%20%28Win-Spr%201983%29_djvu.txt",
+   "quote": "None. Some of the terms are Latin",
+   "page": "p.6"
+  },
+  {
+   "index": 956,
+   "feature": "other: embedded tale",
+   "claim": "Wolfe says the stories inside The Book of the New Sun shed light on the world in which the action takes place.",
+   "source": "Gene Wolfe interviewed by Robert Frazier, Thrust 19, Winter/Spring 1983",
+   "url": "https://archive.org/download/thrust19winspr1983/Thrust%2019%20%28Win-Spr%201983%29_djvu.txt",
+   "quote": "They shed light on the world in which the action",
+   "page": "p.7"
+  },
+  {
+   "index": 958,
+   "feature": "cadence and rhythm",
+   "claim": "Wolfe says the inset stories act as dividers between parts of the action that should be divided.",
+   "source": "Gene Wolfe interviewed by Robert Frazier, Thrust 19, Winter/Spring 1983",
+   "url": "https://archive.org/download/thrust19winspr1983/Thrust%2019%20%28Win-Spr%201983%29_djvu.txt",
+   "quote": "They act as dividers between parts of the action",
+   "page": "p.7"
+  },
+  {
+   "index": 961,
+   "feature": "other: character dossier register",
+   "claim": "Asked to describe Severian, Wolfe answered with a flat physical inventory giving his height as 6'1\" and his weight as 175 pounds.",
+   "source": "Gene Wolfe interviewed by Robert Frazier, Thrust 19, Winter/Spring 1983",
+   "url": "https://archive.org/download/thrust19winspr1983/Thrust%2019%20%28Win-Spr%201983%29_djvu.txt",
+   "quote": "He is pale, with dark eyes, dark straight hair",
+   "page": "p.8"
+  },
+  {
+   "index": 964,
+   "feature": "other: surprise from material",
+   "claim": "Wolfe says the best surprises grow from the material of the story itself when the writer faces its consequences.",
+   "source": "Gene Wolfe interviewed by Robert Frazier, Thrust 19, Winter/Spring 1983",
+   "url": "https://archive.org/download/thrust19winspr1983/Thrust%2019%20%28Win-Spr%201983%29_djvu.txt",
+   "quote": "growing from the material of the story itself",
+   "page": "p.6"
+  },
+  {
+   "index": 965,
+   "feature": "sentence length variation",
+   "claim": "Wolfe contrasts the forms photographically, calling short stories stills and novellas and novels movies.",
+   "source": "Gene Wolfe interviewed by Robert Frazier, Thrust 19, Winter/Spring 1983",
+   "url": "https://archive.org/download/thrust19winspr1983/Thrust%2019%20%28Win-Spr%201983%29_djvu.txt",
+   "quote": "short stories are stills; novellas and novels are movies",
+   "page": "p.5"
+  },
+  {
+   "index": 971,
+   "feature": "other: cartography",
+   "claim": "Wolfe mentions having been an army cartographer in Korea after the cease-fire.",
+   "source": "Gene Wolfe interviewed by Robert Frazier, Thrust 19, Winter/Spring 1983",
+   "url": "https://archive.org/download/thrust19winspr1983/Thrust%2019%20%28Win-Spr%201983%29_djvu.txt",
+   "quote": "I was an army cartographer in Korea",
+   "page": "p.8"
+  },
+  {
+   "index": 974,
+   "feature": "dialogue register",
+   "claim": "Wolfe calls a line of dialogue wasted unless it is said in some particular way or serves the character's purpose.",
+   "source": "Gene Wolfe, Locus 'Engineering the Future' excerpts, 20 March 2011",
+   "url": "https://locusmag.com/feature/gene-wolfe-engineering-the-future/",
+   "quote": "it's a waste unless it's said in some particular way",
+   "page": "excerpt 2"
+  },
+  {
+   "index": 975,
+   "feature": "other: multi-duty sentence",
+   "claim": "Wolfe lists the simultaneous jobs of a passage as tone, plot movement and character.",
+   "source": "Gene Wolfe, Locus 'Engineering the Future' excerpts, 20 March 2011",
+   "url": "https://locusmag.com/feature/gene-wolfe-engineering-the-future/",
+   "quote": "pique the tone of the book; to move the plot forward",
+   "page": "excerpt 2"
+  },
+  {
+   "index": 976,
+   "feature": "other: revision",
+   "claim": "Wolfe says that in his first year of writing he wasted such scenes and later cut them.",
+   "source": "Gene Wolfe, Locus 'Engineering the Future' excerpts, 20 March 2011",
+   "url": "https://locusmag.com/feature/gene-wolfe-engineering-the-future/",
+   "quote": "I used to waste that kind of scene",
+   "page": "excerpt 2"
+  },
+  {
+   "index": 977,
+   "feature": "other: authorial pleasure",
+   "claim": "Wolfe says that if he is not having fun the reader will not have fun either.",
+   "source": "Gene Wolfe, Locus 'Engineering the Future' excerpts, 20 March 2011",
+   "url": "https://locusmag.com/feature/gene-wolfe-engineering-the-future/",
+   "quote": "If I'm not having fun, it's not going to be",
+   "page": "excerpt 1"
+  }
+ ]
+}

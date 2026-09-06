@@ -1,328 +1,4 @@
 {
- "complete": true,
- "coverage": "Named roster: FETCHED RAW - Cheryl Morgan's Emerald City 'Pieces of History' and her Emerald City review of The Last Light of the Sun (both BrightWeavings reprints); Mohanraj and Cobb's two Strange Horizons pieces of 13 Nov 2000 plus their 'History behind the Books' companion (live URL dead, recovered at the Wayback raw capture 20160319104019id_); Kirkus at the primary (seven reviews, Tigana 1990 through A Brightness Long Ago 2019); Publishers Weekly at the primary (six reviews, Tigana 1990 through A Brightness Long Ago); the Infinity Plus interview and three Infinity Plus reviews - which turn out to be by Sandy Auden and Simeon Shoul, NOT Nick Gevers, and are recorded under their true bylines; and Brian Attebery's Strategies of Fantasy, whose complete OCR text was downloaded from an open archive.org item and measured. NOT FOUND - John Clute's SFE entry (sf-encyclopedia.com/entry/kay_guy_gavriel and three variants all 404; SFE's own Canada entry names Kay without linking any entry, so SFE appears to carry none); the 1997 Encyclopedia of Fantasy entry (the /fe/ namespace is 404), survived only as a seven-word quotation relayed on BrightWeavings; Faren Miller's Locus reviews (the Locus September 1992 table of contents confirms her A Song for Arbonne review at page 17, but Locus print reviews of that era are not online and BrightWeavings reprints none); any New York Times review (nytimes.com/search returns 403 to this host, Wayback wildcard CDX requires authorization, and no Kay Wikipedia article cites one). BLOCKED - Farah Mendlesohn's Rhetorics of Fantasy (the only archive.org copy is lending-restricted: fulltext/inside.php returns Item not available, _djvu.txt 302s, HathiTrust 403s, Google Books API returns no totals); Booklist Online and Library Journal (both serve JavaScript shells, 67 characters of body text and 502 respectively); the session's web-search budget was exhausted mid-run and DuckDuckGo, Mojeek and lite endpoints returned captchas or nothing, so lateral searching was replaced by sitemap and Wikipedia-wikitext discovery. Substantive sources per route: 24 by direct fetch with a browser user agent (BrightWeavings, Strange Horizons, Infinity Plus, Kirkus, Publishers Weekly, Locus), 5 by Wayback raw id_ capture (the Strange Horizons companion and four SF Site reviews, sfsite.com being unreachable from this host), 1 by open archive.org full text (Attebery, measured to zero mentions of Kay), and 4 further BrightWeavings reprint pages found by diffing the site sitemap against the 153 distinct URLs already in state-kay.json - which yielded the run's richest register evidence: Jo Walton's 'veiled omniscient', Rob Kilheffer in F&SF on withheld information and off-stage action, Dave Langford in SFX, Michelle Sagara in Quill & Quire, and John H. Riskind in the Washington Post Book World.",
- "sourcesRead": [
-  {
-   "title": "Pieces of History - review by Cheryl Morgan for Emerald City (reprinted at BrightWeavings)",
-   "url": "https://brightweavings.com/pieces-of-history-2/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "reprint posted 2016-05-07; Emerald City review of the Sarantine Mosaic",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "From Tapestry to Mosaic: The Fantasy Novels of Guy Gavriel Kay - Christopher Cobb and Mary Anne Mohanraj, Strange Horizons",
-   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/from-tapestry-to-mosaic-the-fantasy-novels-of-guy-gavriel-kay/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2000-11-13",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "'We must learn to bend, or we break': The Art of Living in Guy Gavriel Kay's Sarantine Mosaic - Cobb and Mohanraj, Strange Horizons",
-   "url": "https://strangehorizons.com/non-fiction/reviews/we-must-learn-to-bend-or-we-break-the-art-of-living-in-guy-gavriel-kays-sarantine-mosaic/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2000-11-13",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "Historical Significance: An Interview with Guy Gavriel Kay - by Sandy Auden, infinity plus",
-   "url": "https://www.infinityplus.co.uk/nonfiction/intggk.htm",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2005-07-03",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "Guy Gavriel Kay: The Lions of Al-Rassan - review by Simeon Shoul, infinity plus",
-   "url": "https://www.infinityplus.co.uk/nonfiction/alrassan.htm",
-   "kind": "reception",
-   "substantive": true,
-   "date": "review of the 1996 Voyager paperback",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "Guy Gavriel Kay: Lord of Emperors - review by Simeon Shoul, infinity plus",
-   "url": "https://www.infinityplus.co.uk/nonfiction/lordofemperors.htm",
-   "kind": "reception",
-   "substantive": true,
-   "date": "reviews the Earthlight paperback published 26 March 2001",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "The Last Light of the Sun by Guy Gavriel Kay - review by Sandy Auden, infinity plus",
-   "url": "https://www.infinityplus.co.uk/nonfiction/lastlightofthesun.htm",
-   "kind": "reception",
-   "substantive": true,
-   "date": "review of the 2004 novel",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "TIGANA - Kirkus Reviews",
-   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/tigana/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "Kirkus Reviews issue 15 August 1990; pub date 7 September 1990",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "A SONG FOR ARBONNE - Kirkus Reviews",
-   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/a-song-for-arbonne/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "Kirkus review of the 1992 novel",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "THE LION[S] OF AL-RASSAN - Kirkus Reviews",
-   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/the-lion-of-al-rassan/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "Kirkus review of the 1995 novel",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "RIVER OF STARS - Kirkus Reviews",
-   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/river-of-stars/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "Kirkus review of the 2013 novel",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "CHILDREN OF EARTH AND SKY - Kirkus Reviews",
-   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/children-of-earth-and-sky/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "Kirkus review of the 2016 novel",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "A BRIGHTNESS LONG AGO - Kirkus Reviews",
-   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/a-brightness-long-ago/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "Kirkus Reviews issue 15 March 2019; pub date 14 May 2019",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "LORD OF EMPERORS - Kirkus Reviews",
-   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/lord-of-emperors/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "Kirkus review of the 2000 novel",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "SFE entry kay_guy_gavriel (named in the angle) - 404, no such entry",
-   "url": "https://sf-encyclopedia.com/entry/kay_guy_gavriel",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "checked 2026-09-06",
-   "route": "direct fetch; 404"
-  },
-  {
-   "title": "The History behind the Books (Cobb/Mohanraj companion, Strange Horizons 2000) - live URL redirects to modern front matter; Wayback offline this window",
-   "url": "https://strangehorizons.com/2000/20001113/kayhistory.html",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "checked 2026-09-06",
-   "route": "direct fetch redirected; archive.org returned Temporarily Offline"
-  },
-  {
-   "title": "River of Stars by Guy Gavriel Kay - Publishers Weekly review",
-   "url": "https://www.publishersweekly.com/9780451464972",
-   "kind": "reception",
-   "substantive": true,
-   "date": "PW review of the Roc edition, April",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "Under Heaven by Guy Gavriel Kay - Publishers Weekly review",
-   "url": "https://www.publishersweekly.com/9780451463302",
-   "kind": "reception",
-   "substantive": true,
-   "date": "PW review of the Roc edition, May",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "Children of Earth and Sky by Guy Gavriel Kay - Publishers Weekly review",
-   "url": "https://www.publishersweekly.com/978-0-451-47296-0",
-   "kind": "reception",
-   "substantive": true,
-   "date": "PW review of the NAL edition, May",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "A Brightness Long Ago by Guy Gavriel Kay - Publishers Weekly review",
-   "url": "https://www.publishersweekly.com/9780451472984",
-   "kind": "reception",
-   "substantive": true,
-   "date": "PW review of the Berkley edition, May",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "Tigana by Guy Gavriel Kay - Publishers Weekly review",
-   "url": "https://www.publishersweekly.com/978-0-451-45028-9",
-   "kind": "reception",
-   "substantive": true,
-   "date": "PW review of the Roc edition, September (1990)",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "A Song for Arbonne by Guy Gavriel Kay - Publishers Weekly review",
-   "url": "https://www.publishersweekly.com/978-0-517-59312-7",
-   "kind": "reception",
-   "substantive": true,
-   "date": "PW review of the Crown edition, January (1993)",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "More about Guy Gavriel Kay's novels: the history behind each book - Strange Horizons companion to Cobb and Mohanraj",
-   "url": "https://web.archive.org/web/20160319104019id_/http://www.strangehorizons.com/2000/20001113/kayhistory.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "published 13 November 2000; capture 19 March 2016",
-   "route": "Wayback raw capture (id_), after the live URL redirected to modern front matter"
-  },
-  {
-   "title": "Brian Attebery, Strategies of Fantasy (Indiana University Press, 1992) - full OCR text",
-   "url": "https://archive.org/download/strategies-of-fantasy/strategies-of-fantasy_djvu.txt",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "1992 book; OCR text read 2026-09-06",
-   "route": "archive.org open item, _djvu.txt downloaded whole (458,049 bytes)"
-  },
-  {
-   "title": "The SF Site Featured Review: Under Heaven - a review by Dominic Cilli",
-   "url": "http://www.sfsite.com/09b/uh328.htm",
-   "kind": "reception",
-   "substantive": true,
-   "date": "copyright 2010",
-   "route": "Wayback raw capture (id_) 20100927040518; sfsite.com unreachable directly from this host"
-  },
-  {
-   "title": "The SF Site: Sailing to Sarantium - a review by James Seidman",
-   "url": "http://www.sfsite.com/02b/sail51.htm",
-   "kind": "reception",
-   "substantive": true,
-   "date": "copyright 1999",
-   "route": "Wayback raw capture (id_) 20241215155441"
-  },
-  {
-   "title": "The SF Site: Lord of Emperors - a review by Wayne MacLaurin",
-   "url": "http://www.sfsite.com/05a/le80.htm",
-   "kind": "reception",
-   "substantive": true,
-   "date": "copyright 2000",
-   "route": "Wayback raw capture (id_) 20241217193312"
-  },
-  {
-   "title": "The SF Site: The Last Light of the Sun - a review by Alma A. Hromic",
-   "url": "http://www.sfsite.com/03a/ll171.htm",
-   "kind": "reception",
-   "substantive": true,
-   "date": "copyright 2004",
-   "route": "Wayback raw capture (id_) 20251014060325"
-  },
-  {
-   "title": "Table of Contents, September 1992 - Locus (confirms Faren Miller reviewed A Song for Arbonne, page 17)",
-   "url": "https://locusmag.com/1992/09/table-of-contents-september-1992/",
-   "kind": "relay",
-   "substantive": false,
-   "date": "Locus, September 1992",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Booklist Online search for Guy Gavriel Kay - client-rendered, no review text served",
-   "url": "https://www.booklistonline.com/SearchResults?Keyword=Guy+Gavriel+Kay",
-   "kind": "reception",
-   "substantive": false,
-   "date": "checked 2026-09-06",
-   "route": "direct fetch; page body is a JS shell (67 characters of text)"
-  },
-  {
-   "title": "Library Journal search for Guy Gavriel Kay - client-rendered, no review text served",
-   "url": "https://www.libraryjournal.com/?searchTerm=Guy%20Gavriel%20Kay",
-   "kind": "reception",
-   "substantive": false,
-   "date": "checked 2026-09-06",
-   "route": "direct fetch; reviews.libraryjournal.com returns 502"
-  },
-  {
-   "title": "New York Times search for Guy Gavriel Kay - 403 to this host; no NYT review cited by any Kay Wikipedia article",
-   "url": "https://www.nytimes.com/search?query=Guy%20Gavriel%20Kay",
-   "kind": "reception",
-   "substantive": false,
-   "date": "checked 2026-09-06",
-   "route": "direct fetch 403; Wayback CDX wildcard needs authorization; web search budget exhausted"
-  },
-  {
-   "title": "Farah Mendlesohn, Rhetorics of Fantasy (2008) - lending-restricted at the Internet Archive; full text not readable",
-   "url": "https://archive.org/details/rhetoricsoffanta0000mend",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "checked 2026-09-06",
-   "route": "archive.org metadata found the item; fulltext/inside.php returns Item not available; _djvu.txt 302; HathiTrust 403; Google Books API returned no totals"
-  },
-  {
-   "title": "Reviews of The Lions of Al-Rassan - BrightWeavings reprint page (Quill & Quire, Edmonton Journal, Washington Post Book World, F&SF, SFX)",
-   "url": "https://brightweavings.com/revlions/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "page posted 2014-11-15; the five reviews date from 1995",
-   "route": "direct fetch, browser user agent; found by diffing the BrightWeavings sitemap against the 153 urls already in state-kay.json"
-  },
-  {
-   "title": "Tigana (leather bound intro) - BrightWeavings stub quoting The Encyclopedia of Fantasy on Kay",
-   "url": "https://brightweavings.com/leatherboundtiganaintro/",
-   "kind": "relay",
-   "substantive": true,
-   "date": "page posted 2014-11-15; the introduction is to the Leather-Bound Masterpieces of Fantasy edition of Tigana",
-   "route": "direct fetch, browser user agent; the only reachable trace of the Encyclopedia of Fantasy entry, the sf-encyclopedia.com /fe/ namespace being 404"
-  },
-  {
-   "title": "Reviews of Written on the Dark - BrightWeavings link index",
-   "url": "https://brightweavings.com/reviews-of-written-on-the-dark/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "posted 2025-06-09",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Faire Ladies Re-imagined: Female Characters in Guy Gavriel Kay's A Song for Arbonne - Sylwia Borowska-Szerszun (BrightWeavings abstract)",
-   "url": "https://brightweavings.com/faire-ladies-re-imagined-female-characters-in-guy-gavriel-kays-a-song-for-arbonne-by-sylwia-borowska-szerszun/",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "page posted on BrightWeavings",
-   "route": "direct fetch; the page carries only an abstract, not the article"
-  },
-  {
-   "title": "Reviews of the Sarantine Mosaic - BrightWeavings reprint page (includes Jo Walton's Tor.com reread and Bill Sheehan for Barnes & Noble)",
-   "url": "https://brightweavings.com/revsarantium/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "page posted 2014-11-15; Walton's review first appeared at tor.com",
-   "route": "direct fetch, browser user agent; found by diffing the BrightWeavings sitemap against state-kay.json"
-  },
-  {
-   "title": "Reviews of The Last Light of the Sun - BrightWeavings reprint page (Challenging Destiny; Cheryl Morgan for Emerald City)",
-   "url": "https://brightweavings.com/revlastlight/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "page posted 2014-11-15; Morgan's review is of the 2004 novel",
-   "route": "direct fetch, browser user agent"
-  },
-  {
-   "title": "Reviews of A Song for Arbonne - BrightWeavings reprint page (Douglas Barbour, 'Fantasy from on High', Books in Canada)",
-   "url": "https://brightweavings.com/revarbonne/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "page posted 2014-11-15; Barbour's review is of the 1992 novel",
-   "route": "direct fetch, browser user agent"
-  }
- ],
  "claims": [
   {
    "feature": "place and institution description",
@@ -479,7 +155,7 @@
    "confidence": "high"
   },
   {
-   "feature": "own words: fantasy as a prism on the past",
+   "feature": "other: fantasy as a prism on the past",
    "claim": "Kay says the fantasy method removes a level of presumption that one can know what Justinian and Theodora's marriage was like.",
    "source": "Guy Gavriel Kay, interviewed by Sandy Auden, infinity plus, 3 July 2005",
    "url": "https://www.infinityplus.co.uk/nonfiction/intggk.htm",
@@ -502,7 +178,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2005-07-03",
-   "routeHint": "direct fetch with browser user agent; page's own spacing preserved",
+   "routeHint": "direct fetch with browser user agent; the page's own spacing preserved",
    "registerHint": "none",
    "confidence": "medium: the page renders 'unimportance' split as 'un importance'"
   },
@@ -530,8 +206,8 @@
    "kind": "reception",
    "polarity": "disputes",
    "date": "undated page; reviews the 1996 Voyager edition",
-   "registerHint": "none",
    "routeHint": "direct fetch with browser user agent",
+   "registerHint": "none",
    "confidence": "high"
   },
   {
@@ -1475,7 +1151,7 @@
   {
    "feature": "other: apprenticeship on The Silmarillion",
    "claim": "The Encyclopedia of Fantasy, as quoted on this page, says of Kay's work on The Silmarillion that he seems to have learned from the experience.",
-   "source": "Wikipedia-style relay: BrightWeavings quoting The Encyclopedia of Fantasy (attributed on the page to Peter Kuzca)",
+   "source": "BrightWeavings relaying The Encyclopedia of Fantasy (attributed on the page to Peter Kuzca)",
    "url": "https://brightweavings.com/leatherboundtiganaintro/",
    "quote": "seems to have learned from the experience",
    "page": "introduction, first paragraph",
@@ -1724,5 +1400,329 @@
    "registerHint": "none",
    "confidence": "high"
   }
- ]
+ ],
+ "sourcesRead": [
+  {
+   "title": "Pieces of History - review by Cheryl Morgan for Emerald City (reprinted at BrightWeavings)",
+   "url": "https://brightweavings.com/pieces-of-history-2/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "reprint posted 2016-05-07; Emerald City review of the Sarantine Mosaic",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "From Tapestry to Mosaic: The Fantasy Novels of Guy Gavriel Kay - Christopher Cobb and Mary Anne Mohanraj, Strange Horizons",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/from-tapestry-to-mosaic-the-fantasy-novels-of-guy-gavriel-kay/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000-11-13",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "'We must learn to bend, or we break': The Art of Living in Guy Gavriel Kay's Sarantine Mosaic - Cobb and Mohanraj, Strange Horizons",
+   "url": "https://strangehorizons.com/non-fiction/reviews/we-must-learn-to-bend-or-we-break-the-art-of-living-in-guy-gavriel-kays-sarantine-mosaic/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000-11-13",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "Historical Significance: An Interview with Guy Gavriel Kay - by Sandy Auden, infinity plus",
+   "url": "https://www.infinityplus.co.uk/nonfiction/intggk.htm",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005-07-03",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "Guy Gavriel Kay: The Lions of Al-Rassan - review by Simeon Shoul, infinity plus",
+   "url": "https://www.infinityplus.co.uk/nonfiction/alrassan.htm",
+   "kind": "reception",
+   "substantive": true,
+   "date": "review of the 1996 Voyager paperback",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "Guy Gavriel Kay: Lord of Emperors - review by Simeon Shoul, infinity plus",
+   "url": "https://www.infinityplus.co.uk/nonfiction/lordofemperors.htm",
+   "kind": "reception",
+   "substantive": true,
+   "date": "reviews the Earthlight paperback published 26 March 2001",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "The Last Light of the Sun by Guy Gavriel Kay - review by Sandy Auden, infinity plus",
+   "url": "https://www.infinityplus.co.uk/nonfiction/lastlightofthesun.htm",
+   "kind": "reception",
+   "substantive": true,
+   "date": "review of the 2004 novel",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "TIGANA - Kirkus Reviews",
+   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/tigana/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "Kirkus Reviews issue 15 August 1990; pub date 7 September 1990",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "A SONG FOR ARBONNE - Kirkus Reviews",
+   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/a-song-for-arbonne/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "Kirkus review of the 1992 novel",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "THE LION[S] OF AL-RASSAN - Kirkus Reviews",
+   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/the-lion-of-al-rassan/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "Kirkus review of the 1995 novel",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "RIVER OF STARS - Kirkus Reviews",
+   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/river-of-stars/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "Kirkus review of the 2013 novel",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "CHILDREN OF EARTH AND SKY - Kirkus Reviews",
+   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/children-of-earth-and-sky/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "Kirkus review of the 2016 novel",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "A BRIGHTNESS LONG AGO - Kirkus Reviews",
+   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/a-brightness-long-ago/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "Kirkus Reviews issue 15 March 2019; pub date 14 May 2019",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "LORD OF EMPERORS - Kirkus Reviews",
+   "url": "https://www.kirkusreviews.com/book-reviews/guy-gavriel-kay/lord-of-emperors/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "Kirkus review of the 2000 novel",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "River of Stars by Guy Gavriel Kay - Publishers Weekly review",
+   "url": "https://www.publishersweekly.com/9780451464972",
+   "kind": "reception",
+   "substantive": true,
+   "date": "PW review of the Roc edition, April",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "Under Heaven by Guy Gavriel Kay - Publishers Weekly review",
+   "url": "https://www.publishersweekly.com/9780451463302",
+   "kind": "reception",
+   "substantive": true,
+   "date": "PW review of the Roc edition, May",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "Children of Earth and Sky by Guy Gavriel Kay - Publishers Weekly review",
+   "url": "https://www.publishersweekly.com/978-0-451-47296-0",
+   "kind": "reception",
+   "substantive": true,
+   "date": "PW review of the NAL edition, May",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "A Brightness Long Ago by Guy Gavriel Kay - Publishers Weekly review",
+   "url": "https://www.publishersweekly.com/9780451472984",
+   "kind": "reception",
+   "substantive": true,
+   "date": "PW review of the Berkley edition, May",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "Tigana by Guy Gavriel Kay - Publishers Weekly review",
+   "url": "https://www.publishersweekly.com/978-0-451-45028-9",
+   "kind": "reception",
+   "substantive": true,
+   "date": "PW review of the Roc edition, September (1990)",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "A Song for Arbonne by Guy Gavriel Kay - Publishers Weekly review",
+   "url": "https://www.publishersweekly.com/978-0-517-59312-7",
+   "kind": "reception",
+   "substantive": true,
+   "date": "PW review of the Crown edition, January (1993)",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "More about Guy Gavriel Kay's novels: the history behind each book - Strange Horizons companion to Cobb and Mohanraj",
+   "url": "https://web.archive.org/web/20160319104019id_/http://www.strangehorizons.com/2000/20001113/kayhistory.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "published 13 November 2000; capture 19 March 2016",
+   "route": "Wayback raw capture (id_), after the live URL redirected to modern front matter"
+  },
+  {
+   "title": "Brian Attebery, Strategies of Fantasy (Indiana University Press, 1992) - full OCR text",
+   "url": "https://archive.org/download/strategies-of-fantasy/strategies-of-fantasy_djvu.txt",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "1992 book; OCR text read 2026-09-06",
+   "route": "archive.org open item, _djvu.txt downloaded whole (458,049 bytes)"
+  },
+  {
+   "title": "The SF Site Featured Review: Under Heaven - a review by Dominic Cilli",
+   "url": "http://www.sfsite.com/09b/uh328.htm",
+   "kind": "reception",
+   "substantive": true,
+   "date": "copyright 2010",
+   "route": "Wayback raw capture (id_) 20100927040518; sfsite.com unreachable directly from this host"
+  },
+  {
+   "title": "The SF Site: Sailing to Sarantium - a review by James Seidman",
+   "url": "http://www.sfsite.com/02b/sail51.htm",
+   "kind": "reception",
+   "substantive": true,
+   "date": "copyright 1999",
+   "route": "Wayback raw capture (id_) 20241215155441"
+  },
+  {
+   "title": "The SF Site: Lord of Emperors - a review by Wayne MacLaurin",
+   "url": "http://www.sfsite.com/05a/le80.htm",
+   "kind": "reception",
+   "substantive": true,
+   "date": "copyright 2000",
+   "route": "Wayback raw capture (id_) 20241217193312"
+  },
+  {
+   "title": "The SF Site: The Last Light of the Sun - a review by Alma A. Hromic",
+   "url": "http://www.sfsite.com/03a/ll171.htm",
+   "kind": "reception",
+   "substantive": true,
+   "date": "copyright 2004",
+   "route": "Wayback raw capture (id_) 20251014060325"
+  },
+  {
+   "title": "Reviews of The Lions of Al-Rassan - BrightWeavings reprint page (Quill & Quire, Edmonton Journal, Washington Post Book World, F&SF, SFX)",
+   "url": "https://brightweavings.com/revlions/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "page posted 2014-11-15; the five reviews date from 1995",
+   "route": "direct fetch, browser user agent; found by diffing the BrightWeavings sitemap against the 153 urls already in state-kay.json"
+  },
+  {
+   "title": "Reviews of the Sarantine Mosaic - BrightWeavings reprint page (includes Jo Walton's Tor.com reread and Bill Sheehan for Barnes & Noble)",
+   "url": "https://brightweavings.com/revsarantium/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "page posted 2014-11-15; Walton's review first appeared at tor.com",
+   "route": "direct fetch, browser user agent; found by diffing the BrightWeavings sitemap against state-kay.json"
+  },
+  {
+   "title": "Reviews of The Last Light of the Sun - BrightWeavings reprint page (Challenging Destiny; Cheryl Morgan for Emerald City)",
+   "url": "https://brightweavings.com/revlastlight/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "page posted 2014-11-15; Morgan's review is of the 2004 novel",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "Reviews of A Song for Arbonne - BrightWeavings reprint page (Douglas Barbour, 'Fantasy from on High', Books in Canada)",
+   "url": "https://brightweavings.com/revarbonne/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "page posted 2014-11-15; Barbour's review is of the 1992 novel",
+   "route": "direct fetch, browser user agent"
+  },
+  {
+   "title": "Tigana (leather bound intro) - BrightWeavings stub quoting The Encyclopedia of Fantasy on Kay",
+   "url": "https://brightweavings.com/leatherboundtiganaintro/",
+   "kind": "relay",
+   "substantive": true,
+   "date": "page posted 2014-11-15",
+   "route": "direct fetch, browser user agent; the only reachable trace of the Encyclopedia of Fantasy entry, the sf-encyclopedia.com /fe/ namespace being 404"
+  },
+  {
+   "title": "SFE entry kay_guy_gavriel (named in the angle) - 404, no such entry",
+   "url": "https://sf-encyclopedia.com/entry/kay_guy_gavriel",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "checked 2026-09-06",
+   "route": "direct fetch; 404 on four URL forms; SFE's Canada entry names Kay without linking any entry"
+  },
+  {
+   "title": "The History behind the Books (Cobb/Mohanraj companion) live URL - redirects to modern Strange Horizons front matter",
+   "url": "https://strangehorizons.com/2000/20001113/kayhistory.html",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "checked 2026-09-06",
+   "route": "direct fetch redirected; recovered instead via the Wayback raw capture"
+  },
+  {
+   "title": "Table of Contents, September 1992 - Locus (confirms Faren Miller reviewed A Song for Arbonne, page 17)",
+   "url": "https://locusmag.com/1992/09/table-of-contents-september-1992/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "Locus, September 1992",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Booklist Online search for Guy Gavriel Kay - client-rendered, no review text served",
+   "url": "https://www.booklistonline.com/SearchResults?Keyword=Guy+Gavriel+Kay",
+   "kind": "reception",
+   "substantive": false,
+   "date": "checked 2026-09-06",
+   "route": "direct fetch; page body is a JS shell (67 characters of text)"
+  },
+  {
+   "title": "Library Journal search for Guy Gavriel Kay - client-rendered, no review text served",
+   "url": "https://www.libraryjournal.com/?searchTerm=Guy%20Gavriel%20Kay",
+   "kind": "reception",
+   "substantive": false,
+   "date": "checked 2026-09-06",
+   "route": "direct fetch; reviews.libraryjournal.com returns 502"
+  },
+  {
+   "title": "New York Times search for Guy Gavriel Kay - 403 to this host; no NYT review cited by any Kay Wikipedia article",
+   "url": "https://www.nytimes.com/search?query=Guy%20Gavriel%20Kay",
+   "kind": "reception",
+   "substantive": false,
+   "date": "checked 2026-09-06",
+   "route": "direct fetch 403; Wayback CDX wildcard requires authorization; web-search budget exhausted"
+  },
+  {
+   "title": "Farah Mendlesohn, Rhetorics of Fantasy (2008) - lending-restricted at the Internet Archive; full text not readable",
+   "url": "https://archive.org/details/rhetoricsoffanta0000mend",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "checked 2026-09-06",
+   "route": "archive.org metadata found the item; fulltext/inside.php returns Item not available; _djvu.txt 302; HathiTrust 403; Google Books API returned no totals"
+  },
+  {
+   "title": "Reviews of Written on the Dark - BrightWeavings link index",
+   "url": "https://brightweavings.com/reviews-of-written-on-the-dark/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "posted 2025-06-09",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Faire Ladies Re-imagined: Female Characters in Guy Gavriel Kay's A Song for Arbonne - Sylwia Borowska-Szerszun (BrightWeavings abstract)",
+   "url": "https://brightweavings.com/faire-ladies-re-imagined-female-characters-in-guy-gavriel-kays-a-song-for-arbonne-by-sylwia-borowska-szerszun/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "page posted on BrightWeavings",
+   "route": "direct fetch; the page carries only an abstract, not the article"
+  }
+ ],
+ "complete": true,
+ "coverage": "Named roster: FETCHED RAW — Cheryl Morgan's Emerald City \"Pieces of History\" and her Emerald City review of The Last Light of the Sun (both BrightWeavings reprints); Mohanraj and Cobb's two Strange Horizons pieces of 13 Nov 2000 plus their \"History behind the Books\" companion (live URL dead, recovered at the Wayback raw capture 20160319104019id_); Kirkus at the primary (seven reviews, Tigana 1990 through A Brightness Long Ago 2019); Publishers Weekly at the primary (six reviews, Tigana 1990 through A Brightness Long Ago); the Infinity Plus interview and three Infinity Plus reviews — which turn out to be by Sandy Auden and Simeon Shoul, NOT Nick Gevers, and are recorded under their true bylines; and Brian Attebery's Strategies of Fantasy, whose complete OCR text was downloaded from an open archive.org item and measured. NOT FOUND — John Clute's SFE entry (sf-encyclopedia.com/entry/kay_guy_gavriel and three variants all 404; SFE's own Canada entry names Kay without linking any entry, so SFE appears to carry none); the 1997 Encyclopedia of Fantasy entry (the /fe/ namespace is 404), surviving only as a seven-word quotation relayed on BrightWeavings; Faren Miller's Locus reviews (the Locus September 1992 table of contents confirms her A Song for Arbonne review at page 17, but Locus print reviews of that era are not online and BrightWeavings reprints none); any New York Times review (nytimes.com/search returns 403 to this host, Wayback wildcard CDX requires authorization, and no Kay Wikipedia article cites one). BLOCKED — Farah Mendlesohn's Rhetorics of Fantasy (the only archive.org copy is lending-restricted: fulltext/inside.php returns Item not available, _djvu.txt 302s, HathiTrust 403s, Google Books API returns no totals); Booklist Online and Library Journal (both serve JavaScript shells, 67 characters of body text and a 502 respectively); the session's web-search budget was exhausted mid-run and DuckDuckGo, Mojeek and lite endpoints returned captchas or nothing, so lateral searching was replaced by sitemap and Wikipedia-wikitext discovery. Substantive sources per route: 24 by direct fetch with a browser user agent (BrightWeavings, Strange Horizons, Infinity Plus, Kirkus, Publishers Weekly, Locus), 5 by Wayback raw id_ capture (the Strange Horizons companion and four SF Site reviews, sfsite.com being unreachable from this host), 1 by open archive.org full text (Attebery, measured to zero mentions of Kay), and 4 further BrightWeavings reprint pages found by diffing the site sitemap against the 153 distinct URLs already in state-kay.json — which yielded the run's richest register evidence: Jo Walton's \"veiled omniscient\", Rob Kilheffer in F&SF on withheld information and off-stage action, Dave Langford in SFX, Michelle Sagara in Quill & Quire, and John H. Riskind in the Washington Post Book World."
 }

@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 14,
+ "indices": [
+  897,
+  898,
+  900,
+  901,
+  902,
+  906,
+  922,
+  923,
+  929,
+  930,
+  936,
+  940,
+  941,
+  942,
+  945
+ ],
+ "claims": [
+  {
+   "index": 897,
+   "feature": "metaphor discipline",
+   "claim": "Robinson says most Wolfe stories mean whatever the text of the story is, word for word.",
+   "source": "Kim Stanley Robinson, 'A Story', NYRSF, 6 September 2013",
+   "url": "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+   "quote": "mean whatever the text of the story is, word for word",
+   "page": "para. on allegory"
+  },
+  {
+   "index": 898,
+   "feature": "dialogue register",
+   "claim": "Robinson catalogues Wolfe's set-piece dialogues as catechisms, interrogations, examinations, Socratic dialogues and classroom lessons.",
+   "source": "Kim Stanley Robinson, 'A Story', NYRSF, 6 September 2013",
+   "url": "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+   "quote": "catechisms, interrogations, examinations, Socratic dialogues, classroom lessons",
+   "page": "para. on question and answer"
+  },
+  {
+   "index": 900,
+   "feature": "register modulation",
+   "claim": "Robinson lists anthropological reports among the non-fiction forms Wolfe wrote pastiches of.",
+   "source": "Kim Stanley Robinson, 'A Story', NYRSF, 6 September 2013",
+   "url": "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+   "quote": "pastiches of anthropological reports, fairy tales, aboriginal tales",
+   "page": "para. on pastiche"
+  },
+  {
+   "index": 901,
+   "feature": "register modulation",
+   "claim": "Robinson reports Wolfe telling him he chose a sentimental style because the story's idea was sentimental.",
+   "source": "Kim Stanley Robinson paraphrasing Gene Wolfe, in 'A Story', NYRSF, 6 September 2013",
+   "url": "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+   "quote": "had a sentimental idea, he chose a sentimental style",
+   "page": "para. on pastiche"
+  },
+  {
+   "index": 902,
+   "feature": "other: embedded document",
+   "claim": "Robinson notes the middle novella of The Fifth Head of Cerberus is identified as a fiction written by a minor character in the first story.",
+   "source": "Kim Stanley Robinson, 'A Story', NYRSF, 6 September 2013",
+   "url": "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+   "quote": "identified as a fiction written by a minor character",
+   "page": "para. on the story suites"
+  },
+  {
+   "index": 906,
+   "feature": "compounds and coinages",
+   "claim": "Mikalatos argues Wolfe's obscure vocabulary gives the reader more clues to the surrounding world than most fantasies do.",
+   "source": "Matt Mikalatos, Speculative Faith / Lorehaven, comment 16 March 2013",
+   "url": "https://lorehaven.com/speculativefaith/a-brief-introduction-to-gene-wolfe-my-favorite-contemporary-author/",
+   "quote": "they give more clues to the world around the reader",
+   "page": "comment reply to Becky"
+  },
+  {
+   "index": 922,
+   "feature": "translation and register",
+   "claim": "Crampton identifies the Latro novels' frame as a manuscript Wolfe merely translates, pointing to the reliability of language.",
+   "source": "Jeremy Crampton, 'Some Greek Themes in Gene Wolfe's Latro novels', Ultan's Library, 10 August 2000 (written c.1988)",
+   "url": "https://ultan.org.uk/some-greek-themes-in-latro/",
+   "quote": "framing the text as translation",
+   "page": "section 'Who Writes?'"
+  },
+  {
+   "index": 923,
+   "feature": "translation and register",
+   "claim": "Crampton notes the preface to Soldier of the Mist warns the reader of possible errors of translation.",
+   "source": "Jeremy Crampton, Ultan's Library, 10 August 2000",
+   "url": "https://ultan.org.uk/some-greek-themes-in-latro/",
+   "quote": "we are warned against possible errors of translation in the preface",
+   "page": "section 'Who Writes?'"
+  },
+  {
+   "index": 929,
+   "feature": "terminology consistency",
+   "claim": "Wolfe's own glossary entry for arete, quoted by Crampton, defines the term by a range running from cleanliness and love of order to courage before death.",
+   "source": "Gene Wolfe, glossary to Soldier of Arete, quoted by Jeremy Crampton, Ultan's Library",
+   "url": "https://ultan.org.uk/some-greek-themes-in-latro/",
+   "quote": "ranging from cleanliness and love of order to courage",
+   "page": "section 'Loyalty and Arete'"
+  },
+  {
+   "index": 930,
+   "feature": "terminology consistency",
+   "claim": "Wolfe, quoted by Crampton, describes as an error the assumption that one knows what words mean and that they cannot mean anything else.",
+   "source": "Gene Wolfe in Frontier Crossings (1987) p.119, quoted by Jeremy Crampton, Ultan's Library",
+   "url": "https://ultan.org.uk/some-greek-themes-in-latro/",
+   "quote": "one knows what the words mean, that they actually mean",
+   "page": "section 'Who Writes?'"
+  },
+  {
+   "index": 936,
+   "feature": "other: rereading standard",
+   "claim": "Wolfe's own definition of good literature, quoted back to him by Gaiman from a letter, is writing an educated reader can reread with increased pleasure.",
+   "source": "Gene Wolfe, quoted from a letter by Neil Gaiman in Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "can be read by an educated reader, and reread with",
+   "page": "p.82"
+  },
+  {
+   "index": 940,
+   "feature": "other: embedded document",
+   "claim": "Wolfe describes The Fifth Head of Cerberus as built so that the second novella is a story told by a character in the third.",
+   "source": "Gene Wolfe interviewed by Neil Gaiman, Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "The second novella is a story told by one",
+   "page": "p.81"
+  },
+  {
+   "index": 941,
+   "feature": "other: purpose of fiction",
+   "claim": "Wolfe says the most important thing fiction does is assure the reader that things need not stay as they are.",
+   "source": "Gene Wolfe interviewed by Neil Gaiman, Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "it assures the reader that things need not be as",
+   "page": "p.82"
+  },
+  {
+   "index": 942,
+   "feature": "other: register source",
+   "claim": "Wolfe grounds his industrial settings in his years as a journalist on a trade magazine.",
+   "source": "Gene Wolfe interviewed by Neil Gaiman, Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "Remember, I was a journalist on an",
+   "page": "p.82"
+  },
+  {
+   "index": 945,
+   "feature": "terminology consistency",
+   "claim": "Wolfe says the temptation of the defined-terms form is to put one's own prejudices in, as Samuel Johnson did.",
+   "source": "Gene Wolfe interviewed by Neil Gaiman, Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "put your own prejudices in as Samuel Johnson",
+   "page": "p.7"
+  }
+ ]
+}

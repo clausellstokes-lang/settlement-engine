@@ -1,200 +1,4 @@
 {
- "complete": true,
- "coverage": "Named roster: FETCHED - the Clute & Grant Encyclopedia of Fantasy (1997) 'Lindholm, Megan' entry (signed DP, David Pringle) and, in place of the non-existent 2014+ Locus interview, both Locus interviews that do exist (Jan 1998, Dec 2005) plus one podcast transcript (Geek's Guide to the Galaxy, printed in Lightspeed 2012). NOT FOUND after author-page, site-search and multi-engine searching: an Amal El-Mohtar review of Assassin's Fate (no such NYT or NPR piece surfaced; the NYT 'Otherworldly' column in 2017 was not hers); Liz Bourke on Hobb (nothing on her Tor.com author page, nothing in a site search of her own blog for 'Hobb', nothing in a site:reactormag.com search); Gary K. Wolfe on Hobb (Locus review columns are print-only and none surfaced); Niall Alexander on Hobb (nothing on his Tor.com author page); a Jo Walton piece on the Farseer books (her only Hobb/Lindholm writing that surfaced is on Wizard of the Pigeons); and Locus interview excerpts from 2014 onward, which Locus's own Index to Interviews shows do not exist. BLOCKED: Hobb's Meditations on Middle-earth essay 'A Bar and a Quest' (2001) - identified by title, but the Internet Archive copy is lending-restricted, its _djvu.txt returns 403, and no open full text exists; no claim written from it. Coode Street, Sword & Laser and Fantasy Faction podcast transcripts: none located (Fantasy-Faction's written Fool's Quest review was read instead). Substantive sources per route: 5 from the named roster (EoF, two Locus interviews, the Locus interview index, the Lightspeed podcast transcript); 8 from bibliography chasing via Wikipedia citation lists and the Fedwren Project annotated bibliography (Mythlore, LARB, Strange Horizons, Telegraph, Guardian, two Langford SFX reviews, Fantasy-Faction); 5 from lateral routes (Wayback CDX enumeration of tor.com Hobb URLs and the tor.com Robin Hobb tag page: Bear x2, Landon, Pulley, Erikson); 2 from open search (Hobb's own '5000 Words About Myself', the New Statesman profile). 21 substantive sources, 67 claims. Reactor/tor.com, the Mythlore PDF and the Telegraph all refused direct fetches and were read through Wayback raw captures; every quotation was string-matched against the fetched text before writing.",
- "sourcesRead": [
-  {
-   "title": "The Golden Age of Epic Fantasy (a review of Robin Hobb's Dragon Keeper)",
-   "url": "https://www.tor.com/2010/02/05/the-golden-age-of-epic-fantasy-a-review-of-robin-hobbs-ligdragon-keeperlig/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2010-02-05",
-   "route": "wayback raw 20221003055909id_"
-  },
-  {
-   "title": "Facts universally acknowledged, being a review of Robin Hobb's Dragon Haven",
-   "url": "https://www.tor.com/2010/06/02/facts-universally-acknowledged-being-a-review-of-robin-hobbs-ligdragon-havenlig/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2010-06-02",
-   "route": "wayback raw 20221004001120id_"
-  },
-  {
-   "title": "Locus: Robin Hobb interview - Behind the Scenes (excerpted from Locus Magazine, January 1998)",
-   "url": "https://www.locusmag.com/1998/Issues/01/Hobb.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "1998-01",
-   "route": "direct"
-  },
-  {
-   "title": "You've Never Read Anything Like SFF Before. Robin Hobb Talks with Peter Orullian",
-   "url": "https://www.tor.com/2012/02/07/youve-never-read-anything-like-sff-before-robin-hobb-talks-with-peter-orullian/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2012-02-07",
-   "route": "wayback raw 20230119153557id_"
-  },
-  {
-   "title": "Character is in the Details: Robin Hobb's Golden Fool (Natasha Pulley)",
-   "url": "https://www.tor.com/2015/07/10/character-is-in-the-details-robin-hobbs-golden-fool/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2015-07-10",
-   "route": "wayback raw 20240114133121id_"
-  },
-  {
-   "title": "The Meticulous Character Details of Robin Hobb (Natasha Pulley; republication of the 2015 piece)",
-   "url": "https://www.tor.com/2022/03/22/the-meticulous-character-details-of-robin-hobb/",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2022-03-22",
-   "route": "wayback raw 20240114133121id_ (duplicate text of the 2015 post)"
-  },
-  {
-   "title": "Revolutionary Nautical Fantasy: Robin Hobb's Liveship Traders Series (Stephanie Dray)",
-   "url": "http://strangehorizons.com/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2001-11-05",
-   "route": "direct"
-  },
-  {
-   "title": "Bright Home, Dark Heart (Ilana Teitelbaum on Fool's Assassin), Los Angeles Review of Books",
-   "url": "https://lareviewofbooks.org/article/bright-home-dark-heart/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2014-09-08",
-   "route": "direct"
-  },
-  {
-   "title": "History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice (Matthew Oliver), Mythlore 41.1",
-   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2022-10",
-   "route": "wayback raw PDF of dc.swosu.edu viewcontent (live PDF 403)"
-  },
-  {
-   "title": "5000 Words About Myself (Robin Hobb, for Alienisti/Finncon 2004)",
-   "url": "http://www.robinhobb.com/5000words.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2004",
-   "route": "wayback raw 20050724083052id_ (live URL 404)"
-  },
-  {
-   "title": "Pastoral family drama: Fool's Assassin by Robin Hobb (Justin Landon), Tor.com",
-   "url": "https://www.tor.com/2014/08/12/book-review-the-fools-assassin-robin-hobb/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2014-08-12",
-   "route": "wayback raw 20231113190246id_"
-  },
-  {
-   "title": "Fool's Assassin by Robin Hobb, review: 'high art' (Jane Shilling), The Daily Telegraph",
-   "url": "https://www.telegraph.co.uk/culture/books/bookreviews/11048552/Fools-Assassin-by-Robin-Hobb-review-high-art.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2014-08-23",
-   "route": "wayback raw 20250725002840id_"
-  },
-  {
-   "title": "Encyclopedia of Fantasy (1997), 'Lindholm, Megan' entry [signed DP], ed. John Clute & John Grant",
-   "url": "http://sf-encyclopedia.uk/fe.php?nm=lindholm_megan",
-   "kind": "reception",
-   "substantive": true,
-   "date": "1997 (digital version prepared 1999)",
-   "route": "direct"
-  },
-  {
-   "title": "Interview: Robin Hobb (The Geek's Guide to the Galaxy podcast transcript), Lightspeed Magazine Issue 23",
-   "url": "https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2012-04",
-   "route": "direct"
-  },
-  {
-   "title": "Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm (Pauline Bock), New Statesman",
-   "url": "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2018-07",
-   "route": "wayback raw 20260212161207id_ (live fetch returned an empty shell)"
-  },
-  {
-   "title": "Fool's Quest by Robin Hobb (Lew Kelly), Fantasy-Faction",
-   "url": "https://fantasy-faction.com/2015/fools-quest-by-robin-hobb",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2015-09-18",
-   "route": "direct"
-  },
-  {
-   "title": "How Robin Hobb's Assassin's Apprentice Pulls the Rug Out From Under You (Steven Erikson), Tor.com 'That Was Awesome'",
-   "url": "https://reactormag.com/how-robin-hobbs-assassins-apprentice-pulls-the-rug-out-from-under-you/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2016-04-27",
-   "route": "wayback raw capture (reactormag.com returns 403 to direct fetches)"
-  },
-  {
-   "title": "Dave Langford, SFX book reviews 1995-96 (Ansible archive) - review of The Assassin's Apprentice, SFX #4",
-   "url": "https://ansible.uk/writing/sfxrev95.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "1995-09 (SFX #4)",
-   "route": "direct"
-  },
-  {
-   "title": "Dave Langford, SFX book reviews 1997-98 (Ansible archive) - review of Assassin's Quest, SFX #24",
-   "url": "https://ansible.uk/writing/sfxrev97.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "1997-04 (SFX #24)",
-   "route": "direct"
-  },
-  {
-   "title": "Fool's Assassin by Robin Hobb - a melancholic hero fights again (Alison Flood), The Guardian",
-   "url": "https://www.theguardian.com/books/2014/sep/10/fools-assassin-robin-hobb-review-fantasy-novel",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2014-09-10",
-   "route": "direct"
-  },
-  {
-   "title": "Locus Magazine, Index to Interviews (evidence of absence: Hobb listed only at Jan 1998 and Dec 2005)",
-   "url": "https://locusmag.com/interviews/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "consulted 2026-09-06",
-   "route": "direct"
-  },
-  {
-   "title": "Locus Online: Robin Hobb interview excerpts, 'More Questions Than Answers' (Locus, December 2005)",
-   "url": "https://www.locusmag.com/2005/Issues/12Hobb.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2005-12",
-   "route": "direct"
-  },
-  {
-   "title": "The Fedwren Project: A Robin Hobb Annotated Bibliography (Geoffrey B. Elliott)",
-   "url": "https://elliottrwi.com/research/hobb-bibliography/",
-   "kind": "relay",
-   "substantive": true,
-   "date": "consulted 2026-09-06",
-   "route": "direct \u2014 used for bibliography chasing; every primary it named was then fetched or logged as blocked"
-  },
-  {
-   "title": "Meditations on Middle-earth, ed. Karen Haber (2001), containing Robin Hobb's essay 'A Bar and a Quest'",
-   "url": "https://archive.org/details/meditationsonmid0000unse",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2001",
-   "route": "BLOCKED \u2014 Internet Archive copy is lending-restricted; _djvu.txt returns 403 and the search-inside endpoints are unavailable; no open full text located"
-  }
- ],
  "claims": [
   {
    "feature": "plainness and economy",
@@ -229,7 +33,7 @@
    "claim": "Bear calls the interpolated dispatches between two pigeon-keepers a great expositional trick.",
    "source": "Elizabeth Bear, Tor.com review of Dragon Keeper, 2010",
    "url": "https://www.tor.com/2010/02/05/the-golden-age-of-epic-fantasy-a-review-of-robin-hobbs-ligdragon-keeperlig/",
-   "quote": "It\u2019s a great expositional trick",
+   "quote": "It’s a great expositional trick",
    "page": "body, penultimate paragraph",
    "kind": "analysis",
    "polarity": "asserts",
@@ -411,7 +215,7 @@
    "claim": "Pulley reads Fitz's insistence on the colour of straw as carrying his stable upbringing against the Fool's courtly one.",
    "source": "Natasha Pulley, 'Character is in the Details: Robin Hobb's Golden Fool', Tor.com, 2015",
    "url": "https://www.tor.com/2015/07/10/character-is-in-the-details-robin-hobbs-golden-fool/",
-   "quote": "What\u2019s brilliant, though, is that he does it over straw",
+   "quote": "What’s brilliant, though, is that he does it over straw",
    "page": "body, paragraph beginning 'That Fitz goes straight'",
    "kind": "analysis",
    "polarity": "asserts",
@@ -453,7 +257,7 @@
    "claim": "Dray writes that Hobb is not afraid to maim, disfigure or transform her characters.",
    "source": "Stephanie Dray, Strange Horizons review of the Liveship Traders series, 2001",
    "url": "http://strangehorizons.com/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
-   "quote": "she isn\u2019t afraid to maim, disfigure, or transform",
+   "quote": "she isn’t afraid to maim, disfigure, or transform",
    "page": "body, paragraph beginning 'This odd pleasure'",
    "kind": "analysis",
    "polarity": "asserts",
@@ -551,7 +355,7 @@
    "claim": "Teitelbaum says Fitz's limited point of view leaves the world as enigmatic to him as to the reader.",
    "source": "Ilana Teitelbaum, 'Bright Home, Dark Heart', Los Angeles Review of Books, 2014",
    "url": "https://lareviewofbooks.org/article/bright-home-dark-heart/",
-   "quote": "Fitz\u2019s limited point of view renders the world as enigmatic to him",
+   "quote": "Fitz’s limited point of view renders the world as enigmatic to him",
    "page": "body, second paragraph",
    "kind": "analysis",
    "polarity": "asserts",
@@ -664,7 +468,7 @@
    "source": "Matthew Oliver, Mythlore 41.1 (Fall/Winter 2022), 'History in the Margins'",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "a distant, scholarly voice",
-   "page": "p. 45-46, opening section",
+   "page": "pp. 45-46, opening section",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
@@ -712,7 +516,7 @@
    "date": "2022-10",
    "routeHint": "wayback raw PDF capture 20240707045408id_",
    "registerHint": "dossier-archivist",
-   "confidence": "medium \u2014 the quoted phrase runs across a line break in the PDF text layer"
+   "confidence": "medium — the quoted phrase runs across a line break in the PDF text layer"
   },
   {
    "feature": "omission as information",
@@ -803,7 +607,7 @@
    "claim": "Hobb says events in the Farseer trilogy directly affect what is happening in Bingtown, as in our world.",
    "source": "Robin Hobb, interviewed on The Geek's Guide to the Galaxy, transcript in Lightspeed Magazine Issue 23",
    "url": "https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
-   "quote": "directly affect what\u2019s happening down in Bing Town",
+   "quote": "directly affect what’s happening down in Bing Town",
    "page": "answer on reading order of the Realm of the Elderlings",
    "kind": "own-words",
    "polarity": "asserts",
@@ -1069,7 +873,7 @@
    "claim": "Alison Flood says Hobb gives the reader months and years of not much happening before events spiral.",
    "source": "Alison Flood, The Guardian review of Fool's Assassin, 2014",
    "url": "https://www.theguardian.com/books/2014/sep/10/fools-assassin-robin-hobb-review-fantasy-novel",
-   "quote": "Hobb gives us months \u2013 years \u2013 of not much happening",
+   "quote": "Hobb gives us months – years – of not much happening",
    "page": "body, paragraph beginning 'Like its predecessors'",
    "kind": "analysis",
    "polarity": "asserts",
@@ -1133,6 +937,202 @@
    "routeHint": "direct fetch of locusmag.com/interviews/; the row's two links are the only Hobb entries, which is the evidence that no Locus interview from 2014 onward exists",
    "registerHint": "none",
    "confidence": "high"
+  }
+ ],
+ "complete": true,
+ "coverage": "Named roster: FETCHED - the Clute & Grant Encyclopedia of Fantasy (1997) 'Lindholm, Megan' entry (signed DP) and, in place of the non-existent 2014+ Locus interview, both Locus interviews that do exist (Jan 1998, Dec 2005) plus one podcast transcript (Geek's Guide to the Galaxy, printed in Lightspeed 2012). NOT FOUND after author-page, site-search and multi-engine searching: an Amal El-Mohtar review of Assassin's Fate (no NYT or NPR piece surfaced); Liz Bourke on Hobb (nothing on her Tor.com author page, nothing in a search of her own blog for 'Hobb', nothing in a site:reactormag.com search); Gary K. Wolfe on Hobb (Locus review columns are print-only); Niall Alexander on Hobb (nothing on his Tor.com author page); a Jo Walton piece on the Farseer books (her only Hobb/Lindholm writing that surfaced is on Wizard of the Pigeons); and Locus interview excerpts from 2014 onward, which Locus's own Index to Interviews shows do not exist. BLOCKED: Hobb's Meditations on Middle-earth essay 'A Bar and a Quest' (2001) - identified by title, but the Internet Archive copy is lending-restricted, its _djvu.txt returns 403, and no open full text exists; no claim written from it. Coode Street, Sword & Laser and Fantasy Faction podcast transcripts: none located (Fantasy-Faction's written Fool's Quest review read instead). Substantive sources per route: 5 from the named roster; 8 from bibliography chasing via Wikipedia citation lists and the Fedwren Project annotated bibliography (Mythlore, LARB, Strange Horizons, Telegraph, Guardian, two Langford SFX reviews, Fantasy-Faction); 5 from lateral routes (Wayback CDX enumeration of tor.com Hobb URLs and the tor.com Robin Hobb tag page: Bear x2, Landon, Pulley, Erikson); 2 from open search (Hobb's '5000 Words About Myself', the New Statesman profile). 21 substantive sources, 67 claims. Reactor/tor.com, the Mythlore PDF and the Telegraph all refused direct fetches and were read through Wayback raw captures; every quotation was string-matched against the fetched text before writing.",
+ "sourcesRead": [
+  {
+   "title": "The Golden Age of Epic Fantasy (a review of Robin Hobb's Dragon Keeper) — Elizabeth Bear",
+   "url": "https://www.tor.com/2010/02/05/the-golden-age-of-epic-fantasy-a-review-of-robin-hobbs-ligdragon-keeperlig/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2010-02-05",
+   "route": "wayback raw 20221003055909id_"
+  },
+  {
+   "title": "Facts universally acknowledged, being a review of Robin Hobb's Dragon Haven — Elizabeth Bear",
+   "url": "https://www.tor.com/2010/06/02/facts-universally-acknowledged-being-a-review-of-robin-hobbs-ligdragon-havenlig/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2010-06-02",
+   "route": "wayback raw 20221004001120id_"
+  },
+  {
+   "title": "Locus: Robin Hobb interview — Behind the Scenes (excerpted from Locus Magazine, January 1998)",
+   "url": "https://www.locusmag.com/1998/Issues/01/Hobb.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1998-01",
+   "route": "direct"
+  },
+  {
+   "title": "You've Never Read Anything Like SFF Before. Robin Hobb Talks with Peter Orullian",
+   "url": "https://www.tor.com/2012/02/07/youve-never-read-anything-like-sff-before-robin-hobb-talks-with-peter-orullian/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2012-02-07",
+   "route": "wayback raw 20230119153557id_"
+  },
+  {
+   "title": "Character is in the Details: Robin Hobb's Golden Fool — Natasha Pulley",
+   "url": "https://www.tor.com/2015/07/10/character-is-in-the-details-robin-hobbs-golden-fool/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-07-10",
+   "route": "wayback raw 20240114133121id_"
+  },
+  {
+   "title": "The Meticulous Character Details of Robin Hobb — Natasha Pulley (republication of the 2015 piece)",
+   "url": "https://www.tor.com/2022/03/22/the-meticulous-character-details-of-robin-hobb/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2022-03-22",
+   "route": "wayback raw 20240114133121id_ — duplicate text of the 2015 post"
+  },
+  {
+   "title": "Revolutionary Nautical Fantasy: Robin Hobb's Liveship Traders Series — Stephanie Dray",
+   "url": "http://strangehorizons.com/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2001-11-05",
+   "route": "direct"
+  },
+  {
+   "title": "Bright Home, Dark Heart — Ilana Teitelbaum on Fool's Assassin, Los Angeles Review of Books",
+   "url": "https://lareviewofbooks.org/article/bright-home-dark-heart/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-09-08",
+   "route": "direct"
+  },
+  {
+   "title": "History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice — Matthew Oliver, Mythlore 41.1",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-10",
+   "route": "wayback raw PDF of dc.swosu.edu viewcontent (live PDF 403)"
+  },
+  {
+   "title": "5000 Words About Myself — Robin Hobb, for Alienisti/Finncon 2004",
+   "url": "http://www.robinhobb.com/5000words.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2004",
+   "route": "wayback raw 20050724083052id_ (live URL 404)"
+  },
+  {
+   "title": "Pastoral family drama: Fool's Assassin by Robin Hobb — Justin Landon, Tor.com",
+   "url": "https://www.tor.com/2014/08/12/book-review-the-fools-assassin-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-08-12",
+   "route": "wayback raw 20231113190246id_"
+  },
+  {
+   "title": "Fool's Assassin by Robin Hobb, review: 'high art' — Jane Shilling, The Daily Telegraph",
+   "url": "https://www.telegraph.co.uk/culture/books/bookreviews/11048552/Fools-Assassin-by-Robin-Hobb-review-high-art.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-08-23",
+   "route": "wayback raw 20250725002840id_"
+  },
+  {
+   "title": "Encyclopedia of Fantasy (1997), 'Lindholm, Megan' entry [signed DP], eds John Clute & John Grant",
+   "url": "http://sf-encyclopedia.uk/fe.php?nm=lindholm_megan",
+   "kind": "reception",
+   "substantive": true,
+   "date": "1997 (digital version prepared 1999)",
+   "route": "direct"
+  },
+  {
+   "title": "Interview: Robin Hobb (The Geek's Guide to the Galaxy podcast transcript), Lightspeed Magazine Issue 23",
+   "url": "https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2012-04",
+   "route": "direct"
+  },
+  {
+   "title": "Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm — Pauline Bock, New Statesman",
+   "url": "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2018-07",
+   "route": "wayback raw 20260212161207id_ (live fetch returned an empty shell)"
+  },
+  {
+   "title": "Fool's Quest by Robin Hobb — Lew Kelly, Fantasy-Faction",
+   "url": "https://fantasy-faction.com/2015/fools-quest-by-robin-hobb",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-09-18",
+   "route": "direct"
+  },
+  {
+   "title": "How Robin Hobb's Assassin's Apprentice Pulls the Rug Out From Under You — Steven Erikson, Tor.com 'That Was Awesome'",
+   "url": "https://reactormag.com/how-robin-hobbs-assassins-apprentice-pulls-the-rug-out-from-under-you/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-04-27",
+   "route": "wayback raw capture (reactormag.com returns 403 to direct fetches)"
+  },
+  {
+   "title": "Dave Langford, SFX book reviews 1995-96 (Ansible archive) — review of The Assassin's Apprentice, SFX #4",
+   "url": "https://ansible.uk/writing/sfxrev95.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "1995-09 (SFX #4)",
+   "route": "direct"
+  },
+  {
+   "title": "Dave Langford, SFX book reviews 1997-98 (Ansible archive) — review of Assassin's Quest, SFX #24",
+   "url": "https://ansible.uk/writing/sfxrev97.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "1997-04 (SFX #24)",
+   "route": "direct"
+  },
+  {
+   "title": "Fool's Assassin by Robin Hobb – a melancholic hero fights again — Alison Flood, The Guardian",
+   "url": "https://www.theguardian.com/books/2014/sep/10/fools-assassin-robin-hobb-review-fantasy-novel",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-09-10",
+   "route": "direct"
+  },
+  {
+   "title": "Locus Magazine, Index to Interviews (evidence of absence: Hobb listed only at Jan 1998 and Dec 2005)",
+   "url": "https://locusmag.com/interviews/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "consulted 2026-09-06",
+   "route": "direct"
+  },
+  {
+   "title": "Locus Online: Robin Hobb interview excerpts, 'More Questions Than Answers' (Locus, December 2005)",
+   "url": "https://www.locusmag.com/2005/Issues/12Hobb.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005-12",
+   "route": "direct"
+  },
+  {
+   "title": "The Fedwren Project: A Robin Hobb Annotated Bibliography — Geoffrey B. Elliott",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "kind": "relay",
+   "substantive": true,
+   "date": "consulted 2026-09-06",
+   "route": "direct — used for bibliography chasing; every primary it named was then fetched or logged as blocked"
+  },
+  {
+   "title": "Meditations on Middle-earth, ed. Karen Haber (2001), containing Robin Hobb's essay 'A Bar and a Quest'",
+   "url": "https://archive.org/details/meditationsonmid0000unse",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2001",
+   "route": "BLOCKED — Internet Archive copy lending-restricted; _djvu.txt returns 403; search-inside endpoints unavailable; no open full text located"
   }
  ]
 }

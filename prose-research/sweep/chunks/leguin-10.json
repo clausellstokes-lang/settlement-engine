@@ -1,0 +1,128 @@
+{
+ "name": "leguin",
+ "chunk": 10,
+ "indices": [
+  889,
+  893,
+  896,
+  898,
+  899,
+  908,
+  913,
+  914,
+  916,
+  919,
+  922,
+  923
+ ],
+ "claims": [
+  {
+   "index": 889,
+   "feature": "dialogue register",
+   "claim": "Le Guin points to the broken monosyllables of Silas Marner's speech in George Eliot as an inseparable part of the passage's meaning.",
+   "source": "Ursula K. Le Guin, \"Reciprocity of Prose and Poetry\" (1983), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "all broken monosyllables",
+   "page": "\"Reciprocity of Prose and Poetry\", p.109"
+  },
+  {
+   "index": 893,
+   "feature": "gloss and over-explaining",
+   "claim": "Le Guin says of her own earlier novel The Lathe of Heaven that the characters talk too much and explain things too much.",
+   "source": "Ursula K. Le Guin interviewed by Paul Morton, The Millions, 31 January 2013",
+   "url": "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+   "quote": "They talk too much. They explain things too much.",
+   "page": "answer near the end of the interview"
+  },
+  {
+   "index": 896,
+   "feature": "other: counter-evidence on style",
+   "claim": "Le Guin says an irresistibly readable story can be told in the most conventional, banal prose if the writer has the narrative gift.",
+   "source": "Ursula K. Le Guin, blog 51, \"The Narrative Gift as a Moral Conundrum\", 2011 (text at ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/blog/51-the-narrative-gift-as-a-moral-conundrum",
+   "quote": "An irresistibly readable story can be told in the most conventional, banal prose",
+   "page": "blog post body"
+  },
+  {
+   "index": 898,
+   "feature": "other: style as substance",
+   "claim": "Le Guin says art is not explanation but what an artist does.",
+   "source": "Ursula K. Le Guin, blog 36, \"Readers' Questions\", 2011 (text at ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/blog/36-readers-questions",
+   "quote": "Art isn’t explanation.",
+   "page": "blog post body"
+  },
+  {
+   "index": 899,
+   "feature": "other: composition process",
+   "claim": "Le Guin says that in writing Lavinia she was not choosing the way as an author but taking dictation.",
+   "source": "Ursula K. Le Guin interviewed by Euan Monaghan, Literary Hub, 1 April 2016",
+   "url": "https://lithub.com/ursula-k-le-guin-on-racism-anarchy-and-hearing-her-characters-speak/",
+   "quote": "I wasn’t choosing the way as an author, I was taking dictation",
+   "page": "answer on the origin of Lavinia"
+  },
+  {
+   "index": 908,
+   "feature": "other: showing versus telling",
+   "claim": "Le Guin praises Galt for telling without showing, in defiance of what she calls the decree of the Iowa Writing School.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "Galt tells without showing",
+   "page": "essay body, pull quote and following paragraph"
+  },
+  {
+   "index": 913,
+   "feature": "consequence on a household",
+   "claim": "Le Guin quotes the minister's entire account of the riot at his installation, which reads that he thought he would have a hard and sore time of it with such an outstrapolous people.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017, quoting John Galt, Annals of the Parish (1821)",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "a hard and sore time of it with such an outstrapolous people",
+   "page": "essay body, block quotation from Galt"
+  },
+  {
+   "index": 914,
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Le Guin notes that the annalist moves from the riot to the dinner without even a period, only a semicolon.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "without even a period, only a semicolon",
+   "page": "essay body, paragraph following the block quotation"
+  },
+  {
+   "index": 916,
+   "feature": "humour",
+   "claim": "Le Guin describes Galt's humour as dry, subtle, morally loaded, and really funny.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "dry, subtle, morally loaded, and really funny",
+   "page": "essay body, paragraph comparing Galt to Austen"
+  },
+  {
+   "index": 919,
+   "feature": "other: genre as dialect",
+   "claim": "Le Guin says genre is a rich dialect that becomes a jargon meaningful only to an ingroup if it gives up connection with the general literary language.",
+   "source": "Ursula K. Le Guin, contribution on Virginia Woolf to \"The stars of modern SF pick the best science fiction\", The Guardian, 14 May 2011",
+   "url": "https://www.theguardian.com/books/2011/may/14/science-fiction-authors-choice",
+   "quote": "it becomes a jargon, meaningful only to an ingroup",
+   "page": "her contribution, first paragraph"
+  },
+  {
+   "index": 922,
+   "feature": "terminology consistency",
+   "claim": "Le Guin says the way magic works in the Earthsea books is a matter of language and names and has rules.",
+   "source": "Ursula K. Le Guin, \"Frankenstein's Earthsea\", Locus, January 2005",
+   "url": "http://locusmag.com/2005/Issues/01LeGuin.html",
+   "quote": "a matter of language and names; it has rules",
+   "page": "essay body, on the film's changes"
+  },
+  {
+   "index": 923,
+   "feature": "other: coherence",
+   "claim": "Le Guin says the rules of Earthsea magic give it a necessary limitation.",
+   "source": "Ursula K. Le Guin, \"Frankenstein's Earthsea\", Locus, January 2005",
+   "url": "http://locusmag.com/2005/Issues/01LeGuin.html",
+   "quote": "which give it a necessary limitation",
+   "page": "essay body, on the film's changes"
+  }
+ ]
+}

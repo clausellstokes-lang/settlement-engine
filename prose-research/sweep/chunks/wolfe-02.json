@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 2,
+ "indices": [
+  545,
+  547,
+  548,
+  552,
+  553,
+  554,
+  556,
+  557,
+  562,
+  564,
+  565,
+  574,
+  575,
+  588,
+  598
+ ],
+ "claims": [
+  {
+   "index": 545,
+   "feature": "other: overall verdict",
+   "claim": "Russ concludes that Operation Ares is a failure, shadowy and inconclusive.",
+   "source": "Joanna Russ, F&SF, vol. 40 no. 4, April 1971, p. 69, reprinted in CLC",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/joanna-russ",
+   "quote": "the novel is a failure, shadowy and inconclusive",
+   "page": "p. 69"
+  },
+  {
+   "index": 547,
+   "feature": "other: baroque ornament",
+   "claim": "Somtow Sucharitkul argues it is the familiarity of Wolfe's sources rather than the baroque weirdness of his textures that makes The Sword of the Lictor powerful.",
+   "source": "Somtow Sucharitkul, \"A Certain Slant of 'I'\", Fantasy Newsletter, vol. 4 no. 12, December 1981, pp. 16-17, reprinted in CLC",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/somtow-sucharitkul",
+   "quote": "not the baroque weirdness of its textures",
+   "page": "pp. 16-17"
+  },
+  {
+   "index": 548,
+   "feature": "compounds and coinages",
+   "claim": "Sucharitkul says Wolfe's neologisms mingle with resurrected antique words and hybridizations of Latin, Greek and Germanic roots.",
+   "source": "Somtow Sucharitkul, Fantasy Newsletter, vol. 4 no. 12, December 1981, p. 16, reprinted in CLC",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/somtow-sucharitkul",
+   "quote": "neologisms mingle with resurrected antique words",
+   "page": "p. 16"
+  },
+  {
+   "index": 552,
+   "feature": "reader and expert judgment",
+   "claim": "Clute allows that for some readers the first three volumes may have seemed picaresque and somewhat random in nature.",
+   "source": "John Clute, 'The Urth and All Its Glory', reprinted in CLC",
+   "url": "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/john-clute",
+   "quote": "may have seemed picaresque, somewhat random in nature",
+   "page": "body"
+  },
+  {
+   "index": 553,
+   "feature": "other: reader difficulty",
+   "claim": "The thread's opening poster says The Book of the New Sun was a very hard read whose plots did not link well.",
+   "source": "'Belgarion', SFFWorld forum thread 'Gene Wolfe Sucks!', 25 September 2002",
+   "url": "https://www.sffworld.com/forum/threads/gene-wolfe-sucks.3581/",
+   "quote": "It was a very hard read, the plots did not link",
+   "page": "post #1"
+  },
+  {
+   "index": 554,
+   "feature": "other: reader difficulty",
+   "claim": "The opening poster says the quartet was basically a collection of short stories.",
+   "source": "'Belgarion', SFFWorld forum, 25 September 2002",
+   "url": "https://www.sffworld.com/forum/threads/gene-wolfe-sucks.3581/",
+   "quote": "was basically a collection of short stories",
+   "page": "post #1"
+  },
+  {
+   "index": 556,
+   "feature": "other: reader difficulty",
+   "claim": "A forum reader reports the series held his interest but left him feeling that he missed a lot.",
+   "source": "'fortytwo', SFFWorld forum, 25 September 2002",
+   "url": "https://www.sffworld.com/forum/threads/gene-wolfe-sucks.3581/",
+   "quote": "I had the feeling that I missed a lot",
+   "page": "post #13"
+  },
+  {
+   "index": 557,
+   "feature": "reader and expert judgment",
+   "claim": "A forum defender argues the style is one of the key selling points of The Book of the New Sun while conceding it could turn some readers off.",
+   "source": "'jfclark', SFFWorld forum, 25 September 2002",
+   "url": "https://www.sffworld.com/forum/threads/gene-wolfe-sucks.3581/",
+   "quote": "the style is one of the key selling-points",
+   "page": "post #16"
+  },
+  {
+   "index": 562,
+   "feature": "other: overall verdict",
+   "claim": "Allbery says he would not recommend The Urth of the New Sun even to someone who read the original series.",
+   "source": "Russ Allbery, review of The Urth of the New Sun, 10 September 2004",
+   "url": "https://www.eyrie.org/~eagle/reviews/books/0-812-55817-0.html",
+   "quote": "I don't think I would recommend this book even to someone",
+   "page": "closing paragraph"
+  },
+  {
+   "index": 564,
+   "feature": "other: overall verdict",
+   "claim": "Allbery concludes he is not sure the series quite lived up to the promise of its beginning.",
+   "source": "Russ Allbery, review of The Citadel of the Autarch, 28 June 2004",
+   "url": "https://www.eyrie.org/~eagle/reviews/books/0-671-49666-2.html",
+   "quote": "I'm not sure that this series quite lived up to the promise",
+   "page": "closing section"
+  },
+  {
+   "index": 565,
+   "feature": "reader and expert judgment",
+   "claim": "Brian Murphy writes that half the reviews of The Book of the New Sun are by people who do not seem to understand what is going on yet declare that you have to read it.",
+   "source": "Brian Murphy, 'Gene Wolfe is intimidating. The Knight is not.', The Silver Key, 29 March 2025",
+   "url": "https://thesilverkey.blogspot.com/2025/03/gene-wolfe-is-intimidating-knight-is.html",
+   "quote": "people who don’t seem to understand what’s going on yet declare",
+   "page": "body, opening section"
+  },
+  {
+   "index": 574,
+   "feature": "other: reader difficulty",
+   "claim": "The reviewer attributes the book's narrow readership to its reputation of being dense, labyrinthine and outright incomprehensible at times.",
+   "source": "Tachy, 'Review: The Book of the New Sun'",
+   "url": "https://tachy.org/posts/botns/",
+   "quote": "being dense, labyrinthine, and outright incomprehensible at times",
+   "page": "body"
+  },
+  {
+   "index": 575,
+   "feature": "other: reader difficulty",
+   "claim": "The reviewer reports that characters in the book are often described as one-dimensional and bewildering.",
+   "source": "Tachy, 'Review: The Book of the New Sun'",
+   "url": "https://tachy.org/posts/botns/",
+   "quote": "described as one-dimensional and bewildering",
+   "page": "body"
+  },
+  {
+   "index": 588,
+   "feature": "other: reader inference refuted",
+   "claim": "Roy C. Lackey rejects the cross-book explanation of the missing guard, saying the theory cannot be true.",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Close Reading: Torturer' thread, 2006-09-05 (message 002927)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002927.html",
+   "quote": "so neat it *ought* to be true. But it can't be.",
+   "page": "message body, paragraph 2"
+  },
+  {
+   "index": 598,
+   "feature": "repetition and refrain",
+   "claim": "The reader 'nastler' identifies a recurring tableau of a beast man, an armed man and a woman first appearing in chapter one.",
+   "source": "'nastler', Urth mailing list, '(urth) Close Reading: Torturer' thread, 2006-09-06 (message 002936)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002936.html",
+   "quote": "Also in this chapter the first (but not last)",
+   "page": "message body, final paragraph"
+  }
+ ]
+}
