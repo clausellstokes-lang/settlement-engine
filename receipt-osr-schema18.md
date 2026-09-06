@@ -90,3 +90,143 @@ so any movement would mean my own cars changed the detector's verdict, which a r
 **DOCK:** `$SC/laneOSR18` HEAD `b0cbc67a15baf0997028ab501c7ee09565f93980`, porcelain **0**, detached,
 453 `node_modules` symlinks, no `core.hooksPath`, `.git/hooks` samples only.
 `git -C <main> rev-parse claude/composite-r4` = **the same sha** — my base IS the product tip. ✅
+
+---
+
+# STEPS 1–3 — LANDED. TWO CARS. **THE CLI IS BACK ON.**
+
+| sha | car |
+|---|---|
+| `f20d5dd48` | the schema **17 → 18** rung is minted — the first rung whose subject is the receipt's own provenance |
+| `a05a4646e` | the schema-18 **genesis**: the governed migration executed, the register re-anchored, the `_doc` cured |
+
+⭐ **THE HEADLINE, EXECUTED:**
+```
+git merge-base --is-ancestor f20d5dd48 HEAD            -> EXIT 0   (was 1 at b0cbc67a1)
+node scripts/check-observed-shape-readers.mjs          -> EXIT 0   15 s
+   "observed-shape readers: 1972 finding(s), exactly matching the frozen inventory."
+```
+rows minted **0** · rows cleared **0** · rung **18** · dock porcelain **0**.
+
+## STEP 1 — THE RENAME CAR: ⛔ **REFUSED, WITH MEASUREMENT (R1)**
+The brief's test was "is the rename a pure identifier swap with ZERO identity movement?" — and it
+fails at the FIRST clause, so the second never arises. `ENGINE_GATED_VIRTUAL_RULE_KEYS` has **119
+sites across 44 files** (scripts 6 · src 18 · tests 20), and **nine of them match the identifier as
+TEXT rather than as a binding**, which makes a rename a semantic change to those consumers, not a
+swap:
+
+| site | what it does with the literal |
+|---|---|
+| `scripts/check-observed-shape-readers.mjs:1892,1893` | the GOVERNED DETECTOR's clause 3 — `indexOf`/`includes` of `'ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze(['` in `simulationRules.js`'s RAW TEXT |
+| `scripts/check-observed-shape-readers.mjs:1902` | clause 4a slices the defaults window at `indexOf('ENGINE_GATED_VIRTUAL_RULE_KEYS')` |
+| `tests/property/advanceEpochDormancyFence.test.js:380` | a REGEX ALLOWLIST over source lines; a rename silently reclassifies the manifest line as a "loose" read and reds the fence |
+| `tests/domain/npc/characterDrift.test.js:946` | `expect(manifest).toContain('ENGINE_GATED_VIRTUAL_RULE_KEYS')` |
+| `tests/lint/observedShapeReaders.walker.test.js:794` | an ordering assertion on `lit.indexOf('ENGINE_GATED_VIRTUAL_RULE_KEYS')` |
+| `scripts/base-state-capsule.mjs:91` | the MEASURED figure's ADDRESS string — a stale address is a false capsule |
+| `scripts/soak/flagConstraints.mjs:72,73,74` | three rationale strings citing the identifier |
+
+⭐ **This is L-HOMES-2's own finding, re-derived and still standing** — its receipt says clause 3
+"finds nothing (`indexOf` → −1, `includes` → false) and **throws for every `VIRTUAL_DORMANT_WRITERS`
+row**", so the rename is red WITH the migration and red WITHOUT it. The rung does not help: clause 3
+would have to be re-spelled in the same car, which is a change to the detector's LAW, not
+bookkeeping — a different act from the one the chair chartered.
+⛔ **And it is unprovable inside my fences.** Proving it green needs `tests/lint/`,
+`tests/property/`, `tests/domain/`, `tests/soak-harness/` and `tests/scripts/` — the preamble
+forbids a full run and my brief names specific files. A half-proved all-or-nothing rename is the
+worst outcome the brief itself names.
+⇒ **LEFT FOR THE CHAIR, as the brief's own instruction directs on a failed measurement.**
+
+## STEP 2 — THE RUNG (`f20d5dd48`), part by part
+- `LINEAGE_REANCHOR_TARGET_SCHEMA = 18` + its rung docblock
+- `LEAF_MIGRATION_PREDECESSOR[18] = 17` (the chain stays SINGLE-STEP)
+- `LEAF_PREDECESSOR_VALIDATOR[17] = validateSchema17Baseline`, re-bound to its RETIRED literal
+- `SCANNER_TRANSITION_BY_TARGET[18]` with the MEASURED three-path `deltaPaths`
+- `LINEAGE_REANCHOR_SCANNER_TRANSITION_POLICY = 'schema-17-to-18-exact-scanner-transition-v1'`
+- `RETIRED_STRESS_TOPOLOGY_BASELINE_SCHEMA = 17`, `BASELINE_SCHEMA = 18`,
+  `validateSchema18Baseline` minted, the checker's three bindings moved to it
+- the CLI's default target and its allowed-target law; header rationale paragraphs
+- the `_doc` source literal cured (it is emitted by the genesis write, not by this car)
+- test pins: `observedShapeBaseline` (schema pin, a schema-17 fixture, the pairing arm),
+  `observedShapeSentinel` (two schema pins, the live-validator pairing),
+  `observedShapeMigration` (the predecessor message, both out-of-table probes 18 → 19, the
+  target-constant pin, the exact `LEAF_MIGRATION_PREDECESSOR` table gaining `18: 17`)
+
+### ⭐ THE DELTA SET IS A FIXED POINT — measured twice, never listed
+Each of the ELEVEN governed detector inputs hashed against the **predecessor's own recorded
+`manifests.detectorTree`**. ⭐ **Before the rung was written ALL ELEVEN were BYTE-IDENTICAL**, which
+is a cleaner start than any recent rung had — so the delta is exactly what the rung then touches:
+```
+MOVED (3):     scripts/check-observed-shape-readers.mjs      165635 -> 166097 B
+               scripts/lib/observed-shape-baseline.mjs        56632 ->  57831 B
+               scripts/migrate-observed-shape-readers.mjs    120342 -> 130025 B
+BYTE-SAME (8): package.json · package-lock.json · governed-artifact-io.mjs ·
+               legacy-reader-shape-scan.mjs · observed-shape-corpus.mjs ·
+               observed-shape-governance.mjs · reader-shape-scan.mjs · spatialPackFixtures.js
+```
+declared == measured == **3**. `package.json`/`package-lock.json` **measured** byte-same, not
+asserted. THREE rather than rung 17's four: 17's SUBJECT was `observed-shape-corpus.mjs`, a detector
+input outside the bookkeeping set; this rung's subject is not a file at all.
+
+## STEP 3 — THE GENESIS (`a05a4646e`), EVERY MOVED FIELD BY NAME
+```
+node scripts/check-observed-shape-readers.mjs --write --migrate-schema=18 --migration-review=<bundle>
+=> froze 1972 finding(s) / 1397 identit(ies) across 386 file(s)     EXIT 0   (10 s)
+```
+report: `predecessorSame` **1397** · Gone **0** · New **0** · Increased **0** · Decreased **0** ·
+issues **exactly 1** (the scanner transition, naming three paths) · review **1398** decisions
+(1397 + 1), all `accept` with notes.
+
+| field | moved | why |
+|---|---|---|
+| `schema` | 17 → **18** | the rung |
+| `frozenAtSha` | `0742f8ff5` → **`f20d5dd48`** | ⭐ the point of the lane |
+| `migrationReview.subjectSha` | `0742f8ff5` → **`f20d5dd48`** | ⭐ in-lineage; every other receipt digest re-derived |
+| `corpusMeta.simulationFlagsLit` | 80 → **81** | SEAT-78's `irregularForceEnabled`; the ONLY one of nine |
+| `scanStats` | files 2162→**2176** · reads 124468→**125631** · resolved 9563→**9669** · unresolved 114905→**115962** | the tip is 25 cars past the predecessor's freeze |
+| `sentinel.resolvedReads` | 9563 → **9669** | same |
+| `manifests` | scanTree 2162→2176 · sourceTree 2176→2190 · executionTree 2187→2201 entries | same |
+| `_doc` | 21 → **26** lines | the cure |
+| `frozen` | 2026-09-05 → **2026-09-06** | UTC date rollover during the write |
+
+| field | **UNMOVED**, and each is load-bearing |
+|---|---|
+| `digests.inventory` | `40856b9ba70142af…` **byte-identical** |
+| `digests.rowTags` | `820c468615ac0421…` **byte-identical** |
+| `total` / `identities` | **1972** / **1397** |
+| `minRows` / `originMinRows` | 40 / 8 |
+| `migrationReview.scanConfigDigest` | `cef0ab59…` — thresholds untouched |
+| `migrationReview.legacyAlgorithmBaseSha` | `6e7acc4d…` — the byte-frozen detector |
+| `scannerProvenance.unscannedInputDigest` | `158d2a7bb5d62f1c…` |
+
+⭐ **THE ZERO IS PROVED STRUCTURALLY, NOT COUNTED.** The receipt's own
+`targetInventoryDigest` **equals** its `predecessorInventoryDigest` (`40856b9b…`) — the target
+inventory IS the predecessor inventory, bit for bit — and the row-by-row walk over all 386 files
+returns **GONE 0 · NEW 0 · COUNT-MOVED 0**. A row moving in either direction would break the digest
+equality, so this is not a count I could have miscounted.
+
+⭐ **THE `_doc` CURE IS SURGICAL — MEASURED.** The **sixteen** lines outside the two cured regions
+are **byte-identical**. Only the SCHEMA-10 paragraph (`[9]`–`[12]`, 4 lines → 9) and the final
+predecessors line (`Schemas 4–9` → `Schemas 4–17`) changed. The new paragraph names schema 18,
+records the **nine-declared / eight-banking** split, and states the provenance law.
+
+⚠ **`reviewableUnscannedMovement: true` WAS CARRIED BUT NEVER EXERCISED** —
+`unscannedInputDigest` is measured UNMOVED. Recorded so the chair does not read the permission as
+evidence that something moved.
+
+⚠ **ONE EXPECTED RED, CARRIED FOR EXACTLY ONE COMMIT.** With the register written but
+**uncommitted**, the plain gate threw `observed-shape migration receipt has no committed schema-18
+genesis descendant` — `validateBaselineHistory` walks `rev-list --ancestry-path <subject>..HEAD --
+<baseline>` for a COMMITTED schema-18 baseline. `a05a4646e` IS that commit; the gate proof is taken
+at that sha, never before it. This is the governed sequence, not a surprise.
+
+## ⭐ PREDICTIONS FOR STEP 4, WRITTEN BEFORE VITEST RUNS (so they can convict me)
+1. `observedShapeReaders.walker.test.js` → **GREEN**. Nothing it pins moved: bank 62/41 unmoved,
+   banked roster 8 of 9 declared unmoved, inventory byte-identical, `source`-carrying shapes 14
+   unmoved. Its only schema-coupled reads go through `registerFigures()`.
+2. `writerReach.walker.test.js` → its **two banked arms turn GREEN** (81 == 81), because the OSR
+   register now carries `simulationFlagsLit` 81. The rest of the file was green already.
+3. `testRatchet.test.js` → **EXPECTED RED on "a banked row passed"**, and that red is the SIGNAL, not
+   a defect: two `WALKER_ROWS_OWED` rows no longer fail. ⛔ Retiring them (remove-only `--update`,
+   `OWED_CEILING` 5 → 3) is the CHAIR's register act at the landing — **I do not take it.**
+4. `observedShapeBaseline` / `observedShapeMigration` / `observedShapeSentinel` → **GREEN**; their
+   pins were moved with the rung.
