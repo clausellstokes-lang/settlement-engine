@@ -146,7 +146,7 @@ to the two deliverables, this receipt and `$SC/r15-scratch/`.
    trace or a declaration site rather than an individually-read render line. They are labelled
    `family-trace` / `family-inference` / `declaration` in the JSON rather than demoted to `ambiguous`,
    on the reading that a module-level trace IS a trace. A stricter chair would move some of the 509
-   `family-inference` rows to `ambiguous`; that would take the reader share from 70.8% to ~57.7% as a
+   `family-inference` rows to `ambiguous`; that would take the reader share from 70.8% to **57.8%** as a
    floor, and the reader-dominance finding survives either way.
 3. **`ambiguous` for authored-but-dark prose.** 48 rows are reader-register sentences in modules no
    product surface reaches at this sha (`EXPERIENCE_CLAUSES`, `ENGAGEMENT_PHASES`, …). They are

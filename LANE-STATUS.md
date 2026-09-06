@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 14:32:45 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 14:34:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -55,11 +55,11 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
       | 
       | FILES CHANGED (kit only): `prose-research/check-pair.mjs` (59 → 132 lines) · `prose-research/probe-all/crosscheck.mjs` (line 10)
       | FILES ADDED (kit): `prose-research/check-pair.v1.mjs` · `prose-research/pairs-s12a-controls.json`
-- **R15-TAIL** (kit/read-only lane) receipt `receipt-r15-tail.md` (mtime 09-06 14:20) head:
+- **R15-TAIL** (kit/read-only lane) receipt `receipt-r15-tail.md` (mtime 09-06 14:33) head:
       | # RECEIPT — lane R15-TAIL (PARTIAL)
       | ⟦Chair: Fable 5.1 · Lane: Opus 5 (R15-TAIL) · read-only on every tree · started 2026-09-06⟧
       | 
-      | **STATUS: PARTIAL — in flight.** This header is written before any measurement, per the preamble
+      | **STATUS: COMPLETE.** (This header was written as PARTIAL before any measurement, per the preamble, and is updated here at the landing.) This header is written before any measurement, per the preamble
       | ("Write your receipt FIRST as a PARTIAL header"). Every figure below is added only after the
       | command that produced it exited in-shell with a captured code.
       | 
@@ -76,7 +76,7 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-05 20:39
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-05 20:41 · critic 09-05 21:01
-- **dnd**: claims 872 · verdicts 514 (todo 358) · kept 460 · partial 52 · verdict files 35 (triage 0, regrade none) · section 09-05 20:56 · critic 09-05 21:12
+- **dnd**: claims 872 · verdicts 574 (todo 298) · kept 517 · partial 55 · verdict files 39 (triage 0, regrade none) · section 09-05 20:56 · critic 09-05 21:12
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 804 · partial 109 · verdict files 60 (triage 1, regrade r1) · section 09-06 00:39 · critic 09-06 00:55
 - **kay**: claims 713 · verdicts 713 (todo 0) · kept 448 · partial 48 · verdict files 36 (triage 1, regrade r5) · section absent · critic absent
 - **leguin**: claims 384 · verdicts 384 (todo 0) · kept 342 · partial 42 · verdict files 27 (triage 0, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
@@ -88,12 +88,12 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - wf_06d7ffd7-48b: 4 journal lines, 2 agents
 - wf_146ba5ee-000: 2 journal lines, 1 agents
 - wf_2b731d5b-460: 4 journal lines, 4 agents
-- wf_328e2797-84f: 3 journal lines, 2 agents
-- wf_a9298963-fdf: 54 journal lines, 30 agents
+- wf_328e2797-84f: 4 journal lines, 2 agents
+- wf_a9298963-fdf: 58 journal lines, 32 agents
 - wf_bcc0efc7-47c: 61 journal lines, 31 agents
 - wf_bf5b8fda-a24: 3 journal lines, 2 agents
-- wf_ed535e1b-537: 19 journal lines, 10 agents
+- wf_ed535e1b-537: 21 journal lines, 11 agents
 - wf_f5b527e0-155: 23 journal lines, 12 agents
 
 ## PROCESSES: 38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.97 4.23 8.64
+load: 4.48 4.34 8.19

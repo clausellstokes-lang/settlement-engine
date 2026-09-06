@@ -1,13 +1,13 @@
-import re,sys,html,os
-for f in sorted(os.listdir('raw03')):
-    if not f.endswith('.html'): continue
-    s=open('raw03/'+f,encoding='utf-8',errors='replace').read()
-    s=re.sub(r'(?is)<(script|style|noscript)\b.*?</\1>',' ',s)
-    s=re.sub(r'(?s)<!--.*?-->',' ',s)
-    s=re.sub(r'(?s)<[^>]+>',' ',s)
-    s=html.unescape(s)
-    s=s.replace('’',"'").replace('‘',"'").replace('“','"').replace('”','"').replace('—','--').replace(' ',' ')
-    s=re.sub(r'[ \t\r\f\v]+',' ',s)
-    s=re.sub(r'\n\s*\n+','\n',s)
-    open('raw03/'+f.replace('.html','.txt'),'w',encoding='utf-8').write(s)
-    print(f, len(s))
+import re,html,sys
+def strip(fn):
+    s=open(fn,encoding='utf-8',errors='replace').read()
+    s=re.sub(r'(?is)<script.*?</script>','',s); s=re.sub(r'(?is)<style.*?</style>','',s)
+    s=re.sub(r'(?is)<!--.*?-->','',s)
+    s=re.sub(r'(?i)</(p|div|h[1-6]|li|br|tr|blockquote)>','\n',s); s=re.sub(r'(?i)<br[^>]*>','\n',s)
+    s=re.sub(r'<[^>]+>',' ',s); s=html.unescape(s)
+    s=re.sub(r'[ \t]+',' ',s); s=re.sub(r'\n[ \t]+','\n',s); s=re.sub(r'\n{3,}','\n\n',s)
+    return s
+if __name__=='__main__':
+    for f in sys.argv[1:]:
+        out=f.rsplit('.',1)[0]+'.txt'
+        t=strip(f); open(out,'w').write(t); print(out,len(t))

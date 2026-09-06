@@ -56,6 +56,11 @@ Non-human text (dev + ai-prompt) is **19.4%**.
 | `reachability` — the module is reachable from NO product surface at this sha | 48 (1.2%) |
 | `untraced` — no consumer found; these are ambiguous rows | 100 (2.6%) |
 
+**The strict floor.** If every `family-inference` row (509, all of them `reader`) were demoted to
+`ambiguous`, the reader-facing share would fall from 70.8% to **57.8%** (2,249 / 3,894). The
+reader-dominance finding — and the refutation of "mostly AI-layer prompts, design-token descriptions
+and dev notes" — survives at either bound. Pick the bound the corrected sentences should carry.
+
 ## The three files with the most reader-facing strings
 
 | file | reader | total |

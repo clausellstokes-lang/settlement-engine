@@ -3,13 +3,13 @@
  "name": "dnd",
  "angle": null,
  "tag": "i589-603",
- "lines": 39,
+ "lines": 67,
  "firstTs": "2026-09-06T18:31:13.228Z",
- "lastTs": "2026-09-06T18:32:30.776Z",
+ "lastTs": "2026-09-06T18:34:18.999Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 7
+  "Bash": 14
  },
  "urlsFetched": [
   "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
@@ -25,6 +25,6 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i589-603.json",
-  "exists": false
+  "exists": true
  }
 }

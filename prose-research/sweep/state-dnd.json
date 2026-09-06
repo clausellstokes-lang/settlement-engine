@@ -14320,6 +14320,429 @@
    "trueWording": "I get a much better feel for the town than I did for Waterdeep in Dragon Heist",
    "note": "Same Wayback raw capture. In the paragraph beginning 'All-in-all', exactly as the claim states, including the Dragon Heist attribution.",
    "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "514": {
+   "index": 514,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ghosts of Saltmarsh includes ten rumors that can be heard on the docks",
+   "note": "Live merricb.com is now a spam 'SULTANSLOT' site; recovered via Wayback raw capture 20230416034304id_. Byline merricb@yahoo.co.uk, May 22, 2019. Sentence appears word for word.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "515": {
+   "index": 515,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "although it's a long way from read-aloud text; it still should be paraphrased or roleplayed out",
+   "note": "Wayback raw capture 20220130065118id_ (live domain hijacked). Both limbs present: player-revealable remainder, and 'should be paraphrased or roleplayed out'.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "516": {
+   "index": 516,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "with the inhabitants described in more detail than I think necessary",
+   "note": "Same Wayback capture; verbatim in the paragraph on the published version of T1.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "517": {
+   "index": 517,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The villagers are presented (mostly) in the houses where they live",
+   "note": "Same capture, in the 'Wall of Text syndrome' paragraph; the parenthetical '(mostly)' matches the claim's 'mostly'.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "518": {
+   "index": 518,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It describes the founding of the Village of Hommlet, the rise of the Temple of Elemental Evil, and the fall of the latter",
+   "note": "Same capture, introduction paragraph. All three limbs (founding, rise, fall) present.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "519": {
+   "index": 519,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "details on laws, admin, taxes, taxis, landmarks, nobility and guilds",
+   "note": "Live page fetched raw. Section 'Chapters 9: Volo's Waterdeep Enchiridion': 'The final chapter... before we're given an overview of each of the city's wards' — supports 'final chapter' and 'before its wards'.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "520": {
+   "index": 520,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The enchiridion gives a very brief history, layout",
+   "note": "Live page fetched raw; sentence continues '(including the various wards...) and calendar of the city'.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "521": {
+   "index": 521,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "along with an introduction to the legal system ... and social norms",
+   "note": "Same sentence as 520; legal system and social norms are conjoined exactly as the claim states.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "522": {
+   "index": 522,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "game books that were written as if they were real-world sources from within the gaming settings",
+   "note": "DriveThruRPG live URL is Cloudflare-blocked (403 'Just a moment...'); recovered via Wayback raw capture 20210120014759id_. 'Introducing the Volo Guides' opens 'In the early 90s' and the Product Historian is named as Shannon Appelcline.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "523": {
+   "index": 523,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "those DMs could just say, \"Volo was wrong\"",
+   "note": "Same capture: 'he got to use an unreliable narrator... allowed him to create details without worrying about contradicting the readers' own campaigns'. Attribution 'He says' is to Greenwood, reported by Appelcline, as the claim states.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "524": {
+   "index": 524,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "skip topics by saying Volo had been kicked out of a locale",
+   "note": "Claim carries no quote field, so verbatim grading does not apply. Page: 'he could skip over some topics by saying simply that Volo had been kicked out of whatever locale Greenwood had decided not to write about.' Substance fully supported.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "525": {
+   "index": 525,
+   "verdict": "PARTIAL",
+   "trueWording": "he has Elminster state, in his preface to the book, \"I must warn ye...\"",
+   "note": "The quoted words are on the page verbatim and Elminster's preface is in-world, but the page presents the line as a statement within the preface; it never says the preface opens with it. Graded PARTIAL on that positional limb only.",
+   "unsupportedLimb": "that the warning opens the preface — the page does not place the line at the preface's start",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "526": {
+   "index": 526,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the first guidebook in Volo's famous series of in-depth, in-character looks at important parts of the Forgotten Realms",
+   "note": "Same Wayback capture, opening line of Product History. 'first', 'in-character looks', 'parts of the Forgotten Realms' all present.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "527": {
+   "index": 527,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Keep, as written is heaped with loving detail to almost no obvious purpose",
+   "note": "Live blogspot page fetched raw; section '1. Excessively Keep Focused', post dated Sunday, January 26, 2014, posted by Gus L.",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "528": {
+   "index": 528,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the keep is described as a series of rooms, with text conveyed in thick blocks",
+   "note": "Live WordPress page fetched raw; 'The first major roadblock' paragraph. Posted January 26, 2019 by Prince (Age of Dusk).",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "529": {
+   "index": 529,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "very much described in terms of components that can be interacted with",
+   "note": "Body para on the Keep: quote verbatim; continues 'with the wider existential, political or metaphysical implications left to the GM to interpret.' Raw HTML fetched (200).",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "530": {
+   "index": 530,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "feels like a living, breathing place, complete with a church, merchant caravans, guilds, a tavern",
+   "note": "Same paragraph; quote verbatim, and the living-place framing is the page's own ('But it also feels like a living, breathing place'). List continues 'a money-lender... prices for drinks listed etc.'",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "531": {
+   "index": 531,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But the NPCs have motivations and character traits",
+   "note": "Verbatim, inside the comment signed 'PrinceofNothing says: January 27, 2019 at 10:50 am', in his bracketed rebuttal under '[Mike Mearls review]' to summarised point '1. NPCs don't have names in Keep therefore the module is bad.' Author and comment-section location both confirmed.",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "532": {
+   "index": 532,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "359 pages of detailed information about keyed locations in the city",
+   "note": "Verbatim in the content walkthrough. Page adds 'and on other maps in the Ptolus \"package\"' - a widening the claim does not contradict. Author countzeroasl, Storytelling and Gaming, confirmed on page.",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "533": {
+   "index": 533,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It covers what it looks like as an everyday resident",
+   "note": "Verbatim. Sentence before: 'The next section is a deep dive into the \"feel\" of Ptolus and what it is like to live there.'",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "534": {
+   "index": 534,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the urbancrawl key doesn't represent all the information that you might prep about the city",
+   "note": "Verbatim, first sentence under the 'THE KEY' heading of 'Thinking About Urbancrawls - Part 4: Experimental City Hexes' (Jan 14, 2015); site author Justin Alexander confirmed on page.",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "535": {
+   "index": 535,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Rooms are described in detail for the DM. Detail that is meaningless and has no impact on the game",
+   "note": "Verbatim; the no-impact limb is the immediately following sentence. Post 'Curse of Strahd', posted March 14, 2016 by Bryce Lynch.",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "536": {
+   "index": 536,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Three sentences are used when one will do",
+   "note": "Verbatim, same paragraph; followed by 'Six are used when it needed two, or three.'",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "537": {
+   "index": 537,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The entries are so long that the important bits are lost",
+   "note": "Verbatim, same paragraph, immediately after the Wall of Text sentence.",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "538": {
+   "index": 538,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Here's a masterpiece of creative read-aloud writing!!! \"You find something on the ground.\"",
+   "note": "Verbatim inside the read-aloud paragraph, quoted from the adventure among other read-aloud examples; Bryce notes these are for a wandering-monster table.",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "539": {
+   "index": 539,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The most valuable part... is the detailed gazetteer describing the neighborhoods and prominent locations",
+   "note": "Verbatim; article title confirms the subject is 'D&D 5e's 2024 Dungeon Master's Guide'.",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "540": {
+   "index": 540,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The location descriptions are full of flavorful NPCs, background hooks",
+   "note": "Verbatim, next sentence after the gazetteer line; continues 'to draw players into the fabric of the city, and concrete reasons to visit each location.'",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "541": {
+   "index": 541,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The calendar is detailed with fictional names for the months and the days of the week, plus festival events",
+   "note": "Verbatim, in the cultures-and-world section; covers month names, weekday names and festivals.",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "542": {
+   "index": 542,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "From premise... to core material and a gazetteer, it serves two purposes",
+   "note": "Verbatim, in the article body above the 'Beth Rimmels' author bio; thread starter/byline 'brimmels' = Beth Rimmels, confirmed on page.",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "543": {
+   "index": 543,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in the 2014 book, Chapter One was about creating your own world",
+   "note": "Verbatim, in the '2014 vs. 2024' section of the body; continues 'and includes a section on creating your own campaign.'",
+   "fromFile": "verdicts-dnd-i529-543.json"
+  },
+  "544": {
+   "index": 544,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a booklet which offers in 96 pages what many books would have needed twice that to do",
+   "note": "Raw page fetched (HTTP 200). Quote appears word for word under 'GAZ3: The Principalities of Glantri / OVERALL', preceded by 'That economy is admirable-'. Byline 'Posted by Lowell Francis', dated Wednesday, April 11, 2012. All limbs supported.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "545": {
+   "index": 545,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "about nine of the major buildings detailed, including the garrison, inn, jeweler, church and general store",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in the paragraph beginning 'The village proper has...'. Hedge recorded: the page says 'about nine of the major buildings detailed', not a flat nine; the count itself is unchanged, so the limb stands. Posted October 7, 2011 by Bryce Lynch.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "546": {
+   "index": 546,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "decent sized rumor table, as is proper for a home base environment",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim; the full sentence reads 'We also get a decent sized rumor table, as is proper for a home base environment.' The claim renders 'environment' as 'settlement', a faithful paraphrase of the same referent (the village of White Dragon Run as home base).",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "547": {
+   "index": 547,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The village is a bit ... bland. The occupants all seem to be fine upstanding members of the community",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim. The 'faults' limb is supported by the immediately adjacent 'The village is a bit ... bland' and 'The NPC's, major & minor, just don't seem to have much personality to them.'",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "548": {
+   "index": 548,
+   "verdict": "PARTIAL",
+   "trueWording": "Two sentences: purple stone and crystal, then 'It is ruled by Lord Zavere and Lady Rill.'",
+   "unsupportedLimb": "that the key entry is a SINGLE sentence - the A2 CASTLE SHARD entry runs to two sentences, the second naming its rulers",
+   "note": "Raw page fetched (HTTP 200), post dated January 14th, 2015. The quoted fragment 'A huge castle made from purple stone' is verbatim in THE KEY at entry A2. But the full entry reads: 'A huge castle made from purple stone, housing a massive crystal with strange magical properties. It is ruled by Lord Zavere and Lady Rill.' - two sentences, not one. Material (stone), colour (purple) and contents (the crystal) are all in the first sentence, so that limb holds; the 'single sentence' limb does not. Neighbouring entries (A1, A3, B5) are likewise one-to-three sentences, so brevity generally is supported - the specific count is not.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "549": {
+   "index": 549,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Instead of writing the conclusion, you are writing the clue",
+   "note": "Raw page fetched (HTTP 200), dated October 30th, 2020. Quote verbatim in the section headed WRITING THE BOOK; full sentence continues 'which will let the players figure out the conclusion.' All limbs supported.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "550": {
+   "index": 550,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is often useful if the key information is not what the book is primarily about",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in WRITING THE BOOK, opening 'Along the same lines, it is often useful if...'. The claim's 'often' matches the page's 'often useful'. Page adds a qualifying parenthetical ('This is not universally true'), which the claim's 'often' already accommodates.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "551": {
+   "index": 551,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Often I achieve this effect by presenting the information in an oblique or mythic manner",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in WRITING THE BOOK. First person 'Often I achieve this effect by...' supports the claim's 'often presents'.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "552": {
+   "index": 552,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "these handouts more or less serve as an executive summary for a book that doesn't actually exist",
+   "note": "Raw page fetched (HTTP 200). The supplied quote fragment ends at the curly apostrophe in 'doesn't'; the full page sentence is 'In practice, these handouts more or less serve as an executive summary for a book that doesn't actually exist.' Found in the body paragraph on what lore books are, as cited. All limbs supported.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "553": {
+   "index": 553,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "describe the experience of reading the book ... the physicality of the book itself",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in TIPS & TRICKS: 'As I mentioned before, describe the experience of reading the book.' The 'physical' limb is carried by the same passage ('This can be the physicality of the book itself') and by the earlier 'I will usually also discuss the actual physical interaction with the book.' Note the page's advice is broader than physicality alone - it also covers sequencing and revelation of knowledge - so the claim narrows rather than overstates.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "554": {
+   "index": 554,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is rather difficult to separate what is meant to be scholarship from fancy",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in the first block-indented example handout ('This slim, peculiar volume purports to be \"a dream woven from the true and factual accounts of many diverse peoples of the world,\" but it is rather difficult to separate what is meant to be scholarship from fancy.'), which Alexander presents as his own demonstration text. All limbs supported.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "555": {
+   "index": 555,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most of the original information about the Yawning Portal is actually contained in the NPC write-up of its proprietor",
+   "note": "Raw page fetched (HTTP 200), dated March 31st, 2022. Quote verbatim in THE EARLY DAYS, immediately after the FR1 key line '4. The Yawning Portal (inn) - See Durnan, p. 17', so the FR1 Waterdeep and the North limb and the proprietor (Durnan) limb are both anchored. Page says 'most of the original information', i.e. the earliest material, which is FR1's.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "556": {
+   "index": 556,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "on the door itself, someone has chalked 'Come Ye Inn'",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in the bulleted list of FRE3 Waterdeep details in THE EARLY DAYS: 'A signboard above the \"round door\" reads \"The Yawning Portal,\" and \"on the door itself, someone has chalked 'Come Ye Inn.'\" (sic)'. The 'welcoming visitors' limb is the plain sense of the chalked words themselves (a pun on 'come ye in'); the page quotes them without separately glossing them as a welcome.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "557": {
+   "index": 557,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Portal is a rambling, dingy, blue-tapestried building of smoothly carved pillars and paneling",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in the bulleted list of new details Ruins of Undermountain (1991) adds, in THE EARLY DAYS. The claim drops 'smoothly' from 'smoothly carved pillars'; nothing else differs. All limbs supported.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "558": {
+   "index": 558,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Details of the inn itself have been omitted from these pages to allow DMs free rein in customizing this rambling, shady place",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim inside the block quotation from the Ruins of Undermountain boxed set in THE EARLY DAYS, which Alexander introduces as 'which rather hilariously notes:'. All limbs supported.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "589": {
+   "index": 589,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Do any of your encounters contain elements better represented in a map rather than strictly described in the text?",
+   "note": "Raw HTML fetched with a browser UA (HTTP 200). Byline 'by Shawn Merwin', 'Oct 9, 2019', title matches. Quote exact in the 'Handouts, Maps, and Appendices' section; posed as a checklist question to the writer, exactly as claimed.",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "590": {
+   "index": 590,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "give a less-detailed description that relies on place, and more on the resources",
+   "note": "Raw page (HTTP 200), 'Let's Design an Adventure: Thinking Like a Designer', by Shawn Merwin, Mar 25, 2020. Sandbox limb exact ('Are you writing more of a sandbox-style adventure...'); kobold-ambush example says the DM can then set it 'in the mountain pass, the city streets, or the abandoned mines'. Caution for downstream use: the excerpted fragment stops mid-sentence and reads as if description relies ON place; the full sentence (apparently missing a 'less') puts the weight on the kobolds' resources, which is what the claim asserts.",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "591": {
+   "index": 591,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "make sure the layout you employ serves the DM who will be running your content",
+   "note": "Raw page, 'Layout' section: 'In the end, though, make sure the layout you employ serves the DM who will be running your content. How much flipping between pages will they be forced to do?' The at-the-table limb is carried by the page-flipping/usability sentences that follow.",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "592": {
+   "index": 592,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When D&D co-creator Gary Gygax created his first dungeon under Castle Greyhawk, he usually wrote a 1-line note for each room",
+   "note": "Raw HTML fetched direct (HTTP 200); the /tag/ URL serves the full post 'How much description should a dungeon key include?', 21 Nov 2016, by David Hartlage. Quote exact in the opening paragraph. 'usually ... for each room' supports 'most rooms'; the post's frame is the dungeon key, and it adds that Gygax shared the notes with Rob Kuntz.",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "593": {
+   "index": 593,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "all they desired was a very skeletal framework with the more time-consuming level details worked out",
+   "note": "Raw page, 'Tegel Manor and minimal descriptions': Bledsaw in Dragon magazine issue 27 - 'we had some bad feedback which indicated that judges felt that the actual description of dungeons was their domain and all they desired was a very skeletal framework'. Bledsaw is named a Judges Guild founder; 'judges' is the referee term, so 'referees told him' is supported.",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "594": {
+   "index": 594,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gary's longer descriptions set the pattern for virtually every adventure to follow",
+   "note": "Raw page, 'Gary Gygax sets the standard': 'Gary started publishing adventures with G1 Steading of the Hill Giant Chief (1978). He included generous descriptions for every location' then the quoted sentence. Title, year and credit limbs all on the page.",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "595": {
+   "index": 595,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This description takes a good, middle sentence and pads it like a school paper stretched to an assigned length",
+   "note": "Raw page, 'Longer descriptions', on the 1989 Gamescience Tegel B9 bedroom; the next sentence supplies the convention limb: 'The custom of longer description encourages authors to write something even when they have little to add.'",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "596": {
+   "index": 596,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A location's purpose in the game should also figure into the length of its descriptions ... no one needs an item-by-item inventory of her kitchen",
+   "note": "Raw page, 'Matching description to a location's purpose'. Both limbs exact: purpose governs length, and the sheriff example ('If the player characters meet the sheriff about a wanted poster').",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "597": {
+   "index": 597,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "An avalanche of description does more than squander page count. It buries many great details might actually enter play",
+   "note": "Raw page, same section; the following sentence is the Victor Wachter example buried in a page-long workroom description inside a 5-page mansion. (The source sentence carries a typo, 'many great details might actually enter play', reproduced here verbatim.)",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "598": {
+   "index": 598,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "boxed text consolidates and identifies features that require description",
+   "note": "Raw page, 'Boxed, read-aloud text': 'Even though I seldom read-aloud text verbatim, boxed text consolidates and identifies features that require description. I like box text, but not every location needs it.' - a defence with a limit, as claimed.",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "599": {
+   "index": 599,
+   "verdict": "PARTIAL",
+   "trueWording": "His follow-up, Storm King's Thunder, omits almost all read-aloud text",
+   "unsupportedLimb": "the parenthetical '(2016)' publication year for Storm King's Thunder - the page dates neither adventure",
+   "note": "Quote exact and the contrast limb is exact too ('Curse of Strahd includes it for every location'), but the page gives no publication year for Storm King's Thunder; its only 2016 dates are the post's own date (November 21, 2016) and archive-sidebar labels. The year is independently correct but is not evidence from this page.",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "600": {
+   "index": 600,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Curtis explains that the format provides 'the minimum amount of information needed to run the dungeon'",
+   "note": "Raw page, 'The influence of one-page dungeons': 'Michael Curtis, author of the well-reviewed Stonehell megadungeon follows a style pioneered for one-page dungeons.' Quote continues '...allowing the referee to customize the adventure to his own (and his players') tastes.'",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "601": {
+   "index": 601,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Descriptions should focus on telling details and plot-critical information-details I can use in play",
+   "note": "Raw page, 'The ideal dungeon description'; stated as Hartlage's own prescription for a dungeon key, followed by 'Don't bury the evocative bits in lavish descriptions of sleeping pallets and rubbish.'",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "602": {
+   "index": 602,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A good DM details more than simply what PCs see. Don't forget noises ... smells ... and tactile senses",
+   "note": "Raw HTML fetched direct (HTTP 200); the /tag/ URL serves the full post 'From B1 to Pinebrook...', 30 January 2024, by David Hartlage. Heading 'B11 King's Festival (1989) by Carl Sargent', subhead 'Description and the senses', and the post says TSR started the new set with it - year, author and publisher limbs all on the page.",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  },
+  "603": {
+   "index": 603,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "giving them an accent or favorite saying, showing them with a favorite thing like a lucky coin or pet cat, or adding a personality-related adjective",
+   "note": "Raw page, section 'H1 Keep on the Shadowfell (2008) by Bruce Cordell and Mike Mearls'. The quoted adjective run is exact and continues 'sly, nervous, dumb, zealous, and so on'; Hartlage paraphrases with the list quoted, exactly as the claim's source line states.",
+   "fromFile": "verdicts-dnd-i589-603.json"
   }
  },
  "mergedAt": "see autosave.log",

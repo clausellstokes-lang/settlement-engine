@@ -1013,5 +1013,79 @@
    "note": "Raw page (live URL, HTTP 200). The quoted fragment is verbatim, and the sidebar/Phandalin limbs hold, but the claim truncates the reviewer's own 'nothing beyond X and Y' to 'nothing beyond X', overstating the emptiness of the sidebar.",
    "fromFile": "verdicts-dnd-i499-513.json"
   }
+ },
+ {
+  "index": 525,
+  "feature": "dialogue register",
+  "claim": "Elminster's in-world preface to Volo's Guide to Waterdeep opens by warning the reader.",
+  "source": "Ed Greenwood writing as Elminster, preface to Volo's Guide to Waterdeep (TSR, 1993), quoted in Appelcline's Product History",
+  "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+  "quote": "I must warn ye",
+  "page": "Product History, quoting Elminster's preface",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1993",
+  "routeHint": "Wayback raw capture 20210120014759id_",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-register",
+  "verdict": {
+   "index": 525,
+   "verdict": "PARTIAL",
+   "trueWording": "he has Elminster state, in his preface to the book, \"I must warn ye...\"",
+   "note": "The quoted words are on the page verbatim and Elminster's preface is in-world, but the page presents the line as a statement within the preface; it never says the preface opens with it. Graded PARTIAL on that positional limb only.",
+   "unsupportedLimb": "that the warning opens the preface — the page does not place the line at the preface's start",
+   "fromFile": "verdicts-dnd-i514-528.json"
+  },
+  "fullSentence": true
+ },
+ {
+  "index": 548,
+  "feature": "place and institution description",
+  "claim": "Justin Alexander's urbancrawl key entry for a Ptolus castle is a single sentence of material, colour and contents.",
+  "source": "Justin Alexander, The Alexandrian, urbancrawl series part 4",
+  "url": "https://thealexandrian.net/wordpress/36508/roleplaying-games/thinking-about-urbancrawls-part-4-experimental-city-hexes",
+  "quote": "A huge castle made from purple stone",
+  "page": "THE KEY, entry A2 CASTLE SHARD",
+  "kind": "analysis",
+  "polarity": "applies",
+  "date": "2015",
+  "routeHint": "direct fetch with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high — the words are Alexander's own key entry, adapted from Monte Cook's Ptolus",
+  "angle": "place-register",
+  "verdict": {
+   "index": 548,
+   "verdict": "PARTIAL",
+   "trueWording": "Two sentences: purple stone and crystal, then 'It is ruled by Lord Zavere and Lady Rill.'",
+   "unsupportedLimb": "that the key entry is a SINGLE sentence - the A2 CASTLE SHARD entry runs to two sentences, the second naming its rulers",
+   "note": "Raw page fetched (HTTP 200), post dated January 14th, 2015. The quoted fragment 'A huge castle made from purple stone' is verbatim in THE KEY at entry A2. But the full entry reads: 'A huge castle made from purple stone, housing a massive crystal with strange magical properties. It is ruled by Lord Zavere and Lady Rill.' - two sentences, not one. Material (stone), colour (purple) and contents (the crystal) are all in the first sentence, so that limb holds; the 'single sentence' limb does not. Neighbouring entries (A1, A3, B5) are likewise one-to-three sentences, so brevity generally is supported - the specific count is not.",
+   "fromFile": "verdicts-dnd-i544-558.json"
+  },
+  "fullSentence": true
+ },
+ {
+  "index": 599,
+  "feature": "edition and house style",
+  "claim": "Hartlage observes that Storm King's Thunder (2016) omits almost all read-aloud text, unlike Curse of Strahd which boxes every location.",
+  "source": "David Hartlage, DMDavid, 21 Nov 2016",
+  "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+  "quote": "omits almost all read-aloud text",
+  "page": "Boxed, read-aloud text",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2016-11-21",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "angle": "scholarship-history",
+  "verdict": {
+   "index": 599,
+   "verdict": "PARTIAL",
+   "trueWording": "His follow-up, Storm King's Thunder, omits almost all read-aloud text",
+   "unsupportedLimb": "the parenthetical '(2016)' publication year for Storm King's Thunder - the page dates neither adventure",
+   "note": "Quote exact and the contrast limb is exact too ('Curse of Strahd includes it for every location'), but the page gives no publication year for Storm King's Thunder; its only 2016 dates are the post's own date (November 21, 2016) and archive-sidebar labels. The year is independently correct but is not evidence from this page.",
+   "fromFile": "verdicts-dnd-i589-603.json"
+  }
  }
 ]
