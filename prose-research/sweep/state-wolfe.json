@@ -23305,12 +23305,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "545": {
+   "index": 545,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the novel is a failure, shadowy and inconclusive",
+   "note": "eNotes live 403; read via Wayback raw capture 20250317060057id_. Quote is verbatim in the review's penultimate sentence, prefaced 'But all in all'. Page citation confirms F&SF Vol. 40, No. 4, April 1971, p. 69, reprinted in CLC. Russ adds that such books are usually called 'promising' and predicts Wolfe will rise far above Ares.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
   "546": {
    "index": 546,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "547": {
+   "index": 547,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not the baroque weirdness of its textures",
+   "note": "eNotes live 403; read via Wayback raw 20250316194237id_. Verbatim in the third body paragraph: it is 'this very familiarity', not the baroque weirdness of its textures, that makes Sword of the Lictor so powerful. Referent note: the familiarity is immediately explained by Wolfe never losing sight of his sources and mythical resonances, and by his words sounding like forgotten friends, so the claim's 'familiarity of Wolfe's sources' is a fair but glossed reading. Page has 'its textures'; claim says 'his'. Citation: Fantasy Newsletter Vol. 4 No. 12, Dec 1981, pp. 16-17, 32.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
+  "548": {
+   "index": 548,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "neologisms mingle with resurrected antique words",
+   "note": "Same Wayback capture. Verbatim in the second body paragraph (marked p. 16 territory, before the '(pp. 16-17)' marker), describing Wolfe's 'language of startling alienness'. Page continues 'and chimerical hybridizations of Latin, Greek, Germanic roots' - the claim drops 'chimerical' but is otherwise exact.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
   },
   "549": {
    "index": 549,
@@ -23333,12 +23354,47 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "552": {
+   "index": 552,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "may have seemed picaresque, somewhat random in nature",
+   "note": "eNotes live 403; read via Wayback raw 20241005181348id_. Verbatim in the paragraph following the '(pp. 1-2)' marker. Two context points: 'the first three volumes' is the CLC editor's bracketed gloss (page reads Severian's [experiences in the three volumes preceding The Citadel of the Autarch]), and Clute's sentence ends 'though colorful enough' before he insists nothing in the narrative is accidental. Source is Book World - The Washington Post, January 30, 1983.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
+  "553": {
+   "index": 553,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It was a very hard read, the plots did not link",
+   "note": "Live sffworld page fetched with a browser UA (HTTP 200). Post #1, article post-55366, author Belgarion, datetime 2002-09-25T13:29:12+0100 - matches the cited date. Quote verbatim; the sentence continues 'very well' plus a typo'd clause about looking like a short collection of stories.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
+  "554": {
+   "index": 554,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "was basically a collection of short stories",
+   "note": "Same live page and same post #1 (post-55366, Belgarion, 2002-09-25). Verbatim in the sentence naming the quartet The Book of the New Sun, which continues 'even though the whole plot was based around Severian in Chronicle Order'.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
   "555": {
    "index": 555,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "556": {
+   "index": 556,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I had the feeling that I missed a lot",
+   "note": "Same live page. Post #13, article post-55425, author 'fortytwo', 2002-09-25T18:24:54+0100 - post number, handle and date all match. Verbatim; the sentence opens 'It's quite a while since I read the series and it held my interest, but'. The poster's gender is not stated on the page (the claim's 'his' is an assumption); he/she adds an intention to re-read.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
+  "557": {
+   "index": 557,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the style is one of the key selling-points",
+   "note": "Same live page. Post #16, article post-55509, author jfclark, 2002-09-25T22:53:29+0100 - all three match. Verbatim (page hyphenates 'selling-points'), and the immediately preceding sentence is the concession that Wolfe's style in these books could turn some readers off.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
   },
   "558": {
    "index": 558,
@@ -23368,12 +23424,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "562": {
+   "index": 562,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't think I would recommend this book even to someone",
+   "note": "Live eyrie.org fetch, HTTP 200. Verbatim as the opening sentence of the final paragraph, which continues 'who read the original series'. Footer reads 'Reviewed: 2004-09-10', matching the cited date; rating 5 out of 10. One qualification the claim omits: the paragraph ends with an exception - read it if you are going on to an analysis such as Borski's Solar Labyrinth.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
   "563": {
    "index": 563,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "564": {
+   "index": 564,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not sure that this series quite lived up to the promise",
+   "note": "Live eyrie.org fetch, HTTP 200. Verbatim in the final substantive paragraph, opening 'In the end, I'm not sure...' and continuing 'of its beginning'. Footer 'Reviewed: 2004-06-28' matches the cited date. The same sentence balances it with 'but at the same time it didn't entirely let it down', so the verdict is mixed rather than negative.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
+  "565": {
+   "index": 565,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "people who don't seem to understand what's going on yet declare",
+   "note": "Live blogspot fetch, HTTP 200. Verbatim in the opening paragraph (curly apostrophes as quoted), in the sentence beginning 'Half of the reviews of The Book of the New Sun are'. Byline Brian Murphy, dated March 29, 2025, post title 'Gene Wolfe is intimidating. The Knight is not. I also recommend smoked brisket.' Page has 'are people who'; the claim's 'are by people who' is a grammatical smoothing. Murphy's one-word reaction is 'Weird.'",
+   "fromFile": "verdicts-wolfe-i545-598.json"
   },
   "566": {
    "index": 566,
@@ -23430,6 +23507,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "574": {
+   "index": 574,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "being dense, labyrinthine, and outright incomprehensible at times",
+   "note": "Live tachy.org fetch, HTTP 200. Verbatim in the third body paragraph. Precise page framing: the book 'doesn't seem to be discussed much outside of a few enclaves of hardcore SF/F readers, probably due to its reputation of' being dense etc. So the attribution is hedged ('probably') and is about how little the book is discussed outside a hardcore-reader niche; 'narrow readership' is a close paraphrase of that, not the page's own noun.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
+  "575": {
+   "index": 575,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "described as one-dimensional and bewildering",
+   "note": "Same live tachy.org page, same third paragraph, sentence beginning 'Characters are often'. Verbatim, and the reviewer is reporting others' descriptions rather than his own view - the paragraph after it says his own experience was overwhelmingly positive. Same sentence also reports the plot being called a straightforward hero's journey.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
   },
   "576": {
    "index": 576,
@@ -23515,6 +23606,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "588": {
+   "index": 588,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "so neat it *ought* to be true. But it can't be.",
+   "note": "lists.urth.net timed out on the live fetch (curl 28, twice); read via Wayback raw capture 20210416053644id_. Verbatim, asterisks included, in the first paragraph of Lackey's own text, directly under the quoted claim that 'We're given another explanation for the missing guard in the BOOK OF THE SHORT SUN' - so the cross-book reading is exactly what he rejects. Header: Roy C. Lackey, Tue Sep 5 12:52:16 PDT 2006, thread '(urth) Close reading: Torturer chapter I'. He refutes it on seasons: swimming weather versus the icy winter of Triskele and Valeria.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
   "589": {
    "index": 589,
    "verdict": "SKIPPED_TRIAGE",
@@ -23578,6 +23676,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "598": {
+   "index": 598,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Also in this chapter the first (but not last)",
+   "note": "Live fetch timed out; read via Wayback raw capture 20210416053655id_. Verbatim as the opening of the message's final content paragraph, which continues '\"tableau\" consisting of a \"beast\" man, an \"armed\" man, and a woman' - beast, armed and woman each in scare quotes. Header: nastler, Wed Sep 6 00:10:21 PDT 2006, thread '(urth) Close Reading: Torturer Chapter I', so 'this chapter' is chapter one; '(but not last)' carries the recurrence.",
+   "fromFile": "verdicts-wolfe-i545-598.json"
+  },
   "599": {
    "index": 599,
    "verdict": "SKIPPED_TRIAGE",
@@ -23599,12 +23704,54 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "602": {
+   "index": 602,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Wolfe almost certainly didn't invent Apheta\"",
+   "note": "Raw page reached via Wayback raw capture (20210416053659id_) after lists.urth.net timed out live. Message 002972, Dan'l Danehy-Oakes, Thu Sep 7 18:42:02 PDT 2006, '(urth) Chapter I'. Quote is verbatim in the message body. Context supports every limb: replying to Wesley Parsons's suggestion that the graveyard fight may foreshadow the new sun, he calls it 'ex post facto foreshadowing' and says the invention waited until Hartwell prevailed upon Wolfe to write the sequel - i.e. the resonance is granted, the advance planting denied.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
+  "603": {
+   "index": 603,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"ex post facto foreshadowing\" happens quite often",
+   "note": "Raw page via Wayback raw capture (20210416053631id_); live host timed out. Message 002985, from stilskin (acronus at yahoo.com), signed 'Paul', Fri Sep 8 04:39:36 PDT 2006. Quote verbatim in body paragraph 1. Working-writer limb supported by the opening clause about being a writer who has discussed the point with many other writers; the 'unplanned' limb by the following sentence crediting Stephen King's 'boys in the basement' producing beyond what the author has consciously planned; 'fiction writing' by the closing line about the delights of writing fiction.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
   "604": {
    "index": 604,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "605": {
+   "index": 605,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the first chapter has only four passive sentences",
+   "note": "Live www.reddit.com returned a 'Welcome to Reddit' gate; old.reddit.com gave the same interstitial and the .json route 403'd, so the raw old-reddit rendering was read from the Wayback raw capture (20240416175339id_). Quote verbatim in the passive-voice bullet. Two qualifiers the claim does not carry: the poster attributes the number to 'an online checker I used' (he says grammar is not his strong point and asks for a precise count), and the same sentence adds 'only two if you exclude dialogue' - his own comparison chart lists 2 passive clauses for The Shadow of the Torturer.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
+  "606": {
+   "index": 606,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there were 30 in the first chapter",
+   "note": "Same Wayback raw capture of the post. Quote verbatim in the adverbs bullet, which opens by saying he did a count of words ending in '-ly'. Every limb supported: same reader, 30, -ly words, first chapter.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
+  "607": {
+   "index": 607,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "out of a little under 3200 words",
+   "note": "Same Wayback raw capture. Quote verbatim in the adverbs bullet, immediately after the 30 figure, used to derive 'so under 1%'. Chapter-length limb supported.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
+  "608": {
+   "index": 608,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "About 85 words end in -ing",
+   "note": "Same Wayback raw capture. Quote verbatim as the participles bullet of the first-chapter analysis list; the bullet continues that not all are present participles, which make up about 2% of all words. 'First chapter' supported by the list's stated scope; the later chart's ~60 is the present-participle subset, not the -ing count.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
   },
   "609": {
    "index": 609,
@@ -23613,12 +23760,40 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "610": {
+   "index": 610,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "15 words per sentence average; longest sentence 96 words",
+   "note": "Same Wayback raw capture; both figures appear verbatim in one sentence of the metrics paragraph (quoted here in condensed form to stay under the twelve-word cap). The poster prefixes it with checking a few other metrics with online tools and the word 'apparently'.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
+  "611": {
+   "index": 611,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "my average sentence was twice as long as Gene's",
+   "note": "Same Wayback raw capture. Quote verbatim in the imitation paragraph listing 'the biggest differences I found'. The deliberate-imitation limb is supported by the preceding paragraph, where he says he tried writing the beginning of a book in a deliberately Wolfean style with a narrator based on Severian.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
+  "612": {
+   "index": 612,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I used 14 times more passive clauses",
+   "note": "Same Wayback raw capture. Quote verbatim in the imitation paragraph. The 'than the original chapter' limb is carried by the sentence's baseline (the preceding clause compares to Gene's) and confirmed by his chart: The Shadow of the Torturer 2 passive clauses versus his pastiche 'The Shadow of the Gene' 28, exactly 14x.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
   "613": {
    "index": 613,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "614": {
+   "index": 614,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Don't take this as factually precise",
+   "note": "Same Wayback raw capture. Quote verbatim in the chart preamble, where he calls the chart rough and made from his approximate and subjective estimates, and adds 'just a general picture'. The warning is anchored to the chart, though he hedges the in-text figures too ('as far as I can tell', 'apparently').",
+   "fromFile": "verdicts-wolfe-i602-628.json"
   },
   "615": {
    "index": 615,
@@ -23662,6 +23837,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "621": {
+   "index": 621,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as if Proust had written I, Claudius",
+   "note": "Live cwhowell.com fetched raw (HTTP 200, 64 KB), article 'The Book of the New Sun Is the Dark Souls of Books' by C.W. Howell, Jul 23 2023. The full quoted phrase, including that it was set in space, is verbatim in the paragraph collecting other readers' attempts to describe the novel; attribution to Michael Dirda is on the page, and Howell is relaying it alongside Disch and an Amazon reviewer.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
+  "622": {
+   "index": 622,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one a cultivated reader can read with pleasure and later reread",
+   "note": "Same raw cwhowell.com page. Quote verbatim, introduced as what Wolfe related in his essay 'Sun of Helioscope' about what a great story is; the sentence in the surrounding paragraph on content consumption attributes it to Gene Wolfe. One omission, not a contradiction: the page's phrase continues past 'later reread' with an intensifier the claim drops.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
   "623": {
    "index": 623,
    "verdict": "SKIPPED_TRIAGE",
@@ -23676,12 +23865,76 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "625": {
+   "index": 625,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There is no revising print",
+   "note": "Live ultan.org.uk fetched raw (HTTP 200, 72 KB), 'Gene Wolfe's time at Plant Engineering', Nigel Price, 27 July 2013. Quote is verbatim as the opening sentence of Wolfe's written reply, and the very next sentence carries the 'out for all time' limb.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
+  "626": {
+   "index": 626,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I was actually a senior editor on the staff",
+   "note": "Same raw ultan.org.uk page. Quote verbatim in Wolfe's reply, immediately after his statement that he has never been able to catch and correct the assertion that he was editor of Plant Engineering. The 'printed' qualifier the claim adds is carried by the two preceding sentences about print being unrevisable, and by the article's framing that biographical sources describe him as 'the editor'.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
   "627": {
    "index": 627,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "628": {
+   "index": 628,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "meaning write the articles and take the pictures",
+   "note": "Same raw ultan.org.uk page. Quote verbatim in Wolfe's reply, glossing 'supply' in his statement that senior editors had to supply cover articles; the same sentence adds a cover picture that could pass the art director, and 'two or three of those a year'. Every limb supported.",
+   "fromFile": "verdicts-wolfe-i602-628.json"
+  },
+  "629": {
+   "index": 629,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "none of my magazine articles have been reprinted anywhere",
+   "note": "Raw page ultan.org.uk/plant-engineering fetched (200, browser UA). Quote verbatim in Wolfe's closing written reply to Nigel Price; Wolfe prefaces it with a 'to the best of my knowledge' hedge the claim drops, and the framing paragraph ties the articles to Plant Engineering back issues.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "630": {
+   "index": 630,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "worked (1972 – 1984) as an editor",
+   "note": "Raw page fetched. Opening paragraph, byline 'By Nigel', 27 July 2013: Wolfe 'worked (1972 – 1984) as an editor for the technical magazine Plant Engineering'. En dash matches; every limb supported.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "631": {
+   "index": 631,
+   "verdict": "PARTIAL",
+   "trueWording": "senior editor of Plant Engineering magazine from 1972 to 1986",
+   "note": "Raw page plantengineering.com/gene-wolfe-1931-2019 fetched (200). Opening line of Bob Vavra's obituary carries the quote word for word, so the 1972–1986 dating limb holds; the comparative limb is arithmetically wrong against the 1984 verified at index 630.",
+   "unsupportedLimb": "the arithmetic limb 'four years later than the terminal date Ultan's Library gives' — 1986 is TWO years after Ultan's 1984, not four",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "632": {
+   "index": 632,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which was good and fun and taught me a lot",
+   "note": "Raw blogspot reprint fetched (200). Header confirms Lawrence Person, Nova Express Vol 5 No 1, Fall/Winter 1998, posted 25 April 2021. Quote verbatim in the Plant Engineering answer: 'I also got to be the Letters to the Editor editor, which was good and fun and taught me a lot of stuff'; the Plant Engineering limb is fixed by LP's question and Wolfe's 'on the staff of Plant Engineering magazine'.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "633": {
+   "index": 633,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He's been my principal editor over the years",
+   "note": "Same raw page. Q: 'Who are the best editors you've worked with over the years?' A: 'Oh, David Hartwell, obviously. He's been my principal editor over the years.' Hartwell named first and called principal editor: both limbs supported. Straight apostrophe on the page, as in the claim.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "634": {
+   "index": 634,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Damon Knight would have to come in second",
+   "note": "Same answer, next sentence: 'Other than David Hartwell, Damon Knight would have to come in second.' The 'after Hartwell' limb is explicit in 'Other than David Hartwell'.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
   },
   "635": {
    "index": 635,
@@ -23704,6 +23957,49 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "638": {
+   "index": 638,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "at least three drafts, occasionally as many as 10",
+   "note": "Raw text file at gwern.net fetched (200), full Washington Post Book World piece of 30 January 1983. Paragraph 3: 'Every one of his carefully wrought stories and novels undergoes at least three drafts, occasionally as many as 10.' The 'every one' limb is on the page.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "639": {
+   "index": 639,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "buys some 25 free-lanced articles a year",
+   "note": "Same raw text, paragraph 2: 'There he edits, buys some 25 free-lanced articles a year, and writes a major cover story every few months', with 'there' being Plant Engineering Magazine in Barrington, Illinois.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "640": {
+   "index": 640,
+   "verdict": "PARTIAL",
+   "trueWording": "writes a major cover story every few months",
+   "note": "Raw text fetched. The quotation and the 'for Plant Engineering' limb are verbatim and supported in paragraph 2. The concurrency with The Book of the New Sun is a reasonable inference from his seven years' writing overlapping the job, but the page does not state it.",
+   "unsupportedLimb": "the temporal limb 'while writing The Book of the New Sun' — the page reports the cover stories in the present tense of the January 1983 interview, when Wolfe says he has finished the first draft of The Urth of the New Sun and is at work on short stories; it never dates the cover stories to the tetralogy's writing",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "641": {
+   "index": 641,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Until I mail a manuscript out I'm never sure",
+   "note": "Same raw text, paragraph 3, Wolfe in his own voice: 'Until I mail a manuscript out I'm never sure that I'm through with it.'",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "642": {
+   "index": 642,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "when he grew me from a bean",
+   "note": "Same raw text, paragraph on Knight: 'That's what I meant when I dedicated The Fifth Head of Cerberus to Damon in memory of when he grew me from a bean.' Both limbs — the dedication and what it commemorates — are on the page.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "643": {
+   "index": 643,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a mentor to many contemporary science fiction writers",
+   "note": "Same raw text, same paragraph, in Dirda's reporting voice inside dashes: 'In 1967 Damon Knight--a mentor to many contemporary science fiction writers-- published Wolfe's third story'.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
   "644": {
    "index": 644,
    "verdict": "SKIPPED_TRIAGE",
@@ -23718,12 +24014,61 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "646": {
+   "index": 646,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Knight liked the story but not its double-column format",
+   "note": "Raw wolfewiki.com Stories.TripTrap fetched (200). Section 'A note about the writing of the story', quoting Contemporary Authors Autobiography Series Vol. 9. The second limb is the page's own continuation: 'asked me to break it up into conventional skips from astronaut to alien and back to astronaut'.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "647": {
+   "index": 647,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "marked to show the points at which he felt",
+   "note": "Same section: 'Knight returned Trip Trap marked to show the points at which he felt the switches from one letter to the other should be made.' Every limb of the claim sentence, including 'from one letter to the other', is the page's wording.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "648": {
+   "index": 648,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I spent a couple of hours trying to improve",
+   "note": "Same section, next sentence: 'I spent a couple of hours trying to improve on them and found I could not...' — 'them' being Knight's marked switch points from the preceding sentence.",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  },
+  "649": {
+   "index": 649,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "editorial relationship for the majority of my career",
+   "note": "Fuller Award program PDF fetched raw and pdftotext-extracted; Hartwell tribute (p.17-18 of the tributes section). Sentence names Aldiss, Heinlein, Herbert, Dick, then singles Wolfe out as the longest editorial relationship of his career. Quote present word for word.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "650": {
+   "index": 650,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "part of my reputation as an editor derives",
+   "note": "Same Hartwell tribute, sentence immediately following the one behind 649; it completes with the fact that he is Wolfe's editor. Verbatim on the raw PDF text.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
   "651": {
    "index": 651,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "652": {
+   "index": 652,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "what I was doing well (Dialogue! Character!)",
+   "note": "Ultan's Library page fetched raw. Paragraph beginning 'And after I sent my chapters, I received a letter' lists keen insight, encouragement, the parenthesis quoted, and 'most importantly, stuff I needed to work on' - the fault limb, expanded next sentence as her habit of interrupting dialogue with infodumps ('lumps of prose like uncooked dumplings'). Every limb supported.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "653": {
+   "index": 653,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I can read it, but I can't promise to say anything",
+   "note": "Raw page, the dinner paragraph: she asks if he will read her novel, his face 'got very careful indeed', and he gently says the quoted line, which continues 'about it'. Both limbs - agreeing to read, refusing to promise comment - are on the page.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
   },
   "654": {
    "index": 654,
@@ -23738,6 +24083,83 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "656": {
+   "index": 656,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "(Gene told me he does too)",
+   "note": "Raw page, late paragraph: 'I still overwrite my early drafts (Gene told me he does too)'. The overwriting-early-drafts limb is Cooney's own clause the parenthesis attaches to, so Wolfe's 'too' carries it.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "657": {
+   "index": 657,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Scrub her face. Give her a new dress.",
+   "note": "Raw page, closing section: prefaced by 'And when it's done... look at your story again' and followed by 'And send her back out into the world' - the finished-story limb and the sending-out-again limb both explicit.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "658": {
+   "index": 658,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "are cutting their own throats",
+   "note": "Raw page, the cover-letters/submitting paragraph. The full sentence names writers who do not subscribe to the magazines they submit to, and Cooney adds 'He was clear on that point', supporting the rule framing.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "659": {
+   "index": 659,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Knight also brings him to the Milford Writer's Workshop",
+   "note": "The Ringer article fetched raw (article body recovered from the page HTML). The Orbit paragraph carries the quote in the present tense used throughout the piece, and three sentences later: 'Gene has never had writing peers before' - the first-time-peers limb.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "660": {
+   "index": 660,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the only person who helped me with my writing",
+   "note": "gwern.net raw HTML of the McCaffery interview; the answer to the Fifth Head dedication question. Full clause ends '...when I really needed help was Damon Knight'.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "661": {
+   "index": 661,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it needs to change here from viewpoint A to viewpoint B",
+   "note": "Same answer. Wolfe describes sending 'Trip Trap' to Orbit and getting it back with Knight's letter; the quoted clause is followed by '-and this is why-' and then a further switch from B to C, so the where-and-why limb holds. The letter was a rejection ('I got it back').",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "662": {
+   "index": 662,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a long list of very sensible suggestions of that sort",
+   "note": "Same sentence as 661, its closing clause. 'Long' is on the page immediately before the quoted span.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "663": {
+   "index": 663,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "on the bed for a long while, and I suddenly realized",
+   "note": "Same answer: 'After I read that letter I lay' precedes the quote, and the realisation is given as 'By golly, I'm actually a writer now.' All three limbs on the raw page.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "664": {
+   "index": 664,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I didn't know I had grown you from a bean",
+   "note": "Same answer: Wolfe says he wrote something like that to Damon and 'he wrote back' the quoted line, 'which is the line I stole for my dedication'. Knight's authorship and the writing-back limb both explicit; McCaffery's question quotes the dedication as 'who one night in 1966 grew me from a bean'.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "665": {
+   "index": 665,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there had been no re write",
+   "note": "Same answer, raw page (the interview text spells it 're write'). Galaxy rejected the story; he sent it to If, not knowing Pohl edited both; 'I got an acceptance from Pohl... with a check' and the letter praised the improvement. 'Resubmitted' is fair - Pohl saw the same story a second time, which is what his letter says.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
+  },
+  "666": {
+   "index": 666,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'm glad you let me see this again",
+   "note": "Same answer: 'His letter said,' introduces the quoted sentence, and the next sentence on the page is the rewrite-praise sentence the claim also quotes. Both sentences match word for word, including the spaced 're write'.",
+   "fromFile": "verdicts-wolfe-i649-666.json"
   },
   "669": {
    "index": 669,

@@ -3,12 +3,13 @@
  "name": "kay",
  "angle": null,
  "tag": "i1082-1096",
- "lines": 69,
+ "lines": 81,
  "firstTs": "2026-09-06T23:43:41.335Z",
- "lastTs": "2026-09-06T23:47:50.534Z",
+ "lastTs": "2026-09-06T23:49:02.698Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 18
+  "Bash": 19,
+  "StructuredOutput": 2
  },
  "urlsFetched": [
   "https://fantasy-faction.com/2013/tigana-by-guy-gavriel-kay",
@@ -16,11 +17,11 @@
   "https://www.goodreads.com/book/show/218153843-written-on-the-dark"
  ],
  "filesWritten": [],
- "lastAssistantText": "All three sources fetched raw and parsed. Now the checkpoint file.",
+ "lastAssistantText": "t written and read back clean: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i1082-1096.json` (18,592 bytes; 15 claims, 15 verdicts, max trueWording 12 words — the copyright cap holds on every row).",
  "run": "wf_d76e605d-6d1",
  "agent": "ae0c269f93d67fd22",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_d76e605d-6d1/agent-ae0c269f93d67fd22.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i1082-1096.json",
   "exists": true

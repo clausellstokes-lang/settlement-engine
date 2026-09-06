@@ -1444,5 +1444,53 @@
    "note": "Live page fetched raw (HTTP 200). Quote is word-for-word in the comment signed 'Ray Davis 8 December 2007 at 06:47' under David Auerbach's 7 December 2007 post, in the 6-comment thread. Only the appositive 'Critic' is unsupported by this page; the substance and attribution to Ray Davis are exact.",
    "fromFile": "verdicts-wolfe-i508-542.json"
   }
+ },
+ {
+  "index": 631,
+  "feature": "other: dating a record",
+  "claim": "Plant Engineering's own obituary of Wolfe dates his senior editorship 1972 to 1986, four years later than the terminal date Ultan's Library gives.",
+  "source": "Bob Vavra, 'Gene Wolfe: 1931-2019', Plant Engineering, 2019",
+  "url": "https://www.plantengineering.com/gene-wolfe-1931-2019/",
+  "quote": "senior editor of Plant Engineering magazine from 1972 to 1986",
+  "page": "opening line",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2019-05-20",
+  "routeHint": "live URL, browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high: the figure is on the page; the conflict with ultan.org.uk/plant-engineering/ is stated by comparison of the two pages, both fetched",
+  "angle": "editors",
+  "verdict": {
+   "index": 631,
+   "verdict": "PARTIAL",
+   "trueWording": "senior editor of Plant Engineering magazine from 1972 to 1986",
+   "note": "Raw page plantengineering.com/gene-wolfe-1931-2019 fetched (200). Opening line of Bob Vavra's obituary carries the quote word for word, so the 1972–1986 dating limb holds; the comparative limb is arithmetically wrong against the 1984 verified at index 630.",
+   "unsupportedLimb": "the arithmetic limb 'four years later than the terminal date Ultan's Library gives' — 1986 is TWO years after Ultan's 1984, not four",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  }
+ },
+ {
+  "index": 640,
+  "feature": "other: editorial workload",
+  "claim": "Dirda reports that Wolfe wrote a major cover story for Plant Engineering every few months while writing The Book of the New Sun.",
+  "source": "Michael Dirda, reporting, The Washington Post Book World, 30 January 1983",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/1983-01-29-michaeldirda-thebookofthenewsun-interview.txt",
+  "quote": "writes a major cover story every few months",
+  "page": "paragraph 2",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "1983-01-30",
+  "routeHint": "gwern.net plain-text transcript",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "editors",
+  "verdict": {
+   "index": 640,
+   "verdict": "PARTIAL",
+   "trueWording": "writes a major cover story every few months",
+   "note": "Raw text fetched. The quotation and the 'for Plant Engineering' limb are verbatim and supported in paragraph 2. The concurrency with The Book of the New Sun is a reasonable inference from his seven years' writing overlapping the job, but the page does not state it.",
+   "unsupportedLimb": "the temporal limb 'while writing The Book of the New Sun' — the page reports the cover stories in the present tense of the January 1983 interview, when Wolfe says he has finished the first draft of The Urth of the New Sun and is at work on short stories; it never dates the cover stories to the tetralogy's writing",
+   "fromFile": "verdicts-wolfe-i629-648.json"
+  }
  }
 ]
