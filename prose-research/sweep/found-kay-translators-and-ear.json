@@ -1,6 +1,6 @@
 {
  "complete": false,
- "coverage": "in progress — roster partly fetched; ActuSF, justaword.fr and AudioFile blocked so far",
+ "coverage": "in progress",
  "sourcesRead": [
   {
    "title": "Guy Gavriel Kay et sa façon d'écrire… (interview traduite par NAK)",
@@ -138,6 +138,82 @@
    "title": "Working Actors Journey — Narrator Simon Vance episode page",
    "url": "https://workingactorsjourney.com/podcast/episodes/simon-vance/",
    "kind": "own-words",
+   "substantive": false,
+   "route": "live"
+  },
+  {
+   "title": "Élisabeth Vonarburg : « Fiat Tyranaël. Et Tyranaël fut » (entretien par Yann Etienne)",
+   "url": "https://diacritik.com/2021/02/19/elisabeth-vonarburg-fiat-tyranael-et-tyranael-fut/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2021-02-19",
+   "route": "live, browser UA"
+  },
+  {
+   "title": "Mikael Cabon, traducteur — Comme un diamant dans ma mémoire (translator's own page)",
+   "url": "https://mikaelcabon.fr/commeundiamantdansmamemoire.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2023",
+   "route": "live"
+  },
+  {
+   "title": "Mikael Cabon, traducteur — Les Chevaux célestes",
+   "url": "https://mikaelcabon.fr/leschevauxcelestes.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2014",
+   "route": "live"
+  },
+  {
+   "title": "Mikael Cabon, traducteur — Le Fleuve céleste",
+   "url": "https://mikaelcabon.fr/lefleuveceleste.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016",
+   "route": "live"
+  },
+  {
+   "title": "Mikael Cabon, traducteur — Les Derniers Feux du soleil",
+   "url": "https://mikaelcabon.fr/lesderniersfeuxdusoleil.html",
+   "kind": "own-words",
+   "substantive": true,
+   "route": "live"
+  },
+  {
+   "title": "Mikael Cabon, traducteur — Voile vers Sarance",
+   "url": "https://mikaelcabon.fr/voileverssarance.html",
+   "kind": "own-words",
+   "substantive": true,
+   "route": "live"
+  },
+  {
+   "title": "Mikael Cabon, traducteur — Enfants de la terre et du ciel",
+   "url": "https://mikaelcabon.fr/enfantsdelaterreetduciel.html",
+   "kind": "own-words",
+   "substantive": true,
+   "route": "live"
+  },
+  {
+   "title": "Mikael Cabon, « Les Chevaux célestes pour \"les cancres\" » (rubrique Du côté des traducteurs), Éditions L'Atalante",
+   "url": "https://www.l-atalante.com/actualites/les-chevaux-celestes-pour-les-cancres/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2014-07-11",
+   "route": "live"
+  },
+  {
+   "title": "Alain Kattnig, « \"Les Chevaux célestes\" d’un certain Guy Gavriel Kay, vous connaissez ? », Éditions L'Atalante",
+   "url": "https://www.l-atalante.com/actualites/les-chevaux-celestes-dun-certain-guy-gavriel-kay-vous-connaissez/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2014-07-04",
+   "route": "live"
+  },
+  {
+   "title": "Éditions L'Atalante — revue de presse, Les Lions d'Al-Rassan",
+   "url": "https://www.l-atalante.com/revues-de-presse/kay-les-lions-d-al-rassan-justaword/",
+   "kind": "reception",
    "substantive": false,
    "route": "live"
   }
@@ -310,6 +386,171 @@
    "routeHint": "live fetch with browser UA",
    "registerHint": "none",
    "confidence": "high"
+  },
+  {
+   "feature": "translation and register",
+   "claim": "Kay writes that a reader of his work in Russian, Korean or Portuguese is reading someone else's rendering of him.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, October 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "you are reading someone else’s rendering of me",
+   "page": "Ysabel journal, October 2006 post on the Giller Prize and translation",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2006-10",
+   "routeHint": "live fetch, browser UA; grep 'translat'",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "translation and register",
+   "claim": "Kay states that a translated work is a version and an interpretation of the original author's work rather than that author's own.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, October 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "It is a version, an interpretation, of that person’s work.",
+   "page": "Ysabel journal, October 2006 post on translation and the Giller Prize",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2006-10",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "translation and register",
+   "claim": "Kay says he has had readers report that a given book's translation in a given language is terrible.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, October 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "the gift or the burden of the people who carry my work",
+   "page": "Ysabel journal, October 2006 post on translation",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2006-10",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "medium — the quotation supports the surrounding passage on translators rather than the reader reports sentence itself"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "Vonarburg says that seeing multiple points of view in practice through what Kay does with them, and writing them herself while translating, was different from knowing the theory.",
+   "source": "Élisabeth Vonarburg, interviewed by Yann Etienne, Diacritik, 19 February 2021",
+   "url": "https://diacritik.com/2021/02/19/elisabeth-vonarburg-fiat-tyranael-et-tyranael-fut/",
+   "quote": "les voir en pratique à travers ce qu’en fait Kay",
+   "page": "answer to the question on having been a translator",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2021-02-19",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "translation and register",
+   "claim": "Vonarburg says that translation, for a writer, is still writing.",
+   "source": "Élisabeth Vonarburg, interviewed by Yann Etienne, Diacritik, 19 February 2021",
+   "url": "https://diacritik.com/2021/02/19/elisabeth-vonarburg-fiat-tyranael-et-tyranael-fut/",
+   "quote": "la traduction, pour une écrivaine, c’est encore de l’écriture",
+   "page": "answer to the question on having been a translator",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2021-02-19",
+   "routeHint": "live fetch, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "concrete sensory noun",
+   "claim": "Cabon names an illustrated clothing encyclopedia, Sophie George's Le vêtement de A à Z, as particularly useful for his translation of A Brightness Long Ago.",
+   "source": "Mikael Cabon, translator's own page for Comme un diamant dans ma mémoire (L'Atalante, 2023)",
+   "url": "https://mikaelcabon.fr/commeundiamantdansmamemoire.html",
+   "quote": "particulièrement utile pour cette traduction",
+   "page": "Références section",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2023",
+   "routeHint": "live fetch of the translator's own site",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "terminology consistency",
+   "claim": "Cabon says a Chinese mythology dictionary let him solve many puzzles tied to Chinese legends while translating Under Heaven.",
+   "source": "Mikael Cabon, translator's own page for Les Chevaux célestes (L'Atalante, 2014)",
+   "url": "https://mikaelcabon.fr/leschevauxcelestes.html",
+   "quote": "m'a permis de résoudre bien des énigmes liées aux légendes chinoises",
+   "page": "Références section",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014",
+   "routeHint": "live fetch of the translator's own site",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "translation and register",
+   "claim": "Cabon says he tried to keep Billeter's reflection on the difficulties of translating Chinese poetry in mind throughout his own work on River of Stars.",
+   "source": "Mikael Cabon, translator's own page for Le Fleuve céleste (L'Atalante)",
+   "url": "https://mikaelcabon.fr/lefleuveceleste.html",
+   "quote": "que je me suis efforcé de garder à l'esprit pendant mes propres travaux",
+   "page": "Références section",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "routeHint": "live fetch of the translator's own site",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: invented world as historical ethic",
+   "claim": "Cabon writes that one reason Kay sets fact-based plots in invented worlds is his refusal to betray historical figures by presuming their reactions and feelings.",
+   "source": "Mikael Cabon, « Les Chevaux célestes pour \"les cancres\" », Éditions L'Atalante, 11 July 2014",
+   "url": "https://www.l-atalante.com/actualites/les-chevaux-celestes-pour-les-cancres/",
+   "quote": "son refus de trahir les personnages historiques en présumant de leurs réactions",
+   "page": "opening section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2014-07-11",
+   "routeHint": "live fetch",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "plainness and economy",
+   "claim": "Kattnig asserts that Kay's writing is not an end in itself and serves his story.",
+   "source": "Alain Kattnig, Éditions L'Atalante blog, 4 July 2014",
+   "url": "https://www.l-atalante.com/actualites/les-chevaux-celestes-dun-certain-guy-gavriel-kay-vous-connaissez/",
+   "quote": "L’écriture de Guy Gavriel Kay n’est pas une fin et sert son histoire.",
+   "page": "body of the post",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2014-07-04",
+   "routeHint": "live fetch",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: retranslation",
+   "claim": "The translator's own pages for Voile vers Sarance and Le Seigneur des empereurs carry the line announcing Kay's Byzantine epic in a new translation.",
+   "source": "Mikael Cabon, translator's own pages for the Sarantine Mosaic (L'Atalante)",
+   "url": "https://mikaelcabon.fr/voileverssarance.html",
+   "quote": "DANS UNE NOUVELLE TRADUCTION",
+   "page": "back-cover text reproduced on the page",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "routeHint": "live fetch of the translator's own site",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "naming and forms of address",
+   "claim": "Elbakin forum readers record that A Brightness Long Ago exists in two French versions, Vonarburg's Un éclat d'antan for Alire and Cabon's Comme un diamant dans ma mémoire for L'Atalante.",
+   "source": "Elbakin.net forum thread on Comme un diamant dans ma mémoire (reader posts)",
+   "url": "https://www.forum-elbakin.net/viewtopic.php?t=9311&start=60",
+   "quote": "Il avait déjà été traduit par Élisabeth Vonarburg et paru en 2020",
+   "page": "page 4 of the thread",
+   "kind": "reader",
+   "polarity": "asserts",
+   "routeHint": "live fetch",
+   "registerHint": "none",
+   "confidence": "medium — forum posts, unsigned readers"
   }
  ]
 }

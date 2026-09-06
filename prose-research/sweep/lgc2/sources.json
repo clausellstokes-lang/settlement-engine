@@ -334,5 +334,117 @@
   "substantive": true,
   "date": "2008",
   "route": "live URL, browser UA; only Kelso's introduction (pp. 7-22) is a free PDF - every other article, including Amy Clarke's 'Tales from the Distaff: The Parallax View of Earthsea' (pp. 63-74, $5) and Le Guin's own 'Living in a Work of Art' (pp. 123-136, $6), is behind a per-article paywall: BLOCKED"
+ },
+ {
+  "title": "Paul Morton, 'Getting Away with Murder: The Millions Interviews Ursula K. Le Guin', The Millions",
+  "url": "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+  "kind": "own-words",
+  "substantive": true,
+  "date": "2013-01-31",
+  "route": "found through the interview index at ursulakleguin.com; live URL, browser UA"
+ },
+ {
+  "title": "Hari Kunzru, 'Ursula Le Guin: \"Wizardry is artistry\"', The Guardian",
+  "url": "https://www.theguardian.com/books/2014/nov/20/ursula-le-guin-wizardry-is-artistry-interview-national-book-awards",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2014-11-20",
+  "route": "found through the interview index at ursulakleguin.com; live URL, browser UA"
+ },
+ {
+  "title": "Jonathan White, 'Coming Back From the Silence: an interview with Ursula Le Guin' (copy hosted by Peter Schmidt, Swarthmore)",
+  "url": "https://peterschmidt.domains.swarthmore.edu/engl5H/leguin.interv.html",
+  "kind": "own-words",
+  "substantive": true,
+  "date": "undated page; the interview predates 1994",
+  "route": "found through the interview index at ursulakleguin.com; live URL, browser UA"
+ },
+ {
+  "title": "'Ursula K. Le Guin talks to Michael Cunningham about genres, gender, and broadening fiction', Electric Literature",
+  "url": "https://electricliterature.com/ursula-k-le-guin-talks-to-michael-cunningham-about-genres-gender-and-broadening-fiction/",
+  "kind": "own-words",
+  "substantive": true,
+  "date": "2016-04-01",
+  "route": "found through the interview index at ursulakleguin.com; live URL, browser UA"
+ },
+ {
+  "title": "David Naimon, 'Writing Nameless Things: An Interview with Ursula K. Le Guin', Los Angeles Review of Books",
+  "url": "https://lareviewofbooks.org/article/writing-nameless-things-an-interview-with-ursula-k-le-guin/",
+  "kind": "own-words",
+  "substantive": false,
+  "date": "2016",
+  "route": "live URL, browser UA; read in full, the interview turns on progress, gender and genre rather than sentence-level style"
+ },
+ {
+  "title": "Locus interview with Ursula K. Le Guin, Locus Magazine, October 2008 (excerpt page)",
+  "url": "https://www.locusmag.com/2008/Issue10_LeGuin.html",
+  "kind": "own-words",
+  "substantive": false,
+  "date": "2008-10",
+  "route": "live URL, browser UA; only the free excerpt is posted and it carries no statement on prose style"
+ },
+ {
+  "title": "'Childhood Readings and the Genesis of Names in the Earthsea Novels of Ursula K. Le Guin', Children's Literature 38 (2010)",
+  "url": "https://muse.jhu.edu/article/380762",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2010",
+  "route": "found via Crossref; Project MUSE returns a bot-verification challenge - BLOCKED, not read"
+ },
+ {
+  "title": "T. A. Shippey, 'The Magic Art and the Evolution of Words: Ursula Le Guin's Earthsea Trilogy' (Mosaic 1977; reprinted in Hard Reading, 2016)",
+  "url": "https://doi.org/10.5949/liverpool/9781781382615.003.0020",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "1977 / 2016",
+  "route": "found via Crossref; the DOI resolves to academic.oup.com which returns 403 - BLOCKED, not read. This is the single most important gap for this angle"
+ },
+ {
+  "title": "Margaret Atwood, In Other Worlds: SF and the Human Imagination (2011), Internet Archive copy",
+  "url": "https://archive.org/details/inotherworldssfh0000atwo_k7b0",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2011",
+  "route": "archive.org metadata reachable but the item is lending-restricted: the fulltext search-inside endpoint returns 403 - BLOCKED. Its Le Guin chapter is the reprinted 'Queen of Quinkdom', already read at nybooks.com by the predecessor"
+ },
+ {
+  "title": "r/Fantasy and r/books threads on Le Guin's prose",
+  "url": "https://old.reddit.com/r/Fantasy/search.json?q=Le+Guin+prose+style&restrict_sr=on",
+  "kind": "reader",
+  "substantive": false,
+  "date": "n/a",
+  "route": "BLOCKED from this environment: old.reddit.com .json redirects to a login wall, www.reddit.com .json returns 403 with a browser user agent, a redlib mirror returns 403, and WebFetch refuses reddit.com"
+ },
+ {
+  "title": "Adam Roberts, Sibilant Fricative (blog)",
+  "url": "https://sibilantfricative.blogspot.com/",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "n/a",
+  "route": "BLOCKED: the blog is now private - both the live search page and the Blogger feed API return 'User does not have permission to read this blog'. His Le Guin criticism was reached instead through his Medium notebook via Wayback"
+ },
+ {
+  "title": "David Naimon, 'Editing to the End: David Naimon on Collaborating with a Literary Legend', Literary Hub (via Tin House)",
+  "url": "https://lithub.com/ursula-k-le-guin-editing-to-the-end/",
+  "kind": "reception",
+  "substantive": true,
+  "date": "2018-05-22",
+  "route": "found through the reviews index at ursulakleguin.com; live URL, browser UA"
+ },
+ {
+  "title": "Jason P. Vest, 'The Re-Possessed: Ursula K. Le Guin storms the Library of America', The Common Reader (Washington University)",
+  "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2021-05-30",
+  "route": "found through the reviews index at ursulakleguin.com; live URL, browser UA"
+ },
+ {
+  "title": "Sherryl Vint, 'The Best Ursula Le Guin Books', Five Books",
+  "url": "https://fivebooks.com/best-books/best-ursula-le-guin-books-sherryl-vint/",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "undated",
+  "route": "live URL, browser UA; read in full, the recommendations are thematic with no sentence-level remark"
  }
 ]

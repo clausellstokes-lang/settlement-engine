@@ -16,3 +16,16 @@ SOURCES = [
  dict(title="Niall Allsopp, 'Dorothy Dunnett's Lymond Chronicles', Slightly Foxed Issue 81", url="https://foxedquarterly.com/niall-allsopp-dorothy-dunnett-literary-review/", kind="analysis", substantive=True, date="2024", route="live URL, browser user agent (curl)"),
  dict(title="BrightWeavings: Professional Scholarship index", url="https://brightweavings.com/scholarship/professional-scholarship/", kind="analysis", substantive=False, date="accessed 2026-09-06", route="live URL (bibliography chasing; no Silmarillion, verse or Dunnett entry)"),
 ]
+
+SOURCES += [
+ dict(title="John D. Rateliff, 'Kay and Christopher' (Sacnoth's Scriptorium)", url="http://sacnoths.blogspot.com/2020/02/kay-and-christopher.html", kind="analysis", substantive=True, date="2020-02-06", route="live URL, browser user agent (curl)"),
+ dict(title="John D. Rateliff, 'Charles Noad comments (was Christopher's Masterpiece)' (Sacnoth's Scriptorium), with Noad's letter and comment thread", url="https://sacnoths.blogspot.com/2020/01/charles-noad-comments-was-christophers.html", kind="analysis", substantive=True, date="2020-01-27", route="live URL, browser user agent (curl)"),
+ dict(title="Douglas C. Kane interviewed about Arda Reconstructed (TheOneRing.net)", url="https://www.theonering.com/douglas-kane-talks-about-arda-reconstructed/", kind="analysis", substantive=True, date="2009", route="live URL, browser user agent (curl)"),
+ dict(title="Interview with Douglas C. Kane about Arda Reconstructed (Tolkien Library)", url="https://tolkienlibrary.com/press/873-arda-reconstructed-interview.php", kind="analysis", substantive=False, date="2009", route="live URL (names Kay's assisting role; no further detail)"),
+ dict(title="Holly Ordway, review of Arda Reconstructed (The Mythopoeic Society)", url="https://www.mythsoc.org/reviews/arda-reconstructed-ordway.htm", kind="reception", substantive=True, date="2009", route="live URL, browser user agent (curl)"),
+ dict(title="Matthew Rettino, 'Fantasies of History: Guy Gavriel Kay's Synthesis of the Historical Fantasy Novel' (2012 McGill honours thesis)", url="https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/", kind="analysis", substantive=True, date="2012 (posted 2015-07-19)", route="live URL, browser user agent (curl)"),
+ dict(title="Holly Ordway, 'The World-Building of Guy Gavriel Kay'", url="https://brightweavings.com/worldbuilding/", kind="analysis", substantive=True, date="1998", route="live URL, browser user agent (curl)"),
+ dict(title="Matthew Rettino, review of Beyond this Dark House", url="https://matthewrettino.com/2014/02/07/beyond-this-dark-house-by-guy-gavriel-kay/", kind="reception", substantive=True, date="2014-02-07", route="live URL, browser user agent (curl)"),
+ dict(title="The Writers' Writer (Dorothy Dunnett Centenary, Dorothy Dunnett Society) - contributions by Marie Macpherson, Ellen Kushner, Gwyneth Hughes, Guy Gavriel Kay and others", url="https://dunnettcentral.org/centenary/the-writers-writer/", kind="analysis", substantive=True, date="2023 centenary collection", route="live URL 403; Wayback raw capture https://web.archive.org/web/20240616085027id_/https://dunnettcentral.org/centenary/the-writers-writer/"),
+]
+COVERAGE = "In progress after 22 sources across all three angles."

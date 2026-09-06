@@ -72,3 +72,28 @@ Non-substantive (book/bibliography pages): tales-from-earthsea, the-books-of-ear
 - "packing your sentences with specifics, not with generalities" (S-G)
 - "Nobody has to do any thinking about it at all" (S-G)
 - "so long as your world looks and smells and tastes real" (S-G)
+
+### FINAL (round 2 complete)
+132 claims, 43 sources (25 substantive), all quotations grepped against the fetched text. Builder: sweep/build-voice2.py (re-runnable; it refuses to emit a claim whose quote is not in the local text).
+Raw texts: sweep/leguin-voice2-raw/.
+
+TOP FINDS OF THE ROUND
+1. "From Elfland to Poughkeepsie" (1972 speech / 1973 booklet) IN FULL — a third-party PDF transcription. 28 claims. "A plain language is the noblest of all." / "It is also the most difficult." / the FAKE-PLAINNESS diagnosis ("not really simple, but flat") / the JOURNALISM rejection ("It is journalistic prose", "the suppression of the author's personality and sensibility is deliberate", "This technique is right, for a newspaper") — this last is direct COUNTER-EVIDENCE for an impersonal dossier register and the synthesis must face it.
+2. Le Guin, "B-Sides: John Galt's Annals of the Parish", Public Books, 23 Jan 2017 — HER OWN WORDS ON AN ANNALIST NARRATOR. Thirteen claims: "kept and dated year by year for 50 years", "a very old-fashioned narrator, and therefore reliable", "Galt tells without showing", "Violence is witnessed without participation", "Galt's prose works like poetry: every word tells", "without even a period, only a semicolon". Found by chasing her site's Essays and Criticism index, not by the roster.
+3. BVC "Session 2 — Three New Questions" (21 Mar 2016): the HORB DEMONSTRATION — two specimen sentences describing an invented town, with her own gloss on what each implies ("This general description implies very little" vs "it has a long-established trading economy"), plus "packing your sentences with specifics, not with generalities".
+4. "Some Thoughts on Narrative" (1980): "whose societies no longer exist, are written in the present tense" — she names the PRESENT-TENSE ETHNOGRAPHIC REGISTER explicitly, and says the present tense "takes the story out of time" and "actually distances the story".
+5. "It Was a Dark and Stormy Night" (1979): the Carlisle runes, "Tolfink carved these runes in this stone", called close to "Barbara Herrnstein Smith's earliest form of historiography" — the minimal chronicle line.
+6. BVC Session 2 Round 1 (2016): "brevity, a few telling details, a great left unsaid" [sic on the page]; "a thousand orcs in agony leave us unmoved".
+7. The Millions 2013: "you do as little as possible", "shorter and more allusive than it used to be", "They talk too much. They explain things too much."
+
+COUNTER-EVIDENCE deliberately kept (the synthesis should not drop it)
+- Elfland rejects journalistic objectivity FOR FANTASY, and rejects "fake plainness".
+- Blog 51: "An irresistibly readable story can be told in the most conventional, banal prose" — she disputes that prose quality governs narrative power.
+- Locus 2001: "Fiction needs a certain roughness"; "I've read overpolished fiction, and it's kind of a bore."
+
+NOT FOUND / BLOCKED (do not re-spend a finder on these without a new route)
+- Earthsea Revisioned (1993): print booklet only; no online text; the reprint is inside The Books of Earthsea, which is lending-restricted.
+- A Description of Earthsea + the Foreword to Tales from Earthsea: archive.org talesfromearthse0000legu / booksofearthsea0000legu are access-restricted; djvu.txt returns "Item not available"; api.archivelab searchinside returns empty; openlibrary /search/inside gives only third-party books ABOUT it (Michael Cadden's book calls it "a text that is neither story nor afterword" — worth a separate academic-angle claim if someone reaches Cadden at the primary).
+- The 2012 Earthsea afterwords: only online copy found is a Tumblr IMAGE.
+- Naimon's book beyond the two LitHub excerpts: ursulakleguincon0000legu access-restricted.
+- SF Site 2001 (Nick Gevers, the Tales-from-Earthsea-era interview): sfsite.com domain suspended; Wayback CDX was offline at the time of the run — RETRY THIS ONE, it is the likeliest remaining win.

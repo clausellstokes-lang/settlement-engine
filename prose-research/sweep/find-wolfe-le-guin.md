@@ -33,3 +33,26 @@ Search URLs used (each returns the snippet verbatim):
 - Wolfe's *Castle of Days* p.304 discusses Le Guin ("It is ... possible, Le Guin says, for ...") — REVERSE direction.
 - The Language of the Night / Dancing / Steering the Craft / Words Are My Matter — searching inside.
 - KPFA Bookwaves 2022-04-21 archive programme pairing Le Guin and Wolfe interviews.
+
+## PRIMARY 3 (FOUND LATE, EARLIER THAN THE JACKET) — Le Guin quoted by David Pringle, 1985
+"Wolfe is so good he leaves me speechless." — Ursula Le Guin, quoted in David Pringle, *Science Fiction: The 100 Best Novels* (1985), entry on *The Book of the New Sun*: "...It is a supremely intelligent novel, supremely well written — and it has drawn numerous peer tributes: 'Wolfe is so good he leaves me speechless,' says Ursula Le Guin; 'simply overwhelming' adds Algis Budrys..."
+Repeated verbatim in Pringle's *The Ultimate Guide to Science Fiction* (BotNS entry, "the ultimate 'Dying Earth' novel ... Sequel: The Urth ...").
+=> The reference literature of the 1980s-90s quotes a DIFFERENT Le Guin sentence than the one the jackets carry. Neither names a venue.
+Route: openlibrary.org/search/inside (snippet-only). Verified locally in ol-speechless.txt / ol-tributes.txt.
+
+## NEGATIVES ESTABLISHED (each one a finding)
+- "From Elfland to Poughkeepsie" (1973), her central essay on fantasy style, read in full from PDF (30,553 chars): ZERO occurrences of "Wolfe" (while "Vance" is present).
+- Words Are My Matter (2000-2016 essays, introductions, 33 book reviews): official ToC has no Wolfe item.
+- Dancing at the Edge of the World (incl. REVIEWS section): no Wolfe item.
+- The Wave in the Mind: appreciations of Cordwainer Smith and Borges, no Wolfe.
+- Steering the Craft and The Language of the Night: NOT CHECKABLE — official pages carry no ToC; IA lending scans return 403 on fulltext/inside.php; api.archivelab.org dead. OPEN.
+- No Le Guin obituary of Wolfe is possible: she died 2018-01-22, he died 2019-04-14.
+- No public Wolfe-Le Guin correspondence located. UO Coll 270 correspondence has an "other authors" subseries; boxes 253 closed until 2069, selected email until 2043; no item-level list on the Archives West page. Texas A&M's Gene Wolfe Collection holds galleys and one manuscript only.
+
+## WHAT LE GUIN ACTUALLY DID FOR WOLFE (editorial acts, all verified)
+- Edges (Pocket Books, 1980), ed. Le Guin + Kidd: selected "Suzanne Delage"; Le Guin wrote the book's introduction.
+- Interfaces (Ace, 1980), ed. Le Guin + Kidd, "hand picked": selected "A Criminal Proceeding".
+- The Norton Book of Science Fiction (1993), ed. Le Guin + Attebery: selected "Feather Tigers".
+
+## STOPPING
+Roster exhausted; the last two lateral searches (Fifth Head blurb, Peace blurb) returned nothing new. 20 substantive sources of 31 fetched.

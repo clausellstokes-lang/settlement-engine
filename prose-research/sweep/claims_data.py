@@ -669,3 +669,184 @@ dict(_src='ddswriters', feature='other: Kay and Dunnett in person',
  routeHint='Wayback raw capture 20240616085027id_',
  registerHint='none', confidence='high'),
 ]
+
+BW_DUNNETT = "https://brightweavings.com/dunnett/"
+BW_FIONAFTER = "https://brightweavings.com/fionavarafterword/"
+DDS_BIO = "https://dunnettcentral.org/dorothy"
+DDS_WG = "https://dunnettcentral.org/whisperinggallery"
+DM_DUNNETT = "https://www.digitalmedievalist.com/reading-lists/dorothy-dunnett/"
+BILL3 = "https://www.dorothydunnett.co.uk/blog/lymond-reading-notes/the-play-for-jonathan-crouch-iii-more-blindfold-play.php"
+BILL4 = "https://www.dorothydunnett.co.uk/blog/lymond-reading-notes/the-play-for-jonathan-crouch-iv-several-moves-by-a-knight.php"
+BILL5 = "https://www.dorothydunnett.co.uk/blog/lymond-reading-notes/the-play-for-jonathan-crouch-v-castling.php"
+
+CLAIMS += [
+# ---- Kay's Dunnett memorial: the two angles meet ----
+dict(_src='bwdunnett', feature='other: biography of the Silmarillion year',
+ claim="Kay says he met Dorothy Dunnett in spring 1975 while living in a village outside Oxford working on the papers that became The Silmarillion.",
+ source="Guy Gavriel Kay, 'In Memoriam - Dorothy Dunnett', Locus Magazine, December 2001, reproduced at brightweavings.com", url=BW_DUNNETT,
+ quote="working on the papers that became The Silmarillion", page="first paragraph",
+ kind='own-words', polarity='asserts', date='2001-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='none', confidence='high'),
+
+dict(_src='bwdunnett', feature='other: what Kay actually did on the Silmarillion',
+ claim="Kay says going through the Tolkien correspondence was a part of the editing process he worked on.",
+ source="Guy Gavriel Kay, 'In Memoriam - Dorothy Dunnett', Locus Magazine, December 2001, reproduced at brightweavings.com", url=BW_DUNNETT,
+ quote="which was a part of the editing process", page="first paragraph",
+ kind='own-words', polarity='asserts', date='2001-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='none', confidence='high'),
+
+dict(_src='bwdunnett', feature='other: silence about the editing method',
+ claim="Kay says he did not discuss the details of editing The Silmarillion with Dunnett in 1975 and still does not.",
+ source="Guy Gavriel Kay, 'In Memoriam - Dorothy Dunnett', Locus Magazine, December 2001, reproduced at brightweavings.com", url=BW_DUNNETT,
+ quote="I didn't discuss the details of editing The Silmarillion", page="fourth paragraph",
+ kind='own-words', polarity='asserts', date='2001-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='none', confidence='high'),
+
+dict(_src='bwdunnett', feature='repetition and refrain',
+ claim="Kay says poetry in many languages and music are inextricably bound up with Dunnett's writing.",
+ source="Guy Gavriel Kay, 'In Memoriam - Dorothy Dunnett', Locus Magazine, December 2001, reproduced at brightweavings.com", url=BW_DUNNETT,
+ quote="Poetry (in many languages) and music are inextricably bound up", page="closing paragraphs",
+ kind='own-words', polarity='asserts', date='2001-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='herald-pools', confidence='high'),
+
+dict(_src='bwdunnett', feature='repetition and refrain',
+ claim="Kay says Dunnett's books are filled to overflowing with music and verse.",
+ source="Guy Gavriel Kay, 'In Memoriam - Dorothy Dunnett', Locus Magazine, December 2001, reproduced at brightweavings.com", url=BW_DUNNETT,
+ quote="The books are filled - gloriously so, spilling over", page="closing paragraphs",
+ kind='own-words', polarity='asserts', date='2001-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='herald-pools', confidence='high'),
+
+# ---- Kay on his own register modulation ----
+dict(_src='bwfionafter', feature='register modulation',
+ claim="Kay says the principal reason the language of the Fionavar Tapestry differs from his later books is that it was his mythic endeavour.",
+ source="Guy Gavriel Kay, 'The Fionavar Tapestry Afterword', HarperPerennial Canada 20th anniversary edition, December 2003, reproduced at brightweavings.com", url=BW_FIONAFTER,
+ quote="The principal reason the language of the trilogy differs from my later books", page="afterword, fifth paragraph",
+ kind='own-words', polarity='asserts', date='2003-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='none', confidence='high'),
+
+dict(_src='bwfionafter', feature='register modulation',
+ claim="Kay says his later books track a movement, not a consistent one, towards history.",
+ source="Guy Gavriel Kay, 'The Fionavar Tapestry Afterword', December 2003, reproduced at brightweavings.com", url=BW_FIONAFTER,
+ quote="The others track a movement (not a consistent one) towards history", page="afterword, fifth paragraph",
+ kind='own-words', polarity='asserts', date='2003-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='none', confidence='high'),
+
+dict(_src='bwfionafter', feature='register modulation',
+ claim="Kay says the language of the Fionavar Tapestry was guided by the matter of the story, a god imprisoned under a mountain and a battle beneath a sacrificial tree.",
+ source="Guy Gavriel Kay, 'The Fionavar Tapestry Afterword', December 2003, reproduced at brightweavings.com", url=BW_FIONAFTER,
+ quote="Language was guided by that context", page="afterword, fifth paragraph",
+ kind='own-words', polarity='asserts', date='2003-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='none', confidence='high'),
+
+dict(_src='bwfionafter', feature='closing sentence',
+ claim="Kay says he does not believe in saying exactly what happens to characters after a novel closes, and that the ending of every book he has written makes this point.",
+ source="Guy Gavriel Kay, 'The Fionavar Tapestry Afterword', December 2003, reproduced at brightweavings.com", url=BW_FIONAFTER,
+ quote="saying exactly what happens to characters after a novel closes", page="afterword, Sharra paragraph",
+ kind='own-words', polarity='asserts', date='2003-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='chronicle-line', confidence='high'),
+
+dict(_src='bwfionafter', feature='omission as information',
+ claim="Kay says we do not always know what happens next, in life or fiction, and the end of a novel does not demand tying down every life that passed through it.",
+ source="Guy Gavriel Kay, 'The Fionavar Tapestry Afterword', December 2003, reproduced at brightweavings.com", url=BW_FIONAFTER,
+ quote="we don't always know what happens next, in life or fiction", page="afterword, Sharra paragraph",
+ kind='own-words', polarity='asserts', date='2003-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='chronicle-line', confidence='high'),
+
+dict(_src='bwfionafter', feature='omission as information',
+ claim="Kay says he cut a planned closing conversation for Sharra because the scene felt static and flat, existing only to tie up a thread.",
+ source="Guy Gavriel Kay, 'The Fionavar Tapestry Afterword', December 2003, reproduced at brightweavings.com", url=BW_FIONAFTER,
+ quote="The scene felt static, flat", page="afterword, Sharra paragraph",
+ kind='own-words', polarity='asserts', date='2003-12', routeHint='live URL with browser user agent (curl)',
+ registerHint='none', confidence='high'),
+
+# ---- Dunnett side: the Society and its close readers ----
+dict(_src='ddsbio', feature='annalist voice and deep time',
+ claim="The Dorothy Dunnett Society reports that the memorial stone in Edinburgh's Makars' Court carries a quotation from Dunnett asking where the links in the chain joining us to the past are.",
+ source="Dorothy Dunnett Society, 'Dorothy Dunnett' biography page", url=DDS_BIO,
+ quote="Where are the links in the chain … joining us to the past?", page="biography, final paragraph",
+ kind='vendor', polarity='asserts', date='accessed via Wayback capture 2025-08-19',
+ routeHint='live URL 403; Wayback raw capture https://web.archive.org/web/20250819090027id_/https://dunnettcentral.org/dorothy',
+ registerHint='chronicle-line', confidence='high'),
+
+dict(_src='ddsbio', feature='repetition and refrain',
+ claim="The Dorothy Dunnett Society describes the House of Niccolo novels as containing poetry and music wrapped up in an evocation of history.",
+ source="Dorothy Dunnett Society, 'Dorothy Dunnett' biography page", url=DDS_BIO,
+ quote="poetry and music, all wrapped up in an evocation of history", page="biography, House of Niccolo paragraph",
+ kind='vendor', polarity='asserts', date='accessed via Wayback capture 2025-08-19',
+ routeHint='Wayback raw capture 20250819090027id_',
+ registerHint='herald-pools', confidence='high'),
+
+dict(_src='ddswg', feature='withheld information and inference',
+ claim="The Dorothy Dunnett Society's magazine publishes essays studying hints in Dunnett's text to establish what a character's purpose was.",
+ source="Dorothy Dunnett Society, Whispering Gallery page describing Issue 166 (June 2025)", url=DDS_WG,
+ quote="we study the hints in the text that suggest", page="Issue 166 description",
+ kind='vendor', polarity='asserts', date='2025-06 issue description',
+ routeHint='live URL 403; Wayback raw capture https://web.archive.org/web/20250814193009id_/https://dunnettcentral.org/whisperinggallery',
+ registerHint='dossier-archivist', confidence='high'),
+
+dict(_src='ddswg', feature='withheld information and inference',
+ claim="The Dorothy Dunnett Society calls the question of which child died during the chess game at Topkapi a perennial argument among readers.",
+ source="Dorothy Dunnett Society, Whispering Gallery page describing Issue 166 (June 2025)", url=DDS_WG,
+ quote="We revisit a perennial argument in this issue", page="Issue 166 description",
+ kind='vendor', polarity='asserts', date='2025-06 issue description',
+ routeHint='Wayback raw capture 20250814193009id_',
+ registerHint='dossier-archivist', confidence='high'),
+
+dict(_src='dmdunnett', feature='other: untranslated allusion',
+ claim="Spangenberg says the quantity of literary allusions and quotations in the Lymond Chronicles drew her into a paper chase after Dunnett's sources.",
+ source="Lisa L. Spangenberg, 'The Books of Dorothy Dunnett', Digital Medievalist / Celtic Studies Resources", url=DM_DUNNETT,
+ quote="enticed me into a paper chase as I tried to locate", page="introductory paragraph",
+ kind='reader', polarity='asserts', date="accessed 2026-09-06 (page undated; written after Dunnett's 2001 death)",
+ routeHint='live URL with browser user agent (curl)',
+ registerHint='dossier-archivist', confidence='medium'),
+
+dict(_src='dmdunnett', feature='other: untranslated allusion',
+ claim="Spangenberg says the two Dunnett Companion books supply the sources and even the translations for many of the allusions in the novels.",
+ source="Lisa L. Spangenberg, 'The Books of Dorothy Dunnett', Digital Medievalist / Celtic Studies Resources", url=DM_DUNNETT,
+ quote="offer the sources and even the translations, for many of the allusions", page="books section",
+ kind='reader', polarity='asserts', date='accessed 2026-09-06',
+ routeHint='live URL with browser user agent (curl)',
+ registerHint='dossier-archivist', confidence='medium'),
+
+dict(_src='bill3', feature='withheld information and inference',
+ claim="The Dunnett close-reader 'bill' identifies Dunnett's habit of having one character's assessment explain to the reader what has already taken place, calling it an interesting writing technique.",
+ source="bill, 'The Play for Jonathan Crouch - III. More Blindfold Play', Bill's Dunnett Blog (dorothydunnett.co.uk), 9 July 2026", url=BILL3,
+ quote="an interesting writing technique", page="reading notes, Sybilla paragraph",
+ kind='reader', polarity='asserts', date='2026-07-09', routeHint='live URL with browser user agent (curl)',
+ registerHint='dossier-archivist', confidence='high'),
+
+dict(_src='bill3', feature='withheld information and inference',
+ claim="The Dunnett close-reader 'bill' says Sybilla's assessment is what explains to the reader what has taken place.",
+ source="bill, 'The Play for Jonathan Crouch - III. More Blindfold Play', Bill's Dunnett Blog, 9 July 2026", url=BILL3,
+ quote="her assessment also explains what has taken place to the reader", page="reading notes, Sybilla paragraph",
+ kind='reader', polarity='asserts', date='2026-07-09', routeHint='live URL with browser user agent (curl)',
+ registerHint='dossier-archivist', confidence='high'),
+
+dict(_src='bill4', feature='withheld information and inference',
+ claim="The Dunnett close-reader 'bill' says there are always so many layers to what Dunnett is telling the reader, after listing unanswered questions raised by one exchange.",
+ source="bill, 'The Play for Jonathan Crouch - IV: Several Moves by a Knight', Bill's Dunnett Blog, 5 August 2026", url=BILL4,
+ quote="Always so many layers to what Dorothy is telling us", page="reading notes, breakfast scene",
+ kind='reader', polarity='asserts', date='2026-08-05', routeHint='live URL with browser user agent (curl)',
+ registerHint='dossier-archivist', confidence='high'),
+
+dict(_src='bill4', feature='other: untranslated allusion',
+ claim="The Dunnett close-reader 'bill' wonders what percentage of readers had to look up the word epithalamium to follow the passage.",
+ source="bill, 'The Play for Jonathan Crouch - IV: Several Moves by a Knight', Bill's Dunnett Blog, 5 August 2026", url=BILL4,
+ quote="had to look up the former", page="reading notes, epithalamium paragraph",
+ kind='reader', polarity='asserts', date='2026-08-05', routeHint='live URL with browser user agent (curl)',
+ registerHint='none', confidence='high'),
+
+dict(_src='bill5', feature='withheld information and inference',
+ claim="The Dunnett close-reader 'bill' says the Game of Kings is written so that the reader realises nothing is ever quite what it seems.",
+ source="bill, 'The Play for Jonathan Crouch - V: Castling', Bill's Dunnett Blog, 21 August 2026", url=BILL5,
+ quote="nothing is ever quite what it seems", page="reading notes, closing summary",
+ kind='reader', polarity='asserts', date='2026-08-21', routeHint='live URL with browser user agent (curl)',
+ registerHint='dossier-archivist', confidence='high'),
+
+dict(_src='bill5', feature='withheld information and inference',
+ claim="The Dunnett close-reader 'bill' says new readers are told that at about a hundred pages in they will change their mind on everything that has confused them.",
+ source="bill, 'The Play for Jonathan Crouch - V: Castling', Bill's Dunnett Blog, 21 August 2026", url=BILL5,
+ quote="everything that has confused them up till now", page="reading notes, opening paragraph",
+ kind='reader', polarity='asserts', date='2026-08-21', routeHint='live URL with browser user agent (curl)',
+ registerHint='dossier-archivist', confidence='high'),
+]

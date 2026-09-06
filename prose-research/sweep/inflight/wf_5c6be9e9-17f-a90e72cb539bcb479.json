@@ -1,0 +1,21 @@
+{
+ "role": "finder",
+ "name": "wolfe",
+ "angle": "primary-on-disk",
+ "tag": null,
+ "lines": 75,
+ "firstTs": "2026-09-06T19:25:33.190Z",
+ "lastTs": "2026-09-06T19:28:13.583Z",
+ "tools": {
+  "Read": 2,
+  "Bash": 18
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Strong source. Let me continue through the roster.",
+ "run": "wf_5c6be9e9-17f",
+ "agent": "a90e72cb539bcb479",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_5c6be9e9-17f/agent-a90e72cb539bcb479.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -1,0 +1,35 @@
+{
+ "role": "finder",
+ "name": "wolfe",
+ "angle": "monographs",
+ "tag": null,
+ "lines": 97,
+ "firstTs": "2026-09-06T19:25:33.191Z",
+ "lastTs": "2026-09-06T19:28:19.580Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 21
+ },
+ "urlsFetched": [
+  "https://archive.org/advancedsearch.php?q=title%3A%28science+fiction+ten+explorations%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=10&output=json",
+  "https://archive.org/metadata/$id",
+  "https://archive.org/download/sciencefictionte00manl/sciencefictionte00manl_djvu.txt",
+  "https://ia801500.us.archive.org/fulltext/inside.php?item_id=sciencefictionte00manl&doc=sciencefictionte00manl&path=/14/items/sciencefictionte00manl&q=Wolfe",
+  "https://api.archive.org/books/$ID/searchinside?q=Wolfe",
+  "https://$SRV/BookReader/BookReaderSearch.php?url=ia600000.us.archive.org/fulltext/inside.php%3Fitem_id%3D$ID%26doc%3D$ID%26path%3D$DIR%26q%3DWolfe",
+  "https://ia-fts.archive.org/api/v1/search/hits_inside?item_id=$ID&doc=$ID&path=$DIR&q=Wolfe",
+  "https://ia-pub-fts-api.archive.org/search/v1/scrape?q=%22suggestive%20rather%20than%20definitive%22&count=20&fields=identifier,title,year",
+  "https://ia-pub-fts-api.archive.org/search/v1/scrape?q=%22suggestive+rather+than+definitive%22&count=10",
+  "https://ia-fts.archive.org/api/v1/search/hits?q=%22suggestive+rather+than+definitive%22",
+  "https://$h/",
+  "https://archive.org/details/sciencefictionte00manl"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the finder method that binds this work.",
+ "run": "wf_5c6be9e9-17f",
+ "agent": "abd81c7f4a03b89ce",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_5c6be9e9-17f/agent-abd81c7f4a03b89ce.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "checkpoint after 20 sources; discovery continuing",
+ "complete": true,
+ "coverage": "Roster: noisms 2019 fetched (on disk, no Le Guin words in it); the Melville blurb traced past every relay to its printed text on The Urth of the New Sun and to a second, earlier Le Guin sentence in Pringle 1985; Guardian obituary NOT FOUND (the 2019 URL 404s, and Le Guin died 2018-01-22, fifteen months before Wolfe, so no Le Guin obituary of him can exist); Steering the Craft and The Language of the Night NOT CHECKABLE at the primary (their official pages carry no table of contents and the Internet Archive lending scans return 403 on fulltext search); Dancing at the Edge of the World, The Wave in the Mind and Words Are My Matter checked by their official tables of contents and contain no Wolfe item; From Elfland to Poughkeepsie read in full as a PDF and does not name Wolfe; public Wolfe-Le Guin correspondence NOT FOUND (part of the Le Guin papers' correspondence is closed until 2069 and the item-level inventory is not on the Archives West page; the Gene Wolfe Collection at Texas A&M holds galleys and one manuscript, no correspondence). Substantive sources by route: named roster 4; bibliography chasing 6 (Edges scan, Interfaces, Norton, Pringle x2, Clute 2009); lateral search 8 (Open Library search-inside, publisher captures, SFE, New Yorker, New Republic, Wikipedia, Archives West, Elfland PDF). Twenty substantive of thirty-one fetched. The literature is genuinely thin and that is the finding: Le Guin never published an essay or review on Wolfe. Her whole reachable record on him is one sentence in her 1980 Edges introduction, one three-sentence jacket blurb on The Urth of the New Sun, one sentence quoted by Pringle in 1985, and her editorial acts of selecting Wolfe for three anthologies.",
  "sourcesRead": [
   {
    "title": "Le Guin, \"Introduction\", Edges (Pocket Books, 1980) \u2014 full book scan",
@@ -169,6 +169,86 @@
    "substantive": false,
    "date": "n/a",
    "route": "404 not found"
+  },
+  {
+   "title": "Open Library search-inside, \"Wolfe is so good he leaves me speechless\"",
+   "url": "https://openlibrary.org/search/inside?q=%22Wolfe+is+so+good+he+leaves+me+speechless%22",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "searched 2026-09-06",
+   "route": "openlibrary.org full-text search (snippet-only); hits in David Pringle, Science Fiction: The 100 Best Novels and The Ultimate Guide to Science Fiction"
+  },
+  {
+   "title": "Open Library search-inside, Pringle's framing of the peer tributes",
+   "url": "https://openlibrary.org/search/inside?q=%22and+it+has+drawn+numerous+peer%22",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "searched 2026-09-06",
+   "route": "openlibrary.org full-text search (snippet-only)"
+  },
+  {
+   "title": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2009-04-06",
+   "route": "on disk from an earlier sweep"
+  },
+  {
+   "title": "Ursula K. Le Guin Foundation \u2014 The Wave in the Mind",
+   "url": "https://www.ursulakleguin.com/the-wave-in-the-mind",
+   "kind": "primary-adjacent",
+   "substantive": true,
+   "date": "2026",
+   "route": "direct fetch"
+  },
+  {
+   "title": "noisms, So. Farewell then...",
+   "url": "https://monstersandmanuals.blogspot.com/2019/04/so-farewell-then.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2019-04-15",
+   "route": "fetched via the blog's April 2019 archive page"
+  },
+  {
+   "title": "SFWA, In Memoriam: Gene Wolfe",
+   "url": "https://sfwa.org/2019/04/15/in-memoriam-gene-wolfe/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2019-04-15",
+   "route": "direct fetch; no Le Guin mention"
+  },
+  {
+   "title": "Nebula Awards, Grand Masters: Gene Wolfe",
+   "url": "https://nebulas.sfwa.org/grand-masters/gene-wolfe/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "accessed 2026-09-06",
+   "route": "direct fetch; quotes Swanwick, not Le Guin"
+  },
+  {
+   "title": "Locus Online, Gene Wolfe Named SFWA Grand Master",
+   "url": "https://locusmag.com/2012/12/gene-wolfe-named-sfwa-grand-master/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2012-12",
+   "route": "direct fetch; Le Guin named only as a previous recipient"
+  },
+  {
+   "title": "Wikipedia, The Language of the Night (wikitext)",
+   "url": "https://en.wikipedia.org/w/index.php?title=The_Language_of_the_Night&action=raw",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2026-09-06",
+   "route": "action=raw; article has no essay-level contents list, so no negative can be drawn about Wolfe"
+  },
+  {
+   "title": "Internet Archive lending items for Le Guin's essay collections (search-inside attempted)",
+   "url": "https://archive.org/metadata/languageofnighte0000ursu",
+   "kind": "measurement",
+   "substantive": false,
+   "date": "2026-09-06",
+   "route": "BLOCKED: fulltext/inside.php returns 403 Item not available for lending items; api.archivelab.org is dead"
   }
  ],
  "claims": [
@@ -521,6 +601,90 @@
    "routeHint": "direct fetch",
    "registerHint": "none",
    "confidence": "high"
+  },
+  {
+   "feature": "other: Le Guin's judgment of Wolfe's fiction",
+   "claim": "Le Guin is quoted as saying that Wolfe is so good he leaves her speechless.",
+   "source": "Ursula Le Guin, quoted by David Pringle, Science Fiction: The 100 Best Novels (1985), entry on Wolfe's Book of the New Sun",
+   "url": "https://openlibrary.org/search/inside?q=%22Wolfe+is+so+good+he+leaves+me+speechless%22",
+   "quote": "Wolfe is so good he leaves me speechless",
+   "page": "entry on The Book of the New Sun",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "quoted 1985; Le Guin's original undated",
+   "routeHint": "Open Library search-inside over IA scans (snippet-only); the identical sentence is quoted again in Pringle's The Ultimate Guide to Science Fiction, whose snippet ends 'Sequel: The Urth'",
+   "registerHint": "none",
+   "confidence": "medium: snippet-only, and Pringle names no venue for Le Guin's sentence"
+  },
+  {
+   "feature": "other: provenance of Le Guin's praise",
+   "claim": "Pringle presents Le Guin's sentence about Wolfe as one of the peer tributes drawn by the novel, printing it beside Algis Budrys's.",
+   "source": "David Pringle, Science Fiction: The 100 Best Novels (1985)",
+   "url": "https://openlibrary.org/search/inside?q=%22and+it+has+drawn+numerous+peer%22",
+   "quote": "and it has drawn numerous peer tributes",
+   "page": "entry on The Book of the New Sun",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1985",
+   "routeHint": "Open Library search-inside (snippet-only)",
+   "registerHint": "none",
+   "confidence": "medium: snippet-only"
+  },
+  {
+   "feature": "other: provenance of Le Guin's praise",
+   "claim": "The Le Guin sentence that the 1980s and 1990s reference books quote about Wolfe is the speechless one, not the Melville one that the jackets carry.",
+   "source": "David Pringle, Science Fiction: The 100 Best Novels (1985) and The Ultimate Guide to Science Fiction, via Open Library search-inside",
+   "url": "https://openlibrary.org/search/inside?q=%22Wolfe+is+so+good+he+leaves+me+speechless%22",
+   "quote": "Wolfe is so good he leaves me speechless",
+   "page": "search-inside snippets, four hits across two Pringle titles",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "searched 2026-09-06",
+   "routeHint": "Open Library search-inside; the query for the Melville line returns only jacket copy and one anthology essay, never a Pringle reference entry",
+   "registerHint": "none",
+   "confidence": "medium: snippet-only, and absence in a snippet index is weaker than absence in a read text"
+  },
+  {
+   "feature": "withheld information and inference",
+   "claim": "Clute argues that Wolfe cannot be paraphrased because his stories only make sense once the reader understands how they have been told, and he sets Le Guin's paraphrasability against that.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "she could almost fairly be paraphrased by academics",
+   "page": "review body",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009-04-06",
+   "routeHint": "already on disk at prose-research/sweep/wolfe-raw/gw-clute-2009.txt from an earlier sweep",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: the thinness of the record",
+   "claim": "The table of contents of The Wave in the Mind lists appreciations of Cordwainer Smith and Borges but no piece on Gene Wolfe.",
+   "source": "The Ursula K. Le Guin Foundation, official site, page for The Wave in the Mind",
+   "url": "https://www.ursulakleguin.com/the-wave-in-the-mind",
+   "quote": "Thinking about Cordwainer Smith",
+   "page": "Table of Contents, Readings",
+   "kind": "measurement",
+   "polarity": "does not mention",
+   "date": "book 2004; page fetched 2026-09-06",
+   "routeHint": "direct fetch; the string 'Wolfe' is absent from the page",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: the friendship",
+   "claim": "The evidence noisms offers for the Wolfe and Le Guin friendship is a video interview with Wolfe, not any statement by Le Guin.",
+   "source": "noisms, \"So. Farewell then...\", Monsters and Manuals, 15 April 2019 (the post linked from the friendship essay)",
+   "url": "https://monstersandmanuals.blogspot.com/2019/04/so-farewell-then.html",
+   "quote": "This is a nice interview with him in the last year of his life.",
+   "page": "post body",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2019-04-15",
+   "routeHint": "fetched the April 2019 archive page monstersandmanuals.blogspot.com/2019/04/; the linked interview is an embedded YouTube video, id 0Pf-DyEEGlU",
+   "registerHint": "none",
+   "confidence": "medium: the quotation is from the linked post, and the video itself was not transcribed"
   }
  ]
 }

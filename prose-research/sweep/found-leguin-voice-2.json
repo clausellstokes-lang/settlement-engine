@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "in progress — round 2 of the voice angle",
+ "complete": true,
+ "coverage": "ROSTER: fetched — Paris Review 221, Dreams Must Explain Themselves/Algol 21, Conversations with UKL (Freedman djvu), Is Gender Necessary? Redux, the Lao Tzu introduction and VQR 2018 were all read by the predecessor finder; this round added the Naimon Conversations on Writing poetry conversation (LitHub excerpt) and Dancing at the Edge of the World in full text, which yielded 'Some Thoughts on Narrative' and 'It Was a Dark and Stormy Night' plus 'World-Making', 'Places Names' and 'Reciprocity of Prose and Poetry'. NOT FOUND / BLOCKED: 'Earthsea Revisioned' (1993), no text online, print booklet only; 'A Description of Earthsea' and the Foreword to Tales from Earthsea — archive.org items talesfromearthse0000legu and booksofearthsea0000legu are access-restricted, their djvu.txt returns 'Item not available' and the search-inside APIs returned nothing usable; the 2012 Earthsea afterwords — the only online copy found is a Tumblr image with no text; Naimon's book beyond the two LitHub excerpts — ursulakleguincon0000legu is access-restricted; 'The Last Interview' (2019) — the book is unreachable, so its component Streitfeld interview was read at the primary (LARB 2017) and proved thin on prose style; SF Site 2001 — domain suspended and the Wayback CDX endpoint was offline. NEW FINDS the roster did not name: Le Guin's 2017 Public Books essay on John Galt's 'Annals of the Parish', a novel written as fifty years of parish annals — the single most on-target source of the whole angle — reached through her site's Essays and Criticism index; and 'From Elfland to Poughkeepsie' in full, which no previous round had read at the primary. SUBSTANTIVE SOURCES PER ROUTE: named roster 3; her own site (sitemap plus the Book View Café, Speeches and Essays indexes) 13; interview-index chasing 7; open web and PDF transcription 3; bibliography chasing inside the essay collections 1. 132 claims, every quotation grepped against the fetched text before writing.",
  "sourcesRead": [
   {
    "title": "From Elfland to Poughkeepsie (1973) — full essay text, PDF transcription",
@@ -297,6 +297,14 @@
    "substantive": true,
    "date": "Summer 1996",
    "route": "live URL + browser UA"
+  },
+  {
+   "title": "National Book Foundation Medal acceptance speech (transcript)",
+   "url": "https://www.ursulakleguin.com/nbf-medal",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "19 November 2014",
+   "route": "live URL + browser UA — read; on publishing economics, not prose register"
   },
   {
    "title": "B-Sides: John Galt’s \"Annals of the Parish\" — Le Guin on a novel written as parish annals",

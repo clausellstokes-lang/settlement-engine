@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "in progress: 5 sources read",
+ "complete": true,
+ "coverage": "Named roster: 'The Matter of Seggri' report frames FETCHED (predecessor, sfsfss full text; corroborated this round by the author's own excerpts page and her 2001 foreword); the Left Hand of Darkness chapter-one report opening FETCHED (verbatim in the Books on GIF review, plus Juliette Wade's close reading and the CSU ERWC module); the Kesh 'Back of the Book' NOT REACHABLE in primary text — covered through Garlick and King's article, Saleem, Danny Yee, Rich Horton, Attebery's LOA interview and a Wikipedia relay of the book's own headings; 'A Description of Earthsea' NOT REACHABLE in primary text — Course Hero blocked by Cloudflare, both archive.org search-inside endpoints returned 'Item not available', so it is covered only by Cadden's two Open Library snippets, Weissman's Bookreporter review, the Le Guin Foundation's own book page and a Wikipedia relay; the Hainish notes in The Birthday of the World FETCHED in full at the author's official site (foreword plus the excerpts page carrying the openings of Coming of Age in Karhide, Seggri, Unchosen Love, Mountain Ways, Solitude and Old Music); Ekumen documents in the Hainish novels FETCHED beyond the roster — the chapter-seven field notes quoted at length in the BSFA Review and, the richest find of the round, the Rocannon's World handbook entry quoted in full by Books & Boots; NEA Big Read guide for LHD NOT FOUND (arts.gov returns 'Gone'); the critics named as Bonnell and Eldridge NOT FOUND under those names by search, Crossref or lateral routes, while Horton, Plotz and Cadden were reached (Cadden only as snippets). Substantive sources this round by route: 11 by direct browser-UA curl, 1 PDF binary with pypdf extraction, 1 Open Library search-inside (snippet-only), 2 Wikipedia relays; blocked or gone: Course Hero, archive.org per-item search-inside, arts.gov, OpenAlex (daily budget), and libcom's unauthorised full text, which was deliberately not used. Discovery stopped after the roster was exhausted and two consecutive Open Library expansions returned nothing new; the web-search budget was also exhausted at that point.",
  "sourcesRead": [
   {
    "title": "Rich Horton, 'Review: Always Coming Home, by Ursula K. Le Guin', Strange at Ecbatan",
@@ -1508,7 +1508,7 @@
   },
   {
    "feature": "terminology consistency",
-   "claim": "Each species entry in the handbook ends on a two-word status code.",
+   "claim": "Two of the handbook's species entries end on a two-word status code.",
    "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted by Books & Boots",
    "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
    "quote": "Status C-Prime",
@@ -1665,7 +1665,7 @@
    "claim": "The blogger contrasts the folk-tale style of the novel's opening story with the more factual style of the rest.",
    "source": "Books & Boots (astrofella), review of Rocannon's World, 2019",
    "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
-   "quote": "juxtaposed with the rest of the narrative which are cast in much more factual",
+   "quote": "cast in much more factual, sci fi style",
    "page": "section 'The plot'",
    "kind": "reception",
    "polarity": "asserts",

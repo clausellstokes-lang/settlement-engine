@@ -203,3 +203,143 @@ SFE="https://sf-encyclopedia.com/entry/kay_guy_gavriel"
 S(title="SFE entry kay_guy_gavriel (named in the angle) - 404, no such entry",url=SFE,kind="analysis",substantive=False,date="checked 2026-09-06",route="direct fetch; 404")
 SHK="https://strangehorizons.com/2000/20001113/kayhistory.html"
 S(title="The History behind the Books (Cobb/Mohanraj companion, Strange Horizons 2000) - live URL redirects to modern front matter; Wayback offline this window",url=SHK,kind="analysis",substantive=False,date="checked 2026-09-06",route="direct fetch redirected; archive.org returned Temporarily Offline")
+
+PW1="https://www.publishersweekly.com/9780451464972"
+S(title="River of Stars by Guy Gavriel Kay - Publishers Weekly review",url=PW1,kind="reception",substantive=True,date="PW review of the Roc edition, April",route="direct fetch, browser user agent")
+C(file='pw-9780451464972',feature="place and institution description",
+  claim="Publishers Weekly says the culture of River of Stars is meticulously researched and recreated in powerful prose.",
+  source="Publishers Weekly, unsigned review of River of Stars",url=PW1,
+  quote="meticulously researched and recreated in powerful prose",page="review body, last sentence",kind="reception",polarity="asserts",date="PW review of the Roc hardcover",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+
+PW2="https://www.publishersweekly.com/9780451463302"
+S(title="Under Heaven by Guy Gavriel Kay - Publishers Weekly review",url=PW2,kind="reception",substantive=True,date="PW review of the Roc edition, May",route="direct fetch, browser user agent")
+C(file='pw-9780451463302',feature="place and institution description",
+  claim="Publishers Weekly calls Under Heaven an exquisitely detailed vision of Kitan, a land much like Tang Dynasty China.",
+  source="Publishers Weekly, unsigned review of Under Heaven",url=PW2,
+  quote="an exquisitely detailed vision of Kitan",page="review body, first sentence",kind="reception",polarity="asserts",date="PW review of the Roc hardcover",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='pw-9780451463302',feature="place and institution description",
+  claim="Publishers Weekly identifies the book's material as the complex intrigues of poets, prostitutes, ministers and soldiers.",
+  source="Publishers Weekly, unsigned review of Under Heaven",url=PW2,
+  quote="intrigues of poets, prostitutes, ministers, and soldiers",page="review body",kind="reception",polarity="asserts",date="PW review of the Roc hardcover",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+
+PW3="https://www.publishersweekly.com/978-0-451-47296-0"
+S(title="Children of Earth and Sky by Guy Gavriel Kay - Publishers Weekly review",url=PW3,kind="reception",substantive=True,date="PW review of the NAL edition, May",route="direct fetch, browser user agent")
+C(file='pw-978-0-451-47296-0',feature="withheld information and inference",
+  claim="Publishers Weekly says Children of Earth and Sky is set in a world where nothing is as valuable as information.",
+  source="Publishers Weekly, unsigned review of Children of Earth and Sky",url=PW3,
+  quote="a world where nothing is as valuable as information",page="review body",kind="reception",polarity="asserts",date="PW review of the NAL hardcover",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+C(file='pw-978-0-451-47296-0',feature="place and institution description",
+  claim="Publishers Weekly says the book offers an intricately detailed setting alongside marvelously believable characters.",
+  source="Publishers Weekly, unsigned review of Children of Earth and Sky",url=PW3,
+  quote="an intricately detailed setting, marvelously believable characters",page="review body, last sentence",kind="reception",polarity="asserts",date="PW review of the NAL hardcover",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+
+PW4="https://www.publishersweekly.com/9780451472984"
+S(title="A Brightness Long Ago by Guy Gavriel Kay - Publishers Weekly review",url=PW4,kind="reception",substantive=True,date="PW review of the Berkley edition, May",route="direct fetch, browser user agent")
+C(file='pw-9780451472984',feature="point of view and distance",
+  claim="Publishers Weekly says A Brightness Long Ago is narrated primarily by Guidanio Cerra, a clever young scholar.",
+  source="Publishers Weekly, unsigned review of A Brightness Long Ago",url=PW4,
+  quote="Narrated primarily by Guidanio Cerra, a clever young scholar",page="review body",kind="reception",polarity="asserts",date="PW review of the Berkley hardcover",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+
+PW5="https://www.publishersweekly.com/978-0-451-45028-9"
+S(title="Tigana by Guy Gavriel Kay - Publishers Weekly review",url=PW5,kind="reception",substantive=True,date="PW review of the Roc edition, September (1990)",route="direct fetch, browser user agent")
+C(file='pw-978-0-451-45028-9',feature="place and institution description",
+  claim="Publishers Weekly says Tigana brings to life a layered, pragmatic world of magic and difficult choices where brutality and beauty coexist.",
+  source="Publishers Weekly, unsigned review of Tigana",url=PW5,
+  quote="a layered, pragmatic world of magic and difficult choices",page="review body, first sentence",kind="reception",polarity="asserts",date="PW review of the 1990 Roc edition",routeHint="direct fetch with browser user agent",registerHint="dossier-archivist",confidence="high")
+
+PW6="https://www.publishersweekly.com/978-0-517-59312-7"
+S(title="A Song for Arbonne by Guy Gavriel Kay - Publishers Weekly review",url=PW6,kind="reception",substantive=True,date="PW review of the Crown edition, January (1993)",route="direct fetch, browser user agent")
+C(file='pw-978-0-517-59312-7',feature="other: a world a quarter-turn from ours",
+  claim="Publishers Weekly says Kay creates a realm that resembles ours but is just different enough to enrich the fantasy genre.",
+  source="Publishers Weekly, unsigned review of A Song for Arbonne",url=PW6,
+  quote="a realm that resembles ours but is just different enough",page="review body, last sentence",kind="reception",polarity="asserts",date="PW review of the Crown edition",routeHint="direct fetch with browser user agent",registerHint="none",confidence="high")
+
+SHH="https://web.archive.org/web/20160319104019id_/http://www.strangehorizons.com/2000/20001113/kayhistory.html"
+S(title="More about Guy Gavriel Kay's novels: the history behind each book - Strange Horizons companion to Cobb and Mohanraj",url=SHH,kind="analysis",substantive=True,date="published 13 November 2000; capture 19 March 2016",route="Wayback raw capture (id_), after the live URL redirected to modern front matter")
+C(file='sh-kayhist-wb',feature="other: fidelity to sources with deliberate changes",
+  claim="The Strange Horizons companion says Kay works closely with his historical sources but sometimes makes crucial changes in the course of events.",
+  source="Christopher Cobb and Mary Anne Mohanraj (unsigned companion), 'More about Guy Gavriel Kay's novels', Strange Horizons, 13 November 2000",url=SHH,
+  quote="he sometimes makes crucial changes in the course of events",page="History Intro",kind="analysis",polarity="asserts",date="2000-11-13",routeHint="Wayback raw capture 20160319104019id_",registerHint="none",confidence="high")
+C(file='sh-kayhist-wb',feature="annalist voice and deep time",
+  claim="The Strange Horizons companion says Kay's foreshadowings and Crispin's awareness of ruins make the Sarantine Empire at its height seem vulnerable and transitory.",
+  source="Christopher Cobb and Mary Anne Mohanraj (unsigned companion), 'More about Guy Gavriel Kay's novels', Strange Horizons, 13 November 2000",url=SHH,
+  quote="seem vulnerable and transitory",page="Roman Empire Background, last sentence",kind="analysis",polarity="asserts",date="2000-11-13",routeHint="Wayback raw capture 20160319104019id_",registerHint="chronicle-line",confidence="high")
+
+ATT="https://archive.org/download/strategies-of-fantasy/strategies-of-fantasy_djvu.txt"
+S(title="Brian Attebery, Strategies of Fantasy (Indiana University Press, 1992) - full OCR text",url=ATT,kind="measurement",substantive=True,date="1992 book; OCR text read 2026-09-06",route="archive.org open item, _djvu.txt downloaded whole (458,049 bytes)")
+C(file=None,feature="stylometry",
+  claim="Attebery's Strategies of Fantasy contains no occurrence of the string Gavriel, and none of Tigana, Fionavar, Arbonne or Al-Rassan, so the book does not discuss Guy Gavriel Kay.",
+  source="Brian Attebery, Strategies of Fantasy (Indiana University Press, 1992), full OCR text counted by the finder",url=ATT,
+  quote="",page="whole text, 458,049 bytes of OCR",kind="measurement",polarity="mentions",date="1992 edition, counted 2026-09-06",routeHint="archive.org open item _djvu.txt; grep -ic over the whole file",registerHint="none",confidence="high")
+C(file=None,feature="stylometry",
+  claim="The only occurrence of the surname Kay in Attebery's Strategies of Fantasy is an index entry for the folklorist Kay Stone at page ninety-three.",
+  source="Brian Attebery, Strategies of Fantasy (Indiana University Press, 1992), index",url=ATT,
+  quote="",page="index",kind="measurement",polarity="mentions",date="1992 edition, counted 2026-09-06",routeHint="archive.org open item _djvu.txt; grep -in 'Kay,'",registerHint="none",confidence="high")
+
+SFU="http://www.sfsite.com/09b/uh328.htm"
+S(title="The SF Site Featured Review: Under Heaven - a review by Dominic Cilli",url=SFU,kind="reception",substantive=True,date="copyright 2010",route="Wayback raw capture (id_) 20100927040518; sfsite.com unreachable directly from this host")
+C(file='sfsite-uh-wb',feature="other: personalised history instead of names and dates",
+  claim="Dominic Cilli says Under Heaven gives a history lesson where the names and dates are not tucked neatly in a row but a more personalized history.",
+  source="Dominic Cilli, review of Under Heaven, SF Site, 2010",url=SFU,
+  quote="names and dates are tucked neatly in a row",page="review body",kind="reception",polarity="asserts",date="2010",routeHint="Wayback raw capture 20100927040518id_",registerHint="chronicle-line",confidence="high")
+C(file='sfsite-uh-wb',feature="cadence and rhythm",
+  claim="Cilli says he was struck by the feel of Under Heaven, which had a very lyrical and poetic quality to it.",
+  source="Dominic Cilli, review of Under Heaven, SF Site, 2010",url=SFU,
+  quote="a very lyrical and poetic quality to it",page="review body, on the writing",kind="reception",polarity="asserts",date="2010",routeHint="Wayback raw capture 20100927040518id_",registerHint="none",confidence="high")
+
+SFS="http://www.sfsite.com/02b/sail51.htm"
+S(title="The SF Site: Sailing to Sarantium - a review by James Seidman",url=SFS,kind="reception",substantive=True,date="copyright 1999",route="Wayback raw capture (id_) 20241215155441")
+C(file='sfs-sail',feature="place and institution description",
+  claim="James Seidman says it is amazing how many varied aspects of the historical Byzantine Empire are represented in Kay's fictional Sarantine Empire.",
+  source="James Seidman, review of Sailing to Sarantium, SF Site, 1999",url=SFS,
+  quote="how many varied aspects of the Byzantine Empire are represented",page="review body",kind="reception",polarity="asserts",date="1999",routeHint="Wayback raw capture 20241215155441id_",registerHint="dossier-archivist",confidence="high")
+C(file='sfs-sail',feature="place and institution description",
+  claim="Seidman notes that among the obscure Byzantine features Kay carries over is a violent religious dispute mirroring the Arian heresy.",
+  source="James Seidman, review of Sailing to Sarantium, SF Site, 1999",url=SFS,
+  quote="a violent religious dispute that mirrors Christianity's Arian heresy",page="review body",kind="reception",polarity="asserts",date="1999",routeHint="Wayback raw capture 20241215155441id_",registerHint="dossier-archivist",confidence="high")
+
+SFL="http://www.sfsite.com/05a/le80.htm"
+S(title="The SF Site: Lord of Emperors - a review by Wayne MacLaurin",url=SFL,kind="reception",substantive=True,date="copyright 2000",route="Wayback raw capture (id_) 20241217193312")
+C(file='sfs-le',feature="place and institution description",
+  claim="Wayne MacLaurin says every character from lowliest foot-soldier to high priest is rich and complex and seldom flat or misplaced.",
+  source="Wayne MacLaurin, review of Lord of Emperors, SF Site, 2000",url=SFL,
+  quote="from lowliest foot-soldier to high priest",page="review body",kind="reception",polarity="asserts",date="2000",routeHint="Wayback raw capture 20241217193312id_",registerHint="dossier-archivist",confidence="high")
+C(file='sfs-le',feature="place and institution description",
+  claim="MacLaurin says Sarantium itself comes to life within the pages of the novel.",
+  source="Wayne MacLaurin, review of Lord of Emperors, SF Site, 2000",url=SFL,
+  quote="Sarantium itself comes to life within the pages",page="review body",kind="reception",polarity="asserts",date="2000",routeHint="Wayback raw capture 20241217193312id_",registerHint="dossier-archivist",confidence="high")
+
+SFH="http://www.sfsite.com/03a/ll171.htm"
+S(title="The SF Site: The Last Light of the Sun - a review by Alma A. Hromic",url=SFH,kind="reception",substantive=True,date="copyright 2004",route="Wayback raw capture (id_) 20251014060325")
+C(file='sfs-ll171',feature="consequence on a household",
+  claim="Alma Hromic says Kay's books convey that history is woven from the small things done by and to people who live under the cloak of great events.",
+  source="Alma A. Hromic, review of The Last Light of the Sun, SF Site, 2004",url=SFH,
+  quote="history is woven from the small things",page="review body",kind="reception",polarity="asserts",date="2004",routeHint="Wayback raw capture 20251014060325id_",registerHint="dossier-archivist",confidence="high")
+C(file='sfs-ll171',feature="consequence on a household",
+  claim="Hromic says Kay's minor characters pass through the book carrying some trace of events that have rolled across them.",
+  source="Alma A. Hromic, review of The Last Light of the Sun, SF Site, 2004",url=SFH,
+  quote="carry some trace of events that have rolled across them",page="review body",kind="reception",polarity="asserts",date="2004",routeHint="Wayback raw capture 20251014060325id_",registerHint="dossier-archivist",confidence="high")
+C(file='sfs-ll171',feature="omission as information",
+  claim="Hromic says the book gives the sense of glimpsing a few shining threads in a larger tapestry.",
+  source="Alma A. Hromic, review of The Last Light of the Sun, SF Site, 2004",url=SFH,
+  quote="glimpsing a few shining threads in a larger tapestry",page="review body, closing paragraph",kind="reception",polarity="asserts",date="2004",routeHint="Wayback raw capture 20251014060325id_",registerHint="dossier-archivist",confidence="high")
+C(file='sfs-ll171',feature="withheld information and inference",
+  claim="Hromic says there is the usual sense that more lies in the background of the story than the reader has been told.",
+  source="Alma A. Hromic, review of The Last Light of the Sun, SF Site, 2004",url=SFH,
+  quote="more, so much more, in the background",page="review body, closing paragraph",kind="reception",polarity="asserts",date="2004",routeHint="Wayback raw capture 20251014060325id_",registerHint="dossier-archivist",confidence="high")
+C(file='sfs-ll171',feature="other: the north as a plainer register than the courts",
+  claim="Hromic says Kay's northern novel visits a corner of his milieu far more raw and earthy than the rarefied decadence of Sarantium.",
+  source="Alma A. Hromic, review of The Last Light of the Sun, SF Site, 2004",url=SFH,
+  quote="far more raw and earthy than the rarefied decadence",page="review body",kind="reception",polarity="asserts",date="2004",routeHint="Wayback raw capture 20251014060325id_",registerHint="none",confidence="high")
+
+LOC92="https://locusmag.com/1992/09/table-of-contents-september-1992/"
+S(title="Table of Contents, September 1992 - Locus (confirms Faren Miller reviewed A Song for Arbonne, page 17)",url=LOC92,kind="relay",substantive=False,date="Locus, September 1992",route="direct fetch")
+
+BLK="https://www.booklistonline.com/SearchResults?Keyword=Guy+Gavriel+Kay"
+S(title="Booklist Online search for Guy Gavriel Kay - client-rendered, no review text served",url=BLK,kind="reception",substantive=False,date="checked 2026-09-06",route="direct fetch; page body is a JS shell (67 characters of text)")
+LJK="https://www.libraryjournal.com/?searchTerm=Guy%20Gavriel%20Kay"
+S(title="Library Journal search for Guy Gavriel Kay - client-rendered, no review text served",url=LJK,kind="reception",substantive=False,date="checked 2026-09-06",route="direct fetch; reviews.libraryjournal.com returns 502")
+NYTS="https://www.nytimes.com/search?query=Guy%20Gavriel%20Kay"
+S(title="New York Times search for Guy Gavriel Kay - 403 to this host; no NYT review cited by any Kay Wikipedia article",url=NYTS,kind="reception",substantive=False,date="checked 2026-09-06",route="direct fetch 403; Wayback CDX wildcard needs authorization; web search budget exhausted")
+MEN="https://archive.org/details/rhetoricsoffanta0000mend"
+S(title="Farah Mendlesohn, Rhetorics of Fantasy (2008) - lending-restricted at the Internet Archive; full text not readable",url=MEN,kind="analysis",substantive=False,date="checked 2026-09-06",route="archive.org metadata found the item; fulltext/inside.php returns Item not available; _djvu.txt 302; HathiTrust 403; Google Books API returned no totals")
