@@ -3,15 +3,16 @@
  "name": "dnd",
  "angle": "usability-school",
  "tag": null,
- "lines": 398,
+ "lines": 401,
  "firstTs": "2026-09-06T12:05:18.083Z",
- "lastTs": "2026-09-06T12:26:23.492Z",
+ "lastTs": "2026-09-06T12:30:50.732Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
   "Bash": 97,
   "WebFetch": 2,
-  "WebSearch": 12
+  "WebSearch": 12,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://tenfootpole.org/ironspike/?page_id=3",
@@ -74,7 +75,7 @@
  "run": "wf_4f47327c-3fe",
  "agent": "a0cb252526dc7c7d4",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_4f47327c-3fe/agent-a0cb252526dc7c7d4.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-usability-school.json",
   "claims": 123,

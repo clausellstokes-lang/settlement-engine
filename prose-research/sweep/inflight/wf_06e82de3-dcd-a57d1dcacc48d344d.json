@@ -3,15 +3,16 @@
  "name": "ai",
  "angle": "steerability-mechanism",
  "tag": null,
- "lines": 423,
+ "lines": 426,
  "firstTs": "2026-09-06T12:07:05.341Z",
- "lastTs": "2026-09-06T12:26:38.337Z",
+ "lastTs": "2026-09-06T12:30:07.297Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
   "Bash": 110,
   "WebFetch": 2,
-  "WebSearch": 3
+  "WebSearch": 3,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://arxiv.org/abs/2310.06452",
@@ -66,7 +67,7 @@
  "run": "wf_06e82de3-dcd",
  "agent": "a57d1dcacc48d344d",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_06e82de3-dcd/agent-a57d1dcacc48d344d.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-steerability-mechanism.json",
   "claims": 72,

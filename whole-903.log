@@ -20,3 +20,11 @@ Not implemented: navigation to another Document
 Not implemented: navigation to another Document
  ❯ tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js (23 tests | 1 failed) 1095ms
      × the current source tree matches the recorded hash (regenerate via npm run build:edge-shared) 100ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/edgeFunctions/edgeSharedBundleReproducibility.test.js (25 tests | 2 failed) 1839ms
+       × the recorded sourceHash equals the builder hash over INDEX content 129ms
+       × the recorded sourceHash equals the builder hash over INDEX content 112ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document
+ ❯ tests/edgeFunctions/aiCharterBundle.freshness.test.js (19 tests | 1 failed) 684ms
+     × the current source tree matches the recorded hash (regenerate via npm run build:edge-shared) 55ms

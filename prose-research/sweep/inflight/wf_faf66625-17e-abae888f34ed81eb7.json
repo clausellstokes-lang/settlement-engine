@@ -3,15 +3,16 @@
  "name": "martin",
  "angle": "scholarship",
  "tag": null,
- "lines": 351,
+ "lines": 354,
  "firstTs": "2026-09-06T12:03:19.391Z",
- "lastTs": "2026-09-06T12:24:48.767Z",
+ "lastTs": "2026-09-06T12:28:04.980Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
   "Bash": 79,
   "WebSearch": 12,
-  "WebFetch": 2
+  "WebFetch": 2,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://journal.finfar.org/articles/book-review-george-r-r-martin-and-the-fantasy-form/",
@@ -69,7 +70,7 @@
  "run": "wf_faf66625-17e",
  "agent": "abae888f34ed81eb7",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_faf66625-17e/agent-abae888f34ed81eb7.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-martin-scholarship.json",
   "claims": 83,

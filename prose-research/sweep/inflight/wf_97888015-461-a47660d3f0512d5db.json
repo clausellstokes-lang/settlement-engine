@@ -3,14 +3,15 @@
  "name": "wolfe",
  "angle": "academic",
  "tag": null,
- "lines": 342,
+ "lines": 345,
  "firstTs": "2026-09-06T12:01:24.697Z",
- "lastTs": "2026-09-06T12:25:53.924Z",
+ "lastTs": "2026-09-06T12:30:29.996Z",
  "tools": {
   "Read": 4,
   "ToolSearch": 1,
   "Bash": 79,
-  "WebSearch": 7
+  "WebSearch": 7,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://gwern.net/doc/fiction/gene-wolfe/$f.pdf",
@@ -68,7 +69,7 @@
  "run": "wf_97888015-461",
  "agent": "a47660d3f0512d5db",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_97888015-461/agent-a47660d3f0512d5db.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-academic.json",
   "claims": 112,
