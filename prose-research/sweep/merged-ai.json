@@ -3312,6 +3312,111 @@
    "trueWording": "Once your story has reached a local minimum of samey cliches, it won't stop going to the same well",
    "note": "Exact (curly apostrophe). Human-writer limb also on the page: 'A human writer might reuse words, but even bad ones will \"give it a rest\" when they notice.'",
    "fromFile": "verdicts-ai-i165-179.json"
+  },
+  "180": {
+   "index": 180,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Alternating loquacious ponderous similes and tiny sentences",
+   "note": "Exact substring in Makin's article (page continues 'made out of cliches?'). Makin writes it while deliberately imitating LLM tells; Gemini's own quoted reasoning corroborates the alternation as 'the tell-tale signature of an algorithm'. 'Without a governing restraint' is the researcher's gloss, not the page's words.",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "181": {
+   "index": 181,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a geometry of madness, a wound in the fabric",
+   "note": "Exact substring, and the article itself uses it as its 'Lists of three' bullet example: Lists of three: 'It was a geometry of madness, a wound in the fabric of what is, older than law and time'. Claim fully supported.",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "182": {
+   "index": 182,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "spammed in the final sentence to describe a single concept",
+   "note": "Exact substring; full sentence reads '...similes and metaphors spammed in the final sentence to describe a single concept…'. Claim fully supported.",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "183": {
+   "index": 183,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Extremely curt dialogue that ends in a “cliffhanger”.",
+   "note": "Word-for-word match; the page puts cliffhanger in scare quotes, which the citation drops. The 'rigidly demarcated from exposition' half is also supported: 'Writing generally starts feeling “blocky” as if you have clearly defined areas of dialogue, exposition and repetitive narration.'",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "184": {
+   "index": 184,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Emdashes are less common than they were months ago.",
+   "note": "Quote as cited ('than months ago') is NOT on the page; the page reads 'than they were months ago'. Substance fully supported, including the replacement mechanism: 'Newer models use the same sentence structures with semicolons or commas in their place', and persistence of structural tells ('The aforementioned “not X; Y” is still universal').",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "185": {
+   "index": 185,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "overassign active verbs, and by extension intent",
+   "note": "Exact substring: 'AI still has a tendency to overassign active verbs, and by extension intent, to inanimate objects that wouldn't be acting out of agency.' The 'dawn unfurled' example is the article's centrepiece, and the 'also just bad writing' half is supported: 'it could just be that they're not exactly a very good writer.' Byline/date match (Kevin Hess, Aug 13 2025).",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "186": {
+   "index": 186,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "No Tuesday. No laundromat. No grandmother with a specific brand…",
+   "note": "Quote as cited is a compression; the page's tell #24 'The missing concrete particular' reads 'No Tuesday. No laundromat. No grandmother with a specific brand of mentholated cough drop.' Laura Preston is cited on the same lines (n+1, 'An Age of Hyperabundance'), and 'No grain: no proper nouns, no specific months, no brand names' repeats the point. Substance sound; the quote is not verbatim.",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "187": {
+   "index": 187,
+   "verdict": "NOT_FOUND",
+   "trueWording": "",
+   "note": "The cited quote 'make a joke that risks falling flat' does not appear. Across the full article text (43k chars) 'joke' occurs once, unrelated ('became the whole joke'); 'digress', 'idiom' and 'unfinished' occur zero times; 'contradict' occurs once about Turnitin false positives. Nothing on the page enumerates what LLM prose never does in these terms. WebFetch, run independently, also returned NONE. The nearest adjacent material is tell #12 'Hypotactic smoothness, no fragments' ('Their sentences resolve. Real prose misbehaves.'), which does not carry the claim's list.",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "188": {
+   "index": 188,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "high school essay vibes",
+   "note": "Exact substring, and correctly framed as Vollmer's guide quoting AI for Lifelong Learners. All three claim parts are on the page: #9 'Uniform sentence length (low burstiness)'; #13 'LLMs default to intro + three body sections + recap even for 100-word answers'; #19 'Aphoristic closure — Paragraphs end on a pseudo-profound kicker designed to feel like a pull-quote.'",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "189": {
+   "index": 189,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Dialogue flattening: characters sound alike; no distinct idiolect.",
+   "note": "No quote was supplied, so verbatim is not assessable. All three parts verified in section 'B. In Fiction': 'characters sound alike; no distinct idiolect. No one has verbal tics, dialect, or pattern of evasion'; '“As-you-know-Bob” exposition: the model's default is to resolve mysteries with explanatory speech rather than action'; 'Resolution bias: endings tie up. The model does not trust the reader with ambiguity unless explicitly told to.' ATTRIBUTION CAVEAT: Neil Clarke is quoted on the page only for 'they are boring. They are flat' / 'bad in ways that no human has been bad before'; the three bullets are the guide's own, listed after Clarke under 'Beyond that:', not Clarke's words.",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "190": {
+   "index": 190,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a jaw that was, objectively, a jaw",
+   "note": "Quote appears word for word twice on the thread page. ATTRIBUTION IS WRONG: it is in post #1 by Negrek (thread starter, Aug 18 2026), not Goolix. Negrek coins the phrase as a label ('the legendary phrase “a jaw that was, objectively, a jaw”'); the AI text itself reads 'a jaw that was, objectively, a really nice jaw', with Negrek's note 'a very very weird thing to write.' Goolix (post #4) does make a same-shape point about physically impossible description ('What kind of coat can conceal breadth?... its model of physical reality is wonky'), so the feature holds under Goolix too, but this quote is not his.",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "191": {
+   "index": 191,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Something he didn't have a good word for",
+   "note": "Exact substring in Negrek's editorial note (post #1): 'Claude is often vague. Something he didn't have a good word for, something he couldn't name.' Attribution to Negrek is correct. CAVEAT: the source frames it as generic vagueness, not specifically emotional evasion; the narrated instance is 'Shane's brain did something he didn't have a good word for'. 'Declining to examine emotion with specificity' is the researcher's gloss.",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "192": {
+   "index": 192,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a voice like a waiting room",
+   "note": "Exact substring (three occurrences). Negrek, post #1, correct attribution: '...until I get to the “He had a voice like a waiting room” line, at which point it's like BZZZT, GAME OVER. The rule-of-three + simile combined with the bizarre metaphor (his voice was designed to contain things??) is a screaming red flag.' Claim fully supported including 'screaming red flag'.",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "193": {
+   "index": 193,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "starting a sentence with “not”–is common with LLMs",
+   "note": "The cited three-fragment string is a COMPOSITE and appears nowhere contiguously (confirmed by raw-text scan and by independent WebFetch). The page has 'Not quite a smile.' in one excerpt and, ~10k chars later, a separate 'really Claude-y' example line: '“Not unkind. Not impatient. Just—waiting.”' The pattern claim itself is supported by Negrek's note: '[Note: This structure–starting a sentence with “not”–is common with LLMs.]' ATTRIBUTION IS WRONG: both passages are Negrek's post #1, not Goolix.",
+   "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "194": {
+   "index": 194,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Perfectly confident, convincing-sounding writing that just makes no sense at all.",
+   "note": "No quote was supplied. Verified in Dragonfree's post #5 (attribution correct): 'I'm so amused by the AI deciding that Nox had four different contingency plans based on the idea that he'd get a Luxray as a starter (if they're all based on the same singular assumption, what makes them four different contingency plans?) and none for any other possibility, only for it to turn out he's actually getting his starter from a lab that gives out Johto starters'. The generated excerpt ('He'd built four contingency branches off that single point. He had built zero contingency branches off anything else.') was posted by Flyg0n; Dragonfree supplies the premise-tracking analysis.",
+   "fromFile": "verdicts-ai-i180-194.json"
   }
  }
 }

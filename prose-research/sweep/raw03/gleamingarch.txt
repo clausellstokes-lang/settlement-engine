@@ -1,0 +1,357 @@
+ 
+ Gleaming Arch: Alliteration in The Return of the King 
+ "Yet all experience is an arch wherethrough /
+Gleams that untravelled world, whose margin fades /
+For ever and for ever when I move." 
+ Sunday, September 7, 2014 
+Alliteration in The Return of the King
+While re-reading The Lord of the Rings: The Return of the King , I found multiple instances where Tolkien's writing style emulates that of Anglo-Saxon poems. Most of my knowledge of Anglo-Saxon poems comes from the introduction to my edition of Sir Gawain and the Green Knight . The version I have is in the Oxford World's Classics series, translated by Keith Harrison with an introduction by Helen Cooper. In the introduction Cooper notes the frequent alliteration in the poem: "the defining feature of the poems of the movement [the "Alliterative Revival" of the 14th century] is the repetition of key sounds within each line, rather than a rhyme or a strictly regular metrical pattern." Additionally, the introduction to one of my editions of Beowulf mentions this alliteration. The translator - Burton Raffel - notes that he "felt it advisable, even obligatory, to alliterate much more freely, occasionally as the Old English alliterates," and in the afterword Roberta Frank notes that the lines are "linked by alliteration." While Beowulf is older than Sir Gawain the Green Knight , through that particular stylistic element they're connected (based on Cooper's comments on the "Alliterative Revival," it seems as if the alliteration in Sir Gawain and the Green Knight might be reviving that of poems like Beowulf ). The themes (of knights and battles) are similar too. Tolkien studied - and, if I'm not mistaken, even taught - Anglo-Saxon literature (I recently got his translation of Beowulf ), so I'm pretty sure that he would have been familiar with this particular feature and it's not surprising that he includes it in The Lord of the Rings . 
+ This posts contains spoilers for The Return of the King . 
+The first instance I found of this alliteration is at the end of Chapter 3 (The Muster of Rohan). Before the knights of Rohan go to aid Gondor, they sing a song about Théoden: 
+From d ark D unharrow in the d im morning 
+with th ane and captain rode Th engel's son: 
+to Edoras h e came, the ancient h alls 
+of the M ark-wardens m ist-enshrouded; 
+ g olden timbers were in g loom mantled. 
+ F arewell he bade to his f ree people, 
+ h earth and h igh-seat, and the h allowed places, 
+where long h e h ad f easted ere the light f aded. 
+ F orth rode the king, f ear behind him, 
+ f ate before h im. F ealty kept h e; 
+oaths h e h ad taken, all f ul f illed them. 
+ F orth rode Théoden. F ive nights and days 
+ e ast and onward rode the E orlingas 
+through F olde and F enmarch and the F irienwood, 
+ s ix thousand s pears to S unlending, 
+ M undburg the m ighty under M indolluin, 
+ S ea- k ings' city in the S outh- k ingdom 
+ f oe-beleaguered, f ire-encircled. 
+ D oom d rove th em on. D arkness took th em, 
+ h orse and h orseman; h oofbeats afar 
+ s ank into s ilence: s o the s ongs tell us. 
+Once they arrive and the battle begins (at the end of Chapter 5, the title of which [The Ride of the Rohirrim] is alliterative in itself), there's an-other alliterative cheer: 
+ A rise, a rise, Riders of Théoden! 
+ F ell deeds a wake: f ire a nd slaughter! 
+ sp ear sh all be sh aken, sh ield be sp lintered, 
+a s word- d ay, a red d ay, ere the s un rises! 
+ R ide n ow, r ide n ow! R ide to Gondor! 
+But, interestingly, that alliterative element also makes its way into Tolkien's prose here: 
+With that h e [Théoden] seized a great h orn from Guthláf, his b anner- b earer, and he b lew such a b last upon it that it b urst asunder. A nd straightway a ll the h orns in the h ost were lifted up in music, and the blowing of the h orns of Rohan in that h our was like a storm upon the plain and a thunder in the mountains. 
+... 
+ S uddenly the king cried to S nowmane and the horse s prang away. B ehind h im h is b anner b lew in the wind. ... Éomer rode there, the white h orsetail on h is h elm floating in his speed, and the f ront of the f irst éored roared like a breaker f oaming to the shore. ... F ey he [Théoden] seemed, or the battle- f ury of his f athers ran like new f ire in his veins. ... His golden sh ield was uncovered, and lo! it sh one like an image of the Sun, and the gr ass flamed into gr een about the white feet of his steed. ... The hosts of Mordor wailed, and t error t ook t hem, ... A nd then a ll the host of Rohan burst into song, and th ey s ang as th ey s lew, for the joy of battle was on them, and th e s ound of th eir s inging th at was fair and terrible came even to the City. 
+When Éomer takes up the kingship in Chapter 6 (The Battle of the Pelennor Fields), he continues the alliterative verses: 
+ O ut o f d oubt, o ut o f d ark to the d ay's rising 
+ I came s inging i n the s un, s word un s heathing. 
+ T o h ope's end I rode and t o h eart's breaking: 
+ N ow f or wr ath, n ow f or r uin and a r ed n ight f all! 
+And the alliteration is present in the song that recounts the battle: 
+We h eard of the h orns in the h ills ringing, 
+the s words s hining in the S outh-kingdom. 
+ St eeds went st riding to the St oningland 
+as w ind in the morning. W ar w as kindled. 
+ Th ere Th éoden fell, Th engling mighty, 
+to his g olden halls and g reen pastures 
+in the N orthern fields n ever returning, 
+ h igh lord of the h ost. H arding and Guthláf, 
+ D únhere and D éorwine, d oughty Grimbold, 
+ H erefara and H erubrand, H orn and Fastred, 
+ f ought and f ell there in a f ar country: 
+in the M ounds of M undburg under m ould they lie 
+with their l eague-fellows, l ords of Gondor. 
+Neither H irluin the Fair to the h ills by the sea, 
+nor F orlong the old to the f lowering vales 
+ever, t o Arnach, t o his own country 
+returned in t riumph; nor the t all bowmen, 
+ D erufin and D uilin, to their d ark waters, 
+ m eres of M orthond under m ountain-shadows. 
+ D eath in the morning and at d ay's ending 
+ l ords took and l owly. L ong now they sleep 
+under g rass in G ondor by the G reat River. 
+ G rey now as tears, g leaming silver, 
+ r ed then it r olled, r oaring water: 
+ f oam dyed with blood f lamed at sunset: 
+as b eacons mountains b urned at evening; 
+ r ed fell the dew in R ammas Echor. 
+And finally, there's the song sung at Théoden's funeral (in Chapter 6 [Many Partings] of Book Six), which is similar to what Éomer says when he rides into battle: 
+ O ut o f d oubt, o ut of d ark, to the d ay's rising 
+he rode s inging in the s un, s word un s heathing. 
+ H ope h e rekindled, and in h ope ended; 
+ o ver d eath, o ver d read, o ver d oom lifted 
+ o ut o f l oss, o ut o f l ife, unto l ong glory. 
+I started paying attention to all of the alliteration of the characters from Rohan only while reading The Return of the King , so I might have missed a lot in The Two Towers and even in the beginning of The Return of the King . However, I still think there's enough alliteration present to connect Rohan to those Anglo-Saxon poems. 
+There are some other elements in The Lord of the Rings that I feel have precedents in Beowulf (for instance, Meduseld seems to be Tolkien's version of Herot), but I'm going to have to re-read both in order to find specific descriptions of each to compare.
+Posted by
+ David Brauer 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ alliteration ,
+ Beowulf ,
+ Burton Raffel ,
+ Helen Cooper ,
+ J.R.R. Tolkien ,
+ Keith Harrison ,
+ Roberta Frank ,
+ Sir Gawain and the Green Knight ,
+ The Lord of the Rings ,
+ The Return of the King 
+ Newer Post 
+ Older Post 
+ Home 
+ Pages 
+ Home 
+ Instagram 
+ About 
+ Extra-Textual Stories 
+ My Other Blogs 
+ Blog Archive 
+ ► 
+2026
+ (2) 
+ ► 
+May
+ (2) 
+ ► 
+2025
+ (4) 
+ ► 
+November
+ (1) 
+ ► 
+October
+ (1) 
+ ► 
+April
+ (1) 
+ ► 
+January
+ (1) 
+ ► 
+2024
+ (1) 
+ ► 
+May
+ (1) 
+ ► 
+2023
+ (5) 
+ ► 
+December
+ (2) 
+ ► 
+November
+ (1) 
+ ► 
+January
+ (2) 
+ ► 
+2022
+ (5) 
+ ► 
+November
+ (1) 
+ ► 
+June
+ (1) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (1) 
+ ► 
+January
+ (1) 
+ ► 
+2021
+ (2) 
+ ► 
+September
+ (1) 
+ ► 
+June
+ (1) 
+ ► 
+2020
+ (2) 
+ ► 
+October
+ (1) 
+ ► 
+May
+ (1) 
+ ► 
+2017
+ (1) 
+ ► 
+August
+ (1) 
+ ► 
+2016
+ (6) 
+ ► 
+July
+ (2) 
+ ► 
+June
+ (1) 
+ ► 
+March
+ (1) 
+ ► 
+January
+ (2) 
+ ► 
+2015
+ (17) 
+ ► 
+December
+ (3) 
+ ► 
+November
+ (3) 
+ ► 
+October
+ (4) 
+ ► 
+September
+ (4) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (1) 
+ ▼ 
+2014
+ (19) 
+ ► 
+October
+ (4) 
+ ▼ 
+September
+ (3) 
+ More on Brave New World 
+ Hamlet in Brave New World 
+ Alliteration in The Return of the King 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (1) 
+ ► 
+May
+ (2) 
+ ► 
+April
+ (1) 
+ ► 
+March
+ (2) 
+ ► 
+February
+ (1) 
+ ► 
+January
+ (2) 
+ ► 
+2013
+ (13) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (1) 
+ ► 
+August
+ (4) 
+ ► 
+July
+ (3) 
+ ► 
+May
+ (3) 
+ ► 
+April
+ (1) 
+ Goodreads 
+ David's bookshelf: currently-reading 
+ Remembrance: Selected Correspondence of Ray Bradbury 
+ by Ray Bradbury 
+ What Jesus Means to Me 
+ by Herman W. Gockel 
+ The da Vinci Notebooks 
+ by Leonardo da Vinci 
+ The Art of Watching Films 
+ by Joseph M. Boggs 
+ Philemon: A Biblical Greek Visual Reader 
+ by Sawyer D Moranville 
+ Greek Grammar Beyond the Basics: An Exegetical Syntax of the New Testament with Scripture, Subject, and Greek Word Indexes 
+ by Daniel B. Wallace 
+ Beethoven: Impressions by His Contemporaries 
+ by Oscar Sonneck 
+ Elementary Turkish 
+ by Lewis V. Thomas 
+ Confessions 
+ by Augustine of Hippo 
+ The Dord, the Diglot, and an Avocado or Two: The Hidden Lives and Strange Origins of Common and Not-So-Common Words 
+ by Anu Garg 
+ Colloquial Polish: The Complete Course for Beginners 
+ by Bolesław W. Mazur 
+ M.C. Escher: The Graphic Work 
+ by m-c-escher 
+ I Am Brian Wilson: A Memoir 
+ by Brian Wilson 
+ The Fairy Tales of Charles Perrault 
+ by Charles Perrault 
+ Sunrise on the Reaping 
+ by Suzanne Collins 
+ Times and Seasons - The Rise and Fall and Rise of The Zombies 
+ by Robin Platts 
+ The Merchant of Venice 
+ by William Shakespeare 
+ The Band FAQ: All That's Left to Know About the Fathers of Americana 
+ by Peter Aaron 
+ The Beach Boys 
+ by The Beach Boys 
+ Diaries, 1910-1923 
+ by Franz Kafka 
+ The Complete Stories 
+ by Franz Kafka 
+ The Collected Poems of Emily Dickinson 
+ by Emily Dickinson 
+ Duke: A Life of Duke Ellington 
+ by Terry Teachout 
+ The New Bach Reader 
+ by Hans T. David 
+ Holy Bible 
+ by Anonymous 
+ The Return of the King 
+ by J.R.R. Tolkien 
+ The Approaching Storm 
+ by Alan Dean Foster 
+ The Original Illustrated Sherlock Holmes 
+ by Arthur Conan Doyle 
+ The Collected Letters of C. S. Lewis, Volume II 
+ by C.S. Lewis 
+ Diary of Samuel Pepys -- Complete 
+ by Samuel Pepys 
+ Les Misérables 
+ by Victor Hugo 
+ The Monkees: The Day-By-Day Story 
+ by Andrew Sandoval 
+ The Journals of Lewis and Clark, 1804-1806 
+ by Meriwether Lewis 
+ A Practical Grammar for Classical Hebrew, 2nd Edition 
+ by Jacob Weingreen 
+ The Travels of Marco Polo - Volume 1 
+ by Marco Polo 
+ Merriam-Webster's Collegiate Dictionary 
+ by Merriam-Webster 
+ The Heath Anthology of American Literature 
+ by Paul Lauter 
+ The Complete Poetry and Prose 
+ by William Blake 
+Simple theme. Powered by Blogger .
+ 

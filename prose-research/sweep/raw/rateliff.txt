@@ -1,0 +1,854 @@
+ 
+ Sacnoth's Scriptorium: Eowyn's Thee and Thou 
+ skip to main |
+ skip to sidebar 
+Sacnoth's Scriptorium
+ Saturday, April 6, 2019 
+Eowyn's Thee and Thou
+So, in my early days of reading, and re-reading, and re-re-reading THE LORD OF THE RINGS over and over again, I used to be puzzled by the scene in which Eowyn begs Aragorn to take her with him when he takes the Paths of the Dead. Not by the content of their exchange but the style. Why, I wondered, did she suddenly switch to formal, archaic English (Bible-speak) at such a time?
+ wilt thou go? 
+ wilt thou not let me ride . . . ? 
+ I beg thee! 
+Years later, when I was no longer thirteen and had studied grammar* and gained some fluency in reading archaic speech (like the time in college when I read the entire FAERIE QUEENE between waiting on customers at the local drive in),** I came to realize that there are, or were, two usages of these archaic pronouns in English (thou, thy, thine, thee). The first and by far most dominant is its association with formal, remote speech, like in the King James Bible. The second, forgotten by just about everybody who wasn't a Quaker or historian of the language, was for intimate use: this is how you refer to people you are close to. Thus it was to add an extra layer to Eowyn's laying bare her feelings in this brief exchange.
+So there's a disconnect here: Tolkien is trying for one effect and instead achieving another. I suspect this was less of a problem when Tolkien was writing this scene (circa 1946) than it is now because over the course of the last century we've lost 'poetic diction', despite Owen Barfield's best efforts on its behalf. Ezra Pound announced its doom as far back as 1911, but there were many hold-outs among traditionalists for a generation or so.
+Tolkien did make judicious use of these archaic pronouns in other contexts, particularly in THE SILMARILLION, as in Cirdan's words to Gandalf in OF THE RINGS OF POWER AND THE THIRD AGE (Silm.304) and in the exchanges between God and the angels (or, if you prefer, Eru and the Valar) in the AINULINDALE (cf. Silm. 15, 17, 19). I strongly suspect that this is what those early reviewers of THE SILMARILLION when it first came out meant when they complained that it 'read like the Bible', and I strongly suspect that this is the only part of THE SILMARILLION read by those critics.
+Tolkien also used deliberately archaic language in most of his translations as an essential part of his goal of making medieval works understandable to a reader unversed in the original language (Old English, Middle English, medieval Welsh) without making it sound as if it'd been written by a modern-day author -- but more on this later.
+--John R.
+--at the end of week three in Milwaukee.
+*and picked up smatterings of Spanish, French, and Old English
+**alas for The Rocket, Magnolia Arkansas's drive-in theatre, long gone.
+Posted by
+ John D. Rateliff 
+at
+ 6:10 PM 
+ 6 comments:
+ Hlaford 
+said...
+Tolkien probably had this passage in mind when he wrote the first footnote to Appendix F, II "On Translation":
+One point in the divergence may here be noted, since, though important, it has proved impossible to represent. The Westron tongue made in the pronouns of the second person (and often also in those of the third) a distinction, independent of number, between 'familiar' and 'deferential' forms. It was, however, one of the peculiarities of Shire-usage that the deferential forms had gone out of colloquial use. They lingered only among the villagers, especially of the Westfarthing, who used them as endearments. This was one of the things referred to when people of Gondor spoke of the strangeness of Hobbit-speech. Peregrin Took, for instance, in his first few days in Minas Tirith used the familiar for people of all ranks, including the Lord Denethor himself. This may have amused the aged Steward, but it must have astonished his servants. No doubt this free use of the familiar forms helped to spread the popular rumour that Peregrin was a person of very high rank in his own country.*
+* In one or two places an attempt has been made to hint at these distinctions by an inconsistent use of thou . Since this pronoun is now unusual and archaic it is employed mainly to represent the use of ceremonious language; but a change from you to thou , thee is sometimes meant to show, there being no other means of doing this, a significant change from the deferential, or between men and women normal, forms to the familiar.
+April 6, 2019 at 9:01 PM
+ Hlaford 
+said...
+Tolkien probably had this passage in mind when he wrote the first footnote to Appendix F, II "On Translation":
+One point in the divergence may here be noted, since, though important, it has proved impossible to represent. The Westron tongue made in the pronouns of the second person (and often also in those of the third) a distinction, independent of number, between 'familiar' and 'deferential' forms. It was, however, one of the peculiarities of Shire-usage that the deferential forms had gone out of colloquial use. They lingered only among the villagers, especially of the Westfarthing, who used them as endearments. This was one of the things referred to when people of Gondor spoke of the strangeness of Hobbit-speech. Peregrin Took, for instance, in his first few days in Minas Tirith used the familiar for people of all ranks, including the Lord Denethor himself. This may have amused the aged Steward, but it must have astonished his servants. No doubt this free use of the familiar forms helped to spread the popular rumour that Peregrin was a person of very high rank in his own country.*
+* In one or two places an attempt has been made to hint at these distinctions by an inconsistent use of thou . Since this pronoun is now unusual and archaic it is employed mainly to represent the use of ceremonious language; but a change from you to thou , thee is sometimes meant to show, there being no other means of doing this, a significant change from the deferential, or between men and women normal, forms to the familiar.
+April 6, 2019 at 9:02 PM
+ N.E. Brigand 
+said...
+"Thee I love more than the meadow so green and still..."
+Pat Boone will turn 85 in June.
+April 6, 2019 at 9:33 PM
+ insurrbution 
+said...
+Very curious what you are working on.... :) 
+April 7, 2019 at 9:45 AM
+ John D. Rateliff 
+said...
+Dear Hlaford.
+Yes, I shd probably have at least mentioned that Tolkien posits a divergent history for Shire-language with historical English.
+In Shire-talk, the formal pronouns (e.g. you, your) died out and they used familiar pronouns (thou, thine) in all cases.
+ Whereas in modern English exactly the opposite occurred: we lost the familiar forms and use the formal ones for all purposes. An interesting little might-have-been, and just the kind of thing that wd occur to a philologist.
+And while I'm all for the language evolving into a simpler form, I do regret the loss of the dual pronouns in Old English, where they had an entire set of pronouns fitting in between the singular and the plural, like this:
+singular: I
+plural: we
+dual: we-two
+--A rather nice way to indicate a special relationship between two people, nowadays covered by makeshifts such as 'those two' and 'you two'
+--JDR
+April 11, 2019 at 9:10 PM
+ John D. Rateliff 
+said...
+Dear insurrbution
+"Very curious what you are working on.... "
+Oh, that's easy. I'm advising Marquette on their reprocessing of their Tolkien manuscripts, which essentially involves identifying the chronology of composition and putting each draft of each chapter in its proper place within the sequence.
+I'll be able to say more after the presentation Marquette Tolkien Archivist Bill Fliss and myself are giving at Kalamazoo in about three weeks.
+Hope this helps
+--John R.
+April 11, 2019 at 9:16 PM
+ Post a Comment 
+ Newer Post 
+ Older Post 
+ Home 
+Subscribe to:
+ Post Comments (Atom) 
+ John D. Rateliff
+My website is here .
+ Events
+2018 Kalamazoo Medieval Congress (May 2018)
+ Blog Archive
+ ► 
+2026
+ (8) 
+ ► 
+July
+ (3) 
+ ► 
+March
+ (1) 
+ ► 
+January
+ (4) 
+ ► 
+2025
+ (16) 
+ ► 
+December
+ (1) 
+ ► 
+November
+ (1) 
+ ► 
+September
+ (2) 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (1) 
+ ► 
+May
+ (2) 
+ ► 
+April
+ (1) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (1) 
+ ► 
+January
+ (3) 
+ ► 
+2024
+ (67) 
+ ► 
+December
+ (5) 
+ ► 
+November
+ (1) 
+ ► 
+October
+ (11) 
+ ► 
+September
+ (5) 
+ ► 
+August
+ (5) 
+ ► 
+July
+ (1) 
+ ► 
+June
+ (2) 
+ ► 
+May
+ (9) 
+ ► 
+April
+ (5) 
+ ► 
+March
+ (7) 
+ ► 
+February
+ (4) 
+ ► 
+January
+ (12) 
+ ► 
+2023
+ (113) 
+ ► 
+December
+ (7) 
+ ► 
+November
+ (8) 
+ ► 
+October
+ (10) 
+ ► 
+September
+ (10) 
+ ► 
+August
+ (8) 
+ ► 
+July
+ (11) 
+ ► 
+June
+ (10) 
+ ► 
+May
+ (8) 
+ ► 
+April
+ (10) 
+ ► 
+March
+ (14) 
+ ► 
+February
+ (6) 
+ ► 
+January
+ (11) 
+ ► 
+2022
+ (132) 
+ ► 
+December
+ (13) 
+ ► 
+November
+ (12) 
+ ► 
+October
+ (10) 
+ ► 
+September
+ (16) 
+ ► 
+August
+ (12) 
+ ► 
+July
+ (9) 
+ ► 
+June
+ (8) 
+ ► 
+May
+ (6) 
+ ► 
+April
+ (7) 
+ ► 
+March
+ (19) 
+ ► 
+February
+ (11) 
+ ► 
+January
+ (9) 
+ ► 
+2021
+ (161) 
+ ► 
+December
+ (11) 
+ ► 
+November
+ (9) 
+ ► 
+October
+ (17) 
+ ► 
+September
+ (14) 
+ ► 
+August
+ (14) 
+ ► 
+July
+ (13) 
+ ► 
+June
+ (11) 
+ ► 
+May
+ (11) 
+ ► 
+April
+ (10) 
+ ► 
+March
+ (14) 
+ ► 
+February
+ (19) 
+ ► 
+January
+ (18) 
+ ► 
+2020
+ (172) 
+ ► 
+December
+ (14) 
+ ► 
+November
+ (19) 
+ ► 
+October
+ (14) 
+ ► 
+September
+ (6) 
+ ► 
+August
+ (14) 
+ ► 
+July
+ (14) 
+ ► 
+June
+ (15) 
+ ► 
+May
+ (17) 
+ ► 
+April
+ (23) 
+ ► 
+March
+ (14) 
+ ► 
+February
+ (12) 
+ ► 
+January
+ (10) 
+ ▼ 
+2019
+ (126) 
+ ► 
+December
+ (4) 
+ ► 
+November
+ (19) 
+ ► 
+October
+ (9) 
+ ► 
+September
+ (8) 
+ ► 
+August
+ (16) 
+ ► 
+July
+ (9) 
+ ► 
+June
+ (12) 
+ ► 
+May
+ (6) 
+ ▼ 
+April
+ (17) 
+ Tolkien Estate on the Tolkien BioPic 
+ Jared in his element ('It seems to me') 
+ Jared and Calquing / The Fall 
+ A picture of Jared 
+ Jared's ENGLAND AND ALWAYS 
+ Jared Lobdell 
+ The Stone Table (unauthorized Narnia) 
+ Fanzines Live! 
+ A Bad Day for Whistleblowers 
+ Lincoln read Poe 
+ Presidential Smoking 
+ Eowyn's Thee and Thou 
+ Presidential Reading 
+ Taking Names to Yourself (Turin vs. Gollum) 
+ Synoptic 
+ Marquette's Tolkien Fans oral history project 
+ Spider Pass (Frodo's Elvish) 
+ ► 
+March
+ (9) 
+ ► 
+February
+ (6) 
+ ► 
+January
+ (11) 
+ ► 
+2018
+ (99) 
+ ► 
+December
+ (9) 
+ ► 
+November
+ (9) 
+ ► 
+October
+ (19) 
+ ► 
+September
+ (5) 
+ ► 
+August
+ (6) 
+ ► 
+July
+ (7) 
+ ► 
+June
+ (5) 
+ ► 
+May
+ (11) 
+ ► 
+April
+ (6) 
+ ► 
+March
+ (6) 
+ ► 
+February
+ (5) 
+ ► 
+January
+ (11) 
+ ► 
+2017
+ (134) 
+ ► 
+December
+ (12) 
+ ► 
+November
+ (16) 
+ ► 
+October
+ (8) 
+ ► 
+September
+ (12) 
+ ► 
+August
+ (5) 
+ ► 
+July
+ (13) 
+ ► 
+June
+ (11) 
+ ► 
+May
+ (13) 
+ ► 
+April
+ (5) 
+ ► 
+March
+ (11) 
+ ► 
+February
+ (12) 
+ ► 
+January
+ (16) 
+ ► 
+2016
+ (140) 
+ ► 
+December
+ (8) 
+ ► 
+November
+ (14) 
+ ► 
+October
+ (15) 
+ ► 
+September
+ (7) 
+ ► 
+August
+ (13) 
+ ► 
+July
+ (13) 
+ ► 
+June
+ (6) 
+ ► 
+May
+ (11) 
+ ► 
+April
+ (11) 
+ ► 
+March
+ (15) 
+ ► 
+February
+ (14) 
+ ► 
+January
+ (13) 
+ ► 
+2015
+ (160) 
+ ► 
+December
+ (13) 
+ ► 
+November
+ (11) 
+ ► 
+October
+ (12) 
+ ► 
+September
+ (11) 
+ ► 
+August
+ (11) 
+ ► 
+July
+ (14) 
+ ► 
+June
+ (11) 
+ ► 
+May
+ (17) 
+ ► 
+April
+ (12) 
+ ► 
+March
+ (13) 
+ ► 
+February
+ (15) 
+ ► 
+January
+ (20) 
+ ► 
+2014
+ (170) 
+ ► 
+December
+ (9) 
+ ► 
+November
+ (15) 
+ ► 
+October
+ (13) 
+ ► 
+September
+ (17) 
+ ► 
+August
+ (15) 
+ ► 
+July
+ (23) 
+ ► 
+June
+ (16) 
+ ► 
+May
+ (8) 
+ ► 
+April
+ (11) 
+ ► 
+March
+ (14) 
+ ► 
+February
+ (14) 
+ ► 
+January
+ (15) 
+ ► 
+2013
+ (158) 
+ ► 
+December
+ (16) 
+ ► 
+November
+ (15) 
+ ► 
+October
+ (9) 
+ ► 
+September
+ (8) 
+ ► 
+August
+ (7) 
+ ► 
+July
+ (21) 
+ ► 
+June
+ (10) 
+ ► 
+May
+ (13) 
+ ► 
+April
+ (10) 
+ ► 
+March
+ (13) 
+ ► 
+February
+ (15) 
+ ► 
+January
+ (21) 
+ ► 
+2012
+ (197) 
+ ► 
+December
+ (16) 
+ ► 
+November
+ (28) 
+ ► 
+October
+ (23) 
+ ► 
+September
+ (17) 
+ ► 
+August
+ (13) 
+ ► 
+July
+ (20) 
+ ► 
+June
+ (12) 
+ ► 
+May
+ (16) 
+ ► 
+April
+ (12) 
+ ► 
+March
+ (14) 
+ ► 
+February
+ (8) 
+ ► 
+January
+ (18) 
+ ► 
+2011
+ (182) 
+ ► 
+December
+ (12) 
+ ► 
+November
+ (14) 
+ ► 
+October
+ (14) 
+ ► 
+September
+ (15) 
+ ► 
+August
+ (27) 
+ ► 
+July
+ (14) 
+ ► 
+June
+ (11) 
+ ► 
+May
+ (11) 
+ ► 
+April
+ (20) 
+ ► 
+March
+ (11) 
+ ► 
+February
+ (17) 
+ ► 
+January
+ (16) 
+ ► 
+2010
+ (183) 
+ ► 
+December
+ (15) 
+ ► 
+November
+ (13) 
+ ► 
+October
+ (13) 
+ ► 
+September
+ (15) 
+ ► 
+August
+ (8) 
+ ► 
+July
+ (12) 
+ ► 
+June
+ (13) 
+ ► 
+May
+ (16) 
+ ► 
+April
+ (24) 
+ ► 
+March
+ (19) 
+ ► 
+February
+ (15) 
+ ► 
+January
+ (20) 
+ ► 
+2009
+ (170) 
+ ► 
+December
+ (16) 
+ ► 
+November
+ (15) 
+ ► 
+October
+ (15) 
+ ► 
+September
+ (9) 
+ ► 
+August
+ (15) 
+ ► 
+July
+ (19) 
+ ► 
+June
+ (6) 
+ ► 
+May
+ (10) 
+ ► 
+April
+ (10) 
+ ► 
+March
+ (19) 
+ ► 
+February
+ (16) 
+ ► 
+January
+ (20) 
+ ► 
+2008
+ (98) 
+ ► 
+December
+ (9) 
+ ► 
+November
+ (11) 
+ ► 
+October
+ (7) 
+ ► 
+September
+ (13) 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (5) 
+ ► 
+June
+ (13) 
+ ► 
+May
+ (5) 
+ ► 
+April
+ (15) 
+ ► 
+March
+ (5) 
+ ► 
+February
+ (8) 
+ ► 
+January
+ (4) 
+ ► 
+2007
+ (61) 
+ ► 
+December
+ (3) 
+ ► 
+November
+ (3) 
+ ► 
+September
+ (9) 
+ ► 
+August
+ (5) 
+ ► 
+July
+ (7) 
+ ► 
+June
+ (11) 
+ ► 
+May
+ (6) 
+ ► 
+April
+ (16) 
+ ► 
+March
+ (1) 
+ Recommended
+Kalimac's corner 
+my first Worldcon
+2 days ago
+GRUBB STREET 
+Book: Book about Books
+3 weeks ago
+Tolkien and Fantasy 
+Icons of the Fantastic: Behind the Scenes
+5 weeks ago
+Lingwë - Musings of a Fish 
+Fifteen years!
+1 month ago
+Too Many Books and Never Enough 
+Book Notes, January-June 2024
+6 months ago
+Journal of Tolkien Research 
+Tolkienâ€™s Penchant for Alliteration: Using XML to Analyze *The Lay of 
+Leithian*
+5 years ago
+ 

@@ -1,0 +1,1428 @@
+
+<!Doctype html><Html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<style id=mainCSS>TD {font-size:10pt}</style><script>var TDCSS=document.styleSheets.item("mainCSS");var Rules;if (TDCSS.rules) Rules=TDCSS.rules;else Rules=TDCSS.cssRules;</script>
+<base href="https://www.thefreelibrary.com/"/>
+<meta http-equiv="content-language" content="EN-US">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>Food Fantasies in George R. R. Martin. - Free Online Library</title>
+<meta name="description" content="Free Online Library: Food Fantasies in George R. R. Martin.(Book review) by &quot;Journal of the Fantastic in the Arts&quot;;  Literature, writing, book reviews Books Book reviews Convenience foods">
+<meta name="Keywords" content="">
+<style>a{color:#064c82}
+A IMG{border:0}
+A:visited{COLOR:#666666}
+BODY{MARGIN:0px;FONT-FAMILY:Arial;BACKGROUND-COLOR:white;font-size:smaller}
+.bodyborder{margin-left:30px;margin-right:30px;background-color:transparent;overflow: auto}
+.social-list{overflow:hidden;white-space:nowrap;margin-top:10px;min-width:240px}
+.fb-like-wrapper{height:25px;display:inline-block;vertical-align:top}
+#topsec{display:table}
+#logo{display:table-cell;padding:15px 22px 15px 0;font-size:.8em;width:212px;text-align:center}
+#f1{display:table-cell;width:98%;vertical-align:middle}
+#login{display:table-cell}
+#right_top{display:table-cell;padding:0;width:140px;text-align:right;vertical-align:top}
+#topline{display:block;text-align:right;font-size:8pt;white-space:nowrap}
+#topline img{border:none;width:14px;height:14px}
+.subtopics-cont {background-color: white;float: left;width: 300px;margin-top: 10px}
+.articles-cont {background-color: white;margin-left: 310px}
+.author-list {column-count: 3}
+.author-list div {margin-bottom: 10px}
+.auth-body {background-color: white;padding: 0 20px 20px 20px}
+@media (max-width:760px){
+	#logo{padding-right:0}
+	.fb-like-wrapper{display:block;margin-top:10px}
+	#topline{display:none}
+	.social-list{min-width:0}
+	#right_top{width:100%}
+	#f1 input[type="text"]{width:180px;margin:10px 20px 10px 0}
+	#f1{display:block;position:absolute;top:110px;left:6px;z-index:10;text-align:center}
+	#top_nav{display:none}
+	#content_div{margin-top:90px}
+	.subtopics-cont {float: none;width: 100%}
+	.articles-cont {margin-left: 0}
+	ul.nav_topics {max-height: 300px;overflow: auto}
+	.author-list {column-count: 2}
+}
+@media (max-width:530px) {
+	.author-list {column-count: 1}
+}
+div.main_content{background-image:url(/_/static/bg.gif);background-color:#EFEFEF;padding:10px 0 10px 0;position:relative;/* important for display of floats! */}
+.body{background-color:white;padding:0 20px 20px 20px;max-width: 708px}
+.clear{clear:both;overflow:hidden}
+table{margin:0;padding:0;border:none;border-collapse: collapse}
+td{vertical-align:top}
+div.separator1 div{border-bottom:#CCCCCC 1px dashed;margin:10px 0 10px 0}
+div.separator1{font-size:1px}
+.count{font-size:.8em;font-weight:normal}
+.pub_date {background-color:white;margin:0 0 40px 0}
+.pub_date td {padding:0 20px 20px 20px}
+.pub_date .year{font-size:1.3em;margin-top:12px}
+.pub_date .months{margin-left:12px}
+.pub_date .months A {white-space:nowrap}
+.cal_years{background-color:white;border:white 10px solid;margin-bottom:40px}
+table.cal_years th{font-weight:bolder;font-size:larger;background-color:#DEDFDE}
+table.cal_years td {color:#CCCCCC;padding:5px 3px;font-size:1em}
+.dv_years {padding-left: 20px;padding-bottom: 15px;overflow: auto;background-color: white;max-width: 728px}
+.dv_years div {float: left;padding: 5px}
+div.cal_month{background-color:white;	margin-bottom:40px;width:15em}
+div.cal_month table{background-color:white;border:white 20px solid}
+div.cal_month th{font-size:.9em;font-weight:normal;color:#CCCCCC;padding-right:5px;text-align:right}
+div.cal_month td{color:#CCCCCC;font-size:1em}
+div.cal_days{margin-bottom:40px}
+div.cal_days TABLE{background-color:white;border-left:white 20px solid;border-right:white 20px solid;border-bottom:white 17px solid;border-top:white 15px solid}
+div.cal_days th{font-weight:bolder;padding-top:3px;border:1px solid #CCCCCC;color:#CCCCCC}
+div.cal_days td{font-size:medium;text-align:right;padding:3px 5px}
+div.cal_days_hl{padding:16px 0 15px 0}
+div.cal_days_hl TABLE{background-color:#EFEFEF;border-left:#EFEFEF 20px solid;border-right:#EFEFEF 20px solid;border-bottom:#EFEFEF 17px solid;border-top:#EFEFEF 15px solid}
+div.cal_days_hl th{font-weight:bolder;padding-top:3px;border:1px solid #85A8C2;color:#85A8C2;text-align:center}
+div.cal_days_hl td{font-size:medium;text-align:right;padding:3px 5px}
+.cal_hl {background-color:#EFEFEF;margin:-1px}
+.cal_head {font-weight:bold; color:#000000; text-align:center}
+div.cal_mname {width:130px}
+#menu { background-color:#FFFFFF; font-size:1.1em; margin: 0 0 12px 0; padding:13px 0; width:100%;white-space:nowrap}
+#menu strong {margin: 0 20px 0 26px; padding:13px 0;}
+#menu a, #menu a:visited, #menu .active{color:#064c82; font-size:1.3em; padding:13px 16px;}
+#menu .active {background-color:#85A8C2; color:#FFFFFF!important; text-decoration:none;}
+#menu_block { background-color:#FFFFFF; font-size:1.1em; margin:4px; padding:4px;}
+#menu_block strong {margin:4px; padding:4px;}
+#menu_block a, #menu_block a:visited, #menu_block .active{color:#064c82; font-size:1.3em; padding:4px;margin:4px; display:block;}
+#menu_block .active {background-color:#85A8C2; color:#FFFFFF!important; text-decoration:none;}
+#bottom_nav p {margin:0 0 0 5px}
+Label{font-weight:normal}
+.tbl {padding: 0;border-collapse: collapse}
+.results{background-color:white;border:white 15px solid;border-top:white 10px solid;padding:0;border-collapse:collapse}
+TABLE.results th{text-align:left;padding:5px 4px 5px 6px;font-size:.8em}
+TABLE.results td{padding:4px 5px 7px 7px}
+TABLE.results tr.odd{background-color:#F8F8F8}
+TABLE.results IMG{margin-left:3px}
+th.words, td.words{text-align:right}
+td.date{text-align:right}
+A.date{white-space:nowrap}
+A.disabled {color:gray;text-decoration:none}
+span.resultscount{padding:0 20px 0 20px;background-color:white}
+span.resultscount A, div.resultscount A:visited{color:#064c82}
+span.resultscount IMG{border:0;margin-bottom:-1px;width:9px;height:9px}
+.prevnext{margin:0 0 0 10px;font-weight:bold}
+#article_text{background-color:white;padding:0 10px 10px 20px;min-width:600px;display:table-cell}
+#article_title{padding:15px 0 0 0}
+#article_footer{padding:15px 0 0 0}
+#article_cp{padding:0 0 0 10px;display:table-cell;width:300px}
+#article_cp table, table.hp_browse{border:10px solid white}
+#article_cp caption, .hp_browse caption, .hp_module .head{text-align:left;font-size:1.2em;font-weight:bold;background-color:#85A8C2;color:white;padding:3px 5px 3px 9px}
+#article_cp td.tools{padding:0 10px 10px 0;font-size:.8em;white-space:nowrap}
+#article_cp .tools a{font-size:.8em;padding:0 1px 0 0}
+#article_cp .tools img{padding:0 2px 0 0;vertical-align:middle}
+#article_cp .even{background-color:white}
+.odd{background-color:#f6faff}
+#article_cp th, #article_cp td{font-size:.75em;padding:4px 3px 5px 4px}
+#article_cp th{text-align:right;font-weight:normal;vertical-align:top}
+@media (max-width:759px){
+	#article, #article_text, #article_cp{display:block;padding:0}
+	#article{padding:3px}
+	#article_cp{width:auto;padding:0;margin:0;background:white}
+	#article_text {min-width:300px}
+	.bodyborder{margin:0;background:white}
+	.rightad, .rightad div {display: none;width: 0}
+	.datePopUp {display: none}
+	.resHolder {width: 100%;overflow-x: auto}
+	div.cal_month table {border: 0}
+	div.cal_mname {width: 80px}
+}
+.rightad {float:right}
+.col{padding-right:10px}
+.copy, #copy_publisher, #copy_gale{font-size:.8em;color:#666666}
+#copy_publisher, #copy_gale{margin:5px 0}
+.copy{margin-bottom:700px}
+div.breadcrumbs{margin:10px 10px 10px 30px}
+div.breadcrumbs a{white-space:nowrap}
+div.breadcrumbs td, div.breadcrumbs div{font-size:.8em}
+div.breadcrumbs img{top:1px;position:relative}
+.breadcrumb_arrow{margin:0 5px}
+div.author_name{margin-bottom:10px}
+.highlight{font-weight:bold}
+.a_named{font-weight:bold;font-size:1.5em;color:#000000;/*position:relative;top:2px;*/}
+a.alphabet{color:#999999;margin:20px 0 5px 0}
+span.alphabet_na{color:#CCCCCC}
+h1, h2{background-color:white;padding:10px 5px 10px 20px;font-weight:normal;margin:0;font-size:1.8em}
+h1 strong, h2 strong {font-weight:bold}
+h2{margin-top:10px;font-size:1.4em}
+h3{font-weight:normal}
+h4 {font-size:1.1em; margin:10px 0 5px 0;}
+h5{margin-bottom:1pt}
+ul{list-style-type:none}
+ul.nav_topics{margin:0;padding:0 5px 10px 20px;white-space:nowrap}
+div.nav_pubcat, div.nav_pubcat_expand{background-color:white;padding:10px 10px 20px 20px}
+ul.nav_pubcat{margin:0 0 10px 0;padding:0}
+ul.nav_pubcat-sub{margin-bottom:10px}
+ul.nav_pubdate{}
+ul.nav_pubdate li{display:inline;padding:0 5px 0 0}
+.wrapper-block{background-color:white}
+.nowrap{white-space:nowrap}
+
+/* lit-specific styles */
+div.alphabet{margin:10px 0;padding:10px 0;background-color:white;width:37em}
+div.alphabet H2{display:inline;padding:0 20px 0 20px}
+.hint{display:none;FONT:normal normal normal 1em Arial;BORDER:black 1px solid;PADDING:2px;TEXT-TRANSFORM:none;WIDTH:300px;COLOR:black;TEXT-ALIGN:left;POSITION:absolute;BACKGROUND-COLOR:oldlace;TEXT-DECORATION:none;margin-left:6px}
+.hint HR{WIDTH:80%;COLOR:black;HEIGHT:1px}
+.hint H1, .hint H2, .hint H3{FONT:normal normal bold 1.2em Arial;background-color:transparent}
+SPAN.flw{FONT-WEIGHT:bold;FONT-SIZE:8pt;COLOR:red;FONT-FAMILY:Tahoma}
+A.tip{color:black}
+B A.tip,EM A.tip{MARGIN-RIGHT:2pt}
+#Citation LI {margin-bottom:20px}
+#Citation UL {padding-left:10px}
+#Citation {padding-bottom:40px}
+img.rss_small {border:none; margin:0 0 0 2px;}
+img.rss_big {border:none; margin:0 0 -2px 4px;}
+
+.datePopUp {position:absolute;visibility:hidden;margin-top:.3em;text-align:left;background-color:White;border:1px black solid;font-size:.8em;padding:6pt;width:320px;z-index:1}
+.datePopUp div.morePop, a.morePop {font-size:1em;font-weight:bold;text-decoration:none;text-align:right}
+#TopLevelNav th {font-size:.7em;font-weight:normal}
+#TopLevelNav td {font-size:.64em;padding:0 1em 0 1em;text-align:center}
+
+img.sort-arrow {border:none; cursor:pointer;}
+img.descending {background-image:url(/_/static/down_sort.gif);}
+img.ascending {background-image:url(/_/static/up_sort.gif); }
+a.cmd {font-size:8pt; font-weight:200;}
+
+.xz{margin:0;display:block;overflow:hidden;width:100%;height:90px}
+.xz iframe,.xz div{margin:0 auto;display:block}
+#xz1{margin:20px 0 10px 0}
+#xz2,#xz3{height:265px;width:300px;margin:0 0 20px 0}
+#xz8,#xz9{margin:15px 0 10px 0}
+@media (min-width:760px) {
+	#xz1{max-width:728px;margin:20px 20px 10px 0}
+	#xz8,#xz9{max-width:728px;margin:15px 0 3px 0}
+}
+</style>
+
+<script>
+function rsslink(l,f){switch(f){case 'pub': dw('<a href="' + l + '" target="_blank"><img class="rss_small" alt="Rss Feed" src="/_/static/feed-icon-10x10.png"></a>');break;
+case 'subcat':dw('<a href="' + l + '"  target="_blank"><img class="rss_big" alt="Rss Feed" src="/_/static/feed-icon-16x16.png"></a>'); break;
+default: dw('<a href="' + l + '" target="_blank"><img class="rss_small" align=right alt="Rss Feed" src="/_/static/feed-icon-10x10.png"></a>')}}
+</script>
+<link rel="search" type="application/opensearchdescription+xml" title="The Free Dictionary" href="https://www.thefreedictionary.com/_/open-search.xml">
+<link rel="search" type="application/opensearchdescription+xml" title="The Free Library" href="https://www.thefreelibrary.com/_/static/open-search.xml">
+<script>
+var Domain='thefreelibrary.com';
+var URLPref='http://www2.'+Domain+'/';
+function dw(t){document.write(t)}
+function ById(id){return document.getElementById(id)}
+
+function getCookie(name){
+	var dc=document.cookie;
+	var prefix=name+'=';
+	var s=dc.indexOf('; '+prefix);
+	if (s==-1){
+		s=dc.indexOf(prefix);
+		if (s !=0) return null;
+	}
+	else
+		s+=2;
+	var e=dc.indexOf(';', s);
+	if (e==-1) e=dc.length;
+	return unescape(dc.substring(s+prefix.length, e));
+}
+function setCookie(name, value){
+	document.cookie=name+'='+escape(value)+'; expires=Thu, 1 Jan 2015 05:00:00 UTC; path=/; domain='+Domain;
+}
+
+function changeTextSize(s){
+	if (s){	
+	var TD=Rules[0].style;
+	TD.fontSize=s+'pt';
+	setCookie('fontSize', s);
+}}
+
+function WF(s,l){
+dw('<a title="Change Text Size" style="text-decoration:none;font-size:'+(s-2)+'pt" href="javascript:changeTextSize('+s+')">'+l+'&nbsp;</a>')
+}
+function FontSize(){
+WF(8,'T');WF(10,'E');WF(11,'X');WF(13,'T');
+changeTextSize(getCookie('fontSize'));
+}
+function showDatePopUp(i){
+	var o;
+	if (eval('typeof PopUp'+i)=='undefined'){
+		eval('PopUp'+i+'=new Object()');
+		o=eval('PopUp'+i);
+		o.e=ById('datePopUp'+i);
+		o.t=null;
+	}
+	else o=eval('PopUp'+i);
+	if (o.t) clearTimeout(o.t);	
+	o.e.style.visibility='visible';		
+}
+function outDatePopUp(i){
+	var o=eval('PopUp'+i);
+	if (o.t) clearTimeout(o.t);
+	o.t=setTimeout('hideDatePopUp('+i+')', 150);
+}
+function hideDatePopUp(i){
+	var o=eval('PopUp'+i);
+	o.e.style.visibility='hidden';
+}
+function TestSB() {
+	if (window.external && ((typeof window.external.AddSearchProvider == "unknown") || (typeof window.external.AddSearchProvider == "function"))) return 1;
+	return 0;
+}
+function WriteSB() {}
+
+function TopLine(){
+FontSize();
+WriteSB();
+}
+function LikeHP(IsHP) { var u = (IsHP ? 'https://www.thefreelibrary.com' : document.location); dw('<div class="fb-like-wrapper"><div style="vertical-align:top" class="fb-like" data-href="' + u + '" data-width="130" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" style="margin-left:10px"></div></div>') }
+
+function SocialNetworks(){
+	dw('<br><b>Please bookmark with social media, your votes are noticed and appreciated:</b><br><br>');
+	LikeHP();
+	dw('<br><br>');
+}
+
+function toggleLayer(l) {
+	var style2 = document.getElementById(l).style;
+	style2.display = style2.display ? "" : "none"
+}
+
+
+
+
+
+var info={word:'',a:'xz'};
+</script>
+
+<link rel="canonical" href="https://www.thefreelibrary.com/Food+Fantasies+in+George+R.+R.+Martin.-a0531977726">
+
+<style>
+pre{font-size:1rem}
+.article_text{display:block !important;max-width:100% !important;overflow:auto !important}
+#article_cp td{padding:0}
+</style>
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "https://www.thefreelibrary.com/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.thefreelibrary.com/_/search/Search.aspx?SearchBy=0&By=0&q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+</head>
+<body ondblclick="dictionary()"><a style="display:none" href="/_/print/printer-friendly.aspx?62228.241757" rel="nofollow">Printer Friendly</a>
+<div id=topsec class="bodyborder">
+<div id=logo>
+	<a href="/" style="text-decoration:none">
+	<img src="/_/static/Online-Library.gif" width=175 height=65 alt="The Free Library"><br>
+	39,370,322 articles and books</a>
+</div>
+
+<form action="/_/search/Search.aspx" method=get id=f1 name=f1>
+<div style="margin-bottom:3px">
+<input type=radio name=SearchBy value=0 id=f1_periodicals checked style="margin-left:-4px"  onclick='updateSearch()'><label for=f1_periodicals><b>Periodicals</b></label>
+<input type=radio name=SearchBy value=4 id=f1_literature onclick='updateSearch()'><label for=f1_literature><b>Literature</b></label>
+<div id=f1_sd>
+<div style="white-space:nowrap">
+<input ondblclick="click_block=1" id=q name=q value="" size=40 type="text">
+<input type=submit value="Search" name=Search></div>
+<div id=f1_searchby>
+<input type=radio name=By value=0 id=f1_by_keyword checked style="margin-left:-4px"><label for=f1_by_keyword>Keyword</label>
+<input type=radio name=By value=3 id=f1_by_title><label for=f1_by_title>Title</label>
+<input type=radio name=By value=1 id=f1_by_author><label for=f1_by_author>Author</label>
+<span id=topic_cb><input type=radio name=By value=4 id=f1_by_topic><label for=f1_by_topic>Topic</label></span>
+</div></div></div>
+<script type="text/javascript">function updateSearch(){if (ById('f1_periodicals').checked) ById('topic_cb').style.visibility='visible';else {ById('topic_cb').style.visibility='hidden';if (ById('f1_by_topic').checked) ById('f1_by_keyword').checked=true;}}updateSearch()</script>
+</form>
+
+<div id=right_top>
+	<div id=topline><span id=shp></span>
+	<SCRIPT>TopLine();dw('<br>')</script>
+	</div>	
+	<div class="social-list"><SCRIPT>LikeHP(1)</SCRIPT></div>
+	
+</div>
+</div>
+<div id=top_nav class="bodyborder breadcrumbs">
+
+<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb"><a href="/" itemprop="url"><span itemprop="title">The Free Library</span></a> &gt;&nbsp;Humanities &gt;&nbsp;<span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="/Humanities-p1+Literature%2fwriting"><span itemprop="title">Literature, writing, book reviews</span></a> &gt;&nbsp;<span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="/Journal+of+the+Fantastic+in+the+Arts-p22397"><span itemprop="title">Journal of the Fantastic in the Arts</span></a> &gt;&nbsp;<span class="nowrap"><span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="/Journal+of+the+Fantastic+in+the+Arts/2013/September/22-p52397"><span itemprop="title">September 22, 2013</span></a></span></span></span></span></div>
+
+
+
+<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb"><a href="/" itemprop="url"><span itemprop="title">The Free Library</span></a>
+    &gt;&nbsp;<span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="/Browse-by-date-d0"><span itemprop="title">Date</span></a> >&nbsp;
+    <span class="nowrap">
+        
+        <span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="/2013-d1"><span itemprop="title">2013</span></a> &gt;&nbsp;
+        
+        
+        <span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="/2013/September-d2"><span itemprop="title">September</span></a> &gt;&nbsp;
+        
+        
+        <span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="/2013/September/22-d3"><span itemprop="title">22</span></a> &gt;&nbsp;
+        
+        <span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="/Journal+of+the+Fantastic+in+the+Arts/2013/September/22-p52397"><span itemprop="title">Journal of the Fantastic in the Arts</span></a>
+    </span>
+    </span></span></span></span></span>
+</div>
+
+
+</div>
+<div class="main_content" id="content_div">
+	<div class="bodyborder">
+		
+<script type="text/javascript">artId=531977726;info.ch='Gale';info.word='Food Fantasies in George R. R. Martin.'</script>
+<div id="article">
+<div id="article_text">
+<h1 id="article_title">Food Fantasies in George R. R. Martin.</h1>
+  <div class="xz" id="xz1"></div>
+
+<div id=SocialNetworks2>
+<div style="display:inline-block;height:28px;width:110px;vertical-align:middle;margin-right:40px"><A title="Click to see Link/Page Citation info" href="javascript:toggleLayer('Citation');">Link/Page Citation</A></div>
+<script>LikeHP()</script>	
+</div>
+<div id="Citation" style="display:none">	
+	<P><b>Page/Link:</b></P>
+	Page URL:
+	<input type="Text" style="width:100%" title="This box contains the URL to this page" ReadOnly size="100" value="https://www.thefreelibrary.com/Food+Fantasies+in+George+R.+R.+Martin.-a0531977726" />
+	<P></P>
+	HTML link:
+	<textarea style="width:100%" title="This box contains HTML specifying a link to this page" ReadOnly cols="100" rows="2">&lt;a href=&quot;https://www.thefreelibrary.com/Food+Fantasies+in+George+R.+R.+Martin.-a0531977726&lt;/a&gt;</textarea>
+
+	<P></P>
+	<b>Citations:</b>
+	<ul>
+		<li><span title="MLA style citation for this page"><b>MLA style:</b> "Food Fantasies in George R. R. Martin.." <u>The Free Library</u>. 2013 The International Association for the Fantastic in the Arts 30 Dec. 2025 <a href="https://www.thefreelibrary.com/Food+Fantasies+in+George+R.+R.+Martin.-a0531977726">https://www.thefreelibrary.com/Food+Fantasies+in+George+R.+R.+Martin.-a0531977726</a></span></li>
+		<li><span title="Chicago Manual of Style citation for this page"><b>Chicago style:</b> <em>The Free Library</em>. S.v. Food Fantasies in George R. R. Martin.." Retrieved Dec 30 2025 from  <a href="https://www.thefreelibrary.com/Food+Fantasies+in+George+R.+R.+Martin.-a0531977726">https://www.thefreelibrary.com/Food+Fantasies+in+George+R.+R.+Martin.-a0531977726</a></span></li>
+		<li><span title="APA style citation for this page"><b>APA style:</b> Food Fantasies in George R. R. Martin.. (n.d.) <em>>The Free Library.</em> (2014). Retrieved Dec 30 2025 from  <a href="https://www.thefreelibrary.com/Food+Fantasies+in+George+R.+R.+Martin.-a0531977726">https://www.thefreelibrary.com/Food+Fantasies+in+George+R.+R.+Martin.-a0531977726</a></span></li>
+	</ul>
+</div>
+
+  In his article "Toward a Psychosociology of Contemporary Food
+Consumption," Roland Barthes points out that "an entire
+'world' (social environment) is present in and signified by
+food" (23). The signifying power of food in a world, however
+fantastic, becomes apparent in George R. R. Martin's (yet to be
+completed) cycle titled The Song of Ice and Fire. (1) Not only do his
+sensuous descriptions of food enhance the medieval aura of the world in
+his novels, but they also underpin the ideologies of the parties
+involved in the conflict. The social structure of this world is complex,
+but among the many differences at play in its evolution, the dominant
+opposition between those in power and the disinherited emerges through,
+among other things, their attitudes toward food. Whereas the privileged
+indulge the pleasure of eating and prove their power through extravagant
+food displays, the dispossessed are forced to resort to violence or risk
+starvation. Both the hedonism of one faction and the cruelty of the
+other are symptoms of an imbalance at once social and spiritual.
+<BR><BR>  Food sharing scenes in Martin's novels have a special appeal.
+His readers' enthusiasm for the subject surfaces in blogs too
+numerous to mention, letters to the author, (2) and not one but two
+cookbooks (3) inspired by the recipes in his novels. In his preface to
+the "official" cookbook, he spells out his reasons for
+describing food: "It grounds the scenes, gives them texture, makes
+them vivid and visceral and memorable. Sense impressions reach us on
+much deeper and more primal levels than intellectual discourse can ever
+hope to" (Monroe-Cassel and Lehrer X). Yet, food descriptions are
+not simply a means to achieve a visceral effect. They contribute to the
+fashioning of a world fringed by magic from fragments of historical or
+literary representations. In her work on medieval romance, Geraldine
+Heng remarks that "Romance, of course, freely cannibalizes from
+extant cultural material--from bodies of older texts, floating metaphors
+and motifs, bits of tales, legends, superstitions, mere hints and
+guesses--and organizes its hybrid matter into a pattern and a structure
+that it instantiates at a particular historical moment" (46). What
+is true about medieval romance is also true of historical fantasy. The
+fantasy writer "cannibalizes" the medieval recipes and
+organizes them in a pattern, where the missing pieces play as crucial a
+role as those included. For whereas the eating habits of the aristocracy
+reflect historically documented attitudes, two important ideologies
+surrounding food in the Middle Ages are left out: the theory of humours
+and Christian food prohibitions. By the same gesture, the violence
+attending the procurement and preparation of food is purged from the
+descriptions of the meals of the privileged and relegated to the means
+by which the disinherited and hungry get their food. The contrast
+between eating for pleasure and being driven by hunger to commit
+unspeakable acts underscores the conflict between those in power and the
+dispossessed.
+<BR><div class="xz" id="xz8"></div><BR>  Studies about food provide insights in many aspects of culture and
+can be used as a framework for analyzing Martin's use of food
+descriptions. In the introduction to the second edition of her book,
+Much Depends on Dinner, Margaret Visser looks back on the developments
+in food studies since its first edition (1986): "Since the book
+first appeared there has been an explosion of writing about food"
+(1). She also comments that "Food used to be thought too
+'low' a subject for intellectual rumination, a merely animal
+pleasure, a necessity that, once we have secured sufficient supplies of
+it, was too obvious and too crude for discussion in public" (1-2).
+No longer considered "low," the subject has become popular
+both with the general public and in academia. Before Visser, it was
+structuralism that drew the attention of academic research to food, when
+Claude Levi-Strauss (4) offered a way to analyze culture through
+cuisine. Like Levi-Strauss, Roland Barthes approaches food as cultural
+element, which acquires meaning, or significance, in relation to other
+areas of human experience: "[Food] is not only a collection of
+products that can be used for statistical or nutritional studies. It is
+also, and at the same time, a system of communication, a body of images,
+a protocol of usages, situations, and behavior" (21).
+<BR><BR>  The idea that food communicates and functions, therefore, as a
+language, opens food-related behavior to cultural interpretation. Mary
+Douglas sums up the usefulness of the concept of food-as-sign, or rather
+system of signs: "If food is treated as a code, the messages it
+encodes will be found in the pattern of social relations being
+expressed. The message is about different degrees of hierarchy,
+inclusion and exclusion, boundaries and transactions across the
+boundaries" (252). Analysis of food becomes, in Douglas's
+view, a way to look into and understand the workings of a society. Many
+other disciplines joined anthropology in using food as a lens through
+which to view their object of study. (5)
+<BR><BR>  Literary criticism has also made the subject of food a focus of
+attention in its exploration of various writers' works. Literary
+representations of food are not new. Authors from Homer, Chaucer,
+Rabelais, Shakespeare, to Fielding, Dickens, and Laura Esquivel use food
+descriptions with various purposes and effects, and critics remark on
+food's importance in creating atmosphere and enhancing
+characterization. Attention to food, however, can do more than reveal
+character or background. Using principles developed in structuralism and
+post-structuralism, Timothy J. Tomasik, for instance, argues that
+"Rather than satirise excess, Rabelais employs the rhetorical
+figure of copia in order to engage other discourses on food in the
+Renaissance" (25). His appraisal of Rabelais's lengthy food
+catalogues uses the poststructuralist notion of "discourse"
+developed by Michel Foucault (6) and highlights the relation between
+food and language. The discourse on food is enmeshed in a network of
+discourses extending to all aspects of life. In his study of Renaissance
+references to food, Robert Appelbaum argues that statements about food
+"conveyed a system for communicating with and by way of food, a
+system for establishing a chain of communication between the subject,
+the foodstuff, the subject's body, and the social world to which
+subject, food, and body alike belonged" (35). Focusing on food as
+discourse enriches the interpretation of a literary work by drawing upon
+its cultural context. For a discourse carries ideas and beliefs, which
+emanate from material practices, and it is part of a network of
+knowledge specific to a culture. An approach foregrounding the cultural
+significance of food is appropriate for Martin's novels, even
+though the cultures he refers to are invented, because his invention
+extrapolates from actual historical evidence.
+<BR><div class="xz" id="xz9"></div><BR>  In his desire to create a medieval atmosphere for the world of his
+novels, Martin did historical research, as he confesses in his interview
+with Kristen Browning-Blas: "I had books about medieval feasts,
+general histories where feasts were described. My research method is one
+of immersion. I read all I can beforehand because when I'm writing
+a scene, I'm in the scene. I don't want to have to stop and
+look something up. Occasionally I put 'and then he ate xxxx'
+but that's rare" (sec. 5). Historical descriptions of feasts
+reflect the food consumption of the upper classes. Massimo Montanari
+notes that "only the cuisine of the powerful has remained available
+to us, albeit in a fragmentary form, handed down from documentary and
+literary sources" (37). Martin uses the recipes handed down in such
+documents, which carry in them not only the tastes but also the ideology
+of the upper class. He thus captures the age's general outlook on
+food, succinctly described by Melitta Weiss Adamson:
+<Pre>
+   At the medieval banquet the political power structure was
+   transferred directly to the table. Status determined where one was
+   seated, how new the table cloth was and how far away the salt was,
+   how many people one had to share one's food with, how many dishes
+   one partook in, how big one's overall food intake was, and whether
+   one was allowed to taste the most luxurious food creations or just
+   marvel at them. (233)
+</Pre><BR><BR>  A scene that illustrates this historical account is the banquet
+Eddard Stark gives in honor of King Robert. As a bastard, Jon Snow is
+seated "below the salt" and weighs the pleasures of being able
+to drink and hear "tales of battle, of bedding and the hunt"
+against the honor of seating near the king (GOT 50). The scene goes
+beyond a textbook description of medieval banquets when Jon feeds a
+whole roasted chicken to his wolf, in a gesture that normally a lord
+would perform when giving gifts of food to his vassals (GOT 51-52). This
+instance is, however, lackluster by comparison to Martin's other
+uses of food-centered scenes to explore the ideologies of the various
+social strata and to set up the conflicts of the cycle.
+<BR><BR>  Most noticeably, it is the ideology of the upper classes that
+emerges in the ways they consume food. At the cycle's beginning,
+Robert Baratheon urges Eddard Stark to come south where "the
+markets are bursting with food, the summerwines are so cheap and so good
+that you can get drunk just by breathing the air. Everyone is fat and
+drunk and rich" (GOT 41). The kingdom's prosperity and safety
+is signified by the availability of food. As befits a medieval context,
+the king's body stands for the kingdom: Robert is fat and drunk and
+rich. Felipe Fernandez-Armesto develops a view of consumption, which
+puts gourmands like Robert in a good light:
+<Pre>
+   Big appetites stimulate production and generate surplus--leftovers
+   on which lesser feeders can eat. So, in normal circumstances, as
+   long as the food supply is unthreatened, eating a lot is an act of
+   heroism and justice, similar in effect to other such acts, such as
+   fighting off enemies and propitiating the gods: it is usual to find
+   the same sort of people engaged in all three tasks. (102)
+</Pre><BR><BR>  Robert combines, indeed, a prodigious appetite and the ability to
+fight off enemies, and it is not by chance that the two qualities are
+related. Both fighting and procuring food imply direct contact--with the
+enemy, the animal, or the land--and violence.
+<BR><BR>  The way nobility came in direct contact with the source of food
+during the Middle Ages was through hunting. Naomi J. Sykes explains:
+"Later medieval hunting manuals describe the chase par force as a
+wide-ranging hunt of day-long duration in which a single deer was
+stalked, killed, and excoriated (skinned, disemboweled, and butchered)
+in a ritualized and formulaic manner" (170). The ritual mediates
+between the brutality of the killing and the enjoyment of the food. A
+scene involving Lord Tarly, who teaches his son a lesson about life,
+"his long knife laying bare the carcass [of a deer] as he
+spoke," demonstrates the aristocratic behavior in the hunt (GOT
+268). Like the medieval lords, Tarly is skilled not only in killing but
+also in skinning and preparing the animal for consumption. King Robert
+is also fond of hunting, which stimulates his battle instincts in times
+of peace. However, both he and Tarly represent a social order based on
+brute power, where heroes earn their titles, as well as their food,
+through their prowess and skill. Robert's death--which ironically
+pits him against his food, when he is fatally wounded by a boar that
+becomes dinner for his funeral--signals the end of an era and the
+beginning of social change (GOT 507). Those who succeed Robert are
+engaged in power struggles, but their fighting is of another nature.
+Power is brokered in the corridors of palaces and castles, at a distance
+from the battlefield. The new nobility distances itself not only from
+the battles but also from the sources of food.
+<BR><BR>  Many of the detailed food descriptions reveal the power struggles
+in individual relationships. For instance, the tension between Tyrion
+and Tywin Lannister becomes evident before a battle, around the table
+improvised on the field. In spite of the improvisation, the food display
+fits Tywin's rank: "five suckling pigs, skin seared and
+crackling, a different fruit in every mouth" (GOT 675). Tyrion is
+excited about eating, not only because he is hungry but also because he
+has just come back from the Eyrie, where he was imprisoned and fed
+beans. Nevertheless, when his father informs him that he will not have
+command of the vanguard, he gives up the food. His self-denial is a way
+to resist his father's power and assert his independence. The
+description of the roast, which trickles throughout the conversation,
+insists on visual, auditory, and gustatory details--"The crisp skin
+crackled under his knife, and hot juice ran from the meat" (GOT
+676)--showing how difficult it is for Tyrion to leave without eating.
+<BR><BR>  Among the privileged, food is a sign of social standing, and is
+often used to display and exert power. After becoming the King's
+Hand, Tyrion demonstrates his power through lavish meals. He invites
+Janos Slynt to his tower and treats him to a princely dinner:
+<BR><BR>  The first thing he had done after taking residence in the Tower of
+the Hand was inquire after the finest cook in the city and take her into
+his services. This evening they had supped on oxtail soup, summer greens
+tossed with pecans, grapes, red fennel and crumbled cheese, hot crab
+pie, spiced squash, and quails drowned in butter. Each dish had come
+with its own wine. (COK 123)
+<BR><BR>  The description relies on the names of the dishes, summing up the
+ingredients as well as giving some hints of their taste: hot, spiced,
+butter(y). The gustatory enticements trap Janos Slynt into accepting the
+authority of Tyrion, who banishes him to the Night's Watch. Tyrion
+gives Slynt the news strategically, after entertaining him and getting
+him drunk. This preparation ensures that Slynt would not refuse the food
+in the way that Tyrion did his father's.
+<BR><BR>  In contemplating the dishes, Tyrion is especially proud of his
+newly acquired cook. Applebaum gives historical evidence showing that,
+in the late Middle Ages, having a good cook became a sign of privilege,
+and he attributes the appearance of more and more cookbooks to the
+improvement of the profession's status at this time: "The
+sudden appearance of a number of cookbooks like the Libellus in the late
+thirteenth and early fourteenth century (nothing in Europe appears
+before then in a vernacular, going back to the fall of the Roman Empire)
+bespeaks a change in the relation of cooks to both their craft and their
+patrons" (71). Like his counterparts in the thirteenth century,
+Tyrion takes pride in his cook and often judges others by the quality of
+their cooks, as when he decides that "Cersei set a tasty
+table" (COK 773), or when he is positively seduced by
+Illyrio's food: "The cooks might be old and fat, but they knew
+their business. He had never eaten so well even at court" (DWD 26).
+He also despises those who do not have accomplished cooks, as is the
+case with Maester Pycelle, in a scene where Tyrion wields his newly
+acquired power by showing disdain for the food. He finds the eggs
+"wanted salt," the plums were "overcooked and watery to
+his taste," and "The porridge was too thick ... and wanted
+butter and honey" (262-263). These disparaging comments hint,
+beyond the inferior food quality, to the ineptitude of Pycelle's
+"girl," who is obviously not a professional cook.
+<BR><BR>  Tyrion is not the only lord who enjoys showing his power by
+displaying food. Upon Lady Stark's arrival to his camp, Renly
+Baratheon delights his guests with a fabulous banquet:
+<BR><BR>  Of food there was plenty. The war had not touched the fabled bounty
+of Highgarden. While singers sang and tumblers tumbled, they began with
+pears poached in wine, and went on to tiny savory fish rolled in salt
+and cooked crisp, and capons stuffed with onions and mushrooms. There
+were great loaves of brown bread, mounds of turnips and sweetcorn and
+pease, immense hams and roast geese and trenchers dripping full of
+venison stewed with beer and barley. For the sweet, Lord Caswell's
+servants brought down trays of pastries from his castle kitchens, cream
+swans and spun-sugar unicorns, lemon cakes in the shape of roses, spiced
+honey biscuits and blackberry tarts, apple crisps and wheels of buttery
+cheese. (COK 348)
+<BR><BR>  Martin enumerates the usual roasts, vegetables, and breads of
+lavish meals, but in this case, they seem to form the background for the
+delicate desserts. The cream swans and spun-sugar unicorns have not been
+mentioned before and attract most of the attention. The food not only
+showcases the talents of the cooks but proves the devotion of
+Renly's supporters as well. Normally, feasts show the power of the
+king or lord who offers food for his subjects. The situation is reversed
+in this instance, since it is lord Caswell who provides the food.
+Nevertheless, by demonstrating support from such wealthy and
+sophisticated subjects, Renly gathers power as favorite pretender.
+Catelyn perceives this indulgence as frivolous and a sign of the
+would-be king's immaturity. In addition to revealing Renly's
+character to Catelyn, the meal is an example of conspicuous consumption,
+which Phyllis Pray Bober identifies as specific to the late Middle Ages.
+In Bober's account, the excess signals the changing fate of the
+aristocracy: "They were not aware, or, at least, refused to believe
+that their way of life was in its final days. It was as if outrageous
+consumption and display, the accoutrements of power, could fend off an
+assault upon their citadel of privilege by a growing class of wealthy
+merchants and craftsmen able and ready to ape their standards of
+living" (221). The attempt to sustain power and control by evincing
+the signs of an authority that is no longer materially supported
+indicates the end of privilege. Just so, the extravagant meal Renly
+enjoys, before Stannis arrives, is his last. Renly's power is as
+fragile as the spun-sugar unicorns and melts as quickly as the cream
+swans. It seems fitting that he is killed by a shadow, since his power
+is as insubstantial (COK 502). Renly's lack of experience with
+politics and war is also metaphorically expressed by his ignorance about
+the production and preparation of food, and about the cost of the
+extravagance flaunted on his behalf.
+<BR><BR>  Renly is not the only representative of a feudal class to be losing
+his grip on power. So is Queen Cersei, who also clings to privilege
+through displays of lavish meals, in spite of diminishing food supplies:
+"Only a trickle of food was coming into King's Landing, most
+of it earmarked for castle and garrison. Prices had risen sickeningly
+high on greens, roots, flour, and fruit, and Tyrion did not want to
+think about what sorts of flesh might be going into the kettles of the
+pot-shops down in Flea Bottom" (COK 266). The shortages are seen
+from Tyrion's point of view. Unlike Cersei, he is both aware of
+prices and acquainted with the pot-shops of Flea Bottom. Supplies resume
+after Renly's death, when the Tyrells negotiate their
+daughter's marriage to Joffrey and win the love of the city with
+gifts of food:
+<BR><BR>  The mob loved Margaery so much they were even willing to love
+Joffrey again. She had belonged to Renly, the handsome young prince who
+had loved them so well he had come back from beyond the grave to save
+them. And the bounty of Highgarden had come with her, flowing up the
+roseroad from the south. The fools didn't seem to remember that it
+had been Mace Tyrell who closed the roseroad to begin with, and made the
+bloody famine. (SOS 812)
+<BR><BR>  The Tyrells bring their bounty to win Margaery a crown, and the
+adulation of the mob gives them a sense of power. To substantiate her
+own power, for King Joffrey's wedding, Cersei plans to serve not
+seven--which would make sense as honoring the seven gods--but seventy
+seven dishes. Tyrion protests against spending money that the crown does
+not have, but Tywin Lannister explains:
+<BR><BR>  "Extravagance has its uses. We must demonstrate the power and
+wealth of Casterly Rock for all the realm to see" (SOS 436). The
+wedding banquet is indeed extravagant, and Martin works in the most
+unusual recipes preserved in medieval cookbooks. A pie with live doves
+under its crust stirs conversations long before the wedding. No doves
+are mentioned in medieval recipes, but "four-and-twenty blackbirds
+baked in a pie" appear in the nursery rhyme called "A Song of
+Sixpence." (7) Like many dishes presented to the guests, the pie
+tests the limits of the possible. Mentioned casually within the list of
+dishes are also "peacocks served in their plumage" (SOS 821).
+Nicola McDonald brings up the same dishes, in her discussion of medieval
+romance:
+<Pre>
+   One recipe demands that a roasted peacock be returned to its plumed
+   skin (skillfully removed before cooking) and served "as if it were
+   alive"; a second provides instructions for a mercury concoction
+   that causes a cooked fowl to jump animatedly in its dish; a third
+   recommends hiding live birds inside a pie shell so that they fly
+   out when the pie is cut open. These dishes and others like them
+   force the diner to acknowledge that the host, even if apparently
+   only in jest, has the power to conjure life itself and, by
+   implication, death. (137)
+</Pre><BR><BR>  By borrowing the recipes, Martin also evokes their intent. In a
+less obviously violent way, the extravagant dishes aim for the same
+effect as the surprising decapitation of Eddard Stark at Joffrey's
+order: they force spectators to recognize the king's power.
+However, this king's power has no material support. Like
+Renly's banquet, the wedding feast proves to be a last meal, this
+time for Joffrey. The cause of his death is uncertain: some suspect
+there was poison in the wine, and it is hinted later that the poison had
+been hidden in Sansa's hairnet. Yet, for the onlookers at the
+wedding, Joffrey meets his death choking on the pie. Unsupported by
+physical prowess or wealth, Joffrey's power ends before it begins.
+He is a transitional figure between the brutal authority of
+Robert's warhammer and the rising economic power of the mercantile
+class, best represented by Illyrio Moppat from Pentos, whom Tyrion
+enjoys calling the cheesemonger.
+<BR><BR>  Faithful to the recipes, Martin's descriptions of meals give
+insight into social relations because particular foods and their
+combinations carry in them the ideology of the upper class, for which
+the enjoyment of food is an assertion of wealth, power, and distinction.
+Yet some other ideologies related to food are omitted. Medieval cuisine
+followed the principles of the humoural theory developed by Galen (8) in
+antiquity. Terence Scully explains that "in order to understand a
+human being, we must begin, along with medieval thinkers, by weighing
+the relative influence upon him of each of the four elements: earth,
+air, water, fire" (41). Foods have qualities related to the
+elements. They can be cold and moist, like water, or warm and dry like
+fire, etc. Renly's feast above can be analyzed along these lines.
+It starts with pears poached in wine. Medieval meals started with fruit
+because fruit was considered hard to digest after other foods. Raw pears
+were considered almost poisonous for being cold and moist and had to be
+cooked in wine, which tempered their coldness. Fish was fried, because
+it was cool and moist, and frying dried and warmed it. Capons--castrated
+roosters--made good roasts because the process of drying, which started
+with the maturity of the male bird, was stopped by castration. Roasting
+dried, while boiling tempered dryness. Turnips were first boiled to
+combat dryness, and then sliced and fried. Venison was considered warm
+but too dry, and stewing helped moisten it.
+<BR><BR>  The theory of humours could also explain the large number of dishes
+served at banquets and at Joffrey's wedding. As Tomasik remarks,
+the long menus of medieval meals can appear as signs of excess, but they
+have their rationales:
+<Pre>
+   The number of dishes served can give the impression of excess.
+   However, it is important to put the plethora of dishes into a
+   medical and physical context. A great variety of prepared foods are
+   necessary to accommodate the different kinds of humours that the
+   attending diners might have. Moreover, each diner would be able to
+   choose only from those dishes in his or her general vicinity at the
+   table. (30)
+</Pre><BR><BR>  Without such rationales the meals in the novels can only be seen as
+signs of excess. As Martin does not elaborate on medical principles
+valid in the Middle Ages, the order of serving the dishes, the
+composition of the meals, and the mixtures of various ingredients appear
+arbitrary, adding to the impression of hedonism and decadence at court.
+<BR><BR>  Another significant exclusion of an ideology related to food is
+that of prohibitions established by religion. The omission of
+Christianity is relevant, especially when the object of reflection is
+food, since in the Middle Ages, eating was regulated by the Christian
+Church. As Bridget Ann Henisch explains, "Over the centuries,
+church and society learned to live together in fair comfort, but there
+was a price to be paid for the alliance. Each was deeply penetrated by
+the other's influence. The Church was flawed and tarnished by the
+relationship, while society found itself caught in a network of rules
+and regulations spun around it by the Church" (6). These rules and
+regulations had mainly to do with food and sex. Bober speaks about a
+"fundamental dichotomy that affects cooking and eating during the
+so-called Middle Ages. Body and soul; feasting and fasting; relishing
+God's bounty yet evading the sins of the flesh like gluttony"
+(193). While eating was sanctioned as a way to partake of the divine
+bounty, asceticism was cultivated to purify the soul, and there was
+considerable tension between the two. The dichotomy feast/fast accounts
+for "meat days" and "fish or meatless days" in
+cookbooks, from the early Middle Ages to the Renaissance.
+<BR><BR>  Not only does Martin eliminate Christianity, but he also leaves out
+any rules regarding eating from the religions he invents. None of the
+religions in the novels--the religion of the seven gods, the quasi pagan
+belief in the old gods, the monotheistic belief in R'hllor, or the
+adoration of the God of the many faces--designates asceticism as a
+virtue or gluttony as a sin to the extent Christianity does. There is a
+mention of Baelor the Blessed, who fasted for so long he died of
+starvation (SOS 806), and the remark of a street prophet that "Even
+the high septon has forgotten the gods! He bathes in scented waters and
+grows fat on lark and lamprey" (COK 317). The implication of the
+outcry is that asceticism is valued by the church of the seven. However,
+no limitations on food for the believers are ever mentioned.
+Restrictions on sex, as Barristan Selmy explains, extend to "The
+masters of the citadel, the septons and septas, the silent sisters of
+the dead, the Kingsguard, and the Night's Watch" (SOS 317).
+However, there are not any food restrictions. The food of the
+Night's Watch is not as elaborate as the food of the castles, and
+it is similar to the types of food eaten in medieval monasteries, but
+without any prescribed "lean days."
+<BR><BR>  Abandoning the idea of regulated eating, Martin creates conditions
+that further emphasize indulgence among the privileged. Fish recipes are
+frequent in medieval cookbooks because fish substitutes for meat on lean
+days. In Martin's novels, meals including fish abound without any
+rationale. Lamprey and eel dishes stand out, as they are not frequently
+consumed in American culture today. Richard Schweid relates the
+popularity of the eel to the religious calendar: "With meat
+prohibited on numerous days of the years in the Church calendar, flesh
+of the flavourful fishes was an ordinary substitute on many a table. And
+why not? Eels were plentiful and cheap, if not free, for the easy
+fishing, and they are a rich and flavourful fish" (78). As Schweid
+also intimates, availability was another reason why the medieval
+kitchens used eel and lamprey. According to Giovanni Rebora, from
+antiquity to the Middle Ages, "Eel was a most important resource
+since it could be transported live and on arrival kept alive in the
+ponds.... For this reason cookbooks are full of recipes for eel and for
+lamprey (which also could be transported live)" (62). Martin,
+perhaps deliberately, makes the eel and lamprey coveted, but religiously
+insignificant foods. Littlefinger is fond of lamprey pie, but he
+mentions the suckling pig on the same menu (GOT 357). Imprisoned by
+Stannis for having thought about killing Melisandre, Davos realizes he
+is not truly punished because he is daily served lamprey, an elegant
+food (SOS 345). Traveling north and facing daily hunger, Bran imagines
+that his brother Rickon and Osha, his companion, have reached lord
+Manderly's castle and are eating eels (SOS 331). In such
+descriptions, the pleasurable aspect of food surfaces at the expense of
+its spiritual dimension, which was all important to Christian believers.
+<BR><BR>  The role of prohibitions, both religious and medical, was to temper
+the consumption of food, in recognition of the effort and the violence
+involved in its production. Christian as well as other religious rituals
+and cultural customs regard food as sacrifice and thereby sanctify it. A
+ritualized meal, where food is eaten in full awareness of what is
+involved in its production, is the Harvest Feast, presided over by Bran.
+Although no food restrictions are mentioned in relation to the religion
+of the old gods, the Starks have respect for nature and reverence for
+its bounty:
+<BR><BR>  There were great joints of aurochs roasted with leeks, venison pies
+chunky with carrots, bacon and mushrooms, mutton chops sauced in honey
+and cloves, savory duck, peppered boar, goose, skewers of pigeon and
+capon, beef-and-barley stew, cold fruit soup. Lord Wyman had brought
+twenty casks of fish from White Harbor packed in salt and seaweed;
+whitefish and winkles, crabs and mussels, clams, herring, cod, salmon,
+lobster and lampreys. There was black bread and honeycakes and oaten
+biscuits, there were turnips and pease and beets, beans and squash and
+huge red onions, there were baked apples and berry tarts and pears
+poached in strongwine. (COK 324-25)
+<BR><BR>  The meal is perhaps richer than the meals at King's Landing
+but has a much earthier flavor. The foods are not drowned in butter or
+hidden in pies, for even the pie ingredients are evident. Moreover,
+everyone knows where the food comes from, for all the guests have
+brought some of their harvest to the table. The style of the description
+is different as well. Sensory details, obscured by repetition and
+alliteration, sound like a ritual chant. The name of the Harvest Feast
+itself implies repeatability and suggests ritual. Before the food is
+brought in, Bran asks his guests "to thank the gods old and new for
+Robb's victories and the bounty of the harvest" (COK 324). In
+recognition of the necessary violence, giving thanks involves both the
+harvest and the war. Yet, the Harvest Feast is not exemplary of the
+kingdom, or even of the North. It is rather an ideal from which all
+other meals fall short, a nostalgic image of an era gone by.
+<BR><BR>  In the meals of the rich, not only the recognition of violence but
+violence itself is absent as well. As Margaret Visser points out, eating
+involves violence: "We need to eat in order to live; yet even
+eating vegetables means cutting and killing first" (Rituals of
+Dinner 34). The modern day consumer can ignore the process of cutting
+and killing. As Montanari points out, "In industrialized countries
+[...] the ensemble of techniques needed for the preparation of daily
+meals is much more limited and less burdensome, given that a large
+number of the preliminary tasks have devolved onto professionals, and to
+the agro-food industry" (33). However, medieval cooks needed to go
+through all the steps of preparing the food. The Good Wife's Guide
+illustrates what was involved in a simple recipe: "to make boudin,
+collect the blood of a pig in a suitable basin or pan. When the pig has
+been butchered and the haslet washed thoroughly and set to cook, while
+it is cooking, remove the clots of blood from the bottom of the basin
+and discard them" (271). The advice is a reminder that before
+technology distanced the consumer from food production, the contact with
+blood and dirt was necessary and direct. In Martin's elegant meal
+descriptions, food arrives at the elite's table the way it comes to
+the contemporary consumer: without any hint of what is involved in
+procuring it. The violence, left out possibly by design, re-emerges with
+a vengeance among those who lost or never had privilege.
+<BR><BR>  If the lack of medical and religious principles in food choices
+makes the meals seem arbitrary, the abstraction of violence from their
+preparation and its accentuation in the actions of the dispossessed
+leads to a new dichotomy, which replaces the feasting/fasting contrast.
+The axis according to which food behaviors align themselves in the
+novels separates eating for pleasure and eating for survival. Eating for
+pleasure is different from feasting, because it is unrestrained and
+lacks a spiritual dimension. Eating for survival, although including
+enforced fasting, is also unrestrained because hunger can lead to
+abominable acts. The restraints imposed on feasting, as well as its
+alternation with fasting, sustain an ordered society, where human
+actions aim for balance. In the novels, the contrast between the
+sumptuous meals of the elite and the total deprivation of the
+dispossessed dominates the evolving disorder. There are numerous other
+differences with regard to food--between men and women, cities and
+castles, lower and higher classes, different cultures of the different
+kingdoms--but they are all subsumed to the main dichotomy between the
+well-fed and the hungry.
+<BR><BR>  This perhaps more primal dichotomy highlights an element downplayed
+by the critical attention to the cultural significance of food.
+Virtually every book about food starts by pointing out that eating is
+both a biological necessity and an element of culture. When Barthes
+directed attention to food as sign, code, grammar, he removed the
+biological aspect as a source of interest. Food as biological necessity
+becomes, however, prominent when survival is at stake. Caroline Walker
+Bynum illustrates the types of behavior generated by famine:
+<Pre>
+   In the Europe of the later thirteenth and fourteenth centuries
+   famine was on the increase again, after several centuries of
+   agricultural growth and relative plenty. Vicious stories--of
+   food-hording merchants, of cannibalism and infanticide, of sick
+   adolescents left to die when they could no longer work--survive in
+   the sources, suggesting a world in which hunger and even starvation
+   was not uncommon. (2)
+</Pre><BR><BR>  As Walker Bynum demonstrates, cruelty increases with the sharpening
+hunger. War is expectedly attended by violence, but its extreme forms
+begin to appear when the initially enthusiastic armies of the would-be
+kings begin to exhaust their provisions. The fear of running out of food
+leads to a Hobbesian outlook on humanity, where wolves look like the
+nobler creatures (FFC 669). One of the minor characters describes the
+process of dehumanization for want of food: "The broken man lives
+from day to day, from meal to meal, more beast than man" (FFC 535).
+This descent into animal savagery mutates from consumption of raw meat
+to sheer cannibalism. Having to survive in the streets of King's
+Landing, Arya quickly learns to catch pigeons and trades part of the
+meat for cooking facilities and bread. Before discovering the trade,
+however, she eats "a couple raw" (GOT 718). Imprisoned and
+starved, Theon Greyjoy consumes a live rat in a scene that makes
+Arya's eating a couple of raw pigeons seem casual: "The rat
+squealed as he bit into it, squirming wildly in his hands, frantic to
+escape. The belly was the softest part. He tore at the sweet meat, the
+warm blood running over his lips. It was so good that it brought tears
+to his eyes" (DWD 161). Theon's enjoyment, as well as the
+sensory adjectives that Martin's description accumulates--soft,
+sweet, warm--intensifies the horror of the scene. The gustatory
+experience clashes with the personification of the rat, hinting at
+cannibalism:
+<BR><BR>  "He's been eating rats," said the second boy.
+"Look."
+<BR><BR>  The first boy laughed. "He has. That's funny."
+<BR><BR>  I had to. The rats bit him when he slept, gnawing at his fingers
+and his toes, even at his face, so when he got his hands on one he did
+not hesitate. Eat or be eaten, those were the only choices. "I did
+it, he mumbled, "I did, I did, I ate him, they do the same to me,
+please ..." (DWD 162)
+<BR><BR>  Driven insane by the mental and physical abuse he had been
+subjected to, Theon does not differentiate between his own species and
+the animal's any longer, but he eats it all the same.
+<BR><BR>  If Theon debases himself to the level of the rat he is eating, a
+renegade of the Lannister army, Biter, unleashes literal cannibalistic
+instincts, as he attacks with his teeth rather than his sword. His
+ferocity culminates in a scene described from Brienne's point of
+view:
+<BR><BR>  Biter's mouth gaped open impossibly wide. She saw his teeth,
+yellow and crooked, filed into points. When they closed on the soft meat
+of her cheek, she hardly felt it.... Biter's mouth tore free, full
+of blood and flesh. He spat, grinned and sank his pointed teeth in to
+her flesh again. This time he chewed and swallowed. He is eating me, she
+realized, but she had no strength to fight him any longer. (FFC 798)
+<BR><BR>  Brienne's capitulation comes from her awareness of the horror
+rather than from pain. She is not squeamish about blood or a stranger to
+injury, yet Biter's relish at chewing her face goes against
+chivalric codes of honor, and it shatters her faith in humanity.
+Although Biter's chivalry is doubtful even before this scene, it
+becomes evident that hunger throws humanity into question.
+<BR><BR>  The threat of losing their humanity faces the Stark children, who
+have been raised to accept violence as necessary but to atone for it as
+well. A friend and contemporary of Robert Baratheon, Eddard Stark
+believes that "the man who passes the sentence should swing the
+sword" and spends hours asking the gods' forgiveness after
+decapitating a deserter from the Night's Watch (GOT 16). Atoning
+for the violence necessary to maintain social order extends to reverence
+for food. As demonstrated in the Harvest Feast scene, the Starks have a
+way of acknowledging both the work and the sacrifice that goes into
+getting the food to the table. It is thus not surprising they have
+difficulty sharing their wolves' irredeemable cruelty when it comes
+to satisfying hunger. The six direwolf puppies found in the snow and
+given to the Stark children appear to be loyal pets at first, but as the
+family disperse, have to face danger, and suffer hunger, the wolves
+become their masters' sensory extensions, and on occasion, their
+killing instruments. This special relation with the animals threatens to
+exclude the Starks from human society, as it becomes apparent in
+Bran's conversation with his friend, Jojen:
+<BR><BR>  "Warg," said Jojen Reed. Bran looked at him, eyes wide.
+"What?"
+<BR><BR>  "Warg. Shapechanger. Beastling. That is what they will call
+you, if they should ever hear of your wolf dreams."
+<BR><BR>  The names made him afraid again. "Who will call me?"
+<BR><BR>  "Your own folk. In fear. Some will hate you if they know what
+you are. Some will even try to kill you."
+<BR><BR>  Old Nan told him scary stories of beastlings and shapechangers
+sometimes. In the stories they were always evil. "I'm not like
+that," Bran said. "I'm not. It's only dreams."
+(COK 523)
+<BR><BR>  Bran refuses the "evil" identity, in spite of its appeal:
+"'I am not a wolf.' Yet he howled with them in the night,
+and tasted blood in his wolf dreams" (COK 438). More than once,
+both Jon and Bran distance themselves from the wolves and refuse to
+identify with them. Jon feels tempted to be one with the wolf, but he
+turns the thought away: "The taste of blood filled Jon's
+mouth, and he knew Ghost had killed that night. No, he thought, I am a
+man not a wolf' (DWD 145). Lady Melisandre urges Jon to embrace the
+power of the wolf: "'Power in you and in this beast. You
+resist it and that is your mistake. Embrace it. Use it.' I am not a
+wolf, he thought" (DWD 380). Robb uses the wolf in battle, both to
+kill enemies and to inspire fear, but when Catelyn tries to convince him
+that the direwolf has magic powers, he also says, "I am not a wolf,
+no matter what they call me" (SOS 197).
+<BR><BR>  In spite of their reluctance to do so, both Bran and Jon resort to
+the animal's hunting skills when they are hungry. The chapters
+narrated from Bran's point of view often start with the point of
+view of the wolf: "Deer, and fear, and blood. The scent of prey
+woke the hunger in him" (SOS 123). Within the same scene,
+Bran's consciousness begins to detach from that of the wolf,
+regrettably, when he is about to feed: "The rich warm taste of
+blood faded on his tongue. No, don't, don't. I want to eat, I
+want to, I want ..." (SOS 125). Hunger is a bond between the boy
+and the animal, making them one. Jon also has moments when he slips into
+his wolf's skin. When he has to decide whether to accept
+Stannis's offer and become the lord of Winterfell, Jon finds
+himself overcome by hunger: "It was a hunger in him, sharp as a
+dragonglass blade. A hunger ... he could feel it. It was food he needed,
+prey, a red deer that stank of fear or a great elk proud and defiant. He
+needed to kill and fill his belly with fresh meat and hot dark
+blood" (SOS 1091). At face value, the hunger seems to be a metaphor
+for Jon's desire to get what he always wanted. Yet a moment later,
+Jon realizes that Ghost has returned after a long absence, and it was
+the wolf's hunger he was feeling. That insight makes him understand
+that the desire to be the lord of Winterfell was the wolf's desire
+to eat. His decision changes, but for a moment, Jon is the wolf. Arya
+dreams about being a wolf and sees the destruction committed by her
+animal self among other animals and people alike: "Lamb and dog and
+mutton and the flesh of man. Some of her little grey cousins were afraid
+of men, even dead men, but not her. Meat was meat and men were prey. She
+was the night wolf' (DWD 593). A long way from where her wolf is
+feeding, Arya recovers the sensations of the animal and shares its
+ferocity. Although only in her dream, Arya also becomes the wolf.
+<BR><BR>  A similar relationship with a heraldic symbol literalized as an
+animal familiar develops between Daenerys and her dragons. She
+identifies as "the blood of the dragon" when she needs courage
+to perform a Dothraki ritual: "I am the blood of the dragon, she
+told herself as she took the stallion's heart in both hands, lifted
+it to her mouth, and plunged her teeth into the tough, stringy
+flesh" (GOT 489). When the three dragon eggs she received as a gift
+from Illyrio hatch in the funeral pyre of Kahl Drogo, Daenerys becomes
+the "mother of dragons" (COK 189). Even before her
+brother's death, when she arrives in Vaes Dothrak, she knows her
+destiny relates to the dragons: "If I were not the blood of the
+dragon, she thought wistfully, this could be my home" (GOT 586).
+Although she never refuses identification with the animals, Daenerys is
+ambivalent about her destiny. Her doubts can be seen in her diet. Having
+been raised in many countries, Daenerys learns to accept whatever food
+locals eat. On her own, however, Daenerys chooses figs or dates to
+appease her hunger (DWD 43 and 398). Nevertheless, she is not able to
+avoid eating meat, as she is not able to keep away from violence and
+bloodshed. Stranded alone with the strongest of her dragons, Drogon,
+Danaerys has no choice but to eat what he has killed:
+<BR><BR>  Drogon consumed his kill there, tearing at the charred flesh as the
+grasses burned around them, the air thick with drifting smoke and the
+smell of burned horsehair. Dany, starved, slid off his back and ate with
+him, ripping chunks of meat from the dead horse with bare, burned hands.
+In Meereen I was a queen in silk, nibbling on stuffed dates and honeyed
+lamb, she remembered. (DWD 942)
+<BR><BR>  The revulsion at swallowing the bloody meat of the stallion's
+heart is all forgotten, and Danaerys eats with the same abandon as
+Drogon. Like Bran, she feels the animal's hunger. Like Arya, she
+participates in the violent destruction of its prey. And like Jon, she
+realizes the political implications of her acts, as she thinks about her
+Meereeneze noble husband: "Hizdahr would be horrified, no
+doubt" (DWD 942).
+<BR><BR>  The close contact with animals created a similar tension for
+medieval lords in the hunt par force, also called a force. Like Naomi
+Sykes, Susan Crane argues that the hunt a force exhibits the power of
+aristocracy, but she finds it has a drawback: "it brings humans
+into contact with animals. Once a complete earthly hierarchy is posited,
+with hunters dominating nature, intimacy with animals is potentially
+abasing" (72). It is this potential, as well as the way aristocrats
+might have felt about it, that might motivate the ambivalence of the
+Starks regarding their relationship with animals. Stark's children,
+as well as Danaerys, are the most evidently dispossessed, but they are
+not willing to descend into uncontrolled violence, even when hunger
+pushes them to do so. They lack, however, the practice of restraint of
+the previous generation, represented by Eddard Stark. Crane reveals how
+the ritual aspects of the hunt give higher meaning to the contact with
+the animal. She concludes that "the hunters' proximity to
+animals demonstrates the knowledge and understanding that make their
+domination of animals appear fully human: rational as well as
+courageous, and hierarchical in keeping with creation's
+hierarchy" (79). Ritual contains the violence and makes it
+acceptable in view of the needs it fulfills. Repelled by unrestrained
+violence, both Danaerys and the Stark children seem to be searching for
+means to integrate it in rational human experience.
+<BR><BR>  The lack of restraint in food-related behavior with its attending
+hedonism and violence is both the result and the sign of disorder. In
+this respect, Martin's "medieval" society is similar to
+our own. Michael Pollan speaks about "our national eating
+disorder" (1). In the absence of traditional restraints on eating,
+contemporary consumers think little about respecting the food. The
+violence involved in procuring food is banished from the everyday
+experience of eating. Like the Westeros elites, contemporary consumers
+ignore the sources of their food: "The industrialization--and
+brutalization--of animals in America is a relatively new, evitable, and
+local phenomenon: No other country raises and slaughters its food
+animals quite as intensively or as brutally as we do. No other people in
+history has lived at quite so great a remove from the animals they
+eat" (333). Warren Belasco agrees that the end of the millennium
+found contemporary Americans "without having the slightest idea
+where their food came from" (239). The alternative to this ignorant
+eating is, in Pollan's view, "a kind of ritual, a meal that is
+eaten in full consciousness of what it took to make it worth
+preparing" (409). In addition to their other effects, food
+descriptions give Martin's novels contemporary relevance.
+<BR><BR>  Martin's use of medieval recipes, both in and outside their
+ideological contexts, creates a world that is indeed "present in
+and signified by food" (Barthes 23). The nature of the conflict
+between those in power and those who have lost it reveals itself in the
+way they are situated in relation to food. Although they flaunt their
+power in food displays, the privileged remain ignorant of its origins
+and neglect the spiritual dimension of eating. The dispossessed, on the
+other hand, come too close to losing their humanity and becoming as
+savage as animals through hunger. Between indulging and devouring, food
+consumption does not find the ideal balance. This balance, suggested by
+the Harvest Feast, might be seen as a state of grace from which the
+novels' world has fallen. The selective use of historical evidence,
+far from diminishing the significance of food in medieval society,
+highlights the importance of both the social and the spiritual
+dimensions of eating, which are also relevant to our time.
+<BR><BR>  Notes
+<BR><BR>  (1.) The titles of the novels in the cycle have been abbreviated as
+follows: A Game of Thrones as GOT; A Clash of Kings as COK; A Storm of
+Swords as SOS; A Feast for Crows as FFC; A Dance with Dragons as DWD.
+<BR><BR>  (2.) Martin asserts that, "dozens of readers" have
+suggested to him to publish a cookbook based on the recipes from the
+novels (Monroe-Cassel and Lehrer XI).
+<BR><BR>  (3.) Like most cookbooks, Alan Kistler's The Unofficial Game
+of Thrones Cookbook is organized by types of meals: breakfast, snacks,
+sides and bread, soup, stews and salads, culminating with feast foods.
+Martin's descriptions are completed by general knowledge of
+cooking. The official cookbook, titled A Feast of Ice and Fire and
+endorsed by Martin himself, has glossy pages and spectacular pictures.
+Chelsea Monroe-Cassel and Sariann Lehrer researched medieval and
+Renaissance recipes and cooked the dishes. Their practical experience
+leads to fascinating insights about the taste and texture of the foods.
+<BR><BR>  (4.) Levi-Strauss develops his ideas about food in the context of
+anthropological studies. References to food and ways to interpret food
+choices, taboos, and ways to think about food are present in The Raw and
+the Cooked, The Savage Mind, and other works.
+<BR><BR>  (5.) Alan Beardsworth and Teresa Keil emphasize food's
+importance in sociology as a major theme (1). Martin Jones borrows
+anthropological methods to interpret archeological findings (12). Like
+Beardsworth and Keil, Jones privileges the symbolism of food over its
+role in biology. If in archeology food is a relatively new emphasis,
+there have been many histories of food even before the contemporary
+rush. Examples are Reay Tannahill's Food in History and Maguelonne
+Toussaint-Samat's A History of Food. The more recent approaches to
+food in other disciplines have inspired historical studies with a focus
+on culture such as Ken Albala's Eating Right in the Renaissance,
+Giovanni Rebora's The Culture of the Fork, Massimo Montanari's
+Food Is Culture, etc.
+<BR><BR>  (6.) Michel Foucault elaborates the concept of
+"discourse" most clearly in "The Order of Discourse"
+and The History of Sexuality vol. I. Starting from the observation that
+science and the professions adapt language to specific purposes and
+practically create a way of speaking known only to initiates, Foucault
+devises the notion of "discourse," which could be defined as a
+way of speaking conditioned by, but also exerting influence on, social
+and cultural forces.
+<BR><BR>  (7.) Terence Scully found the recipe in three sources: in Latin in
+Liber de coquina, ed. Marianne Mulon in 'Deux traites inedits
+d'art culinaire medieval', Bulletin Philologique et
+Historique, Year 1968, Paris (Comite des Traveaux Historique et
+Scientifique), 1971; I, pp. 396-420; in Italian, in Cocina: Anonimo
+Toscano Libro de la cocina ed. Emilio Faccioli, in Arte della cucina.
+Libri di ricette, testi sopra lo scalco, il trinciante e i vini, 2
+vols., Milano (Il Polifilo), 1966; I, pp. 19-57; and in Mestre Martino,
+Libre de arte coquinaria, ed. Emilio Faccioli, in Arte della cucina.
+Libri di ricette, testi sopra lo scalco, il trinciante e i vini, 2
+vols., Milano (Il Polifilo), 1966; I, pp. 117-204 (See The Art of
+Cookery in the Middle Ages 109n12 and 109n13 and Bibliography 258-59).
+Phylis Bober has a plausible explanation of how the pie could be made
+(385n115). Wikipedia gives Giovanni de Roselli's Epulario, quale
+tratta del modo de cucinare ogni carne, ucelli, pesci ... (1549), of
+which an English translation, Epulario, or the Italian Banquet, was
+published in 1598 (Mary Augusta Scott, Elizabethan Translations from the
+Italian No. 356, p. 333f.) as a source.
+<BR><BR>  (8.) Galen (129-c. 210 AD) was extremely influential through the
+Middle Ages and later. His medical theories and his principles for good
+nutrition guided food choices. For a complete explanation of the theory
+of humors see Scully (40-57).
+<BR><BR>  (9.) The Good Wife's Guide is a book of advice written by a
+Parisian rich old man for his adolescent wife. It renders recipes from
+the aristocratic cookbooks. In addition to capturing the tastes of the
+aristocracy, and sometimes criticizing them, it goes into details of
+preparation that other cookbooks often skip.
+<BR><BR>  Works Cited
+<BR><BR>  Albala, Ken. Eating Right in the Renaissance. Berkley: U of
+California P, 2002. ebrary. Web. 12 Sept. 2012.
+<BR><BR>  Applebaum, Robert. Aguecheek's Beef, Belch's Hiccup, and
+Other Gastronomic Interjections: Literature, Culture, and Food among the
+Early Moderns. Chicago: U of Chicago P, 2006. ebrary. Web. 12 Sept.
+2012.
+<BR><BR>  Barthes, Roland. "Toward a Psychosociology of Contemporary
+Food Consumption." Food and Culture: A Reader. Ed. Carole Counihan
+and Penny Van Esterik. New York and London: Routledge, 1997. 20-27.
+Print.
+<BR><BR>  Beardsworth, Alan, and Teresa Keil. Sociology on the Menu: An
+Invitation to the Study of Food and Society. London and New York:
+Routledge, 1996. ebrary. Web. 14 Sept. 2012.
+<BR><BR>  Belasco, Warren James. Meals to Come: A History of the Future of
+Food. Berkeley, Los Angeles, London: U of California P, 2006. California
+Studies in Food and Culture. Series ed. Darra Goldstein. ebrary. Web. 7
+May 2012.
+<BR><BR>  Bober, Phyllis Pray. Art, Culture and Cuisine: Ancient and Medieval
+Gastronomy. Chicago: U of Chicago P, 1999. Print.
+<BR><BR>  Crane, Susan. "Ritual Aspects of the Hunt a Force."
+Engaging with Nature: Essays on the Natural World in Medieval and Early
+Modern Europe. Ed. Barbara A. Hanawalt and Lisa J. Kiser. Notre Dame: U
+of Notre Dame P, 2008. 63-84. ebrary. Web. 12 Sept. 2012.
+<BR><BR>  Douglas, Mary. Implicit Meanings: Essays in Anthropology. 2nd ed.
+1999. London: Routledge, 2001. ebrary. Web. 13 Sept. 2012.
+<BR><BR>  "Entremet." Wikipedia, the Free Encyclopedia. Vers.
+514468363. Wikimedia Foundation, Inc., 25 Sept. 2012. Web. 17 Oct. 2012.
+&lt;http://en.wikipedia. org/w/index.php?title =
+Entremet&amp;oldid=514468363&gt;.
+<BR><BR>  Fernandez-Armesto, Felipe. Near a Thousand Tables: A History of
+Food. New York: The Free Press, 2002. Print.
+<BR><BR>  Foucault, Michel. The History of Sexuality: An Introduction. Trans.
+Robert Hurley. 1978. New York: Vintage, 1990. Print.
+<BR><BR>  --. "The Order of Discourse." Untying the Text: A
+Post-Structuralist Reader. Ed. Robert Young. Boston: Routledge &amp;
+Kegan Paul, 1981. 48-78. Print.
+<BR><BR>  Greco, Gina L. and Christine M. Rose. The Good Wife's Guide
+(Le Menagier de Paris): A Medieval Household Book. Ithaca: Cornell UP,
+2009. ebrary. Web. 2 Oct. 2012.
+<BR><BR>  Heng, Geraldine. Empire of Magic: Medieval Romance and the Politics
+of Cultural Fantasy. New York: Columbia UP, 2003. ebrary. Web. 12 Sept.
+2012.
+<BR><BR>  Henisch, Bridget Ann. Fast and Feast: Food in Medieval Society.
+1976. Philadelphia: Pennsylvania UP, 1999. Print.
+<BR><BR>  Jones, Martin. Feast: Why Humans Share Food. New York: Oxford UP,
+2007. Print.
+<BR><BR>  Kistler, Alan. The Unofficial Game of Thrones Cookbook: From
+Direwolf Ale to Auroch Stew--More than 150 Recipes from Westerns and
+beyond. Avon: Adamsmedia, 2012. Print.
+<BR><BR>  Levi-Strauss, Claude. The Raw and the Cooked. Trans. John Weightman
+and Doreen Weightman. 1969. Chicago: U of Chicago P, 1983. Print.
+<BR><BR>  --. The Savage Mind. 1966. Chicago: U of Chicago P, 1973. Print.
+The Nature of Human Society.
+<BR><BR>  Martin, George R. R. A Clash of Kings. New York: Bantam
+Dell-Random, 1996. Print.
+<BR><BR>  --. A Dance with Dragons. New York: Bantam Books-Random, 2011.
+Print.
+<BR><BR>  --. A Feast for Crows. New York: Bantam Dell-Random, 2005. Print.
+<BR><BR>  --. A Game of Thrones. New York: Bantam Dell-Random, 1996. Print.
+<BR><BR>  --. A Storm of Swords. New York: Bantam Dell-Random, 2000. Print.
+<BR><BR>  --. "'Game of Thrones' author George R. R. Martin
+talks feasting, wine, sex and violence." Interview by Kristen
+Browning-Blas. Colorado Table. Denver Post, 3 June 2012. Web. 5 Oct.
+2012. &lt;http://blogs.denverpost.com/food/2012/06/03/
+game-thrones-author-george-martin-talks-sex-violence-feasting-wine/10548/3/&gt;.
+<BR><BR>  McDonald, Nicola. "Eating People and the Alimentary Logic of
+Richard Coeur de Lion." Pulp Fictions of Medieval England: Essays
+in Popular Romance. Ed. Nicola McDonald. Manchester: Manchester UP,
+2004. 124-50. ebrary. Web. 14 Sept. 2012.
+<BR><BR>  Monroe-Cassel, Chelsea, and Sariann Lehrer. A Feast of Ice and
+Fire: The Official Companion Cookbook. New York: Bantam, 2012. Print.
+<BR><BR>  Montanari, Massimo. Food Is Culture. Trans. Albert Sonnenfeld. New
+York: Columbia UP, 2006. ebrary. Web. 2 Apr. 2012.
+<BR><BR>  Pollan, Michael. The Omnivore's Dilemma: A Natural History of
+Four Meals. New York: Penguin, 2006. Print.
+<BR><BR>  Rebora, Giovanni. Culture of the Fork: A Brief History of Everyday
+Food and Haute Cuisine in Europe. Trans. Albert Sonnenfeld. New York:
+Columbia UP, 2001. ebrary. Web. 2 Apr. 2012.
+<BR><BR>  Schweid, Richard. Eel. London: Reaktion, 2009. ebrary. Web. 12
+Sept. 2012.
+<BR><BR>  Scully, D. Eleanor, and Terence Scully. Early French Cookery:
+Sources, History, Original Recipes, and Modern Adaptations. 1995. Ann
+Arbor: U of Michigan P, 2002. Print.
+<BR><BR>  Scully, Terence. The Art of Cookery in the Middle Ages. Woodbridge:
+Boydell, 1995. Print.
+<BR><BR>  Sykes, Naomi J. "The Impact of the Normans on Hunting
+Practices in England." Food in Medieval England: Diet and
+Nutrition. Ed. Christopher M. Woolgar, Dale Serjeantson, and Tony
+Waldron. Oxford: Oxford UP, 2006. 162-75. ebrary. Web. 13 Sept. 2012.
+<BR><BR>  Tannahill, Reay. Food in History. Clermont: Paw Prints, 2008.
+Print.
+<BR><BR>  Tomasik, Timothy J. "Fishes, Fowl, and La Fleur de toute
+cuysine: Gaster and Gastronomy in Rabelais's Quart livre."
+Renaissance Food from Rabelais to Shakespeare: Culinary Readings and
+Culinary Histories. Ed. Joan Fitzpatrick. Farnham: Ashgate, 2010. 25-54.
+ebrary. Web. 14 Sept. 2012.
+<BR><BR>  Toussaint-Samat, Maguelonne. A History of Food. 2nd ed. Malden:
+Wiley Blackwell, 2009. Print.
+<BR><BR>  Visser, Margaret. Much Depends on Dinner: The Extraordinary History
+and Mythology, Allure and Obsessions, Perils and Taboos of an Ordinary
+Meal. 2nd ed. New York: Harper Collins, 2012. Print.
+<BR><BR>  --. The Rituals of Dinner: The Origins, Evolution, Eccentricities,
+and Meaning of Table Manners. New York: Penguin, 1991. Print.
+<BR><BR>  Walker Bynum, Caroline. Holy Feast and Holy Fast: The Religious
+Significance of Food to Medieval Women. 1987. Los Angeles: U of
+California P, 1988. Print.
+<BR><BR>  Weiss Adamson, Melitta. Food in Medieval Times. Westport:
+Greenwood, 2004. Print. Food through History.
+
+  <div id="article_footer">
+  <div class="separator1"></div>
+  <div id=copy_publisher>COPYRIGHT 2013 The International Association for the Fantastic in the Arts<br>
+  No portion of this article can be reproduced without the express written permission from the copyright holder.
+  </div>
+  <div id=copy_gale>Copyright 2013 Gale, Cengage Learning. All rights reserved.</div>
+  <div class="separator1"></div>
+  <script>SocialNetworks()</script>
+</div> 
+<div class="user_zone">  
+  
+</div><br>
+</div>
+<div id="article_cp">
+<table style="width:100%;border-spacing:0;border:none">
+<caption>Article Details</caption>
+<tr><td colspan="2" class="tools even">
+	<a href="/_/print/PrintArticle.aspx?id=531977726&cs=534590020" target="_blank" rel="nofollow"><img class="icon" src="/_/static/ico_print.gif" align="middle">Printer friendly</a> 
+			<a href="javascript:location='/_/print/cite.aspx?url='+encodeURIComponent(location.href)+'&author=Rosu%2c+Anca&title=Food+Fantasies+in+George+R.+R.+Martin.&artId=531977726&pubDate=2013-09-22';"><img class="icon" src="/_/static/ico_link.gif" align="middle">Cite/link</a>
+ 			<a href="mailto:?subject=Food Fantasies in George R. R. Martin.&body=%22Food Fantasies in George R. R. Martin.(Book review)%22 %0d%0afrom Literature and Periodicals Library provided by thefreelibrary.com%0d%0a%0d%0aURL%3a http%3a%2f%2fwww.thefreelibrary.com%2fFood%2bFantasies%2bin%2bGeorge%2bR.%2bR.%2bMartin.-a0531977726"><img class="icon" src="/_/static/ico_email.gif" align="middle">Email</a> 
+	<a href="http://app.thefreedictionary.com/feedback.aspx" target="_blank" onclick="open('http://app.thefreedictionary.com/feedback.aspx?url='+escape(document.location)+'&ref='+escape(document.referrer), 'feedback','width=630,height=370,resizable=1');return false"><img class="icon" src="/_/static/ico_feedback.gif" align="middle">Feedback</a>
+</td></tr><tr class="odd"><th>Author:</th><td><a href="/Rosu%2c+Anca-a12397">Rosu, Anca</a></td></tr>
+<tr class="even"><th>Publication:</th><td><a href="/Journal+of+the+Fantastic+in+the+Arts/2013/September/22-p52397" title="Publisher: The International
+Association for the Fantastic
+in the Arts
+ISSN: 0897-0521 
+Magazine/Journal
+Academic
+English">Journal of the Fantastic in the Arts</a></td></tr><tr class="odd"><th>Article Type:</th><td>Book review</td></tr>
+<tr class="even"><th>Date:</th><td><a href="/2013/September/22-d3">Sep 22, 2013</a></td></tr>
+<tr class="odd"><th>Words:</th><td>9680</td></tr><tr class="even"><th>Previous&nbsp;Article:</th><td><a href="/The+Uncrossable+Evolutionary+Gulfs+of+Algernon+Blackwood.-a0531977725">The Uncrossable Evolutionary Gulfs of Algernon Blackwood.</a></td></tr><tr class="odd"><th>Next&nbsp;Article:</th><td><a href="/Starting+Your+Journey+in+the+Past%2c+Speculating+on+Time+and+Place%3a...-a0531977727">Starting Your Journey in the Past, Speculating on Time and Place: Daphne du Maurier's The House on the Strand, "Split Second," and the Engaged...</a></td></tr>
+<tr class="even"><th>Topics:</th><td>
+
+  <div><a href="/Books-s1417">Books</a></div>
+  <div style="margin-left:8pt"><a href="/Book+reviews-s1418">Book reviews</a><br></div>
+
+  <div><a href="/Convenience+foods-s13896">Convenience foods</a></div>
+  <div style="margin-left:8pt"></div>
+
+</td></tr>
+
+</table>
+
+<br><div class="xz sticky" id="xz3"></div>
+</div>
+</div>
+
+	</div>
+</div>
+<div class="xz" id="xz5"></div>
+<script type="text/javascript">
+var topnav=document.getElementById('top_nav')
+if (topnav.innerHTML) {
+document.write('<div class="bodyborder breadcrumbs">'+topnav.innerHTML+'</div>');
+document.write('<div class="separator1"><div></div></div>');
+}
+</script>
+
+
+<table class="bodyborder breadcrumbs" id=TopLevelNav>
+<tr><th>Publications by Name</th><th>Publications by Date</th><th>Authors</th><th>Literature</th></tr>
+<tr>
+<td>
+	<a href=/Publications/A-i1>A-D</a> 
+	<a href=/Publications/E-i1>E-O</a> 
+	<a href=/Publications/P-i1>P-T</a> 
+	<a href=/Publications/U-i1>U-Z</a> 
+	</td>
+<td><a href="/1900-1994-d1">before 1995</a>
+    <a href="/1995-1999-d1">1995-1999</a><br>
+    <a href="/2000-2004-d1">2000-2004</a>
+    <a href="/2005-2009-d1">2005-2009</a>
+	<a href="/2010-2014-d1">2010-</a>
+</td>
+<td><a href=/Authors/A-i0>A</a> <a href=/Authors/B-i0>B</a> <a href=/Authors/C-i0>C</a> <a href=/Authors/D-i0>D</a> <a href=/Authors/E-i0>E</a> <a href=/Authors/F-i0>F</a> <a href=/Authors/G-i0>G</a> <a href=/Authors/H-i0>H</a> <a href=/Authors/I-i0>I</a> <a href=/Authors/J-i0>J</a> <a href=/Authors/K-i0>K</a> <a href=/Authors/L-i0>L</a> <a href=/Authors/M-i0>M</a> <br><a href=/Authors/N-i0>N</a> <a href=/Authors/O-i0>O</a> <a href=/Authors/P-i0>P</a> <a href=/Authors/Q-i0>Q</a> <a href=/Authors/R-i0>R</a> <a href=/Authors/S-i0>S</a> <a href=/Authors/T-i0>T</a> <a href=/Authors/U-i0>U</a> <a href=/Authors/V-i0>V</a> <a href=/Authors/W-i0>W</a> <a href=/Authors/X-i0>X</a> <a href=/Authors/Y-i0>Y</a> <a href=/Authors/Z-i0>Z</a> </td>
+<td><a href=/ti.aspx?A>A</a> <a href=/ti.aspx?B>B</a> <a href=/ti.aspx?C>C</a> <a href=/ti.aspx?D>D</a> <a href=/ti.aspx?E>E</a> <a href=/ti.aspx?F>F</a> <a href=/ti.aspx?G>G</a> <a href=/ti.aspx?H>H</a> <a href=/ti.aspx?I>I</a> <a href=/ti.aspx?J>J</a> <a href=/ti.aspx?K>K</a> <a href=/ti.aspx?L>L</a> <a href=/ti.aspx?M>M</a> <br><a href=/ti.aspx?N>N</a> <a href=/ti.aspx?O>O</a> <a href=/ti.aspx?P>P</a> <a href=/ti.aspx?Q>Q</a> <a href=/ti.aspx?R>R</a> <a href=/ti.aspx?S>S</a> <a href=/ti.aspx?T>T</a> <a href=/ti.aspx?U>U</a> <a href=/ti.aspx?V>V</a> <a href=/ti.aspx?W>W</a> <a href=/ti.aspx?X>X</a> <a href=/ti.aspx?Y>Y</a> <a href=/ti.aspx?Z>Z</a> </td>
+</tr></table>
+
+<p class="bodyborder copy"><a href="/terms.aspx" target=_blank>Terms of use</a> |
+	<a href="https://www.thefreedictionary.com/privacy-policy.htm">Privacy policy</a> |
+	Copyright &copy; 2025 <a href="http://www.farlex.com/">Farlex, Inc.</a> |
+	<a target=feedback href="http://app.thefreedictionary.com/feedback.aspx" onclick="open('http://app.thefreedictionary.com/feedback.aspx?url='+escape(document.location)+'&ref='+escape(document.referrer), 'feedback','width=630,height=370,resizable=1');return false">Feedback</a> |
+	<a href="/webmasters.aspx">For webmasters</a> | <span style="display:none" id="userConsentPlaceholder"></span>
+
+</p>
+<div class="afs_ads">&nbsp;</div>
+<script async src="/_/static/async.js"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-5484856-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-5484856-2');
+  if(window.lib&&window.lib.delayedFunctions)window.lib.delayedExec();window.completed=1;
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"466ec0fa717d4d508a11ec37a8bd756f","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</Html>

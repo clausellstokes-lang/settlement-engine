@@ -1,0 +1,81 @@
+ 
+History of the English Language at the U of S - "Old-Fashioned English"-You're Doing It Wrong 
+ History of the English Language at the U of S 
+ Home 
+ About 
+ Writing Tips 
+ The Rise of Middle English - with a little help from the French 
+ Klutz, putz, schmuck and all the dreck in between: Yiddish pejoratives in English 
+ Monday, January 22nd, 2018...10:19 pm
+ "Old-Fashioned English"-You're Doing It Wrong
+ Jump to Comments 
+ Delane Just 
+ Image : (CC0) Pexels .
+ So, you want to use "old-fashioned" English in your fantasy or historical fiction novel? Or maybe you want to use it in your next Dungeons & Dragons campaign? Well, there is more to it than adding the letter E to everything, spelling everything wrong, and throwing in a few "thou"s and "huzzah"s every couple lines. Of course, it would be absurd to try to fully recreate Old English for your novel. With all the changes made throughout the centuries, Old English may as well be another language to Modern English speakers. Then how can you use "old-fashioned" sounding English in your novel accurately without losing your entire audience? How much archaic language is too much? Should you really spell everything wrong just because they did not have standardized spelling in the 1000-1400s? I am going to try to break down what does not work, and look at some ways to use "old-fashioned" English accurately and coherently.
+ What is "Old-Fashioned" English anyway? 
+ It is quite common to lump Old English, Middle English, and Early Modern English into the same category of "old-fashioned" English, when in fact these are vastly different and centuries apart from each other. Old English from around the 5th to 11th centuries has a very different lexicon and syntax, and almost appears to be a different language entirely. Middle English from the 12th-14th centuries has a closer vocabulary and syntax to Modern English but lacks any formalized spelling. Early Modern English is what most people are familiar with because of Shakespeare. Early Modern English is much closer to our English today but still uses the archaic pronouns "thou, thy, thine". You can imagine how important this distinction is when adding "old-sounding" words to your next novel. The phrase "what's up?" would stand out awkwardly in the middle of a book set in the 1920s; similarly, using a word of French origin like "education" before the French language became more influential in English in the 13th and 14th century would be very strange. So, while you are researching the Wars of the Roses for inspiration for your next battle scene, also consider Middle English in the 1400s. However, some common words you can get away with. For example, no one would blink an eye if you used the word "command" in something inspired by 13 th -century England even though the Oxford English Dictionary has it first appearances in English as the late 1300s (OED s.v. command, v) .
+ Thee, Thou, Thine. 
+ I have often heard friends use "thou" and "thee" when trying to mimic older versions of English. It is a common misconception that all 2 nd -person pronouns should be replaced with "thou"s and "thee"s when simulating historical language. Much like French, in Middle English pronouns were based on closeness and hierarchy. The second person plural pronouns "ye, you, your" began to be used in replacement of "thou" to address superiors starting in the 13th century (Wright 158). This means the pronouns "thou, thee, thy" were only used to address people of lower social status or close friends while "ye, you, your" functioned to address multiple people as well as individuals of a higher social status. So, if your protagonist starts calling the King "thou" he is actually being incredibly rude.
+ So, I Just Need to Use the Right Words, Right? Not Quite. 
+ It is entirely possible to do your research on historical linguistics and miss the mark. In The Wake, Paul Kingston attempts to write a novel "us[ing] only words which originated in Old English" (Kingston 353). Great, right? Well, it depends on who you ask. What is a unique take on a historical fiction novel, is also not entirely accurate. Kingston himself notes that he "mutated and hammered the shape of [Old English] words and word endings to suit [his] purpose" (Kingston 353). The sentence structure is modern to appeal to a modern audience, but makes the text less authentic despite its efforts. For example, the use of "Do-Support" in negative constructions is a modern phenomenon. This is when we use the verb "to do" to create negatives like: "do not go in there!", or for emphasis like: "I did do my homework". This syntactic change to using "Do-Support" happened around Early Modern English. In Old English, the sentence Kingston's narrator uses: "that night I did not sleep" (Kingston 83), would be: " on niht ic ne slepte " (Liu). If Modern words were used, it would look more like: "that night I slept not". I would argue that using sentence construction more accurate to the time would make the "old-fashioned" style of the text more authentic sounding if that is what you are going for.
+ As historical fantasy author Roberto Calcas writes in his blog , "historical language should yield to clarity" (Calcas). Using too many Old English words can make reading difficult for readers who are not Old English scholars. Kingston includes a glossary of terms in the back of his text, but reading parts of The Wake is still difficult and the flow of the prose is broken by the need to flip to the back of the book. Unless it is your goal is to create a book using primarily Old English words like Kingston, it is a good idea to put a limit on the historical language you use.
+ Some Ways to use "Old Fashioned" English within a novel: 
+ After all this "what-not-to-do" I am sure you are wondering what you should do. There is a fine line between too much historical language and not enough. One way that J.R.R. Tolkien uses Old English within his "Lord of The Rings" series is through the creation of character names. Emily Fisher discusses this in her essay on Tolkien's use of Old English language to name characters. Frodo, for example, comes from the Old English word frōd meaning "wise" (1). Fisher claims Tolkien does this "to portray a sense of atmosphere and a deeper understanding of a character's personality, hierarchical status, and morality" (1). Aside from using Old English for setting inspiration, Tolkien also uses it meaningfully to create his characters. This is one interesting and effective way to use historical Old English within a fantasy setting.
+ Another famous historical fantasy author, George R.R. Martin, uses archaic language in his book in a way that is not too overpowering for modern readers. The first book in his bestselling series uses a mix of modern language with some language fitting to late Middle English and Early Modern English. Martin uses history often as inspiration, such as the Wars of the Roses being the basis for his "A Song of Ice and Fire" series, so it is no surprise he tries to keep his language partly accurate as well. While choosing not to use Middle English pronouns and using mostly modern syntax, Martin gives A Game of Thrones a historical feel by using accurate 1400s archaic diction like "cruel jape", (Martin 679), "on the morrow" (Martin 426), and "bawdy song" (Martin 678). Martin uses these words sparingly to the effect of avoiding a messy, contrived version of simulated Middle English. Martin hits a sweet spot between Modern and Middle English that I think suits the purposes of his novel well.
+ Your Story, Your World. 
+ Just because it is not 100% authentic, does not mean it is not a good book. This post is primarily for those seeking historical accuracy within their novel or tabletop board game. After all is said and done, it is your story and you can choose how much or how little historical accuracy you would like to use. What I do advise is to keep history in mind when considering setting choices and make the choice based on what you are trying to accomplish in your novel.
+ Works Cited and Consulted 
+ Bean, Marian C. The Development of Word Order Patterns in Old English . Barnes & Noble Books, 1983.
+ Calas, Roberto. "Can Language In Any Historical Novel Truly be Authentic?"
+ Robertocalcus.com , July 20, 2013. http://robertocalas.com/?p=812 . Accessed December 2017.
+ Fisher, Ellen. "An analysis of Tolkien's use of Old English language to create the personal names of key characters in The Lord of the Rings and the significance of these linguistic choices in regards to character development and the discussion of humanity in the novel more widely." Innervate: Leading Undergraduate Work in English Studies , vol. 6, University of Nottingham, 2013-2014, pp. 21-34.
+ Kingston, Paul. The Wake . Unbound Co., 2014.
+ Liu, Yin. English in Time: Course Notes for English 290.6 . University of Saskatchewan, 2017.
+ Martin, George R.R. A Game of Thrones . Bantam Books Mass Market Edition, Bantam Books, 2011.
+[OED]. Oxford English Dictionary Online . Oxford University Press, June 2017, www.oed.com. Accessed January 2018.
+ Sweet, Henry. The Student's Dictionary of Anglo-Saxon . Oxford University Press, 1911.
+ Tolkien, J. R. R. The Fellowship of The Ring . 50th Anniversary ed., HarperCollins Publishers, 2004.
+ Wright, Joseph, and Elizabeth Mary Wright. An Elementary Middle English Grammar . 2nd ed., Oxford University Press, 1928.
+ Comments Off on "Old-Fashioned English"-You're Doing It Wrong 
+ Posted by yil707 Filed under literary English , student posts 
+ Comments are closed.
+ Recent Posts
+ Noah Webster: The Kanye West of Lexicographers 
+ From Fawney to Phoney 
+ The Day the Vikings Came: Old Norse and its Impact on the English Language 
+ Missed and Mist : Linguistic Assimilation and Inflectional Endings 
+ "one peso for every Ilonggo word you say": The Prestige of English in the Philippines 
+ Recent Comments
+ No comments to show.
+ Archives
+ April 2020 
+ March 2020 
+ February 2020 
+ January 2020 
+ October 2019 
+ April 2018 
+ March 2018 
+ February 2018 
+ January 2018 
+ November 2017 
+ October 2017 
+ September 2017 
+ August 2017 
+ Categories
+ dialects 
+ etymology 
+ history 
+ jargon 
+ language and society 
+ languages of the world 
+ lexicography 
+ literary English 
+ mythbusters 
+ pronunciation 
+ proper names 
+ reading 
+ student posts 
+ Uncategorized 
+ words in English 
+ writing 
+ © 2026 History of the English Language at the U of S

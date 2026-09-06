@@ -2,157 +2,147 @@
  "name": "ai",
  "chunk": 3,
  "indices": [
-  150,
-  151,
-  152,
-  153,
-  154,
-  155,
-  156,
-  157,
-  158,
-  159,
-  160,
-  161,
-  162,
-  163,
-  164
+  240,
+  241,
+  242,
+  243,
+  244,
+  245,
+  246,
+  247,
+  248,
+  249,
+  250,
+  251,
+  252,
+  253
  ],
  "claims": [
   {
-   "index": 150,
-   "feature": "dialogue as debate",
-   "claim": "AI dialogue drifts into philosophical debate rather than character-driven exchange.",
-   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
-   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
-   "quote": "AI dialogue more often turns into philosophical debate",
-   "page": ""
-  },
-  {
-   "index": 151,
-   "feature": "narrative sameness across models",
-   "claim": "Stories from five different LLMs cluster together in narrative-feature space while human stories are diverse; narrative features alone reach 93.2% macro-F1 detection.",
-   "source": "Russell et al., StoryScope; Dramatica gloss",
-   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
-   "quote": "five AI models cluster together in narrative space",
-   "page": ""
-  },
-  {
-   "index": 152,
-   "feature": "redundant exposition (tell-not-show)",
-   "claim": "18% of professional writers' edits to LLM prose removed exposition that restated what was already implied.",
-   "source": "Chakrabarty, Laban, Wu, 'Can AI writing be salvaged?' (arXiv 2409.14509, LAMP corpus, 18 writers, 8,035 edits)",
-   "url": "https://arxiv.org/html/2409.14509",
-   "quote": "show, don't tell",
-   "page": ""
-  },
-  {
-   "index": 153,
-   "feature": "cliché / fluff",
-   "claim": "17% of professional edits to LLM prose removed clichés and filler.",
-   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509)",
-   "url": "https://arxiv.org/html/2409.14509",
-   "quote": "unnecessary filler",
-   "page": ""
-  },
-  {
-   "index": 154,
-   "feature": "awkward word choice",
-   "claim": "Awkward phrasing was the largest edit category (28%), e.g. the recurring hedge 'seem to (verb)'.",
-   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509), writer W1",
-   "url": "https://arxiv.org/html/2409.14509",
-   "quote": "not technically wrong it's just inelegant",
-   "page": ""
-  },
-  {
-   "index": 155,
-   "feature": "purple prose and lack of specificity",
-   "claim": "Professional writers' taxonomy of LLM idiosyncrasies also names purple prose (abstract words, excess adjectives/metaphors), lack of specific detail, poor sentence structure (20%), and tense inconsistency.",
-   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509)",
-   "url": "https://arxiv.org/html/2409.14509",
+   "index": 240,
+   "feature": "machine detectors (vendor rebuttal)",
+   "claim": "A detector vendor's rebuttal disputes the Stanford sample (91 forum essays, 8th-grade comparison, old detector version) but still reports a 5.04% false-positive rate on 1,500+ IELTS essays — roughly one wrongful accusation in twenty (vendor with a stake).",
+   "source": "Originality.AI, 2025-12-11",
+   "url": "https://originality.ai/blog/are-ai-checker-biased-against-non-native-english-speakers",
    "quote": "",
-   "page": ""
+   "page": "Are AI Checkers Biased Against Non-Native English Speakers?"
   },
   {
-   "index": 156,
-   "feature": "lyrical nonsense",
-   "claim": "LLM literary prose produces metaphors that sound profound but carry no meaning the reader can cash out.",
-   "source": "Lincoln Michel, 'MFA vs. LLM', Counter Craft, 2025-03-17",
-   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
-   "quote": "Grief, as I've learned, is a delta",
-   "page": ""
+   "index": 241,
+   "feature": "machine detectors",
+   "claim": "OpenAI withdrew its own AI-text classifier within six months for low accuracy after stating at launch that reliable detection of all AI-written text is impossible.",
+   "source": "Search Engine Land — Danny Goodwin, 2023-07-26",
+   "url": "https://searchengineland.com/openai-ai-classifier-no-longer-available-429912",
+   "quote": "It is impossible to reliably detect all AI-written text",
+   "page": "OpenAI's AI Text Classifier no longer available"
   },
   {
-   "index": 157,
-   "feature": "mixed-metaphor pile-up",
-   "claim": "Within one passage the model jumbles construction, tailoring and magic metaphors without coherence.",
-   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
-   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
-   "quote": "protagonists cut from whole cloth, emotions dyed and draped",
-   "page": ""
+   "index": 242,
+   "feature": "machine detectors (false positives on canonical prose)",
+   "claim": "GPTZero flagged a section of the US Constitution and selections from the Bible as AI-generated because heavily trained-on human texts are exactly what models reproduce.",
+   "source": "Sensei Enterprises — Sharon D. Nelson, 2023-07-18",
+   "url": "https://senseient.com/ride-the-lightning/ai-detector-believes-the-u-s-constitution-was-written-by-ai/",
+   "quote": "Selections from The Bible also show up as AI-generated",
+   "page": "AI Detector Believes the U.S. Constitution Was Written by AI"
   },
   {
-   "index": 158,
-   "feature": "no narrative movement",
-   "claim": "The AI story repeats its central idea with new metaphors instead of developing character, plot or thought.",
-   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
-   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
-   "quote": "doesn't really go anywhere. It's flat.",
-   "page": ""
+   "index": 243,
+   "feature": "machine detectors (institutional)",
+   "claim": "Vanderbilt disabled Turnitin's detector: even the vendor's claimed 1% false-positive rate implies about 750 wrongly flagged papers per 75,000, with extra risk to non-native writers, and reliable detection may not be possible at all.",
+   "source": "Vanderbilt University Brightspace, 2023-08-16",
+   "url": "https://www.vanderbilt.edu/brightspace/2023/08/16/guidance-on-ai-detection-and-why-were-disabling-turnitins-ai-detector/",
+   "quote": "if it is even possible",
+   "page": "Guidance on AI Detection and Why We're Disabling Turnitin's AI Detector"
   },
   {
-   "index": 159,
-   "feature": "no intentionality / point of view",
-   "claim": "LLMs cannot make parts of a story work together because they have no point of view or intention behind choices.",
-   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
-   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
-   "quote": "They don't have a point of view",
-   "page": ""
+   "index": 244,
+   "feature": "machine detectors (theory)",
+   "claim": "Recursive paraphrasing breaks watermark, neural, zero-shot and retrieval detectors, and the best achievable detector degrades toward random as LLM text distributions approach human ones; spoofing can also make human text read as AI.",
+   "source": "arXiv 2303.11156 — Sadasivan et al., Can AI-Generated Text be Reliably Detected?",
+   "url": "https://arxiv.org/abs/2303.11156",
+   "quote": "our recursive paraphrasing method can significantly reduce detection rates",
+   "page": "Can AI-Generated Text be Reliably Detected?"
   },
   {
-   "index": 160,
-   "feature": "choices per word",
-   "claim": "A 10,000-word story is ~10,000 choices; a 100-word prompt makes almost none of them, and the hardest work is shaping and refining.",
-   "source": "Lincoln Michel, 'Art Without Intention', 2024-09-04",
-   "url": "https://countercraft.substack.com/p/art-without-intention",
-   "quote": "shaping, honing, and refining",
-   "page": ""
+   "index": 245,
+   "feature": "human detection in the wild",
+   "claim": "Unmodified GPT-4 answers submitted to five real university psychology modules went 94% undetected by markers and scored about half a grade boundary above real students.",
+   "source": "PLOS ONE — Scarfe et al., 2024",
+   "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0305354",
+   "quote": "94% of our AI submissions were undetected",
+   "page": "A real-world test of artificial intelligence infiltration of a university examinations system"
   },
   {
-   "index": 161,
-   "feature": "no perspective / no origin",
-   "claim": "AI sentences give the reader no place to stand because they do not originate from any sensibility.",
-   "source": "Charles Schifano, 'What's Missing from AI Writing', 2023-10-27",
-   "url": "https://charlesschifano.substack.com/p/whats-missing-from-ai-writing",
-   "quote": "the sentences don't originate from anywhere",
-   "page": ""
+   "index": 246,
+   "feature": "human heuristics",
+   "claim": "Across six experiments (N = 4,600) people could not detect AI self-presentations and leaned on wrong cues — first-person pronouns, contractions, family topics — which AI can exploit to read as more human than humans.",
+   "source": "PNAS 2023 / arXiv 2206.07271 — Jakesch, Hancock, Naaman",
+   "url": "https://arxiv.org/abs/2206.07271",
+   "quote": "more human than human",
+   "page": "Human heuristics for AI-generated language are flawed"
   },
   {
-   "index": 162,
-   "feature": "no trajectory (swappable sentences)",
-   "claim": "Sentences in AI prose can be reordered with nothing lost, because there is no point of view driving them forward.",
-   "source": "Charles Schifano, 2023-10-27",
-   "url": "https://charlesschifano.substack.com/p/whats-missing-from-ai-writing",
-   "quote": "there's no trajectory in these sentences",
-   "page": ""
+   "index": 247,
+   "feature": "human heuristics",
+   "claim": "Untrained evaluators distinguished GPT-3 stories, news and recipes from human text at chance; training lifted accuracy only to 55%, and evaluators gave contradictory reasons for their calls.",
+   "source": "ACL 2021 / arXiv 2107.00061 — Clark et al.",
+   "url": "https://arxiv.org/abs/2107.00061",
+   "quote": "often contradictory reasons evaluators gave for their judgments",
+   "page": "All That's 'Human' Is Not Gold"
   },
   {
-   "index": 163,
-   "feature": "no narrative, character or plot",
-   "claim": "Asimov's editor, after hundreds of ChatGPT submissions: no originality, no narrative sense, no character development, near-nonexistent plotting.",
-   "source": "Sheila Williams, Asimov's editorial 'ChatGPT and Me', Jan/Feb 2024",
-   "url": "https://asimovs.com/wp-content/uploads/2024/02/Editorial_CHAT-GPT-and-Me_JanFeb24.pdf",
-   "quote": "no sense of narrative, no character development",
-   "page": ""
+   "index": 248,
+   "feature": "human heuristics (overconfidence)",
+   "claim": "254 Czech readers scored 55.4% without feedback, wrongly expecting AI text to be rigid and administrative and readable text to be human, and made the most errors when most confident (below chance at peak confidence).",
+   "source": "arXiv 2505.01877 — Milička, Marklová, Drobil, Pospíšilová, 2025",
+   "url": "https://arxiv.org/html/2505.01877",
+   "quote": "make the most errors precisely when they feel most confident",
+   "page": "Humans can learn to detect AI-generated texts, or at least learn when they can't"
   },
   {
-   "index": 164,
-   "feature": "no cultural memory",
-   "claim": "Generated stories show no sign their maker ever absorbed a story, folktale or TV show; worse than any human submission.",
-   "source": "Sheila Williams, Asimov's, Jan/Feb 2024",
-   "url": "https://asimovs.com/wp-content/uploads/2024/02/Editorial_CHAT-GPT-and-Me_JanFeb24.pdf",
-   "quote": "ever read a story, heard some folklore",
-   "page": ""
+   "index": 249,
+   "feature": "expert detection (contrast case)",
+   "claim": "Five heavy ChatGPT users' majority vote misclassified only 1 of 300 articles even under paraphrase and humanization, but they relied on AI vocabulary plus holistic judgments of formality, originality and clarity — not punctuation counts.",
+   "source": "ACL 2025 / arXiv 2501.15654 — Russell, Karpinska, Iyyer",
+   "url": "https://arxiv.org/abs/2501.15654",
+   "quote": "misclassifies only 1 of 300 articles",
+   "page": "People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text"
+  },
+  {
+   "index": 250,
+   "feature": "reader preference (poetry)",
+   "claim": "696 non-expert readers judged AI imitations of ten canonical poets more human and slightly better than the originals, because the imitations strip the ambiguity and complexity that inexperienced readers read as 'not making sense'.",
+   "source": "The Conversation — Jon Stone, 2024-11-15 (on Porter & Machery, Sci. Reports 2024)",
+   "url": "https://theconversation.com/people-cant-tell-the-difference-between-human-and-ai-generated-poetry-new-study-243750",
+   "quote": "slightly preferring the imitation to the real thing",
+   "page": "People can't tell the difference between human and AI-generated poetry"
+  },
+  {
+   "index": 251,
+   "feature": "reader preference (critique)",
+   "claim": "The poetry-indistinguishability result collapses under expert reading: the AI poems separate at 87.8% on formal metrics alone, paid-per-task raters were scoring comprehensibility, and imitation of known styles cannot test the innovation human poets are judged on.",
+   "source": "The Luddite — Nature's Folly",
+   "url": "https://theluddite.org/post/ai-poetry.html",
+   "quote": "human poets are expected to innovate on style",
+   "page": "A Response to 'AI-generated poetry is indistinguishable...'"
+  },
+  {
+   "index": 252,
+   "feature": "homogenization",
+   "claim": "AI-idea assistance made weaker writers' stories up to 26.6% better written and 22.6% more enjoyable, yet made stories 10.7% more similar to each other — the real failure is collective sameness, invisible in any single text's surface features.",
+   "source": "ScienceDaily on Doshi & Hauser, Science Advances, 2024-07-12",
+   "url": "https://www.sciencedaily.com/releases/2024/07/240712222127.htm",
+   "quote": "up to 26.6% better written",
+   "page": "AI found to boost individual creativity -- at the expense of less varied content"
+  },
+  {
+   "index": 253,
+   "feature": "originality (where the gap actually sits)",
+   "claim": "Ten professional writers applying a 14-test Torrance creative-writing rubric found LLM stories pass 3–10x fewer tests than professionals', with the deficit in originality and elaboration rather than fluency or structure; LLM judges did not correlate with the experts.",
+   "source": "CHI 2024 / arXiv 2309.14556 — Chakrabarty et al.",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "pass 3-10X less TTCW tests",
+   "page": "Art or Artifice? Large Language Models and the False Promise of Creativity"
   }
  ]
 }

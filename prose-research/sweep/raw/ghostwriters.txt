@@ -1,0 +1,126 @@
+ 
+ The Real Reason Not to Use AI to Write Your Novel - Association of Ghostwriters 
+ Skip to content 
+ Join Now 
+ Member Login 
+ Home 
+ About 
+ Why Join? 
+ Blog 
+ Find a Ghostwriter 
+ Directory 
+ Products 
+ Contact 
+ Home 
+ About 
+ Why Join? 
+ Blog 
+ Find a Ghostwriter 
+ Directory 
+ Products 
+ Contact 
+ The Real Reason Not to Use AI to Write Your Novel 
+ April 29, 2026 / Marcia Layton Turner / 4 Comments 
+ Share on Facebook 
+ 𝕏 
+ Share on X 
+ Share on Linkedin 
+ Share on Email 
+ By Richard Lowe 
+ Everyone has an opinion about AI and fiction these days. Most of those opinions are wrong, or at least incomplete.
+ The arguments I hear most are about craft. AI doesn't understand emotion. AI produces generic prose. AI can't develop character. All of that is true, but those are problems of quality, and quality problems have workarounds. Give the AI better prompts. Edit more aggressively. Use it for scaffolding and rewrite everything in your own voice. People figure out workarounds.
+ The real reason not to use AI to write your novel has nothing to do with whether the prose is good enough.
+ The real reason is that the novel you're trying to write doesn't exist yet in any place except your head, and the only way to find out what it actually is, you have to write it.
+ Writing it down makes it sound obvious. It isn't.
+ The Unplanned is the Gold
+ When I sit down and grind through a scene, I discover things. Not things I planned. Things that come out of the friction between what I intended to write and what the story turns out to want. A character says something that surprises me. A relationship that seemed minor in my outline becomes the emotional spine of the book. A plot point I thought was essential turns out to be dead weight. I find all of this by writing badly through the hard parts and then looking at what I made.
+ AI doesn't go through that friction. It generates the average of what plausibly comes next. It does not have the equivalent of a 3 AM session where you're 40,000 words into a draft that isn't working and you suddenly understand what the book is actually about. That moment is not a side effect of the writing process. It is the writing process.
+ When you hand the novel to an AI, you don't skip the hard part. You skip the part where you learn what the hard part is trying to teach you.
+ Now, I can hear the counter-argument already, because writers who use AI make it constantly. They finish a novel in days instead of months. Their audience doesn't care. They're getting sales. And look, they're not entirely wrong about the sales part, at least in the short run. There is a market for fast, cheap, readable fiction and AI can serve it. If that's your goal, fine. The market will sort it out eventually, and it is sorting it out. Readers who felt burned by AI-generated books are already talking about it, already warning each other, already leaving one-star reviews that say the same things: it felt hollow, it felt like every other book, I couldn't finish it. Readership built on volume and speed erodes. The writers who built it know this on some level, which is why they don't talk much about their long-term plans.
+ But that's a business argument, and I'm not really interested in the business argument. I'm interested in what gets lost.
+ AI Doesn't Have a Life
+ A novel is a record of a specific human mind working through specific material at a specific time in its life. Readers don't consciously notice this. They don't read my books and think, this guy was clearly working through something in 2019. But they feel it, and books they can feel stay with them. Books they can't feel read fine and disappear.
+ AI has no life to work through. It has training data. The output is polished in the same way that a hotel lobby is polished: designed to bother no one, to belong nowhere in particular, usable by any guest who checks in that day.
+ My novels bother some people. They belong somewhere specific and sound like I made them on purpose.
+ Most of the conversation about AI-generated fiction focuses on the sentence level: purple prose, generic descriptions, dialogue that sounds like no human being who has ever existed. That stuff is a real problem, but it's also the easiest one to fix with enough editing time. And yes, I've done it myself. I know what AI writing looks like at the sentence level and I know how to clean it up. It works, to a point. You have to become genuinely expert at recognizing the patterns, and the patterns shift with every new model, and you will still miss things. The cleanup gets you closer. It doesn't get you there.
+ The harder problem is structural.
+ The Biggest Tell - AI has a Recognizable Spine
+ AI builds novels with a recognizable spine. Not recognizable to casual readers, necessarily, but recognizable to editors, agents, and anyone who reads widely enough to have internalized what stories actually feel like from the inside. The chapters are laid out in a pattern. The transitions land in predictable places. The pacing beats hit at intervals that feel correct on a story-structure checklist and feel wrong on the page. Tension rises and releases in the same rhythm across every act. Subplots get introduced and resolved with the tidiness of a math problem.
+ Real novels are messier. A subplot that goes nowhere for 80 pages before it explodes. A chapter that should be transition material but turns into the emotional center of the book because the writer followed something unexpected. Two scenes that sit in the wrong order by every conventional standard and work better because of it.
+ AI doesn't have accidents. It has the average of what structure is supposed to look like, applied consistently, which means the bones are always technically correct and the book never quite breathes.
+ A reader picking up an AI-written novel will often feel something is off before they can name it. This is called the Uncanny Valley, a term from robotics. The story moves, the scenes function, nothing is technically broken, but the book has no weight. It sits in the hand like something made of the right materials assembled by someone who has never held a thing that mattered. The AI spine holds the book up and keeps it from feeling alive at the same time.
+ You can fix prose-level AI problems with enough editing. A spine is closer to rebuilding the book from scratch.
+ Genre fiction is where the safety problem gets exposed fastest.
+ AI is a Coward
+ AI will not stay in the uncomfortable place. Push it toward anything genuinely ugly and it retreats. Violence softens. Sex goes vague. Cruelty gets explained so the reader understands it rather than feels it. The narration always finds a way to step back from the edge.
+ A horror novel that pulls its punches isn't a horror novel. It's a suspense novel with pretensions. You are taking the reader somewhere they did not want to go, and the only way to do that is to go there yourself first and stay long enough to know what it looks like.
+ I recently finished writing a horror novel with a scene where a spirit watches its own body decay. Not a tasteful fade to black, not "signs of decomposition." The full progression, catalogued in detail, observed by the consciousness that used to live there. The horror isn't the decay itself. The horror is the relationship between the observer and what's being observed, the specific wrongness of watching yourself become something you no longer recognize.
+ Ask AI to write that scene and you get one careful paragraph before the plot moves forward. AI has no instinct for how long to keep the reader in the room. I do, because I've written enough to know when a reader wants out and how long to ignore that. AI retreats from discomfort, and in horror, discomfort is the entire product.
+ Horror isn't a special case. Every genre has a place where the writing has to go somewhere hard or it fails at the one thing it was supposed to do. Literary fiction cuts somewhere unexpected and doesn't apologize. Crime fiction needs genuine menace. War fiction needs to smell like what it is. AI flinches every time.
+ I want to make this specific.
+ Let's Talk Specifics
+ I just finished a book called Buttercup. It's narrated by a cat, who tells the story of ten years in an apartment in Los Angeles with a man and a woman named Claudia, who had severe asthma and died on January 31, 2005. Buttercup died two weeks later. The vet said she died of grief.
+ Writing that book taught me something I couldn't have learned any other way. POV from an animal sounds like a gimmick until you're inside it, and then it becomes one of the hardest technical problems in fiction. You can only show what the animal knows and perceives. Buttercup has better senses than a human, so she can hear an ant moving across the carpet from the other side of the room, track a person's heartbeat through a closed door, smell the difference between ordinary fear and the specific fear that means something is about to go seriously wrong. Every scene had to be rebuilt around what a cat would register. I didn't know that going in. I found it by writing badly through the first chapters and then understanding what I'd gotten wrong and fixing it. No prompt produces that discovery. You find it by doing the work wrong first.
+ Here is what AI would have produced with that material.
+ The narrator thinks like a cat for a chapter and then drifts. Buttercup understands the world through smell, sound, vibration, and body temperature in the first few scenes, and then somewhere around chapter four she starts having feelings described in language that belongs to the author, not the character, because that's what the training data normalized and because the model doesn't hold a constraint across four hundred pages the way a writer holds it in their head for months. The POV in Buttercup holds without cheating once. That came from grinding through it, not from prompting.
+ Claudia is described directly. "She was 320 pounds by the end, and she left wet footprints when she walked, and her skin was always damp and warm." AI would not have written that sentence. It would have described her kindness and her laugh and softened everything else into abstraction. The wet footprints are on the page because a human being observed them and understood they were true and put them there anyway. An algorithm trained to avoid discomfort would have cut them before they reached the page.
+ Claudia dies off the page. She gets on the flat surface. He follows. The door closes. The cat waits by the couch. He comes home numb. AI would have written the hospital, the machines, the moment, the goodbye, because the death scene is what its training data told it a death scene looks like. Buttercup understood that the cat wasn't there and the cat's not knowing is the whole point. AI would have cheated its way to the emotional payoff and lost everything in the process.
+ The chapter lengths are structurally wrong in the right way. One chapter is three pages. Another runs for miles. Another is almost comedy. The last room is measured syllable by syllable. AI normalizes chapter length because consistency is what it optimizes for. Buttercup has the shape of actual time, where some things take an afternoon and some things take years. You cannot prompt your way to that shape. It comes from living inside a story long enough to know how long each part of it lasted.
+ There's a cat in the book named Midnight who has asthma. Claudia has asthma. That parallel is so specific and so quiet that I want to stop on it. I noticed I had a cat with the same condition as the woman she loved, and built an entire chapter around what that recognition does to the people involved, then paid it off with Claudia pressing her face to the top of Midnight's head after the inhaler. AI would not have seen that connection. It generates scene by scene, and the observations don't accumulate meaning across a manuscript the way they do when a human being has been sitting with the material for months.
+ The grief in the book is entirely behavioral. He removes the medical equipment from the shelves. He goes up into the hills with the dog. He sits on a bench in a botanical garden. He fed the cat until the cat looked at him like it was going to keep looking until he ate. AI would have described grief. Buttercup shows a man who cannot stop moving because stopping means the thing that is waiting for him to stop. The behavior does the work a lesser book would hand to a paragraph of interiority.
+ At the end, a cat named Zeya the Second was diagnosed with bone cancer and given two months to live. That was three years ago. She's fine. The book offers no explanation, because there isn't one. AI cannot write that ending. It will find the meaning. It will hand you the lesson. It cannot sit with the fact that sometimes a cat survives something she shouldn't and there is no reason and you're glad anyway.
+ The Author's Voice
+ This is what voice means in practice. Not style, not sentence length, not word choice. The accumulation of specific observation over time by a specific person who was paying attention. The book says it in the last line of the author's note: he was paying attention. So was she.
+ AI produces the average of what attention looks like. Paying attention is something else entirely, and no amount of prompting closes the gap between them.
+ There's also the practical side that people don't say out loud. If you use AI to write your novel, you will not get better at writing novels. You will get better at prompting AI, which is a different skill with different applications and nothing in common with what you wanted to learn. Five years of AI-assisted fiction production will not make you a better novelist. Five years of grinding through bad drafts and figuring out what went wrong will.
+ AI has a place in the fiction writing process. Research, plot brainstorming, structural questions about an outline: those are uses that don't replace the actual writing. Pick them up, put them down, keep the work.
+ Think of writing a novel like taking a road trip. You can take shortcuts the whole way. You'll get to your destination faster. But you'll miss the views that weren't on the planned route, the roadside find you never would have looked for, the detour that turned into the best part of the trip. You get to the end, but the trip was bland and it looked like everyone else's trip, because everyone else took the same shortcuts and ended up at the same places seeing the same things.
+ The primary problem with AI writing isn't that it's bad or that it's detectable. It's that it's like everyone else's. It goes where the training data points, which is everywhere the average novel goes, which means it goes nowhere new.
+ There's one more thing. AI will make your novel perfect. Every scene ends properly. Every arc gets closed. Everything tied up nice and tidy with a big bow. Humans don't write like that. Real novels leave things hanging, unresolved, messier than when they started, because that's how life works and readers know it. The perfection is its own tell.
+ If that's what you want, more power to you. The sales might even be real for a while.
+ But if you want to write something that could only have come from you, something a reader feels instead of just follows, something with a view nobody else found because you took the long way and got lost twice before you figured out where you were going, then you already know what I'm going to say.
+ Write the damn book yourself.
+ Richard Lowe is a professional ghostwriter with 54+ completed engagements and the author of more than 113 published books. He writes at thewritingking.com . 
+ Subscribe to Blog via Email
+ Enter your email address to subscribe to this blog and receive notifications of new posts by email.
+ Email Address 
+ Subscribe 
+ Marcia Layton Turner
+ Posts navigation
+ ← Confessions of a CEO Ghostwriter 
+ What Do Writing and Outrunning a Bear Have in Common? → 
+ 4 Comments 
+ Helen Wilkie on May 2, 2026 at 10:04 am 
+ Amen to that, Richard! Your examples illustrate perfectly what AI can't do--take all the winding side roads that suddenly appear and the human author can't resist exploring. That's where the heart of the story is, and AI doesn't even know it's there. I'm not worried about our craft!
+ Reply 
+ Cameron Ellis on June 29, 2026 at 6:29 pm 
+ Thank you for this! I am in the process of writing across different styles. Fast fiction, vs. short story vs. novel and I understand exactly what you are describing from talking through plot points and content from other readers. Anything that pushes the edge and AI goes off the rails. For example, I was discussing how the fast fiction genre keeps having the male lead say he loves the female lead but he spends most chapters abusing her. I said they are crazy or have mental health issues and it replied that it draws the line at an actual diagnosis…..
+ Reply 
+ Bill on July 20, 2026 at 9:29 am 
+ *Again* Amen to that, Richard! For a research about AI and Story-writing your sentences were priceless. One can understand who has read this article, what are the adventages and disadventages of using artificial intelligence and consequences when someone use it unconciously.
+ Reply 
+ Dixie Carlton on August 26, 2026 at 9:28 pm 
+ I loved this article Richard. And I totally agree. When I'm writing fiction (only for my own use as my commercial work is purely NF) I'm a total 'pantser' style of writing and waiting to see what happens next as much as any reader. I don't know what's going to come into my head until I start writing through the story line - AI definitely can't do that. I also love what you say about the insights gained from writing from the cat's perspective too. I'm currently playing with a series of single person narratives throughout one complex story line with each part being viewed by first a young man, then a younger woman, finally by an old man. I find it deeply fascinating how the story is evolving this way. Oh the fun of being a writer who gets to make things up by playing with words for a living.
+ Reply 
+ Leave a Comment Cancel Reply 
+ Comment * 
+ Name * 
+ Email (will not be published) * 
+ Website 
+ Save my name, email, and website in this browser for the next time I comment. 
+ Notify me of follow-up comments by email. 
+ Notify me of new posts by email. 
+ Δ 
+ Sign up for our free newsletter 
+ To get your FREE copy of Breaking Into Ghostwriting, please fill out your information below!
+ Name (Required) 
+ Email (Required) 
+ Submit 
+ Δ 
+ MAILING ADDRESS:
+3349 Monroe Avenue #105
+Rochester, NY 14618
+ Connect with us Online
+ Contact 
+ © 2026 Association of Ghostwriters. All Rights Reserved. Member Login 
+ Scroll To Top 
