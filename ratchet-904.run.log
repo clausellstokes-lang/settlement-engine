@@ -1,0 +1,8 @@
+  probe: load=3.67 workers=0 streak=1 waited=0s
+  probe: load=2.66 workers=0 streak=2 waited=60s
+  probe: load=2.21 workers=0 streak=3 waited=120s
+QUIET CONFIRMED after 120s
+RATCHET_HEAD=35638df4b44248e8960cc2d1663b34a44e5aa832
+RATCHET_PORCELAIN_PRE=[0]
+PREDICTED (E4, §904, derived at c2337220a in predict-904.log + the chair car, which adds no test file and no it() title): totalFiles 2489 (unchanged) · entries 3 (unchanged) · totalTests 31970 -> 31970 (handbookVoice.test.jsx has three it() before and after; two titles RENAMED, none added; the chair car touches no test) — totalTests is REFUSED in advance, this run is the derivation
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 17683 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
