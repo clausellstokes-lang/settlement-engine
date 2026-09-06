@@ -1,5 +1,5 @@
  
- DMsGuild: D&D Style-Guides give a unique insight into the game | EN World D&D & Tabletop RPG News & Reviews 
+ AI/LLMs - DMs Guild and DriveThruRPG ban AI written works, requires labels for AI generated art | EN World D&D & Tabletop RPG News & Reviews 
  Menu 
  News/Columns 
  All News 
@@ -105,119 +105,147 @@
 -->
  Community 
  General Tabletop Discussion 
- *Dungeons & Dragons 
- JavaScript is disabled. For a better experience, please enable JavaScript in your browser before proceeding. 
+ AI Echo Cave 
  You are using an out of date browser. It may not display this or other websites correctly. You should upgrade or use an alternative browser . 
- DMsGuild: D&D Style-Guides give a unique insight into the game 
+ AI/LLMs   DMs Guild and DriveThruRPG ban AI written works, requires labels for AI generated art 
  Thread starter 
  Thread starter 
- Remathilis 
+ Whizbang Dustyboots 
  Start date 
  Start date 
- Nov 25, 2018 
+ Jul 25, 2023 
  1 
  2 
  3 
+ … 
+ Go to page 
+ Go 
+ 64 
  Next 
- 1 of 3
+ 1 of 64
  Go to page 
  Go 
  Next 
  Last 
- Remathilis 
- Legend 
- Nov 25, 2018 
+ Whizbang Dustyboots 
+ Gnometown Hero 
+ Jul 25, 2023 
  #1
- While perusing the DMsGuild the other day, I stumbled upon a rather interesting little gem that is free to download: A D&D Style-guide for publishing. Check it out here: 
- https://www.dmsguild.com/product/25...e-Guide-Resources?filters=0_0_45476_0_0_0_0_0 
-Its only been on the site a month or so, but MAN does it have some interesting insight on how WotC views D&D and the Realms... 
-Ok, first things first: Its divided into four PDFs: An IP Guide (discussing how to use D&D's various IPs and ideas), an Adventure Guide (a rather short and bland bit of info for novice adventure writers), a Style Guide (how to create, and properly format, D&D rules and lore) and a Forgotten Realms Style Guide (how to adapt content to fit with Faerun). Each is loaded with some interesting and useful info on how WotC sees its stewardship of D&D these days. 
-There is so much more info there too, from languages of Faerun to a primer on the main races to the stars in the Faerunian sky. I recommend every DM grab one, if for no other reason than to peer into what WotC views as important in its brand these days. 
+ From Ennies nominee Linda Condega and Gizmodo : 
+ Gizmodo said:
+ Dungeon Masters Guild, a subsidiary of OneBookShelf and the largest digital third-party Dungeons & Dragons marketplace, officially announced a policy change that would restrict the sale of “standalone” AI-generated products. Additionally, it is enacting a “Creation Method Filter” which requires sellers to indicate if any part of their “ game, rulebook, or adventure contains AI-generated content.” 
+The most recent update to the policies says that the DriveThru Marketplaces (which includes Dungeon Masters Guild) will “not accept standalone artwork products that utilize AI-generated art. This includes stock art, token packs, maps, portraits, miniatures, etc.” Additionally, “AI-generated art is permitted for use in rulebooks and adventures, but it must be tagged as such.” 
+While AI-generated art may be allowable, another update states that starting on July 31, any content that is made of “primarily” of AI-generated writing will not be allowed. “We acknowledge enforcement challenges,” says the policy page on both DMsGuild and Roll20 , “and trust in the goodwill of our partners to offer customers unique works based primarily on human creativity”
+ Click to expand... 
+I understand the temptation to use AI generated art -- finding and connecting with professional artists can be challenging -- but I wish they'd gone further in their restrictions on it. 
  Reply 
  Reactions: 
- Whizbang Dustyboots 
+ Grendel_Khan , jhilahd , Pvt. Winslow and 22 others 
  log in or register to remove this ad 
- aco175 
- Legend 
- Nov 25, 2018 
+ Reynard 
+ aka Ian Eller 
+ Jul 25, 2023 
  #2
- I remember this in the old Dragon and Dungeon days if you were planning to submit something there. It does help to standardize things and help make people write clearer. 
+ Whizbang Dustyboots said: 
+ From Ennies nominee Linda Condega and Gizmodo : 
+I understand the temptation to use AI generated art -- finding and connecting with professional artists can be challenging -- but I wish they'd gone further in their restrictions on it.
+ Click to expand... 
+I understand the ethical issues involved in using AI art that was trained on scraped images without permission, but I also understand the value of being able to create the images you want for your project. Blocking all AI art has the effect of increasing the barrier to entry for people who can't afford to pay hundreds or thousands of dollars to commission professional custom art. 
  Reply 
- Older Beholder 
- Legend 
- Nov 27, 2018 
+ Reactions: 
+ Yaarel , Celebrim , GMforPowergamers and 9 others 
+ Whizbang Dustyboots 
+ Gnometown Hero 
+ Jul 25, 2023 
  #3
- Thanks for sharing this, 
-I've always liked reading these submission guidelines. 
-It was always a pipe dream to submit an adventure to Dungeon Magazine back in the day. 
-Maybe this will help me to focus and get something written for DMs Guild. 
+ Reynard said: 
+ I understand the ethical issues involved in using AI art that was trained on scraped images without permission, but I also understand the value of being able to create the images you want for your project. Blocking all AI art has the effect of increasing the barrier to entry for people who can't afford to pay hundreds or thousands of dollars to commission professional custom art.
+ Click to expand... 
+Those people can use the free art put on the website for their use, including by WotC, or buy the collections of stock art available there for that purchase, none of which costs more than a few bucks. 
  Reply 
- Quickleaf 
+ Reactions: 
+ Joshua Randall , Grendel_Khan , jhilahd and 24 others 
+ Sacrosanct 
  Legend 
- Nov 27, 2018 
+ Jul 25, 2023 
  #4
- Been looking it over the four documents and there was this odd line in the D&D IP Guide : 
-"Linking all planes together is the city of Sigil, characters should not be traveling there." 
- Last edited: Nov 27, 2018 
+ Reynard said: 
+ Blocking all AI art has the effect of increasing the barrier to entry for people who can't afford to pay hundreds or thousands of dollars to commission professional custom art.
+ Click to expand... 
+I disagree. People can do what we all did before AI art. In fact, the available affordable art now is miles beyond what it was when I started publishing 20 some odd years ago. There's public domain, and thousands of really high quality stock art available now. You can probably tell, but my opinion is that someone saying banning AI art will prevent them from publishers is making a weak excuse. 
  Reply 
- Paul Farquhar 
+ Reactions: 
+ Joshua Randall , jhilahd , badmonkey404 and 20 others 
+ Sacrosanct 
  Legend 
- Nov 27, 2018 
+ Jul 25, 2023 
  #5
- Suggests they want to keep Sigil clear for official stuff down the line. 
+ Whizbang Dustyboots said: 
+ From Ennies nominee Linda Condega and Gizmodo : 
+I understand the temptation to use AI generated art -- finding and connecting with professional artists can be challenging -- but I wish they'd gone further in their restrictions on it.
+ Click to expand... 
+They've had the policy of enforcing you label it as such for a while. It appears banning stand alone art is a new thing though. And thank goodness. It was getting so flooded with AI stock art that it was hard to sort through to the real art. 
  Reply 
- Remathilis 
- Legend 
- Nov 27, 2018 
+ Reactions: 
+ The Old Crow , Dausuul , Reef and 2 others 
+ Morrus 
+ Well, that was fun 
+ Staff member 
+ Jul 25, 2023 
  #6
- Quickleaf said: 
- Been looking it over the four documents and there was this odd line in the D&D IP Guide : 
-"Linking all planes together is the city of Sigil, characters should not be traveling there."
+ Whizbang Dustyboots said: 
+ From Ennies nominee Linda Condega and Gizmodo : 
+I understand the temptation to use AI generated art -- finding and connecting with professional artists can be challenging -- but I wish they'd gone further in their restrictions on it.
  Click to expand... 
-I took that to mean that while adventures can feature the planes, they don't want that to backdoor open Planescape's IP as well yet. You can have an adventure which takes the players to the Abyss, but they shouldn't go through a portal in the Lady's Ward guarded by Harmonium bariaur soldiers to get there. 
+This has been the case for months. 
  Reply 
- G 
- gyor 
+ cbwjm 
  Legend 
- Nov 27, 2018 
+ Jul 25, 2023 
  #7
- I noticed the IP Guide refers you to a list of common FR gods in the D&D style guide, a list that is NOT in the D&D style guide. 
+ I'm glad they haven't outright banned AI art, there is some cool images I've seen that my friend has generated and I think it should be fine for people to use it in their books. 
  Reply 
- pukunui 
- Legend 
- Nov 27, 2018 
+ Reactions: 
+ Pobman and Lakesidefantasy 
+ Charlaquin 
+ Goblin Queen (She/Her/Hers) 
+ Jul 25, 2023 
  #8
- There's some great stuff in the FR style guide. It's a real shame WotC doesn't bother to make sure their hardcovers follow the guidelines (e.g. The style guide says "week" is banned and one should use "tenday" instead, but "week" shows up in FR products all the time!) 
- Last edited: Nov 27, 2018 
+ Reynard said: 
+ I understand the ethical issues involved in using AI art that was trained on scraped images without permission, but I also understand the value of being able to create the images you want for your project. Blocking all AI art has the effect of increasing the barrier to entry for people who can't afford to pay hundreds or thousands of dollars to commission professional custom art.
+ Click to expand... 
+ you want art, learn to make it or pay an artist. Or use the art that artists have offered for free. 
  Reply 
- Parmandur 
- Book-Friend, he/him 
- Nov 28, 2018 
+ Reactions: 
+ Joshua Randall , Grendel_Khan , jhilahd and 9 others 
+ FrogReaver 
+ The most respectful and polite poster ever 
+ Jul 25, 2023 
  #9
- pukunui said: 
- There's some great stuff in the FR style guide. It's a real shame WotC doesn't bother to make sure their hardcovers follow the guidelines (e.g. The style guide says "week" is banned and one should use "tenday" instead, but "week" shows up in FR products all the time!)
- Click to expand... 
-Could be these are new internal guidelines made for just that reason, that they decided to share. 
+ personal preference. Allow all AI generated products but force them to an AI generated products section. Possibly with the exception of works human created but using ai art. Better yet… give that a category as well! 
  Reply 
- Quickleaf 
+ Reactions: 
+ jhilahd , Yaarel and Lakesidefantasy 
+ Vaalingrade 
  Legend 
- Nov 28, 2018 
+ Jul 25, 2023 
  #10
- Remathilis said: 
- I took that to mean that while adventures can feature the planes, they don't want that to backdoor open Planescape's IP as well yet. You can have an adventure which takes the players to the Abyss, but they shouldn't go through a portal in the Lady's Ward guarded by Harmonium bariaur soldiers to get there.
+ Reynard said: 
+ I understand the ethical issues involved in using AI art that was trained on scraped images without permission, but I also understand the value of being able to create the images you want for your project. Blocking all AI art has the effect of increasing the barrier to entry for people who can't afford to pay hundreds or thousands of dollars to commission professional custom art.
  Click to expand... 
-Well, Sigil the City of Doors & the Lady of Pain are both mentioned in the DMG; they're definitely no longer just "Planescape IP." 
-There's further insight into their thinking on page 4 of the D&D IP Guide: 
-[SECTION] Multiple Planes of Existence 
-While Faerûn is where most of the action should take place in a D&D RPG, the world exists as one within multiple planes. These planes classically form a cosmology known as The Great Wheel. See the Dungeon Master’s Guide for more information on the Great Wheel. The most important concept to remember is that even if the players never visit another plane, the fact that multiple planes exist is knowledge that many adventurers and sages share. Common folk might not commonly know or think about the planes but their influence may be felt over the course of a D&D adventure. Elementals from the elemental planes, for example, demons originate from the Abyss, and devils from the Nine Hells.[/SECTION] 
-This says that, for the time being, they want to keep the focus on Faerûn. Which makes that sentence about Sigil ("characters should not be traveling there") redundant. 
-The only reason I can think for them calling out Sigil specifically as a place to avoid is that they have plans to release a product dealing with Sigil. 
+On the other hand, it blocks people who won't pay to commission art because they can get a robot thief to take it from the people they'd otherwise be paying. 
  Reply 
+ Reactions: 
+ GM Lent , Pvt. Winslow , EthanSental and 9 others 
  1 
  2 
  3 
+ … 
+ Go to page 
+ Go 
+ 64 
  Next 
- 1 of 3
+ 1 of 64
  Go to page 
  Go 
  Next 
@@ -225,76 +253,73 @@ The only reason I can think for them calling out Sigil specifically as a place t
  Post reply
  Insert quotes…
  Similar Threads 
- B 
- A [D&D] Gamer Gift Guide for All Ages
- brimmels 
- Dec 7, 2025 
- *Dungeons & Dragons
+ AI/LLMs 
+ RPG Evolution: Hasbro's AI Plans
+ talien 
+ Mar 25, 2024 
+ AI Echo Cave
+ 11 
+ 12 
+ 13 
+ 14 
+ 15 
  Replies 
- 4 
+ 140 
  Views 
- 8K 
- Dec 8, 2025 
- Sossij 
- Forgotten Realms: Adventures in Faerun - First Impressions
- Christian Hoffer 
- Nov 4, 2025 
- *Dungeons & Dragons
+ 46K 
+ May 5, 2024 
+ overgeeked 
+ AI/LLMs 
+ Multiple "AI Art" Updates and Controversies in Tabletop Gaming
+ Abstruse 
+ Oct 6, 2023 
+ AI Echo Cave
+ 9 
+ 10 
+ 11 
+ 12 
+ 13 
+ Replies 
+ 123 
+ Views 
+ 32K 
+ Oct 10, 2023 
+ Guest 7030100 
+ G 
+ DriveThruRPG's New AI-Content Filter
+ Morrus 
+ Oct 29, 2024 
+ *Tabletop General
+ 2 
  3 
  4 
- 5 
- 6 
+ Replies 
+ 39 
+ Views 
+ 21K 
+ Dec 9, 2024 
+ Morrus 
+ RPG Crowdfunding News – Secrets of Enduril, Machines of Bone & Blood, D&D EN5ider, and more
+ Egg Embry 
+ Jun 24, 2026 
+ *Tabletop General
+ Replies 
  7 
- Replies 
- 69 
  Views 
- 40K 
- Nov 11, 2025 
- humble minion 
- H 
- B 
- D&D’s Gen Con Vision Keynote 2027—all of the announcements
- brimmels 
- Jul 31, 2026 
- *Dungeons & Dragons
- 19 
- 20 
- 21 
- 22 
- 23 
- Replies 
- 225 
- Views 
- 29K 
- Aug 12, 2026 
- Zaukrie 
- Z 
- D&D 5E (2024) 
- DMsGuild Release - Tatters of Myth Drannor!
- Weird Dave 
- Mar 23, 2026 
- *Dungeons & Dragons
- Replies 
+ 5K 
+ Jul 7, 2026 
+ 500 Toads 
+ RPG Crowdfunding News – Skullcrusher, Time Without Tide, Jadestorm, and more
+ Egg Embry 
+ Wednesday at 2:04 PM 
+ *Tabletop General
  2 
- Views 
- 1K 
- Mar 24, 2026 
- aco175 
- D&D 5E (2024) 
- How do you run an open table game in D&D '24?
- Nobleshield 
- Sep 20, 2025 
- *Dungeons & Dragons
- 2 
- 3 
- 4 
- 5 
  Replies 
- 48 
+ 15 
  Views 
- 11K 
- Dec 28, 2025 
- bedir than 
+ 3K 
+ Friday at 5:45 AM 
+ dave2008 
  Share: 
  Facebook 
  X 
@@ -383,7 +408,7 @@ The only reason I can think for them calling out Sigil specifically as a place t
  Remove ads 
  Community 
  General Tabletop Discussion 
- *Dungeons & Dragons 
+ AI Echo Cave 
  Light Mode
  Contact us 
  Terms and rules 

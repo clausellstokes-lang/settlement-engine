@@ -320,5 +320,107 @@
    "unsupportedLimb": "'Kirk's 1971 essay' - the page dates the essay 1977 in both citation and reference list, and never prints 1971",
    "fromFile": "verdicts-tolkien-i478-492.json"
   }
+ },
+ {
+  "index": 525,
+  "feature": "heroic-romance register",
+  "claim": "The book marks the unashamed return of gorgeous, eloquent heroic romance in an anti-romantic age.",
+  "source": "Lewis 1954",
+  "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+  "quote": "heroic romance, gorgeous, eloquent, and unashamed",
+  "angle": "primaries",
+  "verdict": {
+   "index": 525,
+   "verdict": "PARTIAL",
+   "trueWording": "\"it makes not a return but an advance or revolution\"",
+   "unsupportedLimb": "that the book 'marks the return' of heroic romance — Lewis calls exactly that formulation 'inadequate' and says that in the history of Romance itself it is 'not a return but an advance or revolution: the conquest of new territory'",
+   "note": "Quote 'heroic romance, gorgeous, eloquent, and unashamed' is verbatim, inside the sentence 'To say that in it heroic romance, gorgeous, eloquent, and unashamed, has suddenly returned at a period almost pathological in its anti-romanticism, is inadequate.' The anti-romantic-age limb is supported; the unqualified 'return' limb is the one Lewis explicitly overrides (he concedes only that 'To us, who live in that odd period, the return and the sheer relief of it is doubtless the important thing').",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 537,
+  "feature": "tone rising with stakes",
+  "claim": "Olsen's close reading tracks changes in tone as The Hobbit's stakes grow and distinguishes High Elves from Mirkwood elves through their speech.",
+  "source": "David Oberhelman, Mythopoeic Society review of Corey Olsen, Exploring J.R.R. Tolkien's The Hobbit",
+  "url": "https://www.mythsoc.org/reviews/exploring-j-r-r-tolkiens-the-hobbit.htm",
+  "quote": "changes in tone as the stakes become greater",
+  "angle": "primaries",
+  "verdict": {
+   "index": 537,
+   "verdict": "PARTIAL",
+   "trueWording": "\"His discussion of the 'silly' singing elves of Rivendell highlights the differences\"",
+   "unsupportedLimb": "that Olsen distinguishes High Elves from Mirkwood elves 'through their speech' — Oberhelman attributes the contrast to Olsen's discussion of the singing elves of Rivendell and to close readings of the songs, and never says the two kinds are told apart by speech",
+   "note": "First limb verbatim: Olsen 'traces certain themes such as Bilbo's choices, luck and providence in his adventures, and the changes in tone as the stakes become greater throughout the course of the novel.' Second limb's substance is adjacent — 'His discussion of the \"silly\" singing elves of Rivendell highlights the differences between these High Elves and the lower ones of Mirkwood' — but the page grounds it in song and in Olsen's discussion, not in a speech contrast between the two groups.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 538,
+  "feature": "sentence-by-sentence method",
+  "claim": "Mythgard's Exploring The Lord of the Rings is an explicitly sentence-level reading, but no transcripts or notes are published; only titles are public.",
+  "source": "Mythgard Institute, Exploring the Lord of the Rings project page",
+  "url": "https://mythgard.org/lotro/exlotr/",
+  "quote": "sentence by sentence",
+  "angle": "primaries",
+  "verdict": {
+   "index": 538,
+   "verdict": "PARTIAL",
+   "trueWording": "“we read through a portion of the text, sentence by sentence”",
+   "unsupportedLimb": "no transcripts or notes are published; only titles are public",
+   "note": "Raw HTML fetched (curl, browser UA, HTTP 200, 65,817 B) and tag-stripped: the quote is verbatim in the 'Deep Reading and Commentary' block. The page never uses the word 'transcript' (grep -ic transcript = 0) and says nothing about notes or about only titles being public; on the contrary it advertises 'All episodes are recorded and added to the Signum University YouTube channel' plus a podcast feed, Twitch livestreams, Discord and a discussion forum, so the second limb is unsupported and in tension with the page.",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 552,
+  "feature": "phonaesthetic fitness (notion to symbol)",
+  "claim": "The instinct of linguistic invention is the fitting of notion to oral symbol and pleasure in contemplating the relation — words must sound like what they mean.",
+  "source": "Tolkien, 'A Secret Vice' (full text, gwern PDF)",
+  "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+  "quote": "the fitting of notion to oral symbol",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 552,
+   "verdict": "PARTIAL",
+   "trueWording": "“the fitting of notion to oral symbol, and pleasure in contemplating the new relation”",
+   "unsupportedLimb": "words must sound like what they mean",
+   "note": "PDF downloaded from gwern (HTTP 200, 957,151 B, 26 pp — the 'A Secret Vice' text as printed in The Monsters and the Critics) and text-extracted with pdfminer. Quote verbatim: 'The instinct for “linguistic invention” - the fitting of notion to oral symbol, and pleasure in contemplating the new relation established, is rational, and not perverted.' The essay locates the pleasure in the contemplated RELATION between sound and notion — 'it is the contemplation of the relation between sound and notion which is a main source of pleasure', 'a private sense of fitness', 'word-form in relation to meaning (so-called phonetic fitness)' — an invented, personal fitness, not mimicry. Nowhere does the page prescribe that words must sound like what they mean; that limb is the claim's own gloss.",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 554,
+  "feature": "language breeds mythology",
+  "claim": "An invented language with individual flavour must have a mythology woven into it, and conversely language construction will breed a mythology — names and tongue come first, the world grows to fit.",
+  "source": "Tolkien, 'A Secret Vice'",
+  "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+  "quote": "your language construction will breed a mythology",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 554,
+   "verdict": "PARTIAL",
+   "trueWording": "your language construction will breed a mythology",
+   "note": "Quote verbatim. Limbs 1-2 fully supported: 'to give your language an individual flavour, it must have woven into it the threads of an individual mythology' and 'The converse indeed is true, your language construction will breed a mythology.' The third limb is not on this page: 'A Secret Vice' nowhere says names come first or that a world grows to fit them. Greps for names/world/stories return only unrelated passages (Animalic animal names, Welsh names on coal-trucks, 'history of the world'). The names-first/world-to-fit formulation is Letters #165/#180, not this essay. Language->mythology priority IS supported; names and world are not.",
+   "unsupportedLimb": "names and tongue come first, the world grows to fit",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 560,
+  "feature": "inherent linguistic predilections",
+  "claim": "Linguistic taste is partly inborn (the 'native tongue' as distinct from the cradle-tongue), so a writer's phonaesthetic choices express inherent predilections rather than fashion.",
+  "source": "Anna Smol, 'Tolkien's cellar door' (quoting 'English and Welsh' pp.190-1)",
+  "url": "https://annasmol.net/2019/04/13/tolkiens-cellar-door/",
+  "quote": "inherent linguistic predilections",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 560,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien discusses our 'inherent linguistic predilections' (p. 190)",
+   "note": "Quote 'inherent linguistic predilections' is verbatim, with the claimed p.190 citation, and the page supplies the p.191 cellar-door passage — so the pp.190-1 source line is right. But the page never mentions a native tongue or a cradle-tongue: greps for 'cradle', 'native tongue' and bare 'native' return zero hits, and 'fashion' returns zero. The page's support for inbornness is only 'inherent linguistic predilections' plus 'everyone has a preference for certain sounds dissociated from the meanings of words'. The native/cradle-tongue distinction is genuinely in 'English and Welsh', but it is NOT on this cited page.",
+   "unsupportedLimb": "the 'native tongue' as distinct from the cradle-tongue (and 'rather than fashion')",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
  }
 ]

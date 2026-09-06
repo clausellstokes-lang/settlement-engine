@@ -7869,5 +7869,869 @@
    "note": "Same Wayback raw capture of ch. 4 — the page exposes the chapter's Notes; note 7 reads: 'Paul Edmund Thomas draws attention to the narrator's non-committal stance in the opening chapter, calling him \"self-effacing\", \"unintrusive\" and \"vanishing\" (175-176), and identifies ten different viewpoints in this first chapter (177).' The Works Cited on the same page confirms Thomas, Paul Edmund, 'Some of Tolkien's Narrators', in Tolkien's Legendarium (Greenwood, 2000), 161-181. All limbs verbatim.",
    "fromFile": "verdicts-tolkien-i493-507.json"
   }
+ },
+ {
+  "index": 508,
+  "feature": "intrusive-to-self-effacing arc",
+  "claim": "The Hobbit opens with a very intrusive narrator who recedes as the book grows serious; by The Lord of the Rings the narrator is impartial and multi-viewpoint, measured on Wayne Booth's scale.",
+  "source": "Thomas 2000, as summarised in kate_nepveu's reading notes",
+  "url": "https://kate-nepveu.livejournal.com/181350.html",
+  "quote": "impartial and self-effacing",
+  "angle": "primaries",
+  "verdict": {
+   "index": 508,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw LiveJournal page (kate_nepveu, 2006-06-06) reached with a browser UA. Body reads: 'the opening of The Hobbit is told by a very intrusive narrator [*], but as the book gets more serious toward the end, the narrator recedes; and by the start of The Lord of the Rings, the narrator has become impartial and self-effacing, presenting many more viewpoints than at the start of The Hobbit.' The quote 'impartial and self-effacing' is exact. Booth limb supported by the footnote at the asterisk: 'Thomas recounts a system from Wayne Booth's The Rhetoric of Fiction that characterizes narrators on a scale between unintrusive and intrusive'. Essay identified on the page as Paul Edmund Thomas, 'Some of Tolkien's Narrators', in Tolkien's Legendarium (=2000).",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 509,
+  "feature": "discourse juxtaposition in The Hobbit",
+  "claim": "In The Hobbit fairy-tale and epic discourses are set against everyday speech through irony and parody.",
+  "source": "Thomas Kullmann, 'Intertextual Patterns in J.R.R. Tolkien's The Hobbit and The Lord of the Rings', NJES 8(2) 2009 (abstract via Semantic Scholar API)",
+  "url": "https://api.semanticscholar.org/graph/v1/paper/ef4bbee7b8993086ff7315388bece6038fa6241d?fields=title,abstract,year,venue,openAccessPdf,externalIds",
+  "quote": "juxtaposed with everyday speech through irony and parody",
+  "angle": "primaries",
+  "verdict": {
+   "index": 509,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "juxtaposed with everyday speech pattern through irony and parody",
+   "note": "Named Semantic Scholar API URL REACHED RAW: it returned HTTP 429 on six attempts, then HTTP 200 on the seventh in a backoff loop. Its abstract field reads: 'In The Hobbit, fairy-tale and epic discourses are juxtaposed with everyday speech pattern through irony and parody.' Corroborated character-for-character by two independent raw API routes fetched before the retry succeeded - Crossref https://api.crossref.org/works/10.35360/njes.190 (HTTP 200, JATS abstract) and OpenAlex https://api.openalex.org/works/doi:10.35360/njes.190 (HTTP 200, inverted index rebuilt). No summarizer or search snippet was used. (Publisher page publicera.kb.se sits behind an Anubis proof-of-work wall and njes-journal.com refused TLS; the Wayback capture 20221017110104id_ of ojs.ub.gu.se/index.php/njes/article/view/338 independently confirms Kullmann, NJES Vol 8 No 2, 2009.) Claim substance fully supported. Graded SUBSTANCE rather than VERBATIM for one reason only: the supplied quote drops the word 'pattern' from 'everyday speech pattern'.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 510,
+  "feature": "realism plus archaic rhetoric",
+  "claim": "In The Lord of the Rings nineteenth-century circumstantial realism and pathetic fallacy combine with archaic rhetorical patterns.",
+  "source": "Kullmann 2009 (abstract)",
+  "url": "https://api.semanticscholar.org/graph/v1/paper/ef4bbee7b8993086ff7315388bece6038fa6241d?fields=title,abstract,year,venue,openAccessPdf,externalIds",
+  "quote": "circumstantial realism and pathetic fallacy combine with archaic rhetorical patterns",
+  "angle": "primaries",
+  "verdict": {
+   "index": 510,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "circumstantial realism and pathetic fallacy supplemented by archaic rhetorical patterns",
+   "note": "Same raw route as 509 - the named Semantic Scholar API URL returned HTTP 200 on the seventh attempt after six 429s, and Crossref plus OpenAlex on DOI 10.35360/njes.190 return the identical abstract. Abstract reads: 'In The Lord of the Rings, elements of the nineteenth-century novel like circumstantial realism and pathetic fallacy are supplemented by archaic rhetorical patterns.' Every limb holds - nineteenth-century novel, circumstantial realism, pathetic fallacy, archaic rhetorical patterns. Graded SUBSTANCE rather than VERBATIM for one reason only: the supplied quote reads 'combine with' where the abstract reads 'are supplemented by'.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 511,
+  "feature": "Elfland register in dialogue",
+  "claim": "The Aragorn/Boromir/Elrond exchange is a quieter English, extraordinary for simple timelessness, with sobriety, wit and force — the language of men of character.",
+  "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1973)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "It has sobriety, wit, and force",
+  "angle": "primaries",
+  "verdict": {
+   "index": 511,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "PDF fetched as binary (HTTP 200, application/pdf, 8 pp.) and text-extracted with pypdf. 'It has sobriety, wit, and force' is exact. Context: 'In the third passage, the speakers are quieter, and use a less extraordinary English; or rather an English extraordinary for its simple timelessness... It has sobriety, wit, and force. It is the language of men of character.' The third passage is confirmed to be the LotR exchange - Aragorn ('Who can tell?' said Aragorn), Boromir and Elrond all speak in it, and Le Guin later writes 'in the third quotation, the very slight whine in Boromir's tone'. All limbs supported.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 512,
+  "feature": "plain style with range",
+  "claim": "Tolkien writes a plain, clear English whose outstanding virtue is flexibility and variety, from the commonplace to the stately.",
+  "source": "Le Guin 1973",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "ranges easily from the commonplace to the stately",
+  "angle": "primaries",
+  "verdict": {
+   "index": 512,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF. 'ranges easily from the commonplace to the stately' is exact, in: 'Tolkien writes a plain, clear English. Its outstanding virtue is its flexibility, its variety. It ranges easily from the commonplace to the stately'. Every limb (plain clear English, outstanding virtue, flexibility, variety, commonplace-to-stately range) is on the page.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 513,
+  "feature": "unstriking vocabulary",
+  "claim": "Tolkien's vocabulary is not striking; everything is direct, concrete and simple, with no 'ichor'.",
+  "source": "Le Guin 1973",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "Tolkien's vocabulary is not striking; he has no ichor",
+  "angle": "primaries",
+  "verdict": {
+   "index": 513,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF, exact match including the semicolon: 'Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete, and simple.' The 'ichor' limb is doubly supported - Le Guin earlier calls Ichor 'the infallible touchstone of the seventh-rate'.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 514,
+  "feature": "prose sliding into metre",
+  "claim": "The prose can slide into metrical poetry, as in the Bombadil episode, without careless readers noticing.",
+  "source": "Le Guin 1973",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "can slide into metrical poetry",
+  "angle": "primaries",
+  "verdict": {
+   "index": 514,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF: 'can slide into metrical poetry, as in the Tom Bombadil episode, without the careless readers even noticing.' Quote exact; the Bombadil limb and the careless-readers limb are both on the page.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 515,
+  "feature": "archaism as distancer",
+  "claim": "The archaic manner is a perfect distancer but a high wire on which one slip spoils all; Eddison did it perfectly, novices fake it with -est and mayhap.",
+  "source": "Le Guin 1973",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "The archaic manner is indeed a perfect distancer",
+  "angle": "primaries",
+  "verdict": {
+   "index": 515,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF: 'The archaic manner is indeed a perfect distancer, but you have to do it perfectly. It's a high wire: one slip spoils all. The man who did it perfectly was, of course, Eddison.' The novice limb is supported earlier in the same passage: 'The general assumption is that you add -est and you're there... Fake feeling: fake grammar' and 'Mayhap. It can't be maybe, it can't be perhaps; it has to be mayhap'. All four limbs on the page.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 516,
+  "feature": "register alternation as failure",
+  "claim": "Alternating colloquial American for humour and old formal usage for earnest moments (Leiber, Zelazny) jerks the reader between Elfland and Poughkeepsie and breaks character coherence.",
+  "source": "Le Guin 1973",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "the characters lose coherence in my mind",
+  "angle": "primaries",
+  "verdict": {
+   "index": 516,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF: 'Fritz Leiber and Roger Zelazny have both written in the comic-heroic vein, but their technique is different: they alternate the two styles. When humor is intended the characters talk colloquial American English, or even slang, and at earnest moments they revert to old formal usages... I am jerked back and forth between Elland [sic - Elfland] and Poughkeepsie; the characters lose coherence in my mind, and I lose confidence in them.' Quote exact; every limb present. The scan reads 'Elland' where the essay's word is Elfland (the essay's own title); this is an OCR/typesetting slip in the copy, not a divergence in the claim.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 517,
+  "feature": "fake plainness",
+  "claim": "The journalistic plainness of bad fantasy is flat not simple, inexact not clear, with vague sensory cues; Tolkien's plainness is the real thing.",
+  "source": "Le Guin 1973",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "is not really simple, but flat",
+  "angle": "primaries",
+  "verdict": {
+   "index": 517,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF: 'It is a fake plainness. It is not really simple, but flat. It is not really clear, but inexact. Its directness is specious. Its sensory cues... are vague and generalized... To what then is it appropriate? To journalism. It is journalistic prose.' Quote exact. The Tolkien contrast limb is explicit two sentences earlier: 'Does that make it equal to Tolkien's? Alas, no.'",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 518,
+  "feature": "two-beat narrative rhythm",
+  "claim": "The rhythm shaping the narrative is stress/release, a walking gait, carried without faltering across the whole book.",
+  "source": "Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (2001), quoted in kate_nepveu's reading notes",
+  "url": "https://kate-nepveu.livejournal.com/180011.html",
+  "quote": "as simple as a rhythm can be: two beats",
+  "angle": "primaries",
+  "verdict": {
+   "index": 518,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw LiveJournal page (kate_nepveu, 2006-06-04) reached with a browser UA; it block-quotes Le Guin: 'The rhythm that shapes and directs his narrative... is very strong and very simple, as simple as a rhythm can be: two beats. Stress, release... A walking gait--but on so vast a scale... that it carries the whole enormous narrative straight through from beginning to end, from There to Back Again, without faltering.' Quote exact; stress/release, walking gait and without-faltering limbs all present. The page also names the essay's provenance (Meditations on Middle Earth, ed. Haber; reprinted in The Wave in the Mind).",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 519,
+  "feature": "polarities of mood",
+  "claim": "'Fog on the Barrow-downs' pulses between polarities — darkness/daylight, confusion/clarity, trap/freedom — and each pole grows out of its opposite.",
+  "source": "Le Guin 2001, via kate_nepveu",
+  "url": "https://kate-nepveu.livejournal.com/180011.html",
+  "quote": "a pulsation back and forth between polarities",
+  "angle": "primaries",
+  "verdict": {
+   "index": 519,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same raw page: 'She closely reads chapter 8 of Fellowship, \"Fog on the Barrow Downs,\" and lists recurrent elements together with what they reverse into, \"a pulsation back and forth between polarities of feeling, mood, image, emotion, action\"... Examples are \"darkness/daylight,\" \"confusion of thought/clarity,\" and \"imprisonment or a trap/freedom\".' The each-pole-grows-from-its-opposite limb is the next sentence: 'The positive causes or grows from the negative state, and the negative from the position.' Quote exact; all limbs supported.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 520,
+  "feature": "sentence-level reversals",
+  "claim": "The chapter's closing sentences reverse darkness/lights, downhill/up, hill/village, fire/night in quiet simple language, like drumbeats.",
+  "source": "Le Guin 2001, via kate_nepveu",
+  "url": "https://kate-nepveu.livejournal.com/180011.html",
+  "quote": "They are like drumbeats",
+  "angle": "primaries",
+  "verdict": {
+   "index": 520,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same raw page: 'These are the final sentences' introduces the two closing sentences, then 'These few lines of straightforward narrative description are full of rapid reversals: darkness/lights twinkling--downhill/up again--the rise of Bree-hill/the village under it (west of it)--a dark mass/misty stars--a fire/the night. They are like drumbeats... Yet the tone is quiet, the language simple.' Quote exact; all four named reversals and the quiet/simple limb are on the page.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 521,
+  "feature": "trochaic beat",
+  "claim": "On the irreducible simplicity of the trochaic beat Tolkien builds a complex, stable rhythmic pattern in imagined space and time.",
+  "source": "Le Guin 2001, via kate_nepveu (Google Books confirms 'trochaic' on p. 106 of The Wave in the Mind)",
+  "url": "https://kate-nepveu.livejournal.com/180011.html",
+  "quote": "Relying on the irreducible simplicity of the trochaic beat",
+  "angle": "primaries",
+  "verdict": {
+   "index": 521,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same raw page, closing block quote: 'Relying on the irreducible simplicity of the trochaic beat, stress/unstress, Tolkien constructs an inexhaustibly complex, stable rhythmic pattern in imagined space and time.' Quote exact; the complex/stable/imagined-space-and-time limbs are all verbatim. (The parenthetical Google Books p.106 note in the source field is provenance, not a claim limb, and was not independently checked.)",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 522,
+  "feature": "read-aloud cadence",
+  "claim": "Even long sentences follow the breath, punctuation falls where one needs to pause, and the cadences are graceful and inevitable.",
+  "source": "Le Guin, quoted in Jason Fisher, 'Reading The Lord of the Rings aloud' (Lingwë, 2010)",
+  "url": "http://lingwe.blogspot.com/2010/09/reading-lord-of-rings-aloud.html",
+  "quote": "the cadences are graceful and inevitable",
+  "angle": "primaries",
+  "verdict": {
+   "index": 522,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw Lingwe (Jason Fisher) post of 2010-09-23 fetched with a browser UA. It opens with the Le Guin block quote: 'Even when the sentences are long, their flow is perfectly clear, and follows the breath; punctuation comes just where you need to pause; the cadences are graceful and inevitable.' followed by 'So wrote Ursula K. Le Guin'. Quote exact; the long-sentences, breath, punctuation-pause and cadence limbs are all on the page.",
+   "fromFile": "verdicts-tolkien-i508-522.json"
+  }
+ },
+ {
+  "index": 523,
+  "feature": "deep time",
+  "claim": "In Middle-earth one can hardly put a foot down without stirring the dust of history; the world is heavy with past.",
+  "source": "C. S. Lewis, 'The Gods Return to Earth' (Time and Tide, 1954), reproduced at TheOneRing.com",
+  "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+  "quote": "without stirring the dust of history",
+  "angle": "primaries",
+  "verdict": {
+   "index": 523,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"you can hardly put your foot down... without stirring the dust of history\"",
+   "note": "Lewis: 'in the Tolkinian world you can hardly put your foot down anywhere from Esgaroth to Forlindon... without stirring the dust of history.' The 'heavy with past' limb is carried by the next sentence: 'Our own world... hardly seems so heavy with its past' (i.e. Middle-earth is heavier). Quote exact.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 524,
+  "feature": "nomenclature",
+  "claim": "The invented names alone are a feast.",
+  "source": "Lewis 1954",
+  "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+  "quote": "The names alone are a feast",
+  "angle": "primaries",
+  "verdict": {
+   "index": 524,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The names alone are a feast\"",
+   "note": "Exact on the page. 'Invented' is the claim's gloss, but the surrounding sentence is explicitly about Tolkien's sub-creation of 'the whole world... theology, myths, geography, history, palaeography, languages', so the gloss is carried by context.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 526,
+  "feature": "elvish beauty in prose",
+  "claim": "No other prose writer has captured the piercing, high, elvish beauty Tolkien achieves.",
+  "source": "Lewis 1954",
+  "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+  "quote": "piercing, high, elvish beauty",
+  "angle": "primaries",
+  "verdict": {
+   "index": 526,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"of which no other prose writer has captured so much\"",
+   "note": "Lewis: names are best 'when they embody that piercing, high, elvish beauty of which no other prose writer has captured so much.' Quote exact. Source's comparative is 'so much' (degree) rather than an absolute none-at-all; the claim's phrasing 'the beauty Tolkien achieves' preserves that sense.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 527,
+  "feature": "interlaced narration",
+  "claim": "Keeping the reader aware of parallel story-lines adds immensely to pathos, irony and grandeur.",
+  "source": "C. S. Lewis, 'The Dethronement of Power' (1955), via kate_nepveu's reading notes",
+  "url": "https://kate-nepveu.livejournal.com/187276.html",
+  "quote": "adds immensely to the pathos, irony, and grandeur",
+  "angle": "primaries",
+  "verdict": {
+   "index": 527,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"adds immensely to the pathos, irony, and grandeur of the tale\"",
+   "note": "Nepveu's notes on Lewis's 'The Dethronement of Power': by 'never allow[ing]' the reader to forget the connection between the parallel stories, the structure 'adds immensely to the pathos, irony, and grandeur of the tale.' Both limbs on the page; the essay is dated 1955 there, as claimed. Source is a reader's summary quoting Lewis, which the citation states.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 528,
+  "feature": "opening archness fades",
+  "claim": "The first chapter is a little shy-making, but once the story moves the initial archness disappears.",
+  "source": "W. H. Auden, 'The Hero Is a Hobbit' (NYT, 1954), excerpted at Epistle of Dude",
+  "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+  "quote": "this initial archness disappears",
+  "angle": "primaries",
+  "verdict": {
+   "index": 528,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"once the story gets moving, this initial archness disappears\"",
+   "note": "Auden: 'I think some readers may find the opening chapter a little shy-making, [b]ut they must not let themselves be put off, for, once the story gets moving, this initial archness disappears.' Quote exact. Auden hedges the first limb as 'some readers may find'; the claim states it flatly. Page carries 'A. D. 1954', supporting the date.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 529,
+  "feature": "exact description and naming",
+  "claim": "Tolkien possesses an amazing gift for naming and a wonderfully exact eye for description.",
+  "source": "Auden 1954",
+  "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+  "quote": "a wonderfully exact eye for description",
+  "angle": "primaries",
+  "verdict": {
+   "index": 529,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"an amazing gift for naming and a wonderfully exact eye for description\"",
+   "note": "Auden: 'Mr. Tolkien is fortunate in possessing an amazing gift for naming and a wonderfully exact eye for description.' Both limbs verbatim.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 530,
+  "feature": "deep history",
+  "claim": "By the end one knows the histories of Hobbits, Elves, Dwarves and their landscape as well as one's own childhood.",
+  "source": "Auden 1954",
+  "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+  "quote": "as well as one knows one's own childhood",
+  "angle": "primaries",
+  "verdict": {
+   "index": 530,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"as well as one knows one's own childhood\"",
+   "note": "Auden: 'by the time one has finished his book one knows the histories of Hobbits, Elves, Dwarves and the landscape they inhabit as well as one knows one's own childhood.' Quote exact (curly apostrophe on page); 'their landscape' = 'the landscape they inhabit'.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 531,
+  "feature": "hobbit rustic register",
+  "claim": "The hobbits closely resemble the arcadian rustics of British detective fiction.",
+  "source": "Auden 1954",
+  "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+  "quote": "those arcadian rustics",
+  "angle": "primaries",
+  "verdict": {
+   "index": 531,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"resemble very closely those arcadian rustics... British detective stories\"",
+   "note": "Auden: hobbits 'in their thinking and sensibility resemble very closely those arcadian rustics who inhabit so many British detective stories.' Quote exact. The source restricts the resemblance to thinking and sensibility (explicitly contrasted with their three-foot, hairy-footed physical description); the claim drops that restriction but does not reverse it.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 532,
+  "feature": "descriptive elaboration of the portal-quest",
+  "claim": "The language of portal-quest fantasy is elaborate in the anthropologist's or pre-Raphaelite painter's way, intensely descriptive and exploratory.",
+  "source": "Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction",
+  "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+  "quote": "the elaboration of the anthropologist or the pre-Raphaelite painter",
+  "angle": "primaries",
+  "verdict": {
+   "index": 532,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the elaboration of the anthropologist or the pre-Raphaelite painter\"",
+   "note": "Mendlesohn: 'The language of the portal fantasy is often elaborate, but it is the elaboration of the anthropologist or the pre-Raphaelite painter, intensely descriptive and exploratory rather than assumptive.' Quote exact, under her heading 'The Portal-Quest Fantasy'. Source hedges with 'often' and adds 'rather than assumptive'.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 533,
+  "feature": "reader positioned at a point of entry",
+  "claim": "Mendlesohn treats The Lord of the Rings as portal-quest rhetoric in which the reader learns the world from a point of entry, the process traced in her chapter one.",
+  "source": "Mendlesohn 2008, Introduction",
+  "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+  "quote": "we learn from a point of entry",
+  "angle": "primaries",
+  "verdict": {
+   "index": 533,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"In chapter one I will trace precisely this process in The Lord of the Rings\"",
+   "note": "Both limbs on the page: 'portal fantasies require that we learn from a point of entry' (quote exact) and 'In chapter one I will trace precisely this process in The Lord of the Rings'; the chapter roster names 'chapter one (portal-quest fantasy)'.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 534,
+  "feature": "invitational vagueness",
+  "claim": "Descriptions sound vividly detailed but give an open-ended outline the reader fills in, so readers feel they helped make the world.",
+  "source": "Steve Walker, interview on The Power of Tolkien's Prose (Tolkien Library)",
+  "url": "https://tolkienlibrary.com/press/905-power-of-tolkien-prose.php",
+  "quote": "invitational quality",
+  "angle": "primaries",
+  "verdict": {
+   "index": 534,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"sounds vividly detailed... actually giving us an open-ended outline\"",
+   "note": "Walker: 'tolkien's writing, too, sounds vividly detailed... but he's actually giving us an open-ended outline... that invites us to picture for ourselves'; 'lure us into filling in the blanks'; and 'The reason we feel so attached to Middle-earth, as if we've been there, is because we have been -- we help imagine it.' The quoted phrase appears as 'Its invitational quality'. All three limbs supported.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 535,
+  "feature": "style off the critical radar",
+  "claim": "Scholars missed Tolkien's style because sentence-level style is not on the sociological critic's radar, though it mattered greatly to Tolkien.",
+  "source": "Walker interview",
+  "url": "https://tolkienlibrary.com/press/905-power-of-tolkien-prose.php",
+  "quote": "isn't on our scholarly radar",
+  "angle": "primaries",
+  "verdict": {
+   "index": 535,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Style isn't on our scholarly radar... though that mattered a lot to Tolkien himself\"",
+   "note": "Walker: 'Style isn't on our scholarly radar. Our best readers these days are mostly sociological critics... we haven't noticed much about his writing style, though that mattered a lot to Tolkien himself.' Quote exact and every limb supported; the page says 'style'/'writing style' generally, so 'sentence-level' is the claim's narrowing, neither stated nor denied there.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 536,
+  "feature": "multiple versions in differing styles",
+  "claim": "Like a folk mythology the legendarium comes in many forms, with multiple versions in differing styles and levels of detail (Bratman's Estate essay does not name the four modes attributed to him elsewhere).",
+  "source": "David Bratman, 'The History of Middle-earth' (Tolkien Estate)",
+  "url": "https://www.tolkienestate.com/writing/david-bratman-the-history-of-middle-earth/",
+  "quote": "multiple versions in differing styles and levels of detail",
+  "angle": "primaries",
+  "verdict": {
+   "index": 536,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Like a genuine folk mythology... multiple versions in differing styles and levels of detail\"",
+   "note": "Quote exact. Negative limb checked and holds: the word 'mode' appears nowhere in the Estate essay, and no four-part stylistic scheme (annalistic/antique/appendical or otherwise) is named — 'annals' occurs only as the name of a text-type in the volume summaries.",
+   "fromFile": "verdicts-tolkien-i523-537.json"
+  }
+ },
+ {
+  "index": 539,
+  "feature": "polyglossia at the Council",
+  "claim": "The Council of Elrond succeeds by representing many tongues, with Gandalf performing the voice of each speaker he reports, from Saruman to the Gaffer and Butterbur.",
+  "source": "John Halbrooks, 'Could The Council of Elrond Have Been an Email?'",
+  "url": "https://johnhalbrooks.substack.com/p/could-the-council-of-elrond-have-7cd",
+  "quote": "of polyglossia",
+  "angle": "primaries",
+  "verdict": {
+   "index": 539,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“extends it to the representation, literally, of ‘many tongues,’ of polyglossia”",
+   "note": "Raw HTML fetched (curl, browser UA, HTTP 200, 205,319 B). Quote 'of polyglossia' appears verbatim ('of </span><em>polyglossia</em>' — contiguous as rendered). Every limb supported: '“The Council of Elrond” demonstrates this technical mastery in microcosm and extends it to the representation, literally, of “many tongues,” of polyglossia'; 'The extraordinary success of this chapter'; and Gandalf 'puts on a performance worthy of Meryl Streep, playing all of the parts himself, taking on the tongues of Saruman, Isildur, Gollum, Sauron (in the Ring's inscription), Radagast the Brown, Gwaihir the Windlord (an eagle), Gaffer Gamgee, and Butterbur the Innkeeper.'",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 540,
+  "feature": "inner consistency of reality",
+  "claim": "Art is the achievement of expression that gives a Secondary World the inner consistency of reality; consistency, not novelty, is what earns belief.",
+  "source": "Tolkien, 'On Fairy-stories' (full text, coolcalvary PDF)",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "the inner consistency of reality",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 540,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“The achievement of the expression, which gives … ‘the inner consistency of reality,’ … Art”",
+   "note": "PDF downloaded (HTTP 200, 560,795 B, 41 pp) and text-extracted with pdfminer; quote occurs 5x. Limb 1 verbatim: 'The achievement of the expression, which gives (or seems to give) “the inner consistency of reality,” is indeed another thing, or aspect, needing another name: Art, the operative link between Imagination and the final result, Sub-creation.' Limb 2 (consistency, not novelty, earns belief) supported on the same page: belief follows because 'it accords with the laws of that world', while mere novelty is 'not enough' — 'Anyone inheriting the fantastic device of human language can say the green sun … But that is not enough'. The words 'a Secondary World' are the claim's gloss for Tolkien's 'ideal creations'/Sub-creation, which the essay uses interchangeably.",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 541,
+  "feature": "Secondary Belief vs suspension of disbelief",
+  "claim": "Inside a successful Secondary World what is related is 'true' by that world's own laws, and the instant a reader's disbelief arises the art has failed — suspension of disbelief is only a substitute for genuine Secondary Belief.",
+  "source": "Tolkien, 'On Fairy-stories'",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "The moment disbelief arises, the spell is broken",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 541,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Inside it, what he relates is ‘true’: it accords with the laws of that world”",
+   "note": "Same PDF. Quote verbatim: 'The moment disbelief arises, the spell is broken; the magic, or rather art, has failed.' Every limb verbatim on the page: 'He makes a Secondary World which your mind can enter. Inside it, what he relates is “true”: it accords with the laws of that world'; 'this suspension of disbelief is a substitute for the genuine thing, a subterfuge'; 'A real enthusiast for cricket is in the enchanted state: Secondary Belief.'",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 542,
+  "feature": "arresting strangeness",
+  "claim": "Fantasy's native advantage is arresting strangeness, which must be married to consistency or it decays into the merely fanciful and decorative.",
+  "source": "Tolkien, 'On Fairy-stories'",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "arresting strangeness",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 542,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Fantasy, of course, starts out with an advantage: arresting strangeness”",
+   "note": "Same PDF; 'arresting strangeness' occurs once, in 'Fantasy, of course, starts out with an advantage: arresting strangeness.' Second limb supported in the immediately following paragraph: 'Fantasy has also an essential drawback: it is difficult to achieve … “the inner consistency of reality” is more difficult to produce, the more unlike are the images … Fantasy thus, too often, remains undeveloped; it is and has been used frivolously, or only half-seriously, or merely for decoration: it remains merely “fanciful.”'",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 543,
+  "feature": "difficulty scales with unlikeness (sober material)",
+  "claim": "The more the images depart from the Primary World the harder inner consistency is to produce, so fantastic material demands more labour than sober material, not less.",
+  "source": "Tolkien, 'On Fairy-stories'",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "easier to produce this kind of “reality” with more “sober” material",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 543,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“more difficult to produce, the more unlike are the images … to the Primary World”",
+   "note": "Same PDF. Quote verbatim including its curly quotes: 'It is easier to produce this kind of “reality” with more “sober” material.' Preceding sentence supplies the first limb verbatim; the 'more labour' limb is supported by 'Fantasy has also an essential drawback: it is difficult to achieve' and, on the next page, 'will probably require labour and thought, and will certainly demand a special skill'.",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 544,
+  "feature": "the green sun",
+  "claim": "Anyone can say 'the green sun'; building a world in which it commands Secondary Belief requires labour, thought and a special elvish craft — narrative art in its most potent mode.",
+  "source": "Tolkien, 'On Fairy-stories'",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "a kind of elvish craft",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 544,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“require labour and thought … a special skill, a kind of elvish craft”",
+   "note": "Same PDF. Whole claim verbatim in one passage: 'Anyone inheriting the fantastic device of human language can say the green sun … To make a Secondary World inside which the green sun will be credible, commanding Secondary Belief, will probably require labour and thought, and will certainly demand a special skill, a kind of elvish craft … then we have a rare achievement of Art: indeed narrative art, storymaking in its primary and most potent mode.'",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 545,
+  "feature": "adjective as mythical grammar",
+  "claim": "The adjective is the root spell of Faërie: to take green from grass or red from blood is already an enchanter's power, so fantasy is built at the level of the word.",
+  "source": "Tolkien, 'On Fairy-stories'",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "a part of speech in a mythical grammar",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 545,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“the invention of the adjective: no spell or incantation in Faerie is more potent”",
+   "note": "Same PDF. Quote verbatim: 'such incantations might indeed be said to be only another view of adjectives, a part of speech in a mythical grammar.' Limbs supported verbatim in the same paragraph: 'how stimulating … was the invention of the adjective: no spell or incantation in Faerie is more potent'; 'When we can take green from grass, blue from heaven, and red from blood, we have already an enchanter's power'; and 'in such “fantasy,” as it is called, new form is made; Faerie begins' — i.e. built at the level of the word.",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 546,
+  "feature": "Recovery (defamiliarisation)",
+  "claim": "Fantasy's function of Recovery is regaining a clear view, freeing familiar things from the triteness of appropriation — the prose must make the known strange again.",
+  "source": "Tolkien, 'On Fairy-stories'",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "the drab blur of triteness or familiarity",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 546,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Recovery … is a re-gaining—regaining of a clear view”; triteness is “the penalty of ‘appropriation’”",
+   "note": "Same PDF. Quote verbatim: 'freed from the drab blur of triteness or familiarity—from possessiveness.' Limbs verbatim: 'Recovery (which includes return and renewal of health) is a re-gaining—regaining of a clear view'; 'This triteness is really the penalty of “appropriation”.' The prose-application limb ('make the known strange again') is the page's own idea in other words: 'We should look at green again, and be startled anew' and Chesterton's Mooreeffoc, 'the queerness of things that have become trite, when they are seen suddenly from a new angle.'",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 547,
+  "feature": "fantasy belongs to words, not pictures or drama",
+  "claim": "Fantasy is best left to words because painting makes the fantastic technically too easy and Drama is naturally hostile to Fantasy — the verbal medium is the proper one.",
+  "source": "Tolkien, 'On Fairy-stories'",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "Fantasy is a thing best left to words",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 547,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“In human art Fantasy is a thing best left to words, to true literature”",
+   "note": "Same PDF. Quote verbatim inside 'In human art Fantasy is a thing best left to words, to true literature.' Both reasons verbatim on the same page: 'In painting, for instance, the visible presentation of the fantastic image is technically too easy; the hand tends to outrun the mind' and 'But Drama is naturally hostile to Fantasy.'",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 548,
+  "feature": "Faërie indescribable (glimpse, not definition)",
+  "claim": "Faërie is indescribable though not imperceptible; the writer gives glimpses rather than definitions, and analysis will not discover the secret of the whole.",
+  "source": "Tolkien, 'On Fairy-stories'",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "cannot be caught in a net of words",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 548,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“indescribable, though not imperceptible”; “analysis will not necessarily discover the secret”",
+   "note": "Same PDF. Quote verbatim: 'Faërie cannot be caught in a net of words; for it is one of its qualities to be indescribable, though not imperceptible.' Glimpses-not-definitions limb verbatim: 'I will not attempt to define that, nor to describe it directly. It cannot be done … will give some glimpses of my own imperfect vision of it.' One nuance: the page hedges — 'analysis will not NECESSARILY discover the secret of the whole' — where the claim drops 'necessarily'; the limb is supported but stated more categorically than Tolkien states it.",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 549,
+  "feature": "no condescension to children",
+  "claim": "The association of fairy-stories with children is a historical accident, so the register must not be pitched down to a nursery audience.",
+  "source": "Tolkien, 'On Fairy-stories'",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "an accident of our domestic history",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 549,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“the association of children and fairy-stories is an accident of our domestic history”",
+   "note": "Same PDF. Quote verbatim. The register limb is supported in substance on the same page: adapting fairy-stories for children is 'a dangerous process'; 'Fairystories banished in this way, cut off from a full adult art, would in the end be ruined'; and 'If fairy-story as a kind is worth reading at all it is worthy to be written for and read by adults.'",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 550,
+  "feature": "eucatastrophe (joy poignant as grief)",
+  "claim": "The fairy-story's true form is the sudden joyous turn that denies universal defeat without denying sorrow, so the prose must carry grief and joy in one register.",
+  "source": "Tolkien, 'On Fairy-stories'",
+  "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+  "quote": "poignant as grief",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 550,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“The eucatastrophic tale is the true form of fairy-tale”; Joy “poignant as grief”",
+   "note": "Same PDF. Quote verbatim: 'giving a fleeting glimpse of Joy, Joy beyond the walls of the world, poignant as grief.' Limbs verbatim: 'The eucatastrophic tale is the true form of fairy-tale, and its highest function'; 'the sudden joyous “turn”'; 'It does not deny the existence of dyscatastrophe, of sorrow and failure … it denies … universal final defeat.' The one-register prose gloss is carried by 'poignant as grief' itself.",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 551,
+  "feature": "no frame of illusion",
+  "claim": "A fairy-story must be presented as true and cannot tolerate any frame or machinery suggesting the whole is a figment or illusion.",
+  "source": "Wikipedia, 'On Fairy-Stories'",
+  "url": "https://en.wikipedia.org/wiki/On_Fairy-Stories",
+  "quote": "presented as 'true'",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 551,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“it cannot tolerate any frame or machinery suggesting … a figment or illusion”",
+   "note": "Raw wikitext fetched via https://en.wikipedia.org/wiki/Special:Export/On_Fairy-Stories (HTTP 200, 23,951 B), not a summarizer. The article quotes Tolkien in full: 'It is at any rate essential to a genuine fairy-story … that it should be presented as “true”. … But since the fairy-story deals with “marvels”, it cannot tolerate any frame or machinery suggesting that the whole framework in which they occur is a figment or illusion.' Both limbs verbatim; the claim's quote “presented as ‘true’” matches.",
+   "fromFile": "verdicts-tolkien-i538-552.json"
+  }
+ },
+ {
+  "index": 553,
+  "feature": "pleasure in articulate sound",
+  "claim": "Pleasure in articulate sound and its symbolic use is independent of communication though entangled with it, and must never be forgotten in language-making.",
+  "source": "Tolkien, 'A Secret Vice'",
+  "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+  "quote": "pleasure in articulate sound",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 553,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pleasure in articulate sound... must not be forgotten for a moment",
+   "note": "Raw PDF (gwern, 26pp, pypdf text). Quote 'pleasure in articulate sound' appears once, verbatim: 'the more individual and personal factor - pleasure in articulate sound, and in the symbolic use of it, independent of communication though constantly in fact entangled with it - must not be forgotten for a moment.' Every limb (independent of communication; entangled with it; must not be forgotten) is on the page. 'in language-making' is context-supported: the sentence sits in the essay on invented languages and the next sentence applies it to Naffarin, his own construction.",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 555,
+  "feature": "word-form in relation to meaning",
+  "claim": "Tolkien's chief interest is word-form in itself and word-form in relation to meaning, the so-called phonetic fitness.",
+  "source": "Tolkien, 'A Secret Vice'",
+  "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+  "quote": "word-form in relation to meaning",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 555,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I am personally most interested perhaps in word-form in itself",
+   "note": "Quote verbatim: 'I am personally most interested perhaps in word-form in itself, and in word-form in relation to meaning (so-called phonetic fitness) than in any other department.' 'Chief interest' is carried by 'than in any other department'; 'so-called phonetic fitness' is verbatim and parenthetical exactly as claimed.",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 556,
+  "feature": "verse as the test of an invented language",
+  "claim": "The final fruition of an invented language is verse, which both expresses and fixes the maker's personal taste in sound.",
+  "source": "Tolkien, 'A Secret Vice'",
+  "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+  "quote": "this final fruition: verse",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 556,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this final fruition: verse... expresses, and has fixed, my personal taste",
+   "note": "Quote verbatim: '...has had a long enough history of development to allow of this final fruition: verse. It expresses, and at the same time has fixed, my personal taste.' 'Taste in sound' is supported by the same sentence's opening: the language was 'expressly designed to give play to my own most normal phonetic taste'.",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 557,
+  "feature": "word-music consciously weighed",
+  "claim": "In modern poetry word-form is seldom consciously marked and its effects are miscalled 'authentic magic'; Tolkien wants sound-pattern deliberately constructed to give pleasure.",
+  "source": "Tolkien, 'A Secret Vice'",
+  "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+  "quote": "the word-form is seldom consciously marked",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 557,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we call it the 'authentic magic' of the poet, meaningless expression",
+   "note": "Both halves verbatim on the page. Quote: 'the use of significant language is so habitual that the word-form is seldom consciously marked' — and it is explicitly 'poetry (of our day)'. The 'authentic magic' limb: 'we pause to wonder why a line or couplet produces an effect beyond its significance; we call it the authentic magic of the poet, or some such meaningless expression' — 'meaningless expression' supports 'miscalled'. Deliberate construction limb: 'this construction of sounds to give pleasure', which such inventions 'sharpen... by making them more conscious'.",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 558,
+  "feature": "beauty of word-form (Greek, Finnish, Welsh)",
+  "claim": "Word-form even unassociated with notions can give a perception of beauty; Greek, Finnish and Welsh are named as languages with characteristically beautiful word-form.",
+  "source": "Tolkien, 'A Secret Vice'",
+  "url": "https://gwern.net/doc/fiction/fantasy/1931-tolkien.pdf",
+  "quote": "capable of giving pleasure - a perception of beauty",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 558,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Greek, Finnish, Welsh... capable of producing this pleasure",
+   "note": "Quote verbatim: 'The very word-form itself, of course, even unassociated with notions, is capable of giving pleasure - a perception of beauty...' followed immediately by 'Greek, Finnish, Welsh (to name at random languages which have a very characteristic and in their different ways beautiful wordform, readily seizable by the sensitive at first sight) are capable of producing this pleasure.' All three languages named, in that order, as characteristically beautiful in word-form.",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 559,
+  "feature": "association of form and sense (cellar door)",
+  "claim": "'Cellar door' is beautiful dissociated from its sense, and the higher pleasure lies in words where form and sense associate — a phonaesthetic test the prose can be held to.",
+  "source": "Tolkien Gateway, 'Cellar door' (quoting 'English and Welsh')",
+  "url": "https://tolkiengateway.net/wiki/Cellar_door",
+  "quote": "the association of form and sense",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 559,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pleasure in the contemplation of the association of form and sense",
+   "note": "Live URL returned HTTP 403 to both WebFetch and a browser-UA curl; recovered via Wayback raw capture (web.archive.org/web/20260306100734id_/...), so this is the raw page, not a summary. Quote verbatim. Limb 1 verbatim: 'cellar door is beautiful, especially if dissociated from its sense (and from its spelling)'. Limb 2 verbatim: 'moving to the higher dimension, the words in which there is pleasure in the contemplation of the association of form and sense are abundant.' Attribution to the 1955 lecture 'English and Welsh' is stated on the page. The trailing clause 'a phonaesthetic test the prose can be held to' is the sweep's own application, not an assertion about the source.",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 561,
+  "feature": "illusion of historical truth and perspective",
+  "claim": "The illusion of historical truth and perspective in Beowulf is largely a product of art — an instinctive historical sense used with a poetical, not historical, object.",
+  "source": "Tolkien, 'Beowulf: The Monsters and the Critics' (full text PDF)",
+  "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+  "quote": "largely a product of art",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 561,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "illusion of historical truth... largely a product of art",
+   "note": "Raw PDF (22pp, pypdf). Quote verbatim: 'The illusion of historical truth and perspective, that has made Beowulf seem such an attractive quarry, is largely a product of art.' Next sentence carries the rest: 'The author has used an instinctive historical sense... but he has used it with a poetical and not an historical object.'",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 562,
+  "feature": "impression of depth (darker background)",
+  "claim": "The impression of depth is the effect and justification of episodes and allusions to old tales that are darker and more desperate than the foreground — the background must be grimmer than the story.",
+  "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+  "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+  "quote": "mostly darker, more pagan, and desperate than the foreground",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 562,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "impression of depth... episodes and allusions, mostly darker than the foreground",
+   "note": "Quote verbatim: 'This impression of depth is an effect and a justification of the use of episodes and allusions to old tales, mostly darker, more pagan, and desperate than the foreground.' Effect-and-justification and darker-than-foreground limbs both verbatim. The closing gloss 'the background must be grimmer than the story' is a normative restatement of the same sentence, and Tolkien's own 'effect and a justification' framing licenses it.",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 563,
+  "feature": "tower allegory (sources are for building)",
+  "claim": "Old stones (sources) exist to build the tower from whose top one sees the sea; the work is art, not a quarry, and its sources must not be dug for at the tower's expense.",
+  "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+  "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+  "quote": "look out upon the sea",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 563,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "from that tower's top he could look out upon the sea",
+   "note": "Quote verbatim, and the whole allegory is on the page: 'A man inherited a field in which was an accumulation of old stone, part of an older hall... Of the rest he took some and built a tower... So they pushed the tower over' to look for carvings, another 'began to dig' for coal 'and forgot even the stones' — 'But from the top of that tower the man had been able to look out upon the sea.' The art-not-quarry limb is verbatim elsewhere: 'Beowulf has been used as a quarry of fact and fancy far more assiduously than it has been studied as a work of art.'",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 564,
+  "feature": "balance of ends and beginnings",
+  "claim": "The poem's structure is a balance, an opposition of ends and beginnings (youth against age), not a steadily advancing narrative.",
+  "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+  "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+  "quote": "an opposition of ends and beginnings",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 564,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "essentially a balance, an opposition of ends and beginnings",
+   "note": "Quote verbatim: 'But the poem was not meant to advance, steadily or unsteadily. It is essentially a balance, an opposition of ends and beginnings.' Youth-against-age limb verbatim in the next sentence: 'an elaboration of the ancient and intensely moving contrast between youth and age, first achievement and final death.' Not-a-narrative limb: 'we must dismiss... the notion that Beowulf is a narrative poem'.",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 565,
+  "feature": "masonry not music (line and structure)",
+  "claim": "Old English lines are founded on a balance of two opposed halves, more like masonry than music, and the whole is a composition not a tune.",
+  "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+  "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+  "quote": "more like masonry than music",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 565,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more like masonry than music; a composition not a tune",
+   "note": "Quote verbatim. Full support: 'The lines do not go according to a tune. They are founded on a balance; an opposition between two halves of roughly equivalent phonetic weight, and significant content... They are more like masonry than music.' The whole-is-a-composition limb is verbatim on the page too, applied to the poem's total structure: 'It is a composition not a tune.'",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 566,
+  "feature": "heroic-elegiac mode",
+  "claim": "Beowulf is not an epic but an heroic-elegiac poem whose first 3,136 lines are the prelude to a dirge — the elegiac is the governing tone.",
+  "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+  "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+  "quote": "the prelude to a dirge",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 566,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an heroic-elegiac poem; first 3,136 lines the prelude to a dirge",
+   "note": "Quote verbatim, with every limb: 'Beowulf is not an epic, not even a magnified lay... if we must have a term, we should choose rather elegy. It is an heroic-elegiac poem; and in a sense all its first 3,136 lines are the prelude to a dirge'. The 3,136 figure matches exactly, and 'we should choose rather elegy' supports the elegiac as governing tone.",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
+ },
+ {
+  "index": 567,
+  "feature": "late, antiquarian voice (echo of an echo)",
+  "claim": "The poem is late not primitive: its maker told of things already old and weighted with regret, producing sorrows both poignant and remote.",
+  "source": "Tolkien, 'Beowulf: The Monsters and the Critics'",
+  "url": "https://jenniferjsnow.wordpress.com/wp-content/uploads/2011/01/11790039-jrr-tolkien-beowulf-the-monsters-and-the-critics.pdf",
+  "quote": "an echo of an echo",
+  "angle": "tolkien-own-theory",
+  "verdict": {
+   "index": 567,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not a 'primitive' poem; it is a late one",
+   "note": "Quote 'an echo of an echo' verbatim. Late-not-primitive limb verbatim on p.15: 'Beowulf is not a primitive poem; it is a late one, using the materials (then still plentiful) preserved from a day already changing and passing'. Remaining limbs verbatim: 'its maker was telling of things already old and weighted with regret, and he expended his art in making keen that touch upon the heart which sorrows have that are both poignant and remote... it is to us as a memory brought over the hills, an echo of an echo.'",
+   "fromFile": "verdicts-tolkien-i553-567.json"
+  }
  }
 ]

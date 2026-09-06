@@ -1,10 +1,202 @@
 [
- {"title":"[Review] T1 The Village of Hommlet (AD&D); Foreshadow — Age of Dusk (Prince of Nothing)","url":"https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/","kind":"analysis","substantive":true,"date":"2021-07-31","route":"direct fetch, browser UA"},
- {"title":"Greyhawk Returns in the 2024 Dungeon Master's Guide (John Roy, D&D Beyond)","url":"https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide","kind":"analysis","substantive":true,"date":"2024","route":"direct fetch, browser UA"},
- {"title":"GROGNARDIA: Retrospective: The Grand Duchy of Karameikos (James Maliszewski)","url":"http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html","kind":"analysis","substantive":true,"date":"2022-09-28","route":"direct fetch, browser UA"},
- {"title":"[Review] Gaz 1 The Grand Duchy of Karameikos (DnD Basic): Back to Basics — Age of Dusk (Prince of Nothing)","url":"https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/","kind":"analysis","substantive":true,"date":"2020-03-30","route":"direct fetch, browser UA"},
- {"title":"Dungeon of Signs: Lost Mines of Phandelver - Review (Gus L)","url":"http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html","kind":"analysis","substantive":true,"date":"2015-12","route":"direct fetch, browser UA"},
- {"title":"Bathtub Review: Lost Mine of Phandelver — Playful Void (Idle Cartulary)","url":"https://idlecartulary.com/2025/01/13/bathtub-review-lost-mine-of-phandelver/","kind":"analysis","substantive":true,"date":"2025-01-13","route":"direct fetch, browser UA"},
- {"title":"Running Towns in Fantasy RPGs (Mike Shea, Sly Flourish)","url":"https://slyflourish.com/introducing_towns.html","kind":"analysis","substantive":true,"date":"2023-11-13","route":"direct fetch, browser UA"},
- {"title":"The Alexandrian: Review: Ptolus – City of Adventure (Justin Alexander)","url":"https://thealexandrian.net/wordpress/47935/roleplaying-games/review-ptolus-city-of-adventure","kind":"analysis","substantive":false,"date":"2022-05-20","route":"direct fetch, browser UA"}
+ {
+  "title": "[Review] T1 The Village of Hommlet (AD&D); Foreshadow — Age of Dusk (Prince of Nothing)",
+  "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2021-07-31",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Greyhawk Returns in the 2024 Dungeon Master's Guide (John Roy, D&D Beyond)",
+  "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2024",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "GROGNARDIA: Retrospective: The Grand Duchy of Karameikos (James Maliszewski)",
+  "url": "http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2022-09-28",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "[Review] Gaz 1 The Grand Duchy of Karameikos (DnD Basic): Back to Basics — Age of Dusk (Prince of Nothing)",
+  "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2020-03-30",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Dungeon of Signs: Lost Mines of Phandelver - Review (Gus L)",
+  "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2015-12",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Bathtub Review: Lost Mine of Phandelver — Playful Void (Idle Cartulary)",
+  "url": "https://idlecartulary.com/2025/01/13/bathtub-review-lost-mine-of-phandelver/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2025-01-13",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Running Towns in Fantasy RPGs (Mike Shea, Sly Flourish)",
+  "url": "https://slyflourish.com/introducing_towns.html",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2023-11-13",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "The Alexandrian: Review: Ptolus – City of Adventure (Justin Alexander)",
+  "url": "https://thealexandrian.net/wordpress/47935/roleplaying-games/review-ptolus-city-of-adventure",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2022-05-20",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Ghosts of Saltmarsh – Looking at the Town (Merric Blackman, Merric's Musings)",
+  "url": "https://merricb.com/2019/05/22/ghosts-of-saltmarsh-looking-at-the-town/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2019-05-22",
+  "route": "live domain lapsed (redirects to an unrelated site); read via Wayback raw capture 20230416034304id_"
+ },
+ {
+  "title": "AD&D Review: The Village of Hommlet (Merric Blackman, Merric's Musings)",
+  "url": "https://merricb.com/2022/01/26/add-review-the-village-of-hommlet/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2022-01-26",
+  "route": "live domain lapsed; read via Wayback raw capture 20220816043420id_"
+ },
+ {
+  "title": "Waterdeep: Dragon Heist - Review and Tips For Running (Hipsters & Dragons)",
+  "url": "https://www.hipstersanddragons.com/waterdeep-dragon-heist-review/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2018 (updated)",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Review – Waterdeep: Dragon Heist (Strange Assembly)",
+  "url": "https://www.strangeassembly.com/2018/waterdeep-dragon-heist-a-dungeons-dragons-review",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2018",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Volo's Guide to Waterdeep (2e) product page — Product History by Shannon Appelcline, DriveThruRPG",
+  "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "product history undated; describes the 1993 release",
+  "route": "live page 403 to curl and to dmsguild mirror; read via Wayback raw capture 20210120014759id_"
+ },
+ {
+  "title": "Dungeon of Signs: B2 - Keep on the Borderlands - Review (Gus L)",
+  "url": "http://dungeonofsigns.blogspot.com/2014/01/b2-keep-on-borderlands-review.html",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2014-01",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "[Review] B2 Keep on the Borderlands (D&D Basic); Crucible — Age of Dusk (Prince of Nothing)",
+  "url": "https://princeofnothingblogs.wordpress.com/2019/01/26/review-b2-keep-on-the-borderlands-dd-basic-crucible/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2019-01-26",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Review: Ptolus – Monte Cook's City by the Spire (Storytelling and Gaming)",
+  "url": "https://angelscitadel.com/2021/05/21/review-ptolus-monte-cooks-city-by-the-spire/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2021-05-21",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "The Alexandrian: Thinking About Urbancrawls – Part 4: Experimental City Hexes (Justin Alexander)",
+  "url": "https://thealexandrian.net/wordpress/36508/roleplaying-games/thinking-about-urbancrawls-part-4-experimental-city-hexes",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2015",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Volo's Guide to Waterdeep — Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Volo%27s_Guide_to_Waterdeep",
+  "kind": "relay",
+  "substantive": false,
+  "date": "fetched 2026-09-06",
+  "route": "direct fetch; its only cited primary is a 1993 White Wolf print review, not online"
+ },
+ {
+  "title": "Age of Ravens: Gazetteers of Mystara: The Review List (Lowell Francis)",
+  "url": "http://ageofravens.blogspot.com/2012/04/gazetteers-of-mystara-review-list.html",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2012-04-11",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "In-Depth Review of the 2024 Dungeon Master's Guide (Beth Rimmels, EN World)",
+  "url": "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2024-11-12",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "How to Use the Greyhawk World Setting from D&D 5e's 2024 Dungeon Master's Guide (CBR)",
+  "url": "https://www.cbr.com/dnd-5e-dmg-greyhawk-world-setting/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2024",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Curse of Strahd — review (Bryce Lynch, tenfootpole.org)",
+  "url": "https://tenfootpole.org/ironspike/?p=2936",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2016",
+  "route": "direct fetch, browser UA; found via the site's own ?s= search after the web-search budget ran out"
+ },
+ {
+  "title": "AA#13 – White Dragon Run (Bryce Lynch, tenfootpole.org)",
+  "url": "https://tenfootpole.org/ironspike/?p=304",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2011-10-07",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "The Alexandrian: Ptolus: Running the Campaign – Using Lore Books (Justin Alexander)",
+  "url": "https://thealexandrian.net/wordpress/45361/roleplaying-games/ptolus-running-the-campaign-using-lore-books",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2020-10-30",
+  "route": "direct fetch, browser UA"
+ },
+ {
+  "title": "Read the DMG (d20 Digest, Substack)",
+  "url": "https://d20digest.substack.com/p/read-the-dmg",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "fetched 2026-09-06",
+  "route": "direct fetch; page body did not render to text (paywall/JS shell)"
+ }
 ]

@@ -1,0 +1,490 @@
+Review – Waterdeep: Dragon Heist (Dungeons & Dragons) – Strange Assembly 
+
+ Skip to content 
+
+ Strange Assembly 
+
+ Never Stop Gaming – Tabletop Roleplaying, Board, and Card Games
+
+ Toggle Sidebar 
+
+ 18 September, 2018 26 October, 2018 
+
+ Review – Waterdeep: Dragon Heist (Dungeons & Dragons)
+
+ Dungeons & Dragons kicks off a two-part Waterdeep campaign with Dragon Heist , releasing everywhere today (you may have been able to pick it up a week ago at your FLGS). Similar to the Hoard of the Dragon Queen / Rise of Tiamat duology from 2014, Dragon Heist feeds into Waterdeep: Dungeon of the Mad Mage . However, while the prior two-book campaign for D&D5E, the Waterdeep duology is split more unevenly in the levels in covers, with Dragon Heist running only from 1-5 (but mostly 1-4), while Dungeon of the Mad Mage picks up from 5-20.
+
+ The spoiler-free quick take – Waterdeep: Dragon Heist presents a brief urban adventure with a relative lot of variability based on options chosen by the DM and some choices made by the players. Because the adventure is set entirely within an established, cosmopolitan urban location, the adventure will not just involve hack-n-slash, but also encourages the characters to make connections with NPCs and requires the characters to be mindful of the legal framework within which they operate (e.g., they can’t just go kill anyone they think is evil). While the adventure is fun, Dragon Heist definitely feels like the first part of the duology it is, with content that will only come into its own once the characters are at the levels covered in Dungeon of the Mad Mage. Regardless, the short guide to Waterdeep is a nice dose of setting information. And there’s a poster map, and that sort of thing gets me all excited now that I’ve decided to just turn my interior decoration over to my inner geek (is it an “inner geek” anymore if it’s always in charge?).
+
+ You may notice drow are featured prominently on the cover of both Dragon Heist and Dungeon of the Mad Mage. It’s surely not a coincidence that a new Drizzt Do’Urden novel – Timeless – was released two weeks ago (the drow on the cover of Dragon Heist, Jarlaxle Baenre, appears in the novel). I am, however, unaware of any tie-ins to explain the presence of the Infinity Gauntlet on the cover of Dragon Heist (I’m kidding, it’s actually [redacted]).
+
+ As usual for an adventure/campaign review, note that spoilers are present ahead, so you may want to skip the rest if you might be a player in Dragon Heist.
+
+ The Basics 
+
+ That level split may explain why Dragon Heist is such a different presentation from the prior D&D5E campaign/adventure books. Indeed, only about half of the book is the adventure itself. The remainder of Dragon Heist presents information on Waterdeep itself, and on the higher-level antagonists (and their organizations) who might be pulling strings behind the scenes in Dragon Heist, but who would be too challenging for the PCs to be able to directly confront at lower levels. The background material provided on Waterdeep and those organizations allows different playthroughs of Dragon Heist to have more variation than usual for this sort of adventure.
+
+ Dragon Heist is very much a modular adventure. The overarching plot is that there is a vault full of dragons (the unit of Waterdhavian currency, not the creature type) stolen by the former Open Lord of Waterdeep (Dagult Neverember) and hidden somewhere in the city. Dagult removed this information from his mind, and stored it in an artifact – and the PCs must recover this artifact, and the contents of the vault, before the antagonists do. Beyond that, a good bit of the adventure gets changed up. There are four different antagonists to choose from (you can see them on the cover) – (1) Xanather the Beholder and his guild; (2) a faction of the Zhentarim led by a clone of the evil wizard Manshoon (that’s the Thanos wannabe on the cover; he lost one of his arms and had it replaced); (3) the drow Jarlaxle Baenre and the Bregan D’aerthe mercenary company; and (4) a diabolical husband-and-wife duo of House Cassalanter. Depending on the choice of antagonist, the adventure takes place in a different season, which is used to be able to repeat the same map for three or four of the paths, but have different things taking place. This is particularly significant in the penultimate part of the adventure, which involves moving through eight different encounters (but which encounters and in which order and the details vary from antagonist to antagonist). Finally, there are a healthy number of variations based on what factions in the city the player characters join, as they may provide aid at various times during the adventure.
+
+ The Journey 
+
+ Overall, the first four chapters of Dragon Heist track levels 1-4. As is typical for the D&D5E adventures/campaigns, you’re best off using story-based progression so that the characters are naturally the ‘correct’ level throughout the adventure.
+
+ Chapter 1 kicks off in the Yawning Portal (the tavern that sits over an entrance to Undermountain; I presume it will also be relevant in Dungeon of the Mad Mage). This will be the first of many, many references to famed locations and characters of decades past – no point in setting your adventure in Waterdeep if you aren’t going to make use of it, I figure. Things get rolling with a bar fight between thugs of the Zhentarim and Xanathar Guild persuasion, and we get one of our primary references, Volothamp Geddarm (he of the infinite self-references – the guy hawks the in-character version of Volo’s Guide to Monsters like his life depended on it), who sends the PCs off on a mission to look for a missing friend. In the process of rescuing him, the PCs will tangle with more significant forces of the Zhentarim and the Xanathar Guild, whose conflict will play out as a backdrop to Dragon Heist even if neither Manshoon nor Xanathar is the primary antagonist in this playthrough.
+
+ Chapter 2 (and level 2) is almost entirely free-form. As payment for the mission in chapter 1, Volo gifts the PCs with the deed to Trollskull Manor, a home and tavern that, one presumes the PCs will wish to restore to working order. But most of this chapter is taken up with faction missions, assuming that the characters wish to join them (and they should). The factions in question (some of which are the traditional ones that have been around since the launch of 5E, and some of which are local to Waterdeep) are the Bregan D’aerthe, the Emerald Enclave, Force Grey (a specialized cadre of adventurers in service to Waterdeep), the Harpers, the Lords’ Alliance, the Order of the Gauntlet, and the Zhentarim. To gain membership, a character must have what that organization is looking for, and then complete a mission for them (another mission is handed out every time the character gains a level). The missions typically require a few skill checks, or a single combat, and are each detailed in a single paragraph. While Chapter 2 can be blown through very quickly (especially if the PCs don’t want to join factions, and therefore don’t have faction missions), this would be pretty unsatisfying. I think, instead, it is presumed that the party will take the time to get to know their new neighborhood, and that the DM will probably throw in some more random elements for them to deal with before granting that third level, and access to chapter 3.
+
+ Chapter 3 (“Fireball”) starts off with the eponymous third-level spell, which is used to kill the current bearer of the artifact holding the Dagult Neverember’s memories of the location of the vault of dragons. This is what really kicks the players into the primary plot of the adventure. The fireball explodes right outside of their home/tavern, and kills several locals. The PC’s investigation (which does not vary much based on the antagonist, because the assassin doesn’t directly belong to any of those four groups, but rather turns out to be associated with nobles working with whoever the antagonist is) takes them to the House of Inspired Hands (the temple of Gond) and then off to the main encounter zone at the compound of said nobles. On the way, the characters may have a random diversion interacting with Jarlaxle Baenre, or may generate a useful spot of information from one of the NPCs they rescued in chapter 1. Regardless, once they make their way to the compound, they must consider their environment – after all, one cannot simply break into a noble house and smash the place up without consequences. Don’t get me wrong, the characters need to go there, they just need a little finesse and need to think on their feet when they ultimately interact with the occupants of the home and (likely) intervene in an ongoing combat between the residents and another faction of Zhentarim. If the characters swallow a bit of pride and side with the very people who sent the assassin, they can proceed without trouble. If they manage to figure out what’s going or otherwise threaten the inhabitants, then things could get very prickly.
+
+ Ultimately, however, the assassin flees into Chapter 4 and into what is in a lot of ways the climax of the adventure. The characters will chase across eight encounters (some encounters literal chases; some more figurative), with the encounters (and the order they appear in) depending on the antagonist. The ten possible locations are presented over 30 pages, with multiple season/encounter options presented for each one. Characters might engage in literal chases through the streets or rooftops, single combats, minor exploration, or diplomacy.
+
+ ﻿ Similar to the entry into the noble compound in chapter 3, characters here may have to worry about the law – barging into homes and businesses and smashing things up is frowned upon, as it simply bowling people over in a crazy chase across the streets of Waterdeep. This will be especially pertinent if the characters follow one of the encounter paths with the courthouse as a scheduled location.
+
+ One enjoyable detail that repeats itself in a variety of situations is an encounter with three 9- or 10-year-old street urchins – Nat, Jenks, and Squiddly. The children might, for example enter a tower on a dare and be taken hostage, or might help the characters identify a mimic. Their encounters are memorialized in four two-page art spreads in chapters 5-8 (each of which is dedicated to one of the four antagonists/seasons).
+
+ Ultimately, the characters will arrive at the final location, wherein may be fond the vault of dragons. They likely cannot get in immediately, however, as entry requires three oddball vault keys. These are randomly generated (or can be picked by the DM), so the array might be a drunken elf, sunlight, and a gift from a queen, or any of a number of combinations (that number, by the way, is 216). Once in the vault, the characters are met with a few puzzles, but their primary challenge will be diplomatic, as the vault’s guardian is both Good and far beyond their ability to handle (this task is made easier if the characters bring a helpful NPC along). Instead, combat waits for the way out. Here, the PCs may be in deep trouble if they have not made allies, as a party of level 4 characters seems unlikely to be up to the task of toasting a CR13 or 15 antagonist, plus adds. But allies – either from the city proper or from within the vault – can help even up the odds. Regardless, as the dragons were pilfered from Waterdeep, the characters probably shouldn’t expect to keep many of them.
+
+ Beyond the Vault 
+
+ That’s the end of the ‘normal’ adventure portion of the book. Chapters 5-8 each present information on one of the antagonists. However, as noted above, the characters are not really in a position to challenge the antagonists. They might have the ability to disrupt some operations by taking out underlings, but even this must be done very, very carefully (I don’t know about you, but sneaking into a beholder’s lair with a party of 5 th level heroes strikes me as foolhardy, even if the book says these chapters can be tackled at level 5). Dragon Heist is open to the possibility that the characters go after the antagonist before the final showdown in chapter 4, it seems relatively unlikely that the characters – having the location of the vault and the knowledge of what they need to get in – will do something other than wrap things up before going after anyone responsible (if they even know who’s responsible for their troubles). On top of that, there is an indication that the characters will be referred directly from the end of chapter 4 into the Dungeon of the Mad Mage (a.k.a., Undermountain). This leaves these chapters in something of an awkward place, and makes me wonder if they will be relevant when tackling the Dungeon of the Mad Mage, when the characters can address them at a more appropriate level.
+
+ ﻿ On the bright side, in addition to those great two-page spreads of Nat, Jenks, and Squiddly, I really like the opening illustrations for each of the chapters, which show the same street in each of the four seasons. Additionally, the plot of the “summer” antagonists – the Asmodeus-worshipping Cassalanters – have some relatively sympathetic motivations, within the universe of villains who are planning to murder a bunch of people to achieve their goal of undoing another one of their evil deeds. I like the shred of moral ambiguity that this adds to the plot – the characters will need to stop the sacrifice, but anyone with a heart would want to see if they could come up with some other way to achieve the Cassalanter’s goal of keeping their children’s souls away from Asmodeus.
+
+ Three more sections wrap up Dragon Heist. The most notable is the 25-page Volo’s Waterdeep Enchiridion (that’s Latin for a small manual or handbook, but of course you knew that), which is not to be confused with the long-out-of-print Volo’s Guide to Waterdeep . The enchiridion gives a very brief history, layout (including the various wards and some of those much-discussed splendors of the City of Splendors), and calendar of the city (there are a lot of festivals), along with an introduction to the legal system (e.g., don’t mess with the nobles) and social norms (e.g., don’t mess with the nobles).
+
+ The final two sections are the usual magic items and monsters/NPCs. Note that a relatively high proportion of the items included are not readily accessible to the PCs, as they are in the hands of NPCs far more powerful than they.
+
+ Other Thoughts and Observations 
+
+ You may recall that Mordenkainen’s Tome of Foes (released earlier this year) introduced genderfluidity, androgyny, and associated concepts to the elves relating to the nature of their origin from the androgynous Corellon Lorethian. If, like me, you thought that development was pretty cool , then you’ll be interested to know that this new element is present in Dragon Heist, which features at least one genderfluid and one trans elf.
+
+ The headline conclusions of this review are, for the most part, up at the top before the spoiler line. The biggest features of Dragon Heist, to my mind, are the modularity of the adventure (combined with the ability of the PCs to affect things by their faction choices) and the way that the setting/adventure force the players to interact and deal with the social structure of the city. Great to see Wizards continuing to bring fresh takes on the Dungeons & Dragons experience.
+
+ Posted in Reviews , RPG Tagged Dungeons & Dragons By Strange Assembly 1 Comment 
+
+ One thought on “ Review – Waterdeep: Dragon Heist (Dungeons & Dragons) ” 
+
+ Pingback: Review – Explorer’s Guide to Wildemount – Strange Assembly 
+
+ Leave a Reply Cancel reply 
+
+ This site uses Akismet to reduce spam. Learn how your comment data is processed. 
+
+ Post navigation
+
+ ← World of Darkness: the Documentary – A Film Review 
+ Kick Picks – Things from the Flood, Machina Arcana, Deck of Many Animated Spells, Set a Watch → 
+
+ Menu
+
+ Podcast 
+
+ Subscribe on iTunes 
+
+ Subscribe on Google Podcasts 
+
+ Deluxe 
+
+ Legend of the Five Rings 
+
+ Tabletop Games 
+
+ Customizable Games 
+
+ Legend of the Five Rings 
+
+ Legend of the Five Rings – What Clan Am I? 
+
+ Legend of the Five Rings: The Card Game 
+
+ Legend of the Five Rings: The Roleplaying Game 
+
+ Roleplaying Games 
+
+ Dungeons & Dragons 
+
+ Vampire: the Masquerade and World of Darkness 
+
+ Providence by Night 
+
+ Pathfinder 
+
+ Legend of the Five Rings 
+
+ Numenera/Cypher System 
+
+ Customizable Card Games 
+
+ Vampire: the Masquerade Rivals 
+
+ Magic the Gathering 
+
+ Legend of the Five Rings: The Card Game 
+
+ Android: Netrunner 
+
+ Reviews 
+
+ Game of the Year Awards 
+
+ Star Wars 
+
+ Decklists 
+
+ About/Contact Us/Support 
+
+ Search for: 
+
+ Categories
+ Categories 
+ Select Category 
+ Actual Play 
+ Analysis 
+ Announcements 
+ Art 
+ Board & Card Games 
+ Books 
+ CCG 
+ Comics 
+ Digital Games 
+ Episodes 
+ Interviews 
+ LCG 
+ Links 
+ Miniatures 
+ Movies 
+ News 
+ Previews 
+ Reviews 
+ RPG 
+ Television 
+ Uncategorized 
+ Video 
+
+ Tags
+ 7 Wonders 
+ 20 Festivals 
+ Actual Play 
+ Android 
+ Arkham Horror Files 
+ charity 
+ Coils of Madness 
+ Cthulhu Mythos 
+ D&D 
+ decklist 
+ DnD 
+ Doomtown 
+ Dungeons & Dragons 
+ Dungeons and Dragons 
+ Embers of War 
+ emperor edition 
+ GenCon 
+ Hack the Planet 
+ Ivory Edition 
+ kickstarter 
+ kotei 
+ L5R 
+ L5R LCG 
+ L5R RPG 
+ Legend of the Five Rings 
+ Love Letter 
+ Magic 
+ Marvel 
+ meta-game 
+ Netrunner 
+ nightfall 
+ Numenera 
+ Pathfinder 
+ podcast 
+ Providence by Night 
+ Starfinder 
+ Star Trek 
+ Star Wars 
+ Star Wars RPG 
+ Thunderstone 
+ Torn Asunder 
+ Vampire 
+ Vampire: the Masquerade 
+ War of Honor 
+ World of Darkness 
+
+ Recent Comments
+ Fey Eldem on Deconstructing Predator Types (Vampire: The Masquerade) 
+ Routinely Itemised: RPGs #267 on Review – Quests from the Infinite Staircase 
+ Review – The Making of the Original Dungeons & Dragons 1970-1977 – Strange Assembly on Review – Dungeons & Dragons: Art & Arcana: A Visual History 
+ Review – Vecna * Eve of Ruin – Strange Assembly on Review – Tales from the Yawning Portal (D&D) 
+ Review – Vecna * Eve of Ruin – Strange Assembly on Review – Curse of Strahd (Dungeons & Dragons 5E) 
+ Support Strange Assembly!
+
+ Tags
+ 7 Wonders 
+ 20 Festivals 
+ Actual Play 
+ Android 
+ Arkham Horror Files 
+ charity 
+ Coils of Madness 
+ Cthulhu Mythos 
+ D&D 
+ decklist 
+ DnD 
+ Doomtown 
+ Dungeons & Dragons 
+ Dungeons and Dragons 
+ Embers of War 
+ emperor edition 
+ GenCon 
+ Hack the Planet 
+ Ivory Edition 
+ kickstarter 
+ kotei 
+ L5R 
+ L5R LCG 
+ L5R RPG 
+ Legend of the Five Rings 
+ Love Letter 
+ Magic 
+ Marvel 
+ meta-game 
+ Netrunner 
+ nightfall 
+ Numenera 
+ Pathfinder 
+ podcast 
+ Providence by Night 
+ Starfinder 
+ Star Trek 
+ Star Wars 
+ Star Wars RPG 
+ Thunderstone 
+ Torn Asunder 
+ Vampire 
+ Vampire: the Masquerade 
+ War of Honor 
+ World of Darkness 
+
+ Search Strange Assembly
+
+ Search for: 
+
+ Categories
+ Categories 
+ Select Category 
+ Actual Play 
+ Analysis 
+ Announcements 
+ Art 
+ Board & Card Games 
+ Books 
+ CCG 
+ Comics 
+ Digital Games 
+ Episodes 
+ Interviews 
+ LCG 
+ Links 
+ Miniatures 
+ Movies 
+ News 
+ Previews 
+ Reviews 
+ RPG 
+ Television 
+ Uncategorized 
+ Video 
+
+ Archives
+ Archives 
+
+ Select Month 
+ March 2025 
+ July 2024 
+ June 2024 
+ May 2024 
+ October 2023 
+ September 2023 
+ August 2023 
+ July 2023 
+ February 2023 
+ January 2023 
+ November 2022 
+ October 2022 
+ September 2022 
+ August 2022 
+ July 2022 
+ June 2022 
+ May 2022 
+ April 2022 
+ March 2022 
+ February 2022 
+ January 2022 
+ December 2021 
+ November 2021 
+ October 2021 
+ September 2021 
+ August 2021 
+ July 2021 
+ June 2021 
+ May 2021 
+ April 2021 
+ March 2021 
+ February 2021 
+ January 2021 
+ December 2020 
+ November 2020 
+ October 2020 
+ September 2020 
+ August 2020 
+ July 2020 
+ June 2020 
+ May 2020 
+ April 2020 
+ March 2020 
+ February 2020 
+ January 2020 
+ December 2019 
+ November 2019 
+ October 2019 
+ September 2019 
+ August 2019 
+ July 2019 
+ June 2019 
+ May 2019 
+ April 2019 
+ March 2019 
+ February 2019 
+ January 2019 
+ December 2018 
+ November 2018 
+ October 2018 
+ September 2018 
+ August 2018 
+ July 2018 
+ June 2018 
+ May 2018 
+ April 2018 
+ March 2018 
+ February 2018 
+ January 2018 
+ December 2017 
+ November 2017 
+ October 2017 
+ September 2017 
+ August 2017 
+ July 2017 
+ June 2017 
+ May 2017 
+ April 2017 
+ March 2017 
+ February 2017 
+ December 2016 
+ November 2016 
+ October 2016 
+ September 2016 
+ August 2016 
+ July 2016 
+ June 2016 
+ May 2016 
+ April 2016 
+ March 2016 
+ January 2016 
+ December 2015 
+ November 2015 
+ October 2015 
+ September 2015 
+ August 2015 
+ July 2015 
+ June 2015 
+ May 2015 
+ April 2015 
+ March 2015 
+ February 2015 
+ January 2015 
+ December 2014 
+ November 2014 
+ October 2014 
+ September 2014 
+ August 2014 
+ July 2014 
+ June 2014 
+ May 2014 
+ April 2014 
+ March 2014 
+ February 2014 
+ January 2014 
+ December 2013 
+ November 2013 
+ October 2013 
+ September 2013 
+ August 2013 
+ July 2013 
+ June 2013 
+ May 2013 
+ April 2013 
+ March 2013 
+ February 2013 
+ January 2013 
+ December 2012 
+ November 2012 
+ October 2012 
+ September 2012 
+ August 2012 
+ July 2012 
+ June 2012 
+ May 2012 
+ April 2012 
+ March 2012 
+ February 2012 
+ January 2012 
+ December 2011 
+ November 2011 
+ October 2011 
+ September 2011 
+ August 2011 
+ July 2011 
+ June 2011 
+ May 2011 
+ April 2011 
+ March 2011 
+ February 2011 
+ January 2011 
+ December 2010 
+ November 2010 
+ October 2010 
+ September 2010 
+ August 2010 
+ July 2010 
+ June 2010 
+
+ L5R
+
+ Heroes of Rokguan 
+
+ Kaze no Shiro 
+
+ The 6th Ring 
+
+ The Kolat Informant 
+
+ Beyond
+
+ BoardGameGeek 
+
+ Dice Tower News 
+
+ The Dice Tower 
+
+ Meta
+
+ Register 
+ Log in 
+
+ Entries feed 
+
+ Comments feed 
+
+ WordPress.org 
+
+ Proudly powered by WordPress 
+ | 
+ Theme: Cubic by WordPress.com .

@@ -1,6 +1,6 @@
 {
  "complete": false,
- "coverage": "IN PROGRESS (checkpoint 1): 9 sources read raw, 8 substantive. Named roster (journals, monographs, Wikipedia relay, conference papers, stylometric studies) partly walked; BrightWeavings Professional Scholarship index enumerated (20 items) and being fetched; paywalled chapters (Springer, De Gruyter, Wiley) still on the recovery ladder; no stylometric or corpus study of Kay located yet.",
+ "coverage": "IN PROGRESS (checkpoint 2): 22 sources fetched raw, 17 substantive. BrightWeavings Professional Scholarship (20 items) and Student Papers rosters enumerated and largely walked; paywalled chapters reached at abstract level only; no stylometric or corpus study of Kay found.",
  "sourcesRead": [
   {
    "title": "Neil Randall, \"Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry\", Canadian Literature 129 (Summer 1991)",
@@ -73,6 +73,110 @@
    "substantive": true,
    "date": "2016 (Children of Earth and Sky, published 2016)",
    "route": "live URL, raw HTML"
+  },
+  {
+   "title": "Petra Pugar, \"A Marvellous (Hi)story: An Analysis of Tigana by Guy Gavriel Kay\", Words to Works (Anglophonia, University of Zagreb), pp. 162-",
+   "url": "https://anglophonia.ffzg.unizg.hr/wp-content/uploads/2020/07/162_pugar.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "posted 2020-07",
+   "route": "live URL, PDF binary, text extracted with pdfminer"
+  },
+  {
+   "title": "Roosa Töyrylä, \"Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana\" (BA thesis, University of Helsinki, 2017)",
+   "url": "http://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2017",
+   "route": "live URL, raw HTML (full thesis text)"
+  },
+  {
+   "title": "Jillian Hatch, \"The Creative Construction of History in Guy Gavriel Kay's The Sarantine Mosaic\" (University of Calgary undergraduate paper)",
+   "url": "http://brightweavings.com/creative_history/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2005 (cited as Hatch 2005 by Kleander)",
+   "route": "live URL, raw HTML"
+  },
+  {
+   "title": "Anya Kleander, \"Present Reality in Historical Fantasy\" (Honours dissertation, University of Stirling, Spring 2008)",
+   "url": "http://brightweavings.com/presentreality/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2008",
+   "route": "live URL, raw HTML (full dissertation text)"
+  },
+  {
+   "title": "Faye Ringel, \"Kay's Provence: From Arbonne to Ysabel\" (International Conference on the Fantastic in the Arts, March 2009; Anticipation Worldcon, August 2009)",
+   "url": "http://brightweavings.com/kaysprovence/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2009",
+   "route": "live URL, raw HTML"
+  },
+  {
+   "title": "John J. Doherty, \"The High Fantasies of Lawhead and Kay\" (from Arthurian Fantasy, 1980-1989)",
+   "url": "http://brightweavings.com/doherty/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "n.d.",
+   "route": "live URL, raw HTML — read in full; concerns religious imagination and Arthurian symbolism, nothing on register or prose"
+  },
+  {
+   "title": "Kathy Cawsey, \"The Once and Future Childslayer: Guy Gavriel Kay's Inversion of Malory's Morte Darthur\", Arthuriana 25.2 (2015)",
+   "url": "http://brightweavings.com/wp-content/uploads/2016/06/The-Once-and-Future-Childslayer-KATHY-CAWSEY.pdf",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2015-06",
+   "route": "PDF binary via BrightWeavings, text extracted with pypdf — read in full; argument is about Kay's philosophical inversion of Malory, no prose-style or register analysis"
+  },
+  {
+   "title": "Susan A. Johnston, \"When Are We Ever at Home? Exile and Nostalgia in the Work of Guy Gavriel Kay\", in Canadian Science Fiction, Fantasy, and Horror (Palgrave Macmillan, Studies in Global Science Fiction, 2019)",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-15685-5_7",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019",
+   "route": "paywalled; abstract read raw via Wayback capture https://web.archive.org/web/20191114214457id_/… — ABSTRACT ONLY"
+  },
+  {
+   "title": "Sylwia Borowska-Szerszun, \"The limits of the happy ending: Eucatastrophe and cultural memory in Guy Gavriel Kay's Tigana\", Orbis Litterarum (4 June 2026), doi:10.1111/oli.70057",
+   "url": "https://doi.org/10.1111/oli.70057",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-06-04",
+   "route": "paywalled at Wiley; abstract read raw from the Crossref record — ABSTRACT ONLY"
+  },
+  {
+   "title": "Guy Gavriel Kay interviewed in Locus, \"Guy Gavriel Kay: Margins of History\" (12 May 2025)",
+   "url": "https://locusmag.com/feature/guy-gavriel-kay-margins-of-history/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-05-12",
+   "route": "live URL, raw HTML"
+  },
+  {
+   "title": "Raymond H. Thompson, \"Interview with Guy Gavriel Kay\" (Taliesin's Successors), Robbins Library / The Camelot Project, University of Rochester",
+   "url": "https://d.lib.rochester.edu/camelot/text/interview-with-guy-gavriel-kay.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "n.d. (Taliesin's Successors interview series)",
+   "route": "live URL, raw HTML"
+  },
+  {
+   "title": "BrightWeavings, \"Professional Scholarship\" index (roster of 20 scholarly items on Kay)",
+   "url": "https://brightweavings.com/scholarship/professional-scholarship/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "retrieved 2026-09-06",
+   "route": "live URL — used as the bibliography for this angle"
+  },
+  {
+   "title": "BrightWeavings, \"Student Papers\" index (undergraduate and graduate papers on Kay)",
+   "url": "https://brightweavings.com/scholarship/student-papers/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "retrieved 2026-09-06",
+   "route": "live URL — used as the bibliography for this angle"
   }
  ],
  "claims": [
@@ -383,6 +487,230 @@
    "routeHint": "live URL, raw HTML",
    "registerHint": "chronicle-line",
    "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Pugar says Kay's narrator names places in Tigana without explaining where they are, which makes the reading feel like a historical text with geographical references.",
+   "source": "Petra Pugar, University of Zagreb, Words to Works",
+   "url": "https://anglophonia.ffzg.unizg.hr/wp-content/uploads/2020/07/162_pugar.pdf",
+   "quote": "creates a feeling of reading a historical text with geographical references",
+   "page": "p. 168, section 'Geographical map as a paratext'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020",
+   "routeHint": "PDF binary, pdfminer text",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "civic record register",
+   "claim": "Pugar argues that Tigana's prologue persuades the reader they are reading a true account giving evidence of the past.",
+   "source": "Petra Pugar, University of Zagreb, Words to Works",
+   "url": "https://anglophonia.ffzg.unizg.hr/wp-content/uploads/2020/07/162_pugar.pdf",
+   "quote": "they are dealing with a true account, giving evidence of the past",
+   "page": "p. 165",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020",
+   "routeHint": "PDF binary, pdfminer text",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "plainness and economy",
+   "claim": "Töyrylä says Kay uses a matter-of-fact style to describe a dramatic and violent event in Tigana.",
+   "source": "Roosa Töyrylä, BA thesis, University of Helsinki (2017)",
+   "url": "http://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "Again a matter-of-fact style is used to describe a dramatic and violent event",
+   "page": "section 'Narratorial Focalization: All-seeing but Indifferent'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2017",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "adjective and adverb discipline",
+   "claim": "Töyrylä describes that passage's narrator as merely reporting what happened without any commentary.",
+   "source": "Roosa Töyrylä, BA thesis, University of Helsinki (2017)",
+   "url": "http://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "the narrator is merely reporting what happened, without any commentary",
+   "page": "section 'Narratorial Focalization: All-seeing but Indifferent'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2017",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "withheld information and inference",
+   "claim": "Töyrylä reads the phrase 'according to most reports later' as the narrator restricting his omniscience to what people hear about the incident afterwards.",
+   "source": "Roosa Töyrylä, BA thesis, University of Helsinki (2017)",
+   "url": "http://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "narrating only what people hear about the incident afterwards",
+   "page": "section 'Narratorial Focalization: All-seeing but Indifferent'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2017",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "Töyrylä argues that a shift out of a character's perspective is what lets Kay describe that character's execution matter-of-factly.",
+   "source": "Roosa Töyrylä, BA thesis, University of Helsinki (2017)",
+   "url": "http://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "enables the matter-of-fact description of his execution",
+   "page": "section on variable internal focalization",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2017",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "civic record register",
+   "claim": "Töyrylä argues that Kay's narrator describes things as an inhabitant of the storyworld would rather than as an outsider.",
+   "source": "Roosa Töyrylä, BA thesis, University of Helsinki (2017)",
+   "url": "http://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "the narrator describes things like an inhabitant of that world would",
+   "page": "section on communal viewpoint",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2017",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: communal narrator",
+   "claim": "Töyrylä finds that in passages using the phrase 'as everyone knows' the narrator's perspective coincides with that of an average citizen of the Palm.",
+   "source": "Roosa Töyrylä, BA thesis, University of Helsinki (2017)",
+   "url": "http://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+   "quote": "concurs with that of an average citizen of the Palm",
+   "page": "section on communal viewpoint",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2017",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "annalist voice and deep time",
+   "claim": "Hatch argues that through the historian Pertennius Kay shows the historian's power outlasting that of the world's rulers.",
+   "source": "Jillian Hatch, University of Calgary undergraduate paper",
+   "url": "http://brightweavings.com/creative_history/",
+   "quote": "the power of the historian is more lasting than that of the rulers of the world",
+   "page": "section on Pertennius",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2005",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "civic record register",
+   "claim": "Hatch reports that the narrator of Sailing to Sarantium claims on its first page that writers of history often seek the dramatic over the truth.",
+   "source": "Jillian Hatch, University of Calgary undergraduate paper, quoting Kay's Sailing to Sarantium p. 1",
+   "url": "http://brightweavings.com/creative_history/",
+   "quote": "writers of history often seek the dramatic over the truth",
+   "page": "concluding section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2005",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "Kleander counts twenty-one separate focalizants and more than 150 separate focalizations in Tigana, apart from the non-focalized narrative.",
+   "source": "Anya Kleander, Honours dissertation, University of Stirling (2008)",
+   "url": "http://brightweavings.com/presentreality/",
+   "quote": "there are twenty-one separate focalizants in Tigana, and more than 150 separate focalizations",
+   "page": "footnote 1 to the Tigana chapter",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2008",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "concrete sensory noun",
+   "claim": "Kleander reports Kay as believing that the quiet, steady accumulation of detail and complexity reaches readers almost subliminally.",
+   "source": "Anya Kleander (2008) quoting Guy Gavriel Kay in an SF Site interview, 2000",
+   "url": "http://brightweavings.com/presentreality/",
+   "quote": "quiet, steady accumulation of detail and complexity",
+   "page": "Sarantine Mosaic chapter",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2008 (quoting a 2000 interview)",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — the words are Kay's, reached at second hand through Kleander's citation of an SF Site interview I did not fetch"
+  },
+  {
+   "feature": "consequence on a household",
+   "claim": "Kay says he looks for the unwritten histories and the people at the margins of history.",
+   "source": "Guy Gavriel Kay interviewed in Locus, 12 May 2025",
+   "url": "https://locusmag.com/feature/guy-gavriel-kay-margins-of-history/",
+   "quote": "the people at the margins of history",
+   "page": "interview body",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2025-05-12",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "civic record register",
+   "claim": "Kay says he also loves the chronicles of the dukes and the popes, alongside the unwritten lives of women and of the poor.",
+   "source": "Guy Gavriel Kay interviewed in Locus, 12 May 2025",
+   "url": "https://locusmag.com/feature/guy-gavriel-kay-margins-of-history/",
+   "quote": "lives of women, and of the poor",
+   "page": "interview body",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2025-05-12",
+   "routeHint": "live URL, raw HTML",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: eucatastrophe and cultural memory",
+   "claim": "Borowska-Szerszun argues that the restoration of Tigana's name remains marked by loss, fragmentation and incomplete knowledge.",
+   "source": "Sylwia Borowska-Szerszun, Orbis Litterarum (2026)",
+   "url": "https://doi.org/10.1111/oli.70057",
+   "quote": "it remains marked by loss, fragmentation, and incomplete knowledge",
+   "page": "abstract",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2026-06-04",
+   "routeHint": "Crossref record abstract (article paywalled)",
+   "registerHint": "none",
+   "confidence": "medium — abstract only, the article text was not reachable"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Johnston argues that Kay's reimagined ancient and medieval settings estrange the familiar, rendering it unheimlich.",
+   "source": "Susan A. Johnston, in Canadian Science Fiction, Fantasy, and Horror (Palgrave Macmillan, 2019)",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-15685-5_7",
+   "quote": "estranging the familiar, rendering it unheimlich",
+   "page": "chapter abstract",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2019",
+   "routeHint": "Wayback raw capture 20191114214457id_ of the SpringerLink page",
+   "registerHint": "none",
+   "confidence": "medium — abstract only, the chapter text is behind a subscription"
   }
  ]
 }

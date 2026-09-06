@@ -12,13 +12,15 @@ cd $K || exit 1
 # every research run is dead (a cutoff, a TaskStop, a finished run). Confirm with CONFIRM_DEAD=1.
 if [ "$CONFIRM_DEAD" != "1" ]; then echo "REFUSED: set CONFIRM_DEAD=1 only when no research run is alive (their verifiers read the chunk files this rewrites)."; exit 2; fi
 NAMES="$*"; [ -z "$NAMES" ] && NAMES="tolkien kay leguin wolfe martin hobb dnd ai"
+P=$S/inflight/.scan.pid; if ! { [ -f "$P" ] && kill -0 "$(cat "$P")" 2>/dev/null; }; then nohup python3 $S/inflight-scan.py > $S/inflight/scan.out 2>&1 & echo "inflight scanner restarted (pid $!)"; else echo "inflight scanner alive (pid $(cat $P))"; fi
+python3 $S/inflight-scan.py --once >/dev/null 2>&1; echo "== in-flight progress (sweep/inflight/SUMMARY.md) =="; head -5 $S/inflight/SUMMARY.md
 echo "== sweep state before =="; node sweep-state.mjs summary
 for n in $NAMES; do
   RUN=$(python3 -c "import json;d=json.load(open('$S/LAST-RUNS.json'));print(d.get('$n',{}).get('runId',''))")
   PREV=$(python3 -c "import json;d=json.load(open('$S/LAST-RUNS.json'));print(d.get('$n',{}).get('argsFile',''))")
   TAG=$(python3 -c "import json;d=json.load(open('$S/LAST-RUNS.json'));t=d.get('$n',{}).get('tag','r3c');import re;m=re.match(r'r(\d+)([a-z]?)',t);print('r%d'%(int(m.group(1))+1) if m else t+'x')")
   echo "== $n: last run $RUN, prev args $PREV -> next tag $TAG =="
-  if [ -n "$PREV" ] && [ -f "$S/$PREV" ]; then python3 $S/mk-round.py $n $TAG --prev $S/$PREV ${RUN:+--runs $RUN} --cap 4 | tail -1; else echo "  (no prev args in LAST-RUNS.json for $n — build by hand: python3 sweep/mk-round.py $n $TAG --prev sweep/args-$n-<lasttag>.json)"; fi
+  if [ -n "$PREV" ] && [ -f "$S/$PREV" ]; then python3 $S/mk-round.py $n $TAG --prev $S/$PREV ${RUN:+--runs $RUN} --cap 4 --inflight | tail -1; else echo "  (no prev args in LAST-RUNS.json for $n — build by hand: python3 sweep/mk-round.py $n $TAG --prev sweep/args-$n-<lasttag>.json)"; fi
 done
 echo; echo "== PASTE, one Workflow call per sweep (scriptPath = $K/research-workflow-v3.js; args = the JSON of the file named) =="
 for n in $NAMES; do f=$(ls -t $S/args-$n-r*.json 2>/dev/null | head -1); echo "  $n -> $f ($(wc -c < $f 2>/dev/null) bytes)"; done

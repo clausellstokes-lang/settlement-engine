@@ -1,5 +1,5 @@
-COMPLETE=False
-COVERAGE="in progress"
+COMPLETE=True
+COVERAGE="Angle named categories rather than URLs, so the roster was read as: Hobb's own craft essays/interviews/blog (FETCHED, 16 items: OF Blog 2003, Locus 1998 and 2005, Pat's Fantasy Hotlist 2005, SFFWorld 2005, Aidan Moher 2007, Fantasy Book Critic 2008, Lightspeed/Geek's Guide 2012, Writing Excuses 11.Bonus-01 2016 fan transcript, Paw Print 2020, robinhobb.com 'As You Intend To Be' 2020 and 'What Works For Me' 2022 and 'How to Write a Book' 2022, Syl R. Martin 2023, Dragonsteel 2024, LisiPieces 2025, plus 'The Fan Fiction Rant' recovered from Wayback after removal from the live site); critics and close readers on register and pacing (FETCHED: Geoffrey B. Elliott's chapter-by-chapter reread entries 1 and 226, five Vacuous Wastrel reviews, The Idle Woman, Lisa Goldstein in Strange Horizons); craft essays and writing-advice pieces by novelists and craft sites (FETCHED: M Harold Page in Black Gate 2016, Jeffrey Outcalt's Substack epigraph essay 2024, Christopher Luke Dean at Writers Write 2020); editors (FETCHED: Anne Groell, Hobb's Random House editor, interviewed by Julie Crisp 2016, but she discusses her editing method and not Hobb's prose); game designers (NOT FOUND as a substantive category: the nearest is an unsigned, apparently machine-compiled article on rpgstorytellers.com, logged at low confidence; four searches aimed at RPG and game-design writing on Hobb surfaced only wikis, forum recommendation threads and generic DM advice). BLOCKED and recovered: aidanmoher.com refused WebFetch with HTTP 403 and yielded to curl with a browser user agent; the Mythlore PDF of Matthew Oliver's 'History in the Margins' refused a direct fetch with HTTP 403 and was recovered from a Wayback raw capture and parsed with pdfminer; fanlore.org returned HTTP 403 and was bypassed by going to the primary. Substantive sources per route: named-roster/direct search 22; bibliography chasing 3 (Oliver via Elliott's Fedwren Project, which also surfaced Ekman and Taylor 2021 and Mandala 2010, not pursued as they fall to the academic angle); lateral search 5. WebFetch was not used for any claim: it returned summaries rather than page text and once mis-attributed a page, so every source was read raw via curl with a browser user agent and stripped to text locally, and every quotation was string-searched against that text before being written. 35 sources logged, 30 substantive, 127 claims."
 
 SOURCES=[
  {"title":"Robin Hobb Interview (Other Fantasy / OF Blog, Larry Nolen)","url":"http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html","kind":"own-words","substantive":True,"date":"2003-04-28","route":"curl browser-UA on live URL"},
@@ -374,3 +374,254 @@ C("rpgstory-canvas.txt","other: pacing",
   "Unsigned article, rpgstorytellers.com, 2026","https://rpgstorytellers.com/the-assassins-canvas-a-comprehensive-analysis-of-narrative-interiority-magic-systems-and-cultural-anthropology-in-robin-hobbs-farseer-trilogy/",
   "dedicating thousands of words to the mundane details","Section 2.3",kind="analysis",date="2026-01-13",
   confidence="low; unsigned page, machine-compiled in appearance")
+
+OLIVER_URL="https://dc.swosu.edu/mythlore/vol41/iss1/4/"
+OLIVER_SRC="Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66"
+OLIVER_ROUTE="live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction"
+
+SOURCES += [
+ {"title":"History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice (Matthew Oliver, Mythlore 41.1)","url":OLIVER_URL,"kind":"analysis","substantive":True,"date":"2022-10","route":"Wayback raw PDF capture (live PDF 403), pdfminer extraction"},
+ {"title":"The Fedwren Project: A Robin Hobb Annotated Bibliography (Geoffrey B. Elliott)","url":"https://elliottrwi.com/research/hobb-bibliography/","kind":"analysis","substantive":True,"date":"accessed 2026-09-06","route":"curl browser-UA on live URL; used for bibliography chasing"},
+]
+
+C("oliver.norm.txt","civic record register",
+  "Oliver describes the chapter epigraphs of Assassin's Apprentice as excerpts from a public document, largely a formal history written in a distant, scholarly voice.",
+  OLIVER_SRC,OLIVER_URL,"a formal history written in a distant, scholarly voice","p. 45",kind="analysis",date="2022-10",
+  registerHint="dossier-archivist",routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","civic record register",
+  "Oliver says the formal, scholarly, distant history is presumably the authoritative one yet is placed in the margins of the text.",
+  OLIVER_SRC,OLIVER_URL,"the formal, scholarly, distant history is presumably the primary one","pp. 45-46",kind="analysis",date="2022-10",
+  registerHint="dossier-archivist",routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","civic record register",
+  "Oliver says the first chapter's epigraph opens with the authoritative voice of History establishing a clear centre to its narrative.",
+  OLIVER_SRC,OLIVER_URL,"opens with the authoritative voice of History","p. 53",kind="analysis",date="2022-10",
+  registerHint="chronicle-line",routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","civic record register",
+  "Oliver observes that the chapter thirteen epigraph on Patience includes evidentiary quotes from her nursemaids and publicly available information rather than the author's own experience of her.",
+  OLIVER_SRC,OLIVER_URL,"he includes evidentiary quotes from her nursemaids and publicly available information","p. 56",kind="analysis",date="2022-10",
+  registerHint="dossier-archivist",routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","civic record register",
+  "Oliver calls the history that opens the Patience chapter dry, impersonal, but objective, and judges the personal main text more authoritative and satisfying.",
+  OLIVER_SRC,OLIVER_URL,"the dry, impersonal, but objective history beginning the chapter","p. 56",kind="analysis",date="2022-10",
+  registerHint="dossier-archivist",routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","omission as information",
+  "Oliver names Hobb's most striking stylistic element negative narration: describing what is not happening instead of or before what is happening.",
+  OLIVER_SRC,OLIVER_URL,"describing what is not happening instead of or before describing","p. 57",kind="analysis",date="2022-10",
+  registerHint="dossier-archivist",routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","omission as information",
+  "Oliver says the negative narration shows up in sentences that start by telling what a character is not doing or feeling.",
+  OLIVER_SRC,OLIVER_URL,"sentences that start by telling what a character is not doing","p. 57",kind="analysis",date="2022-10",
+  routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","withheld information and inference",
+  "Oliver says the novel constantly focuses on what is not happening or not present in order to define what is happening.",
+  OLIVER_SRC,OLIVER_URL,"focuses on what is not happening or what is not present","p. 45",kind="analysis",date="2022-10",
+  routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","omission as information",
+  "Oliver argues that only through absences and the things that did not happen can the reader apprehend what did happen.",
+  OLIVER_SRC,OLIVER_URL,"Only through absences, the negative spaces, the things that did not happen","p. 47",kind="analysis",date="2022-10",
+  routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","omission as information",
+  "Oliver identifies a roughly seventy-page stretch of the novel as a lengthy portion of the narrative given over to describing what is not there.",
+  OLIVER_SRC,OLIVER_URL,"the narrative given over to describing what is not there","p. 61",kind="analysis",date="2022-10",
+  routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","register modulation",
+  "Oliver says that when Fitz shifts from a discourse of history to a discourse of fantasy the style shifts to extensive parataxis, elevated figurative language, and parallelism.",
+  OLIVER_SRC,OLIVER_URL,"extensive parataxis, elevated figurative language, and parallelism","p. 59",kind="analysis",date="2022-10",
+  registerHint="chronicle-line",routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","register modulation",
+  "Oliver says the later epigraphs become increasingly infected by the style of imaginative fiction in place of the style of scholarly discourse.",
+  OLIVER_SRC,OLIVER_URL,"the epigraphs become increasingly infected by the style of imaginative fiction","p. 61",kind="analysis",date="2022-10",
+  registerHint="chronicle-line",routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","parataxis vs hypotaxis",
+  "Oliver counts two sentences using inverted syntax in the chapter fifteen epigraph, alongside parataxis across sentence boundaries and listed parallel phrases.",
+  OLIVER_SRC,OLIVER_URL,"Two sentences use inverted syntax","p. 62",kind="analysis",date="2022-10",
+  registerHint="chronicle-line",routeHint=OLIVER_ROUTE)
+C("oliver.norm.txt","annalist voice and deep time",
+  "Mendlesohn, quoted by Oliver, likens each chapter's opening memoir to the Venerable Bede's history and calls it recollection and gossip masquerading as an accurate description of the past.",
+  "Farah Mendlesohn, Rhetorics of Fantasy (2008), p. 16, quoted by Matthew Oliver in Mythlore 41.1 (2022)",OLIVER_URL,
+  "recollection and gossip masquerading as an accurate description of the past","p. 63, quoting Mendlesohn p. 16",kind="relay",date="2008",
+  registerHint="chronicle-line",polarity="disputes",routeHint=OLIVER_ROUTE,
+  confidence="medium; a quotation of Mendlesohn inside Oliver's article, not read at Rhetorics of Fantasy itself")
+
+SOURCES += [
+ {"title":"Interviewing Robin Hobb, Epic-Fantasy Best-Selling Author (Syl R. Martin)","url":"https://sylrmartin.com/portfolio/interviewing-robin-hobb-epic-fantasy-best-selling-author/","kind":"own-words","substantive":True,"date":"2023-05-19","route":"curl browser-UA on live URL"},
+ {"title":"An Interview with Robin Hobb: Character Writing (Madalen Erez, Paw Print)","url":"https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/","kind":"own-words","substantive":True,"date":"2020-11-19","route":"curl browser-UA on live URL"},
+ {"title":"My Reddit 'AMA' Q&A with Robin Hobb Is On Today! (Helen Lowe)","url":"https://helenlowe.info/blog/2012/05/17/my-reddit-ama-qa-with-robin-hobb-is-on-today/","kind":"reception","substantive":False,"date":"2012-05-17","route":"curl browser-UA on live URL"},
+]
+
+SM="Robin Hobb, interviewed by Syl R. Martin, 2023"
+SMU="https://sylrmartin.com/portfolio/interviewing-robin-hobb-epic-fantasy-best-selling-author/"
+C("sylmartin.txt","point of view and distance",
+  "Hobb says she tries to keep in mind that every character is the hero of his own story.",
+  SM,SMU,"every character is the hero of his own story","On characters",kind="own-words",date="2023-05-19")
+C("sylmartin.txt","place and institution description",
+  "Hobb says each character has to be the product of the imaginary world they exist in.",
+  SM,SMU,"the product of the imaginary world they exist in","On inspiration",kind="own-words",date="2023-05-19",registerHint="dossier-archivist")
+C("sylmartin.txt","other: research method",
+  "Hobb says her first choice of research source is a person who will tell her about a trade such as bee-keeping or navigating.",
+  SM,SMU,"I like to use people as sources","On research",kind="own-words",date="2023-05-19",registerHint="dossier-archivist")
+C("sylmartin.txt","other: research method",
+  "Hobb says diaries and other first-person accounts are her preferred sources for older technology.",
+  SM,SMU,"Diaries or other first person accounts are great","On research",kind="own-words",date="2023-05-19",registerHint="dossier-archivist")
+C("sylmartin.txt","place and institution description",
+  "Hobb says transplanting a real person or event into an invented world is simply not believable.",
+  SM,SMU,"Transplants are simply not believable","On inspiration",kind="own-words",date="2023-05-19",polarity="rejects")
+
+PP="Robin Hobb, interviewed by Madalen Erez, Paw Print, 2020"
+PPU="https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/"
+C("pawprint.txt","consequence on a household",
+  "Hobb objects to screen fights after which no one is bruised, there is no blood and no one limps.",
+  PP,PPU,"no one is bruised afterwards, there is no blood, no one limps","Writing Traumatic Experiences",kind="own-words",date="2020-11-19",polarity="rejects")
+C("pawprint.txt","consequence on a household",
+  "Hobb says being a good character does not protect a person from physical damage.",
+  PP,PPU,"Having a good character does not protect you from physical damage","Writing Traumatic Experiences",kind="own-words",date="2020-11-19")
+C("pawprint.txt","consequence on a household",
+  "Hobb says the things that happen to us change us, and that this is what makes a character interesting.",
+  PP,PPU,"The things that happen to us change us","Writing Traumatic Experiences",kind="own-words",date="2020-11-19")
+C("pawprint.txt","consequence on a household",
+  "Hobb says we are all the sum of our experiences, good and bad.",
+  PP,PPU,"We are all the sum of our experiences, good and bad","Writing Traumatic Experiences",kind="own-words",date="2020-11-19")
+C("pawprint.txt","consequence on a household",
+  "Hobb says characters are shaped by their experiences and become the product of what has been done to them.",
+  PP,PPU,"We become the product of what has been done to us","Hobb's Writing as a Whole",kind="own-words",date="2020-11-19")
+C("pawprint.txt","point of view and distance",
+  "Hobb says writing a viewpoint character means putting that character on like donning a coat.",
+  PP,PPU,"the writer must put that character on like donning a coat","How does Hobb create characters?",kind="own-words",date="2020-11-19")
+
+SOURCES += [
+ {"title":"Interview with Robin Hobb (Rob Bedford, SFFWorld)","url":"https://www.sffworld.com/2005/09/interview-with-robin-hobb/","kind":"own-words","substantive":True,"date":"2005-09-01","route":"curl browser-UA on live URL"},
+ {"title":"What Works For Me (Robin Hobb's Infrequent and Off Topic Blog)","url":"https://www.robinhobb.com/blog/posts/40869","kind":"own-words","substantive":True,"date":"2022-05-20","route":"curl browser-UA on live URL"},
+ {"title":"A Day in the Life of an Editor - with Anne Groell (Julie Crisp)","url":"http://www.juliecrisp.co.uk/blog-1/2016/1/4/a-day-in-the-life-of-an-editor-with-anne-groell","kind":"own-words","substantive":True,"date":"2016-01-04","route":"curl browser-UA on live URL"},
+]
+
+SW="Robin Hobb, interviewed by Rob Bedford, SFFWorld, 2005"
+SWU="https://www.sffworld.com/2005/09/interview-with-robin-hobb/"
+C("sffworld-2005.txt","withheld information and inference",
+  "Hobb says first person makes her rely on the reader to be alert and connect the dots.",
+  SW,SWU,"rely on the reader to be alert and connect the dots","Q on first person",kind="own-words",date="2005-09-01",registerHint="chronicle-line")
+C("sffworld-2005.txt","point of view and distance",
+  "Hobb says the intimacy of first person lets the reader know things the protagonist would not otherwise verbalise.",
+  SW,SWU,"the reader will know things that the protagonist would not otherwise verbalize","Q on first person",kind="own-words",date="2005-09-01")
+C("sffworld-2005.txt","withheld information and inference",
+  "Hobb says the reader may be able to see what is coming even when the narrator does not.",
+  SW,SWU,"the reader will perhaps be able to see what is coming","Q on first person",kind="own-words",date="2005-09-01")
+C("sffworld-2005.txt","register modulation",
+  "Hobb says the writing and style in the Megan Lindholm books differs substantially from the Robin Hobb books.",
+  SW,SWU,"The writing and style in those books differs substantially","Q on Lindholm reprints",kind="own-words",date="2005-09-01")
+C("sffworld-2005.txt","point of view and distance",
+  "Hobb says she writes for people who really like to know the characters.",
+  SW,SWU,"I write for people who really like to know the characters","Q on readers",kind="own-words",date="2005-09-01")
+C("sffworld-2005.txt","place and institution description",
+  "Hobb says researching for a fantasy lets the writer collect the best bits of history and joggle them to fit the invented world.",
+  SW,SWU,"you get to collect all the best bits","Q on research",kind="own-words",date="2005-09-01",registerHint="dossier-archivist")
+
+HB="Robin Hobb, 'What Works For Me', robinhobb.com blog, 2022"
+HBU="https://www.robinhobb.com/blog/posts/40869"
+C("hobb-blog-40869.txt","other: time compression in one sentence",
+  "Hobb advises skipping a dull stretch of travel by summarising it in one sentence, and supplies the sample sentence herself.",
+  HB,HBU,"After four days of punishing travel, they reached a small holding","Section: I don't want to write the next scene",kind="own-words",date="2022-05-20",registerHint="chronicle-line")
+C("hobb-blog-40869.txt","sentence length variation",
+  "Hobb says a chapter may consist of a single sentence.",
+  HB,HBU,"You can have a one sentence chapter if you want","Section: I don't want to write the next scene",kind="own-words",date="2022-05-20",registerHint="chronicle-line")
+C("hobb-blog-40869.txt","diction (native vs latinate)",
+  "Hobb rejects the word processor's thesaurus because it offers the same synonyms every other writer is using, and recommends a paper Roget's instead.",
+  HB,HBU,"the same synonyms that every other writer is using","Footnote on the thesaurus",kind="own-words",date="2022-05-20",polarity="rejects")
+C("hobb-blog-40869.txt","concrete sensory noun",
+  "Hobb gives as a revision-pass example replacing a red car with candy apple red with metal flake.",
+  HB,HBU,"The car isn't red, it's candy apple red with metal flake","Section: Nope. I'm blocked",kind="own-words",date="2022-05-20")
+
+C("groell-crisp.txt","edition and house style",
+  "Groell, the Random House editor of Hobb, Martin and others, says her first read of a book is close line-reading and individual sentence editing.",
+  "Anne Groell, executive SFF editor, Random House USA, interviewed by Julie Crisp, 2016","http://www.juliecrisp.co.uk/blog-1/2016/1/4/a-day-in-the-life-of-an-editor-with-anne-groell",
+  "I do the really close line-reading and individual sentence editing","Middle of the piece",kind="own-words",date="2016-01-04",polarity="mentions",
+  confidence="medium; Groell describes her general editing method and does not discuss Hobb's prose specifically")
+C("groell-crisp.txt","edition and house style",
+  "Groell says she averages about 25 pages an hour, or 200 pages a day, on that first close read.",
+  "Anne Groell, executive SFF editor, Random House USA, interviewed by Julie Crisp, 2016","http://www.juliecrisp.co.uk/blog-1/2016/1/4/a-day-in-the-life-of-an-editor-with-anne-groell",
+  "I average about 25 pages an hour, or 200 pages a day","Middle of the piece",kind="measurement",date="2016-01-04",polarity="mentions",
+  confidence="medium; a figure about Groell's own reading pace, not about Hobb's prose")
+
+SOURCES += [
+ {"title":"Ship of Magic (1998): Robin Hobb (The Idle Woman)","url":"https://theidlewoman.net/2013/05/05/ship-of-magic-robin-hobb/","kind":"analysis","substantive":True,"date":"2013-05-05","route":"curl browser-UA on live URL"},
+ {"title":"Dragon Haven by Robin Hobb (Lisa Goldstein, Strange Horizons)","url":"http://strangehorizons.com/non-fiction/reviews/dragon-haven-by-robin-hobb/","kind":"reception","substantive":True,"date":"2010-05-10","route":"curl browser-UA on live URL"},
+]
+
+C("idlewoman-ship.txt","register modulation",
+  "The Idle Woman says Bingtown could belong to an entirely different age than the Six Duchies.",
+  "The Idle Woman (pseudonymous reviewer), 'Ship of Magic (1998): Robin Hobb', 2013","https://theidlewoman.net/2013/05/05/ship-of-magic-robin-hobb/",
+  "Bingtown could belong to an entirely different age than the Six Duchies","Opening paragraph",kind="analysis",date="2013-05-05",registerHint="dossier-archivist")
+C("idlewoman-ship.txt","place and institution description",
+  "The Idle Woman says trade, shipping and merchants' colonies give Bingtown a distinctly seventeenth-century feel in contrast with the medievalism of the Farseer trilogy.",
+  "The Idle Woman (pseudonymous reviewer), 'Ship of Magic (1998): Robin Hobb', 2013","https://theidlewoman.net/2013/05/05/ship-of-magic-robin-hobb/",
+  "with a distinctly seventeenth-century feel","Opening paragraph",kind="analysis",date="2013-05-05",registerHint="dossier-archivist")
+
+LG="Lisa Goldstein, novelist, reviewing Dragon Haven in Strange Horizons, 2010"
+LGU="http://strangehorizons.com/non-fiction/reviews/dragon-haven-by-robin-hobb/"
+C("sh-goldstein.txt","repetition and refrain",
+  "Goldstein criticises Hobb's habit of repeating things, as if she did not trust readers to remember them from one chapter to the next.",
+  LG,LGU,"trust her readers to remember them from one chapter to the next","Fourth paragraph",kind="reception",date="2010-05-10",polarity="disputes")
+C("sh-goldstein.txt","plainness and economy",
+  "Goldstein says the writing seemed tired and repetitious in Dragon Keeper and is tightened in Dragon Haven.",
+  LG,LGU,"which seemed tired and repetitious in the earlier book","Fourth paragraph",kind="reception",date="2010-05-10",polarity="disputes")
+C("sh-goldstein.txt","withheld information and inference",
+  "Goldstein complains that very little in Dragon Haven could not have been guessed by an astute reader.",
+  LG,LGU,"Very little happens that couldn't have been guessed by an astute reader","Sixth paragraph",kind="reception",date="2010-05-10",polarity="disputes")
+
+RANT_URL="https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html"
+RANT_ROUTE="the essay was removed from robinhobb.com; located the original URL via the Wayback CDX API and fetched the 2005-06-30 raw capture (id_ form), gunzipped locally"
+LP_URL="https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/"
+
+SOURCES += [
+ {"title":"The Fan Fiction Rant (Robin Hobb, robinhobb.com, captured 30 June 2005)","url":RANT_URL,"kind":"own-words","substantive":True,"date":"captured 2005-06-30","route":"Wayback raw capture of a page since removed from the live site"},
+ {"title":"Robin Hobb Isn't Writing Back Anymore (Elise Mead, LisiPieces)","url":LP_URL,"kind":"own-words","substantive":True,"date":"2025-10-18","route":"curl browser-UA on live URL"},
+ {"title":"Blogging rant (robinhobb.com/rant.html, captured 7 January 2009)","url":"https://web.archive.org/web/20090107003409id_/http://robinhobb.com/rant.html","kind":"own-words","substantive":False,"date":"captured 2009-01-07","route":"Wayback raw capture; the later occupant of the same URL, an anti-blogging piece, not craft"},
+]
+
+RANT="Robin Hobb, 'The Fan Fiction Rant', robinhobb.com (page since removed)"
+C("rant2005.txt","omission as information",
+  "Hobb says fan fiction closes up the space she has engineered into the story.",
+  RANT,RANT_URL,"closes up the space that I have engineered into the story","Section: I should be flattered",kind="own-words",date="2005 or earlier",
+  registerHint="dossier-archivist",routeHint=RANT_ROUTE)
+C("rant2005.txt","withheld information and inference",
+  "Hobb objects that the reader is then told what he must think rather than being allowed to observe the characters and draw his own conclusions.",
+  RANT,RANT_URL,"told what he must think rather than being allowed to observe","Section: I should be flattered",kind="own-words",date="2005 or earlier",
+  polarity="rejects",routeHint=RANT_ROUTE)
+C("rant2005.txt","omission as information",
+  "Hobb says that if something is left nebulous in her text it is because she intends it to be nebulous.",
+  RANT,RANT_URL,"If something is left nebulous, it is because the author intends","Section: I should be flattered",kind="own-words",date="2005 or earlier",
+  registerHint="dossier-archivist",routeHint=RANT_ROUTE)
+C("rant2005.txt","omission as information",
+  "Hobb says a writer puts a great deal of thought into what goes into the story and what does not.",
+  RANT,RANT_URL,"A writer puts a great deal of thought into what goes","Section: I should be flattered",kind="own-words",date="2005 or earlier",
+  routeHint=RANT_ROUTE)
+C("rant2005.txt","withheld information and inference",
+  "Hobb uses the Mona Lisa as her analogy: each viewer draws his own conclusions about the elusive smile rather than having eyebrows drawn on.",
+  RANT,RANT_URL,"Each of us draws his own conclusions about her elusive smile","Section: I should be flattered",kind="own-words",date="2005 or earlier",
+  routeHint=RANT_ROUTE)
+
+LP="Robin Hobb, interviewed by Elise Mead, LisiPieces, 2025"
+C("lisipieces.txt","concrete sensory noun",
+  "Hobb says that in a description of anything she wants to engage as many of the five senses as possible.",
+  LP,LP_URL,"We have five senses, and in a description of anything","On writing food",kind="own-words",date="2025-10-18",registerHint="dossier-archivist")
+C("lisipieces.txt","place and institution description",
+  "Mead reports that Hobb keeps geographical consistency by ensuring ingredients match what would actually grow in each region.",
+  "Elise Mead, paraphrasing Robin Hobb, LisiPieces, 2025",LP_URL,
+  "ensuring ingredients match what would actually grow in each region","On writing food",kind="analysis",date="2025-10-18",registerHint="dossier-archivist",
+  confidence="medium; a reporter's paraphrase, not a transcribed quotation")
+C("lisipieces.txt","place and institution description",
+  "Mead reports that Hobb wishes she had determined coinage and monetary values from the start of her worldbuilding.",
+  "Elise Mead, paraphrasing Robin Hobb, LisiPieces, 2025",LP_URL,
+  "determined coinage and monetary values from the start","On practical wisdom for authors",kind="analysis",date="2025-10-18",registerHint="dossier-archivist",
+  confidence="medium; a reporter's paraphrase")
+C("lisipieces.txt","other: indexing by incident rather than page",
+  "Mead reports that Hobb's glossary entries are anchored to a chapter or event rather than page numbers.",
+  "Elise Mead, paraphrasing Robin Hobb, LisiPieces, 2025",LP_URL,
+  "anchored to a chapter or event rather than page numbers","On practical wisdom for authors",kind="analysis",date="2025-10-18",registerHint="chronicle-line",
+  confidence="medium; a reporter's paraphrase")
+C("lisipieces.txt","other: magic bounded by limitation",
+  "Hobb says a tale of three magic wishes works well while an infinite number of wishes is no story at all.",
+  LP,LP_URL,"A tale of three magic wishes works well","On the magic systems",kind="own-words",date="2025-10-18")
+C("lisipieces.txt","place and institution description",
+  "Mead says the geography of Fitz's world is not a backdrop but is full of sight, sound, taste, and cinematic color.",
+  "Elise Mead, LisiPieces, 2025",LP_URL,"full of sight, sound, taste, and cinematic color","On worldbuilding",kind="analysis",date="2025-10-18",
+  registerHint="dossier-archivist")

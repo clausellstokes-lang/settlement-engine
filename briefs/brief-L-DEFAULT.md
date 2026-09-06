@@ -1,7 +1,7 @@
 # LANE: L-DEFAULT (`LGT-C2-DEFAULT`) — the preset table lights, six hunks in one commit series (lighting POSITION 3)
 ⟦Chair: Fable 5.1 · Lane: Opus 5 (`model: "opus"`) · THE CENTRE OF MASS of the wave · the largest same-seed shift in the arc, DECLARED per cause · boards after L-HOMES lands⟧
 
-READ FIRST: `$SC/briefs/_PREAMBLE.md` → `git show refs/preserve/light-plan-2026-09-05:PLAN.md` §6 POSITION 3 (the order
+READ FIRST: `$SC/briefs/_PREAMBLE.md` → `$SC/lightingwave/PLAN.md` §6 POSITION 3 (⚠ corrected 09-06 08:20: the plan lives at `refs/preserve/light-plan-2026-09-05:lightingwave/PLAN.md`, extracted into the kit at that path; the brief's old spelling `…:PLAN.md` never existed) (the order
 below, verbatim source) + §1.3 (the door denominator: 152 doors, 38 lit, 114 dark; classes A–G) + §5 (the OSR rung: the
 25-key re-key is half (a) of `LGT-P15-EP1`; half (b), the EP-1 release, does NOT ride this car) + §8 (STOPs) → the §890
 O-12 block in `simulationRules.js` (why lighting on a LEGACY preset id re-labels every installed campaign silently) →

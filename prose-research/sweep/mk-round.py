@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""mk-round.py <name> <tag> --prev <args-file> [--runs <runId,...>] [--cap N] — build the NEXT round's args from the FILES:
+"""mk-round.py <name> <tag> --prev <args-file> [--runs <runId,...>] [--cap N] [--inflight] — build the NEXT round's args from the FILES:
 salvage finders from this session's journals (extract-found.py), merge every verdict file (sweep-state summary), fold found files
 (assemble), re-split (split-chunks), then angles = prev.findAngles/extraAngles minus those whose found file is COMPLETE
 (a found file with "complete": false is assembled AND its angle re-run; legacy files without the flag count as complete),
@@ -29,5 +29,20 @@ args=json.load(open(f'{S}/args-{name}.json'))
 for k in ('regrade','regradeNotes','synthNotes'):
     if k in prev: args[k]=prev[k]
 args['regradeTag']=tag; args['cap']=cap
+if '--inflight' in a:
+    # fold the in-flight scanner's progress into PRIOR PROGRESS hints for every angle this round re-runs (finder killed before its checkpoint)
+    hints={}
+    for ang in angles+[e['key'] for e in extras]:
+        urls=[]; claims=None
+        for f in sorted(glob.glob(f'{S}/inflight/*.json')):
+            try: d=json.load(open(f))
+            except Exception: continue
+            if d.get('role')=='finder' and d.get('name')==name and d.get('angle')==ang:
+                urls+= [u for u in d.get('urlsFetched',[]) if u not in urls]
+                cp=d.get('checkpointFile') or {}
+                if cp.get('claims') is not None: claims=cp['claims']
+        if urls:
+            hints[ang]='%d sources were fetched before the cutoff%s: %s%s. Start from the roster items NOT in that list, then expand.'%(len(urls),(' and %d claims are checkpointed'%claims) if claims else '',' ; '.join(urls[:40]),' (+%d more in sweep/inflight/)'%(len(urls)-40) if len(urls)>40 else '')
+    if hints: args['angleHints']=hints; print('  angleHints for', list(hints))
 out=f'{S}/args-{name}-{tag}.json'; json.dump(args,open(out,'w'),ensure_ascii=False)
 print(json.dumps({'name':name,'tag':tag,'out':out,'bytes':os.path.getsize(out),'chunks':len(args.get('chunks') or []),'toVerify':sum(len(c['indices']) for c in (args.get('chunks') or [])),'findAngles':angles,'extraAngles':[e['key'] for e in extras],'droppedComplete':[x for x in (prev.get('findAngles') or []) if complete(x)]+[e['key'] for e in (prev.get('extraAngles') or []) if complete(e['key'])],'baseIndex':args.get('baseIndex'),'verifiedCount':args.get('verifiedCount'),'cap':cap}))

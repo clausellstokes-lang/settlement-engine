@@ -1,0 +1,468 @@
+ 
+ 
+ 
+ISSN 2786 -6165 (ONLINE ) № 5(47) 2026  
+ 
+ 
+ 
+ 372 
+UDC 821.111(73).09-312.9:81'373.23 
+ 
+https://doi.org/10.52058/2786-6165-2026-5(47)-372-381 
+ 
+Tkach Polina  Candidate of Philological Sciences, Associate Professor,  
+Professor of the Department of Philology, Translation and Strategic 
+Communication, National Academy of the National Guard of Ukraine, Kharkiv , 
+https://orcid.org/0000-0003-4377-5335 
+ 
+Volkova Maryna Candidate of Philological Sciences, Associate Professor, 
+Head of the Department of Aviation English, Ivan Kozhedub Kharkiv National 
+Air Force University, Kharkiv, https://orcid.org/0009-0005-3235-4537 
+ 
+ROBIN HOBB’S «THE WORLD OF THE ELDERING» 
+ONOMASTICON: THE STRUCTURAL AND FUNCTIONAL 
+SIGNIFICANCE OF CHARACTONYMS 
+ 
+Abstract. The article is devoted to a comprehensive functional and 
+semantic analysis of charactonyms within the literary universe created by the 
+prominent American fantasy writer Robi n Hobb in her renowned series The 
+World of the Elderlings. In literary texts, proper names lose their purely 
+identifying real-world function and transform into multi -layered linguistic tools 
+intentionally designed by authors to encode deep narrative meanin gs, establish 
+socio-cultural contexts, outline psychological profiles, and steer readers' aesthetic 
+perception. This study addresses a notable gap in contemporary literary 
+onomastics, as Hobb’s intricate onomastic space has remained largely unexplored 
+despite its profound semantic and structural complexity. 
+The structural and functional analysis conducted in the article reveals that 
+the onymic space of the Six Duchies is meticulously constructed upon the 
+fundamental principle of national-cultural contrast. This artistic device serves as 
+a primary marker of cultural differentiation: evocative, transparent, and 
+semantically dense English -derived names function exclusively within the 
+dominant culture of the Six Duchies, closely aligning with the diegetic concept of 
+the magical potency embedded in a name. Conversely, representatives of 
+neighboring nations, such as the Mountain Kingdom or Kalsid, are assigned 
+names characterized by phonetic foreignness and an absolute lack of transparent 
+semantics for the reader ( e.g., Eyod, Rurisk, Kettricken), which strongly 
+reinforces their cultural "otherness" and alien status within the narrative fabric. 
+Researcher L. Belei proposed a rigorous classification of the anthroponyms, 
+dividing them into distinct functional -semantic subgroups: names of national or 
+ 
+ 
+ 
+ISSN 2786 -6165 (ONLINE ) № 5(47) 2026  
+ 
+ 
+ 
+ 373 
+regional significance, socially significant charactonyms, and informational -
+evaluative names. The study demonstrates that socially significant anthroponyms 
+represent the most dominant and structurally diverse group, which perfectly 
+mirrors the early medieval setting of the fantasy universe where a person's social 
+mask, status, and destiny are inextricably linked. Key examples such as Chivalry, 
+Regal, Fitz, and The Fool are analyzed to illustrate how names indicate royal 
+legitimacy, political ambitions, or severe societal stigma. Furthermore, 
+informational-evaluative charactonyms, including Shrewd, Desire, and Patience, 
+are investigated as tools of direct psychological characterization that explicitly 
+encapsulate the core inner nature, behavioral patterns, and moral capacities of the 
+characters. The paper concludes that Hobb's charactonyms transcend basic 
+nomenclature, serving as a vital mechanism of character development and world-
+building. Prospective areas for further scholarly scientific inquiry are identified, 
+including expanding the linguistic analysis to other cycles of the universe and 
+examining the translated variants of these proper names. 
+Keywords: literary onomastics, charactonym, anthroponym, Robin Hobb, 
+The World of the Elderlings, fantasy literature, functional-semantic analysis. 
+ 
+Ткач Поліна Борисівна кандидат філологічних наук, доцент, 
+професор кафедри філології, перекл аду та стратегічних комунікацій,  
+Національна академія Національної гвардії України, Харків, https://orcid. 
+org/0000-0003-4377-5335 
+ 
+Волкова Марина Сергіївна  кандидат філологічних наук, доцент, 
+завідувач кафедри авіаційної англійської мови, Харківський національний 
+університет Повітряних Сил імені Івана Кожедуба, Харків, https://orcid.  
+org/0009-0005-3235-4537 
+ 
+ОНОМАСТИКОН «СВІТУ ЕЛДЕРЛІНГІВ» РОБІН ГОББ: 
+СТРУКТУРНО-ФУНКЦІОНАЛЬНЕ ЗНАЧЕННЯ ХАРАКТЕРОНІМІВ 
+ 
+Анотація. Стаття присвячена комплексному функціонально -
+семантичному аналізу характеронімів у літературному всесвіті відомої 
+американської письменниці Робін Гобб «Світ Елдерлінгів». У художньому 
+тексті власна назва  втрачає свою виключно ідентифікаційну функцію, 
+притаманну реальному світу, і трансформується у багатовимірний 
+лінгвістичний інструмент, свідомо обраний автором для кодування 
+глибинних наративних змістів, окреслення психологічного профілю персо -
+нажів та моделювання читацького сприйняття. Актуальність дослідження 
+зумовлена стрімким розвитком фентезійної літератури та недостатнім 
+ 
+ 
+ 
+ISSN 2786 -6165 (ONLINE ) № 5(47) 2026  
+ 
+ 
+ 
+ 374 
+ступенем вивченості ономастичного простору творів Робін Гобб у сучасній 
+вітчизняній та світовій літературній ономастиці,  попри значну семантичну 
+та структурну складність цього матеріалу. 
+У результаті дослідження з’ясовано, що ономастичний простір Шести 
+Герцогств вибудуваний за фундаментальним принципом національно -
+культурного контрасту. Цей художній прийом виступає основним маркером 
+культурної диференціації у творах письменниці: промовисті, семантично 
+прозорі та насичені назви, що мають чітку внутрішню форму в англійській 
+мові, використовуються виключно в межах панівної культури Шести 
+Герцогств. Це безпосередньо пов’язано з центральним сюжетотворчим 
+концептом магічної сили імені в досліджуваному фентезійному всесвіті. 
+Натомість представники інших етносів (наприклад, жителі Гірського 
+Королівства чи Калсиди) наділені іменами, що характеризуються 
+фонетичною чужорідністю та повно ю відсутністю прозорої семантики для 
+читача (наприклад, Ейод, Руріск, Кеттрікен), що підкреслює їхню 
+«інакшість» та статус чужинців у наративній тканині романів. 
+Антропоніми в романах класифіковано за функціонально -семантич-
+ними підгрупами на підставі типо логії, розробленої дослідником Л.  Белей: 
+імена національно -регіонального значення, соціально марковані характе -
+роніми та інформативно -оцінні ономастичні одиниці. Доведено, що 
+соціально значущі антропоніми становлять найбільш репрезентативну та 
+структурно р ізноманітну групу, що ідеально відображає ранньосеред -
+ньовічний сетинг фентезійного всесвіту, де соціальна маска, статус та доля 
+людини є нерозривно пов’язаними. На прикладі аналізу таких знакових 
+імен, як Чівелрі, Регал, Фітц та Блазень, продемонстровано,  як характе -
+роніми кодують монаршу легітимність, політичні амбіції чи, навпаки, 
+суспільне тавро позашлюбного походження. Крім того, інформативно -
+оцінні характероніми (зокрема, Шрюд, Дезайр, Пейшенс) досліджено як 
+засіб прямої психологічної характеристики, який експліцитно акумулює 
+внутрішню сутність, домінантні риси характеру, паттерни поведінки та 
+моральний потенціал персонажів. Проведений аналіз дозволяє зробити 
+висновок, що власні імена у творчості Робін Гобб виходять за межі 
+номінації, слугуючи ключовим механізмом текстотворення та моделювання 
+вигаданого світу. Перспективним напрямком подальших наукових розвідок 
+може бути розширення матеріалу дослідження на інші цикли всесвіту та 
+порівняльний аналіз оригінальних власних назв з їхніми перекладними 
+варіантами. 
+Ключові слова:  літературна ономастика, характеронім, антро -
+понім, Робін Гобб, Світ Елдерлінгів, фентезі, функціонально -семантичний 
+аналіз. 
+ 
+ 
+ 
+ISSN 2786 -6165 (ONLINE ) № 5(47) 2026  
+ 
+ 
+ 
+ 375 
+Statement of the problem.  Fiction is a unique space in which proper 
+names take on a special functional and seman tic significance. Unlike real-world 
+proper names, which primarily serve an identifying function, charactonyms – 
+proper names in a literary work – are linguistic units deliberately chosen by the 
+author to shape a character’s image, set the tone of the work and influence the 
+reader’s perception. 
+This issue is particularly relevant in the context of fantasy literature, where 
+the author constructs not only characters and a plot, but also a complete fictional 
+universe with its own culture, social hierarchy and onomastic space. The novels 
+of the American writer Robin Hobb, which make up the literary universe of ‘The 
+Elderlings’, are a striking example of such construction: every name in this 
+universe carries semantic weight, reflecting the cultural, social and psychological 
+dimensions of the society depicted. 
+The study of charactonyms in Robin Hobb’s novels has not only a purely 
+linguistic but also a literary significance, as it allows us to uncover the 
+mechanisms of the author’s artistic thinking an d to trace how linguistic means 
+serve as a tool for character development and the construction of the works’ 
+imagery. 
+Analysis of recent studies and publications.  Literary onomastics has 
+emerged as a distinct discipline at the intersection of linguistics a nd literary 
+studies. The domestic tradition of literary-onomastic studies is represented by the 
+works of Yu.  O. Karpenko, who introduced the term ‘ poetonym’ into academic 
+discourse and defined it as a proper name in a literary text characterised by a 
+particular connotative potential [1]. 
+L. Beley, founder of the Uzhhorod School of Literary Onomastics, defines 
+this as the proper names of characters that appear in literary and artistic texts [2]. 
+M. M. Torchynskyi proposed a comprehensive classification of th e onymic field 
+based on the following criteria: the nature of the named objects, the characteristics 
+of proper name formation, the stylistic features of proper names, and the scope 
+and form of their usage [3]. 
+Foreign researchers refer to proper names in l iterary texts as ‘names in 
+literature’, which coincides with the name of the discipline that studies these 
+names. The terminological g roup of the International Council of Onomastic 
+Sciences (ICOS) refers to them as charactonym [4], indicating that the emph asis 
+is placed on anthroponyms rather than on all other categories of onyms in a literary 
+work [5, p. 94]. 
+At the same time, the onomastics of Robin Hobb’s novels remain largely 
+unexplored in both domestic and international linguistics. Isolated references  to 
+this material can be found in fan communities and online forums dedicated to 
+discussing ‘The Elderlings’, yet no scholarly studies have been identified that 
+ 
+ 
+ 
+ISSN 2786 -6165 (ONLINE ) № 5(47) 2026  
+ 
+ 
+ 
+ 376 
+systematically analyse Hobb’s charactonyms from the perspective of literary 
+onomastics. It is precisely this gap that the present article seeks to fill. 
+Aim of the article.  The aim of this article is to conduct a functional -
+semantic analysis of charactonyms in Robin Hobb’s novels from the ‘World of 
+the Elderlings’ series, to identify typological groups of charactonyms, to establish 
+their main functions, and to determine their role in character development and the 
+construction of the works’ imagery. 
+To achieve this aim, the following tasks are to be addressed: 1) to define 
+the concept of a charactonym and clarify its characteristics in relation to the 
+material of the analysed novels; 2) to describe the principles of constructing the 
+onymic space of the ‘World of the Elderlings’; 3) to classify the identified 
+charactonyms into functional subgroups and carry out their semantic analysis. 
+Presentation of the main research material.  A charactonym is a proper 
+name (most often an anthroponym or toponym) in a literary work that creates and 
+portrays a character, shapes the perception of that character, and influences the 
+reader’s attitude towards them. Unlike real proper names, a charactonym is always 
+the result of the author’s choice and therefore conveys certain information about 
+the bearer: their social status, ethnic origin, character traits or role in the plot. 
+‘The Elderlings’ is a literary universe invented by the American writer 
+Robin Hobb and described in several trilogies. This world is at the developmental 
+stage of the early Middle Ages. All proper names of characters and geographical 
+features belonging to the culture of the Six Duchies carry semantic meaning; that 
+is, they are charactonyms in the full sense of the word. 
+A fundamentally important feature of the onymic space in the novels is its 
+construction based on the principle of national -cultural contrast. Evocative, 
+semantically charged names are used exclusively within the culture of the Six 
+Duchies, which is linked to the concept of the magical power of a name, a central 
+theme in Hobb’s fictional world. In contrast, representatives of other peoples 
+(mountain folk, outlanders, etc.) bear names with an unusual sound, which ca rry 
+no semantic weight for the reader and emphasise the characters’ cultural 
+‘otherness’. 
+Researcher L. Belei [2] proposed a rigorous classification of the 
+anthroponyms, dividing them into distinct functional-semantic subgroups: names 
+of national or region al significance, socially significant charactonyms, and 
+informational-evaluative names. Charactonyms of national (or regional) 
+significance primarily serve to create the national flavour the author seeks in a 
+work. In Hobb’s novels, this subgroup is repres ented by the names of characters 
+who do not belong to the culture of the Six Duchies. Their distinctive feature lies 
+in the absence of semantic meaning coupled with phonetic ‘foreignness’, which 
+in itself serves as a marker of foreign origin. 
+ 
+ 
+ 
+ISSN 2786 -6165 (ONLINE ) № 5(47) 2026  
+ 
+ 
+ 
+ 377 
+An example is  the name Eyod – the reigning king of the Mountain 
+Kingdom: 
+«Our Sacrifice, er, ah, you say, King Eyod will welcome you. And he will 
+show to you all his daughter, to be your Sacrifice, hem, ah, Queen. And his son, 
+who will rule for her here». She stumbled through this explanation, with many a 
+pause, and many encouraging nods from me [6]. 
+The name Eyod has no literal meaning, yet it stands out from the names of 
+characters in the culture of the Six Duchies due to its phonetic unusualness. At the 
+same time, the epithet shared by all members of the ruling dynasty is significant: 
+Sacrifice – The Sacrificial One – which points to the symbolic role of the ruler in 
+the culture of the mountain people. 
+The names of Prince Rurisk and Princess Kettricken are constructed  in a 
+similar way. The unusual nature of the name Kettricken is even emphasised in the 
+characters’ dialogue – King Shrewd cannot remember how it sounds, which is a 
+telling detail: 
+«Almost I forgot to tell you why I had called you here. It is, of course, th e 
+mountain princess. Ketkin, I think her name was...» «Kettricken. I at least 
+remember that much. A skinny little child, the last time I saw her. So, she is the 
+one you have selected?» [6]. 
+The case of a character named Burrich – a stablehand at the royal court, 
+originally from Kalsid – is somewhat unusual. His name is also perceived as 
+phonetically ‘foreign’, which emphasises his foreign origins. At the same time, 
+researchers allow for partial semantic interpretation: the name may contain an 
+allusion to th e English word ‘burr’ (a thorn or bur), which correlates with the 
+character’s complex nature. This is the only instance in the novels where a 
+‘foreign’ name may have a hidden connotation. 
+Standard English names are almost entirely absent from the novels, and 
+when they do appear, they belong mainly to members of the working class (Gill, 
+Hod). The exception is the name Molly – the protagonist’s beloved. Dictionaries 
+record ‘molly’ as a colloquial/slang term for a girl or young woman, which gives 
+grounds to regard this name as a charactonym with a tender, affectionate 
+connotation, aptly characterising this woman’s role in the protagonist’s life. 
+Chronologically significant charactonyms are intended to situate a work 
+within a specific time period. Howev er, no examples with this function were 
+found in the analysed novels. This is explained by the very nature of the work: the 
+novels are based on entirely fictional events and characters in a fictional universe, 
+so any reference to a real historical period w ould be incomprehensible to the 
+reader and not perceived as significant. 
+Socially significant anthroponyms reflect the characters’ social status, their 
+origins and their role in society. It is this subgroup that is most prominently 
+featured in Hobb’s novels and most diverse in its manifestations. 
+ 
+ 
+ 
+ISSN 2786 -6165 (ONLINE ) № 5(47) 2026  
+ 
+ 
+ 
+ 378 
+One of the key examples is the name Chivalry – the eldest son of King 
+Shrewd, heir to the throne of the Six Duchies: 
+And didn't Verity, after all, make a much better king -in-waiting than had 
+Chivalry? So rigorously noble was Chivalry that he made all others feel slatternly 
+and stingy in his presence; he'd never allowed himself a moment's respite from 
+what was right, and while he was too chivalrous to sneer at those who did, one 
+always had the feeling that his perfec t behavior was a silent reproach to those 
+with less self-discipline [6]. 
+The word ‘chivalry’ is defined as ‘the combination of qualities expected of 
+an ideal knight, namely courage, honour, courtesy, justice, and a readiness to help 
+the weak’ (chivalry, no bility, bravery). The name Chivalry is not merely a 
+description of a person, but also a social marker: it points to the ideal qualities of 
+a knight-ruler and, at the same time, to the burden borne by a person who must 
+live up to their own name. 
+A telling example in the context of social connotations is the name Regal – 
+the king’s younger son: 
+«When you talk about rogues who stay in bed all morning and do nothing 
+except fuss about hair and garments, you mean how Regal is» [6]. 
+The word ‘regal’ means ‘of, resembling, or fit for a monarch, especially in 
+being magnificent or dignified’. Regal is the third son and has little chance of 
+inheriting the throne; however, his mother deliberately gave him a name that 
+emphasises royal dignity, seeking to legitimise her son’s claim to the throne. Thus, 
+this name encodes not only the character’s traits (arrogance, haughtiness) but also 
+a social intention linked to the struggle for power. 
+A special place in the social onomastics of the novels is occupied by the 
+name Fitz – the illegitimate son of Prince Chivalry, who is the main character: 
+Regal looked perplexed. «Him? It's the Fitz. Chivalry's bastard. Sneaking 
+and thieving as always» [6]. 
+The Urban Dictionary [7] defines ‘Fitz’ as ‘means “son of”... but can also 
+refer to an  illegitimate child, a bastard, someone born out of wedlock’. 
+Historically, the prefix ‘Fitz’ was used by the British monarchy to denote 
+illegitimate offspring who were granted official recognition. In Hobb’s work, this 
+name functions as a social marker of  dual nature: it simultaneously signifies 
+recognition and disgrace, status and stigma. The choice of this charactonym for 
+the protagonist is of fundamental importance to the entire plot and thematic 
+structure of the novels. 
+Another significant social charactonym is The Fool – King Shrewd’s court 
+fool. This character’s real name, origins and even gender remain a mystery 
+throughout the entire cycle. His sole name in the eyes of the reader and most of 
+the characters is his social function or role: The Fool. This is a charactonym where 
+the social mask becomes the character’s sole visible identity. 
+ 
+ 
+ 
+ISSN 2786 -6165 (ONLINE ) № 5(47) 2026  
+ 
+ 
+ 
+ 379 
+The names of the ancient kings are also socially motivated: Taker and 
+Ruler, reflecting the nature of each monarch’s reign. The author even specifically 
+points out the nature of such naming: 
+A more ancient tradition attributes such names to accident, at least 
+initially... But for the purposes of royalty, it is better to have the common folk 
+believe that a boy given a noble name must grow to have a noble nature [6]. 
+Descriptive-evaluative charactonyms serve to provide an emotional and 
+expressive assessment of the characters. Hobb’s novels feature exclusively 
+informative-evaluative charactonyms, whilst no expressive -evaluative ones 
+(where the evaluation is an end in itself ) have been identified. This is consistent 
+with the overall stylistic approach of the novels: the author strives for 
+psychological depth rather than an external evaluative effect. 
+The most telling informational-evaluative charactonym is the name of King 
+Shrewd. The characters repeatedly point out the correspondence between the 
+name and the character: 
+«He is the King!» Molly protested. «And named Shrewd to be shrewd». 
+But our father the King is not a hasty man, as well we know. Shrewd is as 
+Shrewd does, as the common folk say [6]. 
+The word ‘shrewd’ means ‘having or showing sharp powers of judgement; 
+astute’ (practical, intelligent, cunning). Shrewd is indeed an extremely pragmatic, 
+and at times ruthless, ruler who views even his own grandson primarily as a pawn 
+in the political game. 
+Lady Desire – the king’s second wife – bears a name that encapsulates her 
+defining trait: ‘a strong feeling of wanting to have something or  wishing for 
+something to happen’ (desire, passion, ambition). As queen, she was never 
+satisfied with what she had achieved and always strove for more – power, 
+recognition, and privileges for her son. 
+Patience – the wife of Prince Chivalry – is one of the novel’s most profound 
+characters. The word ‘patience’ means ‘the capacity to accept or tolerate delay, 
+problems, or suffering without becoming annoyed or anxious’ (forbearance, 
+tolerance). A woman who was unable to bear a child and had to endure the public 
+revelation of her husband’s bastard son, she eventually accepted Fitz and raised 
+him as her own son. It is precisely her patience and capacity for forgiveness that 
+are her defining traits, accurately reflected in her name. 
+Conclusions. The character names in Robin Hobb’s novels form an integral 
+part of the fictional world of ‘The Elderlings’. They serve not only a nominative 
+function, but also play a role in character development, social identification and 
+cultural differentiation. The onymic space of the novels is constructed on the 
+principle of national -cultural contrast: evocative, semantically rich names 
+function exclusively within the culture of the Six Duchies, whilst characters from 
+ 
+ 
+ 
+ISSN 2786 -6165 (ONLINE ) № 5(47) 2026  
+ 
+ 
+ 
+ 380 
+other nations bear phonetically ‘foreign’ names without transparent semantics. 
+The most prevalent are socially significant charactonyms (Chivalry, Regal, Fitz, 
+The Fool, Taker, Ruler), which reflect the characters’ social status, origin and role 
+within the social hierarchy. This corresponds to the medieval setting of the novels, 
+where name and status are inextricably linked. Informational and evaluative 
+charactonyms (Shrewd, Desire, Patience, Chivalry) serve as psychological 
+characterisations, revealing the inner essence of the character through the 
+semantics of the name.  
+In most cases, the correspondence between name and character is not a 
+coincidence but a conscious authorial device, emphasised by direct references in 
+the text. Chronologically significant and expressive-evaluative charactonyms are 
+absent from the novels, which is a natural consequence of the nature of a fantasy 
+text with a completely fictional universe and a psychologically realistic approach 
+to characterisation. 
+Areas for further research include extending the analysis to other cycles of 
+“The World of the  Elderlings”, a comparative analysis of charactonyms in the 
+original and in translations, and an examination of the toponymic level of the 
+onomasticon in Hobb’s novels. 
+ 
+References  
+1. Karpenko, Yu. O. (2002). Pro literaturnu onomastyku: Mirkuvannia na bazi t voru 
+Liny Kostenko «Korotko — yak diahnoz» [On literary onomastics: Reflections based on the 
+work of Lina Kostenko "Briefly — as a diagnosis"]. Linguistica slavica. Yuvileinyi zbirnyk na 
+poshanu Iryny Mykhailivny Zhelezniak — Linguistica slavica. An anniversary anthology in 
+honour of Iryna Mykhailivna Zhelezniak, 75–83 [in Ukrainian]. 
+2. Belei, L. O. (2002). Nova ukrainska literaturno -khudozhnia antroponimiia: 
+problemy teorii ta istorii [New Ukrainian literary and artistic anthrop onymy: problems of 
+theory and history]. Uzhhorod: Uzhhorod National University [in Ukrainian]. 
+3. Torchynskyi, M. (2014). Onimna systema i kryterii ii analizu [Onymic system and 
+criteria for its analysis]. Naukovi zapysky [Ternopilskoho natsionalnoho pedahohichnoho 
+universytetu imeni Volodymyra Hnatiuka]. Seriia: Movoznavstvo — Scientific Notes [of the 
+Volodymyr Hnatiuk Ternopil National Pedagogical University]. Series: Linguistics, 2, 282 –
+287. Retrieved from http://nbuv.gov.ua/UJRN/NZTNPUmz_2014_2_55 [in Ukrainian]. 
+4. International Council of Onomastic Sciences. (n.d.). Terminology. Retrieved from 
+http://www.icosweb.net/index.php/terminology.html 
+5. Minina, O. V. (2013). Poetonim yak obiekt literaturnoi onomastyky [Poetonym as an 
+object of literary onomastics]. Suchasni naukovi paradyhmy: materialy IV Vseukrainskoi nauk.-
+prakt. konf. — Contemporary Scientific Paradigms: Proceedings of the 4th All -Ukrainian 
+Scientific and Practical Conference, 92–95. Horlivka: Vyd -vo HIM DVNZ «DDPU» [in 
+Ukrainian]. 
+6. Hobb, R. (2014). Assassin's Apprentice. London: HarperCollins Publishers. 
+7. Urban Dictionary. (n.d.). Retrieved from https://www.urbandictionary.com/ 
+ 
+ 
+ 
+ 
+ 
+ISSN 2786 -6165 (ONLINE ) № 5(47) 2026  
+ 
+ 
+ 
+ 381 
+Література 
+1. Карпенко Ю. О. Про літературну ономастику: Міркування на базі твору Ліни 
+Костенко «Коротко — як діагноз». Linguistica slavica . Ювілейний збірник на пошану 
+Ірини Михайлівни Железняк. Київ, 2002. С. 75–83. 
+2. Белей Л. О. Нова українська літературно -художня антр опонімія : проблеми 
+теорії та історії. Ужгород, 2002. 175 с. 
+3. Торчинський М. Онімна система і критерії її аналізу. Наукові записки 
+[Тернопільського національного педагогічного університету імені Володимира 
+Гнатюка]. Серія  : Мовознавство. № 2 2014. С. 282 –287. URL  : http://nbuv.gov.ua/  
+UJRN/NZTNPUmz_2014_2_55.  
+4. International Council of Onomastic Sciences. URL  : http://www.icosweb.net/  
+index.php/terminology.html  
+5. Мініна О. В. Поетонім як об’єкт літературної ономастики. Сучасні наукові 
+парадигми : матеріали ІV Всеукраїнської наук. -практ. конф. Горлівка  : Вид -во ГІІМ 
+ДВНЗ «ДДПУ», 2013. С. 92–95. 
+6. Hobb R. Assassin's Apprentice. London: HarperCollins Publishers, 2014. 400 р. 
+7. Urban Dictionary. URL : https://www.urbandictionary.com/ 
+ 
+ 
+Дата першого надходження статті до видання: 13.05.2026 
+Дата прийняття статті до друку після рецензування: 27.05.2026 
+  

@@ -1,4 +1,51 @@
-# PROBE-ALL — every reader-facing prose home in the estate, measured by register
+# PROBE-ALL — every reader-facing prose home the inventory named, measured by register
+
+## CORRECTIONS APPLIED 2026-09-06 (from sweep/PROBE_ALL_REFUTATION.md; original preserved as PROBE_ALL.v1-unrefuted.md)
+
+Fifteen REFUTED defects (R-1 … R-15) and nine PARTLY defects (P-1 … P-9), folded from four Opus
+refuters. Line numbers are this document's **v1** lines. Every figure is the refuters' own, unrounded.
+No sentence the receipt does not name was touched.
+
+| id | section · line (v1) | was | now | label |
+|---|---|---|---|---|
+| R-1 | title · 1 | "every reader-facing prose home in the estate" | "…prose home the inventory named", plus a scope caveat in the header: 364 admitted rows in 18 shipped files outside `src/**/*.{js,jsx}` and `docs/content/` are unmeasured, 47 of them house-authored in 10 files | CONFIRMED |
+| R-2 | §0 trap 3 · 26 | "**9,700** rows arrived through a function" | **9,722** raw walk leaves (8,021 + 1,701; 9,903 with `fn-plain` 181), of which **2,511** admitted rows carry an `fn-*` shape | CONFIRMED |
+| R-3 | §1 X2 · 84 | "and X5 covers them anyway" | struck: 71 admitted module-level strings inside the 145 unimportable modules belong to no register (`emailTemplates.js` 38, `dailyLifeLogic.js` 18, `foundersHall.js` 5, `emailPreferences.js` 3, 7 elsewhere) | CONFIRMED |
+| R-4 | §1 X5 table · 120 | DOSSIER\_STATE wired 2024, 99.3 | **2030, 99.6** — the wired column then sums to its own TOTAL 4,289 | CONFIRMED |
+| R-5 | §1 X5 table · 124 | CAUSAL wired 8, 1.1 | 8 and 1.1 kept as the numbered-line join's figures, caveated: an independent raw-byte scan finds **129 wired (17.2%)**; 101 rows keep an un-stripped tail and 13 line-wrapped rows are truncated | CONFIRMED |
+| R-6 | §2 roster R16 · 196 | files **361** | **354** | CONFIRMED |
+| R-7 | §4 preamble · 272 | "collapsed to one row per phrase family" | collapsed only where one gram is a substring of another (`metrics.mjs:216`); 28 of 196 rows are row-set subsets of a sibling; do not sum a column — R6's ten sum to 1,000 against a union of 744 (44.8%) | CONFIRMED |
+| R-8 | §5 · 579, 588 | "67 sentences the bible SPEAKS rather than describes"; the anti-corpus "never mixed in" | caveated: 8 rows are third-person meta-description (all of B1), 2 are banned terms, 8 lack a terminal stop, 3 are placeholder/truncated; the 8.1 words/segment fingerprint is **6.5** without the B1 rows | CONFIRMED |
+| R-9 | §5 Axis A · 625 | "**6 strings of genuine reader prose**" | **57 distinct reader-facing em-dash strings in 13 files (58 occurrences)**; `governanceNarrative.js` alone holds 9, and the sixth of the published six is a dev note | CONFIRMED |
+| R-10 | §5 Axis A · 629 | R15/R18's 146 are "mostly AI-layer prompts, design-token descriptions and dev notes" | R18's 57: **38 reader-facing**, 14 dev, 3 AI prompts, 2 ambiguous. R15's 83: 60 dev, **23 reader-facing** | CONFIRMED |
+| R-11 | §5 Axis B · 651 | "seventeen comparable metrics" | kept, caveated: 5 of the 17 are one length construct (Spearman ρ 0.796 against a length-only order, 0.977 against the 12 non-length metrics) and 5 rest on ≤ 1 observation in n=67; effective dimensionality ~13 | CONFIRMED |
+| R-12 | §5 Axis B · 651–665 | (unstated) R4/R17 `unit: phrase` are ranked on sentence-length metrics | stated: removing R4/R17 shifts R16 0.510→0.530, R15 0.648→0.666, R9 0.684→0.707, R2 2.263→2.305; rank order unchanged | CONFIRMED |
+| R-13 | §5 · 688 | "The bible's *hard rules* they hold perfectly (breach 0.000)." | "**four** of the bible's hard rules"; the 13-row terminology and verb registry is unmeasured by Axis A — `DM-private` 5, `publicly visible` / `public-safe` 4, `profit enormously` 3 | CONFIRMED |
+| R-14 | §5 · 682 | "the ladder has **no short sentence at all**" | "no sentence under 19 words at the tenth percentile; 9 of 1,689 segments (0.5%) are under 8 words, the shortest one word (`Yet.`); 21 under 12" | CONFIRMED |
+| R-15 | §6 structural lows · 719–720 | R6 0.02x with median 0.381; R16 0.25x with 0.254 and 0.729 | R6 **0.01x** with median **0.46**; R16 **0.36x** with **0.242** and **0.672** — the figures §6's own LOW list already prints at lines 945 and 987 | **PLAUSIBLE** |
+| P-1 | §0 trap 2 · 25 | R15 0.585, R16 0.604 | R15 **0.588**, R16 **0.615** (§3's own table already prints both) | CONFIRMED |
+| P-2 | §0 trap 4 · 27, §2 roster | "only `sovereigntyNews.js` is in R3" | two `*News.js` files are in R3, `sovereigntyNews.js` and `generosityNews.js` (R3 = 12 files stands); R3's roster also names two ReceiptPools files carrying 0 rows, and R9 names six copy files of which four carry rows | CONFIRMED |
+| P-3 | §6 header · 694–698 | (unstated) a register with no multi-variant pools scores 0 in the median | stated: `run.mjs:104` admits R10/R11's nulls as 0, giving 8 phantom LOW rows; pools-uniform median 0.672 against 0.714 nulls-dropped, repeated-opener 0.112 against 0.126; ratios R12 5.96x→5.29x, R18 5.21x→4.63x, R16 4.27x→3.79x; no outlier changes side | **PLAUSIBLE** |
+| P-4 | §6 · 706 | "**184 of 1,659** ladder lines open `It is public / It is known`" | "185 of 1,689 segments (0.110) open `There/It is/was/are`; 147 open `It is public` (143) or `It is known` (4), 34 open `It is out`"; 184 is first-segment-only and 184/1,659 rounds to 0.111 | **PLAUSIBLE** |
+| P-5 | §4 preamble · 274 | (unstated) the `tic` column reads as a literal phrase | stated: grams are formed after every non-`[a-z0-9{}']` character becomes a space, so 12 of 196 printed grams never occur literally and 17 of 196 printed examples lack their gram | CONFIRMED |
+| P-6 | §5 Axis A heading · 597 | "mechanical compliance with §3's hard rules" | "compliance with four of §3's hard rules (em dash, exclamation, emphasis caps, digits) plus `the PCs`", with `mechanical.mjs`'s computed-but-unprinted en-dash-connector count **65** (R15 53, R16 7, R18 4, R8 1) | CONFIRMED |
+| P-7 | §5 · 664–665 (receipt says 668) | "The three most bible-like … The three least …" | R2 and R1 certain at the bottom (bootstrap P 100% / 95.3%); both third slots undetermined (P(top3) R15 80.8, R16 64.3, R9 43.5, R17 38.3, R18 30.0, R11 29.8; R6 41.5 against R5 38.5); only R9 holds a top-3 slot in all six variants | CONFIRMED |
+| P-8 | §5 · 667–670 (receipt says 672–675) | "The bible's exemplar set is chrome" (labelled PLAUSIBLE) | measured for the top of the axis: 48 of 67 exemplars (71.6%) are chrome, 9 diegetic; withdrawn for the bottom: a diegetic-only set moves R1 1.581→1.880 and R2 2.263→2.498, ρ = 0.567 | CONFIRMED |
+| P-9 | header · 3–8 | "every figure below holds at both shas" | true as written; added for re-runners: at `fd36f0298` the corpus is 34,527 admitted / 41,482 rejected, 26 of 1,008 §3 cells and 5 of 284 §6 rows drift, all inside R15/R16/R18 | CONFIRMED |
+
+**The sha is load-bearing.** Every figure in this document is bound to **`6b80d1e8e`** (and to
+`460a63bca`, which differs only in a test baseline). At the §902 tip **`fd36f0298`** the corpus reads
+**34,527 admitted / 41,482 rejected** against 34,508 / 41,369 here; **26 of 1,008 §3 cells and 5 of
+284 §6 rows drift**, all inside R15/R16/R18 (R15 +11, R16 +3, R18 +5, from `warRemembrance.js` +
+`HeraldRemembrance.jsx`), Axis B carries ±0.002, and no named register or outlier membership moves
+(T16, E17). A re-runner who measures at HEAD and diffs against this document will see exactly those
+26 cells and must not read them as errors.
+
+**Three corrections are PLAUSIBLE, not CONFIRMED** — R-15, P-3 and P-4: the refuter's `node -e`
+one-liner body is paraphrased in the receipt rather than printed, so re-execute before citing them.
+Every other correction rests on a named, executable command in the receipt's "cited" column.
+
+---
 
 **Lane PROBE-ALL (Opus 5) · read-only · six extractors, twenty register columns.**
 Dock `laneDESKINT`, **read at `6b80d1e8e`**; the dock advanced to `460a63bca` mid-run (a sibling's
@@ -9,6 +56,17 @@ written, no test was run, no vitest was started.
 
 *(That sibling commit is independent confirmation of §5's headline: it banks the JSX voice baseline
 to `{}` at the same tip where this probe measures zero em dashes and zero exclamation points in JSX.)*
+
+**Scope caveat [R-1].** The title is narrowed from "every reader-facing prose home in the estate"
+to "every reader-facing prose home the inventory named": **364 admitted rows in 18 shipped files
+outside `src/**/*.{js,jsx}` and `docs/content/` are unmeasured here**, 47 of them house-authored in
+10 files (`mcp-server/src/tools.js` 17, `public/status.html` 12, `api/*` 8, `index.html` 2 …), and
+`index.html`'s og:title carries an em dash.
+
+**Sha drift for later re-runners [P-9].** The two-sha statement above is true as written. At the
+§902 tip `fd36f0298` the corpus is **34,527 admitted / 41,482 rejected**; 26 of 1,008 §3 cells and 5
+of 284 §6 rows drift, all inside R15/R16/R18 (R15 +11, R16 +3, R18 +5, from `warRemembrance.js` +
+`HeraldRemembrance.jsx`), and no named register moves — outlier membership is unchanged.
 
 ---
 
@@ -22,9 +80,9 @@ that are authored but wired nowhere, measured as their own column.
 | the inventory's trap | how this probe avoids it | receipt |
 |---|---|---|
 | 1. a sentence-shape filter scores the subject-phrase register **zero** | registers carry a `unit` (`sentence` \| `phrase`); R4 and R17 are admitted at ≥ 8 chars / ≥ 2 words and every rhythm figure is **per segment**, never per sentence | R17 = **1,293** phrases (a sentence filter scores it 0: `terminal-stop share` 0.000) |
-| 2. it misses the unpunctuated registers | terminal stop is **never** required for admission; `terminal-stop share` is published as its own row so a column's kind is visible | R8 0.469, R15 0.585, R16 0.604, R10 0.634 |
-| 3. a regex probe misses every function variant | X2 materialises functions with a dual-mode slot Proxy and walks array/object returns | **9,700** rows arrived through a function (`fn-array` 8,021 + `fn-template` 1,701) |
-| 4. `*News.js` is a router glob, not a corpus glob | registers are assigned by **named file**, never by glob; only `sovereigntyNews.js` is in R3 | R3 = 12 files, named individually |
+| 2. it misses the unpunctuated registers | terminal stop is **never** required for admission; `terminal-stop share` is published as its own row so a column's kind is visible | R8 0.469, R15 **0.588**, R16 **0.615**, R10 0.634 [P-1] |
+| 3. a regex probe misses every function variant | X2 materialises functions with a dual-mode slot Proxy and walks array/object returns | **9,722** raw walk leaves arrived through a function (`fn-array` 8,021 + `fn-template` 1,701; 9,903 with `fn-plain` 181), of which **2,511** admitted rows carry an `fn-*` shape [R-2] |
+| 4. `*News.js` is a router glob, not a corpus glob | registers are assigned by **named file**, never by glob; two `*News.js` files are in R3, `sovereigntyNews.js` and `generosityNews.js` [P-2] | R3 = 12 files, named individually |
 | 5. build artifacts double-count | `compendium/generated/**`, `copy/index.js`, `copy/pseudo.js`, `sampleDossier*` excluded by path; R10 reads the **sources** | see §1 exclusions |
 | 6. certification rows are not reader prose | `src/domain/certification/**` excluded entirely | 17 files, ~676 rows, never entered |
 
@@ -81,7 +139,12 @@ A function is called only if `v.length <= 3`, source `< 4000` chars, not a class
 free of an I/O denylist (`writeFile|fs\.|localStorage|fetch\(|document\.|window\.|Math\.random|new Date|…`)
 — the dock came out byte-identical, verified.
 **145 import failures**, 133 of them `VITE_SUPABASE_*` at module load; **no prose home among them**
-(none in `data/`, `copy/`, `display/`, `worldPulse/`, `generators/`), and X5 covers them anyway.
+(none in `data/`, `copy/`, `display/`, `worldPulse/`, `generators/`). **[R-3] "and X5 covers them
+anyway" is struck:** **71 admitted module-level strings** inside those 145 unimportable modules
+belong to no register — `src/lib/emailTemplates.js` 38 (the transactional email the reader
+receives), `src/components/new/dailyLifeLogic.js` 18, `foundersHall.js` 5, `emailPreferences.js` 3,
+7 elsewhere. X3 takes only function-scoped literals, so a module-level table in an unimportable
+module is seen by neither instrument.
 
 ### X3 — INLINE IN-FUNCTION PROSE (`x5-inline.mjs`, espree) → **19,329 in-function literals**
 The estate's own parser dependency, over all 1,660 `src/**/*.js`, **0 parse failures**. A literal
@@ -117,7 +180,7 @@ Wired/unwired is stamped by joining the normalised key
 
 | annex | rows | law | short | prose | wired | % |
 |---|---:|---:|---:|---:|---:|---:|
-| RECEIPT_POOLS_DOSSIER_STATE.md | 2050 | 11 | 0 | 2039 | 2024 | 99.3 |
+| RECEIPT_POOLS_DOSSIER_STATE.md | 2050 | 11 | 0 | 2039 | 2030 | 99.6 |
 | RECEIPT_POOLS_LEGACY.md | 1498 | 24 | 98 | 1376 | 1214 | 88.2 |
 | RECEIPT_POOLS_TRADE.md | 798 | 8 | 0 | 790 | 151 | 19.1 |
 | RECEIPT_POOLS_WAR.md | 780 | 7 | 2 | 771 | 306 | 39.7 |
@@ -131,6 +194,19 @@ Wired/unwired is stamped by joining the normalised key
 | RECEIPT_POOLS_COUPLINGS.md | 202 | 0 | 0 | 202 | 0 | 0.0 |
 | RECEIPT_POOLS_CHANCE_MEETING.md | 32 | 0 | 0 | 32 | 16 | 50.0 |
 | **TOTAL** | **9327** | **106** | **106** | **9115** | **4289** | **47.1** |
+
+**[R-4] DOSSIER_STATE is 2030 wired (99.6%), not 2024 (99.3%)** — corrected in the row above. With
+2030 the `wired` column sums to its own TOTAL of **4,289**; as first published it summed to 4,283.
+2024 is `PROSE_INVENTORY.md`'s figure re-based onto this table's denominator.
+
+**[R-5] CAUSAL's 8 (1.1%) is the numbered-line join's figure and is kept as such — but it is not
+the wired truth.** An independent raw-byte scan finds **129 wired (17.2%)**. The join's `noteRe`
+leaves the un-italicised `— back·N` tail on **101** rows (`RECEIPT_POOLS_CAUSAL.md:3712` against
+`heraldCausalGrammar.js:244`), and the `^(\d+)\. (.+)$` row grammar truncates **13** line-wrapped
+rows (11 CAUSAL, 2 DOSSIER_STATE; `:4057` against `heraldIntegrity.js:69`). Wave consequence: CAUSAL
+is **not** a 1.1%-wired orphan — its grammar is live in `heraldCausalGrammar.js` /
+`heraldIntegrity.js` — and those 13 truncated rows are the text every A-U / A-W metric in §3–§6 was
+computed on.
 
 ### X6 — COPY REGISTRIES
 Not a separate instrument: `src/copy/{en,landing,pricingPage,footer,deityAuthoring,support}.js` are
@@ -193,7 +269,7 @@ screen is auditable. The floor is a real limit and is stated as one: a two-word 
 | R12 | treaty / war-status / letter documents | sentence | 108 | 7 | `display/{treatyDocument,chronicleReadModel,chroniclersLetter,threatAssessment,defenseDisplay,demographicReading,marketPrices,regionWakeReplay,…}.js` |
 | R14 | generators' runtime prose tables | sentence | 561 | 11 | `src/generators/**` |
 | R15 | long tail elsewhere in `src/**/*.js` | sentence | 3883 | 233 | catch-all; **heterogeneous** — real reader prose (`tradeGoodsData`, `worldPulse/index`) mixed with design-token and dev strings |
-| R16 | JSX component + PDF-section chrome | sentence | 2685 | 361 | `src/**/*.jsx` incl. `src/pdf/sections/*` |
+| R16 | JSX component + PDF-section chrome | sentence | 2685 | 354 | `src/**/*.jsx` incl. `src/pdf/sections/*` |
 | R17 | legacy rumor **SUBJECT PHRASES** | **phrase** | 1293 | 3 | `display/{rumorPhrasePools,rumorFallbackPhrasePools,rumorFallbackPhrasePoolsEvents,settlementRumors}.js` |
 | R18 | inline in-function prose (no export to walk) | sentence | 5673 | 546 | 546 files; densest `generators/power/*`, `factionRelationshipUpdate`, `hookEscalation`, `stressorGates`, `capacityModel` — **heterogeneous** |
 | **A-U** | **annex rows UNWIRED** (authored, wired nowhere) | sentence | **4626** | 11 | `docs/content/RECEIPT_POOLS_*.md` |
@@ -201,6 +277,15 @@ screen is auditable. The floor is a real limit and is stated as one: a two-word 
 
 `R13` (certification) is absent by design. `A-W` is a control, not a register: its content is
 R1/R2/R3's content seen from the source side, and it is excluded from every median in §6.
+
+**[R-6]** R16's file count is **354**, not the 361 first published — §3's own `files` row prints
+354. Every other file count in this roster is exact.
+
+**[P-2] Two roster homes carry no rows.** R3 names `warReceiptPools.js` and
+`sovereigntyReceiptPools.js`, which carry **0** admitted rows (470 of 477 admissible leaves are
+credited to `eventProse.js` by barrel order); R9 names six `src/copy/*.js` files but only **four**
+carry rows (§1 X6's "4 files" is right). R3's second `*News.js` home, `generosityNews.js`, is named
+in the table above — §0's trap-4 receipt is corrected to match.
 
 ---
 
@@ -269,9 +354,19 @@ respectively (R4, R17) is a **phrase** register, and its "words/segment" is word
 Mined, not assumed: every 2-to-4-gram in a register is scored by **lift** against its rate in
 the rest of the src-side corpus, and a gram qualifies only if it recurs in **three or more
 distinct pools** — a phrase living in one pool is that pool's subject, not the register's habit.
-Overlapping grams are collapsed to one row per phrase family. Read the lift as "this register
+Overlapping grams are collapsed **only where one gram is a substring of another**
+(`metrics.mjs:216`); **28 of 196 rows remain row-set subsets of a sibling** — R6's `it is public`
+(146) contains every `public that` row (126). **Do not sum a column [R-7]:** R6's ten sum to 1,000
+against a union of 744 (44.8%). Read the lift as "this register
 says it N times more often than the rest of the estate does"; a high lift on a setting noun
 ("market roads") is vocabulary, on a frame ("it is public that") it is a tic.
+
+**[P-5] The `tic` column prints a normalised gram, not always a literal phrase.** N-grams are formed
+after every non-`[a-z0-9{}']` character is replaced by a space, so **12 of 196 printed grams never
+occur literally** (R6 `destroyed but` n=75 is `destroyed, but`; R6 `is out the` n=64 is `is out: the`;
+R10 `machinery with`; R15 `candidate owner` / `owner unsigned` / `band surplus`; R11 `name e`; R12
+`by calm`; R14 `is open the`; R9 `seconds then`; R4b `{} and`; R18 `{} 100`), and **17 of 196 printed
+examples do not contain their printed gram**.
 
 ### R1 — dossier-native STATE (n=2262)
 
@@ -576,7 +671,7 @@ says it N times more often than the rest of the estate does"; a high lift on a s
 `docs/VOICE_AND_TONE.md` is a prescriptive document, so "like the bible" has to be split into two
 measurable things, and they **disagree**, which is itself the finding.
 
-### The exemplar corpus (`bible.mjs`) — 67 sentences the bible SPEAKS rather than describes
+### The exemplar corpus (`bible.mjs`) — 67 sentences the bible SPEAKS rather than describes (but see [R-8] below)
 
 | source | n |
 |---|---:|
@@ -585,7 +680,14 @@ measurable things, and they **disagree**, which is itself the finding.
 | B3/B4 the §4 tone matrix and §6 playbook **AFTER** halves (text right of the last `→`) | 35 |
 | B4b §5 immersion-doctrine quoted positives | 7 |
 | **exemplar total** | **67** |
-| the `Don't:` / BEFORE halves, kept separately as an anti-corpus, never mixed in | 42 |
+| the `Don't:` / BEFORE halves, kept separately as an anti-corpus — but not wholly unmixed, see [R-8] | 42 |
+
+**[R-8] The 67 are not all sentences the bible SPEAKS.** The set holds **8 third-person
+meta-description rows** (all of B1), **2 banned terms** scraped from doctrine line 2 (`"live
+engine,"`, `"feature flag,"` — so "never mixed in" is false: B4b's quoted-span scrape pulls them
+across), **8 rows with no terminal stop** and **3 placeholder or truncated rows**. Either purge them
+(the refuter's V1/V3 variants) or relabel the set. The fingerprint below moves with it: words/segment
+**8.1** is **6.5** without the B1 rows.
 
 Its fingerprint: words/segment mean **8.1**, sd 6.9, p50 6, p90 17, **64.2% of segments under eight
 words**, segments/variant **1.00**, semicolons **0**, em dashes **0**, exclamations **0**, gloss
@@ -594,7 +696,7 @@ tails **0**, summarising second sentences **0**, colons 0.119, parentheses 0.090
 there is one-or-two-sentence noise. The comparison below is therefore reported on two axes and
 never collapsed into one score.
 
-### AXIS A — mechanical compliance with §3's hard rules
+### AXIS A — compliance with four of §3's hard rules (em dash, exclamation, emphasis caps, digits) plus `the PCs` [P-6]
 
 Counted over **prose-shaped strings at any length** (`mechanical.mjs`): the admission floor is
 deliberately dropped, because the bible's rule governs "any user-facing string", not any sentence.
@@ -611,6 +713,11 @@ The screen keeps `Email confirmed!` and drops `(?<![.\w])blockadeBypass\s*,`.
 | R18 inline | 9,980 | 57 | 0 | 147 | 0 |
 | **TOTAL** | **53,662** | **153** | **0** | | **1** |
 
+**[P-6] A fifth hard rule is computed here and printed nowhere.** `mechanical.mjs` already computes
+`enDashConnector`: **65** breaches (R15 53, R16 7, R18 4, R8 1). R16 — §5's #1 register, headlined
+"ZERO em dashes in JSX" below — carries **7 unreported** en-dash breaches (`A–Z index`,
+`migrations 036–040`, `scored 0–1`, `I–XXX`). R1, R2 and R6 remain 0 on en dash.
+
 Three results here are worth the chair's eye:
 
 1. **ZERO exclamation points in the entire reader-facing corpus** — all 53,662 prose-shaped strings.
@@ -622,12 +729,19 @@ Three results here are worth the chair's eye:
    and `tests/copy/.voice-mechanics-jsx-baseline.json` at this HEAD is **3 bytes, `{}`**. The debt is
    burned down. The sibling commit that landed mid-run (`460a63bca`) is the estate banking exactly
    this win.
-3. The em-dash debt that remains is **6 strings of genuine reader prose** — 4 in
-   `generators/narrative/settlementOriginProse.js` (*"what the land does not give arrives
-   expensively — through {channels}"*), 1 in `generators/power/governanceNarrative.js`
-   (*"Critical (active siege — survival priority)"*), 1 dev note in `worldPulse/decisionTier.js` —
-   plus 146 in the two heterogeneous buckets R15/R18, which are mostly AI-layer prompts, design-token
-   descriptions and dev notes rather than reader surfaces.
+3. The em-dash debt that remains is **57 distinct reader-facing strings in 13 files (58
+   occurrences)** — **not** the 6 first published **[R-9]**: `customContentSchema.js` 15,
+   `crossSettlementConflicts.js` 11, `generators/power/governanceNarrative.js` **9** (not 1, and not
+   only *"Critical (active siege — survival priority)"*), `labelBands.js` 5,
+   `generators/narrative/settlementOriginProse.js` 4 (*"what the land does not give arrives
+   expensively — through {channels}"*), `economicState.js` 3, `safetyProfile.js` 3,
+   `searchIndex.js` 2, and one each in `dossierViewModel`, `galleryUtils`, `foundry/moduleBuilder`,
+   `foodGenerator`, `settlementGenerateAction`; the sixth of the published six
+   (`worldPulse/decisionTier.js`) is a dev note. ⚠ Hazard for the cure: `safetyLabel` is a persisted
+   `economyInputFingerprint` input. And the 146 in R15/R18 are **not** "mostly dev" **[R-10]**:
+   R18's 57 are 38 reader-facing generated prose / UI labels, 14 dev throw and guard messages, 3
+   AI-layer prompts and 2 ambiguous; R15's 83 are 60 dev, design-token or ledger strings and **23
+   reader-facing** (`customContentSchema` 15, `labelBands` 5, `searchIndex` 2, `dossierViewModel` 1).
 
 **One outright bible violation, exactly one, and it is unambiguous:**
 `src/data/historyData.js:1326` — *"The agents' handler is someone in a position of trust, and **the
@@ -651,6 +765,17 @@ R9's 0.032 is prices and timings, all legitimate.
 Mean |z| over seventeen comparable metrics, each z-scored against the spread of the register columns
 themselves, then differenced against the bible's own z. Low = most like the bible.
 
+**[R-11] Seventeen metrics are not seventeen independent axes.** Five of the 17 are one length
+construct (words/segment mean, sd, share<8, share>30, segments/variant): Spearman ρ **0.796** against
+a length-only order, **0.977** against the 12 non-length metrics. Five more rest on ≤ 1 observation
+in n=67 — gloss tail, 2nd-sentence summary, semicolon and AI-tells are exact zeros, and share>30w is
+1/67. Effective dimensionality is nearer **13**.
+
+**[R-12] The z-pool mixes units.** R4 and R17 are `unit: phrase` yet are scored on five
+sentence-length metrics plus segments/variant. Removing them shifts R16 **0.510→0.530**, R15
+**0.648→0.666**, R9 **0.684→0.707** and R2 **2.263→2.305**: the rank order survives, the numbers do
+not.
+
 | rank | register | distance | rank | register | distance |
 |---:|---|---:|---:|---|---:|
 | 1 | **R16 JSX + PDF chrome** | **0.512** | 13 | R4b Herald disclosure | 1.164 |
@@ -661,8 +786,12 @@ themselves, then differenced against the bible's own z. Low = most like the bibl
 | 6 | R11 event composer | 0.777 | 18 | **R1 dossier STATE** | **1.581** |
 | 7–12 | R12 · R7 · R4 · R10 · R8 · R3 | 0.898 – 1.028 | 19 | **R2 dossier CAUSAL** | **2.263** |
 
-**The three most bible-like: R16 (JSX chrome), R15 (src long tail), R9 (the copy registry).**
-**The three least: R2 (dossier causal join), R1 (dossier state), R6 (the NPC ladder).**
+**The two least bible-like are certain: R2 (dossier causal join) and R1 (dossier state)** —
+bootstrap P(bottom 3) 100% and 95.3% over 400 resamples. **R16 (JSX chrome), R15 (src long tail) and
+R9 (the copy registry) are among the most bible-like, but the third slot is undetermined [P-7]**:
+P(top 3) is R15 80.8%, R16 64.3%, R9 43.5%, R17 38.3%, R18 30.0%, R11 29.8%, and only R9 holds a
+top-3 slot in all six construction variants. **R6 (the NPC ladder)'s third-from-last place is a coin
+flip against R5** (41.5% against 38.5%).
 
 The result is not a paradox and should not be read as a verdict on quality. The bible's exemplar set
 is chrome — landing lines, button labels, error copy, the tone matrix's AFTERs — so the registers
@@ -679,13 +808,26 @@ per-surface tuning rather than through its own examples, diverge on exactly the 
 
 and R1's, separately: gloss tail 0.066 (field 0.016, bible 0.000), "rather than" 0.113 (field 0.007),
 antithesis shape 0.139 (field 0.028). R6's: "There/It is" openers 0.110 (field 0.006), semicolons
-0.540 (field 0.143), p10 **19 words** — the ladder has **no short sentence at all**.
+0.540 (field 0.143), p10 **19 words** — **no sentence under 19 words at the tenth percentile**; 9 of
+1,689 segments (0.5%) are under 8 words, the shortest one word (`Yet.`), and 21 are under 12
+**[R-14]**.
+
+**[P-8] The chrome explanation: half measured, half withdrawn.** For the *top* of Axis B it is no
+longer PLAUSIBLE but measured — **48 of 67 exemplars (71.6%) come from chrome surfaces**, 9 from
+diegetic ones. For the *bottom* it is withdrawn: a diegetic-only exemplar set moves R1
+**1.581→1.880** and R2 **2.263→2.498**, further away rather than nearer, and Spearman ρ(published,
+diegetic-only) = **0.567**.
 
 **The honest reading:** the registers furthest from the bible's exemplars are furthest on precisely
 the four items the dossier §3 already named as the house's own failure mode — the gloss, the
 reflexive contrast, the semicolon-stapled second idea, and the pet-word set — and they are the
-registers where the reconstruction wave was already aimed. The bible's *hard rules* they hold
-perfectly (breach 0.000). The chrome registers that top Axis B are compliant on style precisely
+registers where the reconstruction wave was already aimed. **Four** of the bible's *hard rules* they
+hold perfectly (breach 0.000) **[R-13]** — but the 13-row terminology and verb registry is
+unmeasured by Axis A, and an independent count finds `DM-private` **5** (all R16,
+`ShareToGallery.jsx` / `GalleryDetail.jsx`), `publicly visible` / `public-safe` **4** (all R16) and
+`profit enormously` **3** (R8 + R15). Not breaches: `AI-generated` 7 (sanctioned by §5.2) and
+`supports/enables/attracts` 72 (a preference). The chrome registers that top Axis B are compliant on
+style precisely
 because they are short and plain, and they are where the residual **digit** and **caps** indicators
 live.
 
@@ -697,13 +839,21 @@ The median is taken across the nineteen register columns (A-W, the control, is e
 so are size-scaled counts, which say only that a register is large). Both directions are
 reported: **137 high** (> 2x median) and **147 low** (< 0.5x median).
 
+**[P-3] Two registers with no multi-variant pools enter the pool medians as 0** (PLAUSIBLE — the refuter's command is paraphrased; re-execute before citing).
+R10 and R11 have no multi-variant pools, and `run.mjs:104`'s `Number.isFinite(Number(null))` admits
+their nulls as **0**, producing **8 phantom LOW rows** (R10/R11 × pools-uniform, repeated-opener,
+within-pool sd, mean pool size) and depressing two medians: pools uniform in segment count **0.672**
+against **0.714** nulls-dropped, pools with a repeated 2-word opener **0.112** against **0.126**. The
+dependent ratios move R12 5.96x→5.29x, R18 5.21x→4.63x, R16 4.27x→3.79x. **No outlier changes
+side.**
+
 **The ten that carry meaning**, ahead of the full list:
 
 | x median | register | metric | value | median | what it is |
 |---:|---|---|---:|---:|---|
 | 98.2x | **R2** | share of segments over 30 words | 0.491 | 0.005 | the causal join is the estate's one long register, and it has **no short relief**: p10 is 14 words, p50 is 30 |
 | 37x | R10 | digits-in-prose rate | 0.111 | 0.003 | band-ladder specs (`All sliders 40-65`) — the bible's "digits in scannable UI" permission, not a breach |
-| 18.3x | **R6** | "There/It is" opener rate | 0.110 | 0.006 | **184 of 1,659** ladder lines open `It is public / It is known` — the single strongest formula in the estate |
+| 18.3x | **R6** | "There/It is" opener rate | 0.110 | 0.006 | **185 of 1,689 segments (0.110)** open `There/It is/was/are` — the single strongest formula in the estate; **147** open with the two named formulas (`It is public` 143, `It is known` 4) and 34 open `It is out`. The published **184 of 1,659** is a third quantity, first-segment-only openers, and 184/1,659 rounds to 0.111, not 0.110 [P-4] (PLAUSIBLE — the refuter's command is paraphrased; re-execute before citing) |
 | 16.5x | **R1** | gloss tail `, which` rate | 0.066 | 0.004 | the over-explaining tail the dossier §3 ranked first among house tics, and it is R1's outlier |
 | 16.1x | **R1** | "rather than" rate | 0.113 | 0.007 | 255 of 2,262; with R2's 0.071 this is the reflexive-antithesis debt, concentrated in exactly two columns |
 | 15.5x | **A-U** | gloss tail `, which` rate | 0.062 | 0.004 | the **unwired** annex rows carry the same tic at the same rate — wiring them imports it |
@@ -716,8 +866,12 @@ And two structural lows worth as much as any high:
 
 | x median | register | metric | value | median | what it is |
 |---:|---|---|---:|---:|---|
-| 0.02x | R6 | share of segments under 8 words | 0.005 | 0.381 | R5's rule 10 ("never three of a length in a row") has no purchase here: the ladder is monotonically long |
-| 0.25x | R16 | pools uniform in segment count | 0.254 | 0.729 | the chrome is the **only** register with real shape spread inside a pool; R3 0.843, R8 0.892, R6 0.955, R17 1.000 |
+| 0.01x | R6 | share of segments under 8 words | 0.005 | 0.46 | R5's rule 10 ("never three of a length in a row") has no purchase here: the ladder is monotonically long |
+| 0.36x | R16 | pools uniform in segment count | 0.242 | 0.672 | the chrome is the **only** register with real shape spread inside a pool; R3 0.843, R8 0.892, R6 0.955, R17 1.000 |
+
+**[R-15]** Both rows were first published as `0.02x · 0.005 · 0.381` and `0.25x · 0.254 · 0.729`.
+The corrected figures are the ones §6's own LOW list below already prints (0.381 is R12's own
+share<8 value, and no column set reproduces 0.729). (PLAUSIBLE — the refuter's command is paraphrased; re-execute before citing).
 
 
 ### HIGH — above double the median
