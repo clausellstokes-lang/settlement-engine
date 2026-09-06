@@ -1,0 +1,12 @@
+PROOF_HEAD=a05a4646e4cd41942ebd530e044197932498730a start 21:33:54 load=2.76 3.02 3.27
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 22252 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneOSR18PROOF
+
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/property/generatorGoldenMaster.test.js (3 tests | 1 failed) 20558ms
+     × every config produces byte-identical output to the golden master 20551ms
+ ❯ tests/docs/enforcement-claims.test.js (21 tests | 1 failed) 1385ms
+     × every completeness claim carries an @enforced-by tag with ≥1 target 12ms
+ ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 5534ms
+     × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 18ms
