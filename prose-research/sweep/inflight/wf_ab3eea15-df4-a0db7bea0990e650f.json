@@ -3,20 +3,33 @@
  "name": "hobb",
  "angle": null,
  "tag": "i536-550",
- "lines": 57,
+ "lines": 117,
  "firstTs": "2026-09-06T19:40:50.873Z",
- "lastTs": "2026-09-06T19:42:57.507Z",
+ "lastTs": "2026-09-06T19:45:00.317Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 12,
-  "mcp__Claude_Browser__navigate": 1
+  "Bash": 17,
+  "mcp__Claude_Browser__navigate": 2,
+  "mcp__Claude_Browser__find": 2,
+  "mcp__Claude_Browser__javascript_tool": 6,
+  "mcp__Claude_Browser__browser_batch": 2
  },
  "urlsFetched": [
   "https://www.youtube.com/watch?v=H02ZPoR3tlI",
   "https://www.youtube.com/watch?v={vid}",
   "https://youtubetotranscript.com/transcript?v=H02ZPoR3tlI",
   "https://www.youtube-transcript.io/api/transcripts?ids=H02ZPoR3tlI",
-  "https://www.youtube.com/youtubei/v1/player?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8"
+  "https://www.youtube.com/youtubei/v1/player?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8",
+  "https://r.jina.ai/https://youtubetotranscript.com/transcript?v=H02ZPoR3tlI",
+  "https://youtubetranscript.com/?v=H02ZPoR3tlI",
+  "https://tactiq-apps-prod.tactiq.io/transcript",
+  "https://youtubetranscript.com/?server_vid2=H02ZPoR3tlI",
+  "https://yewtu.be",
+  "https://inv.nadeko.net",
+  "https://invidious.nerdvpn.de",
+  "https://invidious.f5.si",
+  "https://iv.melmac.space",
+  "https://pipedapi.kavin.rocks/streams/H02ZPoR3tlI"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll fetch each unique URL once. There are 4 unique URLs across the 15 claims.",

@@ -3,12 +3,12 @@
  "name": "wolfe",
  "angle": "primary-on-disk",
  "tag": null,
- "lines": 282,
+ "lines": 293,
  "firstTs": "2026-09-06T19:25:33.190Z",
- "lastTs": "2026-09-06T19:42:57.240Z",
+ "lastTs": "2026-09-06T19:44:31.295Z",
  "tools": {
   "Read": 5,
-  "Bash": 70,
+  "Bash": 73,
   "ToolSearch": 1,
   "WebSearch": 1,
   "WebFetch": 2
@@ -54,18 +54,20 @@
   "https://archive.org/download/thrust19winspr1983/Thrust%2019%20%28Win-Spr%201983%29_djvu.txt",
   "https://locusmag.com/2009/04/reading-gene-wolfe/",
   "https://www.mojeek.com/search?q=%22What+I+Know+About+Writing%22+%22Gene+Wolfe%22",
-  "https://search.marginalia.nu/search?query=%22What+I+Know+About+Writing%22+Wolfe"
+  "https://search.marginalia.nu/search?query=%22What+I+Know+About+Writing%22+Wolfe",
+  "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+  "https://archive.org/details/castleofdays00wolf"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now the final build with all sources including the off-disk finds.",
+ "lastAssistantText": "All 152 quotations verified. Writing the raw notes file, then returning.",
  "run": "wf_5c6be9e9-17f",
  "agent": "a90e72cb539bcb479",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_5c6be9e9-17f/agent-a90e72cb539bcb479.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-primary-on-disk.json",
-  "claims": 109,
-  "complete": false,
-  "mtime": "15:35:56"
+  "claims": 152,
+  "complete": true,
+  "mtime": "15:44:29"
  }
 }

@@ -146,6 +146,145 @@ C(feature="point of view and distance", claim="Joan Gordon confirms in 2020 that
   source="Joan Gordon, 'Micro-Wolfenomics', Ultan's Library, 2020", url=UGM,
   quote="the whole novel unspools from Weer", page="paragraph on the Peace chapter", kind="reception",
   polarity="asserts", date="2020-11-23", routeHint="live ultan.org.uk HTML", registerHint="none", confidence="high")
+
+SFE  = "https://sf-encyclopedia.com/entry/wolfe_gene"
+B95  = "https://web.archive.org/web/20230128055737id_/http://www.depauw.edu/sfs/birs/bir95b.htm"
+B45  = "https://web.archive.org/web/20240727144048id_/http://www.depauw.edu/sfs/birs/bir45.htm"
+B41  = "https://web.archive.org/web/20250525020134id_/http://www.depauw.edu/sfs/birs/bir41.htm"
+CLUTE_SRC = "John Clute, 'Wolfe, Gene', The Encyclopedia of Science Fiction (3rd edn, online; entry updated 13 July 2026, signed [JC])"
+JG95 = "Joan Gordon ('JG'), 'Wolfe Trap', review of Peter Wright's Attending Daedalus, Science Fiction Studies 32.1 (#95, March 2005), pp. 212-213"
+SP45 = "Sarah Pell, 'Thematic Explorations', review of C.N. Manlove's Science Fiction: Ten Explorations, Science Fiction Studies #45 (July 1988)"
+DH41 = "Donald M. Hassler, 'Throwing Down the Gauntlet', review of Joan Gordon's Gene Wolfe, Science Fiction Studies #41 (March 1987)"
+
+S(CLUTE_SRC, SFE, "analysis", True, "2026-07-13", "sf-encyclopedia.com live HTML")
+S(JG95 + " -- carries two verbatim quotations from Attending Daedalus with page numbers", B95, "reception", True, "2005-03", "Wayback id_ capture of the retired depauw.edu SFS archive (the live UC Press page is Cloudflare-blocked)")
+S(SP45 + " -- carries a verbatim quotation from Manlove's Wolfe chapter with a page number", B45, "reception", True, "1988-07", "Wayback id_ capture of depauw.edu/sfs/birs/bir45.htm")
+S(DH41, B41, "reception", True, "1987-03", "Wayback id_ capture of depauw.edu/sfs/birs/bir41.htm")
+
+# ---- Gordon, further ----
+C(feature="register modulation", claim="Gordon says Wolfe adjusts his style to suit an adolescent audience in The Devil in a Forest.",
+  source=GORDON_SRC, url=G, quote="Wolfe adjusts his style to suit an adolescent audience", page="ch. VI, p. 44", kind="analysis",
+  polarity="asserts", date="1986", routeHint="gwern.net PDF -> pdftotext", registerHint="none", confidence="high")
+
+C(feature="register modulation", claim="Gordon says Wolfe adjusts his style for the adolescent audience without condescension.",
+  source=GORDON_SRC, url=G, quote="he does so without condescension", page="ch. VI, p. 44", kind="analysis",
+  polarity="asserts", date="1986", routeHint="gwern.net PDF -> pdftotext", registerHint="none", confidence="high")
+
+C(feature="archaism", claim="Gordon says Wolfe keeps a few unfamiliar words in The Devil in a Forest because he knows that a medieval setting demands medieval details.",
+  source=GORDON_SRC, url=G, quote="knows that a medieval setting demands medieval details", page="ch. VI, p. 44", kind="analysis",
+  polarity="asserts", date="1986", routeHint="gwern.net PDF -> pdftotext", registerHint="dossier-archivist", confidence="high")
+
+C(feature="terminology consistency", claim="Gordon says Wolfe explains his unfamiliar words tactfully in the course of furthering plot or developing character rather than glossing them outright.",
+  source=GORDON_SRC, url=G, quote="he tactfully explains them in the course of furthering", page="ch. VI, p. 44", kind="analysis",
+  polarity="asserts", date="1986", routeHint="gwern.net PDF -> pdftotext", registerHint="none", confidence="high")
+
+C(feature="cadence and rhythm", claim="Gordon says Wolfe's emphasis on the number of stresses rather than the number of syllables parallels early English poetry.",
+  source=GORDON_SRC, url=G, quote="number of stresses rather than upon number of syllables", page="ch. VI, p. 45", kind="analysis",
+  polarity="asserts", date="1986", routeHint="gwern.net PDF -> pdftotext", registerHint="none", confidence="high")
+
+C(feature="withheld information and inference", claim="Gordon offers as proof that the narrator of 'Seven American Nights' loses a day the fact that the story describes only six nights.",
+  source=GORDON_SRC, url=G, quote="only six nights", page="ch. VII, p. 65", kind="analysis",
+  polarity="asserts", date="1986", routeHint="gwern.net PDF -> pdftotext", registerHint="none", confidence="high")
+
+C(feature="withheld information and inference", claim="Gordon says Wolfe does not build his layers of perception and storytelling in order to fool the reader.",
+  source=GORDON_SRC, url=G, quote="of storytelling to fool us", page="ch. VII, p. 66", kind="analysis",
+  polarity="rejects", date="1986", routeHint="gwern.net PDF -> pdftotext", registerHint="none", confidence="high")
+
+# ---- Clute / SFE ----
+C(feature="withheld information and inference", claim="Clute writes that a Wolfe story always knows more than it says.",
+  source=CLUTE_SRC, url=SFE, quote="A Wolfe story always knows more than it says", page="SFE entry 'Wolfe, Gene', paragraph on literary influences", kind="analysis",
+  polarity="asserts", date="2026-07-13", routeHint="sf-encyclopedia.com live HTML", registerHint="dossier-archivist", confidence="high")
+
+C(feature="omission as information", claim="Clute describes a deep authorial silence in Wolfe about what any story might mean to say.",
+  source=CLUTE_SRC, url=SFE, quote="a deep auctorial silence about what any story might mean to say", page="SFE entry 'Wolfe, Gene', opening assessment", kind="analysis",
+  polarity="asserts", date="2026-07-13", routeHint="sf-encyclopedia.com live HTML", registerHint="dossier-archivist", confidence="high")
+
+C(feature="point of view and distance", claim="Clute says that in a Wolfe tale the surface is nearly always described with precision.",
+  source=CLUTE_SRC, url=SFE, quote="the surface is nearly always described with precision", page="SFE entry 'Wolfe, Gene', on the Archipelago stories", kind="analysis",
+  polarity="asserts", date="2026-07-13", routeHint="sf-encyclopedia.com live HTML", registerHint="dossier-archivist", confidence="high")
+
+C(feature="withheld information and inference", claim="Clute says the true story inside a Wolfe tale is generally conveyed by indirection.",
+  source=CLUTE_SRC, url=SFE, quote="the true story within is generally conveyed by indirection", page="SFE entry 'Wolfe, Gene', on the Archipelago stories", kind="analysis",
+  polarity="asserts", date="2026-07-13", routeHint="sf-encyclopedia.com live HTML", registerHint="dossier-archivist", confidence="high")
+
+C(feature="withheld information and inference", claim="Clute says the clues Wolfe lays down to govern a text's comprehension are almost subliminal.",
+  source=CLUTE_SRC, url=SFE, quote="clues laid down in the text to govern its comprehension", page="SFE entry 'Wolfe, Gene', on The Fifth Head of Cerberus", kind="analysis",
+  polarity="asserts", date="2026-07-13", routeHint="sf-encyclopedia.com live HTML", registerHint="none", confidence="high")
+
+C(feature="other: evidence inside a document", claim="Clute says the evidence for the impostor's substitution in The Fifth Head of Cerberus is extractable through an examination of the manuscript that tells the story.",
+  source=CLUTE_SRC, url=SFE, quote="extractable through an examination of the manuscript that tells the story", page="SFE entry 'Wolfe, Gene', on The Fifth Head of Cerberus", kind="analysis",
+  polarity="asserts", date="2026-07-13", routeHint="sf-encyclopedia.com live HTML", registerHint="dossier-archivist", confidence="high")
+
+C(feature="civic record register", claim="Clute says Wolfe's greatest novels tend to be couched as written narratives somehow made available to the reader.",
+  source=CLUTE_SRC, url=SFE, quote="his greatest novels tend to be couched as written narratives", page="SFE entry 'Wolfe, Gene', on The Fifth Head of Cerberus", kind="analysis",
+  polarity="asserts", date="2026-07-13", routeHint="sf-encyclopedia.com live HTML", registerHint="dossier-archivist", confidence="high")
+
+C(feature="point of view and distance", claim="Clute describes Severian as narrating his childhood and early youth in a tone deceptively serene.",
+  source=CLUTE_SRC, url=SFE, quote="in a tone deceptively serene", page="SFE entry 'Wolfe, Gene', on The Book of the New Sun", kind="analysis",
+  polarity="asserts", date="2026-07-13", routeHint="sf-encyclopedia.com live HTML", registerHint="chronicle-line", confidence="high")
+
+C(feature="place and institution description", claim="Clute says Urth is so impacted with the relics of humanity's long residence that archaeology and geology have become, in a way, the same science.",
+  source=CLUTE_SRC, url=SFE, quote="archaeology and geology have become, in a way, the same science", page="SFE entry 'Wolfe, Gene', on The Book of the New Sun", kind="analysis",
+  polarity="asserts", date="2026-07-13", routeHint="sf-encyclopedia.com live HTML", registerHint="dossier-archivist", confidence="high")
+
+C(feature="other: masks and appearances", claim="Clute writes that in all of Wolfe's greatest works faces are masques.",
+  source=CLUTE_SRC, url=SFE, quote="faces are masques", page="SFE entry 'Wolfe, Gene', on The Fifth Head of Cerberus", kind="analysis",
+  polarity="asserts", date="2026-07-13", routeHint="sf-encyclopedia.com live HTML", registerHint="none", confidence="high")
+
+# ---- Wright (relayed through the SFS review) ----
+C(feature="withheld information and inference", claim="Peter Wright's first thesis in Attending Daedalus, as Joan Gordon reports it, is that Wolfe intentionally obfuscates his meaning.",
+  source="Peter Wright, Attending Daedalus (Liverpool UP, 2003), reported in " + JG95, url=B95,
+  quote="intentionally obfuscates his meaning", page="SFS 32.1, 'Wolfe Trap'", kind="relay",
+  polarity="asserts", date="2005-03", routeHint="Wayback id_ capture of depauw.edu SFS archive", registerHint="none",
+  confidence="medium: Wright's thesis reaches me through Gordon's summary, not through Attending Daedalus itself, which is behind a Liverpool UP / UC Press block")
+
+C(feature="withheld information and inference", claim="Gordon quotes Attending Daedalus page 44 saying Wolfe's intertextuality enslaves the reader by coercing him or her into exploring a system of connectives.",
+  source="Peter Wright, Attending Daedalus (2003), p. 44, quoted in " + JG95, url=B95,
+  quote="enslaves the reader by coercing him or her into", page="Attending Daedalus p. 44, quoted in SFS 32.1", kind="relay",
+  polarity="asserts", date="2005-03", routeHint="Wayback id_ capture of depauw.edu SFS archive", registerHint="none",
+  confidence="medium: quotation is verbatim in the reviewer's text, not read in the monograph")
+
+C(feature="withheld information and inference", claim="Gordon reports that Wright describes Wolfe's use of a subtextual story as a device for confounding the reader, citing Attending Daedalus page 58.",
+  source="Peter Wright, Attending Daedalus (2003), p. 58, quoted in " + JG95, url=B95,
+  quote="confounding the reader", page="Attending Daedalus p. 58, quoted in SFS 32.1", kind="relay",
+  polarity="asserts", date="2005-03", routeHint="Wayback id_ capture of depauw.edu SFS archive", registerHint="none",
+  confidence="medium: quotation read in the reviewer's text, not in the monograph")
+
+C(feature="diction (native vs latinate)", claim="Joan Gordon says Wolfe's allusions and vocabulary reflect myriad bodies of knowledge from ancient history to navigation.",
+  source=JG95, url=B95, quote="wide-ranging allusions and vocabulary reflecting myriad bodies of knowledge", page="SFS 32.1, 'Wolfe Trap'", kind="reception",
+  polarity="asserts", date="2005-03", routeHint="Wayback id_ capture of depauw.edu SFS archive", registerHint="none", confidence="high")
+
+C(feature="other: difficulty for critics", claim="Joan Gordon says that as glorious as Wolfe's work is to read it is difficult to write about.",
+  source=JG95, url=B95, quote="difficult to write about", page="SFS 32.1, 'Wolfe Trap'", kind="reception",
+  polarity="asserts", date="2005-03", routeHint="Wayback id_ capture of depauw.edu SFS archive", registerHint="none", confidence="high")
+
+# ---- Manlove (relayed through the SFS review) ----
+C(feature="withheld information and inference", claim="Manlove's chapter on The Book of the New Sun concludes that there is no answer to what the book is about, as quoted in the SFS review.",
+  source="C.N. Manlove, Science Fiction: Ten Explorations (Kent State UP, 1986), p. 213, quoted in " + SP45, url=B45,
+  quote="There is no answer", page="Manlove p. 213, quoted in SFS #45", kind="relay",
+  polarity="asserts", date="1988-07", routeHint="Wayback id_ capture of depauw.edu/sfs/birs/bir45.htm",
+  registerHint="none", confidence="medium: Manlove reaches me only through the reviewer's quotation; the monograph is lending-restricted on archive.org and its search-inside returns 403")
+
+C(feature="withheld information and inference", claim="Manlove says the missing answer in The Book of the New Sun feels as though it is just over one's shoulder or too many things to pin into one, as quoted in the SFS review.",
+  source="C.N. Manlove, Science Fiction: Ten Explorations (1986), p. 213, quoted in " + SP45, url=B45,
+  quote="one's shoulder or that it is too many things to pin into one", page="Manlove p. 213, quoted in SFS #45", kind="relay",
+  polarity="asserts", date="1988-07", routeHint="Wayback id_ capture of depauw.edu/sfs/birs/bir45.htm",
+  registerHint="none", confidence="medium: quotation read in the reviewer's text, not in the monograph")
+
+C(feature="other: critical programme", claim="Manlove states that his book sets out to show how the deceptive surface of exciting adventures and exotic settings in science fiction may contain complex patterns of imagery and significance.",
+  source="C.N. Manlove, Science Fiction: Ten Explorations (1986), p. 4, quoted in " + SP45, url=B45,
+  quote="the deceptive surface of exciting adventures and exotic settings", page="Manlove p. 4, quoted in SFS #45", kind="relay",
+  polarity="asserts", date="1988-07", routeHint="Wayback id_ capture of depauw.edu/sfs/birs/bir45.htm",
+  registerHint="none", confidence="medium: quotation read in the reviewer's text, not in the monograph")
+
+# ---- reception of Gordon's monograph ----
+C(feature="other: reception", claim="Donald M. Hassler reports Baird Searles' objection that beneath Wolfe's stylistic glitter there may be no real speculative ideas.",
+  source=DH41, url=B41, quote="underneath Wolfe's stylistic glitter and", page="SFS #41, 'Throwing Down the Gauntlet'", kind="reception",
+  polarity="disputes", date="1987-03", routeHint="Wayback id_ capture of depauw.edu/sfs/birs/bir41.htm", registerHint="none", confidence="high")
+
+C(feature="other: reception", claim="Hassler credits Wolfe with a mastery of baroque complexity of reference.",
+  source=DH41, url=B41, quote="mastery of baroque complexity of reference", page="SFS #41, 'Throwing Down the Gauntlet'", kind="reception",
+  polarity="asserts", date="1987-03", routeHint="Wayback id_ capture of depauw.edu/sfs/birs/bir41.htm", registerHint="none", confidence="high")
 COVERAGE = open('coverage.txt').read().strip()
 COMPLETE = open('complete.txt').read().strip() == 'true'
 import json

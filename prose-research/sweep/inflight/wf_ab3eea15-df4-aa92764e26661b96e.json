@@ -3,17 +3,18 @@
  "name": "hobb",
  "angle": null,
  "tag": "i521-535",
- "lines": 49,
+ "lines": 66,
  "firstTs": "2026-09-06T19:40:50.873Z",
- "lastTs": "2026-09-06T19:42:59.688Z",
+ "lastTs": "2026-09-06T19:45:00.333Z",
  "tools": {
-  "Bash": 12
+  "Bash": 17
  },
  "urlsFetched": [
   "https://archive.org/download/asimovsv21n02199702_201908/Asimovs_v21n02_1997-02_djvu.txt",
   "https://www.fantasy-animation.org/current-posts/review-matthew-oliver-magic-words-magic-worlds-form-and-style-in-epic-fantasy-2022",
   "https://api.openalex.org/works/doi:10.3828/extr.2019.2",
-  "https://doi.org/10.12958/2227-2844-2024-2(361"
+  "https://doi.org/10.12958/2227-2844-2024-2(361",
+  "https://www.youtube.com/watch?v=EYT3NeS_mVQ"
  ],
  "filesWritten": [],
  "lastAssistantText": "",

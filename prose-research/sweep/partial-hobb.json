@@ -1055,5 +1055,51 @@
    "note": "Quote verbatim in the Denver paragraph, and 'not a story, because nothing really happened' is on the page. The grade attribution and the unrestricted 'her only creative-writing class' are the widened limbs.",
    "fromFile": "verdicts-hobb-i461-475.json"
   }
+ },
+ {
+  "index": 513,
+  "feature": "plainness and economy",
+  "claim": "The only contemporary review of Assassin's Apprentice in Interzone calls the novel stylistically patchy.",
+  "source": "Chris Morgan, 'First Fantasies' review column, Interzone 98, August 1995",
+  "url": "https://archive.org/download/interzone-098-1995-08-bogof-39/Interzone%20098%201995-08%20%28Bogof39%29_djvu.txt",
+  "quote": "Stylistically, the novel is patchy",
+  "page": "'First Fantasies' column, review of The Assassin's Apprentice",
+  "kind": "reception",
+  "polarity": "disputes",
+  "date": "1995-08",
+  "routeHint": "archive.org djvu OCR full text, item byte-verified at 441642 bytes. OCR uses DOUBLE spaces between words and a '¬' soft hyphen at line breaks; quote verified against a whitespace-normalised copy and chosen to contain no line break",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 513,
+   "verdict": "PARTIAL",
+   "trueWording": "Stylistically, the novel is patchy",
+   "unsupportedLimb": "that this is the only contemporary review of the novel in Interzone",
+   "note": "Quote is verbatim in the 'First Fantasies' column (item byte-verified at 441642 bytes; OCR double spaces normalised). The stylistic-patchiness limb is fully supported, but a single issue cannot establish exclusivity across the magazine's run - nothing on the page speaks to 'the only'.",
+   "fromFile": "verdicts-hobb-i506-520.json"
+  }
+ },
+ {
+  "index": 518,
+  "feature": "other: register read as historical fiction",
+  "claim": "Reading the prose in 1995, Morgan inferred the author was an experienced writer from another genre, presumably historical fiction.",
+  "source": "Chris Morgan, 'First Fantasies' review column, Interzone 98, August 1995",
+  "url": "https://archive.org/download/interzone-098-1995-08-bogof-39/Interzone%20098%201995-08%20%28Bogof39%29_djvu.txt",
+  "quote": "of an experienced author from another genre (presumably historical fiction)",
+  "page": "'First Fantasies' column, opening of the Hobb review",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "1995-08",
+  "routeHint": "archive.org djvu OCR full text, item byte-verified at 441642 bytes; Morgan also refers to Hobb as 'he' throughout, believing the pseudonym male",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 518,
+   "verdict": "PARTIAL",
+   "trueWording": "of an experienced author from another genre (presumably historical fiction)",
+   "unsupportedLimb": "that Morgan inferred this from reading the prose - the review names no basis",
+   "note": "The quoted phrase opens the review verbatim, and the 1995 date and Morgan's belief are supported (he uses 'he' of Hobb throughout, e.g. 'so he has been able to avoid'). But it is stated as a premise - 'Because Robin Hobb is the pseudonym of an experienced author... The Assassin's Apprentice is free of most of the problems that tend to infect first novels' - reasoning FROM the identity to the prose, not from the prose to the identity.",
+   "fromFile": "verdicts-hobb-i506-520.json"
+  }
  }
 ]

@@ -3,12 +3,17 @@
  "name": "hobb",
  "angle": null,
  "tag": "i551-565",
- "lines": 64,
+ "lines": 122,
  "firstTs": "2026-09-06T19:40:50.874Z",
- "lastTs": "2026-09-06T19:42:58.397Z",
+ "lastTs": "2026-09-06T19:44:57.090Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 14
+  "Bash": 21,
+  "mcp__Claude_Browser__navigate": 2,
+  "mcp__Claude_Browser__find": 1,
+  "mcp__Claude_Browser__computer": 1,
+  "mcp__Claude_Browser__javascript_tool": 1,
+  "mcp__Claude_Browser__browser_batch": 3
  },
  "urlsFetched": [
   "https://www.tor.com/2010/02/05/the-golden-age-of-epic-fantasy-a-review-of-robin-hobbs-ligdragon-keeperlig/:dk.html",
@@ -19,7 +24,11 @@
   "https://web.archive.org/web/20221003055909id_/https://www.tor.com/2010/02/05/the-golden-age-of-epic-fantasy-a-review-of-robin-hobbs-ligdragon-keeperlig/",
   "https://web.archive.org/web/20221004001120id_/https://www.tor.com/2010/06/02/facts-universally-acknowledged-being-a-review-of-robin-hobbs-ligdragon-havenlig/",
   "https://web.archive.org/web/20230119153557id_/https://www.tor.com/2012/02/07/youve-never-read-anything-like-sff-before-robin-hobb-talks-with-peter-orullian/",
-  "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html"
+  "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+  "https://www.youtube.com/watch?v=$v",
+  "https://www.youtube.com",
+  "https://www.youtube.com/youtubei/v1/player?key=AIzaSyA8eiZmM1FaDVjRy-df2KTyQ_vz_yYM39w",
+  "https://youtubetotranscript.com/transcript?v=$v&current_language_code=en"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by grouping the claims by URL and fetching each source.",
