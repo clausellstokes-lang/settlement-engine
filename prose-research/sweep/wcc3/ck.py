@@ -6,7 +6,7 @@ def load_prior():
     if os.path.exists(PRIOR): return json.load(open(PRIOR))
     d=json.load(open(OUT)); json.dump(d,open(PRIOR,'w')); return d
 def write(new_claims,new_sources,coverage,complete=False):
-    p=load_prior()
+    load_prior(); p=json.load(open(OUT))
     claims=list(p['claims']); srcs=list(p['sourcesRead'])
     seen={(c['url'],c.get('quote',''),c['claim'][:60]) for c in claims}
     for c in new_claims:

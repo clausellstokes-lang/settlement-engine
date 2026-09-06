@@ -174,5 +174,117 @@
   "substantive": true,
   "date": "1986",
   "route": "SpringerLink via Wayback raw capture 20180618115401id_ (live page returns a Client Challenge)"
+ },
+ {
+  "title": "Gene Wolfe, 'Special Problems of Science Fiction', Shadows of the New Sun pp. 219-226, opening pages",
+  "url": "https://www.cambridge.org/core/books/shadows-of-the-new-sun/special-problems-of-science-fiction/FAFB20D199B4188847C6F7D75F21F872",
+  "kind": "own-words",
+  "substantive": true,
+  "date": "2007",
+  "route": "Cambridge Core chapter page (Liverpool UP title), fetched live with a browser user agent"
+ },
+ {
+  "title": "John C. Wright, 'And a Sword in the Last' -- his full introduction to Marc Aramini's Between Light and Shadow (Castalia House, 2015), reprinted on the author's site",
+  "url": "https://scifiwright.com/2021/03/and-a-sword-in-the-last/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2021-03-14",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Scott Wowra, 'Place Names in Gene Wolfe's Soldier of the Mist', Ultan's Library",
+  "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2016-09-07",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Marc Aramini, the 'A Solar Labyrinth' entry from Between Light and Shadow, republished on Ultan's Library",
+  "url": "https://ultan.org.uk/aramini-on-a-solar-labyrinth/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2016-02-03",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Marc Aramini, 'Standing on the Shoulders of Giants' -- review of Andre-Driussi's The Book of the New Sun: A Chapter Guide, Ultan's Library",
+  "url": "https://ultan.org.uk/standing-on-the-shoulders-of-giants-a-review-of-michael-andre-driussis-the-book-of-the-new-sun-a-chapter-guide/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2020-07-20",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "'Lexicon Urthus, second edition' -- Ultan's Library news item on Andre-Driussi's second edition",
+  "url": "https://ultan.org.uk/lexicon-urthus-second-edition/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2008-09-20",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Nick Gevers, 'The Reader as Augur: Beginnings and Endings in The Book of the Long Sun', Ultan's Library",
+  "url": "https://ultan.org.uk/the-reader-as-augur/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2000-09-05",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Peter Wright, 'Mapping a Masterwork: A Critical Review of The Book of the New Sun', Ultan's Library (quotes Bishop, Budrys, Greenland)",
+  "url": "https://ultan.org.uk/review-botns/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2002-08-28",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Russ Allbery, review of Robert Borski, Solar Labyrinth (iUniverse 2004, 188 pp.), eyrie.org",
+  "url": "https://www.eyrie.org/~eagle/reviews/books/0-595-31729-4.html",
+  "kind": "reception",
+  "substantive": true,
+  "date": "2004",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "Christian Sauve, review of John Clute, Strokes: Essays and Reviews 1966-1986 (Serconia Press 1988, 178 pp.) -- carries a Strokes quotation with page number",
+  "url": "https://www.christian-sauve.com/2004/09/strokes-john-clute/",
+  "kind": "reception",
+  "substantive": true,
+  "date": "2004-09-12",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish -- a dissenting close reading, with reader comments",
+  "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2007-11",
+  "route": "live page fetched with a browser user agent"
+ },
+ {
+  "title": "C. N. Manlove, Science Fiction: Ten Explorations -- Internet Archive item (lending-restricted; djvu.txt and search-inside both refused)",
+  "url": "https://archive.org/details/sciencefictionte00manl",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "1986",
+  "route": "IA metadata reachable; access-restricted-item true, full text blocked"
+ },
+ {
+  "title": "Cecilia Michel Lopez, 'Art and Allegory: A Method to Read The Book of the New Sun', Logos 18.4 (Fall 2015), pp. 127-154 -- publisher record only, no abstract, paywalled at $20",
+  "url": "https://www.pdcnet.org/logos/content/logos_2015_0018_0004_0127_0154",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2015",
+  "route": "pdcnet.org record page; Project MUSE, Gale and thefreelibrary all blocked or Cloudflare-gated"
+ },
+ {
+  "title": "Francis Gooding, 'Time After Time: On the speculative fiction of Gene Wolfe', Critical Quarterly 62 (2020), pp. 71-78 -- Crossref record only; Unpaywall reports no OA copy; Wiley and Academia.edu Cloudflare-blocked",
+  "url": "https://doi.org/10.1111/criq.12563",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2020",
+  "route": "Crossref + Unpaywall + Semantic Scholar records; all three return no abstract and no OA full text"
  }
 ]

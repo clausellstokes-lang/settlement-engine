@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:19:34 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:25:37 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -280,7 +280,7 @@
 | kay | finder | rescue-unread | result | 113 | — | 100 claims, complete=True @17:25:52 | 19:38:12 |
 | kay | finder | silmarillion-and-verse | result | 105 | — | 113 claims, complete=True @17:25:52 | 19:34:08 |
 | kay | finder | transcripts-and-readers | failed | 22 | — | 96 claims, complete=True @19:18:57 | 19:45:35 |
-| kay | finder | transcripts-and-readers | in-flight | 104 | — | 96 claims, complete=True @19:18:57 | 23:19:31 |
+| kay | finder | transcripts-and-readers | result | 104 | — | 96 claims, complete=True @19:18:57 | 23:23:41 |
 | kay | finder | transcripts-and-readers | in-flight | 1 | — | 96 claims, complete=True @19:18:57 | 21:31:03 |
 | kay | finder | translators-and-ear | result | 80 | — | 35 claims, complete=True @17:25:52 | 19:33:40 |
 | kay | regrade | regrade-r4 | failed | 0 | — | — | 17:51:50 |
@@ -348,16 +348,20 @@
 | kay | verifier | i700-712 | failed | 0 | — | verdict file absent | 17:51:49 |
 | kay | verifier | i711-711 | result | 1 | — | verdict file WRITTEN | 18:14:26 |
 | kay | verifier | i713-727 | failed | 0 | — | verdict file absent | 19:45:36 |
+| kay | verifier | i715-749 | in-flight | 9 | — | verdict file absent | 23:24:20 |
 | kay | verifier | i728-742 | failed | 0 | — | verdict file absent | 19:45:36 |
 | kay | verifier | i743-757 | failed | 2 | — | verdict file absent | 19:45:56 |
 | kay | verifier | i75-89 | result | 1 | — | verdict file WRITTEN | 17:33:59 |
+| kay | verifier | i750-779 | in-flight | 11 | — | verdict file absent | 23:25:33 |
 | kay | verifier | i758-772 | failed | 0 | — | verdict file absent | 19:45:36 |
 | kay | verifier | i773-787 | failed | 2 | — | verdict file absent | 19:45:48 |
+| kay | verifier | i784-854 | in-flight | 15 | — | verdict file absent | 23:25:36 |
 | kay | verifier | i788-802 | failed | 0 | — | verdict file absent | 19:45:36 |
 | kay | verifier | i803-817 | failed | 3 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i818-832 | failed | 0 | — | verdict file absent | 19:45:57 |
 | kay | verifier | i833-847 | failed | 6 | — | verdict file absent | 19:46:17 |
 | kay | verifier | i848-862 | failed | 0 | — | verdict file absent | 19:45:56 |
+| kay | verifier | i858-894 | in-flight | 6 | — | verdict file absent | 23:25:23 |
 | kay | verifier | i863-877 | failed | 0 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i878-892 | failed | 0 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i893-907 | failed | 0 | — | verdict file absent | 19:46:18 |
@@ -548,16 +552,16 @@
 | wolfe | critic |  | failed | 0 | — | — | 19:50:41 |
 | wolfe | critic |  | result | 0 | critic-wolfe.md | — | 18:34:19 |
 | wolfe | critic |  | failed | 0 | — | — | 17:52:41 |
-| wolfe | finder | close-continued | failed | 42 | — | 74 claims, complete=False @19:08:00 | 19:45:45 |
-| wolfe | finder | close-continued | in-flight | 22 | — | 74 claims, complete=False @19:08:00 | 23:19:21 |
-| wolfe | finder | close-continued | in-flight | 1 | — | 74 claims, complete=False @19:08:00 | 21:31:03 |
+| wolfe | finder | close-continued | failed | 42 | — | 126 claims, complete=False @19:23:29 | 19:45:45 |
+| wolfe | finder | close-continued | in-flight | 40 | — | 126 claims, complete=False @19:23:29 | 23:25:26 |
+| wolfe | finder | close-continued | in-flight | 1 | — | 126 claims, complete=False @19:23:29 | 21:31:03 |
 | wolfe | finder | counter | result | 68 | — | 114 claims, complete=True @17:25:54 | 19:22:08 |
 | wolfe | finder | editors | result | 35 | — | 78 claims, complete=True @17:25:54 | 19:17:55 |
 | wolfe | finder | le-guin | result | 56 | — | 31 claims, complete=True @17:25:54 | 19:25:33 |
 | wolfe | finder | measure | result | 36 | find-wolfe-measure.md, found-wolfe-measure.json, metrics.py | 38 claims, complete=True @17:25:54 | 19:18:11 |
-| wolfe | finder | monographs | failed | 71 | — | 115 claims, complete=False @19:17:49 | 19:46:26 |
-| wolfe | finder | monographs | in-flight | 31 | — | 115 claims, complete=False @19:17:49 | 23:19:26 |
-| wolfe | finder | monographs | in-flight | 8 | — | 115 claims, complete=False @19:17:49 | 21:31:03 |
+| wolfe | finder | monographs | failed | 71 | — | 174 claims, complete=False @19:25:27 | 19:46:26 |
+| wolfe | finder | monographs | in-flight | 48 | — | 174 claims, complete=False @19:25:27 | 23:25:27 |
+| wolfe | finder | monographs | in-flight | 8 | — | 174 claims, complete=False @19:25:27 | 21:31:03 |
 | wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
 | wolfe | regrade | regrade-r4 | result | 0 | — | — | 17:43:04 |
 | wolfe | regrade | regrade-r6 | failed | 0 | — | — | 19:50:40 |

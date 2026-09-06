@@ -2,7 +2,7 @@
 import json,sys,os
 B=os.path.dirname(os.path.abspath(__file__))
 prior=json.load(open(B+'/PRIOR-found.json'))
-mine=json.load(open(B+'/claims2.json' if os.path.exists(B+'/claims2.json') else B+'/claims1.json'))
+mine=json.load(open(B+'/claims2.json' if os.path.exists(B+'/claims2.json') else B+'/claims2.json'))
 srcs=json.load(open(B+'/sources.json'))
 complete = (sys.argv[1]=='true') if len(sys.argv)>1 else False
 cov = open(B+'/coverage.txt').read().strip() if os.path.exists(B+'/coverage.txt') else 'CHECKPOINT (in progress).'

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import json,re,unicodedata,os
-d=json.load(open('claims1.json'))
+d=json.load(open('claims2.json'))
 U,LOC,C=d['U'],d['LOC'],d['claims']
 rev={v:k for k,v in U.items()}
 def norm(s):
