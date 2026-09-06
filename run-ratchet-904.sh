@@ -1,5 +1,5 @@
 #!/bin/sh
-# run-ratchet-904.sh — census totals at the §904 consist tip (from run-ratchet-903.sh by substitution, 2026-09-06 18:00). Quiet-window law; exits captured.
+# run-ratchet-904.sh — census totals at the §904 consist tip (stamped). Quiet-window law; exits captured.
 # ⚠ THE LAST LINE IS `exit $TRUE_EXIT` AND NOTHING MAY FOLLOW IT.
 D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLUIMAT
 cd $D || exit 9
@@ -16,7 +16,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED (E4, §904, derived at c2337220a in predict-904.log + the chair car, which adds no test file and no it() title): totalFiles 2489 (unchanged) · entries 3 (unchanged) · totalTests 31970 -> 31970 (handbookVoice.test.jsx has three it() before and after; two titles RENAMED, none added; the chair car touches no test) — totalTests is REFUSED in advance, this run is the derivation"
+echo "PREDICTED: __PREDICTION__ (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"

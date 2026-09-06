@@ -1,0 +1,4 @@
+  probe: load=7.55 workers=0 streak=0 waited=0s
+  probe: load=4.61 workers=0 streak=0 waited=60s
+  probe: load=3.15 workers=0 streak=1 waited=120s
+  probe: load=2.48 workers=0 streak=2 waited=180s

@@ -1,13 +1,13 @@
-# LANE-STATUS — written 2026-09-06 18:48:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 18:54:40 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **L-UI-MAT** dock `laneLUIMAT` HEAD 35638df4b · 4 cars over dd5f13218 · porcelain 0 · last commits:
+- **L-UI-MAT** dock `laneLUIMAT` HEAD 6582958ce · 6 cars over dd5f13218 · porcelain 0 · last commits:
+    6582958ce Register (capsule car): the base-state capsule regenerates at the §904 tip (rung 18 still; no OSR movement at this landing)
+    56ac834ad Register (last car): the census totals re-freeze at the composed tip — totalTests 31970 -> 31970, totalFiles 2489 unchanged, entries 3
     35638df4b §904 L-UI-MAT landing (register car 2): writer-reach re-takes its provenance at the tip; no other register moved
     21b95511f §904 L-UI-MAT landing (register car 1): the lighting census refreezes at the tip
-    89ff7b03b §904 chair car: the mobileSingleChrome registry entry retires — its reader was deleted at 8bf493d05 (2026-06-22) and the entry was bookkeeping; rebuilding the single-chrome mobile nav is an owner row
-    c2337220a L-UI (LGT-C4-UI): two of O-13's three product flags light as a declared display-only shift — and the third is refused with the measurement that it has no reader
     receipt `receipt-l-ui-mat.md` (mtime 09-06 14:31) head:
       | # RECEIPT — LANE L-UI-MAT — **PARTIAL** (in flight)
       | Seat: Opus 5 — Fable-unvalidated · Lane: L-UI-MAT · Chair: Fable 5.1
@@ -100,5 +100,5 @@ KeyError: 'tag'
 - wf_d76e605d-6d1: 2 journal lines, 2 agents
 - wf_e95fca37-bb5: 31 journal lines, 18 agents
 
-## PROCESSES: 17499 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;17538 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 18.16 20.79 18.89
+## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;40184 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;40216 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;
+load: 2.58 9.76 14.58
