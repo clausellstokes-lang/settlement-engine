@@ -2903,5 +2903,245 @@
    "note": "No quote was supplied. Verified in Dragonfree's post #5 (attribution correct): 'I'm so amused by the AI deciding that Nox had four different contingency plans based on the idea that he'd get a Luxray as a starter (if they're all based on the same singular assumption, what makes them four different contingency plans?) and none for any other possibility, only for it to turn out he's actually getting his starter from a lab that gives out Johto starters'. The generated excerpt ('He'd built four contingency branches off that single point. He had built zero contingency branches off anything else.') was posted by Flyg0n; Dragonfree supplies the premise-tracking analysis.",
    "fromFile": "verdicts-ai-i180-194.json"
   }
+ },
+ {
+  "index": 195,
+  "feature": "stock names and stock numbers",
+  "claim": "Recurring default names ('Marcus Webb', 'Sarah Chen') and the number 47 appear across unrelated AI stories, alongside canon-breaking facts.",
+  "source": "Thousand Roads forum",
+  "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+  "quote": "Marcus Webb, Sarah Chen",
+  "angle": "publishing",
+  "verdict": {
+   "index": 195,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "include Marcus, Marcus Webb, Sarah Chen, the last name Chen",
+   "note": "Author's-note tell list: 'Marcus Webb, Sarah Chen' is verbatim and contiguous. Same bullet adds \"Claude also generates '47' for many random numbers -- times will sometimes end with :47\" and \"forget or confuse canon names\"; a separate 'Incorrect canon details' bullet covers the rest. Every element of the claim is on the page.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 196,
+  "feature": "characterization whiplash",
+  "claim": "A character shifts from heated argument to gentleness with no organic transition.",
+  "source": "Thousand Roads forum (user Flyg0n)",
+  "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+  "quote": "startling gentleness",
+  "angle": "publishing",
+  "verdict": {
+   "index": 196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Whitney, with startling gentleness for someone who'd been arguing about tea infusion times ninety seconds earlier",
+   "note": "Appears twice: in the AI-generated sample fic posted by Flyg0n, and re-quoted in a 'Flyg0n said:' blockquote whose reader commentary makes the whiplash point -- 'She was getting so heated over boiling or steeping tea... that I thought she was an inherently terrifying and cruel person.' Attribution to Flyg0n is correct.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 197,
+  "feature": "over-frequent model-specific words",
+  "claim": "Words like 'fluorescent', 'humming', 'particular' recur at rates traceable to a specific model's slop profile.",
+  "source": "Thousand Roads forum citing sam-paech/slop-forensics",
+  "url": "https://github.com/sam-paech/slop-forensics",
+  "quote": "heart pounding chest",
+  "angle": "publishing",
+  "verdict": {
+   "index": 197,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "over-represented lexical patterns in LLM outputs",
+   "note": "ADVERSARIAL DOWNGRADE. 'heart pounding chest' IS verbatim on the repo page, but only as a throwaway illustration of what a trigram is: 'Trigrams (three-word combinations not including stop-words, e.g., heart pounding chest)'. The three words the claim names -- fluorescent, humming, particular -- appear ZERO times on the GitHub page; they come from the Thousand Roads thread's sample text (fluorescent x8, humming x4 there). The repo supports only the mechanism half: 'Analyze a model's outputs for repetitive words, bigrams, trigrams... and slop scores' and 'Cluster models based on slop profile similarity'. The quote does not evidence the claim attached to it.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 198,
+  "feature": "identical query voice",
+  "claim": "Literary agents receive near-identical AI query letters with the same voice, language and content even when the manuscripts look human.",
+  "source": "Naomi & James Jones, 2026-03-09",
+  "url": "https://naomiandjamesjones.substack.com/p/dont-use-ai-to-write-your-query-letter",
+  "quote": "almost identical query letters that used the same voice",
+  "angle": "publishing",
+  "verdict": {
+   "index": 198,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "she'd started to receive almost identical query letters that used the same voice, language and content",
+   "note": "Verbatim. The 'even when manuscripts look human' half is explicit: 'this was happening even when the manuscripts/illustrations being submitted appeared to be 100% made by humans.' Byline Naomi Jones and James Jones, Mar 09, 2026 -- matches. The post is partly paywalled but the quoted passage sits above the paywall.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 199,
+  "feature": "uncanny-valley query with no hook",
+  "claim": "An agent found the AI query offered no hook, fabricated a comp she never represented, and read as real-but-fake.",
+  "source": "Kate Nash, Slushpile Mountaineering, 2026-02-23",
+  "url": "https://slushpilemountaineering.substack.com/p/if-you-are-using-ai-in-your-queries",
+  "quote": "it appears real but it isn't",
+  "angle": "publishing",
+  "verdict": {
+   "index": 199,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's called the uncanny valley for a reason: it appears real but it isn't",
+   "note": "Verbatim (curly apostrophe on the page). All three sub-claims confirmed: 'it did comp me to a writer I'd never heard of, let alone represented'; 'What it failed to do was provide any kind of hook for the book'; and the uncanny-valley framing. Kate Nash, Feb 23, 2026 -- matches.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 200,
+  "feature": "worse than a worst first draft",
+  "claim": "Larian's writing director rates generated dialogue 3/10 at best, below his own worst drafts, and says placeholder AI text does not help development.",
+  "source": "Adam Smith (Larian) via PC Gamer, Ted Litchfield",
+  "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+  "quote": "the results hit a 3/10 at best",
+  "angle": "publishing",
+  "verdict": {
+   "index": 200,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the results hit a 3/10 at best",
+   "note": "Verbatim inside Adam Smith's quoted Reddit comment. 'Even my worst first drafts -- and there are a LOT of them -- are at least a 4/10' confirms 'below his own worst drafts'; \"'how does generated placeholder text benefit development over simple stub text' -- it doesn't\" confirms the placeholder half. The body calls him writing director; the headline says head writer. Ted Litchfield, 10 January 2026.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 201,
+  "feature": "smarmy sycophantic tone",
+  "claim": "Generated text across Grok, Claude and ChatGPT carries a recognizable smarmy, sycophantic tone that editing cannot remove cheaply.",
+  "source": "Ted Litchfield, PC Gamer",
+  "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+  "quote": "a by turns smarmy and sycophantic tone",
+  "angle": "publishing",
+  "verdict": {
+   "index": 201,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a by turns smarmy and sycophantic tone that I find utterly repulsive",
+   "note": "Verbatim, and it is Litchfield's own aside rather than Smith's: 'Whether it's Grok, Claude, or ChatGPT, people can never seem to get the genAI stink off'. The editing-cost half is the next sentence: 'At a certain point, editing bad writing is just more work than starting from scratch.'",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 202,
+  "feature": "NPC filler inflation",
+  "claim": "LLM NPCs pad trivial exchanges with unnecessary words and nonsensical attributes (eighteen as 'a heavy, beautiful number').",
+  "source": "PC Gamer review of Seed (Klang), 2026-07-24",
+  "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+  "quote": "filling up space with completely unnecessary words",
+  "angle": "publishing",
+  "verdict": {
+   "index": 202,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the practice of filling up space with completely unnecessary words",
+   "note": "Verbatim. The eighteen example is on the page: \"you don't need to then give the age of eighteen a bunch of nonsensical attributes, such as that it's a 'heavy, beautiful number'\". Christopher Livingston, published 24 July 2026 -- date matches.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 203,
+  "feature": "over-poeticized simple questions",
+  "claim": "AI NPCs rephrase plain questions into stilted 'alive-sounding' forms, which reads as trying too hard.",
+  "source": "PC Gamer review of Seed, 2026-07-24",
+  "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+  "quote": "How many years have you lived?",
+  "angle": "publishing",
+  "verdict": {
+   "index": 203,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'How many years have you lived?' is also another indication of an AI that's trying way too hard",
+   "note": "Verbatim, twice -- once as seedling dialogue, once in the critique. The 'alive-sounding' framing is explicit: 'You don't have to rephrase simple questions to sound alive!'",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 204,
+  "feature": "vibe-adjective recurrence",
+  "claim": "The same evaluative words ('heavy', 'beautiful', 'iconic', 'vibes') attach to age, names and shoe colour alike; conversations contain no actual meaning.",
+  "source": "PC Gamer review of Seed, 2026-07-24",
+  "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+  "quote": "a full conversation that contains no actual meaning",
+  "angle": "publishing",
+  "verdict": {
+   "index": 204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not as shallow as a full conversation that contains no actual meaning",
+   "note": "Verbatim. The vibe-adjective list is on the page: \"'heavy' and 'beautiful' and 'iconic' and 'vibes' are words that come up constantly in Seed: not only is my seedling's age 'heavy' and 'beautiful' but so is my seedling's name and the color of someone's shoes (brown)\".",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 205,
+  "feature": "personality traits do survive",
+  "claim": "The one thing that worked in Seed: creator-chosen personality types (curt vs gushing) read through the AI dialogue.",
+  "source": "PC Gamer review of Seed, 2026-07-24",
+  "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+  "quote": "Some speak very curtly",
+  "angle": "publishing",
+  "verdict": {
+   "index": 205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Some speak very curtly, indicating they're not really interested in a conversation at all",
+   "note": "Verbatim, framed exactly as the claim's concession: 'I'll say this much: the Seedlings do at least have detectable personality types that come from players' choices during character creation, and those come through in how the AI talks'; the gushing counterpart follows in the same sentence.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 206,
+  "feature": "canon and anachronism pliability",
+  "claim": "LLM NPCs in a Song-dynasty wuxia game discuss ketchup and accept fake pregnancies; players break canon at will.",
+  "source": "PC Gamer on Where Winds Meet",
+  "url": "https://www.pcgamer.com/games/rpg/wuxia-mmo-where-winds-meet-is-full-of-ai-chatbot-npcs-and-people-are-doing-all-the-standard-obscene-stuff-to-them-i-made-him-think-that-my-character-was-pregnant-with-his-child/",
+  "quote": "ketchup wasn't available during the Song dynasty",
+  "angle": "publishing",
+  "verdict": {
+   "index": 206,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ketchup wasn't available during the Song dynasty. Tomatoes weren't known in China back then.",
+   "note": "Verbatim (curly apostrophes on the page), spoken by NPC Zhao Dali. The fake-pregnancy half is the article's own subhead quote: 'I made him think that my character was pregnant with his child, then I demanded child support...'. Justin Wagner, 16 November 2025.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 207,
+  "feature": "robotic but grammatical",
+  "claim": "Nvidia's ACE demo NPC lines were structurally fine yet robotic, with no personality or charm.",
+  "source": "Bradly Shankar, MobileSyrup, 2023-05-29",
+  "url": "https://mobilesyrup.com/2023/05/29/nvidia-player-ai-conversations-tech-demo/",
+  "quote": "they're undeniably robotic",
+  "angle": "publishing",
+  "verdict": {
+   "index": 207,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they're undeniably robotic, not offering any sort of personality or charm",
+   "note": "Verbatim. The 'structurally fine' half immediately precedes it: \"Jin's responses are functionally sound; there's nothing inherently wrong with them in terms of structure or grammar.\" It is the Nvidia/Convai demo (Riva, NeMo, Audio2Face) in a cyberpunk ramen diner; the page does not use the brand name 'ACE'. Bradly Shankar, May 29, 2023 -- matches.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 208,
+  "feature": "NPC memory and identity drift",
+  "claim": "An LLM NPC that forgets its faction or backstory, leaks modern facts into a fantasy setting, or spills quest secrets under manipulation is useless to a designer.",
+  "source": "Gameindustry.com, 'The Hard Problem of AI NPCs', 2026-05-18",
+  "url": "https://www.gameindustry.com/news-industry-happenings/the-hard-problem-of-ai-npcs-why-character-consistency-matters-more-than-intelligence/",
+  "quote": "forget their faction or personal backstory",
+  "angle": "publishing",
+  "verdict": {
+   "index": 208,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "becomes completely useless to a game designer if they suddenly forget their faction or personal backstory",
+   "note": "Verbatim. All three failure modes are on the page: faction/backstory amnesia; 'A character must not reveal the main secrets of the final quest after a couple of leading or blatantly manipulative phrases'; and 'revealing modern facts in a fantasy or futuristic setting'. Bylined 'Special to GiN', May 18, 2026 -- date matches.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
+ },
+ {
+  "index": 209,
+  "feature": "background chatter is load-bearing",
+  "claim": "Barks, journals and ambient NPC lines are the backbone of a game's sense of place; generic filler makes the whole world feel shallower.",
+  "source": "Harvey Randall, PC Gamer op-ed",
+  "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+  "quote": "disconnected, jilted, random stories to tell you",
+  "angle": "publishing",
+  "verdict": {
+   "index": 209,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI-generated NPCs with disconnected, jilted, random stories to tell you",
+   "note": "Verbatim. The backbone wording is explicit: 'Combat barks can characterise an enemy faction, journal entries can flesh out a culture' and 'they're the backbone on which the rest of' the script rests; plus 'causes Starfield to feel shallower as a result'. Harvey Randall, published 15 August 2026.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  }
  }
 ]

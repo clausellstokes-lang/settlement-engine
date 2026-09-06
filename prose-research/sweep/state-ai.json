@@ -3425,6 +3425,111 @@
    "trueWording": "Perfectly confident, convincing-sounding writing that just makes no sense at all.",
    "note": "No quote was supplied. Verified in Dragonfree's post #5 (attribution correct): 'I'm so amused by the AI deciding that Nox had four different contingency plans based on the idea that he'd get a Luxray as a starter (if they're all based on the same singular assumption, what makes them four different contingency plans?) and none for any other possibility, only for it to turn out he's actually getting his starter from a lab that gives out Johto starters'. The generated excerpt ('He'd built four contingency branches off that single point. He had built zero contingency branches off anything else.') was posted by Flyg0n; Dragonfree supplies the premise-tracking analysis.",
    "fromFile": "verdicts-ai-i180-194.json"
+  },
+  "195": {
+   "index": 195,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "include Marcus, Marcus Webb, Sarah Chen, the last name Chen",
+   "note": "Author's-note tell list: 'Marcus Webb, Sarah Chen' is verbatim and contiguous. Same bullet adds \"Claude also generates '47' for many random numbers -- times will sometimes end with :47\" and \"forget or confuse canon names\"; a separate 'Incorrect canon details' bullet covers the rest. Every element of the claim is on the page.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "196": {
+   "index": 196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Whitney, with startling gentleness for someone who'd been arguing about tea infusion times ninety seconds earlier",
+   "note": "Appears twice: in the AI-generated sample fic posted by Flyg0n, and re-quoted in a 'Flyg0n said:' blockquote whose reader commentary makes the whiplash point -- 'She was getting so heated over boiling or steeping tea... that I thought she was an inherently terrifying and cruel person.' Attribution to Flyg0n is correct.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "197": {
+   "index": 197,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "over-represented lexical patterns in LLM outputs",
+   "note": "ADVERSARIAL DOWNGRADE. 'heart pounding chest' IS verbatim on the repo page, but only as a throwaway illustration of what a trigram is: 'Trigrams (three-word combinations not including stop-words, e.g., heart pounding chest)'. The three words the claim names -- fluorescent, humming, particular -- appear ZERO times on the GitHub page; they come from the Thousand Roads thread's sample text (fluorescent x8, humming x4 there). The repo supports only the mechanism half: 'Analyze a model's outputs for repetitive words, bigrams, trigrams... and slop scores' and 'Cluster models based on slop profile similarity'. The quote does not evidence the claim attached to it.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "198": {
+   "index": 198,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "she'd started to receive almost identical query letters that used the same voice, language and content",
+   "note": "Verbatim. The 'even when manuscripts look human' half is explicit: 'this was happening even when the manuscripts/illustrations being submitted appeared to be 100% made by humans.' Byline Naomi Jones and James Jones, Mar 09, 2026 -- matches. The post is partly paywalled but the quoted passage sits above the paywall.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "199": {
+   "index": 199,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's called the uncanny valley for a reason: it appears real but it isn't",
+   "note": "Verbatim (curly apostrophe on the page). All three sub-claims confirmed: 'it did comp me to a writer I'd never heard of, let alone represented'; 'What it failed to do was provide any kind of hook for the book'; and the uncanny-valley framing. Kate Nash, Feb 23, 2026 -- matches.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "200": {
+   "index": 200,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the results hit a 3/10 at best",
+   "note": "Verbatim inside Adam Smith's quoted Reddit comment. 'Even my worst first drafts -- and there are a LOT of them -- are at least a 4/10' confirms 'below his own worst drafts'; \"'how does generated placeholder text benefit development over simple stub text' -- it doesn't\" confirms the placeholder half. The body calls him writing director; the headline says head writer. Ted Litchfield, 10 January 2026.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "201": {
+   "index": 201,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a by turns smarmy and sycophantic tone that I find utterly repulsive",
+   "note": "Verbatim, and it is Litchfield's own aside rather than Smith's: 'Whether it's Grok, Claude, or ChatGPT, people can never seem to get the genAI stink off'. The editing-cost half is the next sentence: 'At a certain point, editing bad writing is just more work than starting from scratch.'",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "202": {
+   "index": 202,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the practice of filling up space with completely unnecessary words",
+   "note": "Verbatim. The eighteen example is on the page: \"you don't need to then give the age of eighteen a bunch of nonsensical attributes, such as that it's a 'heavy, beautiful number'\". Christopher Livingston, published 24 July 2026 -- date matches.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "203": {
+   "index": 203,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'How many years have you lived?' is also another indication of an AI that's trying way too hard",
+   "note": "Verbatim, twice -- once as seedling dialogue, once in the critique. The 'alive-sounding' framing is explicit: 'You don't have to rephrase simple questions to sound alive!'",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "204": {
+   "index": 204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not as shallow as a full conversation that contains no actual meaning",
+   "note": "Verbatim. The vibe-adjective list is on the page: \"'heavy' and 'beautiful' and 'iconic' and 'vibes' are words that come up constantly in Seed: not only is my seedling's age 'heavy' and 'beautiful' but so is my seedling's name and the color of someone's shoes (brown)\".",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "205": {
+   "index": 205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Some speak very curtly, indicating they're not really interested in a conversation at all",
+   "note": "Verbatim, framed exactly as the claim's concession: 'I'll say this much: the Seedlings do at least have detectable personality types that come from players' choices during character creation, and those come through in how the AI talks'; the gushing counterpart follows in the same sentence.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "206": {
+   "index": 206,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ketchup wasn't available during the Song dynasty. Tomatoes weren't known in China back then.",
+   "note": "Verbatim (curly apostrophes on the page), spoken by NPC Zhao Dali. The fake-pregnancy half is the article's own subhead quote: 'I made him think that my character was pregnant with his child, then I demanded child support...'. Justin Wagner, 16 November 2025.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "207": {
+   "index": 207,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they're undeniably robotic, not offering any sort of personality or charm",
+   "note": "Verbatim. The 'structurally fine' half immediately precedes it: \"Jin's responses are functionally sound; there's nothing inherently wrong with them in terms of structure or grammar.\" It is the Nvidia/Convai demo (Riva, NeMo, Audio2Face) in a cyberpunk ramen diner; the page does not use the brand name 'ACE'. Bradly Shankar, May 29, 2023 -- matches.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "208": {
+   "index": 208,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "becomes completely useless to a game designer if they suddenly forget their faction or personal backstory",
+   "note": "Verbatim. All three failure modes are on the page: faction/backstory amnesia; 'A character must not reveal the main secrets of the final quest after a couple of leading or blatantly manipulative phrases'; and 'revealing modern facts in a fantasy or futuristic setting'. Bylined 'Special to GiN', May 18, 2026 -- date matches.",
+   "fromFile": "verdicts-ai-i195-209.json"
+  },
+  "209": {
+   "index": 209,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI-generated NPCs with disconnected, jilted, random stories to tell you",
+   "note": "Verbatim. The backbone wording is explicit: 'Combat barks can characterise an enemy faction, journal entries can flesh out a culture' and 'they're the backbone on which the rest of' the script rests; plus 'causes Starfield to feel shallower as a result'. Harvey Randall, published 15 August 2026.",
+   "fromFile": "verdicts-ai-i195-209.json"
   }
  },
  "mergedAt": "see autosave.log"
