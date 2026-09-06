@@ -123,3 +123,12 @@ Hobb's clearest statement is in the 2008 Fantasy Book Critic interview: if she d
 - loss as what is not received; "After a time" compression — Outcalt
 - exhausting reality of travel/hunting — Templeton
 - Lindholm "more to the point" — Val's
+
+## Tail: retry outcomes (Browser pane)
+
+41. Paw Print, "An Interview with Robin Hobb: Character Writing" (Madalen Erez, 2020) · https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/ · interview · true (READ on the third attempt; the pane is shared with a sibling lane that navigated it mid-batch twice) — the sharpest statement of THE DEVICE in Hobb's own words: "The things that happen to us change us"; "If your character is not shaped by their experiences, what is the point of writing about those experiences?"; "We become the product of what has been done to us. Or for us."; physical trauma must leave aftermath ("no one limps or throws up in the corner"; "your brain sloshes around in your skull"); the Fool was outlined as a minor character who "step[s] off stage"; "some characters just have their own ideas about the story". Interviewer's own reading: Hobb is "closer the slice-of-life style than to action", fights "serve the characters instead of the plot".
+42. The Arched Doorway interview (2014) · https://archeddoorway.com/2014/11/24/robin-hobb-interview/ · NOT READ — Cloudflare "Just a moment" challenge on two attempts, eight-second wait included; not bypassed (bot-check rule). Its known content from the search snippet (returning to Fitz's voice "like putting on a really comfortable pair of jeans") is NOT carried as a claim.
+
+Hazard for the chair: the Browser pane is a single shared tab across lanes — a sibling's navigate landed between my navigate and my read twice (once yielding the blog page, once a DuckDuckGo query about Le Guin/Cherryh stylometry). Any pane read must be navigate→read in the SAME batch with no wait, and the captured title checked against the intended URL.
+
+Feature ledger additions: experience shapes character (consequence as identity) · no plot armour, bodily aftermath · product of what has been done to us · character before purpose · slice-of-life over action (interviewer).

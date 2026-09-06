@@ -1,0 +1,1430 @@
+
+===== PAGE 1 =====
+ 1 
+The authors of Middle Earth:   
+Tolkien and the mystery of literary creation 
+Giuseppe Pezzini (University of St Andrews)1 
+ 
+ 
+Who wrote The Lord of the Rings? And the Hobbit? And the Silmarillion?  And in general, 
+who is the author of the large corpus of texts, published or unpublished, which give life to Middle 
+Earth’s imaginarium? To answer ‘J.R.R. Tolkien’ would not only mean to miss a crucial feature 
+of the literary fabric of these books, which associates them with a long-standing literary tradition, 
+from James’ The Turn of the Screw  to Manzoni’s The Betrothed. More importantly, such an 
+answer would mean to overlook an important dimension of Tolkien’s poetics, grounded on his 
+literary convictions, and ultimately rooted in his deep Christian faith. The aim of this article is 
+to try to give a more precise answer to the above  questions, and thereby discuss some of  the 
+literary sophistication of Tolkien’s work s, unjustly obscured by their commercial success,  as 
+well as delve into the depths of his Christian poetics. Before that, however, I need to make a n 
+apology to Tolkien himself, as I suspect that he would not have approved the sort of exercise that 
+I will be carrying out in this work, to disclose what should remain veiled, as an atmosphere to be 
+felt, rather than as an  ‘evidence’ to be scrutinised by  critical analysis. As Gandalf  warns 
+Saruman, “he that breaks a thing in order to find out what it is has left the path of wisdom” (LotR 
+2.2 [Tolkien 2004: 259]). 
+ 
+1. THE HIDDEN META-TEXTUAL FRAME OF MIDDLE EARTH 
+ 
+It is clear that in the writing and editing process Tolkien took care to conceal the identity of 
+the authors of Middle earth  and in general to conceal the object of  this research, which I will 
+henceforth refer to as  the ‘meta-textual frame’ , i.e. the fictional history of composition, 
+transmission and publication of his books 2. Scholars have recently begun to highlight the 
+underlying and unifying meta-textual narrative of Middle Earth and its literary significance (see 
+in particular Nagy 2003, Flieger 2005: 55 –84, Flieger 2007, Nagy 2007, Brljak 2010, Thiessen 
+2014; cf. also Oberhelman 2008, Lee 2014b: 61, Nagy 2014: 112 –6). This article will build on 
+these recent work s, aiming to expand on the literary complexity of the meta -textual frame, as 
+well as to delve its possible meaning and symbolism. This study is  indebted above all to 
+Flieger’s works, with which it has  some points of affinity, especially in its first part. However, 
+it fundamentally disagrees with her scepticism about the possibility of considering the meta-
+textual frame as a ‘substantial structural factor’, rather than a mere ‘authorial conceit’. In this 
+article I will construe narrative elements, such as multiple focalisations and interlaced narratives, 
+cited by Flieger as counter-evidence to the meta-textual frame, as depending on or constructing 
+that very frame, together with the number of explicit hints scattered throughout his published 
+works3. 
+                                                      
+1 I warmly thank Anthony Errington, George Corbett, Stefano Rebeggiani and Roger Sylvester for their helpful 
+comments and criticism. This article was first given as a paper at the Seminar of the Institute for Theology, 
+Imagination and the Arts, University of St Andrews. I thank all participants for their questions and the engaging 
+discussion, as well as the editors of this journal for their kind support and encouragement.  
+2 Much evidence related to this is indeed found in external sources, such as in particular the earlier manuscript drafts 
+of his works collected by Christopher Tolkien in the monumental History of Middle Earth. For instance, in its earlier 
+versions, The Lord of the Rings ended with an epilogue featuring Sam Gamgee writing on and/or reading excerpts 
+from the Red Book to his (numerous) children (cf. Tolkien 1983 –1996: 9.9, Flieger 2005: 77 –80). Similarly, t he 
+Book of Lost Tales includes several unpublished passages openly narrated in the first-person by Frodo (cf. below n. 
+17).  
+3 This article will on ly focus on the ‘published’ meta -textual frame, i.e. on the meta -textual frame  that can be 
+reconstructed on the basis of Tolkien’s published works, including in particular The Lord of the Rings  and The 
+
+===== PAGE 2 =====
+ 2 
+1.1 The Paratext of LotR 
+ 
+In fact, t he most explicit  and comprehensive evidence about the  writing of Tolkien’s works  
+(the ‘meta-textual frame’) is not found in external or unpublished sources, but in The Lord of the 
+Rings itself (henceforth LoTR), both in the paratextual sections (Prologue and Appendixes) and 
+in the main text4. Just before his final journey to the Grey Havens and beyond, the Hobbit Frodo 
+hands over all his possessions to his friend Sam. These include: 
+ 
+LotR 6.9 [Tolkien 2004: 1026–7]  
+“a big book with plain red covers; its tall pages were now almost filled. At the beginning there 
+were many leaves covered with Bilbo’s thin wandering hand; but most of it was written in 
+Frodo’s firm flowing script. It was divided into chapters but Chapter 80 was unfinished, and 
+after that were some blank leaves. The title page had many titles on it, crossed out one after 
+another, so: 
+My Diary. My Unexpected Journey. There and Back Again. And What Happened After. 
+Adventures of Five Hobbits. The Tale of the Great Ring, compiled by Bilbo Baggins from his 
+own observations and the accounts of his friends. What we did in the War of the Ring. Here 
+Bilbo’s hand ended and Frodo had written: 
+ 
+THE DOWNFALL OF 
+THE LORD OF THE RINGS 
+AND THE 
+RETURN OF THE KING 
+ 
+(as seen by the Little People; being the memoirs of Bilbo and Frodo of the Shire, 
+supplemented by the accounts of their friends and the learning of the Wise.) 
+Together with extracts from Books of Lore translated by Bilbo in Rivendell. 
+ 
+This cryptic passage is a mine of informat ion, a  ‘fortunate crack’ giving a glimpse of an 
+elaborate meta-textual frame, which underlies the novel and indeed the whole imaginarium of 
+Middle Earth, pivoting on this ancestral ‘big book with plain red covers ’, or more simply ‘ Red 
+Book’5.  
+ 
+1.2 The first author of the Red Book: Bilbo Baggins  
+  
+From this fictional paratext we learn that Bilbo Baggins is the first writer of the ‘Red Book’, 
+authoring its opening text; although the heading ‘the Hobbit’ does not appear in  the list of 
+provisional titles “crossed out one after another” by Bilbo, there are few doubts that  the ‘many 
+leaves covered with Bilbo’s thin wandering hand ’ form the textual archetype of  what is now 
+                                                      
+Hobbit, but also The Silmarillion  and The Adventures o f Tom Bombadil . Before its publication, the Silmarillion 
+originally featured a number of different, elaborate frame narratives, which evolved in time  but consistently 
+involved an (old -)English traveller compiling oral stories, directly recorded from elves living in Tol Eressëa (cf. 
+Noad 2000, Flieger 2007). Another variant of this archetypal textual frame is found in Tolkien’s unfinished and 
+unpublished time-fictions, the Lost Road and Notion Club Papers (on which see Flieger 2014).  
+4 This analysis will not consider any meta-textual reference (such as e.g. the famous meta-textual dialogue between 
+Sam and Frodo on the Stairs of Cirith Ungol (LotR 4.8 [Tolkien 2004: 711–13]), but only those that depend on and 
+evoke the underlying frame narrative. 
+5 The paratext also introduces the important epithet ‘of Westmarch’, which refers to the place where the book was 
+preserved by Sam’s descendants, as stated in the Appendixes and Prologue. Cf. LoTR Appendix B: [Sam] comes to 
+the Tower Hills, and i s last seen by Elanor, to whom he gives the Red Book afterwards kept by the Fairbairns.  
+[Tolkien 2004: 1097]; LotR Prologue [Tolkien 2004: 14]: That most important source for the history of the War of 
+the Ring was so called because it was long preserved at Undertowers, the home of the Fairbairns. 
+
+===== PAGE 3 =====
+ 3 
+known as ‘The Hobbit’. Tolkien explicitly confirms that, at the very beginning of the Prologue 
+to LoTR. 
+ 
+LotR Prologue [Tolkien 2004: 1]: 
+Further information [sc. ‘Concerning Hobbits’] will also be found in the selection from the Red 
+Book of Westmarch that has already been published, under the title of The Hobbit. That story 
+was derived from earlier chapters of the Red Book, composed by Bilbo himself, the first Hobbit 
+to become famous in the world at large, and called by him There and Back Again (…) 
+ 
+More indirect hints to Bilbo’s authorship of ‘the Hobbit’ (or rather of his ‘diary’, ‘there and 
+back again’), are also scattered across LoTR itself, normally in the form of references to Bilbo’s 
+‘secret’ book, only read by Frodo and (surreptitiously) by Merry. 
+ 
+LotR 1.5 [Tolkien 2004: 105] 
+“I must be the only one in the Shire, besides you Frodo, that has ever seen the old fellow’s secret 
+book .’ ‘You have read his book!’ cried Frodo. ‘Good heavens above! Is nothing safe?’ ‘Not too 
+safe, I should say,’ said Merry. ‘But I have only had one rapid glance, and that was difficult to 
+get. He never left the book about. I wonder what became of it. I should like another look.(…) 
+Have you got it, Frodo?’ ‘No. It was not at Bag End. He must have taken it away.’ 
+ 
+There is even a direct quote from the Hobbit, explicitly ascribed to Bilbo. 
+ 
+LotR 2.1 [Tolkien 2004: 225] 
+That house was, as Bilbo had long ago reported, ‘a perfect house, whether you like food or sleep 
+or story-telling or singing, or just sitting and thinking best, or a pleasant mixture of them all’. [= 
+Hobbit 3]. 
+ 
+There is an event from the Hobbit (or rather from Bilbo’s diary) that receives particular meta-
+textual attention in the LoTR, which is Bilbo’s narrative of the finding of the ring and his escape 
+from Gollum’s cave. In several points it is said that two variants of this narrative existed: a ‘fake’ 
+one told by Bilbo to the dwarves at the time of the event and eventually written down in his book, 
+according to which the ring was given by Gollum to him as a present6; a second, accurate one, 
+revealed only to his closest friends and eventually to all members of the Council of Elrond, which 
+is essentially the version one can now read in Chapter 5 of the Hobbit (‘Riddles in the Dark’)7. 
+According to Tolkien’s meta-textual frame, this second version remained at oral stage for a long 
+tome, and was not included in the Red Book. And yet, it was eventually written down, as stated 
+in the Prologue to the LoTR: 
+ 
+LotR Prologue [Tolkien 2004: 13]  
+This account Bilbo set down in his memoirs, and he seems never to have altered it himself, not 
+even after the Council of Elrond. Evidently it still appeared in the original Red Book, as it did in 
+several of the copies and abstracts. But many copies contain the true account (as an alternative), 
+derived no doubt from notes by F rodo or Samwise, both of whom learned the truth, though they 
+seem to have been unwilling to delete anything actually. 
+                                                      
+6 Cf. Cf. LotR 1.1 [Tolkien 2004: 40] ‘Which story, I wonder,’ said Gandalf. ‘Oh, not what he told the dwarves and 
+put in his book,’ said Frodo. ‘He told me the true story soon after I came to live here. He said you had pestered him 
+till he told you, so I had better know too. “No secrets between us, Frodo,” he said; “but they are not to go any 
+further. It’s mine anyway.”’ ‘That’s interesting,’ said Gandalf. ‘Well, what did you think of it all?’ ‘If you mean, 
+inventing all that about a “present”, well, I thought the true story much more likely, and I couldn’t see the point of 
+altering it at all’. 
+7 Cf. LotR 2.2 [Tolkien 2004: 249] ‘[…] I will now tell the true story, and if some here have heard me tell it 
+otherwise’ – he looked sidelong at Glóin – ‘I ask them to forget it and forgive me’. 
+
+===== PAGE 4 =====
+ 4 
+ 
+What is thus the point of this double version, which accordingly resulted in a textual variance? 
+First, from a narrative point of view, the existence of a ‘fake’ version of the story helps to shroud 
+the ring with a shadow of deception and evil, and to characterize his finder Bilbo as haunted by 
+a morbid obsession to justify his ownership8. This is, however, only a post-event exploitation of 
+something that is first of all a real fact. The two aforementioned narratives do exist, and firstly, 
+in the real or ‘primary’ world (to use Tolkien’s terminology). In fact, the former narrative is the 
+one found in the first edition of The Hobbit (1937) whereas the second is the one  printed from 
+its second edition onwards, which resulted from the revisions Tolkien made in 1951 in order to 
+harmonise The Hobbit with the forthcoming LoTR.9 We can thus begin to introduce a key feature 
+of Tolkien’s meta-textual frame: real, primary literary events or features (such as the revision of 
+a chapter  of The Hobbit ’s first edition ) are symbolically (and covertly) expressed in  the 
+secondary world , as narrative elements  (a lie engendered by the ring’s corrupt ing power 
+originated as a variance in the fictional transmission of the texts). I will come back to this point 
+later on, since the whole meta-textual frame can be described in similar terms.  
+ 
+1.3 The second author of the Red Book: Frodo Baggins  
+ 
+With its reference to ‘notes by Frodo’, the above passage introduces the second important 
+author of the Red Book, the hobbit Frodo. The paratext of LoTR indeed reveals that Frodo wrote 
+the main text contained in the Red Book (“most of it was written in Frodo’s firm flowing script”), 
+i.e. the account of the War of the Ring 10. Moreover, according to  Frodo’s intention, this 
+secondary text would form a unity (“the memoirs of Bilbo and Frodo”) with the other, preceding 
+text written by Bilbo. In contrast with Bilbo’s authorship, there are not many explicit references 
+to Frodo’s authorial role  in LoTR; nevertheless, his authorial role is often foreshadowed or 
+alluded to. In his first visit to Bree, for instance, Frodo introduces himself as a writer:  
+ 
+LotR 1.9 [Tolkien 2004: 155]  
+“he was thinking of writing a book (at which there was silent astonishment), and that he and his 
+friends wanted to collect information about hobbits living outside the Shire, especially in the 
+eastern lands.” 
+ 
+And this self-presentation is realized on his way back, at the end of the book, where it becomes 
+an allusive reference to the actual writing of his account of the War during his final years in the 
+Shire11. 
+ 
+LotR 6.7 [Tolkien 2004: 995]  
+Bree memories being retentive, Frodo was asked many times if he had written his book. ‘Not yet,’ he 
+answered. ‘I am going home now to put my notes in order.’ He promised to deal with the amazing 
+events at Bree, and so give a bit of interest to a book that appeared likely to treat mostly of the remote 
+and less important affairs ‘away south’. 
+                                                      
+8 Cf. LoTR 1.1 [Tolkien 2004: 34]  “What is it all about? It is mine isn’t it? I found it, and Gollum would have killed 
+me, if I hadn’t kept it. I’m not a thief, whatever he said.” 
+9 For a comparison between the two versions cf. http://www.ringgame.net/riddles.html (accessed 20th September 
+2017). 
+10 Given its heading and content, this text  seems to correspond to what is now known  as The Lord of the Rings, 
+although the two titles are not identical (a detail to which I will return) 
+11 Frodo began and concluded this writing activity,  both editorial and authorial, during his final couple of years in 
+the Shire (1420 –1). Cf. LotR 6.9 [Tolkien 2004: 1027] When the labours of repair had all been planned and set 
+going he took to a quiet life, writing a great deal and going through all his notes. ‘Why, you have nearly finished it, 
+Mr. Frodo!’ Sam exclaimed. ‘Well, you have kept at it, I must say.’ ‘I have quite finished, Sam,’ said Frodo. 
+
+===== PAGE 5 =====
+ 5 
+ 
+One might thus be tempted to  conclude that the author of the Hobbit is Bilbo, and that the 
+author of the LoTR is Frodo: Tolkien’s meta-textual frame, however, is much more complex. It 
+is not obvious at all that the two archetypal texts of the Red Book (‘Bilbo and Frodo’s memoirs’) 
+neatly coincide with their ‘real’ counterparts, The Hobbit and The Lord of the Rings , nor that 
+Bilbo and Frodo are their only two respective authors.  
+ 
+1.4 Bilbo’s extended and incomplete authorial role 
+ 
+First, there are plenty of references in the novel to the incomplete status of the first text, Bilbo’s 
+diary, the supposed source of ‘The Hobbit’. At the beginning of LoTR, before his departure from 
+Rivendell, Bilbo reveals that he has still to finish his book: 
+ 
+LotR 1.1 [Tolkien 2004: 32] 
+‘[…] I can finish my book. I have thought of a nice ending for it: and he lived happily ever after 
+to the end of his days.’  
+ 
+Despite Bilbo’s ambitions , his diary is still  incomplete at the time of the Council of Elrond , 
+after several years spent by Bilbo in Rivendell. 
+ 
+LotR 2.1 [Tolkien 2004: 269] 
+‘[…] Don’t adventures ever have an end? I suppose not. Someone else always has to carry on 
+the story. Well, it can’t be helped. I wonder if it’s any good trying to finish my book?’ 
+ 
+LotR 2.2 [Tolkien 2004: 269] 
+‘[…] I was very comfortable here, and getting on with my book. If you want to know, I am just 
+writing an ending for it . I had thought of putting: and he lived happily ever afterwards to the 
+end of his days. It is a good ending, and none the worse for having been used before. Now I shall 
+have to alter that: it does not look like coming true; and anyway there will evidently have to be 
+several more chapters, if I live to write them. It is a frightful nuisance. When ought I to start?’ 
+ 
+LotR 2.2 [Tolkien 2004: 277] 
+Then Bilbo would read passages from his bo ok (which still seemed very incomplete), or scraps 
+of his verses, or would take notes of Frodo’s adventures. 
+ 
+An important  reason for the book’s ‘incompleteness’, as shown by the above passages, is 
+Bilbo’s realisation that ‘the tale went on’, i.e. that someone else (Frodo) was called to ‘carry on 
+the story’: new chapters should have been added  to his fi rst tale, and initially Bilbo considers 
+himself the one charged with that task. That the old hobbit started (or intended) to draft also the 
+initial chapters of LotR is indeed confirmed by the same paratext of  LotR, where Bilbo’s own 
+hand mentions the tale of ‘What Happened after’ the events of his ‘unexpected journey’, 
+compiling ‘from his own observations and the accounts of his friends’. There are  many 
+references in LotR to Bilbo’s wish to add ‘new chapters’ to the previous story, which yet remains 
+‘our story’. 
+ 
+LotR 2.1 [Tolkien 2004: 238] 
+‘I began to wonder if I should live to see your chapters of our story.’ 
+ 
+LotR 2.2 [Tolkien 2004: 249] 
+‘I tried to make a few notes, but we shall have to go over it all again together some time, if I am 
+to write it up. There are whole chapters of stuff before you ever got here!’ 
+ 
+
+===== PAGE 6 =====
+ 6 
+Frodo’s chapters, as Bilbo calls them, are thus part of the same Hobbit story initiated by Bilbo, 
+and written down by him ; at the same time , they belong to a new, second book, including, in 
+Bilbo’s initial intention, the events now recounted in Book 1 of the Fellowship of the Ring, up 
+to Frodo’s arrival in Rivendell. 
+ 
+LotR 2.3 [Tolkien 2004: 273] 
+‘We can have many a good talk. What about helping me with my book,  and making a start on 
+the next? Have you thought of an ending?’ 
+ 
+LotR 2.3 [Tolkien 2004: 278] 
+‘I should like to write the second book, if I am spared.’ 
+ 
+Thanks to Gandalf’s explicit warning, Bilbo realises, however, that it is too soon to think of an 
+ending for this second book , and that the new story is only at its beginning: this is not just a 
+second book, but a real sequel, and Frodo’s  journey to Rivendell is only  the first step of a 
+long adventure: 
+ 
+LotR 2.2 [Tolkien 2004: 270] 
+‘I should say that your part is ended, unless as a recorder. Finish your book , and leave the 
+ending unaltered! There is still hope for it. But get ready to write a sequel, when they come back.’ 
+ 
+Despite Gandalf’s words , Bilbo’s authorial role is often highlighted  in the LoTR, also in 
+connection with his role as a poet and/or adaptor of Elvish poems12. Moreover, Bilbo continues 
+to be described as the intended ‘recorder’ of the hobbits’ new adventure13. And at the end of the 
+novel, when the victorious Hobbits come back to Rivendell, with the ring destroyed, it is still 
+Bilbo who is supposed to write down the full story of the War of the Ring, ‘compiling’ it from 
+the reports of his friends. 
+ 
+LotR 6.6 [Tolkien 2004: 986]  
+Sitting round the fire they told him in turn all that they could remember of their journeys and 
+adventures. At first he pretended to take some notes; but he often fell asleep; and when he woke 
+he would say: ‘How splendid! How wonderful! But where were we?’ Then they went on with the 
+story from the point where he had begun to nod. 
+ 
+In the end Bilbo did not fulfil his role as recorder: he did not edit his notes nor, apparently, 
+finalize his first book. Both tasks were entrusted to Frodo: 
+ 
+LotR 6.6 [Tolkien 2004: 988]  
+‘I don’t think, Mr. Frodo, that he’s done much writing while we’ve been away. He won’t ever 
+write our story now .’ At that Bilbo opened an eye, almost as if he had heard. Then he roused 
+himself. ‘You see, I am getting so sleepy,’ he said. ‘And when I have time to write, I only really 
+like writing poetry. I wonder, Frodo my dear fellow, if you would very much mind tidying things 
+up a bit before you go? Collect all my notes and papers, and my diary too, and take them wit h 
+you, if you will. Get Sam to help, and when you’ve knocked things into shape, come back, and I’ll 
+run over it. I won’t be too critical.’ ‘Of course I’ll do it!’ said Frodo. 
+ 
+1.5 Frodo and the ‘collective’ narratives of LotR 
+ 
+                                                      
+12 Cf. e.g. LotR 2.3 [Tolkien 2004: 277], quoted above. 
+13 Cf. LotR 6.4 [Tolkien 2004: 956]  ‘You will get almost a chapter in old Bilbo’s book, if ever I get a chance to 
+report to him. ‘And then Frodo will have to be locked up in a tower in Minas Tirith and write it all down. Otherwise 
+he will forget half of it, and poor old Bilbo will be dreadfully disappointed.’  
+
+===== PAGE 7 =====
+ 7 
+Frodo accepts Bilbo’s investiture and will dedicate his last few years in the Shire to writing the 
+account of the war and to ‘tidying up’ Bilbo’s first book. We can thus note that Bilbo’s authorial 
+voice is not the only one in the Hobbit, which was polished up  by Frodo, nor should it be 
+completely discounted from LotR, since this was partly compiled from Bilbo’s notes, including 
+above all those taken at the time of the Council of Elrond, and covering the events up to there14. 
+Frodo’s role in the  writing of the Account of the War is firstly intended  by Bilbo  as an 
+editorial one, aiming to ‘knock things into shape’, i.e. to compile different notes into a coherent 
+narrative: these include Bilbo’s notes, but not just those. As explicitly declared in the paratext,  
+Bilbo and Frodo’s memoirs are ‘supplemented by the accounts of their friends and the learning 
+of the Wise’ (see above). Just like Bilbo, Frodo is thus first of all a ‘compiler’, who puts together 
+the reports and accounts of the characters involved in the story, and above all of the other three 
+hobbits (Sam, Merry and Pipin). 
+ 
+The ‘collective’, ‘compiled’ nature of LoTR is another important feature of the meta-textual 
+frame, which is evoked in the text by many narrative devices. A most common one is the 
+‘remembering’ formula, which presents parts of the narrative ‘as memories’. Cf. e.g. 
+ 
+LotR 1.3 [Tolkien 2004: 82]  
+Pippin afterwards recalled little of either food or drink (…). Sam could never describe in words, 
+nor picture clearly to himself, what he felt or thought that night, though it remained in his memory 
+as one of the chief events of his life.15  
+ 
+Most of the ‘ remembering formulas’ belong to passages in which Frodo is not present, and 
+indeed abound in particular in books three and five of the LoTR, which are narr ated from the 
+perspective of other characters, such as in particular Merry and Pippin 16. All these ‘memories’ 
+should thus be construed as being recalled at a later stage by one of characters, who is reporting 
+to Frodo (and Sam) . There are even some references to such narrative ‘reporting moments’ in 
+the LoTR17.  
+ 
+LotR 6.4 [Tolkien 2004: 955]  
+‘Bless me! But I can see there’s more tales to tell than ours’ ‘There are indeed,’ said Pippin turning 
+towards him. ‘And we’ll begin telling them, as soon as this feast is ended. (…) and they talked deep 
+into the night with Merry and Pippin and Gandalf, and after a while Legolas and Gimli joined them. 
+There Frodo and Sam learned much of all that had happened to the Company after their fellowship 
+was broken on the evil day at Parth Galen by Rauros Falls; and still there was always more to ask 
+and more to tell. 
+ 
+                                                      
+14 I.e. the events now included in the First Book of the Fellowship of the Ring  
+15 Cf. also LotR 1.7 [Tolkien 2004: 128] (…) As far as he could remember , Sam slept through the night in deep 
+content, if logs are contented ; LotR 3.3 [Tolkien 2004: 450] Neither Pippin nor Merry remembered much of the 
+later part of the journey; LotR 3.4 [Tolkien 2004: 463] Often afterwards Pippin tried to describe his first impression 
+of them. LotR 5.2 [Tolkien 2004: 787] Gimli remembered little. 
+16 There are a few cases in which the ‘remembering-formula’ is applied to Frodo himself. Cf. e.g. LotR 2.3 [Tolkien 
+2004: 282] Frodo remembered little of it, save the wind. LotR 2.7 [Tolkien 2004: 359] It was Frodo who first put 
+something of his sorrow into halting words though his memory was stored with many things that others had made 
+before him. Yet when he tried to repeat it to Sam only snatches remained, faded as a handful of withered leaves. 
+LotR 2.8 [Tolkien 2004: 377] The way of Elvish words, they remained graven in his memory, and long afterwards 
+he interpreted them, as well as he could . These references, however, also point to the same meta -textual frame: in 
+coherence with it, the non-omniscient narrator of LoTR has not only to rely on the accounts of the other characters 
+to fill up gaps in the story in which he was not directly involved; he also must recall at a later stage the events that 
+happened to him. 
+17  
+
+===== PAGE 8 =====
+ 8 
+Although there are few allusions to it in the published text, the most important one of these 
+reporting moments took place in Minas Tirith, after Aragorn’s crowning. As Frodo recounts, in 
+a passage not-included in the LoTR, and now printed in Unfinished Tales:  
+ 
+Unfinished Tales [Tolkien 1998: 329] 
+After the crowning we stayed in a fair house in Minas Tirith with Gandalf, and he was very 
+merry, and though we asked him questions about all that came into our minds his patience 
+seemed as endless as his knowledge. I cannot now recall most of the things that he told us; often 
+we did not understand them. But I remember this conversation very clearly.  
+ 
+An interesting feature of this passage is also the first-person narrative. As Christopher Tolkien 
+notes: The ‘He’ of the opening sentence is Gandalf, ‘we’ are Frodo, Peregrin, Meriadoc, and 
+Gimli, and ‘I’ is Frodo, the recorder of the conversation; the scene is a house  in Minas Tirith, 
+after the coronation of King Elessar. The first-person narrative is never used in the LoTR, which 
+always uses the third narrative parson; this fact itself should be related to its intended ‘choral’ 
+nature, meta-textually justified by presenting Frodo as first of all a recorder of accounts. 
+ 
+Together wit h the remembering formulas these reporting moments should be construed as 
+depending on and underpinning the underlying meta -textual frame, as well as justifying  one of 
+the most distinctive features of the narrative fabric of the novel, i.e. the extensive use of multiple 
+focalisations and interlaced narratives18. 
+ 
+1.6 Sam’s authorial voice: narrative/style and the meta-textual frame 
+ 
+Bilbo and Frodo cannot be considered the only , independent authors of the two texts of the 
+Red Book, also because of another important tessera of the meta-textual mosaic. In addition, the 
+Hobbit Sam plays an  important authorial part, both as an editor and reviser  (as declared by 
+Bilbo), but also as a writer of the final chapters of the book. The paratext of LoTR indeed reveals 
+that the manuscript handed over by Frodo to Sam is  unfinished, with the writing of the  few 
+remaining leaves entrusted to Sam to write19.  
+There is also a clue to the exact starting point of Sam’s authorial hand, which is the number of 
+his supposedly unfinished chapter (80). Since the Hobbit  includes 19 chapters  and LoTR 63 
+chapters, one can infer that the final chapter of the novel, i.e. the one including the paratext, is 
+the 81st, of the Red Book and thus that the unfinished 80 th chapter is the previous one, ‘The 
+Scouring of the Shire’. More than that cannot be said  with certainty, although I am inclined to 
+think that Frodo’s hand is supposed to conclude with the Horn-cry of Buckland (Awake! Awake! 
+Fear, Fire, Foes! Awake! Fire, Foes! Awake!), right after Sam’s departure to Cotton’s farm and 
+before the battle properly begins. In fact, what follows is mostly told from Sam’s perspective20. 
+Moreover, in contrast, with Frodo’s leading part in the first part of the chapter21, Frodo’s role in 
+                                                      
+18 On interlaced narratives, their nature, ancestry and parallels see in particular Rosebury 2003: 27–8, Shippey 2003: 
+chapter 5. 
+19 Cf. LotR 6.9 [Tolkien 2004: 1026–7] It was divided into chapters but Chapter 80 was unfinished, and after that 
+were some blank leaves. (…) ‘I have quite finished, Sam,’ said Frodo. ‘The last pages are for you.’  
+20 Cf. LotR 6.8 [Tolkien 2004: 1007] ‘ Behind him Sam heard a hubbub of voices and  a great din and slamming of 
+doors.’ [ibidem 1008] ‘Sam hurried to the house.’ [ibidem 1014] ‘Into the middle of this talk came Sam, bursting in 
+with his gaffer.’ [ibidem 1016] ‘Even Sam’s vision in the Mirror had not prepared him for what they saw. ’ [ibidem 
+1020] ‘I shan’t call it the end, till we’ve cleared up the mess,’ said Sam gloomily. ‘And that’ll take a lot of time and 
+work.’.  
+21 Cf. LotR 6.8  ([Tolkien 2004:  1001] ‘I am going where I please, and in my own time .’ [ibidem 1003] ‘He won’t 
+be so eager when Mr. Frodo has finished with him ’ [ibidem 1005] ‘Indeed. I am glad to hear of your plans,’ said 
+Frodo. ‘I am on my way to call on Mr. Lotho, and he may be interested to hear of them too. ’ 
+
+===== PAGE 9 =====
+ 9 
+the action explicitly decreases after this point ([ibidem 1016] ‘Frodo had been in the battle, but 
+he had not drawn sword’); Frodo is not interested at all in the battle of Hobbiton (and thus, one 
+should assume, in its narrative). A formal feature of the text (the apparent change of the narrator’s 
+perspective) is thus meta-textually justified by a supposed authorial change in the writing of the 
+text. It is not the only one. Another formal feature related to the meta-textual change of narrator 
+concerns style: in the second part of the chapter, after Merry’s battle cry, one can clearly notice 
+a lowering of register, with plenty of contractions and  analogous colloquial forms and words22, 
+which are characteristically attributed to Sam throughtout the book. To focus on one example: 
+the low-register hypocoristic term ‘lad’, is never used in the LotR except in direct speeches by 
+hobbits or orcs23. The only three real exceptions are found in this chapter, and indeed only in its 
+second half24. These sort of stylistic changes are supposed to reflect the supposed identity of the 
+author of the passage, i.e. the hobbit Sam, whose language is characterised throughout the novel 
+as low-register. 
+There is thus a  concealed correlation between narrative and stylistic features  and the 
+underlying meta-textual frame. This correlation is not only found in these final  chapters, but 
+is a widespread feature of the literary fabric of  the LoTR, discernible above all in its stylistic 
+diversity25. For instance, the first book of the Fellowship of the Rings  displays a considerably 
+lower register than the later books , which is more similar to that of the Hobbit 26. Applying 
+Tolkien’s meta -textual frame, we can link this stylistic feature with the intense presence of 
+Bilbo’s authorial voice in this very book, through the notes taken by him in Rivendell . There 
+would be much to say also on the abundance of ‘light talk’ in the chapters of the story concerning 
+(and allegedly reported by) the hobbits Pippin and Merry, or on the use of authorial empathy and 
+focalisation, but this would be in itself a topic for another work. 
+We can thus sum up the meta-textual narrative reconstructed above in the following way: what 
+are now known as the Hobbit and the Lord of the Rings originally formed a single volume of 81 
+chapters, written by three intermingling  hobbit hands (‘as seen by the little people’) : Bilbo 
+Baggins, who drafted (but did not finalise) the first 19 chapters  (The Hobbit’s archetype), and 
+sketched notes for the following 12 ones  (book 1 of LoTR); Frodo Baggins, who presumably 
+polished up Bilbo’s early chapters, and wrote the main bulk of the text, compiling from Bilbo’s 
+and his own notes, and incorporating the (oral) accounts of his friends, especially his fellow 
+hobbits; Sam Gamgee, who completed chapter 80 of the book, left unfinished by Frodo ,  wrote 
+the final one and perhaps incorporated some minor editorial changes to the whole volume.  
+ 
+1.7 The other volumes of the Red Book and its textual history 
+ 
+This account, already quite elaborate, is still only a small part of the meta-textual frame of 
+Tolkien’s works. First of all, the Red Book did not only consist in the above text of 81 chapters, 
+                                                      
+22 Cf. e.g. LotR 6.8 [Tolkien 2004: 1009] the ruffians can’t come at ’em. 
+23 Cf. e.g. LotR 3.3 [Tolkien 2004: 458] Evidently Mauhúr and his ‘lads’ had been killed or driven off. An Irrelevant 
+exception: Bergil of Minas Tirith is referred to as ‘lad’, but the term here is not hypocoristic.  
+24 LotR 6.8 [Tolkien 2004: 1010] Pippin rode off with half a dozen lads on ponies. [ibidem 1007] Before he got to 
+the lane’s end there was Farmer Cotton with three of his lads, Young Tom, Jolly, and Nick, hurrying towards him. 
+[ibidem 1008] When Sam got back he found the whole village roused. Already, apart from many younger lads more 
+than a hundred sturdy hobbits were assembled with axes. 
+25 On intertextual and intra-textual stylistic variation of Tolkien’s works see recently Turner 2014.  
+26 Tolkien himself often noted that there  is a great stylistic variety in the LoTR, with a general ascending trend of 
+‘heightening’ of the linguistic register while the story proceeds (cf. e.g. Letter 193 I paid great attention to such 
+linguistic differentiation as was possible , LotR Appendix F [ Tokien 2004: 1133 –4]; cf. also Letter 131 on the 
+stylistic differentiation in the Hobbit, (…) in fact (as a critic has perceived) the tone and style change with the 
+Hobbit’s development, passing from fairy-tale to the noble and high and relapsing with the return). 
+
+===== PAGE 10 =====
+ 10 
+but also included ‘ extracts from Books of Lore translated by Bilbo in Rivendell ’27. More 
+information about these ‘books of lore’, abridged by Frodo in the ‘appendix’ to his memoirs, are 
+scattered throughout the LoTR; from these one learns that Bilbo’s  books were three in number 
+and were ‘made at various times’, and they  were given by Bilbo to Frodo  on his last visit to 
+Rivendell.  
+ 
+LotR 6.6 [Tolkien 2004: 986–7]  
+Then he gave Frodo his mithril -coat and Sting, forgetting that he had already done so; and he 
+gave him also three books of lore that he had made at various times, written in his spidery hand, 
+and labelled on their red back: Translations from the Elvish, by B.B. 
+ 
+There are also a couple of references to the original Elvish versions of these translated Books 
+of Lore28, and one of these reveals his very author, Elrond himself. 
+ 
+LotR 2.2 [Tolkien 2004: 242]  
+Then through all the years that followed he traced the Ring; but since that history is elsewhere 
+recounted, even as Elrond himself set it down in his books of lore, it is not here recalled. For it 
+is a long tale, full of deeds great and terrible, and briefly though Elrond spoke, the sun  rode up 
+the sky, and the morning was passing ere he ceased. 
+ 
+These ‘three books of lore’ dealt with the tales from the forging of the ring to the last alliance29, 
+and also with the events of the ‘First Age of the World’, that is, one must conclude, with what is 
+now the content of the Silmarillion 30. The Red Book  thus also included Silmarillion material, 
+originally authored by Elrond,  but abridged, translated, and edited  by Bilbo 31. Given its 
+‘translated’ and ‘abridged’ nature, one must infer that this material was only an approximate 
+rendering of the original version, and contained  simplifications and misunderstandings , as 
+Tolkien himself points out32. I will come back to this point in the second part of my analysis.  
+We have thus added another important author of the Red Book, the elf Elrond himself, as well 
+as another important facet of Bilbo’s role , that of translator. But the meta -textual frame is not 
+complete yet, since, in Tolkien’s vision, this frame did not only encompass the redaction of the 
+Red Book, but its subsequent textual history. In this case there is no need for reconstructions, as 
+this textual history is sketched out by Tolkien in a detailed note appended to the Prologue of the 
+LoTR (the ‘Note on the Shire Records’)33. Tolkien’s account is intricate but clear, and can here 
+                                                      
+27 Bilbo’s role as a ‘translator’ of Elvish poetry is also often alluded to in the work and some of his translated poems 
+are even recited by characters in parts of the story: cf. e.g. LotR 1.11 [Tolkien 2004: 186] It is part of the lay that is 
+called The Fall of Gil -galad, which is in an ancient tongue. Bilbo must have translated it. I never knew that.  It is 
+plausible that these oral texts were imagined to be eventually included in Bilbo’s ‘Translations from Elves’.  
+28 LotR 2.3 [Tolkien 2004: 277] Aragorn and Gandalf (…) pondered the storied and figured maps and books of 
+lore that were in the house of Elrond.  
+29 I.e. the content of the very last chapter of the Silmarillion (‘Of the Rings of Power and the Third Age’)  
+30 Cf. LotR Prologue [Tolkien 2004: 15] These three volumes were found to be a work of great skill and learning in 
+which, between 1403 and 1418, he had used all the sources available to him in Rivendell, both living and written. 
+But since they were little used by Frod o, being almost entirely concerned with the Elder Days , no more is said of 
+them here. One can thus reasonably link Bilbo’s Books of Lore  with the Silmarillion, even if it would be too far -
+fetched to make them coincide, also given the fact that the Silmarillion was published posthumously. 
+31 As noted by Nagy (2014: 112), in his published works Tolkien therefore modified the original frame -narratives 
+of the Silmarillion (cf. n.1) and made this ‘the work of Bilbo Baggins, collecting and translating Elvish Texts  in 
+Elrond’s house in Rivendell’.   
+32 On this cf. Agøy 2007, 144–5, Nagy 2014: 112–3. 
+33 Cf LotR Prologue [Tolkien 2004: 14–15] This account of the end of the Third age is drawn mainly from the Red 
+Book of Westmarch. That most important source for the history of the War of the Ring was so called because it was 
+long preserved at Undertowers, the home of the Fairbairns, Wardens of the Westmarch. It was in origin Bilbo’s 
+private diary, which he took with him to Rivendell. Frodo brought it back to the Shire, together with many loose 
+
+===== PAGE 11 =====
+ 11 
+be paraphrased as such: Frodo’s original book was later appended by four supplemental volumes, 
+the full three books of Bilbo’s translations from Elves, and a final volume  featuring 
+miscellaneous material, written or compiled at different times by a number of authors,  which 
+includes Merry Brandibuck and Gimli the Dwarf . The original Red Book was lost, but many 
+copies were made of it, partial or complete, including in particular  a full 5 -volume edition 
+(‘Thain’s Book’), which was emended, annotated and supplemented in Minas Tirith. The LoTR 
+is derived from a copy of this edition,  incorporating Frodo and Sam’s chapters from the 
+first volume and ‘selections’ from the fifth volume34, including the Tale of Aragorn and Arwen, 
+redacted in Gondor by Faramir’s grandson. 
+Just as the early part  of the meta -textual frame is evoked by  narrative and stylisti c changes, 
+also this latter part is duly  harmonised in the text  through the use of formal features ; the 
+appendixes are indeed full of scribal glosses, later notes, and editorial references that are meant 
+to match the elaborate textual history detailed in the Note on the Shire Records35. 
+                                                      
+leaves of notes, and during S.R. 1420 –1 he nearly filled its pages with his account of the War . But annexed to it 
+and preserved with it, probably in a single red case, were the three large volumes, bound in red leather, that Bilbo 
+gave to him as a parting gift. To these four volumes there was added in Westmarch a fifth containing commentaries, 
+genealogies, and various other matter concerning the hobbit members of the Fellowship. The original Red Book 
+has not been preserved, but many copies were made, especially of the first volume, for the use of the descendants of 
+the children of Master Samwise. The most important copy, however, has a different history. It was kept at Great 
+Smials, but it was written in Gondor, probably at the request of the great-grandson of Peregrin, and completed in 
+S.R. 1592 (F.A. 172). Its southern scribe appended this note: Findegil, King’s Writer, finished this work in IV 172. 
+It is an exact copy in all details of the Thain’s Book in Minas Tirith. That book, was a copy, made at the request of 
+King Elessar, of the Red Book of the Periannath, and was brought to him by the Thain Peregrin when he retired to 
+Gondor in IV 64. The Thain’s Book was thus the first copy made of the Red Book and contained much that was later 
+omitted or lost. In Minas Tirith it received much annotation, and many corrections, especially of names, words 
+and quotations in the Elvish languages ; and there was added to it an abbreviated version of those parts of The 
+Tale of Aragorn and Arwen which lie outside the account of the War. The full tale is stated to have been written by 
+Barahir, grandson of the Steward Faramir, some time after the passing of the King . But the chief importance of 
+Findegil’s copy is that it alone contains the whole of Bilbo’s ‘Translations from the Elvish’. These three volumes 
+were found to be a work of great skill and learning in which, between 1403 and 1418, he had used all the sources 
+available to him in Rivendell, both living and written.  But since they were little used by  Frodo, being almost 
+entirely concerned with the Elder Days, no more is said of them here. Since Meriadoc and Peregrin became the 
+heads of their great families, and at the same time kept up their connexion with Rohan and Gondor, the libraries at 
+Bucklebury and Tuckborough contained much that did not appear in the Red Book.  In Brandy Hall there were 
+many works dealing with Eriador and the history of Rohan. Some of these were composed or begun by Meriadoc 
+himself, though in the Shire he was chiefly remembered  for his Herblore of the Shire, and for his Reckoning of 
+Years, in which he discussed the relation of the calendars of the Shire and Bree to those of Rivendell, Gondor, and 
+Rohan. He also wrote a short treatise on Old Words and Names in the Shire, showing special interest in discovering 
+the kinship with the language of the Rohirrim of such ‘shire-words’ as mathom and old elements in place names. At 
+Great Smials the books were of less interest to Shire -folk, though more important for larger history. None of them 
+was written by Peregrin, but he and his successors collected many manuscripts written by scribes of Gondor: mainly 
+copies or summaries of histories or legends relating to Elendil and his heirs. Only here in the Shire were to be found 
+extensive materials for the history of Númenor and the arising of Sauron. It was probably at Great Smials that The 
+Tale of Years was put together, with the assistance of material collected by Meriadoc. Though the dates given are 
+often conjectural, especially for the Second  Age, they deserve attention. It is probable that Meriadoc obtained 
+assistance and information from Rivendell, which he visited more than once . 
+34LotR Appendix A [Tolkien 2004: 1033] ‘only selections from them [the sources], in most places much abridged, 
+are here presented’. 
+35 Narrative formulas, for instance, imply that parts of the Appendi ces are authored by Hobbits (presumably living 
+in Brandibuck Hall or the Great Smials). Cf. e.g. LotR Appendix A [Tolkien 2004: 1039] ‘as they had done for long 
+years before we came to the Shire’. Other references instead point to Gondor and to Findegil, the scribe of the king 
+(cf. e.g. ibidem 1043 n. 1 The sceptre was the chief mark of royalty in Númenor, the King tells us; ibidem 1050 n. 
+1 as we have learned from the King). In general, a complex system of diacritics, explained by Tolkien in the opening 
+section, is used to evoke the variety of ‘sources’ available to the ‘compiler’ of LoTR. Cf. LotR Appendix A [Tolkien 
+2004: 1033] Actual extracts from longer annals and t ales are placed within quotation marks. Insertions of later 
+date are enclosed in brackets. Notes within quotation marks are found in the sources. Others are editorial.  
+
+===== PAGE 12 =====
+ 12 
+ 
+1.8 The hidden presence: Tolkien’s own authorial/editorial voice 
+ 
+The most important  feature of the  Note, however, is precisely the  presence of Tolkien’s 
+authorial voice, which connects  the meta -textual frame outlined above  with Tolkien’s actual 
+writing of the LoTR (or rather, according to the narrative, compiling and translating). In the above 
+passage, just as in the prologue in general, Tolkien is indeed speaking in his own authorial 
+(hobbit) persona; this is shown by the statement that ‘[t]his account of the end of the Third age  
+is drawn mainly from the Red Book of Westmarch ’ and also by the reference to the publication 
+of the Hobbit, which is said to have been ‘derived from the earlier chapter of the Book’  and 
+above all to have been ‘already published’. What the Note does not say explicitly, but is clearly 
+implied, and indeed underlies the whole meta-textual frame reconstructed above, is that Tolkien 
+is in possession of a manuscript descending from the Red Book, and more specifically of one of 
+the descendants of the ‘Thain’s book’ , allegedly revised in Gondor. This is the point where the 
+meta-textual frame of the LoTR is developed, through Tolkien’s authorial persona, into  a full 
+frame narrative, featuring Tolkien himself, where the primary and secondary planes meet . This 
+narrative is never articulated explicitly by Tolkien, but is hinted at  in several places. First, in 
+Appendix F of the book Tolkien claims to have transcribed the ‘ancient scripts’ and translated 
+their content into English 36. Moreover, there are a few remarks in the LoTR itself where the 
+narrator cannot be Frodo, and presumably not even Sam, but the very compiler of LoTR, i.e. 
+Tolkien himself: 
+ 
+LotR 6.8 [Tolkien 2004: 1016] 
+In consequence, though it happily cost very few lives, it has a chapter to itself in the Red Book, 
+and the names of all those who took part were made into a Roll, and learned by heart by Shire -
+historians. 
+ 
+However, the most explicit reference is hidden in the dust jacket of The Hobbit and the title 
+pages of LotR, in the friezes of runic letters, which respectively transliterate as:  
+ 
+The hobbit or there and back again being the record of a year’s journey made by Bilbo Baggins 
+of Hobbiton, compiled from his memoirs by J.R.R. Tolkien and published by George Allen and 
+Unwin Ltd. (The Hobbit 1937, Dust Jacket) 
+ 
+The Lord of the Rings translated from the Red Book of Westmarch by John Ronald Reuel Tolkien. 
+Herein is set forth the history of the War of the Ring and the Return of the King as seen by the 
+Hobbits (LotR 1954–5, Title Pages) 
+ 
+Besides confirming the ‘Hobbito -centrism’ of the book (see below), this hidden paratextual 
+material reveals that Tolkien considered himself as a ‘compiler’, not an author. This is another 
+important element of the frame narrative of Tolkien’s works, which introduces a further layer of 
+complexity to the (fictional) transmission of the text, and above all associates Tolkien, the author 
+in the primary world, with the authors of his secondary wor ld, also described as ‘compilers’ or 
+‘recorders’. This is not the only quality that Tolkien shares with his fictional authors: the second 
+frieze reveals that just like Bilbo, Tolkien is also, and most importantly, a ‘translator’. Tolkien’s 
+                                                      
+36 Cf. LotR Appendix E [Tolkien 2004: 1113]  The Westron or Common Speech has been entirel y translated into 
+English equivalents. (…) In transcribing the ancient scripts I have tried to represent the original sounds (so far as 
+they can be determined) with fair accuracy, and at the same time to produce words and names that do not look 
+uncouth in modern letters. 
+
+===== PAGE 13 =====
+ 13 
+translating role is in fact obsessively emphasised in both the Hobbit and the LoTR37, as well as 
+in his other writings 38. This is another key feature of the meta-textual frame of LoTR: not only 
+does it add a further stage to its already complex meta-textual history but above all it presents 
+Tolkien’s works (already described as ‘abridgements’ ) as ‘mediated’, ‘approximate’ texts, in a 
+word as ‘translations’.   
+ 
+1.9 Summing up 
+ 
+We can now try to summarise the complex meta-textual frame narrative underlying Tolkien’s 
+works: Tolkien has come into possession of a manuscript  copy of an old book in an ancient 
+language (‘the Westron’),  consisting of miscellaneous accounts about the first ‘Three Ages of 
+this World’ in five volumes. The book originally focused on the end of the Third Age and was 
+written by three contemporary authors of Hobbit race (Bilbo, Frodo, Sam) , but was  soon 
+supplemented by a large bulk of miscellaneous material, of different origin, authorship, and 
+content. Tolkien is now translating extracts of this book into English and  compiling them into 
+separate volumes (the Hobbit and LoTR,  as well as, at least according to this versio n of the 
+frame, the incomplete Silmarillion).  Going back to my opening questions: the Hobbit was 
+originally authored by Bilbo, but was partly emended by Frodo; the LoTR was authored by Frodo 
+and Sam, but incorporated  accounts of Bilbo and several other characters; the Silmarillion (or 
+more precisely its archetype) was written by Elrond, and later translated by Bilbo. All three 
+original works were later heavily  edited, through a process which  included emendation, 
+supplementing, and abridgement , and whose last stage consists in Tolkien’s own compilation 
+and translation. 
+Now that this journey of exploration is over, we still have to deal with several other important 
+questions, no less complex than the ones with which we started. And the first question is: why? 
+Why did Tolkien develop such an elaborate meta -textual frame? And in addition, why did he 
+eventually conceal it, while leaving a large number of hints and traces? This will be the focus of 
+the second part of this article. 
+ 
+2. THE SYMBOLISM OF THE META-TEXTUAL FRAME 
+ 
+                                                      
+37 LotR Appendix E [Tolkien 2004: 1113] The Westron or Common Speech has been entirely translated into English 
+equivalents. (…) In transcribing the ancient scripts I have tried to represent the original sounds (so far as they can 
+be determined) with fair accuracy, and at the same time to produce words and names that do not look uncouth in 
+modern letters. LotR Appendix F [Tokien 2004: 1133]  In presenting the matter of the Red Book, as a history for 
+people of today to read, the whole of the lin guistic setting has been translated as far as possible into terms of our 
+own times. (…) The Common Speech, as the language of the Hobbits and their narratives, has inevitably been turned 
+into modern English. In the process the difference between the variet ies observable in the use of the Westron has 
+been lessened. [ibidem 1134] Translation of this kind is, of course, usual because inevitable in any narrative dealing 
+with the past. It seldom proceeds any further. But I have gone beyond it. I have also transl ated all Westron names 
+according to their senses. When English names or titles appear in this book it is an indication that names in the 
+Common Speech were current at the time, beside, or instead of, those in alien (usually Elvish) languages. Moreover, 
+as stated at the very beginning of the shor t ‘Author’s note’ of the Hobbit:  This is a story of long ago. At that time 
+the languages and letters were quite different from ours of today. English is used to represent the languages.  
+38 Cf. LotR Appendix F.2 (‘on Translation) and e.g. Letter 144 [to Naomi Mitchison, April 1954] For the story has 
+to be told, and the dialogue conducted in a language; but English cannot have been the language of any people at 
+that time. What I have in fact done is to equate the Westron or wide-spread Common Speech of the Third Age with 
+English; and translate everything, including names such as The Shire, that was in the Westron into English terms, 
+with some differentiation of style to represent dialectal differences. (…) The name [Gamgee] is a ‘translation’ of 
+the real Hobbit name, derived from a village (devoted to rope-making) […].   
+ 
+
+===== PAGE 14 =====
+ 14 
+In order to  address these questions, we need first of all to distinguish between two different 
+levels of possible answers. Indeed, Tolkien’s meta-textual frame can and must be explained from 
+two different perspectives, one internal and the other external to the stories. By this I mean that 
+the meta-textual frame is meaningful on two different planes at the same time, the fictional world 
+of the story (the ‘secondary world’, according to Tolkien’s terminology) and Tolkien’s real world 
+(‘the primary world’). Using a key notion of Tolkien’s poetics, we  can affirm that  this meta-
+textual frame is ‘symbolic’, and should be explained as such, i.e. both from a perspective internal 
+to the secondary fictional world, and from one external to it, that  is from the  ‘real world’ 
+perspective. A symbol, in Tolkien’s terms , may be defined as  a piece of truth which is 
+experienced (or experienceable) in the real world  and expressed in a transformed form in  the 
+fictional world39. A couple of quotations from Tolkien’s letters to his son will help to clarify this 
+notion. 
+ 
+(Letter 66, to Christopher Tolkien, May 1944)  
+I sense amongst all your pains (some merely physical) the desire to express your feeling about 
+good, evil, fair, foul in some way: to rationalize  it, and prevent it just festering. In my case it 
+generated Morgoth and the History of the Gnomes. 
+ 
+(Letter 73, to Christopher Tolkien, June 1944)  
+So I took to ‘escapism’: or really transforming experience into another form and symbol, with 
+Morgoth and Orcs and the Eldalie (representing beauty and grace of life and artefact) and so 
+on; and it has stood me in good stead in many hard years since and I still draw on the conceptions 
+then hammered out40.  
+ 
+The words ‘experience’ and ‘feeling’, ‘rationalise’ and ‘express’ are critical: Tolkien does not 
+conceive his work as an intellectual act, consisting in the assertion of pre -existing convictions 
+under the veil of  literary fiction, but rather as the artistic (or ‘sub -creative’, ‘mythological’, 
+‘literary’) expression of non-rationalised experiences. The  expression is ‘artistic’ in the sense 
+that it involves the transformation or codification of experience s within a specific expressive 
+code, i.e., in Tolkien’s case, the  literary code of his novels, which incl udes the aesthetical, 
+narrative, and even linguistic features of Middle-Earth universe.  
+This literary conviction explains Tolkien’s notorious aversion for allegory 41, his passionate 
+apology for  his secondary world ‘in its own right’,  and his persistent prioritising of the 
+‘coherence’ and ‘beauty’ of the Story over its possible ‘allegorical’ meanings.  
+ 
+(Letter 165, To the Houghton Mifflin Co., June 1955)  
+There is a great deal of linguistic matter (…) included or mythologically expressed in the book. 
+It is to me, anyway, largely an essay in ‘linguistic aes thetic’ as I sometimes say to people who 
+ask me ‘what is it all about?’. It is not ‘about’ anything but itself. Certainly it has no allegorical 
+intentions, general, particular, or topical, moral, religious, or political.   
+ 
+(Letter 181, To Michael Straight, January/February 1956) 
+[A story] must succeed just as a tale, excite, please, and even on occasion move, and within its 
+own imagined world be accorded (literary) belief.  (…) something of the teller’s own reflections 
+and ‘values’ will inevitably get worked in. This is not the same as allegory.   
+ 
+                                                      
+39 That is, in Tolkien’s case, the narrative universe of Middle Earth (without the latter being necessarily subsequent 
+to the former). 
+40 All quotations of Tolkien’s letters are from Tolkien 1995b. 
+41 And we might add for ‘metaphors’ and ‘similes’ etc. 
+
+===== PAGE 15 =====
+ 15 
+A full exegesis of these beautiful passages, and a discussion of Tolkien’s underlying concept 
+of sub-creation are not the scope of this work . However, in the light of the se passages one can 
+simply point out that w ithin Tolkien’s framework, a symbol is a narrative element  that is 
+perfectly coherent within the economy of the secondary world, but which  has also a  hidden 
+meaning in the primary wor ld, deriving from its being an artistic expression of  a ‘real’ 
+experience. To give an example, and at the same time  to return to the focus of my talk, let me 
+again refer to the already-mentioned case of the two versions of the  finding of the Ring: within 
+the LotR’s ‘secondary’ world it is perfectly credible (and, indeed, it is ‘necessary’)  that Bilbo 
+should have given a false version of the story to the dwarves, under the corruptive effects of the 
+Ring, and that this should have been  the version that first entered the textual tradition of his 
+diary42. But at the same time, the  alternative versi on of the story actually exists  in the ‘real 
+world’, being in fact the one printed in the first edition of the Hobbit43. This element of the meta-
+textual frame is thus ‘true’ and ‘meaningful’ in both the secondary and the primary reality, that 
+is, in Tolkien’s understanding, it is a symbol. What makes a symbol different from an allegory, 
+in Tolkien’s sense, is that its origin is literary-aesthetic rather than intellectual. Thus the symbol’s 
+significance in the secondary world takes priority over its significance in the primary world: in 
+the example quoted, Tolkien does not intentionally and deliberately introduce the concept of a 
+narrative (and textual) variant in order to reveal a piece of the editorial history of the Hobbit, but 
+simply and primarily to justify the existence of a ‘false’ version of the narrative  in the original 
+Red Book (on which the first edition of The Hobbit was fictionally based) . This meta-textual 
+variance does reflect (and can reveal) in fact a ‘real’ editorial history, but this is not its foremost 
+purpose or starting point , which is rather to add coherence and verisimilitude  within the 
+secondary reality.44 The difference between a symbol and allegory are thus, paradoxically, at the 
+level of realism: a symbol is an allegory that aspires to be ‘accorded literary belief’, that is, which 
+is fully ‘realistic’ according to the reality of the fictional world.  This is also the reason why  a 
+symbol, such as indeed the meta -textual frame  itself, must be  explained first of all from a 
+perspective internal to the secondary reality, as a ‘realistic’ tessera of  Middle Earth’s world. 
+ 
+2.1 The internal function of the meta-textual frame 
+ 
+2.1.1 Realism and the mythopoetic ambition 
+ 
+The double-narrative of the finding of the ring can thus be explained first of all an instance of 
+a necessary, ‘realistic’ element within Tolkien’s universe, and the same can be said, analogically, 
+for all the other features of Tolkien’s meta-textual frame, and indeed for its very existence. The 
+first explanation for the meta -textual frame is thus its necessity within the secondary plane. A 
+coherent story, in order to be ‘real’ and accorded belief, needs a ‘textual history’, and especially 
+a story which claims to be set in the same world as  ours, in an imagined past. The meta-textual 
+frame thus provides first of all internal realism. In this sense it plays a similar role to that of the 
+(aesthetically) ‘invented’ languages of Middle Earth, which, as Tolkien often remarked, aimed  
+                                                      
+42 Since the effects of the ring did not disappear with its destruction. 
+43 Later revised by Tolkien before the publication of the LoTR, and incorporated into it almost by chance.  
+44 On the distinction between Allegory and (symbolic) Story cf. Letter 109 [to Sir Stanley Unwin, July 1947] 
+Allegory and Story converge, meeting somewhere in Truth. So that the only perfectly consistent allegor y is a real 
+life; and the only fully intelligible story is an allegory. And one finds, even in imperfect human ‘literature’, that the 
+better and more consistent an allegory is the more easily can it be read ‘just as a story’; and the better and more 
+closely woven a story is the more easily can those so minded find allegory in it. But the two start out from opposite 
+ends. Letter 131 p. 144 [to Milton Waldman, late 1951] I dislike Allegory – the conscious and intentional allegory 
+– yet any attempt to explain the purport of myth or fairytale must use allegorical language. (And of course, the more 
+‘life’ a story has the more readily will it be susceptible of allegorical interpretations: while the better a deliberate 
+allegory is made the more nearly will it be acceptable just as a story). 
+
+===== PAGE 16 =====
+ 16 
+to give ‘an air of reality’45. The ‘realistic’ function of the meta-textual frame and its ‘necessity’ 
+become even clearer if one takes into account Tolkien’s mythopoetic ambition, i.e. his desire to 
+create a national epic for England, on the model of Homer’s poems, and more recently for him, 
+of Elias Lönnrot’s Kalevala, the Finnish national poem46. 
+The comparison with the Kalevala is illuminating: despite most of Kalevala being his own 
+work, Lönnrot always posed as a mere ‘compiler’ of collective tales, handed over from the distant 
+past and embodying the spirit of Finnish tradition. As we have seen already, Tolkien also (along 
+with Bilbo) described himself  as a compiler of collective tales, and ‘collectiveness’ is a key 
+feature of the ‘meta-textual’ frame of the LoTR47. Moreover, as Flieger explains well, the meta-
+textual frame, featuring a single archetypical book translated by Tolkien at different stage s, 
+allows Tolkien to integrate its works into a unified mythological corpus48. In fact, although most 
+of the meta-textual references are found in the LoTR they often allude to other works, integrating 
+them into the same frame narrative (as discussed below). Moreover, although in fewer numbers, 
+meta-textual references are in fact found also in all its other Middle -Earth-related works: apart 
+from the already-discussed cryptic para-text of the Hobbit, there are several meta-textual hints 
+also in The Silmarilli on49 and The Adventures of Tom Bomba dil50, all referring to the same 
+unifying frame. All these contribute to the ‘internal’ realism of the works,  since, on the model 
+of real mythology 51, they convey a sense of ‘wholeness’ and unity of their underlying 
+‘secondary’ reality. 
+ 
+2.1.2 Stylistic and narrative realism 
+ 
+The ‘realistic’ function of the meta-textual frame is not only valid at a large scale, but it affects 
+the literary fabric of the text, down to the level of its stylistic and narrative features. For instance, 
+the meta-textual frame reflects and justifies the stylistic variety of Tolkien’s works, both intra -
+textually (as already shown) and inter-textually: for instance, there is an evident contrast between 
+                                                      
+45 Letter 15 [to Allen and Unwin, August 1937] The magic and mythology and assumed ‘history’ a nd most of the 
+names (e.g. the epic of the Fall of Gondolin) are, alas!, drawn from unpublished inventions, known only to my 
+family, Mis s Griffiths and Mr Lewis. I believe they give the narrative an air of ‘reality’  and have a northern 
+atmosphere. But I wonder whether one should lead the unsuspecting to imagine it all comes out of the ‘old books’, 
+or tempt the knowing to point out that it does not?; Letter 19 [to Stanley Unwin, December 1937] (…) personally I 
+believe (…) [the names] are good, and a large part of the effect. They are coherent and consistent and made upon 
+two related linguistic formulae, so that they achieve a reality  not ful ly achieved to my feeling by other name -
+inventors (say Swift or Dunsany!).  
+46 On the link between the meta -textual frame and Tolkien’s mythopoetic ambition see recently Flieger 2005: 63, 
+Thiessen 2014: 199–200.  
+47 Both Lönnrot and Tolkien devised a meta -textual narrative frame to emphasise the ‘authentic’ quality of  their 
+works, but one might say that Tolkien is more honest, as he did not expect his readers to believe in  that narrative, 
+but simply to use it as a further means to convey an ‘air of reality’. On the literary (and linguistic) influence of 
+Kalevala on Tolkien’s work see Kahlas-Tarkka 2014. 
+48 Cf. Flieger 2005: 83 –4, in particular (84) “[I]f we are to take Tolkien’s work as he wrote it and as he clearly 
+wanted his audience to read it – as a true myt hology, with all the layering and multiple narrators and overlapping 
+texts and variant versions that characterize mythologies in the real world –then we must allow that, like those real -
+world mythologies, all the parts, even the apparently inconsequential ones, are in in the greater service of the whole. 
+49 Cf. e.g. The Silmarillion [Tolkien 1977:  312] But those who saw the things that were done in that time, deeds of 
+valour and wonder, have elsewhere told the tale of the War of the Ring, and how it ended both in victory unlooked 
+for and in sorrow long foreseen.  
+50 Cf. in particular [Tolkien 2008b: 7] The Red Book contains a large number of verses. A few are included in the 
+narrative of the Downfall of The Lord of the Rings, or in the attached stories and chronicles; many more are found 
+on loose leaves, while some are written carelessly in margins and bl anks. Of the last sort most are nonsense, now 
+often unintelligible even when legible, or half-remembered fragments. 
+51 Lee (2014b: 61) also points out the similarity between the meta -textual frame, especially as regards the fictional 
+history of transmission , and medieval antiquarianism, with which Tolkien was well acquainted thanks to his 
+academic work. 
+
+===== PAGE 17 =====
+ 17 
+the high-flown and archaising  tone of the Silm arillion, the simple, fairy-story-like style of the 
+Hobbit, and the stylistic medley which is used in LoTR. These stylistic variations find a ‘realistic’ 
+justification in the meta -textual frame, and in particular in the identities of the author of the 
+different works, an elf for the S ilmarillion, the down-to-earth hobbit Bilbo for the Hobbit, and 
+the ennobled, ‘elvenized’ Hobbit Frodo for LoTR. Similarly, on the narrative level, the multiple 
+focalisations that can be identified in  different parts of the LoTR match the ‘collectiveness’ of 
+the meta -textual frame,  with Frodo compiling from Bilbo’s notes and the memories of his 
+friends, as we already pointed out. 
+ 
+2.1.3 Hobbito-centrism: narrative and themes 
+ 
+Despite this collectiveness, however, in one important sense the narrative perspective remains 
+the same throughout the book, and this  is that it is  a hobbit perspective , a fact which is aptly 
+justified by the hobbit identity of the book’s author(s) . This is probably the most importa nt 
+‘internal’ function of the meta-textual frame: i.e. to emphasise and justify the ‘hobbito-centrism’ 
+of the book. This Hobbito-centrism is not just a narrative accident, but a fundamental feature of 
+the novel, related to one of its key underlying themes, as Tolkien often repeats in his letters:  
+ 
+(Letter 131 p. 160, to Milton Waldman, late 1951])  
+(…)  But as the earliest Tales are seen through Elvish eyes, as it were, this last great Tale (…) , 
+coming down from myth and legend to the earth, is seen mainly through the eyes of Hobbits: it 
+thus becomes in fact anthropocentric. But (…) through Hobbits, not Men so-called, because the 
+last Tale is to exemplify most clearly a recurrent theme: the place in ‘world politics’ of the 
+unforeseen and unforeseeable acts of will, and deeds of virtue of the apparently small, ungreat 
+forgotten in the places of the Wise and Great.  
+ 
+(Letter 181, to Michael Straight, January/February 1956) 
+[The structure of the narrative] is planned to be ‘hobbito-centric’, that is primarily a study of the 
+ennoblement (or sanctification) of the humble.52 
+ 
+The LoTR is written by a hobbit because the whole book is about hobbits, and more precisely 
+about their ‘ennoblement’ and their contribution to the history of the world. Both these  themes 
+were most dear to Tolkien53. 
+ 
+2.1.4 Merging myth into history: the symbolism of the hobbits (and their narrative) 
+ 
+The ‘hobbito-centrism’ of the book, however, is important not only from a narrative, stylistic 
+and thematic point of view: it also has a crucial (meta-)literary function, that is, using Tolkien’s 
+words, to ‘merge myth into history’. 
+ 
+(Letter 131 p. 144, to Milton Waldman, late 1951) 
+The Hobbit, which has much more essential life in it, was quite independently conceived: I did 
+not know as I began it that it belonged. But it proved to be the discovery of the completion of the 
+whole, its mode of descent  to earth, and merging into ‘history’. As the high Legends of the 
+                                                      
+52 Cf. also Letter 186 [to Joanna de Bortadano, March 1956] This story [Aragorn and Arwen] is placed in an 
+appendix, because I have told the whole tale more o r less through hobbits; and that is because another main point 
+in the story for me is the remark of Elrond in Vol. 1 ‘Such is oft the course of deeds that move the wheels of the 
+world’ (…). 
+53 Cf. e.g. Letter 165 [to the Houghton Mifflin Co., June 1955] There are of course certain things and themes that 
+move me specially. The interrelations between the ‘noble’ and the ‘simple’ (or common, vulgar) for instance. The 
+ennoblement of the ignoble I find especially moving.  
+
+===== PAGE 18 =====
+ 18 
+beginning are supposed to look at things through Elvish minds, so the middle tale of the Hobbit 
+takes a virtually human point of view–and the last tale blends them.  
+ 
+What does Tolkien mean by ‘descend to earth’ and ‘merge into history’? A full answer to this 
+question would require more than one article54. Here I’ll simply say that the Hobbits introduce a 
+point of view with which Tolkien and his readers can identify, that is first of all an 
+‘anthropocentric point of view’, and secondarily the point of view of ‘simple’ hum an beings 
+living in a non -heroic age, like that of Tolkien’s twentieth century England. Tolkien himself 
+often describes himself and (some of) his contemporaries as Hobbits, and even the meta-textual 
+frame implies that the compiler was himself of Hobbit race. The Hobbits are therefore the most 
+symbolic characters of the LoTR in the sense that they  only have a full life  (‘a more essential 
+life’) in both the primary and secondary world; they help the merging of myth and history 
+because they link the secondary with the primary world, that is the mythical universe of Middle 
+Earth, with its elves, gods, and heroes, with Tolkien’s real contemporary world. 
+ 
+2.2 The ‘external’ meaning of the meta-textual frame 
+ 
+This leads me at last to the final part of this article, in which I will investigate the meaning of 
+the meta -textual narratives on the ‘primary  plane’. So far I have only discussed ‘internal’ 
+justifications for the meta-textual frame, which are all somehow related to the  need for internal 
+realism and mythopoetic ambition. But this meta-textual frame is clearly symbolic, and it has a 
+meaning also in the primary, real world,  by being a codified expression of real experience s: to 
+put it simply, what sort of ‘real’ experience is expressed by the meta-textual narrative? 
+ 
+2.2.1 The Hobbit’s intrusion: meta-textual frame and inspiration 
+ 
+The starting point for this de-codification is again the hobbits, or more precisely ‘the Hobbit’. 
+We already read above (Letter 131) that Tolkien considered The Hobbit as  ‘an unexpected  
+discovery’, and this point is often repeated in his letters55. 
+ 
+(Letter 164, to W.H. Auden, June 1955) 
+The Hobbit was originally quite unconnected, though it inevitably got drawn in to the 
+circumference of the greater construction; and in th e event modified it. (…) On a blank leaf I 
+scrawled: ‘In a hole in the ground there lived a hobbit’. I did not and do not know why.  I did 
+nothing about it, for a long time, and for some years I got no further than the production of Thor’s 
+Map.  
+ 
+(Letter 17, to Stanley Unwin, October 1937)  
+I have only too much to say, and much already written, about the world into which the hobbit 
+intruded.   
+ 
+(Letter 257, to Christopher Bretherton, July 1964)  
+The Hobbit was not intended to have anything to do with it. 
+ 
+The origin of the Hobbits and above all their ‘intrusion’ with the world of Middle Eart h were 
+unplanned. Tolkien did not consciously invent the hobbits, but the hobbits’ story, suddenly and 
+unexpectedly, ‘happened to him’, like the discovery of a  mysterious manuscript from a distant 
+past (indeed written by and about Hobbits). The ‘hobbito-centrism’ of the meta-textual frame of 
+LoTR does not simply have narrative, thematic, and literary  connotations, but is connected to a 
+                                                      
+54 On this see in particular Shippey 2003: chapter 3. 
+55 On the ‘unexplained’ inspiration of the Hobbit cf. also Carpenter 1977: 230, Shippey 2003: 65 –70.  
+
+===== PAGE 19 =====
+ 19 
+fundamental experiential reality related to the writing of his stories: it is not Tolkien who decided 
+to write about Hobbits, but it is , from this perspective,  the Hobbits who  decided to make him 
+write about them. Tolkien’s self -description as a ‘compiler’ and ‘translator’ is therefore an 
+accurate, symbolic, expression of his experience as a writer of an ‘unplanned’ story, a story that 
+he discovered rather than  devised or invented .56 This is the first, main ‘external’ (or primary) 
+function of the meta-textual frame: it symbolically expresses the actual history of composition 
+of the works. Just  as the fictional ‘variant narrative’ of the finding of the ring reflect s real 
+‘editorial variants’, so the meta-textual notion of Tolkien’s ‘discovery of a hobbit’s manuscript’ 
+reflects the unplanned ‘inspiration’ of his hobbits’ stories.  
+ 
+2.2.2 Meta-textual frame and composition: the ‘self-unfolding’ of the story  
+ 
+There are other ‘real’ features of Tolkien’s writing history and practice which are symbolically 
+expressed in the book: the description of Bilb o’s writing room in Rivendell, for instance, could 
+equally describe the real Oxford study  where Tolkien drafted his notes and books . Similarly, 
+Bilbo’s tendency to procrastinate his writing and his obsession about the unfinished status of his 
+diary is easily mirrored in real elements of Tolkien’s writing life57. Also, the meta-textual frame, 
+with Bilbo unable to go much beyond the drafting of the initial chapters of the ‘new story’, 
+accurately reflects the actual chronology of the LotR’s composition, with Tolkien lingering over 
+the first chapters of the Fellowship of the Ring58. However, the most important ‘real’ feature of 
+the meta-textual frame is related to the already-mentioned ‘unexpectedness’ of the stories, their 
+‘happening’ as unplanned, independent events.  
+ 
+That Tolkien considered his stories unplanned, is indeed true both at the level of the inspiration, 
+and at each stage of the process of writing. Often Tolkien admitted, for instance, that ‘the story 
+unfolded itself’, without sketches or synopses, as ‘given things’: 
+ 
+(Letter 131 p. 145, to Milton Waldman, late 1951) 
+The mere stories were the thing. They arose in my mind as ‘given’ things, and as they came, 
+separately, so too the links grew. (…): yet always I had the sense of recording what was already 
+‘there’, somewhere; not of ‘inventing’.  
+ 
+(Letter 199, to Caroline Everett, June 1957) 
+From time to time I made rough sketches or synopses of what was to follow, immediately or far 
+ahead; but these were seldom of much use: the story unfolded itself, as it were. The tying-up was 
+achieved, so far as it is achieved, by constant re-writing backwards. 
+ 
+Similarly, Tolkien declares that he did not have to anticipate knowledge of characters and 
+scenes, before they were actually put in writing59.  
+                                                      
+56 Cf. also Letter 199 [to Caroline Everett, June 1957] though praised for ‘invention’ I have not in fact any conscious 
+memory of sitting down and deliberately thinking out any episode. 
+57 To confirm Tolkien’s belief that symbols are not always necessarily subsequent to their  primary referents, there 
+are even cases in which meta -textual features anticipate reality: for instance, Bilbo’s handing over his  unfinished 
+notes to Frodo closely for eshadow the posthumous editorial  history of the Silmarillion, compiled by his heir 
+Christopher Tolkien (on cf. Nagy 2014: 114 ‘Christopher Tolkien inserted himself in the functional place of Bilbo, 
+thus reinforcing the mythopoeic effect with the keystone that locks the whole into place. The 1977 Silmarillion does 
+everything Bilbo’s work is supposed to do, and ultimately in conception conforms to Tolkien’s governing 
+intention’).  
+58 On the history of composition of Middle Earth see Whittingham 2007. 
+59 Cf. also Letter 247 [to Colonel Worskett, September 1963] There were no Ents in the older stories –because the 
+Ents in fact  only presented themselves to my sight, without premeditation or any  previous conscious knowledge, 
+
+===== PAGE 20 =====
+ 20 
+ 
+Letter 91 [to Christopher Tolkien, November 1944] What happens to the Ents I don’t yet know. 
+It will probably work out very differently from this plan when it gets written, as if the truth comes 
+out then, only imperfectly glimpsed in the preliminary sketch. 
+ 
+There is a metaphor in particular which Tolkien uses to express this experience of his work as 
+something ‘other’. This is the metaphor of the Tree:  
+ 
+(Letter 64, to Christopher Tolkien, April 1944) also I hope to see him [CS Lewis] tomorrow and 
+read some more of ‘the Ring’. It is growing and sprouting again (I did a whole day at it yesterday 
+to the neglect of many matters) and opening out in unexpected ways.  
+ 
+(Letter 241, to Jane Neave, September 1962) 
+I was anxious about my own internal Tree, The Lord of the Rings. It was growing out of hand, 
+and revealing endless new vistas. 
+ 
+This metaphor was later developed by Tolkien into the full narrative of ‘Leaf by Niggle’,  in 
+Tolkien’s words a ‘symbol of Tale -telling60, which can be considered as  Tolkien’s literary 
+manifesto, and which would also deserve a full investigation (unfortunately outside the scope of 
+this article). Tolkien thus considered their stories as  something ‘other’ from him, something 
+‘given’, free from the control of his rational mind. This also explains why he refers to his books 
+as a puzzle, as the work of ‘a strange’ hand, written by ‘someone else’, why he often declares a 
+fundamental ‘ignorance’ about many details of the background story, and also why he indulges 
+in an apparently absurd self-exegesis of or research on his own books:  
+ 
+ 
+(Letter 211, to Rhona Beare, October 1958) 
+I do not ‘know’ all the answers. Much of my own book puzzles me; and in any case much of it 
+was written so long ago (…) that I read it now as if it were from a strange hand. (…) I have not 
+named the colours because I do not know them.  
+ 
+(Letter 294, to Charlotte and Denis Plimmer, February 1967) 
+If it is of interest, the passages that now move me most – written so long ago that I read them 
+now as if they had been written by someone else – are the end of the chapter Lothlórien and the 
+horns of the Rohirrim at cockcrow.  
+ 
+(Letter 59, to Christopher Tolkien, April 1944) 
+I have seriously embarked on an effort to finish my book, and have been sitting up rather late: a 
+lot of re-reading and research required. 
+ 
+2.2.3 Writing as a ‘labour pain’: discovering, recording and reporting (imperfectly) 
+ 
+There is a text in particular in which Tolkien delves into this experience of ‘writing as 
+discovery’, which is a long letter dating to 1955 and written to the poet W.H. Auden, a great 
+admirer of Tolkien’s work. A couple of short extracts deserve to be quoted in full. 
+ 
+(Letter 163, to W. H. Auden, June 1955) 
+The last two books were written between 1944 and 48. That of course does not mean that the 
+main idea of the story was a war -product. (…) It is really given, and present in germ, from the 
+                                                      
+when I came to Chapter IV of Book 3. Just like the narrative of LoTR, also its characters are according to Tolkien 
+largely ‘independent’ from him. 
+60 Cf. Letter 263. 
+
+===== PAGE 21 =====
+ 21 
+beginning, though I had no conscious notion of what the Necromances s tood for (…) nor of his 
+connexion with the Ring. (…) So (…) the essential Quest started at once. But I met a lot of things 
+on the way that astonished me. Tom Bombadil I knew already; but I had never been to Bree. 
+Strider sitting in the corner at the inn was a shock, and I had no more idea who he was than had 
+Frodo. (…) Fangorn Forest was an unforeseen adventure. I had never heard of the House of Eorl 
+nor of the Stewards of Gondor. Most disquieting of all, Saruman had never been revealed to me, 
+and I was as mystified as Frodo at Gandalf’s failure to appear on September 22. I knew nothing 
+of the Palantiri though the moment the Orthanc-stone was cast from the window I recognized it, 
+and knew the meaning of the ‘rhyme of lore’ that had been running in my mind: seven starts and 
+seven stones and one white tree.  (…) I have yet to discover anything about the cats of Queen 
+Beruthiel. (…)  
+ 
+(Letter 163 n., to W. H. Auden, June 1955) 
+I had very little particular, conscious, intellectual, intention in mind at any point. Take the Ents, 
+for instance. I did not consciously invent them at all. The chapter called ‘Treebeard’, from 
+Treebeard’s first remark on p. 66, was written off more or less as it stands, with an effect on my 
+self  (except for labour pains) almost like reading some one else’s work. And I like Ents because 
+they do not seem to have anything to do with me. I daresay something had been going on in the 
+‘unconscious’ for some time, and that accounts for my feeling throughout, especially  when 
+stuck, that I was not i nventing but reporting (imperfectly) and had at times to wait till ‘what 
+really happened’ came through. (…)  
+ 
+It should be clear by now tha t Tolkien’s meta-textual self-representation as a decipherer and 
+translator of someone’s else story has a meaningful correlation with the way Tolkien experienced 
+his real writing experience. In particular, the adverb ‘imperfectly’ in the second passage quoted 
+above is crucial, and helps to introduce another key element of Tolkien’s writing experience, 
+which is symbolically expressed through the meta -textual frame. This is the ‘imperfection’, 
+‘approximateness’ or ‘incompleteness’ of his writing. As shown by the above passages Tolkien 
+conceives his writing as originating in an ‘event’, of which he only presents a ‘report’: Tolkien 
+often points out in his letters that this report is ‘imperfect’ and incomplete, that he has a ‘limited 
+understanding of the things revealed’ to him61. Cf. e.g. 
+ 
+(Letter 187, to H. Cotton Minchin, April 1956)  
+It [the Appendix] will be a big volume, even if I attend only to the things revealed to my limited 
+understanding!  
+ 
+(Letter 109, to Sir Stanley Unwin, July 1947) 
+Yet the chief thing is to complete one’s work, as far as completion has any real sense. 
+ 
+Similarly, on the linguistic side, Tolkien often remarks that the ‘English’ language of his novels 
+is ‘approximate’, a ‘not very accurate’  rendering of the  original (fictional) languages of his 
+texts62. Cf. e.g. 
+ 
+Letter 24 [to the editor of the ‘Observer’, January/February 1938] In any case, elf, gnome, goblin, 
+dwarf are only approximate translations of the Old Elvish names for beings of not quite the same 
+kinds and functions. 
+ 
+                                                      
+61 Cf. also Letter 115 [to Katherine Farrer, June 1948(?)] The long tales out of which it is drawn (by ‘Pengolod’) 
+are either incomplete or not up to date.  
+62 Cf. also Letter 17 [to Stanley Unwin, October 1937] Perhaps my dwarf –since he and the Gnome are only 
+translations into approximate equivalents of creatures with different names and rather different functions in their 
+own world (…). Letter 114 [to Hugh Brogan, April 1948] A history of the Eldalië (or Elves, by a not very accurate 
+translation).  
+
+===== PAGE 22 =====
+ 22 
+A complex philosophy of language and linguistic aesthetics underlies these beliefs, inspired 
+by Owen Barfield’s works, according to which  modern languages of fallen men  are no longer 
+able to express the ‘truth’ of reality.  For this reason, they are no longer ‘beautiful’, having lost 
+the capacity to express with accuracy and precision the beauty of truth63. This is not the place to 
+delve into these theories , of Stoic ancestry : let me only emphasiz e here how the meta-textual 
+frame, presenting Tolkien as a compiler and translator, is perfectly coherent with his experience 
+of writing as a n ‘incomplete’ and ‘linguistically inaccurate’ report of event s that remain  
+inherently ‘ineffable’, ‘mysterious’. 
+But what kind of events are we talking about? If for Tolkien writing is just an ‘imperfect report’ 
+of what ‘really happened’, what is the nature of this ‘happening’? What has happened? There is 
+no easy answer to these questions, but, with a degree of simplification, we might say that a ll 
+these ‘events’ can be grouped together under a single word, Truth: writing, for Tolkien, is an 
+imperfect report or ‘reflection’ of a True event, of Truth64. Cf. e.g 
+(Letter 181, to Michael Straight, January/February 1956) 
+I think that fairy story has its  own mode of reflecting ‘truth’, different from allegory, or 
+(sustained) satire, or ‘realism’, and in some ways more powerful. 
+ 
+And for Tolkien, a man of d eep Christian faith, Truth ultimately  has a divine origin. Truth 
+transcends human understanding and i s inherently something Other, which cannot be fully 
+expressed in the imperfect language of  fallen human beings. This explains both why (human) 
+writing is inherently ‘approximate’65 and why Tolkien’s stories felt to him as ‘written by others’, 
+an ‘unexpected adventure’, ‘a given thing’.  
+ 
+2.2.4 The Mystery of literary creation 
+ 
+In fact, Tolkien would never have claimed to be the origin of the Truth of his stories: as in the 
+meta-textual frame, he was simply a ‘reporter’, ‘a  compiler’ a ‘translator’ of a Story that was 
+given to him. In the story ‘Leaf by Niggle’ it is not Niggle who gives life to his wonderful Tree: 
+he is only able to pain t lifeless and disconnected leaves, with a longing desire for a  vision that 
+he can only imperfectly picture in his mind. The Divine powers who govern his world decide to 
+bless and transfigure this desire, and create a wonderful flourishing Tree out of it. The Tree has 
+thus something divine in it, and yet it also has something of Niggle’s ‘artistic’ ambition.  
+                                                      
+63 For an extensive discussion of Barfield’s influence on Tolkien’s thought and works see especially Medcalf 1999 
+and Flieger 2002. 
+64 Elaborations of Tolkien’s belief that myth and art (must) express ‘truth’ in ‘symbolic’ (i.e. non -explicit, not -
+allegorically) forms are found especially in the lecture ‘On Fairy Stories’ (Tolkien 2008a), originally delivered at 
+the University of St Andrews, and his poem ‘Mythopoeia’ (in Tolkien 2001), which originated in a momentous 
+conversation with C.S. Lewis (on which see recently Phelpstead 2014). Cf. also Letter 131 p. 144 [to Milton 
+Waldman, late 1951] Myth and fairy -story must, as all art, reflect and contain in solution elements of moral and 
+religious truth (or error), but not explicit, not in the known form of the primary ‘real world’  (…) [ibidem 147] I 
+believe that legends and myths are largely made of ‘truth’, and indeed present aspects of it that can only be received 
+in this mode. It would be interesting to investigate why for Tolkien a symbolic Story could be at the same time a 
+non-intellectual event, originating in an aesthetic process of discovery, and at the same time an expression of Truth. 
+I hope to try to give a full answer in another work; here I will only say that the answer lies in Tolkien’s ‘Sacramental’ 
+vision of reality (and art), grounded in his Catholic faith, and the related belief in the unity of beauty and truth.  
+65 It also explains  why the ‘most moving’ stories for Tolkien are the one s untold, that is the ones that are not 
+‘mediated’ by human imperfection; cf. also Letter 96 [to Christopher Tolkien, January 1945] One that moves 
+supremely and I find small difficulty in evoking: the heart-racking sense of the vanished past  (best expressed by 
+Gandalf’s words about the Palantir); and the other the more ‘ordinary’ emotion, triumph, pathos tragedy of the 
+characters. That I am learning to do, as I get to know my people, but it is not really so near my heart, and is forced 
+on me by the fundamental literary dilemma. A story must be told or there’ll be no story, yet it is the untold stories 
+that are most moving.  
+
+===== PAGE 23 =====
+ 23 
+The birth of the Tree, and by analogy of Tolkien’s literary work, originates thus in a mysterious 
+interplay between human and divine  forces. This is the reason why Tolkien always considered 
+literary creation as a ‘mystery’. 
+ 
+(Letter 180, to Mr Thompson, January 1956) 
+I have long ceased to invent (…) though even patronizing or sneering critics on the side praise 
+my ‘invention’): I wait till I seem to know what really happened. Or till it writes itself. (…) I 
+am interested in mythological ‘invention’, and the ‘mystery’ of literary creation (or sub -
+creation as I have elsewhere called it) . (…) I would build on the hobbits. And I saw that I was 
+meant to do it (as Gandalf would say), since without thought, in a ‘blurb’, I wrote for The Hobbit, 
+I spoke of the time between the Elder Days and the Dominion of Men.  
+ 
+Literary creation is a ‘mystery’ because its occurrence and offspring cannot be fully explained, 
+for Tolkien,  in rational terms, as purely human activities , performed by individual human  
+beings66. In fact, Tolkien never thought himself ‘alone’ in his writing, never considered himself 
+as the only author of his stories 67. A funny anecdote exemplifies  this, in which Tolkien reports 
+his fortuitous encounter with an eccentric old fellow:  
+ 
+(Letter 328 [to Carole Batten-Phelps, Autumn 1971]) 
+He was struck by the curious way in which many old pictures seemed to him to have been 
+designed to illustrate LotR long before its time (..) Suddenly he said ‘Of course you don’t suppose, 
+do you, that you wrot e all that book yourself?’ Pure Gandalf! I  was too well acquainted with 
+Gandalf to expose myself rashly, or to ask what he meant. I think I said: ‘No, I don’t suppose so 
+any longer’. An alarming conclusion (…) but not one that should puff any one up who considers 
+the imperfections of ‘chosen instruments’ and indeed what sometimes see ms their lamentable 
+unfitness for the purpose.   
+ 
+It is important to note that Gandalf is for Tolkien a divine entity, a symbol of divine grace 68: 
+in this anecdote it is  thus God himself, divine ‘Truth’, who claims ‘co -authority’ of Tolkien’s 
+stories and reminds him of his purely ‘instrumental’ role. Tolkien often described himself as an 
+instrument of God, and indeed aspired to be such from his very early years: 
+ 
+(Letter 15 [to G.B. Smith, August 1916]) 
+The greatness I meant was that of a great instrument in God’s hands–a mover, a doer, even an 
+achiever of great things, a beginner at the very least of large things.  
+ 
+And eventually Tolkien did consider himself (and was grateful  for) having become an 
+‘instrument in His hands’, chosen to provide, through the beauty of his literature, ‘a drop of water 
+on a barren stony ground’ and offer ‘a tribute to the infinity of God’s potential variety’. 
+ 
+(Letter 87, to Christopher Tolkien, October 1944) 
+                                                      
+66 Letter 328 [to Carole Batten-Phelps, Autumn 1971] The book was written to please me (…) it was written slowly 
+and with great care for detail and finally emerged as a Frameless picture : a searchlight, as it were, on a brief 
+episode of History (…) Very well: that may explain to some extent why it feels like ‘history’: it does not fully explain 
+what has actually happened. (…) I feel as (..) if indeed the horns of Hope had been heard again, as Pippin heard 
+them suddenly at the absolute nadir of the fortunes of the West. But How and Why?  
+67 In fact, within his fiction evil is defined as the  attempt at creating ‘on one’s own’, which is what, for instance, 
+Morgoth, Sauron and Saruman do. Similarly, one of the main causes of the fall of the Noldor in the Silmarillion is 
+the ‘artificer’ Fëanor’s prideful refusal to recognize the divine origin of the beauty of his fateful Silmarils. 
+68 Cf. e.g. Letter 109 [to Sir Stanley Unwing, July 1947] I think that there is no horror conceivable that such 
+creatures [the Hobbits] cannot surmount, by grace (here appearing in mythological forms) combined with a refusal 
+of their nature and reason at the last pinch to compromise or submit.  
+
+===== PAGE 24 =====
+ 24 
+What thousands of grains of good human corn must fall on barren stony ground, if such a very 
+small drop of water should be so intoxicating! But I suppose one should be grateful for the grace 
+and fortune to have allowed me to provide even the drop. 
+ 
+(Letter 153, to Peter Hastings, September 1954)  
+I should have said that liberation ‘from the channels the creator is known to have used already’ 
+is the fundamental function of ‘sub -creation’, a tribute to the infinity of His potential variety,  
+one of the ways in which indeed it is exhibited. 
+ 
+For Tolkien literary creation is thus another form of God’s creative power, channelled through 
+the imperfect ‘code’ of a human instrument. Just like Niggle’s Tree, Tolkien considers his own 
+work as the offspring of his artistic, sub-creative aspiration and the vitalising power of God, an 
+offspring which Tolkien ‘delivered’ with ‘labour pains’. Tolkien’s stories are thus not only his 
+own stories, just as a translation belongs to the translator but primarily to its original author. In 
+fact, the true  Author of  Tolkien’s stories , returning to  our starting question, is not Tolkien 
+himself, but rather an Unnamed Person. 
+ 
+(Letter 192 [to Amy Ronald, July 1956]) 
+The Other Power then took over: the Writer of the Story (by which I do not mean myself) ‘that 
+one ever-present Person who is never absent and never named’.  
+ 
+Why does this person remain Unnamed? The reason is the same  as why Tolkien eventually 
+concealed the meta-textual frame, whose ultimate  (perhaps unintended) function , to put it in a 
+nutshell, is to express in symbolic forms the ‘ Otherness’ and ‘multi-authoriality’ of his stories. 
+It was not Tolkien’s ambition (or vocation) to articulate truth in  the imperfect language  of 
+fallen human beings, but rather to express it in a more unfamiliar, and thus more powerful (and 
+accurate) form69, under the cloak of symbols and stories70. 
+Following Tolkien’s example, let me  thus conclude this article with a story, which I think 
+provides a good symbolic summary  of the journey I have made , and that I  will leave for  the 
+reader to interpret. This is from the Silmarillion and concerns the creation of the dwarves  by 
+Aulë, the semi-god of ‘sub-creation’:   
+ 
+The Silmarillion 2 [Tolkien 1977]    
+Aulë made the Dwarves (…) but fearing that the other Valar might blame his work, he wrought 
+in secret: and he made first the Seven Fathers of the Dwarves in a hall under the mountains in 
+Middle-earth. Now Ilúvatar [God] knew what was done, and in the very hour that Aulë’s work 
+                                                      
+69 On the beneficial ‘unfamiliarity’ of  the symbolic code cf. e.g. Letter 153 [to Peter Hastings, September 1954] I 
+would claim (…) to have as one object the elucidation of truth, and the encouragement of good morals in this real 
+world, by the ancient device of exemplifying them in unfamiliar embodiments, that may tend to ‘bring them home’.  
+70 On Tolkien’s ‘hiding’ effort in his work cf.  e.g. Letter 156 [to Robert Murray SJ, Novembe r 1954] I have 
+purposely kept all allusions to the highest matters down to mere hints , perceptible only by the most attentive, or 
+kept them under unexplained symbolic forms. So God and the ‘angelic’ gods, the Lords or Powers of the West, only 
+peep through in such places as Gandalf’s conversation with Frodo: ‘behind that there was something else at work’ 
+(…) or in Faramirs’ Numenorean grace at dinner. Letter 163 [to W.H. Auden, June 1955] (…) the author, the most 
+modest (or at any rate retiring) of men, whose instinct is to cloak such self-knowledge as he has, and such criticisms 
+of life as he knows it, under mythical and legendary dress (…)  Letter 250 [to Michael Tolkien, November 1963] At 
+any rate as a key to dons’ behaviour. Quite true, but not the whole truth. (The greater part of the truth is always 
+hidden, in regions out of the reach of cynicism). Letter 142 [to Robert Murray SJ, December 1953] The Lord of the 
+Rings is of course a fundamentally religious and Catholic work; unconsciously so at first, but  consciously in the 
+revision. That is why I have not put in, or have cut out, practically all references to anything like ‘religion’, to 
+cults or practices in the imaginary world. For the religious element is absorbed into the story and the symbolism. 
+(Letter 142). 
+ 
+
+===== PAGE 25 =====
+ 25 
+was complete, and he was pleased, and began to instruct the Dwarves in the speech that he had 
+devised for them, Ilúvatar spoke to him; and Aulë heard his voice and was silent. And the voice 
+of Ilúvatar said to him: ‘Why hast thou done this? Why dost thou attempt a thing which thou 
+knowest is beyond thy power and thy authority? For thou hast from me as a gift thy own being 
+only, and no more; and therefore the creatures of thy hand and mind can live only by that being, 
+moving when thou thinkest to move them, and if thy thought be elsewhere, standing idle. Is that 
+thy desire?’ Then Aulë answered: ‘I did not desire such lordship. I desired things other than I 
+am, to love and to teach them, so that they too might perceive the beauty of Eä, which thou hast 
+caused to be. For it seemed to me that there is great room in Arda for many things that might 
+rejoice in it, yet it is for the most part empty still, and dumb. And in my impatience I have fallen 
+into folly. Yet the making of things is in my heart from my own making by thee; and the child of 
+little understanding that makes a play of the deeds of his father may do so without thought of 
+mockery, but because he is the son of his father. But what shall I do now,  so that thou be not 
+angry with me for ever? As a child to his father, I offer to thee these things, the work of the hands 
+which thou hast made. Do with them what thou wilt. But should I not rather destroy the work of 
+my presumption?’ Then Aulë took up a g reat hammer to smite the Dwarves; and he wept. But 
+Ilúvatar had compassion upon Aulë and his desire, because of his humility; and the Dwarves 
+shrank from the hammer and were afraid, and they bowed down their heads and begged for 
+mercy. And the voice of Ilú vatar said to Aulë: ‘Thy offer I accepted even as it was made. Dost 
+thou not see that these things have now a life of their own, and speak with their own voices? Else 
+they would not have flinched from thy blow, nor from any command of thy will.’ Then Aulë cast 
+down his hammer and was glad, and he gave thanks to Ilúvatar, saying: ‘May Eru bless my work 
+and amend it!’ But Ilúvatar spoke again and said: ‘Even as I gave being to the thoughts of the 
+Ainur at the beginning of the World, so now I have taken up thy  desire and given to it place 
+therein; but in no other way will I amend thy handiwork, and as thou hast made it, so shall it be”. 
+ 
+References List 
+ 
+Primary Sources 
+ 
+Tolkien, J.R.R. (1977), The Silmarillion. Edited by Christopher Tolkien. London.  
+Tolkien, J.R.R. (1983–1996), The History of Middle Earth. Edited by Christopher Tolkien. 12 volumes. London.  
+Tolkien, J.R.R. (1995a), The Hobbit. Rev. edn. London. HarperCollins. [1st edition 1937, 2nd revised edition 1951].  
+Tolkien, J.R.R. (1995b), The Letters of J. R. R. Tolkien. New edn. Edited by Humphrey Carpenter. London. 
+Tolkien, J.R.R. (1998), Unfinished Tales of Númenor and Middle-earth. Edited by Christopher Tolkien. London. 
+Tolkien, J.R.R. (2001), Tree and Leaf, including the Poem Mythopoeia . Edited by Christopher Tolkien. London 
+[1st edition 1964]. 
+Tolkien, J.R.R. (2004), The Lord of the Rings. 3 vols. 50th anniversary edn. London. 
+Tolkien, J.R.R. (2008a), On Fairy-stories. Expanded edn. Edited by V. Flieger and D. A. Anderson. London.  
+Tolkien, J.R.R. (2008b), Tales from the Perilous Realm. Includes Farmer Giles of Ham, “Leaf by Niggle,” Smith 
+of Wootton Major , The Adventures of Tom Bombadil [originally published in 1997] , and Roverandom. 
+London. 
+ 
+Secondary Sources 
+ 
+Agøy, N. I. (2007), ‘Viewpoints, Audiences and Lost Texts in The Silmarillion.’, in Turner (2007), 139–163. 
+Atherton, M. (2012), There and Back Again: J. R. R. Tolkien and the Origins of The Hobbit . London and New 
+York. 
+Brljak, V. (2010), ‘The Book of Lost Tales: Tolkien as Meta ctionist.’, Tolkien Studies 7: 1–34.  
+Caldecott, S. (2005), The Power of the Ring: The Spiritual Vision Behind the Lord of the Rings. New York.  
+Caldecott, S. and Honegger, T. (eds.) (2008), Tolkien’s The Lord of the Rings: Sources of Inspiration. Zurich and 
+Jena. 
+Carpenter, H. (1977), J. R. R. Tolkien – A Biography. London. 
+Drout, M.D.C. (2007), J.R.R. Tolkien Encyclopedia. New York. 
+Eden, B. L. (ed.) (2014), The Hobbit and Tolkien's Mythology. Jefferson, NC. 
+Flieger, V. and Hostett er, C.F. (ed.) (2000), Tolkien’s Legendarium: Essays on The History of Middle -earth. 
+Westport, CT.  
+Flieger, V. (2002), Splintered Light: Logos and Language in Tolkien's World, 2nd ed. Kent and London. 
+Flieger, V. (2005), Interrupted Music. Kent and London. 
+
+===== PAGE 26 =====
+ 26 
+Flieger, V. (2007), ‘Frame Narrative’, in Drout (2007), 216–218.  
+Flieger, V. (2014), ‘“The Lost Road”  and “The Notion Club Papers”: Myth, History, and Time -travel’, in Lee 
+(2014a), 161–172. 
+Hanks, D.T.J. (2012), ‘Tolkien’s “Leaf by Niggle”:  A Blossom on the Tree of Tales ’, Journal of Inklings Studies 
+2, 23–48. 
+Kahlas-Tarkka, L. (2014), ‘Finnish: The Land and Language of Heroes’, in Lee (2014), 259 –271. 
+Lee, S. D. (ed.) (2014a), A Companion to J. R. R. Tolkien. Malden, MA. 
+Lee, S.D. (2014b), ‘Manuscripts: Use, and Using’, in Lee (2014a), 56–75. 
+Medcalf, S. (1999), ‘The Learned Language of Elves: Owen Barfield, The Hobbit and The Lord of the Rings’, 
+Seven 16, 31–53. 
+Nagy, G. (2003), ‘The Great Chain of Reading: (Inter-)textual Relations and the Technique of Mythopoesis in the 
+Túrin Story’, in Chance, J. (ed.), Tolkien the Medievalist (London), 239–258.  
+Nagy, G. (2007), ‘Authorship’, in Drout (2007), 44–45. 
+Nagy, G. (2014), ‘The Silmarillion’, in Lee (2014), 107–118. 
+Noad, Charles. 2000. “On the Construction of The Silmarillion.” In Flieger and Hostetter (2000), 31–68.  
+Oberhelman, D. (2008), ‘A Brief History of Libraries in Middle -earth: Manuscript and Book Repositories in 
+Tolkien’s Legendarium’, in Himes, J. B. (ed.) , Truths Breathed Through Silver: The Inklings' Moral and 
+Mythopoeic Legacy (Newcastle), 81–92. 
+Pezzini, G. and Taylor, B. (forthcoming), Language and Nature in the Classical Roman World. 
+Phelpstead, C. (2014), ‘Myth-making and Sub-creation’, in Lee (2014), 79–91. 
+Rosebury, B. (2003), Tolkien: A Cultural Phenomenon. Basingstoke  
+Shippey, T. (2003), The Road to Middle-earth, 2nd ed. Boston and New York. 
+Thiessen, D. (2014), ‘A Baggins Back Yard: Environmentalism, Authorship and the Elves in Tolkien’s 
+Legendarium’, in Eden, B. L. (ed.), The Hobbit and Tolkien's Mythology (Jefferson, NC), 195–207. 
+Turner, A. (2007), The Silmarillion: Thirty Years On. Zurich and Bern. 
+Turner, A. (2014), ‘Style and Intertextual Echoes’, in Lee (2014a), 389–403. 
+Whittingham, E.A. (2007), The Evolution of Tolkien’s Mythology: A Study of the History of Middle -earth. 
+Jefferson, NC.  

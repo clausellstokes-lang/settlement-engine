@@ -53,3 +53,20 @@
 - Under Heaven Wikipedia author's letter: "the reader who knows what happened... does not know with any certainty what will happen in my story".
 - Wikipedia Sarantine: de Lint quotes; "interplay between the lives of the politically powerful and the interests of the ordinary people".
 - 403/401/429: LARB, Locus, SFFRD (even via jina), reactormag, sf-encyclopedia (429 x2), Springer (idp), Tampere (Anubis).
+
+## Wave 5–6 (fetch-only)
+- Töyrylä (Helsinki BA 2017): "Variable internal focalization"; Dianora's focalization forces reader to "adapt his views on Brandin"; Rhun/Valentin withheld identity ("felt a blurred, disorienting kinship"); narrator "does not make strong moral judgments"; communal "as everyone knows"; narrated monologue "twin snakes around the wreckage of her heart"; cites Genette, Jahn, Bal, Rimmon-Kenan, Cohn.
+- Gutensohn (UVic MA 2004): "music rather than magic is the more prevalent textual code"; "musical imagery is woven into the Prologue"; "archive of cultural memory"; "harmonizing voices" foreshadow unity; instrument choice "insight to their character".
+- Aardse (Lethbridge 2008): "creative performativity of identity" via song; Young, Deleuze/Guattari, Kincaid.
+- Wark (Concordia 1998): thematic only.
+- Walsh (UVic MA 1994) abstract: "ironic treatment of the heroic quest"; "dislocated from the divine"; "from grand mythic drama to a context more closely connected to reality".
+- Doshlova (KubSU; Yekaterinburg conf Feb 2026, pp.1237-1244; PDF read locally): central metaphors "the lost name", "distorted memory", "music" "form an integral artistic system"; Attebery's true-name formula INVERTED (power belongs to those who erase the name); memory metaphor as body/wound/debt; music as alternative channel bypassing the spell; cites Lakoff/Johnson, Assmann, Spivak, Mendlesohn, Attebery, Nora, Stokes.
+- Borowska-Szerszun, Orbis Litterarum (4 June 2026) abstract via S2/Crossref: eucatastrophe "remains marked by loss, fragmentation, and incomplete knowledge"; "preserving the limits of recovery"; Assmann/Lachmann.
+- Kay, "On the Strengths of Fiction Done as Near-History" (BoingBoing 2016): "Nearly our known history, but not quite"; "a 'quarter turn to the fantastic'"; "giving real men invented personalities"; "cannot be sure they know where the novel... is going"; "a gift to both writer and reader"; "tighten focus on themes"; "interactions not ideologies"; "Seressa instead of Venice and Batiara for Italy".
+- Kay, "6 Books I Love" (CBC 2016): Sutcliff "same-yet-different aspects"; Dylan Thomas "word-drunk quality of his language"; Dunnett "colossal value of research", "narrative could be married to character revelation"; Fitzgerald "achieve so much with such small strokes"; McCarthy "merged the lyric with the violent"; Hazzard.
+- Kay LitHub 2019 advice: process only ("There are no rules").
+- JFA 20.2 (2009) via OpenAlex: Gary K. Wolfe "GGK: An Introduction" p.238; GGK "The Fiction of Privacy: Fantasy and the Past" p.240 (NOT online; BW 404).
+- ⚠ FALSE LEAD CORRECTED: the SFFRD-snippet claim of Kay articles in Extrapolation 46(4) 469-486 and 51(3) 343-357 — OpenAlex issue listings show those pages are Knickerbocker's articles on Rosa Montero / apocalypse; NO Extrapolation article on Kay found. JFA 2002 ("Paradigms of Colonization... Tigana", 13.2) and 2004 (15.4, 288-308) not indexed in OpenAlex; unread.
+- Toswell 2025 = Arc Humanities Press, Arc Medievalist series; ch.3 "Historical Fantasy: Guy Gavriel Kay" (TOC only; De Gruyter 405).
+- Blocked: Wiley PDF 403; academia.edu 403; HAL Anubis; Tampere Anubis; Springer idp; sf-encyclopedia 404/429; JSTOR TOC no-load; reactormag 403; LARB/Locus 403 (jina too).
+- SATURATION: last two sweeps (BW category guesses; API issue listings; write-up pages) returned nothing new on prose features.

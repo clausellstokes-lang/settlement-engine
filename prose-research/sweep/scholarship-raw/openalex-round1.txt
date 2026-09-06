@@ -1,0 +1,63 @@
+--- "Network of Thrones"
+2016 | Network of Thrones | Math Horizons | https://doi.org/10.4169/mathhorizons.23.4.18 | OA: None
+2021 | A Network of Thrones: Kinship and Conflict in Europe, 1495–1918 | American Economic Journal Applied Economics | https://doi.org/10.1257/app.20180521 | OA: None
+2020 | Data And Code For Network Of Thrones: Kinship And Conflict In Europe, 1495 - 1918 | ICPSR Data Holdings | https://doi.org/10.3886/e117045v1 | OA: https://doi.org/10.3886/e117045v1
+2020 | Network visualizations with Pyvis and VisJS | Proceedings of the Python in Science Conferences | https://doi.org/10.25080/majora-342d178e-008 | OA: http://conference.scipy.org/proceedings/scipy2020/pdfs/giancarlo_perrone.pdf
+2017 | Who Are the Most Influential Emergency Physicians on Twitter? | Western Journal of Emergency Medicine | https://doi.org/10.5811/westjem.2016.11.31299 | OA: https://escholarship.org/content/qt1nw3291x/qt1nw3291x.pdf?t=p7dn8s
+2018 | M-Centrality: identifying key nodes based on global position and local degree variation | Journal of Statistical Mechanics Theory and Experiment | https://doi.org/10.1088/1742-5468/aace08 | OA: https://iopscience.iop.org/article/10.1088/1742-5468/aace08/pdf
+2022 | Disentangling Homophily, Community Structure, and Triadic Closure in Networks | Physical Review X | https://doi.org/10.1103/physrevx.12.011004 | OA: http://link.aps.org/pdf/10.1103/PhysRevX.12.011004
+2026 | Scalar Velocity and Narrative Scale in the Transmedia Storyworld of World of Warcraft: Network  | Zenodo (CERN European Organization for Nuclear Research) | https://doi.org/10.5281/zenodo.21908903 | OA: https://doi.org/10.5281/zenodo.21908903
+--- "Food Fantasies" Ice Fire
+2013 | Southern foodways and culture [electronic resource] : local considerations and beyond | Newfound Press, University of Tennessee Libraries eBooks | https://doi.org/10.7290/v7wd3xhg | OA: https://trace.tennessee.edu/cgi/viewcontent.cgi?article=1002&context=utk_sasproceed
+2016 | Opowieści Starej Niani. Piśmienność i literatura oralna w sadze „Pieśni Lodu i Ognia” G.R.R. Ma | Quaestiones Oralitatis | https://doi.org/10.19195/qo.2016.2.2.177.205 | OA: https://wuwr.pl/quaestiones-oralitatis/article/download/17615/15942
+2026 | Сакральна та гріховна їжа в літературі фентезі: мотиви причастя та гріхопадіння | The Scientific Issues of Ternopil Volodymyr Hnatiuk National Pedagogical University Series pedagogy | None | OA: http://philmessenger.knlu.edu.ua/article/download/351959/339081
+2019 | Kulinaria w turystyce rekonstrukcji historycznej | Turystyka Kulturowa | https://doi.org/10.62875/tk.v5i0.1082 | OA: http://turystykakulturowa.org/ojs/index.php/tk/article/download/1082/944
+2011 | Feed Me! Insatiable Children and the Monsters Who Want to Devour Them: Fairy Tales and Consumpt | OhioLink ETD Center (Ohio Library and Information Network) | None | OA: http://rave.ohiolink.edu/etdc/view?acc_num=bgsu1300476358
+2016 | Let me tie you up : methods of creating theater by control and surrender | Texas ScholarWorks (Texas Digital Library) | https://doi.org/10.15781/t28g8fh8c | OA: http://hdl.handle.net/2152/39448
+2012 | Manna from the Glossy Pulpit: Food Advertising in Women's Magazines | e-Publications@Marquette (Marquette University) | None | OA: https://epublications.marquette.edu/cgi/viewcontent.cgi?article=1174&context=theses_open
+2015 | Right to food ethics : theological approaches of Asbjørn Eide | Globethics.net eBooks | https://doi.org/10.58863/20.500.12424/222245 | OA: https://repository.globethics.net/bitstream/20.500.12424/222245/1/GE_Theses_8_web_DOI.pdf
+--- "Fantasy Form" Martin Young review
+2019 | The Fantastic Structure of Freedom: Sartre, Freud, and Lacan | e-Publications@Marquette (Marquette University) | None | OA: https://epublications.marquette.edu/dissertations_mu/892
+2022 | Black/African Science Fiction and the Quest for Racial Justice through Legal Knowledge: How Can | Law Technology and Humans | https://doi.org/10.5204/lthj.2507 | OA: https://lthj.qut.edu.au/article/download/2507/1300
+2006 | Queens of Anal, Double, Triple, and the Gang Bang: Producing Asian/American Feminism in Pornogr | bepress Legal Repository | None | OA: https://digitalcommons.law.yale.edu/yjlf/vol18/iss1/10
+2024 | Meaning as mentalization | Frontiers in Human Neuroscience | https://doi.org/10.3389/fnhum.2024.1384116 | OA: https://www.frontiersin.org/articles/10.3389/fnhum.2024.1384116/pdf?isPublishedV2=False
+2008 | Inner Voice of Women's Self-Leadership | OhioLink ETD Center (Ohio Library and Information Network) | None | OA: http://rave.ohiolink.edu/etdc/view?acc_num=antioch1224864051
+2023 | Metaphysics of the sequence shot: the gathering and nihilating of being in Béla Tarr’s The Turi | Journal of AESTHETICS & CULTURE | https://doi.org/10.1080/20004214.2023.2271097 | OA: https://www.tandfonline.com/doi/pdf/10.1080/20004214.2023.2271097?download=true
+2017 | Unsettling Revitalization in Toronto: The Fantasy and Apology of the Settler City | YorkSpace (York University) | None | OA: http://hdl.handle.net/10315/33544
+1998 | Between Immigration and Hyphenation: The Problems of Theorizing Asian American Theater | Latin American Theatre Review (The University of Kansas) | None | OA: https://journals.ku.edu/jdtc/article/download/1997/1960
+--- "Medievalism in A Song of Ice and Fire" review
+2020 | Medievalism in A Song of Ice and Fire and Game of Thrones | The Journal of English and Germanic Philology | https://doi.org/10.5406/jenglgermphil.119.1.0142 | OA: None
+2020 | Book Review: Medievalism in A Song of Ice and Fire and Game of Thrones | DOAJ (DOAJ: Directory of Open Access Journals) | None | OA: None
+2019 | Book Review--Medievalism in A Song of Ice and Fire and Game of Thrones, by Shiloh Carroll | DOAJ (DOAJ: Directory of Open Access Journals) | None | OA: None
+2018 | Medievalism in A Song of Ice and Fire and Game of Thrones by Shiloh Carroll | Arthuriana | https://doi.org/10.1353/art.2018.0037 | OA: None
+2022 | IMITATION AND SIMULATION OF THE MEDIEVAL NARRATIONS IN MODERN MEDIEVALISM: FEATURES OF THE STRU | Sovremennye issledovaniya sotsialnykh problem | https://doi.org/10.12731/2077-1770-2022-14-3-14-47 | OA: http://soc-journal.ru/jour/index.php/mssi/article/download/238/123
+2022 | Mother of Dragons | Eikon / Imago | https://doi.org/10.5209/eiko.76756 | OA: https://revistas.ucm.es/index.php/EIKO/article/download/76756/4564456560254
+2024 | Gods, Kings, and Historians: History and the Dual Diegesis of Crusader Kings in the Assemblage  | None | https://doi.org/10.26503/dl.v2024i1.2244 | OA: https://dl.digra.org/index.php/dl/article/download/2244/2241
+2026 | Getting (and Staying) Medieval | The Bulletin of the International Association for Robin Hood Studies | https://doi.org/10.33043/biarhs.7.1.5-18 | OA: https://openjournals.bsu.edu/biarhs/article/download/6094/3325
+--- "Winter is Coming" Larrington review
+2020 | Anarchy in the Game of Thrones | Neohelicon | https://doi.org/10.1007/s11059-020-00522-5 | OA: https://link.springer.com/content/pdf/10.1007/s11059-020-00522-5.pdf
+2025 | Promoting Sustainable Transport: A Systematic Review of Walking and Cycling Adoption Using the  | Future Transportation | https://doi.org/10.3390/futuretransp5030079 | OA: https://www.mdpi.com/2673-7590/5/3/79/pdf?version=1751337062
+2020 | Social Order and Political Theology in the Game of Thrones: What Makes the Cult Series Interest | Sotsiologicheskoe Obozrenie / Russian Sociological Review | https://doi.org/10.17323/1728-192x-2020-1-139-159 | OA: https://sociologica.hse.ru/data/2020/05/08/1552700661/SocOboz_19_1_139-159_Kildyushov.pdf
+2025 | Uma Uma canção de violência e orientalismo: representações de Daenerys Targaryen em Game of Thr | Neomedieval | https://doi.org/10.33732/nmv.3.105 | OA: https://revistas.urjc.es/index.php/neomedieval/article/download/105/348
+2021 | “I watch it for historic reasons”: Representação e receção da Idade Média em As Crónicas de Gel | Scientific Repository of Open Access of Portugal (RCAAP) | https://doi.org/10.48487/pdh.2017.n5.21614 | OA: http://revistas.rcaap.pt/index.php/pdh/article/view/21614
+2021 | Premodern Pedagogies: Queer Medieval Materiality | ScholarsArchive  (Brigham Young University) | None | OA: https://scholarsarchive.byu.edu/rmmra/vol42/iss1/15
+2025 | La alteridad en "Juego de Tronos" (2011-2019): una reflexión | Medievalia | https://doi.org/10.5565/rev/medievalia.731 | OA: https://revistes.uab.cat/medievalia/article/download/v28-n2-contreras1/858
+2019 | The "New" North: Perceptions, Projections and Memories of Medieval Scandinavia in Video Games a | NORA - Norwegian Open Research Archives | None | OA: http://hdl.handle.net/10852/70203
+--- Martin "Song of Ice and Fire" style prose narrative
+2022 | IMITATION AND SIMULATION OF THE MEDIEVAL NARRATIONS IN MODERN MEDIEVALISM: FEATURES OF THE STRU | Sovremennye issledovaniya sotsialnykh problem | https://doi.org/10.12731/2077-1770-2022-14-3-14-47 | OA: http://soc-journal.ru/jour/index.php/mssi/article/download/238/123
+2019 | A Preliminary Study about the Fantasy Genre in Contemporary Arabic Literature | Folia Orientalia | https://doi.org/10.24425/for.2019.130703 | OA: http://journals.pan.pl/Content/114143/PDF/FoliaOrientalia%2056-19%205De%20Blasio.pdf
+2018 | Questing Feminism: Narrative Tensions and Magical Women in Modern Fantasy | None | https://doi.org/10.23860/diss-wickham-kimberly-2018 | OA: https://digitalcommons.uri.edu/cgi/viewcontent.cgi?article=1751&context=oa_diss
+2025 | Fantasy, Adaptation, Media: From A Song of Ice and Fire to the Speculative Universe | REAL-PhD (Hungarian Academy of Sciences) | https://doi.org/10.15774/ppke.btk.2025.017 | OA: https://real-phd.mtak.hu/2219/3/BTK_DD_2025_sipos.pdf
+2015 | Magic Kingdoms beyond Disneyland: Medievalism in George R.R. Martin's "A Song of Ice and Fire"  | Gothenburg University Publications Electronic Archive (Gothenburg University) | None | OA: http://hdl.handle.net/2077/38773
+2018 | Deep Comprehension | None | https://doi.org/10.4324/9781315109503 | OA: None
+2022 | Perspective narrative, focalisation et point de vue : pour une synthèse | Fabula-LhT littérature histoire théorie | https://doi.org/10.58282/lht.2647 | OA: https://www.fabula.org:443/lht/25/baroni.html
+2020 | Painting with Shades of Grey: The Hero and the Anti-Hero in Medievalist Fantasy Fiction | NORA - Norwegian Open Research Archives | None | OA: http://hdl.handle.net/10852/79130
+--- Martin "Song of Ice and Fire" interlace
+2018 | Questing Feminism: Narrative Tensions and Magical Women in Modern Fantasy | None | https://doi.org/10.23860/diss-wickham-kimberly-2018 | OA: https://digitalcommons.uri.edu/cgi/viewcontent.cgi?article=1751&context=oa_diss
+2020 | ‘That’s One of Mine’ | Exchanges The Interdisciplinary Research Journal | https://doi.org/10.31273/eirj.v7i3.481 | OA: https://exchanges.warwick.ac.uk/index.php/exchanges/article/download/481/497
+2020 | Painting with Shades of Grey: The Hero and the Anti-Hero in Medievalist Fantasy Fiction | NORA - Norwegian Open Research Archives | None | OA: http://hdl.handle.net/10852/79130
+2019 | Medievalism in A Song of Ice & Fire & Game of Thrones by Shiloh Carroll | Parergon | https://doi.org/10.1353/pgn.2019.0073 | OA: None
+2024 | Visualizing the Never-Seen | transcript Verlag eBooks | https://doi.org/10.1515/9783839470589-006 | OA: https://www.degruyterbrill.com/document/doi/10.1515/9783839470589-006/pdf
+2016 | Medievalism in contemporary Fantasy: a new Species of Romance | RACO (Revistes Catalanes amb Accés Obert) (Consorci de Serveis Universitaris de Catalunya) | https://doi.org/10.21001/imagotemporis.v0i0.317182 | OA: http://raco.cat/index.php/ImagoTemporis/article/view/317182
+2024 | Gothic Nature in Fantasy Fiction: The White Walkers as Dreadful Agents of Nature in Game of Thr | Revista Canaria de Estudios Ingleses | https://doi.org/10.25145/j.recaesin.2024.89.04 | OA: https://doi.org/10.25145/j.recaesin.2024.89.04
+2024 | Imaginary Wor(l)ds: Comic Language and the Construction of Fantasy | None | https://doi.org/10.1515/9783111295282-003 | OA: https://www.degruyter.com/document/doi/10.1515/9783111295282-003/pdf

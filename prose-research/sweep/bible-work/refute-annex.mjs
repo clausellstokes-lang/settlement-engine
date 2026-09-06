@@ -45,9 +45,10 @@ const walk = (dir) => { for (const e of readdirSync(dir)) { const p = path.join(
 for (const root of process.argv.slice(4)) walk(path.join(D, root));
 console.log('raw source files scanned:', files.length, 'roots:', process.argv.slice(4).join(' '));
 
-const PREFIX = 6;
+const PREFIX = 3;   // variable-length: rows shorter than 3 words are indexed by their whole key
 const prefixIndex = new Map();
-for (const r of annexRows) { const w = r.key.split(' ').filter(Boolean); const p = w.slice(0, PREFIX).join(' ');
+for (const r of annexRows) { const w = r.key.split(' ').filter(Boolean); r.w = w;
+  const p = w.slice(0, Math.min(PREFIX, w.length)).join(' ');
   if (!prefixIndex.has(p)) prefixIndex.set(p, []); prefixIndex.get(p).push(r); }
 const hit = new Set(); const where = new Map();
 let bytes = 0;
@@ -55,12 +56,14 @@ for (const f of files) {
   const raw = readFileSync(f, 'utf8'); bytes += raw.length;
   const t = normText(raw);
   const words = t.split(' ');
-  for (let i = 0; i + PREFIX <= words.length; i++) {
-    const p = words.slice(i, i + PREFIX).join(' ');
-    const cands = prefixIndex.get(p); if (!cands) continue;
-    for (const r of cands) { if (hit.has(r)) continue;
-      const seg = words.slice(i, i + r.key.split(' ').length).join(' ');
-      if (seg === r.key || seg.startsWith(r.key)) { hit.add(r); where.set(r, path.relative(D, f)); } }
+  for (let i = 0; i < words.length; i++) {
+    for (let L = 1; L <= PREFIX && i + L <= words.length; L++) {
+      const cands = prefixIndex.get(words.slice(i, i + L).join(' ')); if (!cands) continue;
+      for (const r of cands) { if (hit.has(r)) continue;
+        if (r.w.length > L && r.w.length > PREFIX === false && L < Math.min(PREFIX, r.w.length)) continue;
+        const seg = words.slice(i, i + r.w.length).join(' ');
+        if (seg === r.key) { hit.add(r); where.set(r, path.relative(D, f) + ':' + i); } }
+    }
   }
 }
 console.log('bytes scanned:', (bytes / 1e6).toFixed(1) + 'MB');
@@ -84,3 +87,19 @@ console.log(`WIRED BY RAW SCAN BUT NOT BY x6-annex: ${onlyMine.length}`);
 for (const t of onlyMine.slice(0, 15)) { const r = [...hit].find((x) => x.text === t); console.log('   +', where.get(r), '::', t.slice(0, 110)); }
 console.log(`WIRED BY x6-annex BUT NOT BY RAW SCAN: ${onlyX.length}`);
 for (const t of onlyX.slice(0, 10)) console.log('   -', t.slice(0, 110));
+
+// ── FALSE-POSITIVE AUDIT of the raw scan's surplus over x6-annex ─────────────
+console.log('\n=== SURPLUS AUDIT: the raw scan is punctuation-blind, so classify its extra hits ===');
+const surplus = [...hit].filter((r) => !xWired.has(r.text));
+const realWords = (r) => r.w.filter((w) => w !== 'qq').length;
+const degenerate = surplus.filter((r) => realWords(r) <= 2);
+const shortish = surplus.filter((r) => realWords(r) > 2 && realWords(r) < 6);
+const substantive = surplus.filter((r) => realWords(r) >= 6);
+console.log(`surplus rows: ${surplus.length}  | slot-only or <=2 real words (FALSE POSITIVE): ${degenerate.length}`);
+console.log(`             | 3-5 real words (weak): ${shortish.length}  | >=6 real words (SUBSTANTIVE MISS by x6): ${substantive.length}`);
+console.log('\n-- the SUBSTANTIVE rows x6-annex stamped UNWIRED but that are present verbatim in src --');
+for (const r of substantive) console.log('   ', r.annex.replace('RECEIPT_POOLS_', '').replace('.md', '').padEnd(16), where.get(r).padEnd(58), r.text.slice(0, 95));
+const adj = 4289 + substantive.length;
+console.log(`\nDEFENSIBLE INDEPENDENT RANGE for wired rows: ${4289} (x6-annex, import+AST index) .. ${adj} (x6 + substantive raw-scan misses)`);
+console.log(`  as a share of 9,115 prose rows: ${(100*4289/9115).toFixed(1)}% .. ${(100*adj/9115).toFixed(1)}%`);
+console.log(`  authored-unwired therefore: ${9115-adj} .. ${9115-4289}   (report publishes 4,826)`);
