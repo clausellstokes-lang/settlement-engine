@@ -70,5 +70,113 @@
    "note": "Live arts.gov page fetched (HTTP 200, 74,952 bytes). Both quotations ARE on the page: the Overview carries '...it is written in prose as taut and clean as a ship's sail.... It poses the deep questions about life, death, power and responsibility that children need answering' (The Guardian), and an accordion panel reproduces the guide's 'Language of Fantasy' text verbatim including 'plain, strong, and exact'. So the 'repeats the guide's characterization' limb and the 'pairs it with' limb are both supported; only the Craig attribution is absent from the page. (Amanda Craig did write the Guardian review, but that cannot be verified from this URL, which is what was cited.)",
    "fromFile": "verdicts-leguin-i30-44.json"
   }
+ },
+ {
+  "index": 61,
+  "feature": "absorbed Tolkien, own direction",
+  "claim": "Attebery (quoted by Garth) distinguishes her from Tolkien copyists as one who absorbed Tolkien, comprehended him and went her own direction.",
+  "source": "John Garth blog (citing Attebery)",
+  "url": "https://johngarth.wordpress.com/2021/01/22/ursula-le-guin-the-language-of-earthsea-and-tolkien/",
+  "quote": "absorbed Tolkien, comprehended him, and gone on in her own direction",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 61,
+   "verdict": "PARTIAL",
+   "trueWording": "absorbed Tolkien, comprehended him, and gone on in her own direction",
+   "note": "Quotation is on the page word for word and Attebery (The Fantasy Tradition in American Literature) does distinguish Le Guin from 'the Tolkien copyists' — but it is NOT Garth's text: it appears in a reader comment by David Bratman (28 Jan 2021), to which Garth replied 'Absolutely spot on!'. Attribution limb fails.",
+   "unsupportedLimb": "'quoted by Garth' — the Attebery quotation appears in a reader comment by David Bratman, not in Garth's post",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 62,
+  "feature": "Secret Vice acknowledged",
+  "claim": "Garth notes Le Guin called language invention 'the Secret Vice' after Tolkien's essay and counted LOTR among the three books she had re-read past counting.",
+  "source": "John Garth blog",
+  "url": "https://johngarth.wordpress.com/2021/01/22/ursula-le-guin-the-language-of-earthsea-and-tolkien/",
+  "quote": "",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 62,
+   "verdict": "PARTIAL",
+   "trueWording": "lost count only with Dickens, Tolstoy, and Tolkien",
+   "note": "Secret Vice limb fully supported: 'In Always Coming Home (1985), Le Guin refers to language invention as \"what an illustrious predecessor referred to as the Secret Vice\" ... She meant Tolkien, whose essay \"A Secret Vice\"'. But the re-reading limb is misstated: Garth quotes her on LOTR — 'I reread a great deal, but have lost count only with Dickens, Tolstoy, and Tolkien' — three AUTHORS, not three books.",
+   "unsupportedLimb": "'the three books she had re-read past counting' — the page names three authors (Dickens, Tolstoy, Tolkien), not three books",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 78,
+  "feature": "the right word",
+  "claim": "Tearle credits Le Guin with picking up the right word on the end of her pen; Plotz devotes a chapter to her use of language and naming and to the careful, deliberate nature of her prose.",
+  "source": "Oliver Tearle, review of Plotz (Interesting Literature)",
+  "url": "https://interestingliterature.com/2023/10/john-plotz-ursula-le-guin-earthsea-review/",
+  "quote": "the careful and deliberate nature of her prose",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 78,
+   "verdict": "PARTIAL",
+   "trueWording": "Plotz discusses her prose's care; the chapter covers language and naming.",
+   "note": "Both quoted phrases are verbatim: 'the right word on the end of her pen' (Tearle, borrowing Chesterton on Stevenson) and 'the careful and deliberate nature of her prose'. But the latter sits in a separate sentence about Plotz's discussion generally ('He is persuasive when discussing Le Guin's style, the careful and deliberate nature of her prose, and the way she creates an alien world through ingenious use of language'), not in the chapter list, which reads: 'a chapter on the \\u2018simple joy\\u2019 of reading Le Guin's work, especially her use of language and the power of naming'.",
+   "unsupportedLimb": "that the chapter (as opposed to the book generally) is devoted to the careful, deliberate nature of her prose",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 82,
+  "feature": "reading aloud as method",
+  "claim": "She scans a chapter closely, hears its close 'like drumbeats', and recommends reading passages aloud.",
+  "source": "Kate Nepveu, LotR re-read: Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (summary of the 2001 essay)",
+  "url": "https://kate-nepveu.livejournal.com/180011.html",
+  "quote": "like drumbeats",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 82,
+   "verdict": "PARTIAL",
+   "trueWording": "She reads the lines aloud herself; no recommendation appears on the page.",
+   "note": "'like drumbeats' is verbatim ('They are like drumbeats.') and the close reading of chapter 8 of Fellowship, 'Fog on the Barrow Downs', is on the page. But the page's only read-aloud sentence is Le Guin's own practice: 'Reading the lines aloud I can't help thinking of a Beethoven finale'. The two occurrences of 'recommend' on the page are Nepveu's (a friend recommending the essay; asking for further recommendations), not Le Guin recommending reading aloud.",
+   "unsupportedLimb": "that she recommends reading passages aloud \\u2014 the page shows her reading them aloud, not advising it",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 86,
+  "feature": "narrative sentence leads onward",
+  "claim": "The chief duty of a narrative sentence is to lead to the next; pace and movement depend on rhythm you can only control by hearing it.",
+  "source": "Literary Hub, 'A Writing Lesson from Ursula K. Le Guin' (excerpt from Steering the Craft)",
+  "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+  "quote": "duty of a narrative sentence is to lead to the next",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 86,
+   "verdict": "PARTIAL",
+   "trueWording": "the primary way you feel and control rhythm is by hearing it.",
+   "note": "Quote verbatim: 'The chief duty of a narrative sentence is to lead to the next sentence\\u2014to keep the story going.' Page then says 'Pace and movement depend above all on rhythm, and the primary way you feel and control the rhythm of your prose is by hearing it\\u2014by listening to it.' The claim hardens 'the primary way' into an exclusive 'only'.",
+   "unsupportedLimb": "that rhythm can ONLY be controlled by hearing it \\u2014 the page says hearing is the primary way, not the sole one",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 96,
+  "feature": "scholarly focus: voice and rhythm, not lexis",
+  "claim": "Weyant's secondary bibliography shows the style-adjacent scholarship clusters on narrative voice and structure (Adams 1991; Jose 1991; Castleman 2020), rhythm (Barry & Prescott 1992), and the 'language of realism' in terrain (Pegg 1995) — no stylometric or corpus study is listed.",
+  "source": "Curtis Weyant, The Left Hand of Darkness: Secondary Bibliography",
+  "url": "https://curtisweyant.com/scholarship/le-guin/secondary-bibliography-the-left-hand-of-darkness/",
+  "quote": "",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 96,
+   "verdict": "PARTIAL",
+   "trueWording": "Bary, Nora. 'Beyond Words: The Impact of Rhythm as Narrative Technique...' Extrapolation 33 (1992): 154-65",
+   "unsupportedLimb": "'(Barry & Prescott 1992)' as what Weyant's bibliography shows - the page lists that rhythm article under 'Bary, Nora' alone: the surname is misspelled and co-author Mary Prescott is not named there (Crossref, checked at index 95, confirms Barry & Prescott is the true attribution, but this page does not show it)",
+   "note": "curtisweyant.com fetched live (200, 253 KB HTML -> 30 KB text; list runs A-W in both the scholarly and the blog sections, so it is complete, not lazy-loaded). Confirmed on the page: Adams, Rebecca, 'Narrative Voice and Unimaginability of the Utopian Feminine...', Utopian Studies 2.1-2 (1991): 35-47; Jose, Jim, 'Reflections on the Politics of Le Guin's Narrative Shifts', SFS 18.2 (1991): 180-97; Castleman, Samantha, 'Narrative Organization as Cultural Training in the Left Hand of Darkness', Femspec 19.2 (2020): 10-24; Pegg, Barry, 'Down to Earth: Terrain, Territory, and the Language of Realism...', Michigan Academician 27 (1995): 481-92 ('Language of Realism' verbatim). The negative limb also holds: case-insensitive search of the whole page returns 0 hits for 'styl' (so no style/stylistic/stylometry), 0 for 'corpus', 0 for 'quantitative', 0 for 'diction', 0 for 'prose'.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
  }
 ]

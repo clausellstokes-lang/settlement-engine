@@ -1,1 +1,107 @@
-[]
+[
+ {
+  "index": 3,
+  "feature": "style suited to the story; journalistic third person",
+  "claim": "He writes each book in the style its story calls for; the third-person Long Sun therefore came out as plain, journalistic prose rather than the stylized first-person of the Severian books.",
+  "source": "Jordan 1992 interview",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+  "quote": "pretty much straightforward journalistic prose",
+  "page": "p. 103",
+  "angle": "voice",
+  "verdict": {
+   "index": 3,
+   "verdict": "PARTIAL",
+   "trueWording": "'It isn't a highly very stylized series at all, largely because it is third person. I basically feel that you should write the story in the style that corresponds to the story that you have to tell... but it comes out as a pretty much straightforward journalistic prose' (p.103).",
+   "note": "Quote verbatim and the first two limbs (style follows story; third-person Long Sun as plain journalistic prose) are explicit. The contrast with Severian is not: the phrase 'first person' appears nowhere in the 31-page interview (grepped), and this passage names no book as the stylized counter-example - Jordan only asks whether it will be in 'any of the particular styles you have used before'.",
+   "unsupportedLimb": "the contrast term 'the stylized first-person of the Severian books' - the interview never says 'first person' anywhere, and does not name Severian's style as the thing Long Sun differs from",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  }
+ },
+ {
+  "index": 13,
+  "feature": "typos as false clues",
+  "claim": "Asked whether he invented any words, Wolfe answers that some odd words in the New Sun are typos, warning readers against treating every oddity as a clue.",
+  "source": "Jordan 1992 interview",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+  "quote": "some of them are typos",
+  "page": "p. 128",
+  "angle": "voice",
+  "verdict": {
+   "index": 13,
+   "verdict": "PARTIAL",
+   "trueWording": "'You didn't make up any words?' - 'No, but some of them are typos. Ushas is not one of them though.' (p.128)",
+   "note": "Quote verbatim, and the first two limbs are exact: he is asked whether he invented words and answers that some of the odd Severian words are typos. He draws no lesson from it and says nothing about clues; the reader-warning is the researcher's gloss, not on the page.",
+   "unsupportedLimb": "'warning readers against treating every oddity as a clue' - Wolfe issues no warning and never mentions clues here; he only answers the Ushas question and moves on to Qabbalistic sources",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  }
+ },
+ {
+  "index": 18,
+  "feature": "archaic real words, not coinages",
+  "claim": "For the New Sun he refused Tars-Tarkas-style invented names and used archaic names and terms in contexts where the reader can work out what is meant.",
+  "source": "Person 1998 interview",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+  "quote": "not coining Tars Tarkas type names",
+  "page": "p. 173",
+  "angle": "voice",
+  "verdict": {
+   "index": 18,
+   "verdict": "PARTIAL",
+   "trueWording": "\"I started out with the idea of not coining Tars Tarkas type names\"",
+   "unsupportedLimb": "the attribution to The Book of the New Sun specifically - the page says only 'I felt in this book I am not going to do that', answering a question about 'both of the Sun works'; neither Wolfe nor the interviewer names the New Sun in this exchange",
+   "note": "Raw PDF p.173-174. Quote verbatim. The method limb is fully supported: 'What's right is using archaic names and archaic terms for things in connections in which it will be clear to the reader what is meant.' Only the book attribution is unsupported by this page.",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  }
+ },
+ {
+  "index": 33,
+  "feature": "reader sees self in the text",
+  "claim": "Off-the-wall interpretations no longer surprise him because readers look into the story and see themselves.",
+  "source": "Clarkesworld 2015 (Baker)",
+  "url": "https://clarkesworldmagazine.com/wolfe_interview_2015/",
+  "quote": "what they are seeing is themselves",
+  "angle": "voice",
+  "verdict": {
+   "index": 33,
+   "verdict": "PARTIAL",
+   "trueWording": "\"I've been doing this too long to be surprised\"",
+   "note": "Clarkesworld 2015 raw. Quote 'what they are seeing is themselves' is verbatim ('Somebody can look into the story and what they are seeing is themselves'), and the non-surprise is on the page. But the page attributes the non-surprise to long experience, not to readers seeing themselves; the two remarks sit side by side without the causal link the claim asserts.",
+   "unsupportedLimb": "the causal 'because' — the page gives long experience, not readers seeing themselves, as the reason he is no longer surprised",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  }
+ },
+ {
+  "index": 34,
+  "feature": "villain never self-identifies",
+  "claim": "Fictional villains have narrow viewpoints; a real villain never thinks he is a villain, which shapes how bad men narrate themselves.",
+  "source": "Clarkesworld 2015 (Baker)",
+  "url": "https://clarkesworldmagazine.com/wolfe_interview_2015/",
+  "quote": "a real villain never thinks he's a villain",
+  "angle": "voice",
+  "verdict": {
+   "index": 34,
+   "verdict": "PARTIAL",
+   "trueWording": "\"a real villain never thinks he's a villain\"; fictional villains \"have very narrow viewpoints\"",
+   "note": "Clarkesworld 2015 raw. Quote verbatim and the two villain limbs are on the page verbatim in substance. The third limb is an added gloss: the answer is about villains' viewpoints and the human condition, and says nothing about narration or how bad men narrate themselves (the word 'narrat-' appears only in the separate unreliable-narrator answer).",
+   "unsupportedLimb": "'which shapes how bad men narrate themselves' — the page makes no claim about narration in the villain answer",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  }
+ },
+ {
+  "index": 39,
+  "feature": "concrete image before concept",
+  "claim": "Severian began as a costume (boots, trousers, no shirt, cloak, mask, sword) from which Wolfe deduced the man, an executioner.",
+  "source": "Black Gate 2010 (Cooney)",
+  "url": "https://www.blackgate.com/2010/11/23/and-it-goes-on-from-there-an-interview-with-gene-wolfe/",
+  "quote": "He's an executioner.",
+  "angle": "voice",
+  "verdict": {
+   "index": 39,
+   "verdict": "PARTIAL",
+   "trueWording": "black boots, trousers, no shirt, black cloak, mask, big sword — \"He's an executioner.\"",
+   "note": "Black Gate 2010 raw. Quote verbatim, and the costume-first origin is fully on the page: the costuming panel, then 'Black boots... Black trousers... No shirt. Black cloak... A mask. A big sword. And I thought - who is this guy? The answer was obvious. He's an executioner.' But the page never names the character: 'Severian' occurs zero times in the interview (grep count 0); Wolfe names only 'the Urth of the New Sun series'. The identification is the verifier's inference, not the source's word.",
+   "unsupportedLimb": "the name 'Severian' — the page names only the New Sun series, never the character",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  }
+ }
+]

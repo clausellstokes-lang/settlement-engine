@@ -8419,7 +8419,434 @@
    "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url>"
   }
  ],
- "verdicts": {},
+ "verdicts": {
+  "0": {
+   "index": 0,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'I try not to leave a clue more than once ... if you tell me five times then I feel that you are writing for somebody that is a lot dumber than I am' (p.121).",
+   "note": "Quote verbatim on p.121. Both limbs on the page; he also says 'So I try and leave my clues once.' Only softening: he says 'I try not to', a shade less absolute than the claim's 'refuses'.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "1": {
+   "index": 1,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'generally try and leave all the clues that I think the reader is going to require, sometimes more than they require' + 'very little of it consists of reasoning from clues and the great majority of it consists of finding more clues' (p.121).",
+   "note": "Quote verbatim. Surplus-of-clues limb and the real-detection reason are both explicit, the latter framed as 'actual police work' / 'a real life situation'.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "2": {
+   "index": 2,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Everything may be confusing but that is how things are... Life seen superficially has very little pattern to it.' (p.127)",
+   "note": "Quote verbatim (page reads '...pattern to it. There is a lot of confusion'). The 'clues are there / puzzles the reader is supposed to figure out / not that type of novel' formulation is Jordan's question, which Wolfe affirms with 'Yes' and then elaborates in his own words: 'It is not true that you can't get through the confusion and figure out certain things.' Attribution by assent, not by his own sentence.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "3": {
+   "index": 3,
+   "verdict": "PARTIAL",
+   "trueWording": "'It isn't a highly very stylized series at all, largely because it is third person. I basically feel that you should write the story in the style that corresponds to the story that you have to tell... but it comes out as a pretty much straightforward journalistic prose' (p.103).",
+   "note": "Quote verbatim and the first two limbs (style follows story; third-person Long Sun as plain journalistic prose) are explicit. The contrast with Severian is not: the phrase 'first person' appears nowhere in the 31-page interview (grepped), and this passage names no book as the stylized counter-example - Jordan only asks whether it will be in 'any of the particular styles you have used before'.",
+   "unsupportedLimb": "the contrast term 'the stylized first-person of the Severian books' - the interview never says 'first person' anywhere, and does not name Severian's style as the thing Long Sun differs from",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "4": {
+   "index": 4,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'When you research these anomalous stories and accounts you get this sort of thing. You get two witnesses who have very different stories depending on how they perceived some third thing that we don't know what it was. So I tried to show it like that.' (p.126)",
+   "note": "Quote verbatim. The cowboys/knights/spaceship enumeration is Jordan's question ('cowboys and Indians... Arthur and his knights... a spaceship'), which Wolfe adopts with 'So I tried to show it like that', and the Castleview context is explicit on the same page.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "5": {
+   "index": 5,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Because I wanted to lend to the memories certain supernatural strengths that an old man thinking over his life wouldn't have. I wanted to do the rooms as re-creations of rooms that he had known as a very young man... I could not have gotten with just reminiscence.' (p.115)",
+   "note": "Quote verbatim and every limb on the page: dead man rather than reminiscing old man (Jordan's question, answered directly), the re-created rooms, and the strength plain reminiscence could not justify.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "6": {
+   "index": 6,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'That is not the way I conceived it when I wrote it. I conceived it more that he was a ghost trying to make sense of his own life. And I think that is another way of saying that.' (p.116)",
+   "note": "Quote verbatim. Both limbs hold, with a nuance the claim keeps: to 'is Weer in Purgatory working toward peace?' he first answers 'Yeah, I think probably he is', then distinguishes conception from purgatory and accepts purgatory as 'another way of saying that'.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "7": {
+   "index": 7,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'The book really is intended to show the problems faced by a genuinely good man who can't remember. Because it seems to me that is the problem of our society... our society has no memory because it has no awareness of history.' (p.118)",
+   "note": "Quote verbatim and the society mapping explicit ('We have a genuinely good society... quite decent individuals'; 'this America blundering around on the world stage more or less as Latro does'). Page says singular 'The book' (Soldier of Arete under discussion) where the claim says 'The Soldier books'.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "8": {
+   "index": 8,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'what I tried to do was to write about that pagan world as the pagans themselves wrote about it. If we read modern historians we are reading a very rationalistic viewpoint...' (p.117)",
+   "note": "Quote verbatim; the rationalist-historian contrast is spelled out at length. The third limb is on the page too, via the Acts example: 'They are mistaken for Zeus and Hermes in human form because people in those days expected that you could see Zeus and Hermes in human form', prefaced by 'I think that the gods of paganism were real.'",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "9": {
+   "index": 9,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'I am familiar with the memory palace concept, which originally derives from Simonides, a Greek poet of the fifth century B.C... I have made use of the memory palace system in the Soldier books, of course.' (p.107)",
+   "note": "Quote verbatim; Simonides and the Soldier books both named in the same answer. He adds that he has heard of Yates's The Art of Memory but not read it.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "10": {
+   "index": 10,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Every once in a while you say, \"Gee, that's neat; I'll do that.\" And you do it. I wasn't writing the whole book that way. The book isn't intended as an allegory.' (p.118)",
+   "note": "Quote verbatim including the period. The impulse phrasing on the page is 'Gee, that's neat; I'll do that.' The denial is singular ('The book') where the claim generalises to 'the books'; he separately denies allegory for Free Live Free on p.128 ('I wasn't trying to write allegory').",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "11": {
+   "index": 11,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'I could almost invariably identify the writer from the first paragraph or two... And I am a good imitator. I could write imitation Shakespeare that you would think was probably legitimate Shakespeare... I have sort of a knack for doing that sort of thing.' (p.103)",
+   "note": "Quote verbatim and every limb explicit, including the Lewis limb ('I could write much better imitation C. S. Lewis than a lot of this supposedly posthumous stuff') and the self-described knack. The paragraph-or-two identification is set in a writers' chain letter, alongside 'I am pretty good at spotting styles'.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "12": {
+   "index": 12,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Was Jack Vance's style an influence on the style of the Severian novels?' - 'Oh, I'm sure... A lot of that was my deciding to rewrite The Dying Earth from my own standpoint' (p.103); 'I have never concealed a debt to Jack Vance and a debt to Clark Ashton Smith' (p.104).",
+   "note": "Quote verbatim on p.103. 'In part' matches 'A lot of that'. The Clark Ashton Smith acknowledgment sits just over the page break on p.104, not on p.103 as the page field implies.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "13": {
+   "index": 13,
+   "verdict": "PARTIAL",
+   "trueWording": "'You didn't make up any words?' - 'No, but some of them are typos. Ushas is not one of them though.' (p.128)",
+   "note": "Quote verbatim, and the first two limbs are exact: he is asked whether he invented words and answers that some of the odd Severian words are typos. He draws no lesson from it and says nothing about clues; the reader-warning is the researcher's gloss, not on the page.",
+   "unsupportedLimb": "'warning readers against treating every oddity as a clue' - Wolfe issues no warning and never mentions clues here; he only answers the Ushas question and moves on to Qabbalistic sources",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "14": {
+   "index": 14,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'We don't know what is really meant by the world coming to an end, and God rolling up the sky like a carpet and all that. It is all picturesque language, figurative language to try to give a general idea to an audience that would not be capable of understanding the actuality.' (p.129)",
+   "note": "Quote verbatim. The apple limb follows immediately: 'It is like the Genesis story. I don't believe in a literal \"apple\"... but if you have to explain to a bunch of primitives how men differ from animals... this is a pretty good way to do it.' 'In pictures' tracks the page's own 'picturesque language'.",
+   "fromFile": "verdicts-wolfe-i0-14.json"
+  },
+  "15": {
+   "index": 15,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"then the narrator is damn well going to be unreliable\"",
+   "note": "Raw PDF text extracted with pypdf from gwern.net copy (Shadows of the New Sun ch.12, p.169). Quote appears word for word. Both limbs on page: narration by 'this person in the story' entails unreliability, and 'Ask any courtroom lawyer about examining five or six different witnesses to the same event. The five or six witnesses are all trying to tell the truth, but they have all seen different things.' 'Honest' = 'all trying to tell the truth'.",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "16": {
+   "index": 16,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"she is saying something that only Maytera Marble would say\"",
+   "note": "Raw PDF p.168. Quote verbatim. Interviewer's question supplies the crowded-scene limb ('scenes with a number of characters all speaking in turn without being identified'); Wolfe gives both mechanisms: 'certain characteristic phrases or mistakes, or whatever, that will identify him as the speaker' and the circumstance test ('the speech that... Maytera Marble makes under a certain circumstance, is not the speech that Blood would make').",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "17": {
+   "index": 17,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"or it isn't complex, it's simply confused\"; 10,000 parts shaken = \"a box of junk\"",
+   "note": "Raw PDF p.169. Quote verbatim. Machine limb verbatim too: 'If you have a machine with 10,000 parts and you shake them up in a box, what you have is a box of junk.' One hedge worth recording: Wolfe answers 'It's almost that it has to be', slightly softer than the claim's flat 'must be', but the proposition is his and affirmed.",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "18": {
+   "index": 18,
+   "verdict": "PARTIAL",
+   "trueWording": "\"I started out with the idea of not coining Tars Tarkas type names\"",
+   "unsupportedLimb": "the attribution to The Book of the New Sun specifically - the page says only 'I felt in this book I am not going to do that', answering a question about 'both of the Sun works'; neither Wolfe nor the interviewer names the New Sun in this exchange",
+   "note": "Raw PDF p.173-174. Quote verbatim. The method limb is fully supported: 'What's right is using archaic names and archaic terms for things in connections in which it will be clear to the reader what is meant.' Only the book attribution is unsupported by this page.",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "19": {
+   "index": 19,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"on the assumption that someone will have anglicised this term as a new word\"",
+   "note": "Raw PDF p.173-174. Quote verbatim. Every limb present: 'looking up the Latin or Greek word that corresponds to something you need a word for, and then going back to unabridged dictionaries...' and 'very often you find that somebody did indeed do that, and it crops up in the Oxford dictionary for a citation in the 18th century or whatever.'",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "20": {
+   "index": 20,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"not actually written by John V. Marsch, but by the shadowchild who has replaced\" him",
+   "note": "Raw PDF p.169. Quote verbatim. New Wave limb doubly supported: Wolfe calls it 'the rather tricky thing, which I suppose is New Wave' and then, after the interviewer supplies the title, 'That's New Wave.' 'Concedes' is fair - he had just minimised his New Wave membership.",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "21": {
+   "index": 21,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I think it's mostly laziness. Mental sloth more than anything else.\"",
+   "note": "Raw PDF pp.172-173. Quote verbatim. Big-city limb verbatim: 'If you look at a big city, you discover that, on various levels of society, people are talking in ways that are almost different languages already.' The monoculture-criticism limb is established in the question ('you have in the past criticised sf works that depict monocultured worlds') and affirmed by the answer.",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "22": {
+   "index": 22,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I turned generalities into hard facts. I made India talk the way she talks.\"",
+   "note": "Raw HTML fetched from clarkesworldmagazine.com (HTTP 200) and de-tagged locally; no summarizer. Quote verbatim. Synopsis limb: 'Often I tend to write synopsis. When I do, I have to flesh it out in revision.' Lengthening limb: interviewer notes 'you made the second version longer' and Wolfe answers 'It's longer, but it has a lot more meat.'",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "23": {
+   "index": 23,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"'Nick was a bad man and a cruel man.' That's easy. I know I can't say it at all.\"",
+   "note": "Raw Clarkesworld HTML. Quote verbatim, though on the page Wolfe attributes it to another ('Long ago somebody said, \"Easy writing makes damned hard reading.\"') - the claim does not assert authorship, so no limb fails. Show-don't-state limb verbatim: 'I have to show [Nick] being bad and cruel in the context of the story.'",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "24": {
+   "index": 24,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"A fifth draft may find me reverting to the second or the third, and that's a bad sign.\"",
+   "note": "Raw Clarkesworld HTML. Quote verbatim. Stopping-rule limb verbatim: 'There comes a point at which I'm no longer sure that what I'm doing is improving the piece. That's when I stop working on it and send it in. Usually - not always, but usually - I get there after four drafts.' Page says reverting to the second OR THIRD; the claim's 'second' is a subset, not a contradiction.",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "25": {
+   "index": 25,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"It must entertain the reader, forward the plot, and characterize the speaker.\"",
+   "note": "Raw Clarkesworld HTML. Quote 'Dialogue is action.' verbatim as its own line. Simultaneity limb: 'All pretty much at the same time.' Naturalness limb verbatim: 'it must sound natural - that is, like something that speaker might say at that time to that person.'",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "26": {
+   "index": 26,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The butler mustn't sound like the footman, even though neither is an important character.\"",
+   "note": "Raw Clarkesworld HTML. Quote verbatim. Student limb verbatim: 'This is one of those truths that students reject out of hand. They reject it because everybody sounds alike. / To them.' - the page's line break makes 'To them' the sting, which the claim renders correctly.",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "27": {
+   "index": 27,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Like poetry and song, fiction demands the concrete.\"",
+   "note": "Raw Clarkesworld HTML. Quote verbatim. The contrast is on the page: abstract version 'The vessel, bearing fuel to the New World, met with misfortune shortly before its arrival'; ballad names ship ('the Nightingale'), cargo ('Twenty-one days from Clyde in coal') and shoal ('he drowned on the hard-rock shoal'). All three nouns of the claim check out.",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "28": {
+   "index": 28,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"By engendering expectations and satisfying them.\"",
+   "note": "Raw Clarkesworld HTML, answering 'In general terms, how does a short story work?' Quote verbatim. Sign limb verbatim including capitalisation: 'I told a student once to letter a sign and put it where he'd see it when he wrote: \"I AM GOING TO TELL YOU SOMETHING COOL.\"'",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "29": {
+   "index": 29,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Because fantasy is nearer the truth, that's all... Realistic fiction leaves out far, far too much.\"",
+   "note": "Raw Clarkesworld HTML. Quote verbatim. Both limbs in one answer; the human-experience limb is carried by the adjacent 'How true is that story for the bulk of humankind?' Claim's ordering is reversed from the page's, which does not affect support.",
+   "fromFile": "verdicts-wolfe-i15-29.json"
+  },
+  "30": {
+   "index": 30,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Other than that, the style should suit the story.\"",
+   "note": "Clarkesworld 2008 fetched raw (curl, browser UA, HTTP 200). Quote verbatim. All limbs on page: 'Imagine The Wings of the Dove as told by Huck Finn. It would be funny for ten pages, but . . .' and 'the author's voice, or the narrator's, it's so closely linked to style that I see no point in discussing it separately.'",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "31": {
+   "index": 31,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If the author comments from his viewpoint, it's usually ruinously bad.\"",
+   "note": "Clarkesworld 2015 raw (HTTP 200). Quote verbatim. Page: 'When you have a first person narrator, you are much more into the story. Also, the first person narrator can comment from his viewpoint on actions.' Note the page's 'you are much more into the story' is the writer's vantage as much as the reader's; the claim's 'puts the reader inside the story' is a mild gloss but consistent with the answer's contrast to third person distance.",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "32": {
+   "index": 32,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"they are always unreliable because people are writing books and people can't be trusted\"",
+   "note": "Clarkesworld 2015 raw. Quote verbatim within: 'There are narrators that are openly unreliable and there are narrators that pretend to be totally reliable. But they are always unreliable because people are writing books and people can't be trusted, you know?' Every limb supported.",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "33": {
+   "index": 33,
+   "verdict": "PARTIAL",
+   "trueWording": "\"I've been doing this too long to be surprised\"",
+   "note": "Clarkesworld 2015 raw. Quote 'what they are seeing is themselves' is verbatim ('Somebody can look into the story and what they are seeing is themselves'), and the non-surprise is on the page. But the page attributes the non-surprise to long experience, not to readers seeing themselves; the two remarks sit side by side without the causal link the claim asserts.",
+   "unsupportedLimb": "the causal 'because' — the page gives long experience, not readers seeing themselves, as the reason he is no longer surprised",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "34": {
+   "index": 34,
+   "verdict": "PARTIAL",
+   "trueWording": "\"a real villain never thinks he's a villain\"; fictional villains \"have very narrow viewpoints\"",
+   "note": "Clarkesworld 2015 raw. Quote verbatim and the two villain limbs are on the page verbatim in substance. The third limb is an added gloss: the answer is about villains' viewpoints and the human condition, and says nothing about narration or how bad men narrate themselves (the word 'narrat-' appears only in the separate unreliable-narrator answer).",
+   "unsupportedLimb": "'which shapes how bad men narrate themselves' — the page makes no claim about narration in the villain answer",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "35": {
+   "index": 35,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You do not characterize by telling the reader about the character... You simply show it and shut up.\"",
+   "note": "Black Gate 2010 raw (HTTP 200). Item 4 of Wolfe's numbered advice list: 'You do not characterize by telling the reader about the character. You do it by showing the character thinking, speaking and acting in a characteristic way. You simply show it and shut up.' Every limb verbatim.",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "36": {
+   "index": 36,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Do not start a story unless you have an ending in mind.\"",
+   "note": "Black Gate 2010 raw. Item 5: 'Do not start a story unless you have an ending in mind. You can change the story's ending if you wish, but you should always have a destination.' Quote verbatim; both limbs (ending may change; always a destination) on page.",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "37": {
+   "index": 37,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"how much research I do before I start writing. The answer is, almost none.\"",
+   "note": "Black Gate 2010 raw. Quote verbatim. Page continues: 'If it's a book on Ancient Greece, what is it about Ancient Greece that I need to know? What did Ancient Greeks eat for breakfast?' and, asked, 'They didn't eat breakfast!' — supporting research-as-you-go and the breakfast parenthesis.",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "38": {
+   "index": 38,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the ex-wife... is named Mary Christmas. I never say that - you find out by deduction\"",
+   "note": "Black Gate 2010 raw. Quote verbatim; the page spells the title 'The Tree is My Hat' (lower-case 'is'), a typographic difference only. All limbs supported.",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "39": {
+   "index": 39,
+   "verdict": "PARTIAL",
+   "trueWording": "black boots, trousers, no shirt, black cloak, mask, big sword — \"He's an executioner.\"",
+   "note": "Black Gate 2010 raw. Quote verbatim, and the costume-first origin is fully on the page: the costuming panel, then 'Black boots... Black trousers... No shirt. Black cloak... A mask. A big sword. And I thought - who is this guy? The answer was obvious. He's an executioner.' But the page never names the character: 'Severian' occurs zero times in the interview (grep count 0); Wolfe names only 'the Urth of the New Sun series'. The identification is the verifier's inference, not the source's word.",
+   "unsupportedLimb": "the name 'Severian' — the page names only the New Sun series, never the character",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "40": {
+   "index": 40,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If you look in the third book, you will find a storytelling contest that's strictly padding.\"",
+   "note": "Black Gate 2010 raw. Quote verbatim. The split limb is supported immediately before: 'My publisher thought that I should divide it into two books and build each book up... That's what I did.'",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "41": {
+   "index": 41,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"criticism for being unreadable and overcomplex... 'Well, I'll loosen up.'\"",
+   "note": "MIT Technology Review 2014 raw (HTTP 200, full article text retrieved, section 'EDITING AND WRITING'). Quote verbatim inside: 'It's that I've gotten so much criticism for being unreadable and overcomplex and hard to get into and all this stuff. And I thought, \"Well, I'll loosen up.\"' The shorter-paragraphs/looser-tone description is the interviewer's, which Wolfe re-explains ('It's not that, really') by the criticism — exactly the attribution the claim makes.",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "42": {
+   "index": 42,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If you make everything easy for yourself as an author, you bore the reader.\"",
+   "note": "MIT Technology Review 2014 raw, section 'UNRELIABLE NARRATORS AND CRAFT'. Interviewer: 'With your narrators, you set yourself difficult technical challenges.' Wolfe's answer is the quoted line. Both limbs supported.",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "43": {
+   "index": 43,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"He's a ghost. Ghosts often don't realize they're dead.\"",
+   "note": "MIT Technology Review 2014 raw, same section. Quote verbatim (typographic apostrophes normalized). The interviewer names Weer as 'unreliable in this particular sense: he's dead, and doesn't know it', and Wolfe affirms 'He's a ghost.'",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "44": {
+   "index": 44,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"He knows he's not a real Earthman, but he's trying to talk himself into believing that he is.\"",
+   "note": "MIT Technology Review 2014 raw, same section, answering whether John Marsch understands he is really V.R.T. Quote verbatim; every limb on the page.",
+   "fromFile": "verdicts-wolfe-i30-44.json"
+  },
+  "45": {
+   "index": 45,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"he's just giving you what he has seen\"",
+   "note": "Raw MIT Tech Review page fetched with a browser UA (200, 468KB). Wolfe: \"I think a naive observer is more interesting to read because he's just giving you what he has seen. If you've ever listened to people giving testimony at a trial, they are almost incapable of distinguishing between what they have actually seen or heard and their opinions of what it means.\" Quote verbatim. Wording note: the page says \"people giving testimony at a trial\", not literally \"adult witnesses\" — the child/adult contrast is the question's frame (young narrators, \"what Maisie knew\"); substance of the limb is fully supported.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "46": {
+   "index": 46,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"In Severian, I had created a character who forgot nothing\"",
+   "note": "Same page. Wolfe: \"I came across an article about a brain injury that is perfectly real [anterograde amnesia]... In Severian, I had created a character who forgot nothing. And I thought: let's do one of these guys who forgets everything.\" The interviewer frames it as \"In the Soldier series you created a narrator who forgets everything at the end of every day\"; the same page names Latro as the Soldier series narrator, so the Latro identification is page-supported. Quote verbatim.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "47": {
+   "index": 47,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You see things from your standpoint and not from... someone else\"",
+   "note": "Same page. Q: \"A persistent theme of your writing is the unreliability of narrators.\" Wolfe: \"They're all unreliable. Well, we all are, aren't we?\" Then, to \"Everyone's story is necessarily subjective\": \"You see things from your standpoint and not from the standpoint of someone else.\" Both limbs verbatim.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "48": {
+   "index": 48,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"It's an epistolary novel, and that seems to help people along\"",
+   "note": "Same page, EDITING AND WRITING section, answering how a Niven/Card/Brin reader should start Wolfe: \"I think it's probably The Sorcerer's House. It's an epistolary novel, and that seems to help people along. So long as they don't get bothered by the fact that the style changes from one letter writer to another.\" Every limb verbatim.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "49": {
+   "index": 49,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You learn to look at scenery from a standpoint of defensive positions\"",
+   "note": "Same page, WAR AND RELIGION section. The interviewer quotes Severian's passage (\"War is not a new experience; it is a new world ... Even its geography is new, because it is a geography in which insignificant hills and hollows are lifted to the importance of cities\") and Wolfe's whole reply is the quoted line. The claim's link between the Severian passage and the perception is by direct adjacency (reply to that quoted passage), not an explicit statement; the military framing is the section's own (\"What military service does is rub off a lot of the pretense and self-deception\").",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "50": {
+   "index": 50,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"He's taking out every word the sentence doesn't require\"",
+   "note": "locusmag.com/2002/Issue09/GaimanWolfe.html fetched raw (200, 17KB; page uses a legacy charset so curly apostrophes render as replacement chars — normalized before matching). Wolfe on the student editor of The Commentator at Texas A&M: \"he got a blue pencil, and he edited it there in front of me... 'I see what he's doing. He's taking out every word the sentence doesn't require. I'm going to write the next story so he can't do that.'\" Also \"I learned more from the student editor of The Commentator than I have ever learned from any other editor.\" All limbs supported.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "51": {
+   "index": 51,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"read by an educated reader, and reread with increased pleasure\"",
+   "note": "Same Locus page. Gaiman quotes Wolfe's own letter definition: \"My definition of good literature is that which can be read by an educated reader, and reread with increased pleasure.\" On fiction that gives everything up first time, Wolfe: \"Phooey! I don't want to write that kind of thing. Rats! I don't like it and it would bore me to write it and I'm not gonna write it.\" Both limbs supported; the definition is Wolfe's, quoted back to him by Gaiman.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "52": {
+   "index": 52,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I am dealing from this position of presumed expertise\"",
+   "note": "Same Locus page: \"too often people want me to go in and settle their argument. That's exactly what I should not do. I am dealing from this position of presumed expertise. We don't have a level playing field... There's no sacredness to the text.\" Every limb verbatim, including the Baker Street Irregulars analogy that carries it.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "53": {
+   "index": 53,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You're going to see things in there that I don't see consciously\"",
+   "note": "Same Locus page: \"And besides, I don't know everything to give it up. You're going to see things in there that I don't see consciously. I like those things.\" Quote and both limbs verbatim.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "54": {
+   "index": 54,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Peace is built on lies\" / \"I never lie.\"",
+   "note": "Same Locus page. Gaiman: \"I think Gene is the master of lying in fiction, both directly and indirectly. Peace is built on lies... After three or four times through that text, you begin to be able to say, 'I think he's lying about this or that.'\" Wolfe's entire reply: \"I never lie.\" All three limbs (master of lying, Peace built on lies, three or four readings, the reply) verbatim.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "55": {
+   "index": 55,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"it assures the reader that things need not be as they are now\"",
+   "note": "Same Locus page. Q: \"What's the most important thing about fiction?\" Wolfe: \"The most important thing is that it assures the reader that things need not be as they are now. In other words, the most important thing is hope.\" Every limb verbatim.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "56": {
+   "index": 56,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"it's a waste unless it's said in some particular way\"",
+   "note": "locusmag.com/2011/03/gene-wolfe-engineering-the-future/ fetched raw (200, 163KB); page is the excerpts from the March 2011 Locus interview. Wolfe: \"When you do anything in a book, you really have to be doing several things at once. You need to pique the tone of the book; to move the plot forward; to touch on the character of the person. If you've got a dinner scene where somebody says, 'Pass the salt,' it's a waste unless it's said in some particular way, or the character wants the salt for some special purpose.\" Every limb verbatim, tone/plot/character included.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "57": {
+   "index": 57,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"My style hasn't changed at all\"",
+   "note": "Wayback capture 20020703232613 of sfsite.com/03b/gw124.htm fetched raw (200, 41KB); header confirms \"A Magus Of Many Suns: An Interview With Gene Wolfe / An interview with Nick Gevers / January 2002\". Wolfe: \"My style hasn't changed at all. I write in a voice appropriate to the story I have to tell, that's all. I may be doing it a bit better now, or a bit worse; but that's always been the idea.\" Both limbs verbatim.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "58": {
+   "index": 58,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I use the style suited to the story... If it isn't, I change it\"",
+   "note": "Same SF Site capture: \"There really aren't any answers. I use the style suited to the story. If it's the right style for the story, I like it. If it isn't, I change it. A style becomes difficult when it is not suited to what is being said.\" Quote and both limbs verbatim. Wording note: the page says \"becomes difficult when it is not suited\"; the claim's \"only when\" is a (fair, context-consistent) tightening, not the page's word.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  },
+  "59": {
+   "index": 59,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Oreb can manage only two syllables\"",
+   "note": "Same SF Site capture: \"I listen to people, what they actually say as well as what they mean, and how they say it. Both Patera Remora and Patera Incus speak as slight exaggerations of people I've met.\" And: \"Oreb [the night chough, a talking bird] talks, but Oreb can manage only two syllables: 'Good bird! Watch out! Bad boy. Iron girl. Good Silk!'\" All three limbs verbatim.",
+   "fromFile": "verdicts-wolfe-i45-59.json"
+  }
+ },
  "assembledFrom": [
   "found-wolfe-academic.json",
   "found-wolfe-craft.json",

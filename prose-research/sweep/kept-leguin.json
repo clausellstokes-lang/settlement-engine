@@ -695,5 +695,698 @@
    "note": "Same page: 'A grave joyfulness pervades the trilogy, which is perhaps more maturely thoughtful (while remaining exciting) than the comparable Narnia series of C S Lewis.' Quote verbatim and every limb present. FLAG for downstream use: the claim drops SFE's hedge 'perhaps' - the source qualifies the Narnia comparison, so restore 'perhaps' if the sentence is quoted as SFE's position.",
    "fromFile": "verdicts-leguin-i30-44.json"
   }
+ },
+ {
+  "index": 60,
+  "feature": "deliberately limited invented lexicon",
+  "claim": "Le Guin (quoted by Garth) said there was no use trying to make a lexicon of Earthsea's languages, unlike Tolkien who in one sense wrote LOTR to give his languages speakers.",
+  "source": "John Garth, 'Ursula Le Guin, the language of Earthsea, and Tolkien' (blog)",
+  "url": "https://johngarth.wordpress.com/2021/01/22/ursula-le-guin-the-language-of-earthsea-and-tolkien/",
+  "quote": "No use trying to make a lexicon",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 60,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "No use trying to make a lexicon of Hardic",
+   "note": "Garth body text quotes Le Guin ('Dreams Must Explain Themselves', n.3): 'No use trying to make a lexicon of Hardic ... or of the True Speech; there's not enough in the books. It's not like Tolkien, who in one sense wrote The Lord of the Rings to give his invented languages somebody to speak them.' Quote and both limbs verbatim. Live URL 403 to curl; verified on Wayback raw capture 20260522130119id_.",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 63,
+  "feature": "minimal reference tools",
+  "claim": "In 'Dreams Must Explain Themselves' Le Guin named only the Shorter Oxford Dictionary and Follett's and Fowler's usage manuals as her tools (later Strunk & White).",
+  "source": "Stan Carey, 'How to see one's own world': Le Guin on writing style (Sentence first blog)",
+  "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+  "quote": "Follett's and Fowler's manuals",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 63,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "entire arsenal of tools: Shorter Oxford, Follett's and Fowler's manuals",
+   "note": "Carey quotes 'Dreams Must Explain Themselves' (1973): 'The Shorter Oxford Dictionary and Follett's and Fowler's manuals of usage are my entire arsenal of tools.' The 'only' limb is carried by 'entire arsenal'; the 1989 note supplies '(later Strunk & White)': 'Strunk and White's Elements of Style ... are my road-atlas to English.' Live URL 403 to curl; verified on Wayback raw capture 20260804234601id_.",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 64,
+  "feature": "style as vision",
+  "claim": "Carey foregrounds the essay's claim that style is the writer's way of seeing and speaking, and that the artist's hardest lesson is to see his own world and speak in his own words.",
+  "source": "Stan Carey blog (quoting Elfland)",
+  "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+  "quote": "",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 64,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Style is how you as a writer see and speak",
+   "note": "Claim carries no quote field, so graded on substance. Carey quotes 'From Elfland to Poughkeepsie': 'Style is how you as a writer see and speak. It is how you see: your vision, your understanding of the world, your voice' and 'A good learner will finally learn the hardest thing: how to see one's own world, how to speak one's own words.' Carey does foreground it — it is the post's title. Page says 'one's own', not 'his own'.",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 65,
+  "feature": "language as subject",
+  "claim": "Margaret Mahy: in Earthsea language is not only the vehicle of the story but at times what the story is about, and Le Guin must find the right name before she can go on.",
+  "source": "Margaret Mahy, 'Speculations on the Earthsea Stories' (ursulakleguin.com)",
+  "url": "https://www.ursulakleguin.com/on-earthsea-mahy",
+  "quote": "what the story is about",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 65,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "at times, what the story is about",
+   "note": "Mahy, 'Speculations on the Earthsea Stories' on ursulakleguin.com: 'the language which is not only the vehicle by which the story is told, but is, at times, what the story is about.' Second limb is Le Guin to Mahy by phone: 'I must find the right name or I cannot get on with the story ... I cannot write the story if the name is wrong.'",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 66,
+  "feature": "names with conviction",
+  "claim": "The invented names carry conviction and inevitability, so the reader feels reminded of a land already known.",
+  "source": "Margaret Mahy (ursulakleguin.com)",
+  "url": "https://www.ursulakleguin.com/on-earthsea-mahy",
+  "quote": "conviction and inevitability",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 66,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "names which had conviction and inevitability",
+   "note": "Mahy asks 'how she came to command names which had conviction and inevitability'; the reminded-of-a-known-land limb is her own reading experience in the preceding paragraph: 'searching the map ... I felt I was not so much acquainting myself with a new geography, but reminding myself of one that I already knew.' The causal join is the page's own ('Yet', contrasting with names that feel spurious).",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 67,
+  "feature": "spoken voice in the reader's head",
+  "claim": "Mahy describes the reading experience as words on the page becoming a spoken voice in the reader's head — the storyteller addressing a reader-listener.",
+  "source": "Margaret Mahy (ursulakleguin.com)",
+  "url": "https://www.ursulakleguin.com/on-earthsea-mahy",
+  "quote": "a spoken voice in the reader's head",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 67,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "words on the page translate into a spoken voice",
+   "note": "Mahy: 'the writer ... is not directing his or her story at a particular age group but at a particular sort of reader... a listener as well as a reader, for those words on the page translate into a spoken voice in the reader's head... and that reader-listener out there has an approximate connection to that first reader-listener.' Both limbs present.",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 68,
+  "feature": "legend feel",
+  "claim": "Walton calls it one of the very few fantasy novels that succeeds in feeling like a legend.",
+  "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+  "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+  "quote": "succeeds in feeling like a legend",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 68,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "very few fantasy novels that succeeds in feeling like a legend",
+   "note": "Walton, Reactor, dated 2010-01-27: 'It's also one of the very few fantasy novels that succeeds in feeling like a legend.' Byline Jo Walton confirmed on page.",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 69,
+  "feature": "modulated narrative distance",
+  "claim": "The narration passes easily from what people say and what isn't spoken of, from the distance of the fairy-tale teller to the very close, always sure where the teller stands.",
+  "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+  "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+  "quote": "the distance of the teller of fairy-tales to the very close",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 69,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the distance of the teller of fairy-tales to the very close",
+   "note": "Walton: 'she passes easily from what people say, what isn't spoken of, the distance of the teller of fairy-tales to the very close. Whether she's inside or outside she has a tremendous grasp of the story she's telling and where the teller is standing in relation to it.' All three limbs present.",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 70,
+  "feature": "told within the world, after the story",
+  "claim": "The story is told entirely within the world but after it, so the implied reader is assumed to know the great deeds referenced.",
+  "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+  "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+  "quote": "told entirely within the world, but after the story",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 70,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "told entirely within the world, but after the story",
+   "note": "Walton: 'The story is told entirely within the world, but after the story—the implied reader is assumed to know about the great deeds that are referenced.' Verbatim, both limbs.",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 71,
+  "feature": "no wasted word; read-aloud",
+  "claim": "There is never a wasted word and all the words are right; it is like poetry and among the best books for reading aloud.",
+  "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+  "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+  "quote": "There's never a wasted word, and all the words are right.",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 71,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There's never a wasted word, and all the words are right",
+   "note": "Walton: 'There's never a wasted word, and all the words are right. It's like poetry. This is one of the best books for reading aloud.' Verbatim including the poetry and read-aloud limbs.",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 72,
+  "feature": "evocative naming",
+  "claim": "The names (Selidor, Iffish, Havnor, Osskil, Gont, Pendor) make the map memorable; the world is 'named and called up' from the first word.",
+  "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+  "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+  "quote": "Le Guin is so wonderful with names",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 72,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin is so wonderful with names",
+   "note": "Walton: 'I could draw the map from memory, and the reason for this isn't because it's an especially good map but because Le Guin is so wonderful with names—Selidor, Iffish, Havnor, Osskil, Gont, Pendor and the Ninety Isles.' The 'named and called up' limb is also verbatim: 'From the first word, from the names on the map, Earthsea is a very realised world, named and called up.' (Page's list also includes the Ninety Isles; claim's list is a subset, not stated as exhaustive.)",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 73,
+  "feature": "bounded world",
+  "claim": "A world with much more in it than appears on the page — history, other countries — yet with a clear line drawn round it: 'only in silence the word'.",
+  "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+  "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+  "quote": "a clear line drawn around it",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 73,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a world with a clear line drawn around it",
+   "note": "Walton: 'It's a world with a lot more in it than appears on the page—a history, of Elfarran and Erreth-Akbe, other countries, the Kargs, and it's a world with a clear line drawn around it—\"only in silence the word\".' Every limb verbatim.",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 74,
+  "feature": "blank spaces for the reader",
+  "claim": "Plotz (per Burt) calls the prose the antithesis of high-end video-game verisimilitude: it leaves blanks the reader fills, showing how often we fill things in.",
+  "source": "Stephanie Burt, review of John Plotz, Ursula Le Guin's Earthsea (OUP 2023), Strange Horizons",
+  "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+  "quote": "the antithesis of the well-rendered verisimilitude",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 74,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the antithesis of the well-rendered verisimilitude of a high-end video game",
+   "note": "Burt (Strange Horizons, review of Plotz): 'Leaving blank spaces for readers to see how well, and how often, we fill things in, Le Guin's prose is (Plotz writes) \"the antithesis of the well-rendered verisimilitude of a high-end video game\" (p. 48).' Attribution to Plotz per Burt is explicit on the page; both limbs present.",
+   "fromFile": "verdicts-leguin-i60-74.json"
+  }
+ },
+ {
+  "index": 75,
+  "feature": "Cather-like spareness",
+  "claim": "Plotz compares Le Guin's clear, spare prose to Willa Cather's.",
+  "source": "Stephanie Burt on Plotz (Strange Horizons)",
+  "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+  "quote": "",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 75,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Her clear, spare prose reminds Plotz of Willa Cather's.",
+   "note": "Burt: 'Her clear, spare prose reminds Plotz (with reason, and I agree!) of Willa Cather's.' Claim's wording is on the page word for word; no quote field was supplied.",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 76,
+  "feature": "oral-tale co-creation",
+  "claim": "Burt: the narration invites readers in and holds them back, reminding them they are hearing a story and making them co-creators, collaborators, listeners as if to an oral tale.",
+  "source": "Stephanie Burt (Strange Horizons)",
+  "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+  "quote": "co-creators, collaborators, listeners, as if to an oral tale",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 76,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin invites us in, holds us back; co-creators, collaborators, listeners.",
+   "note": "Quote 'co-creators, collaborators, listeners, as if to an oral tale' is verbatim. Page: 'Le Guin instead invites us in and holds us back, reminds us that we are reading (or hearing) a story, making us co-creators...' — page says 'reading (or hearing)', the claim keeps only 'hearing'; subject is Le Guin rather than 'the narration'. Both are within paraphrase.",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 77,
+  "feature": "clear, patient prose; open space",
+  "claim": "Burt names the clear, patient prose and its love for calm, open space, sky and sea, and likens the listening-and-waiting mode to Paradise Regained.",
+  "source": "Stephanie Burt (Strange Horizons)",
+  "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+  "quote": "clear, patient",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 77,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "clear, patient prose; love for calm, open space, sky and sea.",
+   "note": "Verbatim: 'in its clear, patient prose, its cautions against worldly power, its love for calm, open space, sky and sea, untilled land.' Paradise Regained limb also on the page: Le Guin's plots and ethics 'remind me as well of John Milton's Paradise Regained (1671) ... and Jesus says no, and stands, and listens, and waits.'",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 79,
+  "feature": "two-beat trochaic pulse",
+  "claim": "Le Guin reads the fundamental rhythm of LOTR as two beats — stress and release, inbreath and outbreath, a heartbeat — irreducibly simple yet capable of endless variation.",
+  "source": "Kate Nepveu, LotR re-read: Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (summary of the 2001 essay)",
+  "url": "https://kate-nepveu.livejournal.com/180011.html",
+  "quote": "Stress, release. Inbreath, outbreath. A heartbeat.",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 79,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "two beats. Stress, release. Inbreath, outbreath. A heartbeat.",
+   "note": "Quote verbatim. Every limb on the page: 'as simple as a rhythm can be: two beats'; 'so capable of endlessly complex and subtle variation'; and later 'the irreducible simplicity of the trochaic beat, stress/unstress'.",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 80,
+  "feature": "reversal pairs, not binary flips",
+  "claim": "She lists pulsing pairs (darkness/daylight, confusion/clarity, trap/freedom) and insists they are not simple binary flips; each yang contains its yin.",
+  "source": "Kate Nepveu, LotR re-read: Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (summary of the 2001 essay)",
+  "url": "https://kate-nepveu.livejournal.com/180011.html",
+  "quote": "are not simple binary flips",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 80,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reversals are not simple binary flips; each yang contains its yin.",
+   "note": "Quote verbatim ('[t]hese reversals are not simple binary flips'). Pairs on the page as 'darkness/daylight,' 'confusion of thought/clarity,' 'imprisonment or a trap/freedom'; and 'Each yang contains its yin, each yin contains its yang.'",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 81,
+  "feature": "walking gait as rhythm",
+  "claim": "The narrative follows a physical gait — one, two, left, right, on foot from the Shire to the Mountain and back.",
+  "source": "Kate Nepveu, LotR re-read: Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (summary of the 2001 essay)",
+  "url": "https://kate-nepveu.livejournal.com/180011.html",
+  "quote": "",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 81,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "One, two, left, right, on foot, all the way. And back.",
+   "note": "No quote field supplied; the claim's wording is verbatim on the page: 'A walking gait... we walk from the Shire to the Mountain of Doom with Frodo and Sam. One, two, left, right, on foot, all the way. And back.'",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 83,
+  "feature": "sentence follows the breath",
+  "claim": "Le Guin (quoted) on Tolkien: even long sentences flow clearly and follow the breath, punctuation comes where you need to pause, cadences are graceful and inevitable.",
+  "source": "Vermont Softworks blog on 'Rhythmic Pattern in The Lord of the Rings'",
+  "url": "https://vermontsoftworks.com/post/2023/leguin-rhythmic-pattern-in-lotr/",
+  "quote": "their flow is perfectly clear, and follows the breath",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 83,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "their flow is perfectly clear, and follows the breath.",
+   "note": "Quote verbatim inside the block quotation of Le Guin: 'Even when the sentences are long, their flow is perfectly clear, and follows the breath; punctuation comes just where you need to pause; the cadences are graceful and inevitable.' All three limbs present.",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 84,
+  "feature": "the writer must hear the prose",
+  "claim": "Le Guin infers from read-aloud ease that Tolkien must have heard what he wrote.",
+  "source": "Vermont Softworks blog (quoting Le Guin)",
+  "url": "https://vermontsoftworks.com/post/2023/leguin-rhythmic-pattern-in-lotr/",
+  "quote": "Tolkien must have heard what he wrote",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 84,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin observes that 'Tolkien must have heard what he wrote.'",
+   "note": "Quote verbatim. The read-aloud basis is the page's surrounding argument (Le Guin: 'it's a wonderful book to read aloud'; sentences that follow the breath; the blogger never stumbling reading LotR aloud). The page's verb is 'observes' rather than 'infers'.",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 85,
+  "feature": "sound first",
+  "claim": "The sound of the language is where it all begins; the test of a sentence is whether it sounds right.",
+  "source": "Literary Hub, 'A Writing Lesson from Ursula K. Le Guin' (excerpt from Steering the Craft)",
+  "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+  "quote": "The sound of the language is where it all begins.",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 85,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The sound of the language is where it all begins.",
+   "note": "Quote verbatim, opening sentence of the Steering the Craft chapter; next sentence: 'The test of a sentence is, Does it sound right?'",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 87,
+  "feature": "mind's ear and sound faults",
+  "claim": "Writers need a mind's ear; dull, choppy, droning, jerky, feeble are faults of sound, lively, flowing, strong, beautiful its virtues.",
+  "source": "Literary Hub, 'A Writing Lesson from Ursula K. Le Guin' (excerpt from Steering the Craft)",
+  "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+  "quote": "a mind's ear",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 87,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A good writer, like a good reader, has a mind's ear.",
+   "note": "Quote verbatim. Faults list exact: 'Dull, choppy, droning, jerky, feeble: these common criticisms of narrative are all faults in the sound of it.' Virtues: 'Lively, well-paced, flowing, strong, beautiful' \\u2014 the claim drops 'well-paced' but adds nothing. 'Narrative writers need to train their mind's ear'.",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 88,
+  "feature": "prose sound effects irregular",
+  "claim": "Prose's sound effects are subtle and always irregular (unlike verse); onomatopoeia, alliteration, repetition and dialect cadences are the tools, and changing sentence rhythms can express emotion.",
+  "source": "Literary Hub, 'A Writing Lesson from Ursula K. Le Guin' (excerpt from Steering the Craft)",
+  "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+  "quote": "",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 88,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "sound effects of prose are usually subtle and always irregular.",
+   "note": "No quote field supplied; every limb is on the page but assembled from four places: 'the sound effects of prose are usually subtle and always irregular' (the claim drops 'usually' before 'subtle'); the prose/poetry contrast in the same sentence; the tool list from the chapter's exercise ('onomatopoeia, alliteration, repetition, rhythmic effects, made-up words or names, dialect') plus Twain's 'irresistible dialectical cadences'; and 'the way the changing sentence rhythms embody and express the emotions of the characters'.",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 89,
+  "feature": "father tongue distancing",
+  "claim": "The father tongue's essential gesture is not reasoning but distancing — one-way speech that expects no answer and 'only lectures'.",
+  "source": "Le Guin, Bryn Mawr Commencement Address (1986), text at Serendip",
+  "url": "https://serendipstudio.org/sci_cult/leguin/",
+  "quote": "not reasoning but distancing",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 89,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "essential gesture of the father tongue is not reasoning but distancing.",
+   "note": "Quote verbatim: 'The essential gesture of the father tongue is not reasoning but distancing-making a gap, a space, between the subject or self and the object or other.' One-way limb: 'The father tongue is spoken from above. It goes one way. No answer is expected, or heard.' 'It only lectures.' is verbatim (of the written, college-learned dialect). Page is the 1986 Bryn Mawr Commencement Address, reproduced by permission at Serendip.",
+   "fromFile": "verdicts-leguin-i75-89.json"
+  }
+ },
+ {
+  "index": 90,
+  "feature": "mother tongue expects an answer",
+  "claim": "The mother tongue is conversation, language as relation whose power is in binding not dividing.",
+  "source": "Le Guin, Bryn Mawr Commencement Address (1986), text at Serendip",
+  "url": "https://serendipstudio.org/sci_cult/leguin/",
+  "quote": "Expects an answer. It is conversation",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 90,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The mother tongue, spoken or written, expects an answer. It is conversation",
+   "note": "Serendip raw HTML fetched (200, 42.5 KB) and stripped to text. Page: \"The mother tongue, spoken or written, expects an answer. It is conversation, a word the root of which means 'turning together.' The mother tongue is language not as mere communication but as relation, relationship... Its power is not in dividing but in binding, not in distancing but in uniting.\" Every limb (conversation; language as relation; power in binding not dividing) is on the page. Only difference from the supplied quote is the capital E on 'Expects', a fragment artifact.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 91,
+  "feature": "verge of silence and song",
+  "claim": "The mother tongue is always on the verge of silence and often on the verge of song.",
+  "source": "Le Guin, Bryn Mawr Commencement Address (1986), text at Serendip",
+  "url": "https://serendipstudio.org/sci_cult/leguin/",
+  "quote": "on the verge of silence and often on the verge of song",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 91,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is a language always on the verge of silence and often on the verge of song",
+   "note": "Same Serendip page, one fetch. The sentence continues '...It is the language spoken by all children and most women, and so I call it the mother tongue', so the mother-tongue referent in the claim is explicit on the page. Quote appears word for word.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 92,
+  "feature": "native tongue as wedding",
+  "claim": "The third, native tongue of art welds the public father tongue and private mother tongue back together.",
+  "source": "Le Guin, Bryn Mawr Commencement Address (1986), text at Serendip",
+  "url": "https://serendipstudio.org/sci_cult/leguin/",
+  "quote": "wedding and welding back together",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 92,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is a wedding and welding back together of the alienated consciousness... father tongue... mother tongue",
+   "note": "Same Serendip page. 'wedding and welding back together' is verbatim. The other limbs are all on the page: 'The third language, my native tongue'; the unlearned language is 'any use of language when it is spoken, written, read, heard as art'; and 'the marriage of the public discourse and the private experience' supports the public-father / private-mother framing.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 93,
+  "feature": "structuralist view of language",
+  "claim": "Newell's MA thesis argues that the structuralist view of language revealed in the Earthsea Cycle underlies its depiction of power and balance.",
+  "source": "Daniel Newell, 'The Mother Tongue in a World of Sons: Language and Power in The Earthsea Cycle' (MA thesis, Liberty University 2010) — abstract",
+  "url": "https://digitalcommons.liberty.edu/masters/133/",
+  "quote": "The structuralist view of language",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 93,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The structuralist view of language revealed in Le Guin's Earthsea Cycle informs her depiction of power and balance",
+   "note": "digitalcommons.liberty.edu/masters/133/ fetched live (200, 35 KB); abstract present in the raw HTML. Page metadata confirms Daniel Newell, Master of Arts (MA), Masters Theses 133, 5-2010, Liberty University, keyword 'Structuralism'. Claim's 'underlies' = page's 'informs... and is central to understanding'; the supplied fragment is verbatim.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 94,
+  "feature": "speech-act power of wizards (title-level)",
+  "claim": "A peer-reviewed article frames Earthsea's wizards' language as 'doing things with words' — speech-act power crossed with gender.",
+  "source": "Crossref record: Comoletti & Drout, 'How They Do Things with Words…', Children's Literature 29 (2001): 113–141, DOI 10.1353/chl.0.0786",
+  "url": "https://api.crossref.org/works?query.bibliographic=How+They+Do+Things+with+Words+Language+Power+Gender+Priestly+Wizards+Le+Guin+Earthsea&rows=3",
+  "quote": "",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 94,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "How They Do Things with Words: Language, Power, Gender, and the Priestly Wizards",
+   "note": "Crossref API queried live (200); top hit score 77.3 is the exact record: Laura B. Comoletti & Michael D. C. Drout, Children's Literature 29(1): 113-141, DOI 10.1353/chl.0.0786, issued 2001, type journal-article, publisher Project MUSE. Graded SUBSTANCE not VERBATIM because the claim's inline phrase 'doing things with words' is a paraphrase of the title's 'How They Do Things with Words', and the claim carries no quote field. 'Speech-act power crossed with gender' is a fair reading of 'Language, Power, Gender'; 'peer-reviewed' is not a Crossref field but is supported in substance by the journal-article record in a scholarly journal.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 95,
+  "feature": "rhythm as narrative technique (title-level)",
+  "claim": "A 1992 Extrapolation article treats rhythm as a narrative technique operating 'beyond words' in The Left Hand of Darkness.",
+  "source": "Crossref record: Nora Barry & Mary Prescott, 'Beyond Words: The Impact of Rhythm as Narrative Technique in The Left Hand of Darkness', Extrapolation 33.2 (1992): 154–165, DOI 10.3828/extr.1992.33.2.154",
+  "url": "https://api.crossref.org/works?query.bibliographic=Beyond+Words+Impact+of+Rhythm+as+Narrative+Technique+Left+Hand+of+Darkness+Extrapolation+1992&rows=3",
+  "quote": "",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 95,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Beyond Words: The Impact of Rhythm as Narrative Technique in The Left Hand of Darkness",
+   "note": "Crossref API queried live (200); top hit is the exact record: Nora Barry & Mary Prescott, Extrapolation 33(2): 154-165, DOI 10.3828/extr.1992.33.2.154, issued 1992-07, type journal-article. Every limb of the claim (1992, Extrapolation, rhythm as narrative technique, 'beyond words', Left Hand of Darkness) is verbatim in the record title/metadata.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 97,
+  "feature": "retold-legend voice",
+  "claim": "David Mitchell (quoted on the official site) says the book reads like the retelling of a tale first told centuries ago.",
+  "source": "ursulakleguin.com, The Books of Earthsea page (quoting Mitchell)",
+  "url": "https://www.ursulakleguin.com/the-books-of-earthsea",
+  "quote": "reads like the retelling of a tale first told centuries ago",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 97,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reads like the retelling of a tale first told centuries ago (David Mitchell)",
+   "note": "ursulakleguin.com/the-books-of-earthsea fetched live (200, 161 KB). Quote is word for word with the Mitchell attribution in parentheses. Referent note, not a demotion: on the page the phrase describes 'the timeless and beloved A Wizard of Earthsea' at its 50th anniversary, not the omnibus The Books of Earthsea on whose page it sits; the claim's unspecific 'the book' does not assert otherwise.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 98,
+  "feature": "grammar vocabulary as craft tool",
+  "claim": "Steering the Craft insists the writer needs grammatical terms to say what is wrong or right in a sentence, likening the untooled writer to a carpenter who cannot tell a hammer from a screwdriver.",
+  "source": "ursulakleguin.com, Steering the Craft page",
+  "url": "https://www.ursulakleguin.com/steering-the-craft",
+  "quote": "like a carpenter who doesn't know a hammer from a screwdriver",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 98,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A writer who doesn't know them is like a carpenter who doesn't know a hammer from a screwdriver",
+   "note": "ursulakleguin.com/steering-the-craft fetched live (200, 114 KB). The 'From the Introduction' block carries both limbs: 'You can't say what's wrong or right in a sentence without the words to describe it. A writer who doesn't know them is like a carpenter who doesn't know a hammer from a screwdriver.' preceded by 'the technical language of speech and writing, the vocabulary of grammar... these are the names of the writer's tools.' Supplied quote is verbatim.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 99,
+  "feature": "re-vision without retraction",
+  "claim": "The second trilogy 'sees exactly the same world with different eyes', expanding rather than retracting the earlier books.",
+  "source": "Sharada Bhanu, 'Tehanu: A Return to the Source' (ursulakleguin.com)",
+  "url": "https://www.ursulakleguin.com/return-to-source",
+  "quote": "sees exactly the same world with different eyes",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 99,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It sees exactly the same world with different eyes",
+   "note": "ursulakleguin.com/return-to-source fetched live (200, 121 KB). Page: 'Le Guin may have a point when she claims \"The second trilogy changes nothing in the first. It sees exactly the same world with different eyes. Almost, I would say, with two eyes, rather than one.\"' followed by 'she expands and re-visions rather than invalidates, retracts or revokes her earlier writing' - which supports the expanding-not-retracting limb. Attribution nuance, not a demotion: the sentence is Le Guin's own, quoted by Sharada Bhanu on that page; the claim cites the Bhanu page as its source, which is where it appears.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 100,
+  "feature": "plainness and economy",
+  "claim": "Le Guin asserts that plain language is the noblest of all narrative languages.",
+  "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973; repr. The Language of the Night 1979)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "A plain language is the noblest of all.",
+  "page": "p.8, on epic plainness",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "1973",
+  "routeHint": "direct PDF fetch with a browser user agent, pypdf extraction",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 100,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A plain language is the noblest of all.",
+   "note": "PDF fetched live from digginganddeepening.com (200, 346,717 bytes, application/pdf, 8 pages) and text-extracted with pdfminer; the sentence is on PDF page 8, matching the claim's page field. Quote verbatim. The claim's narrowing to 'narrative languages' is weaker than the page, which says it flatly, and the surrounding sentences are about narrative ('Clarity and simplicity are permanent virtues in a narrative', epics and sagas), so the limb holds.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 101,
+  "feature": "plainness and economy",
+  "claim": "Le Guin asserts that plain language is also the most difficult to write.",
+  "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "It is also the most difficult.",
+  "page": "p.8, immediately after the plain-language claim",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "1973",
+  "routeHint": "direct PDF fetch, pypdf extraction",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 101,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is also the most difficult.",
+   "note": "Same PDF, page 8, immediately after 'A plain language is the noblest of all.' - exactly as the claim's page field states. Quote verbatim; 'to write' is the plain referent of the passage on writing plain language.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 102,
+  "feature": "plainness and economy",
+  "claim": "Le Guin calls clarity and simplicity permanent virtues in a narrative.",
+  "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "Clarity and simplicity are permanent virtues in a narrative.",
+  "page": "p.8, on epics and sagas",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "1973",
+  "routeHint": "direct PDF fetch, pypdf extraction",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 102,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Clarity and simplicity are permanent virtues in a narrative.",
+   "note": "Same PDF, page 8, in the paragraph on epics and sagas (Homer, The Song of Roland, the Mabinogion, the Norse sagas) - matching the claim's page field. Quote verbatim, whole sentence.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 103,
+  "feature": "plainness and economy",
+  "claim": "Le Guin distinguishes a fake plainness, which she calls flat rather than simple, from real plainness.",
+  "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "It is not really simple, but flat.",
+  "page": "p.8, on the 'Poughkeepsie style'",
+  "kind": "own-words",
+  "polarity": "rejects",
+  "date": "1973",
+  "routeHint": "direct PDF fetch, pypdf extraction",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 103,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is a fake plainness. It is not really simple, but flat.",
+   "note": "Same PDF, page 8, on 'the Poughkeepsie style of fantasy... also written in a plain and apparently direct prose. Does that make it equal to Tolkien's? Alas, no. It is a fake plainness. It is not really simple, but flat.' Both limbs (a fake plainness; flat rather than simple) verbatim.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
+ },
+ {
+  "index": 104,
+  "feature": "diction (native vs latinate)",
+  "claim": "Le Guin describes Tolkien's vocabulary as unstriking and everything in it as direct, concrete and simple.",
+  "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "everything is direct, concrete, and simple",
+  "page": "p.8, on Tolkien's plain English",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "1973",
+  "routeHint": "direct PDF fetch, pypdf extraction",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 104,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete, and simple",
+   "note": "Same PDF, page 8. Supplied quote verbatim. 'Unstriking' = 'is not striking'. Minor gloss, not a demotion: the page's 'everything is direct, concrete, and simple' reads on Tolkien's writing in that sentence's sweep rather than strictly on items 'in' the vocabulary.",
+   "fromFile": "verdicts-leguin-i90-104.json"
+  }
  }
 ]

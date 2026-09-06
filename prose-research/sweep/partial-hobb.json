@@ -1,1 +1,104 @@
-[]
+[
+ {
+  "index": 7,
+  "feature": "dwelling on the event",
+  "claim": "Other heroes' ordeals feel lesser because the event is not dwelt on and leaves no lingering change; Hobb dwells and lets it change the character.",
+  "source": "A Dribble of Ink interview (Aidan Moher, 2007)",
+  "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+  "quote": "the event is not dwelt on",
+  "angle": "voice",
+  "verdict": {
+   "index": 7,
+   "verdict": "PARTIAL",
+   "trueWording": "they seem lesser because the event is not dwelt on",
+   "note": "Quote exact and the first half is fully supported: 'many fantasy tales where the heroes or heroines endure some truly awful experiences, but they seem lesser because the event is not dwelt on, and in some cases, it doesn't seem to have lingering effects or change the character in any way.' Two gaps: (a) the page hedges 'in some cases' where the claim asserts flatly that such events leave no lingering change; (b) the page nowhere says Hobb dwells on the event - the nearest wording is 'the character experiences them deeply and thus the reader feels those events more strongly.' 'Lets it change the character' is supported by the adjacent baggage paragraph; the dwelling limb is inference.",
+   "unsupportedLimb": "that Hobb herself dwells on the event - the page says only that her characters experience events deeply",
+   "fromFile": "verdicts-hobb-i0-14.json"
+  }
+ },
+ {
+  "index": 22,
+  "feature": "depth of feeling indulged",
+  "claim": "The Hobb name was created to write with a depth of feeling she did not usually indulge.",
+  "source": "Gizmodo excerpting The Inheritance forewords (2011)",
+  "url": "https://gizmodo.com/find-out-how-robin-hobb-became-two-different-people-5792234",
+  "quote": "a depth of feeling that I didn't usually indulge",
+  "angle": "voice",
+  "verdict": {
+   "index": 22,
+   "verdict": "PARTIAL",
+   "trueWording": "With the new name she wrote with that depth of feeling",
+   "unsupportedLimb": "'was created to' — the page gives the depth of feeling as what she then wrote, not as the stated reason the Hobb name was adopted",
+   "note": "gizmodo.com HTTP 200; the page reproduces the full Inheritance preface, so the source attribution is right. Quote exact: 'I wrote with a depth of feeling that I didn't usually indulge.' But the page's stated purposes for the name change are breaking with the past, the appeal of a 'secret identity', and an agreed 'opportunity for me to break out of my \"Megan Lindholm\" voice and tell a big compelling story in a very lively way'. The depth of feeling is the sentence that follows as consequence. Restate as effect, not purpose.",
+   "fromFile": "verdicts-hobb-i15-29.json"
+  }
+ },
+ {
+  "index": 25,
+  "feature": "every character main character of own story",
+  "claim": "Each character, villain included, is written as the main character in his own story.",
+  "source": "Pat's Fantasy Hotlist interview (2005)",
+  "url": "http://fantasyhotlist.blogspot.com/2005/07/robin-hobb-interview.html",
+  "quote": "the main character in his own story",
+  "angle": "voice",
+  "verdict": {
+   "index": 25,
+   "verdict": "PARTIAL",
+   "trueWording": "let each character be the main character in his own story",
+   "unsupportedLimb": "'villain included' — the word villain does not occur anywhere on this page (0 occurrences); its examples are a walk-on barmaid and minor characters written to take a bullet or be the romantic prize",
+   "note": "Quote is an exact substring of 'My technique with characters is to try to let each character be the main character in his own story.' The villain limb is real but belongs to a different source — the OF Blog 2003 interview (index 19's page): 'even the villain is wondering what is for dinner tonight... If you put on the villain's skin, you have to love him or at least understand him.' Either drop the villain limb here or cite OF Blog for it.",
+   "fromFile": "verdicts-hobb-i15-29.json"
+  }
+ },
+ {
+  "index": 27,
+  "feature": "reaction shots",
+  "claim": "How a character reacts to an event reveals more than exposition does.",
+  "source": "Writing Excuses 11.Bonus-01 transcript",
+  "url": "https://writingexcuses.com/11-bonus-01-characterization-and-differentiation-with-robin-hobb/",
+  "quote": "Reaction shots reveal character",
+  "angle": "voice",
+  "verdict": {
+   "index": 27,
+   "verdict": "PARTIAL",
+   "trueWording": "Reaction shots reveal character",
+   "unsupportedLimb": "'more than exposition does' — the page makes no comparison to exposition; the word exposition never appears, and no ranking of reaction against telling is stated",
+   "note": "Quote exact, but it occurs only in the transcript's editorial key-points header ('Reaction shots reveal character!'), not in anyone's speech. Hobb's own version is unranked: 'how the person reacts to that is a great way to build character... all of the secondary, the reaction shots of this happens, how did my character react?' The claim's comparative is an addition; state it as 'reaction reveals character' without the versus-exposition ranking.",
+   "fromFile": "verdicts-hobb-i15-29.json"
+  }
+ },
+ {
+  "index": 33,
+  "feature": "food constrained by technology, geography, climate",
+  "claim": "A meal must be believable for the technology level, geography and climate, and such details fall naturally into the tale.",
+  "source": "Fran Wilde, Cooking the Books guest post (2014)",
+  "url": "https://franwilde.wordpress.com/2014/11/04/ctb-robin-hobb/",
+  "quote": "the technology level, the geography and climate",
+  "angle": "voice",
+  "verdict": {
+   "index": 33,
+   "verdict": "PARTIAL",
+   "trueWording": "The meal has to be believable in terms of the technology level, the geography and climate, and the transportation available.",
+   "note": "Quote verbatim, and the believability limb is exact. But the page says meal detail 'takes a bit of thought and sometimes the pitfalls are not obvious'; the 'naturally fall into place in a tale' line sits in a different answer and refers to status-marking details (below/above the salt, dress, sleeping quarters), not to technology/geography/climate.",
+   "unsupportedLimb": "that such technology, geography and climate details 'fall naturally into the tale'",
+   "fromFile": "verdicts-hobb-i30-44.json"
+  }
+ },
+ {
+  "index": 54,
+  "feature": "household research in process",
+  "claim": "Her writing log records researching diseases of sheep and inserting chapter headings as bridge scaffolding.",
+  "source": "Robin Hobb's blog, November 2022",
+  "url": "https://www.robinhobb.com/blog/posts/41755",
+  "quote": "researched diseases of sheep",
+  "angle": "voice",
+  "verdict": {
+   "index": 54,
+   "verdict": "PARTIAL",
+   "trueWording": "But that doesn't reflect that I ... inserting chapter headings for bridge work I need to create, researched diseases of sheep (it's relevant!)",
+   "note": "robinhobb.com/blog/posts/41755 fetched HTTP 200; post is 'How to Write a Book When You Don't Have Time to Write', article:published_time 2022-11-03, so the November 2022 attribution holds. Quote 'researched diseases of sheep' is verbatim, and the chapter-headings-for-bridge-work limb is verbatim. What the page does NOT support is the framing: the log records start/stop times and word count ('Keep a writing log. Jot down when you start, how many words/pages you have at the beginning of your session, and then log when you stop writing'), and the sheep research and chapter headings are introduced precisely as what the day's 585-word count 'doesn't reflect' -- they are outside the log, not recorded in it.",
+   "unsupportedLimb": "that the writing log records these tasks -- the post presents them as what the log's word count does NOT reflect",
+   "fromFile": "verdicts-hobb-i45-59.json"
+  }
+ }
+]

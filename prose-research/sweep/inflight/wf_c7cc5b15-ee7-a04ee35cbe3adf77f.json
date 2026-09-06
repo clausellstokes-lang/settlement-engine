@@ -1,0 +1,37 @@
+{
+ "role": "finder",
+ "name": "martin",
+ "angle": "measurement",
+ "tag": null,
+ "lines": 38,
+ "firstTs": "2026-09-06T16:56:32.300Z",
+ "lastTs": "2026-09-06T16:58:15.484Z",
+ "tools": {
+  "Read": 1,
+  "Bash": 7,
+  "ToolSearch": 1,
+  "WebSearch": 2
+ },
+ "urlsFetched": [
+  "https://archive.org/advancedsearch.php?q=title%3A%22Nabokov%27s+favorite+word+is+mauve%22&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=10&output=json",
+  "https://archive.org/advancedsearch.php?q=title%3A%22art+of+language+invention%22&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=10&output=json",
+  "http://prosecraft.io/library/george-r-r-martin/a-game-of-thrones/",
+  "http://prosecraft.io/library/george-r-r-martin/fire-and-blood/",
+  "http://prosecraft.io/library/george-r-r-martin/a-storm-of-swords/",
+  "http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/",
+  "https://api.archivelab.org/books/nabokovsfavorite0000blat/searchinside?q=Martin",
+  "https://api.archivelab.org/books/artoflanguageinv0000pete/searchinside?q=Martin"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the finder method, then work the roster.",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "a04ee35cbe3adf77f",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-a04ee35cbe3adf77f.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-martin-measurement.json",
+  "claims": 49,
+  "complete": false,
+  "mtime": "08:25:22"
+ }
+}

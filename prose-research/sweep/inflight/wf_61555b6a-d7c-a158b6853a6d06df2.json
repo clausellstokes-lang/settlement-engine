@@ -1,0 +1,44 @@
+{
+ "role": "verifier",
+ "name": "tolkien",
+ "angle": null,
+ "tag": "i643-657",
+ "lines": 90,
+ "firstTs": "2026-09-06T16:52:22.518Z",
+ "lastTs": "2026-09-06T16:59:00.611Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "WebFetch": 2,
+  "Bash": 20
+ },
+ "urlsFetched": [
+  "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+  "https://books.google.com/books?id=9uAsEAAAQBAJ",
+  "https://books.google.com/books?id=9uAsEAAAQBAJ&q=%22intermediate+agency%22",
+  "https://books.google.com/books?id={VOL}&q={urllib.parse.quote(phrase",
+  "http://web.archive.org/cdx/search/cdx?url=link.springer.com/chapter/10.1007/978-3-030-69299-5_4&output=json&limit=20",
+  "https://api.openalex.org/works/doi:10.1007/978-3-030-69299-5_4",
+  "https://api.crossref.org/works/10.1007/978-3-030-69299-5_4",
+  "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1007/978-3-030-69299-5_4?fields=title,abstract",
+  "https://r.jina.ai/https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+  "https://colab.ws/articles/10.1007%2F978-3-030-69299-5_4",
+  "https://ouci.dntb.gov.ua/en/works/?q=10.1007%2F978-3-030-69299-5_4",
+  "https://www.x-mol.com/paper/1387236634891493376",
+  "http://www.google.com/bot.html",
+  "https://link.springer.com/content/pdf/10.1007/978-3-030-69299-5_4.pdf",
+  "https://www.scilit.com/publications?q=%22978-3-030-69299-5_4%22",
+  "https://archive.ph/newest/https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+  "https://www.sciencegate.app/document/10.1007/978-3-030-69299-5_4"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Percy's Reliques *is* on p.111 after all. Let me get the surrounding context and the remaining limbs.",
+ "run": "wf_61555b6a-d7c",
+ "agent": "a158b6853a6d06df2",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_61555b6a-d7c/agent-a158b6853a6d06df2.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i643-657.json",
+  "exists": false
+ }
+}
