@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 14:47:37 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 14:49:29 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -84,16 +84,7 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - **hobb**: claims 386 · verdicts 386 (todo 0) · kept 346 · partial 40 · verdict files 28 (triage 0, regrade r4) · section 09-06 14:14 · critic 09-06 14:28
 - LAST-RUNS: tolkien r5/wf_bf5b8fda-a24, kay r5/wf_f5b527e0-155, leguin r6/wf_2b731d5b-460, wolfe r5/wf_328e2797-84f, martin r5/wf_ed535e1b-537, hobb r5/wf_06d7ffd7-48b, dnd r5/wf_a9298963-fdf, ai r5/wf_bcc0efc7-47c
 
-## WORKFLOW RUNS of chair session 19ace14d-e63e-4584-ad77-d83bd8e2cd0f (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_06d7ffd7-48b: 4 journal lines, 2 agents
-- wf_146ba5ee-000: 2 journal lines, 1 agents
-- wf_2b731d5b-460: 14 journal lines, 7 agents
-- wf_328e2797-84f: 4 journal lines, 2 agents
-- wf_a9298963-fdf: 102 journal lines, 51 agents
-- wf_bcc0efc7-47c: 66 journal lines, 33 agents
-- wf_bf5b8fda-a24: 4 journal lines, 2 agents
-- wf_ed535e1b-537: 24 journal lines, 12 agents
-- wf_f5b527e0-155: 26 journal lines, 13 agents
+## WORKFLOW RUNS of chair session 059d4243-f837-4b07-8096-8c9ca76b03fb (journal lines; a run dies with the session — the FILES above are the checkpoint)
 
 ## PROCESSES: 38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.26 2.90 5.04
+load: 2.39 2.74 4.71
