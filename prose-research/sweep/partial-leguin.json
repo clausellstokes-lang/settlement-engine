@@ -1,1 +1,74 @@
-[]
+[
+ {
+  "index": 11,
+  "feature": "polysyndeton as costume",
+  "claim": "Imitation Dunsany is diagnosed as elaborate made-up names, vague gorgeous cities and many sentences beginning with 'And' — biblical cadence worn as costume.",
+  "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "a great many sentences beginning with \"And.\"",
+  "page": "p. 5",
+  "angle": "academic",
+  "verdict": {
+   "index": 11,
+   "verdict": "PARTIAL",
+   "trueWording": "a lot of elaborate made-up names, some vague descriptions of gorgeous cities and unmentionable dooms, and a great many sentences beginning with \"And.\"",
+   "note": "p.5 quotation is verbatim and the three diagnostic items are exactly on the page. The essay names the King James Bible only as a formative influence on Dunsany's OWN prose ('one of the profoundest formative influences on Dunsany's prose'; imitators are out of reach unless 'brought up from the cradle on the grand sonorities of Genesis and Ecclesiastes'); it never attributes the imitators' 'And' sentences to biblical cadence, and never frames them as costume. That reading is a defensible inference, not the page's statement.",
+   "unsupportedLimb": "biblical cadence worn as costume -- the essay ties the KJV to Dunsany himself, never says imitators wear biblical cadence as costume",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  }
+ },
+ {
+  "index": 17,
+  "feature": "free indirect discourse",
+  "claim": "Mike Cadden characterizes the Earthsea narration as free indirect discourse in which the protagonist's feelings blend with the narrator's, creating sympathy while keeping narrative flexibility.",
+  "source": "Wikipedia: A Wizard of Earthsea (citing Cadden, Beyond Genre)",
+  "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
+  "quote": "free indirect discourse",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 17,
+   "verdict": "PARTIAL",
+   "trueWording": "makes the narrator seem sympathetic, does not distance his thoughts",
+   "note": "Raw wikitext: 'This narrative technique, which Cadden characterizes as \"free indirect discourse\", makes the narrator of the book seem sympathetic to the protagonist, and does not distance his thoughts from the reader.' Quote verbatim; 'Mike Cadden' confirmed elsewhere on the same page ('Scholar Mike Cadden'); sympathy limb supported; blending of protagonist feelings with narration supported only loosely ('does not distance his thoughts from the reader') and stated squarely on the SEPARATE Ursula K. Le Guin article, not this one. Nothing on this page says anything about narrative flexibility.",
+   "unsupportedLimb": "'while keeping narrative flexibility' - the cited page never claims the technique preserves flexibility",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  }
+ },
+ {
+  "index": 22,
+  "feature": "high style, epic vision",
+  "claim": "Slusser (1976) called the Earthsea cycle a work of high style and imagination with genuine epic vision.",
+  "source": "Wikipedia: A Wizard of Earthsea (citing Slusser)",
+  "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
+  "quote": "work of high style and imagination",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 22,
+   "verdict": "PARTIAL",
+   "trueWording": "Slusser: \"work of high style and imagination\"; \"genuine epic vision\" cited to Cadden",
+   "note": "Raw wikitext: 'Slusser described the Earthsea cycle as a \"work of high style and imagination\",{{sfn|Slusser|1976|pp=32-35}} and the original trilogy of books a product of \"genuine epic vision\".{{sfn|Cadden|2005|p=86}}' The quoted limb is verbatim and is Slusser 1976. The second limb is footnoted to Cadden 2005 and its object is the original trilogy, not the cycle.",
+   "unsupportedLimb": "'the Earthsea cycle ... with genuine epic vision' per Slusser 1976 - the page applies 'genuine epic vision' to the original trilogy and footnotes it to Cadden 2005",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  }
+ },
+ {
+  "index": 42,
+  "feature": "plain strong exact (web page)",
+  "claim": "The NEA Big Read web page repeats the guide's 'plain, strong, and exact' characterization and pairs it with Craig's 'taut and clean as a ship's sail'.",
+  "source": "NEA Big Read: A Wizard of Earthsea (web page)",
+  "url": "https://www.arts.gov/initiatives/nea-big-read/wizard-earthsea",
+  "quote": "plain, strong, and exact",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 42,
+   "verdict": "PARTIAL",
+   "trueWording": "Page credits 'taut and clean' to The Guardian, unnamed",
+   "unsupportedLimb": "the attribution of 'taut and clean as a ship's sail' to Craig - the page credits that quotation only to 'The Guardian' and the string 'Craig' does not occur anywhere in the page's HTML (case-insensitive grep of the raw source returned zero hits)",
+   "note": "Live arts.gov page fetched (HTTP 200, 74,952 bytes). Both quotations ARE on the page: the Overview carries '...it is written in prose as taut and clean as a ship's sail.... It poses the deep questions about life, death, power and responsibility that children need answering' (The Guardian), and an accordion panel reproduces the guide's 'Language of Fantasy' text verbatim including 'plain, strong, and exact'. So the 'repeats the guide's characterization' limb and the 'pairs it with' limb are both supported; only the Craig attribution is absent from the page. (Amanda Craig did write the Guardian review, but that cannot be verified from this URL, which is what was cited.)",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  }
+ }
+]

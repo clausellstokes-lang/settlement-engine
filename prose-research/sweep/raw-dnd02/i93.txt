@@ -1,0 +1,236 @@
+ 
+ Review: Xanathar’s Guide to Everything | Skyland Games 
+ Skyland Games 
+ News, Reviews, Tips, and Insight into board, card dice games and RPGs
+ Home 
+ Contact Us 
+ Free Downloads 
+ Home 
+ > 5e , Adventure , Books , Character , Characters , DnD , DnDnext , Games , Lore , Mechanics , Reviews , Roleplaying , RPGs , Uncategorized , Wizards , WOTC > Review: Xanathar’s Guide to Everything 
+ Review: Xanathar’s Guide to Everything
+ November 13, 2017 
+ Scott D 
+ TLDR: You’re going to want to buy this. 
+ There was a lot of buzz for Xanathar’s Guide to Everything before it was even in print, so I anticipated this was going to be worth a look. It reminds me a lot of what Unearthed Arcana (the book, not the webcolumn ) was like for 1st edition. Was it optional? Yes. Would you be missing out on a lot of content that is considered generally mainstream to play without it? Heck yeah.
+ General Details 
+ Xanathar, a secretive beholder crime lord, keeps notes on everything (he believes). Hence the name of the book (his goldfish is his most prized possession, and that’s what’s on the stylized cover you see above). As with Volo’s Guide to Monsters , there are little notes that run as commentary throughout the book, usually a sort of joke or snipe about the subject matter. As the material is largely mechanics and game lore, it’s less relevant than with Volo’s but still fun.
+ The book is 192 pages, full color, lots of art, slick non-glossy pages (which I like). You’re going to get this and think it feels kind of thin, however. While the book feels light, it has a lot of content, and they pack quite a bit in those pages.
+ The book has three major division: Character Options, Dungeon Master Tools, and Spells , but also has two valuable Appendices . Here’s the breakdown of the sections.
+ Character Options
+ Subclasses
+ By far one of the most valuable sections of Xanathars is the Character Options chapter. This opens 31 new subclasses for the primary classes listed in the Player’s Handbook. That’s right: THIRTY ONE . Note that’s not 31 new classes, but subclasses (like Bardic Colleges, or Barbarian Primal Paths, etc). I like this because I think that too many primary classes waters down your base classes and leads to unexpected bloat. Some of these may be familiar as they have rolled out through playtesting in the Unearthed Arcana column.
+ A few favorites include the Bardic College of Whispers, the Grave Domain Cleric, the Samurai and Cavalier Fighter archetypes, the rogue Swashbuckler, and the War Magic Wizard. Adding rules to differentiate these classes and giving them a new feel works well, without making a GM learn entirely new modes of play functionality.
+ Flavor – Charts – This is Your Life
+ In addition to subclass details, they also offer fluff fans fun and interesting (but very brief) charts for fleshing out details about their characters and their backgrounds. More experienced players may feel these sorts of things are unnecessary, but it definitely gives some players new ways of looking at details about their characters that will flesh them out in interesting ways.
+ Some sections are meatier than others. The Druid Section of the the Character Option chapter lists charts, for example, of what beasts you encounter in what environments for the purposes of exposure to allow wildshape. You could make it up, but this is just damn handy. Other elements, like how you learned to be a druid, are more storytelling. Each class has this sort background material.
+ This culminates with a subsection called “ This Is Your Life ” which allows your background to be determined by charts, at your option. This goes through siblings, parents, family history, and motivations based optionally on class or background. I’ve always been a fan of a certain online character background generator myself (NSFW for language). I seem to recall something like this in an older volume of D&D (maybe player’s handbook 2???) but can’t remember which book. If you know, post in the comments. In the end, it can be fun, and they’re clear not to be pushy about using it. Do it, or don’t if you don’t want to.
+ Racial Feats
+ One thing you won’t hear me complaining about is more feats. I especially like the idea of Racial Feats that continue to expand the characteristics of the races in game. These add additional ways for characters to stand out and differentiate themselves from one another given the more simplified options of 5th edition over early incarnations like 3.5 and 4th editions.
+ Dungeon Master’s Tools
+ Rules Clarifications
+ As a gamer who runs a lot of games, this section is precious to me, as it answers some questions that speaks more to design philosophy on dealing with rules questions. This chapter shotguns out some rules issues right off the bat with little ceremony, including:
+ Simultaneous Effects 
+ Falling (over time and large distances)
+ Sleep Details – Involuntary Waking, Sleeping in Armor, Going Without Sleep
+ Adamantine Weapons 
+ Tying Knots (both tying and slipping out of them)
+ There are two larger sections that go into greater detail as well:
+ Tool Proficiencies – This large section rethinks Tool Proficiency, going into specific items included in certain kits, and spelling out what a player can do with skills and tool proficiencies. A valuable section that will assist GM’s and players alike in seeing how these should be played.
+ Spellcasting – Concealing and identifying spellcasting, measuring ways of determining gridded templates (with illustrations)
+ Challenge Ratings
+ One of the most important changes listed here is the Encounters Section. This lists a new way of calculating encounter challenge ratings that seems to more accurately address the threat of solo monsters based on group size, as well as other types of encounters. This section probably is an admission that prior CR calculations were not correct and did not accurately reflect appropriate difficulty.
+ Paired with this is a comprehensive list of wandering monster encounters by level and geographic environment. For those that use such charts, it’s a masterpiece. Very convenient. While not previously a fan of wandering monsters, I’ve found it a useful tool when players are lollygagging or doing things in a stubborn and ineffective time-consuming way (i.e. camping after every encounter, spending an hour bonding with items in a dungeon, camping in a dangerous place, etc). The lists are detailed, and the setting dressing it provides also fleshes out your world and the creatures in.
+ Other Sections
+ Traps Revisited — A sizable section deals with how traps should be dealt with to make them interesting, including details about constructing elaborate traps and the rules that tied therein. This is more interesting in that it seems to suggest that the standard application of a rogue disarm role should be avoided in favor of a more descriptive approach.
+ Downtime Revisions – This section elaborates on revised downtime rules, including the development of a rivalry, buying magic items, carousing complications, and so on. Helpful if you find yourself using these rules. We never seem to get to them in my groups, however.
+ Magic Items – A section here on magic items deals with suggestions on awarding magic items as a GM, and a type of common magic item that has magical effect and flavor without game-breaking power. A new relisting of magic items by type and rarity, with notation as to whether those items require attunement, is a handy reference.
+ Spells
+ With over 90 additional spells for all spell-casting classes, this chapter alone makes this book a must-have. I haven’t combed through these to see if they have been duplicated in other volumes, but there certainly enough new ones to make it a reference for any spell-caster when picking their list. Some of these are old classics that have been revamped for 5th edition, others are brand new.
+ Appendices:
+ Appendix B is a voluminous list of names from different cultures to help players with naming a character. It’s a great list, as it goes, with real world cultural names as well as fantasy names. This is going to make one of your players very happy.
+ but more importantly, Appendix A is about Shared Campaigns. 
+ Shared Campaigns
+ Skyland Games originally began as a gaming group that decided to split off from Living Forgotten Realms organized play to start our own shared campaign. Part of this split was because of frustration with the management of LFR and the various bookkeeping requirements thereof (and scenario quality, truth be told). We started our own round-robin style of gaming allowing everyone to get some play time, as well as build a common story together. We’re big fans of it.
+ What’s proposed here contemplates a Living campaign like Adventurer’s Guild, but could be used for a round-robin home game as well. It makes use of a benchmark system for leveling based on the number of hours a scenario is designed for and its relative challenge level rather than on the XP value of monsters.
+ Common rewards are determined at levels, including a treasure point system for awarding magic items from a pre-determined list of magic items agreed upon by the collective DM’s of the campaign. Gold can be spent on common items and maybe a small list of alchemical items. Major magic items require treasure points, earned through play.
+ This appendix, however, poses a question: Is this the future (or maybe the present) of Adventurer’s League? I haven’t been to a game in ages, so I couldn’t tell you if they had moved to this system. If so, does the abstraction make the game less enjoyable? I think each player might have a different answer to this question, but if everyone can pay their dues and get the items they want in a timely enough fashion, the abstraction may be worth it. These guidelines won’t make you purchase the book, but are worth a read for any player.
+ Summary
+ Xanathar’s Guide to Everything seems largely about utility and fleshing out things that originally were left to player and GM to determine. Some might see that as an imposition, but I find it incredibly useful.
+ A complaint I’ve heard about 5th edition is that the lack of specialization makes many characters seem the same. I’d point out that, as a player for three decades now, we started with a lot less and never really thought to complain about it. 5th edition is a great expansion on what we started with, but doesn’t lend itself to the hyper-specialization that you see in 3.5 Edition D&D or Pathfinder. These new subclasses, feats, and spells in no way serve to make 5th Edition D&D more like 3.5 or Pathfinder, but they do give a greater degree of options to make a character stand out and build on unique themes. The content provided in this tome is very significant, and is a should-have if not a must-have moving forward with 5th Edition.
+ Share this:
+ Twitter 
+ Facebook 
+ Email 
+ Print 
+ Like this:
+ Like Loading... 
+ Related 
+ Categories: 5e , Adventure , Books , Character , Characters , DnD , DnDnext , Games , Lore , Mechanics , Reviews , Roleplaying , RPGs , Uncategorized , Wizards , WOTC 
+ Tags: Games , gaming , RPG 
+ DnDonations 4 – White Plume Mountain 
+ Don’t Look Back returns! 
+ RSS feed 
+ Google 
+ Youdao 
+ Xian Guo 
+ Zhua Xia 
+ My Yahoo! 
+ newsgator 
+ Bloglines 
+ iNezha 
+ Twitter 
+ Follow Us on Twitter 
+ #DDBStyle twitter.com/DnDBeyond/stat… https://t.co/eNjQBdsO6Q 6 months ago 
+ RT @ dndonations : #DnDonations 6 starts at 6pm ET tonight! Join us in person at @ TheWyvernsTale or online at twitch.tv/dndonations #DnDXL … 2 years ago 
+ Follow @skylandgames 
+ Follow Blog via Email 
+ Enter your email address to follow this blog and receive notifications of new posts by email.
+ Email Address: 
+ Follow 
+ Recent Posts
+ Baby Yoda FFG build 
+ The Mandalorian – Mace West Preview 
+ FFG Star Wars Mandalorian Stats 
+ Building Bad: Tips on Creating Memorable Villain NPC’s 
+ DCC RPG Annual Vol. 1 Review 
+ Search for: 
+ Archives
+ February 2020 
+ January 2020 
+ November 2019 
+ December 2018 
+ November 2018 
+ September 2018 
+ August 2018 
+ July 2018 
+ June 2018 
+ May 2018 
+ April 2018 
+ March 2018 
+ February 2018 
+ January 2018 
+ December 2017 
+ November 2017 
+ October 2017 
+ September 2017 
+ August 2017 
+ June 2017 
+ May 2017 
+ April 2017 
+ March 2017 
+ February 2017 
+ January 2017 
+ November 2016 
+ October 2016 
+ September 2016 
+ August 2016 
+ July 2016 
+ June 2016 
+ May 2016 
+ April 2016 
+ March 2016 
+ February 2016 
+ January 2016 
+ December 2015 
+ November 2015 
+ October 2015 
+ September 2015 
+ August 2015 
+ July 2015 
+ June 2015 
+ May 2015 
+ April 2015 
+ March 2015 
+ February 2015 
+ January 2015 
+ December 2014 
+ November 2014 
+ October 2014 
+ September 2014 
+ August 2014 
+ July 2014 
+ June 2014 
+ May 2014 
+ April 2014 
+ March 2014 
+ February 2014 
+ January 2014 
+ December 2013 
+ November 2013 
+ October 2013 
+ September 2013 
+ August 2013 
+ July 2013 
+ June 2013 
+ May 2013 
+ April 2013 
+ March 2013 
+ February 2013 
+ January 2013 
+ December 2012 
+ November 2012 
+ September 2012 
+ August 2012 
+ July 2012 
+ June 2012 
+ May 2012 
+ April 2012 
+ March 2012 
+ February 2012 
+ January 2012 
+ December 2011 
+ November 2011 
+ October 2011 
+ 4e 5e Adventure Board Books Card Character Comics DCCRPG Dice DnD DnDnext Epic Games kickstarter Lore News Paizo Pathfinder Pirates Pregens Retro Reviews Roleplaying RPGs Society Star Wars Technology Tips Uncategorized 
+ Contributors
+ Steve 
+ Michael 
+ Scott D 
+ Kevin 
+ SkylandGamesFeed 
+ Baby Yoda FFG build February 21, 2020 I would like to see the baby. Fair enough. The surprise star of the first season of the Mandalorian brought many fans joy and made a lot of people curious about the show through some truly adorable memes. “The Child” was one of the more interesting to try and stat up, since we don’t have […]
+ Kevin 
+ The Mandalorian – Mace West Preview February 4, 2020 MACE West is less than a month away! The annual western addition of Mid-Atlantic Convention Expo returns a bit earlier than in previous years (February 28 – March 1), but in the same space at the DoubleTree in Asheville, just outside the Biltmore estate. Registration is already open. Get your tickets, sign up for games, […]
+ Kevin 
+ FFG Star Wars Mandalorian Stats January 8, 2020 It is difficult to find a bad review of the flagship Disney+ original The Mandalorian. Most fans were cautiously optimistic, and even some critics of the recent movies were swayed by this return to a gritty, compelling mix of eastern (samurai) and western (cowboy) influences in a live action, episodic show. SPOILER WARNING: If you […]
+ Kevin 
+ Blogroll
+ DnD Blogs 
+ Game Night 
+ NaGa DeMon 
+ RPGBA 
+ Skyland Games on FB 
+ Skyland Games on FB 
+ Top 
+ Blog at WordPress.com. 
+ Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+To find out more, including how to control cookies, see here:
+ Cookie Policy 
+ Follow 
+ Following 
+ Skyland Games 
+ Join 558 other followers
+ Sign me up 
+ Already have a WordPress.com account? Log in now. 
+ Skyland Games 
+ Customize 
+ Follow 
+ Following 
+ Sign up 
+ Log in 
+ Copy shortlink 
+ Report this content 
+ View post in Reader 
+ Manage subscriptions 
+ Collapse this bar 
+ Loading Comments... 
+ You must be logged in to post a comment. 
+ Send to Email Address 
+ Your Name 
+ Your Email Address 
+ Cancel 
+ Post was not sent - check your email addresses! 
+ Email check failed, please try again 
+ Sorry, your blog cannot share posts by email. 
+ %d bloggers like this: 
+ 

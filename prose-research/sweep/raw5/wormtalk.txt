@@ -1,0 +1,553 @@
+ 
+ Wormtalk and Slugspeak 
+ skip to main |
+ skip to sidebar 
+Wormtalk and Slugspeak
+ My life among the invertebrates 
+ Thursday, April 12, 2007 
+ How to Critique Tolkien's Prose Style 
+[ update : My point here was to show how it would be possible to critique Tolkien's prose style without simply saying that it lacks [undefined] "depth." The comments below, and others on internet forums, show exactly how I think this approach can be successful: people are debating the quantity and quality of the landscape writing. They are making suggestions as to how the particular elements I flagged as being problematic might actually contribute to the aesthetic effects of the piece (i.e., that my assessment was incorrect). I chose the particular passages (except for the fox, for which I must confess an irrational dislike that I should probably exorcise) simply because that was the section I was reading to my daughter last night. My point was to illustrate that people of good will can disagree about the specific merits of the individual passages and that this disagreement demonstrates that 1) hand-waving and invocations of a lack of "depth" are useless as criticism; 2) those who like Tolkien do not mindlessly defend his every aesthetic choice (as do, by the way, many critics of the "greats," who will explain away even a typographical error as a point of genius; see my "spoiled eel" post ), but actually practice analysis and criticism. I think these points stand demonstrated. I assert that specific and detailed discussion makes for better scholarship, criticism and intellectual practice than blanket condemnation.
+Also, I am coming around to the idea that "pinnacles or pillars" is actually effective rather than flabby: it illustrates the temporary confusion in Frodo's perceptions quite well. I am still not sold on "thrawn trees].
+At the end of my my previous and far-too-long post criticizing Bryan Appleyard's review of Tolkien's The Children of Húrin , I said that I would next discuss how Tolkien's prose style could be critiqued without resorting to the undefined notion of "depth" that Appleyard uses. I also said that Tolkien's prose style is, in my view a major stumbling block for contemporary critics.
+As I wrote in the first volume of Tolkien Studies , it is possible to analyze and critique Tolkien's writing without falling back on hand-waving and invocations of depth (I think I showed that the prose style even in particulary harshly criticized passages had plenty of depth). There I tried to show how the prose style worked to convey complex meanings beyond those of the literal text. Here I'll suggest some of the flaws that could be legitimately criticized as failing to achieve their intended effects or working at cross-purposes with the rest of the narrative. 
+The first of these (and my students are already laughing) is the narrator's giving us the thoughts (in English) of a fox in Chapter 3 of The Fellowship of the Ring . I think this is a failure of tone (moving us back towards the intrusive narrator of The Hobbit ) and jarring to the readers, who, after getting through all of the cute hobbit-business and small jokes of Chapter 1, have all of a sudden entered into a much more serious world in Chapter 2 (The Shadow of the Past). Tolkien scholar Marcel Bülles, when he was visiting my Tolkien class, suggested that the fox's thoughts worked as comic relief, but my judgment is that the comic relief was too slight to justify the intrusion of the animal narrator, the making of his thoughts into English, etc. "Sam was content, if logs can be said to be contented" works much better as narrative lightening without jarring the reader into the thoughts of an animal, though others might quarrel that the play on the "sleep like a log" cliche is too gentle for the seriousness of the story. 
+The second significant critique of Tolkien's prose style, and one that is obvious when you read the story aloud, is the amount of space given over to description of landscape. Without doing tedious tabulation, I would venture to argue that something more than 50% of the novel is devoted to landscape description. Defenders might argue that this vast quantity to description leads to the feeling in many readers that Middle-earth is a real place, but I wonder if Tolkien could have been just as effective with fewer words. On the other hand, this critique smacks of the emperor's critique from the film Amadeus : "there are too many notes. Remove some of them." But let's just look at one (very good) passage from the end of The Fellowship of the Ring :
+ Nothing happened that night worse than a brief drizzle of rain an hour before dawn. As soon as it was fully light they started. Already the fog was thinning. They kept as close as they could to the western side, and they could see the dim shapes of the low cliffs rising ever higher, shadowy walls with their feet in the hurrying river. In the mid-morning the clouds drew down lower, and it began to rain heavily. They drew the skin-covers over their boats to prevent them from being flooded, and drifted on: little could be seen before them or about them through the grey falling curtains. 
+In general this is very effective, clear, unornamented landscape writing. It could, with a little stylization, be made to fit into a Hemingway, "Nick Adams" story. I would critique "shadowy walls with their feet in the hurrying river"; the collocation of "hurrying" and "feet" seems to me ineffective, as the image the author is creating is quite the opposite of feet hurrying (the river, obviously, is doing the hurrying). That said, I can't come up with an obvious synonymn for "feet" off the top of my head. I would be tempted to delete the entire phrase. You can also criticize "grey falling curtains" as a cliche, but I'm a little hesitant to do that, because the recurrent image of the rain as a curtain is significant elsewhere in The Lord of the Rings , and here were could have the kind of layering through repetition which creates the "myth" feel of the book. 
+ The rain, however, did not last long. Slowly the sky above grew lighter, and then suddenly the clouds broke, and their draggled fringes trailed away northward up the River. The fogs and mists were gone. Before the travellers lay a wide ravine, with great rocky sides to which clung, upon shelves and in narrow crevices, a few thrawn trees. The channel grew narrower and the River swifter. Now they were speeding along with little hope of stopping or turning, whatever they might meet ahead. Over them was a lane of pale-blue sky, around them the dark overshadowed River, and before them black, shutting out the sun, the hills of Emyn Muil, in which no opening could be seen.
+ Frodo peering forward saw in the distance two great rocks approaching: like great pinnacles or pillars of stone they seemed. Tall and sheer and ominous they stood upon either side of the stream. A narrow gap appeared between them, and the River swept the boats towards it. 
+Again, nice, clear prose that advances the story and provides a very effective description of the landscape. "Speeding along with little hope of stopping or turning" is particularly good because it can be read as an apo koinu construction: A: "speeding along with little hope" (which is true in general for this part of the story); B: "of stopping or turning" (ah, it's more specific). I think that such tiny re-constructions of sentence meaning are very important in poetry, but others disagree. 
+The use of the Sindarin name, Emyn Muil, is well done; the text clearly explains what this is, and the name in an elvish language puts the reader more fully in Middle-earth--Tolkien illustrates what the Emyn Muil are, but he doesn't stop the narrative to give a lecture, as so many other fantasy writers (Stephen R. Donaldson, for instance) are wont to do. 
+I do have two critiques: the "thrawn" trees: everything up to that point is good, but "thrawn" seems to me merely an ornamental archaism. You could make the argument that it provides additional color, but I wouldn't necessarily accept it as giving an important technical description the way that eyot, laving, louver, dwimmerlaik, etc., do in other places. I also question "pinnacles or pillars of stone." I think the sentence would have given the reader a better image without the "or," or without both pinnacles and pillars. On the other hand, I can see what Tolkien is aiming for, to produce a moment of confusion in the reader's mind (as there is in Frodo's) when it is not clear if the giant, pillar-shaped things are really carved by men or are natural formations (pinnacles). 
+As you can see, it's not easy to critique Tolkien's prose style -- which may mean that its much better than it is given credit for being. Most choices can, upon consideration and reflection, be seen to be contributing to particular aesthetic effects. I think critics sometimes displace their discomfort with other elements of Tolkien's writing onto a prose style that they have not considered carefully enough. 
+My critique in this post was on prose style, not speach style, so I'll stop short of critiquing Aragorn's speeches that begin with "Behold!" and save that for another post, where we may find some of the elements of Tolkien's writing that are most objectionable to modernist critics.
+Posted by
+ Michael 
+at
+ 11:21 PM 
+ 13 comments:
+ John Cowan 
+said...
+ Thrawn says "Dwarves" to me, but in this context perhaps that doesn't actually lead anywhere. I don't know. I'd be careful about assuming that any such word can be removed or replaced without damaging its context.
+1:16 AM
+ art*emisia 
+said...
+Perhaps "thrawn" adds a sense (unconscious, even) of ghostly presence through its meaning of something twisted or misshapen, similar in effect to the word "wraith." Also, it has an additional aesthetic function through the soft and ponderous sound of the word.
+Both the word "thrawn" and the line about cliffs are examples of how Tolkien invokes sentience in the landscape of Middle Earth. I think the contrast between feet that have been obviously planted for ages and the hurrying river give us a sense of past ages meeting a quickly changing and dangerous present. It's an image of endurance.
+For me, I've always treasured Tolkien's long, lingering descriptions of nature: he sees the landscape as a painter does. My reading becomes uncomfortably slow--just like the walk from Hobbiton to Mordor, and the pace makes me one of the Fellowship, noticing what they notice. Frodo lingered as he said many sad farewells to the Shire, and Tolkien knows that there will be a final breaking of the world and that we are all mortal. His truly extraordinary devotion to the moods, colors, and beauty of nature is a farewell and an elegy.
+I agree about the fox, though!
+12:59 PM
+ Melancholia 
+said...
+Strange that you cite the landscape descriptions as a stylistic error yet you argue in the earlier post that Tolkien is creating a mythic feel for modern audiences while avoiding modern style. Landscape belongs most expressly to the modern era. Extensive landscape description tended not to be part of the earlier literatures; in fact, one can argue that landscape became an aesthetic object and literary concern only in the 18C. (It's there before the Romantics but they championed it.) The Romantic sublime, for example, could not exist without Mont Blanc.
+Perhaps it would do well to consider what might have been Tolkien's purpose in devoting so much prose to the land. Could it be his crafting of Romanticism onto his mythological imagination? Could he want to focus upon the extreme physical demands of the obligation Frodo accepts? It underscores the experiential aspect of the undertaking. There are many accounts of pilgrimages which focus upon the physical aspects of the trial. Anne Carson, a very modern poet, devotes much attention to the walker's relationship with her environment. The landscape descriptions are one way to focus upon the importance of the journey rather than just the end.
+10:43 PM
+ anchorhold 
+said...
+Thrawn isn't archaic in all dialects; I have been known to use it myself (I'm Scottish) in quite normal speech. It's difficult to think of an equivalent which would get all the sense over.
+Personally, Tolkien's landscape descriptions are a big part of my pleasure in LotR: Middle Earth is almost a character in its own right.
+I quite agree about the fox, though.
+6:36 AM
+Anonymous
+said...
+I can see your point about "thrawn" being a stumbling block for modern readers/critics, but I would want to determine what its currency status was in Britain when Tolkien wrote that sentence before assessing its usage here as reflecting negatively on Tolkien's own sense of prose.
+Another stumbling block in this passage for modern critics, I have no doubt, is the fact that Tolkien capitalizes "River". I expect their reaction will be, "oh, it can't just be a river, or even just "the river", this is fairy-land, so it has to be The River". (Never mind that Anduin _means_ "The Great River")
+10:15 AM
+ robin 
+said...
+I'm jumping in (having only learned about your blog today from a mutual friend in LiveJournal) to say that one, I think your analysis of Tolkien's style (using linguistic methodology, published in TS) is a superb complement to Shippey's work (he doesn't do as much in depth as you do). There's a good argument (Roger Fowler made it) for literary critics who want to argue about "style" being trained in a methodology, not just operating off personal preference(s). 
+I am interested in such analysis myself (in fact, I am teaching a Stylistics class this summer--online for the first time--and as I have the last time I taught the course, I'm using excerpts from Tolkien's LOTR for our class analysis. We cover functional grammar (through Bloor and Bloor, rather than Halladay, given the five week summer term), and students learn how to do stylistic analysis through working with the texts. 
+This summer, we'll do the Mirrormere passage and the Charge of the Rohirrim. Last time, I took the first 100 or so words, approximately, of each chapter in Fellowship . We spent a huge amount of time on the "Frodo's Dream" section that term which is, arguably, one of the most complex sentences in the English language (I'd put it right up there with the opening sentence of Faulkner's Absalom! Absalom! ).
+I've done some stuff myself analyzing Tolkien's style (I have an essay comparing the grammatical style of selected nature passages in the novel with Jackson's cinematography) coming out in an anthology on adaptations--I am one of those who adore the nature passages in the novel (became a nature poet during the seventies because of JRRT's influence), and find Middle-earth as a character incredibly important--but I see no conflict between Tolkien's skills as a world-builder and his skills as a writer--because seems to be writers of fiction all build worlds (even if those worlds are "realistic" or "naturalistic").
+What I do know is that most critical arguments about Tolkien's "bad" style do not have enough evidence to cover the had of a pin!
+9:23 AM
+Anonymous
+said...
+Mr. Drout, do you mind if I translate this article into Spanish and write it on my blog? It will have your credits of course. Your Blog is excellent, by the way!
+12:50 PM
+ Michael 
+said...
+Swerch: I'd be happy to have you translate the post (or any others) into Spanish. If you could, I'd love to have a link to the posted translation. 
+yours,
+Mike Drout
+4:56 PM
+ N.E. Brigand 
+said...
+What particularly interested me in robin's essay on Tolkien's nature passages --at least as portions of it were presented at two conferences last year-- was her examination of how Tolkien's grammar lends agency to the natural world. I see that Patrick Curry briefly pursues the same course in his J.R.R. Tolkien Encyclopedia entry on "Nature"; perhaps he did the same in his book, Defending Middle-earth , which appears on his Further Reading list:
+"A related and still more striking aspect of Middle-earth is its agency. Examples abound: the mountain Caradhras does not want to be crossed by the Company of the Ring and sends snow to block its way... when the herb athelas is crushed, the air ('the air itself,' as Tolkien writes to emphasize the point) awakes and sparkles with joy... when Frodo laughs 'a long clear laugh from his heart' on the stairs of Cirith Ungol, the stones listen.. the sky weeps 'grey tears' for Théoden and Éowyn... It would be a serious mistake to dismiss these as mere poetic license; the words mean exactly what they say, which is also how they are experienced by the characters" (pp. 453-4).
+The passage from "The Great River" critiqued in this post seems to follow this pattern, with elements of the natural world responsible for much of the action: breaking clouds with trailing fringes, approaching rocks, a channel that grows narrower, and a river sweeping the boats along.
+A few other notes: john cowan writes that " Thrawn says 'Dwarves' to me" -- presumably he knows, though others may not, that Tolkien also uses that word for Dwarves in Appendix F of LotR . Tom Shippey specifically notes this in J.R.R. Tolkien: Author of the Century (p. 72) which may help to explain art*emesia's connection of "thrawn" and "wraith" -- those are the two words for which Shippey turns to Richard Blackwelder's Tolkien Thesaurus (though for "wraith" Shippey [p. 122] is actually demonstrating the presence of the related word "writhen").
+Aelfwine suggests the capitalization of "River" might bother some critics; indeed Nick Otty in "The Structralists' Guide to Middle-earth" from the collction J.R.R. Tolkien: This Far Land , edited by Robert Giddings (1984), an article modelled on the encyclopedia style of Robert Foster's Complete Guide to Middle-earth , hammers Tolkien's use of capitals:
+" Capital Letters . It is worth alerting oneself to the way capitals are used in The Lord of the Rings to elevate otherwise quite simple words. This may not be entirely innocent of repercussions since Foster has been infected by the practice where he refers to the book as 'the Text'. See also my quote from Glorfindel (above under Ancientness ). Since this example is in direct speech it might entertain the reader to imagine Glorfindel pronouncing the capitals in 'Last', 'First' and 'Night'."
+And Michael Perry commented here on some connections between Tolkien and William Morris. Michael Faletra presented an interesting paper on that subject last Saturday in Vermont: "William Morris, J.R.R. Tolkien, and the Archaic Style".
+Finally, for more on the fox, see this .
+9:14 PM
+ Unknown 
+said...
+Great post - thanks for that.
+3:39 PM
+ InsomniacByChoice 
+said...
+This is a very late comment, and it's of little substance, but for all his accomplishments in world-building, I can't for the life of me read Tolkien for very long. I get bored reading about what things look like because I just don't care. I don't care about trees and cliff walls and mountains in a story of any kind unless it's crucial as a plot point. 
+It's probably due to being a product of a generation of instant gratification able to see images on television or in the movies or on the Internet at any time I want, but books can't compete with actual images when they describe things.
+At a glance I can take in all of the information from a visual picture that it would take two pages of narration to impart. Books are still worthwhile where they are unique: in their ability to get inside a person's head and feel for someone else. Meanwhile if someone told you you absolutely had to cut your work down by, say, twenty pages, landscape would almost certainly be the first to go because it wouldn't be characters (unless they're completely unnecessary in the first place), it wouldn't be dialogue (unless the people are saying nothing of importance), and it wouldn't be the action (unless it could be easily summarized without affecting the pacing).
+I admit I may have different artistic tastes than most other people, but if you can cut something out and no one would miss it, why is it there in the first place? That goes for everything mentioned above, but my point is that it's the rule and not an exception in the case of "word painting".
+7:13 AM
+ N.E. Brigand 
+said...
+Insomniac wrote, "I don't care about trees and cliff walls and mountains in a story of any kind unless it's crucial as a plot point."
+But why should plot be elevated above style or theme as the most important part of writing?
+Insomniac wrote: "books can't compete with actual images when they describe things".
+But how do you show "thrawn"?
+11:38 AM
+ Unknown 
+said...
+Dear Mr. Drout, I feel that I have jumped in over my head in attempting to write a guide concerning Tolkien-style narration for use in a roleplaying game. I have limited myself to The Hobbit and I have divided my work into three parts: Part One: Tolkien-lore (Studying the Books), Part Two: Words & Phrases (Sounding Like the Professor), and Part Three: Scenes (Blending Story & Game Mechanics).
+Part Two is where I really need help. I have never studied English or literature at an academic level and I do not know the proper terms for identifying Tolkien's style. For example, Tolkien says of Bilbo, "At may never return he began to feel a shriek coming up..." What is that called? It is kind of the modern equivalent of saying, "You had me at ____." I noticed he does this several times in the first chapter of The Hobbit.
+Actually, if you could identify for me several really outstanding characteristics of Tolkien's style (or point me to a "Tolkien for Dummies" kind of document on this matter, I would be so grateful. For my work, I just need a few simple tips for narrators who want to tell their own stories in Middle-earth while sounding like the Professor himself.
+2:56 AM
+ Post a Comment 
+ Newer Post 
+ Older Post 
+ Home 
+Subscribe to:
+ Post Comments (Atom) 
+ About Me
+Michael
+ I am Professor of English and Director of the Center for the Study of the Medieval at Wheaton College, Norton, Mass., where I teach Old English (Anglo-Saxon), Middle English, medieval literature, fantasy, science fiction and writing. I am also a Millicent C. McIntosh Fellow. My scholarship is focused on tenth-century English literature and culture, meme-based theories of culture, and the works of J. R. R. Tolkien. 
+ View my complete profile 
+ Links
+ Anglo-Saxon Aloud: Greatest Hits 
+ My Home Page 
+ Anglo-Saxon Aloud 
+ Beowulf Aloud 
+ How Tradition Works 
+ Beowulf and the Critics 
+ Tolkien Studies 
+ Blog Archive
+ ► 
+2020
+ (1) 
+ ► 
+January
+ (1) 
+ ► 
+2015
+ (3) 
+ ► 
+May
+ (1) 
+ ► 
+March
+ (1) 
+ ► 
+January
+ (1) 
+ ► 
+2014
+ (9) 
+ ► 
+December
+ (1) 
+ ► 
+July
+ (1) 
+ ► 
+May
+ (1) 
+ ► 
+March
+ (3) 
+ ► 
+February
+ (1) 
+ ► 
+January
+ (2) 
+ ► 
+2013
+ (17) 
+ ► 
+December
+ (1) 
+ ► 
+November
+ (3) 
+ ► 
+September
+ (4) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (3) 
+ ► 
+June
+ (2) 
+ ► 
+March
+ (2) 
+ ► 
+2012
+ (17) 
+ ► 
+December
+ (4) 
+ ► 
+November
+ (3) 
+ ► 
+August
+ (1) 
+ ► 
+July
+ (1) 
+ ► 
+May
+ (1) 
+ ► 
+March
+ (2) 
+ ► 
+February
+ (1) 
+ ► 
+January
+ (4) 
+ ► 
+2011
+ (3) 
+ ► 
+April
+ (1) 
+ ► 
+February
+ (1) 
+ ► 
+January
+ (1) 
+ ► 
+2010
+ (26) 
+ ► 
+December
+ (2) 
+ ► 
+November
+ (1) 
+ ► 
+October
+ (2) 
+ ► 
+September
+ (3) 
+ ► 
+June
+ (1) 
+ ► 
+May
+ (2) 
+ ► 
+April
+ (2) 
+ ► 
+March
+ (3) 
+ ► 
+February
+ (6) 
+ ► 
+January
+ (4) 
+ ► 
+2009
+ (50) 
+ ► 
+December
+ (1) 
+ ► 
+November
+ (1) 
+ ► 
+October
+ (5) 
+ ► 
+September
+ (6) 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (2) 
+ ► 
+June
+ (5) 
+ ► 
+May
+ (3) 
+ ► 
+April
+ (4) 
+ ► 
+March
+ (8) 
+ ► 
+February
+ (4) 
+ ► 
+January
+ (8) 
+ ► 
+2008
+ (54) 
+ ► 
+December
+ (5) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (6) 
+ ► 
+September
+ (8) 
+ ► 
+August
+ (13) 
+ ► 
+July
+ (5) 
+ ► 
+June
+ (2) 
+ ► 
+May
+ (3) 
+ ► 
+April
+ (5) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (3) 
+ ► 
+January
+ (1) 
+ ▼ 
+2007
+ (73) 
+ ► 
+December
+ (4) 
+ ► 
+November
+ (11) 
+ ► 
+October
+ (7) 
+ ► 
+September
+ (7) 
+ ► 
+August
+ (1) 
+ ► 
+July
+ (2) 
+ ► 
+June
+ (3) 
+ ► 
+May
+ (7) 
+ ▼ 
+April
+ (11) 
+ My Review of The Children of HúrinThis review was ... 
+ Beowulf Aloud: Now Shipping[updated, with buying i... 
+ Reviews and CriticsI haven't posted the second par... 
+ Corrections and ClarificationsBecause I'm still le... 
+ Daniel Complete over at Anglo-Saxon AloudWe are no... 
+ The Children of Húrin Review##Below Contains Some ... 
+ How to Critique Tolkien's Prose Style[update: My p... 
+ Exodus complete, Daniel beginningJust a quick upda... 
+ Children of Húrin or,Tolkien: The Scholars and the... 
+ Breath Pauses and "swa" ClausesAfter I record pass... 
+ In which I mock the use of "imbricated" in literar... 
+ ► 
+March
+ (8) 
+ ► 
+February
+ (4) 
+ ► 
+January
+ (8) 
+ ► 
+2006
+ (43) 
+ ► 
+December
+ (4) 
+ ► 
+November
+ (3) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (5) 
+ ► 
+August
+ (5) 
+ ► 
+July
+ (4) 
+ ► 
+June
+ (2) 
+ ► 
+May
+ (6) 
+ ► 
+April
+ (3) 
+ ► 
+March
+ (3) 
+ ► 
+February
+ (4) 
+ ► 
+January
+ (3) 
+ ► 
+2005
+ (73) 
+ ► 
+December
+ (4) 
+ ► 
+November
+ (6) 
+ ► 
+October
+ (5) 
+ ► 
+September
+ (8) 
+ ► 
+August
+ (4) 
+ ► 
+July
+ (11) 
+ ► 
+June
+ (7) 
+ ► 
+May
+ (8) 
+ ► 
+April
+ (2) 
+ ► 
+March
+ (4) 
+ ► 
+February
+ (9) 
+ ► 
+January
+ (5) 
+ ► 
+2004
+ (56) 
+ ► 
+December
+ (4) 
+ ► 
+November
+ (3) 
+ ► 
+October
+ (6) 
+ ► 
+September
+ (7) 
+ ► 
+August
+ (8) 
+ ► 
+July
+ (3) 
+ ► 
+June
+ (2) 
+ ► 
+May
+ (6) 
+ ► 
+April
+ (3) 
+ ► 
+March
+ (4) 
+ ► 
+February
+ (5) 
+ ► 
+January
+ (5) 
+ ► 
+2003
+ (39) 
+ ► 
+December
+ (8) 
+ ► 
+November
+ (5) 
+ ► 
+October
+ (5) 
+ ► 
+September
+ (6) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (3) 
+ ► 
+June
+ (1) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (2) 
+ ► 
+January
+ (6) 
+ ► 
+2002
+ (17) 
+ ► 
+December
+ (10) 
+ ► 
+November
+ (1) 
+ ► 
+June
+ (6) 
+ 

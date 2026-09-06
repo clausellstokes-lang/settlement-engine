@@ -1,688 +1,345 @@
 
-
  Kata Iwannhn » How to Read Gene Wolfe 
-
- March 3, 2007
-
+ March 3, 2007 
  How to Read Gene Wolfe 
-
 Category: Literature :: 
  Permalink 
  Print -->
-
- Gene Wolfe is one of my favorite novelists.
-
- Describing what makes him good has been compared to “a musical contemporary attempting to tell people what’s good about Mozart” ( Chicago Sun-Times ).Â  A review of one of his booksÂ in The Washington Post Book World said, “If any writer from within genre fiction ever merited the designation Great Author, it is surelyÂ Wolfe,” and added that he “reads likeÂ Dickens, Proust, Kipling, Chesterton,Â Borges, and Nabokov rolled into one, and then spiced with all manner of fantastic influences, from H. G. Wells to JackÂ Vance, H. P. Lovecraft to Damon Knight.”Â Â The review later said, “Gene Wolfe has taken science fiction to its highest artistic pitch” and called him “SF’s greatest novelist.”
-
- High praise.Â  But that opinion isn’t limited to that one reviewer.Â  WolfeÂ has been referred to as “quite possibly the most important writer in the SF field” (John Clute in The Encyclopedia of Science Fiction ), “a national treasure” (Damon Knight), “our Melville” (Ursula LeGuin), “The greatest writer in the English languageÂ today” (Michael Swanwick),Â “the smartest, sublest, most dangerous writer alive today, in genre or out of it” (Neil Gaiman), and “the best novelist in America that you’ve never heard of, let alone read, because you don’t bother with ‘science fiction'” ( Washington Post Book World ).
-
- When I was a teenager, I loved science fiction and fantasy.Â  When I was in my 20s, however, under the influence of some comments by one of my other favorite writers, Larry Woiwode, I began to think of science fiction and fantasy as a bad form of escapism.Â  God put us in this world, not in some fantasy world, and therefore fiction ought to help us live to God’s glory in this world.Â  Fiction, therefore, ought to be realistic.
-
- That’s Woiwode’s argument in a nutshell, and for a time I bought it.Â  I’m thankful that I didn’t get rid of all my old science fiction novels, however, because that argument no longer persuades me.Â  Just as a story about trees trying to elect a king (Judges 9) canÂ help us live to God’s glory in this world, so can science fiction and fantasyÂ stories.Â  But what persuaded me wasn’t so much that I rethought through Woiwode’s argument and picked holes in it.Â  That came later.Â  What came first was Wolfe.
-
- Shortly after I graduated from seminary,Â  James Jordan introduced me toÂ Wolfe.Â  I read some short stories, moved on to There Are Doors and Endangered Species , and then went back to the (almost) beginning, The Fifth Head of Cerberus , and started reading (and sometimes re-reading)Â everything Wolfe wrote.
-
- I’ve even read some of his stories (“Westwind,” “The Detective of Dreams,” and “The Death of the Island Doctor,” in particular) to my Wednesday night Bible study group, ostensibly so that we could discuss how symbolism works in literature but (I must confess) really because I love these stories and wanted to share them with the group.
-
- That said, Wolfe is not everyone’s taste, which is fine.Â  But perhaps the biggest stumbling block (besides the label “science fiction” or “fantasy” which turns some people off) is that Wolfe is often puzzling.Â  He isn’t always easy to read, and even when you’re galloping through a story and you think you’re catching everything,Â if you go back and reread you’ll discover a lot more that you missed.Â Â He delights in puzzles and mysteries; he sometimes seems to toy with the reader; heÂ slips in clues and, as he has himself said, he gives a clue only once.
-
- But help is on the way.Â  The latest issue of Fantasy & Science Fiction Â is dedicated to Gene Wolfe, and it contains not one but three essays aimed at assisting you in reading and appreciating Gene Wolfe.Â  From Michael Andre-Driussi, there’s “ Gene Wolfe: The Man and His Work ,” which I’d probably recommend reading third.Â  From Michael Swanwick, there’s “ The Wolf in the Labyrinth .”
-
- And from Neil Gaiman, there’s the essay to read first, entitled simply, “ How to Read Gene Wolfe “.Â  Gaiman provides nineÂ tips, whichÂ complement Swanwick’s three.Â  Here’s the seventh:
-
- There are two kinds of clever writer. The ones that point out how clever they are, and the ones who see no need to point out how clever they are. Gene Wolfe is of the second kind, and the intelligence is less important than the tale. He is not smart to make you feel stupid. He is smart to make you smart as well.
-
- I’m glad Jim put me onto Wolfe, and while I still love Woiwode’s own writing, I’m glad I can enjoy more fiction than he’d recommend.
-
+ Gene Wolfe is one of my favorite novelists. 
+ Describing what makes him good has been compared to “a musical contemporary attempting to tell people what’s good about Mozart” ( Chicago Sun-Times ).Â  A review of one of his booksÂ in The Washington Post Book World said, “If any writer from within genre fiction ever merited the designation Great Author, it is surelyÂ Wolfe,” and added that he “reads likeÂ Dickens, Proust, Kipling, Chesterton,Â Borges, and Nabokov rolled into one, and then spiced with all manner of fantastic influences, from H. G. Wells to JackÂ Vance, H. P. Lovecraft to Damon Knight.”Â Â The review later said, “Gene Wolfe has taken science fiction to its highest artistic pitch” and called him “SF’s greatest novelist.” 
+ High praise.Â  But that opinion isn’t limited to that one reviewer.Â  WolfeÂ has been referred to as “quite possibly the most important writer in the SF field” (John Clute in The Encyclopedia of Science Fiction ), “a national treasure” (Damon Knight), “our Melville” (Ursula LeGuin), “The greatest writer in the English languageÂ today” (Michael Swanwick),Â “the smartest, sublest, most dangerous writer alive today, in genre or out of it” (Neil Gaiman), and “the best novelist in America that you’ve never heard of, let alone read, because you don’t bother with ‘science fiction'” ( Washington Post Book World ). 
+ When I was a teenager, I loved science fiction and fantasy.Â  When I was in my 20s, however, under the influence of some comments by one of my other favorite writers, Larry Woiwode, I began to think of science fiction and fantasy as a bad form of escapism.Â  God put us in this world, not in some fantasy world, and therefore fiction ought to help us live to God’s glory in this world.Â  Fiction, therefore, ought to be realistic. 
+ That’s Woiwode’s argument in a nutshell, and for a time I bought it.Â  I’m thankful that I didn’t get rid of all my old science fiction novels, however, because that argument no longer persuades me.Â  Just as a story about trees trying to elect a king (Judges 9) canÂ help us live to God’s glory in this world, so can science fiction and fantasyÂ stories.Â  But what persuaded me wasn’t so much that I rethought through Woiwode’s argument and picked holes in it.Â  That came later.Â  What came first was Wolfe. 
+ Shortly after I graduated from seminary,Â  James Jordan introduced me toÂ Wolfe.Â  I read some short stories, moved on to There Are Doors and Endangered Species , and then went back to the (almost) beginning, The Fifth Head of Cerberus , and started reading (and sometimes re-reading)Â everything Wolfe wrote. 
+ I’ve even read some of his stories (“Westwind,” “The Detective of Dreams,” and “The Death of the Island Doctor,” in particular) to my Wednesday night Bible study group, ostensibly so that we could discuss how symbolism works in literature but (I must confess) really because I love these stories and wanted to share them with the group. 
+ That said, Wolfe is not everyone’s taste, which is fine.Â  But perhaps the biggest stumbling block (besides the label “science fiction” or “fantasy” which turns some people off) is that Wolfe is often puzzling.Â  He isn’t always easy to read, and even when you’re galloping through a story and you think you’re catching everything,Â if you go back and reread you’ll discover a lot more that you missed.Â Â He delights in puzzles and mysteries; he sometimes seems to toy with the reader; heÂ slips in clues and, as he has himself said, he gives a clue only once. 
+ But help is on the way.Â  The latest issue of Fantasy & Science Fiction Â is dedicated to Gene Wolfe, and it contains not one but three essays aimed at assisting you in reading and appreciating Gene Wolfe.Â  From Michael Andre-Driussi, there’s “ Gene Wolfe: The Man and His Work ,” which I’d probably recommend reading third.Â  From Michael Swanwick, there’s “ The Wolf in the Labyrinth .” 
+ And from Neil Gaiman, there’s the essay to read first, entitled simply, “ How to Read Gene Wolfe “.Â  Gaiman provides nineÂ tips, whichÂ complement Swanwick’s three.Â  Here’s the seventh: 
+ There are two kinds of clever writer. The ones that point out how clever they are, and the ones who see no need to point out how clever they are. Gene Wolfe is of the second kind, and the intelligence is less important than the tale. He is not smart to make you feel stupid. He is smart to make you smart as well. 
+ I’m glad Jim put me onto Wolfe, and while I still love Woiwode’s own writing, I’m glad I can enjoy more fiction than he’d recommend. 
 Posted by John Barach @ 2:08 pm | 
-
  Discuss (9) 
-
  -->
-
- 9 Responses to “How to Read Gene Wolfe”
-
+ 9 Responses to “How to Read Gene Wolfe” 
  Angie Says:
-
  March 3rd, 2007 at 9:01 pm 
-
- Interesting piece by Gaiman. I’ve read a number of Wolfe books (the Shadow/Claw/Sword/Citadel series as well as Urth of the New Sun, Litany, and am currently reading Epiphany). I loved the first book, but unfortunately, have enjoyed each subsequent book a little less. Not sure why. Maybe part of it is because, for the most part, I find his female characters rather frightening. I do enjoy the way he immediately plunges the reader into his world so that he slowly becomes a part of it, rather than starting out with a explanations and definitions.
-
+ Interesting piece by Gaiman. I’ve read a number of Wolfe books (the Shadow/Claw/Sword/Citadel series as well as Urth of the New Sun, Litany, and am currently reading Epiphany). I loved the first book, but unfortunately, have enjoyed each subsequent book a little less. Not sure why. Maybe part of it is because, for the most part, I find his female characters rather frightening. I do enjoy the way he immediately plunges the reader into his world so that he slowly becomes a part of it, rather than starting out with a explanations and definitions. 
  John Barach Says:
-
  March 3rd, 2007 at 9:11 pm 
-
- Hmmm…. I’ve heard a lot of people complain about Wolfe’s female characters, so there may be something in what you say. I can’t say I’ve really noticed myself.
-
+ Hmmm…. I’ve heard a lot of people complain about Wolfe’s female characters, so there may be something in what you say. I can’t say I’ve really noticed myself. 
  It seems to me, though, that the male characters aren’t presented as being paragons of virtue either, though. And the women, certainly the women in Long Sun , cover a spectrum from the Mayteras to Chenille and Hyacinth. 
-
- Of course, Hyacinth is supposed to be the way she is. Silk is a Christian figure (not a Christ-figure), and she’s the harlot who becomes his bride.
-
+ Of course, Hyacinth is supposed to be the way she is. Silk is a Christian figure (not a Christ-figure), and she’s the harlot who becomes his bride. 
  Angie Says:
-
  March 4th, 2007 at 1:34 pm 
-
- To be a bit more specific about what I find disconcerting about many (not all)of his females: they are sort of dominatrix, aggressive, oversexed types. Starting with the first book, we have Jolenta, who is, of course, a disturbing exaggeration of the female form complete with huge…tracts of land. So to speak. There are the giant water women (sorry–it’s been a couple of years since I read the first series, so I’ve forgotten names) who are larger-than-life and rather frightening, as are the goddesses in later books (such as Scylla) and Mucor. Both Chenille and Hycianth are prostitutes, both of whom seem to have rather aggressive natures.
-
- The Mayteras, of course, don’t follow this pattern. But most of the females in Wolfe’s world seem to be either unpredictable oversexed dominatrix-types or half-machine nuns. It’s almost as though he’s afraid of the natural female form (I know–authors hate being psychoanalyzed). I’d say that Dorcas, in the Shadow, is one of the few “normal” females I can think of offhand, from the books I’ve read thus far.
-
- So, I’m NOT saying:
-
-1. That every last one of his female characters are dominatrix types
-
-2. That the ones who are have no admirable qualities
-
-3. That all his heroic males (Severian, Patera) are without flaws
-
+ To be a bit more specific about what I find disconcerting about many (not all)of his females: they are sort of dominatrix, aggressive, oversexed types. Starting with the first book, we have Jolenta, who is, of course, a disturbing exaggeration of the female form complete with huge…tracts of land. So to speak. There are the giant water women (sorry–it’s been a couple of years since I read the first series, so I’ve forgotten names) who are larger-than-life and rather frightening, as are the goddesses in later books (such as Scylla) and Mucor. Both Chenille and Hycianth are prostitutes, both of whom seem to have rather aggressive natures. 
+ The Mayteras, of course, don’t follow this pattern. But most of the females in Wolfe’s world seem to be either unpredictable oversexed dominatrix-types or half-machine nuns. It’s almost as though he’s afraid of the natural female form (I know–authors hate being psychoanalyzed). I’d say that Dorcas, in the Shadow, is one of the few “normal” females I can think of offhand, from the books I’ve read thus far. 
+ So, I’m NOT saying: 
+1. That every last one of his female characters are dominatrix types 
+2. That the ones who are have no admirable qualities 
+3. That all his heroic males (Severian, Patera) are without flaws 
 4. That even if what I’m saying about his female characters is true, he isn’t worth reading. As a matter of fact, two of my very favorite humor writers, P.G. Wodehouse and James Thurber, have a pattern of making their female characters a bit on the dominating and aggressive side. Take a look at this Thurber cartoon, which pretty much sums it up! http://tinyurl.com/2cuf3a 
-
- And I’m certainly not reading Wolfe with the hidden motive of trying to figure out his attitude toward women. It’s just that after reading him awhile, this pattern in many of his female characters jumped out at me.
-
+ And I’m certainly not reading Wolfe with the hidden motive of trying to figure out his attitude toward women. It’s just that after reading him awhile, this pattern in many of his female characters jumped out at me. 
  Monteverdi Says:
-
  March 5th, 2007 at 1:22 pm 
-
- Hi John, appreciate this post. As a Reformed believer who enjoys thoughtful and stimulating fantasy and sci-fi, where would you recommend I start with Gene Wolfe? I’ve not read any of his works – which would be his best novel, to give me a taste of what he’s capable of, and accessible for a new reader? Also, are you familiar with L.B. Graham’s Binding of the Blade series – high fantasy, published of all things by P & R! You can reply on my blog: http://www.xanga.com/monteverdi Thanks!
-
+ Hi John, appreciate this post. As a Reformed believer who enjoys thoughtful and stimulating fantasy and sci-fi, where would you recommend I start with Gene Wolfe? I’ve not read any of his works – which would be his best novel, to give me a taste of what he’s capable of, and accessible for a new reader? Also, are you familiar with L.B. Graham’s Binding of the Blade series – high fantasy, published of all things by P & R! You can reply on my blog: http://www.xanga.com/monteverdi Thanks! 
  John Barach Says:
-
  March 5th, 2007 at 1:33 pm 
-
- It’s hard to know exactly where to recommend that you start, but if you have some experience with science fiction and fantasy already … well, I’d probably recommend The Book of the New Sun , originally published in four volumes and now available in two: Shadow and Claw and Sword and Citadel . Wolfe then followed up this novel with another, The Urth of the New Sun , which has the same main character and which ties together some of the loose ends of the earlier book(s).
-
- New Sun is set in a distant future earth (Urth). Also in the same universe, though not at the same time, is The Book of the Long Sun (originally published in four volumes and now available in two: Litany of the Long Sun and Epiphany of the Long Sun ).
-
- The main character of these novels is a man named Patera Silk, who is a priest in what we would call the cult of the Nine Gods but who is contacted by The Outsider, whom Wolfe has identified in interviews as the one true God.
-
- Continuing that story is the more recent The Book of the Short Sun , published in three volumes: On Blue’s Waters , In Green’s Jungles , and Return to the Whorl . Short Sun ‘s protagonist is Horn, one of Silk’s pupils, but Silk is still a major player in ways I can’t possibly describe. Short Sun is more baffling, I think, than the other novels, but deeply rewarding.
-
- If you want to dabble in Wolfe before plunging headfirst, you might be able to find some of his short story collections in a library. See if you can track down the story “Westwind” (which is in Storeys from the Old Hotel ), which is one of Wolfe’s (and my) favorites.
-
- I started, as I said, with There Are Doors , which may not be the worst beginning, but it’s probably not everyone’s taste.
-
- I didn’t mention it in my blog entry, but Wolfe is a conservative Roman Catholic, and so you’ll find all kinds of Christian symbolism throughout his stories. It’s not for nothing, for instance, that New Sun begins the way it does, with a chapter entitled “Death and Resurrection” which opens with a (near) drowning. =)
-
- Hope this helps! I’d be glad to discuss Wolfe with you even via e-mail once you start reading. He can be puzzling, especially at first (to say nothing of second, third,….)
-
+ It’s hard to know exactly where to recommend that you start, but if you have some experience with science fiction and fantasy already … well, I’d probably recommend The Book of the New Sun , originally published in four volumes and now available in two: Shadow and Claw and Sword and Citadel . Wolfe then followed up this novel with another, The Urth of the New Sun , which has the same main character and which ties together some of the loose ends of the earlier book(s). 
+ New Sun is set in a distant future earth (Urth). Also in the same universe, though not at the same time, is The Book of the Long Sun (originally published in four volumes and now available in two: Litany of the Long Sun and Epiphany of the Long Sun ). 
+ The main character of these novels is a man named Patera Silk, who is a priest in what we would call the cult of the Nine Gods but who is contacted by The Outsider, whom Wolfe has identified in interviews as the one true God. 
+ Continuing that story is the more recent The Book of the Short Sun , published in three volumes: On Blue’s Waters , In Green’s Jungles , and Return to the Whorl . Short Sun ‘s protagonist is Horn, one of Silk’s pupils, but Silk is still a major player in ways I can’t possibly describe. Short Sun is more baffling, I think, than the other novels, but deeply rewarding. 
+ If you want to dabble in Wolfe before plunging headfirst, you might be able to find some of his short story collections in a library. See if you can track down the story “Westwind” (which is in Storeys from the Old Hotel ), which is one of Wolfe’s (and my) favorites. 
+ I started, as I said, with There Are Doors , which may not be the worst beginning, but it’s probably not everyone’s taste. 
+ I didn’t mention it in my blog entry, but Wolfe is a conservative Roman Catholic, and so you’ll find all kinds of Christian symbolism throughout his stories. It’s not for nothing, for instance, that New Sun begins the way it does, with a chapter entitled “Death and Resurrection” which opens with a (near) drowning. =) 
+ Hope this helps! I’d be glad to discuss Wolfe with you even via e-mail once you start reading. He can be puzzling, especially at first (to say nothing of second, third,….) 
  John Barach Says:
-
  March 5th, 2007 at 1:34 pm 
-
- Oh, you asked about L. B. Graham. I haven’t read any of his. Worthwhile?
-
+ Oh, you asked about L. B. Graham. I haven’t read any of his. Worthwhile? 
  John Barach Says:
-
  March 5th, 2007 at 1:50 pm 
-
- You’re right about those female characters, and that is precisely the complaint about Wolfe’s female characters that I’ve heard several times on the Urth mailing list. So there may be something to what you say.
-
- It’s hard for me to know why Wolfe’s female characters are this way. Many of his male characters are … wolves (of course), and that’s deliberate. I can’t say I’ve encountered too many rosemaries among his female characters, though Gaiman makes that allusion to Mrs. Wolfe’s name in his piece.
-
- As I pointed out above, though, Hyacinth is what she is (and the way she is) because she’s not just a woman, she’s a type. She is to Silk what the church is (was) to Christ, mutatis mutandi .
-
- I’m trying to think, though, about women in other Wolfe tales, but I’m mainly drawing blanks. Neither of the women in Free Live Free is exactly normal. The women in There Are Doors are somewhat predatory.
-
- There’s some very interesting stuff, though, happening with one of the girls in Short Sun , including some of the most beautiful wisdom I’ve read from Wolfe, though I can’t find the passage now.
-
- I can’t remember too much about women in Castleview , Peace , or the short stories. The main character in Pandora by Holly Hollander is Holly Hollander, who is, of course, female, a rather outspoken teenage girl, which is rather a different narrator for Wolfe.
-
- I suspect, though, that Wolfe’s female characters are the way they are because of the role he wants them to play in the story, but that the lack of more normal roles (other than virgin or whore) may be a flaw in his writing.
-
- Mind you, I also haven’t read his most recent stuff. Maybe that’ll all be different in Wizard Knight . Again, Mora in Short Sun doesn’t fit that dichotomy either.
-
- Thanks for the interaction, Angie!
-
+ You’re right about those female characters, and that is precisely the complaint about Wolfe’s female characters that I’ve heard several times on the Urth mailing list. So there may be something to what you say. 
+ It’s hard for me to know why Wolfe’s female characters are this way. Many of his male characters are … wolves (of course), and that’s deliberate. I can’t say I’ve encountered too many rosemaries among his female characters, though Gaiman makes that allusion to Mrs. Wolfe’s name in his piece. 
+ As I pointed out above, though, Hyacinth is what she is (and the way she is) because she’s not just a woman, she’s a type. She is to Silk what the church is (was) to Christ, mutatis mutandi . 
+ I’m trying to think, though, about women in other Wolfe tales, but I’m mainly drawing blanks. Neither of the women in Free Live Free is exactly normal. The women in There Are Doors are somewhat predatory. 
+ There’s some very interesting stuff, though, happening with one of the girls in Short Sun , including some of the most beautiful wisdom I’ve read from Wolfe, though I can’t find the passage now. 
+ I can’t remember too much about women in Castleview , Peace , or the short stories. The main character in Pandora by Holly Hollander is Holly Hollander, who is, of course, female, a rather outspoken teenage girl, which is rather a different narrator for Wolfe. 
+ I suspect, though, that Wolfe’s female characters are the way they are because of the role he wants them to play in the story, but that the lack of more normal roles (other than virgin or whore) may be a flaw in his writing. 
+ Mind you, I also haven’t read his most recent stuff. Maybe that’ll all be different in Wizard Knight . Again, Mora in Short Sun doesn’t fit that dichotomy either. 
+ Thanks for the interaction, Angie! 
  Monteverdi Says:
-
  March 6th, 2007 at 7:14 am 
-
- Thanks for the reply and the recommendations of where to start with reading Wolfe. As for L.B. Graham’s Binding of the Blade series, I haven’t read them personally, but a Reformed pastor friend of mine enjoyed the first volume. The fact that Presbyterian and Reformed is the publisher would be a positive indication that they’re worth checking out, so I’m intrigued, even if they only prove to have entertainment value.
-
+ Thanks for the reply and the recommendations of where to start with reading Wolfe. As for L.B. Graham’s Binding of the Blade series, I haven’t read them personally, but a Reformed pastor friend of mine enjoyed the first volume. The fact that Presbyterian and Reformed is the publisher would be a positive indication that they’re worth checking out, so I’m intrigued, even if they only prove to have entertainment value. 
  Richard Says:
-
  October 27th, 2014 at 3:14 am 
-
- Hi John, thanks for the tips about reading Gene Wolfe. At your recommendation, I’ve finally taken the plunge by reading some of his short stories – some very thought-provoking material there! See your Facebook inbox for a more detailed message from me with some of my initial impressions. I’ve just finished “The Sorcerer’s House”, which I’m about to re-read immediately – I suspect I’ll be doing doing that more often with Wolfe!
-
- Leave a Reply
-
+ Hi John, thanks for the tips about reading Gene Wolfe. At your recommendation, I’ve finally taken the plunge by reading some of his short stories – some very thought-provoking material there! See your Facebook inbox for a more detailed message from me with some of my initial impressions. I’ve just finished “The Sorcerer’s House”, which I’m about to re-read immediately – I suspect I’ll be doing doing that more often with Wolfe! 
+ Leave a Reply 
  Name (required) 
-
  Mail (will not be published) (required) 
-
  Website 
-
- XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> 
--->
-
+ XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> -->
  Δ 
-
-KATAJOHN
-
+KATAJOHN 
 John Barach lives in Lake Charles, Louisiana. He loves studying the Bible, reading great books, and sharing the things he loves with his four children.
-
-SITE SEARCH
-
-SITE FEEDS
-
+SITE SEARCH 
+SITE FEEDS 
  Posts Feed 
-
  Comments Feed 
-
-Categories
-
+Categories 
  Animals (2)
-
  Apologetics (2)
-
  Architecture (1)
-
  Art (7)
-
  Automobiles (1)
-
  Bible (32)
-
  Bible – NT (5)
-
  Bible – NT – 1 Peter (11)
-
  Bible – NT – Acts (8)
-
  Bible – NT – Colossians (7)
-
  Bible – NT – John (9)
-
  Bible – NT – Jude (1)
-
  Bible – NT – Luke (16)
-
  Bible – NT – Mark (62)
-
  Bible – NT – Matthew (36)
-
  Bible – NT – Philemon (1)
-
  Bible – NT – Philippians (1)
-
  Bible – NT – Revelation (3)
-
  Bible – NT – Romans (2)
-
  Bible – OT – 1 Samuel (1)
-
  Bible – OT – Daniel (2)
-
  Bible – OT – Deuteronomy (4)
-
  Bible – OT – Ecclesiastes (1)
-
  Bible – OT – Exodus (9)
-
  Bible – OT – Ezekiel (1)
-
  Bible – OT – Genesis (33)
-
  Bible – OT – Isaiah (9)
-
  Bible – OT – Job (1)
-
  Bible – OT – Joshua (1)
-
  Bible – OT – Judges (22)
-
  Bible – OT – Leviticus (4)
-
  Bible – OT – Nehemiah (1)
-
  Bible – OT – Psalms (85)
-
  Bible – OT – Zechariah (2)
-
  Catechism (4)
-
  Christian Life (7)
-
  Church (4)
-
  Church Year (7)
-
  Classics (1)
-
  Community (1)
-
  Economics (1)
-
  Education (12)
-
  Ethics (20)
-
  Family (58)
-
  Farm and Garden (3)
-
  Feasting (22)
-
  Hermeneutics (8)
-
  History (37)
-
  In Memoriam (1)
-
  Language (4)
-
  Literature (137)
-
  Marriage (11)
-
  Medicine (4)
-
  Miscellaneous (113)
-
  Missions & Evangelism (4)
-
  Movies (25)
-
  Music (30)
-
  OT – Chronicles (1)
-
  Philosophy (2)
-
  Poetry (6)
-
  Politics (16)
-
  Prayer (12)
-
  Psychology (1)
-
  Science (2)
-
  Sin (2)
-
  Sports (1)
-
  Technology (1)
-
  Television (7)
-
  Theology (100)
-
  Theology – Anthropology (2)
-
  Theology – Christology (13)
-
  Theology – Ecclesiology (34)
-
  Theology – Eschatology (3)
-
  Theology – Liturgical (91)
-
  Theology – Pastoral (53)
-
  Theology – Political (2)
-
  Theology – Soteriology (18)
-
  Theology – Trinity (10)
-
  Uncategorized (71)
-
  Updates (64)
-
  Work (1)
-
-Archives
-
+Archives 
  March 2025 
-
  October 2024 
-
  May 2020 
-
  August 2019 
-
  July 2019 
-
  June 2019 
-
  December 2018 
-
  September 2018 
-
  August 2018 
-
  July 2018 
-
  June 2018 
-
  April 2018 
-
  February 2018 
-
  December 2017 
-
  November 2017 
-
  October 2017 
-
  June 2017 
-
  March 2017 
-
  October 2016 
-
  August 2016 
-
  July 2016 
-
  June 2016 
-
  May 2016 
-
  April 2016 
-
  March 2016 
-
  February 2016 
-
  January 2016 
-
  October 2015 
-
  January 2015 
-
  December 2014 
-
  September 2014 
-
  August 2014 
-
  July 2014 
-
  May 2014 
-
  March 2014 
-
  February 2014 
-
  January 2014 
-
  December 2013 
-
  November 2013 
-
  October 2013 
-
  September 2013 
-
  August 2013 
-
  July 2013 
-
  May 2013 
-
  April 2013 
-
  February 2013 
-
  January 2013 
-
  December 2012 
-
  November 2012 
-
  September 2012 
-
  August 2012 
-
  July 2012 
-
  June 2012 
-
  May 2012 
-
  March 2012 
-
  February 2012 
-
  January 2012 
-
  September 2011 
-
  August 2011 
-
  June 2011 
-
  May 2011 
-
  April 2011 
-
  March 2011 
-
  February 2011 
-
  January 2011 
-
  December 2010 
-
  November 2010 
-
  October 2010 
-
  September 2010 
-
  August 2010 
-
  July 2010 
-
  June 2010 
-
  May 2010 
-
  March 2010 
-
  December 2009 
-
  November 2009 
-
  September 2009 
-
  July 2009 
-
  June 2009 
-
  May 2009 
-
  April 2009 
-
  March 2009 
-
  February 2009 
-
  January 2009 
-
  December 2008 
-
  November 2008 
-
  October 2008 
-
  September 2008 
-
  August 2008 
-
  July 2008 
-
  June 2008 
-
  May 2008 
-
  April 2008 
-
  March 2008 
-
  February 2008 
-
  January 2008 
-
  December 2007 
-
  November 2007 
-
  October 2007 
-
  September 2007 
-
  August 2007 
-
  July 2007 
-
  June 2007 
-
  May 2007 
-
  April 2007 
-
  March 2007 
-
  February 2007 
-
  January 2007 
-
  December 2006 
-
  November 2006 
-
  October 2006 
-
  September 2006 
-
  August 2006 
-
  July 2006 
-
  June 2006 
-
  May 2006 
-
  April 2006 
-
  March 2006 
-
  February 2006 
-
  January 2006 
-
  December 2005 
-
  November 2005 
-
  October 2005 
-
  September 2005 
-
  August 2005 
-
  July 2005 
-
  June 2005 
-
  May 2005 
-
  April 2005 
-
  March 2005 
-
  February 2005 
-
  January 2005 
-
  December 2004 
-
  November 2004 
-
  October 2004 
-
  September 2004 
-
  August 2004 
-
  July 2004 
-
  June 2004 
-
  May 2004 
-
  April 2004 
-
  March 2004 
-
  February 2004 
-
  January 2004 
-
  December 2003 
-
  November 2003 
-
  October 2003 
-
  September 2003 
-
  August 2003 
-
  July 2003 
-
  June 2003 
-
  May 2003 
-
  April 2003 
-
  March 2003 
-
  February 2003 
-
  January 2003 
-
  December 2002 
-
  November 2002 
-
  October 2002 
-
  September 2002 
-
  August 2002 
-
  July 2002 
-
  June 2002 
-
  May 2002 
-
  April 2002 
-
  March 2002 
-
  February 2002 
-
  January 2002 
-
  December 2001 
-
  0 
-
 CREDITS
-
 Blog powered by
-
- WordPress .
-
+ WordPress . 
 CSS borrowed from
-
  BlueRobot .
-
  

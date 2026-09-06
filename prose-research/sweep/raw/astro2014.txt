@@ -1,69 +1,67 @@
 
- Some notes on George RR Martin's prose style | Books & Boots 
+ Some notes on George RR Martin’s prose style | Books & Boots 
  About 
- Books & Boots 
- Reflections on books and art 
- Some notes on George RR Martin's prose style
- George RR Martin's prose style in his epic A Song of Ice and Fire fantasy series of novels is unstable . By this I mean it veers from purely functional modern thriller prose to prose larded with fake medievalisms, from a lexicon of short, Anglo-Saxon words to one suddenly stuffed with neoclassical and latinate vocabulary. On the same page there can be 'ofts' and 'elsewises' from the 15th century and then things being 'divvied up' or people asking 'What's that all about?' as if in modern New York.
- For fun I've tried to identify various aspects of his style:
- 1. Crisp The default setting of Martin's style is lucid and functional: 
- When morning came, none of them quite realised it at first. The world was still dark, but the black had turned to grey and shapes were beginning to emerge half-seen from the gloom. Jon lowered his bow to stare at the mass of heavy clouds that covered the eastern sky. He could see a glow behind them, but perhaps he was only dreaming. He notched another bow. (p.301)
- There are a few nods in the direction of cod-medievalism, a few stylistic gestures towards the books' fantasy setting (see below). But these tics don't conceal the fundamental modernity of the prose and the worldview it conveys.
- Bran was too frightened to shout. The fire had burned down to a few bright embers and his friends were all asleep. He almost slipped his skin and reached out for his wolf, but Summer might be miles away. He couldn't leave his friends helpless in the dark to face whatever was coming up out of the well. (p.195)
- 2. Poetry. When his characters are not swearing or chopping off each others' heads, GRRM's limpid style can have a powerfully simple beauty. I particularly associate this with the character of Arya Stark once she's set sail from Westeros for the island city of Braavos.
- Faint and far away the light burned, low on the horizon, shining through the sea mists.
-"It looks like a star," said Arya.
-"The star of home," said Denyo.
-His father was shouting orders. Sailors scrambled up and down the three tall masts and moved along the rigging, reefing the heavy purple sails. Below, oarsmen heaved and strained over two great banks of oars. The decks tilted, creaking, as the galleas Titan's Daughter heeled to starboard and began to come about." (FFC98)
- His prose can be wonderfully evocative. I'll long remember the word paintings of the Water Palace of Lord Martell of Dorne:
- When the sun set the air grew cool and the children went inside in search of supper, still the prince remained beneath his orange trees, looking out over the still pools and the sea beyond. A serving man brought him a bowl of purple olives, with flatbread, cheese and chickpea paste. He ate a bit of it, and drank a cup of the sweet, heavy strongwine that he loved. When it was empty, he filled it once again. Sometimes in the deep black hours of the morning sleep found him in his chair. Only then did the captain roll him down the moonlit gallery, past a row of fluted pillars and through a graceful archway, to a great bed with crisp, cool linen sheets in a chamber by the sea. (FFC40)
- (I can't decide whether the repetitions in this passage - of 'cool' and 'still' - are signs of haste, or careful repetitions designed to evoke the lazy, torpid atmosphere of Lord Martell's sea retreat.)
- 3. Types of scene Martin can manage an impressive variety of scene:
+ Books & Boots Reflections on books and art 
+ Some notes on George RR Martin’s prose style 
+ George RR Martin’s prose style in his epic A Song of Ice and Fire fantasy series of novels is  unstable . By this I mean it veers from purely functional modern thriller prose to prose larded with fake medievalisms, from a lexicon of short, Anglo-Saxon words to one suddenly stuffed with neoclassical and latinate vocabulary. On the same page there can be ‘ofts’ and ‘elsewises’ from the 15th century and then things being ‘divvied up’ or people asking ‘What’s that all about?’ as if in modern New York. 
+ For fun I’ve tried to identify various aspects of his style: 
+ 1. Crisp  The default setting of Martin’s style is lucid and functional: 
+ When morning came, none of them quite realised it at first. The world was still dark, but the black had turned to grey and shapes were beginning to emerge half-seen from the gloom. Jon lowered his bow to stare at the mass of heavy clouds that covered the eastern sky. He could see a glow behind them, but perhaps he was only dreaming. He notched another bow. (p.301) 
+ There are a few nods in the direction of cod-medievalism, a few stylistic gestures towards the books’ fantasy setting (see below). But these tics don’t conceal the fundamental modernity of the prose and the worldview it conveys. 
+ Bran was too frightened to shout. The fire had burned down to a few bright embers and his friends were all asleep. He almost slipped his skin and reached out for his wolf, but Summer might be miles away. He couldn’t leave his friends helpless in the dark to face whatever was coming up out of the well. (p.195) 
+ 2.  Poetry. When his characters are not swearing or chopping off each others’ heads, GRRM’s limpid style can have a powerfully simple beauty. I particularly associate this with the character of Arya Stark once she’s set sail from Westeros for the island city of Braavos. 
+ Faint and far away the light burned, low on the horizon, shining through the sea mists. 
+“It looks like a star,” said Arya. 
+“The star of home,” said Denyo. 
+His father was shouting orders. Sailors scrambled up and down the three tall masts and moved along the rigging, reefing the heavy purple sails. Below, oarsmen heaved and strained over two great banks of oars. The decks tilted, creaking, as the galleas Titan’s Daughter heeled to starboard and began to come about.” (FFC98) 
+ His prose can be wonderfully evocative. I’ll long remember the word paintings of the Water Palace of Lord Martell of Dorne: 
+ When the sun set the air grew cool and the children went inside in search of supper, still the prince remained beneath his orange trees, looking out over the still pools and the sea beyond. A serving man brought him a bowl of purple olives, with flatbread, cheese and chickpea paste. He ate a bit of it, and drank a cup of the sweet, heavy strongwine that he loved. When it was empty, he filled it once again. Sometimes in the deep black hours of the morning sleep found him in his chair. Only then did the captain roll him down the moonlit gallery, past a row of fluted pillars and through a graceful archway, to a great bed with crisp, cool linen sheets in a chamber by the sea. (FFC40) 
+ (I can’t decide whether the repetitions in this passage – of ‘cool’ and ‘still’ – are signs of haste, or careful repetitions designed to evoke the lazy, torpid atmosphere of Lord Martell’s sea retreat.) 
+ 3. Types of scene Martin can manage an impressive variety of scene: 
  Big setpieces such as: 
- the epic Battle of Blackwater Bay of which we get a panoramic overview as well as the point of view of the heroic dwarf Tyrion Lannister 
- the grisly Red Wedding where Robb Stark and his allies are massacred, seen both from Lady Catelyn's viewpoint inside the castle and from Arya's as she rides up to it from outside 
- the sudden mayhem when the Kings Landing mob riot and attack Joffrey's procession, seizing horses, dragging riders off into the baying crowd and Martin vividly conveys fear and panic and confusion 
- the battle of the Wall as Jon Snow and the Night Watch defend against the wildlings' attack, and then the sudden arrival of King Stannis and his cavalry 
- the Others' attack on the Night Watchmen on the Fist of the First Men
- Small, dramatic scenes such as:
- the countless duels, for example between Bronn and the knight of the Vale for Tyrion's life; between the Oberyn Martell and the Mountain that Rides; between Jaime Lannister and Brienne in the Riverlands 
- sudden violence, as when the wights ambush Bran, Hodor and Meera and Jojen Reed at the mouth of the cave of the prophet; or the three mercenaries ambush Brienne at the castle on the Fingers; or Jon Snow is assassinated; or the Hound cracks Arya on the head with his axe 
- the extraordinary scene where the demon birthed by Melisandre enters King Renly's tent to murder him
- the wonderful opening of Feast for Crows where the Damphair drowns and revives a convert to the Drowned God
- 4 Dramatic dialogue Confrontations between opposing characters are done though terse, charged dialogue. As a reader on numerous occasions you experience a real dramatic shock when you realise, along with one character, the implications of another one's words, and are horrified or shocked. When Cersei orders Sansa's direwolf to be killed; when princess Margaery realises Cersei is trapping her in the dungeon at Baelon's Septon; when Eddard Stark realises he has lost control of King's Landing.
- Tyrion is a master of stylish banter, witty asides, the telling bon mot, throughout the books.
- Littlefinger is arch and aphoristic, especially once he takes Sansa Stark into his 'care'.
- 5 Distorting English Martin employs the slight deformation of existing standard words or phrases into something rich and strange. A frequent example is that knights (warriors in armour riding horses) are called 'Ser', an obvious distortion of the traditional Sir, which starts out sounding silly but, by sheer repetition, comes to seem the natural term. Similarly, girls who have had their first period have 'flowered', they have tobacco in Westeros but use it to chew and call it 'sourleaf'; they have a sedative drink called 'dreamwine', and so on. By repetition over the multiple scenes, and scores of chapters, Martin's slightly distorted English, and slightly amended concepts, become your home setting.
- 6 New coinages Matching and echoing the epic scope of his imagination, Martin has coined completely new, medieval-sounding words to fit the fantasy medievalism of the story. These are a highly creative and enjoyable aspect of his style, and there are hundreds:
- Sept and septon and septa (shrine and priest and priestess to the seven gods), maester (doctor/alchemist), wildlings (wild men from north of the Great Wall), pyromancer (reader of the future in fire), holdfast, warg (human who can inhabit an animal), damphair, and many others.
- 7 New word combinations English (like its parent German) allows its users to combine words to make new ones. Martin uses this facility to coin scores of neologisms:
- sellsword (mercenary), smallfolk (ordinary people), strongwine, westermen, ironborn (inhabitant of the western Iron isles), bannermen (minor families loyal to a great lord), woodharp, stumbletongue, firewine, greensick (seasick), kingsmoot (meeting to decide a king), skinchanger (who can change into an animal), godswood (holy wood where the magic weir trees grow), weirwood (the holy trees), greenseer (wise man of the Children of the Forest), greensight (second sight of the greenseers), sweetling (term of endearment), beastling, shadowcat , crannogman ,
- As with the distortions of standard English and the new coinages, these new word combinations build up a linguistic base for the otherness of his fantasy world. The more there are, the more frequently you encounter them on each page, the greater the sense of moving into his otherworld, the greater the sense of the completeness of his fantasy world.
- Read a comprehensive account of Martin's use of affixes, compound and combination words 
- 8 New names It's one thing to point out that the Song is full of hundreds and hundreds of characters, each realised with great vividness and precision. (Someone has counted over 1,000 named characters in the saga so far.) But of course almost all of them require names. The names of the hundreds and hundreds of characters partake of the alienation affect mentioned above, of being nearly recognisable but bent or distorted. We feel we are nearly in a familiar world - but not quite.
- Martin's names can be grouped into three categories:
- a) Similar names Jon Snow is a straight down the line English name (extremely rare in Martin). His fat friend in the Night Watch is Samwell Tarly. Jaime Lannister's name is almost English. Tywin is definitely foreign and so is Tyrion. Bronn sounds as if it should be English. Joffrey is an English name, distorted. Ditto Margaery, Dorna, Cleos and Kevan, Eddard and Robb, Tommen or Lyonel.
- b) Alien names Others are entirely alien like Tygett, Darlessa, Gerion, Emmon, Lancel, Arya, Hodder, Mace or Loras, Brienne, Barristan, Viserys, Daenerys, Balon, Renley, Stannis, Euron, Asha, Walder,
- c) Exotic names Let alone the exotic names of characters from the free Cities of the eastern continent, Essos: Hizdahr zo Loraq, Khal Jhaqo, Skahaz mo Kandaq, Daario Naharis,
- In these and related ways the text works on a purely verbal level to draw you into a parallel universe , whisperingly close to our English history and culture, yet bracingly alien and explosive.
+ the epic Battle of Blackwater Bay of which we get a panoramic overview as well as the point of view of the heroic dwarf Tyrion Lannister 
+ the grisly Red Wedding where Robb Stark and his allies are massacred, seen both from Lady Catelyn’s viewpoint inside the castle and from Arya’s as she rides up to it from outside 
+ the sudden mayhem when the Kings Landing mob riot and attack Joffrey’s procession, seizing horses, dragging riders off into the baying crowd and  Martin vividly conveys fear and panic and confusion 
+ the battle of the Wall as Jon Snow and the Night Watch defend against the wildlings’ attack, and then the sudden arrival of King Stannis and his cavalry 
+ the Others’ attack on the Night Watchmen on the Fist of the First Men 
+ Small, dramatic scenes such as: 
+ the countless duels, for example between Bronn and the knight of the Vale for Tyrion’s life; between the Oberyn Martell and the Mountain that Rides; between Jaime Lannister and Brienne in the Riverlands 
+ sudden violence, as when the wights ambush Bran, Hodor and Meera and Jojen Reed at the mouth of the cave of the prophet; or the three mercenaries ambush Brienne at the castle on the Fingers; or Jon Snow is assassinated; or the Hound cracks Arya on the head with his axe 
+ the extraordinary scene where the demon birthed by Melisandre enters King Renly’s tent to murder him 
+ the wonderful opening of Feast for Crows where the Damphair drowns and revives a convert to the Drowned God 
+ 4 Dramatic dialogue  Confrontations between opposing characters are done though terse, charged dialogue. As a reader on numerous occasions you experience a real dramatic shock when you realise, along with one character, the implications of another one’s words, and are horrified or shocked. When Cersei orders Sansa’s direwolf to be killed; when princess Margaery realises Cersei is trapping her in the dungeon at Baelon’s Septon; when Eddard Stark realises he has lost control of King’s Landing. 
+ Tyrion is a master of stylish banter, witty asides, the telling bon mot, throughout the books. 
+ Littlefinger is arch and aphoristic, especially once he takes Sansa Stark into his ‘care’. 
+ 5 Distorting English  Martin employs the slight deformation of existing standard words or phrases into something rich and strange. A frequent example is that knights (warriors in armour riding horses) are called ‘Ser’, an obvious distortion of the traditional Sir, which starts out sounding silly but, by sheer repetition, comes to seem the natural term. Similarly, girls who have had their first period have ‘flowered’, they have tobacco in Westeros but use it to chew and call it ‘sourleaf’; they have a sedative drink called ‘dreamwine’, and so on. By repetition over the multiple scenes, and scores of chapters, Martin’s slightly distorted English, and slightly amended concepts, become your home setting. 
+ 6 New coinages  Matching and echoing the epic scope of his imagination, Martin has coined completely new, medieval-sounding  words to fit the fantasy medievalism of the story. These are a highly creative and enjoyable aspect of his style, and there are hundreds: 
+ Sept and septon and septa (shrine and priest and priestess to the seven gods), maester (doctor/alchemist), wildlings (wild men from north of the Great Wall), pyromancer (reader of the future in fire), holdfast, warg (human who can inhabit an animal), damphair, and many others. 
+ 7 New word combinations  English (like its parent German) allows its users to combine words to make new ones. Martin uses this facility to coin scores of neologisms: 
+ sellsword (mercenary), smallfolk (ordinary people),  strongwine, westermen,  ironborn (inhabitant of the western Iron isles), bannermen (minor families loyal to a great lord), woodharp, stumbletongue, firewine, greensick (seasick), kingsmoot (meeting to decide a king), skinchanger (who can change into an animal), godswood (holy wood where the magic weir trees grow), weirwood (the holy trees), greenseer  (wise man of the Children of the Forest), greensight (second sight of the greenseers), sweetling (term of endearment), beastling, shadowcat , crannogman , 
+ As with the distortions of standard English and the new coinages, these new word combinations build up a linguistic base for the otherness of his fantasy world. The more there are, the more frequently you encounter them on each page, the greater the sense of moving into his otherworld, the greater the sense of the  completeness  of his fantasy world. 
+ Read a comprehensive account of Martin’s use of affixes, compound and combination words 
+ 8  New names  It’s one thing to point out that the Song is full of hundreds and hundreds of characters, each realised with great vividness and precision. (Someone has counted over 1,000 named characters in the saga so far.) But of course almost all of them require names. The names of the hundreds and hundreds of characters partake of the alienation affect mentioned above, of being nearly recognisable but bent or distorted. We feel we are nearly  in a familiar world – but not quite. 
+ Martin’s names can be grouped into three categories: 
+ a) Similar names  Jon Snow is a straight down the line English name (extremely rare in Martin). His fat friend in the Night Watch is Samwell Tarly. Jaime Lannister’s name is almost English. Tywin is definitely foreign and so is Tyrion. Bronn sounds as if it should be English. Joffrey is an English name, distorted. Ditto Margaery, Dorna, Cleos and Kevan, Eddard and Robb, Tommen or Lyonel. 
+ b) Alien names Others are entirely alien like Tygett, Darlessa, Gerion, Emmon, Lancel, Arya, Hodder, Mace or Loras, Brienne, Barristan, Viserys, Daenerys, Balon, Renley, Stannis, Euron, Asha, Walder, 
+ c) Exotic names  Let alone the exotic names of characters from the free Cities of the eastern continent, Essos: Hizdahr zo Loraq, Khal Jhaqo, Skahaz mo Kandaq, Daario Naharis, 
+ In these and related ways the text works on a purely verbal level to draw you into a parallel universe , whisperingly close to our English history and culture, yet bracingly alien and explosive. 
  9. Cod medievalism 
- Martin all-too-frequently remembers he's writing a medieval epic and abandons his natural crisp, clear style to slip into pastiche medievalism. I suppose we should be grateful he avoids the standard medievalisms - thee and thou, ye, prithee and so on. But there is a number of would-be medievalisms which become annoying mannerisms:
- The most persistent one is removing the -ly suffix from adverbs. "He is like to be angry"; "He has near finished the task." 
- 'Oft' instead of the sensible 'often' 
- 'Elsewise'
- 'Among' and 'while' become the archaic 'amongst' and 'whilst'
- He invents some cod medieval phrases such as 'much and more'.
+ Martin all-too-frequently remembers he’s writing a medieval epic and abandons his natural crisp, clear style to slip into pastiche medievalism. I suppose we should be grateful he avoids the standard medievalisms – thee and thou, ye, prithee and so on. But there is a number of would-be medievalisms which become annoying mannerisms: 
+ The most persistent one is removing the -ly suffix from adverbs. “He is like to be angry”; “He has near finished the task.” 
+ ‘Oft’ instead of the sensible ‘often’ 
+ ‘Elsewise’ 
+ ‘Among’ and ‘while’ become the archaic ‘amongst’ and ‘whilst’ 
+ He invents some cod medieval phrases such as ‘much and more’. 
  Sometimes entire paragraphs or chunks of dialogue will use these and other tame medievalisms to create a style closer to Victorian pastiches of medieval prose than the real thing. 
  Conclusion 
- In my post on Affixes and compound words I try to show that if Martin's style answers to / is responsive to the medieval world of the narrative, it is not because of the occasional pseudo-medievalisms ('oft' and 'elsewise') which are in fact blemishes on his otherwise swift clear style; it is because he consistently chooses words of Anglo-Saxon origin and generally avoids Latinate and neoclassical vocabulary, thus giving his prose a cumulative feeling of woodiness, antiquity, pithiness.
- The thoughts above are intended to shed further light on the distinctive strengths and achievements of his uneven but often wonderfully powerful and evocative style.
- Related links
- Check out George RR Martin's blog and his website 
- Westeros.org links through to scores of other GoT websites, as well as hosting hundreds of FAQs about the series
- The books have been made into an ongoing HBO TV dramatisation. Series 1 , series 2 and Series 3 are now available on dvd. Series 4 will start transmitting on Sky Atlantic on 7 April 2014 .
- All quotes copyright George RR Martin 2013.
- Rate this:
- Share this:
+ In my post on Affixes and compound words I try to show that if Martin’s style answers to / is responsive to  the medieval world of the narrative, it is not because of the occasional pseudo-medievalisms (‘oft’ and ‘elsewise’) which are in fact blemishes on his otherwise swift clear style;  it is because he consistently chooses words of Anglo-Saxon origin and generally avoids Latinate and neoclassical vocabulary, thus giving his prose a cumulative feeling of woodiness, antiquity, pithiness. 
+ The thoughts above are intended to shed further light on the distinctive strengths and achievements of his uneven but often wonderfully powerful and evocative style. 
+ Related links 
+ Check out  George RR Martin’s blog  and his  website 
+ Westeros.org  links through to scores of other GoT websites, as well as hosting hundreds of FAQs about the series 
+ The books have been made into an ongoing HBO TV dramatisation.  Series 1 ,  series 2 and Series 3  are now available on dvd. Series 4 will start transmitting on Sky Atlantic on  7 April 2014 . 
+ All quotes copyright George RR Martin 2013. 
+ Rate this: Share this: 
  Share on Facebook (Opens in new window) 
  Facebook 
  Share on X (Opens in new window) 
@@ -83,29 +81,25 @@ His father was shouting orders. Sailors scrambled up and down the three tall mas
  Related 
  1 Comment 
  by Simon on March 31, 2014 
- • Permalink 
+  •  Permalink 
  Posted in Books , Fantasy , Novel 
  Tagged Game of Thrones , George RR Martin 
  Posted by Simon on March 31, 2014 
- https://astrofella.wordpress.com/2014/03/31/some-notes-on-george-rr-martins-prose-style/
- Previous Post 
- Njal's Saga (13th century) 
- Next Post 
- Eyrbyggja Saga 1 
+ https://astrofella.wordpress.com/2014/03/31/some-notes-on-george-rr-martins-prose-style/ 
+ Previous Post Njal’s Saga (13th century) Next Post Eyrbyggja Saga 1 
  Leave a comment 
- 1 Comment
+ 1 Comment 
  Word by Word: Is Anglo-Saxon the answer? « jessicamorrell.com 
  Leave a comment Cancel reply 
  Δ 
  This site uses Akismet to reduce spam. Learn how your comment data is processed. 
  Search for: 
  Follow 
- Enter your email address to follow this blog and receive notifications of new posts by email.
+ Enter your email address to follow this blog and receive notifications of new posts by email. 
  Email Address: 
  Follow Books and Boots 
  Join 743 other subscribers 
- Topics
- Africa 
+ Topics Africa 
  America 
  ancient Rome 
  art 
@@ -179,8 +173,7 @@ His father was shouting orders. Sailors scrambled up and down the three tall mas
  theatre 
  thriller 
  Virginia Woolf 
- war 
- Categories
+ war Categories 
  Adventure (151)
  Africa (120)
  America (118)
@@ -311,7 +304,7 @@ His father was shouting orders. Sailors scrambled up and down the three tall mas
  Subscribe 
  Subscribed 
  Books & Boots 
- Join 743 other subscribers
+ Join 743 other subscribers 
  Sign me up 
  Already have a WordPress.com account? Log in now. 
  Books & Boots 

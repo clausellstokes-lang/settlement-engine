@@ -1,0 +1,148 @@
+{{Short description|Wikipedia information page}}
+{{redirect|WP:LLMS|the content guideline|Wikipedia:Writing articles with large language models}}
+{{redirect|Wikipedia:AISLOP |other uses|WP:AI-INDEX}}
+{{pp-protected|small=yes}}
+{{Information page|WP:CLANKER|WP:LLMS|WP:GPT|}}
+
+The use of [[large language model]]s (LLMs; the "engine" behind [[AI chatbot]]s, such as [[ChatGPT]]) on Wikipedia presents systemic risks to maintaining the content standards required by the [[WP:COPO|core content policies]], specifically through the introduction of "[[Hallucination (artificial intelligence)|hallucinated]]" statements, unsourced or unverifiable content, and [[algorithmic bias]]. Asking an LLM to "write a Wikipedia article" can lead to output that is an outright fabrication, complete with [[Wikipedia:Fictitious references|fictitious references]]. It might [[Wikipedia:NPOV|lack neutrality]] and [[Wikipedia:Libel|libel living people]]. In addition, such content can be inconsistent with Wikipedia's [[Wikipedia:Copyrights|copyright policy]].
+
+For this reason, using LLMs to generate or rewrite article content is [[Wikipedia:Writing articles with large language models|prohibited]], except for [[Wikipedia:LLM-assisted translation|translation]] and for [[Wikipedia:Basic copyediting|basic copyediting]] of one's own work. 
+
+Wikipedia [[Wikipedia:NOTLAB|is not a testing ground]]. Using LLMs to write one's talk page comments or edit summaries in a non-transparent way is strongly discouraged, and [[Wikipedia:LLMTALK|obviously-generated comments may be hidden]]. LLMs used to generate or modify text should be mentioned in the [[Help:Edit summary|edit summary]], even if their terms of service do not require it.
+
+== <span class="anchor" id="Risks and relevant policies"></span>Risks ==
+{{shortcut|WP:AIFAIL|WP:AISLOP}}
+
+=== Original research and "hallucinations" ===
+{{For|the relevant policy|Wikipedia:No original research}}
+: {| style="border: var(--border-color-subtle, darkgrey) solid 1px; background-color: var(--background-color-neutral-subtle, WhiteSmoke); color: var(--color-base, black); width: 90%;"
+|-
+| Wikipedia articles must not contain original research – i.e. facts, allegations, and ideas for which no reliable, published sources exist. This includes any analysis or synthesis of published material that [[Wikipedia:No original research#Synthesis of published material|serves to reach or imply a conclusion not stated by the sources]]. To demonstrate that you are not adding original research, you must be able to cite reliable, published sources. They should be {{em|directly related}} to the topic of the article and {{em|directly support}} the material being presented.
+|}
+
+LLMs are pattern completion programs: They generate text by outputting the words most likely to come after the previous ones. They learn these patterns from their training data, which includes a wide variety of content from the Internet and elsewhere, including works of fiction, low-effort forum posts, unstructured and low-quality content for [[search engine optimization]] (SEO), and so on. Because of this, LLMs will sometimes "draw conclusions" which, even if they seem superficially familiar, are not present in any single reliable source. They can also comply with prompts with absurd premises, such as "The following is an article about the benefits of eating crushed glass". Finally, LLMs can make things up, which is a statistically inevitable byproduct of their design, called "[[Hallucination (machine learning)|hallucination]]". {{strong|All of this is, in practical terms, equivalent to original research, or worse, outright fabrication}}.
+
+{{Rquote |1=right |2=In short, the "hallucinations" and biases in generative AI outputs result from the nature of their training data, the tools’ design focus on pattern-based content generation, and the inherent limitations of AI technology...|3=In: "When AI Gets It Wrong", [[MIT Sloan School of Management]], AI basics<ref>{{Cite web |title=When AI Gets It Wrong: Addressing AI Hallucinations and Bias |url=https://mitsloanedtech.mit.edu/ai/basics/addressing-ai-hallucinations-and-bias/ |access-date=2025-05-25 |website=MIT Sloan Teaching & Learning Technologies |language=en-US}}</ref>}}
+
+As LLMs often output accurate statements, and since their outputs are typically plausible-sounding and given with an air of confidence, any time that they deliver a useful-seeming result, people may have difficulty detecting the above problems. An average user who believes that they are in possession of a useful tool, who maybe did a spot check for accuracy and "didn't see any problems", is biased to accept the output as provided; but it is highly likely that there are problems. Even if 90% of the content is okay and 10% is false, that is a huge problem in an encyclopedia. LLMs' outputs become worse when they are asked questions that are complicated, about obscure subjects, or told to do tasks to which they are not suited (e.g. tasks which require extensive knowledge or analysis). An example of this tendency is shown below:
+Prompt: {{Tqbm|Greater-toothed pademelons, Thylogale gigadonti, can be seen in wildlife preserves in [[Queensland]]}}
+Note that "greater-toothed pademelon" is a fictitious species.
+Response: {{Tqbm|{{!tq|'''Yes''', greater-toothed pademelons are found in wildlife preserves in Queensland.}} They are shy and nocturnal, so it may be difficult to see them during the day. However, you may be able to see their tracks or hear them rustling in the bushes at night.}}
+This complete statement is false and is based on the LLM's assumption that this was a real species. In order to provide the most plausible answer, it extracted general information about a different [[Red-necked pademelon|kind of pademelon]] (the second sentence) from an [https://australian.museum/learn/animals/mammals/red-necked-pademelon/ Australian Museum] article. This serves to demonstrate that LLM's can offer statements with a confident tone even when that information is factually incorrect or unverifiable.
+
+<small> (LLM used: [[Gemini (chatbot)|Gemini]]) </small>
+
+=== Unsourced or unverifiable content ===
+{{For|the relevant policy|Wikipedia:Verifiability}}
+: {| style="border: var(--border-color-subtle, darkgrey) solid 1px; background-color: var(--background-color-neutral-subtle, WhiteSmoke); color: var(--color-base, black); width: 90%;"
+|-
+| Readers must be able to check that any of the information within Wikipedia articles is not just made up. This means all material must be attributable to [[Wikipedia:Verifiability#Reliable sources|reliable, published sources]]. Additionally, quotations and any material challenged or likely to be challenged must be supported by [[Wikipedia:Inline citation|inline citations]].
+|}
+{{strong|LLMs do not follow Wikipedia's policies on verifiability and [[Wikipedia:Reliable sources|reliable sourcing]]}}. LLMs sometimes exclude citations altogether or [[WP:QUESTIONABLE|cite sources that don't meet Wikipedia's reliability standards]] (including [[WP:CIRCULAR|citing Wikipedia as a source]]). In some cases, they hallucinate citations of [[Wikipedia:Fictitious references|non-existent references]] by making up titles, authors, and URLs. LLM output can also be influenced by bogus or specifically made-up content by third parties.<ref>Duris, Daniel [https://bastadigital.com/en/year-2026-the-year-of-llm-bombing/ "Year 2026: The Year of LLM Bombing"], Basta digital blog,  Retrieved on 18 January 2026.</ref>
+
+LLM-hallucinated content, in addition to being original research as explained above, also breaks the verifiability policy, as it can't be verified because it is made up: there are no references to find.
+
+=== Algorithmic bias and non-neutral point of view ===
+{{For|the relevant policy|Wikipedia:Neutral point of view}}
+: {| style="border: var(--border-color-subtle, darkgrey) solid 1px; background-color: var(--background-color-neutral-subtle, WhiteSmoke); color: var(--color-base, black); width: 90%;"
+|-
+| Articles must not take sides, but should explain the sides, fairly and without editorial bias. This applies to both what you say and how you say it.
+|}
+{{strong|LLMs can produce content that is neutral-seeming in tone, [[Algorithmic bias|but not necessarily in substance]]}}. This concern is especially salient for [[Wikipedia:Biographies of living persons|biographies of living persons]]. 
+AI models, for example, tend to have (as of 2026) a pro-authoritarian bias in their responses.<ref name=":0">{{Cite journal |last=Waight |first=Hannah |last2=Yang |first2=Eddie |last3=Yuan |first3=Yin |last4=Messing |first4=Solomon |last5=Roberts |first5=Margaret E. |last6=Stewart |first6=Brandon M. |last7=Tucker |first7=Joshua A. |date=May 13, 2026 |title=State media control influences large language models |url=https://www.nature.com/articles/s41586-026-10506-7 |journal=Nature |language=en |volume=655 |issue=8123 |pages=685–693 |doi=10.1038/s41586-026-10506-7 |issn=1476-4687}}</ref><ref name=":02">{{Cite news |last=Woo |first=Stu |date=August 14, 2026 |title=Chinese Censorship Is Leaking Into Answers From American AI |url=https://www.wsj.com/tech/ai/chinese-censorship-is-leaking-into-answers-from-american-ai-62abeca5 |work=Wall Street Journal}}</ref><ref name=":1">{{Cite web |last=Osmonbekov |first=Mia |date=August 13, 2026 |title='Multi-part case study on China’s media' finds that AI models can't hallucinate away Chinese censorship |url=https://fortune.com/2026/08/13/chinese-censorship-ai-models-case-study/ |access-date=2026-08-14 |website=Fortune |language=en}}</ref>
+
+=== Copyright violations ===
+{{hatnote group|{{For|the relevant policy|Wikipedia:Copyrights}}
+{{Further|Wikipedia:Large language models and copyright}}
+{{See also|m:Wikilegal/Copyright Analysis of ChatGPT}}
+}}
+: {| style="border: var(--border-color-subtle, darkgrey) solid 1px; background-color: var(--background-color-neutral-subtle, WhiteSmoke); color: var(--color-base, black); width: 90%;"
+|-
+| If you want to import text that you have found elsewhere or that you have co-authored with others (including LLMs), you can only do so if it is available under terms that are compatible with the CC BY-SA license.
+|}
+[[File:06 Lightning Talks.webm|thumb|Examples of copyright violations by LLMs at 2:00]]
+[[File:Using_LLMs_to_write_Wikipedia_content.pdf|thumb|Slides for examples of copyright violations by LLMs]]
+<onlyinclude>{{Strong|LLMs can generate material that violates copyright}}.{{efn|This also applies to cases in which the AI model is in a jurisdiction where works generated solely by AI are not copyrightable, although with very low probability.}} Generated text may include verbatim snippets from [[Wikipedia:Non-free content|non-free content]] or be a [[WP:DERIVATIVE|derivative work]]. In addition, using LLMs to summarize copyrighted content (such as news articles) may produce [[Wikipedia:Close paraphrasing|excessively close paraphrases]].
+
+The copyright status of LLMs trained on copyrighted material is not yet fully understood. Their output may not be compatible with the CC BY-SA license and the GNU license used for text published on Wikipedia.</onlyinclude>
+
+== Usage ==
+{{see|Wikipedia:Editing policy#Artificial intelligence additions}}
+Wikipedia relies on volunteer efforts to review new content for compliance with our [[Wikipedia:Core content policies|core content policies]]. This is often time consuming. The informal social contract on Wikipedia is that editors will put significant effort into their contributions, so that other editors do not need to "clean up after them". Editors should ensure that their LLM-assisted edits are a net positive to the encyclopedia, and do not increase the maintenance burden on other volunteers.
+
+=== Writing articles ===
+{{for|the relevant guideline|Wikipedia:Writing articles with large language models}}
+Pasting raw large language models' outputs directly into the editing window to create a new article or add substantial new prose to existing articles generally leads to poor results. Consequently, the [[WP:NEWLLM|guideline on writing articles using LLMs]] establishes a near-blanket ban, stating that the use of LLMs to generate or rewrite article content is prohibited. While the guideline permits responsible LLM use for basic copyediting and translation (within the constraints of the [[Wikipedia:LLM-assisted translation|separate guideline on LLM-assisted translation]]), these applications hardly count as exceptions to the ban.
+
+Specifically, basic copyediting—as described in the [[Wikipedia:Basic copyediting|corresponding how-to guide]]—should be seen as inherently distinct from "rewriting"; it is restricted to correcting typography, spelling, punctuation, capitalization, and contractions, alongside straightforward formatting fixes. It also encompasses the most minimal and uncontentious stylistic corrections, such as removing redundant language or splitting overly long sentences, on a localized, incidental, basis. Any intervention requiring fundamental rephrasing exceeds the scope of "basic" copyediting and could mean "intermediate" or "advanced" copyediting, which would then fall under "rewriting", and that is where LLM use remains entirely prohibited. Even basic copyedits need human review. There might be a very good reason why a sentence is longer than usual, why capitalization is the way it is, or why a particular way to name something (that the LLM doesn't like) is used in the article, and the LLM might not know those reasons. Irresponsible LLM use can still do a lot of damage, even if the user believes they are doing "basic copyediting". Every change to an article must comply with all applicable policies and guidelines.
+
+The ban does not cover indirect use of LLMs, which means that they can be used {{em|adjacent to editing}}. For example, they can help editors {{em|spot}} structural problems in long articles (such as: the same information being repeated in different sections, the infobox not agreeing with the prose, etc.), and to generate ideas for new or existing articles. If using an LLM as a writing advisor, i.e. asking for an outline, how to improve a paragraph, a critique of existing content, etc., editors should remain aware that the information it gives is unreliable. Due diligence and common sense are required when choosing whether to incorporate any suggestions. The editor should become familiar with the sourcing landscape for the topic in question and then carefully evaluate the suggestions for their [[WP:NPOV|neutrality]] and [[Wikipedia:Verifiability|verifiability]].
+
+LLM outputs should not be added directly into [[Wikipedia:Drafts|drafts]] either. Drafts are works in progress and their initial versions often fall short of the standard required for articles, but enabling editors to develop article content by starting from an ''unaltered'' LLM-outputted initial version is not one of the purposes of draft space or [[Help:Userspace draft|user space]].
+
+=== Communicating ===
+{{shortcut|WP:LLMCOMM|WP:LLMCHAT}}
+{{For-text|the relevant guideline|[[Wikipedia:Talk page guidelines#LLM|Wikipedia:Talk page guidelines §§ LLM-generated comments]]}}
+Editors should not use LLMs to write comments generatively. Communication is at the root of Wikipedia's [[WP:CON|decision-making process]] and it is presumed that editors contributing to the English-language Wikipedia [[WP:CIR|possess the ability to come up with their own ideas]]. Comments that do not represent an actual person's thoughts are not useful in discussions, and comments that are obviously generated by an LLM or similar AI technology [[WP:AITALK|may be struck or collapsed]]. Repeating such misuse forms a pattern of [[Wikipedia:Disruptive editing|disruptive editing]], and may lead to a [[Wikipedia:Blocking policy|block]] or [[Wikipedia:Banning policy|ban]]. 
+
+This does not apply to using LLMs to refine the <em>expression</em> of one's authentic ideas: for instance, a non-native English speaker might permissibly use an LLM to check their grammar or to translate words they are unfamiliar with, but even in this case, be aware that LLMs may make mistakes or change the intended meaning of the comment. For proofreading, it is recommended to use a [[word processor]] (see [[Comparison of word processor programs|comparison]]) or dedicated [[grammar checker]] (see [[:Category:Grammar checkers|category]]) instead of an AI chatbot. Editors with limited English proficiency are advised to use a [[machine translation]] tool (see [[Comparison of machine translation applications|comparison]]), instead of an AI chatbot, when needed to translate their comments to English. They should be aware, however, that machine translation tools, such as DeepL and Google Translate, are also liable to make errors. They may sometimes make serious ones, especially in low-resource languages.<ref>{{cite web|url=https://www.sciencedirect.com/science/article/pii/S2589004224021035|title=Overview and challenges of machine translation for contextually appropriate translations|publisher=iScience|year=2024|first1=Palanichamy|last1=Naveen|first2=Pavel|last2=Trojovský|access-date=2025-12-11}}</ref>
+
+=== Other policy considerations ===
+LLMs should not be used for [[Wikipedia:Bot policy#Bot-like editing|unapproved bot-like editing]] or anything <em>approaching</em> bot-like editing. Using LLMs to assist high-speed editing in article space has a high chance of failing the standards of responsible use due to the difficulty in rigorously scrutinizing content for compliance with all applicable policies.
+
+Wikipedia [[Wikipedia:NOTLAB|is not a testing ground]] for LLM development, for example, by running experiments or trials on Wikipedia for this sole purpose. Edits to Wikipedia are made to advance the encyclopedia, not a technology. This is not meant to prohibit {{em|editors}} from responsibly experimenting with LLMs in their userspace for the purposes of improving Wikipedia.
+
+== LLM-originated content and deletion ==
+{{for|the relevant policy|Wikipedia:Deletion policy}}
+Even though the near-blanket ban in article space is not strictly necessary to hold LLM content as non-compliant with policy and unsuitable for the encyclopedia in general terms—as it is possible to apply core content policies and other policies directly to reach the same conclusion and act on it—designating [[WP:LLM]] as a standalone content guideline creates a standalone ''content standard'', even if somewhat intentionally redundant. Relative to preexisting policies, it serves as an additional protective layer to ensure Wikipedia remains a high-quality encyclopedia.
+
+This establishes a presumption of a generalized, inherent problem with LLM-originated content. Editors addressing this issue are not obligated to look past the content's origins to identify specific unverifiable, non-neutral, or originally synthesized (or copyright-infringing, libellous, etc.) statements before acting on it, provided those origins are certain or reasonably close to certain.{{efn|Very often they are {{em|not}}, but the cases when they are are also numerous in absolute terms—for example, an editor who has created many articles says the articles are AI-generated when asked.}} An editor might attempt to demonstrate that specific LLM content is compliant, but this is liable to be disputed. The burden to demonstrate compliance lies with the editor who adds or restores the known LLM-originated material. Conversely, demanding that others articulate specific problems to prove the content is flawed could be a wasted effort, as its unsuitability can already be fairly safely assumed under the policies.
+
+Therefore, LLM-originated articles can be deleted under the [[WP:DELREASON#14|deletion policy]] (reason #14: "Any other content not suitable for an encyclopedia"), following the normal [[Wikipedia:Articles for deletion|AfD]] process, with [[WP:PROD|PROD]] as an option.
+
+Some LLM-originated articles, as well as pages in other namespaces, can be speedily deleted under [[WP:G15|criterion G15]], but this is exceptional, as the enumerated subcriteria are fairly technical and seldom apply. Other criteria might apply instead, such as [[WP:G3|G3]]. (Speedy deletion is relevant but not terribly important here: The general direction and strategy is not to deal with the problem by relying significantly on speedy deletion.)
+
+Being comprised of the output of a large language model is one of the few [[WP:DRAFT|explicitly prescribed reasons for incubating an article in draftspace (draftifying)]] as an {{em|alternative to deletion}}, on a summary basis (during new page review). Articles that are eligible for speedy deletion should not be draftified. Furthermore, articles not eligible for speedy deletion—but which may be appropriately nominated in a full deletion process—should not be incubated unless there is a reasonable expectation that the problem can be fixed by editing (e.g., the topic is notable, and an editor in good standing carefully reviews or completely rewrites the article with suitable text).
+
+== Sources with LLM-generated text ==
+{{For|the relevant entry in the list of frequently-discussed sources|Wikipedia:Reliable sources/Perennial sources#Large language models}}
+
+[[WP:RSML|LLM-created works are not reliable sources]]. Unless their outputs were published by reliable outlets with rigorous oversight, and unless it can be verified that the content was evaluated for accuracy by the publisher, they should not be cited. After the AI boom, [[Generative AI#Use in journalism|misuse of LLMs began to negatively affect journalism]], causing a worsening of quality of some media sources.
+
+==See also==
+*[[Wikipedia:Artificial intelligence resources]], a directory related to AI resources
+* [[Wikipedia:WikiProject AI Cleanup]], a group of editors focusing on the issue of non-policy-compliant LLM-originated content
+** [[Wikipedia:WikiProject AI Cleanup/Guide]], a WikiProject advice page about identifying and handling LLM-originated content 
+* [[Wikipedia:Artificial intelligence]], an information page about the use of artificial intelligence on Wikipedia and Wikimedia projects
+* [[Wikipedia:Computer-generated content]], a draft of a proposed policy on using computer-generated content in general on Wikipedia
+* ''[[Artwork title]]'', a surviving article [[Special:PermanentLink/1125818376|initially]] developed from raw LLM output (before this page had been developed)
+* [[m:Research:Implications of ChatGPT for knowledge integrity on Wikipedia]], a Wikimedia research project 
+* [[AI-generated content on Wikipedia]], article on the history of using AI to create content on Wikipedia
+* [[Wikipedia:Case against LLM-generated articles]], a humorous AI-written essay against using AI to write Wikipedia articles
+* [[Wikipedia:LLM use disclosure]], a essay about the idea of requiring LLM use disclosure
+
+=== Demonstrations ===
+* [[User:JPxG/LLM demonstration]] (wikitext markup, table rotation, reference analysis, article improvement suggestions, plot summarization, reference- and infobox-based expansion, proseline repair, uncited text tagging, table formatting and color schemes)
+* [[User:JPxG/LLM demonstration 2]] (suggestions for article improvement, explanations of unclear maintenance templates based on article text)
+* [[User:Fuzheado/ChatGPT]] (PyWikiBot code, writing from scratch, Wikidata parsing, CSV parsing)
+* [[User:DraconicDark/ChatGPT]] (lead expansion)
+* [[Wikipedia:Using neural network language models on Wikipedia/Transcripts]] (showcases several actual mainspace LLM-assisted copyedits)
+* [[User:WeatherWriter/LLM Experiment 1]] (identifying sourced and unsourced information)
+* [[User:WeatherWriter/LLM Experiment 2]] (identifying sourced and unsourced information, including a non-English source)
+* [[User:WeatherWriter/LLM Experiment 3]] (identifying sourced and unsourced information, only six of seven tests successful)
+* [[Wikipedia:Articles for deletion/ChatGPT]] and [[Wikipedia:Articles for deletion/Planet of the Apes]] (humorous April Fools' nominations generated almost entirely by large language models).
+* [[Wikipedia:Village_pump_(idea_lab)/Archive_64#c-Cremastra-20250128165800-Hooman_Mallahzadeh-20250128163700|Wikipedia:Village pump (idea lab)/Archive 64]] (demonstration of [[AI hallucination]] by [[User:Cremastra|Cremastra]] in response to a proposal for "Chatbot validation" of sentences in articles)
+
+=== Policy discussions ===
+*[[Wikipedia:Artificial intelligence#Discussion timeline]], project wide discussions on AI, in chronological order
+
+== Notes ==
+{{notelist}}
+
+== References ==
+{{reflist}}
+
+== External links ==
+* [https://libguides.northwestern.edu/ai-tools-research/evaluatingaigeneratedcontent Using AI Tools in Your Research: Evaluating AI-Generated Content] – research guide published by the Northwestern University
+{{Wikipedia artificial intelligence}}
+[[Category:Wikipedia and artificial intelligence]]

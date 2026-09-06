@@ -902,5 +902,325 @@
    "angle": "academic"
   }
  ],
- "verdicts": {}
+ "verdicts": {
+  "0": {
+   "index": 0,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The style, of course, is the book.",
+   "note": "p.9 verbatim; all limbs on page: 'as if it were an ingredient of a book... something added onto the book'; 'If you remove the style, all you have left is a synopsis of the plot'; 'partly true of history; largely true of fiction; and absolutely true of fantasy.'",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "1": {
+   "index": 1,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A plain language is the noblest of all.",
+   "note": "p.8 verbatim, followed by 'It is also the most difficult.' Limbs on page: 'Most epics are in straightforward language... They retain the directness of their oral forebears'; 'The Mabinogian and the Norse sagas are as plainspoken as they could well be.' Context is explicitly heroic fantasy: 'We are discussing a modern descendant of the epic.' (Essay spells it 'Mabinogian'.)",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "2": {
+   "index": 2,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is a fake plainness. It is not really simple, but flat.",
+   "note": "p.8 verbatim. Limbs on page: 'It is not really clear, but inexact. Its directness is specious'; 'It is journalistic prose. In journalism, the suppression of the author's personality and sensibility is deliberate'; 'A language intended to express the immediate and the trivial is applied to the remote and the elemental.' Commercial framing on same page: 'Fantasy is selling well, so let's all grind out a fantasy. The Old Baloney Factory.'",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "3": {
+   "index": 3,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the scenery is cardboard, or plastic",
+   "note": "p.8 verbatim, inside 'Its sensory cues--extremely important in imaginative writing--are vague and generalized; the rocks, the wind, the trees are not there, are not felt; the scenery is cardboard, or plastic.' Every limb, including the parenthetical quotation, is on the page.",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "4": {
+   "index": 4,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's a high wire: one slip spoils all.",
+   "note": "p.6 verbatim, preceded by 'The archaic manner is indeed a perfect distancer, but you have to do it perfectly.' The four failure markers are all on pp.5-6: botched thee/thou verbs ('Whithersoever thou goest there also I goest'), the subjunctive ('All the was's turn into were's'), 'Mayhap', and 'the final test, the infallible touchstone of the seventh-rate: Ichor.' Minor: the word 'touchstone' is applied literally only to ichor; the other three are catalogued as novice traps, not called touchstones.",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "5": {
+   "index": 5,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And it contains no archaisms at all.",
+   "note": "p.7 verbatim, closing the Vance paragraph after 'It is an achieved style.' Limbs on page: 'The conversation of his characters is aloof and restrained, very like his own narrative prose'; p.8 opens 'After all, archaisms are not essential'; the distancing purpose is stated on p.5 ('what is wanted in fantasy is a distancing from the ordinary'). 'Consistent' is carried by 'very like his own narrative prose' and 'he never shows a tin ear for tone' -- the phrase 'His tone is perfectly consistent' belongs to Cabell, not Vance.",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "6": {
+   "index": 6,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the characters lose coherence in my mind",
+   "note": "p.7 verbatim, inside 'I am jerked back and forth between Elland [sic: Elfland] and Poughkeepsie; the characters lose coherence in my mind, and I lose confidence in them.' Limbs on page: 'Fritz Leiber and Roger Zelazny... they alternate the two styles. When humor is intended the characters talk colloquial American English, or even slang, and at earnest moments they revert to old formal usages.'",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "7": {
+   "index": 7,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Speech expresses character.",
+   "note": "p.4 verbatim, followed by 'It does so whether the speaker or the author knows it or not.' Limbs on page: 'When I hear a man say, \"I could have told you that at Cardosa\"... He is the kind who says, \"I told you so.\" Nobody who says, \"I told you so\" has ever been, or will ever be, a hero'; and 'You could not pull the trick on them that I pulled on Morgan and Nigel--not unless you changed half the words in every sentence. You could not possibly mistake them for anyone on Capitol Hill' (the trick being the four-word change of p.2).",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "8": {
+   "index": 8,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Its outstanding virtue is its flexibility, its variety.",
+   "note": "p.8 verbatim. Limbs on page: 'Tolkien writes a plain, clear English'; 'It ranges easily from the commonplace to the stately, and can slide into metrical poetry, as in the Tom Bombadil episode, without the careless readers even noticing'; 'Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete, and simple.'",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "9": {
+   "index": 9,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the movement of the syntax, and the rhythm of the sentences",
+   "note": "p.6 verbatim. Limbs on page: 'That prose, in spite of or because of its archaisms, is good prose: exact, clear, powerful. Visually it is precise and vivid; musically--that is, in the sound of the words, the movement of the syntax, and the rhythm of the sentences--it is subtle and very strong. Nothing in it is faked or blurred.' The subject is Eddison's Worm Ouroboros passage.",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "10": {
+   "index": 10,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And every word counts.",
+   "note": "p.10 verbatim. Limbs on page: 'There is no borrowed reality of history, or current events... to disguise flaws and failures of creation'; 'There is only a construct built in a void, with every joint and seam and nail exposed'; 'The only voice that speaks there is the creator's voice.'",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "11": {
+   "index": 11,
+   "verdict": "PARTIAL",
+   "trueWording": "a lot of elaborate made-up names, some vague descriptions of gorgeous cities and unmentionable dooms, and a great many sentences beginning with \"And.\"",
+   "note": "p.5 quotation is verbatim and the three diagnostic items are exactly on the page. The essay names the King James Bible only as a formative influence on Dunsany's OWN prose ('one of the profoundest formative influences on Dunsany's prose'; imitators are out of reach unless 'brought up from the cradle on the grand sonorities of Genesis and Ecclesiastes'); it never attributes the imitators' 'And' sentences to biblical cadence, and never frames them as costume. That reading is a defensible inference, not the page's statement.",
+   "unsupportedLimb": "biblical cadence worn as costume -- the essay ties the KJV to Dunsany himself, never says imitators wear biblical cadence as costume",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "12": {
+   "index": 12,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "with what importance they invest these trivial acts",
+   "note": "p.4 verbatim, inside 'But with what importance they invest these trivial acts, what emotion, what vitality!' Limbs on page: 'Nothing is really going on, in those first two passages: in one case they're reading a book, in the other they're dividing a cold leg of rabbit' -- and the first two passages are footnoted to Eddison (Worm Ouroboros) and Kenneth Morris (Book of the Three Dragons). 'Elevation lies in the speech, not the event' is the paragraph's own argument ('All of them are heroic, eloquent, passionate... greatness of soul shows when a man speaks').",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "13": {
+   "index": 13,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an English extraordinary for its simple timelessness",
+   "note": "p.4 verbatim. Limbs on page: 'It has sobriety, wit, and force. It is the language of men of character.' The third passage is footnoted to Tolkien, Fellowship of the Ring (Aragorn, Boromir, Elrond). 'Rather than mannered archaism' is carried by the contrast drawn in the same sentence: 'the speakers are quieter, and use a less extraordinary English' than the Eddison and Morris passages.",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "14": {
+   "index": 14,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fantastic creation should reach to the very words and grammar",
+   "note": "Wikipedia article fetched raw (wikitext via ?action=raw and rendered HTML, oldid 1352490882, last edited 4 May 2026). Verbatim: 'In her argument that fantastic creation should reach to the very words and grammar in fantasy writers, she holds up Lord Dunsany, E. R. Eddison...' Beagle limb verbatim: 'The novelist Peter S. Beagle called it \"the definitive piece on fantasy, and on why simply sprinkling goblins, magic swords, and assorted thees and thous through your story will not get you a step closer to that vast and beautiful realm.\"' Note the page frames the work as a 1972 speech published 1973.",
+   "fromFile": "verdicts-leguin-i0-14.json"
+  },
+  "15": {
+   "index": 15,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "holds up those seven writers as successful examples",
+   "note": "Raw wikitext + rendered plaintext (Special:Export + action=query prop=extracts). Page: 'In her argument that fantastic creation should reach to the very words and grammar in fantasy writers, she holds up Lord Dunsany, E. R. Eddison, Kenneth Morris, J. R. R. Tolkien, James Branch Cabell, Evangeline Walton, and Jack Vance as successful examples.' All seven names match in order; the claim's gloss 'models of style that fits its world' is a paraphrase of 'fantastic creation should reach to the very words and grammar', hence SUBSTANCE not VERBATIM (claim carried no quote).",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "16": {
+   "index": 16,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "because there is no known framework for the reader's mind to rest upon",
+   "note": "Raw wikitext, Style-and-mood section: 'Le Guin herself said that in fantasy it was necessary to be clear and direct with language, because there is no known framework for the reader's mind to rest upon.' Quoted fragment is word-for-word; both limbs (clear and direct; no framework for the reader) supported. Cited to Slusser 1976 pp.32-35.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "17": {
+   "index": 17,
+   "verdict": "PARTIAL",
+   "trueWording": "makes the narrator seem sympathetic, does not distance his thoughts",
+   "note": "Raw wikitext: 'This narrative technique, which Cadden characterizes as \"free indirect discourse\", makes the narrator of the book seem sympathetic to the protagonist, and does not distance his thoughts from the reader.' Quote verbatim; 'Mike Cadden' confirmed elsewhere on the same page ('Scholar Mike Cadden'); sympathy limb supported; blending of protagonist feelings with narration supported only loosely ('does not distance his thoughts from the reader') and stated squarely on the SEPARATE Ursula K. Le Guin article, not this one. Nothing on this page says anything about narrative flexibility.",
+   "unsupportedLimb": "'while keeping narrative flexibility' - the cited page never claims the technique preserves flexibility",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "18": {
+   "index": 18,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the narration switches from looking ahead into Ged's future",
+   "note": "Raw wikitext: 'The story often appears to assume that readers are familiar with the geography and history of Earthsea, a technique which allowed Le Guin to avoid exposition ... In keeping with the notion of an epic, the narration switches from looking ahead into Ged's future and looking back into the past of Earthsea.' Quote verbatim; all limbs present. Minor hedge: the page says 'often appears to assume' where the claim asserts it flatly.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "19": {
+   "index": 19,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying",
+   "note": "Raw wikitext: 'a reviewer wrote that this method \"gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying\"', ref name='Craig 2003' (Amanda Craig, The Guardian, 24 Sep 2003). Quote verbatim; 'a reviewer' and the crediting of the no-exposition method both supported.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "20": {
+   "index": 20,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Slusser described the mood of the novel as \"strange and dreamlike\"",
+   "note": "Raw wikitext: 'Slusser described the mood of the novel as \"strange and dreamlike\", fluctuating between objective reality and the thoughts in Ged's mind'. Quote verbatim; the fluctuation limb is present word for word; 'George Slusser' is given in full earlier in the same section, cited to Slusser 1976 pp.35-38.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "21": {
+   "index": 21,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in prose as taut and clean as a ship's sail",
+   "note": "Raw wikitext, Reception: 'a review in The Guardian by author and journalist Amanda Craig said it was \"The most thrilling, wise and beautiful children's novel ever, [written] in prose as taut and clean as a ship's sail.\"' Quote verbatim; Craig and The Guardian both named on the page.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "22": {
+   "index": 22,
+   "verdict": "PARTIAL",
+   "trueWording": "Slusser: \"work of high style and imagination\"; \"genuine epic vision\" cited to Cadden",
+   "note": "Raw wikitext: 'Slusser described the Earthsea cycle as a \"work of high style and imagination\",{{sfn|Slusser|1976|pp=32-35}} and the original trilogy of books a product of \"genuine epic vision\".{{sfn|Cadden|2005|p=86}}' The quoted limb is verbatim and is Slusser 1976. The second limb is footnoted to Cadden 2005 and its object is the original trilogy, not the cycle.",
+   "unsupportedLimb": "'the Earthsea cycle ... with genuine epic vision' per Slusser 1976 - the page applies 'genuine epic vision' to the original trilogy and footnotes it to Cadden 2005",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "23": {
+   "index": 23,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Every word was exactly in place and every sentence or line had resonance",
+   "note": "Raw wikitext: 'literary critic Harold Bloom described Le Guin as an \"exquisite stylist\", saying that in her writing, \"Every word was exactly in place and every sentence or line had resonance\".' Quote verbatim; 'exquisite stylist', exact placement and resonance all present.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "24": {
+   "index": 24,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "described her as using \"a lean but lyrical style\" to explore issues of moral relevance",
+   "note": "Raw wikitext: 'The New York Times described her as using \"a lean but lyrical style\" to explore issues of moral relevance.' Quote verbatim; the moral-issues limb is supported as 'issues of moral relevance'. The page attributes the style to her writing rather than the word 'prose', a wording difference only.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "25": {
+   "index": 25,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Her prose, according to Zadie Smith, was \"as elegant and beautiful as any written in the twentieth century\"",
+   "note": "Raw wikitext: exact sentence present, ref 'Fellow Writers' (Library of America, 26 Jan 2018). Quote verbatim; every limb supported.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "26": {
+   "index": 26,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "personal narration, diary extracts, Gethenian myths, and ethnological reports; \"distinctly post-modern\"",
+   "note": "Raw wikitext, same paragraph: 'The heterogeneous structure of The Left Hand of Darkness, described as \"distinctly post-modern\", was unusual for the time of its publication' and '... the material, consisting of personal narration, diary extracts, Gethenian myths, and ethnological reports.' Quote verbatim; all four components present.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "27": {
+   "index": 27,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "described by Bloom as \"precise, dialectical-always evocative in its restrained pathos\"",
+   "note": "Raw wikitext has 'restrained [[pathos]]' (wikilink), so the quote was confirmed against the RENDERED plaintext extract via action=query&prop=extracts&explaintext, where the exact string 'precise, dialectical—always evocative in its restrained pathos' is present (em dash, as in the claim). Attributed to Bloom 1987 and applied to Le Guin's writing style in this novel.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "28": {
+   "index": 28,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "tales immediately precede chapters describing Ai's similar experience; explain culture and philosophy",
+   "note": "Raw wikitext: 'The myths and legends serve to explain specific features about Gethenian culture, as well as larger philosophical aspects of society. Many of the tales used in the novel immediately precede chapters describing Ai's experience with a similar situation.' Claim carried no quote and is a paraphrase; both limbs supported. Page hedges with 'Many of the tales' where the claim generalises.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "29": {
+   "index": 29,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "first-person narration reflects his slowly developing view; White: initially confusing to reviewers",
+   "note": "Raw wikitext: 'Ai's first-person narration reflects his slowly developing view, and the reader's knowledge and understanding of the Gethens evolves with Ai's awareness. He begins in naivety, gradually discovering his profound errors in judgement.' And: 'In 1999, literary scholar Donna White wrote that the unorthodox structure of the novel made it initially confusing to reviewers, before it was interpreted as an attempt to follow the trajectory of Ai's changing views.' Both limbs supported; claim carried no quote, hence SUBSTANCE.",
+   "fromFile": "verdicts-leguin-i15-29.json"
+  },
+  "30": {
+   "index": 30,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Live en.wikipedia.org/wiki/The_Tombs_of_Atuan (rendered page + Special:Export wikitext). Quote verbatim: 'making the narrator seem sympathetic to the characters' (cited Cadden 2005 p.92). Both other limbs verbatim too: 'In The Tombs of Atuan, much of the story is told from Tenar's perspective; for instance, the reader sees Tenar's fear of the undertomb through her own eyes, creating an empathy for her' (Cadden 2005 p.94). Minor scope point, not a limb of the claim: the page attributes free indirect discourse to the Earthsea trilogy generally, not to Tombs specifically.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "31": {
+   "index": 31,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page. Verbatim: 'Science fiction writer Jo Walton said that it was a \"beautifully written\" book. She went on to write that a \"lesser writer\" would have ended the novel after the earthquake and the collapse of the Tombs, but that the last section of the story, about Ged and Tenar's travel, \"do a lot to ground it\", making it \"solid and well rooted as ever\".' Every limb (Walton, final travel section, grounding, after the earthquake) supported.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "32": {
+   "index": 32,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Live en.wikipedia.org/wiki/Tehanu. Verbatim: Kirkus Reviews '...even young readers will be beguiled by the flawless, poetic prose, the philosophy expressed in thoughtful, potent metaphor, and the consummately imagined world' (ref Kirkus, January 15, 1990). Both limbs — flawless poetic prose and thoughtful, potent metaphor — supported.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "33": {
+   "index": 33,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page. Verbatim: Dirda in The Washington Post — Tehanu is 'less sheerly exciting' but perhaps 'the most moving'; the book gives the Earthsea themes 'a darker, more realistic edge'; and 'Further, Tehanu presents the world from a woman's point of view...' all carrying ref name 'Dirda 1990' ('The Twilight of an Age of Magic', February 25, 1990). All four limbs supported, and the claim correctly preserves Dirda's 'perhaps'.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "34": {
+   "index": 34,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page. Verbatim: 'Jo Walton finds Tehanu \"problematic\", writing that it is \"a restless book with very strange pacing\", but that it is surprising that it \"works as well as it does\", given the competing demands of \"the force of story\" - plot, action - and Le Guin's evident intention to place \"women's domestic lives\" at the novel's centre.' The 'torn between plot and women's domestic lives' limb is supported by that competing-demands sentence; note the page frames it as competing demands the book nonetheless survives, not as a failure.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "35": {
+   "index": 35,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "NEA PDF fetched live (HTTP 200, 515,637 bytes, 12 pages), text extracted with pypdf. Printed page 4, 'The Language of Fantasy': 'Throughout A Wizard of Earthsea Le Guin's language is plain, strong, and exact; her tone grave and slightly formal; and the rhythm of her sentences carefully balanced and musical.' Quote verbatim; both limbs (diction and tone) supported. Page attribution p.4 is correct.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "36": {
+   "index": 36,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same sentence, same printed page 4: 'the rhythm of her sentences carefully balanced and musical'. Quote verbatim, limb supported. Page attribution p.4 correct.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "37": {
+   "index": 37,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Printed page 4, immediately following: 'Note the occasional touches of alliteration and assonance-reminiscent of Old English verse-in such phrases as this: \"Forest rises ridge behind ridge to the stone and snow of the heights.\"' Quote verbatim; the alliteration/assonance limb and the cited example sentence both verbatim. Page attribution p.4 correct.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "38": {
+   "index": 38,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Printed page 5, 'An Interview with Ursula K. Le Guin': header reads 'On January 7, 2008, Dan Stone of the National Endowment for the Arts interviewed Ursula K. Le Guin at her home in Oregon' - the 2008 limb is confirmed on the page. UKL: 'What a wizard does is like what a writer does. He or she is making things out of words and making things happen with words.' Quote verbatim; every limb supported. Page attribution p.5 correct (the answer sits on p.5, the interview continues onto p.6).",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "39": {
+   "index": 39,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Printed page 9, 'Le Guin and Her Other Works': 'Perhaps the best-known and most taught of all modern science fiction novels, The Left Hand of Darkness is written in a tone even more gravely austere than A Wizard of Earthsea.' Quote verbatim; both limbs supported. Page attribution p.9 correct.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "40": {
+   "index": 40,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Printed page 10, Discussion Questions, question 4: 'The language of A Wizard of Earthsea is often quietly poetic. Comment on three sentences that you find particularly beautiful or moving.' Quote verbatim, and it is indeed a discussion question. Page attribution p.10 correct.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "41": {
+   "index": 41,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Printed page 3, 'Introduction to the Book': 'The book's elegant diction, geographical sweep, and mounting suspense are quite irresistible.' Quote verbatim, all three limbs supported, and it does sit under the heading 'Introduction to the Book'. Page attribution p.3 correct.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "42": {
+   "index": 42,
+   "verdict": "PARTIAL",
+   "trueWording": "Page credits 'taut and clean' to The Guardian, unnamed",
+   "unsupportedLimb": "the attribution of 'taut and clean as a ship's sail' to Craig - the page credits that quotation only to 'The Guardian' and the string 'Craig' does not occur anywhere in the page's HTML (case-insensitive grep of the raw source returned zero hits)",
+   "note": "Live arts.gov page fetched (HTTP 200, 74,952 bytes). Both quotations ARE on the page: the Overview carries '...it is written in prose as taut and clean as a ship's sail.... It poses the deep questions about life, death, power and responsibility that children need answering' (The Guardian), and an accordion panel reproduces the guide's 'Language of Fantasy' text verbatim including 'plain, strong, and exact'. So the 'repeats the guide's characterization' limb and the 'pairs it with' limb are both supported; only the Craig attribution is absent from the page. (Amanda Craig did write the Guardian review, but that cannot be verified from this URL, which is what was cited.)",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "43": {
+   "index": 43,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Live sf-encyclopedia.com/entry/le_guin_ursula_k fetched (HTTP 200, 101,578 bytes). Verbatim: 'The initial Earthsea trilogy, austere but vivid, is a major work whose appeal goes far beyond the Young Adult audience at whom in the first instance it was aimed'. Quote verbatim; all three limbs (austere but vivid, major work, reaching beyond the Young Adult audience) supported.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  },
+  "44": {
+   "index": 44,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page: 'A grave joyfulness pervades the trilogy, which is perhaps more maturely thoughtful (while remaining exciting) than the comparable Narnia series of C S Lewis.' Quote verbatim and every limb present. FLAG for downstream use: the claim drops SFE's hedge 'perhaps' - the source qualifies the Narnia comparison, so restore 'perhaps' if the sentence is quoted as SFE's position.",
+   "fromFile": "verdicts-leguin-i30-44.json"
+  }
+ }
 }
