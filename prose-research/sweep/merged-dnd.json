@@ -11758,6 +11758,112 @@
    "trueWording": "read aloud text does not run the character, the player does",
    "note": "Same 2004 capture. 'some boxed text dictates character actions or assigns emotions to characters... After all, read aloud text does not run the character, the player does.' Both cited examples are on the page verbatim - 'The crying of the babies brings a tear to your eyes.' and 'Fearing for your safety, you grab the hilt of your sword.' - each followed by a neutral rewrite ('Inside the orphanage the babies cry for their lost parents.').",
    "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "169": {
+   "index": 169,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "after all this is roleplaying not story time",
+   "note": "Wayback raw capture 20161101184116id_ (live archive.wizards.com 302s to company.wizards.com/en). Quote verbatim. Both limbs on the page: 'Avoid read aloud text where the characters sit idly by as the NPCs carry on for an extended time' and 'If you have to have extended interactions between NPCs provide breaks for the players to react to what they are hearing.' Also 'Using lengthy box text ... while players sit idle by is a problem.'",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "170": {
+   "index": 170,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Get a feel for what is bare-bones essential and cut the rest out",
+   "note": "Same Wayback capture. Quote verbatim. Limbs supported: 'The best way to gauge the amount of text to include is to run adventures.'; 'When too much information is presented as read aloud text, many GMs feel constrained.'; 'with too little information some judges find it difficult to lead the party through the adventure.'",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "171": {
+   "index": 171,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "having a consistent style for adventures allows judges to quickly find information they need",
+   "note": "Wayback raw capture 20161101184117id_. Quote verbatim. Second limb verbatim too: 'A copy of both the content and style guidelines can be found in the Living Greyhawk Writer's Guidelines.'",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "172": {
+   "index": 172,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The need to keep your writing PG-13 is quite obvious. Children play this game",
+   "note": "Same Wayback capture. Quote verbatim; the causal limb is the next sentence, 'Children play this game...'. Context is explicitly RPGA adventure content ('The content of your adventure must also meet a set of guidelines for both content and style.').",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "173": {
+   "index": 173,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Read-aloud text provides a bare-bones description of the encounter area; it does not make any reference to the viewer",
+   "note": "PDF fetched directly from paizo.com (HTTP 200, 171,743 bytes) and text-extracted with pypdf. Quote verbatim. Next sentence: 'Avoid phrases such as \"you see,\" \"as you enter the room,\" or other phrases that assume any action whatsoever on behalf of the players.' Note the guideline word is 'Avoid ... such as', slightly softer than the claim's 'banned', but it is an editorial prohibition in a submission guideline.",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "174": {
+   "index": 174,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You should also avoid including descriptions of any creatures in the room, since their activities and positions ... often depend on multiple factors",
+   "note": "Same PDF. Quote verbatim (it spans a line break in the original, so naive extraction shows 'avoidincluding'). The causal limb is verbatim too: 'such as if they hear the PCs coming, if it's night or day, and so on'.",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "175": {
+   "index": 175,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Read-aloud text for an encounter should only rarely run more than a few sentences",
+   "note": "Same PDF. Quote verbatim; the handout limb is the next sentence: 'Long sections of read-aloud text are better served as player handouts.'",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "176": {
+   "index": 176,
+   "verdict": "PARTIAL",
+   "trueWording": "Each encounter can include any or all of the following sections ... Do not include sections that are unnecessary",
+   "note": "Quote verbatim: 'The editors greatly dislike printing the words \"This room is empty\" in DUNGEON.' The section names and the omit-don't-fill rule are fully supported ('Do not include sections that are unnecessary for a given encounter... the area is not an encounter and should not be assigned an encounter number'). But the page never prescribes an ORDER: it says each encounter 'can include any or all of the following sections', and read-aloud only 'generally precedes the other entries of an encounter'. The enumeration is also eight items, not seven - the claim drops 'Ad-Hoc XP Adjustment'.",
+   "unsupportedLimb": "fixed order - the guidelines say encounters 'can include any or all of the following sections' and never mandate an order (read-aloud merely 'generally precedes'); the list is also eight sections, the claim names seven",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "177": {
+   "index": 177,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Adventure Background section should be no more than 5% of the total length of the adventure",
+   "note": "Same PDF. Quote verbatim (and restated as 'no more than 5% of the adventure's total length'). Word-count limbs verbatim: 'Our adventures typically range from 5,000 to 15,000 words in length' and 'The ideal manuscript size is 10,000 words'.",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "178": {
+   "index": 178,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Outline surprises and plot twists here, not during the course of the adventure",
+   "note": "Same PDF, under the header 'Adventure Synopsis (Mandatory)': 'This section provides a clear, concise summary of the adventure for the DM. Outline surprises and plot twists here, not during the course of the adventure.' Mandatory, DM-facing and start-of-document limbs all supported.",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "179": {
+   "index": 179,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Try to keep the number of sidebars in your adventure to a minimum, and to no more than 300 words in length",
+   "note": "Same PDF. Quote verbatim; the reason limb precedes it verbatim: 'Remember that sidebars take up more space in the magazine than their word counts would indicate.'",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "180": {
+   "index": 180,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Regardless of how cool your backstory is, an adventure is not a short story",
+   "note": "Same PDF, in the query-writing tips. Quote verbatim. Limbs: 'You need to condense or sacrifice background description in favor of telling us about PC involvement. It's how the adventure PLAYS that determines whether or not a proposal is something we want to pick up.' The 'and adventures' half is carried by Adventure Background (Mandatory): 500-word/5% cap on backstory.",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "181": {
+   "index": 181,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Note that we will not publish an article written in the first person",
+   "note": "PDF fetched directly from paizo.com (HTTP 200, 80,309 bytes), pypdf extraction. Quote verbatim; the second limb verbatim: 'you should not use the words \"I\" or \"my\" in your article unless some character other than yourself is saying them.'",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "182": {
+   "index": 182,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If your article begins with a narrative vignette or piece of example dialog, it should be no more than 200 words long",
+   "note": "Same PDF. Quote verbatim; both 'narrative vignette' and 'example dialog' are named.",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  },
+  "183": {
+   "index": 183,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Especially avoid passive writing, particularly “to be” verbs, and always spell check your work",
+   "note": "Same PDF. Quote verbatim (the PDF uses curly quotes around 'to be'). A later FAQ entry reinforces it: 'Q: What is passive voice and why should I avoid it?'",
+   "fromFile": "verdicts-dnd-i169-183.json"
   }
  }
 }

@@ -10,12 +10,12 @@ while true; do
   NOW=$(date '+%Y-%m-%d %H:%M:%S')
   STATE=$(cd $SC/prose-research && node sweep-state.mjs summary 2>/dev/null | cut -c1-300)
   PROD=$(git -C $REPO rev-parse --short claude/composite-r4 2>/dev/null); LEDG=$(git -C $REPO log -1 --format='%h %s' review-fixes-2026-07-08 2>/dev/null | cut -c1-90)
-  LI=$(git -C $SC/laneOSR18 log -1 --format='%h %s' 2>/dev/null | cut -c1-90); LIP=$(git -C $SC/laneOSR18 status --porcelain -uall 2>/dev/null | wc -l | tr -d ' '); LIC=$(git -C $SC/laneOSR18 rev-list --count b0cbc67a1..HEAD 2>/dev/null); AG=$(ls /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/ 2>/dev/null | wc -l | tr -d ' ')
+  LI=$(git -C $SC/laneLUIMAT log -1 --format='%h %s' 2>/dev/null | cut -c1-90); LIP=$(git -C $SC/laneLUIMAT status --porcelain -uall 2>/dev/null | wc -l | tr -d ' '); LIC=$(git -C $SC/laneLUIMAT rev-list --count dd5f13218..HEAD 2>/dev/null); AG=$(ls /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/ 2>/dev/null | wc -l | tr -d ' ')
   GATE=$(ls -t $SC/gate-90*.log $SC/whole-901.log 2>/dev/null | head -1); GATES=$( [ -n "$GATE" ] && grep -E "GATE_DONE=|TRUE_EXIT=|PROOF_EXIT=" "$GATE" | tail -1 || echo none)
   PROCS=$(pgrep -fl "run-gate-90|run-ratchet-90|run-registers-90|build-90|proof-901" 2>/dev/null | cut -c1-60 | tr '\n' ';')
   RECEIPTS=$(ls -t $SC/receipt-*.md 2>/dev/null | head -3 | xargs -n1 basename | tr '\n' ' ')
   BLOCK="<!-- AUTOSTATUS -->
-**AUTOSAVE $NOW** (autosave-handoff.sh, every 5 min; pid file .autosave.pid) · product claude/composite-r4 = $PROD · ledger = $LEDG · laneOSR18 (the OSR-SCHEMA18 lane) = $LI ($LIC cars over b0cbc67a1, porcelain $LIP) · workflow runs this session: $AG · latest gate log: $(basename "$GATE" 2>/dev/null) → $GATES · chair processes alive: ${PROCS:-none} · newest receipts: $RECEIPTS · sweep state exported to prose-research/sweep/state-*.json: $STATE
+**AUTOSAVE $NOW** (autosave-handoff.sh, every 5 min; pid file .autosave.pid) · product claude/composite-r4 = $PROD · ledger = $LEDG · laneLUIMAT (the L-UI-MAT lane) = $LI ($LIC cars over dd5f13218, porcelain $LIP) · workflow runs this session: $AG · latest gate log: $(basename "$GATE" 2>/dev/null) → $GATES · chair processes alive: ${PROCS:-none} · newest receipts: $RECEIPTS · sweep state exported to prose-research/sweep/state-*.json: $STATE
 <!-- /AUTOSTATUS -->"
   python3 - "$BLOCK" <<'PY'
 import sys,io,re

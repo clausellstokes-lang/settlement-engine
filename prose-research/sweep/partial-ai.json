@@ -1684,5 +1684,22 @@
    "unsupportedLimb": "‘the writers tested’ — the page shows a single participant (MG) reporting his own limited experimentation, not the writer group",
    "fromFile": "verdicts-ai-i479-493.json"
   }
+ },
+ {
+  "index": 501,
+  "feature": "unfixed, topic-based and visual forms unrecognised",
+  "claim": "Models struggle with unfixed forms and those defined by topic or visual layout (ode, elegy, concrete poetry).",
+  "source": "Walsh, Preus, Antoniak — 'Sonnet or Not, Bot? Poetry Evaluation for Large Models and Datasets' (Findings of EMNLP 2024)",
+  "url": "https://arxiv.org/html/2406.18906",
+  "quote": "struggle to identify unfixed poetic forms",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 501,
+   "verdict": "PARTIAL",
+   "trueWording": "Models struggle with unfixed forms; elegy is more often recognized.",
+   "note": "Quote verbatim in abstract and Sec 1: 'the models struggle to identify unfixed poetic forms, especially those based on topic or visual features.' Ode and concrete poetry are supported failure cases (Sec 6.2: 'poems about abstract ideas and styles like aubades and odes are less so'; 'most models except GPT-4 and GPT-4o falter with... concrete or pattern poetry'). Elegy is named on the other side of that sentence.",
+   "unsupportedLimb": "the parenthetical listing elegy among the forms models struggle with - the paper says forms on concrete subjects 'like death (elegy)' are MORE often recognized",
+   "fromFile": "verdicts-ai-i494-508.json"
+  }
  }
 ]

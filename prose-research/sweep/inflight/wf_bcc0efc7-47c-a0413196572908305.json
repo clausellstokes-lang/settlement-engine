@@ -3,13 +3,13 @@
  "name": "ai",
  "angle": null,
  "tag": "i509-523",
- "lines": 42,
+ "lines": 75,
  "firstTs": "2026-09-06T18:05:24.986Z",
- "lastTs": "2026-09-06T18:06:15.604Z",
+ "lastTs": "2026-09-06T18:08:14.729Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 10
+  "Bash": 18
  },
  "urlsFetched": [
   "https://aclanthology.org/2020.acl-main.164.pdf",

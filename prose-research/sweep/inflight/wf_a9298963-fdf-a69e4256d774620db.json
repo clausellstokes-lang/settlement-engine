@@ -3,13 +3,13 @@
  "name": "dnd",
  "angle": null,
  "tag": "i184-198",
- "lines": 46,
+ "lines": 72,
  "firstTs": "2026-09-06T18:04:54.970Z",
- "lastTs": "2026-09-06T18:06:14.296Z",
+ "lastTs": "2026-09-06T18:08:16.398Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 8
+  "Bash": 14
  },
  "urlsFetched": [
   "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
@@ -18,10 +18,12 @@
   "https://www.enworld.org/threads/legend-lore-says-story-not-rules-3-4.334907/",
   "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
   "https://www.fraternityofshadows.com/TheParlor/Curse_Of_Strahd_Interview.html",
-  "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures"
+  "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+  "http://web.archive.org/cdx/search/cdx?url=enworld.org*&filter=original:.*legend.*lore.*story.*not.*rules.*&limit=40&fl=timestamp,original,statuscode&collapse=original",
+  "https://web.archive.org/web/20200812035704id_/https://www.enworld.org/threads/legend-lore-says-story-not-rules-3-4.334907/"
  ],
  "filesWritten": [],
- "lastAssistantText": "Paizo PDF confirms all four. Now the Grognardia and SFWA pages.",
+ "lastAssistantText": "The EN World URL resolves to a different thread entirely. Running recovery routes.",
  "run": "wf_a9298963-fdf",
  "agent": "a69e4256d774620db",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-a69e4256d774620db.jsonl",

@@ -17157,6 +17157,69 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
   },
+  "822": {
+   "index": 822,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In AGOT, Martin uses semicolons and colons interchangeably.",
+   "note": "Raw HTML of atseajournal.com/asoiaf/essays/punctuation.html fetched live (HTTP 200). Opening sentence reads 'In <em>AGOT</em>, Martin uses semicolons and colons interchangeably.' Quote word for word; the AGOT limb is explicit.",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "823": {
+   "index": 823,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Incredibly, there are three examples of this on one page, 239 in my edition of AGOT.",
+   "note": "Same raw page. Quote verbatim. 'this' refers to the immediately preceding paragraph: 'These semicolons are not joining independent clauses, they are “illustrating or amplifying what has preceded the colon”' — i.e. a semicolon where a colon belongs; the page names p.239 of his edition, and three such quoted sentences follow.",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "824": {
+   "index": 824,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin’s paragraphs are like Jenga towers: you can pull out quite a few sentences before they start getting wobbly.",
+   "note": "Raw HTML of .../compressibility.html fetched live (HTTP 200). Opening sentence; quote verbatim, and the 'several sentences removed before they wobble' limb is the second half of the same sentence.",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "825": {
+   "index": 825,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Those seven paragraphs, totalling 427 words, are actually built from the first sentences of 26 different paragraphs, totalling 1,897 words.",
+   "note": "Same raw page. Quote verbatim. 427 words, 26 paragraphs and 1,897 words all present in one sentence; 'readable' is carried by the following clause 'But don’t they read smoothly?'; the source text is AGOT (Dany's second chapter).",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "826": {
+   "index": 826,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin is imprecise, not incompetent.",
+   "note": "Raw HTML of .../imprecision.html fetched live (HTTP 200). Page reads 'Martin is imprecise, <em>not</em> incompetent.' — word for word as rendered text. The 'as a sentence writer' limb is supported by the next sentence: 'There’s no question that he can string together sentences.'",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "827": {
+   "index": 827,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Flow between sentences is the litmus test for a successful author – not great individual sentences – and Martin passes.",
+   "note": "Same raw page, same paragraph as 826. Quote verbatim; both the 'rather than great individual sentences' limb and the 'Martin passes' limb are in the same sentence.",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "828": {
+   "index": 828,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin shifts into antiquated diction: “tangle of root and thorn and grasping limb”; “Knew not”; “small wonder”.",
+   "note": "Raw HTML of .../purple.html fetched live (HTTP 200). Quote verbatim, and it comments directly on the block quotation above it, which ends 'It was small wonder the Night’s Watch named it the haunted forest.'",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "829": {
+   "index": 829,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Presented with the overpowering and wordless sensations of nature and violence, his writing can leap into a high register.",
+   "note": "Same raw page. Quote 'leap into a high register' appears verbatim inside that sentence; nature-and-violence limb explicit ('Here I’d like to point out Martin’s reasons for using it: as an ecstatic response to nature and violence'). Only softening: the page says 'can leap', the claim says 'leaps'.",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "830": {
+   "index": 830,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "For period U2, there are 777 characters in the novels, but only 199 in the TV show.",
+   "note": "doi.org resolves to link.springer.com, which serves a JS bot 'Client Challenge' for both the article HTML and the text-mining PDF, and Wayback has no capture. Recovered via the authors' open-access deposit of the same DOI (CC BY-SA): https://hal.science/hal-04722579/document, PDF binary downloaded and text-extracted. Section 2.5 'Character Sets' carries the quote verbatim; Table 2 row 'U2 / All characters' gives Novels 777, TV Show 199; the section frames all counts as 'the annotated data that we use', and uses the phrase 'in the TV show annotations' two sentences later.",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
   "831": {
    "index": 831,
    "verdict": "SKIPPED_TRIAGE",
@@ -17170,6 +17233,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
+  },
+  "833": {
+   "index": 833,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But Martin’s written a lot of sentences for ASOIAF – 148,130 by my count.",
+   "note": "Raw HTML of .../proselike.html fetched live (HTTP 200). Quote verbatim; the figure is attached to ASOIAF, not to a single novel.",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "834": {
+   "index": 834,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "when I checked for this structure I found ~250 examples of it",
+   "note": "Same raw page. Quote verbatim. 'this structure' is the zeugma the page defines earlier — 'Zeugma is a rhetorical device in which one verb controls multiple phrases' — exemplified by 'His hair was black, his hands rough', i.e. one verb over two comma-separated clauses; the corpus is ASOIAF. (The page adds that the detection net caught 'any sentences with commas whose first word was repeated after the first comma', a proxy, but the ~250 count is presented as examples of the structure.)",
+   "fromFile": "verdicts-martin-i822-841.json"
   },
   "835": {
    "index": 835,
@@ -17191,6 +17268,35 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
+  },
+  "838": {
+   "index": 838,
+   "verdict": "PARTIAL",
+   "trueWording": "Martin’s got an algorithm. He hits on age, hair, eyes, clothes, and physique.",
+   "note": "Raw HTML of .../snippets.html fetched live (HTTP 200), section 'Block Characterization'. The quoted list is verbatim and the five features are right, but the page says only that Martin 'has an algorithm' and names the features — it never claims a fixed sequence, and the block characterisations it then reproduces run in different orders (Tywin: age, physique, hair, eyes, no clothes; Ser Waymar: age, eyes, physique, clothes). The ordering limb is the claimant's addition.",
+   "unsupportedLimb": "that the five features are hit in a fixed order",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "839": {
+   "index": 839,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A block characterization is that block of description characters receive when they first come on stage.",
+   "note": "Same raw page, first sentence of the 'Block Characterization' section; quote verbatim.",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "840": {
+   "index": 840,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When you line them all up, the insistence on eye color is conspicuous, and of dubious value.",
+   "note": "Same raw page and section; quote verbatim. 'them' is the block characterisations being gathered up, so the 'in Martin's block characterisations' limb holds; a sidenote concedes eye description can work elsewhere.",
+   "fromFile": "verdicts-martin-i822-841.json"
+  },
+  "841": {
+   "index": 841,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I’m beginning to wish I had never bothered with the color of people’s eyes.",
+   "note": "Same raw page and section. Germani writes 'From a 2011 interview with Vulture' (linked to vulture.com/2011/10/george_rr_martin_on_his_favori.html) and block-quotes Martin's answer containing the sentence; the claim's quote fragment appears word for word inside it.",
+   "fromFile": "verdicts-martin-i822-841.json"
   },
   "842": {
    "index": 842,
@@ -17248,12 +17354,40 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
   },
+  "850": {
+   "index": 850,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prose seems uninspired, cliched, repetitive, in stark contrast to plotting",
+   "note": "Live page fetched raw (HTTP 200). Walda, posted 31 July 2015, page 2: \"If, at the moment, there are many places where, to me, GRRM's prose seems uninspired, clichéd, repetitive, in stark contrast to his plotting and his characters, what do I know?\" Quote verbatim; every limb (in places, the three adjectives, the contrast with plotting and characters) present. Context worth carrying: the judgement is explicitly provisional and the same post calls the series addictive and 'what masterful prose is supposed to do'.",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
+  "851": {
+   "index": 851,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Romanian translation made awkward dialogues less painful, if painful at all",
+   "note": "Live page fetched raw. Drekinn, posted 31 July 2015 (edited same day), page 2: \"I really like the Romanian translation. Some awkward dialogues weren't as painful if at all in the translation. Like saying ''Nuncle'', fat pink mast or the infamous ''Sunset found her squatting in the grass...''\" Quote verbatim as a substring; the Romanian-translation limb and the awkward-English limb both present.",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
+  "852": {
+   "index": 852,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A good piece, covering ground ranging from prose to themes to world-building",
+   "note": "Live www.westeros.org returned HTTP 403 to curl with a browser UA; recovered via Wayback raw capture https://web.archive.org/web/20250424162321id_/https://www.westeros.org/News/Entry/13834 (raw page, not a summary). Entry dated January 18, 2011, signed \"Posted at 23:40 CET by Linda\" — the 2011 dating, the Collins subject and the quoted phrase are all verbatim. Caveat on attribution only: the page gives the poster as \"Linda\" with no surname and no role title; \"news editor\" and \"Antonsson\" come from outside this page.",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
   "853": {
    "index": 853,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
+  },
+  "854": {
+   "index": 854,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "never read heroic fiction so relentlessly driving home war's degradation",
+   "note": "Live page fetched raw (HTTP 200), AttentionDeficitDisorderly. Point 10: \"There's basically nothing glorious or badass whatsoever about violence as portrayed in these books... I don't think I've ever read a heroic fiction that so relentlessly drives home how war and violence immiserate and degrade everyone who participates in them.\" Quote verbatim; the anti-glorification limb is carried by the point's first sentence.",
+   "fromFile": "verdicts-martin-i850-874.json"
   },
   "855": {
    "index": 855,
@@ -17269,12 +17403,48 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
   },
+  "857": {
+   "index": 857,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "writing did a superb job of immediately putting the reader in the moment",
+   "note": "www.tor.com returned HTTP 403; recovered via Wayback raw capture https://web.archive.org/web/20240114133050id_/https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/. Byline Leigh Butler, Fri Mar 18 2011; the post states she is reading the series \"for the very first time\". The sentence sits in the Prologue Commentary. Quote verbatim.",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
+  "858": {
+   "index": 858,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "just enough worldbuilding tidbits to pique the interest without drowning you in exposition",
+   "note": "Same Wayback raw capture. End of the Prologue Commentary: \"Overall, nicely done, with just enough worldbuilding tidbits to pique the interest without drowning you in exposition.\" Quote verbatim. Use the page's own tail wording — the restraint claimed is 'without drowning you in exposition', not the absence of exposition; do not tighten it to 'without exposition' in any quoted rendering.",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
+  "859": {
+   "index": 859,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the repeated chapter titles are character names — Butler says only 'Or non-repetitive titles, either'",
+   "trueWording": "Martin is not into chapter numbers, or non-repetitive titles either",
+   "note": "Same Wayback raw capture. Introductory note: \"Today's inaugural entry is Part 1 of A Game of Thrones, in which we cover the Prologue and 'Bran,' because it turns out Mr. Martin is not into chapter numbers. Or non-repetitive titles, either.\" The quote is verbatim and the no-numbers limb is fully supported; the repetition limb is supported only as 'non-repetitive titles'. Butler nowhere says the titles are character names — the reader infers it from the chapter header 'Bran' shown on the page. Grade the character-name half as inference, not as Butler's observation.",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
   "860": {
    "index": 860,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
+  },
+  "861": {
+   "index": 861,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "after the combine harvester that was ASOS, a refreshing break",
+   "note": "Live reactormag page fetched raw (HTTP 200); reactormag.com is the renamed Tor.com, byline \"By Leigh Butler\", published December 5, 2013 — same reader as 857–859. Commentary: \"After the combine harvester that was ASOS, a relatively simple story about a dude trying to win a joust is a refreshing break.\" Quote verbatim; the after-ASOS limb and the contrast-with-the-novels limb both present (she adds that Martin still layers politics and history around Dunk).",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
+  "862": {
+   "index": 862,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "his prose style is unstable; it veers between the two registers",
+   "note": "Live page fetched raw (HTTP 200), Books & Boots, \"by Simon on March 31, 2014\". Opening paragraph: \"George RR Martin's prose style ... is unstable. By this I mean it veers from purely functional modern thriller prose to prose larded with fake medievalisms, from a lexicon of short, Anglo-Saxon words to one suddenly stuffed with neoclassical and latinate vocabulary.\" Quote verbatim; unstable, both poles, and the fake-medievalism naming all present.",
+   "fromFile": "verdicts-martin-i850-874.json"
   },
   "863": {
    "index": 863,
@@ -17304,6 +17474,41 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
   },
+  "867": {
+   "index": 867,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "by repetition over scores of chapters the distorted English becomes your home setting",
+   "note": "Same page, section \"5 Distorting English\": \"By repetition over the multiple scenes, and scores of chapters, Martin's slightly distorted English, and slightly amended concepts, become your home setting.\" Quote verbatim; the repetition-across-chapters limb and the default-setting limb both explicit. Examples given on the page: Ser, flowered, sourleaf, dreamwine.",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
+  "868": {
+   "index": 868,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most persistent of the annoying would-be medievalisms is dropping -ly",
+   "note": "Same page, section \"9. Cod medievalism\": Martin \"abandons his natural crisp, clear style to slip into pastiche medievalism\" and there is \"a number of would-be medievalisms which become annoying mannerisms: The most persistent one is removing the -ly suffix from adverbs.\" Quote verbatim; most-persistent and cod-medieval limbs explicit. On the blemish limb: the disparagement is carried here by \"annoying mannerisms\", while the word \"blemishes\" itself appears in the Conclusion attached to 'oft' and 'elsewise' — same family, adjacent sentence, so the limb holds, but do not quote 'blemish' as applied to the -ly item.",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
+  "869": {
+   "index": 869,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not the occasional pseudo-medievalisms but consistent Anglo-Saxon choice gives the woodiness",
+   "note": "Same page, Conclusion: \"...it is not because of the occasional pseudo-medievalisms ('oft' and 'elsewise') which are in fact blemishes on his otherwise swift clear style; it is because he consistently chooses words of Anglo-Saxon origin and generally avoids Latinate and neoclassical vocabulary, thus giving his prose a cumulative feeling of woodiness, antiquity, pithiness.\" Quote verbatim; the not-X-but-Y structure of the claim matches the source exactly.",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
+  "870": {
+   "index": 870,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "systematic exclusion of almost all Latin, Greek, French and loan words",
+   "note": "Live page fetched raw (HTTP 200), Books & Boots, \"by Simon on March 8, 2013\" — same author as 862–869. Under the heading \"Abstract\": the series is distinguished \"by a systematic exclusion from his vocabulary of almost all words derived from Latin, Greek, French or other languages, or foreign loan words, or the 'neo-classical' coinages which entered the English language from the 17th century onwards.\" Quote verbatim; heading placement as cited.",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
+  "871": {
+   "index": 871,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Instead, high frequency of Anglo-Saxon words, conspicuous in compounds",
+   "note": "Same page, Abstract, the sentence immediately following the exclusion sentence: \"Instead, his style shows a high frequency of words of Anglo-Saxon origin, a tendency which is particularly conspicuous in his use of compound and combination words.\" Quote verbatim; the 'counterpart of that exclusion' limb is carried by the page's own \"Instead\".",
+   "fromFile": "verdicts-martin-i850-874.json"
+  },
   "872": {
    "index": 872,
    "verdict": "SKIPPED_TRIAGE",
@@ -17317,6 +17522,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-martin-triage-r5.json"
+  },
+  "874": {
+   "index": 874,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in 770 pages of Feast of Crows only one really Latinate word",
+   "note": "Same page, under the heading \"CONCLUSION\": \"In the 770 pages of Feast of Crows I noticed only one really Latinate word, 'intermediate'.\" Quote verbatim, page count and the 'only one' count both as claimed. Two source-internal wrinkles to carry if the figure is reused: the page writes the title as 'Feast of Crows' (the novel is A Feast for Crows), and elsewhere the same post names 'intermittent', 'intercession', 'fornication', 'penetrate' and 'complement' as Latinate standouts in that novel, so the 'only one' is the author's impression, not a count that survives his own post.",
+   "fromFile": "verdicts-martin-i850-874.json"
   },
   "877": {
    "index": 877,

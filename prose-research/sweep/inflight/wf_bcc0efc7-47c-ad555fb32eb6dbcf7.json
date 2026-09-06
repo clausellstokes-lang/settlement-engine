@@ -3,14 +3,14 @@
  "name": "ai",
  "angle": null,
  "tag": "i524-538",
- "lines": 37,
+ "lines": 84,
  "firstTs": "2026-09-06T18:05:24.986Z",
- "lastTs": "2026-09-06T18:06:11.877Z",
+ "lastTs": "2026-09-06T18:07:55.245Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
   "WebFetch": 2,
-  "Bash": 6
+  "Bash": 21
  },
  "urlsFetched": [
   "https://dl.acm.org/doi/fullHtml/10.1145/3442188.3445922",
@@ -18,7 +18,15 @@
   "https://edintegrity.biomedcentral.com/articles/10.1007/s40979-023-00146-z",
   "https://dl.acm.org/doi/pdf/10.1145/3442188.3445922",
   "https://s10251.pcdn.co/pdf/2021-bender-parrots.pdf",
-  "https://arxiv.org/abs/2306.15666"
+  "https://arxiv.org/abs/2306.15666",
+  "https://web.archive.org/web/20251124123802id_/https://edintegrity.biomedcentral.com/articles/10.1007/s40979-023-00146-z",
+  "https://api.openalex.org/works/doi:$d",
+  "https://arxiv.org/pdf/2005.09980",
+  "https://www.sciencedirect.com/science/article/pii/S2949882125000660",
+  "https://doi.org/10.1016/j.chbah.2025.100207",
+  "https://api.crossref.org/works/10.1016/j.chbah.2025.100207",
+  "https://doaj.org/api/search/articles/doi%3A10.1016%2Fj.chbah.2025.100207",
+  "https://www.sciencedirect.com/science/article/pii/S294988212500091X"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the chunk file.",

@@ -18084,6 +18084,34 @@
    "note": "Raw HTML of whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/ (HTTP 200), the Big Idea essay for Written on the Dark: “A wise man who was not Mark Twain wrote that history may not repeat, but it rhymes. (His name was Theodore Reik and he was a psychoanalyst … but it always seems to be credited to Twain.) I share that thought. I write with that idea in mind.”",
    "fromFile": "verdicts-kay-i360-382.json"
   },
+  "383": {
+   "index": 383,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If I do it right, this use of the fantastic ... causes reader and author to share with each other that we are, indeed, rhyming with the past, not trying to pin the present down with it precisely.",
+   "note": "Raw page fetched (HTTP 200). Quote is a literal substring. Preceding sentence supplies the 'quarter-turn to the fantastic' referent ('What one reviewer called history with a quarter-turn to the fantastic. If I do it right, this use of the fantastic...'). Only nuance: Kay hedges the effect with 'If I do it right', which the claim drops.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
+  "384": {
+   "index": 384,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I want people reading ... and also thinking about ... right now. Not for lessons! I'm offering a story not giving a lecture.",
+   "note": "Raw page. Quote verbatim (curly apostrophe). Both limbs -- readers thinking about their own time, and not-for-lessons/story-not-lecture -- are consecutive sentences in the penultimate section.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
+  "385": {
+   "index": 385,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'm focused on complicating things, multiple ideas, on nuance, on letting readers decide what they find in or take away from a book.",
+   "note": "Raw page, fifth paragraph of Kay's essay. Quote verbatim. Claim omits 'multiple ideas' but adds nothing unsupported.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
+  "386": {
+   "index": 386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we are at risk ... if we are ignorant of the themes of history. That doesn't necessarily mean the minutiae of dates and places, it has to do -- for me -- with patterns, lessons, warnings that can emerge.",
+   "note": "Raw page, answer 2, as the claim's page hint says. Quote verbatim; all three limbs present. Kay frames it negatively ('ignorant of the themes of history'); the claim's 'being alert to' is the same proposition inverted.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
   "387": {
    "index": 387,
    "verdict": "SKIPPED_TRIAGE",
@@ -18105,6 +18133,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "390": {
+   "index": 390,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Children of Earth and Sky was deliberately set up in my mind to be about people who are not important in the scheme of things ... how those grand events can reach down and affect people far away.",
+   "note": "Raw page, answer 5, matching the page hint. Quote verbatim; both limbs are sentences in the same answer.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
   "391": {
    "index": 391,
    "verdict": "SKIPPED_TRIAGE",
@@ -18125,6 +18160,27 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "394": {
+   "index": 394,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I started thinking about how some parts of the world still carry the hard imprint of what has gone before.",
+   "note": "Raw page ('Letter to the Reader of Ysabel'), penultimate paragraph as hinted. Quote verbatim; Kay's own first-person statement.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
+  "395": {
+   "index": 395,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I believe that grounding has to be so secure that the vast majority of the research does not enter the book except subliminally, or does so very quietly ... or else you get what I hate as a reader, which is the 'info dump'.",
+   "note": "Raw page, in the answer about research for River of Stars. Quote verbatim; every limb (secure grounding, vast majority, subliminal/quiet, info dump he hates as a reader) is in the one sentence.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
+  "396": {
+   "index": 396,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I often find that through the peripheral figures I can achieve my strongest effects, whether of character, emotion, or shaping depth to a setting for the reader.",
+   "note": "Raw page. Quote verbatim. Note the site's own formatting runs the grey-characters question into the previous answer with no break, but the sentence is Kay's and sits in that answer.",
+   "fromFile": "verdicts-kay-i383-412.json"
   },
   "397": {
    "index": 397,
@@ -18161,6 +18217,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "402": {
+   "index": 402,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Now, I don't believe in saying exactly what happens to characters after a novel closes - the ending of every book I've written makes this point.",
+   "note": "Raw page, in the Sharra passage as hinted. Quote verbatim; both limbs in one sentence. Date detail only: the header says the afterword first appeared in the 2004 20th-anniversary edition, and Kay signs it December 2003, so the source label's '(2003)' is the signing date, not the publication date.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
   "403": {
    "index": 403,
    "verdict": "SKIPPED_TRIAGE",
@@ -18182,12 +18245,54 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "406": {
+   "index": 406,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't write novels inspired by history to offer easy parallels to our own time. That can feel lazy, or glib, or both.",
+   "note": "Raw page (essay headed 'Exile'; the WordPress post title is 'Under Heaven Author's Letter'). Quote verbatim, in the paragraph following the River of Stars discussion, as hinted. The claim's 'because' makes explicit a link the page leaves to adjacency.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
   "407": {
    "index": 407,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "408": {
+   "index": 408,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Dunnett also flatly refuses to talk down to her readers; she makes demands and rewards them - hugely.",
+   "note": "Raw page; the Lymond Chronicles entry, as hinted. Quote verbatim. Page confirms the piece first appeared at cbc.ca in 2016.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
+  "409": {
+   "index": 409,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I steep myself in a period and then I twist it just that little bit to give myself the ethical and creative space that seems to work for me.",
+   "note": "Raw page (BrightWeavings reproduction, headnote: 'originally appeared at theguardian.com ... written by Alison Flood'). Quote verbatim, in the El Cid paragraph as hinted. Claim's 'just a little' paraphrases 'just that little bit'.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
+  "410": {
+   "index": 410,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "One critic described his work as 'history with a quarter-turn to the fantastic' - a phrase Kay loves.",
+   "note": "Raw page. Quote verbatim, in Flood's narration (not in Kay's quoted speech), which is exactly what the claim asserts: the phrase is the critic's, reported by Flood.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
+  "411": {
+   "index": 411,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I've been calling it an epidemic of co-opting real lives ... Though he is careful never to criticise any writer who does.",
+   "note": "Raw page. Quote verbatim in Kay's speech. The second limb is Flood's narration plus Kay's own words ('I have vastly enjoyed a great many books that do not share my view on this'); the article separately notes he will not 'discuss or critique contemporaries'.",
+   "fromFile": "verdicts-kay-i383-412.json"
+  },
+  "412": {
+   "index": 412,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I have several scenes in this novel where a conversation takes place, as described by more than one of the people in the conversation. When I switch to another character's point of view, the conversation isn't the same.",
+   "note": "Raw LARB page fetched directly (HTTP 200, no paywall). Quote verbatim, in the answer to the question about multiple points of view, as hinted. 'This novel' is Children of Earth and Sky, the interview's subject.",
+   "fromFile": "verdicts-kay-i383-412.json"
   },
   "413": {
    "index": 413,
@@ -18385,6 +18490,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "441": {
+   "index": 441,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That kind of gap is very fertile ground for a novelist",
+   "note": "Live fetch, Clarkesworld issue 117 (June 2016), Chris Urie. Page: 'fascinated by the vast gulf between how the Uskoks were seen by (say) Venice and Ragusa/Dubrovnik, and how they viewed and understood themselves... That kind of gap is very fertile ground for a novelist.' Every limb present.",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
+  "442": {
+   "index": 442,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I like finding corners of history that have been under-explored",
+   "note": "Live fetch, same Clarkesworld answer on the Uskoks, verbatim sentence.",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
   "443": {
    "index": 443,
    "verdict": "SKIPPED_TRIAGE",
@@ -18413,6 +18532,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "447": {
+   "index": 447,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I am drawn as a reader to intelligent characters",
+   "note": "Live fetch, brightweavings.com/patrick (Interview with Patrick St-Denis), answer on extraordinary individuals: 'I am drawn as a reader to intelligent characters, I get irritated if I feel too much smarter than the characters (unless that's being done with purpose, and it can be).' All three limbs present.",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
   "448": {
    "index": 448,
    "verdict": "SKIPPED_TRIAGE",
@@ -18426,6 +18552,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "450": {
+   "index": 450,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Emotion is often conveyed by what is not said.",
+   "note": "Live fetch, Chris McBean, posted December 24 2025, section 'Dialogue as character and culture'. Sentence appears verbatim.",
+   "fromFile": "verdicts-kay-i441-485.json"
   },
   "451": {
    "index": 451,
@@ -18461,6 +18594,48 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "456": {
+   "index": 456,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "make the world be as my characters believe it to be",
+   "note": "Live fetch, LARB 14 Aug 2016, Christine Fischer Guy. Answer to 'How else does the fantastic serve your purposes?': 'What the fantastic lets me do... is make the world be as my characters believe it to be.'",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
+  "457": {
+   "index": 457,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it removes that smugness from the reader",
+   "note": "Live fetch, same LARB answer: 'there's a slightly smug patronizing attitude that kicks in' about the past, and 'The strength of this, for me, is enormous, because it removes that smugness from the reader who's willing to go there.' Both limbs present.",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
+  "458": {
+   "index": 458,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The two moons say, We're not here",
+   "note": "Live fetch, LARB. Interviewer: 'you're setting the rules of engagement? So your reader knows you're not talking about Justinian himself?' Kay: 'That's right. That's also one of the reasons I've used two moons in several of the books. The two moons say, We're not here.' The 'signal to the reader' limb rests on that exchange.",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
+  "459": {
+   "index": 459,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "if a reader can pick out what's made up and what's real, you've botched your storytelling",
+   "note": "Live fetch, LARB, answer to the question quoting Kay's Bring Up the Bodies (Hilary Mantel) review. Verbatim.",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
+  "460": {
+   "index": 460,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it's also, for me, staggeringly alien",
+   "note": "Live fetch, LARB, answer to the Aldous Huxley quotation: 'The past is sometimes refreshingly different, but it's also, for me, staggeringly alien. I think it's important for people writing about the past to acknowledge and work with that.' Both limbs present.",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
+  "461": {
+   "index": 461,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A reverence for language runs through everything he writes.",
+   "note": "Live fetch, LARB, interviewer's introduction ('Kay and I met in Toronto in early June...'), byline Christine Fischer Guy, August 14 2016. Verbatim.",
+   "fromFile": "verdicts-kay-i441-485.json"
   },
   "462": {
    "index": 462,
@@ -18539,6 +18714,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "473": {
+   "index": 473,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The approximate number of the dead could also point in the same direction",
+   "note": "Live fetch, brightweavings hosting of Roosa Toyryla's 2017 University of Helsinki bachelor's thesis (page states: 'This is a bachelor's thesis by Roosa Toyryla, written at the University of Helsinki, Finland. 2017.'). Section 'Narratorial Focalization: All-seeing but Indifferent'. Quoted novel passage gives 'some thirty or forty Senzians'; thesis adds 'the exact number of casualties does not seem to be of great importance'. Note: the thesis calls the Senzio incident a 'bloody, to-the-death melee' / slaughter, not a 'massacre' - the claim's own label, not a separate factual limb.",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
   "474": {
    "index": 474,
    "verdict": "SKIPPED_TRIAGE",
@@ -18559,6 +18741,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "477": {
+   "index": 477,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it strengthens the illusion of there being a world full of other stories",
+   "note": "Live fetch, same thesis, section 'Minor Characters as Focal Characters: Less Important People?': 'The Governor's experience is not essential to the story, but it strengthens the illusion of there being a world full of other stories around the one the novel is about.' Governor of Stevanien named as the focal character earlier in the same section.",
+   "fromFile": "verdicts-kay-i441-485.json"
   },
   "478": {
    "index": 478,
@@ -18581,6 +18770,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "481": {
+   "index": 481,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Fionavar is full of magic, Tigana has somewhat less, Arbonne has less again",
+   "note": "Live fetch, reactormag (Tor.com) reprint, By Jo Walton, Published on August 6, 2010: 'This is also a trajectory away from magic - Fionavar is full of magic, Tigana has somewhat less, Arbonne has less again, and The Lions of Al-Rassan has nothing but an accurate prophecy.' Every limb present; the sentence sits in the second body paragraph rather than the third (locator only).",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
   "482": {
    "index": 482,
    "verdict": "SKIPPED_TRIAGE",
@@ -18594,6 +18790,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "484": {
+   "index": 484,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a throw-away line in the prologue is the first signal",
+   "note": "Live fetch, steelypips.org, 'Copyright May 12, 1999 by Kate Nepveu': '...a throw-away line in the prologue is the first signal that this is not a \"straight\" historical:' followed by the block quote of Fotius the sandalmaker having seen a ghost. All limbs present.",
+   "fromFile": "verdicts-kay-i441-485.json"
+  },
+  "485": {
+   "index": 485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there are numerous throwaway lines to the effect",
+   "note": "Live fetch, Speculiction, Tuesday May 6 2014, posted by Jesse, paragraph beginning 'Forever utilizing the patient voice of the storyteller': 'As is also Kay's habit in the middle stage of his oeuvre, there are numerous throwaway lines to the effect \"Later, he, too, would have cause to be privately grateful - amid chaos - that a wager had not taken place that day.\"' The flash-forward limb is carried by that example.",
+   "fromFile": "verdicts-kay-i441-485.json"
   },
   "487": {
    "index": 487,

@@ -268,5 +268,23 @@
    "note": "Raw page (curl, HTTP 200), Screen Rant, datePublished 2024-10-25, headline '\"Everything In There Better Be Cracking On Topic\": D&D Designers Talk The 2024 Dungeon Master's Guide'. Perkins verbatim: 'if I had the 2024 DMG, which has sample adventures in it, which are tight and short and really sort of scripts for the DM to just to jog their memory and make sure that they're sort of remembering the pace and flow of the adventure, I could have saved myself a lot of prep time.' The quoted phrase 'tight and short' modifies the sample adventures, not their read-aloud text; a case-insensitive grep for 'aloud', 'recit' and 'verbatim' over the whole article returns nothing. Boxed text is mentioned only by Wyatt, on a different point (adventures needlessly re-explaining what boxed text is).",
    "fromFile": "verdicts-dnd-i139-153.json"
   }
+ },
+ {
+  "index": 176,
+  "feature": "fixed encounter section labels",
+  "claim": "Encounters are keyed with labeled sections in a fixed order (Read-aloud Text, General Description, Creature(s), Tactics, Trap(s), Treasure, Development) and unneeded sections are omitted rather than filled.",
+  "source": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+  "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+  "quote": "The editors greatly dislike printing the words \"This room is empty\"",
+  "page": "official editorial guidelines (PDF)",
+  "angle": "voice",
+  "verdict": {
+   "index": 176,
+   "verdict": "PARTIAL",
+   "trueWording": "Each encounter can include any or all of the following sections ... Do not include sections that are unnecessary",
+   "note": "Quote verbatim: 'The editors greatly dislike printing the words \"This room is empty\" in DUNGEON.' The section names and the omit-don't-fill rule are fully supported ('Do not include sections that are unnecessary for a given encounter... the area is not an encounter and should not be assigned an encounter number'). But the page never prescribes an ORDER: it says each encounter 'can include any or all of the following sections', and read-aloud only 'generally precedes the other entries of an encounter'. The enumeration is also eight items, not seven - the claim drops 'Ad-Hoc XP Adjustment'.",
+   "unsupportedLimb": "fixed order - the guidelines say encounters 'can include any or all of the following sections' and never mandate an order (read-aloud merely 'generally precedes'); the list is also eight sections, the claim names seven",
+   "fromFile": "verdicts-dnd-i169-183.json"
+  }
  }
 ]

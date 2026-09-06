@@ -14437,6 +14437,112 @@
    "note": "Quote verbatim; both percentages exact (measured as at least one AA/ABAB/ABBA/ABCB end rhyme via the CMU Pronouncing Dictionary). The aubade/pastoral limb is the next sentence: for those unfixed forms, ‘which do not typically require specific patterns of rhyme’, the models ‘always produced poems with at least one end rhyme’.",
    "fromFile": "verdicts-ai-i479-493.json"
   },
+  "494": {
+   "index": 494,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Over 60% GPT iambic-dominant versus just under 40% human.",
+   "note": "Sec 4.4 raw HTML: 'Over 60% of the GPT-authored poems had a dominant iambic meter, compared to just under 40% of poems from the human corpus.' Both limbs exact. Paper adds a split the claim omits: GPT-4 ~53% vs GPT-3.5 ~74%.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "495": {
+   "index": 495,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GPT uses more first-person plural, fewer singular, than humans.",
+   "note": "Sec 4.2: 'poems produced by GPT-3.5 and GPT-4 tend to use more first-person plural pronouns (\"we,\" \"us,\" \"our\") and fewer first-person singular pronouns'. Quote 'curiously dominant first-person plural perspective' verbatim in Sec 1.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "496": {
+   "index": 496,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Echo/whisper 75% of GPT-4; four GPT-3.5 words 87%.",
+   "note": "Sec 4.3: 'At least one of these words shows up in 87% of the GPT-3.5 poems. For GPT-4, either \"echo\" or \"whisper\" shows up in 75% of the poems.' The 87% is 'at least one of' embrace/grace/dance/dreams, as the claim implies.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "497": {
+   "index": 497,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Most distinctive opening word is 'In'; 'Upon' initiates iambic meter.",
+   "note": "Sec 4.3: 'The most distinctive opening word in both the GPT-3.5- and GPT-4 generated poems is \"In\"'; 'Upon' is 'a frequent way for the model to initiate iambic meter', and 'beneath', 'behold', 'within' are named as further iambic first words.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "498": {
+   "index": 498,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Median limerick 25 lines; models bundle multiple poems together.",
+   "note": "Sec 4.1: 'the median length for both GPT models is 25 lines... both models frequently bundle multiple, appropriately-lengthed limericks together. This is also the case for GPT-3.5's atypically long sonnets'. Two softenings: the sonnet bundling is stated for GPT-3.5 only, and the causal reading is hedged ('we think this tendency more likely suggests').",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "499": {
+   "index": 499,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Default quatrain/iambic/end-rhyme mode resurfaces despite contrary prompts.",
+   "note": "Sec 5: 'The models can be prompted to produce writing in other styles, but sometimes the persistent iambic/quatrain/end rhyme style still breaks through', with the limerick-as-five-quatrains example following.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "500": {
+   "index": 500,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "May reflect pre-programmed inclusivity and lack of singular experience.",
+   "note": "Sec 4.2: 'We think this pattern may reflect the models' pre-programmed attitudes toward inclusivity, as well as its obvious lack of first-person singular experiences, but more work is needed'. The claim's 'partly' matches the paper's hedge.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "501": {
+   "index": 501,
+   "verdict": "PARTIAL",
+   "trueWording": "Models struggle with unfixed forms; elegy is more often recognized.",
+   "note": "Quote verbatim in abstract and Sec 1: 'the models struggle to identify unfixed poetic forms, especially those based on topic or visual features.' Ode and concrete poetry are supported failure cases (Sec 6.2: 'poems about abstract ideas and styles like aubades and odes are less so'; 'most models except GPT-4 and GPT-4o falter with... concrete or pattern poetry'). Elegy is named on the other side of that sentence.",
+   "unsupportedLimb": "the parenthetical listing elegy among the forms models struggle with - the paper says forms on concrete subjects 'like death (elegy)' are MORE often recognized",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "502": {
+   "index": 502,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "41% memorized by GPT-4; memorization may enhance form classification.",
+   "note": "Sec 4.3: 'We find that 41% of poems are memorized by GPT-4' (of the 1.4k-poem benchmark). Sec 6.3: 'This suggests that memorization of a poem may enhance its form classification' - though the same section calls the impact 'unclear' and the abstract calls results 'inconclusive', which the claim's 'may' preserves.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "503": {
+   "index": 503,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Models do better with pantoums than ghazals; whole lines repeat.",
+   "note": "Sec 7.1: 'the models do better with pantoums than ghazals even though both hinge on repetition... pantoums contain repetition of entire lines while ghazals contain repetition of a single endword'.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "504": {
+   "index": 504,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GPT-2 XL: common_sense on recipes, irrelevant on stories, generic on news.",
+   "note": "Figure 6 caption (arXiv PDF, p.5): 'GPT-2 XL tends to make more \"common_sense\" errors on recipes, more \"irrelevant\" errors on stories, and more \"generic\" errors on news. This is consistent with our intuition about what makes each of these domains challenging.' The 'flags' are reader-selected reasons; the model is GPT-2 XL at p=0.4.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "505": {
+   "index": 505,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bad grammar least reliable; common_sense/irrelevant/contradicts_sentence most reliable.",
+   "note": "Sec 4: 'we see that conditioning on bad grammar is by far the least reliable way to detect generated text with a mean score of 1.78... the three most common reasons given (\"common_sense,\" \"irrelevant,\" and \"contradicts_sentence\") were also the three most reliable.' Table 2 ranks grammar last (1.780).",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "506": {
+   "index": 506,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Players selected the boundary sentence 23.4% of time, chance 10%.",
+   "note": "Sec 4: 'players were significantly better than random chance at the boundary detection task, correctly selecting the boundary sentence 23.4% of the time (chance being 10%).' The paper frames 23.4% as above chance rather than as 'only'.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "507": {
+   "index": 507,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Players significantly better at p=1.0; LMs struggle with diverse high-quality text.",
+   "note": "Sec 5: 'players were significantly better at p=1.0 (pure random sampling) than the lower values, validating claims from earlier papers that LMs struggle to generate high-quality text with similar diversity to human-written text.' Comparison run on News and Stories with GPT-2 XL; the paper credits earlier papers for the diversity claim.",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
+  "508": {
+   "index": 508,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Incentivised group improved; reading the help guide predicted skill best.",
+   "note": "Sec 4: 'detection is a skill and that annotators can be trained to do well on the detection task'; Figure 3: Group B, 'given extra instruction and incentives, improved over time' while Group A did not; Sec 4/Appendix: 'the most impactful feature for predicting annotator skill was whether or not they read our provided help guide.'",
+   "fromFile": "verdicts-ai-i494-508.json"
+  },
   "571": {
    "index": 571,
    "verdict": "SKIPPED_TRIAGE",
