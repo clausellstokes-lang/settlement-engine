@@ -61,26 +61,33 @@ const RESUME = !!(args && args.chunks)            // state chunks (pre-split, fi
 // against args.existingKeys (lowercase source|feature|claim[:60] of every claim already in the state) — at indices from
 // args.baseIndex (= the state's claim count), so the state file grows by index and nothing already verified is touched.
 const FIND_ANGLES = (args && args.findAngles) || (RESUME ? [] : ANGLES.map(a => a.key))
+// ROUND-N TOP-UP: a completeness critic's "recommended next round" becomes args.extraAngles = [{key, prompt}] — custom finder
+// prompts run beside (or instead of) the four standard angles, their claims deduped against the state and appended from baseIndex.
+const EXTRA = (args && args.extraAngles) || []
 const BASE_INDEX = (args && args.baseIndex) || 0
-const EXISTING = new Set(((args && args.existingKeys) || []).map(k => String(k).toLowerCase()))
 const keyOf = (c) => (c.source + '|' + c.feature + '|' + String(c.claim || '').slice(0, 60)).toLowerCase()
+// existing claims travel as SHORT HASHES of their content key (djb2, hex) so a 330-claim state costs ~4 KB of args, not 50 KB;
+// the same hash is computed by the chair's Python when the args are built (sweep/mk-args.py). Full keys are still accepted.
+const djb2 = (str) => { let h = 5381; for (let i = 0; i < str.length; i++) h = ((h * 33) ^ str.charCodeAt(i)) >>> 0; return h.toString(16) }
+const EXISTING = new Set([...((args && args.existingKeys) || []).map(k => djb2(String(k).toLowerCase())), ...((args && args.existingHashes) || [])])
+const seenKey = (c) => djb2(keyOf(c))
 // ---------------------------------------------------------------- Find (fresh runs and top-ups)
 phase('Find')
 let freshClaims = []
-if (FIND_ANGLES.length) {
+if (FIND_ANGLES.length || EXTRA.length) {
   const ex = EXEMPLARS.find(e => e.key === NAME)
   let found = []
-  if (ex) found = await batched(ANGLES.filter(a => FIND_ANGLES.includes(a.key)), (an) => agent(
+  if (ex) found = await batched([...ANGLES.filter(a => FIND_ANGLES.includes(a.key)), ...EXTRA], (an) => agent(
     `You are a research finder. Subject: the prose STYLE of ${ex.name} (${ex.notes}). Angle: ${an.prompt}. Use WebSearch and WebFetch; READ every source you cite (fetch it), never rely on a search snippet. Find as many substantive sources as this angle yields (aim for 10–20; stop when two consecutive searches return nothing new). For each source list it (title, url, kind, substantive true/false). Extract CLAIMS about concrete prose features: each claim names the feature (e.g. 'register modulation', 'Anglo-Saxon diction', 'two-sentence boxed text'), states it in one sentence, names the source and url, and carries at most one verbatim quotation under twelve words (or an empty string). Never reproduce copyrighted passages beyond twelve words. Write your raw notes to ${OUT}/find-${ex.key}-${an.key}.md and return the structured result.`,
     { label: `find:${ex.key}:${an.key}`, phase: 'Find', schema: FINDINGS }))
-  else if (NAME === 'ai') found = await batched(AI_ANGLES.filter(a => FIND_ANGLES.includes(a.key)), (an) => agent(
+  else if (NAME === 'ai') found = await batched([...AI_ANGLES.filter(a => FIND_ANGLES.includes(a.key)), ...EXTRA], (an) => agent(
     `You are a research finder. Subject: where generated (LLM) prose FAILS against skilled human fiction and game writing. Angle: ${an.prompt}. Use WebSearch and WebFetch; READ every source you cite; aim for 10–20 substantive sources, stop after two consecutive dry searches. For each source list it; extract CLAIMS as concrete failure modes (feature, one-sentence claim, source, url, one verbatim quotation under twelve words or empty). Write raw notes to ${OUT}/find-ai-${an.key}.md and return the structured result.`,
     { label: `find:ai:${an.key}`, phase: 'Find', schema: FINDINGS }))
   else throw new Error(`unknown sweep name ${NAME}`)
   const all = found.filter(Boolean).flatMap(r => r.claims || [])
   const seen = new Set(EXISTING)
-  for (const c of all) { const k = keyOf(c); if (!seen.has(k)) { seen.add(k); freshClaims.push(c) } }
-  log(`found ${all.length} claims across ${FIND_ANGLES.length} angle(s), ${freshClaims.length} NEW after dedupe (${EXISTING.size} already in the state), from ${found.filter(Boolean).reduce((n, r) => n + (r.sourcesRead || []).length, 0)} sources read`)
+  for (const c of all) { const k = seenKey(c); if (!seen.has(k)) { seen.add(k); freshClaims.push(c) } }
+  log(`found ${all.length} claims across ${FIND_ANGLES.length + EXTRA.length} angle(s), ${freshClaims.length} NEW after dedupe (${EXISTING.size} already in the state), from ${found.filter(Boolean).reduce((n, r) => n + (r.sourcesRead || []).length, 0)} sources read`)
 }
 // ---------------------------------------------------------------- Verify
 phase('Verify')
@@ -111,7 +118,7 @@ log(`verified this run: ${kept} of ${Object.keys(verdictMap).length} survive (${
 phase('Synthesize')
 const ABOUT = NAME === 'ai' ? 'the catalogue of where generated prose FAILS against skilled human fiction and game writing' : `the prose style of ${(EXEMPLARS.find(e => e.key === NAME) || {}).name || NAME}`
 const section = await agent(
-  `First run, in a shell: \`cd ${KIT} && node sweep-state.mjs merge ${NAME} --update-state\` — it merges the state file${STATE_FILE ? ` (${STATE_FILE})` : ''} with every verdicts-${NAME}-*.json the verifiers wrote (this run's and any earlier run's) and writes ${OUT}/kept-${NAME}.json (the VERIFIED_VERBATIM / VERIFIED_SUBSTANCE claims only, each with its index, source, url, quote and verdict.trueWording). Read that file (with Read, in pieces if it is long). Then write the dossier section for "${NAME}" — ${ABOUT} — from those VERIFIED claims only. Structure: numbered concrete features, each with the critics/sources that support it (count them; cite by index), the true wording of any quotation (under twelve words), and the reconstruction rule it implies for a settlement dossier written as a calm archivist (present tense, concrete civic nouns, no digits, no em dash). Mark disagreements between sources explicitly. A feature resting on ONE source is flagged as such. End with a coverage table: sources per angle, and the verdict counts (verified / not found / contradicted / blocked). Write it to ${OUT}/section-${NAME}.md and return the markdown.`,
+  `First run, in a shell: \`cd ${KIT} && node sweep-state.mjs merge ${NAME} --update-state\` — it merges the state file${STATE_FILE ? ` (${STATE_FILE})` : ''} with every verdicts-${NAME}-*.json the verifiers wrote (this run's and any earlier run's) and writes ${OUT}/kept-${NAME}.json (the VERIFIED_VERBATIM / VERIFIED_SUBSTANCE claims only, each with its index, source, url, quote and verdict.trueWording). Read that file (with Read, in pieces if it is long). Begin the section with one line naming the exact files it was built from and their byte counts and mtimes (\`ls -l\` them), so a later reader can tell whether the inputs moved. Then write the dossier section for "${NAME}" — ${ABOUT} — from those VERIFIED claims only. Structure: numbered concrete features, each with the critics/sources that support it (count them; cite by index), the true wording of any quotation (under twelve words), and the reconstruction rule it implies for a settlement dossier written as a calm archivist (present tense, concrete civic nouns, no digits, no em dash). Mark disagreements between sources explicitly. A feature resting on ONE source is flagged as such. End with a coverage table: sources per angle, and the verdict counts (verified / not found / contradicted / blocked). Write it to ${OUT}/section-${NAME}.md and return the markdown.`,
   { label: `synth:${NAME}`, phase: 'Synthesize' })
 const critic = await agent(`You are the completeness critic for the sweep "${NAME}". Read ${OUT}/section-${NAME}.md, ${OUT}/kept-${NAME}.json and the find-${NAME}-*.md notes in ${OUT} (if present). List what is MISSING: an angle not run, a well-known critic or study absent (name them), a claim that rests on one source, a copyright risk (a quotation over twelve words), a verdict that looks wrong on its face (a VERIFIED claim whose quote is not on its page, a NOT_FOUND that a second route would find), and any feature the section contradicts itself on. Return a markdown list with a recommended next round of searches. Write it to ${OUT}/critic-${NAME}.md.`, { label: `critic:${NAME}`, phase: 'Synthesize' })
-return { name: NAME, resumed: RESUME, findAngles: FIND_ANGLES, freshClaims: freshClaims.length, chunks: chunks.length, chunksReturned: results.filter(Boolean).length, verifiedThisRun: Object.keys(verdictMap).length, keptThisRun: kept, missingChunks: missing.map(c => c.k), sectionChars: (section || '').length, critic }
+return { name: NAME, resumed: RESUME, findAngles: FIND_ANGLES, extraAngles: EXTRA.map(a => a.key), freshClaims: freshClaims.length, chunks: chunks.length, chunksReturned: results.filter(Boolean).length, verifiedThisRun: Object.keys(verdictMap).length, keptThisRun: kept, missingChunks: missing.map(c => c.k), sectionChars: (section || '').length, critic }
