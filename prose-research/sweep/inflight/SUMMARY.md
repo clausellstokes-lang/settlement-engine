@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:07:15 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:15:30 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -279,9 +279,9 @@
 | kay | finder | craft | result | 112 | — | 163 claims, complete=True @14:02:12 | 17:25:51 |
 | kay | finder | rescue-unread | result | 113 | — | 100 claims, complete=True @17:25:52 | 19:38:12 |
 | kay | finder | silmarillion-and-verse | result | 105 | — | 113 claims, complete=True @17:25:52 | 19:34:08 |
-| kay | finder | transcripts-and-readers | failed | 22 | — | 40 claims, complete=False @19:07:12 | 19:45:35 |
-| kay | finder | transcripts-and-readers | in-flight | 81 | — | 40 claims, complete=False @19:07:12 | 23:07:12 |
-| kay | finder | transcripts-and-readers | in-flight | 1 | — | 40 claims, complete=False @19:07:12 | 21:31:03 |
+| kay | finder | transcripts-and-readers | failed | 22 | — | 77 claims, complete=False @19:15:24 | 19:45:35 |
+| kay | finder | transcripts-and-readers | in-flight | 98 | — | 77 claims, complete=False @19:15:24 | 23:15:29 |
+| kay | finder | transcripts-and-readers | in-flight | 1 | — | 77 claims, complete=False @19:15:24 | 21:31:03 |
 | kay | finder | translators-and-ear | result | 80 | — | 35 claims, complete=True @17:25:52 | 19:33:40 |
 | kay | regrade | regrade-r4 | failed | 0 | — | — | 17:51:50 |
 | kay | regrade | regrade-r5 | result | 0 | build-kay-regrade.mjs | — | 18:26:34 |
@@ -548,15 +548,15 @@
 | wolfe | critic |  | failed | 0 | — | — | 19:50:41 |
 | wolfe | critic |  | result | 0 | critic-wolfe.md | — | 18:34:19 |
 | wolfe | critic |  | failed | 0 | — | — | 17:52:41 |
-| wolfe | finder | close-continued | failed | 42 | — | 43 claims, complete=False @15:45:44 | 19:45:45 |
-| wolfe | finder | close-continued | in-flight | 1 | — | 43 claims, complete=False @15:45:44 | 23:06:45 |
-| wolfe | finder | close-continued | in-flight | 1 | — | 43 claims, complete=False @15:45:44 | 21:31:03 |
+| wolfe | finder | close-continued | failed | 42 | — | 74 claims, complete=False @19:08:00 | 19:45:45 |
+| wolfe | finder | close-continued | in-flight | 18 | — | 74 claims, complete=False @19:08:00 | 23:15:20 |
+| wolfe | finder | close-continued | in-flight | 1 | — | 74 claims, complete=False @19:08:00 | 21:31:03 |
 | wolfe | finder | counter | result | 68 | — | 114 claims, complete=True @17:25:54 | 19:22:08 |
 | wolfe | finder | editors | result | 35 | — | 78 claims, complete=True @17:25:54 | 19:17:55 |
 | wolfe | finder | le-guin | result | 56 | — | 31 claims, complete=True @17:25:54 | 19:25:33 |
 | wolfe | finder | measure | result | 36 | find-wolfe-measure.md, found-wolfe-measure.json, metrics.py | 38 claims, complete=True @17:25:54 | 19:18:11 |
 | wolfe | finder | monographs | failed | 71 | — | 54 claims, complete=False @15:46:26 | 19:46:26 |
-| wolfe | finder | monographs | in-flight | 12 | — | 54 claims, complete=False @15:46:26 | 23:06:31 |
+| wolfe | finder | monographs | in-flight | 18 | — | 54 claims, complete=False @15:46:26 | 23:15:25 |
 | wolfe | finder | monographs | in-flight | 8 | — | 54 claims, complete=False @15:46:26 | 21:31:03 |
 | wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
 | wolfe | regrade | regrade-r4 | result | 0 | — | — | 17:43:04 |

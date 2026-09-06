@@ -3,16 +3,35 @@
  "name": "wolfe",
  "angle": "close-continued",
  "tag": null,
- "lines": 75,
+ "lines": 162,
  "firstTs": "2026-09-06T22:59:58.348Z",
- "lastTs": "2026-09-06T23:06:45.550Z",
+ "lastTs": "2026-09-06T23:15:20.240Z",
  "tools": {
   "Read": 1,
-  "Bash": 16,
-  "ToolSearch": 1
+  "Bash": 37,
+  "ToolSearch": 1,
+  "WebSearch": 2,
+  "WebFetch": 2
  },
  "urlsFetched": [
-  "https://web.archive.org/web/2021id_/http://lists.urth.net/pipermail/urth-urth.net/2006-October/{n}.html"
+  "https://web.archive.org/web/2021id_/http://lists.urth.net/pipermail/urth-urth.net/2006-October/{n}.html",
+  "http://lists.urth.net/pipermail/urth-urth.net/2006-October/%s.html",
+  "https://web.archive.org/web/2021id_/",
+  "https://reactormag.com/columns/rereading-gene-wolfe/",
+  "https://www.washingtonpost.com/archive/entertainment/books/1989/04/30/gene-wolfes-tales-of-the-alien-and-the-alienated/50d2c807-c56a-4ba3-a317-4540d8786a8c/",
+  "https://www.washingtonpost.com/books/2023/11/22/gene-wolfe-terry-pratchett-review/",
+  "https://web.archive.org/web/%sid_/%s",
+  "https://www.washingtonpost.com/entertainment/books/beyond-george-rr-martin-a-critics-pick-of-science-fiction-and-fantasy/2019/04/30/8fcc7d60-6aa2-11e9-be3a-33217240a539_story.html",
+  "https://reactormag.com/[a-z0-9\\-",
+  "https://reactormag\\.com/[a-z0-9",
+  "https://reactormag.com/rereading-gene-wolfe-the-fifth-head-of-cerberus-wolfes-holy-trinity/",
+  "https://reactormag.com/peace-wolfes-masterful-rumination-on-nostalgia-memory-and-uncertainty/",
+  "https://reactormag.com/gene-wolfes-the-shadow-of-the-torturer-part-1/",
+  "https://reactormag.com/introducing-the-gene-wolfe-reread-on-tor-com-the-reader-in-the-mist/",
+  "https://reactormag.com/the-claw-of-the-conciliator-part-1-holding-the-power-of-life-and-death/",
+  "https://reactormag.com/rereading-gene-wolfe-the-citadel-of-the-autarch-part-1-a-festival-of-stories/",
+  "https://www.reddit.com/r/genewolfe/comments/$id/.rss?limit=100",
+  "http://web.archive.org/cdx/search/cdx?url=$(python3"
  ],
  "filesWritten": [],
  "lastAssistantText": "Now let me build and pre-verify the Urth October claims.",
@@ -22,8 +41,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-close-continued.json",
-  "claims": 43,
+  "claims": 74,
   "complete": false,
-  "mtime": "15:45:44"
+  "mtime": "19:08:00"
  }
 }

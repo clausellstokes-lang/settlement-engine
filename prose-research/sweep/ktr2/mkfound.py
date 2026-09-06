@@ -217,7 +217,7 @@ C('gr-lions.reviews.json','other: divided reader verdict on the prose',
 C('gr-lions.reviews.json','other: divided reader verdict on the prose',
   "A four-star Goodreads reviewer of The Lions of Al-Rassan enjoys Kay's prose but declines to rank it among her favourites.",
   "Booksblabbering (Cait), Goodreads review of The Lions of Al-Rassan, 9 Jan 2026 (38 likes)", GL,
-  "whilst I enjoy GGK's prose, it's not a favourite of mine","reviews list",'reader','disputes','2026-01-09',GRR,'none','high')
+  "whilst I enjoy GGK’s prose, it’s not a favourite of mine","reviews list",'reader','disputes','2026-01-09',GRR,'none','high')
 
 C('gr-lions.reviews.json','plainness and economy',
   "A four-star Goodreads reviewer of The Lions of Al-Rassan calls the prose purposeful and engaging without being overly dense.",
@@ -266,6 +266,206 @@ C('cheryl.txt','omission as information',
   "https://www.cheryl-morgan.com/?p=28717",
   "how much light an author should shed upon the workings of magic","post body",'reception','asserts','2021-05-11','browser user agent','dossier-archivist','high')
 
+# ================= second batch =================
+GU="https://www.goodreads.com/book/show/7139892-under-heaven"
+GC="https://www.goodreads.com/book/show/25938417-children-of-earth-and-sky"
+
+C('gr-under.reviews.json','adjective and adverb discipline',
+  "A Goodreads reviewer of Under Heaven says its prose is the most adjective-free Kay has written and that an immediacy comes from that simplicity.",
+  "Brad, Goodreads review of Under Heaven, 5 Jul 2012 (25 likes)", GU,
+  "His prose was as adjective free as it has ever been","reviews list",'reader','asserts','2012-07-05',GRR,'dossier-archivist','high')
+
+C('gr-under.reviews.json','plainness and economy',
+  "A five-star Goodreads reviewer of Under Heaven describes the writing as never saying more or less than was needed.",
+  "Mike, Goodreads review of Under Heaven, 11 Feb 2014 (14 likes)", GU,
+  "never saying more or less than was needed","reviews list",'reader','asserts','2014-02-11',GRR,'dossier-archivist','high')
+
+C('gr-under.reviews.json','plainness and economy',
+  "A four-star Goodreads reviewer of Under Heaven contrasts Kay with verbose writers and assigns him to a less-is-more school.",
+  "Veronica, Goodreads review of Under Heaven, 5 May 2019 (16 likes)", GU,
+  "Kay subscribes to the \u201cless is more\u201d school of writing","reviews list",'reader','asserts','2019-05-05',GRR,'dossier-archivist','high')
+
+C('gr-under.reviews.json','adjective and adverb discipline',
+  "A four-star Goodreads reviewer of Under Heaven says Kay's language never veers near purple prose.",
+  "Mayim de Vries, Goodreads review of Under Heaven, 15 Jun 2019 (34 likes)", GU,
+  "never veering near the purple prose so many of us detest","reviews list",'reader','asserts','2019-06-15',GRR,'none','high')
+
+C('gr-under.reviews.json','other: punctuation habit',
+  "A four-star Goodreads reviewer of Under Heaven names comma use as a habit of the style.",
+  "Paul O\u2019Neill, Goodreads review of Under Heaven, 6 Apr 2017 (82 likes)", GU,
+  "Kay does go a bit overboard with commas","reviews list",'reader','mentions','2017-04-06',GRR,'none','high')
+
+C('gr-under.reviews.json','other: divided reader verdict on the prose',
+  "A four-star Goodreads reviewer of Under Heaven says Kay's poetic lushness can sound like a bodice-ripper.",
+  "D. Pow, Goodreads review of Under Heaven, 18 Jul 2010 (13 likes)", GU,
+  "a poetic lushness in the language that can sound a bit","reviews list",'reader','disputes','2010-07-18',GRR,'none','high')
+
+C('gr-under.reviews.json','other: divided reader verdict on the prose',
+  "A three-star Goodreads reviewer of Under Heaven states that beautiful prose was not sufficient for her.",
+  "agata, Goodreads review of Under Heaven, 26 Jun 2012 (15 likes)", GU,
+  "beautiful prose is not enough, if you start out promising more","reviews list",'reader','disputes','2012-06-26',GRR,'none','high')
+
+C('gr-under.reviews.json','cadence and rhythm',
+  "A five-star Goodreads reviewer of Under Heaven contrasts merely coherent sentences with woven ones and says a well-woven sentence sings.",
+  "Khanh, Goodreads review of Under Heaven, 9 Jan 2011 (367 likes)", GU,
+  "A well-woven sentence speaks to the heart, it sings to the spirit","reviews list",'reader','asserts','2011-01-09',GRR,'none','high')
+
+C('gr-coes.reviews.json','other: competing accounts of one event',
+  "A Goodreads reviewer of Children of Earth and Sky reports the novel makes the reader read one event two or three times as different characters describe it.",
+  "Mogsy, Goodreads review of Children of Earth and Sky, 15 Jul 2015 (61 likes)", GC,
+  "read about the same event two or three times as multiple characters","reviews list",'reader','mentions','2015-07-15',GRR,'chronicle-line','high')
+
+C('gr-coes.reviews.json','place and institution description',
+  "A Goodreads reviewer of Children of Earth and Sky calls the setting richly described through its competing maritime city-states.",
+  "Krell75, Goodreads review of Children of Earth and Sky, 6 May 2025 (78 likes; reviewer's own English rendering below the Italian)", GC,
+  "richly described with its competing maritime city-states","reviews list",'reader','asserts','2025-05-06',GRR,'dossier-archivist','high')
+
+C('gr-coes.reviews.json','plainness and economy',
+  "A five-star Goodreads reviewer of Children of Earth and Sky credits Kay's clarity of prose with making a complex world accessible.",
+  "Tadiana, Goodreads review of Children of Earth and Sky, 17 May 2016 (138 likes)", GC,
+  "made so accessible by Kay\u2019s clarity of prose","reviews list",'reader','asserts','2016-05-17',GRR,'dossier-archivist','high')
+
+C('gr-coes.reviews.json','metaphor discipline',
+  "A three-star Goodreads reviewer of Children of Earth and Sky calls the fantasy minimalistic and oblique and credits a disciplined imagination.",
+  "Lyn, Goodreads review of Children of Earth and Sky, 23 Mar 2016 (70 likes)", GC,
+  "The fantasy is minimalistic and oblique","reviews list",'reader','asserts','2016-03-23',GRR,'dossier-archivist','high')
+
+C('gr-coes.reviews.json','other: divided reader verdict on the prose',
+  "A three-star Goodreads reviewer of Children of Earth and Sky calls the style repetitive and dense in places.",
+  "tiffany, Goodreads review of Children of Earth and Sky, 18 May 2024 (26 likes)", GC,
+  "the writing style was a bit repetitive and dense at times","reviews list",'reader','disputes','2024-05-18',GRR,'none','high')
+
+C('gr-coes.reviews.json','point of view and distance',
+  "A five-star Goodreads reviewer of Children of Earth and Sky notes the prose moves between protagonists within a single scene.",
+  "Melissa McShane, Goodreads review of Children of Earth and Sky, 19 Mar 2016 (17 likes)", GC,
+  "a prose style that leaps from one to another, sometimes within","reviews list",'reader','mentions','2016-03-19',GRR,'chronicle-line','high')
+
+C('gr-coes.reviews.json','other: reader label for the register',
+  "A Goodreads reviewer relays the novelist Janny Wurts's description of Kay's writing as lyrical nostalgia and endorses it.",
+  "Joshua Thompson relaying Janny Wurts, Goodreads review of Children of Earth and Sky, 1 Mar 2025 (39 likes)", GC,
+  "describe Kay's writing as \"lyrical nostalgia\"","reviews list",'reader','asserts','2025-03-01',GRR,'none','medium')
+
+# ---- Goodreads 'where should I start' topic ----
+GTOP2="https://www.goodreads.com/topic/show/565852-guy-gavriel-kay-where-should-i-start"
+C('grtopic-start.txt','other: divided reader verdict on the prose',
+  "A dissenting reader in a Goodreads recommendation thread concedes Kay's superior writing and still judges the books more smoke than fire.",
+  "an anonymised member, message 4, Goodreads SciFi and Fantasy Book Club topic, 30 May 2011", GTOP2,
+  "He writes better than I ever could, but for me his","message 4",'reader','disputes','2011-05-30','browser user agent','none','high')
+
+C('grtopic-start.txt','other: divided reader verdict on the prose',
+  "The same reader says Kay's writing flies high only intermittently.",
+  "an anonymised member, message 4, Goodreads SciFi and Fantasy Book Club topic, 30 May 2011", GTOP2,
+  "There are moments his writing really flighs high","message 4",'reader','disputes','2011-05-30','browser user agent','none','high')
+
+# ---- the lecture, as transcribed by a reporter ----
+TOR="https://reactormag.com/jrr-tolkien-guy-gavriel-kay-lecture-just-enough-light-some-thoughts-on-fantasy-and-literature-watch/"
+C('tor.txt','withheld information and inference',
+  "A reporter transcribing the 2021 Tolkien Lecture records Kay taking Walter Bagehot's line against letting daylight in upon magic as the lecture's governing text.",
+  "Guy Gavriel Kay quoting Walter Bagehot, transcribed by Andrew Liptak, Tor.com, 13 May 2021", TOR,
+  "We must not let in daylight upon magic","body, Kay's quoted opening",'own-words','asserts','2021-05-13','browser user agent on the reactormag redirect of the tor.com post','dossier-archivist','medium')
+
+C('tor.txt','withheld information and inference',
+  "In the same transcribed passage Kay says anyone writing fantasy must contend with the reverberations of that line.",
+  "Guy Gavriel Kay, transcribed by Andrew Liptak, Tor.com, 13 May 2021", TOR,
+  "needs to contend with the reverberations of Bagehot\u2019s line","body, Kay's quoted paragraph",'own-words','asserts','2021-05-13','browser user agent; the transcription garbles a later clause, so only this span is claimed','dossier-archivist','medium')
+
+# ================= third batch: book club and forums =================
+QU="https://thequilltolive.com/2016/03/17/book-club-discussion-tigana-by-guy-gabriel-kay/"
+C('quill.txt','other: divided reader verdict on the prose',
+  "A book club reports that Tigana split its members into two camps rather than a spectrum of opinion.",
+  "Andrew Mather, 'Book Club Discussion: Tigana By Guy Gavriel Kay', The Quill to Live, 17 Mar 2016", QU,
+  "more of a splitting into two camps: people who loved it","post body",'reader','asserts','2016-03-17','browser user agent','none','high')
+
+C('quill.txt','other: divided reader verdict on the prose',
+  "The same book club reports its scores fell at the two ends of the scale, half at nine or above and half below five, averaging seven with nobody content.",
+  "Andrew Mather, 'Book Club Discussion: Tigana By Guy Gavriel Kay', The Quill to Live, 17 Mar 2016", QU,
+  "half of the group had scores of nine or above","post body",'measurement','asserts','2016-03-17','browser user agent','none','high')
+
+C('quill.txt','plainness and economy',
+  "The dissenting half of that book club called the writing pretentious and said they preferred more austere prose.",
+  "Andrew Mather reporting the club's 'con' group, The Quill to Live, 17 Mar 2016", QU,
+  "found the writing pretentious and that they preferred more austere prose","post body, 'Team Anti-Tigana'",'reader','rejects','2016-03-17','browser user agent','none','high')
+
+C('quill.txt','point of view and distance',
+  "The same dissenting group found the pacing jarring because the perspective jumps from point-of-view to point-of-view.",
+  "Andrew Mather reporting the club's 'con' group, The Quill to Live, 17 Mar 2016", QU,
+  "the perspective often jumps from point-of-view to point-of-view","post body, 'Team Anti-Tigana'",'reader','rejects','2016-03-17','browser user agent','none','high')
+
+SFF="https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/"
+C('sffworld.txt','other: reader label for the register',
+  "A forum member characterises Kay's manner of writing as controlled and orchestrated.",
+  "Erfael, SFFWorld forum, 6 Dec 2011", SFF,
+  "Kay writes in a very controlled, orchestrated way","post #5",'reader','asserts','2011-12-06','browser user agent','none','high')
+
+C('sffworld.txt','other: divided reader verdict on the prose',
+  "A forum member warns that a reader wanting a fast paced tight narrative will not suit Kay, while naming evocative prose as his best trait.",
+  "a member replying at post #4, SFFWorld forum, 6 Dec 2011", SFF,
+  "His best traits are his evocative prose, quality characterization and flair","post #4",'reader','asserts','2011-12-06','browser user agent','none','high')
+
+C('sffworld.txt','register modulation',
+  "A forum member who reread two Kay novels back to back reports subtle differences of tone and manner of writing between them.",
+  "a member at post #2, SFFWorld forum, 6 Dec 2011", SFF,
+  "lovely, subtle differences in his tone and manner of writing","post #2",'reader','asserts','2011-12-06','browser user agent','none','high')
+
+G111="https://www.goodreads.com/topic/show/111082-guy-gavriel-kay"
+C('grtopic-111082.txt','diction (native vs latinate)',
+  "A reader in a Goodreads Fantasy Book Club topic finds Kay's writing unnatural, saying he reaches for obscure words instead of his honest voice.",
+  "Josh, message 8, Goodreads Fantasy Book Club topic on Guy Gavriel Kay, 27 Feb 2009", G111,
+  "he tries too hard to wow the reader with tons","message 8",'reader','rejects','2009-02-27','browser user agent','none','high')
+
+C('grtopic-111082.txt','other: divided reader verdict on the prose',
+  "Another member of the same topic states she has no issue with the style and calls his use of language precise and lyric.",
+  "Janny, message 12, Goodreads Fantasy Book Club topic on Guy Gavriel Kay, 12 Mar 2009", G111,
+  "his use of language is precise, and lyric, and highly creative","message 12",'reader','asserts','2009-03-12','browser user agent','none','high')
+
+C('grtopic-111082.txt','register modulation',
+  "The same member distinguishes Ysabel as quicker and less atmospheric, recommending it to a reader who wants a leaner prose style.",
+  "Janny, message 12, Goodreads Fantasy Book Club topic on Guy Gavriel Kay, 12 Mar 2009", G111,
+  "a reader looking for a leaner prose style","message 12",'reader','asserts','2009-03-12','browser user agent','none','high')
+
+C('grtopic-111082.txt','place and institution description',
+  "A member of the same topic describes Kay's method as travelling to a locale to absorb local colour and then writing on the region's theme.",
+  "a member of the Goodreads Fantasy Book Club topic on Guy Gavriel Kay, 2009", G111,
+  "travels to a locale to soak up local color","topic thread",'reader','asserts','2009','browser user agent','dossier-archivist','medium')
+
+# ================= fourth batch: reader blogs =================
+OLS="https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/"
+C('ols.txt','register modulation',
+  "A reader-blogger reviewing Kay's whole run says Tigana's prose is very different from the often lean prose of The Fionavar Tapestry.",
+  "Michal, 'Flippant Reviews: Guy Gavriel Kay', One Last Sketch, 12 Dec 2011", OLS,
+  "very different from the often lean prose of The Fionavar Tapestry","post body, Tigana",'reader','asserts','2011-12-12','browser user agent','none','high')
+
+C('ols.txt','register modulation',
+  "The same blogger says that in The Last Light of the Sun Kay's ornate style is cut down to a rougher language of sentence fragments and strong images.",
+  "Michal, 'Flippant Reviews: Guy Gavriel Kay', One Last Sketch, 12 Dec 2011", OLS,
+  "ornate style is cut down here to a much rougher use","post body, The Last Light of the Sun",'reader','asserts','2011-12-12','browser user agent','chronicle-line','high')
+
+C('ols.txt','withheld information and inference',
+  "The same blogger objects that the reader is too often told how to feel and given overwrought reminiscence about the lost province.",
+  "Michal, 'Flippant Reviews: Guy Gavriel Kay', One Last Sketch, 12 Dec 2011", OLS,
+  "We\u2019re all too often told how to feel","post body, Tigana",'reader','rejects','2011-12-12','browser user agent','none','high')
+
+C('ols.txt','other: divided reader verdict on the prose',
+  "The same blogger names as an annoyance Kay's habit of long tangents describing the vast import of a historical moment.",
+  "Michal, 'Flippant Reviews: Guy Gavriel Kay', One Last Sketch, 12 Dec 2011", OLS,
+  "long tangents describing the vast import of some historical moment","post body",'reader','rejects','2011-12-12','browser user agent','chronicle-line','high')
+
+FF="https://fantasy-faction.com/2013/tigana-by-guy-gavriel-kay"
+C('ff.txt','other: divided reader verdict on the prose',
+  "A reviewer for a fan site calls the prose technically superb and in the same review says it often felt cold and clinical.",
+  "Alister, 'Tigana by Guy Gavriel Kay', Fantasy-Faction, 2013", FF,
+  "the prose often felt cold and clinical, even lacking in emotion","review body",'reader','disputes','2013','browser user agent','none','high')
+
+C('ff.txt','civic record register',
+  "The same reviewer says Tigana can feel academic in its structure and its descriptions, and links that to Kay's Silmarillion work.",
+  "Alister, 'Tigana by Guy Gavriel Kay', Fantasy-Faction, 2013", FF,
+  "can feel quite academic in its structure and descriptions","review body",'reader','asserts','2013','browser user agent','dossier-archivist','high')
+
+C('ff.txt','place and institution description',
+  "The same reviewer credits the flowing lyrical prose with making the world vivid and real.",
+  "Alister, 'Tigana by Guy Gavriel Kay', Fantasy-Faction, 2013", FF,
+  "the prose flowing and lyrical, making the world vivid and real","review body",'reader','asserts','2013','browser user agent','dossier-archivist','high')
+
 SOURCES=[
  dict(title="Guy Gavriel Kay, 'Just Enough Light: Some Thoughts on Fantasy and Literature,' Tolkien Lecture 2021 (YouTube video, metadata + caption-track listing only)",
       url="https://www.youtube.com/watch?v=z1TgX0alFuM", kind="own-words", substantive=False, date="2021-05-11",
@@ -299,7 +499,23 @@ SOURCES=[
  dict(title="TIG: Who's better, Guy Gavriel Kay or George R.R. Martin? - Goodreads Sword and Laser topic (72 messages)",
       url="https://www.goodreads.com/topic/show/917171-tig-who-s-better-guy-gavriel-kay-or-george-r-r-martin", kind="reader", substantive=True, date="2012-06", route="browser user agent"),
  dict(title="Guy Gavriel Kay: where should I start? - Goodreads SciFi and Fantasy Book Club topic",
-      url="https://www.goodreads.com/topic/show/565852-guy-gavriel-kay-where-should-i-start", kind="reader", substantive=False, date="2012", route="browser user agent"),
+      url="https://www.goodreads.com/topic/show/565852-guy-gavriel-kay-where-should-i-start", kind="reader", substantive=True, date="2011-05", route="browser user agent"),
+ dict(title="Under Heaven - Goodreads book page (30 reviews read from __NEXT_DATA__)",
+      url="https://www.goodreads.com/book/show/7139892-under-heaven", kind="reader", substantive=True, date="2026-09-06", route="browser user agent; apolloState Review: nodes (third attempt; the first two returned HTTP 202 with zero bytes)"),
+ dict(title="Children of Earth and Sky - Goodreads book page (30 reviews read from __NEXT_DATA__)",
+      url="https://www.goodreads.com/book/show/25938417-children-of-earth-and-sky", kind="reader", substantive=True, date="2026-09-06", route="browser user agent; apolloState Review: nodes (third attempt)"),
+ dict(title="Guy Gavriel Kay - Goodreads Fantasy Book Club topic 111082 (2009)",
+      url="https://www.goodreads.com/topic/show/111082-guy-gavriel-kay", kind="reader", substantive=True, date="2009", route="browser user agent"),
+ dict(title="Book Club Discussion: Tigana By Guy Gavriel Kay - The Quill to Live (a second book club, with its scores)",
+      url="https://thequilltolive.com/2016/03/17/book-club-discussion-tigana-by-guy-gabriel-kay/", kind="reader", substantive=True, date="2016-03-17", route="browser user agent"),
+ dict(title="Question regarding Guy Gavriel Kay's books - SFFWorld forum thread",
+      url="https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/", kind="reader", substantive=True, date="2011-12-06", route="browser user agent"),
+ dict(title="Andrew Liptak, 'Watch J.R.R. Tolkien Lecture ... Just Enough Light' (Tor.com, now reactormag) - carries a transcribed passage of Kay's lecture",
+      url="https://reactormag.com/jrr-tolkien-guy-gavriel-kay-lecture-just-enough-light-some-thoughts-on-fantasy-and-literature-watch/", kind="own-words", substantive=True, date="2021-05-13", route="browser user agent"),
+ dict(title="Michal, 'Flippant Reviews: Guy Gavriel Kay' - a reader-blogger's book-by-book run through Kay",
+      url="https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/", kind="reader", substantive=True, date="2011-12-12", route="browser user agent"),
+ dict(title="Alister, 'Tigana by Guy Gavriel Kay' - Fantasy-Faction review",
+      url="https://fantasy-faction.com/2013/tigana-by-guy-gavriel-kay", kind="reader", substantive=True, date="2013", route="browser user agent"),
  dict(title="Brok3n Engines, 'Tigana, by Guy Gavriel Kay - GGK in transition' (Substack review)",
       url="https://b3en.substack.com/p/ggk-in-transition", kind="reader", substantive=True, date="2025-04-16", route="browser user agent"),
  dict(title="r/Fantasy, 'Tigana - A Review' (u/aroseandawritingdesk) with comment thread",

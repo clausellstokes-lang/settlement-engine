@@ -3,14 +3,14 @@
  "name": "kay",
  "angle": "transcripts-and-readers",
  "tag": null,
- "lines": 338,
+ "lines": 448,
  "firstTs": "2026-09-06T22:40:03.727Z",
- "lastTs": "2026-09-06T23:07:12.274Z",
+ "lastTs": "2026-09-06T23:15:29.188Z",
  "tools": {
   "Read": 1,
-  "Bash": 83,
+  "Bash": 110,
   "ToolSearch": 1,
-  "WebSearch": 8,
+  "WebSearch": 13,
   "mcp__Claude_Browser__navigate": 1
  },
  "urlsFetched": [
@@ -94,7 +94,24 @@
   "https://www.reddit.com/r/Fantasy/comments/tizob2/tigana_reviewrant/",
   "https://www.reddit.com/r/Fantasy/comments/1bep250/is_tigana_a_good_representation_of_guy_gavriel_kay/",
   "https://www.reddit.com/r/Fantasy/comments/15kr5yn/just_finished_tigana_im_disappointed/",
-  "https://www.reddit.com/r/Fantasy/comments/15i9i3y/tigana_by_guy_gavriel_kay_a_brief_review_spoiler/"
+  "https://www.reddit.com/r/Fantasy/comments/15i9i3y/tigana_by_guy_gavriel_kay_a_brief_review_spoiler/",
+  "https://podcasts.ox.ac.uk/series/fantasy-literature",
+  "https://tolkienlecture.org/?s=podcast",
+  "https://www.goodreads.com/",
+  "https://www.goodreads.com/book/show/7139892-under-heaven",
+  "https://www.goodreads.com/book/show/25938417-children-of-earth-and-sky",
+  "https://web.archive.org/web/2025id_/https://www.reddit.com/r/${S}/",
+  "https://web.archive.org/web/${Y}id_/https://www.reddit.com/r/${S}/",
+  "https://get-info.downsub.com/",
+  "https://www.librarything.com/work/2306/reviews",
+  "https://downsub.com",
+  "https://downsub.com/",
+  "https://reactormag.com/jrr-tolkien-guy-gavriel-kay-lecture-just-enough-light-some-thoughts-on-fantasy-and-literature-watch/",
+  "https://thequilltolive.com/2016/03/17/book-club-discussion-tigana-by-guy-gabriel-kay/",
+  "https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/",
+  "https://www.goodreads.com/topic/show/111082-guy-gavriel-kay",
+  "https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/",
+  "https://fantasy-faction.com/2013/tigana-by-guy-gavriel-kay"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method, then work the roster.",
@@ -104,8 +121,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-kay-transcripts-and-readers.json",
-  "claims": 40,
+  "claims": 77,
   "complete": false,
-  "mtime": "19:07:12"
+  "mtime": "19:15:24"
  }
 }
