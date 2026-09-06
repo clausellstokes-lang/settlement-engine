@@ -10965,9 +10965,11 @@
   },
   "6": {
    "index": 6,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "fourth wall (67% vs. 39%); reader directly (28% vs. 7%); specific texts (47% vs. 24%)",
-   "note": "All three pairs appear exactly in §4.1 ('Human authors engage the outside world'), and 'Humans use more time jumps, flashbacks and flash-forwards, and nonlinear structure' covers chronological discontinuity. Note the three cited percentages are intertextuality/fourth-wall features, not temporal ones, despite the claim's 'temporal complexity' label."
+   "note": "All three pairs appear exactly in §4.1 ('Human authors engage the outside world'), and 'Humans use more time jumps, flashbacks and flash-forwards, and nonlinear structure' covers chronological discontinuity. Note the three cited percentages are intertextuality/fourth-wall features, not temporal ones, despite the claim's 'temporal complexity' label.",
+   "unsupportedLimb": "the 'temporal complexity' framing — the verifier records that the three cited percentages are intertextuality/fourth-wall features, not temporal ones",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "7": {
    "index": 7,
@@ -11429,10 +11431,11 @@
   },
   "77": {
    "index": 77,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "702 (61%) state a preference for human-written dialogue",
    "note": "The ACL landing page holds only the abstract; verified in the authoritative PDF (aclanthology.org/2023.findings-emnlp.151.pdf), where the quote appears word for word. Every figure checks out: 'H: 64% vs G: 23%; rest ties', 'H: 66% vs G: 23%', logical consistency 'H: 61% vs G: 28%', flow 'H: 67% vs G: 21%'. Note the claim's 28 players and Disco Elysium framing also match.",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the ACL landing page holds only the abstract; the quote is in the authoritative PDF (aclanthology.org/2023.findings-emnlp.151.pdf)",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "78": {
    "index": 78,
@@ -11444,24 +11447,27 @@
   },
   "79": {
    "index": 79,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "on the nose, pun names",
    "note": "arxiv.org/abs page shows only the abstract; verified in the full paper via ar5iv render of the same arXiv ID 2209.14958. Section 5.3.1 is titled 'The system outputs are too literal and predictable' and contains 'relationships so tight and prescriptive', 'a noble endeavour, it will be stated in the dialogue', and 'silly' and 'on the nose, pun names'. Participants = 15 theatre and film industry professionals.",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the /abs/ page shows only the abstract; the quote is in the ar5iv full text of arXiv 2209.14958, §5.3.1",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "80": {
    "index": 80,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Show, not tell: here we are just telling",
    "note": "Verbatim in section 5.5.3 ('Lack of nuance and subtext') of the full paper via ar5iv. Supporting: 'A lot of information, a bit too verbalised, there should be more subtext' (p6); stageability from 5.5.2 'The system doesn't have an awareness of what is stageable and not stageable'; motivation from 5.5.4.",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the ar5iv full text of arXiv 2209.14958, §5.5.3, not on the cited /abs/ page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "81": {
    "index": 81,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Where is the emotional motivation",
    "note": "Verbatim in section 5.5.4 ('Lack of a motivation for the characters'), preceded by 'The stories do not finish. The character journeys are not complete.' Logic gaps: 'participants noticed logical gaps in storytelling, lack of common sense, nuance and subtext'. Generation loops are section 5.4. Reached via ar5iv full text; abs page has abstract only.",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the ar5iv full text of arXiv 2209.14958, §5.5.4; the abs page has the abstract only",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "82": {
    "index": 82,
@@ -11547,10 +11553,11 @@
   },
   "93": {
    "index": 93,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "it will fail to have the emotion linked to it",
-   "note": "Quote is word for word (source lowercases 'it' mid-sentence): 'AI can often get cause and effect, but it will repeat the same cause and effect over and over again OR it will fail to have the emotion linked to it.' Shallow POV element is supported by 'it tends to avoid deep point of view'; the sensory-detail element is supported only indirectly, via the worked deep-POV rewrite ('broken asphalt', 'flat wall') rather than a stated rule.",
-   "fromFile": "verdicts-ai-chunk-01.json"
+   "note": "Completeness critic: the sensory-detail limb is supported only indirectly — PARTIAL.",
+   "unsupportedLimb": "the concrete-sensory-detail limb, supported only indirectly (via a worked deep-POV rewrite) rather than by a stated rule",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "94": {
    "index": 94,
@@ -11599,17 +11606,19 @@
   },
   "100": {
    "index": 100,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "A novice author wouldn't repeatedly go for these sentence patterns",
-   "note": "NOT verbatim. The page's nearest wording is 'A new writer usually doesn't repeat the same sentence shapes again and again, or lean on the same kind of clunky repetition' — and that line sits inside an italicised block Makin presents as MODEL OUTPUT imitating the tell, not as his own assertion. His own-voice equivalent is the trueWording given, from the parody passage above it. Substance holds either way; the supplied quote does not.",
-   "fromFile": "verdicts-ai-chunk-01.json"
+   "note": "Completeness critic: the trueWordings come from Makin's PARODY passage written in the AI voice to demonstrate the tells, not from Makin's own analysis — PARTIAL on the attribution limb.",
+   "unsupportedLimb": "the attribution limb — the wording is from Makin's parody passage written in the AI voice, not his own analysis",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "101": {
    "index": 101,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "Alternating loquacious ponderous similes and tiny sentences made out of cliches",
-   "note": "NOT verbatim. Page reads 'The writing kept swinging between two modes: long, heavy comparisons, then short lines that sounded like stock phrases' (again inside the model-output demo block); Makin's own-voice line is the trueWording given. The cliche-well half IS nearly verbatim and is his own voice: 'Once your story has reached a local minimum of samey cliches, it won't stop going to the same well,' against 'even bad ones will \"give it a rest\" when they notice.'",
-   "fromFile": "verdicts-ai-chunk-01.json"
+   "note": "Completeness critic: the trueWordings come from Makin's PARODY passage written in the AI voice to demonstrate the tells, not from Makin's own analysis — PARTIAL on the attribution limb.",
+   "unsupportedLimb": "the attribution limb — the wording is from Makin's parody passage written in the AI voice, not his own analysis",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "102": {
    "index": 102,
@@ -11725,10 +11734,11 @@
   },
   "117": {
    "index": 117,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "AI over-explains its themes",
    "note": "Verbatim, but in the paper's full text (sec 4.1 heading, arxiv.org/html/2604.03136v6), not on the cited /abs/ landing page, whose abstract instead reads 'AI stories over-explain themes'. All statistics confirmed: 'Narrators explicitly explain the story's theme 77% of the time, versus 52% for humans', 'with tighter thematic unity and more central moral questions'; Table 16 gives Narratorial Thematic Commentary 52% human / 77% AI.",
-   "fromFile": "verdicts-ai-i105-119.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is the §4.1 heading of arxiv.org/html/2604.03136v6, not on the cited /abs/ page, whose abstract reads 'AI stories over-explain themes'",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "118": {
    "index": 118,
@@ -11834,10 +11844,11 @@
   },
   "132": {
    "index": 132,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "AI writes as though no one is watching.",
    "note": "Also in the full text rather than the abstract. Both figures confirmed: 'Humans break the fourth wall far more often (67% vs. 39%)' and 'address the reader directly more frequently (28% vs. 7%)'.",
-   "fromFile": "verdicts-ai-i120-134.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the full text of arXiv 2604.03136 rather than the abstract at the cited /abs/ page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "133": {
    "index": 133,
@@ -11891,17 +11902,19 @@
   },
   "140": {
    "index": 140,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "AI does this on a sentence level often with those em-dashes, declarative sentences.",
-   "note": "Quote appears word for word as the opening of that sentence, BUT in the emotional-resonance/deep-POV section, not the em-dash-overuse section - it is not the source's support for the claim. The claim itself is separately confirmed verbatim elsewhere: 'There's one in every paragraph.' and 'That's not a break in thought. It's a continuation of thought. That's an AI tell.'",
-   "fromFile": "verdicts-ai-i135-149.json"
+   "note": "Completeness critic: the quote sits in the deep-POV section and is not the source's support for the claim — PARTIAL (a quote splice, the rule applied to [102]).",
+   "unsupportedLimb": "the quote's anchoring — it sits in the deep-POV section and is not the source's support for the em-dash claim",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "141": {
    "index": 141,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "Pacing flatness: scenes unfold at a constant rate.",
-   "note": "No quote was supplied, so verbatim is not assessable; both halves are on the page. POV half: 'POV lock: LLMs \"pick a lane and stay in it with unnatural consistency\" - no drift between free indirect style, interior monologue, and exterior scene', which Vollmer attributes to Charlie Guo rather than observing himself. Pacing line continues 'No elision, no selective summary.'",
-   "fromFile": "verdicts-ai-i135-149.json"
+   "note": "Completeness critic: the POV limb is attributed by Vollmer to Charlie Guo, not observed by him — PARTIAL (the rule applied to [94] and [95]).",
+   "unsupportedLimb": "the POV-lock limb, which Vollmer attributes to Charlie Guo rather than observing himself",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "142": {
    "index": 142,
@@ -12139,10 +12152,11 @@
   },
   "174": {
    "index": 174,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "is a testament/reminder",
    "note": "'is a testament' appears contiguously inside the Words-to-watch list of the section 'Undue emphasis on significance, legacy, and broader trends'. 'stands as' appears verbatim in the copulatives list; 'stands/serves as' and 'a crucial/pivotal/vital/significant/key role/moment' are slash-variants, so 'pivotal moment' is not contiguous on the page.",
-   "fromFile": "verdicts-ai-i165-179.json"
+   "unsupportedLimb": "the 'pivotal moment' phrase, which the verifier records is not contiguous on the page (only slash-variants appear)",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "175": {
    "index": 175,
@@ -12238,17 +12252,19 @@
   },
   "188": {
    "index": 188,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "high school essay vibes",
-   "note": "Exact substring, and correctly framed as Vollmer's guide quoting AI for Lifelong Learners. All three claim parts are on the page: #9 'Uniform sentence length (low burstiness)'; #13 'LLMs default to intro + three body sections + recap even for 100-word answers'; #19 'Aphoristic closure — Paragraphs end on a pseudo-profound kicker designed to feel like a pull-quote.'",
-   "fromFile": "verdicts-ai-i180-194.json"
+   "note": "Completeness critic: 'high school essay vibes' is Vollmer quoting a third party (AI for Lifelong Learners) — PARTIAL on attribution.",
+   "unsupportedLimb": "the attribution limb — 'high school essay vibes' is Vollmer quoting AI for Lifelong Learners, not his own coinage",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "189": {
    "index": 189,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "Dialogue flattening: characters sound alike; no distinct idiolect.",
    "note": "No quote was supplied, so verbatim is not assessable. All three parts verified in section 'B. In Fiction': 'characters sound alike; no distinct idiolect. No one has verbal tics, dialect, or pattern of evasion'; '“As-you-know-Bob” exposition: the model's default is to resolve mysteries with explanatory speech rather than action'; 'Resolution bias: endings tie up. The model does not trust the reader with ambiguity unless explicitly told to.' ATTRIBUTION CAVEAT: Neil Clarke is quoted on the page only for 'they are boring. They are flat' / 'bad in ways that no human has been bad before'; the three bullets are the guide's own, listed after Clarke under 'Beyond that:', not Clarke's words.",
-   "fromFile": "verdicts-ai-i180-194.json"
+   "unsupportedLimb": "the attribution to Neil Clarke — the verifier records the three bullets as the guide's own, not Clarke's words",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "190": {
    "index": 190,
@@ -12297,10 +12313,11 @@
   },
   "196": {
    "index": 196,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Whitney, with startling gentleness for someone who'd been arguing about tea infusion times ninety seconds earlier",
-   "note": "Appears twice: in the AI-generated sample fic posted by Flyg0n, and re-quoted in a 'Flyg0n said:' blockquote whose reader commentary makes the whiplash point -- 'She was getting so heated over boiling or steeping tea... that I thought she was an inherently terrifying and cruel person.' Attribution to Flyg0n is correct.",
-   "fromFile": "verdicts-ai-i195-209.json"
+   "note": "Completeness critic: fix the attribution per the critic — the quoted line is not the commenter's own observation.",
+   "unsupportedLimb": "the attribution limb — the quoted line comes from the AI-generated sample fic, not the commenter's own observation",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "197": {
    "index": 197,
@@ -12456,10 +12473,11 @@
   },
   "218": {
    "index": 218,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "an AI prompt asking for a rewrite in another author's voice",
    "note": "No quote was supplied with the claim, so no verbatim test is possible; the substance checks out. Book Riot (Jun 30, 2025): 'an AI prompt asking for a rewrite in another author's voice was accidentally left in the published version of Darkhollow Academy: Year 2, a reverse harem romance by Lena McDonald', sourced to Reddit users and Futurism. Disclosure half verbatim: 'While there is a requirement to disclose AI usage to Kindle, that disclosure is not made to users.' TWO GAPS: the page never states the book's own publication date (June 2025 is the ARTICLE's date), and it never says this specific title is in Kindle Unlimited -- KU is the article's frame.",
-   "fromFile": "verdicts-ai-i210-224.json"
+   "unsupportedLimb": "the book's June 2025 publication date and its Kindle Unlimited membership, which the verifier records the page never states",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "219": {
    "index": 219,
@@ -12485,10 +12503,11 @@
   },
   "222": {
    "index": 222,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Later editors put the dashes back -- because they weren't accidents",
    "note": "Focus Lab, Nadine Kavanaugh, February 9, 2026, 'The Em Dash Is Not an AI Tell'. Quote verbatim. Dickinson history verbatim: 'She littered her poems with bold dashes. Her original publishers hated them; they scrubbed her poems clean... Later editors put the dashes back -- because they weren't accidents. They were architecture.' Tool-versus-intent half is the Dickinson coda: her editors 'mistook unfamiliar form for flawed thinking... the dash wasn't excess. It was intention.' Page calls Dickinson 'the patron saint of the em dash' rather than saying it was her signature mark.",
-   "fromFile": "verdicts-ai-i210-224.json"
+   "unsupportedLimb": "the 'signature mark' limb — the page calls Dickinson 'the patron saint of the em dash' rather than saying it was her signature mark",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "223": {
    "index": 223,
@@ -12551,10 +12570,11 @@
   },
   "231": {
    "index": 231,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a reflection of effective communication strategies embedded within their training data",
-   "note": "Quote exact, on the GPTZero blog (the detector vendor's own site). The second half is the next sentence: 'Professional writing probably employs this \"rule of three\" for clarity'. Framing check: the page attributes the quoted phrase to 'AI writing tools', so the concession is reported by the vendor rather than authored as its own analysis.",
-   "fromFile": "verdicts-ai-i225-239.json"
+   "note": "Completeness critic: GPTZero's page attributes the quoted concession to 'AI writing tools' — an LLM self-description reported by the vendor, not the vendor's finding — PARTIAL.",
+   "unsupportedLimb": "the attribution limb — the page attributes the quoted concession to 'AI writing tools', so it is an LLM self-description relayed by the vendor, not the vendor's own finding",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "232": {
    "index": 232,
@@ -12572,10 +12592,11 @@
   },
   "234": {
    "index": 234,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Human speech and writing is being influenced by LLMs",
    "note": "Quote exact. Both halves of the claim are on the page in near-identical wording: 'While they perform better than random chance, these tools have non-trivial error rates'; and 'a 2025 study has shown that human ability to distinguish LLM text from human is no better than random chance.' Note the quote chosen sits on the convergence point rather than on either half of the claim it is attached to.",
-   "fromFile": "verdicts-ai-i225-239.json"
+   "unsupportedLimb": "the quote's anchoring — the verifier records it sits on the convergence point rather than on either half of the claim it is attached to",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "235": {
    "index": 235,
@@ -12595,10 +12616,11 @@
   },
   "237": {
    "index": 237,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "average false positive rate: 61.22%",
    "note": "Quote exact, and every figure checks: 'a corpus of 91 human-authored TOEFL essays ... and 88 US 8-th grade essays'; 'near-perfect accuracy for US 8-th grade essays'; '(average false positive rate: 61.22%)'; 'All seven detectors unanimously identified 18 of the 91 TOEFL essays (19.78%)'; '89 of the 91 TOEFL essays (97.80%) are flagged ... by at least one detector'; and the perplexity mechanism, 'significantly lower perplexity'. URL precision: the cited /abs/2304.02819 page carries only the abstract - the quote lives in the full text at arxiv.org/html/2304.02819v3, reached from that page's HTML link.",
-   "fromFile": "verdicts-ai-i225-239.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited /abs/2304.02819 page carries only the abstract; the quote lives in the full text at arxiv.org/html/2304.02819v3",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "238": {
    "index": 238,
@@ -12785,10 +12807,11 @@
   },
   "263": {
    "index": 263,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "might invent details when faced with an obscure-topic prompt",
    "note": "Wikitext fetched raw. Near-verbatim, one inflection off: the page reads 'It might even invent details when faced with a prompt on an obscure topic or a nonsensical request' - 'invent', not the claim's 'invented' - so this is SUBSTANCE, not VERBATIM. 'Rather than saying less' is not stated but follows directly from inventing. STANDING CAVEAT for this source: the page carries {{Humorous essay|WP:NOAI}} at the top and its supporting refs are deliberate jokes (e.g. 'Chatty Al, On the Ontology of Ontologies: Why Everything is Probably a Sandwich'); it is a Wikipedia essay, not a guideline, and its examples are hypothetical or invented on purpose.",
-   "fromFile": "verdicts-ai-i254-268.json"
+   "unsupportedLimb": "the 'rather than saying less' limb, which the verifier records is not stated on the page and is only inferred from inventing",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "264": {
    "index": 264,
@@ -12800,10 +12823,11 @@
   },
   "265": {
    "index": 265,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "drafts often read like advertorials or partisan spins",
    "note": "Wikitext fetched raw. Quote verbatim: 'editors noted how these drafts often read like advertorials or partisan spins - text that superficially met Wikipedia's guidelines in form, but not in spirit.' The promotional-language limb is stated as a feared hypothetical ('One hypothetical scenario we fear is an LLM churning out dozens of boosters for a company or ideology, each mixing facts with subtle promotional language') but also follows directly from 'advertorials'. Same humorous-essay caveat as index 263; note also the surrounding factual scaffolding is real (Princeton/WaPo, New Scientist refs).",
-   "fromFile": "verdicts-ai-i254-268.json"
+   "unsupportedLimb": "the promotional-language-mixed-into-facts limb, which the page states only as a feared hypothetical rather than an observation",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "266": {
    "index": 266,
@@ -13034,17 +13058,19 @@
   },
   "296": {
    "index": 296,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "LLMs overuse the rule of three",
    "note": "No quotation supplied; graded on substance. The 'Rule of three' section (WP:RO3) states: 'LLMs overuse the rule of three. This can take different forms, from \"adjective, adjective, adjective\" to \"short phrase, short phrase, and short phrase\". LLMs often use this structure to make superficial analyses appear more comprehensive.' The claim's 'for rhythm rather than because the record has three' is a fair gloss of overuse plus 'stylistic flourishes' ('This sign is stronger when it appears in contexts where most people would not bother to include such stylistic flourishes, like edit summaries'), but the page never phrases the contrast in terms of what the record contains.",
-   "fromFile": "verdicts-ai-i284-298.json"
+   "unsupportedLimb": "the 'rather than because the record has three' contrast, which the verifier records the page never phrases",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "297": {
    "index": 297,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "uses them more often than nonprofessional human-written text of the same genre",
    "note": "No quotation supplied; graded on substance. Section 'Overuse of em dashes' (WP:AIDASH): 'LLM output uses them more often than nonprofessional human-written text of the same genre, and uses them in places where humans are more likely to use commas, parentheses, colons, or (misused) hyphens and en dashes' - which supports both the rate limb and the clause-separation limb. Two qualifications the page carries and the claim does not: the baseline is NONPROFESSIONAL human writing of the same genre, and a maintenance box dated September 2026 says the sign 'seems to be less common in current LLM output' and should probably move to Historical indicators, citing a July 2026 Economist piece that 'of contemporary models only Claude used em dashes more than professional writers, and ChatGPT used them less.' The page also notes it is 'most useful... in combination with other indicators, not by itself' and is 'much more common on discussion pages than in article text'.",
-   "fromFile": "verdicts-ai-i284-298.json"
+   "unsupportedLimb": "the unqualified 'abnormally high rate' — the page's baseline is nonprofessional human writing, and its own maintenance box says the sign seems less common in current LLM output",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "298": {
    "index": 298,
@@ -13385,10 +13411,11 @@
   },
   "345": {
    "index": 345,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "no helpful summary when a monster had only numeric game stats",
    "note": "No quote was supplied, so substance-graded. Page: 'Another common case where Calypso did not present a helpful summary was when a monster did not have a published prose description, only numeric game stats. Most commonly, such creatures were an animal found in real life (e.g. a brown bear; P3) or relied entirely on a DM's thematic commonsense to run (e.g. a snow golem; P3).' The remedy limb is explicit: 'we had to prompt it with explicit instructions to do so ... we remodeled the summarization task to a more abstract \"understanding\" task, in which we provided the model explicit instructions to use thematic commonsense.' One softening: the paper says the model used 'minimal external knowledge', not literally nothing to draw on.",
-   "fromFile": "verdicts-ai-i344-358.json"
+   "unsupportedLimb": "the 'had nothing to draw on' limb, which overstates the paper's 'minimal external knowledge'",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "346": {
    "index": 346,
@@ -13448,17 +13475,19 @@
   },
   "354": {
    "index": 354,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "effective at open-domain story generation ... struggle with long-term story coherence",
    "note": "arxiv 2406.00554 fetched raw. Page: 'LLMs, on the other hand, are effective at open-domain story generation. However, they tend to struggle with long-term story coherence, often failing to produce a satisfying overall story arc or reader experience Kreminski and Martens (2022).' Provenance caveat for citation use: this is the paper's related-work framing attributed to Kreminski and Martens 2022, not a new result measured in this paper.",
-   "fromFile": "verdicts-ai-i344-358.json"
+   "unsupportedLimb": "the attribution limb — the sentence is the paper's related-work framing attributed to Kreminski and Martens (2022), not a result of the cited paper",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "355": {
    "index": 355,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "unoriginality or homogeneity in both the semantic and syntactic aspects of generated stories",
    "note": "Same sentence block: 'comparing LLM-generated to human-written stories reveals many aesthetic weaknesses ... in particular a tendency toward unoriginality or homogeneity in both the semantic and syntactic aspects of generated stories Anderson et al. (2024); Begus (2023).' The claim's gloss of semantic/syntactic as 'what happens / how sentences are built' is a fair rendering. Same provenance caveat: the page attributes this to Anderson et al. 2024 and Begus 2023.",
-   "fromFile": "verdicts-ai-i344-358.json"
+   "unsupportedLimb": "the attribution limb — the page attributes the finding to Anderson et al. (2024) and Begus (2023), not to the cited paper",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "356": {
    "index": 356,
@@ -13499,10 +13528,11 @@
   },
   "361": {
    "index": 361,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "Human arousal higher; gap enlarges midpoint to end; +40% over vanilla",
    "note": "Claim carried no quote, so graded on substance. Figure 3 caption: 'Human stories consistently exhibit higher levels of suspense (greater arousal). The gap enlarges from the midpoint to the end.' Intro: 'incorporating turning point information significantly improves narrative suspense and engagement (outperforming vanilla by 40%)'; abstract says 'over 40% improvement'. Note the 40% is a human comparative win-rate (Table 4: suspense-best 7.9% Outline-Only vs 48.3% +Self TP), not a rating scale.",
-   "fromFile": "verdicts-ai-i359-373.json"
+   "unsupportedLimb": "the 'raised suspense ratings ~40%' limb — the verifier records the 40% as a human comparative win-rate, not a rating scale",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "362": {
    "index": 362,
@@ -13661,10 +13691,11 @@
   },
   "384": {
    "index": 384,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "Quality varies unpredictably; cited studies found overly positive endings, uneven sessions",
    "note": "No quote was supplied and none is needed: every limb is on the raw page, but split across two sentences of Sec. I with different attributions. The paper's own sentence: 'Even with well-crafted prompts, the quality of the generated content can vary unpredictably, leading to results that are unconvincing, repetitive, or misaligned with the desired tone or character development.' The endings and across-sessions limbs come from the preceding sentence, where the paper is REPORTING other work: 'with some studies identifying trends toward overly positive or uninspired endings [13], or uneven output quality across sessions [14]' (refs 13/14 = Taveekitworachai et al. 2023). So the claim is supported by the source but fuses the authors' own assertion with findings they attribute to cited studies; graded SUBSTANCE rather than VERBATIM for that reason.",
-   "fromFile": "verdicts-ai-i374-388.json"
+   "unsupportedLimb": "the overly-positive-endings and across-sessions limbs, which the paper reports as findings of cited studies (Taveekitworachai et al. 2023) rather than its own",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "385": {
    "index": 385,
@@ -13696,10 +13727,11 @@
   },
   "389": {
    "index": 389,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "basic math screwed up; no complication inflicted after the success",
    "note": "Raw page fetched live (200, browser UA), dated December 28th, 2025. Both named violations are on the page in the Lasers & Feelings playtest: at character creation ChatGPT \"almost immediately screws up basic math\" (\"Number: 3 (balanced but slightly leaning Lasers)\" - 3 leans Feelings), it mis-states the target number (\"Under 3 counts as a success\" - \"This is incorrect. A 3 would also count as a success\"), and after the first successful roll \"The GM did not inflict a complication, harm, or cost.\" Claim carries no quote field, so substance grade. Precision point: the article's own \"two mechanics\" of this one-page game are the action roll and Helping; both errors the claim names are action-roll rules (Helping is never shown violated), so \"two core mechanics\" reads correctly only as the two rules the parenthetical enumerates.",
-   "fromFile": "verdicts-ai-i389-403.json"
+   "unsupportedLimb": "the 'two core mechanics' limb — the article's two mechanics are the action roll and Helping, and both cited violations are action-roll rules (Helping is never shown violated)",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "390": {
    "index": 390,
@@ -13802,10 +13834,11 @@
   },
   "404": {
    "index": 404,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "without actually knowing what's in the Fiend Folio",
    "note": "Raw page (curl, HTTP 200) post #67 by Hemlock: 'They all exist in the 5E MMs though. A good illustration of the limits of GPT: apparently it's aware that these monsters tend to be discussed adjacent to the Fiend Folio, without actually knowing what's in the Fiend Folio.' The first limb is carried by Beoric's quoted post on the same page: 'It is worth mentioning that as far as I can tell some of those monsters do not appear in any version of the FF that I am aware of.' The generated room listed Hezrous, Gibbering mouthers, Grell, Vargouilles and Dretch as Fiend Folio monsters. Both source statements are hedged ('as far as I can tell', 'apparently'); the claim states them flatly.",
-   "fromFile": "verdicts-ai-i404-418.json"
+   "unsupportedLimb": "the flat assertion — both source statements are hedged ('as far as I can tell', 'apparently') while the claim states them flatly",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "405": {
    "index": 405,
@@ -13816,10 +13849,11 @@
   },
   "406": {
    "index": 406,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "motivated by greed and loyalty to their goblin boss",
    "note": "No quote supplied, so graded on substance. Raw page 1 of the thread carries Beoric's transcript. The phrase 'They are motivated by greed and loyalty to their goblin boss' recurs verbatim across at least six entries (lighthouse basement, dungeon entrance, guard room, armory, kitchen, treasure room) — the claim's parenthetical drops the word 'goblin'. Every creature entry follows one identical block ('They are not initially hostile, but will attack if provoked ... They are motivated by ... They want ... They have a fear of ... They are currently ...'). 'Guard room' entry 3 recurs on dungeon level 1 and again on level 2 in near-identical wording. Two caveats a reader should see: that block format was dictated by Beoric's own prompt, and the village NPC list earlier in the transcript uses a different (also prompt-dictated) template, so 'every NPC in the same template' holds within a key, not across the whole transcript.",
-   "fromFile": "verdicts-ai-i404-418.json"
+   "unsupportedLimb": "the 'every NPC in the same template' limb, which the verifier records holds within a key rather than across the whole transcript (and the block format was dictated by the prompter)",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "407": {
    "index": 407,
@@ -13860,10 +13894,11 @@
   },
   "412": {
    "index": 412,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "takes more training data to tune it to remember deeper associations",
    "note": "Raw page: 'But it takes more training data to tune it to remember deeper associations and themes — like “salt is associated with archiving” or “venom is associated with drugs and bright colours.”' The contrast with surface form is the preceding sentence: 'I could fairly easily train a GPT model to create outputs that structurally resembled the card-description pattern I had'. Only overstatement is the intensifier 'far more'; the page says 'more'.",
-   "fromFile": "verdicts-ai-i404-418.json"
+   "unsupportedLimb": "the 'far more' intensifier, which the verifier records as an overstatement of the page's 'more'",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "413": {
    "index": 413,
@@ -14001,10 +14036,11 @@
   },
   "432": {
    "index": 432,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "we ultimately utilized bench resource from seven different game development studios ... the tooling was unable to replace talent",
    "note": "Live Game Developer page (Chris Kerr, March 13 2024), raw HTML. Bodson quote carries 'over 400 tools' and 'bench resource from seven different game development studios as part of the project, as the tooling was unable to replace talent.' Not-released limb: 'Bodson said the GenAI title won't be made public, so we'll never know the full extent of its successes and shortcomings.' The page attributes it to 'the company's latest fiscal report' rather than naming FY2023; the March 2024 dateline makes that the FY2023 report, but the label itself is inferred, not printed.",
-   "fromFile": "verdicts-ai-i419-433.json"
+   "unsupportedLimb": "the 'FY2023 report' label, which the verifier records is inferred from the March 2024 dateline rather than printed on the page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "433": {
    "index": 433,
@@ -14333,10 +14369,11 @@
   },
   "479": {
    "index": 479,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "“a weird and violent kind of homogenizing that steer toward the narratives of dominant powers, voices, and stories”",
    "note": "Quote verbatim in Sec. 6.5 weakness table (theme ‘Reliance on Cliches and Tropes’). The ‘dominant powers, voices’ framing is participant FV’s alone; the plural ‘writers’ holds for the homogenising/generic pull, which NM (‘cliched conception of literature’, ‘generic… essay-like texts’), SH (‘one narrative that it knows how to write’) and MC (‘autocompletes with the most obvious version’) also report. Cite FV by name for the dominant-powers wording.",
-   "fromFile": "verdicts-ai-i479-493.json"
+   "unsupportedLimb": "the plural 'writers' for the dominant-powers framing, which the verifier records is participant FV's alone",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "480": {
    "index": 480,
@@ -14404,10 +14441,11 @@
   },
   "489": {
    "index": 489,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "“Indian participants modified suggestions in 63.5% of the tasks (SD=4.2) whereas American participants modified suggestions in 59.4%”",
    "note": "Both statistics exact (t(198)=6.48, p<0.001, Cohen’s d=0.91), and the second limb is confirmed in Sec. 4.1.3: ‘Indians derived significantly less productivity per suggestion compared to Americans’ (U=5424.0, p<0.001), ‘Americans derived more productivity from each suggestion’. The supplied quote ‘Indians lose cultural nuance’ is verbatim on the page but comes from the introduction’s cultural-gaze sentence, not from the passage carrying these numbers — re-quote from Sec. 4.1.2/4.1.3 if the quotation must sit with the figures.",
-   "fromFile": "verdicts-ai-i479-493.json"
+   "unsupportedLimb": "the quote's anchoring — 'Indians lose cultural nuance' comes from the introduction's cultural-gaze sentence, not from the passage carrying the 63.5%/59.4% figures",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "490": {
    "index": 490,
@@ -14467,10 +14505,11 @@
   },
   "498": {
    "index": 498,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Median limerick 25 lines; models bundle multiple poems together.",
    "note": "Sec 4.1: 'the median length for both GPT models is 25 lines... both models frequently bundle multiple, appropriately-lengthed limericks together. This is also the case for GPT-3.5's atypically long sonnets'. Two softenings: the sonnet bundling is stated for GPT-3.5 only, and the causal reading is hedged ('we think this tendency more likely suggests').",
-   "fromFile": "verdicts-ai-i494-508.json"
+   "unsupportedLimb": "the sonnet-bundling limb (stated for GPT-3.5 only) and the causal 'because the model does not stop', which the paper hedges as 'we think this tendency more likely suggests'",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "499": {
    "index": 499,
@@ -14510,38 +14549,43 @@
   },
   "504": {
    "index": 504,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "GPT-2 XL: common_sense on recipes, irrelevant on stories, generic on news.",
    "note": "Figure 6 caption (arXiv PDF, p.5): 'GPT-2 XL tends to make more \"common_sense\" errors on recipes, more \"irrelevant\" errors on stories, and more \"generic\" errors on news. This is consistent with our intuition about what makes each of these domains challenging.' The 'flags' are reader-selected reasons; the model is GPT-2 XL at p=0.4.",
-   "fromFile": "verdicts-ai-i494-508.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is the Figure 6 caption of the arXiv PDF (p.5), not on the cited /abs/2212.12672 page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "505": {
    "index": 505,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Bad grammar least reliable; common_sense/irrelevant/contradicts_sentence most reliable.",
    "note": "Sec 4: 'we see that conditioning on bad grammar is by far the least reliable way to detect generated text with a mean score of 1.78... the three most common reasons given (\"common_sense,\" \"irrelevant,\" and \"contradicts_sentence\") were also the three most reliable.' Table 2 ranks grammar last (1.780).",
-   "fromFile": "verdicts-ai-i494-508.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §4 of the full text of arXiv 2212.12672, not on the cited /abs/ page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "506": {
    "index": 506,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Players selected the boundary sentence 23.4% of time, chance 10%.",
    "note": "Sec 4: 'players were significantly better than random chance at the boundary detection task, correctly selecting the boundary sentence 23.4% of the time (chance being 10%).' The paper frames 23.4% as above chance rather than as 'only'.",
-   "fromFile": "verdicts-ai-i494-508.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §4 of the full text of arXiv 2212.12672, not on the cited /abs/ page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "507": {
    "index": 507,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Players significantly better at p=1.0; LMs struggle with diverse high-quality text.",
    "note": "Sec 5: 'players were significantly better at p=1.0 (pure random sampling) than the lower values, validating claims from earlier papers that LMs struggle to generate high-quality text with similar diversity to human-written text.' Comparison run on News and Stories with GPT-2 XL; the paper credits earlier papers for the diversity claim.",
-   "fromFile": "verdicts-ai-i494-508.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §5 of the full text of arXiv 2212.12672, not on the cited /abs/ page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "508": {
    "index": 508,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Incentivised group improved; reading the help guide predicted skill best.",
    "note": "Sec 4: 'detection is a skill and that annotators can be trained to do well on the detection task'; Figure 3: Group B, 'given extra instruction and incentives, improved over time' while Group A did not; Sec 4/Appendix: 'the most impactful feature for predicting annotator skill was whether or not they read our provided help guide.'",
-   "fromFile": "verdicts-ai-i494-508.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §4 of the full text of arXiv 2212.12672, not on the cited /abs/ page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "509": {
    "index": 509,
@@ -14560,38 +14604,43 @@
   },
   "511": {
    "index": 511,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "humans more easily noticing semantic errors and discriminators picking up on statistical artifacts",
    "note": "Quote verbatim (§1 Introduction). \"Contradictions and nonsense\" limb supported: \"choosing one of these words can lead to odd or contradictory phrases and semantic errors. Humans are quick to notice these types of errors.\" \"Unigram-distribution\" limb supported by the abstract (\"when a decoding strategy severely modifies the unigram token distribution, as top-k does\") and §7 (\"[the distribu]tion over unigrams strongly diverges from human-written texts–an easy feature for discriminators to exploit\").",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §1 of the ACL PDF (2020.acl-main.164.pdf); the landing page carries only the abstract",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "512": {
    "index": 512,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "human language ... dips in and out of low probability zones",
    "note": "Quote verbatim. Second limb verbatim too: \"Today's generation systems have not yet solved the problem of mimicking the human cadence without introducing poor word choices that are easy for humans to detect.\" Note for citation hygiene: on the page the low-probability-zone observation is credited to Holtzman et al. (2020), restated by Ippolito et al.; the claim does not assert originality, so this does not reduce the grade.",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the body of the ACL PDF (2020.acl-main.164.pdf); the landing page carries only the abstract",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "513": {
    "index": 513,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "the high level of fluency left human raters fooled",
    "note": "Quote verbatim (§8, discussion of Table 4). The \"otherwise catch topic drift and falsehoods\" limb is the immediately preceding sentence: \"In the middle two examples, topic drift and falsehoods such as Atlanta being the 'information hub of the nation's capital' allowed humans to correctly detect the generated content.\"",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §8 of the ACL PDF (2020.acl-main.164.pdf); the landing page carries only the abstract",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "514": {
    "index": 514,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "human performance is only at 71.4%; AMT accuracy \"hovered around 50%\"",
    "note": "Quote verbatim: \"Even with the multi-paragraph 192-length excerpts, human performance is only at 71.4%, indicating that even trained humans struggle...\" — the raters reported there are the trained \"expert raters\" (university students walked through ten examples). Untrained limb verbatim: \"Initially, Amazon Mechanical Turk (AMT) raters were employed ... but rater accuracy was poor ... Accuracy, even for the longest sequences, hovered around 50%\" (chance, since \"Passages are equally likely to be human-written or machine-generated\").",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the body of the ACL PDF (2020.acl-main.164.pdf); the landing page carries only the abstract",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "515": {
    "index": 515,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Top-k produces the text that is hardest for raters to correctly distinguish",
    "note": "Quote verbatim, and the same sentence carries the second limb: \"but as shown in Section 7, it is the easiest for our automatic detection systems.\" Causal limb supported by the abstract (\"when a decoding strategy severely modifies the unigram token distribution, as top-k does\") and §1 (\"any strategy that oversamples high-likelihood words is susceptible\"; See et al. on rare-word usage requiring k=1000).",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the body of the ACL PDF (2020.acl-main.164.pdf); the landing page carries only the abstract",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "516": {
    "index": 516,
@@ -14602,101 +14651,115 @@
   },
   "517": {
    "index": 517,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "only because A does all the work in attributing meaning to O's response",
    "note": "Quote verbatim in the octopus test (§4): \"It is absolutely conceivable that A accepts this reply as meaningful — but only because A does all the work in attributing meaning to O's response. It is not because O understood the meaning of A's instructions or even his own reply.\" O is the octopus, A the human reader.",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §4 of the ACL PDF (2020.acl-main.463.pdf); the landing page carries only the abstract",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "518": {
    "index": 518,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "It is sufficient to produce text that is internally coherent",
    "note": "Quote verbatim. Phatic limb on the page: \"the utterances in such conversations have a primarily social function, and do not need to be grounded in the particulars of the interlocutors' actual physical situation.\" Breakage limb on the page: the coconut catapult (\"he does not know what words such as rope and coconut refer to\") and the bear (\"O has no idea what A 'means' ... it is at this point that O would fail the Turing test\").",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the body of the ACL PDF (2020.acl-main.463.pdf); the landing page carries only the abstract",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "519": {
    "index": 519,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "GPT-2 has learned what activity words tend to co-occur with bears and sticks, but none of these completions would be helpful to A",
    "note": "Both limbs are one sentence on the page, quote verbatim, in the GPT-2 bear-and-sticks probe (§6.1/Figure). Followed by \"We think this is because GPT-2 does not know the meaning of the prompt and the generated sentences, and thus cannot ground them in reality.\"",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §6.1 of the ACL PDF (2020.acl-main.463.pdf); the landing page carries only the abstract",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "520": {
    "index": 520,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "sometimes a mirage built on leveraging artifacts in the training data",
    "note": "Quote verbatim (§2, BERTology overview). Adversarial-data limb verbatim in the preceding sentences: McCoy et al.'s syntactic-heuristic finding — \"In a dataset carefully designed to frustrate such heuristics, BERT's performance falls to significantly below chance.\" One hedge is dropped by the claim: the page says apparent reasoning is \"sometimes a mirage\", not always.",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §2 of the ACL PDF (2020.acl-main.463.pdf); the landing page carries only the abstract",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "521": {
    "index": 521,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "haphazardly stitching together sequences of linguistic forms ... without any reference to meaning: a stochastic parrot",
    "note": "Quote verbatim (§6.1, end). Every limb is in the same sentence: \"observed in its vast training data\", \"according to probabilistic information about how they combine\", \"but without any reference to meaning\". ACM DL is Cloudflare-403 on a browser UA; reached the publisher PDF by mirror, and confirmed it is byte-identical to the Wayback raw capture of dl.acm.org/doi/pdf/10.1145/3442188.3445922 (sha256 e283b37a14e894c105ca26003d8cf5447535e8a73423cd7f1001d7b46af6c1d6, 304,472 bytes, both files).",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — dl.acm.org returns 403 and its landing page carries only the abstract; the quote is in the publisher PDF, §6.1",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "522": {
    "index": 522,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Text generated by an LM is not grounded in communicative intent, any model of the world, or any model of the reader's state of mind",
    "note": "All three limbs are one sentence on the page (§6.1), quote verbatim; followed by \"It can't have been, because the training data never included sharing thoughts with a listener.\" Same publisher PDF verified against the Wayback capture by sha256.",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §6.1 of the FAccT publisher PDF, not at the cited DOI landing page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "523": {
    "index": 523,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "coherence is in fact in the eye of the beholder; interlocutors \"impute meaning where there is none\"",
    "note": "Quote verbatim (§6.1, \"We say seemingly coherent because coherence is in fact in the eye of the beholder\"; section heading \"Coherence in the Eye of the Beholder\"). Second limb verbatim elsewhere in the paper: \"the tendency of human interlocutors to impute meaning where there is none can mislead both NLP researchers and the general public into taking synthetic text as meaningful.\"",
-   "fromFile": "verdicts-ai-i509-523.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §6.1 of the FAccT publisher PDF, not at the cited DOI landing page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "524": {
    "index": 524,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "the voices of people most likely to hew to a hegemonic viewpoint are also more likely to be retained",
    "note": "ACM publisher PDF of the FAccT'21 paper (dl.acm.org 403; identical publisher typesetting fetched from the s10251.pcdn.co mirror, running heads 'FAccT '21, March 3-10, 2021' and p.613 confirm the version of record). Quote verbatim in Sec. 4.1. All three limbs supported: the same passage covers 'discussions which will be included via the crawling methodology, and finally the texts likely to be contained after the crawled data are filtered', and the section closes 'Thus at each step, from initial participation in Internet fora, to continued presence there, to the collection and finally the filtering of training data, current practice privileges the hegemonic viewpoint.'",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §4.1 of the FAccT publisher PDF (reached via mirror), not at the cited DOI landing page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "525": {
    "index": 525,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "the LM-reliant technology reifies older, less-inclusive understandings",
    "note": "ACM publisher PDF of the FAccT'21 paper (dl.acm.org 403; identical publisher typesetting fetched from the s10251.pcdn.co mirror, running heads 'FAccT '21, March 3-10, 2021' and p.613 confirm the version of record). Quote verbatim in Sec. 4.2 'Static Data/Changing Social Views', in the sentence about the risk of 'value-lock'; the static-data and language-change limbs are the section's own framing ('Social movements produce new norms, language, and ways of communicating').",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §4.2 of the FAccT publisher PDF (reached via mirror), not at the cited DOI landing page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "526": {
    "index": 526,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "attenuate, by suppressing such words as twink, the influence of online spaces built by and for LGBTQ people",
    "note": "ACM publisher PDF of the FAccT'21 paper (dl.acm.org 403; identical publisher typesetting fetched from the s10251.pcdn.co mirror, running heads 'FAccT '21, March 3-10, 2021' and p.613 confirm the version of record). Quote verbatim in Sec. 4.1. The bad-word limb is explicit: the Colossal Clean Crawled Corpus is 'cleaned, inter alia, by discarding any page containing one of a list of about 400 “Dirty, Naughty, Obscene or Otherwise Bad Words”'.",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §4.1 of the FAccT publisher PDF (reached via mirror), not at the cited DOI landing page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "527": {
    "index": 527,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "we foresee that LMs producing text will reproduce and even amplify the biases in their input",
    "note": "ACM publisher PDF of the FAccT'21 paper (dl.acm.org 403; identical publisher typesetting fetched from the s10251.pcdn.co mirror, running heads 'FAccT '21, March 3-10, 2021' and p.613 confirm the version of record). Quote verbatim in Sec. 6 (Stochastic Parrots), with the same 'LMs producing text' subject the claim uses.",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §6 of the FAccT publisher PDF (reached via mirror), not at the cited DOI landing page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "528": {
    "index": 528,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "failed to reliably detect the algorithmically-generated poems in the Human-in-the-loop treatment, yet succeeded in the Human-out-of-the-loop treatment",
    "note": "ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. Quote verbatim in the abstract. The two limbs map to the stated treatments: Human-in-the-loop = 'the best one was selected', Human-out-of-the-loop = 'a random poem was chosen'.",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — ScienceDirect returned 403; the quote was verified in the author-manuscript PDF at arXiv 2005.09980, a different document from the cited DOI",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "529": {
    "index": 529,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Human writers overall won 64.90% of the comparisons",
    "note": "ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. Quote verbatim in Study 2 results (Sec. 4.2.1, the professional-poet study, run because 'poems created by novices competed with the output of a state-of-the-art algorithm'); the novice figure is Study 1's 'a win share of 56.97%' (Sec. 3.2.2).",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §4.2.1 of the author-manuscript PDF (arXiv 2005.09980), not at the cited ScienceDirect DOI",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "530": {
    "index": 530,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "detecting artificial text is not a matter of incentives but ability",
    "note": "ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. Quote verbatim in the Study 1 discussion; the 50.21% is Study 1's Sec. 3.2.3 ('judges identified the correct origin with an average accuracy of 50.21%'), and the incentive limb is the paper's own ('In light of the financial rewards for accuracy in our version of the Turing Test').",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the Study 1 discussion of the author-manuscript PDF (arXiv 2005.09980), not at the cited ScienceDirect DOI",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "531": {
    "index": 531,
@@ -14707,45 +14770,51 @@
   },
   "532": {
    "index": 532,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "only poems selected by the experimenters successfully passed as human and lowered algorithm aversion",
    "note": "ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. Quote verbatim in Sec. 5.4 'Human Selection in and out of the Loop'; the curation limb is the same paragraph's 'humans play an integral role in the process' and 'whether humans are in or out of the selection loop shaped participants’ reactions'.",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §5.4 of the author-manuscript PDF (arXiv 2005.09980), not at the cited ScienceDirect DOI",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "533": {
    "index": 533,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "each additional human-written essay contributed more new ideas than did each additional GPT-4 essay",
    "note": "ScienceDirect 403 by every route and Wayback holds only 403 captures; verified against the raw accepted-manuscript PDF at osf.io/download/8p9wu_v4/, headed 'Accepted in Computers in Human Behavior: Artificial Humans'. Quote verbatim in the abstract; the widening limb is the next sentence, 'this difference became more pronounced as more essays were included in the analysis'.",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — ScienceDirect returned 403; the quote was verified in the accepted-manuscript PDF at osf.io/download/8p9wu_v4/",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "534": {
    "index": 534,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "only about 11% of the rate for the human-written essays",
    "note": "ScienceDirect 403 by every route and Wayback holds only 403 captures; verified against the raw accepted-manuscript PDF at osf.io/download/8p9wu_v4/, headed 'Accepted in Computers in Human Behavior: Artificial Humans'. Quote verbatim in Study 3. The 31% figure appears twice as claimed: Study 1 'only about 31% of the diversity growth rate observed for human-written essays' and Study 2 'only about 31% of the rate for the human-written essays', both for base GPT-4.",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in Study 3 of the accepted-manuscript PDF (osf.io/download/8p9wu_v4/), not at the cited DOI",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "535": {
    "index": 535,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "a newer version of GPT-4 (gpt-4-0125-preview) actually yielded higher homogenization than the previous model (gpt-4-0613)",
    "note": "ScienceDirect 403 by every route and Wayback holds only 403 captures; verified against the raw accepted-manuscript PDF at osf.io/download/8p9wu_v4/, headed 'Accepted in Computers in Human Behavior: Artificial Humans'. Quote verbatim in the discussion, and the two model ids are named in that same sentence; the 'not curing with versions' limb is the paper's own inferential use of the finding.",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the discussion of the accepted-manuscript PDF (osf.io/download/8p9wu_v4/), not at the cited DOI",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "536": {
    "index": 536,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "increased semantic diversity and decreased homogenization but at the expense of coherence and readability",
    "note": "ScienceDirect 403 by every route and Wayback holds only 403 captures; verified against the raw accepted-manuscript PDF at osf.io/download/8p9wu_v4/, headed 'Accepted in Computers in Human Behavior: Artificial Humans'. Quote verbatim in the discussion, naming 'presence_penalty' and 'frequency_penalty'. The above-human limb is Study 2's result: 'the parameter-modified model exceeded the individual diversity of the human-written essays, Mean Difference = 16.62'.",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the discussion of the accepted-manuscript PDF (osf.io/download/8p9wu_v4/), not at the cited DOI",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "537": {
    "index": 537,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "suggesting that homogenization may be an inherent feature of current LLMs",
    "note": "ScienceDirect 403 by every route and Wayback holds only 403 captures; verified against the raw accepted-manuscript PDF at osf.io/download/8p9wu_v4/, headed 'Accepted in Computers in Human Behavior: Artificial Humans'. Quote verbatim in the discussion, immediately after the two attributed causes: 'autoregressive systems optimized to select the most probable next token' and 'instruction tuning with Reinforcement Learning from Human Feedback (RLHF) to produce “safe” or aligned responses'.",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the discussion of the accepted-manuscript PDF (osf.io/download/8p9wu_v4/), not at the cited DOI",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "538": {
    "index": 538,
@@ -14784,10 +14853,11 @@
   },
   "543": {
    "index": 543,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "average false positive rate: 61.22%",
    "note": "Confirmed in the raw arXiv PDF (arxiv.org/pdf/2304.02819) and the ar5iv full text, not merely the abs page: 'We evaluated the performance of seven widely-used GPT detectors... The detectors demonstrated near-perfect accuracy for US 8-th grade essays. However, they misclassified over half of the TOEFL essays as \"AI-generated\" (average false positive rate: 61.22%).' Seven detectors, TOEFL essays and the US-essay contrast all supported.",
-   "fromFile": "verdicts-ai-i539-553.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote was confirmed in the raw arXiv PDF and ar5iv full text; index 13's sibling verification records that the cited /abs/2304.02819 page carries the abstract only",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "544": {
    "index": 544,
@@ -14798,38 +14868,43 @@
   },
   "545": {
    "index": 545,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "significantly reduced detection rates from 100% to 13%",
    "note": "Verbatim in the raw PDF: a 'second-round self-edit prompt (\"Elevate the provided text by employing literary language\") applied to ChatGPT-3.5 significantly reduced detection rates from 100% to 13% (Fig. 2a)' for 31 ChatGPT-3.5 college admission essays. Fig. 2's caption phrases it 'from up to 100% to up to 13%'.",
-   "fromFile": "verdicts-ai-i539-553.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the raw arXiv PDF body (Fig. 2a discussion), not on the cited /abs/2304.02819 page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "546": {
    "index": 546,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "only 67% of the tests were accurate",
    "note": "Raw arXiv PDF text (arXiv HTML 404s; PDF extracted with pypdf): 'the AI detectors tested have a mean accuracy rating of only 39.5% when evaluating unmanipulated AI-generated content. Importantly, regarding the human-written control samples, only 67% of the tests were accurate'. 'Mislabelled a third' is the paper's own 67% control-sample figure inverted; Table 7 lists both.",
-   "fromFile": "verdicts-ai-i539-553.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — arXiv HTML 404s; the quote is in the raw arXiv PDF text, not on the cited /abs/2403.19148 page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "547": {
    "index": 547,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "outputs produced with spelling errors (12.9%) or higher burstiness (15.9%) were almost undetectable",
    "note": "Quote verbatim twice ('highly effective in evading detection', in Discussion and Conclusion). Table 9 gives Add Spelling Errors 12.9% and Increase Burstiness 15.9% accuracy, and Table 1 shows the burstiness prompt is topic 'Varying Sentence Length', so the claim's gloss of burstiness as varying sentence length is the paper's own. Note 12.9/15.9 are residual accuracy rates, not drops — the same parenthetical the paper uses.",
-   "fromFile": "verdicts-ai-i539-553.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the Discussion and Conclusion of the arXiv PDF, not on the cited /abs/2403.19148 page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "548": {
    "index": 548,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "With the rate of false accusations at 15%",
    "note": "Verbatim in the Discussion. Table 10 (FAS/UDC ratios) gives Total/Mean FAS 15%, and Copyleaks 50%; the body confirms both limbs: 'Copyleaks displayed the highest sensitivity' and 'Copyleaks possessed the highest likelihood of producing false results, with 50% of human-generated samples misidentified as AI written.'",
-   "fromFile": "verdicts-ai-i539-553.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in the Discussion of the arXiv PDF, not on the cited /abs/2403.19148 page",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "549": {
    "index": 549,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "unfairly penalise students who write at a higher level of perplexity",
    "note": "Verbatim in the closing Discussion: 'the potential for such tools to unfairly penalise students who write at a higher level of perplexity (including NNESs or lower-proficiency English speakers)'. One softening: the paper names a higher perplexity level specifically, where the claim generalises to a perplexity profile that 'differs'; the lower-proficiency limb is the paper's own parenthesis.",
-   "fromFile": "verdicts-ai-i539-553.json"
+   "unsupportedLimb": "the generalisation to any differing 'perplexity profile' — the paper names a higher perplexity level specifically (and the quote is in the PDF body, not at the cited abs URL)",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "550": {
    "index": 550,
@@ -15291,10 +15366,11 @@
   },
   "615": {
    "index": 615,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "“plot, character development, or structure might not be accurately reflected”",
    "note": "§3.1.4, raw page: “Our study examines shorter (up to 450-word) excerpts and because of this, broader creative elements such as plot, character development, or structure might not be accurately reflected.” Quote verbatim and the concession limb explicit. Two shadings: the writing brief was a 200–450 word excerpt (the claim gives only the ceiling), and the page's hedge is “might not be accurately reflected” rather than flatly “unmeasured”.",
-   "fromFile": "verdicts-ai-i601-615.json"
+   "unsupportedLimb": "the 'leaves plot, character and structure unmeasured' limb, which overstates the page's hedge 'might not be accurately reflected' (and the brief was a 200-450 word excerpt, not only a 450-word ceiling)",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "616": {
    "index": 616,
@@ -15445,10 +15521,11 @@
   },
   "637": {
    "index": 637,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "its sentences - and the small-scale choices they represent - help to determine the thriller's effectiveness",
    "note": "Page: 'I doubt you could replace every sentence in a thriller with one that is semantically equivalent and have the resulting novel be as entertaining. This means that its sentences - and the small-scale choices they represent - help to determine the thriller's effectiveness.' Quote verbatim and both limbs present. Fidelity note for the downstream writer: Chiang hedges twice where the claim does not - 'I doubt you could' (not 'you could not') and 'help to determine' (not 'determine'). Use the page's wording if quoting.",
-   "fromFile": "verdicts-ai-i631-645.json"
+   "unsupportedLimb": "the two dropped hedges — Chiang writes 'I doubt you could' rather than 'you could not', and 'help to determine' rather than 'determine'",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "638": {
    "index": 638,
@@ -15816,10 +15893,11 @@
   },
   "690": {
    "index": 690,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Then, I cracked it, by establishing a fenced-in space for the AI to contribute what it could.",
    "note": "Raw live page. Quote exact. Next paragraph supplies the assignment limbs: 'very good at riffing', 'This new story called for a litany of grisly deaths, so, I asked the AI to dream up grisly deaths. I asked it, also, to tell me the names of the dead: characters from a fantasy saga.' 'Rather than any structural role' is not phrased that way on the page but is entailed by the abandoned detective role that 'didn't work at all' immediately above.",
-   "fromFile": "verdicts-ai-i678-692.json"
+   "unsupportedLimb": "the 'rather than any structural role' limb, which the verifier records is not phrased that way on the page and is only entailed",
+   "fromFile": "verdicts-ai-regrade-r5.json"
   },
   "691": {
    "index": 691,

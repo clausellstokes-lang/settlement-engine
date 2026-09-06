@@ -1,0 +1,18 @@
+{
+ "role": "synth",
+ "name": "ai",
+ "angle": null,
+ "tag": null,
+ "lines": 5,
+ "firstTs": "2026-09-06T18:42:09.660Z",
+ "lastTs": "2026-09-06T18:42:10.292Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your weekly limit · resets Sep 8 at 11am (America/New_York)",
+ "run": "wf_bcc0efc7-47c",
+ "agent": "a894869841f0e486e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a894869841f0e486e.jsonl",
+ "journal": "failed",
+ "checkpointFile": null
+}
