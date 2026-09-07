@@ -345,5 +345,19 @@ export function mintRefusals(annotatedReceipt) {
   if (receipt.rolling === true) refusals.push('a rolling run is additive and never freezes');
   if (receipt.restored === true) refusals.push('a restored run computes no official figure');
   if (receipt.fullInstrument !== true) refusals.push('not the FULL instrument at build-complete-dark');
+  // ⛔⛔ A BLIND ROW IS NAMED, NOT SUMMARISED (M1-F1). `fullInstrument` already closes the
+  // door on this receipt, but "not the FULL instrument" is the same sentence a three-year
+  // run gets, and the two are not the same problem: one measured less than everything, the
+  // other could not measure a DETERMINISTIC row at all because the field it keys on is on no
+  // receipt the writer produces. A cell frozen from such a run would bank a curve certified
+  // by an instrument that never ran, so the refusal says which row went dark.
+  const blind = (Array.isArray(receipt.notExecutable) ? receipt.notExecutable : [])
+    .filter((row) => row && row.source === 'tripwire-registry');
+  if (blind.length) {
+    refusals.push(
+      `${blind.length} deterministic tripwire row(s) could not run — `
+      + `${blind.map((row) => `${row.name} (${row.reason})`).join('; ')}`,
+    );
+  }
   return refusals;
 }

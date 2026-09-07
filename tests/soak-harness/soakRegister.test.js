@@ -108,6 +108,24 @@ function researchReceipt({ caseId = 'research-lit-4s-300y-4s-seed1', shapes = ['
   };
 }
 
+/**
+ * THE SAME RECEIPT AS THE WRITER WILL SHIP IT ONCE THE PER-YEAR SERIES LANDS — the two
+ * capacity fields derived from the fixture's OWN state vectors, so nothing is invented.
+ *
+ * ⛔⛔ THIS PLANTS TWO FIELDS NO WRITER SHIPS TODAY, DELIBERATELY, AND THE ARM DIRECTLY
+ * BELOW PINS THAT FACT rather than letting this helper hide it. M1-F1's whole lesson is
+ * that a fixture which is the only writer of a shape makes a blind row look green, so the
+ * blindness is asserted FIRST, against the honest `researchReceipt()`, and the forward shape
+ * is used only where a DOOR is the subject: a door cannot be exercised by a receipt the
+ * previous door already refused. Shipping the series is the owner's schema row (§907); when
+ * it lands this helper becomes the identity function and should be deleted.
+ */
+const instrumentComplete = (receipt) => ({
+  ...receipt,
+  yearlyPopulations: receipt.behavioral.yearly.map((year) => IDS.map((id) => year.stateVectors[id].population)),
+  yearlyDiedFlags: receipt.behavioral.yearly.map(() => IDS.map(() => false)),
+});
+
 const annotate = (receipt) => evaluateReceipt(receipt, { profile: 'research-lit-4s' }).annotated;
 const measure = (receipt) => deriveRegisterFigures(annotate(receipt));
 
@@ -230,7 +248,23 @@ describe('the soak register — shapes, comparisons and the governed growth door
 
   test('a receipt that is not clean can never mint a cell', () => {
     // §13 C7: a cell designed to fail `population_bounded` — the DARK twin — cannot mint.
-    expect(mintRefusals(annotate(researchReceipt()))).toEqual([]);
+    expect(mintRefusals(annotate(instrumentComplete(researchReceipt())))).toEqual([]);
+
+    // ⛔⛔ AND A BLIND INSTRUMENT CANNOT MINT EITHER (M1-F1). The receipt in the WRITER'S
+    // OWN SHAPE — no `yearlyPopulations`, no `yearlyDiedFlags`, exactly what
+    // `whole-world-soak.mjs` has always written — leaves two DETERMINISTIC capacity rows
+    // unable to run. Before the third channel existed they answered `[]`, the run graded
+    // `fullInstrument: true`, and the door would have banked a 300-year curve certified by
+    // detectors that never executed. The door now refuses, and names which rows went dark.
+    const blind = mintRefusals(annotate(researchReceipt()));
+    expect(blind).toContain('not the FULL instrument at build-complete-dark');
+    expect(blind.some((line) => line.includes('capacity_plateau') && line.includes('capacity_floor_thaw')))
+      .toBe(true);
+    expect(blind.some((line) => line.includes('receipt.yearlyPopulations'))).toBe(true);
+    // …and it is the ABSENCE that refuses, not the capacity rows themselves: plant the two
+    // fields the writer does not yet ship and the very same receipt mints.
+    expect(mintRefusals(annotate(instrumentComplete(researchReceipt())))).toEqual([]);
+
     expect(mintRefusals({ ...annotate(researchReceipt()), passed: false }))
       .toContain('the run did not pass — a register cell is minted from a clean run or not at all');
     expect(mintRefusals({ ...annotate(researchReceipt()), deterministicFirings: 2 }))
@@ -260,7 +294,7 @@ describe('the soak register — shapes, comparisons and the governed growth door
     }
     const dir = mkdtempSync(join(tmpdir(), 'soak-compare-'));
     const receiptPath = join(dir, 'receipt.json');
-    writeFileSync(receiptPath, `${JSON.stringify(researchReceipt())}\n`);
+    writeFileSync(receiptPath, `${JSON.stringify(instrumentComplete(researchReceipt()))}\n`);
     const proposal = join(dir, 'proposal.json');
     const run = runCliTolerant([
       '--compare', '--register', REGISTER, '--receipt', receiptPath,
@@ -279,7 +313,7 @@ describe('the soak register — shapes, comparisons and the governed growth door
     const key = 'research-lit-4s/research-lit-4s-300y-4s-seed1';
     const { dir, registerPath, run: git } = gitFixture(genesisRegister(key));
     const receiptPath = join(dir, 'clean-receipt.json');
-    writeFileSync(receiptPath, `${JSON.stringify(researchReceipt())}\n`);
+    writeFileSync(receiptPath, `${JSON.stringify(instrumentComplete(researchReceipt()))}\n`);
     const base = ['--register', registerPath, '--repo', dir, '--profile', 'research-lit-4s'];
     const seat = { SOAK_REGISTER_REFREEZE: 'Opus 5 (lane INSTR-SOAK)' };
     const note = { SOAK_REGISTER_NOTE: 'the first clean research run freezes this cell' };
@@ -311,43 +345,72 @@ describe('the soak register — shapes, comparisons and the governed growth door
     expect(after.status).toBe(0);
     expect(after.stdout).toContain('OK — every committed figure holds');
 
-    // ── THE RUNAWAY ARRIVES ────────────────────────────────────────────────────
+    // ── THE RUNAWAY ARRIVES, AND IS NOW REFUSED BY THE FIRST DOOR ──────────────
     const worsePath = join(dir, 'worse-receipt.json');
-    writeFileSync(worsePath, `${JSON.stringify(researchReceipt({ shapes: ['runaway', 'plateau', 'plateau', 'plateau'] }))}\n`);
+    writeFileSync(worsePath, `${JSON.stringify(instrumentComplete(researchReceipt({ shapes: ['runaway', 'plateau', 'plateau', 'plateau'] })))}\n`);
     git('add', '-A'); git('commit', '-q', '-m', 'the worse receipt');
     const convicted = runCliTolerant(['--compare', ...base, '--receipt', worsePath, '--solo']);
     expect(convicted.status).toBe(1);
     expect(convicted.stdout).toContain('grew · realm.runawayCount 0 → 1 (shrink-only)');
     expect(convicted.stdout).toContain('shape_changed · population.soak-a.shape');
 
+    // ⛔⛔ AND THE TWO DOORS ARE ORDERED, WHICH M1-F1's CURE MADE VISIBLE. `capacity_plateau`
+    // now SEES this series and convicts it, so the write is refused at the TRIPWIRE door and
+    // never reaches the declaration door at all. Before the cure the runaway was invisible
+    // to every tripwire and walked straight through to the charter question — which is to
+    // say the growth door's debt path was reachable only because the instrument was blind.
+    // A runaway can no longer be banked by note under any charter, and that is the right
+    // answer; the arms below therefore price a figure that moves without the world breaking.
+    const runawayWrite = runCliTolerant(['--write', ...base, '--receipt', worsePath], { ...seat, ...note });
+    expect(runawayWrite.status).toBe(2);
+    expect(runawayWrite.stderr).toContain('a deterministic-class tripwire fired — the run is not clean');
+    expect(runawayWrite.stderr).not.toContain('SOAK_REGISTER_DECLARED');
+
+    // ── A FIGURE MOVES WITHOUT THE WORLD BREAKING ─────────────────────────────
+    // The liveness FLOOR the run reported, lowered. No tripwire grades `liveness.reported`
+    // (the `liveness_floor` row folds live from the behavioural counts and cross-checks only
+    // `liveness.failures`), so this receipt is tripwire-clean AND carries a debt figure.
+    const debtPath = join(dir, 'debt-receipt.json');
+    const debtReceipt = instrumentComplete(researchReceipt());
+    debtReceipt.liveness = {
+      ...debtReceipt.liveness,
+      reported: { ...debtReceipt.liveness.reported, minDistinctTypesPerDecade: 60 },
+    };
+    writeFileSync(debtPath, `${JSON.stringify(debtReceipt)}\n`);
+    git('add', '-A'); git('commit', '-q', '-m', 'the debt receipt');
+    const fell = runCliTolerant(['--compare', ...base, '--receipt', debtPath, '--solo']);
+    expect(fell.status).toBe(1);
+    expect(fell.stdout).toContain('fell_below_floor · liveness.minDistinctTypesPerDecade 120 → 60 (floor)');
+
     // An UNDECLARED move is refused and NAMED — silence never banks a figure.
-    const undeclared = runCliTolerant(['--write', ...base, '--receipt', worsePath], { ...seat, ...note });
+    const undeclared = runCliTolerant(['--write', ...base, '--receipt', debtPath], { ...seat, ...note });
     expect(undeclared.status).toBe(2);
     expect(undeclared.stderr).toContain('were not declared in SOAK_REGISTER_DECLARED');
-    expect(undeclared.stderr).toContain('realm.runawayCount');
+    expect(undeclared.stderr).toContain('liveness.minDistinctTypesPerDecade');
 
-    // ⛔ DECLARED IS NOT ENOUGH. An env var plus free text is how a runaway gets banked by
-    // note; a shrink figure moving UP costs a charter.
-    const moved = runCliTolerant(['--compare', ...base, '--receipt', worsePath, '--solo']).stdout;
-    const declaredFigures = [...moved.matchAll(/· (?:grew|shape_changed|outside_band) · ([\w.-]+)/g)].map((match) => match[1]);
+    // ⛔ DECLARED IS NOT ENOUGH. An env var plus free text is how a regression gets banked by
+    // note; a floor figure moving DOWN costs a charter.
+    const declaredFigures = [...fell.stdout.matchAll(/· (?:grew|fell_below_floor|shape_changed|outside_band) · ([\w.-]+)/g)]
+      .map((match) => match[1]);
+    expect(declaredFigures).toEqual(['liveness.minDistinctTypesPerDecade']);
     const declared = { SOAK_REGISTER_DECLARED: declaredFigures.join(',') };
-    const noCharter = runCliTolerant(['--write', ...base, '--receipt', worsePath], { ...seat, ...note, ...declared });
+    const noCharter = runCliTolerant(['--write', ...base, '--receipt', debtPath], { ...seat, ...note, ...declared });
     expect(noCharter.status).toBe(2);
     expect(noCharter.stderr).toContain('no --charter=§NNN was given');
     expect(noCharter.stderr).toContain('banked by note');
 
     // …and a charter with a thin note is refused too: the note IS the audit trail.
     const thin = runCliTolerant(
-      ['--write', ...base, '--receipt', worsePath, '--charter=§882'],
+      ['--write', ...base, '--receipt', debtPath, '--charter=§882'],
       { ...seat, ...declared, SOAK_REGISTER_NOTE: 'too short' },
     );
     expect(thin.status).toBe(2);
     expect(thin.stderr).toContain('at least 60 characters');
 
     // With both, the debt is banked AND recorded forever.
-    const longNote = 'SOAK-4 accept the honest red: the lit engine runs away on soak-a and the tuning sitting will price it';
+    const longNote = 'SOAK-4 accept the honest red: the lit run reported a thinner liveness floor and the tuning sitting will price it';
     const banked = runCliTolerant(
-      ['--write', ...base, '--receipt', worsePath, '--charter=§882'],
+      ['--write', ...base, '--receipt', debtPath, '--charter=§882'],
       { ...seat, ...declared, SOAK_REGISTER_NOTE: longNote },
     );
     expect(banked.status).toBe(1);
@@ -355,16 +418,16 @@ describe('the soak register — shapes, comparisons and the governed growth door
     const withDebt = JSON.parse(readFileSync(registerPath, 'utf8'));
     expect(withDebt.cells[key].debtHistory).toHaveLength(1);
     expect(withDebt.cells[key].debtHistory[0]).toMatchObject({
-      figure: 'realm.runawayCount', from: 0, to: 1, charter: '§882', seat: 'Opus 5 (lane INSTR-SOAK)',
+      figure: 'liveness.minDistinctTypesPerDecade', from: 120, to: 60, charter: '§882', seat: 'Opus 5 (lane INSTR-SOAK)',
     });
 
     // ⭐ AND EVERY LATER COMPARE PRINTS IT. The debt population is a shrink-only record: a
     // reader sees which numbers were allowed to get worse without any archaeology.
     git('add', '-A'); git('commit', '-q', '-m', 'banked');
-    const later = runCliTolerant(['--compare', ...base, '--receipt', worsePath, '--solo']);
+    const later = runCliTolerant(['--compare', ...base, '--receipt', debtPath, '--solo']);
     expect(later.status).toBe(0);
     expect(later.stdout).toContain('HOLD: 1 figure(s) have been banked in the wrong direction');
-    expect(later.stdout).toContain('realm.runawayCount 0 → 1 (§882, Opus 5 (lane INSTR-SOAK)');
+    expect(later.stdout).toContain('liveness.minDistinctTypesPerDecade 120 → 60 (§882, Opus 5 (lane INSTR-SOAK)');
   }, 120_000);
 
   test('the two lit profiles plan a 300-year case that carries its lighting into the child argv', () => {

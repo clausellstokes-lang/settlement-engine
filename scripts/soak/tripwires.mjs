@@ -56,6 +56,25 @@ export const WALL_TIME_TREND_SLACK_MS = WALL_TIME_TREND.slackMs;
 
 const finite = (value) => typeof value === 'number' && Number.isFinite(value);
 
+/**
+ * Is a TOP-LEVEL receipt field present at all?
+ *
+ * ⛔⛔ THE THIRD STATUS EXISTS BECAUSE ABSENCE AND CLEANLINESS READ ALIKE OTHERWISE
+ * (§206.2b, and M1-F1 measured the cost). A detector that hits its own
+ * `Array.isArray(receipt?.x) ? … : []` guard on a field NO WRITER SHIPS reads a
+ * zero-length series, takes its "did not observe" early return, and answers `[]` —
+ * indistinguishable from a world that behaved. That is a WEAK ZERO of exactly the class
+ * `non_finite_ledger_figure` above already paid for once, and the cure is the same one:
+ * say what was not measured, positively, with the field on its face.
+ *
+ * `null` counts as absent: a receipt that wrote the key and nothing into it carried no
+ * evidence either, and grading the two apart would be a distinction without a measurement.
+ */
+const receiptCarries = (receipt, field) => receipt != null
+  && typeof receipt === 'object'
+  && Object.prototype.hasOwnProperty.call(receipt, field)
+  && receipt[field] != null;
+
 const meanOf = (list, from, to) => {
   const slice = list.slice(Math.floor(list.length * from), Math.floor(list.length * to));
   return slice.reduce((sum, value) => sum + value, 0) / Math.max(1, slice.length);
@@ -65,6 +84,22 @@ const meanOf = (list, from, to) => {
  * THE REGISTRY. Each row: a stable `id` (the census key — the banked-failure identity
  * law), its `class`, its band with a `home`, and a pure `detect(receipt)` returning the
  * firings it found.
+ *
+ * Two OPTIONAL declarations carry §206.2b's third status, and they are DIFFERENT
+ * statements that a single early return used to blur into one silence:
+ *
+ *   `gate(receipt)`   the row is NOT APPLICABLE to this receipt — a capacity row on a DARK
+ *                     cell measured the right thing about a term that was not running. It
+ *                     is silent by design and owes no ledger entry.
+ *   `requires: []`    the top-level receipt fields WITHOUT WHICH THE ROW'S SILENCE IS NOT A
+ *                     MEASUREMENT. Absent ⇒ the row is NOT-EXECUTABLE and says so with the
+ *                     field named; it does NOT answer `[]`.
+ *
+ * ⛔ THE GATE LIVES ON THE ROW, NOT INSIDE `detect`, AND THAT IS THE WHOLE REASON IT MOVED.
+ * While the demographics gate was the detector's own first line, an ungated blindness and a
+ * gated dark cell produced the identical `[]`, so no caller could tell "the term was off"
+ * from "the field the row keys on does not exist". One spelling, on the row, where the
+ * evaluator can read it.
  */
 export const TRIPWIRES = Object.freeze([
   Object.freeze({
@@ -234,8 +269,24 @@ export const TRIPWIRES = Object.freeze([
     class: 'deterministic',
     band: 'over >= 150 observed years: |y_last - y_mid| / y_mid <= 0.05, and every century multiplier < 50',
     home: 'tests/domain/demographicsCure.test.js:108-149 — the cure suite\'s own plateau clauses, INHERITED verbatim so the soak and the unit pin cannot disagree about what a plateau is',
+    gate: (receipt) => receipt?.subsystems?.rules?.demographicsEnabled === true,
+    // ⛔⛔ MEASURED BLIND, AND NOW IT SAYS SO (M1-F1, CONFIRMED twice by independent
+    // execution). `whole-world-soak.mjs` BUILDS both series per run and ships only the FINAL
+    // row (`finalPopulations`, `finalDiedFlags`); no written receipt has ever carried
+    // `yearlyPopulations`. On the 300-year research receipt this row therefore answered `[]`
+    // while the same detector, fed the series rebuilt from
+    // `behavioral.yearly[].stateVectors[id].population`, convicts all four settlements
+    // (8319@149 → 10869@299; 202 → 1017; 324 → 244; 38 → 159). The unit pin was green
+    // throughout because its fixture PLANTS the field — the estate's own "a fixture can be
+    // the only writer of the SHAPE" hazard, live. Shipping the series is a receipt SCHEMA
+    // change and the owner's row; until it lands the row is NOT-EXECUTABLE, which is a
+    // reading a freeze gate can act on and a silent `[]` is not.
+    //
+    // ⚠ THE DIED FLAGS ARE REQUIRED TOO, AND NOT AS SYMMETRY. Without them the remnant law
+    // has no exception list and this row would convict every lawful death — a series
+    // shipped alone would be worse than no series at all.
+    requires: ['yearlyPopulations', 'yearlyDiedFlags'],
     detect: (receipt) => {
-      if (receipt?.subsystems?.rules?.demographicsEnabled !== true) return [];
       const pops = Array.isArray(receipt?.yearlyPopulations) ? receipt.yearlyPopulations : [];
       // A run under 150 years did not observe a plateau; reading that silence as either a
       // pass or a finding is the §206.2b error the liveness row already paid for.
@@ -271,8 +322,12 @@ export const TRIPWIRES = Object.freeze([
     class: 'deterministic',
     band: 'no LIVING settlement holds one head count across its last 100 observed years',
     home: 'tests/domain/demographicsFloor.test.js — the floored-six unfreeze. The pre-cure defect had TWO halves and the bounded check only ever saw one: a settlement frozen at 200 for a century is as broken as one at 2.9e13, and it fires nothing',
+    gate: (receipt) => receipt?.subsystems?.rules?.demographicsEnabled === true,
+    // The SAME blindness as its sibling above, and it was found the same way: on the real
+    // 300-year receipt the row is correctly silent once the series is rebuilt (nothing is
+    // frozen), but as shipped it could not have said otherwise about any world.
+    requires: ['yearlyPopulations', 'yearlyDiedFlags'],
     detect: (receipt) => {
-      if (receipt?.subsystems?.rules?.demographicsEnabled !== true) return [];
       const pops = Array.isArray(receipt?.yearlyPopulations) ? receipt.yearlyPopulations : [];
       if (pops.length < 100) return [];
       const died = Array.isArray(receipt?.yearlyDiedFlags) ? receipt.yearlyDiedFlags : [];
@@ -298,8 +353,15 @@ export const TRIPWIRES = Object.freeze([
     class: 'deterministic',
     band: 'final realmDemography.loadRatio01 in [0.6, 1.05], and binding.granary + binding.walls === settlements',
     home: 'src/domain/worldPulse/demographicsObservation.js observeRealmDemography — the realm reading the engine already writes; the band is the cure suite\'s own plateau window (0.6 floor, 1.05 overshoot allowance) read at realm scale',
+    gate: (receipt) => receipt?.subsystems?.rules?.demographicsEnabled === true,
+    // ⚠ NO `requires`, AND THE ASYMMETRY IS DELIBERATE. This row keys on `behavioral`, which
+    // the writer DOES ship — it is reachable, and it executes on the real receipt. Its own
+    // remaining gap is one level down (`yearly[last].realmDemography`, an ADDITIVE key a v4
+    // receipt simply lacks), and `requires` grades TOP-LEVEL fields only. Widening it to
+    // dotted paths is a real question and is left to the chair rather than smuggled in here:
+    // it would re-grade archived receipts, which is a different act from curing a row that
+    // could never fire on any receipt at all.
     detect: (receipt) => {
-      if (receipt?.subsystems?.rules?.demographicsEnabled !== true) return [];
       const yearly = Array.isArray(receipt?.behavioral?.yearly) ? receipt.behavioral.yearly : [];
       // The observation is an ADDITIVE key: a v4 receipt simply lacks it, and a consumer
       // must read that as an instrument gap rather than a finding.
@@ -360,18 +422,41 @@ export function tripwiresOfClass(klass) {
  *
  * ⛔ ONLY THE DETERMINISTIC CLASS MINTS FINDINGS. Host-observability rows land in
  * `observability`, are attached to reports as metadata, and never gate anything.
+ *
+ * ⛔⛔ AND THERE ARE THREE CHANNELS, NOT TWO (§206.2b, M1-F1). `notExecutable` carries the
+ * rows that COULD NOT RUN — a row whose declared `requires` field is absent from the
+ * receipt is listed there with the field named, and its detector is NOT called at all,
+ * because calling it would produce the very `[]` that hid the defect. A row the receipt's
+ * own state says does not apply (`gate`) is silent and lists nothing: not applicable and
+ * not measurable are different facts, and this estate has already paid for reading them as
+ * one.
+ *
+ * @returns {{findings: Array<object>, observability: Array<object>,
+ *            notExecutable: Array<{id: string, class: string, reason: string}>}}
  */
 export function evaluateTripwires(receipt) {
   const findings = [];
   const observability = [];
+  const notExecutable = [];
   for (const row of TRIPWIRES) {
+    if (typeof row.gate === 'function' && !row.gate(receipt)) continue;
+    const missing = (Array.isArray(row.requires) ? row.requires : [])
+      .filter((field) => !receiptCarries(receipt, field));
+    if (missing.length) {
+      notExecutable.push({
+        id: row.id,
+        class: row.class,
+        reason: `requires ${missing.map((field) => `receipt.${field}`).join(', ')} — absent from this receipt`,
+      });
+      continue;
+    }
     for (const detail of row.detect(receipt)) {
       const firing = { id: row.id, class: row.class, detail };
       if (row.class === 'deterministic') findings.push(firing);
       else observability.push(firing);
     }
   }
-  return { findings, observability };
+  return { findings, observability, notExecutable };
 }
 
 /**
@@ -389,7 +474,14 @@ export function tripwireRegistryDefects(rows = TRIPWIRES) {
     if (!String(row.home || '').trim()) defects.push(`${row.id}: threshold has no derivation home`);
     if (!String(row.band || '').trim()) defects.push(`${row.id}: no band`);
     if (typeof row.detect !== 'function') defects.push(`${row.id}: no detector`);
-    if (row.class === 'deterministic' && /Date\.now|performance\.now|memoryUsage/.test(String(row.detect))) {
+    if (row.gate !== undefined && typeof row.gate !== 'function') defects.push(`${row.id}: gate is declared and is not a function`);
+    if (row.requires !== undefined && (!Array.isArray(row.requires) || !row.requires.length
+      || row.requires.some((field) => typeof field !== 'string' || !field.trim()))) {
+      defects.push(`${row.id}: requires is declared and is not a non-empty list of field names`);
+    }
+    // The clock scan reads the GATE as well as the detector: moving a row's applicability
+    // test onto the row must not open a door the class boundary closed.
+    if (row.class === 'deterministic' && /Date\.now|performance\.now|memoryUsage/.test(`${String(row.detect)}${String(row.gate || '')}`)) {
       defects.push(`${row.id}: a DETERMINISTIC row reads a clock or the heap — it belongs in host-observability`);
     }
   }

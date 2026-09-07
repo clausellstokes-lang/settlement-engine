@@ -45,11 +45,21 @@ export const RESTORE_PROBE_KIND = 'whole_world_soak_restore_probe';
  * that could not execute an assertion measured less than the full instrument, and §206.2b's
  * third status exists precisely so that fact is legible instead of looking like a pass.
  *
+ * ⛔⛔ AND THE LEDGER HAS TWO WRITERS NOW, WHICH IS THE WHOLE OF M1-F1's CURE. The soak
+ * writes `receipt.notExecutable` for the assertions IT could not run. The tripwire registry
+ * knows a second class the soak cannot: a DETERMINISTIC row keyed on a field no writer
+ * ships. Before this fold, such a row answered `[]`, the ledger stayed empty, and the
+ * receipt graded `fullInstrument: true` while two of its three capacity rows were
+ * structurally blind — a receipt certifying the completeness of an instrument that had not
+ * run. The evaluator's rows are APPENDED, each stamped `source: 'tripwire-registry'` so no
+ * reader can mistake them for something the soak claimed, and `fullInstrument` reads both
+ * halves. A blind row now costs the freeze exactly what a failed precondition costs it.
+ *
  * @param {object} receipt a parsed soak receipt
  * @param {{profile?: string, rolling?: boolean, restored?: boolean,
  *          behavioralPropertiesPassing?: boolean|null}} [options]
  * @returns {{findings: Array<object>, observability: Array<object>,
- *            deterministicFirings: number, annotated: object}}
+ *            notExecutable: Array<object>, deterministicFirings: number, annotated: object}}
  */
 export function evaluateReceipt(receipt, {
   profile = '',
@@ -57,17 +67,31 @@ export function evaluateReceipt(receipt, {
   restored = false,
   behavioralPropertiesPassing = null,
 } = {}) {
-  const { findings, observability } = evaluateTripwires(receipt);
+  const { findings, observability, notExecutable: rowsNotExecutable } = evaluateTripwires(receipt);
   const deterministicFirings = findings.length;
   const isRestored = restored === true || receipt?.kind === RESTORE_PROBE_KIND;
   const notExecutable = Array.isArray(receipt?.notExecutable) ? receipt.notExecutable : null;
+  const folded = rowsNotExecutable.map((row) => ({
+    name: `tripwire ${row.id}`,
+    reason: row.reason,
+    source: 'tripwire-registry',
+  }));
   const fullInstrument = receipt?.kind === FULL_INSTRUMENT_KIND
     && !isRestored
     && Array.isArray(notExecutable)
-    && notExecutable.length === 0;
+    && notExecutable.length === 0
+    && folded.length === 0;
 
   const annotated = {
     ...receipt,
+    // ⚠ THE LEDGER IS EXTENDED, NEVER REPLACED, and it is the one key outside the
+    // freezeBlockers set this function may touch — because it is not an annotation at all,
+    // it is the same ledger the writer opened, continued by the only reader that can see
+    // this class. A receipt that carried no ledger and has a blind row GAINS the key: the
+    // alternative is a receipt that stays silent about the thing it most needs to say.
+    ...(notExecutable === null && folded.length === 0
+      ? {}
+      : { notExecutable: [...(notExecutable || []), ...folded] }),
     // The six fields freezeBlockers reads, and no more (§4.1's finite-semantics clause:
     // "the `evaluateReceipt` annotation (the `freezeBlockers` key set, no more)").
     deterministicFirings,
@@ -81,7 +105,7 @@ export function evaluateReceipt(receipt, {
     ...(profile ? { evaluatedProfile: String(profile) } : {}),
   };
 
-  return { findings, observability, deterministicFirings, annotated };
+  return { findings, observability, notExecutable: folded, deterministicFirings, annotated };
 }
 
 /**

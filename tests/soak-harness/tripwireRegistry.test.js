@@ -90,7 +90,7 @@ describe('the tripwire registry', () => {
   });
 
   it('a clean receipt fires NOTHING — the registry is not a false-finding factory', () => {
-    expect(evaluateTripwires(clean())).toEqual({ findings: [], observability: [] });
+    expect(evaluateTripwires(clean())).toEqual({ findings: [], observability: [], notExecutable: [] });
     // A properly-died settlement legitimately holds zero: the remnant law, honoured.
     expect(evaluateTripwires(clean({
       finalPopulations: [120, 0, 280, 390],
@@ -155,34 +155,46 @@ describe('the tripwire registry', () => {
     const firedRows = (receipt) => [...new Set(fired(receipt))];
     /** @param {(y: number, i: number) => number} f */
     const years = (n, f) => Array.from({ length: n }, (_, y) => [0, 1, 2, 3].map((i) => f(y, i)));
+    /**
+     * ⛔ THE SERIES AND ITS DIED FLAGS ARE PLANTED TOGETHER, BECAUSE A ROW THAT SEES ONE
+     * WITHOUT THE OTHER IS WORSE THAN A BLIND ONE: the remnant law's exception list lives in
+     * the flags, and a plateau row reading populations alone convicts every lawful death.
+     * Both are named in the rows' `requires`, so a fixture that plants only half now makes
+     * the row NOT-EXECUTABLE rather than quietly changing what it means.
+     */
+    const capacity = (n, f) => ({
+      yearlyPopulations: years(n, f),
+      yearlyDiedFlags: years(n, () => false),
+    });
 
     // 1. A REALM STILL CLIMBING AT YEAR 200 never plateaued. It is not FROZEN either, so
     //    the thaw row beside it must stay silent — that is the "only on its own" half.
-    const climbing = lit({ yearlyPopulations: years(201, (y, i) => 100 + i * 100 + y) });
+    const climbing = lit(capacity(201, (y, i) => 100 + i * 100 + y));
     expect(firedRows(climbing)).toEqual(['capacity_plateau']);
     // and it named EVERY settlement that never plateaued, not just the first
     expect(fired(climbing)).toHaveLength(4);
     // and the DARK twin of the very same receipt is convicted by nothing at all
-    expect(fired(clean({ yearlyPopulations: climbing.yearlyPopulations }))).toEqual([]);
+    expect(fired(clean(capacity(201, (y, i) => 100 + i * 100 + y)))).toEqual([]);
 
     // 2. A SETTLEMENT HELD AT ONE HEAD COUNT FOR A CENTURY is the pre-cure defect's OTHER
     //    half — the floored losers the bounded check never saw. Its three siblings step
     //    once, so they are neither frozen nor still climbing, and only the thaw row fires.
-    const frozen = lit({
-      yearlyPopulations: years(150, (y, i) => (i === 0 ? 200 : 500 + i * 100 + Math.floor(y / 100))),
-    });
+    const frozenSeries = (y, i) => (i === 0 ? 200 : 500 + i * 100 + Math.floor(y / 100));
+    const frozen = lit(capacity(150, frozenSeries));
     expect(firedRows(frozen)).toEqual(['capacity_floor_thaw']);
     // exactly the ONE frozen settlement, not its three moving siblings
     expect(fired(frozen)).toHaveLength(1);
-    expect(fired(clean({ yearlyPopulations: frozen.yearlyPopulations }))).toEqual([]);
+    expect(fired(clean(capacity(150, frozenSeries)))).toEqual([]);
 
     // 3. A REALM SITTING AT A FIFTH OF ITS OWN BOUND is not a plateaued realm. This plant
-    //    carries no yearly series at all, so the two rows above are NOT-EXECUTABLE on it
-    //    and their silence here is the design rather than a miss.
+    //    carries no yearly series at all, so the two rows above are NOT-EXECUTABLE on it —
+    //    and that is now a channel this arm can READ rather than a claim in a comment.
     const underloaded = lit({
       behavioral: { yearly: [{ realmDemography: { loadRatio01: 0.2, binding: { granary: 2, walls: 2 } } }] },
     });
     expect(firedRows(underloaded)).toEqual(['capacity_realm_load']);
+    expect(evaluateTripwires(underloaded).notExecutable.map((row) => row.id))
+      .toEqual(['capacity_plateau', 'capacity_floor_thaw']);
     expect(fired(clean({ behavioral: underloaded.behavioral }))).toEqual([]);
 
     // 4. A BINDING CENSUS THAT DOES NOT ACCOUNT FOR EVERY SETTLEMENT is the other clause,
@@ -193,10 +205,65 @@ describe('the tripwire registry', () => {
 
     // 5. AND THE PASSING CORNER, without which every plant above proves only that the rows
     //    can fire and never that they can be satisfied.
-    expect(fired(lit({
-      yearlyPopulations: years(201, (y, i) => (y < 50 ? 100 + i * 100 + y : 150 + i * 100 + (y % 7))),
+    const settled = lit({
+      ...capacity(201, (y, i) => (y < 50 ? 100 + i * 100 + y : 150 + i * 100 + (y % 7))),
       behavioral: { yearly: [{ realmDemography: { loadRatio01: 0.8, binding: { granary: 2, walls: 2 } } }] },
-    }))).toEqual([]);
+    });
+    expect(fired(settled)).toEqual([]);
+    // ⭐ AND THE PASSING CORNER IS A PASS, NOT A SILENCE. Every capacity row RAN on it: the
+    // third channel is empty, so this `[]` is a measurement rather than the weak zero the
+    // same assertion reported for three weeks.
+    expect(evaluateTripwires(settled).notExecutable).toEqual([]);
+  });
+
+  it('a row keyed on an ABSENT field is NOT-EXECUTABLE and names the field — it never answers []', () => {
+    const lit = (over) => clean({ subsystems: { rules: { demographicsEnabled: true } }, ...over });
+    const REASON = 'requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt';
+
+    // ⛔⛔ THE DEFECT THIS ARM EXISTS FOR (M1-F1, measured on the real 300-year receipt).
+    // `whole-world-soak.mjs` ships `finalPopulations` and `finalDiedFlags` and has never
+    // shipped the per-year series, so BOTH capacity series rows hit their own
+    // `Array.isArray(…) ? … : []` guard, read a zero-length series, took the `< 150` (resp.
+    // `< 100`) early return and answered `[]` — a silent clean, on every receipt the estate
+    // has ever written, while the receipt graded `fullInstrument: true`. The fixture below
+    // is the shape the WRITER produces, not the shape the pin used to plant.
+    const asTheWriterShipsIt = lit({});
+    const blind = evaluateTripwires(asTheWriterShipsIt);
+    expect(blind.findings).toEqual([]);
+    expect(blind.notExecutable).toEqual([
+      { id: 'capacity_plateau', class: 'deterministic', reason: REASON },
+      { id: 'capacity_floor_thaw', class: 'deterministic', reason: REASON },
+    ]);
+
+    // HALF A SERIES IS STILL BLIND, and that is not pedantry: the died flags carry the
+    // remnant law's exception list, so a plateau row reading populations alone convicts
+    // every lawful death.
+    expect(evaluateTripwires(lit({ yearlyPopulations: [[1], [2]] })).notExecutable
+      .map((row) => row.reason))
+      .toEqual([
+        'requires receipt.yearlyDiedFlags — absent from this receipt',
+        'requires receipt.yearlyDiedFlags — absent from this receipt',
+      ]);
+    // A key written with nothing in it carried no evidence either.
+    expect(evaluateTripwires(lit({ yearlyPopulations: null, yearlyDiedFlags: null })).notExecutable)
+      .toHaveLength(2);
+
+    // ⭐ PLANT THE FIELDS AND THE ROWS EXECUTE — the existing behaviour, unchanged. Without
+    // this half the arm above would pass on a registry whose rows had simply been disabled.
+    const planted = lit({
+      yearlyPopulations: Array.from({ length: 201 }, (_, y) => [100 + y]),
+      yearlyDiedFlags: Array.from({ length: 201 }, () => [false]),
+    });
+    expect(evaluateTripwires(planted).notExecutable).toEqual([]);
+    expect(evaluateTripwires(planted).findings.map((row) => row.id)).toEqual(['capacity_plateau']);
+
+    // ⛔ AND A DARK CELL IS NOT A BLIND ONE. The §13 C8 rider's gate says the demographic
+    // term was not running, so the rows measured the right thing about a term that was off:
+    // they are NOT APPLICABLE, they list nothing, and a freeze gate must not be told a run
+    // went blind because a subsystem was legitimately dark.
+    expect(evaluateTripwires(clean({})).notExecutable).toEqual([]);
+    expect(evaluateTripwires(clean({ subsystems: { rules: { demographicsEnabled: false } } })).notExecutable)
+      .toEqual([]);
   });
 
   it('HOST-OBSERVABILITY rows never mint a finding, which is what makes the pool proof possible', () => {
@@ -281,6 +348,8 @@ describe('the tripwire registry', () => {
       expect(Array.isArray(row.detect({}))).toBe(true);
       expect(Array.isArray(row.detect(null))).toBe(true);
     }
-    expect(evaluateTripwires({})).toEqual({ findings: [], observability: [] });
+    // An EMPTY receipt lights no gate, so every capacity row is NOT APPLICABLE rather than
+    // not-executable: the third channel stays empty and the two others answer nothing.
+    expect(evaluateTripwires({})).toEqual({ findings: [], observability: [], notExecutable: [] });
   });
 });
