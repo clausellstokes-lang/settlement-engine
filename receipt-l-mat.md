@@ -677,3 +677,51 @@ Build determinism re-controlled in passing: the two tip builds produced identica
    this lane; every tree-reading walker is green.
 8. **+36 first-paint bytes** (above) — accepted, measured, inside budget by 5,878 B.
 
+
+---
+
+## CAR 10 — THE SKEPTIC'S CURES
+
+⟦Seat: Opus 5 — Fable-unvalidated (implementer) · Lane L-MAT-FIX · chair Fable 5.1 (session
+5540cfd2) · brief: `$SC/skeptic-913/FOLD.md`, all twenty cures ACCEPTED by the chair as the fold
+states them⟧
+
+### ARRIVAL CHECK (2026-09-07 19:50:19 EDT, from `date`) — PASS
+| gate | reading |
+|---|---|
+| dock HEAD | `19642a9fce0817213040af0a0815ac5ced09fbbb` — the briefed tip |
+| `git status --porcelain \| wc -l` | **0** |
+| `ls -A node_modules \| wc -l` | **455** (the three hidden entries are `.bin`, `.vite`, `.vite-temp` — C16) |
+| `$SC/HOLD-VITEST` | **absent** |
+| `pgrep -fl vitest \| grep -v gate-mutex \| wc -l` | **0** |
+
+### THE SPLIT THIS CAR SHIPS
+**Bytes:** C1–C8 (§2.A of the fold) — the smallest cure each, verified against the tip by SYMBOL
+before editing, never by the fold's line number. **Receipt only:** C9–C20, written below as
+numbered X-corrections that supersede the earlier sentences without deleting them.
+
+### ⭐ C1 — THE MEASUREMENT TAKEN *BEFORE* THE EDIT (the arm must be green AND failable)
+The unconditional form can only land if all five identity keys really are on the generated rows;
+otherwise the cure would red the file and the refusal, not the edit, would be the result. Probe run
+read-only against the dock (`$SC5/car10/c1-failability.mjs`, dock cwd, no dock byte moved), the
+test's own `litSettlement()` reproduced:
+
+```
+IDENTITY KEYS (5): customDefinitionId, customDefinitionRevisionId,
+                   customDefinitionContentHash, customDefinitionVersion,
+                   customDefinitionFingerprint
+rows = 4 | rosterKeys = 33 | every key present on a row AND in rosterKeys
+UNCONDITIONAL ASSERTION AT THE TIP = GREEN
+```
+And the negative control — the regression the fold says the guarded form silently permits, run
+once per key (drop that identifier from every row, recompute `rosterKeys`):
+
+```
+DROP customDefinitionId          | OLD guarded arm fires = false (SILENTLY GREEN) | NEW = RED
+DROP customDefinitionRevisionId  | OLD guarded arm fires = false (SILENTLY GREEN) | NEW = RED
+DROP customDefinitionContentHash | OLD guarded arm fires = false (SILENTLY GREEN) | NEW = RED
+DROP customDefinitionVersion     | OLD guarded arm fires = false (SILENTLY GREEN) | NEW = RED
+DROP customDefinitionFingerprint | OLD guarded arm fires = false (SILENTLY GREEN) | NEW = RED
+```
+**5 of 5.** The old arm went green on every one of the five regressions it claimed to guard; the
+new one reds on every one. The fold's HIGH is confirmed by execution, not by reading.

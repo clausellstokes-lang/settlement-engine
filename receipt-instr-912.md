@@ -483,3 +483,116 @@ $ node scripts/check-full-typecheck.mjs
 [typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
 ```
 
+---
+
+## CAR 4 — THE DERIVED INSTITUTION TABLE (CLERK-LAWS §1, §1.5) — **LANDED** · sha `37833b22e` · 2026-09-07 19:50 EDT
+
+### 4.1 What was built
+`src/domain/institutions/institutionTable.js` — a headless, derived, UNPERSISTED read-time
+projection beside `institutionRoster.js` — and `tests/lint/institutionTable.walker.test.js`
+(12 assertions). Eleven columns, each carrying its `closed` flag **and the BASIS it was filled
+from**, so a reader argues with the column rather than with the table.
+
+### 4.2 THE MEASUREMENT THAT CHANGED THE BUILD — and it is a spec correction
+CLERK-LAWS §1.2 sources `whatItCounts` from *"the settlement's INSTANTIATED services"*. The
+schema's field for that is `settlement.services` (`settlement.schema.js:273`).
+**MEASURED: `settlement.services` is EMPTY on every settlement this pipeline generates** — 0
+rows over 20 settlements across four tiers, and 0 institutions carrying their own `.services`.
+The rows the generator actually writes land on **`availableServices`**, an object keyed by
+category whose rows each name the INSTITUTION they belong to: **702 rows over twelve
+settlements, 697 of them naming a live roster row, 19 of duty kind.**
+
+A table built on the schema's declared field would have reported EVERY duty column empty and
+been believed — and the Brackwater refusal would have rested on a false ground. The module
+carries the measurement beside the read.
+
+### 4.3 THE ESTATE SCAN — asserted in the test, not assumed
+```
+INSTITUTION TABLE · estate scan over 30 settlements (six tiers × five seeds)
+  whoIsExempt non-empty on: 0
+  distinct offices held:    146
+  a bailiff anywhere:       false
+```
+- `whoIsExempt` is empty on all thirty, and every table sets `nullEverywhere: true`.
+- **No bailiff among 146 distinct offices** — the Brackwater noun, re-measured at this tip
+  rather than carried from the spec.
+- `whoIsCounted.closed` is FALSE on every tier and holds at most ONE value, a band word.
+- The scan asserts `offices.size > 50` so "no bailiff" cannot pass vacuously.
+
+### 4.4 THE COLUMN CENSUS at 3b1c0eaa5, beside CLERK-LAWS §1.2's own table
+```
+  hamlet — 17 live institutions
+     institution      closed=true  held=  17   Carpenter (part-time) · Hunter's lodge · …
+     office           closed=false held=   8   Elder · Feudal Stewardship · Lord Mayor
+     holderRole       closed=false held=   0
+     whatItCounts     closed=true  held=   0
+     whoIsCounted     closed=false held=   1   a hundred or so
+     whoIsExempt      closed=false held=   0
+     whatItDoes       closed=true  held=  18
+     whatItDoesNotDo  closed=true  held=   0
+     provenance       closed=true  held=   1   PRE_SEED
+     sustainer        closed=false held=   0
+  town  — 55 live institutions:  whatItCounts held 3  (Custom commission · Register of the
+                                 dead · Tax collection);  whoIsCounted "thousands"
+  city  — 42 live institutions:  whatItCounts held 1  (Customs bypass)
+```
+**Two rows worth the chair's eye.** A HAMLET's `whatItCounts` is EMPTY — no duty row at all —
+so on a small settlement no count-duty sentence is licensed by anything. And `provenance` holds
+exactly ONE value, `PRE_SEED`, on every tier sampled: a freshly generated town has no
+`FOUNDED{year}` institution at all, so "founded in the year…" is refused everywhere and
+"has stood since the founding" is the only licensed provenance form.
+
+### 4.5 ONE DETECTOR NARROWED BY MEASUREMENT
+`Custom enchanting` — an arcane SERVICE — entered the duty column through a bare `custom` in
+`DUTY_SERVICE_KINDS`. A duty column that admits a craft service licenses a clerk's sentence
+about a duty the town does not have, which is the whole fault this table exists to make
+impossible. The stem was removed; `customs` and `custom commission(s)` stay. Distinct duty
+rows across the estate fell from 10 to **9**: Central register · Custom commissions · Customs
+bypass · Record keeping · Register of the dead · Road register · Tax collection · Tax payment ·
+Toll collection.
+
+### 4.6 THE FENCES — asserted against the module's own BYTES
+| fence | how it is asserted |
+|---|---|
+| **no writer** | no `settlement.<field> =` assignment in the code |
+| **no persistence** | no store/persist/saves/localStorage import; no `localStorage`/`indexedDB` |
+| **no `exempt` field** | no `exempt:` key in the code |
+| **no `bailiff` role** | the string appears nowhere in the code |
+| **no product surface** | `grep -rl institutionTable src/components src/generators src/pdf` returns EMPTY — D10 is the owner's to sign. A CONTROL grep proves the grep can find something |
+| **the ruin filter routed, not re-spelled** | the module imports `liveInstitutions` from `institutionRoster.js`; the estate's ruin-filter ratchet reads it as COMPLIANT rather than exempt (run: green) |
+
+**The fence scan reads CODE-ONLY, and that cost a red to learn.** The module's own
+documentation QUOTES the estate's one live typed `exempt: true|false`
+(`demographicsLand.js:347/:351` — a SITE-LEGALITY flag: a user-provenance site is exempt from
+the legality refusal) in order to explain why it does not belong in this column. A raw-byte
+fence read that sentence as the writer it forbids. The test now routes through the estate's own
+`codeOnly` blanker AND asserts the blanker is doing that work — the same two-scan asymmetry
+`ruinFilterRoster.walker.test.js` records in its own header.
+
+**This also confirms the sitting's correction (B.4.8) and its limit:** the live typed `exempt`
+exists, and it is not an exemption from a duty. The column conclusion — no exemption FAMILY —
+stands, now on a measurement rather than a grep of comments.
+
+### 4.7 THE PROOFS
+```
+$ npx vitest run tests/lint/institutionTable.walker.test.js ; echo EXIT=$?
+  Test Files  1 passed (1)
+       Tests  12 passed (12)
+EXIT=0
+$ npx vitest run tests/lint/ruinFilterRoster.walker.test.js \
+      tests/lint/institutionTable.walker.test.js tests/lint/contractTestAntiVacuity.walker.test.js
+  Test Files  3 passed (3)
+       Tests  39 passed (39)
+$ npx eslint src/domain/institutions/institutionTable.js tests/lint/institutionTable.walker.test.js ; echo EXIT=$?
+EXIT=0
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+```
+
+### 4.8 The seam car 1 leaves open
+`entryGround.estateGround({officeRoster})` still takes its roster as an argument. The
+table's `office` column is now the per-settlement answer, and
+`entryGround.settlementGround(table)` accepts the table directly. Wiring the corpus walk to a
+per-settlement table is the WAVE's act, not this lane's: a corpus variant is not bound to a
+settlement (§1.1's two scopes), so the estate ground stays the corpus-wide read.
+

@@ -1,8 +1,7 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 19:46:28 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 19:52:28 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
-| ? | critic |  | result | 0 | CRITIC-S12.md | — | 17:49:27 |
 | ? | other |  | result | 0 | — | — | 21:05:34 |
 | ? | other |  | result | 0 | refutations.md | — | 20:30:16 |
 | ? | other |  | result | 0 | rulings.md | — | 20:31:15 |
@@ -12,18 +11,10 @@
 | ? | other |  | result | 0 | — | — | 20:31:41 |
 | ? | other |  | result | 0 | bdash.mjs, chron.mjs, figures.md, r6.mjs, r6b.mjs, r6c.mjs, r6d.mjs, rest.mjs, r | — | 20:34:29 |
 | ? | other |  | result | 0 | — | — | 20:48:04 |
-| ? | other |  | in-flight | 0 | — | — | 23:46:04 |
+| ? | other |  | result | 0 | — | — | 23:48:59 |
 | ? | other |  | result | 0 | — | — | 23:37:42 |
 | ? | other |  | result | 0 | — | — | 23:41:42 |
 | ? | other |  | result | 0 | — | — | 23:38:19 |
 | ? | other |  | result | 0 | — | — | 23:37:38 |
-| ? | other |  | result | 0 | CLERK-LAWS.md | — | 17:32:22 |
-| ? | other |  | failed | 0 | RULES-V2-PART-B.md | — | 18:25:52 |
-| ? | other |  | result | 0 | reconcile-dm-page.md, dm-only-measure.mjs, recount.py | — | 17:03:54 |
-| ? | other |  | result | 0 | refute-chronicle-line.md | — | 17:01:06 |
-| ? | other |  | result | 0 | MOVE-GRAMMAR.md | — | 17:30:42 |
-| ? | other |  | result | 0 | CONTRADICTIONS.md | — | 17:34:32 |
-| ? | other |  | result | 0 | — | — | 17:01:30 |
-| ? | other |  | result | 0 | — | — | 17:20:49 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).
