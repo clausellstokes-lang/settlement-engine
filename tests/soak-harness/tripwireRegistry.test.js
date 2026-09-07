@@ -22,6 +22,7 @@ import {
   WALL_TIME_TREND_FACTOR,
   YEARLY_BYTES_PER_SETTLEMENT_CEILING,
   evaluateTripwires,
+  nestedWriterFields,
   receiptWriterFields,
   tripwireFieldReach,
   tripwireFieldsRead,
@@ -38,6 +39,13 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
  * question about forty key names.
  */
 const WRITER_SOURCE = readFileSync(join(ROOT, 'scripts/audit/whole-world-soak.mjs'), 'utf8');
+/**
+ * ⭐ THE SECOND WRITER, READ THE SAME WAY (§909 car 2). `capacity_realm_load` stands on
+ * `behavioral.yearly[last].realmDemography`, and the module that ships that key is the
+ * OBSERVER, not the soak — so a walker handed only the soak's text could grade the row's
+ * first segment and nothing else. Text-read for the same ARM_B_ROOT reason as above.
+ */
+const OBSERVER_SOURCE = readFileSync(join(ROOT, 'scripts/audit/behavioral-observation.mjs'), 'utf8');
 
 /** A clean receipt: nothing should fire. */
 const clean = (overrides = {}) => ({
@@ -94,8 +102,7 @@ describe('the tripwire registry', () => {
 
     // ⛔ AND THE FALSE CLAIM CANNOT BE RE-MADE BY READING THIS FILE. The writer is text-read
     // here so "no `motion` block at all" is refuted by the tree rather than by memory.
-    const observer = readFileSync(join(ROOT, 'scripts/audit/behavioral-observation.mjs'), 'utf8');
-    expect(observer).toMatch(/motion: \{\s*\n\s*populationTransitions,\s*\n\s*populationMoved,/);
+    expect(OBSERVER_SOURCE).toMatch(/motion: \{\s*\n\s*populationTransitions,\s*\n\s*populationMoved,/);
   });
 
   it('no DETERMINISTIC row reads a clock or the heap, and the scan really convicts', () => {
@@ -246,6 +253,9 @@ describe('the tripwire registry', () => {
   it('a row keyed on an ABSENT field is NOT-EXECUTABLE and names the field — it never answers []', () => {
     const lit = (over) => clean({ subsystems: { rules: { demographicsEnabled: true } }, ...over });
     const REASON = 'requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt';
+    const NESTED_REASON = 'requires receipt.behavioral.yearly[last].realmDemography — absent from this receipt';
+    /** The realm reading a receipt must carry for `capacity_realm_load` to be executable. */
+    const realmReading = { realmDemography: { loadRatio01: 0.8, binding: { granary: 2, walls: 2 } } };
 
     // ⛔⛔ THE DEFECT THIS ARM EXISTS FOR (M1-F1, measured on the real 300-year receipt).
     // `whole-world-soak.mjs` ships `finalPopulations` and `finalDiedFlags` and has never
@@ -260,6 +270,10 @@ describe('the tripwire registry', () => {
     expect(blind.notExecutable).toEqual([
       { id: 'capacity_plateau', class: 'deterministic', reason: REASON },
       { id: 'capacity_floor_thaw', class: 'deterministic', reason: REASON },
+      // ⭐ AND THE THIRD ROW JOINED THE LEDGER AT §909 CAR 2, which is a DECLARED grade
+      // movement and not a drive-by: `capacity_realm_load` keys on a NESTED additive key,
+      // so on a lit receipt that carries no realm reading it used to answer a silent clean.
+      { id: 'capacity_realm_load', class: 'deterministic', reason: NESTED_REASON },
     ]);
 
     // HALF A SERIES IS STILL BLIND, and that is not pedantry: the died flags carry the
@@ -270,16 +284,21 @@ describe('the tripwire registry', () => {
       .toEqual([
         'requires receipt.yearlyDiedFlags — absent from this receipt',
         'requires receipt.yearlyDiedFlags — absent from this receipt',
+        NESTED_REASON,
       ]);
     // A key written with nothing in it carried no evidence either.
     expect(evaluateTripwires(lit({ yearlyPopulations: null, yearlyDiedFlags: null })).notExecutable)
-      .toHaveLength(2);
+      .toHaveLength(3);
 
     // ⭐ PLANT THE FIELDS AND THE ROWS EXECUTE — the existing behaviour, unchanged. Without
     // this half the arm above would pass on a registry whose rows had simply been disabled.
     const planted = lit({
       yearlyPopulations: Array.from({ length: 201 }, (_, y) => [100 + y]),
       yearlyDiedFlags: Array.from({ length: 201 }, () => [false]),
+      // The realm reading rides along from §909 car 2: the arm's claim is that planting what
+      // the rows REQUIRE makes them execute, so it must plant what ALL THREE require or it
+      // would be asserting the cure for two rows against a third that stayed blind.
+      behavioral: { yearly: [realmReading] },
     });
     expect(evaluateTripwires(planted).notExecutable).toEqual([]);
     expect(evaluateTripwires(planted).findings.map((row) => row.id)).toEqual(['capacity_plateau']);
@@ -383,7 +402,7 @@ describe('the tripwire registry', () => {
     const UNREACHABLE_ROWS_BANKED = 0;
     const UNREACHABLE_PAIRS_BANKED = 0;
 
-    const reach = tripwireFieldReach(TRIPWIRES, WRITER_SOURCE);
+    const reach = tripwireFieldReach(TRIPWIRES, WRITER_SOURCE, OBSERVER_SOURCE);
 
     // The writer's key set is a real reading, not an empty set that would make every row
     // look unreachable — 40+ keys, and the ones the deterministic rows actually stand on.
@@ -405,6 +424,10 @@ describe('the tripwire registry', () => {
     expect(reach.unreachable).toEqual([]);
     // No row is beyond the walker's reading.
     expect(reach.unreadable).toEqual([]);
+    // …and no DECLARED requirement is beyond a writer either (§909 car 2). A read is what a
+    // row touches; a require is what it says its silence depends on, and the second is the
+    // one a freeze gate acts on — so both are graded, in their own channels.
+    expect(reach.unreachablePaths).toEqual([]);
 
     // ⛔⛔ A ZERO IS ONLY A MEASUREMENT IF THE INSTRUMENT COULD HAVE SAID OTHERWISE. With
     // both series shipped, every assertion above passes just as well on a walker that
@@ -421,23 +444,49 @@ describe('the tripwire registry', () => {
     expect(legacyWriter.length).toBeLessThan(WRITER_SOURCE.length);
     expect(receiptWriterFields(legacyWriter)).not.toContain('yearlyPopulations');
     expect(receiptWriterFields(legacyWriter)).not.toContain('yearlyDiedFlags');
-    const legacyReach = tripwireFieldReach(TRIPWIRES, legacyWriter);
+    const legacyReach = tripwireFieldReach(TRIPWIRES, legacyWriter, OBSERVER_SOURCE);
     expect(legacyReach.unreachable).toEqual([
       { id: 'capacity_plateau', field: 'yearlyDiedFlags' },
       { id: 'capacity_plateau', field: 'yearlyPopulations' },
       { id: 'capacity_floor_thaw', field: 'yearlyDiedFlags' },
       { id: 'capacity_floor_thaw', field: 'yearlyPopulations' },
     ]);
+    // …and the DECLARED-requirement channel convicts the same pre-§909 writer independently,
+    // in the order the rows declare them. Two channels agreeing on one control is what makes
+    // either believable; `capacity_realm_load`'s nested path is grounded in the observer and
+    // is untouched by deleting two lines from the soak, which is the discrimination.
+    expect(legacyReach.unreachablePaths).toEqual([
+      { id: 'capacity_plateau', path: 'yearlyPopulations', segment: 'yearlyPopulations' },
+      { id: 'capacity_plateau', path: 'yearlyDiedFlags', segment: 'yearlyDiedFlags' },
+      { id: 'capacity_floor_thaw', path: 'yearlyPopulations', segment: 'yearlyPopulations' },
+      { id: 'capacity_floor_thaw', path: 'yearlyDiedFlags', segment: 'yearlyDiedFlags' },
+    ]);
 
     // ⭐ AND EVERY UNREACHABLE ROW STILL DECLARES ITS OWN BLINDNESS — the law survives the
     // cure, and it is read off the CONTROL because the live reach is now empty. The two rows
     // KEEP their `requires`: an archived v4/v5 receipt written before §909 still lacks both
-    // fields, and its silence must still grade NOT-EXECUTABLE rather than clean. Reachability
-    // and requiredness were one fact while the writer was blind; they are two facts now, and
-    // this is the direction that matters — a blind row must announce itself.
-    expect([...new Set(legacyReach.unreachable.map((row) => row.id))]).toEqual(
-      TRIPWIRES.filter((row) => Array.isArray(row.requires)).map((row) => row.id),
-    );
+    // fields, and its silence must still grade NOT-EXECUTABLE rather than clean.
+    //
+    // ⛔ THE IDENTITY WAS RESTATED AT §909 CAR 2, AND THE OLD SPELLING WAS THE COINCIDENCE.
+    // "Unreachable rows == rows that declare `requires`" held only while every requirement
+    // was a top-level field of ONE writer. `capacity_realm_load` declares a requirement it
+    // CAN reach — grounded in the observer — so the equality now fails in the harmless
+    // direction and would have to be weakened to nothing to keep its old shape. The law it
+    // was protecting is a SUBSET law, and it is asserted as one: whatever the walker
+    // convicts, in either channel, is a row that announced its dependency.
+    const convictedBy = (grade) => [...new Set(
+      [...grade.unreachable, ...grade.unreachablePaths].map((row) => row.id),
+    )];
+    const declaresRequires = TRIPWIRES.filter((row) => Array.isArray(row.requires)).map((row) => row.id);
+    expect(convictedBy(legacyReach)).toEqual(['capacity_plateau', 'capacity_floor_thaw']);
+    expect(convictedBy(legacyReach).filter((id) => !declaresRequires.includes(id))).toEqual([]);
+    // …and blinding BOTH writers at once recovers the TOTALITY the old equality asserted:
+    // every row that declares a requirement can be convicted of losing it, none excepted.
+    const legacyObserver = OBSERVER_SOURCE
+      .replace(/\n\s*\.\.\.\(realmDemography \? \{ realmDemography \} : \{\}\),/, '\n');
+    expect(legacyObserver.length).toBeLessThan(OBSERVER_SOURCE.length);
+    expect(convictedBy(tripwireFieldReach(TRIPWIRES, legacyWriter, legacyObserver)))
+      .toEqual(declaresRequires);
 
     // ⛔ THE THIRD ROW, REFUSED WITH A MEASUREMENT. A walker that read only `receiptBody`
     // would report `non_finite_ledger_figure` as unreachable too — and it is not:
@@ -475,6 +524,124 @@ describe('the tripwire registry', () => {
     expect(opaque.unreadable).toContain('a computed `receipt[…]` read whose key list is not a literal array');
     expect(tripwireFieldReach([{ id: 'opaque', detect: (receipt) => [receipt?.[String(Math.random())]] }], WRITER_SOURCE)
       .unreadable.map((row) => row.id)).toEqual(['opaque']);
+  });
+
+  it('a NESTED requirement is grounded in its own writer, and an ungrounded one is refused rather than passed', () => {
+    /**
+     * ⛔⛔ THE WEAK ZERO HAD A THIRD FLOOR (§909 car 2). `capacity_realm_load` was never
+     * unreachable the way its two siblings were — it keys on `behavioral`, which the soak
+     * ships — but the field it actually stands on is one level down:
+     * `behavioral.yearly[last].realmDemography`, an ADDITIVE key the OBSERVER ships
+     * CONDITIONALLY. On a receipt without it the detector took `if (!reading …) return []`
+     * and answered a silent clean. `requires` graded TOP-LEVEL names only, so nothing in the
+     * estate could see that. The path is the unit now, and this arm is the proof that both
+     * halves of the new machinery — the runtime channel and the walker — can say NO.
+     */
+    expect(TRIPWIRES.find((row) => row.id === 'capacity_realm_load').requires)
+      .toEqual(['behavioral.yearly[last].realmDemography']);
+
+    // ── THE WALKER HALF ──────────────────────────────────────────────────────────────
+    // The observer really does ship the leaf, and it ships it as a CONDITIONAL SHORTHAND
+    // SPREAD — the form the writer scanner could not see until this car, which is asserted
+    // against the observer's own text so a refactor to any other form reds here rather than
+    // silently making the path look ungrounded.
+    expect(nestedWriterFields(OBSERVER_SOURCE)).toContain('realmDemography');
+    expect(OBSERVER_SOURCE).toMatch(/\.\.\.\(realmDemography \? \{ realmDemography \} : \{\}\)/);
+    expect(tripwireFieldReach(TRIPWIRES, WRITER_SOURCE, OBSERVER_SOURCE).unreachablePaths).toEqual([]);
+
+    // ⛔ AND THE ZERO IS CAUSED, on the OBSERVER this time. Reconstruct the pre-P4 observer
+    // by deleting the one line that ships the key, prove the deletion non-vacuous, and the
+    // walker must convict the path at exactly the segment that went missing.
+    const legacyObserver = OBSERVER_SOURCE
+      .replace(/\n\s*\.\.\.\(realmDemography \? \{ realmDemography \} : \{\}\),/, '\n');
+    expect(legacyObserver.length).toBeLessThan(OBSERVER_SOURCE.length);
+    expect(nestedWriterFields(legacyObserver)).not.toContain('realmDemography');
+    expect(tripwireFieldReach(TRIPWIRES, WRITER_SOURCE, legacyObserver).unreachablePaths).toEqual([
+      {
+        id: 'capacity_realm_load',
+        path: 'behavioral.yearly[last].realmDemography',
+        segment: 'realmDemography',
+      },
+    ]);
+
+    // ⛔⛔ NO NESTED SOURCE ⇒ UNREADABLE, NEVER A PASS. A walker that graded `behavioral` and
+    // shrugged at the rest would report a clean sheet about the exact level where the weak
+    // zero lived. This is the arm that keeps the two-argument call from becoming a loophole.
+    expect(tripwireFieldReach(TRIPWIRES, WRITER_SOURCE).unreadable).toEqual([{
+      id: 'capacity_realm_load',
+      reason: 'a nested `requires` path (behavioral.yearly[last].realmDemography) and no '
+        + 'nested-writer source to ground it in',
+    }]);
+
+    // A first segment the RECEIPT writer never writes is convicted at that segment, so the
+    // two levels are graded against the two different sources and not conflated.
+    const plantedTop = [{
+      id: 'planted', class: 'deterministic', band: 'b', home: 'a derivation home long enough to pass',
+      requires: ['noSuchSection.yearly[last].realmDemography'], detect: () => [],
+    }];
+    expect(tripwireFieldReach(plantedTop, WRITER_SOURCE, OBSERVER_SOURCE).unreachablePaths)
+      .toEqual([{ id: 'planted', path: 'noSuchSection.yearly[last].realmDemography', segment: 'noSuchSection' }]);
+    const plantedLeaf = [{
+      id: 'planted', class: 'deterministic', band: 'b', home: 'a derivation home long enough to pass',
+      requires: ['behavioral.yearly[last].noSuchReading'], detect: () => [],
+    }];
+    expect(tripwireFieldReach(plantedLeaf, WRITER_SOURCE, OBSERVER_SOURCE).unreachablePaths)
+      .toEqual([{ id: 'planted', path: 'behavioral.yearly[last].noSuchReading', segment: 'noSuchReading' }]);
+
+    // ── THE RUNTIME HALF ─────────────────────────────────────────────────────────────
+    const lit = (over) => clean({ subsystems: { rules: { demographicsEnabled: true } }, ...over });
+    const NESTED_REASON = 'requires receipt.behavioral.yearly[last].realmDemography — absent from this receipt';
+    const reasonsFor = (receipt, id) => evaluateTripwires(receipt).notExecutable
+      .filter((row) => row.id === id).map((row) => row.reason);
+
+    // A LIT receipt whose last observed year carries no realm reading: the row could not
+    // run, and now it says so instead of answering [].
+    expect(reasonsFor(lit({ behavioral: { yearly: [{ year: 1 }] } }), 'capacity_realm_load'))
+      .toEqual([NESTED_REASON]);
+    // …and the same for every shape of absence the path can meet on the way down.
+    expect(reasonsFor(lit({}), 'capacity_realm_load')).toEqual([NESTED_REASON]);
+    expect(reasonsFor(lit({ behavioral: { yearly: [] } }), 'capacity_realm_load')).toEqual([NESTED_REASON]);
+    expect(reasonsFor(lit({ behavioral: { yearly: null } }), 'capacity_realm_load')).toEqual([NESTED_REASON]);
+    expect(reasonsFor(lit({ behavioral: { yearly: [{ realmDemography: null }] } }), 'capacity_realm_load'))
+      .toEqual([NESTED_REASON]);
+
+    // ⭐ `[last]` MEANS THE LAST ROW AND NOT ANY ROW, which is what the detector reads. A
+    // series whose EARLIER years carry the reading and whose final year does not measured
+    // nothing about the horizon it is asked about.
+    const reading = { loadRatio01: 0.8, binding: { granary: 2, walls: 2 } };
+    expect(reasonsFor(lit({ behavioral: { yearly: [{ realmDemography: reading }, { year: 2 }] } }), 'capacity_realm_load'))
+      .toEqual([NESTED_REASON]);
+    // …and PRESENT on the last row, the row executes: the third channel is empty for it and
+    // the band is what speaks. Without this half the arm proves only that the row can refuse.
+    const carried = lit({ behavioral: { yearly: [{ year: 1 }, { realmDemography: reading }] } });
+    expect(reasonsFor(carried, 'capacity_realm_load')).toEqual([]);
+    expect(evaluateTripwires(carried).findings.map((row) => row.id)).toEqual([]);
+    expect(evaluateTripwires(lit({
+      behavioral: { yearly: [{ realmDemography: { loadRatio01: 0.2, binding: { granary: 2, walls: 2 } } }] },
+    })).findings.map((row) => row.id)).toEqual(['capacity_realm_load']);
+
+    // ⛔ A DARK CELL IS STILL NOT A BLIND ONE. `gate` is read BEFORE `requires`, so a receipt
+    // that legitimately ran the term dark lists nothing at all — the re-grade this car
+    // performs reaches LIT receipts only, and that boundary is machinery, not a promise.
+    expect(evaluateTripwires(clean({ subsystems: { rules: { demographicsEnabled: false } } })).notExecutable)
+      .toEqual([]);
+
+    // ── AND A MALFORMED PATH IS A REGISTRY DEFECT, NOT A PERMANENT INSTRUMENT GAP ─────
+    // `receiptCarries` answers false for a path it cannot parse, so an unconvicted typo
+    // would make its row NOT-EXECUTABLE on every receipt for ever and read exactly like an
+    // honest gap. The scan names it instead.
+    const malformed = (path) => tripwireRegistryDefects([{
+      id: 'planted', class: 'deterministic', band: 'b', home: 'a derivation home long enough to pass',
+      requires: [path], detect: () => [],
+    }]);
+    expect(malformed('behavioral..yearly')).toEqual([
+      'planted: requires path "behavioral..yearly" is not a dotted field path (name, or name[last])',
+    ]);
+    expect(malformed('behavioral.yearly[0].realmDemography')).toHaveLength(1);
+    expect(malformed('behavioral.yearly[last] .realmDemography')).toHaveLength(1);
+    // …and the two live spellings are NOT convicted, so the scan is a rule and not a wall.
+    expect(malformed('yearlyPopulations')).toEqual([]);
+    expect(malformed('behavioral.yearly[last].realmDemography')).toEqual([]);
   });
 
   it('every row is a REGISTRY ROW — a new class costs its row or the guard is invisible', () => {

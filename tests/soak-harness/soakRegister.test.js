@@ -50,7 +50,20 @@ const HORIZON = 301;
  * A synthetic 300-year receipt in the watchdog's own shape. `shape` names what each
  * settlement's series should do, so a test can move one figure and nothing else.
  */
-function researchReceipt({ caseId = 'research-lit-4s-300y-4s-seed1', shapes = ['plateau', 'plateau', 'plateau', 'plateau'], lit = true } = {}) {
+function researchReceipt({
+  caseId = 'research-lit-4s-300y-4s-seed1',
+  shapes = ['plateau', 'plateau', 'plateau', 'plateau'],
+  lit = true,
+  // ⛔ THE REALM READING, AS A LIT RUN ACTUALLY SHIPS IT (§909 car 2). `observeRealmDemography`
+  // returns non-null on exactly the worlds whose demographic term is running, so a LIT
+  // receipt from `whole-world-soak.mjs` always carries this key on every yearly row —
+  // measured on the real 300-year `research-lit-4s` receipt and on a fresh lit 30-year run.
+  // This fixture claimed `lit` and carried no reading, which is a shape the writer cannot
+  // produce; `capacity_realm_load` therefore read a silent clean off it. Defaulting it TRUE
+  // makes the fixture the writer's shape again, and `realmReading: false` reconstructs the
+  // pre-P4 shape so the door's refusal can be proved rather than assumed.
+  realmReading = true,
+} = {}) {
   const seriesFor = (shape, base) => {
     const out = [];
     for (let year = 0; year < HORIZON; year += 1) {
@@ -67,7 +80,18 @@ function researchReceipt({ caseId = 'research-lit-4s-300y-4s-seed1', shapes = ['
     IDS.forEach((id, index) => { stateVectors[id] = { population: series[index][year] }; });
     const eventTypeCounts = {};
     for (let n = 0; n < 12; n += 1) eventTypeCounts[`type_${(year * 12) + n}`] = 3;
-    yearly.push({ year: year + 1, majorEventCount: 4, eventTypeCounts, stateVectors });
+    yearly.push({
+      year: year + 1,
+      majorEventCount: 4,
+      eventTypeCounts,
+      stateVectors,
+      // Inside the row's own band on both clauses (load in [0.6, 1.05]; the binding census
+      // accounts for all four settlements), so the fixture stays CLEAN and this key adds an
+      // instrument rather than a finding.
+      ...(realmReading && lit
+        ? { realmDemography: { loadRatio01: 0.82, binding: { granary: 2, walls: 2 } } }
+        : {}),
+    });
   }
   return {
     schemaVersion: 5,
@@ -110,16 +134,20 @@ function researchReceipt({ caseId = 'research-lit-4s-300y-4s-seed1', shapes = ['
 }
 
 /**
- * THE SAME RECEIPT AS THE WRITER WILL SHIP IT ONCE THE PER-YEAR SERIES LANDS — the two
- * capacity fields derived from the fixture's OWN state vectors, so nothing is invented.
+ * THE SAME RECEIPT AS THE WRITER SHIPS IT — the two capacity fields derived from the
+ * fixture's OWN state vectors, so nothing is invented.
  *
- * ⛔⛔ THIS PLANTS TWO FIELDS NO WRITER SHIPS TODAY, DELIBERATELY, AND THE ARM DIRECTLY
- * BELOW PINS THAT FACT rather than letting this helper hide it. M1-F1's whole lesson is
- * that a fixture which is the only writer of a shape makes a blind row look green, so the
- * blindness is asserted FIRST, against the honest `researchReceipt()`, and the forward shape
- * is used only where a DOOR is the subject: a door cannot be exercised by a receipt the
- * previous door already refused. Shipping the series is the owner's schema row (§907); when
- * it lands this helper becomes the identity function and should be deleted.
+ * ⛔⛔ THE SERIES LANDED AT §909 CAR 1, AND THIS HELPER STAYS ANYWAY — the old note here
+ * said it would "become the identity function and should be deleted" once
+ * `whole-world-soak.mjs` shipped `yearlyPopulations` / `yearlyDiedFlags`, and that reading
+ * was half right. The writer ships them now (proved on a fresh 30-year receipt), but
+ * `researchReceipt()` is SYNTHETIC and still does not, deliberately: the arm directly below
+ * needs a receipt in the PRE-§909 shape to prove the mint door refuses a blind instrument,
+ * and a helper that had become the identity function would leave that arm with no subject.
+ * M1-F1's whole lesson is that a fixture which is the only writer of a shape makes a blind
+ * row look green, so the blindness is asserted FIRST, against the bare `researchReceipt()`,
+ * and this forward shape is used only where a DOOR is the subject: a door cannot be
+ * exercised by a receipt the previous door already refused.
  */
 const instrumentComplete = (receipt) => ({
   ...receipt,
@@ -265,6 +293,19 @@ describe('the soak register — shapes, comparisons and the governed growth door
     // …and it is the ABSENCE that refuses, not the capacity rows themselves: plant the two
     // fields the writer does not yet ship and the very same receipt mints.
     expect(mintRefusals(annotate(instrumentComplete(researchReceipt())))).toEqual([]);
+
+    // ⛔⛔ AND THE NESTED BLINDNESS REFUSES THE SAME DOOR (§909 car 2). A LIT receipt whose
+    // last observed year carries no `realmDemography` left `capacity_realm_load` unable to
+    // run — and, until the path was declared, silently clean. The door must refuse that
+    // receipt for the same reason it refuses the two series rows, and must NAME the path.
+    const nestedBlind = mintRefusals(annotate(instrumentComplete(researchReceipt({ realmReading: false }))));
+    expect(nestedBlind).toContain('not the FULL instrument at build-complete-dark');
+    expect(nestedBlind.some((line) => line.includes('capacity_realm_load')
+      && line.includes('receipt.behavioral.yearly[last].realmDemography'))).toBe(true);
+    // ⚠ AND THE DARK TWIN IS NOT REFUSED FOR IT — the gate is read before the requirement,
+    // so a legitimately dark cell is NOT APPLICABLE and this door never sees the row.
+    expect(mintRefusals(annotate(instrumentComplete(researchReceipt({ lit: false }))))
+      .some((line) => line.includes('capacity_realm_load'))).toBe(false);
 
     expect(mintRefusals({ ...annotate(researchReceipt()), passed: false }))
       .toContain('the run did not pass — a register cell is minted from a clean run or not at all');

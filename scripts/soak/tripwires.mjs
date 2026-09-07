@@ -57,7 +57,7 @@ export const WALL_TIME_TREND_SLACK_MS = WALL_TIME_TREND.slackMs;
 const finite = (value) => typeof value === 'number' && Number.isFinite(value);
 
 /**
- * Is a TOP-LEVEL receipt field present at all?
+ * Is a receipt field present at all — a top-level name, or a dotted path into the envelope?
  *
  * ⛔⛔ THE THIRD STATUS EXISTS BECAUSE ABSENCE AND CLEANLINESS READ ALIKE OTHERWISE
  * (§206.2b, and M1-F1 measured the cost). A detector that hits its own
@@ -69,11 +69,46 @@ const finite = (value) => typeof value === 'number' && Number.isFinite(value);
  *
  * `null` counts as absent: a receipt that wrote the key and nothing into it carried no
  * evidence either, and grading the two apart would be a distinction without a measurement.
+ *
+ * ⭐⭐ AND THE PATH MAY BE NESTED (§909 car 2). `capacity_realm_load` keys on
+ * `behavioral.yearly[last].realmDemography` — an ADDITIVE key `behavioral-observation.mjs`
+ * ships CONDITIONALLY (`:1054`, `...(realmDemography ? { realmDemography } : {})`), so a v4
+ * receipt, and any receipt whose world ran the demographic term dark, simply lacks it. Its
+ * detector then hit `if (!reading || typeof reading !== 'object') return []` and answered
+ * `[]` — the SAME weak zero its two siblings paid for one level up, one level down. Grading
+ * only TOP-LEVEL fields left exactly that hole, so the path is the unit now.
+ *
+ * ⚠ `[last]` IS THE ONLY INDEX FORM, AND IT IS NOT A CONVENIENCE. Every capacity row reads
+ * the LAST observed year and nothing else, so the path says so out loud rather than letting
+ * a reader guess which row of the series `requires` meant. An EMPTY array is absent by the
+ * same law `null` is: a run that observed no years carried no evidence about its last one.
  */
-const receiptCarries = (receipt, field) => receipt != null
-  && typeof receipt === 'object'
-  && Object.prototype.hasOwnProperty.call(receipt, field)
-  && receipt[field] != null;
+const REQUIRE_SEGMENT = /^([A-Za-z_$][\w$]*)(\[last\])?$/;
+
+/** Is this a well-formed `requires` path? A malformed one is a registry DEFECT, not a miss. */
+const requirePathIsWellFormed = (path) => typeof path === 'string'
+  && path.trim() === path
+  && path.length > 0
+  && path.split('.').every((segment) => REQUIRE_SEGMENT.test(segment));
+
+const receiptCarries = (receipt, path) => {
+  if (!requirePathIsWellFormed(path)) return false;
+  let cursor = receipt;
+  for (const segment of path.split('.')) {
+    const [, key, last] = REQUIRE_SEGMENT.exec(segment);
+    if (cursor == null
+      || typeof cursor !== 'object'
+      || !Object.prototype.hasOwnProperty.call(cursor, key)
+      || cursor[key] == null) return false;
+    cursor = cursor[key];
+    if (last) {
+      if (!Array.isArray(cursor) || !cursor.length) return false;
+      cursor = cursor[cursor.length - 1];
+      if (cursor == null) return false;
+    }
+  }
+  return true;
+};
 
 const meanOf = (list, from, to) => {
   const slice = list.slice(Math.floor(list.length * from), Math.floor(list.length * to));
@@ -91,9 +126,12 @@ const meanOf = (list, from, to) => {
  *   `gate(receipt)`   the row is NOT APPLICABLE to this receipt — a capacity row on a DARK
  *                     cell measured the right thing about a term that was not running. It
  *                     is silent by design and owes no ledger entry.
- *   `requires: []`    the top-level receipt fields WITHOUT WHICH THE ROW'S SILENCE IS NOT A
+ *   `requires: []`    the receipt FIELD PATHS without which the row's silence is not a
  *                     MEASUREMENT. Absent ⇒ the row is NOT-EXECUTABLE and says so with the
- *                     field named; it does NOT answer `[]`.
+ *                     path named; it does NOT answer `[]`. A path is a top-level name
+ *                     (`yearlyPopulations`) or a dotted walk into the envelope with `[last]`
+ *                     for the last row of a series (`behavioral.yearly[last].realmDemography`
+ *                     — §909 car 2, because the same weak zero lives one level down).
  *
  * ⛔ THE GATE LIVES ON THE ROW, NOT INSIDE `detect`, AND THAT IS THE WHOLE REASON IT MOVED.
  * While the demographics gate was the detector's own first line, an ungated blindness and a
@@ -386,13 +424,22 @@ export const TRIPWIRES = Object.freeze([
     band: 'final realmDemography.loadRatio01 in [0.6, 1.05], and binding.granary + binding.walls === settlements',
     home: 'src/domain/worldPulse/demographicsObservation.js observeRealmDemography — the realm reading the engine already writes; the band is the cure suite\'s own plateau window (0.6 floor, 1.05 overshoot allowance) read at realm scale',
     gate: (receipt) => receipt?.subsystems?.rules?.demographicsEnabled === true,
-    // ⚠ NO `requires`, AND THE ASYMMETRY IS DELIBERATE. This row keys on `behavioral`, which
-    // the writer DOES ship — it is reachable, and it executes on the real receipt. Its own
-    // remaining gap is one level down (`yearly[last].realmDemography`, an ADDITIVE key a v4
-    // receipt simply lacks), and `requires` grades TOP-LEVEL fields only. Widening it to
-    // dotted paths is a real question and is left to the chair rather than smuggled in here:
-    // it would re-grade archived receipts, which is a different act from curing a row that
-    // could never fire on any receipt at all.
+    // ⚠ THE GAP WAS ONE LEVEL DOWN, AND §909 CAR 2 CLOSED IT. This row keys on `behavioral`,
+    // which the writer DOES ship, so it was never unreachable the way its two siblings were
+    // — but `requires` graded TOP-LEVEL fields only, and the field this row actually stands
+    // on is `yearly[last].realmDemography`: an ADDITIVE key `behavioral-observation.mjs`
+    // ships CONDITIONALLY (`:1054`). On a receipt that lacks it the detector hit
+    // `if (!reading …) return []` and answered a silent clean, which is the identical weak
+    // zero one level down. The path is declared now, so that silence grades NOT-EXECUTABLE.
+    //
+    // ⛔ AND THIS RE-GRADES ARCHIVED RECEIPTS, WHICH IS THE POINT AND IS DECLARED, NOT
+    // SMUGGLED. Any receipt whose demographics gate is LIT but whose last observed year
+    // carries no `realmDemography` moves from "clean" to "the row could not run" and its
+    // `fullInstrument` goes false. A DARK receipt is untouched: `gate` is read BEFORE
+    // `requires` (see `evaluateTripwires`), so a legitimately dark cell stays NOT APPLICABLE
+    // and owes no ledger entry. The two measured cases both keep their grade — the 300-year
+    // `research-lit-4s` receipt and a lit 30-year run each carry the key.
+    requires: ['behavioral.yearly[last].realmDemography'],
     detect: (receipt) => {
       const yearly = Array.isArray(receipt?.behavioral?.yearly) ? receipt.behavioral.yearly : [];
       // The observation is an ADDITIVE key: a v4 receipt simply lacks it, and a consumer
@@ -555,31 +602,80 @@ export function tripwireFieldsRead(row) {
  * @param {string} writerSource the text of `scripts/audit/whole-world-soak.mjs`
  * @returns {string[]}
  */
+function literalKeysFrom(source, afterOpener) {
+  const fields = new Set();
+  let depth = 1;
+  for (const raw of source.slice(afterOpener).split('\n')) {
+    const line = raw.replace(/\/\/.*$/, '');
+    const trimmed = line.trim();
+    if (depth === 1) {
+      // `key:`, `...(FLAG ? { key: … } : {})`, and the bare `key,` shorthand — the third
+      // matters because `failures` and `frozenTail` ship that way and `throw_or_assert`
+      // keys on the first of them.
+      const keyed = trimmed.match(/^(?:\.\.\.\([^)]*\?\s*\{\s*)?([A-Za-z_$][\w$]*)\s*:/);
+      if (keyed) fields.add(keyed[1]);
+      const shorthand = trimmed.match(/^([A-Za-z_$][\w$]*)\s*,\s*$/);
+      if (shorthand) fields.add(shorthand[1]);
+      // ⛔ AND THE CONDITIONAL SHORTHAND SPREAD, WHICH THIS SCANNER MISSED AND §909 CAR 2
+      // MEASURED. `behavioral-observation.mjs:1054` ships the key this walker was extended
+      // to grade as `...(realmDemography ? { realmDemography } : {})` — a spread whose
+      // payload is SHORTHAND, so the colon pattern above does not see it and the bare-key
+      // pattern does not either. Without this line the walker reported the observer as not
+      // writing `realmDemography` at all: a false unreachable on the one path the car
+      // exists to ground, which is precisely how a guard earns being deleted.
+      const spreadShorthand = trimmed.match(/^\.\.\.\([^)]*\?\s*\{\s*([A-Za-z_$][\w$]*)\s*\}/);
+      if (spreadShorthand) fields.add(spreadShorthand[1]);
+    }
+    for (const character of line) {
+      if (character === '{') depth += 1;
+      else if (character === '}') depth -= 1;
+    }
+    if (depth <= 0) break;
+  }
+  return fields;
+}
+
 export function receiptWriterFields(writerSource) {
   const source = String(writerSource || '');
   const fields = new Set();
   for (const opener of ['const receiptBody = {', 'const receipt = {']) {
     const start = source.indexOf(opener);
     if (start === -1) continue;
-    let depth = 1;
-    for (const raw of source.slice(start + opener.length).split('\n')) {
-      const line = raw.replace(/\/\/.*$/, '');
-      const trimmed = line.trim();
-      if (depth === 1) {
-        // `key:`, `...(FLAG ? { key: … } : {})`, and the bare `key,` shorthand — the third
-        // matters because `failures` and `frozenTail` ship that way and `throw_or_assert`
-        // keys on the first of them.
-        const keyed = trimmed.match(/^(?:\.\.\.\([^)]*\?\s*\{\s*)?([A-Za-z_$][\w$]*)\s*:/);
-        if (keyed) fields.add(keyed[1]);
-        const shorthand = trimmed.match(/^([A-Za-z_$][\w$]*)\s*,\s*$/);
-        if (shorthand) fields.add(shorthand[1]);
-      }
-      for (const character of line) {
-        if (character === '{') depth += 1;
-        else if (character === '}') depth -= 1;
-      }
-      if (depth <= 0) break;
-    }
+    for (const key of literalKeysFrom(source, start + opener.length)) fields.add(key);
+  }
+  return [...fields];
+}
+
+/**
+ * The keys a NESTED writer ships — every object literal it `return`s, unioned (§909 car 2).
+ *
+ * ⛔⛔ AND ITS BOUND IS STATED HERE RATHER THAN LEFT TO BE DISCOVERED. This is a LEXICAL
+ * key census, not a resolution: it proves that `realmDemography` is a key this module
+ * SHIPS somewhere, and it does NOT prove that it nests under `yearly` under `behavioral`.
+ * Following that chain means resolving `buildBehavioralObservation`'s call graph across two
+ * modules from text, which this walker cannot do and must not pretend to. What it DOES
+ * refuse is the defect class that actually bit twice in one landing — a row keyed on a
+ * name NO writer writes at all — and the estate's rule for a guard's error direction is
+ * satisfied in the reachable half: the FIRST segment is graded against the receipt writer's
+ * own top-level key set, exactly as strictly as any other row's read.
+ *
+ * ⚠ WHERE IT IS WEAK IT IS WEAK TOWARD SILENCE, and that is why the runtime channel is not
+ * built on it: `receiptCarries` walks the REAL receipt, segment by segment, and a path that
+ * this walker admitted but the envelope does not actually carry still grades NOT-EXECUTABLE
+ * at evaluation time, with the path on its face.
+ *
+ * @param {string} nestedSource the text of a module that builds a nested receipt section
+ *   (`scripts/audit/behavioral-observation.mjs` is the only one today)
+ * @returns {string[]}
+ */
+export function nestedWriterFields(nestedSource) {
+  const source = String(nestedSource || '');
+  const fields = new Set();
+  const opener = 'return {';
+  let at = source.indexOf(opener);
+  while (at !== -1) {
+    for (const key of literalKeysFrom(source, at + opener.length)) fields.add(key);
+    at = source.indexOf(opener, at + opener.length);
   }
   return [...fields];
 }
@@ -587,14 +683,31 @@ export function receiptWriterFields(writerSource) {
 /**
  * Every row's read set graded against the writer's key set.
  *
+ * ⭐ AND EVERY DECLARED `requires` PATH IS GRADED TOO (§909 car 2), not only the fields the
+ * detector text happens to mention. The two are different statements: a read is what the
+ * row TOUCHES, a require is what the row says its silence DEPENDS ON, and a require naming
+ * a path no writer produces is a promise the registry cannot keep. The first segment is
+ * graded against the receipt writer's top-level key set; the rest against `nestedSource`.
+ *
+ * ⛔ A NESTED PATH WITH NO NESTED SOURCE IS UNREADABLE, NEVER PASSED. A walker that graded
+ * `behavioral` and shrugged at `yearly[last].realmDemography` would report a clean sheet
+ * about the exact level where the remaining weak zero lived, which is how a guard earns
+ * being deleted. Caller supplies the source or the walker refuses the row.
+ *
  * @param {Array<object>} rows
  * @param {string} writerSource
+ * @param {string|null} [nestedSource] the text of the nested-section writer
+ *   (`scripts/audit/behavioral-observation.mjs`); required once any row declares a dotted
+ *   `requires` path
  * @returns {{written: string[], unreachable: Array<{id: string, field: string}>,
+ *            unreachablePaths: Array<{id: string, path: string, segment: string}>,
  *            unreadable: Array<{id: string, reason: string}>}}
  */
-export function tripwireFieldReach(rows, writerSource) {
+export function tripwireFieldReach(rows, writerSource, nestedSource = null) {
   const written = new Set(receiptWriterFields(writerSource));
+  const nested = nestedSource == null ? null : new Set(nestedWriterFields(nestedSource));
   const unreachable = [];
+  const unreachablePaths = [];
   const unreadable = [];
   for (const row of rows) {
     const read = tripwireFieldsRead(row);
@@ -605,8 +718,29 @@ export function tripwireFieldReach(rows, writerSource) {
     for (const field of read.fields.sort()) {
       if (!written.has(field)) unreachable.push({ id: row.id, field });
     }
+    for (const path of (Array.isArray(row.requires) ? row.requires : [])) {
+      if (!requirePathIsWellFormed(path)) {
+        unreachablePaths.push({ id: row.id, path: String(path), segment: String(path) });
+        continue;
+      }
+      const keys = path.split('.').map((segment) => REQUIRE_SEGMENT.exec(segment)[1]);
+      if (!written.has(keys[0])) {
+        unreachablePaths.push({ id: row.id, path, segment: keys[0] });
+        continue;
+      }
+      if (keys.length === 1) continue;
+      if (nested === null) {
+        unreadable.push({
+          id: row.id,
+          reason: `a nested \`requires\` path (${path}) and no nested-writer source to ground it in`,
+        });
+        continue;
+      }
+      const missing = keys.slice(1).find((key) => !nested.has(key));
+      if (missing) unreachablePaths.push({ id: row.id, path, segment: missing });
+    }
   }
-  return { written: [...written].sort(), unreachable, unreadable };
+  return { written: [...written].sort(), unreachable, unreachablePaths, unreadable };
 }
 
 /**
@@ -628,6 +762,16 @@ export function tripwireRegistryDefects(rows = TRIPWIRES) {
     if (row.requires !== undefined && (!Array.isArray(row.requires) || !row.requires.length
       || row.requires.some((field) => typeof field !== 'string' || !field.trim()))) {
       defects.push(`${row.id}: requires is declared and is not a non-empty list of field names`);
+    } else if (Array.isArray(row.requires)) {
+      // ⭐ AND THE PATH SHAPE IS CONVICTED HERE (§909 car 2), because `receiptCarries`
+      // answers FALSE for a malformed path — so a typo (`behavioral..yearly`,
+      // `yearly[0]`, a stray space) would make the row permanently NOT-EXECUTABLE on
+      // every receipt and read exactly like an honest instrument gap.
+      for (const path of row.requires) {
+        if (!requirePathIsWellFormed(path)) {
+          defects.push(`${row.id}: requires path "${path}" is not a dotted field path (name, or name[last])`);
+        }
+      }
     }
     // The clock scan reads the GATE as well as the detector: moving a row's applicability
     // test onto the row must not open a door the class boundary closed.
