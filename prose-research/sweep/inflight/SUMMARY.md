@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 06:48:20 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 06:54:21 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -52,18 +52,14 @@
 | ai | verifier | i951-1032 | result | 12 | — | verdict file WRITTEN | 08:56:33 |
 | ai | verifier | i962-984 | result | 7 | — | verdict file WRITTEN | 04:23:40 |
 | ai | verifier | i985-1004 | result | 7 | verdicts-ai-i985-1004.json | verdict file WRITTEN | 04:26:43 |
-| dnd | critic |  | result | 0 | critic-dnd.md | — | 05:08:53 |
 | dnd | critic |  | failed | 0 | — | — | 09:05:59 |
 | dnd | critic |  | result | 0 | — | — | 08:35:20 |
 | dnd | finder | place-lawful-primaries | result | 56 | claims.json | 60 claims, complete=True @03:00:39 | 06:39:14 |
-| dnd | regrade | regrade-r10 | result | 0 | — | — | 04:08:15 |
 | dnd | regrade | regrade-r12 | result | 0 | — | — | 07:19:35 |
 | dnd | regrade | regrade-r13 | result | 0 | — | — | 08:47:59 |
-| dnd | synth |  | result | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:52:03 |
 | dnd | synth |  | failed | 0 | _r13-apply.mjs, dnd-coverage.mjs, dnd-stats.mjs | — | 09:05:58 |
 | dnd | synth |  | result | 0 | _assemble-dnd.mjs, _gen-tables-dnd.mjs, 00-header.md, 01-method.md, 06-partVI-in | — | 08:16:50 |
 | dnd | verifier | i0-14 | in-flight | 6 | — | verdict file WRITTEN | 06:53:51 |
-| dnd | verifier | i1056-1130 | result | 7 | — | verdict file WRITTEN | 03:55:50 |
 | dnd | verifier | i1058-1074 | result | 4 | — | verdict file WRITTEN | 06:48:56 |
 | dnd | verifier | i1075-1090 | result | 3 | — | verdict file WRITTEN | 06:47:39 |
 | dnd | verifier | i1091-1112 | result | 3 | — | verdict file WRITTEN | 06:47:16 |
