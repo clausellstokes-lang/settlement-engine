@@ -10,3 +10,12 @@ Not implemented: navigation to another Document
 Not implemented: navigation to another Document
  ❯ tests/property/generatorGoldenMaster.test.js (3 tests | 1 failed) 22846ms
      × every config produces byte-identical output to the golden master 22840ms
+Not implemented: navigation to another Document
+ ❯ tests/docs/enforcement-claims.test.js (21 tests | 1 failed) 1434ms
+     × every completeness claim carries an @enforced-by tag with ≥1 target 14ms
+ ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 5556ms
+     × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 15ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package

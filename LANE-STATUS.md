@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 22:33:11 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 22:40:07 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lighting tail's measurement lands with zero product bytes — L-PROBE-2 at ever
 
@@ -104,10 +104,10 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 
 ## WORKFLOW RUNS of chair session df942c1b-a1a2-4594-ba90-9241ff864ccd (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_0cd91522-1ce: 2 journal lines, 1 agents
-- wf_55c30493-02f: 3 journal lines, 2 agents
+- wf_55c30493-02f: 7 journal lines, 4 agents
 - wf_8cd21474-a7b: 4 journal lines, 2 agents
 - wf_d3face35-f20: 2 journal lines, 1 agents
 - wf_f191dac2-82a: 4 journal lines, 2 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;49053 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;51370 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;n=0; until grep -q '"'"'^PROOF_EXIT='"'"' $SC/whole-906.log 2>/dev/nul;echo "PROOF WATCH: $(grep -E '"'"'^PROOF_EXIT=|GAVE UP|REFUSED'"'"' $S;
-load: 22.11 14.60 8.42
+load: 19.57 22.55 15.53
