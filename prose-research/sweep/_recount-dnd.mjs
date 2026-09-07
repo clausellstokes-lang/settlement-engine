@@ -16,7 +16,7 @@ for (let li=0; li<sec.length; li++) { const L=sec[li]; const m=L.match(/^\*\*(\d
     const keptCited=new Set(), pCited=new Set(), wrongK=[], wrongP=[];
     for (let seg of segs) { const isPseg = /^\s*\(?P\b/.test(seg) || /\(P\)/.test(seg);
       // within a non-P segment, tokens like "(P 23)" or "P 61" mark individual P cites
-      const re=/(\(P\s*|\bP\s+)?(\d{1,4})\b/g; let t;
+      const re=/(\(P\s*|\bP\s+)?(?<![A-Za-z0-9])(\d{1,4})\b/g; let t;
       while ((t=re.exec(seg))) { const n=+t[2]; if (n>1211) continue; const isP = isPseg || !!t[1]; if (isP) { pCited.add(n); if(!part.has(n)) wrongP.push(n); } else { keptCited.add(n); if(!kept.has(n)) wrongK.push(n+(part.has(n)?'(P!)':'('+(st.verdicts[n]?st.verdicts[n].verdict:'none')+')')); } }
     }
     const docs = new Set([...keptCited].filter(n=>kept.has(n)).map(n=>st.claims[n].url));

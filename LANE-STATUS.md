@@ -1,13 +1,19 @@
-# LANE-STATUS — written 2026-09-07 03:28:43 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 03:34:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegation sitting — the owner hands the open rows to the chair's judgment an
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 268d53605 · 11 cars over 4243bdc61 · porcelain 0 · last commits:
+- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 268d53605 · 11 cars over 4243bdc61 · porcelain 5 · last commits:
     268d53605 §909 car 2: the weak zero had a third floor — `requires` becomes a field PATH, the reachability walker learns the observer, and `capacity_realm_load` stops answering a silent clean about a reading it never had
     ec265d24c §909 car 1a: the per-year population series ships, additively on v5 — the two capacity rows stop being blind and the reachability ratchet reaches zero with a control that proves the zero was caused
     6ebe0ef3b Register (capsule car): the base-state capsule regenerates at the §908 tip (rung 18 still; no OSR movement at this landing)
     029e5406d Register (last car): the census totals re-freeze at the composed tip — totalTests 31977 -> 31979, totalFiles 2489 unchanged, entries 3
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M scripts/audit/behavioral-observation.mjs
+       M scripts/audit/soakInvariants.mjs
+       M scripts/soak/tripwires.mjs
+       M tests/domain/demographicsEnvelope.test.js
+       M tests/soak-harness/tripwireRegistry.test.js
     receipt `receipt-cap-trip-907.md` (mtime 09-07 01:50) head:
       | # RECEIPT — LANE CAP-TRIP-907
       | **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
@@ -144,4 +150,4 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 - wf_543ddb3b-67c: 15 journal lines, 8 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.94 2.00 3.24
+load: 2.15 2.07 2.87
