@@ -39,8 +39,22 @@ const SRC = join(process.cwd(), 'src');
 /** The module that DEFINES the pipeline is not a caller of it. */
 const SELF = 'src/generators/generateSettlementPipeline.js';
 
-/** The two symbols that constitute "this module mints a birth law". */
-const MINT_SYMBOLS = ['birthConfig', 'newSettlementDensityLaw'];
+/** The symbols that constitute "this module mints a birth law".
+ *
+ *  ⭐ `newSettlementLivingContentLaw` JOINED THIS LIST IN THE ACT THAT WIRED IT
+ *  (lane L-MAT), AND THE TIMING IS THE POINT. The register's starred arm below
+ *  guards NON-WIRED laws only — it is what stopped the living-content mint
+ *  reaching a generation-side module while the law was UNWIRED. Flipping that
+ *  row to WIRED takes the law OUT of that arm's denominator, so without this
+ *  widening the wiring car would have retired the only guard on where that
+ *  mint may be named and left a PREVIEW free to mint it. The three per-caller
+ *  arms (`every BIRTH mints`, `nothing else does`, `not named outside its
+ *  homes`) now cover both laws. */
+const MINT_SYMBOLS = [
+  'birthConfig',
+  'newSettlementDensityLaw',
+  'newSettlementLivingContentLaw',
+];
 
 /** The create-boundary module and the law module behind it legitimately NAME the
  *  mint without being pipeline callers; they are the mint's home, not generation
@@ -57,6 +71,10 @@ const MINT_SYMBOLS = ['birthConfig', 'newSettlementDensityLaw'];
 const MINT_HOMES = Object.freeze([
   'src/domain/density/densityCreateBoundary.js',
   'src/domain/density/densityLaw.js',
+  // The living-content law's own module, added with its mint symbol above: it
+  // DECLARES the mint, which is the one legitimate way to name it outside the
+  // boundary and its BIRTH callers.
+  'src/domain/content/livingContentLaw.js',
 ]);
 
 /**

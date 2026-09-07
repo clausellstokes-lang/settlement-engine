@@ -123,31 +123,36 @@ export const LIVING_CONTENT_BUCKETS = Object.freeze([
  * boundary can call this unconditionally and write not one byte, and the flip
  * needs no second edit at the call site.
  *
- * ⚠ THIS HAS NO CALLER YET — AND THE REASON RECORDED HERE UNTIL NOW WAS THE
- * WRONG ONE, WHICH IS WORSE THAN NONE. It said the create-boundary car was owed
- * because "the store's generate action is BOTH a birth and a regeneration". That
- * car LANDED (ODQ §822): `src/domain/density/densityCreateBoundary.js` classifies
- * every module that can reach the settlement pipeline as BIRTH / DERIVED /
- * PREVIEW, `birthConfig` is its one mint, both birth callers are wired through
- * it, and `tests/lint/densityCreateBoundary.walker.test.js` holds the manifest to
- * the tree. The generate action is a BIRTH; re-derivation goes through
- * `regenSection`, which reads `settlement.config` FIRST and so replays the law
- * the world was born under.
+ * ⭐ THIS IS WIRED (lane L-MAT). `src/domain/density/densityCreateBoundary.js`
+ * classifies every module that can reach the settlement pipeline as BIRTH /
+ * DERIVED / PREVIEW / EXECUTOR, `birthConfig` is its one mint, both BIRTH
+ * callers go through it, and `tests/lint/densityCreateBoundary.walker.test.js`
+ * holds the manifest to the tree. `birthConfig` spreads THIS mint beside the
+ * density one, so every classified BIRTH mints this law and nothing else can.
+ * Re-derivation goes through `regenSection`, which reads `settlement.config`
+ * FIRST and so replays the law the world was born under.
  *
- * ⛔⛔ THE REAL BLOCKER IS BYTES, AND IT IS EXECUTABLE RATHER THAN ARGUED.
- * `densityCreateBoundary.js` is EAGER — one of the 237 modules in `src/main.jsx`'s
- * static closure — while this module and the leaf behind it are deliberately
- * outside it, the leaf excised and UNPINNED in `vite.config.js`'s
- * `ENGINE_SHARED_DOMAIN_EXCISIONS` on the stated ground that no first-paint
- * module reaches it. A static import from the boundary to here puts both modules
- * into first paint, and `tests/build/engineChunkLazy.test.js`'s orphan-excision
- * arm convicts an unpinned excision the moment first paint reaches it — no build
- * needed to see the red. The mint therefore belongs on the LAZY engine side that
- * the birth caller already awaits, together with an excision row for this file;
- * `GENERATION_LAWS` in the boundary module carries that instruction as the row
- * a wiring car has to flip. Until then a v2 world can only be produced by
- * passing `_livingContentLawVersion: 2` in a config explicitly, which is how
- * this file's own fixtures drive it.
+ * ⛔ AND WIRING IT IS NOT LIGHTING IT. The dial above stays at the dormant
+ * default, so this function returns `{}` and a birth's config is byte-identical
+ * to one taken before the law existed. A v2 world is still produced only by
+ * passing `_livingContentLawVersion: 2` explicitly, which is how this file's own
+ * fixtures drive it. Lighting is a separate owner act — see the dial's comment.
+ *
+ * ⛔⛔ THE BLOCKER THAT HELD THIS UNWIRED WAS BYTES, AND THE CURE WAS NOT THE ONE
+ * PREDICTED. The record here said the mint belonged on "the LAZY engine side
+ * that the birth caller already awaits", with an excision row for this file.
+ * Both halves were measured wrong and are kept as a correction rather than
+ * deleted: the generation lane never awaits `loadEngine()` (that loader lives in
+ * `settlementSlice.js` and serves `regenSection`; the lane reaches the core
+ * through its own dynamic import of `src/workers/generationRequest.js`), and an
+ * excision row for this file would be inert because `ENGINE_SHARED_DOMAIN` is
+ * seeded from `src/generators` only and this module is not one of its 68
+ * members. What was true is that the boundary module's ONLY eager edge was a
+ * `birthConfig` re-export through an eager store leaf whose two real callers are
+ * both lazy. Cutting it took `src/main.jsx`'s static closure from 239 modules to
+ * 238, dropped the boundary out of it, and left every emitted dist file
+ * byte-identical — so the import below this comment is a lazy -> lazy edge and
+ * first paint pays nothing.
  *
  * @returns {Record<string, number>}
  */
