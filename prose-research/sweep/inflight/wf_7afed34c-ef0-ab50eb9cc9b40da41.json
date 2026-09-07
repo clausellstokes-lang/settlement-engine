@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 84,
+ "firstTs": "2026-09-07T14:57:58.194Z",
+ "lastTs": "2026-09-07T15:03:26.453Z",
+ "tools": {
+  "Bash": 23
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Strong reproduction. Now the second probe: window excursions, realm totals, and the §907 baseline.",
+ "run": "wf_7afed34c-ef0",
+ "agent": "ab50eb9cc9b40da41",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/8de5f153-f375-48fb-803c-ec578a273a4a/subagents/workflows/wf_7afed34c-ef0/agent-ab50eb9cc9b40da41.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
