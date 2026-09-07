@@ -22895,6 +22895,70 @@
    "note": "Same raw page. Under the 'Generalizations' heading; the preceding clause names the problem as homogeny among imaginary people, and the next sentences credit Eberron's sophisticated takes but say it fails to escape the flat-culture issue with much of its reimagining. Every limb supported.",
    "fromFile": "verdicts-dnd-i1056-1130.json"
   },
+  "1115": {
+   "index": 1115,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more examples are better than hedged generalizations",
+   "note": "Raw page fetched (chrisssims.wordpress.com, HTTP 200). Quote appears word for word in the 'Generalizations' section, in the paragraph explicitly about writing a description of a species for a game; the surrounding text contrasts game species descriptions with other narratives, so every limb holds.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1116": {
+   "index": 1116,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leaving a lot of words doing little work",
+   "note": "Raw page. In 'Superlatives or Absolutisms': the sentence about hedged superlatives leads directly into the block-quoted 5e Player's Handbook half-orc passage, which the raw text carries in full. All limbs supported.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1117": {
+   "index": 1117,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Among them is the great Kim Mohan",
+   "note": "Raw page, opening paragraph. Sims's topic sentence names generalizations, hedging and superlatives, then thanks mentors and colleagues who freed him from those habits, Mohan named among them as having tried to teach him more than he could absorb.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1118": {
+   "index": 1118,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "moving away from boxed text and separating information into specific headings",
+   "note": "Raw page fetched (alphastream.org, HTTP 200). 'Season 8 Changes' section; the page frames it as Season 8 AL leaning heavily into that idea, the reason given being that DMs could find and use information as needed. Program named on the page as the D&D Adventurer's League.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1119": {
+   "index": 1119,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Season 8 required that authors use the format.",
+   "note": "Raw page, 'Season 8 Changes', immediately after the description of the heading-driven format (Call to Action, Playing the Pillars, flowchart), so 'the format' is the heading-based one. The page adds that Season 9 keeps the requirement in altered form.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1120": {
+   "index": 1120,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The information is spread out; You must read both places",
+   "note": "Raw page, the MOON12-02 talking-door example. The page states that multiple required headings force the author to break up information that belongs in one place, that the door description sits under 'Dimensions & Terrain' while a clarification sits under 'Door', and that both must be read; a third section (Creatures/NPCs) carries yet more door detail.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1121": {
+   "index": 1121,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "actively obfuscates the content and makes the adventure harder to run",
+   "note": "Raw page, closing sentence of the Season 8 discussion. The page's wording is 'harder to run well at the table'; the claim's 'harder to run at the table' is the same verdict.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1122": {
+   "index": 1122,
+   "verdict": "PARTIAL",
+   "trueWording": "novel excerpt in MOON12-02 eschews the format and actually gathers",
+   "note": "Raw page. The quotation is present and the praise-not-for-being-boxed limb is exact, but the praised passage is not a rival format's: it is an excerpt from a novel printed inside the same Season 8 Moonshae adventure (MOON12-02, A Gift From the Queen) that the post is criticising, and the page's point is that it departs from that Season 8 format. Abadia's rival-format praise elsewhere in the post attaches to the Oracle of War Eberron adventures (EB-07) and to Pelgrane's Night's Black Agents, not to this excerpt.",
+   "unsupportedLimb": "that it is a rival format's equivalent of boxed text - the passage praised sits inside the same Season 8 Moonshae adventure and eschews that format",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1123": {
+   "index": 1123,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "does not embrace the narrative style of most PLANESCAPE products",
+   "note": "Raw page fetched (mimir.net, HTTP 200). Answer to 'From what perspective is the product written?'. The page joins the two limbs with 'and' rather than 'because', but the causal reading is the page's own: the next answer notes A Guide to Hell uses a similar narrative style and 'It, too, is designed as a core AD&D product'. The editor's note at the head of the interview identifies Perkins as editor of TSR's DUNGEON Adventures.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
   "1124": {
    "index": 1124,
    "verdict": "VERIFIED_VERBATIM",
@@ -22902,12 +22966,54 @@
    "note": "Live mimir.net fetched 200 (raw HTML). Perkins's answer on how the product is written: Warriors of Heaven is a core AD&D product not embracing most Planescape products' narrative style; the quoted clause continues that he slipped the occasional 'basher' and 'leatherhead' past the editors. Both limbs supported.",
    "fromFile": "verdicts-dnd-i1056-1130.json"
   },
+  "1125": {
+   "index": 1125,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I almost always overwrite",
+   "note": "Raw page, answer to how the supplement grew from 64 to 96 pages. Perkins prefaces it by saying anyone who has edited his work knows this, then explains he had all but exhausted his word count.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1126": {
+   "index": 1126,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an adventure set in Sigil has an entirely different feel",
+   "note": "Raw page, answer on what attracts him to PLANESCAPE. The same answer carries the second limb: as a designer he enjoys the chance to describe places that could exist nowhere else. Page prints 'feel' in quotation marks and contrasts Sigil with an adventure in the Abyss.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1127": {
+   "index": 1127,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The voice and design of the campaign setting was daring",
+   "note": "Raw page, answer on how he got involved with the PLANESCAPE line. Preceded by his being blown away by the PLANESCAPE Campaign Setting boxed set, so 'the campaign setting' is Planescape; page continues 'and striking in its originality'.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1128": {
+   "index": 1128,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the language needs to be direct and clear",
+   "note": "Raw page fetched (grognardia.blogspot.com, HTTP 200, dated 8 August 2009). The quote closes the answer that begins with journalists being trained for clarity and directness, applying the same to games. The first-hire limb is Winter's own hedged self-report ('I think that I was the first person hired at TSR who had actual job experience in writing and editing'). Locator note: on the page this is answer 2, not answer 3.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
+  "1129": {
+   "index": 1129,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Flowery phrases and clever wordplay are things to avoid",
+   "note": "Raw page, same answer as 1128: the sentence follows the statement that journalists are trained to write for clarity and directness, and is followed by 'The same is true in games'. Locator is answer 2, not answer 3.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  },
   "1130": {
    "index": 1130,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "an editor took over and managed everything about the manuscript",
    "note": "Live grognardia.blogspot.com fetched 200 (raw HTML). Winter's answer to question 4 on editing at TSR: the designer wrote the original manuscript, then this, 'from that point on' with the parenthetical listing additional development, editing, layout, ordering art and maps, proofreading and typefitting. Every limb supported.",
    "fromFile": "verdicts-dnd-i1056-1130.json"
+  },
+  "1131": {
+   "index": 1131,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Editors: Michele Carter Scott Fitzgerald Cray, Kim Mohan",
+   "note": "Raw archive.org full-text page fetched (HTTP 200, 1.19MB) and the OCR credits block read directly. Match is exact once the OCR's doubled spaces are collapsed; the OCR renders Gray as 'Cray'. Same page gives 'First Printing: September 201S' (2018) and the 2018 copyright line, and the foreword frames it as a Waterdeep / City of Splendors adventure, so the date and city-adventure limbs hold.",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
   },
   "1132": {
    "index": 1132,

@@ -4171,6 +4171,30 @@
   }
  },
  {
+  "index": 1122,
+  "feature": "boxed text form",
+  "claim": "Abadia praises a rival format's equivalent of boxed text not for being boxed but because it gathers all of the information in one place.",
+  "source": "Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020",
+  "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+  "quote": "eschews the format and actually gathers all of the information",
+  "page": "Season 8 Changes",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2020-02-20",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-editorial-staff",
+  "verdict": {
+   "index": 1122,
+   "verdict": "PARTIAL",
+   "trueWording": "novel excerpt in MOON12-02 eschews the format and actually gathers",
+   "note": "Raw page. The quotation is present and the praise-not-for-being-boxed limb is exact, but the praised passage is not a rival format's: it is an excerpt from a novel printed inside the same Season 8 Moonshae adventure (MOON12-02, A Gift From the Queen) that the post is criticising, and the page's point is that it departs from that Season 8 format. Abadia's rival-format praise elsewhere in the post attaches to the Oracle of War Eberron adventures (EB-07) and to Pelgrane's Night's Black Agents, not to this excerpt.",
+   "unsupportedLimb": "that it is a rival format's equivalent of boxed text - the passage praised sits inside the same Season 8 Moonshae adventure and eschews that format",
+   "fromFile": "verdicts-dnd-i1115-1131.json"
+  }
+ },
+ {
   "index": 1137,
   "feature": "edition and house style",
   "claim": "The D&D adventure design guide distributed with the house style guide is bylined Chris Perkins and Greg Bilsland.",

@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i1132-1146",
- "lines": 60,
+ "lines": 63,
  "firstTs": "2026-09-07T06:48:56.352Z",
- "lastTs": "2026-09-07T06:51:56.326Z",
+ "lastTs": "2026-09-07T06:52:21.605Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 15
+  "Bash": 15,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://archive.org/stream/wheaton_Wdh/Waterdeep%20-%20%20Dragon%20Heist_djvu.txt",
@@ -22,7 +23,7 @@
  "run": "wf_23c7ccc2-48d",
  "agent": "ac43c0a3efaa8354e",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_23c7ccc2-48d/agent-ac43c0a3efaa8354e.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i1132-1146.json",
   "exists": true

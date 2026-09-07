@@ -3,26 +3,29 @@
  "name": "dnd",
  "angle": null,
  "tag": "i0-14",
- "lines": 68,
+ "lines": 83,
  "firstTs": "2026-09-07T06:48:56.352Z",
- "lastTs": "2026-09-07T06:51:55.823Z",
+ "lastTs": "2026-09-07T06:53:51.487Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 15
+  "Bash": 18
  },
  "urlsFetched": [
   "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
   "https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf",
-  "https://www.dndbeyond.com/posts/$u"
+  "https://www.dndbeyond.com/posts/$u",
+  "https://www.dndbeyond.com/posts/1825-whats-new-in-the-2024-dungeon-masters-guide",
+  "https://www.dndbeyond.com/posts/1916-updates-in-the-dungeon-masters-guide-2024",
+  "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in"
  ],
  "filesWritten": [],
- "lastAssistantText": "The bodies did load — my greps failed on non-breaking spaces, exactly as the routeHint warned. Searching normalized text.",
+ "lastAssistantText": "r's town band is 501–5,000 with village capped at 500 — so the terminology mismatch is real. I also flagged in its note, and in index 12's, that \"Wizards of the Coast / D&D Beyond\" is a loose attribution for a February 2020 article bylined James Haeck, since D&D Beyond was not WotC-owned until 2022.",
  "run": "wf_23c7ccc2-48d",
  "agent": "a9d5d23fe2d85986f",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_23c7ccc2-48d/agent-a9d5d23fe2d85986f.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i0-14.json",
-  "exists": false
+  "exists": true
  }
 }
