@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 21:03:37 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 21:08:35 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MAT landing lands at six cars — two of O-13's three product flags light 
 
@@ -91,14 +91,7 @@ Traceback (most recent call last):
 KeyError: 'tag'
 - LAST-RUNS: 
 
-## WORKFLOW RUNS of chair session cc123b6c-1961-44c5-b071-c5e5aee7ee80 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_1326cde9-2e5: 77 journal lines, 40 agents
-- wf_255b6391-7fb: 10 journal lines, 5 agents
-- wf_3a29e467-750: 1 journal lines, 1 agents
-- wf_3d71f708-fe3: 1 journal lines, 1 agents
-- wf_b15831a8-df4: 1 journal lines, 1 agents
-- wf_d76e605d-6d1: 43 journal lines, 22 agents
-- wf_e95fca37-bb5: 32 journal lines, 18 agents
+## WORKFLOW RUNS of chair session df942c1b-a1a2-4594-ba90-9241ff864ccd (journal lines; a run dies with the session — the FILES above are the checkpoint)
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.31 2.81 2.86
+load: 3.10 3.64 3.30
