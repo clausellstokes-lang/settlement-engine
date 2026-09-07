@@ -28026,6 +28026,13 @@
    "note": "Live page fetched raw (200), 'How does this work?' panel, 'Not an AI Detector!' subsection, word for word; sentence continues 'the text as AI or human'. Second limb is the next sentence: 'it won't reliably help you avoid AI detection'. Attribution to Paech rests on the panel's source link to github.com/sam-paech/slop-score and the EQ-Bench host, not on a byline in the page text.",
    "fromFile": "verdicts-ai-i1082-1097.json"
   },
+  "1098": {
+   "index": 1098,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "will likely under-report slop",
+   "note": "Raw HTML fetched with a browser UA (HTTP 200, 87,140 bytes), tags stripped. The 'How does this work?' modal, under 'Tips for the Analysis Tool', carries both limbs: the analysis is optimised for creative writing and essays, and may work for other domains but will likely under-report slop. Authorship attribution rests on the same panel's source-code link to github.com/sam-paech/slop-score (the page names no author in prose).",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
   "1099": {
    "index": 1099,
    "verdict": "VERIFIED_VERBATIM",
@@ -28040,6 +28047,35 @@
    "note": "github.com/sam-paech/slop-forensics README (fetched raw from raw.githubusercontent.com/.../main/README.md); the quoted phrase is verbatim in the opening line. Every limb of the claim is supported under 'How the Analysis Works', item 3 'Phylogenetic Tree Building': feature vectors are a binary presence/absence representation (1s and 0s) of whether a model has a given slop word or phrase in its top used list; PHYLIP, described as a bioinformatics tool for DNA or protein sequences, is run over them with each model treated as a species and each slop term as a genetic trait; and the parsimony section says it infers lineage from the fewest mutations. Note the quoted phrase itself sits in the README intro, not inside section 3.",
    "fromFile": "verdicts-ai-i1046-1108.json"
   },
+  "1101": {
+   "index": 1101,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "generation is very task-specific",
+   "note": "arXiv PDF 2203.15721v1 fetched and text-extracted (pdftotext -layout). Abstract carries the quoted words contiguously in 'the nature of the diversity-quality trade-off in language generation is very task-specific'; the 'rather than a property of the decoding rule' limb is supported by the abstract's opening ('the properties elicited by various decoding strategies do not always transfer across natural language generation tasks') and by the Discussion.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
+  "1102": {
+   "index": 1102,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "for all tasks besides SG, we see repet",
+   "note": "PDF page-6 column break confirmed: the line ends 'we see repet-' and continues 'itive behaviour in less than 1% of generations.' in section 5, Repetitions. SG is story generation; the other tasks are MT, AS, Diag and ULG.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
+  "1103": {
+   "index": 1103,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Table 5: Greedy 95.67, Reference 0",
+   "note": "Table 5 ('Perplexities and repetition count for different strategies on the SG task'), Story Gen. (small) '% repetition' column: Greedy 95.67, Reference 0 — both figures exact. The Reference row is the human-written WRITINGPROMPTS continuation (Table 1 names the dataset; section 5.1 calls the row 'human generated references'). Claim carries no quotation; the figures match verbatim.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
+  "1104": {
+   "index": 1104,
+   "verdict": "PARTIAL",
+   "trueWording": "little consistency across tasks in terms of",
+   "unsupportedLimb": "'across a set of generations' — the sentence attributes the inconsistency to SEQUENCE-level string diversity, and the same paragraph reports set-level diversity as consistent across tasks",
+   "note": "The quotation is verbatim in section 5.2, but the sentence completes 'sequence-level string diversity.' The two sentences immediately before it say the opposite of the claim for set-level diversity: 'For diversity metrics calculated over a set of generations, ancestral sampling consistently generates the most diverse text' and 'Mode-seeking decoding strategies consistently have a stronger negative correlation with set-level diversity metrics'. Section 4.1.2 defines the paper's two levels (string level, within a string; set level, across strings), so the claim's 'across a set of generations' names the level the page reports as consistent. The 'Interestingly' that opens the sentence marks it as the contrast to that consistency.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
   "1105": {
    "index": 1105,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -28048,6 +28084,20 @@
    "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2210.15191) carries only the abstract; the quote is in arXiv 2210.15191 PDF, §5.4 'Repetition analysis'",
    "fromFile": "verdicts-ai-regrade-r10.json"
   },
+  "1106": {
+   "index": 1106,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Table 4 lg: top-p 47%, eta-sampling 26%",
+   "note": "arXiv PDF 2210.15191v1. Table 4 ('repetition-degeneration rates ... in an adversarial setting'), column lg: top-p 47%, eta-sampling (ours) 26% — exact. Section 5.4's prose repeats both figures for GPT-2 large. The injected repetition is the paper's synthetic corruption: the last 3 subword tokens repeated 5 additional times. Claim carries no quotation; the figures match verbatim.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
+  "1107": {
+   "index": 1107,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wikipedia biographies of the 101",
+   "note": "Section 5.4, Setting: 'We take natural prompts—the first 35 words of the Wikipedia biographies of the 101 people with the most-read Wikipedia pages'. 'Opening words' = the first 35 words; 'stress test' is the paper's own word ('To stress test the methods, we devise an adversarial setting').",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
   "1108": {
    "index": 1108,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -28055,6 +28105,13 @@
    "note": "arXiv 2210.15191, Abstract, verbatim including the hyphenated line break ('unnec-/essarily truncates high-probability words'), exactly as the claim's page note predicts. The claim's substance is the abstract's own framing: thinking of a neural language model as a mixture of a true distribution and a smoothing distribution that avoids infinite perplexity, in which light truncation algorithms aim to perform desmoothing; the Introduction adds 'uniform-like' to the smoothing distribution, matching that limb of the claim.",
    "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2210.15191) carries only the abstract; the quote is in arXiv 2210.15191 PDF — the trueWording as printed carries the PDF's line-break hyphenation ('top-p unnec-'), which appears nowhere on the cited abs page",
    "fromFile": "verdicts-ai-regrade-r10.json"
+  },
+  "1109": {
+   "index": 1109,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ferred over top-p (53% to 40%)",
+   "note": "Section 5.2, Results: the line-wrapped 'pre-/ferred over top-p (53% to 40%)' is verbatim. Raters were 59 US Mechanical Turk Masters judging which 70-token suffix follows a 35-token prefix, so 'continuations' holds. Note the paper's prose attaches 53/40 to Study 1 while Table 3 gives Study 1 as 39%/53% and Study 2 as 40%/53%/6% equal; the claim's pair of figures appears verbatim in the prose and exactly in the Study 2 row.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
   },
   "1110": {
    "index": 1110,
@@ -28114,6 +28171,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1118": {
+   "index": 1118,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "less critical after the model is aligned",
+   "note": "arXiv PDF 2402.06925v3, section 4.1, under the heading 'Aligned models are less dependent on decoding methods than unaligned models'. The narrowing limb is carried by the MBPP example: unaligned Llama2-7B spans 21.20% (FSD-d) to 7.80% (mirostat), the aligned Chat model 21.60% to 16.00%, 'showcasing a narrowed performance range'. The paper qualifies the generalisation — relative deviation is lower for the aligned model on every dataset except XSUM and CNN/DM, where the two are close.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
+  "1119": {
+   "index": 1119,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Table 2 Wikinews: 2.37 unaligned, 0.52 Chat",
+   "note": "Table 2 ('The entropy of Llama2-7B and Llama2-Chat-7B's generation results (top-p sampling with p = 1.0) on GSM8K, MBPP and Wikinews'), Wikinews column: Llama2-7B 2.37, Llama2-7B-Chat 0.52 — exact. Section 4.1 calls it 'the average next-token prediction entropy'. Claim carries no quotation; the figures match verbatim.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
+  "1120": {
+   "index": 1120,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the aligned model produces much fewer repetitions",
+   "note": "Section 4.1, 'Phenomenon Analysis', reason ii ('The alleviated degeneration issue'): the sentence continues 'even when using deterministic decoding methods such as greedy search', and the passage is explicitly one of three 'potential reasons' for the narrowed decoder gap, so the 'partly' limb holds.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
   "1121": {
    "index": 1121,
    "verdict": "SKIPPED_TRIAGE",
@@ -28134,6 +28212,63 @@
    "trueWording": "Abstract: \"typicality bias in preference data, whereby annotators systematically favor familiar text\"",
    "note": "arxiv.org/abs/2510.01171 fetched raw. Quote word-for-word. Every limb supported by the abstract: it is named 'a fundamental, pervasive data-level driver' of mode collapse, defined as annotators systematically favouring familiar text. Dateline confirms v4, last revised 15 Jul 2026.",
    "fromFile": "verdicts-ai-i1110-1160.json"
+  },
+  "1124": {
+   "index": 1124,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is orthogonal to the decoding strategy",
+   "note": "arXiv PDF 2510.01171v4 (stamped 15 Jul 2026), Appendix F.3 'Ablation on Decoding Strategies': the quoted words are verbatim, and the next sentence names the layering — temperature, top-p, and min-p sampling. Section 5.1 repeats it ('VS is orthogonal to these generation parameters and can be combined with them').",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
+  "1125": {
+   "index": 1125,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "VS increases diversity by 1.6-2.1",
+   "note": "Abstract: 'For instance, in creative writing, VS increases diversity by 1.6-2.1x over direct prompting.' Quotation verbatim; both limbs (creative writing, over direct prompting) on the same sentence.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
+  "1126": {
+   "index": 1126,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Story row: Direct 2.74, VS-Standard 3.06",
+   "note": "Table 2 ('Human-rated diversity (1 = Very Similar, 4 = Very Dissimilar) for poem, story, and joke tasks'), Story row: Direct 2.74, VS-Standard 3.06 — exact. Section 5.2 supplies the study limbs: 'a human study on Prolific', 'We recruited 90 annotators (30 per task)', '4-point Likert scales'. Claim carries no quotation; the figures match verbatim.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
+  "1127": {
+   "index": 1127,
+   "verdict": "PARTIAL",
+   "trueWording": "post-training reduces output di[versity]",
+   "unsupportedLimb": "'at every stage they tested ... and RLVR' — the paper records diversity drops after SFT and DPO only; the (SFT, RLHF, RLVR) list qualifies where VS improves diversity, not where diversity falls",
+   "note": "The quotation is verbatim across the line-wrapped hyphen in section 5.1: 'Figure 4 in Section F.1 confirms that post-training reduces output di-/versity, and VS improves diversity across all post-training stages (SFT, RLHF, RLVR).' The parenthetical attaches to VS's improvement. Figure 4's caption states 'Baseline prompting methods experience major diversity drops (mode collapse) after SFT and DPO', and Appendix F.1 gives direct prompting 20.8% after SFT falling to 10.8% after DPO; no drop is stated or numbered for the RLVR stage (Tulu-Final-70B), which the caption uses to show VS holding diversity. So the reduction is established for SFT and RLHF/DPO, not confirmed stage-by-stage through RLVR.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  },
+  "1128": {
+   "index": 1128,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "human-authored text exhibits richer variability in lexical",
+   "note": "Abstract, arxiv.org/abs/2509.18880 (v3, 25 Feb 2026; Comments: accepted to TMLR '26), fetched raw by curl. Quote is word-for-word; the abstract continues 'and structural unpredictability than LLM outputs', so both limbs (lexical and structural) hold. Framing note: the paper states it as the observation motivating DivEye, not as a new measurement of its own.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
+  "1129": {
+   "index": 1129,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "resulting in unnaturally flat probability curves devoid of these organic",
+   "note": "Section 3.1 'Design Hypothesis' (confirmed at that section in both the arXiv HTML v3 and the published TMLR PDF, header 'Published in Transactions on Machine Learning Research (02/2026)'). Quote word-for-word. Both limbs hold: the sentence names likelihood-maximization objectives, the theoretical UID optimum approximated too strictly, and the flat curves as the result. One hedge the claim drops: the paper says LLMs 'often' approximate it too strictly, and it cites Holtzman et al. 2020 rather than measuring this itself.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
+  "1130": {
+   "index": 1130,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "second-order features contribute the most (39.4%)",
+   "note": "LOCATOR ERROR IN THE CLAIM'S PAGE FIELD: this is section 4.6 'Ablation Studies', subsection 'Relevance of DivEye's Features' - NOT section 5, which is the two-sentence Conclusion. Verified in the published TMLR PDF (pdf line 768) where the quote renders exactly as given; the arXiv HTML puts 39.4% in a math element so it extracts with spaces. Both comparison limbs hold: distributional features follow at 34.2% and first-order differences at 23.7%. The figures are averaged feature importances from a trained XGBoost model.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
+  "1131": {
+   "index": 1131,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "outperforms existing zero-shot detectors by up to 33.2%",
+   "note": "Abstract. The claim's own quote ('pointing to rhythmic unpredictability as a powerful and') is separately word-for-word in the same abstract, and the 33.2% limb is stated in the sentence given as trueWording. Scope note the claim omits: the abstract pairs this with 'competitive performance with fine-tuned baselines', so the 33.2% is against zero-shot detectors only, which is what the claim says.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
   },
   "1132": {
    "index": 1132,
@@ -28256,12 +28391,54 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1149": {
+   "index": 1149,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "50-50 chance of guessing whether a piece of sample",
+   "note": "Section 'Who will identify AI content?', WhatamIdoing, 23:34, 4 September 2026, on en.wikivoyage.org/wiki/Wikivoyage_talk:AI_guidelines (raw wikitext via ?action=raw). Quote word-for-word (the page uses an en dash in 50-50). 'Recalled a study' is exact: 'There was a study a while ago that said'. The 'experienced Wikimedia policy editor' limb is supported on the same page but in a different section - in 'Assistive technology' the same editor writes of having a lot of experience with policy writing (01:33, 5 September 2026). The editor also says he/she is bad at detecting AI use and possibly worse than 50-50.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
+  "1150": {
+   "index": 1150,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it was written 22 years ago",
+   "note": "Same comment, same section and timestamp as 1149. Quote word-for-word. FLAG, not buried: the page states no gender for User:WhatamIdoing, so the pronoun 'he' is the claim's own attribution and is not supported by the source - drop the pronoun downstream. Second wording gap: the page calls what was found 'something unencyclopedically puffy', not 'a passage'. Everything else holds - English Wikipedia, suspected AI-generated, discovered via a trip through the page history - and the page adds that 22 years is about 19 years before AI text generators were generally available.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
   "1151": {
    "index": 1151,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"The prose is nearly always better written by you, for style\"",
    "note": "Raw wikitext of User:LPfi/AI guidelines fetched via action=raw. The page opens with {{experimental}}, then 'Be very careful if you use artificial intelligence (AI). The prose is nearly always better written by you, for style and to avoid potential copyright and plagiarism issues.' So 'opens by', 'for style' and 'marked experimental' all hold; the source adds copyright/plagiarism as a second reason. Revision date checked via the revisions API: latest edits 2026-09-03, consistent with 'revision of September 2026'.",
    "fromFile": "verdicts-ai-i1110-1160.json"
+  },
+  "1152": {
+   "index": 1152,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "claiming a particular beach resort has a restaurant because many do",
+   "note": "Section 'Hallucinations', User:LPfi/AI guidelines (raw wikitext; page carries {{experimental}}; current revision 2026-09-03, so 'revision of September 2026' is right). Quote word-for-word. The 'substituting the typical for the particular' clause is the claim's own gloss rather than the draft's wording, but it is entailed by the example as written (a particular resort, inferred from what many resorts have). The draft's own label for these is 'AI hallucinations'.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
+  "1153": {
+   "index": 1153,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "avoid converting an article into an obvious AI voice",
+   "note": "Section heading is exactly 'AI assisted copy editing' on User:LPfi/AI guidelines. Quote word-for-word. The 'existing article' limb is supported: the paragraph opens 'For existing articles, you shouldn't get carried away' and the same sentence tells editors to aim to maintain the original tone and style.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
+  "1154": {
+   "index": 1154,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some average or mishmash of the inputs",
+   "note": "Section 'Copyright issues', User:LPfi/AI guidelines. Quote word-for-word. The 'large language model' limb is supported two sentences earlier in the same section, which describes current AI programs as applying a large language model to a collection of inputs. The draft's sentence ends 'that is not what Wikivoyage needs'.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
+  "1155": {
+   "index": 1155,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "do not use the style AI chatbots tend to use",
+   "note": "Section 'Discussions', User:LPfi/AI guidelines. Quote word-for-word. Both limbs hold, but name the carve-out downstream: the bar is on AI tools in talk-page posts 'other than for spelling correction, finding a word, and similar tasks', and the draft adds that the original wording must be the editor's and that pace and volume should match unassisted participation.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
   },
   "1156": {
    "index": 1156,
@@ -28341,6 +28518,13 @@
    "note": "Same paragraph supplies the remaining limbs: the reporter writes that the book required research Burgess believes AI cannot do, and Burgess names the New York State Library and its microfilm of Franklin Roosevelt's gubernatorial papers. State library limb confirmed.",
    "fromFile": "verdicts-ai-i1162-1193.json"
   },
+  "1167": {
+   "index": 1167,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there were 102 mentions of food poisoning at the Riu Palace",
+   "note": "Which? press release, 02 Jul 2026, fetched raw by curl (server-rendered HTML, no summarizer). Quote word-for-word. Two limbs rest on nearby context rather than the sentence itself: the sentence says 'checked in March this year', and 2026 comes from the article's own 02 Jul 2026 dateline; and 'guest reviews' comes from the preceding paragraph, which is about recent guest reviews on Tripadvisor. The hotel is introduced earlier as the five-star all-inclusive Riu Palace Santa Maria in Cape Verde. Same paragraph adds 32 one- and two-star reviews Dec 2025-Apr 2026, 14 reporting illness.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
   "1168": {
    "index": 1168,
    "verdict": "VERIFIED_VERBATIM",
@@ -28354,6 +28538,34 @@
    "trueWording": "described the atmosphere as 'charming'",
    "note": "Both limbs sit in one paragraph comparing the platforms for the Britannia International hotel in London: Google's overview is reported as highlighting guest reviews of 'filthy' conditions, and Tripadvisor's summary of the same hotel as praising clean rooms and calling the atmosphere charming.",
    "fromFile": "verdicts-ai-i1162-1193.json"
+  },
+  "1170": {
+   "index": 1170,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Lapses [in service] noted by a few'",
+   "note": "Kaia Coracesium section of the Which? release. Quote word-for-word including the bracketed insertion (the page uses curly quotes). Limbs hold: several reviewers who visited last summer wrote they felt unsafe due to repeated sexual harassment from male hotel staff. Framing the claim compresses: the article says the summary describes the service as 'friendly' and that this phrase is the closest it comes to referring to those allegations, rather than saying it rendered the reports as that phrase.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
+  "1171": {
+   "index": 1171,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the language used appears to minimise their significance",
+   "note": "Paragraph immediately after the Kaia Coracesium example. Quote word-for-word, and the 'where the summaries do reference serious allegations' limb matches the article's 'when they do'. One framing gap worth carrying: Which? puts it as a question that remains open - why such references do not appear consistently and why, when they do, the language appears to minimise - rather than as a flat conclusion. The preceding sentence says the AI systems are evidently capable of identifying and referencing such allegations.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
+  "1172": {
+   "index": 1172,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "identify the most common themes and then turn those themes",
+   "note": "Tripadvisor's statement quoted in the Which? release. The claim's 12-word quote is word-for-word; the statement's full clause has the summaries use large language models and natural language processing to read recent reviews before that phrase, which supports the claim's 'the models' limb, and ends with short, plain-English overviews. Tripadvisor adds that summaries update monthly over the previous 12 months of reviews and that reviews are treated equally regardless of rating.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
+  },
+  "1173": {
+   "index": 1173,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Google manages context in their AI summaries far better",
+   "note": "Comparison-with-rival-platforms section of the Which? release. Quote word-for-word (present tense 'manages'; the claim's past tense is reported speech). The 'of the same hotel warning of potential for illness' limb is the next sentence: Google's overview for the Riu Palace warned of 'potential for illness' and flagged outbreaks of illness and concerns over birds in the buffet areas. The 'than Tripadvisor' comparator is implicit - the sentence names no comparator, but it opens a paragraph framed as Which? looking at a rival platform's approach, in an article wholly about Tripadvisor.",
+   "fromFile": "verdicts-ai-i1128-1173.json"
   },
   "1174": {
    "index": 1174,

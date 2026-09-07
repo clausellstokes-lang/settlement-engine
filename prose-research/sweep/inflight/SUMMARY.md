@@ -1,8 +1,9 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:59:58 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 05:06:00 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | result | 11 | — | — | 06:11:37 |
+| ai | critic |  | failed | 0 | — | — | 09:01:55 |
 | ai | critic |  | failed | 0 | — | — | 03:45:47 |
 | ai | finder | arch-biographical-record | result | 57 | — | 104 claims, complete=True @23:50:23 | 03:27:43 |
 | ai | finder | arch-decoding-literature | result | 31 | — | 180 claims, complete=True @00:14:26 | 04:19:20 |
@@ -13,9 +14,12 @@
 | ai | finder | arch-worldbuilding-communities | result | 62 | — | 66 claims, complete=True @23:50:23 | 03:23:02 |
 | ai | finder | procgen-baseline | result | 28 | — | 68 claims, complete=True @04:45:55 | 08:50:22 |
 | ai | regrade | regrade-r10 | result | 0 | — | — | 05:07:46 |
+| ai | regrade | regrade-r11 | failed | 0 | — | — | 09:01:53 |
 | ai | regrade | regrade-r9 | failed | 0 | — | — | 03:45:46 |
 | ai | synth |  | result | 0 | — | — | 05:55:12 |
+| ai | synth |  | failed | 0 | — | — | 09:01:54 |
 | ai | synth |  | failed | 0 | — | — | 03:45:47 |
+| ai | verifier | i0-14 | failed | 0 | — | verdict file absent | 09:01:53 |
 | ai | verifier | i1000-1014 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1006-1025 | result | 10 | — | verdict file WRITTEN | 04:24:22 |
 | ai | verifier | i1015-1029 | failed | 0 | — | verdict file absent | 03:45:44 |
@@ -27,38 +31,50 @@
 | ai | verifier | i1060-1074 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1063-1081 | result | 5 | — | verdict file WRITTEN | 08:55:09 |
 | ai | verifier | i1075-1089 | failed | 0 | — | verdict file absent | 03:45:45 |
-| ai | verifier | i1082-1097 | in-flight | 7 | — | verdict file absent | 08:59:48 |
+| ai | verifier | i1082-1097 | result | 7 | — | verdict file WRITTEN | 09:01:01 |
 | ai | verifier | i1090-1104 | failed | 0 | — | verdict file absent | 03:45:44 |
-| ai | verifier | i1098-1127 | in-flight | 2 | — | verdict file absent | 08:59:55 |
+| ai | verifier | i1098-1127 | failed | 2 | — | verdict file WRITTEN | 09:01:52 |
 | ai | verifier | i1105-1119 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1110-1160 | result | 13 | — | verdict file WRITTEN | 04:31:42 |
 | ai | verifier | i1120-1134 | failed | 0 | — | verdict file absent | 03:45:45 |
-| ai | verifier | i1128-1173 | in-flight | 7 | — | verdict file absent | 08:59:55 |
+| ai | verifier | i1128-1173 | failed | 8 | — | verdict file WRITTEN | 09:01:39 |
 | ai | verifier | i1135-1149 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1150-1164 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1162-1193 | result | 10 | — | verdict file WRITTEN | 04:32:16 |
 | ai | verifier | i1165-1179 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1180-1194 | failed | 0 | — | verdict file absent | 03:45:45 |
-| ai | verifier | i1185-1210 | in-flight | 7 | — | verdict file absent | 08:59:49 |
+| ai | verifier | i1185-1210 | result | 7 | — | verdict file WRITTEN | 09:01:51 |
 | ai | verifier | i1195-1209 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1198-1227 | result | 10 | — | verdict file WRITTEN | 04:38:37 |
 | ai | verifier | i1210-1224 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1214-1239 | failed | 0 | — | verdict file absent | 09:01:52 |
 | ai | verifier | i1225-1239 | failed | 0 | — | verdict file absent | 03:45:46 |
 | ai | verifier | i1232-1259 | result | 5 | — | verdict file WRITTEN | 04:37:03 |
 | ai | verifier | i1240-1254 | failed | 0 | — | verdict file absent | 03:45:46 |
+| ai | verifier | i1240-1270 | failed | 0 | — | verdict file absent | 09:01:52 |
 | ai | verifier | i1255-1257 | failed | 0 | — | verdict file absent | 03:45:46 |
 | ai | verifier | i1262-1326 | result | 8 | — | verdict file WRITTEN | 04:38:48 |
+| ai | verifier | i1271-1298 | failed | 0 | — | verdict file absent | 09:01:52 |
+| ai | verifier | i1299-1315 | failed | 0 | — | verdict file absent | 09:01:52 |
+| ai | verifier | i1317-1336 | failed | 0 | — | verdict file absent | 09:01:52 |
 | ai | verifier | i1335-1378 | result | 11 | — | verdict file WRITTEN | 04:38:32 |
+| ai | verifier | i1339-1354 | failed | 0 | — | verdict file absent | 09:01:52 |
+| ai | verifier | i1355-1390 | failed | 0 | — | verdict file absent | 09:01:52 |
 | ai | verifier | i1383-1414 | result | 9 | — | verdict file WRITTEN | 04:44:04 |
+| ai | verifier | i1391-1398 | failed | 0 | — | verdict file absent | 09:01:52 |
 | ai | verifier | i1415-1425 | result | 2 | — | verdict file WRITTEN | 04:40:05 |
 | ai | verifier | i1426-1440 | result | 4 | — | verdict file WRITTEN | 04:44:20 |
 | ai | verifier | i1441-1455 | result | 7 | — | verdict file WRITTEN | 04:45:37 |
 | ai | verifier | i1456-1470 | result | 6 | — | verdict file WRITTEN | 04:51:38 |
 | ai | verifier | i1471-1485 | result | 6 | — | verdict file WRITTEN | 04:52:16 |
 | ai | verifier | i1486-1500 | result | 8 | — | verdict file WRITTEN | 04:52:13 |
+| ai | verifier | i15-29 | failed | 0 | — | verdict file absent | 09:01:53 |
 | ai | verifier | i1501-1515 | result | 9 | — | verdict file WRITTEN | 04:52:07 |
 | ai | verifier | i1516-1517 | result | 1 | verdicts-ai-i1516-1517.json | verdict file WRITTEN | 04:53:46 |
+| ai | verifier | i30-44 | failed | 0 | — | verdict file absent | 09:01:53 |
+| ai | verifier | i45-59 | failed | 0 | — | verdict file absent | 09:01:53 |
 | ai | verifier | i571-949 | result | 8 | — | verdict file WRITTEN | 08:54:35 |
+| ai | verifier | i60-67 | failed | 0 | — | verdict file absent | 09:01:53 |
 | ai | verifier | i940-954 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i940-961 | result | 6 | — | verdict file WRITTEN | 04:22:23 |
 | ai | verifier | i951-1032 | result | 12 | — | verdict file WRITTEN | 08:56:33 |
@@ -68,6 +84,7 @@
 | ai | verifier | i985-1004 | result | 7 | verdicts-ai-i985-1004.json | verdict file WRITTEN | 04:26:43 |
 | ai | verifier | i985-999 | failed | 0 | — | verdict file absent | 03:45:43 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 05:08:53 |
+| dnd | critic |  | failed | 0 | — | — | 09:05:59 |
 | dnd | critic |  | result | 0 | — | — | 08:35:20 |
 | dnd | critic |  | failed | 0 | — | — | 03:45:30 |
 | dnd | finder | place-5e-gazetteers | result | 44 | — | 61 claims, complete=True @23:50:21 | 03:11:50 |
@@ -80,7 +97,7 @@
 | dnd | regrade | regrade-r13 | result | 0 | — | — | 08:47:59 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
 | dnd | synth |  | result | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:52:03 |
-| dnd | synth |  | in-flight | 0 | dnd-coverage.mjs, dnd-stats.mjs | — | 08:55:49 |
+| dnd | synth |  | failed | 0 | _r13-apply.mjs, dnd-coverage.mjs, dnd-stats.mjs | — | 09:05:58 |
 | dnd | synth |  | result | 0 | _assemble-dnd.mjs, _gen-tables-dnd.mjs, 00-header.md, 01-method.md, 06-partVI-in | — | 08:16:50 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | verifier | i0-14 | in-flight | 6 | — | verdict file WRITTEN | 06:53:51 |

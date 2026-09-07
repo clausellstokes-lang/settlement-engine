@@ -3127,6 +3127,31 @@
   }
  },
  {
+  "index": 1104,
+  "feature": "counter-evidence",
+  "claim": "Wiher and colleagues report that string diversity across a set of generations shows little consistency from one task to another.",
+  "source": "Gian Wiher, Clara Meister and Ryan Cotterell, 'On Decoding Strategies for Neural Text Generators', TACL 2022 (arXiv v1, 29 Mar 2022)",
+  "url": "https://arxiv.org/abs/2203.15721",
+  "quote": "little consistency across tasks in terms of",
+  "page": "section 5, Diversity",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2022-03-29",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "GPT-2-based generators across five tasks, March 2022; registers measured: story generation, unconditional generation, summarization, dialogue, machine translation.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1104,
+   "verdict": "PARTIAL",
+   "trueWording": "little consistency across tasks in terms of",
+   "unsupportedLimb": "'across a set of generations' — the sentence attributes the inconsistency to SEQUENCE-level string diversity, and the same paragraph reports set-level diversity as consistent across tasks",
+   "note": "The quotation is verbatim in section 5.2, but the sentence completes 'sequence-level string diversity.' The two sentences immediately before it say the opposite of the claim for set-level diversity: 'For diversity metrics calculated over a set of generations, ancestral sampling consistently generates the most diverse text' and 'Mode-seeking decoding strategies consistently have a stronger negative correlation with set-level diversity metrics'. Section 4.1.2 defines the paper's two levels (string level, within a string; set level, across strings), so the claim's 'across a set of generations' names the level the page reports as consistent. The 'Interestingly' that opens the sentence marks it as the contrast to that consistency.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
+  }
+ },
+ {
   "index": 1111,
   "feature": "other: mechanism of blandness",
   "claim": "Meister and colleagues state that low-information strings may be seen as boring and uninformative, giving the low-probability end of the paradox a communicative rather than statistical reading.",
@@ -3149,6 +3174,31 @@
    "unsupportedLimb": "\"the low-probability end of the paradox\" - the paper places boring/uninformative strings at the LOW-INFORMATION extreme, which (information = negative log-probability) is the HIGH-probability end; the low-probability end is the one it calls \"hard to process\"",
    "note": "Quote verbatim in section 1, Introduction, immediately after 'At one extreme, strings with more-than-expected information may be hard to process... At the other extreme, low-information strings may be seen as boring and uninformative.' The communicative framing limb IS supported (the passage rests on 'the goal of human communication is to transmit messages efficiently and reliably'), but the claim attaches the quote to the wrong end of the paradox.",
    "fromFile": "verdicts-ai-i1110-1160.json"
+  }
+ },
+ {
+  "index": 1127,
+  "feature": "model era drift",
+  "claim": "Zhang and colleagues confirmed that post-training reduces output diversity at every stage they tested, supervised fine-tuning, RLHF and RLVR.",
+  "source": "Jiayi Zhang, Simon Yu, Derek Chong, Anthony Sicilia, Michael R. Tomz, Christopher D. Manning and Weiyan Shi, 'Verbalized Sampling: How to Mitigate Mode Collapse and Unlock LLM Diversity', arXiv v4, 15 Jul 2026",
+  "url": "https://arxiv.org/abs/2510.01171",
+  "quote": "post-training reduces output di",
+  "page": "section 5.1, Ablation on Training Stages (the quotation breaks at a line-wrapped hyphen; the word completed is 'diversity')",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2026-07-15 (v4)",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "Tulu-70B across its post-training stages, base-model diversity 45.4 percent, 2025-2026; register measured: creative writing prompts.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1127,
+   "verdict": "PARTIAL",
+   "trueWording": "post-training reduces output di[versity]",
+   "unsupportedLimb": "'at every stage they tested ... and RLVR' — the paper records diversity drops after SFT and DPO only; the (SFT, RLHF, RLVR) list qualifies where VS improves diversity, not where diversity falls",
+   "note": "The quotation is verbatim across the line-wrapped hyphen in section 5.1: 'Figure 4 in Section F.1 confirms that post-training reduces output di-/versity, and VS improves diversity across all post-training stages (SFT, RLHF, RLVR).' The parenthetical attaches to VS's improvement. Figure 4's caption states 'Baseline prompting methods experience major diversity drops (mode collapse) after SFT and DPO', and Appendix F.1 gives direct prompting 20.8% after SFT falling to 10.8% after DPO; no drop is stated or numbered for the RLVR stage (Tulu-Final-70B), which the caption uses to show VS holding diversity. So the reduction is established for SFT and RLHF/DPO, not confirmed stage-by-stage through RLVR.",
+   "fromFile": "verdicts-ai-i1098-1127.json"
   }
  },
  {
