@@ -1,0 +1,21 @@
+PREDICT_HEAD=c2337220a965e1eea02815c194df393c61d28e35 start 14:50:49 load=1.86 2.51 4.45
+--- OSR plain read (read-only):
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+CR-OSR-FREEZE-6 shape-family filter (theta=0.8, >=8 keys): cleared 124 read(s) across 31 identit(ies) whose key is carried by a sibling shape in the same family. Zero CR-OSR-FREEZE-3-R2 class-(a) rows may be cleared; the scan refuses if one is.
+CR-OSR-SCHEMA-6 M11 DOM-global receiver filter (document, globalThis, window): cleared 11 read(s) across 3 identit(ies) whose read EXPRESSION begins with a host global, so the shape the ungrounded single-home rule bound them to is not the record being read. Keyed on the RECEIVER, never on the key name. No class-(a) TRUE POSITIVE may be cleared.
+CR-OSR-SCHEMA-6 M12 language-surface filter (toLocaleString): cleared 0 read(s) across 0 identit(ies) of a builtin prototype member the byte-frozen detector's BUILTIN_MEMBERS list predates. Each declared key must live on a builtin prototype AND be absent from every observed shape, or the scan refuses.
+M8/M9 explained-writer bank (H26 / CR-OSR-FREEZE-6-R2): 9 declared identit(ies) whose writer the GENERATION corpus never runs; banked and enforced 62 read(s) across 8 of them on this scan. Each entry names its writer and its key must still be written there, in one of the four measured write shapes, or the scan refuses. No class-(a) TRUE POSITIVE may be exempted.
+CR-OSR-FREEZE-7 UNREVIEWED-UI cohort (src/components/): 50 file(s) / 128 identit(ies) / 192 read(s), banked in the frozen inventory and PER-ROW TRIAGED under CR-OSR-FREEZE-7 (the dispositions live in the chair's record, not here). These are ENFORCED, not excluded: CR-OSR-SCOPE-1 removes them from EXACT resolution only.
+OSR_DRY_EXIT=0
+--- writer-reach dry (read-only):
+WRWALKER HOLD — judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326 (reviewable 526) · pending-surface debt: isolationSupport on settlement → web-display (§12 WRW-2, the owner row that rules whether the isolation-support finding is shown); magicDependent on isolationSupport → web-display (§12 WRW-2, the owner row that rules whether the isolation-support finding is shown); requiredCapacity on isolationSupport → web-display (§12 WRW-2, the owner row that rules whether the isolation-support finding is shown)
+WR_DRY_EXIT=0
+--- lighting probe (farmed, read-only):
+{"files":2543,"parked":373,"credited":2170,"titles":23653,"suiteTitles":6333}
+LIGHT_PROBE_EXIT=0
+--- lighting register:
+{"files": 2543, "parked": 373, "credited": 2170, "titles": 23653, "suiteTitles": 6333, "measuredAtSha": "e4ca5ec9d757216078327cc27a81a64bd9537510"}
+--- prose-numerics dry:
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+PN_DRY_EXIT=0
+PREDICT_END 14:51:27 porcelain=[]

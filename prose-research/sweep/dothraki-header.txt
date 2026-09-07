@@ -1,0 +1,300 @@
+
+The Header Script – Dothraki
+Skip to content
+Dothraki
+ A Language of Fire and Blood 
+The Header Script
+Click to enlarge.
+I’ve gotten a few questions about the script in the header (the one in black below the word “Dothraki” in white), so I thought I’d address it, even though it doesn’t relate much to Dothraki itself.
+First (in case there’s anyone who can’t make it out), it’s intended to say “Dothraki” in English (works if you kind of squint your eyes at it [especially when you get to the “a”]). Even so, the script was not intended to be a Roman font: it was created for a 
+conlang
+.
+Back in mid-2010, when I was working on season 1 of 
+Game of Thrones
+, I was also participating in a group conlang creation project (the language was called 
+Kenakoliku
+). It didn’t end up being successful (group projects are 
+very
+ difficult to maintain), but it was fun at the time. Since my favorite part of creating a language is creating its 
+orthography
+, I devoted my energies to creating a possible orthography for Kenakoliku.
+I initially fonted up five proposals (just one character for each): two instantiations of someone else’s hand-drawn proposal, and three of my own. They’re shown below:
+Click to enlarge.
+I actually liked the one called “Curvy Glyphs” the best, with “Kadani B” coming in a close second (for some reason it reminded me of those block Greek letters you see on fraternity houses…), but most everyone else liked what I called “Halfsies”: an orthography where the consonant was on the bottom, and the vowel on the top. As a result, I filled the font out, creating possible consonant and vowel characters without assigning any values to them (so people on the board could choose which ones they liked best). Here’s the chart I came up with:
+Click to enlarge.
+From this sample, everyone (mostly) settled on form-sound combinations they liked, and I produced a font, a sample of which is shown below:
+Click to enlarge.
+The font had some problems, and I mostly fixed them so that the font worked in 
+my
+ word processor of choice, but then it still had problems in other word processors, and then the language itself kind of wound down anyway, so I abandoned the project and the script. If you’d like, you can download what remains of the font and toy around with it 
+here (.zip)
+. I warn you, though: the ligatures may not work on your end, and I’m no longer maintaining it.
+Anyway, several months later, 
+Game of Thrones
+ debuted, and I started up 
+a LiveJournal account
+ mainly to make comments on 
+George R. R. Martin’s LiveJournal
+. In order to do so, though, I needed an icon. I didn’t want to use a picture of one of the actors from the show (or, even worse, a picture of me), and Dothraki didn’t have its own script, so I was in a quandary. I’d always liked the Halfsies font, though (I always referred to it in my head as the Swashbuckler’s Script), and one of the characters kind of looked like a “D”, so I made it my LJ icon:
+And that’s been my little Dothraki icon ever since.
+When it came to making 
+this
+ blog, I found a theme I 
+really
+ liked (props to 
+digitalnature
+!), but the font in the header looked way too plain (sans-serif?! Decidedly un-Dothraki!). And since I didn’t want to actually go in and mess with the CSS, I just created a background image with the Halfsies font. In order to get something that looked like English, I had to pick and choose characters (and alter some, using Photoshop), some of which you will have seen in the image above:
+Click to enlarge.
+And eventually I had it.
+So that’s the story behind the script in the header. The look of it was, indeed, inspired by 
+Devanāgarī
+, but the actual structure is a bit different. The font above can’t actually be used to write English (it’d need a 
+lot
+ of work for that), but maybe if someone’s interested they can take it and manipulate it.
+I feel like I should have something related to Dothraki in here, since this is a Dothraki blog. Let’s see… If I had to give “Halfsies” a name in Dothraki it’d probably be 
+Lirisirazo
+ (a class B inanimate noun, as all noun-adjective compounds are that end in a vowel), which means something like “Bladed Writing”.
+Also, for the curious, Dothraki is now up to 3,163 words: More words than 
+Mr. Padre Tony Gwynn
+ has hits, but still a ways to go to catch 
+Pete Rose
+ (and my guess is Dothraki will have double his number before he gets even a sniff of the Hall of Fame).
+Published 
+September 21, 2011
+By 
+David J. Peterson
+Categorized as 
+Conlanging
+Tagged 
+misc
+, 
+other conlangs
+, 
+writing
+ 30 comments 
+Mia
+says:
+September 21, 2011 at 1:52 pm
+I like Kadani A & B quite a lot, but Halfsies is pretty.
+I sometimes get the urge to gather all the Kenakoliku material into one place and make something of it. (With all due credit to the other contributors, of course.)
+Reply
+David J. Peterson
+says:
+September 21, 2011 at 2:18 pm
+*sigh* No one liked my Curvy Glyphs… 
+You can always use one of the urls (colla or kenakoliku). Though they have bb’s on there, you can still create static pages and link directly to them—or perhaps produce an article summarizing the entire project.
+Reply
+Tim Stoffel
+says:
+September 24, 2011 at 1:00 am
+David, your scripts have always amazed me (I like watching them go by on your home page), and this is simply more proof of that. I like Kadani B a lot, as well as the square script. But, there is something very organic about both the curvy and the halfsies scripts, that make them intriguing.
+Reply
+Daenerys
+says:
+September 28, 2011 at 11:08 am
+I absolutely love the “Lirisirazo”! It looks very Dothraki. I think it would be wonderful to develop it into either a romanized version to write Dothraki in or with the vowels being added on top of the consonants as originally shown. The later reminds me of how Tolkien did his Elvish script. 
+Considering the Dothraki’s contact with literate societies, the written word is on their horizon. 
+ They are already, at least in the show, using that pretty blue “war paint”, which must have symbolic meaning depending on the design. 
+Reply
+David J. Peterson
+says:
+September 28, 2011 at 4:29 pm
+A quick reply to the last bit. As a human being, I, frankly, can’t understand how a people can create art of any kind and 
+not
+ create a writing system. And yet, it’s happened—lots and lots and lots of times. I’m not sure if there’s any civilization that lacks art, but there are plenty that never invented writing. I don’t see how, but, well, that’s history.
+Reply
+ingsve
+says:
+September 28, 2011 at 5:53 pm
+Another question could be whether people can create art without having a language. When do linguists believe the first human languages came about?
+Reply
+David J. Peterson
+says:
+September 28, 2011 at 7:42 pm
+The thinking now is that a human community can’t exist without a language, and that we’ve been speaking for at least 10,000 years. By that logic, it’d seem that it wouldn’t be possible to create art without language. A lot of this, though, depends on conjectures about ancient peoples we have absolutely no records of.
+Reply
+ingsve
+says:
+September 28, 2011 at 10:12 pm
+If that’s the thinking then I would guess language must probably be even older than that since cave paintings for example are perhaps 40000 years old.
+Reply
+Khal Qanno
+says:
+May 4, 2020 at 10:50 am
+Having an orthography for a language is a pretty urban-biased idea. Written language is a really weird idea, and even weirder in practice if you really think about it, so I can totally see why many societies don’t form one.
+And really, the main reason why most societies take one on is because they need to check receipts more than anything else. People usually see its usefulness for art and knowledge after the fact (though I will admit the Mayans did know what was good from the getgo)
+One day I’d love to take the time and develop a conlang without an orthography or romanization system – just build it from my hands, voice and memory
+Reply
+Bill Nixon
+says:
+June 8, 2012 at 10:51 pm
+I just finished watching Season 1 on DVD so don’t tell me what happens. After completing the season, I watched the feature about the language you created. Very, very cool. During the feature there is a book that is shown. It is titled, “Dothraki reference grammar and lexicon.” You also mention MP3s that the actors studied. 
+I know it is probably and HBO super-secret thing that I am asking, but would it ever be possible to get that book somewhere and the pronunciation MP3’s. I have searched a great deal, but have only found scattered bits and pieces.
+Reply
+David J. Peterson
+says:
+June 9, 2012 at 12:53 am
+Hi, Bill! That book is a print version of the grammar document I maintain of the Dothraki language. I literally had it printed out at Staples for that Dothraki promo I did for HBO (and then I’ve used it elsewhere for other TV spots). There’s only one copy of it, and it’s hopelessly out of date at this point. What would be best is to produce a book, and both I and HBO are open to the idea, but thus far there hasn’t been any interest from any publishers.
+As for the .mp3’s, I have them all on my computer. I could probably put them up somewhere (after all the lines are in the show), but there are hundreds; I can’t think of a practical way to do it. Maybe I’ll throw a few up here and there on future blog posts.
+Thanks for the comment!
+Reply
+CJ
+says:
+April 15, 2015 at 3:05 pm
+Howdy,
+Old comment I know, but has there been any interest from publishers? If there hasn’t, would a Kickstarter/Gofundme to get the manuscript polished up and uploaded to Lulu work? At which point it’s print on demand and sales can do whatever they please.
+As for the .mp3’s, have you still got them? If so, have you considered a torrent file? Torrents are currently the sanest method for sharing large amounts of files, or very large files, and once the swarm has a full file the initial seeder can drop off the radar.
+A Kickstarted/Lulu printed book with torrent audio wouldn’t be as fancy as a hardcover engraved tome on Amazon, complete with CD’s or a custom USB, but then that sort of thing tends to be expensive to produce, sell, and ship. Throwing them on an engraved USB stick for a Kickstarter could be fun, but not absolutely necessary.
+Reply
+David J. Peterson
+says:
+April 15, 2015 at 3:20 pm
+Hey CJ!
+In case you missed it, I 
+did
+ get the opportunity to publish a book on Dothraki. It’s called 
+Living Language Dothraki
+, and you can purchase it 
+here
+. It’s different from my own document, because it’s intended as an instructional guide, and reference grammars aren’t that.
+Self-publishing, though, is not an option. Since HBO owns the work, HBO has to license it (which they did with 
+Living Language Dothraki
+). They’re not going to license the work for a self-published project—at least not right now. If nothing else has cropped up for other 
+Game of Thrones
+ languages a few years after the show has ended, they might be interested, in which case I 
+could
+ probably do a Kickstarter to try to pay the licensing fee, whatever it is, in addition to the cost of making the book. That, though, is something for the future. For now, we work through traditional publishing, and we at least have one book! That’s not too bad!
+Reply
+Lesley
+says:
+June 26, 2012 at 8:56 pm
+Haha, The second I looked at the curvy glyphs; my mind went straight to Kamakawi. I’m guessing that that glyph type is what ultimately spawned the Kamakawi script (which I like but find confusing :P)
+Reply
+David J. Peterson
+says:
+June 27, 2012 at 2:43 am
+Nah, the 
+Kamakawi script
+ predated Curvy Glyphs by 
+many
+ years. Never thought they looked alike… Live and learn!
+Reply
+Esploranto
+says:
+June 27, 2012 at 8:40 am
+Actually I like the curvy glyphs better. They kind of remind me of Thai to some extent. I would have loved to see how you would have developed a complete set for the curvy glyphs.
+Reply
+Esploranto
+says:
+June 28, 2012 at 12:05 pm
+In fact I think the curvy glyphs would be very very cool for Valyrian glyphs! :p
+Reply
+alejandro
+says:
+August 5, 2013 at 3:16 pm
+hi,i want to make me a tattoo that say: Yer jalan atthirari anni , you can send me to me this text in dothraki font text, please
+Reply
+David J. Peterson
+says:
+August 5, 2013 at 7:06 pm
+Just to double check, you’d like it in the font I created on this post? Just do you know, it wasn’t created for Dothraki, but I think I can do it, nonetheless.
+Reply
+Alexandria Rivas
+says:
+April 15, 2015 at 4:12 pm
+Would you consider publishing a book on (High) Valyrian, the way you did with Dothraki?
+Reply
+David J. Peterson
+says:
+April 15, 2015 at 4:29 pm
+If it were up to me, absolutely! It’s not my call, though, at this point. To get a book up, a publisher, HBO, and I have to say “yes”. We definitely have a “yes” on my side. Consequently, it’s out of my hands at the moment. This is purely because the show is ongoing, though. I mean, 
+Game of Thrones
+ is not just HBO’s current property: It’s its hottest property. They want to make sure everything that happens surrounding the show happens in a particular way and according to a particular timeline (which makes sense, from a marketing perspective). After the show is done, I may have more wiggle room to start pitching things on my own, but right now it really has to come from HBO.
+Reply
+Alexandria Rivas
+says:
+April 15, 2015 at 5:00 pm
+Would it be possible, and would you be willing to translate a text to High Valyrian for a tattoo I’d like to get? Nine words! I’ve been reading up on the translated words and word order but it would be a lot if it were directly translated by the creator!
+Reply
+David J. Peterson
+says:
+April 15, 2015 at 5:02 pm
+Sure. What is it?
+Reply
+Alexandria Rivas
+says:
+April 15, 2015 at 5:06 pm
+Oh my god, thank you! It’s “Sky above me. Earth below me. Fire within me.” 
+Reply
+David J. Peterson
+says:
+April 15, 2015 at 5:24 pm
+Tough one, because of the “within me”… Let’s see.
+Jēdar yno toliot. Tegon yno gō. Perzys yno iemnȳ.
+I used the “inside” postposition that’s used for emphatic “inside”-ness because ordinarily you’d just use the locative. I also thought of using 
+hen
+, but that’s a preposition and would break up the symmetry. This translation preserves the symmetry.
+So, there you are! If you get a tattoo please send pictures. 
+Mad Latinist
+says:
+April 20, 2015 at 1:02 pm
+Hmm, if you had gone with 
+hen
+ would that have been 
+hen ynot
+ “out of me” or 
+hen *ynā
+ “from me”? Interesting that this might even be considered for “within.”
+Mad Latinist
+says:
+April 20, 2015 at 1:15 pm
+I do remember that a couple years back, when you had to translate into HV on the fly for that one podcast, you were in doubt as to how to say “inside” to describing Homer’s predicament. I believe you said that, at the time, you had not come up with a way to say that specifically, and just went with the locative case or applicative. But the point is moot because you have repeatedly told us to disregard that sentence 
+Alexandria Rivas
+says:
+April 15, 2015 at 5:27 pm
+Thank you so much! I really appreciate it, and will do! I’m actually pretty impressed with myself, I used “inside” too but could’t find “me” so kept using “I”. Really hoping to see a Valyrian language guide in the future and think the Kickstarter is an awesome idea, that I’m sure would get a lot of support, mine included. Thanks again!! 
+Reply
+Mad Latinist
+says:
+April 20, 2015 at 1:39 pm
+You are not the first learner to be confused by “I” vs. “me.” I guess we need to add a better explanation of this on the wiki.
+But as things stand, by each pronoun in the vocabulary there is at least a link to the chart explaining how to decline them. The problem is that many beginners won’t realize how that relates to the English I/me distinction!
+Reply
+Alexandria Rivas
+says:
+April 15, 2015 at 5:59 pm
+Ah, I meant i got the “below”, using the word “under” because I couldn’t find “below”. I saw iemny translated to stomach but it would make sense to use it as “inside” or “within” lol, still kinda getting the hang of the bits and pieces I find on forums and such, but love the language, its very eloquent and if pronounced correctly, rolls off the tongue. Bought the Dothraki guide yesterday and it is a lot tougher to pronounce but so much fun all the same!
+Reply
+Leave a comment 
+Cancel reply
+Your email address will not be published.
+Required fields are marked 
+*
+Comment 
+*
+Name 
+*
+Email 
+*
+Website
+Δ
+This site uses Akismet to reduce spam. 
+Learn how your comment data is processed.
+Post navigation
+Previous post
+Dothraki Writing System…?
+Next post
+Asshekhqoyi Vezhvena!
+Search…
+Resources
+Dedalvs.com
+Dothraki Forums
+Dothraki Language Wiki
+Dothraki.org
+Language Creation Society
+Westeros.org
+Winter-Is-Coming.net
+Dothraki
+ Proudly powered by 
+WordPress
+. 

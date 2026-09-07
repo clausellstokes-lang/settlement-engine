@@ -1,0 +1,68 @@
+{
+  "name": "dnd",
+  "chunk": 1,
+  "claims": [
+    {
+      "index": 45,
+      "feature": "2024 glossary layout",
+      "claim": "Screen Rant notes the 2024 Rules Glossary de-emphasises art with monochrome scenes to prioritise text and lacks a dedicated Conditions section.",
+      "source": "Ben Brosofsky, Screen Rant, 2024-09-21",
+      "url": "https://screenrant.com/dnd-2024-players-handbook-rules-glossary-change/",
+      "quote": "the lack of a dedicated section for Conditions",
+      "page": ""
+    },
+    {
+      "index": 46,
+      "feature": "2025 Monster Manual lore compression",
+      "claim": "Arndt reports the 2025 Monster Manual cuts iconic monsters' multi-page lore to at most three paragraphs and a roll table, adds a subtitle epithet to every monster, renames phylactery to 'spirit jar', and reads as a utilitarian encyclopedia.",
+      "source": "Dan Arndt, The Fandomentals, 2025-01-28",
+      "url": "https://www.thefandomentals.com/in-the-new-dungeons-dragons-monster-manual-more-is-unfortunately-less/",
+      "quote": "three paragraphs and a table to roll on",
+      "page": ""
+    },
+    {
+      "index": 47,
+      "feature": "sourcebook encyclopedic register",
+      "claim": "Shank's MA thesis characterises campaign-setting handbooks as giving encyclopedic knowledge of D&D geography, history and politics alongside ancillary rules.",
+      "source": "Nathan Shank, 'The Narrative Structures of Dungeons and Dragons', MA thesis 2011 (academia.edu, abstract/intro only)",
+      "url": "https://www.academia.edu/3873121/Masters_Thesis_The_Narrative_Structures_of_Dungeons_and_Dragons",
+      "quote": "encyclopedic knowledge of D&D geography, history, and politics",
+      "page": ""
+    },
+    {
+      "index": 48,
+      "feature": "absence of stylometric / corpus scholarship",
+      "claim": "No stylometric, corpus-linguistic or authorship-attribution study of official D&D prose was found; searches on those terms returned only NLP actual-play datasets and generic stylometry papers, and the term 'Gygaxian' does not surface in Analog Game Studies, Games and Culture or IJRP indexes.",
+      "source": "Negative result from this sweep (searches 3, 22, 25, 35; Semantic Scholar rate-limited)",
+      "url": "https://arxiv.org/abs/2210.07109",
+      "quote": "",
+      "page": ""
+    }
+  ],
+  "verdicts": [
+    {
+      "index": 45,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "the lack of a dedicated section for Conditions",
+      "note": "Quote appears word for word: 'Tossing so much into one glossary does come with certain drawbacks, like the need to reference the back of the book more frequently while learning the basic rules and the lack of a dedicated section for Conditions.' The art clause is also verbatim on the page: 'the Rules Glossary is also the one part of DnD's 2024 Player's Handbook that largely de-emphasizes artwork, squeezing monochrome scenes into banners at the top of some pages but devoting most of the real estate to the text.' Both halves of the claim confirmed. Fetched via WebFetch, HTTP 200."
+    },
+    {
+      "index": 46,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "three paragraphs and a table to roll on",
+      "note": "Quote verbatim: 'Creatures like Aboleths, Beholders, and Mind Flayers from multi-page descriptions that show you their backstory and place in the world to, at best, three paragraphs and a table to roll on.' All three remaining sub-assertions confirmed on the page: subtitles — 'they also all now have Dark Souls boss subtitles' (article's word is 'subtitles', not 'epithet'); phylactery — 'Instead of the Greek word Phylactery ... the Monster Manual now uses \"spirit jar.\"'; utilitarian encyclopedia — 'It goes from an in-universe collection of monster lore to a glorified encyclopedia. It's stripped down to something purely utilitarian.' Byline and date in page JSON-LD match the citation exactly: author 'Dan Arndt', datePublished 2025-01-28. WebFetch returned HTTP 403; retrieved via curl with a browser user agent, HTTP 200, 289,672 bytes."
+    },
+    {
+      "index": 47,
+      "verdict": "NOT_FOUND",
+      "trueWording": "",
+      "note": "The cited academia.edu page does not contain the quoted phrase or any supporting text. Direct fetch 403s (WebFetch and curl); the Wayback snapshot 20250914225534 fetched successfully (HTTP 200, 196,401 bytes) and is a login-walled listing page whose only body text is metadata ('Master's Thesis: The Narrative Structures of Dungeons and Dragons', '2011', 'Nathan Shank'), download prompts, related-paper links, and 'Sorry, preview is currently unavailable. You can download the paper by clicking the button above.' Zero occurrences of 'encyclopedic', 'geography', 'ancillary' or 'campaign setting' in the retrieved text. Not BLOCKED — the page was retrieved; it simply carries no abstract. An exact-phrase web search for the quotation surfaced no verbatim match anywhere. The thesis may well say this in its PDF body, but nothing at the cited URL supports it, so the citation as written is unverifiable and needs the PDF itself."
+    },
+    {
+      "index": 48,
+      "verdict": "NOT_FOUND",
+      "trueWording": "",
+      "note": "The claim is a self-declared negative result; its 'source' field names the sweep's own searches, not the URL. The cited arXiv page (2210.07109, 'Dungeons and Dragons as a Dialog Challenge for Artificial Intelligence') was fetched successfully and does confirm the one clause that touches it — it is an actual-play dialogue NLP dataset ('a gameplay dataset consisting of nearly 900 games ... 800,000 dialogue turns ... 58 million words'), not stylometry or authorship attribution, so the citation is correctly characterised. But no single page can establish the load-bearing existential negative (that no stylometric/corpus study of official D&D prose exists, and that 'Gygaxian' is absent from three journal indexes), and the arXiv page asserts nothing about it. Two adversarial counter-searches (stylometry/corpus/authorship-attribution of D&D rulebook prose; 'Gygaxian' across AGS, Games and Culture, IJRP) surfaced no refuting study, so the negative is not contradicted — it is merely unestablished by the cited source. Verify this row by index searches, not by source fetch."
+    }
+  ]
+}

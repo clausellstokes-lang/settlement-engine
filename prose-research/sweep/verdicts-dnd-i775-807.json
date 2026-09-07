@@ -1,0 +1,233 @@
+{
+ "name": "dnd",
+ "chunk": 2,
+ "claims": [
+  {
+   "index": 775,
+   "feature": "boxed text form",
+   "claim": "The Temple of Elemental Evil's introductory boxed text runs about 1,300 words, more than a full page.",
+   "source": "Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021",
+   "url": "https://deltasdnd.blogspot.com/2021/10/early-evolution-of-encounter-text.html",
+   "quote": "introductory boxed text section that runs more than a full page",
+   "page": "section '1984 (c.) - Dungeonland & Temple of Elemental Evil'"
+  },
+  {
+   "index": 776,
+   "feature": "place and institution description",
+   "claim": "Delta counts 1,200 words of content text for room 404 of the Temple of Elemental Evil, a 20 by 30 foot room.",
+   "source": "Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021",
+   "url": "https://deltasdnd.blogspot.com/2021/10/early-evolution-of-encounter-text.html",
+   "quote": "room 404 is ironically a 20'×30' room with 1,200 words",
+   "page": "section '1984 (c.) - Dungeonland & Temple of Elemental Evil'"
+  },
+  {
+   "index": 777,
+   "feature": "dm-facing sentence",
+   "claim": "The Temple of Elemental Evil tends to open an encounter with non-boxed information for the DM before the boxed description.",
+   "source": "Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021",
+   "url": "https://deltasdnd.blogspot.com/2021/10/early-evolution-of-encounter-text.html",
+   "quote": "start with some non-boxed info to the DM, and then",
+   "page": "section '1984 (c.) - Dungeonland & Temple of Elemental Evil'"
+  },
+  {
+   "index": 782,
+   "feature": "boxed text form",
+   "claim": "In the 1979 Lost Tamoachan the initial area descriptions are set as quoted and indented passages rather than boxed text.",
+   "source": "Delta (Daniel R. Collins), 'Tip-Offs in Tamoachan', Delta's D&D Hotspot, 2017",
+   "url": "https://deltasdnd.blogspot.com/2017/10/tip-offs-in-tamoachan.html",
+   "quote": "not exactly in boxed text, but in specially quoted and indented",
+   "page": "section 'Other Curiosities', 'Proto-Boxed Text'"
+  },
+  {
+   "index": 783,
+   "feature": "edition and house style",
+   "claim": "Bruce Cordell wrote that the 4e tactical format makes a compelling adventure narrative difficult to generate.",
+   "source": "Bruce Cordell, Design & Development column (2011), quoted by Mike Bridges, Greyhawkery",
+   "url": "https://greyhawkery.blogspot.com/2011/06/new-article-d-adventure-format.html",
+   "quote": "The tactical format makes it difficult to generate a compelling adventure narrative",
+   "page": "quoted block, paragraph 1"
+  },
+  {
+   "index": 784,
+   "feature": "omission as information",
+   "claim": "Cordell wrote that the tactical format leaves too little space for notes on exploration, lore or character story.",
+   "source": "Bruce Cordell, Design & Development column (2011), quoted by Mike Bridges, Greyhawkery",
+   "url": "https://greyhawkery.blogspot.com/2011/06/new-article-d-adventure-format.html",
+   "quote": "adventures tend to be fairly Spartan affairs, because too little space",
+   "page": "quoted block, final paragraph"
+  },
+  {
+   "index": 785,
+   "feature": "edition and house style",
+   "claim": "Cordell reports reviewing 1st Edition adventures including Tomb of Horrors for models of adventure format.",
+   "source": "Bruce Cordell, Design & Development column (2011), quoted by Mike Bridges, Greyhawkery",
+   "url": "https://greyhawkery.blogspot.com/2011/06/new-article-d-adventure-format.html",
+   "quote": "1st Edition adventures I looked at included Tomb of Horrors",
+   "page": "second quoted block"
+  },
+  {
+   "index": 787,
+   "feature": "place and institution description",
+   "claim": "In 4th Edition adventures, locations with no encounter are compressed into single paragraphs with minimal description.",
+   "source": "Welcome to the Deathtrap (OSR blog), 'Designing Layout and Information in Adventures', 2021",
+   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
+   "quote": "compressed into single paragraphs with minimal effort spent on description",
+   "page": "section 'The Evolution of Dungeons & Dragons' Information Design'"
+  },
+  {
+   "index": 788,
+   "feature": "boxed text form",
+   "claim": "The blogger describes 5th Edition's Candlekeep Mysteries as a wall of text with a boxed description.",
+   "source": "Welcome to the Deathtrap (OSR blog), 2021",
+   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
+   "quote": "it is a wall of text with a boxed description",
+   "page": "section 'The Evolution of Dungeons & Dragons' Information Design'"
+  },
+  {
+   "index": 791,
+   "feature": "boxed text form",
+   "claim": "The Dark of Hot Springs Island replaces long box text with a handful of adjectives for the GM to improvise from.",
+   "source": "Welcome to the Deathtrap (OSR blog), 2021",
+   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
+   "quote": "rather than give a long box text, Hot Springs Island provides",
+   "page": "section 'Point Form Description'"
+  },
+  {
+   "index": 800,
+   "feature": "dm-facing sentence",
+   "claim": "Peterson says In Search of the Unknown carried starting guidance on running an adventure absent from the then-current D&D books.",
+   "source": "Jon Peterson, Game Wizards (MIT Press 2021), excerpt published by Polygon",
+   "url": "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
+   "quote": "useful starting guidance on running an adventure that you wouldn’t find",
+   "page": "paragraph 1 of the excerpt"
+  },
+  {
+   "index": 801,
+   "feature": "edition and house style",
+   "claim": "Peterson says much of Carr's text on the art of dungeon mastering was effectively paraphrased in Gygax's Keep on the Borderlands.",
+   "source": "Jon Peterson, Game Wizards (MIT Press 2021), excerpt published by Polygon",
+   "url": "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
+   "quote": "enlightening text about the art of dungeon mastering was effectively paraphrased",
+   "page": "paragraph beginning 'It was then that Gygax apparently grasped'"
+  },
+  {
+   "index": 802,
+   "feature": "edition and house style",
+   "claim": "Peterson dates the start of modules as a business for TSR to the summer of 1978.",
+   "source": "Jon Peterson, Game Wizards (MIT Press 2021), excerpt published by Polygon",
+   "url": "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
+   "quote": "Modules only started to become a business for TSR in the summer",
+   "page": "paragraph 1 of the excerpt"
+  },
+  {
+   "index": 806,
+   "feature": "plainness and economy",
+   "claim": "The same writeup says the Gazetteers make their points quickly and efficiently.",
+   "source": "Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "quote": "points are made quickly and efficiently",
+   "page": "Introduction, 'The Base Rules'"
+  },
+  {
+   "index": 807,
+   "feature": "plainness and economy",
+   "claim": "GAZ1 The Grand Duchy of Karameikos runs to 64 pages plus maps.",
+   "source": "Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "quote": "The first one clocks in at a mere 64 pages plus maps",
+   "page": "Introduction, 'The Base Rules'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 775,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "introductory boxed text section that runs more than a full page",
+   "note": "Live raw page (curl, browser UA, HTTP 200). Final section '1984 (c.) - Dungeonland & Temple of Elemental Evil'; the sentence names the Gygax/Mentzer Temple and puts the ~1,300-word figure in parentheses immediately after. Both limbs (word count, more than a page) supported."
+  },
+  {
+   "index": 776,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "room 404 is ironically a 20'×30' room with 1,200 words",
+   "note": "Same section and same sentence chain as 775; the page continues 'of content text' and adds room 417 at 1,400 words. Dimensions, word count and Temple attribution all on the page. Quote matched byte-for-byte including the × character."
+  },
+  {
+   "index": 777,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "start with some non-boxed info to the DM, and then",
+   "note": "Same final section: the page says Temple has a strong tendency to do this and gives the boxed description deep in the encounter text. The page's own hedge, that this is not universal, is consistent with the claim's 'tends to'."
+  },
+  {
+   "index": 782,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not exactly in boxed text, but in specially quoted and indented",
+   "note": "Live raw page, HTTP 200. Section 'Other Curiosities', item 'Proto-Boxed Text'. The 1979 date limb is carried by the post's opening paragraph, which dates the Collector's Edition of Lost Tamoachan to TSR 1979. 'Initial descriptions for each area' matches the claim's 'initial area descriptions'."
+  },
+  {
+   "index": 783,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The tactical format makes it difficult to generate a compelling adventure narrative",
+   "note": "Live raw page, HTTP 200. Opening sentence of the first quoted block. The '4e' limb is carried by Bridges' framing sentence directly above the block, which calls Cordell a main designer of 4th edition rejecting the current tactical format; post labels include '4th edition'."
+  },
+  {
+   "index": 784,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "adventures tend to be fairly Spartan affairs, because too little space",
+   "note": "Final paragraph of the same first quoted block; it continues with notes on exploration, lore and character story, so all three of the claim's listed omissions are on the page."
+  },
+  {
+   "index": 785,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "1st Edition adventures I looked at included Tomb of Horrors",
+   "note": "Second quoted block, opening words; the block goes on to White Plume Mountain and Isle of Dread. The 'models of adventure format' limb is carried by Bridges' bridging sentence about going back to the classics for formatting examples."
+  },
+  {
+   "index": 787,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "compressed into single paragraphs with minimal effort spent on description",
+   "note": "Live raw page, HTTP 200. Section 'The Evolution of Dungeons & Dragons' Information Design', in the 4th Edition paragraph. The page hedges with 'often'; the claim drops that word but states a tendency, not a universal, so the limb stands."
+  },
+  {
+   "index": 788,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is a wall of text with a boxed description",
+   "note": "Same section, the paragraph comparing the author's copy of D&D5e's Candlekeep Mysteries to Temple of Elemental Evil. 'The blogger' is Brian C. Rideout, the post's bylined author."
+  },
+  {
+   "index": 791,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "rather than give a long box text, Hot Springs Island provides",
+   "note": "Section 'Point Form Description'; the sentence continues that the adjectives describe the area for the GM to use while improvising. The full title The Dark of Hot Springs Island appears in the adjacent section and image credit."
+  },
+  {
+   "index": 800,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "useful starting guidance on running an adventure that you wouldn’t find",
+   "note": "Live raw page, HTTP 200, Polygon excerpt bylined Jon Peterson. First paragraph of the excerpt under 'From the Unknown to the Borderlands'; the antecedent 'It' is In Search of the Unknown (B1) by Mike Carr, named in the preceding clause. Page continues 'in the D&D books available at the time', supporting the 'then-current' limb."
+  },
+  {
+   "index": 801,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "enlightening text about the art of dungeon mastering was effectively paraphrased",
+   "note": "Paragraph beginning 'It was then that Gygax apparently grasped'. The page says 'in Gygax's version'; that version is identified two sentences earlier as Keep on the Borderlands (B2), so the claim's naming of B2 is supported in context, not asserted beyond the page."
+  },
+  {
+   "index": 802,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Modules only started to become a business for TSR in the summer",
+   "note": "First paragraph of the excerpt; the page completes the date as 'of 1978'. Claim's dating limb matches exactly."
+  },
+  {
+   "index": 806,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "points are made quickly and efficiently",
+   "note": "Live raw page, HTTP 200. Introduction, subsection 'The Base Rules', third point about the GAZ books; the same sentence notes casual, informal language and no overuse of purple prose. Subject is the Gazetteer series, matching the claim."
+  },
+  {
+   "index": 807,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The first one clocks in at a mere 64 pages plus maps",
+   "note": "Same 'The Base Rules' subsection. 'The first one' is GAZ1: The Grand Duchy of Karameikos: the writeup proceeds in publication order and the very next heading is GAZ1 Karameikos; the GAZ1 conclusion later on the same page independently exclaims that it was only 64 pages."
+  }
+ ]
+}

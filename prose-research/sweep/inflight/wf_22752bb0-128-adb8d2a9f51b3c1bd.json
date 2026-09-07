@@ -1,0 +1,36 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i60-74",
+ "lines": 98,
+ "firstTs": "2026-09-06T16:57:42.834Z",
+ "lastTs": "2026-09-06T17:02:10.202Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 20,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://lareviewofbooks.org/article/bright-home-dark-heart/",
+  "https://sf-encyclopedia.com/entry/hobb_robin",
+  "https://ansible.uk/writing/sfxrev97.html",
+  "https://vacuouswastrel.wordpress.com/2014/08/26/fools-assassin-by-robin-hobb/",
+  "https://thehuntressandthewolf.substack.com/p/how-robin-hobb-created-a-legendary",
+  "https://hippogriff.wordpress.com/2018/09/30/book-review-fools-assassin-by-robin-hobb/",
+  "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+  "https://jeffreydavidoutcalt.substack.com/p/lies-are-what-a-man-needs-most-masculinity",
+  "https://reactormag.com/assassins-pirates-or-dragons-where-to-start-with-the-work-of-robin-hobb/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All 15 quotes located on raw pages. Writing the checkpoint file.",
+ "run": "wf_22752bb0-128",
+ "agent": "adb8d2a9f51b3c1bd",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-adb8d2a9f51b3c1bd.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i60-74.json",
+  "exists": true
+ }
+}

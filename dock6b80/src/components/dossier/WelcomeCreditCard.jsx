@@ -1,0 +1,190 @@
+/**
+ * WelcomeCreditCard.jsx — "every paying user has felt what
+ * they're paying for."
+ *
+ * The single strongest pitch for Narrate is a Narrate credit the user
+ * has already spent. We grant 1 on signup (migration 017 repairs the
+ * original migration 015 trigger) and surface
+ * this card on the user's first saved dossier, with a single CTA to
+ * spend it.
+ *
+ * Visibility rules:
+ *   - Renders only for signed-in users (anonymous = no ledger entry).
+ *   - Renders only on the first saved settlement (i.e. savedCount === 1).
+ *   - Renders only while the server says the welcome credit is still
+ *     available for this user.
+ *   - Dismisses permanently via localStorage flag.
+ *
+ * Once the user clicks "Narrate this town" the existing requestNarrative
+ * flow handles the credit spend through the spend_credits RPC. The
+ * card auto-dismisses on first narrate.
+ */
+
+import { useEffect, useState } from 'react';
+import { useStore } from '../../store/index.js';
+import { Funnel, EVENTS } from '../../lib/analytics.js';
+import { INK, sans, serif_, FS, SP, swatch, BODY } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+
+const SLATE = swatch['#5A6E82'];
+const SLATE_BG = swatch['#E4E9EE'];
+
+const DISMISS_KEY = 'sf.welcomeCredit.dismissed';
+
+function readDismissed() {
+  try {
+    return typeof localStorage !== 'undefined' &&
+      localStorage.getItem(DISMISS_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function markDismissed() {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(DISMISS_KEY, '1');
+    }
+  } catch {
+    /* storage unavailable */
+  }
+}
+
+export default function WelcomeCreditCard({ saveId = null, onVisibilityChange }) {
+  const tier = useStore(s => s.auth.tier);
+  const userId = useStore(s => s.auth.user?.id);
+  const savedCount = useStore(s => s.savedSettlements?.length || 0);
+  const requestNarrative = useStore(s => s.requestNarrative);
+  const settlement = useStore(s => s.settlement);
+
+  const [dismissed, setDismissed] = useState(() => readDismissed());
+  const [welcomeUnspent, setWelcomeUnspent] = useState(false);
+
+  // Report visibility upward so the dossier shell can suppress its OTHER violet
+  // narrative pitch (the DossierActionBand eyebrow/copy/buttons) while this card
+  // is showing — only one Narrate pitch should compete for the focal point in
+  // the chrome stack at a time. Mirrors the card's own early-return predicate.
+  const isVisible = !dismissed && welcomeUnspent && !!settlement;
+  useEffect(() => {
+    onVisibilityChange?.(isVisible);
+    return () => onVisibilityChange?.(false);
+  }, [isVisible, onVisibilityChange]);
+
+  // Ask the server whether the welcome credit is still available. We do
+  // this once per mount + on user id change. The fetch is small and only
+  // fires for signed-in users on their first saved dossier — the
+  // narrowest possible audience.
+  useEffect(() => {
+    if (tier === 'anon' || !userId) return;
+    if (savedCount !== 1 || !saveId) return;
+    if (dismissed) return;
+
+    let cancelled = false;
+    (async () => {
+      try {
+        const { supabase, isConfigured } = await import('../../lib/supabase.js');
+        if (!isConfigured) {
+          // Local dev — assume the credit is present so we can preview
+          // the card without a backend.
+          if (!cancelled) setWelcomeUnspent(true);
+          return;
+        }
+        const { data, error } = await supabase.rpc('welcome_credit_available', {
+          target_user: userId,
+        });
+        if (error) return;
+        if (!cancelled && data === true) {
+          setWelcomeUnspent(true);
+          // userId rides the hashed opts lane (the signupCompleted pattern) so
+          // the raw Supabase id never lands in analytics props (never mirrored
+          // raw to a provider, never stored beside the pseudonymous actor_id) —
+          // finding components-dossier-library-1.
+          Funnel.track(EVENTS.WELCOME_CREDIT_GRANTED, {}, { userId });
+        }
+      } catch { /* network failure — just don't show the card */ }
+    })();
+
+    return () => { cancelled = true; };
+  }, [tier, userId, savedCount, saveId, dismissed]);
+
+  if (dismissed) return null;
+  if (!welcomeUnspent) return null;
+  if (!settlement) return null;
+
+  const onNarrate = async () => {
+    try {
+      await requestNarrative?.(saveId);
+      // Hashed opts lane, not props (see WELCOME_CREDIT_GRANTED above).
+      Funnel.track(EVENTS.WELCOME_CREDIT_SPENT, {}, { userId });
+    } catch (e) {
+      console.warn('[WelcomeCreditCard] requestNarrative failed:', e);
+    }
+    markDismissed();
+    setDismissed(true);
+  };
+
+  const onLater = () => {
+    markDismissed();
+    setDismissed(true);
+  };
+
+  // A tinted left-accent callout, not a second floating card. No full border,
+  // no drop shadow, and no internal header/body divider: the eyebrow + heading +
+  // prose group is held together by tight spacing, and looser spacing sets the
+  // cost+CTA row apart — so it reads as a callout within the dossier card rather
+  // than a card stacked on top of it. (Mirrors the DossierActionBand idiom.)
+  return (
+    <div style={{
+      margin: `${SP.md}px ${SP.lg}px`,
+      padding: SP.md,
+      background: `linear-gradient(135deg, ${SLATE_BG}88, ${SLATE_BG}33)`,
+      borderLeft: `3px solid ${SLATE}`,
+      fontFamily: sans,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
+        <div style={{
+          width: 36, height: 36, borderRadius: '50%',
+          background: SLATE_BG, color: SLATE,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: FS.xl,
+        }}>✦</div>
+        <div style={{ flex: 1 }}>
+          <div style={{
+            fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em',
+            textTransform: 'uppercase', color: SLATE,
+          }}>
+            Welcome credit · on us
+          </div>
+          <div style={{
+            fontFamily: serif_, fontSize: FS.lg, fontWeight: 600,
+            color: INK, marginTop: 2,
+          }}>
+            Try the Narrative Layer once.
+          </div>
+        </div>
+      </div>
+      <p style={{
+        margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY,
+        lineHeight: 1.55, fontFamily: serif_, fontStyle: 'italic',
+      }}>
+        It turns this town's facts into prose your players can hear,
+        the difference between a sheet and a session.
+      </p>
+      <div style={{
+        marginTop: SP.lg, display: 'flex',
+        alignItems: 'center', gap: SP.sm,
+      }}>
+        <div style={{ flex: 1, fontSize: FS.xs, color: BODY }}>
+          <div>Cost: <s>5 credits</s></div>
+          <div style={{ fontWeight: 700, color: SLATE }}>This one: free</div>
+        </div>
+        <Button variant="ai" size="md" onClick={onNarrate}>
+          Narrate this town
+        </Button>
+        <Button variant="ghost" size="sm" onClick={onLater}>
+          Maybe later
+        </Button>
+      </div>
+    </div>
+  );
+}

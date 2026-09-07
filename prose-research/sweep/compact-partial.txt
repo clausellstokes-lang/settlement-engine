@@ -1,0 +1,535 @@
+#17 [academic] PARTIAL | F: Sentence-level epistemic filtering (own words) | S: Amy Gentry, Austin Chronicle interview, 2013 | H: austinchronicle.com
+  C: Martin checks every sentence against what the focal character could actually understand at that moment.
+  Q: does he understand what's happening?
+  T: look at every sentence ... does he understand what's happening?
+  N: Page: 'It's hard to write from the viewpoint of a child that young. You have to really look at every sentence and say, okay, he's in the middle of this, does he understand what's happening? What words would he think?' Caution: the context is specifically a very young child POV (Bran); the claim's generalisation to every focal character is inference, not stated on the page.
+#20 [academic] PARTIAL | F: Sensory immersion rationale (own words) | S: ComicBook.com on Martin's Official Game of Thrones Cookbook foreword, 2024 | H: comicbook.com
+  C: Martin defends dense food, heraldry and sound description as vicarious experience meant to be tasted, seen and heard.
+  Q: I want them to taste the food.
+  T: When they sit down at my table, I want them to taste the food.
+  N: ComicBook.com, Nicole Drum, May 4 2024. Also on page: "'gratuitous' usually translates to 'more than I wanted' or 'did not advance the plot'". The returned excerpt did not include the heraldry/sound (seen/heard) sentences, so that portion of the claim is plausible but not confirmed from this fetch.
+#27 [academic] PARTIAL | F: Frank description | S: Wikipedia, 'A Song of Ice and Fire' (citing CNN) | H: en.wikipedia.org
+  C: CNN in 2000 found Martin's descriptions far franker than those of other fantasy authors.
+  Q: far more frank than those found
+  T: far more frank than those found in the works of other fantasy authors
+  N: Wikipedia: "CNN found in 2000 that Martin's mature descriptions were 'far more frank than those found in the works of other fantasy authors'." Cite [89]. Claim supported.
+#39 [academic] PARTIAL | F: Structural sprawl (criticism) | S: Wikipedia, 'A Feast for Crows' (citing Huffington Post) | H: en.wikipedia.org
+  C: Remy Verhoeve found Feast and Dance structurally sprawling and incoherent, with chapters reading like separate stories.
+  Q: sprawling and incoherent
+  T: the same structural problems, being sprawling and incoherent
+  N: The quoted phrase 'sprawling and incoherent' IS verbatim and attributed to Remy Verhoeve of The Huffington Post, applied to both Feast and Dance. But the claim's clause 'with chapters reading like separate stories' has no support anywhere on the page (0 hits for separate/standalone/self-contained; the only 'stories' hit is in a different critic's quote). Drop or re-source that clause.
+#44 [academic] PARTIAL | F: Multi-sided perspective | S: Lev Grossman, NPR, 2011 | H: npr.org
+  C: The POV structure makes readers experience the struggle from all sides at once.
+  Q: from all sides at once
+  T: experience the struggle for the fate of Westeros from all sides at once
+  N: Verbatim. The page does not use the words 'POV structure'; that mechanism is the claim's inference from the adjacent sentences about each story's own voice and Martin's narrative orchestration.
+#74 [academic] PARTIAL | F: Grimdark register | S: Shiloh Carroll, 'Grimdark Medievalism in ASOIAF', Public Medievalist, 2018 | H: publicmedievalist.com
+  C: Carroll reads the series as 'Barbaric Age' medievalism that foregrounds visceral violence as a narrative strategy rather than subtle prose technique.
+  Q: virile, brute force
+  T: Martin’s medievalism is what Eco calls “Barbaric Age” medievalism
+  N: Quote present but it is Umberto Eco's phrase (1986 'Dreaming of the Middle Ages') quoted by Carroll: 'Martin's medievalism is what Eco calls “Barbaric Age” medievalism, which he describes as “Dark par excellence,” a medievalism that celebrates “virile, brute force” and “the glories of a new Aryanism.”' Violence foregrounding is supported ('hyper-violence'; 'violent, dark, brutal, and relentlessly masculine'). The words 'visceral', 'narrative strategy', 'prose', 'technique' and 'subtle' do NOT ap
+#91 [craft] PARTIAL | F: stock phrase repetition | S: Asher Gelzer-Govatos, The Erstwhile Philistine, 2012-03-21 | H: theerstwhilephilistine.wordpress.com
+  C: A single phrase, 'mummer's farce', is applied to nearly every council and hostile meeting, dozens of times per book.
+  Q: 
+  T: every king's council and meeting between frenemies... at least ten times in every book
+  N: CONFIRMED in raw HTML. Page: 'His number one most abused phrase... mummer's farce... Do you really need to describe every king's council and meeting between frenemies as a "mummer's farce"? Seriously, the phrase comes up at least ten times in every book.' The claim's 'dozens of times per book' overstates the page's figure; correct to 'at least ten times in every book'. 'Hostile meeting' is a paraphrase of 'meeting between frenemies'.
+#100 [craft] PARTIAL | F: flow-first drafting | S: At Sea Journal (anonymous, undated), quoting Martin | H: atseajournal.com
+  C: Martin (as quoted by the essay) prioritises getting the flow right in the draft over machining individual sentences.
+  Q: 
+  T: This is not Martin's way... he stresses rhythm... The flow is important
+  N: CONFIRMED in raw HTML, with an attribution caveat. The essayist contrasts 'textualists' who 'machine their sentences' with Martin: 'This is not Martin's way. When he describes his writing process, he stresses rhythm', then quotes Martin on good days/bad days ('sometimes you eat the bear...'), then 'The flow is important, it's gotta come out right for him.' The flow-over-machining framing is the essayist's gloss; Martin's quoted words describe rhythm and productivity, not a stated preference agai
+#104 [craft] PARTIAL | F: single-sense overemphasis | S: At Sea Journal (anonymous, undated) | H: atseajournal.com
+  C: The prologue hammers one sensory note (cold) so often that the essayist wants half of it cut.
+  Q: 
+  T: I need about 50% less about the cold here
+  N: CONFIRMED in raw HTML, but the claim's 'prologue' is wrong. The passage the essayist wants halved is a Jon Snow scene at Castle Black ('Inside, Jon hung sword and scabbard... There was scant warmth to be found in Castle Black; the walls were cold here, and the people colder'), not the AGOT prologue. The word 'prologue' does not appear on the page. Correct the claim to 'a Jon chapter at Castle Black'.
+#110 [craft] PARTIAL | F: descriptive set pieces | S: Adam Whitehead, The Wertzone, 2011-07-07 | H: thewertzone.blogspot.com
+  C: Martin visibly relishes certain long descriptive passages, such as the account of the Doom of Valyria.
+  Q: 
+  T: seems to relish some descriptive passages… Doom of Valyria
+  N: Raw page fetched (200). Exact text: 'Martin seems to relish some descriptive passages. A detailed account of the Doom of Valyria … is spine-crawling and disturbing.' The claim's 'visibly' and 'long' are additions; the page says 'seems to' and 'some'.
+#113 [craft] PARTIAL | F: inter-chapter time jumps | S: Adam Whitehead, The Wertzone, 2009-12-22 | H: thewertzone.blogspot.com
+  C: Weeks pass between chapters and armies cover hundreds of miles offstage, giving the narrative rapid forward motion.
+  Q: 
+  T: weeks passing between chapters, armies covering hundreds of miles
+  N: Raw page fetched (200). Facts supported, but the page frames this as a FLAW: 'The book also feels like it moves a little too quickly at times, with sometimes weeks passing between chapters, armies covering hundreds of miles in the blink of an eye.' It then concedes 'On one level this is a good thing'. The claim's neutral 'rapid forward motion' softens the reviewer's criticism; 'offstage' is the claim's word.
+#114 [craft] PARTIAL | F: place vivification | S: Adam Whitehead, The Wertzone, 2009-12-22 | H: thewertzone.blogspot.com
+  C: Individual locations such as the Red Keep, Winterfell and the Wall are made to come alive through description.
+  Q: 
+  T: the Red Keep, Winterfell and the Wall come to life quite nicely
+  N: Raw page fetched (200). Exact: 'individual locations like the Red Keep, Winterfell and the Wall come to life quite nicely'. 'Through description' is the claim's addition; the page does not say how they come to life, and the same sentence calls the wider worldbuilding 'a little sketchy'.
+#116 [craft] PARTIAL | F: unhurried density | S: Matt Maenpaa, Fantasy-Faction, 2011-07-22 | H: fantasy-faction.com
+  C: Martin does not rush; the prose favours response and interiority over action and is never concise.
+  Q: 
+  T: less about the actions… more about response, reaction and decision
+  N: Raw page fetched (200). Also: 'He does not rush' and 'no one has ever accused George R. R. Martin of being concise.' Page says 'the stories being told are' less about action, not 'the prose'; 'interiority' is the claim's gloss on 'response, reaction and decision'.
+#118 [craft] PARTIAL | F: character leitmotifs | S: Lev Grossman, Time, 2011-07-07 | H: time.com
+  C: Like Wagner, Martin gives each character recurring phrases that function as leitmotifs, kept close like dragons' eggs.
+  Q: 
+  T: Like Wagner, he gives each of his characters leitmotifs that recur
+  N: Completeness critic: verified through a summarizer only, no raw route reached. Partially rescued: the leitmotif sentence is raw-verified at index 519 (Wayback raw capture of the original Time URL, 20110711021407id_), but no raw route in the corpus reaches the 'These phrases are like dragons' eggs' sentence, which the claim asserts.
+#121 [craft] PARTIAL | F: muck-and-grit register | S: Lev Grossman, Time, 2005-11-13 | H: time.com
+  C: Martin's register is grounded and realist, men and women slugging it out in the muck, against Tolkien's elevated romance.
+  Q: 
+  T: men and women slugging it out in the muck
+  N: Full sentence: "It's men and women slugging it out in the muck, for money and power and lust and love," preceded by "A Feast for Crows isn't pretty elves against gnarly orcs." The muck phrase and the grounded/realist register are exact. The Tolkien contrast is real but framed as moral complexity, not register: "Tolkien's work has enormous imaginative force, but you have to go elsewhere for moral complexity." The words "elevated romance" are the claim's gloss, not Grossman's.
+#122 [craft] PARTIAL | F: epic sweep with small drama | S: Lev Grossman, Time, 2005-11-13 | H: time.com
+  C: The prose holds epic sweep and tiny touching human drama at the same time.
+  Q: 
+  T: epic sweep and tiny, touching human drama simultaneously
+  N: Source: "Martin has an astonishing ability to focus on epic sweep and tiny, touching human drama simultaneously." Attributed to Martin's ability generally rather than to "the prose" specifically, and the sentence sits beside praise of him as "a tense, surging, insomnia-inflicting plotter and a deft and inexhaustible sketcher of personalities." Substance holds; the word "prose" is the claim's.
+#123 [craft] PARTIAL | F: supernatural restraint | S: Lev Grossman, Time, 2005-11-13 | H: time.com
+  C: The supernatural appears only rarely, which keeps the texture close to historical fiction.
+  Q: 
+  T: The supernatural plays a role, but only rarely.
+  N: First half is essentially verbatim — the sentence appears exactly as "The supernatural plays a role, but only rarely." The second half is not in this source: Grossman never says the restraint keeps the texture close to historical fiction, and the words "historical fiction" do not appear in the article at all. If the historical-fiction link is needed, cite Fiction Advocate instead, which says Martin "uses fantastic elements sparingly... he initially conceived of the books as historical fiction."
+#124 [craft] PARTIAL | F: weather opening | S: Jon Auerbach, 2017-08-22 | H: jonauerbach.com
+  C: Bran I opens on a description of the season and weather, defying the usual advice against weather openings.
+  Q: 
+  T: advice trope of never opening with weather... applies here though
+  N: Completeness critic: polarity over-read. Auerbach applies the advice and excises the weather line; the claim cites him for the reverse. The verifier's own note says so: 'the polarity is the opposite of what "defying" implies... He treats it as a flaw Martin got away with, not a rule successfully broken. Do not cite this as endorsement of a weather opening.'
+#125 [craft] PARTIAL | F: child POV opening | S: Jon Auerbach, 2017-08-22 | H: jonauerbach.com
+  C: The first chapter is filtered through a seven-year-old attending his first beheading, so adult explanation arrives naturally.
+  Q: 
+  T: a seven-year old boy going to his first beheading
+  N: The core is directly supported: "We've got a seven-year old boy going to his first beheading," and the quoted passage gives "This was the first time he had been deemed old enough to go with his lord father..." The craft rationale is NOT in the source — Auerbach never discusses point of view, never says the child POV licenses adult explanation, and never connects the narrator's age to exposition. His nearest statement is only "this chapter actually accomplishes a lot. We learn a bit about the wor
+#130 [craft] PARTIAL | F: fantasy-historical hybrid (own words) | S: George R.R. Martin, interviewed by Dylan Runco & Joanna Buffum, New Jersey Monthly, 2013-03-15 | H: njmonthly.com
+  C: Martin says his aim was a book combining the best traits of contemporary fantasy with those of the historical novel.
+  Q: 
+  T: combines some of the best traits of contemporary fantasy
+  N: Martin's own answer, near-verbatim: "One of the things I wanted to do was to write a book that combines some of the best traits of contemporary fantasy with some of the traits of the historical novel." He continues that historical fiction "had an excitement to it and a grittiness and a realness to it that the fantasy novels lacked" and that he wanted "to almost write a historical novel about history that never happened." Only softening: the source says "some of the traits of the historical novel
+#132 [craft] PARTIAL | F: food description (own words) | S: George R.R. Martin, New Jersey Monthly, 2013-03-15 | H: njmonthly.com
+  C: Martin says he loves describing food and values the small character-driven scenes over plot mechanics.
+  Q: 
+  T: not the stuff that advances the plot, but... character parts
+  N: SPLIT — one half is misattributed. "Loves describing food" is the interviewer's premise ("NJM: ...we know from your writing that you love describing food"); Martin's reply is about missing Bayonne pizza and bar pies, and he never says he loves describing food. The second half IS Martin's own words: on cut scenes he says "it's a character scene, and mostly that's what has been cut, not the stuff that advances the plot, but the little character parts," and wishes for more episodes so "we could get
+#136 [craft] PARTIAL | F: food as narrative signal | S: WiC Staff, Winter Is Coming, 2017-11-23 | H: winteriscoming.net
+  C: Meals carry narrative purpose (Walder Frey's deliberately dull dinner as an insult) and are coloured by the POV character's emotion.
+  Q: 
+  T: more often than not, they serve a narrative purpose
+  N: First half exact: Walder Frey 'is purposefully serving the King in the North a ho-hum dinner ... as a small act of discourtesy'. The POV-emotion half is the weaker leg: supported by instances ('flavored with fear'; 'the calves' brains turned Catelyn's stomach') but the page never states it as a general principle.
+#145 [craft] PARTIAL | F: sensory cue of cold | S: LitCharts | H: litcharts.com
+  C: In the prologue the sudden onset of cold and the scream-like sound of clashing swords serve as sensory signals of the supernatural.
+  Q: 
+  T: Suddenly, it becomes cold; swords clash, a sound like a scream
+  N: Completeness critic: 'sensory signals of the supernatural' is the claimant's inference, not LitCharts' analysis. The verifier's note agrees: 'the visible analysis reads the prologue for leadership and climate change, not as "sensory signals of the supernatural" - that gloss is the claimant's inference, and the adjacent analysis panes are paywalled placeholder text.'
+#146 [craft] PARTIAL | F: opening line as atmospheric exposition | S: Tommy E. Turner, The Fantasy Reviews, 2023-10-19 | H: thefantasyreviews.com
+  C: Bran I's first line sets the bleak execution scene and hints at summer's end, and the child POV licenses adult explanation.
+  Q: 
+  T: sets the stage for the immediate bleak scene of execution
+  N: Content verified both halves: first line quoted with 'a crispness that hinted at the end of summer', and the child POV 'allows George R.R. Martin the space to explain a few things'. Attribution is off: page metadata gives the author as 'fantasyreviews' (not Tommy E. Turner) and the site as 'The Fantasy Review'; datePublished 2023-10-19 matches.
+#149 [craft] PARTIAL | F: plain diction (reader-level) | S: Cinthia Koeksal, Goodreads author blog, 2013-02-22 | H: goodreads.com
+  C: Martin does not need big fancy words to make his point, and will spend a whole paragraph on intricate clothing.
+  Q: 
+  T: An author doesn't need big, fancy words to make his/her point
+  N: Both halves present; clothing half near-verbatim ('the author uses a whole paragraph to explain the intricate clothing of a certain lord or lady'). Minor slippage: the page frames the diction point as a generalized lesson about 'an author', not a statement about Martin specifically. Author and date (Cinthia Koeksal, February 22, 2013) confirmed.
+#162 [the] PARTIAL | F: register: modern prose with a pinch of archaism | S: So Spake Martin, UK Signing Tour Nottingham report (2005-10-20) | H: westeros.org
+  C: Martin says the line between modern prose and archaic diction is fine; his compromise is modern prose stripped of pop-culture references with occasional archaic words, like salt in soup.
+  Q: modern prose, but omitting all pop culture references
+  T: modern prose, but omitting all pop culture references
+  N: Completeness critic: the quoted words are the reporter's paraphrase, not Martin's transcribed speech. The verifier's own note says so: 'CAVEAT: this So Spake Martin entry is a third-person con report summarizing Martin's remarks, so the quoted words are the reporter's paraphrase, not transcribed Martin speech.'
+#163 [the] PARTIAL | F: archaism scaled by speaker age | S: So Spake Martin, UK Signing Tour Nottingham report (2005-10-20) | H: westeros.org
+  C: After his editor feared a 'forsooth' would follow, Martin kept 'mayhaps' for old characters like Aemon and gave younger ones like Bran 'perhaps' and 'maybe'.
+  Q: a "forsooth" would follow shortly
+  T: he feared a "forsooth" would follow shortly
+  N: Completeness critic: the quoted words are the reporter's paraphrase, not Martin's transcribed speech. The verifier's own note carries the 'Same third-person-report caveat as 162.'
+#164 [the] PARTIAL | F: period register by reading period syntax | S: So Spake Martin, UK Signing Tour Nottingham report (2005-10-20) | H: westeros.org
+  C: For Fevre Dream Martin read period novels such as Twain's to absorb their syntax and vocabulary, a different register strategy from the one used in Ice and Fire.
+  Q: to understand the syntax and words
+  T: to understand the syntax and words
+  N: Completeness critic: the quoted words are the reporter's paraphrase, not Martin's transcribed speech. The verifier's own note carries the 'Same third-person-report caveat as 162.'
+#166 [the] PARTIAL | F: names as slant-variants with phonetic power | S: So Spake Martin, Naming Characters correspondence (2003-04-01) | H: westeros.org
+  C: Martin makes names up as variants of real ones (Eddard for Edward) and insists on the right sound, holding that a name evokes a character better than a page of description.
+  Q: variants of real names -- Eddard for Edward
+  T: variants of real names -- Eddard for Edward
+  N: westeros.org returned 403 to direct fetch; verified via Wayback snapshot 20250416171115. Full line: 'In many cases, they are variants of real names -- Eddard for Edward, for example. They have to have the right "sound," though.' Caveat: the 'a name evokes a character better than a whole page' formulation is the FAN's (Bale Dayne), not Martin's; Martin's reply is 'I agree.' and later 'You want the names to be evocative, yes.'
+#168 [the] PARTIAL | F: Vance's voice vs his own | S: Infinity Plus, Nick Gevers interview (Feb 2001) | H: infinityplus.co.uk
+  C: Martin denies that Ice and Fire is Vancean; he tried once to write like Vance and concluded only Vance can, keeping his own plainer voice.
+  Q: Vance has his voice and I have mine.
+  T: Vance has his voice and I have mine.
+  N: infinityplus.co.uk fetched directly (HTTP 200). Surrounding text confirms every element: 'I don't think A Song of Ice and Fire is particularly Vancean... I couldn't write like Vance even if I tried... and I did try, once' ('A Beast for Norn'), '...only Jack Vance can write like Jack Vance.' Minor unsourced embellishment: the page never characterizes Martin's own voice as 'plainer'.
+#174 [the] PARTIAL | F: chapter endings as act breaks | S: TIFF Master Class (June 2012), transcript excerpts at Bulletproof Screenwriting | H: bulletproofscreenwriting.tv
+  C: Martin carries television act breaks into chapter endings: each should close on a cliffhanger, a twist point, or a new revelation.
+  Q: just a twist point or a new revelation
+  T: it can be just a twist point or a new revelation or a piece of information
+  N: Same Bulletproof Screenwriting transcript. Context: 'working for network television, you have to have act breaks... it can be a cliffhanger, that's a good [act] break. It doesn't have to be...' and 'it's a good way to end a chapter or an act.' Slight overstatement in the claim's 'each should close on': Martin presents these as options, not a requirement.
+#177 [the] PARTIAL | F: chapter opening from a seed sentence | S: CBS 60 Minutes, Anderson Cooper (2019-04-14) | H: cbsnews.com
+  C: The first chapter came to Martin whole; its first sentence's phrase 'summer snows' told him seasons were wrong here, and the world grew outward from that sentence.
+  Q: They find the direwolf pups in the summer snows.
+  T: They find the direwolf pups in the summer snows.
+  N: cbsnews.com 60 Minutes Overtime transcript fetched directly (HTTP 200), dated April 14, 2019. Verbatim. Supporting text: 'the first chapter of "Game of Thrones" came to me... I knew they were the summer snows. So this was a place where it snowed even in summer.' One wording gap: the page says 'the world building grew parallel to the story', not that the world grew outward from the sentence.
+#191 [the] PARTIAL | F: historical fiction as harder-edged model | S: SLF Portolan Project transcript, Mary Anne Mohanraj, Dublin (Aug 2019) | H: speculativeliterature.org
+  C: Martin describes historical fiction as grittier, harder-edged and more realistic than epic fantasy and says he set out to meld the two traditions.
+  Q: grittier, harder-edged, more realistic
+  T: grittier, harder-edged, more realistic
+  N: SLF Dublin 2019 PDF fetched directly (HTTP 200, PDF 1.5), text extracted with pdfminer. Verbatim: "I was also reading a lot of historical fiction, which is, you know, grittier, harder-edged, more realistic. And I wanted to meld epic fantasy tradition with the tradition of historical fiction." Minor nuance: the comparative's referent ('than epic fantasy') is implied by the surrounding Tolkien discussion rather than stated.
+#194 [the] PARTIAL | F: dynastic depth vs fairy-tale mode | S: SLF Portolan Project transcript, Mary Anne Mohanraj, Dublin (Aug 2019) | H: speculativeliterature.org
+  C: Martin contrasts Dunsany's once-upon-a-time mode with Tolkien's dynastic history and places his own work with Tolkien, closer to historical fiction.
+  Q: who was the king before him?
+  T: who was the king before him?
+  N: Same PDF; the quoted string is Martin's, verbatim: of Dunsany, "And once upon a time there was a king and you know, he had a beautiful daughter and then an elf came in, but you don't get the sense of, 'Okay, what was the name of the dynasty this king was, who was the king before him? How did this dynasty come to power?'" ATTRIBUTION CAVEAT: the claim's second half — placing Martin's own work with Tolkien, closer to historical fiction — is spoken in the transcript by the interviewer Mary Anne Moh
+#197 [the] PARTIAL | F: color-saturated sensory palette | S: 'On Fantasy', georgerrmartin.com (1996) | H: georgerrmartin.com
+  C: The essay opposes fantasy's rich colors and spices to the drab strip-mall real, implying a prose that reaches for vivid sensory nouns.
+  Q: silver and scarlet, indigo and azure
+  T: Fantasy is silver and scarlet, indigo and azure, obsidian veined with gold and lapis lazuli.
+  N: Quote is verbatim. The colors/spices-vs-drab-real opposition is explicit, including the strip mall: "Reality is the strip malls of Burbank, the smokestacks of Cleveland, a parking garage in Newark." The trailing gloss 'implying a prose that reaches for vivid sensory nouns' is the claimant's inference about prose technique, not something the essay states.
+#199 [the] PARTIAL | F: magic as salt (sparing, implicit) | S: Austin Chronicle, Amy Gentry interview (2013-08-29) | H: austinchronicle.com
+  C: Martin handles magic like salt in a stew, a little improving it and too much ruining it; elsewhere he says explicit magic ceases to be magical.
+  Q: like a little salt in a stew
+  T: It's like a little salt in a stew, I think.
+  N: Quote verbatim, and the mechanism is stated: "You put in a little salt, the stew tastes a lot better. You put in too much salt and ruin the stew." Caveat: the claim's second half ('elsewhere he says explicit magic ceases to be magical') is NOT on this page — searches for 'ceases to be magic' and 'explicit' returned nothing. The claim flags it as 'elsewhere', so it is uncited rather than miscited, but it currently rests on no source and needs one. Byline confirmed: Amy Gentry, LoneStarCon 3.
+#200 [the] PARTIAL | F: thematic core: the heart in conflict | S: Austin Chronicle, Amy Gentry interview (2013-08-29) | H: austinchronicle.com
+  C: Martin quotes Faulkner that the only thing worth writing about is the human heart in conflict with itself, which drives his interior POV.
+  Q: the human heart in conflict with itself
+  T: The only thing worth writing about is the human heart in conflict with itself.
+  N: Verbatim, and Martin explicitly frames it as his credo: "My credo as a writer has always been Faulkner's Nobel Prize acceptance speech where he said..." One overreach: 'which drives his interior POV' is the claimant's inference — on this page Martin invokes Faulkner to argue that magic must never be the solution to the problem, not to explain viewpoint.
+#201 [the] PARTIAL | F: Homeric even-handedness | S: Adria's News interview (2012-10-08), repost | H: ohnotheydidnt.livejournal.com
+  C: Martin cites the Iliad as a model where the hero of one side is the villain of the other, shaping his multi-sided viewpoint scheme.
+  Q: The hero of one side is the villain
+  T: The hero of one side is the villain of the other side.
+  N: Verbatim, and the Iliad attribution is explicit: "I've been always very impressed by Homer and his Iliad, especially the scene of the fight between Achilles and Hector. Who is the hero and who is the villain?" Caveat: 'shaping his multi-sided viewpoint scheme' is inference — this answer is about grey characters, and Martin's POV-technique answer is a separate question earlier in the same interview.
+#224 [the] PARTIAL | F: sex-scene clichés (critic) | S: The Erstwhile Philistine, 'The Literary Crimes of George R.R. Martin' (2012-03-21) | H: theerstwhilephilistine.wordpress.com
+  C: The same reviewer finds the sex scenes reliant on clichés such as 'drunk with desire'.
+  Q: drunk with desire
+  T: someone being drunk with desire for the other person
+  N: Quote verbatim inside 'They usually involve someone being drunk with desire for the other person, their head swimming with the wine of lust or some such nonsense.' Caveat: 'cliche' is the summarizer's word, not the author's — he writes 'clunky to the extreme' and 'the obligatory mention of naughty body parts'; 'cliches' appears only in reader comments.
+#226 [the] PARTIAL | F: 'much and more' / 'little and less' tics (readers) | S: Overthinking It comments (2011-08) | H: overthinkingit.com
+  C: Commenters on that essay counter that Martin has a penchant for pseudo-archaic language and, once he likes a term ('much and more', 'leal'), uses it everywhere.
+  Q: GRRM has a penchant for pseudo-archaic language
+  T: I think GRRM has a penchant for pseudo-archaic language
+  N: Verbatim in the comment by 'Wenyip' (Aug 17 2011), which also names 'much and more' (and 'little and less') and cautions against reading much into 'leal'. Minor: it is one commenter, not 'commenters' plural, and the tone is a caveat rather than a counter-argument.
+#228 [the] PARTIAL | F: archaic lexicon with attested dates | S: OUPblog, Adam Pulford, 'Words are wind' (2012-04-16) | H: blog.oup.com
+  C: A lexicographer notes 'ser', 'southron' and 'craven' are 15th-century forms and 'turncloak' is Martin's coinage from 'turncoat'.
+  Q: 
+  T: date from 1451, 1488, and 1400 respectively
+  N: No quote field to check. Page: 'Ser for Sir, Southron for Southern, and craven meaning cowardly all date from 1451, 1488, and 1400 respectively, according to the Oxford English Dictionary' and 'turncloak, which is Martin's archaic-sounding amendment of turncoat'. Two drifts: craven's 1400 is 14th-, not 15th-century, so '15th-century forms' overreaches for one of the three; and Adam Pulford is described on the page as working 'in marketing for Oxford Dictionaries', not as a lexicographer.
+#235 [the] PARTIAL | F: chapter-level structure praised | S: Goodreads blog, Brent Hartinger (2014-05-05) | H: goodreads.com
+  C: Hartinger calls the prose tight, clear and evocative and the individual chapter structure about as good as structure gets, faulting only scope.
+  Q: about as good as structure gets
+  T: The structure of the individual chapters is often about as good as structure gets
+  N: Quote verbatim; the prose limb is verbatim too, with the original's typo: 'He prose is tight and clear and evocative'. 'Faulting only scope' is a slight narrowing — his fault is that Martin 'seems to have lost complete control of his overall story' and traded story for 'atmosphere', of which length is one symptom. Post dated May 05, 2014, itself a repost of a 2012 piece.
+#240 [close] PARTIAL | F: cumulative otherness | S: Books & Boots (Simon), 2013-03-08 | H: astrofella.wordpress.com
+  C: The medieval-fantasy feel comes from the frequency of compounds rather than from any single coinage.
+  Q: 
+  T: derives not from a handful of obvious stock phrases
+  N: No quote was supplied, so verbatim status is not at issue. The 2013 post supports the cumulative-frequency argument twice: 'The more there are, the more frequently you encounter them on each page, the greater the sense of moving into his otherworld,' and the conclusion, where the medieval-fantasy sense 'derives not from a handful of obvious stock phrases, but from Martin's deep and systematic deployment of a carefully filtered... Anglo-Saxon vocabulary.' Two calibrations: the post's stated contr
+#243 [close] PARTIAL | F: lexical repetition for atmosphere | S: Books & Boots (Simon), 2014-03-31 | H: astrofella.wordpress.com
+  C: He repeats a small set of words within a passage (cool, still) to build stillness and mood.
+  Q: repetitions in this passage – of 'cool' and 'still'
+  T: repetitions in this passage – of 'cool' and 'still'
+  N: Quotation is exact (en dash and curly quotes as printed). CAVEAT ON THE CLAIM, not the quote: the source explicitly refuses to settle the purpose the claim asserts — 'I can't decide whether the repetitions in this passage... are signs of haste, or careful repetitions designed to evoke the lazy, torpid atmosphere of Lord Martell's sea retreat.' The claim's 'to build stillness and mood' states as fact one of two alternatives the author leaves open, and the source's word is 'lazy, torpid atmosphere
+#244 [close] PARTIAL | F: terse charged dialogue | S: Books & Boots (Simon), 2014-03-31 | H: astrofella.wordpress.com
+  C: Confrontations are carried by short, charged exchanges that deliver the revelations rather than by narration.
+  Q: terse, charged dialogue
+  T: Confrontations between opposing characters are done though terse, charged dialogue
+  N: Exact match under heading '4 Dramatic dialogue' (the source's 'though' for 'through' is its own typo, outside the quoted span). 'Deliver the revelations' is supported: 'you experience a real dramatic shock when you realise, along with one character, the implications of another one's words.' The contrastive 'rather than by narration' is the citing author's framing; the page does not state that contrast.
+#253 [close] PARTIAL | F: judgmental adverb as POV marker | S: At Sea Journal (Erik Germani), 'Psychic Distance' | H: atseajournal.com
+  C: An evaluative adverb in narration ('Stupidly, Jon argued') fuses narrator judgment with the character's own.
+  Q: Stupidly, Jon argued
+  T: Stupidly, Jon argued.
+  N: Exact match, quoted from AGOT: 'Stupidly, Jon argued. "I'll be fifteen on my name day," he said.' CAVEAT ON THE CLAIM: the essay poses this as an open question rather than asserting fusion — its lead-in is 'In this next quote, who thinks Jon is being stupid? Jon, or the narrator?' — and files it under 'Martin does not always control psychic distance.' 'Fuses narrator judgment with the character's own' is the citing author's resolution of an ambiguity the source deliberately leaves standing.
+#258 [close] PARTIAL | F: modern anachronisms | S: At Sea Journal (Erik Germani), 'Linguistic Anachronism' | H: atseajournal.com
+  C: Words such as pug-nosed, longshoreman (1811), condone (1857), yen, burp, and snark leak modern English into Westeros.
+  Q: shows you the seams of his work
+  T: Martin shows you the seams of his work
+  N: Quotation appears word for word, in the snark passage: 'by using it in the exact same context, Martin shows you the seams of his work.' All six items check out: pug ('are there pugs in Westeros?', 'She was pug-nosed and bouncy'); 'Longshoreman came into English in 1811, according to Etymonline.com' (1811 exact); condone tied to 'the Matrimonial Causes Act, an 1857 piece of legislation' (1857 exact); yen 'is in fact about a hundred years old'; burp 'Only a few decades older than Martin' (charted 
+#259 [close] PARTIAL | F: compressible paragraphs | S: At Sea Journal (Erik Germani), 'Compressible Paragraphs' | H: atseajournal.com
+  C: Many sentences are modular and deletable: a 1,897-word passage compresses to 427 words using only topic sentences.
+  Q: modular sentences that can snap together like LEGO
+  T: modular sentences that can snap together like LEGO
+  N: Quotation appears word for word. The figures are exact: 'Those seven paragraphs, totalling 427 words, are actually built from the first sentences of 26 different paragraphs, totalling 1,897 words.' Deletability is the essay's opening thesis: 'you can pull out quite a few sentences before they start getting wobbly.' Two directional notes: the essay assembled 427 words out of 1,897 rather than compressing a continuous passage, and the LEGO line is one of several speculative explanations ('Maybe...
+#260 [close] PARTIAL | F: one-line paragraphs | S: At Sea Journal (Erik Germani), 'Compressible Paragraphs' | H: atseajournal.com
+  C: Frequent single-sentence paragraphs sustain narrative momentum.
+  Q: Martin has a fair number of one-lines
+  T: (Martin has a fair number of one-lines.)
+  N: Quotation appears word for word, parenthetically. The momentum link is present but weaker than the claim states: the essay is hunting 'something beyond the plot that's contributing to the series' propulsiveness,' then offers 'Or this is an epiphenomenon, and the real driver is a short average paragraph. (Martin has a fair number of one-lines.)' So one-line paragraphs are floated as a possible driver among alternatives, and 'a fair number' is a softer quantity than the claim's 'Frequent'.
+#265 [close] PARTIAL | F: semicolon misuse | S: At Sea Journal (Erik Germani), 'Punctuation' | H: atseajournal.com
+  C: In A Game of Thrones semicolons and colons are used interchangeably (three on one page), a habit corrected by A Dance with Dragons.
+  Q: he's gotten the semicolon figured out by now
+  T: Seems like he's gotten the semicolon figured out by now
+  N: Quotation appears word for word. Opening sentence: 'In AGOT, Martin uses semicolons and colons interchangeably.' The page count is exact: 'Incredibly, there are three examples of this on one page, 239 in my edition of AGOT.' One softening the claim drops: the ADWD verdict is hedged and evidentially weak in the source, 'Seems like he's gotten the semicolon figured out by now, though, ADWD didn't pop any for me' - an absence of noticed instances by one reader, not a demonstrated correction.
+#266 [close] PARTIAL | F: purple register for nature and violence | S: At Sea Journal (Erik Germani), 'Purple Prose in Green and Red' | H: atseajournal.com
+  C: The tone swings from casual to purple, with ornate diction reserved for wilderness (green) and bloodshed (red).
+  Q: the tone can be very casual and very purple
+  T: In ASOIAF, the tone can be very casual and very purple
+  N: Quotation appears word for word. The green/red framing is explicit: 'Here I'd like to point out Martin's reasons for using it: as an ecstatic response to nature and violence' and 'It's about the green and the red, for Martin.' Ornate diction is identified in the wilderness passage: 'Martin shifts into antiquated diction: "tangle of root and thorn and grasping limb"; "Knew not"; "small wonder".' Minor overstatement in the claim: the essay gives nature and violence as Martin's reasons for the high
+#267 [close] PARTIAL | F: personified weapons / time distortion | S: At Sea Journal (Erik Germani), 'Purple Prose in Green and Red' | H: atseajournal.com
+  C: Combat passages personify the sword and stretch or stop time.
+  Q: time slept when swords woke
+  T: It might have been minutes or it might have been hours; time slept when swords woke
+  N: Quotation appears word for word. Time distortion is directly supported by that sentence and its lead-in, 'Jaime could not have said how long he pressed the attack.' Weapon animation is present in the combat material the essay quotes: 'the longsword alive in his hands', 'The swords kissed and sprang apart and kissed again', and 'the gilded sword that had sipped the blood of the last of the Dragonkings'. One attribution note: 'personify' is the claimant's analytic label, not the essayist's word; t
+#268 [close] PARTIAL | F: stealth exposition | S: At Sea Journal (Erik Germani), 'Now, As We All Know' | H: atseajournal.com
+  C: Backstory is delivered as monologue dressed as dialogue, assigned to talkative characters as a trait, lampshaded, or reported in summary rather than quoted.
+  Q: It is a flashback dressed up as a monologue
+  T: It is a flashback dressed up as a monologue
+  N: Quotation appears word for word, following Ned's roughly 650-word remembrance to Robert. All four mechanisms are confirmed. Trait assignment: 'Telling Catelyn stuff she already knows is Rodrik's thing... It's just a character trait!' and Hal Mollen, 'He had a penchant for loudly announcing the obvious.' Lampshading: 'Winking at the audience while doing something gauche (hanging a lampshade, as TvTropes would have it).' Summary over quotation: 'Sam Tarly's backstory feels better in comparison to 
+#269 [close] PARTIAL | F: scene typology | S: At Sea Journal (Erik Germani), 'Scene Types' | H: atseajournal.com
+  C: Chapters cycle among coercion, negotiation, action, travel, revelation, predicament, and disclosure scenes, each shoehorning in secondary information.
+  Q: The narrative cycles between these types of scene.
+  T: The narrative cycles between these types of scene.
+  N: Quotation appears word for word. Six of the seven types map directly to the essay's numbered list: coercion (1), 'Discussions/arguments about what to do/bargaining' (2), 'Action sequence' (3), 'Travelling sequence' (4), 'A predicament is sketched out' (6), 'Present information is disclosed' (7). The shoehorning half is explicit: 'Every chapter is like this. There is some central action to the scene, but Martin takes the opportunity to shoehorn in some other information.' One relabel to flag: the
+#285 [close] PARTIAL | F: sensory colour doctrine (Martin's words) | S: George R. R. Martin, 'On Fantasy' (1996), georgerrmartin.com | H: georgerrmartin.com
+  C: Martin describes fantasy's proper language as dreamlike and defined by taste, colour, and texture.
+  Q: The best fantasy is written in the language of dreams.
+  T: The best fantasy is written in the language of dreams.
+  N: Opening line of the essay, exact. Colour and taste are explicit in the following paragraph ("silver and scarlet, indigo and azure"; "Fantasy tastes of habaneros and honey"); "texture" is the analyst's inference from the material imagery ("obsidian veined with gold", "plywood and plastic"), not Martin's word.
+#286 [close] PARTIAL | F: colour as purpose (Martin's words) | S: George R. R. Martin, 'On Fantasy' (1996), georgerrmartin.com | H: georgerrmartin.com
+  C: He frames the reader's motive as recovering vividness of colour, which underwrites his heraldic and food description.
+  Q: We read fantasy to find the colors again
+  T: We read fantasy to find the colors again, I think.
+  N: Exact (US spelling "colors" on the page). The reader-motive half is fully supported, and food/taste is present ("To taste strong spices"). The clause "underwrites his heraldic ... description" is the analyst's application; heraldry appears nowhere in the essay.
+#295 [close] PARTIAL | F: open mid-activity | S: W.A. Hughes, 'How to Write a Chapter of ASOIAF', 2014-05-12 (satire) | H: wahwriter.wordpress.com
+  C: Chapters typically open with the character already eating, fighting, or mid-conversation.
+  Q: 
+  T: Start In The Middle of the Action
+  N: No quotation supplied. Step 2 lists "a) eating b) excreting c) fucking d) fighting or e) in the middle of a conversation". Slight overreach: the page scopes this to a character's first appearance and "within two pages", not to every chapter opening, and omits two of its five items.
+#296 [close] PARTIAL | F: recurring-phrase fixation (criticism) | S: W.A. Hughes, 'How to Write a Chapter of ASOIAF', 2014-05-12 (satire) | H: wahwriter.wordpress.com
+  C: Characters fixate on stock expressions in italics, which the satirist reads as padding.
+  Q: isn't worth a mummer's fart
+  T: someone in every chapter should find a way to exclaim that something "isn't worth a mummer's fart"
+  N: Quotation exact, but it sits in Step 4 (word choice), while the italics-and-padding point is Step 3: "recurring ideas or phrases they can't get out of their head... smashing through that word count". The claim fuses two separate steps; both halves are on the page, the linkage is the analyst's.
+#298 [close] PARTIAL | F: embedded worldbuilding | S: Jon Auerbach, 'Writing advice from the first chapter', 2017 | H: jonauerbach.com
+  C: Setting facts are folded into ordinary exposition rather than explained.
+  Q: the ninth year of summer, and the seventh of Bran's life
+  T: It was the ninth year of summer, and the seventh of Bran's life.
+  N: Quotation exact. Support for the craft claim is indirect: the post reacts with a joke ("apparently the ninth year of summer on whatever crazy planet") rather than naming embedded worldbuilding; the nearest explicit statement is about Ice - "a good detail that G.R.R.M. tucks in here when readers won't be able to grasp its significance."
+#304 [close] PARTIAL | F: exposition by prompted memory | S: Dark Jackel's Howl, 'Let's Read AGOT Part 1', 2015-08-19 | H: darkjackelshowl.wordpress.com
+  C: Backstory enters when a remark prompts the POV character's memory rather than by narrator summary.
+  Q: some character makes a comment or observation, which prompts memories
+  T: "some character makes a comment or observation, which prompts memories and reactions from the POV character, Will"
+  N: Exact substring. 'rather than by narrator summary' is the claim's gloss on the page's "it's pretty minimalist" framing of the expositional style.
+#305 [close] PARTIAL | F: menace by absence | S: The Fantasy Review, 'Prologue Summary and Analysis', 2023-10-14 | H: thefantasyreviews.com
+  C: The prologue builds dread through negative sensory statements and dialogue with double meanings.
+  Q: The Others made no sound
+  T: "The Others made no sound."
+  N: Word for word, but as the post's epigraph excerpt from the novel (with "The woods gave no answer"), not as the blogger's own analysis. The 'double meanings' half IS the page's analysis: the opening exchange is "clever wordplay" that on reread is "telling you to be very, very afraid of the dead". The page never uses the phrase 'negative sensory statements'.
+#307 [close] PARTIAL | F: callback imagery | S: Race for the Iron Throne (Steven Attewell), Bran VII ACOK, 2016-04-07 | H: racefortheironthrone.wordpress.com
+  C: Earlier physical detail (Bran's gargoyle handholds) is re-used as an instrument of later violence.
+  Q: His tongue felt strange and thick in his mouth
+  T: "the gargoyles that were Bran's handholds transformed into murder weapons"
+  N: The supplied quote "His tongue felt strange and thick in his mouth" IS on the page word for word, but it is a block quote about Bran's warging and does NOT evidence this claim. The claim's actual support is the separate sentence given as trueWording, which the claim calls "deliberate and thorough" callback. Quote/claim are mispaired.
+#308 [close] PARTIAL | F: ironic refrain | S: Race for the Iron Throne (Steven Attewell), ASOS Prologue, 2016-04-18 | H: racefortheironthrone.wordpress.com
+  C: A repeated phrase in a doomed POV ('the bloody snow') carries foreshadowing the character cannot read.
+  Q: 
+  T: "GRRM loves a cheap pun, Chett's downfall is caused by snow"
+  N: The doomed-POV foreshadowing the character cannot read is supported. But 'refrain' overstates: the page carries "the bloody snow" once as its epigraph and once inside the quoted Chett passage; it never calls it a repeated phrase or refrain.
+#310 [close] PARTIAL | F: silenced inner voice | S: ASOIAF University (tumblr aggregator), tagged 'writing' | H: tumblr.com
+  C: Jaime's italic commentary goes silent immediately before a violent act, forcing the reader to register it.
+  Q: absolutely SILENT
+  T: "jaime's smart-mouthed inner voice is absolutely SILENT about his feelings about brienne"
+  N: Exact, capitalisation included. 'forcing the reader to register it' is supported: "he wants that jolt, he wants to shake you. he wants you to NOTICE." Caveat: the page says 'inner voice'/'inner commentary'/'inner snarkbot', never 'italic'; and the silence runs through the Ronnet Connington exchange, with Jaime's golden hand striking him at the end.
+#311 [close] PARTIAL | F: archaic-ing from AFFC | S: nobodysuspectsthebutterfly (tumblr) | H: tumblr.com
+  C: 'Nuncle' and similar archaisms (pease, neeps) appear only from A Feast for Crows onward, a deliberate late shift some readers dislike.
+  Q: It's totally an AFFC and onward thing
+  T: "But it's totally an AFFC and onward thing, with GRRM deliberately archaic-ing his language (to many people's annoyance)"
+  N: Exact substring, and the dislike is the blogger's own (tag: "i am not a great fan of the archaic-ing of asoiaf"). Caveat: only 'nuncle' is dated to AFFC-onward. 'pease' and 'neeps' appear in a different post as "Other GRRM-style words from archaic English" with no book range attached, so the claim's parenthetical extends the source.
+#322 [close] PARTIAL | F: adverb avoidance | S: Winter Is Coming (Dan Selcke) on Dimitris Spathis, 2015-09-24 | H: winteriscoming.net
+  C: Text-mining across four series finds Martin uses -ly adverbs least and reads at about age ten by readability index.
+  Q: George R.R. Martin hates adverbs
+  T: What does this chart tell us? That George R.R. Martin hates adverbs.
+  N: Quote exact. Four series confirmed (LOTR, Harry Potter, Hunger Games, ASOIAF) and 'you only need to be 10 years old to understand A Song of Ice and Fire'. Caveat: the page never says '-ly' adverbs nor the word 'least' - it credits an adverb chart hosted on Spathis' own Medium post.
+#328 [close] PARTIAL | F: food as belonging and class | S: Cultura Colectiva (Carrasco), 2019-04-09 | H: culturacolectiva.com
+  C: Meal descriptions mark inclusion, class, and culture, with sensory verbs carrying the emotion.
+  Q: 
+  T: uses food to establish the emotional states of his characters
+  N: No quote was supplied. Belonging/class confirmed ('a sign of brotherhood, of the sense of fraternity'; Jon as bastard 'not fit to sit in the main hall'), culture confirmed ('Dothraki food, drink, and the way they celebrate tell us quite a bit about them as a group'). 'Sensory verbs' is the analyst's gloss, not the page's wording. Byline note: page credits 'By Andrea Guzman' in the body under poster Isabel Carrasco, translated by Oliver G. Alvar; date April 9 2019 matches.
+#332 [chronicle] PARTIAL | F: unreliable-narrator distance | S: Patrick Nugent, The Irish Times, 16 Feb 2019 | H: irishtimes.com
+  C: Gyldayn is framed as an extremely unreliable narrator, and that distance keeps readers from investing in characters who rarely stay long enough to be known.
+  Q: an extremely unreliable narrator
+  T: It's hard to root for anyone as they rarely stick around
+  N: Quote 'an extremely unreliable narrator' is verbatim ("purportedly written by Archmaester Gyldayn, an extremely unreliable narrator"), and the not-investing limb is on the page ("It's hard to root for anyone as they rarely stick around long enough for us to get to know them"). But the review attributes that difficulty to the events' density, not to narratorial distance; the two facts sit in adjacent sentences with no causal link drawn.
+#336 [chronicle] PARTIAL | F: roundup link set | S: Winter Is Coming critics roundup, 23 Nov 2018 | H: winteriscoming.net
+  C: The roundup links the Independent, Publishers Weekly, GQ, The Times, the Sunday Times, Tor.com and Mental Floss; it does not link NYT, Guardian or Vox reviews, and none were found.
+  Q: 
+  T: links Independent, PW, GQ, The Times, Sunday Times, Tor.com, Mental Floss
+  N: The link set is exactly right, confirmed by parsing every href in the raw HTML: independent.co.uk (O'Connor), publishersweekly.com/978-1-5247-9628-0, gq-magazine.co.uk/article/fire-and-blood-review, thetimes.co.uk (Rifkind), thetimes.co.uk/magazine (Dan Jones, Sunday Times), tor.com/2018/11/21, mentalfloss.com - and no nytimes.com, theguardian.com or vox.com link anywhere on the page. The final limb is the problem: a roundup page cannot attest that no such reviews exist or that a search failed t
+#347 [chronicle] PARTIAL | F: vivid single image amid summary | S: Publishers Weekly review, 19 Nov 2018 | H: publishersweekly.com
+  C: Even the summary voice lands concrete, countable images, such as a dragon devouring a queen in six bites.
+  Q: devoured the queen in six bites
+  T: Brief sections are dramatic ('the golden dragon devoured the queen in six bites')
+  N: Quote is verbatim on the raw PW page, but the review assigns that image to the BRIEF DRAMATIC sections and explicitly contrasts them with summary: 'they only last a few pages before a return to brisk summary.' The page does not say the summary voice lands such images; it says the opposite relation.
+#361 [chronicle] PARTIAL | F: regnal-year sentence openers | S: George R.R. Martin, Not a Blog excerpt post, 27 Sep 2018 | H: georgerrmartin.com
+  C: The Jaehaerys excerpt dates its action to a regnal year (58 AC) and advances by chronology rather than by scene.
+  Q: plans were laid in 58 AC
+  T: plans were laid in 58 AC for Jaehaerys and Alysanne
+  N: Quote "plans were laid in 58 AC" is verbatim (once, mid-sentence, not as a sentence opener despite the feature label 'regnal-year sentence openers'). 58 AC is the only regnal year in the entire excerpt; later transitions are relative ('A few days later', 'After taking leave of White Harbor', 'The longer the queen stayed'). The second limb fails: the excerpt descends into extended scenes at Winterfell built from direct dialogue (Alaric Stark's "I hope you brought something warmer than that", the 
+#366 [chronicle] PARTIAL | F: narrator's incomplete knowledge as design | S: Winter Is Coming digest of Martin's Not a Blog comments, 3 May 2018 | H: winteriscoming.net
+  C: Because Gyldayn 'writes' the book, Martin says it makes sense he would not have all the information, and its mysteries are possible answers, not definitive ones.
+  Q: he wouldn't have all the information
+  T: it is all possible answers, not meant to be definitive
+  N: Quote "he wouldn't have all the information" is verbatim on the page, but I checked the raw HTML: it sits in the article's own <p id="inline-text-4"> body paragraph ("Fire & Blood is 'written' by Archmaester Gyldayn of the Citadel, so it makes sense that he wouldn't have all the information."), authored by Dan Selcke — NOT inside the adjacent <blockquote> carrying Martin's words. The second limb IS Martin verbatim in that blockquote: "in the case of things like Valyria and the dragon eggs, it is
+#371 [chronicle] PARTIAL | F: archaic diction markers | S: George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com | H: reactormag.com
+  C: Archaic markers ('whilst', 'alarum', 'a moon's turn', 'the hour of the bat/owl') set the register without heavy Latinate vocabulary.
+  Q: the hour of the bat
+  T: at the hour of the bat; a general alarum; a moon's turn
+  N: All four archaic markers verify verbatim: "whilst"/"Whilst", "without raising a general alarum", "for a fortnight or a moon's turn", "at the hour of the bat" and "It was the hour of the owl." The negative limb is the failure: the same excerpt reaches for markedly Latinate diction — "savage internecine struggle", "strikes us as grotesquely inappropriate", "two principal claimants", "became embroiled" — so the page does not support 'without heavy Latinate vocabulary' as stated.
+#373 [chronicle] PARTIAL | F: blaming lore on singers | S: George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com | H: reactormag.com
+  C: The chronicler attributes the war's poetic name to some singer, the chronicle's habit of assigning romance to song and sobriety to record.
+  Q: No doubt the phrase originated with some singer.
+  T: No doubt the phrase originated with some singer.
+  N: Quote exact, including the full stop, in the opening paragraph, immediately after the chronicler calls 'dance' "grotesquely inappropriate" and immediately before he proposes the soberer "The Dying of the Dragons" and concedes to "the more poetic usage". The romance-to-song / sobriety-to-record contrast is therefore explicit in context; scope note only, the page shows this move once rather than establishing a repeated 'habit'.
+#374 [chronicle] PARTIAL | F: precise calendar dating | S: George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com | H: reactormag.com
+  C: A king's death is dated to the day and moon of a year and to a named hour, precision that reads as record rather than scene.
+  Q: third day of third moon
+  T: on the third day of third moon of 129 AC
+  N: "third day of third moon" is verbatim, in "the conflict burst into the open on the third day of third moon of 129 AC, when the ailing, bedridden King Viserys I Targaryen closed his eyes for a nap in the Red Keep of King's Landing, and died without waking." Day, moon and year all present. But the page attaches no hour to the death itself: the hour of the bat marks the serving man's discovery of the body, and "It was the hour of the owl" marks the summoning of the small council. The calendar-preci
+#381 [chronicle] PARTIAL | F: chronicle to reminiscence to fairy tale | S: Bartlomiej Blaszkiewicz, 'From Chronicle to Fairy Tale', in Marchen und Gesellschaft (WUW, 2024), pp. 163-175 | H: ceeol.com
+  C: The Harrenhal tourney exists in three registers: the World of Ice and Fire chronicle, scattered eyewitness reminiscences, and Meera Reed's fairy-tale retelling, tracing how history becomes tale.
+  Q: scattered personal reminiscences of various eyewitness characters
+  T: “the chronicle The World of Ice and Fire, which reappears in the form of scattered personal reminiscences of various eyewitness characters … to Meera Reed's fairy-tale version”
+  N: Source reached is the CEEOL chapter-detail page itself (HTTP 200, publisher abstract; chapter PDF is paywalled at 6.50 EUR). The abstract carries the quote verbatim, names all three forms — chronicle, eyewitness reminiscences, Meera Reed's fairy tale — and states the aim as illustrating ‘the transformation of historical events into a fairy tale’. Caveat of record: the abstract frames the reminiscences as the chronicle narrative reappearing, so ‘three registers’ is the claimant's enumeration; the
+#395 [chronicle] PARTIAL | F: suppressed-source motif | S: Collider | H: collider.com
+  C: Mushroom's testimony was deemed so salacious that King Baelor ordered it burned, a suppressed-source motif familiar from real archives.
+  Q: ordered it burned
+  T: "they were ordered burned by King Baelor the Blessed"
+  N: Same Collider page: 'So salacious, and perverse were these tales that they were ordered burned by King Baelor the Blessed - but luckily, some survived'. The chunk's quote string 'ordered it burned' is NOT word-for-word on the page (grep returns nothing; page reads 'they were ordered burned by'), hence SUBSTANCE not VERBATIM. Salacious + Baelor + burning all supported; 'a suppressed-source motif familiar from real archives' is the researcher's own genre label, not sourced to the page.
+#400 [chronicle] PARTIAL | F: damaged-manuscript conceit | S: A Wiki of Ice and Fire, 'Gyldayn' | H: awoiaf.westeros.org
+  C: The original WOIAF frame had Gyldayn's papers found with pages misplaced, destroyed, or damaged by neglect and fire, the lost-manuscript topos.
+  Q: damaged by neglect and by fire
+  T: "many pages were misplaced or destroyed, and still others were damaged by neglect and by fire"
+  N: Same AWOIAF capture: 'In the original text of The World of Ice & Fire ... Yandel discovered other manuscripts by Gyldayn, but many pages were misplaced or destroyed, and still others were damaged by neglect and by fire.' Quote verbatim; the papers-found frame ('sent his papers to Archmaester Gerold ... recently discovered by Maester Yandel') is on the page. 'the lost-manuscript topos' is the researcher's genre label, not a page assertion.
+#401 [chronicle] PARTIAL | F: rhetorical question as hedge | S: A Wiki of Ice and Fire, 'Gyldayn' | H: awoiaf.westeros.org
+  C: Gyldayn's line on the dragon Tessarion shows the chronicler's habit of closing an unknowable with a rhetorical question.
+  Q: Who can know the heart of a dragon?
+  T: "Who can know the heart of a dragon?" - Gyldayn writing about Tessarion
+  N: Same AWOIAF capture. The quote and its attribution to Gyldayn writing about Tessarion are verbatim on the page (Quotes section, cited to Fire & Blood, 'The Dying of the Dragons - Rhaenyra Overthrown'). The generalisation to a habit is an inference the page does not evidence, so the claim is graded PARTIAL rather than verified.
+#420 [chronicle] PARTIAL | F: dialogue only at big events | S: Book Analysis review | H: bookanalysis.com
+  C: Conversations appear only when a massive event occurs, which the reviewer finds produces a choppy dialogue texture.
+  Q: 
+  T: conversations only when a massive event occurs; choppiness in dialoguing
+  N: Raw page read (bookanalysis.com, 200). Claim carried an empty quote field, so graded on substance: the 'Dialogues' section reads 'Most storylines in the novel employ conversations only when a massive event occurs' and 'The novel's writing style also contributes to the choppiness in dialoguing.' Page hedges with 'Most storylines'; the claim generalises to all conversations. Choppiness is attributed to the writing style rather than caused by the event-gating, but the reviewer does report a choppy 
+#435 [longform] PARTIAL | F: killing viewpoint characters | S: John Lanchester, 'When did you get hooked?', London Review of Books v35 n7, 11 Apr 2013 | H: lrb.co.uk
+  C: Martin kills off central characters who are richly imagined, three-dimensional portraits, which most writers could not bear to lose.
+  Q: richly imagined, textured, three-dimensional portraits of central characters
+  T: the kind many writers couldn't bear to kill off
+  N: Quote 'richly imagined, textured, three-dimensional portraits of central characters' is verbatim on the LRB page, in the paragraph listing Renly, Tywin, Robb and Joffrey ('He dies' x4), closing 'the kind many writers couldn't bear to kill off. Nobody needs to give Martin any advice about how he needs to slaughter his darlings.' The kill-off limb and the three-dimensional-portrait limb are fully supported; only the quantifier is inflated from 'many' to 'most'.
+#438 [longform] PARTIAL | F: viewpoint stakes at chapter end | S: John Lanchester, 'When did you get hooked?', London Review of Books v35 n7, 11 Apr 2013 | H: lrb.co.uk
+  C: The Bran defenestration lands harder in the book than on screen because Bran has already been established as a viewpoint character.
+  Q: even more of an impact, perhaps
+  T: equivalent impact in the books; even more of an impact, perhaps
+  N: Page: 'It has an equivalent impact in the books; even more of an impact, perhaps, because Bran has already been established as one of the characters from whose viewpoint the story is told.' The causal limb (already a viewpoint character) is verbatim-supported; the claim strips the source's hedge and asserts the comparison outright.
+#447 [longform] PARTIAL | F: descriptive set piece as self-reference | S: Daniel Mendelsohn, 'The Women and the Thrones', New York Review of Books, 7 Nov 2013 issue | H: nybooks.com
+  C: The three-walled description of Qarth (animals, war, sex) reads as a sly reference to the series' own layered decor.
+  Q: a sly reference to the series itself
+  T: in the Qartheen decor a sly reference to the series itself
+  N: The quoted Qarth passage does run animals (outer red sandstone), war (middle grey granite) and sex (innermost black marble), so the three-walled/animals-war-sex limb is exactly right, and 'a sly reference to the series itself' is verbatim. What the page does not say is that the referent is the series' decor; the tenor of the comparison there is scale — 'anyone familiar with Martin's slowly metastasizing epic—it began as a trilogy in 1996 and now runs to five volumes of a projected seven, each ar
+#463 [longform] PARTIAL | F: pageantry and colour | S: Laura Miller, 'Just Write It!', The New Yorker, 11 Apr 2011 | H: newyorker.com
+  C: Martin's taste for pageantry and colour (his medieval miniature dioramas) carries into the fiction.
+  Q: I like the pageantry and the color
+  T: I like the pageantry and the color - said of his medieval miniatures
+  N: Quote verbatim, and the dioramas of mostly medieval miniatures are on the page. But the page never says this taste carries into the fiction: the only bridge it draws from the closets to the novels is population - 'Like his closets, Martin's head is crammed with people' - leading to Garcia's thousand-name census, not to pageantry or colour in the prose.
+#490 [longform] PARTIAL | F: cliffhanger plotting | S: Sady Doyle, 'Enter Ye Myne Mystic World of Gayng-Raype', Tiger Beatdown, 26 Aug 2011 | H: tigerbeatdown.com
+  C: The plotty, cliffhangery reversals (dead! alive! dying! a zombie! in disguise!) are conceded as the selling point.
+  Q: the plotty, cliffhangery aspects of Martin’s writing
+  T: I could acknowledge the plotty, cliffhangery aspects as a selling point
+  N: Wayback raw capture of tigerbeatdown.com (live host refuses connection). Quote and the whole reversal list are verbatim: 'I could acknowledge the plotty, cliffhangery aspects of Martin's writing as a selling point: So-and-so was dead! But now he's alive! But now he's dying! But now he's a zombie! But now he's the Prince of Sblarghlhaar, because he was IN DISGUISE!' But it sits in a run of declined moves ('I could get into the reasons... I could try to construct some kind of nuanced argument... I
+#494 [longform] PARTIAL | F: frequency of rape scenes | S: Sady Doyle, 'Enter Ye Myne Mystic World of Gayng-Raype', Tiger Beatdown, 26 Aug 2011 | H: tigerbeatdown.com
+  C: The essay's core objection is the count of gratuitous rape, molestation and domestic-violence scenes, tallied book by book.
+  Q: TWENTY THOUSAND MILLION GRATUITOUS RAPE
+  T: creepy primarily for his gratuitous rape/molestation/DV scenes
+  N: Wayback raw capture. The core-objection limb is verbatim: 'He is creepy, primarily, because of his TWENTY THOUSAND MILLION GRATUITOUS RAPE AND/OR MOLESTATION AND/OR DOMESTIC VIOLENCE SCENES. And I could write a post about those... But you know what would be easier? I could just count them. One by one by one.' The essay does walk the books in order (sections 1-4, each with a 'Major Female Characters' roster), but no per-book count of scenes exists: the arithmetic is one cumulative 'FINAL SCORES' 
+#500 [longform] PARTIAL | F: compound neologisms | S: Simon (Books & Boots), 'Some notes on George RR Martin's prose style', 31 Mar 2014 | H: astrofella.wordpress.com
+  C: Compounds like sellsword, smallfolk, ironborn, greenseer and weirwood are a highly creative and enjoyable aspect of the style.
+  Q: a highly creative and enjoyable aspect of his style
+  T: Martin uses this facility to coin scores of neologisms (of the compounds)
+  N: The quote is verbatim but belongs to section 6 'New coinages', whose examples are sept/septon/septa, maester, wildlings, pyromancer, holdfast, warg, damphair. The five words the claim names are all on the page but in the SEPARATE section 7 'New word combinations', where the page says only 'Martin uses this facility to coin scores of neologisms' and that they 'build up a linguistic base for the otherness of his fantasy world' - no creative/enjoyable praise. Confirmed positionally: the praise phra
+#502 [longform] PARTIAL | F: ambiguous repetition | S: Simon (Books & Boots), 'Some notes on George RR Martin's prose style', 31 Mar 2014 | H: astrofella.wordpress.com
+  C: Repeated 'cool' and 'still' in the Water Gardens passage may be haste or deliberate torpor-evoking repetition.
+  Q: signs of haste, or careful repetitions
+  T: the word paintings of the Water Palace of Lord Martell of Dorne
+  N: Substantive limb is verbatim: '(I can't decide whether the repetitions in this passage - of cool and still - are signs of haste, or careful repetitions designed to evoke the lazy, torpid atmosphere of Lord Martell's sea retreat.)' Haste-vs-deliberate-torpor and the two repeated words are exactly right. Only the location label diverges: the page introduces the quoted FFC40 passage as the 'Water Palace', never 'Water Gardens'. Relabel the passage and the claim is fully sourced.
+#532 [longform] PARTIAL | F: tone | S: Kirkus Reviews, 'A Dance with Dragons', 26 Sep 2011 | H: kirkusreviews.com
+  C: Book five is cynical, dark, with few laughs and not much action, mostly exposition.
+  Q: a little cynical, plenty dark, with not many laughs
+  T: a little cynical, plenty dark, few laughs, not much action, the usual blend of exposition
+  N: Kirkus raw page carries the quote word for word: 'it's vintage Martin: It's a little cynical, plenty dark, with not many laughs and, truth be told, not much action.' The cynical / dark / few laughs / not much action limbs are all supported verbatim, and 'book five' matches ('The fifth installment'). Only the 'mostly exposition' limb overstates the page, which credits exposition as one half of a blend (albeit 'sometimes seemingly endless').
+#544 [longform] PARTIAL | F: intrigue over elevated prose | S: Matt Hilliard, 'A Song of Ice and Fire 1–4', Yet There Are Statues, 14 Aug 2010 | H: matthilliard.wordpress.com
+  C: The series' approach emphasised intrigue and realism over magic and elevated prose.
+  Q: intrigue and realism over magic and elevated prose
+  T: I primarily associated ... intrigue and realism over magic and elevated prose
+  N: Quote is verbatim on the page, but it sits inside the reviewer's PRE-READING expectation: 'from countless asides in conversations with friends and reviews of other books, I primarily associated two attributes with Martin's work: First, an unromantic approach to fantasy that emphasized intrigue and realism over magic and elevated prose.' He then writes 'the series Martin wrote was quite a bit different than the one I had expected to read' and, on grit and realism, 'Compared to Joe Abercrombie ...
+#549 [longform] PARTIAL | F: out-of-order composition | S: Thomas M. Wagner, SFF180 review of A Dance with Dragons (undated, c. 2011) | H: sff180.com
+  C: Martin writes chapters out of order and sequences them later, like a film editor.
+  Q: he writes chapters out of order, and then sequences them later
+  T: like a filmmaker, he writes chapters out of order, and then sequences them later
+  N: Quote verbatim on the page: 'Martin has said in interviews (or at least in one convention interview I sat in on) that, like a filmmaker, he writes chapters out of order, and then sequences them later.' The page's simile is 'filmmaker', not 'film editor'; it also attributes the practice to Martin's own interview remarks rather than stating it in the reviewer's own voice.
+#611 [editorial-ownwords] PARTIAL | F: civic record register | S: Linda Antonsson, La Garde de Nuit interview (recorded Worldcon Dublin 2019, published 2020-03-25) | H: lagardedenuit.com (archive)
+  C: Antonsson says the concept of a maester writing The World of Ice and Fire was their suggestion, not Martin's.
+  Q: the concept of the book, the idea that there would be a maester writing it
+  T: And also the concept of the book, the idea that there would be a maester writing it. That was also our suggestion from early on, inspired in part of George that has this idea
+  N: Wayback raw capture (25 mars 2020 publication date confirmed on the page); speaker confirmed as Linda. The quotation is verbatim and 'our suggestion from early on' is on the page, but the page does not say the concept was not Martin's -- it says the suggestion was theirs *inspired in part* by George's own idea of a fallible in-world guidebook narrator. The exclusive negation is the claim's addition.
+#620 [editorial-ownwords] PARTIAL | F: terminology consistency | S: Elio M. García Jr. and Linda Antonsson, La Garde de Nuit interview (published 2020-03-25) | H: lagardedenuit.com (archive)
+  C: García says version control between Martin's original WordStar files and the edited documents was a problem, because Martin often worked from files that had not been through Groell's editing.
+  Q: the all versioning control was definitely a bit of a problem
+  T: Antonsson: versioning control was definitely a bit of a problem
+  N: The quoted sentence is verbatim on the page but it is Linda Antonsson speaking, not Garcia: 'Linda: ... George would often work from his original files, which weren't necessarily the files that had then gone back to us and through Anne's editing. So, the all versioning control was definitely a bit of a problem'. Garcia separately supports the WordStar limb elsewhere on the page ('George wouldn't refer to those when he looked back to his original WordStar files where we didn't have any comments')
+#666 [measurement] PARTIAL | F: compounds and coinages | S: HBO official press release, dothraki.conlang.org, 12 April 2010 | H: dothraki.conlang.org
+  C: HBO's press release says Peterson drew on Martin's description of the language rather than on a vocabulary Martin had supplied.
+  Q: drew inspiration from George R.R. Martin’s description of the language
+  T: Peterson drew inspiration from George R.R. Martin's description of the language, as well as from such languages as Russian, Turkish, Estonian, Inuktitut and Swahili
+  N: Wayback raw capture (see 665). The quoted clause is verbatim. But the release draws no contrast with a Martin-supplied vocabulary: the alternative it names is other natural languages, and Peterson's own quoted words point the other way, at material Martin did supply in print - 'I wanted to remain as faithful as possible to the extant material in George R.R. Martin's series... Though there isn't a lot of data, there is evidence of a dominant word order'. The 'rather than' framing is the claimant'
+#667 [measurement] PARTIAL | F: compounds and coinages | S: Wikipedia 'Dothraki language' relaying the HBO press release of 12 April 2010 | H: en.wikipedia.org
+  C: Wikipedia, relaying the HBO press release, states Peterson delivered over 1700 words to HBO before the initial shooting, a figure the press release itself puts at more than 1,800.
+  Q: He delivered over 1700 words to HBO before the initial shooting.
+  T: He delivered over 1700 words to HBO before the initial shooting.
+  N: Raw page fetched live (HTTP 200). The quoted sentence is verbatim in section 'Development'. Two limbs fail. (1) 'relaying the HBO press release': that sentence carries no footnote of its own; ref [5] ('Official HBO Press Release', Dothraki.conlang.org, April 12, 2010) is attached to the NEXT sentence, and the press release itself (read raw via Wayback) contains no 1700 figure at all. (2) 'a figure the press release itself puts at more than 1,800': the release's 'more than 1,800 words' describes 
+#697 [reception] PARTIAL | F: point of view and distance | S: Steve Jeffery, review of A Game of Thrones, Vector 192 (BSFA), March/April 1997, p.19 | H: fanac.org
+  C: Steve Jeffery's 1997 Vector review attributes the episodic feel of A Game of Thrones's later stretches to Martin's alternation of chapters between major viewpoint characters.
+  Q: Martin's technique of alternating chapters between a number of major viewpoint characters
+  T: episodic feel 'underlined by' the chapter alternation, not caused by it
+  N: fanac.org/fanzines/Vector/Vector192.pdf fetched raw (HTTP 200, 10.99 MB) and text extracted with pypdf; page index 18 carries the running head 'Vector 192 - March/April 1997' and the folio 'page 19', with 'George R.R. Martin / Reviewed by Steve Jeffery / A Game of Thrones'. Full sentence: '...threads start to develop independently towards the end, things become more episodic, underlined by Martin's technique of alternating chapters between a number of major viewpoint characters.' Quote exact; da
+#730 [reception] PARTIAL | F: place and institution description | S: Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011 | H: nytimes.com
+  C: Jennings's 2011 review says Martin is often more intrigued by the friction among conflicting religions and by what he calls the Kremlinology of Westeros than by fantasy's usual furniture.
+  Q: by the Kremlinology of Westeros
+  T: Jennings's own phrase, not attributed to Martin
+  N: NYT (Wayback raw): "He's often more intrigued by the friction among conflicting religions, by the Kremlinology of Westeros, in the 'plots, ploys, whispers, lies, secrets within secrets' that make of up 'the game of thrones.'" Quote verbatim and the 'more intrigued... than fantasy's usual furniture' contrast is carried by the preceding sentence ('The elements of fantasy exist here but are deftly muted'), but the page nowhere has Martin calling it that -- the coinage is the reviewer's.
+#838 [scholarship] PARTIAL | F: other: introduction formula for a person | S: Erik Germani, 'Block Characterization', in 'Odds and Ends', At Sea Journal | H: atseajournal.com
+  C: Germani finds that Martin's block characterisations follow a fixed order, hitting age, hair, eyes, clothes, and physique.
+  Q: He hits on age, hair, eyes, clothes, and physique
+  T: Martin’s got an algorithm. He hits on age, hair, eyes, clothes, and physique.
+  N: Raw HTML of .../snippets.html fetched live (HTTP 200), section 'Block Characterization'. The quoted list is verbatim and the five features are right, but the page says only that Martin 'has an algorithm' and names the features — it never claims a fixed sequence, and the block characterisations it then reproduces run in different orders (Tywin: age, physique, hair, eyes, no clothes; Ser Waymar: age, eyes, physique, clothes). The ordering limb is the claimant's addition.
+#852 [closereading] PARTIAL | F: other: recommendation framing | S: Linda Antonsson, 'Sean T. Collins on ASoIaF', Westeros.org news entry 13834 | H: westeros.org
+  C: Westeros.org's news editor introduces Sean T. Collins's 2011 piece as covering ground from prose to themes to world-building.
+  Q: covering ground ranging from prose to themes to world-building
+  T: A good piece, covering ground ranging from prose to themes to world-building
+  N: Live www.westeros.org returned HTTP 403 to curl with a browser UA; recovered via Wayback raw capture https://web.archive.org/web/20250424162321id_/https://www.westeros.org/News/Entry/13834 (raw page, not a summary). Entry dated January 18, 2011, signed "Posted at 23:40 CET by Linda" — the 2011 dating, the Collins subject and the quoted phrase are all verbatim. Caveat on attribution only: the page gives the poster as "Linda" with no surname and no role title; "news editor" and "Antonsson" come fr
+#858 [closereading] PARTIAL | F: omission as information | S: Leigh Butler, 'A Read of Ice and Fire: A Game of Thrones, Part 1', Tor.com | H: tor.com
+  C: Butler praises the Prologue for supplying only enough worldbuilding detail to raise interest without exposition.
+  Q: just enough worldbuilding tidbits to pique the interest
+  T: just enough worldbuilding tidbits to pique the interest without drowning you in exposition
+  N: Same Wayback raw capture. End of the Prologue Commentary: "Overall, nicely done, with just enough worldbuilding tidbits to pique the interest without drowning you in exposition." Quote verbatim. Use the page's own tail wording — the restraint claimed is 'without drowning you in exposition', not the absence of exposition; do not tighten it to 'without exposition' in any quoted rendering.
+#859 [closereading] PARTIAL | F: other: chapter titling | S: Leigh Butler, 'A Read of Ice and Fire: A Game of Thrones, Part 1', Tor.com | H: tor.com
+  C: Butler notes that Martin's chapters carry no numbers and repeat character names as titles.
+  Q: Mr. Martin is not into chapter numbers
+  T: Martin is not into chapter numbers, or non-repetitive titles either
+  N: Same Wayback raw capture. Introductory note: "Today's inaugural entry is Part 1 of A Game of Thrones, in which we cover the Prologue and 'Bran,' because it turns out Mr. Martin is not into chapter numbers. Or non-repetitive titles, either." The quote is verbatim and the no-numbers limb is fully supported; the repetition limb is supported only as 'non-repetitive titles'. Butler nowhere says the titles are character names — the reader infers it from the chapter header 'Bran' shown on the page. Gra
+#889 [closereading] PARTIAL | F: other: active and passive voice | S: Corey Huffman, video description, '[5] The Prose of George R R Martin | How to Meld the Active & Passive Voices' | H: youtube.com
+  C: Part five uses passages from A Clash of Kings to argue Martin melds active and passive voice within a single narrative movement.
+  Q: how to differentiate between the Active and Passive voices
+  T: how you, as a writer, can meld the two voices
+  N: Quote byte-exact in the raw description of [5], and the A Clash of Kings limb holds ("using excerpts taken from George R R Martin's novel, 'A Clash of Kings'"). But the description attributes the melding to the reader-writer, not to Martin, and says the purpose is "to take your reader on a smooth, vivid, and immersive journey" - not a single narrative movement.
+#955 [measurement] PARTIAL | F: stylometry | S: Ben Blatt, Nabokov's Favorite Word Is Mauve (2017), page 172 | H: books.google.com
+  C: Blatt states that the tables of clichés and favourite words in his book cover the fifty authors he has been using as examples throughout it.
+  Q: fifty authors I've been using as examples throughout this book
+  T: p.172: fifty example authors PLUS "fifty more authors"; clichés not mentioned
+  N: The quotation is verbatim on p. 172: "...top three 'cinnamon words' and top three 'nod words' for each of the fifty authors I've been using as examples throughout this book. To add to the fun, I've also included fifty more authors of popular and critical acclaim." So the sentence is about the favourite-words (cinnamon/nod) table only - clichés are a different table on p. 158, worded differently ("fifty authors I use as examples, Number of Clichés per 100,000 Words"). The claim fuses two pages in
+#981 [measurement] PARTIAL | F: adjective and adverb discipline | S: prosecraft.io library figures as scraped in the Genre_Prediction dataset | H: raw.githubusercontent.com
+  C: The scraped prosecraft figures put the ly-adverb rate of A Dance with Dragons at 0.4% of the text.
+  Q: A Dance With Dragons,George R. R. Martin,414873.0,69.08,7.83,2.07,0.4,1.67
+  T: ly-adverbs column reads 0.4 for A Dance With Dragons; no unit given
+  N: Row 20474 of the CSV is verbatim: 'A Dance With Dragons,George R. R. Martin,414873.0,69.08,7.83,2.07,0.4,1.67'. Under the header ',title,author,total words,vividness,passive voice,all adverbs,ly-adverbs,non-ly-adverbs,genre,year' the ly-adverbs value is exactly 0.4, so the number and the book are confirmed. The percent-of-text unit is not stated anywhere on the fetched page: the column is bare 'ly-adverbs'. It is a strong inference (0.4 + 1.67 = 2.07 exactly matches the all-adverbs column, so th
+#982 [measurement] PARTIAL | F: adjective and adverb discipline | S: prosecraft.io library figures as scraped in the Genre_Prediction dataset | H: raw.githubusercontent.com
+  C: The scraped prosecraft figures put the ly-adverb rate of A Game of Thrones at 0.77% of the text.
+  Q: A Game of Thrones,George R. R. Martin,292795.0,63.7,7.26,2.44,0.77,1.67
+  T: ly-adverbs column reads 0.77 for A Game of Thrones; no unit given
+  N: Row 11522 is verbatim: 'A Game of Thrones,George R. R. Martin,292795.0,63.7,7.26,2.44,0.77,1.67'. The ly-adverbs value is exactly 0.77 and the internal check holds (0.77 + 1.67 = 2.44, the all-adverbs column). Same single defect as 981: the page states no unit for the column, so '% of the text' is not supported by the raw source even though the figure is exact.
+#984 [measurement] PARTIAL | F: register modulation | S: prosecraft.io library figures as scraped in the Genre_Prediction dataset | H: raw.githubusercontent.com
+  C: In the same dataset Martin's science-fiction collection Nightflyers & Other Stories carries a ly-adverb rate of 1.3%, more than three times the rate of A Dance with Dragons.
+  Q: Nightflyers & Other Stories,George R. R. Martin,96483.0,50.48,7.91,3.43,1.3,2.13
+  T: Nightflyers ly-adverbs 1.3; A Dance With Dragons 0.4
+  N: Row 20451 of the raw CSV contains the quoted string verbatim as a substring (line begins '20451,'). ly-adverbs column = 1.3; genre list begins ['Science Fiction','Short Stories',...] so 'science-fiction collection' holds. Same file, row 20474, gives A Dance With Dragons ly-adverbs 0.4, so 1.3 is 3.25x - 'more than three times' is exact. Only nuance: the CSV prints bare numbers with no % sign; the percentage unit is prosecraft's convention, not stated on this page.
+#985 [measurement] PARTIAL | F: register modulation | S: prosecraft.io library figures as scraped in the Genre_Prediction dataset | H: raw.githubusercontent.com
+  C: The Wild Cards novel Joker Moon, credited to Martin in the dataset, carries a ly-adverb rate of 1.28% and a vividness of 46.89, both far from the Westeros novels' figures.
+  Q: Joker Moon,George R. R. Martin,171682.0,46.89,8.21,3.22,1.28,1.94
+  T: Joker Moon 46.89 vividness, 1.28 ly-adverbs, credited G.R.R. Martin
+  N: Quoted row appears verbatim as a substring of line 20830 ('20828,Joker Moon,George R. R. Martin,171682.0,46.89,8.21,3.22,1.28,1.94,...'). Author field is 'George R. R. Martin' so 'credited to Martin in the dataset' is exact. The ly-adverb limb is strongly supported: 1.28 against A Game of Thrones 0.77, A Clash of Kings 0.68, A Storm of Swords 0.6, A Feast for Crows 0.47, A Dance With Dragons 0.4. The vividness limb holds only if 'the Westeros novels' means the five main-series books; the same pa

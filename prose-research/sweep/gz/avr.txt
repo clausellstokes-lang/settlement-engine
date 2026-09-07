@@ -1,0 +1,1112 @@
+Remixing Avernus 
+
+ March 14th, 2020 
+
+ SPOILERS FOR DESCENT INTO AVERNUS 
+
+ If you’re a local player in my campaigns, you might want to steer clear here. I may be running Descent Into Avernus in the future, but not for people who’ve read the plot. 
+
+ Last year I wrote the Alexandrian Remix of Waterdeep: Dragon Heist . It sought to revise the published campaign in order to create a richer, more dynamic, and (importantly) more robust scenario. People seemed to like it. They liked it a lot, in fact, and I’ve been repeatedly asked to do a similar remix for Baldur’s Gate: Descent Into Avernus .
+
+ Which is obviously why we’re here today.
+
+ I’ve done a few of these in-depth remixes in the past, and they’re generally of two types:
+
+ Expansive remixes, like I did for Eternal Lies , where I’m primarily creating lots of cool new stuff (props, dioramas, new spin-off scenarios) to enhance an already great experience.
+
+ Design remixes, like the one I did for Keep on the Shadowfell , in which I’m primarily focused on fixing the flaws and shortcomings of a scenario.
+
+ In the latter, the flaws I’m looking at are usually in the scenario structure . This is not because shortcomings in the scenario structure are the only problem published adventures suffer from. Rather, in order for me to want to spend the considerable time and effort necessary to remix an adventure, there must be both (a) something about the adventure that needs to be fixed and (b) something that makes it worthwhile to do so.
+
+ This almost always means that the adventure has some really cool stuff in it. It’s worth remixing specifically so that you can bring that cool stuff to your table in the best possible way. If there wasn’t any cool stuff to start with, it wouldn’t make much sense to spend a lot of effort remixing it: Just move on and either find better material to start with or make something new from scratch.
+
+ (For example, there was no mystery about how the scenario structure for Hoard of the Dragon Queen needed to be fixed : Ripping the railroad apart and reassembling it into a node-based structure would have been pretty straightforward. I describe how you can do it in Remixing Hoard of the Dragon Queen . But I never actually did it because the actual material in Hoard didn’t excite me.)
+
+ When I started looking at Descent Into Avernus , it was almost immediately clear why people were asking me to remix it. Its structure was badly, badly flawed. There was, in fact, a goodly span of time where I thought it was going to end up being more like Hoard of the Dragon Queen than Dragon Heist . Its structural flaws were so significant that it seemed as if fixing them would mean throwing out virtually everything of value in the adventure and starting over from scratch with a vaguely similar premise. (At which point, again, why bother?)
+
+ Fortunately, thanks in large part to a vigorous discussion with the patrons of my Patreon and also my followers on Twitter , I had a series of key insights that, at the end of the day, will radically transform Descent Into Avernus , but do so in a way that still leaves a lot of the meat on the bone (so to speak). It is primarily because I think these insights will be useful to others that this project is happening.
+
+ With that being said, the Alexandrian Remix of Descent Into Avernus will probably be a bit more “hands on” than my previous remixes. My plan is to critically look at each section of the adventure and then lay out what steps are necessary to redress the problems we’ve found. In some cases, those fixes will be specific and detailed. In others, though, you may have some “homework” to do before actually running the adventure.
+
+ (Of course, I basically said the same thing about Dragon Heist and then I ended up diving into all the nitty-gritty details. So we’ll see how it goes!)
+
+ One thing I learned from doing the Dragon Heist remix, though, is that it’s a lot easier for people if I tackle the material sequentially instead of topically. So rather than, for example, looking at all of the heists and then looking at all of the mysteries (like we did with Dragon Heist ), we’ll instead be largely walking through the book step by step. This might mean that some of our early installments get a little top-heavy, but I think it will all work out in the end.
+
+ ACT I: BALDUR’S GATE 
+
+ Part 1: The Beginning 
+
+ Part 2: Character Creation 
+
+ Part 2B: Elfsong Tavern 
+
+ Part 3: The Vanthampur Investigations 
+
+ Part 3B: Lore of the Vanthampur Investigations 
+
+ Part 3C: The Vanthampur Revelations 
+
+ Part 3D: Investigating the Murders 
+
+ Part 3E: The Poisoned Poseidon 
+
+ Part 3F: Dungeon of the Dead Three 
+
+ Part 3F-B: Key – Part 3F-C: Roster – Part 3F-D: Handouts 
+
+ Part 3G: Xandering the Dead Three 
+
+ Part 3H: Trafficking Amrik 
+
+ Part 3I: Vanthampur Manor 
+
+ Part 3J: The Portyr Assassination 
+
+ Part 4A: The Road to Candlekeep 
+
+ Part 4B: The Road to Avernus 
+
+ Part 4C: At the Threshold of Hell 
+
+ ACT II: HELLTUREL 
+
+ Part 5: Hellturel 
+
+ Part 5B-A: Arrival in Hellturel 
+
+ Part 5B-B: Streetcrawl in Elturel 
+
+ Part 5C-A: Pointcrawl in Elturel 
+
+ Part 5C-B: A Very Brief Gazetteer of Elturel 
+
+ Part 5C-C: Elturel Locations 
+
+ Part 5D: The High Hall 
+
+ Part 5E: The Grand Cemetery 
+
+ ACT III: AVERNUS 
+
+ Part 6: The Rest of the Remix 
+
+ Part 6B: The Avernian Quest 
+
+ Part 6C: Quest of the Dream Machine 
+
+ Part 6D: Lulu’s Memories 
+
+ Part 6D-B: Zariel’s Crusade – Part 6D-C: Zariel In Hell 
+
+ Part 6D-D: Legend of the Hellriders – Part 6D-E: Lulu’s Memory Mystery 
+
+ Part 6D-F: Triggered Memories – Part 6D-G: Memory Revelations 
+
+ Part 6D-H: The Four Memory Dives – 6D-I: The Dream Machine 
+
+ Part 6D-J: Claiming the Sword – 6D-K: Zariel’s Spark 
+
+ 6D-L: Questioning the Hellriders 
+
+ Part 7: Exploring Avernus 
+
+ Part 7B: Avernian Hex Map – Part 7C: Avernian Hex Key 
+
+ Part 7D: Raid on the Flying Fortress – Part 7D-B: Fortress Raid Map 
+
+ Part 7D-C: Fortress Locations 
+
+ Part 7E: Warlords of Avernus 
+
+ Part 7F: Factions in Avernus – Part 7F-B: Demonic Powers 
+
+ Part 7G: The Devils of Baldur’s Gate 
+
+ Part 7H: Avernian Random Encounters 
+
+ 7H-B: Designed Encounters – 7H-C: Procedural Encounters 
+
+ 7H-D: Advanced Encounter Options 
+
+ Part 7I: Avernian Rumor Tables 
+
+ THE END 
+
+ Part 8: The End 
+
+ Epilogue: The Elturian Wars 
+
+ Epilogue 2: Elturel Returns 
+
+ ADDENDUMS 
+
+ Addendum: Rumors of Elturel 
+
+ Addendum: Corpsedamp Zombies 
+
+ Addendum: A Textual History of Elturel 
+
+ Addendum: Playing Gargauth 
+
+ Addendum: Streetcrawling Tools 
+
+ Addendum: Elturian Names 
+
+ Addendum: Soul Coins 
+
+ Addendum: A Textual History of Zariel 
+
+ Addendum: The Ranks of Hell 
+
+ Addendum: The Grand 5E Devil Index 
+
+ Addendum: 3rd Party Resources 
+
+ From Waterdeep to Avernus 
+
+ MAPS 
+
+ Map Pack: Flying Fortress – Brig 
+
+ Map Pack: Flying Fortress – Command Deck 
+
+ Map Pack: Player Hexmaps 
+
+ Map Patch: Avernus Players’ Map 
+
+ Map Patch: Hellturel 
+
+ REVIEWS 
+
+ Review: Descent Into Avernus 
+
+ Capsule Reviews: DMs Guild 
+
+ Capsule Reviews: Rhodarin Avernus 
+
+ Capsule Reviews: Adventurers League (Season 9) 
+
+ Review: Rescuing Lulu From Elturel 
+
+ FAN ADDENDUMS 
+
+ Song of Elturel (Cami-Cat) 
+
+ Poisoned Poseidon Key (Tominar) 
+
+ RUNNING THE REMIX
+
+ Descent Into Avernus is a big campaign. If you look at the table of contents above, you can see that the Remix is a big project. You may feel overwhelmed by it.
+
+ Here are some tips for how you can grapple it to your will.
+
+ READING THE CAMPAIGN : First, I do recommend reading the full campaign ( Descent Into Avernus , pg. 1-154) and the Remix. (You can skip the addendums for now, although you may find the detailed addendums for Gargauth , Elturel , and Zariel will help orient you.)
+
+ That’s a lot of reading, but ultimately knowing where you’re going is vital. Don’t feel like you need to memorize everything. You’re just trying to gain some familiarity with all of it. Keep a notebook nearby where you can jot down any cool ideas or questions you have along the way.
+
+ PREPPING THE CAMPAIGN : Once you’ve read everything, you can start prepping. But you don’t have to prep everything all at once. Broadly speaking, the Remix is organized into three acts (each of which uses a different scenario structure to remove the “go where the NPC tells you” railroad of the published adventure, as discussed in my review of the book), and you really only need to prep one act at a time.
+
+ So, for example, you can start by just prepping Act I. As the PCs wrap up their investigation in Baldur’s Gate and head towards Candlekeep at the end of Act I, you can start prepping Act II and have it ready by the time they plane shift to Elturel. Similarly, as they wrap things up in Elturel at the end of Act II, you can start prepping Act III and have the hexcrawl ready to go by the time they arrive in Fort Knucklebones.
+
+ ACT I: BALDUR’S GATE reorganizes the investigation into the refugee murders and the Vanthampur cultists into a node-based mystery scenario. Everything has been reorganized and expanded into a robust investigation. The core structure is described in Parts 3 , 3B , and 3C .
+
+ ACT II: HELLTUREL remodels Elturel using a streetcrawl followed by a pointcrawl . The factions and history of the city are also expanded. These structures allow the PCs to freely explore the city, while choosing which factions to ally with and which factions to oppose in their efforts to figure out how the city can be saved.
+
+ ACT III: AVERNUS is built around the Avernian Hexcrawl , which provides a structure for freely exploring the Avernian wastelands. But the primary structure of this act is the Avernian Quest , which requires the PCs to (a) break the Pact, (b) sever the chains holding Elturel, and (c) return Elturel to the Material Plane. There are several ways to achieve each of these goals (allowing the PCs to chart their own course in solving the problem), but it’s likely the Quest for the Dream Machine , in which the PCs need to explore the Avernian Hexcrawl in order to find the parts necessary to repair the dream machine which can restore Lulu’s memories, will play a part.
+
+ A key thematic structure in the Remix is that of faction: The factional strife of Baldur’s Gate is revealed to have a dark mirror in Hell, and there’s a ladder of feuding politics that the PCs will climb from the squabbling gangs of Elturel to the Mad Max-style gang warlords of the wastes to the titanic powers which rule Avernus.
+
+ ADDITIONAL READING: If you’re new here at the Alexandian, you might also find it useful to dive into these articles, as they include deep discussions of topics we’ll be visiting here:
+
+ Three Clue Rule 
+
+ Node-Based Scenario Design 
+
+ Xandering the Dungeon 
+
+ There are many more articles at Gamemastery 101 that you might also enjoy! Please also consider becoming a patron if you’d like to support this type of work in the future!
+
+ COLLECTED EDITION
+
+ Patrons of the Alexandrian can download a complete edition of the Avernus Remix as a bookmarked PDF, including all of the addendums, map patches, and reviews.
+
+ REMIXING AVERNUS: THE COMPLETE COLLECTION 
+
+ Go to Part 1: The Beginning 
+
+ Filed under: Roleplaying Games Comments (67) 
+ Article tags: d&d , descent into avernus , rpg scenarios 
+
+ 67 Responses to “Remixing Avernus”
+
+ John R says: 
+
+ Excited for this project! Have long enjoyed your posts, but your remixes always seem to add an extra wrinkle to your theory posts that enhances them all.
+
+ March 14th, 2020 - 9:48 pm 
+
+ Rob Rendell says: 
+
+ Ha! You’re doing it! This should be excellent 🙂
+
+ March 15th, 2020 - 3:05 am 
+
+ Firox says: 
+
+ I can’t wait! Thank you so much for this!
+
+ March 16th, 2020 - 9:55 pm 
+
+ Anthony Bishop says: 
+
+ I can’t wait for the rest of part 3. I’m getting ready to run this on 4/1/2020 and already love this remix. You are doing great work.
+
+ March 30th, 2020 - 1:08 pm 
+
+ How the Flawed Hooks in Descent Into Avernus Might Make D&D Players Feel Railroaded | DMDavid says: 
+
+ […] work. For ideas, see Merric Blackman’s account of running the campaign, Justin Alexander’s Remixing Avernus, and my own post Improve the Start of Baldur’s Gate: Descent Into Avernus With These 2 Add-On […]
+
+ April 7th, 2020 - 6:24 am 
+
+ David says: 
+
+ Hi!
+
+I am not familiar with your work, yet – but it is awesome!
+
+Do you have a schedule for the remaining articles?
+
+By supporting you on patreon we can have early access?
+
+ April 10th, 2020 - 8:48 pm 
+
+ Justin Alexander says: 
+
+ To be clear up front: I am still writing the Remix. My goal is 2 or 3 articles per week, but I’m currently a little behind schedule as the most recent installment was both larger than I’d anticipated and also needed to be revised when I spotted an error in its design (more details on that over at Patreon).
+
+ So my patrons do get early access in a collected PDF, but obviously only as the material is actually written. There was a point at which that was 3 articles in the future; at the moment it’s 0 articles in the future.
+
+ April 10th, 2020 - 9:00 pm 
+
+ Bill says: 
+
+ Please write more ASAP! This is so much better. I’d pay for this.
+
+ April 27th, 2020 - 5:44 pm 
+
+ Kal says: 
+
+ Brilliantly done. I only wish I’d found your remix before running my Session 0 and Session 1. I’ve done without the refugee story beat because it would be too weird to retcon it, but the rest is working really well in my local game. Your updates also are coming out just in time for my weekly sessions. Thanks so much for making sense of this nonsense and sharing it with us!
+
+ May 5th, 2020 - 1:45 pm 
+
+ Randy says: 
+
+ Great work! Just seeing this as I’m about 10 sessions into DiA and I’m surprised to find you’ve remixed (in different ways) a number of the same things I changed.
+
+ May 10th, 2020 - 7:18 pm 
+
+ D&D - Descent into Avernus 1.2 - Tomek Sokoluk o grach RPG says: 
+
+ […] Justin Alexander […]
+
+ May 26th, 2020 - 6:39 pm 
+
+ Bill Mason says: 
+
+ Our group has jumped to DiA from HotDQ, making the transition in Elturel, and loosely following the Fall of Elturel supplement, with a bunch of homebrew added in to smooth things out. I love your remix, and am hanging on every word. 
+
+ In Elturel, I made TK give a speech that sounds very Trumpian, all about isolationism, beating the Baldur’s Gate trade contingent and of course coming out on top, and justified by a new unseen threat outside the city, he ordered the city gates closed. “Remember the Creed” was shouted by the Elturellian crowd like a MAGA slogan. The PC’s had to fight Hellriders at the north gate to get out of the city. I plan to also make the Cult of Zariel involved in child trafficking as well as refugee profiteering and murder, and really emphasize the fear of refugees within Baldur’s Gate. The idea being that the Cult of Zariel is behind a rising tide of fascism and militarized cultural control, justified by “freedom” and threats to freedom. I’ll be mixing in homophobia, racism (humans first!), with the church of Helm as the unwilling false front/scapegoat for the cult of Zariel. All in the name of law, order, and duty.
+
+ May 29th, 2020 - 8:38 am 
+
+ Nywroc says: 
+
+ Thanks for the amazing work and keep it up!
+
+ July 2nd, 2020 - 12:44 pm 
+
+ Bill says: 
+
+ Y’all got any more of them updates?
+
+ July 9th, 2020 - 6:26 am 
+
+ Heather Davis says: 
+
+ Hello,
+
+ I have been reading and using this for my game but I don’t think anything has been added in awhile? Even if you could just do a quick post with bullet point ideas to help tie it all together it would be greatly appreciated. I know you are busy and I totally get that but this is my first time DMing a game and this guide has vastly improved everything about it.. I would hate to have all of this steam going in and then it just poof, goes away. Either way I really appreciate this remix and your gamemastery posts. They have helped me a lot. Thank you.
+
+ July 15th, 2020 - 3:14 pm 
+
+ Justin Alexander says: 
+
+ @Bill, @Heather: I know! It’s been far too long between updates!
+
+ Short version: It’s been a long month in general.
+
+ Long version: I simultaneously ran into some significant problems with the material itself where I was kind of running my face into a wall. Over the weekend, though, I figured out that the larger of the two problems was actually a sequencing problem; the order I was trying to present the information in was making it impossible to clearly explain anything.
+
+ I was able to make some good progress on 5C and 5D last night. I’m hoping to have those up soon. And I’m hoping with the new sequencing that the stuff beyond that will be relatively straightforward (although I still need to work out the precise details of the new sequencing).
+
+ July 15th, 2020 - 4:10 pm 
+
+ Bill Mason says: 
+
+ This blog is like crack cocaine, man, it’s been really great work. Unfortunately, my campaign has now progressed to the High Hall, players are just about to enter, but our next session isn’t scheduled yet, so maybe I’ll still have time to use your new content! Thanks for all the awesome work!
+
+ July 16th, 2020 - 6:52 am 
+
+ Bill says: 
+
+ WEWEASE ELTUWEL!
+
+ (please)
+
+ July 23rd, 2020 - 7:37 am 
+
+ Daniel says: 
+
+ Exactly the same situation as Heather Davis here. This is my first time DM’ing, so I want to put as much time and love into preparing the campaign as possible. 
+
+ This remix has been an absolute godsend in fixing the many problems DIA has, and I’m absolutely looking forward to your next posts. Thanks again man!
+
+ July 24th, 2020 - 3:02 am 
+
+ Zac says: 
+
+ Such an AMAZING blog. Recently found DiA and started looking into it to DM a game of it at some point soon. Thought the original content was good but clearly had areas where it stumbles. These posts are so incredibly detailed, helpful, insightful and genius.
+
+Keep them coming! Really looking forward to seeing what you do to chapters 2 and 3 🙂
+
+ July 25th, 2020 - 8:51 am 
+
+ Dan says: 
+
+ Heads up: you need to add the 6C URL! Great series!
+
+ August 27th, 2020 - 3:08 pm 
+
+ Timothy Goggin says: 
+
+ Is there anywhere to find where you reccomend doing all of the levelups?
+
+ September 21st, 2020 - 1:33 pm 
+
+ Joaquin says: 
+
+ I know you’re exited with the new campaign, but do you know when you gonna have the next entry of DiA? I’m really excited knowing how it gonna be
+
+ September 22nd, 2020 - 9:10 pm 
+
+ Justin Alexander says: 
+
+ Hopefully within the new few days. I’ve been quietly grinding away on it.
+
+ September 23rd, 2020 - 12:15 am 
+
+ Descent into Avernus – Extra Content – Sarainy says: 
+
+ […] This has been covered in depth by Justin Alexander over at his blog, in the still on-going Remixing Avernus […]
+
+ September 23rd, 2020 - 11:58 am 
+
+ Marcus Schubert says: 
+
+ Oh Lord, I’m really excited for the next entries! The ending of the adventure is not very well wrapped, and I loved how you solved this problem in the previous sections. 
+
+ Cheers!
+
+ October 12th, 2020 - 8:27 pm 
+
+ Alex Dean says: 
+
+ I cant wait for the rest! The story is so much better with your modifications and I am so excited to see how it ends. I have been running my party through it and they are loving it. Hopefully the next sections will be up soon!
+
+ October 19th, 2020 - 8:28 am 
+
+ Tim Tischler says: 
+
+ I am hoping you come out with 7 soon. Your writing has provided a model for how to remix Avernus, and the party just landed in Avernus proper. I think I have good ideas, but I really want to read your thinking!!! Hurry!! 🙂
+
+ November 7th, 2020 - 4:27 pm 
+
+ Zachary Auron says: 
+
+ Your breakdown of this campaign has been so helpful in my preparation to run this for my friends. The way you explained your thought process in such detail was also so helpful for understanding what makes a good role-play scenario, and I am trying to apply your lessons to my other games. Just wanted to chime in that I am also eagerly awaiting the last few entries, and would definitely become a patreon subscriber for early access. Thanks again for all your hard work and insight.
+
+ November 22nd, 2020 - 3:28 pm 
+
+ Yora says: 
+
+ At this point, it seems like all the work that went into this could easily have produced two or three high quality original adventures.
+
+ November 30th, 2020 - 8:33 am 
+
+ Justin Alexander says: 
+
+ @Yora: Honestly, I try not to think about it. There’s a lot of cool stuff here, but the project has consumed far more of 2020 than I thought it would back in March.
+
+ Of course, back in March I didn’t know the apocalypse was literally days away. 😉
+
+ On the flip-side, one of the goals for the Alexandrian is to reach out and provide guidance and advice to new GMs. The remixes help do that. Remixing Avernus has introduced a lot of people to node-based design, adversary rosters, point-crawls, streetcrawls, etc. 
+
+ But, yes, I’d love to be 50,000 words into my Dweredell Trilogy (urbancrawl, hexcrawl, megadungeon) right now.
+
+ November 30th, 2020 - 11:38 am 
+
+ Colin R says: 
+
+ @Justin, I hope you haven’t lost too much time on original work doing the remix. I do want to thank you for doing it as it’s been really valuable to me, but if you were interested in talking through your process for creating original material in the same way I’d be happy to stay subscribed for that, too.
+
+ December 7th, 2020 - 5:08 pm 
+
+ Chris says: 
+
+ Thanks for this series, it reminded me to re-subscribe via patreon.
+
+ I use the official adventures to run D&D on Roll20. For less rules-intensive systems, I mostly do my own stuff, but D&D is just too involved when it comes to the logistics. But so many of them have real problems with basic concepts.
+
+ Descent has such a weak sauce opening … a holy city is dragged into hell, but the PCs only learn of it off-screen? Not only do they not witness this amazing event, they get told third-hand accounts. And are conscripted … also off-screen! It seems inconceivable to waste such a good opportunity, not only for a great scene, but also for roleplaying and the important art of tying characters to the story arc. Can’t really get my head around that decision.
+
+ Still, I committed one of my groups to Descent after finishing Curse of Ravenloft, because “Mad Max in Hell!”, and your series will without doubt be very helpful to paper over the many cracks in the module.
+
+ Keep up the good work!
+
+ December 23rd, 2020 - 6:04 am 
+
+ Luther says: 
+
+ Idyllglen
+
+ Book says it is north of Elturel somewhere.
+
+Any good ideas on where to place it on the Faerun map?
+
+ Thanks.
+
+ Luther
+
+ January 7th, 2021 - 9:13 am 
+
+ Zac says: 
+
+ Any plans on when Parts 7 and 8 are due. I and many others have absolutely loved this remix and I’m so excited to particularly see how you handle the exploration of Avernus.
+
+Thanks Justin 🙂
+
+ February 28th, 2021 - 4:34 pm 
+
+ Trevor says: 
+
+ Do you have a PDF or other printer friendly version of all your content for this remix?
+
+ March 27th, 2021 - 11:13 pm 
+
+ croald says: 
+
+ Justin provides a massive PDF to patrons, https://www.patreon.com/justinalexander/ 
+
+ Costs a whole dollar to get it.
+
+ March 28th, 2021 - 11:11 am 
+
+ Edward P. says: 
+
+ I just started reading this series after seeing that part 7b was published, and I expected that it was about 10 articles in total…. I came to table of contents while reading part 3b. Holy crap this is thorough. I just went and downloaded the pdf and its longer than the actual book. I’m so blown away by this blog. Why doesn’t WoTC pay you to fix their modules before they publish them?
+
+ April 7th, 2021 - 10:34 pm 
+
+ SWatt says: 
+
+ This is so in depth I didn’t even realise it wasn’t finished until I reached the end of the hex key! I just need to hope the updates can stay ahead of my game!
+
+ June 29th, 2021 - 4:12 pm 
+
+ Quinn says: 
+
+ So, I find myself in a pickle. The pickle is that I’ve already started running DiA, and my players are currently halfway through the dungeon of the dead three. Any advice on applying the remix after you’ve started?
+
+ September 7th, 2021 - 4:35 am 
+
+ Justin Alexander says: 
+
+ @Quinn: If nothing else, once you head towards Candlekeep you can basically shift entirely to the Remix with little difficulty.
+
+ For where you are now, take a peek at the revelation list in Part 3C and see if you can, based on what’s happened to your campaign to date, salvage the node-based mystery structure of the Remix.
+
+ Also swing by the Alexandrian Discord . We have an Avernus channel filled with a lot of DMs, some of whom have had your experience and can give you lots of practical advice based on their experience.
+
+ September 7th, 2021 - 10:40 am 
+
+ Jake says: 
+
+ Sorry if this is answered elsewhere in the Remix (I’ve only just started reading it), but do you address the huge amount of setting information on Baldur’s Gate in the appendix of this module? It seems quite detached from the rest of the adventure to me, but I couldn’t help but widen my eyes at how much they actually included – it seems a shame to waste it, but a waste of time to read/learn it if it’s not required.
+
+ October 19th, 2021 - 8:57 am 
+
+ Justin Alexander says: 
+
+ @Jake: The best the Remix does is expand the amount of time the PCs spend in Baldur’s Gate conducting their initial investigations (which will make the material more relevant; in the published adventure, the PCs are likely to spend less than 48 hours in Baldur’s Gate and little or none of it outside of dungeons).
+
+ The gazetteer material is clearly geared towards a full campaign set in Baldur’s Gate (including dark secrets for the PCs). But DiA fundamentally isn’t that campaign.
+
+ October 19th, 2021 - 9:33 am 
+
+ Henry Leveque says: 
+
+ Hello nice work, I have been playing this scenario since March 2020, and I have drawn heavily on your work, even if I have totally reworked some of the events in the story. But I have a question about Zariel’s contract. We agree that if the two parts of the contract are destroyed, the souls of the living Elturians who have been abused are saved, but what about those who have died and found themselves in hell against their will?
+
+Sorry if the question has already been asked. I admit I haven’t read all the comments
+
+Translated with http://www.DeepL.com/Translator (free version)
+
+ November 8th, 2021 - 2:50 am 
+
+ Anthony Pleasant says: 
+
+ Congratulations on finishing the Remix!
+
+ December 15th, 2021 - 5:45 pm 
+
+ Morten Skoglund says: 
+
+ Hi everyone. First of all I want to thank you Justin for creating this vast, crazy resource. Maybe you should write the next books for Wizards 😉 When I was preparing the campaign I was searching high and low on youtube to see if anyone had streamed your resource, but alas. I found none! Then I decided to create my own and share it with everyone who want’s to see all this play out. Here it is, hope you enjoy it:
+
+ https://youtu.be/43aSW4Gx-qE 
+
+ January 13th, 2022 - 5:25 am 
+
+ Nick says: 
+
+ @Justin
+
+Do you have any plans to post a review for Descent into Avernus? I noticed you had reviews for the original adventures of your other remixes and was wondering if you’d do the same here.
+
+ March 21st, 2022 - 5:58 pm 
+
+ colin r says: 
+
+ Nick@47: I’m kind of trying to imagine what you could want from a review that isn’t covered by the above explanation of why Justin undertook the remix. I imagine that after writing 420 pages of dissection of the book, he’s pretty done with it.
+
+ “the adventure has some really cool stuff in it. It’s worth remixing specifically so that you can bring that cool stuff to your table in the best possible way” + “When I started looking at Descent Into Avernus, it was almost immediately clear why people were asking me to remix it. Its structure was badly, badly flawed.”
+
+ March 22nd, 2022 - 9:26 am 
+
+ Nick says: 
+
+ @colin r
+
+Guess he did it anyway. Thanks Justin!
+
+ March 23rd, 2022 - 7:24 pm 
+
+ Fernando says: 
+
+ Just want to say THANK YOU Justin!
+
+I DMed DIA during a 2 year period, and this remix was a really key resource to make sense of the original mess and beeing able to bring a great experience to my players!
+
+As a DM I deeply appreciate your game-design approach, clever insights and enormous effort in putting this together!
+
+ April 25th, 2022 - 9:12 am 
+
+ Tony says: 
+
+ My players have found the shield, and know a bit more than I had hoped (long story) they know it is the shield of the hidden lord, and that gargauth speaks through it. They are probably ambiguous on whether he is IN it or not. Know he is pit fiend. And know that he spent a lot of time with Kreeg. They will I’m sure continue to further try to interrogate the shield about the fate of Elturel, and whether he or Kreeg had anything to do with it.
+
+ I dont want to spoil the reveals with the puzzle box and sylvira/trax in candlekeep. but i dont think Garg should outright lie either. Any thoughts on deceptively handling all the heros questions from now until candlekeep?
+
+ June 6th, 2022 - 2:10 pm 
+
+ RazorChain says: 
+
+ I stumbled upon this after I started running the adventure. I normally don’t run published material because it’s poorly written and doesn’t make much sense but I’ve been trying to salvage Descent into Avernus.
+
+ I took another route where the Vanthampurs were using the cult of the Dead Three to remove political opposition and that story arc culumnated in that Vaaz tried to blow up the Parliment of Peers using smokeless powder stolen from Felogyr’s Fireworks. After the PC’s saved the Parliment they were hailed as heroes but after they had showdown with Amrik and killed him with the help of Mortlock. After that Thalamra has been discrediting them using the Baldur’s Mouth.
+
+ At the same time I took some story arcs from Avernus Rising where the Cult of Zariel is killing off descendents of the original Hellriders and the PC’s are trying to investigate that at the same time as two of the PC’s are on the kill list. But I’m reading through this for further inspiration.
+
+ June 22nd, 2022 - 6:17 am 
+
+ Cory says: 
+
+ Sharing the sentiment with others on here. I will be DMing this campaign as my first ever and I’m so glad I’ve found your website it has been such an absolute gem not just for fixing up the story but how to properly structure and run the game as a whole. Thank you so much for all you do Justin, as soon as I am in a position to subscribe to your patreon, I will. Thanks a bunch mate. Much love from Aotearoa/New Zealand
+
+ July 28th, 2022 - 1:14 pm 
+
+ EighthNine says: 
+
+ Anyone know where Lulu meets the kenku in the remixed order of things?
+
+ August 9th, 2022 - 5:39 am 
+
+ Justin Alexander says: 
+
+ @EighthNine: She visited Fort Knucklebones while wandering Avernus after escaping from the Cyst and before getting doused with Styx water at the Wandering Emporium.
+
+ August 10th, 2022 - 1:54 am 
+
+ Jess says: 
+
+ This is an incredible series of articles and the amount of thought and care that went into this remix is MIND-BOGGLING. Despite having absolutely no group to play it with (I’m DMing a Star Wars Saga Edition group right now), I’m now intrigued by this idea and trying to resist finding players and starting this immediately.
+
+ November 28th, 2022 - 12:31 pm 
+
+ How Wizard’s 1.1 OGL is a portent of what’s to come. – CaseyCrits says: 
+
+ […] and unacceptable Descent into Avernus is as a product people were expected to pay $60 for see Justin Alexanders’ review and remix of it.And please don’t see this as blind hate, I love Descent into Avernus, every single idea […]
+
+ January 10th, 2023 - 11:58 am 
+
+ Enar says: 
+
+ Hi Justin,
+
+I recently finished my own DiA campaign with a group of 5 players, over 2 years. I just wanted to say how grateful I am for the rework you have done here. Thanks to it (in which I have based plenty of elements on my campaign) we were able to rescue a content-lacking campaign and turned it in a memorable one. Your remix has turned to be the best companion.
+
+Once again, thank you!
+
+ April 17th, 2023 - 2:34 am 
+
+ ShotMessenger says: 
+
+ Thank you for the work you put into this. You get a lot of praise in the comments, deservedly so, but I do want to offer constructive criticism. I only offer it because I like what you are doing and want it to be as useful as possible, because I honestly do care, not because I just want to be cynical or critical. 
+
+ Personally, I find the layout of the information to be so confusing and nearly impossible to refer back to easily. I’ve been using this for over a year, almost weekly, and still find it nearly impenetrable. I feel like there are many different intentions being mixed together… the intention to point out all the actual and perceived problems with the original; the intention to teach people how to build their own games and campaigns; the intention to present your own version of the adventure; the intention to provide tons of obscure lore and additional information for the few who might want to go even further than you have. 
+
+ I would have much, MUCH rather have had these various intentions separate from one another. Absolutely point out all the problems with the original, but keep that contained to one page or one per chapter, rather than mixing together what’s wrong in the original and what you recommend for the remix. When I’m running the game, I just want quick and easy access to your improved version, not all the other detritus we’re planning to leave behind on the cutting room floor, and not three other alternative narratives that just end up confusing me and giving me analysis paralysis. 
+
+ You could provide a simple, clear, concise retelling, chapter by chapter, the way you would have done it, without all the tangents into how [xandering] works or spreading the encounter table over four separate webpages, or sprinkling in completely alternate histories to the events you have already described as canon. If there is a bunch of obscure lore that true deep-divers might want to use, if there are alternate histories you also considered but ultimately did not use, you could provide that as footnotes on a completely different page. If someone wants to go that deep and make a bunch of additional changes to what you ultimately recommend, they will follow those links and do that homework while the rest of us would get a much cleaner presentation of the adventure as you would have written it.
+
+ The idea would be to have an easily digestible version of this for the DM who just wants to play the adventure as it would have been written by The Alexandrian, without all the game mechanics explanations and having to follow multiple rabbit holes of links. Every time I open this remix, I immediately end up with at least a dozen tabs open trying to figure out just one small section of the adventure.
+
+ I can envision a few ways to organize it, but I think something like:
+
+– Chapter 2 –
+
+ – What is wrong with the original (point out all the problems)
+
+ – How I’d run it instead (simple and clean way to run it instead)
+
+ – Additional lore and alternatives (for the deep-divers)
+
+ – Explaining the game mechanics used (to learn about game design)
+
+ In this scenario, I can read part 1 about what is wrong, then practically never have to think about it again. I can read part 2 and know exactly how you would have done those things differently, and I can use this page during my game for a clean and clear reference. The other two parts, maybe I’ll read, maybe not, but they’re there for others who are interested, and most importantly, they don’t clutter any of the information you really need to run the adventure. I feel like right now, all that information is just kind of jumbled together and it forces me to open about a dozen tabs and ignore about 3/4 of what is presented when I just want to run the game.
+
+ That’s it, that’s my big gripe, honestly meant to be constructive. I don’t want to inflame the internet. I am really glad you did all this, I think my DIA campaign has been much better because of your remix, I just wish it had been organized differently so I can just open a page and see only what I absolutely need to see, without all the extraneous tangents, deep dives, obscure alternate lore that most people will never use, multiple links to follow, understanding Euclidian fractional derivative number randomization, multiple alternate ways to arrange a chart rather than just the one way that you would recommend, trying to find all Lulu’s memories spread over numerous different pages, etc. Thanks for listening.
+
+ September 15th, 2023 - 10:37 am 
+
+ Kicking off D&D’s Descent into Avernus – Character Creation – Family Game Night Adventures says: 
+
+ […] them in spades. A number of reddit articles in the Descent into Avernus subreddit and the website The Alexandrian doing a full remix of the adventure a few years […]
+
+ March 5th, 2024 - 9:32 am 
+
+ Kopez says: 
+
+ Thank you for your work on “Remixing Avernus.” It clarified many issues I had and provided new ideas for running “Descent into Avernus.” However, I encountered a few significant problems.
+
+ First, your website’s design feels outdated, reminiscent of the 90s. Navigation is cumbersome as I have to return to the Remixing Avernus Introduction page to move between sections. Additionally, finding “Remixing Avernus” on your site is challenging; I often resort to Googling it since it’s not easily accessible directly from thealexandrian.net. This makes it difficult to reference your material during a session.
+
+ The original adventure book is 260 pages, and you’ve written an additional 100-150 pages to explain what needs fixing. This expands the material to nearly 400 pages, adding content without simplifying or removing anything. Moreover, your work is incomplete: it offers ideas but lacks essential components like maps or read-aloud text for players, which would make running Avernus easier.
+
+ The section on Zariel’s history is overly detailed and tedious. It would be more helpful if you provided concise read-aloud text for Lulu’s dreams instead of lengthy backstory. Implementing your ideas requires a significant amount of additional work, making it impractical for those with demanding jobs and family commitments.
+
+ While there is valuable content in “Remixing Avernus,” it demands too much effort to integrate into a game. A typical person with a busy schedule looking to DM a fun game at the end of the week should read it for clarity but be prepared for the substantial time investment needed to implement your ideas.
+
+ May 17th, 2024 - 2:31 am 
+
+ Justin Alexander says: 
+
+ Sorry, Kopez. I’m afraid you may be in the wrong place. If you want a campaign you can run straight out of the box without implementing a remix, I think you’re going to have to look at non-WotC options. (Check out Mike Shea’s Grendelroot or Monte Cook’s Banewarrens for good D&D 5E options.)
+
+ Remixing Avernus can be accessed from the RPG Scenarios page, but I sympathize with the idea that a website can be a tough format for this type of material. You might consider checking out the downloadable files available on my Patreon .
+
+ May 20th, 2024 - 2:50 pm 
+
+ Joana says: 
+
+ Oh wow thanks for this! I’m not running an adventure but I’m writing a fanfic that is supposed to be post BG3 and I was trying to figure out how Descent Into Avernus fits with the game. Your remix will be a lot of help, thank you!! <3
+
+ October 3rd, 2024 - 5:35 pm 
+
+ Carol X. says: 
+
+ For @Kopez, I usually try to read sections in mobile devices, and the website makes it difficult because it’s not mobile friendly. For Android users, I found it best to use the “readable format” button that appears beside the address bar – that makes it a lot cleaner.
+
+I would welcome (and even help) in a CSS redo to make the website mobile friendly.
+
+ November 15th, 2024 - 11:58 am 
+
+ Rast says: 
+
+ While I applaud your work and dedication to working on this, I can’t in good faith recommend it to anyone.
+
+ I’m usually a DM, however I’m a player in a campaign where the DM has decided to use the remix. We’re well over a year and a half into the campaign and just left Fort Knucklebones. Over half the party wants to quit out of frustration that NOTHING makes sense. We feel like we’re following a rail but at the same time, have no information on where that rail is going or why we’re on it.
+
+ Lulu’s rewrite is the worst part of this. We’re so frustrated with the character and their inability to remember anything my character straight up attacked her out of frustration at one point only to find out she has magical plot armor and can’t be harmed by magic.
+
+ At this point we’re about to tell the DM we don’t even want to finish the adventure because of how boring every single session is.
+
+ July 19th, 2025 - 2:56 am 
+
+ Justin Alexander says: 
+
+ @Rast: ironically, the problems you’re describing are from the published adventure. The Remix specifically fixes them.
+
+ Embracing that irony: Thanks for the endorsement!
+
+ July 19th, 2025 - 10:10 am 
+
+ Israel says: 
+
+ Best work involving the Descent into Avernos adventure on the entire internet! <3
+
+ June 9th, 2026 - 9:51 am 
+
+ Leave a Reply
+
+ Name (required) 
+
+ Mail (will not be published) (required) 
+
+ Website 
+
+ XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> 
+-->
+
+ you MUST enable javascript to be able to comment 
+
+ Δ 
+
+ JUSTIN ALEXANDER
+ About - Bibliography 
+ Acting Resume 
+
+ROLEPLAYING GAMES
+ Gamemastery 101 
+
+ RPG Scenarios 
+
+ RPG Cheat Sheets 
+
+ RPG Miscellaneous 
+
+ Dungeons & Dragons 
+
+ Ptolus: Shadow of the Spire 
+
+ Alexandrian Auxiliary 
+
+ Check These Out 
+
+ Essays 
+
+ Other Games 
+
+ Reviews 
+
+ Shakespeare Sunday 
+
+ Thoughts of the Day 
+
+ Videos 
+
+ Patrons 
+
+ Open Game License 
+
+ Bluesky • Mastodon • Twitter 
+
+ Archives
+ Archives 
+
+ Select Month 
+ August 2026 (13) 
+ July 2026 (13) 
+ June 2026 (10) 
+ May 2026 (10) 
+ April 2026 (13) 
+ March 2026 (8) 
+ February 2026 (10) 
+ January 2026 (9) 
+ December 2025 (16) 
+ November 2025 (12) 
+ October 2025 (16) 
+ September 2025 (14) 
+ August 2025 (11) 
+ July 2025 (17) 
+ June 2025 (16) 
+ May 2025 (11) 
+ April 2025 (14) 
+ March 2025 (14) 
+ February 2025 (16) 
+ January 2025 (16) 
+ December 2024 (13) 
+ November 2024 (11) 
+ October 2024 (13) 
+ September 2024 (14) 
+ August 2024 (16) 
+ July 2024 (16) 
+ June 2024 (14) 
+ May 2024 (16) 
+ April 2024 (17) 
+ March 2024 (17) 
+ February 2024 (16) 
+ January 2024 (18) 
+ December 2023 (15) 
+ November 2023 (16) 
+ October 2023 (14) 
+ September 2023 (16) 
+ August 2023 (12) 
+ July 2023 (12) 
+ June 2023 (13) 
+ May 2023 (19) 
+ April 2023 (15) 
+ March 2023 (15) 
+ February 2023 (13) 
+ January 2023 (16) 
+ December 2022 (14) 
+ November 2022 (15) 
+ October 2022 (13) 
+ September 2022 (15) 
+ August 2022 (15) 
+ July 2022 (16) 
+ June 2022 (17) 
+ May 2022 (19) 
+ April 2022 (19) 
+ March 2022 (12) 
+ February 2022 (9) 
+ January 2022 (14) 
+ December 2021 (10) 
+ November 2021 (13) 
+ October 2021 (11) 
+ September 2021 (13) 
+ August 2021 (13) 
+ July 2021 (11) 
+ June 2021 (14) 
+ May 2021 (12) 
+ April 2021 (12) 
+ March 2021 (14) 
+ February 2021 (14) 
+ January 2021 (18) 
+ December 2020 (16) 
+ November 2020 (13) 
+ October 2020 (16) 
+ September 2020 (13) 
+ August 2020 (11) 
+ July 2020 (12) 
+ June 2020 (12) 
+ May 2020 (15) 
+ April 2020 (13) 
+ March 2020 (13) 
+ February 2020 (12) 
+ January 2020 (13) 
+ December 2019 (7) 
+ November 2019 (6) 
+ October 2019 (8) 
+ September 2019 (15) 
+ August 2019 (9) 
+ July 2019 (8) 
+ June 2019 (9) 
+ May 2019 (15) 
+ April 2019 (20) 
+ March 2019 (11) 
+ February 2019 (13) 
+ January 2019 (12) 
+ December 2018 (5) 
+ November 2018 (19) 
+ October 2018 (20) 
+ September 2018 (16) 
+ August 2018 (18) 
+ July 2018 (20) 
+ June 2018 (17) 
+ May 2018 (18) 
+ April 2018 (7) 
+ March 2018 (14) 
+ February 2018 (16) 
+ January 2018 (19) 
+ December 2017 (1) 
+ October 2017 (1) 
+ September 2017 (2) 
+ August 2017 (4) 
+ July 2017 (4) 
+ June 2017 (2) 
+ April 2017 (7) 
+ February 2017 (1) 
+ December 2016 (1) 
+ November 2016 (5) 
+ October 2016 (12) 
+ September 2016 (7) 
+ August 2016 (8) 
+ June 2016 (1) 
+ May 2016 (8) 
+ April 2016 (5) 
+ March 2016 (5) 
+ February 2016 (15) 
+ January 2016 (3) 
+ December 2015 (2) 
+ November 2015 (12) 
+ October 2015 (12) 
+ September 2015 (6) 
+ August 2015 (14) 
+ July 2015 (13) 
+ June 2015 (14) 
+ May 2015 (19) 
+ April 2015 (18) 
+ March 2015 (25) 
+ February 2015 (28) 
+ January 2015 (29) 
+ December 2014 (20) 
+ November 2014 (13) 
+ October 2014 (10) 
+ September 2014 (11) 
+ August 2014 (8) 
+ July 2014 (7) 
+ June 2014 (3) 
+ May 2014 (6) 
+ April 2014 (3) 
+ February 2014 (4) 
+ January 2014 (1) 
+ December 2013 (3) 
+ November 2013 (1) 
+ October 2013 (7) 
+ September 2013 (11) 
+ August 2013 (20) 
+ July 2013 (27) 
+ June 2013 (2) 
+ April 2013 (4) 
+ March 2013 (6) 
+ February 2013 (11) 
+ January 2013 (5) 
+ December 2012 (7) 
+ November 2012 (14) 
+ October 2012 (12) 
+ September 2012 (3) 
+ August 2012 (6) 
+ July 2012 (2) 
+ June 2012 (14) 
+ May 2012 (21) 
+ April 2012 (22) 
+ March 2012 (4) 
+ February 2012 (17) 
+ January 2012 (31) 
+ December 2011 (18) 
+ November 2011 (25) 
+ October 2011 (28) 
+ September 2011 (27) 
+ August 2011 (27) 
+ July 2011 (8) 
+ June 2011 (16) 
+ May 2011 (22) 
+ April 2011 (28) 
+ March 2011 (38) 
+ February 2011 (29) 
+ January 2011 (14) 
+ November 2010 (6) 
+ September 2010 (4) 
+ August 2010 (7) 
+ July 2010 (20) 
+ June 2010 (22) 
+ May 2010 (17) 
+ April 2010 (1) 
+ January 2010 (11) 
+ December 2009 (3) 
+ November 2009 (2) 
+ September 2009 (1) 
+ August 2009 (2) 
+ July 2009 (3) 
+ June 2009 (3) 
+ May 2009 (2) 
+ April 2009 (8) 
+ March 2009 (30) 
+ February 2009 (29) 
+ January 2009 (11) 
+ December 2008 (1) 
+ November 2008 (4) 
+ October 2008 (22) 
+ September 2008 (23) 
+ August 2008 (9) 
+ July 2008 (23) 
+ June 2008 (23) 
+ May 2008 (31) 
+ April 2008 (1) 
+ March 2008 (7) 
+ February 2008 (2) 
+ January 2008 (2) 
+ December 2007 (1) 
+ November 2007 (4) 
+ October 2007 (7) 
+ September 2007 (7) 
+ August 2007 (10) 
+ July 2007 (13) 
+ June 2007 (7) 
+ May 2007 (11) 
+ April 2007 (6) 
+ March 2007 (5) 
+ February 2007 (4) 
+ January 2007 (2) 
+ December 2006 (5) 
+ November 2006 (6) 
+ June 2006 (9) 
+ May 2006 (5) 
+ April 2006 (9) 
+ March 2006 (25) 
+ November 2005 (6) 
+ October 2005 (3) 
+ August 2005 (17) 
+ July 2005 (25) 
+
+ Recent Posts
+
+ Chaos Lorebook: The Magi of Chaos 
+
+ Ex-RPGNet Review: A Song of Ice and Fire 
+
+ Chaos Lorebook: The Earthbound Demons 
+
+ Ex-RPGNet Review: Penumbra Backdrops 
+
+ Chaos Lorebook: The Assassins of Chaos 
+
+ Recent Comments
+ SvenFu on Mothership: Thinking About Combat 
+ Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) 
+ On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal 
+ Robert on Chaos Lorebook: The Magi of Chaos 
+ Justin Alexander on Ptolus: Running the Campaign – From Table to Page 
+ BP on Ex-RPGNet Review: A Song of Ice and Fire 
+ Remus on Some Thoughts on Swords & Sorcery 
+ BP on Ex-RPGNet Review: A Song of Ice and Fire 
+ Ben Ferguson on Ptolus: Running the Campaign – From Table to Page 
+ Jake on Ex-RPGNet Review: A Song of Ice and Fire 
+
+ Author
+ Read Now! - Audio Book 
+
+Author
+
+ PDF Edition 
+
+ City Supplement 1: Dweredell 
+
+ City Supplement 2: Aerie 
+
+ City Supplement 3: Anyoc 
+
+ Rule Supplement 1: Mounted Combat 
+
+ Adventure: Complex of Zombies 
+
+ Adventure: The Black Mist 
+
+ Spells of Light and Darkness 
+
+ Mythos Audio Library: Call of Cthulhu 
+
+ Copyright © The Alexandrian . All rights reserved.

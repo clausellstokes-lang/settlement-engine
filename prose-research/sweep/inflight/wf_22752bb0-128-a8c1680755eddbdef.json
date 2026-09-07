@@ -1,0 +1,38 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i30-44",
+ "lines": 74,
+ "firstTs": "2026-09-06T16:52:50.043Z",
+ "lastTs": "2026-09-06T16:57:10.759Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 16,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+  "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+  "https://franwilde.wordpress.com/2014/11/04/ctb-robin-hobb/",
+  "https://www.locusmag.com/1998/Issues/01/Hobb.html",
+  "https://www.locusmag.com/2005/Issues/12Hobb.html",
+  "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+  "https://fantasy-faction.com/2013/robin-hobb-interview-part-two",
+  "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/how-to-write-compelling-characters-panel-dragonsteel-nexus-2024",
+  "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+  "http://web.archive.org/cdx/search/cdx?url=newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm&output=text&limit=20&filter=statuscode:200",
+  "https://web.archive.org/web/20220630012930id_/https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All fifteen checked against raw page text. Writing the checkpoint file.",
+ "run": "wf_22752bb0-128",
+ "agent": "a8c1680755eddbdef",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-a8c1680755eddbdef.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i30-44.json",
+  "exists": true
+ }
+}

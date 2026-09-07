@@ -1,0 +1,405 @@
+
+
+ Posthistory 201 – Ultan's Library
+
+ Skip to the content
+
+Home
+
+Articles
+
+Book of the New Sun
+
+Fifth Head of Cerberus
+
+Latro (Soldier) novels
+
+Book Reviews
+
+Interviews
+
+News
+
+About
+
+Contributors
+
+Search
+
+Home
+
+Articles
+
+Book of the New Sun
+
+Fifth Head of Cerberus
+
+Latro (Soldier) novels
+
+Book Reviews
+
+Interviews
+
+News
+
+About
+
+Contributors
+
+Posthistory 201
+
+By Michael Andre-Driussi
+
+On 6 July 2020
+
+In Articles, Book of the New Sun, Featured, Gene Wolfe, Latest
+
+In this new study of how human history is measured and portrayed in Gene Wolfe’s Solar Cycle, Michael Andre-Driussi reassesses the subject of his earlier essay “Posthistory 101” (originally published in Extrapolation, Vol. 37, No. 2,1996) and examines the textual evidence for estimating the duration of the Autarchy.
+
+1: A NEW MODEL
+
+Let me propose the following model for the underlying structure of Urth history as depicted in Gene Wolfe’s Solar Cycle:
+
+Prehistory (before starflight)
+
+History (Urth’s galactic empire)
+
+Posthistory
+
+The text gives us starting- and end-points for the this tripartite structure: Apu-Punchau at the beginning and the Deluge at the end.
+
+Most of the details available are either prehistoric (from Apu-Punchau to the picture of the Apollo astronaut on the Moon) or posthistoric (Era of the Monarch Typhon and the subsequent Age of the Autarch).
+
+The historic period of galactic conquest by Koreans includes the terraforming of Mars, Venus, and the Moon into Verthandi, Skuld, and Lune. It has a decline and fall, I believe. In any event, Typhon plans to create or recreate a galactic empire.
+
+Jonas now shines for me as the man of history, in the Urth sense described above. Previously I had grasped that he shared common threads with us prehistoric readers: he has read Lewis Carroll’s Through the Looking-Glass, he knows the Greek myth of Theseus and the Minotaur, and he is accurate in his comments on the European Middle Ages. In this respect he is our stand-in, our surrogate in Severian’s Commonwealth.
+
+But now I see Jonas was there at the beginning of history: he saw Citadel Hill when it was the bustling Port of Urth, he knew Nessus under its earlier name, and he knows why the Wall was built (probably as a containment device to keep hazards in, rather than as a protection against things from outside). Jonas went up in his rocket ship and participated in the galactic expansion, but when that same ship came back, history was over, there was no longer a port on Urth, and they crash-landed the rocket somewhere in the Commonwealth.
+
+I now believe that the enigmatic Kim Lee Soong was the navigator of his ship, and the poignancy is that Jonas has found the long-time descendants of his old friend imprisoned in the antechamber of the House Absolute.
+
+The text often emphasizes the similarities between Jonas and Hethor, and I believe they are contemporaries, but Hethor went onto the Big Ship and adapted to starsails, whereas Jonas stayed with rockets.
+
+When Jonas says the city was not called Nessus yet because it did not poison the water, it now seems crystal clear to me that the poisoning of the water is a direct result of technological decline. That is, it was a metropolis of the high population density only possible through 20th century technology for water treatment. The technology fell until finally the city had to move upstream to avoid its own filth.
+
+2: THE AUTARCHIAL TIME
+
+2.1 Overview
+
+In “Posthistory 101” and Lexicon Urthus I stated that the time from Ymar to Severian was about a chiliad. Recent reading suggests that the range is actually between one thousand and thirty-thousand years, most accurately “many chiliads,” which means “more than three chiliads” and yet it is probably unknowable beyond that.
+
+2.2 Revising my estimate
+I had been working on a chapter guide to The Book of the New Sun for many months, and thus I was engaged with the text again.
+
+Nigel Price and I were chatting in email about the timespan of Urth’s history. We agreed with the basic principle that Severian’s post-historic vantage point means that all time is vague. In this Wolfe goes against the Vancean grain of numbered Aeons known as history by the grubbing wizards of the dying Earth, as in the following examples from Rhialto the Marvellous (1984):
+
+During the 17th Aeon, a land-bridge rises across the Straits of Garch…
+
+And:
+
+For double security I reverted the object to the 16th Aeon…
+
+Then Nigel asked the simple question of why I was so certain that the Age of the Autarchy was about a thousand years. This proved surprisingly difficult to answer, because it turns out I had not adequately cited the source text for that detail in my essay “Posthistory 101”.
+
+After putting in some research, it seems that my millennium autarchy (hereafter “1K”) was following the model put forth by Vodalus in his recruitment pitch to Severian:
+
+“Has it never struck you that mankind was richer by far, and happier too, a chiliad gone than it is now?” (II, chap. 10)
+
+This statement strongly implied to me that the autarchs had reigned for about a thousand years. For more context, I assumed that the exultant Vodalus was as well-educated as Thecla, so he might plausibly know such a thing. Furthermore, Vodalus was not presenting himself as a “reformer” but as a revolutionary who would restore Urth to a former glory of pre-Autarchial times.
+
+In addition to that line from Vodalus, I was perhaps unduly influenced by a statement from Gene Wolfe in a 1983 interview by Robert Frazier, where two lines near the end go as follows:
+
+RF: Perhaps we could end this by telling something about Severian which doesn’t end up in the books [The Book of the New Sun].
+
+GW: There was a time when Severian encountered assassins in the Secret House who had come to kill Ymar, an autarch a chiliad dead. (Peter Wright, Shadows of the New Sun, p. 55)
+
+Based, then, on Vodalus’ and Wolfe’s comments, I took the 1K model as being solid beyond reasonable questioning.
+
+But then I found another timespan model, this time coming from Agia, of all people. She is a commoner, with no education. As she walks toward the Botanic Gardens she is larking along in flirtatious banter with Severian, but it turns out in hindsight that many of her statements are prophetically true.
+
+At one point she says about the Conciliator: “Then there is nothing to prevent him, from a position, say, of thirty thousand years ago, coming into what we call the present” (I, chap. 19).
+
+This is highly specific. She is saying that the era of the Conciliator was thirty chiliads back (hereafter “30K”).
+
+Initially there is no solid link between the time of the Conciliator and the era of Typhon. This changes in The Urth of the New Sun, where it is established that the Conciliator met the Monarch.
+
+2.3 Narrowing the range
+
+The range in these two models is from one to thirty chiliads. In an attempt to narrow that down a bit, I set upon a brute force method of searching for the terms “chiliads,” “thousand years,” “ages,” “aeons,” and “eons,” in order to sift for further clues. (A trivial task now, with e-text.) My results are summarised in the following section.
+
+3: THE LANGUAGE OF TIME
+
+CHILIADS
+
+Jonas to Severian: “Once I read a history. I don’t suppose you know anything about it. So many chiliads have elapsed here” (II, chap. 16). This statement is generic. Jonas is probably referring to the “post-historic” nature of Severian’s culture, and/or the technological decline evidenced by the fact that Urth’s “(space)port” was missing.
+
+Cyriaca to Severian about her uncle at the Library: “It was a book no one had opened, as he believed, for a chiliad” (III, chap. 6). Since the Library was formed by Typhon, then this line can be read to support the 1K model, but of course it supports the 30K form as well.
+
+Severian to Typhon on the Conciliator: “He has been dead for many chiliads” (III, chap. 25). This might be honest, perhaps based on what Agia had said, but there is a strong case for dissimulation here.
+
+Severian on Typhon: “The heart that had not served him for so many chiliads ceased to beat” (III, chap. 26). An attempt at dissimulation would not work against Typhon at this point so this one cannot go into the 1K pile. It is too non-specific to go into the 30K pile, however. (Too bad Severian did not use “several,” since it seems that he always means “three” in that case!)
+
+Severian as Conciliator to his followers: “To the ice of ten chiliads will be added the ice of the winter now almost upon us” (V, chap. 27). This line is ambiguous for bringing in ice time. On the positive side, he definitely knows he is early in the Autarchy at that point, I think.
+
+Severian returned to the House Absolute, presumably at the eleventh year of his reign. Looking at the dead assassin, he is tempted to “replace the knife I had lost so many chiliads ago” (V, chap. 41, 292). Since he had just come from the Typhon Era, the knife he refers to is the one he drove into Typhon’s table (V, chap. 39, 275). This item cannot go in the 1K pile.
+
+THOUSAND YEARS
+
+Agia to Severian on the Conciliator as quoted above: source of 30K model.
+
+The aquastor Malrubius regarding the second time ship: “its range is but a few thousand years” (IV, chap. 31). Since this likely means that the mausoleum builder is alive in that time frame of a few thousand years in the past, it implies that the mausoleum builder’s era is there, which would require the Autarchial Age to be many chiliads. These speculations suggest it cannot be added to the 1K pile.
+
+AGES
+
+Severian about the Atrium of Time: “No doubt because the frost of these latter ages entering the tunnel below had heaved its foundations” (I, chap. 4). Interesting that the “ages” here are shorter than the autarchial age.
+
+Agia about the Wall: “it has stood through a dozen ages” (I, chap. 25). Too ambiguous for use, but does use a figure (12!).
+
+Severian on duelling: “Those ages that have outlawed it (and many hundreds have, by my reading) have replaced it largely with murder” (I, chap. 27). This case seems to conflate “ages” with “societies” or maybe “reigns.” For example, we look to Wikipedia under “Duel” and see that Italy outlawed it in 1215, and the Holy Roman Empire outlawed it in 1650, etc. Still, he is talking about many hundreds of units here, whatever their actual duration.
+
+Jonas: “what they called the dark ages” (II, chap. 16). Based upon the points he gives, this is an anchor to the early middle ages (AD 500 to 1000), a span of 500 years. Hmm, so with the plural, each “age” of the dark ages might be 100 years? Hard to say!
+
+Severian: “costumes drawn largely from remote ages” (II, chap. 23).
+
+Severian on towers: “of metal so closely fitted that they had, ages ago, diffused into one another” (II, chap. 30). Another case where the multiple “ages” are tucked within the Autarchial Age.
+
+Merryn on the Cumaean and the stone town: “She is very old, but this city was devastated whole ages before she came to be” (II, chap. 31). The Stone Age/Bronze Age stone town seems to be a far point in time from the Autarchial Age, but “whole ages” seems (to me at least) less than “dozens of ages” or “hundreds of ages.”
+
+Appendix to Volume II: “An age is the interval between the exhaustion of some mineral or other resource in its naturally occurring form (for example, sulfur) and the next” (301). This note slyly shifts from the standard models of “materials of use” (Stone Age, Iron Age, Steam Age) to the 1970s concern for “resource depletion” (petroleum, uranium, etc.). While the Bronze Age lasts something like 2,000 years and the Steam Age around 145 years, the depletion schedule remains only theoretical. The text is plain that the citadel wall is made of unsmeltable metal, and that some things called “metal” are really more like cloth, etc.
+
+About seeds that “sink to the bottom of Gyoll and remain there for whole ages of the world” (III, chap. 11). Too vague for my task.
+
+Severian about his narrative: “I shall call it The Book of the New Sun, for that book, lost now for so many ages, is said to have predicted his coming” (IV, chap. 38). Could be used for 1K pile or 30K pile.
+
+Conciliator to Typhon: “and whole ages of the world will stride across it before my coming reawakens you to life” (V, chap. 39). “Whole ages” being equated with 30K, or at least “many chiliads.”
+
+On the estimated time of arrival for the White Fountain: “no matter how fast I drew my star to me, it was so distant that whole ages of the world would pass before it reached us” (V, chap. 40).
+
+Vulcanism: “In ages when men were only higher beasts, there were indeed such mountains” (V, chap. 42).
+
+“After ages of Urth, a bold man forced his way into that temple” (V, chap 47).
+
+The three Hierodules to Severian in the House of Day: “Whole ages of the world have passed since we’ve seen you” (V, chap. 50). The span they refer to is from Severian’s first year to the era of Apu-Punchau. The usage here resembles that in the earlier example involving the Cumaean.
+
+“Age of the Autarch” is used by Wolfe only in his article “Cavalry in the Age of the Autarch.”
+
+So “ages” are all over the place, which is especially confusing when relating to governments or reigns or something like that.
+
+4: INDICATORS OF TIME
+
+Here are some more terms (given in upper case) and concepts relating to the passage of time which Wolfe uses in The Book of the New Sun and related texts:
+
+Chain of civilizations: Wolfe writes, “in Severian’s time for the scholar-heirs of a sequence of civilizations that may be over a million years old” (“Books in The Book of the New Sun,” Wright’s Shadows of the New Sun, 195). Note that a million years = 1,000 chiliads.
+
+Fossilization time: minimum 10,000 years. (Regarding the cliff-exposed city as a natural fossil.)
+
+AEONS:
+
+“pounded to powder by aeons of tumbling in the…sea” (I, chap. 16).
+
+“the world is ordered to some plan…or one derived during the billion aeons of its existence” (III, chap. 27).
+
+“Ages are aeons to us” (III, chap. 33). [Good to know that aeons are greater than ages!]
+
+“for so many aeons” (V, chap. 21).
+
+“among the fallen towers [of the undersea city]…treasures…had withstood the passing of aeons” (V, chap. 48).
+
+EONS:
+
+“to have walked among us eons ago” (I, chap. 29).
+
+“perhaps, [he is separated from his readers] by the abyss of eons” (II, chap. 4).
+
+“the eons [for the manapes] of struggles in the dark” (II, chap. 6).
+
+“In the earliest eons he [Apu-Punchau] had appeared” (II, chap. 31).
+
+“substance of the tiles [cliff city] in eons past” (III, chap. 14).
+
+“but during the eons of its existence [telecommunications], it laid upon him a spell” (IV, chap. 26).
+
+The first instance of “eons” is especially interesting. This is Severian talking to Agia about the Conciliator, where he uses “eons” and she replies with “thirty thousand years,” which suggests that an eon could be around ten thousand years.
+
+5: JONAS
+
+When Jonas refers to “the dark ages” (II, chap. 16, 137), I am unsure as to his context. Still, he is talking very specific points:
+
+king elected at Marchfield (AD 509).
+
+counts appointed by kings (AD 450-751).
+
+“baron” only a freeman of Lombardy (Old High German 750-1050).
+
+Jonas seems to be highlighting that the Early Middle Ages, or “the Dark Ages”, were only five hundred years, and had these meritocratic qualities, whereas the High Middle Ages and Late Middle Ages, lasting 250 years each, showed improvements in some ways but positions became inherited. So the context seems to be, “I am shocked to find that this Autarchial Age has lasted longer than the Middle Ages,” which would move the scale from the one thousand years to the multi-thousand years model.
+
+Urth cannot climb up out of the pit of its own “Middle Ages” because resources have been so comprehensively depleted.
+
+6: POSTHISTORY
+
+What can we conclude from this survey? Does the period that I have described as “Posthistory” have a precise duration?
+
+My sense is that the autarchy is entirely within the posthistorical phase of Wolfe’s time scheme, but it probably started before then. Typhon had come in, made Urth his capital, and tried to conquer the galaxy, but it seems that Urth had already been fallow for some time at that point.
+
+Share this:
+
+Share
+
+ Email a link to a friend (Opens in new window)
+ Email
+
+ Share on Facebook (Opens in new window)
+ Facebook
+
+ Share on X (Opens in new window)
+ X
+
+ Share on Tumblr (Opens in new window)
+ Tumblr
+
+Previous
+
+Everything has to be true somehow
+
+Next
+
+Standing on the Shoulders of Giants – A Review of Michael Andre-Driussi’s ‘The Book of the New Sun: A Chapter Guide’
+
+Categorically:
+
+A Solar Labyrinth
+
+Articles
+
+Book Reviews
+
+Featured
+
+Gene Wolfe
+
+Book of the Long Sun
+
+Book of the New Sun
+
+Book of the Short Sun
+
+Fifth Head of Cerberus
+
+Latro (Soldier) novels
+
+Interviews
+
+Latest
+
+News
+
+Shadows of the New Sun
+
+site admin
+
+Wolfeana
+
+Cave Canem
+Robert Borski’s site about the mystery that is the Fifth Head of Cerberus
+
+Sirius Fiction
+Home of Lexicon Urthus, Michael Andre-Driussi, and the forthcoming book about Book of the Long Sun
+
+The URTH mailing list
+Ongoing old-fashioned email discussion of Wolfe, and everything else that is important
+
+Wolfewiki
+A wiki about Gene Wolfe
+
+Search Ultan
+
+Search
+
+Categories
+Categories
+ Select Category
+ A Solar Labyrinth
+ Articles
+ Book Reviews
+ Featured
+ Gene Wolfe
+    Book of the Long Sun
+    Book of the New Sun
+    Book of the Short Sun
+    Fifth Head of Cerberus
+    Latro (Soldier) novels
+ Interviews
+ Latest
+ News
+ Shadows of the New Sun
+ site admin
+
+Wolfeana
+
+Cave Canem
+Robert Borski’s site about the mystery that is the Fifth Head of Cerberus
+
+Sirius Fiction
+Home of Lexicon Urthus, Michael Andre-Driussi, and the forthcoming book about Book of the Long Sun
+
+The URTH mailing list
+Ongoing old-fashioned email discussion of Wolfe, and everything else that is important
+
+Wolfewiki
+A wiki about Gene Wolfe
+
+Categories
+
+A Solar Labyrinth
+
+Articles
+
+Book of the Long Sun
+
+Book of the New Sun
+
+Book of the Short Sun
+
+Book Reviews
+
+Featured
+
+Fifth Head of Cerberus
+
+Gene Wolfe
+
+Interviews
+
+Latest
+
+Latro (Soldier) novels
+
+News
+
+Shadows of the New Sun
+
+site admin
+
+Wolfeana
+
+Cave Canem
+
+Sirius Fiction
+
+The URTH mailing list
+
+Wolfewiki
+
+Meta
+
+Log in
+
+Entries feed
+
+Comments feed
+
+WordPress.org
+
+Powered by WordPress & Theme by Anders Norén
+
+

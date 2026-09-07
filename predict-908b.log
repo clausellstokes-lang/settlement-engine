@@ -1,0 +1,17 @@
+PREDICT_HEAD=d804420d707e0b801a5a874ffcd12de8d0596aa8 cars_over_4243bdc61=5 start 01:50:49 load=3.87 5.63 10.13
+--- OSR plain read (read-only):
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+OSR_DRY_EXIT=0
+--- writer-reach dry (read-only):
+WRWALKER HOLD — judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326 (reviewable 526) · pending-surface debt: isolationSupport on settlement → web-display (§12 WRW-2, the owner row that rules wh
+WR_DRY_EXIT=0
+--- lighting probe (farmed, read-only):
+{"files":2543,"parked":373,"credited":2170,"titles":23662,"suiteTitles":6335}
+LIGHT_PROBE_EXIT=0
+--- lighting register:
+{"files": 2543, "parked": 373, "credited": 2170, "titles": 23660, "suiteTitles": 6335, "measuredAtSha": "2f1f9381f6a3f096b1a6e57bf3ab0a9686912222"}
+--- prose-numerics dry:
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+PN_DRY_EXIT=0
+--- negative-assertion frozen rows for the touched files:
+PREDICT_PORCELAIN_AFTER=0 end 01:51:30

@@ -1,0 +1,235 @@
+{
+ "name": "tolkien",
+ "chunk": 3,
+ "claims": [
+  {
+   "index": 673,
+   "feature": "reference by name over pronoun",
+   "claim": "Pronoun reference is a dispreferred strategy; given the unusually large cast, reference by name becomes a frequent necessity (p. 75).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "reference by name becomes a frequent necessity",
+   "page": ""
+  },
+  {
+   "index": 674,
+   "feature": "underuse of modal verbs",
+   "claim": "At word level Tolkien underuses modal verbs relative to post-war fiction (p. 72).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "underuse of modal verbs",
+   "page": ""
+  },
+  {
+   "index": 675,
+   "feature": "dispreferred adverb-led participle clauses",
+   "claim": "Clause-initial participle clauses introduced by an adverb and followed by a main clause ('Already cringing ..., she suddenly felt') are comparatively rare in The Lord of the Rings (p. 75).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 676,
+   "feature": "fronting of adverbials",
+   "claim": "The most conspicuous clause-level idiosyncrasy is the fronting of adverbials, as in 'to a (N) they came' (p. 78).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "the fronting of adverbials",
+   "page": ""
+  },
+  {
+   "index": 677,
+   "feature": "clause-initial then/presently/suddenly",
+   "claim": "Tolkien overuses 'then', 'presently' and 'suddenly' in clause-initial position (p. 78).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "overuse of then, presently or suddenly in clause-initial position",
+   "page": ""
+  },
+  {
+   "index": 678,
+   "feature": "inversion types",
+   "claim": "Even a casual reader notices Tolkien's fondness for inverted constructions, most commonly fronted subject complements followed by copular be and the subject ('beautiful was its colour'), and fronted prepositional phrases with other verbs (p. 81).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "fronted subject complements followed by copular be and the subject",
+   "page": ""
+  },
+  {
+   "index": 679,
+   "feature": "inversion vs fronting terminology",
+   "claim": "Turner notes Siepmann distinguishes linguistically between inversion and fronting whereas Kullmann uses 'inversion' for both in the rhetorical sense.",
+   "source": "Allan Turner, review of Kullmann & Siepmann, Journal of Inklings Studies 12.1 (2022)",
+   "url": "https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144",
+   "quote": "between inversion and fronting",
+   "page": ""
+  },
+  {
+   "index": 680,
+   "feature": "passive plus prepositional complement",
+   "claim": "An overused clause variant is a passive verb followed by a prepositional complement ('Her shield was shivered in many pieces'), with passive slots filled by original or obsolescent material; the stative passive is far more common than the eventive (pp. 79-80, 83).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "the stative passive is far more common than the eventive",
+   "page": ""
+  },
+  {
+   "index": 681,
+   "feature": "clause-initial participles and bare participles",
+   "claim": "Tolkien, unlike many novelists, clearly prefers clause-initial over clause-final participial clauses, sometimes reduced to a bare absolute participle ('he, bowing low to the fallen, bade them'), though participial constructions are generally underused (p. 80).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "clear preference for clause-initial participial clauses",
+   "page": ""
+  },
+  {
+   "index": 682,
+   "feature": "existential there for events",
+   "claim": "Tolkien uses existential clauses with a wide variety of verbs to describe events ('there came ...'), fronted prepositional phrases with existential there, and existential there with passives ('there was held the highest feast'), but hardly ever for mere presence or absence (pp. 76, 82-83).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "existential clauses with a wide variety of verbs",
+   "page": ""
+  },
+  {
+   "index": 683,
+   "feature": "coordination by and / polysyndeton",
+   "claim": "Clauses and phrases coordinated by 'and' feature prominently; Tolkien uses 'and' with high frequency but sometimes differently from other writers (Table 3.1 'Use of and'; pp. 76, 86).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "Clauses and phrases coordinated by and feature prominently",
+   "page": ""
+  },
+  {
+   "index": 684,
+   "feature": "dialogue-framing inversion",
+   "claim": "Dialogue-framing sentences of the type 'said Frodo' (verb before name) are a recurrent feature of the narrative syntax (pp. 84-85).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "dialogue-framing sentences (said Frodo)",
+   "page": ""
+  },
+  {
+   "index": 685,
+   "feature": "sentence-initial 'at last'",
+   "claim": "Sentence-initial 'at last' combined with a short verb, and fronted adjectives functioning as subject complements, are typical sentence openers (p. 84).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 686,
+   "feature": "descriptive verbs and intensifiers",
+   "claim": "Key verbs shared with modern fiction are highly descriptive (clutch, cower, crawl, flicker, gape, gasp, gaze, gleam), while Tolkien overuses the emphasizers very, so and too and the adverb 'even', about seven times more common than in modern fiction (pp. 47, 49, 59).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "around seven times more common than in modern fiction",
+   "page": ""
+  },
+  {
+   "index": 687,
+   "feature": "descriptivity distribution",
+   "claim": "The first half of the book is less densely descriptive; tight clusters of high descriptivity peak in Book Four, chapters II and VII (p. 48).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "three outstanding peaks in Book Four",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 673,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reference by name becomes a frequent necessity",
+   "note": "p.75 raw snippet (Google Books search-inside, vol 9uAsEAAAQBAJ): 'how Tolkien establishes back-reference or why pronominal substitution is a dispreferred strategy in The Lord of the Rings. One may speculate that this is to do with the unusually large number of characters Tolkien introduces, so that, to avoid confusion, reference by name becomes a frequent necessity'. Quote verbatim; every limb (dispreferred pronoun reference, unusually large cast, name-reference a frequent necessity, p.75) supported."
+  },
+  {
+   "index": 674,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "At the word level ... is the underuse of modal verbs",
+   "note": "p.72 raw snippet: '3.2.1 Word Level At the word level the only notable difference between The Lord of the Rings and general fiction is the underuse of modal verbs, as in sentences like these...'. Same page names the reference corpus: '(post-war fiction) and the British National Corpus as a reference' (corpus described p.42 as a post-war fiction corpus). Quote 'underuse of modal verbs' verbatim; word-level and post-war-fiction limbs both supported."
+  },
+  {
+   "index": 675,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Equally underused are clause-initial participle clauses introduced by an adverb",
+   "note": "Claim carries no quote. p.75 raw snippet: 'Equally underused are clause-initial participle clauses introduced by an adverb and followed by a main clause: Already cringing under the hand in her hair, she suddenly felt terrifyingly weak.' All limbs supported; the book's word is 'underused' rather than the claim's 'comparatively rare' (that phrase on p.75 belongs to the next structure discussed), hence SUBSTANCE not VERBATIM."
+  },
+  {
+   "index": 676,
+   "verdict": "PARTIAL",
+   "trueWording": "one of the most conspicuous ... is the fronting of adverbials",
+   "note": "p.78 raw snippet: 'idiosyncrasies of Tolkien's can be found at clause level, one of the most conspicuous of which even to the human reader is the fronting of adverbials: to a (N) they came.' The quote 'the fronting of adverbials', the clause-level siting and the example 'to a (N) they came' are all verbatim on p.78, but the page hedges with 'one of the most conspicuous', not a definite superlative.",
+   "unsupportedLimb": "that it is THE most conspicuous clause-level idiosyncrasy - the page says 'one of the most conspicuous'"
+  },
+  {
+   "index": 677,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the overuse of then, presently or suddenly in clause-initial position",
+   "note": "p.78 raw snippet: 'overused words or fixed lexical phrases include no more, and the overuse of then, presently or suddenly in clause-initial position: Then Frodo breathed a sigh of relief.' Quote verbatim (page has 'or', claim has 'and' in the list - same three items, same assertion); p.78 correct; section is 3.3 'Overused Constructions'."
+  },
+  {
+   "index": 678,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "casual reader will notice ... Tolkien's fondness for inverted constructions",
+   "note": "p.81 raw snippet: '...casual reader will notice is Tolkien's fondness for inverted constructions of various types, most commonly fronted subject complements followed by copular be and the subject, but also fronted prepositional phrases followed by other verbs. and beautiful was its colour ... So deep and narrow was that chasm that...'. Quote verbatim; casual-reader, most-commonly, 'beautiful was its colour' and fronted-PP limbs all supported on p.81."
+  },
+  {
+   "index": 679,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Siepmann distinguishes, correctly from a linguistic point of view, between inversion and fronting",
+   "note": "Live euppublishing.com returned HTTP 403 with a browser UA; recovered via Wayback raw capture https://web.archive.org/web/20220615121435id_/https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144. Page text: 'There is also some inconsistency in the use of terminology: Siepmann distinguishes, correctly from a linguistic point of view, between inversion and fronting, whereas Kullmann uses inversion for both according to the traditional terminology of rhetoric.' Byline 'Allan Turner'; masthead 'Journal of Inklings Studies, Volume 12 Issue 1, Page 139-142', Apr 2022. Quote verbatim; all limbs supported."
+  },
+  {
+   "index": 680,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the stative passive is far more common than the eventive passive",
+   "note": "Three pages, all raw snippets. p.79: '...overused in The Lord of the Rings is a passive verb followed by a prepositional complement. Her shield was shivered in many pieces...'. p.80: 'filled by highly original (blotted from the sky) or obsolescent material (his memory was stored with).' p.83: 'the stative passive is far more common than the eventive passive.' Quote is a verbatim prefix of the p.83 sentence, which continues with the word 'passive'; every limb and every cited page supported."
+  },
+  {
+   "index": 681,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unlike many other writers of fiction, has a clear preference for clause-initial participial clauses",
+   "note": "p.80 raw snippet: '...unlike many other writers of fiction, has a clear prefer-ence for clause-initial participial clauses over clause-final ones. These are sometimes reduced to the bare participle (Table 3.2).' Quote matches word for word (the only difference is the line-break hyphen in 'prefer- ence'). Table 3.2 gives 'Tolkien: clause-initial, \"absolute\" present participles: he, bowing low to the fallen, bade them farewell' against 'BNC: clause-final participial clauses'. Underuse limb also on p.80: 'Although participial constructions are generally underused in The Lord of the Rings (see above)'."
+  },
+  {
+   "index": 682,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "existential clauses with a wide variety of verbs to describe events",
+   "note": "p.76 raw snippet: 'existential clauses with a wide variety of verbs to describe events (there came ...), but there is hardly any evidence of such clauses used with nouns to indicate mere presence or absence'. p.82: 'existential there. About it he clasped a belt, at which there hung a short sheath...' (fronted PP examples). p.83: 'existential there with passive verbs: ... and there was held the highest feast that it had known since the'. Quote verbatim; all four limbs and all cited pages supported."
+  },
+  {
+   "index": 683,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Clauses and phrases coordinated by and feature prominently",
+   "note": "p.86 raw snippet opens exactly: 'Clauses and phrases coordinated by and feature prominently.' p.76 raw snippet: '...and with high frequency, he sometimes does so in a slightly different way from a great deal of other fiction. Whereas in the comparison corpus and is more commonly used to link two verbs with the same subject...'. Table 3.1 'Use of and' is confirmed at p.76 by both the List of Tables ('Use of and 76') and the p.76 snippet. All limbs supported."
+  },
+  {
+   "index": 684,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "short dialogue-framing sentences (said Frodo)",
+   "note": "p.85 raw snippet: 'Other overused clausal features include relative clauses whose antecedent is those, all or many (those who, all who, many who) and short dialogue-framing sentences (said Frodo). 3.4 Narrative Syntax: Conclusion and Two Sample Paragraphs'. The p.84 snippet ends '...Other overused clausal features include relative clauses whose anteced- ent 84 D. Siepmann', so the sentence does span pp.84-85 as cited. Quote verbatim within 'short dialogue-framing sentences (said Frodo)'; chapter 3 is 'The Narrative Syntax of The Lord of the Rings'."
+  },
+  {
+   "index": 685,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Sentence-initial at last ... commonly combined with a short verb",
+   "note": "Claim carries no quote. p.84 raw snippet: 'Sentence-initial at last, in itself frequent, is commonly combined with a short verb, such as speak: At last she spoke again. Another typical sentence-initial feature is the use of fronted adjectives functioning as subject complements or as extraposed elements.' Both limbs and p.84 supported."
+  },
+  {
+   "index": 686,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "around seven times more common than in modern fiction",
+   "note": "p.47: 'The key verbs shared with modern fiction are the following: clutch, cower, crack, crawl, curl, flicker, frown, gape, gasp, gaze, gleam, ...' followed by 'The descriptive verbs in question are distributed quite thickly...' (so the page does call them descriptive; p.87 'highly descriptive verbs'). p.49: 'the adverb even, which is around seven times more common than in modern fiction and one and a half times as common as in nineteenth-century fiction.' p.59: 'there is a clear overuse of the empha-sizers very (+ tall, weary, hungry, heavy, fair, hot, etc.), so (heavy, strong, strong, eager, etc.) and too (long, great, many, late, etc.)' - the emphasizers limb needed a hyphenation-aware probe ('a clear overuse') because 'emphasizers' is split across a line. Quote verbatim; all three cited pages check out."
+  },
+  {
+   "index": 687,
+   "verdict": "PARTIAL",
+   "trueWording": "three outstanding peaks in Book Four, Chapters II and VII and Book Six, Chapter III",
+   "note": "p.48 raw snippet: 'the first half of the book is generally less densely descriptive, we find fairly tight clusters of high descriptivity in the second part, culminating in three outstanding peaks in Book Four, Chapters II (The Passing of the Marshes) and VII (Journey to the Crossroads) and Book Six, Chapter III (Mount Doom)'. The first-half limb and the two Book Four chapters are verbatim right, and the quote 'three outstanding peaks in Book Four' is a verbatim substring - but it is severed mid-sentence so that it reads as though all three peaks were in Book Four; the claim silently drops the third peak.",
+   "unsupportedLimb": "that the three peaks fall in Book Four - the third is Book Six, Chapter III (Mount Doom)"
+  }
+ ]
+}

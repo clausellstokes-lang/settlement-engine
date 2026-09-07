@@ -1,0 +1,235 @@
+{
+ "name": "ai",
+ "chunk": 7,
+ "claims": [
+  {
+   "index": 1185,
+   "feature": "abstraction over the concrete",
+   "claim": "Rettberg's proposed mechanism is that LLMs generate text associatively, so a route or place token pulls in the promotional register that surrounds it in the training data.",
+   "source": "Jill Walker Rettberg, jilltxt.net, 13 May 2026",
+   "url": "https://jilltxt.net/genre-glitches-and-unexpected-promotional-phrases-as-a-sign-of-ai-writing/",
+   "quote": "LLMs generate text associatively",
+   "page": "explanation following Example 2"
+  },
+  {
+   "index": 1186,
+   "feature": "counter-evidence",
+   "claim": "The New York Times told Rettberg that the journalist who wrote her first example confirmed she did not use AI to write it.",
+   "source": "Jill Walker Rettberg, jilltxt.net, update of 14 May 2026",
+   "url": "https://jilltxt.net/genre-glitches-and-unexpected-promotional-phrases-as-a-sign-of-ai-writing/",
+   "quote": "she did not use AI to write this",
+   "page": "Example 1, bracketed update"
+  },
+  {
+   "index": 1189,
+   "feature": "reader and expert judgment",
+   "claim": "A public library services manager says today's AI-generated books are quite bad, to the point of asking whether an alien wrote this.",
+   "source": "Kate DeMeester-Lane, library services manager, Pima County Public Library, quoted by Jule Pattison-Gordon, Governing, 3 October 2025",
+   "url": "https://www.governing.com/artificial-intelligence/how-local-librarians-keep-ai-slop-off-the-shelves",
+   "quote": "Did an alien write this?",
+   "page": "later in the article"
+  },
+  {
+   "index": 1190,
+   "feature": "reader and expert judgment",
+   "claim": "The same librarian says the first pages of an AI-generated book quickly reveal it because the content doesn't make sense.",
+   "source": "Kate DeMeester-Lane quoted by Jule Pattison-Gordon, Governing, 3 October 2025",
+   "url": "https://www.governing.com/artificial-intelligence/how-local-librarians-keep-ai-slop-off-the-shelves",
+   "quote": "the content doesn’t make sense",
+   "page": "early in the article"
+  },
+  {
+   "index": 1194,
+   "feature": "steerability",
+   "claim": "A Carnegie Mellon machine-learning professor says the model doesn't know the difference between travel advice, directions or recipes and just knows words.",
+   "source": "Rayid Ghani, Carnegie Mellon University, quoted by BBC Travel, 26 September 2025",
+   "url": "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+   "quote": "It doesn't know the difference between travel advice, directions or recipes",
+   "page": "middle section on how AI generates answers"
+  },
+  {
+   "index": 1195,
+   "feature": "detection and its failures",
+   "claim": "A 2024 survey reported by the BBC found around 33% of respondents who used AI to plan travel said their AI-generated recommendations included false information.",
+   "source": "a 2024 survey as reported by BBC Travel, 26 September 2025",
+   "url": "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+   "quote": "33% said their AI-generated recommendations included false information",
+   "page": "middle section"
+  },
+  {
+   "index": 1196,
+   "feature": "abstraction over the concrete",
+   "claim": "The same 2024 survey found 37% of those who used AI to plan travel reported that it could not provide enough information.",
+   "source": "a 2024 survey as reported by BBC Travel, 26 September 2025",
+   "url": "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+   "quote": "37% of those surveyed who used AI to help plan their travels reported that it could not provide enough information",
+   "page": "middle section"
+  },
+  {
+   "index": 1197,
+   "feature": "abstraction over the concrete",
+   "claim": "A Wikivoyage administrator deleting a batch of Nigerian town articles as AI-generated cited among his signs how vague some sections are.",
+   "source": "User:SHB2000, Wikivoyage:Votes for deletion/September 2025, nomination of 22 August 2025",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/September_2025",
+   "quote": "as well as how vague some sections are",
+   "page": "section 'Articles created by A Sulaiman Z'"
+  },
+  {
+   "index": 1199,
+   "feature": "detection and its failures",
+   "claim": "The same editor reported that an AI checker returned a 99% chance of AI generation for the Tafawa Balewa article.",
+   "source": "User:SelfieCity, Wikivoyage:Votes for deletion/September 2025, comment of 22 August 2025",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/September_2025",
+   "quote": "came back as 99% chance of being AI-generated",
+   "page": "section 'Articles created by A Sulaiman Z'"
+  },
+  {
+   "index": 1200,
+   "feature": "counter-evidence",
+   "claim": "A third Wikivoyage editor objected that deleting the batch would remove African destination coverage the site already lacks.",
+   "source": "User:Ground Zero, Wikivoyage:Votes for deletion/September 2025, comment of 22 August 2025",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/September_2025",
+   "quote": "Wikivoyage has a problem with a lack of coverage of African destinations",
+   "page": "section 'Articles created by A Sulaiman Z'"
+  },
+  {
+   "index": 1204,
+   "feature": "homogenisation",
+   "claim": "A measurement study of AI urban perception found that culturally proximate prompting fails to recover the variety and diversity of human responses.",
+   "source": "Rong Zhao and four co-authors, 'Culturally uneven urban perception in large language models', arXiv 2604.20048v3, 8 June 2026",
+   "url": "https://arxiv.org/abs/2604.20048",
+   "quote": "fails to recover the variety and diversity of human responses",
+   "page": "abstract"
+  },
+  {
+   "index": 1205,
+   "feature": "homogenisation",
+   "claim": "The same study found that after culturally proximate prompting the model texts remained less diverse than the human benchmark.",
+   "source": "Rong Zhao et al., arXiv 2604.20048v3, 8 June 2026",
+   "url": "https://arxiv.org/html/2604.20048v3",
+   "quote": "the model texts remained less diverse, more affectively positive",
+   "page": "results, nation-level IPI comparison"
+  },
+  {
+   "index": 1208,
+   "feature": "register measured",
+   "claim": "The three-model comparison in that study used GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash, producing 72,000 model-generated place texts.",
+   "source": "Rong Zhao et al., arXiv 2604.20048v3, 8 June 2026",
+   "url": "https://arxiv.org/html/2604.20048v3",
+   "quote": "The three-model comparison used GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash",
+   "page": "methods, Study 1"
+  },
+  {
+   "index": 1209,
+   "feature": "abstraction over the concrete",
+   "claim": "A CSCW audit of LLM local knowledge found that in formal news contexts models exhibit an urban advantage, leaving rural areas systematically underrepresented with lower semantic depth.",
+   "source": "Zihan Gao and Jacob Thebault-Spieker, 'Is Your Chatbot a Tourist or a Townie?', Proceedings of the ACM on Human-Computer Interaction, 2026 (abstract as published by the UW-Madison Institute for Diversity Science, 24 April 2026)",
+   "url": "https://ids.wisc.edu/2026/04/24/is-your-chatbot-a-tourist-or-a-townie-quantifying-geographic-and-localness-disparities-in-llm-representations-of-place",
+   "quote": "leaving rural areas systematically underrepresented with lower semantic depth",
+   "page": "abstract"
+  },
+  {
+   "index": 1210,
+   "feature": "abstraction over the concrete",
+   "claim": "The same audit found that models are more adept at concrete physical questions but consistently struggle to capture the nuanced relational and cognitive dimensions of a community.",
+   "source": "Zihan Gao and Jacob Thebault-Spieker, ACM CSCW 2026 (abstract via UW-Madison Institute for Diversity Science)",
+   "url": "https://ids.wisc.edu/2026/04/24/is-your-chatbot-a-tourist-or-a-townie-quantifying-geographic-and-localness-disparities-in-llm-representations-of-place",
+   "quote": "struggle to capture the nuanced relational and cognitive dimensions",
+   "page": "abstract"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1185,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLMs generate text associatively",
+   "note": "Raw page fetched (curl, browser UA, HTTP 200). Quote is word-for-word in the paragraph beginning 'I think these genre glitches are another sign of AI-assisted writing.' The associative-mechanism limb is spelled out there: the Chicago-train phrase is said to be connected in the model's training data to tourist sites marketing the journey, so the next most probable words are promotional. The second example (the Amtrak passage in the Cole Allen detention memorandum) is not labelled 'Example 2' on the page - only 'Example 1' is numbered - but it is the example the explanation follows, so the page pointer is substantively right. Byline 'Jill' on jilltxt.net, dated May 13 2026, updated May 15 2026."
+  },
+  {
+   "index": 1186,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "she did not use AI to write this",
+   "note": "Quote word-for-word inside the bracketed update in the Example 1 paragraph: the New York Times emailed the author on May 14 to say they had contacted the journalist, who confirmed it. Every limb holds - NYT told Rettberg, the journalist wrote the first example (Julie Creswell's tomato-price story of 12 May 2026), and she confirmed no AI. Post footer shows 'May 13, 2026 / May 15, 2026', consistent with a 14 May update."
+  },
+  {
+   "index": 1189,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Did an alien write this?",
+   "note": "Raw page fetched (HTTP 200). Sentence reads: today's AI-generated books are 'quite bad,' DeMeester-Lane says, then the contrast - it does not feel like a person wrote it, it is sort of like 'Did an alien write this?'. Speaker is identified earlier as library services manager for Pima County Public Library in Arizona, so the 'public library services manager' limb holds. Article bylined Jule Pattison-Gordon, dated October 3, 2025."
+  },
+  {
+   "index": 1190,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the content doesn't make sense",
+   "note": "Quote word-for-word (curly apostrophe on the page, matched after Unicode normalisation) in the paragraph beginning 'Fortunately, while there's a lot of AI-written nonsense out there'. Full limb support: these are not sophisticated mimics like deepfakes, and the first pages quickly reveal that the book is AI-generated because the content does not make sense, or the syntax will be wrong. Same speaker as index 1189. This passage sits earlier in the article than the 'alien' quote, matching the page pointer."
+  },
+  {
+   "index": 1194,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It doesn't know the difference between travel advice, directions or recipes",
+   "note": "Raw page fetched (HTTP 200). Quote word-for-word, immediately followed on the page by 'It just knows words.' - so the second limb of the claim is supported too. Speaker introduced as Rayid Ghani, a distinguished professor in machine learning; note the BBC page misspells the university as 'Carnegie Melon', while the claim uses the correct 'Carnegie Mellon'. Passage sits in the section explaining how AI generates its answers, as the page pointer says. Discrepancy outside the claim sentence: the URL slug reads 20250926 but the visible dateline on the page is 29 September 2025, not 26 September."
+  },
+  {
+   "index": 1195,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "around 33% said their AI-generated recommendations included false information",
+   "note": "Quote is a word-for-word contiguous substring of the sentence beginning 'According to a 2024 survey, 37% of those surveyed who used AI to help plan their travels reported...'; the page's own wording carries 'around' before 33%, exactly as the claim's hedge does. The 'who used AI to plan travel' limb is carried by the same sentence's subject group. Same middle-section paragraph as index 1196."
+  },
+  {
+   "index": 1196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "37% ... reported that it could not provide enough information",
+   "note": "Quote is word-for-word on the page (the supplied quote runs 20 words, so trueWording here is trimmed to a 12-word cap and the rest is located rather than copied: it is the sentence opening the paragraph on why AI trip-planning goes wrong, immediately before the 33% figure of index 1195). Attribution limb holds - the page says 'According to a 2024 survey'. Both figures come from that one sentence, so 1195 and 1196 stand or fall together."
+  },
+  {
+   "index": 1197,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'Nigerian' and 'administrator' - the word Nigeria appears nowhere in the page source (grep count 0), and no form of 'admin' appears either; both descriptors come from outside knowledge, not from this page",
+   "trueWording": "as well as how vague some sections are",
+   "note": "Raw page fetched (HTTP 200). The quotation is word-for-word in the nomination under the heading 'Articles created by A Sulaiman Z', signed '// shb' at 09:46, 22 August 2025 (UTC): two articles already deleted as AI-generated, gptzero.me cited, oddly formatted bullet points cited, 'as well as how vague some sections are'. The batch limb is supported - two signed lists follow, roughly 45 titles (Birniwa, Mallam Madori, Katagum, Tafawa Balewa, the Kano district articles, and so on). But the page never says these are Nigerian places, and never calls SHB2000 an administrator; deletion rights imply adminship only if you bring Wikivoyage's permission model to the page. Graded PARTIAL on those two descriptors, not on the quotation, which is exact."
+  },
+  {
+   "index": 1199,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'The same editor' - the page attributes the AI-checker comment to Selfie City (signed 12:17, 22 August 2025), not to SHB2000, who is the editor of the preceding claim 1199 follows in this chunk (index 1198 is absent from every chunk in the sweep, so nothing intervenes to re-bind the anaphora)",
+   "trueWording": "came back as 99% chance of being AI-generated",
+   "note": "Raw page fetched (HTTP 200). Quotation is word-for-word: the commenter checked part of Tafawa Balewa against an AI checker, it came back as 99% chance of being AI-generated and gave specific examples from the text, which he declined to list so as not to help anyone circumvent detection. The substantive limbs - AI checker, 99%, Tafawa Balewa - are all supported. The claim's own source field names User:SelfieCity, which the page confirms; it is the claim sentence's 'the same editor' that the page contradicts, so this is a visible PARTIAL rather than a note."
+  },
+  {
+   "index": 1200,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wikivoyage has a problem with a lack of coverage of African destinations",
+   "note": "Quotation word-for-word in Ground Zero's comment of 12:19, 22 August 2025 (UTC), a third named editor in the thread after SHB2000 and Selfie City. Objection limb supported: he opens 'I am of two minds about this', recognises the AI problem, then says it would be unfortunate to lose so much African content all at once and proposes that A Sulaiman Z rewrite the articles instead. Two things a downstream document should not overstate: his stance is explicitly two-minded rather than flat opposition, and by 00:20, 14 September 2025 the same editor writes on this page that he would support deleting the articles after the author showed no willingness to save them."
+  },
+  {
+   "index": 1204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fails to recover the variety and diversity of human responses",
+   "note": "Raw abstract page fetched (HTTP 200), arXiv:2604.20048v3, submitted 21 Apr 2026, last revised 8 Jun 2026, title 'Culturally uneven urban perception in large language models'. Quotation word-for-word in the abstract clause stating that prompting can move AI responses closer to specific regional human descriptions but fails to recover that variety and diversity, flattening demographic patterns and introducing sentiment-based self-favouring bias. The 'culturally proximate' wording of the claim is the paper's own term for that prompting - it appears in the body (Fig. 1d discussion and the Study 1 nation-level IPI paragraph) - so the limb is supported, though the abstract itself says only 'prompting'. 'Measurement study' limb holds: the abstract introduces a measurement framework. Author list on the page is six names (Rong Zhao, Wanqi Liu, Zhizhou Sha, Nanxi Su, Yecheng Zhang, Ying Long); arXiv's own display string is 'Rong Zhao and 4 other authors', which is what the source field copied."
+  },
+  {
+   "index": 1205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the model texts remained less diverse, more affectively positive",
+   "note": "Raw HTML full text fetched (HTTP 200). Quotation word-for-word in the closing sentence of the nation-level IPI paragraph under 'Study 1 | Open-ended urban perception': culturally proximate prompting therefore improved semantic alignment with human descriptions, but the model texts remained less diverse, more affectively positive and more strongly shifted in identity-linked evaluation than the human benchmark. Every limb of the claim - culturally proximate prompting, less diverse, human benchmark - is on the page in that one sentence. Context is the 270-image Geograph subset for England, Scotland and Wales."
+  },
+  {
+   "index": 1208,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The three-model comparison used GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash",
+   "note": "Quotation word-for-word in Methods, subsection 'Open-perception prompting and three-model generation', in the paragraph that begins 'For Study 1' - exactly the page pointer given. The 72,000 limb is stated on the same page twice: that paragraph ends by saying that because all 3,000 images were evaluated under all eight conditions for all three models, the open-perception analysis comprises 72,000 model-generated texts; the Results overview independently says the open-text task yielded 72,000 descriptions. The claim's 'place texts' is a paraphrase of 'model-generated texts', which are street-view scene descriptions. Note for any downstream use: the structured task of Study 2 separately produced 72,000 evaluations, so the figure must be kept attached to the open-text task."
+  },
+  {
+   "index": 1209,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leaving rural areas systematically underrepresented with lower semantic depth",
+   "note": "Raw page fetched (HTTP 200). Quotation word-for-word in the abstract, in the dual-geographic-bias sentence: in formal news contexts models exhibit a strong 'urban advantage', leaving rural areas systematically underrepresented with lower semantic depth. CSCW-audit limb supported by the abstract's own claim to be the first systematic audit of localness disparities in LLMs and its call to the CSCW community; venue line reads Proceedings of the ACM Human-Computer Interaction (2026), authors Zihan Gao and Jacob Thebault-Spieker, posted 04/24/2026. Downstream context worth keeping: the abstract pairs this with the converse 'urban penalty' on social media data."
+  },
+  {
+   "index": 1210,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "struggle to capture the nuanced relational and cognitive dimensions",
+   "note": "Quotation word-for-word in the abstract's domain-bias sentence, which says models are more adept at handling concrete, physical questions but consistently struggle to capture the nuanced relational and cognitive dimensions of a community. Both limbs of the claim are in that single sentence, including 'consistently' and 'of a community'. Same page and same abstract as index 1209."
+  }
+ ]
+}

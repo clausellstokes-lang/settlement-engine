@@ -1,0 +1,35 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 31855 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneANCHOR905
+
+ ❯ tests/components/handbookVoice.test.jsx (6 tests | 1 failed) 482ms
+     × the voiced header and essay are in the accessible DOM with NO interaction, exactly as AppViews mounts it 82ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/handbookVoice.test.jsx > §906 — the voiced Handbook is READ on first paint of /about/guide > the voiced header and essay are in the accessible DOM with NO interaction, exactly as AppViews mounts it
+AssertionError: FIRST-PAINT LAW [guide → voiced essay]: <div> on the host chain hides the surface with aria-hidden="true". A lit sentence a reader cannot see is dark.: expected 'aria-hidden="true"' to be null
+
+- Expected:
+null
+
++ Received:
+"aria-hidden=\"true\""
+
+ ❯ expectNoHiddenAncestor tests/components/handbookVoice.test.jsx:138:9
+    136|         `FIRST-PAINT LAW [${label}]: <${node.tagName.toLowerCase()}> o…
+    137|         + ` the surface with ${how}. A lit sentence a reader cannot se…
+    138|       ).toBeNull();
+       |         ^
+    139|       if (node === root) break;
+    140|     }
+ ❯ tests/components/handbookVoice.test.jsx:164:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  22:13:59
+   Duration  2.17s (transform 770ms, setup 22ms, import 1.14s, tests 482ms, environment 444ms)
+

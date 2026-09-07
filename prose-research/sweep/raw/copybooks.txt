@@ -1,0 +1,134 @@
+ 
+ [2510.13939] Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers 
+ Skip to main content 
+ Search
+ Submit 
+ Donate 
+ Log in 
+ Search arXiv 
+ Press Enter to search · Advanced search 
+--> 
+ Computer Science > Computation and Language 
+ arXiv:2510.13939 (cs)
+ [Submitted on 15 Oct 2025 ( v1 ), last revised 17 Mar 2026 (this version, v4)] 
+ Title: Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers 
+ Authors: Tuhin Chakrabarty , Jane C. Ginsburg , Paramveer Dhillon View a PDF of the paper titled Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers, by Tuhin Chakrabarty and 2 other authors 
+ View PDF 
+ HTML (experimental) 
+ Abstract: The use of copyrighted books for training AI has sparked lawsuits from authors concerned about AI generating derivative content. Yet whether these models can produce high-quality literary text emulating authors' voices remains unclear. We conducted a preregistered study comparing MFA-trained writers with three frontier models (ChatGPT, Claude, Gemini) writing up to 450-word excerpts emulating 50 award-winning authors' styles. In blind pairwise evaluations by 28 MFA-trained readers and 516 college-educated general readers, AI text from in-context prompting was strongly disfavored by MFA readers for stylistic fidelity (OR=0.16) and quality (OR=0.13), while general readers showed no fidelity preference (OR=1.06) but favored AI for quality (OR=1.82). Fine-tuning ChatGPT on authors' complete works reversed these results: MFA readers favored AI for fidelity (OR=8.16) and quality (OR=1.87), with general readers showing even stronger preference (fidelity OR=16.65; quality OR=5.42). Both groups preferred fine-tuned AI, but the writer-type X reader-type interaction remained significant (p=0.021 for fidelity; p<10^-4 for quality), indicating general readers favored AI by a wider margin. Effects are robust under cluster-robust inference and generalize across authors in heterogeneity analyses. Fine-tuned outputs were rarely flagged as AI-generated (3% vs. 97% for prompting) by leading detectors. Mediation analysis shows fine-tuning eliminates detectable AI quirks that penalize in-context outputs, altering the nexus between detectability and preference. While not accounting for effort to transform AI output into publishable prose, the median fine-tuning cost of $81 per author represents a 99.7% reduction versus typical writer compensation. Author-specific fine-tuning enables non-verbatim AI writing preferred over expert human writing, providing evidence relevant to copyright's fourth fair-use factor.
+ Comments: 
+ Preprint Under Review 
+ Subjects: 
+ Computation and Language (cs.CL) ; Artificial Intelligence (cs.AI); Computers and Society (cs.CY) 
+ Cite as: 
+ arXiv:2510.13939 [cs.CL] 
+ (or 
+ arXiv:2510.13939v4 [cs.CL] for this version)
+ https://doi.org/10.48550/arXiv.2510.13939 
+ Focus to learn more 
+ arXiv-issued DOI via DataCite 
+ Submission history From: Tuhin Chakrabarty Mr [ view email ] [v1] 
+ Wed, 15 Oct 2025 17:51:58 UTC (9,992 KB) 
+ [v2] 
+ Fri, 17 Oct 2025 04:21:56 UTC (9,992 KB) 
+ [v3] 
+ Sat, 1 Nov 2025 19:29:36 UTC (11,588 KB) 
+ [v4] 
+ Tue, 17 Mar 2026 17:33:11 UTC (12,238 KB) 
+ Full-text links: 
+ Access Paper: 
+View a PDF of the paper titled Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers, by Tuhin Chakrabarty and 2 other authors View PDF HTML (experimental) TeX Source
+ view license 
+ Current browse context: 
+ cs.CL 
+ < prev 
+ | 
+ next > 
+ new 
+ | 
+ recent 
+ | 2025-10 
+ Change to browse by:
+ cs 
+ cs.AI 
+ cs.CY 
+ References & Citations 
+ NASA ADS Google Scholar 
+ Semantic Scholar 
+ export BibTeX citation 
+ Loading... 
+ BibTeX formatted citation 
+ × 
+ loading... 
+ Data provided by: 
+ Bookmark 
+ Bibliographic Tools 
+ Bibliographic and Citation Tools 
+ Bibliographic Explorer Toggle 
+ Bibliographic Explorer ( What is the Explorer? ) 
+ Connected Papers Toggle 
+ Connected Papers ( What is Connected Papers? ) 
+ Litmaps Toggle 
+ Litmaps ( What is Litmaps? ) 
+ scite.ai Toggle 
+ scite Smart Citations ( What are Smart Citations? ) 
+ Code, Data, Media 
+ Code, Data and Media Associated with this Article 
+ alphaXiv Toggle 
+ alphaXiv ( What is alphaXiv? ) 
+ Links to Code Toggle 
+ CatalyzeX Code Finder for Papers ( What is CatalyzeX? ) 
+ DagsHub Toggle 
+ DagsHub ( What is DagsHub? ) 
+ GotitPub Toggle 
+ Gotit.pub ( What is GotitPub? ) 
+ Huggingface Toggle 
+ Hugging Face ( What is Huggingface? ) 
+ ScienceCast Toggle 
+ ScienceCast ( What is ScienceCast? ) 
+ Demos 
+ Demos 
+ Replicate Toggle 
+ Replicate ( What is Replicate? ) 
+ Spaces Toggle 
+ Hugging Face Spaces ( What is Spaces? ) 
+ Spaces Toggle 
+ TXYZ.AI ( What is TXYZ.AI? ) 
+ Related Papers 
+ Recommenders and Search Tools 
+ Link to Influence Flower 
+ Influence Flower ( What are Influence Flowers? ) 
+ Core recommender toggle 
+ CORE Recommender ( What is CORE? ) 
+ Author 
+ Venue 
+ Institution 
+ Topic 
+ About arXivLabs
+ arXivLabs: experimental projects with community collaborators 
+ arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website. 
+ Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them. 
+ Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs . 
+ Which authors of this paper are endorsers? |
+ Disable MathJax ( What is MathJax? )
+ We gratefully acknowledge support from
+ our major funders ,
+ member institutions , ,
+ and all contributors.
+ About 
+ · 
+ Help 
+ · 
+ Contact 
+ · 
+ Subscribe 
+ · 
+ Copyright 
+ · 
+ Privacy 
+ · 
+ Accessibility 
+ · 
+ Operational Status (opens in new tab) 
+ Major funding support from 
+ 

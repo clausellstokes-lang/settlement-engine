@@ -1,0 +1,28 @@
+ 
+ Home / Delve into the Depths in the Kobold Blog / Designing with Style: Heading to the Races 
+Designing with Style: Heading to the Races 
+ By 
+ Hannah Rose 
+ / September 20, 2019 / Articles , Designing with Style 
+ In this installment, we’ll talk about headings (or headers, the terms are interchangeable), which are used to separate content into smaller pieces and indicate what information each of those pieces contain. 
+The 5th Edition style guide says, “We expect headings to be used logically and consistently throughout a manuscript.” From my perspective as an editor, this means a few different things. 
+ Use Headers Regularly. This one is pretty simple: if you have really long blocks of text that aren’t separated by headers, it will be hard for readers to find what they’re looking for. Using headers reasonably frequently helps GMs hone in on the information they need while running a game. Plus, avoiding a page-long wall of text simply makes the content more readable and approachable. Your sections will vary in length based on their content, but as a rule of thumb, if you have a chunk of more than 400 words without a header, consider splitting it up into smaller pieces or condensing it to be shorter. 
+ Use Headers Intelligently. A header generally indicates what kind of information is imparted in the block of text under the header. If the header is “Daily Life in Zobeck,” then all of the content in that section should (you guessed it) be about daily life in Zobeck. Save the breakdown of the Undercity and the Collegium for other sections. Of course, if you want to discuss daily life for different kinds of Zobeckers, you might want to use subheadings, which brings us to the heading hierarchy. 
+ Follow the Header Hierarchy. There are five different kinds of headings in this style, as well as formatting options like bulleted lists and sidebars, which we won’t get into for now. The five headings are: 
+Chapter Title 
+Heading 1 
+Heading 2 
+Heading 3 
+Inline Subhead 
+Chapter titles are pretty self-explanatory: “Chapter 2: Races” is an example of a chapter title header. Note that, if you’re creating something short like a subclass, you don’t need a chapter title. Also, chapter titles always span the entire top of the page, meaning that they are formatted in a single column, unlike the rest of the document’s body text, which should be in a two-column format. 
+Chapter titles are followed by first-level headings (or heading 1 or H1, such as “Choosing a Race”), which are followed by second-level headings (or heading 2 or H2, such as “Racial Traits”), and then third-level headings (or heading 3 or H3, such as “Ability Score Increase”). 
+I think of headings like a series of nesting boxes: a chapter title box contains one or more H1 boxes, which can each contain one or more H2 boxes, and so on. The style guide specifies that you should “Use a heading for a structural reason, not an aesthetic one.” You don’t get to skip from an H1 to an H3 just because it looks nice; the H3 box must be inside an H2 box. The one exception is that the name of a spell at the top of a spell description is always an H3. 
+Inline subheadings are occasionally called fourth-level headings, but don’t be fooled; they don’t look like other headings, which appear above the body of the text. Inline subheadings are set in bold and italics and are followed by a period (also in bold and italics). 
+ This Is an Inline Subheading. It probably looks familiar (especially since it appears earlier in this article). Inline subheadings are generally indented (see the “ At Higher Levels. ” subheadings in spell descriptions). If you’re writing for Adventurer’s League or an official product, each header option will have a specific style in the Microsoft Word styles pane. It’s important to use those styles rather than manually bolding and italicizing the text, since the styles persist when the document is transferred from text form in Word to layout in InDesign. 
+That’s it for the headings in official 5th Edition style. To understand more about how the breakdown in this article is used in practice, take a look at a physical copy of the books and an official adventure. When I’m writing, I often look at the books to make sure I’m following established conventions for headers. And note that the style conventions on D&D Beyond, particularly for headers, don’t always follow the same rules as the print books. 
+Comment below with any questions, and feel free to suggest topics for future posts in the Designing with Style series! 
+___ 
+ <<PREVIOUSLY 
+ The Designing with Style series breaks down the official 5th Edition style guide to help designers create content that’s well written, polished, and precise. Understanding the style guide is the key to producing products that are both usable and professional. 
+ Tags: #dnd , #dnd5e 
+ 

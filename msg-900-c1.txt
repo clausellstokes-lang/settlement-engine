@@ -1,0 +1,7 @@
+Desk composition (chair car): the chance meeting's Herald table takes ENC-4b's major band — two leaf pairs, units per leaf
+
+ENC-4b's second car reshaped CHANCE_MEETING_PRESENTATION into a notable/major table; at the §900 composition the table stays the registered CHANCE_MEETING_NEWS_TUNING (P1) with both bands and the alias kept, and its register row's unit map names all four leaves (fraction01 / score100). The inventory refreeze follows as a register act at the composed tip. ENC-4b's +1 registry row and +1 routed token moved in the roster of record (registeredKinds 115, routedTokens 381) with the walker reading the roster.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

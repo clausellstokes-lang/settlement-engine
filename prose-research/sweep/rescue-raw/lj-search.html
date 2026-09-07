@@ -1,0 +1,3551 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+
+<script src="//cdn.blueconic.net/mediasource.js"></script>
+
+<title>Library Journal</title>
+<meta name="keywords" content="Library Journal Junior Library Guild, jlg, library, librarian, books, collection development, reading categories, reading levels." />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" type="text/css" href="/webfiles/1788549891630/css/bootstrap3.3.7.min.css"/>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
+<!-- Jquery pluging for Pagination -->
+<script src="/webfiles/1788549891630/js/jquery.simplePagination.js" type="text/javascript"></script>
+<!-- <script type="text/javascript" src="path_to/jquery.simplePagination.js"></script> -->
+
+<!-- Latest compiled JavaScript -->
+<script src="/webfiles/1788549891630/js/bootstrap3.3.7.min.js" type="text/javascript"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+<!-- ReCAPTCHA plugin -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<!-- fa fa Icons -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<!-- <link href="http://lj.libraryjournal.com/wp-content/themes/news/images/favicon.ico" rel="Shortcut Icon" type="image/x-icon" /> -->
+
+<link href="/webfiles/1788549891630/images/LJ_logo.ico" rel="Shortcut Icon" type="image/x-icon" />
+
+<!-- <link rel="stylesheet" type="text/css" href="/webfiles/1788549891630/css/header.css"/> -->
+<link rel="stylesheet" type="text/css" href="/webfiles/1788549891630/css/font-awesome.css"/>
+<link rel="stylesheet" type="text/css" href="/webfiles/1788549891630/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/webfiles/1788549891630/css/movers.css"/>
+<link rel="stylesheet" type="text/css" href="/webfiles/1788549891630/css/subscription.css"/>
+
+<script src="/webfiles/1788549891630/js/swiper.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/webfiles/1788549891630/css/swiper.min.css"/>
+
+<link rel="canonical" href="https://www.libraryjournal.com/"/>
+
+
+<script>
+function myFunction() {
+var x = document.getElementById("myTopnav");
+if (x.className === "topnav") {
+x.className += " responsive";
+} else {
+x.className = "topnav";
+}
+}
+</script>
+<script type="text/javascript">
+var analyticsFileTypes = [''];
+var analyticsSnippet = 'enabled';
+var analyticsEventTracking = 'enabled';
+</script>
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KKLCXJW');</script>
+<!-- End Google Tag Manager -->
+<script type="text/javascript">
+function divSwap(div1,div2)
+{
+d1 = document.getElementById(div1);
+d2 = document.getElementById(div2);
+if( d2.style.display == "none" )
+{
+d1.style.display = "none";
+d2.style.display = "block";
+}
+else
+{
+d1.style.display = "block";
+d2.style.display = "none";
+}
+}
+
+</script>
+
+<script async="async" src="https://www.googletagservices.com/tag/js/gpt.js">
+</script>
+
+<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+</script>
+
+<script type='text/javascript'>
+
+   var networkCode = 3245306;
+   var adUnit = 'lj';
+   var slotName = "/" + networkCode + "/" + adUnit;
+   var pid = 'ljhome';
+   var theme = 'homepage';
+   var pgtype = 'homepage';
+   function breakpointval(){
+       var width = window.innerWidth;
+       if(width<768){
+           return "mobile";
+       }else if(width<993){
+           return "tablet";
+       }else if(width>992){
+           return "desktop";
+       }
+   }
+   function customerName() {
+    if ($.cookie('customerToken') != undefined) {
+        var customerDetails = JSON.parse($.cookie('customerData'));
+        return customerDetails.firstname;
+    }
+   }
+   var breakpoint = breakpointval();
+   var loggedin =(customerName())?"yes":"no";
+ googletag.cmd.push(function() {
+  var topMapping = googletag.sizeMapping().
+      addSize([768, 0], [728, 90]).
+      addSize([0, 0], [300, 50]).
+      build();
+  var hpmid1Mapping = googletag.sizeMapping().
+      addSize([993, 0], [300, 250]).
+      addSize([768, 0], [728, 90]).
+      addSize([0, 0], [300, 250]).
+      build();
+  var hpmid2Mapping = googletag.sizeMapping().
+      addSize([768, 0], [728, 90]).
+      addSize([0, 0], [300, 250]).
+      build();
+  googletag.defineSlot(slotName, [[728, 90], [300, 50]], 'header_tag_desktop')
+   .defineSizeMapping(topMapping)
+   .addService(googletag.pubads())
+   .setTargeting("pos", "top");
+  googletag.defineSlot(slotName, [[300, 250], [728, 90]], 'homepage1')
+   .defineSizeMapping(hpmid1Mapping)
+   .addService(googletag.pubads())
+   .setTargeting("pos", "mid1");
+  googletag.defineSlot(slotName, [[728, 90], [300, 250]], 'homepage2')
+   .defineSizeMapping(hpmid2Mapping)
+   .addService(googletag.pubads())
+   .setTargeting("pos", "mid2");
+  googletag.defineSlot(slotName, [[728, 90], [300, 250]], 'homepage3')
+   .defineSizeMapping(hpmid2Mapping)
+   .addService(googletag.pubads())
+   .setTargeting("pos", "mid3");
+  googletag.defineSlot(slotName, [1, 1], 'LJ_Spotible1_1x1')
+   .addService(googletag.pubads())
+   .setTargeting("pos", "spotible");
+  googletag.defineSlot(slotName, [1, 1], 'LJ_Video_1x1')
+   .addService(googletag.pubads())
+   .setTargeting("pos", "video");
+    googletag.pubads().setTargeting("theme",theme);
+    googletag.pubads().setTargeting("pid",pid);
+    googletag.pubads().setTargeting("pgtype",pgtype);
+    googletag.pubads().setTargeting("breakpoint",breakpoint);
+    googletag.pubads().setTargeting("loggedin",loggedin);
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().collapseEmptyDivs();
+    googletag.pubads().enableLazyLoad();
+    googletag.enableServices();
+   });
+</script>
+
+
+
+<script>
+function userName() {
+    if ($.cookie('customerToken') != undefined) {
+        var customerDetails = JSON.parse($.cookie('customerData'));
+        if(customerDetails.firstname == "LJ")
+            return "Free User";
+        else
+            return "loggedin"
+    }
+   }
+var usertyp =(userName())?userName():"NotLogged";
+
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+    'dimensions':{
+
+      'category': theme,
+      'user type': usertyp
+    }
+});
+</script>
+<script>/*<![CDATA[*/(function(w,a,b,d,s){w[a]=w[a]||{};w[a][b]=w[a][b]||{q:[],track:function(r,e,t){this.q.push({r:r,e:e,t:t||+new Date});}};var e=d.createElement(s);var f=d.getElementsByTagName(s)[0];e.async=1;e.src='//mediasource.actonservice.com/cdnr/63/acton/bn/tracker/10574';f.parentNode.insertBefore(e,f);})(window,'ActOn','Beacon',document,'script');ActOn.Beacon.track();/*]]>*/</script>
+
+<meta name="google-site-verification" content="GINpffHmAfZPGwpGyHSIt6k2Eeg8Hk44abcaPHa4FsI" />
+<meta name="facebook-domain-verification" content="894j6361r0x0qu1ys4g936p4766o10" />
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKLCXJW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+	<div class="col-md-12 pl_0 pr_0">
+    <a name="top"></a>
+		<div id="advertisement" class="advertisement adv-top bg-gray col-md-12 col-sm-12 col-xs-12 float-left hidden-print">
+			<div id="header_tag_desktop">
+                <script type='text/javascript'>
+                    googletag.cmd.push(function() { googletag.display('header_tag_desktop'); });
+                </script>
+
+			</div>
+		</div>
+<!-- new header design in desktop view -->
+<script src="/webfiles/1788549891630/js/header.js" type="text/javascript"></script>
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/20468848.js"></script>
+<script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js"></script>
+
+
+<!-- IP Popup Start -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="ip-met-pop-cont modal-content">
+      <div class="modal-body">
+        <button onclick="closeClick()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span style="font-size:25px;" aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="ip-met-pop-h3"></h3>
+        <div class="ip-met-pop-anc-link-cont">
+          <button onclick="loginClick()" type="button" class="ip-met-pop-anc-link">Login</button>
+          <button onclick="closeClick()" type="button" class="ip-met-pop-anc-link" data-dismiss="modal">No thanks, take me to the website.</button>
+        </div>
+     </div>
+    </div>
+  </div>
+</div>
+<!-- IP Popup End -->
+
+<!-- Login Access Popup Start -->
+<div class="modal fade" id="loginConfirmModal" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="login-met-pop-cont modal-content">
+      <div class="modal-body">
+        <button onclick="procedToLoginClose()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span style="font-size:25px;" aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="login-met-pop-h3-header">You have exceeded your limit for simultaneous device logins.</h3>
+        <h3 class="login-met-pop-h3">Your current subscription allows you to be actively logged in on up to three (3) devices simultaneously. Click on continue below to log out of other sessions and log in on this device.</h3>
+        <div class="ip-met-pop-anc-link-cont">
+          <button id="proced-to-login" type="button" class="ip-met-pop-anc-link" onclick="procedToLoginClick()" data-dismiss="modal">Continue</button>
+          <button type="button" class="ip-met-pop-anc-link" data-dismiss="modal" onclick="procedToLoginClose()">Cancel</button>
+        </div>
+     </div>
+    </div>
+  </div>
+</div>
+<!-- Login Access Popup End -->
+
+<!-- Gift Subscription Popup Start -->
+<div class="modal fade" id="myGiftModal" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="gift-met-pop-cont modal-content">
+      <div class="modal-body">
+        <button onclick="giftPopupCloseClick()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span style="font-size:25px;" aria-hidden="true">&times;</span>
+        </button>
+        <h3 id="gift-met-pop-h3" class="gift-met-pop-h3"></h3>
+        <div class="gift-met-pop-anc-link-cont">
+          <button onclick="giftPopupOKClick()" type="button" class="gift-met-pop-anc-link">OK</button>
+        </div>
+        <div class="display-none" id="gift-loader-space"><i class="fa fa-spinner fa-spin red" style="font-size:38px;margin-left: 45%;"></i></div>
+     </div>
+    </div>
+  </div>
+</div>
+<!-- Gift Subscription Popup End -->
+
+<div id="header" class="header container-fluid col-md-12 col-sm-12 col-xs-12 float-left pl_0 pr_0 hidden-xs">
+  <div id="header-banner-multi-sub" class="header-banner-multi-sub"></div>
+  <nav class="navbar navbar-default container mb_0">
+    <div class="col-md-12 col-sm-12 col-xs-12 p_0">
+      <div class="navbar-header col-md-3 col-sm-3 col-xs-12 mb_15 p_0">
+     
+           
+
+           <!-- NEW ONLINE COURSE BLOCK -->
+    <div id="online-course-block" style="margin-top:51px;">
+        <div class="course-title">Online Professional Development</div>
+       <a href="https://course.libraryjournal.com/?utm_source=library_journal&utm_medium=website&utm_campaign=lj_courses_s26"
+     class="course-btn"
+     target="_blank"
+     rel="noopener noreferrer">
+    EXPLORE OUR COURSES
+  </a>
+    </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12 text-align-center">
+        <a id="homeId" onclick="readUrlCategory('home','homeId','home')" ;>
+          <img class="LJ-image pointer" src="/webfiles/1788549891630/images/LJ.jpg" alt="L J image" />
+        </a>
+      </div>
+      <ul class="nav navbar-nav navbar-right col-md-3 col-sm-3 col-xs-12 mt_20">
+        <!-- <li class="pull-right mt_5 tab-mt-20">
+            <a class="tab-no-padding" href="/page/shopping-cart-page">
+              <div id="cart">
+                <img class="tab-w20" src="/webfiles/1788549891630/images/shopping-cart.png"/>
+              </div>
+              <span id="itemCount">0</span>
+            </a>
+          </li> -->
+        <li class="pull-right mt_20 ml_30 search-bar">
+          <a href="" class="search-icon p_0 tab-ml-10" data-toggle="collapse">
+            <img id="btn" class="tab-w20" src="/webfiles/1788549891630/images/search.png" />
+            <div id="idd" class="display-none"></div>
+          </a>
+        </li>
+        <li id="usertempDetail" class="pull-right mt_20 ellipsis-user-name dropdown-hover display-none">
+          <div class="usertempDetail pointer ml_20 tab-no-margin fs_16 tab-fs-14 customer-id">Free Access Account</div>
+          <!-- After logged in user account nav popup-->
+          <ul id="account-popup" class="dropdown-menu account-nav border-none">
+            <li><a class="mb_10 mt_10 pointer" onclick="deleteAllCookies('/page/home')">Logout</a></li>
+          </ul>
+        </li>
+        <li id="userDetail" class="pull-right mt_20 ellipsis-user-name dropdown">
+          <div id="mydiv" class="userDetail pointer ml_20 tab-no-margin fs_16 tab-fs-14">
+              <a href="/page/login" class="p_0 fs_16 dropdown-toggle" role="button" aria-expanded="false">
+          <img class="mr_10" src="/webfiles/1788549891630/images/user.png" />Log In</a> 
+
+            </div>
+          <!-- After logged in user account nav popup-->
+          <ul id="account-popup" class="dropdown-menu account-nav border-none">
+            <li><a class="mb_10 mt_10" href="/page/account-dashboard?id=ms" id="ms">My Subscriptions</a></li>
+            <!-- <li><a class="mb_10 mt_10"href="/page/account-dashboard?id=ml" id="ml">My Library</a></li> -->
+            <li><a class="mb_10 mt_10" href="/page/account-dashboard?id=mz" id="mz">My Library</a></li>
+            <li><a class="mb_10 mt_10" href="/page/account-dashboard?id=mp" id="mp">My Profile</a></li>
+            <li><a class="mb_10 mt_10 display-none" href="/page/account-dashboard?id=mi" id="mi">Manage Institution</a>
+            </li>
+            <li><a class="mb_10 mt_10 pointer" onclick="deleteAllCookies('/page/home')">Logout</a></li>
+          </ul> <!-- End After logged in user account nav popup -->
+
+          <!-- Before log in user account nav popup -->
+          <ul id="reg-popup" class="dropdown-menu dropdown-menu-login pb_20" role="menu">
+            <li>
+              <div class="registration">
+                <div class="col-md-12 col-xs-12 p_0">
+                  <form class="registration-form" id="login-form1" method="post" data-toggle="validator">
+
+                    <div class="col-md-12 text-align-center pl_0 pr_0 pt_0">
+                      <div class="highlight error-color display-none" id="login-error1">Invalid email or password. Try
+                        again.</div>
+                    </div>
+
+                    <div class="col-md-12 form-group required mb_0 pl_20 pr_20">
+                      <label class="control-label">Email</label>
+                      <input class="" type="email" id="loginEmail1" name="loginEmail" placeholder="Email" required>
+                    </div>
+
+                    <div class="col-md-12 form-group required mb_0 pl_20 pr_20">
+                      <label class="control-label">Password</label>
+                      <input type="password" id="loginPassword1" name="loginPassword" placeholder="Password" required>
+                    </div>
+
+                    <div class="col-md-12 form-group required mb_0 pl_20 pr_20 text-align-center"
+                      id="headerDropdownLoginLoader">
+
+                    </div>
+
+                    <div class="col-md-12 text-align-center pl_20 pr_20">
+                      Forgot <a class="border-bottom-red text-decoration-none" href="/page/forgot-pass">password</a>?
+                    </div>
+
+                    <div class="col-md-12 align-center pl_20 pr_20">
+                      <button type="submit" class="btn btn-default-red bold akzidenz-grotesk-regular"
+                        id="headerDropdownLoginButton">LOG IN</button>
+                    </div>
+
+                    <div class="col-md-12 text-align-center align-center pl_20 pr_20 pb_0 fs_13">
+                      Don't have a Library Journal Account?
+                    </div>
+
+                    <div class="col-md-12 text-align-center align-center pl_20 pr_20 pt_0">
+                      <a class="border-bottom-red text-decoration-none" href="/page/register">Register Now</a>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <!-- End Before log in user account nav popup -->
+        </li>
+           <div class="subscribe-wrapper ml_20 mt_10">
+
+  <!-- SUBSCRIBE -->
+  <a href="/page/subscribe" id="subscribe-wrapper">
+    <button id="subscribe-btn"
+      class="btn btn-subscribe btn-red navbar-btn subscribe-btn-size"
+      style="width:140px;">
+      SUBSCRIBE
+    </button>
+  </a>
+
+  <!-- ACCESS (same style as before) -->
+  <div id="open-url-btn" class="topic-type" style="display:none;">
+    <a id="digitized" class="theme-link fs_13" style="cursor:pointer;">
+      ACCESS DIGITIZED EDITION
+    </a>
+  </div>
+   <div id="emags_link" class="topic-type mb_10" style="display:none;">
+              <a id="emags_link_click" class="theme-link fs_13" style="cursor: pointer">ACCESS DIGITIZED EDITION</a>
+          </div>
+
+</div>
+      </ul>
+    </div><!-- end col-md-12 col-sm-12 col-xs-12 -->
+  </nav>
+
+  <div class="hr_division_grey_light mb_0"></div>
+  <div class="topic-navigation">
+    <nav class="navbar-default mb_0 container">
+      <ul class="nav navbar-nav full-width pull-left header-section">
+        <li class="pl_0 nml-8">
+          <a id="newsId" class="pl_0" onclick="readUrlCategory('news','newsId','News')" ;>News</a>
+        </li>
+        <li>
+          <a id="reviewsId" onclick="readUrlCategory('reviews','reviewsId','Reviews')" ;>Reviews+</a>
+        </li>
+        <li>
+          <a id="technologyId" onclick="readUrlCategory('technology','technologyId','Technology')" ;>Technology</a>
+        </li>
+        <li>
+          <a id="programsId" onclick="readUrlCategory('programs+','programsId','Programs+')" ;>Programs+</a>
+        </li>
+        <li>
+          <a id="designId" onclick="readUrlCategory('design','designId','Design')" ;>Design</a>
+        </li>
+        <li>
+          <a id="peopleId" onclick="readUrlCategory('people','peopleId','People')" ;>People</a>
+        </li>
+        <li>
+          <a id="publicLibrariesId" onclick="readUrlCategory('publiclibraries','publicLibrariesId','Public Libraries')"
+            ;>Public Libraries</a>
+        </li>
+        <li>
+          <a id="academicId" onclick="readUrlCategory('academiclibraries','academicId','Academic Libraries')" ;>Academic
+            Libraries</a>
+        </li>
+        <li class="pr_0">
+          <a id="moreId" class="pr_0">Events & More+</a>
+          <ul class="dropdownlist">
+            <li><a id="eventId" onclick="readUrlCategory('events','eventId','Events')" ;>Events</a></li>
+            <li><a id="onlineCourseId" onclick="readUrlCategory('events?eventtype=eventHome','onlineCourseId','OnlineCourse')" ;>Online Courses</a></li>
+               <li><a href="https://librarieslead.libraryjournal.com">Libraries Lead Podcast</a></li>
+            <li><a id="leadershipId" onclick="readUrlCategory('leadership','leadershipId','Leadership')"
+                ;>Leadership</a></li>
+            <li><a id="advocacyId" onclick="readUrlCategory('advocacy','advocacyId','Advocacy')" ;>Advocacy</a></li>
+            <li><a id="researchId" onclick="readUrlCategory('research','researchId','Research')" ;>Research</a></li>
+            <li><a id="opinionId" onclick="readUrlCategory('opinion','opinionId','Opinion')" ;>Opinion</a></li>
+            <li><a id="infoDocketId" onclick="readUrlCategory('infoDOCKET','infoDocketId','infoDOCKET')"
+                ;>infoDOCKET</a></li>
+            <li><a href="http://jobs.libraryjournal.com/" target="_blank">Job Zone</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="hr_division mt_0 mb_0"></div>
+    <form method="get" action="https://www.libraryjournal.com/search" class="collapse search-form full-width">
+      <div class="container-fluid p_0">
+        <div class="p_0 search-bar-container col-md-12 col-sm-12">
+          <div id="imaginary_container" class="col-md-offset-2 col-md-8 col-sm-12 mt_30">
+            <div class="input-group stylish-input-group input-append">
+              <input type="text" name="query" class="form-control search-box" placeholder="Search" autofocus>
+              <span class="input-group-addon">
+                <button type="submit">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>
+
+     
+      <!-- new header design in mobile view -->
+<div id="header-mobile" class="header container-fluid col-md-12 col-sm-12 col-xs-12 float-left visible-xs">
+  <nav class="navbar navbar-default container mb_0">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="container">
+      <div class="navbar-header mobile-top-row">
+        <div id="online-course-block-mobi" style="margin-top:10px;"> 
+  <div class="course-title">Online Professional Development</div>
+  <a href="https://course.libraryjournal.com/?utm_source=library_journal&utm_medium=website&utm_campaign=lj_courses_s26"
+     class="course-btn"
+     target="_blank"
+     rel="noopener noreferrer">
+    EXPLORE OUR COURSES
+  </a>
+</div>
+        <button id="ChangeToggle" type="button" class="navbar-toggle" data-toggle="collapse"
+          data-target="#navbarCollapse">
+          <img id="navbar-hamburger" class="lines pt_0" src="/webfiles/1788549891630/images/menu.png" />
+          <img id="navbar-close" class="cross pt_0 hidden" src="/webfiles/1788549891630/images/cross.png" />
+        </button>
+        <a id="mobileHomeId" onclick="readUrlCategory('home','mobileHomeId','home')" ;>
+          <img class="LJ-image pointer" src="/webfiles/1788549891630/images/mob_LJ.png" alt="L J image" />
+        </a>
+        <a href="#" class="p_0 pull-right" data-toggle="collapse" data-target=".login-user">
+          <img class="userLines" src="/webfiles/1788549891630/images/user.png" />
+        </a>
+         <div id="sub-mobile-btn">
+        <a id="sub-btn-mobi" href="/page/subscribe"><button class="btn btn-subscribe btn-red navbar-btn">SUBSCRIBE</button></a>
+     </div>
+</div>
+        <div class="collapse login-user">
+          <div id="userDetail" class="mt_20 mb_20 dropdown">
+            <div class="userDetail pointer ml_15 mb_10">
+              <a href="/page/login" class="p_0 fs_16 dropdown-toggle" role="button" aria-expanded="false">Log In</a>
+            </div>
+            <!-- After logged in user account nav popup-->
+            <div class="display-none" id="mobileViewAccountList">
+              <ul class="display-none nav navbar-nav full-width pull-left no-margin">
+                <li><a href="/page/account-dashboard?id=ms" id="ms">My Subscriptions</a></li>
+                <li><a href="/page/account-dashboard?id=ml" id="ml">My Library</a></li>
+                <!-- <li><a href="#">My Saved Articles</a></li> -->
+                <li><a href="/page/account-dashboard?id=mp" id="mp">My Profile</a></li>
+                <li><a href="/page/account-dashboard?id=mi" id="mi" class="display-none">Manage Institutions</a></li>
+                <li><a class="pointer" onclick="deleteAllCookies('/page/home')">Logout</a></li>
+              </ul>
+            </div>
+            <!-- End After logged in user account nav popup -->
+          </div>
+        </div>
+      </div>
+      <div class="topic-type mb_10 text-center">
+        <!--<a class="theme-link fs_13" href="https://store.emags.com/libraryjournal_free" target="_blank">ACCESS DIGITIZED EDITION</a>-->
+        <a id="digitized-mobi open-url-btn-mobi" class="theme-link fs_13" style="cursor: pointer; display:none;">ACCESS DIGITIZED EDITION</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <form method="get" action="https://www.libraryjournal.com/search" class="search-input" id="demo-2">
+            <div id="imaginary_container">
+              <div class="input-group stylish-input-group input-append">
+                <input type="text" name="query" class="form-control search-box" placeholder="Search">
+                <span class="input-group-addon">
+                  <button type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <ul class="nav navbar-nav mt_70">
+            <li>
+              <a id="mobNewsId" class="bold" onclick="readUrlCategory('news','mobNewsId','News')" ;>News</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="/section/news/archivespreservation">Archives & Preservation</a></p>
+                  <p><a href="/section/news/awards">Awards</a></p>
+                  <p><a href="/section/news/booknews">Book News</a></p>
+                  <p><a href="/section/news/budgetsfunding">Budgets & Funding</a></p>
+                  <p id="newsMoreToggle">More</p>
+                  <ul id="newsMoreToggleUl" class="display-none list-unstyled">
+                    <li class="mb_10"><a href="/section/news/innovation">Innovation</a></li>
+                    <li class="mb_10"><a href="/section/news/lis">LIS</a></li>
+                    <li class="mb_10"><a href="/section/news/management">Management</a></li>
+                    <li class="mb_10"><a href="/section/news/marketing">Marketing</a></li>
+                  </ul>
+                </div>
+                <div class="col-xs-6 pr_0 pl_10">
+                  <p><a href="/section/news/buildings">Buildings</a></p>
+                  <p><a href="/section/news/conferencecoverage">Conference Coverage</a></p>
+                  <p><a href="/section/news/impacts">Impacts</a></p>
+                  <p><a href="/section/news/industrynews">Industry News</a></p>
+
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobReviewsId" class="bold" onclick="readUrlCategory('reviews','mobReviewsId','Reviews')"
+                ;>Reviews+</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="/section/reviews/awards">Awards</a></p>
+                  <p><a href="/section/reviews/bestof">Best of</a></p>
+                  <p><a href="/section/reviews/booknews">Book News</a></p>
+                  <p><a href="/section/reviews/booklists">Booklists</a></p>
+                  <p id="reviewMoreToggle">More</p>
+                  <ul id="reviewMoreToggleUl" class="display-none list-unstyled">
+                    <li class="mb_10"><a href="/section/reviews/readersadvisory">Readers' Advisory</a></li>
+                    <li class="mb_10"><a href="/section/reviews/reference">Reference</a></li>
+                  </ul>
+                </div>
+                <div class="col-xs-6 pr_0 pl_10">
+                  <p><a href="/section/reviews/collectionmanagement">Collection Management</a></p>
+                  <p><a href="/section/reviews/fiction">Fiction</a></p>
+                  <p><a href="/section/reviews/media">Media</a></p>
+                  <p><a href="/section/reviews/nonfiction">Nonfiction</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobTechnologyId" class="bold"
+                onclick="readUrlCategory('technology','mobTechnologyId','Technology')" ;>Technology</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="/section/technology/archivespreservation">Archives & Preservation</a></p>
+                  <p><a href="/section/technology/awards">Awards</a></p>
+                  <p><a href="/section/technology/budgetsfunding">Budgets & Funding</a></p>
+                  <p><a href="/section/technology/buildings">Buildings</a></p>
+                  <p id="technologyMoreToggle">More</p>
+                  <ul id="technologyMoreToggleUl" class="display-none list-unstyled">
+                    <li class="mb_10"><a href="/section/technology/management">Management</a></li>
+                    <li class="mb_10"><a href="/section/technology/marketing">Marketing</a></li>
+                    <li class="mb_10"><a href="/section/technology/readersadvisory">Readers' Advisory</a></li>
+                  </ul>
+                </div>
+                <div class="col-xs-6 pr_0 pl_10">
+                  <p><a href="/section/technology/impacts">Impacts</a></p>
+                  <p><a href="/section/technology/industrynews">Industry News</a></p>
+                  <p><a href="/section/technology/innovation">Innovation</a></p>
+                  <p><a href="/section/technology/lis">LIS</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobProgramsId" class="bold" onclick="readUrlCategory('programs+','mobProgramsId','Programs+')"
+                ;>Programs+</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="/section/programs+/archivespreservation">Archives & Preservation</a></p>
+                  <p><a href="/section/programs+/awards">Awards</a></p>
+                  <p><a href="/section/programs+/collectionmanagement">Collection Management</a></p>
+                  <p><a href="/section/programs+/impacts">Impacts</a></p>
+                  <p id="programsMoreToggle">More</p>
+                  <ul id="programsMoreToggleUl" class="display-none list-unstyled">
+                    <li class="mb_10"><a href="/section/programs+/readersadvisory">Readers' Advisory</a></li>
+                  </ul>
+                </div>
+                <div class="col-xs-6 pr_0 pl_10">
+                  <p><a href="/section/programs+/innovation">Innovation</a></p>
+                  <p><a href="/section/programs+/management">Management</a></p>
+                  <p><a href="/section/programs+/marketing">Marketing</a></p>
+                  <p><a href="/section/programs+/programming">Programming</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobDesignId" class="bold" onclick="readUrlCategory('design','mobDesignId','Design')" ;>Design</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="/section/design/archivespreservation">Architecture & Buildings</a></p>
+                  <p><a href="/section/design/awards">Awards</a></p>
+                  <p><a href="/section/design/budgetsfunding">Budgets & Funding</a></p>
+                  <p><a href="/section/design/buildings">Buildings</a></p>
+                </div>
+                <div class="col-xs-6 pr_0 pl_10">
+                  <p><a href="/section/design/impacts">Impacts</a></p>
+                  <p><a href="/section/design/innovation">Innovation</a></p>
+                  <p><a href="/section/design/management">Management</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobLeadershipId" class="bold"
+                onclick="readUrlCategory('leadership','mobLeadershipId','Leadership')" ;>Leadership</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="/section/leadership/archivespreservation">Archives & Preservation</a></p>
+                  <p><a href="/section/leadership/awards">Awards</a></p>
+                  <p><a href="/section/leadership/budgetsfunding">Budgets & Funding</a></p>
+                  <p><a href="/section/leadership/careers">Careers</a></p>
+                  <p id="leadershipMoreToggle">More</p>
+                  <ul id="leadershipMoreToggleUl" class="display-none list-unstyled">
+                    <li class="mb_10"><a href="/section/leadership/management">Management</a></li>
+                    <li class="mb_10"><a href="/section/leadership/marketing">Marketing</a></li>
+                    <li class="mb_10"><a href="/section/leadership/readersadvisory">Readers' Advisory</a></li>
+                  </ul>
+                </div>
+                <div class="col-xs-6 pr_0 pl_10">
+                  <p><a href="/section/leadership/collectionmanagement">Collection Management</a></p>
+                  <p><a href="/section/leadership/impacts">Impacts</a></p>
+                  <p><a href="/section/leadership/innovation">Innovation</a></p>
+                  <p><a href="/section/leadership/lis">LIS</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobPeopleId" class="bold" onclick="readUrlCategory('people','mobPeopleId','People')" ;>People</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="/section/people/awards">Awards</a></p>
+                  <p><a href="/section/people/careers">Careers</a></p>
+                  <p><a href="/section/people/industrynews">Industry News</a></p>
+                  <p><a href="/section/people/innovation">Innovation</a></p>
+                </div>
+                <div class="col-xs-6 pr_0 pl_10">
+                  <p><a href="/section/people/lis">LIS</a></p>
+                  <p><a href="/section/people/management">Management</a></p>
+                  <p><a href="/section/people/marketing">Marketing</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobpublicLibId" class="bold"
+                onclick="readUrlCategory('publiclibraries','mobpublicLibId','Public Libraries')" ;>Public Libraries</a>
+              <div class="col-xs-12 mb_10">
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobAcademicId" class="bold"
+                onclick="readUrlCategory('academiclibraries','mobAcademicId','Academic Libraries')" ;>Academic
+                Libraries</a>
+              <div class="col-xs-12 mb_10">
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobAdvocacyId" class="bold" onclick="readUrlCategory('advocacy','mobAdvocacyId','Advocacy')"
+                ;>Advocacy</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="?subpage=Advocacy,Awards">Awards</a></p>
+                  <p><a href="?subpage=Advocacy,budgetsfunding">Budgets & Funding</a></p>
+                  <p><a href="?subpage=Advocacy,Impacts">Impacts</a></p>
+                </div>
+                <div class="col-xs-6 pr_0 pl_10">
+                  <p><a href="?subpage=Advocacy,Innovation">Innovation</a></p>
+                  <p><a href="?subpage=Advocacy,Management">Management</a></p>
+                  <p><a href="?subpage=Advocacy,Marketing">Marketing</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li class="pr_0">
+              <a id="mobMoreId" class="bold">More</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a id="mobCovid19Id" onclick="readUrlCategory('covid19','mobCovid19Id','COVID19')" ;>COVID19</a>
+                  </p>
+                  <p><a id="mobResearchId" onclick="readUrlCategory('research','mobResearchId','Research')"
+                      ;>Research</a></p>
+                  <p><a id="mobopinionId" onclick="readUrlCategory('opinion','mobopinionId','Opinion')" ;>Opinion</a>
+                  </p>
+                  <p><a id="mobInfoDocketId" onclick="readUrlCategory('infoDOCKET','mobInfoDocketId','infoDOCKET')"
+                      ;>infoDOCKET</a></p>
+                  <p><a href="http://jobs.libraryjournal.com/" target="_blank">Job Zone</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobeventPDId" class="bold" onclick="readUrlCategory('events','mobeventPDId','Events')" ;>Events &
+                PD</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="/section/events?eventtype=inPersonEvents">Live Events</a></p>
+                  <p><a href="/section/events?eventtype=virtualEvents">Virtual Events</a></p>
+                </div>
+                <div class="col-xs-6 pr_0">
+                  <p><a href="/section/events?eventtype=onlineCourses">Online Courses</a></p>
+                  <p><a href="/section/events?eventtype=webcasts">Webcasts</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <!-- <li>
+									<a id="mobCommunityId" class="bold" onclick="">Community</a>
+                  <div class="col-xs-12 mb_10">
+                    <div class="col-xs-6 p_0">
+                        <p><a href="">Forums</a></p>
+                        <p><a href="">Resources</a></p>
+                    </div>
+                    <div class="col-xs-6 pr_0">
+                      <p><a href="">Member Benefits</a></p>
+                    </div>
+                    <div class="hr_division_grey_light"></div>
+                  </div>
+                </li> -->
+            <li>
+              <a id="mobAboutId" class="bold" href="/page/About-Us">About LJ</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="http://www.mediasourceinc.com/">LJ Projects</a></p>
+                  <p><a href="https://self-e.libraryjournal.com/">Self-Published Books</a></p>
+                </div>
+                <div class="col-xs-6 pr_0">
+                  <p><a href="/page/Data-Privacy">Privacy Policy</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <a id="mobGetTouchId" class="bold" onclick="">Get in Touch</a>
+              <div class="col-xs-12 mb_10">
+                <div class="col-xs-6 p_0">
+                  <p><a href="/page/subscribe">Subscriber Services</a></p>
+                </div>
+                <div class="col-xs-6 pr_0">
+                  <p><a href="/page/Contact-Us">Contact Us</a></p>
+                </div>
+                <div class="hr_division_grey_light"></div>
+              </div>
+            </li>
+            <li>
+              <div class="col-xs-12 mb_10 text-align-center bold fs_18">
+                888-282-5852
+              </div>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+<script type="text/javascript">
+  var btn = $('#btn');
+  var idd = $('#idd');
+  var click = $('#open-url-btn');
+
+  if ($.cookie('customerData') != undefined) {
+    var cdata = JSON.parse($.cookie('customerData'));
+    var group_id = cdata.group_id;
+    if (group_id == 4) {
+      //$('.topic-navigation').css("display","none");
+      $("#userDetail").css("display", "none");
+      $("#usertempDetail").removeClass('display-none');
+    }
+  }
+
+  btn.click(function () {
+    idd.toggle(100, function () {
+      // change the button text according to the state of the "#idd"
+      if (idd.hasClass('display-none')) {
+        btn.attr('src', "/webfiles/1788549891630/images/cross.png");
+        $('.search-box').focus();
+        idd.removeClass('display-none');
+      } else {
+        btn.attr('src', "/webfiles/1788549891630/images/search.png");
+        idd.addClass('display-none');
+      }
+    });
+
+  });
+
+  //  click.click(function() {
+  //    if ($.cookie('customerData') != undefined) {
+  //      var Url = APIBaseUrl + "customer/getEmagsLink/" + JSON.parse($.cookie('customerData')).email;
+  //var Url = APIBaseUrl + "customer/getImpelsysLink/" + "ajey.s@quantilus.com"
+  //      $.ajax({
+  //        url: Url,
+  //        type: 'GET',
+  //        contentType: 'application/json',
+  //        success: function(data, textStatus) {
+  //          const obj = JSON.parse(data)
+  //          if(obj['success'] == 1){
+  //            window.open(obj['url']);
+  //          }
+  //        },
+  //        error: function(request, textStatus, errorThrown) {
+  //document.getElementById("saveProfileId").innerHTML = '<div onclick="myProfileSave()" class="btn btn-default-red full-width bold akzidenz-grotesk-regular" >SAVE</div>';
+  //        }
+  //      });
+  //    }
+  //  });
+
+  $("#newsMoreToggle").click(function () {
+    if ($("#newsMoreToggleUl").hasClass('display-none')) {
+      $("#newsMoreToggleUl").removeClass('display-none');
+    } else {
+      $("#newsMoreToggleUl").addClass('display-none');
+    }
+  });
+  $("#reviewMoreToggle").click(function () {
+    if ($("#reviewMoreToggleUl").hasClass('display-none')) {
+      $("#reviewMoreToggleUl").removeClass('display-none');
+    } else {
+      $("#reviewMoreToggleUl").addClass('display-none');
+    }
+  });
+  $("#technologyMoreToggle").click(function () {
+    if ($("#technologyMoreToggleUl").hasClass('display-none')) {
+      $("#technologyMoreToggleUl").removeClass('display-none');
+    } else {
+      $("#technologyMoreToggleUl").addClass('display-none');
+    }
+  });
+  $("#programsMoreToggle").click(function () {
+    if ($("#programsMoreToggleUl").hasClass('display-none')) {
+      $("#programsMoreToggleUl").removeClass('display-none');
+    } else {
+      $("#programsMoreToggleUl").addClass('display-none');
+    }
+  });
+  $("#leadershipMoreToggle").click(function () {
+    if ($("#leadershipMoreToggleUl").hasClass('display-none')) {
+      $("#leadershipMoreToggleUl").removeClass('display-none');
+    } else {
+      $("#leadershipMoreToggleUl").addClass('display-none');
+    }
+  });
+</script>
+    <div class="container">
+
+
+
+<div class="content pull-left full-width">
+  <div class="home-featured-story col-sm-12 col-xs-12 float-right pr_0 tab-pl_0 mob-pl_0">
+      <div class="col-md-8 col-sm-8 tab-pl_0 mob-pl_0 mob-pr_0 mb_30" id="top-center-div">
+                          <div class="top-story-image-main">
+                      <a href="/page/library-journal-150-years" target="">
+                        <img class="image-full" src="https://www.libraryjournal.com/binaries/content/gallery/Jlibrary/special-projects/2026/lj-at-150-september/ljsept2026_150landingpage_topelement_new.png" border="0" id="ad_unbordered"/>
+                      </a>
+                  </div>
+                  <div class="top-story-content">
+                      <div class="topic-type mb_10">
+                        <a class="theme-link" href="/section/Opinion">OPINION</a>
+                      </div>
+                      <div class="top-story-heading  heading-underline">
+                        <a href="/page/library-journal-150-years" target="">
+                          <h1 class="laptop smart-headline display-inline">Library Journal 150 Years</h1>
+                          <h3 class="tablet smart-headline display-inline">Library Journal 150 Years</h3>
+                        </a>
+                      </div>
+
+                      <!-- Old Sponsored Code Start -->
+
+                      <!-- New Sponsored Code Start -->
+
+
+
+                      <!-- New Sponsored Code End -->
+
+                      <div class="full-width pull-left top-center-desc">
+                          On the occasion of our 150th anniversary, <em>LJ</em> has been reflecting on the history of librarianship, where we are now, and what the future could—and should—hold.
+                      </div>
+
+                      <!-- Content for filling the white space below "Top-Center-Article" -->
+
+                  </div>
+
+
+      </div>
+
+      <div class="col-md-4 col-sm-4 pr_0 tab-pl_0 mob-pl_0" id="top-right-div">
+
+
+                  <div class="top-story-side-bar">
+                    <div class="top-story-image-sub">
+                        <a href="https://www.infodocket.com/2026/08/26/roundup-honoring-the-life-and-work-of-dolly-parton-statements-from-libraries-literacy-organizations-and-others/" target="_blank">
+                            <img class="image-full" src="/binaries/content/gallery/960px-dolly_parton_accepting_liseberg_applause_award_2010_portrait.jpg" alt=""Dolly Parton accepting Liseberg Applause Award 2010 portrait" by Curtis Hilbun is licensed under CC BY 3.0." border="0" id="ad_unbordered"/>
+                        </a>
+
+                    </div>
+                    <div class="top-story-content">
+                        <div class="topic-type mb_10">
+                          <a class="theme-link" href="/section/Infodocket">INFODOCKET</a>
+                        </div>
+                        <div class="top-story-heading  heading-underline">
+                          <a href="https://www.infodocket.com/2026/08/26/roundup-honoring-the-life-and-work-of-dolly-parton-statements-from-libraries-literacy-organizations-and-others/" target="_blank">
+                              <h3 class="smart-headline display-inline">Libraries Honor Parton's Commitment to Advancing Literacy</h3>
+                          </a>
+                        </div>
+
+                        <!-- Old Sponsored Code Start -->
+
+                        <!-- New Sponsored Code Start -->
+
+
+
+                        <!-- New Sponsored Code End -->
+
+
+                    </div>
+                    <div class="hr_division_grey_light mt_20 mb_10"></div>
+                  </div>
+                  <div class="top-story-side-bar">
+                    <div class="top-story-image-sub">
+                        <a href=/story/county-cornerstone-best-small-library-in-america-2026>
+                            <img class="image-full" src="/binaries/content/gallery/Jlibrary/2026/august/best-small/ljaug2026_bestsmall_featured2.jpg" border="0" id="ad_unbordered"/>
+                        </a>
+
+                    </div>
+                    <div class="top-story-content">
+                        <div class="topic-type mb_10">
+                          <a class="theme-link" href="/section/Awards">AWARDS</a>
+                        </div>
+                        <div class="top-story-heading  heading-underline">
+                          <a href=/story/county-cornerstone-best-small-library-in-america-2026>
+                              <h3 class="smart-headline display-inline">County Cornerstone | Best Small Library in America 2026</h3>
+                          </a>
+                        </div>
+
+                        <!-- Old Sponsored Code Start -->
+
+                        <!-- New Sponsored Code Start -->
+
+
+
+                        <!-- New Sponsored Code End -->
+
+
+                    </div>
+                    <div class="hr_division_grey_light mt_20 mb_10"></div>
+                  </div>
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-12 col-xs-12 pl_0 pr_0" id="top-left-div">
+      <div id="advertisement" class="advertisement adv-top mob_ad_align hidden-print mb_30">
+        <div id="homepage1">
+                  <script type='text/javascript'>
+                      googletag.cmd.push(function() { googletag.display('homepage1'); });
+                  </script>
+
+        </div>
+      </div>
+      <div class="left-side-bar">
+
+
+
+                    <div class="top-story-content">
+
+                        <div class="left-side-bar-section">
+                          <div class="topic-type mt_0 mb_10">
+                            <a class="theme-link" href="/section/LIS">LIS</a>
+                          </div>
+                          <div class="top-story-heading">
+                            <a href=/story/declaration>
+                              <h3 class="line-clamp-3 smart-headline display-inline">Many Paths, One Profession</h3>
+                            </a>
+                          </div>
+
+                          <!-- Old Sponsored Code Start -->
+                          <!--  -->
+
+                          <!-- New Sponsored Code Start -->
+
+
+
+                          <!-- New Sponsored Code End -->
+
+                        </div>
+                        <div class="hr_division_grey_light mt_20 mb_10"></div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="top-story-content">
+
+                        <div class="left-side-bar-section">
+                          <div class="topic-type mt_0 mb_10">
+                            <a class="theme-link" href="/section/Impacts">IMPACTS</a>
+                          </div>
+                          <div class="top-story-heading">
+                            <a href=/story/readers-advisory-in-the-pages-of-library-journal-faith-in-our-future>
+                              <h3 class="line-clamp-3 smart-headline display-inline">Readers’ Advisory Service in the Pages of Library Journal | Faith in Our Future</h3>
+                            </a>
+                          </div>
+
+                          <!-- Old Sponsored Code Start -->
+                          <!--  -->
+
+                          <!-- New Sponsored Code Start -->
+
+
+
+                          <!-- New Sponsored Code End -->
+
+                        </div>
+                        <div class="hr_division_grey_light mt_20 mb_10"></div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="top-story-content">
+
+                        <div class="left-side-bar-section">
+                          <div class="topic-type mt_0 mb_10">
+                            <a class="theme-link" href="/section/Industry%20News">INDUSTRY NEWS</a>
+                          </div>
+                          <div class="top-story-heading">
+                            <a href=/story/sabeena-karnick-interview>
+                              <h3 class="line-clamp-3 smart-headline display-inline">LJ Talks to Paper Artist Sabeena Karnick</h3>
+                            </a>
+                          </div>
+
+                          <!-- Old Sponsored Code Start -->
+                          <!--  -->
+
+                          <!-- New Sponsored Code Start -->
+
+
+
+                          <!-- New Sponsored Code End -->
+
+                        </div>
+                        <div class="hr_division_grey_light mt_20 mb_10"></div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="top-story-content">
+
+                        <div class="left-side-bar-section">
+                          <div class="topic-type mt_0 mb_10">
+                            <a class="theme-link" href="/section/Impacts">IMPACTS</a>
+                          </div>
+                          <div class="top-story-heading">
+                            <a href=/story/out-of-sight-out-of-mind-missing-stories-in-american-library-history-faith-in-our-future>
+                              <h3 class="line-clamp-3 smart-headline display-inline">Out of Sight, Out of Mind: Missing Stories in American Library History | Faith in Our Future</h3>
+                            </a>
+                          </div>
+
+                          <!-- Old Sponsored Code Start -->
+                          <!--  -->
+
+                          <!-- New Sponsored Code Start -->
+
+
+
+                          <!-- New Sponsored Code End -->
+
+                        </div>
+                        <div class="hr_division_grey_light mt_20 mb_10"></div>
+                    </div>
+
+
+
+
+
+        <div class="top-story-content mt_10 mb_20">
+          <a href="/section/news" style="none">
+            <span class="more-link">More News</span>
+            <i class="fa fa-arrow-right" style="color:red"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hr_division"></div>
+
+
+
+    <div class="review-content float-left hidden-md-down">
+      <div class="books_and_review_headline col-md-12 col-sm-12 float-left full-width mt_30 mb_50">BOOKS & REVIEWS</div>
+        <div class="col-md-12 col-sm-12 col-xs-12 review-flex">
+                    <div class="col-md-4 text-align-center reviewlist-flex">
+
+                            <a href=/story/Great-Reads-September-2026-starred-reviews>
+                              <img class="review-list-img" src="/binaries/content/gallery/Jlibrary/2026/september/ljx260901webstars.jpg" onerror="this.src='https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/defaultcover.jpg'" alt="Story Image"/>
+                            </a>
+
+                        <div class="top-story-heading mt_15">
+                            <a href=/story/Great-Reads-September-2026-starred-reviews>
+                                <h3 class="smart-headline text-align-center fs_20">Great Reads | September 2026 Starred Reviews</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-align-center reviewlist-flex">
+
+                            <a href=/story/hispanic-heritage-month-2026-a-reading-list>
+                              <img class="review-list-img" src="/binaries/content/gallery/Jlibrary/2026/september/ljsept2026booklistfeatured.jpg" onerror="this.src='https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/defaultcover.jpg'" alt="Story Image"/>
+                            </a>
+
+                        <div class="top-story-heading mt_15">
+                            <a href=/story/hispanic-heritage-month-2026-a-reading-list>
+                                <h3 class="smart-headline text-align-center fs_20">Hispanic Heritage Month 2026 | A Reading List</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-align-center reviewlist-flex">
+
+                            <a href=/story/Prepub-Alert-February-2027-Titles>
+                              <img class="review-list-img" src="/binaries/content/gallery/Jlibrary/2026/september/prepubsept2026_featured.jpg" onerror="this.src='https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/defaultcover.jpg'" alt="Story Image"/>
+                            </a>
+
+                        <div class="top-story-heading mt_15">
+                            <a href=/story/Prepub-Alert-February-2027-Titles>
+                                <h3 class="smart-headline text-align-center fs_20">Prepub Alert | February 2027 Titles</h3>
+                            </a>
+                        </div>
+                    </div>
+        </div>
+        <div class="text-align-center full-width pull-left mt_40 mb_30">
+            <a href="/section/reviews" class="more-anchor">
+              <span class="more-link">More Books & Reviews </span>
+              <i class="fa fa-arrow-right" style="color:red"></i>
+            </a>
+          </div>
+      </div>
+
+    <div class="review-content col-xs-12 float-left pl_0 pr_0 hidden-md-up">
+
+      <div class="review-headline col-md-12 col-sm-12 float-left full-width mb_25">
+        <a href="/section/reviews">
+          <span class="text-align-center fb mb_20" style="letter-spacing:5px;">BOOKS & REVIEWS</span>
+          <span class="heading-arrow"><i class="fa fa-arrow-right" style="color:red; font-size:14px;"></i></span>
+        </a>
+      </div>
+
+        <div class="carousel-development-career full-width pull-left hidden-md-up">
+          <div id="reviewCarousel" class="carousel slide" data-ride="carousel">
+
+                  <ol class="carousel-indicators">
+                                <li data-target="#reviewCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#reviewCarousel" data-slide-to="1"></li>
+                                <li data-target="#reviewCarousel" data-slide-to="1"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                            <div class="item ">
+
+                                  <div class="text-align-center section-image col-xs-12 pl_20 pr_20">
+                                    <a href=/story/Great-Reads-September-2026-starred-reviews>
+                                      <img class="full-width review-list-img" src="/binaries/content/gallery/Jlibrary/2026/september/ljx260901webstars.jpg" alt="Story Image"/>
+                                    </a>
+                                  </div>
+
+                              <div class="top-story-heading mt_15">
+                                <a href=/story/Great-Reads-September-2026-starred-reviews>
+                                  <h3 class="text-align-center">Great Reads | September 2026 Starred Reviews</h3>
+                                </a>
+                              </div>
+                            </div>
+                            <div class="item active">
+
+                                  <div class="text-align-center section-image col-xs-12 pl_20 pr_20">
+                                    <a href=/story/hispanic-heritage-month-2026-a-reading-list>
+                                      <img class="full-width review-list-img" src="/binaries/content/gallery/Jlibrary/2026/september/ljsept2026booklistfeatured.jpg" alt="Story Image"/>
+                                    </a>
+                                  </div>
+
+                              <div class="top-story-heading mt_15">
+                                <a href=/story/hispanic-heritage-month-2026-a-reading-list>
+                                  <h3 class="text-align-center">Hispanic Heritage Month 2026 | A Reading List</h3>
+                                </a>
+                              </div>
+                            </div>
+                            <div class="item ">
+
+                                  <div class="text-align-center section-image col-xs-12 pl_20 pr_20">
+                                    <a href=/story/Prepub-Alert-February-2027-Titles>
+                                      <img class="full-width review-list-img" src="/binaries/content/gallery/Jlibrary/2026/september/prepubsept2026_featured.jpg" alt="Story Image"/>
+                                    </a>
+                                  </div>
+
+                              <div class="top-story-heading mt_15">
+                                <a href=/story/Prepub-Alert-February-2027-Titles>
+                                  <h3 class="text-align-center">Prepub Alert | February 2027 Titles</h3>
+                                </a>
+                              </div>
+                            </div>
+                  </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="hr_division mb_0"></div>
+                    <div class="col-md-8 float-left hidden-md-down" style="width:100%">
+                      <div id="sponsored-text" class="books_and_review_headline col-md-12 col-sm-12 float-left mt_30 mb_50">SPONSORED</div>
+                        <div id="sponsored-review" class="col-md-12 col-sm-12 col-xs-12 review-flex">
+                          <div class="col-md-4 text-align-center reviewlist-flex">
+
+                                  <a href=/story/cabi-global-health-database-fills-a-need-for-comprehensive-international-research-lj290902>
+                                    <img class="review-list-img sponsored-img" src="/binaries/content/gallery/Jlibrary/lj-sponsored-images/2026-sponsored-images/gettyimages-1064032460-dr.-examining-child.jpg" onerror="this.src='https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/defaultcover.jpg'" alt="Story Image"/>
+                                  </a>
+
+                              <div class="top-story-heading">
+                                    <div class="topic-type mt_10 mb_10 pl_10">
+                                      <div class="sponsored" style="float: unset !important;width: 90px;margin-left: auto;margin-right: auto;">
+                                          SPONSORED
+                                      </div>
+                                    </div>
+                                  <a href=/story/cabi-global-health-database-fills-a-need-for-comprehensive-international-research-lj290902>
+                                      <h3 class="smart-headline text-align-center fs_20">CABI Global Health Database Fills a Need for Comprehensive International Research</h3>
+                                  </a>
+                              </div>
+                          </div>
+                          <div class="col-md-4 text-align-center reviewlist-flex">
+
+                                  <a href=/story/a-new-chapter-for-tcus-digital-collections-lj260901>
+                                    <img class="review-list-img sponsored-img" src="/binaries/content/gallery/Jlibrary/lj-sponsored-images/2026-sponsored-images/clarivate-software---daniela/400x400-article-1-lj-092026.png" onerror="this.src='https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/defaultcover.jpg'" alt="Story Image"/>
+                                  </a>
+
+                              <div class="top-story-heading">
+                                    <div class="topic-type mt_10 mb_10 pl_10">
+                                      <div class="sponsored" style="float: unset !important;width: 90px;margin-left: auto;margin-right: auto;">
+                                          SPONSORED
+                                      </div>
+                                    </div>
+                                  <a href=/story/a-new-chapter-for-tcus-digital-collections-lj260901>
+                                      <h3 class="smart-headline text-align-center fs_20">A New Chapter for TCU’s Digital Collections</h3>
+                                  </a>
+                              </div>
+                          </div>
+                          <div class="col-md-4 text-align-center reviewlist-flex">
+
+                                  <a href=/story/what-the-academic-ai-impact-study-shows-about-productivity-capacity-and-human-oversight-in-library-workflows-lj260715>
+                                    <img class="review-list-img sponsored-img" src="/binaries/content/gallery/Jlibrary/lj-sponsored-images/2026-sponsored-images/clarivate-software---daniela/clarivate260715_400x400-leganto-july-article-2.png" onerror="this.src='https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/defaultcover.jpg'" alt="Story Image"/>
+                                  </a>
+
+                              <div class="top-story-heading">
+                                    <div class="topic-type mt_10 mb_10 pl_10">
+                                      <div class="sponsored" style="float: unset !important;width: 90px;margin-left: auto;margin-right: auto;">
+                                          SPONSORED
+                                      </div>
+                                    </div>
+                                  <a href=/story/what-the-academic-ai-impact-study-shows-about-productivity-capacity-and-human-oversight-in-library-workflows-lj260715>
+                                      <h3 class="smart-headline text-align-center fs_20">What the Academic AI Impact Study Shows About Productivity, Capacity and Human Oversight in Library Workflows</h3>
+                                  </a>
+                              </div>
+                          </div>
+                          </div>
+                        <div id="sponsored-more" class="full-width text-align-center pull-left mt_40 mb_30">
+                          <a href="/section/sponsored" class="more-anchor">
+                            <span class="more-link">More Sponsored Content </span>
+                            <i class="fa fa-arrow-right" style="color:red"></i>
+                          </a>
+                        </div>
+                  </div>
+               <div id="jobWidgetContainer" class="col-md-4 col-xs-12 float-left">
+
+                    <script id="rm_Source" type="text/javascript" src="https://jobs.thejobnetwork.com/Widgets/js/FeaturedJob/TJN.js"></script><script type="text/javascript">var rm_FeaturedJobWidgetId = 4787;
+                    
+                    </script>
+                    
+
+                  </div>
+                              
+
+    <div class="review-content col-xs-12 float-left pl_0 pr_0 hidden-md-up">
+
+      <div class="review-headline col-md-12 col-sm-12 float-left full-width mb_25">
+        <a href="/section/sponsored" class="more-anchor">
+          <span class="text-align-center fb mb_20" style="letter-spacing:5px;">SPONSORED</span>
+          <span class="heading-arrow"><i class="fa fa-arrow-right" style="color:red; font-size:14px;"></i></span>
+        </a>
+      </div>
+
+        <div class="carousel-development-career full-width pull-left hidden-md-up">
+          <div id="reviewCarousel" class="carousel slide" data-ride="carousel">
+
+                  <ol class="carousel-indicators">
+                                <li data-target="#reviewCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#reviewCarousel" data-slide-to="1"></li>
+                                <li data-target="#reviewCarousel" data-slide-to="1"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                            <div class="item ">
+
+                                  <div class="text-align-center section-image col-xs-12 pl_20 pr_20">
+                                    <a href=/story/cabi-global-health-database-fills-a-need-for-comprehensive-international-research-lj290902>
+                                      <img class="full-width review-list-img" src="/binaries/content/gallery/Jlibrary/lj-sponsored-images/2026-sponsored-images/gettyimages-1064032460-dr.-examining-child.jpg" alt="Story Image"/>
+                                    </a>
+                                  </div>
+
+                              <div class="top-story-heading">
+                                <div class="topic-type mt_10 mb_10 pl_10">
+
+
+  <div class="pull-left sponsored mt_5">
+      SPONSORED
+  </div>
+                                </div>
+                                <a href=/story/cabi-global-health-database-fills-a-need-for-comprehensive-international-research-lj290902>
+                                  <h3 class="text-align-center">CABI Global Health Database Fills a Need for Comprehensive International Research</h3>
+                                </a>
+                              </div>
+                            </div>
+                            <div class="item active">
+
+                                  <div class="text-align-center section-image col-xs-12 pl_20 pr_20">
+                                    <a href=/story/a-new-chapter-for-tcus-digital-collections-lj260901>
+                                      <img class="full-width review-list-img" src="/binaries/content/gallery/Jlibrary/lj-sponsored-images/2026-sponsored-images/clarivate-software---daniela/400x400-article-1-lj-092026.png" alt="Story Image"/>
+                                    </a>
+                                  </div>
+
+                              <div class="top-story-heading">
+                                <div class="topic-type mt_10 mb_10 pl_10">
+
+
+  <div class="pull-left sponsored mt_5">
+      SPONSORED
+  </div>
+                                </div>
+                                <a href=/story/a-new-chapter-for-tcus-digital-collections-lj260901>
+                                  <h3 class="text-align-center">A New Chapter for TCU’s Digital Collections</h3>
+                                </a>
+                              </div>
+                            </div>
+                            <div class="item ">
+
+                                  <div class="text-align-center section-image col-xs-12 pl_20 pr_20">
+                                    <a href=/story/what-the-academic-ai-impact-study-shows-about-productivity-capacity-and-human-oversight-in-library-workflows-lj260715>
+                                      <img class="full-width review-list-img" src="/binaries/content/gallery/Jlibrary/lj-sponsored-images/2026-sponsored-images/clarivate-software---daniela/clarivate260715_400x400-leganto-july-article-2.png" alt="Story Image"/>
+                                    </a>
+                                  </div>
+
+                              <div class="top-story-heading">
+                                <div class="topic-type mt_10 mb_10 pl_10">
+
+
+  <div class="pull-left sponsored mt_5">
+      SPONSORED
+  </div>
+                                </div>
+                                <a href=/story/what-the-academic-ai-impact-study-shows-about-productivity-capacity-and-human-oversight-in-library-workflows-lj260715>
+                                  <h3 class="text-align-center">What the Academic AI Impact Study Shows About Productivity, Capacity and Human Oversight in Library Workflows</h3>
+                                </a>
+                              </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+          
+
+
+
+
+  <div class="hr_division mt_10" style="margin-bottom:30px"></div>
+<div class="review-headline col-md-12 col-sm-12 float-left full-width mb_25">
+        <span class="text-align-center fb mb_20" style="letter-spacing:5px;">LIBRARIES LEAD PODCAST</span>
+        <!-- <span class="heading-arrow"><i class="fa fa-arrow-right" style="color:red; font-size:14px;"></i></span> -->
+      </div>
+      <div style="display:inline-flex;text-align:center">
+
+      
+
+
+    
+                      
+                    
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0 podcast-web">
+                              <div class="section-image col-xs-12 pl_0 pr_0">
+                              <a href="https://librarieslead.libraryjournal.com/?p=393" target="_blank">
+                                <img class="image-full" src="https://librarieslead.libraryjournal.com/wp-content/uploads/2026/08/graphic-2.jpg" alt="Story Image">
+                              </a>
+                            </div>
+
+                             
+
+                               <div class="top-story-type full-width pull-left">
+                                <a class="theme-link" href="/section/LibrariesLeadPodcast">LIBRARIES LEAD PODCAST</a>
+                            </div>
+
+                              <div class="top-story-heading text-align-center" style="margin-left:10px">
+                                <a href="https://librarieslead.libraryjournal.com/?p=393" target="_blank">
+                                  <h3 class="smart-headline more-link" style="text-align:center;">Episode 52 (Sept 2026) Information Shock!</h3>
+                                </a>
+                              </div>
+
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                      </div>
+
+
+    
+                      
+                    
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0 podcast-web">
+                              <div class="section-image col-xs-12 pl_0 pr_0">
+                              <a href="https://librarieslead.libraryjournal.com/?p=386" target="_blank">
+                                <img class="image-full" src="https://librarieslead.libraryjournal.com/wp-content/uploads/2026/04/UT-A-small.png" alt="Story Image">
+                              </a>
+                            </div>
+
+                             
+
+                               <div class="top-story-type full-width pull-left">
+                                <a class="theme-link" href="/section/LibrariesLeadPodcast">LIBRARIES LEAD PODCAST</a>
+                            </div>
+
+                              <div class="top-story-heading text-align-center" style="margin-left:10px">
+                                <a href="https://librarieslead.libraryjournal.com/?p=386" target="_blank">
+                                  <h3 class="smart-headline more-link" style="text-align:center;">Episode 51 (May 2026): The Changing Contours of the Information Field</h3>
+                                </a>
+                              </div>
+
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                      </div>
+
+
+    
+                      
+                    
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0 podcast-web">
+                              <div class="section-image col-xs-12 pl_0 pr_0">
+                              <a href="https://librarieslead.libraryjournal.com/?p=378" target="_blank">
+                                <img class="image-full" src="https://librarieslead.libraryjournal.com/wp-content/uploads/2026/04/CPL.png" alt="Story Image">
+                              </a>
+                            </div>
+
+                             
+
+                               <div class="top-story-type full-width pull-left">
+                                <a class="theme-link" href="/section/LibrariesLeadPodcast">LIBRARIES LEAD PODCAST</a>
+                            </div>
+
+                              <div class="top-story-heading text-align-center" style="margin-left:10px">
+                                <a href="https://librarieslead.libraryjournal.com/?p=378" target="_blank">
+                                  <h3 class="smart-headline more-link" style="text-align:center;">Episode 50: Open Doors: Libraries as Sanctuary Space</h3>
+                                </a>
+                              </div>
+
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                      </div>
+             </div>
+
+                <div class="carousel-development-career full-width pull-left hidden-md-up" style="height:fit-content">
+                  <div id="careerCarousel" class="carousel slide" data-ride="carousel">
+
+                          <ol class="carousel-indicators">
+                            <li data-target="#careerCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#careerCarousel" data-slide-to="1"></li>
+                            <li data-target="#careerCarousel" data-slide-to="2"></li>
+                          </ol>
+
+                          <div class="carousel-inner">
+
+                              <div class="item active">
+                                <div class="section-image col-xs-12 pl_0 pr_0">
+                                  <a href="https://librarieslead.libraryjournal.com/?p=393" target="_blank">
+                                    <img class="image-full" src="https://librarieslead.libraryjournal.com/wp-content/uploads/2026/08/graphic-2.jpg" alt="Story Image">
+                                  </a>
+                                </div>
+
+                                <div class="top-story-type full-width pull-left">
+                                <a class="theme-link" href="/section/LIBRARIES LEAD PODCAST">LIBRARIES LEAD PODCAST</a>
+                                </div>
+
+                                  <div class="top-story-heading text-align-center">
+                                    <a href="https://librarieslead.libraryjournal.com/?p=393" target="_blank">
+                                      <h3 class="smart-headline">Episode 52 (Sept 2026) Information Shock!</h3>
+                                    </a>
+                                  </div>
+                              </div>
+
+                             
+
+                              <div class="item ">
+                                <div class="section-image col-xs-12 pl_0 pr_0">
+                                  <a href="https://librarieslead.libraryjournal.com/?p=386" target="_blank">
+                                    <img class="image-full" src="https://librarieslead.libraryjournal.com/wp-content/uploads/2026/04/UT-A-small.png" alt="Story Image">
+                                  </a>
+                                </div>
+
+                                <div class="top-story-type full-width pull-left">
+                                <a class="theme-link" href="/section/LIBRARIES LEAD PODCAST">LIBRARIES LEAD PODCAST</a>
+                                </div>
+
+                                  <div class="top-story-heading text-align-center">
+                                    <a href="https://librarieslead.libraryjournal.com/?p=386" target="_blank">
+                                      <h3 class="smart-headline">Episode 51 (May 2026): The Changing Contours of the Information Field</h3>
+                                    </a>
+                                  </div>
+                              </div>
+
+                             
+
+                              <div class="item ">
+                                <div class="section-image col-xs-12 pl_0 pr_0">
+                                  <a href="https://librarieslead.libraryjournal.com/?p=378" target="_blank">
+                                    <img class="image-full" src="https://librarieslead.libraryjournal.com/wp-content/uploads/2026/04/CPL.png" alt="Story Image">
+                                  </a>
+                                </div>
+
+                                <div class="top-story-type full-width pull-left">
+                                <a class="theme-link" href="/section/LIBRARIES LEAD PODCAST">LIBRARIES LEAD PODCAST</a>
+                                </div>
+
+                                  <div class="top-story-heading text-align-center">
+                                    <a href="https://librarieslead.libraryjournal.com/?p=378" target="_blank">
+                                      <h3 class="smart-headline">Episode 50: Open Doors: Libraries as Sanctuary Space</h3>
+                                    </a>
+                                  </div>
+                              </div>
+
+                             
+                          </div>
+
+                        </div>
+                    </div>
+
+
+
+
+    <div class="hr_division mt_10" style="margin-top:30px !important"></div>
+  <div class="tabbed-content">
+    <div class="review-headline col-md-12 col-sm-12 float-left full-width">
+      <h3 class="text-align-center fb fs_21 mt_40 mb_20" style="letter-spacing:5px;">
+      EXPLORE LJ
+      </h3>
+    </div>
+
+    <div class="col-md-12 col-sm-12 mt_20 mb_30 float-left pl_0 pr_0">
+
+        <div class="navbar-default tabbed-navbar-default fs_16 fb full-width pull-left mb_30" id="myNavbar">
+          <ul class="nav navbar-nav col-md-12 col-sm-12 story-nav mb_30">
+                        <li class="tablinks expTags active pointer" onclick="openTabContent(event, EditorsPicks)"><a >Editors' Picks</a></li>
+                      <li class="tablinks expTags pointer" onclick="openTabContent(event, allstories)"><a>All Stories</a></li>
+                      <li class="tablinks expTags pointer" onclick="openTabContent(event, infoDOCKET)"><a >infoDOCKET</a></li>
+                      <li class="tablinks expTags pointer" onclick="openTabContent(event, Libraries_Lead_Podcast)"><a >Libraries Lead Podcast</a></li>
+          </ul>
+        </div>
+
+        <div id="EditorsPicks" class="tabcontent" style="display:block;">
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+
+                            <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                <a href=/story/honorable-mentions-embudo-valley-library-and-westernport-library-best-small-library-in-america-2026>
+                                  <img class="image-full" src="/binaries/content/gallery/Jlibrary/2026/august/best-small/ljaug2026_bestsmall_slug.jpg" alt="Story Image"/>
+                                </a>
+                            </div>
+
+                          <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                              <div class="topic-type mt_0">
+                                <a class="theme-link" href="/section/Awards">AWARDS</a>
+                              </div>
+
+                              <div class="top-story-heading">
+                                <a href=/story/honorable-mentions-embudo-valley-library-and-westernport-library-best-small-library-in-america-2026>
+                                  <h3 class="smart-headline">Honorable Mentions: Embudo Valley Library and Westernport Library | Best Small Library in America 2026</h3>
+                                </a>
+                              </div>
+
+                              <div class="full-width pull-left">
+
+                                  <a class="author expauthor" href = "/author?query=Mary Daniels">Mary Daniels</a>,
+Aug 03, 2026                              </div>
+
+                              <!-- Old Sponsored Code Start -->
+
+                              <!-- New Sponsored Code Start -->
+
+
+
+                              <!-- New Sponsored Code End -->
+
+                              <div class="explore-desc full-width pull-left hidden-md-down">
+                                  Embudo Valley Library and Community Center in Dixon, NM, and&nbsp;Westernport Library, MD, receive Honorable Mention in <em>LJ</em>'s Best Small Library in America 2026.</p>
+                              </div>
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                          </div>
+                        </div>
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+
+                            <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                <a href=/story/appeals-court-reverses-lower-court-injunction-allows-arkansas-act-372-to-take-effect>
+                                  <img class="image-full" src="/binaries/content/gallery/Jlibrary/2026/august/us-courtofappeals-8thcircuit-seal.png" alt="Story Image"/>
+                                </a>
+                            </div>
+
+                          <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                              <div class="topic-type mt_0">
+                                <a class="theme-link" href="/section/News">NEWS</a>
+                              </div>
+
+                              <div class="top-story-heading">
+                                <a href=/story/appeals-court-reverses-lower-court-injunction-allows-arkansas-act-372-to-take-effect>
+                                  <h3 class="smart-headline">Appeals Court Reverses Lower Court Injunction, Allows Arkansas Act 372 to Take Effect</h3>
+                                </a>
+                              </div>
+
+                              <div class="full-width pull-left">
+
+                                  <a class="author expauthor" href = "/author?query=Lisa Peet">Lisa Peet</a>,
+Aug 05, 2026                              </div>
+
+                              <!-- Old Sponsored Code Start -->
+
+                              <!-- New Sponsored Code Start -->
+
+
+
+                              <!-- New Sponsored Code End -->
+
+                              <div class="explore-desc full-width pull-left hidden-md-down">
+                                  After being declared unconstitutional in U.S. District Court last year, Arkansas Act 372 will now be allowed to take effect. The act, signed into law in 2023 by Gov. Sarah Huckabee Sanders, prohibits minors from accessing materials that are considered “obscene”; librarians and booksellers could be charged with a Class A misdemeanor, facing jail time or fines of up to $10,000. Despite an earlier injunction, on July 30 a three-judge federal appeals panel sided with the state, reversing the lower court decision that found the law in violation of the First Amendment.</p>
+                              </div>
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                          </div>
+                        </div>
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+
+                            <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                <a href=/story/arl-unbound-research-libraries-and-public-impact-scholarship>
+                                  <img class="image-full" src="/binaries/content/gallery/Jlibrary/2026/may/andrew-k-pace-sq.jpg" alt="Story Image"/>
+                                </a>
+                            </div>
+
+                          <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                              <div class="topic-type mt_0">
+                                <a class="theme-link" href="/section/News">NEWS</a>
+                              </div>
+
+                              <div class="top-story-heading">
+                                <a href=/story/arl-unbound-research-libraries-and-public-impact-scholarship>
+                                  <h3 class="smart-headline">ARL Unbound | Research Libraries and Public Impact Scholarship</h3>
+                                </a>
+                              </div>
+
+                              <div class="full-width pull-left">
+
+                                  <a class="author expauthor" href = "/author?query=Andrew K. Pace">Andrew K. Pace</a>,
+Aug 19, 2026                              </div>
+
+                              <!-- Old Sponsored Code Start -->
+
+                              <!-- New Sponsored Code Start -->
+
+
+
+                              <!-- New Sponsored Code End -->
+
+                              <div class="explore-desc full-width pull-left hidden-md-down">
+                                  Many research institutions, particularly but not exclusively those with a public or land-grant structure and mission, are actively looking for opportunities to deepen the connections between research conducted by their faculty and its impact on community health, prosperity, and well-being. I sat down with Kornelia Tancheva, Hillman University Librarian and Director of the University Library System at the University of Pittsburgh, to glean her insights into the role of research libraries in public-impact knowledge creation.</p>
+                              </div>
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                          </div>
+                        </div>
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+
+                            <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                <a href=/story/lj-talks-with-ken-concepcion-owner-of-now-serving>
+                                  <img class="image-full" src="/binaries/content/gallery/Jlibrary/2026/august/icweb/ljx260801websciboxcookbookstore.jpg" alt="Story Image"/>
+                                </a>
+                            </div>
+
+                          <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                              <div class="topic-type mt_0">
+                                <a class="theme-link" href="/section/Book%20News">BOOK NEWS</a>
+                              </div>
+
+                              <div class="top-story-heading">
+                                <a href=/story/lj-talks-with-ken-concepcion-owner-of-now-serving>
+                                  <h3 class="smart-headline">LJ Talks with Ken Concepcion, Owner of Now Serving</h3>
+                                </a>
+                              </div>
+
+                              <div class="full-width pull-left">
+
+                                  <a class="author expauthor" href = "/author?query=LJ Reviews">LJ Reviews</a>,
+Aug 12, 2026                              </div>
+
+                              <!-- Old Sponsored Code Start -->
+
+                              <!-- New Sponsored Code Start -->
+
+
+
+                              <!-- New Sponsored Code End -->
+
+                              <div class="explore-desc full-width pull-left hidden-md-down">
+                                  To celebrate the joys of reading, browsing, and discovering new titles and to learn from our colleagues practicing readers’ advisory service in bookstores, <em>LJ</em> talks with Ken Concepcion, owner of Now Serving, a cookbook and culinary shop in Los Angeles, CA. He discusses current cookbook trends and how Now Serving selects titles and offers a list of titles to hand-sell.</p>
+                              </div>
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                          </div>
+                        </div>
+
+                <div class="text-align-center full-width pull-left mt_30 mb_20">
+                    <a href="/section/editorspicks" style="none" class="more-anchor">
+                  </a>
+                </div>
+        </div>
+
+        <div id="infoDOCKET" class="tabcontent">
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                              <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                  <a href="https://www.infodocket.com/?p=168769" target="_blank">
+                                      <img class="image-full" src="https://s3.amazonaws.com/WebVault/logos/infodocketStacked.jpg" alt="Story Image"/>
+                                  </a>
+                              </div>
+
+                          <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                              <div class="topic-type mt_0">
+                                <!-- <p></p> -->
+                                <a class="theme-link" href="/section/INFOdocket">INFODOCKET</a>
+                              </div>
+
+                              <div class="top-story-heading">
+                                <a href="https://www.infodocket.com/?p=168769" target="_blank">
+                                  <h3 class="smart-headline more-link">Report: The Federal Program Keeping Libraries Online? the FCC Might Gut It</h3>
+                                </a>
+                              </div>
+
+                              <div class="full-width pull-left">
+                                <!-- <p> -->
+
+                                  <a class="author expauthor" href = "/author?query=Gary%20Price">Gary Price</a>,
+Sep 04, 2026                                <!-- </p> -->
+                              </div>
+
+                              <!-- Old Sponsored Code Start -->
+
+                              <!-- New Sponsored Code Start -->
+
+
+
+                              <!-- New Sponsored Code End -->
+
+                              <div class="explore-desc full-width pull-left hidden-md-down">
+                                  From the Indianapolis Star: Under the atrium at the Indianapolis Public Library, a woman is busily typing away on her laptop. Another patron seated at the Central Branch is charging their device while streaming music through earbuds as they read quietly between the stacks. Free Wi-Fi allows Hoosiers a cozy and safe place to access the [&#8230;]</p>The post <a href="https://www.infodocket.com/2026/09/04/report-the-federal-program-keeping-libraries-online-the-fcc-might-gut-it/">Report: The Federal Program Keeping Libraries Online? the FCC Might Gut It</a> appeared first on <a href="https://www.infodocket.com">Library Journal infoDOCKET</a>.</p>
+                              </div>
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                          </div>
+                      </div>
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                              <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                  <a href="https://www.infodocket.com/?p=168767" target="_blank">
+                                      <img class="image-full" src="https://s3.amazonaws.com/WebVault/logos/infodocketStacked.jpg" alt="Story Image"/>
+                                  </a>
+                              </div>
+
+                          <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                              <div class="topic-type mt_0">
+                                <!-- <p></p> -->
+                                <a class="theme-link" href="/section/INFOdocket">INFODOCKET</a>
+                              </div>
+
+                              <div class="top-story-heading">
+                                <a href="https://www.infodocket.com/?p=168767" target="_blank">
+                                  <h3 class="smart-headline more-link">Report: “DC Librarian Offers Paid Internship to Boost Interest in Library Science”</h3>
+                                </a>
+                              </div>
+
+                              <div class="full-width pull-left">
+                                <!-- <p> -->
+
+                                  <a class="author expauthor" href = "/author?query=Gary%20Price">Gary Price</a>,
+Sep 04, 2026                                <!-- </p> -->
+                              </div>
+
+                              <!-- Old Sponsored Code Start -->
+
+                              <!-- New Sponsored Code Start -->
+
+
+
+                              <!-- New Sponsored Code End -->
+
+                              <div class="explore-desc full-width pull-left hidden-md-down">
+                                  From WTOP: In 2019, Christopher Stewart started paying students in D.C. to work in a school library and learn about the field. The concept is similar to a paid internship, with students helping with research and shelving books. The goal is to increase students’ awareness of library science and spark their interest in the field. [&#8230;]</p>The post <a href="https://www.infodocket.com/2026/09/04/report-dc-librarian-offers-paid-internship-to-boost-interest-in-library-science/">Report: &#8220;DC Librarian Offers Paid Internship to Boost Interest in Library Science&#8221;</a> appeared first on <a href="https://www.infodocket.com">Library Journal infoDOCKET</a>.</p>
+                              </div>
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                          </div>
+                      </div>
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                              <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                  <a href="https://www.infodocket.com/?p=168758" target="_blank">
+                                      <img class="image-full" src="https://www.infodocket.com/wp-content/uploads/2026/09/2026-09-01_12-22-26-371x500.png" alt="Story Image"/>
+                                  </a>
+                              </div>
+
+                          <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                              <div class="topic-type mt_0">
+                                <!-- <p></p> -->
+                                <a class="theme-link" href="/section/INFOdocket">INFODOCKET</a>
+                              </div>
+
+                              <div class="top-story-heading">
+                                <a href="https://www.infodocket.com/?p=168758" target="_blank">
+                                  <h3 class="smart-headline more-link">Association of American Publishers (AAP) and The Authors Guild Release New Study Analyzing the Impact of Library E-Lending on Commercial Book Markets</h3>
+                                </a>
+                              </div>
+
+                              <div class="full-width pull-left">
+                                <!-- <p> -->
+
+                                  <a class="author expauthor" href = "/author?query=Gary%20Price">Gary Price</a>,
+Sep 01, 2026                                <!-- </p> -->
+                              </div>
+
+                              <!-- Old Sponsored Code Start -->
+
+                              <!-- New Sponsored Code Start -->
+
+
+
+                              <!-- New Sponsored Code End -->
+
+                              <div class="explore-desc full-width pull-left hidden-md-down">
+                                  From a Joint Release: Today, the Association of American Publishers (AAP) and the Authors Guild announced the release of a landmark independent study by leading economists at Secretariat Advisors, titled An Empirical Study of the Impact of Library E-Lending on the Book Economy. The study, commissioned jointly by AAP and the Authors Guild, but independently [&#8230;]</p>The post <a href="https://www.infodocket.com/2026/09/01/association-of-american-publishers-aap-and-the-authors-guild-release-new-study-analyzing-the-impact-of-library-e-lending-on-commercial-book-markets/">Association of American Publishers (AAP) and The Authors Guild Release New Study Analyzing the Impact of Library E-Lending on Commercial Book Markets</a> appeared first on <a href="https://www.infodocket.com">Library Journal infoDOCKET</a>.</p>
+                              </div>
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                          </div>
+                      </div>
+                      <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                              <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                  <a href="https://www.infodocket.com/?p=168749" target="_blank">
+                                      <img class="image-full" src="https://www.infodocket.com/wp-content/uploads/2026/09/2026-09-01_09-29-34-500x370.png" alt="Story Image"/>
+                                  </a>
+                              </div>
+
+                          <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                              <div class="topic-type mt_0">
+                                <!-- <p></p> -->
+                                <a class="theme-link" href="/section/INFOdocket">INFODOCKET</a>
+                              </div>
+
+                              <div class="top-story-heading">
+                                <a href="https://www.infodocket.com/?p=168749" target="_blank">
+                                  <h3 class="smart-headline more-link">Report: “US Public Libraries at ‘Breaking Point’ Amid Ideological Attacks, Report Finds”</h3>
+                                </a>
+                              </div>
+
+                              <div class="full-width pull-left">
+                                <!-- <p> -->
+
+                                  <a class="author expauthor" href = "/author?query=Gary%20Price">Gary Price</a>,
+Sep 01, 2026                                <!-- </p> -->
+                              </div>
+
+                              <!-- Old Sponsored Code Start -->
+
+                              <!-- New Sponsored Code Start -->
+
+
+
+                              <!-- New Sponsored Code End -->
+
+                              <div class="explore-desc full-width pull-left hidden-md-down">
+                                  New Report From PEN America: Out of Circulation: Expanding Censorship in Public Libraries Key Findings: It&#8217;s not just books: Public libraries are increasingly censorship battlegrounds, leading to interference with book displays, improper reshelving mandates, and disruptions of events. Political threats are eroding library systems through governance shifts and defunding. Harassment and intimidation of librarians are [&#8230;]</p>The post <a href="https://www.infodocket.com/2026/09/01/report-us-public-libraries-at-breaking-point-amid-ideological-attacks-report-finds/">Report: &#8220;US Public Libraries at &#8216;Breaking Point&#8217; Amid Ideological Attacks, Report Finds&#8221;</a> appeared first on <a href="https://www.infodocket.com">Library Journal infoDOCKET</a>.</p>
+                              </div>
+
+                              <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                          </div>
+                      </div>
+
+            <div class="text-align-center full-width pull-left">
+                    <a href="/section/infoDocket" style="none" class="more-anchor">
+                      <span class="more-link">More infoDOCKET </span>
+                      <i class="fa fa-arrow-right" style="color:red"></i>
+                    </a>
+            </div>
+
+       </div>
+
+
+       <div id="Libraries_Lead_Podcast" class="tabcontent">
+                    <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                              <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                  <a href="https://librarieslead.libraryjournal.com/?p=393" target="_blank">
+                                      <img class="image-full" src="https://librarieslead.libraryjournal.com/wp-content/uploads/2026/08/graphic-2.jpg" alt="Story Image"/>
+                                  </a>
+                              </div>
+
+                        <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                            <div class="topic-type mt_0">
+                              <!-- <p></p> -->
+                                                                              <a class="theme-link" href="/section/LibrariesLeadPodcast">LIBRAIES LEAD PODCAST</a>
+
+                            </div>
+
+                            <div class="top-story-heading">
+                              <a href="https://librarieslead.libraryjournal.com/?p=393" target="_blank">
+                                <h3 class="smart-headline more-link">Episode 52 (Sept 2026) Information Shock!</h3>
+                              </a>
+                            </div>
+
+                            <div class="full-width pull-left">
+                              <!-- <p> -->
+
+                                <a class="author expauthor" href = "/author?query=Mike%20Eisenberg">Mike Eisenberg</a>,
+Sep 01, 2026                              <!-- </p> -->
+                            </div>
+
+                            <!-- Old Sponsored Code Start -->
+
+                            <!-- New Sponsored Code Start -->
+
+
+
+                            <!-- New Sponsored Code End -->
+
+                            <div class="explore-desc full-width pull-left hidden-md-down">
+                                Generative AI triggers a major "information shock"—a fundamental disruption on par with the printing press or digital computer that forces fundamental changes in how we create, store, retrieve, use, and evaluate information. Dave makes the case; Beth and Mike push back.
+                            </div>
+
+                            <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                        </div>
+                    </div>
+                    <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                              <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                  <a href="https://librarieslead.libraryjournal.com/?p=386" target="_blank">
+                                      <img class="image-full" src="https://librarieslead.libraryjournal.com/wp-content/uploads/2026/04/UT-A-small.png" alt="Story Image"/>
+                                  </a>
+                              </div>
+
+                        <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                            <div class="topic-type mt_0">
+                              <!-- <p></p> -->
+                                                                              <a class="theme-link" href="/section/LibrariesLeadPodcast">LIBRAIES LEAD PODCAST</a>
+
+                            </div>
+
+                            <div class="top-story-heading">
+                              <a href="https://librarieslead.libraryjournal.com/?p=386" target="_blank">
+                                <h3 class="smart-headline more-link">Episode 51 (May 2026): The Changing Contours of the Information Field</h3>
+                              </a>
+                            </div>
+
+                            <div class="full-width pull-left">
+                              <!-- <p> -->
+
+                                <a class="author expauthor" href = "/author?query=Mike%20Eisenberg">Mike Eisenberg</a>,
+May 01, 2026                              <!-- </p> -->
+                            </div>
+
+                            <!-- Old Sponsored Code Start -->
+
+                            <!-- New Sponsored Code Start -->
+
+
+
+                            <!-- New Sponsored Code End -->
+
+                            <div class="explore-desc full-width pull-left hidden-md-down">
+                                Information schools are navigating serious structural challenges — including mergers into larger university units and the difficulty of preserving disciplinary identity within administratively complex institutions. The hosts propose that iSchools come together to collectively address the organizational challenge along with curriculum, leadership, and integration of AI issues.
+                            </div>
+
+                            <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                        </div>
+                    </div>
+                    <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                              <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                                  <a href="https://librarieslead.libraryjournal.com/?p=378" target="_blank">
+                                      <img class="image-full" src="https://librarieslead.libraryjournal.com/wp-content/uploads/2026/04/CPL.png" alt="Story Image"/>
+                                  </a>
+                              </div>
+
+                        <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                            <div class="topic-type mt_0">
+                              <!-- <p></p> -->
+                                                                              <a class="theme-link" href="/section/LibrariesLeadPodcast">LIBRAIES LEAD PODCAST</a>
+
+                            </div>
+
+                            <div class="top-story-heading">
+                              <a href="https://librarieslead.libraryjournal.com/?p=378" target="_blank">
+                                <h3 class="smart-headline more-link">Episode 50: Open Doors: Libraries as Sanctuary Space</h3>
+                              </a>
+                            </div>
+
+                            <div class="full-width pull-left">
+                              <!-- <p> -->
+
+                                <a class="author expauthor" href = "/author?query=Mike%20Eisenberg">Mike Eisenberg</a>,
+Apr 01, 2026                              <!-- </p> -->
+                            </div>
+
+                            <!-- Old Sponsored Code Start -->
+
+                            <!-- New Sponsored Code Start -->
+
+
+
+                            <!-- New Sponsored Code End -->
+
+                            <div class="explore-desc full-width pull-left hidden-md-down">
+                                Libraries aspire to be a place where everyone belongs — but what does that commitment look like today when it is being both tested and expanded? In this episode, we explore how libraries are redefining sanctuary: partnering with nonprofits and social service agencies, navigating uncertain immigration policy, and balancing the needs of the most vulnerable with maintaining a welcoming and safe space for families and the broader community.
+                            </div>
+
+                            <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                        </div>
+                    </div>
+
+            <div class="text-align-center full-width pull-left">
+                    <a href="/section/LibrariesLeadPodcast" style="none" class="more-anchor">
+                      <span class="more-link">More Libraries Lead Podcast </span>
+                      <i class="fa fa-arrow-right" style="color:red"></i>
+                    </a>
+            </div>
+
+        </div>
+
+
+
+        <div id="allstories" class="tabcontent">
+                <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                        <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                            <a href=/story/cabi-global-health-database-fills-a-need-for-comprehensive-international-research-lj290902>
+                                <img class="image-full" src="/binaries/content/gallery/Jlibrary/lj-sponsored-images/2026-sponsored-images/gettyimages-1064032460-dr.-examining-child.jpg" onerror="this.src='https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/defaultcover.jpg'" alt="CABI Global Health Database Fills a Need for Comprehensive International Research"/>
+                            </a>
+                        </div>
+
+                    <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                        <div class="topic-type mt_0">
+                          <!-- <p></p> -->
+                          <a class="theme-link" href="/section/Academic%20Libraries">ACADEMIC LIBRARIES</a>
+                        </div>
+
+                        <div class="top-story-heading">
+                          <a href=/story/cabi-global-health-database-fills-a-need-for-comprehensive-international-research-lj290902>
+                            <h3 class="smart-headline more-link">CABI Global Health Database Fills a Need for Comprehensive International Research</h3>
+                          </a>
+                        </div>
+
+                        <div class="full-width pull-left">
+                          <!-- <p> -->
+
+                            <a class="author expauthor" href = "/author?query=CABI">CABI</a>,&nbsp;
+
+Sep 03, 2026                            
+                          <!-- </p> -->
+                        </div>
+
+                        <!-- Old Sponsored Code Start -->
+
+                      <!-- New Sponsored Code Start -->
+
+
+
+  <div class="pull-left sponsored mt_10 mb_10">
+      SPONSORED
+  </div>
+                      <!-- New Sponsored Code End -->
+
+                        <div class="explore-desc full-width pull-left hidden-md-down">
+                            As a leader in public health research, the University of Georgia (UGA) provides world-class research tools to its students and faculty. One of the databases it relies on to make sure researchers have a truly global perspective on public health is the Global Health database created by CABI.</p>
+                        </div>
+
+                        <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                    </div>
+                </div>
+
+                <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                        <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                            <a href=/story/Great-Reads-September-2026-starred-reviews>
+                                <img class="image-full" src="/binaries/content/gallery/Jlibrary/2026/september/ljx260901webstars.jpg" onerror="this.src='https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/defaultcover.jpg'" alt="Great Reads | September 2026 Starred Reviews"/>
+                            </a>
+                        </div>
+
+                    <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                        <div class="topic-type mt_0">
+                          <!-- <p></p> -->
+                          <a class="theme-link" href="/section/Best%20Of">BEST OF</a>
+                        </div>
+
+                        <div class="top-story-heading">
+                          <a href=/story/Great-Reads-September-2026-starred-reviews>
+                            <h3 class="smart-headline more-link">Great Reads | September 2026 Starred Reviews</h3>
+                          </a>
+                        </div>
+
+                        <div class="full-width pull-left">
+                          <!-- <p> -->
+
+                            <a class="author expauthor" href = "/author?query=LJ%20Reviews">LJ Reviews</a>,&nbsp;
+
+Sep 02, 2026                            
+                          <!-- </p> -->
+                        </div>
+
+                        <!-- Old Sponsored Code Start -->
+
+                      <!-- New Sponsored Code Start -->
+
+
+
+                      <!-- New Sponsored Code End -->
+
+                        <div class="explore-desc full-width pull-left hidden-md-down">
+                            Elizabeth Kostova’s <strong><span style="color:#2980b9">Mystery Play</span></strong>, John<strong> </strong>Scalzi’s <strong><span style="color:#2980b9">Monsters of Ohio</span></strong>, Bonnie Garmus’s <strong><span style="color:#2980b9">Peck &amp; Peck</span></strong>,<strong><span style="color:#2980b9"> </span></strong>and Annie Proulx’s <strong><span style="color:#2980b9">Stories </span></strong>are just some of the forthcoming titles earning starred reviews in the September issue.</p>
+                        </div>
+
+                        <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                    </div>
+                </div>
+
+                <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                        <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                            <a href=/story/hispanic-heritage-month-2026-a-reading-list>
+                                <img class="image-full" src="/binaries/content/gallery/Jlibrary/2026/september/ljsept2026booklistfeatured.jpg" onerror="this.src='https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/defaultcover.jpg'" alt="Hispanic Heritage Month 2026 | A Reading List"/>
+                            </a>
+                        </div>
+
+                    <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                        <div class="topic-type mt_0">
+                          <!-- <p></p> -->
+                          <a class="theme-link" href="/section/Booklists">BOOKLISTS</a>
+                        </div>
+
+                        <div class="top-story-heading">
+                          <a href=/story/hispanic-heritage-month-2026-a-reading-list>
+                            <h3 class="smart-headline more-link">Hispanic Heritage Month 2026 | A Reading List</h3>
+                          </a>
+                        </div>
+
+                        <div class="full-width pull-left">
+                          <!-- <p> -->
+
+                            <a class="author expauthor" href = "/author?query=Sarah%20Hashimoto">Sarah Hashimoto</a>,&nbsp;
+
+Sep 02, 2026                            
+                          <!-- </p> -->
+                        </div>
+
+                        <!-- Old Sponsored Code Start -->
+
+                      <!-- New Sponsored Code Start -->
+
+
+
+                      <!-- New Sponsored Code End -->
+
+                        <div class="explore-desc full-width pull-left hidden-md-down">
+                            Hispanic Heritage Month marks the achievements, histories, and cultures of Americans whose ancestors came from Spain, Mexico, the Caribbean, Central America, and South America, including people from Indigenous and Afro-Latino communities. The following books celebrate the diverse contributions and experiences of Hispanic and Latine people and include literary fiction, historical fiction, memoirs, poetry, and more.</p>
+                        </div>
+
+                        <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                    </div>
+                </div>
+
+                <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+                        <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                            <a href=/story/LJ-Talks-with-Duncan-Smith-About-Reading-Libraries-and-LJ>
+                                <img class="image-full" src="/binaries/content/gallery/duncansmithfeatured.jpg" onerror="this.src='https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/defaultcover.jpg'" alt="LJ Talks with Duncan Smith About Reading, Libraries, and LJ"/>
+                            </a>
+                        </div>
+
+                    <div class="story-detail col-md-9 col-sm-9 col-xs-12" style = "padding-left:30px;">
+
+                        <div class="topic-type mt_0">
+                          <!-- <p></p> -->
+                          <a class="theme-link" href="/section/Book%20News">BOOK NEWS</a>
+                        </div>
+
+                        <div class="top-story-heading">
+                          <a href=/story/LJ-Talks-with-Duncan-Smith-About-Reading-Libraries-and-LJ>
+                            <h3 class="smart-headline more-link">LJ Talks with Duncan Smith About Reading, Libraries, and LJ</h3>
+                          </a>
+                        </div>
+
+                        <div class="full-width pull-left">
+                          <!-- <p> -->
+
+                            <a class="author expauthor" href = "/author?query=Neal%20Wyatt">Neal Wyatt</a>,&nbsp;
+
+Sep 02, 2026                            
+                          <!-- </p> -->
+                        </div>
+
+                        <!-- Old Sponsored Code Start -->
+
+                      <!-- New Sponsored Code Start -->
+
+
+
+                      <!-- New Sponsored Code End -->
+
+                        <div class="explore-desc full-width pull-left hidden-md-down">
+                            To celebrate our 150th anniversary, we are inviting library luminaries who have retired from a life working in service to libraries, readers, and books to reflect on their careers, their experience with <em>Library Journal</em>, and their hopes for the future. Duncan Smith, who co-invented NoveList and was instrumental in the readers' advisory renaissance of the early 1980s, shares his perspective.</p>
+                        </div>
+
+                        <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                    </div>
+                </div>
+
+
+            <div class="text-align-center full-width pull-left">
+              <a href="/section/all stories" style="none" class="more-anchor">
+                <span class="more-link">View All Stories</span>
+                <i class="fa fa-arrow-right" style="color:red"></i>
+              </a>
+            </div>
+
+        </div>
+
+        <div id="mostpopular" class="tabcontent most-popular">
+              <div class="story-section col-md-12 col-sm-11 col-xs-12 pl_0">
+
+                <div class="explore-image col-md-3 col-sm-3 col-xs-12 pl_0 pr_0">
+                  <img class="image-full" src="/binaries/content/gallery/duncansmithfeatured.jpg" alt="Story Image"/>
+                </div>
+
+                <div class="story-detail col-md-9 col-sm-9 col-xs-12">
+
+                  <div class="topic-type mt_0">
+                    <p>Subtitle</p>
+                  </div>
+
+                  <div class="top-story-heading">
+                    <h3 class="fb">Headline</h3>
+                  </div>
+
+                  <div>
+                    <p>ByLine,
+                      Jan, 16 2017
+                      </p>
+                  </div>
+
+
+                    <div class="pull-left sponsored mt_10 mb_10">
+                    </div>
+
+
+                  <div class="explore-desc full-width pull-left hidden-md-down">
+                    Testing bluconinc section
+                  </div>
+
+                  <div class="hr_division_grey_light mt_20 mb_15 hidden-md-up"></div>
+                </div>
+            </div>
+
+            <div class="text-align-center full-width pull-left">
+              <a href="#" style="none" class="more-anchor">
+                <span class="smart-headline more-link">More Popular </span>
+                <i class="fa fa-arrow-right" style="color:red"></i>
+              </a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="hr_division"></div>
+
+
+  <div class="development-career col-md-12 col-xs-12 float-left pl_0 pr_0">
+
+      <div class="review-headline col-md-12 col-sm-12 float-left full-width mb_25">
+        <span class="text-align-center fb mb_20" style="letter-spacing:5px;">PROFESSIONAL DEVELOPMENT</span>
+      </div>
+
+                <div class="carousel-development-career full-width pull-left hidden-md-up">
+                  <div id="developmentCarousel" class="carousel slide" data-ride="carousel">
+
+                          <ol class="carousel-indicators">
+                            <li data-target="#developmentCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#developmentCarousel" data-slide-to="1"></li>
+                          </ol>
+
+                          <div class="carousel-inner">
+
+                                <div class="item active">
+                                  <div class="section-image col-xs-12 pl_0 pr_0">
+                                  <a href="/event/prh-winter-festival-2025">
+                                    <img src = "/binaries/content/gallery/prh-winterbookandauthorfestival2025-300x250.jpg">
+                                  </a>
+                                  </div>
+
+
+                                    <div class="top-story-heading text-align-center">
+                                      <a href="/event/prh-winter-festival-2025">
+                                        <h3 class="smart-headline">Penguin Random House Winter Book & Author Festival 2025</h3>
+                                      </a>
+                                    </div>
+                                    <div class="text-align-center full-width pull-left">
+                                      <p>
+Dec 04, 2025                                       </p>
+                                     </div>
+                                </div>
+
+                                <div class="item ">
+                                  <div class="section-image col-xs-12 pl_0 pr_0">
+                                  <a href="https://course.libraryjournal.com/products/advance-library-career-F25">
+                                    <img src = "/binaries/content/gallery/advance_300x250.jpg">
+                                  </a>
+                                  </div>
+
+
+                                    <div class="top-story-heading text-align-center">
+                                      <a href="https://course.libraryjournal.com/products/advance-library-career-F25">
+                                        <h3 class="smart-headline">How to Advance in Your Library Career</h3>
+                                      </a>
+                                    </div>
+                                    <div class="text-align-center full-width pull-left">
+                                      <p>
+Dec 02                                                 & 09, 2025
+                                       </p>
+                                     </div>
+                                </div>
+                          </div>
+
+                          <a href="#developmentCarousel" data-slide="prev">
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a  href="#developmentCarousel" data-slide="next">
+                            <span class="sr-only">Next</span>
+                          </a>
+
+                    </div>
+                </div>
+
+      <div class="col-md-4 col-sm-4 col-xs-12 pl_0 mob-pr_0">
+        <div class="left-side-bar full-width pull-left">
+          <div class="top-story-content">
+              <div class="hr_division_grey_light mt_20 mb_30 hidden-md-up"></div>
+              <div class="topic-type mt_0">
+                    EVENTS
+              </div>
+
+
+
+                  <div class="left-side-bar-section full-width pull-left hidden-md-down">
+                    <div class="top-story-heading">
+                        <a href="/event/directors-summit-2026">
+                          <h3>Directors' Summit 2026</h3>
+                        </a>
+                    </div>
+                    <div class="full-width pull-left">
+                     <p>Winter Park Library in Winter Park, FL, 
+Oct 22, 2026                      </p>
+                    </div>
+                    <div class="hr_division_grey_light mt_20 mb_10"></div>
+                  </div>
+
+
+
+
+                  <div class="left-side-bar-section full-width pull-left ">
+                    <div class="top-story-heading">
+                        <a href="/event/library-journal-day-of-dialog-fall-2026">
+                          <h3><i>Library Journal</i> Day of Dialog Fall 2026</h3>
+                        </a>
+                    </div>
+                    <div class="full-width pull-left">
+                     <p>ONLINE, 
+Oct 22, 2026                      </p>
+                    </div>
+                    <div class="hr_division_grey_light mt_20 mb_10"></div>
+                  </div>
+
+
+
+
+                  <div class="left-side-bar-section full-width pull-left hidden-md-down">
+                    <div class="top-story-heading">
+                        <a href="/event/Design-Institute-Columbus-OH-2026">
+                          <h3>Design Institute Columbus, OH</h3>
+                        </a>
+                    </div>
+                    <div class="full-width pull-left">
+                     <p>Columbus Metropolitan Library, 
+Oct 08, 2026                      </p>
+                    </div>
+                    <div class="hr_division_grey_light mt_20 mb_10"></div>
+                  </div>
+
+
+              <div class="full-width pull-left">
+                <a href="/section/events" style="none">
+                  <span class="smart-headline more-link">More Events </span>
+                  <i class="fa fa-arrow-right" style="color:red; padding-left: 4px;"></i>
+                </a>
+              </div>
+          </div>
+        </div>
+      </div>
+
+                <div class="col-md-4 col-sm-4 hidden-md-down">
+                  <div class="section-image col-md-12 col-sm-12 col-xs-12 pl_0 pr_0 text-align-center">
+                    <a href="/event/prh-winter-festival-2025">
+                    <img src="/binaries/content/gallery/prh-winterbookandauthorfestival2025-300x250.jpg" alt="Story Image">
+                    </a>
+                  </div>
+                    <div class="top-story-type">
+                      	<p>VIRTUAL EVENTS</p>
+                    </div>
+                    <div class="top-story-heading text-align-center">
+                      <a href="/event/prh-winter-festival-2025">
+                        <h3 class="smart-headline">Penguin Random House Winter Book & Author Festival 2025</h3>
+                      </a>
+                    </div>
+                       <div class="text-align-center full-width pull-left">
+                         <p>
+Dec 04, 2025                          </p>
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-4 hidden-md-down">
+                  <div class="section-image col-md-12 col-sm-12 col-xs-12 pl_0 pr_0 text-align-center">
+                    <a href="https://course.libraryjournal.com/products/advance-library-career-F25">
+                    <img src="/binaries/content/gallery/advance_300x250.jpg" alt="Story Image">
+                    </a>
+                  </div>
+                    <div class="top-story-type">
+                      	<p>ONLINE COURSES</p>
+                    </div>
+                    <div class="top-story-heading text-align-center">
+                      <a href="https://course.libraryjournal.com/products/advance-library-career-F25">
+                        <h3 class="smart-headline">How to Advance in Your Library Career</h3>
+                      </a>
+                    </div>
+                       <div class="text-align-center full-width pull-left">
+                         <p>
+Dec 02&nbsp;to Dec 09, 2025                          </p>
+                        </div>
+                </div>
+    </div>
+
+<div id="subscribe-callout-hr" class="hr_division mb_0"></div>
+
+          <div class="subscribe-callout col-md-12 col-xs-12">
+
+            <div class="col-md-12 col-xs-12 p_0 subscribe_callout">
+<h1 style="text-align:center" class="hidden-xs"><a href="https://www.libraryjournal.com/page/subscribe" target="_blank"><img src="/binaries/content/gallery/Jlibrary/subscribe-callout/2022/digital-ad-homepage__q1_lj.png" /></a></h1>
+
+<div class="hidden-md-up">&nbsp;</div>
+
+<p style="text-align:center"><a href="https://storeapi.libraryjournal.com/magento2-ib/customform/form.php?name=LJnewsletters" target="_blank"><img src="/binaries/content/gallery/ljnewslettercta.png" /></a><br />
+<br />
+<br />
+&nbsp;</p>            </div>
+          </div>
+
+<div class="hr_division mt_0 mb_0"></div>
+<div id="advertisement" class="advertisement adv-top col-md-12 col-sm-12 col-xs-12 float-left hidden-print">
+  <div id="homepage3">
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('homepage3'); });
+            </script>
+
+  </div>
+</div>
+
+<div class="hr_division mt_0"></div>
+
+<div class="development-career col-md-12 col-xs-12 float-left pl_0 pr_0">
+
+      <div class="review-headline col-md-12 col-sm-12 float-left full-width mb_25">
+        <span class="text-align-center fb mb_20" style="letter-spacing:5px;">STARRED REVIEWS</span>
+        <!-- <span class="heading-arrow"><i class="fa fa-arrow-right" style="color:red; font-size:14px;"></i></span> -->
+      </div>
+
+            <div class="carousel-development-career full-width pull-left hidden-md-up">
+              <div id="careerCarousel" class="carousel slide" data-ride="carousel">
+
+                      <ol class="carousel-indicators">
+                                <li data-target="#careerCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#careerCarousel" data-slide-to="1"></li>
+                                <li data-target="#careerCarousel" data-slide-to="1"></li>
+                      </ol>
+
+                      <div class="carousel-inner">
+
+
+                          <div class="item active">
+                            <div class="section-image col-xs-12 pl_0 pr_0">
+                              <a href=/review/cloud-runner-poems-100015564>
+                                <img class="image-full" src="https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/9781324123651.jpg" alt="Story Image">
+                              </a>
+                            </div>
+
+                            <div class="top-story-type full-width pull-left">
+                              <a class="theme-link" href="/section/Nonfiction">NONFICTION</a>
+                            </div>
+
+                          </div>
+
+
+
+
+                          <div class="item ">
+                            <div class="section-image col-xs-12 pl_0 pr_0">
+                              <a href=/review/joy-100014298>
+                                <img class="image-full" src="https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/9780063447455.jpg" alt="Story Image">
+                              </a>
+                            </div>
+
+                            <div class="top-story-type full-width pull-left">
+                              <a class="theme-link" href="/section/Nonfiction">NONFICTION</a>
+                            </div>
+
+                          </div>
+
+
+
+
+                          <div class="item ">
+                            <div class="section-image col-xs-12 pl_0 pr_0">
+                              <a href=/review/the-best-journey-in-the-world-an-antarctic-story-100014547>
+                                <img class="image-full" src="https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/9780316570725.jpg" alt="Story Image">
+                              </a>
+                            </div>
+
+                            <div class="top-story-type full-width pull-left">
+                              <a class="theme-link" href="/section/Nonfiction">NONFICTION</a>
+                            </div>
+
+                          </div>
+
+
+                      </div>
+
+                    </div>
+                </div>
+
+          <!-- Job Zone Start-->
+          <!-- Right now we commented this code But it will be needed in future -->
+          <!-- <div class="col-md-4 col-sm-4 col-xs-12 pl_0 mob-pr_0">
+            <div class="left-side-bar full-width pull-left">
+              <div class="top-story-content">
+                <div class="hr_division_grey_light mt_20 mb_30 hidden-md-up"></div>
+                <div class="topic-type mt_0">
+                      JOB ZONE
+                </div>
+
+
+
+                      <div class="left-side-bar-section full-width pull-left hidden-md-down">
+                        <div class="top-story-heading">
+                          <p>
+                          </p>
+                        </div>
+                        <div class="hr_division_grey_light mt_20 mb_10"></div>
+                      </div>
+
+
+
+                      <div class="left-side-bar-section full-width pull-left ">
+                        <div class="top-story-heading">
+                          <p>
+                          </p>
+                        </div>
+                        <div class="hr_division_grey_light mt_20 mb_10"></div>
+                      </div>
+
+
+
+                      <div class="left-side-bar-section full-width pull-left hidden-md-down">
+                        <div class="top-story-heading">
+                          <p>
+                          </p>
+                        </div>
+                        <div class="hr_division_grey_light mt_20 mb_10"></div>
+                      </div>
+
+
+                      <div class="full-width pull-left">
+                        <a href="#" style="none">
+                          <span class="more-link">More Jobs </span>
+                          <i class="fa fa-arrow-right" style="color:red; padding-left: 4px;"></i>
+                        </a>
+                      </div>
+              </div>
+            </div>
+          </div> -->
+          <!-- Job Zone End-->
+
+
+                  <div class="col-md-4 col-sm-4 hidden-md-down">
+                    <div class="section-image col-md-12 col-sm-12 col-xs-12 pl_0 pr_0 text-align-center">
+                      <a href=/review/cloud-runner-poems-100015564>
+                       <img class="image-full" src="https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/9781324123651.jpg" alt="Story Image">
+                      </a>
+                    </div>
+                    <div class="top-story-type">
+                      <a class="theme-link" href="/section/Nonfiction">NONFICTION</a>
+                    </div>
+
+                    <div class="top-story-heading text-align-center">
+                    <a href=/review/cloud-runner-poems-100015564>
+                      <h3 class="smart-headline">Cloud Runner: Poems</h3>
+                    </a>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-4 col-sm-4 hidden-md-down">
+                    <div class="section-image col-md-12 col-sm-12 col-xs-12 pl_0 pr_0 text-align-center">
+                      <a href=/review/joy-100014298>
+                       <img class="image-full" src="https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/9780063447455.jpg" alt="Story Image">
+                      </a>
+                    </div>
+                    <div class="top-story-type">
+                      <a class="theme-link" href="/section/Nonfiction">NONFICTION</a>
+                    </div>
+
+                    <div class="top-story-heading text-align-center">
+                    <a href=/review/joy-100014298>
+                      <h3 class="smart-headline">Joy</h3>
+                    </a>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-4 col-sm-4 hidden-md-down">
+                    <div class="section-image col-md-12 col-sm-12 col-xs-12 pl_0 pr_0 text-align-center">
+                      <a href=/review/the-best-journey-in-the-world-an-antarctic-story-100014547>
+                       <img class="image-full" src="https://s3.amazonaws.com/ArchiveImages/LegacyReviews/LJ/9780316570725.jpg" alt="Story Image">
+                      </a>
+                    </div>
+                    <div class="top-story-type">
+                      <a class="theme-link" href="/section/Nonfiction">NONFICTION</a>
+                    </div>
+
+                    <div class="top-story-heading text-align-center">
+                    <a href=/review/the-best-journey-in-the-world-an-antarctic-story-100014547>
+                      <h3 class="smart-headline">The Best Journey in the World: An Antarctic Story</h3>
+                    </a>
+                    </div>
+                  </div>
+
+    </div>
+
+<!-- Community Section Starts-->
+<!-- <div class="hr_division"></div>
+
+ <div class="col-md-12 mt_30 mb_50 pull-left display-block">
+
+   <div class="review-headline col-md-12 col-sm-12 float-left full-width">
+     <span class="text-align-center fb mb_20" style="letter-spacing:5px;">COMMUNITY FORUM</span>
+     <span class="heading-arrow"><i class="fa fa-arrow-right" style="color:red; font-size:14px;"></i></span>
+   </div>
+
+   <div class="community-block col-md-6 col-sm-6 col-xs-12">
+     <div class="communty-form-heading">
+       <h3>"What is this?" Design thinking from an LIS student prespective</h3>
+     </div>
+
+     <div class="community-form-info full-width pull-left">
+       <p>
+         Field in Collection Development | 17 replies
+       </p>
+     </div>
+
+     <div class="col-md-1 col-xs-2 highlight" style="height: 40px;">
+       <img src="" alt="">
+     </div>
+
+     <div class="col-md-10 col-xs-10 pull-left mb_20">
+       <p class="community-form-desc">
+         One year into the MLIS program at San Joes State Univirsity, I took a chnace on a design thinking corse zzzzzzzzzzzzzzzz
+       </p>
+       <div class="full-width pull-left hidden-md-down">
+         <span style="font-size:  12px; color:  gray;">latest reply from UserName, 4 hour ago</span>
+       </div>
+     </div>
+
+   </div>
+
+   <div class="hr_division_grey_light hidden-md-up"></div>
+
+   <div class="community-block col-md-6 col-sm-6 col-xs-12">
+     <div class="communty-form-heading">
+       <h3>"What is this?" Design thinking from an LIS student prespective</h3>
+     </div>
+
+     <div class="community-form-info full-width pull-left">
+       <p>
+         Field in Collection Development | 17 replies
+       </p>
+     </div>
+
+     <div class="col-md-1 col-xs-2 highlight" style="height: 40px;">
+       <img src="" alt="">
+     </div>
+
+     <div class="col-md-10 col-xs-10 pull-left mb_20">
+       <p class="community-form-desc">
+         One year into the MLIS program at San Joes State Univirsity, I took a chnace on a design thinking corse zzzzzzzzzzzzzzzz
+       </p>
+       <div class="full-width pull-left hidden-md-down">
+         <span style="font-size:  12px; color:  gray;">latest reply from UserName, 4 hour ago</span>
+       </div>
+     </div>
+
+   </div>
+</div> -->
+<!-- Community Section Ends-->
+
+</div>
+
+<style>
+.sponsored-line{
+  border-right: 2px solid #bdbec0;
+}
+</style></div>
+
+          <script>
+  (function() {
+    const currentUrl = window.location.href;
+    if (currentUrl.includes("/page/home?subpage=reviews")) {
+      window.location.replace("https://www.libraryjournal.com/section/reviews");
+    }
+  })();
+</script>
+
+<script>
+  if (window.location.pathname === "/page/home") {
+    window.location.replace("/");
+  }
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.location.pathname.includes("/page/home")) {
+    // Show loader
+    document.body.innerHTML = '<div id="loader" style="text-align:center;padding:40px;font-family:sans-serif;"></div>';
+
+    // Fetch homepage HTML
+    fetch(window.location.origin + "/")
+      .then((res) => res.text())
+      .then((html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        // --- COPY HEAD STYLES & SCRIPTS ---
+        const head = doc.querySelector("head");
+        const links = head.querySelectorAll("link[rel='stylesheet']");
+        const scripts = head.querySelectorAll("script[src]");
+
+        // Add missing CSS stylesheets
+        links.forEach((link) => {
+          const exists = [...document.styleSheets].some((s) => s.href === link.href);
+          if (!exists) {
+            const newLink = document.createElement("link");
+            newLink.rel = "stylesheet";
+            newLink.href = link.href;
+            document.head.appendChild(newLink);
+          }
+        });
+
+        // Add JS scripts (async for speed)
+        scripts.forEach((script) => {
+          const exists = [...document.scripts].some((s) => s.src === script.src);
+          if (!exists) {
+            const newScript = document.createElement("script");
+            newScript.src = script.src;
+            newScript.async = true;
+            document.body.appendChild(newScript);
+          }
+        });
+
+        // --- EXTRACT MAIN CONTENT ---
+        const homepageMain =
+          doc.querySelector("main") ||
+          doc.querySelector("#main") ||
+          doc.querySelector(".site-content") ||
+          doc.body;
+
+        document.body.innerHTML = homepageMain.innerHTML;
+
+        // Re-run inline scripts (important)
+        homepageMain.querySelectorAll("script:not([src])").forEach((oldScript) => {
+          const newScript = document.createElement("script");
+          newScript.text = oldScript.textContent;
+          document.body.appendChild(newScript);
+        });
+      })
+      .catch((err) => {
+        console.error("Error loading homepage:", err);
+        document.body.innerHTML =
+          "<p style='text-align:center;color:red;'>Failed to load homepage.</p>";
+      });
+  }
+});
+</script>
+
+
+          <div id="meternote">
+              <div class = "gtm_half_ID"></div>
+              <div class="col-md-12 col-xs-12 mt_20 mb_20 fs_20">
+                <div class="col-md-12 col-sm-12 col-xs-12 mt_20 mb_10 fs_15 resp-no-margin">
+                    <div class="col-md-6 col-sm-8 col-xs-11 meter-text">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 fs_20 p_0">
+                        <div class = "text-align-center float-left-resp">
+                            <a class="meter-href" href="?page=subscribe">
+                            <button type="submit" class="btn btn-subscribe-meter btn-white navbar-btn subscribe-btn-size resp-full-width" id="notiRedirect">SUBSCRIBE</button></a>
+                            <h6 class="fs_13 mb_20 white">ALREADY A SUBSCRIBER? <a class="meter-login-utm meter-login white underline" href="?page=login">LOG IN</a></h6>
+                        </div>
+                    </div>
+                </div>
+
+              </div>
+              <span class="meterNoteclose" style="cursor:pointer;">
+                <i class="fa fa-chevron-down fa-2x mt_5 meter-login white"></i>
+              </span>
+          </div>
+          <div id="smallmeternote">
+            <div class = "gtm_small_ID"></div>
+              <div class="container fs_20">
+                <div class="col-md-8 col-sm-8 col-xs-11 fs_20 resp-no-margin text-align-center white">
+                  <p class="fs_16 mt_20 mb_10 meter-small-num float-right-resp">
+                  </p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12 fs_20 text-align-center">
+                  <a class="meter-href" href="?page=subscribe">
+                    <button type="submit" class="btn btn-subscribe-meter btn-white navbar-btn subscribe-btn-size resp-full-width" id="notiRedirect">SUBSCRIBE</button></a>
+                </div>
+              </div>
+              <span class="meterNoteopen display-none" style="cursor:pointer;">
+                <i class="fa fa-chevron-up white fa-2x mt_5  meter-login"></i>
+              </span>
+          </div>
+          <div id="freemeternote">
+              <div class = "gtm_freehalf_ID"></div>
+              <div class="col-md-12 col-xs-12 mt_20 mb_20 fs_20">
+                <div class="col-md-12 col-sm-12 col-xs-12 mt_20 mb_10 fs_15 resp-no-margin">
+                    <div class="col-md-6 col-sm-8 col-xs-11 meter-text mr_20">
+                        <p>We are currently offering this content for free. Sign up now to activate your personal profile, where you can save articles for future viewing</p>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 fs_20 p_0">
+                        <div class = "text-align-center float-left-resp">
+                            <a class="meter-reg-href" href="?page=register">
+                            <button type="submit" class="btn btn-subscribe-meter btn-white navbar-btn subscribe-btn-size resp-full-width" id="notiRedirect">CREATE AN ACCOUNT</button></a>
+                            <h6 class="fs_13 mb_20 white">ALREADY A SUBSCRIBER? <a class="white meter-login-utm meter-login underline" href="?page=login">LOG IN</a></h6>
+                        </div>
+                    </div>
+                </div>
+
+              </div>
+              <span class="meterNoteclose" style="cursor:pointer;">
+                <i class="fa fa-chevron-down white fa-2x mt_5  meter-login"></i>
+              </span>
+          </div>
+          <div id="privateMode" class="modal fade" data-backdrop="static" data-keyboard="false" style="overflow : auto;">
+          <div class = "gtm_private_ID"></div>
+           <div class="modal-dialog" style="top:8%;">
+               <div class="modal-content">
+                <div class="modal-body">
+
+                     <div class="text-align-center" style="border: 1px solid black;">
+                        <div class="text-align-left">
+                            <a class="meter-backHome" href="?page=home">
+                                <button class="back-home-close bold">
+                                    BACK TO HOMEPAGE
+                                </button>
+                            </a>
+                        </div>
+                        <h2 class="text-align-center bold">Thank you for visiting.</h2>
+                        <div class="paywall-text">
+                        <p>We’ve noticed you are using a private browser. To continue, please log in or create an account.</p>
+                        </div>
+                        <p><img  style="width: 80%;
+                                        height: auto!important; margin-top:20px;" src="/webfiles/1788549891630/images/ljHardPaywall.jpg" alt="Hard paywall image"/></p>
+                        <p><a class="meter-login-utm" href="?page=login"><button class="btn btn-subscribe btn-red navbar-btn subscribe-btn-size mt_5" style="width:195px;">LOG IN</button></a></p>
+                        <p><a href="?page=register"><button class="btn btn-subscribe btn-red navbar-btn subscribe-btn-size mt_5" style="width:195px;">CREATE AN ACCOUNT</button></a></p>
+                        <h6 class="mb_20 text-decoration-underline"><span class="bold"><a class="underline full-meter-href" href="?page=subscribe">SUBSCRIPTION OPTIONS</a></span></h6>
+                     </div>
+
+                </div>
+               </div>
+            </div>
+          </div>
+
+          <div id="hardPaywallMode" class="modal fade" data-backdrop="static" data-keyboard="false" style="overflow : auto;">
+            <div class = "gtm_hard_ID"></div>
+           <div class="modal-dialog" style="top:8%;">
+               <div class="modal-content">
+
+                <div class="modal-body">
+                     <div class="text-align-center" style="border: 1px solid black;">
+                        <div class="text-align-left">
+                            <a class="meter-backHome" href="?page=home">
+                                <button class="back-home-close bold">
+                                    BACK TO HOMEPAGE
+                                </button>
+                            </a>
+                        </div>
+                        <div class="paywall-text">
+                        </div>
+                        <p><a class="full-meter-href" href="?page=subscribe"><button class="btn btn-subscribe btn-red mt_10 navbar-btn subscribe-btn-size" style="width:140px;">SUBSCRIBE</button></a></p>
+                        <h6 class="fs_13 mb_20">Already a subscriber? <span class="bold"><a class="meter-login-utm underline" href="?page=login">Log In</a></span></h6>
+                     </div>
+
+                </div>
+               </div>
+            </div>
+          </div>
+          <div id="hardPaywallReviewMode" class="modal fade" data-backdrop="static" data-keyboard="false" style="overflow : auto;">
+           <div class = "gtm_reviewHard_ID" style="display:none;"></div>
+           <div class="modal-dialog" style="top:8%;">
+               <div class="modal-content">
+                <div class="modal-body">
+                     <div class="text-align-center" style="border: 1px solid black;">
+                        <div class="text-align-left">
+                            <a class="meter-backHome" href="?page=home">
+                                <button class="back-home-close bold">
+                                    BACK TO HOMEPAGE
+                                </button>
+                            </a>
+                        </div>
+                       <div class="text-align-center bold"><h2 class="bold">Thank you for visiting.</h2></div>
+                        <div class="paywall-text">
+                        <p>Most <i>LJ</i> reviews are exclusive to subscribers.</p>
+                        <p>As a subscriber, you'll receive unlimited access to all reviews dating back to 2010.</p>
+                        <p><img  style="width: 80%;
+                                        height: auto!important; margin-top:20px;" src="/webfiles/1788549891630/images/ljHardPaywall.jpg" alt="Hard paywall image"/></p>
+                        <p>To access other site content, visit our <a class="meter-backHome" href="https://www.libraryjournal.com/" style="text-decoration:underline;">homepage</a>.</p>
+                        </div>
+
+                        <p><a class="full-meter-href" href="?page=subscribe"><button class="btn btn-subscribe btn-red mt_10 navbar-btn subscribe-btn-size" style="width:140px;">SUBSCRIBE</button></a></p>
+                        <h6 class="fs_13 mb_20">Already a subscriber? <span class="bold"><a class="meter-login-utm underline" href="?page=login">Log In</a></span></h6>
+                     </div>
+
+                </div>
+               </div>
+            </div>
+          </div>
+          <div id="meterExhaustMode" class="modal fade" data-backdrop="static" data-keyboard="false" style="overflow : auto;">
+          <div class = "gtm_exhaust_ID"></div>
+           <div class="modal-dialog" style="top:8%;">
+               <div class="modal-content">
+
+                <div class="modal-body">
+                     <div class="text-align-center" style="border: 1px solid black;">
+                        <div class="text-align-left">
+                            <a class="meter-backHome" href="?page=home">
+                                <button class="back-home-close bold">
+                                    BACK TO HOMEPAGE
+                                </button>
+                            </a>
+                        </div>
+                        <div class="paywall-text">
+                        </div>
+                        <p><a class="full-meter-href" href="?page=subscribe"><button class="btn btn-subscribe btn-red mt_10 navbar-btn subscribe-btn-size" style="width:140px;">SUBSCRIBE</button></a></p>
+                        <h6 class="fs_13 mb_20">Already a subscriber? <span class="bold"><a class="meter-login-utm underline" href="?page=login">Log In</a></span></h6>
+                     </div>
+
+                </div>
+               </div>
+            </div>
+          </div>
+
+
+
+
+	 </div>
+
+       <div id="LJ_Spotible1_1x1">
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('LJ_Spotible1_1x1'); });
+            </script>
+        </div>
+        <div id="LJ_Video_1x1">
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('LJ_Video_1x1'); });
+            </script>
+        </div>
+<footer class="lj-footer display-block pull-left full-width hidden-print">
+
+    <!-- <div class="hr_division"></div> -->
+
+    <div class="footer" id="footer">
+      <div class="container">
+        <!-- Footer for Larger screen view Start-->
+          <div class="laptop mt_30">
+                              <div class="col-md-2 col-sm-2 col-xs-12 footer-block pl_0">
+                    <ul class="footer links footer-text">
+                        <li class="nav item"><a href="https://www.libraryjournal.com/?subpage=News" target="">News</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/section/reviews" target="">Reviews+</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/section/technology" target="">Technology</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/section/programs+" target="">Programs+</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/section/design" target="">Design</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/section/leadership" target="">Leadership</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/section/people" target="">People</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/section/covid19" target="">COVID-19</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/section/advocacy" target="">Advocacy</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/section/opinion" target="">Opinion</a></li>
+                        <li class="nav item"><a href="https://www.infodocket.com/?ref=ljnav-news" target="_blank">INFOdocket</a></li>
+                        <li class="nav item"><a href="http://jobs.libraryjournal.com/" target="_blank">Job Zone</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-2 col-sm-2 footer-block pl_0">
+                    <h4 class="mt_0">Reviews+</h4>
+                    <ul class="footer links footer-text">
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?subpage=BookLists" target="">Booklists</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?subpage=Prepub" target="">Prepub Alert</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?subpage=Book%20Pulse" target="">Book Pulse</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?subpage=Reviews%2B,Media" target="">Media</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?subpage=Readers%27%20Advisory" target="">Readers' Advisory</a></li>
+                          <li class="nav item"><a href="https://self-e.libraryjournal.com/" target="_blank">Self-Published Books</a></li>
+                          <li class="nav item"><a href="/page/Review-Submissions" target="">Review Submissions</a></li>
+                          <li class="nav item"><a href="/page/Review-for-LJ" target="">Review for LJ</a></li>
+                          <li class="nav item"><a href="https://openshelfreviews.com/" target="_blank">Open Shelf Reviews</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-2 col-sm-2 footer-block pl_0">
+                    <h4 class="mt_0">Awards</h4>
+                    <ul class="footer links footer-text">
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?page=jerry-kline-community-impact-prize-submission-guidelines" target="">Community Impact Prize</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?subpage=Librarian%20of%20the%20Year" target="">Librarian of the Year</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?subpage=Marketer%20of%20the%20Year" target="">Marketer of the Year</a></li>
+                          <li class="nav item"><a href="/page/movers-and-shakers-2026" >Movers & Shakers 2026</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?subpage=Library%20of%20the%20Year" target="">Library of the Year</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/page/Best-Small-Library-Guidelines" target="">Best Small Library</a></li>
+                          <li class="nav item"><a href="/page/All-Awards-Guidelines" target="">All Awards Guidelines</a></li>
+                        <!-- <li class="nav item"><a class="pointer" id="footerLibraryAwareCommunityId" onclick="readUrlCategory('LibraryAware%20Community','footerLibraryAwareCommunityId','Library Aware Community')";>Library Aware Community</a></li> -->
+                    </ul>
+                  </div>
+
+                  <div class="col-md-2 col-sm-2 footer-block pl_0">
+                    <h4 class="mt_0">Resources</h4>
+                    <ul class="footer links footer-text">
+                          <li class="nav item"><a href="https://www.libraryjournal.com/page/americas-star-libraries-2021" target="">LJ Index/Star Libraries</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?detailStory=research" target="">Research</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/?detailStory=white-papers-case-studies" target="">White Papers / Case Studies</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-md-2 col-sm-2 footer-block pl_0">
+                    <h4 class="mt_0">Events & PD</h4>
+                    <ul class="footer links footer-text">
+                          <li class="nav item"><a href="https://www.libraryjournal.com/section/events?eventtype=onlineCourses" target="">Online Courses</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/section/events?eventtype=inPersonEvents" target="">In-Person Events</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/section/events?eventtype=virtualEvents" target="">Virtual Events</a></li>
+                          <li class="nav item"><a href="https://www.libraryjournal.com/section/events?eventtype=webcasts" target="">Webcasts</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-md-2 col-sm-2 footer-block pl_0 pr_0">
+                    <ul class="footer links footer-text">
+                        <li class="nav item"><a href="/page/About-Us" target="">About Us</a></li>
+                        <li class="nav item"><a href="/page/Contact-Us" target="">Contact Us</a></li>
+                        <li class="nav item"><a href="https://media.libraryjournal.com/" target="_blank">Advertise</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/?page=subscribe" target="">Subscribe</a></li>
+                        <li class="nav item"><a href="/page/Media-Inquiries" target="">Media Inquiries</a></li>
+                        <li class="nav item"><a href="https://www.libraryjournal.com/page/freenewsletters" target="_blank">Newsletter Sign Up</a></li>
+                        <li class="nav item"><a href="/page/submit-features-news" target="">Submit Features/News</a></li>
+                        <li class="nav item"><a href="/page/Data-Privacy" target="">Data Privacy</a></li>
+                        <li class="nav item"><a href="/page/terms-of-use" target="">Terms of Use</a></li>
+                        <li class="nav item"><a href="/page/terms-of-sale" target="">Terms of Sale</a></li>
+                        <li class="nav item"><a href="/page/FAQs" target="">FAQs</a></li>
+                        <li class="nav item"><a href="/page/careers" target="">Careers at MSI</a></li>
+                      <li class="nav item mt_20">
+                        <a href="https://www.facebook.com/libraryjournalmagazine/" target="_blank"><img class="mr_4 tab-w-30" src="/webfiles/1788549891630/images/fb.png"></a>
+                        <a href="https://twitter.com/libraryjournal?lang=en" target="_blank"><img style="width: 35px;height: 35px;" class="mr_4 tab-w-30" src="/webfiles/1788549891630/images/tw.png"></a>
+                        <a href="https://www.pinterest.com/libraryjournal/" target="_blank"><img class="tab-w-30" src="/webfiles/1788549891630/images/pin.png"></a>
+                      </li>
+                    </ul>
+                  </div>
+            <!-- <div class="col-md-2 col-sm-4 col-xs-12 footer-block pl_0">
+            <h4>LJ Topics</h4>
+            <ul class="footer links footer-text">
+                <li class="nav item"><a href="#">Advocacy</a></li>
+                <li class="nav item"><a href="#">Building & Design</a></li>
+                <li class="nav item"><a href="#">Collection Development</a></li>
+                <li class="nav item"><a href="#">Innovation</a></li>
+                <li class="nav item"><a href="#">Leadership</a></li>
+                <li class="nav item"><a href="#">Library Education</a></li>
+                <li class="nav item"><a href="#">Marketing</a></li>
+                <li class="nav item"><a href="#">Technology</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-sm-4 footer-block pl_0">
+            <h4>News</h4>
+            <ul class="footer links footer-text">
+                <li class="nav item"><a href="#">Latest</a></li>
+                <li class="nav item"><a href="#">Infodocket</a></li>
+                <li class="nav item"><a href="#">Q&A</a></li>
+                <li class="nav item"><a href="#">Industry News</a></li>
+                <li class="nav item"><a href="#">People</a></li>
+                <li class="nav item"><a href="#">Events</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-sm-4 footer-block pl_0">
+            <h4>Features</h4>
+            <ul class="footer links footer-text">
+                <li class="nav item"><a href="#">2017 Movers & Shakers</a></li>
+                <li class="nav item"><a href="#">Star Libraries</a></li>
+                <li class="nav item"><a href="#">Placement & Salary Survey</a></li>
+                <li class="nav item"><a href="#">Library of the Year</a></li>
+                <li class="nav item"><a href="#">Best small library in America</a></li>
+                <li class="nav item"><a href="#">Librarian of the Year</a></li>
+                <li class="nav item"><a href="#">Paralibrarian of the Year</a></li>
+                <li class="nav item"><a href="#">2016 Yaer in Architecture</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-sm-4 footer-block pl_0">
+            <h4>Reviews</h4>
+            <ul class="footer links footer-text">
+                <li class="nav item"><a href="#">Prepub Alerts</a></li>
+                <li class="nav item"><a href="#">Audio Book Previews</a></li>
+                <li class="nav item"><a href="#">Collection Development</a></li>
+                <li class="nav item"><a href="#">Reader's Advisory</a></li>
+                <li class="nav item"><a href="#">Editor's Picks</a></li>
+                <li class="nav item"><a href="#">Review Lists</a></li>
+                <li class="nav item"><a href="#">All Review</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-sm-4 footer-block pl_0">
+            <h4>Opinion</h4>
+            <ul class="footer links footer-text">
+                <li class="nav item"><a href="#">Annoyed librarian</a></li>
+                <li class="nav item"><a href="#">Author 1</a></li>
+                <li class="nav item"><a href="#">Author 2</a></li>
+                <li class="nav item"><a href="#">Author 3</a></li>
+                <li class="nav item"><a href="#">Topic 1</a></li>
+                <li class="nav item"><a href="#">Topic 2</a></li>
+                <li class="nav item"><a href="#">Topic 3</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-sm-4 footer-block pl_0">
+            <h4>Learning</h4>
+            <ul class="footer links footer-text">
+                <li class="nav item"><a href="#">Live Workshop</a></li>
+                <li class="nav item"><a href="#">Online Courses</a></li>
+                <li class="nav item"><a href="#">Webinars</a></li>
+                <li class="nav item"><a href="#">Conference & Events</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-4 col-sm-8 float-right pl_0">
+              <div class="col-md-6  col-sm-6 footer-block pl_0">
+                <h4>About LJ</h4>
+                <ul class="footer links footer-text">
+                    <li class="nav item"><a href="#">LJ Awards</a></li>
+                    <li class="nav item"><a href="#">Self Publish</a></li>
+                    <li class="nav item"><a href="#">Careers at LJ</a></li>
+                    <li class="nav item"><a href="#">Library Jobs</a></li>
+                    <li class="nav item"><a href="#">Privacy Policy</a></li>
+                </ul>
+              </div>
+
+              <div class="col-md-6  col-sm-6 footer-block pl_0">
+                <h4>Get in Touch</h4>
+                <ul class="footer links footer-text">
+                    <li class="nav item"><a href="#">Subscriber Services</a></li>
+                    <li class="nav item"><a href="#">Contact Us</a></li>
+                    <li class="nav item"><a href="#">555-555-5555</a></li><span>
+                </ul>
+              </div>
+
+              <div class="col-md-6  col-sm-6 footer-block pl_0 pr_0">
+                <ul class="footer links footer-text">
+                    <li class="nav item">
+                      <a href="#"><i class="fa fa-facebook social-icon" aria-hidden="true"/></i></a>
+                      <a href="#"><img style="width: 35px;height: 35px;" class="mr_4 tab-w-30" src="/webfiles/1788549891630/images/tw.png"/></a>
+                      <a href="#"><i class="fa fa-instagram social-icon" aria-hidden="true"/></i></a>
+                      <a href="#"><i class="fa fa-pinterest social-icon" aria-hidden="true"/></i></a>
+                    </li>
+                </ul>
+              </div> -->
+
+          </div><!-- end laptop 1st section -->
+        </div><!-- end 1st container  -->
+
+        <hr class="footer-border-line mt_20 mb_20 hidden-xs">
+          <div class="container footer-img hidden-xs">
+
+              <div class="col-md-2 col-sm-2 col-xs-6 pl_0  text-align-left" style="border-right: 2px solid white">
+                <a title="Media Source Incorporated" href="http://www.mediasourceinc.com/" target="_blank">
+                  <img  src="/webfiles/1788549891630/images/MSI-Logo-bw_rev55k.png"/>
+                </a>
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-6 text-align-center">
+                <a title="AKJ" href="https://www.akjeducation.com/" target="_blank">
+                  <img style="width:50px" src="/webfiles/1788549891630/images/akj1.png"/>
+                </a>
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-6  text-align-right">
+                <a title="The Horn Book" href="http://www.hbook.com/" target="_blank">
+                  <img src="/webfiles/1788549891630/images/The_Horn_Booknew.png"/>
+                </a>
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-4  text-align-right p_0">
+                <a title="Junior Library Guild" href="https://www.juniorlibraryguild.com/" target="_blank">
+                  <img src="/webfiles/1788549891630/images/JLGnew.png"/>
+                </a>
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-4  text-align-right">
+                <a id="homeFromFooter" onclick="readUrlCategory('home','homeFromFooter','home')"; class="pointer">
+                  <img src="/webfiles/1788549891630/images/LJ_Blacknew.png"/>
+                </a>
+              </div>
+
+              <div class="col-md-2 col-sm-2 col-xs-4  text-align-right">
+                <a title="School Library Journal" href="http://www.slj.com/" target="_blank">
+                  <img src="/webfiles/1788549891630/images/SLJ-footer.png"/>
+                </a>
+              </div>
+
+          </div><!-- end 2nd container  -->
+          <hr class="footer-border-line mt_20 mb_20 hidden-xs">
+
+
+          <!-- <div class="col-md-12 col-sm-12 col-xs-12 mb_20 pl_0 pr_0 pt_5 pb_5 footer-img">
+
+              <div class="col-md-3 col-sm-3 col-xs-6 pl_0">
+                <a title="Media Source Incorporated" href="http://www.mediasourceinc.com/" target="_blank">
+                  <img src="/webfiles/1788549891630/images/media_source.png"/>
+                </a>
+              </div>
+
+              <div class="col-md-2 col-sm-2 col-xs-6">
+                <a title="The Horn Book" href="http://www.hbook.com/" target="_blank">
+                  <img src="/webfiles/1788549891630/images/The_Horn_Book.png"/>
+                </a>
+              </div>
+
+              <div class="col-md-3 col-sm-3 col-xs-4 text-align-center">
+                <a title="Junior Library Guild" href="https://www.juniorlibraryguild.com/" target="_blank">
+                  <img src="/webfiles/1788549891630/images/JLG.png"/>
+                </a>
+              </div>
+
+              <div class="col-md-2 col-sm-2 col-xs-4">
+                <a title="School Library Journal" href="http://www.slj.com/" target="_blank">
+                  <img src="/webfiles/1788549891630/images/SLJ.png"/>
+                </a>
+              </div>
+
+              <div class="col-md-2 pr_0 col-sm-2 col-xs-4">
+                <a id="homeFromFooter" href="https://lj.libraryjournal.com/forms/LJsub2018.php" class="pointer">
+                  <img class="float-right" src="/webfiles/1788549891630/images/LJ_Black.png"/>
+                </a>
+              </div>
+
+          </div> -->
+
+          <div class="container hidden-xs mb_10">
+            <div class="col-md-12 col-sm-12 pl_0 pr_0">
+              <div class="col-md-6 col-sm-4 pl_0 gray">
+                &copy; 2024 Library Journal. All rights reserved.
+              </div>
+              <div class="col-md-6 col-sm-8 footer-policy float-right pr_0">
+                <ul class="pull-right">
+                  <!-- <li class="nav"><a href="/page/Privacy-Policy">Privacy Policy</a></li> -->
+                  <!-- <li class="nav"><a href="#">Copyright Notice</a></li> -->
+                  <!-- <li class="nav"><a href="#">Shipping Policy</a></li>
+                  <li class="nav"><a href="#">Refund Policy</a></li> -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        <!-- Footer for Larger screen view End-->
+
+        <!-- Footer for Smaller screen view Start-->
+        <div class="col-md-12 col-sm-12 col-xs-12 mb_20 tablet">
+          <div class="col-xs-12 footer-block mt_30 mb_20">
+            <ul class="footer links footer-text text-align-center">
+                <li class="nav item">
+                  <a href="https://www.facebook.com/libraryjournalmagazine/"><img class="mr_20" src="/webfiles/1788549891630/images/fb.png"></a>
+                  <a href="https://twitter.com/libraryjournal?lang=en"><img style="width: 35px;height: 35px;" class="mr_20" src="/webfiles/1788549891630/images/tw.png"></a>
+                  <a href="https://www.instagram.com/library_journal/"><img class="mr_20" src="/webfiles/1788549891630/images/insta.png"></a>
+                  <a href="https://www.pinterest.com/libraryjournal/"><img src="/webfiles/1788549891630/images/pin.png"></a>
+                </li>
+            </ul>
+          </div>
+          <hr class="footer-border-line mb_30">
+          <div class="footer-img display-block full-width pull-left mb_30">
+            <div class="col-xs-12 p_0">
+              <div class="col-xs-6 text-align-center">
+                <a title="Media Source Incorporated" href="http://www.mediasourceinc.com/" target="_blank">
+                  <img  src="/webfiles/1788549891630/images/MSI-Logo-bw_rev55k.png"/>
+                </a>
+              </div>
+
+              <div class="col-xs-6 text-align-center">
+                <a title="The Horn Book" href="http://www.hbook.com/" target="_blank">
+                  <img class="full-width" src="/webfiles/1788549891630/images/The_Horn_Booknew.png"/>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-xs-12 p_0">
+              <div class="col-xs-6 text-align-center mt_30">
+                <a id="homeFromFooter" href="https://lj.libraryjournal.com/forms/LJsub2018.php" class="pointer">
+                  <img class="full-width" src="/webfiles/1788549891630/images/LJ_Blacknew.png"/>
+                </a>
+              </div>
+
+              <div class="col-xs-6 text-align-center mt_30">
+                <a title="School Library Journal" href="https://lj.libraryjournal.com/forms/SLJsub2018.php" target="_blank">
+                  <img class="full-width" src="/webfiles/1788549891630/images/SLJ-footer.png"/>
+                </a>
+              </div>
+
+
+            </div>
+            <div class="col-xs-12 p_0">
+              <div class="col-xs-6 text-align-center mt_30">
+                 <a title="AKJ" href="https://www.akjeducation.com//" target="_blank">
+                 <img style="width:50px" src="/webfiles/1788549891630/images/akj1.png"/>
+                 </a>
+             </div>
+             <div class="col-xs-6 text-align-center mt_30">
+              <a title="Junior Library Guild" href="https://www.juniorlibraryguild.com/" target="_blank">
+                <img class="full-width" src="/webfiles/1788549891630/images/JLGnew.png"/>
+              </a>
+             </div>
+          </div>
+
+
+
+          </div>
+          <hr class="footer-border-line mb_30">
+          <div class="col-md-12 col-xs-12 pl_0 pr_0">
+            <div class="footer-policy pl_0 pr_0 fs_15">
+                <!--<div class="text-align-center col-sm-4 col-xs-12 mb_15">
+                  <a class="gray" href="/page/Privacy-Policy">Privacy Policy</a>
+                </div>
+                 <div class="text-align-center col-sm-4 col-xs-12 mb_20">
+                  <a class="mr_15" href="#">Shipping Policy</a>
+                  <a href="#">Refund Policy</a>
+                </div>
+                <div class="text-align-center col-sm-4 col-xs-12 mb_20">
+                  <a class="mr_15" href="#">About LJ</a>
+                  <a href="#">555-555-5555</a>
+                </div> -->
+                <!-- <div class="text-align-center col-xs-6">
+                  <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Copyright Notice</a></li>
+                  </ul>
+                </div>
+                <div class="text-align-center col-xs-6">
+                  <ul>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                  </ul>
+                </div> -->
+                <!-- <div class="text-align-center col-xs-6"></div>
+                <div class="text-align-center col-xs-6"></div>
+                <div class="text-align-center col-xs-6"></div> -->
+            </div>
+            <div class="col-md-6 col-xs-12 p_0 text-align-center mb_20 fs_15 gray">
+              &copy; 2024 Library Journal. All rights reserved.
+            </div>
+          </div>
+
+          <!-- Back To Top Button for Smaller Screen -->
+          <!-- <div class="col-md-12 col-xs-12 text-align-center mt_10">
+            <a href="#top"><button class="btn btn-default-black navbar-btn fs_14 fb">BACK TO TOP<i class="fa fa-arrow-up ml_5"></i></button></a>
+          </div> -->
+
+          <!-- About LJ & Get in Touch -->
+          <!-- <div class="col-xs-12 mt_20">
+              <span class="col-xs-6 footer-block text-align-center">
+                <h4>About LJ</h4>
+              </span>
+
+              <span class="col-xs-6  col-sm-6 footer-block text-align-center">
+                <h4>Get in Touch</h4>
+              </span>
+
+              <span class="col-xs-12 text-align-center fs_16 mt_10">555-555-5555</span>
+
+              <div class="col-xs-12 footer-block text-align-center mt_30 mb_30">
+                  <div class="width_25"><a href="#"><i class="fa fa-facebook social-icon" aria-hidden="true"/></i></a></div>
+                  <div class="width_25"><a href="#"><img style="width: 35px;height: 35px;" class="mr_4 tab-w-30" src="/webfiles/1788549891630/images/tw.png"/></a></div>
+                  <div class="width_25"><a href="#"><i class="fa fa-instagram social-icon" aria-hidden="true"/></i></a></div>
+                  <div class="width_25"><a href="#"><i class="fa fa-pinterest social-icon" aria-hidden="true"/></i></a></div>
+              </div>
+          </div> -->
+
+        </div>
+        <!-- Footer for Smaller screen view End-->
+
+    </div>
+</footer>
+
+<script type='text/javascript'>
+    function readUrlCategory(subpageVal, elementId, page) {
+        var link = document.getElementById(elementId);
+        if ("home" == page) {
+            link.setAttribute("href", "?");
+        } else {
+            link.setAttribute("href", "?subpage=" + subpageVal);
+        }
+        // document.forms[0].submit();
+    }
+</script>
+<script src="/webfiles/1788549891630/js/variable.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/session.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/main.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/smarten-text.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/private-mode.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/analytics.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/metering.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/validation.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/ecommerce.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/login.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/reset.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/topic-image.js" type="text/javascript"></script>
+<script src="/webfiles/1788549891630/js/institutions.js" type="text/javascript"></script>
+
+<!-- <script src="/webfiles/1788549891630/js/account-dashboard.js" type="text/javascript"></script> -->
+<!-- Start of HubSpot Embed Code --> <script type="text/javascript" id="hs-script-loader" async defer src="//https://us01.l.antigena.com/l/sMmsucjkVjbHBZpY4a_zfeTmny0AEi3ymm19LSkSDmGg-qpqH52GTlPHgWXiwPZllSy3b2n7cBVCA7OIWo1Z7uvZa~7jk56EZ5jXqHE8Xtpu24JDh7gXGy1"></script>
+ <!-- End of HubSpot Embed Code -->
+</body>
+
+</html>

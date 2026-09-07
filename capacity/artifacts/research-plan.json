@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "kind": "realm_scale_plan",
+  "profile": "research-lit-4s",
+  "description": "The interim lit cell: three hundred years at four settlements, sized to fit a hosted six-hour job.",
+  "cases": [
+    {
+      "id": "research-lit-4s-300y-4s-seed1",
+      "years": 300,
+      "settlements": 4,
+      "seed": "realm-scale-research-lit-4s-300y-4s-seed1",
+      "lighting": {
+        "demographicsEnabled": true
+      }
+    }
+  ],
+  "source": {
+    "commit": "4243bdc610fe5b380f1d0029973cf9088bae1631",
+    "dirty": false,
+    "sourceFingerprint": "fef4c11e043ecf4d639533fb5c96645f418862dc2aa16502c62d336a35bbcfb0"
+  },
+  "complete": false,
+  "note": "Dry run only. No simulation was executed and no product claim was earned."
+}

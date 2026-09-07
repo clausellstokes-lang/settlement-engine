@@ -1,0 +1,136 @@
+
+AI-generated profiles of TTRPG designers ignite fury across social media
+New Games
+Features
+Investigations
+Crossword
+Podcasts
+Announcements
+About
+Get in Touch
+Sign in
+Subscribe
+investigations
+AI-generated profiles of TTRPG designers ignite fury across social media
+4 Pillar Games’ new website adds AI-generated slop to an already ephemeral online historical record.
+Lin Codega
+May 12, 2026
+—
+ 13 min read
+The afternoon of Saturday, May 9, game designer David Thompson posted on Bluesky about Four Pillar Games (sometimes stylized 4 Pillar Games), hoping to alert board game folks to the site’s inexcusable run of 
+AI-generated profiles
+ — many of them riddled with inaccuracies, saying little to nothing of merit, and glossing over some of the uglier parts of people’s histories. Over the weekend, more and more people interacted with the post, including many designers who had been caught up in the wide-ranging, but oddly selective, net of designers given space on the site.
+David Thompson (@djackthompson.bsky.social)
+Warning for board game folks: this site has a list of industry people that uses AI slop for images and bios. I’m trying to figure out how to reach out to them to ask to have the entry on me removed. Wanted to spread awareness on the slop. www.4pillargames.com/about/
+https://www.4pillargames.com/about/
+Bluesky Social
+David Thompson
+Many were understandably upset — most of the people who found themselves “profiled” (although I hesitate to use the word, as that implies some kind of peer-to-peer journalistic validation, which I am not giving) were disgusted by both the absurd 
+YouTube-style AI amalgams 
+of their faces that the mysterious authors of the site had generated and the weird, overblown, glossy, flattening of their careers to a sloppish wasteland of sycophantic textual formulas. A few people were trying to think of ways to register a DMCA takedown — at the very least many of the edited images the site used for headers were either copyrighted or used without permission. It was bleak on Bluesky for a bit. Amid this desert, where words, like sand, were many and their meanings completely ungraspable, people began to poke around, trying to figure out just who was responsible for this localized slop spill. 
+It didn’t take long for folks to connect the site to Ken “Whit” Whitman, a publisher with a long history in the tabletop space. I wish that I could say that there was clever hacking involved here, or a binary-code ARG-style clue hidden in the logo, but no. Whenever anyone shared the site on an app that generated preview thumbnails (such as Discord or Slack), there it was: 
+Ken Whitman Games
+. Doesn’t get much cleaner than that. 
+Credit: Screencap by Rascal
+I cannot speak to whether Whitman’s notoriety is earned; the sources I found documenting his foibles are varied and not completely reliable or verifiable, but I can say that a lot of people don’t like him, and his reputation is certainly not glowing, and he has failed to deliver on five of six crowdfunding campaigns (including a 
+deck of cards
+ and 
+pencil dice
+), according to his own profile on 
+Kickstarter.com
+. For these reasons alone it seems obvious to me why the leadership of this site might want to obfuscate their connection to Whitman, despite this being, ostensibly, his project. The three named collaborators — Reece Wardrip, Don Perrin, and Tony Lee — are all previous collaborators with Whitman, mostly through previous game companies, and all have some sort of connection to him via LinkedIn. I was able to speak to a 4 Pillar representative on Facebook, and they stated that as of Monday, May 11, Perrin and Lee had left the project. The exclusion of Ken Whitman’s name suggests that the remaining partners want to give 4 Pillar Games a shot at legitimacy even as it blatantly and unrepentantly engages in pissing off the very same people that it someday hopes to court. 
+Screenshots from LinkedIn
+Additionally, 
+Shannon Appelcline, noted TTRPG historian
+, and author of the deeply researched series on the history of the genre, 
+Designers & Dragons
+, received a message from Ken Whitman on LinkedIn in January 2026, asking him for an opinion on the company profile on Facebook for “
+Most Influential Tabletop Game Icons
+.” Appelcline responded that he had read the first few paragraphs of a profile and “tossed it aside,” writing that “it’s a mess of misimplications and incorrect details.” He wrote further, “I would like to see that junk gone from the earth because you’re poisoning the well of history.” Whitman’s response was dismissive, and then he followed up with the justification of his use of AI, writing that he runs a “governance system” that allegedly reduces hallucinations by 97%. 
+Appelcline confirmed this directly, writing to 
+Rascal 
+via email. “Hallucinations are a built-in part of LLMs. Using LLMs as fact-generating machines is antithetical to their actual design. I read through the first five or so paragraphs of one of the designer histories generated by Ken Whitman back in January. There were one or two outright falsehoods in just those five paragraphs: you know, a dramatically wrong year, that sort of thing. But worse were the misimplications. Despite being sold as AI, LLMs aren't intelligent. They don't know what they're writing. So they definitely don't understand that if you say one thing in one sentence, and then something else in another, that those two sentences create implications between them. There were two or three implications in the five paragraphs that I read of that history that implied things which were false.”
+While Whitman’s name might not be listed on the governance of this particular AI-generated site, he has his own entry in the rolodex of  Tabletop Icons, and four of his former companies, Archangel Entertainment, Dynasty Presentations, Imperium Games, and Whit Publications also have entries in the section called “Top TTG Companies Remembered” where he eulogizes his own poor decisionmaking through the blurry lens of whatever agentic AI he has spewing out this drudge. 
+Screenshot
+Which leads to the next question; what the fuck is the point of all this? The front page announces the site as “4 Pillar Games Newswire” and the tagline “Current Table Top Game News from active tabletop news sources.” (So much for editorial oversight — they can’t even agree with themselves whether it should be Table Top or tabletop) It then proceeds to aggregate from multiple, much more legitimate, news sources — including yours truly, 
+Rascal News
+, which has the place of dishonor as the first site listed, alongside other news sites such as 
+ENWorld
+ and 
+TTRPG Insider
+. It also aggregates from both hobbyist and professional blogs, like the Rollacrit blog, 
+Gnome Stew
+, and 
+Meeple Mountain
+, doing all of it through various RSS feeds. 
+There’s a possibility that this entire site is an SEO trap of some kind — the owners hoping to use sheer sloppy numbers to game a failing search algorithm that has been decimated by AI-generated summaries. When you click on the profiles of any person there are no links, internal or external. No list of published work, not even a direct website where people might go to find out more about the individual whose internet presence has been unceremoniously wrung through whatever LLM cocktail 4 Pillar used to generate these profiles. Additionally, there’s no ads on the site and a quick poke through the code showed no obvious phishing scams hidden in the cookies. It’s not clickbait or a honeypot… so, what is it? 
+The site also has a “Store” and “Publisher Login” but lists no games for sale. In a conversation with Amanda Lee Franck on Instagram, 4 Pillar wrote that they wanted to “eventually support a curated place for publishers to sell digital products.” Publishers will have to opt into this and set up connections with 4 Pillar Games themselves in order to establish this storefront, which seems incredibly unlikely considering not only 
+how unpopular AI is with the tabletop industry in general
+, but also the absurd and disrespectful way that 4 Pillar Games has been speaking to anyone who reached out asking to be taken off their site.
+Rascal 
+received screenshots and permission for replication from four designers who reached out complaining about the site. Spencer Campbell asked to be taken off the list and received a request for corrections, which Campbell declined — corrections won’t fix the fact that he had been unwillingly included on a site entirely populated by AI-generated misinformation. The response from 4 Pillar Games defended their work, but seemed to be self-aware enough to realize that the AI was a problem and said they could have “the profile reviewed and rewritten by a human editor.” If they were willing to do this upon request, why not take the time to do this for everyone? It’s mealy-mouthed half-assery that continues when they state that they are “not able to make removal the standard response to objection alone.” Even quoting 4 Pillar’s answers feels slimy, like I’m covering myself in the same pollutant machine oil that coats their writing. 
+Credit: Screencaps provided by Spencer Campbell
+Other designers received the same kind of responses; 
+Rascal 
+reviewed screenshots of ‘conversations’ between 4 Pillar and four designers who had been featured on the site, including Emiel Boven,  Amanda Lee Franck, and Will Jobst. All of them had the same cadence and many messages had the same or almost the same wording throughout. There were, of course, uniquely terrible aspects to each interaction; Boven’s request was ignored entirely in favor of a mission statement, Franck was asked to request that her profile be removed from Board Game Geek before they would honor her request to be taken down from the 4 Pillar archive, stating “We believe that’s fair. don’t you?” like some rancorous, paternalistic smug-faced pedant. And then, when they responded to Jobst, they had the gall to tell them that they were “[reporting] on the industry” and that posting these terrible AI profiles was their “right as journalists.” 
+Screencaps provided by Will Jobst
+As a part of this, they claimed that “game designers” got 600,000 views this month – “for some designers that might mean sales. Maybe they pay the rent.” The incredible elision between ‘might mean sales’ and ‘pay rent’ is an absolutely wild leap to make. Even worse is the fact that none of these profiles link to the profiled person’s website, social media, or even their games. There are no external links to any of these games, and often the games themselves are so hidden in the slurpy mush of pablum they’ve published that it’s difficult to discern an accurate hagiography of any single designer. 
+In some cases they’ve even missed some of the designer’s best work! As someone who constantly sings the praises of 
+Greg Costikyan’s 
+Violence
+, imagine my surprise when that particular game wasn’t even mentioned in the overwrought bolus of his profile. I suppose the AI they used wasn’t clever enough to realize that Designer X was one of his pseudonyms, and it appears that the editors don’t care enough to make sure that 
+Violence
+ was included. There is simply not enough time to go through all of these mushy profiles to identify, as Appelcline so succinctly put it, the “misimplications and incorrect details” left behind by an AI formula so imprecise and impolitic that it misses the very point that each and every designer was attempting in their own work. 
+But dismissing or ignoring the actual work the designers that 4 Pillar purport to support isn’t the worst of it. When Dillin Apelyan reached out to them via Instagram, writing, “You should absolutely delete every designer who does not want to be featured from your site,” they had done so out of a sense of professional interest in the site’s blatant disregard for what designers wanted, and not because they had been featured themselves. However, within the span of ten hours, Apelyan received their very own entry in the list of icons, and a quick inspection of the site’s code shows that it went live that very day. Apelyan demanded that they be removed from the 4 Pillar site, but has not received a response. According to Apelyan, it appears that their inclusion was a retaliatory response to their desire to see other people removed from the site.
+When I reached out to 4 Pillar Games via the Facebook page titled “Most Influential Tabletop Game Icons” — the only way to reach the company — every time I asked a question I was given AI-generated responses. I played the game for an hour, patiently asking questions, identifying contradictions, and pushing back against definitions. Every single time I asked a question I got an overblown answer, three or four paragraphs of sycophantic evasion with repeated phrases like “that’s fair” and “public historical record,” until even the phrase “primary source” eventually became lumpy and cumbersome. Every time I asked “are you a journalistic outlet” or “are you an editorial publication,” where I quoted their previous responses, each explanatory message followed a similar formula — an apology, a rewrite or readjustment of the words which evaded all consistency, a nebulous statement of intent for the future, and then an adjustment of the goalposts. 
+I never got confirmation of who I was speaking to — I asked directly if I was talking to Ken Whitman and the response was “at this time we’re choosing to keep the identities of the remaining operators private due to the volume of hostility, threats of litigation, and ongoing online harassment surrounding the project.” However, Whitman’s involvement wasn’t denied, and I was not corrected. 
+I had noticed throughout the day that the MITTGI Facebook profile had published even more profiles since this kerfuffle began on Saturday; I went to check the word count on some of these articles. Most end up between 1500 and 2000 words. That’s not nothing! I asked how long it took to write these articles, and the response was “around two hours.” The AI generated text stated that the writer/editor/generator would “select subjects, review source material, compare outputs, combine drafts, edit structure and tone, review for factual concerns, and make final publication decisions." All within two hours. This is an impossible working pace for a writer. This article, which on publication is around 3000 words, took me all day to write, and I emailed with a half dozen sources and chatted with at least five more on social media. And I’m a professional who was able to dedicate their entire ten-hour workday to this piece! For someone who doesn’t have this skillset or practice, it would take much longer. For anyone to attempt to research, compile sources, read and edit writing, and produce an accurate “historical archive” of anyone in under two hours, to say nothing of multiple people multiple times a day, if that is their publishing schedule, is an undertaking that risks much more than just veracity. 
+Appelcline wrote about the potential implications of the proliferation of this scummy morass masquerading as archival histories. “My fear is that the falsehoods and errors that are baked into any LLM-written history are going to corrupt history itself. Some people are going to use these slop histories as records of fact. They're going to reference LLM-generated falsehoods in their own articles… That's not even the whole extent of how LLMs are going to corrupt our understanding of what happened in the past. Greg Pak noted a few weeks ago that people are using LLMs for their own writing, and that means that soon we're not even going to be able to trust the primary sources, because they might have been written by a hallucinating AI rather than the person who put their name on it.” 
+Additionally, Appelcline noted that his own 
+Designers & Dragons 
+series has been caught up in LLM training programs. While there’s no way to confirm a direct plagarization of his work, or the work of other published historians in this space, the specifics don’t matter when the output is this prolific and has the potential to cause real, lasting harm to the industry. 
+Thus, one of the parts of this project I was especially keen to push back on while talking to 4 Pillar Games was the assertion that this was a “historical archive project.” I asked why they didn’t do any actual archiving: downloading interviews, transcripts of podcasts, or even games as PDFs in a manner that would allow for archival coverage and historical preservation. I asked why they didn’t cite sources, or reference any of the designer’s sites while constructing their profiles. Why they didn’t do anything 
+at all 
+that would provide solid ground for a profile to be built on. There was nothing of substance in the response I was given, although I was provided an assurance that this would be taken into consideration in the future. Not that I believed this for a second. I was, in effect, talking to a chatbot. 
+I wish that I got something real out of that conversation; worse than feeling like I had been fed gruel for an hour and a half, at the end of the day, I’m not even sure if I got something earnest. Talking to a chatbot is disorienting. Talking to a chatbot, but fed through a couple layers of person-approximating telephone, is even more so. At one point 4 Pillar agreed to speak to me directly, without the use of AI and then almost immediately responded with an AI generated response. I asked another question, trying to be a good sport, and got 
+another
+ AI response. 
+Screencaps from the last few interactions between me and the MITTGI account
+This was untenable. I didn’t trust what I was reading, I barely trusted what I was asking was being fully received. The erosion of trust between me — a journalist — and my source meant that I couldn’t continue the conversation in any productive way and I was only serving to dig the empty hole deeper. I was at risk of being buried alive. I wanted to engage in good faith and found myself sunk in the AI-generated quicksand that was the fundament of this entire 4 Pillar Games project. It seems that even if the leadership of this project is faced with fair criticism, direct questions, and even a kind indulgence of their insipid LLM-generated words, nothing I said would elicit more than more of what I already had, which was nothing. I thanked him for his time and stepped away from the interview.  
+Later in the day, 4 Pillar Games released an official statement through the MITTGI Facebook. It had the same cadence as all the other messages where it acknowledged the backlash, but doubled down on the project, refusing to engage at all in the very real issues that both I and Appelcline had pointed out with relation to the digital establishment of an incorrect, hallucinatory archive. They will not remove the profiles. And they will keep generating incorrect, slop-filled work, despite the pushback.
+Still. There is always a chance that the people involved in this project change their minds. Perhaps the backlash will result in those involved coming to their senses. After all, in one of his later messages to Appelcline, Whitman wrote, “AI [is] not going to replace anyone. People who use it will… But also AI lets idiots idiot faster.”  
+Read more
+features
+A game without players can still be played
+Revisiting essays five years later: On lyric games, ownership, and an understanding of what makes up a game.
+Lin Codega
+Sep 4, 2026
+features
+In Guadalajara, kids who once photocopied game books now design RPGs and run conventions
+Gaming across the US-Mexican border.
+Thomas Manuel
+Sep 3, 2026
+opinion
+Finally, a healthy relationship to crowdfunding
+Mothership maker Tuesday Knight Games says the team is “exhausted” by crowdfunding initiatives meant to help small publishers.
+Chase Carter
+Sep 1, 2026
+podcast
+Reading Club: Blades in the Dark/Doskvol
+This ain't Swords in the Light.
+Thomas Manuel
+Sep 1, 2026
+Subscribe
+Staff
+Send a Tip (narrative)
+FAQ
+Send a Tip (money)
+Write for Rascal
+Ethics, Standards, and Disclosures
+Bluesky
+Public RSS
+Rascal Gift Subscriptions
+Full-text RSS
+The Back of the Book
+Rascal is a tabletop roleplaying game and culture outlet striving to sustainably publish voicey journalism that is compelling, deeply-reported, and fearlessly honest. We’re also a little cheeky.
+© 2026 Rascal News

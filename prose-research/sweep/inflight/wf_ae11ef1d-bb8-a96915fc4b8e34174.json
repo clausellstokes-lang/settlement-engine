@@ -1,0 +1,35 @@
+{
+ "role": "verifier",
+ "name": "kay",
+ "angle": null,
+ "tag": "i120-134",
+ "lines": 61,
+ "firstTs": "2026-09-06T17:34:44.080Z",
+ "lastTs": "2026-09-06T17:38:32.037Z",
+ "tools": {
+  "Read": 4,
+  "ToolSearch": 1,
+  "Bash": 9,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://locusmag.com/feature/guy-gavriel-kay-margins-of-history/|locus.html",
+  "https://reactormag.com/2016/04/29/guy-gavriel-kay-alternate-history-research|reactor.html",
+  "https://psychopomp.com/fantasy/miscellaneous/a-conversation-with-guy-gavriel-kay/|psycho.html",
+  "https://vector-bsfa.com/2010/08/18/under-heaven/|vector.html",
+  "https://reactormag.com/2016/04/29/guy-gavriel-kay-alternate-history-research/",
+  "https://www.tor.com/2016/04/29/guy-gavriel-kay-alternate-history-research/",
+  "https://www.google.com/",
+  "https://web.archive.org/web/20221207110311id_/https://www.tor.com/2016/04/29/guy-gavriel-kay-alternate-history-research/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All four sources reached raw (Reactor blocked on live URL; recovered via Wayback `id_` capture). Writing the checkpoint.",
+ "run": "wf_ae11ef1d-bb8",
+ "agent": "a96915fc4b8e34174",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_ae11ef1d-bb8/agent-a96915fc4b8e34174.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i120-134.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,233 @@
+{
+ "name": "dnd",
+ "chunk": 8,
+ "claims": [
+  {
+   "index": 274,
+   "feature": "game-term typography: italics",
+   "claim": "Spells, magic items, and artifacts are italicized and treated as titles, and the effect a spell creates is not italicized.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Spells {magic missile}",
+   "page": "p.6"
+  },
+  {
+   "index": 275,
+   "feature": "game-term typography: bold stat-block names",
+   "claim": "A stat block name is bolded in running text only at its first appearance in an encounter area, and nothing may sit between the number and the name.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "write “four goblins,” not “four loud goblins”",
+   "page": "p.6"
+  },
+  {
+   "index": 276,
+   "feature": "numerals in rules text",
+   "claim": "Rules prose uses numerals for points, damage, durations of game effects, and tactical distances, but spells out narrative quantities (six hours, fifty miles).",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "The two cities are fifty miles apart.",
+   "page": "p.7"
+  },
+  {
+   "index": 277,
+   "feature": "canonical verb collocations",
+   "claim": "The guide fixes verb-noun pairings: you cast a spell, take damage, make a saving throw, finish a rest, score a critical hit.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "You take damage.",
+   "page": "p.7"
+  },
+  {
+   "index": 278,
+   "feature": "succeed vs make a check",
+   "claim": "Rules must say 'succeed on a DC 15 check', not 'make a DC 15 check', unless the outcomes follow immediately.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "“You must succeed on a DC 15 Strength check",
+   "page": "p.7"
+  },
+  {
+   "index": 279,
+   "feature": "'save' as synonym",
+   "claim": "'Save' for 'saving throw' is used sparingly, mainly in stat blocks; the 4E sense of 'save' as a successful saving throw is abandoned.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "use it sparingly, preferably only in a stat block",
+   "page": "p.7"
+  },
+  {
+   "index": 280,
+   "feature": "'result' vs number rolled",
+   "claim": "'Result' no longer means the number on the die; it means the die roll plus modifiers, and 'total' is often preferred.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "We often prefer the word “total”",
+   "page": "p.8"
+  },
+  {
+   "index": 281,
+   "feature": "magic vs magical",
+   "claim": "'Magic' is the adjective for objects (magic item, magic sword); 'magical' for other things; 'magical item' is forbidden.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "“magic item” and its variants should never be “magical item.”",
+   "page": "p.8"
+  },
+  {
+   "index": 282,
+   "feature": "points of damage",
+   "claim": "Damage is written as '10 fire damage', never '10 points of fire damage'.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Avoid referring to points of damage",
+   "page": "p.8"
+  },
+  {
+   "index": 283,
+   "feature": "extra damage phrasing",
+   "claim": "The die expression stays with the damage type: 'an extra 1d4 fire damage'.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "We write “an extra 1d4 fire damage,”",
+   "page": "p.8"
+  },
+  {
+   "index": 284,
+   "feature": "proficiency prepositions",
+   "claim": "One is proficient 'in' a skill, language, or activity but 'with' a tool, weapon, or armor.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "proficient in Elvish and Arcana",
+   "page": "p.8"
+  },
+  {
+   "index": 285,
+   "feature": "'Dungeon Master' is a noun",
+   "claim": "'Dungeon Master' is never a verb except in conversational web writing.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "This term is a noun, not a verb",
+   "page": "p.8"
+  },
+  {
+   "index": 286,
+   "feature": "weeks and months banned in rules",
+   "claim": "Because week and month lengths vary by world (a Realms week is a tenday), rules durations are given in days or years, never weeks or months.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "say a game effect lasts for 7 days, not 1 week",
+   "page": "p.8"
+  },
+  {
+   "index": 287,
+   "feature": "'human' vs 'mortal'; 'humanoid' as type",
+   "claim": "'Human' is not a synonym for 'mortal', and 'humanoid' is used cautiously because it names a creature type.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Beware of using “human” as a synonym for “mortal.”",
+   "page": "p.8"
+  },
+  {
+   "index": 288,
+   "feature": "house word list",
+   "claim": "A word list fixes spellings and plurals: dwarves not dwarfs, mithral not mithril, staffs, war band, drow/kenku/yuan-ti unchanged in plural.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "mithral (not mithril)",
+   "page": "p.9"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 274,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Terms to Italicize: Artifacts, Magic items, Spells {magic missile}",
+   "note": "Quote exact on p.6 under 'Terms to Italicize' (artifacts, magic items, spells all listed). The second limb sits one page later, p.7: 'The italicized terms are treated as titles... Don't confuse one of these titles with an effect it creates (see Chicago 8.174). For example, the wall of fire spell produces a wall of fire, not a wall of fire (the latter would imply an infinite loop).' Both limbs supported; only the page cite (p.6) is narrow for the second limb."
+  },
+  {
+   "index": 275,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bold only first appearance; no text between number and stat block name",
+   "note": "Quote exact on p.6. Both limbs explicit there: 'Set a monster's name in bold only the first time it appears in an encounter area or other subsection' and 'Make sure no text gets between the number of monsters appearing and the name of the stat block.'"
+  },
+  {
+   "index": 276,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Numerals for points, damage, game durations, tactical distances",
+   "note": "Quote exact on p.7 under 'Numerals in Rules Text'. Every limb explicit: 'Use numerals for points, scores, damage expressions, and any game trait with a numerical value'; 'units of time that quantify the duration of a game effect'; 'units of distance that quantify the size or extent of game effects' plus 'dimensions and distances... on a tactical scale'. The narrative counterexamples are the guide's own: 'the characters slept for six hours' and 'The two cities are fifty miles apart.'"
+  },
+  {
+   "index": 277,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Verb Usage list: cast, take damage, make a saving throw, finish a rest",
+   "note": "Quote exact on p.7. The 'Verb Usage' list carries all five pairings: 'You cast a spell.', 'You take damage.', 'You make a saving throw, and it succeeds or fails.', 'You finish a short or long rest.', 'You score a critical hit.' (guide's rest wording is 'a short or long rest')."
+  },
+  {
+   "index": 278,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Succeed on a DC 15 Strength check, not make one, unless outcomes follow",
+   "note": "Quote exact on p.7 under 'Making a Roll vs. Succeeding on One'. The unless-clause is the guide's own: \"Don't write, 'You must make a DC 15 Strength check...' unless that sentence is immediately followed by a description of what happens on a success or failure.\" Claim drops the ability name (Strength) but adds nothing."
+  },
+  {
+   "index": 279,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sparingly, preferably only in a stat block; 4E sense abandoned",
+   "note": "Quote exact on p.7 under 'Saving Throws'. Both limbs explicit: 'use it sparingly, preferably only in a stat block or when preceded by \"saving throw\"' and 'In 4E, we used \"save\" as a synonym for \"successful saving throw.\" We have abandoned that practice.' The claim omits the second permitted context (when preceded by 'saving throw'), which narrows rather than overstates."
+  },
+  {
+   "index": 280,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Die-number sense abandoned; result = roll plus modifiers; total preferred",
+   "note": "Quote exact on p.8 under '\"Result\" and Die Rolls'. All three limbs: 'In 3E and 4E, the word \"result\" was sometimes used as a synonym for \"the number rolled on a die.\" We have abandoned that practice'; '\"Result\" can legitimately refer to the sum of a die roll and any modifiers'; 'We often prefer the word \"total\" in such a context.'"
+  },
+  {
+   "index": 281,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Magic for objects; magical used more often for other things; never magical item",
+   "note": "Quote exact on p.8. Limbs 1 and 3 are verbatim rules ('a magic item, a magic sword, a magic trap'; 'should never be \"magical item\"'). Limb 2 is a preference, not an absolute, in the source: 'The adjective can be used for other things, but we use \"magical\" more often than \"magic\" for them' — the claim's clean split states the guide's default correctly but drops the 'more often' hedge."
+  },
+  {
+   "index": 282,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Avoid points of damage: write 10 fire damage, not 10 points of fire damage",
+   "note": "Quote exact on p.8 under 'Points of Damage'. The guide's example is the claim verbatim: 'write, \"The spell deals 10 fire damage,\" not \"The spell deals 10 points of fire damage.\"' Claim's 'never' hardens the heading verb 'Avoid', but the worked example is a flat write-X-not-Y."
+  },
+  {
+   "index": 283,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We like to keep the die expression with the damage type",
+   "note": "Quote exact on p.8 under 'Extra Damage'. Rationale limb explicit: 'We write \"an extra 1d4 fire damage,\" not \"1d4 extra fire damage.\" We like to keep the die expression with the damage type.'"
+  },
+  {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Proficient in a skill/language/activity; with a tool/weapon/armor",
+   "note": "Quote exact on p.8 under 'Proficiency'. Both bullets match limb for limb: 'proficient... in a skill, language, or other activity that is learnable and repeatable' and 'proficient... with a tool, weapon, type of armor, or other object', with the example 'proficient in Elvish and Arcana... proficient with longswords and heavy armor.'"
+  },
+  {
+   "index": 285,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Noun not verb; breakable in an informal context such as a blog",
+   "note": "Quote exact on p.8 under '\"Dungeon Master\" Isn't a Verb'. The exception in the source is broader than the claim's: 'This rule can be broken in an informal context, such as in a blog or a web article that has a conversational tone' — informal context generally, with blog/web article as examples. The claim is stricter than the guide, not unsupported."
+  },
+  {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Week is ten days in the Realms, a tenday; use days, years allowed",
+   "note": "Quote exact on p.8 under 'Avoid \"Week\" and \"Month\"'. Every limb: 'The lengths of weeks and months vary in different D&D worlds. A week is ten days long in the Forgotten Realms, for instance, and is called a tenday'; \"don't express durations or other lengths of time in weeks or months when you're writing rules\"; 'The length of the year varies as well, but you may use years for durations and the like.'"
+  },
+  {
+   "index": 287,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Beware human for mortal; be cautious with humanoid, a creature type",
+   "note": "Quote exact on p.8 under 'Misusing \"Human\" and \"Humanoid\"'. Second limb explicit: 'be cautious when using the word \"humanoid,\" given the fact that it refers to a creature type. For example, a giant has humanlike features, but it isn't a humanoid in the game.'"
+  },
+  {
+   "index": 288,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Word list: dwarves (not dwarfs), mithral (not mithril), staffs, war band",
+   "note": "Quote exact on p.9. Every listed item found in the same word list on p.9: 'dwarves (not dwarfs)', 'mithral (not mithril)', 'staffs', 'war band (not warband)', 'drow (singular and plural)', 'kenku (singular and plural)', 'yuan-ti (singular and plural)'."
+  }
+ ]
+}

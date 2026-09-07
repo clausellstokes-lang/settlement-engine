@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>K-0 Architecture Spike -- the deterministic gothic ceiling</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { margin: 0; font: 15px/1.5 -apple-system, system-ui, sans-serif; background: #f3efe6; color: #201c17; }
+  @media (prefers-color-scheme: dark) { body { background: #17140f; color: #e9e2d4; } }
+  main { max-width: 1080px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 22px; margin: 0 0 4px; } .sub { opacity: .7; margin: 0 0 24px; }
+  .plates { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 760px) { .plates { grid-template-columns: 1fr; } }
+  figure { margin: 0; } figure img, figure svg { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 14px rgba(0,0,0,.22); background:#fff; display:block; }
+  figcaption { font-size: 13px; opacity: .78; margin-top: 8px; }
+  table { border-collapse: collapse; margin: 24px 0; font-size: 13px; } td, th { border: 1px solid rgba(128,128,128,.35); padding: 5px 12px; text-align: left; }
+  .note { border-left: 3px solid #b98a3e; padding: 8px 0 8px 16px; margin: 20px 0; }
+  code { background: rgba(128,128,128,.16); padding: 1px 5px; border-radius: 4px; }
+</style></head><body><main>
+<h1>K-0 Architecture Spike &mdash; the PROMISE-keeping gothic ceiling</h1>
+<p class="sub">One traceried gothic window + one flying-buttress bay. Pure rational JS, zero GPU, zero trig, byte-deterministic.</p>
+<div class="plates">
+  <figure><img src="k0-cathedral.plate.png" alt="deterministic CPU raster plate"><figcaption><b>The ceiling plate</b> &mdash; deterministic CPU raster: per-pixel Lambert from the one NW light, rounded-relief tracery, ambient occlusion, soft cast shadow, procedural ashlar stone. Tone-mapped through a pinned LUT. This is the actual ceiling of the byte-deterministic path.</figcaption></figure>
+  <figure><img src="k0-cathedral.engraving.svg" alt="engraving vector line-art"><figcaption><b>The engraving</b> &mdash; vector line-art (cubic Bezier paths, never the arc <code>A</code> command). The print / plotter comparison; per the No-Compromise ruling it is NOT a fidelity candidate.</figcaption></figure>
+</div>
+<table>
+  <tr><th>metric</th><th>value</th></tr>
+  <tr><td>plate resolution</td><td>720 x 720 px (2x supersampled)</td></tr>
+  <tr><td>vector draw-ops (fragment)</td><td>33</td></tr>
+  <tr><td>&nbsp;&nbsp;of which tracery/window</td><td>~18</td></tr>
+  <tr><td>3D faces / bars / glass</td><td>14 / 16 / 3</td></tr>
+  <tr><td>engraving SVG bytes</td><td>5175</td></tr>
+  <tr><td>PNG plate bytes (stored DEFLATE)</td><td>1556103</td></tr>
+</table>
+<div class="note"><b>Tracery without trig.</b> The pointed arches, trefoils and the enclosing gable are constructible &mdash; they live entirely in the <code>{sqrt2, sqrt3}</code> closure. The oculus is a deliberate <b>septfoil</b> (7 lobes): 7 is not a Fermat prime, so its ring is NOT constructible and is placed from a pinned literal <code>HEPTA_DIRS</code> table. The engine never calls Math.cos/sin/pow.</div>
+<div class="note"><b>The LOD finding.</b> This fragment is ~33 vector ops. Extrapolated, ONE fully-traceried cathedral is on the order of ~554 ops &mdash; about 25% of the whole-town op budget (2200) on its own. A town cannot render every building at cathedral LOD: a per-building LOD ladder (full tracery for signature institutions, massing silhouettes for commons, flat glyphs for distant fill) is mandatory, exactly as the massing substrate already anticipates.</div>
+<div class="note"><b>Determinism.</b> Rendering twice produces byte-identical PNG + SVG (verified by <code>--check</code> and by <code>cmp</code>). All lighting/material math is <code>{+,-,*,/,sqrt}</code> or a pinned rational table, so the plate is reproducible cross-machine &mdash; THE PROMISE stays literal.</div>
+</main></body></html>

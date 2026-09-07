@@ -1,0 +1,235 @@
+{
+ "name": "tolkien",
+ "chunk": 2,
+ "claims": [
+  {
+   "index": 478,
+   "feature": "per-speaker register (Aragorn vs Boromir)",
+   "claim": "Aragorn's language is deceptively modern and easy-going but wider in range than Boromir's stiff magniloquence, and the contrast carries their rivalry.",
+   "source": "Shippey, The Road to Middle-earth, p. 110",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "Boromir's slightly wooden magniloquence",
+   "page": ""
+  },
+  {
+   "index": 479,
+   "feature": "dwarvish understatement",
+   "claim": "Dwarf dialogues (Dáin and Sauron's messenger, Elrond and Gimli, Théoden) delight in cool polite surface over passionate interior, so 'not too long' means 'extremely rapidly'.",
+   "source": "Shippey, The Road to Middle-earth, p. 110",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "passionate interior and polite or rational expression",
+   "page": ""
+  },
+  {
+   "index": 480,
+   "feature": "language variation as ethical dramatisation",
+   "claim": "Stylistic variation between speakers is Tolkien's thorough and economical way of dramatising ethical debate.",
+   "source": "Shippey, The Road to Middle-earth, p. 111",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "a thorough and economical way of dramatising ethical debate",
+   "page": ""
+  },
+  {
+   "index": 481,
+   "feature": "whole book as stylistic contrast",
+   "claim": "The whole of The Lord of the Rings works on its larger scale like the Council of Elrond, depending on relished stylistic variation and separate tableaux more than on plot.",
+   "source": "Shippey, The Road to Middle-earth, p. 111",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "the relishing of stylistic variation",
+   "page": ""
+  },
+  {
+   "index": 482,
+   "feature": "loose semantic fit",
+   "claim": "Tolkien deliberately emulates Malory's medieval tolerance of semantically loose phrasing ('by stock or by stone', echoing Pearl), which puzzles readers trained on modern exactness.",
+   "source": "Shippey, The Road to Middle-earth, pp. 160–1",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "His emulation of 'loose semantic fit'",
+   "page": ""
+  },
+  {
+   "index": 483,
+   "feature": "register rise in elvish speech",
+   "claim": "Galadriel's farewell to Treebeard suddenly shifts to less plain language with an elvish place-name, against Treebeard's triple 'feel ... feel ... smell'.",
+   "source": "Shippey, The Road to Middle-earth, p. 161",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "sudden change to less plain language",
+   "page": ""
+  },
+  {
+   "index": 484,
+   "feature": "archaic effect without archaic words",
+   "claim": "In an exchange containing no archaic word except perhaps 'naught', a strong archaic effect is produced by inverting nouns and adjectives and by adverbs of time such as 'yet' and 'seldom'.",
+   "source": "Shippey, The Road to Middle-earth (chapter on style, 'hovering between styles')",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "by inversion of nouns and adjectives",
+   "page": ""
+  },
+  {
+   "index": 485,
+   "feature": "modern rewrite would ring false",
+   "claim": "Tolkien could have written the same exchange in modern English, but the discrepancy between modern usage and archaic thought would have sounded bogus, a disunion of word and meaning.",
+   "source": "Shippey, The Road to Middle-earth",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "would simply have sounded bogus",
+   "page": ""
+  },
+  {
+   "index": 486,
+   "feature": "overworked cadence (hostile)",
+   "claim": "Manlove condemns the Treebeard/Galadriel farewell for over-worked cadences and a droning monotonous pitch offering only sentimental indulgence or embarrassment.",
+   "source": "C. N. Manlove, Modern Fantasy (1975), quoted verbatim in Shippey, Road to Middle-earth p. 160 (Google Books confirms 'overworked' on p. 188 of the 2020 edition)",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "The overworked cadences, the droning, monotonous pitch",
+   "page": ""
+  },
+  {
+   "index": 487,
+   "feature": "elegiac register (hostile comparison)",
+   "claim": "Manlove sets Ector's lament in Malory and the Ubi sunt of The Wanderer against Tolkien's farewell as real elegy with something to be elegiac about.",
+   "source": "Manlove 1975, quoted in Shippey, Road to Middle-earth p. 160",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "This is real elegy",
+   "page": ""
+  },
+  {
+   "index": 488,
+   "feature": "'not literature' verdict (hostile)",
+   "claim": "Raffel grants The Lord of the Rings magnificence but denies it the status of literature, on grounds including style.",
+   "source": "Burton Raffel 1968, p. 218, as quoted in Kullmann & Siepmann, Tolkien as a Literary Artist, Introduction n. 11",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_1",
+   "quote": "is not literature",
+   "page": ""
+  },
+  {
+   "index": 489,
+   "feature": "professorial amateurishness (hostile)",
+   "claim": "Edmund Wilson judged Tolkien's prose and verse to be on the same level of professorial amateurishness.",
+   "source": "Edmund Wilson 1956, as quoted in Siepmann, 'Tolkien as a stylist' (CL2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "the same level of professorial amateurishness",
+   "page": ""
+  },
+  {
+   "index": 490,
+   "feature": "ordinary yet dignified diction",
+   "claim": "Siepmann characterises Kirk's 1971 essay as praise of Tolkien's ordinary yet dignified diction, against Wilson's scorn.",
+   "source": "Elizabeth Kirk 1971 (1977 reprint), as characterised in Siepmann CL2017",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "Tolkien's ordinary yet dignified diction",
+   "page": ""
+  },
+  {
+   "index": 491,
+   "feature": "unironic high style",
+   "claim": "Anthony Lane observed that Tolkien's high style had hardly been used without irony since Tennyson's Idylls, so reverting to it in the 1950s challenged modernity head-on.",
+   "source": "Anthony Lane 2001, as quoted in Patrick Curry, 'The Critical Response to Tolkien's Fiction'",
+   "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+   "quote": "Hardly anyone had used it unironically since Tennyson",
+   "page": ""
+  },
+  {
+   "index": 492,
+   "feature": "archaic 'high' style as taste barrier",
+   "claim": "Curry concedes Tolkien's tone is sometimes sentimental and that the occasional archaic and high style will never suit some readers.",
+   "source": "Patrick Curry, 'The Critical Response to Tolkien's Fiction' (Companion ch. 25)",
+   "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+   "quote": "its occasional archaic and 'high' style",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 478,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Aragorn's language deceptively modern, even easy-going on occasion, but with greater range than Boromir's slightly wooden magniloquence",
+   "note": "Shippey p.110 (djvu page marker confirms): 'More subtly Aragorn and Boromir strike sparks off each other through their ways of speech as well as their claims, Aragorn's language deceptively modern, even easy-going on occasion, but with greater range than Boromir's slightly wooden magniloquence.' Quote verbatim; the rivalry limb is carried by 'strike sparks off each other' and by Aragorn 'letting his rival have the last word'."
+  },
+  {
+   "index": 479,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "delight in the contrast between passionate interior and polite or rational expression",
+   "note": "Shippey p.110, verbatim: 'Their unifying feature is delight in the contrast between passionate interior and polite or rational expression... Thus the messenger's \"things will not seem so well\" works as violent threat; \"not too long\" means \"extremely rapidly\".' All three named dialogues present: Dain and Sauron's messenger, 'Elrond and Gimli swap grim proverbs', 'Theoden King silences Merry'."
+  },
+  {
+   "index": 480,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Language variation gives Tolkien a thorough and economical way of dramatising ethical debate",
+   "note": "Shippey p.111, verbatim sentence. The page's subject noun is 'Language variation' rather than 'stylistic variation between speakers', but the whole preceding analysis is of the Council speakers' contrasting styles, so the limb holds."
+  },
+  {
+   "index": 481,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the single chapter relies for a great part of its effect on the relishing of stylistic variation",
+   "note": "Shippey p.111, verbatim: 'The whole of The Lord of the Rings is on its larger scale like \"The Council of Elrond\"... just as the single chapter relies for a great part of its effect on the relishing of stylistic variation, so the work as a whole depends very largely on tableaux: separate images of places, peoples, societies...'. The 'more than on plot' limb is supported by the page's own contrast with 'critics or reviewers skimming through for the plot' and tableaux 'there mostly or largely for their own sake'."
+  },
+  {
+   "index": 482,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His emulation of 'loose semantic fit' does however puzzle many modern readers",
+   "note": "Shippey pp.160-1, verbatim. Every limb on the page: Malory 'did not feel this urge towards exactness at all' and 'Malory's insensitivity in this respect (a common thing in medieval writers) had not led necessarily to failure'; \"'By stock or by stone' is certainly a deliberate echo of the fourteenth century poem Pearl\"; puzzled readers are 'those especially who have been sophisticated by modern literary practice'."
+  },
+  {
+   "index": 483,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the sudden change to less plain language in Galadriel's speech, with its elvish place-name",
+   "note": "Shippey p.161, verbatim: '...the triple repetition of \"feel ... feel ... smell\", or the sudden change to less plain language in Galadriel's speech, with its elvish place-name'. The triple repetition is Treebeard's ('I feel it in the water, I feel it in the earth, and I smell it in the air'); Galadriel's reply carries the place-name Tasarinan and 'Farewell!'. Shippey lists the two as separate candidate irritants rather than explicitly setting one 'against' the other, but both facts are on the page."
+  },
+  {
+   "index": 484,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a strong archaic effect is produced, by inversion of nouns and adjectives, careful selection of adverbs of time like 'yet' and 'seldom'",
+   "note": "Shippey pp.199-200 (Legolas/Gimli exchange at Minas Tirith), verbatim: 'There is no archaic word in the passage, except perhaps \"naught\". Nevertheless a strong archaic effect is produced, by inversion of nouns and adjectives, careful selection of adverbs of time like \"yet\" and \"seldom\", and other less obvious linguistic features.' The source field's 'hovering between styles' is also verbatim in the preceding sentence."
+  },
+  {
+   "index": 485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The discrepancy between modern usage and archaic thought would simply have sounded bogus, leading to a deep 'disunion of word and meaning'",
+   "note": "Shippey p.200, verbatim, and the preceding sentence supplies the first limb: 'It would have been no trouble to him to write the exchange in modern English' (with a modern-English rewrite given)."
+  },
+  {
+   "index": 486,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The overworked cadences, the droning, monotonous pitch, the sheer sense of hearts charged not with lead but gas, can offer only nervous sentimental indulgence or plain embarrassment to the reader",
+   "note": "Shippey p.160 quotes Manlove verbatim; attribution on the page is explicit ('Modern Fantasy by Dr C. N. Manlove, who then goes straight on as usual to spearhead the critical assault and declare:'), and the passage under attack is 'the parting of Treebeard from Celeborn and Galadriel in The Return of the King, p. 259'. The claim's shortened 'sentimental indulgence or embarrassment' drops Manlove's 'nervous' and 'plain' but adds nothing."
+  },
+  {
+   "index": 487,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Compare this with, say, Ector's lament over Arthur in Malory... 'This is real elegy, for it has something to be elegiac about'",
+   "note": "Shippey p.160, verbatim: Manlove cites Ector's lament in Malory, the 'Survivor's Lament' in Beowulf, and a well-known Ubi sunt passage from 'The Wanderer', observing 'This is real elegy, for it has something to be elegiac about'. (Shippey adds that Manlove got it wrong: 'As for Ector's lament, it was in fact over Lancelot, not Arthur' - a defect in Manlove, not in this claim.)"
+  },
+  {
+   "index": 488,
+   "verdict": "PARTIAL",
+   "trueWording": "We disagree with critics like Burton Raffel who declares that while 'The Lord of the Rings is a magnificent performance, full of charm, excitement, and affection [...] it is not [...] literature' (Raffel 218)",
+   "note": "Raw page reached only through a real browser (curl and WebFetch both hit Springer's JS 'Client Challenge'; no Wayback capture exists; Crossref and OpenAlex carry no abstract). Note 11 is exactly as above, so magnificence-granted and literature-denied are both supported and the p.218 cite matches the Works Cited entry (Raffel, 'The Lord of the Rings as Literature', 1968, 218-246). Two defects: the quoted words are not contiguous on the page - the page reads 'it is not [...] literature' with a bracketed elision, not 'is not literature' - and the note gives no reason at all for Raffel's verdict.",
+   "unsupportedLimb": "'on grounds including style' - note 11 states Raffel's verdict without giving any grounds, stylistic or otherwise"
+  },
+  {
+   "index": 489,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prose and verse are on the same level of professorial amateurishness",
+   "note": "Siepmann CL2017 PDF, opening sentence, verbatim: 'scathing criticisms to the effect that \"prose and verse are on the same level of professorial amateurishness\" (Wilson, 1995, p. 59)'. The paper names the critic by initial only ('Wilson, E.'); its reference list gives Wilson, E. (1956), 'Oo, Those Awful Orcs', The Nation, April 14 - i.e. Edmund Wilson's essay - so the forename is a safe expansion. (The paper's own in-text date '1995' does not match its reference list's 1956; that is the paper's inconsistency, not a limb of the claim.)"
+  },
+  {
+   "index": 490,
+   "verdict": "PARTIAL",
+   "trueWording": "praise of Tolkien's ordinary yet dignified diction (Kirk, 1977, Rosebury, 2003, p. 22)",
+   "note": "Quote verbatim in the PDF's opening sentence, and the against-Wilson framing is supported by the 'ranging from scathing criticisms... to praise of...' construction. But the page dates Kirk 1977, not 1971, in both the in-text citation and the reference list: 'Kirk, E. (1977). I Would Rather Have Written in Elvish: Language, Fiction, and The Lord of the Rings. Novel 5, 5-18. Reprinted in M. Spilka (Ed.) (1977) Towards a Poetics of Fiction'. The year 1971 appears nowhere in the paper.",
+   "unsupportedLimb": "'Kirk's 1971 essay' - the page dates the essay 1977 in both citation and reference list, and never prints 1971"
+  },
+  {
+   "index": 491,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hardly anyone had used it unironically since Tennyson's 'Idylls of the King,' and to revert to it with a straight face in the nineteen-fifties was to mount a head-on challenge to modernity",
+   "note": "Curry, 'The Critical Response to Tolkien's Fiction', verbatim, attributed on the page to 'Anthony Lane (2001)' seeing 'the same dynamic in Tolkien's \"high\" style'; the reference list gives Lane, Anthony. 2001. 'The Hobbit Habit', The New Yorker, December 10."
+  },
+  {
+   "index": 492,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's tone (not unlike that of Dickens) is sometimes sentimental, and its occasional archaic and 'high' style will never be to some readers' tastes",
+   "note": "Curry, verbatim in Curry's own voice, in the passage listing reasons why The Lord of the Rings 'will never have universal appeal'. The quoted fragment matches word for word; the page sets 'high' in curly double quotes where the claim uses single quotes."
+  }
+ ]
+}

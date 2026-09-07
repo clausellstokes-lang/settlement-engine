@@ -1,0 +1,36 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 14099 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js (44 tests | 1 failed) 126706ms
+       × THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all 4022ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > the provenance drift classifier separates a detector change from an input change > THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all
+AssertionError: an execution INPUT drifted since the mint — lawful, and the shrink-only re-freeze absorbs it: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/compendium/generated/compendiumData.generated.js",
++ ]
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js:1005:10
+    1003|       expect(drift.inputs,
+    1004|         'an execution INPUT drifted since the mint — lawful, and the s…
+    1005|         .toEqual([]);
+       |          ^
+    1006|       // …and the arm is NOT vacuous: the classifier still SEES a plan…
+    1007|       // very tree, so an empty result means "nothing moved", never "n…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 139 passed (140)
+      Tests  1 failed | 2193 passed (2194)
+   Start at  08:01:01
+   Duration  150.83s (transform 26.47s, setup 5.59s, import 204.53s, tests 735.83s, environment 20ms)
+

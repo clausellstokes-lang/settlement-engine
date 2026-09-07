@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 23,
+ "claims": [
+  {
+   "index": 846,
+   "feature": "reader and expert judgment",
+   "claim": "Wendig describes AI writing as having a fakey-fakey sound with prose as plastic as a synthetic voice-over.",
+   "source": "Chuck Wendig, Terribleminds, 2024",
+   "url": "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+   "quote": "fakey-fakey sound to it, the prose as plastic",
+   "page": "advice section, 'Fourth, get good at spotting it'"
+  },
+  {
+   "index": 847,
+   "feature": "other: formula is the vulnerable register",
+   "claim": "Wendig asserts that AI does well with formula, so the most vulnerable writing is the kind that has a formula at its core.",
+   "source": "Chuck Wendig, Terribleminds, 2024",
+   "url": "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+   "quote": "Second, AI does well with formula.",
+   "page": "advice section"
+  },
+  {
+   "index": 848,
+   "feature": "abstraction over the concrete",
+   "claim": "Tiffany Yates Martin, a developmental editor, found the AI editorial letters heavy on literary buzzwords and concepts but light on practical, concrete observations.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "heavy on literary buzzwords and concepts, but light on practical, concrete observations",
+   "page": "section 'What's less valuable'"
+  },
+  {
+   "index": 849,
+   "feature": "other: what a human editor sees first",
+   "claim": "Martin found both engines' feedback heavy on critiquing style and light on addressing substance, the reverse of what she takes an editor's job to be.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "heavy on critiquing style and light on addressing substance",
+   "page": "section 'What's less valuable'"
+  },
+  {
+   "index": 850,
+   "feature": "other: fabricated specifics",
+   "claim": "On a repeat of the identical prompt ChatGPT hallucinated a character who was not in the book and a plot development that did not happen.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "It also hallucinated a character who wasn’t in the book",
+   "page": "section 'Honing the Prompt'"
+  },
+  {
+   "index": 851,
+   "feature": "steerability",
+   "claim": "Asked to give feedback in Tiffany Yates Martin's own style, both engines produced warmer and more question-led letters that still felt frustratingly generalized to her.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "still felt frustratingly generalized",
+   "page": "section 'Honing the Prompt', after the style-transfer prompt"
+  },
+  {
+   "index": 852,
+   "feature": "homogenisation",
+   "claim": "Martin asserts that AI engines try to streamline every story toward the most common denominators of the fiction in their training data.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "trying to streamline every story based on the most common denominators",
+   "page": "section 'So What's the Takeaway for Authors?'"
+  },
+  {
+   "index": 853,
+   "feature": "other: praise register under pressure",
+   "claim": "When Martin asked Copilot for more detail its feedback became weirdly effusive without becoming more substantive.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "when I asked for more detail it became weirdly effusive",
+   "page": "section 'Honing the Prompt'"
+  },
+  {
+   "index": 854,
+   "feature": "other: what a human editor sees first",
+   "claim": "Martin's standard for a professional edit is specificity and granularity, a reading that should feel like a forensic examination of the story.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "A good edit should feel like a forensic examination",
+   "page": "section 'What's less valuable', pull-quote"
+  },
+  {
+   "index": 855,
+   "feature": "other: absence of communicative intention",
+   "claim": "Lincoln Michel asserts that AI does not have intention and produces automatically, so a generated metaphor is not chosen to emphasise a theme or deepen a character.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2024",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "It produces automatically, without intention.",
+   "page": "section following the 'happy novelist' image"
+  },
+  {
+   "index": 856,
+   "feature": "place and institution description",
+   "claim": "Michel asserts that a description of a setting is not merely something to get through but a place to reinforce themes, add atmosphere and deepen character.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2024",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "a place to reenforce themes, add atmosphere, deepen character",
+   "page": "section discussing the Verge self-publishing article"
+  },
+  {
+   "index": 857,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Michel characterises AI-generated work as art that has nothing to say.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2024",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "art that has nothing to say",
+   "page": "section after 'the happy novelist'"
+  },
+  {
+   "index": 858,
+   "feature": "other: revision is where quality is made",
+   "claim": "Michel asserts that the hardest and most time-consuming part of writing is shaping, honing and refining the material, not producing a draft.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2024",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "The hardest and most time-consuming part of writing is shaping, honing, and refining",
+   "page": "section after the Verge excerpt"
+  },
+  {
+   "index": 859,
+   "feature": "homogenisation",
+   "claim": "Michel contrasts individual human sentences with what he calls the generic averaging of terabytes of training data.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2025",
+   "url": "https://countercraft.substack.com/p/criticism-in-the-age-of-ai",
+   "quote": "the generic averaging of terabytes of training data",
+   "page": "section 'The Optimistic Case', closing paragraph"
+  },
+  {
+   "index": 860,
+   "feature": "other: visible prose as the human marker",
+   "claim": "Michel proposes that criticism should celebrate very visible prose, sentences that writhe and shine and sing with the individual behind them.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2025",
+   "url": "https://countercraft.substack.com/p/criticism-in-the-age-of-ai",
+   "quote": "sentences that writhe and shine and sing with the individual behind them",
+   "page": "section 'The Optimistic Case'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 846,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fakey-fakey sound to it, the prose as plastic",
+   "note": "Raw page: live URL now serves the Terribleminds front page, so verified on the Wayback raw capture 20240401134905id_ of the same URL. Line: 'AI writing ... usually gets a bunch of shit wrong and has a kind of... fakey-fakey sound to it, the prose as plastic as the weird TikTok voice or the creepy sheen on so much AI-generated artbarf.' Quote exact. The comparandum on the page is 'the weird TikTok voice' (a synthetic TTS voice) rather than the words 'synthetic voice-over'; same referent. Section 'Fourth, get good at spotting it' confirmed."
+  },
+  {
+   "index": 847,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Second, AI does well with formula.",
+   "note": "Wayback raw capture of the same URL (live URL serves the front page). Page: 'Second, AI does well with formula. The most vulnerable writing is the kind of writing that has at its core a formula, an equation of how the thing is written.' Quote exact; both limbs (AI does well with formula; formula-cored writing is most vulnerable) on the page, in the advice list."
+  },
+  {
+   "index": 848,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "heavy on literary buzzwords and concepts, but light on practical, concrete observations",
+   "note": "Live raw page fetched. Under 'What's less valuable': 'This is the kind of editorial feedback I often see from newer editors ... heavy on literary buzzwords and concepts, but light on practical, concrete observations and suggestions.' Quote exact (page continues 'and suggestions'). Framing is a comparison of the AI editorial letters to newer-editor feedback, and the preceding paragraph is explicitly about the AI editorial letter. Her developmental-editor role is supported by the site's own service pages and her line 'A full developmental edit would have included detailed embedded comments as well.'"
+  },
+  {
+   "index": 849,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "heavy on critiquing style and light on addressing substance",
+   "note": "Live raw page. 'In general, both engines' feedback felt heavy on critiquing style and light on addressing substance. In my opinion the editor's job is to do pretty much the opposite: help the author with the substance of the story ... and respect and help them hone their own style.' Quote exact; the 'reverse of an editor's job' limb is the page's own next sentence."
+  },
+  {
+   "index": 850,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It also hallucinated a character who wasn't in the book",
+   "note": "Live raw page, section 'Honing the Prompt': 'in a separate prompt on a different day I gave ChatGPT the same instructions on the same book ... It also hallucinated a character who wasn't in the book and a plot development that didn't happen.' Quote exact (curly apostrophe). 'Repeat of the identical prompt' = the page's 'same instructions on the same book'; both fabrication limbs present."
+  },
+  {
+   "index": 851,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "still felt frustratingly generalized",
+   "note": "Live raw page, after the 'in the style of Tiffany Yates Martin' prompt: 'the \"Martin-ized\" AI feedback felt warmer and more personal and encouraging, with more questions that encouraged the author to think about the answers' and 'the Tiffany-style feedback from both engines still felt frustratingly generalized'. Quote exact; warmer, question-led, and still-generalized limbs all on the page, and it applies to both engines."
+  },
+  {
+   "index": 852,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "trying to streamline every story based on the most common denominators",
+   "note": "Live raw page, under 'So What's the Takeaway for Authors?': 'By definition of the way they work, AI engines seem to be doing the exact opposite: trying to streamline every story based on the most common denominators of all the fiction in its database.' Quote exact. Two wording notes that do not change the substance: the page says 'in its database' where the claim says 'in their training data', and hedges with 'seem to be doing'."
+  },
+  {
+   "index": 853,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "when I asked for more detail it became weirdly effusive",
+   "note": "Live raw page, section 'Honing the Prompt': 'Copilot's feedback the second time I fed it the same prompt was similar to the first, but sketchier, and when I asked for more detail it became weirdly effusive-\"It is with great admiration and emotional reverence...\"-but no more substantive.' Quote exact; the 'without becoming more substantive' limb is the page's closing 'but no more substantive'."
+  },
+  {
+   "index": 854,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A good edit should feel like a forensic examination",
+   "note": "Live raw page, pull-quote and body under 'What's less valuable': 'What makes a professional edit valuable is its specificity and granularity. A good edit should feel like a forensic examination.' and the body repeat '...a forensic examination of the story-or as I often liken it to, a home inspection report'. Quote exact; specificity/granularity and forensic-examination limbs both present."
+  },
+  {
+   "index": 855,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It produces automatically, without intention.",
+   "note": "Live raw page (Substack, Sep 04 2024), paragraph after 'the happy novelist' image: 'AI does not have intention. When AI generates a metaphor ... it is not deciding that this specific metaphor will emphasize the larger themes of the novel or deepen our understanding of the specific character. It produces automatically, without intention.' Quote exact; every limb (no intention, automatic production, metaphor not chosen for theme or character) on the page."
+  },
+  {
+   "index": 856,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a place to reenforce themes, add atmosphere, deepen character",
+   "note": "Live raw page, in the passage discussing the viral Verge article on self-publishing authors who use AI: 'A description of a setting isn't just something to get through or even merely a space to create evocative images. It's also a place to reenforce themes, add atmosphere, deepen character, and so on.' Quote exact, including Michel's 'reenforce' spelling; the 'not merely something to get through' limb is the preceding sentence."
+  },
+  {
+   "index": 857,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "art that has nothing to say",
+   "note": "Live raw page, same paragraph as the intention passage: 'What is art without intention? Art without a vision behind it? It's art that has nothing to say being sold by someone who doesn't care.' Quote exact, and it is said of AI-generated work ('why so few people have been interested in buying AI-generated work')."
+  },
+  {
+   "index": 858,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The hardest and most time-consuming part of writing is shaping, honing, and refining",
+   "note": "Live raw page, paragraph after the Verge excerpt discussion: 'Anyone can come up with ideas. And almost anyone can vomit up a rough draft. The hardest and most time-consuming part of writing is shaping, honing, and refining the material into a coherent work.' Quote exact; the 'not producing a draft' limb is the page's 'almost anyone can vomit up a rough draft'."
+  },
+  {
+   "index": 859,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the generic averaging of terabytes of training data",
+   "note": "Live raw page (Substack, Sep 05 2025), 'The Optimistic Case', penultimate paragraph: 'maybe we can celebrate very visible prose-sentences that writhe and shine and sing with the individual behind them rather than the generic averaging of terabytes of training data'. Quote exact; the contrast between individual human sentences and generic averaging is the page's own 'rather than' construction."
+  },
+  {
+   "index": 860,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sentences that writhe and shine and sing with the individual behind them",
+   "note": "Live raw page, same 'The Optimistic Case' paragraph, framed as a proposal for book criticism: 'And maybe we can celebrate very visible prose-sentences that writhe and shine and sing with the individual behind them...'. Quote exact; 'celebrate very visible prose' limb present verbatim, and the section is explicitly about what book criticism should do."
+  }
+ ]
+}

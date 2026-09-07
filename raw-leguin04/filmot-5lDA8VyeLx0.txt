@@ -1,0 +1,283 @@
+
+ Filmot - Search in Youtube captions and subtitles 
+Home
+Metadata
+More
+Channel Search
+Unlisted Video Search
+Word Cloud Search
+Transverso
+Title Restorer
+Be a Patron
+🔎 Auto
+🔎 Manual
+Login
+Settings
+Search within YouTube subtitles, captions and transcripts
+Enclose phrases in double quotation marks, for example: "radio telescope"
+Indexing over 1.7B transcripts across 1.5B videos and 84M channels. 
+The metadata index covers over 18B videos.
+Text
+?
+ Type a word or an expression enclosed in double quotes in any language. 
+Search inside these channels
+?
+Search Automatic Subtitles
+Search Manual Subtitles
+ Now available in 12 more languages!
+ New features! Logged-in users can now add private notes to videos and enable daily email reports for new results.
+See a list of unlisted videos here
+Please complete the captcha
+×
+Please complete the captcha to continue.
+Error verifying captcha. Please try again.
+Search Syntax Cheat Sheet 
+(works for transcripts and titles)
+×
+Syntax
+Example
+Meaning
+word1 word2
+CRISPR gene editing
+All words/terms (AND)
+word1 | word2
+"dark matter" | "dark energy"
+At least one word/term (OR)
+"exact phrase"
+"gravitational waves"
+Exact phrase match
+(expr1 | expr2)
+"stem cells" (therapy | treatment)
+Grouping
+"w1 w2"~N
+"vaccine efficacy"~5
+Within N words of each other
+w1 NEAR/N w2
+"black hole" NEAR/10 "event horizon"
+Near each other (any order)
+w1 NOTNEAR/N w2
+radiation NOTNEAR/100 microwave
+First term NOT within N words of the second
+"w1 * w2"
+"basic * spectroscopy"
+Exactly one word in between
+-word
+quantum -computing
+Exclude documents containing word
+Click any syntax above for detailed docs &amp; more examples &darr;
+Implicit AND 
+word1 word2
+Words separated by spaces are treated as an AND search. All words must appear somewhere in the transcript or document, but they don't have to be right next to each other.
+CRISPR gene editing
+ - Videos discussing CRISPR alongside gene editing
+superconductor room temperature
+ - Superconductor research at room temperature
+exoplanet atmosphere spectroscopy
+ - Exoplanet atmospheric analysis via spectroscopy
+mitochondria ATP synthesis
+ - Cellular energy production discussions 
+Do 
+not
+ type the word "AND" as a keyword—it is treated as a literal word, not an operator. Just separate terms with spaces.
+OR Operator 
+|
+Use the pipe symbol 
+|
+ to match any of the alternatives. This is especially useful for synonyms or transcription variations in auto-generated captions.
+"dark matter" | "dark energy"
+ - Either cosmological concept
+"CRISPR cas9" | "CRISPR-Cas9" | "CRISPR Cas 9" | "CRISPR c.a.s.9" | "crisper cas9" | "crisper cas 9" | "krisper cas 9" | "krisper cas9" 
+ - Catch various transcription variants
+"mRNA" | "messenger RNA" | "messenger R.N.A."
+ - Various ways mRNA is spoken and transcribed
+"H2O" | "water molecule" | "dihydrogen monoxide"
+ - Different names for the same compound
+"CO2" | "carbon dioxide" | "CO 2"
+ - Emissions data across transcription styles 
+Exact Phrase 
+"..."
+Wrap words in double quotes to search for an exact, ordered phrase.
+"gravitational waves"
+ - Exact phrase, not just both words separately
+"general relativity"
+ - Matches only this exact sequence
+"polymerase chain reaction"
+ - The full name of PCR
+"standard model of particle physics"
+ - Precise physics term 
+Grouping 
+( )
+Use parentheses to combine operators and build complex queries.
+"stem cells" (therapy | treatment | transplant)
+ - Stem cells AND any clinical application
+(CRISPR | "gene editing") ("sickle cell" | "cystic fibrosis")
+ - Gene editing in the context of specific diseases
+("supernova" | "neutron star") ("magnetic field" | magnetar)
+ - Stellar remnants with magnetic phenomena
+("deep learning" | "neural network") (protein | genomics) -tutorial
+ - AI applied to biology, excluding tutorials 
+Proximity 
+"w1 w2"~N
+Matches when the words appear within N words of each other (up to N words in between). The order of the words does not matter.
+"vaccine efficacy"~5
+ - "vaccine" and "efficacy" within 5 words of each other
+"tumor suppressor"~3
+ - Close mentions of tumor suppressor genes
+"ocean acidification"~8
+ - These terms discussed in close proximity
+"antibiotic resistance"~4
+ - Antibiotic resistance mentions in a tight context 
+NEAR 
+w1 NEAR/N w2
+Finds two terms within N words of each other, in any order. This also works with exact phrases and grouped terms.
+"black hole" NEAR/10 "event horizon"
+ - Black holes discussed near event horizons
+"clinical trial" NEAR/15 "phase three"
+ - Clinical trials near phase 3 mentions
+"James Webb" NEAR/20 "exoplanet"
+ - JWST observations related to exoplanets
+("dopamine" | "serotonin") NEAR/10 ("receptor" | "pathway")
+ - Neurotransmitters near biological mechanism terms
+(filmot|philmont|philmot|filmont) NEAR\15 (youtube|subtitles|captions|transcript|transcripts)
+ - Combines the OR operator (|) to catch multiple variations of a mis-transcribed word alongside a list of nearby relevant terms, helping to filter out false positives. 
+NOTNEAR 
+w1 NOTNEAR/N w2
+Finds the first word only if the second word is 
+NOT
+ within N words. This is more precise than using 
+-word
+, which excludes the entire video. Maximum allowed distance: 500 words.
+radiation NOTNEAR/100 microwave
+ - Radiation mentions not about microwaves
+"nuclear energy" NOTNEAR/60 weapons
+ - Nuclear energy not in a weapons context
+"genetic modification" NOTNEAR/100 "conspiracy"
+ - GMO science, skipping conspiracy segments
+evolution NOTNEAR/60 debate
+ - Evolution discussed outside debate contexts 
+Wildcard 
+"w1 * w2"
+An asterisk (
+*
+) inside a quoted phrase acts as a placeholder for exactly one word. This is useful when you know the surrounding words but not the middle one. It can be combined with the OR operator (|) and multiple asterisks for precise proximity matching.
+"observed * decay"
+ - Matches "observed radioactive decay", "observed beta decay", "observed exponential decay", etc.
+"basic * spectroscopy" | "basic * * spectroscopy" | "basic * * * spectroscopy"
+ - Matches "basic mass spectroscopy", "basic principles of spectroscopy", "basic idea about NMR spectroscopy" etc. Useful for fuzzy matching a specific word order.
+"professor * explained"
+ - Any professor's name in between
+"discovered * beneath"
+ - Matches "discovered gold beneath", "discovered microbes beneath", etc. 
+NOT / Exclude 
+-word
+Add a hyphen (
+-
+) before a word to exclude any video where that word appears 
+anywhere
+ in the transcript or document.
+quantum -computing
+ - Quantum physics, excluding computing topics
+"nuclear fusion" -fission
+ - Fusion only, skipping fission discussions
+neuroscience -psychology -self-help
+ - Hard neuroscience, excluding pop-sci
+"climate change" -politics -debate
+ - Scientific climate content, not political 
+Why prefer 
+NOTNEAR
+?
+ Using 
+-word
+ removes the entire video, even if the excluded term appears just once and is completely unrelated to your search. 
+NOTNEAR
+ only filters out matches where the terms are close together. This allows you to keep relevant results even if the excluded word happens to appear elsewhere in the transcript. 
+Title Search
+The 
+Title
+ search field supports all of these operators too! You can use exact phrases, OR, grouping, and more when searching titles. The title filter is available on the left sidebar under 
+"Filters,"
+ or in the main search form under 
+Metadata search
+.
+Censored subtitle placeholders 
+#FUCK#
+ You can search for the 
+[ __ ]
+ marker that YouTube uses when a word is censored in subtitles. Filmot indexes those censored positions with the placeholder 
+#FUCK#
+, so searching for 
+#FUCK#
+ can help locate censored words or locations in transcripts. 
+#FUCK#
+ - 
+ find censored subtitle markers in a channel 
+"#FUCK# #Laughter#"~10
+ - 
+ find censored markers near laughter 
+#FUCK# NEAR\5 #FUCK# NEAR\5 #FUCK#
+ - 
+ find several censored markers close together 
+ This also works with descriptive sound placeholders such as 
+#Laughter#
+, 
+#Music#
+, and 
+#Applause#
+. These labels can be language-specific: for example, Italian subtitles may use 
+#Risate#
+, 
+#Musica#
+, and 
+#Applauso#
+. The wording may also change over time. 
+#FUCK#
+ is language-independent because it represents the censored marker itself, not the original censored word. You can combine it with the other search operators above, including proximity and 
+NEAR
+, to make selective searches. 
+Close
+Channel Lookup Help
+×
+ Use the channel lookup box to limit a search or action to specific YouTube channels. Start typing a channel name, handle, or channel ID, then click a suggestion to add it as a channel tag. 
+Select one channel
+@LinusTechTips
+ Click or tap on the matching suggestion to limit search results to that channel. 
+Adding channels
+ After a channel is added, it appears as a selected channel tag, shown as a green tag on the home page, subtitle search, and metadata search pages. Add more channels by typing another name or selecting another suggestion. If an Include/Exclude switch is shown, Include searches only inside the selected channels, while Exclude searches everywhere except the selected channels. 
+Typed text without a selected tag
+ If you type text in the channel box and start a search without selecting a channel tag, Filmot tries to help by looking up that text automatically. It uses up to the top 6 matching channels. If you need one exact channel, click or tap the suggestion so it becomes a green tag before searching. 
+Reusing a channel list
+ In subtitle search and metadata search, the selected channels are saved in the page URL. To reuse the same channel list later, bookmark the search page or click the bell button to save the search if you are logged-in. When you open it again, you can change the search words, dates, or other filters and keep the same selected channels. 
+Where channels come from
+ On the home page and subtitle search pages, channel lookup contains channels that have subtitles available for subtitle search. In metadata search and unlisted search, channel lookup searches all known channels, including channels without indexed subtitles. 
+Opening channel pages
+ After adding a channel, hover or click the selected channel tag, the green tag on the home page, subtitle search, and metadata search pages, to open its tooltip. The tooltip contains a Filmot channel page link and a YouTube channel link. 
+Pasting multiple channels
+ On the home page, subtitle search, and metadata search pages, you can paste comma-delimited handles or channel IDs directly into the lookup box. Each matching channel resolves into a separate selected channel tag. 
+Paste multiple channels
+@LinusTechTips,@JerryRigEverything,@Dave2D,@GamersNexus
+ Comma-delimited handles resolve into separate channel tags on the home page, subtitle search, and metadata search pages. 
+Mix handles and channel IDs
+@DIYPerks,UCWFKCr40YwOZQx8FHU_ZqqQ,UCVYamHliCI9rw1tHR1xbkfw,UChIs72whgZI9w6d6FhwGGHA,UCXuqSBlHAE6Xw-yeJA0Tunw
+ Comma-delimited handles and UC channel IDs can be looked up together on the home page, subtitle search, and metadata search pages. 
+Practical limits
+ For one search, use up to 200 selected channels, whether you add them one by one or paste them as a list. The search URL contains the selected UC channel IDs, so larger lists can hit browser, proxy, or server URL-length limits, especially when combined with other filters. For bulk paste boxes, use batches up to 200 UC channel IDs to keep lookup and submit actions responsive. 
+Close
+ ﻿
+ Settings 
+ Privacy 
+ About 
+ Contact 
+ Donate 
+Deutsch
+English
+Español
+繁體中文
+Français
+한국어
+Italiano
+日本語
+Português (Brasil)
+Русский
+Tiếng Việt
+Türkçe
+Українська

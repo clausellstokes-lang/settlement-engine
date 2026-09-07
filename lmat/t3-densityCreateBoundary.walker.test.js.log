@@ -1,0 +1,10 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 92182 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLMAT
+
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Start at  11:18:21
+   Duration  1.60s (transform 37ms, setup 25ms, import 762ms, tests 723ms, environment 0ms)
+

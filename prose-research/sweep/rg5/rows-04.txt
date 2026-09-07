@@ -1,0 +1,499 @@
+### 304 [VERIFIED_VERBATIM] src=Dark Jackel's Howl, 'Let's Read AGOT Part 1', 2015-08-19
+CLAIM: Backstory enters when a remark prompts the POV character's memory rather than by narrator summary.
+TW: "some character makes a comment or observation, which prompts memories and reactions from the POV character, Will"
+NOTE: Exact substring. 'rather than by narrator summary' is the claim's gloss on the page's "it's pretty minimalist" framing of the expositional style.
+
+### 305 [VERIFIED_VERBATIM] src=The Fantasy Review, 'Prologue Summary and Analysis', 2023-10-14
+CLAIM: The prologue builds dread through negative sensory statements and dialogue with double meanings.
+TW: "The Others made no sound."
+NOTE: Word for word, but as the post's epigraph excerpt from the novel (with "The woods gave no answer"), not as the blogger's own analysis. The 'double meanings' half IS the page's analysis: the opening exchange is "clever wordplay" that on reread is "telling you to be very, very afraid of the dead". The page never uses the phrase 'negative sensory statements'.
+
+### 306 [VERIFIED_VERBATIM] src=Race for the Iron Throne (Steven Attewell), Tyrion VIII, 2014-01-30
+CLAIM: Battle description opens ornate and tips into graphic gore, with spatial confusion left intentional.
+TW: "the likening of the Lannister host to an 'iron rose, thorns gleaming' is typical"
+NOTE: Exact. Page: "Martin's prose is almost lyrical... From there though, the narrative soon descends into the blood and gore". The intentional-confusion half is also explicit: "I think the confusion is intentional for several reasons", about mistaking an east-west for a north-south orientation.
+
+### 307 [VERIFIED_VERBATIM] src=Race for the Iron Throne (Steven Attewell), Bran VII ACOK, 2016-04-07
+CLAIM: Earlier physical detail (Bran's gargoyle handholds) is re-used as an instrument of later violence.
+TW: "the gargoyles that were Bran's handholds transformed into murder weapons"
+NOTE: The supplied quote "His tongue felt strange and thick in his mouth" IS on the page word for word, but it is a block quote about Bran's warging and does NOT evidence this claim. The claim's actual support is the separate sentence given as trueWording, which the claim calls "deliberate and thorough" callback. Quote/claim are mispaired.
+
+### 308 [VERIFIED_SUBSTANCE] src=Race for the Iron Throne (Steven Attewell), ASOS Prologue, 2016-04-18
+CLAIM: A repeated phrase in a doomed POV ('the bloody snow') carries foreshadowing the character cannot read.
+TW: "GRRM loves a cheap pun, Chett's downfall is caused by snow"
+NOTE: The doomed-POV foreshadowing the character cannot read is supported. But 'refrain' overstates: the page carries "the bloody snow" once as its epigraph and once inside the quoted Chett passage; it never calls it a repeated phrase or refrain.
+
+### 309 [VERIFIED_SUBSTANCE] src=ASOIAF University (tumblr aggregator), tagged 'writing'
+CLAIM: Fan close readers note full names in narration assert agency while 'the dwarf' appears ten times in one depressed Tyrion chapter.
+TW: "every sentence is a declaration of Tyrion's will"
+NOTE: Both halves check out. The count is near-verbatim on the page: "'the dwarf' as a descriptor appears ten times in the narrative in Tyrion's first chapter in ADWD alone, at a time where his headspace is full of depression and self-loathing". Claim supplied no quote, hence SUBSTANCE not VERBATIM.
+
+### 310 [VERIFIED_VERBATIM] src=ASOIAF University (tumblr aggregator), tagged 'writing'
+CLAIM: Jaime's italic commentary goes silent immediately before a violent act, forcing the reader to register it.
+TW: "jaime's smart-mouthed inner voice is absolutely SILENT about his feelings about brienne"
+NOTE: Exact, capitalisation included. 'forcing the reader to register it' is supported: "he wants that jolt, he wants to shake you. he wants you to NOTICE." Caveat: the page says 'inner voice'/'inner commentary'/'inner snarkbot', never 'italic'; and the silence runs through the Ronnet Connington exchange, with Jaime's golden hand striking him at the end.
+
+### 311 [VERIFIED_VERBATIM] src=nobodysuspectsthebutterfly (tumblr)
+CLAIM: 'Nuncle' and similar archaisms (pease, neeps) appear only from A Feast for Crows onward, a deliberate late shift some readers dislike.
+TW: "But it's totally an AFFC and onward thing, with GRRM deliberately archaic-ing his language (to many people's annoyance)"
+NOTE: Exact substring, and the dislike is the blogger's own (tag: "i am not a great fan of the archaic-ing of asoiaf"). Caveat: only 'nuncle' is dated to AFFC-onward. 'pease' and 'neeps' appear in a different post as "Other GRRM-style words from archaic English" with no book range attached, so the claim's parenthetical extends the source.
+
+### 313 [VERIFIED_VERBATIM] src=Goodreads Sword & Laser thread, 'Kay or Martin?'
+CLAIM: Reading-group posters contrast Martin's crisp, fast, gritty prose with Kay's slow lyricism, while one flags excessive wordiness.
+TW: "He's fast where Kay is slow; gritty where Kay is lyrical; despairing where Kay is poignant."
+NOTE: Exact substring (poster Kam, msg 40). Every element checks: 'HD' is msg 2, "Martin seems to write in HD, where Kay uses a soft filter at times" plus "Martin's pacing and action are crisper"; the wordiness flag is msg 6, "can be given over to excessive wordiness, but his action is incomparable".
+
+### 314 [VERIFIED_VERBATIM] src=M.L. Katz, Goodreads author blog, 2015-07-11
+CLAIM: Each chapter is named for its POV and the reader knows only what that character knows, who may be an unreliable witness.
+TW: "With a limited point of view, the reader only knows what the main character knows."
+NOTE: Exact substring. Both other elements are explicit: "the POV character gets his or her chapter named after them" and "he or she could be an unreliable witness".
+
+### 315 [VERIFIED_VERBATIM] src=The Editorial Department (Shannon Roberts), 2016
+CLAIM: An editor's first-50 review credits titled POV chapters with removing head-hopping confusion and praises exposition delivered in scene.
+TW: While shifting POV can occasionally lead to confusion, giving each character a clearly titled chapter solves the problem admirably.
+NOTE: Quote exact. Exposition-in-scene praise also present: 'By giving us needed information in the form of dialogue and scenes, Martin holds our attention.' Byline Shannon Roberts confirmed; piece marks AGOT's 20th anniversary (=2016), though the page footer stamp reads 2024-01-07.
+
+### 316 [VERIFIED_VERBATIM] src=Literary Analysis, 2012-06-07
+CLAIM: Description flows without Tolkien-style descriptive excess and each character keeps a distinct voice.
+TW: accounts of the mythic world unfold with fluid lyricism, without ever lapsing into Tolkienesque descriptive tedium
+NOTE: Quote exact. Distinct-voice half confirmed in the same paragraph: Martin gives 'each character their own unique voice'. Date 2012-06-07 matches the URL path.
+
+### 317 [VERIFIED_VERBATIM] src=Humanities Notebook (Heba Hallak), 2026-04-15
+CLAIM: Sanderson's lecture uses 'Bran Stark' in chapter one as a tone promise of bleakness.
+TW: naming his viewpoint character Bran Stark in the first chapter of A Game of Thrones is a tone promise. The name Stark implies a bleak and grim mood
+NOTE: Quote exact and the bleakness gloss is explicit. Byline Heba Hallak, Apr 15 2026, confirmed on the page; it reports Sanderson's BYU lecture.
+
+### 318 [VERIFIED_VERBATIM] src=OUPblog (Adam Pulford), 2012-04-16
+CLAIM: Ser, southron, and craven date to 1451, 1488, and 1400; turncloak is an archaic-sounding remake of turncoat; 'butt' and 'ass' jar.
+TW: which is Martin's archaic-sounding amendment of turncoat
+NOTE: Quote exact. Every other element confirmed on the page: 'Ser for Sir, Southron for Southern, and craven meaning cowardly all date from 1451, 1488, and 1400 respectively, according to the Oxford English Dictionary', and 'modern-sounding terms such as butt and ass jarring'.
+
+### 319 [VERIFIED_SUBSTANCE] src=OUPblog (Adam Pulford), 2012-04-16
+CLAIM: Different cultures are marked by colloquial phrases and aphorisms such as 'words are wind'.
+TW: portrayed through a number of colloquial phrases
+NOTE: No quote was supplied, so substance only. Page: the flavour of the different languages of the seven kingdoms is 'portrayed through a number of colloquial phrases', and '"Words are wind" is another aphorism used by the characters'. Page says languages/kingdoms where the claim says cultures.
+
+### 320 [VERIFIED_VERBATIM] src=U of Saskatchewan HEL blog (Just), 2018-01-22
+CLAIM: Martin uses accurate late-Middle-English words sparingly, avoids thou/thee, and keeps modern syntax.
+TW: Martin hits a sweet spot between Modern and Middle English
+NOTE: Quote exact. Rest confirmed verbatim: 'While choosing not to use Middle English pronouns and using mostly modern syntax, Martin gives A Game of Thrones a historical feel by using accurate 1400s archaic diction'; 'Martin uses these words sparingly'. Author Delane Just, Jan 22 2018.
+
+### 321 [VERIFIED_VERBATIM] src=A.R. Rivera, 'A Brief Linguistic Exam', 2023-09-10
+CLAIM: Repeated insult words bind paragraphs, 'without' means outside, and m'Lord versus my Lord marks class; lexical density about 4–4.5 and a sixth-grade readability index.
+TW: For instance, terms like "elsewise" (A Feast For Crows, p. 2742) could hardly be found in any story set in modern times
+NOTE: Words match exactly; only the capital T and the single-quote style differ from the page's mid-sentence 'terms like "elsewise"'. All four sub-claims confirmed: lexical cohesion via the repeated insult ('repeated five times', 'ties parts of a text'); 'without' in 'the old English meaning "outside [the wall]"'; m'Lord vs my Lord by birth; density 'between 4 and 4.5'; 'The ARI score for A Game of Thrones is sixth-grade, or 11-12 years old'.
+
+### 322 [VERIFIED_VERBATIM] src=Winter Is Coming (Dan Selcke) on Dimitris Spathis, 2015-09-24
+CLAIM: Text-mining across four series finds Martin uses -ly adverbs least and reads at about age ten by readability index.
+TW: What does this chart tell us? That George R.R. Martin hates adverbs.
+NOTE: Quote exact. Four series confirmed (LOTR, Harry Potter, Hunger Games, ASOIAF) and 'you only need to be 10 years old to understand A Song of Ice and Fire'. Caveat: the page never says '-ly' adverbs nor the word 'least' - it credits an adverb chart hosted on Spathis' own Medium post.
+
+### 323 [VERIFIED_VERBATIM] src=AutoCrit, 'What's the Score? A Game of Thrones'
+CLAIM: AGOT scores Flesch Reading Ease 87, has 851 sentences over 30 words, 3.39% slow-paced paragraphs, and near-equal standard versus alternative dialogue tags with adverbs in tags flagged.
+TW: a Game of Thrones comes in with a Flesch Reading Ease score of 87
+NOTE: Quote exact and all three further figures confirmed: 'a comparatively small 851 sentences containing more than 30 words'; 'A tiny 3.39% of A Game of Thrones is detected as slower in pace'; 'having almost the same number of alternative dialogue tags as we do the standard two is a little alarming'; and a section flagging 'Martin's use of adverbs in dialogue tags'.
+
+### 324 [VERIFIED_VERBATIM] src=The Erstwhile Philistine (Asher Gelzer-Govatos), 2012-03-21
+CLAIM: 'Mummer's farce' recurs constantly and 'jape' reads as a pretentious substitute for joke; prose 'borders on serviceable'.
+TW: seriously, the phrase comes up at least ten times in every book
+NOTE: Quote exact, about 'mummer's farce'. 'Jape' confirmed: 'Jape, aside from its pretentiousness, is a singularly displeasing word.' The prose verdict is on the page but differently worded and misspelled there: 'Most of the time his prose borders on the servicable' - the claim's 'borders on serviceable' is a paraphrase, not a quotation.
+
+### 325 [VERIFIED_SUBSTANCE] src=The Erstwhile Philistine (Asher Gelzer-Govatos), 2012-03-21
+CLAIM: Hodor's and Reek's repeated lines become formula rather than characterisation.
+TW: Annoying speech mannerisms... sometimes his choices are inexplicable
+NOTE: No quote was supplied. Page devotes a section to Hodor's one-word dialogue (a mock exchange ending 'HOOOOOOODOOOOOOOOR') and to Reek's rhyme, 'Reek, my name is Reek, it rhymes with [random word]', framing both as mechanical repetition rather than characterisation.
+
+### 326 [VERIFIED_VERBATIM] src=Portland Mercury (Streckert), 2014-04-02
+CLAIM: Sex scenes fixate on nipple size and colour and crude similes, unlike his assured violence and heraldry.
+TW: George R.R. Martin is good at writing about violence and heraldry. He is not good at writing about sex.
+NOTE: Quote exact. Nipples confirmed: 'Nipples of massive girth, darkness, and circumference: Martin is obsessed with them', with 'big dark', 'huge dark', 'fat'/'brown', 'wide pink circles'. Crude similes confirmed: 'Myrish swamp', 'fat pink mast'. Byline Joe Streckert, April 2 2014; note the live URL now redirects to portlandmercury.com/general/the-erotica-of-westeros-12111961/.
+
+### 327 [VERIFIED_VERBATIM] src=Gizmodo (Katharine Trendacosta), 2017
+CLAIM: Feasts are rendered as course-by-course lists with taste and smell, and appetite indexes a character's mental state.
+TW: tonight all the food was flavored with fear
+NOTE: Quote exact (Martin's line as quoted in the piece). Course-by-course cataloguing confirmed ('All the while the courses came and went... Then came trout fresh from the river'), and the appetite claim is explicit: 'Martin uses people's reaction to food a lot to show state of mind.'
+
+### 328 [VERIFIED_SUBSTANCE] src=Cultura Colectiva (Carrasco), 2019-04-09
+CLAIM: Meal descriptions mark inclusion, class, and culture, with sensory verbs carrying the emotion.
+TW: uses food to establish the emotional states of his characters
+NOTE: No quote was supplied. Belonging/class confirmed ('a sign of brotherhood, of the sense of fraternity'; Jon as bastard 'not fit to sit in the main hall'), culture confirmed ('Dothraki food, drink, and the way they celebrate tell us quite a bit about them as a group'). 'Sensory verbs' is the analyst's gloss, not the page's wording. Byline note: page credits 'By Andrea Guzman' in the body under poster Isabel Carrasco, translated by Oliver G. Alvar; date April 9 2019 matches.
+
+### 329 [VERIFIED_VERBATIM] src=Narrative Looking Glass (Matt), 2026-01
+CLAIM: Martin describes loving a Tyrion chapter, then rereading it and deciding it failed.
+TW: I wrote a Tyrion chapter I just loved... Then I looked at it and said: 'I can't do this, it will change the whole book.'
+NOTE: Quote exact. The 'reread and decided it failed' half is the page's next clause. Author 'Matt', Jan 30 2026, confirmed on the page; it quotes Martin on The Winds of Winter.
+
+### 330 [VERIFIED_VERBATIM] src=Patrick Nugent, The Irish Times, 16 Feb 2019
+CLAIM: Because the book masquerades as a historical document, its prose is deliberately dry and staid.
+TW: the prose is (deliberately) dry and staid
+NOTE: Irish Times raw page fetched 200. Sentence reads: "Because the book is masquerading as an historical document the prose is (deliberately) dry and staid". Quote 'dry and staid' word for word; both limbs (masquerade-as-history cause, deliberate dryness) on the page.
+
+### 331 [VERIFIED_VERBATIM] src=Patrick Nugent, The Irish Times, 16 Feb 2019
+CLAIM: Events are relayed so densely that characters can live full lives in the space of a single paragraph.
+TW: characters can live full lives in a single paragraph
+NOTE: Same sentence continues: "the events relayed are so dense that characters can live full lives in the space of a single paragraph". Quote verbatim; density limb and paragraph limb both present.
+
+### 333 [VERIFIED_VERBATIM] src=Patrick Nugent, The Irish Times, 16 Feb 2019
+CLAIM: Nugent's rule of thumb: readers who enjoyed The Silmarillion will like this; others should steer clear.
+TW: if you enjoyed The Silmarillion, you'll like this; if not, steer clear
+NOTE: Page: "a helpful yardstick exists: if you enjoyed JRR Tolkien's The Silmarillion, you'll like this. If not, steer clear." Quote 'If not, steer clear.' verbatim; 'rule of thumb' matches 'yardstick'; byline is Patrick Nugent, dated Sat Feb 16 2019.
+
+### 334 [VERIFIED_VERBATIM] src=Patrick Nugent, The Irish Times, 16 Feb 2019
+CLAIM: At least three chapters are packed densely enough with intrigue and set-pieces that each could sustain a series of its own.
+TW: at least three chapters so packed with Machiavellian machinations
+NOTE: Page: "There are at least three chapters in here that are so packed with Machiavellian machinations, political intrigue and set-pieces that any one of them alone could be the basis for the next Westeros-based TV series." Quote verbatim; 'sustain a series of its own' = 'be the basis for the next Westeros-based TV series'.
+
+### 335 [VERIFIED_SUBSTANCE] src=Winter Is Coming critics roundup, 23 Nov 2018
+CLAIM: Critics divided sharply on the register: the Independent, GQ and Rifkind found the dry historical voice flat or a synopsis, while Dan Jones found the chronological telling propulsive and Lough called it the best book in the series in 18 years.
+TW: not everyone is down on the book; angriest of all is GQ
+NOTE: winteriscoming.net raw page fetched 200. Every named limb checks out: Independent ("the prose is so dry that even ... a battle in the sky ... manages to fall as flat"); GQ Levesley ("a dry, dusty historical screed"); Rifkind of The Times ("one long synopsis for about 50 books", introduced as "beyond not liking the style"); Dan Jones ("strictly chronological telling ... evokes the same propulsive storytelling"); Chris Lough of Tor.com ("the best Song of Ice and Fire book in 18 years"). The roundup's own pivot is "But not everyone is down on the book", so the sharp division is the page's framing. Graded SUBSTANCE rather than VERBATIM only because the claim supplies no quotation to match.
+
+### 337 [VERIFIED_VERBATIM] src=Roisin O'Connor, The Independent, Nov 2018
+CLAIM: Martin assumes historical writing should be dry and clinical and lets events do the talking, so even an aerial dragon duel between brothers falls flat.
+TW: the prose is so dry that a battle in the sky falls flat
+NOTE: Independent raw page fetched 200 (redirects to the-independent.com). Page: "Martin appears to have made the assumption that historical writing should be dry and clinical, and that the excitement of the events themselves should be left to do the talking. Yet the prose is so dry that even descriptions of a battle in the sky between two brothers manages to fall as flat as the losing Targaryen and his dragon." Quote verbatim; all three limbs present. The page hedges with "appears to have made the assumption" where the claim says "assumes" - a hedge stripped, not a limb added.
+
+### 338 [VERIFIED_VERBATIM] src=Roisin O'Connor, The Independent, Nov 2018
+CLAIM: The dense, name-heavy history reads like a mildly interesting but tedious assigned piece of homework.
+TW: sheer scale and exhaustive detail feels like assigned homework
+NOTE: Page: "the sheer scale and exhaustive detail in Fire and Blood makes reading it feel more like you've been assigned a mildly interesting, but often tedious, piece of homework." Quote verbatim. Both adjectives hold of the book on this page - dense ('sheer scale and exhaustive detail') and name-heavy ('several characters have incredibly similar names (at least six are called Aegon)') - though the homework sentence itself is pinned to scale and detail, not to the names.
+
+### 339 [VERIFIED_VERBATIM] src=Roisin O'Connor, The Independent, Nov 2018
+CLAIM: The difficulty is complexity rather than length: at least six characters are named Aegon and the reader struggles after the first hundred pages.
+TW: not in its length but in its complexity; first 100 pages OK
+NOTE: Page: "the main problem with Fire and Blood lies not in its length (an eye-watering 706 pages) but in its complexity. The first 100 pages are OK, but as the history continues, the reader struggles to keep up. It doesn't help that several characters have incredibly similar names (at least six are called Aegon)". Quote verbatim; complexity-over-length limb and hundred-pages limb both confirmed by string match.
+
+### 340 [VERIFIED_VERBATIM] src=Roisin O'Connor, The Independent, Nov 2018
+CLAIM: The publisher pitches the in-universe account as having the scope and grandeur of Gibbon's Decline and Fall.
+TW: Martin's publisher describes the scope and grandeur of Gibbon's
+NOTE: Page: "Fire and Blood is written as an in-universe account (purportedly) by the Archmaester Gyldayn of the Citadel, in a style that Martin's publisher describes as possessing the 'scope and grandeur of Gibbon's The History of the Decline and Fall of the Roman Empire'." Quote verbatim, attribution to the publisher explicit, in-universe limb explicit. (GQ independently corroborates, calling it the dust jacket.)
+
+### 341 [VERIFIED_VERBATIM] src=David Levesley, GQ (UK), Nov 2018
+CLAIM: Martin is wholly committed to a dry, dusty historical screed as the book's style.
+TW: really, really committed to a dry, dusty historical screed
+NOTE: GQ raw page fetched 200. Page: "Martin is really, really committed to a dry, dusty historical screed for his style of writing." Quote verbatim; 'wholly committed' renders 'really, really committed' and 'the book's style' renders 'his style of writing'.
+
+### 342 [VERIFIED_VERBATIM] src=David Levesley, GQ (UK), Nov 2018
+CLAIM: The maester's voice compresses women's diplomatic parleys into sentences while indistinguishable men get pages of bluster, which Levesley reads as Martin's deliberate statement on how history brushes over women.
+TW: fascinating situations over in sentences; men get pages of bluster
+NOTE: Page: "elder sister Velenya engages in diplomatic parleys with powerful Westerosi women and these fascinating situations are over in sentences - whereas indistinguishable men get pages of bluster. The fault of the maester's voice the piece is written in? A statement on how history brushes over women's impact? Almost certainly, considering Martin loves creating fully fleshed out women characters." Quote verbatim; every limb present. Levesley poses the maester's-voice and the statement-on-history readings as rhetorical questions and then answers them "Almost certainly", so the endorsement the claim reports is the page's own.
+
+### 343 [VERIFIED_VERBATIM] src=David Levesley, GQ (UK), Nov 2018
+CLAIM: Like Homer, Martin relishes a pageant of near-indistinguishable names to convey the scope of combat, but unlike Homer generates little narrative tension.
+TW: just like Homer, a pageant of almost indistinguishable names
+NOTE: Page: "Just like Homer, Martin relishes a pageant of almost indistinguishable names to show the scope of combat. But, unlike Homer, he's not a big fan of generating much narrative tension". Quote verbatim; the like-Homer limb and the unlike-Homer tension limb are consecutive sentences.
+
+### 344 [VERIFIED_VERBATIM] src=Publishers Weekly review, 19 Nov 2018
+CLAIM: Dramatic passages with snatches of dialogue and detailed battles last only a few pages before the text returns to brisk summary.
+TW: only last a few pages before a return to brisk summary
+NOTE: Publishers Weekly raw page fetched 200, review dated 11/19/2018. Page: "there are entertaining snatches of dialogue and detailed depictions of battles, but they only last a few pages before a return to brisk summary." Quote verbatim; dialogue limb, battles limb and few-pages limb all present.
+
+### 345 [VERIFIED_VERBATIM] src=Publishers Weekly review, 19 Nov 2018
+CLAIM: Martin's evocative storytelling style and gift for gripping narrative are mostly absent from the dry history.
+TW: Martin's evocative storytelling style and gift for gripping narrative are mostly absent from this dry history
+NOTE: Opening sentence of the PW review, fetched raw from publishersweekly.com (HTTP 200). Quote appears word for word; every limb ('evocative storytelling style', 'gift for gripping narrative', 'mostly absent', 'dry history') is on the page.
+
+### 346 [VERIFIED_VERBATIM] src=Publishers Weekly review, 19 Nov 2018
+CLAIM: The Gyldayn attribution conjures unhappy Westerosi schoolchildren forced to study a weighty textbook.
+TW: mostly gives rise to images of unhappy Westerosi schoolchildren being forced to study this weighty textbook
+NOTE: Raw PW review. Page: 'The conceit of the history being written by one Archmaester Gyldayn ... mostly gives rise to images of unhappy Westerosi schoolchildren being forced to study this weighty textbook.' Gyldayn attribution, schoolchildren and weighty textbook all present.
+
+### 348 [VERIFIED_VERBATIM] src=George R.R. Martin interviewed by Lenny Picker, Publishers Weekly, 16 Jul 2018
+CLAIM: Martin says Gyldayn is an opinionated man whose prejudices, gripes and cavils leak into the text, so the reader must remember they are reading the voice of a character.
+TW: he has prejudices and gripes and his own cavils, and you have to realize that you're reading the voice of a character
+NOTE: Raw PW interview (gzip-decoded, HTTP 200). Page: Gyldayn 'is an opinionated guy and has his views of these people, that definitely leak into it. In some places, he has prejudices and gripes and his own cavils, and you have to realize that you're reading the voice of a character.' Every limb supported; page says 'guy' where the claim says 'man'.
+
+### 349 [VERIFIED_VERBATIM] src=George R.R. Martin interviewed by Lenny Picker, Publishers Weekly, 16 Jul 2018
+CLAIM: Martin dropped his own term 'fake history' for 'imaginary history' after readers took umbrage at the demeaning label.
+TW: some of my readers actually took umbrage ... they felt that it was demeaning
+NOTE: Raw PW interview. Page: 'I was using the term "fake history" for a number of years, and some of my readers actually took umbrage at that. They didn't like the term-they felt that it was demeaning ... So I thought imaginary history was a good way to describe it.' Drop of the term, the umbrage and the demeaning label are all on the page.
+
+### 350 [VERIFIED_SUBSTANCE] src=George R.R. Martin interviewed by Lenny Picker, Publishers Weekly, 16 Jul 2018
+CLAIM: Martin calls the book essentially a popular history, not a novel, modelled on Costain's four-volume Plantagenet history and readable without prior knowledge.
+TW: an entirely different literary form than what's essentially a popular history
+NOTE: Every limb is supported on the raw PW interview page - 'it's not a novel', Costain's 'four-volume history of the Plantagenets' as cited inspiration, and accessibility without prior knowledge ('Yeah, I think so ... do you have to know anything about the Plantagenets ... I don't think so'). Only the quotation is off: the page reads "what's essentially a popular history", not "it's essentially a popular history".
+
+### 351 [VERIFIED_VERBATIM] src=George R.R. Martin interviewed by Lenny Picker, Publishers Weekly, 16 Jul 2018
+CLAIM: Martin accepts the comparison to Tolkien's appendices and jokingly calls the book the GRRMarillion.
+TW: Yes, definitely. I jokingly referred to it ... as the GRRMarillion
+NOTE: Raw PW interview. Asked 'Would you consider it similar to Tolkien's appendices, and his work on The Silmarillion?' Martin answers 'Yes, definitely. I jokingly referred to it, before I came up with the title, as the GRRMarillion.' Acceptance and the joke name both present.
+
+### 352 [VERIFIED_VERBATIM] src=George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018
+CLAIM: Martin insists the book is written in the style of a textbook, a quite different style adopted deliberately, and is not a traditional novel.
+TW: It's written in the style of a textbook ... which is quite a different style and is deliberately that way
+NOTE: EW live URL returned HTTP 403 (bot block); recovered via Wayback raw capture 20250303213006id_. Page: 'this is not a traditional novel ... It's written in the style of a textbook as you've seen, which is quite a different style and is deliberately that way.' All three limbs present.
+
+### 353 [VERIFIED_VERBATIM] src=George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018
+CLAIM: The history needs only one voice, Gyldayn's, whom Martin describes as a crotchety old academic, whereas the novels switch voice every chapter.
+TW: the history book, I only have one voice to do ... he's a crotchety old academic
+NOTE: EW via Wayback raw capture. Page also: 'When I'm doing Winds, I switch voices every time I switch chapters.' Note the page names Winds of Winter specifically where the claim generalises to 'the novels'; the contrast Martin draws (one voice vs. voice per chapter) is exactly the claim's. Page spells it 'Archermaester Gyldayn'.
+
+### 354 [VERIFIED_VERBATIM] src=George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018
+CLAIM: Martin found the book easy because it is linear: here is what happened in year 30, here is what happened in 25, with no juggling of parallel timelines.
+TW: Partly because it's linear ... here's what happened in the year 30, here's what happened in 25
+NOTE: EW via Wayback raw capture. Interviewer: 'this was curiously easy for you to write.' Martin: 'Yes. Partly because it's linear.' The no-juggling limb is the explicit contrast he draws: 'In Winds ... I'm juggling the timeline ... That's far more complicated.' Page says 'Partly because'; claim says 'because'.
+
+### 355 [VERIFIED_VERBATIM] src=George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018
+CLAIM: Martin invented contradictory imaginary primary sources, especially for the Dance of the Dragons, so he could tell the same events three different ways.
+TW: inventing imaginary primary sources, particularly in the case of the Dance of the Dragons ... in three different ways
+NOTE: EW via Wayback raw capture. Page: 'sometimes there are contradictory accounts. So I had some fun with inventing imaginary primary sources, particularly in the case of the [Targaryen civil war] Dance of the Dragons. So I get to tell the same different events in three different ways.' All limbs present.
+
+### 356 [VERIFIED_VERBATIM] src=George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018
+CLAIM: It is a generational story over 150 years in which a large cast are born, grow up, die and are succeeded by their children.
+TW: It's a generational story, it covers 150 years, there's a large cast of characters who are born, grow up and die, and are succeeded by their children
+NOTE: EW via Wayback raw capture. The claim reproduces the page sentence limb for limb.
+
+### 357 [VERIFIED_VERBATIM] src=George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018
+CLAIM: Martin likens Gyldayn to a modern historian of the Civil War who was not present and must reconstruct from memories and court records that sometimes contradict.
+TW: Like a historian today writing about the Civil War, they weren't present ... memories and court records ... sometimes there are contradictory accounts
+NOTE: EW via Wayback raw capture. Every element - modern historian, absence from the events, memories and court records, contradiction - is verbatim. Gyldayn is named two answers earlier as the book's single historian voice rather than inside the analogy itself.
+
+### 358 [VERIFIED_VERBATIM] src=George R.R. Martin interviewed by James Hibberd, Entertainment Weekly, 19 Nov 2018
+CLAIM: The text began as sidebars for The World of Ice and Fire that ballooned to 300,000 words and were pulled out to become the GRRM-arillion.
+TW: I had written 300,000 words of sidebars ... we pulled out all the sidebars and I joked this was my Silmarillion - the GRRM-arillion
+NOTE: EW via Wayback raw capture. Origin as sidebars for The World of Ice and Fire, the 300,000-word ballooning, the pull-out and the GRRM-arillion joke are all on the page.
+
+### 359 [VERIFIED_VERBATIM] src=George R.R. Martin, Not a Blog, 25 Apr 2018
+CLAIM: Martin stresses that the book is imaginary history, the essential point being the history part, and compares it to Costain's Plantagenets with dragons.
+TW: let's call this one "imaginary history" instead. The essential point being the "history" part.
+NOTE: Raw fetch of georgerrmartin.com Not a Blog (HTTP 200). Page also: 'I do want to stress... indeed, I want to shout...', and 'something more akin to Thomas B. Costain's monumental ... four-volume history of the Plantagenets. (But with dragons. Did I mention the dragons?)' - the Costain-with-dragons limb verbatim.
+
+### 360 [VERIFIED_VERBATIM] src=George R.R. Martin, Not a Blog, 25 Apr 2018
+CLAIM: The framing joke is that Gyldayn's manuscript came handwritten on vellum with a quill and Martin merely transcribed it.
+TW: handwritten on vellum with a quill pen
+NOTE: georgerrmartin.com 25 Apr 2018, raw HTML fetched 200. Full sentence: "I've seen the archmaester's manuscript. Since it was handwritten on vellum with a quill pen, he required my help in transcribing the text to a more modern format: WordStar 4.0, on a DOS computer." Quote exact; the transcription conceit (Gyldayn wrote it, Martin transcribed) and its joking frame are both explicit on the page, which also ends "Archmaester Gyldayn is hanging up his quill for a while."
+
+### 362 [VERIFIED_VERBATIM] src=George R.R. Martin, Not a Blog excerpt post, 27 Sep 2018
+CLAIM: Speech in the chronicle is mediated through testimony hedges such as 'is reported to have said' and 'would later tell the king'.
+TW: Theomore Manderly is reported to have said
+NOTE: Both hedges are verbatim on the page: "'I had not known there were so many smallfolk in the city,' Theomore Manderly is reported to have said" and "Her first sight of the Wall from above took Alysanne's breath away, Her Grace would later tell the king." Both mediate speech through testimony. Scope note only (not a failed limb): the excerpt also carries much unhedged direct dialogue, so the hedging is a recurring device rather than a universal one.
+
+### 363 [VERIFIED_VERBATIM] src=George R.R. Martin, Not a Blog excerpt post, 27 Sep 2018
+CLAIM: Consistent formal designations (His Grace, the queen, Lord Stark) and archaic diction sustain a courtly register with occasional colloquial flourishes.
+TW: His Grace; Her Grace; Lord Stark; whilst; mayhaps; amongst
+NOTE: "His Grace" x3, "the queen" x21, "Lord Stark" x2 all verbatim; archaic diction present as 'whilst' x4, 'amongst' x2, 'mayhaps', 'elsewise', 'needs must'-register throughout. Colloquial flourishes are on the page too: Lord Manderly's fool — "Methinks Lord Alaric has not moved his bowels since he was twelve" — and Alaric's "That's good. Fewer would be even better." Every limb supported.
+
+### 364 [VERIFIED_SUBSTANCE] src=George R.R. Martin, Not a Blog excerpt post, 27 Sep 2018
+CLAIM: Even the chronicle register carries substantial direct speech embedded in the narrative and compresses a family's history into a single sentence.
+TW: rivals drove them from their rich lands along the Mander
+NOTE: Claim carries no quote, so graded on substance. Direct speech is substantial and embedded: Manderly, Alaric Stark, Lord Commander Burley and the queen all speak in quotation marks inside the chronicle narration. Family history compressed into a single sentence is present twice — House Manderly ("Having originated in the Reach centuries before, they had found refuge near the mouth of the White Knife when rivals drove them from their rich lands along the Mander.") and Lady Stark ("She was a Mormont of Bear Isle... took an axe to a pack of wolves when she was twelve, killed two of them, and sewed a cloak from their skins.").
+
+### 365 [VERIFIED_VERBATIM] src=George R.R. Martin, georgerrmartin.com Fire & Blood page
+CLAIM: Martin says he loves reading popular histories and that is what he was aiming for.
+TW: I love reading popular histories myself, and that's what I was aiming for here
+NOTE: georgerrmartin.com/fireandblood/ raw fetch 200. Martin, quoted in the publisher announcement: "I do want to stress... that FIRE & BLOOD is not a novel... let's call this one 'imaginary history' instead. The essential point being the 'history' part. I love reading popular histories myself, and that's what I was aiming for here..." Quote exact (curly apostrophe on page); both limbs supported.
+
+### 367 [VERIFIED_VERBATIM] src=George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com
+CLAIM: The Gyldayn document opens with a long early-modern-style descriptive title ('Being A History of the Causes, Origins, Battles, and Betrayals...') plus a transcription credit.
+TW: Being A History of the Causes, Origins, Battles, and Betrayals
+NOTE: reactormag.com raw fetch 200. Masthead reads: "THE PRINCESS AND THE QUEEN, OR, THE BLACKS AND THE GREENS / Being A History of the Causes, Origins, Battles, and Betrayals of that Most Tragic Bloodletting Known as the Dance of the Dragons, as set down by Archmaester Gyldayn of the Citadel of Oldtown ((here transcribed by GEORGE R.R. MARTIN))". Long descriptive title and transcription credit both present; the 'Being A History of...' formula is squarely early-modern.
+
+### 368 [VERIFIED_VERBATIM] src=George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com
+CLAIM: The first paragraph is the historian objecting to the received name of the war and deferring to tradition anyway.
+TW: so we must dance along with the rest
+NOTE: First body paragraph in full does exactly this: "To characterize the dark, turbulent, bloody doings of this period as a 'dance' strikes us as grotesquely inappropriate... 'The Dying of the Dragons' would be altogether more fitting, but tradition and time have burned the more poetic usage into the pages of history, so we must dance along with the rest." Objection plus deference to tradition, both in the opening paragraph.
+
+### 369 [VERIFIED_SUBSTANCE] src=George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com
+CLAIM: Before any scene, four abstract paragraphs summarize the war's claimants, scale, character and consequences; only then does the narrative descend to a dated day.
+TW: the conflict burst into the open on the third day of third moon
+NOTE: No quote supplied, graded on substance; the count checks out exactly. Four abstract paragraphs precede any scene: (1) the name and the 129-131 AC span, (2) "There were two principal claimants to the Iron Throne" — claimants, (3) "The Dance split the Seven Kingdoms in two" — scale and consequences (Targaryen power diminished, dragons reduced), (4) "The Dance was a war unlike any other" — character of the war. The fifth paragraph descends to the dated day: "Long simmering, the conflict burst into the open on the third day of third moon of 129 AC...". Minor slack: paragraph 1 is about the war's name, so the four listed topics map mainly onto paragraphs 2-4.
+
+### 370 [VERIFIED_VERBATIM] src=George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com
+CLAIM: Sentences lean on triadic lists and 'and'-chains ('lords, knights, and smallfolk'; 'knives and lies and poison').
+TW: with knives and lies and poison; lords, knights, and smallfolk
+NOTE: Both parenthesised exemplars are verbatim: "as lords, knights, and smallfolk declared for one side or the other" and "a war fought in shadows and stairwells, council chambers and castle yards with knives and lies and poison." Further triads and and-chains on the same page: "tooth and claw and flame", "the kith, kin, and children", "stealth, murder, and betrayal", "the dark, turbulent, bloody doings". Every limb supported.
+
+### 372 [VERIFIED_SUBSTANCE] src=George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com
+CLAIM: An asterisked footnote glosses how 'greens' and 'blacks' got their names at a tourney, importing scholarly apparatus into the narrative.
+TW: thereafter it became the custom to refer to "greens" and "blacks"
+NOTE: No quote supplied, graded on substance. The asterisk hangs on "Queen Alicent and her party, the so-called greens, *" and the footnote reads: "* In 111 AC, a great tourney was held at King's Landing on the fifth anniversary of the king's marriage to Queen Alicent. At the opening feast, the queen wore a green gown, whilst the princess dressed dramatically in Targaryen red and black. Note was taken, and thereafter it became the custom to refer to 'greens' and 'blacks'..." Asterisked footnote, tourney origin, both colour-names glossed — every limb supported.
+
+### 373 [VERIFIED_VERBATIM] src=George R.R. Martin, 'The Princess and the Queen' excerpt (primary text), Reactor/Tor.com
+CLAIM: The chronicler attributes the war's poetic name to some singer, the chronicle's habit of assigning romance to song and sobriety to record.
+TW: No doubt the phrase originated with some singer.
+NOTE: Quote exact, including the full stop, in the opening paragraph, immediately after the chronicler calls 'dance' "grotesquely inappropriate" and immediately before he proposes the soberer "The Dying of the Dragons" and concedes to "the more poetic usage". The romance-to-song / sobriety-to-record contrast is therefore explicit in context; scope note only, the page shows this move once rather than establishing a repeated 'habit'.
+
+### 375 [VERIFIED_VERBATIM] src=Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182
+CLAIM: Fire and Blood doubles as a diegetic chronicle written by Maester Gyldayn whose in-world publication year is unclear.
+TW: “the extradiegetic book Fire and Blood … doubles as a diegetic chronicle, written by Maester Gyldayn, but its diegetic year of publication is unclear” (n.11, p.172).
+NOTE: Raw PDF of the article (21 pp.) reached via Wayback capture 20251004113739id_ of dc.swosu.edu/cgi/viewcontent.cgi?article=3342&context=mythlore (live viewcontent.cgi returns 403/AWS-WAF). Footnote 11 carries the quote word for word and supports Gyldayn's authorship and the unclear diegetic publication year.
+
+### 376 [VERIFIED_VERBATIM] src=Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182
+CLAIM: The book's opening sentence assigns history-keeping to the maesters of the Citadel, implying historiography confined to an ivory tower, unfunded and unnoticed by rulers.
+TW: “The opening sentence of Fire and Blood tells us about ‘the maesters of the Citadel who keep the histories of Westeros,’ suggesting that history writing is confined to the ivory tower and not encouraged, funded, or even much noticed by the political rulers of King's Landing.”
+NOTE: Same PDF, p.172. Every limb present: opening sentence, maesters of the Citadel keeping the histories, ivory tower, not funded, not much noticed by rulers.
+
+### 377 [VERIFIED_VERBATIM] src=Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182
+CLAIM: Contemporary fantasy assumes knowledge must be sought where it is hidden, and that the hidden truth may not in the end be trustworthy, so transmission itself is threatened.
+TW: “knowledge must be sought where it is hidden … but that the ‘hidden truth’ might not, in the end, be trustworthy. In short, transmission of information is threatened.”
+NOTE: Appears twice — in the Mythlore abstract (also visible on the live landing page dc.swosu.edu/mythlore/vol43/iss2/11/) and in the article's introduction. All three limbs supported.
+
+### 378 [VERIFIED_VERBATIM] src=Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182
+CLAIM: In-world histories such as Daeron's Conquest of Dorne are remembered for their inaccuracy ('vainglorious', 'boastful'), and propagandistic history-writing has otherwise died out in Westeros.
+TW: “a book still discussed for its inaccuracy: it is both called ‘vainglorious’ … and ‘boastful’ … Such propagandistic use of history writing, however, seems to have died out.”
+NOTE: PDF p.173. Both epithets and the death of propagandistic history-writing are on the page; the article hedges with ‘seems to have died out’ where the claim states it flatly, and Conquest of Dorne is the article's single example rather than a class of ‘histories’ — a modality/scope softening, not an unsupported limb.
+
+### 379 [VERIFIED_VERBATIM] src=Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182
+CLAIM: The Kingsguard's White Book, a list of knights and deeds, echoes warrior chronicles such as Froissart's.
+TW: “Jaime Lannister writes in the White Book, a list of Kingsguard knights and their deeds”; n.12 “The White Book bears echoes of the warrior chronicles of, for example, Jean Froissart.”
+NOTE: PDF p.172 body plus footnote 12. Both limbs (list of knights and deeds; Froissart echo) supported.
+
+### 380 [VERIFIED_VERBATIM] src=Maria Damkjaer, Mythlore 43.2 (2025), pp. 161-182
+CLAIM: Deep time is hostile to book knowledge, and the loss of knowledge is the greatest challenge to fantasy realms concerned with the distant past.
+TW: “Deep time is hostile to book knowledge, and it is the loss of knowledge that poses the greatest challenges to fantasy realms so concerned with the distant past.”
+NOTE: Abstract wording, on the live landing page and in the PDF abstract; the body varies it slightly (‘but it is the very loss, or disappearance, of knowledge’). Both limbs supported.
+
+### 381 [VERIFIED_VERBATIM] src=Bartlomiej Blaszkiewicz, 'From Chronicle to Fairy Tale', in Marchen und Gesellschaft (WUW,
+CLAIM: The Harrenhal tourney exists in three registers: the World of Ice and Fire chronicle, scattered eyewitness reminiscences, and Meera Reed's fairy-tale retelling, tracing how history becomes tale.
+TW: “the chronicle The World of Ice and Fire, which reappears in the form of scattered personal reminiscences of various eyewitness characters … to Meera Reed's fairy-tale version”
+NOTE: Source reached is the CEEOL chapter-detail page itself (HTTP 200, publisher abstract; chapter PDF is paywalled at 6.50 EUR). The abstract carries the quote verbatim, names all three forms — chronicle, eyewitness reminiscences, Meera Reed's fairy tale — and states the aim as illustrating ‘the transformation of historical events into a fairy tale’. Caveat of record: the abstract frames the reminiscences as the chronicle narrative reappearing, so ‘three registers’ is the claimant's enumeration; the chapter body was not reachable.
+
+### 382 [VERIFIED_VERBATIM] src=Maksim Kyrchanoff (Kirchanov), Journal of Frontier Studies 2018 no. 1
+CLAIM: The real authors of The World of Ice and Fire imitated the style of the medieval chronicle and synthesized it with modern simplistic historical representations.
+TW: “the real authors of the text actually imitated the style of the medieval chronicle, synthesized it with modern simplistic historical representations.”
+NOTE: Full English text obtained from the article's own galley PDF (jfs.today/index.php/jfs/article/download/34/31/, linked from the given landing page), p.26. ‘The text’ is The World of Ice and Fire, the article's stated object of analysis.
+
+### 383 [VERIFIED_VERBATIM] src=Maksim Kyrchanoff (Kirchanov), Journal of Frontier Studies 2018 no. 1
+CLAIM: The imagined author orders events chronologically and periodizes into named ages (Dawn Age, Age of Heroes, Long Night, Doom of Valyria), linear yet imagined as torn apart.
+TW: “imagined his ‘linear time’ as torn apart … classification of events in their chronological order and sequence … ‘the Dawn Age’, ‘the Age of Heroes’, ‘the Long Night’, … ‘the Doom of Valyria’.”
+NOTE: Galley PDF pp.26-27. All four named ages appear in the article's longer list of nine stages; chronological ordering and the torn-apart linearity are both stated.
+
+### 384 [VERIFIED_VERBATIM] src=Maksim Kyrchanoff (Kirchanov), Journal of Frontier Studies 2018 no. 1
+CLAIM: The imagined chronicler allows himself estimates of the world's age ranging from 40 to 500 thousand years, a hedge of enormous width stated flatly.
+TW: “the imagined author of the historical chronicle allowed himself reasoning about the age of the world and his estimates ranged from 40 to 500 thousand years.”
+NOTE: Galley PDF p.26. The figures and the flat, uncommented statement are on the page; ‘a hedge of enormous width’ is the claimant's gloss on the quoted range, not the article's phrasing.
+
+### 385 [VERIFIED_VERBATIM] src=Ken Mondschein, Medievalists.net, Aug 2022
+CLAIM: Gyldayn's Dance history rests on three fictional primary sources: Septon Eustace, Maester Munkun, and the Testimony of Mushroom.
+TW: “Gyldayn's history … is based on fictional primary sources: … a septon (priest) named Eustace; a Maester (academic) named Munkun; and the Testimony of Mushroom”
+NOTE: Live page fetched 200 with a browser UA. ‘three fictional accounts’ also appears verbatim two paragraphs later; the history is explicitly the Dance of the Dragons account by Archmaester Gyldayn.
+
+### 386 [VERIFIED_VERBATIM] src=Ken Mondschein, Medievalists.net, Aug 2022
+CLAIM: Mushroom peppers his account with debauchery and ribald humor and is by far the most amusing of the three chroniclers.
+TW: “Of the three fictional chroniclers, Mushroom is by far the most amusing, peppering his account with debauchery and ribald humor.”
+NOTE: Same page; both limbs are one sentence of the source.
+
+### 387 [VERIFIED_VERBATIM] src=Ken Mondschein, Medievalists.net, Aug 2022
+CLAIM: The device mirrors real premodern sources (Procopius, the Anglo-Saxon Chronicle, Froissart), which are later compilations, paraphrases and unreliable narrators.
+TW: “So much of the information we have about the premodern world comes from later compilations, paraphrases, and unreliable narrators” — then Procopius, the Anglo-Saxon Chronicle, Froissart.
+NOTE: Same page. The three real analogues follow the quoted sentence in order, each with its unreliability named (Procopius' grudge, the ‘convoluted’ Chronicle, Froissart compiling events he did not witness).
+
+### 388 [VERIFIED_VERBATIM] src=Ken Mondschein, Medievalists.net, Aug 2022
+CLAIM: Showrunner Condal says the show left the Rashomon-style telling to the book and instead defined an objective truth, which Mondschein calls a category error about real history.
+TW: Condal: “we kind of left that to the book, and decided to, instead, try to define what we thought the objective truth of this actual history was”; Mondschein: “there is no such thing as ‘actual history’ or being ‘right’ or ‘wrong.’”
+NOTE: Same page; the quote is attributed there to showrunner Ryan Condal via a Polygon interview. ‘Category error’ is the claimant's label for Mondschein's rebuttal — he does not use the phrase, but he argues exactly that objective truth/right/wrong do not apply to real history.
+
+### 389 [VERIFIED_VERBATIM] src=Nerdist
+CLAIM: The narrator openly admits where the history gets muddled between Eustace's sober account and Mushroom's sensational one and leaves the reader to decide.
+TW: “The narrator admits that the history gets muddled between Maester Eustace and Mushroom's accounts”; “the book leaves it to the reader to determine how much they want to believe.”
+NOTE: Live Nerdist page fetched 200. Eustace's account is called ‘a sober recollection’ and Mushroom's ‘deeply sensationalized’. Minor agent shift: the source credits the book (with the narrator unsure) for leaving the choice to the reader; Nerdist also miscalls Eustace a Maester rather than a septon, which the claim does not repeat.
+
+### 390 [VERIFIED_VERBATIM] src=Nerdist
+CLAIM: The book is less a history of House Targaryen than a portrait of how history is constructed in Westeros; readers leave with no definitive account.
+TW: "they walk away with no definitive account of what really happened"
+NOTE: Nerdist live fetch (HTTP 200, raw HTML stripped). Page: 'In the end, they walk away with no definitive account of what really happened. In this sense, Fire & Blood is less a history of House Targaryen, and more a portrait of the construction of history in Westeros in the first place.' Quote verbatim; both limbs (portrait-of-construction, no definitive account) on the page.
+
+### 391 [VERIFIED_VERBATIM] src=Nerdist
+CLAIM: Eustace's account is a sober recollection of the fall; Mushroom's is a deeply sensationalized look at Rhaenyra, and the pairing suits morally complex figures.
+TW: "Maester Eustace's account is a sober recollection of House Targaryen's fall"
+NOTE: Same Nerdist page. 'Maester Eustace's account is a sober recollection of House Targaryen's fall; Mushroom's is a deeply sensationalized look at Princess Rhaenyra's life in particular. In turn, this is a perfect framework ... because of how morally complex many of the characters are.' Quote verbatim; all three limbs supported. (Nerdist writes 'Maester Eustace'; Collider and canon call him Septon Eustace - the claim says only 'Eustace'.)
+
+### 392 [VERIFIED_VERBATIM] src=Collider (Sara Hess quotes), 25 Sep 2022
+CLAIM: Sara Hess: the book is three separate reporters saying what they think happened and contradicting each other, so nobody in it actually knows.
+TW: "It's three separate reporters saying what they think might have happened and contradicts each other"
+NOTE: Collider live fetch (HTTP 200). Hess quoted directly; the 'nobody knows' limb is her adjacent quote 'So, nobody in that book actually knows what happened.' Quote fragment 'three separate reporters' verbatim. Two mismatches outside the claim sentence: page headline is 'House of the Dragon: How Fire & Blood's Unreliable Narrative Shaped Series' (chunk's page title differs), and the byline is Shrishty Mishra, published Sep 25, 2022 (date matches).
+
+### 393 [VERIFIED_VERBATIM] src=Collider (Sara Hess quotes), 25 Sep 2022
+CLAIM: Hess: it is men talking about what they think happened, and they are probably wrong.
+TW: "It's men talking about what they think happened, and they are probably wrong"
+NOTE: Same Collider page: '...history is written by the victors, history is written by men. It's men talking about what they think happened, and they are probably wrong,' Hess said. Quote verbatim, attribution to Hess explicit.
+
+### 394 [VERIFIED_SUBSTANCE] src=Collider
+CLAIM: The book layers court documents, royal decrees and Grand Maesters' histories with two first-person eyewitness accounts (Eustace, Mushroom).
+TW: court documents and royal decrees, Grand Maesters' histories, two first-person accounts
+NOTE: Collider 'Mushroom' article, live fetch (HTTP 200). Page: 'made up of "historical sources" such as court documents and royal decrees as well as the histories written by the Grand Maesters' of the time. These are filled in with information from two separate first-person accounts from people who were present ... One was from Septon Eustace ... and the other a man named Mushroom, the court jester.' Graded SUBSTANCE rather than VERBATIM only because the claim carries no quote string to match; every limb is on the page. Page says Septon (not Maester) Eustace.
+
+### 395 [VERIFIED_SUBSTANCE] src=Collider
+CLAIM: Mushroom's testimony was deemed so salacious that King Baelor ordered it burned, a suppressed-source motif familiar from real archives.
+TW: "they were ordered burned by King Baelor the Blessed"
+NOTE: Same Collider page: 'So salacious, and perverse were these tales that they were ordered burned by King Baelor the Blessed - but luckily, some survived'. The chunk's quote string 'ordered it burned' is NOT word-for-word on the page (grep returns nothing; page reads 'they were ordered burned by'), hence SUBSTANCE not VERBATIM. Salacious + Baelor + burning all supported; 'a suppressed-source motif familiar from real archives' is the researcher's own genre label, not sourced to the page.
+
+### 396 [VERIFIED_VERBATIM] src=TV Tropes
+CLAIM: Gyldayn cites Mushroom claims the text notes as obviously false, yet no follow-up statement blunts them, so the lurid version lingers.
+TW: "no follow-up statement serves to blunt the force of it"
+NOTE: TV Tropes blocked live (Cloudflare 'Just a moment...' 403 on a browser UA); reached via Wayback raw capture https://web.archive.org/web/20260322132616id_/... (HTTP 200, 62KB). Under 'Unreliable Narrator': 'He also glosses over his own biases on the subject: e.g. in many places Mushroom is cited as saying something which the narrative notes is obviously false, but no follow-up statement serves to blunt the force of it.' Quote verbatim; 'the lurid version lingers' is a fair reading of 'blunt the force of it'.
+
+### 397 [VERIFIED_VERBATIM] src=TV Tropes
+CLAIM: Gyldayn admits not everything written is accurate, that history has mixed with folklore and historians disagree on details.
+TW: "not everything written is certainly accurate, that history has mixed with folklore"
+NOTE: Same Wayback capture: 'Unreliable Narrator: Gyldayn admits that not everything written is certainly accurate, that history has mixed with folklore and historians disagree about the details of some events.' Quote verbatim. The claim drops the page's hedge word 'certainly' ('not everything written is accurate' vs 'not everything written is certainly accurate') - a slight hardening, but the limb is supported.
+
+### 398 [VERIFIED_VERBATIM] src=TV Tropes
+CLAIM: Minor figures simply disappear from the record, plausibly because the chronicler did not think their fates worth writing down.
+TW: "many more simply disappear from the record"
+NOTE: Same Wayback capture, 'What Happened to the Mouse?': 'Some characters go missing in-universe during the story, such as Qarl Correy and Nettles, but many more simply disappear from the record. It's possible that Gyldayn did know the fates of those characters but didn't consider them important enough to write down.' Quote verbatim; the 'plausibly because ... not worth writing down' limb matches 'It's possible that...didn't consider them important enough'.
+
+### 399 [VERIFIED_VERBATIM] src=A Wiki of Ice and Fire, 'Gyldayn' (citing r/asoiaf AMA)
+CLAIM: In The World of Ice and Fire, everything attributed to Gyldayn was written directly by Martin, while Yandel's words were written by Garcia and Antonsson.
+TW: "anything attributed to Gyldayn was directly written by George R.R. Martin"
+NOTE: AWOIAF blocked live (Cloudflare 403); reached via Wayback raw capture https://web.archive.org/web/20260801014239id_/... (HTTP 200). 'Behind the Scenes': 'In the real-world book The World of Ice & Fire, anything attributed to Gyldayn was directly written by George R.R. Martin, in the same way that Yandel's words were written by Elio Garcia and Linda Antonsson.' Quote verbatim; footnote [9] is the r/asoiaf AMA with Garcia and Antonsson, matching the chunk's source note.
+
+### 400 [VERIFIED_VERBATIM] src=A Wiki of Ice and Fire, 'Gyldayn'
+CLAIM: The original WOIAF frame had Gyldayn's papers found with pages misplaced, destroyed, or damaged by neglect and fire, the lost-manuscript topos.
+TW: "many pages were misplaced or destroyed, and still others were damaged by neglect and by fire"
+NOTE: Same AWOIAF capture: 'In the original text of The World of Ice & Fire ... Yandel discovered other manuscripts by Gyldayn, but many pages were misplaced or destroyed, and still others were damaged by neglect and by fire.' Quote verbatim; the papers-found frame ('sent his papers to Archmaester Gerold ... recently discovered by Maester Yandel') is on the page. 'the lost-manuscript topos' is the researcher's genre label, not a page assertion.
+
+### 402 [VERIFIED_VERBATIM] src=Reactor (Stubby the Rocket), Nov 2018
+CLAIM: The frame is a historical summary compiled from primary and secondary sources by Gyldayn, who brings his own bias to the importance and likelihood of events, so the history is fluid.
+TW: "a historical summary collected from primary and secondary sources by Archmaester Gyldayn"
+NOTE: Reactor live fetch (HTTP 200). Under Mystery #4: 'The framing concept behind Fire & Blood is that we are reading a historical summary collected from primary and secondary sources by Archmaester Gyldayn, who brings his own bias to the importance and likelihood of recorded events. So this history is fluid...' Quote 'this history is fluid' verbatim; every limb supported (claim says 'compiled', page says 'collected'). Byline is Stubby the Rocket as stated, but the page reads 'Published on December 7, 2018' - the chunk's 'Nov 2018' is off by a month.
+
+### 403 [VERIFIED_VERBATIM] src=Chris Lough, Reactor/Tor.com, Oct 2014
+CLAIM: WOIAF's dedication to Tommen is written over the half-erased names of Joffrey and Robert, so the document displays its own revision history.
+TW: "Tommen's name is written over the not-entirely erased name of Joffrey"
+NOTE: Reactor/Tor.com live fetch (HTTP 200), 'By Chris Lough | Published on October 29, 2014' - byline and date match. Item 1: 'A dedication page ... declares the book a gift to King Tommen ... Tommen's name is written over the not-entirely erased name of Joffrey, which itself is written over the not-entirely erased name of Robert.' Quote verbatim; both erased names present.
+
+### 404 [VERIFIED_VERBATIM] src=Chris Lough, Reactor/Tor.com, Oct 2014
+CLAIM: Yandel's page on King Robert is very fawning and very short, the courtier-historian's survival instinct made visible.
+TW: "King Robert's page ... is also very, very fawning. (And very short.)"
+NOTE: Same Reactor page, same paragraph: 'King Robert's page in the later section on rulers of Westeros is also very, very fawning. (And very short.) Yandel knows how this game is played.' Quote verbatim including the full stop; 'very fawning and very short' matches (page doubles the intensifier). 'Courtier-historian's survival instinct made visible' is the researcher's gloss on the page's own 'Yandel knows how this game is played.'
+
+### 405 [VERIFIED_SUBSTANCE] src=Wikipedia, 'Fire & Blood (novel)'
+CLAIM: Fire & Blood is a scholarly treatise citing competing fictional primary sources whose conflicts reflect medieval historiography and make Gyldayn unreliable.
+TW: scholarly treatise; conflicting sources make Gyldayn an unreliable narrator
+NOTE: Claim carries no quote field, so no verbatim string to check; every limb is on the raw article source (fetched via ?action=raw): 'Rather than a novel, Fire & Blood takes the form of a scholarly treatise about the Targaryen dynasty written by a historian within the world of A Song of Ice and Fire, Archmaester Gyldayn' and 'Gyldayn cites a variety of fictional primary sources for the historical events he describes, whose accounts sometimes conflict with each other, reflecting medieval methods of historiography and thus making Gyldayn an unreliable narrator from the reader's perspective.' Graded SUBSTANCE only because there is no supplied quotation to verify word for word.
+
+### 406 [VERIFIED_VERBATIM] src=Wikipedia, 'Fire & Blood (novel)' (secondhand for the paywalled Times pieces and the 404'd
+CLAIM: Rifkind (Times) called it interminable self-indulgent crap, Dan Jones (Sunday Times) a masterpiece of popular historical fiction, and Chris Lough (Tor.com) the best Song of Ice and Fire book in 18 years.
+TW: a masterpiece of popular historical fiction
+NOTE: All three attributions verbatim in the Reception section: 'Hugo Rifkind of The Times described it as "interminable, self-indulgent crap."'; 'Dan Jones of The Sunday Times praised the book, calling it "a masterpiece of popular historical fiction"'; 'Chris Lough of Tor.com described the book as "... the best Song of Ice and Fire book in 18 years"'. Verified on Wikipedia itself (the named url), not on the paywalled Times pieces or the dead Tor.com page; Wikipedia's own citation template misspells the Times critic as 'Rifkin, Hugo' while the article body reads Rifkind.
+
+### 407 [VERIFIED_VERBATIM] src=Kirkus Reviews, 20 Jan 2019
+CLAIM: The chronicle leans on eldritch epochal names such as the Doom of Valyria and the Dance of the Dragons.
+TW: eldritch epochal terms such as the Doom of Valyria
+NOTE: Kirkus: 'Martin aficionados are used to eldritch epochal terms such as the Doom of Valyria and the Dance of the Dragons, here evoked as defining points in the emergence of his Targaryen dynasty'. Quote verbatim; both named epochs present. Note the page frames the terms as familiar to aficionados and 'here evoked as defining points' — the claim's 'leans on' is a fair but slightly stronger gloss.
+
+### 408 [VERIFIED_VERBATIM] src=Kirkus Reviews, 20 Jan 2019
+CLAIM: The storyline moves briskly across 700 pages, fed by dragons, impaled bodies and betrayals.
+TW: moving along briskly
+NOTE: Kirkus: 'Over the span of 700-odd pages...' and 'there are plenty of fierce dragons, impaled bodies, and betrayals to keep the storyline moving along briskly.' Quote verbatim; the 700-page span and all three of dragons/impaled bodies/betrayals confirmed.
+
+### 409 [VERIFIED_VERBATIM] src=C.T. Phipps, Grimdark Magazine, 6 Aug 2022
+CLAIM: Martin creates vivid personalities that leap from the page even when they have no dialogue or on-page appearance, only description.
+TW: even when they don't have any dialogue
+NOTE: Grimdark: 'George remains perfectly capable of creating vivid personalities that leap from the page even when they don't have any dialogue or appearance on page save descriptions about them.' Quote verbatim; every limb (leap from the page, no dialogue, no on-page appearance, description only) supported.
+
+### 410 [VERIFIED_VERBATIM] src=C.T. Phipps, Grimdark Magazine, 6 Aug 2022
+CLAIM: The history seeds unanswered questions (was Aegon's heir a singer's? was Maegor resurrected?) and often offers its own suggestions as to what happened.
+TW: leaves all manner of breadcrumbs
+NOTE: Grimdark: 'Was Aegon I's eldest child really his or a singer's? Was Maegor the Cruel resurrected as a zombie?'; 'leaves all manner of breadcrumbs as well as clues'; 'the book often offers their own suggestions as to what might have happened.' Quote verbatim; the claim's 'Aegon's heir' renders the page's 'Aegon I's eldest child'.
+
+### 411 [VERIFIED_VERBATIM] src=C.T. Phipps, Grimdark Magazine, 6 Aug 2022
+CLAIM: It is a pseudo-history that keeps the salacious details real history downplays, a summary of the good parts in an entertaining, well-formatted style.
+TW: A summary of the good parts
+NOTE: Grimdark: 'George is smart enough to keep all the salacious and twisted details about the Targaryens intact throughout the text while real-life history often downplays these elements'; 'This is not a novel but more a very well-done pseudo-history of events. A summary of the good parts, really, that is done in an entertaining and well-formatted style.' Quote verbatim; every limb supported.
+
+### 412 [VERIFIED_VERBATIM] src=Speculiction, Oct 2022
+CLAIM: Fire and Blood reads like a real work of history, whereas The Silmarillion reads like a collection of interlinked fables and myths.
+TW: more like a real work of history
+NOTE: Speculiction: 'In short, Fire and Blood reads more like a real work of history, whereas The Silmarillion reads more like a collection of interlinked fables/myths—very different.' Quote verbatim; the claim drops the comparative 'more' but keeps the contrast that carries it.

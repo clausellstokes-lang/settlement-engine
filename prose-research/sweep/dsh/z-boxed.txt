@@ -1,0 +1,3253 @@
+ZENOPUS ARCHIVES: Search results for boxed text 
+
+ZENOPUS ARCHIVES
+
+ Exploring the Underworld of Holmes Basic 
+
+ This is the blog. Click
+ here to go to the Zenopus Archives website. 
+
+ Note: Many older posts on this blog are missing images, but can be viewed at the corresponding page in the Internet Archive 
+
+ FEATURED POST
+
+ The Forgotten Smugglers' Cave: Index of Posts 
+
+ An index of posts describing the Forgotten Smugglers' Cave, an adventure for Holmes Basic characters levels 2-4. ...
+
+Showing posts sorted by relevance for query boxed text . Sort by date Show all posts 
+
+ Showing posts sorted by relevance for query boxed text . Sort by date Show all posts 
+
+ Friday, July 24, 2020 
+
+ A Chronology of D&D Sample Dungeons: The Haunted Keep by Tom Moldvay (1981) 
+
+ The Haunted Keep cross-section by Erol Otus. Source: Old School FRP tumblr 
+
+ This is material I recently wrote for the Chronology of Sample Dungeons section of the Zenopus Archives site . Think of it as a first draft as I will likely revise/add to it over time. 
+
+ The Haunted Keep is the sample dungeon from the 1981 revision of the D&D Basic rulebook , which was edited by Tom Moldvay . As with the Holmes Basic rulebook, the job of editor involved a significant amount of original writing, including an entire sample dungeon level. While the Zenopus Dungeon from Holmes Basic has no formal name other than " Sample Dungeon ", Moldvay specifically refers to his scenario as "THE HAUNTED KEEP" (top left of page B55). 
+
+ Holmes pioneered the inclusion of an introductory sample dungeon in the Basic rulebook, taking the sample level concept from OD&D Vol 3 , which is essentially a collection of examples, mainly tricks and traps, and adding narrative cohesion and gearing it towards beginners. Moldvay takes his cues from Holmes' structure, similarly providing an evocative background in several concise paragraphs (page B55) followed by a single fully described dungeon level (page B56-B57), and with suggestions for expansion. 
+
+ Moldvay's background echoes that of the Zenopus Dungeon in several respects. The occupants have mysteriously disappeared, leaving the structure housing the dungeon abandoned. The structure is said to be haunted; "[s]trange lights and sounds are often seen and heard in the ruins by the passing townspeople", which recalls the Zenopus Dungeon's bit about the neighbors complaining about ghostly lights and ghastly screams. Th e Haunted Keep is ruined like Zenopus' tower, although not to the same extent, and thus Moldvay's sample dungeon level is actually above ground in the only remaining floor of the East Tower. Because the dungeon is named The Haunted Keep, it's not usually remembered that the sample level is actually of the East Tower of this structure (see map below), and t here is a perhaps a trace of Holmes' ruined tower concept in Moldvay's likewise ruined tower. 
+
+ Moldvay advances the concept of an introductory sample dungeon in a number of significant ways. These changes suggest why Moldvay chose to write a new level rather than just revising Holmes' dungeon. 
+
+ 1. Providing "Boxed Text ". Several of the paragraphs of the background are in quotes, with a suggestion that this could be read to players (pg B55); this seems to be a step in the evolution of TSR's "boxed text" that would shortly become standard in modules. The first modules for the revised Basic Set, such as B3 Palace of the Silver Princess (originally by Jean Wells alone, with Moldvay as a co-author on the revised version) and B4 The Lost City (by Moldvay) were among the first TSR modules to include boxed text. 
+
+ 2. Integration with Advice on Types of Scenarios . Moldvay provides a motivation for exploring the dungeon beyond simply looking for treasure. On page B51, he lists out ten different "Scenarios", of which the "Haunted Keep" is described as an example of #8, "Rescuing Prisoners". 
+
+ 3. Procedural Dungeon Construction . There is the significant addition of a "step-by-step" how-to section that shows how the dungeon was constructed (pages B55-B56), with the dungeon level being the example of the output. This guidance is integrated with Moldvay's instructions for stocking dungeons on pages B51-B52; both sections include steps A-F. 
+
+ 4. Dungeon Map Features . The dungeon map (pg B57) includes more room features than the Zenopus dungeon, and these correspond to a separate key of standard dungeon map features (pg B58). 
+
+ Maps for the Haunted Keep from page B57. Source: Marks Roll Dice 
+
+ 5. Location Map . There is a second map showing the outside structure of the dungeon below the dungeon map (shown above). This serves as a bit of a location map, showing a north-south road running through the gatehouse of the ruined keep, as well as suggestion another area for expansion: the West Tower. The introduction also indicates that the "interior of the gatehouse will be similar to the towers, though there will be fewer rooms", although the map does not shown a blank interior area where these rooms would be located in the Gate House. 
+
+ 6. Sample Cross-Section Integration . The sample cross-section (of B58) drawn by Erol Otus (shown at the top of the page) is linked to the sample dungeon level rather than being an unrelated cross-section like Skull Mountain in Holmes Basic. This cross-section shows second and third levels of the dungeon, corresponding to Moldvay's instructions for expanding the dungeon. These three levels match the three levels of Basic play, which refer to both character levels and dungeon levels. This was a design decision first implemented by Holmes, who included Wandering Monsters for the first three dungeon levels. Holmes had also intended for his rulebook to include a cross-section of a dungeon with just three levels , but TSR replaced this with the much more extensive Skull Mountain cross-section. 
+
+ 7. Tie-in to Examples of Play and Combat . The Example of Play (page B59) is also linked to the sample dungeon rather than having it be an unrelated example like in Holmes Basic. The Example starts at end of the first level of the dungeon at the entrance to the second level, and is thus able to continue the description of the dungeon a bit further. This Example of Play is also linked to the Example of Combat earlier in the book (B28), which continues directly from the Example of Play. 
+
+ 8. More Advice on Expanding the Sample . for Holmes gave some brief suggestions for expanding the dungeon. Moldvay expands on this by giving more detailed instructions for what the DM should include when designing the 2nd and 3rd level of the dungeon (pg B55). 
+
+ The extra material noted above does mean that the dungeon itself is greatly reduced in size from Holmes' example, with the first level of the Haunted Keep having just 9 rooms described in a little over half a column of text, as compared to Holmes' 15+ rooms described over 3 full pages. This provides less ready-to-go material for the DM, but this was perhaps less of a concern as the Basic Set now included a full module. When the Holmes Basic set debuted, it was packaged with Monster & Treasure Assortments, but these were replaced in 1978 with B1 In Search of the Unknown, and then again in early 1980 with B2 Keep on the Borderlands, which was then retained in revised format for the Moldvay Basic set. 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 3:08 PM 
+
+ 3
+comments 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ B/X ,
+ ODnD Sample Level ,
+ Sample Dungeon 
+
+ Monday, December 11, 2017 
+
+ Gygax's Dungeon Level from Hall of Many Panes 
+
+ The "Dungeon Delving" map from Hall of Many Pane 
+
+ I recently found a cheap second-hand copy of the Hall of Many Panes boxed set, a mega-adventure written by Gary Gygax and published by Troll Lord Games in 2005, with dual stats for 3.5E D&D and the Lejendary Adventures (LA) RPG. The Hall was playtested by Gary back in 2002 using LA, his preferred system in his last decade. I was subscribed to his Gygax-Games email list back then and remember his regular play-test reports. 
+
+ This is my first time owning the final product, so I'd never seen the " Dungeon Delving " Map that was one of the "Many Panes" ( Pane 8 / Rose). In the text, Gary describes it at as a "dungeon of the days of yore". Once a party enters via the pane, they are stuck on the level and must explore it thoroughly until they figure out how to leave again. 
+
+ The published map is a bit of an oddity, as the cartographer seems to have taken a scan of Gary's original map (whatever the source may be), made a negative image out of it, and then drew right over that digitally. The graph from the original paper can be seen in white, as well as many of Gary's notes - some written over completely, some written over partially, and some not written over at all, like the pool in Room 9. The cartographer must have had some trouble following the original notations because, as T. Foster has pointed out , the final map has a number of discrepancies between it and the text of the module. 
+
+ The design is interesting because it's a rare published example in Gary's early style of dungeons, as glimpsed in the tips in OD&D Vol 3 , TSR's Dungeon Geomorphs and the unpublished levels of Castle Greyhawk (CG). In the '00s, Gary kept the original castle notes in a binder that he would use to run it at conventions, under OD&D rules , and a few of the levels were photographed by players of these games. The two most well-known images are of Levels 1 and 3, which I've included below for comparison (see also Visualizing Castle Greyhawk ). On the whole, "Dungeon Delving" is closest in style to CG Level 3: 
+
+ Castle Greyhawk Level 3 ("binder" version) 
+
+ Below is a list of elements in "Dungeon Delving" that are found in Gygax's other dungeons. Note this list contains spoilers if you think you might ever play through Hall of Many Panes. 
+
+ Diag onal Passages: In "Dungeon Delving" the central START area is an octagonal room similar in design to the hexagonal room in the northern half of Level 3 (see above). In each, a door leads out to a diagonal passage in four directions: NW, NE, SW, SE - essentially an X-shape with a room at the intersection. 
+
+ Gary's use of diagonal passages was first illustrated way back in the "Sample Level" in OD&D Vol 3; see Area 3 in the image further down this page. The note for this explained, "This area simply illustrates the use of slanting passages to help prevent players from accurately mapping a level (exact deviation from cardinal points is difficult for them to ascertain)." 
+
+ His "Solo Dungeon Adventures" article in Strategic Review #1 (Spring 1975) is a close relative of these early dungeons, and was later reprinted as Appendix A: Random Dungeon Generation in the Dungeon Masters Guide . In this, Table III: Side Passages includes an entry that the "passage "X's" (if present passage is horizontal or vertical it forms a fifth passage into the "x")". 
+
+ Diagonal passages and even a few "X-shaped" rooms can also be found in the Dungeon Geomorphs, originally published in 1976-1977 , for example in Geomorph A from Set 1: 
+
+ Geomorph A from Dungeon Geomorphs Set 1: Basic Dungeon (1976)
+
+ Room-Labyrinths : A prominent feature of the early dungeons are the maze-like series of empty rooms, which Gygax terms a "room-labyrinth" in OD&D Vol 3. Area 2 of the "Sample Level" illustrates this (see below), with the note stating, "This is a simple room-labyrinth, generally leading nowhere, but "[Room] A would be a room containing a monster and treasure". The section on "Distribution of Monsters and Treasures" further explains, "As a general rule there will be far more uninhabited space on a level than there will be space occupied by monsters, human or otherwise" (page 6). The random distribution instructions that follow give each room a 1-2 in 6 chance of having a monster, which means that on average 33% of the rooms will be occupied. 
+
+ The Dungeon Geomorphs are also chock-full of the room-labyrinths (see above). The original notes for the Dungeon Geomorphs restricted this even further: "Approximately 25% of the rooms and large spaces should contain monsters, treasures and other notable items. For every five such rooms there should be approximately one trap. Slanting passages, teleportation areas, slides and the like should be added sparingly thereafter -- one or two such items per level is a fair guideline". 
+
+ Detail of the map from S1 Tomb of Horrors
+
+ Some other less filled-in Gygax dungeons have isolated room-labyrinths. The infamous Tomb of Horrors has a small room-labyrinth south of Area 8. One section of this leads to a false door concealing a spear trap (more on those below), and the other is a series of secret doors (Area 9) leading to the next area of the dungeon (Area 10). His last publication, Castle Zagyg, also has a room-labyrinth (Area 103) consisting of over 30 10' by 10' rooms with 50 (!) different doors, part of the defenses of his beloved Old Guard Kobolds. 
+
+ Castle Greyhawk Level 1 ("binder" version) 
+
+ Transporters: "Dungeon Delving" has three different two-way transporters; A1 & A2 are corridor/stair transporters, and B1/2 & B2/1 and B3/4 & B4/3 are two sets of room transporters. The L-shaped A1 & A2 transporters are in a style similar to those on the Level 1 CG map as pointed out by T. Foster here . 
+
+ Back in the Tricks and Traps section of OD&D Vol 3, the list of suggestions by Gygax include "Intra-level teleportation area, so that a player will be transported to a similar (or dissimilar area on the same level, possibly activated by touching some items (such as a gem, door, or the like)". The "Sample Level" in OD&D Vol 3 also includes two different examples of transporters, one a two-way room-based transporter, the other a one-way corridor transporter, although neither is explicitly "intra-level". See areas E and F below. 
+
+ Likewise, in the original notes for the Dungeon Geomorphs he suggests "putting in areas where those who entered are teleported to a similar spot elsewhere". Tomb of Horrors also has a number of teleporters. 
+
+ The original version of the OD&D Vol 3 "Sample Level" 
+
+ Pits : In "Dungeon Delving", the pits are marked with X's and are generally at intersections of corridors, similar to the example in the OD&D "Sample Level". See above, the "X" near Room I. The note for this states, "Note the pit (X) at the four-way intersection containing a s ecret door on its south surface" (pg 5). The use of X's to marked covered pits became standard in D&D modules, at least for a time, for example the infamous pit in the Kobold lair in the Caves of Chaos. 
+
+ The text for "Dungeon Delving" indicates that its pits are of three types, all 10' deep: an unboxed X to indicate an open pit, a boxed X to indicate a covered pit, and a boxed X with a cross-bar to indicate a covered pit with spikes at the bottom. I don't actually note any of the third type on the map itself, which suggests one of the mapping errors noted above. 
+
+ Arrow/Spear Traps : An "A" on the "Dungeon Delving" map indicates an arrow trap that fires three arrows from the dungeon wall when the square is stepped on. Area 14 also has a more interesting variant on this. 
+
+ There are no arrow traps in the OD&D Sample Level, but the sample encounters for the Dungeon Geomorphs Set 1 have one that fires when a door is opened . Arrow and spear traps are part of the line-up in the Trick/Trap Table in "Solo Dungeon Adventures", and are part of the standard line-up in the trap tables in the Dungeon Masters Guide , including Appendix A: Random Dungeon Generation Tables and Appendix G: Traps. Tomb of Horrors has a number of door-triggered spear traps. 
+
+ Cage Traps : A "C" on the map indicates a "cage trap" where "spike-ended bars fall from the ceiling above to enclose the exit(s) from the place". There are two of these, each opened differently. In the south, one side must be levered a foot off the floor to cause the bars to raise. In the north, a trapped lever near the cage must be pulled to raise it. 
+
+ OD&D Vol 3 mentions a "return passage blocked by bars", although no other details are given. Appendix G: Traps in the Dungeon Masters Guide includes "Passage, blocked by falling bars". Most famously, t he Moat House dungeon in the Village of Hommlet has a hidden grate that will fall to block the exit when a false door is pulled open; it can be raised by use of a hidden winch. 
+
+ Sloping Passages : Along the NE edge of "Dungeon Delving" is a passage that "slopes up going north 300 feet, so as to bring those traversing it back to the normal level of surrounding dungeon without noticing the incline. Going south the slope is downwards, so as to require the flight of steps up to regain the level of the dungeon proper". This means that if approached from the north, the steps will appear to lead up a level, and if approached from the south, the steps will appear to lead down a level. This is straight out of OD&D Vol 3, which suggests, "Steps which lead to a slanting passage, so the player may actually stay on the same level..." The reverse is also suggested in the Sample Level, where "D" indicates a passage to a lower level with such a gentle slope that "even dwarves won't recognize it". 
+
+ Carved Face : Area 14 also has a "huge leering face chiseled into the stone wall", reminiscent of other Gygaxian carved faces, including the "great bas-relief face" in the Tricks and Traps list of the Greyhawk Supplement, and of course the Face of the Great Green Devil in the Tomb of Horrors. 
+
+ Weird Statues : In Dungeon Delving, the START area also has nine statues, a number that reminds me of the infamous room in CG with nine statues - actually imprisoned demigods, later freed by Robilar. The statues here do not similarly house prisoners, but are important to solving the dungeon level. Th e use of weird statues was suggested in several of the "Trick and Traps: (Additions)" found in the Greyhawk Supplement. 
+
+ Evil Human Lair with Escape Route : Room 17 of "Dungeon Delving" is called the "Jolly Priest" and is home to an evil priest masquerading as good, ala the "jovial priest" in the Keep on the Borderlands . The description includes his plans for escape via a secret door and nearby passages, which is another design element Gygax often included in his dungeons. 
+
+ In the note for Area 8 of the OD&D Sample Level, "The western portion contains the room of some evil man [Room J], complete with two secret doors for handy escape". Likewise, the evil priest in the Caves of Chaos has a secret escape door from his chamber in Area K. And in the evocative yet incomplete DMG Sample Dungeon, the Wandering Monster Table indicates an evil cleric lairs in Areas 35-37, which contain two concealed doors - presumably an escape route. 
+
+ See also: Gygax's Playtest Reports for the "Dungeon Delving" Level from HoMP 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 6:43 AM 
+
+ 6
+comments 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ Castle Greyhawk ,
+ DMG Sample Dungeon ,
+ Geomorphs ,
+ Gygax ,
+ ODnD ,
+ ODnD Sample Level ,
+ Tricks and Traps 
+
+ Saturday, August 4, 2018 
+
+ D&D Revision Plans 1977 
+
+ Here's a very early description by Gygax of the plans for Basic and AD&D that I've never come across before. It' s from Alarums & Excursion #21, April 1977, but is copied from an earlier source. The A&E contributor is Martin Easterbrook of Surrey, UK, who writes that the above is "a short extract I've 'pirated'" from "Walter Luc Haas' gameszine EUROPA". Martin doesn't mention the issue or date of the EUROPA zine, and I haven't been able to locate a copy of the original to confirm. The only issue of EUROPA that is widely available is #6-8 from 1975, which contains the now well-known Gygax article " How To Set Up Your Dungeons & Dragons Campaign ". Edit : See update below. 
+
+ Notes 
+
+ -Gygax indicates that the revision is to include all of the material from the D&D booklets as well as magazine articles, which at that point included the seven issues of the Strategic Review and the first few issues of Dragon. Elsewhere Martin mentions that he has not yet obtained Dragon #5. 
+
+ -"[A] beginner's guide" --- Gygax credited Holmes with this idea, so presumably he was already working on "D&D for Beginners", as he titled the manuscript for what became the Basic rulebook. And we actually know that Holmes had finished his manuscript by February of '77 , which is before this issue of A&E. But as I noted above, we don't know when exactly Gygax's statements appeared in EUROPA. Note also that there is not yet any mention of the specific terms Basic or Advanced. 
+
+ -They were considering putting not only the Basic rulebook and dice in a boxed set, but also all of the revised D&D books: "[t]he entire package will be available boxed, with dice included". The planned size was already that of the eventual Basic Set, 8.5 x 11. This is given an exclamation point because all previous D&D booklets were digest-sized. No mention of hardcovers, so the idea of having all of the rulebooks in one box (as in OD&D) seems reasonable. 
+
+ -No mention of the Monster Manual, presumably at this point it was going to be included in the "large referee's manual". The revised and expanded GD&H eventually became Deities & Demigods. 
+
+ -The reference to "only one combat system" indicates that the Chainmail combat system would no longer be referenced, as is the case with AD&D. 
+
+ -"There will be no additional formal material" --- it's not clear if Gygax means that the books will be limited mainly to a revision & clarification of existing material, without adding new material, or if he means that there will be no additional supplements once these books are published (imagine that). 
+
+ -Overly optimistic timeline. The Basic Set came out in July of 1977, so not too far off from "near spring", and while the Monster Manual came out in very late December, the other books were delayed by years --- PHB - 1978, DMG - 1979, and D&DG - 1980. 
+
+ I've also added a transcription of Gygax's statements to the " Gygax on Holmes " page. 
+
+ Update : Thanks to Allan Grohe (grodog) for tracking down the original publication in Europa issue #15-17, January 1977. The text is same as given in A&E. That places this plan prior to Holmes finishing the Basic manuscript. 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 7:15 AM 
+
+ 4
+comments 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ ADnD ,
+ Europa ,
+ Gygax 
+
+ Friday, March 14, 2014 
+
+ Part 25: "Horrors are Naturals for Dungeons" 
+
+ Part 25 of a comparison of Holmes' manuscript with the published Basic Set 
+rulebook. Turn to page 26 of your 'Blue Book' and follow along... 
+
+ Giants 
+
+ Five types of giants are described in OD&D Vol 2, pg 8: Hill, Stone, Frost, Fire and Cloud. Holmes reproduces the table from this page and adds Storm Giants from Greyhawk, pg 34. 
+
+ The Vol 2 entry begins, "As stated in CHAINMAIL, Giants act as mobile light catapaults with a 20' range", and Holmes goes to this source, using material from page 12-13 of Chainmail to describe the giants' thrown rocks. The published version keeps all of Holmes' text, including the material sourced from Chainmail, and adds a few columns to the table: "Alignment" and "Damage". The info for the "Damage" column comes from the varying dice table on page 17 of Greyhawk. However, in the last column the published version also retains the multiple dice damage from Vol 2 for the larger giants, resulting in two different ranges for damage. For example, Frost Giants are listed as doing "4-24" in the "Damage" column but 2 die + 1 damage per hit (i.e., 3-13 points of damage) in the last column. This inconsistency remained through all printings of the rulebook. 
+
+ For those of you with later printings, I'll note that the first printing of the rulebook also contains two short paragraphs of text following the table that were deleted in the 2nd edition (1978) when the Monster List was reformatted: 
+
+ These sentences are from Holmes' manuscript, and the subect matter is also sourced from the material in Vol 2, with the exception that the original only mentions the gold and not the rocks in the shoulder sacks. In an earlier post (" Blue Book Hydras "), I noted that the Monster Manual doesn't mention hydras in any of the entries for giants. But looking at B/X now, I note Hydras, along with Hell Hounds, are listed as guards for Fire Giants. So this early concept of Hydras as the pets of giants was retained in one later aspect of D&D. 
+
+ Giant Animals and Insects 
+
+ This is an important entry that was included in the manuscript but deleted from the published rulebook. It explains the various "giant vermin" that Holmes mentions throughout the rulebook. In the past, I had wondered why he mentions giants rats, spiders and other undescribed creatures in his examples and the Sample Dungeon that aren't described in the Monster List. But these actually did have a point of reference in this catchall entry that follows the lead of Chainmail, which has entry for "Giant Spiders and Insects" (pg 36) and OD&D, Vol 2, which has entries for "Insects or Small Animals" (which includes wolves, centipedes, snakes and spiders) and "Large Insects or Animals" ("includes giant ants and prehistoric monsters"), that give some general, vague guidance on stats for these creatures. Holmes' choice of words in the last sentence echoes the first sentence in the Chainmail entry, which reads "The possibilities for employing such creatures are almost endless, and the abilities and weakness of each should be decided upon prior to the game they are to be used in". 
+
+ The dungeon encounter tables in Vol 3 of OD&D include some "Giant" creatures in the tables, such as "Giant Rats", "Giant Ants" and "Giant Snakes" but also just "Centipedes" and "Spiders". Greyhawk, page 18, includes some varying dice damage for these creatures, but no other stats. Most of these monsters didn't receive a full write-up until the Monster Manual, which was published after Holmes Basic. So Holmes synthesized what had come previously as this "Giant Animals and Insects" entry. He interprets a Giant Animal's hit dice as equal to its dungeon level, such as 1 HD giant rats on level 1, 2 HD giant rats on level 2, etc. It's a simple way to scale vermin by dungeon level. Earlier in the manuscript ( Part 18 ), we saw an example of Holmes using such creatures in the Second Combat Example, where he has the party attacked by "six giant spiders with 1 hit die each", "armor class 3" and a bite that does the standard d6 of damage plus poison. 
+
+ This comes from a simpler era when giant animals weren't so codified, and DMs were expected to be able to easily come up with stats for these creatures themselves. As much as I like the original Monster Manual, I do like this simplicity - do we really need separate entries for every type giant animal? It also allows for more variety in the size of each type of giant animal. 
+
+ In the published rulebook they simply deleted this entry without any corresponding replacement. This left the rulebook littered with mentions of giant vermin without any reference point in the Monster List. In particular, this created problems with the Wandering Monster Tables, as I've mentioned previously (for example see the post, " Basic Level Monster Tables 1974-1978 "), although some stats for these creatures were present in the random tables in the Monster & Treasure Assortment also included in the boxed set along with the 1st edition rulebook. TSR may have thought these stats were sufficient. 
+
+ Giant Ant, Giant Centipede, Giant Rats 
+
+ These three entries were adding to the 2nd edition of the rulebook in 1978, after the Monster Manual was published, and are apparently adapted from the entries there. Naturally, they are not present in the manuscript. 
+
+ Giant Tick 
+
+ This is the only "giant" animal that Holmes gives its own entry in the manuscript, and this reflects that it was also the first "giant" animal (along with Giant Slugs) to get its own full standard entry in OD&D, specifically in the Greyhawk supplement (although some aquatic "giant" creatures had their own descriptions in a special section for Naval Advenures in OD&D Vol 2). Holmes' description of the ticks follows the Greyhawk description closely, including a mention of the spell Cure Disease which is not described in the Basic rulebook. The published rulebook follows the manuscript, with no changes to the description and only adding a single attack for d4 damage to the stats. 
+
+ Gnoll 
+
+ This is another entry not included by Holmes in the manuscript, and thus not found in the published rulebook but was later added to the 2nd edition. This one differs from the others in that Gnolls were fully described back in OD&D Vol 2, are humanoids rather than vermin, and are even an entry on the 2nd level of the Wandering Monster table that Holmes included in the manuscript (see Part 7 ). Holmes may have overlooked these humanoids when compiling his Monster List, but possibly in left them out in favor of the many other types of humanoids. 
+
+ Update : Andy C on G+ asked about the Tom Wham "Gnoll" illustration in the first edition rulebook. Yes, it's there near the 'G' monsters (on the top of page 26), even without an entry for Gnoll. It's not clear if Wham originally intended for the creatures were to be gnolls, although the look remarkably similar to Sutherland's gnoll in the Monster Manual (which was published after the rulebook, but possibly drawn earlier). 
+
+ Gnolls are also mentioned in the Holmes manuscript in two other places: 
+the languages that elves speak, and the humanoids subject to Charm 
+Person.﻿ 
+
+ Continue on to 
+
+ Or Go Back to Start: The Holmes Manuscript 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 6:11 AM 
+
+ 8
+comments 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ Chainmail ,
+ Holmes Manuscript ,
+ Monster List ,
+ ODnD ,
+ Printings 
+
+ Friday, August 20, 2021 
+
+ The Holmes Basic Set Cover Art: Exhibited! 
+
+ "The Sutherland Dragon" on display, photo by myself 
+
+ About two weeks ago, while on vacation, I saw a cryptic post on FB implying that the original Holmes Basic Set cover art — which I often refer to as "The Sutherland Dragon", after the artist — was on display in public ... somewhere. After a bit of searching, I confirmed that it was indeed being exhibited, as part of the show Enchanted: A History of Fantasy Illustration at the Norman Rockwell Museum in the town of Stockbridge in western Massachusetts. I hadn't heard of the show until that moment, but at the time I just happened to be within reasonable driving distance of the museum, and would not be as close again for some time, so a quick decision was made to take a previously unplanned side trip to the museum! 
+
+ A Painting Rediscovered 
+
+ Not all original D&D art still exists, but I've known for a while that Sutherland's painting does, because back in 2013 Steve Winter reported on Twitter that it had been found, like the Lost Ark of the Covenant, "in a crate in WotC's warehouse". Steve provided a photo, observing that the "detail is amazing", which showed that the art had slipped inside its framing while in storage: 
+
+ (As an aside, I joined Twitter for the first time just so I could comment on Steve's tweet, which eventually led to regular usage, and I recently passed 700 followers ). 
+
+ At the time, Steve also wrote on his blog Howling Tower about the find , which he coincidentally posted on Holmes' date of birth. 
+
+ I also have a vague recollection of hearing later that it was now hanging up at the WOTC offices. I've played in several games with Steve at NTRPG Con and Gary Con over the years since ( Gamma World, for example ), so I may have asked him about it at one point. 
+
+ Update : I was reminded on Twitter that on page 394 of Art & Arcana (2018), there is a small inset showing a WOTC employee holding the Sutherland Dragon with the caption: "Wizards employee Curt Gould poses in front of the beast with a red dragon of his own — the original Dave Sutherland basic box painting that he discovered in a Wizards of the Coast warehouse in 2013". The painting is in the same frame as the current exhibit. This may have been the source of my vague recollection mentioned in the paragraph above. 
+
+ The Exhibit Curator on Sutherland's Illustration 
+
+ The Enchanted exhibit opened in mid-June, after which the museum held a virtual symposium, which included a keynote talk ( archived here on Google ) by the exhibition curator, Jesse Kowalski, who at one point shows Sutherland's art (at ~41:00) and says that "it is probably the painting I was most thrilled to have in the exhibit", and that "I believe it is the first time on view to the public. It's on loan from Wizards of the Coast", and while "...it's not the best painting, however, it's such an iconic work t hat started a whole generation of kids in the basement rolling dice". 
+ Visiting the Museum 
+ After driving several hours we arrived in Stockbridge , where Rockwell had lived, and then at the museum, which is in a beautiful leafy setting with picnic tables and sculptures, which currently includes a complimentary exhibit of contemporary fantasy sculpture, titled Land of Enchantment: A Fantastical Outdoor Sculpture Exhibition . In addition to the museum proper, which counts George Lucas and Steven Spielberg as donors, Rockwell's actual studio is also on the grounds, having been moved there from another location in town. 
+ Update : Thanks to a user on reddit , I've learned that Stockbridge is also famous as the setting of Arlo Guthrie's song Alice's Restaurant . 
+ Seeing The Sutherland Dragon 
+ After paying our entry fee and applying my sticker, I zipped through the rooms of the exhibit until I found what I was there for, which was hung next to another classic from the same era, David Trampier's Pseudo-dragon from the AD&D Monster Manual: 
+
+It was stunning to finally see the Sutherland Dragon in the person. The colors in the original are *much* brighter than the published image on the box cover, and many details are more apparent, such as the colorful, glinting gems stuck in the crevices between the dragon's belly scales, like Smaug in the Hobbit. I'll make a follow-up post with a few closer photos of details of the painting, so here I'll just talk about some overall impressions of the painting as it is on display in the exhibition. 
+
+ The painting, which the wall text indicates is "acrylic on board", has been re-framed since 2013, and now includes triple matting (see the picture at the top of this blog). I imagine this was done by Wizards of the Coast, who the wall text indicates are still the owners. The catalog for the exhibit (see below for more on this) lists the size as 24 5/8" x 22", which I believe refers to the entire framing, or perhaps just the painted board inside. The new matting is more aggressive than in the earlier frame, limiting the visible portion of the painting to about 10" by 12", which is just a bit larger than the original box cover, which is about 9" by 11". I can guess why this was done, as it has the effect of focusing the presentation on the action of the scene: the wizard and warrior confronting the looming red dragon. And it also emphasizes that Sutherland was painting something just a bit larger in scale than what was needed for the product as published. 
+
+ Unfortunately, WOTC's new matting covers up some significant details from Sutherland's original painting. Like other TSR boxed games from this era, the cover art was printed not just on the top of the box lid, but also wraps around to the sides. In the case of the Holmes Basic Set, the left, top and right sides each show the blocks of dungeon walls, which were all part of Sutherland's painting. Since this is an exhibition focusing on illustration, I would have preferred to see the entire painting, along with discussion of how Sutherland arranged a composition that was intended for a wrap-around box top. 
+
+ The matting also shifts the "visible portion" of the painting downward from the published box cover, which covers up most of a significant detail that is visible at the top of the published box cover: the archway that connects the top of the columns and frames the dragon. As a positive, this shift keeps uncovered most of what was shown on the bottom box edge, allowing for an fuller unobstructed view of the two adventurers, which I enjoyed seeing. 
+ 
+ For a visualization of what the entire painting might look like if the current matting was removed, here is a mock-up of the original art posted on the Xeveninti blog back in 2010 . It was made by scanning the entirety of the original box (cover and all four sides), editing these together, and editing out the graphics: 
+
+ I hope I don't sound too negative here; this was simply an observation I made while viewing the painting and thinking about it. My overall experience at the museum was terrific, I was thrilled to see the painting in person, and it is wonderful that it has been preserved ("it belongs in a museum!") and has been made available for public showing by WOTC.
+ 
+ Exhibition Catalog 
+ I bought a copy of this at the gift shop, and you can purchase it online here . It's nicely done, edited by the curator of the exhibit, and lavishly filled with color images from the exhibit, plus other images not in the exhibit. There's an 11-page section called "Gaming", which includes a ~1/3-page image of the Sutherland painting — I, of course, wish they made this one full page like some of the other illustrations in the book — and a really nice large scan of Trampier's Pseudo-dragon, as well as other gaming art, including an Elmore and an Easley that were also in the show. 
+ Thy Deadline 
+ If you want to see the exhibit in person in Stockbridge, get there by October 31st of this year! 
+ Update : Mike S. on FB found info here on where the show will later move to: 
+ 
+ May 20 to September 5, 2022: Hunter Museum of American Art in Chattanooga, TN 
+ September 23, 2022 to January 8, 2023: Flint Institute of Art in Flint, MI 
+ 
+ Future Posts 
+ I plan to make a few follow-up posts with some closer shots of the Sutherland Dragon, and also a few of the other artworks in the exhibition, including Trampier's Pseudo-Dragon. I'll update this section with the links once they are up. 
+ See also: 
+ Smaug versus the Sutherland Dragon 
+ David Sutherland Day 
+ Sutherland Dragon in Lego 
+ Dragon+ 5 Wallpaper inspired by Sutherland Dragon 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 7:07 AM 
+
+ 4
+comments 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ Artists ,
+ Legacy ,
+ Sutherland ,
+ Sutherland Dragon ,
+ Trampier 
+
+ Tuesday, November 5, 2013 
+
+ OD&D Reprint Previews 
+
+ The contents. Source: Steve Winter on Facebook 
+
+ The boxed set reprinting the original D&D set and the first four supplements is set to be released just before Christmas this year, pushed back from November. The cover art of each booklet has been updated in a 'modern' style, but the interior text and art is supposed to be mostly unchanged from the originals, similar to the AD&D hardback reprints. 
+
+ Steve Winter of The Howling Tower blog and a former TSR employee, received his copy on his last day of his current contract work for Wizards, and posted pictures of it on FB. The set comes in a wooden box featuring an anachronistic '80s D&D ampersand on the cover: 
+
+ The box cover. Source: Steve Winter on Facebook 
+
+ The interior of the lid features new artwork of a wizard casting, which as pointed out by Falconer on OD&D Discussion is meant to be an updated version of the 'white box' cover (4th+ printing of OD&D): 
+
+ Inside the Box. Source: Steve Winter on Facebook 
+
+ Original 'White Box' cover. Source: The Acaeum 
+
+ And over on the Wizards website, Bart Carroll has been running a series, "OD&D Excerpts", previewing the new booklets and showing comparisons of the covers with the originals. The original Volumes I-III and Supplements I-IV have been renumbered as Books I-VII: 
+
+ Book I: Men & Magic 
+
+ Book II: Monsters & Treasure 
+
+ Book III: The Underworld & Wilderness Adventures 
+
+ Book IV: Greyhawk 
+
+ Book V: Blackmoor 
+
+ Book VI: Eldritch Wizardry 
+
+ Book VII: Gods, Demigods & Heroes 
+
+ The set also includes a reprint of the Reference Sheets from the original box and two sets of dice, but does not include Chainmail, the miniatures rules that D&D grew out of, or Swords & Spells, the D&D miniatures rules that are often considered Supplement V. 
+
+ From these 
+previews, we can see they are correcting some minor typos, such as 
+changing "Forward" in the original Men & Magic to "Foreword". 
+
+ I can't say I am a fan of the updated artwork, but it is nice to see OD&D back in print and in the public eye. 
+
+ For more discussion visit the OD&D Discussion thread, WOTC reprinting OD&D . 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 7:05 AM 
+
+ 4
+comments 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ ODnD 
+
+ Monday, December 12, 2011 
+
+ Discover all the Fantastic Possibilities of D&D (updated) 
+
+ The Collector's Trove is running another set of auctions of items owned by Gary Gygax . The current auctions include a number of TSR promotional posters, intended for display by retailers, including this one for the Holmes Basic Set (16" x 23"). I didn't have a picture of this in my records, so if I've seen it before it was years ago and I'd forgotten about it. The auctions note that all of the posters are double hole punched (once at the top, once 3/4 of the way down), presumably for ease of hanging. 
+
+ An awesome feature of the Basic Set poster is that is shows more of David Sutherland's cover art unobscured. The edges are slightly cropped compared to what can be seen on the sides of the Basic Set, so it's not the full painting, but we see more of the cover without text or bending over the sides. Unfortunately the auction photo is low resolution (the above picture is the full-size of the auction photo). Last year, the Xeveninti blog created an excellent mock-up of Sutherland's original art by scanning the box at high resolution and filling in missing parts. But I'd love to get a larger photo/scan of this poster for the Zenopus Archives site (hint to the winner of the auction or anyone else who might have one of these posters). 
+
+ The auction states the poster is from 1977, and that is the latest copyright date shown, but I think the poster was produced later than that because it has the TSR Wizard Logo, which was started being used in mid-1978. The third printing of the Blue Book from May 1978 still has the Lizard Logo, and first with the Wizard Logo is the 2nd edition, Nov 1978. Also, some of the posters of the same size are for games that came out later, like Top Secret (dated 1980). It's possible they were all produced at different times from 1978-1980 or all at once as late as 1980. 
+
+ There are fourteen other fantastic posters from the same time period being auctioned, including ones for the AD&D hardcovers and contemporary TSR boxed games, such as Gamma World: 
+
+ The auctions all end in about a day and half (on Sunday the 11th). The Basic Set poster is currently up to $117.50, far beyond what I would pay, but these auctions have a history of going very high due the celebrity factor. 
+
+ Badmike posted some wise words about these auctions on the Acaeum last Wed: 
+
+ "I don't want to put the kibosh on the auction, but I would be willing to bet other posters of this will be offered at some time. Note the wording Paul has on the auction, the fact he doesn't tout this as the only one in the collection, and the fact Paul has already offered multiple copies of several items. Still, I bet it would look nice framed on the wall....but there could be more copies to come. 
+
+ If I may also say a few words, if you are buying these you should be buying them for the unique collectibility, not for the possibility of making a mint on resale. So far, items I have seen reselling from Paul's auctions have gone for a fraction of the original price. Being auctioned under the Collector's Trove banner seems to attract larger bids than such items would normally get, especially for more common items. But it doesn't seem to affect what the item will sell for later. " 
+
+ Update: The auctions are over and this poster sold fo r 1,527.97....! 
+
+ I believe the winner was ScketreWhisp® on the Acaeum. See here . He runs the NTRPGCon and says this poster and others he won (for ~$7700 total) will be framed and on display at the next con. So they are going somewhere useful. 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 12:30 AM 
+
+ 4
+comments 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ Advertisements 
+
+ Tuesday, June 26, 2012 
+
+ UK "Deep Dish" Holmes Basic Set 
+
+ "Move over bacon, now there's something meatier"
+
+ Acaeum member Gnat the Beggar posted the above picture today in the Recent Fun Finds thread. It nicely shows off the height difference between the US (left) and UK (right) versions of Holmes Basic Set (produced by Games Workshop). As you can see, the UK version is much taller (more room to store modules!) and is missing the overlapped artwork on the box edges. Gnat also posted a photo of the contents of box: 
+
+ In addition to the rulebook, the module B1 and a set of standard Holmes dice, there are two loose sheets: (1) an advertisement for White Dwarf magazine (which began its run in mid-77, just before the Holmes Set was published in the US), and (2) a sheet replicating pages 31 and 32 of the module (player's background material), something which has been found before with UK copies of B1 . 
+
+ The printing history of Holmes Basic in the UK is convoluted. The first two known printings of the rulebook were sold alone (without a box) and had different artwork on the cover by John Blanche of Games Workshop fame, and throughout the interior by Fangorn ( Christopher Baker ). I believe the text of these are the same as one of the earlier US printings (1st-3rd printings). 
+
+ After this, the UK version appeared as a boxed set with a rulebook that restored the original cover and interior art (as pictured above). The interior of this rulebook appears to match the 2nd edition (Nov 1978) of the US version. Strangely, however, this UK version retains the Lizard Logo and F116-R code on the front cover instead of using the new Wizard Logo and 2001 code. 
+
+ The various printings are described on the Acaeum Basic Set Foreign Editions page, which has at least one error (the 3rd UK printing refers to Halflings, not Hobbits) and is missing a putative 5th printing with prices missing on the back cover . 
+
+ See also the Zenopus Archives website Foreign Editions page. 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 7:32 PM 
+
+ 4
+comments 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ Artists ,
+ Fangorn ,
+ Foreign Editions ,
+ John Blanche 
+
+ Saturday, May 19, 2012 
+
+ Heroic Fantasy! Basic Set Ad 
+
+ HEROIC FANTASY! 
+
+ This Holmes Basic Set advertisement is new to me. I found it thanks to the blog 5 Stone Games posting a link to a tumblr called Old School FRP , where this ad is on the second page. The OSF tumblr blogger started D&D with Holmes - see their very first post, which shows the Holmes set cover.
+
+ The advertisement above is a variation of a few others that I've seen before. Below is one that has the same photo (2nd edition Holmes set with 5 dice and the then new B1 module, also found on the bottom of the boxed set itself), and same paragraph of text. I need a better pic/scan if anyone comes across one. 
+
+ NOT JUST A GAME 
+
+ Here's a similar ad from Model Retailer, a trade magazine. Same photo & also touts the new module now found in the set (the 1st edition had Geomorphs and a Monster & Treasure Assortment): 
+
+ THE BEST IS BETTER! 
+
+ To see more Holmes Basic Set advertisements, see this thread on OD&D Discussion . I plan to eventually organize these better on the actual Zenopus Archives site. Most of the ads that I have are posted in that thread, so if you know of one that is not there, please let me know. 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 6:39 AM 
+
+ 4
+comments 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ Advertisements ,
+ Printings 
+
+ Tuesday, January 23, 2024 
+
+ Sutherland Dragon mini from Wizkids 
+
+ As part of the 50th anniversary of the publication of D&D occurring this month*, WizKids has announced a Red Dragon mini based on David Sutherland's cover for the Holmes Basic Set, which is available for pre-order now and will be released later this year. 
+ Pre-order it from Amazon here: 
+ WizKids Classic Red Dragon 
+ The full text from the product page reads: 
+ 
+ "A fiery peril to adventurers of editions, new and old, the red dragon has remained a mainstay of fantasy villainy. Celebrate this classic D&D threat with our new D&D Icons of the Realms: 50th Anniversary - Classic Red Dragon Boxed Miniature (Set 31)! 
+ This set includes the red dragon as depicted on the cover of the 1977 Dungeons & Dragons Basic Set . The beast among monsters. The tyrant among kings. The dragon among dragons." 
+ 
+ Thanks to Josh and Leroyd20 on Twitter for a heads up on this release. 
+ *Specifically, this upcoming weekend per the Playing at the World blog. 
+ Update: 
+ The Amazon pre-order page indicates that this will be shipping in early August of this year. 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 8:22 AM 
+
+ 3
+comments 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ 50th Anniversary ,
+ Legacy ,
+ Sutherland Dragon 
+
+ Next Posts 
+ 
+ Home 
+
+Subscribe to:
+ Posts (Atom) 
+
+ Holmesian Random Name
+
+ Click here for a name 
+
+ Find it here at DMs Guild 
+Ad by the 1000 Foot General 
+
+ DRIVETHRU RPG 
+
+ Basic/OD&D in PDF 
+
+ Basic/OD&D in Print 
+
+ AD&D 1E in PDF 
+
+ AD&D 1E in Print 
+
+ Gamma World 1E 
+
+ OSR Products 
+
+ Links may contain affiliate #s
+
+ THE MAKING OF OD&D
+
+ Reprints ODnD! Find it here 
+
+ PLAYING AT THE WORLD 2E
+
+ Revised edition! Find it here 
+
+ MAHARS OF PELLUCIDAR
+
+ Hardcover reissue of the 1976 classic. Find it here 
+
+ RED AXE OF PELLUCIDAR
+
+ First official release of the sequel! Find it here 
+
+ As an Amazon Associate I earn from qualifying purchases.
+
+ CHARACTER RECORD
+
+ THIS BLOG is devoted to the original D&D Basic set (aka Holmes Basic) & the writings of its editor, J. Eric Holmes
+
+ BUY The Ruined Tower of Zenopus , a 5E conversion, for $1.99 at DMs Guild
+
+ FIND ME 
+ on social media 
+
+ READ my publications or an interview with me 
+
+ LISTEN to podcasts I'm on 
+
+ HOLMES REF : reference sheets for referees 
+ 
+ View my complete profile 
+
+ BLOG SERIES
+
+ Forgotten Smugglers' Cave 
+
+ Tales of Peril Book Club 
+
+ The Holmes Manuscript 
+
+ Greyhawk & Great Kingdom 
+
+ New Monsters for Holmes 
+
+ Warlock D&D (1975) 
+
+ Tolkien 
+
+ BOOK OF SPELLS (RECENT POSTS)
+
+ ▼ 
+
+2026
+ 
+ (4) 
+
+ ▼ 
+
+April
+ 
+ (1) 
+ 
+ Moldvay Basic finally available in Print on Demand 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+2025
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ► 
+
+2024
+ 
+ (36) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (3) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (5) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (2) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2023
+ 
+ (44) 
+
+ ► 
+
+December
+ 
+ (1) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (4) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (10) 
+
+ ► 
+
+2022
+ 
+ (29) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2021
+ 
+ (23) 
+
+ ► 
+
+November
+ 
+ (3) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+May
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2020
+ 
+ (68) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (7) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (4) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (7) 
+
+ ► 
+
+March
+ 
+ (8) 
+
+ ► 
+
+February
+ 
+ (10) 
+
+ ► 
+
+January
+ 
+ (5) 
+
+ ► 
+
+2019
+ 
+ (37) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (3) 
+
+ ► 
+
+April
+ 
+ (11) 
+
+ ► 
+
+March
+ 
+ (3) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ► 
+
+2018
+ 
+ (31) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (3) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2017
+ 
+ (51) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (5) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (5) 
+
+ ► 
+
+March
+ 
+ (3) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (4) 
+
+ ► 
+
+2016
+ 
+ (36) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (6) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (10) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ► 
+
+2015
+ 
+ (39) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (6) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (2) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (5) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2014
+ 
+ (55) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (5) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2013
+ 
+ (89) 
+
+ ► 
+
+December
+ 
+ (8) 
+
+ ► 
+
+November
+ 
+ (10) 
+
+ ► 
+
+October
+ 
+ (9) 
+
+ ► 
+
+September
+ 
+ (10) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (6) 
+
+ ► 
+
+May
+ 
+ (11) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (6) 
+
+ ► 
+
+February
+ 
+ (8) 
+
+ ► 
+
+January
+ 
+ (9) 
+
+ ► 
+
+2012
+ 
+ (130) 
+
+ ► 
+
+December
+ 
+ (8) 
+
+ ► 
+
+November
+ 
+ (9) 
+
+ ► 
+
+October
+ 
+ (10) 
+
+ ► 
+
+September
+ 
+ (14) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (11) 
+
+ ► 
+
+May
+ 
+ (13) 
+
+ ► 
+
+April
+ 
+ (13) 
+
+ ► 
+
+March
+ 
+ (17) 
+
+ ► 
+
+February
+ 
+ (11) 
+
+ ► 
+
+January
+ 
+ (18) 
+
+ ► 
+
+2011
+ 
+ (65) 
+
+ ► 
+
+December
+ 
+ (11) 
+
+ ► 
+
+November
+ 
+ (13) 
+
+ ► 
+
+October
+ 
+ (16) 
+
+ ► 
+
+September
+ 
+ (25) 
+
+ ANCIENT SCROLLS (POPULAR POSTS)
+
+ The Holmes Manuscript Series: Index of Posts 
+
+ Ruined Tower of Zenopus Goes Mithral! 
+
+ WARLOCK or how to play D&D without playing D&D? 
+
+ The Holmes Basic Set Cover Art: Exhibited! 
+
+ d20 Unexpectedly Intelligent Monsters in the Monster Manual (1977) 
+
+ Gygax's "City on the Edge" Greyhawk Adventure 
+
+ Lee Gold: 45 Years of Alarums & Excursions! 
+
+ Jim Ward on the Why of Chits 
+
+ 20 Backgrounds for OD&D 
+
+ RANDOM ANCIENT SCROLLS
+
+ Click for d12 Random Posts 
+
+ FORUMS & GROUPS
+
+ OD&D Discussion 
+
+ Dragonsfoot 
+
+ K & K Alehouse 
+
+ r/HolmesBasicDnD 
+
+ FB Holmes Basic 
+
+ The Piazza 
+
+ MeWe Holmes Basic 
+
+ Acaeum 
+
+ RPG Pub 
+
+ Other Forums 
+
+ Holmes Basic G+ Community Archives 
+
+ HELM OF TELEPATHY (RPG BLOGS I FOLLOW)
+
+Reviews from R'lyeh 
+
+[Free RPG Day 2026] Terror in Tortuga
+
+1 day ago
+
+What a Horrible Night... 
+
+Selling Physical Books
+
+1 day ago
+
+Mythopoeic Rambling 
+
+Frightful Fridays! Psychokinetic Elemental
+
+1 day ago
+
+Dyson's Dodecahedron 
+
+Halder’s Delve
+
+2 days ago
+
+Tower of the Archmage 
+
+August ‘26 In Review
+
+2 days ago
+
+Save Vs. Dragon 
+
+Outline for the BX DMG
+
+2 days ago
+
+Sorcerer's Skull 
+
+Some Links on Naming
+
+2 days ago
+
+Fabled Lands 
+
+On the road
+
+2 days ago
+
+The Rolemaster Blog 
+
+Rolemaster: Gaps in the Rules?
+
+3 days ago
+
+Bat in the Attic 
+
+Development of the Majestic Fantasy RPG, Part 3
+
+3 days ago
+
+Greyhawkery 
+
+Greyhawkery Comics: Cultists #51
+
+3 days ago
+
+The Other Side 
+
+Witchcraft Wednesday: The Three Laws of Witchcraft
+
+4 days ago
+
+tenfootpole.org 
+
+Stronghold of the Mad Dwarf
+
+4 days ago
+
+Tao of D&D 
+
+Anticipation
+
+4 days ago
+
+Hobby Games Recce 
+
+What Do Games Tell Our Adversaries?
+
+4 days ago
+
+Sly Flourish 
+
+Lazy Improvised Monsters for Daggerheart
+
+6 days ago
+
+B/X BLACKRAZOR 
+
+Back Into The Woods
+
+6 days ago
+
+Leicester's Ramble 
+
+They Met in a Tavern 34: Drom Misses Out on a Ziggurat
+
+1 week ago
+
+The Gloomy Forest 
+
+Bergummo's Tower Is a Silver Best Seller!
+
+1 week ago
+
+Dungeoneering 
+
+Warriors of the Lost Planet - Tékumel Homage
+
+1 week ago
+
+GROGNARDIA 
+
+Reconsiderations: H.P. Lovecraft
+
+2 weeks ago
+
+Applied Phantasticality 
+
+Hit or Miss: Missed
+
+2 weeks ago
+
+Doomslakers! 
+
+Legendary Lives
+
+3 weeks ago
+
+Havard's Blackmoor 
+
+Mystara Could Return Says WotC's Bilsland
+
+3 weeks ago
+
+Akratic Wizardry 
+
+Pete Fenlon on the Rise and Fall of Iron Crown Enterprises
+
+3 weeks ago
+
+Save vs. Total Party Kill 
+
+Some Thoughts on My Awards
+
+3 weeks ago
+
+Wayne's Books 
+
+Lantillian GX1 short hauler “The Long Shot”: A Ship for your Star Wars RPG 
+players
+
+3 weeks ago
+
+DM David 
+
+Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s 
+for You
+
+3 weeks ago
+
+Methods & Madness 
+
+Single saving throws
+
+3 weeks ago
+
+Cave of the Dice... 
+
+Bandits of Fort Emridy: Turning classic modules into outlaw PC settings
+
+3 weeks ago
+
+The Realm of Zhu 
+
+Zone Trooper: The Solo Future War Roleplaying Board Game
+
+4 weeks ago
+
+Yore 
+
+Doing a comprehensive survey of Appendix N
+
+1 month ago
+
+Richard's Dystopian... 
+
+How I read “theory”
+
+2 months ago
+
+Northport 
+
+Two Great Losses
+
+2 months ago
+
+The Hapless Henchman 
+
+The Backrooms: Terrifying Dungeon Crawl
+
+3 months ago
+
+DIY & dragons 
+
+My 2025 in Review
+
+3 months ago
+
+Echoes from the... 
+
+Let’s Talk About Treasure Types (A)
+
+3 months ago
+
+Tom Van Winkle's... 
+
+Maze Rats conversion for Skerples' Monster Overhaul
+
+3 months ago
+
+The Lizard Man Diaries 
+
+Adventure Game on Cardboard
+
+4 months ago
+
+Blog of Holding 
+
+Draw Steel Monsters on a Credit Card
+
+4 months ago
+
+From Kuroth's Quill 
+
+Castle Greyhawk Four New Dungeon Level Maps Revealed
+
+4 months ago
+
+OSR Grimoire 
+
+Gary Con XVIII
+
+5 months ago
+
+Swords & Dorkery 
+
+Wheel…of…fortunes!
+
+5 months ago
+
+DONJON LANDS 
+
+New Adventure: DONJON LANDS is Moving
+
+6 months ago
+
+Alex Schroeder 
+
+2026-02-26 Clone a virtual machine from inside it
+
+6 months ago
+
+The Cryptic Archivist 
+
+Spatial Paradigms of early CRPGs and Adventure Games
+
+6 months ago
+
+Hidden in Shadows 
+
+Mapping the pre D&D Dungeon Adventure From May 25 1972, Part 1
+
+6 months ago
+
+Nine and Thirty Kingdoms 
+
+Downtime
+
+8 months ago
+
+Fen Orc 
+
+Lovely Hedgerow Review
+
+9 months ago
+
+The Collector's Trove 
+
+The Collector's Trove Presents: Our Latest Auction!
+
+9 months ago
+
+Playing at the World 
+
+Playing at the World 2E V2 Arrives
+
+1 year ago
+
+Pulsipher Game Design 
+
+A "special" review of my book "Game Design," with a twist (the book is NOT 
+the point)
+
+1 year ago
+
+oldschool 
+
+D&D Demon Names
+
+1 year ago
+
+Delta's D&D Hotspot 
+
+Why Did Natural 20's Become Automatic Hits?
+
+1 year ago
+
+Delta's D&D Hotspot 
+
+Why Did Natural 20's Become Automatic Hits?
+
+1 year ago
+
+Explore: Beneath... 
+
+Original Scenarios Resurrected XI: The Tower of Mrannor (1980, Andrew 
+Ravenscroft)
+
+1 year ago
+
+Circle of Dar Janix 
+
+Traveller : Session 53
+
+1 year ago
+
+An Abominable Fancy 
+
+Knave 2e Alternate Attributes
+
+2 years ago
+
+ChicagoWiz 
+
+Last move - to self-hosting!
+
+2 years ago
+
+Appendix N... 
+
+Creature Companion: Shadowdark Edition!
+
+2 years ago
+
+D&D Chronologically 
+
+The Dragon #28, Vol 4.2
+
+2 years ago
+
+Land of Nod 
+
+Angels, Demons and Subtle Bodies
+
+3 years ago
+
+Scottenkainenland 
+
+Company of the White Oak Campaign - Sessions 63-64
+
+3 years ago
+
+The Song of the Susurrus 
+
+Save Against Death
+
+3 years ago
+
+Wampus Country 
+
+Legends of Law: Von Hoff
+
+3 years ago
+
+Dreamscape Design 
+
+The State of Play
+
+3 years ago
+
+Against The Wicked... 
+
+Notes on a semi-successful skill system
+
+4 years ago
+
+Dungeons of Klang 
+
+Dungeon Meshi for Dungeons and Dragons: Ape to Bear
+
+4 years ago
+
+Necropraxis 
+
+The Worm Ouroboros
+
+4 years ago
+
+Darlene the Artist 
+
+Sacred Art for the New Year
+
+6 years ago
+
+Oubliette Magazine 
+
+Squarehex 2019 Review and 2020 Plans
+
+6 years ago
+
+Geekerati 
+
+[From the Archives] Episode 24: An Interview with Jeff Mariotte and a 
+Discussion of Vampires and Other Things that Prefer the Night
+
+6 years ago
+
+Unvisible Citadel 
+
+Saving Throw fundraiser fanzine for James D. Kramer
+
+6 years ago
+
+The Warlock's Home Brew 
+
+The Warlock's Tower
+
+8 years ago
+
+Semper Initiativus Unum 
+
+Happy Gygax Day!
+
+9 years ago
+
+Parzival's Place 
+
+Show 10
+
+Show All
+
+ MINIATURES GAMING
+
+Small Scale World 
+
+F is for Fattypuff, T is for Thinifer
+
+2 days ago
+
+The Sharp End of... 
+
+Midgard: Early Impressions
+
+4 days ago
+
+Battle Game of the Month 
+
+Meet Me At The Crossroads
+
+4 days ago
+
+Here's No Great Matter 
+
+Trebia - the fight
+
+1 week ago
+
+Dear Tony Blair 
+
+Superior Models Starfleets
+
+1 week ago
+
+Realm of Chaos 80s 
+
+A Second Summer of Citadel: Rogue Trader Orc and Space Skaven Conversion, 
+Heroes of the Enemy Within and an Unreleased Fighter and Druid
+
+1 week ago
+
+Plastic Soldier Review 
+
+Linear-A Alexander with Staff reviewed
+
+3 weeks ago
+
+Graeme Davis 
+
+July’s Monster of the Month: The Bonnacon
+
+1 month ago
+
+Fantasy Toy Soldiers 
+
+MAGI: Non Western Wizards/Shaman
+
+2 months ago
+
+Geordie's Big Battles 
+
+Hinton on AI
+
+2 months ago
+
+SquadPainter 
+
+Unlocking Pro Acryl Paint Secrets
+
+6 months ago
+
+Scrum in Miniature 
+
+Scrum Con V
+
+6 months ago
+
+Super Galactic... 
+
+Presenting ... Bob Moss
+
+6 months ago
+
+Third Point of... 
+
+Hobgoblin First Play
+
+1 year ago
+
+Vintage Wargaming 
+
+Warplan 5/5 Campaign System
+
+6 years ago
+
+1000 Foot General 
+
+Sci-Fi Hangar by Impudent Mortal
+
+6 years ago
+
+Show 5
+
+Show All
+
+ FICTION & TOLKIENANA
+
+Wormwoodiana 
+
+Insidious Mechanisms: A New Anthology from Egaeus Press
+
+1 day ago
+
+Black Gate 
+
+Spoiler Free Review: Coyote vs. Acme
+
+1 day ago
+
+m john harrison 
+
+a couple of reactions to TEoE at Insta
+
+6 days ago
+
+A Shiver in the... 
+
+When the Poet Sings, by Lord Dunsany
+
+2 weeks ago
+
+Sacnoth's Scriptorium 
+
+The Cat Room
+
+5 weeks ago
+
+Tolkien & Fantasy 
+
+Icons of the Fantastic: Behind the Scenes
+
+5 weeks ago
+
+JOHN GARTH 
+
+Tolkien, the critics, and why I’m starting an Oxford doctoral project on 
+The Lord of the Rings and war
+
+2 months ago
+
+Too Many Books... 
+
+Book Notes, January–June 2024
+
+6 months ago
+
+On An Underwood... 
+
+Farnsworth Wright’s Favorite Weird Tales by Bobby Derie
+
+6 years ago
+
+Show 5
+
+Show All
+
+ TEXT ADVENTURES
+
+Renga in Blue 
+
+Twin Kingdom Valley (1983)
+
+6 days ago
+
+Lloyd of Gamebooks 
+
+Voting has now closed for the 2026 Lindenbaum competition
+
+1 week ago
+
+The Stack 
+
+0PLAYER
+
+1 year ago
+
+Emily Short 
+
+Dialogue Expressiveness in Mask of the Rose
+
+2 years ago
+
+ MISC
+
+Love in the Time of Chasmosaurs 
+
+Vintage Dinosaur Art: Lone Star Dinosaurs – Part 1
+
+23 hours ago
+
+Happy & d20 
+
+PCT: Hikertown redux
+
+1 day ago
+
+Plaid Stallions 
+
+5 Awesome Things on eBay this week
+
+2 days ago
+
+GRUBB STREET 
+
+Book: Book about Books
+
+3 weeks ago
+
+Garage Sale Finds 
+
+Sprint Magazine
+
+1 month ago
+
+MONSTER BRAINS 
+
+Osamu Tezuka (1928 - 1989)
+
+4 years ago
+
+Show 5
+
+Show All
+
+ Loading... 
+
+ MIRTH
+
+Rusty and Co. 
+
+Level 14: #67
+
+1 day ago
+
+xkcd 
+
+Asteroid Mission
+
+2 days ago
+
+Dork Tower 
+
+Death Becomes Him
+
+3 days ago
+
+Order of the Stick 
+
+1348: Fading Odds
+
+3 weeks ago
+
+d20monkey 
+
+Forever GM 2.0 Design
+
+2 months ago
+
+KoDT 
+
+Hello world!
+
+4 months ago
+
+Marvin the Mage 
+
+Game Wizards Gary and Dave Minis To Be Released at Gamehole Con
+
+4 years ago
+
+Table Titans 
+
+News & Events: Adventure Journals Return with Five New Colors!
+
+5 years ago
+
+Show 5
+
+Show All
+
+ NPCs
+
+ Follow this blog
+
+ Click here 
+
+ Subscribe To
+
+Posts
+
+ Atom
+
+Posts
+
+All Comments
+
+ Atom
+
+All Comments
+
+ Labels
+
+ ODnD 
+ (107) 
+
+ Holmes Manuscript 
+ (79) 
+
+ Legacy 
+ (65) 
+
+ Portown Campaign 
+ (56) 
+
+ Sample Dungeon 
+ (56) 
+
+ Artists 
+ (55) 
+
+ Printings 
+ (53) 
+
+ Gygax 
+ (52) 
+
+ Boinger and Zereth 
+ (46) 
+
+ Forgotten Smugglers' Cave 
+ (44) 
+
+ Holmes Ref 
+ (44) 
+
+ New Monsters 
+ (41) 
+
+ Cons 
+ (40) 
+
+ B2 
+ (35) 
+
+ Sutherland 
+ (34) 
+
+ Tolkien 
+ (33) 
+
+ Greyhawk 
+ (30) 
+
+ Monster List 
+ (29) 
+
+ Pirates 
+ (26) 
+
+ GaryCon 
+ (24) 
+
+ Sutherland Dragon 
+ (24) 
+
+ Appendix N 
+ (23) 
+
+ OSR 
+ (23) 
+
+ RTOZ 
+ (23) 
+
+ Tales of Peril 
+ (23) 
+
+ Adventures 
+ (22) 
+
+ Chainmail 
+ (22) 
+
+ Miniatures 
+ (22) 
+
+ Zenopus 
+ (22) 
+
+ Cthulhu 
+ (20) 
+
+ Advertisements 
+ (19) 
+
+ 5E 
+ (18) 
+
+ Podcasts 
+ (18) 
+
+ 50th Anniversary 
+ (17) 
+
+ Books 
+ (17) 
+
+ Holmes Blogs 
+ (17) 
+
+ Zines 
+ (17) 
+
+ B1 
+ (16) 
+
+ Publication History 
+ (16) 
+
+ Scrum Con 
+ (16) 
+
+ B/X 
+ (15) 
+
+ DMsGuild 
+ (15) 
+
+ PatW 
+ (15) 
+
+ Chris Holmes 
+ (14) 
+
+ Dice 
+ (14) 
+
+ Skull Mountain 
+ (14) 
+
+ Trampier 
+ (14) 
+
+ Warlock 
+ (14) 
+
+ Sea Caves 
+ (13) 
+
+ ntrpgcon 
+ (13) 
+
+ Chargen 
+ (12) 
+
+ Foreign Editions 
+ (12) 
+
+ History 
+ (12) 
+
+ Arneson 
+ (11) 
+
+ Drivethru 
+ (11) 
+
+ GenCon 
+ (11) 
+
+ Great Kingdom 
+ (11) 
+
+ In Memoriam 
+ (11) 
+
+ Lee Gold 
+ (11) 
+
+ Popular Culture 
+ (11) 
+
+ Balrogs 
+ (10) 
+
+ Blackmoor 
+ (10) 
+
+ Maps 
+ (10) 
+
+ Otus 
+ (10) 
+
+ RTOZ review 
+ (10) 
+
+ Reprints 
+ (10) 
+
+ TSR 
+ (10) 
+
+ Wandering Monsters 
+ (10) 
+
+ ADnD 
+ (9) 
+
+ B3 
+ (9) 
+
+ Bayt Al Azif 
+ (9) 
+
+ DMG 
+ (9) 
+
+ Easter Eggs 
+ (9) 
+
+ Equipment 
+ (9) 
+
+ Rules Expansions 
+ (9) 
+
+ Dagonites 
+ (8) 
+
+ Darlene 
+ (8) 
+
+ Rules Variants 
+ (8) 
+
+ 35 years 
+ (7) 
+
+ Aurania 
+ (7) 
+
+ Dungeon! 
+ (7) 
+
+ Freebie 
+ (7) 
+
+ Holmes for the Holidays 
+ (7) 
+
+ Jean Wells 
+ (7) 
+
+ Play Report 
+ (7) 
+
+ Cinema 
+ (6) 
+
+ Dragon magazine 
+ (6) 
+
+ Green Dragon 
+ (6) 
+
+ Holmes Bibliography 
+ (6) 
+
+ Lore Suto 
+ (6) 
+
+ Monster Faces 
+ (6) 
+
+ Promo 
+ (6) 
+
+ Roslof 
+ (6) 
+
+ Zenopus Art-chives 
+ (6) 
+
+ Ability Scores 
+ (5) 
+
+ Castle Greyhawk 
+ (5) 
+
+ Conan 
+ (5) 
+
+ DMG Sample Dungeon 
+ (5) 
+
+ Delving Deeper 
+ (5) 
+
+ Fangorn 
+ (5) 
+
+ Holmesiana 
+ (5) 
+
+ John Blanche 
+ (5) 
+
+ Kids 
+ (5) 
+
+ Lakofka 
+ (5) 
+
+ Minifigs 
+ (5) 
+
+ New Magic Items 
+ (5) 
+
+ Periodicals 
+ (5) 
+
+ Quotes 
+ (5) 
+
+ Undead 
+ (5) 
+
+ Wham 
+ (5) 
+
+ 1st print 
+ (4) 
+
+ Combat 
+ (4) 
+
+ Community 
+ (4) 
+
+ EPT 
+ (4) 
+
+ Geomorphs 
+ (4) 
+
+ Lake Geneva 
+ (4) 
+
+ Logo 
+ (4) 
+
+ MM 
+ (4) 
+
+ Magic 
+ (4) 
+
+ New Classes 
+ (4) 
+
+ PHB 
+ (4) 
+
+ Saltmarsh 
+ (4) 
+
+ Turnbull 
+ (4) 
+
+ Video 
+ (4) 
+
+ Wereshark 
+ (4) 
+
+ Bell 
+ (3) 
+
+ Carter 
+ (3) 
+
+ Collecting 
+ (3) 
+
+ Computer Games 
+ (3) 
+
+ Contemporary Reviews 
+ (3) 
+
+ DSL 
+ (3) 
+
+ Dee 
+ (3) 
+
+ Draw Your Own Floor Plan 
+ (3) 
+
+ Dungeoneering 
+ (3) 
+
+ Europa 
+ (3) 
+
+ Gamma World 
+ (3) 
+
+ Guidon DnD 
+ (3) 
+
+ Holmes Expert 
+ (3) 
+
+ Kuntz 
+ (3) 
+
+ Lycanthropes 
+ (3) 
+
+ Mentzer 
+ (3) 
+
+ Monster Manual 
+ (3) 
+
+ ODnD Sample Level 
+ (3) 
+
+ Polyhedron 
+ (3) 
+
+ Review 
+ (3) 
+
+ S1 
+ (3) 
+
+ Scrum Club 
+ (3) 
+
+ Text Adventure 
+ (3) 
+
+ Thomas Cole 
+ (3) 
+
+ Tricks and Traps 
+ (3) 
+
+ Willingham 
+ (3) 
+
+ Arduin 
+ (2) 
+
+ Chaosium 
+ (2) 
+
+ Coloring Album 
+ (2) 
+
+ Dragonmirth 
+ (2) 
+
+ Dragons 
+ (2) 
+
+ Drawings 
+ (2) 
+
+ ERB 
+ (2) 
+
+ Elmore 
+ (2) 
+
+ Ephemera 
+ (2) 
+
+ Examples of Play 
+ (2) 
+
+ FRPG book 
+ (2) 
+
+ Holmes Campaign 
+ (2) 
+
+ Holmes-Era Games 
+ (2) 
+
+ Judges Guild 
+ (2) 
+
+ MTA 
+ (2) 
+
+ Metamorphosis Alpha 
+ (2) 
+
+ Moldvay 
+ (2) 
+
+ Movies 
+ (2) 
+
+ Music 
+ (2) 
+
+ New Races 
+ (2) 
+
+ One-Page Dungeon 
+ (2) 
+
+ Pellucidar 
+ (2) 
+
+ Perren 
+ (2) 
+
+ Photo Gallery 
+ (2) 
+
+ Pulps 
+ (2) 
+
+ Retroclones 
+ (2) 
+
+ Rule Interpretations 
+ (2) 
+
+ Spells 
+ (2) 
+
+ TSR UK 
+ (2) 
+
+ Ward 
+ (2) 
+
+ Wargaming 
+ (2) 
+
+ White Dwarf 
+ (2) 
+
+ de Camp 
+ (2) 
+
+ weapons 
+ (2) 
+
+ what if 
+ (2) 
+
+ 45 years 
+ (1) 
+
+ Artifacts 
+ (1) 
+
+ B4 
+ (1) 
+
+ BECMI 
+ (1) 
+
+ Baguettes 
+ (1) 
+
+ Bio 
+ (1) 
+
+ C1 
+ (1) 
+
+ Catalogs 
+ (1) 
+
+ Cheese 
+ (1) 
+
+ Chits 
+ (1) 
+
+ Comics 
+ (1) 
+
+ DDG 
+ (1) 
+
+ Dawn Patrol 
+ (1) 
+
+ DnD from Memory 
+ (1) 
+
+ DnD50 
+ (1) 
+
+ Dungeon Design 
+ (1) 
+
+ Dungeon Hobby Shop 
+ (1) 
+
+ Eldritch Wizardry 
+ (1) 
+
+ Ernie Gygax 
+ (1) 
+
+ Erol Otus 
+ (1) 
+
+ Expedition to Skull Stack Crater 
+ (1) 
+
+ Fiend Folio 
+ (1) 
+
+ Fonts 
+ (1) 
+
+ Games Workshop 
+ (1) 
+
+ Grenadier 
+ (1) 
+
+ Historic FLGS 
+ (1) 
+
+ Holloway 
+ (1) 
+
+ Inspiration 
+ (1) 
+
+ Known World 
+ (1) 
+
+ Lejendary Adventure 
+ (1) 
+
+ Licensed Products 
+ (1) 
+
+ Links 
+ (1) 
+
+ Marsh 
+ (1) 
+
+ Milestones 
+ (1) 
+
+ Mini Dungeon 
+ (1) 
+
+ Mirth 
+ (1) 
+
+ Monster Plants 
+ (1) 
+
+ New Modules 
+ (1) 
+
+ Norton 
+ (1) 
+
+ Purple Worm 
+ (1) 
+
+ RPG 
+ (1) 
+
+ Rumors 
+ (1) 
+
+ Savage Worlds 
+ (1) 
+
+ Saving Throws 
+ (1) 
+
+ Schick 
+ (1) 
+
+ SciFi 
+ (1) 
+
+ Shakespeare 
+ (1) 
+
+ Solo 
+ (1) 
+
+ Star Schlock 
+ (1) 
+
+ Star Wars 
+ (1) 
+
+ Swords & Sorcery 
+ (1) 
+
+ T1 
+ (1) 
+
+ Weird Fiction 
+ (1) 
+
+ Wilderness Adventures 
+ (1) 
+
+ Zeb Cook 
+ (1) 
+
+ ADVERT (CLICK IMAGE TO VISIT - DISCLOSURE: LINK INCLUDES AFFILIATE #)
+
+ " 
+
+Powered by Blogger .

@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 10,
+ "claims": [
+  {
+   "index": 646,
+   "feature": "reader and expert judgment",
+   "claim": "Preston reports that when Brenda sounded odd and graceless, people were less likely to get intimate with her, which reduced the number of conversations escalated to a human.",
+   "source": "Laura Preston, former chatbot operator, n+1 Issue 44, 2022",
+   "url": "https://www.nplusonemag.com/issue-44/essays/human_fallback/",
+   "quote": "when Brenda sounded odd and graceless, people were less likely to get intimate",
+   "page": "section beginning \"Eventually I reached a level of virtuosity\""
+  },
+  {
+   "index": 647,
+   "feature": "detection and its failures",
+   "claim": "Clarke reports that even AI works that have been co-written or given a polishing edit to disguise them still display the hallmarks he has come to expect.",
+   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "they still display the hallmarks I",
+   "page": "para. beginning \"In many cases, these works have been 'co-written'\""
+  },
+  {
+   "index": 648,
+   "feature": "detection and its failures",
+   "claim": "Clarke states parenthetically that the tells of generated fiction are more obvious on longer works, which is why some AI flash fiction and poetry has found publication elsewhere.",
+   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "the tells are more obvious on longer works",
+   "page": "para. beginning \"In many cases, these works have been 'co-written'\""
+  },
+  {
+   "index": 649,
+   "feature": "reader and expert judgment",
+   "claim": "Clarke describes the AI systems writers co-write with as having produced some of the worst stories he has read.",
+   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "some of the worst stories I",
+   "page": "para. beginning \"If any of that makes you nervous\""
+  },
+  {
+   "index": 650,
+   "feature": "detection and its failures",
+   "claim": "Clarke reports that at the peak of the generated-submission surge Clarkesworld's submissions more than doubled.",
+   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "our submissions more than doubled due to the high volume of generated works",
+   "page": "para. beginning \"The good news is that the adaptations\""
+  },
+  {
+   "index": 651,
+   "feature": "detection and its failures",
+   "claim": "Clarke reports that when he evaluated commercial detection tools he observed an even greater error rate on works written by non-native English speakers.",
+   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "an even greater error rate when it came to works written by non-native English speakers",
+   "page": "para. beginning \"I was already thinking ahead\""
+  },
+  {
+   "index": 652,
+   "feature": "detection and its failures",
+   "claim": "Clarke states that he would never trust an algorithm to make a final assessment and personally evaluates each submission his automated check flags as suspicious.",
+   "source": "Neil Clarke, editor of Clarkesworld, personal blog, 2 May 2025",
+   "url": "https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/",
+   "quote": "I would never trust an algorithm to make a final assessment",
+   "page": "para. beginning \"No process is perfect\""
+  },
+  {
+   "index": 653,
+   "feature": "reader and expert judgment",
+   "claim": "Clarke states that setting aside legal and ethical concerns, the output of generative AI tools is nowhere near the standards Clarkesworld expects.",
+   "source": "Neil Clarke, editor of Clarkesworld, personal blog, 2 May 2025",
+   "url": "https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/",
+   "quote": "the output of these tools is nowhere near the standards we expect",
+   "page": "closing section, para. beginning \"And repeated from the previous post\""
+  },
+  {
+   "index": 654,
+   "feature": "other: abstract-concrete conjunction (eyeball kick)",
+   "claim": "nostalgebraist claims the main stylistic hallmark shared by DeepSeek-R1 and an unreleased OpenAI creative-writing model is the conjunction of one thing that is abstract or incorporeal with another that is concrete or sensory.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "one thing that is abstract and/or incorporeal",
+   "page": "section \"A mechanical boot, a human eye\""
+  },
+  {
+   "index": 655,
+   "feature": "steerability",
+   "claim": "nostalgebraist reports that R1 kept producing abstract/concrete conjunctions in spite of user-specified stylistic directions, including prompts to imitate named literary authors.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "R1 even consistently does this in spite of user-specified stylistic directions",
+   "page": "section \"A mechanical boot, a human eye\""
+  },
+  {
+   "index": 656,
+   "feature": "steerability",
+   "claim": "nostalgebraist reports that the one pastiche free of the abstract/concrete tell was the Hemingway attempt, which he attributes to Hemingway having a distinctive and constrained style leaving no room for such flourishes.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "presumably because Hemingway himself has a distinctive and constrained style",
+   "page": "section \"A mechanical boot, a human eye\", parenthesis after the pastiche list"
+  },
+  {
+   "index": 657,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "nostalgebraist describes this crammed prose as having no modulation and no room to breathe, an unrelenting stream of gee-whiz effects.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "no modulation, no room to breathe",
+   "page": "section \"A mechanical boot, a human eye\""
+  },
+  {
+   "index": 658,
+   "feature": "homogenisation",
+   "claim": "nostalgebraist guesses that the shared style of two unrelated models is convergent evolution, what happens if you optimize for human judgments of literary quality in a generic way.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "maybe this is just what happens if you optimize for human judgments",
+   "page": "section \"Background: the new OpenAI model\""
+  },
+  {
+   "index": 659,
+   "feature": "other: technique without purpose",
+   "claim": "nostalgebraist argues that where human writers deploy these devices to specific ends, the LLMs seem to use them arbitrarily and incessantly.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "the LLMs seem to use them arbitrarily and incessantly",
+   "page": "section \"Commentary\""
+  },
+  {
+   "index": 660,
+   "feature": "lexical tells",
+   "claim": "nostalgebraist identifies personification of nature or the inanimate as a trick overused by R1, and suggests it is favoured because it is easy and reads as distinctively literary.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "personification of nature (or the inanimate)",
+   "page": "section \"More on style: personification\""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 646,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"when Brenda sounded odd and graceless, people were less likely to get intimate, which meant less HUMAN_FALLBACK\"",
+   "note": "Raw n+1 page fetched (HTTP 200, browser UA). Quote exact in the paragraph beginning \"Eventually I reached a level of virtuosity\". The escalation limb is supported: the essay defines HUMAN_FALLBACK as Brenda's \"white flag of surrender\" with which \"Brenda ceded the conversation to me\" (the human operator), so \"less HUMAN_FALLBACK\" = fewer conversations escalated to a human."
+  },
+  {
+   "index": 647,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"In many cases, these works have been “co-written” with “AI” or simply given a polishing edit in an attempt to make them less obvious... they still display the hallmarks I’ve come to expect\"",
+   "note": "Raw Clarkesworld Aug 2025 editorial fetched (HTTP 200). Quote exact; both limbs (co-written / polishing edit to disguise, and hallmarks he has come to expect) present in the same sentence pair."
+  },
+  {
+   "index": 648,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Given that I’ve seen some flash and poetry examples of these works find publication elsewhere (the tells are more obvious on longer works)\"",
+   "note": "Quote exact and genuinely parenthetical. The causal \"which is why\" is carried by the parenthesis's placement immediately after the flash/poetry-publication clause, which is its plain function; both facts are stated on the page."
+  },
+  {
+   "index": 649,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"co-writing with something that has produced some of the worst stories I’ve read\"",
+   "note": "Quote exact, in the paragraph beginning \"If any of that makes you nervous\". Page uses the singular \"something\" (the AI system) rather than plural \"systems\"; substance identical."
+  },
+  {
+   "index": 650,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"At its peak, our submissions more than doubled due to the high volume of generated works.\"",
+   "note": "Quote exact, in the paragraph beginning \"The good news is that the adaptations we made to our submissions process\". Peak-of-surge limb explicit (\"At its peak\")."
+  },
+  {
+   "index": 651,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The number of false positives and negatives was simply unacceptable and I observed an even greater error rate when it came to works written by non-native English speakers\"",
+   "note": "Quote exact, in the paragraph beginning \"I was already thinking ahead to this scenario\". The evaluation limb is supported both by that paragraph's subject (commercial detection tools/\"their products\") and by his later statement \"I’ve been regularly evaluating these products since 2023\"."
+  },
+  {
+   "index": 652,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I would never trust an algorithm to make a final assessment... As such, I personally evaluate each suspicious submission.\"",
+   "note": "Raw neil-clarke.com post (dated 05/02/2025) fetched (HTTP 200). Quote exact, in the paragraph beginning \"No process is perfect\"; the automated check is the post's \"oval\" in-house automated step that routes “suspicious” submissions to a separate queue."
+  },
+  {
+   "index": 653,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"even if we set aside our legal and ethical concerns with how these systems were developed, the output of these tools is nowhere near the standards we expect\"",
+   "note": "Quote exact, in the closing section paragraph beginning \"And repeated from the previous post\". Both limbs (setting aside legal and ethical concerns; nowhere near Clarkesworld's standards) present verbatim."
+  },
+  {
+   "index": 654,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"This, I claim, is the main stylistic hallmark of both R1 and the new OpenAI model\" ... \"one thing that is abstract and/or incorporeal\" / \"another thing that is concrete and/or sensory\"",
+   "note": "Raw Tumblr page fetched (HTTP 200, browser UA; full post body present, not a shell). Quote exact in section \"A mechanical boot, a human eye\". The OpenAI model is described earlier as \"the new, unreleased OpenAI model\"."
+  },
+  {
+   "index": 655,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"R1 even consistently does this in spite of user-specified stylistic directions. To wit: when I tried prompting R1 to mimic the styles of a bunch of famous literary authors...\"",
+   "note": "Quote exact in \"A mechanical boot, a human eye\". The named-author limb is the following sentence: mimicking \"famous literary authors\" yielded the eyeball kicks \"in virtually every case\"."
+  },
+  {
+   "index": 656,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"(The one exception being the Hemingway pastiche, presumably because Hemingway himself has a distinctive and constrained style which leaves no room for these kinds of flourishes.)\"",
+   "note": "Quote exact; it is the parenthesis immediately after the pastiche discussion, exactly as the page hint says. Both limbs (sole exception; attributed to Hemingway's constrained style) present."
+  },
+  {
+   "index": 657,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"There’s no modulation, no room to breathe – just an unrelenting stream of “gee-whiz” effects.\"",
+   "note": "Quote exact in \"A mechanical boot, a human eye\"; the referent \"This kind of prose\" is the \"crammed prose full of eyeball kicks\" named two paragraphs above, so the \"crammed prose\" limb holds."
+  },
+  {
+   "index": 658,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I would guess it’s convergent evolution: maybe this is just what happens if you optimize for human judgments of “literary quality” in some fairly generic, obvious, “naive” manner\"",
+   "note": "Quote exact, in the closing paragraph of section \"Background: the new OpenAI model\". \"Two unrelated models\" is supported — the post's framing is \"two unrelated LLMs\" and he explicitly doubts OpenAI copied DeepSeek."
+  },
+  {
+   "index": 659,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"In the hands of humans, these are techniques that can be deployed to specific ends; the LLMs seem to use them arbitrarily and incessantly\"",
+   "note": "Quote exact, in section \"Commentary\". Both limbs (human writers deploy to specific ends; LLMs arbitrary and incessant) are the two halves of the same sentence."
+  },
+  {
+   "index": 660,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"First: personification of nature (or the inanimate)... possibly because it’s a fairly easy technique... which nonetheless strikes most people as distinctively “literary”\"",
+   "note": "Quote exact in section \"More on style: personification\", which opens \"a few other stylistic ‘tricks’ overused by R1\". The easy/reads-as-literary limb is the next sentence; the page hedges it as \"possibly because\", matching the claim's \"suggests\"."
+  }
+ ]
+}

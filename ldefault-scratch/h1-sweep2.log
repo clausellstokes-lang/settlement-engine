@@ -1,0 +1,38 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 7378 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT
+
+ ❯ tests/domain/npc/livedExperienceSources.test.js (52 tests | 1 failed) 2493ms
+     × festival_kept is NOT dark: traditionsEnabled is lit in the same three presets as roads 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/npc/livedExperienceSources.test.js > ⭐ THE PRESET CENSUS — EXECUTED, and it corrected five of L3's verdicts > festival_kept is NOT dark: traditionsEnabled is lit in the same three presets as roads
+AssertionError: expected [ 'dramatic_campaign', …(3) ] to deeply equal [ 'dramatic_campaign', …(2) ]
+
+- Expected
++ Received
+
+  [
+    "dramatic_campaign",
+    "full_simulation",
+    "living_realm",
++   "realistic_regional",
+  ]
+
+ ❯ tests/domain/npc/livedExperienceSources.test.js:164:17
+    162|   test('festival_kept is NOT dark: traditionsEnabled is lit in the sam…
+    163|     const lit = presetsLighting('traditionsEnabled');
+    164|     expect(lit).toEqual(['dramatic_campaign', 'full_simulation', 'livi…
+       |                 ^
+    165|     expect(lit).toEqual(presetsLighting('roadsEnabled'));
+    166|     expect(lit).toEqual(presetsLighting('npcLadderEnabled'));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 11 passed (12)
+      Tests  1 failed | 213 passed (214)
+   Start at  07:57:22
+   Duration  6.30s (transform 6.12s, setup 362ms, import 11.13s, tests 5.30s, environment 1ms)
+

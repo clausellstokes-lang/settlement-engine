@@ -1,0 +1,2 @@
+[detached HEAD 0eb028111] §905 follow-on car: the mobileSingleChrome retirement is anchored in flags.test.js (ratified vetoable at §904) — and the negative-assertion row for the file banks 1 → 0 by deletion
+ 2 files changed, 13 insertions(+), 2 deletions(-)

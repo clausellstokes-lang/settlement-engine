@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 3,
+ "claims": [
+  {
+   "index": 1063,
+   "feature": "reader and expert judgment",
+   "claim": "In Nguyen and colleagues' human evaluation at temperature 3 with the lower-diversity setting, min-p stories scored 7.74 out of 10 for quality against 5.75 for top-p and 6.75 for standard sampling.",
+   "source": "Nguyen Nhat Minh, Andrew Baker, Clement Neo, Allen Roush, Andreas Kirsch and Ravid Shwartz-Ziv, 'Turning Up the Heat: Min-p Sampling for Creative and Coherent LLM Outputs', ICLR 2025 (arXiv v8, 20 Nov 2025)",
+   "url": "https://arxiv.org/abs/2407.01082",
+   "quote": "",
+   "page": "Table 4 (row T=3, Quality, Lower Diversity Settings)"
+  },
+  {
+   "index": 1064,
+   "feature": "reader and expert judgment",
+   "claim": "Nguyen and colleagues report min-p winning 56.54 percent on the AlpacaEval Creative Writing benchmark at temperature 1.5, against 53.18 percent for temperature-only sampling.",
+   "source": "Nguyen Nhat Minh, Andrew Baker, Clement Neo, Allen Roush, Andreas Kirsch and Ravid Shwartz-Ziv, 'Turning Up the Heat: Min-p Sampling for Creative and Coherent LLM Outputs', ICLR 2025 (arXiv v8, 20 Nov 2025)",
+   "url": "https://arxiv.org/abs/2407.01082",
+   "quote": "",
+   "page": "Table 3b (AlpacaEval Creative Writing % win, column tau=1.5)"
+  },
+  {
+   "index": 1065,
+   "feature": "counter-evidence",
+   "claim": "Nguyen and colleagues concede that their human evaluation rests on a limited sample size and gives directional insight rather than a settled result.",
+   "source": "Nguyen Nhat Minh, Andrew Baker, Clement Neo, Allen Roush, Andreas Kirsch and Ravid Shwartz-Ziv, 'Turning Up the Heat: Min-p Sampling for Creative and Coherent LLM Outputs', ICLR 2025 (arXiv v8, 20 Nov 2025)",
+   "url": "https://arxiv.org/abs/2407.01082",
+   "quote": "this represents a limited sample size, it provides valuable directional insights",
+   "page": "section 6, Experimental Setup"
+  },
+  {
+   "index": 1066,
+   "feature": "detection and its failures",
+   "claim": "Nguyen and colleagues relay, from Ilya Gusev's run of Sam Paech's EQ-Bench Creative Writing benchmark, a min-p score of 62 at temperature 1.5 against the baseline's 51.5 at temperature 1.0.",
+   "source": "Nguyen Nhat Minh, Andrew Baker, Clement Neo, Allen Roush, Andreas Kirsch and Ravid Shwartz-Ziv, 'Turning Up the Heat: Min-p Sampling for Creative and Coherent LLM Outputs', ICLR 2025 (arXiv v8, 20 Nov 2025)",
+   "url": "https://arxiv.org/abs/2407.01082",
+   "quote": "",
+   "page": "section 5.2.3, Creative Writing, Results"
+  },
+  {
+   "index": 1069,
+   "feature": "steerability",
+   "claim": "Basu and colleagues measured that sentence-level repetition in GPT-2 output effectively disappears above an observed cross-entropy of about 2.5.",
+   "source": "Sourya Basu, Govardana Sachitanandam Ramachandran, Nitish Shirish Keskar and Lav R. Varshney, 'Mirostat: A Neural Text Decoding Algorithm that Directly Controls Perplexity', ICLR 2021 (arXiv v2, 14 Jan 2021)",
+   "url": "https://arxiv.org/abs/2007.14966",
+   "quote": "beyond a threshold of cross-entropy, which seems to be around 2.5",
+   "page": "section 5.2, discussion of Figure 3c"
+  },
+  {
+   "index": 1070,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Basu and colleagues measured that human-written continuation settles at a limiting cross-entropy rate as it lengthens, falling into neither the boredom nor the confusion trap.",
+   "source": "Sourya Basu, Govardana Sachitanandam Ramachandran, Nitish Shirish Keskar and Lav R. Varshney, 'Mirostat: A Neural Text Decoding Algorithm that Directly Controls Perplexity', ICLR 2021 (arXiv v2, 14 Jan 2021)",
+   "url": "https://arxiv.org/abs/2007.14966",
+   "quote": "Human-generated text converges to some limiting value of cross-",
+   "page": "section 5.3, Boredom and Confusion Traps, discussion of Figure 5c"
+  },
+  {
+   "index": 1071,
+   "feature": "detection and its failures",
+   "claim": "Basu and colleagues report that at a target cross-entropy of 3 more than half their raters guessed the AI-generated text was human-written.",
+   "source": "Sourya Basu, Govardana Sachitanandam Ramachandran, Nitish Shirish Keskar and Lav R. Varshney, 'Mirostat: A Neural Text Decoding Algorithm that Directly Controls Perplexity', ICLR 2021 (arXiv v2, 14 Jan 2021)",
+   "url": "https://arxiv.org/abs/2007.14966",
+   "quote": "more than half of raters mistakenly guessed the AI-generated text",
+   "page": "section 5.4, Human Evaluations"
+  },
+  {
+   "index": 1072,
+   "feature": "model era drift",
+   "claim": "Basu and colleagues measured that GPT-2-XL at 1558 million parameters repeats slightly less than GPT-2 at 117 million parameters at the same observed cross-entropy.",
+   "source": "Sourya Basu, Govardana Sachitanandam Ramachandran, Nitish Shirish Keskar and Lav R. Varshney, 'Mirostat: A Neural Text Decoding Algorithm that Directly Controls Perplexity', ICLR 2021 (arXiv v2, 14 Jan 2021)",
+   "url": "https://arxiv.org/abs/2007.14966",
+   "quote": "have slightly less repetitions for a fixed value of cross-entropy",
+   "page": "section 5.2, discussion of Figure 3d"
+  },
+  {
+   "index": 1075,
+   "feature": "homogenisation",
+   "claim": "Su and colleagues measured cosine similarities above 0.95 between the representations of different tokens within a single sentence in GPT-2.",
+   "source": "Yixuan Su, Tian Lan, Yan Wang, Dani Yogatama, Lingpeng Kong and Nigel Collier, 'A Contrastive Framework for Neural Text Generation', NeurIPS 2022 (arXiv v3, 26 Sep 2022)",
+   "url": "https://arxiv.org/abs/2202.06417",
+   "quote": "the cosine similarities between tokens within a sentence are over 0.95",
+   "page": "section 1, Introduction, discussion of Figure 1(a)"
+  },
+  {
+   "index": 1076,
+   "feature": "register measured",
+   "claim": "Su and colleagues ran their whole degeneration evaluation on the Wikitext-103 test set, that is on encyclopedic prose.",
+   "source": "Yixuan Su, Tian Lan, Yan Wang, Dani Yogatama, Lingpeng Kong and Nigel Collier, 'A Contrastive Framework for Neural Text Generation', NeurIPS 2022 (arXiv v3, 26 Sep 2022)",
+   "url": "https://arxiv.org/abs/2202.06417",
+   "quote": "",
+   "page": "Table 1 caption: 'Evaluation results on Wikitext-103 test set'"
+  },
+  {
+   "index": 1077,
+   "feature": "homogenisation",
+   "claim": "In Su and colleagues' Wikitext-103 table, greedy decoding from the MLE model scored a rep-2 of 69.21 against 3.92 for the human reference.",
+   "source": "Yixuan Su, Tian Lan, Yan Wang, Dani Yogatama, Lingpeng Kong and Nigel Collier, 'A Contrastive Framework for Neural Text Generation', NeurIPS 2022 (arXiv v3, 26 Sep 2022)",
+   "url": "https://arxiv.org/abs/2202.06417",
+   "quote": "",
+   "page": "Table 1 (column rep-2, rows MLE greedy and Human)"
+  },
+  {
+   "index": 1078,
+   "feature": "counter-evidence",
+   "claim": "In Su and colleagues' Wikitext-103 table, nucleus sampling produced text with a generation perplexity of 47.19 against 24.01 for the human reference, so the sampled text was less predictable than the human original rather than flatter.",
+   "source": "Yixuan Su, Tian Lan, Yan Wang, Dani Yogatama, Lingpeng Kong and Nigel Collier, 'A Contrastive Framework for Neural Text Generation', NeurIPS 2022 (arXiv v3, 26 Sep 2022)",
+   "url": "https://arxiv.org/abs/2202.06417",
+   "quote": "",
+   "page": "Table 1 (column gen-ppl, rows SimCTG nucleus and Human)"
+  },
+  {
+   "index": 1079,
+   "feature": "reader and expert judgment",
+   "claim": "Su and colleagues' human evaluation covered 200 Wikitext-103 prefixes scored by five graders, producing 9,000 annotated samples.",
+   "source": "Yixuan Su, Tian Lan, Yan Wang, Dani Yogatama, Lingpeng Kong and Nigel Collier, 'A Contrastive Framework for Neural Text Generation', NeurIPS 2022 (arXiv v3, 26 Sep 2022)",
+   "url": "https://arxiv.org/abs/2202.06417",
+   "quote": "results in 9,000 annotated samples in total",
+   "page": "section 4.3, Human Evaluation"
+  },
+  {
+   "index": 1080,
+   "feature": "counter-evidence",
+   "claim": "Schaeffer, Kazdan and Denisov-Blanch re-analysed the min-p paper's own human-evaluation data and concluded min-p did not outperform baseline samplers on quality.",
+   "source": "Rylan Schaeffer, Joshua Kazdan and Yegor Denisov-Blanch (Stanford University), 'Min-p, Max Exaggeration: A Critical Analysis of Min-p Sampling in Language Models', arXiv preprint v2, 19 Jun 2025",
+   "url": "https://arxiv.org/abs/2506.13681",
+   "quote": "our reanalysis demonstrates min-p did not out",
+   "page": "Abstract (the quotation breaks at a line-wrapped hyphen; the word completed is 'outperform')"
+  },
+  {
+   "index": 1081,
+   "feature": "counter-evidence",
+   "claim": "Schaeffer and colleagues report that in the min-p paper's own human-evaluation data the three samplers scored similarly on both quality and diversity, with 95 percent confidence intervals frequently overlapping.",
+   "source": "Rylan Schaeffer, Joshua Kazdan and Yegor Denisov-Blanch (Stanford University), 'Min-p, Max Exaggeration: A Critical Analysis of Min-p Sampling in Language Models', arXiv preprint v2, 19 Jun 2025",
+   "url": "https://arxiv.org/abs/2506.13681",
+   "quote": "the three samplers provide similar quality and similar diversity",
+   "page": "section 2.2, discussion of Figure 1"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1063,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Table 4, T=3 Quality: Standard 6.75, Top-p 5.75, Min-p 7.74",
+   "note": "arXiv v8 full-text HTML (arxiv.org/html/2407.01082v8) read raw. Table 4, row T=3 / Quality, Lower Diversity Settings: Standard Sampling 6.75+/-0.3509, Top-p=0.1 5.75+/-0.3201, Min-p=0.2 7.74+/-0.2418. Caption confirms the 1-10 scale. Claim carries no quotation, so graded on substance; every figure is exact."
+  },
+  {
+   "index": 1064,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Table 3(b), tau=1.5: Min-p 56.54, Temperature Only 53.18",
+   "note": "Same raw v8 HTML. Table 3 right panel is headed '(b) AlpacaEval Creative Writing (% win)'; column tau=1.5 gives Temperature Only 53.18 and Min-p (ours) 56.54 (top-p has no tau=1.5 entry). No quotation supplied, so substance."
+  },
+  {
+   "index": 1065,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this represents a limited sample size, it provides valuable directional insights",
+   "note": "Section 6 Human Evaluation, Experimental Setup paragraph reads 'While this represents a limited sample size, it provides valuable directional insights into perceived quality and diversity differences between methods.' The supplied quote is a contiguous substring (drops the leading 'While'); both limbs (limited sample, directional not settled) are on the page."
+  },
+  {
+   "index": 1066,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "min-p (tau=1.5) scoring 62 versus the baseline's 51.5 at tau=1.0",
+   "note": "Creative Writing results paragraph (sec. 5.2, before 5.3 Ablation Study), raw v8 HTML: 'Independent EQ-Bench Creative Writing Paech (2024) results further support these findings, with min-p (tau=1.5, p_base=0.1) scoring 62 versus the baseline's 51.5 at tau=1.0 (Gusev, 2024).' Reference list confirms Samuel J. Paech (EQ-Bench) and Ilya Gusev. Section label in the claim is 5.2, not 5.2.3, in this version."
+  },
+  {
+   "index": 1069,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "beyond a threshold of cross-entropy, which seems to be around 2.5",
+   "note": "ar5iv full text of 2007.14966 (v2), section 5.2 'Perplexity and repetitions', Fig. 3c paragraph: '...we do expect a good sampling algorithm to have minimum sentence-level repetitions, which all the sampling seems to show beyond a threshold of cross-entropy, which seems to be around 2.5 for GPT-2.' Quote contiguous; sentence-level, GPT-2 and observed cross-entropy limbs all present."
+  },
+  {
+   "index": 1070,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Human-generated text converges to some limiting value of cross-entropy",
+   "note": "Section 5.3 'Boredom and confusion traps', Fig. 5c paragraph: 'Human-generated text converges to some limiting value of cross-entropy when the generated text is long enough and does not fall into either boredom or confusion.' The supplied quote truncates mid-word at 'cross-' but is contiguous; the neither-trap limb is in the same sentence."
+  },
+  {
+   "index": 1071,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more than half of raters mistakenly guessed the AI-generated text",
+   "note": "Section 5.4 Human Evaluations: 'Further, for tau=3, more than half of raters mistakenly guessed the AI-generated text to be human generated.' tau is the target average cross-entropy rate set for mirostat, matching the claim's 'target cross-entropy of 3'. 43 participants."
+  },
+  {
+   "index": 1072,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "have slightly less repetitions for a fixed value of cross-entropy",
+   "note": "Section 5.2, Fig. 3d paragraph: 'Larger LMs such as GPT-2-XL with 1558M parameters have slightly less repetitions for a fixed value of cross-entropy than smaller LMs such as GPT-2 with 117M parameters.' Figure 3 caption repeats it. Both parameter counts on the page."
+  },
+  {
+   "index": 1075,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the cosine similarities between tokens within a sentence are over 0.95",
+   "note": "ar5iv full text of 2202.06417 (v3), section 1 Introduction, Figure 1(a) discussion: 'We see that the cosine similarities between tokens within a sentence are over 0.95, meaning that these representations are close to each other.' The matrix is GPT-2 output-layer token representations."
+  },
+  {
+   "index": 1076,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Table 1 caption: Evaluation results on Wikitext-103 test set",
+   "note": "Table 1 caption is exactly that; section 4 Evaluation Benchmark describes Wikitext-103 as a large collection of Wikipedia articles, supporting 'encyclopedic prose'. Checked the 'whole' limb adversarially: the only other task, section 5 open-domain dialogue (LCCC, DailyDialog), reports human ratings alone, no rep-n/diversity/MAUVE/gen-ppl, so every degeneration measurement in the paper is on Wikitext-103."
+  },
+  {
+   "index": 1077,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Table 1 rep-2: MLE greedy 69.21, Human 3.92",
+   "note": "Table 1 (Wikitext-103 test set), rep-2 column: MLE + greedy 69.21; Human row 3.92. Both figures exact; no quotation supplied, so substance."
+  },
+  {
+   "index": 1078,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Table 1 gen-ppl: SimCTG nucleus 47.19, Human 24.01",
+   "note": "Table 1 gen-ppl column: SimCTG + nucleus 47.19, Human 24.01 (MLE + nucleus is 49.71, so the row attribution in the claim's page field is the right one). The interpretive limb is on the page too: section 4.1 defines gen-ppl and states a high gen-ppl means the generated text is very unlikely given the prefix, i.e. less predictable, not flatter."
+  },
+  {
+   "index": 1079,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "results in 9,000 annotated samples in total",
+   "note": "Section 4.3 Human Evaluation: 200 prefixes of length 32 randomly selected from the Wikitext-103 test set, all generations plus the reference shuffled and 'evaluated by five graders, which results in 9,000 annotated samples in total'. All three limbs present."
+  },
+  {
+   "index": 1080,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "our reanalysis demonstrates min-p did not outperform baseline samplers",
+   "note": "arXiv v2 full-text HTML (arxiv.org/html/2506.13681v2), Abstract: '...our reanalysis demonstrates min-p did not outperform baseline samplers in quality, diversity, or a trade-off between quality and diversity.' The supplied quote is the contiguous head of that clause. Authors and Stanford affiliation confirmed on the page."
+  },
+  {
+   "index": 1081,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the three samplers provide similar quality and similar diversity",
+   "note": "Section 2.2 (Visualizations and Statistical Tests Fail to Support...), Figure 1 discussion: 'Using the original paper's data, Fig. 1 reveals that the three samplers provide similar quality and similar diversity, with 95% confidence intervals frequently overlapping.' Both metric limbs and the overlapping-CI limb are in the one sentence."
+  }
+ ]
+}

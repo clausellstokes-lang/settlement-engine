@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 19,
+ "claims": [
+  {
+   "index": 439,
+   "feature": "plainness and economy",
+   "claim": "The EN World column's fourth writing step is a halving target for every description, and it names adjectives and adverbs as the writer's enemies.",
+   "source": "Radiating Gnome, EN World column",
+   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+   "quote": "those words are actually our mortal enemies",
+   "page": "1. Write A Good Description"
+  },
+  {
+   "index": 440,
+   "feature": "concrete sensory noun",
+   "claim": "The same column argues one well-chosen physical detail can stand for a whole person, instancing the loose skin under an old woman's arm.",
+   "source": "Radiating Gnome, EN World column",
+   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+   "quote": "it paints a vivid image in your mind of the whole woman",
+   "page": "1. Write A Good Description"
+  },
+  {
+   "index": 441,
+   "feature": "other: hedging verbs",
+   "claim": "A forum reader rewriting a Bastion of Broken Souls boxed text cuts the phrase 'appears as', calling the hedge a DM reflex the players do not need.",
+   "source": "forum member 'Dausuul', reply of 15 July 2013 on EN World",
+   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+   "quote": "\"Appears as\" is just instinctive DM pedantry",
+   "page": "reply #5"
+  },
+  {
+   "index": 442,
+   "feature": "adjective and adverb discipline",
+   "claim": "The same reader deletes 'scaly' from the official description on the ground that the noun already carries it.",
+   "source": "forum member 'Dausuul', EN World",
+   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+   "quote": "Scaliness was pure fluff from the start.",
+   "page": "reply #5"
+  },
+  {
+   "index": 443,
+   "feature": "plainness and economy",
+   "claim": "Radiating Gnome rewrites an 81-word location description from Dungeon 213 down to 23 words and prints both side by side.",
+   "source": "Radiating Gnome, EN World",
+   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+   "quote": "That's 23 words verses the originals 81.",
+   "page": "reply #6"
+  },
+  {
+   "index": 444,
+   "feature": "other: verb choice",
+   "claim": "In that rewrite he replaces the causeway's 'rising' with a climbing verb because rising suggests effortless floating.",
+   "source": "Radiating Gnome, EN World",
+   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+   "quote": "the ramp needs to climb",
+   "page": "reply #6"
+  },
+  {
+   "index": 445,
+   "feature": "cadence and rhythm",
+   "claim": "He keeps an alliteration on purpose, saying the paired sound will stay in the listener's ear.",
+   "source": "Radiating Gnome, EN World",
+   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+   "quote": "which will resonate in the listener's ear",
+   "page": "reply #6"
+  },
+  {
+   "index": 446,
+   "feature": "other: information order",
+   "claim": "He traces the reader's eye through the original passage from feet to cliff to causeway and back, and moves the load-bearing detail forward because listeners are lost after a sentence or two.",
+   "source": "Radiating Gnome, EN World",
+   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+   "quote": "That seems like a lot of redirection",
+   "page": "reply #6"
+  },
+  {
+   "index": 447,
+   "feature": "naming and forms of address",
+   "claim": "Gus L. holds that plain names in a strange world beat strange names in a familiar one, and reads Lost Mine of Phandelver's invented names as unmemorable.",
+   "source": "Gus L., Dungeon of Signs",
+   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+   "quote": "Simple names used in a way that imply a strange world",
+   "page": "review, section on names"
+  },
+  {
+   "index": 448,
+   "feature": "place and institution description",
+   "claim": "Gus L. says the Phandalin locations each get a paragraph and no evocative detail in it.",
+   "source": "Gus L., Dungeon of Signs",
+   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+   "quote": "no evocative detail despite having a paragraph each",
+   "page": "review, section on Phandalin"
+  },
+  {
+   "index": 449,
+   "feature": "edition and house style",
+   "claim": "Gus L. reads a one-line box of read-aloud text in Lost Mine of Phandelver as a symptom of an outdated house style rather than of that scene.",
+   "source": "Gus L., Dungeon of Signs",
+   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+   "quote": "odd devotion to an antiquated house style",
+   "page": "review, section on Phandalin"
+  },
+  {
+   "index": 450,
+   "feature": "dm-facing sentence",
+   "claim": "Gus L. calls the Phandalin NPC sidebar useless because it gives a name and a note that the person has a quest and nothing else; Bryce Lynch praises the same device.",
+   "source": "Gus L., Dungeon of Signs",
+   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+   "quote": "a simple list of names with \"has a quest for party\"",
+   "page": "review, section on Phandalin"
+  },
+  {
+   "index": 451,
+   "feature": "concrete sensory noun",
+   "claim": "Gus L. contrasts the bare category word for a monster with a specific physical description he writes out, arguing the second makes a mystery of the same creature.",
+   "source": "Gus L., Dungeon of Signs",
+   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+   "quote": "is a mystery to be unraveled",
+   "page": "review, section on description"
+  },
+  {
+   "index": 452,
+   "feature": "other: information order",
+   "claim": "David Hartlage's example of boxed text failing is a 2012 tournament room whose load-bearing runes were listed among unimportant details and missed by his whole team.",
+   "source": "David Hartlage, 'Picturing the dungeon \u2013 boxed text', DMDavid",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "the text mentioned the runes alongside other, less important details",
+   "page": "Boxed text"
+  },
+  {
+   "index": 453,
+   "feature": "cadence and rhythm",
+   "claim": "Hartlage attributes boxed text's drag to delivery: a reader's voice takes a different tone and cadence from speech, and the monotony loses the listener.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "their voice takes a different tone and cadence",
+   "page": "Boxed text"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 439,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "those words are actually our mortal enemies",
+   "note": "Raw thread page fetched with a browser UA (HTTP 200). Under '1. Write A Good Description' the 'Try this:' procedure's fourth bullet is 'Try to cut out half the words... We may not be able to cut out half of them, but make it a goal', and the same bullet reads 'When we write, we include modifiers -- adjective and adverbs -- and those words are actually our mortal enemies.' Quote exact. Note the article's own top-level step 4 is 'Delivery: Don't Read - Perform'; the halving is the fourth step of the WRITING procedure (Dausuul labels it 'D' in reply #5), which is what the claim says."
+  },
+  {
+   "index": 440,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a flap of skin flaps under an old woman's arm",
+   "note": "Same page, same section: 'if I describe the way a flap of skin flaps under an old woman's arm, it paints a vivid image in your mind of the whole woman, very quickly.' Quote exact. Standing-for-the-whole limb also carried by 'we can say a lot about a scene with one or two well-chosen details' and 'What's the one thing you can describe about a person or a place that will carry with it enough detail of the whole?' The claim's 'loose skin' is a gloss of the page's 'flap of skin', which is description, not quotation."
+  },
+  {
+   "index": 441,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "instinctive DM pedantry... This is unnecessary. Players know about illusions.",
+   "note": "Post #5 by Dausuul, dated Jul 15, 2013 on the page (matches the claim's attribution and date), rewriting boxed text from 'Bastion of Broken Souls'. Step D reads: '\"Appears as\" is just instinctive DM pedantry--hey, it could be an illusion, so I have to qualify that it \"appears\" this way. This is unnecessary. Players know about illusions.' The phrase is duly cut: the revision reads 'It's a python from the waist down.' Quote exact, every limb supported."
+  },
+  {
+   "index": 442,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When was the last time you met a snake that wasn't scaly?",
+   "note": "Same post #5, same step D: 'Scaliness was pure fluff from the start. When was the last time you met a snake that wasn't scaly?' Quote exact. The 'noun already carries it' limb is the page's own reasoning \u2014 snakes are inherently scaly, and one sentence earlier 'by choosing \"python\" to replace \"snake,\" we have already implied bigness, color, and coils, so we can cut those.' The source description is the official one from Bastion of Broken Souls, quoted on the page."
+  },
+  {
+   "index": 443,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That's 23 words verses the originals 81.",
+   "note": "Post #6 by Radiating Gnome, Jul 16, 2013: 'This is from Dungeon 213: The Dread Pirate Braxis, by Jeffrey Ludwig... (from page 40, encounter area 2, Approach)'; he calls it 'one of the descriptions of a location'. He then writes 'Here are the two -- the original and my revision -- side by side' followed by a two-cell table, and closes 'That's 23 words verses the originals 81.' (typo 'verses' is the page's). Quote exact; all limbs on the page."
+  },
+  {
+   "index": 444,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the ramp needs to climb, not rise. Rise sounds like floating up effortlessly",
+   "note": "Post #6: '\"rising like a ramp out of the island's bedrock\" ... \"rising\" isn't my first choice here. We want to give the sense of the cliff and fortress above, the ramp needs to climb, not rise. Rise sounds like you're floating up effortlessly.' The replacement is executed in the final version: 'A lone craggy causeway climbs from island bedrock...'. Quote exact; the causeway is the subject; the effortless-floating rationale is verbatim on the page."
+  },
+  {
+   "index": 445,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the alliterative 'craggy causeway' which will resonate in the listener's ear",
+   "note": "Post #6: 'Stone is probably not necessary... And that gives us the alliterative \"craggy causeway\" which will resonate in the listener's ear.' Quote exact. He keeps it deliberately \u2014 'craggy causeway' survives into both revisions \u2014 and later reinforces the sound argument: 'it bring's the \"c\" sounds in from the beginning of the passage.' Strictly the alliteration is produced by cutting 'stone' as much as kept, but the deliberateness limb holds."
+  },
+  {
+   "index": 446,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "down (feet) to up (cliff)... That seems like a lot of redirection",
+   "note": "Post #6 traces it explicitly: 'the reader's attention is going from down (feet) to up (cliff) to up (stronghold) to up (battlements) jump all the way down (causeway) to up (stronghold) to down (tower). That seems like a lot of redirection -- putting the causeway and the tower much earlier in the description also evens out that progression a bit.' Quote exact. The listener-loss limb is on the same page a few paragraphs up: the tower 'is buried in the description. Assuming you lose listeners after the first or second sentence of reading this...' \u2014 note the two rationales sit in separate paragraphs (redirection/evenness here, listener-loss there), but both are the page's."
+  },
+  {
+   "index": 447,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "better then strange names that imply a cliched world",
+   "note": "Raw blogspot page fetched (HTTP 200). Names section: 'Simple names used in a way that imply a strange world are better then strange names that imply a cliched world.' Quote exact. Unmemorability limb: 'no need to add names that are impossible to remember', 'The dwarf merchant with the eye-patch is a lot easier to distinguish from other dwarves of business then \"Gundrun Rockseeker\"', and later 'nothing beyond an immediately forgotten fantasy name'. The claim's 'a familiar one' glosses the page's 'a cliched world'."
+  },
+  {
+   "index": 448,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The locations of course have no evocative detail despite having a paragraph each.",
+   "note": "Phandalin section, verbatim on the page: 'Following Lost Mine's tradition of almost good design philosophy in the shabbiest most cliched of dressing, the town has a few point-crawl style locations and a sidebar of NPCs. The locations of course have no evocative detail despite having a paragraph each.' Quote exact; both limbs (a paragraph each, no evocative detail) are the same sentence."
+  },
+  {
+   "index": 449,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "emblematic of Lost Mine's odd devotion to an antiquated house style",
+   "note": "Phandalin section: 'Also a unique text box for the one line \"Let's find an Inn\" that the rescued NPC might say is a waste, and one emblematic of Lost Mine's odd devotion to an antiquated house style.' Quote exact. The 'rather than of that scene' limb is carried by the next sentences: 'the NPC's reactions to the town are worth noting if they are special, but finding an inn is not a clue or even a bit of color worth noting... this is a pointless waste of space.'"
+  },
+  {
+   "index": 450,
+   "verdict": "PARTIAL",
+   "trueWording": "a simple list of names with 'has a quest for party' behind them is useless",
+   "unsupportedLimb": "'Bryce Lynch praises the same device' \u2014 nothing on this page has Bryce Lynch praising the NPC sidebar or any quest-list device",
+   "note": "The Gus L. half is fully verbatim: 'A side bar lists the important NPCs about town, but provides nothing beyond an immediately forgotten fantasy name and the note that they have a quest for the party... but a simple list of names with \"has a quest for party\" behind them is useless.' Bryce Lynch does appear on the page twice, but neither instance praises this device: Gus L. praises HIM ('I have read and had my work reviewed by tenfootpole.org. Bryce is excellent when it comes to explaining what makes a good adventure'), and Lynch's own comment of April 20, 2016 attacks D&D as 'not only generic but aggressively generic' \u2014 no mention of NPC sidebars or quest lists. The praise limb needs a tenfootpole.org source it does not have here."
+  },
+  {
+   "index": 451,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A 'goblin' is a vaguely defined monster... is a mystery to be unraveled",
+   "note": "Description section: 'A \"goblin\" is a vaguely defined monster that low level adventurers are supposed to kill. A \"4' tall thing with mottled white and lavender skin, vague drooping features, four ropy, ill matched limbs and a musty fungal odor\" is a mystery to be unraveled.' Quote exact. Both halves describe the same creature (a goblin), and the surrounding text supplies the argument: 'monsters are reduced to ever more boring cliches if their only description is a name from a monster guide.'"
+  },
+  {
+   "index": 452,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the text mentioned the runes alongside other, less important details",
+   "note": "Raw dmdavid.com tag page carries the full post 'Picturing the dungeon - boxed text' (David Hartlage, November 15, 2012). 'In 2012, the final challenge required you to close six arcane gates while demons poured out... the DM dutifully read the boxed text, which included a description of mysterious runes on the pillars in the room. Like any good boxed text description, the text mentioned the runes alongside other, less important details. No one on my team appreciated the runes significance, so we failed to discover that disabling the runes reduced the extremely difficult arcana checks required to close the gates.' Quote exact; year, tournament (D&D Championship at GEN CON), room, load-bearing runes and whole-team miss all supported. One nuance short of a downgrade: Hartlage frames the text as 'any good boxed text description' and adds 'We could not blame the DM's wording, because every team heard the same boxed text' \u2014 so it is a failure of the form's information order, not one he pins on that DM's phrasing."
+  },
+  {
+   "index": 453,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "their voice takes a different tone and cadence than when they speak extemporaneously",
+   "note": "Same post: 'Boxed text does have a drawback. When most speakers read something aloud, their voice takes a different tone and cadence than when they speak extemporaneously, and that monotony can cause players' attention to wander.' Quote exact; delivery-as-cause and monotony-loses-the-listener are the same sentence. He offers a second, content-side cause immediately after ('too many boxed text descriptions have lingered on... obviously unimportant fluff'), which does not contradict the claim."
+  }
+ ]
+}

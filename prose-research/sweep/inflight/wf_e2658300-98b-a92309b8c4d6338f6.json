@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i360-374",
+ "lines": 40,
+ "firstTs": "2026-09-06T09:50:26.812Z",
+ "lastTs": "2026-09-06T09:53:47.624Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 12
+ },
+ "urlsFetched": [
+  "https://georgerrmartin.com/notablog/2018/04/25/fire-blood-on-the-way/",
+  "https://georgerrmartin.com/notablog/2018/09/27/a-fire-blood-excerpt-just-for-you/",
+  "https://georgerrmartin.com/fireandblood/",
+  "https://winteriscoming.net/2018/05/03/george-r-r-martin-misconceptions-fire-and-blood-dance-with-dragons-not-a-blog/",
+  "https://reactormag.com/dangerous-women-george-r-r-martin-excerpt/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 10:10am (America/New_York)",
+ "run": "wf_e2658300-98b",
+ "agent": "a92309b8c4d6338f6",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_e2658300-98b/agent-a92309b8c4d6338f6.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i360-374.json",
+  "exists": false
+ }
+}

@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://shereadsnovels.com/xmlrpc.php">
+<title>The Lions of Al-Rassan by Guy Gavriel Kay &#8211; She Reads Novels</title>
+<script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Noto+Sans:r,i,b,bi:latin,latin-ext"]},"api_url":"https:\/\/fonts-api.wp.com\/css"};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = '/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active body, .wf-active button, .wf-active input, .wf-active select, .wf-active textarea{font-family:"Noto Sans",sans-serif}.wf-active .menu-toggle{font-family:"Noto Sans",sans-serif}.wf-active .comment-navigation a, .wf-active .paging-navigation a, .wf-active .post-navigation a{font-family:"Noto Sans",sans-serif}.wf-active .site-description{font-family:"Noto Sans",sans-serif}.wf-active .archive .page-title, .wf-active .search .page-title{font-family:"Noto Sans",sans-serif}.wf-active .entry-meta{font-family:"Noto Sans",sans-serif}.wf-active .format-quote blockquote:before{font-family:"Noto Sans",sans-serif}.wf-active .format-quote blockquote{font-family:"Noto Sans",sans-serif}.wf-active blockquote cite{font-family:"Noto Sans",sans-serif}.wf-active .jetpack-testimonial .entry-title{font-family:"Noto Sans",sans-serif}.wf-active .wp-caption-dd, .wf-active .wp-caption-text{font-family:"Noto Sans",sans-serif}</style>
+<meta name='robots' content='max-image-preview:large' />
+
+<!-- Async WordPress.com Remote Login -->
+<script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.parentNode.removeChild( dom_node ); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[ i ].parentNode.removeChild( dom_nodes[ i ] );
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+					+ '//' + window.location.hostname
+					+ '&postid=8728'
+					+ '&is_singular=1';
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9zaGVyZWFkc25vdmVscy5jb20%3D"
+		+ "&wpcomid=13133801"
+		+ "&time=" + Math.floor( Date.now() / 1000 );
+	document.body.appendChild( iframe );
+}, false );
+</script>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//widgets.wp.com' />
+<link rel='dns-prefetch' href='//fonts-api.wp.com' />
+<link rel="alternate" type="application/rss+xml" title="She Reads Novels &raquo; Feed" href="https://shereadsnovels.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="She Reads Novels &raquo; Comments Feed" href="https://shereadsnovels.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="She Reads Novels &raquo; The Lions of Al-Rassan by Guy Gavriel&nbsp;Kay Comments Feed" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/feed/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-1' href='/_static/??-eJxtjEsKgDAMBS9kjbqwuBDPUtog9o9J8fpaEQSRBw8GhoEjC50iY2QIRWRf1i0SWOSstHsYQkr1TPFIsKNXjEbkRPyhVhM18J/0m8M3fFPVlzD3UnbTtWG0J2CTNNk=&cssminify=yes' type='text/css' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/common.min.css */
+</style>
+<style id="wp-block-library-inline-css-extra">
+.has-text-align-justify {
+	text-align:justify;
+}
+.has-text-align-justify{text-align:justify;}
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}.wp-block-tab:not(.has-text-color){color:inherit!important}.wp-block-tab:not(.has-background){background-color:inherit!important}.wp-block-tab:focus,.wp-block-tab:hover{text-decoration:none}.wp-block-tab:focus-visible{outline:auto;outline-offset:0}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/classic.min.css */
+</style>
+
+<style id="coblocks-inline-format-inline-css">
+.uppercase{text-transform:uppercase}
+/*# sourceURL=coblocks-inline-format-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-12-1' href='/_static/??-eJx9jcEKg0AMRH+oaVhorR7Eb9E16IpZg8min2889FZ6GYbhPQYPgbhlo2zIBWQtU8qKcdvJd5be0AmmMfW0Ejv2jKoP/K0daZzIXNdvB6PzvyJ+A8MgO6mCJ6fCYLN/6e113IZXU9WfUL/DcgHSTkDo&cssminify=yes' type='text/css' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--albert-sans: 'Albert Sans', sans-serif;--wp--preset--font-family--alegreya: Alegreya, serif;--wp--preset--font-family--arvo: Arvo, serif;--wp--preset--font-family--bodoni-moda: 'Bodoni Moda', serif;--wp--preset--font-family--bricolage-grotesque: 'Bricolage Grotesque', sans-serif;--wp--preset--font-family--cabin: Cabin, sans-serif;--wp--preset--font-family--chivo: Chivo, sans-serif;--wp--preset--font-family--commissioner: Commissioner, sans-serif;--wp--preset--font-family--cormorant: Cormorant, serif;--wp--preset--font-family--courier-prime: 'Courier Prime', monospace;--wp--preset--font-family--crimson-pro: 'Crimson Pro', serif;--wp--preset--font-family--dm-mono: 'DM Mono', monospace;--wp--preset--font-family--dm-sans: 'DM Sans', sans-serif;--wp--preset--font-family--dm-serif-display: 'DM Serif Display', serif;--wp--preset--font-family--domine: Domine, serif;--wp--preset--font-family--eb-garamond: 'EB Garamond', serif;--wp--preset--font-family--epilogue: Epilogue, sans-serif;--wp--preset--font-family--fahkwang: Fahkwang, sans-serif;--wp--preset--font-family--figtree: Figtree, sans-serif;--wp--preset--font-family--fira-sans: 'Fira Sans', sans-serif;--wp--preset--font-family--fjalla-one: 'Fjalla One', sans-serif;--wp--preset--font-family--fraunces: Fraunces, serif;--wp--preset--font-family--gabarito: Gabarito, system-ui;--wp--preset--font-family--ibm-plex-mono: 'IBM Plex Mono', monospace;--wp--preset--font-family--ibm-plex-sans: 'IBM Plex Sans', sans-serif;--wp--preset--font-family--ibarra-real-nova: 'Ibarra Real Nova', serif;--wp--preset--font-family--instrument-serif: 'Instrument Serif', serif;--wp--preset--font-family--inter: Inter, sans-serif;--wp--preset--font-family--josefin-sans: 'Josefin Sans', sans-serif;--wp--preset--font-family--jost: Jost, sans-serif;--wp--preset--font-family--libre-baskerville: 'Libre Baskerville', serif;--wp--preset--font-family--libre-franklin: 'Libre Franklin', sans-serif;--wp--preset--font-family--literata: Literata, serif;--wp--preset--font-family--lora: Lora, serif;--wp--preset--font-family--merriweather: Merriweather, serif;--wp--preset--font-family--montserrat: Montserrat, sans-serif;--wp--preset--font-family--newsreader: Newsreader, serif;--wp--preset--font-family--noto-sans-mono: 'Noto Sans Mono', sans-serif;--wp--preset--font-family--nunito: Nunito, sans-serif;--wp--preset--font-family--open-sans: 'Open Sans', sans-serif;--wp--preset--font-family--overpass: Overpass, sans-serif;--wp--preset--font-family--pt-serif: 'PT Serif', serif;--wp--preset--font-family--petrona: Petrona, serif;--wp--preset--font-family--piazzolla: Piazzolla, serif;--wp--preset--font-family--playfair-display: 'Playfair Display', serif;--wp--preset--font-family--plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;--wp--preset--font-family--poppins: Poppins, sans-serif;--wp--preset--font-family--raleway: Raleway, sans-serif;--wp--preset--font-family--roboto: Roboto, sans-serif;--wp--preset--font-family--roboto-slab: 'Roboto Slab', serif;--wp--preset--font-family--rubik: Rubik, sans-serif;--wp--preset--font-family--rufina: Rufina, serif;--wp--preset--font-family--sora: Sora, sans-serif;--wp--preset--font-family--source-sans-3: 'Source Sans 3', sans-serif;--wp--preset--font-family--source-serif-4: 'Source Serif 4', serif;--wp--preset--font-family--space-mono: 'Space Mono', monospace;--wp--preset--font-family--syne: Syne, sans-serif;--wp--preset--font-family--texturina: Texturina, serif;--wp--preset--font-family--urbanist: Urbanist, sans-serif;--wp--preset--font-family--work-sans: 'Work Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-albert-sans-font-family{font-family: var(--wp--preset--font-family--albert-sans) !important;}.has-alegreya-font-family{font-family: var(--wp--preset--font-family--alegreya) !important;}.has-arvo-font-family{font-family: var(--wp--preset--font-family--arvo) !important;}.has-bodoni-moda-font-family{font-family: var(--wp--preset--font-family--bodoni-moda) !important;}.has-bricolage-grotesque-font-family{font-family: var(--wp--preset--font-family--bricolage-grotesque) !important;}.has-cabin-font-family{font-family: var(--wp--preset--font-family--cabin) !important;}.has-chivo-font-family{font-family: var(--wp--preset--font-family--chivo) !important;}.has-commissioner-font-family{font-family: var(--wp--preset--font-family--commissioner) !important;}.has-cormorant-font-family{font-family: var(--wp--preset--font-family--cormorant) !important;}.has-courier-prime-font-family{font-family: var(--wp--preset--font-family--courier-prime) !important;}.has-crimson-pro-font-family{font-family: var(--wp--preset--font-family--crimson-pro) !important;}.has-dm-mono-font-family{font-family: var(--wp--preset--font-family--dm-mono) !important;}.has-dm-sans-font-family{font-family: var(--wp--preset--font-family--dm-sans) !important;}.has-dm-serif-display-font-family{font-family: var(--wp--preset--font-family--dm-serif-display) !important;}.has-domine-font-family{font-family: var(--wp--preset--font-family--domine) !important;}.has-eb-garamond-font-family{font-family: var(--wp--preset--font-family--eb-garamond) !important;}.has-epilogue-font-family{font-family: var(--wp--preset--font-family--epilogue) !important;}.has-fahkwang-font-family{font-family: var(--wp--preset--font-family--fahkwang) !important;}.has-figtree-font-family{font-family: var(--wp--preset--font-family--figtree) !important;}.has-fira-sans-font-family{font-family: var(--wp--preset--font-family--fira-sans) !important;}.has-fjalla-one-font-family{font-family: var(--wp--preset--font-family--fjalla-one) !important;}.has-fraunces-font-family{font-family: var(--wp--preset--font-family--fraunces) !important;}.has-gabarito-font-family{font-family: var(--wp--preset--font-family--gabarito) !important;}.has-ibm-plex-mono-font-family{font-family: var(--wp--preset--font-family--ibm-plex-mono) !important;}.has-ibm-plex-sans-font-family{font-family: var(--wp--preset--font-family--ibm-plex-sans) !important;}.has-ibarra-real-nova-font-family{font-family: var(--wp--preset--font-family--ibarra-real-nova) !important;}.has-instrument-serif-font-family{font-family: var(--wp--preset--font-family--instrument-serif) !important;}.has-inter-font-family{font-family: var(--wp--preset--font-family--inter) !important;}.has-josefin-sans-font-family{font-family: var(--wp--preset--font-family--josefin-sans) !important;}.has-jost-font-family{font-family: var(--wp--preset--font-family--jost) !important;}.has-libre-baskerville-font-family{font-family: var(--wp--preset--font-family--libre-baskerville) !important;}.has-libre-franklin-font-family{font-family: var(--wp--preset--font-family--libre-franklin) !important;}.has-literata-font-family{font-family: var(--wp--preset--font-family--literata) !important;}.has-lora-font-family{font-family: var(--wp--preset--font-family--lora) !important;}.has-merriweather-font-family{font-family: var(--wp--preset--font-family--merriweather) !important;}.has-montserrat-font-family{font-family: var(--wp--preset--font-family--montserrat) !important;}.has-newsreader-font-family{font-family: var(--wp--preset--font-family--newsreader) !important;}.has-noto-sans-mono-font-family{font-family: var(--wp--preset--font-family--noto-sans-mono) !important;}.has-nunito-font-family{font-family: var(--wp--preset--font-family--nunito) !important;}.has-open-sans-font-family{font-family: var(--wp--preset--font-family--open-sans) !important;}.has-overpass-font-family{font-family: var(--wp--preset--font-family--overpass) !important;}.has-pt-serif-font-family{font-family: var(--wp--preset--font-family--pt-serif) !important;}.has-petrona-font-family{font-family: var(--wp--preset--font-family--petrona) !important;}.has-piazzolla-font-family{font-family: var(--wp--preset--font-family--piazzolla) !important;}.has-playfair-display-font-family{font-family: var(--wp--preset--font-family--playfair-display) !important;}.has-plus-jakarta-sans-font-family{font-family: var(--wp--preset--font-family--plus-jakarta-sans) !important;}.has-poppins-font-family{font-family: var(--wp--preset--font-family--poppins) !important;}.has-raleway-font-family{font-family: var(--wp--preset--font-family--raleway) !important;}.has-roboto-font-family{font-family: var(--wp--preset--font-family--roboto) !important;}.has-roboto-slab-font-family{font-family: var(--wp--preset--font-family--roboto-slab) !important;}.has-rubik-font-family{font-family: var(--wp--preset--font-family--rubik) !important;}.has-rufina-font-family{font-family: var(--wp--preset--font-family--rufina) !important;}.has-sora-font-family{font-family: var(--wp--preset--font-family--sora) !important;}.has-source-sans-3-font-family{font-family: var(--wp--preset--font-family--source-sans-3) !important;}.has-source-serif-4-font-family{font-family: var(--wp--preset--font-family--source-serif-4) !important;}.has-space-mono-font-family{font-family: var(--wp--preset--font-family--space-mono) !important;}.has-syne-font-family{font-family: var(--wp--preset--font-family--syne) !important;}.has-texturina-font-family{font-family: var(--wp--preset--font-family--texturina) !important;}.has-urbanist-font-family{font-family: var(--wp--preset--font-family--urbanist) !important;}.has-work-sans-font-family{font-family: var(--wp--preset--font-family--work-sans) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-14-1' href='/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/verbum-comments.css?m=1785895867i&cssminify=yes' type='text/css' media='all' />
+<link rel='stylesheet' id='verbum-gutenberg-css-css' href='https://widgets.wp.com/verbum-block-editor/block-editor.css?ver=1771405207' media='all' />
+<link rel='stylesheet' id='sela-fonts-css' href='https://fonts-api.wp.com/css?family=Source+Sans+Pro%3A300%2C300italic%2C400%2C400italic%2C600%7CDroid+Serif%3A400%2C400italic%7COswald%3A300%2C400&#038;subset=latin%2Clatin-ext' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-18-1' href='/_static/??-eJyFj90KwjAMRl/Img1h80Z8FOlKrJ1pUpaW4dvbiRcFRe++A+fLD6zJOOGMnCEWk6j4wAoz5mTd/c0QRRgugR14ZFxCbej3uHeqO2iG5htGVEhlAkWyoPlB+NfaVr1MsyYn8cNvTl1wIvE1eqhWg79KHsWQOJtDfawFcyUblq16jqd+HPuhGw7Hbn4CUctukA==&cssminify=yes' type='text/css' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='print-css-19-1' href='/wp-content/mu-plugins/global-print/global-print.css?m=1465851035i&cssminify=yes' type='text/css' media='print' />
+<style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+/*# sourceURL=jetpack-global-styles-frontend-style-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-22-1' href='/_static/??-eJyNjcEKwjAQRH/IuBWL0YP4KZJmQ7p1ky3dhOLf20ovIoiXYQZm5sE8Gi+5hFwgVTNyjZQVhlBG5x9bhiSyClYOCtq7KaBDfL4t5bj3qjv4/+lO2UNXiRFUPDk2LFH0I3x9lj6khd63EFk6x7+gM2EMRWGpbN7EidC4jIZJy7q9pevBno+ni21sM7wA5Zhh+w==&cssminify=yes' type='text/css' media='all' />
+<script id="jetpack_related-posts-js-extra">
+var related_posts_js_options = {"post_heading":"h4"};
+//# sourceURL=jetpack_related-posts-js-extra
+</script>
+<script id="wpcom-actionbar-placeholder-js-extra">
+var actionbardata = {"siteID":"13133801","postID":"8728","siteURL":"https://shereadsnovels.com","xhrURL":"https://shereadsnovels.com/wp-admin/admin-ajax.php","nonce":"e422ab16d0","isLoggedIn":"","statusMessage":"","subsEmailDefault":"instantly","proxyScriptUrl":"https://s0.wp.com/wp-content/js/wpcom-proxy-request.js?m=1513050504i&amp;ver=20211021","shortlink":"https://wp.me/pT6Hv-2gM","i18n":{"followedText":"New posts from this site will now appear in your \u003Ca href=\"https://wordpress.com/reader\"\u003EReader\u003C/a\u003E","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","shortLinkCopied":"Shortlink copied to clipboard."}};
+//# sourceURL=wpcom-actionbar-placeholder-js-extra
+</script>
+<script id="jetpack-mu-wpcom-settings-js-before">
+var JETPACK_MU_WPCOM_SETTINGS = {"assetsUrl":"https://s0.wp.com/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/"};
+//# sourceURL=jetpack-mu-wpcom-settings-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJx1T9sOgjAM/SFLkQR9Mn6KAdaQzt3cOpC/dyommOhTe3JuOTgHGLwTcoI2QzB5ZJdQk4RuuK4YrfcOL+wG7DMbhZFMJ6Qg+CTpG1WWXaXTDjfBumiMQIj+vny4EmayovQk9S1TXNazDfgrAstjLKW/2jYzZlYjycv+fqHPNsDENBfX2Z72x7at60PTtPoBeIxivA=='></script>
+<script id="rlt-proxy-js-after">
+	rltInitialize( {"token":null,"iframeOrigins":["https:\/\/widgets.wp.com"]} );
+//# sourceURL=rlt-proxy-js-after
+</script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://shereadsnovels.wordpress.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/" />
+<link rel='shortlink' href='https://wp.me/pT6Hv-2gM' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fshereadsnovels.com%2F2013%2F08%2F17%2Fthe-lions-of-al-rassan-by-guy-gavriel-kay%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fshereadsnovels.com%2F2013%2F08%2F17%2Fthe-lions-of-al-rassan-by-guy-gavriel-kay%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="The Lions of Al-Rassan by Guy Gavriel Kay" />
+<meta property="og:url" content="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/" />
+<meta property="og:description" content="Guy Gavriel Kay is only a recent discovery for me, but after reading Tigana in June I knew I wanted to read more of his work. Leander of The Idle Woman mentioned that she had been wanting to re-rea…" />
+<meta property="article:published_time" content="2013-08-17T09:31:09+00:00" />
+<meta property="article:modified_time" content="2013-08-17T09:31:09+00:00" />
+<meta property="og:site_name" content="She Reads Novels" />
+<meta property="og:image" content="https://shereadsnovels.com/wp-content/uploads/2013/08/the-lions-of-al-rassan.jpg?w=196" />
+<meta property="og:image:width" content="196" />
+<meta property="og:image:height" content="300" />
+<meta property="og:image:alt" content="The Lions of Al-Rassan" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<meta name="twitter:creator" content="@shereadsnovels" />
+<meta name="twitter:site" content="@shereadsnovels" />
+<meta name="twitter:text:title" content="The Lions of Al-Rassan by Guy Gavriel&nbsp;Kay" />
+<meta name="twitter:image" content="https://shereadsnovels.com/wp-content/uploads/2013/08/the-lions-of-al-rassan.jpg?w=144" />
+<meta name="twitter:image:alt" content="The Lions of Al-Rassan" />
+<meta name="twitter:card" content="summary" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=32" sizes="16x16" />
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=32" sizes="16x16" />
+<link rel="apple-touch-icon" href="https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=114" />
+<link rel='openid.server' href='https://shereadsnovels.com/?openidserver=1' />
+<link rel='openid.delegate' href='https://shereadsnovels.com/' />
+<link rel="search" type="application/opensearchdescription+xml" href="https://shereadsnovels.com/osd.xml" title="She Reads Novels" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="description" content="Guy Gavriel Kay is only a recent discovery for me, but after reading Tigana in June I knew I wanted to read more of his work. Leander of The Idle Woman mentioned that she had been wanting to re-read The Lions of Al-Rassan, one of her favourite books, so we decided it would be interesting&hellip;" />
+<style id="custom-background-css">
+body.custom-background { background-image: url("https://shereadsnovels.wordpress.com/wp-content/uploads/2026/05/grey-star.jpg"); background-position: left top; background-size: auto; background-repeat: repeat; background-attachment: scroll; }
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-0-3' href='/_static/??-eJyNjMEKhDAMBX9IfaiIXsRPWdxskGqbFNPi7y+CevY4wzA4YkkqiSUh5DL6vDgxrJziTNvFCKqCjxPC1yttBjtc5L0iswLvD0F/2bOB5l2zsX+iW5zDKYx1P3RN07b1sP4BKPs7aw==&cssminify=yes' type='text/css' media='all' />
+<style id="jetpack-subscriptions-inline-css">
+#subscribe-email input {
+	width: 95%;
+}
+
+.comment-subscription-form {
+	margin-bottom: 1em;
+}
+
+.comment-subscription-form .subscribe-label {
+	display: inline !important;
+}
+
+/*
+Text meant only for screen readers.
+Provides support for themes that do not bundle this CSS yet.
+@see https://make.wordpress.org/accessibility/2015/02/09/hiding-text-for-screen-readers-with-wordpress-core/
+***********************************/
+.screen-reader-text {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	overflow-wrap: normal !important;
+}
+
+/*# sourceURL=/wp-content/mu-plugins/jetpack-plugin/moon/_inc/build/subscriptions/subscriptions.min.css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-3' href='/wp-content/mu-plugins/jetpack-plugin/moon/modules/widgets/goodreads/css/goodreads.css?m=1753284714i&cssminify=yes' type='text/css' media='all' />
+
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-8728 single-format-standard custom-background wp-theme-pubsela customizer-styles-applied not-multi-author display-header-text jetpack-reblog-enabled">
+<div id="page" class="hfeed site">
+	<header id="masthead" class="site-header" role="banner">
+		<a class="skip-link screen-reader-text" href="#content" title="Skip to content">Skip to content</a>
+
+		<div class="site-branding">
+			<a href="https://shereadsnovels.com/" class="site-logo-link" rel="home" itemprop="url"></a>			<h1 class="site-title"><a href="https://shereadsnovels.com/" title="She Reads Novels" rel="home">She Reads Novels</a></h1>
+							<h2 class="site-description">&quot;She had read novels while other people perused the Sunday papers&quot; &#8211; Mary Elizabeth Braddon</h2>
+					</div><!-- .site-branding -->
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle" aria-controls="menu" aria-expanded="false">Menu</button>
+			<div class="menu"><ul>
+<li ><a href="https://shereadsnovels.com/">Home</a></li><li class="page_item page-item-485"><a href="https://shereadsnovels.com/reviews-by-author/">A-Z Review List</a></li>
+<li class="page_item page-item-2"><a href="https://shereadsnovels.com/about/">About</a></li>
+<li class="page_item page-item-488 page_item_has_children"><a href="https://shereadsnovels.com/challenges/">Challenges and Projects</a>
+<ul class='children'>
+	<li class="page_item page-item-51058 page_item_has_children"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/">20 Books of Summer&nbsp;2026</a>
+	<ul class='children'>
+		<li class="page_item page-item-47268 page_item_has_children"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/">20 Books of Summer&nbsp;2025</a>
+		<ul class='children'>
+			<li class="page_item page-item-43157 page_item_has_children"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/">20 Books of Summer&nbsp;2024</a>
+			<ul class='children'>
+				<li class="page_item page-item-39768 page_item_has_children"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/">20 Books of Summer&nbsp;2023</a>
+				<ul class='children'>
+					<li class="page_item page-item-35379 page_item_has_children"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/">20 Books of Summer&nbsp;2022</a>
+					<ul class='children'>
+						<li class="page_item page-item-31734"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/20-books-of-summer-2021/">20 Books of Summer&nbsp;2021</a></li>
+						<li class="page_item page-item-28766"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/20-books-of-summer-2020/">20 Books of Summer&nbsp;2020</a></li>
+						<li class="page_item page-item-25995"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/20-books-of-summer-2019/">20 Books of Summer&nbsp;2019</a></li>
+						<li class="page_item page-item-22918"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/20-books-of-summer-2018/">20 Books of Summer&nbsp;2018</a></li>
+						<li class="page_item page-item-19727"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/20-books-of-summer-2017/">20 Books of Summer&nbsp;2017</a></li>
+					</ul>
+</li>
+				</ul>
+</li>
+			</ul>
+</li>
+		</ul>
+</li>
+	</ul>
+</li>
+	<li class="page_item page-item-11059"><a href="https://shereadsnovels.com/challenges/historical-fiction/">Reading the Walter Scott&nbsp;Prize</a></li>
+	<li class="page_item page-item-1124"><a href="https://shereadsnovels.com/challenges/completed-challenges/">Completed Challenges</a></li>
+	<li class="page_item page-item-11137"><a href="https://shereadsnovels.com/challenges/reading-lists/">Reading Lists</a></li>
+	<li class="page_item page-item-13622"><a href="https://shereadsnovels.com/challenges/goodreads-tbr-project/">Goodreads TBR Project</a></li>
+</ul>
+</li>
+<li class="page_item page-item-6419 page_item_has_children"><a href="https://shereadsnovels.com/my-journey-through-time/">My Journey Through&nbsp;Time</a>
+<ul class='children'>
+	<li class="page_item page-item-17387"><a href="https://shereadsnovels.com/my-journey-through-time/ancient-greece/">Ancient Greece</a></li>
+	<li class="page_item page-item-13263"><a href="https://shereadsnovels.com/my-journey-through-time/ancient-rome/">Ancient Rome</a></li>
+	<li class="page_item page-item-21679"><a href="https://shereadsnovels.com/my-journey-through-time/history-of-spain/">History of Spain</a></li>
+	<li class="page_item page-item-25404"><a href="https://shereadsnovels.com/my-journey-through-time/history-of-wales/">History of Wales</a></li>
+	<li class="page_item page-item-13973"><a href="https://shereadsnovels.com/my-journey-through-time/pre-conquest-england-and-house-of-normandy/">Pre-Conquest England and House of&nbsp;Normandy</a></li>
+	<li class="page_item page-item-12233"><a href="https://shereadsnovels.com/my-journey-through-time/the-plantagenets/">The Plantagenets</a></li>
+	<li class="page_item page-item-41947"><a href="https://shereadsnovels.com/my-journey-through-time/historical-fiction-in-translation/">Historical Fiction in&nbsp;Translation</a></li>
+	<li class="page_item page-item-10870"><a href="https://shereadsnovels.com/my-journey-through-time/the-wars-of-the-roses/">The Wars of the&nbsp;Roses</a></li>
+	<li class="page_item page-item-10916"><a href="https://shereadsnovels.com/my-journey-through-time/the-tudors-part-1/">The Tudors: Part&nbsp;1</a></li>
+	<li class="page_item page-item-11173 page_item_has_children"><a href="https://shereadsnovels.com/my-journey-through-time/the-tudors-part-2/">The Tudors: Part&nbsp;2</a>
+	<ul class='children'>
+		<li class="page_item page-item-13480"><a href="https://shereadsnovels.com/my-journey-through-time/the-tudors-part-2/inspired-by-shakespeare/">Inspired by Shakespeare</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-18957"><a href="https://shereadsnovels.com/my-journey-through-time/irish-history/">Irish History</a></li>
+	<li class="page_item page-item-11015 page_item_has_children"><a href="https://shereadsnovels.com/my-journey-through-time/the-english-civil-war/">James I/VI, Charles I and the English Civil&nbsp;War</a>
+	<ul class='children'>
+		<li class="page_item page-item-15742"><a href="https://shereadsnovels.com/my-journey-through-time/the-english-civil-war/restoration-and-late-17th-century/">Restoration and late 17th&nbsp;century</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-11747"><a href="https://shereadsnovels.com/my-journey-through-time/world-war-i/">World War I</a></li>
+	<li class="page_item page-item-14543"><a href="https://shereadsnovels.com/my-journey-through-time/scottish-history/">Scottish History</a></li>
+</ul>
+</li>
+<li class="page_item page-item-49618 page_item_has_children"><a href="https://shereadsnovels.com/read-in-2026/">Read in 2026</a>
+<ul class='children'>
+	<li class="page_item page-item-45926"><a href="https://shereadsnovels.com/read-in-2026/read-in-2025/">Read in 2025</a></li>
+	<li class="page_item page-item-41907"><a href="https://shereadsnovels.com/read-in-2026/read-in-2024/">Read in 2024</a></li>
+	<li class="page_item page-item-38256 page_item_has_children"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/">Read in 2023</a>
+	<ul class='children'>
+		<li class="page_item page-item-33726"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2022/">Read in 2022</a></li>
+		<li class="page_item page-item-30283"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2021/">Read in 2021</a></li>
+		<li class="page_item page-item-27596"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2020/">Read in 2020</a></li>
+		<li class="page_item page-item-24877"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2019/">Read in 2019</a></li>
+		<li class="page_item page-item-21431"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2018/">Read in 2018</a></li>
+		<li class="page_item page-item-17797"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2017/">Read in 2017</a></li>
+		<li class="page_item page-item-14894"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2016/">Read in 2016</a></li>
+		<li class="page_item page-item-12281"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2015/">Read in 2015</a></li>
+		<li class="page_item page-item-7271"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2014/">Read in 2014</a></li>
+		<li class="page_item page-item-9560"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2013/">Read in 2013</a></li>
+		<li class="page_item page-item-5115"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2012/">Read in 2012</a></li>
+		<li class="page_item page-item-1032"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2011/">Read in 2011</a></li>
+		<li class="page_item page-item-2416"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2010-2/">Read in 2010</a></li>
+		<li class="page_item page-item-1040"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2009/">Read in 2009</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li class="page_item page-item-512"><a href="https://shereadsnovels.com/review-policy/">Review Policy</a></li>
+<li class="page_item page-item-5683 page_item_has_children"><a href="https://shereadsnovels.com/the-classics-club/">The Classics Club</a>
+<ul class='children'>
+	<li class="page_item page-item-14324"><a href="https://shereadsnovels.com/the-classics-club/womens-classic-literature-event/">Women&#8217;s Classic Literature&nbsp;Event</a></li>
+</ul>
+</li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+				
+<article id="post-8728" class="post-8728 post type-post status-publish format-standard hentry category-fantasy category-historical-fiction category-reviews tag-alternate-history tag-guy-gavriel-kay tag-spain without-featured-image">
+
+	
+	<header class="entry-header ">
+					<h1 class="entry-title">The Lions of Al-Rassan by Guy Gavriel&nbsp;Kay</h1>			</header><!-- .entry-header -->
+
+	<div class="entry-body">
+
+				<div class="entry-meta">
+			<span class="date"><a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/" title="Permalink to The Lions of Al-Rassan by Guy Gavriel&nbsp;Kay" rel="bookmark"><time class="entry-date published" datetime="2013-08-17T10:31:09+01:00">August 17, 2013</time></a></span>		</div><!-- .entry-meta -->
+		
+				<div class="entry-content">
+			<p><a href="https://shereadsnovels.com/wp-content/uploads/2013/08/the-lions-of-al-rassan.jpg"><img data-attachment-id="8729" data-permalink="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/the-lions-of-al-rassan/#main" data-orig-file="https://shereadsnovels.com/wp-content/uploads/2013/08/the-lions-of-al-rassan.jpg" data-orig-size="262,400" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="The Lions of Al-Rassan" data-image-description="" data-image-caption="" data-large-file="https://shereadsnovels.com/wp-content/uploads/2013/08/the-lions-of-al-rassan.jpg?w=262" src="https://shereadsnovels.com/wp-content/uploads/2013/08/the-lions-of-al-rassan.jpg?w=196&#038;h=300" alt="The Lions of Al-Rassan" width="196" height="300" class="alignleft size-medium wp-image-8729" srcset="https://shereadsnovels.com/wp-content/uploads/2013/08/the-lions-of-al-rassan.jpg?w=196 196w, https://shereadsnovels.com/wp-content/uploads/2013/08/the-lions-of-al-rassan.jpg?w=98 98w, https://shereadsnovels.com/wp-content/uploads/2013/08/the-lions-of-al-rassan.jpg 262w" sizes="(max-width: 196px) 100vw, 196px" /></a> Guy Gavriel Kay is only a recent discovery for me, but after reading <a href="https://shereadsnovels.wordpress.com/2013/06/26/tigana-by-guy-gavriel-kay/" title="Tigana by Guy Gavriel Kay"><em>Tigana</em></a> in June I knew I wanted to read more of his work.  Leander of <a href="http://theidlewoman.blogspot.co.uk/" target="_blank">The Idle Woman</a> mentioned that she had been wanting to re-read <em>The Lions of Al-Rassan</em>, one of her favourite books, so we decided it would be interesting to read it at the same time and exchange our thoughts on it.</p>
+<p>I should start by saying that although Kay is known as a fantasy author, this book has few, if any, elements that I would describe as ‘fantasy’ and is much closer to historical fiction.  The story is set in a fictitious world very similar to medieval Spain.  In the north, we have the sun-worshipping Jaddites – brave warriors and horsemen.  The Jaddite lands have become divided and weakened over the years due to rivalries between their three kings but they still hope to one day ride south and reconquer the rest of the peninsula.  In the south is Al-Rassan, the land of the Asharites, who worship the stars and who value poetry, music and beauty.  After the death of their last Khalif, Al-Rassan has also become divided and is not as strong as it once was.  Caught between the two are the wandering Kindath people, who pray to the two moons that shine in the sky, one blue and one white.  Even with my very limited (almost non-existent) knowledge of Spanish history I could immediately see that the Jaddites represented Christians, the Asharites Muslims and the Kindath Jews.  </p>
+<p>As tension builds between the Jaddites and the Asharites and war begins to look inevitable, there are big consequences for the novel’s three central characters.  One of these is Rodrigo Belmonte, Captain to a Jaddite king and one of the Jaddites’ greatest soldiers.  When Rodrigo is exiled by his king he and his company find themselves in the Asharite city of Ragosa.  Here he meets another great man, Ammar ibn Khairan, an Asharite who is also in exile, and the two form an instant connection.  Our third protagonist is a woman, Jehane bet Ishak, a Kindath physician who joins Rodrigo&#8217;s company and becomes close to both men.  With the peninsula heading rapidly towards conflict, will the bonds between Rodrigo, Ammar and Jehane be able to survive?   </p>
+<p>Now that I’ve read two of Guy Gavriel Kay’s novels, it’s hard to say which I liked best because both were such great books.  I think I found <em>Tigana</em> more fun to read (simply because I read fantasy so rarely these days and it was something a bit different for me to read a book with magic and wizards) but I found the writing in <em>The Lions of Al-Rassan</em> more powerful and the characters more fully developed.  Ammar, Rodrigo and Jehane are all characters that I could love and admire, and considering their very different backgrounds and cultures, it&#8217;s quite an achievement that Kay could make it possible to identify with and care about all three of them.    </p>
+<p>Although this novel is set in a fictional land, the parallels with a real period of history made me feel that I was gaining a better understanding of medieval Spain.  But as well as the history, there’s also a lot of drama and excitement throughout the novel: among other things, there are battles, assassination attempts (both successful and unsuccessful), and a masked Carnival.  What I really loved about this book, though, was the portrayal of the three main characters and the relationships between them.  It’s not as simple as Jehane being in love with both men (or them being in love with her) and having to choose between them; although there is a romantic aspect, the relationships are much deeper and more complex than that and encompass not just love but also friendship, loyalty and trust.  </p>
+<p>There’s a growing sense of sadness too as you start to approach the end of the book and wonder whether all three of Ammar, Jehane and Rodrigo will survive the coming conflict and how they will cope if they find themselves on opposite sides.  The final chapter was one of the most tense and emotional I’ve read for some time, though I thought it would have been even more effective without the epilogue that followed (I was pleased to see that Leander felt the same as I was wondering whether I was the only person who would rather not have had the loose ends tied up).             </p>
+<p>I’m excited about the prospect of working my way through the rest of Kay’s books, but I’m sure I’ll want to re-read this one at some point too – preferably after I’ve had a chance to read up on Spanish history!  If you would like to see what Leander thought of <em>The Lions of Al-Rassan</em>, you can read her post <a href="http://theidlewoman.blogspot.co.uk/2013/08/the-lions-of-al-rassan-guy-gavriel-kay.html" target="_blank">here</a>.</p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-email"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-email-8728"
+				class="share-email sd-button share-icon"
+				href="mailto:?subject=%5BShared%20Post%5D%20The%20Lions%20of%20Al-Rassan%20by%20Guy%20Gavriel%20Kay&#038;body=https%3A%2F%2Fshereadsnovels.com%2F2013%2F08%2F17%2Fthe-lions-of-al-rassan-by-guy-gavriel-kay%2F&#038;share=email"
+				target="_blank"
+				aria-labelledby="sharing-email-8728"
+				data-email-share-error-title="Do you have email set up?" data-email-share-error-text="If you&#039;re having problems sharing via email, you might not have email set up for your browser. You may need to create a new email yourself." data-email-share-nonce="75fd2e2953" data-email-share-track-url="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?share=email">
+				<span id="sharing-email-8728" hidden>Email a link to a friend (Opens in new window)</span>
+				<span>Email</span>
+			</a></li><li class="share-print"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-print-8728"
+				class="share-print sd-button share-icon"
+				href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#print?share=print"
+				target="_blank"
+				aria-labelledby="sharing-print-8728"
+				>
+				<span id="sharing-print-8728" hidden>Print (Opens in new window)</span>
+				<span>Print</span>
+			</a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-facebook-8728"
+				class="share-facebook sd-button share-icon"
+				href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?share=facebook"
+				target="_blank"
+				aria-labelledby="sharing-facebook-8728"
+				>
+				<span id="sharing-facebook-8728" hidden>Share on Facebook (Opens in new window)</span>
+				<span>Facebook</span>
+			</a></li><li class="share-reddit"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-reddit-8728"
+				class="share-reddit sd-button share-icon"
+				href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?share=reddit"
+				target="_blank"
+				aria-labelledby="sharing-reddit-8728"
+				>
+				<span id="sharing-reddit-8728" hidden>Share on Reddit (Opens in new window)</span>
+				<span>Reddit</span>
+			</a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-twitter-8728"
+				class="share-twitter sd-button share-icon"
+				href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?share=twitter"
+				target="_blank"
+				aria-labelledby="sharing-twitter-8728"
+				>
+				<span id="sharing-twitter-8728" hidden>Share on X (Opens in new window)</span>
+				<span>X</span>
+			</a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-13133801-8728-6a9d34f4adf7d' data-src='//widgets.wp.com/likes/index.html?ver=20260906#blog_id=13133801&amp;post_id=8728&amp;origin=shereadsnovels.wordpress.com&amp;obj_id=13133801-8728-6a9d34f4adf7d&amp;domain=shereadsnovels.com' data-name='like-post-frame-13133801-8728-6a9d34f4adf7d' data-title='Like or Reblog'><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class='loading'>Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>					</div><!-- .entry-content -->
+		
+				<footer class="entry-meta">
+			<span class="cat-links">Posted in: <a href="https://shereadsnovels.com/category/reviews/fantasy/" rel="category tag">Fantasy</a>, <a href="https://shereadsnovels.com/category/reviews/historical-fiction/" rel="category tag">Historical Fiction</a>, <a href="https://shereadsnovels.com/category/reviews/" rel="category tag">Reviews</a></span><span class="sep"> | </span><span class="tags-links">Tagged: <a href="https://shereadsnovels.com/tag/alternate-history/" rel="tag">Alternate history</a>, <a href="https://shereadsnovels.com/tag/guy-gavriel-kay/" rel="tag">Guy Gavriel Kay</a>, <a href="https://shereadsnovels.com/tag/spain/" rel="tag">Spain</a></span>		</footer><!-- .entry-meta -->
+		
+			</div><!-- .entry-body -->
+
+</article><!-- #post-## -->
+
+					<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">Post navigation</h1>
+		<div class="nav-links">
+			<div class="nav-previous"><a href="https://shereadsnovels.com/2013/08/13/the-sea-change-by-joanna-rossiter/" rel="prev"><span class="meta-nav"></span>&nbsp;The Sea Change by Joanna&nbsp;Rossiter</a></div><div class="nav-next"><a href="https://shereadsnovels.com/2013/08/19/captain-blood-by-rafael-sabatini/" rel="next">Captain Blood by Rafael&nbsp;Sabatini&nbsp;<span class="meta-nav"></span></a></div>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	
+				
+	<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			17 thoughts on &ldquo;<span>The Lions of Al-Rassan by Guy Gavriel&nbsp;Kay</span>&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+			
+	<li id="comment-7909" class="comment byuser comment-author-jessicabookworm even thread-even depth-1 parent">
+		<article id="div-comment-7909" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="http://thebookwormchronicles.wordpress.com/" class="url" rel="ugc external nofollow">jessicabookworm</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7909">
+						<time datetime="2013-08-17T14:25:13+01:00">
+							August 17, 2013 at 2:25 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7909#respond" data-commentid="7909" data-postid="8728" data-belowelement="div-comment-7909" data-respondelement="respond" data-replyto="Reply to jessicabookworm" aria-label="Reply to jessicabookworm">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='jessicabookworm&#039;s avatar' src='https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>Sounds like a great read. The fantasy/history style reminds me of <i>A Song of Ice and Fire</i> series. Once I&#8217;ve finished that epic series maybe I should look for this author&#8217;s work.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-7917" class="comment byuser comment-author-shereadsnovels bypostauthor odd alt depth-2 parent">
+		<article id="div-comment-7917" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7917">
+						<time datetime="2013-08-18T17:03:50+01:00">
+							August 18, 2013 at 5:03 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7917#respond" data-commentid="7917" data-postid="8728" data-belowelement="div-comment-7917" data-respondelement="respond" data-replyto="Reply to Helen" aria-label="Reply to Helen">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>That series sounds like a big commitment so I can understand wanting to finish those before trying another fantasy author!</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-7924" class="comment byuser comment-author-jessicabookworm even depth-3">
+		<article id="div-comment-7924" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="http://thebookwormchronicles.wordpress.com/" class="url" rel="ugc external nofollow">jessicabookworm</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7924">
+						<time datetime="2013-08-18T20:57:49+01:00">
+							August 18, 2013 at 8:57 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7924#respond" data-commentid="7924" data-postid="8728" data-belowelement="div-comment-7924" data-respondelement="respond" data-replyto="Reply to jessicabookworm" aria-label="Reply to jessicabookworm">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='jessicabookworm&#039;s avatar' src='https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/ced3d6dca8ff7a0bd21691049ff06a7b5f04d6fa2b936f4bf70dec93f10f5cab?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>Yes, big commitment! I still have 5 to go and the author is writing more!</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-7910" class="comment odd alt thread-odd thread-alt depth-1 parent">
+		<article id="div-comment-7910" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="http://Www.catherinemillsartist.com" class="url" rel="ugc external nofollow">Cathy</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7910">
+						<time datetime="2013-08-17T15:26:26+01:00">
+							August 17, 2013 at 3:26 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7910#respond" data-commentid="7910" data-postid="8728" data-belowelement="div-comment-7910" data-respondelement="respond" data-replyto="Reply to Cathy" aria-label="Reply to Cathy">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Cathy&#039;s avatar' src='https://2.gravatar.com/avatar/b26757f4ce045fd4ffbce1c2671e27f9b9d5f056677aa55c337cdb88d71d447b?s=48&#038;d=identicon&#038;r=G' srcset='https://2.gravatar.com/avatar/b26757f4ce045fd4ffbce1c2671e27f9b9d5f056677aa55c337cdb88d71d447b?s=48&#038;d=identicon&#038;r=G 1x, https://2.gravatar.com/avatar/b26757f4ce045fd4ffbce1c2671e27f9b9d5f056677aa55c337cdb88d71d447b?s=72&#038;d=identicon&#038;r=G 1.5x, https://2.gravatar.com/avatar/b26757f4ce045fd4ffbce1c2671e27f9b9d5f056677aa55c337cdb88d71d447b?s=96&#038;d=identicon&#038;r=G 2x, https://2.gravatar.com/avatar/b26757f4ce045fd4ffbce1c2671e27f9b9d5f056677aa55c337cdb88d71d447b?s=144&#038;d=identicon&#038;r=G 3x, https://2.gravatar.com/avatar/b26757f4ce045fd4ffbce1c2671e27f9b9d5f056677aa55c337cdb88d71d447b?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>Thanks for all your posts, all are considered and appreciated.  I will definitely read this book, after I finish Edith Parteger&#8217;s Heaven Tree trilogy, which I highly recommend. Guy Gavriel Kay wrings me out, so I have to gird my loins before I dive in. I loved &#8216;Finovar&#8217;s Tapestry, Ysabel and Under Heaven; although I felt utterly exhausted after reading Finovars Tapestry (actually 3 books, can&#8217;t remember all the titles) sorry&#8230;. But everything is there; pagan mythology, Arthurian legend, modern contemporary life, battles, large and small, intimate and epic and through it all, love and life.  I read this book at a particular time in my life, and it made me weep. I know, I&#8217;m ridiculous, but there it is.<br />
+Thanks for reminding me I am not alone as I turn the pages late into the night.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-7918" class="comment byuser comment-author-shereadsnovels bypostauthor even depth-2">
+		<article id="div-comment-7918" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7918">
+						<time datetime="2013-08-18T17:06:44+01:00">
+							August 18, 2013 at 5:06 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7918#respond" data-commentid="7918" data-postid="8728" data-belowelement="div-comment-7918" data-respondelement="respond" data-replyto="Reply to Helen" aria-label="Reply to Helen">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>No, you&#8217;re not alone!  I&#8217;m thinking about making Under Heaven the next Kay novel I read, but I&#8217;d like to read them all eventually.  The Heaven Tree trilogy is on my list too as I&#8217;ve heard such good things about those books.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-7911" class="comment odd alt thread-even depth-1 parent">
+		<article id="div-comment-7911" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="http://theidlewoman.blogspot.com" class="url" rel="ugc external nofollow">Leander</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7911">
+						<time datetime="2013-08-17T15:36:54+01:00">
+							August 17, 2013 at 3:36 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7911#respond" data-commentid="7911" data-postid="8728" data-belowelement="div-comment-7911" data-respondelement="respond" data-replyto="Reply to Leander" aria-label="Reply to Leander">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Leander&#039;s avatar' src='https://1.gravatar.com/avatar/d8cd3264bfdf1369537d7ca53faaae4e2bc5183ea81bff5ca6daf6e2df92d904?s=48&#038;d=identicon&#038;r=G' srcset='https://1.gravatar.com/avatar/d8cd3264bfdf1369537d7ca53faaae4e2bc5183ea81bff5ca6daf6e2df92d904?s=48&#038;d=identicon&#038;r=G 1x, https://1.gravatar.com/avatar/d8cd3264bfdf1369537d7ca53faaae4e2bc5183ea81bff5ca6daf6e2df92d904?s=72&#038;d=identicon&#038;r=G 1.5x, https://1.gravatar.com/avatar/d8cd3264bfdf1369537d7ca53faaae4e2bc5183ea81bff5ca6daf6e2df92d904?s=96&#038;d=identicon&#038;r=G 2x, https://1.gravatar.com/avatar/d8cd3264bfdf1369537d7ca53faaae4e2bc5183ea81bff5ca6daf6e2df92d904?s=144&#038;d=identicon&#038;r=G 3x, https://1.gravatar.com/avatar/d8cd3264bfdf1369537d7ca53faaae4e2bc5183ea81bff5ca6daf6e2df92d904?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>So pleased to see the considered final verdict, Helen. And so relieved that you enjoyed it so much! It was a real joy discussing this with you &#8211; and it&#8217;s funny that we both independently picked up on the same things. I&#8217;d recommend Sailing to Sarantium or Under Heaven for your next one. 🙂</p>
+<p>Thanks so much for letting me read along with you.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-7919" class="comment byuser comment-author-shereadsnovels bypostauthor even depth-2">
+		<article id="div-comment-7919" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7919">
+						<time datetime="2013-08-18T17:10:11+01:00">
+							August 18, 2013 at 5:10 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7919#respond" data-commentid="7919" data-postid="8728" data-belowelement="div-comment-7919" data-respondelement="respond" data-replyto="Reply to Helen" aria-label="Reply to Helen">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>Yes, we seem to have had a lot of the same thoughts about the book.  Thanks for suggesting the joint read 🙂</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-7913" class="comment odd alt thread-odd thread-alt depth-1 parent">
+		<article id="div-comment-7913" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="http://cat-bookmagic.blogspot.com" class="url" rel="ugc external nofollow">Cat</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7913">
+						<time datetime="2013-08-17T21:29:12+01:00">
+							August 17, 2013 at 9:29 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7913#respond" data-commentid="7913" data-postid="8728" data-belowelement="div-comment-7913" data-respondelement="respond" data-replyto="Reply to Cat" aria-label="Reply to Cat">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Cat&#039;s avatar' src='https://1.gravatar.com/avatar/a122972e220315b2b4ba1c4fddab6fdee2b4226d637e97211cf68836c018c665?s=48&#038;d=identicon&#038;r=G' srcset='https://1.gravatar.com/avatar/a122972e220315b2b4ba1c4fddab6fdee2b4226d637e97211cf68836c018c665?s=48&#038;d=identicon&#038;r=G 1x, https://1.gravatar.com/avatar/a122972e220315b2b4ba1c4fddab6fdee2b4226d637e97211cf68836c018c665?s=72&#038;d=identicon&#038;r=G 1.5x, https://1.gravatar.com/avatar/a122972e220315b2b4ba1c4fddab6fdee2b4226d637e97211cf68836c018c665?s=96&#038;d=identicon&#038;r=G 2x, https://1.gravatar.com/avatar/a122972e220315b2b4ba1c4fddab6fdee2b4226d637e97211cf68836c018c665?s=144&#038;d=identicon&#038;r=G 3x, https://1.gravatar.com/avatar/a122972e220315b2b4ba1c4fddab6fdee2b4226d637e97211cf68836c018c665?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>I&#8217;ve only read Ysabel which I really liked but is a bit different from his others which I&#8217;ve always thought of as fantasy. I do have Song of Arbonne on my shelf so maybe I should try it.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-7920" class="comment byuser comment-author-shereadsnovels bypostauthor even depth-2">
+		<article id="div-comment-7920" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7920">
+						<time datetime="2013-08-18T17:13:25+01:00">
+							August 18, 2013 at 5:13 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7920#respond" data-commentid="7920" data-postid="8728" data-belowelement="div-comment-7920" data-respondelement="respond" data-replyto="Reply to Helen" aria-label="Reply to Helen">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>Yes, I&#8217;ve heard that Ysabel is not really a typical Guy Gavriel Kay book.  I&#8217;m glad you still liked it, though.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-7914" class="comment byuser comment-author-thecaptivereader odd alt thread-even depth-1 parent">
+		<article id="div-comment-7914" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="http://thecaptivereader.wordpress.com" class="url" rel="ugc external nofollow">Claire (The Captive Reader)</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7914">
+						<time datetime="2013-08-18T02:50:57+01:00">
+							August 18, 2013 at 2:50 am						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7914#respond" data-commentid="7914" data-postid="8728" data-belowelement="div-comment-7914" data-respondelement="respond" data-replyto="Reply to Claire (The Captive Reader)" aria-label="Reply to Claire (The Captive Reader)">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Claire (The Captive Reader)&#039;s avatar' src='https://1.gravatar.com/avatar/4757d7833858264dc855e7a4382a3cf030711dd26c28c83d4f8363de20211fec?s=48&#038;d=identicon&#038;r=G' srcset='https://1.gravatar.com/avatar/4757d7833858264dc855e7a4382a3cf030711dd26c28c83d4f8363de20211fec?s=48&#038;d=identicon&#038;r=G 1x, https://1.gravatar.com/avatar/4757d7833858264dc855e7a4382a3cf030711dd26c28c83d4f8363de20211fec?s=72&#038;d=identicon&#038;r=G 1.5x, https://1.gravatar.com/avatar/4757d7833858264dc855e7a4382a3cf030711dd26c28c83d4f8363de20211fec?s=96&#038;d=identicon&#038;r=G 2x, https://1.gravatar.com/avatar/4757d7833858264dc855e7a4382a3cf030711dd26c28c83d4f8363de20211fec?s=144&#038;d=identicon&#038;r=G 3x, https://1.gravatar.com/avatar/4757d7833858264dc855e7a4382a3cf030711dd26c28c83d4f8363de20211fec?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>I adore Kay&#8217;s books.  I think <i>The Lions of Al-Rassan</i> is my favourite to date, but I have high hopes for <i>River of Stars</i>, which I just picked up from the library today.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-7921" class="comment byuser comment-author-shereadsnovels bypostauthor even depth-2">
+		<article id="div-comment-7921" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7921">
+						<time datetime="2013-08-18T17:17:18+01:00">
+							August 18, 2013 at 5:17 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7921#respond" data-commentid="7921" data-postid="8728" data-belowelement="div-comment-7921" data-respondelement="respond" data-replyto="Reply to Helen" aria-label="Reply to Helen">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>I hope you enjoy River of Stars.  I&#8217;m looking forward to reading that one but want to read Under Heaven first as they have the same setting.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-7915" class="comment odd alt thread-odd thread-alt depth-1 parent">
+		<article id="div-comment-7915" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn">Amy K</cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7915">
+						<time datetime="2013-08-18T08:03:22+01:00">
+							August 18, 2013 at 8:03 am						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7915#respond" data-commentid="7915" data-postid="8728" data-belowelement="div-comment-7915" data-respondelement="respond" data-replyto="Reply to Amy K" aria-label="Reply to Amy K">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Amy K&#039;s avatar' src='https://0.gravatar.com/avatar/03ba75f423ed00aec93487c8a488da6fda1aeb1e3363e4a0db59c21f3135275f?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/03ba75f423ed00aec93487c8a488da6fda1aeb1e3363e4a0db59c21f3135275f?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/03ba75f423ed00aec93487c8a488da6fda1aeb1e3363e4a0db59c21f3135275f?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/03ba75f423ed00aec93487c8a488da6fda1aeb1e3363e4a0db59c21f3135275f?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/03ba75f423ed00aec93487c8a488da6fda1aeb1e3363e4a0db59c21f3135275f?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/03ba75f423ed00aec93487c8a488da6fda1aeb1e3363e4a0db59c21f3135275f?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>Tigana is my favorite Kay book, with The Lions of Al-Rassan a close second, but A Song for Arbonne and the two Sarantine Mosaic books aren&#8217;t far behind. Really, the only one I didn&#8217;t enjoy much was the The Last Light of the Sun. I look forward to reading more reviews!</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-7922" class="comment byuser comment-author-shereadsnovels bypostauthor even depth-2">
+		<article id="div-comment-7922" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7922">
+						<time datetime="2013-08-18T17:19:47+01:00">
+							August 18, 2013 at 5:19 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7922#respond" data-commentid="7922" data-postid="8728" data-belowelement="div-comment-7922" data-respondelement="respond" data-replyto="Reply to Helen" aria-label="Reply to Helen">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>His books all sound so appealing!  I&#8217;m sorry to hear you didn&#8217;t enjoy The Last Light of the Sun, though.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-7986" class="comment byuser comment-author-aartichapati odd alt thread-even depth-1 parent">
+		<article id="div-comment-7986" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn">aartichapati</cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7986">
+						<time datetime="2013-08-27T03:47:02+01:00">
+							August 27, 2013 at 3:47 am						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7986#respond" data-commentid="7986" data-postid="8728" data-belowelement="div-comment-7986" data-respondelement="respond" data-replyto="Reply to aartichapati" aria-label="Reply to aartichapati">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='aartichapati&#039;s avatar' src='https://0.gravatar.com/avatar/cc8dfde2d0f9f32b265ceda6984a59ea2ff6d21d4d3c30470f6ca3246390100a?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/cc8dfde2d0f9f32b265ceda6984a59ea2ff6d21d4d3c30470f6ca3246390100a?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/cc8dfde2d0f9f32b265ceda6984a59ea2ff6d21d4d3c30470f6ca3246390100a?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/cc8dfde2d0f9f32b265ceda6984a59ea2ff6d21d4d3c30470f6ca3246390100a?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/cc8dfde2d0f9f32b265ceda6984a59ea2ff6d21d4d3c30470f6ca3246390100a?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/cc8dfde2d0f9f32b265ceda6984a59ea2ff6d21d4d3c30470f6ca3246390100a?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>I love The Lions of Al-Rassan! I also like A Song for Arbonne. I rank them both above Tigana only because one of the female characters in Tigana really irked me and then somehow ended up in a completely out-of-nowhere romance at the end of the book and that made no sense to me.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-7997" class="comment byuser comment-author-shereadsnovels bypostauthor even depth-2">
+		<article id="div-comment-7997" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comment-7997">
+						<time datetime="2013-08-28T20:20:10+01:00">
+							August 28, 2013 at 8:20 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/?replytocom=7997#respond" data-commentid="7997" data-postid="8728" data-belowelement="div-comment-7997" data-respondelement="respond" data-replyto="Reply to Helen" aria-label="Reply to Helen">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>I agree with you about the romance coming out of nowhere at the end of Tigana, although that alone didn&#8217;t spoil the rest of the book for me.  I think I did prefer The Lions of Al-Rassan, though.  I&#8217;m looking forward to reading A Song for Arbonne!</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-17478" class="pingback odd alt thread-odd thread-alt depth-1">
+		<div class="comment-body">
+			Pingback: <a href="https://shereadsnovels.wordpress.com/2015/03/29/the-last-light-of-the-sun-by-guy-gavriel-kay/" class="url" rel="ugc external nofollow">The Last Light of the Sun by Guy Gavriel Kay &#8211; She Reads Novels</a> 		</div>
+
+	</li><!-- #comment-## -->
+
+	<li id="comment-21229" class="pingback even thread-even depth-1">
+		<div class="comment-body">
+			Pingback: <a href="http://theidlewoman.net/2013/08/15/the-lions-of-al-rassan-guy-gavriel-kay/" class="url" rel="ugc external nofollow">The Lions of Al-Rassan: Guy Gavriel Kay &#8211; The Idle Woman</a> 		</div>
+
+	</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Please leave a comment.  Thanks! <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://shereadsnovels.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+
+
+<div class="comment-form__verbum transparent"></div><div class="verbum-form-meta"><input type='hidden' name='comment_post_ID' value='8728' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+
+			<input type="hidden" name="highlander_comment_nonce" id="highlander_comment_nonce" value="b53c7d7cb9" />
+			<input type="hidden" name="verbum_show_subscription_modal" value="" /></div><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="dfd9cc817c" /></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="34"/><script>
+document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
+</script>
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	<div id="secondary" class="widget-area sidebar-widget-area" role="complementary">
+		<aside id="search-4" class="widget widget_search"><h3 class="widget-title">Search this blog</h3><form role="search" method="get" class="search-form" action="https://shereadsnovels.com/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside><aside id="follow_button_widget-3" class="widget widget_follow_button_widget">
+		<a class="wordpress-follow-button" href="https://shereadsnovels.com" data-blog="13133801" data-lang="en" >Follow She Reads Novels on WordPress.com</a>
+		<script type="text/javascript">(function(d){ window.wpcomPlatform = {"titles":{"timelines":"Embeddable Timelines","followButton":"Follow Button","wpEmbeds":"WordPress Embeds"}}; var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');p.type = 'text/javascript';p.async = true;p.src = '//widgets.wp.com/platform.js';f.parentNode.insertBefore(p,f);}(document));</script>
+
+		</aside><aside id="blog_subscription-6" class="widget widget_blog_subscription jetpack_subscription_widget"><h3 class="widget-title"><label for="subscribe-field">Follow Blog via Email</label></h3>
+
+			<div class="wp-block-jetpack-subscriptions__container">
+			<form
+				action="https://subscribe.wordpress.com"
+				method="post"
+				accept-charset="utf-8"
+				data-blog="13133801"
+				data-post_access_level="everybody"
+				id="subscribe-blog"
+			>
+				<p>Enter your email address to follow this blog and receive notifications of new posts by email.</p>
+				<p id="subscribe-email">
+					<label
+						id="subscribe-field-label"
+						for="subscribe-field"
+						class="screen-reader-text"
+					>
+						Email Address:					</label>
+
+					<input
+							type="email"
+							name="email"
+							autocomplete="email"
+							
+							style="width: 95%; padding: 1px 10px"
+							placeholder="Email Address"
+							value=""
+							id="subscribe-field"
+							required
+						/>				</p>
+
+				<p id="subscribe-submit"
+									>
+					<input type="hidden" name="action" value="subscribe"/>
+					<input type="hidden" name="blog_id" value="13133801"/>
+					<input type="hidden" name="source" value="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/"/>
+					<input type="hidden" name="sub-type" value="widget"/>
+					<input type="hidden" name="redirect_fragment" value="subscribe-blog"/>
+					<input type="hidden" id="_wpnonce" name="_wpnonce" value="6cf8d99fc8" />					<button type="submit"
+													class="wp-block-button__link"
+																	>
+						Follow					</button>
+				</p>
+			</form>
+						</div>
+			
+</aside><aside id="text-20" class="widget widget_text"><h3 class="widget-title">Follow on X</h3>			<div class="textwidget"><a href="https://twitter.com/shereadsnovels" class="twitter-follow-button" data-show-count="false" data-text-color="#404040" data-link-color="#009933">Follow @shereadsnovels</a>
+</div>
+		</aside><aside id="text-19" class="widget widget_text"><h3 class="widget-title">Follow me on Bloglovin&#8217;</h3>			<div class="textwidget"><a href="http://www.bloglovin.com/en/blog/3266972" title="Follow She Reads Novels on Bloglovin"><img src="https://i0.wp.com/www.bloglovin.com/widget/bilder/en/widget.gif" alt="Follow on Bloglovin" border="0"></a></div>
+		</aside><aside id="rss_links-6" class="widget widget_rss_links"><ul><li><a href="https://shereadsnovels.com/feed/" title="Subscribe to Posts">RSS - Posts</a></li><li><a href="https://shereadsnovels.com/comments/feed/" title="Subscribe to Comments">RSS - Comments</a></li></ul>
+</aside><aside id="media_image-19" class="widget widget_media_image"><style>.widget.widget_media_image { overflow: hidden; }.widget.widget_media_image img { height: auto; max-width: 100%; }</style><a href="https://shereadsnovels.wordpress.com/my-journey-through-time/"><img width="300" height="168" src="https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg" class="image wp-image-18953 alignnone attachment-full size-full" alt="" style="max-width: 100%; height: auto;" decoding="async" loading="lazy" srcset="https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg 300w, https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg?w=150&amp;h=84 150w, https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg?w=200&amp;h=112 200w" sizes="auto, (max-width: 300px) 100vw, 300px" data-attachment-id="18953" data-permalink="https://shereadsnovels.com/journey-through-time/" data-orig-file="https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg" data-orig-size="300,168" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;1&quot;}" data-image-title="Journey Through Time" data-image-description="" data-image-caption="" data-large-file="https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg?w=300" /></a></aside>
+		<aside id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="widget-title">Recent Posts</h3>
+		<ul>
+											<li>
+					<a href="https://shereadsnovels.com/2026/09/05/six-degrees-of-separation-from-the-matchbox-girl-to-ace-king-knave/">Six Degrees of Separation: From The Matchbox Girl to Ace, King,&nbsp;Knave</a>
+									</li>
+											<li>
+					<a href="https://shereadsnovels.com/2026/09/04/the-heiress-of-northanger-abbey-by-nancy-bilyeau/">The Heiress of Northanger Abbey by Nancy&nbsp;Bilyeau</a>
+									</li>
+											<li>
+					<a href="https://shereadsnovels.com/2026/09/02/the-snow-witch-by-kirsty-ferry/">The Snow Witch by Kirsty&nbsp;Ferry</a>
+									</li>
+											<li>
+					<a href="https://shereadsnovels.com/2026/09/01/top-ten-tuesday-books-with-nationalities-in-the-title/">Top Ten Tuesday: Books With Nationalities In The&nbsp;Title</a>
+									</li>
+											<li>
+					<a href="https://shereadsnovels.com/2026/08/31/my-commonplace-book-august-2026/">My Commonplace Book: August&nbsp;2026</a>
+									</li>
+					</ul>
+
+		</aside><aside id="archives-6" class="widget widget_archive"><h3 class="widget-title">Archives</h3>		<label class="screen-reader-text" for="archives-dropdown-6">Archives</label>
+		<select id="archives-dropdown-6" name="archive-dropdown">
+			
+			<option value="">Select Month</option>
+				<option value='https://shereadsnovels.com/2026/09/'> September 2026 &nbsp;(4)</option>
+	<option value='https://shereadsnovels.com/2026/08/'> August 2026 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2026/07/'> July 2026 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2026/06/'> June 2026 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2026/05/'> May 2026 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2026/04/'> April 2026 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2026/03/'> March 2026 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2026/02/'> February 2026 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2026/01/'> January 2026 &nbsp;(20)</option>
+	<option value='https://shereadsnovels.com/2025/12/'> December 2025 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2025/11/'> November 2025 &nbsp;(20)</option>
+	<option value='https://shereadsnovels.com/2025/10/'> October 2025 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2025/09/'> September 2025 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2025/08/'> August 2025 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2025/07/'> July 2025 &nbsp;(19)</option>
+	<option value='https://shereadsnovels.com/2025/06/'> June 2025 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2025/05/'> May 2025 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2025/04/'> April 2025 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2025/03/'> March 2025 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2025/02/'> February 2025 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2025/01/'> January 2025 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2024/12/'> December 2024 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2024/11/'> November 2024 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2024/10/'> October 2024 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2024/09/'> September 2024 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2024/08/'> August 2024 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2024/07/'> July 2024 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2024/06/'> June 2024 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2024/05/'> May 2024 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2024/04/'> April 2024 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2024/03/'> March 2024 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2024/02/'> February 2024 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2024/01/'> January 2024 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2023/12/'> December 2023 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2023/11/'> November 2023 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2023/10/'> October 2023 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2023/09/'> September 2023 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2023/08/'> August 2023 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2023/07/'> July 2023 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2023/06/'> June 2023 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2023/05/'> May 2023 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2023/04/'> April 2023 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2023/03/'> March 2023 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2023/02/'> February 2023 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2023/01/'> January 2023 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/12/'> December 2022 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/11/'> November 2022 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2022/10/'> October 2022 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2022/09/'> September 2022 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/08/'> August 2022 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/07/'> July 2022 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/06/'> June 2022 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2022/05/'> May 2022 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/04/'> April 2022 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2022/03/'> March 2022 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2022/02/'> February 2022 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2022/01/'> January 2022 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2021/12/'> December 2021 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2021/11/'> November 2021 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2021/10/'> October 2021 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2021/09/'> September 2021 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2021/08/'> August 2021 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2021/07/'> July 2021 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2021/06/'> June 2021 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2021/05/'> May 2021 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2021/04/'> April 2021 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2021/03/'> March 2021 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2021/02/'> February 2021 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2021/01/'> January 2021 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2020/12/'> December 2020 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2020/11/'> November 2020 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2020/10/'> October 2020 &nbsp;(8)</option>
+	<option value='https://shereadsnovels.com/2020/09/'> September 2020 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2020/08/'> August 2020 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2020/07/'> July 2020 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2020/06/'> June 2020 &nbsp;(8)</option>
+	<option value='https://shereadsnovels.com/2020/05/'> May 2020 &nbsp;(8)</option>
+	<option value='https://shereadsnovels.com/2020/04/'> April 2020 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2020/03/'> March 2020 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2020/02/'> February 2020 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2020/01/'> January 2020 &nbsp;(19)</option>
+	<option value='https://shereadsnovels.com/2019/12/'> December 2019 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2019/11/'> November 2019 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2019/10/'> October 2019 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2019/09/'> September 2019 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2019/08/'> August 2019 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2019/07/'> July 2019 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2019/06/'> June 2019 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2019/05/'> May 2019 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2019/04/'> April 2019 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2019/03/'> March 2019 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2019/02/'> February 2019 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2019/01/'> January 2019 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2018/12/'> December 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/11/'> November 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/10/'> October 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/09/'> September 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/08/'> August 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/07/'> July 2018 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2018/06/'> June 2018 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2018/05/'> May 2018 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2018/04/'> April 2018 &nbsp;(19)</option>
+	<option value='https://shereadsnovels.com/2018/03/'> March 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/02/'> February 2018 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2018/01/'> January 2018 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/12/'> December 2017 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2017/11/'> November 2017 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2017/10/'> October 2017 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2017/09/'> September 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/08/'> August 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/07/'> July 2017 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2017/06/'> June 2017 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2017/05/'> May 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/04/'> April 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/03/'> March 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/02/'> February 2017 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2017/01/'> January 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2016/12/'> December 2016 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2016/11/'> November 2016 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2016/10/'> October 2016 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2016/09/'> September 2016 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2016/08/'> August 2016 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2016/07/'> July 2016 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2016/06/'> June 2016 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2016/05/'> May 2016 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2016/04/'> April 2016 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2016/03/'> March 2016 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2016/02/'> February 2016 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2016/01/'> January 2016 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2015/12/'> December 2015 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2015/11/'> November 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/10/'> October 2015 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2015/09/'> September 2015 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2015/08/'> August 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/07/'> July 2015 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2015/06/'> June 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/05/'> May 2015 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2015/04/'> April 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/03/'> March 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/02/'> February 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/01/'> January 2015 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2014/12/'> December 2014 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2014/11/'> November 2014 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2014/10/'> October 2014 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2014/09/'> September 2014 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2014/08/'> August 2014 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2014/07/'> July 2014 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2014/06/'> June 2014 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2014/05/'> May 2014 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2014/04/'> April 2014 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2014/03/'> March 2014 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2014/02/'> February 2014 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2014/01/'> January 2014 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2013/12/'> December 2013 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2013/11/'> November 2013 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2013/10/'> October 2013 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2013/09/'> September 2013 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2013/08/'> August 2013 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2013/07/'> July 2013 &nbsp;(7)</option>
+	<option value='https://shereadsnovels.com/2013/06/'> June 2013 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2013/05/'> May 2013 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2013/04/'> April 2013 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2013/03/'> March 2013 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2013/02/'> February 2013 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2013/01/'> January 2013 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2012/12/'> December 2012 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2012/11/'> November 2012 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2012/10/'> October 2012 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2012/09/'> September 2012 &nbsp;(8)</option>
+	<option value='https://shereadsnovels.com/2012/08/'> August 2012 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2012/07/'> July 2012 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2012/06/'> June 2012 &nbsp;(8)</option>
+	<option value='https://shereadsnovels.com/2012/05/'> May 2012 &nbsp;(5)</option>
+	<option value='https://shereadsnovels.com/2012/04/'> April 2012 &nbsp;(7)</option>
+	<option value='https://shereadsnovels.com/2012/03/'> March 2012 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2012/02/'> February 2012 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2012/01/'> January 2012 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2011/12/'> December 2011 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2011/11/'> November 2011 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2011/10/'> October 2011 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2011/09/'> September 2011 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2011/08/'> August 2011 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2011/07/'> July 2011 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2011/06/'> June 2011 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2011/05/'> May 2011 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2011/04/'> April 2011 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2011/03/'> March 2011 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2011/02/'> February 2011 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2011/01/'> January 2011 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2010/12/'> December 2010 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2010/11/'> November 2010 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2010/10/'> October 2010 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2010/09/'> September 2010 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2010/08/'> August 2010 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2010/07/'> July 2010 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2010/06/'> June 2010 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2010/05/'> May 2010 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2010/04/'> April 2010 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2010/03/'> March 2010 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2010/02/'> February 2010 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2010/01/'> January 2010 &nbsp;(20)</option>
+	<option value='https://shereadsnovels.com/2009/12/'> December 2009 &nbsp;(22)</option>
+	<option value='https://shereadsnovels.com/2009/11/'> November 2009 &nbsp;(31)</option>
+	<option value='https://shereadsnovels.com/2009/10/'> October 2009 &nbsp;(4)</option>
+
+		</select>
+
+			<script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value ) {
+				document.location.href = dropdown.value;
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "archives-dropdown-6" );
+
+//# sourceURL=WP_Widget_Archives%3A%3Awidget
+</script>
+</aside><aside id="categories-4" class="widget widget_categories"><h3 class="widget-title">Categories</h3><form action="https://shereadsnovels.com" method="get"><label class="screen-reader-text" for="cat">Categories</label><select  name='cat' id='cat' class='postform'>
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="36502859">After the Sunday Papers</option>
+	<option class="level-0" value="143095">Author Interviews</option>
+	<option class="level-0" value="26046">Blog Updates</option>
+	<option class="level-0" value="1936042">Book Miscellany</option>
+	<option class="level-0" value="9068">Childhood Memories</option>
+	<option class="level-0" value="924">Events</option>
+	<option class="level-0" value="9548">Features</option>
+	<option class="level-0" value="82555">Giveaways</option>
+	<option class="level-0" value="15235025">Historical Musings</option>
+	<option class="level-0" value="366">Memes</option>
+	<option class="level-0" value="19496723">My Commonplace Book</option>
+	<option class="level-0" value="9169092">New Book Arrivals</option>
+	<option class="level-0" value="368468">Not About Books</option>
+	<option class="level-0" value="531339">Reading Challenges</option>
+	<option class="level-0" value="309">Reviews</option>
+	<option class="level-1" value="64079">&nbsp;&nbsp;&nbsp;Chick Lit</option>
+	<option class="level-1" value="7225">&nbsp;&nbsp;&nbsp;Children&#8217;s</option>
+	<option class="level-1" value="6720">&nbsp;&nbsp;&nbsp;Classics</option>
+	<option class="level-1" value="3898">&nbsp;&nbsp;&nbsp;Crime</option>
+	<option class="level-1" value="3027824">&nbsp;&nbsp;&nbsp;Did Not Finish</option>
+	<option class="level-1" value="7224">&nbsp;&nbsp;&nbsp;Fantasy</option>
+	<option class="level-1" value="1747">&nbsp;&nbsp;&nbsp;Fiction</option>
+	<option class="level-1" value="585700">&nbsp;&nbsp;&nbsp;Gothic Fiction</option>
+	<option class="level-1" value="1651">&nbsp;&nbsp;&nbsp;Graphic Novels</option>
+	<option class="level-1" value="92732">&nbsp;&nbsp;&nbsp;Historical Fiction</option>
+	<option class="level-1" value="1252">&nbsp;&nbsp;&nbsp;Horror</option>
+	<option class="level-1" value="18517">&nbsp;&nbsp;&nbsp;Memoirs</option>
+	<option class="level-1" value="13078">&nbsp;&nbsp;&nbsp;Mystery</option>
+	<option class="level-1" value="5174">&nbsp;&nbsp;&nbsp;Mythology</option>
+	<option class="level-1" value="634707">&nbsp;&nbsp;&nbsp;Neo-Victorian</option>
+	<option class="level-1" value="3748">&nbsp;&nbsp;&nbsp;Non-Fiction</option>
+	<option class="level-1" value="1868">&nbsp;&nbsp;&nbsp;Philosophy</option>
+	<option class="level-1" value="43050">&nbsp;&nbsp;&nbsp;Plays</option>
+	<option class="level-1" value="422">&nbsp;&nbsp;&nbsp;Poetry</option>
+	<option class="level-1" value="10615">&nbsp;&nbsp;&nbsp;Science Fiction</option>
+	<option class="level-1" value="10515571">&nbsp;&nbsp;&nbsp;Sensation Novels</option>
+	<option class="level-1" value="546">&nbsp;&nbsp;&nbsp;Short Stories</option>
+	<option class="level-1" value="8811">&nbsp;&nbsp;&nbsp;Suspense</option>
+	<option class="level-1" value="11183">&nbsp;&nbsp;&nbsp;Thriller</option>
+	<option class="level-1" value="12343">&nbsp;&nbsp;&nbsp;YA Fiction</option>
+	<option class="level-0" value="1571794">Sunday Salon</option>
+	<option class="level-0" value="1">Uncategorized</option>
+</select>
+</form><script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value && parseInt( dropdown.value ) > 0 && dropdown instanceof HTMLSelectElement ) {
+				dropdown.parentElement.submit();
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "cat" );
+
+//# sourceURL=WP_Widget_Categories%3A%3Awidget
+</script>
+</aside><aside id="jetpack_posts_i_like-3" class="widget widget_jetpack_posts_i_like"><h3 class="widget-title">Posts I Like</h3><ul class='widgets-list-layout no-grav'><li><img src='https://findingtimetowrite.files.wordpress.com/2026/09/875066.jpg?w=800&#038;resize=40%2C40' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://findingtimetowrite.wordpress.com/2026/09/06/6degrees-of-separation-september-2026/' class='bump-view' data-bump-view='pil'>#6Degrees of Separation Septem&hellip;</a> <span>on&nbsp;<a href='http://findingtimetowrite.wordpress.com' class='bump-view' data-bump-view='pil'>findingtimetowrite</a></span></div></li><li><img src='https://hopewellslibraryoflife.files.wordpress.com/2026/04/6degsep-1.webp?w=800&#038;resize=40%2C40' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://hopewellslibraryoflife.wordpress.com/2026/09/05/six-degrees-of-separation-silver-bone-a-novel-by-andrey-kurkov/' class='bump-view' data-bump-view='pil'>Six Degrees of Separation: Sil&hellip;</a> <span>on&nbsp;<a href='http://hopewellslibraryoflife.wordpress.com' class='bump-view' data-bump-view='pil'>Hopewell&#039;s Public Library of Life</a></span></div></li><li><img src='https://potpourri2015.files.wordpress.com/2026/08/proper-place.jpg?w=800&#038;resize=40%2C40' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://potpourri2015.wordpress.com/2026/09/05/six-degrees-of-separation-from-the-proper-place-to-eight-graves/' class='bump-view' data-bump-view='pil'>Six Degrees of Separation: Fro&hellip;</a> <span>on&nbsp;<a href='http://potpourri2015.wordpress.com' class='bump-view' data-bump-view='pil'>Literary Potpourri</a></span></div></li><li><img src='https://wordsandpeace.files.wordpress.com/2012/05/seciond-empress.jpg?w=800&#038;resize=40%2C40' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://wordsandpeace.com/2026/09/05/six-degrees-of-separation-initials/' class='bump-view' data-bump-view='pil'>Six degrees of separation: Ini&hellip;</a> <span>on&nbsp;<a href='http://wordsandpeace.com' class='bump-view' data-bump-view='pil'>Words And Peace</a></span></div></li><li><img src='https://i0.wp.com/pics.cdn.librarything.com/picsizes/17/71/17715439-b-h1200-w600-pv25_597539514467465941724145_v5.jpg?resize=40%2C40&#038;ssl=1' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://thinkaboutreading.wordpress.com/2026/09/05/six-degrees-of-separation-september-2026/' class='bump-view' data-bump-view='pil'>Six Degrees of Separation, Sep&hellip;</a> <span>on&nbsp;<a href='http://thinkaboutreading.wordpress.com' class='bump-view' data-bump-view='pil'>What I Think About When I Think About Reading</a></span></div></li><li><img src='https://bronasbooks.files.wordpress.com/2026/09/the-feast.jpg?w=800&#038;resize=40%2C40' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://bronasbooks.com/2026/09/05/the-feast-margaret-kennedy/' class='bump-view' data-bump-view='pil'>The Feast | Margaret Kennedy</a> <span>on&nbsp;<a href='http://bronasbooks.com' class='bump-view' data-bump-view='pil'>This Reading Life</a></span></div></li></ul></aside><aside id="custom_html-2" class="widget_text widget widget_custom_html"><h3 class="widget-title">NetGalley</h3><div class="textwidget custom-html-widget"><img src="https://www.netgalley.co.uk/badge/f0c81353dd681b24c370f7a474c91c92b5358ee1" width="80" height="80" alt="200 Book Reviews" title="200 Book Reviews" />
+<img src="https://www.netgalley.co.uk/badge/dd2f01316b573e58c61468ef6428335f87931873" width="80" height="80" alt="80%" title="80%" />
+<img src="https://www.netgalley.co.uk/badge/2c670e2e47ecc42a64fc9e04c91c3169b8dd47f3" width="80" height="80" alt="Reviews Published" title="Reviews Published" />
+<img src="https://www.netgalley.co.uk/badge/6715b76580311c11564714b179fb737d2daf9e06" width="80" height="80" alt="2016 NetGalley Challenge" title="2016 NetGalley Challenge" />
+<img src="https://www.netgalley.co.uk/badge/5accfa233c64682c426297305a84acf778a282cd" width="80" height="80" alt="2015 Challenge Participant" title="2015 Challenge Participant" />
+<img src="https://www.netgalley.co.uk/badge/e6e7b8db1fe052de87ca5392c9281a22bd344e34" width="80" height="80" alt="Professional Reader" title="Professional Reader" /></div></aside><aside id="wpcom-goodreads-3" class="widget widget_goodreads"><h3 class="widget-title">Currently reading</h3><div class="jetpack-goodreads-legacy-widget gr_custom_widget" id="gr_custom_widget_204148_currently_reading"></div>
+<script src="https://www.goodreads.com/review/custom_widget/204148.Currently%20reading:%20currently-reading?cover_position=&#038;cover_size=small&#038;num_books=5&#038;order=d&#038;shelf=currently-reading&#038;sort=date_added&#038;widget_bg_transparent=&#038;widget_id=204148_currently_reading"></script>
+</aside><aside id="text-16" class="widget widget_text">			<div class="textwidget"><!--NetworkedBlogs Start--><!--.networkedblogs_widget a {text-decoration:none;color:#3B5998;font-weight:normal;}.networkedblogs_widget .networkedblogs_footer a {text-decoration:none;color:#FFFFFF;font-weight:normal;}--><div id='networkedblogs_container' style='height:180px;padding-top:20px;'><div id='networkedblogs_above'></div><div id='networkedblogs_widget' style="width:120px;margin:0 auto;padding:0 0 3px;font-family:'lucida grande', tahoma, Verdana, Arial, Sans-Serif;font-size:11px;font-weight:normal;text-decoration:none;background:#3B5998 none repeat scroll 0 0;border:none;line-height:13px;"><div id='networkedblogs_header' style="padding:1px 1px 2px 3px;text-align:left;"><a href='http://www.facebook.com/apps/application.php?id=9953271133' style="text-decoration:none;color:#FFFFFF;font-weight:normal;font-size:11px;background-repeat:no-repeat;">NetworkedBlogs</a></div><div id='networkedblogs_body' style="background-color:#FFFFFF;color:#444444;padding:4px;border-left:1px solid #D8DFEA;border-right:1px solid #D8DFEA;text-align:left;"><table cellpadding="0" cellspacing="0" style="border:none;padding:0;"><tr><td style="border:none;padding:0;"><span style="color:#777777;">Blog:</span></td></tr><tr><td style="border:none;padding:0;"><a target="_blank" href="http://www.networkedblogs.com/blog/she-reads-novels" style="text-decoration:none;color:#3B5998;" rel="noopener">She Reads Novels</a></td></tr><tr><td style="border:none;padding:0;"><div style="padding:0;color:#777777;">Topics:</div></td></tr><tr><td style="border:none;padding:0;">  </td></tr><tr><td style="border:none;padding:0;"><div id='networkedblogs_badges'>&nbsp;</div></td></tr><tr><td style="border:none;padding:0;"><div style='padding:0;text-align:center;'><a target="_blank" href="http://www.networkedblogs.com/blog/she-reads-novels?ahash=70f588656260895e6340aa17f862a1d3" style="text-decoration:none;color:#666666;font-weight:normal;font-size:10px;" rel="noopener">Follow my blog</a></div></td></tr></table></div></div><div id='networkedblogs_below' class='networkedblogs_below'></div></div><!--NetworkedBlogs End--></div>
+		</aside>	</div><!-- #secondary -->
+
+	</div><!-- #content -->
+
+	
+	<footer id="colophon" class="site-footer">
+		
+		<div class="site-info"  role="contentinfo">
+			<a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a>
+			
+					</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<!--  -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/files/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/pub/sela/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="grofiles-cards-js" src="//0.gravatar.com/js/hovercards/hovercards.min.js?ver=202636d1133547e8a1f2801609f51cef12522abe7f6647d869e9fbc974fe356a37e613"></script>
+<script id="wpgroho-js-extra">
+var WPGroHo = {"my_hash":""};
+//# sourceURL=wpgroho-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1610363240i'></script>
+
+	<script>
+		// Initialize and attach hovercards to all gravatars
+		( function() {
+			function init() {
+				if ( typeof Gravatar === 'undefined' ) {
+					return;
+				}
+
+				if ( typeof Gravatar.init !== 'function' ) {
+					return;
+				}
+
+				Gravatar.profile_cb = function ( hash, id ) {
+					WPGroHo.syncProfileData( hash, id );
+				};
+
+				Gravatar.my_hash = WPGroHo.my_hash;
+				Gravatar.init(
+					'body',
+					'#wp-admin-bar-my-account',
+					{
+						i18n: {
+							'Edit your profile →': 'Edit your profile →',
+							'View profile →': 'View profile →',
+							'Contact': 'Contact',
+							'Send money': 'Send money',
+							'Sorry, we are unable to load this Gravatar profile.': 'Sorry, we are unable to load this Gravatar profile.',
+							'Gravatar not found.': 'Gravatar not found.',
+							'Too Many Requests.': 'Too Many Requests.',
+							'Internal Server Error.': 'Internal Server Error.',
+							'Is this you?': 'Is this you?',
+							'Claim your free profile.': 'Claim your free profile.',
+							'Email': 'Email',
+							'Home Phone': 'Home Phone',
+							'Work Phone': 'Work Phone',
+							'Cell Phone': 'Cell Phone',
+							'Contact Form': 'Contact Form',
+							'Calendar': 'Calendar',
+						},
+					}
+				);
+			}
+
+			if ( document.readyState !== 'loading' ) {
+				init();
+			} else {
+				document.addEventListener( 'DOMContentLoaded', init );
+			}
+		} )();
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-8b683b908585b93833b71e028729687c">
+	</div>
+	<div class="grofile-hash-map-9059aeed6ff4af803e53a2635ba5601c">
+	</div>
+	<div class="grofile-hash-map-0a41274266793862967040b5faeed8b7">
+	</div>
+	<div class="grofile-hash-map-4882e3c488b8d25c59c6aa1d5e833924">
+	</div>
+	<div class="grofile-hash-map-b703a20d282207fcb59175a7de514169">
+	</div>
+	<div class="grofile-hash-map-272d1d32f86a486f81d03da97490a7de">
+	</div>
+	<div class="grofile-hash-map-c1583ade7c2d5dc9c3873dcf808f2ce6">
+	</div>
+	<div class="grofile-hash-map-e3485f5f34882495ff6b3b277b499c6b">
+	</div>
+	</div>
+		<div id="actionbar" dir="ltr" style="display: none;"
+			class="actnbr-pub-sela actnbr-has-follow actnbr-has-actions">
+		<ul>
+								<li class="actnbr-btn actnbr-hidden">
+						<a class="actnbr-action actnbr-actn-comment" href="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/#comments">
+							<svg class="gridicon gridicons-comment" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M12 16l-5 5v-5H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v9c0 1.1-.9 2-2 2h-7z"/></g></svg>							<span>Comment						</span>
+						</a>
+					</li>
+									<li class="actnbr-btn actnbr-hidden">
+						<a class="actnbr-action actnbr-actn-reblog" href="">
+							<svg class="gridicon gridicons-reblog" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M22.086 9.914L20 7.828V18c0 1.105-.895 2-2 2h-7v-2h7V7.828l-2.086 2.086L14.5 8.5 19 4l4.5 4.5-1.414 1.414zM6 16.172V6h7V4H6c-1.105 0-2 .895-2 2v10.172l-2.086-2.086L.5 15.5 5 20l4.5-4.5-1.414-1.414L6 16.172z"/></g></svg><span>Reblog</span>
+						</a>
+					</li>
+									<li class="actnbr-btn actnbr-hidden">
+								<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+							<div class="actnbr-popover tip tip-top-left actnbr-notice" id="follow-bubble">
+							<div class="tip-arrow"></div>
+							<div class="tip-inner actnbr-follow-bubble">
+															<ul>
+											<li class="actnbr-sitename">
+			<a href="https://shereadsnovels.com">
+				<img loading='lazy' alt='' src='https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=50&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' srcset='https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=50&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 1x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=75&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 1.5x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=100&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 2x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=150&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 3x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=200&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 4x' class='avatar avatar-50' height='50' width='50' />				She Reads Novels			</a>
+		</li>
+										<div class="actnbr-message no-display"></div>
+									<form method="post" action="https://subscribe.wordpress.com" accept-charset="utf-8" style="display: none;">
+																						<div class="actnbr-follow-count">Join 930 other subscribers</div>
+																					<div>
+										<input type="email" name="email" placeholder="Enter your email address" class="actnbr-email-field" aria-label="Enter your email address" />
+										</div>
+										<input type="hidden" name="action" value="subscribe" />
+										<input type="hidden" name="blog_id" value="13133801" />
+										<input type="hidden" name="source" value="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/" />
+										<input type="hidden" name="sub-type" value="actionbar-follow" />
+										<input type="hidden" id="_wpnonce" name="_wpnonce" value="6cf8d99fc8" />										<div class="actnbr-button-wrap">
+											<button type="submit" value="Sign me up">
+												Sign me up											</button>
+										</div>
+									</form>
+									<li class="actnbr-login-nudge">
+										<div>
+											Already have a WordPress.com account? <a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fshereadsnovels.com%252F2013%252F08%252F17%252Fthe-lions-of-al-rassan-by-guy-gavriel-kay%252F">Log in now.</a>										</div>
+									</li>
+								</ul>
+															</div>
+						</div>
+					</li>
+							<li class="actnbr-ellipsis actnbr-hidden">
+				<svg class="gridicon gridicons-ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"/></g></svg>				<div class="actnbr-popover tip tip-top-left actnbr-more">
+					<div class="tip-arrow"></div>
+					<div class="tip-inner">
+						<ul>
+								<li class="actnbr-sitename">
+			<a href="https://shereadsnovels.com">
+				<img loading='lazy' alt='' src='https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=50&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' srcset='https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=50&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 1x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=75&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 1.5x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=100&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 2x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=150&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 3x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=200&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 4x' class='avatar avatar-50' height='50' width='50' />				She Reads Novels			</a>
+		</li>
+								<li class="actnbr-folded-follow">
+										<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+								</li>
+														<li class="actnbr-signup"><a href="https://wordpress.com/start/">Sign up</a></li>
+							<li class="actnbr-login"><a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fshereadsnovels.com%252F2013%252F08%252F17%252Fthe-lions-of-al-rassan-by-guy-gavriel-kay%252F">Log in</a></li>
+																<li class="actnbr-shortlink">
+										<a href="https://wp.me/pT6Hv-2gM">
+											<span class="actnbr-shortlink__text">Copy shortlink</span>
+											<span class="actnbr-shortlink__icon"><svg class="gridicon gridicons-checkmark" height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M9 19.414l-6.707-6.707 1.414-1.414L9 16.586 20.293 5.293l1.414 1.414"/></g></svg></span>
+										</a>
+									</li>
+																<li class="flb-report">
+									<a href="https://wordpress.com/abuse/?report_url=https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/" target="_blank" rel="noopener noreferrer">
+										Report this content									</a>
+								</li>
+															<li class="actnbr-reader">
+									<a href="https://wordpress.com/reader/blogs/13133801/posts/8728">
+										View post in Reader									</a>
+								</li>
+															<li class="actnbr-subs">
+									<a href="https://subscribe.wordpress.com/">Manage subscriptions</a>
+								</li>
+																<li class="actnbr-fold"><a href="">Collapse this bar</a></li>
+														</ul>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+<script>
+window.addEventListener( "DOMContentLoaded", function( event ) {
+	var link = document.createElement( "link" );
+	link.href = "/wp-content/mu-plugins/actionbar/actionbar.css?v=20250116";
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	document.head.appendChild( link );
+
+	var script = document.createElement( "script" );
+	script.src = "/wp-content/mu-plugins/actionbar/actionbar.js?v=20250204";
+	document.body.appendChild( script );
+} );
+</script>
+
+			<div id="jp-carousel-loading-overlay" style="display: none;">
+			<div id="jp-carousel-loading-wrapper">
+				<span id="jp-carousel-library-loading"><svg class="jetpack-spinner" width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+			</div>
+		</div>
+		<div class="jp-carousel-overlay" style="display: none;">
+
+		<div class="jp-carousel-container">
+			<!-- The Carousel Swiper -->
+			<div
+				class="jp-carousel-wrap swiper jp-carousel-swiper-container jp-carousel-transitions"
+				itemscope
+				itemtype="https://schema.org/ImageGallery">
+				<div class="jp-carousel swiper-wrapper"></div>
+				<div class="jp-swiper-button-prev swiper-button-prev">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskPrev" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="9" height="12">
+							<path d="M16.2072 16.59L11.6496 12L16.2072 7.41L14.8041 6L8.8335 12L14.8041 18L16.2072 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskPrev)">
+							<rect x="0.579102" width="23.8823" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+				<div class="jp-swiper-button-next swiper-button-next">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskNext" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="8" height="12">
+							<path d="M8.59814 16.59L13.1557 12L8.59814 7.41L10.0012 6L15.9718 12L10.0012 18L8.59814 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskNext)">
+							<rect x="0.34375" width="23.8822" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+			</div>
+			<!-- The main close buton -->
+			<div class="jp-carousel-close-hint">
+				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<mask id="maskClose" mask-type="alpha" maskUnits="userSpaceOnUse" x="5" y="5" width="15" height="14">
+						<path d="M19.3166 6.41L17.9135 5L12.3509 10.59L6.78834 5L5.38525 6.41L10.9478 12L5.38525 17.59L6.78834 19L12.3509 13.41L17.9135 19L19.3166 17.59L13.754 12L19.3166 6.41Z" fill="white"/>
+					</mask>
+					<g mask="url(#maskClose)">
+						<rect x="0.409668" width="23.8823" height="24" fill="#FFFFFF"/>
+					</g>
+				</svg>
+			</div>
+			<!-- Image info, comments and meta -->
+			<div class="jp-carousel-info">
+				<div class="jp-carousel-info-footer">
+					<div class="jp-carousel-pagination-container">
+						<div class="jp-swiper-pagination swiper-pagination"></div>
+						<div class="jp-carousel-pagination"></div>
+					</div>
+					<div class="jp-carousel-photo-title-container">
+						<div class="jp-carousel-photo-caption"></div>
+					</div>
+					<div class="jp-carousel-photo-icons-container">
+						<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-info" aria-label="Toggle photo metadata visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskInfo" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M12.7537 2C7.26076 2 2.80273 6.48 2.80273 12C2.80273 17.52 7.26076 22 12.7537 22C18.2466 22 22.7046 17.52 22.7046 12C22.7046 6.48 18.2466 2 12.7537 2ZM11.7586 7V9H13.7488V7H11.7586ZM11.7586 11V17H13.7488V11H11.7586ZM4.79292 12C4.79292 16.41 8.36531 20 12.7537 20C17.142 20 20.7144 16.41 20.7144 12C20.7144 7.59 17.142 4 12.7537 4C8.36531 4 4.79292 7.59 4.79292 12Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskInfo)">
+										<rect x="0.8125" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+							</span>
+						</a>
+												<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-comments" aria-label="Toggle photo comments visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskComments" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M4.3271 2H20.2486C21.3432 2 22.2388 2.9 22.2388 4V16C22.2388 17.1 21.3432 18 20.2486 18H6.31729L2.33691 22V4C2.33691 2.9 3.2325 2 4.3271 2ZM6.31729 16H20.2486V4H4.3271V18L6.31729 16Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskComments)">
+										<rect x="0.34668" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+
+								<span class="jp-carousel-has-comments-indicator" aria-label="This image has comments."></span>
+							</span>
+						</a>
+											</div>
+				</div>
+				<div class="jp-carousel-info-extra">
+					<div class="jp-carousel-info-content-wrapper">
+						<div class="jp-carousel-photo-title-container">
+							<div class="jp-carousel-photo-title"></div>
+						</div>
+						<div class="jp-carousel-comments-wrapper">
+															<div id="jp-carousel-comments-loading">
+									<span>Loading Comments...</span>
+								</div>
+								<div class="jp-carousel-comments"></div>
+								<div id="jp-carousel-comment-form-container">
+									<span id="jp-carousel-comment-form-spinner"><svg class="jetpack-spinner" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+									<div id="jp-carousel-comment-post-results"></div>
+																														<form id="jp-carousel-comment-form">
+												<label for="jp-carousel-comment-form-comment-field" class="screen-reader-text">Write a Comment...</label>
+												<textarea
+													name="comment"
+													class="jp-carousel-comment-form-field jp-carousel-comment-form-textarea"
+													id="jp-carousel-comment-form-comment-field"
+													placeholder="Write a Comment..."
+												></textarea>
+												<div id="jp-carousel-comment-form-submit-and-info-wrapper">
+													<div id="jp-carousel-comment-form-commenting-as">
+																													<fieldset>
+																<label for="jp-carousel-comment-form-email-field">Email (Required)</label>
+																<input type="text" name="email" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-email-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-author-field">Name (Required)</label>
+																<input type="text" name="author" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-author-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-url-field">Website</label>
+																<input type="text" name="url" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-url-field" />
+															</fieldset>
+																											</div>
+													<input
+														type="submit"
+														name="submit"
+														class="jp-carousel-comment-form-button"
+														id="jp-carousel-comment-form-button-submit"
+														value="Post Comment" />
+												</div>
+											</form>
+																											</div>
+													</div>
+						<div class="jp-carousel-image-meta">
+							<div class="jp-carousel-title-and-caption">
+								<div class="jp-carousel-photo-info">
+									<div class="jp-carousel-caption" itemprop="caption description"></div>
+								</div>
+
+								<div class="jp-carousel-photo-description"></div>
+							</div>
+							<a class="jp-carousel-image-download" href="#" aria-label="Download image" target="_blank" style="display: none;">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="3" y="3" width="19" height="18">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M5.84615 5V19H19.7775V12H21.7677V19C21.7677 20.1 20.8721 21 19.7775 21H5.84615C4.74159 21 3.85596 20.1 3.85596 19V5C3.85596 3.9 4.74159 3 5.84615 3H12.8118V5H5.84615ZM14.802 5V3H21.7677V10H19.7775V6.41L9.99569 16.24L8.59261 14.83L18.3744 5H14.802Z" fill="white"/>
+									</mask>
+									<g mask="url(#mask0)">
+										<rect x="0.870605" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+								<span class="jp-carousel-download-text"></span>
+							</a>
+							<div class="jp-carousel-image-map" style="display: none;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+		
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/":8728};
+	</script>
+				<script id="twitter-widgets-js" src="https://platform.twitter.com/widgets.js?ver=20111117"></script>
+
+	<script type="text/javascript">
+		(function () {
+			var wpcom_reblog = {
+				source: 'toolbar',
+
+				toggle_reblog_box_flair: function (obj_id, post_id) {
+
+					// Go to site selector. This will redirect to their blog if they only have one.
+					const postEndpoint = `https://wordpress.com/post`;
+
+					// Ideally we would use the permalink here, but fortunately this will be replaced with the 
+					// post permalink in the editor.
+					const originalURL = `${ document.location.href }?page_id=${ post_id }`; 
+					
+					const url =
+						postEndpoint +
+						'?url=' +
+						encodeURIComponent( originalURL ) +
+						'&is_post_share=true' +
+						'&v=5';
+
+					const redirect = function () {
+						if (
+							! window.open( url, '_blank' )
+						) {
+							location.href = url;
+						}
+					};
+
+					if ( /Firefox/.test( navigator.userAgent ) ) {
+						setTimeout( redirect, 0 );
+					} else {
+						redirect();
+					}
+				},
+			};
+
+			window.wpcom_reblog = wpcom_reblog;
+		})();
+	</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/likes/queuehandler.js?m=1741961244i'></script>
+<script id="jetpack-testimonial-theme-supports-js-after">
+const jetpack_testimonial_theme_supports = false
+//# sourceURL=jetpack-testimonial-theme-supports-js-after
+</script>
+<script id="wp-hooks-js" src="/wp-content/plugins/gutenberg-core/v23.9.0/build/scripts/hooks/index.min.js?m=1788366818i&#038;ver=f0f188028580e8dc1255"></script>
+<script id="wp-i18n-js" src="/wp-content/plugins/gutenberg-core/v23.9.0/build/scripts/i18n/index.min.js?m=1788366818i&#038;ver=1dfe7db3940c23ea9216"></script>
+<script id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script id="verbum-settings-js-before">
+window.VerbumComments = {"Log in or provide your name and email to leave a reply.":"Log in or provide your name and email to leave a reply.","Log in or provide your name and email to leave a comment.":"Log in or provide your name and email to leave a comment.","Receive web and mobile notifications for posts on this site.":"Receive web and mobile notifications for posts on this site.","Name":"Name","Email (address never made public)":"Email (address never made public)","Website (optional)":"Website (optional)","Leave a reply. (log in optional)":"Leave a reply. (log in optional)","Leave a comment. (log in optional)":"Leave a comment. (log in optional)","Log in to leave a reply.":"Log in to leave a reply.","Log in to leave a comment.":"Log in to leave a comment.","Logged in via %s":"Logged in via %s","Log out":"Log out","Your browser is blocking the cookies needed to log in and comment here. Allow cookies in your privacy settings, then reload the page.":"Your browser is blocking the cookies needed to log in and comment here. Allow cookies in your privacy settings, then reload the page.","Email":"Email","(Address never made public)":"(Address never made public)","Instantly":"Instantly","Daily":"Daily","Reply":"Reply","Comment":"Comment","WordPress":"WordPress","Weekly":"Weekly","Notify me of new posts":"Notify me of new posts","Email me new posts":"Email me new posts","Email me new comments":"Email me new comments","Cancel":"Cancel","Write a comment...":"Write a comment...","Write a reply...":"Write a reply...","Website":"Website","Optional":"Optional","We'll keep you in the loop!":"We'll keep you in the loop!","Loading your comment...":"Loading your comment...","Discover more from":"Discover more from She Reads Novels","Subscribe now to keep reading and get access to the full archive.":"Subscribe now to keep reading and get access to the full archive.","Continue reading":"Continue reading","Never miss a beat!":"Never miss a beat!","Interested in getting blog post updates? Simply click the button below to stay in the loop!":"Interested in getting blog post updates? Simply click the button below to stay in the loop!","Enter your email address":"Enter your email address","Subscribe":"Subscribe","Comment sent successfully":"Comment sent successfully","Save my name, email, and website in this browser for the next time I comment.":"Save my name, email, and website in this browser for the next time I comment.","hovercardi18n":{"Edit your profile \u2192":"Edit your profile \u2192","View profile \u2192":"View profile \u2192","Contact":"Contact","Send money":"Send money","Gravatar not found.":"Gravatar not found.","This profile is private.":"This profile is private.","Too Many Requests.":"Too Many Requests.","Internal Server Error.":"Internal Server Error.","Sorry, we are unable to load this Gravatar profile.":"Sorry, we are unable to load this Gravatar profile."},"siteId":13133801,"postId":8728,"mustLogIn":false,"requireNameEmail":true,"commentRegistration":false,"connectURL":"https://shereadsnovels.wordpress.com/public.api/connect/?action=request\u0026domain=shereadsnovels.com","logoutURL":"https://shereadsnovels.wordpress.com/wp-login.php?action=logout\u0026_wpnonce=83b4c96bff","homeURL":"https://shereadsnovels.com/","subscribeToBlog":true,"subscribeToComment":true,"isJetpackCommentsLoggedIn":false,"jetpackUsername":"","jetpackUserId":0,"jetpackSignature":"","jetpackAvatar":"https://0.gravatar.com/avatar/?s=96\u0026amp;d=identicon\u0026amp;r=G","enableBlocks":true,"enableSubscriptionModal":true,"currentLocale":"en","isJetpackComments":false,"allowedBlocks":["core/paragraph","core/list","core/code","core/list-item","core/quote","core/image","core/embed","core/quote","core/code"],"embedNonce":"a1883e3962","verbumBundleUrl":"/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/features/verbum-comments/dist/index.js","isRTL":false,"vbeCacheBuster":1771405207,"iframeUniqueId":0,"colorScheme":false}
+//# sourceURL=verbum-settings-js-before
+</script>
+<script data-wp-strategy="defer" defer id="verbum-dynamic-loader-js" src="/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/assets/dynamic-loader.js?m=1772518873i&#038;minify=false&#038;ver=8b5296f9195db92c42e4"></script>
+<script id="jetpack-carousel-js-extra">
+var jetpackSwiperLibraryPath = {"url":"/wp-content/mu-plugins/jetpack-plugin/moon/_inc/blocks/swiper.js"};
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https://shereadsnovels.com/wp-admin/admin-ajax.php","nonce":"869e97c3e6","display_exif":"1","display_comments":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","image_label":"Open image in full-screen.","download_original":"View full size \u003Cspan class=\"photo-size\"\u003E{0}\u003Cspan class=\"photo-size-times\"\u003E\u00d7\u003C/span\u003E{1}\u003C/span\u003E","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https://shereadsnovels.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fshereadsnovels.com%2F2013%2F08%2F17%2Fthe-lions-of-al-rassan-by-guy-gavriel-kay%2F","blog_id":"13133801","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"stats_query_args":"blog=13133801&v=wpcom&tz=1&user_id=0&subd=shereadsnovels","is_public":"1"};
+//# sourceURL=jetpack-carousel-js-extra
+</script>
+<script id="sharing-js-js-extra">
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+//# sourceURL=sharing-js-js-extra
+</script>
+<script id="jetpack-script-data-js-before">
+window.JetpackScriptData = {"site":{"host":"wpcom","is_wpcom_platform":true}};
+//# sourceURL=jetpack-script-data-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJydkN1uwjAMhV9oaZimAbuY9ijIJG5xmz/FDoy3J4KmQpvE0K6SHH/H9ok+JWViEAyi5YAeWaey14wO9Mg6wJEGEIqhG/lFP4Z5oqQchUn10RRWPX0/46pnwygYV2wFqm6i99WiMiZ37jz92sAXlVwZKFQcJYGZVJVOqRrngvYxhlbcHTHYmDUUiR5EyCw2YEZhvS/k7CKyyZREWRB4YvL9wF2NMTczkGOpCReuCX8EgonYo6i3bnVr14Q+X2H7wNtG3L7ix/P/UfgAGS1Ye75eKQxzhi//+brZbj7eV9v1erwA3/nd5w=='></script>
+<script id="sharing-js-js-after">
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "facebook" ] = "menubar=1,resizable=1,width=600,height=400";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "twitter" ] = "menubar=1,resizable=1,width=600,height=350";
+//# sourceURL=sharing-js-js-after
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/72x72/","ext":".png","svgUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?m=1783090810i&ver=7.1-RC3-63320"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
+</script>
+	<iframe src='https://widgets.wp.com/likes/master.html?ver=20260906#ver=20260906' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+	<div id='likes-other-gravatars' role="dialog" aria-hidden="true" tabindex="-1"><div class="likes-text"><span>%d</span></div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+	<script src="//stats.wp.com/w.js?69" defer></script> <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'13133801','blog_tz':'1','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+		// Prevent sending pageview tracking from WP-Admin pages.
+		_stq.push(['view', {'blog':'13133801','v':'wpcom','tz':'1','user_id':'0','post':'8728','subd':'shereadsnovels'}]);
+		_stq.push(['extra', {'crypt':'UE5tW3cvZGRmTkx6U0I2P0glOVIwL1NyN0w0ZEJYUkJ4fE1daltaZGplN0VaVWVwd3dDNHFQMElzd2Y2bCVTN2YvQkkrX2ExTnImY3NXQ2Y2eUgzWW5neVtubC4sMy9SWGw/NCVMPzZ4Z2RQNi43UkZUK11EVllia3FKcWx6JjM4WUxQMHlnSVlyS3NdLGxGNnwweSU9a3Z0Jjd6c3BOJnE2LTRXVz1wMy52bm94VkFBX2JBTzh4TCZMby1oc01PazVnRGtTUVBjcTdqbzBwU3FlNVZPOHNobEdKb2xqRi5SdzhyQUVpflFrNCUrW2F2MmJjbldSa110P0ZROSVoM3YzWW8ucD94N0c0Rg=='}]);
+_stq.push([ 'clickTrackerInit', '13133801', '8728' ]);
+</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:1px;width:1px;overflow:hidden;position:absolute;bottom:1px;" alt="" /></noscript>
+<meta id="bilmur" property="bilmur:data" content="" data-provider="wordpress.com" data-service="simple" data-site-tz="Europe/London" data-custom-props="{&quot;enq_jquery&quot;:&quot;1&quot;,&quot;logged_in&quot;:&quot;0&quot;,&quot;wptheme&quot;:&quot;pub\/sela&quot;,&quot;wptheme_is_block&quot;:&quot;0&quot;}"   >
+		<script defer src="/wp-content/js/bilmur.min.js?i=17&amp;m=202636"></script> 	
+<script>
+(function() {
+	'use strict';
+
+	const fetches = {};
+	const promises = {};
+	const urls = {
+		'wp-polyfill': '/wp-includes/js/dist/vendor/wp-polyfill.min.js?m=1786440387i&ver=3.15.0',
+		'verbum': '/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/verbum-comments.js?m=1785895867i&minify=false&ver=ecf5cfe8827907d3ea28'
+	};
+	const loaders = {
+		'verbum': () => {
+			fetchExternalScript('wp-polyfill');
+			fetchExternalScript('verbum');
+			promises['wp-polyfill'] = promises['wp-polyfill'] || loadWPScript('wp-polyfill');
+			promises['verbum'] = promises['verbum'] || promises['wp-polyfill'].then( () => loadWPScript('verbum') );
+			return promises['verbum'];
+		},
+		
+	};
+	const scriptExtras = {
+		
+	};
+
+	window.WP_Enqueue_Dynamic_Script = {
+		loadScript: (handle) => {
+			if (!loaders[handle]) {
+				console.error('WP_Enqueue_Dynamic_Script: unregistered script `' + handle + '`.');
+			}
+			return loaders[handle]();
+		}
+	};
+
+	function fetchExternalScript(handle) {
+		if (!urls[handle]) {
+			return Promise.resolve();
+		}
+
+		fetches[handle] = fetches[handle] || fetch(urls[handle], { mode: 'no-cors' });
+		return fetches[handle];
+	}
+
+	function runExtraScript(handle, type, index) {
+		const id = 'wp-enqueue-dynamic-script:' + handle + ':' + type + ':' + (index + 1);
+		const template = document.getElementById(id);
+		if (!template) {
+			return Promise.reject();
+		}
+
+		const script = document.createElement( 'script' );
+		script.innerHTML = template.innerHTML;
+		document.body.appendChild( script );
+		return Promise.resolve();
+	}
+
+	function loadExternalScript(handle) {
+		if (!urls[handle]) {
+			return Promise.resolve();
+		}
+
+		return fetches[handle].then(() => {
+			return new Promise((resolve, reject) => {
+				const script = document.createElement('script');
+				script.onload = () => resolve();
+				script.onerror = (e) => reject(e);
+				script.src = urls[handle];
+				document.body.appendChild(script);
+			});
+		});
+	}
+
+	function loadExtra(handle, pos) {
+		const count = (scriptExtras[handle] && scriptExtras[handle][pos]) || 0;
+		let promise = Promise.resolve();
+
+		for (let i = 0; i < count; i++) {
+			promise = promise.then(() => runExtraScript(handle, pos, i));
+		}
+
+		return promise;
+	}
+
+	function loadWPScript(handle) {
+		// Core loads scripts in this order. See: https://github.com/WordPress/WordPress/blob/a59eb9d39c4fcba834b70c9e8dfd64feeec10ba6/wp-includes/class-wp-scripts.php#L428.
+		return loadExtra(handle, 'translations')
+			.then(() => loadExtra(handle, 'before'))
+			.then(() => loadExternalScript(handle))
+			.then(() => loadExtra(handle, 'after'));
+	}
+} )();
+</script>
+
+</body>
+</html>

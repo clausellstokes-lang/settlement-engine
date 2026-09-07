@@ -1,0 +1,32 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i360-374",
+ "lines": 65,
+ "firstTs": "2026-09-06T17:25:49.773Z",
+ "lastTs": "2026-09-06T17:29:16.947Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 11,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives|a-substack",
+  "https://thequaintbooknook.wordpress.com/2023/09/03/realm-of-the-elderlings-a-series-review/|b-nook",
+  "https://sassideeee.blog/2020/06/21/reread-and-review-of-assassins-apprentice-by-robin-hobb/|c-omni",
+  "https://www.robinhobb.com/blog/posts/40869|d-hobb",
+  "https://vacuouswastrel.wordpress.com/tag/robin-hobb/|e-wastrel"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and verified (15 claims, 15 verdicts, indices 360-374).",
+ "run": "wf_22752bb0-128",
+ "agent": "a38b2db141fa551be",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-a38b2db141fa551be.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i360-374.json",
+  "exists": true
+ }
+}

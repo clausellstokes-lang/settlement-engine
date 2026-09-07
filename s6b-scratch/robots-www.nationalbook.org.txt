@@ -1,0 +1,20 @@
+# START WPFORMS BLOCK
+# ---------------------------
+User-agent: *
+Disallow: /wp-content/uploads/wpforms/
+# ---------------------------
+# END WPFORMS BLOCK
+
+# START YOAST BLOCK
+# ---------------------------
+User-agent: *
+Disallow: /?s=
+Disallow: /page/*/?s=
+Disallow: /search/
+
+User-agent: AdsBot
+Disallow: /
+
+Sitemap: https://www.nationalbook.org/sitemap_index.xml
+# ---------------------------
+# END YOAST BLOCK

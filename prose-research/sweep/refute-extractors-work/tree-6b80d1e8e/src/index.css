@@ -1,0 +1,608 @@
+/* Global styles for SettlementForge */
+
+/* ─────────────────────────────────────────────────────────────────────
+   Self-hosted fonts. These used to load from the Google Fonts CDN via a
+   render-blocking stylesheet link in index.html; that stylesheet is gone.
+   The web UI and the exported dossier read in one type voice (Lora + Nunito)
+   with no third-party origin on the critical path.
+
+   FORMAT — the browser is served WOFF2 (brotli-compressed). WOFF2 is ~65%
+   smaller than the source TTF (the Lora/Nunito faces drop from ~125–135 KB
+   each to ~42–49 KB), so first paint fetches a fraction of the bytes. Every
+   supported browser reads WOFF2 (React 19 itself won't run on anything old
+   enough to lack it), so there is no TTF fallback in the src lists here — a
+   TTF fallback would be dead weight the browser never fetches.
+     The TTFs still SHIP under public/fonts, but only the PDF path consumes
+     them: @react-pdf/renderer registers fonts through fontkit, which can't
+     open WOFF2 the way it opens TTF, so src/pdf/theme.js keeps registering the
+     .ttf?v=2 URLs. Those are fetched only at PDF-export time, never on first
+     paint — so the heavy TTF bytes never touch the landing critical path.
+   Regenerate the WOFF2 from the TTFs with fontTools:
+     python3 -c "from fontTools.ttLib import TTFont; \
+       f=TTFont('public/fonts/X.ttf'); f.flavor='woff2'; f.save('public/fonts/X.woff2')"
+   (needs the `brotli` python package). Guarded by tests/build/fontsAndMeta.test.js.
+
+   Every face uses swap display — text paints immediately in the fallback and
+   swaps to the web font when it arrives; never a blank (invisible) FOIT.
+
+   SERIF ALIAS — the design token still declares its serif as "Crimson Text"
+   (src/design/tokens.js → fontFamily.serif). But the only serif shipped in
+   public/fonts is Lora (the same serif the PDF renders). Rather than
+   reintroduce a Google fetch for Crimson Text, or regress the serif to the
+   Georgia *system* fallback, we self-host Lora and ALSO register it under the
+   'Crimson Text' family name so the existing token resolves to a real,
+   self-hosted, PDF-matching serif with zero source-file churn.
+     Follow-up (design-tokens owner): rename fontFamily.serif to 'Lora' and
+     drop the 'Crimson Text' alias below — one edit, then the alias is dead.
+
+   WEIGHTS — we ship exactly the faces the PDF cut: Nunito 400/700/800 (+400i)
+   and Lora 400/700 (+400i/700i). Intermediate weights the tokens request
+   (Nunito 500/600) are synthesized by the browser from the nearest face, as
+   they were under the Google variable font. font-family stacks in tokens.js
+   keep system fallbacks (system-ui / Georgia) for the pre-swap frame.
+   ───────────────────────────────────────────────────────────────────── */
+
+/* Sans — Nunito (exact token name match). */
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Serif — Lora, registered under BOTH its true name and the 'Crimson Text'
+   token alias (see the note above). Each block is emitted twice so both family
+   names resolve to the same self-hosted files. */
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Crimson Text'; /* alias → Lora files (see note above) */
+  src: url('/fonts/Lora-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Crimson Text';
+  src: url('/fonts/Lora-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Crimson Text';
+  src: url('/fonts/Lora-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Crimson Text';
+  src: url('/fonts/Lora-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Page background — the painted pastoral fixed under the whole UI.
+   The image lives at /public/parchment-bg.jpg (saved by the user).
+   Two stacked backgrounds:
+     1. A cream-tinted linear gradient (top of stack) at 72% opacity.
+        The painting remains a texture, but cream now dominates so bare
+        helper text and inline controls do not disappear into roofs,
+        paths, or tree shadows. Card surfaces (CARD = #FFFBF5) carry
+        their own opaque background for longer reading areas.
+     2. The painting itself (bottom of stack), fixed and cover-sized so
+        scrolling content drifts over a stationary canvas.
+   The cream `background-color` is the fallback when the painting hasn't
+   yet been saved into /public — page still reads as parchment, never
+   white.
+   ───────────────────────────────────────────────────────────────────── */
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  -webkit-text-size-adjust: 100%;
+  /* Disable OpenType ligature substitution app-wide (inherited). The bundled
+     Lora serif has broken fi/fl/ff ligature glyphs that render as a tofu box
+     after the f in dossier prose; turning ligatures off makes the browser draw
+     the plain letters. The PDF path defuses the same bug separately via noLig.
+     Ligatures are purely cosmetic, so this is invisible apart from the fix. */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "dlig" 0;
+  /* Flat parchment fallback. The painting now lives per-view on the
+     .page-bg wrapper (see below), set from App.jsx by the current view. */
+  background-color: #f7f0e4;
+}
+
+input, select, textarea {
+  font-size: 16px !important;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+/* The root and the .parchment-bg wrapper let the body's painting show
+   through — they used to paint their own cream, which would mask the
+   background image. */
+#root {
+  background: transparent !important;
+}
+
+/* The last-resort render fallback belongs to the global shell, so its visual
+   contract lives here rather than as an inline object in main.jsx. It remains
+   readable even if token emission fails during boot. */
+.root-error-boundary {
+  margin: 16px;
+  padding: 24px;
+  border: 2px solid var(--sem-destructive, #8b1a1a);
+  border-radius: 8px;
+  background: var(--sem-destructive-bg, #fdf4f4);
+  font-family: monospace;
+}
+.root-error-boundary pre {
+  white-space: pre-wrap;
+  font-size: 12px;
+}
+
+.parchment-bg {
+  min-height: 100vh;
+}
+
+/*
+ * Keep the footer below the first viewport while a lazy route chunk resolves.
+ *
+ * The shell renders its real header, footer, and mobile navigation around the
+ * Suspense fallback. Without a route-height floor, the short Loading card lets
+ * the footer enter the viewport; the resolved page then pushes that entire
+ * footer away and produces a large mobile layout shift. The per-layout reserve
+ * is supplied by App so this remains one shell contract rather than a
+ * generator-specific skeleton height.
+ */
+.app-route-main {
+  --app-shell-header-reserve: 72px;
+  min-height: calc(100vh - var(--app-shell-header-reserve, 72px));
+}
+.app-route-main--mobile {
+  --app-shell-header-reserve: 56px;
+}
+@supports (height: 100svh) {
+  .app-route-main {
+    min-height: calc(100svh - var(--app-shell-header-reserve, 72px));
+  }
+}
+
+/* Per-view page background. App.jsx sets the image via the --page-bg custom
+   property based on the current view; the cream overlay keeps text legible
+   over any painting. `is-flow` (during a generation flow) lightens the
+   overlay so the chosen settlement scene reads through more strongly. */
+.page-bg {
+  background-color: #f7f0e4;
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.54), rgba(247, 240, 228, 0.59)),
+    var(--page-bg, none);
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.page-bg.is-flow {
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.49), rgba(247, 240, 228, 0.56)),
+    var(--page-bg, none);
+}
+
+/* Disciplined clean-view backgrounds (P5 / P12). CLEAN_VIEWS
+   (config/pageBackgrounds.js) paint the per-image painting BELOW a flat-cream
+   header band: the page header sits on solid cream that fades into the painting
+   over the content region, so bare header text is never scanned through texture
+   while the painting still earns its place. App sets --page-bg + the profile
+   class; the profile tunes how much cream to hold based on the per-image
+   art-direction (busy = strongest cream, dark = show more, calm = hold high). */
+.page-painted {
+  background-color: #f7f0e4;
+  background-image:
+    linear-gradient(to bottom,
+      rgba(247, 240, 228, 0.97) 0,
+      rgba(247, 240, 228, 0.80) 200px,
+      rgba(247, 240, 228, 0.62) 460px),
+    var(--page-bg, none);
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.page-painted.scrim-busy {
+  background-image:
+    linear-gradient(to bottom,
+      rgba(247, 240, 228, 0.98) 0,
+      rgba(247, 240, 228, 0.88) 220px,
+      rgba(247, 240, 228, 0.74) 520px),
+    var(--page-bg, none);
+}
+.page-painted.scrim-dark {
+  background-image:
+    linear-gradient(to bottom,
+      rgba(247, 240, 228, 0.95) 0,
+      rgba(247, 240, 228, 0.72) 200px,
+      rgba(247, 240, 228, 0.52) 460px),
+    var(--page-bg, none);
+}
+.page-painted.scrim-calm {
+  background-image:
+    linear-gradient(to bottom,
+      rgba(247, 240, 228, 0.98) 0,
+      rgba(247, 240, 228, 0.86) 220px,
+      rgba(247, 240, 228, 0.70) 500px),
+    var(--page-bg, none);
+}
+
+/* Dark-hero band (HomeLanding). The OPPOSITE polarity of the cream painted
+   pages: a radial ink scrim, darkest behind the centred headline and easing
+   toward the edges, so the maps / books / quill of create.jpg stay visible
+   while the cream hero text keeps its contrast. App/HomeLanding set --page-bg. */
+.hero-dark {
+  position: relative;
+  background-color: #1c1409;
+  background-image:
+    radial-gradient(ellipse at center,
+      rgba(18, 12, 5, 0.52) 0%,
+      rgba(18, 12, 5, 0.74) 62%,
+      rgba(18, 12, 5, 0.90) 100%),
+    var(--page-bg, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ── Scrollable Welcome page (HomeLanding + home/LandingBelowFold) ───────────
+   The painted-scene section scrims. Colors stay in CSS (no raw color leaks into
+   JS — visual-budget lint); the per-section scene URL is passed in from JS as
+   the --sf-scene custom property (a url(), not a color). Scrim alphas are the
+   landing spec §5 values. */
+
+/* Hero — dark linear ink scrim over the village scene. This is the ONLY layer
+   on the whole page with background-attachment: fixed (spec §8 perf). iOS
+   Safari ignores `fixed` and falls back to scroll, which degrades cleanly. */
+.sf-landing-hero {
+  background-image:
+    linear-gradient(rgba(20, 14, 5, 0.52), rgba(20, 14, 5, 0.7)),
+    var(--sf-scene, none);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 86vh;
+}
+
+/* Walk W1 (owner order 2026-07-21, item 10): every below-fold section card drops its
+   painted-scene / opaque-parchment background and adopts ONE translucent cream, so the
+   scrubbed growth film (WelcomeJourneyBackdrop, item 1) reads THROUGH behind every card.
+   Alpha 0.9 keeps INK/BODY text AA over the film's brightest frame while still letting
+   the settlement art show. The set-out (07) card is EXEMPT — it keeps its dark scene.
+   (Was `.sf-landing-scene-cream`: a cream scrim over per-section painted scenes; the
+   scenes were dropped for the film read-through, so this is now a flat translucent tone
+   applied to 01/02/03/04/06 alike.) */
+.sf-landing-scene-cream {
+  background-color: rgba(247, 240, 228, 0.9);
+}
+
+/* Closer 06 · Set out — dark scrim over the create scene, attachment scroll. */
+.sf-landing-scene-dark {
+  background-image:
+    linear-gradient(rgba(20, 14, 5, 0.66), rgba(20, 14, 5, 0.8)),
+    var(--sf-scene, none);
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+}
+
+/* Scroll cue (hero → #forge). The gentle bounce is decorative; the global
+   reduced-motion rule in styles/a11y.css collapses it (animation-duration:1ms),
+   and this explicit override kills it outright — spec §9/§10. */
+@keyframes sf-cue-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+.sf-landing-cue { animation: sf-cue-bounce 1.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .sf-landing-cue { animation: none; }
+}
+
+/* 03 · The voice previously used `.sf-landing-voice` (#F7F0E4 opaque parchment).
+   Walk W1 item 10 retired that in favour of the shared translucent
+   `.sf-landing-scene-cream` so the growth film reads through it like every other
+   section; its hairline top/bottom borders stay set inline (BORDER token). */
+
+/* ── C2 THE WELCOME — the travel-and-stop film journey ────────────────────────
+   The `.leg` travel spacers sit between the stops. Scrolling through one scrubs
+   the growth film between two tiers (the microsite mechanic, marketing/website/
+   src/main.js); they are transparent so the fixed film backdrop (home/
+   WelcomeJourneyBackdrop) shows through, while the opaque stop sections present
+   over the frozen still. Desktop fine-pointer gets a full viewport of travel per
+   leg; touch / mobile / reduced-motion get the COMPRESSED stills journey (law
+   #4): 70vh, no scrub — the stills floor serves both from one code path. */
+.sf-welcome-leg {
+  height: 100vh;
+  pointer-events: none;
+}
+@media (hover: none), (max-width: 768px), (prefers-reduced-motion: reduce) {
+  .sf-welcome-leg { height: 70vh; }
+}
+
+/* 02 · The brief — deliberate incompleteness (owner amendment W-L2/1): the
+   mini-dossier's final prose line fades out mid-thought, signalling the rest
+   lives in the dossier the visitor forges themselves. A text mask, not a color
+   (safe over any surface, no contrast trap for the fully-visible portion). */
+.sf-landing-prose-fade {
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, rgba(0, 0, 0, 0.15) 100%);
+  mask-image: linear-gradient(180deg, #000 55%, rgba(0, 0, 0, 0.15) 100%);
+}
+
+/* Skip-to-content link — the first focusable element in the DOM (App.jsx).
+   Visually hidden until focused, then slides into the top-left so keyboard / SR
+   users can jump past the header/nav straight to <main id="main-content">. */
+.skip-link {
+  /* `position` is owned by the authoritative a11y.css rule loaded after this sheet. */
+  left: 8px;
+  top: -56px;
+  z-index: 300;
+  padding: 10px 18px;
+  background: #1c1409;
+  color: #e8c98a;
+  border: 1px solid rgba(160, 118, 42, 0.6);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 8px;
+  outline: 2px solid #c9a24c;
+  outline-offset: 2px;
+}
+
+/* Scaled-down settlement scene behind a Create-page mode card. The image
+   URL comes from the --card-bg custom property; the overlay is heavier than
+   the page (card copy is dense) and lifts on the active card to reveal more
+   of the scene. */
+.mode-card-bg {
+  background-color: #FFFBF5;
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.65), rgba(247, 240, 228, 0.72)),
+    var(--card-bg, none);
+  background-size: cover;
+  background-position: center;
+}
+.mode-card-bg.is-active {
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.43), rgba(247, 240, 228, 0.50)),
+    var(--card-bg, none);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #c8b89a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a0762a; }
+
+/* Tab strip hide scrollbar */
+.tab-strip::-webkit-scrollbar { display: none; }
+.output-tab-btn { -webkit-tap-highlight-color: transparent; }
+
+/* Readability helpers for intentional text-on-page moments. The page
+   painting is decorative; any standalone prose or control strip should
+   have a paper surface instead of relying on whatever part of the image
+   happens to sit behind it. */
+.sf-readable-surface {
+  background: rgba(255, 251, 245, 0.96);
+  border: 1px solid rgba(216, 192, 144, 0.78);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(27, 20, 8, 0.08);
+}
+
+.sf-readable-strip {
+  display: inline-block;
+  max-width: min(100%, 760px);
+  padding: 6px 12px;
+  background: rgba(255, 251, 245, 0.92);
+  border: 1px solid rgba(216, 192, 144, 0.72);
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(27, 20, 8, 0.06);
+}
+
+/* Anon-Create proof pair — the sample dossier and the region-wake replay sit
+   side by side on wider screens and stack on narrow ones, so the two demo
+   cards stop doubling the landing's vertical length. Each child keeps its own
+   max-width; the grid centres them within balanced columns. */
+.sf-proof-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+  justify-items: center;
+}
+@media (min-width: 768px) {
+  .sf-proof-pair {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.sf-proof-pair > * {
+  width: 100%;
+}
+
+/* §14 — sparkling gold shimmer for custom-content dossier rows (GOLD_TINT) */
+@keyframes sf-goldShimmer {
+  0%, 100% { background-position: 0% 0; }
+  50% { background-position: 100% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes sf-goldShimmer { 0%, 100% { background-position: 0% 0; } }
+}
+
+/* Busy/loading spinner. Consumed by the Button primitive (busy state) and
+ * the map loaders via className="sf-spin". This lived as an inline <style>
+ * in WorldMapOverlays.jsx, so the keyframe only existed while the world map
+ * was mounted — every other `.sf-spin` (Button busy state app-wide) rendered
+ * a frozen icon. Hoisting it here makes the animation global.
+ * Reduced-motion is handled globally in styles/a11y.css, whose
+ * `*, *::before, *::after { animation-duration: 1ms; animation-iteration-count: 1 }`
+ * rule collapses this spin (and every other animation) — no per-keyframe
+ * override needed here. */
+.sf-spin { animation: sf-spin 1.2s linear infinite; }
+@keyframes sf-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── THE ONE DOOR (C13) — the left-edge Surveyor marginalia tab ─────────────
+ * The single AI entry marker (owner ruling 2026-07-18). Shape/elevation live
+ * here (not inline) because the deep-craft kill-list freezes the inline
+ * borderRadius/boxShadow/rgba( counts across src/components — a new floating
+ * surface carries its chrome as CSS. Colors ride the theme's AI register
+ * (src/design/tokens.js — the slate pair); the two hexes below mirror
+ * slate tokens and are commented at the definition site.
+ * The label is a hover/focus reveal flag ("no text until hover") — AT always
+ * hears the aria-label; :focus-visible reveals it for keyboard users too. */
+.sf-door-tab {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 60;
+  /* a slim marginalia tab, but never under the 44px hit floor */
+  min-width: 44px;
+  min-height: 96px;
+  padding: 0;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.18);
+}
+.sf-door-tab .sf-door-label {
+  position: absolute;
+  left: calc(100% + 6px);
+  top: 50%;
+  transform: translate(-6px, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease-out, transform 140ms ease-out;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.sf-door-tab:hover .sf-door-label,
+.sf-door-tab:focus-visible .sf-door-label {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+/* While the slip is open the trigger stays mounted (so the focus trap can
+   restore focus to it on close) but is tucked under the panel and made inert —
+   visually identical to the previous unmount, with focus never orphaned. */
+.sf-door-tab--open {
+  left: 12px;
+  z-index: 59;
+  pointer-events: none;
+}
+
+/* The door's prompt slip — docked at the tab's margin position. */
+.sf-door-panel {
+  position: fixed;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 60;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+/* The small-cap register line (draft slips, the door heading). */
+.sf-smallcap {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.06em;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   THE WHIPPING'S BLEND FALL-BACK (ribbon V4D, R-2).
+
+   The nav ribbon's two silk wraps (src/components/nav/ShaftWrap.jsx) are painted
+   as WRAP_BARREL — a NEUTRAL luminance ramp — MULTIPLIED over the opaque oxblood
+   turn gradient. That single `background-blend-mode` declaration is the whole
+   reason the bands read as thread: without it the topmost layer is the neutral
+   modulator itself, and both wraps render as a flat #D7D7D7 light-grey stripe at
+   ~9:1 against the cedar — the loudest object on the bar, and a mark that says
+   nothing.
+
+   So an engine without the property gets the PRE-V4C oxblood ramp instead, which
+   is the same claim one step flatter: the thread's own shading, lit by the shaft's
+   own light. The tones live in theme.js and reach here through a custom property
+   the component sets, because a second spelling of an authored colour in a
+   stylesheet is how two sources of one tone start drifting.
+
+   ⚠️ THIS IS THE ONE THING AN INLINE STYLE CANNOT SAY. Everything else about these
+   elements is inline; the sheet holds only the conditional. An engine that never
+   loads this file gets the blended paint, which is the correct one — the fallback
+   is the degraded arm, never the default.
+
+   Pinned by tests/components/navFletching.test.jsx, which asserts the rendered
+   element declares the blend, that its blend list and image list are the same
+   length, and that this rule exists and consumes the component's custom property.
+   ───────────────────────────────────────────────────────────────────── */
+@supports not (background-blend-mode: multiply) {
+  .sf-shaft-wrap {
+    background-image: var(--sf-wrap-flat);
+  }
+}

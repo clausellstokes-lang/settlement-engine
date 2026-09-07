@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "leguin",
+ "angle": null,
+ "tag": "i637-659",
+ "lines": 63,
+ "firstTs": "2026-09-07T06:21:43.358Z",
+ "lastTs": "2026-09-07T06:34:20.979Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 10,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aunderstandingurs0000cumm%20AND%20%22both%20the%20voices%20of%20the%20anthropologist%22",
+  "https://api.archivelab.org/books/approachestofict0000bitt/searchinside?q=factuality",
+  "https://api.archive.org/books/approachestofict0000bitt/searchinside?q=factuality",
+  "https://openlibrary.org/search/inside.json?q="
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "ial* framework, not a narrative one, which is the sharper fact for the civic-record register anyway. **656 is PARTIAL** because Cadden's referent is \"Earthsea specifically, and indeed in much of Le Guin's stories\" — Earthsea being novels, the claim's narrowing to \"short fiction\" is its own addition.",
+ "run": "wf_14be9775-021",
+ "agent": "a59d0c492e1f59383",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_14be9775-021/agent-a59d0c492e1f59383.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i637-659.json",
+  "exists": true
+ }
+}

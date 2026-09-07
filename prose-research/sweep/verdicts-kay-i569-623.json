@@ -1,0 +1,233 @@
+{
+ "name": "kay",
+ "chunk": 6,
+ "claims": [
+  {
+   "index": 569,
+   "feature": "closing sentence",
+   "claim": "Dirda writes that Under Heaven ends with everything fading quietly into history.",
+   "source": "Michael Dirda, The Washington Post, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-michael-dirda-of-the-washington-post/",
+   "quote": "Everything quietly, ineluctably fades into history",
+   "page": "final paragraph"
+  },
+  {
+   "index": 570,
+   "feature": "other: prose reception",
+   "claim": "Adam Whitehead of The Wertzone characterises River of Stars as told with elegant prose.",
+   "source": "Adam Whitehead, The Wertzone, review of River of Stars, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-adam-whitehead-of-the-wertzone/",
+   "quote": "told with flair, passion and elegant prose",
+   "page": "final paragraph"
+  },
+  {
+   "index": 572,
+   "feature": "adjective and adverb discipline",
+   "claim": "Das writes that in over six hundred pages not a word of River of Stars feels gratuitous.",
+   "source": "Indrapramit Das, Strange Horizons, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-indrapramit-das-for-strange-horizons/",
+   "quote": "not a word of this novel feels gratuitous",
+   "page": "paragraph beginning 'Not only are Shan and Daiyan wonderfully drawn'"
+  },
+  {
+   "index": 589,
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Hoyle writes that Kay's sentences are often convoluted and their meanings often obscured.",
+   "source": "Victoria Hoyle, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-victoria-hoyle/",
+   "quote": "sentences are often convoluted, meanings often obscured",
+   "page": "paragraph beginning 'What to say?'"
+  },
+  {
+   "index": 590,
+   "feature": "archaism",
+   "claim": "Hoyle writes that Kay's phrasing is sometimes flavoured with an archaism that makes the reader slow down.",
+   "source": "Victoria Hoyle, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-victoria-hoyle/",
+   "quote": "flavoured with an archaism that prompts a second glance",
+   "page": "paragraph beginning 'What to say?'"
+  },
+  {
+   "index": 600,
+   "feature": "other: prolepsis and foreshadowing",
+   "claim": "Milicia writes that Kay's foreshadowing is elaborate and delivered with a detached amusement.",
+   "source": "Joe Milicia, NYRSF, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-joe-milicia-for-the-new-york-review-of-science-fiction/",
+   "quote": "elaborate foreshadowing with a sort of detached amusement",
+   "page": "paragraph beginning 'First, Kay likes exercising'"
+  },
+  {
+   "index": 601,
+   "feature": "other: prolepsis and foreshadowing",
+   "claim": "The sample Milicia quotes shows Kay's narrator speculating in the conditional about consequences of an event that did not happen.",
+   "source": "Guy Gavriel Kay, Sailing to Sarantium, quoted by Joe Milicia in NYRSF, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-joe-milicia-for-the-new-york-review-of-science-fiction/",
+   "quote": "This, in turn, might have occasioned a significant change in various",
+   "page": "parenthetical sample quotation of Kay's text"
+  },
+  {
+   "index": 604,
+   "feature": "other: chronology handling",
+   "claim": "Milicia praises a chapter of Sailing to Sarantium for its intricately rearranged chronology.",
+   "source": "Joe Milicia, NYRSF, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-joe-milicia-for-the-new-york-review-of-science-fiction/",
+   "quote": "an intricately rearranged chronology and a wittily drawn-out suspense",
+   "page": "paragraph beginning 'Kay is also extremely skilled'"
+  },
+  {
+   "index": 605,
+   "feature": "other: opening pacing",
+   "claim": "Milicia calls the long Prologue of Sailing to Sarantium a bit plodding.",
+   "source": "Joe Milicia, NYRSF, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-joe-milicia-for-the-new-york-review-of-science-fiction/",
+   "quote": "the long Prologue is a bit plodding",
+   "page": "paragraph beginning 'Kay is also extremely skilled'"
+  },
+  {
+   "index": 607,
+   "feature": "other: historical fidelity",
+   "claim": "Dena Taylor writes that Sailing to Sarantium shows Kay at his most historical, reshaping the reign of Justinian and Theodora.",
+   "source": "Dena Taylor, review for a Nimrod Press Babel Handbooks volume, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-dena-taylor-sailing-to-sarantium/",
+   "quote": "Here is Kay at his most historical, reshaping the reign of",
+   "page": "paragraph beginning 'As a first volume'"
+  },
+  {
+   "index": 610,
+   "feature": "diction (native vs latinate)",
+   "claim": "Kay describes the language of The Last Light of the Sun as harder, terser and less lyric than his earlier books.",
+   "source": "Guy Gavriel Kay, interviewed by Richard Marcus, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/leapinthedark/",
+   "quote": "is harder, terser, less lyric than the books before",
+   "page": "answer to question 6"
+  },
+  {
+   "index": 615,
+   "feature": "other: influence and imitation",
+   "claim": "Kay denies that his language is a linguistic attempt to echo any other writer.",
+   "source": "Guy Gavriel Kay, interviewed by Richard Marcus, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/leapinthedark/",
+   "quote": "Certainly not a linguistic attempt to echo anyone else.",
+   "page": "answer to question 6"
+  },
+  {
+   "index": 616,
+   "feature": "other: reception of the prose",
+   "claim": "Interviewer Richard Marcus describes Kay's language as having an almost opulence that elevates events above the mundane.",
+   "source": "Richard Marcus (interviewer), 'Leap in the Dark', reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/leapinthedark/",
+   "quote": "the almost opulence of your language",
+   "page": "question 6"
+  },
+  {
+   "index": 620,
+   "feature": "other: contrast rather than blending",
+   "claim": "Kay says the mosaic form does not blend colours but contrasts them so blending appears only at a distance.",
+   "source": "Guy Gavriel Kay, interviewed by Peter Halasz, NYRSF 2000, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/nyrsf_halasz/",
+   "quote": "you don’t blend colours – you contrast them to form an",
+   "page": "answer on the prologue as mosaic"
+  },
+  {
+   "index": 623,
+   "feature": "other: elegiac register",
+   "claim": "Kay says The Lions of Al-Rassan is elegiac because it is about the demise of a civilisation.",
+   "source": "Guy Gavriel Kay, interviewed by Peter Halasz, NYRSF 2000, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/nyrsf_halasz/",
+   "quote": "Lions is elegiac in nature because it is really, as much",
+   "page": "answer on style and tone changing between books"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 569,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Everything quietly, ineluctably fades into history",
+   "note": "Final paragraph of the Dirda review, raw HTML fetched from brightweavings.com (HTTP 200): “‘Under Heaven’ ends where it began, among ghosts. Everything quietly, ineluctably fades into history, as into those mists one sees on Chinese scroll paintings.” Page byline confirms Michael Dirda of The Washington Post, reproduced with permission."
+  },
+  {
+   "index": 570,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "told with flair, passion and elegant prose",
+   "note": "Final paragraph: “River of Stars (*****) … is told with flair, passion and elegant prose.” Page title/byline confirm Adam Whitehead of The Wertzone and that the book reviewed is River of Stars."
+  },
+  {
+   "index": 572,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In six hundred plus pages, not a word of this novel feels gratuitous",
+   "note": "Quote verbatim on the page; the ‘over six hundred pages’ limb is carried by the page’s own ‘In six hundred plus pages’ in the same sentence. Byline confirms Indrapramit Das for Strange Horizons, reviewing River of Stars."
+  },
+  {
+   "index": 589,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sentences are often convoluted, meanings often obscured",
+   "note": "In the ‘What to say?’ paragraph, of Kay’s prose: “his style is very involved and requires a certain level of concentration from his reader; sentences are often convoluted, meanings often obscured.” Byline: Victoria Hoyle of Eve’s Alexandria, reviewing Sailing to Sarantium."
+  },
+  {
+   "index": 590,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "flavoured with an archaism that prompts a second glance and a slower read",
+   "note": "Same paragraph, next sentence: “The phrasing is sometimes flavoured with an archaism that prompts a second glance and a slower read” — the ‘makes the reader slow down’ limb is the page’s own ‘and a slower read’."
+  },
+  {
+   "index": 600,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "giving us elaborate foreshadowing with a sort of detached amusement",
+   "note": "Paragraph beginning ‘First, Kay likes exercising tricks of the narrator’s trade’. Byline: Joe Milicia, New York Review of Science Fiction, reprinted at BrightWeavings; the book under review is Sailing to Sarantium."
+  },
+  {
+   "index": 601,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This, in turn, might have occasioned a significant change in various affairs",
+   "note": "The parenthetical sample of Kay’s text reads: “Had he arrived back at the inn after the racing, as he had intended…, Crispin would almost certainly have conducted himself differently in certain matters that followed. This, in turn, might have occasioned a significant change in various affairs, both personal and of much wider import.” Counterfactual conditional about consequences of an arrival that did not occur; Milicia adds ‘And so on for another whole paragraph.’"
+  },
+  {
+   "index": 604,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an intricately rearranged chronology and a wittily drawn-out suspense",
+   "note": "Paragraph beginning ‘Kay is also extremely skilled’: “Also brilliant is Kay’s virtuoso handling of structure in the chapter that follows … but all with an intricately rearranged chronology and a wittily drawn-out suspense.” Praise limb (‘Also brilliant’, ‘virtuoso’) and ‘a chapter’ limb both on the page; the reviewed book is Sailing to Sarantium (opening paragraph)."
+  },
+  {
+   "index": 605,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the long Prologue is a bit plodding",
+   "note": "Parenthetical in the same paragraph: “Kay is also extremely skilled, especially in the later chapters (the long Prologue is a bit plodding), in building a lengthy scene to a dramatic climax.” Book confirmed as Sailing to Sarantium."
+  },
+  {
+   "index": 607,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Here is Kay at his most historical, reshaping the reign of Justinian and Theodora",
+   "note": "Paragraph beginning ‘As a first volume’. Header confirms the piece is by Dena Taylor and ‘part of an upcoming book on GGK being published by NIMROD PRESS … in the BABEL HANDBOOKS series’, on Sailing to Sarantium."
+  },
+  {
+   "index": 610,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The language in Last Light … is harder, terser, less lyric than the books before",
+   "note": "Answer to question 6: “The language in Last Light , for example, is harder, terser, less lyric than the books before (and some reviewers and scholars have commented on this).” The same page names the book in full as The Last Light of the Sun in several other answers."
+  },
+  {
+   "index": 615,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Certainly not a linguistic attempt to echo anyone else.",
+   "note": "Opening of the same answer to question 6, replying to Marcus’s ‘Was this style inspired by anyone in particular’; Kay goes on to describe operatic rhythms and mythic, Biblical cadences in Fionavar as his own device, not an echo of another writer."
+  },
+  {
+   "index": 616,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the almost opulence of your language … elevate everything above the mundane",
+   "note": "Question 6, verbatim: “One of the elements I’ve always been particularly fond of … has been the almost opulence of your language. It lends a splendour to events, but it also seems to elevate everything above the mundane.” The page says ‘everything’ where the claim says ‘events’, but ‘lends a splendour to events’ sits in the same sentence, so the limb holds. Header confirms Richard Marcus of ‘Leap in the Dark’ as interviewer."
+  },
+  {
+   "index": 620,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you don’t blend colours – you contrast them to form an illusion of blending when you back away",
+   "note": "Answer on the prologue of Sailing to Sarantium written as a mosaic: “That’s the art form of mosaic; you don’t blend colours – you contrast them to form an illusion of blending when you back away. When you get too close you can’t see it clearly…” — the ‘only at a distance’ limb is the page’s ‘when you back away’. Header confirms Peter Halasz, NYRSF, 2000."
+  },
+  {
+   "index": 623,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Lions is elegiac in nature because it is really … about the demise of a civilisation",
+   "note": "Answer on style and tone changing between books: “Lions is elegiac in nature because it is really, as much as anything else, about the demise of a civilisation. The demise of the Arab civilisation in Spain.” Same Halasz/NYRSF interview page."
+  }
+ ]
+}

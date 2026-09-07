@@ -1,0 +1,326 @@
+{
+ "name": "dnd",
+ "chunk": 8,
+ "claims": [
+  {
+   "index": 992,
+   "feature": "boxed text form",
+   "claim": "Noonan's stated hypothesis before the observation was that read-aloud text longer than a paragraph is not worth reading.",
+   "source": "Jesse Decker and David Noonan, \"Design & Development: Undercover at Gen Con, Part 1\", wizards.com, 16 September 2005",
+   "url": "https://web.archive.org/web/20051215014928id_/http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "boxed text longer than a paragraph probably isn’t worth reading",
+   "page": "'Undercover at Gen Con, Part 1', Undercover Insight #1",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2005-09-16",
+   "routeHint": "Wayback raw capture (/<ts>id_/ form), curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 993,
+   "feature": "boxed text form",
+   "claim": "Noonan's explanation for the failure is that read-aloud text turns the table's conversation into oration.",
+   "source": "Jesse Decker and David Noonan, \"Design & Development: Undercover at Gen Con, Part 1\", wizards.com, 16 September 2005",
+   "url": "https://web.archive.org/web/20051215014928id_/http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text replaces that conversation with oration.",
+   "page": "'Undercover at Gen Con, Part 1', Undercover Insight #1",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2005-09-16",
+   "routeHint": "Wayback raw capture (/<ts>id_/ form), curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 994,
+   "feature": "place and institution description",
+   "claim": "Two Wizards designers advise the DM to drop the written read-aloud text and describe the room in their own words.",
+   "source": "Jesse Decker and David Noonan, \"Design & Development: Undercover at Gen Con, Part 1\", wizards.com, 16 September 2005",
+   "url": "https://web.archive.org/web/20051215014928id_/http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "ditch the boxed text and use your own words",
+   "page": "'Undercover at Gen Con, Part 1', closing",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2005-09-16",
+   "routeHint": "Wayback raw capture (/<ts>id_/ form), curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 995,
+   "feature": "edition and house style",
+   "claim": "The column judges a three-sentence 2005 boxed text short by comparison with a 1999 one, evidence that Wizards' read-aloud passages had already contracted before 5th edition.",
+   "source": "Jesse Decker and David Noonan, \"Design & Development: Undercover at Gen Con, Part 1\", wizards.com, 16 September 2005",
+   "url": "https://web.archive.org/web/20051215014928id_/http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "That’s pretty short. Contrast it with the first room",
+   "page": "'Undercover at Gen Con, Part 1', Tangent Alert",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2005-09-16",
+   "routeHint": "Wayback raw capture (/<ts>id_/ form), curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "medium - 'already contracted' is the column's own framing of two quoted passages, not a measurement over a corpus"
+  },
+  {
+   "index": 996,
+   "feature": "edition and house style",
+   "claim": "Wizards of the Coast's D&D House Style Guide is an internal PDF distributed to official-play writers rather than a published book, and was last updated in January 2019.",
+   "source": "Dungeon Masters Guild product page for \"DMs Guild Creator Resource - Style Guide Resources\" (vendor copy describing Wizards' House Style Guide)",
+   "url": "https://web.archive.org/web/20250809215255id_/https://www.dmsguild.com/product/267467/DMs-Guild-Creator-Resource--Style-Guide-Resources",
+   "quote": "distributed by Wizards of the Coast to official play writers",
+   "page": "DMs Guild product description",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "date": "2019-01",
+   "routeHint": "Wayback raw capture, gzip-encoded body gunzipped, then HTML strip",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 997,
+   "feature": "edition and house style",
+   "claim": "A hobbyist who compiled a widely circulated 5th-edition writer's guide states he could find no official Wizards style sheet for 5th edition and back-fitted the 3.5 and 4.0 guides instead.",
+   "source": "Ronny (Dungeon Master Assistance), \"D&D 5E - Writer's Guide\", 3 August 2015",
+   "url": "https://olddungeonmaster.com/2015/08/03/5e-writers-guide/",
+   "quote": "I was looking for an official writer’s guide, or style sheet",
+   "page": "'D&D 5E - Writer's Guide', opening",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2015-08-03",
+   "routeHint": "live URL, browser user agent, curl + HTML strip",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 998,
+   "feature": "other: tense",
+   "claim": "The same compiled 5th-edition writer's guide states the rule as writing in the present tense and avoiding 'will' for NPC and monster actions.",
+   "source": "Ronny (Dungeon Master Assistance), \"D&D 5E - Writer's Guide\", 3 August 2015",
+   "url": "https://olddungeonmaster.com/2015/08/03/5e-writers-guide/",
+   "quote": "Write in the present tense.",
+   "page": "'D&D 5E - Writer's Guide' > 'Tense'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2015-08-03",
+   "routeHint": "live URL, browser user agent, curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium - a fan compilation from the 3.5 and 4.0 style guides, not Wizards' own 5e document"
+  },
+  {
+   "index": 999,
+   "feature": "boxed text form",
+   "claim": "Dyson Logos, relaying the Decker and Noonan observation, urges adventure writers to cut read-aloud text to one or two simple sentences or replace it with a point-form list.",
+   "source": "Dyson Logos, \"The Dreaded Boxed Text\", September 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "reduce it down to one or two SIMPLE sentences",
+   "page": "'The Dreaded Boxed Text', closing",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2013-09-29",
+   "routeHint": "live URL, browser user agent, curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 1000,
+   "feature": "place and institution description",
+   "claim": "SRD 5.1 Appendix PH-C \"The Planes of Existence\" (pp. 363-365) is the only sustained place-describing prose in the document, and measures 1,530 words across 9 paragraphs and 72 sentences.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "Appendix PH-C: The Planes of Existence",
+   "page": "pp. 363-365",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1001,
+   "feature": "sentence length variation",
+   "claim": "Across SRD 5.1 Appendix PH-C the mean sentence length is 21.2 words with a population standard deviation of 7.5 words.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 363-365 (72 sentences, 1,530 words)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1002,
+   "feature": "sentence length variation",
+   "claim": "No sentence in SRD 5.1 Appendix PH-C is shorter than 8 words (shortest 8, longest 41; p10 11, p50 21, p90 30).",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 363-365",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1003,
+   "feature": "sentence length variation",
+   "claim": "11.11 percent of the sentences in SRD 5.1 Appendix PH-C exceed 30 words.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 363-365 (8 of 72 sentences)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1004,
+   "feature": "other: digits in prose",
+   "claim": "SRD 5.1 Appendix PH-C contains zero digit characters across its 1,530 words.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 363-365",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1005,
+   "feature": "other: digits in prose",
+   "claim": "Every number in SRD 5.1 Appendix PH-C is spelled in words, including \"sixteen planes\" and \"from the first layer to the ninth\".",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "from the first layer to the ninth",
+   "page": "p. 364, Outer Planes",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1006,
+   "feature": "other: paragraph length",
+   "claim": "SRD 5.1 Appendix PH-C averages 8.00 sentences per paragraph (72 sentences in 9 paragraphs).",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 363-365",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 992,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "boxed text longer than a paragraph probably isn't worth reading",
+   "note": "Wayback raw capture fetched 200, 13,874 bytes; quote is word-for-word under the heading 'Undercover Insight #1: Boxed Text = MEGO', introduced as 'My hypothesis was that...' and followed by 'What I actually saw was much more dramatic than my hypothesis' - so the prior-hypothesis limb is explicit. The first-person narrator of that section is Noonan: the column later calls the method 'Dave wanders around' and asks whether adventures change 'because Dave spent a lot of time wandering around'."
+  },
+  {
+   "index": 993,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boxed text replaces that conversation with oration.",
+   "note": "Verbatim on the same page. The antecedent is supplied two paragraphs earlier ('At its heart, a D&D game is a conversation'), and the column ranks this above two other factors, naming it 'the conversation vs. oration factor'. Both limbs - that it is his explanation, and that the mechanism is conversation displaced by oration - are on the page."
+  },
+  {
+   "index": 994,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ditch the boxed text and use your own words",
+   "note": "Verbatim in the closing 'In the meantime' paragraph; the page continues 'for the initial description of the room', which carries the claim's 'describe the room' limb. Attribution limb: the column is co-bylined 'By Jesse Decker and David Noonan', both Wizards R&D staff per the About the Authors block, and the closing section speaks as 'we' - but the advice paragraph itself is in the singular undercover voice, so 'two Wizards designers' rests on the byline, not on a joint first person."
+  },
+  {
+   "index": 995,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That's pretty short. Contrast it with the first room",
+   "note": "Verbatim in the 'Tangent Alert!' aside. The 2005 passage quoted (from Sons of Gruumsh, called 'a recent Forgotten Realms adventure' - the page does not date it) is indeed three sentences; the comparator is named as 1999's Return to the Keep on the Borderlands. The contraction limb is the column's own generalisation immediately above the pair - that boxed text used to be much longer than it is today - so it is asserted, not inferred; but it rests on two hand-picked passages, not a corpus measure, and 5th edition is nowhere on the page, so 'before 5th edition' is external chronology (2005 precedes 2014)."
+  },
+  {
+   "index": 996,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'is an internal PDF ... rather than a published book' - the page never says internal, and states the documents 'are now available for all DMsGuild creators' as a free ($0.00) watermarked PDF download",
+   "trueWording": "distributed by Wizards of the Coast to official play writers",
+   "note": "Wayback raw capture fetched 200, 56,942 bytes. Quote verbatim. The January 2019 limb is verbatim too, on its own line above the description: the House Style Guide has been updated January 2019 (the package's File Last Updated is 22 February 2019). The package also bundles adventure-design tips from Chris Perkins and Greg Bilsand, D&D IP guidance and a Forgotten Realms guide, and the page says following them is not required to publish on DMsGuild. 'Internal' is fair as origin but wrong as present access - the cited page is itself a public free download of the guide."
+  },
+  {
+   "index": 997,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'widely circulated' - the page carries no circulation evidence at all (a personal WordPress blog post with 8 comments); nothing on it speaks to reach",
+   "trueWording": "I was looking for an official writer's guide, or style sheet",
+   "note": "Live URL fetched 200 with a browser UA, 39,307 bytes. Quote verbatim in the opening under 'Style Guide for Dungeon Masters'. The two substantive limbs are verbatim: 'Perhaps they have one and I just couldn't find it' (no official 5e sheet found) and 'So I took the copies I had from 3.5 and 4.0 and updated them for 5th edition' (the back-fit). Author is 'Ronny', posted 3 August 2015, matching the claim's date."
+  },
+  {
+   "index": 998,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Write in the present tense.",
+   "note": "Verbatim as the first line of the 'Tense' section on the same page. The second limb is verbatim on the next line - avoid the future tense 'will' to describe NPC or monster actions - with a worked golem-attacks example. Note the claim's own confidence field is right: this is Ronny's compilation from the 3.5 and 4.0 guides, not a Wizards 5e document, so it is evidence of fan-codified house style, not of Wizards' own rule."
+  },
+  {
+   "index": 999,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reduce it down to one or two SIMPLE sentences",
+   "note": "Live URL fetched 200 with a browser UA, 43,692 bytes; post dated 29 September 2013, byline Dyson Logos. Quote verbatim (SIMPLE capitalised in the original). The point-form limb is verbatim in the next sentence, as the preferred option ('But really, replace it with a point-form list of things seen in the room'), and the first option offered is to get rid of boxed text entirely. The relay limb holds: the post names Jesse Decker and David Noonan, block-quotes their Gen Con passage, and links the wizards.com article. One narrowing to flag: the page addresses 'OSR adventure writers', not adventure writers generally."
+  },
+  {
+   "index": 1000,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'9 paragraphs' - re-measurement of the same PDF gives 21 indent-marked paragraphs (avg 73 words each); 9 is the count of heading-delimited sections. The 'only sustained place-describing prose in the document' limb is also a whole-document judgment over 403 pages that the cited pages cannot establish",
+   "trueWording": "1,530 words, 72 sentences, 21 paragraphs (pp. 363-365)",
+   "note": "CONFIRMED by re-measurement: PDF re-fetched from media.wizards.com (200, 3,158,713 bytes, sha256 2504d2a0abb0a4d491a939be4f17910a2dde0312570ab8d208080225ccf0a1f0), pdftotext -enc UTF-8, appendix isolated on PDF pages 363-365. Heading 'Appendix PH-C: / The Planes of / Existence' verbatim at the top of p. 363. Body prose (headings and the running head/folio furniture excluded) = 1,530 words excluding the two bold run-in heads 'Spells.' and 'Portals.' (1,532 including them) and 72 sentences - both exact. The 9 corresponds to the intro plus eight headings (The Material Plane, Beyond the Material, Planar Travel, Transitive Planes, Inner Planes, Outer Planes, Outer Planes, Demiplanes)."
+  },
+  {
+   "index": 1001,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "mean 21.25 words; population SD 7.54 across 72 sentences",
+   "note": "CONFIRMED by independent re-measurement on the byte-identical PDF: 1,530 body words / 72 sentences = 21.25 -> 21.2, population stdev 7.542 -> 7.5. Counting the two run-in heads instead gives 1,532 words, mean 21.28, population stdev 7.537 - both roundings land on the claim's 21.2 / 7.5 only under the 1,530-word tokenisation, which is the one the claim itself uses. Sample (n-1) stdev would be 7.59, so the claim's 'population' qualifier is load-bearing and correct."
+  },
+  {
+   "index": 1002,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "shortest 8, longest 41; p10 11, p50 21 confirmed",
+   "note": "CONFIRMED for the headline and three of four bracket figures. Re-measured min 8 ('Such a journey is the stuff of legend.'), max 41 (the 'Some are vortices...' sentence on p. 363), p10 11, p50 21. One convention caveat, stated visibly rather than buried: p90 re-measures at 30.9 by linear interpolation and 31 by nearest rank, so the claim's p90 30 holds only under a lower/truncating percentile method. Nothing in the appendix falls below 8 words once the run-in heads 'Spells.' and 'Portals.' are attached to their sentences, which is how the 72-sentence count is reached."
+  },
+  {
+   "index": 1003,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "8 of 72 sentences exceed 30 words (11.11%)",
+   "note": "CONFIRMED exactly by re-measurement: 8/72 = 11.1111%. The eight are the 33-, 32-, 34-, 35-, 41-, 32-, 31- and 34-word sentences; the 31-word one is the 'guided tour of the Nine Hells' sentence, so the count is sensitive to whether >30 or >=30 is used - >30 is what reproduces 8."
+  },
+  {
+   "index": 1004,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "zero digit characters in the appendix body prose",
+   "note": "CONFIRMED: a regex scan for [0-9] over the 1,530-word body returns nothing. The only digits on pp. 363-365 are page furniture excluded from the body - the running head 'System Reference Document 5.1' and the folios 363, 364, 365 - so the claim is true of the prose and would be false of the raw page text."
+  },
+  {
+   "index": 1005,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "from the first layer to the ninth",
+   "note": "Quote verbatim on p. 364 in the Outer Planes section, matching the claim's page cite; 'sixteen planes' is also verbatim on p. 364. CONFIRMED by the same zero-digit scan: every quantity in the appendix is spelled out - four Elemental Planes, two ways, eight alignments, sixteen, Nine Hells, first, ninth, single."
+  },
+  {
+   "index": 1006,
+   "verdict": "CONTRADICTED",
+   "trueWording": "21 paragraphs; 3.43 sentences per paragraph, not 8.00",
+   "note": "The 72-sentence numerator reproduces, but the 9-paragraph denominator does not. Re-measurement of the byte-identical PDF finds 21 paragraphs in PH-C, identified by the typographic first-line indents pdftotext preserves plus the first paragraph after each heading: 72/21 = 3.43 sentences and 73 words per paragraph. The 9 is the number of heading-delimited sections (intro plus The Material Plane, Beyond the Material, Planar Travel, Transitive Planes, Inner Planes, Outer Planes, Outer Planes, Demiplanes), so a section count has been reported as a paragraph count and the per-paragraph average is inflated roughly 2.3x. Downstream: do not carry 8.00 sentences per paragraph."
+  }
+ ]
+}

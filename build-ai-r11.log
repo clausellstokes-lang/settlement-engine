@@ -1,0 +1,22 @@
+== Mon Sep  7 03:11:34 EDT 2026 build ai r11 ==
+--- dry run:
+untriage ai: 231 rows wanted; 231 found across 2 triage file(s); 0 NOT in any triage file (they may sit in a chunk verdict file — left alone): []
+  verdicts-ai-triage-r10.json: 221 of 285 rows removed
+  verdicts-ai-triage-r5.json: 10 of 10 rows removed
+DRY RUN — re-run with --apply when no research run is alive
+--- apply:
+untriage ai: 231 rows wanted; 231 found across 2 triage file(s); 0 NOT in any triage file (they may sit in a chunk verdict file — left alone): []
+  verdicts-ai-triage-r10.json: 221 of 285 rows removed
+  verdicts-ai-triage-r5.json: 10 of 10 rows removed
+state-ai.json: 231 SKIPPED_TRIAGE verdicts removed (backup .pre-untriage-0907-0311.bak)
+APPLIED; now: cd .. && node sweep-state.mjs summary && python3 sweep/mk-round.py ai <tag> --prev sweep/args-ai-<last>.json --cap 4  (NO --triage; NO angles)
+--- merge ai only (no cross-sweep summary):
+{"name":"ai","claims":1518,"verdicts":1287,"kept":1015,"partial":191,"chunkFiles":84,"verdictsFromFiles":1430}
+--- mk-round ai r11 (no --triage, no angles):
+chunk-manifests.json written
+  $ python3 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/mk-args.py ai --chunks -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-ai.json 4720 bytes; chunks 16 angles [] extra [] baseIndex None
+{"name": "ai", "tag": "r11", "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-ai-r11.json", "bytes": 9640, "chunks": 16, "toVerify": 231, "findAngles": [], "extraAngles": [], "droppedComplete": ["arch-decoding-literature"], "baseIndex": null, "verifiedCount": 1287, "cap": 4}
+args-ai-r11.json set: chunks 16 extraAngles ['procgen-baseline'] regrade True cap 4 regradeNotes 3346 synthNotes 5138
+--- embed:
+ai r11: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r11.js (45560 bytes; chunks 16; extra ['procgen-baseline']; regrade True; skipSynth None; hashes 0) — literal==file, node --check OK
+READY: Workflow({scriptPath: '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r11.js'}) — launch when a research slot frees; then record in LAST-RUNS.json (tag r11).

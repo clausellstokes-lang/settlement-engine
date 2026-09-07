@@ -1,0 +1,162 @@
+{{Achtung|Text=
+
+Diese Seite basiert ursprünglich als angepasste Übersetzung auf '''[[:en:Wikipedia:Signs of AI writing]]''' mit Stand vom '''[https://de.wikipedia.org/w/index.php?title=Wikipedia:Anzeichen_für_KI-generierte_Inhalte&oldid=259607874 9. September 2025 (Import)]'''. 
+Mittlerweile hat sich das englische Original bzw. auch das Wissen zur Erkennung insgesamt deutlich erweitert, einiges ist noch unzureichend an KI in der deutschsprachigen Wikipedia angepasst. Diese Seite hier soll als übersichtliche Darstellung überarbeitet, ergänzt und wo möglich auch gekürzt werden.}}
+
+* [https://www.heise.de/news/Wieselworte-und-Co-Anleitung-zum-Erkennen-KI-generierter-Texte-auf-Wikipedia-10644150.html Bericht über diese Seite bei heise.de]
+
+Das Einstellen von mit [[Large Language Model|Large Language Models]] (LLM) erzeugten oder bearbeiteten Texten in der Wikipedia ist gemäss Community-Beschluss verboten, siehe [[Wikipedia:Künstliche Intelligenz]]. Neben einigen eindeutigen Hinweisen auf Verstöße gegen dieses Verbot gibt es weitere, weniger eindeutige Anzeichen. Um diese leichter erkennbar zu machen, soll auf dieser Seite eine Übersicht zu einigen Schreib- und Formatierungskonventionen entstehen, die typisch für [[Chatbot]]s wie [[ChatGPT]] sind. Als Beispiele dienen meist kurze Formulierungen, die auffällig sind.
+
+Es wird dabei nicht behauptet, dass gewisse Formulierungen nur von [[Large Language Model|LLMs]] verwendet werden. Nicht jeder Text mit den in der Folge beschriebenen auffälligen Indikatoren ist KI-generiert. Da die großen [[Sprachmodell]]e, die die KI-Chatbots antreiben, anhand von menschlichem Schreiben trainiert wurden, einschließlich der Texte von Wikipedia-Autoren, sind die Zuschreibungen manchmal fließend. Wenn LLM-generierter Text vom menschlichen Autor überarbeitet wurde (durch modifizierte Prompts, oder nachträglich bearbeitet), dann sind diese Indikatoren möglicherweise nicht mehr vorhanden. Das grundsätzliche Problem aber bleibt. 
+
+Man sollte sich nicht auf Werkzeuge zur Erkennung von KI-Inhalten wie etwa [[GPTZero]] verlassen, um zu bewerten, ob Texte [[Large Language Model|LLM]]-generiert sind. Diese Tools sind unzuverlässig. Sie schneiden zwar besser als der Zufall ab, haben aber trotzdem hohe Fehlerquoten und können menschliches Urteilsvermögen nicht ersetzen.<ref>Thomas Claburn: ''[https://www.theregister.com/2023/03/21/detecting_ai_generated_text/ No reliable way to detect AI-generated text, boffins sigh]''. In: ''[[The Register]]''. 21. März 2023, abgerufen am 6. April 2026 (englisch)</ref>
+
+Eindeutige Indikatoren wie falsche Belege oder ein Hinweis im Artikel, dass dieser von einer KI produziert wurde, sind ausreichender Grund für einen [[Wikipedia:Schnelllöschantrag|Schnelllöschantrag]]. Die weiteren Anzeichen, obwohl sie tatsächlich auf KI-Nutzung hinweisen könnten, reichen ohne Löschdiskussion nicht für eine Schnelllöschung aus.
+
+== Eindeutige Anzeichen ==
+=== Falsche Belege  ===
+LLMs [[Halluzination (Künstliche Intelligenz)|halluzinieren]] aus ihren Trainingsdaten Aussagen und Zusammenhänge, die plausibel klingen und richtig sein können, aber nicht richtig sein müssen.<ref>[[Andrej Karpathy]]:
+[https://x.com/karpathy/status/1733299213503787018 # On the “hallucination problem”.] Twitter vom 9. Dezember 2023, abgerufen am 11. März 2026.</ref> Die wichtigste Maßnahme zur Prüfung, ob ein Text KI-generiert ist, ist daher die Prüfung der angegebenen Belege in zwei Schritten:
+#Existiert die zitierte Quelle? Kann ich das zitierte Werk im Internet oder in einem Bibliothekskatalog finden, sind Parameter wie URL, Autor, Werktitel, Erscheinungsjahr, Verlag, Herausgeber, Seitenzahl und Identifikatoren wie ISBN oder DOI korrekt angegeben?
+#Wenn die Quelle gefunden werden kann: Ist in der angegebenen Quelle die zu belegende Aussage enthalten? Hierfür musst du dir die Quelle beschaffen und nachlesen.
+
+Wenn nur ein geringfügiger Fehler wie eine falsches Erscheinungsjahr gefunden wird und die übrigen Belege in Ordnung sind, kann von einem Versehen ausgegangen werden. Bei mehreren fehlerhaften Belegangaben ist jedoch von einer unsauberen Arbeitsweise des Autors auszugehen, möglicherweise auch von einem Einsatz von KI.
+
+=== Formulierungsreste aus dem Dialog mit dem Bot ===
+Wenn sich Reste des Dialogs mit dem Chatbot im Artikeltext finden, ist dies ein eindeutiger Hinweis auf unzulässigen KI-Einsatz.
+
+==== Briefartiges Schreiben ====
+''Betreff:'', ''Liebe Wikipedia-Editoren/Administratoren'', ''Ich hoffe, diese Nachricht erreicht Sie wohlauf'', ''Ich schreibe, um&nbsp;…'', ''Ich bin bereit/würde gerne&nbsp;…'', ''Vielen Dank für Ihre Zeit/Überlegung&nbsp;…'',&nbsp;…
+Höflichkeitsformeln sind in Wikipedia-Diskussionsseiten unüblich und fallen auf. Diskussionsseitennachrichten und Entsperrungsanträge, die von KI-Chatbots generiert wurden, enthalten oft Anreden und Grußformeln. Viele dieser Nachrichten betonen den guten Glauben des Benutzers und versprechen, dass er die Richtlinien von Wikipedia einhalten wird. Das Vorhandensein einer Betreffzeile über dem Text, wie in E-Mails, ist ein eindeutigeres Zeichen, dass eine KI mit im Spiel ist.
+
+==== Kollaborative Kommunikation ====
+''Ich hoffe, das hilft'', ''Natürlich!'', ''Sicherlich!'', ''Möchten Sie&nbsp;…'', ''gibt es noch etwas'', ''lassen Sie mich wissen'', ''detailliertere Aufschlüsselung'', ''hier ist ein'',&nbsp;… Deutsche Formulierungen wie diese sind direkte Übersetzungen englischer KI-Phrasen und wirken im deutschen Wikipedia-Kontext fremd. In einigen Fällen fügen Benutzer Text von einem KI-Chatbot ein, der als Korrespondenz, Vorentwurf oder Ratschlag vom Chatbot gedacht war, anstatt als Artikelinhalt.
+KI-Chatbots können auch explizit angeben, dass der Text für einen Wikipedia-Artikel bestimmt ist, wenn sie aufgefordert werden, einen solchen zu erstellen, und können in ihren Ausgaben verschiedene Richt- und Leitlinien erwähnen – wobei sie oft explizit angeben, dass es sich dabei um Wikipedia-Konventionen handelt.
+
+==== Hinweise auf Wissenslücken ====
+Ein Hinweis auf beschränktes Wissen ist eine Erklärung, die vom KI-Chatbot verwendet wird, um darauf hinzuweisen, dass die bereitgestellten Informationen unvollständig, ungenau oder veraltet sein können. Zu beachtende Wörter: ''Stand [Datum]'', ​​''Bis zu meinem letzten Update'', ''Stand meines letzten Wissensupdates'', ''Obwohl spezifische Details begrenzt/rar sind&nbsp;…'', ''nicht allgemein verfügbar/dokumentiert/offengelegt'', ''…&nbsp;in den bereitgestellten/verfügbaren Quellen/Suchergebnissen&nbsp;…'', ''basierend auf verfügbaren Informationen'',&nbsp;…
+
+Wenn das Trainingsmaterial eines LLM ein festes Grenzdatum hat (normalerweise das letzte Trainingsupdate des Modells), kann es keine Informationen zu Ereignissen oder Entwicklungen nach diesem Zeitpunkt bereitstellen und gibt häufig einen Hinweis darauf, um den Benutzer daran zu erinnern. Dieser Hinweis besteht normalerweise aus einer Erklärung, dass die bereitgestellte Information nur bis zu einem bestimmten Datum korrekt ist.
+
+Wenn ein LLM mit Retrieval-Augmented Generation (ein KI-Chatbot, der das Internet durchsuchen kann) keine Quellen zu einem bestimmten Thema findet oder Informationen in den in einer Eingabeaufforderung angegebenen Quellen fehlen, gibt er häufig eine entsprechende Erklärung, die einem Hinweis auf Wissenslücken ähnelt. Er kann diese Erklärung auch mit einem Text verknüpfen, der beschreibt, was diese Informationen „wahrscheinlich“ sein könnten und warum sie wichtig sind. Diese Informationen sind rein spekulativ (einschließlich der Behauptung, sie seien „nicht dokumentiert“) und können auf lose verwandten Themen basieren oder frei erfunden sein. Sie werden auch häufig mit den oben genannten kombiniert.
+
+==== Platzhaltertext ====
+KI-Chatbots können Antworten mit Lückentextvorlagen generieren, die der LLM-Benutzer durch Wörter und Phrasen ersetzen kann, die für seinen Anwendungsfall relevant sind. Manche LLM-Benutzer vergessen jedoch, solche Wörter hinzuzufügen. Beachte, dass es für Entwürfe und neue Artikel [[Wikipedia:Formatvorlage|Formatvorlagen]] in Wikipedia gibt.
+
+=== Einbindung nicht existierender Vorlagen ===
+Von KI-Tools erzeugte Vorlagen sind häufig fehlerhaft. Sie existieren entweder gar nicht oder enthalten Parameter, die in der Vorlage nicht verwendet werden.
+
+== Weichere, uneindeutige Anzeichen ==
+Chatbots sind geschwätzig. Generierte Texte sind daher häufig recht lang, oft überstrukturiert mit übermäßigem Fettdruck, Aufzählungen und Listen mit Spiegelstrichen, Genderzeichen, Trennlinien. Sie enthalten viele Floskeln und oftmals werbliche Sprache und unpassende, oft zweiteilige Zwischenüberschriften. Im Folgenden sollen einige Beispiele gesammelt werden.
+
+=== Sprache und Tonfall ===
+Übermäßige Betonung von Symbolik und Bedeutung, Wörter, auf die man achten sollte: ''ist/steht als/dient als Zeugnis'', ''spielt eine wichtige/bedeutende Rolle'', ''unterstreicht seine Bedeutung'', ''fasziniert weiterhin'', ''hinterlässt bleibenden Eindruck'', ''Wendepunkt'', ''Schlüsselmoment'', ''tief verwurzelt'', ''tiefes Erbe'', ''unerschütterliche Hingabe'', ''steht als'', ''festigt'',&nbsp;…
+
+LLMs blähen oft die Bedeutung des Themas auf, suggerieren, dass der Artikel ein breites Thema repräsentiert oder dazu beiträgt. Es scheint nur ein kleines Repertoire von Phrasen zu geben. Wenn über Biologie gesprochen wird (z.&nbsp;B. wenn zu einer bestimmten Tier- oder Pflanzenart geschrieben wird), neigen LLMs dazu, zu viel Betonung auf den Erhaltungsstatus der Art und die Bemühungen zu ihrem Schutz zu legen, auch wenn der Gefährdungsgrad unbekannt und keine Initiativen zu ihrem Schutz bekannt sind.
+
+==== Werbesprache ====
+Formulierungen, auf die man achten sollte: ''reiches kulturelles Erbe'', ''reiche Geschichte'', ''atemberaubend'', ''unbedingt besuchen'', ''unbedingt sehen'', ''beeindruckende natürliche Schönheit'', ''bleibendes Vermächtnis'', ''reicher kultureller Teppich'', ''eingebettet'', ''im Herzen von'',&nbsp;… LLMs haben ernsthafte Probleme damit, einen neutralen Ton zu bewahren, besonders beim Schreiben über etwas, das z.&nbsp;B. als „kulturelles Erbe“ betrachtet werden könnte. In diesen Fällen tendieren sie dazu, den Leser ständig daran zu erinnern, dass das ein kulturelles Erbe ist&nbsp;…
+
+==== Redaktionelle Kommentare ====
+Formulierungen, auf die man achten sollte: ''es ist wichtig zu bemerken/zu bedenken/zu beachten'', ''es ist bemerkenswert'', ''keine Diskussion wäre vollständig ohne'', ''dieser Artikel würde nicht ohne existieren'',&nbsp;… Solche Kommentare wirken im deutschen Wikipedia-Stil, etwa bei Übersetzungen durch KI besonders auffällig, da die deutsche Wikipedia-Sprache traditionell sachlicher und zurückhaltender formuliert. KI-Chatbots neigen dazu, ihre eigene Interpretation, Analyse und Meinungen in ihr Schreiben einzufügen, auch wenn sie gebeten werden, neutral zu schreiben.
+
+==== Bestimmte Konjunktionen ====
+''andererseits'', ''darüber hinaus'', ''zusätzlich'', ''außerdem'', ''ferner'',&nbsp;… Konjunktionen wie „darüber hinaus“ oder „außerdem“ sind in akademischen Texten üblich, LLMs verwenden sie oft übermäßig und mechanisch, das fällt im deutschen Wikipedia-Stil auf. Menschliches Schreiben enthält natürlich Verbindungswörter und -phrasen, LLMs neigen aber dazu, sie zu oft und auf eine steife formelhafte Weise zu verwenden.
+
+==== Abschnitts-Zusammenfassungen ====
+Worauf man achten sollte: ''zusammenfassend'', ''abschließend'', ''insgesamt'' ... Zusammenfassungsformeln sind in wissenschaftlichen Texten üblich, in Wikipedia-Artikeln unpassend. LLMs beenden oft einen Absatz oder Abschnitt, indem sie die Kernidee zusammenfassen und wiederholen. Während dies für einige wissenschaftliche Texte erlaubt sein mag, fasst man in Wikipedia typischerweise nie die allgemeine Idee eines Textblocks zusammen, außer im Einleitungsabschnitt, der ja eine Zusammenfassung des gesamten Artikels sein kann.
+
+==== Fazit ====
+Charakteristisch für KI-generierte Texte ist ferner, dass sie mit dem Abschnitt ''Fazit'' schließen. Auch das ist für einen Wikipedia-Artikel unpassend, typisch ist es hingegen für Fachaufsätze in Medizin sowie den Naturwissenschaften.
+
+==== Schlussfolgerungen ====
+Umrissartige Schlussfolgerungen über Herausforderungen und Zukunftsaussichten wie ''Trotz seiner/dieser Erfolge&nbsp;…'', ''…&nbsp;steht vor mehreren Herausforderungen&nbsp;…'', ''Vermächtnis'', ''Zukunftsaussichten'' Solche Wendungen klingen oft formelhaft, deutsche Texte sind direkter strukturiert. Viele LLM-generierte Wikipedia-Artikel enthalten einen „Herausforderungen“-Abschnitt, der typischerweise mit einem Satz wie „Trotz seiner (positiv-werbegenre-gemäße Wortwahl) steht … vor Herausforderungen&nbsp;…“ beginnt und entweder mit einer positiven Bewertung des Artikelthemas oder mit Spekulationen darüber endet, wie laufende oder potenzielle Initiativen dem Thema zugutekommen könnten. Hier geht es um die oben genannte starre Formelhaftigkeit, die LLMs verwenden, nicht um die Erwähnung von Herausforderungen überhaupt.
+
+==== Negative Parallelismen ====
+Deutsche Parallelkonstruktionen mit ''„nicht nur&nbsp;…, sondern auch“'' oder ''„es geht nicht nur um&nbsp;…, sondern“'' sind zwar grammatisch korrekt, aber in Wikipedia-Texten eher unpassend, da sie einen argumentativen Ton vermitteln. Parallelkonstruktionen mit „nicht“, „aber“ oder „jedoch“, „sondern“ oder „Es geht nicht nur um&nbsp;…" sind häufiger in LLM-Artikeln zu finden, jedoch eher ungeeignet für den geforderten neutralen Schreibstil.
+
+==== Trikolon ====
+LLMs verwenden übermäßig rhetorische Stilmittel wie die Dreierregel à la ''„the good, the bad, and the ugly“''. Dies kann verschiedene Formen annehmen von „Adjektiv, Adjektiv, Adjektiv“ bis zu „kurze Phrase, kurze Phrase und kurze Phrase“. Im Deutschen wird die Dreierregel oft durch Aufzählungen mit ''„sowohl&nbsp;… als auch&nbsp;… und“'' oder durch drei koordinierte Begriffe ausgedrückt. Dies fällt in deutschen Wikipedia-Texten deshalb auf, weil man hier sparsam mit rhetorischen Stilmitteln umgeht.
+
+==== Oberflächliche Analysen ====
+''gewährleistend…'', ''hervorhebend…'', ''betonend…'', ''widerspiegelnd&nbsp;…'',&nbsp;… Deutsche Partizipialkonstruktionen (Partizip-I-Formen) werden in der deutschen Wikipedia seltener verwendet als etwa entsprechende englische ''-ing''-Formen, da sie als zu abgehoben oder künstlich empfunden werden. KI-Chatbots neigen dazu, oberflächliche Analysen von Informationen einzufügen, oft in Bezug auf Bedeutung, Anerkennung oder Auswirkung. Diese Formulierungen sind im Allgemeinen nicht sehr hilfreich, da sie unnötige oder fiktive Meinungen einbringen.
+
+==== Vage Autoritäten ====
+''Branchenberichte'', ''Beobachter haben zitiert'', ''Einige Kritiker argumentieren&nbsp;…'' KI-Chatbots neigen dazu, Meinungen oder Behauptungen einer vagen Autorität zuzuschreiben – eine Praxis, die als „Weasel Wording“ bezeichnet wird – und dabei nur ein oder zwei Quellen zu zitieren, die diese Ansicht möglicherweise tatsächlich vertreten. Sie neigen auch dazu, die Perspektive einer oder weniger Quelle/n auf die einer größeren Gruppe zu übertragen.
+
+==== Falsche Erweiterung ====
+Wenn KI-Chatbots Beispiele für Elemente innerhalb eines Sets nennen, erwähnen sie diese Elemente häufig mit Phrasen wie ''von&nbsp;… bis'', was oft einen nicht-enzyklopädischen Tonfall erzeugt. Dieser Indikator ist nicht zu verwechseln mit der nicht-figurativen Verwendung von Präpositionen, etwa in räumlichen oder zeitlichen Kontexten.
+
+=== Typische Formatierungen ===
+==== Übermäßige Verwendung von Fettschrift ====
+KI-Chatbots zeigen oft verschiedene Phrasen in [[Fettschrift]] zur Betonung an. Diese Tendenzen haben sie aus FAQs, Fan-Wikis, Anleitungen, Verkaufsgesprächen, Foliensätzen, Listenartikeln und anderen Materialien mit starker Fettschrift übernommen. Dort wird jedes Vorkommen eines bestimmten Wortes hervorgehoben, oft in der Art „wichtiger Erkenntnisse“. Einige neuere große Sprachmodelle oder Apps enthalten Anweisungen, um eine übermäßige Verwendung von Fettschrift zu vermeiden.
+
+==== Listen ====
+KI-Chatbots organisieren  den Inhalt ihrer Antworten oft in Listen, die auf eine bestimmte Weise formatiert sind. Deshalb können Listen, die aus KI-Chatbot-Antworten kopiert und eingefügt werden, ihre ursprüngliche Formatierung beibehalten. Anstatt der Formatierung gemäß [[Wikitext]] kann ein Aufzählungspunkt in einer ungeordneten Liste als Aufzählungszeichen (•), Bindestrich (-), Gedankenstrich (–) oder als Nummerierung erscheinen.
+
+==== Emojis ====
+Manchmal setzen KI-Chatbots [[Emoji]]s vor Abschnittsüberschriften oder Aufzählungspunkte. Emojis sind in der deutschen Wikipedia grundsätzlich unüblich und fallen daher besonders auf.
+
+==== Verwendung von Gedankenstrichen ====
+Die Verwendung typographisch korrekter Halbgeviertstriche (Gedankenstriche) (–) statt Viertelgeviertstrichen (-) kann gerade bei Beiträgen von Neulingen ein weiterer Hinweis auf die Nutzung eines LLM sein, ist aber nur zusammen mit weiteren Hinweisen wirklich aussagekräftig. Es gibt auch Anzeichen dafür, dass LLMs Gedankenstriche grundsätzlich häufiger verwenden als Menschen.
+
+=== Auszeichnungstext ===
+==== Verwendung von Markdown ====
+KI-Chatbots sind nicht kompetent in [[Wikitext]], der [[Auszeichnungssprache]], die verwendet wird, um Wikipedias [[MediaWiki]]-Software zu instruieren, wie ein Artikel formatiert werden soll. Außerhalb wird Wikitext kaum verwendet, es ist eine Nischen-Auszeichnungssprache. Daher fehlen den meisten LLMs in der Regel Trainingsdaten im Wikitext-Format. Zwar haben die Chatbot-Korpus Millionen von Wikipedia-Artikeln aufgenommen, diese wurden jedoch nicht als Textdateien mit Wikitext-Syntax verarbeitet. Erschwerend kommt hinzu, dass die meisten Chatbots werkseitig auf die Verwendung einer anderen, konzeptionell ähnlichen, aber viel vielseitiger anwendbaren Auszeichnungssprache eingestellt sind: [[Markdown]]. Ihre systemweiten Anweisungen weisen sie an, ihre Ausgaben mit dieser Sprache zu formatieren, und die Chatbot-Apps stellen die Syntax als formatierten Text auf dem Bildschirm des Benutzers dar. Dadurch werden Überschriften, Aufzählungs- und Nummerierungslisten, Tabellen usw. gemäß Markdown angezeigt, genauso wie andererseits MediaWiki Wikitext so darstellt, dass Wikipedia-Artikel wie formatierte Dokumente aussehen.
+
+Wenn ein Chatbot bereit ist, einige seiner Anweisungen auf Systemebene preiszugeben, gibt er in der Regel eine Variation folgender „Formatierungsrichtlinien“ preis ([[Microsoft Copilot]] Mitte 2025):
+<pre>
+## Formatting Guidelines
+
+- All output uses GitHub-flavored Markdown.
+- Use a single main title (`#`) and clear primary subheadings (`##`).
+- Keep paragraphs short (3–5 sentences, ≤150 words).
+- Break large topics into labeled subsections.
+- Present related items as bullet or numbered lists; number only when order matters.
+- Always leave a blank line before and after each paragraph.
+- Avoid bold or italic styling in body text unless explicitly requested.
+- Use horizontal dividers (`---`) between major sections.
+- Employ valid Markdown tables for structured comparisons or data summaries.
+- Refrain from complex Unicode symbols; stick to simple characters.
+- Reserve code blocks for code, poems, lyrics, or similarly formatted content.
+- For mathematical expressions, use LaTeX outside of code blocks.
+</pre>
+
+Wie das oben Gesagte bereits andeutet, unterscheidet sich die Syntax von Markdown völlig von der von Wikitext: Markdown verwendet Sternchen (*) oder Unterstriche (_) anstelle von einfachen Anführungszeichen (') für Fett- und Kursivformatierung, Rautensymbole (#) anstelle von Gleichheitszeichen (=) für Abschnittsüberschriften, Klammern ( () ) anstelle von eckigen Klammern (<nowiki> [ ] </nowiki>) um URLs und drei Symbole (---, *** oder ___) anstelle von vier Bindestrichen (<nowiki>----</nowiki>) für thematische Trennungen.
+
+Selbst auf ausdrücklichen Wunsch haben Chatbots im Allgemeinen Schwierigkeiten, Text mit syntaktisch korrektem Wikitext zu generieren, da ihre inhärenten Architekturvorurteile und Trainingsdaten zu einer deutlich höheren Affinität und Beherrschung von Markdown führen. Wenn ein Benutzer einen Chatbot auffordert, „einen Artikel zu generieren“, verwendet er für die generierte Ausgabe in der Regel standardmäßig Markdown, das von den Kopierfunktionen einiger Chatbot-Plattformen in der Zwischenablage gespeichert wird. Wenn ein Benutzer ihn auffordert, Inhalte für Wikipedia zu generieren, erkennt der Chatbot möglicherweise selbst die Notwendigkeit, Wikipedia-kompatiblen Code zu generieren, und fügt seiner Ausgabe eine Nachricht wie ''Möchten Sie, dass ich … dies in das tatsächliche Wikipedia-Markup-Format (`Wikitext`) umwandle?'' Wenn man ihn auffordert, fortzufahren, ist die resultierende Syntax oft rudimentär, syntaktisch falsch oder beides.
+
+Das Vorhandensein fehlerhafter Wikitext-Syntax gemischt mit Markdown-Syntax ist ein starker Indikator dafür, dass Inhalte LLM-generiert sind, insbesondere in Form eines abgegrenzten Markdown-Codeblocks. Markdown allein ist jedoch kein so starker Indikator. Softwareentwickler, Forscher, technische Redakteure und erfahrene Internetnutzer verwenden Markdown häufig, das in verschiedenen Tools und auf Online-Plattformen zur Anwendung kommt. Die zunehmende Allgegenwärtigkeit von Markdown kann auch dazu führen, dass neue Benutzer davon ausgehen, dass Wikipedia Markdown standardmäßig unterstützt.
+
+=== Fehlerhafter Wikitext ===
+==== Gehe zu Suche Nr. ====
+ChatGPT kann solche „gehe zu Suche Nr.“ (manchmal umgeben von Unicode-Punkten) am Ende von Sätzen einfügen, wobei die „Suche“-Nummer im Verlauf des Textes ansteigt. Dies sind Stellen, wo der Chatbot auf eine externe Website verlinkt, aber ein Mensch, der die Unterhaltung in Wikipedia einfügt, diesen Link in Platzhalter-Code umwandelt. Das wurde erstmals ab Februar 2025 beobachtet.
+
+'''Beispiel'''
+Simmel, Georg: ''Die Ritualdimensionen der Freimaurerei'' (Gehe zu Suche Nr.)freimaurerei+1
+
+==== Inkorrekte formatierte Referenzen ====
+Deutsche Wikipedia-Zitationsstile unterscheiden sich oft von englischen. KI-Tools, die auf englischen Texten trainiert wurden, verwenden möglicherweise unpassende Zitationsformate für deutsche Wikipedia. KI-Tools können aufgefordert worden sein, Referenzen einzubeziehen, und versuchen dies so zu tun, wie Wikipedia es erwartet, scheitern aber bei wichtigen Implementierungsdetails oder fallen im Vergleich mit Konventionen auf.
+
+==== nicht existierende Kategorien ====
+LLMs täuschen manchmal nicht vorhandene Kategorien vor (die als rote Links erscheinen), weil ihr Trainingsset veraltete und umbenannte Kategorien enthält, die sie in neuen Inhalten reproduzieren. Sie können auch gewöhnliche Verweise auf Themen als Kategorien behandeln und so nicht vorhandene Kategorien generieren. Dies ist ein häufiger Fehler, den neue oder wiederkehrende Benutzer machen.
+
+=== Userbezogene Kriterien, weitere Anzeichen ===
+==== Wechsel im Schreibstil ====
+Wenn ein Autor, der z.&nbsp;B. in Diskussionen oder früheren Artikelbeiträgen durch fehlerhafte Grammatik und Rechtschreibung auffällt, plötzlich keine Fehler mehr macht, kann das auf die Verwendung von KI-Tools hinweisen. Auch ein Wechsel zwischen verschiedenen Sprachregistern (z.&nbsp;B. von umgangssprachlich zu hochformal) oder die Verwendung von Konstruktionen, die für das Englische typisch sind, ist auffällig.
+
+==== Produktivitätsschub ====
+Wenn Nutzer eine hohe Schlagzahl bei der Artikelerstellung (oder Edits) haben, z.&nbsp;B. auch im Vergleich zu früheren Arbeitsweisen, kann … dies auf KI-Nutzung hinweisen. Eine sorgfältige Erstellung von Artikeln braucht viel Zeit, möglich ist natürlich, dass Artikel offline vorbereitet wurden.
+
+==== Text ist jünger als der ChatGPT-Start ====
+ChatGPT wurde am 30. November 2022 öffentlich zugänglich gemacht. Es ist daher sehr unwahrscheinlich, dass Text, der vor diesem Datum in Wikipedia eingefügt wurde, von einem LLM stammt. (LLMs existierten zwar schon vor diesem Datum, waren aber kostenpflichtig, schwer zugänglich und wenig bekannt.) Ältere Wikipedia-Texte können einige der in dieser Liste genannten KI-Merkmale aufweisen; um solche falsch-positiven Ergebnisse zu vermeiden, sollte immer auch das Datum des Beitrags geprüft werden.
+
+==== Ausführliche Bearbeitungszusammenfassungen ====
+KI-generierte Zusammenfassungen in der Versionsgeschichte sind oft ungewöhnlich lang, in der ersten Person verfasst, ohne Abkürzungen oder verstoßen gegen die deutschen Wikipedia-Konventionen.
+
+== Filter „Mutmaßliche KI-Bearbeitung“ ==
+Der [https://de.wikipedia.org/w/index.php?title=Spezial:Missbrauchsfilter-Logbuch&wpSearchFilter=453 Spezial:Missbrauchsfilter-Logbuch Filter 453: Mutmaßliche KI-Bearbeitung] loggt Edits mit, die mehr oder weniger eindeutige Merkmale dafür aufweisen, dass ein Chatbot bei der Erstellung des Texts im Spiel war. Diese sind:
+*Die URL enthält den [[UTM-Parameter]] „[https://de.wikipedia.org/w/index.php?limit=500&fulltext=1&ns0=1&ns11=1&ns9=1&profile=advanced&search=insource%3A%2Fchatgpt%5C.com%2F&title=Spezial%3ASuche insource:/chatgpt\.com/]“
+
+== Einzelnachweise ==
+<references />

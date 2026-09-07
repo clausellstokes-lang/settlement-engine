@@ -1,0 +1,1011 @@
+
+
+ Let’s Design an Adventure: Boxed Text | Dungeons & Dragons 
+
+ Skip to Content 
+
+ Play D&D 
+ My Characters
+
+ Create a character 
+
+ My Campaigns
+
+ Beta 
+ Maps VTT
+
+ More Tools
+ D&D Beyond Mobile App 
+ Avrae Discord Bot 
+ Browse Homebrew 
+ My Homebrew Collection 
+ My Homebrew Creations 
+ Encounters 
+ My Dice 
+
+ Rules Browse
+ Classes 
+ Backgrounds 
+ Species 
+ Feats 
+ Spells 
+ Equipment 
+ Magic Items 
+ Monsters 
+
+ Resources
+ How to Play D&D 
+ D&D Beyond Basic Rules 
+ Rules Glossary 
+ D&D Character Sheets 
+ System Reference Document (SRD) 
+ Unearthed Arcana 
+
+ Featured
+ Article 
+ Updating Your Campaign to the 5.5e D&D Rules
+
+ Article 
+ Running Lairs: How to Make the Most of a Monster's Place of Power
+
+ Library Free books View all 
+
+ Sign in to view your
+library & saved
+favorites.
+ Sign in 
+
+ Community Support
+ Help Portal 
+ Articles 
+ Support Forum 
+ Changelog 
+ Roadmap 
+ Creator FAQ 
+
+ Connect
+ Community Update 
+ Forums 
+ Organized Play 
+ Find Players 
+ Discord 
+ Legends of Greyhawk 
+
+ Follow Us
+
+ Featured Article
+
+ Dungeon Masters: The New D&D Actual Play
+
+ Marketplace 
+
+ Open search Toggle mobile navigation Sign in Create Account 
+
+ Play D&D Back Play D&D 
+ My Characters 
+ Create a character 
+ My Campaigns 
+
+ Maps VTT 
+
+ More Tools
+ D&D Beyond Mobile App 
+ Avrae Discord Bot 
+ Browse Homebrew 
+ My Homebrew Collection 
+ My Homebrew Creations 
+ Encounters 
+ My Dice 
+
+ Rules Back Rules 
+ Browse
+ Classes 
+ Backgrounds 
+ Species 
+ Feats 
+ Spells 
+ Equipment 
+ Magic Items 
+ Monsters 
+
+ Resources
+ How to Play D&D 
+ D&D Beyond Basic Rules 
+ Rules Glossary 
+ D&D Character Sheets 
+ System Reference Document (SRD) 
+ Unearthed Arcana 
+
+ Featured
+ Article 
+ Updating Your Campaign to the 5.5e D&D Rules
+
+ Article 
+ Running Lairs: How to Make the Most of a Monster's Place of Power
+
+ Library Back Library 
+ Free books
+ Monstrous Compendium Vol. 1: Spelljammer Creatures 
+ Frozen Sick 
+ D&D Beyond Basic Rules 
+ Basic Rules (2014) 
+ Sign in to view your
+library & saved
+favorites.
+ Sign in 
+
+ Community Back Community 
+ Help Portal 
+ Articles 
+ Support Forum 
+ Changelog 
+ Roadmap 
+ Creator FAQ 
+ Connect
+ Community Update 
+ Forums 
+ Organized Play 
+ Find Players 
+ Discord 
+ Legends of Greyhawk 
+
+ Follow Us
+
+ Featured Article
+
+ Dungeon Masters: The New D&D Actual Play
+
+ Marketplace 
+ Sign in Create an Account 
+
+ Home 
+
+ Posts 
+
+ Let’s Design an Adventure: Boxed Text 
+
+ Let’s Design an Adventure: Boxed Text
+
+ Let’s Design an Adventure: Boxed Text
+
+ by Shawn Merwin 
+
+ Nov 6, 2019 
+
+ Category Icon 
+ Posts 
+
+ 73 
+
+ Tags 
+
+ Let's Design an Adventure! 
+
+ Adventure Design 
+
+ If you’ve DMed, read, written, or even played D&D adventures at any point in the game’s existence, you are familiar with boxed text, which is also sometimes referred to as read-aloud text. It got its name from the thin boxed-line that sometimes surrounds the text in an adventure, denoting that it should be read aloud to the players. It’s as much a part of D&D’s history and brand as saving throws, hit points, and armor class.
+
+ People who know me understand that when it comes to game design, I don’t care much about tradition or nostalgia. Just because something’s been around forever doesn’t mean it’s good or necessary, it just means it’s been around forever. And nostalgia may sell, but that doesn’t mean it is necessary good or functional. With that sort of mindset, I want to take an honest look at boxed text as an adventure designer.
+
+ Every couple of years, the topic of boxed text sweeps through the game-design community, opinions are thrown about, battle lines and drawn, and then we all go back to writing our own adventures, usually including boxed text. I wrote about the topic 20 years ago on forums, and 10 years ago in blogs, and now I’ll write about it again. Not much has changed in the conversation, but it’s still one we need to have.
+
+ Confession time: I have a love/hate relationship with boxed text. When it’s good, it’s a great tool not just for DMs, but for adventure writers as well. By quickly setting a scene and tone, and orienting the players, it can save a game for less-experienced or underprepared DMs. (I’ve been both, I assure you.) It can also force adventure designers, by the very act of having to write it, to think harder about their encounters. When boxed text is bad, though, it’s really bad. And far too often, it is bad. It can be a drain on players’ attention, and it can make the DMs job harder by being obtuse, uninteresting, misleading, or distracting. Editing bad boxed text is more painful than editing stat blocks, and that’s saying something.
+
+ Writing good boxed text is difficult. It requires the same precision that one might use for fiction or poetry, while also trying to perform the mechanical task of dealing with game elements, much like technical writing. And like battle plans, boxed text rarely survives engagement with the enemy (i.e. the players).
+
+ I Offer Exhibit A
+
+ Consider the following boxed text:
+
+ Your trip through the Forest of Demise was uneventful. The chittering of forest animals and chirping of birds that serenaded you through the forest suddenly ends, as if the creatures of the natural world shun and fear this place. In the distance, you see a tower sticking out of the ground like an evil, twisted tree reaching up to the sky. As you approach the tower, the crunching of the dead leaves under your feet seems almost deafening in the otherwise silent clearing. When you get within 20 feet of the tower, you realize the place is surrounded by a nearly invisible noxious vapor. As you breathe it in, its stench burns your lungs and makes your eyes water. The hairs on your arms bristle with terror and your heart pounds as an anguished shriek cuts through the silence from within the tower. The palpable presence of evil is stunning. On the door of the tower you see four glowing runes.
+
+ Now picture, if you will, a D&D party. We have Pedritar the dragonborn paladin, Brark the grimlock barbarian, Clang the warforged cleric, Drizzelda the wood elf druid, and Rhuul the revenant rogue. The party is approaching the tower-lair of Lystrango the evil lich of doom. If I was running this adventure, this is how I see the adventure starting:
+
+ Me : Everyone ready? I have your marching order? Great, let’s start with the opening boxed text! “ Your trip through the Forest of Demise was uneventful. The chittering of forest animals and chirping of birds that serenaded you through the forest suddenly ends, as if the creatures of the natural world shun and fears this place. In the—“
+ Drizzelda the Druid : Why?
+ Me : Why what?
+ Drizzelda the Druid : Why do they shun this place?
+ Me : [confused stare]
+ Drizzelda the Druid : I’m a druid. I ask that squirrel over there why he stopped chittering.
+ Me : Um. Right. Ok. He tells you that he and all the forest animals are afraid of the tower in the clearing ahead. Let me jumped ahead to that. “ In the distance, you see a tower sticking out of—”
+ Brark the Barbarian : Nope.
+ Me : Nope what?
+ Brark the Barbarian : Nope, I don’t see it. I’m a grimlock. Got no eyes.
+ Me : Right, ok. “Everyone but Brark sees a tower sticking out the ground like an evil, twisted tree reaching up to the sky.”
+ Drizzelda the Druid : I talk to it. I can talk to plants too.
+ Me : Huh?
+ Drizzelda the Druid : You said there was a tree sticking out of the ground.
+ Me : It’s not really a tree. It’s like a tree. It’s a metaphor.
+ Clang the Cleric : That’s a simile.
+ Me: Right, a simile. Anyway, continuing: “As you approach the tower, the crunching of the dead leaves under your feet seems almost deafening in the silence.”
+ Rhuul the Rogue : I don’t walk on the dead leaves. I try to be silent.
+ Me : OK, I guess you can avoid the leaves. But it’s not really that imp—
+ Pedritar the Paladin : I’m not walking. I’m flying. Remember I took that feat that gives me wings and a fly speed.
+ Me : Got it. Pedritar is flying and Rhuul is tiptoeing around the leaves. Anyway, let’s continue. “When you get within 20 feet of the tower, you realize the place is surrounded by a nearly invisible noxious vapor. As you breathe it in, its stench burns your lungs and makes your eyes water.”
+ Clang the Cleric : Technically, I don’t have lungs. I’m made of wood and stone.
+ Me : Yeah, I guess. The point is—
+ Brark the Barbarian : I still don’t have eyes. They can’t be watering.
+ Me : Right. I just mean—
+ Rhuul the Rogue : As a revenant, I am undead. Technically, I don’t think I need to breathe.
+ Me : Ok, Ok, I get it. There’s a mist that’s burning the lungs of those of you with lungs and/or that breathe, irritating your eyes if you have eyes, and is generally unpleasant and mildly irritating to the rest of you. Let’s continue: “The hairs on your arms bristle with terror and your heart pounds as an anguished shriek cuts through the silence from within the tower. The palpable presence of evil is stunning.”
+ Pedritar the Paladin : I can. They can’t.
+ Me : Who can’t what?
+ Pedritar the Paladin : The rest of the party can’t detect evil without a spell. Only I can.
+ Me : It’s just a general presence of evil, not an actual specific evil like undead or fiends.
+ Pedritar the Paladin : Seems like only I would be able to feel it. It’s a class ability after all.
+ Me : Sure, but—.
+ Drizzelda the Druid: So we can’t take actions?
+ Me : Sorry, you lost me.
+ Drizzelda the Druid: You said we were stunned?
+ Me : [Rereads boxed text to self] Oh, no. It’s just affecting you noticeably. You aren’t actually stunned stunned. It was just a simile.
+ Clang the Cleric : Metaphor. And I have no hair.
+ Me : Excuse me?
+ Clang the Cleric : You said that the hairs on my arm stand up in terror. I’m hairless. Maybe I have some moss or something that stands up instead?
+ Me : Sounds good to me.
+ Rhuul the Rogue : I’m not scared.
+ Me : What?!
+ Rhuul the Rogue : Dude, I was once locked in a coffin with a vampire for a week. A little shrieking from some lich’s tower isn’t going to phase me. And also, I don’t think my heart actually beats, so it couldn’t pound.
+ Clang the Cleric : Yeah, I don’t have a—
+ Me : Yes, I get it. Moving on. “On the door you see—”
+ Brark the Barbarian : I don’t—
+ Me : Yes, yes, yes! You have no eyes and can’t see. Let’s sum this up. “There’s a tower in front of you.” What do you do?
+
+ As is evidenced above, boxed text can be rife with pitfalls when it assumes a character’s feelings, movements, actions, or reactions. What sounded like fairly typical boxed text is really a Samuel Beckett play waiting to happen. Boxed text needs to be carefully crafted or it becomes not only unhelpful, but an actual distraction from the game on many levels. I humbly suggest the following tips for creating boxed text:
+
+ Tip 1. Move from the second-person point of view to the third person 
+
+ To experienced adventure designers this might sound radical, but it really is a great way to avoid many of the pitfalls illustrated above. If we do not use the word “you” as the subject of the sentences in boxed text, it’s difficult to inadvertently include character actions, motivations, feelings, or movements. By avoiding the second-person (“As you enter the clearing, you notice the bloated corpse of a headless dragon”) and using the third-person (“The bloated corpse of a headless dragon dominates the center of a clearing”), you avoid moving the PCs when they might not want to move, and you’ve given them the chance to enter the clearing from any direction and in any manner they choose. This also makes it very difficult to add bits like “you believe” or “you think,” which steals player agency.
+
+ Tip 2. Avoid the novelist/dramatist urge 
+
+ DMs and adventure designers often have stories to tell. However, boxed text is not the place to unleash that inner novelist. Nothing slows a game more than paragraph after paragraph of boxed text, especially when the DM has to stumble through prose so purple that not even a rainbow wants to admit association with the color. There are three main kinds of problem with this novelist’s urge:
+
+ 2a. “It was a dark and stormy night.” 
+
+ Relevant details are fine for boxed text, and maybe one or two tiny poetic flourishes can add to the tone. But piling on obvious, irrelevant, or overwrought details make the players lose focus. My rule of thumb when writing or editing is to leave in only the details about the environment when the PCs must interact with them on some level. The stench of a bog or a monster is important only if those things matter for the encounter, especially as a terrain feature or monster ability: the bog weakens a creature entering it, or the monster’s stench is a weakening aura. The smell of flowers in the sunny glade can probably be left out, unless you happen to be DMing for a party comprised solely of elves or florists.
+
+ 2b. The villain’s soliloquy 
+
+ This trope dominates not just fantasy, but much storytelling in our popular culture. The characters fight their way through the evil mastermind’s fortress, encountering her as she completes her evil plan. Then she breaks into four paragraphs of boxed-text monologue: first cursing the PCs for being a nuisance, then explaining what her evil plan is, then describing to the PCs what will happen to them after she rips off their heads, spits down their necks, and finishes by talking about her plans to take over the world. (Maniacal laugh optional.) It has taken the evil genius one minute, 45 seconds to ramble on, and the subsequent battle where the characters stomp on the faces of her and her guards takes 18 seconds of in-game time.
+
+ Solution: The PCs are always a nuisance; that’s a given. The PCs should learn the evil plan throughout the adventure and know it by the time they arrive. The trash talking can take place during combat, rather than before. Two minutes and tons of player attention saved!
+
+ 2c. The action in progress. 
+
+ This is similar to the evil soliloquy problem, only it involves action instead of talking. Sometimes PCs are forced to watch while some plot point happens, either leading up to combat, or after combat ends, or just a scene in the flow of your game’s narrative. The characters just saved the prince, and now they get to watch his coronation. If your players are into it, great. Let ‘er rip! However, chances are, even the most invested player nods off after the 8th paragraph of text describing the festivities.
+
+ Solution: Give PCs the chance to interact with the scene, even if it’s just standing in the crowd and trading quips. Better yet, put them up on the royal stage, trying to hold still during the ceremony while a pesky mosquito bites them. (Constitution saving throws for everyone!) Let the characters be the focus. Save the “you watch while” moments for times when you really need them!
+
+ Tip 3. Describe everything the characters can sense, but not what they can’t 
+
+ While this might seem obvious, it happens surprisingly often. The boxed text fails to mention something obvious but important, like the 50-foot-wide chasm between the doorway and the altar. Less troublesome but equally odd is when the boxed text details things the characters couldn’t know. They enter a room full of locked crates, and the boxed text describes the room, detailing the “large crates full of mining equipment.” The characters couldn’t know that without opening them, so let the mystery linger for a bit. Or if it doesn’t matter, only mention the objects that do.
+
+ Tip 3a. Let maps and art do their jobs 
+
+ If your adventure includes maps and art for an area, don’t include text that can be easily discerned from them. Room size is detailed by the map, and the picture of the alabaster statue is worth 1,000 words of boxed text. The large chasm in the room? Go ahead and mention that even if it’s shown on the map. This’ll help both visual and auditory processors understand the situation.
+
+ Tip 4. Avoid “seems to be” or “appears to be.” 
+
+ For the characters, perception is reality. Everything they sense “appears to be” what it is. And nothing triggers meta-gaming like the words “seems” or “appears” in boxed text. Those words generally mean that some trick or diversion is in the offing. If something “appears to be” to the characters, it “is” to the characters. Wherever you stand philosophically in real life, perception has to equal reality for the characters or you lose too much in the game. Let those Wisdom (Perception) or Intelligence (Investigation) checks separate the “seems” from the “is” after concluding the boxed text.
+
+ Tip 5. Read your boxed text aloud to check readability 
+
+ This advice is equally valid for any type of writing you do, but it is required for boxed text. Trouble areas like tongue-twisters, funny-sounding phrases, unintended alliteration, and other pitfalls are hard to spot on the page but easy to hear when spoken. NPCs named “Eileen Dover” just don’t belong in an adventure, whether accidentally or purposefully place.
+
+ Tip 6. Avoid game mechanical terms used in a non-mechanical way 
+
+ Terms like reaction , action , incapacitated , stunned , frightened , magical , and many others have specific meanings in the game. Using their normal connotations in proximity to mechanical bits can lead to confusion. Avoid them whenever possible.
+
+ If you keep some of these tips in mind while writing boxed text or planning what you will reveal to your players about an encounter area, I think you will see an improvement not just in how you present it to your players, but in how you design it is as well. Unless you're a grimlock , of course.
+
+ A Boxed-Text Opening
+
+ The previous article in this series talked about adventure openings, so let’s kill two birds with one sling stone. I present to you an in media res opening scene boxed text for the unnamed adventure we are creating:
+
+ The carrion crows in the field shriek and take flight, blood decorating their beaks. Their feast is gruesome: at least 30 human bodies are strewn across the hillside, muddy from the downpour earlier in the day. Cresting the top of the hill, near the entrance to the secret base, spiders as big as horses scuttle toward you. They move like others of their kind, but at the end of each leg is a hand, all clenching and opening reflexively as the spiders approach.
+
+ Four sentences, and less than 100 words. The first sentence sets the tone and introduces the scene, using words like “carrion” and “bloody.” The second describes what is obvious on the battlefield: dead bodies and mud—the latter indicating difficult or dangerous terrain. The third introduces the monsters in the fight, as well as gives a clue why the characters are there: a secret base. The fourth shows something odd about the monsters, giving both a point of knowing (spiders) and a horrible unknown (hands at the end of each leg), even as it gives a warning to the players that combat is about to start.
+
+ Next time we’ll continue with this encounter as we talk about creating encounters, with an emphasis on the three pillars of D&D.
+
+ What do you think of boxed text? Do you write read-aloud text for your home adventures? Let us know in the comments. 
+
+ Shawn Merwin's professional design, development, and editing work in D&D has spanned 20 years and over 4 million words of content, ranging from third to fifth edition. His most recent credits include the Acquisitions Incorporated book, Baldur’s Gate: Descent into Avernus , and Storm Lord’s Wrath . He is also the Resource Manager for the D&D Adventurers League’s Eberron: Oracle of War campaign. Shawn hosts a weekly D&D podcast called Down with D&D, and he holds an MFA in Creative Writing from Vermont College of Fine Arts. You can follow his ramblings and musing on Twitter at @shawnmerwin.
+
+ Want to read more of this series? Click on the "Let's Design an Adventure!" tag to see the full series. 
+
+ Tags 
+
+ Let's Design an Adventure! 
+
+ Adventure Design 
+
+ 73 
+
+ Comments
+
+ 1 
+ 2 
+ 3 
+ 4 
+ Next 
+
+ Bodesterine 
+
+ Veteran
+
+ Join Date:
+
+ 10/2/2018
+
+ Posts:
+
+ 15
+
+ Member Details
+
+ #1 
+
+ Bodesterine 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ Great example of a text reading! This happens all the time in my campaigns... 
+
+ Thanks for the great article!
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ BlackTailedRaven 
+
+ Adventurer
+
+ Join Date:
+
+ 8/27/2019
+
+ Posts:
+
+ 2
+
+ Member Details
+
+ #2 
+
+ BlackTailedRaven 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ Awesome Article Shawn, pretty illustrative, thank you very much, I think it makes a lot of sense, I usually try to memorize the Boxed Text, but sometimes I lose details, so I'll tend to start using them and keep them short and efficient. Thanks!
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ SpootyTWK 
+
+ Adventurer
+
+ Join Date:
+
+ 7/23/2017
+
+ Posts:
+
+ 4
+
+ Member Details
+
+ #3 
+
+ SpootyTWK 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ This is an excellent point for new and experienced DM's alike. I used to just read the text as written (TAW?) but after a few of these exact scenarios happening with my players I learned to alter them to be less in some areas and more in others depending on what I feel as the DM is important. Sometimes I omit them completely, other times I whittle them down to a mere sentence or two and yet other times I alter them almost completely leaving only the most skeletal of remnants of the original text. Adventure books are great for the busy DMs who don't have the time to write their own adventures but if you read from them like they are a novel you lose the organic feeling that most people love about the game and it's like reading a choose your own adventure book out loud to an audience. Plus, for me anyway, it feels like cheating when I use 100% of someone else's story. I love the improv portions of the game. 
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ Katya_Kalb 
+
+ Adventurer
+
+ Join Date:
+
+ 6/14/2019
+
+ Posts:
+
+ 1
+
+ Member Details
+
+ #4 
+
+ Katya_Kalb 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ I'm creating my first adventure at the moment, this is sooo useful! Thank you [thumbs up emoji]
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ Tassin 
+
+ Rogue
+
+ Join Date:
+
+ 3/22/2017
+
+ Posts:
+
+ 14
+
+ Member Details
+
+ #5 
+
+ Tassin 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ Really great tips Shawn! It's so helpful to have good opening text to set the mood for new rooms and encounters.
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ Hazardbale 
+
+ Adventurer
+
+ Join Date:
+
+ 9/18/2019
+
+ Posts:
+
+ 8
+
+ Member Details
+
+ #6 
+
+ Hazardbale 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ Great article!
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ drowsy_tree 
+
+ Adventurer
+
+ Join Date:
+
+ 12/14/2017
+
+ Posts:
+
+ 3
+
+ Member Details
+
+ #7 
+
+ drowsy_tree 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ I had no idea how to handle writing something a Dm would read aloud and how it could be as helpful as possible. Now i feel pretty confident i can write a decent boxed text
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ zeromh 
+
+ Acolyte
+
+ Join Date:
+
+ 8/13/2018
+
+ Posts:
+
+ 21
+
+ Member Details
+
+ #8 
+
+ zeromh 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ Following.
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ Strumwulf 
+
+ Acolyte
+
+ Join Date:
+
+ 1/18/2018
+
+ Posts:
+
+ 20
+
+ Member Details
+
+ #9 
+
+ Strumwulf 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ Nice description of the do's and dont's of box text.
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ RodTheBard 
+
+ (Perfect)
+
+ Join Date:
+
+ 6/1/2018
+
+ Posts:
+
+ 4,462
+
+ Member Details
+
+ #10 
+
+ RodTheBard 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ The points detailing how to improve boxed text are actually pretty good (although I think adding fine details regarding sound or smell can help with immersion.) Quite helpful.
+
+ But I have to add this: the article could have been done without that... contrived example of a group running over their DM's setup. The problem with a group like that is the group, not the boxed text.
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ Kaddock 
+
+ Prestidigitator
+
+ Join Date:
+
+ 5/20/2019
+
+ Posts:
+
+ 605
+
+ Member Details
+
+ #11 
+
+ Kaddock 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ Love the article. That example of a picky party would be a non-started for me. LOL 
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ Dragarhir 
+
+ A lost Dungeon Master
+
+ Join Date:
+
+ 6/30/2017
+
+ Posts:
+
+ 36
+
+ Member Details
+
+ #12 
+
+ Dragarhir 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ Those are excellent tips. I need to review all my boxed texts now.
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ Deleted
+
+ #13 
+
+ user-1056631383 
+
+ Posted Nov 6, 2019 
+
+ [Deleted] 
+
+ christopher_stratton_smith 
+
+ Adventurer
+
+ Join Date:
+
+ 6/9/2019
+
+ Posts:
+
+ 5
+
+ Member Details
+
+ #14 
+
+ christopher_stratton_smith 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 6, 2019 
+
+ Excellent article! To-the-point, practical and easy to implement in home games.
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ gruszczy 
+
+ Adventurer
+
+ Join Date:
+
+ 4/14/2019
+
+ Posts:
+
+ 4
+
+ Member Details
+
+ #15 
+
+ gruszczy 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 7, 2019 
+
+ Great article, I am going to use it right now to proof read the read aloud boxes! Thanks a lot for writing it! I have to say this is one of the best, practical advice I have seen. No BS, but solid suggestions based on experience.
+
+ As for the example: too real and funny! One comment though: if you are trying to set a mood by providing a description and players keep interrupting, it's probably worth establishing a rule of the table - let me finish the narrative-mood setting part, in return no negative consequences or stolen agency.
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ V2Blast 
+
+ Moderator
+
+ Swashbuckler
+
+ Join Date:
+
+ 11/27/2017
+
+ Posts:
+
+ 1,271
+
+ Member Details
+
+ #16 
+
+ V2Blast 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 7, 2019 
+
+ I know it was just an example, but the constantly-interrupting party was driving me crazy. Too real. (Also, it's "faze me", not "phase me".)
+
+ Great tips. Though I disagree with tip 4, to some extent - either you should get rid of "seems to be" as suggested, or you should consistently use that sort of phrasing for everything (e.g. "In the center of the room, you see what looks like a statue. In its hand, there seems to be a glowing spherical orb."). Arguably, the latter can be overly repetitive, but it can help establish that not everything is as it seems. Sometimes players can get upset if you tell them that something is X (as if it's fact), and then it's revealed that the thing that seemed like X is actually Y; since you are the only window through which they can perceive the world, they might feel that it's unfair of you to mislead them by presenting the appearance of something as fact (perhaps they assume that "something is X" indicates the characters have already examined the thing well enough to identify it as X, rather than indicating that the thing simply seems like X without further examination).
+
+ I also somewhat disagree with 3a. Even when an adventure includes maps, the DM may want to run a theater-of-the-mind campaign or otherwise not show those maps to the player. And even if maps are being used, the DM shouldn't have to calculate the dimensions of the room by counting squares - when the boxed text can simply present the dimensions of the room quickly in a single line. Good boxed text just saves the DM having to calculate that stuff on their own, in the same way that the boxed text shouldn't fail to mention the presence of monsters or visible treasure in the room just because the text intended for the DM goes into more detail on it.
+
+ Last edited by V2Blast : Nov 7, 2019 
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ V2Blast 
+
+ Moderator
+
+ Swashbuckler
+
+ Join Date:
+
+ 11/27/2017
+
+ Posts:
+
+ 1,271
+
+ Member Details
+
+ #17 
+
+ V2Blast 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 7, 2019 
+
+ Quote from RodTheBard >> 
+
+ But I have to add this: the article could have been done without that... contrived example of a group running over their DM's setup. The problem with a group like that is the group, not the boxed text.
+
+ Yeah, it was a bit over the top - there were some reasonable objections to the original boxed text example, but some of it was just the fictional players being willfully obtuse, and rudely interrupting every 2 seconds.
+
+ Last edited by V2Blast : Nov 7, 2019 
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ V2Blast 
+
+ Moderator
+
+ Swashbuckler
+
+ Join Date:
+
+ 11/27/2017
+
+ Posts:
+
+ 1,271
+
+ Member Details
+
+ #18 
+
+ V2Blast 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 7, 2019 
+
+ Quote from baytalazif >> 
+
+ Hi Shawn,
+Is there any chance you could re-write the first problematic boxed text to show us how that would work? I think a bad/good comparison would be really helpful.
+
+ I liked the flavor in your carrion crows boxed text at the end, but it seemed to still have a lot of the problems of writing set text for a very "not set" roleplaying experience. Can you also address how to change or avoid writing boxed text that assumes when the boxed text is used? For example, in the carrion crows boxed text, there is a triggering event - the crows taking flight, which would be set off by someone approaching the corpses. This seems like it would trigger an immediate response by the characters, and not necessarily "Wait to see if anything crests the hill", let alone "Get close enough as a group to see what the crows flew away from." The players could run, split up, go invisible, but my guess would be send a scout character ahead to see what happened.
+
+ I've seen examples of small chunks of boxed text split up with options between them, do you think that a good option?
+
+ Yes, I love the idea of breaking up boxed text depending on what happens in the situation - I know some official adventures do exactly this, such as adding a separate sentence or two in another bit of boxed text depending on whether monsters have entered or left this room after some event occurs elsewhere.
+
+ Last edited by V2Blast : Nov 7, 2019 
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ Grubwart_Lintbelly 
+
+ Adventurer
+
+ Join Date:
+
+ 8/31/2019
+
+ Posts:
+
+ 1
+
+ Member Details
+
+ #20 
+
+ Grubwart_Lintbelly 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 7, 2019 
+
+ Got to agree with Rod on this one. It is not the boxed text that is the problem in the first example, it's the players. They're pretty, selfish, and honestly....childish. if players cannot step back and enjoy the theater of the mind and instead see it as an attack on their characters, well....not a group I would want to play with.
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ DeathtotheMortals 
+
+ Adventurer
+
+ Join Date:
+
+ 3/21/2017
+
+ Posts:
+
+ 8
+
+ Member Details
+
+ #21 
+
+ DeathtotheMortals 
+
+ View User Profile
+
+ Send Message
+
+ Posted Nov 7, 2019 
+
+ Couldn't agree more, my general experience is most players get the "narrative cutscene" that is going on. Maybe it's different for something like adventure league than even so I would imagine there would be a modicum of respect for a DM setting a stage. That being said there's nothing wrong with cleaning up boxed text so as not too drone on too much. I also agree that find details can really amp things up if your players are invested maybe not so much on a session one though.
+
+ Rollback Post to Revision 
+
+ RollBack 
+
+ To post a comment, please login or register a new account.
+
+ 1 
+ 2 
+ 3 
+ 4 
+ Next 
+
+ Delete 
+ Undelete 
+ Spam 
+ Not Spam 
+ Merge 
+
+ Apply To Selected 
+
+ Clear Selected 
+
+ Posts Quoted: 
+
+ Reply 
+
+ Clear All Quotes 
+
+ Our Terms of Service and Privacy Notice have recently been updated to provide greater clarity as to how disputes are handled and transparency regarding the collection and use of personal data. Please review them here: Terms of Service , Privacy Notice . By continuing to use the services, you agree to the new Terms.
+
+ Support
+
+ Help Portal 
+
+ Support Forum 
+
+ System Status 
+
+ Do Not Sell or Share My Personal Information 
+
+ Your Privacy Choices 
+
+ Cookie Notice 
+
+ System Reference Document (SRD) 
+
+ About
+
+ Contact Us 
+
+ Careers 
+
+ Wizards of the Coast 
+
+ Credits 
+
+ Find us on social media
+
+ Download the D&D Beyond App
+
+ © 2017- 2024 Wizards of the Coast LLC | All Rights Reserved
+
+ Dungeons & Dragons, D&D Beyond, D&D, Wizards of the Coast, the dragon ampersand, and all other Wizards of the Coast product names, campaign settings, their respective logos, and The World's Greatest Roleplaying Game are © and trademark Wizards of the Coast in the U.S.A. and other countries. © 2024 Wizards.
+
+ Privacy Policy
+
+ Terms of Service
+

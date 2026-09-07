@@ -1,0 +1,21 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i45-59",
+ "lines": 5,
+ "firstTs": "2026-09-06T11:27:26.631Z",
+ "lastTs": "2026-09-06T11:27:26.887Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 10:10am (America/New_York)",
+ "run": "wf_ddf37721-d84",
+ "agent": "a75aa9579adfc04aa",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_ddf37721-d84/agent-a75aa9579adfc04aa.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i45-59.json",
+  "exists": true
+ }
+}

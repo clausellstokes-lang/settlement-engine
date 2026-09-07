@@ -1,0 +1,275 @@
+### [322] VERIFIED_VERBATIM  |feature: other: escalation inside one sentence
+CLAIM: Bell describes the same sentence as containing two progressions that expand its scale as it goes.
+QUOTE: See the two progressions expanding its scale as it goes
+TRUE: See the two progressions expanding its scale as it goes, its scope expanding from hundred to thousands of worlds...
+NOTE: Raw page fetched. Quote exact, in the same sentence-level close reading of the Rocannon's World line as index 335 (same paragraph, clause immediately preceding the 'rhyming sets' clause).
+
+### [323] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Bell says Le Guin built cultures by working from the big picture down to the minutiae of local life.
+QUOTE: working from the big picture down to the minutiae of local life
+TRUE: I thrilled at how she turned thought problems into intricate cultures, working from the big picture down to the minutiae of local life...
+NOTE: Raw page fetched. Quote exact in the worldbuilding paragraph.
+
+### [324] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: Bell cites as a pleasurable detail the Gethenian table implement for cracking the ice formed on a drink.
+QUOTE: with which you crack the ice that has formed
+TRUE: ...filling books with pleasurable details like the 'common table implement' on Gethen 'with which you crack the ice that has formed on your drink between drafts', a necessity for drinking hot beer on a frozen planet.
+NOTE: Raw page fetched. Quote exact; Bell's own word is 'pleasurable details', and the implement is placed 'on Gethen' (Bell does not name The Left Hand of Darkness at this point, but the claim does not assert that he does).
+
+### [325] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: Bell singles out a Left Hand of Darkness sentence that names the landscape as four bare nouns.
+QUOTE: rock, ice, sky, and silence: nothing else, for eighty-one days
+TRUE: All those miles and days had been across a houseless, speechless desolation: rock, ice, sky, and silence: nothing else, for eighty-one days, except each other.
+NOTE: Raw page fetched. Quote exact. Bell introduces it as the close of Genly Ai and Estraven's Gobrin ice-sheet crossing in The Left Hand of Darkness — 'it ended with this unforgettable sentence' — in the essay's opening anecdote. 'Four bare nouns' is the claim's own characterisation, but it is directly observable in the quoted line (rock, ice, sky, silence).
+
+### [326] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: A commenter on Bell's essay says Le Guin can say more in twenty words than almost anyone.
+QUOTE: She can say more in twenty words than almost anyone
+TRUE: She can say more in twenty words than almost anyone I can think of.
+NOTE: Raw page fetched with the comment thread intact (5 comments). The commenter is Rachel Holmen ('Rachel E. Holmen'), 5 years ago, who also calls Le Guin's writing 'cheesecake... incredibly rich and dense'. Quote exact as a prefix of her sentence.
+
+### [327] VERIFIED_VERBATIM  |feature: archaism
+CLAIM: A forum reader describes the prose of A Wizard of Earthsea as very archaic.
+QUOTE: very archaic and flowed in a unique style
+TRUE: The prose was lovely - very archaic and flowed in a unique style.
+NOTE: Raw page fetched (HTTP 200). Post #1 of thread 583221, SilentRoamer, Aug 1 2022, about A Wizard of Earthsea ('I read A Wizard of Earthsea recently'). Quote exact.
+
+### [328] VERIFIED_VERBATIM  |feature: register modulation
+CLAIM: A forum moderator reports The Left Hand of Darkness is very different from the Earthsea books in style and tone.
+QUOTE: very different from the Earthsea books in style and tone
+TRUE: The Left Hand of Darkness -- very different from the Earthsea books in style and tone, I'd have said...
+NOTE: Raw page fetched. Post #4, Aug 1 2022, by 'The Judge', whose user title is 'Truth. Order. Moderation.' and who is flagged 'Staff member' — the moderator limb holds. Quote exact.
+
+### [329] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Rob Tomlinson says Le Guin's style is spot-on for describing unfamiliar places and cultures.
+QUOTE: a style that is spot-on for describing unfamiliar places and cultures
+TRUE: It is also a style that is spot-on for describing unfamiliar places and cultures.
+NOTE: Raw page fetched (HTTP 200). rob-tomlinson.com, 'A good read' section, page 'The Dispossessed' (page title 'The Dispossessed | Rob Tomlinson', written in the first person on his own site). Quote exact, in the second paragraph as the claim states.
+
+### [330] VERIFIED_VERBATIM  |feature: withheld information and inference
+CLAIM: Tomlinson says the reader can rely on Le Guin explaining a noted difference in due course rather than at once.
+QUOTE: rely on her explaining that difference in due course
+TRUE: can rely on her explaining that difference in due course
+NOTE: Exact on the live page (HTTP 200, raw HTML). Full sentence: 'You know that there's something different in what she's describing and can rely on her explaining that difference in due course.' The 'rather than at once' limb is carried by the next sentence, 'But first, there's our curiosity to be fed.'
+
+### [331] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: Tomlinson quotes the opening of The Dispossessed, which describes the wall as built of uncut rocks roughly mortared.
+QUOTE: It was built of uncut rocks roughly mortared
+TRUE: It was built of uncut rocks roughly mortared
+NOTE: Exact inside Tomlinson's block quotation of the novel's page-1 opening, introduced as 'start on page 1 by describing the wall'. Tomlinson's text has a colon after 'mortared' where other editions print a full stop; the quoted limb itself is verbatim.
+
+### [332] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Tomlinson says Le Guin depicts the under-belly of a dazzling society in just a few pages of dense, carefully-worked text.
+QUOTE: In just a few pages of dense, carefully-worked text
+TRUE: In just a few pages of dense, carefully-worked text
+NOTE: Exact; full sentence continues 'Le Guin depicts the under-belly of an otherwise dazzling society.' Every limb of the claim is on the page (claim drops only the word 'otherwise').
+
+### [333] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: Tomlinson renders the poor quarter of Nio as broken street lights, shuttered windows and shop fronts gutted by fire.
+QUOTE: Street lights were broken, windows shuttered, shop fronts gutted by fire
+TRUE: Street lights were broken, windows shuttered, shop fronts gutted by fire
+NOTE: Exact. The 'poor quarter of Nio' limb is supported by the preceding sentences: Shevek escapes 'into the Old Town of Urras's main city Nio. There he finds poverty that had been kept hidden from him.'
+
+### [334] VERIFIED_VERBATIM  |feature: other: general-to-particular descent
+CLAIM: Goss says the opening moves from a grander, larger view toward a smaller, more intimate one.
+QUOTE: moves from a grander, larger view toward a smaller, more intimate
+TRUE: The opening moves from a grander, larger view toward a smaller, more intimate one
+NOTE: Exact; the sentence continues ': Sparrowhawk to Ged to Duny.' All limbs supported.
+
+### [335] VERIFIED_VERBATIM  |feature: naming and forms of address
+CLAIM: Goss notes the opening names its subject in descending order, Sparrowhawk to Ged to Duny.
+QUOTE: Sparrowhawk to Ged to Duny
+TRUE: Sparrowhawk to Ged to Duny
+NOTE: Exact, and its 'descending order' limb is supplied by the same sentence ('moves from a grander, larger view toward a smaller, more intimate one') and the parallel list following it, 'Dragonlord to archmage to goat herd.' The three names are one subject.
+
+### [336] VERIFIED_VERBATIM  |feature: opening sentence
+CLAIM: Goss argues the opening scene is structured by oppositions between boy and man, village and world.
+QUOTE: structured by the oppositions between boy and man, village and world
+TRUE: This entire scene is structured by the oppositions between boy and man, village and world
+NOTE: Exact. The page's list continues 'present and future', and adds 'the opposition between poetry and prose'; the claim quotes a subset, which is not a contradiction.
+
+### [337] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Doug Merrill observes that no people appear in the first paragraph of The Dispossessed.
+QUOTE: No people appear in the first paragraph
+TRUE: No people appear in the first paragraph
+NOTE: Exact on the live page. Merrill's sentence continues that people are alluded to on the second page and no specific characters appear until the third.
+
+### [338] VERIFIED_VERBATIM  |feature: naming and forms of address
+CLAIM: Merrill notes no names are mentioned in the novel until the seventh page.
+QUOTE: no names are mentioned until the seventh
+TRUE: no names are mentioned until the seventh
+NOTE: Exact; the governing unit is pages, set by the same sentence's 'on the book's second page' and 'until the third'. Merrill's own text later calls Shevek 'the first named character in the book'.
+
+### [339] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: Merrill says the opening paragraph establishes the rough and improvised nature of a key setting.
+QUOTE: the rough and improvised nature of a key setting
+TRUE: the rough and improvised nature of a key setting
+NOTE: Exact. It is one item in Merrill's list of what is 'already laid out for readers in the novel's opening paragraph', which supports the 'establishes' limb; the page adds 'even after seven generations of settlement'.
+
+### [340] VERIFIED_VERBATIM  |feature: omission as information
+CLAIM: Merrill lists among the opening paragraph's subjects things that do not look important but are.
+QUOTE: things that do not look important but are
+TRUE: things that do not look important but are
+NOTE: Exact, and it is the first item in that same opening-paragraph list, so the 'lists among the opening paragraph's subjects' limb holds.
+
+### [341] VERIFIED_VERBATIM  |feature: withheld information and inference
+CLAIM: Merrill says Le Guin's sketches of incidental characters hint at full lives lived off the page.
+QUOTE: hint at the full lives they have lived off the page
+TRUE: hint at the full lives they have lived off the page
+NOTE: Exact; full sentence: 'Le Guin's sketches of incidental characters hint at the full lives they have lived off the page.'
+
+### [342] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: A Cannonball Read reviewer calls Le Guin's writing spare and lyrical, begging to be read aloud.
+QUOTE: Her writing is spare and lyrical, just begging to be read aloud
+TRUE: Her writing is spare and lyrical, just begging to be read aloud
+NOTE: Exact. Byline and date on the page match the citation: 'February 13, 2014 by alannaofdoom'; the site header now reads Cannonball Read 18, the review is tagged #CBR6.
+
+### [343] VERIFIED_VERBATIM  |feature: annalist voice and deep time
+CLAIM: The same reviewer says the first lines have the feel of an old legend told and retold around hearth fires.
+QUOTE: the feel of an old legend, told and retold around hearth
+TRUE: From the very first lines, it has the feel of an old legend, told and retold around hearth fires
+NOTE: Exact through 'hearth' and beyond ('hearth fires for generations'). It immediately follows the 358 sentence, matching the cited 'second point' location.
+
+### [344] VERIFIED_VERBATIM  |feature: cadence and rhythm
+CLAIM: The reviewer says Le Guin's ear for rhythm turns the description of the midsummer Long Dance into a dance.
+QUOTE: her ear for rhythm turns a description of the midsummer Long
+TRUE: her ear for rhythm turns a description of the midsummer Long Dance
+NOTE: Cannonball Read (alannaofdoom, February 13, 2014) reads verbatim: 'And her ear for rhythm turns a description of the midsummer Long Dance into a syncopated dance itself:' followed by the block-quoted Long Dance passage. Byline and date on the page match the source field. Live page fetched 200 with a browser UA.
+
+### [345] VERIFIED_VERBATIM  |feature: other: alliteration
+CLAIM: The reviewer credits Le Guin with a gift for alliteration in short phrases.
+QUOTE: gift for alliteration brings us beautiful little phrases
+TRUE: Le Guin's gift for alliteration brings us beautiful little phrases
+NOTE: Same page, same paragraph: "Le Guin's gift for alliteration brings us beautiful little phrases like 'nameless and naked he walked into the cold springs...'" — the example given is a short phrase, so the 'in short phrases' limb holds.
+
+### [346] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: The reviewer says the book teaches its systems of trade and government along the way.
+QUOTE: its systems of trade and government
+TRUE: along the way we learn about ... its systems of trade and government
+NOTE: Page: 'and along the way we learn about Earthsea's afterlife, its systems of trade and government, how its magic functions, and its religions'. The 'along the way' limb is the page's own phrasing.
+
+### [347] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: The reviewer says Le Guin doles out world detail so skillfully that the narrative flow is never interrupted.
+QUOTE: doles it out so skillfully that the flow of the narrative
+TRUE: She doles it out so skillfully that the flow of the narrative is never interrupted
+NOTE: Page: preceding sentence is 'The detail in that large map is nothing to the detail that must be living in Le Guin's head,' so 'it' is world detail; 'is never interrupted' completes the sentence, supporting every limb.
+
+### [348] VERIFIED_VERBATIM  |feature: point of view and distance
+CLAIM: A reviewer who reread A Wizard of Earthsea reports it feels all surface and no depth.
+QUOTE: It just feels all surface and no depth
+TRUE: It just feels all surface and no depth
+NOTE: The Book Nut post of March 30, 2018 (posted by 'booknutgirls'; the claim's own metadata says the reviewer is unnamed, which is a source-field nuance, not a claim limb). The reread limb is supported: 'I read this a long time ago ... Since LeGuin recently passed away, I thought I'd give it another try. And... I was still underwhelmed.'
+
+### [349] VERIFIED_VERBATIM  |feature: point of view and distance
+CLAIM: A commenter says the book has a lot of narrative that tells instead of showing.
+QUOTE: It has a lot of narrative that tells instead of showing
+TRUE: It has a lot of narrative that tells instead of showing
+NOTE: In the comment thread, by commenter Lu Fiskin-Ross (March 30, 2018 at 1:25 PM), inside the '2 thoughts on A Wizard of Earthsea' block: '...tells instead of showing like writers are instructed to do today.' Commenter limb confirmed from the comment markup.
+
+### [350] VERIFIED_VERBATIM  |feature: omission as information
+CLAIM: The same commenter argues telling lets the reader use their imagination more.
+QUOTE: It lets the reader use their imagination more
+TRUE: It lets the reader use their imagination more
+NOTE: Same Lu Fiskin-Ross comment, two sentences later: 'There is a lot to be said for telling, in my opinion. It lets the reader use their imagination more., again my opinion.' Both the 'same commenter' and the 'telling' limbs hold.
+
+### [351] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: Another commenter praises the spare, beautiful prose and the mythic feel of the narrative.
+QUOTE: the spare, beautiful prose and the inevitable, mythic feel
+TRUE: I still love the spare, beautiful prose and the inevitable, mythic feel of the narrative
+NOTE: Second, distinct commenter Kim Aippersbach — so the 'another commenter' limb is confirmed, not assumed; 'of the narrative' closes the page's sentence.
+
+### [352] VERIFIED_VERBATIM  |feature: consequence on a household
+CLAIM: A reviewer says Tehanu centres the story not on the grand and powerful but on the small and ordinary.
+QUOTE: not on the grand and powerful, but the small, the powerless
+TRUE: to centre the story not on the grand and powerful, but the small, the powerless, the ordinary
+NOTE: Wet Broken Things, 'Book review - Tehanu', posted 25th May 2025. The sentence closes the first body paragraph, matching the claim's 'opening paragraphs' locator; 'the ordinary' supports the claim's 'small and ordinary'.
+
+### [353] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: The same reviewer lists the book's subject matter as the harvest, cooking and cleaning, and conversations amongst women.
+QUOTE: the harvest, cooking and cleaning, conversations amongst women
+TRUE: the harvest, cooking and cleaning, conversations amongst women
+NOTE: Same post and same reviewer. Page: 'There is only a child and a mother, a man and a woman in love, the harvest, cooking and cleaning, conversations amongst women, the routines of death, the routines of life.' It sits in the last body paragraph, matching 'closing paragraph'; the page lists further items beyond the three named, which the claim's 'lists ... as' does not exclude.
+
+### [354] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: A book blogger reports the Earthsea novels are neither long nor wordy.
+QUOTE: the novels in Earthsea Cycle are neither long nor wordy
+TRUE: the novels in Earthsea Cycle are neither long nor wordy
+NOTE: Moda od Radosti (modaodaradosti.blogspot.com), post dated August 12, 2024. Page: 'This is not unusual, for the the novels in Earthsea Cycle are neither long nor wordy.' (the doubled 'the' is the page's own typo, outside the quoted span).
+
+### [355] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: The same blogger says the language is precise and descriptive.
+QUOTE: The language is precise and descriptive
+TRUE: The language is precise and descriptive
+NOTE: Same page, next sentence: 'The language is precise and descriptive, but the author never goes into great detail.'
+
+### [356] VERIFIED_VERBATIM  |feature: omission as information
+CLAIM: The blogger says the natural laws and mythology of Earthsea are more hinted on than explained.
+QUOTE: is more hinted on than explained
+TRUE: The natural laws and the mythology of the Earthsea is more hinted on than explained
+NOTE: Same page, next sentence. Every limb of the claim (natural laws, mythology, Earthsea, hinted rather than explained) is on the page.
+
+### [357] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: The blogger concludes Le Guin proves worldbuilding can succeed without going into detail.
+QUOTE: you can do successful worldbuilding without going into detail
+TRUE: She proves that you can do successful worldbuilding without going into detail
+NOTE: Same page, final sentence of the Tehanu section; the immediately preceding sentences name Ursula K. Le Guin, so 'She' is Le Guin and the 'Le Guin proves' limb holds.
+
+### [358] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Michael Chabon lists the ingredients of the Earthsea world as its flora, its weather, and the dialects and ceremonies of its inhabitants.
+QUOTE: from its flora to its weather to the dialects and ceremonies
+TRUE: detailed and plausible from its flora to its weather to the dialects and ceremonies of its inhabitants
+NOTE: Live theparisreview.org returned Cloudflare 403 even with a browser UA; verdict formed on the RAW Wayback capture https://web.archive.org/web/20191121050122id_/... (raw original bytes, not a summarizer). The capture carries the byline 'Le Guin's Subversive Imagination / By Michael Chabon / November 20, 2019'. The preceding paragraph names A Wizard of Earthsea and the next sentence says 'In Earthsea, the wielders of linguistic power were known as wizards', so the 'Earthsea world' limb holds even though the quoted sentence says 'an entire planet'.
+
+### [359] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Chabon says Le Guin conjured an entire planet into vivid existence with nothing but lines on paper.
+QUOTE: conjured an entire planet into vivid existence
+TRUE: conjured an entire planet into vivid existence
+NOTE: Live theparisreview.org returned 403 to both curl (browser UA) and WebFetch; reached the RAW page via Wayback id_ capture 20191121050122. Byline 'By Michael Chabon / November 20, 2019' present. Full sentence: 'With nothing but language-lines on paper, properly configured-Ursula K. Le Guin conjured an entire planet into vivid existence, detailed and plausible from its flora to its weather to the dialects and ceremonies of its inhabitants.' Every limb supported, including 'nothing but lines on paper' ('with nothing but language-lines on paper, properly configured').
+
+### [360] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Jason P. Vest says Le Guin weaves each place's contradictions, tensions, mores and rites into detailed portraits.
+QUOTE: each place’s contradictions, tensions, mores, and rites into satisfyingly detailed
+TRUE: weaving each place's contradictions, tensions, mores, and rites into satisfyingly detailed portraits
+NOTE: Live page fetched raw (HTTP 200, curl). Byline 'By Jason P. Vest', 'May 30, 2021' (article:published_time 2021-05-30). Sentence: 'You may begin as a stranger in these strange lands, but soon take up residence inside them thanks to Le Guin's brilliance at weaving each place's contradictions, tensions, mores, and rites into satisfyingly detailed portraits of authentic extraterrestrial societies.' Quote verbatim; every limb supported.
+
+### [361] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Vest says Le Guin's invented worlds convince readers they are real places rife with complex histories, cultures and characters.
+QUOTE: real places rife with complex histories, cultures, and characters
+TRUE: real places rife with complex histories, cultures, and characters
+NOTE: Same raw fetch of commonreader.wustl.edu. Sentence: 'her fiction swiftly convinces its readers that the worlds Le Guin invents are, indeed, real places rife with complex histories, cultures, and characters.' Quote verbatim (appears twice: body text and a pull-quote). 'convince readers' and 'invented worlds' both supported.
+
+### [362] VERIFIED_VERBATIM  |feature: sentence length variation
+CLAIM: Vest identifies the most famous sentence of The Left Hand of Darkness as the four-word line The king was pregnant.
+QUOTE: The king was pregnant
+TRUE: Perhaps Left Hand's most famous sentence ... 'The king was pregnant'
+NOTE: Same raw fetch. Page: 'Perhaps Left Hand's most famous sentence appears in Chapter 8, when Argaven, the monarch of Karhide ..., finds himself with child. "The king was pregnant," Genly Ai writes in a field report...'. Quote verbatim. Two minor divergences that do not unseat a limb: Vest hedges with 'Perhaps' where the claim states it flatly, and 'four-word' is the verifier's count of the quoted line (He/is/... -> 'The king was pregnant' = 4 words), not the page's own wording.
+
+### [363] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: Alison Smith calls Le Guin's prose in Very Far Away From Anywhere Else spare and clarifying.
+QUOTE: too taboo for her spare, clarifying prose
+TRUE: too taboo for her spare, clarifying prose
+NOTE: Live granta.com returned 403 to curl (browser UA); reached the RAW page via Wayback id_ capture 20190718094045. Byline Alison Smith, article:published_time 2019-01-03. Sentence: 'Le Guin pierced my solitude again when I read her slender, realist novel Very Far Away From Anywhere Else, in which no emotion was too complicated, too nuanced or too taboo for her spare, clarifying prose.' Quote verbatim; the novel limb is supported in the same sentence.
+
+### [364] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: Smith describes Le Guin's genius as an amalgam of vivid prose, straight talk and revolutionary engagement.
+QUOTE: vivid prose, straight talk and revolutionary engagement
+TRUE: her genius - that brilliant amalgam of vivid prose, straight talk and revolutionary engagement
+NOTE: Same Wayback raw capture of the Granta memoir. Sentence: 'I watched from afar as Le Guin's star rose and her genius - that brilliant amalgam of vivid prose, straight talk and revolutionary engagement - was recognized by larger and larger circles.' Quote verbatim; 'genius' and 'amalgam' both on the page.
+
+### [365] VERIFIED_VERBATIM  |feature: other: language encodes ideology
+CLAIM: Sherryl Vint says Le Guin is sensitive to the notion that ideologies and values are embedded in the language and metaphors we use.
+QUOTE: our ideologies and values are embedded in the language and metaphors
+TRUE: very sensitive to the notion that our ideologies and values are embedded in the language and metaphors we use
+NOTE: Live fivebooks.com returned 403 to curl (browser UA); reached the RAW page via Wayback id_ capture 20210508144857. 'Interview by Cal Flyn / May 7, 2021'; speaker is Sherryl Vint. The full-form quote sits in the body of the section on The Word for World is Forest (just before book 3, The Left Hand of Darkness): '...because she's very sensitive to the notion that our ideologies and values are embedded in the language and metaphors we use.' (A pull-quote higher on the page gives the shorter 'embedded in the language we use'.) Every limb supported.
+
+### [366] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: A commenter on the Reactor Le Guin reread picks out a five-word Le Guin sentence and calls it lovely.
+QUOTE: He is done with doing.
+TRUE: 'He is done with doing.' ... no matter how lovely that sentence is
+NOTE: Live reactormag.com fetched raw (HTTP 200, curl); comments are server-rendered in the HTML. Commenter 'Msb' (6 years ago) on 'Introducing the Ursula K. Le Guin Reread' (Sean Guynes, 22 Jan 2020) writes: 'Le Guin was writing masterworks well after the 1970s. "He is done with doing." Except he wasn't, of course, no matter how lovely that sentence is.' Quote verbatim; the line is five words (He/is/done/with/doing) and is Le Guin's (Earthsea); 'lovely' is the commenter's own word, though applied concessively.
+
+### [367] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Terry Morris faults the Ghibli Earthsea film for giving no sense of islands in a lonely ocean.
+QUOTE: no sense of islands in a lonely ocean
+TRUE: There was no sense of islands in a lonely ocean
+NOTE: PDF fetched as binary (HTTP 200, 4.96 MB) and text-extracted with pypdf (54 pages). Article "'Earthsea' and 'Tales From Earthsea' By Terry Morris" begins p. 27 of the issue; the quote is on PDF page 30: 'It was particularly surprising that most of the scenes were set firmly on land. There was no sense of islands in a lonely ocean, no sense of the sea as a constant element in people's lives...'. Quote verbatim, and the fault is aimed at the Studio Ghibli Tales From Earthsea film. Two metadata nits outside the claim sentence: the chunk's page field says p. 31 (actual PDF page 30, printed folio 29/30), and the fanzine's cover reads 'February 2010' while its colophon reads 'No 11, February 2009' as the chunk has it.

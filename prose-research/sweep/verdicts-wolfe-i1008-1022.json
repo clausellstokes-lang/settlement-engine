@@ -1,0 +1,323 @@
+{
+ "name": "wolfe",
+ "chunk": 18,
+ "claims": [
+  {
+   "index": 1008,
+   "feature": "withheld information and inference",
+   "claim": "Brian Attebery's account of rationalised fantasy has the apparent magic explained away by the story's end.",
+   "source": "Brian Attebery, quoted in Peter Wright, Attending Daedalus (2003), 'Last Thrilling Wonder Story'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/last-thrilling-wonder-story-intergeneric-operations/3CC9BC9E09B6B06DA7BE6219A48DC01E",
+   "quote": "the apparent magic is explained away by the end",
+   "page": "pp. 86-103",
+   "kind": "relay",
+   "polarity": "applies",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "medium"
+  },
+  {
+   "index": 1009,
+   "feature": "place and institution description",
+   "claim": "Wright asserts Wolfe arranges the Urth Cycle's events into the architecture of a written memory system.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'There Are Doors', pp. 145-165",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/there-are-doors-memory-and-textual-structure/B89AE6555E9DC5DCAA0121AF21F943AA",
+   "quote": "the architecture of a written memory system",
+   "page": "pp. 145-165",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1010,
+   "feature": "place and institution description",
+   "claim": "Frances Yates's account of the classical memory art has the orator remember a spacious and varied building.",
+   "source": "Frances Yates, The Art of Memory (1966), quoted in Peter Wright, Attending Daedalus (2003), 'There Are Doors'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/there-are-doors-memory-and-textual-structure/B89AE6555E9DC5DCAA0121AF21F943AA",
+   "quote": "a building is to be remembered, as spacious and varied",
+   "page": "pp. 145-165",
+   "kind": "relay",
+   "polarity": "applies",
+   "date": "1966",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium"
+  },
+  {
+   "index": 1011,
+   "feature": "other: layered writing",
+   "claim": "Wolfe held that good writing is multileveled, comparing it to a club sandwich.",
+   "source": "Gene Wolfe, quoted in Peter Wright, Attending Daedalus (2003), 'Trip, Trap', pp. 23-36",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/trip-trap-psychology-and-thematic-coherence/27964C258DD3B2CD02436C50D4281A52",
+   "quote": "multileveled, like a club sandwich",
+   "page": "pp. 23-36",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1012,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe held that a good writer is often saying two things at once.",
+   "source": "Gene Wolfe, quoted in Peter Wright, Attending Daedalus (2003), 'Trip, Trap', pp. 23-36",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/trip-trap-psychology-and-thematic-coherence/27964C258DD3B2CD02436C50D4281A52",
+   "quote": "a good writer is often saying two things at once",
+   "page": "pp. 23-36",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1013,
+   "feature": "other: characterisation",
+   "claim": "Michael Bishop observed that Wolfe's characters are neither wholly heroic nor unremittingly villainous.",
+   "source": "Michael Bishop, quoted in Peter Wright, Attending Daedalus (2003), 'Trip, Trap'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/trip-trap-psychology-and-thematic-coherence/27964C258DD3B2CD02436C50D4281A52",
+   "quote": "neither wholly heroic nor unremittingly villainous",
+   "page": "pp. 23-36",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "medium"
+  },
+  {
+   "index": 1014,
+   "feature": "other: reputation",
+   "claim": "John Clute called Wolfe quite possibly the most important writer in the science fiction field.",
+   "source": "John Clute, The Encyclopedia of Science Fiction (revised edition), quoted in Peter Wright, Attending Daedalus (2003), 'Silhouette'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/silhouette-an-introduction-to-gene-wolfe/37824B6A185F41E81960E1767DC05A74",
+   "quote": "quite possibly the most important writer",
+   "page": "pp. 3-22",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "1993",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "medium"
+  },
+  {
+   "index": 1015,
+   "feature": "other: critical neglect",
+   "claim": "Wright asserts Wolfe's work has provoked little academic interest.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Silhouette', pp. 3-22",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/silhouette-an-introduction-to-gene-wolfe/37824B6A185F41E81960E1767DC05A74",
+   "quote": "provoked little academic interest",
+   "page": "pp. 3-22",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1016,
+   "feature": "place and institution description",
+   "claim": "Wolfe's catalogue of Ultan's library lists bindings by material without figurative comparison.",
+   "source": "Gene Wolfe, 'Books in The Book of the New Sun', in Peter Wright (ed.), Shadows of the New Sun (2007), pp. 193-202",
+   "url": "https://www.cambridge.org/core/books/shadows-of-the-new-sun/books-in-the-book-of-the-new-sun/71A41863E43DFE9FA893C93786F3C386",
+   "quote": "We have books bound wholly in metals of unknown alloy",
+   "page": "pp. 193-202",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1017,
+   "feature": "omission as information",
+   "claim": "Wolfe's library catalogue names books precious precisely because nobody on Urth can read them.",
+   "source": "Gene Wolfe, 'Books in The Book of the New Sun', in Shadows of the New Sun (2007), pp. 193-202",
+   "url": "https://www.cambridge.org/core/books/shadows-of-the-new-sun/books-in-the-book-of-the-new-sun/71A41863E43DFE9FA893C93786F3C386",
+   "quote": "books doubly precious because no one on Urth can read them",
+   "page": "pp. 193-202",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1018,
+   "feature": "place and institution description",
+   "claim": "Wolfe describes the library as folded in upon itself and larger than the world containing it.",
+   "source": "Gene Wolfe, 'Books in The Book of the New Sun', in Shadows of the New Sun (2007), pp. 193-202",
+   "url": "https://www.cambridge.org/core/books/shadows-of-the-new-sun/books-in-the-book-of-the-new-sun/71A41863E43DFE9FA893C93786F3C386",
+   "quote": "the library is larger than the world that contains it",
+   "page": "pp. 193-202",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1019,
+   "feature": "annalist voice and deep time",
+   "claim": "Wolfe attaches an ancient flavour to the library through books unread since before they were written.",
+   "source": "Gene Wolfe, 'Books in The Book of the New Sun', in Shadows of the New Sun (2007), pp. 193-202",
+   "url": "https://www.cambridge.org/core/books/shadows-of-the-new-sun/books-in-the-book-of-the-new-sun/71A41863E43DFE9FA893C93786F3C386",
+   "quote": "of books that have not been read since before they were written",
+   "page": "pp. 193-202",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1020,
+   "feature": "other: long-form construction",
+   "claim": "Wolfe held that a multivolume work is made by writing something more like life itself than shorter forms are.",
+   "source": "Gene Wolfe, 'Nor the Summers as Golden', in Shadows of the New Sun (2007), pp. 208-213",
+   "url": "https://www.cambridge.org/core/books/shadows-of-the-new-sun/nor-the-summers-as-golden-writing-multivolume-works/1BF1BCBAAE4043F14CCEB7395D5D5462",
+   "quote": "more like life itself than the other forms are",
+   "page": "pp. 208-213",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1021,
+   "feature": "other: short-story scope",
+   "claim": "Wolfe held that a short story typically separates a few hours from the characters' years.",
+   "source": "Gene Wolfe, 'Nor the Summers as Golden', in Shadows of the New Sun (2007), pp. 208-213",
+   "url": "https://www.cambridge.org/core/books/shadows-of-the-new-sun/nor-the-summers-as-golden-writing-multivolume-works/1BF1BCBAAE4043F14CCEB7395D5D5462",
+   "quote": "In short stories we typically separate a few hours",
+   "page": "pp. 208-213",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1022,
+   "feature": "other: series decline",
+   "claim": "Wolfe called a series a succession of novels that are all too often progressively weaker.",
+   "source": "Gene Wolfe, 'Nor the Summers as Golden', in Shadows of the New Sun (2007), pp. 208-213",
+   "url": "https://www.cambridge.org/core/books/shadows-of-the-new-sun/nor-the-summers-as-golden-writing-multivolume-works/1BF1BCBAAE4043F14CCEB7395D5D5462",
+   "quote": "a succession of novels that are all too often progressively weaker",
+   "page": "pp. 208-213",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1008,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the apparent magic is explained away by the end",
+   "note": "Inside the indented Attebery block quote in the Summary: rationalised fantasy is named in the same sentence, and the block is introduced as 'Brian Attebery remarks... when he posits'. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring. Wright re-quotes it two sentences later with 'at the end' rather than 'by the end'; the claim follows the block-quote wording. Page's own citation metadata gives pp. 86-103, matching the source."
+  },
+  {
+   "index": 1009,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the architecture of a written memory system",
+   "note": "Summary's closing movement: Wright's sentence has Wolfe arranging the narrative events of The Urth Cycle to form this architecture, so the arranger, the arranged material and the architecture limbs are all on the page. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring. citation metadata pp. 145-165 matches."
+  },
+  {
+   "index": 1010,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a building is to be remembered, as spacious and varied",
+   "note": "Summary, memory-art paragraph. All limbs supported: Yates is named ('As Frances Yates documents in her study The Art of Memory (1966)') and the orator limb is carried both by 'Like the Classical orators' and by the later 'the orator situates his mnemonic images'. Nuance, not an unsupported limb: the page credits the description itself to Quintilian as documented within Yates's study, so the words are Yates relaying Quintilian rather than Yates speaking in her own voice. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  },
+  {
+   "index": 1011,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "multileveled, like a club sandwich",
+   "note": "Summary, 'good writing' paragraph: introduced as 'He argues that good writing should be...', so the attribution to Wolfe and the club-sandwich comparison are both on the page. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring. citation metadata pp. 23-36 matches."
+  },
+  {
+   "index": 1012,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a good writer is often saying two things at once",
+   "note": "Summary, same 'good writing' quotation, immediately after the club-sandwich line; the page continues 'and sometimes three or even four', which the claim does not overstate. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  },
+  {
+   "index": 1013,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "neither wholly heroic nor unremittingly villainous",
+   "note": "Summary, opening paragraph: the phrase sits inside the sentence introduced by 'Michael Bishop observes that', describing the characters Wolfe produces, so both the observer and the characters limbs hold. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  },
+  {
+   "index": 1014,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quite possibly the most important writer",
+   "note": "Summary's first sentence: 'John Clute describes Gene Wolfe as ... working in the science fiction (SF) field', and the sentence opens 'In the revised edition of The Encyclopedia of Science Fiction', matching the source field. The page does not state the 1993 date carried in the claim's metadata; that is metadata, not a limb of the claim sentence. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  },
+  {
+   "index": 1015,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "provoked little academic interest",
+   "note": "Summary: 'As this bio-bibliographical introduction reveals, Wolfe's work has provoked little academic interest (possibly because of its complexity)'. Wright's own voice, so the 'Wright asserts' limb holds. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring. citation metadata pp. 3-22 matches."
+  },
+  {
+   "index": 1016,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We have books bound wholly in metals of unknown alloy",
+   "note": "Summary is the essay's opening library catalogue. The negative limb 'without figurative comparison' is verifiable by inspection of the catalogue sentences themselves: hides of echidnes and krakens, metals of unknown alloy, bindings covered with thickset gems, cases of perfumed woods, all literal materials with no simile or metaphor. Ultan's limb holds via 'Master Ultan's library' later in the same passage. The one simile in the passage ('like a Klein bottle') is about the library's structure, not its bindings, so it does not touch the claim's scope. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  },
+  {
+   "index": 1017,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "books doubly precious because no one on Urth can read them",
+   "note": "Summary, catalogue passage: the causal construction 'doubly precious because' is the page's own, so the claim's 'precious precisely because' adds no unsupported force. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  },
+  {
+   "index": 1018,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the library is larger than the world that contains it",
+   "note": "Summary, Wolfe's commentary on his own catalogue: both limbs present in adjacent sentences, the folding limb as 'the library is folded in upon itself like a Klein bottle' and the size limb verbatim. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  },
+  {
+   "index": 1019,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "of books that have not been read since before they were written",
+   "note": "Summary, sentence beginning 'And yet there is some flavour of the ancient about it', which carries the ancient-flavour limb; the quoted phrase is the appositive that follows. Twelve words exactly, at the cap. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  },
+  {
+   "index": 1020,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more like life itself than the other forms are",
+   "note": "Summary, fourth sentence, on creating 'these large works' — the chapter opens 'How do you write stories too big for one book?' and is titled Writing Multivolume Works, carrying the multivolume limb. The page says 'the other forms'; the claim glosses these as 'shorter forms', which the page supports because the other forms it then discusses are the short story and the novel. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  },
+  {
+   "index": 1021,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In short stories we typically separate a few hours",
+   "note": "Summary, next sentence: the page completes it '- a single day at most - from the years of the characters', supplying the claim's 'from the characters' years' limb. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  },
+  {
+   "index": 1022,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a succession of novels that are all too often progressively weaker",
+   "note": "Summary's final sentence: 'a series is nothing more than a succession of novels that are all too often progressively weaker', in Wolfe's own voice. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring."
+  }
+ ]
+}

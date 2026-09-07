@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 128,
+ "firstTs": "2026-09-07T15:21:01.345Z",
+ "lastTs": "2026-09-07T15:25:16.783Z",
+ "tools": {
+  "Bash": 35,
+  "Read": 9
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The guard passes (S10b's fold exists). Now the core inputs in parallel.",
+ "run": "wf_8b507f28-6e0",
+ "agent": "a5360b5d5b1866476",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/8de5f153-f375-48fb-803c-ec578a273a4a/subagents/workflows/wf_8b507f28-6e0/agent-a5360b5d5b1866476.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -1,0 +1,445 @@
+
+Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective
+ Report GitHub Issue
+ ×
+ Title:
+ Content selection saved. Describe the issue below:
+ Description:
+ Submit without GitHub
+ Submit in GitHub
+ arXiv is now an independent nonprofit!
+ Learn more
+ ×
+ Back to arXiv
+ Why HTML?
+ Report Issue
+ Back to Abstract
+ Download PDF
+Abstract
+I Introduction
+II Related Work
+II-A Symbolic Narrative Planning for Story Generation
+II-B Large Language Models for Story Generation
+II-C Large Language Models for Reasoning and Planning
+II-D Answer Set Programming and Action Languages
+III Methodology
+III-A Preliminaries: Narrative Planning
+III-A1 Causal Planning
+III-A2 Intentional Planning
+III-A3 Conflict Planning
+III-B Benchmarking Pipeline
+III-C Translating Narrative Planning Problems to ASP
+III-C1 Representing Causal Planning in ASP
+III-C2 Representing character intentionality
+III-C3 Representing conflict
+III-D LLM Prompts for Generating Narrative Plans
+III-E Benchmarking Tasks
+III-E1 Secret Agent [48] (Figure (a))
+III-E2 Aladdin [13] (Figure (b))
+III-E3 Western [16] (Figure (c))
+IV Results
+IV-A Overview
+IV-B Detailed Analysis for Each Story Domain
+IV-B1 Secret Agent (Causal Planning)
+IV-B2 Aladdin (Intentional Planning)
+IV-B3 Western (Conflict Planning)
+V Discussion and Future Work
+References
+ License: CC BY-SA 4.0
+arXiv:2506.10161v1 [cs.CL] 11 Jun 2025
+Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective
+Yi Wang
+Affiliation: Autodesk Research
+San Francisco, United States 
+ywang485@gmail.com
+Affiliation: 
+Max Kreminski
+Affiliation: Midjourney
+San Francisco, United States 
+maxkreminski@gmail.com
+Abstract
+Story generation has been a prominent application of Large Language Models (LLMs). However, understanding LLMs’ ability to produce high-quality stories remains limited due to challenges in automatic evaluation methods and the high cost and subjectivity of manual evaluation. Computational narratology offers valuable insights into what constitutes a good story, which has been applied in the symbolic narrative planning approach to story generation. This work aims to deepen the understanding of LLMs’ story generation capabilities by using them to solve narrative planning problems. We present a benchmark for evaluating LLMs on narrative planning based on literature examples, focusing on causal soundness, character intentionality, and dramatic conflict. Our experiments show that GPT-4 tier LLMs can generate causally sound stories at small scales, but planning with character intentionality and dramatic conflict remains challenging, requiring LLMs trained with reinforcement learning for complex reasoning. The results offer insights on the scale of stories that LLMs can generate while maintaining quality from different aspects. Our findings also highlight interesting problem solving behaviors and shed lights on challenges and considerations for applying LLM narrative planning in game environments.
+Index Terms: 
+Story Generation, Narrative Planning, Large Language Models, Video games, Generative AI, Game Narrative
+I Introduction
+Large language models (LLMs) are now being applied to a wide range of open-ended and creative tasks in and around games [1, 2]. In particular, some recent games have begun using LLMs for open-ended story generation, demonstrating the potential for LLMs applied in this way to support novel forms of narrative interactivity [3, 4].
+Nevertheless, the capability of LLMs to produce high-quality narratives remains uncertain. Writing stories is difficult even for humans: authors typically need to establish a mental model of the story world, develop characters, mentally simulate different possible plotlines, curate compelling ones, and render them as text [5]. If LLMs are to produce good stories, it would seem that they must somehow perform the same tasks via autoregressive statistical sequence prediction—deviating from how human authors generally write [6].
+Existing LLM-based story generation methods utilize either automatic metrics or human evaluation to assess the quality of generated stories[7]. However, automatic metrics typically address superficial aspects, such as lexical or semantic similarity to reference texts [8, 9], while human evaluations are constrained by cost and the subjective nature of the evaluation criteria, making it difficult to achieve consistent results [10].
+On the other hand, what constitutes a good story is a central question for computational narratology—a field of study focused on modeling narrative structure using computational constructs, as well as creating and interpreting narratives with algorithmic processes[11]. Work in this field has led to the symbolic narrative planning approach to story generation [12, 13], in which a desired world state is specified as the narrative goal, and event sequences leading to this goal—known as “narrative plans”—are generated, subject to “trajectory constraints” that attempt to enforce narrativity [14].
+In this study, we aim to deepen understanding of LLMs’ story generation capabilities by prompting them to generate narrative plans that adhere to constraints established in narrative planning literature. Specifically, we focus on causal soundness [15], character intentionality [13], and the presence of dramatic conflict [16]. By evaluating the performance of LLMs in satisfying these constraints, we seek to gain insights into their ability to generate causally sound stories with believable character actions and dramatic conflicts.
+For each of the three aforementioned aspects, we select a representative story domain from narrative planning literature. We first demonstrate that existing LLMs can solve the original version of the three examples with reasonable accuracy, thereby motivating the need for larger scale examples. We then create a benchmark consisting of parameterized variations of the examples, encoded via Answer Set Programming (ASP) [17] to support automatic validation of the above three aspects.
+Our experiments show that GPT-4 tier LLMs can generate causally sound stories at small scales; however, planning with character intentionality and dramatic conflict remains challenging, requiring LLMs trained with reinforcement learning for complex reasoning. The results offer insights on the scale of stories that LLMs can generate while maintaining different kinds of quality. Our findings also highlight interesting problem solving behaviors in connection with classical planning and shed light on challenges and considerations for applying LLM narrative planning in game environments, as well as the role of symbolic narrative planning in the LLM era.
+Contributions of this study can be summarized as follows:
+• 
+We show that existing LLMs can solve representative narrative planning tasks from literature, motivating the need for new benchmarking task sets with varied scales.
+• 
+We develop an LLM narrative planning benchmarking pipeline utilizing an Answer Set solver for causal transition simulation, plan validation and providing external feedbacks, via a translation of narrative planning problems into Answer Set Programs.
+• 
+We extend three well-known narrative planning tasks into parametrized task sets to facilitate evaluation of narrative planning involving causal soundness, character intentionality and conflicts.
+• 
+We evaluate LLMs’ performance on the above task sets. Our findings provide insights on LLMs’ capabilities in generating compelling stories, and shed lights on challenges and engineering practice and concerns for applying LLM narrative planning in actual game environments.
+The taskset along with ASP encoding and LLM prompts used for all our experiments is publicly available at: https://huggingface.co/datasets/ADSKAILab/LLM-narrative-planning-taskset.
+Fig. 1: Our evaluation pipeline consists of the task generation component, the plan validation component, and the LLM planner. Dashed lines represent processes only present in the external calibration mode. Rounded rectangles represent ASP-based components.
+Fig. 2: Description of the three story domains we use for benchmarking. Bold text indicates intentional actions. All the fluents are binary-valued except h​a​s​(c​h,o​b​j)has(ch,obj) in the Western domain takes a numerical value indicating the number of o​b​jobj that c​hch has. The number of ground actions/fluents is calculated by counting how many ways to substitute each of v1,v2,…,vnv_{1},v_{2},\dots,v_{n} in an action/fluents p⁡(v1,v2,…,vn)p(v_{1},v_{2},\dots,v_{n}) - for actions it further take into account all possile characters performing the action. Action space size count includes nonexecutable actions. Ground symbol calculations exclude intention as part of the action symbols, despite being an argument of action predicates in the ASP encoding, because LLM-generated plans are not evaluated for correct intentions behind actions. Thus, intention symbols do not affect the search space size for LLMs.
+II Related Work
+II-A Symbolic Narrative Planning for Story Generation
+Narrative planning methods [13, 12] use symbolic search over spaces of possible character actions to generate plot structures. Planning often takes into account a wide range of narratological concepts, including character intention [13]; character belief [18] and meta-belief [19]; conflict [16]; surprise [20]; tellability [21]; and even interactivity [22].
+This makes the narrative planning literature a potentially rich vein of knowledge about the characteristics of a good story and how good stories can be computationally produced. However,
+narrative planning domains are rigid and require specialized knowledge to author—leading some researchers and developers to pursue alternative means of story generation for games.
+II-B Large Language Models for Story Generation
+Rapid progress in neural language modeling has brought about increased interest in text-oriented story generation, including via text continuation [23, 24]; instruction-based prompting [25]; more complicated prompt-chaining strategies, such as plan-and-write [26]; emergent narrative via LLM-based character simulation [27]; and even neurosymbolic approaches [28]. Some of these neurosymbolic approaches combine LLMs with planning: TattleTale [29] uses a planner to generate plot structures for an LLM to follow; Kelly et al. [30] use an LLM to generate narrative planning domains which are then solved by a planner; StoryVerse [31] and WhatELSE [32] use LLMs for both top-down planning and bottom-up simulation; and Farrell and Ware [33] use an LLM as a heuristic to guide a symbolic narrative planner.
+The coherence and prompt adherence of LLM-generated stories has improved considerably over the last few years, but these stories still exhibit noticeable deficiencies [10, 34, 35]. How to address these problems is not entirely clear—in part because there is no clear consensus on how to evaluate stories [36], with even human experts using explicitly delimited rating criteria giving substantially divergent ratings to the same stories [10]. By using narrative planning problems as concrete benchmarks for specific LLM story generation capabilities, we hope to build on existing attempts to operationalize narratological knowledge and better understand LLM storytelling strengths and weaknesses.
+II-C Large Language Models for Reasoning and Planning
+Prior work has evaluated LLM “reasoning” via standard symbolic planning problems, broadly finding that LLMs have some ability to solve planning problems [37] but tend to break down on larger or more complicated problems unless augmented by an “LLM-modulo” symbolic search framework [38]. LLMs might reasonably be expected to exhibit similar limitations on narrative planning problems, though it has also been found that LLMs seem to be able to leverage “commmon-sense” knowledge for improved planning ability on unobfuscated rather than obfuscated narrative planning problems [33]. More research may help to illuminate when and how “common-sense” knowledge makes LLMs better at solving some planning problems than others.
+II-D Answer Set Programming and Action Languages
+Answer set programming (ASP) [17] is a logic programming formalism that has been employed in many games-related domains, especially for procedural content generation [39].
+In particular, ASP has been applied to both planning [40] and narrative generation [41], with some recent attempts drawing these approaches together [42] or using ASP to guide LLM-based story generation [43]. One application of ASP is to model dynamic systems, in connection with action languages—formalisms for describing actions and their effects (PDDL is a well-known one). Many of these languages can be viewed as high-level notations of ASP programs structured to represent transition systems. The flexibility of ASP leads to various expressive possibility for actions languages, such as indirect effects, triggered actions, and additive fluents. In this study, we use the action language ℬ𝒞{\cal BC}+ [44] to represent the story domains and execute through ASP solver Clingo [45].
+III Methodology
+III-A Preliminaries: Narrative Planning
+Though many works from the literature on narrative planning are built on top of the Partial Order Causal Link (POCL) planning framework [46], for simplicity, in this study we prompt LLMs to generate total-order plans. We focus on total-order plans in the following review of preliminaries from symbolic narrative planning.
+A story domain is defined by
+• 
+CC: a set of characters,
+• 
+VV: a set of fluents—each valuation of them is a world state,
+• 
+AA: a set of actions each associated with preconditions and effects—preconditions define a subset of all possible world states in which the action is executable, while effects define how to update the world state once the action is executed.
+In symbolic planning, fluents and actions are usually represented as logical predicates
+such as l​o​c​a​t​i​o​n​(𝚊𝚍𝚊𝚖,𝚘𝚏𝚏𝚒𝚌𝚎)location({\tt adam},{\tt office}).
+III-A1 Causal Planning
+In the simplest case, narrative planning aims at generating causally sound sequences of character actions that lead to a set of target world states (called “narrative goal”), which largely coincides with classical planning.
+A (causal) narrative planning problem instance is a triple:
+⟨Π,S0,SG⟩\langle\Pi,S_{0},S_{G}\rangle\vskip-2.84526pt
+where Π\Pi is a story domain. S0S_{0} is the initial world state, and SGS_{G} is a set of target world states specifying the narrative goal.
+A solution of a (causal) narrative planning problem, called a narrative plan, is a sequence of actions ⟨a0,a1,…,an⟩\langle a_{0},a_{1},\dots,a_{n}\rangle (ai∈Aa_{i}\in A), such that each sis_{i} satisfies the precondition of aia_{i}, and sn+1∈SGs_{n+1}\in S_{G}, where si​(i>0)s_{i}(i>0) denotes the world state obtained from executing ai−1a_{i-1} at state si−1s_{i-1}, and s0=defS0s_{0}\stackrel{{\scriptstyle\text{def}}}{{=}}S_{0}.
+In a narrative plan, we say that there is a causal link between an action a1a_{1} and a following action a2a_{2} by pp, if executing a1a_{1} makes some precondition pp of a2a_{2} to be true (denoted a1→pa2a_{1}\stackrel{{\scriptstyle p}}{{\rightarrow}}a_{2}).
+III-A2 Intentional Planning
+Riedl et al. [13] have extended this notion of narrative planning to go beyond classical causal planning by accounting for character goals. The work introduces the notion of character intentions, and requires a narrative plan to be decomposable to a set of “frames of commitment”, in each of which a character takes actions driven by an intention.
+A set of predicates is used to represent characters’ intentions, of the form i​n​t​e​n​d​s​(c,G)intends(c,G), where cc is a character, and GG describes a subset of world states, representing that cc is taking actions towards leading the world state to GG. Actions are divided into intentional and unintentional actions—the former can only occur when it’s justified by an underlying intention.
+A solution SS to a narrative planning problem is defined as intentional, if every occurrence of an intentional action is part of some commitment frame. A commitment frame is a subsequence S′S^{\prime} of SS, with all actions performed by the same character cc, with some intention state i​n​t​e​n​d​s​(c,G)intends(c,G) held throughout the course of this subsequence such that
+• 
+the effect of the final action in S′S^{\prime} leads to GG,
+• 
+a motivating action preceding S′S^{\prime} has i​n​t​e​n​d​s​(c,G)intends(c,G) as its effect, and
+• 
+for each action ai​(i<n)a_{i}(i<n) in S′=⟨a0,a1,…,an⟩S^{\prime}=\langle a_{0},a_{1},\dots,a_{n}\rangle, there is a path of causal links from aia_{i} to ana_{n}.
+III-A3 Conflict Planning
+Ware et al. [16] further extended narrative planning to account for dramatic conflicts. Actions in a narrative plan are now further marked as executed or nonexecuted actions to allow characters to fail to achieve their goals, which further makes it possible to have conflict between commitment frames.
+In a narrative plan, a causal link a1→pa2a_{1}\stackrel{{\scriptstyle p}}{{\rightarrow}}a_{2} is said to be threatened by another action a0a_{0} if
+• 
+a0a_{0} has effect ¬p\neg p;
+• 
+a0a_{0} occurs after a1a_{1}, and before a2a_{2}.
+A conflict is further defined as a four-tuple ⟨c1,c2,a1→pa2,a0⟩\langle c_{1},c_{2},a_{1}\stackrel{{\scriptstyle p}}{{\rightarrow}}a_{2},a_{0}\rangle, where:
+• 
+c1c_{1} and c2c_{2} are (possibly the same) characters;
+• 
+there exist actions a0a_{0}, a1a_{1} and a2a_{2} in the plan, so that a1a_{1} and a2a_{2} form a causal link that is threatened by a0a_{0};
+• 
+a2a_{2} belongs to a commitment frame of character c1c_{1}, and a0a_{0} belongs to a commitment frame of character c2c_{2};
+• 
+at least one of a2a_{2} and a0a_{0} is an nonexecuted action.
+III-B Benchmarking Pipeline
+We evaluate the capability of LLMs in solving narrative planning problems with three story domains (Figure 2), in terms of generating causally sound narrative plans, intentional narrative plans, and intentional narrative plans with conflicts. Our evaluation pipeline (Figure 1) leverage the Answer Set solver clingo 5.7.1 as the formal verifier for causal soundness, intentionality and conflict, to automatically evaluate the narrative plans generated by LLMs.
+In addition to one-off prompting to get narrative plans from LLMs, we assess the planning performance of an LLM-modulo approach [38], which incorporates external calibration for causal planning. This represents applications where LLMs are integrated in a game environment, allowing the environment to provide real-time feedback that guides and calibrates the LLM’s output. Specifically, the LLM planner is paired with an ASP solver that simulates world state updates based on the narrative plan generated by the LLM, offering feedback on the causal soundness of the plan. The LLM is prompted to output one character action at a time, with the ASP solver executing this action within the simulated game environment. The LLM then observes the effects of the action and the updated world state before proceeding to the next action.
+To scale up the original story domains for benchmarking, we create their parameterized variations. For each of the three story domains, an instance generator produces narrative planning tasks of varying scales by adjusting the introduced parameters. An instance verifier then removes unsolvable instances. The instance generator creates both ASP encoding for plan validation and natural language prompts for LLMs to generate narrative plans. The methods for parameterization, instance generation, and solvability verification are tailored specifically for each story domain.
+III-C Translating Narrative Planning Problems to ASP
+III-C1 Representing Causal Planning in ASP
+The causal planning problem involves identifying a sequence of transitions within a transition system, where the transitions correspond to the character actions updating the world state. PDDL solvers and POCL-based solvers are commonly used for causal planning in narrative contexts. In our study, we use a symbolic solver for plan simulation and validation rather than solving the planning problem itself. We consequently employ an ASP-based action language to represent transition systems due to its versatility in performing various inferences, support for functional arguments allowing flexible reification, and ability to extend for tracking character intentions and detecting conflicts. Following Babb and Lee [44], we represent the causal planning problem in ASP using action language ℬ𝒞{\cal BC}+.
+Narrative plan validation is accomplished by encoding the plan as constraints within the main ASP program of the story domain, along with the ASP encoding of the initial world state and narrative goal constraints. The causal soundness of the narrative plan translates to the satisfiability of this combined ASP program. In the external calibration mode, we introduce a special predicate in the ASP program to provide external feedback (e.g., n​o​n​e​x​e​c​_​f​e​e​d​b​a​c​k{nonexec\_feedback}(”Destination isn’t connected to starting location”, a​c​t​(𝚜𝚎𝚌𝚛𝚎𝚝​_​𝚊𝚐𝚎𝚗𝚝CLOSEact({\tt secret\_agent}, m​o​v​e​(𝚑𝚎𝚊𝚍𝚚𝚞𝚊𝚛𝚝𝚎𝚛)move({\tt headquarter}), TT) with timestep TT of the error). After each LLM-generated action, these messages are included in the observation part of the prompt to guide the generation of the next action.
+III-C2 Representing character intentionality
+Following Compilation 1 from [47], we translate intentional narrative planning problems into classical causal planning problems. Actions are categorized into intentional and unintentional actions, with intentional action predicates including a special argument representing the intention behind the action. Preconditions for intentional actions require the corresponding intention to be held by the action’s subject, and new predicates are introduced to track causal and motivational links. The occurrences of intentional actions require justification of their effects in terms of character intentionality, while each of their preconditions becomes justified for prior timesteps.
+III-C3 Representing conflict
+Conflict detection is accomplished by introducing a new predicate to record actions that threaten causal links, tracking the conflicting commitment frames, the threatening action, and the effect of the prior action that is reverted. Actions are categorized into executed and nonexecuted—the latter do not change the world state but can justify the intentionality of previous actions. In the ASP encoding, rules are added to specify which effects of each action can potentially revert the effects of prior actions. For simplicity, nonexecuted actions are not required to be causally sound, although their intentionality must still be justified.
+III-D LLM Prompts for Generating Narrative Plans
+Narrative plan generation prompts describe the following information in natural language:
+1. 
+the list of characters, locations and objects, including description of their attributes and the relations between them that are static throughout all timesteps, including location connectivity,
+2. 
+the narrative goal,
+3. 
+the initial or current world state, for one-off prompting and external calibration mode respectively,
+4. 
+the list of possible actions, including description of their preconditions and effects,
+5. 
+for narrative planning involving intentionality and conflict, the definition of an intentional narrative plan (Sec. III-A2) in natural language,
+6. 
+for narrative planning involving conflict, the definition of conflict (Sec. III-A3) in natural language.
+The LLM is prompted to generate a sequence of actions achieving the narrative goal (in one-off prompting mode) or a singular next action (in external calibration mode), with each action drawn exclusively from the provided list of possible actions. For tasks involving conflicts, the LLM is also prompted to specify whether each intentional action is executed.
+III-E Benchmarking Tasks
+We developed three sets of narrative planning tasks to comprehensively evaluate LLMs’ narrative planning capabilities. These tasks are based on well-known examples from narrative planning literature, which we generalized into parameterized versions to enable procedural generation of variations.
+III-E1 Secret Agent [48] (Figure 2 (a))
+In this story domain, a secret agent must navigate from the starting point to the mastermind’s location, acquiring necessary items to pass through checkpoints and kill the mastermind. The domain features a single plannable character whose character goal coincides with the narrative goal. This example emphasizes classical causal planning, focusing on identifying causal dependencies between steps. The shortest plan for the agent to kill the mastermind consists of 77 steps in our ASP encoding. We generate variations of the secret agent example by introducing random n×nn\times n grid maps, where obstacles, along with the gun and the key are randomly located on the grid.
+III-E2 Aladdin [13] (Figure 2 (b))
+The Aladdin example, first introduced by Riedl and Young, demonstrates the concept of intentional narrative plans. In this domain, a dragon possesses a magical lamp, whose spirit can cast love spells. Only Aladdin can slay the dragon, but the king Jafar can command Aladdin to achieve specific goals. The task is to generate an intentional narrative plan where the king marries Princess Jasmine and the lamp spirit is killed. The challenge involves maintaining causal soundness, managing transmission of character intentions, and ensuring each intentional action fits within a commitment frame. For simplicity, unlike in the original IPOCL representation, where intention can be any arbitrary expression over world state, our ASP encoding allows only two types of intentions: d​e​a​d​(C​h)dead(Ch) (the intention to kill character C​hCh) and i​n​_​p​o​s​s​e​s​s​i​o​n​_​o​f​(C​h,O​b​j)in\_possession\_of(Ch,Obj) (the intention for character C​hCh to possess object O​b​jObj). Only these goals can be delegated to another character. The shortest plan achieving Jafar’s marriage to Jasmine and the lamp spirit’s death consists of 1212 steps in our encoding. We generate variations of the Aladdin example by introducing intermediate delegation layers, controlled by two parameters: the number of delegation layers and the number of agents within each layer. A random tree structure represents the “delegation network.” Additionally, we constrain that only the knight Aladdin can move out of the castle, necessitating the task to find a path in the delegation network from the king to Aladdin.
+III-E3 Western [16] (Figure 2 (c))
+The story domain was introduced by Ware et al. to demonstrate planning for dramatic conflict. The story involves a parent attempting to steal medicine from a shop to save their child from a snakebite, while the sheriff tries to kill the parent for stealing, and the shop owner attempts to reclaim the medicine. The challenge lies in tracking (possibly failed) character plans and incorporating conflict into the narrative plan. The shortest plan leading to conflict consists of 66 steps in our encoding. To scale up this domain for increasing difficulty of conflict occurrence, we randomly place nn newly introduced adventurer characters on a m×mm\times m grid, with the general store located at the center. Each adventurer can get snakebite at most once, and can legally obtain at most one medicine from the general store to heal themselves. The number of medicines is set to n−1n-1, so that conflict only occurs when all the nn adventurers get snakebite, successfully navigate to the general store and attempt to obtain a medicine. For simplicity, the sheriff and parent characters are removed from these variations.
+IV Results
+IV-A Overview
+TABLE I: Success Rate of LLM Narrative Planning on the Original Secret Agent, Aladdin and Western Examples 
+Domain
+Condition
+gpt-3.5
+gpt-4o
+o1
+o1-mini
+Claude-3.5
+Claude-3.7
+Secret Agent(Causal)\begin{subarray}{c}\vskip 8.53581pt\\
+\text{\footnotesize Secret Agent}\\
+\text{(Causal)}\end{subarray}
+One-off Prompting
+0/30∼ 2400 tokens,∼ 5 sec\begin{subarray}{c}0/30\\
+\text{$\sim$ 2400 tokens},\\
+\text{$\sim$ 5 sec}\end{subarray}
+13/30∼ 900 tokens,∼ 10 sec\begin{subarray}{c}13/30\\
+\text{$\sim$ 900 tokens},\\
+\text{$\sim$ 10 sec}\end{subarray}
+30/30∼ 2500 tokens,∼ 20 sec\begin{subarray}{c}30/30\\
+\text{$\sim$ 2500 tokens},\\
+\text{$\sim$ 20 sec}\end{subarray}
+28/30∼ 2,700 tokens,∼ 30 sec\begin{subarray}{c}28/30\\
+\text{$\sim$ 2,700 tokens},\\
+\text{$\sim$ 30 sec}\end{subarray}
+26/30∼ 850 tokens,∼ 5 sec\begin{subarray}{c}26/30\\
+\text{$\sim$ 850 tokens},\\
+\text{$\sim$ 5 sec}\end{subarray}
+30/30∼ 2900 tokens, ∼ 30 sec\begin{subarray}{c}30/30\\
+\text{$\sim$ 2900 tokens},\\
+\text{ $\sim$ 30 sec}\end{subarray}
+External Calibration
+0/300/30
+29/30∼ 5000 tokens,∼ 20 sec\begin{subarray}{c}29/30\\
+\text{$\sim$ 5000 tokens},\\
+\text{$\sim$ 20 sec}\end{subarray}
+30/30∼ 12,000 tokens,∼ 90 sec\begin{subarray}{c}30/30\\
+\text{$\sim$ 12,000 tokens},\\
+\text{$\sim$ 90 sec}\end{subarray}
+30/30∼ 15,000 tokens,∼ 70 sec\begin{subarray}{c}30/30\\
+\text{$\sim$ 15,000 tokens,}\\
+\text{$\sim$ 70 sec}\end{subarray}
+30/30∼ 4500 tokens,∼ 25 sec\begin{subarray}{c}30/30\\
+\text{$\sim$ 4500 tokens,}\\
+\text{$\sim$ 25 sec}\end{subarray}
+30/30∼ 8900 tokens,∼ 80 sec\begin{subarray}{c}30/30\\
+\text{$\sim$ 8900 tokens,}\\
+\text{$\sim$ 80 sec}\end{subarray}
+Aladdin(Intentional)\begin{subarray}{c}\vskip 2.84526pt\\
+\text{\footnotesize Aladdin}\\
+\text{(Intentional)}\end{subarray}
+One-off Prompting
+0/30∼ 2500 tokens,∼ 5 sec\begin{subarray}{c}0/30\\
+\text{$\sim$ 2500 tokens,}\\
+\text{$\sim$ 5 sec}\end{subarray}
+0/30∼ 2000 tokens,∼ 15 sec\begin{subarray}{c}0/30\\
+\text{$\sim$ 2000 tokens,}\\
+\text{$\sim$ 15 sec}\end{subarray}
+14/30∼ 10,000 tokens,∼ 100 sec\begin{subarray}{c}14/30\\
+\text{$\sim$ 10,000 tokens,}\\
+\text{$\sim$ 100 sec}\end{subarray}
+0/30∼ 7000 tokens,∼ 30 sec\begin{subarray}{c}0/30\\
+\text{$\sim$ 7000 tokens,}\\
+\text{$\sim$ 30 sec}\end{subarray}
+0/30∼ 2200 tokens,∼ 11 sec\begin{subarray}{c}0/30\\
+\text{$\sim$ 2200 tokens,}\\
+\text{$\sim$ 11 sec}\end{subarray}
+15/30∼ 14,000 tokens,∼ 145 sec\begin{subarray}{c}15/30\\
+\text{$\sim$ 14,000 tokens,}\\
+\text{$\sim$ 145 sec}\end{subarray}
+Western(Conflict)\begin{subarray}{c}\vskip 2.84526pt\\
+\text{\footnotesize Western}\\
+\text{(Conflict)}\end{subarray}
+One-off Prompting
+0/30∼ 1500 tokens,∼ 5 sec\begin{subarray}{c}0/30\\
+\text{$\sim$ 1500 tokens,}\\
+\text{$\sim$ 5 sec}\end{subarray}
+3/30∼ 3000 tokens,∼ 20 sec\begin{subarray}{c}3/30\\
+\text{$\sim$ 3000 tokens,}\\
+\text{$\sim$ 20 sec}\end{subarray}
+20/30∼ 8000 tokens,∼ 70 sec\begin{subarray}{c}20/30\\
+\text{$\sim$ 8000 tokens,}\\
+\text{$\sim$ 70 sec}\end{subarray}
+6/30∼ 6000 tokens,∼ 30 sec\begin{subarray}{c}6/30\\
+\text{$\sim$ 6000 tokens,}\\
+\text{$\sim$ 30 sec}\end{subarray}
+2/30∼ 1650 tokens,∼ 8.5 sec\begin{subarray}{c}2/30\\
+\text{$\sim$ 1650 tokens,}\\
+\text{$\sim$ 8.5 sec}\end{subarray}
+6/30∼ 15,000 tokens,∼ 150 sec\begin{subarray}{c}6/30\\
+\text{$\sim$ 15,000 tokens,}\\
+\text{$\sim$ 150 sec}\end{subarray}
+Table I shows various LLM models’ planning performance on the original secret agent, Aladdin and western examples. The success rates were computed based on 30 task-solving attempts. In addition to success rate, we also report rough scale of token count and time for solving the whole problem once. 11
+ 1
+ Numbers for external calibration methods reflect only successful attempts. As can be seen, the GPT o1 model is able to solve all the three examples, consistently on the secret agent example, and with around and above 50% accuracy for the Aladdin and western example. GPT-4o has similar performance to Claude Sonnet 3.5, except that Claude-3.5 can solve secret agent with one-off prompting quite consistently. The reasoning models Claude Sonnet 3.7 and GPT o1 model have similar performance, except in that Claude-3.7 is significantly outperformed by o1 on the western example. GPT-3.5 was unable to solve any of the examples. All of the non-reasoning models struggle with the Aladdin and/or western examples, even the reasoning models o1-mini and Claude-3.7. The difficulty likely lies in understanding the complex computational definitions of intentionality and conflict, as well as failed actions, and applying them in problem solving without being misled by their prior understanding of these concepts. It can be seen that the token counts and solving time roughly indicate the difficulty of the problem for reasoning models, but not the case for the other models.
+IV-B Detailed Analysis for Each Story Domain
+IV-B1 Secret Agent (Causal Planning)
+Figure 3 (a) presents results for generated variations of the secret agent domain with different map scales to increase the difficulty of maintaining causal soundness. For each map scale, success rates are computed based on 50 solvable random configurations of obstacles, the key, and the gun. The o1 model, even with simple one-off prompting, achieved the best performance across all map scales up to 16x16. The performance of the o1-mini model with external calibration declined more slowly as map size increased, overall matching o1’s performance. The o1-mini model without external calibration significantly outperformed GPT-4o with external calibration. For smaller scale instances, LLMs often found the shortest path, despite not being explicitly prompted to do so.
+As the map scale increases, output plans tend to skip steps, leading to failure cases. These failed plans often maintain a correct high-level structure, such as finding the gun and key before passing the guard to kill the mastermind. For GPT-4o models with external calibration, sometimes the secret agent switches back and forth between objectives, such as moving toward the gun, then switching to obtain the key, and then returning for the gun, etc., resulting in unachieved goals.
+Overall, results from the secret agent domain indicate that post-GPT-4 LLMs can generally generate causally sound stories within certain scale.
+External calibration significantly enhances model performance, but also requires significant amount of additional time and tokens.
+Fig. 3: LLM Narrative Planning Performance on the Variations of the Three Story Domains
+IV-B2 Aladdin (Intentional Planning)
+Results from Table I suggests that intentional narrative planning poses challenges except for certain reasoning models. Figure 3 (b) presents the o1 model’s performance on various sizes and shapes of delegation networks. For each parameter combination, 50 random configurations of edges representing “loyal to” relations were generated to benchmark the o1 model, with agents in lower layers loyal to those in upper layers. The network includes Aladdin as the lowest layer and the king as the highest, ensuring at least one path from Aladdin to the king.
+Comparing the success rate for an Aladdin instance and a secret agent instance of similar scale, e.g., Aladdin with 1−11-1 delegation network and secret agent with 10×1010\times 10 map, the o1 model is able to achieve much better performance on secret agent. This highlights the fact that the difficulty of the Aladdin problem lies not only on the scale of the problem, but also the concept of intentional planning.
+Adding an additional delegation agent between Aladdin and the king significantly reduces the success rate. At the macro level, larger delegation networks result in lower success rates. At the micro level, network structure also affects success rates. A “chain reporting structure” without branching agents generally achieves higher success rates compared to other formations with the same number of agents.
+For the o1 model, most failed plans are causally sound, but often with character actions lacking valid intention. For instance, Aladdin kills the dragon due to perceived threat but then obtains the lamp and casts a spell without valid motivation. Failed cases frequently introduce external motivations not established in the current plan, despite explicit prompts to avoid this. This suggests that the o1 model struggles with tracking character intentions under closed-world assumption.
+IV-B3 Western (Conflict Planning)
+Figure 3 (c) displays the o1 model’s performance on western variations with varying numbers of adventurers. Adventurers were randomly placed on a 5x5 grid, with the general store at the center, requiring 1-2 steps to reach it for each adventurers. This shifts the challenge from map navigation to tracking multiple character storylines. The o1 model handles up to 12 characters to plan for conflicts involving all characters. The success rate drops sharply from 2 to 3 adventurers (likely due to handling multi-party conflicts) and from 10 to 12 adventurers (likely due to exceeding context limits), with a slower decline in the middle range.
+Comparing western instances to secret agent instances of similar scale, we find that conflict planning is more challenging than simple causal planning. The o1 model generally performs better on the western example than on the Aladdin example, likely due to the smaller action and state space in the western domain. The performance decline is slower in the western example, which is expected since the search space grows cubically with the number of characters in the Aladdin variations but only quadratically in the western variations.
+However, even among instances with similar search space scales, the o1 model performs somewhat better on western instances compared to Aladdin instances. The o1 model’s difficulties with the complex delegation structure and transmission of intentions in the Aladdin example suggest greater weaknesses around intentional planning than conflict planning. On the other hand, Claude-3.7 performs substantially better on the original Aladdin examples than on the western example (Table I). Claude-3.7’s weaker performance on the western domain seems to be due to difficulties adhering to the formal definition of an nonexecuted action as an action that would fail if attempted, rather than an action that could be narrativized as failing for common-sense reasons.
+In the original version of this example, we observe creative, technically correct plans leading to conflicts, though not aligned with common sense. For instance, one plan involves the parent taking medicine from the child in order to heal the child, conflicting with the child’s intention to own the medicine to heal themselves. This suggests the o1 model can disregard its prior knowledge and operate strictly within the specifications of the symbolic planning domain.
+As in the secret agent example, increasing the number of adventurers leads to plans that skip steps while maintaining reasonable high-level structure, with characters going to the general store or attempting to obtain medicine. We also observe interesting “reward hacking” behaviors. For instance, plans exploit the definition of conflict from [16], where two nonexecuted actions can conflict, and our setting where preconditions of nonexecuted actions are not enforced. This results in agents merely “thinking about” taking medicine without execution to bypass map navigation. We observe other types of attempts to create shortcuts for conflict, such as an adventurer repeatedly getting snakebites or healing themselves to cause medicine shortage without involving other characters.
+V Discussion and Future Work
+The secret agent example bridges our results with existing work on LLM for classic planning. Narrative planning, with constraints on character intentionality and conflict, is more challenging than classic planning. Unlike traditional planning tasks like blockworld and path planning, narrative planning may leverage LLMs’ prior commonsense knowledge of story events and social interactions. However, our results suggest that the benefit from LLMs’ prior knowledge, if any, does not counterbalance the inherent difficulty of narrative planning. Conversely, results from the Aladdin example indicate that prior knowledge may even have negative impact, misleading LLMs into invalid plans. This is evident in common failure cases where character actions are driven by motivations never established in the current plan.
+This type of hallucination is intriguing. In the secret agent example, the o1 model was able to adopt a closed-world assumption for causal planning, rarely hallucinating nonexistent paths to the destination. However, the same model fails to adhere to this assumption for character intention.
+A possible explanation for LLMs’ failure at reasoning tasks is that pre-training and instruction-tuning corpora do not contain the true data-generating process [49]. We speculate that a similar reason underlies the failure in planning with character intentionality. Stories typically present sequences of character actions, by default without comprehensively specifying the intentions behind each action. Many fictions intentionally create ambiguity in character intentions to encourage multiple interpretations, making it difficult for LLMs to fully understand these aspects from textual data alone.
+Despite the failure of other models, reasoning models show promise in narrative planning. However, symbolic planners such as Glaive [50] remain superior for runtime narrative planning in games, considering both cost and running times (0.06 seconds for the original Aladdin and 28.41 seconds for the original Western). As of now, symbolic planners are still the preferred choice for efficient implementation. Symbolic planners will also likely remain superior at diverse plan generation for the foreseeable future until the homogeneity of LLM output [35] is mitigated.
+Given the current success of connectionist approaches to AI, one might be inclined to believe that symbolic narrative planning will eventually be replaced altogether by data-driven approaches. There may be skepticism regarding our application of computational narratology to evaluate LLM-generated stories. The argument might be made that fuzzy, subjective, and complex concepts such as character believability and dramatic conflict—perhaps even the concept of “a good story”—should be characterized statistically in the first place, which aligns with the operational principles of LLMs. Why, in this work, did we force LLMs to operate under clear-cut formal definitions of these concepts?
+Broadly, we believe that even if symbolic narrative planning algorithms were to be superseded entirely, concepts and theories from computational narratology would remain valuable for human understanding of storytelling. They could aid in assessing story coherence and guide story generation toward specific standards, potentially through control mechanisms and evaluation metrics for LLM-based story generation. The main weakness of symbolic planning lies in the extensive engineering required to construct story domain specifications; future work might therefore improve the applicability of computational narratology by developing automatic methods to construct these specifications.
+Our study has several limitations. We did not explore other narrative planning concepts, such as the computational characterization of character beliefs [51] and emotions [52]. Additionally, we were unable to test a wider variety of LLMs or use larger sample sizes due to limited computational resources. The numbers of repeated experiments were a compromise between our computational budget and the stabilization of statistical results. Time constraints also prevented the exploration of more sophisticated prompting schemes.
+References
+[1]
+D. Yang, E. Kleinman, and C. Harteveld, “GPT for games: A scoping review (2020-2023),” in IEEE Conference on Games (CoG), 2024.
+[2]
+R. Gallotta, G. Todd, M. Zammit, S. Earle, A. Liapis, J. Togelius, and G. N. Yannakakis, “Large language models and games: A survey and roadmap,” IEEE Transactions on Games, 2024.
+[3]
+Y. Sun, Z. Li, K. Fang, C. H. Lee, and A. Asadipour, “Language as reality: a co-creative storytelling game experience in 1001 Nights using generative AI,” in Proc. AIIDE, 2023.
+[4]
+M. Hua and R. Raley, “Playing with unicorns: AI Dungeon and citizen NLP,” DHQ: Digital Humanities Quarterly, vol. 14, no. 4, 2020.
+[5]
+M. Kreminski and C. Martens, “Unmet creativity support needs in computationally supported creative writing,” in Proceedings of the First Workshop on Intelligent and Interactive Writing Assistants, 2022.
+[6]
+L. Flower and J. R. Hayes, “A cognitive process theory of writing,” College Composition & Communication, 1981.
+[7]
+D. Yang and Q. Jin, “What makes a good story and how can we measure it? A comprehensive survey of story evaluation,” arXiv preprint, 2024.
+[8]
+C.-Y. Lin, “ROUGE: A package for automatic evaluation of summaries,” in Text summarization branches out, 2004, pp. 74–81.
+[9]
+T. Zhang, V. Kishore, F. Wu, K. Q. Weinberger, and Y. Artzi, “BERTScore: Evaluating text generation with BERT,” arXiv, 2019.
+[10]
+T. Chakrabarty, P. Laban, D. Agarwal, S. Muresan, and C.-S. Wu, “Art or artifice? Large language models and the false promise of creativity,” in CHI Conference on Human Factors in Computing Systems, 2024.
+[11]
+I. Mani, “Computational narratology,” Handbook of narratology, 2014.
+[12]
+R. E. C. Rivera, A. Jhala, J. Porteous, and R. M. Young, “The story so far on narrative planning,” in Proc. ICAPS, vol. 34, 2024, pp. 489–499.
+[13]
+M. O. Riedl and R. M. Young, “Narrative planning: Balancing plot and character,” Journal of Artificial Intelligence Research, 2010.
+[14]
+J. Porteous and M. Cavazza, “Controlling narrative generation with planning trajectories: the role of constraints,” in Proc. ICIDS, 2009.
+[15]
+J. R. Meehan, “TALE-SPIN, an interactive program that writes stories,” in IJCAI, vol. 77, 1977, pp. 91–98.
+[16]
+S. G. Ware, R. M. Young, B. Harrison, and D. L. Roberts, “A computational model of plan-based narrative conflict at the fabula level,” IEEE Transactions on Computational Intelligence and AI in Games, 2013.
+[17]
+M. Gelfond and V. Lifschitz, “The stable model semantics for logic programming,” in 5th Conference on Logic Programming, 1988.
+[18]
+T. Wadsley and M. Ryan, “A belief-desire-intention model for narrative generation,” in Proc. AIIDE, 2013.
+[19]
+R. Sanghrajka, R. M. Young, and B. Thorne, “Headspace: incorporating action failure and character beliefs into narrative planning,” in Proc. AIIDE, vol. 18, 2022, pp. 171–178.
+[20]
+B.-C. Bae and R. M. Young, “A computational model of narrative generation for surprise arousal,” IEEE Transactions on Computational Intelligence and AI in Games, vol. 6, no. 2, pp. 131–143, 2013.
+[21]
+R. E. Cardona-Rivera, B. A. Cassell, S. G. Ware, and R. M. Young, “Indexter: A computational model of the event-indexing situation model for characterizing narratives,” in Proceedings of the 3rd Workshop on Computational Models of Narrative, 2012, pp. 34–43.
+[22]
+J. Garbe, M. Kreminski, B. Samuel, N. Wardrip-Fruin, and M. Mateas, “StoryAssembler: an engine for generating dynamic choice-driven narratives,” in Proc. FDG, 2019.
+[23]
+A. Fan, M. Lewis, and Y. Dauphin, “Hierarchical neural story generation,” arXiv preprint arXiv:1805.04833, 2018.
+[24]
+M. Roemmele, A. S. Gordon, and R. Swanson, “Evaluating story generation systems using automated linguistic analyses,” in SIGKDD 2017 Workshop on Machine Learning for Creativity, 2017, pp. 13–17.
+[25]
+A. Yuan, A. Coenen, E. Reif, and D. Ippolito, “Wordcraft: story writing with large language models,” in Proc. UIST, 2022, pp. 841–852.
+[26]
+L. Yao, N. Peng, R. Weischedel, K. Knight, D. Zhao, and R. Yan, “Plan-and-write: Towards better automatic storytelling,” in Proc. AAAI, 2019.
+[27]
+J. S. Park, J. O’Brien, C. J. Cai, M. R. Morris, P. Liang, and M. S. Bernstein, “Generative agents: Interactive simulacra of human behavior,” in Proc. UIST, 2023.
+[28]
+L. Martin, P. Ammanabrolu, X. Wang, W. Hancock, S. Singh, B. Harrison, and M. Riedl, “Event representations for automated story generation with deep neural nets,” in Proc. AAAI, 2018.
+[29]
+N. Simon and C. Muise, “TattleTale: storytelling with planning and large language models,” in ICAPS Workshop on Scheduling and Planning Applications, 2022.
+[30]
+J. Kelly, A. Calderwood, N. Wardrip-Fruin, and M. Mateas, “There and back again: extracting formal domains for controllable neurosymbolic story authoring,” in Proc. AIIDE, 2023.
+[31]
+Y. Wang, Q. Zhou, and D. Ledo, “StoryVerse: Towards co-authoring dynamic plot with LLM-based character simulation via narrative planning,” in Proc. FDG, 2024.
+[32]
+Z. Lu, Q. Zhou, and Y. Wang, “WhatELSE: Shaping narrative spaces at configurable level of abstraction for AI-bridged interactive storytelling,” in the CHI Conference on Human Factors in Computing Systems, 2025.
+[33]
+R. Farrell and S. G. Ware, “Large language models as narrative planning search guides,” IEEE Transactions on Games, 2024.
+[34]
+Y. Tian, T. Huang, M. Liu, D. Jiang, A. Spangher, M. Chen, J. May, and N. Peng, “Are large language models capable of generating human-level narratives?” arXiv preprint arXiv:2407.13248, 2024.
+[35]
+N. Beguš, “Experimental narratives: A comparison of human crowdsourced storytelling and AI storytelling,” Humanities and Social Sciences Communications, vol. 11, no. 1, 2024.
+[36]
+C. Chhun, P. Colombo, C. Clavel, and F. M. Suchanek, “Of human criteria and automatic metrics: A benchmark of the evaluation of story generation,” arXiv preprint arXiv:2208.11646, 2022.
+[37]
+B. Sel, R. Jia, and M. Jin, “LLMs can plan only if we tell them,” arXiv preprint arXiv:2501.13545, 2025.
+[38]
+S. Kambhampati, K. Valmeekam, L. Guan, K. Stechly, M. Verma, S. Bhambri, L. Saldyt, and A. Murthy, “LLMs can’t plan, but can help planning in LLM-modulo frameworks,” arXiv:2402.01817, 2024.
+[39]
+A. M. Smith and M. Mateas, “Answer set programming for procedural content generation: A design space approach,” IEEE Transactions on Computational Intelligence and AI in Games, 2011.
+[40]
+V. Lifschitz, “Answer set programming and plan generation,” Artificial Intelligence, vol. 138, no. 1-2, pp. 39–54, 2002.
+[41]
+S. Chen, A. M. Smith, A. Jhala, N. Wardrip-Fruin, and M. Mateas, “RoleModel: towards a formal model of dramatic roles for story generation,” in Intelligent Narrative Technologies III Workshop, 2010.
+[42]
+C. Dabral and C. Martens, “Generating explorable narrative spaces with answer set programming,” in Proc. AIIDE, 2020.
+[43]
+P. J. Wang and M. Kreminski, “Guiding and diversifying LLM-based story generation via answer set programming,” arXiv preprint, 2024.
+[44]
+J. Babb and J. Lee, “Action language bc+,” Journal of Logic and Computation, vol. 30, no. 4, pp. 899–922, 2020.
+[45]
+M. Gebser, R. Kaminski, B. Kaufmann, and T. Schaub, “Clingo = ASP + control: Preliminary report,” arXiv preprint arXiv:1405.3694, 2014.
+[46]
+M. Williamson and S. Hanks, “Flaw selection strategies for value-directed planning,” in Proc. ICAPS, 1996, pp. 237–244.
+[47]
+P. Haslum, “Narrative planning: Compilations to classical planning,” Journal of Artificial Intelligence Research, vol. 44, pp. 383–395, 2012.
+[48]
+M. O. Riedl, “Narrative planning: balancing plot and character,” Ph.D. dissertation, North Carolina State University, 2004.
+[49]
+V. Xiang, C. Snell, K. Gandhi, A. Albalak, A. Singh, C. Blagden, D. Phung, R. Rafailov, N. Lile, D. Mahan et al., “Towards System 2 reasoning in LLMs: Learning how to think with meta chain-of-thought,” arXiv preprint arXiv:2501.04682, 2025.
+[50]
+S. G. Ware and R. M. Young, “Glaive: a state-space narrative planner supporting intentionality and conflict,” in Proc. AIIDE, 2014.
+[51]
+A. Shirvani, S. Ware, and R. Farrell, “A possible worlds model of belief for state-space narrative planning,” in Proc. AIIDE, 2017.
+[52]
+A. Shirvani and S. Ware, “A formalization of emotional planning for strong-story systems,” in Proc. AIIDE, 2020.
+ Experimental support, please
+ view the build logs
+ for errors. Generated by
+ L
+ A
+ T
+ E
+ xml
+ .
+ Instructions for reporting errors
+ We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+ support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+ methods listed below:
+ Click the "Report Issue" (
+ ) button, located in the page header.
+ Tip: You can select the relevant text first, to include it in your report.
+ Our team has already identified the following issues. We appreciate your time reviewing and reporting rendering errors we
+ may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+ should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+ all.
+ Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion, and welcome developer contributions.
+ We gratefully acknowledge support from
+ our major funders,
+ member institutions, ,
+ and all contributors.
+ About
+ ·
+ Help
+ ·
+ Contact
+ ·
+ Subscribe
+ ·
+ Copyright
+ ·
+ Privacy
+ ·
+ Accessibility
+ ·
+ Operational Status (opens in new tab)
+ Major funding support from

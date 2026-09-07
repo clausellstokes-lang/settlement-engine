@@ -1,0 +1,326 @@
+{
+ "name": "dnd",
+ "chunk": 3,
+ "claims": [
+  {
+   "index": 917,
+   "feature": "place and institution description",
+   "claim": "DMDavid reports that in Curse of Strahd the houses of notable NPCs run to pages of room-by-room description.",
+   "source": "David Hartlage, DMDavid, How much description should a dungeon key include?",
+   "url": "https://dmdavid.com/tag/tag/curse-of-strahd/",
+   "quote": "The homes of notable NPCs get pages of room descriptions",
+   "page": "section Matching description to a location's purpose",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2018-2020",
+   "routeHint": "curl with browser UA on the DMDavid Curse of Strahd tag archive page",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 918,
+   "feature": "place and institution description",
+   "claim": "DMDavid measures one Vallaki NPC's entry as a page-long workroom description inside a five-page mansion description.",
+   "source": "David Hartlage, DMDavid, How much description should a dungeon key include?",
+   "url": "https://dmdavid.com/tag/tag/curse-of-strahd/",
+   "quote": "buried in the page-long description of his workroom",
+   "page": "section Matching description to a location's purpose",
+   "kind": "measurement",
+   "polarity": "disputes",
+   "date": "2018-2020",
+   "routeHint": "curl with browser UA on the DMDavid Curse of Strahd tag archive page",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 919,
+   "feature": "boxed text form",
+   "claim": "Power Score's Curse of Strahd guide records that the Village of Barovia chapter opens with flavour text to be read aloud on the party's arrival.",
+   "source": "Sean McGovern, Power Score, A Guide to Curse of Strahd, Mar 2016",
+   "url": "http://thecampaign20xx.blogspot.com/2016/03/dungeons-dragons-guide-to-curse-of.html",
+   "quote": "Read the flavor text out loud",
+   "page": "Chapter 3: The Village of Barovia, When the Heroes Arrive",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2016-03",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 920,
+   "feature": "place and institution description",
+   "claim": "Eventyr Games gives more than 150 pages as the space Rime of the Frostmaiden spends describing the ten towns and its wilderness locations.",
+   "source": "Eventyr Games, Review – Icewind Dale: Rime of the Frostmaiden, 17 Sep 2020",
+   "url": "https://eventyrgames.com/2020/09/17/review-icewind-dale-rime-of-the-frostmaiden/",
+   "quote": "Spread over more than 150 pages, we get a full",
+   "page": "section Setting",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-09-17",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 921,
+   "feature": "place and institution description",
+   "claim": "Eventyr Games reports that nearly every location in Rime of the Frostmaiden carries a quest or event attached to it.",
+   "source": "Eventyr Games, Review – Icewind Dale: Rime of the Frostmaiden, 17 Sep 2020",
+   "url": "https://eventyrgames.com/2020/09/17/review-icewind-dale-rime-of-the-frostmaiden/",
+   "quote": "every location has a meaningful quest or event attached",
+   "page": "section Setting",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020-09-17",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 922,
+   "feature": "sentence length variation",
+   "claim": "Eventyr Games criticises parts of Rime of the Frostmaiden for long meandering paragraphs that cannot be used at the table.",
+   "source": "Eventyr Games, Review – Icewind Dale: Rime of the Frostmaiden, 17 Sep 2020",
+   "url": "https://eventyrgames.com/2020/09/17/review-icewind-dale-rime-of-the-frostmaiden/",
+   "quote": "long, meandering, and poorly-structured paragraphs of text",
+   "page": "section Accessibility",
+   "kind": "reception",
+   "polarity": "rejects",
+   "date": "2020-09-17",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 923,
+   "feature": "place and institution description",
+   "claim": "RPG Musings counts two or three described locations per town in Rime of the Frostmaiden.",
+   "source": "RPG Musings, Why & How to Use Legacy of the Crystal Shard in Your Frostmaiden Game, Nov 2020",
+   "url": "https://rpgmusings.com/2020/11/why-how-to-use-legacy-of-the-crystal-shard-in-your-frostmaiden-game/",
+   "quote": "each town only gets 2 or 3 described locations",
+   "page": "section Ten-Towns Businesses & NPCs",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-11",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 924,
+   "feature": "place and institution description",
+   "claim": "RPG Musings reports that in the 2013 Legacy of the Crystal Shard campaign guide each town write-up carries at least one new NPC per location.",
+   "source": "RPG Musings, Why & How to Use Legacy of the Crystal Shard in Your Frostmaiden Game, Nov 2020",
+   "url": "https://rpgmusings.com/2020/11/why-how-to-use-legacy-of-the-crystal-shard-in-your-frostmaiden-game/",
+   "quote": "each town write-up comes with at least one new NPC",
+   "page": "section on Legacy of the Crystal Shard NPCs",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020-11 (describing the 2013 D&D Next product)",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 925,
+   "feature": "place and institution description",
+   "claim": "RPG Musings measures two of the minor Bryn Shander locations in Legacy of the Crystal Shard at two to three sentences each.",
+   "source": "RPG Musings, Why & How to Use Legacy of the Crystal Shard in Your Frostmaiden Game, Nov 2020",
+   "url": "https://rpgmusings.com/2020/11/why-how-to-use-legacy-of-the-crystal-shard-in-your-frostmaiden-game/",
+   "quote": "the Armory and Council Hall in Bryn Shander get 2-3",
+   "page": "section Ten-Towns Businesses & NPCs",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-11 (describing the 2013 D&D Next product)",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 926,
+   "feature": "place and institution description",
+   "claim": "Oak of Honor Games reports that the 5e Dungeon Master's Guide sorts settlements by population figures alone.",
+   "source": "Oak of Honor Games, Settlements: critique of the DMG guidelines, 14 Oct 2020",
+   "url": "https://www.oakofhonor.com/index.php/2020/10/14/settlements-critique-of-the-dmg-guidelines/",
+   "quote": "The DMG divides settlements just by population",
+   "page": "section Village",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2020-10-14",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 927,
+   "feature": "place and institution description",
+   "claim": "Oak of Honor Games names Commerce as one of the headed sections of the 5e Dungeon Master's Guide settlement guidance and places it on page 19.",
+   "source": "Oak of Honor Games, Settlements: critique of the DMG guidelines, 14 Oct 2020",
+   "url": "https://www.oakofhonor.com/index.php/2020/10/14/settlements-critique-of-the-dmg-guidelines/",
+   "quote": "as described in the Commerce section (p19)",
+   "page": "section Village",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020-10-14",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 928,
+   "feature": "naming and forms of address",
+   "claim": "Elven Tower names Vallaki's ruler by noble title, given name, surname and then the office he holds.",
+   "source": "Elven Tower (Derek Ruiz), Chapter 5 – The Town of Vallaki",
+   "url": "https://www.elventower.com/chapter-5-the-town-of-vallaki/",
+   "quote": "Baron Vargas Vallakovich, the Burgomaster of Vallaki, a ruthless cruel",
+   "page": "section The powers at play",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "n.d.; Wayback capture 2026-04-18",
+   "routeHint": "live URL returns 403; Wayback raw capture web.archive.org/web/20260418221915id_/",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 929,
+   "feature": "place and institution description",
+   "claim": "Elven Tower gives Vallaki's armed strength as a named captain plus a numeral count of guards.",
+   "source": "Elven Tower (Derek Ruiz), Chapter 5 – The Town of Vallaki",
+   "url": "https://www.elventower.com/chapter-5-the-town-of-vallaki/",
+   "quote": "consists of Izek and 24 guards",
+   "page": "section The Bomb in Vallaki",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "n.d.; Wayback capture 2026-04-18",
+   "routeHint": "live URL returns 403; Wayback raw capture web.archive.org/web/20260418221915id_/",
+   "registerHint": "dm-page",
+   "confidence": "medium"
+  },
+  {
+   "index": 930,
+   "feature": "boxed text form",
+   "claim": "A forum reader reports that reading boxed text aloud signals to players that the location or NPC matters to the plot.",
+   "source": "EN World forum thread 'Boxed texts', reader comment",
+   "url": "https://www.enworld.org/threads/boxed-texts.673236/",
+   "quote": "Reading out a chunk of boxed text is basically equivalent",
+   "page": "thread Boxed texts",
+   "kind": "reader",
+   "polarity": "disputes (treats the signalling as a drawback)",
+   "date": "2021",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "none",
+   "confidence": "medium"
+  },
+  {
+   "index": 931,
+   "feature": "place and institution description",
+   "claim": "Justin Alexander estimates the gazetteer portion of Waterdeep: Dragon Heist at about 32 pages.",
+   "source": "Justin Alexander, The Alexandrian, Review – Waterdeep: Dragon Heist, 2018",
+   "url": "https://thealexandrian.net/wordpress/41114/roleplaying-games/review-waterdeep-dragon-heist",
+   "quote": "about 32 pages of gazetteer information",
+   "page": "closing assessment",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2018",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "none",
+   "confidence": "medium"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 917,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The homes of notable NPCs get pages of room descriptions",
+   "note": "Raw page (live, browser UA). Verbatim in section 'Matching description to a location's purpose', of Curse of Strahd. Post footer dates it November 21, 2016, not the claim's 2018-2020."
+  },
+  {
+   "index": 918,
+   "verdict": "PARTIAL",
+   "trueWording": "page-long description of his workroom in the 5-page description",
+   "note": "Quote verbatim; the measurement (page-long workroom inside a 5-page mansion) is exact. The page names only 'the players' ally Victor Wachter'; 'Vallaki' appears nowhere on it (0 hits). Post dated November 21, 2016.",
+   "unsupportedLimb": "the page never places Victor Wachter, or his father's mansion, in Vallaki"
+  },
+  {
+   "index": 919,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Read the flavor text out loud",
+   "note": "Raw page. Verbatim under 'Chapter 3: The Village of Barovia', bullet 'When the Heroes Arrive : (page 41)'. Post dated Friday, March 25, 2016."
+  },
+  {
+   "index": 920,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Spread over more than 150 pages, we get a full description",
+   "note": "Raw page. Verbatim in section 'Setting'; the sentence continues to each of Ten-Towns plus 13 wilderness adventure locations, matching both limbs."
+  },
+  {
+   "index": 921,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "nearly every location has a meaningful quest or event attached",
+   "note": "Raw page, section 'Setting'. HTML splits the word across a styled span ('n' + '<span>early'), so the text reads 'nearly'; the claim's 'nearly every' is correct."
+  },
+  {
+   "index": 922,
+   "verdict": "PARTIAL",
+   "trueWording": "very hard to use directly at the table",
+   "note": "Quote 'long, meandering, and poorly-structured paragraphs of text' is verbatim in section 'Accessibility'. The page grades the difficulty, not impossibility.",
+   "unsupportedLimb": "'cannot be used at the table' overstates the page's 'very hard to use directly at the table'"
+  },
+  {
+   "index": 923,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each town only gets 2 or 3 described locations",
+   "note": "Raw page. Verbatim in section 'Ten-Towns Businesses & NPCs', explicitly of Rime's ten towns. Post dated November 2020."
+  },
+  {
+   "index": 924,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each town write-up comes with at least one new NPC per location",
+   "note": "Raw page, section 'NPCs', whose paragraph subject is Legacy of the Crystal Shard's campaign guide ('In this supplement we meet...'). The year 2013 is the claim's own editorial gloss; the page names the product but no year."
+  },
+  {
+   "index": 925,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the Armory and Council Hall in Bryn Shander get 2-3 sentences each",
+   "note": "Raw page, section 'Ten-Towns Businesses & NPCs'. Context puts both among the extra locations Legacy adds ('presents all of these plus 17 more'), and calls those write-ups 'not extensive', supporting 'minor'."
+  },
+  {
+   "index": 926,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The DMG divides settlements just by population",
+   "note": "Raw page, section 'Village'; the preceding sentence names 'The 5e DMG', and the quoted sentence continues 'and lumps together everything under 1,000 inhabitants as a village'."
+  },
+  {
+   "index": 927,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as described in the Commerce section (p19)",
+   "note": "Raw page, section 'Village'. The article walks the DMG's settlement-generation section by heading (Purpose p15, Size with Village/Town/City sub-headings, Commerce p19), supporting both limbs."
+  },
+  {
+   "index": 928,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Baron Vargas Vallakovich, the Burgomaster of Vallaki, a ruthless cruel man",
+   "note": "Live URL 403; recovered via Wayback raw capture 20260418221915id_. Verbatim under heading 'The powers at play'. Title, given name, surname, then office - all four limbs on the page."
+  },
+  {
+   "index": 929,
+   "verdict": "PARTIAL",
+   "trueWording": "the \"guard\" consists of Izek and 24 guards",
+   "note": "Wayback raw capture. Quote verbatim under heading 'The Bomb in Vallaki'. 'captain' and 'commander' return 0 hits on the page; Izek is named only as distinct from the 24 guards, and elsewhere as Ireena's brother.",
+   "unsupportedLimb": "'captain' - the page gives Izek no rank, title or command role"
+  },
+  {
+   "index": 930,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Reading out a chunk of boxed text is basically equivalent to waving",
+   "note": "Raw page, thread 'Boxed texts'. The sentence continues to a flag reading that the location or NPC is a clue to the plot, supporting the claim. Post is by 'humble minion', dated Jul 12, 2020, not the claim's 2021."
+  },
+  {
+   "index": 931,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "about 32 pages of gazetteer information",
+   "note": "Raw page, closing assessment, dated November 7th, 2018. Framed counterfactually ('could have easily been a 64 page module plus...'), but the next sentence treats it as the book's own usable 96 pages, so the gazetteer estimate does attach to Dragon Heist."
+  }
+ ]
+}

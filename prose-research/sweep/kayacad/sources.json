@@ -1,0 +1,162 @@
+[
+ {
+  "title": "Gary K. Wolfe, \"Guy Gavriel Kay: An Introduction\", Journal of the Fantastic in the Arts 20.2 (Spring 2009): 238-39",
+  "url": "https://web.archive.org/web/20150917090646id_/https://www.questia.com/library/journal/1G1-223225904/guy-gavriel-kay-an-introduction",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2009 (capture 2015-09-17)",
+  "route": "Wayback raw id_ capture of the defunct Questia article page; the www. prefix is required - the bare host returns no snapshot. Opening-paragraph excerpt only."
+ },
+ {
+  "title": "Guy Gavriel Kay, \"The Fiction of Privacy: Fantasy and the Past\", Journal of the Fantastic in the Arts 20.2 (Spring 2009): 240-47 (ICFA guest-of-honour address)",
+  "url": "https://web.archive.org/web/20181019170915id_/https://www.questia.com/library/journal/1G1-223225905/the-fiction-of-privacy-fantasy-and-the-past",
+  "kind": "own-words",
+  "substantive": true,
+  "date": "2009 (capture 2018-10-19)",
+  "route": "Wayback raw id_ capture of the Questia article page; excerpt only (ends mid-quotation of Scott McNealy)."
+ },
+ {
+  "title": "Guy Gavriel Kay, \"Reflections on an Ethical Society\" (address, 4 November 2000, Convocation Hall, University of Toronto) - the source text the JFA 20.2 essay revises",
+  "url": "https://brightweavings.com/privacy/",
+  "kind": "own-words",
+  "substantive": true,
+  "date": "delivered 2000-11-04; posted 2014-11-15",
+  "route": "live HTML on Kay's authorized site (http://brightweavings.com/ggkswords/privacy/ redirects here); full text, and its end-note names the JFA 20.2 article as the updated version."
+ },
+ {
+  "title": "Sylwia Borowska-Szerszun, \"When Gods are Absent from Fantasy: Religion and Spiritual Experience in Guy Gavriel Kay's The Lions of Al-Rassan and The Sarantine Mosaic\", in M. Blaszkiewicz and L. Neubauer (eds), The Light of Life: Essays in Honour of Professor Barbara Kowalik (Krakow: Libron, 2017), 217-32",
+  "url": "https://repozytorium.uwb.edu.pl/jspui/bitstream/11320/8028/1/When_Gods_are_Absent_from_Fantasy.pdf",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2017",
+  "route": "the 4.7 MB PDF is an image-only Konica-Minolta scan yielding zero extractable text; cracked by extracting the 18 embedded page JPEGs with pypdf and OCRing each with tesseract 5.5.3 (eng, --psm 1), 36,724 characters recovered."
+ },
+ {
+  "title": "Sylwia Borowska-Szerszun, \"Remembering the Romance: Medievalist Romance in Fantasy Fiction by Guy Gavriel Kay and Charles de Lint\", ch. 10 of M. J. Toswell (ed.), Medievalism in English Canadian Literature: From Richardson to Atwood (Cambridge: Boydell & Brewer, 2020), 155-71",
+  "url": "https://www.cambridge.org/core/product/identifier/9781787448858%23c10/type/book_part",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2020-04",
+  "route": "the /core/books/abs/ slug 404s; the Crossref record's resource.primary URL (/core/product/identifier/9781787448858%23c10/type/book_part) renders. Cambridge Core prints the chapter's opening pages as the 'abstract' - EXTRACT ONLY, not the whole chapter."
+ },
+ {
+  "title": "Medievalists.net (Sandra Alvarez), \"Book Talk: A Conversation with Guy Gavriel Kay\" (interview on Children of Earth and Sky)",
+  "url": "https://www.medievalists.net/2016/08/book-talk-a-conversation-with-guy-gavriel-kay/",
+  "kind": "own-words",
+  "substantive": true,
+  "date": "2016-08-04",
+  "route": "live HTML, full text."
+ },
+ {
+  "title": "Nathalie Labrousse-Marchau, \"A Song for Arbonne: De-romanticised fantasy\" (trans. Francois Vincent)",
+  "url": "http://brightweavings.com/nath_arbonne/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "posted 2014-11-15; English translation of a French web article",
+  "route": "live HTML on Kay's authorized site, full text."
+ },
+ {
+  "title": "Dena Taylor, \"The Double-Edged Gift: Power and Moral Choice in The Fionavar Tapestry\" (University of Toronto)",
+  "url": "http://brightweavings.com/denafionavar/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "posted 2014-11-15",
+  "route": "live HTML, full text (33,869 characters) - read in full this round, keyword-scanned only before."
+ },
+ {
+  "title": "John J. Doherty, \"The High Fantasies of Lawhead and Kay\" (third section of \"Arthurian Fantasy, 1980-1989: An analytical and bibliographical survey\")",
+  "url": "http://brightweavings.com/doherty/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "posted 2014-11-15; survey covers 1980-1989",
+  "route": "live HTML, full text (29,686 characters) - read in full this round."
+ },
+ {
+  "title": "Susannah Clements, \"From Middle Earth to Fionavar: Free Will and Sacrifice in High Fantasy by J.R.R. Tolkien and Guy Gavriel Kay\" (Conference on Christianity and Literature, 2002)",
+  "url": "http://brightweavings.com/clementsfionavarlotr/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2002",
+  "route": "live HTML, full text (31,505 characters) - read in full this round."
+ },
+ {
+  "title": "Medievalists.net, \"Merging history and the fantastic with Guy Gavriel Kay\" (The Medieval Podcast episode page, host Daniele Cybulskie)",
+  "url": "https://www.medievalists.net/2019/07/history-fantastic-guy-gavriel-kay/",
+  "kind": "reception",
+  "substantive": false,
+  "date": "2019-07-23",
+  "route": "live HTML; the page is an episode blurb - the interview itself is audio, not transcribed, so the page carries one characterising phrase and nothing else."
+ },
+ {
+  "title": "Medievalists.net, \"Interview with Guy Gavriel Kay\" (Under Heaven)",
+  "url": "https://www.medievalists.net/2010/03/interview-with-guy-gavriel-kay/",
+  "kind": "reception",
+  "substantive": false,
+  "date": "2010-03-29",
+  "route": "live HTML; the interview body is a dead embedded document - the page carries only a one-sentence blurb."
+ },
+ {
+  "title": "Project MUSE, Worlds of Wonder: Readings in Canadian Science Fiction and Fantasy Literature, ed. Jean-Francois Leroux and Camille La Bossiere (University of Ottawa Press, 2004) - book record and full table of contents",
+  "url": "https://muse.jhu.edu/book/6623",
+  "kind": "relay",
+  "substantive": false,
+  "date": "2004",
+  "route": "live HTML; establishes the Siourbas chapter's full title and pagination (pp. 73-80). No chapter-level links are exposed without a licence, so the chapter text itself was not reached."
+ },
+ {
+  "title": "OpenAlex source record and works listing for Journal of the Fantastic in the Arts (ISSN 0897-0521), used to enumerate the contents of volume 20 issue 2 (2009)",
+  "url": "https://api.openalex.org/works?filter=primary_location.source.issn:0897-0521,publication_year:2009&per-page=100",
+  "kind": "relay",
+  "substantive": false,
+  "date": "queried 2026-09-06",
+  "route": "OpenAlex API. Crossref has no record of this journal (api.crossref.org/journals/0897-0521 returns 404), so OpenAlex is the only index that enumerates the issue. No DOIs exist for any article in it."
+ },
+ {
+  "title": "Crossref record for M. J. Toswell, Medievalism in English Canadian Identity and Literature (Arc Humanities Press / Amsterdam University Press, 2025), and for its ch. 3 \"Guy Gavriel Kay: Historical Fantasy\", pp. 89-124",
+  "url": "https://api.crossref.org/works/10.1515/9781802703696-006",
+  "kind": "relay",
+  "substantive": false,
+  "date": "2025-09-10 (book); chapter dated 2025",
+  "route": "Crossref API. Metadata only - no abstract in Crossref, none in OpenAlex, the De Gruyter Brill document endpoint returns HTTP 202 with an empty body, JSTOR (10.2307/jj.32561711.8, book jj.32561711) serves a 3,038-byte bot-challenge shell, and the book is in neither OAPEN nor DOAB."
+ },
+ {
+  "title": "Sylwia Borowska-Szerszun, \"King Arthur and Imagined Indians: The Entanglement of Medievalist and Indigenous Elements in Guy Gavriel Kay's Fionavar Tapestry\", in Studies in Medievalism XXXIV: Tribal Medievalisms (Boydell & Brewer, 2025), 174-91",
+  "url": "https://www.cambridge.org/core/product/identifier/9781805435631%23c9/type/book_part",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2025",
+  "route": "Cambridge Core /core/product/identifier/ endpoint (the same route that unblocked the 2020 chapter); opening pages printed as the abstract - EXTRACT ONLY."
+ },
+ {
+  "title": "Ewa Drab, \"Medievalisms and Romance Traditions in Guy Gavriel Kay's Ysabel\", ch. 11 of M. J. Toswell (ed.), Medievalism in English Canadian Literature (Boydell & Brewer, 2020), 172-88",
+  "url": "https://www.cambridge.org/core/product/identifier/9781787448858%23c11/type/book_part",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2020",
+  "route": "Cambridge Core /core/product/identifier/ endpoint; opening pages printed as the abstract - EXTRACT ONLY. Found by walking the same volume as the Borowska-Szerszun chapter the angle named."
+ },
+ {
+  "title": "Weronika Laszkiewicz, \"Abandoning the Quest? High/Epic Fantasy and the Challenges of the Anthropocene\", Atlantis: Journal of the Spanish Association for Anglo-American Studies 46.1 (2024): 131-49",
+  "url": "https://www.atlantisjournal.org/index.php/atlantis/article/download/1069/606",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2024",
+  "route": "diamond open-access PDF located through the OpenAlex best_oa_location for DOI 10.28914/atlantis-2024-46.1.08; binary fetched and text extracted with pdftotext -layout (60,205 characters). Full text."
+ },
+ {
+  "title": "Sylwia Borowska-Szerszun, \"The limits of the happy ending: Eucatastrophe and cultural memory in Guy Gavriel Kay's Tigana\", Orbis Litterarum (2026)",
+  "url": "https://api.openalex.org/works/doi:10.1111/oli.70057",
+  "kind": "analysis",
+  "substantive": false,
+  "date": "2026-06-04",
+  "route": "the Wiley article page returns HTTP 403 behind a Cloudflare interstitial; only the publisher abstract, read from the OpenAlex record's inverted index, was reached. ABSTRACT ONLY."
+ },
+ {
+  "title": "OpenAlex and Crossref author queries for M. J. Toswell, run to find the earlier articles on The Last Light of the Sun that the angle names",
+  "url": "https://api.crossref.org/works?query.author=Toswell&query.bibliographic=Kay+OR+Anglo-Saxon+fantasy&rows=20",
+  "kind": "relay",
+  "substantive": false,
+  "date": "queried 2026-09-06",
+  "route": "API queries. NEGATIVE FINDING: neither index holds any Toswell article on The Last Light of the Sun, or on Kay at all, apart from the 2025 book chapter and her editorship of the 2020 Boydell volume."
+ }
+]

@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 1,
+ "indices": [
+  542,
+  548,
+  551,
+  552,
+  566,
+  577,
+  579,
+  580,
+  584,
+  587,
+  605,
+  613,
+  614,
+  615,
+  616
+ ],
+ "claims": [
+  {
+   "index": 542,
+   "feature": "point of view and distance",
+   "claim": "Adam Roberts attributes the compelling quality of Le Guin's rendering of Earthsea to a seriousness and an absolute belief in the way she renders the world.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "There is a seriousness, an absolute belief",
+   "page": "paragraph beginning 'There is a seriousness'"
+  },
+  {
+   "index": 548,
+   "feature": "naming and forms of address",
+   "claim": "Adam Roberts reads the hero's three names, Duny, Ged and Sparrowhawk, as covering three of the four elements, earth, water and air.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "three names covering three of the four elements",
+   "page": "paragraph on Dun, Ged and sparrowhawk"
+  },
+  {
+   "index": 551,
+   "feature": "plainness and economy",
+   "claim": "Sean Guynes says Le Guin's language is at its finest and most artful in The Tombs of Atuan.",
+   "source": "Sean Guynes, \"The Tombs of Atuan: Power, Ideology, and Becoming Uneaten\", Reactor, 29 April 2020",
+   "url": "https://reactormag.com/the-tombs-of-atuan-power-ideology-and-becoming-uneaten/",
+   "quote": "language is at its finest, its most artful",
+   "page": "section beginning 'Le Guin wrote Tombs as a sequel'"
+  },
+  {
+   "index": 552,
+   "feature": "concrete sensory noun",
+   "claim": "Sean Guynes locates Le Guin's finest sentences in The Tombs of Atuan in the plainclothes description of thistle and juniper and frozen reeds by a desert river in midwinter.",
+   "source": "Sean Guynes, Reactor, 29 April 2020",
+   "url": "https://reactormag.com/the-tombs-of-atuan-power-ideology-and-becoming-uneaten/",
+   "quote": "her sentences luxuriate in the plainclothes description of thistle and juniper",
+   "page": "section beginning 'Le Guin wrote Tombs as a sequel'"
+  },
+  {
+   "index": 566,
+   "feature": "naming and forms of address",
+   "claim": "Le Guin says the sound of characters' and places' names, and the echo-allusions hidden in them, can be intensely expressive.",
+   "source": "Ursula K. Le Guin, Steering the Craft (2015 revised edition), chapter 1, at Literary Hub",
+   "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+   "quote": "the echo-allusions hidden in them, can be intensely expressive",
+   "page": "chapter 1, notes after the exercise"
+  },
+  {
+   "index": 577,
+   "feature": "omission as information",
+   "claim": "Stephanie Burt says Le Guin leaves blank spaces for readers to fill in, inviting the reader in and holding them back so that they become co-creators as if listening to an oral tale.",
+   "source": "Stephanie Burt, Strange Horizons, 6 November 2023",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+   "quote": "Leaving blank spaces for readers to see how well",
+   "page": "paragraph beginning 'Leaving blank spaces'"
+  },
+  {
+   "index": 579,
+   "feature": "omission as information",
+   "claim": "Stephanie Burt locates Le Guin's technique of letting the reader fill in the details of a strongly outlined world at the level of the sentence in the first Earthsea trilogy.",
+   "source": "Stephanie Burt, Strange Horizons, 6 November 2023",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+   "quote": "letting us fill in the details of her strongly outlined world",
+   "page": "paragraph beginning 'Le Guin, Plotz says'"
+  },
+  {
+   "index": 580,
+   "feature": "place and institution description",
+   "claim": "Stephanie Burt endorses Plotz's distinction between the prose of Earthsea and the no-detail-left-unturned, purposefully slow-moving prose of The Lord of the Rings.",
+   "source": "Stephanie Burt, Strange Horizons, 6 November 2023",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+   "quote": "the no-detail-left-unturned, purposefully-slow-moving Lord of the Rings",
+   "page": "paragraph beginning 'Plotz may try too hard'"
+  },
+  {
+   "index": 584,
+   "feature": "register modulation",
+   "claim": "Erin Ramsay says the reassuring sense of fable that pervades A Wizard of Earthsea is lost in The Farthest Shore.",
+   "source": "Erin Ramsay, The Lighthouse (Substack), 16 April 2024",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "the reassuring sense of fable which pervades",
+   "page": "section The Farthest Shore (1972)"
+  },
+  {
+   "index": 587,
+   "feature": "repetition and refrain",
+   "claim": "Alessandro Amenta identifies repetitions, paired synonyms and redundancies as typical traits of Le Guin's writing, which the Polish translator tends to remove by periphrasis and by substituting one word for two.",
+   "source": "Alessandro Amenta, Kwartalnik Neofilologiczny LXX 2/2023, p. 282",
+   "url": "http://journals.pan.pl/Content/128312/PDF/2023-02-KNEO-06.pdf",
+   "quote": "which are typical traits of Le Guin's writing",
+   "page": "section on omission and simplification"
+  },
+  {
+   "index": 605,
+   "feature": "concrete sensory noun",
+   "claim": "The reviewer on A Novel Review says he could picture almost every scene completely and calls the book incredibly picturesque, which he attributes to Le Guin's writing style.",
+   "source": "A Novel Review - Book Podcast (video), 11 August 2025",
+   "url": "https://www.youtube.com/watch?v=P48Xg6ZNi88",
+   "quote": "this was incredibly picturesque",
+   "page": "closing summary of A Wizard of Earthsea"
+  },
+  {
+   "index": 613,
+   "feature": "adjective and adverb discipline",
+   "claim": "Mary Anne Mohanraj notes that Le Guin's self-revisions descend to a single word, instancing her bracketed instruction to strike the word probably and replace it with certainly.",
+   "source": "Mary Anne Mohanraj, Reactor, 1 November 2018, quoting Le Guin's 'Is Gender Necessary? Redux'",
+   "url": "https://reactormag.com/write-critique-revise-repeat-on-le-guin-and-asking-the-hard-questions-of-ourselves/",
+   "quote": "Strike the word 'probably' and replace it with 'certainly.'",
+   "page": "paragraph beginning 'Throughout this essay'"
+  },
+  {
+   "index": 614,
+   "feature": "place and institution description",
+   "claim": "David Bratman describes Le Guin's essay 'Living in a Work of Art' as a description of the Berkeley house she grew up in, which she presents as beautiful but eminently livable.",
+   "source": "David Bratman, Kalimac's corner, 6 September 2020",
+   "url": "http://kalimac.blogspot.com/2020/09/a-work-of-art-for-living-in.html",
+   "quote": "beautiful but eminently livable",
+   "page": "first paragraph"
+  },
+  {
+   "index": 615,
+   "feature": "plainness and economy",
+   "claim": "A reader commenting on Sean Guynes's Tehanu essay ranks the crystalline prose and storytelling of A Wizard of Earthsea above Tehanu.",
+   "source": "Reader comment by 'S' on Sean Guynes, 'Tehanu: Le Guin's Return to Earthsea', Reactor, 24 February 2021",
+   "url": "https://reactormag.com/tehanu-le-guins-return-to-earthsea-and-her-best-novel/",
+   "quote": "the crystalline prose and storytelling of",
+   "page": "comment thread"
+  },
+  {
+   "index": 616,
+   "feature": "plainness and economy",
+   "claim": "A reader commenting on Jo Walton's The Other Wind essay says the book is worth reading because one should never turn down a chance at Le Guin's prose.",
+   "source": "Reader comment on Jo Walton, 'Revising death and dragons: Ursula K. Le Guin's The Other Wind', Reactor, 8 November 2011",
+   "url": "https://reactormag.com/revising-death-and-dragons-ursula-k-le-guins-lemgthe-other-windlemg/",
+   "quote": "one should never turn down a chance at Le Guin's prose",
+   "page": "comment thread"
+  }
+ ]
+}

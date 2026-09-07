@@ -1,0 +1,42 @@
+[
+ {
+  "id": "ill-1",
+  "block": "DS-DEF-1",
+  "pool": "readiness WEAK",
+  "angle": "unfolding",
+  "before": "{settlement} is getting by on not being tested. The margin has been narrowing rather than widening, and nothing in hand is closing it.",
+  "after": "{settlement} is getting by on not being tested. The margin narrows, and nothing in hand closes the margin."
+ },
+ {
+  "id": "ill-2",
+  "block": "DS-DEF-1",
+  "pool": "terrain EXPOSED",
+  "angle": "visitor",
+  "before": "{settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.",
+  "after": "{settlement} sits open. No ground here helps the town, and what defense it has, it has built."
+ },
+ {
+  "id": "ill-3",
+  "block": "DS-DEF-1",
+  "pool": "readiness ADEQUATE",
+  "angle": "street",
+  "before": "The town believes it could hold against the usual trouble and does not claim more than that, which is a fair reading of what it has.",
+  "after": "The town believes it could hold against the usual trouble. It claims no more than that, and what it has bears the belief out."
+ },
+ {
+  "id": "ill-4",
+  "block": "DS-DEF-2",
+  "pool": "Invasion & War: walls AND professional garrison",
+  "angle": "ledger",
+  "before": "{settlement} has a line and professionals to hold it, which is real deterrence against raiding and against a conventional assault; it is not a posture rated for a long siege without stores behind it.",
+  "after": "{settlement} has a wall line and professionals to hold it, and that is real deterrence against a raid and a conventional assault. A long siege without stores behind the wall is another matter."
+ },
+ {
+  "id": "ill-5",
+  "block": "DS-DEF-1",
+  "pool": "terrain EXPOSED",
+  "angle": "street",
+  "before": "The town has no hill and no narrows and does not pretend otherwise; what {settlement} holds it holds by standing on it.",
+  "after": "The town has no hill and no narrows and says so. What {settlement} holds, it holds by standing on the ground."
+ }
+]

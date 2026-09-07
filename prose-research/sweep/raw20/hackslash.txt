@@ -1,0 +1,312 @@
+ 
+ Hack & Slash: On Set Design 
+ Home of the Quantum Ogre, Agency, Theory, and Fun 
+ Pages
+ Support Hack & Slash on Patreon 
+ Directory 
+ HotDQ 
+ Artifices & Deceptions 
+ Bibliography 
+ Biography 
+On Set Design
+There have been some posts lately on how to label adventures.
+I think that the old methods and indeed these new methods are unsatisfactory! I run a game based on agency and that has certain specific description requirements. Here is an example of some encounters in my adventures and how I think they should be labeled. 
+My entry for the famous Tick room in the Moathouse. The bar is the line separator on the page.
+ Kitchen 17) | Tables -> Stained, Wooden Cask -> Giant Tick ! 
+ ( AC 16, HD 3, HP 19, Bite +5/1-4/1-6 auto, ML (20) XP 141 ) 
+Here is an entry with treasure and a monster
+ Small Alcove 32) | Refuse , Furniture , Bones ->in corner, 8 Ghouls ! 
+ ( AC 6, HD 2, +3/1d4-1/1d4-1/1d6, Para 1d6+2, ML (20) XP 175 ) 
+ Ornate Iron Armchair -> Dwarven, decorative cobalt inlay (900gp) 65lbs. + Bulky. 
+ B lanket (60gp) Chiffon, covering-> ottoman , Hollow slate upholstered in woven twill. (200 gp) 35lbs. + Bulky. 
+ -> Gem , Kunzite /mi (202 gp) 
+ -> Human sized Iron mail (Chain +1, weightless) 
+ -> Fleece Pouch (Pouch of Accessibility) 
+ -> 3 Scrolls (Scroll-Protection from lycanthropes, Scroll-Cursed, 
+ Scroll-Cleric, 
+spell levels 1,2,4,5,6,6) 
+ S ack, Moleskin (10gp) Horsehair cord-> platinum aiguillette -> 3 vs/vf Rubies (400 gp) 
+ -> 400 gp, 200 hs, and 80 pp 
+Let's break down how this works.
+ Before the bar on the page is the room type. This let's me know instantly what kind of room this is. When stocking this room, I use Empty Rooms which lists common contents for every room type. Ever. In the history of the world. All rooms.
+ After the bar are the immediately visible items! When describing things, I only use the bolded words! The players receive no extra information unless they ask for it!
+ The arrows indicate that it is either "Information available upon further examination" or "An item contained in or on the container". For items containing or supporting multiple items (tables, chests) indents are used to group the items. 
+ The order the thing is listed, is the actual order it is stacked. I.e. Inside the ottoman, the gem is on top of the mail, which is covering the pouch and scrolls.
+ Gems are noted as to number, with size/quality following. Blanks indicate average size/quality. The GP value is for each individual gem. 
+ Coins listed without modifiers are just that, loose coins.
+ Any word that is not important, is not used. It is clear, for example, that the horsehair cord with the platinum aiguillette is what is securing the moleskin sack, by virtue of it being listed on the same line.
+Example:
+On the fly, I look down and say, "Roll for surprise (party rolls a 4, ghouls roll a 3) You see a small alcove filled with bones, furniture and refuse, as half a dozen dessicated humanoids turn towards you and groan. They move forward intent on consuming your immortal souls, except for you Frank. Declare actions." After the combat I will go "What do you do?"
+If they go, "We look around." I'll say, "You see a small alcove with refuse, furniture, and bones in the corner"
+If they say, "We look at the furniture." I'll say, "You see an ornate iron armchair, a blanket covering something like a box, and a sack sitting next to the chair."
+"What's under the blanket."
+"You can't tell from here."
+Explanation: 
+The key things here are speed , flexibility , and creativity . I do it this way, because I am in constant engagement with the players.
+I look down at the tick room, and I see enough information to tell me everything I need to run the encounter successfully in seven words. The next time I will have to disengage from the players is to read the Ticks stats!
+It also allows me to construct encounters dependent on player skill, in such a way that I won't give away anything by having to check the sheet. I've given them the inter-actable objects, with the red herrings, so they can't read where the danger is.
+This structure changes depending on the complexity of the room easily, while still keeping the information clear, and not taking up a ton of space on my sheets. 
+From the player side, they don't know what the results of interacting with anything will be, so even though it seems simple from the DM's side, it remains a complicated sequence of choices for the players.
+Mostly it's safe to examine refuse or travel through it, except when it isn't. If they didn't examine the refuse; and it contained rot grubs; and they moved to inspect the furniture. . .
+My school is all old up in here.
+Epilogue:
+In the classic DMG example:
+ DM:'First, the others checking the containers find 
+that they held nothing but water, or ore totally empty, and that the 
+wood is rotten to boot. You see a few white, eyeless fish and various 
+stone formations in a pool of water about 4' to 6' deep and about 10' 
+long. That's all. Do you wish to leave the place now?" 
+ I would key the room as so:
+ Water Room 2) | Barrels -> Location A -> Water, Rotting, Buckets , Small Rivulet/Pool 
+ Stream (Rivulet) -> Cold, Fast, North to South, 7'-5' wide, 3'-5' deep 
+ Pool of Water -> Mineral Formation -> Skeleton -> Hand -> Key 
+ | -> Disturb -> Cylinder dislodged, 
+ floats South in steam, AC 16 
+ Cylinder -> Watertight Ivory Tube -> Vellum Map of level (See Handout) 
+ Hack & Slash 
+ Follow , Twitch , Newsletter , Supp ort , Donate to end Cancer ( 5 Star Rating ) 
+Posted by
+ -C 
+at
+ 6/04/2012 05:30:00 AM 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ series (adventure design) ,
+ series (set design) ,
+ theory 
+ Newer Post 
+ Older Post 
+ Home 
+ Subscribe To
+Posts
+ Atom
+Posts
+Comments
+ Atom
+Comments
+ Blog Archive
+ ► 
+2026
+ (1) 
+ ► 
+January
+ (1) 
+ ► 
+2025
+ (64) 
+ ► 
+October
+ (6) 
+ ► 
+September
+ (4) 
+ ► 
+August
+ (26) 
+ ► 
+July
+ (13) 
+ ► 
+June
+ (8) 
+ ► 
+May
+ (4) 
+ ► 
+March
+ (1) 
+ ► 
+January
+ (2) 
+ ► 
+2024
+ (18) 
+ ► 
+December
+ (2) 
+ ► 
+September
+ (1) 
+ ► 
+July
+ (8) 
+ ► 
+June
+ (1) 
+ ► 
+April
+ (2) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (3) 
+ ► 
+2023
+ (13) 
+ ► 
+July
+ (1) 
+ ► 
+June
+ (1) 
+ ► 
+April
+ (5) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (3) 
+ ► 
+January
+ (2) 
+ ► 
+2022
+ (10) 
+ ► 
+May
+ (1) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (8) 
+ ► 
+2021
+ (77) 
+ ► 
+December
+ (1) 
+ ► 
+November
+ (5) 
+ ► 
+October
+ (7) 
+ ► 
+September
+ (2) 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (11) 
+ ► 
+June
+ (18) 
+ ► 
+May
+ (17) 
+ ► 
+March
+ (1) 
+ ► 
+January
+ (12) 
+ ► 
+2020
+ (28) 
+ ► 
+December
+ (8) 
+ ► 
+November
+ (1) 
+ ► 
+October
+ (5) 
+ ► 
+September
+ (3) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (5) 
+ ► 
+June
+ (4) 
+ ► 
+2019
+ (1) 
+ ► 
+November
+ (1) 
+ ► 
+2017
+ (1) 
+ ► 
+February
+ (1) 
+ ► 
+2016
+ (3) 
+ ► 
+August
+ (3) 
+ ► 
+2015
+ (3) 
+ ► 
+August
+ (1) 
+ ► 
+May
+ (2) 
+ ► 
+2014
+ (16) 
+ ► 
+December
+ (4) 
+ ► 
+November
+ (1) 
+ ► 
+October
+ (4) 
+ ► 
+September
+ (5) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (1) 
+ ► 
+2013
+ (1) 
+ ► 
+December
+ (1) 
+ ▼ 
+2012
+ (4) 
+ ▼ 
+June
+ (4) 
+ On Reader Mail: Set Design 
+ On Expanded Set Design 
+ On a Map of the Known 
+ On Set Design 
+ ► 
+2011
+ (6) 
+ ► 
+September
+ (4) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (1) 
+Powered by Blogger .
+ 

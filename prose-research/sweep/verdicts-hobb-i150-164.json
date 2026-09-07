@@ -1,0 +1,233 @@
+{
+ "name": "hobb",
+ "chunk": 10,
+ "claims": [
+  {
+   "index": 150,
+   "feature": "plainness and economy",
+   "claim": "Hobb says that in a short story she cuts everything that does not describe the setting, advance the plot or give a character insight.",
+   "source": "Robin Hobb, interviewed by Other Fantasy (OF Blog, Larry Nolen), 2003",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "cut out everything that does not describe the setting",
+   "page": "On writing, Q2"
+  },
+  {
+   "index": 151,
+   "feature": "register modulation",
+   "claim": "Hobb states that her prose written as Megan Lindholm is much leaner than her prose written as Robin Hobb.",
+   "source": "Robin Hobb, interviewed by Other Fantasy (OF Blog, Larry Nolen), 2003",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "Prose as Megan Lindholm is much leaner than prose as Robin Hobb",
+   "page": "On writing, Q2"
+  },
+  {
+   "index": 152,
+   "feature": "other: authorial self-description of sprawl",
+   "claim": "Hobb says that in a novel she sprawls, and knows she does.",
+   "source": "Robin Hobb, interviewed by Other Fantasy (OF Blog, Larry Nolen), 2003",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "In a novel, I sprawl, and I know it",
+   "page": "On writing, Q2"
+  },
+  {
+   "index": 153,
+   "feature": "place and institution description",
+   "claim": "Hobb tells aspiring writers to make the economy and geography of an invented place make sense.",
+   "source": "Robin Hobb, interviewed by Other Fantasy (OF Blog, Larry Nolen), 2003",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "Make your economy and geography make sense",
+   "page": "On writing, Q12"
+  },
+  {
+   "index": 154,
+   "feature": "place and institution description",
+   "claim": "Hobb gives as an error of scale the idea that a tiny village would support an artisan who specialises in doorknockers.",
+   "source": "Robin Hobb, interviewed by Other Fantasy (OF Blog, Larry Nolen), 2003",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "A tiny village isn't going to have an artisan",
+   "page": "On writing, Q12"
+  },
+  {
+   "index": 155,
+   "feature": "consequence on a household",
+   "claim": "Hobb gives as an error of labour scale the idea that a medieval farm family harvested its entire farm in one afternoon.",
+   "source": "Robin Hobb, interviewed by Other Fantasy (OF Blog, Larry Nolen), 2003",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "A medieval farm family didn't harvest its entire farm in one afternoon",
+   "page": "On writing, Q12"
+  },
+  {
+   "index": 156,
+   "feature": "point of view and distance",
+   "claim": "Hobb says every character, however small the part, is the main character while on stage.",
+   "source": "Robin Hobb, interviewed by Other Fantasy (OF Blog, Larry Nolen), 2003",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "Every character is the main character",
+   "page": "On writing, Q10"
+  },
+  {
+   "index": 157,
+   "feature": "concrete sensory noun",
+   "claim": "Hobb says that inside a villain's skin the villain is wondering what is for dinner tonight.",
+   "source": "Robin Hobb, interviewed by Other Fantasy (OF Blog, Larry Nolen), 2003",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "even the villain is wondering what is for dinner tonight",
+   "page": "On writing, Q10"
+  },
+  {
+   "index": 158,
+   "feature": "point of view and distance",
+   "claim": "Hobb names immediacy and reader identification as the benefits she found in writing Farseer in first person.",
+   "source": "Robin Hobb, interviewed by Other Fantasy (OF Blog, Larry Nolen), 2003",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "Immediacy and reader identification",
+   "page": "Specific questions, Q14"
+  },
+  {
+   "index": 159,
+   "feature": "withheld information and inference",
+   "claim": "Hobb says first person confined her to telling the reader only what Fitz knew at that moment.",
+   "source": "Robin Hobb, interviewed by Other Fantasy (OF Blog, Larry Nolen), 2003",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "I could only tell the reader what Fitz knew at that moment",
+   "page": "Specific questions, Q14"
+  },
+  {
+   "index": 160,
+   "feature": "point of view and distance",
+   "claim": "Hobb calls the first person voice the natural voice for the story teller.",
+   "source": "Robin Hobb, interviewed by Aidan Moher, A Dribble of Ink, 2007",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "the first person voice is the natural voice for the story teller",
+   "page": "Q on first person"
+  },
+  {
+   "index": 161,
+   "feature": "point of view and distance",
+   "claim": "Hobb says first person makes the reader privy to the viewpoint character's innermost thoughts and feelings.",
+   "source": "Robin Hobb, interviewed by Aidan Moher, A Dribble of Ink, 2007",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "the reader is privy to the characters innermost thoughts and feelings",
+   "page": "Q on first person"
+  },
+  {
+   "index": 162,
+   "feature": "register modulation",
+   "claim": "Hobb says that writing as Hobb she tends to write longer, more detailed stories.",
+   "source": "Robin Hobb, interviewed by Aidan Moher, A Dribble of Ink, 2007",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "I tend to write longer, more detailed stories",
+   "page": "Q on the two pen names"
+  },
+  {
+   "index": 163,
+   "feature": "register modulation",
+   "claim": "Hobb says the Lindholm writing style is not as leisurely as the Hobb style.",
+   "source": "Robin Hobb, interviewed by Aidan Moher, A Dribble of Ink, 2007",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "The Lindholm writing style is not as leisurely",
+   "page": "Q on the two pen names"
+  },
+  {
+   "index": 164,
+   "feature": "consequence on a household",
+   "claim": "Hobb says that when her characters are hurt they acquire baggage that may later affect what they do.",
+   "source": "Robin Hobb, interviewed by Aidan Moher, A Dribble of Ink, 2007",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "they acquire baggage and later on it may affect what they do",
+   "page": "Q on hard situations"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 150,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cut out everything that does not describe the setting",
+   "note": "Raw page (ofblog.blogspot.com, HTTP 200, curl with browser UA), On writing Q2: 'In a short story, I'm the opposite. I ruthlessly edit and cut out everything that does not describe the setting, advance the plot or offer a character insight.' Quote verbatim; all three limbs present. Page says 'offer a character insight' where the claim says 'give a character insight' - synonymous paraphrase in the claim sentence, not in the quotation."
+  },
+  {
+   "index": 151,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Prose as Megan Lindholm is much leaner than prose as Robin Hobb",
+   "note": "Raw page, On writing Q2, immediately after the sprawl/short-story passage: 'Prose as Megan Lindholm is much leaner than prose as Robin Hobb.' Verbatim, whole claim supported."
+  },
+  {
+   "index": 152,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In a novel, I sprawl, and I know it",
+   "note": "Raw page, On writing Q2 opening: 'This depends on what I'm writing. In a novel, I sprawl, and I know it.' Verbatim; both limbs (sprawls, knows it) on the page."
+  },
+  {
+   "index": 153,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Make your economy and geography make sense",
+   "note": "Raw page, On writing Q12 (advice to a young and aspiring writer): 'Make your economy and geography make sense.' Verbatim. The invented-place limb is carried by the surrounding fantasy context ('don't think that fantasy means you can write anything you want', the unicorn/magic-horse example)."
+  },
+  {
+   "index": 154,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A tiny village isn't going to have an artisan who makes his living specializing in doorknockers",
+   "note": "Raw page, On writing Q12: 'A tiny village isn't going to have an artisan who makes his living specializing in doorknockers.' Quote verbatim as a prefix of that sentence; offered as an example of the foundation a writer must get under the writing."
+  },
+  {
+   "index": 155,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A medieval farm family didn't harvest its entire farm in one afternoon",
+   "note": "Raw page, On writing Q12, the sentence immediately after the doorknocker example: verbatim, and framed there as an error of the same 'get a foundation under your writing' kind."
+  },
+  {
+   "index": 156,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Every character is the main character",
+   "note": "Raw page, On writing Q10: 'Every character is the main character. Even if they only have a bit part, for the time they are on stage and moving around, the writer has to remember that for that character, \"Life is all about me.\"' Verbatim; the 'however small the part' and 'while on stage' limbs are both on the page."
+  },
+  {
+   "index": 157,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Climb into a character, and suddenly even the villain is wondering what is for dinner tonight",
+   "note": "Raw page, On writing Q10: quote verbatim. The 'inside a villain's skin' limb is supported twice in the same paragraph - 'Climb into a character, and suddenly even the villain is wondering...' and 'If you put on the villain's skin, you have to love him or at least understand him.'"
+  },
+  {
+   "index": 158,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Immediacy and reader identification",
+   "note": "Raw page, Specific questions Q14 ('What benefits to the story did you find when you chose to write Farseer in first person?'): the answer opens 'Immediacy and reader identification. But it isn't like I planned it.' Verbatim; question and answer match the claim exactly."
+  },
+  {
+   "index": 159,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I could only tell the reader what Fitz knew at that moment",
+   "note": "Raw page, Specific questions Q14: 'It was horribly inconvenient at times, because I could never say, \"Meanwhile, back at the castle, thus and so was happening.\" I could only tell the reader what Fitz knew at that moment.' Verbatim; the confinement limb is explicit in the preceding sentence."
+  },
+  {
+   "index": 160,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "To me, the first person voice is the natural voice for the story teller",
+   "note": "Raw page (aidanmoher.com, HTTP 200, curl with browser UA), Q on what draws her to first person: verbatim, prefixed on the page by the hedge 'To me,'."
+  },
+  {
+   "index": 161,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the reader is privy to the characters innermost thoughts and feelings",
+   "note": "Raw page, same first-person answer: 'With first person, the reader gets to know the viewpoint character intimately because the reader is privy to the characters innermost thoughts and feelings.' Verbatim (the page omits the apostrophe in 'characters'); the viewpoint-character limb is in the same sentence."
+  },
+  {
+   "index": 162,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When I write as Hobb, I tend to write longer, more detailed stories",
+   "note": "Raw page, Q on the two pen names: verbatim, and the page attributes it explicitly to writing as Hobb ('When I write as Hobb, ...'), followed by 'Often they are more emotionally complex as well.'"
+  },
+  {
+   "index": 163,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Lindholm writing style is not as leisurely",
+   "note": "Raw page, Q on the two pen names, the sentence two after the Hobb one: verbatim. The 'than the Hobb style' comparand is not spelled out in that sentence but is the immediate antecedent ('When I write as Hobb, I tend to write longer, more detailed stories... The Lindholm writing style is not as leisurely.') in an answer whose whole subject is the difference between the two bylines."
+  },
+  {
+   "index": 164,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they acquire baggage and later on it may affect what they do",
+   "note": "Raw page, Q on putting characters through hard situations: 'When my characters get hurt, physically or emotionally, they acquire baggage and later on it may affect what they do.' Verbatim; the hurt limb is in the same sentence."
+  }
+ ]
+}

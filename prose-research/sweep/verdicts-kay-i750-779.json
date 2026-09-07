@@ -1,0 +1,233 @@
+{
+ "name": "kay",
+ "chunk": 1,
+ "claims": [
+  {
+   "index": 750,
+   "feature": "other: fantasy as a method for history",
+   "claim": "Borowska-Szerszun sets The Fionavar Tapestry apart from the rest of Kay's work as completely different from that historical-fantasy form.",
+   "source": "Sylwia Borowska-Szerszun, \"King Arthur and Imagined Indians\", in Studies in Medievalism XXXIV (Boydell, 2025)",
+   "url": "https://www.cambridge.org/core/product/identifier/9781805435631%23c9/type/book_part",
+   "quote": "grounded in history but uses the elements of the fantastic",
+   "page": "chapter opening (Cambridge Core extract), p. 174"
+  },
+  {
+   "index": 751,
+   "feature": "other: memory as the shape of the record",
+   "claim": "Borowska-Szerszun argues that the restoration of Tigana's name reproduces a Tolkienian resolution while remaining marked by loss, fragmentation and incomplete knowledge.",
+   "source": "Sylwia Borowska-Szerszun, \"The limits of the happy ending: Eucatastrophe and cultural memory in Guy Gavriel Kay's Tigana\", Orbis Litterarum (2026)",
+   "url": "https://api.openalex.org/works/doi:10.1111/oli.70057",
+   "quote": "",
+   "page": "publisher abstract"
+  },
+  {
+   "index": 752,
+   "feature": "other: history as consequence",
+   "claim": "Drab opens her chapter on Kay's Ysabel by arguing that fantasy's representation of the Middle Ages tends on the whole to be trivialized because general knowledge of the period is limited to simplified concepts.",
+   "source": "Ewa Drab, \"Medievalisms and Romance Traditions in Guy Gavriel Kay's Ysabel\", in Medievalism in English Canadian Literature (Boydell, 2020)",
+   "url": "https://www.cambridge.org/core/product/identifier/9781787448858%23c11/type/book_part",
+   "quote": "the representation of this part of history",
+   "page": "chapter opening (Cambridge Core extract), p. 172"
+  },
+  {
+   "index": 756,
+   "feature": "other: characterisation",
+   "claim": "Doherty faults The Fionavar Tapestry for using its Arthurian figures as ciphers, calling Lancelot more of a stereotype than a character.",
+   "source": "John J. Doherty, \"The High Fantasies of Lawhead and Kay\" (BrightWeavings)",
+   "url": "http://brightweavings.com/doherty/",
+   "quote": "Lancelot is more of a stereotype than a character",
+   "page": "closing section on The Fionavar Tapestry"
+  },
+  {
+   "index": 757,
+   "feature": "other: characterisation",
+   "claim": "Doherty holds up Tigana as evidence of what Kay can do when he does not confine characters to their symbolic value.",
+   "source": "John J. Doherty, \"The High Fantasies of Lawhead and Kay\" (BrightWeavings)",
+   "url": "http://brightweavings.com/doherty/",
+   "quote": "an evocative, rich story that studies the seemingly incompatible themes",
+   "page": "closing section on The Fionavar Tapestry"
+  },
+  {
+   "index": 761,
+   "feature": "other: unreliable chronicler inside the fiction",
+   "claim": "Cheryl Morgan reports Kay's note that the historian Procopius is so unpleasant about Theodora that his testimony must be suspect.",
+   "source": "Cheryl Morgan, 'Pieces of History', Emerald City (reprinted BrightWeavings), paraphrasing Kay",
+   "url": "https://brightweavings.com/pieces-of-history-2/",
+   "quote": "his testimony must be suspect",
+   "page": "body, on the real history"
+  },
+  {
+   "index": 762,
+   "feature": "other: court politics rendered without dominating the book",
+   "claim": "Morgan judges Kay's court politics believably subtle and devious without social nuance becoming the whole book.",
+   "source": "Cheryl Morgan, 'Pieces of History', Emerald City (reprinted BrightWeavings, posted 2016-05-07)",
+   "url": "https://brightweavings.com/pieces-of-history-2/",
+   "quote": "believably subtle and devious without making social nuance",
+   "page": "body, on the politics"
+  },
+  {
+   "index": 765,
+   "feature": "other: characters repeat across books",
+   "claim": "Cobb concedes that judged as realist fiction Kay's characters are not sufficiently differentiated from book to book.",
+   "source": "Christopher Cobb, in Cobb and Mohanraj, 'From Tapestry to Mosaic', Strange Horizons, 13 November 2000",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/from-tapestry-to-mosaic-the-fantasy-novels-of-guy-gavriel-kay/",
+   "quote": "his characters are not sufficiently differentiated from book to book",
+   "page": "Tigana section, CC turn"
+  },
+  {
+   "index": 767,
+   "feature": "other: trajectory toward historical realism",
+   "claim": "Cobb reads the Sarantine Mosaic as part of Kay's trajectory away from high fantasy towards historical realism.",
+   "source": "Christopher Cobb, in Cobb and Mohanraj, 'We must learn to bend, or we break', Strange Horizons, 13 November 2000",
+   "url": "https://strangehorizons.com/non-fiction/reviews/we-must-learn-to-bend-or-we-break-the-art-of-living-in-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "trajectory away from high fantasy towards historical realism",
+   "page": "CC turn on history"
+  },
+  {
+   "index": 768,
+   "feature": "other: narrator as recorder of the world",
+   "claim": "Cobb's closing judgment is that Kay makes the Mosaic with an unwearying spirit of love for the spectacle of the world that he records.",
+   "source": "Christopher Cobb, in Cobb and Mohanraj, 'We must learn to bend, or we break', Strange Horizons, 13 November 2000",
+   "url": "https://strangehorizons.com/non-fiction/reviews/we-must-learn-to-bend-or-we-break-the-art-of-living-in-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "love for the spectacle of the world that he records",
+   "page": "CC's last word"
+  },
+  {
+   "index": 770,
+   "feature": "other: fantasy as a prism on the past",
+   "claim": "Kay says the fantasy method removes a level of presumption that one can know what Justinian and Theodora's marriage was like.",
+   "source": "Guy Gavriel Kay, interviewed by Sandy Auden, infinity plus, 3 July 2005",
+   "url": "https://www.infinityplus.co.uk/nonfiction/intggk.htm",
+   "quote": "It removes a level of presumption",
+   "page": "answer on similarities between past and present"
+  },
+  {
+   "index": 771,
+   "feature": "other: the unimportance of great events to ordinary citizens",
+   "claim": "Kay traces a motif of the Sarantine Mosaic to Auden's poem on Breughel and the relative unimportance of great events for ordinary citizens.",
+   "source": "Guy Gavriel Kay, interviewed by Sandy Auden, infinity plus, 3 July 2005",
+   "url": "https://www.infinityplus.co.uk/nonfiction/intggk.htm",
+   "quote": "the relative un importance of great events",
+   "page": "answer on the legacy theme"
+  },
+  {
+   "index": 776,
+   "feature": "other: show rather than announce",
+   "claim": "Shoul's advice to Kay is to talk about his characters less and show their actions more.",
+   "source": "Simeon Shoul, review of The Lions of Al-Rassan, infinity plus",
+   "url": "https://www.infinityplus.co.uk/nonfiction/alrassan.htm",
+   "quote": "talk about your characters less, show us their actions more",
+   "page": "body, advice"
+  },
+  {
+   "index": 778,
+   "feature": "other: ordinary trades as the vantage on power",
+   "claim": "Shoul says the book uses the experiences and perspective of a master artisan to explore the life of the greatest city on earth.",
+   "source": "Simeon Shoul, review of Lord of Emperors, infinity plus",
+   "url": "https://www.infinityplus.co.uk/nonfiction/lordofemperors.htm",
+   "quote": "the experiences and perspective of a master artisan",
+   "page": "body, first paragraph"
+  },
+  {
+   "index": 779,
+   "feature": "concrete sensory noun",
+   "claim": "Sandy Auden says Kay delivers his historical detail with no dry technical facts.",
+   "source": "Sandy Auden, review of The Last Light of the Sun, infinity plus",
+   "url": "https://www.infinityplus.co.uk/nonfiction/lastlightofthesun.htm",
+   "quote": "There are no dry technical facts",
+   "page": "body, on Kay's love of history"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 750,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "grounded in history but uses the elements of the fantastic",
+   "note": "Cambridge Core chapter Summary (reached via the 301 to the /core/books/studies-in-medievalism-xxxiv/king-arthur-and-imagined-indians... URL). Summary contrasts Kay's usual historical fantasy with the debut trilogy, which it calls completely different. Author Sylwia Borowska-Szerszun; Studies in Medievalism XXXIV, Boydell & Brewer, pp. 174-191. Metadata note: the page says first published 2026 (online 26 June 2026), not 2025 as the source field states; the claim sentence carries no year."
+  },
+  {
+   "index": 751,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "remains marked by loss, fragmentation, and incomplete knowledge",
+   "note": "OpenAlex record W7163571973 fetched raw and its abstract_inverted_index reconstructed; author Sylwia Borowska-Szerszun, Orbis Litterarum 2026, DOI 10.1111/oli.70057. Abstract's penultimate-but-one sentence supports every limb, but hedges: the restoration 'appears to reproduce' a 'recognizably Tolkienian' resolution rather than flatly reproducing it. Claim carried no quote field, so graded on substance."
+  },
+  {
+   "index": 752,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the representation of this part of history",
+   "note": "Cambridge Core chapter Summary, closing sentence: general knowledge of the media tempora being limited to simplified, if not false, concepts is given as the reason the representation and its presence in the genre tends on the whole to be trivialized. By Ewa Drab, chapter 11, Medievalism in English Canadian Literature, Boydell & Brewer 2020, pp. 172-188 - matching the claimed p. 172 chapter opening."
+  },
+  {
+   "index": 756,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Lancelot is more of a stereotype than a character",
+   "note": "BrightWeavings essay by John J. Doherty, final Fionavar section. Same passage supplies the cipher limb: the three Arthurian characters are called no more than symbols, and the next sentence regrets that Kay did not use his characters beyond their values as ciphers."
+  },
+  {
+   "index": 757,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an evocative, rich story that studies the seemingly incompatible themes",
+   "note": "Same BrightWeavings paragraph, immediately after the ciphers sentence: Doherty says that Kay can do so 'has already been proven in Tigana (1990)', then the quoted phrase, which continues 'of language, patriotism and revenge'. Both limbs supported."
+  },
+  {
+   "index": 761,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "his testimony must be suspect",
+   "note": "brightweavings.com/pieces-of-history-2/ , headed 'Review by Cheryl Morgan for her online magazine, Emerald City', posted 7 May 2016. Body, history section: 'as Kay notes the historian Procopius (Pertennius in the books) is so unpleasant about Theodora that' + the quoted words. Attribution to Kay is explicit on the page."
+  },
+  {
+   "index": 762,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "believably subtle and devious without making social nuance",
+   "note": "Same Morgan review, politics paragraph; the sentence completes '...the be all and end all of the book.' The court limb is supported two sentences earlier, where Morgan ranks Kay second only to Dorothy Dunnett at portraying courtiers' games. Posted date 7 May 2016 matches the source field."
+  },
+  {
+   "index": 765,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "his characters are not sufficiently differentiated from book to book",
+   "note": "Strange Horizons, 'From Tapestry to Mosaic', Christopher Cobb and Mary Anne Mohanraj, issue 13 November 2000. CC turn answering MM's charge, inside the Tigana discussion, prefixed by \"from the standpoint of 'realist' fiction\" - so the realist-fiction qualifier in the claim is on the page, as is the concessive framing (CC calls it the big question and adds Kay's counter)."
+  },
+  {
+   "index": 767,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "trajectory away from high fantasy towards historical realism",
+   "note": "Strange Horizons, 'We must learn to bend, or we break', Cobb and Mohanraj, 13 November 2000. CC turn on Kay following history: he calls the Sarantine Mosaic much less idealized than earlier works and 'part of Kay's' + the quoted words, closing 'I would argue'."
+  },
+  {
+   "index": 768,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "love for the spectacle of the world that he records",
+   "note": "Same review; CC turn opening 'Here's my last word on The Sarantine Mosaic', which says Kay creates it all with an unwearying spirit of the quoted phrase. It is Cobb's declared last word on the Mosaic, though one further CC turn on reading order follows before the piece ends."
+  },
+  {
+   "index": 770,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It removes a level of presumption",
+   "note": "infinity plus interview by Sandy Auden, 3 July 2005, answer to the question about similarities between past and present. Kay calls fantasy as a method a prism, then the quoted sentence continues 'that we can know what Justinian and Theodora's marriage was like' - both limbs on the page."
+  },
+  {
+   "index": 771,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the relative un importance of great events",
+   "note": "Same interview, answer on the legacy theme: Kay moves from Breughel's painting of Icarus to remembering Auden's poem about that painting 'and' the quoted words '(and people) for ordinary citizens ... and another theme or motif of the two books arose strongly.' The odd space in 'un importance' is the page's own typography."
+  },
+  {
+   "index": 776,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "talk about your characters less, show us their actions more",
+   "note": "infinity plus review of The Lions of Al-Rassan by Simeon Shoul, 4 August 2001, penultimate section: 'My advice for Kay;' then the quoted words, continuing 'and don't let them form a mutual back-slapping society.'"
+  },
+  {
+   "index": 778,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the experiences and perspective of a master artisan",
+   "note": "infinity plus review of Lord of Emperors by Simeon Shoul, 2 June 2001, first paragraph: the book 'uses' the quoted phrase '(Crispin, a mosaicist ...) to explore the lavish lives, amours and lethal conspiracies that constitute life in the greatest city on earth' - both limbs in one sentence."
+  },
+  {
+   "index": 779,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are no dry technical facts",
+   "note": "infinity plus review of The Last Light of the Sun by Sandy Auden, in the paragraph on Kay's love of history: the preceding sentence credits the palpable atmosphere to his use of historical detail, then the quoted sentence opens the contrast with the living, breathing narration."
+  }
+ ]
+}

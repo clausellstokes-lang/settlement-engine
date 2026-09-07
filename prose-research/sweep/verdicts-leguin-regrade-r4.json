@@ -1,0 +1,530 @@
+{
+ "name": "leguin",
+ "regrade": true,
+ "claims": [
+  {
+   "index": 4,
+   "feature": "archaism as high wire",
+   "claim": "The archaic manner is a perfect distancer only when done perfectly; botched thee/thou verbs, subjunctives, 'mayhap' and 'ichor' are the touchstones of failure.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "It's a high wire: one slip spoils all.",
+   "page": "p. 6",
+   "angle": "academic"
+  },
+  {
+   "index": 18,
+   "feature": "assumed familiarity, no exposition",
+   "claim": "The narration assumes the reader already knows Earthsea's geography and history, avoiding heavy exposition, and moves between looking ahead into Ged's future and back into Earthsea's past.",
+   "source": "Wikipedia: A Wizard of Earthsea",
+   "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
+   "quote": "switches from looking ahead into Ged's future",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 28,
+   "feature": "myth-chapter interleaving",
+   "claim": "Gethenian myths and legends are placed before chapters in which Genly Ai meets similar situations, so the embedded texts explain both cultural detail and philosophy.",
+   "source": "Wikipedia: The Left Hand of Darkness",
+   "url": "https://en.wikipedia.org/wiki/The_Left_Hand_of_Darkness",
+   "quote": "",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 30,
+   "feature": "limited third person",
+   "claim": "Much of Tombs unfolds from Tenar's perspective, the reader feeling the undertomb's fear through her eyes; Cadden's free indirect discourse makes the narrator seem sympathetic to the characters.",
+   "source": "Wikipedia: The Tombs of Atuan (citing Cadden)",
+   "url": "https://en.wikipedia.org/wiki/The_Tombs_of_Atuan",
+   "quote": "the narrator seem sympathetic to the characters",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 44,
+   "feature": "grave joyfulness",
+   "claim": "The SFE says a grave joyfulness pervades the trilogy, more maturely thoughtful than Narnia while remaining exciting.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "A grave joyfulness pervades the trilogy",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 46,
+   "feature": "motifs as story",
+   "claim": "Archetypal motif pairs (darkness/light, root/branch, language/silence) are woven until the motifs are the story, treated as balanced twins rather than polarities.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "the motifs are the story",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 51,
+   "feature": "sentence rhythm foreshadows the whole",
+   "claim": "Kelso reads the Lathe of Heaven jellyfish sentence's four opposing blocks (two compound adjectives, two clauses) as an ocean-on-beach here-and-back rhythm that foreshadows the novel's yin/yang structure of recurrence.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "rhythm at sentence level foreshadows the tenor",
+   "page": "pp. 14–15",
+   "angle": "academic"
+  },
+  {
+   "index": 52,
+   "feature": "move toward austerity",
+   "claim": "Like Yeats, Le Guin moves toward simplicity or austerity in both rhythm and content of later work; Tehanu begins in farm life and ends among a few goats and bean vines.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "move toward simplicity, or at least austerity",
+   "page": "p. 16",
+   "angle": "academic"
+  },
+  {
+   "index": 57,
+   "feature": "less doing more",
+   "claim": "Tehanu shows 'the skill of experience making less do more, rather than more do more' — the late style compresses.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "making less do more",
+   "page": "p. 16",
+   "angle": "academic"
+  },
+  {
+   "index": 84,
+   "feature": "the writer must hear the prose",
+   "claim": "Le Guin infers from read-aloud ease that Tolkien must have heard what he wrote.",
+   "source": "Vermont Softworks blog (quoting Le Guin)",
+   "url": "https://vermontsoftworks.com/post/2023/leguin-rhythmic-pattern-in-lotr/",
+   "quote": "Tolkien must have heard what he wrote",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 88,
+   "feature": "prose sound effects irregular",
+   "claim": "Prose's sound effects are subtle and always irregular (unlike verse); onomatopoeia, alliteration, repetition and dialect cadences are the tools, and changing sentence rhythms can express emotion.",
+   "source": "Literary Hub, 'A Writing Lesson from Ursula K. Le Guin' (excerpt from Steering the Craft)",
+   "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+   "quote": "",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 94,
+   "feature": "speech-act power of wizards (title-level)",
+   "claim": "A peer-reviewed article frames Earthsea's wizards' language as 'doing things with words' — speech-act power crossed with gender.",
+   "source": "Crossref record: Comoletti & Drout, 'How They Do Things with Words…', Children's Literature 29 (2001): 113–141, DOI 10.1353/chl.0.0786",
+   "url": "https://api.crossref.org/works?query.bibliographic=How+They+Do+Things+with+Words+Language+Power+Gender+Priestly+Wizards+Le+Guin+Earthsea&rows=3",
+   "quote": "",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 104,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin describes Tolkien's vocabulary as unstriking and everything in it as direct, concrete and simple.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "everything is direct, concrete, and simple",
+   "page": "p.8, on Tolkien's plain English",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1973",
+   "routeHint": "direct PDF fetch, pypdf extraction",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "angle": "craft"
+  },
+  {
+   "index": 109,
+   "feature": "dialogue register",
+   "claim": "Le Guin asserts that speech expresses character, whether or not the writer intends it.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "Speech expresses character.",
+   "page": "p.4, after the three dialogue samples",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1973",
+   "routeHint": "direct PDF fetch, pypdf extraction",
+   "registerHint": "herald-pools",
+   "confidence": "high",
+   "angle": "craft"
+  },
+  {
+   "index": 119,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says the sound effects of prose are usually subtle and always irregular, unlike those of poetry.",
+   "source": "Ursula K. Le Guin, Steering the Craft (2015 revised ed.), chapter 1, excerpted at Literary Hub",
+   "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+   "quote": "the sound effects of prose are usually subtle and always irregular",
+   "page": "Steering the Craft ch.1, first paragraph",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2015-09-03",
+   "routeHint": "direct fetch, HTML stripped to text",
+   "registerHint": "none",
+   "confidence": "high",
+   "angle": "craft"
+  },
+  {
+   "index": 130,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin concludes from the read-aloud quality of the prose that Tolkien must have heard what he wrote.",
+   "source": "Ursula K. Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (2001), quoted by Erik D. Mueller-Harder, Vermont Softworks",
+   "url": "https://vermontsoftworks.com/post/2023/leguin-rhythmic-pattern-in-lotr/",
+   "quote": "Tolkien must have heard what he wrote.",
+   "page": "blog quotation of the essay",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2023-09-28",
+   "routeHint": "direct fetch; quotation of the 2001 essay",
+   "registerHint": "none",
+   "confidence": "medium",
+   "angle": "craft"
+  },
+  {
+   "index": 167,
+   "feature": "stylometry",
+   "claim": "Le Guin observes that Jane Austen's stress-count nearly matching the textbook's shows stress-counting alone cannot indicate the quality of prose.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "merely counting stresses is not going to give us any solid",
+   "page": "after the comparison tables",
+   "kind": "measurement",
+   "polarity": "disputes",
+   "date": "2004",
+   "routeHint": "direct PDF fetch, pypdf extraction",
+   "registerHint": "none",
+   "confidence": "high",
+   "angle": "craft"
+  },
+  {
+   "index": 170,
+   "feature": "sentence length variation",
+   "claim": "Le Guin's counts show Woolf writing the shortest sentences of the eight samples and Austen the longest.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "Woolf writes the shortest sentences of the lot and Austen the longest",
+   "page": "'Various interesting factoids emerge'",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "direct PDF fetch, pypdf extraction",
+   "registerHint": "none",
+   "confidence": "high",
+   "angle": "craft"
+  },
+  {
+   "index": 196,
+   "feature": "adjective and adverb discipline",
+   "claim": "A workshop blogger reports that Le Guin calls the no-adjective, no-adverb 'Chastity' exercise the only one she has given to all her workshops.",
+   "source": "'Would That I Might' (workshop blogger) working Steering the Craft chapter five, Exercise Five 'Chastity'",
+   "url": "https://wouldthatimight.blogspot.com/2018/07/le-guin-steering-craft-chapter-five.html",
+   "quote": "the only exercise that she has given to all",
+   "page": "the post's opening note",
+   "kind": "reader",
+   "polarity": "applies",
+   "date": "2018-07-16",
+   "routeHint": "direct fetch, HTML stripped to text; a reader's report of Le Guin, not her words",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium",
+   "angle": "craft"
+  },
+  {
+   "index": 227,
+   "feature": "other: internal coherence",
+   "claim": "Le Guin names coherence as the touchstone of plausibility in imaginative fiction.",
+   "source": "Ursula K. Le Guin, 'Plausibility in Fantasy: an open letter to Alexei Mutovkin', ursulakleguin.com, 2005",
+   "url": "https://www.ursulakleguin.com/plausibility-in-fantasy-an-open-letter",
+   "quote": "The touchstone to plausibility in imaginative fiction is probably coherence.",
+   "page": "body, penultimate section",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2005",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200)",
+   "registerHint": "none",
+   "confidence": "high",
+   "angle": "voice"
+  },
+  {
+   "index": 239,
+   "feature": "plainness and economy",
+   "claim": "Le Guin says a poet's desire to make words vivid, exact and as few as possible carries over into writing prose.",
+   "source": "Ursula K. Le Guin, answer to 'Deepthi', 'Navigating the Ocean of Story - Session 1 part 3', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "as exact and accurate, and as few as possible",
+   "page": "Session 1 part 3, answer to Deepthi",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2015",
+   "routeHint": "curl with a desktop browser user agent on the live page (HTTP 200)",
+   "registerHint": "chronicle-line",
+   "confidence": "high",
+   "angle": "voice"
+  },
+  {
+   "index": 268,
+   "feature": "metaphor discipline",
+   "claim": "Le Guin says a sentence is not working as a narrative sentence if its similes or metaphors are so dazzling that they stop the reader.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "the proper beauty and power of prose",
+   "page": "chapter 3, 'Sentence Length and Complex Syntax'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2015",
+   "routeHint": "archive.org OCR text (djvu.txt) of the 2015 Mariner edition fetched by curl; quotations contiguous after whitespace normalisation",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium - the quotation given is the chapter's summary sentence, not the sentence stating the claim itself",
+   "angle": "voice"
+  },
+  {
+   "index": 309,
+   "feature": "civic record register",
+   "claim": "Horton records that Le Guin placed a roughly hundred-page appendix called The Back of the Book at the end of the novel.",
+   "source": "Rich Horton, Strange at Ecbatan blog, 24 April 2024",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "quote": "in the final section, some 100 pages",
+   "page": "body, second paragraph",
+   "kind": "reception",
+   "polarity": "mentions",
+   "date": "2024-04-24",
+   "routeHint": "curl with browser user agent (live URL)",
+   "registerHint": "dm-page",
+   "angle": "close"
+  },
+  {
+   "index": 331,
+   "feature": "place and institution description",
+   "claim": "Erin Ramsay notes that in The Tombs of Atuan the conflict is administrative, over the posting of guards and how to punish unbelievers.",
+   "source": "Erin Ramsay, \"Earthsea: A Sharpening of Scale\", The Lighthouse (Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "over the posting of guards and how to punish unbelievers",
+   "page": "Tombs of Atuan section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "curl with browser user agent (live URL)",
+   "registerHint": "dossier-archivist",
+   "angle": "close"
+  },
+  {
+   "index": 334,
+   "feature": "concrete sensory noun",
+   "claim": "Ramsay quotes Le Guin describing the villagers of Lorbanery as sullen and silent in the large, soft rain of April.",
+   "source": "Ursula K. Le Guin, quoted by Erin Ramsay, The Lighthouse (Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "sullen and silent in the large, soft rain of April",
+   "page": "The Farthest Shore section",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2024",
+   "routeHint": "curl with browser user agent (live URL)",
+   "registerHint": "dossier-archivist",
+   "angle": "close"
+  },
+  {
+   "index": 378,
+   "feature": "sentence length variation",
+   "claim": "Vest identifies the most famous sentence of The Left Hand of Darkness as the four-word line The king was pregnant.",
+   "source": "Jason P. Vest, The Common Reader, 30 May 2021, quoting Le Guin",
+   "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
+   "quote": "The king was pregnant",
+   "page": "section on The Left Hand of Darkness",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2021-05-30",
+   "routeHint": "curl with browser user agent (live URL)",
+   "registerHint": "chronicle-line",
+   "angle": "close"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 4,
+   "verdict": "PARTIAL",
+   "trueWording": "It's a high wire: one slip spoils all.",
+   "note": "p.6 verbatim, preceded by 'The archaic manner is indeed a perfect distancer, but you have to do it perfectly.' The four failure markers are all on pp.5-6: botched thee/thou verbs ('Whithersoever thou goest there also I goest'), the subjunctive ('All the was's turn into were's'), 'Mayhap', and 'the final test, the infallible touchstone of the seventh-rate: Ichor.' Minor: the word 'touchstone' is applied literally only to ichor; the other three are catalogued as novice traps, not called touchstones.",
+   "unsupportedLimb": "\"the touchstones of failure\" applied to all four markers — the verifier's note says the essay calls only ichor a touchstone ('the infallible touchstone of the seventh-rate: Ichor'); the thee/thou verbs, the subjunctive and 'mayhap' are catalogued as novice traps and are not called touchstones."
+  },
+  {
+   "index": 18,
+   "verdict": "PARTIAL",
+   "trueWording": "the narration switches from looking ahead into Ged's future",
+   "note": "Raw wikitext: 'The story often appears to assume that readers are familiar with the geography and history of Earthsea, a technique which allowed Le Guin to avoid exposition ... In keeping with the notion of an epic, the narration switches from looking ahead into Ged's future and looking back into the past of Earthsea.' Quote verbatim; all limbs present. Minor hedge: the page says 'often appears to assume' where the claim asserts it flatly.",
+   "unsupportedLimb": "the flat assertion that the narration assumes the reader knows Earthsea's geography and history — the page says 'often appears to assume', a hedge the claim drops."
+  },
+  {
+   "index": 28,
+   "verdict": "PARTIAL",
+   "trueWording": "tales immediately precede chapters describing Ai's similar experience; explain culture and philosophy",
+   "note": "Raw wikitext: 'The myths and legends serve to explain specific features about Gethenian culture, as well as larger philosophical aspects of society. Many of the tales used in the novel immediately precede chapters describing Ai's experience with a similar situation.' Claim carried no quote and is a paraphrase; both limbs supported. Page hedges with 'Many of the tales' where the claim generalises.",
+   "unsupportedLimb": "the generalisation that the myths precede the chapters — the page hedges with 'Many of the tales used in the novel immediately precede chapters', not all of them."
+  },
+  {
+   "index": 30,
+   "verdict": "PARTIAL",
+   "trueWording": "making the narrator seem sympathetic to the characters (Cadden 2005 p.92) — said of the Earthsea trilogy generally, not of The Tombs of Atuan specifically.",
+   "note": "Live en.wikipedia.org/wiki/The_Tombs_of_Atuan (rendered page + Special:Export wikitext). Quote verbatim: 'making the narrator seem sympathetic to the characters' (cited Cadden 2005 p.92). Both other limbs verbatim too: 'In The Tombs of Atuan, much of the story is told from Tenar's perspective; for instance, the reader sees Tenar's fear of the undertomb through her own eyes, creating an empathy for her' (Cadden 2005 p.94). Minor scope point, not a limb of the claim: the page attributes free indirect discourse to the Earthsea trilogy generally, not to Tombs specifically.",
+   "unsupportedLimb": "the free-indirect-discourse limb as a fact about The Tombs of Atuan — the verifier's note says the page attributes free indirect discourse to the Earthsea trilogy generally, not to Tombs specifically."
+  },
+  {
+   "index": 44,
+   "verdict": "PARTIAL",
+   "trueWording": "A grave joyfulness pervades the trilogy, which is perhaps more maturely thoughtful (while remaining exciting) than the comparable Narnia series of C S Lewis.",
+   "note": "Same page: 'A grave joyfulness pervades the trilogy, which is perhaps more maturely thoughtful (while remaining exciting) than the comparable Narnia series of C S Lewis.' Quote verbatim and every limb present. FLAG for downstream use: the claim drops SFE's hedge 'perhaps' - the source qualifies the Narnia comparison, so restore 'perhaps' if the sentence is quoted as SFE's position.",
+   "unsupportedLimb": "the unhedged Narnia comparison — the verifier FLAGGED that the claim drops SFE's 'perhaps'; the source qualifies the comparison ('perhaps more maturely thoughtful')."
+  },
+  {
+   "index": 46,
+   "verdict": "PARTIAL",
+   "trueWording": "until it might almost be said that the motifs are the story",
+   "note": "Raw SFE page: 'shaping a story around recurrent motifs... until it might almost be said that the motifs are the story. Many of them are the simple archetypal symbols... darkness and light, root and branch, winter and summer, submission and arrogance, language and silence. These are not seen by Le Guin as polarities or opposed forces; rather, they are twin parts of a balanced whole.' All three named pairs and the twins-not-polarities limb present. Two fidelity notes, not limb failures: the SFE hedges with 'it might almost be said', and says this of the first three Hainish novels as the 'typical Le Guin strategy'.",
+   "unsupportedLimb": "'the motifs are the story' stated flatly, and stated of the Earthsea/Le Guin work at large — the note records that SFE hedges with 'it might almost be said' and says this of the first three Hainish novels as the 'typical Le Guin strategy'."
+  },
+  {
+   "index": 51,
+   "verdict": "PARTIAL",
+   "trueWording": "rhythm at sentence level foreshadows the tenor of the work",
+   "note": "Kelso PDF fetched raw (HTTP 200, 16pp) and text-extracted; passage on journal pp.14-15. Verbatim: 'But in this example, rhythm at sentence level foreshadows the tenor of the work as a whole'; then 'The sentence's four opposing blocks, two compound adjectives, two clauses, echo the rhythm of ocean on beach: Here-and-back. Here-and-back' and 'the pattern of the yin/yang dynamic... this is the overall structure of Lathe of Heaven, where change occurs, and re-occurs, and re-occurs again'. Note: the yin/yang-structure reading is Kelso relaying Kathy Keating's I Ching reading.",
+   "unsupportedLimb": "the yin/yang-structure-of-recurrence reading attributed to Kelso — the note says that reading is Kelso relaying Kathy Keating's I Ching reading, not Kelso's own."
+  },
+  {
+   "index": 52,
+   "verdict": "PARTIAL",
+   "trueWording": "Like Yeats, Le Guin does seem to move toward simplicity, or at least austerity",
+   "note": "Raw PDF, journal p.16: 'Like Yeats, Le Guin does seem to move toward simplicity, or at least austerity, in both the rhythm and content of her later work'; and 'Tehanu, on the other hand, starts in farm-life, descending at times to the edge of poverty, and the austerity of a few goats, and a patch of bean vines (251-52), is where it ends.' Fidelity note: the source hedges with 'does seem to'; the claim asserts flatly.",
+   "unsupportedLimb": "the flat 'Le Guin moves toward simplicity or austerity' — the note records that the source hedges with 'does seem to move'."
+  },
+  {
+   "index": 57,
+   "verdict": "PARTIAL",
+   "trueWording": "the skill of experience making less do more, rather than more do more",
+   "note": "Raw PDF, journal p.16: 'At the same time, Tehanu can show the skill of experience making less do more, rather than more do more, as in the previous quote.' The gloss 'the late style compresses' is carried by the adjacent Yeats/austerity paragraph. Fidelity note: source says 'can show'.",
+   "unsupportedLimb": "the flat 'Tehanu shows' — the note records that the source says Tehanu 'can show' the skill of experience."
+  },
+  {
+   "index": 84,
+   "verdict": "PARTIAL",
+   "trueWording": "Le Guin observes that 'Tolkien must have heard what he wrote.'",
+   "note": "Quote verbatim. The read-aloud basis is the page's surrounding argument (Le Guin: 'it's a wonderful book to read aloud'; sentences that follow the breath; the blogger never stumbling reading LotR aloud). The page's verb is 'observes' rather than 'infers'.",
+   "unsupportedLimb": "'infers from read-aloud ease' — the note records that the page's verb is 'observes'; the inference relation is the verifier's reconstruction from surrounding argument, not the page's own move."
+  },
+  {
+   "index": 88,
+   "verdict": "PARTIAL",
+   "trueWording": "sound effects of prose are usually subtle and always irregular.",
+   "note": "No quote field supplied; every limb is on the page but assembled from four places: 'the sound effects of prose are usually subtle and always irregular' (the claim drops 'usually' before 'subtle'); the prose/poetry contrast in the same sentence; the tool list from the chapter's exercise ('onomatopoeia, alliteration, repetition, rhythmic effects, made-up words or names, dialect') plus Twain's 'irresistible dialectical cadences'; and 'the way the changing sentence rhythms embody and express the emotions of the characters'.",
+   "unsupportedLimb": "'sound effects are subtle' stated absolutely — the note records that the claim drops 'usually' from the page's 'usually subtle and always irregular'."
+  },
+  {
+   "index": 94,
+   "verdict": "PARTIAL",
+   "trueWording": "How They Do Things with Words: Language, Power, Gender, and the Priestly Wizards",
+   "note": "Crossref API queried live (200); top hit score 77.3 is the exact record: Laura B. Comoletti & Michael D. C. Drout, Children's Literature 29(1): 113-141, DOI 10.1353/chl.0.0786, issued 2001, type journal-article, publisher Project MUSE. Graded SUBSTANCE not VERBATIM because the claim's inline phrase 'doing things with words' is a paraphrase of the title's 'How They Do Things with Words', and the claim carries no quote field. 'Speech-act power crossed with gender' is a fair reading of 'Language, Power, Gender'; 'peer-reviewed' is not a Crossref field but is supported in substance by the journal-article record in a scholarly journal.",
+   "unsupportedLimb": "'peer-reviewed' — the note states this is not a Crossref field; it is inferred from the journal-article record, not attested by the evidence fetched."
+  },
+  {
+   "index": 104,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete, and simple",
+   "note": "Same PDF, page 8. Supplied quote verbatim. 'Unstriking' = 'is not striking'. Minor gloss, not a demotion: the page's 'everything is direct, concrete, and simple' reads on Tolkien's writing in that sentence's sweep rather than strictly on items 'in' the vocabulary.",
+   "unsupportedLimb": "'everything in it [the vocabulary] is direct, concrete and simple' — the note records that the page's 'everything is direct, concrete, and simple' reads on Tolkien's writing in that sentence's sweep, not strictly on items in the vocabulary."
+  },
+  {
+   "index": 109,
+   "verdict": "PARTIAL",
+   "trueWording": "Speech expresses character. It does so whether the speaker or the author knows it or not.",
+   "note": "Exact on p.4, directly after the third dialogue sample, as cited. Wording caveat: the page says \"whether the speaker or the author KNOWS it or not\", not \"intends\"; unintended is entailed by unknown, so the limb holds, but the source's axis is knowledge, not intention.",
+   "unsupportedLimb": "'whether or not the writer intends it' — the note records that the page says 'whether the speaker or the author knows it or not'; the source's axis is knowledge, not intention (the claim's wording is entailed, not stated)."
+  },
+  {
+   "index": 119,
+   "verdict": "PARTIAL",
+   "trueWording": "though the sound effects of prose are usually subtle and always irregular",
+   "note": "Exact in the first paragraph. Contrast caveat: the poetry limb rests on the concessive full sentence - \"This is just as true of prose as it is of poetry, though the sound effects of prose are usually subtle and always irregular\" - so the difference from poetry is conceded by \"though\" rather than asserted about poetry outright.",
+   "unsupportedLimb": "'unlike those of poetry' — the note records that the difference from poetry is conceded by the page's 'though' clause ('This is just as true of prose as it is of poetry, though...'), not asserted about poetry outright."
+  },
+  {
+   "index": 130,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien must have heard what he wrote",
+   "note": "Raw page: 'Le Guin observes that \"Tolkien must have heard what he wrote.\"' Quote exact. The page's own verb is 'observes'; the claim's 'concludes from the read-aloud quality' is supplied by the surrounding context (the whole passage is about reading LotR aloud), not by an explicit inference marker on the page.",
+   "unsupportedLimb": "'concludes from the read-aloud quality' — the note records that the page's verb is 'observes' and that the inference is supplied by surrounding context, not by any explicit inference marker on the page."
+  },
+  {
+   "index": 167,
+   "verdict": "PARTIAL",
+   "trueWording": "That Jane Austen's stress-count is almost the same as that of the textbook is, however, a good indication that merely counting stresses is not going to give us any solid indications of the quality--in all senses--of the prose",
+   "note": "Verbatim, immediately following the 'far too small' sentence. Both limbs supported: the Austen/textbook near-match (tables give Austen 33, Craig 32) and the inference about quality. Nuance, not a defect: the page hedges as 'a good indication that merely counting stresses is not going to give us any SOLID indications' where the claim says 'shows ... cannot indicate' -- the hedge is carried inside the quoted words themselves.",
+   "unsupportedLimb": "'shows stress-counting alone cannot indicate the quality of prose' — the note records that the page hedges as 'a good indication that merely counting stresses is not going to give us any SOLID indications'."
+  },
+  {
+   "index": 170,
+   "verdict": "PARTIAL",
+   "trueWording": "that Woolf writes the shortest sentences of the lot and Austen the longest",
+   "note": "Verbatim, fourth bullet of the 'Various interesting factoids emerge' list. The claim's 'of the eight samples' is supported: the tables enumerate exactly eight samples ('Three Bears', Woolf, Tolkien, Twain, Stein, Darwin, Austen, Craig). Source-internal tension worth flagging but not a claim defect, since the claim reports what Le Guin's counts are said to show and the page asserts it as a factoid emerging from those counts: her per-passage counts give Darwin 1 sentence in 77 words against Austen 1 sentence in 72, so within the 100-syllable window Darwin's single sentence is the longer; both samples are cut mid-sentence at the dagger.",
+   "unsupportedLimb": "'Austen the longest' as something Le Guin's counts show — the verifier flagged that her own per-passage counts give Darwin 1 sentence in 77 words against Austen's 1 in 72, so within the 100-syllable window Darwin's single sentence is the longer; the page asserts the factoid, the counts do not support it."
+  },
+  {
+   "index": 196,
+   "verdict": "PARTIAL",
+   "trueWording": "she points out that it is the only exercise that she has given to all of her workshops",
+   "note": "Live page (HTTP 200). Quote exact in the opening note. Blogger (William May, 'Would That I Might') is working Steering the Craft chapter five, Exercise Five 'Chastity'; his own commentary confirms the exercise forbids adjectives and adverbs ('the forbidden words', 'functions of not having adjectives and adverbs'). Blogger is a reader working the exercises, not a workshop leader, but the claim's report-limb holds.",
+   "unsupportedLimb": "'a workshop blogger' — the note records that the source's author (William May) is a reader working the Steering the Craft exercises, not a workshop leader."
+  },
+  {
+   "index": 227,
+   "verdict": "PARTIAL",
+   "trueWording": "“The touchstone to plausibility in imaginative fiction is probably coherence.”",
+   "note": "Quote exact, in the paragraph before the closing two — locator confirmed. One nuance recorded, not a downgrade: Le Guin hedges with 'probably', which the claim drops; no limb of the claim is otherwise unsupported. The page continues 'Fantasy, which creates a world, must be strictly coherent to its own terms.'",
+   "unsupportedLimb": "'names coherence as the touchstone of plausibility' stated flatly — the note records that Le Guin hedges with 'probably', which the claim drops."
+  },
+  {
+   "index": 239,
+   "verdict": "PARTIAL",
+   "trueWording": "“the poet’s desire to make the words vivid, as exact and accurate, and as few as possible, telling much briefly”",
+   "note": "Quote exact. 'Carries over into writing prose' is supported by the preceding sentence ('the poet’s ear … will carry over into writing prose') and the elliptical 'And so may the poet’s desire…'. Two nuances recorded, neither a downgrade: Le Guin hedges with 'may', and the answer is a single joint reply under the heading 'POETRY AND FICTION — Two questions' to Joseph and Deepthi, not to Deepthi alone.",
+   "unsupportedLimb": "'carries over into writing prose' stated flatly — the note records that Le Guin hedges with 'may' ('And so may the poet's desire…')."
+  },
+  {
+   "index": 268,
+   "verdict": "PARTIAL",
+   "trueWording": "'A sentence isn't working as a narrative sentence if ... its similes or metaphors so dazzling, that it stops the reader'",
+   "note": "Same raw djvu text. Every limb of the claim is supported verbatim on the page: 'A sentence isn't working as a narrative sentence if its order is so unexpected, or its adjectives and adverbs so striking, or its similes* or metaphors* so dazzling, that it stops the reader, even to say \"Ooh!\"'. CAVEAT ON THE ATTACHED QUOTE: the claim's quote field, 'the proper beauty and power of prose', is also verbatim on the page but belongs to a different, later sentence ('though every sentence should move with grace, the proper beauty and power of prose is in the work as a whole') and does not by itself evidence the claim. Graded VERIFIED_VERBATIM because both rubric conditions hold (quote word-for-word on page; every limb supported), but the citation should be re-pointed to the sentence given in trueWording. Located in the chapter-2 'Conjunctivitis' passage on killing your darlings, not chapter 3 as the page field states.",
+   "unsupportedLimb": "the attached quote field — the note states that 'the proper beauty and power of prose' belongs to a different, later sentence and 'does not by itself evidence the claim'; the citation must be re-pointed to the trueWording sentence (and the passage is in chapter 2, not chapter 3 as the page field says)."
+  },
+  {
+   "index": 309,
+   "verdict": "PARTIAL",
+   "trueWording": "in the final section, some 100 pages, called 'The Back of the Book'",
+   "note": "Same page: 'she literally does -- in the final section, some 100 pages, called \"The Back of the Book\".' Quote exact; ~100 pages, the title, and the end-of-book position all supported. Flagging the wording: Horton calls it 'the final section', never 'appendix' -- the claim's word is a paraphrase of a section of notes at the book's end, not an added fact. Locator drift: it is the fourth body paragraph, not the second.",
+   "unsupportedLimb": "'appendix' — the verifier flagged the wording: Horton calls it 'the final section' and never 'appendix'."
+  },
+  {
+   "index": 331,
+   "verdict": "PARTIAL",
+   "trueWording": "Instead of conversations with dragons, there are struggles between Arha and the scheming Kossil, High Priestess of the Godkings, over the posting of guards and how to punish unbelievers.",
+   "note": "Raw page fetched (HTTP 200, full essay text present). Quote exact in the 'The Tombs of Atuan (1970)' section. 'Administrative' is the claim's gloss, not Ramsay's word, but it summarises exactly the two items she lists (guard postings, punishment of unbelievers) and matches her own framing of them as 'the realistic and mundane'.",
+   "unsupportedLimb": "'the conflict is administrative' attributed to Ramsay — the note states 'administrative' is the claim's gloss, not Ramsay's word (her framing is 'the realistic and mundane')."
+  },
+  {
+   "index": 334,
+   "verdict": "PARTIAL",
+   "trueWording": "There is time enough to spend with the villagers of Lorbanery, sullen and silent in the large, soft rain of April, sitting outside their inn...",
+   "note": "Raw page fetched. The full phrase appears word for word in the 'The Farthest Shore (1972)' section. In the HTML only 'large, soft rain of April' is wrapped in <em>, which is Ramsay's consistent convention for wording lifted from Le Guin (cf. 'girlish lad', 'golden seal', 'tired and stupid'); 'sullen and silent' sits in roman type, so the quoted-from-Le Guin span is narrower than the claim implies, though the sentence as a whole is Ramsay describing the villagers exactly this way.",
+   "unsupportedLimb": "'Ramsay quotes Le Guin describing the villagers as sullen and silent in the large, soft rain of April' — the note records that only 'large, soft rain of April' is marked (in <em>) as wording lifted from Le Guin; 'sullen and silent' sits in roman type as Ramsay's own, so the quoted-from-Le Guin span is narrower than the claim implies."
+  },
+  {
+   "index": 378,
+   "verdict": "PARTIAL",
+   "trueWording": "Perhaps Left Hand's most famous sentence ... 'The king was pregnant'",
+   "note": "Same raw fetch. Page: 'Perhaps Left Hand's most famous sentence appears in Chapter 8, when Argaven, the monarch of Karhide ..., finds himself with child. \"The king was pregnant,\" Genly Ai writes in a field report...'. Quote verbatim. Two minor divergences that do not unseat a limb: Vest hedges with 'Perhaps' where the claim states it flatly, and 'four-word' is the verifier's count of the quoted line (He/is/... -> 'The king was pregnant' = 4 words), not the page's own wording.",
+   "unsupportedLimb": "'identifies the most famous sentence' stated flatly, and 'four-word' — the note records that Vest hedges with 'Perhaps Left Hand's most famous sentence' and that 'four-word' is the verifier's own count, not the page's wording."
+  }
+ ]
+}

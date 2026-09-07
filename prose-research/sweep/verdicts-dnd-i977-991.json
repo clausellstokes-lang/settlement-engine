@@ -1,0 +1,325 @@
+{
+ "name": "dnd",
+ "chunk": 7,
+ "claims": [
+  {
+   "index": 977,
+   "feature": "other: digits in prose",
+   "claim": "In the same city description a fine is given as a dice expression and a coin abbreviation inside a sentence of prose.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Free City of Greyhawk\", read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Free%20City%20of%20Greyhawk?expansion=33359",
+   "quote": "The perpetrator pays a fine of 2d10 GP or works",
+   "page": "'Free City of Greyhawk' > 'Crime' > 'Petty Crime'",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 978,
+   "feature": "naming and forms of address",
+   "claim": "The 2024 DMG's worked city names its quarters after a trade, a physical feature and a resident class, applying the ward-naming rule the 2014 DMG had set out.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Free City of Greyhawk\", read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Free%20City%20of%20Greyhawk?expansion=33359",
+   "quote": "the River Quarter, Clerkburg, the Artisans’ Quarter, and the Foreign Quarter",
+   "page": "'Free City of Greyhawk' > 'City Neighborhoods'",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 979,
+   "feature": "place and institution description",
+   "claim": "Each neighbourhood in the 2024 DMG's worked city is a bolded place name followed by two or three present-tense sentences of description.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Free City of Greyhawk\", read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Free%20City%20of%20Greyhawk?expansion=33359",
+   "quote": "Clerkburg is the university district of Greyhawk, with dozens of schools",
+   "page": "'Free City of Greyhawk' > 'City Neighborhoods'",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 980,
+   "feature": "annalist voice and deep time",
+   "claim": "The 2024 DMG's Greyhawk Gazetteer dates realm-level events with numerals and an era abbreviation, giving the present year as 576 CY.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Greyhawk Gazetteer\", read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Greyhawk%20Gazetteer?expansion=33359",
+   "quote": "picture the Flanaess about 200 years ago",
+   "page": "'Greyhawk Gazetteer' > 'The Big Picture'",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 981,
+   "feature": "other: digits in prose",
+   "claim": "On the same gazetteer page an elapsed interval is spelled out in words in one paragraph and written as the numeral 200 in another, so the book applies no single rule.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Greyhawk Gazetteer\", read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Greyhawk%20Gazetteer?expansion=33359",
+   "quote": "Seven years ago, knights and soldiers from Furyondy",
+   "page": "'Greyhawk Gazetteer' > 'Central Flanaess' / 'The Big Picture'",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 982,
+   "feature": "withheld information and inference",
+   "claim": "The 2024 DMG rules that only the details of a setting's history that feature in the adventures are relevant.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Greyhawk Gazetteer\", read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Greyhawk%20Gazetteer?expansion=33359",
+   "quote": "the only relevant details of this history are those that",
+   "page": "'Greyhawk Gazetteer' > 'Living History'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 983,
+   "feature": "consequence on a household",
+   "claim": "The 2024 DMG tells the DM to carry past events into the present as physical residue - a crater, a defaced statue in the town square, a holiday for a local hero.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Greyhawk Gazetteer\", read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Greyhawk%20Gazetteer?expansion=33359",
+   "quote": "provide concrete touchstones to past events",
+   "page": "'Greyhawk Gazetteer' > 'Living History' > 'Echoes of the Past'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 984,
+   "feature": "plainness and economy",
+   "claim": "The 2024 DMG instructs the DM to summarise what a long written record says and give only its plot-worthy parts.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Greyhawk Gazetteer\", read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Greyhawk%20Gazetteer?expansion=33359",
+   "quote": "Summarize what lengthy works say, and focus on the most",
+   "page": "'Greyhawk Gazetteer' > 'Living History' > 'Historical Records'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 985,
+   "feature": "boxed text form",
+   "claim": "Shawn Merwin's first rule for read-aloud text on D&D Beyond is to write it in the third person rather than the second.",
+   "source": "Shawn Merwin, \"Let's Design an Adventure: Boxed Text\", D&D Beyond (Wizards of the Coast platform)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Move from the second-person point of view to the third person",
+   "page": "'Let's Design an Adventure: Boxed Text', Tip 1",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "",
+   "routeHint": "live URL, browser user agent, curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 986,
+   "feature": "boxed text form",
+   "claim": "Merwin's own demonstration of the preferred third-person form makes the object of description the grammatical subject of the sentence.",
+   "source": "Shawn Merwin, \"Let's Design an Adventure: Boxed Text\", D&D Beyond (Wizards of the Coast platform)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "The bloated corpse of a headless dragon dominates the center",
+   "page": "'Let's Design an Adventure: Boxed Text', Tip 1 example",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "",
+   "routeHint": "live URL, browser user agent, curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 987,
+   "feature": "adjective and adverb discipline",
+   "claim": "Merwin's rule of thumb is to keep only the environmental details the characters must interact with.",
+   "source": "Shawn Merwin, \"Let's Design an Adventure: Boxed Text\", D&D Beyond (Wizards of the Coast platform)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "leave in only the details about the environment when the PCs",
+   "page": "'Let's Design an Adventure: Boxed Text', Tip 2",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "",
+   "routeHint": "live URL, browser user agent, curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 988,
+   "feature": "boxed text form",
+   "claim": "Merwin warns that read-aloud text is not the place for a novelist's voice.",
+   "source": "Shawn Merwin, \"Let's Design an Adventure: Boxed Text\", D&D Beyond (Wizards of the Coast platform)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "boxed text is not the place to unleash that inner novelist",
+   "page": "'Let's Design an Adventure: Boxed Text', Tip 2",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "",
+   "routeHint": "live URL, browser user agent, curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 989,
+   "feature": "withheld information and inference",
+   "claim": "Merwin rules that read-aloud text must not describe what the characters could not know.",
+   "source": "Shawn Merwin, \"Let's Design an Adventure: Boxed Text\", D&D Beyond (Wizards of the Coast platform)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Describe everything the characters can sense, but not what they can’t",
+   "page": "'Let's Design an Adventure: Boxed Text', Tip 3",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "",
+   "routeHint": "live URL, browser user agent, curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 990,
+   "feature": "boxed text form",
+   "claim": "Merwin bans the hedges 'seems' and 'appears' from read-aloud text on the ground that they cue metagaming.",
+   "source": "Shawn Merwin, \"Let's Design an Adventure: Boxed Text\", D&D Beyond (Wizards of the Coast platform)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "nothing triggers meta-gaming like the words “seems” or “appears”",
+   "page": "'Let's Design an Adventure: Boxed Text', Tip 4",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "",
+   "routeHint": "live URL, browser user agent, curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 991,
+   "feature": "boxed text form",
+   "claim": "David Noonan reports from watching play at Gen Con 2005 that a DM's read-aloud text holds the table for two sentences.",
+   "source": "Jesse Decker and David Noonan, \"Design & Development: Undercover at Gen Con, Part 1\", wizards.com, 16 September 2005",
+   "url": "https://web.archive.org/web/20051215014928id_/http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "If you’re the DM, you get two sentences. Period.",
+   "page": "'Design & Development: Undercover at Gen Con, Part 1', Undercover Insight #1",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2005-09-16",
+   "routeHint": "Wayback raw capture (web.archive.org /<ts>id_/ form), curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 977,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The perpetrator pays a fine of 2d10 GP or works",
+   "note": "Verbatim in the 'Crime' > 'Petty Crime' paragraph of the Roll20 licensed 2024 DMG page (HTTP 200, raw curl with browser UA, HTML stripped). Both limbs hold: the dice expression 2d10 and the coin abbreviation GP sit inside a prose sentence, and the same three-category Crime block also carries 50 GP, 250 GP, 100 GP, 1d6 years and 2d10 years in running prose."
+  },
+  {
+   "index": 978,
+   "verdict": "PARTIAL",
+   "trueWording": "the River Quarter, Clerkburg, the Artisans' Quarter, and the Foreign Quarter",
+   "unsupportedLimb": "that this applies a ward-naming rule the 2014 DMG had set out - the page never mentions the 2014 DMG, any earlier edition, or a ward-naming rule; that link is the claimant's inference, not on this page",
+   "note": "Quote verbatim in 'City Neighborhoods'. The naming limb holds on the page's own roster - Artisans' Quarter (a trade), River Quarter (the Selintan River, a physical feature), Foreign Quarter and Thieves'/Slum Quarters (resident classes). Only the cross-edition attribution is unsupported here."
+  },
+  {
+   "index": 979,
+   "verdict": "PARTIAL",
+   "trueWording": "Clerkburg is the university district of Greyhawk, with dozens of schools",
+   "unsupportedLimb": "that each entry runs two or three present-tense sentences - of the eight neighbourhood entries four (Foreign Quarter, Garden Quarter, Slum Quarter, Thieves' Quarter) are a single sentence and none reaches three; the range is one to two",
+   "note": "Quote verbatim in 'City Neighborhoods'. The bolding limb is confirmed in the raw HTML, where each entry opens <strong>Clerkburg.</strong> etc. before the description, and every entry is present tense. Only the sentence-count limb fails."
+  },
+  {
+   "index": 980,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the year 576 in the Common Year",
+   "note": "Quote verbatim in 'The Big Picture'. The dating limb holds: realm-level events are dated 356 CY (Nyrond joining the secession), 453 CY (accession of King Tavish IV) and 569 CY (Battle of Emridy Meadows). Caveat on form only - the present year is written out as the Common Year in the same parenthesis rather than abbreviated CY, though the abbreviation is used for the dated events."
+  },
+  {
+   "index": 981,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Seven years ago, knights and soldiers from Furyondy",
+   "note": "Quote verbatim under 'Central Flanaess' > 'Battle of Emridy Meadows'; the numeral form is in 'The Big Picture' on the same page, which asks the reader to picture the Flanaess about 200 years ago. The no-single-rule limb is reinforced by a second mismatched pair on the page: the Eastern Flanaess culture paragraph writes almost 800 years ago as a numeral while the Western Flanaess paragraph spells out about a thousand years ago, so no consistent spell-out threshold is in force."
+  },
+  {
+   "index": 982,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the only relevant details of this history are those that",
+   "note": "Verbatim in the opening sentence of 'Living History', which completes with the clause that they feature in your adventures. The page states it of Greyhawk's own history of ancient empires and recent wars - the claim's generalisation to a setting's history is a fair reading of the worked setting, and the following sentence tells the DM to reveal significant details in the course of adventures."
+  },
+  {
+   "index": 983,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "provide concrete touchstones to past events",
+   "note": "Verbatim in 'Living History' > 'Echoes of the Past', where all three of the claim's examples appear in one sentence: a crater in the side of a mountain, a defaced statue in the town square, a holiday celebrating a local hero. The page's own word is concrete touchstones rather than physical residue, and the third example (a holiday) is a custom rather than a physical object - a gloss, not a failed limb."
+  },
+  {
+   "index": 984,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Summarize what lengthy works say, and focus on the most",
+   "note": "Verbatim as the closing sentence of 'Living History' > 'Historical Records', completing with plot-worthy parts. The page says to focus on the most plot-worthy parts rather than to give only those, so the claim's only is a slight strengthening of the instruction's emphasis."
+  },
+  {
+   "index": 985,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Move from the second-person point of view to the third person",
+   "note": "Verbatim as the Tip 1 heading of the article, bylined Shawn Merwin and dated Nov 6, 2019 on dndbeyond.com (HTTP 200, raw curl with browser UA). It is the first of six numbered tips, and the article's opening paragraph equates boxed text with read-aloud text, so both limbs of the claim hold."
+  },
+  {
+   "index": 986,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The bloated corpse of a headless dragon dominates the center",
+   "note": "Verbatim inside the Tip 1 body, given as the third-person rewrite (it completes with of a clearing) set against the second-person version he rejects, in which you notice the same corpse. In the preferred form the corpse - the object described - is the grammatical subject and the verb is dominates, exactly as the claim states."
+  },
+  {
+   "index": 987,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leave in only the details about the environment when the PCs",
+   "note": "Verbatim under Tip 2 (Avoid the novelist/dramatist urge), introduced as his rule of thumb when writing or editing and completing with the requirement that the PCs must interact with them on some level. The following sentences illustrate with a bog or a monster's stench that matters only as a terrain feature or monster ability."
+  },
+  {
+   "index": 988,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "boxed text is not the place to unleash that inner novelist",
+   "note": "Verbatim in the first paragraph under the Tip 2 heading, which is itself Avoid the novelist/dramatist urge. The surrounding sentences warn that nothing slows a game more than paragraph after paragraph of boxed text and prose so purple it embarrasses a rainbow, so the claim's novelist's voice reading is exact."
+  },
+  {
+   "index": 989,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Describe everything the characters can sense, but not what they can't",
+   "note": "Verbatim as the Tip 3 heading. The body supports the could-not-know limb directly: it faults boxed text that details things the characters couldn't know, giving locked crates whose contents are described as full of mining equipment, and tells the DM to let the mystery linger."
+  },
+  {
+   "index": 990,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "nothing triggers meta-gaming like the words “seems” or “appears”",
+   "note": "Verbatim in the Tip 4 body (the heading reads Avoid seems to be or appears to be), and the metagaming ground is the page's own reason - those words generally mean some trick or diversion is in the offing. The page frames it as avoidance rather than a formal ban, and directs the DM to let Perception or Investigation checks separate the seems from the is after the boxed text ends."
+  },
+  {
+   "index": 991,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If you're the DM, you get two sentences. Period.",
+   "note": "Verbatim under 'Undercover Insight #1: Boxed Text = MEGO' on the Wayback raw capture (HTTP 200), which carries the Design & Development masthead, the date 09/16/2005 and the byline Jesse Decker and David Noonan. The first-person observer is Noonan: the piece describes ditching the Wizards polo shirt to watch games for twenty minutes at a stretch across the four days of Gen Con 2005, and later calls it the Dave wanders around technique. The next sentence supplies the consequence - beyond two sentences players are stacking dice, talking or staring off into space."
+  }
+ ]
+}

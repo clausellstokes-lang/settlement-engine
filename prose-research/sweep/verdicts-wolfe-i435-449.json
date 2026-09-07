@@ -1,0 +1,233 @@
+{
+ "name": "wolfe",
+ "chunk": 29,
+ "claims": [
+  {
+   "index": 435,
+   "feature": "withheld information and inference",
+   "claim": "Borski says 'V.R.T.' is told anachronically and leaves the reader to piece everything together from a fragmentary, disjointed narrative.",
+   "source": "Robert Borski, Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "with the reader left to piece everything together from a fragmentary",
+   "page": "review, paragraph 2"
+  },
+  {
+   "index": 436,
+   "feature": "naming and forms of address",
+   "claim": "Borski says the only name the first novella's narrator is identified by is Number Five, though his first and last names are decodeable.",
+   "source": "Robert Borski, Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "the only name he’s identified by in the book: Number Five",
+   "page": "review, paragraph on the first novella"
+  },
+  {
+   "index": 437,
+   "feature": "per-speaker register",
+   "claim": "Gevers says rich eccentricities of diction abound in The Book of the Long Sun, retarding comprehension, and lists a distinct manner of speech for each class and character.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "Rich eccentricities of diction abound, retarding comprehension.",
+   "page": "section 'Voices'"
+  },
+  {
+   "index": 438,
+   "feature": "civic record register",
+   "claim": "Gevers says Long Sun's narrator reconstructs Silk's story years afterwards from his own memories and from much oral testimony.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "reconstructs Silk’s story from his own memories and from much oral",
+   "page": "section 'Plot'"
+  },
+  {
+   "index": 439,
+   "feature": "annalist voice and deep time",
+   "claim": "Gevers says the resulting narrative relates some events in great and possibly very significant detail while telling complex developments at second hand.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "Sometimes events are related in great, possibly very significant detail",
+   "page": "section 'Plot'"
+  },
+  {
+   "index": 440,
+   "feature": "omission as information",
+   "claim": "Gevers says parts of the Long Sun narrative are conveyed speedily and with gaping lacunae.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "conveyed speedily and with gaping lacunae",
+   "page": "section 'Plot'"
+  },
+  {
+   "index": 441,
+   "feature": "withheld information and inference",
+   "claim": "Gevers says that in certain instances of Long Sun only guesswork can reconstruct what has occurred.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "in certain instances, only guesswork can reconstruct what has occurred",
+   "page": "section 'Plot'"
+  },
+  {
+   "index": 442,
+   "feature": "withheld information and inference",
+   "claim": "Gevers says detailed textual analysis is demanded by all of Wolfe's works.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "of the kind all Wolfe’s works demand",
+   "page": "section on Oreb and Quetzal"
+  },
+  {
+   "index": 443,
+   "feature": "place and institution description",
+   "claim": "Crampton says the torturers of the Book of the New Sun are the executors of a sentence decided elsewhere by the judicial process.",
+   "source": "Jeremy Crampton, Ultan's Library, 10 April 2001",
+   "url": "https://ultan.org.uk/torture-and-confession-in-wolfes-book-of-the-new-sun/",
+   "quote": "the torturers are the executors of a sentence decided elsewhere",
+   "page": "section on the guild and the judiciary"
+  },
+  {
+   "index": 444,
+   "feature": "place and institution description",
+   "claim": "Crampton says the silence of the torturer emphasises that the confession exists not for the torturers but to produce penitence or truth for the authorities.",
+   "source": "Jeremy Crampton, Ultan's Library, 10 April 2001",
+   "url": "https://ultan.org.uk/torture-and-confession-in-wolfes-book-of-the-new-sun/",
+   "quote": "The silence of the torturer also emphasises that the confession is",
+   "page": "section on the guild and the judiciary"
+  },
+  {
+   "index": 445,
+   "feature": "place and institution description",
+   "claim": "Crampton says Wolfe's juridical system approximates closely that of Europe up to the early modern period.",
+   "source": "Jeremy Crampton, Ultan's Library, 10 April 2001",
+   "url": "https://ultan.org.uk/torture-and-confession-in-wolfes-book-of-the-new-sun/",
+   "quote": "his system should approximate so closely that of Europe up to",
+   "page": "conclusion"
+  },
+  {
+   "index": 446,
+   "feature": "withheld information and inference",
+   "claim": "Gaiman's first rule for reading Wolfe is to trust the text implicitly because the answers are in it.",
+   "source": "Neil Gaiman, “How To Read Gene Wolfe”, World Horror Convention 2002 Program Book, reprinted on the F&SF site",
+   "url": "https://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "quote": "Trust the text implicitly. The answers are in there.",
+   "page": "numbered rule 1"
+  },
+  {
+   "index": 447,
+   "feature": "withheld information and inference",
+   "claim": "Gaiman says Peace read as a gentle Midwestern memoir on his first reading and became a horror novel only on a later one.",
+   "source": "Neil Gaiman, “How To Read Gene Wolfe”, World Horror Convention 2002 Program Book, reprinted on the F&SF site",
+   "url": "https://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "quote": "really was a gentle Midwestern memoir the first time I read",
+   "page": "numbered rule 3"
+  },
+  {
+   "index": 448,
+   "feature": "plainness and economy",
+   "claim": "Gaiman places Wolfe among the clever writers who see no need to point out how clever they are.",
+   "source": "Neil Gaiman, “How To Read Gene Wolfe”, World Horror Convention 2002 Program Book, reprinted on the F&SF site",
+   "url": "https://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "quote": "who see no need to point out how clever they are",
+   "page": "numbered rule 7"
+  },
+  {
+   "index": 449,
+   "feature": "concrete sensory noun",
+   "claim": "Joan Gordon says the individual scenes of Peace are sharply evoked so that the reader travels in time to its streets and houses.",
+   "source": "Joan Gordon, “We Read Things Differently”, Los Angeles Review of Books, 30 April 2013",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "Its individual scenes are sharply evoked so that we travel in time",
+   "page": "standfirst and body"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 435,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“‘V.R.T’ is told anachronically, with the reader left to piece everything together from a fragmentary, disjointed narrative”",
+   "note": "Raw HTML fetched from ultan.org.uk (HTTP 200, browser UA). Quote is contiguous and word-for-word. Both limbs supported: 'told anachronically' and the piecing-together clause sit in the same sentence. Byline on the page: 'reviewed by Robert Borski', dated 28 August 2001 — attribution confirmed."
+  },
+  {
+   "index": 436,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“the only name he’s identified by in the book: Number Five (though both his first and last name are eminently decodeable)”",
+   "note": "Same raw page. Quote verbatim. The decodeable-names limb is the page's own parenthesis. Page says 'in the book' where the claim says 'the first novella's narrator'; the surrounding sentence is about Maitre and the narrator of the title novella, so the narrowing is accurate rather than a stretch."
+  },
+  {
+   "index": 437,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Rich eccentricities of diction abound, retarding comprehension.”",
+   "note": "Raw HTML fetched from ultan.org.uk (HTTP 200). Quote verbatim. Second limb supported: the paragraph then itemises Tick, Oreb, the lower classes' 'thieves' cant', the lower-ranking soldiers, Remora, Incus, the Trivigaunti elite, Quetzal, Crane, Lemur. Locator nit only: the section is headed 'Dialogue.', not 'Voices' — the claim sentence itself does not assert the heading."
+  },
+  {
+   "index": 438,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“As Wolfe’s narrator years afterwards reconstructs Silk’s story from his own memories and from much oral testimony”",
+   "note": "Same raw page, opening of the 'Plot.' section. Quote verbatim; the 'years afterwards' limb is on the page too, immediately before the quoted span."
+  },
+  {
+   "index": 439,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Sometimes events are related in great, possibly very significant detail; elsewhere, complex developments are told at second hand”",
+   "note": "Same raw page, same 'Plot.' sentence. Quote verbatim; the second-hand limb is the following clause of the same sentence."
+  },
+  {
+   "index": 440,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“or conveyed speedily and with gaping lacunae”",
+   "note": "Same raw page, same sentence. Quote verbatim as a contiguous span."
+  },
+  {
+   "index": 441,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“in certain instances, only guesswork can reconstruct what has occurred”",
+   "note": "Same raw page, closing clause of the same 'Plot.' sentence. Quote verbatim; the subject throughout is the Long Sun narrative."
+  },
+  {
+   "index": 442,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Detailed textual analysis, of the kind all Wolfe’s works demand, suggests that the Outsider has two oracular mouthpieces”",
+   "note": "Same raw page. Quote verbatim. It does sit in the Oreb/Quetzal discussion, as the locator says, and the claim's paraphrase (all Wolfe's works demand detailed textual analysis) is the page's own assertion."
+  },
+  {
+   "index": 443,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Wolfe tells us that the torturers are the executors of a sentence decided elsewhere by the judicial process.”",
+   "note": "Raw HTML fetched from ultan.org.uk (HTTP 200). Quote verbatim, and the claim's added words 'by the judicial process' are the page's own continuation. Byline 'by Jeremy Crampton', dated 10 April 2001, signed 'Jeremy Crampton, October-December 2000' — attribution confirmed. Subject is Wolfe's Book of the New Sun throughout."
+  },
+  {
+   "index": 444,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“The silence of the torturer also emphasises that the confession is not there for the benefit of the torturers, but to produce penitence in the accused, or to produce truth for the authorities”",
+   "note": "Same raw page. Quote verbatim. The claim compresses 'penitence in the accused, or ... truth for the authorities (be it judge or priest)' to 'penitence or truth for the authorities'; that reads the page correctly rather than adding to it."
+  },
+  {
+   "index": 445,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“that his system should approximate so closely that of Europe up to the early modern period”",
+   "note": "Same raw page. Quote verbatim; the full sentence is 'It is all the more interesting therefore that his system should approximate so closely that of Europe up to the early modern period.' It sits at ~86% through the article, in the closing discussion — consistent with the 'conclusion' locator."
+  },
+  {
+   "index": 446,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“1) Trust the text implicitly. The answers are in there.”",
+   "note": "Live host www.sfsite.com does not resolve (DNS NXDOMAIN on curl with browser UA and on WebFetch, both apex and www). Recovered via Wayback raw capture https://web.archive.org/web/20110608132208id_/http://www.sfsite.com/fsf/2007/gwng0704.htm (HTTP 200, full article text, not a summary; corroborated against the 2007 and 2010 captures). Quote verbatim and it is numbered rule 1. Page bylined 'by Neil Gaiman', with 'First published in The World Horror Convention 2002 Program Book' — attribution confirmed."
+  },
+  {
+   "index": 447,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Peace really was a gentle Midwestern memoir the first time I read it. It only became a horror novel on the second or the third reading.”",
+   "note": "Same Wayback raw capture. Quote verbatim, inside numbered rule 3. Both limbs on the page; the claim's 'a later one' is the page's 'the second or the third reading'."
+  },
+  {
+   "index": 448,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“the ones who see no need to point out how clever they are. Gene Wolfe is of the second kind”",
+   "note": "Same Wayback raw capture, numbered rule 7. Quote verbatim; the placing limb ('places Wolfe among') is the page's explicit 'Gene Wolfe is of the second kind'."
+  },
+  {
+   "index": 449,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Its individual scenes are sharply evoked so that we travel in time, along with the narrator, to the novel’s streets and houses”",
+   "note": "Raw HTML fetched live from lareviewofbooks.org (HTTP 200); the sentence appears twice, as the standfirst and in the body. The live page renders its byline client-side, so authorship was confirmed on the Wayback raw capture https://web.archive.org/web/20200927175832id_/https://lareviewofbooks.org/article/we-read-things-differently/ — 'We Read Things Differently By Joan Gordon APRIL 30, 2013'. Quote verbatim; the 'streets and houses' limb is the body continuation."
+  }
+ ]
+}

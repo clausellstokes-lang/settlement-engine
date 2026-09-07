@@ -1,0 +1,326 @@
+{
+ "name": "dnd",
+ "chunk": 11,
+ "claims": [
+  {
+   "index": 0,
+   "feature": "place and institution description",
+   "claim": "Wizards of the Coast's own 2024 settlement handout bands settlement size by population, with a village at up to 500 people.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "VILLAGE (POP. UP TO 500)",
+   "page": "Settlement Tracker, size checkbox row",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "direct PDF fetch from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1,
+   "feature": "place and institution description",
+   "claim": "The same 2024 handout sets the town band at a population of 501 to 5,000.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "TOWN (POP. 501–5,000)",
+   "page": "Settlement Tracker, size checkbox row",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "direct PDF fetch from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 2,
+   "feature": "place and institution description",
+   "claim": "The same 2024 handout sets the city band at a population of 5,001 or more.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "CITY (POP. 5,001+)",
+   "page": "Settlement Tracker, size checkbox row",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "direct PDF fetch from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 3,
+   "feature": "place and institution description",
+   "claim": "The publisher's settlement slot list opens with a slot labelled Defining Trait.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "DEFINING TRAIT",
+   "page": "Settlement Tracker, first field",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "direct PDF fetch from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 4,
+   "feature": "place and institution description",
+   "claim": "The publisher's settlement slot list carries a slot labelled Claim to Fame.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "CLAIM TO FAME",
+   "page": "Settlement Tracker, second field",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "direct PDF fetch from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 5,
+   "feature": "place and institution description",
+   "claim": "The publisher's settlement slot list carries a single leadership slot labelled Local Leader.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "LOCAL LEADER",
+   "page": "Settlement Tracker, fourth field",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "direct PDF fetch from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 6,
+   "feature": "place and institution description",
+   "claim": "The publisher's settlement handout keeps a list slot for the settlement's noteworthy places, separate from its people.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "NOTEWORTHY PLACES",
+   "page": "Settlement Tracker, right-hand list column",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "direct PDF fetch from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 7,
+   "feature": "place and institution description",
+   "claim": "The only economic figure the publisher's settlement handout asks a DM to record is the gp value of the most expensive item for sale.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "GP VALUE OF THE MOST EXPENSIVE ITEM FOR SALE",
+   "page": "Settlement Tracker, footer field",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "direct PDF fetch from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 8,
+   "feature": "boxed text form",
+   "claim": "The Death House read-aloud paragraph opens a settlement with a road, the village, and a simile drawn from its own building stock rather than with any statistic.",
+   "source": "Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016",
+   "url": "https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf",
+   "quote": "The gravel road leads to a village, its tall houses dark as",
+   "page": "Death House, arrival read-aloud",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2016",
+   "routeHint": "direct PDF fetch from media.wizards.com, pdftotext",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 9,
+   "feature": "naming and forms of address",
+   "claim": "Death House names a building by the name the locals give it rather than by an owner or address.",
+   "source": "Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016",
+   "url": "https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf",
+   "quote": "Death House is the name given to an old row house",
+   "page": "Death House, 'History'",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2016",
+   "routeHint": "direct PDF fetch from media.wizards.com, pdftotext",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 10,
+   "feature": "place and institution description",
+   "claim": "D&D Beyond's own launch article says the 2024 Dungeon Master's Guide's handouts serve as a template for building settlements.",
+   "source": "Mike Bernier, 'What's New in the 2024 Dungeon Master's Guide?', D&D Beyond, 12 Nov 2024",
+   "url": "https://www.dndbeyond.com/posts/1825-whats-new-in-the-2024-dungeon-masters-guide",
+   "quote": "creating NPCs and building settlements",
+   "page": "'Adventures, Handouts, and Ready-to-Play Maps'",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "curl with browser user agent; note the page uses non-breaking spaces, so longer quotations will not match on a naive search",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 11,
+   "feature": "edition and house style",
+   "claim": "Wizards of the Coast states that the 2024 Dungeon Master's Guide replaces all rules in the 2014 version of the book.",
+   "source": "DND Staff, 'Updates in the Dungeon Master's Guide (2024)', D&D Beyond, 20 Feb 2025",
+   "url": "https://www.dndbeyond.com/posts/1916-updates-in-the-dungeon-masters-guide-2024",
+   "quote": "it replaces all rules in the 2014 version of the book",
+   "page": "'Using This Book with Older Books'",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "date": "2025-02-20",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 12,
+   "feature": "place and institution description",
+   "claim": "An official free D&D Beyond encounter opens a settlement entry with the settlement's name, a population figure, and its people's trade, in one sentence.",
+   "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
+   "url": "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
+   "quote": "Icehaven is a village of 5,000 souls",
+   "page": "'The Village of Icehaven'",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2020",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 13,
+   "feature": "terminology consistency",
+   "claim": "The same official column calls Icehaven a village while giving it a population of 5,000, a figure the publisher's own 2024 settlement handout places in the town band.",
+   "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
+   "url": "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
+   "quote": "Icehaven is a village of 5,000 souls",
+   "page": "'The Village of Icehaven'",
+   "kind": "own-words",
+   "polarity": "disputes",
+   "date": "2020",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — the mismatch is a comparison across two WotC documents of different years, not a statement either page makes"
+  },
+  {
+   "index": 14,
+   "feature": "naming and forms of address",
+   "claim": "The same column names a settlement's leader as office title plus given name plus surname, in that order.",
+   "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
+   "url": "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
+   "quote": "The leader of the village, Starosta Ernath Noack",
+   "page": "'Arrival of the Infected One'",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2020",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 0,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "VILLAGE (POP. UP TO 500)",
+   "note": "Raw PDF fetched live (HTTP 200, 5.3 MB), pdftotext -layout. Size checkbox row carries three population bands; village band is as quoted. Footer reads TM & (c) 2024 Wizards of the Coast LLC, so publisher and year are on the artefact itself."
+  },
+  {
+   "index": 1,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "TOWN (POP. 501–5,000)",
+   "note": "Same raw PDF, same size checkbox row, second band. En dash in the original between 501 and 5,000, as the claim's quote has it."
+  },
+  {
+   "index": 2,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "CITY (POP. 5,001+)",
+   "note": "Same raw PDF, same size checkbox row, third band. The three bands are contiguous and exhaustive."
+  },
+  {
+   "index": 3,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "DEFINING TRAIT",
+   "note": "First of the four boxed slots, immediately below the settlement-name line and the size row. The name line and size row are header, not slots, so 'opens with' holds."
+  },
+  {
+   "index": 4,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "CLAIM TO FAME",
+   "note": "Second boxed slot, directly under Defining Trait."
+  },
+  {
+   "index": 5,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LOCAL LEADER",
+   "note": "Fourth boxed slot (after Defining Trait, Claim to Fame, Current Calamity), as the claim's page field says. Checked the whole one-page handout: it is the only leadership slot; Noteworthy People is a free list, not a leadership field. The 'single' limb holds."
+  },
+  {
+   "index": 6,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "NOTEWORTHY PLACES",
+   "note": "Right-hand of two parallel seven-line list columns; the left is headed NOTEWORTHY PEOPLE. Places and people are separate columns, as claimed."
+  },
+  {
+   "index": 7,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GP VALUE OF THE MOST EXPENSIVE ITEM FOR SALE",
+   "note": "Footer field, followed by a colon and a rule. Read the complete handout text to test the 'only' limb: the other fields are name, size band, Defining Trait, Claim to Fame, Current Calamity, Local Leader, and the two lists. No other currency or economic figure appears, so 'only' is supported. Population is a size band, not an economic figure."
+  },
+  {
+   "index": 8,
+   "verdict": "PARTIAL",
+   "trueWording": "its tall houses dark as tombstones",
+   "unsupportedLimb": "that the simile is drawn from the village's own building stock - the simile's vehicle is tombstones (grave markers), not buildings; the houses are the tenor being compared, not the source of the comparison",
+   "note": "Raw PDF fetched live (HTTP 200, 62 MB), pdftotext. The quoted fragment is verbatim; the two-column flow splits it, and the paragraph continues 'tombstones. Nestled among these solemn dwellings are a handful of closed-up shops. Even the tavern is shut tight.' Road, village and absence of any statistic are all supported. Only the 'building stock' characterisation of the simile fails."
+  },
+  {
+   "index": 9,
+   "verdict": "PARTIAL",
+   "trueWording": "Death House is the name given to an old row house",
+   "unsupportedLimb": "that the locals are the ones who give the name - the sentence is agentless passive ('is the name given'), and the only mention of locals nearby is that they 'give the building a wide berth', which is avoidance, not naming",
+   "note": "Raw PDF, section 'History'. The quote is verbatim and the naming-by-epithet form is supported; the page does locate the house by village and map area (E7) and mentions the family that built it, so the 'rather than by an owner or address' contrast is the verifier's reading rather than the page's statement."
+  },
+  {
+   "index": 10,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "provide a template for creating NPCs and building settlements",
+   "note": "Live page fetched with a browser user agent (HTTP 200). The routeHint's warning is real: the body uses non-breaking spaces, and a naive grep found nothing until the bytes were normalised. Byline confirmed on the page as 'by Mike Bernier Nov 12, 2024'. The sentence sits under the heading 'Adventures, Handouts, and Ready-to-Play Maps' and its subject is 'the handouts sprinkled throughout the book', the book being the 2024 Dungeon Master's Guide. Every limb holds."
+  },
+  {
+   "index": 11,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it replaces all rules in the 2014 version of the book",
+   "note": "Live page fetched with a browser user agent (HTTP 200), byline 'by DND Staff Feb 20, 2025', tagged Studio Blog, under the heading 'Using This Book with Older Books'. The page's full sentence carries a conditional the claim drops: 'When you play D&D with the Dungeon Master's Guide (2024), it replaces...'. That is scope, not contradiction, so the verdict stands; a downstream user who needs the conditional should carry it."
+  },
+  {
+   "index": 12,
+   "verdict": "PARTIAL",
+   "trueWording": "Icehaven is a village of 5,000 souls",
+   "unsupportedLimb": "that the people's trade is in that same opening sentence - the opening sentence gives name, population, species mix and coastal location; the trade ('ply their trades on fishing boats') arrives two sentences later",
+   "note": "Live page fetched with a browser user agent (HTTP 200). Quote verbatim under the heading 'The Village of Icehaven'. Name and population limbs hold; the 'in one sentence' limb does not. Separately, the source attribution 'Wizards of the Coast / D&D Beyond' is loose for a February 2020 article: the byline is James Haeck, and D&D Beyond was not WotC-owned until 2022."
+  },
+  {
+   "index": 13,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Icehaven is a village of 5,000 souls",
+   "note": "Both halves verified against raw sources fetched in this same batch: the 'village' label and the 5,000 figure are verbatim on the 2020 page (heading 'The Village of Icehaven'), and the 2024 Settlement Tracker PDF puts 5,000 inside its town band (501-5,000) with village capped at 500. The mismatch is therefore real. As the claim's own confidence note says, it is a cross-document comparison, not a statement either page makes - that framing is accurate and is the only reason this is not a same-page finding."
+  },
+  {
+   "index": 14,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The leader of the village, Starosta Ernath Noack",
+   "note": "Live page, heading 'Arrival of the Infected One'. Quote verbatim. The office-title reading is corroborated later in the same article, where 'starosta' is used as a bare common noun ('the aging starosta', 'the starosta's guest room'), so Starosta is title, Ernath given name, Noack surname, in that order."
+  }
+ ]
+}

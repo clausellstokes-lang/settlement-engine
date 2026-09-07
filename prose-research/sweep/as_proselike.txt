@@ -1,0 +1,63 @@
+⌂ 
+
+ Zeugma and Literary DNA
+
+ Does this sound like prose?
+
+ Since these studies require me to read with spoon-bending intensity, I sometimes feel like I’ve really only read three books: Waiting for the Barbarians , by JM Coetzee; the Viriconium omnibus, by M John Harrison; and now A Game of Thrones .
+
+ In some respects these are similar books. All the authors are white, English-speaking men born between the years 1940 and 1948. But each book emerges from different countries and genres and literary traditions, with AGOT being most distinct from the other two. Still, I see correspondences, and it makes me wonder how much DNA any two books share just because they are written in the same language.
+
+ Here’s a weirdly specific (weirdly specific being our modus operandi here at the At Sea Journal) example: is there a preferred sentence structure for describing air?
+
+ In Viriconium , I noted the frequent appearance of a particular sentence structure that makes use of zeugma . Zeugma is a rhetorical device in which one verb controls multiple phrases. For instance:
+
+ His hair was black, his hands rough.
+
+ We only get one was , and it is then implied in the second clause.
+
+ So when I looked at Harrison’s use of this , I noticed that he used it quite a bit to describe the atmosphere. (5 out of 21 sentences). Here they are:
+
+ The air was warm, the valley dappled with honey-coloured light.
+
+ The air was bitter inside the nose, the sky as black as anthracite.
+
+ The city was unseasonably dank again, the air chilly and lifeless.
+
+ Within the tall brick walls — which, with their mats of bramble, bladder-senna, and reddish ivy, dulled the sounds of construction coming from either side — the air was sharp and rapturous, the light a curiously bleached lemon colour.
+
+ The pack animals were fractious, the wind bitter.
+
+ Now I come across this sentence in AGOT :
+
+ The day was warm and cloudless, the sky a deep blue.
+
+ Which would fit right in with the above sentences. I looked for more sentences referencing the atmosphere and found these:
+
+ Outside, the sun was low on the horizon, the sky a bruised red.
+
+ The sun was hot this morning, the sky blue and cloudless.
+
+ The Wall was a dull white, the sky above it whiter. A snow sky.
+
+ The sky was a gloom of cloud, the woods dead and frozen.
+
+ The sky was grey and thick with cloud, the river green and full of floating things.
+
+ The sky was slate grey, the sun no more than a faint patch of brightness behind the clouds.
+
+ The air was damp, the ground cloaked in mist.
+
+ The air was swirling with smoke, the back wall a sheet of fire ground to roof.
+
+ The air had been damp and clammy, the causeway so narrow they could not even make proper camp at night, they had to stop right on the kingsroad.
+
+ Now I’m intrigued.
+
+ But Martin’s written a lot of sentences for ASOIAF – 148,130 by my count – and when I checked for this structure I found ~250 examples of it.
+
+ (My net caught any sentences with commas whose first word was repeated after the first comma)
+
+ Those sky sentences represent a good portion of the total, but the most common subject is the human body. As you can see by glancing through this text file , there’s a lot of faces, eyes, noses, legs, etc. being described. And this is what I’m talking about when I say that most of a book’s DNA is determined by its language. When any of us learn to write prose, what we are really learning is another way of speaking. The structures may be passed down to us from the Romans, or maybe developed more recently, but by reading books we internalize these structures as sounding “prose-like.” So when we write books of our own, we imitate these unconsciously.
+
+ Return to table of contents

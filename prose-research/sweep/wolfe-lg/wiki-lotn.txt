@@ -1,0 +1,70 @@
+{{Short description|Book by Ursula K. Le Guin}}
+{{Infobox book
+| name              = The Language of the Night
+| image             = The Language of the Night book cover.jpg
+| caption           = Book cover
+| author            = [[Ursula K. Le Guin]]
+| editor            = [[Susan Wood (science fiction)|Susan Wood]]
+| illustrator       = 
+| cover_artist      = Mike Mariano
+| country           = 
+| language          = English
+| series            = 
+| genre             = [[Essay]]
+| published         = 1979 (Putnam Adult)
+| media_type        = Print
+| pages             = 270
+| isbn              = 978-0399123252
+}}
+
+'''''The Language of the Night: Essays on Fantasy and Science Fiction''''' is a collection of essays written by [[Ursula K. Le Guin]] and edited by [[Susan Wood (science fiction)|Susan Wood]]. It was first published in 1979 and published in a revised edition in 1992. The essays discuss various aspects of the [[science fiction]] and [[fantasy (genre)|fantasy]] genres, as well as Le Guin's own writing process. The 24 essay selections come from a variety of sources, including journals, book introductions, and award-acceptance speeches. The title comes from Le Guin's description of fantasy literature: "We like to think we live in daylight, but half the world is always dark; and fantasy, like poetry, speaks the language of the night."
+
+Well known as a fantasy and science fiction author by 1979, Le Guin's criticism was relatively difficult to find prior to the publication of this collection. ''The Language of the Night'' contains "the most important critical statements [Le Guin] has made to date",<ref name="CLAQ">[https://muse.jhu.edu/journals/childrens_literature_association_quarterly/summary/v004/4.2.article08.html Children's Literature Association Quarterly]. Volume 4, Number 2, Summer 1979. p 19-21.</ref> addressing topics such as Americans' attitudes towards fantasy fiction, the strengths and weaknesses of science fiction, and the qualities of children's literature. She also discusses the background of her major works, such as ''[[A Wizard of Earthsea]]'' and ''[[The Left Hand of Darkness]]''.
+
+A 2024 edition of the collection features a new introduction by the writer [[Ken Liu]].<ref>{{Cite book |last=Guin |first=Ursula K. Le |url=https://books.google.com/books?id=so4CEQAAQBAJ |title=The Language of the Night: Essays on Writing, Science Fiction, and Fantasy |date=2024-05-14 |publisher=Simon and Schuster |isbn=978-1-6680-3490-3 |language=en}}</ref>
+
+== Summary ==
+
+The collection is divided into five parts, each with its own introduction.
+
+=== Part I: Le Guin Introduces Le Guin ===
+
+The first part contains an introduction and the essay "A Citizen of Mondath". 
+
+=== Part II: On Fantasy and Science Fiction ===
+
+The second section includes the essays "Why are Americans Afraid of Dragons?", "Dreams Must Explain Themselves", her speech at the [[National Book Award]], "The Child and the Shadow", "Myth and Archetype in Science Fiction", "[[From Elfland to Poughkeepsie]]", "American SF and the Other", "Science Fiction and Mrs. Brown", and "Do-It-Yourself Cosmology". 
+
+=== Part III: The Book Is What Is Real ===
+
+The third section contains the introductions to her novels ''[[Rocannon's World]]'', ''[[Planet of Exile]]'', ''[[City of Illusions]]'', [[The Word for World Is Forest|''The Word for World is Forest'']], ''[[The Left Hand of Darkness]]'', and ''[[Star Songs of an Old Primate]]''. Additionally, there are the essays "Is Gender Necessary? Redux", "The Staring Eye", and "The Modest One". 
+
+=== Part IV: Telling the Truth ===
+
+The fourth part contains the essays "Introduction to the Altered I (excerpt)", "Talking about Writing", and "Escape Routes". 
+
+=== Part V: Pushing at the Limits ===
+
+The fifth and final part contains an introduction, and the two essays "The Stalin in the Soul" and "The Stone Ax and the Muskoxen". 
+
+== Reception ==
+
+''The Language of the Night'' has received positive reviews. Author [[Peter S. Beagle]] called the book "splendid."<ref name="Beagle1979">{{cite news |last1=Beagle |first1=Peter S |title=A Beautful Realm of Fantasy, Sci-Fi |url=https://www.newspapers.com/image/1222859275/ |access-date=24 April 2026 |work=San Francisco Chronicle |date=June 10, 1979}}</ref> Writing for ''[[Games International]]'' in 1989, Paul Mason called this "a classic book that should be on every fantasy gamer's shelves."<ref name="gi">{{cite magazine |last=Mason |first=Paul |date=September–October 1989 |title=Role Call |journal=[[Games International]] |issue=9 |pages=44}}</ref>
+
+[[Patrick Curry (author)|Patrick Curry]], in the 2014 book ''[[A Companion to J. R. R. Tolkien]]'', wrote that Le Guin's reflections in the essays "remain[ed] evergreen", handling contentious issues such as whether fantasy is escapist, the subtlety of the character portraits in ''[[The Lord of the Rings]]'', and that work's handling of the nature of evil.<ref name="Curry 2020">{{cite book |last=Curry |first=Patrick |author-link=Patrick Curry (author) |chapter=The Critical Response to Tolkien's Fiction |editor-last=Lee |editor-first=Stuart D. |editor-link=Stuart D. Lee |title=A Companion to J. R. R. Tolkien |date=2020 |orig-year=2014 |publisher=[[Wiley Blackwell]] |isbn=978-1-11965-602-9 |pages=369–388 |url=http://www.patrickcurry.co.uk/papers/THE%20CRITICAL%20RESPONSE%20TO%20TOLKIEN.pdf<!--author's own page-->}}</ref>
+ 
+However, some critics noted that the selections in ''The Language of the Night'' vary in significance, with "both substantial and slender contributions to science-fiction journals and symposiums."<ref name="kirkus">[https://www.kirkusreviews.com/book-reviews/ursula-k-le-guin/the-language-of-the-night/ Book review]. ''Kirkus Reviews''. April 1979 issue.</ref><ref name="Sagona1979">{{cite news |last1=Sagona |first1=Paul |title=Science Fiction Essays 'Interesting, Tedious' |url=https://www.newspapers.com/image/750554202/ |access-date=24 April 2026 |work=The State |issue=July 15, 1979}}</ref>
+
+For the 1980 [[Hugo Awards]], the collection was a nominee in the newly created category of Best Related Non-Fiction Book.<ref>{{cite web | url =https://www.thehugoawards.org/hugo-history/1980-hugo-awards/ | title =1980 Hugo Awards | website =thehugoawards.org  | date =26 July 2007 | access-date =2020-11-02}}</ref>
+
+==References==
+{{Reflist}}
+{{Ursula K. Le Guin}}
+{{Feminist science fiction}}
+
+{{Authority control}}
+
+{{DEFAULTSORT:Language of the Night, The}}
+[[Category:1979 non-fiction books]]
+[[Category:American essay collections]]
+[[Category:Works by Ursula K. Le Guin]]

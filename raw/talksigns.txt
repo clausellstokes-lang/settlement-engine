@@ -1,0 +1,240 @@
+{{talk header|WT:AISIGNS|WT:LLMSIGNS}}
+{{AINB talk notice}}
+{{Old moves |date = July 10, 2025 |from = Wikipedia:WikiProject AI Cleanup/AI catchphrases |destination = Wikipedia:Signs of AI writing |result = Moved |link = Special:Permalink/1300978596#Move proposal}}
+{{WikiProject banner shell |listas=Signs of AI writing |1=
+{{WikiProject AI Cleanup}}
+{{WikiProject Reliability}}
+{{WikiProject Essays}}
+{{Wikipedia Help Project|importance=High}}
+}}
+{{Press
+ |author      = Wu, Daniel
+ |title       = Volunteers fight to keep 'AI slop' off Wikipedia
+ |date        = 8 August 2025
+ |org         = ''[[The Washington Post]]''
+ |url         = https://www.washingtonpost.com/technology/2025/08/08/wikipedia-ai-generated-mistakes-editors/
+ |accessdate  = 9 August 2025
+
+ |author2     = Roth, Emma
+ |title2      = How Wikipedia is fighting AI slop content
+ |date2       = 9 August 2025
+ |org2        = ''[[The Verge]]''
+ |url2        = https://www.theverge.com/report/756810/wikipedia-ai-slop-policies-community-speedy-deletion
+ |accessdate2 = 10 August 2025 
+
+ |author3     = Clair, Grant
+ |title3      = Wikipedia publishes list of AI writing tells
+ |date3       = 20 August 2025
+ |org3        = ''[[Boing Boing]]''
+ |url3         = https://boingboing.net/2025/08/20/wikipedia-publishes-list-of-ai-writing-tells.html
+ |accessdate3 = 23 August 2025
+
+ |author4     = Smith, Thomas
+ |title4      = Want to disguise your AI writing? Start with Wikipedia’s new list
+ |date4       = 27 August 2025
+ |org4        = ''[[Fast Company]]''
+ |url4         = https://www.fastcompany.com/91392747/want-disguise-your-ai-writing-start-wikipedias-new-list
+ |accessdate4 = 27 August 2025
+ 
+ |title5      = Wikipedia editors publish new guide to help readers detect entries written by AI
+ |date5       = 5 September 2025
+ |org5        = ''[[NPR]]''
+ |url5        = https://www.npr.org/2025/09/04/nx-s1-5519267/wikipedia-editors-publish-new-guide-to-help-readers-detect-entries-written-by-ai
+ |accessdate5 = 7 September 2025
+ 
+ |title6      = The best guide to spotting AI writing comes from Wikipedia
+ |date6       = 20 November 2025
+ |org6        = ''[[TechCrunch]]''
+ |url6        = https://techcrunch.com/2025/11/20/the-best-guide-to-spotting-ai-writing-comes-from-wikipedia/
+ |accessdate6 = 20 November 2025
+ 
+ |title7      = Wikipedia volunteers spent years cataloging AI tells. Now there’s a plugin to avoid them.
+ |date7       = 21 January 2026
+ |org7        = ''[[Ars Technica]]''
+ |url7        = https://arstechnica.com/ai/2026/01/new-ai-plugin-uses-wikipedias-ai-writing-detection-rules-to-help-it-sound-human/
+ |accessdate7 = 22 January 2026
+ 
+ |title8      = This plugin uses Wikipedia’s AI-spotting guide to make AI writing sound more human
+ |date8       = 22 January 2026
+ |org8        = ''[[The Verge]]''
+ |url8        = https://www.theverge.com/news/865627/wikipedia-ai-slop-guide-anthropic-claude-skill
+ |accessdate8 = 22 January 2026
+
+ |author9     = Edwards, Benj
+ |title9      = A Wikipedia Group Made a Guide to Detect AI Writing. Now a Plug-In Uses It to ‘Humanize’ Chatbots
+ |date9       = 22 January 2026
+ |org9        = ''[[Wired (magazine)|Wired]]''
+ |url9        = https://www.wired.com/story/wikipedia-group-made-guide-to-detect-ai-writing-now-a-plug-in-uses-it-to-humanize-chatbots/
+ |accessdate9 = 23 January 2026
+
+ |author10     = Froneman, Willemien
+ |title10      = Failed comprehensiveness, successful minimalism: Wikipedia’s 3-year struggle to govern AI-generated content (2022–2025)
+ |date10       = 25 April 2026
+ |org10        = ''[[AI & Society]]''
+ |url10        = https://link.springer.com/article/10.1007/s00146-026-03046-1#Sec22
+ |accessdate10 = 28 April 2026
+ |author11 = Basu, Saikat
+ |title11 = Wikipedia may have built the best AI writing detection guide
+ |date11 = 25 May 2026
+ |org11 = ''[[MakeUseOf]]''
+ |url11 = https://www.makeuseof.com/wikipedia-best-ai-writing-detection-guide/
+ |accessdate11 = 27 May 2026
+
+ |title12      = The one AI detector people actually trust
+ |date12       = 16 July 2026
+ |org12        = ''[[The Verge]]''
+ |url12        = https://www.theverge.com/ai-artificial-intelligence/966719/the-one-ai-detector-people-actually-trust
+ |accessdate12 = 17 July 2026
+|author12 = Jacob Kastrenakes
+}}
+{{User:MiszaBot/config
+|archiveheader       = {{talkarchivenav}}
+|maxarchivesize      = 75K
+|counter             = 8
+|minthreadsleft      = 4
+|minthreadstoarchive = 1
+|algo                = old(28d)
+|archive             = Wikipedia talk:Signs of AI writing/Archive %(counter)d
+}}
+
+== Paste Check ==
+
+I think that it might be beneficial to add that a [https://www.mediawiki.org/wiki/Edit_check/Paste_Check paste check] can be a sign of pasting straight from an AI's output. Ofcourse, this is by no means definitive but it might be useful to add.  - [[User:Mustbeotherwise|Otherwise]] ([[user:Mustbeotherwise/defcon|Antibacklog Aktion]]!) ([[User talk:Mustbeotherwise|talk?]]) 20:09, 5 August 2026 (UTC)
+
+:There's also [[phab:T420258]], an "LLM-specific version of Paste Check". It's currently being worked on, but hopefully it'll be up and running soon. [[User:ARandomName123|ARandomName123]] ([[User talk:ARandomName123|talk]])<sup><span style="color: green"><small>Ping me!</small></span></sup>  08:57, 15 August 2026 (UTC)
+
+==Another counter-intuitive non-AI article==
+From [[Photography in Taiwan]]: "Taiwanese photography is deeply rooted in the country's unique and rapidly changing history".  This sentence, in fact, was [[Special:Diff/1064433314|older than Jan. 2022]].  [[User:Somepinkdude|Somepinkdude]] ([[User talk:Somepinkdude|talk]] &#124; [[Special:Contributions/Somepinkdude|contribs]]), ''[[WP:SOLIDARITY|in solidarity]]'' 00:03, 13 August 2026 (UTC)
+
+:<small>However it ended up back then, it violates [[Talk:History of Pakistan#c-CaydenStorm-20260806103900-Serious structural concerns regarding WP:NPOV, WP:SYNTH, and historical anachron|Wikipedia's core policy on historical anachronisms]] and should be [[Template:ClockBlock|chronosighted]]. – [[User:MrPersonHumanGuy|MrPersonHumanGuy]]&nbsp;([[User talk:MrPersonHumanGuy|talk]]) 12:11, 13 August 2026 (UTC)</small>
+
+== Suggested addition: Inanimate subjects performing human actions (dropped actors) ==
+
+I have been seeing this more and more and fighting to understand what is happening as the text reads technically correct, but just awkward. This is when AI text assigns actions to inanimate objects, or events while not mentionign or skipping the "doer" or the people who actually perform them. AI typically writes things like Lanes "go," rooms "tighten," maps "publish," an event "absorbs labor," expertise "travels," a festival "runs." The sentences are grammatically correct and read smoothly, but I have found myself wondering why this feels incorrect. The middle of the sentence is missing: a writer with direct knowledge of the subject names the actor, not the inanimate object, because they know who did the thing. Road crews close the lanes. Hotels raise rates. The city publishes the closure maps. The teams building the event book the labor.
+
+This differs from ordinary passive voice, which at least implies an actor by saying something like "the lanes were closed." In this pattern, the object is promoted to subject and becomes the "doer." Human writers use personification and metonymy deliberately and occasionally; LLM output defaults to actor-less constructions at high density, likely because the model is compressing patterns from text rather than actually having these conversations and seeing actions that specific people take. The cumulative effect is prose in which things happen but nobody does anything, and it persists even after obvious vocabulary tells have been edited out.
+
+Examples from some of our marketing outputs, with the actor restored in parentheses:
+
+"Curb lanes go for weeks on either side of the event" (crews close the curb lanes, and the closures last for weeks)
+"Rooms tighten and rates move" (hotels sell out and raise rates)
+"The event absorbs local labor" (the teams building the event book the local labor)
+"The closure maps publish in June" (the city publishes the closure maps in June)
+"The festival has run indoors since 2014" (the organizers have held the festival indoors since 2014)
+
+This pattern complements the existing entries on present-participle trailing clauses and vague attributions: all three remove a specific, checkable human actor from the sentence. Once I could understand what I was seeing, I can not un-see this! [[User:Davocados|Davocados]] ([[User talk:Davocados|talk]]) 21:40, 13 August 2026 (UTC)
+
+:I did some quick research just to locate relevant material, not read it whole. Not much I could find ''specifically'' on this, but this substack blog post brings up something the author labels ''personified callbacks'':
+{{refbegin}}
+:* {{Cite web |last=Romero |first=Alberto |date=2025-12-03 |title=10 Signs of AI Writing That 99% of People Miss |url=https://www.thealgorithmicbridge.com/p/10-signs-of-ai-writing-that-99-of |access-date=2026-08-14 |website=www.thealgorithmicbridge.com |language=en}}
+{{refend}}
+:But that's user-generated. As for journals, this article came up:
+{{refbegin}}
+:* {{Cite journal |last=Heimann |first=Marc |last2=Hübener |first2=Anne-Friederike |date=2025-03-01 |title=The extimate core of understanding: absolute metaphors, psychosis and large language models |url=https://doi.org/10.1007/s00146-024-01971-7 |journal=AI & SOCIETY |volume=40 |issue=3 |pages=1265–1276 |doi=10.1007/s00146-024-01971-7 |issn=1435-5655}}
+{{refend}}
+:It does not seem to discuss detecting AI writing but does {{tq|argue that the formal structure of metaphor and metonymy in natural language is reproduced in the mathematical architecture of LLMs}}. I will read the article in full sometime later and encourage you to do so too. — [[User:EmoryNB|EmoryNB]] <sup>(they/them)</sup> [[User talk:EmoryNB|<sup>talk</sup>]] [[Special:Contributions/EmoryNB|<sup>contribs</sup>]] 14:10, 14 August 2026 (UTC)
+:I don't know if this is relevant, but I have been seeing people say that movies "will release" instead of being released. – [[User:MrPersonHumanGuy|MrPersonHumanGuy]]&nbsp;([[User talk:MrPersonHumanGuy|talk]]) 14:16, 14 August 2026 (UTC)
+:Making a new topic for this but [https://slhck.info/software/2026/06/22/claudish.html does this get at the same thing?] From what I understand Claude is its whole parallel universe of AI indicators. [[User:Gnomingstuff|Gnomingstuff]] ([[User talk:Gnomingstuff|talk]]) 18:43, 19 August 2026 (UTC)
+
+== Connections ==
+
+I'm seeing in drafts a lot of verbose ways of establishing connections between subjects. Take, for example, [[Draft:Amir Tajik]] (which I've declined for other AI signs):
+* {{tq|...his involvement in music produced in connection with Iran's participation in the 2006 FIFA World Cup}}
+* {{tq|...one of several musical productions associated with Iran's participation in [...]}}
+* {{tq|... He became widely associated with the [...]}}
+I don't have any other drafts on hand right now, but I've definitely seen similar use of "in connection with/to" / "associated with/to" / "involvement in" language in other drafts that read as unnatural. Is this a noteworthy AI sign? <small>[[WP:WWUS|In solidarity]]</small>, [[User:Nil NZ|<span style="color:#000;font-family:Comic Sans MS;border-radius:30px;background-color:#8ACE00;padding:4px 7px 5px 7px">nil</span>]]<sup> [[User talk:Nil NZ|<span style="color:#000">nz</span>]]</sup> 01:54, 14 August 2026 (UTC)
+:A quick [https://en.wikipedia.org/w/index.php?search=insource%3A%22in+connection+with%22&title=Special%3ASearch&profile=advanced&fulltext=1&ns118=1&searchToken=bsk8kxd2bh98b4j273fwmlln7 insource search of "in connection with" in Draft space] returns 720 results; looking through the first page shows a few false positives (e.g. [[Draft:William R. Donham]], quoting a 1938 source), but also use in a lot of obvious/likely AI content, such as [[Draft:U.S. Patent 9,765,508 B2]], [[Draft:Hans Vermeersch]], [[Draft:Karyn Strickler]], [[Draft:Maha Mustafa]], & [[Draft:Brian Ivon Jones]], to pick just a few. <small>[[WP:WWUS|In solidarity]]</small>, [[User:Nil NZ|<span style="color:#000;font-family:Comic Sans MS;border-radius:30px;background-color:#8ACE00;padding:4px 7px 5px 7px">nil</span>]]<sup> [[User talk:Nil NZ|<span style="color:#000">nz</span>]]</sup> 02:11, 14 August 2026 (UTC)
+::"Associated with" and "in association with" returns a lot more false-positives than "in connection with", but still pops up in the likes of [[Draft:Upasana Taku]] and [[Draft:Fereidoun Khalilian]]. <small>[[WP:WWUS|In solidarity]]</small>, [[User:Nil NZ|<span style="color:#000;font-family:Comic Sans MS;border-radius:30px;background-color:#8ACE00;padding:4px 7px 5px 7px">nil</span>]]<sup> [[User talk:Nil NZ|<span style="color:#000">nz</span>]]</sup> 02:19, 14 August 2026 (UTC)
+:Can confirm! From a recent article I annotated for AIS ([[User:EmoryNB/Glenn_R._Conrad_(annotated)#Historiographical_Significance]]):
+:{{bq|The volume's introduction situates the Attakapas land record within the broader historiography of Acadian Louisiana. Conrad challenges the thesis, {{hl|associated with scholars Milton Comeaux (1972) and William Faulkner Rushton (1979)}}, that Acadians were systematically dispossessed of their lands by Anglo-American and Creole interests following the Louisiana Purchase — a narrative sometimes characterized as a "second [[Grand Dérangement]]."}} — [[User:EmoryNB|EmoryNB]] <sup>(they/them)</sup> [[User talk:EmoryNB|<sup>talk</sup>]] [[Special:Contributions/EmoryNB|<sup>contribs</sup>]] 12:58, 14 August 2026 (UTC)
+:I drafted a section for this titled ''Periphrastic expression of connection or association'' to be placed under ''Language and grammar'', as it feels like a sibling to [[WP:AINOCOPULA]]. The proposed shortcuts are [[WP:AICONNECT]] and [[WP:AIASSOCIATION]]. Interested editors are welcome to edit the draft with more examples and details. Link: [[User:EmoryNB/sandbox/signs]] — [[User:EmoryNB|EmoryNB]] <sup>(they/them)</sup> [[User talk:EmoryNB|<sup>talk</sup>]] [[Special:Contributions/EmoryNB|<sup>contribs</sup>]] 16:04, 14 August 2026 (UTC)
+:@[[User:MrPersonHumanGuy|MrPersonHumanGuy]] I see that you work quite a lot on this page, so will shamelessly address a question to you. Are there any specific requirements to add an AI indicator (such as the discussed one) into the article, or can it be [[WP:BOLD]]ed in with enough confidence? — [[User:EmoryNB|EmoryNB]] <sup>(they/them)</sup> [[User talk:EmoryNB|<sup>talk</sup>]] [[Special:Contributions/EmoryNB|<sup>contribs</sup>]] 09:13, 19 August 2026 (UTC)
+::If you think you've noticed a pattern that hasn't been mentioned at AISIGNS or AITALKSIGNS yet, you can be bold and add the section about it, as I have been with several of the sections I've been adding. – [[User:MrPersonHumanGuy|MrPersonHumanGuy]]&nbsp;([[User talk:MrPersonHumanGuy|talk]]) 10:09, 19 August 2026 (UTC)
+:::Added, thanks! And thanks to @[[User:Nil NZ|Nil NZ]] for making the suggestion. — [[User:EmoryNB|EmoryNB]] <sup>(they/them)</sup> [[User talk:EmoryNB|<sup>talk</sup>]] [[Special:Contributions/EmoryNB|<sup>contribs</sup>]] 10:20, 19 August 2026 (UTC)
+:Seems like a variation on AITREND although that category is a bit of a behemoth so it may be worth splitting. [[User:Gnomingstuff|Gnomingstuff]] ([[User talk:Gnomingstuff|talk]]) 18:44, 19 August 2026 (UTC)
+::Maybe only technically. To me it seems more like a local blend of [[WP:AINOCOPULA]] (i.e. result of some prompt clause like ''Avoid simple grammatic constructions when responding to the user in academic prose'') and [[WP:AIWEASEL]] (''You're right to double-check me, and I appreciate the pushback. However, no hallucination happened on my part. I did not say that this quote came from these professors—I said it was '''associated''' with them by some... scholars... beep boop...''). The vagueness of the expressed subject connections seems rather elaborate. — [[User:EmoryNB|EmoryNB]] <sup>(they/them)</sup> [[User talk:EmoryNB|<sup>talk</sup>]] [[Special:Contributions/EmoryNB|<sup>contribs</sup>]] 03:57, 20 August 2026 (UTC)
+
+== Citations at the end of paragraphs ==
+
+Working for AfC, I have noticed that there are several articles that I suspect of being AI-generated that have citations only at the end of bulky paragraphs. The largely reflects what I found when messing with ChatGPT and other LLMs. I can look through articles I have reviewed and the AfC backlog for proof but I first want to see if it is worth investigation. There might also be a small subpattern of the bulky paragraph with one citation having another unsourced sentence after the citation. [[User:Quxyz|<span style="color:#926F17">✶Quxyz✶</span>]] ([[User talk:Quxyz|talk]]) 13:41, 21 August 2026 (UTC)
+
+:This is something that I've seen in articles for the whole of the two decades I've been reading Wikipedia. Indeed a bunch of citations supporting (or not) an entire paragraph with multiple claims in is a style seemingly preferred by some. I don't think this is a reliable indicator of human or AI writing. [[User:Thryduulf|Thryduulf]] ([[User talk:Thryduulf|talk]]) 18:26, 21 August 2026 (UTC)
+:I would have to agree with Thryduulf, it's a thing I've been seeing for years. Undoubtedly it's a thing AI ''does'', but it's not a reliable indicator in and of itself as to whether a page was AI-generated or human-written, because human editors have been doing the same thing for decades. [[User:Bearcat|Bearcat]] ([[User talk:Bearcat|talk]]) 14:31, 23 August 2026 (UTC)
+::Pretty much what I wanted to know before doing an in-depth hunt for LLM-generated text. Thanks for the information! [[User:Quxyz|<span style="color:#926F17">✶Quxyz✶</span>]] ([[User talk:Quxyz|talk]]) 14:38, 23 August 2026 (UTC)
+:Not something I've noticed, there seem to be a lot of ways AI doe its citations.
+:One thing that may be an actual tell is people using a consistent citation style within individual articles, but an inconsistent style as a whole. (barring obvious explanations like large editing breaks, using new tools, etc.) So Article A may use Citation Style A and be completely consistent in that, but Article B uses Citation Style B and is also completely consistent in that, and the articles were created with only a few hours between them. [[User:Gnomingstuff|Gnomingstuff]] ([[User talk:Gnomingstuff|talk]]) 18:59, 23 August 2026 (UTC)
+
+== Weird table coding ==
+
+Lately I've been seeing the use of handcoded tables that use a very particular, weird and inherently broken format I've never, ever seen before, but have now seen at least a dozen or so times this year alone.
+
+The format (example taken from the userpage of {{noping|Reptile021}}) goes:<br>
+<nowiki>{| class="wikitable plainrowheaders"</nowiki><br>
+<nowiki>! Year</nowiki><br>
+<nowiki>! Title</nowiki><br>
+<nowiki></nowiki><br>
+<nowiki>| ! Album                     |                    |</nowiki><br>
+<nowiki>| --------------------------- | ------------------ |</nowiki><br>
+<nowiki>| rowspan="7"                 | 2026               |</nowiki><br>
+<nowiki>| "RUN IT! (Bassline Anthem)" |                    |</nowiki><br>
+<nowiki>| rowspan="6"                 | ''Bass Instinct''  |</nowiki><br>
+<nowiki>| -                           |                    |</nowiki><br>
+<nowiki>| "Roll That Bassline"        |                    |</nowiki><br>
+<nowiki>| -                           |                    |</nowiki><br>
+<nowiki>| "Neuro Odyssey"             |                    |</nowiki><br>
+<nowiki>| -                           |                    |</nowiki><br>
+<nowiki>| "Cosmic Bass Overload"      |                    |</nowiki><br>
+<nowiki>| -                           |                    |</nowiki><br>
+<nowiki>| "Bassquake"                 |                    |</nowiki><br>
+<nowiki>| -                           |                    |</nowiki><br>
+<nowiki>| "Bassline Madness"          |                    |</nowiki><br>
+<nowiki>| -                           |                    |</nowiki><br>
+<nowiki>| "Boomtown Vibes 2026"       |                    |</nowiki><br>
+<nowiki>| {{N/A                       | Non-album single}} |</nowiki><br>
+<nowiki>| }                           |                    |</nowiki><br>
+
+producing a table that looks like:
+
+{| class="wikitable plainrowheaders"
+! Year
+! Title
+
+| ! Album                     |                    |
+| --------------------------- | ------------------ |
+| rowspan="7"                 | 2026               |
+| "RUN IT! (Bassline Anthem)" |                    |
+| rowspan="6"                 | ''Bass Instinct''  |
+| -                           |                    |
+| "Roll That Bassline"        |                    |
+| -                           |                    |
+| "Neuro Odyssey"             |                    |
+| -                           |                    |
+| "Cosmic Bass Overload"      |                    |
+| -                           |                    |
+| "Bassquake"                 |                    |
+| -                           |                    |
+| "Bassline Madness"          |                    |
+| -                           |                    |
+| "Boomtown Vibes 2026"       |                    |
+| {{N/A                       | Non-album single}} |
+|}
+
+Needless to say, this is not a correctly coded table, and does not produce a properly working result. Note also the closing line of the code, which does not correctly close the table, thus causing any sections that come after the table to also get swallowed up as part of the table and breaking the table even further.
+
+I've consistently come across this particular format in either the discography tables of musicians or the filmography tables of actors and filmmakers, though there are likely other examples (or different kinds of bad table code) in other contexts as well.
+
+Bad AI code is almost certainly the explanation for this, because it's just not plausible that this many editors would just suddenly keep inventing and duplicating the ''same'' broken table-coding format independently of each other. But it doesn't seem to be documented in the main list here yet, or if it is I couldn't find it, so I wanted to bring it to other editors' attention. [[User:Bearcat|Bearcat]] ([[User talk:Bearcat|talk]]) 14:53, 23 August 2026 (UTC)
+
+:AI does seem the most likely, but worth checking to make sure that there haven't been any recent changes that mean it used to work but no longer does. [[User:Thryduulf|Thryduulf]] ([[User talk:Thryduulf|talk]]) 15:19, 23 August 2026 (UTC)
+:This could be cited as an example at a subsection of [[WP:AITABLE]]. – [[User:MrPersonHumanGuy|MrPersonHumanGuy]]&nbsp;([[User talk:MrPersonHumanGuy|talk]]) 15:47, 23 August 2026 (UTC)
+::Yeah, I noticed that section, but it currently only mentions "unnecessarily small" tables. Obviously it should probably have badly-coded broken tables added to it, though obviously with some clarity about how to distinguish out-to-lunch tables like this that were almost certainly AI-generated from the smaller kinds of edits that can break tables while still being human rather than AI edits. [[User:Bearcat|Bearcat]] ([[User talk:Bearcat|talk]]) 17:15, 23 August 2026 (UTC)
+:::I thought the tables were being suspected because of their purportedly unusual scope (Metric and Figure), not because they were small. – [[User:MrPersonHumanGuy|MrPersonHumanGuy]]&nbsp;([[User talk:MrPersonHumanGuy|talk]]) 19:29, 23 August 2026 (UTC)
+::I think it would be better placed in [[Wikipedia:Signs of AI writing#Broken wikitext]], as that section is specifically for, well, broken wikitext (which includes broken wikitable markup). AITABLE discusses ''unnecessary'', but working tables; a discography table as in [[Special:Permalink/1370859113|the provided example]] makes sense in that context, even if malformed. [[User:OutsideNormality|OutsideNormality]] ([[User talk:OutsideNormality|talk]]) 04:43, 24 August 2026 (UTC)
+:::AI tables are weird (tables in general are weird) and I suspect it's something that different chatbots do really differently. There definitely is a "grayble" that is pretty common in AI-generated text but not other Wikipedia articles or older revisions, but I don't have much of a bead on it beyond that. [[User:Gnomingstuff|Gnomingstuff]] ([[User talk:Gnomingstuff|talk]]) 08:33, 26 August 2026 (UTC)
+::::By "grayble" I mean stuff like [[Special:Diff/1347347646]] [[User:Gnomingstuff|Gnomingstuff]] ([[User talk:Gnomingstuff|talk]]) 17:29, 26 August 2026 (UTC)
+*Just as an update, I'm now starting to see the same nonsensical table-coding format pop up in sports-related articles as well, for example [[User:DanielNetic/sandbox]]. So it's definitely not just one or two users making counterintuitive errors on their own, and is absolutely 100 per cent bad AI code. [[User:Bearcat|Bearcat]] ([[User talk:Bearcat|talk]]) 16:33, 4 September 2026 (UTC)
+*:Oh, you mean ''those'' -- [https://www.codecademy.com/resources/docs/markdown/tables that's just Markdown]. [[User:Gnomingstuff|Gnomingstuff]] ([[User talk:Gnomingstuff|talk]]) 13:14, 6 September 2026 (UTC)
+
+== AI edit summaries section ==
+
+Did some rehauls of this as it is getting misinterpreted to mean that any long or formal edit summary is AI-generated, which is not the case, these things are incredibly formulaic. Let me know if there are some major omissions -- the spreadsheet I keep has 106 signs (sorted by strength) but a lot of them are variations on the same thing. [[User:Gnomingstuff|Gnomingstuff]] ([[User talk:Gnomingstuff|talk]]) 21:35, 23 August 2026 (UTC)

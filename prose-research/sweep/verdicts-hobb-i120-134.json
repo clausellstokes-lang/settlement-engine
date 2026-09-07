@@ -1,0 +1,233 @@
+{
+ "name": "hobb",
+ "chunk": 8,
+ "claims": [
+  {
+   "index": 120,
+   "feature": "stylometry",
+   "claim": "Slavova's sound-symbolic experiment selected twenty roughly one-page passages, drawn from works by seven authors including Robin Hobb.",
+   "source": "Velina Slavova, 'Towards Emotion Recognition in Texts - A Sound-Symbolic Experiment', International Journal of Cognitive Research in Science, Engineering and Education 7.2 (2019) 41-51",
+   "url": "https://www.ijcrsee.com/index.php/ijcrsee/article/view/238",
+   "quote": "Twenty approximately one-page-long passages of text",
+   "page": "Materials and Methods"
+  },
+  {
+   "index": 121,
+   "feature": "place and institution description",
+   "claim": "Elliott's annotation reports that Shropshire's geography thesis codes Hobb's landscape passages as performing five functions, among them establishing verisimilitude, criticising social systems and denoting privilege and relative power.",
+   "source": "Geoffrey B. Elliott, annotating Catherine Ann Shropshire, 'The Importance of Geographic Realism in Genre Fiction' (MS thesis, Oklahoma State University, 2019), in The Fedwren Project: A Robin Hobb Annotated Bibliography (last updated 18 May 2026)",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "quote": "establishing verisimilitude, criticizing social systems, denoting privilege and relative power",
+   "page": "entry: Shropshire, Catherine Ann"
+  },
+  {
+   "index": 122,
+   "feature": "place and institution description",
+   "claim": "Elliott's annotation reports that Crane and Fletcher read the Liveship Traders novels as inverting the usual depiction of land as busy and sea as empty.",
+   "source": "Geoffrey B. Elliott, annotating Ralph Crane and Lisa Fletcher, 'An Imaginary Water World: Robin Hobb's The Liveship Traders Trilogy' (2017), in The Fedwren Project",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "quote": "inverting the usual depiction of land as busy and sea",
+   "page": "entry: Crane, Ralph, and Lisa Fletcher"
+  },
+  {
+   "index": 123,
+   "feature": "point of view and distance",
+   "claim": "Elliott's annotation records that Mendlesohn's taxonomy places Hobb's Elderlings corpus as an example of portal-quest fantasy.",
+   "source": "Geoffrey B. Elliott, annotating Farah Mendlesohn, Rhetorics of Fantasy (2008), in The Fedwren Project",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "quote": "offering an example of the portal-quest fantasy in the Elderlings corpus",
+   "page": "entry: Mendlesohn, Farah"
+  },
+  {
+   "index": 124,
+   "feature": "naming and forms of address",
+   "claim": "Tkach and Volkova find Hobb's Six Duchies naming built on a principle of national-cultural contrast.",
+   "source": "Polina Tkach (National Academy of the National Guard of Ukraine) and Maryna Volkova (Kharkiv National Air Force University), \"Robin Hobb's 'The World of the Elderlings' Onomasticon: The Structural and Functional Significance of Charactonyms\", Perspectives and Innovations of Science 5(47) (2026) 372-381",
+   "url": "https://perspectives.pp.ua/index.php/vno/article/download/46053/46079",
+   "quote": "meticulously constructed upon the fundamental principle of national-cultural contrast",
+   "page": "Abstract"
+  },
+  {
+   "index": 125,
+   "feature": "naming and forms of address",
+   "claim": "They report that names for the neighbouring nations - Eyod, Rurisk, Kettricken - are phonetically foreign and carry no transparent semantics for the reader.",
+   "source": "Tkach and Volkova, Perspectives and Innovations of Science 5(47) (2026) 372-381",
+   "url": "https://perspectives.pp.ua/index.php/vno/article/download/46053/46079",
+   "quote": "phonetic foreignness and an absolute lack of transparent semantics",
+   "page": "Abstract"
+  },
+  {
+   "index": 126,
+   "feature": "naming and forms of address",
+   "claim": "Socially significant anthroponyms are the largest group in Hobb's naming, which the authors read as mirroring a setting where social mask, status and destiny are bound together.",
+   "source": "Tkach and Volkova, Perspectives and Innovations of Science 5(47) (2026) 372-381",
+   "url": "https://perspectives.pp.ua/index.php/vno/article/download/46053/46079",
+   "quote": "a person's social mask, status, and destiny are inextricably linked",
+   "page": "Abstract"
+  },
+  {
+   "index": 127,
+   "feature": "naming and forms of address",
+   "claim": "Names such as Shrewd, Desire and Patience are treated as direct psychological characterisation carried by the name itself.",
+   "source": "Tkach and Volkova, Perspectives and Innovations of Science 5(47) (2026) 372-381",
+   "url": "https://perspectives.pp.ua/index.php/vno/article/download/46053/46079",
+   "quote": "tools of direct psychological characterization",
+   "page": "Abstract"
+  },
+  {
+   "index": 128,
+   "feature": "naming and forms of address",
+   "claim": "Srsic notes that the Liveship Traders characters call the woman known only as Mother by that role and never by a name, and that her name is never given.",
+   "source": "Petra Srsic (University of Osijek), 'Motherhood, Disability, and Rebellion: Constructing the Mother in Hobb's Liveship Traders Trilogy', Studia Anglica Resoviensia 22 (2025) 145-157",
+   "url": "https://journals.ur.edu.pl/SAR/article/download/11148/11875",
+   "quote": "they always refer to her as Mother, never by her name",
+   "page": "section 3, Violence, Trauma, and Naming"
+  },
+  {
+   "index": 129,
+   "feature": "plainness and economy",
+   "claim": "Elliott reads Hobb's novella Words like Coins as a commentary on the craft of writing that warns against sloppiness of language.",
+   "source": "Geoffrey B. Elliott, 'Sample Conference-length Paper: Searching the Hoard in Words like Coins', Geoffrey B. Elliott's Teaching Blog, 29 July 2013",
+   "url": "http://gelliottteaching.blogspot.com/2013/07/sample-conference-length-paper.html",
+   "quote": "serves as a commentary on the craft of writing",
+   "page": "para. 2"
+  },
+  {
+   "index": 130,
+   "feature": "plainness and economy",
+   "claim": "In Elliott's reading the pecksies of that novella repeatedly press for linguistic precision and frugality.",
+   "source": "Geoffrey B. Elliott, 'Searching the Hoard in Words like Coins' (2013)",
+   "url": "http://gelliottteaching.blogspot.com/2013/07/sample-conference-length-paper.html",
+   "quote": "Linguistic precision and frugality are repeatedly emphasized by the pecksie",
+   "page": "para. 4"
+  },
+  {
+   "index": 131,
+   "feature": "plainness and economy",
+   "claim": "Elliott says the pecksies keep their own utterances exact, giving no more than is needed to be clear, so as to limit unintended consequences.",
+   "source": "Geoffrey B. Elliott, 'Searching the Hoard in Words like Coins' (2013)",
+   "url": "http://gelliottteaching.blogspot.com/2013/07/sample-conference-length-paper.html",
+   "quote": "giving no more than is necessary to be clear",
+   "page": "para. 5"
+  },
+  {
+   "index": 132,
+   "feature": "consequence on a household",
+   "claim": "Elliott traces the novella's central disaster - a near-fatal childbirth - to the protagonist's imprecise wording of a charm.",
+   "source": "Geoffrey B. Elliott, 'Searching the Hoard in Words like Coins' (2013)",
+   "url": "http://gelliottteaching.blogspot.com/2013/07/sample-conference-length-paper.html",
+   "quote": "all as a result of Mirrifen's lack of specificity",
+   "page": "para. 8"
+  },
+  {
+   "index": 133,
+   "feature": "point of view and distance",
+   "claim": "Borowska-Szerszun, relayed by Wikipedia, contrasts Martin's focus on the brutality of realism with Hobb's focus on the psychological aspects of trauma.",
+   "source": "Wikipedia, 'Liveship Traders', Style section, relaying Sylwia Borowska-Szerszun, Extrapolation 60.1 (2019) 1-22",
+   "url": "https://en.wikipedia.org/wiki/Liveship_Traders",
+   "quote": "Hobb's narrative focuses more on the psychological aspects of trauma",
+   "page": "Style section"
+  },
+  {
+   "index": 134,
+   "feature": "point of view and distance",
+   "claim": "Borowska-Szerszun's own abstract says Hobb's novels reframe the traditional rape script by shifting emphasis to the survivor.",
+   "source": "Sylwia Borowska-Szerszun, 'Representation of Rape in George R. R. Martin's A Song of Ice and Fire and Robin Hobb's Liveship Traders', Extrapolation 60.1 (2019) 1-22 - abstract only, via the OpenAlex record",
+   "url": "https://api.openalex.org/works/doi:10.3828/extr.2019.2",
+   "quote": "",
+   "page": "abstract"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 120,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Twenty approximately one-page-long passages of text were selected... taken from works by Leigh Bardugo, Charles Dickens, Neil Gaiman, Robin Hobb, Derek Landy, Brandon Sanderson, and J. R. R. Tolkien.",
+   "note": "Raw journal PDF galley reached from the cited article record (www.ijcrsee.com/index.php/ijcrsee/article/download/238/290/1039); quote is verbatim in section 2 MATERIALS AND METHODS, p.44. The author list contains exactly seven names and includes Robin Hobb, so the 'seven authors including Robin Hobb' limb is confirmed by count. Note: the landing page at the cited URL carries only the abstract; the methods sentence is in that record's own full-text galley."
+  },
+  {
+   "index": 121,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "...selections of the text perform particular expository and critiquing functions: establishing verisimilitude, criticizing social systems, denoting privilege and relative power, enabling and restricting intimate issues, and interrogating nations and governments.",
+   "note": "Quote verbatim in the Shropshire entry. The list holds exactly five functions, confirming the 'five functions' limb; the entry also states 'In a master's thesis in geography' and 'The Importance of Geographic Realism in Genre Fiction: How Landscape in Robin Hobb's Assassin's Quest Inspires Social Criticism. 2019. Oklahoma SU, MS thesis', and the page is signed 'Geoffrey B. Elliott 18 May 2026'. 'Codes' matches the entry's methodology gloss ('selection of passages for study, and coding')."
+  },
+  {
+   "index": 122,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Crane and Fletcher address the Liveship Traders novels' figuration of their milieu as ... inverting the usual depiction of land as busy and sea as empty.",
+   "note": "Quote verbatim in the Crane and Fletcher entry (the claim's quote field is a truncation of the same sentence, which continues 'as empty'). Every limb supported."
+  },
+  {
+   "index": 123,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hobb is presented as offering an example of the portal-quest fantasy in the Elderlings corpus.",
+   "note": "Quote verbatim at the close of the Mendlesohn, Rhetorics of Fantasy (2008) entry, whose body sets out her four-category taxonomy including 'portal-quest'. Source citation matches the entry ('Middletown, CT: Wesleyan UP, 2008')."
+  },
+  {
+   "index": 124,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the onymic space of the Six Duchies is meticulously constructed upon the fundamental principle of national-cultural contrast",
+   "note": "Quote verbatim in the English abstract of the PDF (p.372). Authors, affiliations, issue 5(47) 2026 and pages 372-381 all match the cited source; the PDF's running title misspells the series as 'THE WORLD OF THE ELDERING', which does not affect the claim."
+  },
+  {
+   "index": 125,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "representatives of neighboring nations ... are assigned names characterized by phonetic foreignness and an absolute lack of transparent semantics for the reader (e.g., Eyod, Rurisk, Kettricken)",
+   "note": "Quote verbatim in the abstract, and the three exemplars named in the claim are the abstract's own three exemplars. Every limb supported."
+  },
+  {
+   "index": 126,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "socially significant anthroponyms represent the most dominant and structurally diverse group, which perfectly mirrors the early medieval setting ... where a person's social mask, status, and destiny are inextricably linked",
+   "note": "Quote verbatim in the abstract. Disclosure on one limb: the page says 'the most dominant and structurally diverse group'; the claim renders that as 'the largest group'. In context (a classification into three functional-semantic subgroups, after Belei) 'most dominant' carries the sense of predominant/largest, so the limb is supported, but the source does not use a size word."
+  },
+  {
+   "index": 127,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "informational-evaluative charactonyms, including Shrewd, Desire, and Patience, are investigated as tools of direct psychological characterization that explicitly encapsulate the core inner nature",
+   "note": "Quote verbatim in the abstract, with exactly the three names the claim lists; 'carried by the name itself' is supported by 'explicitly encapsulate the core inner nature, behavioral patterns, and moral capacities of the characters'."
+  },
+  {
+   "index": 128,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mother's description comes from other characters - chiefly Kennit and Paragon - and they always refer to her as Mother, never by her name",
+   "note": "Quote verbatim in section 3 'Violence, Trauma, and Naming' of the PDF, exactly the section the claim cites. The second limb (her name is never given) is separately supported two sentences later: 'As Mother's name is not known, neither are her personal or other identities'."
+  },
+  {
+   "index": 129,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the novella Words like Coins, serves as a commentary on the craft of writing, noting the perils in sloppiness of language",
+   "note": "Quote verbatim in the first body paragraph of the blog post (the claim's 'para. 2' counts the students' preamble as para. 1). Both limbs - commentary on the craft of writing, and the warning against sloppiness - are in the same sentence."
+  },
+  {
+   "index": 130,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Linguistic precision and frugality are repeatedly emphasized by the pecksie, and their lack repudiated.",
+   "note": "Quote verbatim. Minor wording gap, not a limb failure: the sentence has the singular 'the pecksie' (the one bound to Mirrifen) where the claim writes 'the pecksies'; the post elsewhere generalises ('Hobb's pecksies themselves are much concerned with the effects of language, and therefore with its exactitude')."
+  },
+  {
+   "index": 131,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They are therefore at pains to ensure that their utterances are exacting, giving no more than is necessary to be clear so as to minimize the possibility of unintended consequences.",
+   "note": "Quote verbatim, and every limb of the claim (utterances kept exact; no more than needed to be clear; to limit unintended consequences) sits in that one sentence."
+  },
+  {
+   "index": 132,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "How it goes is poorly, and all as a result of Mirrifen's lack of specificity.",
+   "note": "Quote verbatim. Supporting limbs are in the same passage: 'The primary textual example ... is in the birth of Jami's child'; Mirrifen (named earlier as 'the protagonist') builds the warding charm from 'person' and 'small' because 'She didn't know the charm symbol for pecksie'; the delivery leaves Jami 'weakened almost to the point of death', and 'it was through her lack of specificity in language that the near-fatality of the delivery came to be'."
+  },
+  {
+   "index": 133,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "According to scholar Sylvia Borowska-Szerszun, Martin's work focuses on the brutality and violence of its realism, while Hobb's narrative focuses more on the psychological aspects of trauma, including that arising from violence and rape.",
+   "note": "Quote verbatim in the Style section of the live Wikipedia article; the sentence cites Borowska-Szerszun (2019) p.11, and the Sources list gives Extrapolation 60(1): 1-22, doi 10.3828/extr.2019.2, matching the claim's citation. Wikipedia spells the forename 'Sylvia' where the journal record has 'Sylwia'."
+  },
+  {
+   "index": 134,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "reframe this pattern by shifting emphasis to the survivor",
+   "note": "Raw OpenAlex JSON fetched at the cited URL (W2942637364); abstract reconstructed from abstract_inverted_index. It reads: 'Hobb's novels seem to reframe this pattern by shifting emphasis to the survivor and actually redefining what rape is', where 'this pattern' is the '\"traditional\" rape script' named earlier in the same abstract. Graded SUBSTANCE not VERBATIM because the claim carries no quotation to match (quote field empty) and it drops the abstract's hedge 'seem to'."
+  }
+ ]
+}

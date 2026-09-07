@@ -1,0 +1,5 @@
+ledger: removed 2 entries; OWED_CEILING 5 -> 3
+META_EXIT=0
+ Test Files  1 passed (1)
+      Tests  94 passed (94)
+RETIRE-OWED CAR -> f8c19e3de · cars over b0cbc67a1: 7

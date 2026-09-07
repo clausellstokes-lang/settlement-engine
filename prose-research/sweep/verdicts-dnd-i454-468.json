@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 20,
+ "claims": [
+  {
+   "index": 454,
+   "feature": "adjective and adverb discipline",
+   "claim": "Hartlage names sunset colour as the type of unimportant ornament too many boxed descriptions dwell on.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "the color of the sunset and other bits of obviously unimportant fluff",
+   "page": "Boxed text"
+  },
+  {
+   "index": 455,
+   "feature": "boxed text form",
+   "claim": "Hartlage, though he paraphrases at the table, says nothing has replaced boxed text as a way of summarising what players must learn on entering a room.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "No one has shown a better way to summarize",
+   "page": "Boxed text"
+  },
+  {
+   "index": 456,
+   "feature": "civic record register",
+   "claim": "Justin Alexander shows the Yawning Portal's first official entry in FR1 Waterdeep and the North was a numbered cross-reference line with no description.",
+   "source": "Justin Alexander, The Alexandrian, quoting FR1 Waterdeep and the North (1987)",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "4. The Yawning Portal (inn) – See Durnan, p. 17",
+   "page": "The Early Days"
+  },
+  {
+   "index": 457,
+   "feature": "omission as information",
+   "claim": "Alexander quotes Ruins of Undermountain (1991) declining to describe the inn on the stated ground of leaving DMs free rein, and calls the claim implausible given three prior books.",
+   "source": "Justin Alexander quoting TSR's Ruins of Undermountain (1991)",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "to allow DMs free rein in customizing this rambling, shady place",
+   "page": "The Early Days"
+  },
+  {
+   "index": 458,
+   "feature": "civic record register",
+   "claim": "Alexander records that City of Splendors (1994) fixes the inn's founding year and building class, adding registry-style facts to the accumulated description.",
+   "source": "Justin Alexander, The Alexandrian, on City of Splendors (1994)",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "Durnan established the Yawning Portal in 1306 DR.",
+   "page": "The Early Days"
+  },
+  {
+   "index": 459,
+   "feature": "edition and house style",
+   "claim": "James Maliszewski characterises pre-1982 module backgrounds as thin and credits Tracy Hickman's modules with introducing NPCs given hopes, dreams and fears.",
+   "source": "James Maliszewski, Grognardia",
+   "url": "https://grognardia.blogspot.com/2008/12/scrappy-doo-and-hickman-revolution.html",
+   "quote": "the thin backgrounds of earlier adventures",
+   "page": "Scrappy-Doo and the Hickman Revolution"
+  },
+  {
+   "index": 460,
+   "feature": "dm-facing sentence",
+   "claim": "Maliszewski quotes The Hidden Shrine of Tamoachan's own DM notes instructing the referee to read the module through and annotate the margins before play.",
+   "source": "James Maliszewski quoting module C1's Notes for the Dungeon Master",
+   "url": "https://grognardia.blogspot.com/2010/06/retrospective-hidden-shrine-of.html",
+   "quote": "read the module thoroughly before play starts, making notes in the margins",
+   "page": "Retrospective: The Hidden Shrine of Tamoachan"
+  },
+  {
+   "index": 461,
+   "feature": "point of view and distance",
+   "claim": "Bryce Lynch frames published adventure prose as a transfer problem: a private note is only a memory cue, and writing for a stranger must carry the image itself.",
+   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "The words on the page are only a memory cue",
+   "page": "The Book Introduction"
+  },
+  {
+   "index": 462,
+   "feature": "other: craft difficulty",
+   "claim": "Lynch counts at least two translations between the writer's image and the gamemaster's, and blames dry encounters on their failure.",
+   "source": "Bryce Lynch, tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "there are at least two translations between your head and the gamemaster",
+   "page": "The Book Introduction"
+  },
+  {
+   "index": 463,
+   "feature": "other: information order",
+   "claim": "Alexander's key structure puts the seen-at-a-glance block first and requires it to hold everything conveyed on entering, before checks and before element-by-element detail.",
+   "source": "Justin Alexander, 'The Art of the Key – Part 2', The Alexandrian",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "quote": "contain all of the information that should be immediately conveyed",
+   "page": "Boxed Text"
+  },
+  {
+   "index": 464,
+   "feature": "other: information order",
+   "claim": "Alexander's ordering principle for a location entry is general to specific, tracked against how the reader will actually come by each fact.",
+   "source": "Justin Alexander, The Alexandrian",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "quote": "move from the general to the specific",
+   "page": "Developing Significant Elements"
+  },
+  {
+   "index": 465,
+   "feature": "plainness and economy",
+   "claim": "The Age of Dusk reviewer's writing standard is that short evocative prose conveys a place's feel and leaves blanks for the GM to fill.",
+   "source": "Prince, 'Reviewing Standards', Age of Dusk",
+   "url": "https://princeofnothingblogs.wordpress.com/reviewing-standards/",
+   "quote": "Short, evocative writing communicates the feel of a place",
+   "page": "Writing"
+  },
+  {
+   "index": 466,
+   "feature": "place and institution description",
+   "claim": "The same standard lists two-page room descriptions among the things everyone dislikes in adventure writing.",
+   "source": "Prince, 'Reviewing Standards', Age of Dusk",
+   "url": "https://princeofnothingblogs.wordpress.com/reviewing-standards/",
+   "quote": "room descriptions that go on for two pages",
+   "page": "Writing"
+  },
+  {
+   "index": 467,
+   "feature": "dm-facing sentence",
+   "claim": "Courtney Campbell's location notation reduces the spoken description to the bolded words alone, everything else waiting on a player's question.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash",
+   "url": "https://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "When describing things, I only use the bolded words!",
+   "page": "On Set Design"
+  },
+  {
+   "index": 468,
+   "feature": "plainness and economy",
+   "claim": "Campbell's stated rule for the same notation is that no unimportant word appears at all.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash",
+   "url": "https://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "Any word that is not important, is not used.",
+   "page": "On Set Design"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 454,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Perhaps too many boxed text descriptions have lingered on descriptions of the color of the sunset and other bits of obviously unimportant fluff.",
+   "note": "Raw page (curl, HTTP 200) — the tag URL serves the full 2012 post 'Picturing the dungeon - boxed text', bylined David Hartlage. Quote matches character for character; both limbs (sunset colour as the named example, 'too many' boxed descriptions dwelling on it) are on the page. The page hedges with 'Perhaps'."
+  },
+  {
+   "index": 455,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "No one has shown a better way to summarize what the players must learn when they enter a room.",
+   "note": "Same raw page. Quote verbatim. The paraphrase limb is also there two sentences earlier: 'when I know the content well enough, I paraphrase boxed text. Still, even for DMs who never read boxed text, it helps.'"
+  },
+  {
+   "index": 456,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In FR1 Waterdeep and the North, the Yawning Portal appears as Building #4: 4. The Yawning Portal (inn) - See Durnan, p. 17",
+   "note": "Raw page (curl, HTTP 200). Quote verbatim including the en dash. 'First official entry' is supported: the page states the inn did not appear in the 1987 FRCS boxed set and that FR1 carried 'the first details of Durnan's tavern'. 'No description' is supported by the quoted line itself plus 'most of the original information ... is actually contained in the NPC write-up of its proprietor'."
+  },
+  {
+   "index": 457,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Details of the inn itself have been omitted from these pages to allow DMs free rein in customizing this rambling, shady place.",
+   "note": "Same raw page. Quote verbatim inside the block Alexander quotes from Ruins of Undermountain (1991). The implausibility limb is his next line: 'We've detailed this location in THREE different books, but we haven't included those details here so that you can have free rein in customizing it.' Yeah. Sure. Whatever you say, TSR."
+  },
+  {
+   "index": 458,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Durnan established the Yawning Portal in 1306 DR. / The Yawning Portal is a 3-story Class C building.",
+   "note": "Same raw page. Quote verbatim as a City of Splendors (1994) new-detail bullet; the building-class limb is the adjacent bullet. 'Adding to the accumulated description' matches 'City of Splendors mostly compiles the known information ... but there are a few notable new details'. 'Registry-style' is the researcher's own characterisation, not the page's wording, but the facts quoted are of that kind (a founding year and a building class code)."
+  },
+  {
+   "index": 459,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "what made those modules a popular success was the way they went beyond the thin backgrounds of earlier adventures ... memorable NPCs with hopes, dreams, and fears of their own",
+   "note": "Raw page (curl, HTTP 200), posted by James Maliszewski, 4 Dec 2008. Quote verbatim. 'Pre-1982' is a one-step inference the page licenses directly: the same paragraph opens 'Tracy Hickman made his TSR debut in 1982' and the contrast is with adventures earlier than his; the page's own word is 'earlier'. The NPC limb is verbatim, and 'introducing' matches 'what Hickman was doing was nothing short of revolutionary'."
+  },
+  {
+   "index": 460,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is recommended that the DM read the module thoroughly before play starts, making notes in the margins where useful.",
+   "note": "Raw page (curl, HTTP 200). Quote is an exact substring of the sentence Maliszewski quotes from C1's 'Notes for the Dungeon Master'. The page attributes it to that section by name. The module's register is 'It is recommended', slightly softer than the claim's 'instructing'."
+  },
+  {
+   "index": 461,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The words on the page are only a memory cue to recall what you initially imagined.",
+   "note": "Raw page (curl, HTTP 200), 'The Book Introduction' on Bryce Lynch's tenfootpole.org. Quote verbatim. The transfer limb is the next paragraph: 'You have to transfer that vision from your head down to paper and in such a way that it can then get into someone else's head.' The private-note limb is the rope-bridge example that precedes the quote."
+  },
+  {
+   "index": 462,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there are at least two translations between your head and the gamemaster ... leading to dry and tedious encounters",
+   "note": "Same raw page. Quote verbatim, and the very next sentence carries the blame limb: 'Those translations seldom happen successfully, leading to dry and tedious encounters.'"
+  },
+  {
+   "index": 463,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it should be clearly delineated from the rest of the key and contain all of the information that should be immediately conveyed when the PCs first enter the room",
+   "note": "Raw page (curl, HTTP 200), 'The Art of the Key - Part 2'. Quote verbatim; the page names the block 'seen in a glance'. Order limbs hold: 'Directly after the boxed text are the reactive skill checks', then 'At this point, each significant element ... is independently described'. One nuance: an optional 'TITLE OF THE ROOM' precedes the boxed text, so the glance block is first among the descriptive blocks, not literally the first line."
+  },
+  {
+   "index": 464,
+   "verdict": "PARTIAL",
+   "trueWording": "move from the general to the specific while paying attention to how the players gain that information",
+   "unsupportedLimb": "'tracked against how the reader will actually come by each fact' - the page ties the ordering to how the PLAYERS gain the information, not the reader (the GM) of the key",
+   "note": "Raw page, section 'DEVELOPING SIGNIFICANT ELEMENTS'. Quote verbatim: 'What you want to do is to move from the general to the specific while paying particular attention to how the players are gaining that information.' The rationale paragraph is explicitly player-side: 'In interacting with a room, the players are most likely to start by asking questions about the things they've just been told about'. Alexander's separate GM-side point (bold titles making information easy to find) is about scanning, not about general-to-specific ordering. Swapping 'players' for 'reader' inverts whose acquisition of information governs the sequence, so the second limb is unsupported as written."
+  },
+  {
+   "index": 465,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Short, evocative writing communicates the feel of a place, allowing the GM to fill in the blanks with his imagination.",
+   "note": "Raw page (curl, HTTP 200), Age of Dusk 'Reviewing Standards', Writing section. Quote verbatim, both limbs in the one sentence. Worth flagging for the researcher: the same page's 'Shit I hate' list includes 'Blank spaces where The GM can fill in something of his own design' - a different sense of blank (unwritten content), not a contradiction of this sentence."
+  },
+  {
+   "index": 466,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Everyone dislikes long tedious backstories ..., room descriptions that go on for two pages, boxed read-aloud text, long exposition ...",
+   "note": "Same raw page, same Writing paragraph. Quote verbatim and it sits inside the 'Everyone dislikes' list exactly as the claim describes."
+  },
+  {
+   "index": 467,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When describing things, I only use the bolded words! The players receive no extra information unless they ask for it!",
+   "note": "Raw page (curl, HTTP 200), 'On Set Design', 4 June 2012. Quote verbatim; the waiting-on-a-question limb is the following sentence. The post is signed '-C'; authorship as Courtney Campbell is corroborated on another page fetched in this same chunk (thealexandrian.net/wordpress/35201 names 'Courtney Campbell's Hack & Slash: On Set Design')."
+  },
+  {
+   "index": 468,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Any word that is not important, is not used.",
+   "note": "Same raw page, in the bullet list breaking down the notation. Quote verbatim, and it is stated as a rule of that same location notation, so both limbs hold."
+  }
+ ]
+}

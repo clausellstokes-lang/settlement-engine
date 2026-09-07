@@ -1,0 +1,33 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i993-1007",
+ "lines": 53,
+ "firstTs": "2026-09-07T00:12:55.706Z",
+ "lastTs": "2026-09-07T00:17:18.558Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 9,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.cambridge.org/core/books/attending-daedalus/solar-labyrinth-metafictional-devices-and-textual-complexity/49656CDCE0E04E7F80E4E4FE4FFC069C",
+  "https://www.cambridge.org/core/books/attending-daedalus/how-the-whip-came-back-directing-reader-response/2A2AC1DCBED89BCD79CD247018F62257",
+  "https://www.cambridge.org/core/books/attending-daedalus/in-the-house-of-gingerbread-interpretative-games-and-the-psychology-of-reader-response/8A7999ECDD3CAC9AECF22E6C964FA277",
+  "https://www.cambridge.org/core/books/attending-daedalus/toy-theatre-uncovering-the-story-of-the-urth-cycle/8A95293F693266D39C225BE509844A1E",
+  "https://www.cambridge.org/core/books/attending-daedalus/map-the-multivolume-novels-and-metafictional-cartography/EDEF37F8E56A9DF1C559ABDD4BC47EDE",
+  "https://www.cambridge.org/core/books/attending-daedalus/god-and-his-man-critical-responses-to-the-urth-cycle/888E54B4D73F5B5D8F93C390C49F8907",
+  "https://www.cambridge.org/core/books/attending-daedalus/last-thrilling-wonder-story-intergeneric-operations/3CC9BC9E09B6B06DA7BE6219A48DC01E"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "ent (no Wayback fallback needed); each carries a \"Summary\" block containing the chapter's opening pages, and all 15 quotations were checked byte-exactly against the normalized raw text rather than by eye. Checkpoint written and re-read at 17,475 bytes with 15 claims, 15 verdicts and aligned indices.",
+ "run": "wf_1326cde9-2e5",
+ "agent": "ada13f9264047fd80",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-ada13f9264047fd80.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i993-1007.json",
+  "exists": true
+ }
+}

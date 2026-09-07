@@ -1,0 +1,1060 @@
+ 
+1 
+Representation of BBC News content in AI Assistants 
+ 
+ 
+Foreword  
+AI assistants risk misleading audiences by distorting BBC Journalism 
+The media landscape is being changed by AI. It offers new capabilities and opportunities for 
+media companies like the BBC; and new formats and ways to consume content for audiences. 
+The BBC is excited about the future of AI and the value it can bring audiences and our staff. 
+We’re already using it to add subtitles to programmes on BBC Sounds and translate content 
+into different languages on BBC News. We’re developing tools that use AI to assist our staff in 
+everyday tasks; and exploring how it can provide our audience with new experiences, like a 
+personal tutor on Bitesize.  
+AI will bring real value when it’s used responsibly. But AI also brings significant challenges for 
+audiences, and the UK's information eco-system.  
+A key feature of the emerging landscape is AI assistants like those from OpenAI, Google, and 
+Microsoft. AI assistants are adept at many tasks including drafting emails and documents; 
+analysing data; and summarising information. They can also provide answers to questions 
+about news and current affairs. They do this, in part, by repurposing content from publishers' 
+websites, often without publishers’ permission.  
+To better understand the news related output from AI assistants we undertook research into 
+four prominent, publicly available AI assistants – OpenAI’s ChatGPT; Microsoft’s Copilot; 
+Google’s Gemini; and Perplexity. We wanted to know whether they provided accurate 
+responses to questions about the news; and if their answers faithfully represented BBC news 
+stories used as sources. 
+We gave the AI assistants access to our website for the duration of the research and asked 
+them questions about the news, prompting them to use BBC News articles as sources where 
+possible. AI answers were reviewed by BBC journalists, all experts in the question topics, on 
+criteria including accuracy, impartiality and how they represented BBC content.  
+The BBC is the UK’s most widely used and trusted news provider and the world’s most trusted 
+international news provider.1,2 We take time and care to ensure the accuracy and impartiality 
+of our news. Our journalists approached this task with the same level of care.  
+  
+ 
+1 Ipsos UK, February 2024 
+2 BBC Global Brand Tracker 
+ 
+ 
+2 
+The answers produced by the AI assistants contained significant inaccuracies and distorted 
+content from the BBC. In particular: 
+• 51% of all AI answers to questions about the news were judged to have significant 
+issues of some form.  
+• 19% of AI answers which cited BBC content introduced factual errors – incorrect factual 
+statements, numbers and dates.  
+• 13% of the quotes sourced from BBC articles were either altered from the original 
+source or not present in the article cited.  
+This matters because it is essential that audiences can trust the news to be accurate, whether 
+on TV, radio, digital platforms, or via an AI assistant. It matters because society functions on a 
+shared understanding of facts, and inaccuracy and distortion can lead to real harm. 
+Inaccuracies from AI assistants can be easily amplified when shared on social networks. It 
+matters because news publishers must be able to ensure their content is being used with their 
+permission in ways that accurately represent their original content and reporting. We also 
+know from previous internal research that when AI assistants cite trusted brands like the BBC 
+as a source, audiences are more likely to trust the answer – even if it is incorrect. 
+Individual errors highlight some of the issues our research found. For example, Google’s 
+Gemini incorrectly stated that “The NHS advises people not to start vaping, and recommends 
+that smokers who want to quit should use other methods”. In fact, the NHS does recommend 
+vaping as a method to quit smoking. Microsoft’s Copilot incorrectly stated that Gisèle Pelicot 
+uncovered the crimes against her when she began having blackouts and memory loss. In fact, 
+she found out about the crimes when the police showed her videos they had found when they 
+confiscated her husband’s electronic devices. Perplexity mis-stated the date of Michael 
+Mosley’s death and misquoted a statement from Liam Payne’s family after his death. OpenAI’s 
+ChatGPT claimed in December 2024 that Ismail Haniyeh, who was assassinated in Iran in July 
+2024, was part of Hamas leadership. 
+Our research can only scratch the surface of the issue. The scale and scope of errors and the 
+distortion of trusted content is unknown. This is because AI assistants can provide answers on 
+a very broad range of questions and users can receive different answers to the same or similar 
+question. Audiences, media companies and regulators do not know the extent of the issue. It 
+may be that AI companies do not know either.  
+The implications of this research are far-reaching.  
+AI assistants cannot currently be relied upon to provide accurate news and they risk 
+misleading the audience. While AI Assistants often include a disclaimer about the risk of 
+inaccuracy there is no mechanism for AI applications to correct errors, unlike professional 
+news outlets that acknowledge and correct occasional errors. 
+It is likely other publishers may be similarly affected by the issues the research has identified. 
+It may also be that errors are repeated in other areas where reliability and accuracy is 
+paramount - for example, health, education and security.  
+We expect the use of AI assistants to grow so it's critical they provide audiences with accurate 
+and trustworthy information. Publishers, like the BBC, should have control over whether and 
+ 
+3 
+how their content is used and AI companies should show how assistants process news along 
+with the scale and scope of errors and inaccuracies they produce. 
+Ensuring people can find trusted information in the age of AI will require AI and media sectors 
+to work together, and the BBC is ready and willing to work closely with others. We are also 
+planning a series of AI literacy activities to help audiences navigate their use of AI.  
+ 
+We believe there are three important next steps: 
+1) We want AI companies to hear our concerns and work constructively with us. We want 
+to understand how they will rectify the issues we have identified and discuss the right 
+long-term approach to ensuring accuracy and trustworthiness in AI assistants. We are 
+willing to work closely with them to do this.  
+2) Regulation may have a key role to play in helping ensure a healthy information eco-
+system in the AI age. Policymakers are already looking at this area. For example Ofcom 
+has recently published research that shows that audiences that consume news from 
+Public Service Broadcasters (PSBs) have higher trust in institutions, better knowledge of 
+news and are less polarised. We believe it is vital that the accuracy of PSB news is 
+preserved through the prism of AI assistants. It is essential that PSBs, AI companies, 
+Ofcom and Government work together to secure an effective regulatory regime. 
+3) We will repeat this study in the near-future and believe there would be value in regular 
+evaluations which may sit best with a regulator or research institute - providing an 
+independent view of the accuracy and trustworthiness of news content on AI platforms, 
+including AI assistants.  
+ 
+The BBC is excited about the opportunities AI will bring. We look forward to working with the 
+AI and media sectors to ensure AI is used responsibly and brings value to our audiences.  
+ 
+Pete Archer, Programme Director Generative AI 
+ 
+ 
+  
+ 
+4 
+Representation of BBC News content in AI Assistants 
+ 
+Research by Oli Elliott, Principal Data Scientist, BBC Responsible AI Team 
+February 2025 
+ 
+Approach 
+In December 2024, the BBC carried out research into the accuracy of four prominent AI 
+assistants that can search the internet – OpenAI’s ChatGPT; Microsoft’s Copilot; Google’s 
+Gemini; and Perplexity. We did this by reviewing responses from the AI assistants to 100 
+questions about the news, asking AI assistants to use BBC News sources where possible. 
+Ordinarily the BBC ‘blocks’ these AI assistants from accessing the BBC’s websites. These 
+blocks were lifted for the duration of the research and have since been reinstated. 
+ 
+AI answers were reviewed by BBC journalists, all experts in the question topics. Journalists 
+rated each AI answer against seven criteria – (i) accuracy; (ii) attribution of sources; (iii) 
+impartiality; (iv) distinguishing opinions from facts; (v) editorialisation (inserting comments 
+and descriptions not backed by the facts presented in the source); (vi) context; (vii) the 
+representation of BBC content in the response. For each of these criteria, journalists could 
+rate each response as having no issues; some issues; significant issues or don’t know.  
+ 
+A detailed methodology is included in the appendix.  
+ 
+High level findings 
+51% of all AI responses were flagged as having ‘significant issues’ of some form by reviewers. 
+91% of responses contained at least ‘some issues’. Journalists analysed responses to all the 
+questions AI attempted to answer, including where no BBC sources were used. 
+ 
+ 
+ 
+ 
+
+ 
+5 
+When looking at how assistants represent 
+BBC content, 34% of Gemini, 27% of Copilot, 
+17% of Perplexity, and 15% of ChatGPT 
+responses were judged to have significant 
+issues with how they represented the BBC 
+content used as a source. The most common 
+problems were factual inaccuracies, sourcing 
+and missing context. 
+ 
+Perplexity cited at least one BBC source in all 
+responses, ChatGPT and Copilot in 70% of 
+responses, and Gemini in 53% of responses. 
+ 
+The sections below give further detail on 
+some of the criteria we assessed against.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Accuracy 
+Journalists were asked to rate the overall 
+accuracy of each response, and whether the 
+claims in it were supported by the citations 
+the assistant provided.  Gemini responses 
+raised the most concerns with 46% flagged 
+as having significant issues with accuracy. 
+ 
+Gemini incorrectly stated that “The NHS 
+advises people not to start vaping, and 
+recommends that smokers who want to quit 
+should use other methods”. In fact the NHS 
+does recommend vaping as a method to quit 
+smoking. (The BBC article cited elsewhere in 
+the response makes this clear, including 
+reference to free ‘swap to stop’ vape kits for 
+adults provided by the NHS) 
+ 
+
+ 
+6 
+ 
+Across all responses which cited BBC 
+articles, journalists identified 45 instances 
+of dates, numbers and factual statements 
+incorrectly reproduced by AI assistants 
+from or attributed to BBC content – one in 
+every five responses.  
+ 
+When asked about rape survivor Gisèle 
+Pelicot, Copilot suggested blackouts and 
+memory loss led her to uncover the crimes 
+committed against her. In fact, Gisèle 
+Pelicot only found out about these crimes 
+when she was questioned by police and 
+shown videos they had found after 
+detaining her husband and confiscating his 
+electronic devices - as the cited BBC 
+article makes clear. 
+ 
+The full text and sources of the AI 
+assistant responses illustrated in this 
+report are in the appendix. 
+ 
+ 
+ 
+ 
+Other errors included understating the 
+number of UK prisoners let out of jail under 
+the early release programme by a factor of 
+3, the year of singer Liam Payne’s death 
+(2024, not 2023), and Chrome’s market 
+share (64.6% not 61%).  
+ 
+ChatGPT claimed, in December 2024, that 
+Ismail Haniyeh, who was assassinated in Iran 
+in July 2024, was part of Hamas leadership. 
+ 
+  
+
+ 
+7 
+Perplexity, describing the circumstances of the 
+death of broadcaster Dr Michael Mosley, stated 
+he went missing on October 30 and his body 
+was found in November – in fact he died in June 
+2024. The same response also misrepresented 
+statements from Dr Mosley’s wife describing 
+the family’s reaction to his death. 
+ 
+Eight quotes sourced from BBC articles were 
+either altered from the original source or not 
+present in the cited article. 62 responses in 
+total included BBC quotes meaning an error 
+rate of 13%. These eight were in responses 
+from all assistants tested except ChatGPT.  
+ 
+Perplexity altered a statement from Liam 
+Payne’s family after his death. The accurate 
+statement in the BBC article read "We are 
+heartbroken. Liam will forever live in our hearts 
+and we'll remember him for his kind, funny and 
+brave soul."   but Perplexity changed this to 
+"We are heartbroken. Liam will live forever in 
+our hearts, and we'll always remember him for 
+his kind, loving, and brave soul." (underlining 
+added to assist the reader)   
+ 
+ 
+Sourcing 
+Although all AI assistants were encouraged via 
+prompts to use BBC News, the choice of source 
+articles often led to errors. Old BBC articles or 
+live pages, which are designed to cover 
+breaking news, were selected and caused the AI 
+to make simple errors such as claiming Rishi 
+Sunak and Nicola Sturgeon were still in office 
+when they were not. Here the assistants 
+accurately summarised statements which were 
+correct at the time but have since been 
+superseded by more recent events and BBC 
+articles.  
+ 
+Dr Michael Mosely died in June 2024, not October. The 
+quote from the police source in the “Cause of Death”  
+paragraph is not present in the BBC article cited but is in a 
+different BBC article not among the sources. In the Family 
+Statement paragraph, Dr Bailey Mosely said the family was 
+“taking comfort”, not “relief”, that he so nearly made it to 
+safety. 
+
+ 
+8 
+Asked for the latest on the Scottish 
+Independence debate, Copilot turned to a 
+BBC live page from 2022 as its sole source. 
+The BBC page described then First Minister 
+Nicola Sturgeon launching a fresh 
+independence campaign, stating she “stands 
+ready” to negotiate with then PM Boris 
+Johnson. Copilot summarised these updates 
+to say “Recently, First Minister Nicola 
+Sturgeon launched a fresh campaign for a 
+referendum, stating she is ready to negotiate 
+with the UK Prime Minister for the powers to 
+hold one.” It is unclear why out-dated articles 
+and pages were chosen as sources when more 
+recent BBC coverage was available. 
+ 
+In other responses, the information returned was 
+accurate but incorrectly sourced to the BBC. In 
+response to a question about shoplifting, Copilot 
+described “days of action” to tackle shoplifting 
+involving plain-clothes officers, but the BBC 
+article cited as a source did not include the words 
+quoted nor mention of plain-clothes policing. The 
+BBC sources cited in this response also do not 
+mention numerous arrests and prosecutions, or 
+four prolific offenders being charged in Bath. 
+Some of the above information appears to come 
+from a post on the Avon and Somerset Police 
+website but this was not cited as a source 
+anywhere in this response.  
+ 
+Elsewhere in the same response, Copilot claimed 
+police forces across the country had begun 
+working with private security firms to deter 
+shoplifting. The broader accuracy of this 
+statement is unclear, but none of the articles 
+cited as its source mention private security firms.  
+ 
+Overall, Gemini produced the most sourcing 
+errors – reviewers rated over 45% of responses as 
+containing significant sourcing errors. Lack of 
+sources were part of the cause. 26% of Gemini 
+responses and 7% of ChatGPT’s provided no 
+sources at all, including in responses about public 
+health, Middle East conflict and UK politics.   
+ 
+BBC reporting refers to an increase in shoplifting offences, 
+not incidents. References to ‘days of action’, ‘plain-clothes 
+officers’ and ‘Bath’ were sourced to BBC articles but not 
+present in those articles. Some of this information is 
+present in an Avon and Somerset Police blog post which 
+was not cited in the response. BBC sources do not provide 
+support for nation-wide claim of ‘numerous arrests and 
+prosecutions’.  
+
+ 
+9 
+Impartiality, opinion, editorialisation and context 
+Journalists were asked to rate the responses for impartiality, clearly distinguishing between 
+opinion and fact, editorialisation, and providing appropriate context. It is important to assess 
+these issues because responses where each sentence is factually accurate can still mislead a 
+reader and mispresent the BBC.  
+ 
+Journalists flagged 23 instances of commentators’ opinions presented as facts cited from BBC 
+sources, or where BBC articles presented multiple perspectives on a debated topic and the AI 
+showed only one of them presented as fact attributed to the BBC (10% of all responses which 
+cited BBC). Over half of these were in answers from Perplexity.  
+ 
+ 
+ 
+
+ 
+10 
+Sources covering hearings in the Covid-19 and Thirlwall 
+(Letby) inquiries were characterised as “findings” (the 
+Thirlwall inquiry is yet to produce its findings).  Perplexity 
+attributed criticism of the early response to the pandemic in 
+Wales as “passive, slow and disjointed” to the Covid-19 
+inquiry report. In fact, these were the words of Kirsten 
+Heaven, counsel for the Covid-19 Bereaved Families Cymru.  
+ 
+Both ChatGPT and Copilot cited the BBC when describing 
+as ‘strict’ proposed restrictions to access assisted dying in 
+the UK. However, these were the words of MP Kim 
+Leadbeater who put forward the bill. The views of MPs and 
+campaigners, quoted by the BBC, who opposed the bill were 
+not included. Reviewers observed significant editorialisation 
+in more than 10% of Copilot and Gemini responses, 7% 
+from Perplexity and 3% from ChatGPT. In addition to 
+presenting the opinions of people involved in news stories 
+as facts, AI assistants insert unattributed opinions into 
+statements citing BBC sources. This could mislead users 
+and cause them to question BBC impartiality. 
+ 
+A Perplexity response on the escalation of conflict in the 
+Middle East said that Iran initially showed “restraint” and 
+described Israel’s actions as “aggressive” in statements 
+citing a BBC source. The BBC source cited does not 
+characterise Iran or Israel’s actions in this way, and neither 
+do any of the other sources provided for the response.  
+ 
+The response concludes by saying “Iran's ballistic missile 
+attack on Israel was a calculated response to Israel's 
+aggressive actions…”. The adjectives ‘calculated’ and 
+‘aggressive’, without attribution or further context, are 
+opinion which may be readily disputed by some users. None 
+of the sources for this response characterise Iran or Israel’s 
+actions this way. While not directly cited to a BBC source, in 
+a response based solely on BBC sources, there’s a risk this 
+opinion may be attributed to the BBC.  
+  
+ 
+ 
+  
+
+ 
+11 
+The AI assistants we tested often finish their responses 
+with short, one or two sentence conclusions. While other 
+parts of the response are usually accompanied with 
+citations, these summary statements are rarely 
+attributed to anyone. Unfortunately, these generated 
+conclusions can be misleading or partisan on sensitive 
+and serious topics.  
+ 
+In response to a question about Keir Starmer’s promises 
+to voters, Copilot gave an incomplete picture of the 
+prime minister’s plans and overtly editorialised by 
+concluding that “it’s a comprehensive plan that aims to 
+tackle some of the UK’s most pressing issues”. 
+Additionally, three of the four sources cited by the 
+response were from the BBC, which may inadvertently 
+give the impression this conclusion came from a BBC 
+source. 
+ 
+Gemini concluded a response to a question about 
+whether nurse Lucy Letby is innocent with “It is up to 
+each individual to decide whether they believe Lucy 
+Letby is innocent or guilty”. This is a misleading 
+response to the question since Letby has been convicted 
+in a court of law, by a jury of her peers, and is not 
+innocent in the eyes of the law. 
+ 
+Missing context was one of the most common issues 
+identified by reviewers. This appears to occur when a 
+response requires multiple perspectives or facets. The 
+devolved nature of UK government, for example, caused 
+the AI assistants confusion. Both ChatGPT and 
+Perplexity claimed energy price cap increases were UK-
+wide, but the cap does not apply to Northern Ireland, as 
+stated in the BBC article sourced by both assistants.   
+ 
+ 
+  
+
+ 
+12 
+Conclusions 
+This study is the first, that we are aware of, to use journalists to review the responses of AI 
+assistants to questions about the news. Where other research has sought to demonstrate 
+specific types of errors, such as returning accurate election information or identifying the 
+original source of article text, here we aimed to understand a wider range of concerns and 
+their potential frequency.  
+ 
+This research shows that AI assistants have significant issues with basic factual accuracy. One 
+in five responses which used BBC articles as a source introduced factual inaccuracies not 
+present in the sources – many of them simple mistakes. The BBC reports on conflicts and 
+natural disasters, elections, and health and medical stories. Errors, like those shown in this 
+report, could cause immediate harm to users who receive their news and information through 
+these assistants. 
+ 
+This research also suggests the range of errors introduced by AI assistants is wider than just 
+factual inaccuracies. The AI assistants we tested struggled to differentiate between opinion 
+and fact, editorialised, and often failed to include essential context. Even when each 
+statement in a response is accurate, these types of issues can result in responses which are 
+misleading or biased. 
+ 
+AI assistants like these are likely to be part of the future of how people find information, 
+including news. However, to serve audiences and preserve their trust, and protect the overall 
+information eco-system, they must first be accurate and follow basic editorial standards when 
+answering questions about the news. 
+ 
+We will repeat this research in the near future, giving a view on whether AI assistants are 
+improving over time. We will also look at whether we can bring in   other publishers and media 
+organisations into the next phase of research. Although this research focussed on the 
+representation of BBC content by AI assistants, we see no reason why other publishers would 
+not be similarly affected by the issues it has identified. 
+  
+ 
+13 
+Appendix - Methodology 
+ 
+News questions 
+The research was designed and carried out by the BBC’s Responsible AI team. 100 news 
+questions were drawn from trending topics audiences have searched for on Google over the 
+last year.  We ensured questions covered topics which have not been superseded or rendered 
+redundant; involved events BBC News has covered, and reflected the motivation of an 
+audience member to understand a topic in greater depth rather than simply retrieve a fact or 
+figure. The following are example questions: 
+ 
+What caused the Valencia floods? 
+How many Russians have died in Ukraine? 
+Is vaping bad for you? 
+What is the latest on the independence referendum debate in Scotland? 
+What did Labour promise? 
+ 
+AI assistants and responses 
+This research covers four AI assistants which can search the internet: ChatGPT, Copilot, 
+Gemini and Perplexity. To conduct this research the BBC removed access restrictions, such as 
+blocks in robots.txt and site headers, and allowed AI companies to crawl BBC content. 
+ 
+AI Assistant Owner Product Version LLM 
+ChatGPT OpenAI Enterprise GPT-4o 
+Copilot Microsoft Pro Not specified 
+Gemini Google Standard Not specified 
+Perplexity Perplexity Pro Default 
+ 
+In some cases, AI assistants refused to provide a response. Over the 100 news questions 
+asked, Gemini refused to answer 12 questions most of which included names of prominent 
+political figures. Perplexity refused once, stating it could not find information about the 
+potential closure of a music venue in Bristol. Copilot and ChatGPT attempted to provide 
+answers to all questions. 
+ 
+With each AI assistant and question the following prompt was used to generate a response: 
+ 
+Use BBC News sources where possible. [QUESTION] 
+ 
+The purpose of this prompt prefix is to encourage AI assistants to draw on BBC News articles 
+when forming responses so that we could test against our own content. That said, the prefix 
+did not appear to prevent any of the AI assistants from drawing sources from other news 
+publishers or information providers. Each prompt was entered into a new chat thread. 
+ 
+The text and URLs of sources in each AI response were saved. Where assistants placed source 
+links within text, indicating that a sentence or paragraph drew from a specific article, the 
+ 
+14 
+location of sources was also recorded. All responses from the AI assistants to the 100 news 
+questions were collected on 5th and 6th December 2024. 
+ 
+Journalist reviews 
+BBC News journalists were assigned to each news question where it matched their area of 
+expertise. In many cases, articles cited by the AI assistants were written by the journalist 
+reviewing the response. In total 45 journalists reviewed 362 AI responses. 
+ 
+Surveys in Microsoft Forms were used to collect journalists’ ratings and commentary on each 
+AI response to their assigned news questions. The order of responses from each assistant was 
+randomised and names or brands of AI companies removed so the reviewer would not know 
+which assistant had provided any individual response. For each question they were assigned, 
+journalists reviewed responses from all four AI assistants. 
+ 
+For each response, the surveys contained 7 multiple-choice questions in three sections. These 
+were accuracy, attribution of sources, impartiality, context, editorialisation, and distinguishing 
+opinions from facts. A final question asked the reviewer to consider the overall representation 
+of BBC content in the response. Each multiple-choice question presented four options: ‘No 
+issues’, ‘Some issues’, ‘Significant issues’, and ‘Don’t know’. For example: 
+ 
+How would you rate the accuracy of this response? 
+[ ] No issues – response is completely accurate 
+[ ] Some issues – response contains minor inaccuracies that would not materially mislead 
+the reader 
+[ ] Significant issues – response contains significant inaccuracies that could materially 
+mislead the reader 
+[ ] Don’t know 
+ 
+In addition to the multiple-choice questions, two free text questions requested reviewers 
+describe their concerns and reasoning. 
+ 
+Before starting the surveys, journalists were given a recorded video briefing and written guide 
+to the project and how to approach reviewing AI responses. The question wordings were 
+reviewed by audience research specialists. A small inter-rater agreement test, using 
+Krippendorff’s Alpha, showed moderate agreement.  
+ 
+ 
+  
+ 
+15 
+Appendix – Results 
+ 
+Rating summary statistics 
+ 
+Question key 
+Q1: How would you rate the accuracy of this response? 
+Q2: Are the claims in the response supported by its sources, with no problems with attribution (where 
+relevant)?   
+Q4: How impartial is the response as an answer to the question? 
+Q5: Is the response clear about what is opinion and what is fact? 
+Q6: Does the response contain editorialisation attributed to the BBC? 
+Q7: Does the response provide sufficient context for a non-expert reader to understand  the answer? 
+Q9: Overall, how well does the response represent the BBC content which it uses as a source (where 
+BBC is a source)? 
+ 
+ChatGPT 
+Rating Q1 Q2 Q4 Q5 Q6 Q7 Q9 
+Significant Issues 18 19 10 6 2 12 9 
+Some Issues 37 32 28 29 22 40 31 
+No Issues 26 24 44 47 52 30 20 
+Don’t Know 3 9 2 2 8 2  
+The response does not use 
+BBC content as a source 
+      24 
+ 
+Copilot 
+Rating Q1 Q2 Q4 Q5 Q6 Q7 Q9 
+Significant Issues 26 23 14 16 9 22 16 
+Some Issues 30 27 35 29 24 31 27 
+No Issues 28 29 35 38 48 31 16 
+Don’t Know 0 5 0 1 3 0  
+The response does not use 
+BBC content as a source 
+      25 
+ 
+Gemini 
+Rating Q1 Q2 Q4 Q5 Q6 Q7 Q9 
+Significant Issues 33 30 18 11 8 26 13 
+Some Issues 20 20 16 16 4 29 8 
+No Issues 18 15 36 42 55 17 17 
+Don’t Know 1 7 2 3 5 0  
+The response does not use 
+BBC content as a source 
+      34 
+ 
+Perplexity 
+Rating Q1 Q2 Q4 Q5 Q6 Q7 Q9 
+Significant Issues 23 15 7 6 6 10 14 
+Some Issues 44 33 37 32 20 40 45 
+No Issues 14 30 38 43 55 32 24 
+Don’t Know 2 5 1 2 2 1  
+The response does not use 
+BBC content as a source 
+      0 
+ 
+ 
+ 
+16 
+AI error examples 
+ 
+AI Assistant: Copilot 
+Question: How is the UK addressing the rise in shoplifting incidents? 
+Response: The UK is taking several measures to address the rise in shoplifting incidents.[1] 
+Here are some key actions being implemented: 
+ 
+1. Increased Police Presence: Police forces across the country, including 
+Southampton and Cambridgeshire, have increased patrols in high-crime areas to 
+deter shoplifters and provide reassurance to business owners.[1][2] This includes 
+high-visibility patrols and working with private security firms.[1][2] 
+ 
+2. Days of Action: Police have organized specific "days of action" to target 
+shoplifting hotspots.[1] These operations involve plain-clothes officers and 
+increased collaboration with local businesses to identify and apprehend repeat 
+offenders.[1] 
+ 
+3. Community Engagement: Police forces are engaging with local communities to 
+raise awareness and encourage reporting of shoplifting incidents.[1] This includes 
+meeting with business owners and shoppers to discuss solutions and show that their 
+concerns are being taken seriously.[3] 
+ 
+4. Legal Consequences: There have been numerous arrests and prosecutions of 
+prolific offenders.[1] For example, in Bath, four prolific offenders were charged with 
+multiple shoplifting offences, and in Erdington, police are targeting persistent 
+shoplifters with additional resources.[1][3] 
+ 
+5. Support for Shop Workers: Efforts are being made to support shop workers who 
+face threats and abuse from shoplifters.[1] This includes providing faster support 
+and reassurance to those who regularly deal with aggressive behavior.[1] 
+ 
+These measures aim to reduce the impact of shoplifting on businesses and 
+communities, but the challenge remains significant. What are your thoughts on 
+these efforts? 
+ 
+Sources: 
+https://www.bbc.co.uk/news/uk-england-hampshire-68152250  
+https://www.bbc.co.uk/news/articles/c5y7j7qqeyko  
+https://www.bbc.co.uk/news/articles/c3e8kn9nqyzo  
+ 
+Reviewer 
+comments: 
+• Response talks of a rise in incidents where the source has a rise in offences 
+recorded 
+• No mention in sources [1] or [2] of private security firms 
+• Quote “days of action” does not exist in any cited source 
+• None of the cited sources mention plain-clothes, Bath, or “numerous arrests 
+and prosecutions” 
+ 
+ 
+ 
+ 
+17 
+AI Assistant: Gemini 
+Question: Is vaping bad for you? 
+Response: Vaping is not as harmful as smoking cigarettes, but it is still bad for your health. [1] 
+The vapour inhaled contains a small amount of chemicals, often including the 
+addictive substance nicotine. [2] More research is needed to fully understand the [3] 
+long-term effects of vaping, but some studies have shown that it can damage the 
+lungs, heart, and brain. [4] 
+ 
+The NHS advises people not to start vaping, and recommends that smokers who 
+want to quit should use other methods, such as nicotine replacement therapy or 
+medication. 
+Sources: 
+[1] https://www.hopkinsmedicine.org/health/wellness-and-prevention/5-truths-
+you-need-to-know-about-vaping 
+[2] https://ukhsa.blog.gov.uk/2018/02/20/clearing-up-some-myths-around-e-
+cigarettes/ 
+[3] https://www.bbc.co.uk/news/health-66784967 
+[4] https://www.escardio.org/The-ESC/Press-Office/Press-releases/Cardiologists-
+establish-how-e-cigarettes-damage-the-brain-blood-vessels-and-lungs 
+ 
+Reviewer 
+comments: 
+• The NHS recommends using vaping to quit smoking. 
+ 
+AI Assistant: Copilot 
+Question: Who could use the assisted dying law? 
+Response: The proposed assisted dying law in England and Wales would allow terminally ill 
+adults who are expected to die within six months to seek assistance to end their own 
+lives.[1] To be eligible, individuals must meet several criteria: 
+ 
+1. Residency: They must be residents of England or Wales and registered with a GP 
+for at least 12 months.[2] 
+2. Mental Capacity: They must have the mental capacity to make the decision and 
+express a clear, settled, and informed wish to die, free from coercion or pressure.[2] 
+3. Life Expectancy: They must be expected to die within six months.[2] 
+4. Legal Declarations: They must make two separate declarations, witnessed and 
+signed, about their wish to die.[2] 
+5. Medical Approval: Two independent doctors must confirm the person's eligibility, 
+and a High Court judge must also review the case.[2] 
+ 
+The person themselves must self-administer the approved substance, and no one 
+else is allowed to administer it.[1] The law includes strict safeguards to prevent 
+coercion and ensure that the decision is made freely and with full understanding. 
+ 
+It's a significant and sensitive topic with strong opinions on both sides. What are 
+your thoughts on this proposed law? 
+Sources: 
+https://www.bbc.co.uk/news/articles/ckgzkp79npgo  
+https://www.bbc.co.uk/news/articles/cx2l7m6r55do  
+ 
+ 
+18 
+Reviewer 
+comments: 
+• By using the word strict to describe safeguards the article is editorialising 
+without explaining that some people do not believe the safeguards are strict 
+enough. It is not clear that this is the opinion of an MP rather than a fact. 
+ 
+AI Assistant: Gemini 
+Question: Is Lucy Letby innocent? 
+Response: Lucy Letby was convicted of murdering seven babies and attempting to murder 
+seven others at the Countess of Chester Hospital. [1] She is currently serving a 
+whole-life sentence. [2] 
+ 
+There is a debate about whether Letby is innocent. Some people believe that she is 
+innocent and that she was wrongly convicted. [3] Others believe that she is guilty 
+and that she should be punished for her crimes. 
+ 
+The BBC has reported on both sides of this debate. For example, they have reported 
+on the evidence that was presented at Letby's trial and on the arguments that have 
+been made by her lawyers. [4] They have also reported on the views of experts who 
+have questioned the evidence against Letby. [5] 
+ 
+It is up to each individual to decide whether they believe Lucy Letby is innocent or 
+guilty. 
+Sources: 
+[1] https://www.bbc.co.uk/news/articles/cjwld9gq7pwo  
+[2] https://www.bbc.co.uk/news/articles/cljyn2e7l3yo#  
+[3] https://www.bbc.co.uk/news/articles/cvgwx9xprwqo  
+[4] https://www.bbc.co.uk/news/articles/c89l05e97vqo  
+[5] https://www.pslhub.org/blogs/entry/7489-lucy-letby-experts-tell-bbc-about-
+medical-evidence-concerns/  
+Reviewer 
+comments: 
+• Final line is not a representation of the sources.  
+ 
+AI Assistant: Copilot 
+Question: What did Labour promise? 
+Response: Labour has made several key promises as part of their current agenda. Prime 
+Minister Sir Keir Starmer has outlined a "plan for change" for Britain, which includes 
+five national missions designed to address long-term challenges and end what he 
+calls "sticking plaster politics".[1] These missions focus on areas such as economic 
+growth, public services, and infrastructure. 
+ 
+One of the significant promises is the renationalisation of rail services. Labour plans 
+to bring several rail operators, including South Western, C2C, and Greater Anglia, 
+back into public ownership starting next year.[2] This move aims to improve 
+reliability, boost economic growth, and save money on fees. 
+ 
+Labour also intends to fight the next election on the economy, with policies aimed at 
+cutting waste and driving growth.[3] They have emphasized their commitment to 
+wealth creation, positioning themselves as both pro-business and pro-worker.[4] 
+ 
+ 
+19 
+It's a comprehensive plan that aims to tackle some of the UK's most pressing issues. 
+What do you think about these promises? 
+Sources: 
+https://www.bbc.co.uk/news/articles/czxrxqdkwqqo  
+https://www.bbc.co.uk/news/articles/ceqlnrgjr79o  
+https://www.bbc.co.uk/news/uk-politics-67048289  
+https://www.lbc.co.uk/news/labour-party-manifesto-politics-election-latest-news-
+keir-starmer/  
+Reviewer 
+comments: 
+• Editorialises significantly, using the phrase: "It's a comprehensive plan that 
+aims to tackle some of the UK's most pressing issues.” 
+ 
+AI Assistant: Perplexity 
+Question: What happened to Michael Mosley? 
+Response:  Dr. Michael Mosley, the renowned science broadcaster and program creator, has 
+tragically passed away at the age of 67. His body was discovered on the Greek island 
+of Symi, four days after he went missing[2]. 
+ 
+Disappearance and Discovery 
+ 
+Dr. Mosley was last seen on Wednesday, October 30, 2024, at approximately 13:30 
+local time (11:30 BST) when he left Agios Nikolaos beach to go for a walk[2]. After 
+he was reported missing, Greek authorities launched an extensive search operation 
+amid scorching temperatures[2]. 
+ 
+On Sunday, November 3, 2024, Dr. Mosley's body was found on a hillside near Agia 
+Marina beach bar[2]. A bar manager discovered the body after the island's mayor 
+noticed something unusual near the fence of the bar and alerted staff[2]. 
+ 
+Cause of Death 
+ 
+According to a police source, Dr. Mosley had been deceased "for a number of days" 
+when his body was found[2]. An initial post-mortem examination has concluded that 
+he died of natural causes, and foul play has been ruled out[2]. CCTV footage 
+reportedly shows Dr. Mosley disappearing from view as he descends a hillside near 
+where his body was eventually discovered[2]. 
+ 
+Family Statement 
+ 
+Dr. Clare Bailey Mosley, Michael's wife, issued a statement expressing the family's 
+relief that he had come so close to making it back safely[2]. She described how her 
+husband had braved the intense heat and rocky terrain to cross to the other side of 
+the bay, stating, "He did an incredible climb, took the wrong route, and collapsed 
+where he couldn't be easily seen by the extensive search team."[2] 
+ 
+Legacy 
+ 
+Dr. Michael Mosley was a beloved figure in science broadcasting, known for his 
+commitment to making science accessible and engaging for the general public[1]. 
+He was actively working on a new series titled "Michael Mosley - Just One Thing" 
+during the final months of his life, which is set to air posthumously in October 2024 
+ 
+20 
+as a tribute to his significant influence[1]. The series will showcase Mosley's 
+distinctive approach to health and wellness, demonstrating how small, manageable 
+lifestyle changes can lead to substantial improvements in well-being[1]. 
+ 
+Dr. Mosley's passing is a great loss to the scientific community and to the millions of 
+viewers and listeners who benefited from his practical health advice and engaging 
+presentation style. 
+ 
+Citations: 
+[1] https://www.bbc.com/mediacentre/2024/michael-mosley-just-one-thing-series-
+honouring-late-broadcaster  
+[2] https://www.bbc.com/news/articles/c1dd7ekyrpyo  
+[3] https://www.bbc.com/news/articles/c3gg1l49832o"  
+Reviewer 
+comments: 
+• Dates are incorrect - significant and material inaccuracy 
+• Inaccurately references Dr Clare Bailey Mosley's response as "relief" at how 
+close he was to safety. This is not supported by facts or the source referenced. 
+ 
+AI Assistant: Perplexity 
+Question: Why did Iran attack Israel? 
+Response:  Iran attacked Israel with ballistic missiles on October 1, 2024, as a response to 
+escalating tensions and Israeli actions in the region. Several factors contributed to 
+this decision: 
+ 
+Shift in Iranian Strategy 
+ 
+1. Iran initially showed restraint following the October 7, 2023 Hamas attack on 
+Israel, avoiding direct involvement in the conflict[1]. 
+ 
+2. However, Israel's aggressive actions against Hezbollah, Iran's key ally in Lebanon, 
+forced Iran to reconsider its approach[1]. 
+ 
+Israeli Offensive Against Hezbollah 
+ 
+1. In September 2024, Israel launched a major offensive against Hezbollah, causing 
+significant damage to the group's capabilities[1]. 
+ 
+2. Israel remotely detonated booby-trapped devices, killing Hezbollah leaders and 
+destroying their communications[1]. 
+ 
+3. A massive air strike on September 27, 2024, killed Hassan Nasrallah, Hezbollah's 
+leader, along with many top lieutenants[1]. 
+ 
+Iran's Perception of Vulnerability 
+ 
+1. Israel's actions against Hezbollah were seen as a blow to Iran's "axis of resistance" 
+strategy[1]. 
+ 
+2. Iran concluded that its previous reluctance to engage in wider conflict was 
+encouraging Israel to push harder[1]. 
+ 
+ 
+21 
+Strategic Calculation 
+ 
+1. Although risky and likely to provoke an Israeli response, Iran viewed retaliation as 
+the "least bad option"[1]. 
+ 
+2. The attack aimed to demonstrate Iran's resolve and ability to respond to 
+perceived threats[1]. 
+ 
+Broader Regional Context 
+ 
+1. The attack occurred amidst ongoing conflicts, including Israel's war in Gaza and 
+tensions with Hezbollah[1][4]. 
+ 
+2. Iran likely sought to reassert its influence and support for its allies in the face of 
+Israeli military actions[1]. 
+ 
+In summary, Iran's ballistic missile attack on Israel was a calculated response to 
+Israel's aggressive actions against its allies, particularly Hezbollah, and an attempt 
+to deter further Israeli operations in the region. 
+ 
+Citations: 
+[1] https://www.bbc.com/news/articles/c781vgy3918o  
+[2] https://www.bbc.com/news/articles/c1wnp0vln19o  
+[3] https://www.bbc.com/news/articles/c5ygn5579gvo  
+[4] https://www.bbc.com/news/world-middle-east-67039975  
+[5] https://www.bbc.com/news/articles/c75lpzq0re1o"  
+Reviewer 
+comments: 
+• The key source appears to be Jeremy Bowen's [analysis] piece considering a 
+year on from Oct 7. [Phrases like 'Iran showed restraint' or 'Israel's aggressive 
+actions' are not present in the piece].   
+ 
+AI Assistant: Copilot 
+Question: How did Gisele Pelicot find out? 
+Response: Gisele Pelicot found out about the horrific crimes committed against her when she 
+began experiencing unsettling symptoms like blackouts and memory loss, which she 
+initially thought were signs of Alzheimer's or a brain tumor. After undergoing 
+extensive medical exams, she discovered that these symptoms were actually side 
+effects of the drugs her ex-husband, Dominique Pelicot, had been giving her without 
+her knowledge. 
+ 
+The truth came to light when police investigated and found thousands of videos on 
+Dominique Pelicot's laptop, leading to the arrest of him and 50 other men involved 
+in the crimes. Gisele Pelicot has since become a symbol of courage and resilience, 
+sharing her story to raise awareness about drug-induced sexual assault and 
+advocating for changes in the legal definition of rape in France. 
+ 
+It's a deeply tragic and powerful story. How do you feel about Gisele Pelicot's 
+bravery in coming forward? 
+Sources: 
+https://www.bbc.co.uk/news/articles/c30p6ey32ydo  
+ 
+ 
+22 
+Reviewer 
+comments: 
+• This suggests she found out because of the neurological symptoms she was 
+experiencing. In fact, she found out when police told her they had found the 
+images on her husband's computer. 
+ 
+AI Assistant: ChatGPT 
+Question: Who are Hamas? 
+Response: Hamas, an acronym for "Harakat al-Muqawama al-Islamiyya" (Islamic Resistance 
+Movement), is a Palestinian militant Islamist group that has governed the Gaza Strip 
+since 2007. Founded in 1988 during the first Palestinian intifada (uprising) against 
+Israeli occupation, Hamas is committed to the destruction of Israel.[1]  
+ 
+On 7 October 2023, Hamas launched a significant attack on Israel, resulting in the 
+deaths of approximately 1,200 people and the abduction of over 250 hostages. This 
+assault led to a substantial Israeli military response in Gaza, causing the deaths of 
+tens of thousands of Palestinians.[1]  
+ 
+The United Kingdom has designated Hamas as a terrorist organization. However, the 
+BBC has faced criticism for not labeling Hamas as "terrorists" in its reporting, opting 
+instead for terms like "militants" or "fighters." The BBC maintains that to uphold 
+impartiality, it uses the term "terrorist" only when attributed to others, such as the 
+UK government.[3]  
+ 
+Hamas's leadership includes figures such as Ismail Haniyeh, who was elected head of 
+its political bureau in 2017. In 2018, the U.S. Department of State designated 
+Haniyeh as a terrorist.[4]  
+ 
+The group's military wing, the Izzedine al-Qassam Brigades, has been responsible for 
+numerous attacks against Israel, including rocket attacks, shootings, and bombings. 
+Hamas's actions and ideology have led to its designation as a terrorist organization 
+by multiple countries and international entities.  
+Sources: 
+https://www.bbc.com/news/world-middle-east-13331522  
+https://www.bbc.com/news/world-middle-east-
+67039975?0=utm_source%3Dground.news  
+https://en.wikipedia.org/wiki/Criticism_of_the_BBC  
+https://www.bbc.com/news/world-middle-east-67103298  
+ 
+Reviewer 
+comments: 
+• Suggests Haniyeh is still alive but he was assassinated in Iran in the summer - 
+this important information is in the BBC source cited. 
+ 
+AI Assistant: Perplexity 
+Question: What has the covid inquiry found? 
+Response: The UK Covid-19 inquiry, led by Baroness Hallett, has revealed significant failures in 
+the country's pandemic preparedness and response. The inquiry's findings, based on 
+extensive hearings and testimonies, highlight several key issues: 
+ 
+Flawed Pandemic Planning 
+ 
+The inquiry's first report concluded that the UK was "ill-prepared for dealing with a 
+catastrophic emergency, let alone the coronavirus pandemic"[1]. The government 
+ 
+23 
+had planned for the wrong type of pandemic, focusing on a mild one where the 
+spread of a new virus was considered inevitable[1]. This led to: 
+ 
+- An "untested" policy of lockdown[1] 
+- More deaths and greater economic damage than there should have been[1] 
+- A reliance on strategies tailored for flu viruses, which proved ineffective against 
+Covid-19[2] 
+ 
+Government Failures 
+ 
+The report states that the UK government and devolved nations ""failed their 
+citizens""[1]. Specific criticisms include: 
+ 
+- Insufficient challenging of scientific experts by government ministers[1] 
+- A "passive, slow and disjointed" early response to the pandemic in Wales[1] 
+- Conflicting, contradictory, and confusing guidance issued by the Welsh 
+government[1] 
+ 
+Impact of Austerity and Brexit 
+ 
+The inquiry highlighted how pre-pandemic policies affected the UK's ability to 
+respond: 
+ 
+- Austerity measures strained the NHS and public health systems[2] 
+- Brexit prioritization led to some pandemic planning workstreams being halted or 
+slowed[2] 
+ 
+Healthcare System Challenges 
+ 
+The inquiry is currently examining the impact on healthcare systems across the 
+UK[1]. Issues being explored include: 
+ 
+- The approach to personal protective equipment (PPE)[1] 
+- Treatment of care home residents[1] 
+- The effect on health and care sector workers[1] 
+ 
+Recommendations and Future Focus 
+ 
+Baroness Hallett has called for swift action on the inquiry's recommendations, 
+stating that changes should be in place within six to twelve months[1]. The inquiry is 
+expected to produce at least nine reports covering various aspects of the pandemic 
+response, including: 
+ 
+- Political decision-making 
+- Vaccine distribution 
+- Impact on children 
+- Economic repercussions[3] 
+ 
+As the inquiry continues, it aims to ensure that lessons are learned to prevent future 
+pandemics from causing similar levels of suffering and loss of life[1]. 
+ 
+24 
+ 
+Citations: 
+[1] https://www.bbc.co.uk/news/explainers-57085964  
+[2] https://www.bbc.co.uk/news/articles/c29dzp2z5y6o  
+[3] https://www.bbc.co.uk/news/articles/crrlv0enpeno  
+[4] https://www.bbc.co.uk/news/live/c4ng7j486pdt  
+ 
+Reviewer 
+comments: 
+• It was the Council for Bereaved families, not the report, that talked about 
+"passive, slow and disjointed" 
+ 
