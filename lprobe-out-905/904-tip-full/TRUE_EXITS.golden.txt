@@ -1,0 +1,4 @@
+TRUE_EXIT_golden_master=1
+TRUE_EXIT_dormancy_tip=0
+TRUE_EXIT_dormancy_base=0
+TRUE_EXIT_dormancy_diff=0

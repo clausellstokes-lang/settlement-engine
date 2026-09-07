@@ -4,3 +4,5 @@ TRUE_EXIT_d_census=0
 TRUE_EXIT_e_rosters=0
 TRUE_EXIT_f_birth=0
 TRUE_EXIT_g_pulse=0
+TRUE_EXIT_a_golden=1
+TRUE_EXIT_b_certify=0

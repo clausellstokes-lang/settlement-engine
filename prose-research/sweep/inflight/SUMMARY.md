@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:24:25 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:30:27 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -9,7 +9,7 @@
 | dnd | regrade | regrade-r6 | result | 0 | — | — | 19:13:50 |
 | dnd | synth |  | failed | 0 | secA.md, secB.md, secC.md | — | 19:46:03 |
 | dnd | synth |  | in-flight | 0 | — | — | 21:31:03 |
-| dnd | synth |  | in-flight | 0 | — | — | 01:16:16 |
+| dnd | synth |  | in-flight | 0 | — | — | 01:26:08 |
 | dnd | verifier | i724-795 | result | 12 | — | verdict file WRITTEN | 19:00:26 |
 | dnd | verifier | i796-842 | result | 10 | — | verdict file WRITTEN | 18:59:33 |
 | dnd | verifier | i843-870 | result | 7 | — | verdict file WRITTEN | 18:58:35 |
