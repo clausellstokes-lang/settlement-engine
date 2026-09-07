@@ -20109,6 +20109,48 @@
    "note": "Raw page fetched (HTTP 200, browser UA). Post 'The Swan Hollow Intrigue', posted September 5, 2026 by Bryce Lynch. Quote verbatim in the paragraph opening on the confusion between details and specifics; the same paragraph sets specificity against detail, so every limb (distinguishes detail from specificity; calls it trivia; says detail is bad) is on the page.",
    "fromFile": "verdicts-dnd-i724-795.json"
   },
+  "725": {
+   "index": 725,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one well written specific sentence is worth more than a page",
+   "note": "Raw page fetched with a browser UA (HTTP 200). Sentence sits in the details-vs-specifics paragraph of the Swan Hollow Intrigue review, prefaced by the picture/thousand-words comparison; 'of details' closes it. Every limb holds.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
+  "726": {
+   "index": 726,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is terse, meaning it doesn't get in the way",
+   "note": "Same paragraph, defining Specificity against detail; the sentence continues about scanning an adventure and not pausing mid-game. Claim's 'the page' is the page of an adventure being scanned, and the DM is the reader throughout the paragraph.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
+  "727": {
+   "index": 727,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It communicates exactly the vibe the DM should be going for.",
+   "note": "Closing sentence of the details-vs-specifics paragraph, immediately after the one-sentence/page-of-details line. Quotation word for word.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
+  "728": {
+   "index": 728,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That (dubious) in parens tells us a lot.",
+   "note": "Next paragraph, on the Quack selling a (dubious) potion of healing. The page calls the table 'a wandering traveller table for one of the inns' rather than 'random-encounter table'; that is a naming difference, the entry is a rolled table entry and the parenthetical adjective limb is exact.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
+  "729": {
+   "index": 729,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quick adjectives/adverbs used to describe NPCs hit so well",
+   "note": "Same paragraph; the contrast limb is the following sentence, where a long section of italics read-aloud per NPC meant to convey personality is said to fail. Both limbs on the page.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
+  "730": {
+   "index": 730,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "More is not better.",
+   "note": "Stands as its own sentence inside the paragraph on long bouts of exposition and irrelevant detail, so the claim's framing as a verdict on exposition is the page's own context.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
   "731": {
    "index": 731,
    "verdict": "SKIPPED_TRIAGE",
@@ -20123,12 +20165,27 @@
    "note": "Raw page fetched (HTTP 200). 'Ptolus: Running the Campaign - From Table to Page', January 5th, 2018, The Alexandrian. Quote verbatim; it is introduced as what you must be wary of when going table-to-page, i.e. adapting his own home campaign (The Complex of Zombies) into a publishable scenario, and the following paragraphs give the falls-in-love-with-an-NPC example. Warning limb supported.",
    "fromFile": "verdicts-dnd-i724-795.json"
   },
+  "733": {
+   "index": 733,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a mediocre at best prose poem in the form of",
+   "note": "Post is '7 Maxims of the OSR', section III 'Role Playing not Roll Playing', final sentence of the fruitful-voids paragraph: when such voids are everywhere one has no game, but that prose poem, shaped as an instruction manual or gazetteer. 'Made entirely of' maps to the page's 'when they are everywhere'. Byline renders via script, but Gus L answers as blog author throughout the comments.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
   "734": {
    "index": 734,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "735": {
+   "index": 735,
+   "verdict": "PARTIAL",
+   "trueWording": "Sickly stench; grease and putrescence.",
+   "note": "Quotation is exact: Bryce quotes room 28 'Lower Hydra Nest' from Nikoline's Lions of Tell Arn Part 2 and does hold the writing up as the model ('That IS the goal of good writing'). But the entry he quotes is not verbless throughout - after the two noun phrases it runs a ledge line and then a finite-verb clause about water and blood dripping from above, and the ledge line is spatial rather than sensory. The neighbouring model rooms he praises open with finite verbs too (room 29's detritus thickens).",
+   "unsupportedLimb": "'a string of verbless sensory noun phrases' - the same quoted room 28 entry ends in a finite-verb clause (water and blood dripping from above) and includes a non-sensory ledge/exit line",
+   "fromFile": "verdicts-dnd-i725-749.json"
   },
   "736": {
    "index": 736,
@@ -20158,12 +20215,54 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "740": {
+   "index": 740,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he usually wrote a 1-line note for each room",
+   "note": "Opening paragraph of the post (the tag archive renders the article in full). Page frames it as Gygax's first dungeon under Castle Greyhawk, notes shared with co-DM Rob Kuntz. Claim's limbs hold.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
+  "741": {
+   "index": 741,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gary's longer descriptions set the pattern for virtually every adventure",
+   "note": "Section 'Gary Gygax sets the standard'; the preceding sentences name G1 Steading of the Hill Giant Chief (1978) and generous descriptions for every location, so the G1 limb is on the page. Quoted sentence closes with 'to follow'.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
+  "742": {
+   "index": 742,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ideas that spring to mind first will steer toward the obvious",
+   "note": "Section 'Longer descriptions'. The preceding sentence supplies the first limb: longer descriptions free DMs from needing to invent details at the table. The quoted clause continues about the most familiar and blandest ideas.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
   "743": {
    "index": 743,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "pads it like a school paper stretched to an assigned length",
    "note": "Raw page fetched (HTTP 200); the tag URL serves the full post 'How much description should a dungeon key include?', November 21, 2016, by David Hartlage. Quote verbatim in the section headed 'Longer descriptions', judging the 1989 Gamescience expanded Tegel Manor entry B9 BEDROOM against the shorter original. 'Expanded room description' and 'good middle sentence' limbs both on the page.",
    "fromFile": "verdicts-dnd-i724-795.json"
+  },
+  "744": {
+   "index": 744,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "encourages authors to write something even when they have little to add",
+   "note": "Section 'Longer descriptions', on the padded taxidermist's-bedroom entry. Noting the wording gap honestly: the page says 'encourages' and 'little to add' where the claim says 'makes' and 'nothing to add'; the very next sentence carries the stronger form, saying the format makes authors feel obligated to describe an empty closet's shelves and pegs, so both limbs are supported in substance.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
+  "745": {
+   "index": 745,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "An avalanche of description does more than squander page count.",
+   "note": "Section 'Matching description to a location's purpose'; the next sentence (with a typo in the original) says it buries great details that might actually enter play, and the Victor Wachter example follows. Both limbs on the page.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
+  "746": {
+   "index": 746,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The length of descriptions should match the way players will engage",
+   "note": "Section 'The ideal dungeon description'; sentence ends 'a location', followed by the widow's-salon versus Tomb of Horrors contrast. Claim's paraphrase matches.",
+   "fromFile": "verdicts-dnd-i725-749.json"
   },
   "747": {
    "index": 747,
@@ -20179,12 +20278,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "749": {
+   "index": 749,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the first thing a typical DM would imagine at the table",
+   "note": "Section 'The ideal dungeon description', final paragraph: if your kitchen description reads that way, you may as well rely on the typical imagination - which is the cutting test the claim describes.",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  },
   "750": {
    "index": 750,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "751": {
+   "index": 751,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "judges felt that the actual description of dungeons was their 'domain'",
+   "note": "Live raw page fetched (dmdavid.com tag page renders the full 2016-11-21 post, bylined David Hartlage). Under heading 'Tegel Manor and minimal descriptions': introduced as 'In Dragon magazine issue 27, Bob Bledsaw wrote'. Every limb holds (Hartlage; Bledsaw; Dragon 27; judges' own domain). Bledsaw's sentence continues that all judges wanted was a skeletal framework.",
+   "fromFile": "verdicts-dnd-i751-774.json"
   },
   "752": {
    "index": 752,
@@ -20193,6 +20306,28 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "753": {
+   "index": 753,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A lot of this involves de-bullet pointing the text.",
+   "note": "Live raw page fetched. Opening paragraph, dated March 23 2023: the rewrite is of 'Behind Closed Doors', shown to be his own by 'I'm a better writer than I was three years ago' and 'even my bullet-points'. 'Largely' tracks the page's 'a lot of this'. Only nuance: the page says bullets -> prose, never that the text had been prose before ('back into').",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
+  "754": {
+   "index": 754,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I find this only exacerbates my issue with them.",
+   "note": "Live raw page fetched. Same opening paragraph; the preceding sentence is that even his bullet-points are more prose-based than a lot of other examples he has seen. Both limbs (more prose-based than most; worsens rather than eases the objection) are on the page.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
+  "755": {
+   "index": 755,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the prose keys a room 'from a single dominant smell or object outward'",
+   "trueWording": "The old bricks of the kitchen are stained black with soot.",
+   "note": "Live raw page fetched; the quoted smell line is verbatim in the room 4 Kitchen prose version, and the prose is present tense throughout. But it is the SECOND sentence: room 4 opens on the soot-stained bricks. The page never states a method, and the demonstrated openings are not uniform - rooms 10 and 14 open on a bare adjective ('Austere.', 'Pristine, kept in readiness'), room 12 on an abstraction, while rooms 8 and 13 do open on a smell. The lead-from-a-dominant-sensory-anchor rule is the researcher's inference, not the page's claim.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
   "756": {
    "index": 756,
    "verdict": "VERIFIED_VERBATIM",
@@ -20200,12 +20335,55 @@
    "note": "Raw page fetched (HTTP 200). 'Bullet Points vs Prose', March 23, 2023, Luke Gearing. HTML confirms the layout: each room heading is followed by a <p> prose version and then a <ul> bullet version. Room '10) Study' prose opens with the one-word sentence 'Austere.' before the desk, dust and papers; the bullet twin instead opens 'Study - austere and spartan...'. One-word-first and before-inventory limbs both hold.",
    "fromFile": "verdicts-dnd-i724-795.json"
   },
+  "757": {
+   "index": 757,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I often just close my eyes and imagine being there",
+   "note": "Live raw page fetched (post dated September 14 2021), under 'Structures' > 'Mental Dig/Exploration'. Supported, with two framings the claim flattens: the page conditions it on already having 'a good sense of the vibe and tone of a physical space', says 'often', and offers it as one of five interchangeable structures (Mental Dig, Map First, Pearl, Resonance & Conflict, Timeline) to 'move between as you see fit'.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
+  "758": {
+   "index": 758,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "finding those touchstones which communicate the tone",
+   "note": "Live raw page fetched. Same 'Mental Dig/Exploration' paragraph, which lists three uses: fine-tuning the vibe/tone, finding those touchstones, and finding out what else is there. The walk-through limb is the same paragraph's 'moving from room to room, the contents of physical space begin to suggest themselves to me'.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
   "759": {
    "index": 759,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Use your outline (that is, your headings) to build a skeleton",
    "note": "Raw page fetched (HTTP 200). 'Techniques to Write Adventures', September 14, 2021, Luke Gearing, under the heading 'Outline To Fuck'. The same sentence continues that your words, the details, are the meat; the following paragraph describes typing headings first in Markdown. Skeleton-first and words-as-meat limbs both supported.",
    "fromFile": "verdicts-dnd-i724-795.json"
+  },
+  "760": {
+   "index": 760,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The introduction is highly evocative, reading almost like the weird fiction",
+   "note": "Live raw page fetched. Section 'SAMPLE DUNGEON', second sentence; the page continues 'that Holmes was a fan of'. One attribution note: the post is bylined 'Zenopus Archives', not 'Zach Howard' - the identification is corroborated on the Delta page fetched for this same chunk, which credits 'Zach Howard (Zenopus)'.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
+  "761": {
+   "index": 761,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "should read the background material above to the assembled players",
+   "note": "Live raw page fetched. Quoted Holmes manuscript text: 'The Dungeon Master should read the background material above to the assembled players and then let them decide how they will proceed.' 'Aloud' is entailed by 'read ... to the assembled players'. The 1977 attribution survives: the post names only two changes to the introduction in the published rulebook (the second sentence moved to the paragraph's end; 'assistants' -> 'men-at-arms'), neither touching this instruction.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
+  "762": {
+   "index": 762,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'predating boxed text' - the page never mentions boxed text at all",
+   "trueWording": "this background material is meant to be read to the players",
+   "note": "Live raw page fetched; the quotation is verbatim in Howard's commentary on the Portown paragraph ('- this background material is meant to be read to the players, as indicated below'), and the read-to-the-players limb is fully supported. The chronological limb is absent: the words 'boxed text' do not occur anywhere on the page (checked against the full raw text, comments included), so the page cannot support the claim that this practice predates boxed text.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
+  "763": {
+   "index": 763,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Here we get a thumbnail sketch of a campaign setting",
+   "note": "Live raw page fetched. Commentary immediately below the quoted Holmes paragraph, which is one paragraph covering caravan routes from the south (trade), merchant ships on pirate-infested waters, and humans and non-humans from all over the globe (inhabitants). Every limb holds.",
+   "fromFile": "verdicts-dnd-i751-774.json"
   },
   "764": {
    "index": 764,
@@ -20236,6 +20414,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "768": {
+   "index": 768,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And hey, there's boxed text for the first time!",
+   "note": "Live raw page fetched. Closing line of the section headed '1982 - Lost Caverns of Tsojcanth Publication', and corroborated later in the same post: the 1983-85 adventures use boxed text 'as introduced in the 1982 Tsojcanth dungeon areas'. 'First' is first within Delta's declared sample - adventures authored by Gygax at two-year intervals across 1974-1985.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
   "769": {
    "index": 769,
    "verdict": "SKIPPED_TRIAGE",
@@ -20243,12 +20428,61 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "770": {
+   "index": 770,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only a single curt bullet-line per encounter area",
+   "note": "Live raw page fetched. Section '1974 - Castle Greyhawk Notes'; the sentence continues 'noting monster type, number range, and treasure (and absolutely nothing else)'. Two hedges the claim drops: the notes were never published (known from a photo taken at a Gen Con 2007 event), and Delta records debate over whether the encounter text is original, with the map dated 'could be 1972-1974 or so'. He also notes the key is sparser still - one number often covers several rooms and about three-quarters are unkeyed.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
   "771": {
    "index": 771,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "here we at least get full English sentences describing each area",
    "note": "Raw page fetched (HTTP 200). 'Early Evolution of Encounter Text', Delta's D&D Hotspot, October 2021, section heading '1976 - Lost Caverns of Tsojconth Tournament' (Gygax's Winter Con V document). The sentence begins 'Rather than bullet-point atoms...', which carries the moved-from-bullet-points limb; the preceding section is the 1974 Castle Greyhawk bullet notes.",
    "fromFile": "verdicts-dnd-i724-795.json"
+  },
+  "772": {
+   "index": 772,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the paragraphs tend to lead with those sense-descriptions",
+   "note": "Live raw page fetched. Section '1978 - Steading of the Hill Giant Chief'; the sentence continues that monster identification and hit points possibly occur deeper in the block, which is the point of the observation. Both limbs (the 1978 module; paragraphs leading with sense-descriptions) hold.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
+  "773": {
+   "index": 773,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "almost 500 words total for the one area",
+   "note": "Live raw page fetched. Section '1980 - Expedition to the Barrier Peaks', on area 7, the 'Ship Commander's Quarters'. The no-monsters limb is doubly supported: the area is offered as an example of deeply detailed areas 'even without any monsters or traps at all', and its sub-areas a-d are parenthesised as having no monsters or unnatural contents. Delta's word count covers area 7 with those sub-areas, matching the claim's 'an area'.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
+  "774": {
+   "index": 774,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "2 full pages of text to be read verbatim",
+   "note": "Live raw page fetched. In the final section '1984 (c.) - Dungeonland & Temple of Elemental Evil', where Delta brings in 1985's Isle of the Ape: an introductory boxed-speech by Tenser running two full pages to be read verbatim, parenthesised as 'some 1,600 words!'. Every limb (opens with; boxed; Tenser; ~1,600 words; read verbatim) holds.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  },
+  "775": {
+   "index": 775,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "introductory boxed text section that runs more than a full page",
+   "note": "Live raw page (curl, browser UA, HTTP 200). Final section '1984 (c.) - Dungeonland & Temple of Elemental Evil'; the sentence names the Gygax/Mentzer Temple and puts the ~1,300-word figure in parentheses immediately after. Both limbs (word count, more than a page) supported.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
+  "776": {
+   "index": 776,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "room 404 is ironically a 20'×30' room with 1,200 words",
+   "note": "Same section and same sentence chain as 775; the page continues 'of content text' and adds room 417 at 1,400 words. Dimensions, word count and Temple attribution all on the page. Quote matched byte-for-byte including the × character.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
+  "777": {
+   "index": 777,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "start with some non-boxed info to the DM, and then",
+   "note": "Same final section: the page says Temple has a strong tendency to do this and gives the boxed description deep in the encounter text. The page's own hedge, that this is not universal, is consistent with the claim's 'tends to'.",
+   "fromFile": "verdicts-dnd-i775-807.json"
   },
   "778": {
    "index": 778,
@@ -20278,12 +20512,54 @@
    "note": "Raw page fetched (HTTP 200); the comment thread is in the served HTML. Comment by Warren D., October 25, 2021, on Delta's D&D Hotspot. Praise limb explicit two lines earlier, where he calls the best text innovations those championed by the OSR with Old-School Essentials as his example; he then gives a worked room example with the bolded object and parenthetical detail.",
    "fromFile": "verdicts-dnd-i724-795.json"
   },
+  "782": {
+   "index": 782,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not exactly in boxed text, but in specially quoted and indented",
+   "note": "Live raw page, HTTP 200. Section 'Other Curiosities', item 'Proto-Boxed Text'. The 1979 date limb is carried by the post's opening paragraph, which dates the Collector's Edition of Lost Tamoachan to TSR 1979. 'Initial descriptions for each area' matches the claim's 'initial area descriptions'.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
+  "783": {
+   "index": 783,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The tactical format makes it difficult to generate a compelling adventure narrative",
+   "note": "Live raw page, HTTP 200. Opening sentence of the first quoted block. The '4e' limb is carried by Bridges' framing sentence directly above the block, which calls Cordell a main designer of 4th edition rejecting the current tactical format; post labels include '4th edition'.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
+  "784": {
+   "index": 784,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "adventures tend to be fairly Spartan affairs, because too little space",
+   "note": "Final paragraph of the same first quoted block; it continues with notes on exploration, lore and character story, so all three of the claim's listed omissions are on the page.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
+  "785": {
+   "index": 785,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "1st Edition adventures I looked at included Tomb of Horrors",
+   "note": "Second quoted block, opening words; the block goes on to White Plume Mountain and Isle of Dread. The 'models of adventure format' limb is carried by Bridges' bridging sentence about going back to the classics for formatting examples.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
   "786": {
    "index": 786,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "a compact series of encounters appropriate for a specific level of play",
    "note": "Raw page fetched (HTTP 200). 'Dungeon Delve: WTF?', The Alexandrian. The sentence sits in an indented block (padding-left/right 60px in the HTML) among the passages Alexander quotes from the Dungeon Delve introduction, which he introduces as written by Bill Slavicsek, WotC Director of R&D. The block continues that the book holds 30 Delves, one per level, three encounters each. Definition and attribution limbs both supported.",
    "fromFile": "verdicts-dnd-i724-795.json"
+  },
+  "787": {
+   "index": 787,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "compressed into single paragraphs with minimal effort spent on description",
+   "note": "Live raw page, HTTP 200. Section 'The Evolution of Dungeons & Dragons' Information Design', in the 4th Edition paragraph. The page hedges with 'often'; the claim drops that word but states a tendency, not a universal, so the limb stands.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
+  "788": {
+   "index": 788,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is a wall of text with a boxed description",
+   "note": "Same section, the paragraph comparing the author's copy of D&D5e's Candlekeep Mysteries to Temple of Elemental Evil. 'The blogger' is Brian C. Rideout, the post's bylined author.",
+   "fromFile": "verdicts-dnd-i775-807.json"
   },
   "789": {
    "index": 789,
@@ -20298,6 +20574,13 @@
    "trueWording": "clearly signposted monsters, treasure, traps, and tactics using indentation and icons",
    "note": "Raw page fetched (HTTP 200). Same post and section. The page continues 'and presented in a specific order', plus Encounter Level at the start of each encounter, so the specific-order limb is on the page and the attribution to 3rd edition's structure is explicit.",
    "fromFile": "verdicts-dnd-i724-795.json"
+  },
+  "791": {
+   "index": 791,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "rather than give a long box text, Hot Springs Island provides",
+   "note": "Section 'Point Form Description'; the sentence continues that the adjectives describe the area for the GM to use while improvising. The full title The Dark of Hot Springs Island appears in the adjacent section and image credit.",
+   "fromFile": "verdicts-dnd-i775-807.json"
   },
   "792": {
    "index": 792,
@@ -20355,6 +20638,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "800": {
+   "index": 800,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "useful starting guidance on running an adventure that you wouldn’t find",
+   "note": "Live raw page, HTTP 200, Polygon excerpt bylined Jon Peterson. First paragraph of the excerpt under 'From the Unknown to the Borderlands'; the antecedent 'It' is In Search of the Unknown (B1) by Mike Carr, named in the preceding clause. Page continues 'in the D&D books available at the time', supporting the 'then-current' limb.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
+  "801": {
+   "index": 801,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "enlightening text about the art of dungeon mastering was effectively paraphrased",
+   "note": "Paragraph beginning 'It was then that Gygax apparently grasped'. The page says 'in Gygax's version'; that version is identified two sentences earlier as Keep on the Borderlands (B2), so the claim's naming of B2 is supported in context, not asserted beyond the page.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
+  "802": {
+   "index": 802,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Modules only started to become a business for TSR in the summer",
+   "note": "First paragraph of the excerpt; the page completes the date as 'of 1978'. Claim's dating limb matches exactly.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
   "803": {
    "index": 803,
    "verdict": "VERIFIED_VERBATIM",
@@ -20376,6 +20680,20 @@
    "note": "Raw page fetched (HTTP 200). Quote verbatim in the Introduction under the heading 'The Base Rules', in a sentence about the GAZ books being designed for beginning players; the antecedent 'these books' is the Gazetteer line, so the claim's scope is right.",
    "fromFile": "verdicts-dnd-i796-842.json"
   },
+  "806": {
+   "index": 806,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "points are made quickly and efficiently",
+   "note": "Live raw page, HTTP 200. Introduction, subsection 'The Base Rules', third point about the GAZ books; the same sentence notes casual, informal language and no overuse of purple prose. Subject is the Gazetteer series, matching the claim.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
+  "807": {
+   "index": 807,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The first one clocks in at a mere 64 pages plus maps",
+   "note": "Same 'The Base Rules' subsection. 'The first one' is GAZ1: The Grand Duchy of Karameikos: the writeup proceeds in publication order and the very next heading is GAZ1 Karameikos; the GAZ1 conclusion later on the same page independently exclaims that it was only 64 pages.",
+   "fromFile": "verdicts-dnd-i775-807.json"
+  },
   "808": {
    "index": 808,
    "verdict": "PARTIAL",
@@ -20384,12 +20702,62 @@
    "unsupportedLimb": "'rather than the DM' is the claimant's implied contrast, not words on the page, whose stated purpose is letting players decide where their characters are from (the cited section is also wrong: Part 2, not Part 4)",
    "fromFile": "verdicts-dnd-regrade-r6.json"
   },
+  "809": {
+   "index": 809,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the official census of 50.000 was taken 15 years ago",
+   "note": "Raw page fetched by curl (browser UA, HTTP 200). Quote is verbatim in the 'Gaz 1 Part 4: The Lay of the Land' post, subheading 'An Array of Strange Places'. Every limb holds: GAZ1, Specularum, official census of 50.000, taken 15 years ago; page adds it has grown considerably since.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
+  "810": {
+   "index": 810,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Some merit only a paragraph",
+   "note": "Raw page, same Gaz 1 Part 4 post, paragraph immediately after the Specularum passage: the other notable places in Karameikos get their own descriptions, some merit only a paragraph. All limbs supported.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
+  "811": {
+   "index": 811,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His prose is dispassionate, methodical, and encouraging",
+   "note": "Raw page fetched by curl (HTTP 200). Verbatim in the section 'The Translotar: J. Eric Holmes and the Bridge Between Worlds'; the surrounding sentences name Holmes and the Holmes Basic Set, so the prose attribution holds.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
+  "812": {
+   "index": 812,
+   "verdict": "PARTIAL",
+   "trueWording": "The text in the set was dense and peculiar",
+   "note": "The quotation is verbatim in the Holmes section, but the essay never dates the original boxed set: it says only 'the original boxed set', and the sole years it prints are 1930, 1977, 1970, 1948, 1981 and 1980. The 1974 date is the claim's own gloss, not the page's, so the attribution 'the same essay calls the original 1974 boxed set' overstates what is on the page.",
+   "unsupportedLimb": "the 1974 dating of the boxed set",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
+  "813": {
+   "index": 813,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Moldvay's text seems both efficient and lyrical",
+   "note": "Raw page, section 'The poet: Tom Moldvay and the Art of Elegance'. The 1981 limb is supported in the same paragraph, which dates the Basic D&D set to 1981.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
   "814": {
    "index": 814,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "“Unlike Gygax, whose prose resembled a baroque sermon”",
    "note": "Raw page fetched (HTTP 200). Quote verbatim inside the section 'The Teacher: Frank Mentzer and the Human Face of D&D', where Gygax's prose is the foil for Mentzer's teacherly style. Byline Serban Ionita, The RPG Gazette, posted November 11 2025.",
    "fromFile": "verdicts-dnd-i796-842.json"
+  },
+  "815": {
+   "index": 815,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each adventure implied a cosmology, a history, and a mood",
+   "note": "Raw page, Moldvay section, paragraph on Isle of Dread and The Lost City. The page continues that the mood was built in by its placement of statues, monsters and ruins, supporting that limb too.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
+  "816": {
+   "index": 816,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "These adventures communicated worldviews, rather than merely offering maps",
+   "note": "Raw page, Moldvay section, the sentence immediately preceding the cosmology sentence; refers to Isle of Dread and The Lost City.",
+   "fromFile": "verdicts-dnd-i809-831.json"
   },
   "817": {
    "index": 817,
@@ -20413,6 +20781,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "820": {
+   "index": 820,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His settlement populations and locations followed real-world economic maxims",
+   "note": "Raw page fetched by curl (HTTP 200), byline John Roy, Oct 21 2024. Verbatim as the opening sentence of the second paragraph under the heading 'Keeping It Real'; the preceding sentence names Gygax, so 'His' is Gygax.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
+  "821": {
+   "index": 821,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each nation's imports and exports and the trade routes they used",
+   "note": "Raw page, same 'Keeping It Real' paragraph: he provided each nation's imports and exports and the trade routes they used to transport them. Subject is Gygax, named in the same paragraph.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
   "822": {
    "index": 822,
    "verdict": "SKIPPED_TRIAGE",
@@ -20434,12 +20816,54 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "825": {
+   "index": 825,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We made no more than what we could put on a page",
+   "note": "Raw transcript fetched by curl (HTTP 200), part 1, dated July 14 2025. Verbatim at the end of Zeb Cook's first answer in the exchange on models of world building, which opens 'when we started doing things [at TSR], we were doing modules'. TSR and the early-module limbs are both on the page.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
+  "826": {
+   "index": 826,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "For every module, you had to create a quick setting",
+   "note": "Raw transcript, part 1, same Zeb Cook turn; the page continues 'so you could explain it', supporting the purpose limb.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
+  "827": {
+   "index": 827,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You obviously have a whole bunch more",
+   "note": "Raw transcript, part 1, the paragraph after the page remark: 'Then we got letters from people saying...' followed by 'No, we don't have anything more on that.' Readers writing in and the belief in more material are both on the page.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
   "828": {
    "index": 828,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "“the most important thing to know about world building is, who”",
    "note": "Raw page fetched (HTTP 200). Quote verbatim, twice on the page (body line and pull-quote), spoken by Wolfgang Baur in the opening exchange after the host's first prompt. The claim drops Baur's hedge 'I think'; the sentence completes by asking who you are doing it for, which is the claim's second limb. Seminar part 1, dated July 14 2025.",
    "fromFile": "verdicts-dnd-i796-842.json"
+  },
+  "829": {
+   "index": 829,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Forgotten Realms is the kitchen sink approach to world building",
+   "note": "Raw transcript, part 1, verbatim in Wolfgang Baur's turn replying to Cook on the TSR settings; the turn is speaker-tagged 'Wolfgang' and the seminar intro identifies him as Wolfgang Baur of Kobold Press.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
+  "830": {
+   "index": 830,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to provide the minimum viable world building",
+   "note": "Raw transcript, part 1, Baur's turn: a new model of world building that Kobold Press and others have pursued, which is to provide the minimum viable world building; the next sentence names the one-book model.",
+   "fromFile": "verdicts-dnd-i809-831.json"
+  },
+  "831": {
+   "index": 831,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "are ones that are literally just lists of places and people",
+   "note": "Raw transcript fetched by curl (HTTP 200), part 2, dated July 21 2025, in the exchange on conflict. The paragraph is an unbroken continuation of the turn tagged 'Zeb:' ('Yeah, there's conflict there'), with the next speaker tag being 'Wolfgang:' two paragraphs later, so the attribution to Cook holds.",
+   "fromFile": "verdicts-dnd-i809-831.json"
   },
   "832": {
    "index": 832,

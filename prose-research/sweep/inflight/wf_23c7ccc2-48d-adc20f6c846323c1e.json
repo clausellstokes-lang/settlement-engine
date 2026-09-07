@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i1058-1074",
+ "lines": 69,
+ "firstTs": "2026-09-07T06:43:42.704Z",
+ "lastTs": "2026-09-07T06:46:00.508Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 17
+ },
+ "urlsFetched": [
+  "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "https://adventurersleague.files.wordpress.com/2018/10/1765690-dnd_house_style_guide.pdf",
+  "https://web.archive.org/web/20201112024903if_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+  "https://www.expositionbreak.com/a-walk-through-the-planes-an-interview-with-monte-cook-ray-vallese-and-colin-mccomb/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Now the interview page and the Dungeon 197 column.",
+ "run": "wf_23c7ccc2-48d",
+ "agent": "adc20f6c846323c1e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_23c7ccc2-48d/agent-adc20f6c846323c1e.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i1058-1074.json",
+  "exists": false
+ }
+}

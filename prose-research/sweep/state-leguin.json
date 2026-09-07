@@ -31131,12 +31131,75 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "588": {
+   "index": 588,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Generally, Barańczak maintains the high, solemn tone of some Le Guin's",
+   "note": "PDF fetched raw from journals.pan.pl (HTTP 200) and extracted with pdftotext. The sentence continues '...sentences, which was probably congenial to his personal writing style', with the Hateful-was-the-look example. Barańczak is the Polish translator, so 'the Polish translation' is a fair subject. CITATION CORRECTION: the sentence sits on printed p. 284 (PDF page 12, running head '284 ALESSANDRO AMENTA'), not p. 283; article runs pp. 273-287.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
   "589": {
    "index": 589,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"usually borrowed without any adaptation, for instance perriot, corly, gebbeth\"",
    "note": "Same raw PDF. The sentence starts on p. 281 (neologisms for plants, animals, fantastic creatures or objects usually borrowed without any adaptation, listing perriot, corly, gebbeth) and runs over the page break to pellawi, otak, harrekki on p. 282, so the cited p. 281 is right and the given fragment is verbatim. 'Into Polish' is the article's subject throughout.",
    "fromFile": "verdicts-leguin-i573-627.json"
+  },
+  "590": {
+   "index": 590,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "simple words words that are themselves almost always very old",
+   "note": "Word for word in the transcript: the sentence names 'the wizard of Earthsea' and 'the impression of simplicity' as what these old simple words create, so every limb holds. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
+  "591": {
+   "index": 591,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She doesn't use technical terms, she doesn't use jargon",
+   "note": "Word for word, immediately following the 'almost always very old' sentence in the simplicity passage. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
+  "592": {
+   "index": 592,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She's not going to say crenellation",
+   "note": "Verbatim; the next two sentences of the same passage supply the other limbs (talk about houses; say roof, tower), and the preceding sentences set the contrast with fantasists' 'elaborate vocabulary'. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
+  "593": {
+   "index": 593,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The more technical the more limited a word the less likely",
+   "note": "Verbatim; the transcript completes it '...she is to use it', immediately after the roof/tower sentences. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
+  "594": {
+   "index": 594,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "picked up a lot of associations in their travels",
+   "note": "Verbatim in the closing seconds ('Simple words or common words that have a long history... Words with a shadow. That's how Le Guin rolls.'). The 'not for simplicity's own sake' limb is carried by the video's opening ('deceptively simple', 'makes it look simple, but there's a lot of art and craft involved') rather than by one sentence. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
+  "595": {
+   "index": 595,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She saves the shortest sentence for the highest impact",
+   "note": "Verbatim; the transcript's preceding sentence gives 'They're fairly long and complex and flowing sentences' and the following words are 'He lay dying. Three words. Three words. Four syllables.' Passage is the chapter-four Archmage death scene. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
+  "596": {
+   "index": 596,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Simple words for you to fill in with emotional associations",
+   "note": "Verbatim; preceded in the transcript by 'Is he frigid? Is he freezing?... Is he subzero? No, he's cold. Very cold.', and the quoted novel line is 'the Archmage lay also unmoving but cold, very cold'. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
+  "597": {
+   "index": 597,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She finds that effect distracting and and fakey",
+   "note": "Verbatim, doubled 'and' included; the sentence before it reads 'The fantasists who use those words are trying to create a distance by using the elaborate vocabulary.' Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "fromFile": "verdicts-leguin-i588-636.json"
   },
   "598": {
    "index": 598,
@@ -31272,6 +31335,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "617": {
+   "index": 617,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a clear, clean prose that is never tainted by inkhorn medievalism",
+   "note": "Raw HTML fetched from theguardian.com with a browser user agent (HTTP 200) despite the robots.txt bar on Anthropic agents; the sentence continues 'or technological jargon.' Byline Hari Kunzru, headline 'Ursula Le Guin: Wizardry is artistry', datePublished 2014-11-20. It sits in the mid-article career paragraph rather than the opening, a page-location detail only.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
   "618": {
    "index": 618,
    "verdict": "SKIPPED_TRIAGE",
@@ -31364,12 +31434,47 @@
    "note": "Same 'Dial it down further' paragraph; source reads 'you quickly learned when talking to her about it' (generalised second person for Naimon's own experience) and ends 'has a history'.",
    "fromFile": "verdicts-leguin-i628-708.json"
   },
+  "631": {
+   "index": 631,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "weaving each place's contradictions, tensions, mores, and rites",
+   "note": "Verbatim; the article credits this to 'Le Guin's brilliance', in the paragraph on the first Hainish novels. The claim's 'portraits of its society' compresses the page's 'satisfyingly detailed portraits of authentic extraterrestrial societies'. Page byline Jason P. Vest, May 30 2021, confirmed on the fetched HTML.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
+  "632": {
+   "index": 632,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "real places rife with complex histories, cultures, and characters",
+   "note": "Verbatim, in the same sentence as claim 631's: 'her fiction swiftly convinces its readers that the worlds Le Guin invents are, indeed, real places...'. Same raw fetch of commonreader.wustl.edu.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
   "633": {
    "index": 633,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "most of all, resonant prose immediately capture the reader's",
    "note": "Opening section, in the series 'fertile imagination, winsome characters, fabulous plots, and, most of all, resonant prose'. Byline Jason P. Vest, datePublished 2021-05-30.",
    "fromFile": "verdicts-leguin-i628-708.json"
+  },
+  "634": {
+   "index": 634,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "results from her sensitivity to sound and syntax",
+   "note": "Verbatim; the widened window reads 'Her style, often called lyrical, results from her sensitivity to sound and syntax, from her wit and wisdom...', and 'her' is Le Guin throughout this volume. Volume is lending-restricted at archive.org (_djvu.txt returns 403), so the raw book page cannot be opened; the given search-inside URL was fetched raw and returns verbatim OCR of the book, widened with extra phrase queries to resolve the sentence around the match.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
+  "635": {
+   "index": 635,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it lacks the objective tone of most anthropological writing",
+   "note": "Verbatim, and the widened window resolves the pronoun: 'Always Coming Home is not an ethnograph, of course. It describes an imagined society; it lacks...', continuing 'is not organized by traditional topics, includes mainly primary material and little analysis'. Volume is lending-restricted at archive.org (_djvu.txt returns 403), so the raw book page cannot be opened; the given search-inside URL was fetched raw and returns verbatim OCR of the book, widened with extra phrase queries to resolve the sentence around the match.",
+   "fromFile": "verdicts-leguin-i588-636.json"
+  },
+  "636": {
+   "index": 636,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "drawing the reader into the making of the culture",
+   "note": "The quoted phrase is verbatim, but the page's own framing is narrower than 'presenting a culture': the window reads '...the characters and for drawing the reader into the making of the culture is to use the textual model of the ethnograph, in which both the voices of the anthropologist and the people being studied are heard.' Cite the page's wording, not 'presenting'. The agent is unnamed inside the window; it is Le Guin by the chapter's subject (Always Coming Home). Volume is lending-restricted at archive.org (_djvu.txt returns 403), so the raw book page cannot be opened; the given search-inside URL was fetched raw and returns verbatim OCR of the book, widened with extra phrase queries to resolve the sentence around the match.",
+   "fromFile": "verdicts-leguin-i588-636.json"
   },
   "637": {
    "index": 637,

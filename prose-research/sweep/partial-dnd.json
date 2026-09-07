@@ -2871,6 +2871,78 @@
   }
  },
  {
+  "index": 735,
+  "feature": "concrete sensory noun",
+  "claim": "The room text Bryce Lynch holds up as the model is a string of verbless sensory noun phrases, quoted in his review.",
+  "source": "module text by Nikoline quoted in Bryce Lynch's review, tenfootpole.org, 2026",
+  "url": "https://tenfootpole.org/ironspike/?p=10550",
+  "quote": "Sickly stench; grease and putrescence.",
+  "page": "Lions of Tell Arn Part 2 review, quoted room 28",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2026-07-06",
+  "routeHint": "direct curl (browser UA)",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "usability-school",
+  "verdict": {
+   "index": 735,
+   "verdict": "PARTIAL",
+   "trueWording": "Sickly stench; grease and putrescence.",
+   "note": "Quotation is exact: Bryce quotes room 28 'Lower Hydra Nest' from Nikoline's Lions of Tell Arn Part 2 and does hold the writing up as the model ('That IS the goal of good writing'). But the entry he quotes is not verbless throughout - after the two noun phrases it runs a ledge line and then a finite-verb clause about water and blood dripping from above, and the ledge line is spatial rather than sensory. The neighbouring model rooms he praises open with finite verbs too (room 29's detritus thickens).",
+   "unsupportedLimb": "'a string of verbless sensory noun phrases' - the same quoted room 28 entry ends in a finite-verb clause (water and blood dripping from above) and includes a non-sensory ledge/exit line",
+   "fromFile": "verdicts-dnd-i725-749.json"
+  }
+ },
+ {
+  "index": 755,
+  "feature": "place and institution description",
+  "claim": "Luke Gearing's model prose keys a room in the present tense from a single dominant smell or object outward.",
+  "source": "Luke Gearing's own demonstration passage, 'Bullet Points vs Prose', 2023",
+  "url": "https://lukegearing.blot.im/bullet-points-vs-prose",
+  "quote": "The smell of cold grease fills the air",
+  "page": "Bullet Points vs Prose, room 4 Kitchen, prose version",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2023-03-23",
+  "routeHint": "direct curl (browser UA)",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "usability-school",
+  "verdict": {
+   "index": 755,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the prose keys a room 'from a single dominant smell or object outward'",
+   "trueWording": "The old bricks of the kitchen are stained black with soot.",
+   "note": "Live raw page fetched; the quoted smell line is verbatim in the room 4 Kitchen prose version, and the prose is present tense throughout. But it is the SECOND sentence: room 4 opens on the soot-stained bricks. The page never states a method, and the demonstrated openings are not uniform - rooms 10 and 14 open on a bare adjective ('Austere.', 'Pristine, kept in readiness'), room 12 on an abstraction, while rooms 8 and 13 do open on a smell. The lead-from-a-dominant-sensory-anchor rule is the researcher's inference, not the page's claim.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  }
+ },
+ {
+  "index": 762,
+  "feature": "boxed text form",
+  "claim": "Howard reads Holmes's Portown background as material meant to be read to the players, predating boxed text.",
+  "source": "Zach Howard (Zenopus Archives), 'Part 46', 2015",
+  "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+  "quote": "this background material is meant to be read to the players",
+  "page": "commentary on the Portown paragraph",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2015-02-06",
+  "routeHint": "direct fetch",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "scholarship-history",
+  "verdict": {
+   "index": 762,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'predating boxed text' - the page never mentions boxed text at all",
+   "trueWording": "this background material is meant to be read to the players",
+   "note": "Live raw page fetched; the quotation is verbatim in Howard's commentary on the Portown paragraph ('- this background material is meant to be read to the players, as indicated below'), and the read-to-the-players limb is fully supported. The chronological limb is absent: the words 'boxed text' do not occur anywhere on the page (checked against the full raw text, comments included), so the page cannot support the claim that this practice predates boxed text.",
+   "fromFile": "verdicts-dnd-i751-774.json"
+  }
+ },
+ {
   "index": 764,
   "feature": "other: adventure as coherent mini-setting",
   "claim": "Howard contrasts OD&D's Sample Level, a collection of examples, with Holmes presenting his dungeon as part of a coherent adventure.",
@@ -2916,6 +2988,30 @@
    "note": "Raw page fetched (HTTP 200). Quote verbatim, but it sits in the section 'Gaz 1 Part 2: Maps, Characters and More History of Karameikos', NOT 'Gaz 1 Part 4: The Lay of the Land' as the citation's page field says - same URL, wrong section; fix the locator before reuse. The claim's 'rather than the DM' is the contrast implied by 'mostly meant for players', not words on the page; the stated purpose there is letting players decide where their characters are from.",
    "unsupportedLimb": "'rather than the DM' is the claimant's implied contrast, not words on the page, whose stated purpose is letting players decide where their characters are from (the cited section is also wrong: Part 2, not Part 4)",
    "fromFile": "verdicts-dnd-regrade-r6.json"
+  }
+ },
+ {
+  "index": 812,
+  "feature": "edition and house style",
+  "claim": "The same essay calls the original 1974 boxed set's text dense and peculiar.",
+  "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+  "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+  "quote": "The text in the set was dense and peculiar",
+  "page": "section 'The Translotar: J. Eric Holmes'",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2025-11-11",
+  "routeHint": "direct fetch",
+  "registerHint": "none",
+  "confidence": "medium: an evaluative hobbyist essay",
+  "angle": "scholarship-history",
+  "verdict": {
+   "index": 812,
+   "verdict": "PARTIAL",
+   "trueWording": "The text in the set was dense and peculiar",
+   "note": "The quotation is verbatim in the Holmes section, but the essay never dates the original boxed set: it says only 'the original boxed set', and the sole years it prints are 1930, 1977, 1970, 1948, 1981 and 1980. The 1974 date is the claim's own gloss, not the page's, so the attribution 'the same essay calls the original 1974 boxed set' overstates what is on the page.",
+   "unsupportedLimb": "the 1974 dating of the boxed set",
+   "fromFile": "verdicts-dnd-i809-831.json"
   }
  },
  {

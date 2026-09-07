@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-07 02:39:25 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 02:46:24 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 lands with zero product bytes — the three CAPACITY measurements are ta
+product claude/composite-r4 = 6ebe0ef3b · ledger = 64735cb34 §908: the capacity tripwires are made honest — CAP-TRIP-907 lands as nine cars over 424
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 6ebe0ef3b · 9 cars over 4243bdc61 · porcelain 0 · last commits:
@@ -111,7 +111,7 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
@@ -129,19 +129,19 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
-- **dnd**: claims 1153 · verdicts 1001 (todo 152) · kept 760 · partial 195 · verdict files 70 (triage 2, regrade r6) · section 09-07 00:36 · critic 09-07 01:07
+- **dnd**: claims 1153 · verdicts 1061 (todo 92) · kept 816 · partial 199 · verdict files 74 (triage 2, regrade r6) · section 09-07 00:36 · critic 09-07 01:07
 - **ai**: claims 1518 · verdicts 1518 (todo 0) · kept 1015 · partial 191 · verdict files 84 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-07 02:10
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
-- **leguin**: claims 924 · verdicts 786 (todo 138) · kept 551 · partial 94 · verdict files 48 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
+- **leguin**: claims 924 · verdicts 801 (todo 123) · kept 566 · partial 94 · verdict files 49 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r9/wf_14be9775-021, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r11/wf_23c7ccc2-48d, ai r10/wf_0eb229cc-f75
 
 ## WORKFLOW RUNS of chair session 405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074 (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_0eb229cc-f75: 50 journal lines, 25 agents
-- wf_14be9775-021: 15 journal lines, 8 agents
-- wf_23c7ccc2-48d: 6 journal lines, 5 agents
+- wf_14be9775-021: 20 journal lines, 12 agents
+- wf_23c7ccc2-48d: 14 journal lines, 9 agents
 - wf_4bd76597-3a3: 8 journal lines, 4 agents
 
-## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;34447 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;34452 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 26.61 27.24 27.25
+## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 5.97 16.42 22.67
