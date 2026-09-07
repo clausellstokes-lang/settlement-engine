@@ -3,15 +3,16 @@
  "name": null,
  "angle": null,
  "tag": null,
- "lines": 14,
+ "lines": 159,
  "firstTs": "2026-09-07T16:05:24.019Z",
- "lastTs": "2026-09-07T16:05:33.165Z",
+ "lastTs": "2026-09-07T16:11:11.873Z",
  "tools": {
-  "Bash": 1
+  "Bash": 23,
+  "Read": 3
  },
  "urlsFetched": [],
  "filesWritten": [],
- "lastAssistantText": "The guard passes (EXEMPLAR-BEST-PARTS.md exists, 86KB). Reading the fold and the framing documents now.",
+ "lastAssistantText": "The shell's glob expansion ate the `--include` flags; I'll quote them and re-run, and add the remaining independent reads to the same pass.",
  "run": "wf_8b507f28-6e0",
  "agent": "a35c3d5e38f2f495e",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/8de5f153-f375-48fb-803c-ec578a273a4a/subagents/workflows/wf_8b507f28-6e0/agent-a35c3d5e38f2f495e.jsonl",
