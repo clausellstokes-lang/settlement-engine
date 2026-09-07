@@ -28,6 +28,7 @@ import {
   tripwireRegistryDefects,
   tripwiresOfClass,
 } from '../../scripts/soak/tripwires.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 /**
@@ -392,8 +393,10 @@ describe('the tripwire registry', () => {
       expect(reach.written, `the writer's key set is missing ${field}`).toContain(field);
     }
     // …and the two the writer has never written are absent from it, which is the finding.
-    expect(reach.written).not.toContain('yearlyPopulations');
-    expect(reach.written).not.toContain('yearlyDiedFlags');
+    // Each absence is anchored by its own FINAL-state sibling — same object literal, same
+    // walker read — so a key set that drifted empty reds here instead of passing quietly.
+    expectAbsentWithAnchor(reach.written, 'yearlyPopulations', 'finalPopulations', "the writer's key set");
+    expectAbsentWithAnchor(reach.written, 'yearlyDiedFlags', 'finalDiedFlags', "the writer's key set");
 
     const unreachableRows = [...new Set(reach.unreachable.map((row) => row.id))];
     expect(unreachableRows).toEqual(['capacity_plateau', 'capacity_floor_thaw']);
@@ -419,7 +422,8 @@ describe('the tripwire registry', () => {
     // `const receipt = { ...receiptBody, nonFiniteFigures }`. The false positive is
     // reproduced here on purpose, because a guard that cries wolf gets deleted.
     const bodyOnly = WRITER_SOURCE.slice(0, WRITER_SOURCE.indexOf('const receipt = {'));
-    expect(receiptWriterFields(bodyOnly)).not.toContain('nonFiniteFigures');
+    expectAbsentWithAnchor(receiptWriterFields(bodyOnly), 'nonFiniteFigures', 'finalPopulations',
+      'the truncated body is still a live key set');
     expect([...new Set(tripwireFieldReach(TRIPWIRES, bodyOnly).unreachable.map((row) => row.id))])
       .toEqual(['non_finite_ledger_figure', 'capacity_plateau', 'capacity_floor_thaw']);
     expect(reach.written).toContain('nonFiniteFigures');

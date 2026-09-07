@@ -36,6 +36,7 @@ import {
 } from '../../scripts/soak/register.mjs';
 import { evaluateReceipt } from '../../scripts/soak/evaluate.mjs';
 import { buildRealmScalePlan, soakArgsFor } from '../../scripts/audit/realm-scale-certification.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const CLI = join(ROOT, 'scripts/soak/soak-register.mjs');
@@ -363,8 +364,12 @@ describe('the soak register — shapes, comparisons and the governed growth door
     // answer; the arms below therefore price a figure that moves without the world breaking.
     const runawayWrite = runCliTolerant(['--write', ...base, '--receipt', worsePath], { ...seat, ...note });
     expect(runawayWrite.status).toBe(2);
-    expect(runawayWrite.stderr).toContain('a deterministic-class tripwire fired — the run is not clean');
-    expect(runawayWrite.stderr).not.toContain('SOAK_REGISTER_DECLARED');
+    // The ORDERING, read off one stderr: the tripwire door's refusal is present (the anchor,
+    // proving the run reached and failed that door) and the declaration door's prompt never
+    // appears. A stderr that drifted empty now reds on the anchor rather than passing here.
+    expectAbsentWithAnchor(runawayWrite.stderr, 'SOAK_REGISTER_DECLARED',
+      'a deterministic-class tripwire fired — the run is not clean',
+      'the tripwire door refuses before the declaration door is reached');
 
     // ── A FIGURE MOVES WITHOUT THE WORLD BREAKING ─────────────────────────────
     // The liveness FLOOR the run reported, lowered. No tripwire grades `liveness.reported`
