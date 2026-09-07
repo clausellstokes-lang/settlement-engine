@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 20:03:58 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 20:10:01 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -147,7 +147,7 @@
 | kay | regrade | regrade-r8 | result | 0 | — | — | 00:00:50 |
 | kay | synth |  | failed | 0 | — | — | 19:46:20 |
 | kay | synth |  | failed | 0 | kay-stats.mjs, section-kay.md | — | 18:42:12 |
-| kay | synth |  | in-flight | 0 | — | — | 00:03:31 |
+| kay | synth |  | in-flight | 0 | — | — | 00:07:51 |
 | kay | verifier | i1007-1021 | result | 10 | — | verdict file WRITTEN | 23:43:41 |
 | kay | verifier | i1022-1036 | result | 10 | — | verdict file WRITTEN | 23:42:38 |
 | kay | verifier | i1037-1051 | result | 5 | — | verdict file WRITTEN | 23:48:03 |
@@ -319,9 +319,9 @@
 | wolfe | verifier | i708-722 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i711-725 | result | 11 | — | verdict file WRITTEN | 00:02:18 |
 | wolfe | verifier | i723-737 | failed | 0 | — | verdict file absent | 19:50:39 |
-| wolfe | verifier | i726-742 | in-flight | 22 | — | verdict file absent | 00:03:43 |
+| wolfe | verifier | i726-742 | result | 22 | — | verdict file WRITTEN | 00:05:54 |
 | wolfe | verifier | i738-752 | failed | 0 | — | verdict file absent | 19:50:39 |
-| wolfe | verifier | i743-779 | in-flight | 22 | — | verdict file absent | 00:03:21 |
+| wolfe | verifier | i743-779 | result | 22 | — | verdict file WRITTEN | 00:06:09 |
 | wolfe | verifier | i753-767 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i768-782 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i783-797 | failed | 0 | — | verdict file absent | 19:50:40 |
@@ -329,8 +329,12 @@
 | wolfe | verifier | i798-812 | failed | 0 | — | verdict file absent | 19:50:40 |
 | wolfe | verifier | i813-827 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i828-842 | failed | 0 | — | verdict file absent | 19:50:40 |
+| wolfe | verifier | i829-859 | in-flight | 12 | — | verdict file absent | 00:09:58 |
 | wolfe | verifier | i843-857 | failed | 0 | — | verdict file absent | 19:50:40 |
 | wolfe | verifier | i858-872 | failed | 0 | — | verdict file absent | 19:50:40 |
+| wolfe | verifier | i860-896 | in-flight | 10 | — | verdict file absent | 00:09:55 |
 | wolfe | verifier | i873-880 | failed | 0 | — | verdict file absent | 19:50:40 |
+| wolfe | verifier | i897-945 | in-flight | 4 | — | verdict file absent | 00:09:55 |
+| wolfe | verifier | i947-977 | in-flight | 3 | — | verdict file absent | 00:09:40 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).

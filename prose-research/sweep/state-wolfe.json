@@ -25826,6 +25826,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "947": {
+   "index": 947,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you always bear some imprint of the people who impressed you",
+   "note": "Raw PDF read (pdftotext, gwern.net); footer confirms '84 / LOCUS September 2002'. Wolfe's reply on the Lafferty/Chesterton line, p.84 col.2: he says you start writing imitating someone, develop your own voice, but keep the imprint. Page word is 'people', not 'writers'; the surrounding sentences are about literary influence and imitation, so the narrowing is contextually carried. Quote given matches word for word.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
+  },
   "948": {
    "index": 948,
    "verdict": "SKIPPED_TRIAGE",
@@ -25833,12 +25840,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "949": {
+   "index": 949,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "As long as you stick to explaining, you're going to have",
+   "note": "Raw archive.org djvu text. Wolfe answering the 'awkward explanatory lump' question; the sentence continues naming the lump's possible positions (end, middle, beginning). Every limb supported. Text sits just before the 'Page 7' running foot, i.e. the interview's p.6-7 spread rather than p.7 exactly; page field is metadata, not a claim limb.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
+  },
   "950": {
    "index": 950,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "951": {
+   "index": 951,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Perhaps what you're really seeing is Severian's straightforwardness, as opposed to",
+   "note": "Raw archive.org djvu text, p.7. Reply to the interviewer's 'unusual clarity ... so visual' question about the New Sun works. Two wording notes recorded, neither an unsupported limb: Wolfe hedges ('I don't really know' ... 'Perhaps'), and the page's contrast pair is named as 'someone like Number Five or Den' under the word 'protagonist', not 'narrators' — both are narrators of the earlier Fifth Head of Cerberus and Peace.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
+  },
+  "952": {
+   "index": 952,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "None. Some of the terms are Latin",
+   "note": "Raw archive.org djvu text. Question was 'Were any of the terms invented?' after the interviewer's 'spiced freely with all that archaic terminology', inside the New Sun conception exchange. Wolfe's answer opens 'None.' and continues that others were made by divesting Latin words of their endings, mostly for extinct animals. Quote matches word for word.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
   },
   "953": {
    "index": 953,
@@ -25861,12 +25889,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "956": {
+   "index": 956,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They shed light on the world in which the action",
+   "note": "Raw archive.org djvu text, p.7, in the 'stories within the story - what function do they perform?' answer. The page's sentence ends 'is taking place'; the claim's 'takes place' is paraphrase, not misquote. Quote matches word for word.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
+  },
   "957": {
    "index": 957,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "958": {
+   "index": 958,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "act as dividers between parts of the action that should be divided",
+   "note": "Raw archive.org djvu text, p.7, same 'stories within the story' answer as index 956; the sentence immediately precedes the shed-light sentence. Page reads 'They act as dividers...'. Quote matches word for word.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
   },
   "959": {
    "index": 959,
@@ -25882,6 +25924,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "961": {
+   "index": 961,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He is 6'1\", and weighs 175 pounds",
+   "note": "Raw archive.org djvu text, p.8. Question: 'If Severian were standing in front of us, describe him externally and internally.' Wolfe first fixes a moment ('at the time he leaves the Citadel'), then gives the height and weight; the quoted clause about pallor, eyes and hair follows verbatim in the next sentence. Height 6'1\" and weight 175 pounds both confirmed. Note: the inventory continues past the physical into a mental description, as the question asked, so 'flat physical inventory' describes the opening half of the answer.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
+  },
   "962": {
    "index": 962,
    "verdict": "SKIPPED_TRIAGE",
@@ -25895,6 +25944,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "964": {
+   "index": 964,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "All the best surprises and wonders come about like that, growing from",
+   "note": "Raw archive.org djvu text, in the answer about the speaking corpse and Terry Carr's anecdote. The sentence continues with the material of the story itself and the writer's willingness to face that material's consequences, so both limbs (best surprises; facing consequences) are supported. Quote matches word for word.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
+  },
+  "965": {
+   "index": 965,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In photographic terms, short stories are stills; novellas and novels are movies",
+   "note": "Raw archive.org djvu text, p.5 region (between the 'Page 4' and 'Page 6' running feet), in Wolfe's remarks on discovering the limitations of the short story. The photographic framing is the page's own words. Quote matches word for word.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
   },
   "966": {
    "index": 966,
@@ -25931,6 +25994,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "971": {
+   "index": 971,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I was an army cartographer in Korea after the cease-fire.",
+   "note": "Raw archive.org djvu text, p.8, closing sentence of the answer about maps of Nessus, Thrax and the Commonwealth. Both limbs (army cartographer in Korea; after the cease-fire) are on the page. Quote matches word for word.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
+  },
   "972": {
    "index": 972,
    "verdict": "SKIPPED_TRIAGE",
@@ -25944,6 +26014,34 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "974": {
+   "index": 974,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it's a waste unless it's said in some particular way",
+   "note": "Raw HTML of the live locusmag.com page (curl, browser UA), second excerpt. The 'Pass the salt' dinner-scene example; 'it' is what is said, i.e. the line. The alternative limb - that the character wants the salt for some special purpose - is the next clause of the same sentence. Quote matches word for word bar curly apostrophes.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
+  },
+  "975": {
+   "index": 975,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pique the tone of the book; to move the plot forward",
+   "note": "Raw HTML of the live locusmag.com page, second excerpt. The list is introduced by Wolfe saying that doing anything in a book means doing several things at once, which supports the 'simultaneous' limb; the third item, touching on the character of the person, closes the same sentence. Quote matches word for word.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
+  },
+  "976": {
+   "index": 976,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When I'd only been writing for a year, I used to waste",
+   "note": "Raw HTML of the live locusmag.com page, second excerpt, immediately after the salt example. The sentence names the wasted scene, and the parenthesis that follows says he would go back and take it out later, supporting the 'later cut them' limb. Quote matches word for word.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
+  },
+  "977": {
+   "index": 977,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If I'm not having fun, it's not going to be fun",
+   "note": "Raw HTML of the live locusmag.com page, first excerpt, opening sentence of the excerpt block. The sentence names the reader as the one who then loses the fun, and Wolfe extends the point to workshops. Quote matches word for word bar curly apostrophes.",
+   "fromFile": "verdicts-wolfe-i947-977.json"
   }
  },
  "assembledFrom": [
