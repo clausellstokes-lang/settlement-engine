@@ -3,15 +3,15 @@
  "name": "ai",
  "angle": "arch-worldbuilding-communities",
  "tag": null,
- "lines": 66,
+ "lines": 150,
  "firstTs": "2026-09-07T02:56:37.986Z",
- "lastTs": "2026-09-07T02:58:39.125Z",
+ "lastTs": "2026-09-07T03:03:44.862Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 9,
+  "Bash": 28,
   "WebFetch": 2,
-  "WebSearch": 6
+  "WebSearch": 11
  },
  "urlsFetched": [
   "https://www.reddit.com/r/worldbuilding/wiki/rules/",
@@ -27,7 +27,20 @@
   "https://web.archive.org/web/20250328024607id_/https://old.reddit.com/r/DnDBehindTheScreen/wiki/index",
   "https://www.reddit.com/r/DnDBehindTheScreen/about/rules/",
   "https://old.reddit.com/r/DnDBehindTheScreen/about/rules",
-  "https://www.reddit.com/r/DnDBehindTheScreen/wiki/rules/"
+  "https://www.reddit.com/r/DnDBehindTheScreen/wiki/rules/",
+  "https://www.legendkeeper.com/worldbuilding-with-ai/",
+  "https://help.drivethrurpg.com/hc/en-us/articles/26794784634007-Managing-AI-Generated-Content-and-DriveThru-Policy",
+  "https://www.enworld.org/threads/drivethrurpgs-new-ai-content-filter.707636/",
+  "http://web.archive.org/cdx/search/cdx?url=reddit.com/r/DnDBehindTheScreen/about/rules*&output=text&fl=timestamp,original,statuscode&collapse=timestamp:6&from=2023&limit=40",
+  "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+  "https://www.rascal.news/dungeons-dragons-new-art-direction-isnt-ai-generated-but-almost-worse-boring/",
+  "https://r.jina.ai/https://help.drivethrurpg.com/hc/en-us/articles/26794784634007-Managing-AI-Generated-Content-and-DriveThru-Policy",
+  "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
+  "https://www.wargamer.com/dnd/marketplace-dungeon-masters-guild-ai-ban",
+  "https://help.dmsguild.com/hc/en-us/articles/12776888583319-Content-Format-Logo-Artwork-Guidelines",
+  "https://tenfootpole.org/ironspike/?p=10009",
+  "https://tenfootpole.org/ironspike/?p=10508",
+  "https://tenfootpole.org/ironspike/?p=9672"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",

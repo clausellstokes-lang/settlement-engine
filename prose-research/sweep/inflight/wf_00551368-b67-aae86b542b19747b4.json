@@ -3,21 +3,28 @@
  "name": "ai",
  "angle": "arch-historical-fact-measured",
  "tag": null,
- "lines": 78,
+ "lines": 122,
  "firstTs": "2026-09-07T02:56:37.991Z",
- "lastTs": "2026-09-07T02:58:43.505Z",
+ "lastTs": "2026-09-07T03:04:49.428Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 14,
-  "WebSearch": 4
+  "Bash": 24,
+  "WebSearch": 6,
+  "WebFetch": 1
  },
  "urlsFetched": [
   "https://proceedings.neurips.cc/paper_files/paper/2024/file/38cc5cba8e513547b96bc326e25610dc-Paper-Datasets_and_Benchmarks_Track.pdf",
-  "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0"
+  "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+  "https://csh.ac.at/news/can-chatgpt-pass-a-phd-level-history-test/",
+  "https://techcrunch.com/2025/01/19/ai-isnt-very-good-at-history-new-paper-finds/",
+  "http://web.archive.org/cdx/search/cdx?url=abc.net.au/news*&output=text&fl=original,timestamp&collapse=urlkey&from=20240901&to=20241231&limit=200000&filter=original:.*(asic|artificial-intelligence|ai-summar",
+  "https://ia.acs.org.au/article/2024/humans-outperform-ai-in-australian-govt-trial.html",
+  "http://web.archive.org/cdx/search/cdx?url=${q}&output=text&fl=original,timestamp&collapse=urlkey&limit=40",
+  "http://web.archive.org/cdx/search/cdx?url=abc.net.au*&output=text&fl=original&collapse=urlkey&from=20240820&to=20241001&limit=300000"
  ],
  "filesWritten": [],
- "lastAssistantText": "Let me checkpoint notes and fetch the January 2025 reporting.",
+ "lastAssistantText": "ABC confirmed not found across CDX and site-restricted search. Let me checkpoint the JSON and begin expansion toward the archival-register gap.",
  "run": "wf_00551368-b67",
  "agent": "aae86b542b19747b4",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-aae86b542b19747b4.jsonl",

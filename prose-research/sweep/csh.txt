@@ -1,0 +1,360 @@
+ 
+ Can-chatgpt-pass-a-phd-level-history-test 
+ Skip to content 
+ Education 
+ Close Education 
+ Open Education 
+ People 
+ Close People 
+ Open People 
+ Events & News 
+ Close Events & News 
+ Open Events & News 
+ Visuals 
+ Engage 
+ Close Engage 
+ Open Engage 
+ About Us 
+ Close About Us 
+ Open About Us 
+ 21.01.2025 
+ Social Complexity & Collapse 
+ News 
+ Can ChatGPT Pass a PhD-Level History Test? 
+ According to a new study, the answer is “not yet.” GPT-4 Turbo couldn’t get most of the answers right: it had a balanced accuracy of 46%. 
+ For the past decade, complexity scientist Peter Turchin has been working with collaborators to bring together the most current and structured body of knowledge about human history in one place: the Seshat Global History Databank . Over the past year, together with computer scientist Maria del Rio-Chanona , he has begun to wonder if artificial intelligence chatbots could help historians and archeologists to gather data and better understand the past. As a first step, they wanted to assess the AI tools understanding of historical knowledge. In collaboration with an international team of experts, they decided to evaluate the historical knowledge of advanced AI models such as ChatGPT-4, Llama, and Gemini. “Large language models (LLMs), such as ChatGPT, have been enormously successful in some fields—for example, they have largely succeeded by replacing paralegals. But when it comes to making judgments about the characteristics of past societies, especially those located outside North America and Western Europe, their ability to do so is much more limited,” says Turchin, who leads the Complexity Science Hub’s (CSH) research group on social complexity and collapse . 
+ "One surprising finding, which emerged from this study, was just how bad these models were. This result shows that artificial ‘intelligence’ is quite domain-specific. LLMs do well in some contexts, but very poorly, compared to humans, in others." 
+ Peter Turchin 
+ Tweet 
+ The results of the study were presented recently at the NeurIPS conference, AI’s premier annual gathering, in Vancouver. GPT-4 Turbo, the best-performing model, scored 46% on a four-choice question test. According to Turchin and his team, although these results are an improvement over the baseline of 25% of random guessing, they highlight the considerable gaps in AI’s understanding of historical knowledge. “I thought the AI chatbots would do a lot better,” says del Rio-Chanona, the study’s corresponding author. “History is often viewed as facts, but sometimes interpretation is necessary to make sense of it,” adds del Rio-Chanona, an external faculty member at CSH and an assistant professor at University College London. 
+ World map displaying Seshat's division of regions inspired by the UN geographic regions. On the map, each marker represents a "Natural Geographic Area" (NGA), as defined by Seshat experts. The researchers identified and collected data about each polity that occupied or overlapped with each NGA over the course of history. The colors correspond to the regional division scheme used in the current paper based on the UN geographic regions. 
+ Setting a Benchmark for LLMs 
+ This new assessment, the first of its kind, challenged these A.I. systems to answer questions at a graduate and expert level, similar to ones answered in Seshat (and the researchers used the knowledge in Seshat to test the accuracy of the AI answers). Seshat is a vast, evidence-based resource that compiles historical knowledge across 600 societies worldwide, spanning more than 36,000 data points and over 2,700 scholarly references. “We wanted to set a benchmark for assessing the ability of these LLMs to handle expert-level history knowledge,” explains first author Jakob Hauser , a resident scientist at CSH. “The Seshat Databank allows us to go beyond ‘general knowledge’ questions. A key component of our benchmark is that we not only test whether these LLMs can identify correct facts, but also explicitly ask whether a fact can be proven or inferred from indirect evidence.” 
+ Disparities Across Time Periods and Geographic Regions
+ The benchmark also reveals other important insights into the ability of current chatbots—a total of seven models from the Gemini, OpenAI, and Llama families—to comprehend global history. For instance, they were most accurate in answering questions about ancient history, particularly from 8,000 BCE to 3,000 BCE. However, their accuracy dropped sharply for more recent periods, with the largest gaps in understanding events from 1,500 CE to the present. In addition, the results highlight the disparity in model performance across geographic regions. OpenAI’s models performed better for Latin America and the Caribbean, while Llama performed best for Northern America. Both OpenAI’s and Llama models’ performance was worse for Sub-Saharan Africa. Llama also performed poorly for Oceania. This suggests potential biases in the training data, which may overemphasize certain historical narratives while neglecting others, according to the study. 
+ Heatmap indicates balanced accuracy score for each NGA (bottom label) and UN geographic region (top label) over time (left axis) for the GPT-4 Turbo model. The figure shows the balanced accuracy distribution across space and time for GPT-4 Turbo, the model with the best overall performance. Darker colors indicate greater balanced accuracy, while completely white areas signify the absence of data points. More recent periods are generally colored lighter, indicating lower accuracy of the model. Although one might assume that lower accuracy in more recent periods is due to more data being available, this is not necessarily true. As an example, the model's accuracy is higher for the earlier years of the NGA Basin of Mexico, where there are roughly the same number of data points between 5000 BCE and 1000 BCE. 
+ Better on Legal System, Worse on Discrimination 
+ The benchmark also found differences in performance across categories. Models performed best on legal systems and social complexity. “But they struggled with topics such as discrimination and social mobility,” says del Rio-Chanona. “The main takeaway from this study is that LLMs, while impressive, still lack the depth of understanding required for advanced history. They’re great for basic facts, but when it comes to more nuanced, PhD-level historical inquiry, they’re not yet up to the task,” adds del Rio-Chanona. According to the benchmark, the model that performed best was GPT-4 Turbo, with a balanced accuracy of 46%, while the weakest was Llama-3.1-8B with 33.6%. 
+ Next Steps 
+ Del Rio-Chanona and the other researchers—from CSH, the University of Oxford, and the Alan Turing Institute—are committed to expanding the dataset and improving the benchmark. They plan to include more data from underrepresented regions and incorporate more complex historical questions, according to Hauser. “We plan to continue refining the benchmark by integrating additional data points from diverse regions, especially the Global South. We also look forward to testing more recent LLM models, such as o3, to see if they can bridge the gaps identified in this study,” says Hauser. The CSH scientist emphasizes that the benchmark’s findings can be valuable to both historians and AI developers. For historians, archaeologists, and social scientists, knowing the strengths and limitations of A.I. chatbots can help guide their use in historical research. For A.I. developers, these results highlight areas for improvement, particularly in mitigating regional biases and enhancing the models’ ability to handle complex, nuanced historical knowledge. 
+ About the study 
+ The paper “Large Language Models’ Expert-level Global History Knowledge Benchmark (HiST-LLM),” by Jakob Hauser, Daniel Kondor, Jenny Reddish, Majid Benam, Enrico Cioni, Federica Villa, James S. Bennett, Daniel Hoyer, Pieter Francois, Peter Turchin, and R. Maria del Rio-Chanona, was presented at the NeurIPS conference, in Vancouver, in December. 
+ Text in German 
+ Researchers 
+ Peter Turchin 
+ Faculty 
+ Maria del Rio Chanona 
+ External Faculty 
+ Jakob Hauser 
+ Former Researcher 
+ Dániel Kondor 
+ PostDoc 
+ Jenny Reddish 
+ Staff Scientist 
+ Majid Benam 
+ Former Researcher 
+ James Bennett 
+ Associate Faculty 
+ Daniel Hoyer 
+ Associate Faculty 
+ Pieter François 
+ Associate Faculty 
+ Related 
+ Visual 
+ HiST-LLM 
+ HiST-LLM is a LLM benchmark and dataset focused on PhD-level historical knowledge. This visualization displays the categories and sub-categories of our data, from the Seshat Databank. 
+ Social Complexity & Collapse , AI & Machine Learning 
+ Press Highlight 
+ 22.01.2025 
+ Besteht ChatGPT einen Geschichtstest auf PhD-Niveau? 
+ GPT-4 Turbo beantwortete die meisten Fragen in… 
+ Social Complexity & Collapse 
+ Press Highlight 
+ 23.01.2025 
+ Sztuczna inteligencja miała test z historii. Wynik to tylko 46 proc., naukowcy zaskoczeni 
+ Sztuczna inteligencja nie radzi sobie z pytaniami z historii 
+ Social Complexity & Collapse 
+ Press Highlight 
+ 22.01.2025 
+ MSN 
+ Can AI pass a Ph.D.-level history test? New study says 'not yet' 
+ GPT-4 Turbo had a balanced of 46% 
+ Social Complexity & Collapse 
+ Press Highlight 
+ 21.01.2025 
+ Können KI-Modelle einen Geschichtstest auf PhD-Niveau bestehen? 
+ Ein Forschungsteam klopfte gängige Systeme darauf ab, ob sie… 
+ Social Complexity & Collapse 
+ Project 
+ ESSENCSE 
+ Building Critical Mass at the Complexity Science Hub Vienna— Establishing and Expanding Complexity Science in Austria 
+ Stefan Thurner 
+ Social Complexity & Collapse , Algorithmic Fairness , Transforming Economies 
+ Project 
+ HuBERT 
+ Developing HuBERT: a Natural Language Processing algorithm for extending the Seshat Global History 
+ Maria del Rio Chanona 
+ Social Complexity & Collapse 
+ Project 
+ Sustainable Communities 
+ Building sustainable communities around Arts and Humanities datasets and Software 
+ Peter Turchin 
+ Social Complexity & Collapse 
+ 0  Pages 
+ 0  Press 
+ 0  News 
+ 0  Events 
+ 0  Projects 
+ 0  Publications 
+ 0  Person 
+ 0  Visualisation 
+ 0  Art 
+ Signup 
+ CSH Newsletter 
+ Choose your preference 
+ Monthly CSH Newsletter 
+ Invitations to CSH Events 
+ First name 
+ Last name 
+ E-mail* 
+ Organization 
+ Position 
+ Street 
+ ZIP 
+ City 
+ Country
+ Österreich 
+ Afghanistan 
+ Åland Islands 
+ Albania 
+ Algeria 
+ American Samoa 
+ Andorra 
+ Angola 
+ Anguilla 
+ Antigua And Barbuda 
+ Argentina 
+ Armenia 
+ Aruba 
+ Australia 
+ Azerbaijan 
+ Bahamas 
+ Bahrain 
+ Bangladesh 
+ Barbados 
+ Belarus 
+ Belgium 
+ Belize 
+ Benin 
+ Bermuda 
+ Bhutan 
+ Bolivia 
+ Bosnia And Herzegovina 
+ Botswana 
+ Bouvet Island 
+ Brazil 
+ British Indian Ocean Territory 
+ Brunei Darussalam 
+ Bulgaria 
+ Burkina Faso 
+ Burundi 
+ Cambodia 
+ Cameroon 
+ Canada 
+ Cape Verde 
+ Cayman Islands 
+ Central African Republic 
+ Chad 
+ Chile 
+ China 
+ Christmas Island 
+ Cocos (keeling) Islands 
+ Colombia 
+ Comoros 
+ Congo 
+ Congo, The Democratic Republic Of The 
+ Cook Islands 
+ Costa Rica 
+ CÔte D ivoire 
+ Croatia 
+ Cuba 
+ Cyprus 
+ Czech Republic 
+ Denmark 
+ Deutschland 
+ Djibouti 
+ Dominica 
+ Dominican Republic 
+ Ecuador 
+ Egypt 
+ El Salvador 
+ Equatorial Guinea 
+ Eritrea 
+ Estonia 
+ Ethiopia 
+ Falkland Islands (malvinas) 
+ Faroe Islands 
+ Fiji 
+ Finland 
+ France 
+ French Polynesia 
+ Gabon 
+ Gambia 
+ Georgia 
+ Ghana 
+ Gibraltar 
+ Greece 
+ Greenland 
+ Grenada 
+ Guam 
+ Guatemala 
+ Guernsey 
+ Guinea 
+ Guinea-bissau 
+ Guyana 
+ Haiti 
+ Heard Island And Mcdonald Islands 
+ Holy See (vatican City State) 
+ Honduras 
+ Hong Kong 
+ Hungary 
+ Iceland 
+ India 
+ Indonesia 
+ Iran, Islamic Republic Of 
+ Iraq 
+ Ireland 
+ Israel 
+ Italy 
+ Jamaica 
+ Japan 
+ Jersey 
+ Jordan 
+ Kazakhstan 
+ Kenya 
+ Kiribati 
+ Korea, Democratic Peoples Republic Of 
+ Korea, Republic Of 
+ Kuwait 
+ Kyrgyzstan 
+ Lao Peoples Democratic Republic 
+ Latvia 
+ Lebanon 
+ Lesotho 
+ Liberia 
+ Libyan Arab Jamahiriya 
+ Liechtenstein 
+ Lithuania 
+ Luxembourg 
+ Macao 
+ Macedonia, The Former Yugoslav Republic Of 
+ Madagascar 
+ Malawi 
+ Malaysia 
+ Maldives 
+ Mali 
+ Malta 
+ Marshall Islands 
+ Mauritania 
+ Mauritius 
+ Mexico 
+ Micronesia, Federated States Of 
+ Moldova 
+ Monaco 
+ Mongolia 
+ Montserrat 
+ Morocco 
+ Mozambique 
+ Myanmar 
+ Namibia 
+ Nauru 
+ Nepal 
+ Netherlands 
+ Netherlands Antilles 
+ New Caledonia 
+ New Zealand 
+ Nicaragua 
+ Niger 
+ Nigeria 
+ Niue 
+ Norfolk Island 
+ Northern Mariana Islands 
+ Norway 
+ Oman 
+ Pakistan 
+ Palau 
+ Panama 
+ Papua New Guinea 
+ Paraguay 
+ Peru 
+ Philippines 
+ Pitcairn 
+ Poland 
+ Portugal 
+ Puerto Rico 
+ Qatar 
+ Romania 
+ Russian Federation 
+ Rwanda 
+ Saint Helena 
+ Saint Kitts And Nevis 
+ Saint Lucia 
+ Saint Vincent And The Grenadines 
+ Samoa 
+ San Marino 
+ Sao Tome And Principe 
+ Saudi Arabia 
+ Schweiz 
+ Senegal 
+ Seychelles 
+ Sierra Leone 
+ Singapore 
+ Slovakia 
+ Slovenia 
+ Solomon Islands 
+ Somalia 
+ South Africa 
+ Spain 
+ Sri Lanka 
+ Sudan 
+ Suriname 
+ Svalbard And Jan Mayen 
+ Swaziland 
+ Sweden 
+ Syrian Arab Republic 
+ Taiwan, Province Of China 
+ Tajikistan 
+ Tanzania, United Republic Of 
+ Thailand 
+ Timor-leste 
+ Togo 
+ Tokelau 
+ Tonga 
+ Trinidad And Tobago 
+ Tunisia 
+ Turkey 
+ Turkmenistan 
+ Turks And Caicos Islands 
+ Tuvalu 
+ Uganda 
+ Ukraine 
+ United Arab Emirates 
+ United Kingdom 
+ United States 
+ Uruguay 
+ Uzbekistan 
+ Vanuatu 
+ Venezuela 
+ Viet Nam 
+ Virgin Islands, British 
+ Virgin Islands, U.s. 
+ Wallis And Futuna 
+ Western Sahara 
+ Yemen 
+ Zambia 
+ Zimbabwe 
+ Data Protection* 
+ Yes, I have read the data protection rules and explicitly give consent to receive emails. 
+ Subscribe 
+ www.CleverReach.com 
+ 

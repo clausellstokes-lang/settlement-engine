@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 22:58:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 23:05:10 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lighting tail's measurement lands with zero product bytes — L-PROBE-2 at ever
 
@@ -112,4 +112,4 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 - wf_f191dac2-82a: 4 journal lines, 2 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;80594 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
-load: 37.46 27.22 19.44
+load: 27.22 32.58 25.69

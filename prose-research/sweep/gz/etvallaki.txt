@@ -1,5 +1,127 @@
-Checking your browser before accessing
+Skip to content 
 
- Please wait for up to 5 seconds...
+ Quality content, cartography, and adventures for fantasy games.
 
- Please check that your browser supports JavaScript and that it is enabled in the browser settings.
+ Chapter 5 – The Town of Vallaki
+
+ The GUIDE index for Curse of Strahd and other related articles can be found here ! 
+
+ This is pivotal point in the Curse of Strahd Module. After the Village of Barovia, this is the first settlement the party will visit. They might have heard that the town is secured and walled. That people can prosper there and that the Burgomaster is in a constant fight against Strahd’s evil. However nothing is farthest from the truth. In reality, Vallaki is a bomb about to explode, and the adventurers cannot stop it. How and when it blows are the only factors that could be managed to work differently, but the conflict will burn down the city to its core.
+
+ This is real because of the current political situation in Vallaki, and the different powers at play. No DM should feel constrained to blow the fuse, this settlement was written in this way so everything goes down for the players, ultimately it will serve to send the players in search for a safer haven, Krezk. 
+
+ The powers at play 
+
+ The town is led by Baron Vargas Vallakovich, the Burgomaster of Vallaki, a ruthless cruel man who believes that if he can make everyone in town happy, then Strahd will lose his power inside Vallaki’s walls. He organizes festivals every few days to promote this idea, however the people of Vallaki don’t really share his view and aren’t happy. They fake compliance with the festivities. If anyone is sighted unhappy or talking against the current way of things, the person is arrested for “malicious unhappiness”.
+
+ Regardless of Vargas Vallakovich’s methods, this is a battle he cannot win. Unknown to most, a big percentage of people in Barovia do not have souls and are unable to feel the happiness the burgomaster is trying to elicit. They still comply with the celebrations, but these are grim events anyway. The Burgomaster’s wife, Lydia Petrovna is always helping with festival preparations and has an awkward laugh. It’s important to note that she is the sister of Father Lucian, but due to their conflicting stations (government vs church) they do not talk much.
+
+ They have a son, Viktor Vallakovich, which is Vargas’ successor. He doesn’t care about that though, he’s always in the Mansion’s attic trying to perfect a Teleport spell to escape Barovia.
+
+ You can assume a lot of people hate the Vallakovich family, but no one more so than Lady Fiona Wachter. She is a wealthy noble and very influential. She heads a cultist group and is allied with Strahd. These facts are not public knowledge. Things are brewing in Vallaki in such a way that she is ready for open confrontation, she’s just waiting for the exact moment to do so, or an instruction from Count Strahd.
+
+ The next important power group are the Keepers of the Feather, a faction of wereravens who oppose Strahd. The Martikov Family in the Blue Water Inn (page 98) are the main members of this group. They will not initially reveal their intentions to the party. In a way they wish to make sure that they can be trusted. The Martikov Family also owns the Wizard of Wines Vineyard and thus the supply of wine of the entire Valley.
+
+ The Bomb in Vallaki 
+
+ The initial conflict in Vallaki is already in motion when the party arrives. Strahd has a plan: to attack the Church of St. Andral and kill Father Lucian, and prove that he is not stopped by ridiculous festivals. To do this, he coerced Henrik van der Voort into helping. Henrik then paid Milijov (page 98) to steal the bones of St. Andral from the church. This deactivates the protective charm that the church normally has. Strahd then used his teleportation room in Castle Ravenloft to bring 6 vampire spawn, which are then hidden in boxes in the coffin maker’s shop (page 116).
+
+ When the party arrives to Vallaki it’s only normal that they will visit the Church of St. Andral. Either because Ismark wants to bring Ireena there or simply because it sounds like a safe place (which it was before the bones were stolen). There they will get the hook of St. Andral’s bones. This is an important moment for the adventure because hell rains whether the party helps or not, so don’t push the hook to much, it’s actually better if they don’t help.
+
+ If the party decides to help, they will eventually end up investigating the coffin shop and releasing the 6 vampire spawn. This is a TOUGH fight, especially since the party is probably level 4 or 5 at this point. Expect some deaths here. If the party is smart they will separate the vampires with T urn U ndead or similar. And run to the church. Once outside, while the vampires are not affected by sun light, they could be also targeted by Vallaki’s guards. This could either end up as a big fight in the church or a big fight in the main square. A great moment to introduce Rictavio or Ezmeralda and help. Maybe even Kasimir Velikov (page 121) or the Vistani Arrigal and Luvash (page 122) can show up to help.
+
+ If the party doesn’t follow this path. Then three days later Strahd leads his vampires and swarms of bats into the church to kill Father Lucian. The PCs could hear about this attack when it is going on, and go there to intervene. I believe this is a thing that Strahd would not let be stopped. So they are in for disappointment when Strahd kills the father anyway and kicks their butts. If Father Lucian dies, the town demoralizes to the point where a few days later they set the Vallakovich mansion ablaze, arrest the Vallakovich family, and then stone them to death in the main square. This is only followed by Lady Wachter taking control of the town.
+
+ If the church is saved however, Vallaki is still in a very precarious position. The 6 vampire fight is probably common knowledge, specially if the fight turned to the streets. The town will be in fear of further attacks and the usefulness of the festivals will be doubted even more. Which brings us to Baron Vargas and his way to handle things.
+
+ Depending on the party’s disposition, alignment and style, it is probable that they will blow the fuse against the Vallakovich family. If they have an audience with the Baron it could only end in bad words and angry faces, since he is oh! so charming. But a few days later there is a festival, the Festival of the Blazing Sun. It is a grim event and it might probably go unnoticed if not by the fact that the Baron decides to punish a laughing guard by tying him by the ankles to his horse and then drag him all around the square.
+
+ If the party opposes the Baron there, he will order their arrest and banishment from the town. It’s really important to note that this is a very small town and the “guard” consists of Izek and 24 guards, and that’s it. A level 5 party with a F ireball can dispatch all but Izek in a single round. Even regular fighting against the guards will bode bad for them in the end. If the PCs win such a confrontation the Vallakovich family flees to their mansion and the townsfolk lock themselves in their homes in fear of being killed by the PCs. This is also a winning situation for Lady Wachter, with no guard and the power of the Vallakovich tested, even if they are still alive, she can take over the town with her cultist group.
+
+ If she doesn’t do this right then, and the PCs don’t attack the townsfolk directly, then after a few days the people would burn the mansion and kill the baron and his family anyway. All in all, Vallki is in for a rude awakening.
+
+ Ireena’s Brother 
+
+ Hidden in the book’s appendix is the fact that Izek Strazni is Ireena’s brother. She was adopted which is probably common knowledge now. The thing is that not Izek nor Ireena are aware of their bond and there is no way to know it. And there is no one alive who can supply this information so it’s just weird. He is evil and tainted by the Dark Powers. He feels this unnatural attraction and fixation with a girl from his dreams. He has Gadof Blinsky (page 118) make him a new and better doll each month. When he sees Ireena for the first time, he will do his best to abduct her. I guess one could think that this is just misguided protectiveness. He cannot explain why he feels like this but he will try to take Ireena and lock her away. His fixation and obsessive behavior towards Ireena can only be explained by their blood bond, but this will never be revealed. Also, Izek is very likely to end up dead by the party’s actions and Ireena will never know they just killed her brother.
+
+ Rictavio aka Rudolf Van Richten 
+
+ Rictavio is a half-elf bard currently living in the Blue Water Inn, he has no musical talent and entertains guests by telling unbelievable stories. He is so bad at his job because it really isn’t. He is legendary vampire slayer Rudolf Van Richten, he’s been hiding in Barovia with false identities for a while, gathering info on Strahd to better confront him. He poses as a carnival ringmaster looking for local personalities for his circus. He even has a carnival cart with a tiger inside. It’s important to note this is a racist tiger, trained only to hunt and kill Vistani. Why? Well Van Richten has a long sad story behind him regarding Vistani but in short words. The Vistani stole his son Erasmus and sold him to a vampire. When he got there Erasmus was a vampire already and Van Richten had to kill his own son. This is in his diary which can be found in Ezmeralda’s wagon outside of the abandoned tower (page 169). Rudolf is a powerful character and he has some good spells, he can join and/or help the party in many ways, however he will try to remain incognito as long as possible, just like the wereravens.
+
+ Kasimir Velikov 
+
+ This is the mutilated elf whose sister almost married Strahd a long time ago, he is the leader of the remaining dusk elves in Barovia. Kasimir lives with the Vistani group north of Vallaki. He is important because it’s one of the few people who know the location of the Amber Temple and its connection with Strahd’s power. He seeks to visit the temple to find a way to restore Patrina to life. He’s the safest bet to visiting the Amber Temple, he could also be an ally vs Strahd.
+
+ Conclusion 
+
+ So at the end, Vallaki will suffer a transformation. Possibly the power of House Vallakovich is destroyed and taken by a militia or Lady Wachter. Maybe the PCs start a police state. Maybe they PCs are banished from town and are banned to return. If the PCs are not good aligned, due to the situation in town, anything could happen. The PCs may start an alliance with Lady Wachter, they could take control of the city and dispatch any other competitor (Strahd wouldn’t like this much…).
+
+ However it ends, it should be a bang. This is not a safe place and more likely than not, the adventurers will continue traveling west towards Krezk . Either to help Ireena and Ismark, or just to find a safe haven themselves. By the way, unless they force their entry, they can’t enter Krezk unless they help first with getting wine from the Wizard of Wines.
+
+ Previous Chapter — Next Chapter 
+
+ Make sure you follow the rest of this Curse of Strahd DM Guide 
+
+ You can now buy the full guide at DM’s guild . It’s formatted in a single PDF document. The PDF has clickable index and it’s got bookmarks ! A printer friendly version is also included.
+
+ Thank you for your contribution because it makes my work more rewarding. You’re not paying only for the content here, but also, you are supporting a freelance author and illustrator in the hobby.
+
+ I thank you and I hope this guide was useful to you and proved a factor in making your Curse of Strahd game a better experience for you as a DM and also for your players.
+
+ You can buy it here 
+
+ Writing these DM guides is time consuming, my website is funded through Patreon , It is thanks to people who like my work that I am able to continue mapping and providing RPG original experiences to people all over the world. If you like what I do, consider getting involved and backing me. What you get is impressive hi-def versions of my maps to be used in your RPG games (these have lower resolution), and the satisfaction of helping the rpg community grow bigger and stronger. Help me get funding and enjoy hi resolution version of all my work.
+
+ Did you like this guide? Consider liking our Facebook page. 
+
+ All the maps in this website are registered under the Creative Commons License Attribution-NonCommercial CC BY-NC. What this means is that anyone can use them, share them or modify them. They cannot be used commercially. And finally, credit must be given to me (Derek Ruiz) as the author, and a link to this web page must be included if it is shared or redistributed.
+
+ Share this with other awesome RPG folks
+
+ Share on X (Opens in new window) 
+ X 
+
+ Share on Facebook (Opens in new window) 
+ Facebook 
+
+ One thought on “ Chapter 5 – The Town of Vallaki ” 
+
+ Joe Clave 
+
+ April 25, 2022 at 8:35 pm 
+
+ Reply 
+
+ This was very helpful. Thank you!
+
+ Leave a Reply Cancel reply 
+ Your email address will not be published. Required fields are marked * 
+ Comment * 
+ Name * 
+
+ Email * 
+
+ Website 
+
+ Save my name, email, and website in this browser for the next time I comment. 
+
+ Notify me of follow-up comments by email. 
+ Notify me of new posts by email. 
+
+ Δ 
+
+ Search Search 
+
+ FishBlade Advanced by Elven Tower Adventures FishBlade Advanced by Elven Tower Adventures 
+
+ Mapping Out Your Dreams No. 3 - Cartography Tutorial by Elven Tower Adventures Mapping Out Your Dreams No. 3 - Cartography Tutorial by Elven Tower Adventures 
+
+ Loading Comments... 
+
+ Write a Comment... 
+
+ Email (Required) 
+
+ Name (Required) 
+
+ Website
