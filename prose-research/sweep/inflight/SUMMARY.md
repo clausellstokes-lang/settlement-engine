@@ -1,9 +1,9 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:58:35 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 22:04:35 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | in-flight | 0 | — | — | 21:31:03 |
-| dnd | critic |  | in-flight | 0 | — | — | 01:55:20 |
+| dnd | critic |  | in-flight | 0 | — | — | 01:59:50 |
 | dnd | synth |  | in-flight | 0 | — | — | 21:31:03 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
 | hobb | critic |  | result | 0 | critic-hobb.md | — | 22:39:48 |
@@ -52,7 +52,7 @@
 | leguin | verifier | i843-885 | result | 7 | — | verdict file WRITTEN | 22:04:49 |
 | leguin | verifier | i889-923 | result | 8 | — | verdict file WRITTEN | 22:04:42 |
 | martin | critic |  | in-flight | 0 | — | — | 21:31:03 |
-| wolfe | critic |  | in-flight | 0 | — | — | 01:57:00 |
+| wolfe | critic |  | in-flight | 0 | — | — | 02:04:15 |
 | wolfe | finder | close-continued | result | 41 | — | 93 claims, complete=True @21:09:26 | 23:31:55 |
 | wolfe | finder | close-continued | in-flight | 1 | — | 93 claims, complete=True @21:09:26 | 21:31:03 |
 | wolfe | finder | monographs | result | 69 | — | 184 claims, complete=True @21:09:26 | 23:43:23 |

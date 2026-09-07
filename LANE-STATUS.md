@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 21:59:21 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 22:04:55 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lighting tail's measurement lands with zero product bytes — L-PROBE-2 at ever
 
@@ -76,13 +76,20 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 0eb028111 · 1 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 79b35fdcb · 2 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
       | Dock: `$SC/laneANCHOR905` detached @ `6582958ce7bdc10bcbb8c69d9789b4d957fc5890`
       | Arrival porcelain: **0 lines**. node_modules: **453 symlinked packages** (never materialised).
       | VITEST HOLD present at start (`$SC/HOLD-VITEST`) — all reading/measuring/editing done under the hold; no vitest, no build.
+- **VIS-906** (same dock laneANCHOR905, on top of the anchor car) receipt head:
+      | # RECEIPT — VIS-906 (PARTIAL — lane in flight, updated after every proof)
+      | Seat: Opus 5 — Fable-unvalidated · Lane: VIS-906 · Chair: Fable 5.1 · 2026-09-06
+      | Dock: `$SC/laneANCHOR905`
+      | 
+      | ## STATUS: PARTIAL (arrival verified; no car committed yet)
+      | 
 - **L-PROBE-2 (chair)**: cheap 6/6 tips · full: FULL_DONE · bracket: BRACKET_DONE
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
@@ -100,4 +107,4 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 - wf_f191dac2-82a: 3 journal lines, 2 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.27 2.85 2.98
+load: 2.62 2.76 2.92

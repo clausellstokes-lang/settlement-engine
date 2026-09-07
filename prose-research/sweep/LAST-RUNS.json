@@ -34,7 +34,8 @@
    "runId": "wf_1326cde9-2e5",
    "tag": "r7",
    "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — 32 verdict files / 479 verdicts (16 planned + 16 fresh chunks); regrade-r7 / section / critic on disk: section-wolfe.md@14:19 critic-wolfe.md@14:32; the resume script derives the owed tail"
-  }
+  },
+  "dryCheck": "22:15: 42 features vs 38 (section-wolfe.r7.md from the 21:25 seal): 6 new (le guin on wolfe; cadence shifts; the same fact printed differently; the imitation fails as mannered; what the dissent says; the archivist moralises nothing) / 2 dropped. NOT dry by the letter, but wolfe's ONE critic-driven top-up is spent (rule 4) — no further round; the 6 go to S12 as input."
  },
  "martin": {
   "runId": "",
@@ -69,7 +70,8 @@
    "runId": "wf_3d71f708-fe3",
    "tag": "r7",
    "status": "PAUSED ~17:30 — 5th (synth + critic)"
-  }
+  },
+  "dryCheck": "22:15 (dry-check.py now reads BOLD-numbered features too — the old heading-only regex read 0 and printed a FALSE dry): 50 features vs 19 in the r7 snapshot (section-dnd.r7.md, recovered from the 21:25 kit seal — the 21:42 seal held a MID-WRITE 20 KB partial; never snapshot from a seal taken while a synth is writing): 45 new / 14 dropped by the four-word key — the section was REWRITTEN in the new form, so the diff is a re-keying, not 45 discoveries. NOT dry by the letter; this was a synth-only completion round over verified claims — no FIND round follows unless the critic names the PLACE hole (S-BOUND: ONE targeted round, owner-gated)."
  },
  "ai": {
   "runId": "",
