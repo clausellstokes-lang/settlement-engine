@@ -16,3 +16,50 @@ gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as
   PASS  isolated worker output equals the direct domain path — 37cee3987341 == 37cee3987341
   PASS  isolated worker completed a non-vacuous one-year advance — 52 progress messages; final tick 52/52
   PASS  byte-identical re-run (same seed) — all 30 yearly composite hashes equal
+  PASS  different seeds produce a divergent event-type mix — TV 0.320 (min 0.10); 485.05 shifted event-equivalents (min 2); largest shift strategy_reroute (0.093); composite hash also differed
+  PASS  every settlement population finite and > 0 every year (remnants excepted: a properly-died settlement holds zero by law)
+  PASS  realm population bounded — 75790 → 93543 (×1.23; envelope 0.05–20)
+  PASS  the world keeps moving: every decade carries distinct typed events and the composite state changes every year — 3 decade(s); min distinct types 28 (floor 10), min hash moves 10 (floor 10), min events/settlement 111.25 (floor 1)
+        majors: min 37 per decade; 0 decade(s) with none — REPORTED, and no floor grades it
+  PASS  serialized state under the house envelope — max 3.45MB < 10.80MB (12 settlements)
+  PASS  per-year wall-time trend not age-linear — Q1 9305.9ms → Q4 8993.0ms/year
+
+## cost envelope (serialized worldState+regionalGraph bytes per year)
+  1114KB 1416KB 1357KB 1394KB 1477KB 1558KB 1649KB 1729KB 1822KB 1962KB 1986KB 2092KB 2209KB 2339KB 2299KB 2391KB 2454KB 2534KB 2631KB 2680KB 2775KB 2863KB 2936KB 3012KB 3096KB 3163KB 3241KB 3322KB 3449KB 3402KB
+  max 3.45MB · final 3.40MB · 287KB/settlement
+
+## stressor rhythm (active stressors at each year end)
+  4 7 7 6 9 6 5 4 2 5 3 4 5 4 3 4 5 4 2 5 5 4 5 5 4 5 7 5 5 6
+  min 2 · max 9 · final 6
+  stressors oscillated across the run (no permanent freeze at this horizon).
+
+## population trajectory (per settlement, year 1 → 30)
+  soak-a (city): 11821 → 67342 (min 13620, max 67342)
+  soak-b (town): 2489 → 389 (min 389, max 3426)
+  soak-c (town): 2592 → 10524 (min 1237, max 10524)
+  soak-d (village): 843 → 171 (min 171, max 1179)
+  soak-4 (city): 24635 → 183 (min 183, max 17009)
+  soak-5 (town): 4050 → 182 (min 182, max 4954)
+  soak-6 (town): 1325 → 10132 (min 1128, max 11275)
+  soak-7 (village): 435 → 287 (min 287, max 287)
+  soak-8 (city): 21143 → 391 (min 391, max 18259)
+  soak-9 (town): 2983 → 2776 (min 1980, max 2776)
+  soak-10 (town): 2835 → 446 (min 446, max 2106)
+  soak-11 (village): 639 → 720 (min 573, max 720)
+
+## war convergence (WR-9 instrument — envelopes graded by the behavioral oracle, not here)
+  counted wars 8 = closed 8 + alive at horizon 0
+  duration histogram {"short":3,"long":0,"generational":0,"unresolved":0,"unmeasured":5} (sum 8)
+  endings mix {"terms":0,"exhaustion":0,"ruler_change":0,"fragmentation":0,"annihilation":0,"conquest":5,"punitive_sack_initiation":0,"punitive_sack_vengeance":0}
+  endings unclassified {"not_a_closed_war":0,"no_terminal_evidence":3,"razing_road_unreconstructable":0} (3 of 8 closes)
+  deciding terms {"cause":0,"cost_to_continue":0,"cost_to_stop":0,"momentum":0} — 0 samples, 1-in-52
+  declared resolution: close ticks are tick-resolved from the outcome stream (every interior tick), not the year-boundary deployment ledger
+  wars ended by a road this collector does not observe: 5 (counted, duration unmeasured); ambiguous pairings: 0
+  PASS  every counted war lands in exactly one duration band — sum 8 === counted 8
+  PASS  every closed war lands in exactly one ending or one unclassified reason — classified 5 + unclassified 3 === closes 8
+
+receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/capacity-horizon/artifacts/probe-30y-12s-dark.json
+
+OK — all assertions green (30y × 3 runs)
+TRUE_EXIT=0
+SOAK END Mon Sep  7 10:18:34 EDT 2026

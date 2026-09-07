@@ -1,9 +1,29 @@
 # RECEIPT — LANE CAP-HORIZON-909 (the 600-year horizon + the 12-settlement timing probe)
 **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session b43943b4) · dock `$SC/laneB6` · MEASUREMENT lane, ZERO product bytes**
 
-**STATUS: PARTIAL — M2 COMPLETE (TRUE_EXIT=0, 9 min 00 s, 08:38:44 → 08:47:44 EDT); M1 RUNNING
-(launched 08:51:02 EDT, predicted ≈ 61 min).** Arrival check 08:35:00; orientation re-derived
-08:36–08:38; receipt re-written at each milestone. Timestamps from `date` in the same shell.
+**STATUS: COMPLETE — THREE RUNS TAKEN, ALL `TRUE_EXIT=0`, NO KILL, NO RE-LAUNCH. ZERO PRODUCT
+BYTES; DOCK PORCELAIN 0 AT THE END; DOCK HEAD UNMOVED AT `3b1c0eaa5…`.** M2 08:38:44 → 08:47:44
+(9 m 00 s); **M1 08:51:02 → 10:05:54 (1 h 14 m 52 s)**; M2's dark twin 10:08:33 → 10:18:34
+(10 m 01 s). Arrival check 08:35:00; orientation re-derived 08:36–08:38; receipt re-written at each
+milestone; final write 10:21 EDT. Every timestamp from `date` in the same shell.
+
+> ## ⭐⭐⭐ THE FOUR HEADLINES
+> 1. **§910's DEFERRAL D1 IS DISCHARGED.** `capacity_plateau` **EXECUTED and FIRED** on a shipped
+>    600-row series at its own horizon — four findings, `deterministicFirings 4`,
+>    `fullInstrument true`, `notExecutable []`, `observability` empty. Not inconclusive, not
+>    refused. The §907 M1-F1 cure is now CONFIRMED-on-a-shipped-series, not
+>    PLAUSIBLE-by-reconstruction.
+> 2. **THE FIXTURE SETTLES — INTO A BAND, NOT ONTO A POINT, AND FROM ABOUT YEAR 350.** Five of the
+>    six 50-year marks from y350 sit INSIDE the 5 % plateau band; none of the five before it does.
+>    The realm load's 50-year drift collapses from ±0.12–0.19 to ±0.01–0.02. At the horizon the
+>    load is **0.7251 — inside [0.6, 1.05] — and `capacity_realm_load` is SILENT.**
+> 3. ⛔ **§907's 0.4787 IS NEITHER A MODEL FACT NOR A WINDOW FACT — IT IS A *SEED* FACT.** At the
+>    same year 300, same configuration, a different seed reads **0.6443** — across the window's own
+>    floor. One seed moves the figure by 37 % of the band's width, and both research profiles ship
+>    `seedIndices: [1]`.
+> 4. **SOAK-1's ≈ 35 h OWNER ASK PRICES AT ≈ 4.0–5.1 h** — 7× to 9× less — from five measured runs
+>    rather than one extrapolated constant.
+
 
 ## ARRIVAL CHECK (Mon Sep  7 08:35:00 EDT 2026, `date`)
 | line | expected | measured | verdict |
@@ -412,3 +432,153 @@ is named as the cause.** A linear age term fitted inside 300 years (`c(y) = 2012
 reproduced that run to 1.1 % and predicted 1,809 s for 600 years against **2,239.6 s** measured.
 The cost curve is not linear in age; it is concave and saturating near ×1.6. **Any figure in this
 programme extrapolated past its own measured horizon should be read as this prediction was.**
+
+## M2 (b) — THE 12-SETTLEMENT **DARK** TWIN, MEASURED RATHER THAN INHERITED
+The brief asks the DARK twin to be *priced*. It could have been priced from §909's 30 y × 4 s
+dark/lit ratio. A ~10-minute measurement **at the settlement count actually being priced** is cheap
+against a figure that feeds an owner row, so it was run: same seed, same settlement count, same
+horizon, **`--lighting` omitted** — a true A/B against the lit probe (argv verified by `ps`; no
+`--lighting` token present).
+
+**Quiet window** (samples 72, 73, all after M1 released the box at 10:05:54; `quiet-window-M2dark.log`):
+`10:06:25 load-1 2.30 · 10:07:25 load-1 2.41`, vitest 0, gate-mutex 0 — plus, at the launch instant
+(10:08:33), `gate-mutex.sh` inspect **FREE**, `pgrep -f vitest` **0**, HOLD-VITEST absent, porcelain
+**0**, and the lock taken `after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s)`.
+⚠ Sampler SAMPLE 74 (10:08:25) again read `vitest: 1 | gate-mutex 12` — **the same false positive as
+before, in the same position: the minute in which this lane was itself reaching for the lock.** It
+is now seen twice and characterised: `pgrep -f vitest` matched **0** processes both a minute before
+and a minute after, and matches **0** right now with the dark run's mutex holder alive — so the
+over-match belongs to the ACQUISITION, not to a held lock.
+
+**RESULT — TRUE_EXIT=0, 10:08:33 → 10:18:34 (10 min 01 s)**, every assertion green.
+```
+runDurationsMs = {"primary":271395, "replay":267012, "divergent":44912}
+run A 271.4 s over 360 settlement-years ⇒ 0.7539 s/settlement-year        CONFIRMED
+dark / lit AT 12 SETTLEMENTS = 271.4 / 244.6 = ×1.1094                    CONFIRMED
+   (against ×1.2120 at 4 settlements — the dark penalty SHRINKS with scale)
+deterministicFirings 0 · fullInstrument TRUE · all four capacity rows NOT APPLICABLE (gate false)
+```
+⭐ **AND THE DARK WORLD GOES THE OTHER WAY, WHICH IS THE POINT OF THE TWIN.**
+`PASS realm population bounded — 75790 → 93543 (×1.23)` **dark**, against `75790 → 30641 (×0.40)`
+**lit** — identical seed, identical fixture, one flag apart. The lit demographic term is not
+cosmetic: it turns a growing realm into a contracting one over thirty years. This also gives the
+`population-runaway-300y` hazard its shape at 12 settlements in miniature.
+
+⭐ It also re-measures §910's **D2** at a new settlement count: a dark run certifies
+`fullInstrument: true` with `deterministicFirings 0` and all four capacity rows NOT APPLICABLE **by
+gate** — read BEFORE `requires`, exactly as designed. D2 stands as the open DESIGN question §910
+recorded; nothing here reopens it as a defect.
+
+## ⭐⭐ THE PRICED TERMINAL CELL — FINAL, from five measured runs
+| input | value | how measured |
+|---|---|---|
+| `f_S(12)` — the settlement term at a fixed 30-year horizon | **×1.4821** | 4 s vs 12 s, both LIT, both 30 y |
+| `rate(4,300)` — seed A | **0.6352 s/sy** | §907's run A / 1,200 |
+| `rate(4,300)` — seed B | **0.8051 s/sy** | the 600-year world's OWN first 300 years, from `yearlyMs` |
+| dark / lit at 12 settlements | **×1.1094** | this lane's A/B |
+
+```
+rate(12,300) = 0.9415 … 1.1933 s/settlement-year   (the band IS the seed spread, +26.7 %)
+run A        = 3,389 … 4,296 s        run A + run B = 6,779 … 8,592 s
+⇒ THE LIT 300 y × 12 s CELL   ≈ 1.9 – 2.4 h
+⇒ ITS DARK TWIN               ≈ 2.1 – 2.7 h
+⇒ SOAK-1's TOTAL OWNER ASK    ≈ 4.0 – 5.1 h        against the design's ≈ 35 h
+                                                    — the design's ask is 7× to 9× the measurement
+```
+**This figure replaces the design's ≈ 35 h in the chair's §909 row. PLAUSIBLE, and the caveats are
+named rather than buried:**
+1. **The separability assumption is untested.** `f_S` was measured at 30 years and `f_Y` on the
+   4-settlement axis; **nothing here measures the cross term** — whether a 12-settlement world ages
+   more expensively than a 4-settlement one. The 12-settlement 30-year runs cannot see it
+   (`Q1 8033.9 → Q4 8115.0 ms/y` lit, `9305.9 → 8993.0` dark — thirty years shows no age term at
+   all). If the axes interact super-multiplicatively the true figure is higher.
+2. **`f_S` rests on TWO settlement counts at ONE horizon on ONE seed** (`k = 1.358`). Two points fix
+   a power law only if the law is a power law.
+3. ⛔ **The DARK twin's figure is a FLOOR, not an estimate, and this lane now has direct evidence
+   for that.** ×1.1094 is measured at 30 years, where the dark world has not yet run away — and the
+   dark 12-settlement world is already **growing at ×1.23 per thirty years** while the lit one
+   contracts. A runaway world costs more per year, not less, and 300 years is ten times the window
+   in which that ratio was taken.
+4. **The seed band is real and is the largest single term.** rate(4,300) moves +26.7 % between two
+   seeds of the same fixture. A one-seed price is a one-seed price.
+
+## THE FIVE RUNS THIS LANE TOOK (all detached, all through the EXCLUSIVE mutex, all TRUE_EXIT=0)
+| # | run | launched | wall clock | run A | s/settlement-year | TRUE_EXIT |
+|---|---|---|---|---|---|---|
+| 1 | 30 y × 12 s **LIT** (M2 + pilot) | 08:38:44 | 9 m 00 s | 244,623 ms | 0.6795 | **0** |
+| 2 | **600 y × 4 s LIT (M1)** | 08:51:02 | **1 h 14 m 52 s** | **2,239,561 ms** | **0.9332** | **0** |
+| 3 | 30 y × 12 s **DARK** (M2b) | 10:08:33 | 10 m 01 s | 271,395 ms | 0.7539 | **0** |
+
+(Runs 4 and 5 in the analysis — the 300 y × 4 s lit receipt and the three §909 30-year receipts —
+were **read from disk**, not re-executed; every figure taken from them is `runDurationsMs` off the
+receipt, cited by file.)
+
+No run was killed; **no 143/137 exit occurred**; nothing was re-launched.
+
+## FENCES — HELD
+- **ZERO product bytes.** No edit, no commit, no `register --write`, no `--propose`, no signature,
+  no golden, no push, no stash, no `git add` of any form. Dock porcelain verified **0** at arrival
+  (08:35), mid-M1 (08:55), at the dark-twin launch instant (10:08:33) and at the end.
+- **Dock HEAD unmoved at `3b1c0eaa51f77561a036ae7ec54682c39856192c`** throughout — re-verified, not
+  assumed.
+- **⛔ NO VITEST OF ANY KIND was run by this lane.** `$SC/HOLD-VITEST` checked before every launch
+  and at every quiet-window sample; absent throughout.
+- **Every run detached** (`nohup`), never a foreground tool call; `TRUE_EXIT` captured **in-shell
+  before any pipe** (the §907 `tee`-exit trap is not repeated); a pid file per run.
+- **Every output outside the repo**, under `$SC/capacity-horizon/`.
+- **Every timestamp from `date`** in the same shell — none estimated.
+## RETROVALIDATION ROW (draft — M1 rows appended when it lands)
+| # | call | ground | who owns it |
+|---|---|---|---|
+| R1 | **M2 was run FIRST, against the brief's order, as a pilot.** The brief lists M1 first. This lane inverted them because M1 is a ~60-minute run on an invocation nobody had executed (`whole-world-soak.mjs` called DIRECTLY, where §907 reached the world through `realm-scale-certification.mjs --profile`), and M2 is the same invocation at a small horizon. Total wall clock is identical — the two serialise on the exclusive mutex either way — so the inversion cost nothing and bought a proof that the argv, the overlay, the shipped series and the evaluator all work before the long run started. | judgment, this lane, 08:38. | lane |
+| R2 | **NO `--case-id` IS PASSED ON EITHER RUN.** `--case-id` composes a register cell identity (`cellKeyOf`, `register.mjs:65`). A measurement lane may not mint, so neither receipt claims a case. The seeds follow the register's spelling so a later minting lane recognises the shape; nothing else about the register is touched. | the lane's own fence. | lane |
+| R3 | **⛔ A FALSE POSITIVE WAS FOUND IN THIS LANE'S OWN QUIET-WINDOW DETECTOR AND PROVEN BY NEGATIVE CONTROL.** One sample read `vitest: 1`. `pgrep -f vitest` matches the machine-wide lock path `/tmp/settlementforge-vitest-gate.$(id -u).lock` (`gate-mutex.sh:61`, `:85`) because "vitest" is a SUBSTRING of it — executed: a `tail -f` on that path is convicted by `pgrep -f vitest`, and the count returns to 0 when it is killed. The estate-wide consequence is stated with its DIRECTION: the detector over-matches, so it can produce a false positive but never a false zero — every `vitest: 0` in every quiet-window log (§907's included) stands, and only a NON-ZERO reading needs `gate-mutex.sh`'s own inspect beside it. | measured, this lane, 08:52:51. | lane |
+| R4 | **⛔ REFUSAL WITH A MEASUREMENT — the §907 rate 0.635 s/settlement-year is NOT a constant and no single-number extrapolation from it is sound.** It is one point on a surface with two measured axes: settlements (×1.482 from 4 to 12, at a fixed 30-year horizon) and world age (×1.386 from 30 to 300 years, at a fixed 4 settlements). §907 said so itself and named the missing datum; the datum is now taken. Every hour-figure in this receipt carries both terms. | measured, this lane + two §909 receipts on disk. | lane |
+| R5 | **THE SUPERLINEARITY EXPONENT IS LABELLED PLAUSIBLE AND THE REASON IS THE SHAPE OF THE EVIDENCE, NOT MODESTY.** `k = 1.358` comes from exactly TWO settlement counts at ONE horizon on ONE seed. Two points fix a power law only if the law is a power law; nothing here excludes a linear-plus-quadratic or a cache-cliff. The terminal cell's price inherits that label. | measured, this lane. | lane |
+| R6 | **⛔ THE SEEDS DIFFER BETWEEN THE 300-YEAR AND 600-YEAR RUNS, AND THE BRIEF'S QUESTION IS RE-CUT RATHER THAN ANSWERED WRONG.** The brief prescribes `…-600y-4s-seed1`; §907 ran `…-300y-4s-seed1`. Different seed, different world — the soak's own divergence arm proves seeds diverge. So "is 0.4787 a point on a curve still moving at 600?" is answered WITHIN the 600-year run's own curve, and the cross-world comparison at year 300 is reported separately and labelled as what it is. Answering it as a single continued curve would have been a false report. | measured, this lane, before M1 landed. | lane |
+| R7 | **No product byte moved.** No edit, no commit, no `register --write`, no signature, no golden, no push, no stash, no `git add`. Dock porcelain verified 0 at arrival, at the M1 launch instant, and at the end. Every output is under `$SC/capacity-horizon/`, outside the repo. | STATE NEVER FATE. | lane |
+| R8 | **The DARK twin of the 12-settlement probe is RUN, not inherited.** The brief asks the DARK twin to be *priced*. It could have been priced from the §909 30 y × 4 s dark/lit ratio alone. A ~9-minute measurement at the settlement count actually being priced is cheap against a figure that feeds an owner row, so it is measured. | judgment, this lane. | lane |
+| R9 | **⛔ MY OWN PRE-REGISTERED PREDICTION WAS PUBLISHED BEFORE THE RUN AND WAS WRONG BY +23.8 %, AND IT IS KEPT IN THE RECEIPT RATHER THAN QUIETLY DROPPED.** The linear-age model (fitted to the 300-year run's own quartiles, reproducing it to 1.1 %) predicted run A = 1,809 s; the measurement is 2,239.6 s. The cause is named by measurement, not guessed: the per-year cost is concave and saturates near ×1.6 of a young world's year around century 5, so no model fitted inside 300 years can predict 600. Publishing the prediction first is what made the miss legible at all. | measured, this lane, 08:49 (prediction) and 09:28:34 (result). | lane |
+| R10 | **⭐ THE HORIZON AXIS WAS RE-MEASURED WITHOUT THE SEED CONFOUND, USING A FIELD NOBODY HAD USED FOR IT.** The cross-run reading (300 y vs 600 y, two seeds) says the rate rises ×1.469 per doubling. The receipt's own `yearlyMs` prices ANY PREFIX of ONE world, and inside the 600-year world the same doubling reads **×1.179**. The cross-run figure over-states the horizon term by ×1.25 because it carries a population-level difference between two seeds. Every horizon claim in this receipt is stated on the seed-controlled figure and the confounded one is labelled. | measured, this lane. | lane |
+| R11 | **⛔ REFUSAL — THE BRIEF'S MODEL-VS-WINDOW DICHOTOMY IS REPORTED AS INSUFFICIENT, WITH THE FIGURE THAT BREAKS IT.** The brief says "do not rule model-vs-window; report which the figures support". The figures support NEITHER cleanly: at the same year 300, the same configuration and a different seed, `loadRatio01` reads **0.6443** where §907 read **0.4787** — across the window's own floor. The honest report is a third category (a SEED fact) plus partial support for the instrument reading's weaker half. Forcing the answer into the two offered options would have been a false report. | measured, this lane. | lane |
+| R12 | **⚠ AN INSTRUMENT DISAGREEMENT IS REPORTED WITHOUT BEING CALLED A DEFECT.** On one receipt `settlementShapeOf` grades two settlements `plateau` while `capacity_plateau` convicts all four. The windows differ (one century vs `pops[mid]`, which is three centuries on a 600-year run) and BOTH are correct on their own terms. It is reported because the register pins `population.<id>.shape` `exact` beside a tripwire grading a different window on the same bytes, and nothing in the estate says so — a reader taking one as corroborating the other would be wrong. Calling it a defect would have been the over-claim. | measured, this lane. | lane |
+| R13 | **THE `capacity_plateau` CONVICTION OF `soak-b` IS A HAIRLINE AND IS FLAGGED AS ONE.** Drift **0.0502** against a **0.05** band — it fails by 0.0002. Reporting "all four settlements convicted" without that would let a 0.004 % margin read as a strong signal to the tuning desk. | measured, this lane. | lane |
+
+## WHAT THE CHAIR IS OWED — findings this lane MAY NOT act on
+| # | the finding | why it is the chair's |
+|---|---|---|
+| C1 | **§910's D1 IS DISCHARGED** — `capacity_plateau` has now graded a shipped 600-row series at its own horizon, EXECUTED and FIRED with four figures. The ledger row can be closed. | closing a deferral is a ledger act, not a measurement. |
+| C2 | **SOAK-1's ≈ 35 h ask is measured at ≈ 4.0–5.1 h.** The owner row asks the owner to accept ≈ 35 h of terminal-soak wall clock or take the interim 4 s cell instead. At 7×–9× less, the question changes shape. | an OWNER row. The chair re-prices; the owner decides. |
+| C3 | ⛔ **ONE SEED MOVES `loadRatio01` AT YEAR 300 BY 0.166 — 37 % OF THE [0.6, 1.05] WINDOW'S WIDTH.** Both research profiles carry `seedIndices: [1]`. The design signs tuning bands against a one-seed cell. | the SEED GRID is a design decision with a cost in owner-hours; §2.5/CAP-7 and the tuning sitting own it. Nothing was changed. |
+| C4 | **The register's `population.<id>.shape` and the `capacity_plateau` row grade DIFFERENT WINDOWS on the same receipt** (one century vs `pops[mid]`) and will disagree; on this receipt they disagree on two of four settlements. | whether the estate wants them reconciled, or wants the difference documented, is a design call. |
+| C5 | **A DARK 300 y × 12 s twin cannot be priced from a 30-year ratio with confidence** — the dark world grows ×1.23 per thirty years where the lit one contracts ×0.40. ≈ 2.1–2.7 h is a floor. | if the twin's price matters to the owner's answer on SOAK-1, the measurement that settles it is a longer dark run. |
+| C6 | ⚠ **`pgrep -f vitest` over-matches** — proven by control. Every quiet-window log in the programme uses it. The direction saves every zero; only NON-ZERO readings are unsafe. | an estate-wide idiom; changing it is a code act outside a measurement lane. |
+
+## DEFERRED — documented, not a bug to re-find
+| # | the item | what would discharge it |
+|---|---|---|
+| E1 | **The CROSS TERM in the cost model is unmeasured** — no run in the estate varies settlements at a long horizon, so `rate(S,Y) = rate(4,30)·f_S(S)·f_Y(Y)` is assumed separable and the terminal cell's price inherits that. | the terminal cell itself, or a cheaper 150 y × 12 s probe (≈ 25 min at the measured rate) which would give the cross term directly and shrink the price band. **Recommended to the chair as the cheapest next measurement, if the price matters.** |
+| E2 | **The settling verdict rests on ONE seed at 600 years.** This world settles into the window from ~y350. Whether the FIXTURE FAMILY does is not established — and C3 shows seeds differ materially at 300 years. | a second 600-year seed (≈ 1 h 15 m). Not run here: the brief named one seed, and a second is a chair-sized decision about owner-hours, not a lane's. |
+| E3 | **`capacity_plateau`'s window is horizon-relative (`pops[mid]`) while every other plateau definition in the estate is absolute (one century).** On a 600-year run it grades a 300-year drift; on a 300-year run it would grade 150. So the SAME row asks a different question of a longer receipt. | a design ruling (C4). Recorded because a longer run being convicted *more* readily is counter-intuitive and will be misread. |
+
+## FILES WRITTEN (all outside the repo; the dock is untouched)
+```
+$SC/receipt-cap-horizon-909.md              this receipt
+$SC/capacity-horizon/
+  M1-600y-extract.txt                       the 600-year receipt, graded by the PRODUCT's instruments
+  M2-lit-extract.txt  M2-dark-extract.txt   the two 12-settlement probes
+  BASELINE-300y-4s-extract.txt              §907's receipt re-graded at THIS tip (the control)
+  M2-figures.md                             the cost-surface working
+  RETRO-draft.md                            the retrovalidation working
+  horizon-extract.mjs                       the read-only instrument (imports evaluate.mjs,
+                                            register.mjs, tripwires.mjs from the dock; re-implements nothing)
+  launch-soak.sh  quiet-sample.sh           the detached launcher and the sampler
+  soak-horizon-600y-4s-lit.log              M1's raw log
+  soak-probe-30y-12s-lit.log  …-dark.log    M2's raw logs
+  quiet-window-M1.log  -M1b.log  -M2dark.log  three quiet-window logs, two of them overlapping
+                                            by design so each window has an independent second reading
+  artifacts/horizon-600y-4s-lit.json        10,496,438 B — THE 600-YEAR RECEIPT
+  artifacts/probe-30y-12s-lit.json          1,043,214 B
+  artifacts/probe-30y-12s-dark.json         the dark twin
+  *.pid                                     one pid file per run
+```
