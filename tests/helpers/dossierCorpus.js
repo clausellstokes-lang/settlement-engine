@@ -435,3 +435,347 @@ export async function blockSlotCensus() {
   if (census.size === 0) throw new Error('dossierCorpus: the block slot census read zero blocks');
   return census;
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// CAR 3 — THE REGISTER LOADERS, in the wave's order
+//
+// Every reconcile named the same gap: a rule that cites `check-pair.mjs` on a register whose
+// LOADER DOES NOT EXIST is OWED, not tested, and keeps its direction while losing its
+// STRONG-by-test standing (Part B §0.2, the chair's 13:22 ruling G). These are those loaders.
+//
+// ⭐ ONE HARVESTER, NOT SEVEN. The registers differ in nesting, not in kind: every one is a
+// frozen table whose leaves are string arrays. A loader per register would be seven copies of
+// one tree-walk, and the estate has a name for that. What differs per register is the
+// ROSTER of exports and the ADMISSION PREDICATE, and both are declared per call.
+//
+// ⚠ THE ADMISSION PREDICATE IS PUBLISHED, because every count depends on it (PROBE_ALL §1's
+// own discipline: "the admission predicate, printed, because every N depends on it"). A string
+// is admitted as PROSE when it holds at least three whitespace-separated words and at least
+// one lower-case letter, and is refused when it reads as an id, a slug, a key or a token
+// (SCREAMING_SNAKE, kebab-with-no-space, a bare path). The predicate is deliberately looser
+// than PROBE_ALL's — it admits fragments a sentence regex drops — so a count here may exceed
+// PROBE_ALL's for the same register. Both figures are printed; neither is reconciled by hand.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Is this string reader-facing PROSE, or an id wearing a string's coat?
+ * @param {unknown} value
+ * @returns {boolean}
+ */
+export function isProse(value) {
+  if (typeof value !== 'string') return false;
+  const s = value.trim();
+  if (s.split(/\s+/).length < 3) return false;
+  if (!/[a-z]/.test(s)) return false;
+  if (/^[A-Z0-9_]+$/.test(s)) return false;
+  if (/^[a-z0-9]+([_-][a-z0-9]+)+$/.test(s)) return false;
+  return true;
+}
+
+/**
+ * Harvest every prose leaf of a frozen export table into corpus entries. An ARRAY of prose is
+ * a POOL keyed by its path; a lone prose string under an object is a POOL OF ONE, which is
+ * itself a finding (NL-8b: a pool of one is not a pool).
+ * @param {object} options
+ * @param {string} options.rel repo-relative path, for the entry's `file`
+ * @param {string} options.register the register id (R4b, R6, R7, …)
+ * @param {Record<string, unknown>} options.module the imported namespace
+ * @param {ReadonlyArray<string>} options.exports the export names to harvest
+ * @param {string} [options.source] the file's text, when line numbers are wanted
+ * @returns {CorpusEntry[]}
+ */
+export function harvestExports({
+  rel, register, module, exports: names, source,
+}) {
+  /** @type {CorpusEntry[]} */
+  const out = [];
+  const lines = source ? source.split('\n') : null;
+  /** @param {string} text */
+  const lineOf = (text) => {
+    if (!lines) return undefined;
+    const needle = text.slice(0, 48);
+    const at = lines.findIndex((l) => l.includes(needle));
+    return at >= 0 ? at + 1 : undefined;
+  };
+  /**
+   * @param {unknown} node
+   * @param {string[]} path
+   * @param {number} depth
+   */
+  const walk = (node, path, depth) => {
+    if (depth > 8) return;
+    if (Array.isArray(node)) {
+      const prose = node.filter(isProse);
+      if (prose.length) {
+        const poolId = `${register}::${path.join('.')}`;
+        prose.forEach((text, idx) => {
+          const line = lineOf(String(text));
+          out.push({
+            id: `${poolId}#${idx}`,
+            text: String(text),
+            block: path[0],
+            pool: path.slice(1).join('.') || '*',
+            poolId,
+            idx,
+            angle: '',
+            marks: [],
+            slots: [...new Set([...String(text).matchAll(/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g)].map((m) => m[1]))],
+            file: rel,
+            ...(line ? { line } : {}),
+            register,
+            siblings: [],
+          });
+        });
+      }
+      for (const [i, child] of node.entries()) {
+        if (child && typeof child === 'object') walk(child, [...path, String(i)], depth + 1);
+      }
+      return;
+    }
+    if (!node || typeof node !== 'object') return;
+    /** @type {string[]} */
+    const singles = [];
+    for (const [key, value] of Object.entries(/** @type {Record<string, unknown>} */ (node))) {
+      if (isProse(value)) { singles.push(String(value)); continue; }
+      walk(value, [...path, key], depth + 1);
+    }
+    if (singles.length) {
+      const poolId = `${register}::${path.join('.')}`;
+      singles.forEach((text, idx) => {
+        const line = lineOf(text);
+        out.push({
+          id: `${poolId}::single#${idx}`,
+          text,
+          block: path[0],
+          pool: path.slice(1).join('.') || '*',
+          poolId: `${poolId}::single`,
+          idx,
+          angle: '',
+          marks: [],
+          slots: [...new Set([...text.matchAll(/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g)].map((m) => m[1]))],
+          file: rel,
+          ...(line ? { line } : {}),
+          register,
+          siblings: [],
+        });
+      });
+    }
+  };
+  for (const name of names) {
+    if (!(name in module)) {
+      throw new Error(`dossierCorpus.harvestExports: ${rel} exports no \`${name}\` — the loader's roster is stale, which is the address lie one level up`);
+    }
+    walk(module[name], [name], 0);
+  }
+  return out;
+}
+
+/**
+ * A MODULE-PRIVATE array of prose, read from SOURCE because no export reaches it. The
+ * chronicler's letter keeps its `GREETINGS`, `CLOSINGS` and `QUIET` this way.
+ * @param {string} src
+ * @param {string} name
+ * @returns {string[]}
+ */
+export function privateArray(src, name) {
+  const anchor = new RegExp(`\\bconst\\s+${name}\\s*=\\s*Object\\.freeze\\(\\[|\\bconst\\s+${name}\\s*=\\s*\\[`);
+  const m = anchor.exec(src);
+  if (!m) throw new Error(`dossierCorpus.privateArray: no \`const ${name}\` array in the source`);
+  const open = src.indexOf('[', m.index);
+  let depth = 0;
+  let end = -1;
+  for (let i = open; i < src.length; i++) {
+    const c = src[i];
+    if (c === '\'' || c === '"' || c === '`') {
+      const q = c;
+      i++;
+      while (i < src.length && src[i] !== q) { if (src[i] === '\\') i++; i++; }
+      continue;
+    }
+    if (c === '[') depth += 1;
+    else if (c === ']') { depth -= 1; if (depth === 0) { end = i; break; } }
+  }
+  if (end < 0) throw new Error(`dossierCorpus.privateArray: unbalanced array for \`${name}\``);
+  const body = src.slice(open + 1, end);
+  const items = [...body.matchAll(/'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)"/g)]
+    .map((x) => (x[1] ?? x[2]).replace(/\\'/g, "'").replace(/\\"/g, '"'));
+  const prose = items.filter(isProse);
+  if (prose.length === 0) throw new Error(`dossierCorpus.privateArray: \`${name}\` yielded no prose rows`);
+  return prose;
+}
+
+/** @param {string} rel @returns {Promise<{module: Record<string, unknown>, source: string, rel: string}>} */
+async function openLeaf(rel) {
+  const abs = join(ROOT, rel);
+  return { module: await import(/* @vite-ignore */ `file://${abs}`), source: readFileSync(abs, 'utf8'), rel };
+}
+
+/**
+ * THE CHRONICLE (R11 · R12) — the quiet fallbacks, the letter's greetings, closings and quiet
+ * lines, the treaty compliance voice and its floor, and the demographic reading's sentences.
+ * @returns {Promise<CorpusEntry[]>}
+ */
+export async function loadChronicle() {
+  /** @type {CorpusEntry[]} */
+  const out = [];
+  const readModel = await openLeaf('src/domain/display/chronicleReadModel.js');
+  out.push(...harvestExports({ ...readModel, register: 'R12', exports: ['QUIET_FALLBACK'] }));
+  const treaty = await openLeaf('src/domain/display/treatyDocument.js');
+  out.push(...harvestExports({
+    ...treaty, register: 'R12', exports: ['TREATY_COMPLIANCE_VOICE', 'TREATY_COMPLIANCE_FLOOR'],
+  }));
+  const demographic = await openLeaf('src/domain/display/demographicReading.js');
+  out.push(...harvestExports({
+    ...demographic, register: 'R12', exports: ['OCCUPANCY_SENTENCES', 'READING_VOCABULARIES'],
+  }));
+  // ⛔ `threatAssessment.js` CARRIES NO TABLE — its one export is `buildThreatAssessment`, a
+  // BUILDER whose branches compose their sentences inline. The brief's "assessment branches"
+  // are therefore reachable only by running the builder or by reading its source, and this
+  // loader does neither: it records the absence, so that "the assessment branches are loaded"
+  // is never claimed by a loader that returned nothing. (Executed:
+  // `Object.keys(module)` → `['buildThreatAssessment']`, all of it a function.)
+  const assessment = await openLeaf('src/domain/display/threatAssessment.js');
+  const assessmentTables = Object.keys(assessment.module)
+    .filter((k) => assessment.module[k] && typeof assessment.module[k] === 'object');
+  out.push(...harvestExports({ ...assessment, register: 'R12', exports: assessmentTables }));
+  // The letter's three pools are MODULE-PRIVATE and reached from source.
+  const letter = await openLeaf('src/domain/display/chroniclersLetter.js');
+  for (const name of ['GREETINGS', 'CLOSINGS', 'QUIET']) {
+    privateArray(letter.source, name).forEach((text, idx) => {
+      out.push({
+        id: `R11::letter.${name}#${idx}`,
+        text,
+        block: 'CHRONICLERS-LETTER',
+        pool: name,
+        poolId: `R11::letter.${name}`,
+        idx,
+        angle: '',
+        marks: [],
+        slots: [...new Set([...text.matchAll(/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g)].map((m) => m[1]))],
+        file: 'src/domain/display/chroniclersLetter.js',
+        register: 'R11',
+        siblings: ['GREETINGS', 'CLOSINGS', 'QUIET'].filter((k) => k !== name),
+      });
+    });
+  }
+  refuseEmpty('chronicle (R11/R12)', out);
+  return out;
+}
+
+/**
+ * R4b — the Herald's disclosure and cause-lifecycle voice.
+ * @returns {Promise<CorpusEntry[]>}
+ */
+export async function loadHeraldDisclosure() {
+  /** @type {CorpusEntry[]} */
+  const out = [];
+  const integrity = await openLeaf('src/domain/display/heraldIntegrity.js');
+  out.push(...harvestExports({ ...integrity, register: 'R4b', exports: ['DISCLOSURE_LINES'] }));
+  const vocabulary = await openLeaf('src/domain/display/causeLifecycleVocabulary.js');
+  out.push(...harvestExports({
+    ...vocabulary, register: 'R4b', exports: ['CAUSE_MECHANISM_PHRASE', 'STAGE_TEMPLATES'],
+  }));
+  const walkLeaf = await openLeaf('src/domain/display/causeWalk.js');
+  out.push(...harvestExports({
+    ...walkLeaf, register: 'R4b', exports: ['NO_DEEPER_MEMORY', 'LEDGER_DARK_LINE', 'REDACTED_HOP'],
+  }));
+  refuseEmpty('R4b herald disclosure', out);
+  return out;
+}
+
+/**
+ * R6 — the NPC cause-conjunction ladder, keyed `role | situation | causeClass | stage`.
+ * @returns {Promise<CorpusEntry[]>}
+ */
+export async function loadNpcLadder() {
+  /** @type {CorpusEntry[]} */
+  const out = [];
+  for (const [rel, name] of /** @type {ReadonlyArray<[string, string]>} */ ([
+    ['src/domain/display/causeConjunctionRoleContent.js', 'ROLE_CONTENT'],
+    ['src/domain/display/causeConjunctionClassContent.js', 'CLASS_CONTENT'],
+    ['src/domain/display/causeConjunctionContent.js', 'FULL_CONTENT'],
+  ])) {
+    const leaf = await openLeaf(rel);
+    out.push(...harvestExports({ ...leaf, register: 'R6', exports: [name] }));
+  }
+  refuseEmpty('R6 npc ladder', out);
+  return out;
+}
+
+/**
+ * R7 — the institution and service gazetteer.
+ * @returns {Promise<CorpusEntry[]>}
+ */
+export async function loadInstitutionGazetteer() {
+  /** @type {CorpusEntry[]} */
+  const out = [];
+  const catalog = await openLeaf('src/data/institutionalCatalog.js');
+  out.push(...harvestExports({ ...catalog, register: 'R7', exports: ['institutionalCatalog'] }));
+  const services = await openLeaf('src/data/institutionServices.js');
+  out.push(...harvestExports({ ...services, register: 'R7', exports: ['INSTITUTION_SERVICES'] }));
+  // ⚠ THE BRIEF NAMED TWO FILES; PROBE_ALL'S R7 ROSTER NAMES SIX, and the count depends on
+  // which. The four the brief did not name are loaded here too, so the register's figure can
+  // be read against PROBE_ALL's 2,169 rather than against a narrower loader nobody can
+  // compare. `domain/institutions/institutionCatalog.js` is the sixth and carries NO table:
+  // it exports one BUILDER function, so there is nothing to harvest and the roster says so
+  // rather than leaving a silent hole.
+  const variants = await openLeaf('src/data/institutionDescVariants.js');
+  out.push(...harvestExports({ ...variants, register: 'R7', exports: ['INSTITUTION_DESC_VARIANTS'] }));
+  const ladders = await openLeaf('src/data/institutionLadders.js');
+  out.push(...harvestExports({ ...ladders, register: 'R7', exports: ['UPGRADE_CHAINS', 'SUBSUMPTION_RULES'] }));
+  const vocabulary = await openLeaf('src/domain/display/institutionVocabulary.js');
+  out.push(...harvestExports({
+    ...vocabulary,
+    register: 'R7',
+    exports: Object.keys(vocabulary.module).filter((k) => vocabulary.module[k] && typeof vocabulary.module[k] === 'object'),
+  }));
+  refuseEmpty('R7 institution gazetteer', out);
+  return out;
+}
+
+/**
+ * D-d — the DM page's hooks and secrets: the NPC plot-hook tables and the stress-institution
+ * effect prose.
+ * @returns {Promise<CorpusEntry[]>}
+ */
+export async function loadDmHooks() {
+  /** @type {CorpusEntry[]} */
+  const out = [];
+  const npc = await openLeaf('src/data/npcData.js');
+  out.push(...harvestExports({
+    ...npc, register: 'D-d', exports: ['NPC_PLOT_HOOKS', 'MANNERISMS', 'SPEECH_PATTERNS'],
+  }));
+  const stress = await openLeaf('src/data/stressInstitutionEffects.js');
+  out.push(...harvestExports({ ...stress, register: 'D-d', exports: ['STRESS_INSTITUTION_EFFECTS'] }));
+  refuseEmpty('D-d dm hooks', out);
+  return out;
+}
+
+/**
+ * R9 — THE CHROME COPY REGISTRY (the chrome-pool arm). Chrome is a DIFFERENT REGISTER with its
+ * own rules — CC-1's wall is that the archivist never speaks on chrome — so it is loaded here
+ * to be MEASURED beside the diegetic registers, never to be judged by their rules.
+ *
+ * ⛔ R16 (the JSX + PDF chrome, 2,685 rows over 354 files) IS NOT LOADED, and that is a
+ * refusal with a reason rather than an omission. R16 is a JSX SEGMENT walk — PROBE_ALL's own
+ * X4 extractor over `src/**\/*.jsx` — not a pool table, and a second, weaker JSX extractor
+ * beside the estate's existing `tests/helpers/jsxLiteralWalk.js` would be a fork of a solved
+ * problem. A future car that needs R16 should route through that helper.
+ * @returns {Promise<CorpusEntry[]>}
+ */
+export async function loadChromeCopy() {
+  /** @type {CorpusEntry[]} */
+  const out = [];
+  for (const [rel, name] of /** @type {ReadonlyArray<[string, string]>} */ ([
+    ['src/copy/en.js', 'en'],
+    ['src/copy/landing.js', 'landing'],
+    ['src/copy/pricingPage.js', 'pricingPage'],
+    ['src/copy/deityAuthoring.js', 'deityAuthoring'],
+    ['src/copy/footer.js', 'footer'],
+  ])) {
+    const leaf = await openLeaf(rel);
+    out.push(...harvestExports({ ...leaf, register: 'R9', exports: [name] }));
+  }
+  refuseEmpty('R9 chrome copy registry', out);
+  return out;
+}
