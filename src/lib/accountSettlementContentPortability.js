@@ -262,7 +262,7 @@ export function remapAccountSettlementContentProvenance(
  *   | {ok: false, code: string, error: string}}
  */
 export function remapAccountSettlementLivingContentRoster(rawRoster, identityMap) {
-  if (rawRoster == null) return { ok: true, roster: null };
+  if (rawRoster == null) return { ok: true, roster: /** @type {Record<string, unknown>|null} */ (null) };
 
   const source = plainObject(rawRoster);
   const schemaVersion = Number(source.schemaVersion);
@@ -324,6 +324,7 @@ export function remapAccountSettlementLivingContentRoster(rawRoster, identityMap
       // presentation field are carried VERBATIM: they are the author's content,
       // not an account-scoped identifier, and rewriting them would make the
       // record disagree with the definition it points at.
+      /** @type {Record<string, unknown>} */
       const remappedRow = { ...row, customDefinitionId: definitionId };
       remappedRow.customDefinitionRevisionId = revisionId;
       remappedRow.customDefinitionContentHash = contentHash;
@@ -387,11 +388,10 @@ export function remapAccountSettlementLivingContentRoster(rawRoster, identityMap
     };
   }
 
-  return {
-    ok: true,
-    roster: Object.freeze({
-      schemaVersion,
-      buckets: Object.freeze(remappedBuckets),
-    }),
-  };
+  /** @type {Record<string, unknown>|null} */
+  const roster = Object.freeze({
+    schemaVersion,
+    buckets: Object.freeze(remappedBuckets),
+  });
+  return { ok: true, roster };
 }

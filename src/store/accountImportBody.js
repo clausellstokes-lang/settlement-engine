@@ -470,7 +470,7 @@ export const createAccountImportSlice = (set, get) => ({
             sourceRoster,
             contentIdentityMap,
           );
-          if (remappedRoster.ok) {
+          if (remappedRoster.ok === true) {
             preparedResult.entry.settlement.customContentRoster =
               remappedRoster.roster;
           } else {
