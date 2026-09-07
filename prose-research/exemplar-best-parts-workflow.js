@@ -3,7 +3,7 @@ export const meta = {
   description: 'S10b (owner 2026-09-06 23:40): take the BEST PARTS of EVERY exemplar — Tolkien, Martin, Kay, Le Guin, Wolfe, Hobb, the D&D house style, the anti-AI faults as constraints — and what OUR OWN prose measurably does, into one cross-author matrix for the grand reconciliation (S12). Opus extracts from the VERIFIED sections only; the seat folds.',
   phases: [ { title: 'Extract', detail: 'one Opus extractor per section (cap 2): evidenced, transferable techniques with row citations and strength' }, { title: 'Fold', detail: 'the seat folds nine extracts into sweep/EXEMPLAR-BEST-PARTS.md: technique × author × strength × register × anti-AI risk × what we do now' } ],
 }
-// Owner's words (2026-09-06 ~23:40): "regarding the five author check... don't limit it to the proposal. look at every author including martin and
+// Owner's words (2026-09-06 ~22:36): "regarding the five author check... don't limit it to the proposal. look at every author including martin and
 // tolkien and take the best parts of all of them to consider in our grand reconciliation including anti-ai faults and the D&D exemplar and our own prose".
 // This is INPUT to S12, not a rule change: nothing in the corpus moves before the owner's walk.
 const CAP = (args && args.cap) || 2

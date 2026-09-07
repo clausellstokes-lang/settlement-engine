@@ -1,0 +1,39 @@
+{
+ "role": "finder",
+ "name": "ai",
+ "angle": "arch-worldbuilding-communities",
+ "tag": null,
+ "lines": 66,
+ "firstTs": "2026-09-07T02:56:37.986Z",
+ "lastTs": "2026-09-07T02:58:39.125Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 9,
+  "WebFetch": 2,
+  "WebSearch": 6
+ },
+ "urlsFetched": [
+  "https://www.reddit.com/r/worldbuilding/wiki/rules/",
+  "https://old.reddit.com/r/worldbuilding/wiki/rules",
+  "https://www.reddit.com/r/DnDBehindTheScreen/about/rules.json",
+  "https://old.reddit.com/r/worldbuilding/wiki/rules.json",
+  "https://old.reddit.com/r/DnDBehindTheScreen/about/rules.json",
+  "https://old.reddit.com/r/worldbuilding/about/rules.json",
+  "https://www.reddit.com/r/DnDBehindTheScreen/wiki/rules",
+  "https://old.reddit.com/r/DnDBehindTheScreen/wiki/index",
+  "https://www.rascal.news/ai-generated-profiles-of-ttrpg-designers-ignite-fury-across-social-media/",
+  "https://web.archive.org/web/20260819232418id_/https://old.reddit.com/r/worldbuilding/wiki/rules",
+  "https://web.archive.org/web/20250328024607id_/https://old.reddit.com/r/DnDBehindTheScreen/wiki/index",
+  "https://www.reddit.com/r/DnDBehindTheScreen/about/rules/",
+  "https://old.reddit.com/r/DnDBehindTheScreen/about/rules",
+  "https://www.reddit.com/r/DnDBehindTheScreen/wiki/rules/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the finder method that binds this work.",
+ "run": "wf_00551368-b67",
+ "agent": "af5a17eeb26001796",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-af5a17eeb26001796.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

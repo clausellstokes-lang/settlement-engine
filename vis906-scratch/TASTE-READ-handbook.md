@@ -1,4 +1,4 @@
-# TASTE READ — the voiced Keeper's Handbook essay (`handbookVoice`, shipped ON since §904) — Fable chair, 2026-09-06 22:35
+# TASTE READ — the voiced Keeper's Handbook essay (`handbookVoice`, shipped ON since §904) — Fable chair, 2026-09-06 ~22:03 (War & Resolve appended 22:28)
 
 Measured with the prose kit's own `probe-all/metrics.mjs measure()` over the six reader-facing paragraphs of each state (`vis906-scratch/taste-measure.mjs`;
 the source strings at 6582958ce: plain = `HowToUse.jsx` `conceptIntro`, voiced = `howto/HandbookVoiced.jsx` `VoicedConceptIntro`).

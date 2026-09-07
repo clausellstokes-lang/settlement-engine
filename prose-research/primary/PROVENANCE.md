@@ -64,3 +64,77 @@ martin_chronicle.txt  1 src    141 paras 12422 w  dropped {boilerplate:3, short:
 tolkien_elevated.txt  6 srcs   103 paras 15093 w  dropped {pullquote:6, short:8, boilerplate:12}
 tolkien_plain.txt     6 srcs    23 paras  4503 w  dropped {pullquote:6, short:10, boilerplate:12}
 ```
+
+---
+
+# APPENDED 2026-09-06 — lane S6B-LEGUIN-FINGERPRINT (Le Guin column)
+
+`primary/raw/` was empty on arrival: the 09-05 raw texts died with the reboot, and the cut scripts
+this file documents (`cut_html.py`, `cut_pdf.py`, `pdf2txt.py`, `table.mjs`) died with them. Nothing
+above was edited. The Le Guin raw files below are new; equivalents of the lost scripts were
+re-written under `$SC/s6b-scratch/` (`cut_html.py`, `pdf2txt.py`, `build_corpora.py`, `table.py`).
+
+⛔ **Two sources named in the lane brief are refused by robots.txt, by name.**
+`www.ursulakleguin.com/robots.txt` puts `anthropic-ai` and `ClaudeBot` in a 27-agent group
+terminated by `Disallow: /` — the whole official site, essays and blog alike. `www.arts.gov`
+(the NEA Big Read's host; `www.neabigread.org` no longer resolves) carries `# AI Bots` /
+`User-agent: ClaudeBot` / `Disallow: /`. `www.theguardian.com` bars `anthropic-ai`, `ClaudeBot`,
+`Claude-SearchBot` and `Claude-User` the same way. **No byte of page content was fetched from any
+of the three.** Substitutes below are hosts whose robots.txt names no Anthropic agent and which
+published Le Guin's prose themselves, with permission.
+
+## Fetched sources (Le Guin)
+
+| # | source | URL | terms as stated on the page/file | fetched | raw file | prose words kept |
+|---|--------|-----|----------------------------------|---------|----------|------------------|
+| 8 | Le Guin — *Steering the Craft* (21st-century edition), chapter one, posted as a publisher excerpt | https://lithub.com/a-writing-lesson-from-ursula-k-leguin/ | page states the piece is the book's "first chapter", the updated edition "available now from Houghton Mifflin Harcourt" | 2026-09-06 | `leguin-lithub-a-writing-lesson.html` → `leguin_nonfiction_written.txt` | 1,301 |
+| 9 | Le Guin — "How to Become a Writer" (essay) | https://lithub.com/ursula-k-le-guin-on-how-to-become-a-writer/ | page states it first appeared in Lit Hub's Craft of Writing newsletter; no other licence line | 2026-09-06 | `leguin-lithub-how-to-become-a-writer.html` → `leguin_nonfiction_written.txt` | 1,383 |
+| 10 | Le Guin — "Who Cares About the Great American Novel", essay from *No Time to Spare* | https://lithub.com/ursula-k-le-guin-who-cares-about-the-great-american-novel/ | credit line on the page: "Used with permission of Houghton Mifflin Harcourt. Copyright © 2017 by Ursula K. Le Guin." | 2026-09-06 | `leguin-lithub-great-american-novel.html` → `leguin_nonfiction_written.txt` | 1,020 |
+| 11 | Le Guin — essay on utopia and dystopia (yin/yang) | https://electricliterature.com/ursula-k-le-guin-explains-how-to-build-a-new-kind-of-utopia/ | no licence line; piece published under her byline by Electric Literature | 2026-09-06 | `leguin-el-utopia.html` → `leguin_nonfiction_written.txt` | 791 |
+| 12 | Le Guin — open letter, "I Keep Asking You Not to Buy Books from Amazon" | https://electricliterature.com/ursula-k-le-guin-i-keep-asking-you-not-to-buy-books-from-amazon/ | no licence line; her letter quoted at length by Electric Literature, editor's commentary excluded from the cut | 2026-09-06 | `leguin-el-amazon.html` → `leguin_nonfiction_written.txt` | 281 |
+| 13 | Le Guin — interview by Euan Monaghan, **her answers only** | https://lithub.com/ursula-k-le-guin-on-racism-anarchy-and-hearing-her-characters-speak/ | page states "This interview originally appeared in Issue 14 of Structo Magazine." | 2026-09-06 | `leguin-lithub-racism-anarchy.html` → `leguin_nonfiction_spoken.txt` | 3,063 |
+| 14 | Le Guin — interview by David Naimon, **her answers only** | https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/ | credit line: "From *Ursula K. Le Guin: Conversations on Writing*. Used with permission of Tin House Books." | 2026-09-06 | `leguin-lithub-dictators-poets.html` → `leguin_nonfiction_spoken.txt` | 1,874 |
+| 15 | Le Guin — "The Ones Who Walk Away from Omelas" (full story), course reading of **UC Davis ECS 088, "Ethics of Technology", Prof. Patrice Koehl** | https://www.cs.ucdavis.edu/~koehl/Teaching/ECS088/PDF_files/Omelas.pdf | PDF header credits *The Wind's Twelve Quarters: Short Stories* by Ursula Le Guin; no other licence line; the syllabus at `.../ECS088/index.html` carries the course's Home/Lectures/Term-paper/Reader navigation | 2026-09-06 | `leguin-omelas-ucdavis.pdf` → `leguin-omelas-ucdavis.pagetxt` → `leguin_fiction.txt` | 2,822 |
+
+`robots.txt` read before every fetch: `lithub.com` (only wp paths, `*?s=*`, `/search/*`; `crawl-delay: 10`,
+honoured with a 10 s inter-request delay), `electricliterature.com` (wc-logs/woocommerce/add-to-cart/wp-admin,
+then a Yoast block with an empty `Disallow:`), `www.cs.ucdavis.edu` (`/wp-admin/` only). None names an AI agent.
+
+A further 20 editorial bracket spans (`[Laughs]`, `[Pause]`, glosses) were stripped from the two
+interviews — the transcriber's words, not hers — which is why the built corpora total 9,670
+nonfiction words rather than 9,713.
+
+**Le Guin prose measured: 12,492 words** (nonfiction 9,670 — written 4,776 + spoken 4,894 — plus
+fiction 2,822).
+
+## Fetched and rejected (Le Guin)
+
+| source | why rejected |
+|--------|--------------|
+| `www.ursulakleguin.com` (the official site: essays + blog archive) | **robots.txt disallows `anthropic-ai` and `ClaudeBot` for `/`**; not fetched |
+| `www.arts.gov` (NEA Big Read Earthsea guides) | **robots.txt `# AI Bots` block disallows `ClaudeBot` for `/`**; not fetched. `www.neabigread.org` does not resolve (curl exit 6) |
+| `www.theguardian.com` | **robots.txt disallows `anthropic-ai`, `ClaudeBot`, `Claude-SearchBot`, `Claude-User` for `/`**; not fetched |
+| `www.theparisreview.org/interviews/6253/…` (The Art of Fiction No. 221) | robots permits, but the host returns **http 403** behind Cloudflare ("Attention Required!"); the kit's `sweep/parisreview-leguin.txt` is that same interstitial, not the interview |
+| `w3.ric.edu/faculty/rpotter/temp/waaaod.pdf` ("Why Are Americans Afraid of Dragons?") | host refuses the connection on http and https (`curl: (52) Empty reply from server`), so even `robots.txt` could not be read |
+| `bookviewcafe.com/blog/ursula-k-le-guins-blog/` | **http 404** — BVC permits crawling and was her blog's original home, but the posts are gone; its sitemap's 14 "guin" entries are BVC news items about her, not her prose |
+| `sweep/leguin1973.txt` ("From Elfland to Poughkeepsie", 5,106 w, already in the kit) | no traceable provenance row anywhere in the kit, and the only reachable full texts are on the robots-refused official site or on document lockers; **and it is specimen-contaminated** — the essay quotes Dunsany, Eddison, Tolkien and Kurtz at length, so a naive fingerprint of it measures four other authors |
+| `scribd.com`, `pdfcoffee.com`, `are.na`, `monoskop.org`, `coursehero.com`, `academia.edu`, `researchgate.net`, `docs.google.com`, `shsdavisapes.pbworks.com` | document lockers / scan mirrors / non-`.edu` wikis; not fetched |
+| `lithub.com/ursula-k-le-guins-best-life-advice/`, `…/ursula-k-le-guin-editing-to-the-end/`, `…/this-1998-advice-…-gender-neutral-language…/` | fetched (http 200) but the body is a LitHub or David Naimon **third-party** essay around short quotations — not her connected prose |
+| LitHub/EL poem posts (`two-poems-by-…`, `equinox-75-…`, `a-poem-…-about-cats`, `three-new-poems-…`), and the `watch-…`/`listen-…` video posts | verse or media, not prose |
+| `storyoftheweek.loa.org` | sitemap carries no Le Guin entry |
+
+## Tooling note (Le Guin rows)
+
+Fingerprints produced from `primary/` exactly as the earlier labels were:
+`node ../fingerprint.mjs <label> <absolute raw path…>`, five labels —
+`leguin-nonfiction`, `leguin-nonfiction-written`, `leguin-nonfiction-spoken`, `leguin-fiction`,
+`leguin-all` (nonfiction + fiction). The two `-written` / `-spoken` labels are diagnostics: 4,894 of
+the 9,670 nonfiction words are transcribed speech, and a written/spoken mixture is a register
+mixture. Cut counts, as printed at cut time:
+
+```
+leguin_nonfiction_written.txt  5 srcs   81 paras  4776 w  (specimens by Kipling/Twain/Hurston/Gloss 1095 w, quotations of Hamid and Tolstoy, LitHub/EL frames, bios, affiliate lines all dropped)
+leguin_nonfiction_spoken.txt   2 srcs   74 paras  4894 w  (every interviewer turn, both intros, an Earthsea epigraph, 3 duplicated pull-quotes and 20 bracket spans dropped)
+leguin_nonfiction.txt          7 srcs  155 paras  9670 w
+leguin_fiction.txt             1 src    16 paras  2822 w  (4 page markers, 3 title/credit lines dropped)
+```

@@ -1,0 +1,25 @@
+{
+ "role": "finder",
+ "name": "dnd",
+ "angle": "place-srd-measure",
+ "tag": null,
+ "lines": 90,
+ "firstTs": "2026-09-07T02:52:52.795Z",
+ "lastTs": "2026-09-07T02:58:39.186Z",
+ "tools": {
+  "Read": 1,
+  "Bash": 20,
+  "ToolSearch": 1
+ },
+ "urlsFetched": [
+  "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+  "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Now building a clean-text normalizer and extracting the place-describing passages.",
+ "run": "wf_37af3c74-8c8",
+ "agent": "aa8ece68c381f59f7",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-aa8ece68c381f59f7.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

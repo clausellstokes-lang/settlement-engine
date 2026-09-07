@@ -1,10 +1,18 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 22:52:47 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 22:58:49 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | in-flight | 0 | — | — | 21:31:03 |
 | ai | critic |  | result | 0 | critic-ai.md | — | 02:25:15 |
+| ai | finder | arch-biographical-record | in-flight | 9 | — | — | 02:58:44 |
+| ai | finder | arch-gazetteer-travel-history | in-flight | 10 | — | — | 02:58:46 |
+| ai | finder | arch-historical-fact-measured | in-flight | 2 | — | — | 02:58:43 |
+| ai | finder | arch-worldbuilding-communities | in-flight | 14 | — | — | 02:58:39 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 02:10:32 |
+| dnd | finder | place-5e-gazetteers | in-flight | 22 | — | — | 02:58:19 |
+| dnd | finder | place-dmg-settlements | in-flight | 23 | — | — | 02:58:43 |
+| dnd | finder | place-editorial-staff | in-flight | 17 | — | — | 02:58:33 |
+| dnd | finder | place-srd-measure | in-flight | 2 | — | — | 02:58:39 |
 | dnd | synth |  | in-flight | 0 | — | — | 21:31:03 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
 | hobb | critic |  | result | 0 | critic-hobb.md | — | 22:39:48 |

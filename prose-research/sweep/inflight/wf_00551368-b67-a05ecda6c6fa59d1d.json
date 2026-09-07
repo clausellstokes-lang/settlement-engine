@@ -1,0 +1,33 @@
+{
+ "role": "finder",
+ "name": "ai",
+ "angle": "arch-biographical-record",
+ "tag": null,
+ "lines": 57,
+ "firstTs": "2026-09-07T02:56:37.991Z",
+ "lastTs": "2026-09-07T02:58:44.978Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 8,
+  "WebSearch": 5
+ },
+ "urlsFetched": [
+  "https://www.theverge.com/2024/2/13/24067157/ai-obituary-spam-generative-clickbait",
+  "https://waxy.org/2024/02/the-verges-mia-sato-on-the-rise-of-ai-generated-obituary-spam/",
+  "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+  "https://www.wikitree.com/g2g/2021670/should-become-official-wikitree-policy-generated-enhanced",
+  "https://en.wikipedia.org/wiki/Obituary_piracy",
+  "https://www.wired.com/story/morbid-war-online-obituaries/|bio-wired-morbid",
+  "https://www.wired.com/story/youtube-obituary-pirates/|bio-wired-yt",
+  "https://www.legalgenealogist.com/?s=ChatGPT|bio-lg-search",
+  "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/|bio-ajc"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the finder method that binds this work.",
+ "run": "wf_00551368-b67",
+ "agent": "a05ecda6c6fa59d1d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-a05ecda6c6fa59d1d.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

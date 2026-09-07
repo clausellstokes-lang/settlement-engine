@@ -1,8 +1,8 @@
-# RECEIPT — S6B-LEGUIN-FINGERPRINT — **PARTIAL**
+# RECEIPT — S6B-LEGUIN-FINGERPRINT — **COMPLETE**
 Seat: Opus 5 — Fable-unvalidated · Lane: S6B-LEGUIN-FINGERPRINT · Chair: Fable 5.1
 Started 2026-09-06 (kit-only lane; no git tree touched, no vitest, no npm, no subagents).
 
-STATUS: PARTIAL — header written before any fetch. Updated after every fetch and every measurement.
+STATUS: COMPLETE (opened PARTIAL; updated after every fetch and every measurement).
 
 ## Plan
 1. Re-derive the brief's premises (raw/ empty; fingerprint.mjs shape; existing JSON labels).
@@ -149,3 +149,155 @@ are claims about written prose.
 - written half longer than spoken half by ≥ 3 words/sentence.
 - `leguin-fiction` (Omelas) mean 21–26, semicolonRate the highest of any Le Guin column.
 - Le Guin's mean below tolkien-plain's 22.5 in every column except possibly fiction.
+
+## Fingerprints written (all five, `node ../fingerprint.mjs` run from `primary/`, exit 0 each)
+| JSON (in `prose-research/primary/`) | paragraphs | **sentences** | words in |
+|---|---|---|---|
+| `leguin-nonfiction.fingerprint.json` | 153 | **632** | 9,670 |
+| `leguin-nonfiction-written.fingerprint.json` (diagnostic) | 81 | **281** | 4,776 |
+| `leguin-nonfiction-spoken.fingerprint.json` (diagnostic) | 72 | **351** | 4,894 |
+| `leguin-fiction.fingerprint.json` | 16 | **162** | 2,822 |
+| `leguin-all.fingerprint.json` | 169 | **794** | 12,492 |
+
+The `-thin` label was NOT needed: 2,822 fiction words clears the brief's 2,500 floor.
+
+## Prediction scorecard (predictions above were written before the instrument ran)
+| prediction | outcome |
+|---|---|
+| nonfiction mean 16–20 | **MISS — 15.3**, below the band |
+| nonfiction sd 11–15 | HIT — 11.1 |
+| nonfiction p50 14–18 | **MISS — 12**, below the band |
+| written half ≥ 3 w/sentence longer than spoken | HIT — 17.0 vs 13.9 (3.1) |
+| fiction mean 21–26 | **MISS — 17.4**, well below the band |
+| fiction semicolonRate the highest Le Guin column | HIT — 0.0864 vs written 0.0676 |
+| every Le Guin column below tolkien-plain's 22.5 | HIT — highest Le Guin column is 17.4 |
+Three of seven predictions missed, all in the same direction: **I expected her sentences to be
+longer than they are.** The chair should treat the shortness figure as the lane's least-anticipated
+result, not as a rounding of a prior.
+
+## COMPARISON TABLE (Le Guin against every existing column and the CONTROL)
+| metric | leguin-nonfiction | leguin-nonfiction-written | leguin-nonfiction-spoken | leguin-fiction | leguin-all | tolkien-plain | tolkien-elevated | martin-narrative | martin-chronicle | dnd-flavor | dnd-rules | estate-state |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| sentences | 632 | 281 | 351 | 162 | 794 | 200 | 623 | 409 | 479 | 610 | 1141 | 2914 |
+| wps mean | 15.3 | 17 | 13.9 | 17.4 | 15.7 | 22.5 | 24.2 | 13.8 | 25.9 | 18.8 | 18.4 | 16.7 |
+| wps sd | 11.1 | 11.9 | 10.3 | 13 | 11.6 | 15.4 | 16 | 9.3 | 12.7 | 8.8 | 8.9 | 7.2 |
+| wps p50 | 12 | 14 | 11 | 13 | 12 | 20 | 21 | 11 | 25 | 18 | 17 | 17 |
+| wps p90 | 31 | 33 | 29 | 32 | 31 | 43 | 46 | 26 | 43 | 30 | 31 | 26 |
+| shareUnder8 | 0.2896 | 0.2349 | 0.3333 | 0.2407 | 0.2796 | 0.145 | 0.1027 | 0.3007 | 0.0292 | 0.0787 | 0.0675 | 0.1301 |
+| shareOver30 | 0.106 | 0.121 | 0.094 | 0.1296 | 0.1108 | 0.27 | 0.2809 | 0.0489 | 0.3382 | 0.0885 | 0.1017 | 0.0206 |
+| neighbourVar | 0.74 | 0.708 | 0.771 | 0.805 | 0.755 | 0.733 | 0.646 | 0.593 | 0.508 | 0.495 | 0.52 | 0.399 |
+| emDash | 0.0744 | 0.1032 | 0.0513 | 0.0062 | 0.0605 | 0.015 | 0.0482 | 0 | 0.0063 | 0.0377 | 0.0254 | 0 |
+| semicolon | 0.0348 | 0.0676 | 0.0085 | 0.0864 | 0.0453 | 0.06 | 0.122 | 0.0098 | 0.0355 | 0.0148 | 0.0114 | 0.1325 |
+| colon | 0.0301 | 0.0569 | 0.0085 | 0.0432 | 0.0327 | 0.125 | 0.1252 | 0 | 0.0084 | 0.0262 | 0.0272 | 0.0559 |
+| antithesis | 0.0127 | 0.0178 | 0.0085 | 0.037 | 0.0176 | 0.03 | 0.0401 | 0.0171 | 0.0167 | 0.0131 | 0.0105 | 0.1088 |
+| triad | 0.057 | 0.0747 | 0.0427 | 0.0617 | 0.0579 | 0.125 | 0.1091 | 0.0465 | 0.2129 | 0.1443 | 0.0447 | 0.0089 |
+| participialOpener | 0.0142 | 0.0249 | 0.0057 | 0 | 0.0113 | 0.005 | 0.008 | 0.0024 | 0.0084 | 0.0148 | 0.0342 | 0.0117 |
+| doubledAdj | 0.0174 | 0.032 | 0.0057 | 0.0556 | 0.0252 | 0.045 | 0.0417 | 0.0122 | 0.023 | 0.041 | 0.0131 | 0.0144 |
+| adverbs/sent | 0.231 | 0.246 | 0.219 | 0.16 | 0.217 | 0.325 | 0.392 | 0.059 | 0.28 | 0.228 | 0.14 | 0.162 |
+| abstractCloser | 0.0459 | 0.0534 | 0.0399 | 0.0432 | 0.0453 | 0.045 | 0.0578 | 0.0122 | 0.023 | 0.077 | 0.0876 | 0.0439 |
+| runs3SameBand | 0.1788 | 0.21 | 0.1538 | 0.1543 | 0.1738 | 0.155 | 0.199 | 0.2543 | 0.2839 | 0.2705 | 0.3392 | 0.3202 |
+
+| corpus | top 5 openers | top 5 closers |
+|---|---|---|
+| leguin-nonfiction | i 72, the 40, and 34, it 28, it’s 28 | it 33, that 10, book 7, me 7, one 7 |
+| leguin-nonfiction-written | the 24, but 13, i 13, and 11, you 10 | it 17, writer 5, one 4, truth 4, writing 3 |
+| leguin-nonfiction-spoken | i 59, it’s 24, and 23, it 19, the 16 | it 16, that 9, so 6, me 6, way 5 |
+| leguin-fiction | they 22, the 21, it 15, but 11, i 9 | omelas 5, joy 4, all 4, it 3, there 3 |
+| leguin-all | i 81, the 61, it 43, but 37, they 35 | it 36, that 10, book 7, me 7, one 7 |
+| tolkien-plain | i 43, the 12, but 12, we 12, and 7 | ∅ 11, us 4, it 3, guardian 3, me 3 |
+| tolkien-elevated | i 96, it 46, but 46, the 46, in 25 | ∅ 29, it 17, me 8, ring 7, him 6 |
+| martin-narrative | the 38, i 24, if 20, and 14, that 12 | them 9, her 8, princess 7, dorne 6, well 6 |
+| martin-chronicle | the 67, in 24, lord 22, his 16, a 16 | rock 14, him 11, west 8, them 8, instead 6 |
+| dnd-flavor | the 59, they 51, in 21, you 17, a 13 | ∅ 16, races 9, game 8, them 7, others 6 |
+| dnd-rules | the 140, if 97, a 97, for 78, you 73 | ∅ 47, check 34, it 27, action 24, you 17 |
+| estate-state | the 928, ashford 610, what 232, a 188, there 110 | it 253, ashford 63, them 53, here 51, not 33 |
+
+Secondary rows, same corpora and order:
+
+| metric | leguin-nonfiction | leguin-nonfiction-written | leguin-nonfiction-spoken | leguin-fiction | leguin-all | tolkien-plain | tolkien-elevated | martin-narrative | martin-chronicle | dnd-flavor | dnd-rules | estate-state |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| sameOpenerPrev | 0.0696 | 0.0605 | 0.0769 | 0.1667 | 0.0894 | 0.065 | 0.0947 | 0.0342 | 0.0334 | 0.0639 | 0.0727 | 0.1321 |
+| whichTail | 0.0285 | 0.0178 | 0.037 | 0.0123 | 0.0252 | 0.01 | 0.0225 | 0.0024 | 0 | 0.0066 | 0.0237 | 0.0511 |
+| thereIsOpener | 0.038 | 0.0249 | 0.0484 | 0.0556 | 0.0416 | 0.02 | 0.0482 | 0.0122 | 0.0167 | 0.0016 | 0.0018 | 0.0515 |
+| dialogueShare | 0.0649 | 0.0783 | 0.0541 | 0.0309 | 0.0579 | 0 | 0.0032 | 0.2714 | 0.0981 | 0.0311 | 0.0438 | 0.0003 |
+| pronounCloser | 0.0997 | 0.089 | 0.1083 | 0.0556 | 0.0907 | 0.07 | 0.0674 | 0.1076 | 0.0543 | 0.0213 | 0.05 | 0.1335 |
+| sentsPerPara | 4.13 | 3.47 | 4.88 | 10.13 | 4.7 | 8.7 | 6.05 | 4.54 | 3.4 | 3.35 | 2.74 | 1.29 |
+| question | 0.0633 | 0.0961 | 0.037 | 0.0617 | 0.063 | 0.055 | 0.0144 | 0.0807 | 0 | 0.023 | 0.0035 | 0 |
+| paren | 0.0079 | 0.0178 | 0 | 0.0062 | 0.0076 | 0.245 | 0.2247 | 0 | 0.071 | 0.0525 | 0.1025 | 0.0048 |
+
+## What the numbers do to the section's own stated rules (numbers only; no taste judgment)
+
+Feature 15 ("There is no optimum sentence length. The optimum is variety", against "Macho
+Staccato") is **CONFIRMED in its precise form and CONTRADICTED in its naive one**: her
+runsOfThreeSameLengthBand is the lowest in the table (fiction 0.154, nonfiction 0.179) against
+dnd-rules 0.339, the CONTROL 0.320, martin-chronicle 0.284, dnd-flavor 0.271 and martin-narrative
+0.254, and her neighbourVariation is the highest measured anywhere (fiction 0.805; nonfiction 0.740
+against tolkien-plain's 0.733) — she genuinely refuses to run three sentences in the same length
+band — yet her mean is the second-shortest in the whole table (nonfiction 15.3, fiction 17.4;
+only martin-narrative is shorter at 13.8) and her shareUnder8 the second-highest (0.290 / 0.241
+against martin-narrative's 0.301), so "variety" in her practice is a short mean with a long tail
+(p90 31–32, shareOver30 0.106–0.130), not the long-sentence prose the Tolkien columns show (means
+22.5 and 24.2). Feature 17 ("rationed, not banned") is **CONFIRMED for adverbs** — 0.160 per
+sentence in her fiction and 0.246 in her written essays, below both Tolkien columns (0.325, 0.392)
+and martin-chronicle (0.280), above martin-narrative (0.059) and dnd-rules (0.140), and nowhere
+near zero — but its doubled-adjective limb is **CONTRADICTED for her fiction**, whose
+doubledAdjectiveRate 0.0556 is the highest figure in the entire table, above tolkien-plain (0.045)
+and dnd-flavor (0.041). Feature 25's annalist semicolon (her praise of Galt moving from riot to
+dinner "only a semicolon") is **PARTLY CONFIRMED and materially qualified**: the semicolon is
+indeed her fiction's signature punctuation (0.0864, her highest column, above tolkien-plain's
+0.060 and martin-chronicle's 0.0355) but it sits below tolkien-elevated (0.122) and below the
+CONTROL's own 0.1325 — our estate prose already out-semicolons Le Guin, so a "more semicolons"
+instruction would move the product away from her, not toward her. Feature 18's repetition-with-
+variation leaves a measurable trace: sameOpenerAsPreviousRate 0.167 in her fiction is the highest
+in the table, above the CONTROL's 0.132. Features 6 and 7 (plainness, plain-not-flat) are only
+**consistent, not decided**, by the one figure that separates hardest — parenthesisRate 0.008
+against Tolkien's 0.225–0.245 — with abstract-noun closers at 0.046 against dnd-rules' 0.088.
+Features 13 (sound first), 26 (alliteration and assonance), 9 (crowding and leaping), 11 (the
+legend voice) and 23 (register narrows with scale) this lane **CANNOT REACH**: `fingerprint.mjs`
+has no phonetic, syllabic or discourse-level measure. Feature 14 matters most here because the
+section withdrew its one numeric target — "more than half the words in a block are one syllable",
+which was a count of a Tolkien sample — explicitly "until the primary-measure lane lands her own
+fingerprint". **This is that lane and it cannot supply it**: the instrument counts words,
+punctuation, shapes, openers and closers and has no syllable counter, so feature 14's target stays
+withdrawn and restoring it needs a new measure, which is a chair decision and not a lane's.
+
+## CONFIRMED / PLAUSIBLE per figure
+- **CONFIRMED (executed, quoted above):** every number in both comparison tables — each is read
+  straight out of a `*.fingerprint.json` written by `node fingerprint.mjs` at exit 0; every word
+  count printed by `build_corpora.py` at cut time; every http code, byte count and curl exit;
+  every robots.txt line (fetched and greppable under `s6b-scratch/robots-*.txt`); the byte-identity
+  of the pre-existing PROVENANCE rows (`cmp` exit 0 against a backup taken before the append).
+- **CONFIRMED:** the two robots refusals and the Guardian refusal — the agent names are in the live
+  files, not inferred.
+- **PLAUSIBLE (reasoning, not executed):** that the LitHub/EL cut lists isolate *only* her words.
+  They were set by reading every paragraph of every page and are printed as index lists in
+  `build_corpora.py`, but a mis-attributed paragraph would not announce itself. The interview
+  columns rest on speaker prefixes (`UG:`/`Ursula Le Guin:`, `UKL:`/`Ursula K. Le Guin:`) plus five
+  hand-identified unlabelled continuations in the Naimon piece — those five are the softest
+  judgment in the lane.
+- **PLAUSIBLE:** that 9,670 words is enough for the rate metrics. The per-sentence rates rest on
+  632 nonfiction and 162 fiction sentences; the fiction column in particular is ONE short story, so
+  every fiction figure is a single-work figure, not a Le Guin-fiction figure.
+
+## ⚠ Standing caveats the chair must carry forward
+1. **The fiction column is one story.** 162 sentences from "Omelas" alone. Its high
+   doubledAdjectiveRate and semicolonRate may be that story's catalogue rhetoric, not her fiction.
+   Every other lawful fiction route was refused or empty (see the rejected table in PROVENANCE.md).
+2. **Half the nonfiction column is transcribed speech** (4,894 of 9,670 words). Use
+   `leguin-nonfiction-written` when adjudicating a written-prose rule; the spoken half drags the
+   headline mean down by 3.1 words/sentence and the semicolon rate from 0.068 to 0.009.
+3. **The estate's own opt-out is now a program fact.** `ursulakleguin.com` bars Anthropic agents
+   site-wide. Any future Le Guin lane that "just fetches the essays" will either break that or
+   silently launder it through a mirror; the chair should carry the refusal forward as a rule.
+
+## RETROVALIDATION ROW
+| what was judged | what the Fable chair must re-derive | receipts by path | priority |
+|---|---|---|---|
+| **Refusing the brief's two named sources on robots grounds** (ursulakleguin.com, arts.gov) and substituting LitHub/EL/.edu | Whether a named-agent `Disallow: /` binds this lane. If the chair rules it does not, the Le Guin column can be rebuilt from the official site and every figure here changes | `s6b-scratch/robots-www.ursulakleguin.com.txt`, `robots-www.arts.gov.txt`, `robots-www.theguardian.com.txt`; receipt §"ROBOTS REFUSALS" | **P1** |
+| **The written/spoken split** — I made `leguin-nonfiction` the mixture the brief specified and added two diagnostics rather than choosing for the chair | Which of the three the dossier's Le Guin figures should quote | the three JSONs in `primary/` | **P1** |
+| **Per-source keep-lists** (which paragraphs are hers) | Spot-check the five unlabelled Naimon continuations (25, 41, 46, 50, 51) and the Steering-the-Craft specimen drops (7, 9, 11, 12, 13, 15, 16) | `s6b-scratch/build_corpora.py`; raw HTML in `primary/raw/` | P2 |
+| **Feature 14's withdrawn numeric target cannot be restored by this instrument** | Whether to commission a syllable/stress measure, or leave the target withdrawn | receipt §"What the numbers do…"; `prose-research/fingerprint.mjs` (no syllable counter) | P2 |
+| **Re-writing the lost cut scripts under `s6b-scratch/` instead of re-planting them in `primary/`** | Whether the kit wants `cut_html.py` / `pdf2txt.py` restored to `primary/` as PROVENANCE.md documents them | `s6b-scratch/{cut_html,pdf2txt,build_corpora,table}.py`; PROVENANCE.md "Cut scripts" section | P3 |
+
+STATUS: **COMPLETE**. No git tree touched; no vitest, npm, register door or subagent used.
+Raw text exists only under `prose-research/primary/raw/`. Scratch only under `s6b-scratch/`.

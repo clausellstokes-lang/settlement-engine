@@ -9,7 +9,7 @@ S=os.path.dirname(os.path.abspath(__file__)); name=sys.argv[1]; a=sys.argv[2:]
 def feats(path):
     out=[]
     for l in open(path,encoding='utf-8'):
-        # 09-06 22:15 (chair): a section may number its features as HEADINGS (`## 12. …`) or as BOLD LINES (`**12. …**`, the dnd/hobb/kay
+        # 09-06 22:00 (chair): a section may number its features as HEADINGS (`## 12. …`) or as BOLD LINES (`**12. …**`, the dnd/hobb/kay
         # shape) — both are features; the old heading-only regex read 0 on a bold-numbered section and printed a FALSE 'dry'.
         m=re.match(r'^#{2,4}\s*(\d+)[.)]\s*(.+?)\s*$',l) or re.match(r'^\*\*\s*(\d+)[.)]\s*(.+?)\*\*',l)
         if m: out.append(re.sub(r'[^a-z0-9 ]','',m.group(2).lower()).strip())
