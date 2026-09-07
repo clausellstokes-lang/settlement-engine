@@ -28,7 +28,7 @@
   "argsFile": "args-wolfe-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--wolfe-r8.js",
-  "status": "RUNNING since 21:12 (session df942c1b) — r8 = the r7 TAIL: synth + critic only (regrade-r7 landed 20:4x in the dead run: 107 downgraded / 766 standing; verification 1255/1255)",
+  "status": "RUNNING (session df942c1b): synth DONE 21:48 (section-wolfe.md 139,632 B); critic in flight — r8 = the r7 tail",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--wolfe-r7.js",
   "prev": {
    "runId": "wf_1326cde9-2e5",
@@ -63,7 +63,7 @@
   "argsFile": "args-dnd-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r8.js",
-  "status": "RUNNING since 21:12 (session df942c1b) — r8 = the r7 launch rebuilt: synth + critic (regrade-r6 covers every verdict; section 09-05 20:56 is stale)",
+  "status": "RUNNING (session df942c1b): synth DONE 21:46 (section-dnd.md 127,898 B); critic in flight — r8 = the r7 launch rebuilt (synth + critic)",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--dnd-r7.js",
   "prev": {
    "runId": "wf_3d71f708-fe3",

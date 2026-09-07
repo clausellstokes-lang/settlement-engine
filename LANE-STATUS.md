@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 21:53:45 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 21:59:21 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lighting tail's measurement lands with zero product bytes — L-PROBE-2 at ever
 
@@ -97,7 +97,7 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 
 ## WORKFLOW RUNS of chair session df942c1b-a1a2-4594-ba90-9241ff864ccd (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_8cd21474-a7b: 3 journal lines, 2 agents
-- wf_f191dac2-82a: 1 journal lines, 1 agents
+- wf_f191dac2-82a: 3 journal lines, 2 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.59 2.73 3.05
+load: 3.27 2.85 2.98

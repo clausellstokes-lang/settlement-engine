@@ -1,0 +1,21 @@
+{
+ "role": "critic",
+ "name": "dnd",
+ "angle": null,
+ "tag": null,
+ "lines": 56,
+ "firstTs": "2026-09-07T01:54:01.250Z",
+ "lastTs": "2026-09-07T01:55:20.356Z",
+ "tools": {
+  "Bash": 9,
+  "Read": 6
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll begin by reading the sweep artifacts.",
+ "run": "wf_f191dac2-82a",
+ "agent": "a406e99cc4cb5b63d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_f191dac2-82a/agent-a406e99cc4cb5b63d.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
