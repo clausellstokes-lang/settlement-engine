@@ -1,0 +1,324 @@
+{
+ "name": "wolfe",
+ "chunk": 16,
+ "claims": [
+  {
+   "index": 978,
+   "feature": "withheld information and inference",
+   "claim": "Wright asserts that Wolfe's fiction actively encourages misreadings by the reader.",
+   "source": "Peter Wright, Attending Daedalus: Gene Wolfe, Artifice and the Reader (Liverpool University Press, 2003), Preface, p. xi",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+   "quote": "it encourages misreadings, demands thoughtful reflection",
+   "page": "Preface, pp. xi-xii",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page (Liverpool UP title), fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 979,
+   "feature": "plainness and economy",
+   "claim": "Wright characterises Wolfe's fiction as densely allusive and conceptually elusive rather than plain.",
+   "source": "Peter Wright, Attending Daedalus (Liverpool University Press, 2003), Preface, p. xi",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+   "quote": "intricately wrought, densely allusive, and conceptually elusive",
+   "page": "Preface, pp. xi-xii",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 980,
+   "feature": "point of view and distance",
+   "claim": "Wright reports that the majority of critics who have approached Wolfe's work would call him ambiguous, subtle and playful.",
+   "source": "Peter Wright, Attending Daedalus (Liverpool University Press, 2003), Preface, p. xi",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+   "quote": "complex and wily writer, ambiguous, subtle and playful",
+   "page": "Preface, pp. xi-xii",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 981,
+   "feature": "other: critical neglect",
+   "claim": "Wright names Attending Daedalus as only the second book-length study of Wolfe's fiction.",
+   "source": "Peter Wright, Attending Daedalus (Liverpool University Press, 2003), Preface, p. xi",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+   "quote": "only the second book-length study of his fiction",
+   "page": "Preface, pp. xi-xii",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 982,
+   "feature": "register modulation",
+   "claim": "Wright characterises the prose of The Wizard Knight (2004) as spare.",
+   "source": "Peter Wright (ed.), Shadows of the New Sun: Wolfe on Writing/Writers on Wolfe (Liverpool University Press, 2007), Introduction, pp. 1-8",
+   "url": "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29D7A4CD8C40CAA72A62E",
+   "quote": "the spare prose of The Wizard Knight",
+   "page": "Introduction, pp. 1-8",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 983,
+   "feature": "register modulation",
+   "claim": "Wright characterises the prose of The Book of the New Sun (1980-83) as baroque in its richness.",
+   "source": "Peter Wright (ed.), Shadows of the New Sun (Liverpool University Press, 2007), Introduction, pp. 1-8",
+   "url": "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29D7A4CD8C40CAA72A62E",
+   "quote": "the baroque richness of The Book of the New Sun",
+   "page": "Introduction, pp. 1-8",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 984,
+   "feature": "per-speaker register",
+   "claim": "Wright asserts Wolfe's narrative versatility extends to narrating as a phantom haunting his own memories in Peace (1975).",
+   "source": "Peter Wright (ed.), Shadows of the New Sun (Liverpool University Press, 2007), Introduction, pp. 1-8",
+   "url": "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29D7A4CD8C40CAA72A62E",
+   "quote": "a phantom haunting his own memories in Peace",
+   "page": "Introduction, pp. 1-8",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 985,
+   "feature": "other: stylistic distinctness",
+   "claim": "Wright calls Wolfe's fiction among the most stylistically distinct imaginative fiction of recent years.",
+   "source": "Peter Wright (ed.), Shadows of the New Sun (Liverpool University Press, 2007), Introduction, pp. 1-8",
+   "url": "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29D7A4CD8C40CAA72A62E",
+   "quote": "most stylistically distinct, structurally complex and intellectually invigorating",
+   "page": "Introduction, pp. 1-8",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 986,
+   "feature": "archaism",
+   "claim": "Wright asserts that Wolfe's archaisms work as agents of estrangement that render Urth alien to the reader.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Cues: the function of unfamiliar diction', pp. 126-144",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "agents of estrangement to render the fictional Urth alien",
+   "page": "pp. 126-144",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 987,
+   "feature": "compounds and coinages",
+   "claim": "Wright reports that Wolfe disavows any fondness for coined 'gibberish', meaning neologisms.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Cues', p. 126, reporting The Castle of the Otter",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "Wolfe admits that he has no fondness for",
+   "page": "pp. 126-144",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 988,
+   "feature": "archaism",
+   "claim": "Wolfe's own stated reason for archaic vocabulary is to convey the flavour of an odd place at an odd time.",
+   "source": "Gene Wolfe, The Castle of the Otter (1982), quoted in Peter Wright, Attending Daedalus (2003), 'Cues'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "odd words to convey the flavour of an odd place",
+   "page": "pp. 126-144",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1982",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 989,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe told Larry McCaffery that a great deal of knowledge can be intuited from the words people use.",
+   "source": "Gene Wolfe, interview with Larry McCaffery for Science-Fiction Studies, quoted in Peter Wright, Attending Daedalus (2003), 'Cues'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "a great deal of knowledge can be intuited",
+   "page": "pp. 126-144",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1988",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 990,
+   "feature": "archaism",
+   "claim": "Wright asserts Wolfe's archaic reappropriations convey social, linguistic and creative exhaustion.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Cues', pp. 126-144",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "the notion of recycling, of social, linguistic and creative exhaustion",
+   "page": "pp. 126-144",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 991,
+   "feature": "archaism",
+   "claim": "Wright asserts Wolfe's Classico-medieval references operate both deflectively and candidly at once.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Cues', pp. 126-144",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "references function both deflectively and candidly",
+   "page": "pp. 126-144",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 992,
+   "feature": "withheld information and inference",
+   "claim": "Wright asserts Wolfe organises the Urth Cycle so that it rewards only readers willing to pause, reflect and reread.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Solar Labyrinth', pp. 166-182",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/solar-labyrinth-metafictional-devices-and-textual-complexity/49656CDCE0E04E7F80E4E4FE4FFC069C",
+   "quote": "pause, reflect and reread",
+   "page": "pp. 166-182",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 978,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it encourages misreadings, demands thoughtful reflection",
+   "note": "Raw Cambridge Core Preface page (pp. xi-xii summary) fetched live, HTTP 200, browser UA. Quote contiguous and verbatim in the sentence beginning 'His fiction is intricately wrought...'. 'By the reader' is carried by the same sentence's continuation about involving the reader in interpretation; 'actively' is the claim's intensifier, not Wright's word, but adds no content."
+  },
+  {
+   "index": 979,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'rather than plain' — the page never opposes these qualities to plainness, and Wright elsewhere calls The Wizard Knight's prose spare",
+   "trueWording": "intricately wrought, densely allusive, and conceptually elusive",
+   "note": "Quote verbatim on the raw Preface page. The positive characterisation is fully supported, but the contrast with plainness is the claim's own gloss: dense allusion and conceptual elusiveness are not sentence-level plainness, and the same critic's Shadows introduction (index 982) calls Wolfe's Wizard Knight prose spare. Do not cite this as Wright denying plainness of style."
+  },
+  {
+   "index": 980,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "complex and wily writer, ambiguous, subtle and playful",
+   "note": "Verbatim on the raw Preface page, introduced by 'as the majority of critics and reviewers who have approached his oeuvre would admit'. Claim's 'critics' narrows the page's 'critics and reviewers'; 'would call him' matches the page's 'would admit'."
+  },
+  {
+   "index": 981,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only the second book-length study of his fiction",
+   "note": "Verbatim on the raw Preface page; 'this' in the sentence is the present volume, Attending Daedalus, and the page continues 'and the first to address any material published after 1983'. Page range 'pp. xi - xii' confirmed on the same page."
+  },
+  {
+   "index": 982,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the spare prose of The Wizard Knight",
+   "note": "Raw Cambridge Core Introduction page for Shadows of the New Sun fetched live, HTTP 200. Quote verbatim, with '(2004)' following, inside the stylistic-ingenuity contrast. Page range 'pp. 1 - 8' confirmed on the page."
+  },
+  {
+   "index": 983,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the baroque richness of The Book of the New Sun",
+   "note": "Verbatim on the raw Introduction page, with '(1980-83)' following. The sentence frames it as a prose contrast ('his stylistic ingenuity - demonstrated, for example, in the contrast between the spare prose of The Wizard Knight and...'), so the claim's 'prose' limb is supported."
+  },
+  {
+   "index": 984,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a phantom haunting his own memories in Peace",
+   "note": "Verbatim on the raw Introduction page, with '(1975)' following, inside the parenthesis illustrating 'his notable narrative versatility' (the other pole being narrating as a high school girl in Pandora by Holly Hollander)."
+  },
+  {
+   "index": 985,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most stylistically distinct, structurally complex and intellectually invigorating",
+   "note": "Verbatim on the raw Introduction page; the full sentence reads 'he remains the author of some of the most ... imaginative fiction of recent years', so the claim's 'among' and 'imaginative fiction of recent years' limbs both hold."
+  },
+  {
+   "index": 986,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "agents of estrangement to render the fictional Urth alien",
+   "note": "Raw Cambridge Core 'Cues' chapter page fetched live, HTTP 200; page range 'pp. 126 - 144' confirmed. Quote verbatim; the sentence adds the irony that the archaisms 'function as neologisms', and continues that they may be as much gibberish 'to the reader', supporting the reader limb."
+  },
+  {
+   "index": 987,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he has no fondness for 'gibberish' (by which he means neologisms)",
+   "note": "The claim's short quote 'Wolfe admits that he has no fondness for' is contiguous and verbatim on the raw 'Cues' page; the parenthetical gloss 'by which he means neologisms' is Wright's own, and the sentence attributes the admission to The Castle of the Otter, matching the claim's source line."
+  },
+  {
+   "index": 988,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "used odd words to convey the flavour of an odd place",
+   "note": "Verbatim on the raw 'Cues' page, inside Wright's quotation of Wolfe: the sentence closes 'at an odd time', and continues that these odd words substitute for SF's usual neologistic invention. Attribution to The Castle of the Otter is on the page; the page does not itself date that book to 1982."
+  },
+  {
+   "index": 989,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a great deal of knowledge can be intuited",
+   "note": "Verbatim on the raw 'Cues' page. Wright names 'his interview with Larry McCaffery for Science-Fiction Studies' two sentences earlier and then quotes Wolfe; the page's full clause conditions on 'if you know something about the words people use', slightly tighter than the claim's 'from the words people use'. The page carries no date for the interview."
+  },
+  {
+   "index": 990,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the notion of recycling, of social, linguistic and creative exhaustion",
+   "note": "Verbatim on the raw 'Cues' page; the subject of 'conveys' is 'Wolfe's replacement of neologistic experimentation with archaic reappropriations', so the claim's 'archaic reappropriations' limb is the page's own phrase."
+  },
+  {
+   "index": 991,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "references function both deflectively and candidly",
+   "note": "Verbatim on the raw 'Cues' page; the full sentence begins 'Paradoxically, Wolfe's Classico-medieval references function both deflectively and candidly on this intuitive, allusionary level', which supports both the 'Classico-medieval' and the simultaneity ('at once') limbs."
+  },
+  {
+   "index": 992,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "willing to question their own literary assumptions, pause, reflect and reread",
+   "note": "Raw Cambridge Core 'A Solar Labyrinth' chapter page fetched live, HTTP 200; page range 'pp. 166 - 182' confirmed. Quote verbatim; the page says the text is organised to be 'understood, or at least appreciated, only by those readers who are willing to...', which the claim compresses to 'rewards only readers'. The page names The Urth Cycle in the next sentence, supporting the work limb."
+  }
+ ]
+}

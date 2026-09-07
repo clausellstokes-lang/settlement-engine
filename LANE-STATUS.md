@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 20:11:09 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 20:16:46 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MAT landing lands at six cars — two of O-13's three product flags light 
 
@@ -83,7 +83,7 @@ product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MA
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 00:55
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 14:42 · critic 09-06 15:04
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
-- **wolfe**: claims 978 · verdicts 933 (todo 45) · kept 571 · partial 90 · verdict files 48 (triage 1, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
+- **wolfe**: claims 993 · verdicts 993 (todo 0) · kept 629 · partial 92 · verdict files 52 (triage 1, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
@@ -92,7 +92,7 @@ KeyError: 'tag'
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session cc123b6c-1961-44c5-b071-c5e5aee7ee80 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_1326cde9-2e5: 35 journal lines, 20 agents
+- wf_1326cde9-2e5: 42 journal lines, 24 agents
 - wf_255b6391-7fb: 10 journal lines, 5 agents
 - wf_3a29e467-750: 1 journal lines, 1 agents
 - wf_3d71f708-fe3: 1 journal lines, 1 agents
@@ -101,4 +101,4 @@ KeyError: 'tag'
 - wf_e95fca37-bb5: 32 journal lines, 18 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.65 2.81 3.59
+load: 2.79 2.61 3.23

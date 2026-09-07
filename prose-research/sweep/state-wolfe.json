@@ -13537,6 +13537,231 @@
    "registerHint": "none",
    "confidence": "high",
    "angle": "primary-on-disk"
+  },
+  {
+   "index": 978,
+   "feature": "withheld information and inference",
+   "claim": "Wright asserts that Wolfe's fiction actively encourages misreadings by the reader.",
+   "source": "Peter Wright, Attending Daedalus: Gene Wolfe, Artifice and the Reader (Liverpool University Press, 2003), Preface, p. xi",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+   "quote": "it encourages misreadings, demands thoughtful reflection",
+   "page": "Preface, pp. xi-xii",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page (Liverpool UP title), fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 979,
+   "feature": "plainness and economy",
+   "claim": "Wright characterises Wolfe's fiction as densely allusive and conceptually elusive rather than plain.",
+   "source": "Peter Wright, Attending Daedalus (Liverpool University Press, 2003), Preface, p. xi",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+   "quote": "intricately wrought, densely allusive, and conceptually elusive",
+   "page": "Preface, pp. xi-xii",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 980,
+   "feature": "point of view and distance",
+   "claim": "Wright reports that the majority of critics who have approached Wolfe's work would call him ambiguous, subtle and playful.",
+   "source": "Peter Wright, Attending Daedalus (Liverpool University Press, 2003), Preface, p. xi",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+   "quote": "complex and wily writer, ambiguous, subtle and playful",
+   "page": "Preface, pp. xi-xii",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 981,
+   "feature": "other: critical neglect",
+   "claim": "Wright names Attending Daedalus as only the second book-length study of Wolfe's fiction.",
+   "source": "Peter Wright, Attending Daedalus (Liverpool University Press, 2003), Preface, p. xi",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+   "quote": "only the second book-length study of his fiction",
+   "page": "Preface, pp. xi-xii",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 982,
+   "feature": "register modulation",
+   "claim": "Wright characterises the prose of The Wizard Knight (2004) as spare.",
+   "source": "Peter Wright (ed.), Shadows of the New Sun: Wolfe on Writing/Writers on Wolfe (Liverpool University Press, 2007), Introduction, pp. 1-8",
+   "url": "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29D7A4CD8C40CAA72A62E",
+   "quote": "the spare prose of The Wizard Knight",
+   "page": "Introduction, pp. 1-8",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 983,
+   "feature": "register modulation",
+   "claim": "Wright characterises the prose of The Book of the New Sun (1980-83) as baroque in its richness.",
+   "source": "Peter Wright (ed.), Shadows of the New Sun (Liverpool University Press, 2007), Introduction, pp. 1-8",
+   "url": "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29D7A4CD8C40CAA72A62E",
+   "quote": "the baroque richness of The Book of the New Sun",
+   "page": "Introduction, pp. 1-8",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 984,
+   "feature": "per-speaker register",
+   "claim": "Wright asserts Wolfe's narrative versatility extends to narrating as a phantom haunting his own memories in Peace (1975).",
+   "source": "Peter Wright (ed.), Shadows of the New Sun (Liverpool University Press, 2007), Introduction, pp. 1-8",
+   "url": "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29D7A4CD8C40CAA72A62E",
+   "quote": "a phantom haunting his own memories in Peace",
+   "page": "Introduction, pp. 1-8",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 985,
+   "feature": "other: stylistic distinctness",
+   "claim": "Wright calls Wolfe's fiction among the most stylistically distinct imaginative fiction of recent years.",
+   "source": "Peter Wright (ed.), Shadows of the New Sun (Liverpool University Press, 2007), Introduction, pp. 1-8",
+   "url": "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29D7A4CD8C40CAA72A62E",
+   "quote": "most stylistically distinct, structurally complex and intellectually invigorating",
+   "page": "Introduction, pp. 1-8",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 986,
+   "feature": "archaism",
+   "claim": "Wright asserts that Wolfe's archaisms work as agents of estrangement that render Urth alien to the reader.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Cues: the function of unfamiliar diction', pp. 126-144",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "agents of estrangement to render the fictional Urth alien",
+   "page": "pp. 126-144",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 987,
+   "feature": "compounds and coinages",
+   "claim": "Wright reports that Wolfe disavows any fondness for coined 'gibberish', meaning neologisms.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Cues', p. 126, reporting The Castle of the Otter",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "Wolfe admits that he has no fondness for",
+   "page": "pp. 126-144",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 988,
+   "feature": "archaism",
+   "claim": "Wolfe's own stated reason for archaic vocabulary is to convey the flavour of an odd place at an odd time.",
+   "source": "Gene Wolfe, The Castle of the Otter (1982), quoted in Peter Wright, Attending Daedalus (2003), 'Cues'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "odd words to convey the flavour of an odd place",
+   "page": "pp. 126-144",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1982",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 989,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe told Larry McCaffery that a great deal of knowledge can be intuited from the words people use.",
+   "source": "Gene Wolfe, interview with Larry McCaffery for Science-Fiction Studies, quoted in Peter Wright, Attending Daedalus (2003), 'Cues'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "a great deal of knowledge can be intuited",
+   "page": "pp. 126-144",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1988",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 990,
+   "feature": "archaism",
+   "claim": "Wright asserts Wolfe's archaic reappropriations convey social, linguistic and creative exhaustion.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Cues', pp. 126-144",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "the notion of recycling, of social, linguistic and creative exhaustion",
+   "page": "pp. 126-144",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 991,
+   "feature": "archaism",
+   "claim": "Wright asserts Wolfe's Classico-medieval references operate both deflectively and candidly at once.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Cues', pp. 126-144",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/cues-the-function-of-unfamiliar-diction/3EBA78727C037096F69FE025BCB2F3AD",
+   "quote": "references function both deflectively and candidly",
+   "page": "pp. 126-144",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 992,
+   "feature": "withheld information and inference",
+   "claim": "Wright asserts Wolfe organises the Urth Cycle so that it rewards only readers willing to pause, reflect and reread.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Solar Labyrinth', pp. 166-182",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/solar-labyrinth-metafictional-devices-and-textual-complexity/49656CDCE0E04E7F80E4E4FE4FFC069C",
+   "quote": "pause, reflect and reread",
+   "page": "pp. 166-182",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
   }
  ],
  "sources": [
@@ -25315,6 +25540,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "829": {
+   "index": 829,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fall prey to a creeping sense of unreality",
+   "note": "Raw gwern HTML read. pg212, paragraph beginning 'And how do his friends and foes earn theirs?': Kafka's salesman need not be seen selling because the story is short, 'In a longer work we must, if the work is not to fall prey to...'. Quote exact; both limbs (must show characters earning a living; else unreality) supported.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
+  "830": {
+   "index": 830,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "virtually everyone is interesting at work",
+   "note": "pg212, paragraph beginning 'Neglecting this aspect of our characters'. Full sentence contrasts being interesting in bed with being interesting at work, and carries the 'even when the work itself is not' limb verbatim. Quote exact.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
   "831": {
    "index": 831,
    "verdict": "SKIPPED_TRIAGE",
@@ -25350,6 +25589,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "836": {
+   "index": 836,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "told in half a million words or so",
+   "note": "pg210, paragraph beginning 'Now we have reached the hard part'. Wolfe: keep in mind the overshadowing story is to be told in that many words; the next paragraph repeats 'half a million words will scarcely suffice'. Working size of the multivolume work confirmed.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
+  "837": {
+   "index": 837,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I AM GOING TO TELL YOU SOMETHING COOL",
+   "note": "pg212, setting paragraph: Wolfe reports once telling a beginner to put up a little sign facing his desk with those words, adding a multi-book work deserves a bigger sign. All limbs (a beginner, sign facing the desk, wording) exact.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
   "838": {
    "index": 838,
    "verdict": "SKIPPED_TRIAGE",
@@ -25363,6 +25616,27 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "840": {
+   "index": 840,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "For the manner, study the masters; for the matter",
+   "note": "Gwern PDF is a scan; the default text layer is column-scrambled, so extracted with pdftotext -raw -f 3 -l 3, which gives clean prose. Final paragraph continues 'touch none but your own.' Both limbs (manner from the masters, matter the writer's own) exact.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
+  "841": {
+   "index": 841,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Blood blacked with smoke's a good ink",
+   "note": "Same raw page-3 extraction; sentence completes 'but the blood must be yours, mind.' It is the penultimate sentence of the closing paragraph (the essay's last sentence is the Homer line at index 842), so 'closes the piece' means the closing valediction. Ink-of-smoke-blackened-blood and must-be-the-writer's-own both exact.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
+  "842": {
+   "index": 842,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Work hard, and recollect you'll be measured against Homer",
+   "note": "Same raw page-3 extraction; the essay's final sentence. Addressee is a would-be writer: the closing valediction reads 'You can point your feather with that sword'. PDF is 'The Ethos of Elfland', Twilight Zone Magazine, December 1987, pg32-35.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
   },
   "843": {
    "index": 843,
@@ -25385,12 +25659,61 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "846": {
+   "index": 846,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I write sequentially, and then go back and rewrite",
+   "note": "Raw .txt transcript. Wolfe's labelled reply 'Sequentially:' answers Robert's question about proceeding sequentially versus jumping around; the answer continues 'and then go back and rewrite, and so on...', supporting the 'rewrites repeatedly' and 'rather than out of order' limbs.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
+  "847": {
+   "index": 847,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I came to Nabokov somewhat late",
+   "note": "Raw .txt transcript. Wolfe's labelled reply 'Nabokov:' to Jude's question about Nabokov as an influence reads 'Yes, somewhat.' then the quote, then 'but the basic answer is yes.' Both limbs exact.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
+  "848": {
+   "index": 848,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Any personal connection with story, with myth, is lost",
+   "note": "Raw .txt transcript. davelant asked what is lost in life when people get all their stories 'from TV and such'; Wolfe's labelled reply 'Stories:' is the quote. The claim's 'television' is the page's 'TV'.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
   "849": {
    "index": 849,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "850": {
+   "index": 850,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the great guru of dialog",
+   "note": "Raw blog HTML stripped to text. Answer to 'favorite horror or dark fantasy writers': 'Neil Gaiman, of course. He's the master of the quirky idea and the...'. Quote exact; the claim's 'dialogue' is the page's 'dialog'.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
+  "851": {
+   "index": 851,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think I'd call the Soldier books historical fantasy",
+   "note": "Answer on current work: Wolfe is writing SOLDIER OF SIDON, 'a third novel about Latro', then the quote. Latro-Soldier identification and the historical-fantasy label both on the page.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
+  "852": {
+   "index": 852,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Or THE ELEMENTS OF STYLE?",
+   "note": "Answer on five books: after naming Bible, Rawlinson's Herodotus, Pope's Homer and a dictionary, Wolfe offers to furnish other titles and asks 'What about THE NATIONAL GEOGRAPHIC ATLAS OF THE WORLD?' then the quote. Atlas limb and further-titles limb both supported.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
+  "853": {
+   "index": 853,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Eight thirty to eleven is pretty typical",
+   "note": "Answer on an average work day: 'After that I write, usually until eleven.' then the quote. The post is headed '2005 interview I did with Gene Wolfe for Hellnotes', supporting the 2005 limb.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
   },
   "854": {
    "index": 854,
@@ -25427,6 +25750,41 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "859": {
+   "index": 859,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not subjective information but objective fact",
+   "note": "URL CORRECTION: the cited host middletownlibrary.org resets the TLS handshake on every route (browser UA, http, no-www, python, WebFetch) and has no Wayback capture. The real document is the same SFBC September 2020 interview at middletownpubliclib.org/wp-content/uploads/2020/09/Discussion-about-Gene-Wolfe.pdf, fetched as a PDF binary and extracted with pdftotext. In the answer to John Grayshaw's 'Was there anything in your research of Wolfe that surprised you?', on 'The Changeling': external verification and wordplay is characteristic of Wolfe, 'as it is...'. Quote exact; both limbs supported.",
+   "fromFile": "verdicts-wolfe-i829-859.json"
+  },
+  "860": {
+   "index": 860,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he is the ultimate engineer",
+   "note": "Source unreachable at the cited middletownlibrary.org URL (TLS connection reset on every client, no Wayback capture); the identical PDF -- 'Science Fiction Book Club Interview with Marc Aramini (September 2020)' -- was fetched raw at https://middletownpubliclib.org/wp-content/uploads/2020/09/Discussion-about-Gene-Wolfe.pdf and text-extracted with pdftotext. In the answer to John Grayshaw's question 'What makes Wolfe interesting from a critical perspective?': Aramini says Wolfe's control over the text and profound structures suggest he is the furthest thing from a 'deconstructive' author, then the quoted phrase. Both limbs supported.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
+  "861": {
+   "index": 861,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe frequently changed his style and worked in multiple genres",
+   "note": "Source unreachable at the cited middletownlibrary.org URL (TLS connection reset on every client, no Wayback capture); the identical PDF -- 'Science Fiction Book Club Interview with Marc Aramini (September 2020)' -- was fetched raw at https://middletownpubliclib.org/wp-content/uploads/2020/09/Discussion-about-Gene-Wolfe.pdf and text-extracted with pdftotext. Verbatim in the opening sentence of the answer to Marina Akushskaya ('Where should I start?'), continuing 'sometimes blurring those lines'.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
+  "862": {
+   "index": 862,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "banter of Vance's rogues certainly informs some of the vocabulary choices",
+   "note": "Source unreachable at the cited middletownlibrary.org URL (TLS connection reset on every client, no Wayback capture); the identical PDF -- 'Science Fiction Book Club Interview with Marc Aramini (September 2020)' -- was fetched raw at https://middletownpubliclib.org/wp-content/uploads/2020/09/Discussion-about-Gene-Wolfe.pdf and text-extracted with pdftotext. In the answer to Anastasia Hilvers. The page reads 'the erudite banter of Vance's rogues' (the claim's quote is an exact substring up to the possessive); the sentence before names Jack Vance's influence on Wolfe's Book of the New Sun, and the target of the influence is written as 'Wolfe's most famous work'. All limbs supported.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
+  "863": {
+   "index": 863,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He learned Greek for the Latro books, read original sources",
+   "note": "Source unreachable at the cited middletownlibrary.org URL (TLS connection reset on every client, no Wayback capture); the identical PDF -- 'Science Fiction Book Club Interview with Marc Aramini (September 2020)' -- was fetched raw at https://middletownpubliclib.org/wp-content/uploads/2020/09/Discussion-about-Gene-Wolfe.pdf and text-extracted with pdftotext. Verbatim in the answer to John Grayshaw's 'What kind of research did Wolfe do for his books?', which opens 'Exhaustive, until his vision failed!'",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
   "864": {
    "index": 864,
    "verdict": "SKIPPED_TRIAGE",
@@ -25441,12 +25799,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "866": {
+   "index": 866,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the way that allegory is embedded changes from story to story",
+   "note": "Source unreachable at the cited middletownlibrary.org URL (TLS connection reset on every client, no Wayback capture); the identical PDF -- 'Science Fiction Book Club Interview with Marc Aramini (September 2020)' -- was fetched raw at https://middletownpubliclib.org/wp-content/uploads/2020/09/Discussion-about-Gene-Wolfe.pdf and text-extracted with pdftotext. Closing sentence of the answer to Craig Brewer's Long/Short Sun question, prefaced by the statement that Wolfe is always writing allegorically. Verbatim.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
   "867": {
    "index": 867,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "868": {
+   "index": 868,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "keep wanting Wolfe to return to the elegant and baroque style",
+   "note": "Raw page fetched from lareviewofbooks.org (HTTP 200). Third body paragraph (the one beginning 'This is not at all the novel I had imagined'). The sentence names all three works with dates and ends 'but he doesn't want to', and the next sentence says his style has become more spare. Both limbs supported.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
   },
   "869": {
    "index": 869,
@@ -25475,6 +25847,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "873": {
+   "index": 873,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Cultures are like people, it seems",
+   "note": "Raw LARB page. In the paragraph on libraries and archives ('The reclone of Smithe is an archive...'), Gordon quotes the narrator Smithe, 'in the literary voice of his originary writer', on books; the quoted line continues 'Sure, they get old and die; but sometimes they die even when they are not very old at all.' Attribution to Wolfe's narrator and the cultures-die-like-people sense are both on the page; 'plain aphorism' is a description of the quoted sentence's own form, not Gordon's wording.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
+  "874": {
+   "index": 874,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a passage that evokes the style of The Book",
+   "note": "Raw LARB page, penultimate body paragraph ('That is how Wolfe portrays the \"New America\"...'). Gordon writes that in a few places the beautiful language of the earlier work appears briefly, then: Smithe opens a book he had written 13 years before he died to read a passage that evokes the style of The Book of the New Sun, quoting it and calling it a reminder of the Library of Ultan. All limbs supported.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
   },
   "875": {
    "index": 875,
@@ -25539,6 +25925,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "884": {
+   "index": 884,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he keeps trying new ways of writing",
+   "note": "Raw Guardian page fetched (HTTP 200). Final paragraph of the piece: 'He's my hero because he keeps trying new ways of writing and because he remains as kind and as patient with me...'. Verbatim, and in the final paragraph as cited.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
   "885": {
    "index": 885,
    "verdict": "SKIPPED_TRIAGE",
@@ -25560,12 +25953,47 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "888": {
+   "index": 888,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe shifts his pacing everywhere in his stories very freely",
+   "note": "Raw Wayback capture (20201116152809id_) of nyrsf.com fetched successfully. In the paragraph beginning 'The acceleration of the slingshot ending is a matter of pacing'; the sentence continues 'creating wonderful, rhythmic effects in the flow of the telling'. Verbatim.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
+  "889": {
+   "index": 889,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no telling if it will cover a second or a year",
+   "note": "Same raw Wayback capture, same pacing paragraph: 'Just as there is no knowing what the content of the next sentence is going to be, there is also no telling if it will cover a second or a year or stand outside time entirely.' Verbatim; the page adds the further option of standing outside time, which the claim does not contradict.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
+  "890": {
+   "index": 890,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "written entirely at the same pace, either plodding or frenetic",
+   "note": "Same raw capture, same pacing paragraph: 'What joy, after the too many volumes written entirely at the same pace, either plodding or frenetic but in any case ever so predictable and painful to one's urge to flow or bop.' Verbatim; the fault-finding and the predictability limb are both explicit.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
+  "891": {
+   "index": 891,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one falls on Wolfe's pages as on music after a metronome",
+   "note": "Same raw capture, closing sentence of the pacing paragraph, immediately after the sentence about volumes written entirely at the same pace. Verbatim.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
   "892": {
    "index": 892,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "893": {
+   "index": 893,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "syntax, sensibility, precision, and analytical power reminiscent of Proust",
+   "note": "Same raw capture, in the Proust discussion (paragraph ending the Fifth Head / Number Five naming anecdote). Robinson describes the moment Wolfe 'spoke in a voice he would use often afterward, a characteristic Wolfe style', in which those qualities 'are set on the clones, robots, six-armed monsters, and all the rest of the matter of his beloved pulp tradition'. Verbatim; the mature-voice and pulp-material limbs are both supported.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
   },
   "894": {
    "index": 894,
@@ -25581,12 +26009,54 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "896": {
+   "index": 896,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stories usually are not allegories but events in themselves",
+   "note": "Same raw capture, in the allegory discussion: 'This doesn't seem to be Wolfe's method. His stories usually are not allegories but events in themselves, something like dreams or vases.' Verbatim.",
+   "fromFile": "verdicts-wolfe-i860-896.json"
+  },
+  "897": {
+   "index": 897,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most of these stories mean whatever the text of the story is",
+   "note": "Raw Wayback capture of NYRSF fetched and read. Sentence appears verbatim in the allegory paragraph, opening 'So most of these stories...'. Byline 'A Story' / Kim Stanley Robinson, dated 09/06/2013, NYRSF issue 301 (Sept 2013) - all attribution limbs confirmed on the page.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
+  "898": {
+   "index": 898,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "catechisms, interrogations, examinations, Socratic dialogues, classroom lessons",
+   "note": "Verbatim in the question-and-answer paragraph; the list continues 'badgering sessions, and many other forms'. The 'set-piece dialogue' limb is supported by the very next sentence, which names 'this tendency for set piece dialogue'.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
   "899": {
    "index": 899,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "900": {
+   "index": 900,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pastiches of anthropological reports, fairy tales, aboriginal tales",
+   "note": "Verbatim in the pastiche paragraph. Robinson does not himself sort the list into fiction/non-fiction, but anthropological reports are listed and the same list carries other non-fiction forms (movie reviews, hunting articles), so the claim's 'non-fiction forms' reading holds on the page.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
+  "901": {
+   "index": 901,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "had a sentimental idea, he chose a sentimental style",
+   "note": "Verbatim, same pastiche paragraph: Robinson reports 'He once told me that since \"Our Neighbor, by David Copperfield\"' had a sentimental idea, he chose a sentimental style. Reported-speech limb ('Wolfe telling him') confirmed.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
+  "902": {
+   "index": 902,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "identified as a fiction written by a minor character",
+   "note": "Verbatim in the story-suite paragraph, which opens 'Another suite is made by the three novellas in The Fifth Head of Cerberus'; the clause ends 'in the first story'. Every limb on the page.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
   },
   "903": {
    "index": 903,
@@ -25608,6 +26078,14 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "906": {
+   "index": 906,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'than most fantasies do' - the comment reads 'than a lot of fantasies', a weaker comparison class",
+   "trueWording": "they give more clues to the world around the reader",
+   "note": "Live Lorehaven page fetched with a browser UA; comment thread present in the raw HTML. Matt Mikalatos, reply opening 'Hey Becky', timestamped March 15, 2013 at 11:24 pm (the claim's source line says 16 March - one day off, probably timezone). He writes of 'the obscure language and things'; the quotation is verbatim except that the page's comparison is 'a lot of fantasies', not 'most'.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
   },
   "907": {
    "index": 907,
@@ -25714,6 +26192,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "922": {
+   "index": 922,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "By framing the text as translation... language and its reliability",
+   "note": "ultan.org.uk fetched live. Section 'Who Writes?' In the same section Crampton writes of manuscripts Wolfe 'merely \"edits\" or \"translates\"' and of two writings 'supposedly translated by Wolfe'. The page's exact formulation is 'pointing to the question of language and its reliability'; the claim compresses this to 'the reliability of language', which is the same move.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
+  "923": {
+   "index": 923,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we are warned against possible errors of translation in the preface",
+   "note": "Verbatim in section 'Who Writes?', the clause closing 'to Soldier of the Mist'. Article bylined Jeremy Crampton, dated 10 August 2000, with an afterword saying it was written in the late 1980s (c.1988) - both source limbs confirmed.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
   "924": {
    "index": 924,
    "verdict": "SKIPPED_TRIAGE",
@@ -25748,6 +26240,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "929": {
+   "index": 929,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ranging from cleanliness and love of order to courage",
+   "note": "Verbatim under the heading 'Loyalty and \"Arete\"'. Crampton introduces it as Wolfe's own definition and cites it to (Arete, Glossary); the entry opens 'the virtues of a soldier' and closes on courage in the face of death, so the claimed range is exact.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
+  "930": {
+   "index": 930,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one knows what the words mean, that they actually mean it",
+   "note": "Verbatim in section 'Who Writes?'; Crampton's quotation runs on '...and that they cannot ever mean anything else. All of which is seldom true'. Its footnote 9 is Gene Wolfe [untitled] in R. Jackson (ed.), Frontier Crossings, Conspiracy '87, 1987, p.119 - the claim's citation limb confirmed on the page.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
   },
   "931": {
    "index": 931,
@@ -25784,6 +26290,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "936": {
+   "index": 936,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "can be read by an educated reader, and reread with increased pleasure",
+   "note": "gwern PDF fetched and text-extracted (6 pages). On printed p.82 (PDF p.4) Gaiman says he has used the line 'ever since I read it in a letter where you defined good literature', then quotes Wolfe's definition verbatim. Letter, quoted-back-by-Gaiman and definition limbs all on the page. Issue confirmed as Locus 500, September 2002 ('This is Issue 500').",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
   "937": {
    "index": 937,
    "verdict": "SKIPPED_TRIAGE",
@@ -25805,6 +26318,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
   },
+  "940": {
+   "index": 940,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The second novella is a story told by one of the characters",
+   "note": "Printed p.81 (PDF p.3), GW speaking of The Fifth Head of Cerberus after Gaiman's 'Those three stories interweave': 'A lot of readers consider it a sort of three-part novel', then the quoted sentence, ending 'in the third novella, and so on'. Every limb supported.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
+  "941": {
+   "index": 941,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it assures the reader that things need not be as they are",
+   "note": "Printed p.82, both in the body and as the page's pull-quote. Gaiman asks 'What's the most important thing about fiction?'; Wolfe answers with the quoted sentence, ending 'as they are now. In other words, the most important thing is hope.'",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
+  "942": {
+   "index": 942,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Remember, I was a journalist on an industrial magazine, Plant Engineering",
+   "note": "Printed p.82, GW, continuing 'I've been in a ton of industrial plants' and describing plants 'right out of Dante' and a rubber tire plant. Gaiman's next question, 'To what extent does that stuff wind up in the fiction?', draws 'You can't help drawing upon yourself... transmute them into a coherent story', supporting the grounding limb; the issue's own bio gives the span (Plant Engineering, 1972-84), supporting 'years'.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  },
   "943": {
    "index": 943,
    "verdict": "SKIPPED_TRIAGE",
@@ -25818,6 +26352,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-wolfe-triage-r7.json"
+  },
+  "945": {
+   "index": 945,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's very tempting to define terms, put your own prejudices in",
+   "note": "Printed p.7 (PDF p.2), GW, in the exchange about dictionaries and guidebooks; the sentence ends 'as Samuel Johnson did' and is preceded by 'Ambrose Bierce was the original guy in that area'. Quotation and both limbs verbatim on the page.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
   },
   "946": {
    "index": 946,
@@ -26042,6 +26583,112 @@
    "trueWording": "If I'm not having fun, it's not going to be fun",
    "note": "Raw HTML of the live locusmag.com page, first excerpt, opening sentence of the excerpt block. The sentence names the reader as the one who then loses the fun, and Wolfe extends the point to workshops. Quote matches word for word bar curly apostrophes.",
    "fromFile": "verdicts-wolfe-i947-977.json"
+  },
+  "978": {
+   "index": 978,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it encourages misreadings, demands thoughtful reflection",
+   "note": "Raw Cambridge Core Preface page (pp. xi-xii summary) fetched live, HTTP 200, browser UA. Quote contiguous and verbatim in the sentence beginning 'His fiction is intricately wrought...'. 'By the reader' is carried by the same sentence's continuation about involving the reader in interpretation; 'actively' is the claim's intensifier, not Wright's word, but adds no content.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "979": {
+   "index": 979,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'rather than plain' — the page never opposes these qualities to plainness, and Wright elsewhere calls The Wizard Knight's prose spare",
+   "trueWording": "intricately wrought, densely allusive, and conceptually elusive",
+   "note": "Quote verbatim on the raw Preface page. The positive characterisation is fully supported, but the contrast with plainness is the claim's own gloss: dense allusion and conceptual elusiveness are not sentence-level plainness, and the same critic's Shadows introduction (index 982) calls Wolfe's Wizard Knight prose spare. Do not cite this as Wright denying plainness of style.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "980": {
+   "index": 980,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "complex and wily writer, ambiguous, subtle and playful",
+   "note": "Verbatim on the raw Preface page, introduced by 'as the majority of critics and reviewers who have approached his oeuvre would admit'. Claim's 'critics' narrows the page's 'critics and reviewers'; 'would call him' matches the page's 'would admit'.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "981": {
+   "index": 981,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only the second book-length study of his fiction",
+   "note": "Verbatim on the raw Preface page; 'this' in the sentence is the present volume, Attending Daedalus, and the page continues 'and the first to address any material published after 1983'. Page range 'pp. xi - xii' confirmed on the same page.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "982": {
+   "index": 982,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the spare prose of The Wizard Knight",
+   "note": "Raw Cambridge Core Introduction page for Shadows of the New Sun fetched live, HTTP 200. Quote verbatim, with '(2004)' following, inside the stylistic-ingenuity contrast. Page range 'pp. 1 - 8' confirmed on the page.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "983": {
+   "index": 983,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the baroque richness of The Book of the New Sun",
+   "note": "Verbatim on the raw Introduction page, with '(1980-83)' following. The sentence frames it as a prose contrast ('his stylistic ingenuity - demonstrated, for example, in the contrast between the spare prose of The Wizard Knight and...'), so the claim's 'prose' limb is supported.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "984": {
+   "index": 984,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a phantom haunting his own memories in Peace",
+   "note": "Verbatim on the raw Introduction page, with '(1975)' following, inside the parenthesis illustrating 'his notable narrative versatility' (the other pole being narrating as a high school girl in Pandora by Holly Hollander).",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "985": {
+   "index": 985,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most stylistically distinct, structurally complex and intellectually invigorating",
+   "note": "Verbatim on the raw Introduction page; the full sentence reads 'he remains the author of some of the most ... imaginative fiction of recent years', so the claim's 'among' and 'imaginative fiction of recent years' limbs both hold.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "986": {
+   "index": 986,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "agents of estrangement to render the fictional Urth alien",
+   "note": "Raw Cambridge Core 'Cues' chapter page fetched live, HTTP 200; page range 'pp. 126 - 144' confirmed. Quote verbatim; the sentence adds the irony that the archaisms 'function as neologisms', and continues that they may be as much gibberish 'to the reader', supporting the reader limb.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "987": {
+   "index": 987,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he has no fondness for 'gibberish' (by which he means neologisms)",
+   "note": "The claim's short quote 'Wolfe admits that he has no fondness for' is contiguous and verbatim on the raw 'Cues' page; the parenthetical gloss 'by which he means neologisms' is Wright's own, and the sentence attributes the admission to The Castle of the Otter, matching the claim's source line.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "988": {
+   "index": 988,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "used odd words to convey the flavour of an odd place",
+   "note": "Verbatim on the raw 'Cues' page, inside Wright's quotation of Wolfe: the sentence closes 'at an odd time', and continues that these odd words substitute for SF's usual neologistic invention. Attribution to The Castle of the Otter is on the page; the page does not itself date that book to 1982.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "989": {
+   "index": 989,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a great deal of knowledge can be intuited",
+   "note": "Verbatim on the raw 'Cues' page. Wright names 'his interview with Larry McCaffery for Science-Fiction Studies' two sentences earlier and then quotes Wolfe; the page's full clause conditions on 'if you know something about the words people use', slightly tighter than the claim's 'from the words people use'. The page carries no date for the interview.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "990": {
+   "index": 990,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the notion of recycling, of social, linguistic and creative exhaustion",
+   "note": "Verbatim on the raw 'Cues' page; the subject of 'conveys' is 'Wolfe's replacement of neologistic experimentation with archaic reappropriations', so the claim's 'archaic reappropriations' limb is the page's own phrase.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "991": {
+   "index": 991,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "references function both deflectively and candidly",
+   "note": "Verbatim on the raw 'Cues' page; the full sentence begins 'Paradoxically, Wolfe's Classico-medieval references function both deflectively and candidly on this intuitive, allusionary level', which supports both the 'Classico-medieval' and the simultaneity ('at once') limbs.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  },
+  "992": {
+   "index": 992,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "willing to question their own literary assumptions, pause, reflect and reread",
+   "note": "Raw Cambridge Core 'A Solar Labyrinth' chapter page fetched live, HTTP 200; page range 'pp. 166 - 182' confirmed. Quote verbatim; the page says the text is organised to be 'understood, or at least appreciated, only by those readers who are willing to...', which the claim compresses to 'rewards only readers'. The page names The Urth Cycle in the next sentence, supporting the work limb.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
   }
  },
  "assembledFrom": [

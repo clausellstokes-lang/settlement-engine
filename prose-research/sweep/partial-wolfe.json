@@ -1972,5 +1972,52 @@
    "unsupportedLimb": "that Hassler himself credits Wolfe with it - the phrase sits inside his report of Baird Searles' objection, not in his own assertion",
    "fromFile": "verdicts-wolfe-i787-825.json"
   }
+ },
+ {
+  "index": 906,
+  "feature": "compounds and coinages",
+  "claim": "Mikalatos argues Wolfe's obscure vocabulary gives the reader more clues to the surrounding world than most fantasies do.",
+  "source": "Matt Mikalatos, Speculative Faith / Lorehaven, comment 16 March 2013",
+  "url": "https://lorehaven.com/speculativefaith/a-brief-introduction-to-gene-wolfe-my-favorite-contemporary-author/",
+  "quote": "they give more clues to the world around the reader",
+  "page": "comment reply to Becky",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2013-03-16",
+  "routeHint": "already on disk",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "primary-on-disk",
+  "verdict": {
+   "index": 906,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'than most fantasies do' - the comment reads 'than a lot of fantasies', a weaker comparison class",
+   "trueWording": "they give more clues to the world around the reader",
+   "note": "Live Lorehaven page fetched with a browser UA; comment thread present in the raw HTML. Matt Mikalatos, reply opening 'Hey Becky', timestamped March 15, 2013 at 11:24 pm (the claim's source line says 16 March - one day off, probably timezone). He writes of 'the obscure language and things'; the quotation is verbatim except that the page's comparison is 'a lot of fantasies', not 'most'.",
+   "fromFile": "verdicts-wolfe-i897-945.json"
+  }
+ },
+ {
+  "index": 979,
+  "feature": "plainness and economy",
+  "claim": "Wright characterises Wolfe's fiction as densely allusive and conceptually elusive rather than plain.",
+  "source": "Peter Wright, Attending Daedalus (Liverpool University Press, 2003), Preface, p. xi",
+  "url": "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+  "quote": "intricately wrought, densely allusive, and conceptually elusive",
+  "page": "Preface, pp. xi-xii",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2003",
+  "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 979,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'rather than plain' — the page never opposes these qualities to plainness, and Wright elsewhere calls The Wizard Knight's prose spare",
+   "trueWording": "intricately wrought, densely allusive, and conceptually elusive",
+   "note": "Quote verbatim on the raw Preface page. The positive characterisation is fully supported, but the contrast with plainness is the claim's own gloss: dense allusion and conceptual elusiveness are not sentence-level plainness, and the same critic's Shadows introduction (index 982) calls Wolfe's Wizard Knight prose spare. Do not cite this as Wright denying plainness of style.",
+   "fromFile": "verdicts-wolfe-i978-992.json"
+  }
  }
 ]
