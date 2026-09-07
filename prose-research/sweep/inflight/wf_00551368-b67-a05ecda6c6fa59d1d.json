@@ -3,14 +3,14 @@
  "name": "ai",
  "angle": "arch-biographical-record",
  "tag": null,
- "lines": 227,
+ "lines": 329,
  "firstTs": "2026-09-07T02:56:37.991Z",
- "lastTs": "2026-09-07T03:09:54.534Z",
+ "lastTs": "2026-09-07T03:16:13.299Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 49,
-  "WebSearch": 11
+  "Bash": 71,
+  "WebSearch": 18
  },
  "urlsFetched": [
   "https://www.theverge.com/2024/2/13/24067157/ai-obituary-spam-generative-clickbait",
@@ -50,7 +50,18 @@
   "https://vitabrevis.americanancestors.org/-ai-in-genealogical-research",
   "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
   "https://familylocket.com/can-chatgpt-help-with-genealogy-citations/",
-  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing"
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "https://www.poynter.org/commentary/2023/artificial-intelligence-obituary-brandon-hunter-useless/|poynter",
+  "https://futurism.com/msn-ai-brandon-hunter-useless|futurism",
+  "https://news.findagrave.com/2021/12/02/avoiding-sensitive-information-in-bios/|fag-bios",
+  "https://arxiv.org/abs/2305.14251",
+  "https://arxiv.org/pdf/2305.14251",
+  "https://bcgcertification.org/bcg-ai-portfolio",
+  "https://futurism.com/funeral-homes-chatgpt-obituaries",
+  "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
+  "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "https://archive.ph/newest/https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "https://web.archive.org/web/20250804135306id_/https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -60,8 +71,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-biographical-record.json",
-  "claims": 19,
+  "claims": 53,
   "complete": false,
-  "mtime": "23:04:55"
+  "mtime": "23:11:53"
  }
 }

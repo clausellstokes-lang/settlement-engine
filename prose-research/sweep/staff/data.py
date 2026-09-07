@@ -162,3 +162,12 @@ claims += [
  {"feature":"annalist voice and deep time","claim":"Perkins and Bilsland hold that an adventure is about the here and now, and that the less history it carries the better.","source":"Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 4","url":ADG,"quote":"An adventure is about the here and now.","page":"General Principles, 4","kind":"own-words","polarity":"asserts","date":"pre-2019","routeHint":"curl PDF, pypdf extraction","registerHint":"dossier-archivist","confidence":"high"},
  {"feature":"edition and house style","claim":"The Perkins and Bilsland guide sends writers to the Chicago Manual of Style, 16th edition, and to the D&D House Style Guide for grammar and punctuation.","source":"Chris Perkins and Greg Bilsland, Writing Adventures, closing line","url":ADG,"quote":"The Chicago Manual of Style (16th edition) and the","page":"closing line","kind":"own-words","polarity":"asserts","date":"pre-2019","routeHint":"curl PDF, pypdf extraction","registerHint":"none","confidence":"high"},
 ]
+
+MV="https://mimir.net/chant/an-interview-with-ray-and-val-vallese/"
+sources += [
+ {"title":"An Interview with Ray and Val Vallese (Planescape: I am the Mimir)","url":MV,"kind":"own-words","substantive":True,"date":"1999","route":"curl with browser user agent"},
+]
+claims += [
+ {"feature":"plainness and economy","claim":"Ray Vallese says RPG supplements are supposed to focus on communicating the basic information rather than dazzling the audience with clever prose.","source":"Ray Vallese, TSR Planescape editor, interviewed at Planescape: I am the Mimir, 1999","url":MV,"quote":"communicating the basic info and less on dazzling the audience","page":"answer comparing the novel to supplements","kind":"own-words","polarity":"asserts","date":"1999","routeHint":"curl with browser user agent","registerHint":"dossier-archivist","confidence":"high"},
+ {"feature":"register modulation","claim":"Vallese qualifies that rule for the Planescape line, saying many people have remarked they bought Planescape products just to read them.","source":"Ray Vallese, TSR Planescape editor, interviewed at Planescape: I am the Mimir, 1999","url":MV,"quote":"purchased PS products just to read them","page":"answer comparing the novel to supplements","kind":"own-words","polarity":"asserts","date":"1999","routeHint":"curl with browser user agent","registerHint":"none","confidence":"high"},
+]

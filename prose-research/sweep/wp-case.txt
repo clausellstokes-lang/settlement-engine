@@ -1,0 +1,1307 @@
+
+Wikipedia:Case against LLM-generated articles - Wikipedia
+Jump to content
+Main menu
+Main menu
+move to sidebar
+hide
+ Navigation
+Main page
+Contents
+Current events
+Random article
+About Wikipedia
+Contact us
+ Contribute
+Help
+Learn to edit
+Community portal
+Recent changes
+Upload file
+Special pages
+Search
+Search
+Appearance
+Donate
+Create account
+Log in
+Personal tools
+Donate
+Create account
+Log in
+Contents
+move to sidebar
+hide
+(Top)
+1
+Risks of hallucinated content
+2
+The verifiability crisis
+3
+Undermining the editorial ecosystem
+4
+Case studies and hypothetical failures
+5
+Conclusion: Preserving Wikipedia's integrity
+6
+In all seriousness
+7
+See also
+8
+References that definitely 100% exist (well, some of them actually do)
+Toggle the table of contents
+Wikipedia
+:
+Case against LLM-generated articles
+Add languages
+Add links
+Project page
+Talk
+English
+Read
+Edit
+View history
+Tools
+Tools
+move to sidebar
+hide
+ Actions
+Read
+Edit
+View history
+ General
+What links here
+Related changes
+Upload file
+Permanent link
+Page information
+Get shortened URL
+Switch to legacy parser
+ Print/export
+Download as PDF
+Printable version
+ In other projects
+Appearance
+move to sidebar
+hide
+contains material which is considered humorous</b>. It may also contain advice."}' id="mwAds">
+From Wikipedia, the free encyclopedia
+Humorous Wikipedia essay
+This is a humorous 
+essay
+.
+It contains 
+humorous
+ advice or opinions of one or more Wikipedia contributors and isn't meant to be taken seriously. This is not an encyclopedia article or one of 
+Wikipedia's policies or guidelines
+ and may not represent 
+community consensus
+.
+Shortcut
+WP:NOAI
+WP:NOAI
+In the age of 
+large language models
+ (LLMs) like 
+ChatGPT
+, it might be tempting to use these tools to rapidly generate Wikipedia articles. Their fluent prose and speedy output present an alluring shortcut. However, the Wikipedia editing community is overwhelmingly 
+opposed
+ to letting LLMs write our content. The reason is simple: such AI-generated text threatens the core principles that make Wikipedia reliable. We have seen that asking an LLM to "write a Wikipedia article" can produce 
+outright fabrication
+, complete with 
+fictitious reference
+s
+.
+ From factual inaccuracies that readers might never catch to citations that lead nowhere, LLM-created content poses risks Wikipedia cannot afford. This essay outlines the community’s firm concerns – 
+factual inaccuracy and 
+hallucinations
+, unverifiable sourcing and fake citations, damage to the collaborative editing model, and long-term erosion of content integrity
+ – and argues that Wikipedia must remain a human-driven project grounded in verifiable truth.
+Risks of hallucinated content
+[
+edit
+]
+One of the most alarming issues with AI-generated text is the tendency of LLMs to "hallucinate" – to fabricate information that sounds plausible but is entirely false. By design, an LLM predicts words based on patterns, not on an understanding of facts.
+[
+1
+]
+ This means an LLM will sometimes produce content that 
+reads
+ convincingly but has no basis in reality. It might even invent details when faced with a prompt on an obscure topic or a nonsensical request. For example, in one trial an LLM confidently described the habits of a completely 
+fictitious animal
+ as if it were real, blending real-sounding facts into a coherent but false narrative.
+[
+2
+]
+ The 
+entire statement was false
+, yet it was delivered authoritatively – a clear illustration of how AI can offer 
+convincing lies with a confident tone
+.
+[
+3
+]
+Such hallucinated content isn’t just a theoretical edge case; it’s a practical nightmare for Wikipedia. Even if 
+90% of an AI-generated article is correct and 10% is false, that 10% is a huge problem in an encyclopedia
+. Wikipedia’s reputation hinges on accuracy. One subtly false claim or distorted quote can misinform readers and damage trust. LLMs have no sense of responsibility or context – they’ll cheerfully generate an "article" about the health benefits of eating crushed glass if asked. They might also incorporate hidden biases or defamatory assertions without realizing it. In short, hallucinations from LLMs introduce outright falsehoods into what should be a repository of verified knowledge. Wikipedia editors view this as an unacceptable risk. The community has long held that 
+verifiability, not truth
+ (in other words, verifiable evidence over unsupported claims) is non-negotiable. Content that "sounds true" is worthless to Wikipedia if it can’t be verified or if it’s simply concocted by an algorithm.
+The verifiability crisis
+[
+edit
+]
+Wikipedia’s bedrock principle of 
+verifiability
+ requires that material be backed by 
+reliable
+, published sources that readers can check. Every fact on Wikipedia should be attributable; if it isn’t attributable, it doesn’t belong. Here lies a fundamental conflict with LLM-generated content: LLMs often do 
+not
+ follow this principle. They might output paragraphs with no citations at all, or cite 
+unreliable sources
+, or even cite 
+sources that don’t exist
+.
+[
+4
+]
+ Indeed, in many observed cases, LLMs have produced 
+academic-sounding references that are completely fabricated
+.
+[
+5
+]
+ A human editor might spend hours searching for a cited journal article or book, only to discover it was never real. Wikipedia’s verifiability policy is clear that readers 
+"must be able to check that any of the information... is not just made up"
+ – but with AI hallucinations, the information 
+is
+ made up, and no real source exists to support it.
+This problem has already manifested in experiments. Wikipedia editors who have tested LLMs report that these tools tend to sprinkle in references that 
+look plausible but are bogus
+. In one analysis, researchers found an AI-written draft of a historical article included seven references – and 
+five of those were fabricated
+.
+[
+5
+]
+ The citations 
+appeared
+ credible, naming reputable journals and authors, but on closer inspection they led nowhere. Such fake citations are more insidious than an obvious "
+citation needed
+" tag; they give a false impression of 
+credibility
+, undermining the reader’s ability to trust Wikipedia. Even outside Wikipedia, hallucinated citations have caused scandals – for instance, legal briefs and academic papers generated by AI have cited cases and articles that don’t exist.
+[
+5
+]
+ For Wikipedia, this is a verifiability crisis: content backed by phantom sources is 
+worse
+ than unsourced content, because it actively misleads. It violates the core policy that all challenged material 
+must be supported by inline citations to reliable sources
+. If an AI tool cannot guarantee genuine, checkable sources, it has no place writing our articles. The community’s stance is that every sentence added to Wikipedia needs human 
+verification
+ against real, 
+reliable sources
+ – a standard an LLM cannot meet on its own.
+[
+6
+]
+Undermining the editorial ecosystem
+[
+edit
+]
+Letting an AI write an article is like asking these robots to plow that field, but worse. You wouldn't do that, would you?
+Beyond the immediate content issues, using LLMs to generate articles poses a serious threat to Wikipedia’s collaborative editing ecosystem. The site thrives on a 
+community of volunteers
+ who write, 
+fact-check
+, and refine articles through 
+consensus
+ and 
+debate
+. Introducing masses of machine-generated text upends this model in several ways.
+First, it creates an overwhelming 
+maintenance burden
+ on human editors. Wikipedia’s volunteers have limited time and energy. If they must sift through AI-produced drafts line-by-line to weed out errors, or chase down phantom references, it turns editing into a chore of cleanup rather than a process of building knowledge. As one community essay notes, Wikipedia operates on an informal social contract: editors put significant effort into their contributions so that others 
+"do not need to clean up after them"
+. LLM-generated content shatters that contract. Poorly vetted AI text 
+increases the maintenance burden on other volunteers
+, effectively asking humans to become janitors for machine output. This is not why people volunteer for Wikipedia, and it’s not sustainable. Indeed, editors have reported feeling 
+"flooded non-stop with horrendous drafts"
+ created by AI, full of mistakes that require significant time to fix. One experienced editor described many AI-written drafts as containing 
+"lies and fake references"
+ that demand painstaking correction.
+[
+7
+]
+ This tsunami of low-quality content isn’t just annoying – it threatens to 
+overwhelm
+ the quality control processes that keep Wikipedia reliable.
+Second, over-reliance on LLM content could 
+erode the culture of collaboration
+. Wikipedia is built by people discussing and reasoning together. An AI cannot participate in talk page debates, cannot understand nuance, and cannot exercise judgment about neutrality or due weight of a topic. If editors start deferring to AI-generated text, the role of human deliberation diminishes. There is also a risk of mistrust and social disruption: editors may grow suspicious of each other’s contributions ("Was this written by a bot?"), making 
+good-faith
+ collaboration harder. Already, the community has felt the need to develop 
+guides for spotting AI-generated writing
+ and even a dedicated 
+WikiProject AI Cleanup
+ to coordinate the identification and removal of AI content.
+[
+7
+]
+ While these efforts demonstrate commendable vigilance, they also reveal a worrying shift – volunteer time that used to go towards improving content is now spent on 
+policing AI-generated additions
+. Seasoned editors now have to train newcomers on how to recognize the telltale signs of "AI slop" (unnatural phrasing, excessive formality, oddly formatted citations, etc.)
+[
+8
+]
+ rather than on how to research and write well.
+[
+9
+]
+[
+7
+]
+ This is an 
+opportunity cost
+: every hour spent fighting AI-generated nonsense is an hour not spent writing a featured article or reviewing actual sourced content.
+The 
+human cost
+ of this fight is real. Longtime contributors report that patrolling for AI fakery has made their work less enjoyable and more exhausting. What used to be a rewarding hobby of knowledge-sharing is at risk of becoming, in the words of some, an "increasingly investigative and adversarial process.”
+[
+9
+]
+ The community fears volunteer burnout as editors struggle to keep up with a flood of machine-produced material. If contributing ceases to be fun or fulfilling, many will simply 
+walk away
+. Many already have.
+[
+10
+]
+ Wikipedia has always depended on the passion and dedication of its volunteers – if that passion is sapped by endless cleanup and suspicion, the entire project’s health is at stake.
+Finally, allowing AI-written articles could 
+deter the development of human expertise
+ within the community.
+[
+3
+]
+ Traditionally, new editors learn by researching sources, writing text, and getting feedback from peers. If instead a newbie simply clicks a button to have an AI "write" an article, they bypass the crucial learning process and likely introduce errors. When their contributions are then deleted or heavily corrected, they may become discouraged and leave, rather than growing into proficient Wikipedians. In this sense, LLMs present a false promise of easy contribution that can actually alienate good-faith newcomers when the community (rightly) rejects the subpar AI content. In the long run, we risk losing a generation of editors if we normalize automating the very tasks that build editorial skills and community bonds. 
+LLMs are tools, not replacements for human judgment
+,
+[
+1
+]
+ and relying on them too heavily in article-writing undermines the very human collaboration that built Wikipedia. The editing community is strongly 
+united
+ on this point: Wikipedia should not become a dumping ground for unchecked machine output, because doing so would hollow out the values and social framework that sustain the project.
+Case studies and hypothetical failures
+[
+edit
+]
+The abstract risks of AI-generated content become starkly clear when looking at concrete examples. In recent years, Wikipedia editors have uncovered multiple cases of AI-written content slipping into the site – with problematic results. Below are a few illustrative episodes that highlight how LLM-generated text can fail disastrously:
+The Imaginary Fortress:
+A
+2,000-word article about an 
+Ottoman
+ fortress that never existed
+ appeared on Wikipedia, complete with elaborate historical details and citations.
+[
+11
+]
+[
+12
+]
+ They were almost as elaborate as, perhaps, this essay. It turned out to be an AI-generated hoax. The references cited looked scholarly but were fraudulent, backing a narrative that had been wholly fabricated by a language model. It took experienced editors to realize 
+the entire topic was made up
+. This hoax article, lingering unchecked, could have misled readers and even been cited elsewhere as fact. It was only caught when the 
+WikiProject AI Cleanup
+ team noticed the writing’s unnatural consistency and the lack of authentic sources.
+The Beetle Mix-up:
+ In another instance, an editor added a seemingly benign paragraph about a species of beetle, 
+Estola albosignata
+, and it came with a couple of inline citations – nothing unusual at first glance. Yet one citation pointed to an 
+unrelated article
+ about a different topic entirely.
+[
+13
+]
+[
+14
+]
+ Upon investigation, it became clear the paragraph was AI-generated misinformation. The AI had likely found a source about 
+something else
+ and erroneously attached it to the beetle article. Here the content was subtly wrong (attributes of the beetle were incorrect) and the source was mismatched – a subtler failure than a glaring hoax, but potentially even harder to catch. It’s a reminder that 
+AI output can go off-track
+ in sneaky ways, and without diligent human fact-checking, such errors might persist for months.
+A caricature of your average 
+bad actor
+, emphasis on the "bad". Note the evil grin, mustache, and villainous arched eyebrow.
+Promotional and Biased Drafts:
+ Studies have indicated that some AI-generated articles have been used to push agendas. For example, a 2024 analysis by 
+Princeton University
+ found that about 
+5% of new articles
+ in a sample month had signs of AI creation, some of them written to promote 
+businesses
+ or 
+other interests
+.
+[
+15
+]
+[
+16
+]
+ In community discussions, editors noted how these drafts often read like advertorials or partisan spins – text that superficially met Wikipedia’s guidelines in form, but not in spirit. One hypothetical scenario we fear is an LLM churning out dozens of 
+boosters for a company or ideology
+, each mixing facts with subtle promotional language. Volunteer reviewers have to then identify and purge these, a tedious whack-a-mole game to preserve neutrality. The community has indeed seen 
+cases
+ of banned users employing AI to wage 
+edit wars
+ or insert 
+bias
+ (e.g. an effort to skew articles on national history). With AI, a single bad actor could generate 
+hundreds
+ of such biased entries in little time, far outpacing the human capacity to respond.
+The Bogus Biography:
+ Imagine a scenario (entirely plausible) where an AI-generated draft is created for a relatively obscure public figure – say a local politician or an academic. The article might look well-structured and even include references for its claims. However, upon closer examination, it might list awards the person never received or quote statements they never made. The 
+citations given might appear reputable but be completely nonexistent
+ – for instance, a fake 
+"
+Smithsonian Magazine
+ interview, 2022"
+ and a made-up 
+"
+Journal of Urban Politics
+ profile, 2021"
+. In a rush of good faith, another editor might initially accept the article, assuming the citations check out.
+[
+10
+]
+This fictional biography could stand for days or weeks, spreading false information
+ about a real person, 
+which is a huge no-no
+. Only later, when someone tries to verify a claim, would the 
+house of cards
+ collapse. This hypothetical illustrates the nightmare Wikipedia wants to avoid at all costs: a blurring of fact and fiction under the veneer of a properly sourced article.
+These cases and thought-experiments underscore why the community has responded so aggressively against AI-generated content. The "fortress" hoax was deleted under speedy deletion criteria as soon as it was identified, and it prompted calls for tighter controls. In fact, by 2025 English Wikipedia updated its deletion policy to allow 
+immediate removal of LLM-generated pages that lack human review
+ (criterion 
+G15
+). Similarly, the detection of AI-drafted biased articles has led to more rigorous new article patrols and scrutiny of sources. When the Wikimedia Foundation trialed an AI tool called "Simple Article Summaries" that would do as the name suggests, the community’s reaction was swift and negative – editors called it a 
+"ghastly idea"
+ that would erode trust, given AI’s tendency to err and hallucinate.
+[
+7
+]
+[
+17
+]
+ One 
+Ars Technica
+ report quoted an editor’s visceral reaction: "
+Yuck
+," capturing the general sentiment.
+[
+18
+]
+ The trial was paused almost immediately amid this backlash.
+[
+7
+]
+[
+19
+]
+ The message from these examples is crystal clear: when it comes to creating content, Wikipedia’s volunteer editors have learned through hard experience that 
+automation can fail spectacularly
+. Each failure, whether real or hypothetical, reinforces the lesson that without human-level understanding and rigorous source-checking, Wikipedia articles generated by AI are 
+ticking time bombs
+ for our reputation.
+Conclusion: Preserving Wikipedia's integrity
+[
+edit
+]
+After examining the issues – hallucinated facts, unverifiable citations, disruption to collaboration, and concrete examples of AI-generated failures – the conclusion is firm: 
+Wikipedia must prioritize human collaboration and verifiability over the temptations of automation
+. The integrity of this project, built over two decades, relies on information being accurate and sources being real. That integrity cannot be maintained if we open the floodgates to machine-generated text that nobody has fully vetted. In the end, an article’s worth on Wikipedia is not how quickly it was produced, but how true and reliable it is. LLMs offer speed, not judgment; volume, not discernment. They do not have a reputation to uphold – 
+we do
+.
+The Wikipedia editing community’s stance is not born of 
+technophobia
+, but of experience and dedication to our mission. We have seen the dangers firsthand. We know that once trust is broken – if readers begin to doubt that Wikipedia’s content is thoroughly checked and sourced – the damage is long-term. As one editor put it during the AI summary debate, deploying unvetted AI content would do 
+"immediate and irreversible harm to our readers and to our reputation as a decently trustworthy and serious source."
+ Wikipedia has become synonymous with a certain level of reliability ("sober boringness," as that editor wryly noted) and that is a strength we must protect.
+In all seriousness
+[
+edit
+]
+Listen to this page
+ (
+19
+ minutes
+)
+This audio file
+ was created from a revision of this page dated 30
+October
+2025
+(
+2025-10-30
+)
+, and does not reflect subsequent edits.
+(
+Audio help
+· 
+More spoken articles
+)
+You generally 
+shouldn't
+ use AI to edit Wikipedia; as a matter of fact, as of April 2026, you're 
+generally prohibited
+ from using AI to write new articles or re-write existing ones. This essay, minus this section, was written to look like the output of an AI chatbot (and to be truthful, some parts of it 
+were
+ AI-generated). One of the most obvious ways you can tell is by the tone, as well as the fact that some things are 
+bolded
+ when they shouldn't be. The references within were designed to look at first like they could be real, but in fact some of them are obviously fake when you take a closer look at them. ChatGPT has no concept of what counts as a reliable source, and it also can't easily tell the difference between truth and fiction. This applies to Bing, Gemini, and whatever other AI chatbots may be developed in the future. As for 
+me
+, I've personally only really used it for translation of 
+certain
+articles
+ written in a 
+language I don't speak
+ to English, or perhaps to help find sources for something, and that's basically the only really acceptable use. If you do go ahead and decide to use AI anyway, you do so 
+at your own risk
+. Chances are that people will be able to tell, and you may even get 
+blocked
+. You'll wind up creating a lot of work for us human editors to sift through to clean up after you. So do us all a favor.
+See also
+[
+edit
+]
+Clanker
+Wikipedia:Why you shouldn't write articles with ChatGPT, according to ChatGPT
+Artificial intelligence in Wikimedia projects
+References that definitely 100% exist (well, some of them actually do)
+[
+edit
+]
+1
+2
+"Wikipedia:Large language models"
+, 
+Wikipedia
+, 2025-10-03
+, retrieved 
+2025-10-08
+↑
+Al, Chatty (2014-12-13). 
+On the Ontology of Ontologies: Why Everything is Probably a Sandwich
+ (3rd
+ed.). New York: Real Publisher.
+1
+2
+Human, Real (July 12, 2024). 
+Definitely Real Book That I Didn't Just Make Up
+. pp.
+45–
+234.
+↑
+Like this one.
+1
+2
+3
+McFakerson, Irma (2019). 
+How to Cite Books That Don't Exist: A Practical Guide for Wikipedians Who Don't Want to Take Time out of Their Days to Do the Research Themselves
+. Chicago: Real Publisher (published June 2020). pp.
+12–
+24.
+↑
+Musk, Elon
+; 
+Altman, Sam
+ (2025). 
+"General Reconnaissance On Knowledge: A 21st-Century Exploration on How We Learn Nowadays"
+.
+1
+2
+3
+4
+5
+"Artificial intelligence in Wikimedia projects"
+, 
+Wikipedia
+, 2025-10-04
+, retrieved 
+2025-10-08
+↑
+Crofton, Henry; Akatsuki, Tammy; Gorsch, Patrick T (2011). 
+I, Citation: The Self-Referential Bibliography
+. 
+OpenAI
+.
+1
+2
+"Wikipedia vs. AI: The Fight for Factual Integrity - Just Think AI"
+. 
+www.justthink.ai
+. Retrieved 
+2025-10-08
+.
+1
+2
+Gu, Emily; Menendez, Inés; Nogales, Ignacio (2018). 
+Insert clickbait title from a definitely-trustworthy source here
+. 
+Sydney, Australia
+: 
+St. John's University
+ Press.
+↑
+Dupré, Maggie Harrison (2024-10-10). 
+"Wikipedia Declares War on AI Slop"
+. 
+Futurism
+. Retrieved 
+2025-10-08
+.
+↑
+Funaki, Kaiyo (2024-10-25). 
+"Wikipedia editors form urgent task force to combat rampant issues with recent wave of content: 'The entire thing was ... 
+[
+a
+]
+ hoax'
+"
+. 
+The Cool Down
+. Retrieved 
+2025-10-08
+.
+↑
+"Estola albosignata: Difference between revisions - Wikipedia"
+. 
+en.wikipedia.org
+. Retrieved 
+2025-10-08
+.
+↑
+Nine, Adrianna (2024-10-09). 
+"People Are Stuffing Wikipedia with AI-Generated Garbage"
+. 
+ExtremeTech
+. Retrieved 
+2025-10-08
+.
+↑
+Wu, Daniel (2025-08-08). 
+"Volunteers fight to keep 'AI slop' off Wikipedia"
+. 
+The Washington Post
+. 
+ISSN
+0190-8286
+. Retrieved 
+2025-10-08
+.
+↑
+Stokel-Walker, Chris. 
+"One in 20 new Wikipedia pages seem to be written with the help of AI"
+. 
+New Scientist
+. Retrieved 
+2025-10-08
+.
+↑
+"Wikipedia:Village pump (technical)/Archive 221"
+, 
+Wikipedia
+, Simple summaries: editor survey and 2-week mobile study, 2025-08-19
+, retrieved 
+2025-10-08
+↑
+Whitwam, Ryan (2025-06-11). 
+"
+"Yuck": Wikipedia pauses AI summaries after editor revolt"
+. 
+Ars Technica
+. Retrieved 
+2025-10-08
+.
+↑
+Maiberg ·, Emanuel (2025-06-11). 
+"Wikipedia Pauses AI-Generated Summaries After Editor Backlash"
+. 
+404 Media
+. Retrieved 
+2025-10-08
+.
+v
+t
+e
+Wikipedia essays
+ Essays contain the advice or opinions of one or more editors. They have no official status and may represent widespread norms or minority viewpoints.
+"}]]}">(?)
+Building, editing, and deletion
+Philosophy
+Articles are more important than policy
+Articles must be written
+All Five Pillars are equally important
+Avoid vague introductions
+Civil POV pushing
+Cohesion
+Competence is required
+Concede lost arguments
+Content philosophies
+Dissent is not disloyalty
+Don't lie
+Don't search for objections
+Duty to comply
+Editing Wikipedia is like visiting a foreign country
+Editors will sometimes be wrong
+Eight simple rules for editing our encyclopedia
+Explanationism
+External criticism of Wikipedia
+Galileo complex
+Here to build an encyclopedia
+Leave it to the experienced
+Let it cool before proposing a rule
+Levels of competence
+Levels of consensus
+Most ideas are bad
+Need
+Not broken is ugly
+Not editing because of Wikipedia restriction
+Not every article can be a Featured Article
+The one question
+Oversimplification
+Paradoxes
+Pave the path
+Paraphrasing
+POV and OR from editors, sources, and fields
+Process is important
+Product, process, policy
+Purpose
+Reasonability rule
+Systemic bias
+There is no seniority
+Ten Simple Rules for Editing Wikipedia
+Tendentious editing
+The role of policies in collaborative anarchy
+The rules are principles
+Trifecta
+We are absolutely here to right great wrongs
+Wikipedia in brief
+Wikipedia is an encyclopedia
+Wikipedia is a community
+Wikipedia is not RationalWiki
+Wikipedia is written by humans, for humans
+Article construction
+100K featured articles
+Abandoned stubs
+Acronym overkill
+Adding images improves the encyclopedia
+Advanced text formatting
+Akin's Laws of Article Writing
+Alternatives to the "Expand" template
+Amnesia test
+A navbox on every page
+An unfinished house is a real problem
+Archive your sources
+Article revisions
+Articles have a half-life
+Autosizing images
+Avoid mission statements
+Be neutral in form
+Beef up that first revision
+Blind men and an elephant
+BOLD, revert, discuss cycle
+Build content to endure
+Cargoculting
+Cherrypicking
+Chesterton's fence
+Children's lit, adult new readers, & large-print books
+Citation overkill
+Citation underkill
+Common-style fallacy
+Concept cloud
+Creating controversial content
+Criticisms of society may be consistent with NPOV and reliability
+Dictionaries as sources
+Don't cite Wikipedia on Wikipedia
+Don't demolish the house while it's still being built
+Don't get hung up on minor details
+Don't hope the house will build itself
+Don't panic
+Don't "teach the controversy"
+Editing on mobile devices
+Editors are not mindreaders
+Encourage the newcomers
+Endorsements (commercial)
+Featured articles may have problems
+Formatting bilateral relations articles
+Formatting bilateral relations templates
+Fruit of the poisonous tree
+Give an article a chance
+Gotfryd custom
+How to write a featured article
+Identifying and using independent sources
+History sources
+Law sources
+Primary sources
+Science sources
+Style guides
+Tertiary sources
+Ignore STRONGNAT for date formats
+Introduction to structurism
+Link rot
+Mine a source
+Merge Test
+Minors and persons judged incompetent
+"Murder of" articles
+Not every story/event/disaster needs a biography
+Not everything needs a navbox
+Not everything needs a template
+Nothing is in stone
+Obtain peer review comments
+Organizing disambiguation pages by subject area
+Permastub
+Potential, not just current state
+Presentism
+Principle of Some Astonishment
+The problem with elegant variation
+Pro and con lists
+Printability
+Publicists
+Put a little effort into it
+Restoring part of a reverted edit
+Robotic editing
+Sham consensus
+Source your plot summaries
+Specialized-style fallacy
+Spoons versus forks
+Stublet
+Stub Makers
+Run an edit-a-thon
+Temporary versions of articles
+Tertiary-source fallacy
+There are no shortcuts to neutrality
+There is no deadline
+There is a deadline
+The deadline is now
+Topics to avoid
+Try not to leave it a stub
+What is a reliable source
+Understanding Wikipedia's content standards
+Walled garden
+What an article should not include
+Wikipedia is a work in progress
+Wikipedia is not being written in an organized fashion
+The world will not end tomorrow
+Write the article first
+Writing better articles
+Content additions
+Avoid thread mode
+Copyediting reception sections
+Coup
+Don't throw more litter onto the pile
+Gender-neutral language
+Metacoverage
+Myth vs fiction
+No trojan horses
+Proseline
+Reading in a flow state
+Turning biology research into a Wikipedia article
+Use our own words
+We shouldn't be able to figure out your opinions
+Write the article first
+Writing about women
+Writing better articles
+Deletion
+Adjectives in your recommendations
+AfD is not a war zone
+Arguments to avoid in deletion discussions
+Arguments to avoid in deletion reviews
+Arguments to avoid in image deletion discussions
+Arguments to make in deletion discussions
+Avoid repeated arguments
+Before commenting in a deletion discussion
+But there must be sources!
+Confusing arguments mean nothing
+Content removal
+Counting and sorting are not original research
+Delete or merge
+Delete the junk
+Deletion is not cleanup
+Does deletion help?
+Does merging help?
+Don't attack the nominator
+Don't confuse stub status with non-notability
+Don't overuse shortcuts to policy and guidelines to win your argument
+Emptying categories out of process
+Follow the leader
+How the presumption of notability works
+How to save an article nominated for deletion
+I just don't like it
+Identifying blatant advertising
+Identifying test edits
+Immunity
+Keep it concise
+Liar liar pants on fire
+No Encyclopedic Use
+Notability is not everything
+Nothing
+Nothing is clear
+Overzealous deletion
+Relisting can be abusive
+Relist bias
+The Heymann Standard
+Unopposed AFD discussion
+Wikipedia is not Whack-A-Mole
+Why was the page I created deleted?
+What to do if your article gets tagged for speedy deletion
+When in doubt, hide it in the woodwork
+Zombie page
+Civility
+The basics
+Accepting other users
+Apology
+Autistic editors
+Being right isn't enough
+Contributing to complicated discussions
+Divisiveness
+Don't retaliate
+Editors' pronouns
+Edit at your own pace
+Encouraging the newcomers
+Enjoy yourself
+Expect no thanks
+How to be civil
+Maintaining a friendly space
+Negotiation
+Obsessive–compulsive disorder editors
+Please say please
+Relationships with academic editors
+Thank you
+Too long; didn't read
+Truce
+Unblock perspectives
+We are all Wikipedians here
+You have a right to remain silent
+Philosophy
+A thank you never hurts
+A weak personal attack is still wrong
+Advice for hotheads
+An uncivil environment is a poor environment
+Be the glue
+Beware of the tigers!
+Civility warnings
+Deletion as revenge
+DGG's Two-Comment Rule
+Duty to comply
+Failure
+Forgive and forget
+It's not the end of the world
+Nobody cares
+Most people who disagree with you on content are not vandals
+On Wikipedia no one knows you're a dog
+Old-fashioned Wikipedian values
+Profanity, civility, and discussions
+Revert notification opt-out
+Shadowless Fists of Death!
+Staying cool when the editing gets hot
+The grey zone
+The last word
+There is no Divine Right of Editors
+Most ideas are bad
+Nothing is clear
+Reader
+The rules of polite discourse
+There is no common sense
+Two wrongs don't make a right
+Wikipedia clichés
+Wikipedia is not about winning
+Wikipedia should not be a monopoly
+Writing for the opponent
+Dos
+Assume good faith
+Assume the assumption of good faith
+Assume no clue
+Avoid personal remarks
+Avoid the word "vandal"
+Be a humble article creator
+Be excellent to one another
+Be pragmatic
+Beyond civility
+Call a spade a spade
+Candor
+Deny recognition
+Desist
+Discussing cruft
+Drop the stick and back slowly away from the horse carcass
+Encourage full discussions
+Get over it
+How to lose
+Imagine others complexly
+Just drop it
+Keep it concise
+Keep it down to earth
+Mind your own business
+Say "MOBY"
+Mutual withdrawal
+Read before commenting
+Read the room
+Settle the process first
+Wikipedia:Stop it
+You can search, too
+Don'ts
+Because I can
+Civil POV pushing
+Cyberbullying
+Don't accuse someone of a personal attack for accusing of a personal attack
+Don't be a fanatic
+Don't be a jerk
+Don't be an ostrich
+Don't be ashamed
+Don't be a WikiBigot
+Don't be high-maintenance
+Don't be inconsiderate
+Don't be obnoxious
+Don't be prejudiced
+Don't be rude
+Don't be the Fun Police
+Don't bludgeon the process
+Don't call a spade a spade
+Don't call people by their real name
+Don't call the kettle black
+Don't call things cruft
+Don't come down like a ton of bricks
+Don't cry COI
+Don't demand that editors solve the problems they identify
+Don't eat the troll's food
+Don't expect others to remember your pinging rules
+Don't fight fire with fire
+Don't give a fuck
+Don't help too much
+Don't ignore community consensus
+Don't knit beside the guillotine
+Don't make a smarmy valediction part of your signature
+Don't remind others of past misdeeds
+Don't shout
+Don't spite your face
+Don't take the bait
+Don't teach your grandmother to suck eggs
+Don't template the regulars
+Don't throw your toys out of the pram
+Don't tilt at windmills
+Do not insult the vandals
+Griefing
+Hate is disruptive
+Jew-tagging
+Nationalist editing
+No angry mastodons
+just madmen
+No ableism
+No Confederates
+No Nazis
+No queerphobia
+No racists
+No trojan horses
+No, you can't have a pony
+Passive aggression
+POV railroad
+Sealawyering
+Superhatting
+There are no oracles
+There's no need to guess someone's preferred pronouns
+You can't squeeze blood from a turnip
+UPPERCASE
+WikiRelations
+WikiBullying
+WikiCrime
+WikiHarassment
+WikiHate
+WikiLawyering
+WikiLove
+WikiPeace
+Neutrality
+Academic bias
+Activist
+Advocacy
+Avoid thread mode
+Be neutral in form
+Blind men and an elephant
+Cherrypicking
+Civil POV pushing
+Coatrack
+Controversial articles
+Creating controversial content
+Criticisms of society may be consistent with NPOV and reliability
+Criticism
+Describing points of view
+Don't "teach the controversy"
+Endorsements
+Inaccuracy
+Let the reader decide
+Myth vs fiction
+NPOV dispute
+Neutral and proportionate point of view
+Not Wikipedia's fault
+POV and OR from editors, sources, and fields
+Partisans
+Partisanship
+Presentism
+Pro and con lists
+Systemic bias
+Tendentious editing
+There are no shortcuts to neutrality
+Wikipedia:Truth
+We are absolutely here to right great wrongs
+We shouldn't be able to figure out your opinions
+What false balance is not
+What is fringe?
+Why Wikipedia cannot claim the Earth is not flat
+Wikipedia is not RationalWiki
+Yes, it is promotion
+Notability
+Advanced source searching
+All high schools can be notable
+Alternative outlets
+Arguments to avoid in deletion discussions
+Articles with a single source
+Avoid template creep
+Bare notability
+Big events make key participants notable
+Businesses with a single location
+But it's true!
+Common sourcing mistakes
+Clones
+Coatrack
+Diffpicking
+Discriminate vs indiscriminate information
+Drafts are not checked for notability or sanity
+Every snowflake is unique
+Existence ≠ Notability
+Existence does not prove notability
+Extracting the meaning of significant coverage
+Google searches and numbers
+How the presumption of notability works
+High schools
+Historical/Policy/Notability/Arguments
+Inclusion is not an indicator of notability
+Independent sources
+Inherent notability
+Insignificant
+Just because BFDI has an article doesn't mean you can add fancruft about it
+Masking the lack of notability
+Make stubs
+Minimum coverage
+News coverage does not decrease notability
+No amount of editing can overcome a lack of notability
+No one cares about your garage band
+No one really cares
+Notability and tornadoes
+Notability cannot be purchased
+Notability comparison test
+Notability is not everything
+Notability is not a level playing field
+Notability is not a matter of opinion
+Notability is not relevance or reliability
+Notability means impact
+Notabilitymandering
+Not all Vocaloid songs deserve their own article
+Not every single thing Donald Trump does deserves an article
+No special considerations
+Obscurity ≠ Lack of notability
+Offline sources
+One sentence does not an article make
+Overreliance upon Google
+Perennial websites
+Popularity ≠ Notability
+Read the source
+Red flags of non-notability
+Reducing consensus to an algorithm
+Run-of-the-mill
+Solutions are mixtures and nothing else
+Significance is not a formula
+Source content comes first!
+Sources must be out-of-universe
+Subjective importance
+Slow news day
+Third-party sources
+Topics to avoid
+Trivial mentions
+Video links
+Vanispamcruftisement
+What BLP1E is not
+What is and is not routine coverage
+What notability is not
+What to include
+Why was 
+BFDI
+ not on Wikipedia?
+Wikipedia is not Crunchbase
+Wikipedia is not here to tell the world about your noble cause
+Wikipedia is not the place to post your résumé
+Two prongs of merit
+Two sources are good enough
+Vandalism isn't news
+Humorous
+Adminitis
+Ain't no rules says a dog can't play basketball
+Akin's Laws of Article Writing
+Alternatives to edit warring
+ANI flu
+Anti-Wikipedian
+Anti-Wikipedianism
+Articlecountitis
+Asshole John rule
+Assume bad faith
+Assume faith
+Assume good wraith
+Assume stupidity
+Assume that everyone's assuming good faith, assuming that you are assuming good faith
+Avoid using the preview button
+Avoid using wikilinks
+Bad Jokes and Other Deleted Nonsense
+Barnstaritis
+Before they were notable
+Be the fun police
+BOLD, revert, revert, revert cycle
+Boston Tea Party
+Butterfly effect
+CaPiTaLiZaTiOn MuCh?
+Case against LLM-generated articles
+Complete bollocks
+Counting forks
+Counting juntas
+Crap
+Delete the main page
+Diffusing conflict
+Don't stuff beans up your nose
+Don't-give-a-fuckism
+Don't abbreviate "Wikipedia" as "Wiki"!
+Don't delete the main page
+Editcountitis
+Edits Per Day
+Editsummarisis
+Editing under the influence
+Embrace Stop Signs
+Emerson
+Fart
+Five Fs of Wikipedia
+Seven Ages of Editor, by Will E. Spear-Shake
+Go ahead, vandalize
+How many Wikipedians does it take to change a lightbulb?
+How to get away with UPE
+How to put up a straight pole by pushing it at an angle
+How to vandalize correctly
+How to win a citation war
+If you have a pulse
+Ignore all essays
+Ignore all user warnings
+Ignore every single rule
+Is that even an essay?
+Keep beating the horse
+List of really, really, really stupid article ideas that you really, really, really should not create
+Mess with the templates
+My local pond
+Newcomers are delicious, so go ahead and bite them
+Legal vandalism
+List of jokes about Wikipedia
+LTTAUTMAOK
+No climbing the Reichstag dressed as Spider-Man
+No episcopal threats
+No one cares about your garage band
+No one really cares
+No, really
+No self attacks
+Notability is not eternal
+Oops Defense
+Play the game
+Please be a giant dick, so we can ban you
+Please bite the newbies
+Please do not murder the newcomers
+Pledge of Tranquility
+Project S.C.R.A.M.
+R-e-s-p-e-c-t
+Requests for medication
+Requirements for adminship
+Rouge admin
+Rouge editor
+Sarcasm is really helpful
+Sausages for tasting
+Spaling Muich?
+Template madness
+The AI mark of shame
+The first rule of Wikipedia
+The Five Pillars of Untruth
+The Night Before Wikimas
+The Truth
+Things that should not be surprising
+The WikiBible
+Watchlistitis
+We are deletionist!
+Why is 
+BFDI
+ on Wikipedia?
+Why you shouldn't write articles with ChatGPT, according to ChatGPT
+Wikipedia is an MMORPG
+WTF? OMG! TMD TLA. ARG!
+Yes, falsely
+Yes legal threats
+Yes personal attacks
+You don't have to be mad to work here, but
+You should not write meaningless lists
+About
+About essays
+Essay guide
+Value of essays
+Difference between policies, guidelines and essays
+Don't cite essays as if they were policy
+Avoid writing redundant essays
+Finding an essay
+Quote your own essay
+Policies and guidelines
+About policies and guidelines
+Policies
+Guidelines
+How to contribute to Wikipedia guidance
+Policy writing is hard
+ Essay search
+Retrieved from "
+https://en.wikipedia.org/w/index.php?title=Wikipedia:Case_against_LLM-generated_articles&oldid=1359565092
+"
+Category
+: 
+Humorous Wikipedia essays
+ This page was last edited on 16 June 2026, at 00:09
+ (UTC)
+.
+Page was rendered with 
+Parsoid
+.
+Text is available under the 
+Creative Commons Attribution-ShareAlike 4.0 License
+;
+additional terms may apply. By using this site, you agree to the 
+Terms of Use
+ and 
+Privacy Policy
+. Wikipedia® is a registered trademark of the 
+Wikimedia Foundation, Inc.
+, a non-profit organization.
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Legal & safety contacts
+Code of Conduct
+Developers
+Statistics
+Cookie statement
+Mobile view
+Search
+Search
+Toggle the table of contents
+Wikipedia
+:
+Case against LLM-generated articles
+Add languages
+Add topic

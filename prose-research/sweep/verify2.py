@@ -1,10 +1,32 @@
-def load(n): return open(f"raw/{n}.txt",encoding='utf-8').read()
-def check(name,qs):
-    t=load(name)
-    for q in qs: print(("OK  " if q in t else "MISS"), name, "|", q)
-check('porter',["participants performed below chance levels in identifying AI-generated poems","Observed accuracy was in fact slightly lower than chance (46.6%","AI-generated poems are rated as having much better rhythm than","all 5 AI-generated poems are rated more highly in overall quality","they find AI poems more straightforward","These poems rarely use complex metaphors","144 explanations vs. 29 explanations","experience with poetry did not improve discrimination performance","Using ChatGPT 3.5, we generated 5 poems","we used the first 5 poems generated","more likely to judge AI-generated poems as human-authored than actual"])
-check('gw-full',["experts preferred human writing in 82.7% of cases under the","reversed to 62% preference for AI after fine-tuning","Lay judges, however, consistently preferred AI writing","fine-tuning eliminates the stylistic tics—clichés, awkward phrasing, overly ornamental language","both experts (81.1%) and lay evaluators (80.0%) strongly preferred AI-generated writing","Lay judges disproportionately reward writing based on whether it","fine-tuning requires 583 times more number of tokens on average","OpenAI’s GPT-4o, Anthropic’s Claude 3.5 Sonnet, and Google’s Gemini 1.5 Pro","Our study examines shorter (up to 450-word) excerpts","whereas lay judges remained inconsistent","triggered an identity crisis, eroding aesthetic confidence","28 MFA writers (experts) competed against three LLMs"])
-check('italian',["two created with ChatGPT-4o and one by Alberto Moravia","AI-written texts received slightly higher average ratings and were more","20 participants read and evaluated three stories"])
-check('artifice',["LLM-generated stories pass 3-10X less TTCW tests than stories written by professionals","none of the LLMs positively correlate with the expert assessments","We recruit 10 creative writers"])
-check('salvaged',["these writers agree on undesirable idiosyncrasies in LLM generated text","a seven-category taxonomy (e.g. clichés, unnecessary exposition)","outperform each other in terms of writing quality","experts largely prefer text edited by other experts","1,057 LLM-generated paragraphs edited by professional writers"])
-check('doshi',["generative AI ideas causes stories to be evaluated as more","stories are more similar to each other than stories by","an increase in novelty of 8.1%","how well the story was written increase by up to 26.6%","OpenAI’s GPT-4 LLM","there is little effect of having access to generative AI ideas"])
+import json
+m={
+"https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait":"bio-verge.txt",
+"https://www.wired.com/story/morbid-war-online-obituaries/":"bio-wired-morbid.txt",
+"https://www.wired.com/story/youtube-obituary-pirates/":"bio-wired-yt.txt",
+"https://www.legalgenealogist.com/2026/05/12/ai-meets-tos/":"lg-aitos.txt",
+"https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content":"wt-styleguide.txt",
+"https://www.wikitree.com/g2g/2021670/should-become-official-wikitree-policy-generated-enhanced":"wt-policy.txt",
+"https://vitabrevis.americanancestors.org/-ai-in-genealogical-research":"va-ai.txt",
+"https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/":"ajc.txt",
+"https://familylocket.com/can-chatgpt-help-with-genealogy-citations/":"fl-cit.txt",
+"https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing":"wp-signs.txt",
+"https://www.familysearch.org/en/blog/ai-developments-genealogy":"fs-ai.txt",
+"https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/":"wapo.txt",
+"https://futurism.com/funeral-homes-chatgpt-obituaries":"fut-funeral.txt",
+"https://futurism.com/msn-ai-brandon-hunter-useless":"futurism.txt",
+"https://www.poynter.org/commentary/2023/artificial-intelligence-obituary-brandon-hunter-useless/":"poynter.txt",
+"https://bcgcertification.org/bcg-ai-portfolio":"bcg.txt",
+"https://en.wikipedia.org/wiki/Wikipedia:Large_language_models":"wp-llm.txt",
+"https://arxiv.org/abs/2305.14251":"fact-abs.txt",
+"https://arxiv.org/pdf/2305.14251":"factscore.txt",
+}
+d=json.load(open("found-ai-arch-biographical-record.json"))
+cache={}; bad=[]
+for i,c in enumerate(d["claims"]):
+    q=c.get("quote","")
+    if not q: continue
+    f=m.get(c["url"])
+    if not f: print("NOFILE",i,c["url"]); continue
+    if f not in cache: cache[f]=open(f,encoding="utf-8").read()
+    if q not in cache[f]: bad.append((i,c["url"],q)); print("MISS",i,"|",repr(q))
+print("misses:",len(bad),"of",len(d["claims"]))

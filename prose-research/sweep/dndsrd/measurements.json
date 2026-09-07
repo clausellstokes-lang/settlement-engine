@@ -1466,5 +1466,85 @@
    22,
    21
   ]
+ },
+ "S52_ENVEFFECTS": {
+  "label": "SRD5.2.1 \"Environmental Effects\" (p.195)",
+  "note": "",
+  "paragraphs": 9,
+  "sentences": 27,
+  "words": 512,
+  "wordsPerSentence": {
+   "mean": 19.0,
+   "sd": 9.1,
+   "min": 5,
+   "max": 40,
+   "p10": 7,
+   "p50": 17,
+   "p90": 29,
+   "shareUnder8": 0.1111,
+   "shareOver30": 0.1111,
+   "neighbourVariation": 0.527
+  },
+  "sentencesPerParagraph": 3.0,
+  "secondPerson": {
+   "sentenceRate": 0.0,
+   "per1000words": 0.0
+  },
+  "digits": {
+   "sentenceRate": 0.4444,
+   "per1000words": 44.92
+  },
+  "emDash": {
+   "count": 0,
+   "sentenceRate": 0.0,
+   "per1000words": 0.0
+  },
+  "contractions": {
+   "count": 1,
+   "sentenceRate": 0.037,
+   "per1000words": 1.95
+  },
+  "tenseProxy": {
+   "isAre_per1000": 17.58,
+   "wasWere_per1000": 0.0,
+   "hasHave_per1000": 11.72,
+   "had_per1000": 0.0
+  },
+  "punctuation": {
+   "semicolonSentenceRate": 0.0,
+   "colonSentenceRate": 0.0,
+   "parenSentenceRate": 0.1852,
+   "questionSentenceRate": 0.0,
+   "exclamationSentenceRate": 0.0
+  },
+  "lengthHistogram": [
+   20,
+   29,
+   36,
+   14,
+   40,
+   16,
+   11,
+   14,
+   23,
+   24,
+   25,
+   27,
+   6,
+   26,
+   28,
+   17,
+   16,
+   5,
+   33,
+   10,
+   8,
+   17,
+   17,
+   14,
+   19,
+   7,
+   10
+  ]
  }
 }

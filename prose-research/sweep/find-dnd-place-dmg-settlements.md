@@ -20,3 +20,13 @@ Opus finder, 2026-09-06.
 - d-dad07efa4f1ca8cc6173890354d6ae32.txt  (Oak of Honor critique of the DMG settlement guidelines)
 - d-d20d9b4c563f7498dbafc21bc5e3e71c.txt  (PC Gamer 2024 DMG review)
 - d-aec8261cdeab45ae20ed1cb3dca8e1df.txt  (Wargamer: Perkins on the tracking sheets)
+
+## Round-2 additions (the publisher's own worked settlement + the read-aloud doctrine)
+- 2024 DMG "Free City of Greyhawk" and "Greyhawk Gazetteer" FETCHED complete and free from the Roll20 licensed compendium. This is the publisher's own worked settlement gazetteer: present tense, physical situation first, quarters named after trade/feature/resident class.
+- THE NUMBER RULE (measured across the 2024 Greyhawk city section): counts of people, offices, years and objects are SPELLED OUT ("seventy-eight years ago", "sixteen coequal rulers", "some eight hundred Guards", "up to forty archers", "three platforms"); game quantities are NUMERALS ("A 30-foot-high stone wall", "every 300 feet", "50 GP", "2d10 GP", "1d6 years"). The Gazetteer breaks it once: "about 200 years ago" beside "Seven years ago". So there is a house tendency, not a rule.
+- 2014 DMG does the same split: prose "Cities that hold more than twenty-five thousand people" vs the field "Population: Up to about 25,000"; the Forgotten Realms currency example is all numerals ("worth 50 gp in Waterdeep and 30 gp elsewhere").
+- Wizards' free SETTLEMENT TRACKER PDF is the exact slot list: name / size band / Defining Trait / Claim to Fame / Current Calamity / Local Leader / Noteworthy People / Noteworthy Places / GP value of the most expensive item for sale.
+- 2005 Decker & Noonan wizards.com column recovered via Wayback raw capture: "If you're the DM, you get two sentences. Period." + "Boxed text replaces that conversation with oration."
+- Shawn Merwin on D&D Beyond: third person not second; only details the PCs must interact with; never "seems"/"appears"; no inner novelist.
+- NO PUBLISHED STYLE GUIDE CONFIRMED: the D&D House Style Guide is an internal PDF "distributed by Wizards of the Coast to official play writers" (updated January 2019), released only through DMs Guild Creator Resources; a widely circulated fan "5E Writer's Guide" exists because its author "was looking for an official writer's guide, or style sheet" and could not find one.
+- REGISTER SHIFT 2014 -> 2024: Current Calamity entries went from unpunctuated noun phrases ("Undead stirring in cemeteries") to complete sentences ("Monsters infest the settlement."); Ruler's Status became Local Leaders and now admits a council; Race Relations was dropped entirely; "Known For Its ..." (a sentence stem with an ellipsis) became "Claims to Fame" (a noun-phrase heading).

@@ -3,15 +3,15 @@
  "name": "ai",
  "angle": "arch-worldbuilding-communities",
  "tag": null,
- "lines": 231,
+ "lines": 339,
  "firstTs": "2026-09-07T02:56:37.986Z",
- "lastTs": "2026-09-07T03:10:42.692Z",
+ "lastTs": "2026-09-07T03:16:53.438Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 44,
-  "WebFetch": 2,
-  "WebSearch": 21
+  "Bash": 67,
+  "WebFetch": 3,
+  "WebSearch": 27
  },
  "urlsFetched": [
   "https://www.reddit.com/r/worldbuilding/wiki/rules/",
@@ -56,18 +56,36 @@
   "http://web.archive.org/cdx/search/cdx?url=worldanvil.com*&output=text&fl=timestamp,original&filter=original:.*ai.*&collapse=urlkey&limit=25&from=2023",
   "https://www.worldanvil.com/community/voting/suggestion/53f7f721-96a0-4972-b3b4-d1b5a7d75288/view",
   "https://web.archive.org/web/20260415002848id_/https://old.reddit.com/r/DnDBehindTheScreen/",
-  "http://web.archive.org/cdx/search/cdx?url=reddit.com/r/DnDBehindTheScreen/wiki*&output=text&fl=timestamp,original,statuscode&collapse=urlkey&limit=60"
+  "http://web.archive.org/cdx/search/cdx?url=reddit.com/r/DnDBehindTheScreen/wiki*&output=text&fl=timestamp,original,statuscode&collapse=urlkey&limit=60",
+  "https://koboldpress.com/no-ai-pledge/",
+  "https://www.rascal.news/tag/ai/",
+  "https://itch.io/jam/one-page-rpg-jam-2025/topic/5041892/generative-ai-policy",
+  "https://www.rascal.news/tabletop-industry-veteran-ryan-dancey-loses-alderac-coo-job-after-saying-ai-can-generate-game-ideas-as-good-as-some-of-his-companys-designs/",
+  "https://www.rascal.news/ennie-awards-updated-submission-policy-wont-accept-ai-projects-next-year/",
+  "https://www.drivethrurpg.com/en/browse?keyword=ai%20generated",
+  "https://itch.io/books/tag-ai-generated/tag-ttrpg",
+  "https://[a-z0-9_-",
+  "https://itch.io/post/12153358",
+  "https://itch.io/post/12149497",
+  "https://gabrielphoenix.itch.io/world-of-zeal/comments",
+  "https://tenfootpole.org/ironspike/?p=$p",
+  "https://tenfootpole.org/ironspike/?s=Snake+Temple+Ruins",
+  "https://tenfootpole.org/ironspike/?p=[0-9",
+  "http://web.archive.org/cdx/search/cdx?url=drivethrurpg.com*&output=text&fl=timestamp,original&filter=original:.*[Tt",
+  "https://tenfootpole.org/ironspike/?p=9829",
+  "https://en.wikipedia.org/wiki/Wikipedia:Case_against_LLM-generated_articles",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing"
  ],
  "filesWritten": [],
- "lastAssistantText": "I'll start by reading the finder method that binds this work.",
+ "lastAssistantText": "Now let me update the checkpoint file with everything so far.",
  "run": "wf_00551368-b67",
  "agent": "af5a17eeb26001796",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-af5a17eeb26001796.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-worldbuilding-communities.json",
-  "claims": 24,
+  "claims": 35,
   "complete": false,
-  "mtime": "23:05:02"
+  "mtime": "23:13:17"
  }
 }

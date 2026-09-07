@@ -19,3 +19,19 @@ Roster: (1) HiST-LLM/Seshat NeurIPS 2024 D&B paper; (2) Jan 2025 reporting GPT-4
    - Hansard: Longo "bland summary" ... "It wasn't misleading but it was bland."; Jefferson "summaries were quite generic".
    - Themes: nuance/context missed; incorrect info added; missed central point; "Made strange choices about what to highlight."; minor recommendation given opening prominence; waffly/wordy; repetitive; lacked formatting; assessors had to refer back to source.
    - Discussion: "read between the lines"; low repeatability of outputs; hallucinations "grammatically correct, but on occasion factually inaccurate".
+
+## EXPANSION (lateral, filling the archival/encyclopedic-register gap)
+- BBC 'Representation of BBC News content in AI Assistants' (Feb 2025, tested 5-6 Dec 2024, ChatGPT Enterprise GPT-4o/Copilot Pro/Gemini/Perplexity Pro; 45 journalists, 362 responses): 51% significant issues, 91% some issues, 19% factual errors where BBC cited, 13% of quotes altered/absent.
+- BBC-EBU 'News Integrity in AI Assistants' (Oct 2025, responses May/June 2025, free tiers): 45% significant, sourcing 31%, accuracy 20%, context 14%; Gemini 76% significant / 72% sourcing; BBC-to-BBC 51% -> 37%.
+- Dahl et al. 'Large Legal Fictions' (JLA, arXiv v2 21 Jun 2024): 58% (ChatGPT 4) to 88% (Llama 2) hallucination on federal cases; NON-LINEAR by case year (worst oldest AND newest, best Warren Court 1953-69); better on NEWER cases -- OPPOSITE temporal direction to HiST-LLM (which is better on EARLIER periods). Recorded as a juxtaposition, confidence medium.
+- OpenAI SimpleQA (arXiv 2411.04368, 7 Nov 2024): GPT-4o 38.2% correct, o1-preview 42.7%; History n=173 of 4,326; models "consistently overstate their confidence".
+- Magesh et al. 'Hallucination-Free?' (arXiv 2405.20362): RAG legal tools 17-33% hallucination; Lexis+ AI 65% accurate, Westlaw 42%; VENDOR claim "100% hallucination-free" vs measurement.
+- Tow Center / CJR (6 Mar 2025): 1,600 queries, 8 tools, asked for headline/publisher/PUBLICATION DATE/URL; >60% incorrect; Perplexity 37%, Grok 3 94%; "presented inaccurate answers with alarming confidence"; premium worse than free; Gemini/Grok 3 >half fabricated or broken URLs.
+- ProHist-Bench (arXiv 2604.24690v1, 27 Apr 2026, 18 models incl. GPT-5.2, Gemini-3-Pro-Preview, Claude-Sonnet-4.5-Thinking, Qwen3-Max): RS barely approaching 30 for the best, most below 15; Gemini-3-Pro-Preview RS 26.71, GPT-5.2 RS 11.07. FRONTIER 2026 EVIDENCE.
+
+## NOT FOUND / BLOCKED
+- ABC article: NOT FOUND. Wayback CDX wildcard over abc.net.au (Aug-Dec 2024) filtered on asic/summaris = no rows; site-restricted search = nothing. Story appears to have been broken by Crikey, not the ABC.
+- OpenReview peer reviews for HiST-LLM: BLOCKED, 403 ChallengeRequiredError on both api.openreview.net and api2.openreview.net.
+- Cited-by route DRY: OpenAlex records 0 citations for HiST-LLM (two records, W7113284946 and W4415798354).
+
+## FINAL: 69 claims, 12 substantive sources. 68 quotes verified verbatim against fetched text, 1 deliberately blank, 0 overlong.

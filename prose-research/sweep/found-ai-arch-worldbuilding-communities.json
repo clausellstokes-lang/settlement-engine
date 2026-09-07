@@ -1,6 +1,6 @@
 {
  "complete": false,
- "coverage": "in progress",
+ "coverage": "in progress (checkpoint 2)",
  "sourcesRead": [
   {
    "title": "r/worldbuilding subreddit rules wiki (rule 4, 'AI Content')",
@@ -81,6 +81,78 @@
    "substantive": false,
    "date": "2024-06-25",
    "route": "live curl; body paywalled after the lede, and the subject is illustration not prose"
+  },
+  {
+   "title": "Mike Shea (Sly Flourish), 'The Best LLM for Generating RPG Stuff \u2013 Your Brain'",
+   "url": "https://slyflourish.com/best_llm.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-09-30",
+   "route": "live curl with browser UA"
+  },
+  {
+   "title": "Leon Furze, 'Science Fiction Worldbuilding with Generative AI'",
+   "url": "https://leonfurze.com/2023/11/29/science-fiction-worldbuilding-with-generative-ai/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2023-11-29",
+   "route": "live curl with browser UA"
+  },
+  {
+   "title": "Mike Didymus-True, 'Tabletop industry veteran Ryan Dancey loses Alderac COO job\u2026', Rascal News",
+   "url": "https://www.rascal.news/tabletop-industry-veteran-ryan-dancey-loses-alderac-coo-job-after-saying-ai-can-generate-game-ideas-as-good-as-some-of-his-companys-designs/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2026-02-27",
+   "route": "live curl with browser UA"
+  },
+  {
+   "title": "'ChatGPT-enhanced content generation', Obsidian Portal community forums",
+   "url": "https://forums.obsidianportal.com/discussion/6463/chatgpt-enhanced-content-generation",
+   "kind": "reader",
+   "substantive": true,
+   "date": "March 2023 (capture 2024-08-04)",
+   "route": "Wayback raw id_ capture; live forum returns 403"
+  },
+  {
+   "title": "AngusA, 'Dungeon Master of Disaster? Ken Whitman's AI Bios Stir TTRPG Chaos', Tabletop Sentinel",
+   "url": "https://www.tabletopsentinel.com/news/hobby/dungeon-master-of-disaster-ken-whitmans-ai-bios-stir-ttrpg-chaos",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-05-12",
+   "route": "live curl with browser UA"
+  },
+  {
+   "title": "rhythmsoundmotion, 'ChatGPT writes \u201dMissed Opportunities in Generic Tabletop RPG Campaign Settings\u201d', EN World",
+   "url": "https://www.enworld.org/threads/chatgpt-writes-%E2%80%9Dmissed-opportunities-in-generic-tabletop-rpg-campaign-settings%E2%80%9D.709326/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2024-12-30",
+   "route": "live curl with browser UA"
+  },
+  {
+   "title": "Unknown Dungeon, 'Generative AI Policy', One-Page RPG Jam 2025 community, itch.io",
+   "url": "https://itch.io/jam/one-page-rpg-jam-2025/topic/5041892/generative-ai-policy",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2025-07-01",
+   "route": "live curl with browser UA"
+  },
+  {
+   "title": "Kapoor, Zhang et al., 'AI Rules? Characterizing Reddit Community Policies Towards AI-Generated Content'",
+   "url": "https://arxiv.org/html/2410.11698v3",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "arXiv v3, 2024-10 onward",
+   "route": "live curl of the arXiv HTML rendering"
+  },
+  {
+   "title": "DriveThruRPG Staff, 'A Response to Rascal News', Medium",
+   "url": "https://medium.com/drivethru/a-response-to-rascal-news-0deb1ce4ac21",
+   "kind": "vendor",
+   "substantive": false,
+   "date": "2025-06-30",
+   "route": "Wayback raw id_ capture; the piece is about a content-guidelines dispute, not AI"
   }
  ],
  "claims": [
@@ -443,6 +515,171 @@
    "registerHint": "none",
    "confidence": "high",
    "modelEra": "no model named; policy effective 2023-07-31; register governed is commercial RPG rulebook, adventure and supplement text"
+  },
+  {
+   "feature": "other: publisher pledge",
+   "claim": "Kobold Press's No-AI Pledge, quoted by Mike Shea, states that the publisher does not use AI to generate text for its game design.",
+   "source": "Wolfgang Baur / Kobold Press No-AI Pledge, quoted by Mike Shea, Sly Flourish",
+   "url": "https://slyflourish.com/best_llm.html",
+   "quote": "we don\u2019t use AI to generate text for our game design",
+   "page": "section 'The Current State of Generative AI in TTRPGs'",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "date": "2024-09-30",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "dm-page",
+   "confidence": "medium",
+   "modelEra": "no model named; pledge quoted September 2024; register governed is published RPG game text"
+  },
+  {
+   "feature": "reader and expert judgment",
+   "claim": "Mike Shea, a full-time D&D prep writer, says that in his experience LLMs are not great for generating game content compared with reading books and using his imagination.",
+   "source": "Mike Shea, Sly Flourish",
+   "url": "https://slyflourish.com/best_llm.html",
+   "quote": "not great for generating game content",
+   "page": "section 'Your Best Large Language Model \u2013 Your Brain'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2024-09-30",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "dm-page",
+   "confidence": "high",
+   "modelEra": "ChatGPT and similar, September 2024; register measured is RPG prep content \u2014 NPCs, locations, encounters"
+  },
+  {
+   "feature": "measurement",
+   "claim": "Shea reports that among 3,700 players and GMs he surveyed, about 3 in 10 use generative AI when preparing for or playing RPGs.",
+   "source": "Mike Shea, Sly Flourish",
+   "url": "https://slyflourish.com/best_llm.html",
+   "quote": "about 3 in 10 use generative AI when preparing for or playing RPGs",
+   "page": "section 'The Current State of Generative AI in TTRPGs'",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-09-30",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "dm-page",
+   "confidence": "high",
+   "modelEra": "no model named; survey reported September 2024; register is RPG preparation and play"
+  },
+  {
+   "feature": "steerability",
+   "claim": "Leon Furze reports that when he pointed GPT-4 at a broad exoplanet catalogue for his science-fiction worldbuilding, the model returned a generic response, and that linking one specific catalogue entry was what made the description specific.",
+   "source": "Leon Furze, personal blog",
+   "url": "https://leonfurze.com/2023/11/29/science-fiction-worldbuilding-with-generative-ai/",
+   "quote": "it returned a generic response",
+   "page": "section 'Creating a World'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-11-29",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "ChatGPT Plus (GPT-4) with Bing browsing, November 2023; register measured is science-fiction worldbuilding setting description"
+  },
+  {
+   "feature": "naming and forms of address",
+   "claim": "Board-game designer Elizabeth Hargrave says the AI-generated placeholder names she sees designers use are often clunky but adequate for a prototype.",
+   "source": "Elizabeth Hargrave to BoardGameWire, quoted by Mike Didymus-True, Rascal News",
+   "url": "https://www.rascal.news/tabletop-industry-veteran-ryan-dancey-loses-alderac-coo-job-after-saying-ai-can-generate-game-ideas-as-good-as-some-of-his-companys-designs/",
+   "quote": "often clunky options but they do the job",
+   "page": "section 'Wider Issue'",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "2026-02-27",
+   "routeHint": "live curl with browser UA; Rascal quoting BoardGameWire, primary interview not fetched",
+   "registerHint": "herald-pools",
+   "confidence": "medium",
+   "modelEra": "no model named; February 2026; register measured is generated proper names in a game prototype"
+  },
+  {
+   "feature": "counter-evidence",
+   "claim": "Hargrave says that after prompting several options for Wingspan card ideas, not one gave her an actionable idea.",
+   "source": "Elizabeth Hargrave to BoardGameWire, quoted by Mike Didymus-True, Rascal News",
+   "url": "https://www.rascal.news/tabletop-industry-veteran-ryan-dancey-loses-alderac-coo-job-after-saying-ai-can-generate-game-ideas-as-good-as-some-of-his-companys-designs/",
+   "quote": "not one of them has given me an actionable idea",
+   "page": "section 'Wider Issue'",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "2026-02-27",
+   "routeHint": "live curl with browser UA; Rascal quoting BoardGameWire",
+   "registerHint": "none",
+   "confidence": "medium",
+   "modelEra": "no model named; February 2026; register measured is board-game design ideas, not prose"
+  },
+  {
+   "feature": "reader and expert judgment",
+   "claim": "A member of the Obsidian Portal campaign-wiki forum, answering a request for AI-generated wiki text for NPCs and locations, replies that AI generation is not all that imaginative in what it provides.",
+   "source": "forum member 'ElMuggs', Obsidian Portal community forums",
+   "url": "https://forums.obsidianportal.com/discussion/6463/chatgpt-enhanced-content-generation",
+   "quote": "not all that 'imaginative' in what it provides",
+   "page": "reply of March 2023",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "March 2023",
+   "routeHint": "Wayback raw id_ capture (live forum 403)",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium",
+   "modelEra": "AI Dungeon named as the example tool, March 2023; register discussed is campaign-wiki entries for NPCs, locations and groups"
+  },
+  {
+   "feature": "reader and expert judgment",
+   "claim": "Tabletop Sentinel's writer says the curated AI-produced designer bios read as AI-generated work.",
+   "source": "AngusA, Tabletop Sentinel",
+   "url": "https://www.tabletopsentinel.com/news/hobby/dungeon-master-of-disaster-ken-whitmans-ai-bios-stir-ttrpg-chaos",
+   "quote": "they not only read as AI generated work",
+   "page": "paragraph 2",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2026-05-12",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "model unnamed; May 2026; register measured is biographical profile prose"
+  },
+  {
+   "feature": "reader and expert judgment",
+   "claim": "An EN World poster presents a ChatGPT essay on generic RPG campaign settings as an instance where the model shows the limits of neural network text generation.",
+   "source": "forum poster 'rhythmsoundmotion', EN World",
+   "url": "https://www.enworld.org/threads/chatgpt-writes-%E2%80%9Dmissed-opportunities-in-generic-tabletop-rpg-campaign-settings%E2%80%9D.709326/",
+   "quote": "Sometimes it shows the limits of neural network text generation.",
+   "page": "opening post, 2024-12-30",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2024-12-30",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "dm-page",
+   "confidence": "medium",
+   "modelEra": "ChatGPT, December 2024; register measured is critical essay prose about campaign settings"
+  },
+  {
+   "feature": "steerability",
+   "claim": "The One-Page RPG Jam 2025's generative-AI policy forbids text generated from a prompt and also text merely re-written by a generative AI tool.",
+   "source": "Unknown Dungeon (jam host), itch.io community policy",
+   "url": "https://itch.io/jam/one-page-rpg-jam-2025/topic/5041892/generative-ai-policy",
+   "quote": "use text generated from a prompt in your game",
+   "page": "'Text' section of the policy",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "date": "2025-07-01",
+   "routeHint": "live curl with browser UA",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Midjourney and ChatGPT named as examples, July 2025; register governed is one-page RPG text"
+  },
+  {
+   "feature": "other: community rule rationale",
+   "claim": "A study of Reddit community AI rules finds quality and authenticity to be the concerns most frequently given as justification.",
+   "source": "Kapoor et al., 'AI Rules? Characterizing Reddit Community Policies Towards AI-Generated Content', arXiv",
+   "url": "https://arxiv.org/html/2410.11698v3",
+   "quote": "quality and authenticity as the most frequently mentioned concerns",
+   "page": "Discussion / results summary",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "arXiv HTML v3",
+   "routeHint": "live curl of the arXiv HTML rendering",
+   "registerHint": "none",
+   "confidence": "medium",
+   "modelEra": "no model named; rules corpus collected 2023-2024; register governed is all subreddit content, image rules predominating"
   }
  ]
 }

@@ -81,3 +81,59 @@ the 2014 asyndetic list of six ("a tranquil garden, lovely glade, cheery tavern,
 tropical island, fantastic carnival") becomes five, each with its own article.
 
 ## WEB ROSTER (supporting; status logged below)
+| # | source | status | route |
+|---|--------|--------|-------|
+| 1 | SRD 5.1 PDF (CC-BY-4.0) | FETCHED, measured in full | direct download, browser UA |
+| 2 | SRD 5.2.1 PDF (CC-BY-4.0) | FETCHED, measured in full | direct download, browser UA |
+| 3 | dnd.wizards.com/resources/systems-reference-document (redirects to dndbeyond.com/srd) | FETCHED (curl 200; WebFetch returned a summary, not the page, so curl was used) | curl browser UA |
+| 4 | Converting to SRD 5.2.1 (WotC, 27 May 2025) | FETCHED | direct PDF |
+| 5 | D&D Basic Rules v1.0 (Nov 2018) | FETCHED | direct PDF |
+| 6 | D&D Beyond studio post 1717 "2024 Core Rulebooks to Expand the SRD" | FETCHED | curl; body in served HTML |
+| 7 | D&D Beyond studio post 1949 "You Can Now Publish…" | FETCHED | curl; body in served HTML |
+| 8 | Merwin, "Let's Design an Adventure: Boxed Text" (6 Nov 2019) | FETCHED | curl |
+| 9 | ScreenRant, Brosofsky interview with Perkins and Wyatt (25 Oct 2024) | FETCHED | curl |
+| 10 | Dungeon Master's Workshop, "Mastering the Boxed Text" (27 Sep 2019) | FETCHED | curl |
+| 11 | D&D Beyond forum, Official SRD 5.2 thread p.3 | FETCHED | curl |
+| 12 | 5thsrd.org planes rendering | FETCHED, used as extraction control | curl |
+| 13 | Tribality SRD 5.2 piece | FETCHED, REJECTED — reprints the WotC FAQ verbatim | curl |
+| — | a peer-reviewed stylometric study of the SRD | NOT FOUND — two searches returned only general stylometry literature; the thin literature is itself the finding |
+
+## ADDED AFTER THE FIRST CHECKPOINT
+- ⚠ CORRECTION TO MYSELF: my first TOC read of SRD 5.2.1 missed the **Gameplay Toolbox** chapter
+  (p.192; Travel Pace, Magical Contagions, **Environmental Effects** p.195, Fear and Mental Stress,
+  Poison, Traps, Combat Encounters). I checked pp.192-199 before letting any absence claim stand.
+  It contains NO place description and NO read-aloud: "Environmental Effects" is Deep Water,
+  Extreme Cold, Extreme Heat, Frigid Water, Heavy Precipitation, High Altitude, Slippery Ice,
+  Strong Wind, Thin Ice — each a saving-throw rule keyed to a number.
+- 5.2.1 Environmental Effects p.195: 9 paras / 27 sentences / 512 words; mean 19.0, sd 9.1;
+  sent/para 3.00; second person 0.00/1k; **digits 44.92/1k, 44.44% of sentences**; em dash 0.
+- 5.1 Appendix PH-B pantheon prose p.360 (prose paragraphs only): 5 paras / 22 sentences / 550 w;
+  mean 25.0, sd 12.0, min 9, max 54; 27.27% over 30 words; sent/para 4.40; second person 0.00/1k;
+  digits 0.00/1k; em dash 5.45/1k; contractions 9.09/1k; was/were 0.00/1k. Removed in 5.2 as well.
+- D&D Basic Rules 2018 p.2, the DM's Castle Ravenloft speech (the read-aloud form the SRD lacks):
+  1 para / 9 sentences / 127 words; mean 14.1, sd 4.4, min 5, max 21; digits 0; em dashes 0;
+  contractions 0; second person 15.75/1k in 2 of 9 sentences; and NOT ONE finite form of "to be" —
+  the nine main verbs are towers, keep, look, gapes, spans, creak, stare, grin, hangs, stand.
+- Capitalisation, measured over both full documents (242,857 w in 5.1; 235,684 w in 5.2.1):
+  "difficult terrain" lower 48 / Cap 1 in 5.1 → lower 0 / Cap 52 in 5.2.1; "bright light" 54/0 → 0/50;
+  "dim light" 72/0 → 0/63; "temporary hit points" 27/0 → 0/72; "short rest" 13/0 → 0/30;
+  "long rest" 98/11 → 0/148; "proficiency bonus" 81/16 → 0/98. The conversion guide's
+  Capitalization section lists 75 bulleted categories.
+- Extraction control: three sentences of the planes appendix were checked word-for-word against the
+  independent CC rendering at 5thsrd.org and matched.
+
+## FOR THE SYNTHESIS — the tension the measurements expose (NOT written as a claim)
+Merwin's D&D Beyond column tells adventure writers to move boxed text "from the second-person point
+of view to the third person"; WotC's own Basic Rules sample read-aloud passage is second person
+("Castle Ravenloft towers before you", 2 of 9 sentences). The house does not follow its own column.
+A claim spanning both pages would be graded PARTIAL on either one, so it is recorded here instead.
+
+## WHAT THE ANGLE ANSWERS
+The SRD is a NEGATIVE result for place prose and a POSITIVE result for the register question. There
+is no settlement text, no read-aloud, no gazetteer or chronicle vocabulary in 767 pages of licensed
+WotC text. What place prose there was — 1,530 words of planes and 550 words of pantheons — shares
+the archivist profile the program is reconstructing: present tense, no digits, second person
+effectively absent (1.96 and 0.00 per 1,000 words), long undivided paragraphs (8.00 and 4.40
+sentences each), no sentence under 8 words in the planes appendix. And WotC deleted all of it in
+2025 "as those are not rules-bearing", leaving a document whose only environment section carries
+44.92 numerals per 1,000 words.

@@ -1,0 +1,357 @@
+
+
+ Funeral Homes Are Using ChatGPT to Churn Out Lazy Obituaries 
+
+ We have updated our Privacy Policy . Please review to learn more. By continuing to use our services, you agree to these updates. 
+
+ ×
+
+ AI 
+
+ Society 
+
+ Health 
+
+ Machines 
+
+ Science 
+
+ Space 
+
+ Transport 
+
+ Latest 
+
+ Newsletter 
+
+ Search for: 
+
+ AI 
+
+ Anthropic 
+
+ Ethics 
+
+ Facial recognition 
+
+ Google 
+
+ Machine Learning 
+
+ Meta 
+
+ OpenAI 
+
+ xAI 
+
+ Society 
+
+ Art 
+
+ Blockchain 
+
+ Cybersecurity 
+
+ Education 
+
+ FCC 
+
+ Finance 
+
+ Food 
+
+ Privacy 
+
+ The Industrialists 
+
+ Virtual Reality 
+
+ Health 
+
+ Brain 
+
+ Developments 
+
+ Genetics 
+
+ Medical 
+
+ Prosthetics and Devices 
+
+ Sleep 
+
+ Studies 
+
+ Machines 
+
+ Computing 
+
+ Robotics 
+
+ Science 
+
+ Agriculture 
+
+ Biology 
+
+ Chemistry 
+
+ Energy 
+
+ Environment 
+
+ Evolution 
+
+ Future Materials 
+
+ Military 
+
+ Physics 
+
+ Space 
+
+ Astronomy 
+
+ Astrophysics 
+
+ Blue Origin 
+
+ Boeing 
+
+ ESA 
+
+ NASA 
+
+ Off-World 
+
+ Space Force 
+
+ SpaceX 
+
+ Transport 
+
+ Electric Vehicles 
+
+ Mass Transit 
+
+ Self-Driving Vehicles 
+
+ Tesla 
+
+ Latest 
+
+ Newsletter 
+
+ Artificial Intelligence OpenAI 
+
+ Good Grief 
+
+ Funeral Homes Are Using ChatGPT to Churn Out Lazy Obituaries
+
+ "Wouldn't it still mean something, even if it was written by a machine?"
+
+ By Frank Landymore 
+
+ Published 
+
+ Aug 4, 2025 2:24 PM EDT 
+
+ Add Futurism (opens in a new tab) 
+
+ More information 
+ Adding us as a Preferred Source in Google by using this link indicates that you would like to see more of our content in Google News results. 
+
+ Image: Getty / Futurism 
+
+ Sign up to see the future, today
+
+ Can’t-miss innovations from the bleeding edge of science and tech
+
+ Email address 
+
+ Sign Up 
+
+ Thank you! 
+
+ Funeral companies and grieving families are turning to AI chatbots to cough up obituaries for the recently deceased, the Washington Post reports , in yet another example of how the tech is being used to automate even the most emotionally charged parts of the human experience. 
+
+ One bellwether of the AI’s rise in the death care industry was last year’s National Funeral Directors Association conference in Las Vegas, where it was apparently the talk of the town, according to Ryan Lynch, head of product at the cemetery software developer PlotBox.
+
+ “Someone did stand up and say they thought it was the greatest advancement in funeral-home technology since some kind of embalming tool,” Lynch told WaPo . “Which I thought was maybe a bit hyperbolic.” 
+
+ That year, the second-place winner of the conference’s Innovation Awards was an app called Nemu, WaPo noted, an “AI-enabled recognition tool” that catalogs and appraises a deceased person’s belongings so they can be divvied up between family members. 
+
+ Sonali George, founder of an AI obituary generator called CelebrateAlley, told WaPo that AI functions as an “enabler of human connection.” 
+
+ “Imagine for the person who just died, [wouldn’t] that person want their best friend to say a heartfelt tribute that makes everybody laugh, brings out the best, with AI?” she told the newspaper. “If you had the tool to do ’25 reasons why I love you, mom,’ wouldn’t it still mean something, even if it was written by a machine?” 
+
+ The appeal of an AI obituary is straightforward, and follows the trend of AI and other Silicon Valley tech offering to make our lives as frictionless as possible, down to the most quotidian forms of human interaction. Why write that email, or even text message , when a chatbot can do it for you? Regarding an obituary, the death of a loved one is always difficult, and finding the right words to say while grieving is doubly so. Why, again, make it more stressful than it needs to be? 
+
+ Jeff Fargo, a 55-year-old Nevada man, gushed about how ChatGPT helped him memorialize his mother. “I just… emptied my soul into the prompt,” he told WaPo . “I was mentally not in a place where I could give my mom what she deserved. And this did it for me.” 
+
+ The AI’s writeup was well received by people who knew his mother. Now, Fargo’s already looking forward to using a new ChatGPT feature to write his father’s obit, when the time comes — and hopes that one day his kids will do the same when he passes. 
+
+ “This time I’m gonna use Deep Research mode,” Fargo added, referring to OpenAI’s agentic model intended for automating complex research. “It’s gonna be a banger.” 
+
+ On the other hand, you might argue that speedrunning the grieving process isn’t a healthy way of coping with a personal loss. It’s something that needs to be worked through, however painful. Writing an obituary can be a cathartic release — and beyond that, shows that you’re willing to expend at least the bare minimum amount of effort to honor the life of someone who was once close to you. 
+
+ The mother of a man who built an AI obituary generator (these startups are legion, evidently) argued as much, saying, quoted by her son, that she and the seniors she lives with find it disheartening to think that “someone found a faster way to remember you and move on with their lives,” per WaPo . 
+
+ WaPo ‘s testing of the AI obituary writing tool CelebrateAlly, which is powered by models from OpenAI and Anthropic, confirm the common criticisms of the tech, particularly its proclivity for making up details and slathering them in sententious, flowery language. Providing specific details of a fake person’s life still led to the AI dreaming up new ones. 
+
+ For example, when prompted to write an obit about a fictional “Jimmy,” who was specified as being thoughtful, the AI wrote: “His thoughtful nature manifested in countless acts of kindness, each gesture reflecting his profound understanding of human nature…” In another test, a prompt described Jimmy as strong — to which the AI embellished that his strength was “legendary among those who knew him — not merely physical prowess, but an inner fortitude…” No mention of his friends or family was made in the prompt. 
+
+ Those outputs may sound “writerly” and refined. But according to Mary McGreevy, who runs a popular TikTok account dedicated to reading obits, it’s the raw imperfections — both of the writing and of the person it’s describing — that make an obituary beautiful. What AI does is effectively “airbrush” it all.
+
+ The best obituaries aren’t written by talented writers but by people “who just lay it all out there… to get to the imperfect heart of who that person was,” she told WaPo . “Those are the ones I think truly help people in their grief. And they’re not necessarily professional or polished at all.”
+
+ More on AI: Zuckerberg Says Meta Is Now Seeing Signs of Advanced AI Improving Itself 
+
+ Add Futurism as a preferred source on Google to see more of our reporting. 
+
+ Frank Landymore
+
+ Contributing Writer 
+
+ I’m a tech and science correspondent for Futurism, where I’m particularly interested in astrophysics, the business and ethics of artificial intelligence and automation, and the environment.
+
+ .article-sidebar]:pt-0">
+
+ Most Popular
+
+ Ethics 
+
+ Teen Boys Are Using Meta Glasses to Harass and Bully Girls at High Schools and Middle Schools 
+
+ By Maggie Harrison Dupré 
+
+ Food 
+
+ Scientists Find That 96 Percent of Delicious Tuna Is Infected With Parasitic Worms 
+
+ By Joe Wilkins 
+
+ Machine Learning 
+
+ Man Pretends to Hallucinate in Job Interview With an AI Bot, Causing It to Go Haywire 
+
+ By Joe Wilkins 
+
+ Meta 
+
+ As If There Was Any Question About Data Centers Being Weak Job Creators, Meta Is Now Deploying Robots to Maintain Them 
+
+ By Joe Wilkins 
+
+ Dark Matter 
+
+ Something Strange Just Happened With the World’s Largest Dark Matter Detector 
+
+ By Frank Landymore 
+
+ Read More 
+
+ More 
+
+ OpenAI 
+
+ ChatGPT Is Now Losing Users 
+
+ By Victor Tangermann 
+
+ OpenAI 
+
+ People Are Rizzing on Tinder Using ChatGPT, Then Showing Up to Dates Completely Tongue-Tied 
+
+ By Victor Tangermann 
+
+ Artificial Intelligence 
+
+ AI Allows Dead Woman to Talk to People Who Showed Up at Her Funeral 
+
+ By Victor Tangermann 
+
+ OpenAI 
+
+ A Dumb Reality of ChatGPT Could Spell Big Trouble for OpenAI 
+
+ By Victor Tangermann 
+
+ OpenAI 
+
+ Copywriter Fired After Bosses Started Calling Her “ChatGPT” 
+
+ By Noor Al-Sibai 
+
+ Artificial Intelligence 
+
+ Leading AI Chatbots Stumped When Asked About Biden’s Decision to Drop Out 
+
+ By Frank Landymore 
+
+ OpenAI 
+
+ Lawyer Fired for Using ChatGPT Says He Will Keep Using AI Tools 
+
+ By Victor Tangermann 
+
+ OpenAI 
+
+ ChatGPT Falsely Accuses Law Professor of Sexual Assault 
+
+ By Noor Al-Sibai 
+
+ SEE MORE 
+
+ Sign up to see the future, today
+
+ Can’t-miss innovations from the bleeding edge of science and tech
+
+ Email address 
+
+ Sign Up 
+
+ Thank you! 
+
+ Newsletter 
+
+ About Us 
+
+ Editorial Standards 
+
+ Contacts 
+
+ Licensing Requests 
+
+ Privacy Policy 
+
+ Terms & Conditions 
+
+ DMCA Policy 
+
+ Sitemap 
+
+ FOLLOW US
+
+ DISCLAIMER(S)
+
+ Disclaimer(s)
+
+ Articles may contain affiliate links which enable us to share in the revenue of any purchases made. Registration on or use of this site constitutes acceptance of our Terms of Service. 
+
+ © 2026 Recurrent . All rights reserved. 
+
+ Advanced Transport 
+
+ Artificial Intelligence 
+
+ Future Society 
+
+ Health & Medicine 
+
+ Robots and Machines 
+
+ Science & Energy 
+
+ Space 
+
