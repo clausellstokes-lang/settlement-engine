@@ -1,0 +1,7 @@
+SOAK START Mon Sep  7 00:09:37 EDT 2026
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 60913 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+# realm-scale case research-lit-4s-300y-4s-seed1
+# whole-world soak — 300 years × 4 settlements, seed "realm-scale-research-lit-4s-300y-4s-seed1", full_simulation preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
+
+## run A (primary)

@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 00:07:41 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 00:13:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lighting tail's three follow-on cars land as one consist — the mobileSingleCh
 
@@ -104,7 +104,7 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 
 ## WORKFLOW RUNS of chair session 405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074 (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_0eb229cc-f75: 1 journal lines, 1 agents
-- wf_4bd76597-3a3: 3 journal lines, 2 agents
+- wf_4bd76597-3a3: 5 journal lines, 3 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.17 3.38 5.44
+load: 3.15 3.21 4.68

@@ -3,14 +3,14 @@
  "name": "ai",
  "angle": "arch-decoding-literature",
  "tag": null,
- "lines": 270,
+ "lines": 383,
  "firstTs": "2026-09-07T03:52:54.297Z",
- "lastTs": "2026-09-07T04:07:06.475Z",
+ "lastTs": "2026-09-07T04:13:05.699Z",
  "tools": {
   "Read": 1,
-  "Bash": 66,
+  "Bash": 90,
   "ToolSearch": 1,
-  "WebSearch": 3
+  "WebSearch": 11
  },
  "urlsFetched": [
   "https://arxiv.org/pdf/$id",
@@ -31,18 +31,30 @@
   "https://arxiv.org/abs/2210.15097",
   "https://arxiv.org/abs/2408.13586",
   "https://arxiv.org/abs/2307.03749",
-  "https://arxiv.org/abs/2310.01041"
+  "https://arxiv.org/abs/2310.01041",
+  "https://arxiv.org/abs/2601.01714",
+  "https://arxiv.org/abs/2406.07735",
+  "https://arxiv.org/abs/2402.05201",
+  "https://arxiv.org/abs/2511.04754",
+  "https://arxiv.org/abs/2305.13477",
+  "https://arxiv.org/abs/2305.02633",
+  "https://arxiv.org/abs/2408.16345",
+  "https://aclanthology.org/2025.findings-emnlp.132.pdf",
+  "https://arxiv.org/pdf/2410.06097",
+  "https://arxiv.org/abs/2410.06097",
+  "https://arxiv.org/pdf/2504.01100",
+  "https://arxiv.org/abs/2504.01100"
  ],
  "filesWritten": [],
- "lastAssistantText": "Two searches surfaced new on-angle work. Fetching.",
+ "lastAssistantText": "The stopping rule is met. Writing final notes and the complete checkpoint.",
  "run": "wf_0eb229cc-f75",
  "agent": "a6f695ff0b1f3146d",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-a6f695ff0b1f3146d.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-decoding-literature.json",
-  "claims": 150,
+  "claims": 180,
   "complete": false,
-  "mtime": "00:06:03"
+  "mtime": "00:12:36"
  }
 }
