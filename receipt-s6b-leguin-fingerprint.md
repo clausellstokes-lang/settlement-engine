@@ -118,3 +118,34 @@ The PDF's own header credits *The Wind's Twelve Quarters: Short Stories* by Ursu
 `researchgate.net`, `docs.google.com` copies of "The Carrier Bag Theory of Fiction",
 "She Unnames Them" and Omelas — none is a publisher- or course-sanctioned page.
 `shsdavisapes.pbworks.com` (Omelas) — a wiki host, not `.edu`.
+
+## Corpus build (all cuts printed at cut time; scripts in `s6b-scratch/`)
+`cut_html.py` (re-written to the lost `primary/cut_html.py` contract) + `build_corpora.py`
+(per-source keep-lists, so quoted specimens by other authors never enter a Le Guin column) +
+`pdf2txt.py` (pypdf 6.14.2 — `pdftotext` is still absent, same deviation PROVENANCE.md records).
+
+| source | paras in→kept | words in→kept | what was cut |
+|---|---|---|---|
+| lithub *Steering the Craft* ch.1 | 32→22 | 2,542→1,301 | **7 specimen blocks quoted from Kipling, Twain, Hurston and Molly Gloss (1,095 w)**, LitHub frame, bio, affiliate line |
+| lithub "How to Become a Writer" | 23→19 | 1,528→1,383 | newsletter line, a Tolstoy quotation, bio, affiliate |
+| lithub "Who Cares About the Great American Novel" | 22→16 | 1,234→1,020 | LitHub frame, a Mohsin Hamid quotation, a duplicated pull-quote, credit, bio, affiliate |
+| EL "…How to Build a New Kind of Utopia" | 21→19 | 845→791 | two newsletter promos |
+| EL "I Keep Asking You Not to Buy Books from Amazon" | 11→5 | 505→281 | EL editor's bio ×2, EL commentary, link line, promos |
+| lithub / Structo interview | 96→44 | 4,117→3,063 | every `EM:` question, LitHub frame, interviewer intro and bio, a stage-direction paragraph, affiliate |
+| lithub / Tin House *Conversations on Writing* | 69→30 | 4,062→1,874 | every `DN:` question, Naimon's 6-paragraph intro, an Earthsea epigraph poem, 3 duplicated pull-quotes, an unlabelled DN continuation, credit, bio, affiliate |
+| ucdavis Omelas PDF | 195 lines→16 paras | 2,848→2,822 | 4 page markers, 3 title/credit lines |
+
+A further **20 editorial bracket spans** (`[Laughs]`, `[Pause]`, `[Both laugh.]`, glosses) were
+stripped from the interview text — those are the transcriber's words, not hers.
+
+**Words kept per column: nonfiction 9,670 (written 4,776 + spoken 4,894); fiction 2,822.**
+Both clear the brief's floors (≥8,000 nonfiction; ≥2,500 fiction), so the `-thin` label is NOT used.
+Because 4,894 of the 9,670 nonfiction words are *transcribed speech*, I also fingerprinted the two
+halves separately — a written/spoken mixture is a register mixture, and the section's craft rules
+are claims about written prose.
+
+## Predictions written BEFORE the instrument ran (preamble law)
+- `leguin-nonfiction` wordsPerSentence mean 16–20, sd 11–15, p50 14–18.
+- written half longer than spoken half by ≥ 3 words/sentence.
+- `leguin-fiction` (Omelas) mean 21–26, semicolonRate the highest of any Le Guin column.
+- Le Guin's mean below tolkien-plain's 22.5 in every column except possibly fiction.
