@@ -3,12 +3,13 @@
  "name": "wolfe",
  "angle": null,
  "tag": "i711-725",
- "lines": 76,
+ "lines": 96,
  "firstTs": "2026-09-06T23:56:25.333Z",
- "lastTs": "2026-09-06T23:59:51.241Z",
+ "lastTs": "2026-09-07T00:02:18.494Z",
  "tools": {
   "Read": 1,
-  "Bash": 17
+  "Bash": 21,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://web.archive.org/web/20230527084143id_/https://us.macmillan.com/books/9780312863944/theurthofthenewsun",
@@ -28,9 +29,9 @@
  "run": "wf_1326cde9-2e5",
  "agent": "a08f019f06f367ac6",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a08f019f06f367ac6.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i711-725.json",
-  "exists": false
+  "exists": true
  }
 }

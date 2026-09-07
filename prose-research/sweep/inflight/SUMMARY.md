@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:59:57 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 20:03:58 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -144,9 +144,10 @@
 | kay | finder | translators-and-ear | result | 80 | — | 35 claims, complete=True @17:25:52 | 19:33:40 |
 | kay | regrade | regrade-r5 | result | 0 | build-kay-regrade.mjs | — | 18:26:34 |
 | kay | regrade | regrade-r7 | failed | 0 | — | — | 19:46:19 |
-| kay | regrade | regrade-r8 | in-flight | 0 | — | — | 23:59:26 |
+| kay | regrade | regrade-r8 | result | 0 | — | — | 00:00:50 |
 | kay | synth |  | failed | 0 | — | — | 19:46:20 |
 | kay | synth |  | failed | 0 | kay-stats.mjs, section-kay.md | — | 18:42:12 |
+| kay | synth |  | in-flight | 0 | — | — | 00:03:31 |
 | kay | verifier | i1007-1021 | result | 10 | — | verdict file WRITTEN | 23:43:41 |
 | kay | verifier | i1022-1036 | result | 10 | — | verdict file WRITTEN | 23:42:38 |
 | kay | verifier | i1037-1051 | result | 5 | — | verdict file WRITTEN | 23:48:03 |
@@ -197,7 +198,6 @@
 | kay | verifier | i992-1005 | result | 13 | — | verdict file WRITTEN | 23:37:58 |
 | kay | verifier | i998-1006 | failed | 0 | — | verdict file absent | 19:46:19 |
 | leguin | critic |  | failed | 0 | — | — | 19:46:19 |
-| leguin | critic |  | result | 32 | critic-leguin.md | — | 18:21:42 |
 | leguin | critic |  | failed | 0 | — | — | 18:42:15 |
 | leguin | critic |  | result | 15 | critic-leguin.md | — | 22:59:38 |
 | leguin | finder | academic-2 | result | 50 | — | 78 claims, complete=True @17:25:53 | 19:45:14 |
@@ -317,15 +317,15 @@
 | wolfe | verifier | i693-707 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i693-710 | result | 8 | — | verdict file WRITTEN | 23:56:00 |
 | wolfe | verifier | i708-722 | failed | 0 | — | verdict file absent | 19:50:39 |
-| wolfe | verifier | i711-725 | in-flight | 11 | — | verdict file absent | 23:59:51 |
+| wolfe | verifier | i711-725 | result | 11 | — | verdict file WRITTEN | 00:02:18 |
 | wolfe | verifier | i723-737 | failed | 0 | — | verdict file absent | 19:50:39 |
-| wolfe | verifier | i726-742 | in-flight | 17 | — | verdict file absent | 23:59:50 |
+| wolfe | verifier | i726-742 | in-flight | 22 | — | verdict file absent | 00:03:43 |
 | wolfe | verifier | i738-752 | failed | 0 | — | verdict file absent | 19:50:39 |
-| wolfe | verifier | i743-779 | in-flight | 16 | — | verdict file absent | 23:59:09 |
+| wolfe | verifier | i743-779 | in-flight | 22 | — | verdict file absent | 00:03:21 |
 | wolfe | verifier | i753-767 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i768-782 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i783-797 | failed | 0 | — | verdict file absent | 19:50:40 |
-| wolfe | verifier | i787-825 | in-flight | 8 | — | verdict file absent | 23:59:27 |
+| wolfe | verifier | i787-825 | result | 8 | — | verdict file WRITTEN | 00:01:13 |
 | wolfe | verifier | i798-812 | failed | 0 | — | verdict file absent | 19:50:40 |
 | wolfe | verifier | i813-827 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i828-842 | failed | 0 | — | verdict file absent | 19:50:40 |
