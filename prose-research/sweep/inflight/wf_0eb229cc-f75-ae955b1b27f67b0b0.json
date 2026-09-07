@@ -1,0 +1,36 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i1162-1193",
+ "lines": 92,
+ "firstTs": "2026-09-07T04:26:43.182Z",
+ "lastTs": "2026-09-07T04:30:19.662Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 22
+ },
+ "urlsFetched": [
+  "https://www.lonelyplanet.com/legal/ai-policy",
+  "https://slate.com/technology/2025/11/arcadia-publishing-artificial-intelligence-history-books-authors.html",
+  "https://www.which.co.uk/policy-and-insight/article/tripadvisor-ai-tool-gives-glowing-reviews-to-dangerous-hotels-which-finds-adbnO9E3Dr2O",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "https://jilltxt.net/genre-glitches-and-unexpected-promotional-phrases-as-a-sign-of-ai-writing/",
+  "https://www.ohs.org/blog/an-artificial-intelligence-research-request.cfm",
+  "https://www.governing.com/artificial-intelligence/how-local-librarians-keep-ai-slop-off-the-shelves",
+  "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+  "https://en.wikipedia.org/w/index.php?oldid=1162718043&action=raw",
+  "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&revids=1162718043&rvprop=timestamp&format=json"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All eight sources fetched live (HTTP 200, no blocks). Writing the checkpoint file.",
+ "run": "wf_0eb229cc-f75",
+ "agent": "ae955b1b27f67b0b0",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-ae955b1b27f67b0b0.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1162-1193.json",
+  "exists": false
+ }
+}

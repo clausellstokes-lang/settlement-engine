@@ -1,0 +1,39 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i1110-1160",
+ "lines": 72,
+ "firstTs": "2026-09-07T04:26:43.182Z",
+ "lastTs": "2026-09-07T04:30:15.658Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 18
+ },
+ "urlsFetched": [
+  "https://arxiv.org/abs/2203.17217",
+  "https://arxiv.org/abs/1908.04319",
+  "https://arxiv.org/abs/2510.01171",
+  "https://en.wikivoyage.org/w/index.php?title=Wikivoyage_talk:AI_guidelines&action=raw",
+  "https://en.wikivoyage.org/w/index.php?title=User:LPfi/AI_guidelines&action=raw",
+  "https://intrepidtimes.com/2026/01/chatgpt-vs-lonely-planet-tallinn-day-trip/",
+  "https://www.nytimes.com/2023/08/05/travel/amazon-guidebooks-artificial-intelligence.html",
+  "https://ar5iv.labs.arxiv.org/html/2203.17217",
+  "https://aclanthology.org/2022.acl-short.4/",
+  "https://en.wikivoyage.org/w/api.php?action=query&list=users&ususers=LPfi&usprop=groups&format=json",
+  "https://en.wikivoyage.org/w/api.php?action=query&prop=revisions&titles=User%3ALPfi%2FAI%20guidelines&rvlimit=3&rvprop=timestamp%7Cuser%7Ccomment&format=json",
+  "https://web.archive.org/web/20260207205925id_/https://www.nytimes.com/2023/08/05/travel/amazon-guidebooks-artificial-intelligence.html",
+  "https://arxiv.org/pdf/2203.17217v1"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All seven URLs reached as raw text. Writing the checkpoint file.",
+ "run": "wf_0eb229cc-f75",
+ "agent": "ac2ef395f946952cb",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-ac2ef395f946952cb.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1110-1160.json",
+  "exists": false
+ }
+}

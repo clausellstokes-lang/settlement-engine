@@ -2679,6 +2679,56 @@
   }
  },
  {
+  "index": 986,
+  "feature": "other: hedged non-statement",
+  "claim": "A December 2024 revision to the Wikipedia biography 'Throwing Curves: Eva Zeisel' is given as an example of hedging that the details of the subject's resistance efforts are not widely documented.",
+  "source": "a Wikipedia revision quoted as a demonstration passage in Wikipedia:Signs of AI writing, retrieved 6 Sep 2026",
+  "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "quote": "Though the details of these resistance efforts",
+  "page": "§ Knowledge-cutoff disclaimers — Examples, 2023-2025",
+  "kind": "analysis",
+  "polarity": "applies",
+  "date": "2026-09-06",
+  "routeHint": "curl with a desktop browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "an unnamed LLM, revision dated Dec 2024; register measured: encyclopedic biography",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 986,
+   "verdict": "PARTIAL",
+   "trueWording": "Though the details of these resistance efforts aren't widely documented",
+   "unsupportedLimb": "that 'Throwing Curves: Eva Zeisel' is a Wikipedia biography — the page names it only as the article the revision belongs to, and that article is about a 2002 documentary film, not a biography",
+   "note": "Quote is verbatim in the Examples box of the knowledge-cutoff section, attributed to 'this December 2024 revision' (Special:Diff/1261964722) to Throwing Curves: Eva Zeisel, with 'aren't widely documented' highlighted. December 2024 and the hedging function are supported. The 'biography' limb is not: the en.wikipedia extract for that title opens 'Throwing Curves : Eva Zeisel is a 2002 documentary film directed by Jyll Johnstone.'",
+   "fromFile": "verdicts-ai-i985-1004.json"
+  }
+ },
+ {
+  "index": 1000,
+  "feature": "other: eulogy register in the record",
+  "claim": "Treadway says the obituaries he now reads are stilted messages that read as if ripped from LinkedIn.",
+  "source": "Bob Treadway, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+  "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "quote": "stilted messages that read as if they were ripped from LinkedIn",
+  "page": "section 'Creative ideas for a graveside service'",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2025-08-03",
+  "routeHint": "Wayback Machine raw capture",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "suspected AI obituaries in a local newspaper, observed mid-2025; register measured: the obituary",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 1000,
+   "verdict": "PARTIAL",
+   "trueWording": "stilted messages that read as if they were ripped from LinkedIn",
+   "unsupportedLimb": "that Treadway said it — the LinkedIn simile is Harwell's paraphrase of Treadway's reaction, not words attributed to him; Treadway's own quoted line instead says the obits look like they were taken off a resume",
+   "note": "Same Wayback raw capture; section heading 'Creative ideas for a graveside service' confirmed. Quote is verbatim, in the reporter's sentence 'But he's been saddened to see so many obits get replaced by ...'. Two limbs are softer than the claim: the attribution (paraphrase, not quotation) and the quantity ('so many obits', not 'the obituaries he now reads').",
+   "fromFile": "verdicts-ai-i985-1004.json"
+  }
+ },
+ {
   "index": 1023,
   "feature": "other: neutral-seeming but not neutral",
   "claim": "Wikipedia's large language models policy page states LLMs can produce content neutral-seeming in tone but not in substance.",
@@ -2701,6 +2751,31 @@
    "note": "Fetched twice as raw text: the wikitext via action=raw and the rendered page, both 200. The quotation is verbatim on the page, in the section the claim names. The substantive limb is fully supported. The failing limb is the descriptor: the page's own hatnote reads 'This is an information page. It is not a Wikipedia policy or guideline', and its short description is 'Wikipedia information page'. Wikipedia treats policy, guideline and information page as distinct tiers, and the redirect line at the top points to a DIFFERENT page, Wikipedia:Writing articles with large language models, as the content guideline. Downstream prose must not say 'Wikipedia policy states'.",
    "unsupportedLimb": "that the cited page is a policy page - its own banner says it is not a Wikipedia policy or guideline, but an information page",
    "fromFile": "verdicts-ai-i1006-1025.json"
+  }
+ },
+ {
+  "index": 1055,
+  "feature": "other: mechanism of blandness",
+  "claim": "Meister and colleagues argue that high-probability text reads as dull because low probability is low information content, so probable text is literally uninformative.",
+  "source": "Clara Meister, Tiago Pimentel, Gian Wiher and Ryan Cotterell, 'Locally Typical Sampling', TACL 2023 (arXiv v6, 5 Jun 2025)",
+  "url": "https://arxiv.org/abs/2202.00666",
+  "quote": "its low information content likely makes for boring",
+  "page": "section 5.1",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2023 (TACL); arXiv v6 5 Jun 2025",
+  "routeHint": "arXiv PDF binary (https://arxiv.org/pdf/<id>) -> pdftotext",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "information-theoretic argument about probabilistic language generators generally, 2022-2023.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1055,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'low probability is low information content' - the paper's relation runs the other way: high probability implies low information content",
+   "trueWording": "why high-probability text is often dull or generic",
+   "note": "arXiv 2202.00666: the quoted fragment is on the page verbatim, broken across a hyphenated line ('makes for bor-/ing, i.e., uninformative, text'), and the sentence attributes dullness to low information content. But the claim's stated mechanism is inverted: the paper's information-theoretic framing (information content = -log p) makes HIGH probability the low-information case, which is exactly why high-probability text is dull. As written, 'because low probability is low information content' is not what the page supports, so this grades PARTIAL rather than VERIFIED.",
+   "fromFile": "verdicts-ai-i1046-1108.json"
   }
  }
 ]

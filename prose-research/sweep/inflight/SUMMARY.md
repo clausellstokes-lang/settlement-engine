@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:25:13 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:30:30 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -16,15 +16,19 @@
 | ai | verifier | i1000-1014 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1006-1025 | result | 10 | — | verdict file WRITTEN | 04:24:22 |
 | ai | verifier | i1015-1029 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1026-1043 | result | 4 | — | verdict file WRITTEN | 04:29:45 |
 | ai | verifier | i1030-1044 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1045-1059 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1046-1108 | in-flight | 4 | — | verdict file WRITTEN | 04:30:30 |
 | ai | verifier | i1060-1074 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1075-1089 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1090-1104 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1105-1119 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1110-1160 | in-flight | 13 | — | verdict file absent | 04:30:15 |
 | ai | verifier | i1120-1134 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1135-1149 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1150-1164 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1162-1193 | in-flight | 10 | — | verdict file absent | 04:30:19 |
 | ai | verifier | i1165-1179 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1180-1194 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1195-1209 | failed | 0 | — | verdict file absent | 03:45:45 |
@@ -37,7 +41,7 @@
 | ai | verifier | i955-969 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i962-984 | result | 7 | — | verdict file WRITTEN | 04:23:40 |
 | ai | verifier | i970-984 | failed | 0 | — | verdict file absent | 03:45:43 |
-| ai | verifier | i985-1004 | in-flight | 7 | — | verdict file absent | 04:25:01 |
+| ai | verifier | i985-1004 | result | 7 | verdicts-ai-i985-1004.json | verdict file WRITTEN | 04:26:43 |
 | ai | verifier | i985-999 | failed | 0 | — | verdict file absent | 03:45:43 |
 | dnd | critic |  | failed | 0 | — | — | 03:45:30 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 02:10:32 |
@@ -47,7 +51,7 @@
 | dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:50:21 | 03:18:23 |
 | dnd | regrade | regrade-r10 | result | 0 | — | — | 04:08:15 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
-| dnd | synth |  | in-flight | 0 | head.md, part6.md | — | 04:24:55 |
+| dnd | synth |  | in-flight | 0 | head.md, part6.md, reconcile.md, tail.md | — | 04:29:22 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
 | dnd | verifier | i1007-1021 | result | 2 | — | verdict file WRITTEN | 03:45:27 |
@@ -70,11 +74,6 @@
 | dnd | verifier | i962-976 | result | 10 | — | verdict file WRITTEN | 03:32:25 |
 | dnd | verifier | i977-991 | result | 4 | — | verdict file WRITTEN | 03:30:44 |
 | dnd | verifier | i992-1006 | result | 5 | — | verdict file WRITTEN | 03:41:17 |
-| hobb | critic |  | result | 0 | critic-hobb.md | — | 22:39:48 |
-| hobb | regrade | regrade-r7 | result | 0 | build-r7.mjs | — | 22:00:30 |
-| hobb | synth |  | result | 0 | section-hobb-body.md | — | 22:27:15 |
-| hobb | verifier | i531-639 | result | 41 | — | verdict file WRITTEN | 21:45:54 |
-| hobb | verifier | i640-693 | result | 14 | — | verdict file WRITTEN | 21:34:12 |
 | kay | critic |  | result | 29 | critic-kay.md | — | 00:52:00 |
 | kay | finder | transcripts-and-readers | result | 104 | — | 96 claims, complete=True @19:18:57 | 23:23:41 |
 | kay | finder | transcripts-and-readers | in-flight | 1 | — | 96 claims, complete=True @19:18:57 | 21:31:03 |
