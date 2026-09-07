@@ -1,8 +1,0 @@
-## SUBJECT
-⟦SUBJECT⟧
-
-## BODY
-⟦BODY⟧
-
-## ENROLS
-⟦ENROLS⟧

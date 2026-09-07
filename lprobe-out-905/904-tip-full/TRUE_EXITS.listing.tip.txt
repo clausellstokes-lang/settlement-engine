@@ -1,3 +1,0 @@
-TRUE_EXIT_archive=0
-TRUE_EXIT_build=0
-TRUE_EXIT_measure=0

@@ -1,6 +1,0 @@
-gate green · tests=31872
-INFO ratchet register totalTests=31872 totalFiles=2483 entries=5
-PASS ratchet register totalTests == the gate line — (31872, '31872')
-CHAIR-VERIFY GREEN
-CAS OK: product=04bb92d19 · sealed landing-desk-2026-09-05 · cars since ca651d54b=258
-⛔ unfilled placeholder in payload-900
