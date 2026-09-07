@@ -34,7 +34,7 @@ for n in ['tolkien','martin','dnd','ai','kay','leguin','wolfe','hobb']:
     def mt(p): return time.strftime('%m-%d %H:%M',time.localtime(os.path.getmtime(p))) if os.path.exists(p) else 'absent'
     print('- **%s**: claims %s · verdicts %s (todo %s) · kept %s · partial %s · verdict files %d (triage %d, regrade %s) · section %s · critic %s'%(n,s.get('claims'),s.get('verdicts'),(s.get('claims',0)-s.get('verdicts',0)),s.get('kept'),s.get('partial'),vf,tri,(os.path.basename(rg[-1])[len('verdicts-%s-regrade-'%n):-5] if rg else 'none'),mt(S+'/section-%s.md'%n),mt(S+'/critic-%s.md'%n)))
 "
-echo "- LAST-RUNS: $(python3 -c "import json;d=json.load(open('$SC/prose-research/sweep/LAST-RUNS.json'));print(', '.join('%s %s/%s'%(k,v['tag'],v['runId']) for k,v in d.items() if not k.startswith('_')))")"
+echo "- LAST-RUNS: $(python3 -c "import json;d=json.load(open('$SC/prose-research/sweep/LAST-RUNS.json'));print(', '.join('%s %s/%s'%(k,v['tag'],v['runId']) for k,v in d.items() if k!='_doc'))")"
 echo
 echo "## WORKFLOW RUNS of chair session $SESS (journal lines; a run dies with the session — the FILES above are the checkpoint)"
 for d in /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/$SESS/subagents/workflows/wf_*; do [ -d "$d" ] && echo "- $(basename $d): $(wc -l < $d/journal.jsonl 2>/dev/null | tr -d ' ') journal lines, $(ls $d/agent-*.jsonl 2>/dev/null | wc -l | tr -d ' ') agents"; done

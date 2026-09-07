@@ -1,0 +1,21 @@
+{
+ "role": "synth",
+ "name": "wolfe",
+ "angle": null,
+ "tag": null,
+ "lines": 111,
+ "firstTs": "2026-09-07T01:10:25.919Z",
+ "lastTs": "2026-09-07T01:13:48.650Z",
+ "tools": {
+  "Bash": 12,
+  "Read": 25
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The merge wrote 766 kept and 217 partial rows. Now I'll gather the input file metadata and inspect the kept file's shape in one pass.",
+ "run": "wf_8cd21474-a7b",
+ "agent": "ae0dc38d5bd57787c",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_8cd21474-a7b/agent-ae0dc38d5bd57787c.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -1,5 +1,5 @@
 {
- "_doc": "the LAST launch of every sweep. 2026-09-06 17:31 (chair Fable 5.1, session cc123b6c, after the 15:46 session-limit death of 059d4243): all seven rebuilt by resume-research.sh (kay's two rescue chunks added by hand, step 3) and launched at 17:29 as EMBEDDED scripts (sweep/embedded/*.js: the v3 script with `let A = <args JSON>` spliced in by prose-research/mk-embedded.py — byte-exact, hashes included, no paste; launch = Workflow({scriptPath})). OWNER ~17:30: 'do each research only one at a time. pause all others' → six runs STOPPED at ~17:30 (~3 min in), hobb kept. Resume a paused run by Workflow({scriptPath: <its script>, resumeFromRunId: <its runId>}) when the running one COMPLETES (the task notification); its files are the checkpoint either way. Order (chair, vetoable): hobb → leguin → kay → wolfe → dnd → martin → ai. TAG LAW unchanged: a tag is a LAUNCH COUNTER; these launches complete the r6/r7 rounds (kay r8, leguin r8, others r7); tolkien STOPPED (nothingToRun). Within the single running sweep the cap stays 4 (the args' cap; the owner may lower it).",
+ "_doc": "2026-09-06 21:14 (chair Fable 5.1, session df942c1b, after the 20:44 ACCOUNT SWITCH; the old session cc123b6c lived to ~21:03 and is dead): wolfe/dnd/martin/ai REBUILT by resume-research.sh (resume-research-2110.log) as r8 = the TAILS ONLY (no chunks, no angles; wolfe+dnd synth+critic, martin+ai critic-only) and embedded by mk-embedded.py; wolfe r8 + dnd r8 LAUNCHED 21:12 (the two research slots, owner 17:40); martin r8 and ai r8 are BUILT-BUT-UNLAUNCHED (recorded here with runId '' so the resume script's next tag advances past them — see memory a-built-but-unlaunched-args-file-is-clobbered-by-the-resume-script). A NEW session cannot resume a runId; the files are the checkpoint. || PREVIOUS _doc: the LAST launch of every sweep. 2026-09-06 17:31 (chair Fable 5.1, session cc123b6c, after the 15:46 session-limit death of 059d4243): all seven rebuilt by resume-research.sh (kay's two rescue chunks added by hand, step 3) and launched at 17:29 as EMBEDDED scripts (sweep/embedded/*.js: the v3 script with `let A = <args JSON>` spliced in by prose-research/mk-embedded.py — byte-exact, hashes included, no paste; launch = Workflow({scriptPath})). OWNER ~17:30: 'do each research only one at a time. pause all others' → six runs STOPPED at ~17:30 (~3 min in), hobb kept. Resume a paused run by Workflow({scriptPath: <its script>, resumeFromRunId: <its runId>}) when the running one COMPLETES (the task notification); its files are the checkpoint either way. Order (chair, vetoable): hobb → leguin → kay → wolfe → dnd → martin → ai. TAG LAW unchanged: a tag is a LAUNCH COUNTER; these launches complete the r6/r7 rounds (kay r8, leguin r8, others r7); tolkien STOPPED (nothingToRun). Within the single running sweep the cap stays 4 (the args' cap; the owner may lower it).",
  "tolkien": {
   "runId": "(none — nothingToRun 17:26)",
   "argsFile": "args-tolkien-r7.json",
@@ -24,20 +24,30 @@
   "dryCheck": "19:06: features 29 vs 24 at section-leguin.r4.md — FIVE new features (reports apparatus; the encyclopedic form; many voices; …) → NOT dry by the owner's rule; no FIND round follows (rule 4); the open decision above is verify-only"
  },
  "wolfe": {
-  "runId": "wf_1326cde9-2e5",
-  "argsFile": "args-wolfe-r7.json",
-  "tag": "r7",
-  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--wolfe-r7.js",
-  "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — 32 verdict files / 479 verdicts (16 planned + 16 fresh chunks); regrade-r7 / section / critic on disk: section-wolfe.md@14:19 critic-wolfe.md@14:32; the resume script derives the owed tail",
-  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--wolfe-r7.js"
+  "runId": "wf_8cd21474-a7b",
+  "argsFile": "args-wolfe-r8.json",
+  "tag": "r8",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--wolfe-r8.js",
+  "status": "RUNNING since 21:12 (session df942c1b) — r8 = the r7 TAIL: synth + critic only (regrade-r7 landed 20:4x in the dead run: 107 downgraded / 766 standing; verification 1255/1255)",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--wolfe-r7.js",
+  "prev": {
+   "runId": "wf_1326cde9-2e5",
+   "tag": "r7",
+   "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — 32 verdict files / 479 verdicts (16 planned + 16 fresh chunks); regrade-r7 / section / critic on disk: section-wolfe.md@14:19 critic-wolfe.md@14:32; the resume script derives the owed tail"
+  }
  },
  "martin": {
-  "runId": "wf_3a29e467-750",
-  "argsFile": "args-martin-r7.json",
-  "tag": "r7",
-  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--martin-r7.js",
-  "status": "PAUSED ~17:30 — 6th (critic only, skipSynth)",
-  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--martin-r7.js"
+  "runId": "",
+  "argsFile": "args-martin-r8.json",
+  "tag": "r8",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--martin-r8.js",
+  "status": "BUILT 21:11, NOT LAUNCHED — queued for the next free research slot; critic only (skipSynth)",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--martin-r7.js",
+  "prev": {
+   "runId": "wf_3a29e467-750",
+   "tag": "r7",
+   "status": "PAUSED ~17:30 — 6th (critic only, skipSynth)"
+  }
  },
  "hobb": {
   "runId": "wf_255b6391-7fb",
@@ -49,40 +59,52 @@
   "dryCheck": "18:40: no baseline (prev null); dry-check.py counted 0 features — the hobb section is written as numbered RULES, not features; kit nit: dry-check's feature regex does not read rule headings"
  },
  "dnd": {
-  "runId": "wf_3d71f708-fe3",
-  "argsFile": "args-dnd-r7.json",
-  "tag": "r7",
-  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r7.js",
-  "status": "PAUSED ~17:30 — 5th (synth + critic)",
-  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--dnd-r7.js"
+  "runId": "wf_f191dac2-82a",
+  "argsFile": "args-dnd-r8.json",
+  "tag": "r8",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r8.js",
+  "status": "RUNNING since 21:12 (session df942c1b) — r8 = the r7 launch rebuilt: synth + critic (regrade-r6 covers every verdict; section 09-05 20:56 is stale)",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--dnd-r7.js",
+  "prev": {
+   "runId": "wf_3d71f708-fe3",
+   "tag": "r7",
+   "status": "PAUSED ~17:30 — 5th (synth + critic)"
+  }
  },
  "ai": {
-  "runId": "wf_b15831a8-df4",
-  "argsFile": "args-ai-r7.json",
-  "tag": "r7",
-  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r7.js",
-  "status": "PAUSED ~17:30 — 7th (critic only, skipSynth)",
-  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--ai-r7.js"
+  "runId": "",
+  "argsFile": "args-ai-r8.json",
+  "tag": "r8",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r8.js",
+  "status": "BUILT 21:11, NOT LAUNCHED — queued after martin; critic only (skipSynth)",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--ai-r7.js",
+  "prev": {
+   "runId": "wf_b15831a8-df4",
+   "tag": "r7",
+   "status": "PAUSED ~17:30 — 7th (critic only, skipSynth)"
+  }
  },
  "_queue": {
   "ruling": "OWNER 2026-09-06 ~17:30: one research sweep at a time; AMENDED 17:40: \"up to two lanes for research and one additional third lane for implementation\" → TWO research runs alive at once + ONE build lane",
   "order": [
-   "hobb",
-   "leguin",
-   "kay",
    "wolfe",
    "dnd",
    "martin",
    "ai"
   ],
-  "running": [],
-  "resume": "keep TWO research runs alive: when one completes (its task notification), resume the next in `order` by Workflow({scriptPath: d[<next>].scriptPath, resumeFromRunId: d[<next>].runId}); set its status RUNNING here",
+  "running": [
+   "wolfe",
+   "dnd"
+  ],
+  "resume": "keep TWO research runs alive: when one completes (its task notification), LAUNCH the next in `order` by Workflow({scriptPath: d[<next>].scriptPath}) (martin, then ai — their scripts are built; a runId of '' means never launched); set its runId/status RUNNING here. In THIS session a completed run's runId can be resumed by resumeFromRunId; a NEW session must rebuild (CONFIRM_DEAD=1 sh $SC/resume-research.sh <names>) and re-embed.",
   "done": [
    "hobb",
    "leguin",
-   "kay"
+   "kay",
+   "tolkien"
   ],
   "open_decision": "TRIAGE-BY-FEATURE completion pass for leguin (~250–300) and hobb (~60): a kit change (split-chunks --triage keyed on section features × witness) + verify-only runs; owner-gated on cost under the 17:40 cap",
-  "at_switch": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time"
+  "at_switch_2044": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time",
+  "resumed_2112": "session df942c1b: wolfe r8 wf_8cd21474-a7b + dnd r8 wf_f191dac2-82a launched 21:12; martin r8 / ai r8 built and waiting"
  }
 }

@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:08:20 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:14:22 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -9,6 +9,7 @@
 | dnd | regrade | regrade-r6 | result | 0 | — | — | 19:13:50 |
 | dnd | synth |  | failed | 0 | secA.md, secB.md, secC.md | — | 19:46:03 |
 | dnd | synth |  | in-flight | 0 | — | — | 21:31:03 |
+| dnd | synth |  | in-flight | 0 | — | — | 01:14:08 |
 | dnd | verifier | i724-795 | result | 12 | — | verdict file WRITTEN | 19:00:26 |
 | dnd | verifier | i796-842 | result | 10 | — | verdict file WRITTEN | 18:59:33 |
 | dnd | verifier | i843-870 | result | 7 | — | verdict file WRITTEN | 18:58:35 |
@@ -157,21 +158,22 @@
 | martin | critic |  | in-flight | 0 | — | — | 21:31:03 |
 | martin | synth |  | result | 0 | section-martin.md | — | 19:46:43 |
 | wolfe | critic |  | failed | 0 | — | — | 19:50:41 |
-| wolfe | finder | close-continued | failed | 42 | — | 136 claims, complete=True @19:26:41 | 19:45:45 |
-| wolfe | finder | close-continued | result | 41 | — | 136 claims, complete=True @19:26:41 | 23:31:55 |
-| wolfe | finder | close-continued | in-flight | 1 | — | 136 claims, complete=True @19:26:41 | 21:31:03 |
+| wolfe | finder | close-continued | failed | 42 | — | 93 claims, complete=True @21:09:26 | 19:45:45 |
+| wolfe | finder | close-continued | result | 41 | — | 93 claims, complete=True @21:09:26 | 23:31:55 |
+| wolfe | finder | close-continued | in-flight | 1 | — | 93 claims, complete=True @21:09:26 | 21:31:03 |
 | wolfe | finder | counter | result | 68 | — | 114 claims, complete=True @17:25:54 | 19:22:08 |
 | wolfe | finder | editors | result | 35 | — | 78 claims, complete=True @17:25:54 | 19:17:55 |
 | wolfe | finder | le-guin | result | 56 | — | 31 claims, complete=True @17:25:54 | 19:25:33 |
 | wolfe | finder | measure | result | 36 | find-wolfe-measure.md, found-wolfe-measure.json, metrics.py | 38 claims, complete=True @17:25:54 | 19:18:11 |
-| wolfe | finder | monographs | failed | 71 | — | 238 claims, complete=True @19:34:41 | 19:46:26 |
-| wolfe | finder | monographs | result | 69 | — | 238 claims, complete=True @19:34:41 | 23:43:23 |
-| wolfe | finder | monographs | in-flight | 8 | — | 238 claims, complete=True @19:34:41 | 21:31:03 |
+| wolfe | finder | monographs | failed | 71 | — | 184 claims, complete=True @21:09:26 | 19:46:26 |
+| wolfe | finder | monographs | result | 69 | — | 184 claims, complete=True @21:09:26 | 23:43:23 |
+| wolfe | finder | monographs | in-flight | 8 | — | 184 claims, complete=True @21:09:26 | 21:31:03 |
 | wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
 | wolfe | regrade | regrade-r6 | failed | 0 | — | — | 19:50:40 |
 | wolfe | regrade | regrade-r7 | result | 0 | build-wolfe-r7.mjs | — | 01:03:44 |
 | wolfe | synth |  | failed | 0 | — | — | 19:50:41 |
 | wolfe | synth |  | in-flight | 0 | — | — | 01:04:17 |
+| wolfe | synth |  | in-flight | 0 | — | — | 01:13:48 |
 | wolfe | verifier | i1008-1022 | result | 6 | — | verdict file WRITTEN | 00:18:08 |
 | wolfe | verifier | i1023-1037 | result | 6 | — | verdict file WRITTEN | 00:17:49 |
 | wolfe | verifier | i1038-1052 | result | 5 | — | verdict file WRITTEN | 00:22:48 |
