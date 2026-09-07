@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i872-886",
- "lines": 77,
+ "lines": 83,
  "firstTs": "2026-09-07T03:18:52.316Z",
- "lastTs": "2026-09-07T03:22:43.349Z",
+ "lastTs": "2026-09-07T03:23:13.899Z",
  "tools": {
   "ToolSearch": 1,
   "Bash": 18,
-  "Write": 1
+  "Write": 1,
+  "StructuredOutput": 2
  },
  "urlsFetched": [
   "https://thealexandrian.net/wordpress/45452/roleplaying-games/review-icewind-dale-rime-of-the-frostmaiden-part-2",
@@ -26,7 +27,7 @@
  "run": "wf_37af3c74-8c8",
  "agent": "a8282180116499402",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-a8282180116499402.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i872-886.json",
   "exists": true

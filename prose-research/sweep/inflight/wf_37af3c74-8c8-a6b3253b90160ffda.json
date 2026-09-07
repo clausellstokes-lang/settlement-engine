@@ -3,12 +3,13 @@
  "name": "dnd",
  "angle": null,
  "tag": "i902-916",
- "lines": 86,
+ "lines": 95,
  "firstTs": "2026-09-07T03:18:53.489Z",
- "lastTs": "2026-09-07T03:22:39.991Z",
+ "lastTs": "2026-09-07T03:24:33.206Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 22
+  "Bash": 23,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.dndbeyond.com/posts/855-encounter-of-the-week-trek-to-ten-towns",
@@ -19,13 +20,13 @@
   "https://dmdavid.com/tag/tag/curse-of-strahd/"
  ],
  "filesWritten": [],
- "lastAssistantText": "All six sources fetched with HTTP 200. Now extracting raw text.",
+ "lastAssistantText": "All six sources reached raw (HTTP 200, no summarizer). Writing the checkpoint.",
  "run": "wf_37af3c74-8c8",
  "agent": "a6b3253b90160ffda",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-a6b3253b90160ffda.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i902-916.json",
-  "exists": false
+  "exists": true
  }
 }

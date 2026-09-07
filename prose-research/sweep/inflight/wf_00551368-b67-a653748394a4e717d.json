@@ -1,0 +1,38 @@
+{
+ "role": "finder",
+ "name": "ai",
+ "angle": "arch-second-tell-catalogue",
+ "tag": null,
+ "lines": 95,
+ "firstTs": "2026-09-07T03:27:43.322Z",
+ "lastTs": "2026-09-07T03:30:51.204Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 19,
+  "WebFetch": 3,
+  "WebSearch": 3
+ },
+ "urlsFetched": [
+  "https://en.wikipedia.org/wiki/Wikipedia:Criteria_for_speedy_deletion",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "https://www.nature.com/articles/s41598-023-33607-z",
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Criteria_for_speedy_deletion&action=raw",
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Signs_of_AI_writing&action=raw",
+  "https://pmc.ncbi.nlm.nih.gov/articles/PMC10133283/",
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Speedy_deletion&action=raw",
+  "https://arxiv.org/pdf/$id",
+  "https://arxiv.org/pdf/2304.14276",
+  "https://openreview.net/pdf?id=ahVmnYkVLt",
+  "https://arxiv.org/pdf/2410.08044",
+  "https://wikiedu.org/blog/2026/01/29/generative-ai-and-wikipedia-editing-what-we-learned-in-2025/",
+  "https://www.pangram.com/ai-news"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Rich vein. Let me fetch the Wikipedia-register primaries in parallel.",
+ "run": "wf_00551368-b67",
+ "agent": "a653748394a4e717d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-a653748394a4e717d.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -3,15 +3,16 @@
  "name": "ai",
  "angle": "arch-worldbuilding-communities",
  "tag": null,
- "lines": 355,
+ "lines": 358,
  "firstTs": "2026-09-07T02:56:37.986Z",
- "lastTs": "2026-09-07T03:19:55.070Z",
+ "lastTs": "2026-09-07T03:23:02.635Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
   "Bash": 71,
   "WebFetch": 3,
-  "WebSearch": 27
+  "WebSearch": 27,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.reddit.com/r/worldbuilding/wiki/rules/",
@@ -82,7 +83,7 @@
  "run": "wf_00551368-b67",
  "agent": "af5a17eeb26001796",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-af5a17eeb26001796.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-worldbuilding-communities.json",
   "claims": 66,
