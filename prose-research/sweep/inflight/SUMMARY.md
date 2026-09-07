@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 12:23:37 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 12:29:06 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -19,11 +19,11 @@
 | ? | other |  | result | 0 | — | — | 15:05:42 |
 | ? | other |  | result | 0 | — | — | 15:43:55 |
 | ? | other |  | result | 0 | — | — | 15:59:30 |
-| ? | other |  | in-flight | 0 | — | — | 16:17:25 |
+| ? | other |  | in-flight | 0 | reconcile-chrome-and-compendium.md | — | 16:25:31 |
 | ? | other |  | result | 0 | — | — | 16:05:21 |
 | ? | other |  | result | 0 | — | — | 15:47:35 |
 | ? | other |  | in-flight | 0 | — | — | 16:22:15 |
-| ? | other |  | in-flight | 0 | dsec.py, run-dsec.sh | — | 16:19:08 |
+| ? | other |  | in-flight | 0 | count.py, dsec.py, run-dsec.sh, spec-dm.json | — | 16:27:28 |
 | ? | other |  | result | 0 | reconcile-herald-pools.md | — | 15:39:42 |
 | ? | other |  | result | 0 | — | — | 15:56:26 |
 | ? | other |  | result | 0 | — | — | 16:05:29 |

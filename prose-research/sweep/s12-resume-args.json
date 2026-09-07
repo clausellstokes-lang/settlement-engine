@@ -1,0 +1,700 @@
+{
+ "drafts": {
+  "dossier-archivist": true,
+  "herald-pools": true,
+  "npc-ladder": true
+ },
+ "cached": {
+  "reconcile": {
+   "herald-pools": {
+    "register": "herald-pools",
+    "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/reconcile-herald-pools.md",
+    "rules": [
+     {
+      "id": "H-1",
+      "strength": "STRONG",
+      "sourceCount": 24,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "H-2",
+      "strength": "STRONG",
+      "sourceCount": 35,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "H-3",
+      "strength": "STRONG",
+      "sourceCount": 23,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "H-4",
+      "strength": "STRONG",
+      "sourceCount": 22,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "H-5",
+      "strength": "STRONG",
+      "sourceCount": 28,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "H-6",
+      "strength": "STRONG",
+      "sourceCount": 8,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "H-7",
+      "strength": "STRONG",
+      "sourceCount": 28,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "H-8",
+      "strength": "STRONG",
+      "sourceCount": 38,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "H-9",
+      "strength": "STRONG",
+      "sourceCount": 27,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "H-10",
+      "strength": "STRONG",
+      "sourceCount": 18,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "H-11",
+      "strength": "STRONG",
+      "sourceCount": 21,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "H-12",
+      "strength": "STRONG",
+      "sourceCount": 19,
+      "changesShippedSurface": true
+     }
+    ],
+    "refusedTechniques": [],
+    "conflicts": [],
+    "absenceRule": "(see file)",
+    "openQuestions": [],
+    "allocation": "(see file; cached from wf_8b507f28-6e0)"
+   },
+   "npc-ladder": {
+    "register": "npc-ladder",
+    "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/reconcile-npc-ladder.md",
+    "rules": [
+     {
+      "id": "NL-1",
+      "strength": "STRONG",
+      "sourceCount": 21,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-2",
+      "strength": "STRONG",
+      "sourceCount": 19,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-3",
+      "strength": "STRONG",
+      "sourceCount": 5,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-4",
+      "strength": "STRONG",
+      "sourceCount": 10,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-5",
+      "strength": "STRONG",
+      "sourceCount": 46,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-6",
+      "strength": "MODERATE",
+      "sourceCount": 4,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-7",
+      "strength": "STRONG",
+      "sourceCount": 14,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-8",
+      "strength": "STRONG",
+      "sourceCount": 9,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-9",
+      "strength": "STRONG",
+      "sourceCount": 14,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-10",
+      "strength": "STRONG",
+      "sourceCount": 15,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-11",
+      "strength": "STRONG",
+      "sourceCount": 27,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "NL-12",
+      "strength": "STRONG",
+      "sourceCount": 30,
+      "changesShippedSurface": true
+     }
+    ],
+    "refusedTechniques": [],
+    "conflicts": [],
+    "absenceRule": "(see file)",
+    "openQuestions": [],
+    "allocation": "(see file; cached from wf_8b507f28-6e0)"
+   },
+   "dossier-archivist": {
+    "register": "dossier-archivist",
+    "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/reconcile-dossier-archivist.md",
+    "rules": [
+     {
+      "id": "R-DA-00",
+      "strength": "STRONG",
+      "sourceCount": 5,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "R-DA-01",
+      "strength": "STRONG",
+      "sourceCount": 18,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-02",
+      "strength": "STRONG",
+      "sourceCount": 10,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-03",
+      "strength": "STRONG",
+      "sourceCount": 14,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-04",
+      "strength": "STRONG",
+      "sourceCount": 17,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-05",
+      "strength": "STRONG",
+      "sourceCount": 16,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-06",
+      "strength": "STRONG",
+      "sourceCount": 9,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-07",
+      "strength": "STRONG",
+      "sourceCount": 14,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-08",
+      "strength": "STRONG",
+      "sourceCount": 23,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-09",
+      "strength": "STRONG",
+      "sourceCount": 21,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-10",
+      "strength": "STRONG",
+      "sourceCount": 37,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-11",
+      "strength": "STRONG",
+      "sourceCount": 23,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "R-DA-12",
+      "strength": "STRONG",
+      "sourceCount": 23,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-13",
+      "strength": "STRONG",
+      "sourceCount": 28,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-14",
+      "strength": "STRONG",
+      "sourceCount": 29,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-15",
+      "strength": "STRONG",
+      "sourceCount": 24,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-16",
+      "strength": "STRONG",
+      "sourceCount": 25,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "R-DA-17",
+      "strength": "STRONG",
+      "sourceCount": 41,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-18",
+      "strength": "STRONG",
+      "sourceCount": 47,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "R-DA-19",
+      "strength": "STRONG",
+      "sourceCount": 46,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-20",
+      "strength": "STRONG",
+      "sourceCount": 26,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "R-DA-21",
+      "strength": "STRONG",
+      "sourceCount": 48,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "R-DA-22",
+      "strength": "STRONG",
+      "sourceCount": 25,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-23",
+      "strength": "MODERATE",
+      "sourceCount": 6,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "R-DA-24",
+      "strength": "STRONG",
+      "sourceCount": 11,
+      "changesShippedSurface": false
+     }
+    ],
+    "refusedTechniques": [],
+    "conflicts": [],
+    "absenceRule": "(see file)",
+    "openQuestions": [],
+    "allocation": "(see file; cached from wf_8b507f28-6e0)"
+   }
+  },
+  "refute": {
+   "herald-pools": {
+    "register": "herald-pools",
+    "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/refute-herald-pools.md",
+    "verdicts": [
+     {
+      "id": "S3-CEILING",
+      "refuted": true,
+      "ground": "\u00a73 sets \"no single order above 0.35\" on the premise of \"four orders in R3/R5\". R5 cannot reach four: G-E is R4b-only by the seat's own line, and G-A needs PLACE",
+      "severity": "HIGH"
+     },
+     {
+      "id": "H-1",
+      "refuted": true,
+      "ground": "(3) The guard is vacuous against the fault the rule names: H-1 names fault 9 and guards it with \"a seeded draw from \u00a73\", but its own Move-grammar paragraph make",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "H-2",
+      "refuted": true,
+      "ground": "(2) The figure is misread. \u00a72 prints the gloss-tail exemplar band as \"0.000 (martin-chronicle)\" \u2014 a floor, not a band. Re-derived over the fourteen primary fing",
+      "severity": "HIGH"
+     },
+     {
+      "id": "H-3",
+      "refuted": true,
+      "ground": "(2) The SIZE cuts a figure no instrument convicts. R3's pronoun closer 0.077 is inside the exemplar band 0.021\u20130.108 (leguin-nonfiction-spoken 0.108, leguin-all",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "H-4",
+      "refuted": true,
+      "ground": "(5) The test cannot fail because there is nothing to run: \"Executable now by hand: the negative control is the Brackwater sentence\" names a walker that must fir",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "H-5",
+      "refuted": true,
+      "ground": "(3) The guard inverts its leading source. martin:31 (7, the rule's largest contribution) requires each fixed phrase to be \"one the place itself repeats, so its ",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "H-6",
+      "refuted": true,
+      "ground": "(2)(6) The rule moves no figure of its own: its Figure and SIZE \u2014 R5 exogenous tells \"0.024 = 9 variants ... 9 \u2192 \u2264 3\" \u2014 are verbatim H-12's figure and H-12's SI",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "H-7",
+      "refuted": true,
+      "ground": "(1) kay:40 is graded Transferable PARTIAL by its own file and sourced at 2 (MODERATE), yet its 2 sit inside the 28; and the reaction-point limb, carried in the ",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "H-8",
+      "refuted": true,
+      "ground": "(2) The second quoted voice is not licensed by the receipt kind \u2014 measured over all 86 pools of src/domain/worldPulse/warReceiptPools.js at HEAD: seven are firs",
+      "severity": "HIGH"
+     },
+     {
+      "id": "H-9",
+      "refuted": true,
+      "ground": "(1) The count breaks the seat's own \u00a70.1 convention twice: kay:26 is graded \"6 \u2014 STRONG\" in best-kay.md and is entered at 7, and kay:38 is graded Transferable P",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "H-10",
+      "refuted": true,
+      "ground": "(3)(6) A second connective system composes Herald causal prose outside R4 and outside the guard: src/domain/display/discourseKernel.js carries its own band-keye",
+      "severity": "HIGH"
+     },
+     {
+      "id": "H-11",
+      "refuted": true,
+      "ground": "(1) wolfe:41 is five DOCUMENTS, not five voices: its kept rows resolve to Gene Wolfe's own voice four times (the McCaffery interview, the Fifth Head dedication,",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "H-12",
+      "refuted": true,
+      "ground": "(2)(6) The em-dash absolute does not hold at the text this reconciliation was written over. Measured: src/domain/display/newsVoice.js carries 60 em-dash lines a",
+      "severity": "HIGH"
+     }
+    ]
+   },
+   "npc-ladder": {
+    "register": "npc-ladder",
+    "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/refute-npc-ladder.md",
+    "verdicts": [
+     {
+      "id": "R6-OP-01",
+      "refuted": true,
+      "ground": "NL-8(a)'s size \u2014 no 2-4-gram above 0.10 of any stage's lines \u2014 is unsatisfiable in English and is scoped to neither content words nor a lift threshold. Re-deriv",
+      "severity": "HIGH"
+     },
+     {
+      "id": "R6-OP-02",
+      "refuted": true,
+      "ground": "Both limbs of NL-12's STAGE-PAIR test pass on the corpus the rule convicts. I built the walker over all 168 role x cause cells at 29a4ff20d: content-word overla",
+      "severity": "HIGH"
+     },
+     {
+      "id": "R6-OP-03",
+      "refuted": true,
+      "ground": "NL-7's size (abstract-noun closer 0.078 -> <= 0.05) is licensed by 'dnd-flavor 0.021'. That is dnd-flavor's PRONOUN closer rate. primary/dnd-flavor.fingerprint.",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R6-OP-04",
+      "refuted": true,
+      "ground": "NL-1 and NL-8(a) justify the 0.10 ceiling identically: it is 'the crier's own licensed-formula rate for a QUOTED voice (A'-R5, and the country 7%), and the ladd",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R6-OP-05",
+      "refuted": true,
+      "ground": "C5 rules the licensed set at '(30 lines)' and NL-5's walker then fails every other mental predicate on every subject. Measured at 29a4ff20d: 101 lines carry a k",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R6-OP-06",
+      "refuted": true,
+      "ground": "NL-10 drives four imperative openers to zero and holds second person at zero on the ground of 'own row 56 ... zero in every record register'. But best-own.md li",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R6-OP-07",
+      "refuted": true,
+      "ground": "NL-1's Statement says the opening move and move order 'are drawn by seed from a closed set of grammars' and its Move-grammar repeats 'the draw is seeded', while",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R6-OP-08",
+      "refuted": true,
+      "ground": "NL-2 proposes sd 4.0 -> >= 6.5, licensed by 'sd 6.5-8.0 is ACHIEVED inside this house voice by the arrival tables (own row 8: sd 8.1)'. The proof is 8.1; the ba",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R6-OP-09",
+      "refuted": true,
+      "ground": "NL-7's Figure prints the closer 'it' at 46. npc-ladder.fingerprint.json closers.topClosers reads ['it', 48]. Every other closer in the printed list (arrangement",
+      "severity": "LOW"
+     },
+     {
+      "id": "R6-OP-10",
+      "refuted": true,
+      "ground": "NL-1's Figure says 'only one pool of 564 shares a two-word opener'. I measured it directly at 29a4ff20d: 558 pools hold two or more variants and exactly one of ",
+      "severity": "LOW"
+     },
+     {
+      "id": "R6-OP-11",
+      "refuted": true,
+      "ground": "Section 0's method states two collapsing rules that conflict where an author is quoted by a critic \u2014 'an author's own several documents are one hand' and 'a rel",
+      "severity": "LOW"
+     },
+     {
+      "id": "R6-OP-12",
+      "refuted": true,
+      "ground": "NL-4's Obeys says 'removing an unheld claim is the one removal B-CLAIM requires'. B-CLAIM's text at RULES-V2-DRAFT.md:59 is: a reconstruction may spend punctuat",
+      "severity": "LOW"
+     },
+     {
+      "id": "R6-OP-13",
+      "refuted": false,
+      "ground": "NL-3's 'Sources: 5 distinct' includes dnd:1009/1010, which are 'Finder measurement over SRD 5.1 ... pdftotext extraction' \u2014 this programme's own instrument, gra",
+      "severity": "LOW"
+     },
+     {
+      "id": "R6-OP-14",
+      "refuted": true,
+      "ground": "Section 4.4 declares an override of fault 24's constraint ('a gap in the record is recorded as a gap'), saying it 'binds the record registers and the DM page'. ",
+      "severity": "LOW"
+     },
+     {
+      "id": "NL-4-SUBSTANCE",
+      "refuted": false,
+      "ground": "I attacked NL-4 hardest and could not dent it. All three Brackwater breaches re-derived exactly at 29a4ff20d: 234 lines carry him/his/he/himself and 0 carry her",
+      "severity": "LOW"
+     },
+     {
+      "id": "NL-6",
+      "refuted": false,
+      "ground": "Re-derived: 16 lines carry 'will', 35 carry would/could/might, and all three adjudication examples are present and correctly characterised ('Someone will.' as a",
+      "severity": "LOW"
+     },
+     {
+      "id": "NL-9",
+      "refuted": false,
+      "ground": "I tested the failure mode the file itself caught in the draft (an assertion that passes today). NL-9's three assertions all FAIL at 29a4ff20d: the full rung's p",
+      "severity": "LOW"
+     },
+     {
+      "id": "NL-11",
+      "refuted": false,
+      "ground": "The rule states 'Figure: None measured' plainly rather than dressing an unmeasured size as a figure, its walker is a property test (abstract-noun subject head +",
+      "severity": "LOW"
+     },
+     {
+      "id": "C3-SEAM",
+      "refuted": false,
+      "ground": "Verified in the code by symbol at 29a4ff20d. src/components/new/npcComponents.jsx calls npcInteriority({ npc }) with no includeGroundTruth, so the ground-truth ",
+      "severity": "LOW"
+     }
+    ]
+   },
+   "dossier-archivist": {
+    "register": "dossier-archivist",
+    "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/refute-dossier-archivist.md",
+    "verdicts": [
+     {
+      "id": "R-DA-00",
+      "refuted": true,
+      "ground": "Ground (2)/(4): graded \"STRONG (by instrument count)\" over five own: rows. The file's own \u00a72.0 collapse rule says an in-house measurement is an instrument readi",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R-DA-01",
+      "refuted": true,
+      "ground": "Ground (2): the Figure asserts second person 0 in R1/R2/A on own:56, while \u00a73 and C14 of the SAME file assert 30 second-person variants in R1/R2 and attribute t",
+      "severity": "HIGH"
+     },
+     {
+      "id": "R-DA-02",
+      "refuted": true,
+      "ground": "Ground (2) twice. (a) Unit mix in the rule written to cure unit mixes: the per-VARIANT ceiling \u22640.040 is anchored on tolkien-elevated 0.0401, a per-SENTENCE fin",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R-DA-03",
+      "refuted": true,
+      "ground": "Ground (2): the size justification is inverted on its own numbers. 'The SIZE 0.010 sits below every RECORD-register exemplar (martin-chronicle 0.0000; dnd-flavo",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R-DA-04",
+      "refuted": false,
+      "ground": "Every figure re-derived and correct: fingerprint pronounRate 0.1335 over 2,914 sentences = 389 \u2192 160 at \u22640.055; the it-only sub-figure 253 \u2192 104 at the same rat",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-05",
+      "refuted": true,
+      "ground": "Ground (6): \u00a72.0 asserts that 'every text rule below excludes [the LIVE_STRING_BINDINGS rows] by name', but only R-DA-02 and R-DA-03 do; R-DA-04, R-DA-05, R-DA-",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R-DA-06",
+      "refuted": false,
+      "ground": "Every size re-derived and correct: semicolon 0.360 \u2192 \u22640.130 against tolkien-elevated 0.122 (verified the highest exemplar); colon 0.364 held; >30 0.491 \u2192 \u22640.340",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-07",
+      "refuted": false,
+      "ground": "The strongest rule in the file on ground (5): it identifies that a delta arm cannot catch a breach present in both BEFORE and AFTER (U7's #7, verified) and adds",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-08",
+      "refuted": true,
+      "ground": "Ground (2): the Figure and \u00a71 item 6 both rest on 'best-own.md \u00a75b' \u2014 best-own.md has sections A\u2013L plus three unnumbered tail sections and NO \u00a75b, and no sectio",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R-DA-09",
+      "refuted": false,
+      "ground": "21-source union over 34 cited rows and 29 distinct source strings, all present and VERIFIED. The DISPUTE move is field-licensed, barred in R1 where no such fiel",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-10",
+      "refuted": false,
+      "ground": "The TTR target re-verified against best-own row 51: 0.211 against dnd-rules 0.242, the lowest of eight columns, and the instrument correctly named as primary/ex",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-11",
+      "refuted": true,
+      "ground": "Ground (6): marked 'Shipped surface: false' on the strength of 'R1 carries almost none today' \u2014 an unmeasured claim the rule concedes in its own Figure line ('N",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R-DA-12",
+      "refuted": true,
+      "ground": "Ground (5): the only executable the Test names that exists today is check-pair.mjs's RATION family, read from source as nine patterns (rather than / which (is|m",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R-DA-13",
+      "refuted": false,
+      "ground": "Honest that no figure exists, and proposes four falsifiable walker figures (vague-authority phrases \u2192 0; hedges per entry \u22641; every attribution resolves to a ty",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-14",
+      "refuted": false,
+      "ground": "29-source union over 44 cited rows / 36 distinct strings, all present and VERIFIED. The live target is named and reader-facing (R8 npcData manner strings). The ",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-15",
+      "refuted": true,
+      "ground": "Ground (4): the statement licenses 'the bare roll is rare and sometimes incomplete'. An incomplete roll where the institution table holds the entries is an abse",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R-DA-16",
+      "refuted": true,
+      "ground": "Grounds (4)/(5) and (6). (a) Two limbs no field licenses: 'with its source beside it' and 'rarely corrected' both write sentences, but the Grammar section types",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R-DA-17",
+      "refuted": true,
+      "ground": "Grounds (3)/(4): the closed set carries the owner's fourth grammar verbatim, ending on an 'unresolved question', while the same file holds questions at zero (\u00a70",
+      "severity": "MEDIUM"
+     },
+     {
+      "id": "R-DA-18",
+      "refuted": false,
+      "ground": "Floors re-derived from the fingerprint and the probe and all correct (participialOpenerRate 0.0117, doubledAdjectiveRate 0.0144, adverbsPerSentence 0.162, exoge",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-19",
+      "refuted": true,
+      "ground": "Ground (2), citation only: the live corpus defect is cited at RECEIPT_POOLS_DOSSIER_STATE.md:2247. Read at 3b1c0eaa5, the economicBase: extraction header is lin",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-20",
+      "refuted": true,
+      "ground": "Grounds (6) and (4): marked 'Shipped surface: false \u2014 a gate; it writes no bytes', but the rule's own statement says a failing variant 'is REFUSED at the pool'.",
+      "severity": "HIGH"
+     },
+     {
+      "id": "R-DA-21",
+      "refuted": false,
+      "ground": "The licensing set is named and countable (dm-only marks, 89 of 2,734, from check-pair's own note \u2014 and the MARKS channel exists at check-pair.mjs:65 with the dm",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-22",
+      "refuted": false,
+      "ground": "Every figure verified against PROBE_ALL's own correction [R-13]: DM-private 5, publicly visible/public-safe 4, profit enormously 3 = 12 breaches in a 13-row reg",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-23",
+      "refuted": true,
+      "ground": "Ground (2): the head-noun figure is a summed column \u2014 'the head noun travellers in 64 of 1,293 phrases (0.050) across four top-ten grams'. PROBE_ALL's \u00a74 preamb",
+      "severity": "LOW"
+     },
+     {
+      "id": "R-DA-24",
+      "refuted": false,
+      "ground": "The best-warranted rule in the file, and the only one whose authority is the repository's rather than an author's. Executed: at 3b1c0eaa5, tests/data/dossierSta",
+      "severity": "LOW"
+     }
+    ]
+   }
+  }
+ }
+}
