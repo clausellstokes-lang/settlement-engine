@@ -237,3 +237,14 @@ Read in full this session: `sweep/reconcile-{dossier-archivist,npc-ladder,herald
 **No rule here is applied. No corpus text changed. Nothing is validated until the Fable chair's retrovalidation sitting.**
 
 Seat: Fable 5.1 — the S12 judgment seat; ratified by the Fable chair at the next ledger act.
+
+---
+
+## 5. SUPERSEDED OR AMENDED PASSAGES — stamped by the chair's sitting (2026-09-07 17:16 EDT; §0–§4 byte-unchanged,      239 lines)
+| passage | amendment |
+|---|---|
+| §1.2 "`exempt` appears only in comments" | 239 hits over `src`, 58 outside comment lines, a live typed `exempt: true|false` at `demographicsLand.js:347/:351`; the column conclusion (no exemption FAMILY) stands (SITTING B.4.8) |
+| §1.3 the two LIVE BREACHES | FOUR: `newsVoice.js:97` · `RECEIPT_POOLS_DOSSIER_STATE.md:5233` + its leaf twin `general.generated.js:855` · `factionDynamics.js:466` (SITTING A6) |
+| §2.4 the three Brackwater fixtures | a FOURTH is owed — rows `closed: true` at the ROW while the COLUMN is false — the only table that discriminates per-column from per-row (SITTING B.4.7) |
+| §3 as "adopted whole" by Part B §9 | adopted with two amendments: the chronicle's floor is a LIVE fallback until the ratchet lands; the ladder's neutral-noun interim is a declared B-CLAIM breach the owner signs or refuses (SITTING B.4.3) |
+| §4 "the walker must exist before the taste sample is cut" | the sample proceeds on the existing instruments (check-pair.mjs + the refuter + printed claim sets); the walker's receipt on the sample is OWED and is the instrument lane's first product (SITTING §F.4, vetoable) |

@@ -596,3 +596,15 @@ The acceptance test for "preventative" is a blind panel of game masters reading 
 It changes no rule, size, count, source or allocation in §1–§12; it builds no walker, arm, class, key or table; it moves no corpus byte; it applies nothing. Every clause is the completing seat's application of the chair's 14:14 answer and is vetoable at the sitting.
 
 Seat: Fable 5.1 — the S12 judgment seat; ratified by the Fable chair at the next ledger act. Retrovalidation owed through `docs/FABLE_RETROVALIDATION_QUEUE.md`.
+
+---
+
+## 14. THE CHAIR'S SITTING (appended by the Fable chair, session 5540cfd2, 2026-09-07 17:16 EDT — Seat: Fable 5.1 — validated)
+
+**Provenance.** §0–§13 are BYTE-UNCHANGED by this sitting (pre-append line count      598; md5 of the first 598 lines 72b4163ffb1a4eb0bd9cf1c34e22176d). The sitting's full record is `$SC/s12-sitting/SITTING-RULINGS-912.md`; the seven-lens Opus skeptic pass and its fold are `<5540cfd2 scratchpad>/skeptic-s12/` (199 rows: 116 CONFIRMED · 27 REFUTED · 50 PARTLY · 6 UNTESTED; porcelain 0 → 0 on every lens). The chair re-measured fourteen load-bearing items at the product tip itself (SITTING §A).
+
+**The verdict.** Part B is **RATIFIED AS CORRECTED**: 48 rules as written (SITTING B.1); 34 with a stated correction binding (B.2 — counts, units, citations, one withdrawn parenthesis; the twelve dm-page Sources integers are DISTINCT PAGES, the reconcile's own unit); 9 re-opened by the fold and DISPOSED by the chair (B.3): R-DA-01's front-matter limb NOT-EXECUTABLE pending the field · R-DA-03's justification restated, size kept · R-DA-05's `runsOfThree` size withdrawn, `sameOpener` kept with the record-register narrowing declared, 407/708 · R-DA-15's 0.060 withdrawn · R-DA-17's ceiling re-derived as min(1/n + 0.10, 1.5/n), the baseline 0.240, the fourth member pending the field · H-8's census integers withdrawn (definition-dependent), the defect confirmed · CL-4's CLOSINGS gains ADDRESS → SIGNOFF · CL-6's two sizes withdrawn · CC-6's extension withdrawn (paid copy owner-gated). The frame corrected (B.4): walls 4/5/6/9/10 scoped; A1 qualified to "state before cause"; §9 "adopted with two amendments"; §2.0 prints 554 vs 558; four LIVE BREACHES (`newsVoice.js:97` · `RECEIPT_POOLS_DOSSIER_STATE.md:5233` and its leaf twin `general.generated.js:855` · `factionDynamics.js:466`). §12's split reads 15 survived as written / 74 cured; §7 resolves 47 of 47 (the six "carried" are §7 owner questions of EXEMPLAR-BEST-PARTS, E5 resolved by A12). §13 ratified as written.
+
+**Nothing here is applied; no corpus byte moved; the walkers, loaders, classes and tables named in §1–§13 remain OWED (Opus builds).** The next act is the taste sample under SITTING §F, then the blind DM panel, then the wave — the owner's 14:0x order.
+
+Seat: Fable 5.1 — validated (§912, FRQ R75).

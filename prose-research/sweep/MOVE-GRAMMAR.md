@@ -316,3 +316,24 @@ A sample that shows one grammar beautifully written has shown vocabulary, not st
 No corpus text changed. No rule is applied anywhere. No walker, classifier, loader, tag, key or draw named above is built; every one is Opus's to build and verify under ruling (8). No figure was taken from the working tree (the ledger branch); every corpus figure is the probe's at 6b80d1e8e or the fingerprint's, re-read from the files this session, with the reading-order caveat carried. Every ceiling is a recommendation for the owner's Q4 offered as "test this, don't trust it". Every text move the grammar implies is owner-signed through the walk; the level-2 draw, the new absence-field class and any pool-key mint are owner-gated. Nothing here is validated until the Fable chair's retrovalidation sitting.
 
 Seat: Fable 5.1 — the S12 judgment seat; ratified by the Fable chair at the next ledger act. Retrovalidation owed through `docs/FABLE_RETROVALIDATION_QUEUE.md`.
+
+---
+
+## 9. SUPERSEDED PASSAGES — stamped by the chair's sitting (2026-09-07 17:16 EDT; §0–§8 byte-unchanged,      318 lines). A builder reads the amendment beside the passage.
+| passage | superseded by |
+|---|---|
+| §0 row 1 "408 of 708 pools uniform"; §4.4 control 4 | 407/708 = 0.575 (Part B §14 / SITTING A7, B.3); the segment definition to be pinned by the walker lane |
+| §2.1 "the realised set is larger than six"; the ceiling ≤ 0.35 | struck (Part B §10 item 1); the ceiling min(1/n + 0.10, 1.5/n), n measured per tab, NOT-EXECUTABLE at n ≤ 2 (SITTING B.3 R-DA-17); today's per-tab n ≤ 1 (SITTING A10, A12) |
+| §2.1 V6's licensing "state key whose value is unresolved" | pending a typed state field — none exists on a leaf (SITTING A12) |
+| §2.2 "n = 4 in R3/R5" | R5 n = 2, no share ceiling (Part B §10 item 2) |
+| §2.3 the ladder's 0.10 ceiling | ≤ 0.07 lift-filtered, an arithmetic bound from a tail rate (Part B §10 item 3; SITTING B.2 NL-1) |
+| §2.4 "four close KINDS" / three closing orders | four ORDERS: SIGNOFF · STANDING → SIGNOFF · LIMIT → SIGNOFF (flag) · ADDRESS → SIGNOFF (SITTING B.3 CL-4) |
+| §2.5 the four one-shape DM orders, ceiling 0.40 | the five shape-varying members, ≤ 0.30 (Part B §5.0, §10 item 5) |
+| §2.6 the chrome/docent ceiling ≤ 0.60 | re-derived under the formula: 0.35 (n = 4), 0.433 (n = 3) (SITTING B.3 R-DA-17) |
+| §1.4 walls 4, 5, 6, 9, 10 as estate-wide | scoped to the registers that re-derived them (SITTING B.4.1) |
+| §4.3 arm C "identical typed claim set" per pool; per-row `closed` | split into C-pair / C-sibling; `closed` per column (Part B §10 item 7) |
+| §4.3 arm B1's fixed 0.05 slack; arm B2 adjacency "zero" | 1/n + 2 SE (min 1/n + 0.05); adjacency at the chance floor (Part B §10 item 8; SITTING B.3) |
+| §4.4 "five negative controls" | four negative + one positive; controls owed for arms B2, D, F, G, H and C-sibling; a fourth Brackwater fixture (SITTING B.4.7) |
+| §5.2.6 the cross-register absence set | a PROPOSED instrument, no binding force (Part B §10 item 10) |
+| §6.1 "two variants in two grammars" | one block, one pool, ALL its variants (Part B §10 item 11); the sample's block DS-POW-5 (SITTING §F) |
+| §3.2's draw as `hash % length` (as quoted in the dossier §5) | `eligible[avalanche32(fnv1a32(seed::blockId::poolKey)) % eligible.length]` (`stateProseKernel.js:304`) |
