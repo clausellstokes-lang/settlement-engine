@@ -202,3 +202,199 @@ Dock tip `950c0c204`, porcelain 0. Car 2 (the B-GRAMMAR walker) begins next and 
 table's own `office` column; the seam is `estateGround({officeRoster})` and nothing else
 needs to change.
 
+---
+
+## CAR 2 — THE B-GRAMMAR WALKER (MOVE-GRAMMAR §4 as amended) — **LANDED** · sha `d63f80207` · 2026-09-07 19:38 EDT
+
+### 2.1 What was built (5 files, 1,944 lines)
+| file | what it is |
+|---|---|
+| `src/domain/prose/moveGrammar.js` | the eleven typed moves + the two positional ones · the eight non-moves with a detector each · V1–V8 · E1–E6 · the ten walls **SCOPED** as SITTING B.4.1 ruled · the `grammar:` tag CONTRACT · the classifier |
+| `src/domain/prose/proseFingerprint.js` | the 21 rate metrics, in the estate, over any unit of prose |
+| `src/domain/prose/grammarWalker.js` | arms **A · B1 · B2 · B3 · C-sibling · D · E · F · G · H · I · J**, the three numbers, the ten gaps |
+| `tests/fixtures/grammarControls.js` | 4 negative controls + 1 positive + one per owed arm + the hand-tagged sample |
+| `tests/lint/proseMoveGrammar.walker.test.js` | the gate — 42 assertions |
+
+### 2.2 THE CEILINGS, as the sitting corrected them — asserted, not assumed
+`ceiling(n) = min(1/n + 0.10, 1.5/n)` for n ≥ 3; **NOT-EXECUTABLE at n ≤ 2**. Asserted at
+n = 3 (0.4333), 4 (0.35), 5 (0.30), 6 (0.25), 8 (0.1875), and asserted to hold ≤ 1.6× uniform
+at every n in {3,4,5,6,8,12,20} — the 13:22 bar, which the old fixed 0.35 breaches at n = 6.
+Arm B1's slack is `1/n + 2 SE` floored at `1/n + 0.05`, asserted to be SE-dominated on a
+40-line sample and floor-dominated on a large one — never a fixed 0.05.
+
+### 2.3 THE CONTROLS — every one fires, and the ones built to stay silent stay silent
+| control | what it must do | measured |
+|---|---|---|
+| **1 · the owner's own template** (40 units, one order) | RED on arm A (share 1.0) and arm B1 (run 1.0) | both red, share exactly 1, run exactly 1 |
+| **2 · the rota** (E1→E2→E3→E4…) | PASS A and B1, **RED on B3** | passes A and B1; B3 reds; every transition row at share 1.0 and **0 bits** of entropy |
+| **3 · Brackwater** | red on the claim arm twice, not on the nouns alone | car 1's four tables (§1.2) — the grammar face of the same arm |
+| **4 · today's R1 leaves** | reproduce PROBE_ALL's two figures **exactly** | **407 / 708** uniform in segment count · **79 / 708** repeated opener · 708 pools. The SEGMENT is pinned in writing in `segmentCount`'s doc: a SENTENCE, by `check-pair.mjs:43`'s rule |
+| **5 · the positive control** (a fair draw, n = 6, 600 units) | PASS every arm | zero fails on A and B; top share below the ceiling; run rate below the run ceiling |
+| **B2** | adjacency judged at the CHANCE FLOOR, so a fair draw is not called a loop | zero B2 notes on a fair draw; chance floor exactly 1/n |
+| **H** | n ≤ 2 → NOT-EXECUTABLE, never a pass | arm A returns zero fails and one not-executable row; a pool of one likewise |
+| **F1 F2 F3 F6(×2)** | one control each, each firing | all five fire; and a 3-sentence CHROME unit does **not** fire F6 while a dossier one does — the scoping is live |
+| **G × 6** (FORECAST · MEANING · VERDICT · FEELING · FIGURE · SAYING) | one control each | all six fire; arm G stays silent on a licensed record sentence |
+| **D** | fail a slot the bag does not offer, pass one it does | the pair discriminates; with no bag supplied the arm is NOT-EXECUTABLE, never a pass |
+| **C-sibling** | red on two variants banding ONE noun differently; pass an honest difference | the conflicting pair reds; the lawful pair (a difference by OMISSION) passes |
+| **BUDGET · DEPTH · PERFECTION · SPREAD** | fire on a unit built to trip each; exempt a DECLARED defining feature | all four; the defining-feature exemption moves a DEPTH fail to a note; with no bands every one is NOT-EXECUTABLE |
+
+### 2.4 THE CLASSIFIER, MEASURED BEFORE IT GATES — and it does not gate
+MOVE-GRAMMAR §4.1 item 3: *its precision is measured on a hand-tagged sample before it gates
+anything.* Twenty-four variants, drawn deterministically (every 97th entry of the loaded
+corpus, so the selection carries no taste), hand-tagged with a written GROUND per line:
+```
+  exact sequence:      20/24 = 0.83
+  conservative:        18/24 = 0.75   (the two tags this lane revised AFTER seeing the
+                                       classifier's output counted as disagreements)
+  first move agrees:   22/24 = 0.92
+```
+**RULING (this lane's, vetoable): arm A REPORTS and does not gate.** At 0.75–0.83 the
+classifier is good enough to read a distribution and not good enough to fail a pool on one
+reading. The four disagreements are printed by the test, each with the hand tag beside the
+machine tag. The two revised tags are marked `revisedAfterSeeing` in the fixture, so the bias
+is visible rather than buried — a hand tag changed after seeing the answer is not evidence.
+
+**One improvement round, measured before and after.** The first classifier scored 13/24. Three
+defects were named and cured: a bare `was`/`were` read as HISTORY inside a present clause; a
+fronted subordinate clause ("After the fire came, …") swallowed the state that followed it, so
+wall 1 could not fire on the plainest breach of itself; and a clause carrying two assertions
+reported only the second, INVERTING an order — which is fatal in an instrument whose whole
+subject is order. After: 20/24.
+
+### 2.5 THE SIMULATED READING SEQUENCE — 200 towns, composed through the SHIPPED composers
+`$SC/instr-912/reading-sequence.mjs`, `gen-probe2.mjs`'s method with REAL readings (never
+`{}` — a composer called with empty readings selects its ABSENCE pools for every seed and
+manufactures a finding).
+```
+towns 200 of 200 (composer throws 0) | lines 1,986 | mean 9.9 lines/town
+realised orders n = 14 | ceiling(14) = 0.1071
+ARM A  FAIL: order V1 holds 78.4% of 1,986 (ceiling 10.7% at n = 14)   — 7.3x the ceiling
+ARM B1 FAIL: same-order-as-previous 1,104/1,786 = 0.6181 (ceiling 0.1214)  — 5.1x
+ARM B3: 10 of 14 transition rows concentrate above 0.50
+```
+**This is the walker's first-run finding and it is the wave's whole case in three numbers.**
+MOVE-GRAMMAR §4.4 predicted "one grammar above 0.35"; the measured share is 0.784. CAVEAT,
+stated: the reading is bounded by the classifier's 0.75–0.83 precision and V1 is the
+classifier's fallback, so the figure is an UPPER bound on uniformity. It is a finding for the
+chair, not a verdict.
+
+### 2.6 THE OWNER'S THREE NUMBERS — the OWED per-paragraph refinement, measured
+**The register level reproduces the sitting exactly** (leave-one-out over the ten leaf
+registers, 21 rate metrics): exceeded per record **min 1 · median 4 · max 7 of 21**; records at
+ZERO **0 of 10**; max depth **median 0.52, max 1.68** (martin-narrative's dialogue share — the
+sitting's own declared defining feature).
+
+**The per-PARAGRAPH refinement says something materially different**, and SITTING §I asked for
+exactly this before the walker bakes the numbers in:
+```
+ 113 paragraphs, each scored against the band formed by the other NINE registers
+   exceeded share: median 57% · p90 67%     [the chair's BUDGET is 33%, expected 17%]
+   depth:          median 0.25 · p90 1.75   [the chair's DEPTH is 0.5]
+   paragraphs at ZERO: 0 of 113             [consistent with the PERFECTION CEILING]
+```
+**REPORTED, AND NOTHING CHANGED — the chair re-rules.** Read literally, the chair's BUDGET
+(one third) and DEPTH (0.5 band-widths) applied PER ENTRY would fail essentially every human
+paragraph in the exemplar corpus — the unsatisfiable-ceiling error the herald refuter caught
+once already. The mechanism this lane offers, as a hypothesis to test and not to trust: a rate
+over a 3–10 sentence paragraph is a far noisier estimate than the same rate over a 200–600
+sentence register, so scoring an ENTRY against a REGISTER-level band compares a high-variance
+estimate to a low-variance band. If that is right, the cure is to re-derive the bands at the
+ENTRY's own grain rather than to move the numbers. **The PERFECTION CEILING survives the
+refinement unchanged and is the one of the three that the per-entry data supports directly.**
+
+**A REFUSAL, with its measurement.** The refinement covers **3 of the 10** leaf registers.
+The seven others' raw texts do not exist anywhere on this machine: the fingerprints' own
+`files` arrays point into scratchpad `d5b9a39f-…`, which is gone (`find` over
+`/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine` returns nothing for
+`dnd_flavor_basic.txt`, `dnd_rules_srd.txt`, `martin_chronicle.txt`, `tolkien_plain.txt`).
+The three that survive are all Le Guin. A three-register, one-author reading is not a
+ten-register one and this receipt does not pretend otherwise.
+
+**A SECOND REFUSAL, and it is a fence not a shortfall.** The real exemplar bands are NOT
+copied into the repo. They are derived from the fourteen exemplar records; the repo instrument
+takes bands as an ARGUMENT and the test proves the arms on a SYNTHETIC band set. The estate
+has a standing hazard about exemplar-derived material in the repo, and a lane does not resolve
+that by shipping. The bands are supplied by the caller; this receipt carries the measurement.
+
+### 2.7 THE FINGERPRINT IS BYTE-PARITY WITH THE KIT'S OWN TOOL — CONFIRMED
+```
+$ node probe-fp-parity.mjs $K/primary/raw/leguin_fiction.txt
+sentences mine=162 kit=162 | paragraphs mine=16 kit=16
+PARITY: all 21 rate metrics identical
+$ node probe-fp-parity.mjs $K/primary/raw/leguin_nonfiction_spoken.txt
+sentences mine=351 kit=351 | paragraphs mine=72 kit=72
+PARITY: all 21 rate metrics identical
+```
+Two texts, 42 metric comparisons, zero differences. This is the guard against the
+second-spelling drift the module's own header warns about: without it the estate would be
+measured on one ruler and the exemplars on another and every depth figure would be wrong.
+
+### 2.8 THE WALK OVER THE SHIPPED CORPUS (report-only)
+```
+B-GRAMMAR · level 1 over 2,734 variants
+  realised orders n = 180; top: V1 60.6% · GEOGRAPHY→PRESENT 4.9% · V5 2.5% · V3|V8 2.2%
+  index-0 orders: V1 455 · GEOGRAPHY→PRESENT 46 · V5 24 · V3|V8 22
+  untagged variants: 2,734 of 2,734
+  pools 786 — uniform grammar 37.9%, uniform segments 56.9%, repeated opener 12.6%
+  fails by arm: A, D, F1, F2, F3, F6, G/FEELING, G/FIGURE, G/FORECAST, G/MEANING
+B-GRAMMAR GAPS · first 400 R1 variants
+  opening shapes: article=183 settlement-token=103 other=37 free-relative=26 expletive=22
+                  participial=17 negative=10 other-slot=2
+  close kinds:    other=323 pronoun=57 abstraction=11 civicNoun=9
+  tenses:         present=294 subjunctive=56 past=38 future=12
+  settlement-token openers 103 · contrast shapes 65 · bare relatives 1 · appositives 4
+```
+The index-0 histogram is the one to read twice: **455 of the 708 canonical lines are V1**. A
+default that is one order everywhere is fault 9 by the back door, and §3.2 names that risk in
+its own words.
+
+### 2.9 REFUSALS AND DECLARED LIMITS (car 2)
+1. **Arm A does not gate** — measured ground in §2.4.
+2. **The per-entry three numbers are reported, not applied** — §2.6.
+3. **The exemplar bands stay out of the repo** — §2.6.
+4. **The `grammar:` tag is DECLARED and applied to nothing.** `GRAMMAR_TAG_CONTRACT` names its
+   shape, its annex form (it rides the projection's EXISTING optional second bracketed tag, so
+   no new row grammar is needed), its leaf form, and the TWO files that must move with it:
+   the generator's `parseTag` (or a `grammar:`-prefixed tag lands in `marks` and the
+   `STATE_MARK_DIMENSIONS` contract test reds on eight new mark words) and the projection
+   contract test's `--check` byte-compare. THE PROMISE holds: `variantIsAnchored` reads
+   `slots`, `variantIsAudible` reads `marks`, and neither reads `grammar` — no pool length, key,
+   index or eligibility moves. **The test asserts that zero shipped variants carry the tag.**
+5. **Arm I is NOT-EXECUTABLE** and says so on every run: the unwritten-slot arm needs a
+   rank-form manifest naming which slots a place of a given rank carries, and none is typed
+   (Part B §0.1 ruling 4; chair C-6).
+6. **Arm J ships as a DIRECTION with a first arm** (sentence count against licensed
+   move/field units), reported as a NOTE — the spec deferred the rest and this lane does not
+   invent it.
+7. **V3 and V8 are reported as `V3|V8`, never picked between.** They share a move list and
+   differ only in the ABSENCE CLASS (a world LACK against a record GAP), which no lexical read
+   settles. A classifier that picked would be inventing a licence.
+
+### 2.10 THE PROOFS
+```
+$ npx vitest run tests/lint/proseMoveGrammar.walker.test.js ; echo EXIT=$?
+  Test Files  1 passed (1)
+       Tests  42 passed (42)
+EXIT=0
+$ npx vitest run tests/lint/proseMoveGrammar.walker.test.js tests/lint/proseEntryContradiction.walker.test.js
+  Test Files  2 passed (2)
+       Tests  61 passed (61)
+$ npx eslint src/domain/prose tests/lint/proseMoveGrammar.walker.test.js tests/fixtures/grammarControls.js ; echo EXIT=$?
+EXIT=0     # after the determinism ban caught Math.log2 — see below
+$ npx tsc --noEmit -p tsconfig.json 2>&1 | grep 'domain/prose'
+           # (no output)
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+```
+**THE ESTATE'S OWN LINT CAUGHT A REAL DEFECT IN THIS CAR.** `entropyOf` used `Math.log2`,
+which ECMAScript leaves implementation-approximated; `src/domain/**` bans the transcendentals
+outright because one feeding a threshold can fork same-seed worlds across devices. The figure
+is report-only and feeds no seed — and the ban is fail-closed for exactly the case where
+someone believes that and is wrong later. It now uses the kernel's `log2Det`.
+
+### 2.11 What a successor continues from
+Dock tip `d63f80207`, porcelain 0. Cars 3–6 remain. Car 3's loaders extend
+`tests/helpers/dossierCorpus.js`; car 5's presence measure extends
+`src/domain/prose/proseFingerprint.js` with three keys and re-runs the fourteen (the raw-text
+absence in §2.6 bounds what that re-run can cover, and the same refusal applies).
+
