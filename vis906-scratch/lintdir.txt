@@ -1,0 +1,34 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 44902 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneANCHOR905
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 2613ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 23ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the live TEST-title count moved from SP-C's measured 18,471 — this is the evidence layer, the exact figure two cuts in a row stated wrongly in prose, and the reason it is asserted rather than described: expected 23660 to be 23653 // Object.is equality
+
+- Expected
++ Received
+
+- 23653
++ 23660
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7455:8
+    7453|       + ' is the evidence layer, the exact figure two cuts in a row st…
+    7454|       + ' the reason it is asserted rather than described')
+    7455|       .toBe(CENSUS.titles);
+       |        ^
+    7456|     // …AND THE SUITE LAYER IS COUNTED TOO, WHICH IS WHAT MAKES THE SP…
+    7457|     // that merged the two arrays again would leave `titles` at 23,678…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 139 passed (140)
+      Tests  1 failed | 2193 passed (2194)
+   Start at  22:18:22
+   Duration  153.66s (transform 5.31s, setup 1.77s, import 60.76s, tests 224.16s, environment 9ms)
+
