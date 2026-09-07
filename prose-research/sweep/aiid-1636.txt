@@ -1,0 +1,118 @@
+ Incident 1636: Purportedly AI-Generated Travel Information Reportedly Misled Tourists into Seeking Nonexistent 'Sacred Canyon of Humantay' in Peru Skip to Content 
+ AI Incident Database 
+ Donate 
+ Discover
+ Submit
+ Welcome to the AIID 
+ Table View 
+ List view 
+ Entities 
+ Taxonomies 
+ Spatial View 
+ Blog 
+ AI News Digest 
+ Random Incident 
+ Sign Up 
+ Discover
+ Submit
+ Welcome to the AIID 
+ Table View 
+ List view 
+ Entities 
+ Taxonomies 
+ Spatial View 
+ Blog 
+ AI News Digest 
+ Random Incident 
+ Sign Up 
+ Incident 1636: Purportedly AI-Generated Travel Information Reportedly Misled Tourists into Seeking Nonexistent 'Sacred Canyon of Humantay' in Peru
+ Description : Two tourists in Peru reportedly relied on AI-generated travel information describing a nonexistent destination called the "Sacred Canyon of Humantay." One tourist had paid nearly $160 to reach a rural road near Mollepata without a guide or actual destination. Trek operator Miguel Ángel Góngora Meza intervened after seeing the purportedly AI-generated itinerary and warned that such misinformation could expose travelers to serious risks in high-altitude Andean terrain.
+ Editor Notes : The exact incident date is unknown. Reporting suggests the event occurred in late September 2025; 09/29/2025 is used as the earliest documented report-date fallback. The incident ID was created 08/13/2026.
+ Tools
+ Notify Me of Updates
+ New Report New Response Discover Citation Info View History 
+ Entities
+ View all entities 
+ Alleged: OpenAI , Large language model developers and Chatbot developers developed an AI system deployed by Travelers , Tourists seeking the supposed Sacred Canyon of Humantay , tourists and Chatbot users , which harmed Travelers , tourists , Chatbot users , OpenAI users , Epistemic integrity and Consumers . Alleged implicated AI systems: Large language models , ChatGPT and Chatbots 
+ Incident Stats
+ Incident ID
+ 1636
+ Report Count
+ 4
+ Incident Date
+ 2025-09-29
+ Editors
+ Daniel Atherton
+ Incident Reports
+ Reports Timeline
+ Loading... 
+ The perils of letting AI plan your next trip 
+ bbc.com
+ Loading... 
+ The dangers of letting AI organize your next trip. 
+ www1.folha.uol.com.br
+ Loading... 
+ Crece el número de turistas que planifican sus viajes con ChatGPT y también los destinos inventados por la IA 
+ computerhoy.20minutos.es
+ Loading... 
+ What NOT to Do on the Inca Trail: 16 Hard-Earned lessons from hiking to Machu Picchu for 30 years. 
+ evolutiontreksperu.com
+ Expand All Collapse All 
+ Loading... 
+ The perils of letting AI plan your next trip
+ bbc.com · 2025 
+ An imagined town in Peru, an Eiffel tower in Beijing: travellers are increasingly using tools like ChatGPT for itinerary ideas -- and being sent to destinations that don't exist.
+ Miguel Angel Gongora Meza, founder and director of Evolution … 
+ Read More 
+ Loading... 
+ The dangers of letting AI organize your next trip.
+ www1.folha.uol.com.br · 2025 
+ AI Translated 
+ BBC News Brazil The founder and director of Evolution Treks Peru, Miguel Ángel Gongora Meza, was preparing for a hike through the Andes in a town in the Peruvian countryside when he overheard a curious conversation.
+ Two unaccompanied touris…
+ Read More 
+ Loading... 
+ Crece el número de turistas que planifican sus viajes con ChatGPT y también los destinos inventados por la IA
+ computerhoy.20minutos.es · 2025 
+ ¿Has utilizado alguna vez ChatGPT para planificar tus vacaciones? Lo más probable es que sí y también es posible que la inteligencia artificial te haya dicho que vayas a un lugar presumiblemente turístico que no lo es... y, puede que ¡ni ex…
+ Read More 
+ Loading... 
+ What NOT to Do on the Inca Trail: 16 Hard-Earned lessons from hiking to Machu Picchu for 30 years.
+ evolutiontreksperu.com · 2026 
+ Mistake #10: Trusting Only AI or Random Online Itineraries
+ These days, people arrive with perfect PDFs and screenshots created by tools that have never gasped for air at 4,000 meters or checked a weather forecast in Quechua. Information is…
+ Read More 
+ Variants
+ A "variant" is an AI incident similar to a known case—it has the same causes, harms, and AI system. Instead of listing it separately, we group it under the first reported incident. Unlike other incidents, variants do not need to have been reported outside the AIID. Learn more from the research paper. Seen something similar?
+ Submit a Variant 
+ Similar Incidents
+ Selected by our editors
+ Purportedly AI-Generated Video Reportedly Misled Elderly Malaysian Couple Into Traveling to Nonexistent Cable Car Attraction
+ Jun 2025 · 10 reports 
+ Previous Incident Next Incident 
+ Similar Incidents
+ Selected by our editors
+ Purportedly AI-Generated Video Reportedly Misled Elderly Malaysian Couple Into Traveling to Nonexistent Cable Car Attraction
+ Jun 2025 · 10 reports 
+ Research
+ Defining an “AI Incident” 
+ Defining an “AI Incident Response” 
+ Database Roadmap 
+ Related Work 
+ Download Complete Database 
+ Project and Community
+ About 
+ Contact and Follow 
+ Apps and Summaries 
+ Editor’s Guide 
+ Incidents
+ All Incidents in List Form 
+ Flagged Incidents 
+ Submission Queue 
+ Classifications View 
+ Taxonomies 
+ 2026 - AI Incident Database
+ Terms of use 
+ Privacy Policy 
+ dd3f754
+ 

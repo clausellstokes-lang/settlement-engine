@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 23:05:10 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 23:11:57 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lighting tail's measurement lands with zero product bytes — L-PROBE-2 at ever
 
@@ -76,7 +76,7 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 8e430c97f · 5 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 25438e944 · 6 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
@@ -105,11 +105,11 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 ## WORKFLOW RUNS of chair session df942c1b-a1a2-4594-ba90-9241ff864ccd (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_00551368-b67: 4 journal lines, 4 agents
 - wf_0cd91522-1ce: 2 journal lines, 1 agents
-- wf_37af3c74-8c8: 4 journal lines, 4 agents
+- wf_37af3c74-8c8: 5 journal lines, 4 agents
 - wf_55c30493-02f: 10 journal lines, 5 agents
 - wf_8cd21474-a7b: 4 journal lines, 2 agents
 - wf_d3face35-f20: 2 journal lines, 1 agents
 - wf_f191dac2-82a: 4 journal lines, 2 agents
 
-## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;80594 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
-load: 27.22 32.58 25.69
+## PROCESSES: 6100 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsho;date '"'"'+START %H:%M:%S'"'"'; sh $SC/after-ratchet-906.sh 2489 3 2>&;echo "--- dock:"; git -C $SC/laneANCHOR905 log --oneline -4 | cut -c1-;echo "--- stamped kit:"; ls -la $SC/run-gate-906.sh $SC/after-cas-906.;sed -e '"'"'s/904/906/g'"'"' $SC/build-payload-904.py > $SC/build-payl;grep -n "GATE_CARS\|expected .* cars" $SC/run-gate-906.sh $SC/after-ca;26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 7.05 20.19 23.15

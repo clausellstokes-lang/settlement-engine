@@ -53,3 +53,17 @@ Opus finder, 2026-09-06.
 ### Slate (Nov 2025)
 - Michael Burgess: "I used ChatGPT and put something in about Eleanor Roosevelt, and it said, Eleanor and her husband Theodore Roosevelt"
 - Burgess: "The A.I. is not going to go and get microfilm, I can tell you that."
+
+## ROUND 2 SOURCES (7-19)
+7. Which? (Jul 2026) TripAdvisor AI summaries — primary read. 'spotless' hotel with 102 food-poisoning mentions; Britannia 'charming' vs Google 'filthy'; harassment reduced to 'Lapses [in service] noted by a few'; Tripadvisor's own mechanism = "identify the most common themes and then turn those themes into short, plain-English overviews"; Google's overviews handled context far better (counter-evidence).
+8. Wikipedia:Signs of AI writing (raw wikitext, 220KB) — THE ENCYCLOPEDIC-REGISTER CATALOGUE. "even when prompted to use an encyclopedic style, their output will often tend toward advertisement-like writing, or like the prose of a travel guide" (STEERABILITY FAILURE). Real AI town entries: Alamata (Ethiopia, Jun 2023) "Nestled ... stands as a vibrant town with a rich cultural heritage"; Kumba, Cameroon (Oct 2024) "solidify its role as a regional hub"; Korattur (Apr 2024) "Despite its industrial and residential prosperity, Korattur faces challenges" = THE EVALUATIVE CLOSE. Model-era vocabulary lists by GPT-4 / GPT-4o / GPT-5.
+9. Jill Walker Rettberg (13 May 2026) — the GENRE GLITCH. A US pretrial-detention memo describing a train inserted "a route famous for its scenic views of the mountains and deserts". Mechanism: associative generation pulls the promotional register attached to a place/route token. NOTE the tomato example was RETRACTED (NYT confirmed no AI) = detection false positive.
+10. Oregon Historical Society, Nikki Koehlert (9 Jan 2024) — ChatGPT invented a newspaper article title, paper and date for a local-history event. Mechanism: names co-occurring on a page read as a relation.
+11. Governing / Pima County Public Library (3 Oct 2025) — "Did an alien write this?"; AI nonfiction "full of inaccuracies".
+12. BBC Travel (26 Sep 2025) — the nonexistent "Sacred Canyon of Humantay": "confidently written and full of vivid adjectives"; name = two real places recombined. Ghani (CMU): "It doesn't know the difference between travel advice, directions or recipes." 2024 survey: 33% false info, 37% not enough info.
+13-14. Wikivoyage VfD Sept 2025 + Jan 2025 — a real gazetteer CLEANUP: a batch of Nigerian town articles deleted as AI-generated. SelfieCity: "AI's tendency to hallucinate regarding places or events that don't already have an online presence". Ground Zero's counter: it costs African coverage.
+15. Wikivoyage Travellers' pub — still NO adopted AI policy as of Sep 2026.
+16. Wikivoyage:Deletion policy — NEGATIVE: no AI clause in the text as fetched, despite the pub's claim of a speedy-deletion provision.
+17. arXiv 2604.20048 (Zhao et al., v3 8 Jun 2026) — 72,000 model place texts, GPT-5.2 / Claude Sonnet 4 / Gemini 2.5 Flash. Prompting "fails to recover the variety and diversity of human responses"; model texts "less diverse, more affectively positive"; human IPIs negative for England/Scotland/Wales, model estimates "systematically more elevated".
+18. Gao & Thebault-Spieker, ACM CSCW 2026 (ABSTRACT ONLY, dl.acm.org blocked) — "urban advantage" in formal news, "leaving rural areas systematically underrepresented with lower semantic depth".
+19. Euronews + AI Incident DB — routing only, not counted substantive.

@@ -1,18 +1,18 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 23:04:51 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 23:10:53 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | in-flight | 0 | — | — | 21:31:03 |
 | ai | critic |  | result | 0 | critic-ai.md | — | 02:25:15 |
-| ai | finder | arch-biographical-record | in-flight | 26 | — | — | 03:04:04 |
-| ai | finder | arch-gazetteer-travel-history | in-flight | 17 | payload.json | 35 claims, complete=False @23:02:32 | 03:04:50 |
-| ai | finder | arch-historical-fact-measured | in-flight | 8 | — | — | 03:04:49 |
-| ai | finder | arch-worldbuilding-communities | in-flight | 27 | — | — | 03:03:44 |
+| ai | finder | arch-biographical-record | in-flight | 38 | — | 19 claims, complete=False @23:04:55 | 03:09:54 |
+| ai | finder | arch-gazetteer-travel-history | in-flight | 27 | payload.json, payload2.json | 35 claims, complete=False @23:02:32 | 03:10:48 |
+| ai | finder | arch-historical-fact-measured | in-flight | 20 | — | 52 claims, complete=False @23:08:35 | 03:10:40 |
+| ai | finder | arch-worldbuilding-communities | in-flight | 43 | — | 24 claims, complete=False @23:05:02 | 03:10:42 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 02:10:32 |
-| dnd | finder | place-5e-gazetteers | in-flight | 39 | — | 26 claims, complete=False @22:59:32 | 03:04:46 |
-| dnd | finder | place-dmg-settlements | in-flight | 42 | — | 0 claims, complete=False @22:59:47 | 03:04:49 |
-| dnd | finder | place-editorial-staff | in-flight | 19 | — | 33 claims, complete=False @23:03:13 | 03:04:27 |
-| dnd | finder | place-srd-measure | in-flight | 4 | — | — | 03:04:39 |
+| dnd | finder | place-5e-gazetteers | in-flight | 44 | — | 61 claims, complete=True @23:08:40 | 03:09:12 |
+| dnd | finder | place-dmg-settlements | in-flight | 48 | — | 40 claims, complete=False @23:08:16 | 03:10:51 |
+| dnd | finder | place-editorial-staff | in-flight | 32 | — | 76 claims, complete=False @23:09:18 | 03:10:49 |
+| dnd | finder | place-srd-measure | in-flight | 6 | — | 42 claims, complete=False @23:09:39 | 03:10:52 |
 | dnd | synth |  | in-flight | 0 | — | — | 21:31:03 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
 | hobb | critic |  | result | 0 | critic-hobb.md | — | 22:39:48 |

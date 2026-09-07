@@ -3,14 +3,14 @@
  "name": "dnd",
  "angle": "place-editorial-staff",
  "tag": null,
- "lines": 206,
+ "lines": 294,
  "firstTs": "2026-09-07T02:52:52.795Z",
- "lastTs": "2026-09-07T03:04:27.269Z",
+ "lastTs": "2026-09-07T03:10:49.631Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 42,
-  "WebSearch": 13,
+  "Bash": 59,
+  "WebSearch": 23,
   "WebFetch": 2
  },
  "urlsFetched": [
@@ -32,7 +32,20 @@
   "https://www.darkshire.net/jhkim/rpg/dnd/dungeoncraft/",
   "https://textual.ru/rpg/dungeoncraft.pdf",
   "https://paizo.com/writersguidelines/dragon.html",
-  "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf"
+  "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+  "https://theadventurerleagues.com/2024/07/adventurers-league-documents-repository-current-docs/",
+  "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+  "https://chrisssims.wordpress.com/",
+  "https://chrisssims.wordpress.com/20[0-9",
+  "https://chrisssims.wordpress.com/2020/07/14/writing-generalizations-and-absolutes/",
+  "https://chrisssims.wordpress.com/2020/01/21/explain-a-game/",
+  "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+  "https://groups.google.com/g/rec.games.frp.dnd/c/ysbpiEo92M8/m/zkUaW4N_pAwJ",
+  "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
+  "https://blackwells.co.uk/bookshop/product/Waterdeep-Dragon-Heist-by-Michele-Carter-editor-Scott-Fitzgerald-Gray-editor-Kim-Mohan-editor/9780786966257",
+  "https://annarchive.com/",
+  "https://www.dndbeyond.com/sources/dnd/wdh",
+  "https://archive.org/stream/wheaton_Wdh/Waterdeep%20-%20%20Dragon%20Heist_djvu.txt"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -42,8 +55,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-place-editorial-staff.json",
-  "claims": 33,
+  "claims": 76,
   "complete": false,
-  "mtime": "23:03:13"
+  "mtime": "23:09:18"
  }
 }

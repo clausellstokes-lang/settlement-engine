@@ -1329,5 +1329,142 @@
    23,
    12
   ]
+ },
+ "BR2018_RAVENLOFT": {
+  "label": "D&D Basic Rules v1.0 (Nov 2018) p.2 \u2014 the DM speech describing Castle Ravenloft",
+  "note": "",
+  "paragraphs": 1,
+  "sentences": 9,
+  "words": 127,
+  "wordsPerSentence": {
+   "mean": 14.1,
+   "sd": 4.4,
+   "min": 5,
+   "max": 21,
+   "p10": 5,
+   "p50": 15,
+   "p90": 18,
+   "shareUnder8": 0.1111,
+   "shareOver30": 0.0,
+   "neighbourVariation": 0.345
+  },
+  "sentencesPerParagraph": 9.0,
+  "secondPerson": {
+   "sentenceRate": 0.2222,
+   "per1000words": 15.75
+  },
+  "digits": {
+   "sentenceRate": 0.0,
+   "per1000words": 0.0
+  },
+  "emDash": {
+   "count": 0,
+   "sentenceRate": 0.0,
+   "per1000words": 0.0
+  },
+  "contractions": {
+   "count": 0,
+   "sentenceRate": 0.0,
+   "per1000words": 0.0
+  },
+  "tenseProxy": {
+   "isAre_per1000": 0.0,
+   "wasWere_per1000": 0.0,
+   "hasHave_per1000": 0.0,
+   "had_per1000": 0.0
+  },
+  "punctuation": {
+   "semicolonSentenceRate": 0.0,
+   "colonSentenceRate": 0.0,
+   "parenSentenceRate": 0.0,
+   "questionSentenceRate": 0.0,
+   "exclamationSentenceRate": 0.0
+  },
+  "lengthHistogram": [
+   21,
+   11,
+   5,
+   12,
+   15,
+   16,
+   17,
+   12,
+   18
+  ]
+ },
+ "S51_PANTHEONS": {
+  "label": "SRD5.1 Appendix PH-B pantheon prose (p.360), prose paragraphs only",
+  "note": "",
+  "paragraphs": 5,
+  "sentences": 22,
+  "words": 550,
+  "wordsPerSentence": {
+   "mean": 25,
+   "sd": 12.0,
+   "min": 9,
+   "max": 54,
+   "p10": 14,
+   "p50": 21,
+   "p90": 35,
+   "shareUnder8": 0.0,
+   "shareOver30": 0.2727,
+   "neighbourVariation": 0.585
+  },
+  "sentencesPerParagraph": 4.4,
+  "secondPerson": {
+   "sentenceRate": 0.0,
+   "per1000words": 0.0
+  },
+  "digits": {
+   "sentenceRate": 0.0,
+   "per1000words": 0.0
+  },
+  "emDash": {
+   "count": 3,
+   "sentenceRate": 0.1364,
+   "per1000words": 5.45
+  },
+  "contractions": {
+   "count": 5,
+   "sentenceRate": 0.2273,
+   "per1000words": 9.09
+  },
+  "tenseProxy": {
+   "isAre_per1000": 21.82,
+   "wasWere_per1000": 0.0,
+   "hasHave_per1000": 1.82,
+   "had_per1000": 3.64
+  },
+  "punctuation": {
+   "semicolonSentenceRate": 0.0,
+   "colonSentenceRate": 0.0,
+   "parenSentenceRate": 0.0909,
+   "questionSentenceRate": 0.0,
+   "exclamationSentenceRate": 0.0
+  },
+  "lengthHistogram": [
+   18,
+   32,
+   54,
+   16,
+   16,
+   16,
+   9,
+   50,
+   25,
+   31,
+   25,
+   26,
+   14,
+   20,
+   46,
+   11,
+   29,
+   20,
+   14,
+   35,
+   22,
+   21
+  ]
  }
 }

@@ -3,14 +3,14 @@
  "name": "dnd",
  "angle": "place-dmg-settlements",
  "tag": null,
- "lines": 220,
+ "lines": 272,
  "firstTs": "2026-09-07T02:52:52.795Z",
- "lastTs": "2026-09-07T03:04:49.635Z",
+ "lastTs": "2026-09-07T03:10:51.252Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 47,
-  "WebSearch": 10
+  "Bash": 59,
+  "WebSearch": 12
  },
  "urlsFetched": [
   "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
@@ -54,7 +54,13 @@
   "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/",
   "https://toolsandtaverns.com/guides/settlement-guide",
   "http://web.archive.org/cdx/search/cdx?url=dnd.wizards.com/dungeons-and-dragons/what-is-dnd*&limit=20&output=text&collapse=urlkey",
-  "http://web.archive.org/cdx/search/cdx?url=archive.wizards.com/dnd/*&limit=2000&output=text&collapse=urlkey"
+  "http://web.archive.org/cdx/search/cdx?url=archive.wizards.com/dnd/*&limit=2000&output=text&collapse=urlkey",
+  "https://roll20.net/compendium/dnd5e/$slug?expansion=33359",
+  "https://olddungeonmaster.com/2015/08/03/5e-writers-guide/",
+  "https://help.dmsguild.com/hc/en-us/articles/12776888583319-Content-Format-Logo-Artwork-Guidelines",
+  "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+  "https://www.dmsguild.com/en/product/267467/DMs-Guild-Creator-Resource--Style-Guide-Resources"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -64,8 +70,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-place-dmg-settlements.json",
-  "claims": 0,
+  "claims": 40,
   "complete": false,
-  "mtime": "22:59:47"
+  "mtime": "23:08:16"
  }
 }

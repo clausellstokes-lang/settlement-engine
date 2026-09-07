@@ -1,29 +1,27 @@
-import json,re,sys
-FILES={
- 'roll20':'dnd-roll20-settlements-2024.txt',
- 'tracker':'settlement-tracker.txt',
- 'dmg14':'dmg2014-ia.txt',
- 'srd51':'srd51.txt',
- 'srd521':'srd521.txt',
- 'sly':'d-2631c0b695f5f151fb6fb8ac640db644.txt',
- 'oak':'d-dad07efa4f1ca8cc6173890354d6ae32.txt',
- 'pcg':'d-d20d9b4c563f7498dbafc21bc5e3e71c.txt',
- 'warg':'d-aec8261cdeab45ae20ed1cb3dca8e1df.txt',
- 'd20d':'d-c783a7ff56fc8949131c134fe4e0e4a3.txt',
- 'jeth':'d-48235bcccffbb9008dc43ea88ddc0226.txt',
+import json
+m={
+"https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait":"bio-verge.txt",
+"https://www.wired.com/story/morbid-war-online-obituaries/":"bio-wired-morbid.txt",
+"https://www.wired.com/story/youtube-obituary-pirates/":"bio-wired-yt.txt",
+"https://www.legalgenealogist.com/2026/05/12/ai-meets-tos/":"lg-aitos.txt",
+"https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content":"wt-styleguide.txt",
+"https://www.wikitree.com/g2g/2021670/should-become-official-wikitree-policy-generated-enhanced":"wt-policy.txt",
+"https://vitabrevis.americanancestors.org/-ai-in-genealogical-research":"va-ai.txt",
+"https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/":"ajc.txt",
+"https://familylocket.com/can-chatgpt-help-with-genealogy-citations/":"fl-cit.txt",
+"https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing":"wp-signs.txt",
+"https://www.familysearch.org/en/blog/ai-developments-genealogy":"fs-ai.txt",
 }
-T={k:open(v,encoding='utf-8',errors='replace').read() for k,v in FILES.items()}
-N={k:re.sub(r'\s+',' ',v) for k,v in T.items()}
-QUOTES=json.load(open('quotes.json'))
+d=json.load(open("found-ai-arch-biographical-record.json"))
+cache={}
 bad=0
-for k,q in QUOTES:
-    if not q: print('BLANK   ', k); continue
-    nq=re.sub(r'\s+',' ',q).strip()
-    exact = q in T[k]
-    norm  = nq in N[k]
-    w=len(nq.split())
-    flag='OK ' if norm else 'FAIL'
-    if not norm: bad+=1
-    if w>12: flag+=' >12W'; bad+=1
-    print(f'{flag} [{k}] ({w}w) exact={exact} :: {q}')
-print('BAD:',bad)
+for i,c in enumerate(d["claims"]):
+    q=c.get("quote","")
+    if not q: continue
+    f=m.get(c["url"])
+    if not f: print("NOFILE",i,c["url"]); continue
+    if f not in cache: cache[f]=open(f,encoding="utf-8").read()
+    if q not in cache[f]:
+        bad+=1
+        print("MISS",i,"|",c["source"][:45],"|",repr(q))
+print("total quotes checked; misses:",bad)

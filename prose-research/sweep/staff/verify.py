@@ -7,6 +7,8 @@ FILES={
  data.HSG19:"hsg2019.txt", data.HSG13:"hsg2018.txt", data.EB:"vallese-planes.txt",
  data.PK:"perkins2011.txt", data.DC:"dungeoncraft.txt",
  data.PDG:"paizo-dungeon.txt", data.PDR:"paizo-dragon.txt",
+ data.CS:"sims-gen.txt", data.AL:"alpha-fmt.txt", data.MM:"mimir-perkins.txt",
+ data.SW:"grog-winter.txt", data.WDH:"wdh.raw", data.DG:"dmsg-267467.txt", data.ADG:"adg.txt",
 }
 def norm(s):
     s=s.replace('’',"'").replace('‘',"'").replace('“','"').replace('”','"')

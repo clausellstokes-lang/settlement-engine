@@ -1,739 +1,274 @@
-# -*- coding: utf-8 -*-
-import json, io, os
-
-BASE = os.path.dirname(os.path.abspath(__file__))
-
-FORUM = "https://asoiaf.westeros.org/index.php?/topic/133760-grrms-prose/"
-FORUM2 = "https://asoiaf.westeros.org/index.php?/topic/133760-grrms-prose/page/2/"
-NEWS = "https://www.westeros.org/News/Entry/13834"
-COLLINS = "https://seantcollins.com/2011/01/playing-a-game-of-thrones-why-you-should-read-george-r-r-martins-a-song-of-ice-and-fire-series-2/"
-BP1 = "https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/"
-BRW = "https://reactormag.com/a-read-of-ice-and-fire-a-storm-of-swords-part-30/"
-BHK = "https://reactormag.com/a-read-of-ice-and-fire-the-hedge-knight-part-1/"
-ASTRO = "https://astrofella.wordpress.com/2014/03/31/some-notes-on-george-rr-martins-prose-style/"
-AFFIX = "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/"
-ATSEA = "https://atseajournal.com/asoiaf/essays/epithets.html"
-YT1 = "https://www.youtube.com/watch?v=RmB-C9soI_s"
-YT2 = "https://www.youtube.com/watch?v=hl9MF6PEnC8"
-YT3 = "https://www.youtube.com/watch?v=QVYpX8RC0Cg"
-YT4 = "https://www.youtube.com/watch?v=10DpU5PbRHY"
-YT5 = "https://www.youtube.com/watch?v=dCa8YujbzIU"
-ATTEWELL = "https://racefortheironthrone.wordpress.com/2020/02/03/dunk-egg-essay-1-what-worth-a-hedge-knight/"
-MALAZAN = "https://forum.malazanempire.com/topic/17889-the-tales-of-dunk-and-egg-by-george-rr-martin/"
-SFFW = "https://www.sffworld.com/2012/11/bookreview900/"
-INDEP = "https://www.independent.co.uk/arts-entertainment/books/reviews/fire-and-blood-review-george-rr-martin-game-of-thrones-targaryens-winds-of-winter-a8640791.html"
-PWREV = "https://www.publishersweekly.com/978-1-5247-9628-0"
-LOUGH = "https://www.tor.com/2018/11/21/grrm-fire-and-blood-review/"
-PWINT = "https://www.publishersweekly.com/pw/by-topic/authors/interviews/article/77516-pw-talks-with-george-r-r-martin.html"
-BOOKPAGE = "https://www.bookpage.com/interviews/17465-george-r-r-martin-fiction/"
-ATL = "https://www.theatlantic.com/entertainment/archive/2011/07/george-rr-martin-on-sex-fantasy-and-a-dance-with-dragons/241738/"
-RIVERA = "https://authorarrivera.com/2023/09/10/a-brief-linguistic-exam-of-a-song-of-ice-and-fire/"
-VOICE = "https://nineworldsacademia.wordpress.com/2014/08/15/writing-westeros-a-corpus-linguistic-study-of-a-song-of-ice-and-fire/"
-FA = "https://www.fictionadvocate.com/2015/01/28/how-to-write-like-george-r-r-martin/"
-WCI = "https://www.wildcardsworld.com/intervew/interview-with-george-r-r-martin-from-sff-world/"
-WIC = "https://winteriscoming.net/2018/11/23/george-rr-martin-critics-fire-and-blood/"
-
-R_LIVE = "live fetch, curl with a desktop browser user agent"
-R_LIVE_SLUG = "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves"
-R_WB = "Wayback raw id_ capture after the live URL returned 403"
-R_YT = "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)"
-
-C = []
-def c(**kw):
-    C.append(kw)
-
-# ---------------- forum 133760 (readers) ----------------
-c(feature="plainness and economy",
-  claim="A reader on the Westeros forum characterises Martin's narrative delivery as generally straightforward and plain rather than complex or poetic.",
-  source="Raving Stark the Mad, forum post in 'GRRM's prose', A Forum of Ice and Fire", url=FORUM,
-  quote="he is generally straightforward and plain, rather than complex, poetic, or masterful",
-  page="topic 133760, page 1, post of 30 July 2015", kind="reader", polarity="asserts",
-  date="2015-07-30", routeHint=R_LIVE_SLUG, registerHint="none", confidence="high")
-
-c(feature="per-speaker register",
-  claim="A reader argues that Martin's distinctive skill is altering word choice according to which point-of-view character is narrating.",
-  source="sweetsunray, forum post in 'GRRM's prose', A Forum of Ice and Fire", url=FORUM2,
-  quote="alter the choice of words based on the POV",
-  page="topic 133760, page 2, post of 31 July 2015", kind="reader", polarity="asserts",
-  date="2015-07-31", routeHint=R_LIVE_SLUG, registerHint="dossier-archivist", confidence="high")
-
-c(feature="plainness and economy",
-  claim="The same reader argues that the plainness of Martin's prose is deceptive rather than a lack of deliberation.",
-  source="sweetsunray, forum post in 'GRRM's prose', A Forum of Ice and Fire", url=FORUM2,
-  quote="In that way the proze's plainness is deceptive.",
-  page="topic 133760, page 2, post of 31 July 2015", kind="reader", polarity="asserts",
-  date="2015-07-31", routeHint=R_LIVE_SLUG, registerHint="dossier-archivist", confidence="high")
-
-c(feature="concrete sensory noun",
-  claim="A reader argues that an incidental sensory detail (a character smelling of soap) does no descriptive work but signals how closely the point-of-view character is attending to him.",
-  source="sweetsunray, forum post in 'GRRM's prose', A Forum of Ice and Fire", url=FORUM2,
-  quote="Does it matter? No, it doesn't in a descriptive way.",
-  page="topic 133760, page 2, post of 31 July 2015", kind="reader", polarity="asserts",
-  date="2015-07-31", routeHint=R_LIVE_SLUG, registerHint="dossier-archivist", confidence="high")
-
-c(feature="per-speaker register",
-  claim="A reader credits Martin with creating character voices that are easily distinguishable from one another.",
-  source="Aderyn, forum post in 'GRRM's prose', A Forum of Ice and Fire", url=FORUM,
-  quote="create unique character voices that are easily distinguishable and believable",
-  page="topic 133760, page 1, post of 30 July 2015", kind="reader", polarity="asserts",
-  date="2015-07-30", routeHint=R_LIVE_SLUG, registerHint="none", confidence="high")
-
-c(feature="repetition and refrain",
-  claim="A reader objects to the recurrence of Martin's character catchphrases as over-repetitive.",
-  source="Berric_Dondiedagain, forum post in 'GRRM's prose', A Forum of Ice and Fire", url=FORUM,
-  quote="I do not like the over repetitive nature of",
-  page="topic 133760, page 1, post of 30 July 2015", kind="reader", polarity="rejects",
-  date="2015-07-30", routeHint=R_LIVE_SLUG, registerHint="herald-pools", confidence="high")
-
-c(feature="repetition and refrain",
-  claim="The thread's opening poster reports having encountered complaints elsewhere that Martin's style is dry and repetitious.",
-  source="Shierak_qiya, opening post of 'GRRM's prose', A Forum of Ice and Fire", url=FORUM,
-  quote="complaints that George's writing style is dry and repetitious",
-  page="topic 133760, page 1, opening post of 30 July 2015", kind="reader", polarity="mentions",
-  date="2015-07-30", routeHint=R_LIVE_SLUG, registerHint="none", confidence="high")
-
-c(feature="concrete sensory noun",
-  claim="Several readers in the thread single out Martin's food descriptions as the part of his description they most enjoy.",
-  source="Grayce Hornwood and others, 'GRRM's prose', A Forum of Ice and Fire", url=FORUM,
-  quote="I like the descriptions of food",
-  page="topic 133760, page 1, posts of 30 July 2015", kind="reader", polarity="asserts",
-  date="2015-07-30", routeHint=R_LIVE_SLUG, registerHint="dossier-archivist", confidence="high")
-
-c(feature="metaphor discipline",
-  claim="A reader judges Martin's prose in places uninspired, cliched and repetitive by contrast with his plotting and characters.",
-  source="Walda, forum post in 'GRRM's prose', A Forum of Ice and Fire", url=FORUM2,
-  quote="GRRM's prose seems uninspired, clichéd, repetitive",
-  page="topic 133760, page 2, post of 31 July 2015 (the page spells it 'clichéd')", kind="reader", polarity="rejects",
-  date="2015-07-31", routeHint=R_LIVE_SLUG, registerHint="none", confidence="medium; the quotation as fetched carries the accent in 'clichéd'")
-
-c(feature="translation and register",
-  claim="A reader reports that the Romanian translation softens dialogue that reads awkwardly in Martin's English.",
-  source="Drekinn, forum post in 'GRRM's prose', A Forum of Ice and Fire", url=FORUM2,
-  quote="awkward dialogues weren't as painful if at all in the translation",
-  page="topic 133760, page 2, post of 31 July 2015", kind="reader", polarity="asserts",
-  date="2015-07-31", routeHint=R_LIVE_SLUG, registerHint="none", confidence="high")
-
-# ---------------- westeros news 13834 ----------------
-c(feature="other: recommendation framing",
-  claim="Westeros.org's news editor introduces Sean T. Collins's 2011 piece as covering ground from prose to themes to world-building.",
-  source="Linda Antonsson, 'Sean T. Collins on ASoIaF', Westeros.org news entry 13834", url=NEWS,
-  quote="covering ground ranging from prose to themes to world-building",
-  page="news entry 13834, posted 23:40 CET", kind="reception", polarity="mentions",
-  date="2011-01-18", routeHint="live URL returned 403 behind Cloudflare; read from the Wayback raw capture web/20250424162321id_/", registerHint="none", confidence="high")
-
-# ---------------- Collins ----------------
-c(feature="plainness and economy",
-  claim="Sean T. Collins judges Martin a strong prose craftsman while conceding groaners, especially in the first novel.",
-  source="Sean T. Collins, 'Playing a Game of Thrones', Attentiondeficitdisorderly", url=COLLINS,
-  quote="I think Martin’s a pretty strong prose craftsman",
-  page="point 7", kind="analysis", polarity="asserts",
-  date="2011-01-18", routeHint="link harvested from the Wayback capture of Westeros news 13834, then fetched live (redirects to the -series-2 slug)",
-  registerHint="none", confidence="high")
-
-c(feature="consequence on a household",
-  claim="Collins argues Martin's depiction of violence shows how war degrades everyone who takes part in it rather than glorifying it.",
-  source="Sean T. Collins, 'Playing a Game of Thrones', Attentiondeficitdisorderly", url=COLLINS,
-  quote="how war and violence immiserate and degrade everyone who participates",
-  page="point 10", kind="analysis", polarity="asserts",
-  date="2011-01-18", routeHint=R_LIVE, registerHint="chronicle-line", confidence="high")
-
-c(feature="place and institution description",
-  claim="Collins says the series' worldbuilding is cultural and historical rather than a matter of invented races or magic systems.",
-  source="Sean T. Collins, 'Playing a Game of Thrones', Attentiondeficitdisorderly", url=COLLINS,
-  quote="worldbuilding in the cultural and historical senses",
-  page="point 1", kind="analysis", polarity="asserts",
-  date="2011-01-18", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="point of view and distance",
-  claim="Collins attributes the books' pull to the rotation of single-character chapters, each titled with that character's name.",
-  source="Sean T. Collins, 'Playing a Game of Thrones', Attentiondeficitdisorderly", url=COLLINS,
-  quote="The structure of the narrative is highly addictive",
-  page="point 5", kind="analysis", polarity="asserts",
-  date="2011-01-18", routeHint=R_LIVE, registerHint="none", confidence="high")
-
-# ---------------- Butler prologue / Bran I ----------------
-c(feature="opening sentence",
-  claim="Leigh Butler, reading the Prologue for the first time, credits the writing with putting the reader inside the scene immediately.",
-  source="Leigh Butler, 'A Read of Ice and Fire: A Game of Thrones, Part 1', Tor.com", url=BP1,
-  quote="immediately putting the reader in the moment",
-  page="Prologue, Commentary", kind="reader", polarity="asserts",
-  date="2011-03-18", routeHint="live tor.com returned 403; read from the Wayback raw capture web/20240114133050id_/",
-  registerHint="none", confidence="high")
-
-c(feature="omission as information",
-  claim="Butler praises the Prologue for supplying only enough worldbuilding detail to raise interest without exposition.",
-  source="Leigh Butler, 'A Read of Ice and Fire: A Game of Thrones, Part 1', Tor.com", url=BP1,
-  quote="just enough worldbuilding tidbits to pique the interest",
-  page="Prologue, Commentary", kind="reader", polarity="asserts",
-  date="2011-03-18", routeHint=R_WB, registerHint="dossier-archivist", confidence="high")
-
-c(feature="other: chapter titling",
-  claim="Butler notes that Martin's chapters carry no numbers and repeat character names as titles.",
-  source="Leigh Butler, 'A Read of Ice and Fire: A Game of Thrones, Part 1', Tor.com", url=BP1,
-  quote="Mr. Martin is not into chapter numbers",
-  page="introductory note", kind="reader", polarity="mentions",
-  date="2011-03-18", routeHint=R_WB, registerHint="none", confidence="high")
-
-c(feature="withheld information and inference",
-  claim="Reading the Red Wedding for the first time, Butler cannot identify the man described only by his dark armour and pale pink cloak.",
-  source="Leigh Butler, 'A Read of Ice and Fire: A Storm of Swords, Part 30', Tor.com", url=BRW,
-  quote="but I am drawing a total blank",
-  page="Chapter 51 (Catelyn), Commentary", kind="reader", polarity="applies",
-  date="2013-05-30", routeHint="live reactormag.com with a browser user agent (the tor.com dated URL 403s)",
-  registerHint="chronicle-line", confidence="high")
-
-c(feature="register modulation",
-  claim="The same reader describes The Hedge Knight, after A Storm of Swords, as a refreshingly simple story by comparison with the novels.",
-  source="Leigh Butler, 'A Read of Ice and Fire: The Hedge Knight, Part 1', Tor.com", url=BHK,
-  quote="a relatively simple story about a dude trying to win a joust",
-  page="Commentary", kind="reader", polarity="asserts",
-  date="2013-12-05", routeHint="live reactormag.com with a browser user agent", registerHint="none", confidence="high")
-
-# ---------------- astrofella notes ----------------
-c(feature="register modulation",
-  claim="Simon of Books & Boots argues Martin's style is unstable, veering between functional modern thriller prose and fake medievalism.",
-  source="Simon, 'Some notes on George RR Martin's prose style', Books & Boots", url=ASTRO,
-  quote="it veers from purely functional modern thriller prose to prose larded",
-  page="opening paragraph", kind="analysis", polarity="asserts",
-  date="2014-03-31", routeHint=R_LIVE, registerHint="none", confidence="high")
-
-c(feature="plainness and economy",
-  claim="The same critic identifies lucid functional prose as Martin's default setting.",
-  source="Simon, 'Some notes on George RR Martin's prose style', Books & Boots", url=ASTRO,
-  quote="The default setting of Martin’s style is lucid and functional",
-  page="section 1, 'Crisp'", kind="analysis", polarity="asserts",
-  date="2014-03-31", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="place and institution description",
-  claim="The critic singles out the description of the Water Palace of Dorne as the passage of place-writing he most remembers.",
-  source="Simon, 'Some notes on George RR Martin's prose style', Books & Boots", url=ASTRO,
-  quote="I’ll long remember the word paintings of the Water Palace",
-  page="section 2, 'Poetry'", kind="analysis", polarity="asserts",
-  date="2014-03-31", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="repetition and refrain",
-  claim="The critic cannot decide whether repeated words inside one Dornish passage are haste or a deliberate device for its torpid atmosphere.",
-  source="Simon, 'Some notes on George RR Martin's prose style', Books & Boots", url=ASTRO,
-  quote="signs of haste, or careful repetitions designed to evoke the lazy",
-  page="section 2, 'Poetry'", kind="analysis", polarity="disputes",
-  date="2014-03-31", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="compounds and coinages",
-  claim="The critic says Martin uses English word-combination to coin scores of neologisms.",
-  source="Simon, 'Some notes on George RR Martin's prose style', Books & Boots", url=ASTRO,
-  quote="Martin uses this facility to coin scores of neologisms",
-  page="section 7, 'New word combinations'", kind="analysis", polarity="asserts",
-  date="2014-03-31", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="archaism",
-  claim="The critic argues that repetition across chapters makes Martin's slightly distorted English read as the reader's default setting.",
-  source="Simon, 'Some notes on George RR Martin's prose style', Books & Boots", url=ASTRO,
-  quote="slightly distorted English, and slightly amended concepts, become your home setting",
-  page="section 5, 'Distorting English'", kind="analysis", polarity="asserts",
-  date="2014-03-31", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="archaism",
-  claim="The critic names dropping the -ly suffix from adverbs as Martin's most persistent cod-medieval mannerism, and treats it as a blemish.",
-  source="Simon, 'Some notes on George RR Martin's prose style', Books & Boots", url=ASTRO,
-  quote="The most persistent one is removing the -ly suffix from adverbs",
-  page="section 9, 'Cod medievalism'", kind="analysis", polarity="rejects",
-  date="2014-03-31", routeHint=R_LIVE, registerHint="none", confidence="high")
-
-c(feature="diction (native vs latinate)",
-  claim="The critic concludes that the archaic feel comes from consistent Anglo-Saxon word choice, not from the occasional pseudo-medievalism.",
-  source="Simon, 'Some notes on George RR Martin's prose style', Books & Boots", url=ASTRO,
-  quote="he consistently chooses words of Anglo-Saxon origin and generally avoids Latinate",
-  page="Conclusion", kind="analysis", polarity="asserts",
-  date="2014-03-31", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-# ---------------- astrofella affix ----------------
-c(feature="diction (native vs latinate)",
-  claim="The same critic's longer study states that Martin systematically excludes almost all words of Latin, Greek or French derivation.",
-  source="Simon, 'George RR Martin's prose style - Affixes, compound and combination words', Books & Boots", url=AFFIX,
-  quote="a systematic exclusion from his vocabulary of almost all words derived",
-  page="Abstract", kind="analysis", polarity="asserts",
-  date="2013-03-08", routeHint="bibliography chase from the 2014 post's own cross-link, then live fetch",
-  registerHint="dossier-archivist", confidence="high")
-
-c(feature="diction (native vs latinate)",
-  claim="The study reports a high frequency of Anglo-Saxon-derived words as the counterpart of that exclusion.",
-  source="Simon, 'Affixes, compound and combination words', Books & Boots", url=AFFIX,
-  quote="his style shows a high frequency of words of Anglo-Saxon origin",
-  page="Abstract", kind="analysis", polarity="asserts",
-  date="2013-03-08", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="per-speaker register",
-  claim="The study reads Maester Colemon's use of 'intercession' as in character because he is a learned man of the Citadel.",
-  source="Simon, 'Affixes, compound and combination words', Books & Boots", url=AFFIX,
-  quote="a maester, a learnèd man, and so it is in character",
-  page="section 3, 'Martin's use of combining forms' (the page prints 'learned' with a grave accent)",
-  kind="analysis", polarity="asserts",
-  date="2013-03-08", routeHint=R_LIVE, registerHint="dossier-archivist",
-  confidence="medium; the page spells the word 'learnèd', so the quotation matches only with that accent")
-
-c(feature="civic record register",
-  claim="The study argues that the rare neoclassical words are deployed to mark scenes with a legalistic or learned speaker or setting.",
-  source="Simon, 'Affixes, compound and combination words', Books & Boots", url=AFFIX,
-  quote="accentuate the legalistic or learnèd character of the speaker",
-  page="section 3, 'Martin's use of combining forms' (the page prints 'learnèd')",
-  kind="analysis", polarity="asserts",
-  date="2013-03-08", routeHint=R_LIVE, registerHint="dossier-archivist",
-  confidence="medium; the page spells the word 'learnèd', so the quotation matches only with that accent")
-
-c(feature="stylometry",
-  claim="The critic reports noticing only one really Latinate word, 'intermediate', in the 770 pages of A Feast for Crows.",
-  source="Simon, 'Affixes, compound and combination words', Books & Boots", url=AFFIX,
-  quote="770 pages of Feast of Crows I noticed only one really Latinate",
-  page="Conclusion", kind="measurement", polarity="asserts",
-  date="2013-03-08", routeHint=R_LIVE, registerHint="dossier-archivist",
-  confidence="medium; a single reader's hand count, and the same page names 'intermittent' as a standout usage earlier")
-
-c(feature="archaism",
-  claim="The study notes Martin's conspicuous use of the archaic native prefix a- for position, in atop, abed and ahorse.",
-  source="Simon, 'Affixes, compound and combination words', Books & Boots", url=AFFIX,
-  quote="he conspicuously deploys the archaic prefix",
-  page="section 1, 'The prefix'", kind="analysis", polarity="asserts",
-  date="2013-03-08", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="diction (native vs latinate)",
-  claim="The study concludes that Martin's lexical choices matter as much as his subject matter in producing the novels' archaic worldview.",
-  source="Simon, 'Affixes, compound and combination words', Books & Boots", url=AFFIX,
-  quote="the lexical choices he makes are as important as the subject matter",
-  page="Introduction", kind="analysis", polarity="asserts",
-  date="2013-03-08", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-# ---------------- atsea ----------------
-c(feature="repetition and refrain",
-  claim="The At Sea Journal essayist reads Martin's recurring stock phrases as Homeric epithets belonging to an oral tradition.",
-  source="At Sea Journal, 'George R.R. Martin, The American Homer'", url=ATSEA,
-  quote="Martin was the runaway consumer of the construction",
-  page="section on 'black as night'", kind="measurement", polarity="asserts",
-  date="undated; written after A Dance with Dragons (2011)", routeHint="lateral search then live fetch",
-  registerHint="herald-pools", confidence="medium; the essayist reports a personal corpus comparison without publishing counts")
-
-c(feature="cadence and rhythm",
-  claim="The essayist characterises Martin's narration as a steady flow of low-density sentences that keeps pages turning.",
-  source="At Sea Journal, 'George R.R. Martin, The American Homer'", url=ATSEA,
-  quote="Martin keeps us turning pages with a steady flow of low-density sentences",
-  page="section on oral versus textual storytelling", kind="analysis", polarity="asserts",
-  date="undated; post-2011", routeHint=R_LIVE, registerHint="chronicle-line", confidence="high")
-
-c(feature="sentence length variation",
-  claim="The essayist calls the method shotgun writing, in which no single sentence carries the effect on its own.",
-  source="At Sea Journal, 'George R.R. Martin, The American Homer'", url=ATSEA,
-  quote="It’s shotgun writing: like buckshot, no single sentence is that effective",
-  page="section on oral versus textual storytelling", kind="analysis", polarity="asserts",
-  date="undated; post-2011", routeHint=R_LIVE, registerHint="chronicle-line", confidence="high")
-
-c(feature="plainness and economy",
-  claim="The essayist states that except at moments of emotional shock a sentence in A Game of Thrones never needs rereading.",
-  source="At Sea Journal, 'George R.R. Martin, The American Homer'", url=ATSEA,
-  quote="you never have to read an AGOT sentence twice",
-  page="section on oral versus textual storytelling", kind="analysis", polarity="asserts",
-  date="undated; post-2011", routeHint=R_LIVE, registerHint="chronicle-line", confidence="high")
-
-c(feature="dialogue register",
-  claim="The essayist reports that every top answer in a Reddit thread on favourite passages named a passage of dialogue.",
-  source="At Sea Journal, 'George R.R. Martin, The American Homer'", url=ATSEA,
-  quote="all of the top answers referred to passages of dialogue",
-  page="section 'The con: The sentences aren't beautiful'", kind="reader", polarity="asserts",
-  date="undated; post-2011", routeHint=R_LIVE, registerHint="none", confidence="high")
-
-c(feature="stylometry",
-  claim="The essayist puts the non-dialogue share of the text at 60 percent and calls that prose forgettable.",
-  source="At Sea Journal, 'George R.R. Martin, The American Homer'", url=ATSEA,
-  quote="the prose that constitutes the other 60% of the text is forgettable",
-  page="section 'The con: The sentences aren't beautiful'", kind="measurement", polarity="rejects",
-  date="undated; post-2011", routeHint=R_LIVE, registerHint="none",
-  confidence="medium; the 60% figure is the essayist's own estimate, given without method")
-
-c(feature="cadence and rhythm",
-  claim="The essayist argues stock phrases persist because they come easily to a writer working for flow.",
-  source="At Sea Journal, 'George R.R. Martin, The American Homer'", url=ATSEA,
-  quote="for a writer, they come easily off the pen",
-  page="section on Martin's process", kind="analysis", polarity="asserts",
-  date="undated; post-2011", routeHint=R_LIVE, registerHint="herald-pools", confidence="high")
-
-# ---------------- YouTube series ----------------
-c(feature="sentence length variation",
-  claim="The author of the five-part video series on Martin's prose credits him with knowing where to end a sentence inside a long description.",
-  source="Corey Huffman, video description, '[1] The Prose of George R R Martin | How to Write Focused Descriptions'", url=YT1,
-  quote="Martin knows just where to drop his periods",
-  page="video description", kind="analysis", polarity="asserts",
-  date="2023-07-24", routeHint=R_YT, registerHint="dossier-archivist", confidence="high")
-
-c(feature="sentence length variation",
-  claim="The same video's description says Martin breaks large descriptions into easily digestible sentences.",
-  source="Corey Huffman, video description, '[1] The Prose of George R R Martin'", url=YT1,
-  quote="break up large descriptions into easily digestible sentences",
-  page="video description", kind="analysis", polarity="asserts",
-  date="2023-07-24", routeHint=R_YT, registerHint="dossier-archivist", confidence="high")
-
-c(feature="other: contrast within description",
-  claim="Part two of the series treats contrast as the technique that lets one Martin description do several narrative jobs at once.",
-  source="Corey Huffman, video description, '[2] The Prose of George R R Martin | Why You Should Contrast Your Descriptions'", url=YT2,
-  quote="how Martin uses the literary technique of “contrast” to enrich these descriptions",
-  page="video description", kind="analysis", polarity="asserts",
-  date="2023", routeHint=R_YT, registerHint="dossier-archivist", confidence="high")
-
-c(feature="metaphor discipline",
-  claim="Part three of the series examines twenty-five metaphors and similes drawn from A Game of Thrones.",
-  source="Corey Huffman, video description, '[3] The Prose of George R R Martin | Masterful Metaphors & Similes'", url=YT3,
-  quote="I examine twenty-five metaphors and similes masterfully crafted by George R R",
-  page="video description", kind="analysis", polarity="asserts",
-  date="2023-09-11", routeHint=R_YT, registerHint="none", confidence="high")
-
-c(feature="adjective and adverb discipline",
-  claim="Part four claims Martin frequently structures adjectives, nouns and clauses in threes.",
-  source="Corey Huffman, video description, '[4] The Prose of George R R Martin | Adjectives & The Rule of 3'", url=YT4,
-  quote="he often uses \"The Rule of 3\" with regards to structuring",
-  page="video description", kind="analysis", polarity="asserts",
-  date="2023-10-11", routeHint=R_YT, registerHint="dossier-archivist", confidence="high")
-
-c(feature="other: active and passive voice",
-  claim="Part five uses passages from A Clash of Kings to argue Martin melds active and passive voice within a single narrative movement.",
-  source="Corey Huffman, video description, '[5] The Prose of George R R Martin | How to Meld the Active & Passive Voices'", url=YT5,
-  quote="how to differentiate between the Active and Passive voices",
-  page="video description", kind="analysis", polarity="asserts",
-  date="2023", routeHint=R_YT, registerHint="dossier-archivist", confidence="high")
-
-# ---------------- other registers ----------------
-c(feature="dialogue register",
-  claim="A reviewer of Fevre Dream identifies phonetic spellings of dialect as a device Martin uses in that novel.",
-  source="Rob H. Bedford, review of Fevre Dream, SFFWorld", url=SFFW,
-  quote="the phonetic spellings of the dialect utilized by the characters",
-  page="review body", kind="analysis", polarity="asserts",
-  date="2012-11-06", routeHint=R_LIVE, registerHint="none", confidence="high")
-
-c(feature="dialogue register",
-  claim="The same reviewer judges the dialect spellings to add a layer of authenticity to the narrative.",
-  source="Rob H. Bedford, review of Fevre Dream, SFFWorld", url=SFFW,
-  quote="Martin employed this tool quite well himself, lending another layer of authenticity",
-  page="review body", kind="analysis", polarity="asserts",
-  date="2012-11-06", routeHint=R_LIVE, registerHint="none", confidence="high")
-
-c(feature="omission as information",
-  claim="The reviewer prefers Martin's vampire history to Anne Rice's because of what Martin leaves unsaid.",
-  source="Rob H. Bedford, review of Fevre Dream, SFFWorld", url=SFFW,
-  quote="more successful than Rice’s history more for what is left unsaid",
-  page="review body", kind="analysis", polarity="asserts",
-  date="2012-11-06", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="register modulation",
-  claim="Adam Whitehead judges The Mystery Knight to lack the elegant simplicity of The Hedge Knight.",
-  source="Adam Whitehead (Werthead), review posted in the Malazan Empire thread 'The Tales of Dunk and Egg'", url=MALAZAN,
-  quote="It lacks the elegant simplicity of The Hedge Knight",
-  page="The Mystery Knight review, quoted post", kind="analysis", polarity="asserts",
-  date="undated post in a thread begun 2010", routeHint=R_LIVE, registerHint="none", confidence="high")
-
-c(feature="closing sentence",
-  claim="The same reviewer says the novella's ending is unusually neat for Martin and lacks the messy consequences he usually favours.",
-  source="Adam Whitehead (Werthead), review posted in the Malazan Empire thread 'The Tales of Dunk and Egg'", url=MALAZAN,
-  quote="lacks the messy consequences he usually favours",
-  page="The Mystery Knight review, quoted post", kind="analysis", polarity="asserts",
-  date="undated post in a thread begun 2010", routeHint=R_LIVE, registerHint="chronicle-line", confidence="high")
-
-c(feature="point of view and distance",
-  claim="A commenter on Steven Attewell's Dunk and Egg essay calls Dunk Martin's best point-of-view character.",
-  source="artihcus022, comment on Steven Attewell's 'Dunk and Egg, Essay 1', Race for the Iron Throne", url=ATTEWELL,
-  quote="Dunk especially is GRRM’s best POV",
-  page="comments, 3 February 2020", kind="reader", polarity="asserts",
-  date="2020-02-03", routeHint=R_LIVE, registerHint="none",
-  confidence="high; note the line is a reader comment, not Attewell's own essay text")
-
-c(feature="point of view and distance",
-  claim="The same commenter attributes voice, distinct personality and quiet charisma to the Dunk narration.",
-  source="artihcus022, comment on 'Dunk and Egg, Essay 1', Race for the Iron Throne", url=ATTEWELL,
-  quote="The writing has voice and a distinct personality, and a quiet charisma",
-  page="comments, 3 February 2020", kind="reader", polarity="asserts",
-  date="2020-02-03", routeHint=R_LIVE, registerHint="none",
-  confidence="high; a reader comment on the essay, not the essayist")
-
-c(feature="other: mosaic structure",
-  claim="Martin describes the Wild Cards non-mosaic volumes as stories threaded by an interstitial narrative he calls beads on a string.",
-  source="George R.R. Martin, interview reprinted at WildCardsWorld from SFFWorld", url=WCI,
-  quote="which we sometimes call the beads on a string",
-  page="answer on the mosaic form", kind="own-words", polarity="asserts",
-  date="interview reprinted undated; the answers date it to 2007", routeHint=R_LIVE,
-  registerHint="herald-pools", confidence="medium; the reprint carries no date, and the internal references place it in 2007")
-
-# ---------------- Fire & Blood chronicle register ----------------
-c(feature="civic record register",
-  claim="Roisin O'Connor argues Martin assumed historical writing should be dry and clinical in Fire and Blood.",
-  source="Roisin O'Connor, review of Fire and Blood, The Independent", url=INDEP,
-  quote="historical writing should be dry and clinical",
-  page="review body", kind="reception", polarity="rejects",
-  date="2018-11-20", routeHint="live fetch (redirects to the-independent.com)", registerHint="dossier-archivist", confidence="high")
-
-c(feature="civic record register",
-  claim="The same reviewer says the dryness flattens even a dragon battle between two brothers.",
-  source="Roisin O'Connor, review of Fire and Blood, The Independent", url=INDEP,
-  quote="the prose is so dry that even descriptions of a battle",
-  page="review body", kind="reception", polarity="rejects",
-  date="2018-11-20", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="civic record register",
-  claim="The Independent notes that Fire and Blood is written as an in-universe account attributed to Archmaester Gyldayn of the Citadel.",
-  source="Roisin O'Connor, review of Fire and Blood, The Independent", url=INDEP,
-  quote="written as an in-universe account (purportedly) by the Archmaester Gyldayn",
-  page="review body", kind="reception", polarity="mentions",
-  date="2018-11-20", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="civic record register",
-  claim="Publishers Weekly says Martin's evocative storytelling style is mostly absent from the dry history.",
-  source="Publishers Weekly, review of Fire & Blood", url=PWREV,
-  quote="Martin’s evocative storytelling style and gift for gripping narrative are mostly absent",
-  page="review body", kind="reception", polarity="rejects",
-  date="2018-11-19", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="cadence and rhythm",
-  claim="Publishers Weekly reports that the book's dramatic or salacious passages last only a few pages before returning to brisk summary.",
-  source="Publishers Weekly, review of Fire & Blood", url=PWREV,
-  quote="they only last a few pages before a return to brisk summary",
-  page="review body", kind="reception", polarity="asserts",
-  date="2018-11-19", routeHint=R_LIVE, registerHint="chronicle-line", confidence="high")
-
-c(feature="civic record register",
-  claim="Publishers Weekly says the Gyldayn conceit mostly evokes the image of a weighty school textbook.",
-  source="Publishers Weekly, review of Fire & Blood", url=PWREV,
-  quote="images of unhappy Westerosi schoolchildren being forced to study this weighty textbook",
-  page="review body", kind="reception", polarity="rejects",
-  date="2018-11-19", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="register modulation",
-  claim="Chris Lough describes Fire & Blood as written in a dry, staid, objective tone unlike the Song of Ice and Fire novels.",
-  source="Chris Lough, review of Fire & Blood, Tor.com", url=LOUGH,
-  quote="featuring a dry, staid, objective tone",
-  page="review body", kind="reception", polarity="asserts",
-  date="2018-11-21", routeHint="live tor.com URL is dead; read from the Wayback raw capture web/20181124220153id_/",
-  registerHint="dossier-archivist", confidence="high")
-
-c(feature="civic record register",
-  claim="Lough calls the sample paragraph from 'The Princess and the Queen' stiff exposition.",
-  source="Chris Lough, review of Fire & Blood, Tor.com", url=LOUGH,
-  quote="that is some stiff exposition",
-  page="review body, after the quoted excerpt", kind="reception", polarity="rejects",
-  date="2018-11-21", routeHint=R_WB, registerHint="dossier-archivist", confidence="high")
-
-c(feature="civic record register",
-  claim="Lough judges the book's overall narrative fluid despite prose that stays in that stiff register throughout.",
-  source="Chris Lough, review of Fire & Blood, Tor.com", url=LOUGH,
-  quote="the overall narrative of the book is wonderfully fluid",
-  page="review body", kind="reception", polarity="asserts",
-  date="2018-11-21", routeHint=R_WB, registerHint="dossier-archivist", confidence="high")
-
-c(feature="annalist voice and deep time",
-  claim="Lough credits the strictly chronological telling, king to king, with supplying the book's propulsion.",
-  source="Chris Lough, review of Fire & Blood, Tor.com", url=LOUGH,
-  quote="benefits enormously from adhering to a strictly chronological telling",
-  page="review body", kind="reception", polarity="asserts",
-  date="2018-11-21", routeHint=R_WB, registerHint="chronicle-line", confidence="high")
-
-c(feature="place and institution description",
-  claim="Lough observes that the history's subject matter is institutional: infrastructure, economic and trade policy, and law reform.",
-  source="Chris Lough, review of Fire & Blood, Tor.com", url=LOUGH,
-  quote="They impose infrastructure, economic and trade policies, and institute sweeping law reforms",
-  page="review body", kind="reception", polarity="asserts",
-  date="2018-11-21", routeHint=R_WB, registerHint="dossier-archivist", confidence="high")
-
-c(feature="civic record register",
-  claim="Dan Jones of The Sunday Times called Fire & Blood a masterpiece of popular historical fiction.",
-  source="Dan Jones, The Sunday Times, quoted by Dan Selcke at Winter is Coming", url=WIC,
-  quote="a masterpiece of popular historical fiction",
-  page="round-up of critics", kind="relay", polarity="asserts",
-  date="2018-11-23 (the round-up); the review is dated 18 November 2018", routeHint="live fetch of the round-up; the Sunday Times original is paywalled and was not read",
-  registerHint="dossier-archivist", confidence="low; read only as a quotation inside a fan-site round-up, not at the primary")
-
-# ---------------- Martin's own words ----------------
-c(feature="civic record register",
-  claim="Martin says he had fun creating the authorial voice of Archmaester Gyldayn for Fire & Blood.",
-  source="George R.R. Martin, 'Imaginary History: PW Talks With George R.R. Martin', Publishers Weekly", url=PWINT,
-  quote="an authorial voice there that I had fun trying to create",
-  page="first answer", kind="own-words", polarity="asserts",
-  date="2018-11", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="civic record register",
-  claim="Martin says the archmaester narrating Fire & Blood has prejudices, gripes and cavils of his own.",
-  source="George R.R. Martin, PW interview 'Imaginary History'", url=PWINT,
-  quote="he has prejudices and gripes and his own cavils",
-  page="first answer", kind="own-words", polarity="asserts",
-  date="2018-11", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="point of view and distance",
-  claim="Martin says the reader of Fire & Blood is reading the voice of a character even while reading about people centuries older than him.",
-  source="George R.R. Martin, PW interview 'Imaginary History'", url=PWINT,
-  quote="you have to realize that you’re reading the voice of a character",
-  page="first answer", kind="own-words", polarity="asserts",
-  date="2018-11", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="edition and house style",
-  claim="Martin names Thomas B. Costain's four-volume history of the Plantagenets as his model for Fire & Blood.",
-  source="George R.R. Martin, PW interview 'Imaginary History'", url=PWINT,
-  quote="Thomas B. Costain’s four-volume history of the Plantagenets",
-  page="first answer", kind="own-words", polarity="asserts",
-  date="2018-11", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="register modulation",
-  claim="Martin insists Fire & Blood is not a novel but essentially a popular history, an entirely different literary form.",
-  source="George R.R. Martin, PW interview 'Imaginary History'", url=PWINT,
-  quote="what’s essentially a popular history",
-  page="first answer", kind="own-words", polarity="asserts",
-  date="2018-11", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="concrete sensory noun",
-  claim="Martin says he wants all of the sensory detail in a novel, so that the reader lives the experience.",
-  source="George R.R. Martin, interviewed by Rachael Brown, The Atlantic", url=ATL,
-  quote="I want all of the detail, all of the sensory things",
-  page="answer on gratuitous content", kind="own-words", polarity="asserts",
-  date="2011-07-11", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="concrete sensory noun",
-  claim="Martin states that detail and showing rather than telling are necessary and that nothing in his books is gratuitous.",
-  source="George R.R. Martin, interviewed by Rachael Brown, The Atlantic", url=ATL,
-  quote="detail is necessary, showing not telling is necessary, and nothing is gratuitous",
-  page="answer on gratuitous content", kind="own-words", polarity="asserts",
-  date="2011-07-11", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="withheld information and inference",
-  claim="Martin says that two characters remembering one event differently is deliberate rather than an error.",
-  source="George R.R. Martin, interviewed by Rachael Brown, The Atlantic", url=ATL,
-  quote="Two different characters may remember an event in two different ways",
-  page="answer on continuity mistakes", kind="own-words", polarity="asserts",
-  date="2011-07-11", routeHint=R_LIVE, registerHint="chronicle-line", confidence="high")
-
-c(feature="per-speaker register",
-  claim="The Atlantic's introduction faults A Dance with Dragons for characters who use the same idioms regardless of class or continent.",
-  source="Rachael Brown, introduction to the Atlantic interview with Martin", url=ATL,
-  quote="too much repetition, unexceptional prose, and characters who use the same idioms",
-  page="editorial introduction", kind="reception", polarity="rejects",
-  date="2011-07-11", routeHint=R_LIVE, registerHint="none",
-  confidence="high; this is the interviewer's framing, not Martin's own words and not the counter-view held elsewhere in this sweep")
-
-c(feature="civic record register",
-  claim="BookPage reports that Maester Yandel's history in The World of Ice and Fire is presented as undeniably distorted.",
-  source="BookPage, 'George R.R. Martin: History is written in blood'", url=BOOKPAGE,
-  quote="Maester Yandel has presented a history that is undeniably distorted",
-  page="feature body", kind="reception", polarity="asserts",
-  date="2014", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="other: research method",
-  claim="BookPage reports that Elio Garcia and Linda Antonsson read 10,000 pages of the novels to extract every reference to history, myth and legend.",
-  source="BookPage, 'George R.R. Martin: History is written in blood'", url=BOOKPAGE,
-  quote="they pored over 10,000 pages of novels",
-  page="feature body", kind="measurement", polarity="asserts",
-  date="2014", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-# ---------------- linguistic / craft ----------------
-c(feature="naming and forms of address",
-  claim="A linguistic reading finds that low-born speakers address a noble as m'Lord while nobles addressing peers say my Lord.",
-  source="A.R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire'", url=RIVERA,
-  quote="will use a contraction of a formal address, “m’Lord”",
-  page="section on caste and register", kind="analysis", polarity="asserts",
-  date="2023-09-10", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="repetition and refrain",
-  claim="The same reading identifies the repetition of 'bastard' across nearby sentences as lexical cohesion tying the passage together.",
-  source="A.R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire'", url=RIVERA,
-  quote="this kind of repetition is called lexical cohesion",
-  page="section on repetition", kind="analysis", polarity="asserts",
-  date="2023-09-10", routeHint=R_LIVE, registerHint="herald-pools", confidence="high")
-
-c(feature="stylometry",
-  claim="The same reading reports a lexical density score between 4 and 4.5 for A Game of Thrones.",
-  source="A.R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire'", url=RIVERA,
-  quote="A Game of Thrones has a score between 4 and 4.5",
-  page="section on lexical density and readability", kind="measurement", polarity="asserts",
-  date="2023-09-10", routeHint=R_LIVE, registerHint="none",
-  confidence="medium; the figure is cited to a third-party source the page does not fully identify")
-
-c(feature="stylometry",
-  claim="The same reading gives A Game of Thrones an Automated Readability Index score of sixth grade.",
-  source="A.R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire'", url=RIVERA,
-  quote="The ARI score for A Game of Thrones is sixth-grade",
-  page="section on lexical density and readability", kind="measurement", polarity="asserts",
-  date="2023-09-10", routeHint=R_LIVE, registerHint="none",
-  confidence="medium; the page attributes the score only to 'medium.com'")
-
-c(feature="plainness and economy",
-  claim="The same reading characterises Martin's writing as a bare-bones functionality combined with archaic diction.",
-  source="A.R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire'", url=RIVERA,
-  quote="a clearly defined, bare-bones functionality that uses not only archaic diction",
-  page="opening paragraph", kind="analysis", polarity="asserts",
-  date="2023-09-10", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="stylometry",
-  claim="A conference abstract announces a corpus of the first four ASOIAF novels rendered searchable in full for stylistic analysis.",
-  source="Matthew Voice (University of Sheffield), abstract 'Writing Westeros: a Corpus Linguistic Study', Nine Worlds Academia", url=VOICE,
-  quote="the first four books of ASOIAF are rendered searchable in their entirety",
-  page="abstract", kind="measurement", polarity="mentions",
-  date="2014-08-15", routeHint=R_LIVE, registerHint="none",
-  confidence="low; abstract only, no findings or figures are published on the page")
-
-c(feature="opening sentence",
-  claim="Graham Oliver counts roughly twenty main characters and one source of tension introduced within the first five chapters of A Game of Thrones.",
-  source="Graham Oliver, 'How to Write Like George R. R. Martin', Fiction Advocate", url=FA,
-  quote="a source of tension (Others) and 20 or so main characters",
-  page="section 1, 'Keep it simple. Then build.'", kind="analysis", polarity="asserts",
-  date="2015-01-28", routeHint=R_LIVE, registerHint="none", confidence="high")
-
-c(feature="omission as information",
-  claim="The same critic argues Martin pairs exposition with dramatic incident so that background arrives without stalling the reader.",
-  source="Graham Oliver, 'How to Write Like George R. R. Martin', Fiction Advocate", url=FA,
-  quote="By pairing the exposition with the dramatic, you reduce the chances",
-  page="section 1", kind="analysis", polarity="asserts",
-  date="2015-01-28", routeHint=R_LIVE, registerHint="dossier-archivist", confidence="high")
-
-c(feature="naming and forms of address",
-  claim="The same critic calls Martin's use of meaningful nicknames extreme, describing it as overuse.",
-  source="Graham Oliver, 'How to Write Like George R. R. Martin', Fiction Advocate", url=FA,
-  quote="his extreme (over)use of meaningful nicknames",
-  page="section 1", kind="analysis", polarity="rejects",
-  date="2015-01-28", routeHint=R_LIVE, registerHint="herald-pools", confidence="high")
-
-SOURCES = [
- {"title":"GRRM's prose (topic 133760), A Forum of Ice and Fire","url":FORUM,"kind":"reader","substantive":True,"date":"2015-07-30","route":R_LIVE_SLUG},
- {"title":"GRRM's prose, page 2","url":FORUM2,"kind":"reader","substantive":True,"date":"2015-07-31","route":R_LIVE_SLUG},
- {"title":"Westeros: News - Sean T. Collins on ASoIaF (Linda Antonsson)","url":NEWS,"kind":"reception","substantive":False,"date":"2011-01-18","route":"live 403 Cloudflare; Wayback raw capture web/20250424162321id_/"},
- {"title":"Playing a Game of Thrones (Sean T. Collins, Attentiondeficitdisorderly)","url":COLLINS,"kind":"analysis","substantive":True,"date":"2011-01-18","route":"link harvested from the Wayback capture of news 13834, then live fetch"},
- {"title":"A Read of Ice and Fire: A Game of Thrones, Part 1 - Prologue and Bran I (Leigh Butler)","url":BP1,"kind":"reader","substantive":True,"date":"2011-03-18","route":"live 403; Wayback raw capture web/20240114133050id_/"},
- {"title":"A Read of Ice and Fire: A Storm of Swords, Part 30 - the Red Wedding (Leigh Butler)","url":BRW,"kind":"reader","substantive":True,"date":"2013-05-30","route":"live reactormag.com with a browser user agent"},
- {"title":"A Read of Ice and Fire: The Hedge Knight, Part 1 (Leigh Butler)","url":BHK,"kind":"reader","substantive":True,"date":"2013-12-05","route":"live reactormag.com with a browser user agent"},
- {"title":"Some notes on George RR Martin's prose style (Simon, Books & Boots)","url":ASTRO,"kind":"analysis","substantive":True,"date":"2014-03-31","route":"lateral search, live fetch"},
- {"title":"George RR Martin's prose style - Affixes, compound and combination words (Simon, Books & Boots)","url":AFFIX,"kind":"analysis","substantive":True,"date":"2013-03-08","route":"bibliography chase from the 2014 post's cross-link, live fetch"},
- {"title":"George R.R. Martin, The American Homer (At Sea Journal)","url":ATSEA,"kind":"analysis","substantive":True,"date":"undated; post-2011","route":"lateral search, live fetch"},
- {"title":"[1] The Prose of George R R Martin | How to Write Focused Descriptions (Corey Huffman)","url":YT1,"kind":"analysis","substantive":True,"date":"2023-07-24","route":R_YT},
- {"title":"[2] The Prose of George R R Martin | Why You Should Contrast Your Descriptions","url":YT2,"kind":"analysis","substantive":True,"date":"2023","route":R_YT},
- {"title":"[3] The Prose of George R R Martin | Masterful Metaphors & Similes","url":YT3,"kind":"analysis","substantive":True,"date":"2023-09-11","route":R_YT},
- {"title":"[4] The Prose of George R R Martin | Adjectives & The Rule of 3","url":YT4,"kind":"analysis","substantive":True,"date":"2023-10-11","route":R_YT},
- {"title":"[5] The Prose of George R R Martin | How to Meld the Active & Passive Voices","url":YT5,"kind":"analysis","substantive":True,"date":"2023","route":R_YT},
- {"title":"Dunk and Egg, Essay 1: What Worth a Hedge Knight? (Steven Attewell) and its comments","url":ATTEWELL,"kind":"analysis","substantive":True,"date":"2020-02-03","route":"lateral search, live fetch"},
- {"title":"The Tales of Dunk and Egg (Malazan Empire forum; carries Adam Whitehead's Mystery Knight review)","url":MALAZAN,"kind":"analysis","substantive":True,"date":"thread begun 2010","route":"lateral search, live fetch"},
- {"title":"Fevre Dream by George R.R. Martin (Rob H. Bedford, SFFWorld)","url":SFFW,"kind":"analysis","substantive":True,"date":"2012-11-06","route":"lateral search, live fetch"},
- {"title":"Fire and Blood review (Roisin O'Connor, The Independent)","url":INDEP,"kind":"reception","substantive":True,"date":"2018-11-20","route":"primary chased from the Wikipedia reference list, live fetch"},
- {"title":"Fire & Blood (Publishers Weekly review)","url":PWREV,"kind":"reception","substantive":True,"date":"2018-11-19","route":"primary chased from the Wikipedia reference list, live fetch"},
- {"title":"Fire & Blood is the Best Song of Ice and Fire Book in 18 Years (Chris Lough, Tor.com)","url":LOUGH,"kind":"reception","substantive":True,"date":"2018-11-21","route":"live URL dead; Wayback raw capture web/20181124220153id_/"},
- {"title":"Imaginary History: PW Talks With George R.R. Martin","url":PWINT,"kind":"own-words","substantive":True,"date":"2018-11","route":"lateral search, live fetch"},
- {"title":"George R.R. Martin: History is written in blood (BookPage, on The World of Ice and Fire)","url":BOOKPAGE,"kind":"reception","substantive":True,"date":"2014","route":"lateral search, live fetch"},
- {"title":"George R. R. Martin on Sex, Fantasy, and A Dance With Dragons (Rachael Brown, The Atlantic)","url":ATL,"kind":"own-words","substantive":True,"date":"2011-07-11","route":"footnote chase from the Books & Boots affix study, live fetch"},
- {"title":"A Brief Linguistic Exam of A Song Of Ice And Fire (A.R. Rivera)","url":RIVERA,"kind":"analysis","substantive":True,"date":"2023-09-10","route":"lateral search, live fetch"},
- {"title":"Writing Westeros: a Corpus Linguistic Study of A Song of Ice and Fire (Matthew Voice) - abstract only","url":VOICE,"kind":"measurement","substantive":False,"date":"2014-08-15","route":"lateral search, live fetch; conference abstract, no findings published"},
- {"title":"How to Write Like George R. R. Martin (Graham Oliver, Fiction Advocate)","url":FA,"kind":"analysis","substantive":True,"date":"2015-01-28","route":"lateral search, live fetch"},
- {"title":"Interview with George R.R. Martin from SFF World (WildCardsWorld reprint)","url":WCI,"kind":"own-words","substantive":True,"date":"reprint undated; internal references place it in 2007","route":"lateral search, live fetch"},
- {"title":"What are the critics saying about Fire & Blood? (Dan Selcke, Winter is Coming) - used as a relay","url":WIC,"kind":"relay","substantive":False,"date":"2018-11-23","route":"lateral search, live fetch; primaries chased where reachable"},
- {"title":"Martin Re-read: The Hedge Knight (Tales after Tolkien)","url":"http://talesaftertolkien.blogspot.com/2017/12/martin-re-read-hedge-knight.html","kind":"analysis","substantive":False,"date":"2017-12","route":"live fetch; thematic reading with no prose observations, no claims drawn"},
+import json
+U={
+ 'roll20':'https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359',
+ 'tracker':'https://media.dndbeyond.com/compendium-images/br/dmg/settlement-tracker.pdf',
+ 'dmg14':'https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt',
+ 'srd51':'https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf',
+ 'srd521':'https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf',
+ 'sly':'https://slyflourish.com/random_tables_of_the_dmg.html',
+ 'oak':'https://www.oakofhonor.com/index.php/2020/10/14/settlements-critique-of-the-dmg-guidelines/',
+ 'pcg':'https://www.pcgamer.com/games/gosh-i-think-d-and-ds-finally-done-it-the-2024-dungeon-masters-guide-actually-does-a-decent-job-of-teaching-you-how-to-run-a-game/',
+ 'warg':'https://www.wargamer.com/dnd/tracking-sheets-dms-guide',
+ 'd20d':'https://d20digest.substack.com/p/read-the-dmg',
+ 'jeth':'https://jethoof.github.io/home/worldbuilding/Tables/Settlements/',
+ 'ddbtr':'https://www.dndbeyond.com/sources/dnd/br-2024/tracking-sheets',
+ 'ebin':'https://ebin.pub/dungeons-amp-dragons-dungeon-masters-guide-5nbsped-9780786965625.html',
+}
+S={
+ 'roll20':'Wizards of the Coast, Dungeon Master’s Guide (2024), "Settlements" (DM’s Toolbox), read on the licensed Roll20 compendium',
+ 'tracker':'Wizards of the Coast, "Settlement Tracker" sheet, Dungeon Master’s Guide (2024), free PDF on D&D Beyond, © 2024',
+ 'dmg14':'Wizards of the Coast, Dungeon Master’s Guide (2014, 5th edition)',
+ 'srd51':'Wizards of the Coast, System Reference Document 5.1 (CC-BY-4.0)',
+ 'srd521':'Wizards of the Coast, System Reference Document 5.2.1 (CC-BY-4.0)',
+ 'sly':'Mike Shea (Sly Flourish), "Random Tables of the Dungeons and Dragons 5th Edition Dungeon Master’s Guide", 26 May 2015',
+ 'oak':'Ian, Oak of Honor Games, "Settlements: critique of the DMG guidelines", 14 October 2020',
+ 'pcg':'Joshua Wolens, PC Gamer, review of the 2024 Dungeon Master’s Guide',
+ 'warg':'Chris Perkins, quoted in an official 1 October 2024 livestream by Mollie Russell, Wargamer',
+ 'd20d':'Maximilian Hart, d20 Digest, "Read the DMG", 27 October 2022',
+ 'jeth':'Jethoof’s Digital Garden, "Settlement Generator" (reproduction citing DMG 5e p.112), 11 February 2023',
+ 'ddbtr':'Wizards of the Coast / D&D Beyond, "Tracking Sheets", free 2024 rules',
+}
+def c(feature,claim,k,quote,page,kind,polarity,date,route,reg,conf=None):
+    d={"feature":feature,"claim":claim,"source":S[k],"url":U[k],"quote":quote,"page":page,
+       "kind":kind,"polarity":polarity,"date":date,"routeHint":route,"registerHint":reg}
+    if conf: d["confidence"]=conf
+    else: d["confidence"]="high"
+    return d
+
+R_ROLL='roll20.net licensed compendium page fetched raw with a browser user agent (section body is free to read); curl + HTML strip'
+R_TRK='PDF binary from media.dndbeyond.com (linked from the free /sources/dnd/br-2024/tracking-sheets page), pdftotext -layout'
+R_IA='archive.org item "dungeon-masters-guide", file "Dungeon Master\'s Guide_djvu.txt" (full-book OCR), curl direct'
+R_PDF='publisher PDF fetched with curl, pdftotext -layout'
+R_PLAIN='live URL, browser user agent, curl + HTML strip'
+
+claims=[
+# ---- 2024 DMG, publisher's own words
+c("other: settlement slot list",
+ "The 2024 Dungeon Master's Guide defines a settlement with exactly four settlement-level tables, headed Defining Traits, Claims to Fame, Current Calamities and Local Leaders, plus a Settlements by Size table.",
+ 'roll20',"The following tables allow you to flesh out details about a settlement.",
+ "DM's Toolbox, 'Settlements' > 'Settlement Tables and Tracker'","own-words","asserts","2024-11-12",R_ROLL,"dossier-archivist"),
+
+c("place and institution description",
+ "The 2024 DMG asserts that describing a settlement to the players in words is usually enough and no map is required.",
+ 'roll20',"Simply describing the settlement to your players is usually sufficient.",
+ "'Settlements' > sidebar 'Do I Need a Settlement Map?'","own-words","asserts","2024-11-12",R_ROLL,"dm-page"),
+
+c("other: settlement size bands",
+ "The 2024 DMG's Settlements by Size table gives population ranges of up to 500 for a village, 501-5,000 for a town and 5,001 and higher for a city.",
+ 'roll20',"population ranges for villages, towns, and cities",
+ "'Settlements' > 'Settlements by Size'","own-words","asserts","2024-11-12",R_ROLL,"dossier-archivist"),
+
+c("other: digits in prose",
+ "The 2024 DMG writes a price as a numeral inside a running sentence of its own worked example rather than spelling it out.",
+ 'roll20',"(which costs 50 GP) is too expensive an item",
+ "'Settlements', opening paragraphs","own-words","applies","2024-11-12",R_ROLL,"dm-page"),
+
+c("dm-facing sentence",
+ "Every entry on the 2024 DMG's Current Calamities table is a complete sentence in the present tense closed with a full stop.",
+ 'roll20',"Monsters infest the settlement.",
+ "'Settlements' > 'Current Calamities' (1d12)","own-words","applies","2024-11-12",R_ROLL,"chronicle-line"),
+
+c("other: settlement slot list",
+ "The 2024 DMG's leadership slot, retitled Local Leaders, admits a council rather than only a single ruler as a settlement's leader.",
+ 'roll20',"Respected, fair, and just leader or council",
+ "'Settlements' > 'Local Leaders' (1d12)","own-words","asserts","2024-11-12",R_ROLL,"dossier-archivist"),
+
+c("concrete sensory noun",
+ "The 2024 DMG's Defining Traits table is a list of physical, visible features of the built place rather than of its politics or reputation.",
+ 'roll20',"Impressive structure (such as a keep, temple, circle of standing stones",
+ "'Settlements' > 'Defining Traits' (1d20)","own-words","applies","2024-11-12",R_ROLL,"dossier-archivist"),
+
+c("other: settlement slot list",
+ "The 2024 DMG's Settlements section carries no table on relations between the peoples living in a settlement, a slot the 2014 book had as Race Relations.",
+ 'roll20',"",
+ "'Settlements' > 'Settlement Tables and Tracker' (complete list of tables on the page)","measurement","asserts","2024-11-12",R_ROLL,"none",
+ "medium - an absence claim: the whole section was read and its seven tables enumerated, but absence cannot be quoted"),
+
+# ---- The Settlement Tracker (the publisher's own record form)
+c("civic record register",
+ "Wizards' own free Settlement Tracker sheet records a settlement in nine fields: settlement name, a size band, defining trait, claim to fame, current calamity, local leader, noteworthy people, noteworthy places, and the GP value of the most expensive item for sale.",
+ 'tracker',"GP VALUE OF THE MOST EXPENSIVE ITEM FOR SALE:",
+ "Settlement Tracker, single sheet","own-words","asserts","2024-11-12",R_TRK,"dossier-archivist"),
+
+c("civic record register",
+ "On Wizards' Settlement Tracker the four rolled slots are labelled in the singular, where the corresponding DMG table headings are plural.",
+ 'tracker',"DEFINING TRAIT",
+ "Settlement Tracker, slot labels","own-words","applies","2024-11-12",R_TRK,"dossier-archivist",
+ "medium - the plural table headings are on a different page (the Roll20 compendium capture)"),
+
+c("civic record register",
+ "Wizards' Settlement Tracker adds two free-text roster fields, Noteworthy People and Noteworthy Places, that no table in the DMG's Settlements section generates.",
+ 'tracker',"NOTEWORTHY PEOPLE",
+ "Settlement Tracker, lower half","own-words","asserts","2024-11-12",R_TRK,"dossier-archivist",
+ "medium - the second limb (no generating table) rests on the Roll20 capture of the section"),
+
+c("other: settlement size bands",
+ "Wizards' Settlement Tracker records settlement size as one of three tick boxes carrying the population band in numerals.",
+ 'tracker',"TOWN (POP. 501–5,000)",
+ "Settlement Tracker, header line","own-words","applies","2024-11-12",R_TRK,"dossier-archivist"),
+
+# ---- 2014 DMG chapter 5
+c("place and institution description",
+ "The 2014 DMG tells the DM to build a settlement around the locations most relevant to the adventure.",
+ 'dmg14',"When creating a settlement for your campaign, focus",
+ "ch.5 'Adventure Environments' > 'Settlements', p.112","own-words","asserts","2014-12-09",R_IA,"dm-page"),
+
+c("omission as information",
+ "The 2014 DMG warns the DM off naming every street and identifying every building's inhabitants, calling that way madness.",
+ 'dmg14',"the inhabitants of every building; that way lies madness.",
+ "ch.5 > 'Settlements', p.112","own-words","asserts","2014-12-09",R_IA,"dm-page"),
+
+c("other: settlement slot list",
+ "The 2014 DMG's five Random Settlements tables presuppose that the settlement's size and basic form of government have already been fixed elsewhere.",
+ 'dmg14',"settlement. They assume that you've already determined",
+ "ch.5 > 'Settlements' > 'Random Settlements', p.112","own-words","asserts","2014-12-09",R_IA,"dossier-archivist"),
+
+c("other: settlement slot list",
+ "The 2014 DMG's settlement slots are five tables headed Race Relations, Ruler's Status, Notable Traits, Known For Its, and Current Calamity.",
+ 'dmg14',"its size and its basic form of government.",
+ "ch.5 > 'Random Settlements', p.112 (table headings on the page)","own-words","asserts","2014-12-09",R_IA,"dossier-archivist"),
+
+c("other: table heading form",
+ "The 2014 DMG heads its reputation slot as a sentence stem with an ellipsis that the rolled result completes.",
+ 'dmg14',"Known For Its ...",
+ "ch.5 > 'Random Settlements', p.112","own-words","applies","2014-12-09",R_IA,"herald-pools"),
+
+c("dm-facing sentence",
+ "The entries on the 2014 DMG's Current Calamity table are unpunctuated noun phrases rather than sentences.",
+ 'dmg14',"Undead stirring in cemeteries",
+ "ch.5 > 'Random Settlements' > 'Current Calamity', p.112","own-words","applies","2014-12-09",R_IA,"herald-pools"),
+
+c("place and institution description",
+ "The 2014 DMG tells the DM drawing a settlement map to ignore the placement of every building and concentrate on major features.",
+ 'dmg14',"concentrate instead on the major features.",
+ "ch.5 > 'Mapping a Settlement', p.114","own-words","asserts","2014-12-09",R_IA,"dm-page"),
+
+c("naming and forms of address",
+ "The 2014 DMG advises naming a city's wards after the dominant trade, a geographical characteristic, or a dominant site, offering Tannery Square, Riverside and the Lords' Quarter as its own examples.",
+ 'dmg14',"the kinds of trades that dominate the neighborhood",
+ "ch.5 > 'Mapping a Settlement', p.114","own-words","asserts","2014-12-09",R_IA,"dossier-archivist"),
+
+# ---- 2014 DMG chapter 1
+c("other: settlement slot list",
+ "The 2014 DMG opens its settlement guidance with a question list whose second sensory question asks what the place looks, smells and sounds like.",
+ 'dmg14',"What does it look, smell, and sound like?",
+ "ch.1 'A World of Your Own' > 'Settlements', p.15","own-words","asserts","2014-12-09",R_IA,"dossier-archivist"),
+
+c("concrete sensory noun",
+ "The 2014 DMG asserts that sensory details are what bring a settlement to life for the players.",
+ 'dmg14',"Sensory details help bring a settlement to life and",
+ "ch.1 > 'Settlements' > 'Atmosphere', p.17","own-words","asserts","2014-12-09",R_IA,"dossier-archivist"),
+
+c("place and institution description",
+ "The 2014 DMG tells the DM to fix one defining factor for a settlement's personality and extrapolate the rest of the description from it.",
+ 'dmg14',"Settle on a single defining factor that sums up a",
+ "ch.1 > 'Settlements' > 'Atmosphere', p.17","own-words","asserts","2014-12-09",R_IA,"dossier-archivist"),
+
+c("plainness and economy",
+ "The 2014 DMG rules that a settlement the party only rests and resupplies in needs no more than a brief description.",
+ 'dmg14',"of this sort needs no more than a brief description.",
+ "ch.1 > 'Settlements' > 'Local Color', p.15","own-words","asserts","2014-12-09",R_IA,"dm-page"),
+
+c("omission as information",
+ "The 2014 DMG instructs the DM to create only the settlement features the campaign will actually need and let the place grow later.",
+ 'dmg14',"you put into it. Create only the features of a settlement",
+ "ch.1 > 'Settlements' > 'Purpose', p.15","own-words","asserts","2014-12-09",R_IA,"dm-page"),
+
+c("edition and house style",
+ "The 2014 DMG explicitly licenses the DM to disregard its own settlement advice where it conflicts with the DM's vision.",
+ 'dmg14',"Disregard any advice here that runs counter to",
+ "ch.1 > 'Settlements', p.15","own-words","asserts","2014-12-09",R_IA,"dm-page"),
+
+c("civic record register",
+ "Each settlement size in the 2014 DMG is written as a five-field labelled record: Population, Government, Defense, Commerce and Organizations.",
+ 'dmg14',"Organizations: A village might contain one or two",
+ "ch.1 > 'Settlements' > 'Size' (Village, Town, City), pp.16-17","own-words","applies","2014-12-09",R_IA,"dossier-archivist"),
+
+c("other: digits in prose",
+ "In the 2014 DMG the city population threshold is spelled out in words inside the running prose.",
+ 'dmg14',"Cities that hold more than twenty-five thousand people",
+ "ch.1 > 'Settlements' > 'Size' > City, p.17","own-words","applies","2014-12-09",R_IA,"dossier-archivist"),
+
+c("other: digits in prose",
+ "The same 2014 DMG city entry gives the same population figure in numerals in its labelled Population field, a few lines above the spelled-out sentence.",
+ 'dmg14',"Population: Up to about 25,000",
+ "ch.1 > 'Settlements' > 'Size' > City, p.17","own-words","applies","2014-12-09",R_IA,"dossier-archivist"),
+
+c("other: digits in prose",
+ "The 2014 DMG's Forgotten Realms currency example carries two coin values as numerals inside one sentence of running prose.",
+ 'dmg14',"worth 50 gp in Waterdeep and 30 gp",
+ "ch.1 > 'Settlements' > 'Currency' > 'Example: The Forgotten Realms', p.19","own-words","applies","2014-12-09",R_IA,"dossier-archivist"),
+
+c("place and institution description",
+ "The 2014 DMG defines a ward as a neighbourhood of a city defined by specific features, produced by the outward expansion of city walls.",
+ 'dmg14',"naturally divide the city into wards (neighborhoods",
+ "ch.1 > 'Settlements' > 'Size' > City, p.17","own-words","asserts","2014-12-09",R_IA,"dossier-archivist"),
+
+# ---- SRD measurements
+c("other: open-content coverage",
+ "The CC-BY System Reference Document 5.1 carries no settlement section and none of the DMG's settlement tables; 'settlement' occurs twice in the whole document, both times incidentally.",
+ 'srd51',"",
+ "whole document, grep of the extracted text","measurement","asserts","2023-01-01",R_PDF+"; grep over the extracted text","none"),
+
+c("other: open-content coverage",
+ "The CC-BY System Reference Document 5.2.1 likewise carries no settlement section and none of the 2024 DMG's settlement tables.",
+ 'srd521',"",
+ "whole document, grep of the extracted text","measurement","asserts","2025-04-22",R_PDF+"; grep over the extracted text","none"),
+
+# ---- secondary
+c("other: settlement slot list",
+ "Mike Shea's index of the 2014 DMG's random tables places Race Relations, Ruler's Status, Notable Traits, Known For Its and Current Calamity all on page 112, and Forms of Government separately on page 18.",
+ 'sly',"doesn't include an index of all of the random charts",
+ "'The Random Table Index'","analysis","asserts","2015-05-26",R_PLAIN,"none"),
+
+c("edition and house style",
+ "Ian of Oak of Honor Games judges that the DMG's Purpose section is about how much the GM should invent and record rather than about what settlements are like.",
+ 'oak',"is less about what settlements are like in the world",
+ "opening section on 'Purpose'","analysis","asserts","2020-10-14",R_PLAIN,"none"),
+
+c("other: settlement size bands",
+ "Ian of Oak of Honor Games disputes the 2014 DMG's size scheme, objecting that it separates settlements by population alone where historians separate them by function.",
+ 'oak',"The DMG divides settlements just by population",
+ "'Village' section","analysis","disputes","2020-10-14",R_PLAIN,"none"),
+
+c("other: reception of the tables",
+ "PC Gamer's reviewer complains that the 2024 DMG's toolbox tables, settlement creation among them, read as a bullet-point list of suggestions rather than a guide.",
+ 'pcg',"more of a bullet-point list of suggestions than a guide",
+ "review body, on the DM's Toolbox","reception","disputes","2024-11-08",R_PLAIN,"none"),
+
+c("civic record register",
+ "Chris Perkins presents the 2024 tracking sheets, the Settlement Tracker among them, as a device for keeping track of important information in play.",
+ 'warg',"designed to help you keep track of important information",
+ "Wargamer report of the 1 October 2024 livestream","own-words","asserts","2024-10-01",R_PLAIN,"dossier-archivist",
+ "medium - Perkins' words as transcribed by a reporter, not a primary transcript"),
+
+c("place and institution description",
+ "Maximilian Hart demonstrates that the 2014 DMG's page-112 slots compose into a single connected settlement paragraph, and reports it took about 30 seconds.",
+ 'd20d',"All that took about 30 seconds to create using the tables",
+ "'Read the DMG', demonstration paragraph","analysis","applies","2022-10-27",R_PLAIN,"dossier-archivist"),
+
+c("other: settlement slot list",
+ "A community reproduction citing DMG 5e p.112 gives the full row lists of the 2014 Race Relations, Ruler's Status, Notable Traits, Known for and Calamity tables.",
+ 'jeth',"Dungeon Master’s Guide 5e, p.112",
+ "'Settlement Generator', footnote 1","relay","asserts","2023-02-11",R_PLAIN,"dossier-archivist",
+ "low - the same page also prints a Community Sizes table and an Overall Alignment table that are from the 3.5e DMG, not 5e; use only the tables the 5e book actually has"),
 ]
 
-COVERAGE = ("Named roster: all five items fetched raw except the video transcripts. asoiaf.westeros.org topic 133760 FETCHED "
-"(browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves; both pages read). "
-"Westeros news post 13834 FETCHED via the Wayback raw id_ capture after a live 403, and the Sean T. Collins 2011 essay reached from the link inside it and FETCHED live. "
-"Leigh Butler's reread FETCHED for all three named chapters: the Prologue and Bran I (AGoT Part 1, via Wayback after a tor.com 403) and the Red Wedding (ASoS Part 30, chapters 51-52, live at reactormag), plus The Hedge Knight Part 1 for the register comparison. "
-"The five-part 'The Prose of George R R Martin' series LOCATED IN FULL (parts 3 and 4 recovered from part 5's own description) but its TRANSCRIPTS ARE BLOCKED: the caption tracks are ASR-only and every timedtext route returned zero bytes (curl with a browser user agent, fmt=json3 and fmt=srv1, an in-page fetch from the youtube.com origin, and the innertube get_transcript POST), while youtubetotranscript.com sits behind a bot-verification interstitial I did not attempt to pass; claims from that series are therefore drawn from each video's own written shortDescription read raw from the watch-page JSON, and the transcripts are OWED to a later round. "
-"Other registers covered: Dunk and Egg (Butler's Hedge Knight reread, Attewell's essay and its comments, Adam Whitehead's Mystery Knight review), Fevre Dream (Bedford at SFFWorld, on phonetic dialect and on what is left unsaid), Wild Cards (Martin's own words on the mosaic form). "
-"Substantive sources per route: 5 from the named roster, 3 by bibliography chasing (the Collins link inside news 13834, the affix study cross-linked from the 2014 Books & Boots post, and the Atlantic interview from that study's footnote), 3 primaries chased from the Wikipedia reference list for Fire & Blood (Independent, Publishers Weekly, Tor.com via Wayback), and 11 by lateral search. "
-"Not found or thin: no scholarly close reading of Martin's chapter openings surfaced; Matthew Voice's corpus study exists only as a conference abstract with no published findings; the Times, Sunday Times and GQ Fire & Blood reviews are paywalled and were read only as quotations inside a fan-site round-up, marked relay and low confidence. "
-"27 substantive sources read raw; discovery stopped when the last two lateral searches returned only pages already read or non-substantive.")
-
-out = {"complete": True, "coverage": COVERAGE, "sourcesRead": SOURCES, "claims": C}
-with io.open(os.path.join(BASE, "found-martin-closereading.json"), "w", encoding="utf-8") as f:
-    json.dump(out, f, ensure_ascii=False, indent=1)
-print("claims", len(C), "sources", len(SOURCES))
+sources=[
+ {"title":"Settlements | D&D 2024 | Roll20 Compendium (Dungeon Master's Guide 2024)","url":U['roll20'],"kind":"own-words","substantive":True,"date":"2024-11-12","route":R_ROLL},
+ {"title":"SETTLEMENT TRACKER (2024 Dungeon Master's Guide free tracking sheet)","url":U['tracker'],"kind":"own-words","substantive":True,"date":"2024","route":R_TRK},
+ {"title":"Tracking Sheets - D&D Beyond free 2024 rules (index of the ten sheets)","url":U['ddbtr'],"kind":"vendor","substantive":True,"date":"2024","route":R_PLAIN},
+ {"title":"Dungeon Master's Guide (2014) - full-book OCR text","url":U['dmg14'],"kind":"own-words","substantive":True,"date":"2014-12-09","route":R_IA},
+ {"title":"Dungeons & Dragons: Dungeon Master's Guide [5 ed.] - partial book text mirror (chs.1-2 clean, used to cross-check OCR)","url":U['ebin'],"kind":"own-words","substantive":True,"date":"2014","route":R_PLAIN},
+ {"title":"System Reference Document 5.1 (CC-BY)","url":U['srd51'],"kind":"measurement","substantive":True,"date":"2023","route":R_PDF},
+ {"title":"System Reference Document 5.2.1 (CC-BY)","url":U['srd521'],"kind":"measurement","substantive":True,"date":"2025","route":R_PDF},
+ {"title":"Random Tables of the D&D 5th Edition Dungeon Master's Guide - Sly Flourish","url":U['sly'],"kind":"analysis","substantive":True,"date":"2015-05-26","route":R_PLAIN},
+ {"title":"Settlements: critique of the DMG guidelines - Oak of Honor Games","url":U['oak'],"kind":"analysis","substantive":True,"date":"2020-10-14","route":R_PLAIN},
+ {"title":"PC Gamer review of the 2024 Dungeon Master's Guide","url":U['pcg'],"kind":"reception","substantive":True,"date":"2024","route":R_PLAIN},
+ {"title":"DnD's 2024 DM's Guide debuts tracking sheets for absolutely everything - Wargamer","url":U['warg'],"kind":"reception","substantive":True,"date":"2024-10-01","route":R_PLAIN},
+ {"title":"Read the DMG - d20 Digest","url":U['d20d'],"kind":"analysis","substantive":True,"date":"2022-10-27","route":R_PLAIN},
+ {"title":"Settlement Generator - Jethoof's Digital Garden (reproduction of DMG p.112 tables)","url":U['jeth'],"kind":"relay","substantive":True,"date":"2023-02-11","route":R_PLAIN},
+]
+out={"complete":False,"coverage":"checkpoint after 13 sources","sourcesRead":sources,"claims":claims}
+json.dump(out,open('found-dnd-place-dmg-settlements.json','w'),indent=1,ensure_ascii=False)
+print(len(claims),"claims,",len(sources),"sources")

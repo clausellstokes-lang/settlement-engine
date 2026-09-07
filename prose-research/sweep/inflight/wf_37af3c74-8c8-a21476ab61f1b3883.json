@@ -3,14 +3,14 @@
  "name": "dnd",
  "angle": "place-5e-gazetteers",
  "tag": null,
- "lines": 224,
+ "lines": 277,
  "firstTs": "2026-09-07T02:52:51.251Z",
- "lastTs": "2026-09-07T03:04:46.633Z",
+ "lastTs": "2026-09-07T03:09:12.183Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 41,
-  "WebSearch": 17,
+  "Bash": 53,
+  "WebSearch": 19,
   "WebFetch": 2
  },
  "urlsFetched": [
@@ -52,18 +52,23 @@
   "https://eventyrgames.com/2020/12/21/running-rime-of-the-frostmaiden-4/",
   "https://eventyrgames.com/2020/12/17/running-rime-of-the-frostmaiden-2-2/",
   "https://dmdavid.com/tag/tag/curse-of-strahd/",
-  "https://eventyrgames.com/2020/09/17/review-icewind-dale-rime-of-the-frostmaiden/"
+  "https://eventyrgames.com/2020/09/17/review-icewind-dale-rime-of-the-frostmaiden/",
+  "https://web.archive.org/web/20260418221915id_/https://www.elventower.com/chapter-5-the-town-of-vallaki/",
+  "https://www.theopentome.com/2021/09/24/rime-of-the-frostmaiden-welcome-to-bryn-shander/",
+  "https://www.oakofhonor.com/index.php/2020/10/14/settlements-critique-of-the-dmg-guidelines/",
+  "https://web.archive.org/web/20230327012017id_/https://www.theopentome.com/2021/09/24/rime-of-the-frostmaiden-welcome-to-bryn-shander/",
+  "https://rpgmusings.com/2020/11/why-how-to-use-legacy-of-the-crystal-shard-in-your-frostmaiden-game/"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now the Curse of Strahd settlements and the publisher's own preview routes.",
+ "lastAssistantText": "The record file is written and complete. Returning the same result.",
  "run": "wf_37af3c74-8c8",
  "agent": "a21476ab61f1b3883",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-a21476ab61f1b3883.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-place-5e-gazetteers.json",
-  "claims": 26,
-  "complete": false,
-  "mtime": "22:59:32"
+  "claims": 61,
+  "complete": true,
+  "mtime": "23:08:40"
  }
 }

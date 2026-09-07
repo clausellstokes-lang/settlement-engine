@@ -3,14 +3,14 @@
  "name": "ai",
  "angle": "arch-biographical-record",
  "tag": null,
- "lines": 127,
+ "lines": 227,
  "firstTs": "2026-09-07T02:56:37.991Z",
- "lastTs": "2026-09-07T03:04:04.730Z",
+ "lastTs": "2026-09-07T03:09:54.534Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 25,
-  "WebSearch": 7
+  "Bash": 49,
+  "WebSearch": 11
  },
  "urlsFetched": [
   "https://www.theverge.com/2024/2/13/24067157/ai-obituary-spam-generative-clickbait",
@@ -38,7 +38,19 @@
   "https://www.legalgenealogist.com/||;",
   "https://www.wired.com/story/morbid-war-online-obituaries/",
   "https://www.wired.com/story/youtube-obituary-pirates/",
-  "https://www.legalgenealogist.com/2026/05/12/ai-meets-tos/"
+  "https://www.legalgenealogist.com/2026/05/12/ai-meets-tos/",
+  "https://www.legalgenealogist.com/wp-sitemap-posts-post-2.xml",
+  "http://www.google.com/bot.html",
+  "https://www.familysearch.org/en/blog/ai-developments-genealogy",
+  "https://www.wikitree.com/wiki/$p",
+  "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+  "https://www.wikitree.com/g2g/1665823/chat-gpt-and-research",
+  "https://www.wikitree.com/wiki/Help:Photos_FAQ",
+  "https://www.familysearch.org/en/help/helpcenter/artificial-intelligence",
+  "https://vitabrevis.americanancestors.org/-ai-in-genealogical-research",
+  "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
+  "https://familylocket.com/can-chatgpt-help-with-genealogy-citations/",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -46,5 +58,10 @@
  "agent": "a05ecda6c6fa59d1d",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-a05ecda6c6fa59d1d.jsonl",
  "journal": "in-flight",
- "checkpointFile": null
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-biographical-record.json",
+  "claims": 19,
+  "complete": false,
+  "mtime": "23:04:55"
+ }
 }

@@ -85,3 +85,29 @@ fetched text before writing.
 - elventower via wayback
 - D&D Beyond / wizards.com official previews & free samples
 - 2024 DMG gazetteer chapter (Greyhawk) as the house-style control
+
+## FINAL STATE (complete)
+61 claims, 31 sources logged (21 substantive). Every quotation re-verified verbatim against the
+locally fetched text (gz/*.txt) by script; 0 mismatches.
+
+Added in the second half:
+- D&D Beyond "Trek to Ten-Towns" (publisher-hosted, 2020) — the only true WotC prose SPECIMEN in this
+  sweep: "Read or paraphrase the following to set the scene", second-person read-aloud, bolded run-in
+  DM labels ("Investigating the Cart."), and the digits/words split BY REGISTER
+  ("four-day journey" in read-aloud vs "4-day trip" in DM text).
+- media.wizards.com CoS_DMsGuild.pdf (official) — one-word bold label + sentence, present tense,
+  place name as subject.
+- D&D Beyond 2024 DMG Greyhawk article (publisher) — nation entry = description + history of conflict
+  + current strife.
+- Dungeon Master's Workshop (2019) — boxed text with a paragraph break is "too long by half";
+  Dragon Heist gives boxed text to important areas, short paraphrasable paragraphs or bullets to minor ones.
+- DMDavid — CoS boxed text for EVERY location; notable NPC homes run to pages.
+- RPG Musings — Rime gives "2 or 3 described locations" per town.
+- Oak of Honor — 5e DMG sorts settlements by population alone; Size/Government/Commerce headings.
+- Elven Tower (via Wayback raw) — Vallaki ruler named title+name+office.
+
+NOT FOUND / BLOCKED (recorded, not missed):
+- The Alexandrian has NO Curse of Strahd remix and NO Icewind Dale Remix; the CoS tag 404s.
+- dndbeyond.com/sources/dnd/idrotf returns a JS shell only.
+- theopentome.com is DNS-dead; its Wayback capture body is empty.
+- Unlawful full-text mirrors (5e.tools, scribd, archive.org book scans) were deliberately NOT used.
