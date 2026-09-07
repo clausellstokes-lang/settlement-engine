@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 23:39:41 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 23:45:10 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lighting tail's three follow-on cars land as one consist — the mobileSingleCh
 
@@ -94,7 +94,7 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
-- **dnd**: claims 992 · verdicts 992 (todo 0) · kept 718 · partial 168 · verdict files 63 (triage 1, regrade r6) · section 09-06 21:46 · critic 09-06 22:09
+- **dnd**: claims 1052 · verdicts 1052 (todo 0) · kept 762 · partial 182 · verdict files 67 (triage 1, regrade r6) · section 09-06 21:46 · critic 09-06 22:09
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
@@ -105,11 +105,11 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 ## WORKFLOW RUNS of chair session df942c1b-a1a2-4594-ba90-9241ff864ccd (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_00551368-b67: 10 journal lines, 6 agents
 - wf_0cd91522-1ce: 2 journal lines, 1 agents
-- wf_37af3c74-8c8: 28 journal lines, 16 agents
+- wf_37af3c74-8c8: 31 journal lines, 16 agents
 - wf_55c30493-02f: 10 journal lines, 5 agents
 - wf_8cd21474-a7b: 4 journal lines, 2 agents
 - wf_d3face35-f20: 2 journal lines, 1 agents
 - wf_f191dac2-82a: 4 journal lines, 2 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 4.37 15.65 19.27
+load: 2.58 7.10 14.01

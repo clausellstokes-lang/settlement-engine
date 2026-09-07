@@ -3,15 +3,15 @@
  "name": "ai",
  "angle": "arch-second-tell-catalogue",
  "tag": null,
- "lines": 236,
+ "lines": 344,
  "firstTs": "2026-09-07T03:27:43.322Z",
- "lastTs": "2026-09-07T03:38:52.773Z",
+ "lastTs": "2026-09-07T03:44:37.240Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 56,
+  "Bash": 84,
   "WebFetch": 3,
-  "WebSearch": 7
+  "WebSearch": 10
  },
  "urlsFetched": [
   "https://en.wikipedia.org/wiki/Wikipedia:Criteria_for_speedy_deletion",
@@ -44,18 +44,38 @@
   "https://arxiv.org/html/2607.14729v1",
   "https://fr.wikipedia.org/w/index.php?title=Projet:Observatoire_des_IA/Rapport_du_9_mai_2026&action=raw",
   "https://de.wikipedia.org/w/index.php?title=Wikipedia:Anzeichen_f%C3%BCr_KI-generierte_Inhalte&action=raw",
-  "https://arxiv.org/pdf/2510.26899"
+  "https://arxiv.org/pdf/2510.26899",
+  "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=RfC%20speedy%20deletion%20criterion%20LLM-generated%20pages%20without%20human%20review&srnamespace=4&srlimit=15&format=json",
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Village_pump_(policy",
+  "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=insource%3A%22LLM-generated%20pages%20without%20human%20review%22&srnamespace=4%7C5&srlimit=20&format=json",
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Speedy_deletion/G15_update&action=raw",
+  "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=Wikipedia:Speedy%20deletion/G15%20update&rvlimit=1&rvdir=newer&rvprop=timestamp|user|comment&format=json",
+  "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=Wikipedia:Criteria%20for%20speedy%20deletion&rvlimit=1&rvdir=newer&rvprop=timestamp&format=json",
+  "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=insource%3A%22new%20speedy%20deletion%20criterion%22%20insource%3A%22LLM%22&srnamespace=4&srlimit=15&format=json",
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Artificial_intelligence&action=raw",
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia_talk:Speedy_deletion/Archive_92&action=raw",
+  "https://$host.wikipedia.org/wiki/$e",
+  "https://en.wikipedia.org/wiki/Wikipedia_talk:Speedy_deletion/Archive_92",
+  "https://en.wikipedia.org/wiki/Wikipedia:Artificial_intelligence",
+  "https://en.wikipedia.org/wiki/Wikipedia:Speedy_deletion/G15_update",
+  "https://fr.wikipedia.org/wiki/Projet:Observatoire_des_IA/Rapport_du_9_mai_2026",
+  "https://fr.wikipedia.org/wiki/Projet:Observatoire_des_IA/Contr%C3%B4le",
+  "https://de.wikipedia.org/wiki/Wikipedia:Anzeichen_f%C3%BCr_KI-generierte_Inhalte",
+  "https://arxiv.org/pdf/2501.15654",
+  "https://www.science.org/doi/10.1126/sciadv.adt3813",
+  "https://pmc.ncbi.nlm.nih.gov/articles/PMC12219543/",
+  "https://arxiv.org/pdf/2410.16107"
  ],
  "filesWritten": [],
- "lastAssistantText": "Checkpoint written (37 claims, 10 sources). Now the rest of the named roster.",
+ "lastAssistantText": "Now the final write with the expansion round.",
  "run": "wf_00551368-b67",
  "agent": "a653748394a4e717d",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-a653748394a4e717d.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-second-tell-catalogue.json",
-  "claims": 37,
+  "claims": 64,
   "complete": false,
-  "mtime": "23:37:05"
+  "mtime": "23:42:25"
  }
 }

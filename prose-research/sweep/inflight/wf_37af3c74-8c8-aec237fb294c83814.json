@@ -3,12 +3,13 @@
  "name": "dnd",
  "angle": null,
  "tag": "i1037-1051",
- "lines": 104,
+ "lines": 145,
  "firstTs": "2026-09-07T03:32:59.437Z",
- "lastTs": "2026-09-07T03:39:02.530Z",
+ "lastTs": "2026-09-07T03:43:57.106Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 21
+  "Bash": 29,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://media.wizards.com/2018/dnd/downloads/DnD_BasicRules_2018.pdf",
@@ -17,13 +18,13 @@
   "https://www.dndbeyond.com/posts/1717-2024-core-rulebooks-to-expand-the-srd"
  ],
  "filesWritten": [],
- "lastAssistantText": "The gap is tokenizer treatment of em-dash and non-breaking-hyphen compounds. Let me test whitespace tokenization and measure the planes appendix.",
+ "lastAssistantText": "Checkpoint file written and read back clean. All four sources were fetched live at HTTP 200 with a browser UA — no BLOCKED verdicts, no Wayback fallback needed.",
  "run": "wf_37af3c74-8c8",
  "agent": "aec237fb294c83814",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-aec237fb294c83814.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i1037-1051.json",
-  "exists": false
+  "exists": true
  }
 }
