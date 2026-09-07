@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:31:52 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:37:53 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -11,6 +11,7 @@
 | ai | finder | arch-historical-fact-measured | result | 22 | — | 69 claims, complete=True @23:50:23 | 03:16:09 |
 | ai | finder | arch-second-tell-catalogue | failed | 51 | — | 80 claims, complete=True @23:45:42 | 03:45:43 |
 | ai | finder | arch-worldbuilding-communities | result | 62 | — | 66 claims, complete=True @23:50:23 | 03:23:02 |
+| ai | finder | procgen-baseline | in-flight | 8 | — | — | 08:37:51 |
 | ai | regrade | regrade-r10 | result | 0 | — | — | 05:07:46 |
 | ai | regrade | regrade-r9 | failed | 0 | — | — | 03:45:46 |
 | ai | synth |  | result | 0 | — | — | 05:55:12 |
@@ -59,7 +60,7 @@
 | ai | verifier | i985-1004 | result | 7 | verdicts-ai-i985-1004.json | verdict file WRITTEN | 04:26:43 |
 | ai | verifier | i985-999 | failed | 0 | — | verdict file absent | 03:45:43 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 05:08:53 |
-| dnd | critic |  | in-flight | 0 | — | — | 08:30:02 |
+| dnd | critic |  | result | 0 | — | — | 08:35:20 |
 | dnd | critic |  | failed | 0 | — | — | 03:45:30 |
 | dnd | finder | place-5e-gazetteers | result | 44 | — | 61 claims, complete=True @23:50:21 | 03:11:50 |
 | dnd | finder | place-dmg-settlements | result | 55 | — | 68 claims, complete=True @23:50:21 | 03:18:52 |
@@ -98,6 +99,7 @@
 | dnd | verifier | i751-774 | result | 5 | — | verdict file WRITTEN | 06:43:42 |
 | dnd | verifier | i775-807 | result | 6 | — | verdict file WRITTEN | 06:43:25 |
 | dnd | verifier | i809-831 | result | 5 | — | verdict file WRITTEN | 06:42:58 |
+| dnd | verifier | i819-823 | in-flight | 0 | — | verdict file absent | 08:37:53 |
 | dnd | verifier | i835-1057 | result | 7 | — | verdict file WRITTEN | 06:47:32 |
 | dnd | verifier | i872-886 | result | 6 | claims-in.json | verdict file WRITTEN | 03:23:13 |
 | dnd | verifier | i887-901 | result | 5 | — | verdict file WRITTEN | 03:25:24 |
@@ -108,7 +110,7 @@
 | dnd | verifier | i962-976 | result | 10 | — | verdict file WRITTEN | 03:32:25 |
 | dnd | verifier | i977-991 | result | 4 | — | verdict file WRITTEN | 03:30:44 |
 | dnd | verifier | i992-1006 | result | 5 | — | verdict file WRITTEN | 03:41:17 |
-| leguin | critic |  | in-flight | 35 | — | — | 08:29:25 |
+| leguin | critic |  | result | 35 | critic-leguin.md | — | 08:37:32 |
 | leguin | regrade | regrade-r10 | result | 2 | — | — | 07:37:27 |
 | leguin | synth |  | result | 0 | assign-leguin.json, secA.md, secB.md, secC.md, secD.md, section-leguin.draft.md | — | 08:14:15 |
 | leguin | verifier | i388-419 | result | 6 | — | verdict file WRITTEN | 06:21:11 |

@@ -21656,13 +21656,6 @@
    "unsupportedLimb": "the chapter says 'independent authors like Peterson (2012) and Appelcline (2015)', marking them as exemplars rather than the producers of the historiographies, and its object is 'TRPGs and RPGs more generally'",
    "fromFile": "verdicts-dnd-regrade-r6.json"
   },
-  "819": {
-   "index": 819,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-dnd-triage-r6.json"
-  },
   "820": {
    "index": 820,
    "verdict": "VERIFIED_VERBATIM",
@@ -21676,20 +21669,6 @@
    "trueWording": "each nation's imports and exports and the trade routes they used",
    "note": "Raw page, same 'Keeping It Real' paragraph: he provided each nation's imports and exports and the trade routes they used to transport them. Subject is Gygax, named in the same paragraph.",
    "fromFile": "verdicts-dnd-i809-831.json"
-  },
-  "822": {
-   "index": 822,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-dnd-triage-r6.json"
-  },
-  "823": {
-   "index": 823,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-dnd-triage-r6.json"
   },
   "824": {
    "index": 824,

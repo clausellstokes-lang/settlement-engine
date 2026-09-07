@@ -1,0 +1,21 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i819-823",
+ "lines": 7,
+ "firstTs": "2026-09-07T08:37:53.236Z",
+ "lastTs": "2026-09-07T08:37:53.240Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "",
+ "run": "wf_2c525e43-1f2",
+ "agent": "a36b267c36707fa51",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_2c525e43-1f2/agent-a36b267c36707fa51.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i819-823.json",
+  "exists": false
+ }
+}
