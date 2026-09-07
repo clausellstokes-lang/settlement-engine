@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 04:21:35 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 04:27:13 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegation sitting — the owner hands the open rows to the chair's judgment an
 
@@ -142,7 +142,7 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 - wf_37a1566c-e8f: 8 journal lines, 4 agents
 - wf_43d098bf-eff: 13 journal lines, 7 agents
 - wf_543ddb3b-67c: 19 journal lines, 10 agents
-- wf_e092839f-8b1: 19 journal lines, 10 agents
+- wf_e092839f-8b1: 20 journal lines, 10 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.96 2.60 5.58
+load: 2.58 2.49 4.55

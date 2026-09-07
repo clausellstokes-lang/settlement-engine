@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:21:50 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:25:51 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -59,7 +59,7 @@
 | ai | verifier | i985-1004 | result | 7 | verdicts-ai-i985-1004.json | verdict file WRITTEN | 04:26:43 |
 | ai | verifier | i985-999 | failed | 0 | — | verdict file absent | 03:45:43 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 05:08:53 |
-| dnd | critic |  | in-flight | 0 | — | — | 08:21:49 |
+| dnd | critic |  | in-flight | 0 | — | — | 08:24:09 |
 | dnd | critic |  | failed | 0 | — | — | 03:45:30 |
 | dnd | finder | place-5e-gazetteers | result | 44 | — | 61 claims, complete=True @23:50:21 | 03:11:50 |
 | dnd | finder | place-dmg-settlements | result | 55 | — | 68 claims, complete=True @23:50:21 | 03:18:52 |
@@ -108,7 +108,7 @@
 | dnd | verifier | i962-976 | result | 10 | — | verdict file WRITTEN | 03:32:25 |
 | dnd | verifier | i977-991 | result | 4 | — | verdict file WRITTEN | 03:30:44 |
 | dnd | verifier | i992-1006 | result | 5 | — | verdict file WRITTEN | 03:41:17 |
-| leguin | critic |  | in-flight | 0 | — | — | 08:18:22 |
+| leguin | critic |  | in-flight | 25 | — | — | 08:25:07 |
 | leguin | regrade | regrade-r10 | result | 2 | — | — | 07:37:27 |
 | leguin | synth |  | result | 0 | assign-leguin.json, secA.md, secB.md, secC.md, secD.md, section-leguin.draft.md | — | 08:14:15 |
 | leguin | verifier | i388-419 | result | 6 | — | verdict file WRITTEN | 06:21:11 |
@@ -132,7 +132,7 @@
 | leguin | verifier | i917-921 | result | 2 | verdicts-leguin-i917-921.json | verdict file WRITTEN | 07:22:21 |
 | ? | critic |  | result | 0 | — | — | 07:06:40 |
 | ? | critic |  | result | 0 | — | — | 07:06:57 |
-| ? | critic |  | in-flight | 0 | — | — | 08:21:35 |
+| ? | critic |  | result | 0 | — | — | 08:24:52 |
 | ? | other |  | result | 0 | — | — | 07:10:20 |
 | ? | other |  | result | 0 | — | — | 07:16:13 |
 | ? | other |  | result | 0 | — | — | 07:16:12 |
