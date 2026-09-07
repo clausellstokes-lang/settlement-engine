@@ -30,8 +30,29 @@
  *     promotion is OWNER-GATED and deliberately not taken;
  *     `tests/domain/livingContentMaterialization.test.js` pins the gap so
  *     crossing it reds rather than arriving quietly.
- *   • Nothing in `src/` reads this key. It is regression-grade by construction,
- *     and saying so plainly is the honest reading rather than a gap.
+ *   • NO GENERATOR, MECHANIC OR SURFACE reads this key — it is regression-grade
+ *     by construction, and saying so plainly is the honest reading rather than a
+ *     gap. ⚠ AMENDED (lane L-MAT, O-11 path 2): there is now exactly ONE reader
+ *     in `src/`, and it is a PORTABILITY reader rather than a consumer.
+ *     `src/store/accountImportBody.js` reads the key on an imported settlement so
+ *     `remapAccountSettlementLivingContentRoster` can rewrite its account-scoped
+ *     identifiers into the receiving namespace — or, when the archive receipt
+ *     cannot map them, delete the key and push a per-settlement warning. That is
+ *     the same law the provenance receipt three lines above it obeys. Nothing
+ *     reads the key for its CONTENT, which is the claim this bullet makes.
+ *
+ * ⛔ THE OTHER IMPORT BOUNDARY DOES NOT REMAP IT, AND THAT IS MEASURED RATHER
+ * THAN ASSUMED (lane L-MAT, DEFERRED with its reason). The reconciliation slice
+ * (`importReconciliationAdmission.js`) calls the SAME `prepareSettlementEntry`,
+ * which preserves this key verbatim — executed probe: a roster survives that call
+ * with its SOURCE ids unchanged — and that slice has no content identity map at
+ * all. So a settlement reconciled across accounts would carry a foreign roster.
+ * It is NOT cured here, for two reasons stated so the next reader inherits them:
+ * `customContentProvenance` has exactly the same pre-existing gap on exactly that
+ * boundary, so curing one and not the other would leave the two records — minted
+ * side by side, governed alike everywhere else — disagreeing about one path; and
+ * with the dial at its dormant default no shipped world carries a roster at all,
+ * so nothing can reach it today. The pair belongs to one car, not to this one.
  *
  * ⛔ WHY THE ROWS CARRY ONLY MANIFEST-ADMITTED FIELDS. A roster that copied
  * whatever the author's object happened to hold would be an uncontrolled

@@ -1047,3 +1047,166 @@ describe('importAccountData — restore semantics (§359.10)', () => {
     }
   });
 });
+
+// ── O-11 PATH 2 — THE LIVING-CONTENT ROSTER ACROSS THE IMPORT BOUNDARY ───────
+// The roster is minted beside the provenance receipt in the pipeline's last three
+// lines and is treated alike here: resolve every identity through the
+// archive-backed map, or drop the whole record and warn. Both lifecycle paths are
+// exercised, because they differ in WHEN the identity map exists:
+//   • a v3 ARCHIVE envelope populates the map in Phase 3, BEFORE the settlement
+//     loop, so the remap resolves and the true record survives the move;
+//   • a legacy content-PACK envelope leaves the map at its empty
+//     archiveBacked:false default until Phase 8, AFTER the settlement loop, so
+//     the remap resolves nothing and MUST degrade to drop-with-warning.
+// A settlement carrying a roster cannot occur while the dial is dormant; these
+// arms drive the shape explicitly, exactly as the law's own fixtures do.
+describe('importAccountData — the living-content roster (O-11 path 2)', () => {
+  const sourceContent = {
+    name: 'Haunted Glassworks',
+    localUid: 'lu_glassworks',
+    definitionId: 'source-definition-glassworks',
+    revisionId: 'source-revision-glassworks-2',
+  };
+  const historicalContent = {
+    ...sourceContent,
+    name: 'Old Glassworks',
+    revisionId: 'source-revision-glassworks-1',
+  };
+
+  function settlementWithRoster(binding) {
+    return {
+      name: 'Rosterton',
+      tier: 'town',
+      config: { settType: 'town', _livingContentLawVersion: 2 },
+      customContentRoster: {
+        schemaVersion: 1,
+        buckets: {
+          deities: [{
+            source: 'custom',
+            isCustom: true,
+            customDefinitionCategory: 'deities',
+            localUid: sourceContent.localUid,
+            customDefinitionId: sourceContent.definitionId,
+            customDefinitionRevisionId: sourceContent.revisionId,
+            customDefinitionContentHash:
+              binding.resolvedDefinitions[0].contentHash,
+            customDefinitionFingerprint:
+              binding.resolvedDefinitions[0].contentHash,
+            name: 'Aster of the Kiln',
+          }],
+        },
+      },
+    };
+  }
+
+  test('a v3 ARCHIVE envelope remaps every roster identity into the receiving namespace', async () => {
+    const currentBinding = makeCampaignContentBinding({
+      institutions: [sourceContent],
+    });
+    const exported = buildAccountExport({
+      auth: { user: { id: 'USER-A', email: 'a@x.test' }, displayName: 'A', tier: 'premium' },
+      savedSettlements: [{
+        id: 'a-1', user_id: 'USER-A', name: 'Rosterton', tier: 'town',
+        settlement: settlementWithRoster(currentBinding),
+      }],
+      campaigns: [],
+      customContent: { institutions: [sourceContent] },
+      customContentArchive: fullContentArchive(sourceContent, historicalContent),
+    });
+
+    const store = makeStore();
+    const res = await store.getState().importAccountData(JSON.stringify(exported));
+    expect(res.ok).toBe(true);
+
+    const imported = store.getState().savedSettlements
+      .find(saved => saved.name === 'Rosterton');
+    const row = imported.settlement.customContentRoster.buckets.deities[0];
+    expect(row).toMatchObject({
+      customDefinitionId: 'definition-0',
+      customDefinitionRevisionId: 'revision-1',
+      localUid: 'lu_import_0',
+      // Authored + classification fields ride through verbatim.
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'deities',
+      name: 'Aster of the Kiln',
+    });
+    // THE ANCHOR THAT MAKES THE REMAP MEAN SOMETHING: not one source-account
+    // identifier survives anywhere in the row.
+    const sourceIds = [
+      sourceContent.definitionId, sourceContent.revisionId, sourceContent.localUid,
+      currentBinding.resolvedDefinitions[0].contentHash,
+    ];
+    for (const sourceId of sourceIds) {
+      expect(
+        Object.values(row).includes(sourceId),
+        `the source identifier ${sourceId} survived the remap`,
+      ).toBe(false);
+    }
+    // …and the fingerprint was re-derived from the DESTINATION hash rather than
+    // left holding the source one under a second key.
+    expect(row.customDefinitionFingerprint)
+      .toBe(row.customDefinitionContentHash);
+    expect(res.settlementContentWarnings || []).toEqual([]);
+  });
+
+  test('an envelope with NO archive-backed identity map drops the roster with a per-settlement warning', async () => {
+    // ⚠ THE ORDERING THIS ARM EXISTS FOR. `contentIdentityMap` starts as the
+    // empty archiveBacked:false join and is only REPLACED by a real one in
+    // Phase 3 (a v3 archive) or Phase 8 (a legacy content pack). The settlement
+    // loop is Phase 4 — between them — so on every envelope except the archive
+    // one it is still empty here and the remap can resolve nothing. This
+    // envelope carries no archive, which puts the map in exactly that state.
+    const currentBinding = makeCampaignContentBinding({
+      institutions: [sourceContent],
+    });
+    const exported = buildAccountExport({
+      auth: { user: { id: 'USER-A', email: 'a@x.test' }, displayName: 'A', tier: 'premium' },
+      savedSettlements: [{
+        id: 'a-1', user_id: 'USER-A', name: 'Rosterton', tier: 'town',
+        settlement: settlementWithRoster(currentBinding),
+      }],
+      campaigns: [],
+      customContent: { institutions: [] },
+    });
+
+    const store = makeStore();
+    const res = await store.getState().importAccountData(JSON.stringify(exported));
+    expect(res.ok).toBe(true);
+
+    const imported = store.getState().savedSettlements
+      .find(saved => saved.name === 'Rosterton');
+    expect(
+      imported,
+      'the settlement itself must still import — a foreign roster is a dropped'
+      + ' record, never a refused world',
+    ).toBeTruthy();
+    expect(Object.hasOwn(imported.settlement, 'customContentRoster')).toBe(false);
+    expect(res.settlementContentWarnings).toEqual([{
+      name: 'Rosterton',
+      reason: 'The archive receipt did not map every living-content roster identity.'
+        + ' Its living-content roster was removed.',
+    }]);
+  });
+
+  test('a settlement with NO roster is untouched and warns about nothing', async () => {
+    // The control for both arms above: the block must be a no-op on the shape
+    // every world the product mints today actually has.
+    const exported = buildAccountExport({
+      auth: { user: { id: 'USER-A', email: 'a@x.test' }, displayName: 'A', tier: 'premium' },
+      savedSettlements: [{
+        id: 'a-1', user_id: 'USER-A', name: 'Plainton', tier: 'town',
+        settlement: { name: 'Plainton', tier: 'town' },
+      }],
+      campaigns: [],
+      customContent: { institutions: [] },
+    });
+    const store = makeStore();
+    const res = await store.getState().importAccountData(JSON.stringify(exported));
+    expect(res.ok).toBe(true);
+    expect(res.settlementContentWarnings || []).toEqual([]);
+    const imported = store.getState().savedSettlements
+      .find(saved => saved.name === 'Plainton');
+    expect(Object.hasOwn(imported.settlement, 'customContentRoster')).toBe(false);
+  });
+});

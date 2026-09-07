@@ -54,6 +54,7 @@ import {
 import {
   accountCampaignBindingDestinations,
   remapAccountSettlementContentProvenance,
+  remapAccountSettlementLivingContentRoster,
 } from '../lib/accountSettlementContentPortability.js';
 import { remapSettlementParentRefForImport } from '../domain/settlementParentRef.js';
 import {
@@ -440,6 +441,43 @@ export const createAccountImportSlice = (set, get) => ({
             settlementContentWarnings.push({
               name: preparedResult.entry.name,
               reason: `${remappedProvenance.error} Its source provenance was removed.`,
+            });
+          }
+        }
+        // ── O-11 PATH 2 — THE LIVING-CONTENT ROSTER, TREATED LIKE THE RECEIPT ──
+        // The roster and the receipt are minted side by side in the pipeline's
+        // last three lines, and they are both EXACTNESS RECORDS about authored
+        // content, so they obey one law here: resolve every identity through the
+        // archive-backed map, or drop the whole record and say so. A
+        // half-resolved scope record is a false one, and source-account ids in a
+        // destination record are worse than an honest absence.
+        //
+        // ⚠ ORDERING: on a legacy content-PACK envelope `contentIdentityMap` is
+        // still the EMPTY archiveBacked:false default at this point — it is only
+        // replaced in Phase 8 — so the remap resolves nothing and degrades to
+        // exactly this drop-with-warning. On a v3 ARCHIVE envelope the map is
+        // already populated (Phase 3), and the true record survives the move.
+        // That asymmetry is the estate's, not this block's, and both paths are
+        // proved in tests/store/accountImportSlice.test.js.
+        //
+        // ⛔ AND A REGEN DOES NOT REBUILD IT. Only the full pipeline mints a
+        // roster; `regenNPCsPipeline` / `regenHistoryPipeline` never do. So the
+        // roster an import writes is the roster the world keeps — nothing
+        // downstream will quietly correct a foreign one.
+        const sourceRoster = preparedResult.entry.settlement.customContentRoster;
+        if (sourceRoster != null) {
+          const remappedRoster = remapAccountSettlementLivingContentRoster(
+            sourceRoster,
+            contentIdentityMap,
+          );
+          if (remappedRoster.ok) {
+            preparedResult.entry.settlement.customContentRoster =
+              remappedRoster.roster;
+          } else {
+            delete preparedResult.entry.settlement.customContentRoster;
+            settlementContentWarnings.push({
+              name: preparedResult.entry.name,
+              reason: `${remappedRoster.error} Its living-content roster was removed.`,
             });
           }
         }

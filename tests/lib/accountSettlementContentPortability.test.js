@@ -13,10 +13,23 @@ import {
 import {
   accountCampaignBindingDestinations,
   remapAccountSettlementContentProvenance,
+  remapAccountSettlementLivingContentRoster,
 } from '../../src/lib/accountSettlementContentPortability.js';
 import {
   buildImportedAccountArchiveIdentityMap,
 } from '../../src/lib/accountContentPortability.js';
+import {
+  LIVING_CONTENT_ROSTER_SCHEMA_VERSION,
+  buildLivingContentRoster,
+} from '../../src/domain/content/livingContentRoster.js';
+import {
+  LIVING_CONTENT_LAW_CONFIG_KEY,
+  ROSTER_LIVING_CONTENT_LAW_VERSION,
+} from '../../src/domain/content/livingContentLawVersion.js';
+import {
+  customContentReferencePack,
+  identifyCustomContentPack,
+} from '../fixtures/customContentReferencePack.js';
 
 function sourceFixture() {
   const sourceItem = {
@@ -205,5 +218,249 @@ describe('account settlement content provenance portability', () => {
       ok: false,
       code: 'settlement_content_provenance_environment_incomplete',
     });
+  });
+});
+
+// ── O-11 PATH 2 — THE LIVING-CONTENT ROSTER'S REMAP (lane L-MAT) ─────────────
+// The roster and the provenance receipt are minted side by side in the pipeline
+// and are treated alike here: resolve every identity through the archive-backed
+// map, or drop the whole record. These arms are the algebra; the two lifecycle
+// paths (a v3 archive envelope, and a legacy content-pack envelope whose identity
+// map is still empty at Phase 4) are proved in tests/store/accountImportSlice.
+function rosterFixture(overrides = {}) {
+  const fixture = sourceFixture();
+  const sourceHash = fixture.sourceProvenance.materializedDefinitions[0].contentHash;
+  const roster = {
+    schemaVersion: LIVING_CONTENT_ROSTER_SCHEMA_VERSION,
+    buckets: {
+      deities: [{
+        source: 'custom',
+        isCustom: true,
+        customDefinitionCategory: 'deities',
+        localUid: 'lu_archive_hall',
+        customDefinitionId: 'source-hall',
+        customDefinitionRevisionId: 'source-hall-r3',
+        customDefinitionContentHash: sourceHash,
+        // The projection's own fallback: no authored fingerprint, so the row
+        // carries the SOURCE content hash under a second key.
+        customDefinitionFingerprint: sourceHash,
+        name: 'Aster of the Kiln',
+        ...overrides,
+      }],
+    },
+  };
+  return { ...fixture, roster, sourceHash };
+}
+
+describe('account settlement living-content roster portability', () => {
+  test('rewrites every account-scoped identifier and leaves the authored fields alone', () => {
+    const fixture = rosterFixture();
+    const remapped = remapAccountSettlementLivingContentRoster(
+      fixture.roster,
+      fixture.identityMap,
+    );
+    expect(remapped.ok).toBe(true);
+    const row = remapped.roster.buckets.deities[0];
+    expect(row).toMatchObject({
+      customDefinitionId: 'received-hall',
+      customDefinitionRevisionId: 'received-hall-r1',
+      customDefinitionContentHash: fixture.destinationHash,
+      localUid: 'lu_received_hall',
+      // Authored + classification fields ride through untouched.
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'deities',
+      name: 'Aster of the Kiln',
+    });
+    // The schema version is CARRIED, and it agrees with the builder's constant —
+    // the pin the remapper deliberately does not make with a static import.
+    expect(remapped.roster.schemaVersion).toBe(LIVING_CONTENT_ROSTER_SCHEMA_VERSION);
+    // Non-vacuity: the source really did carry the ids we claim were rewritten.
+    expect(fixture.roster.buckets.deities[0].customDefinitionId).toBe('source-hall');
+  });
+
+  test('the fingerprint is RE-DERIVED from the destination hash, never carried', () => {
+    const fixture = rosterFixture();
+    const row = remapAccountSettlementLivingContentRoster(
+      fixture.roster,
+      fixture.identityMap,
+    ).roster.buckets.deities[0];
+    expect(row.customDefinitionFingerprint).toBe(fixture.destinationHash);
+    // THE TRAP THIS ARM EXISTS FOR: the source hash must not survive anywhere in
+    // the row, under any key. Carrying the fingerprint verbatim would leave it.
+    expect(Object.values(row).includes(fixture.sourceHash)).toBe(false);
+    // …and the anchor that the trap was real: the source row DID carry it twice.
+    expect(fixture.roster.buckets.deities[0].customDefinitionFingerprint)
+      .toBe(fixture.sourceHash);
+  });
+
+  test('an INDEPENDENT source fingerprint is dropped rather than carried', () => {
+    const fixture = rosterFixture({ customDefinitionFingerprint: 'authored-fingerprint' });
+    const row = remapAccountSettlementLivingContentRoster(
+      fixture.roster,
+      fixture.identityMap,
+    ).roster.buckets.deities[0];
+    expect(Object.hasOwn(row, 'customDefinitionFingerprint')).toBe(false);
+  });
+
+  test('customDefinitionVersion remaps through revisionNumbers, and drops when unresolvable', () => {
+    const unresolvable = rosterFixture({ customDefinitionVersion: 3 });
+    // sourceFixture()'s receipt carries no destinationRevisionNumber, so the
+    // destination ordinal is unknown and the field must not be asserted.
+    const dropped = remapAccountSettlementLivingContentRoster(
+      unresolvable.roster,
+      unresolvable.identityMap,
+    ).roster.buckets.deities[0];
+    expect(Object.hasOwn(dropped, 'customDefinitionVersion')).toBe(false);
+
+    // …and the paired positive, so the drop above is a decision and not a
+    // function that never sets the field.
+    const numbered = buildImportedAccountArchiveIdentityMap({
+      namespace: 'account-content:test',
+      identityMap: {
+        definitionIds: [{ sourceId: 'source-hall', destinationId: 'received-hall' }],
+        revisionIds: [{
+          sourceId: 'source-hall-r3',
+          destinationId: 'received-hall-r1',
+          destinationContentHash: unresolvable.destinationHash,
+          destinationRevisionNumber: 7,
+        }],
+        localUids: [{ sourceId: 'lu_archive_hall', destinationId: 'lu_received_hall' }],
+        packIds: [], environmentIds: [], environmentRevisionIds: [],
+      },
+    });
+    const kept = remapAccountSettlementLivingContentRoster(
+      rosterFixture({ customDefinitionVersion: 3 }).roster,
+      numbered.identityMap,
+    ).roster.buckets.deities[0];
+    expect(kept.customDefinitionVersion).toBe(7);
+  });
+
+  test('a bucket is RE-SORTED on the destination id, not the source order', () => {
+    const fixture = sourceFixture();
+    const secondHash = contentRevisionHash('institutions', {
+      name: 'Second', localUid: 'lu_received_second',
+    });
+    const joined = buildImportedAccountArchiveIdentityMap({
+      namespace: 'account-content:test',
+      identityMap: {
+        // SOURCE order a < b; DESTINATION order reverses it.
+        definitionIds: [
+          { sourceId: 'src-a', destinationId: 'dst-z' },
+          { sourceId: 'src-b', destinationId: 'dst-a' },
+        ],
+        revisionIds: [
+          { sourceId: 'src-a-r1', destinationId: 'dst-z-r1', destinationContentHash: fixture.destinationHash },
+          { sourceId: 'src-b-r1', destinationId: 'dst-a-r1', destinationContentHash: secondHash },
+        ],
+        localUids: [], packIds: [], environmentIds: [], environmentRevisionIds: [],
+      },
+    });
+    const roster = {
+      schemaVersion: LIVING_CONTENT_ROSTER_SCHEMA_VERSION,
+      buckets: {
+        deities: [
+          { customDefinitionId: 'src-a', customDefinitionRevisionId: 'src-a-r1' },
+          { customDefinitionId: 'src-b', customDefinitionRevisionId: 'src-b-r1' },
+        ],
+      },
+    };
+    const remapped = remapAccountSettlementLivingContentRoster(roster, joined.identityMap);
+    expect(remapped.ok).toBe(true);
+    expect(remapped.roster.buckets.deities.map(row => row.customDefinitionId))
+      .toEqual(['dst-a', 'dst-z']);
+  });
+
+  test('RESOLVE-OR-DROP: one unmapped identity refuses the WHOLE roster', () => {
+    const fixture = rosterFixture();
+    fixture.roster.buckets.deities.push({
+      customDefinitionId: 'stranger',
+      customDefinitionRevisionId: 'stranger-r1',
+    });
+    const remapped = remapAccountSettlementLivingContentRoster(
+      fixture.roster,
+      fixture.identityMap,
+    );
+    expect(remapped.ok).toBe(false);
+    expect(remapped.code).toBe('settlement_living_content_roster_identity_incomplete');
+    // The anchor: the SAME roster without the stranger resolves, so the refusal
+    // is about the unmapped row and not about the fixture being unreadable.
+    expect(remapAccountSettlementLivingContentRoster(
+      rosterFixture().roster, fixture.identityMap,
+    ).ok).toBe(true);
+  });
+
+  test('an EMPTY identity map (the legacy content-pack envelope at Phase 4) refuses', () => {
+    const fixture = rosterFixture();
+    const empty = buildImportedAccountArchiveIdentityMap({
+      namespace: 'account-content:test',
+      identityMap: {
+        definitionIds: [], revisionIds: [], localUids: [],
+        packIds: [], environmentIds: [], environmentRevisionIds: [],
+      },
+    });
+    const remapped = remapAccountSettlementLivingContentRoster(
+      fixture.roster,
+      empty.identityMap,
+    );
+    expect(remapped.ok).toBe(false);
+    expect(remapped.code).toBe('settlement_living_content_roster_identity_incomplete');
+  });
+
+  test('a null roster is a no-op, and an unreadable shape refuses', () => {
+    expect(remapAccountSettlementLivingContentRoster(null, sourceFixture().identityMap))
+      .toEqual({ ok: true, roster: null });
+    const map = sourceFixture().identityMap;
+    for (const bad of [
+      { buckets: { deities: [] } },
+      { schemaVersion: 0, buckets: { deities: [] } },
+      { schemaVersion: 1 },
+      { schemaVersion: 1, buckets: {} },
+      { schemaVersion: 1, buckets: { deities: 'not-an-array' } },
+    ]) {
+      const remapped = remapAccountSettlementLivingContentRoster(bad, map);
+      expect(remapped.ok, `shape ${JSON.stringify(bad)} must refuse`).toBe(false);
+      expect(remapped.code).toBe('settlement_living_content_roster_shape_unreadable');
+    }
+  });
+
+  test('⭐ the REAL builder\'s output round-trips through this remapper', () => {
+    // The agreement arm. The remapper validates the roster structurally rather
+    // than importing the builder's constant (a byte decision recorded in its
+    // header), so the two are pinned to agree HERE, where the import is free.
+    const pack = identifyCustomContentPack(customContentReferencePack());
+    const built = buildLivingContentRoster(pack, {
+      [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION,
+    });
+    expect(built, 'the reference pack built no roster — this arm would be vacuous').toBeTruthy();
+    expect(built.schemaVersion).toBe(LIVING_CONTENT_ROSTER_SCHEMA_VERSION);
+
+    // Build an identity map that covers exactly the ids the builder emitted.
+    const rows = Object.values(built.buckets).flat();
+    expect(rows.length).toBeGreaterThan(3);
+    const joined = buildImportedAccountArchiveIdentityMap({
+      namespace: 'account-content:test',
+      identityMap: {
+        definitionIds: rows.map((row, index) => ({
+          sourceId: row.customDefinitionId, destinationId: `dst-def-${index}`,
+        })),
+        revisionIds: rows.map((row, index) => ({
+          sourceId: row.customDefinitionRevisionId,
+          destinationId: `dst-rev-${index}`,
+          destinationContentHash: contentRevisionHash('deities', { n: index }),
+        })),
+        localUids: rows
+          .filter(row => typeof row.localUid === 'string' && row.localUid)
+          .map((row, index) => ({ sourceId: row.localUid, destinationId: `dst-lu-${index}` })),
+        packIds: [], environmentIds: [], environmentRevisionIds: [],
+      },
+    });
+    const remapped = remapAccountSettlementLivingContentRoster(built, joined.identityMap);
+    expect(remapped.ok, `the real roster was refused: ${remapped.error || ''}`).toBe(true);
+    expect(Object.keys(remapped.roster.buckets).sort())
+      .toEqual(Object.keys(built.buckets).sort());
+    for (const row of Object.values(remapped.roster.buckets).flat()) {
+      expect(String(row.customDefinitionId).startsWith('dst-def-')).toBe(true);
+    }
   });
 });
