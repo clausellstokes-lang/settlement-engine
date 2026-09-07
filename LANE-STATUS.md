@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 23:45:10 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 23:50:42 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lighting tail's three follow-on cars land as one consist — the mobileSingleCh
 
@@ -94,8 +94,8 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
-- **dnd**: claims 1052 · verdicts 1052 (todo 0) · kept 762 · partial 182 · verdict files 67 (triage 1, regrade r6) · section 09-06 21:46 · critic 09-06 22:09
-- **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
+- **dnd**: claims 1153 · verdicts 1142 (todo 11) · kept 762 · partial 182 · verdict files 68 (triage 2, regrade r6) · section 09-06 21:46 · critic 09-06 22:09
+- **ai**: claims 1426 · verdicts 1225 (todo 201) · kept 769 · partial 144 · verdict files 62 (triage 2, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
@@ -103,13 +103,13 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r8/wf_e95fca37-bb5, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r9/wf_37af3c74-8c8, ai r9/wf_00551368-b67
 
 ## WORKFLOW RUNS of chair session df942c1b-a1a2-4594-ba90-9241ff864ccd (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_00551368-b67: 10 journal lines, 6 agents
+- wf_00551368-b67: 62 journal lines, 31 agents
 - wf_0cd91522-1ce: 2 journal lines, 1 agents
-- wf_37af3c74-8c8: 31 journal lines, 16 agents
+- wf_37af3c74-8c8: 52 journal lines, 26 agents
 - wf_55c30493-02f: 10 journal lines, 5 agents
 - wf_8cd21474-a7b: 4 journal lines, 2 agents
 - wf_d3face35-f20: 2 journal lines, 1 agents
 - wf_f191dac2-82a: 4 journal lines, 2 agents
 
-## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.58 7.10 14.01
+## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 2.28 4.37 10.57

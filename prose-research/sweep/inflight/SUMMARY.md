@@ -1,23 +1,58 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 23:45:04 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 23:51:05 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
+| ai | critic |  | failed | 0 | — | — | 03:45:47 |
 | ai | critic |  | result | 0 | critic-ai.md | — | 02:25:15 |
-| ai | finder | arch-biographical-record | result | 57 | — | 104 claims, complete=True @23:21:31 | 03:27:43 |
-| ai | finder | arch-decoding-literature | in-flight | 27 | — | 79 claims, complete=False @23:42:54 | 03:44:42 |
-| ai | finder | arch-gazetteer-travel-history | result | 32 | payload.json, payload2.json | 79 claims, complete=True @23:11:48 | 03:15:34 |
-| ai | finder | arch-historical-fact-measured | result | 22 | — | 69 claims, complete=True @23:12:24 | 03:16:09 |
-| ai | finder | arch-second-tell-catalogue | in-flight | 51 | — | 64 claims, complete=False @23:42:25 | 03:44:37 |
-| ai | finder | arch-worldbuilding-communities | result | 62 | — | 66 claims, complete=True @23:19:37 | 03:23:02 |
+| ai | finder | arch-biographical-record | result | 57 | — | 104 claims, complete=True @23:50:23 | 03:27:43 |
+| ai | finder | arch-decoding-literature | failed | 30 | — | 88 claims, complete=False @23:45:20 | 03:45:34 |
+| ai | finder | arch-gazetteer-travel-history | result | 32 | payload.json, payload2.json | 79 claims, complete=True @23:50:23 | 03:15:34 |
+| ai | finder | arch-historical-fact-measured | result | 22 | — | 69 claims, complete=True @23:50:23 | 03:16:09 |
+| ai | finder | arch-second-tell-catalogue | failed | 51 | — | 80 claims, complete=True @23:45:42 | 03:45:43 |
+| ai | finder | arch-worldbuilding-communities | result | 62 | — | 66 claims, complete=True @23:50:23 | 03:23:02 |
+| ai | regrade | regrade-r9 | failed | 0 | — | — | 03:45:46 |
+| ai | synth |  | failed | 0 | — | — | 03:45:47 |
+| ai | verifier | i1000-1014 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1015-1029 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1030-1044 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1045-1059 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1060-1074 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1075-1089 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1090-1104 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1105-1119 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1120-1134 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1135-1149 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1150-1164 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1165-1179 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1180-1194 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1195-1209 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1210-1224 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1225-1239 | failed | 0 | — | verdict file absent | 03:45:46 |
+| ai | verifier | i1240-1254 | failed | 0 | — | verdict file absent | 03:45:46 |
+| ai | verifier | i1255-1257 | failed | 0 | — | verdict file absent | 03:45:46 |
+| ai | verifier | i940-954 | failed | 0 | — | verdict file absent | 03:45:43 |
+| ai | verifier | i955-969 | failed | 0 | — | verdict file absent | 03:45:43 |
+| ai | verifier | i970-984 | failed | 0 | — | verdict file absent | 03:45:43 |
+| ai | verifier | i985-999 | failed | 0 | — | verdict file absent | 03:45:43 |
+| dnd | critic |  | failed | 0 | — | — | 03:45:30 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 02:10:32 |
-| dnd | finder | place-5e-gazetteers | result | 44 | — | 61 claims, complete=True @23:08:40 | 03:11:50 |
-| dnd | finder | place-dmg-settlements | result | 55 | — | 68 claims, complete=True @23:15:24 | 03:18:52 |
-| dnd | finder | place-editorial-staff | result | 36 | — | 95 claims, complete=True @23:13:38 | 03:17:42 |
-| dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:14:53 | 03:18:23 |
+| dnd | finder | place-5e-gazetteers | result | 44 | — | 61 claims, complete=True @23:50:21 | 03:11:50 |
+| dnd | finder | place-dmg-settlements | result | 55 | — | 68 claims, complete=True @23:50:21 | 03:18:52 |
+| dnd | finder | place-editorial-staff | result | 36 | — | 95 claims, complete=True @23:50:21 | 03:17:42 |
+| dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:50:21 | 03:18:23 |
+| dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
+| dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
-| dnd | verifier | i1007-1021 | in-flight | 2 | — | verdict file WRITTEN | 03:44:28 |
+| dnd | verifier | i1007-1021 | result | 2 | — | verdict file WRITTEN | 03:45:27 |
 | dnd | verifier | i1022-1036 | result | 6 | — | verdict file WRITTEN | 03:41:28 |
 | dnd | verifier | i1037-1051 | result | 4 | — | verdict file WRITTEN | 03:43:57 |
+| dnd | verifier | i1052-1066 | failed | 0 | — | verdict file absent | 03:45:28 |
+| dnd | verifier | i1067-1081 | failed | 0 | — | verdict file absent | 03:45:28 |
+| dnd | verifier | i1082-1096 | failed | 0 | — | verdict file absent | 03:45:28 |
+| dnd | verifier | i1097-1111 | failed | 0 | — | verdict file absent | 03:45:28 |
+| dnd | verifier | i1112-1126 | failed | 0 | — | verdict file absent | 03:45:28 |
+| dnd | verifier | i1127-1141 | failed | 0 | — | verdict file absent | 03:45:28 |
+| dnd | verifier | i1142-1152 | failed | 0 | — | verdict file absent | 03:45:28 |
 | dnd | verifier | i872-886 | result | 6 | claims-in.json | verdict file WRITTEN | 03:23:13 |
 | dnd | verifier | i887-901 | result | 5 | — | verdict file WRITTEN | 03:25:24 |
 | dnd | verifier | i902-916 | result | 6 | — | verdict file WRITTEN | 03:24:33 |

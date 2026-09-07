@@ -1,192 +1,4 @@
 {
- "complete": true,
- "coverage": "Named roster: FETCHED at the primary - Christopher Perkins (2011 collected Dungeon columns via the Wayback capture of wizards.com, the 1999 Mimir interview, and the Perkins/Bilsland Adventure Design Guide), Chris Sims (his own 2020 essay, which names Mohan as his mentor), Ray Vallese and Monte Cook (two 1999 Mimir interviews and the 2022 Exposition Break interview), Steve Winter (Grognardia 2009), Ray Winninger's 29 Dungeoncraft columns, both released versions of the D&D Style Guide (v1.04a 2013 and v1.08a 2018), the DUNGEON and Dragon writers' guidelines at paizo.com, and the DMs Guild style-guide product page via Wayback; NOT FOUND in their own words - Kim Mohan (the June 2013 D&D podcast has no transcript, so he survives only in a blogger's two transcribed lines, a colleague's tribute and a museum biography; no 2021 docx is traceable and neither released guide carries any byline), Michele Carter (present only as a credited editor and as named by Vallese), Jeremy Crawford on the D&D voice (only a credits line), the Adventurers League Season 8 content template (absent from the AL document vault and the AL WordPress; reached only through Abadia's 2020 critique), and a distinct DMs Guild \"Guide to Publishing\"; BLOCKED - the TSR-era Dungeon guidelines (Google Groups 429, Scribd), Scott Fitzgerald Gray (insaneangel.com is credits lists; the Mastering Dungeons episode is untranscribed audio), Hannah Rose (transcript tab script-loaded), D&D Beyond and Blackwell's (Cloudflare). Substantive sources per route: 11 from the named roster, 5 by bibliography chasing (the rjd20 link to the Perkins PDF, John H. Kim's Dungeoncraft collection, the two Mimir interviews reached from the Vallese interview, the Adventure Design Guide reached from the DMs Guild package), 2 by lateral search (Sims's essay, Winter's Grognardia interview); 18 substantive of 23 read.",
- "sourcesRead": [
-  {
-   "title": "Kim Mohan on the D&D Podcast (Ramanan Sivaranjan, Save vs. Total Party Kill)",
-   "url": "https://save.vs.totalpartykill.ca/blog/kim-mohan/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2013-06-16",
-   "route": "curl with browser user agent"
-  },
-  {
-   "title": "Honoring Kim Mohan (Stan!, 50 Years in the Dungeon)",
-   "url": "https://50yearsinthedungeon.substack.com/p/honoring-kim-mohan",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2025-05-24",
-   "route": "curl with browser user agent"
-  },
-  {
-   "title": "Kim Mohan, SFFHOF Inductee (Museum of Pop Culture)",
-   "url": "https://www.mopop.org/sffhof/kim-mohan",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2025",
-   "route": "curl with browser user agent"
-  },
-  {
-   "title": "Dragon Editor-in-Chief Kim Mohan Passes (EN World thread)",
-   "url": "https://www.enworld.org/threads/dragon-editor-in-chief-kim-mohan-passes.693806/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "2022-12-12",
-   "route": "curl; news item plus tributes, no statement on style"
-  },
-  {
-   "title": "D&D Style Guide: Writing and Editing, Version 1.08a",
-   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2018 copyright line; file posted January 2019",
-   "route": "curl PDF, pypdf text extraction"
-  },
-  {
-   "title": "D&D Style Guide: Writing and Editing, Version 1.04a",
-   "url": "https://adventurersleague.files.wordpress.com/2018/10/1765690-dnd_house_style_guide.pdf",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2013 copyright line; file posted October 2018",
-   "route": "curl PDF, pypdf text extraction"
-  },
-  {
-   "title": "A Walk Through the Planes: An Interview with Monte Cook, Ray Vallese, and Colin McComb (Exposition Break)",
-   "url": "https://www.expositionbreak.com/a-walk-through-the-planes-an-interview-with-monte-cook-ray-vallese-and-colin-mccomb/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2022-03-07",
-   "route": "curl with browser user agent"
-  },
-  {
-   "title": "The Dungeon Master Experience 2011 (Christopher Perkins, collected Dungeon columns)",
-   "url": "https://web.archive.org/web/20201112024903if_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2011",
-   "route": "Wayback id_ capture of wizards.com PDF, pypdf extraction"
-  },
-  {
-   "title": "Dungeoncraft (Ray Winninger, Dragon 255-283, collected by John H. Kim)",
-   "url": "https://textual.ru/rpg/dungeoncraft.pdf",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "1997-1999 columns; PDF collection undated",
-   "route": "curl PDF, pypdf extraction"
-  },
-  {
-   "title": "Insane Angel Studios - RPG - Editing (Scott Fitzgerald Gray)",
-   "url": "https://www.insaneangel.com/insaneangel/RPG/RPGEditing.html",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "n.d.",
-   "route": "curl; credits list only, no statement on style"
-  },
-  {
-   "title": "DwDD - Editing Adventures with Scott Fitzgerald Gray (Mastering Dungeons)",
-   "url": "https://masteringdungeons.podbean.com/e/dwdd-%E2%80%93-editing-adventures-with-scott-fitzgerald-gray/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2020-03-05",
-   "route": "curl; show notes only, audio not transcribed"
-  },
-  {
-   "title": "DUNGEON Submission Guidelines, By the DUNGEON Staff",
-   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "Paizo era, D&D 3.5 (c. 2005-2007)",
-   "route": "curl PDF, pypdf extraction"
-  },
-  {
-   "title": "Dragon Writers Guidelines (Paizo/Dragon editorial staff)",
-   "url": "https://paizo.com/writersguidelines/dragon.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "Paizo era, D&D 3.5 (c. 2005-2007)",
-   "route": "curl with browser user agent"
-  },
-  {
-   "title": "Writing: Generalizations and Absolutes (Chris S. Sims)",
-   "url": "https://chrisssims.wordpress.com/2020/07/14/writing-generalizations-and-absolutes/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2020-07-14",
-   "route": "curl with browser user agent"
-  },
-  {
-   "title": "World Building: Explain a Game (Chris S. Sims)",
-   "url": "https://chrisssims.wordpress.com/2020/01/21/explain-a-game/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2020-01-21",
-   "route": "curl; a worldbuilding exercise, nothing on register or house style"
-  },
-  {
-   "title": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream)",
-   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2020-02-20",
-   "route": "curl with browser user agent"
-  },
-  {
-   "title": "An Interview with Chris Perkins, Designer of Warriors of Heaven (Planescape: I am the Mimir)",
-   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "1999 (GenCon 1999 interview series)",
-   "route": "curl with browser user agent"
-  },
-  {
-   "title": "Interview: Steve Winter (Grognardia)",
-   "url": "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2009-08",
-   "route": "curl with browser user agent"
-  },
-  {
-   "title": "Waterdeep: Dragon Heist credits page (Internet Archive OCR text)",
-   "url": "https://archive.org/stream/wheaton_Wdh/Waterdeep%20-%20%20Dragon%20Heist_djvu.txt",
-   "kind": "relay",
-   "substantive": true,
-   "date": "2018 (book); scan undated",
-   "route": "archive.org djvu.txt stream; OCR"
-  },
-  {
-   "title": "DMs Guild Creator Resource - Style Guide Resources (product page)",
-   "url": "http://web.archive.org/web/20240423102657id_/https://www.dmsguild.com/product/267467/",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "page captured 2024-04-23; note dated January 2019",
-   "route": "Wayback id_ capture"
-  },
-  {
-   "title": "Writing Adventures (D&D Adventure Design Guide) by Chris Perkins and Greg Bilsland",
-   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "pre-2019 (cites Chicago 16th edition)",
-   "route": "curl PDF, pypdf extraction"
-  },
-  {
-   "title": "Interview - Hannah Rose - TTRPG Editor (Snyder's Return)",
-   "url": "https://www.buzzsprout.com/1061770/4748468",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2020",
-   "route": "curl; the transcript tab is script-loaded and did not arrive in the HTML"
-  },
-  {
-   "title": "An Interview with Ray and Val Vallese (Planescape: I am the Mimir)",
-   "url": "https://mimir.net/chant/an-interview-with-ray-and-val-vallese/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "1999",
-   "route": "curl with browser user agent"
-  }
- ],
  "claims": [
   {
    "feature": "withheld information and inference",
@@ -200,8 +12,7 @@
    "date": "2013-06-16",
    "routeHint": "curl with browser user agent",
    "registerHint": "dossier-archivist",
-   "confidence": "medium",
-   "confidenceReason": "the words reach us through a blogger's transcription of a podcast, not the recording"
+   "confidence": "medium"
   },
   {
    "feature": "plainness and economy",
@@ -215,8 +26,7 @@
    "date": "2013-06-16",
    "routeHint": "curl with browser user agent",
    "registerHint": "dossier-archivist",
-   "confidence": "medium",
-   "confidenceReason": "blogger's transcription of a podcast"
+   "confidence": "medium"
   },
   {
    "feature": "edition and house style",
@@ -244,8 +54,7 @@
    "date": "2025-05-24",
    "routeHint": "curl with browser user agent",
    "registerHint": "none",
-   "confidence": "medium",
-   "confidenceReason": "a colleague's recollection, not a credits audit"
+   "confidence": "medium"
   },
   {
    "feature": "other: editor biography",
@@ -329,8 +138,7 @@
    "date": "2018",
    "routeHint": "curl PDF, pypdf extraction, search for credits, byline, author",
    "registerHint": "none",
-   "confidence": "medium",
-   "confidenceReason": "a negative finding over the extracted text of the two released versions; a byline in an image or in an unreleased internal version would not appear"
+   "confidence": "medium"
   },
   {
    "feature": "dm-facing sentence",
@@ -484,8 +292,7 @@
    "date": "2022-03-07",
    "routeHint": "curl with browser user agent",
    "registerHint": "herald-pools",
-   "confidence": "medium",
-   "confidenceReason": "Cook is reporting another man's preference two decades later"
+   "confidence": "medium"
   },
   {
    "feature": "plainness and economy",
@@ -1311,8 +1118,7 @@
    "date": "2018",
    "routeHint": "archive.org djvu.txt stream; the OCR renders Gray as Cray",
    "registerHint": "none",
-   "confidence": "medium",
-   "confidenceReason": "read through an OCR scan, which misreads Gray as Cray"
+   "confidence": "medium"
   },
   {
    "feature": "edition and house style",
@@ -1326,8 +1132,7 @@
    "date": "2018",
    "routeHint": "archive.org djvu.txt stream",
    "registerHint": "none",
-   "confidence": "medium",
-   "confidenceReason": "OCR scan of the printed credits"
+   "confidence": "medium"
   },
   {
    "feature": "edition and house style",
@@ -1524,6 +1329,194 @@
    "routeHint": "curl with browser user agent",
    "registerHint": "none",
    "confidence": "high"
+  }
+ ],
+ "complete": true,
+ "coverage": "Named roster: FETCHED at the primary - Christopher Perkins (the 2011 collected Dungeon columns via the Wayback capture of wizards.com, the 1999 Mimir interview, and the Perkins/Bilsland Adventure Design Guide), Chris Sims (his own 2020 essay, which names Mohan as his mentor), Ray Vallese and Monte Cook (two 1999 Mimir interviews and the 2022 Exposition Break interview), Steve Winter (Grognardia 2009), Ray Winninger's 29 Dungeoncraft columns, both released versions of the D&D Style Guide (v1.04a 2013 and v1.08a 2018), the DUNGEON and Dragon writers' guidelines at paizo.com, and the DMs Guild style-guide product page via Wayback; NOT FOUND in their own words - Kim Mohan (the June 2013 D&D podcast has no transcript, so he survives only in a blogger's two transcribed lines, a colleague's tribute and a museum biography; no 2021 docx is traceable and neither released guide carries any byline), Michele Carter (present only as a credited editor and as named by Vallese), Jeremy Crawford on the D&D voice (only a credits line), the Adventurers League Season 8 content template (absent from the AL document vault and the AL WordPress; reached only through Abadia's 2020 critique), and a distinct DMs Guild \"Guide to Publishing\"; BLOCKED - the TSR-era Dungeon guidelines (Google Groups 429, Scribd), Scott Fitzgerald Gray (insaneangel.com is credits lists; the Mastering Dungeons episode is untranscribed audio), Hannah Rose (script-loaded transcript), D&D Beyond and Blackwell's (Cloudflare). Substantive sources per route: 11 from the named roster, 5 by bibliography chasing (the rjd20 link to the Perkins PDF, John H. Kim's Dungeoncraft collection, the two Mimir interviews reached from the Vallese interview, the Adventure Design Guide reached from the DMs Guild package), 2 by lateral search (Sims's essay, Winter's Grognardia interview); 18 substantive of 23 read.",
+ "sourcesRead": [
+  {
+   "title": "Kim Mohan on the D&D Podcast (Ramanan Sivaranjan, Save vs. Total Party Kill)",
+   "url": "https://save.vs.totalpartykill.ca/blog/kim-mohan/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2013-06-16",
+   "route": "curl with browser user agent"
+  },
+  {
+   "title": "Honoring Kim Mohan (Stan!, 50 Years in the Dungeon)",
+   "url": "https://50yearsinthedungeon.substack.com/p/honoring-kim-mohan",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2025-05-24",
+   "route": "curl with browser user agent"
+  },
+  {
+   "title": "Kim Mohan, SFFHOF Inductee (Museum of Pop Culture)",
+   "url": "https://www.mopop.org/sffhof/kim-mohan",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025",
+   "route": "curl with browser user agent"
+  },
+  {
+   "title": "Dragon Editor-in-Chief Kim Mohan Passes (EN World thread)",
+   "url": "https://www.enworld.org/threads/dragon-editor-in-chief-kim-mohan-passes.693806/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2022-12-12",
+   "route": "curl; news item plus tributes, no statement on style"
+  },
+  {
+   "title": "D&D Style Guide: Writing and Editing, Version 1.08a",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2018 copyright line; file posted January 2019",
+   "route": "curl PDF, pypdf text extraction"
+  },
+  {
+   "title": "D&D Style Guide: Writing and Editing, Version 1.04a",
+   "url": "https://adventurersleague.files.wordpress.com/2018/10/1765690-dnd_house_style_guide.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2013 copyright line; file posted October 2018",
+   "route": "curl PDF, pypdf text extraction"
+  },
+  {
+   "title": "A Walk Through the Planes: An Interview with Monte Cook, Ray Vallese, and Colin McComb (Exposition Break)",
+   "url": "https://www.expositionbreak.com/a-walk-through-the-planes-an-interview-with-monte-cook-ray-vallese-and-colin-mccomb/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2022-03-07",
+   "route": "curl with browser user agent"
+  },
+  {
+   "title": "The Dungeon Master Experience 2011 (Christopher Perkins, collected Dungeon columns)",
+   "url": "https://web.archive.org/web/20201112024903if_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2011",
+   "route": "Wayback id_ capture of wizards.com PDF, pypdf extraction"
+  },
+  {
+   "title": "Dungeoncraft (Ray Winninger, Dragon 255-283, collected by John H. Kim)",
+   "url": "https://textual.ru/rpg/dungeoncraft.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1997-1999 columns; PDF collection undated",
+   "route": "curl PDF, pypdf extraction"
+  },
+  {
+   "title": "Insane Angel Studios - RPG - Editing (Scott Fitzgerald Gray)",
+   "url": "https://www.insaneangel.com/insaneangel/RPG/RPGEditing.html",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "n.d.",
+   "route": "curl; credits list only, no statement on style"
+  },
+  {
+   "title": "DwDD - Editing Adventures with Scott Fitzgerald Gray (Mastering Dungeons)",
+   "url": "https://masteringdungeons.podbean.com/e/dwdd-%E2%80%93-editing-adventures-with-scott-fitzgerald-gray/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2020-03-05",
+   "route": "curl; show notes only, audio not transcribed"
+  },
+  {
+   "title": "DUNGEON Submission Guidelines, By the DUNGEON Staff",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "Paizo era, D&D 3.5 (c. 2005-2007)",
+   "route": "curl PDF, pypdf extraction"
+  },
+  {
+   "title": "Dragon Writers Guidelines (Paizo/Dragon editorial staff)",
+   "url": "https://paizo.com/writersguidelines/dragon.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "Paizo era, D&D 3.5 (c. 2005-2007)",
+   "route": "curl with browser user agent"
+  },
+  {
+   "title": "Writing: Generalizations and Absolutes (Chris S. Sims)",
+   "url": "https://chrisssims.wordpress.com/2020/07/14/writing-generalizations-and-absolutes/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2020-07-14",
+   "route": "curl with browser user agent"
+  },
+  {
+   "title": "World Building: Explain a Game (Chris S. Sims)",
+   "url": "https://chrisssims.wordpress.com/2020/01/21/explain-a-game/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2020-01-21",
+   "route": "curl; a worldbuilding exercise, nothing on register or house style"
+  },
+  {
+   "title": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-02-20",
+   "route": "curl with browser user agent"
+  },
+  {
+   "title": "An Interview with Chris Perkins, Designer of Warriors of Heaven (Planescape: I am the Mimir)",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1999 (GenCon 1999 interview series)",
+   "route": "curl with browser user agent"
+  },
+  {
+   "title": "Interview: Steve Winter (Grognardia)",
+   "url": "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2009-08",
+   "route": "curl with browser user agent"
+  },
+  {
+   "title": "Waterdeep: Dragon Heist credits page (Internet Archive OCR text)",
+   "url": "https://archive.org/stream/wheaton_Wdh/Waterdeep%20-%20%20Dragon%20Heist_djvu.txt",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2018 (book); scan undated",
+   "route": "archive.org djvu.txt stream; OCR"
+  },
+  {
+   "title": "DMs Guild Creator Resource - Style Guide Resources (product page)",
+   "url": "http://web.archive.org/web/20240423102657id_/https://www.dmsguild.com/product/267467/",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "page captured 2024-04-23; note dated January 2019",
+   "route": "Wayback id_ capture"
+  },
+  {
+   "title": "Writing Adventures (D&D Adventure Design Guide) by Chris Perkins and Greg Bilsland",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "pre-2019 (cites Chicago 16th edition)",
+   "route": "curl PDF, pypdf extraction"
+  },
+  {
+   "title": "Interview - Hannah Rose - TTRPG Editor (Snyder's Return)",
+   "url": "https://www.buzzsprout.com/1061770/4748468",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2020",
+   "route": "curl; the transcript tab is script-loaded and did not arrive in the HTML"
+  },
+  {
+   "title": "An Interview with Ray and Val Vallese (Planescape: I am the Mimir)",
+   "url": "https://mimir.net/chant/an-interview-with-ray-and-val-vallese/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1999",
+   "route": "curl with browser user agent"
   }
  ]
 }

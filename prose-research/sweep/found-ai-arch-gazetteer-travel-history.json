@@ -1,168 +1,4 @@
 {
- "complete": true,
- "coverage": "Named roster: NYT Kugel and Hiltner FETCHED (live nytimes.com blocked, Wayback raw id_ capture 20260207205925) with its Originality.ai figures and the guidebook prose it quotes; Wikivoyage AI policy NOT FOUND AS ADOPTED POLICY (Wikivoyage:AI guidelines 404s and User:Globetrotter30/AI guidelines was deleted) so the surviving Wikivoyage talk:AI guidelines, the User:LPfi/AI guidelines draft, the Travellers' pub AI thread and two Votes-for-deletion cleanup discussions were fetched raw instead; Slate on Arcadia FETCHED but is about local-history books as AI TRAINING DATA, not AI-written local history, so it yields only two prose claims; Lonely Planet's AI policy FETCHED plus the Intrepid Times head-to-head test of ChatGPT against a Lonely Planet guide; TripAdvisor generated summaries covered by the Which? investigation read at the primary (Euronews used only to find it); library/archive/historical-society statements FETCHED: the Oregon Historical Society research library and Pima County Public Library via Governing. Substantive sources per route: 9 named-roster (NYT, Slate, Lonely Planet, Which?, and five Wikivoyage pages standing in for the absent policy); 4 bibliography-chasing (Wikipedia:Signs of AI writing, Rettberg, arXiv 2604.20048, Gao and Thebault-Spieker); 4 lateral (Intrepid Times, BBC Travel, Oregon Historical Society, Governing). 17 substantive sources and 79 claims, plus 3 non-substantive entries (2 relays used only for routing, 1 negative result). Two blocked and routed around: dl.acm.org (abstract taken from the authors' institution page, marked abstract-only) and nytimes.com (Wayback). Two consecutive lateral searches (academic place-description measurement; archival-body statements) surfaced only sources already read or off-angle, so the roster is treated as exhausted. The gap the method names as worth most is partly filled here: four sources measure or catalogue the ENCYCLOPEDIC or GAZETTEER register directly (Wikipedia:Signs of AI writing with real AI town entries, the Wikivoyage VfD batch, arXiv 2604.20048, Gao and Thebault-Spieker), and five carry MECHANISM rather than tell (LPfi's beach-resort default, Rettberg's associative genre glitch, Tripadvisor's theme-extraction design, the OHS co-occurrence-read-as-relation, Ghani's register indifference).",
- "sourcesRead": [
-  {
-   "title": "A New Frontier for Travel Scammers: A.I.-Generated Guidebooks",
-   "url": "https://www.nytimes.com/2023/08/05/travel/amazon-guidebooks-artificial-intelligence.html",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2023-08-05",
-   "route": "wayback raw id_ capture 20260207205925 (live nytimes.com blocked to fetch)"
-  },
-  {
-   "title": "Wikivoyage talk:AI guidelines",
-   "url": "https://en.wikivoyage.org/wiki/Wikivoyage_talk:AI_guidelines",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2026-05-16 to 2026-09-06",
-   "route": "en.wikivoyage.org action=raw wikitext"
-  },
-  {
-   "title": "User:LPfi/AI guidelines (Wikivoyage draft, marked experimental)",
-   "url": "https://en.wikivoyage.org/wiki/User:LPfi/AI_guidelines",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "revision as of 2026-09",
-   "route": "en.wikivoyage.org action=raw wikitext"
-  },
-  {
-   "title": "ChatGPT Planned Me a Terrible Tallinn Day Trip, But Is Lonely Planet Any Better?",
-   "url": "https://intrepidtimes.com/2026/01/chatgpt-vs-lonely-planet-tallinn-day-trip/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2026-01-02",
-   "route": "curl browser user agent"
-  },
-  {
-   "title": "Lonely Planet's Editorial Policy on AI",
-   "url": "https://www.lonelyplanet.com/legal/ai-policy",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "page fetched 2026-09-06, undated",
-   "route": "curl browser user agent"
-  },
-  {
-   "title": "Your Town's Local History Books Have a Very Secret and Powerful New Buyer (Slate)",
-   "url": "https://slate.com/technology/2025/11/arcadia-publishing-artificial-intelligence-history-books-authors.html",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2025-11",
-   "route": "curl browser user agent"
-  },
-  {
-   "title": "Wikivoyage:Travellers' pub, section 'AI guidelines'",
-   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Travellers%27_pub",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2026-08 to 2026-09",
-   "route": "en.wikivoyage.org action=raw wikitext"
-  },
-  {
-   "title": "Wikivoyage:Votes for deletion/September 2025 (batch deletion of AI-generated Nigerian town articles)",
-   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/September_2025",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2025-08-22 to 2025-09",
-   "route": "action=raw wikitext"
-  },
-  {
-   "title": "Wikivoyage:Votes for deletion/January 2025 (Ambler, Alaska nominated as AI-written)",
-   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/January_2025",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2025-01-02",
-   "route": "action=raw wikitext"
-  },
-  {
-   "title": "Wikivoyage:Deletion policy",
-   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Deletion_policy",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "fetched 2026-09-06",
-   "route": "action=raw wikitext; NEGATIVE RESULT - contains no AI clause, contrary to the pub claim of a speedy-deletion provision"
-  },
-  {
-   "title": "Tripadvisor AI tool gives glowing reviews to dangerous hotels, Which? finds",
-   "url": "https://www.which.co.uk/policy-and-insight/article/tripadvisor-ai-tool-gives-glowing-reviews-to-dangerous-hotels-which-finds-adbnO9E3Dr2O",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2026-07",
-   "route": "curl browser user agent, live"
-  },
-  {
-   "title": "Tripadvisor AI summaries give glowing reviews to dangerous hotels, consumer watchdog finds (Euronews)",
-   "url": "https://www.euronews.com/travel/2026/07/03/tripadvisor-ai-summaries-give-glowing-reviews-to-dangerous-hotels-consumer-watchdog-finds",
-   "kind": "relay",
-   "substantive": false,
-   "date": "2026-07-03",
-   "route": "curl browser user agent; used only to locate the Which? primary, which was then read"
-  },
-  {
-   "title": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup advice page)",
-   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "revision fetched 2026-09-06",
-   "route": "en.wikipedia.org action=raw wikitext (220KB)"
-  },
-  {
-   "title": "Genre glitches and unexpected promotional phrases as a sign of AI writing",
-   "url": "https://jilltxt.net/genre-glitches-and-unexpected-promotional-phrases-as-a-sign-of-ai-writing/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2026-05-13 (updated 2026-05-15)",
-   "route": "curl browser user agent"
-  },
-  {
-   "title": "Chronicles from the Research Library: An Artificial Intelligence Research Request (Oregon Historical Society)",
-   "url": "https://www.ohs.org/blog/an-artificial-intelligence-research-request.cfm",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2024-01-09",
-   "route": "curl browser user agent"
-  },
-  {
-   "title": "How Local Librarians Keep AI Slop Off the Shelves (Governing)",
-   "url": "https://www.governing.com/artificial-intelligence/how-local-librarians-keep-ai-slop-off-the-shelves",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2025-10-03",
-   "route": "curl browser user agent"
-  },
-  {
-   "title": "The perils of letting AI plan your next trip (BBC Travel)",
-   "url": "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2025-09-26",
-   "route": "curl browser user agent, live bbc.com (cross-checked against wayback id_ capture 20260829164331)"
-  },
-  {
-   "title": "Culturally uneven urban perception in large language models",
-   "url": "https://arxiv.org/html/2604.20048v3",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2026-06-08 (v3; v1 2026-04-21)",
-   "route": "arxiv.org/abs then arxiv.org/html full text, curl browser user agent"
-  },
-  {
-   "title": "Is Your Chatbot a Tourist or a Townie? Quantifying Geographic and Localness Disparities in LLM Representations of Place",
-   "url": "https://ids.wisc.edu/2026/04/24/is-your-chatbot-a-tourist-or-a-townie-quantifying-geographic-and-localness-disparities-in-llm-representations-of-place",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2026-04-24",
-   "route": "dl.acm.org/doi/10.1145/3788058 blocked; author-institution abstract page read; ABSTRACT ONLY"
-  },
-  {
-   "title": "Incident 1636: Nonexistent 'Sacred Canyon of Humantay' (AI Incident Database)",
-   "url": "https://incidentdatabase.ai/cite/1636/",
-   "kind": "relay",
-   "substantive": false,
-   "date": "2025-09-29",
-   "route": "curl; used only to recover the BBC primary URL, which was then read"
-  }
- ],
  "claims": [
   {
    "feature": "detection and its failures",
@@ -477,7 +313,7 @@
    "routeHint": "action=raw wikitext",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "generative AI tools as of mid-2026; register measured = travel-gazetteer listings and place description. This is a MECHANISM claim, not a tell."
+   "modelEra": "generative AI tools as of mid-2026; register measured = travel-gazetteer listings and place description. MECHANISM claim, not a tell."
   },
   {
    "feature": "homogenisation",
@@ -662,7 +498,7 @@
   {
    "feature": "other: invented particular",
    "claim": "A local-history author reports that ChatGPT, asked about Eleanor Roosevelt, called Theodore Roosevelt her husband.",
-   "source": "Michael Burgess quoted by Nitish Pahwa, Slate, November 2025",
+   "source": "Michael Burgess quoted by Slate, November 2025",
    "url": "https://slate.com/technology/2025/11/arcadia-publishing-artificial-intelligence-history-books-authors.html",
    "quote": "Eleanor and her husband Theodore Roosevelt",
    "page": "section on the History Press authors",
@@ -677,7 +513,7 @@
   {
    "feature": "other: the missing archival particular",
    "claim": "The same author argues the research behind his local history is beyond AI because it required microfilm held at the state library.",
-   "source": "Michael Burgess quoted by Nitish Pahwa, Slate, November 2025",
+   "source": "Michael Burgess quoted by Slate, November 2025",
    "url": "https://slate.com/technology/2025/11/arcadia-publishing-artificial-intelligence-history-books-authors.html",
    "quote": "not going to go and get microfilm",
    "page": "section on the History Press authors",
@@ -804,10 +640,10 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2026-09-06",
-   "routeHint": "en.wikipedia.org action=raw wikitext; quote is contiguous in both wikitext and rendered text",
+   "routeHint": "en.wikipedia.org action=raw wikitext; quote contiguous in both wikitext and rendered text",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "LLMs generally as catalogued by Wikipedia editors through 2026, page flagged as needing update for the most recent models in August 2026; register measured = encyclopedic article prose. This is a STEERABILITY claim: the register instruction does not hold."
+   "modelEra": "LLMs generally as catalogued by Wikipedia editors through 2026, page flagged in August 2026 as needing update for the most recent models; register measured = encyclopedic article prose. STEERABILITY: the register instruction does not hold."
   },
   {
    "feature": "homogenisation",
@@ -834,7 +670,7 @@
    "kind": "own-words",
    "polarity": "applies",
    "date": "2023-06",
-   "routeHint": "action=raw wikitext; quote contiguous inside one highlight span, so also contiguous in the rendered page",
+   "routeHint": "action=raw wikitext; quote sits inside one highlight span so is contiguous in the rendered page too",
    "registerHint": "dossier-archivist",
    "confidence": "high",
    "modelEra": "unidentified LLM of the GPT-3.5/GPT-4 era, text added to Wikipedia in June 2023; register measured = encyclopedic gazetteer entry for a small settlement"
@@ -901,7 +737,7 @@
   },
   {
    "feature": "model era drift",
-   "claim": "The same page reports that the word delve was famously overused by ChatGPT in 2023 and early 2024 and dropped off sharply in 2025.",
+   "claim": "The same page reports that the word delve was famously overused by ChatGPT in 2023 and early 2024.",
    "source": "Wikipedia:Signs of AI writing, revision fetched 6 September 2026, citing Merrill, Chen and Kumer in The Washington Post and Geng and Trotta",
    "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
    "quote": "was famously overused by ChatGPT in 2023 and early 2024",
@@ -942,7 +778,7 @@
    "routeHint": "curl browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "LLM-assisted writing observed in May 2026, model unidentified; register measured = news and legal informational prose. The single most transferable mechanism for a record register."
+   "modelEra": "LLM-assisted writing observed in May 2026, model unidentified; register measured = news and legal informational prose"
   },
   {
    "feature": "other: genre glitch (promotional register intruding into a record)",
@@ -1017,7 +853,7 @@
    "routeHint": "curl browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "ChatGPT of late 2023; register measured = local history. MECHANISM claim: co-occurrence on a page read as a relation."
+   "modelEra": "ChatGPT of late 2023; register measured = local history. MECHANISM: co-occurrence on a page read as a relation."
   },
   {
    "feature": "reader and expert judgment",
@@ -1167,7 +1003,7 @@
    "routeHint": "action=raw wikitext",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "LLMs as assessed by Wikivoyage editors in August 2025; register measured = travel-gazetteer entries for small settlements. The claim locates invention precisely where a settlement dossier lives: thinly documented places."
+   "modelEra": "LLMs as assessed by Wikivoyage editors in August 2025; register measured = travel-gazetteer entries for small settlements"
   },
   {
    "feature": "detection and its failures",
@@ -1227,7 +1063,7 @@
    "routeHint": "action=raw wikitext",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "state of English Wikivoyage policy in September 2026; register measured = project policy. Corroborates that the angle's 'Wikivoyage AI-content policy' does not yet exist as adopted policy."
+   "modelEra": "state of English Wikivoyage policy in September 2026; register measured = project policy. Corroborates that the angle's 'Wikivoyage AI-content policy' does not exist as adopted policy."
   },
   {
    "feature": "other: policy status",
@@ -1254,7 +1090,7 @@
    "kind": "measurement",
    "polarity": "asserts",
    "date": "2026-06-08",
-   "routeHint": "arxiv.org/abs and arxiv.org/html full text, curl browser user agent",
+   "routeHint": "arxiv.org/abs plus arxiv.org/html full text, curl browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high",
    "modelEra": "GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash, measured April to June 2026; register measured = open-ended descriptions of street-view scenes, that is, place description"
@@ -1348,6 +1184,170 @@
    "registerHint": "dossier-archivist",
    "confidence": "medium",
    "modelEra": "unnamed LLMs benchmarked in 2026; register measured = local knowledge across census, news and social media. Confidence medium: abstract only."
+  }
+ ],
+ "complete": true,
+ "coverage": "Named roster: NYT Kugel and Hiltner FETCHED (live nytimes.com blocked, Wayback raw id_ capture 20260207205925) with its Originality.ai figures and the guidebook prose it quotes; Wikivoyage AI policy NOT FOUND AS ADOPTED POLICY (Wikivoyage:AI guidelines 404s and User:Globetrotter30/AI guidelines was deleted), so the surviving Wikivoyage talk:AI guidelines, the User:LPfi/AI guidelines draft, the Travellers' pub AI thread and two Votes-for-deletion cleanup discussions were fetched raw as wikitext instead; Slate on Arcadia FETCHED but is about local-history books as AI TRAINING DATA rather than AI-written local history, so it yields only two prose claims; Lonely Planet's AI policy FETCHED plus the Intrepid Times head-to-head test of ChatGPT against a Lonely Planet guide; TripAdvisor generated summaries covered by the Which? investigation read at the primary (Euronews used only to locate it); library, archive and historical-society statements FETCHED: the Oregon Historical Society research library and Pima County Public Library via Governing. Substantive sources per route: 9 named-roster, 4 bibliography-chasing (Wikipedia:Signs of AI writing, Rettberg, arXiv 2604.20048, Gao and Thebault-Spieker), 4 lateral (Intrepid Times, BBC Travel, OHS, Governing) — 17 substantive sources and 79 claims, plus 3 non-substantive entries (2 relays used only for routing, 1 negative result). Two sources blocked and routed around: dl.acm.org (abstract taken from the authors' institution page, marked abstract-only) and nytimes.com (Wayback). Two consecutive lateral searches surfaced only sources already read or off-angle, so the roster is treated as exhausted. The gap the method calls worth most is partly filled: four sources measure or catalogue the ENCYCLOPEDIC or GAZETTEER register directly, and five carry MECHANISM rather than tell.",
+ "sourcesRead": [
+  {
+   "title": "A New Frontier for Travel Scammers: A.I.-Generated Guidebooks",
+   "url": "https://www.nytimes.com/2023/08/05/travel/amazon-guidebooks-artificial-intelligence.html",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2023-08-05",
+   "route": "wayback raw id_ capture 20260207205925 (live nytimes.com blocked to fetch)"
+  },
+  {
+   "title": "Wikivoyage talk:AI guidelines",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage_talk:AI_guidelines",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2026-05-16 to 2026-09-06",
+   "route": "en.wikivoyage.org action=raw wikitext"
+  },
+  {
+   "title": "User:LPfi/AI guidelines (Wikivoyage draft, marked experimental)",
+   "url": "https://en.wikivoyage.org/wiki/User:LPfi/AI_guidelines",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "revision as of 2026-09",
+   "route": "en.wikivoyage.org action=raw wikitext"
+  },
+  {
+   "title": "ChatGPT Planned Me a Terrible Tallinn Day Trip, But Is Lonely Planet Any Better?",
+   "url": "https://intrepidtimes.com/2026/01/chatgpt-vs-lonely-planet-tallinn-day-trip/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2026-01-02",
+   "route": "curl browser user agent"
+  },
+  {
+   "title": "Lonely Planet's Editorial Policy on AI",
+   "url": "https://www.lonelyplanet.com/legal/ai-policy",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "page fetched 2026-09-06, undated",
+   "route": "curl browser user agent"
+  },
+  {
+   "title": "Your Town's Local History Books Have a Very Secret and Powerful New Buyer (Slate)",
+   "url": "https://slate.com/technology/2025/11/arcadia-publishing-artificial-intelligence-history-books-authors.html",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2025-11",
+   "route": "curl browser user agent"
+  },
+  {
+   "title": "Wikivoyage:Travellers' pub, section 'AI guidelines'",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Travellers%27_pub",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2026-08 to 2026-09",
+   "route": "en.wikivoyage.org action=raw wikitext"
+  },
+  {
+   "title": "Wikivoyage:Votes for deletion/September 2025 (batch deletion of AI-generated Nigerian town articles)",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/September_2025",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2025-08-22 to 2025-09",
+   "route": "action=raw wikitext"
+  },
+  {
+   "title": "Wikivoyage:Votes for deletion/January 2025 (Ambler, Alaska nominated as AI-written)",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/January_2025",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2025-01-02",
+   "route": "action=raw wikitext"
+  },
+  {
+   "title": "Wikivoyage:Deletion policy",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Deletion_policy",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "fetched 2026-09-06",
+   "route": "action=raw wikitext; NEGATIVE RESULT — contains no AI clause, contrary to the pub claim of a speedy-deletion provision"
+  },
+  {
+   "title": "Tripadvisor AI tool gives glowing reviews to dangerous hotels, Which? finds",
+   "url": "https://www.which.co.uk/policy-and-insight/article/tripadvisor-ai-tool-gives-glowing-reviews-to-dangerous-hotels-which-finds-adbnO9E3Dr2O",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-07",
+   "route": "curl browser user agent, live"
+  },
+  {
+   "title": "Tripadvisor AI summaries give glowing reviews to dangerous hotels, consumer watchdog finds (Euronews)",
+   "url": "https://www.euronews.com/travel/2026/07/03/tripadvisor-ai-summaries-give-glowing-reviews-to-dangerous-hotels-consumer-watchdog-finds",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2026-07-03",
+   "route": "curl browser user agent; used only to locate the Which? primary, which was then read"
+  },
+  {
+   "title": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup advice page)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "revision fetched 2026-09-06",
+   "route": "en.wikipedia.org action=raw wikitext (220KB)"
+  },
+  {
+   "title": "Genre glitches and unexpected promotional phrases as a sign of AI writing",
+   "url": "https://jilltxt.net/genre-glitches-and-unexpected-promotional-phrases-as-a-sign-of-ai-writing/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-05-13 (updated 2026-05-15)",
+   "route": "curl browser user agent"
+  },
+  {
+   "title": "Chronicles from the Research Library: An Artificial Intelligence Research Request (Oregon Historical Society)",
+   "url": "https://www.ohs.org/blog/an-artificial-intelligence-research-request.cfm",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2024-01-09",
+   "route": "curl browser user agent"
+  },
+  {
+   "title": "How Local Librarians Keep AI Slop Off the Shelves (Governing)",
+   "url": "https://www.governing.com/artificial-intelligence/how-local-librarians-keep-ai-slop-off-the-shelves",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2025-10-03",
+   "route": "curl browser user agent"
+  },
+  {
+   "title": "The perils of letting AI plan your next trip (BBC Travel)",
+   "url": "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2025-09-26",
+   "route": "curl browser user agent, live bbc.com (cross-checked against wayback id_ capture 20260829164331)"
+  },
+  {
+   "title": "Culturally uneven urban perception in large language models",
+   "url": "https://arxiv.org/html/2604.20048v3",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-06-08 (v3; v1 2026-04-21)",
+   "route": "arxiv.org/abs then arxiv.org/html full text, curl browser user agent"
+  },
+  {
+   "title": "Is Your Chatbot a Tourist or a Townie? Quantifying Geographic and Localness Disparities in LLM Representations of Place",
+   "url": "https://ids.wisc.edu/2026/04/24/is-your-chatbot-a-tourist-or-a-townie-quantifying-geographic-and-localness-disparities-in-llm-representations-of-place",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-04-24",
+   "route": "dl.acm.org/doi/10.1145/3788058 blocked; author-institution abstract page read; ABSTRACT ONLY"
+  },
+  {
+   "title": "Incident 1636: Nonexistent 'Sacred Canyon of Humantay' (AI Incident Database)",
+   "url": "https://incidentdatabase.ai/cite/1636/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2025-09-29",
+   "route": "curl; used only to recover the BBC primary URL, which was then read"
   }
  ]
 }

@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 9,
+ "indices": [
+  1232,
+  1233,
+  1236,
+  1237,
+  1238,
+  1241,
+  1242,
+  1243,
+  1246,
+  1247,
+  1250,
+  1251,
+  1255,
+  1258,
+  1259
+ ],
+ "claims": [
+  {
+   "index": 1232,
+   "feature": "no subtext",
+   "claim": "An ASIC assessor recorded that the model missed nuance, context and reading between the lines.",
+   "source": "Unnamed ASIC assessor, rubric comment quoted in Appendix C of the AWS draft report attached to ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "missed nuance, context and reading between the lines",
+   "page": "Appendix C, qualitative analysis"
+  },
+  {
+   "index": 1233,
+   "feature": "no subtext",
+   "claim": "The AWS report attributes a class of summary failures to the model's limited ability to handle content needing deep understanding of context, subtle nuance or implicit meaning.",
+   "source": "AWS Professional Services draft report 'ASIC Gen AI Document Summarisation PoC', attached to ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "a deep understanding of context, subtle nuances, or implicit meaning",
+   "page": "Section 6 Discussion, p.18"
+  },
+  {
+   "index": 1236,
+   "feature": "other: fabricated content in an archival summary",
+   "claim": "An ASIC assessor recorded that the model included analysis that did not come from the source document.",
+   "source": "Unnamed ASIC assessor, rubric comment quoted in the AWS draft report attached to ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "Included analysis which did not come from the document",
+   "page": "Section 5.1 Key Themes, p.17"
+  },
+  {
+   "index": 1237,
+   "feature": "other: fabricated content in an archival summary",
+   "claim": "The AWS report defines the hallucination risk it observed as text that was grammatically correct but on occasion factually inaccurate.",
+   "source": "AWS Professional Services draft report attached to ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "grammatically correct, but on occasion factually inaccurate",
+   "page": "Section 6.1 Limitations of the PoC, p.19"
+  },
+  {
+   "index": 1238,
+   "feature": "other: output instability under repetition",
+   "claim": "The AWS report records that testing was hampered because asking the model the same question twice might not yield the same answer.",
+   "source": "AWS Professional Services draft report attached to ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "Asking the same question twice may not yield the same answer.",
+   "page": "Section 6.1 Limitations of the PoC, p.19"
+  },
+  {
+   "index": 1241,
+   "feature": "other: measured accuracy on archival summarisation",
+   "claim": "BBC journalists judged 51 percent of the AI assistants' answers to news questions to have significant issues of some form.",
+   "source": "BBC, 'Representation of BBC News content in AI Assistants', February 2025",
+   "url": "https://www.bbc.co.uk/aboutthebbc/documents/bbc-research-into-ai-assistants.pdf",
+   "quote": "51% of all AI answers to questions about the news",
+   "page": "Executive summary, p.2"
+  },
+  {
+   "index": 1242,
+   "feature": "other: fabricated content in an archival summary",
+   "claim": "Of the AI answers that cited BBC content, 19 percent introduced factual errors such as incorrect statements, numbers and dates.",
+   "source": "BBC, 'Representation of BBC News content in AI Assistants', February 2025",
+   "url": "https://www.bbc.co.uk/aboutthebbc/documents/bbc-research-into-ai-assistants.pdf",
+   "quote": "19% of AI answers which cited BBC content introduced factual errors",
+   "page": "Executive summary, p.2"
+  },
+  {
+   "index": 1243,
+   "feature": "other: fabricated content in an archival summary",
+   "claim": "Thirteen percent of the quotations the assistants sourced from BBC articles were altered from the original or absent from the article cited.",
+   "source": "BBC, 'Representation of BBC News content in AI Assistants', February 2025",
+   "url": "https://www.bbc.co.uk/aboutthebbc/documents/bbc-research-into-ai-assistants.pdf",
+   "quote": "13% of the quotes sourced from BBC articles were either altered",
+   "page": "Executive summary, p.2"
+  },
+  {
+   "index": 1246,
+   "feature": "other: measured accuracy on archival summarisation",
+   "claim": "In the BBC-EBU multi-market study 45 percent of AI responses contained at least one significant issue of any type.",
+   "source": "BBC and European Broadcasting Union, 'News Integrity in AI Assistants', October 2025",
+   "url": "https://www.ebu.ch/Report/MIS-BBC/NI_AI_2025.pdf",
+   "quote": "45% of responses contained at least one significant issue",
+   "page": "Foreword, p.3"
+  },
+  {
+   "index": 1247,
+   "feature": "other: sourcing and attribution failure",
+   "claim": "Sourcing was the single biggest cause of significant issues in the BBC-EBU study, affecting 31 percent of all responses.",
+   "source": "BBC and European Broadcasting Union, 'News Integrity in AI Assistants', October 2025",
+   "url": "https://www.ebu.ch/Report/MIS-BBC/NI_AI_2025.pdf",
+   "quote": "Sourcing is the single biggest cause of significant issues (31%)",
+   "page": "Foreword, p.3"
+  },
+  {
+   "index": 1250,
+   "feature": "other: measured accuracy on archival summarisation",
+   "claim": "Accuracy accounted for 20 percent and insufficient context for 14 percent of significant issues in the BBC-EBU study.",
+   "source": "BBC and European Broadcasting Union, 'News Integrity in AI Assistants', October 2025",
+   "url": "https://www.ebu.ch/Report/MIS-BBC/NI_AI_2025.pdf",
+   "quote": "Accuracy (20%) and providing sufficient context (14%)",
+   "page": "High-level findings, p.10"
+  },
+  {
+   "index": 1251,
+   "feature": "other: measured factual accuracy on dated historical facts",
+   "claim": "Asked direct verifiable questions about randomly selected federal court cases, the models hallucinated between 58 percent and 88 percent of the time.",
+   "source": "Matthew Dahl, Varun Magesh, Mirac Suzgun and Daniel E. Ho, 'Large Legal Fictions: Profiling Legal Hallucinations in Large Language Models', Journal of Legal Analysis (arXiv v2, 21 June 2024)",
+   "url": "https://arxiv.org/pdf/2401.01301",
+   "quote": "LLMs hallucinate between 58% (ChatGPT 4) and 88% (Llama 2)",
+   "page": "Section 1 Introduction, p.6"
+  },
+  {
+   "index": 1255,
+   "feature": "other: uncritical acceptance of a false premise",
+   "claim": "The authors report that the models often uncritically accept a user's incorrect legal assumptions.",
+   "source": "Dahl, Magesh, Suzgun and Ho, 'Large Legal Fictions', Journal of Legal Analysis (arXiv v2, 21 June 2024)",
+   "url": "https://arxiv.org/pdf/2401.01301",
+   "quote": "often uncritically accept users' incorrect legal assumptions",
+   "page": "Abstract"
+  },
+  {
+   "index": 1258,
+   "feature": "other: measured factual accuracy on dated historical facts",
+   "claim": "On OpenAI's SimpleQA benchmark of short fact-seeking questions GPT-4o answered 38.2 percent correctly.",
+   "source": "Jason Wei, Nguyen Karina, Hyung Won Chung, Yunxin Joy Jiao, Spencer Papay, Amelia Glaese, John Schulman and William Fedus (OpenAI), 'Measuring short-form factuality in large language models' (SimpleQA), arXiv, 7 November 2024",
+   "url": "https://arxiv.org/pdf/2411.04368",
+   "quote": "GPT-4o 38.2",
+   "page": "Table 3, p.6"
+  },
+  {
+   "index": 1259,
+   "feature": "other: measured factual accuracy on dated historical facts",
+   "claim": "OpenAI o1-preview answered 42.7 percent of SimpleQA questions correctly, the highest of the models reported.",
+   "source": "Wei, Karina, Chung et al. (OpenAI), 'Measuring short-form factuality in large language models' (SimpleQA), arXiv, 7 November 2024",
+   "url": "https://arxiv.org/pdf/2411.04368",
+   "quote": "OpenAI o1-preview 42.7",
+   "page": "Table 3, p.6"
+  }
+ ]
+}

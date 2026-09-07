@@ -1,6 +1,6 @@
 {
  "complete": true,
- "coverage": "Named roster: r/worldbuilding's AI rule FETCHED (Wayback raw capture of old.reddit, 2026-08-19; live reddit, old.reddit and the .json endpoints are all login-walled or 403); r/DnDBehindTheScreen's rule 8 'No AI-centric content' FETCHED as a title only (Wayback sidebar captures 2025-03 and 2026-04) and its rule body NOT FOUND (no Wayback capture of about/rules or a rules wiki page since 2020), and no moderator announcement post on either subreddit was reachable; LegendKeeper FETCHED (its founder's 2025 author's note is the one worldbuilding-vendor line on generated text); World Anvil BLOCKED (403 on the community and codex pages, and no AI policy page found); Kanka and Obsidian Portal have no AI policy \u2014 the Obsidian Portal forum thread on ChatGPT-generated wiki text was recovered via Wayback instead; DriveThruRPG's and DMs Guild's own AI policy pages BLOCKED by Cloudflare with no Wayback capture, so the policy wording is taken from Wargamer and EN World quoting it; DriveThruRPG and DMs Guild product pages and their customer reviews BLOCKED (403 on the store, no capture), so no one-star review text was obtained \u2014 the reviewer evidence comes from tenfootpole.org instead, where two products (one carrying the store's own 'Contains AI-Generated Content' label) are reviewed line by line with their comment threads; Dicebreaker NOT FOUND on AI text specifically (the outlet wound down) and Polygon's coverage is of AI art, not text; Rascal News FETCHED across four articles, of which the 4 Pillar Games investigation is the richest source in the whole sweep because its subject is generated ARCHIVAL prose. Substantive sources by route: 12 fetched live with a browser user agent, 3 recovered through Wayback raw captures, 1 arXiv HTML, 2 non-substantive. The largest find against the program's stated gap \u2014 a source that measured the archival or encyclopedic register \u2014 is Wikipedia's 'Signs of AI writing' field guide, which catalogues the tells with dated examples drawn from settlement and institution articles.",
+ "coverage": "Named roster: r/worldbuilding's AI rule FETCHED (Wayback raw capture of old.reddit, 2026-08-19; live reddit, old.reddit and the .json endpoints are all login-walled or 403); r/DnDBehindTheScreen's rule 8 \"No AI-centric content\" FETCHED as a title only (Wayback sidebar captures 2025-03 and 2026-04) and its rule body NOT FOUND (no capture of about/rules or a rules wiki since 2020), with no moderator announcement post reachable on either subreddit; LegendKeeper FETCHED (its founder's 2025 author's note is the one worldbuilding-vendor line on generated text); World Anvil BLOCKED (403 on community and codex pages, no AI policy page found); Kanka and Obsidian Portal have no AI policy, so the Obsidian Portal forum thread on ChatGPT-generated wiki text was recovered via Wayback instead; DriveThruRPG's and DMs Guild's own AI policy pages BLOCKED by Cloudflare with no Wayback capture, so the wording comes from Wargamer and EN World quoting it; DriveThruRPG and DMs Guild product pages and their customer reviews BLOCKED (403, no capture), so no one-star review text was obtained — the reviewer evidence comes from tenfootpole.org instead, where two products (one carrying the store's own \"Contains AI-Generated Content\" label) are reviewed line by line with their comment threads; Dicebreaker NOT FOUND on AI text specifically (the outlet wound down) and Polygon's coverage is of AI art, not text; Rascal News FETCHED across four articles, of which the 4 Pillar Games investigation is the richest source in the sweep because its subject is generated ARCHIVAL prose. Substantive sources by route: 18 fetched live with a browser user agent, 3 recovered through Wayback raw captures, 1 arXiv HTML; 3 non-substantive. The largest find against the program's stated gap — a source that measured the archival or encyclopedic register — is Wikipedia's \"Signs of AI writing\" field guide, which catalogues the tells with dated examples drawn from settlement and institution articles.",
  "sourcesRead": [
   {
    "title": "r/worldbuilding subreddit rules wiki (rule 4, 'AI Content')",
@@ -67,7 +67,7 @@
    "route": "live curl with browser UA"
   },
   {
-   "title": "Whizbang Dustyboots, 'DMs Guild and DriveThruRPG ban AI written works\u2026', EN World",
+   "title": "Whizbang Dustyboots, 'DMs Guild and DriveThruRPG ban AI written works…', EN World",
    "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
    "kind": "reception",
    "substantive": true,
@@ -75,7 +75,7 @@
    "route": "live curl with browser UA"
   },
   {
-   "title": "Chase Carter, \"Dungeons & Dragons' new art direction isn't AI generated but almost worse\u2014boring\", Rascal News",
+   "title": "Chase Carter, \"Dungeons & Dragons' new art direction isn't AI generated but almost worse—boring\", Rascal News",
    "url": "https://www.rascal.news/dungeons-dragons-new-art-direction-isnt-ai-generated-but-almost-worse-boring/",
    "kind": "analysis",
    "substantive": false,
@@ -83,7 +83,7 @@
    "route": "live curl; body paywalled after the lede, and the subject is illustration not prose"
   },
   {
-   "title": "Mike Shea (Sly Flourish), 'The Best LLM for Generating RPG Stuff \u2013 Your Brain'",
+   "title": "Mike Shea (Sly Flourish), 'The Best LLM for Generating RPG Stuff – Your Brain'",
    "url": "https://slyflourish.com/best_llm.html",
    "kind": "analysis",
    "substantive": true,
@@ -99,7 +99,7 @@
    "route": "live curl with browser UA"
   },
   {
-   "title": "Mike Didymus-True, 'Tabletop industry veteran Ryan Dancey loses Alderac COO job\u2026', Rascal News",
+   "title": "Mike Didymus-True, 'Tabletop industry veteran Ryan Dancey loses Alderac COO job…', Rascal News",
    "url": "https://www.rascal.news/tabletop-industry-veteran-ryan-dancey-loses-alderac-coo-job-after-saying-ai-can-generate-game-ideas-as-good-as-some-of-his-companys-designs/",
    "kind": "reception",
    "substantive": true,
@@ -115,7 +115,7 @@
    "route": "Wayback raw id_ capture; live forum returns 403"
   },
   {
-   "title": "AngusA, 'Dungeon Master of Disaster? Ken Whitman's AI Bios Stir TTRPG Chaos', Tabletop Sentinel",
+   "title": "AngusA, \"Dungeon Master of Disaster? Ken Whitman's AI Bios Stir TTRPG Chaos\", Tabletop Sentinel",
    "url": "https://www.tabletopsentinel.com/news/hobby/dungeon-master-of-disaster-ken-whitmans-ai-bios-stir-ttrpg-chaos",
    "kind": "analysis",
    "substantive": true,
@@ -123,7 +123,7 @@
    "route": "live curl with browser UA"
   },
   {
-   "title": "rhythmsoundmotion, 'ChatGPT writes \u201dMissed Opportunities in Generic Tabletop RPG Campaign Settings\u201d', EN World",
+   "title": "rhythmsoundmotion, 'ChatGPT writes ”Missed Opportunities in Generic Tabletop RPG Campaign Settings”', EN World",
    "url": "https://www.enworld.org/threads/chatgpt-writes-%E2%80%9Dmissed-opportunities-in-generic-tabletop-rpg-campaign-settings%E2%80%9D.709326/",
    "kind": "reader",
    "substantive": true,
@@ -139,11 +139,11 @@
    "route": "live curl with browser UA"
   },
   {
-   "title": "Kapoor, Zhang et al., 'AI Rules? Characterizing Reddit Community Policies Towards AI-Generated Content'",
+   "title": "'AI Rules? Characterizing Reddit Community Policies Towards AI-Generated Content', arXiv",
    "url": "https://arxiv.org/html/2410.11698v3",
    "kind": "measurement",
    "substantive": true,
-   "date": "arXiv v3, 2024-10 onward",
+   "date": "arXiv v3",
    "route": "live curl of the arXiv HTML rendering"
   },
   {
@@ -155,7 +155,7 @@
    "route": "Wayback raw id_ capture; the piece is about a content-guidelines dispute, not AI"
   },
   {
-   "title": "Bryce Lynch, review of 'Three Witches' (Rutibex) plus comment thread, tenfootpole.org \u2014 the product is labelled 'Contains AI-Generated Content' on DriveThruRPG",
+   "title": "Bryce Lynch, review of 'Three Witches' (Rutibex) plus comment thread, tenfootpole.org — the product is labelled 'Contains AI-Generated Content' on DriveThruRPG",
    "url": "https://tenfootpole.org/ironspike/?p=9842",
    "kind": "reception",
    "substantive": true,
@@ -163,7 +163,7 @@
    "route": "live curl with browser UA"
   },
   {
-   "title": "'Bryce rebuts \u2013 Greg Gawron, Founder, Advanced Fantasy Games' comment thread, tenfootpole.org",
+   "title": "'Bryce rebuts – Greg Gawron, Founder, Advanced Fantasy Games' comment thread, tenfootpole.org",
    "url": "https://tenfootpole.org/ironspike/?p=10508",
    "kind": "reader",
    "substantive": true,
@@ -179,19 +179,19 @@
    "route": "live curl with browser UA"
   },
   {
-   "title": "Chase Carter, 'ENNIE Awards' updated submission policy won't accept AI projects\u2026 next year', Rascal News",
+   "title": "Chase Carter, \"ENNIE Awards' updated submission policy won't accept AI projects… next year\", Rascal News",
    "url": "https://www.rascal.news/ennie-awards-updated-submission-policy-wont-accept-ai-projects-next-year/",
    "kind": "reception",
    "substantive": true,
    "date": "2025-01-27",
-   "route": "live curl with browser UA (lede and the quoted policy are outside the paywall)"
+   "route": "live curl with browser UA (lede and quoted policy are outside the paywall)"
   },
   {
    "title": "WikiProject AI Cleanup, 'Wikipedia:Signs of AI writing' (advice page, not policy)",
    "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
    "kind": "analysis",
    "substantive": true,
-   "date": "maintenance notices dated August and September 2026; examples dated 2023\u20132026",
+   "date": "maintenance notices dated August and September 2026; examples dated 2023–2026",
    "route": "live curl with browser UA"
   },
   {
@@ -247,7 +247,7 @@
    "routeHint": "live curl with browser UA",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "no model named; observation dated August 2025; register is worldbuilding wiki/article text sold by AI worldbuilding tools"
+   "modelEra": "no model named; observation August 2025; register is worldbuilding wiki/article text sold by AI worldbuilding tools"
   },
   {
    "feature": "discourse-level tells",
@@ -265,7 +265,7 @@
    "modelEra": "model not named beyond 'LLM'; reading January 2026, published May 2026; register measured is biographical/archival history prose"
   },
   {
-   "feature": "other: mechanism \u2014 no model of what was written",
+   "feature": "other: mechanism — no model of what was written",
    "claim": "Appelcline attributes those cross-sentence false implications to the model not knowing what it is writing.",
    "source": "Shannon Appelcline, email to Rascal News, quoted by Lin Codega",
    "url": "https://www.rascal.news/ai-generated-profiles-of-ttrpg-designers-ignite-fury-across-social-media/",
@@ -314,7 +314,7 @@
    "claim": "Codega reports that Greg Costikyan's profile omitted his game Violence, which she attributes to the model not connecting his pseudonym Designer X to him.",
    "source": "Lin Codega, Rascal News",
    "url": "https://www.rascal.news/ai-generated-profiles-of-ttrpg-designers-ignite-fury-across-social-media/",
-   "quote": "wasn\u2019t even mentioned in the overwrought bolus of his profile",
+   "quote": "wasn’t even mentioned in the overwrought bolus of his profile",
    "page": "paragraph on Costikyan",
    "kind": "analysis",
    "polarity": "asserts",
@@ -370,7 +370,7 @@
    "modelEra": "model unnamed; May 2026; register measured is encyclopedic designer-profile prose"
   },
   {
-   "feature": "other: mechanism \u2014 corruption of the record",
+   "feature": "other: mechanism — corruption of the record",
    "claim": "Appelcline told Ken Whitman on LinkedIn that publishing the LLM-written histories was poisoning the well of history.",
    "source": "Shannon Appelcline, LinkedIn message of January 2026, quoted by Lin Codega",
    "url": "https://www.rascal.news/ai-generated-profiles-of-ttrpg-designers-ignite-fury-across-social-media/",
@@ -415,7 +415,7 @@
    "modelEra": "Google Gemini, December 2025; register measured is RPG setting and play-transcript prose"
   },
   {
-   "feature": "other: mechanism \u2014 no mental model",
+   "feature": "other: mechanism — no mental model",
    "claim": "Alexander argues an LLM cannot form a mental model of a text and so can only produce a simulacrum of criticism of it.",
    "source": "Justin Alexander, The Alexandrian",
    "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
@@ -434,7 +434,7 @@
    "claim": "Bryce Lynch, who reviews commercial adventures and setting books full time, says he cannot recognise AI-written products that his readers spot easily.",
    "source": "Bryce Lynch, comment on his own review, tenfootpole.org",
    "url": "https://tenfootpole.org/ironspike/?p=10009",
-   "quote": "I just don\u2019t understand how people can recognize it so easily.",
+   "quote": "I just don’t understand how people can recognize it so easily.",
    "page": "comment of October 22, 2025 at 8:49 am",
    "kind": "reception",
    "polarity": "asserts",
@@ -476,7 +476,7 @@
   },
   {
    "feature": "other: human tells rather than machine tells",
-   "claim": "The same commenter says the reliable first-glance signs are human ones \u2014 misspellings and long widely spaced constructions \u2014 because LLMs have good spelling and bad memory.",
+   "claim": "The same commenter says the reliable first-glance signs are human ones — misspellings and long widely spaced constructions — because LLMs have good spelling and bad memory.",
    "source": "commenter 'Peltast', tenfootpole.org comment thread",
    "url": "https://tenfootpole.org/ironspike/?p=10009",
    "quote": "LLMs have good spelling and bad memory",
@@ -494,7 +494,7 @@
    "claim": "A commenter argues that the recognisable 'ChatGPT Voice' is deliberately built into that product and is not common to all LLMs, so readers who know only ChatGPT overestimate their ability to detect generated text.",
    "source": "commenter 'LettuceBeReal', tenfootpole.org comment thread",
    "url": "https://tenfootpole.org/ironspike/?p=10009",
-   "quote": "the \u201cChatGPT Voice\u201d that OpenAI purposefully bakes into it",
+   "quote": "the “ChatGPT Voice” that OpenAI purposefully bakes into it",
    "page": "comment of October 26, 2025 at 10:43 am",
    "kind": "reader",
    "polarity": "disputes",
@@ -569,7 +569,7 @@
    "claim": "Kobold Press's No-AI Pledge, quoted by Mike Shea, states that the publisher does not use AI to generate text for its game design.",
    "source": "Wolfgang Baur / Kobold Press No-AI Pledge, quoted by Mike Shea, Sly Flourish",
    "url": "https://slyflourish.com/best_llm.html",
-   "quote": "we don\u2019t use AI to generate text for our game design",
+   "quote": "we don’t use AI to generate text for our game design",
    "page": "section 'The Current State of Generative AI in TTRPGs'",
    "kind": "vendor",
    "polarity": "asserts",
@@ -585,14 +585,14 @@
    "source": "Mike Shea, Sly Flourish",
    "url": "https://slyflourish.com/best_llm.html",
    "quote": "not great for generating game content",
-   "page": "section 'Your Best Large Language Model \u2013 Your Brain'",
+   "page": "section 'Your Best Large Language Model – Your Brain'",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2024-09-30",
    "routeHint": "live curl with browser UA",
    "registerHint": "dm-page",
    "confidence": "high",
-   "modelEra": "ChatGPT and similar, September 2024; register measured is RPG prep content \u2014 NPCs, locations, encounters"
+   "modelEra": "ChatGPT and similar, September 2024; register measured is RPG prep content — NPCs, locations, encounters"
   },
   {
    "feature": "measurement",
@@ -717,10 +717,10 @@
   {
    "feature": "other: community rule rationale",
    "claim": "A study of Reddit community AI rules finds quality and authenticity to be the concerns most frequently given as justification.",
-   "source": "Kapoor et al., 'AI Rules? Characterizing Reddit Community Policies Towards AI-Generated Content', arXiv",
+   "source": "'AI Rules? Characterizing Reddit Community Policies Towards AI-Generated Content', arXiv",
    "url": "https://arxiv.org/html/2410.11698v3",
    "quote": "quality and authenticity as the most frequently mentioned concerns",
-   "page": "Discussion / results summary",
+   "page": "results summary",
    "kind": "measurement",
    "polarity": "asserts",
    "date": "arXiv HTML v3",
@@ -734,7 +734,7 @@
    "claim": "Reviewing 'Three Witches', a product whose DriveThruRPG description is labelled as containing AI-generated content, Bryce Lynch writes that nothing in its hex crawl is specific.",
    "source": "Bryce Lynch, tenfootpole.org review of 'Three Witches' by Rutibex",
    "url": "https://tenfootpole.org/ironspike/?p=9842",
-   "quote": "There\u2019s nothing specific about anything in that fucking hex crawl.",
+   "quote": "There’s nothing specific about anything in that fucking hex crawl.",
    "page": "review body, on the hex descriptions",
    "kind": "reception",
    "polarity": "asserts",
@@ -852,7 +852,7 @@
   {
    "feature": "other: label without content",
    "claim": "A commenter says the previewed product's 'Adventure Summary' is not a summary of the adventure and its 'Players Background' provides no background.",
-   "source": "commenter 'Beoric', tenfootpole.org comment thread on 'Bryce rebuts \u2013 Greg Gawron'",
+   "source": "commenter 'Beoric', tenfootpole.org comment thread on 'Bryce rebuts – Greg Gawron'",
    "url": "https://tenfootpole.org/ironspike/?p=10508",
    "quote": "which is not, in fact, a summary of the adventure",
    "page": "comment of June 17, 2026 at 10:56 pm",
@@ -867,9 +867,9 @@
   {
    "feature": "other: voice recognition",
    "claim": "The same commenter says those two sections are reminiscent of ChatGPT's voice, allowing either that a model wrote them or that a human steeped in LLM writing mimicked its style.",
-   "source": "commenter 'Beoric', tenfootpole.org comment thread on 'Bryce rebuts \u2013 Greg Gawron'",
+   "source": "commenter 'Beoric', tenfootpole.org comment thread on 'Bryce rebuts – Greg Gawron'",
    "url": "https://tenfootpole.org/ironspike/?p=10508",
-   "quote": "reminiscent of ChatGPT\u2019s voice",
+   "quote": "reminiscent of ChatGPT’s voice",
    "page": "comment of June 17, 2026 at 10:56 pm",
    "kind": "reader",
    "polarity": "asserts",
@@ -884,7 +884,7 @@
    "claim": "A commenter judges that an adventure widely suspected of being machine-written does not read like an LLM, and says people wildly overestimate LLMs.",
    "source": "commenter 'Quentin', tenfootpole.org comment thread on 'The Snake Temple Ruins'",
    "url": "https://tenfootpole.org/ironspike/?p=9829",
-   "quote": "It doesn\u2019t read like an LLM.",
+   "quote": "It doesn’t read like an LLM.",
    "page": "comment of June 21, 2025 at 8:45 am",
    "kind": "reader",
    "polarity": "disputes",
@@ -895,7 +895,7 @@
    "modelEra": "no model named; June 2025; register measured is dungeon room description"
   },
   {
-   "feature": "other: mechanism \u2014 long-range dependency",
+   "feature": "other: mechanism — long-range dependency",
    "claim": "That commenter's stated reason is that a model struggles to hold enough separate things in mind at once to have written a chain of clues linking a broken sword in one room to a jammed secret door in another.",
    "source": "commenter 'Quentin', tenfootpole.org comment thread on 'The Snake Temple Ruins'",
    "url": "https://tenfootpole.org/ironspike/?p=9829",
@@ -910,11 +910,11 @@
    "modelEra": "no model named; June 2025; register measured is interlocking dungeon room descriptions"
   },
   {
-   "feature": "other: mechanism \u2014 relations between facts",
+   "feature": "other: mechanism — relations between facts",
    "claim": "He adds that such a chain involves relationships a machine cannot understand or extrapolate from.",
    "source": "commenter 'Quentin', tenfootpole.org comment thread on 'The Snake Temple Ruins'",
    "url": "https://tenfootpole.org/ironspike/?p=9829",
-   "quote": "involving relationships it can\u2019t understand or extrapolate from",
+   "quote": "involving relationships it can’t understand or extrapolate from",
    "page": "comment of June 21, 2025 at 8:45 am",
    "kind": "reader",
    "polarity": "asserts",
@@ -993,16 +993,16 @@
    "page": "section 'Superficial analyses'",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "examples dated 2023\u20132025",
+   "date": "examples dated 2023–2025",
    "routeHint": "live curl with browser UA",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "chatbots generally, examples 2023\u20132025; register measured is encyclopedia article prose"
+   "modelEra": "chatbots generally, examples 2023–2025; register measured is encyclopedia article prose"
   },
   {
    "feature": "other: participial evaluative tail",
-   "claim": "It cites a June 2023 revision of the article on Dou\u00e9ra in which a census population figure is followed by the clause that it creates a lively community within its borders.",
-   "source": "WikiProject AI Cleanup, 'Wikipedia:Signs of AI writing', quoting the Dou\u00e9ra article",
+   "claim": "It cites a June 2023 revision of the article on Douéra in which a census population figure is followed by the clause that it creates a lively community within its borders.",
+   "source": "WikiProject AI Cleanup, 'Wikipedia:Signs of AI writing', quoting the Douéra article",
    "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
    "quote": "creating a lively community within its borders.",
    "page": "section 'Superficial analyses', examples",
@@ -1023,11 +1023,11 @@
    "page": "section 'Vague attributions and overgeneralization of opinions'",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "examples dated 2025\u20132026",
+   "date": "examples dated 2025–2026",
    "routeHint": "live curl with browser UA",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "chatbots generally, examples 2025\u20132026; register measured is encyclopedia article prose"
+   "modelEra": "chatbots generally, examples 2025–2026; register measured is encyclopedia article prose"
   },
   {
    "feature": "other: vague connection instead of predication",

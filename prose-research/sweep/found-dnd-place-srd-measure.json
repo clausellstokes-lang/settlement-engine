@@ -1,112 +1,4 @@
 {
- "complete": true,
- "coverage": "Named roster (SRD 5.1 and SRD 5.2.1) fetched raw as PDFs and measured in full; nothing in the named roster was not found or blocked. 13 sources read, 12 substantive: 5 primaries/vendor documents fetched direct (both SRD PDFs, the WotC SRD page and its 5.2 FAQ, the official conversion guide, the 2018 Basic Rules PDF), 4 by bibliography chasing off the SRD page and its FAQ (the two D&D Beyond studio posts, the conversion guide, the forum thread), 3 by lateral search (Merwin on boxed text, the ScreenRant designer interview, Dungeon Master\u2019s Workshop), 1 as an extraction control (5thsrd.org); Tribality read and rejected as a verbatim reprint of the WotC FAQ. The SRD contains no read-aloud text, no settlement tables and no civic-record vocabulary, so the measured place corpus is small by nature: 1,530 words in SRD 5.1 Appendix PH-C plus 550 words of pantheon prose, both of which SRD 5.2.1 deletes.",
- "sourcesRead": [
-  {
-   "title": "System Reference Document 5.1 (CC-BY-4.0 edition), Wizards of the Coast",
-   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
-   "kind": "primary",
-   "substantive": true,
-   "date": "2023",
-   "route": "direct PDF download with a browser UA; 403 pages; pdftotext extraction"
-  },
-  {
-   "title": "System Reference Document 5.2.1 (CC-BY-4.0), Wizards of the Coast",
-   "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
-   "kind": "primary",
-   "substantive": true,
-   "date": "2025-05-01",
-   "route": "direct PDF download with a browser UA; 364 pages; pdftotext extraction"
-  },
-  {
-   "title": "System Reference Document (SRD) page, Wizards of the Coast / D&D Beyond (SRD 5.2 FAQ)",
-   "url": "https://dnd.wizards.com/resources/systems-reference-document",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "2026-03-02",
-   "route": "curl browser UA; dnd.wizards.com redirects to www.dndbeyond.com/srd"
-  },
-  {
-   "title": "Converting to System Reference Document 5.2.1, Wizards of the Coast",
-   "url": "https://media.dndbeyond.com/compendium-images/srd/guide/converting-to-srd-5.2.1.pdf",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "2025-05-27",
-   "route": "direct PDF download with a browser UA"
-  },
-  {
-   "title": "D&D Basic Rules v1.0 (November 2018), Wizards of the Coast",
-   "url": "https://media.wizards.com/2018/dnd/downloads/DnD_BasicRules_2018.pdf",
-   "kind": "primary",
-   "substantive": true,
-   "date": "2018-11",
-   "route": "direct PDF download with a browser UA"
-  },
-  {
-   "title": "2024 Core Rulebooks to Expand the SRD \u2014 DND Staff, D&D Beyond",
-   "url": "https://www.dndbeyond.com/posts/1717-2024-core-rulebooks-to-expand-the-srd",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "2024-05-06",
-   "route": "curl browser UA; body in served HTML"
-  },
-  {
-   "title": "You Can Now Publish Your Own Creations Using the New Core Rules \u2014 DND Staff, D&D Beyond",
-   "url": "https://www.dndbeyond.com/posts/1949-you-can-now-publish-your-own-creations-using-the",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "2025-05-27",
-   "route": "curl browser UA; body in served HTML"
-  },
-  {
-   "title": "Let\u2019s Design an Adventure: Boxed Text \u2014 Shawn Merwin, D&D Beyond",
-   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2019-11-06",
-   "route": "curl browser UA; body in served HTML"
-  },
-  {
-   "title": "\u201cEverything In There Better Be Cracking On Topic\u201d: D&D Designers Talk The 2024 Dungeon Master\u2019s Guide \u2014 Ben Brosofsky, ScreenRant",
-   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-interview-perkins-wyatt/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2024-10-25",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Dungeon Mastering 101: Mastering the Boxed Text \u2014 The Archmage, Dungeon Master\u2019s Workshop",
-   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2019-09-27",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Official SRD 5.2 Discussion Thread, page 3 \u2014 D&D Beyond forums",
-   "url": "https://www.dndbeyond.com/forums/d-d-beyond-general/general-discussion/219273-official-srd-5-2-discussion-thread-srd-5-2-1-now?page=3",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2025-04-24",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "The Planes of Existence \u2014 5thSRD community rendering of SRD 5.1",
-   "url": "https://5thsrd.org/adventuring/planes_of_existence/",
-   "kind": "relay",
-   "substantive": true,
-   "date": "2026-09-06",
-   "route": "curl browser UA; used only as an extraction control"
-  },
-  {
-   "title": "D&D \u2014 System Reference Document v5.2 \u2014 Tribality",
-   "url": "https://www.tribality.com/2025/04/23/dd-system-reference-document-v5-2/",
-   "kind": "relay",
-   "substantive": false,
-   "date": "2025-04-23",
-   "route": "curl browser UA; reprints the WotC FAQ verbatim, adds no independent analysis"
-  }
- ],
  "claims": [
   {
    "feature": "place and institution description",
@@ -250,7 +142,7 @@
   },
   {
    "feature": "other: contractions",
-   "claim": "SRD 5.1 Appendix PH-C contains 3 contractions in 1,530 words (They\u2019re, doesn\u2019t, don\u2019t), a rate of 1.96 per 1,000 words.",
+   "claim": "SRD 5.1 Appendix PH-C contains 3 contractions in 1,530 words (They’re, doesn’t, don’t), a rate of 1.96 per 1,000 words.",
    "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
    "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
    "quote": "",
@@ -349,7 +241,7 @@
   {
    "feature": "boxed text form",
    "claim": "Neither SRD contains any read-aloud or boxed text: a case-insensitive search for \"read aloud\", \"read-aloud\", \"read the following\", \"boxed text\" and \"aloud to the players\" returns zero matches across all 403 pages of SRD 5.1 and all 364 pages of SRD 5.2.1.",
-   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction and Finder measurement over SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0, 364 pp.), pdftotext extraction",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
    "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
    "quote": "",
    "page": "whole of both documents",
@@ -363,7 +255,7 @@
   {
    "feature": "place and institution description",
    "claim": "Neither SRD contains a settlement table; the word \"settlement\" occurs twice in the whole of SRD 5.1 and once in SRD 5.2.1, always as a rules noun.",
-   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction and Finder measurement over SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0, 364 pp.), pdftotext extraction",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
    "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
    "quote": "",
    "page": "whole of both documents",
@@ -391,7 +283,7 @@
   {
    "feature": "civic record register",
    "claim": "The strings \"gazetteer\", \"chronicle\", \"annal\", \"archive\" and \"ledger\" occur zero times in the full text of SRD 5.1 and zero times in the full text of SRD 5.2.1.",
-   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction and Finder measurement over SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0, 364 pp.), pdftotext extraction",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
    "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
    "quote": "",
    "page": "whole of both documents",
@@ -463,7 +355,7 @@
    "claim": "Wizards of the Coast states that it removed the \"Between Adventures\" section from SRD 5.2 because it is not in the 2024 core rules.",
    "source": "Wizards of the Coast / D&D Beyond, \"System Reference Document\" page, last updated March 02, 2026",
    "url": "https://dnd.wizards.com/resources/systems-reference-document",
-   "quote": "Removed: \u201cBetween Adventures\u201d section as that is not featured",
+   "quote": "Removed: “Between Adventures” section as that is not featured",
    "page": "SRD page, Game Rules row",
    "kind": "vendor",
    "polarity": "asserts",
@@ -531,7 +423,7 @@
   {
    "feature": "terminology consistency",
    "claim": "The phrase \"difficult terrain\" appears in lower case 48 times in SRD 5.1 and zero times in SRD 5.2.1, where it appears capitalized 52 times.",
-   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction and Finder measurement over SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0, 364 pp.), pdftotext extraction",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
    "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
    "quote": "",
    "page": "whole of both documents",
@@ -545,7 +437,7 @@
   {
    "feature": "terminology consistency",
    "claim": "The phrase \"bright light\" appears in lower case 54 times in SRD 5.1 and zero times in SRD 5.2.1, where it appears capitalized 50 times.",
-   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction and Finder measurement over SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0, 364 pp.), pdftotext extraction",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
    "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
    "quote": "",
    "page": "whole of both documents",
@@ -559,7 +451,7 @@
   {
    "feature": "terminology consistency",
    "claim": "The phrase \"temporary hit points\" appears in lower case 27 times in SRD 5.1 and zero times in SRD 5.2.1, where it appears capitalized 72 times.",
-   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction and Finder measurement over SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0, 364 pp.), pdftotext extraction",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
    "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
    "quote": "",
    "page": "whole of both documents",
@@ -600,7 +492,7 @@
   },
   {
    "feature": "edition and house style",
-   "claim": "The Rod of Security\u2019s destination is called \"a paradise that exists in an extraplanar space\" in SRD 5.1 and simply \"a demiplane\" in SRD 5.2.1.",
+   "claim": "The Rod of Security’s destination is called \"a paradise that exists in an extraplanar space\" in SRD 5.1 and simply \"a demiplane\" in SRD 5.2.1.",
    "source": "Finder measurement over SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0, 364 pp.), pdftotext extraction",
    "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
    "quote": "transports you and up to 199 other willing creatures",
@@ -713,7 +605,7 @@
   {
    "feature": "other: digits in prose",
    "claim": "Numeral density separates the two kinds of SRD place text by a factor with no overlap: 0.00 per 1,000 words in the deleted place appendix of SRD 5.1 against 44.92 per 1,000 words in the Environmental Effects section of SRD 5.2.1.",
-   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction and Finder measurement over SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0, 364 pp.), pdftotext extraction",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
    "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
    "quote": "",
    "page": "SRD 5.1 pp. 363-365 against SRD 5.2.1 p. 195",
@@ -852,7 +744,7 @@
   },
   {
    "feature": "boxed text form",
-   "claim": "James Wyatt says the 2024 Dungeon Master\u2019s Guide now defines boxed text, so published adventures need not keep doing so.",
+   "claim": "James Wyatt says the 2024 Dungeon Master’s Guide now defines boxed text, so published adventures need not keep doing so.",
    "source": "James Wyatt, quoted by Ben Brosofsky, ScreenRant interview with Christopher Perkins and James Wyatt",
    "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-interview-perkins-wyatt/",
    "quote": "Now the DMG tells you what boxed text is",
@@ -866,8 +758,8 @@
   },
   {
    "feature": "boxed text form",
-   "claim": "Dungeon Master\u2019s Workshop dates the introduction of boxed text to the 1979 module The Hidden Shrine of Tamoachan, written so that competing tables received identical room descriptions.",
-   "source": "The Archmage, \"Dungeon Mastering 101: Mastering the Boxed Text\", Dungeon Master\u2019s Workshop",
+   "claim": "Dungeon Master’s Workshop dates the introduction of boxed text to the 1979 module The Hidden Shrine of Tamoachan, written so that competing tables received identical room descriptions.",
+   "source": "The Archmage, \"Dungeon Mastering 101: Mastering the Boxed Text\", Dungeon Master’s Workshop",
    "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
    "quote": "ever since boxed text was introduced in The Hidden Shrine of Tamoachan",
    "page": "post of 27 September 2019",
@@ -880,8 +772,8 @@
   },
   {
    "feature": "terminology consistency",
-   "claim": "Shawn Merwin tells adventure writers to avoid using D&D\u2019s mechanical terms in their ordinary senses inside boxed text.",
-   "source": "Shawn Merwin, \"Let\u2019s Design an Adventure: Boxed Text\", D&D Beyond",
+   "claim": "Shawn Merwin tells adventure writers to avoid using D&D’s mechanical terms in their ordinary senses inside boxed text.",
+   "source": "Shawn Merwin, \"Let’s Design an Adventure: Boxed Text\", D&D Beyond",
    "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
    "quote": "Avoid game mechanical terms used in a non-mechanical way",
    "page": "tip 6, article of 6 November 2019",
@@ -920,5 +812,113 @@
    "registerHint": "none",
    "confidence": "high"
   }
- ]
+ ],
+ "sourcesRead": [
+  {
+   "title": "System Reference Document 5.1 (CC-BY-4.0 edition), Wizards of the Coast",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "kind": "primary",
+   "substantive": true,
+   "date": "2023",
+   "route": "direct PDF download with a browser UA; 403 pages; pdftotext extraction"
+  },
+  {
+   "title": "System Reference Document 5.2.1 (CC-BY-4.0), Wizards of the Coast",
+   "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+   "kind": "primary",
+   "substantive": true,
+   "date": "2025-05-01",
+   "route": "direct PDF download with a browser UA; 364 pages; pdftotext extraction"
+  },
+  {
+   "title": "System Reference Document (SRD) page, Wizards of the Coast / D&D Beyond (SRD 5.2 FAQ)",
+   "url": "https://dnd.wizards.com/resources/systems-reference-document",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2026-03-02",
+   "route": "curl browser UA; dnd.wizards.com redirects to www.dndbeyond.com/srd"
+  },
+  {
+   "title": "Converting to System Reference Document 5.2.1, Wizards of the Coast",
+   "url": "https://media.dndbeyond.com/compendium-images/srd/guide/converting-to-srd-5.2.1.pdf",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2025-05-27",
+   "route": "direct PDF download with a browser UA"
+  },
+  {
+   "title": "D&D Basic Rules v1.0 (November 2018), Wizards of the Coast",
+   "url": "https://media.wizards.com/2018/dnd/downloads/DnD_BasicRules_2018.pdf",
+   "kind": "primary",
+   "substantive": true,
+   "date": "2018-11",
+   "route": "direct PDF download with a browser UA"
+  },
+  {
+   "title": "2024 Core Rulebooks to Expand the SRD — DND Staff, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/1717-2024-core-rulebooks-to-expand-the-srd",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2024-05-06",
+   "route": "curl browser UA; body in served HTML"
+  },
+  {
+   "title": "You Can Now Publish Your Own Creations Using the New Core Rules — DND Staff, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/1949-you-can-now-publish-your-own-creations-using-the",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2025-05-27",
+   "route": "curl browser UA; body in served HTML"
+  },
+  {
+   "title": "Let’s Design an Adventure: Boxed Text — Shawn Merwin, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-11-06",
+   "route": "curl browser UA; body in served HTML"
+  },
+  {
+   "title": "“Everything In There Better Be Cracking On Topic”: D&D Designers Talk The 2024 Dungeon Master’s Guide — Ben Brosofsky, ScreenRant",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-interview-perkins-wyatt/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2024-10-25",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Dungeon Mastering 101: Mastering the Boxed Text — The Archmage, Dungeon Master’s Workshop",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-09-27",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Official SRD 5.2 Discussion Thread, page 3 — D&D Beyond forums",
+   "url": "https://www.dndbeyond.com/forums/d-d-beyond-general/general-discussion/219273-official-srd-5-2-discussion-thread-srd-5-2-1-now?page=3",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2025-04-24",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "The Planes of Existence — 5thSRD community rendering of SRD 5.1",
+   "url": "https://5thsrd.org/adventuring/planes_of_existence/",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2026-09-06",
+   "route": "curl browser UA; used only as an extraction control"
+  },
+  {
+   "title": "D&D — System Reference Document v5.2 — Tribality",
+   "url": "https://www.tribality.com/2025/04/23/dd-system-reference-document-v5-2/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2025-04-23",
+   "route": "curl browser UA; reprints the WotC FAQ verbatim, adds no independent analysis"
+  }
+ ],
+ "complete": true,
+ "coverage": "Named roster (SRD 5.1 and SRD 5.2.1) fetched raw as PDFs and measured in full; nothing in the named roster was not found or blocked. 13 sources read, 12 substantive: 5 primaries/vendor documents fetched direct (both SRD PDFs, the WotC SRD page and its 5.2 FAQ, the official conversion guide, the 2018 Basic Rules PDF), 4 by bibliography chasing off the SRD page and its FAQ (the two D&D Beyond studio posts, the conversion guide, the forum thread), 3 by lateral search (Merwin on boxed text, the ScreenRant designer interview, Dungeon Master's Workshop), 1 as an extraction control (5thsrd.org); Tribality read and rejected as a verbatim reprint of the WotC FAQ; no peer-reviewed stylometric study of the SRD exists — two searches returned only general stylometry literature, and that thin literature is itself the finding. The SRD contains no read-aloud text, no settlement tables and no civic-record vocabulary, so the measured place corpus is small by nature: 1,530 words in SRD 5.1 Appendix PH-C plus 550 words of pantheon prose, both of which SRD 5.2.1 deletes."
 }

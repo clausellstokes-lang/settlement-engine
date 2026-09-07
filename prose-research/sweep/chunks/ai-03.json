@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 3,
+ "indices": [
+  1006,
+  1007,
+  1009,
+  1011,
+  1012,
+  1014,
+  1015,
+  1016,
+  1019,
+  1020,
+  1021,
+  1022,
+  1023,
+  1024,
+  1025
+ ],
+ "claims": [
+  {
+   "index": 1006,
+   "feature": "other: platform policy",
+   "claim": "A cemetery sales executive's testimonial on Passare's website praises its AI obituary writer for its adjectives and descriptions.",
+   "source": "Skip Phelps of Spring Grove Cemetery, testimonial on Passare's website, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+   "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+   "quote": "great adjectives and descriptions",
+   "page": "section 'Passed away peacefully'"
+  },
+  {
+   "index": 1007,
+   "feature": "other: scale of the generated record",
+   "claim": "Passare's vice-president of marketing and product says its AI tool has written tens of thousands of obituaries nationwide in the last few years.",
+   "source": "Josh McQueen of Passare, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+   "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+   "quote": "has written tens of thousands of obituaries nationwide in the last few years",
+   "page": "opening section"
+  },
+  {
+   "index": 1009,
+   "feature": "other: eulogy register in the record",
+   "claim": "Futurism, relaying the Post's CelebrateAlly test, quotes the tool writing that a fictional man's thoughtful nature manifested in countless acts of kindness.",
+   "source": "a CelebrateAlly output quoted as a demonstration passage by Frank Landymore, Futurism, 4 Aug 2025, relaying the Washington Post's test",
+   "url": "https://futurism.com/funeral-homes-chatgpt-obituaries",
+   "quote": "His thoughtful nature manifested in countless acts of kindness",
+   "page": "body, after the CelebrateAlly paragraph"
+  },
+  {
+   "index": 1011,
+   "feature": "other: invented kin",
+   "claim": "Futurism notes that no friends or family were named in that prompt, although the generated obituary invoked those who knew him.",
+   "source": "Frank Landymore, Futurism, 4 Aug 2025, relaying the Washington Post's test",
+   "url": "https://futurism.com/funeral-homes-chatgpt-obituaries",
+   "quote": "No mention of his friends or family was made in the prompt",
+   "page": "body, after the CelebrateAlly paragraph"
+  },
+  {
+   "index": 1012,
+   "feature": "other: fabricated fact in the record",
+   "claim": "Futurism summarises the Post's test as showing the tool made up details even when specific details of the fake life were supplied.",
+   "source": "Frank Landymore, Futurism, 4 Aug 2025",
+   "url": "https://futurism.com/funeral-homes-chatgpt-obituaries",
+   "quote": "Providing specific details of a fake person’s life still led to",
+   "page": "body, CelebrateAlly paragraph"
+  },
+  {
+   "index": 1014,
+   "feature": "other: garbled record register",
+   "claim": "Futurism reports that MSN's article on Brandon Hunter's death carried the headline calling him useless at 42.",
+   "source": "Victor Tangermann, 'Microsoft Publishes Garbled AI Article Calling Tragically Deceased NBA Player Useless', Futurism, 14 Sep 2023",
+   "url": "https://futurism.com/msn-ai-brandon-hunter-useless",
+   "quote": "Brandon Hunter useless at 42",
+   "page": "body, second paragraph"
+  },
+  {
+   "index": 1015,
+   "feature": "other: mechanism (synonym substitution over a scraped source)",
+   "claim": "Futurism reports the MSN piece followed the structure of a TMZ Sports story about the same death.",
+   "source": "Victor Tangermann, Futurism, 14 Sep 2023",
+   "url": "https://futurism.com/msn-ai-brandon-hunter-useless",
+   "quote": "follows the same structure as a TMZ Sports story about his death",
+   "page": "body, plagiarism section"
+  },
+  {
+   "index": 1016,
+   "feature": "other: mechanism (synonym substitution over a scraped source)",
+   "claim": "Futurism attributes the incomprehensibility to synonym substitution used liberally enough to disguise the copying.",
+   "source": "Victor Tangermann, Futurism, 14 Sep 2023",
+   "url": "https://futurism.com/msn-ai-brandon-hunter-useless",
+   "quote": "a use of synonyms so liberal that the result is essentially incomprehensible",
+   "page": "body, plagiarism section"
+  },
+  {
+   "index": 1019,
+   "feature": "other: register boundary",
+   "claim": "Kristen Hare, an obituary writer for the Tampa Bay Times, says she would not let a bot near the kind of reported obituaries journalists write.",
+   "source": "Kristen Hare, 'AI butchered a former NBA player's obit. Could it still have a use?', Poynter, 15 Sep 2023",
+   "url": "https://www.poynter.org/commentary/2023/artificial-intelligence-obituary-brandon-hunter-useless/",
+   "quote": "I wouldn’t let a bot near the kind of reported obits",
+   "page": "commentary, closing paragraph"
+  },
+  {
+   "index": 1020,
+   "feature": "other: register boundary",
+   "claim": "Hare distinguishes a second register she thinks AI could serve, the resume-listing obituary a family writes through the funeral home.",
+   "source": "Kristen Hare, Poynter, 15 Sep 2023",
+   "url": "https://www.poynter.org/commentary/2023/artificial-intelligence-obituary-brandon-hunter-useless/",
+   "quote": "Obituaries, the resume-listing kind, can fall into that category",
+   "page": "commentary, middle"
+  },
+  {
+   "index": 1021,
+   "feature": "other: platform policy",
+   "claim": "The Board for Certification of Genealogists ruled in July 2024 that work in a new certification portfolio may not be written or generated by AI.",
+   "source": "Board for Certification of Genealogists, 'BCG Announces Interpretation Regarding Use of AI', 9 Jul 2024",
+   "url": "https://bcgcertification.org/bcg-ai-portfolio",
+   "quote": "may not be written or generated by AI",
+   "page": "the interpretation, first paragraph"
+  },
+  {
+   "index": 1022,
+   "feature": "other: platform policy",
+   "claim": "The same interpretation bars AI from every part of the BCG-supplied document work, including transcribing, abstracting and analysing.",
+   "source": "Board for Certification of Genealogists, 9 Jul 2024",
+   "url": "https://bcgcertification.org/bcg-ai-portfolio",
+   "quote": "AI may not be used for any aspect of the BCG-Supplied Document Work",
+   "page": "the interpretation, exceptions list"
+  },
+  {
+   "index": 1023,
+   "feature": "other: neutral-seeming but not neutral",
+   "claim": "Wikipedia's large language models policy page states LLMs can produce content neutral-seeming in tone but not in substance.",
+   "source": "Wikipedia:Large language models, retrieved 6 Sep 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
+   "quote": "neutral-seeming in tone, but not necessarily in substance",
+   "page": "§ Algorithmic bias and non-neutral point of view"
+  },
+  {
+   "index": 1024,
+   "feature": "other: neutral-seeming but not neutral",
+   "claim": "That page states this concern is especially salient for biographies of living persons.",
+   "source": "Wikipedia:Large language models, retrieved 6 Sep 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
+   "quote": "This concern is especially salient for biographies of living persons",
+   "page": "§ Algorithmic bias and non-neutral point of view"
+  },
+  {
+   "index": 1025,
+   "feature": "other: fabricated or absent citation",
+   "claim": "That page states LLMs sometimes hallucinate citations of non-existent references by inventing titles, authors and URLs.",
+   "source": "Wikipedia:Large language models, retrieved 6 Sep 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
+   "quote": "hallucinate citations of non-existent references by making up titles, authors",
+   "page": "§ Unsourced or unverifiable content"
+  }
+ ]
+}

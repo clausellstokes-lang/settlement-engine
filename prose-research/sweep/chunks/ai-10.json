@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 10,
+ "indices": [
+  1262,
+  1263,
+  1266,
+  1267,
+  1268,
+  1269,
+  1272,
+  1275,
+  1276,
+  1288,
+  1301,
+  1313,
+  1316,
+  1321,
+  1326
+ ],
+ "claims": [
+  {
+   "index": 1262,
+   "feature": "other: evidenced versus inferred fact",
+   "claim": "SimpleQA questions were built so that each has only a single indisputable answer, excluding facts on which sources disagree.",
+   "source": "Wei, Karina, Chung et al. (OpenAI), 'Measuring short-form factuality in large language models' (SimpleQA), arXiv, 7 November 2024",
+   "url": "https://arxiv.org/pdf/2411.04368",
+   "quote": "there exists only a single, indisputable answer",
+   "page": "Abstract"
+  },
+  {
+   "index": 1263,
+   "feature": "other: measured accuracy on archival summarisation",
+   "claim": "Retrieval-grounded legal research tools from LexisNexis and Thomson Reuters hallucinated between 17 percent and 33 percent of the time.",
+   "source": "Varun Magesh, Faiz Surani, Matthew Dahl, Mirac Suzgun, Christopher D. Manning and Daniel E. Ho, 'Hallucination-Free? Assessing the Reliability of Leading AI Legal Research Tools', arXiv 2405.20362 (2024)",
+   "url": "https://arxiv.org/pdf/2405.20362",
+   "quote": "each hallucinate between 17% and 33% of the time",
+   "page": "Abstract"
+  },
+  {
+   "index": 1266,
+   "feature": "other: measured accuracy on archival summarisation",
+   "claim": "Lexis+ AI, the highest performing system tested, answered 65 percent of the queries accurately.",
+   "source": "Magesh, Surani, Dahl, Suzgun, Manning and Ho, 'Hallucination-Free?', arXiv 2405.20362 (2024)",
+   "url": "https://arxiv.org/pdf/2405.20362",
+   "quote": "answering 65% of our queries accurately",
+   "page": "Section 1, p.4"
+  },
+  {
+   "index": 1267,
+   "feature": "other: measured accuracy on archival summarisation",
+   "claim": "Westlaw's AI-Assisted Research was accurate 42 percent of the time in the same evaluation.",
+   "source": "Magesh, Surani, Dahl, Suzgun, Manning and Ho, 'Hallucination-Free?', arXiv 2405.20362 (2024)",
+   "url": "https://arxiv.org/pdf/2405.20362",
+   "quote": "Westlaw's AI-Assisted Research is accurate 42% of the time",
+   "page": "Section 1, p.4"
+  },
+  {
+   "index": 1268,
+   "feature": "other: measured factual accuracy on dated historical facts",
+   "claim": "Asked to identify a source article's headline, publisher, publication date and URL from an excerpt, the eight tools answered more than 60 percent of queries incorrectly.",
+   "source": "Klaudia Jazwinska and Aisvarya Chandrasekar, Tow Center for Digital Journalism, Columbia Journalism Review, 6 March 2025",
+   "url": "https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php",
+   "quote": "they provided incorrect answers to more than 60 percent of queries",
+   "page": "section 'Chatbots' responses to our queries were often confidently wrong'"
+  },
+  {
+   "index": 1269,
+   "feature": "other: measured factual accuracy on dated historical facts",
+   "claim": "Error rates in the Tow Center test ranged from 37 percent of queries answered incorrectly by Perplexity to 94 percent by Grok 3.",
+   "source": "Jazwinska and Chandrasekar, Tow Center for Digital Journalism, Columbia Journalism Review, 6 March 2025",
+   "url": "https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php",
+   "quote": "with Perplexity answering 37 percent of the queries incorrectly",
+   "page": "section 'Chatbots' responses to our queries were often confidently wrong'"
+  },
+  {
+   "index": 1272,
+   "feature": "other: fabricated content in an archival summary",
+   "claim": "More than half of the Gemini and Grok 3 responses cited fabricated or broken URLs that led to error pages.",
+   "source": "Jazwinska and Chandrasekar, Tow Center for Digital Journalism, Columbia Journalism Review, 6 March 2025",
+   "url": "https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php",
+   "quote": "cited fabricated or broken URLs that led to error pages",
+   "page": "section on fabricated URLs"
+  },
+  {
+   "index": 1275,
+   "feature": "other: measured factual accuracy on dated historical facts",
+   "claim": "Top-performing models on ProHist-Bench reached Rubric Scores barely approaching 30 while most models scored below 15.",
+   "source": "Gao, Wang, Cai, Deng et al., 'Can LLMs Act as Historians? ProHist-Bench', arXiv 2604.24690v1, 27 April 2026",
+   "url": "https://arxiv.org/pdf/2604.24690",
+   "quote": "RS scores barely approaching 30, while most LLMs score below 15",
+   "page": "Section 5.2 Main results"
+  },
+  {
+   "index": 1276,
+   "feature": "other: measured factual accuracy on dated historical facts",
+   "claim": "Gemini-3-Pro-Preview recorded a Rubric Score of 26.71 on ProHist-Bench, the highest of the closed-source models listed.",
+   "source": "Gao, Wang, Cai, Deng et al., 'Can LLMs Act as Historians? ProHist-Bench', arXiv 2604.24690v1, 27 April 2026",
+   "url": "https://arxiv.org/pdf/2604.24690",
+   "quote": "Gemini-3-Pro-Preview 1.94 6.27 73.97 26.71",
+   "page": "Table 4, p.6"
+  },
+  {
+   "index": 1288,
+   "feature": "punctuation tics",
+   "claim": "The page relays a July 2026 study finding that among contemporary models only Claude used em dashes more than professional writers while ChatGPT used them less.",
+   "source": "English Wikipedia advice page 'Signs of AI writing' relaying The Economist, 'How to spot AI writing', 30 July 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "only Claude used em dashes more than professional writers",
+   "page": "Style > Overuse of em dashes"
+  },
+  {
+   "index": 1301,
+   "feature": "no subtext",
+   "claim": "The HC3 annotators reported that ChatGPT never uses antiphrasis whereas humans apply humour, irony, metaphors and examples.",
+   "source": "Guo et al., HC3, 2023",
+   "url": "https://arxiv.org/pdf/2301.07597",
+   "quote": "whereas ChatGPT never uses antiphrasis",
+   "page": "Section 3, Major Differences between Human and ChatGPT, item (c)"
+  },
+  {
+   "index": 1313,
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Huang et al. relay Reinhart et al. 2025 as having found that LLMs use present participial clauses at two to five times the rate of human text while using the passive voice at roughly half the rate.",
+   "source": "Huang et al., TMLR, February 2026, relaying Reinhart et al. 2025",
+   "url": "https://arxiv.org/pdf/2503.02879",
+   "quote": "present participial clauses at 2 to 5 times the rate of human text",
+   "page": "Section 4.2, Sentence Level"
+  },
+  {
+   "index": 1316,
+   "feature": "other: citation fabrication and source quality",
+   "claim": "The analysis measured that non-CC-licensed Grokipedia articles are thirteen times more likely than the same Wikipedia articles to contain a source the English Wikipedia community has blacklisted.",
+   "source": "Triedman & Mantzarlis, Cornell Tech, November 2025",
+   "url": "https://arxiv.org/pdf/2511.09685",
+   "quote": "13 times more likely to contain a",
+   "page": "Section 1, summary of findings"
+  },
+  {
+   "index": 1321,
+   "feature": "other: criterion narrowing over time",
+   "claim": "A standing proposal page preserves G15's earlier wording, under which the criterion was titled 'LLM-generated pages without human review' and additionally required that the page would have been removed by any reasonable human review.",
+   "source": "English Wikipedia proposal page 'Speedy deletion/G15 update', created by editor Ca",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Speedy_deletion/G15_update",
+   "quote": "",
+   "page": "Whole page (proposal text)"
+  },
+  {
+   "index": 1326,
+   "feature": "other: citation fabrication and source quality",
+   "claim": "The same report lists plausible but fictitious bibliographic references among the source problems that AI-generated French Wikipedia content presents.",
+   "source": "Projet:Observatoire des IA, report of 9 May 2026, French Wikipedia",
+   "url": "https://fr.wikipedia.org/wiki/Projet:Observatoire_des_IA/Rapport_du_9_mai_2026",
+   "quote": "des références bibliographiques plausibles mais fictives",
+   "page": "Les sources : principal critère de vérification > Types de problèmes rencontrés"
+  }
+ ]
+}

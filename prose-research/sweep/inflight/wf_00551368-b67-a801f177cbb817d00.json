@@ -3,13 +3,13 @@
  "name": "ai",
  "angle": "arch-decoding-literature",
  "tag": null,
- "lines": 321,
+ "lines": 330,
  "firstTs": "2026-09-07T03:27:43.321Z",
- "lastTs": "2026-09-07T03:44:42.410Z",
+ "lastTs": "2026-09-07T03:45:34.657Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 76,
+  "Bash": 78,
   "WebFetch": 1,
   "WebSearch": 7
  },
@@ -40,18 +40,21 @@
   "https://arxiv.org/abs/2310.06452",
   "https://arxiv.org/pdf/2510.01171",
   "https://arxiv.org/pdf/2509.18880",
-  "https://arxiv.org/pdf/2506.05387"
+  "https://arxiv.org/pdf/2506.05387",
+  "https://arxiv.org/abs/2510.01171",
+  "https://arxiv.org/abs/2509.18880",
+  "https://arxiv.org/abs/2506.05387"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now adding batch 3 and checkpointing.",
+ "lastAssistantText": "You've hit your session limit · resets 2am (America/New_York)",
  "run": "wf_00551368-b67",
  "agent": "a801f177cbb817d00",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-a801f177cbb817d00.jsonl",
- "journal": "in-flight",
+ "journal": "failed",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-decoding-literature.json",
-  "claims": 79,
+  "claims": 88,
   "complete": false,
-  "mtime": "23:42:54"
+  "mtime": "23:45:20"
  }
 }
