@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 10:23:26 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 10:29:27 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -41,11 +41,11 @@
 | leguin | verifier | i694-849 | in-flight | 6 | — | verdict file absent | 11:54:36 |
 | ? | critic |  | result | 0 | — | — | 08:44:03 |
 | ? | critic |  | result | 0 | — | — | 08:43:39 |
-| ? | other |  | in-flight | 0 | — | — | 14:23:17 |
+| ? | other |  | in-flight | 0 | — | — | 14:27:52 |
 | ? | other |  | result | 0 | reconcile-dossier-archivist.md | — | 14:10:11 |
-| ? | other |  | in-flight | 0 | — | — | 14:21:00 |
+| ? | other |  | in-flight | 0 | — | — | 14:27:45 |
 | ? | other |  | result | 0 | — | — | 14:14:25 |
-| ? | other |  | in-flight | 0 | — | — | 14:22:16 |
+| ? | other |  | in-flight | 0 | — | — | 14:26:49 |
 | ? | other |  | result | 0 | reconcile-npc-ladder.md | — | 14:16:27 |
 | ? | other |  | in-flight | 0 | — | — | 13:53:19 |
 | ? | other |  | in-flight | 0 | — | — | 13:53:19 |
