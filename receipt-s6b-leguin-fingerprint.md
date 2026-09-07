@@ -70,3 +70,51 @@ uploads, `/?s=`, `/search/` and an `AdsBot` block.
   length as specimens ("let us read a little fantasy"), so a naive fingerprint of it measures four
   other authors as well. Its own provenance line is also absent from any provenance file. Handling
   recorded below.
+
+## Substitute-source policy (recorded because it departs from the brief's named sources)
+Both named nonfiction sources are unusable (ursulakleguin.com robots-refused by name; Paris Review
+WAF-blocked, below). I substituted only hosts that (a) serve a robots.txt with no Anthropic/Claude
+stanza, and (b) published Le Guin's prose themselves with permission — LitHub and Electric
+Literature (publisher-sanctioned book excerpts, her own newsletter/blog pieces, and a reprinted
+interview) — plus, for fiction, exactly the .edu-course-page class the brief blessed. No document
+locker, no whole-book site, no scan mirror.
+
+## Fetch log (every exit and byte count captured in-shell)
+| # | file (under primary/raw/) | URL | http | bytes | curl exit |
+|---|---|---|---|---|---|
+| F1 | leguin-lithub-a-writing-lesson.html | lithub.com/a-writing-lesson-from-ursula-k-leguin/ | 200 | 27,693 | 0 |
+| F2 | leguin-lithub-how-to-become-a-writer.html | lithub.com/ursula-k-le-guin-on-how-to-become-a-writer/ | 200 | 28,120 | 0 |
+| F3 | leguin-lithub-racism-anarchy.html | lithub.com/ursula-k-le-guin-on-racism-anarchy-and-hearing-her-characters-speak/ | 200 | 32,538 | 0 |
+| F4 | leguin-lithub-best-life-advice.html | lithub.com/ursula-k-le-guins-best-life-advice/ | 200 | 30,528 | 0 |
+| F5 | leguin-el-utopia.html | electricliterature.com/ursula-k-le-guin-explains-how-to-build-a-new-kind-of-utopia/ | 200 | 34,910 | 0 |
+| F6 | leguin-el-amazon.html | electricliterature.com/ursula-k-le-guin-i-keep-asking-you-not-to-buy-books-from-amazon/ | 200 | 33,277 | 0 |
+| F7 | leguin-el-author-index.html | electricliterature.com/el-author/ursula-le-guin/ | 200 | 23,246 | 0 |
+| F8 | leguin-omelas-ucdavis.pdf | cs.ucdavis.edu/~koehl/Teaching/ECS088/PDF_files/Omelas.pdf | 200 | 58,197 | 0 |
+| F9 | leguin-course-ecs088-index.html | cs.ucdavis.edu/~koehl/Teaching/ECS088/index.html | 200 | 4,692 | 0 |
+
+All fetches used a 10 s inter-request delay on lithub.com (its robots states `crawl-delay: 10`).
+
+### Failed / blocked fetches
+- `www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin` — **http=403,
+  1,750 B, curl exit 0**; body `<title>Attention Required! | Cloudflare</title>`. robots permitted;
+  the WAF does not. Same wall the 09-05 lane hit. No interview text obtained.
+- `w3.ric.edu/faculty/rpotter/temp/waaaod.pdf` ("Why Are Americans Afraid of Dragons?") — the host
+  refuses the connection: `curl: (52) Empty reply from server` on both https and http for
+  `/robots.txt`. Not fetched (robots could not even be read, so the path could not be cleared).
+- `bookviewcafe.com/blog/ursula-k-le-guins-blog/` — **http=404**. BVC's robots permits and BVC was
+  the original home of her blog, but the posts are gone from that host; its sitemap holds 1,316
+  posts of which the 14 matching "guin"/"ursula" are BVC news items about her, not her prose.
+- `storyoftheweek.loa.org` sitemap holds no Le Guin entry (1 loc, unrelated).
+
+### Verified as a genuine course reading, not a mirror (brief's explicit requirement)
+`https://www.cs.ucdavis.edu/~koehl/Teaching/ECS088/index.html` is the syllabus of **UC Davis
+ECS 088, "Ethics of Technology: Fall 2025", Prof. Patrice Koehl**, with Home / Lectures / Term
+paper / **Reader** navigation; the Omelas PDF sits in that course's own `PDF_files/` directory.
+Host is `.edu`; `cs.ucdavis.edu/robots.txt` (http=200, 119 B) disallows only `/wp-admin/`.
+The PDF's own header credits *The Wind's Twelve Quarters: Short Stories* by Ursula Le Guin.
+
+### Rejected without fetching (document lockers / scan mirrors, per the brief's law)
+`scribd.com`, `pdfcoffee.com`, `are.na`, `monoskop.org`, `coursehero.com`, `academia.edu`,
+`researchgate.net`, `docs.google.com` copies of "The Carrier Bag Theory of Fiction",
+"She Unnames Them" and Omelas — none is a publisher- or course-sanctioned page.
+`shsdavisapes.pbworks.com` (Omelas) — a wiki host, not `.edu`.

@@ -1,0 +1,15 @@
+REGISTER_HEAD=2f1f9381f6a3f096b1a6e57bf3ab0a9686912222 22:46:10
+PREDICTIONS (E4, §906, to be re-derived at the dock tip in predict-906.log BEFORE this runs — the anchor car adds one it() title in tests/lib/flags.test.js, the visibility car adds N in tests/components/{warFaithSurfacing,handbookVoice}.test.jsx, the docs car adds nothing): lighting — titles 23653 -> 23660, suiteTitles 6333 -> 6335 (two new describes, measured by the farmed probe in predict-906.log), files 2543 / parked 373 / credited 2170 UNCHANGED (no new file); OSR plain read 1972 exact, 0 drift, NO write; mounts unchanged; prose-numerics 225 exact; writer-reach: no writer string changed — dry run decides; tuning plain green
+registry: mounts 56 dark 15
+--- lighting: probe vs register
+  probe   : {"files":2543,"parked":373,"credited":2170,"titles":23660,"suiteTitles":6335}
+  register: {"files": 2543, "parked": 373, "credited": 2170, "titles": 23653, "suiteTitles": 6333}
+=== 1. LIGHTING (refuses a dirty tree — first):
+LIGHTING_DOOR_EXIT=1 (non-zero EXPECTED)
+LIGHTING_PLAIN_EXIT=0 (must be 0)
+      Tests  34 passed (34)
+REGISTER CAR 1 (lighting) -> b64a47e1d
+=== 1b. OSR — READ ONLY (predicted: exact match, no drift; a non-zero exit or a drift line is a STOP — the chair rules before any door):
+OSR_DRY_EXIT=0 (must be 0)
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+  drift lines (must be 0): 0
