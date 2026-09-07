@@ -1,18 +1,18 @@
-# LANE-STATUS — written 2026-09-07 01:46:59 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 01:52:32 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 lands with zero product bytes — the three CAPACITY measurements are ta
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 082314af3 · 4 cars over 4243bdc61 · porcelain 0 · last commits:
+- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 2e1bb6311 · 6 cars over 4243bdc61 · porcelain 0 · last commits:
+    2e1bb6311 §908 CAP-TRIP landing (register car 1): the lighting census refreezes at the tip — titles 23660 -> 23662 (two it() titles the CAP-TRIP cars added; files, parked, credited and suiteTitles unchanged)
+    d804420d7 §907 CAR 5: the four negative assertions the proof's walker counted are anchored — each pairs its absence with a live sibling on the same code path
     082314af3 §907 CAR 4: the envelope suite's "MEASURED AT THIS COMMIT" header is corrected from a run of that file at this tip — three of its four figures were wrong from the day they were written
     11f6425a9 §907 CAR 3: capacity_envelope_30y re-measured — the refusal's stated mechanism was FALSE, the row stays out on a different and measured ground, and the reinstatement is handed to the chair with the figures
-    6f4fa80ad §907 CAR 2: the reachability guard — a walker reads what every tripwire row keys on and what the receipt writer actually writes, and the two blind rows are BANKED as a shrink-only baseline
-    3835be900 §907 CAR 1: the tripwire registry gets a NOT-EXECUTABLE channel — a row keyed on a field no receipt writer ships says so instead of answering [], and a blind instrument can no longer certify itself full
-    receipt `receipt-cap-trip-907.md` (mtime 09-07 01:17) head:
+    receipt `receipt-cap-trip-907.md` (mtime 09-07 01:50) head:
       | # RECEIPT — LANE CAP-TRIP-907
       | **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
       | 
-      | **STATUS: COMPLETE** — four cars chartered, **three landed as built and one landed as a measured REFUSAL** (car 3's row is not armed; the corrections it owed did land). Last written Mon Sep  7 01:15:48 EDT 2026.
+      | **STATUS: COMPLETE** — **FIVE cars**: four chartered (three landed as built, one landed as a measured REFUSAL — car 3's row is not armed; the corrections it owed did land) and **car 5, the repair the chair's whole-su
       | 
       | ## ARRIVAL CHECK — Mon Sep  7 00:52:00 EDT 2026 — **all three lines pass**
       | - `git rev-parse HEAD` == `4243bdc610fe5b380f1d0029973cf9088bae1631` — **CONFIRMED**
@@ -141,5 +141,5 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 - wf_0eb229cc-f75: 47 journal lines, 24 agents
 - wf_4bd76597-3a3: 8 journal lines, 4 agents
 
-## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.93 8.67 12.36
+## PROCESSES: 1968 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsho;1970 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engi;26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 4.17 5.24 9.45

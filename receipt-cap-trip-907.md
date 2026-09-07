@@ -1,7 +1,7 @@
 # RECEIPT — LANE CAP-TRIP-907
 **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
 
-**STATUS: COMPLETE** — four cars chartered, **three landed as built and one landed as a measured REFUSAL** (car 3's row is not armed; the corrections it owed did land). Last written Mon Sep  7 01:15:48 EDT 2026.
+**STATUS: COMPLETE** — **FIVE cars**: four chartered (three landed as built, one landed as a measured REFUSAL — car 3's row is not armed; the corrections it owed did land) and **car 5, the repair the chair's whole-suite proof at `082314af3` called for**, landed. Last written Mon Sep  7 01:50:01 EDT 2026.
 
 ## ARRIVAL CHECK — Mon Sep  7 00:52:00 EDT 2026 — **all three lines pass**
 - `git rev-parse HEAD` == `4243bdc610fe5b380f1d0029973cf9088bae1631` — **CONFIRMED**
@@ -217,3 +217,70 @@ The design's predicted **12 / 10 was not reached** and the reason is car 3's, me
 - Receipt: `$SC/receipt-cap-trip-907.md` (this file)
 - Working artifacts: `$SC/cap-trip-907/` — gate outputs, the two md5-verified backups, `m4-figures.json`, `probe-after.mjs`
 - The dock is `$SC/laneB6` at `082314af38aa00f7bd02be23f6b2007e288fbecb`, porcelain empty. **The shared tree `/Users/cstokes/Desktop/settlement-engine` was never touched.**
+
+---
+
+## CAR 5 — THE FOUR UN-ANCHORED NEGATIVES THE PROOF COUNTED — **LANDED `d804420d7`**
+
+**Chartered by the proof, not by the original brief.** The chair's whole-suite run at the four-car tip (`$SC/whole-908.log`) found one unpredicted red: `tests/lint/negativeAssertionAnchor.walker.test.js`, arm *"no NEW un-anchored negative assertion anywhere in the test corpus"*, counted **four** bare negatives that **this lane's own cars introduced** into the two soak-harness test files. Neither file holds a row in `FROZEN_UNANCHORED_NEGATIVES` (`grep soak-harness` on the walker: **no match**), so the ceiling is an exact zero and the count was a true finding, not a ratchet nuisance.
+
+### ARRIVAL CHECK — Mon Sep  7 01:44:45 EDT 2026 — **both lines pass**
+- `git -C $SC/laneB6 rev-parse --short HEAD` == `082314af3` — **CONFIRMED**
+- `git status --porcelain | wc -l` == `0` — **CONFIRMED**
+- The brief's four line numbers were **re-derived at HEAD before editing** and are exact: `soakRegister.test.js:367`; `tripwireRegistry.test.js:395, 396, 422`. **CONFIRMED**
+
+### THE FOUR SITES AND THEIR ANCHORS
+All four went through `tests/helpers/anchoredNegatives.js`. **No inline `// anchored:` marker was used anywhere** — in every case a live sibling exists, and the helper is the stronger of the two forms the rule allows (the marker is the escape hatch for sites whose surroundings already pin the collection; none of these four qualify).
+
+| # | site | excluded member | **anchor** (the live sibling) | why the anchor travels the same path |
+|---|---|---|---|---|
+| 1 | `soakRegister.test.js:367` | `'SOAK_REGISTER_DECLARED'` in `runawayWrite.stderr` | `'a deterministic-class tripwire fired — the run is not clean'` | the **same run's own stderr**, the refusal the tripwire door prints. It was already asserted present on the line above; the two assertions fold into one `expectAbsentWithAnchor`, so the **ordering of the two doors** — the tripwire door refuses first, the declaration door is never reached — is now read off one string rather than asserted twice about it |
+| 2 | `tripwireRegistry.test.js:395` | `'yearlyPopulations'` in `reach.written` | `'finalPopulations'` | the excluded key's own **FINAL-state sibling**: same object literal in `scripts/audit/whole-world-soak.mjs`, same `receiptWriterFields` read. A drift that empties the key set takes the anchor with it |
+| 3 | `tripwireRegistry.test.js:396` | `'yearlyDiedFlags'` in `reach.written` | `'finalDiedFlags'` | same, for the died-flag family |
+| 4 | `tripwireRegistry.test.js:422` | `'nonFiniteFigures'` in `receiptWriterFields(bodyOnly)` | `'finalPopulations'` | `bodyOnly` is the writer source truncated before `const receipt = {`. The anchor proves the truncated slice is **still a live key set** rather than a slice that cut too early and returned nothing — which is precisely how this *deliberate* false positive could have gone vacuous |
+
+**The anchors were MEASURED before they were chosen, not assumed.** A probe run against the real writer source (`node`, scratch script, no tree write) returned the body-only key set at **39 keys** and confirmed: the writer ships `finalPopulations`, `finalDiedFlags` and `startPopulations`, and ships **neither** per-year series — which is the very finding arm 2/3 exists to state — and `bodyOnly` contains `finalPopulations` but not `nonFiniteFigures`.
+
+### NEGATIVE CONTROL — because an anchor that cannot fail anchors nothing
+Each of the four anchors was broken **in turn** (the sibling renamed to a non-existent key / a word changed in the stderr string) and its file re-run. Every one reds with the helper's `LIVENESS ANCHOR` message, **exit 1**:
+
+| anchor broken | result |
+|---|---|
+| `'finalPopulations'` (site 2) | `EXIT=1`, 1 × `LIVENESS ANCHOR` |
+| `'finalDiedFlags'` (site 3) | `EXIT=1`, 1 × `LIVENESS ANCHOR` |
+| `'finalPopulations'` (site 4) | `EXIT=1`, 1 × `LIVENESS ANCHOR` |
+| the tripwire-door stderr string (site 1) | `EXIT=1`, 1 × `LIVENESS ANCHOR` |
+
+The three tripwire anchors share **one `it()`**, so breaking them together would have proven only the first — each was therefore broken alone. Both files were then restored **byte-identical from copies taken before the probe** (`diff` clean on both; `git checkout` was never used, per this lane's car-2 rule), and the gate re-run at the exact committed bytes.
+
+### FAST GATE — quoted, exits captured before any pipe
+```
+npx vitest run tests/lint/negativeAssertionAnchor.walker.test.js   WALKER EXIT=0
+   Test Files  1 passed (1)          Tests  9 passed (9)
+```
+— up from the proof's **`Tests  1 failed | 8 passed (9)`**. The arm the proof reddened is green, and the other eight arms (including the walker's own "an annotation two lines above does NOT exempt" self-tests) are untouched.
+```
+npx vitest run tests/soak-harness/tripwireRegistry.test.js         TRIPWIRE EXIT=0
+   Test Files  1 passed (1)          Tests  9 passed (9)
+
+npx vitest run tests/soak-harness/soakRegister.test.js             SOAKREGISTER EXIT=0
+   Test Files  1 passed (1)          Tests  8 passed (8)
+
+npx eslint tests/soak-harness/tripwireRegistry.test.js tests/soak-harness/soakRegister.test.js
+   ESLINT EXIT=0   (no output)
+```
+
+### WHAT MOVED
+`+14 / −5` across **exactly two files**, both tests: `tests/soak-harness/soakRegister.test.js`, `tests/soak-harness/tripwireRegistry.test.js` (two of the changed lines are the `expectAbsentWithAnchor` import in each file). **No product file, no fixture, no threshold, no golden, no registry row.** No same-seed output moves; THE PROMISE is untouched. Staged with an explicit two-path `git add`; no `-A`, no `-u`, no `.`, no push, no stash.
+
+### JUDGMENT CALLS (car 5)
+| # | call | why | reversible? |
+|---|---|---|---|
+| 1 | **The helper everywhere; the inline `// anchored:` marker nowhere** | the rule prefers the helper wherever a live sibling exists, and one exists at all four sites. The marker is also the form the walker's own header records as having cost a lane two attempts (the wrapped-comment edge) — choosing the form that cannot be mis-spelled is free here | yes |
+| 2 | At site 1 the **pre-existing positive assertion was folded into the helper call** rather than left standing beside a duplicate | keeping it would have spelled the long em-dashed stderr string **twice**, one line apart, with nothing keeping the two copies equal — a two-homes defect introduced to avoid touching a line. The helper asserts the identical `toContain`, so no claim was dropped; only its failure text changes | yes |
+| 3 | `'finalPopulations'` / `'finalDiedFlags'` chosen as anchors over `'failures'` or `'startPopulations'` | the helper's own header refuses an anchor that does not travel the member's path. The **final-state twin of the excluded per-year series** is the closest sibling the key set holds: same family, same writer statement, same read | yes |
+| 4 | Each anchor's negative control run **separately** | three of the four sit in one `it()`; a single mutated run reds on the first and proves nothing about the other two. This is the same discipline car 2 used on the registry | n/a |
+| 5 | The stale lines **above** this section were left as written | the brief says append, not rewrite. Two lines are now car-4-current rather than tip-current and are corrected here rather than in place: the **FILES** block names the dock at `082314af3` (now **`d804420d7`**), and the closing note says "Four commits" (now **five**, each with both trailers) | n/a — corrected here |
+
+### THE DOCK AT CAR 5's TIP
+`git -C $SC/laneB6 rev-parse --short HEAD` == **`d804420d7`** · `git status --porcelain` == **empty (0 lines)** · five commits over base `4243bdc61`, each carrying `Seat: Opus 5 — Fable-unvalidated` and `Lane: CAP-TRIP-907`. No push, no stash. **The shared tree `/Users/cstokes/Desktop/settlement-engine` was never touched.**

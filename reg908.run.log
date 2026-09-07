@@ -1,0 +1,21 @@
+REGISTER_HEAD=d804420d707e0b801a5a874ffcd12de8d0596aa8 01:51:42
+PREDICTIONS (E4, §908, re-derived at the dock tip in predict-908.log at 01:19 BEFORE this runs — the four CAP-TRIP cars edit tests/soak-harness/{tripwireRegistry,soakRegister}.test.js and tests/domain/demographicsEnvelope.test.js, adding it() cases and no file): lighting — titles 23660 -> 23662 (+2, the farmed probe read 23662), suiteTitles 6335 UNCHANGED, files 2543 / parked 373 / credited 2170 UNCHANGED (no new file); OSR plain read 1972 exact, 0 drift, NO write; mounts unchanged; prose-numerics 225 exact; writer-reach: no writer string changed — dry run decides (provenance-only refresh expected, as at §906); tuning plain green
+registry: mounts 56 dark 15
+--- lighting: probe vs register
+  probe   : {"files":2543,"parked":373,"credited":2170,"titles":23662,"suiteTitles":6335}
+  register: {"files": 2543, "parked": 373, "credited": 2170, "titles": 23660, "suiteTitles": 6335}
+=== 1. LIGHTING (refuses a dirty tree — first):
+LIGHTING_DOOR_EXIT=1 (non-zero EXPECTED)
+LIGHTING_PLAIN_EXIT=0 (must be 0)
+      Tests  34 passed (34)
+REGISTER CAR 1 (lighting) -> 2e1bb6311
+=== 1b. OSR — READ ONLY (predicted: exact match, no drift; a non-zero exit or a drift line is a STOP — the chair rules before any door):
+OSR_DRY_EXIT=0 (must be 0)
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+  drift lines (must be 0): 0
+OSR_WALKER_PLAIN_EXIT=0 (must be 0)
+      Tests  44 passed (44)
+=== 2. MOUNTS BASELINE (predicted: no change):
+MOUNTS_DOOR_EXIT=0
+  changed (must be empty): []
+=== 3. PROSE-NUMERICS re-key (dry, then --write; predicted 225 exact, nothing re-keyed):
