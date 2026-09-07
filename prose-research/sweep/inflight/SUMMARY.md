@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 16:38:10 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 16:44:11 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -6,12 +6,12 @@
 | ? | critic |  | result | 0 | CRITIC-S12.md | — | 17:49:27 |
 | ? | other |  | result | 0 | refutations.md | — | 20:30:16 |
 | ? | other |  | result | 0 | rulings.md | — | 20:31:15 |
-| ? | other |  | in-flight | 0 | — | — | 20:37:29 |
+| ? | other |  | result | 0 | — | — | 20:38:49 |
 | ? | other |  | result | 0 | RECONCILIATION-DOSSIER.md | — | 20:16:53 |
 | ? | other |  | result | 0 | — | — | 20:29:47 |
 | ? | other |  | result | 0 | — | — | 20:31:41 |
 | ? | other |  | result | 0 | bdash.mjs, chron.mjs, figures.md, r6.mjs, r6b.mjs, r6c.mjs, r6d.mjs, rest.mjs, r | — | 20:34:29 |
-| ? | other |  | in-flight | 0 | — | — | 20:38:03 |
+| ? | other |  | in-flight | 0 | — | — | 20:43:36 |
 | ? | other |  | result | 0 | — | — | 15:08:52 |
 | ? | other |  | result | 0 | FOLD.md | — | 15:23:48 |
 | ? | other |  | result | 0 | — | — | 15:12:16 |
