@@ -15889,6 +15889,30 @@
   }
  },
  {
+  "index": 951,
+  "feature": "counter-evidence",
+  "claim": "Sato writes that of all the obituaries published for Beth Mazur only the one written by a person who knew her captures who she actually was.",
+  "source": "Mia Sato, The Verge, 12 Feb 2024",
+  "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+  "quote": "only Vastag’s obituary captures the actual person Mazur was",
+  "page": "body, closing section",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2024-02-12",
+  "routeHint": "curl with a desktop browser user agent on the live URL",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "comparison of unnamed generative-AI obituaries against a human-written one, Feb 2024; register measured: obituary / biographical record",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 951,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only Vastag’s obituary captures the actual person Mazur was",
+   "note": "Live theverge.com fetched raw (HTTP 200). Quote exact in the closing section; byline Mia Sato, dated Feb 12, 2024. Every limb holds: the sentence contrasts his obituary with the faster spam obituaries, and Vastag is described earlier as once married to Mazur and still close to her, so 'a person who knew her' is supported.",
+   "fromFile": "verdicts-ai-i951-1032.json"
+  }
+ },
+ {
   "index": 952,
   "feature": "other: kin relation corrupted",
   "claim": "Weiss reports that Echovita's automated summary of a family-written obituary turned the dead woman's granddaughter into a grandson.",
@@ -16126,6 +16150,54 @@
    "trueWording": "by someone who knew little if anything about the deceased",
    "note": "Raw page via Wayback capture 20260525050716id_ (live wikitree.com returns an AWS WAF challenge, HTTP 202 x-amzn-waf-action: challenge). Byline confirmed: 'answered Nov 23, 2023 by M Ross Golden Owl (1.3m points)', answer header '+18 votes' as the locator states. The obituary-filler limb is carried by the same sentence, which continues about filling the ten lines an obituary requires. One softening to record: the page says 'little if anything', the claim says 'knew nothing' - idiomatically equivalent, not an added limb.",
    "fromFile": "verdicts-ai-i962-984.json"
+  }
+ },
+ {
+  "index": 963,
+  "feature": "abstraction over the concrete",
+  "claim": "Stephanie Ward characterises AI-generated WikiTree biographies as pretty words carrying no content.",
+  "source": "Stephanie Ward, answer on WikiTree G2G, 23 Nov 2023",
+  "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+  "quote": "pretty words for a lot of nothing",
+  "page": "answer, +21 votes",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2023-11-23",
+  "routeHint": "curl with a Googlebot user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "ChatGPT / Bing as of Nov 2023; register measured: genealogical biography",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 963,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pretty words for a lot of nothing",
+   "note": "Live wikitree.com returned HTTP 202 with an empty body; reached via the Wayback raw capture 20260525050716id_. Quote exact, in Stephanie Ward's answer of Nov 23, 2023 carrying +21 votes, referring to AI-generated profiles ('emperor's new clothes').",
+   "fromFile": "verdicts-ai-i951-1032.json"
+  }
+ },
+ {
+  "index": 964,
+  "feature": "steerability",
+  "claim": "M Cole reports that ChatGPT keeps adding lofty summary statements about a subject's achievements whatever prompt is used to forbid opinion.",
+  "source": "M Cole, answer on WikiTree G2G, 23 Nov 2023",
+  "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+  "quote": "adding lofty summary statements about people's achievements no matter what",
+  "page": "answer, +19 votes",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2023-11-23",
+  "routeHint": "curl with a Googlebot user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "ChatGPT as of Nov 2023; register measured: genealogical biography merged from existing sourced text",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 964,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "adding lofty summary statements about people’s achievements no matter what",
+   "note": "Same Wayback raw capture of the G2G thread. Quote exact inside M Cole's answer (+19 votes, Nov 23, 2023); the sentence continues 'prompts I use to ask it to stick to facts and avoid opinions', supporting the 'whatever prompt forbids opinion' limb.",
+   "fromFile": "verdicts-ai-i951-1032.json"
   }
  },
  {
@@ -16417,6 +16489,30 @@
   }
  },
  {
+  "index": 978,
+  "feature": "steerability",
+  "claim": "Crow reports that when she supplied the verified facts, ChatGPT's biography still contained editorializing and embellishment she was not comfortable with.",
+  "source": "Amy Johnson Crow, 7 Jul 2023",
+  "url": "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
+  "quote": "There’s some editorializing and a little bit of embellishment",
+  "page": "section 'Getting Accuracy in ChatGPT Results'",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2023-07-07",
+  "routeHint": "curl with a Googlebot user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "ChatGPT, July 2023; register measured: genealogical biography written from supplied facts",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 978,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some editorializing and a little bit of embellishment",
+   "note": "Live amyjohnsoncrow.com returned HTTP 412 behind a proof-of-work gate; reached via the Wayback raw capture 20250115092958id_. Quote exact under the heading 'Getting Accuracy in ChatGPT Results', about the second prompt in which she supplied the facts. Page reads 'not quite comfortable with' (a hedge) where the claim says 'not comfortable with' — same direction, so still verified.",
+   "fromFile": "verdicts-ai-i951-1032.json"
+  }
+ },
+ {
   "index": 979,
   "feature": "other: identity conflation",
   "claim": "Crow states that even for a subject present in its training set, ChatGPT has no good way to tell apart people who share a name.",
@@ -16438,6 +16534,102 @@
    "trueWording": "a good way of differentiating between people who have the same name",
    "note": "Same live fetch, same section, the sentence immediately after the §977 quote. Its opening clause - even if the ancestor were famous and somewhere in the training set - carries the claim's 'present in its training set' limb; the negation ('it doesn't have') is trimmed out of trueWording only for the twelve-word cap and is present on the page.",
    "fromFile": "verdicts-ai-i962-984.json"
+  }
+ },
+ {
+  "index": 980,
+  "feature": "counter-evidence",
+  "claim": "Nicole Elder Dyer reports that ChatGPT 4 gave the correct Chicago format for a book citation, matching the Chicago Manual of Style 17th edition at p. 799, section 14.101.",
+  "source": "Nicole Elder Dyer, 'Can ChatGPT Help with Genealogy Citations?', Family Locket, 17 Nov 2023",
+  "url": "https://familylocket.com/can-chatgpt-help-with-genealogy-citations/",
+  "quote": "ChatGPT did a great job with providing the accurate format",
+  "page": "section 'Book Citation'",
+  "kind": "measurement",
+  "polarity": "rejects",
+  "date": "2023-11-17",
+  "routeHint": "curl with a Googlebot user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "ChatGPT 4, Nov 2023; register measured: genealogical citation formatting (Evidence Explained / Chicago)",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 980,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ChatGPT did a great job with providing the accurate format",
+   "note": "Live familylocket.com fetched raw (HTTP 200). Quote exact under the 'Book Citation' section; the same sentence names the Chicago Manual of Style, 17th ed., p. 799, section 14.101, and the section states 'I asked ChatGPT 4', so the model-version limb holds. Byline Nicole Elder Dyer, November 17, 2023.",
+   "fromFile": "verdicts-ai-i951-1032.json"
+  }
+ },
+ {
+  "index": 981,
+  "feature": "counter-evidence",
+  "claim": "Dyer concludes that ChatGPT had a much harder time with the census citation when she did not supply the details herself.",
+  "source": "Nicole Elder Dyer, Family Locket, 17 Nov 2023",
+  "url": "https://familylocket.com/can-chatgpt-help-with-genealogy-citations/",
+  "quote": "without me providing the details for the 1850 census",
+  "page": "section 'Conclusion'",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2023-11-17",
+  "routeHint": "curl with a Googlebot user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "ChatGPT 4, Nov 2023; register measured: genealogical citation formatting",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 981,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "without me providing the details for the 1850 census",
+   "note": "Same live familylocket.com page. Quote exact in the 'Conclusion' section, where the sentence ends 'that I already knew would be helpful, it had a much harder time' — both limbs (census citation, her not supplying details) supported.",
+   "fromFile": "verdicts-ai-i951-1032.json"
+  }
+ },
+ {
+  "index": 982,
+  "feature": "lexical tells",
+  "claim": "Wikipedia's WikiProject AI Cleanup field guide lists 'indelible mark' among the words to watch for LLM-written claims of legacy and significance.",
+  "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup advice page), retrieved 6 Sep 2026",
+  "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "quote": "indelible mark",
+  "page": "§ Undue emphasis on significance, legacy, and broader trends — Words to watch",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2026-09-06",
+  "routeHint": "curl with a desktop browser user agent on the live URL",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "ChatGPT-class chatbots, page maintained 2023-2026 with a banner saying the most recent models need updating; register measured: encyclopedic articles, drafts and comments",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 982,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "indelible mark",
+   "note": "Live en.wikipedia.org fetched raw (HTTP 200). The term appears in the 'Words to watch' list under the section 'Undue emphasis on significance, legacy, and broader trends'; the page header states 'This is an advice page from WikiProject AI Cleanup', supporting the field-guide attribution.",
+   "fromFile": "verdicts-ai-i951-1032.json"
+  }
+ },
+ {
+  "index": 983,
+  "feature": "abstraction over the concrete",
+  "claim": "That field guide states LLM writing inflates a subject's importance by adding statements about how arbitrary aspects of it contribute to a broader topic.",
+  "source": "Wikipedia:Signs of AI writing, retrieved 6 Sep 2026",
+  "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "quote": "the importance of the subject matter by adding statements about how",
+  "page": "§ Undue emphasis on significance, legacy, and broader trends",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2026-09-06",
+  "routeHint": "curl with a desktop browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "ChatGPT-class chatbots, 2023-2026; register measured: encyclopedic articles",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 983,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLM writing often puffs up the importance of the subject matter",
+   "note": "Same live Wikipedia page, first body sentence of 'Undue emphasis on significance, legacy, and broader trends'. The quoted fragment is exact; the sentence continues about arbitrary aspects of the topic representing or contributing to a broader topic, so 'inflates' (= puffs up) and every other limb hold.",
+   "fromFile": "verdicts-ai-i951-1032.json"
   }
  },
  {
@@ -16558,6 +16750,30 @@
    "trueWording": "attribute opinions or claims to some vague authority",
    "note": "Section heading is exactly 'Vague attributions and overgeneralization of opinions'. Quote verbatim in its first sentence (which names the practice weasel wording); the exaggeration limb is the immediately following sentence about exaggerating the quantity of sources those opinions are attributed to.",
    "fromFile": "verdicts-ai-i985-1004.json"
+  }
+ },
+ {
+  "index": 990,
+  "feature": "detection and its failures",
+  "claim": "The field guide relays a 2025 study finding that human ability to tell LLM text from human text is no better than chance.",
+  "source": "Wikipedia:Signs of AI writing relaying a 2025 study (its reference 4), retrieved 6 Sep 2026",
+  "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "quote": "no better than random chance",
+  "page": "§ Caveats — Your detection ability",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "2026-09-06",
+  "routeHint": "curl with a desktop browser user agent",
+  "registerHint": "none",
+  "confidence": "medium",
+  "modelEra": "unspecified models, study dated 2025; register measured: not stated on this page. RELAY: the underlying study was not read here",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 990,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no better than random chance",
+   "note": "Same live Wikipedia page, section 'Caveats' → 'Your detection ability': a 2025 study is relayed as showing human ability to distinguish LLM text from human is no better than random chance, carrying footnote [4] as the claim states.",
+   "fromFile": "verdicts-ai-i951-1032.json"
   }
  },
  {
@@ -16753,6 +16969,78 @@
   }
  },
  {
+  "index": 999,
+  "feature": "lexical tells",
+  "claim": "Bob Treadway, a daily reader of his local paper's obituary section, names paint-by-numbers phrases and clunky sentences as what makes him suspect an AI obituary.",
+  "source": "Bob Treadway, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+  "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "quote": "the paint-by-numbers phrases, the clunky sentences",
+  "page": "section 'Creative ideas for a graveside service'",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2025-08-03",
+  "routeHint": "Wayback Machine raw capture",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "suspected AI obituaries in a local newspaper, observed mid-2025; register measured: the obituary",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 999,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the paint-by-numbers phrases, the clunky sentences",
+   "note": "Live washingtonpost.com would not complete (HTTP/2 INTERNAL_ERROR, then a 45 s timeout on HTTP/1.1); reached via the Wayback raw capture 20250804135306id_, full article text. Quote exact in the first paragraph under '‘Creative ideas for a graveside service’', attached to his suspicion of a growing number of AI obituaries; the next paragraph confirms he reads his local paper's obit section every day. Byline Drew Harwell.",
+   "fromFile": "verdicts-ai-i951-1032.json"
+  }
+ },
+ {
+  "index": 1002,
+  "feature": "counter-evidence",
+  "claim": "McGreevy says the obituaries that travel are not written by talented writers.",
+  "source": "Mary McGreevy, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+  "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "quote": "It’s not the people who are talented writers whose obituaries go viral",
+  "page": "section 'A faster way to remember you'",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2025-08-03",
+  "routeHint": "Wayback Machine raw capture",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "human obituaries compared against AI ones, Aug 2025; register measured: the obituary",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 1002,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It’s not the people who are talented writers whose obituaries",
+   "note": "Same Wayback raw capture; the sentence ends 'go viral'. Quote exact in the McGreevy passage under '‘A faster way to remember you’'; 'travel' maps to 'go viral'.",
+   "fromFile": "verdicts-ai-i951-1032.json"
+  }
+ },
+ {
+  "index": 1003,
+  "feature": "counter-evidence",
+  "claim": "McGreevy locates the value of an obituary in reaching the imperfect heart of the person rather than in polish.",
+  "source": "Mary McGreevy, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+  "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "quote": "to get to the imperfect heart of who that person was",
+  "page": "section 'A faster way to remember you'",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2025-08-03",
+  "routeHint": "Wayback Machine raw capture",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "human obituaries compared against AI ones, Aug 2025; register measured: the obituary",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 1003,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to get to the imperfect heart of who that person was",
+   "note": "Same Wayback raw capture, same McGreevy quotation. The 'rather than in polish' limb is carried by the following sentences: those obituaries 'truly help people in their grief' and are 'not necessarily professional or polished at all'.",
+   "fromFile": "verdicts-ai-i951-1032.json"
+  }
+ },
+ {
   "index": 1004,
   "feature": "point of view and distance",
   "claim": "Irina Raicu of Santa Clara University's internet ethics program says a traditional obituary lets the reader see the dead person through the writer's eyes.",
@@ -16774,6 +17062,30 @@
    "trueWording": "you can actually see the person through the writer's eyes",
    "note": "Same Wayback raw capture. The quote is verbatim, prefaced 'In a traditional obituary,' and closed 'she said' — 'she' being Irina Raicu, introduced three paragraphs earlier as directing the internet ethics program at Santa Clara University. The passage sits above the '‘Passed away peacefully’' section break, matching the cited location.",
    "fromFile": "verdicts-ai-i985-1004.json"
+  }
+ },
+ {
+  "index": 1005,
+  "feature": "homogenisation",
+  "claim": "Raicu names the risk of outsourcing memorial writing to machines a flattening effect.",
+  "source": "Irina Raicu, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+  "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "quote": "flattening effect",
+  "page": "section before 'Passed away peacefully'",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2025-08-03",
+  "routeHint": "Wayback Machine raw capture",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "AI obituary generators generally, Aug 2025; register measured: the obituary",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 1005,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "flattening effect",
+   "note": "Same Wayback raw capture, in the paragraph preceding the '‘Passed away peacefully’' subhead. Irina Raicu, who directs the internet ethics program at Santa Clara University, is reported as worrying about the flattening effect stemming from people outsourcing their most emotional moments to unfeeling machines — the article's frame is memorials/obituaries, so 'memorial writing' holds.",
+   "fromFile": "verdicts-ai-i951-1032.json"
   }
  },
  {
@@ -17254,6 +17566,30 @@
    "trueWording": "\"higher for facts mentioned later in the generation\" — §3.4",
    "note": "Verbatim contiguous prefix of the §3.4 run-in heading 'Error rates are higher for facts mentioned later in the generation.' Supporting text: 'Across all LMs, the later part of the generation has significantly worse precision', measured over relative positions (Figure 2, bottom); the generations are the people biographies of §3.3.",
    "fromFile": "verdicts-ai-i1026-1043.json"
+  }
+ },
+ {
+  "index": 1032,
+  "feature": "register measured",
+  "claim": "They chose people biographies for the evaluation on the stated ground that biographies are objective and contain specific rather than vague information.",
+  "source": "Sewon Min et al., arXiv:2305.14251",
+  "url": "https://arxiv.org/pdf/2305.14251",
+  "quote": "Biographies are objective (not subjective or de-",
+  "page": "§3.2, first bullet",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2023-05-23",
+  "routeHint": "arXiv PDF via curl, pdftotext -layout; the line breaks mid-word in the two-column layout",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium",
+  "modelEra": "study design, spring 2023; register measured: people biographies. Confidence medium: the quotation is truncated by the PDF's column break",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 1032,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Biographies are objective (not subjective or de-",
+   "note": "arXiv PDF fetched as binary and text-extracted with pdftotext. The fragment is exact (line-broken 'de-/batable'); the full bullet reads that biographies are objective and contain specific (not vague) information, and it is the first of the reasons given for prompting the subject LM to generate people biographies. Paper is FACTSCORE, Sewon Min et al. Locator correction: the bullet sits in §3.3 'Data', not §3.2 (which describes the subject LMs).",
+   "fromFile": "verdicts-ai-i951-1032.json"
   }
  },
  {
@@ -18417,6 +18753,270 @@
   }
  },
  {
+  "index": 1082,
+  "feature": "counter-evidence",
+  "claim": "Schaeffer and colleagues' twelve one-sided paired t-tests on the min-p paper's data supported min-p's superiority in one of twelve comparisons after Bonferroni correction at alpha 0.05.",
+  "source": "Rylan Schaeffer, Joshua Kazdan and Yegor Denisov-Blanch (Stanford University), 'Min-p, Max Exaggeration: A Critical Analysis of Min-p Sampling in Language Models', arXiv preprint v2, 19 Jun 2025",
+  "url": "https://arxiv.org/abs/2506.13681",
+  "quote": "",
+  "page": "Table 1 caption",
+  "kind": "measurement",
+  "polarity": "rejects",
+  "date": "2025-06-19",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "re-analysis of the 2024 min-p human study, June 2025; paired t-tests with 52 degrees of freedom; without correction 5 of 12 reached alpha 0.05.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1082,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "min-p's superiority in 1 of 12 comparisons at alpha=0.05",
+   "note": "arXiv HTML v2 fetched raw (200). Table 1 caption states exactly this after Bonferroni; Sec 2.3 confirms '12 one-sided paired t-tests' run 'using the authors' published data' (df=52, alternative=greater). Graded SUBSTANCE not VERBATIM only because the claim ships an empty quote field.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1083,
+  "feature": "reader and expert judgment",
+  "claim": "Schaeffer and colleagues, annotating the min-p study's free-text responses, found that more human evaluators explicitly preferred plain temperature sampling than preferred min-p.",
+  "source": "Rylan Schaeffer, Joshua Kazdan and Yegor Denisov-Blanch (Stanford University), 'Min-p, Max Exaggeration: A Critical Analysis of Min-p Sampling in Language Models', arXiv preprint v2, 19 Jun 2025",
+  "url": "https://arxiv.org/abs/2506.13681",
+  "quote": "more human evaluators explicitly preferred basic sampling than preferred min-p",
+  "page": "section 2.3",
+  "kind": "measurement",
+  "polarity": "rejects",
+  "date": "2025-06-19",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "qualitative responses from Nguyen and colleagues' 2024 Prolific study, re-annotated June 2025; register measured: prompted short fiction.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1083,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more human evaluators explicitly preferred basic sampling than preferred min-p",
+   "note": "Sec 2.3, result (1), word for word (page continues 'sampling'). Annotation limb supported: 'We manually annotated responses from human annotators regarding their preferred sampler(s)', free-text answers quoted in Appendix A. 'Plain temperature sampling' is a fair gloss of the paper's 'basic' sampler, defined in Sec 1 as temperature-only and in Sec 3.1 as having 'only a temperature hyperparameter'.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1084,
+  "feature": "detection and its failures",
+  "claim": "Schaeffer and colleagues report that the min-p paper's creative-writing table gave the higher of two available scores for min-p and the lower of two for top-p.",
+  "source": "Rylan Schaeffer, Joshua Kazdan and Yegor Denisov-Blanch (Stanford University), 'Min-p, Max Exaggeration: A Critical Analysis of Min-p Sampling in Language Models', arXiv preprint v2, 19 Jun 2025",
+  "url": "https://arxiv.org/abs/2506.13681",
+  "quote": "the higher of two scores was reported for min-p",
+  "page": "section 4.3",
+  "kind": "measurement",
+  "polarity": "rejects",
+  "date": "2025-06-19",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "audit of the min-p paper's AlpacaEval Creative Writing table, June 2025; the reported min-p win rate of 52.01 corresponds to p=0.05 while p=0.01 yields 50.14.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1084,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the higher of two scores was reported for min-p",
+   "note": "Sec 4.3 body, word for word; the section heading states the same for Table 3(b), and the sentence continues that the lower of two was reported for top-p (52.01 vs 50.14 for min-p; 50.07 vs 50.43 for top-p). Creative-writing limb supported: Sec 4 introduces these as the original paper's 'AlpacaEval creative writing evaluations'.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1086,
+  "feature": "counter-evidence",
+  "claim": "Schaeffer and colleagues allow that min-p may sometimes help at higher temperatures, with the caveat that absolute performance in that regime is meaningfully worse than at standard temperatures.",
+  "source": "Rylan Schaeffer, Joshua Kazdan and Yegor Denisov-Blanch (Stanford University), 'Min-p, Max Exaggeration: A Critical Analysis of Min-p Sampling in Language Models', arXiv preprint v2, 19 Jun 2025",
+  "url": "https://arxiv.org/abs/2506.13681",
+  "quote": "min-p sampling can sometimes provide a benefit at higher temperatures",
+  "page": "section 6, Discussion and Limitations",
+  "kind": "analysis",
+  "polarity": "disputes",
+  "date": "2025-06-19",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "June 2025 assessment of the min-p evidence base across Qwen, Mistral, Llama and Gemma models. THIS IS THE ANSWER TO THE ROSTER'S HIGH-TEMPERATURE CLAIM: the peer-reviewed 'high temperature can be made coherent' result survives only as a weak effect inside a regime that is worse overall.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1086,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "min-p sampling can sometimes provide a benefit at higher temperatures",
+   "note": "Sec 6, Discussion and Limitations, word for word. The caveat limb is the same sentence: 'albeit with the critical caveat that absolute performance is meaningfully worse in this high-temperature regime than in standard temperature regimes'. The page's lead-in is 'The paper's data does weakly suggest', which matches the claim's hedged 'allow that... may sometimes'.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1087,
+  "feature": "lexical tells",
+  "claim": "Paech and colleagues measured that some over-used patterns appear over one thousand times more often in language-model output than in human text.",
+  "source": "Samuel J Paech, Allen G Roush, Judah Goldfeder and Ravid Shwartz-Ziv, 'Antislop: A Comprehensive Framework for Identifying and Eliminating Repetitive Patterns in Language Models', arXiv preprint v2, 21 Oct 2025",
+  "url": "https://arxiv.org/abs/2510.15061",
+  "quote": "slop patterns appear over 1,000× more frequently in LLM output",
+  "page": "Abstract",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025-10-21",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "Gemma-3-12B, Mistral-Small-3.2 and Llama-3.3-70B, 2,000 generations per model from Reddit creative-writing prompts, October 2025; human baseline: wordfreq plus a curated corpus of Reddit creative writing and Project Gutenberg; register measured: prompted short fiction, not archival or encyclopedic.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1087,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some slop patterns appear over 1,000x more frequently in LLM output",
+   "note": "Abstract, word for word (page renders the multiplication sign; sentence ends 'than human text'). Sec 1 repeats it as 'some patterns occur over 1000x more frequently in LLM text than in human writing'. arXiv HTML v2 fetched raw (200).",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1088,
+  "feature": "lexical tells",
+  "claim": "Paech and colleagues measured that the name Elara appears 85,513 times more often in gemma-3-12b's creative writing than in their human baseline.",
+  "source": "Samuel J Paech, Allen G Roush, Judah Goldfeder and Ravid Shwartz-Ziv, 'Antislop: A Comprehensive Framework for Identifying and Eliminating Repetitive Patterns in Language Models', arXiv preprint v2, 21 Oct 2025",
+  "url": "https://arxiv.org/abs/2510.15061",
+  "quote": "appears 85,513 times more frequently",
+  "page": "section 3.2, Empirical Findings, discussion of Table 1",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025-10-21",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "gemma-3-12b, 2,000 creative-writing samples, October 2025; human baseline wordfreq plus Reddit and Project Gutenberg; register measured: prompted short fiction.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1088,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Elara appears 85,513 times more frequently in gemma-3-12b's creative writing",
+   "note": "Sec 3.2 text under Table 1, word for word; page says 'than in human text', and the Table 1 caption defines that baseline as 'wordfreq + Reddit/Gutenberg corpora' over 2,000 gemma-3-12b creative-writing samples. Table 1's own row for 'elara' reads 85,513x.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1089,
+  "feature": "homogenisation",
+  "claim": "Paech and colleagues found the trigram 'voice barely whisper' among the top forty over-represented trigrams of 68.7 percent of the sixty-seven models they profiled.",
+  "source": "Samuel J Paech, Allen G Roush, Judah Goldfeder and Ravid Shwartz-Ziv, 'Antislop: A Comprehensive Framework for Identifying and Eliminating Repetitive Patterns in Language Models', arXiv preprint v2, 21 Oct 2025",
+  "url": "https://arxiv.org/abs/2510.15061",
+  "quote": "",
+  "page": "Table 5 (Top overlapping trigrams across 67 AI models)",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025-10-21",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "67 AI models profiled against a human baseline, October 2025; register measured: creative writing prompts. This is cross-model homogenisation measured directly rather than inferred.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1089,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "'voice barely whisper' appearing on 68.7% of lists",
+   "note": "Appendix G text gives the figure; Table 5's row for 'voice barely whisper' is 68.7 and its caption reads 'Top overlapping trigrams across 67 AI models... % of models in which the phrase appears among their top 40 most over-represented trigrams'. Every limb (top forty, 68.7 percent, sixty-seven models) checks out. Graded SUBSTANCE only because the claim ships an empty quote field.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1090,
+  "feature": "steerability",
+  "claim": "Paech and colleagues state that stochastic decoding strategies such as top-k, top-p and min-p do not address a model's repetitive tendencies in outputs that are already coherent.",
+  "source": "Samuel J Paech, Allen G Roush, Judah Goldfeder and Ravid Shwartz-Ziv, 'Antislop: A Comprehensive Framework for Identifying and Eliminating Repetitive Patterns in Language Models', arXiv preprint v2, 21 Oct 2025",
+  "url": "https://arxiv.org/abs/2510.15061",
+  "quote": "these strategies do not address repetitive tendencies in coherent outputs",
+  "page": "section 2, Related Work",
+  "kind": "analysis",
+  "polarity": "rejects",
+  "date": "2025-10-21",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "assessment as of October 2025 across Gemma 3, Mistral Small 3.2 and Llama 3.3. THE BRIDGE CLAIM: the decoding literature's cures address degeneration, not the lexical and phrasal tells of modern instruction-tuned prose.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1090,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "these strategies do not address repetitive tendencies in coherent outputs",
+   "note": "Sec 2, Related Work, word for word (preceded by 'However,'). The antecedent is the prior sentence: 'Stochastic decoding strategies like top-k, top-p (nucleus sampling), and min-p... have since been adopted to increase diversity and reduce incoherent outputs', so the named-samplers limb holds.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1091,
+  "feature": "steerability",
+  "claim": "Paech and colleagues measured that their backtracking Antislop sampler suppressed banned patterns completely while scoring above the baseline model on their writing-quality rubric.",
+  "source": "Samuel J Paech, Allen G Roush, Judah Goldfeder and Ravid Shwartz-Ziv, 'Antislop: A Comprehensive Framework for Identifying and Eliminating Repetitive Patterns in Language Models', arXiv preprint v2, 21 Oct 2025",
+  "url": "https://arxiv.org/abs/2510.15061",
+  "quote": "The Antislop Sampler achieves perfect suppression (100%)",
+  "page": "section 6.2, Main Results",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025-10-21",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "gemma-3-12b with banlists of 2k, 4k and 8k patterns, 1,000 evaluation prompts from the Reddit writing dataset, GPT-5-judged rubric, October 2025; register measured: prompted short fiction.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1091,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Antislop Sampler achieves perfect suppression (100%) while actually improving writing quality",
+   "note": "Sec 6.2, Main Results, word for word; the sentence ends 'above baseline', and the preceding sentence names the axis as 'output degradation as measured by our writing rubric'. Backtracking limb supported by the Abstract: the sampler 'uses backtracking to suppress unwanted strings at inference time'.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1092,
+  "feature": "counter-evidence",
+  "claim": "Paech and colleagues measured that plain token banning at eight thousand patterns dropped writing quality to 28 out of 100 on their rubric.",
+  "source": "Samuel J Paech, Allen G Roush, Judah Goldfeder and Ravid Shwartz-Ziv, 'Antislop: A Comprehensive Framework for Identifying and Eliminating Repetitive Patterns in Language Models', arXiv preprint v2, 21 Oct 2025",
+  "url": "https://arxiv.org/abs/2510.15061",
+  "quote": "quality falling to 28 (out of 100) at 8k patterns",
+  "page": "section 6.2, Main Results",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025-10-21",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "gemma-3-12b with logit-bias token banning at -100, October 2025; the degradation showed as 'severe repetition, spelling and grammar artifacting, and incoherence'; register measured: prompted short fiction.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1092,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quality falling to 28 (out of 100) at 8k patterns",
+   "note": "Sec 6.2, Main Results, word for word, in the sentence 'Token banning collapses even more severely, with quality falling to 28 (out of 100) at 8k patterns'. Rubric limb supported by the same subsection's writing-rubric metric definition; 'plain token banning' is the paper's 'token banning' baseline.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1093,
+  "feature": "steerability",
+  "claim": "Paech and colleagues measured that DPO fine-tuning on their slop preference pairs collapsed lexical diversity to between 74 and 92 percent of the baseline model's.",
+  "source": "Samuel J Paech, Allen G Roush, Judah Goldfeder and Ravid Shwartz-Ziv, 'Antislop: A Comprehensive Framework for Identifying and Eliminating Repetitive Patterns in Language Models', arXiv preprint v2, 21 Oct 2025",
+  "url": "https://arxiv.org/abs/2510.15061",
+  "quote": "FTPO maintains or enhances diversity",
+  "page": "section 6.3, Lexical diversity",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025-10-21",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "gemma-3-12b, banlists 1k to 8k, October 2025; diversity is a length-controlled composite of MATTR-500, Root-TTR, HD-D and Distinct-1/2/3 normalised to the baseline at 100; register measured: prompted short fiction. The quotation is the contrasting clause; the 74-92 percent figures are in the same paragraph.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1093,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "DPO causes progressive collapse (74-92%)",
+   "note": "CITATION MISMATCH, flagged: the supplied quote 'FTPO maintains or enhances diversity' is on the page word for word but describes FTPO (95-102% of baseline), not the DPO collapse the claim asserts. The claim's own substance is fully supported by the second half of that Sec 6.3 sentence, 'while DPO causes progressive collapse (74-92%)', diversity being normalized to the baseline model at 100. Do not carry the supplied quote as the citation for this claim; the DPO run is trained on their final-token preference set.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
   "index": 1094,
   "feature": "other: mechanism of blandness",
   "claim": "Paech and colleagues cite Kirk and colleagues for the finding that RLHF significantly reduces output diversity relative to a supervised baseline.",
@@ -18439,6 +19039,78 @@
    "note": "arXiv 2510.15061 (Antislop), section 2 Related Work, verbatim; the sentence continues 'compared to a supervised baseline [Kirk et al., 2024]', so both the citation limb and the 'relative to a supervised baseline' limb hold. Kirk et al., 'Understanding the effects of RLHF on LLM generalisation and diversity', is in the reference list.",
    "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2510.15061) carries only the abstract; the quote is in arXiv 2510.15061 PDF, §2 Related Work",
    "fromFile": "verdicts-ai-regrade-r10.json"
+  }
+ },
+ {
+  "index": 1095,
+  "feature": "steerability",
+  "claim": "Paech explains that per-token logit biasing cannot suppress most over-used phrases because they span more than one token, which is why his sampler waits for the whole phrase and backtracks.",
+  "source": "Sam Paech, antislop-sampler README (GitHub), updated 13 Oct 2024",
+  "url": "https://github.com/sam-paech/antislop-sampler",
+  "quote": "most slop words & phrases are more than one token",
+  "page": "section 'What this does'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2024-10-13",
+  "routeHint": "raw.githubusercontent.com README, browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "written October 2024 about Llama-3.2-3B-Instruct-class open models in the Transformers stack; register measured: general chat and story generation. Mechanism claim about why decoding-level cures for lexical tells are hard.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1095,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most slop words & phrases are more than one token",
+   "note": "README section 'What this does:', word for word, in 'Previous approaches have done this with per-token logit biasing; but that's quite ineffective since most slop words & phrases are more than one token'. Backtracking limb is the next sentence ('we wait for the whole phrase to appear... then backtrack'). The strong 'cannot suppress' reading is carried by the later 'Samplers typically work at the token level -- but that doesn't work if [you] want to avoid words/phrases that tokenise to >1 tokens'; the nearer wording is the softer 'quite ineffective'.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1096,
+  "feature": "lexical tells",
+  "claim": "Paech states that his default slop list was computed as words over-represented in language-model output relative to normal human writing.",
+  "source": "Sam Paech, antislop-sampler README (GitHub), updated 13 Oct 2024",
+  "url": "https://github.com/sam-paech/antislop-sampler",
+  "quote": "over-represented in LLM output compared to normal human writing",
+  "page": "section 'What this does'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2024-10-13",
+  "routeHint": "raw.githubusercontent.com README, browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "October 2024; the list was auto-generated from a large LLM-generated story dataset, which Paech himself calls 'not well optimised or curated'; register measured: stories.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1096,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "over-represented in LLM output compared to normal human writing",
+   "note": "README section 'What this does:', word for word: 'For the default slop list, we computed a large list of words that are over-represented in LLM output compared to normal human writing.' Completeness note for downstream use (not a failed limb, since the claim asserts derivation and not exclusivity): the same sentence adds that the list 'is supplemented by a list of over-used phrases that are pet peeves of LLM enthusiasts', and the README elsewhere calls the shipped JSON 'mostly auto-generated' and 'not well optimised or curated'.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
+  }
+ },
+ {
+  "index": 1097,
+  "feature": "detection and its failures",
+  "claim": "Paech states that his Slop Score looks for glaringly over-used patterns rather than classifying a text as machine or human, and will not reliably help a writer evade AI detectors.",
+  "source": "Sam Paech, 'Slop Score' explainer page, EQ-Bench (eqbench.com), read 6 Sep 2026",
+  "url": "https://eqbench.com/slop-score.html",
+  "quote": "It looks for glaringly over-used patterns, rather than trying to classify",
+  "page": "'How does this work?' panel, 'Not an AI Detector!'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "read 2026-09-06",
+  "routeHint": "live URL with browser user agent, HTML stripped locally",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "EQ-Bench Slop Score as served September 2026; lists computed from outputs of 10 language models on essay and creative-writing prompts against human-authored text.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1097,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It looks for glaringly over-used patterns, rather than trying to classify",
+   "note": "Live page fetched raw (200), 'How does this work?' panel, 'Not an AI Detector!' subsection, word for word; sentence continues 'the text as AI or human'. Second limb is the next sentence: 'it won't reliably help you avoid AI detection'. Attribution to Paech rests on the panel's source link to github.com/sam-paech/slop-score and the EQ-Bench host, not on a byline in the page text.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
   }
  },
  {
@@ -19021,6 +19693,54 @@
   }
  },
  {
+  "index": 1185,
+  "feature": "abstraction over the concrete",
+  "claim": "Rettberg's proposed mechanism is that LLMs generate text associatively, so a route or place token pulls in the promotional register that surrounds it in the training data.",
+  "source": "Jill Walker Rettberg, jilltxt.net, 13 May 2026",
+  "url": "https://jilltxt.net/genre-glitches-and-unexpected-promotional-phrases-as-a-sign-of-ai-writing/",
+  "quote": "LLMs generate text associatively",
+  "page": "explanation following Example 2",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2026-05-13",
+  "routeHint": "curl browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "LLMs generally as of May 2026; register discussed = informational prose. MECHANISM claim.",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1185,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLMs generate text associatively",
+   "note": "Raw page fetched (curl, browser UA, HTTP 200). Quote is word-for-word in the paragraph beginning 'I think these genre glitches are another sign of AI-assisted writing.' The associative-mechanism limb is spelled out there: the Chicago-train phrase is said to be connected in the model's training data to tourist sites marketing the journey, so the next most probable words are promotional. The second example (the Amtrak passage in the Cole Allen detention memorandum) is not labelled 'Example 2' on the page - only 'Example 1' is numbered - but it is the example the explanation follows, so the page pointer is substantively right. Byline 'Jill' on jilltxt.net, dated May 13 2026, updated May 15 2026.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
+  "index": 1186,
+  "feature": "counter-evidence",
+  "claim": "The New York Times told Rettberg that the journalist who wrote her first example confirmed she did not use AI to write it.",
+  "source": "Jill Walker Rettberg, jilltxt.net, update of 14 May 2026",
+  "url": "https://jilltxt.net/genre-glitches-and-unexpected-promotional-phrases-as-a-sign-of-ai-writing/",
+  "quote": "she did not use AI to write this",
+  "page": "Example 1, bracketed update",
+  "kind": "analysis",
+  "polarity": "disputes",
+  "date": "2026-05-14",
+  "routeHint": "curl browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "a May 2026 news sentence wrongly read as AI; register measured = news prose. Direct evidence that the genre-glitch tell produces false positives.",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1186,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "she did not use AI to write this",
+   "note": "Quote word-for-word inside the bracketed update in the Example 1 paragraph: the New York Times emailed the author on May 14 to say they had contacted the journalist, who confirmed it. Every limb holds - NYT told Rettberg, the journalist wrote the first example (Julie Creswell's tomato-price story of 12 May 2026), and she confirmed no AI. Post footer shows 'May 13, 2026 / May 15, 2026', consistent with a 14 May update.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
   "index": 1187,
   "feature": "other: invented archival particular",
   "claim": "A historical society reference librarian reports that ChatGPT, asked about the first Hindu wedding in US media, generated an article title in quotation marks from a specific newspaper on a particular date, none of which she could verify.",
@@ -19066,6 +19786,54 @@
    "trueWording": "it found a repeated pattern and produced a conclusion",
    "note": "Same paragraph carries the mechanism limb: the names and the words wedding/Hindoo appeared on the same Daily Astorian pages in the 1910s but were unrelated, and the sentence closes with the conclusion not being based in fact.",
    "fromFile": "verdicts-ai-i1162-1193.json"
+  }
+ },
+ {
+  "index": 1189,
+  "feature": "reader and expert judgment",
+  "claim": "A public library services manager says today's AI-generated books are quite bad, to the point of asking whether an alien wrote this.",
+  "source": "Kate DeMeester-Lane, library services manager, Pima County Public Library, quoted by Jule Pattison-Gordon, Governing, 3 October 2025",
+  "url": "https://www.governing.com/artificial-intelligence/how-local-librarians-keep-ai-slop-off-the-shelves",
+  "quote": "Did an alien write this?",
+  "page": "later in the article",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2025-10-03",
+  "routeHint": "curl browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "AI-written books reaching library wholesalers by October 2025; register measured = nonfiction and children's books",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1189,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Did an alien write this?",
+   "note": "Raw page fetched (HTTP 200). Sentence reads: today's AI-generated books are 'quite bad,' DeMeester-Lane says, then the contrast - it does not feel like a person wrote it, it is sort of like 'Did an alien write this?'. Speaker is identified earlier as library services manager for Pima County Public Library in Arizona, so the 'public library services manager' limb holds. Article bylined Jule Pattison-Gordon, dated October 3, 2025.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
+  "index": 1190,
+  "feature": "reader and expert judgment",
+  "claim": "The same librarian says the first pages of an AI-generated book quickly reveal it because the content doesn't make sense.",
+  "source": "Kate DeMeester-Lane quoted by Jule Pattison-Gordon, Governing, 3 October 2025",
+  "url": "https://www.governing.com/artificial-intelligence/how-local-librarians-keep-ai-slop-off-the-shelves",
+  "quote": "the content doesn’t make sense",
+  "page": "early in the article",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2025-10-03",
+  "routeHint": "curl browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "AI-written books circulating in 2025; register measured = nonfiction and children's books",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1190,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the content doesn't make sense",
+   "note": "Quote word-for-word (curly apostrophe on the page, matched after Unicode normalisation) in the paragraph beginning 'Fortunately, while there's a lot of AI-written nonsense out there'. Full limb support: these are not sophisticated mimics like deepfakes, and the first pages quickly reveal that the book is AI-generated because the content does not make sense, or the syntax will be wrong. Same speaker as index 1189. This passage sits earlier in the article than the 'alien' quote, matching the page pointer.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
   }
  },
  {
@@ -19141,6 +19909,78 @@
   }
  },
  {
+  "index": 1194,
+  "feature": "steerability",
+  "claim": "A Carnegie Mellon machine-learning professor says the model doesn't know the difference between travel advice, directions or recipes and just knows words.",
+  "source": "Rayid Ghani, Carnegie Mellon University, quoted by BBC Travel, 26 September 2025",
+  "url": "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+  "quote": "It doesn't know the difference between travel advice, directions or recipes",
+  "page": "middle section on how AI generates answers",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2025-09-26",
+  "routeHint": "curl browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "LLMs generally as characterised in September 2025; register discussed = travel advice. MECHANISM claim about register indifference.",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1194,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It doesn't know the difference between travel advice, directions or recipes",
+   "note": "Raw page fetched (HTTP 200). Quote word-for-word, immediately followed on the page by 'It just knows words.' - so the second limb of the claim is supported too. Speaker introduced as Rayid Ghani, a distinguished professor in machine learning; note the BBC page misspells the university as 'Carnegie Melon', while the claim uses the correct 'Carnegie Mellon'. Passage sits in the section explaining how AI generates its answers, as the page pointer says. Discrepancy outside the claim sentence: the URL slug reads 20250926 but the visible dateline on the page is 29 September 2025, not 26 September.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
+  "index": 1195,
+  "feature": "detection and its failures",
+  "claim": "A 2024 survey reported by the BBC found around 33% of respondents who used AI to plan travel said their AI-generated recommendations included false information.",
+  "source": "a 2024 survey as reported by BBC Travel, 26 September 2025",
+  "url": "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+  "quote": "33% said their AI-generated recommendations included false information",
+  "page": "middle section",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025-09-26",
+  "routeHint": "curl browser user agent",
+  "registerHint": "none",
+  "confidence": "medium",
+  "modelEra": "AI travel planning tools in use during 2024; register measured = travel recommendations. Confidence medium: the BBC links but does not name the survey.",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1195,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "around 33% said their AI-generated recommendations included false information",
+   "note": "Quote is a word-for-word contiguous substring of the sentence beginning 'According to a 2024 survey, 37% of those surveyed who used AI to help plan their travels reported...'; the page's own wording carries 'around' before 33%, exactly as the claim's hedge does. The 'who used AI to plan travel' limb is carried by the same sentence's subject group. Same middle-section paragraph as index 1196.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
+  "index": 1196,
+  "feature": "abstraction over the concrete",
+  "claim": "The same 2024 survey found 37% of those who used AI to plan travel reported that it could not provide enough information.",
+  "source": "a 2024 survey as reported by BBC Travel, 26 September 2025",
+  "url": "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+  "quote": "37% of those surveyed who used AI to help plan their travels reported that it could not provide enough information",
+  "page": "middle section",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025-09-26",
+  "routeHint": "curl browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium",
+  "modelEra": "AI travel planning tools in use during 2024; register measured = travel recommendations. Confidence medium: survey not named on the page.",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "37% ... reported that it could not provide enough information",
+   "note": "Quote is word-for-word on the page (the supplied quote runs 20 words, so trueWording here is trimmed to a 12-word cap and the rest is located rather than copied: it is the sentence opening the paragraph on why AI trip-planning goes wrong, immediately before the 33% figure of index 1195). Attribution limb holds - the page says 'According to a 2024 survey'. Both figures come from that one sentence, so 1195 and 1196 stand or fall together.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
   "index": 1198,
   "feature": "other: invented particular",
   "claim": "Another Wikivoyage editor argued that given AI's tendency to hallucinate about places or events that do not already have an online presence, much of the content in those town articles is probably false.",
@@ -19162,6 +20002,30 @@
    "trueWording": "AI's tendency to hallucinate regarding places or events that don't already",
    "note": "Raw wikitext (action=raw) of Wikivoyage:Votes for deletion/September 2025, section 'Articles created by A Sulaiman Z'. SelfieCity, 11:59, 22 August 2025 (UTC), votes Delete; the quoted clause runs on to 'have an online presence' and he then says he suspects much of the content in those articles is false. The listed pages are Nigerian localities (Birniwa, Dawakin Kudu, Katagum and about two dozen more); the page calls them articles or African destinations rather than 'towns', though the descriptor is accurate. SelfieCity is the second commenter, so 'another editor' holds.",
    "fromFile": "verdicts-ai-i1198-1227.json"
+  }
+ },
+ {
+  "index": 1200,
+  "feature": "counter-evidence",
+  "claim": "A third Wikivoyage editor objected that deleting the batch would remove African destination coverage the site already lacks.",
+  "source": "User:Ground Zero, Wikivoyage:Votes for deletion/September 2025, comment of 22 August 2025",
+  "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/September_2025",
+  "quote": "Wikivoyage has a problem with a lack of coverage of African destinations",
+  "page": "section 'Articles created by A Sulaiman Z'",
+  "kind": "reader",
+  "polarity": "disputes",
+  "date": "2025-08-22",
+  "routeHint": "action=raw wikitext",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "August 2025 cleanup discussion; register measured = travel-gazetteer entries. The cost of the cure, recorded by the community itself.",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1200,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wikivoyage has a problem with a lack of coverage of African destinations",
+   "note": "Quotation word-for-word in Ground Zero's comment of 12:19, 22 August 2025 (UTC), a third named editor in the thread after SHB2000 and Selfie City. Objection limb supported: he opens 'I am of two minds about this', recognises the AI problem, then says it would be unfortunate to lose so much African content all at once and proposes that A Sulaiman Z rewrite the articles instead. Two things a downstream document should not overstate: his stance is explicitly two-minded rather than flat opposition, and by 00:20, 14 September 2025 the same editor writes on this page that he would support deleting the articles after the author showed no willingness to save them.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
   }
  },
  {
@@ -19237,6 +20101,54 @@
   }
  },
  {
+  "index": 1204,
+  "feature": "homogenisation",
+  "claim": "A measurement study of AI urban perception found that culturally proximate prompting fails to recover the variety and diversity of human responses.",
+  "source": "Rong Zhao and four co-authors, 'Culturally uneven urban perception in large language models', arXiv 2604.20048v3, 8 June 2026",
+  "url": "https://arxiv.org/abs/2604.20048",
+  "quote": "fails to recover the variety and diversity of human responses",
+  "page": "abstract",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2026-06-08",
+  "routeHint": "arxiv.org/abs plus arxiv.org/html full text, curl browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash, measured April to June 2026; register measured = open-ended descriptions of street-view scenes, that is, place description",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fails to recover the variety and diversity of human responses",
+   "note": "Raw abstract page fetched (HTTP 200), arXiv:2604.20048v3, submitted 21 Apr 2026, last revised 8 Jun 2026, title 'Culturally uneven urban perception in large language models'. Quotation word-for-word in the abstract clause stating that prompting can move AI responses closer to specific regional human descriptions but fails to recover that variety and diversity, flattening demographic patterns and introducing sentiment-based self-favouring bias. The 'culturally proximate' wording of the claim is the paper's own term for that prompting - it appears in the body (Fig. 1d discussion and the Study 1 nation-level IPI paragraph) - so the limb is supported, though the abstract itself says only 'prompting'. 'Measurement study' limb holds: the abstract introduces a measurement framework. Author list on the page is six names (Rong Zhao, Wanqi Liu, Zhizhou Sha, Nanxi Su, Yecheng Zhang, Ying Long); arXiv's own display string is 'Rong Zhao and 4 other authors', which is what the source field copied.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
+  "index": 1205,
+  "feature": "homogenisation",
+  "claim": "The same study found that after culturally proximate prompting the model texts remained less diverse than the human benchmark.",
+  "source": "Rong Zhao et al., arXiv 2604.20048v3, 8 June 2026",
+  "url": "https://arxiv.org/html/2604.20048v3",
+  "quote": "the model texts remained less diverse, more affectively positive",
+  "page": "results, nation-level IPI comparison",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2026-06-08",
+  "routeHint": "arxiv.org/html full text",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash, 2026; register measured = open-ended place description of British street-view images from Geograph",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the model texts remained less diverse, more affectively positive",
+   "note": "Raw HTML full text fetched (HTTP 200). Quotation word-for-word in the closing sentence of the nation-level IPI paragraph under 'Study 1 | Open-ended urban perception': culturally proximate prompting therefore improved semantic alignment with human descriptions, but the model texts remained less diverse, more affectively positive and more strongly shifted in identity-linked evaluation than the human benchmark. Every limb of the claim - culturally proximate prompting, less diverse, human benchmark - is on the page in that one sentence. Context is the 270-image Geograph subset for England, Scotland and Wales.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
   "index": 1206,
   "feature": "other: evaluative positivity in place description",
   "claim": "The same study found the model texts remained more affectively positive than the human benchmark.",
@@ -19258,6 +20170,78 @@
    "trueWording": "the model texts remained less diverse, more affectively positive",
    "note": "arxiv.org/html/2604.20048v3, 'Culturally uneven urban perception in large language models', first author Rong Zhao; the abs page's submission history dates v3 to 8 June 2026, matching the citation. The sentence closes the UK Geograph results paragraph and states the comparison is against the human benchmark, so the 'than the human benchmark' limb is explicit.",
    "fromFile": "verdicts-ai-i1198-1227.json"
+  }
+ },
+ {
+  "index": 1208,
+  "feature": "register measured",
+  "claim": "The three-model comparison in that study used GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash, producing 72,000 model-generated place texts.",
+  "source": "Rong Zhao et al., arXiv 2604.20048v3, 8 June 2026",
+  "url": "https://arxiv.org/html/2604.20048v3",
+  "quote": "The three-model comparison used GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash",
+  "page": "methods, Study 1",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2026-06-08",
+  "routeHint": "arxiv.org/html full text",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash, prompts run 2026; register measured = short English paragraphs describing street-view scenes",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1208,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The three-model comparison used GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash",
+   "note": "Quotation word-for-word in Methods, subsection 'Open-perception prompting and three-model generation', in the paragraph that begins 'For Study 1' - exactly the page pointer given. The 72,000 limb is stated on the same page twice: that paragraph ends by saying that because all 3,000 images were evaluated under all eight conditions for all three models, the open-perception analysis comprises 72,000 model-generated texts; the Results overview independently says the open-text task yielded 72,000 descriptions. The claim's 'place texts' is a paraphrase of 'model-generated texts', which are street-view scene descriptions. Note for any downstream use: the structured task of Study 2 separately produced 72,000 evaluations, so the figure must be kept attached to the open-text task.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
+  "index": 1209,
+  "feature": "abstraction over the concrete",
+  "claim": "A CSCW audit of LLM local knowledge found that in formal news contexts models exhibit an urban advantage, leaving rural areas systematically underrepresented with lower semantic depth.",
+  "source": "Zihan Gao and Jacob Thebault-Spieker, 'Is Your Chatbot a Tourist or a Townie?', Proceedings of the ACM on Human-Computer Interaction, 2026 (abstract as published by the UW-Madison Institute for Diversity Science, 24 April 2026)",
+  "url": "https://ids.wisc.edu/2026/04/24/is-your-chatbot-a-tourist-or-a-townie-quantifying-geographic-and-localness-disparities-in-llm-representations-of-place",
+  "quote": "leaving rural areas systematically underrepresented with lower semantic depth",
+  "page": "abstract",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2026-04-24",
+  "routeHint": "dl.acm.org/doi/10.1145/3788058 blocked; author-institution abstract page fetched instead; ABSTRACT ONLY, full text not read",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium",
+  "modelEra": "unnamed LLMs benchmarked on over 12,000 question-answer pairs, published 2026; register measured = census data, local news and social media about places. Confidence medium: abstract only.",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1209,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leaving rural areas systematically underrepresented with lower semantic depth",
+   "note": "Raw page fetched (HTTP 200). Quotation word-for-word in the abstract, in the dual-geographic-bias sentence: in formal news contexts models exhibit a strong 'urban advantage', leaving rural areas systematically underrepresented with lower semantic depth. CSCW-audit limb supported by the abstract's own claim to be the first systematic audit of localness disparities in LLMs and its call to the CSCW community; venue line reads Proceedings of the ACM Human-Computer Interaction (2026), authors Zihan Gao and Jacob Thebault-Spieker, posted 04/24/2026. Downstream context worth keeping: the abstract pairs this with the converse 'urban penalty' on social media data.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
+  "index": 1210,
+  "feature": "abstraction over the concrete",
+  "claim": "The same audit found that models are more adept at concrete physical questions but consistently struggle to capture the nuanced relational and cognitive dimensions of a community.",
+  "source": "Zihan Gao and Jacob Thebault-Spieker, ACM CSCW 2026 (abstract via UW-Madison Institute for Diversity Science)",
+  "url": "https://ids.wisc.edu/2026/04/24/is-your-chatbot-a-tourist-or-a-townie-quantifying-geographic-and-localness-disparities-in-llm-representations-of-place",
+  "quote": "struggle to capture the nuanced relational and cognitive dimensions",
+  "page": "abstract",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2026-04-24",
+  "routeHint": "author-institution abstract page; ABSTRACT ONLY",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium",
+  "modelEra": "unnamed LLMs benchmarked in 2026; register measured = local knowledge across census, news and social media. Confidence medium: abstract only.",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1210,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "struggle to capture the nuanced relational and cognitive dimensions",
+   "note": "Quotation word-for-word in the abstract's domain-bias sentence, which says models are more adept at handling concrete, physical questions but consistently struggle to capture the nuanced relational and cognitive dimensions of a community. Both limbs of the claim are in that single sentence, including 'consistently' and 'of a community'. Same page and same abstract as index 1209.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
   }
  },
  {

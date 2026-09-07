@@ -1,0 +1,33 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i1185-1210",
+ "lines": 93,
+ "firstTs": "2026-09-07T08:56:33.489Z",
+ "lastTs": "2026-09-07T08:59:49.641Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 20
+ },
+ "urlsFetched": [
+  "https://jilltxt.net/genre-glitches-and-unexpected-promotional-phrases-as-a-sign-of-ai-writing/",
+  "https://www.governing.com/artificial-intelligence/how-local-librarians-keep-ai-slop-off-the-shelves",
+  "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+  "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/September_2025",
+  "https://arxiv.org/abs/2604.20048",
+  "https://arxiv.org/html/2604.20048v3",
+  "https://ids.wisc.edu/2026/04/24/is-your-chatbot-a-tourist-or-a-townie-quantifying-geographic-and-localness-disparities-in-llm-representations-of-place"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_6dd3b009-2b0",
+ "agent": "a5f17802b13b91b1b",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_6dd3b009-2b0/agent-a5f17802b13b91b1b.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1185-1210.json",
+  "exists": false
+ }
+}

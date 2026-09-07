@@ -1,13 +1,13 @@
-# LANE-STATUS — written 2026-09-07 04:55:34 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 05:01:09 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegation sitting — the owner hands the open rows to the chair's judgment an
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 864e76be9 · 14 cars over 4243bdc61 · porcelain 0 · last commits:
+- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 6906e1935 · 15 cars over 4243bdc61 · porcelain 0 · last commits:
+    6906e1935 §910 SOAK-HONEST landing (register car 1): the lighting census refreezes at the tip — titles 23662 -> 23665 (three it() titles the SOAK-HONEST-909 cars added; files, parked, credited and suiteTitles unchanged)
     864e76be9 §909 CAR 5: the weak zero's last two floors close, and a run too short to conclude stops reading like a world that behaved
     68c3a1618 §909 CAR 4: the seven negative assertions the whole-suite proof counted are anchored — each absence now stands on a liveness anchor that travels its own code path
     d58b489b8 §909 car 3: the fourth designed capacity row is ARMED — the state-motion bars are lifted to one home, both former homes import them, and the roster reaches 12/10 exactly as CAPACITY C3's §2.5 predicted
-    268d53605 §909 car 2: the weak zero had a third floor — `requires` becomes a field PATH, the reachability walker learns the observer, and `capacity_realm_load` stops answering a silent clean about a reading it never had
     receipt `receipt-cap-trip-907.md` (mtime 09-07 01:50) head:
       | # RECEIPT — LANE CAP-TRIP-907
       | **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
@@ -111,7 +111,7 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
@@ -130,7 +130,7 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
 - **dnd**: claims 1212 · verdicts 1212 (todo 0) · kept 906 · partial 265 · verdict files 89 (triage 2, regrade r6) · section 09-07 03:58 · critic 09-07 04:33
-- **ai**: claims 1518 · verdicts 1332 (todo 186) · kept 1060 · partial 191 · verdict files 87 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-07 02:10
+- **ai**: claims 1518 · verdicts 1377 (todo 141) · kept 1101 · partial 195 · verdict files 90 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-07 02:10
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 858 (todo 66) · kept 666 · partial 117 · verdict files 59 (triage 2, regrade r8) · section 09-07 04:03 · critic 09-07 04:36
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
@@ -143,9 +143,9 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 - wf_37a1566c-e8f: 8 journal lines, 4 agents
 - wf_43d098bf-eff: 14 journal lines, 7 agents
 - wf_543ddb3b-67c: 20 journal lines, 10 agents
-- wf_6dd3b009-2b0: 8 journal lines, 5 agents
+- wf_6dd3b009-2b0: 15 journal lines, 9 agents
 - wf_a1a420b6-993: 6 journal lines, 3 agents
 - wf_e092839f-8b1: 20 journal lines, 10 agents
 
-## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.11 2.32 2.74
+## PROCESSES: 31515 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;31557 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 3.17 2.81 2.82

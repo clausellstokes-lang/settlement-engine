@@ -3027,6 +3027,31 @@
   }
  },
  {
+  "index": 1001,
+  "feature": "homogenisation",
+  "claim": "Mary McGreevy, who reads obituaries publicly on TikTok, says AI will produce more tributes that feel templated and airbrushed.",
+  "source": "Mary McGreevy, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+  "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "quote": "templated and airbrushed",
+  "page": "section 'A faster way to remember you'",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2025-08-03",
+  "routeHint": "Wayback Machine raw capture",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "AI obituary tools generally, Aug 2025; register measured: the obituary",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 1001,
+   "verdict": "PARTIAL",
+   "trueWording": "worries that AI will lead to more tributes that feel",
+   "note": "Same Wayback raw capture. The quoted phrase 'templated and airbrushed' is exact, and McGreevy is identified as reading and commentating obituaries on her TikTok account 'Tips from Dead People'. But the page frames this as a worry set against her stated appreciation of the tools ('it got us 75 percent of the way there'), not as the flat prediction the claim asserts.",
+   "unsupportedLimb": "'says AI will produce' — the page has her worrying that AI will lead to such tributes, in a passage that also credits the tools",
+   "fromFile": "verdicts-ai-i951-1032.json"
+  }
+ },
+ {
   "index": 1023,
   "feature": "other: neutral-seeming but not neutral",
   "claim": "Wikipedia's large language models policy page states LLMs can produce content neutral-seeming in tone but not in substance.",
@@ -3074,6 +3099,31 @@
    "trueWording": "why high-probability text is often dull or generic",
    "note": "arXiv 2202.00666: the quoted fragment is on the page verbatim, broken across a hyphenated line ('makes for bor-/ing, i.e., uninformative, text'), and the sentence attributes dullness to low information content. But the claim's stated mechanism is inverted: the paper's information-theoretic framing (information content = -log p) makes HIGH probability the low-information case, which is exactly why high-probability text is dull. As written, 'because low probability is low information content' is not what the page supports, so this grades PARTIAL rather than VERIFIED.",
    "fromFile": "verdicts-ai-i1046-1108.json"
+  }
+ },
+ {
+  "index": 1085,
+  "feature": "steerability",
+  "claim": "Schaeffer and colleagues conclude that all the samplers they swept perform roughly the same once each is given the same amount of hyperparameter tuning.",
+  "source": "Rylan Schaeffer, Joshua Kazdan and Yegor Denisov-Blanch (Stanford University), 'Min-p, Max Exaggeration: A Critical Analysis of Min-p Sampling in Language Models', arXiv preprint v2, 19 Jun 2025",
+  "url": "https://arxiv.org/abs/2506.13681",
+  "quote": "all samplers perform roughly the same once given the same",
+  "page": "section 6, Discussion and Limitations, Scientific Conclusions",
+  "kind": "measurement",
+  "polarity": "rejects",
+  "date": "2025-06-19",
+  "routeHint": "arXiv PDF binary -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "9 models (Qwen 2.5 0.5B-7B, Mistral 7B v0.1, Llama 3.1 8B and 3.2 3B, Gemma 2 2B and 9B), base and instruct, 4 samplers, 31 temperatures from 0.0 to 3.0, swept June 2025; register measured: GSM8K chain-of-thought, a reasoning task, not prose.",
+  "angle": "arch-decoding-literature",
+  "verdict": {
+   "index": 1085,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that Schaeffer and colleagues 'conclude' this flatly - the page hedges the same sentence, saying the data 'suggest' it and that 'more research would be needed to assess the veracity of this conclusion'",
+   "trueWording": "all samplers perform roughly the same once given the same",
+   "note": "Quote is verbatim in Sec 6, Scientific Conclusions. Full sentence: the original paper's data and their extensions 'suggest' this, 'however, in our view, more research would be needed to assess the veracity of this conclusion'. The samplers-swept limb is fine (Sec 3.1 sweeps four: basic, top-p, top-k, min-p). Downgraded because the claim drops the authors' own explicit hedge and reports a suggestion as a settled conclusion.",
+   "fromFile": "verdicts-ai-i1082-1097.json"
   }
  },
  {
@@ -3199,6 +3249,56 @@
    "trueWording": "stands as a vibrant town with a rich cultural heritage",
    "note": "Quotation is verbatim on the page, in section 'Promotional and advertisement-like language' > 'Subtypes', labelled as from a June 2023 revision to Alamata (woreda). I followed the page's own diff link (oldid 1162718043; API confirms timestamp 2023-06-30 and title 'Alamata (woreda)') and fetched the raw wikitext: the lead is a plain one-sentence definition of Alamata as a woreda in Tigray Region, and the 'Nestled within...' passage is the first line of the '== Overview ==' section, not the opening. Puffery limb, June 2023 limb, Ethiopian-woreda limb and the quotation all hold; only the positional limb fails.",
    "fromFile": "verdicts-ai-i1162-1193.json"
+  }
+ },
+ {
+  "index": 1197,
+  "feature": "abstraction over the concrete",
+  "claim": "A Wikivoyage administrator deleting a batch of Nigerian town articles as AI-generated cited among his signs how vague some sections are.",
+  "source": "User:SHB2000, Wikivoyage:Votes for deletion/September 2025, nomination of 22 August 2025",
+  "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/September_2025",
+  "quote": "as well as how vague some sections are",
+  "page": "section 'Articles created by A Sulaiman Z'",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2025-08-22",
+  "routeHint": "action=raw wikitext",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "suspected Gemini or ChatGPT output added to Wikivoyage in 2025; register measured = travel-gazetteer entries for small Nigerian towns",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1197,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'Nigerian' and 'administrator' - the word Nigeria appears nowhere in the page source (grep count 0), and no form of 'admin' appears either; both descriptors come from outside knowledge, not from this page",
+   "trueWording": "as well as how vague some sections are",
+   "note": "Raw page fetched (HTTP 200). The quotation is word-for-word in the nomination under the heading 'Articles created by A Sulaiman Z', signed '// shb' at 09:46, 22 August 2025 (UTC): two articles already deleted as AI-generated, gptzero.me cited, oddly formatted bullet points cited, 'as well as how vague some sections are'. The batch limb is supported - two signed lists follow, roughly 45 titles (Birniwa, Mallam Madori, Katagum, Tafawa Balewa, the Kano district articles, and so on). But the page never says these are Nigerian places, and never calls SHB2000 an administrator; deletion rights imply adminship only if you bring Wikivoyage's permission model to the page. Graded PARTIAL on those two descriptors, not on the quotation, which is exact.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
+  }
+ },
+ {
+  "index": 1199,
+  "feature": "detection and its failures",
+  "claim": "The same editor reported that an AI checker returned a 99% chance of AI generation for the Tafawa Balewa article.",
+  "source": "User:SelfieCity, Wikivoyage:Votes for deletion/September 2025, comment of 22 August 2025",
+  "url": "https://en.wikivoyage.org/wiki/Wikivoyage:Votes_for_deletion/September_2025",
+  "quote": "came back as 99% chance of being AI-generated",
+  "page": "section 'Articles created by A Sulaiman Z'",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025-08-22",
+  "routeHint": "action=raw wikitext",
+  "registerHint": "none",
+  "confidence": "medium",
+  "modelEra": "an unnamed AI detector run in August 2025 on a 2025 gazetteer article; register measured = travel-gazetteer entry. Confidence medium: detector not named and the editor withheld the specific signals.",
+  "angle": "arch-gazetteer-travel-history",
+  "verdict": {
+   "index": 1199,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'The same editor' - the page attributes the AI-checker comment to Selfie City (signed 12:17, 22 August 2025), not to SHB2000, who is the editor of the preceding claim 1199 follows in this chunk (index 1198 is absent from every chunk in the sweep, so nothing intervenes to re-bind the anaphora)",
+   "trueWording": "came back as 99% chance of being AI-generated",
+   "note": "Raw page fetched (HTTP 200). Quotation is word-for-word: the commenter checked part of Tafawa Balewa against an AI checker, it came back as 99% chance of being AI-generated and gave specific examples from the text, which he declined to list so as not to help anyone circumvent detection. The substantive limbs - AI checker, 99%, Tafawa Balewa - are all supported. The claim's own source field names User:SelfieCity, which the page confirms; it is the claim sentence's 'the same editor' that the page contradicts, so this is a visible PARTIAL rather than a note.",
+   "fromFile": "verdicts-ai-i1185-1210.json"
   }
  },
  {

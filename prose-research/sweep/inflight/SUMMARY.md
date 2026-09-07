@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:55:58 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:59:58 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -27,15 +27,19 @@
 | ai | verifier | i1060-1074 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1063-1081 | result | 5 | — | verdict file WRITTEN | 08:55:09 |
 | ai | verifier | i1075-1089 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1082-1097 | in-flight | 7 | — | verdict file absent | 08:59:48 |
 | ai | verifier | i1090-1104 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1098-1127 | in-flight | 2 | — | verdict file absent | 08:59:55 |
 | ai | verifier | i1105-1119 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1110-1160 | result | 13 | — | verdict file WRITTEN | 04:31:42 |
 | ai | verifier | i1120-1134 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1128-1173 | in-flight | 7 | — | verdict file absent | 08:59:55 |
 | ai | verifier | i1135-1149 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1150-1164 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1162-1193 | result | 10 | — | verdict file WRITTEN | 04:32:16 |
 | ai | verifier | i1165-1179 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1180-1194 | failed | 0 | — | verdict file absent | 03:45:45 |
+| ai | verifier | i1185-1210 | in-flight | 7 | — | verdict file absent | 08:59:49 |
 | ai | verifier | i1195-1209 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1198-1227 | result | 10 | — | verdict file WRITTEN | 04:38:37 |
 | ai | verifier | i1210-1224 | failed | 0 | — | verdict file absent | 03:45:45 |
@@ -57,7 +61,7 @@
 | ai | verifier | i571-949 | result | 8 | — | verdict file WRITTEN | 08:54:35 |
 | ai | verifier | i940-954 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i940-961 | result | 6 | — | verdict file WRITTEN | 04:22:23 |
-| ai | verifier | i951-1032 | in-flight | 12 | — | verdict file absent | 08:55:32 |
+| ai | verifier | i951-1032 | result | 12 | — | verdict file WRITTEN | 08:56:33 |
 | ai | verifier | i955-969 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i962-984 | result | 7 | — | verdict file WRITTEN | 04:23:40 |
 | ai | verifier | i970-984 | failed | 0 | — | verdict file absent | 03:45:43 |
