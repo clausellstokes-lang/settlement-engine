@@ -1,7 +1,7 @@
 # RECEIPT — LANE SOAK-HONEST-909
 **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (re-dispatch session b43943b4) · dock `$SC/laneB6` · implementation lane, three cars**
 
-**STATUS: PARTIAL — CAR 1 COMPLETE (`ec265d24c`), cars 2 and 3 not started.** Written Mon Sep  7 03:12:56 EDT 2026.
+**STATUS: PARTIAL — CARS 1 AND 2 COMPLETE (`ec265d24c`, `268d53605`), car 3 in flight.** Written Mon Sep  7 03:26:31 EDT 2026.
 
 ## ARRIVAL CHECK — the RE-DISPATCH (Mon Sep  7 03:02:16 EDT 2026)
 | line | expected | measured | verdict |
@@ -15,13 +15,13 @@
 
 ## CARS
 - **CAR 1 — ship the series: DONE. `ec265d24c`** (3 files, +103/−31).
-- CAR 2 — dotted-path `requires` + walker extension: **not started**
-- CAR 3 — constant lift + arm `capacity_envelope_30y`: **not started**
+- **CAR 2 — dotted-path `requires` + walker extension: DONE. `268d53605`** (3 files, +409/−57).
+- CAR 3 — constant lift + arm `capacity_envelope_30y`: **in flight**
 
 ### CAR 1 — the measurements
 | what | measured | verdict |
 |---|---|---|
-| focused suites, one file at a time, exit captured in-shell | tripwireRegistry **9/9**, tripwireCaller **4/4**, soakRegister **6/6**, soakScriptSeams **8/8**, curveBandFreeze **10/10**, demographicsEnvelope **9/9** — every `EXIT=0` | **CONFIRMED** |
+| focused suites, one file at a time, exit captured in-shell | tripwireRegistry **9/9**, tripwireCaller **10/10**, soakRegister **8/8**, soakScriptSeams **8/8**, curveBandFreeze **4/4**, demographicsEnvelope **6/6** — every `EXIT=0`. ⚠ **These figures were first written mis-attributed** (a `grep -h … *.log` prints in ALPHABETICAL order, not loop order); re-read per file at 03:26 and corrected — see R8 | **CONFIRMED, after correction** |
 | eslint on the three touched files | `EXIT=0`, zero output | **CONFIRMED** |
 | the reachability walker's banked baseline | rows `2 → 0`, pairs `4 → 0`; `reach.unreachable` = `[]`, `reach.unreadable` = `[]` | **CONFIRMED** |
 | the zero is CAUSED, not weak | the test reconstructs the pre-§909 writer by deleting the two shipped lines, proves the reconstruction non-vacuous (`legacyWriter.length < WRITER_SOURCE.length`, neither field in its key set), and re-runs the walker: **the old 2 rows / 4 pairs come back** | **CONFIRMED** |
@@ -35,6 +35,23 @@
 | the detectors are NOT vacuous at their own horizon | fed the 300-row series rebuilt from `behavioral.yearly[].stateVectors[id].population`, `capacity_plateau` convicts **all four** settlements — 8319@149 → 10869@299; 202 → 1017; 324 → 244; 38 → 159 — reproducing §907 M1-F1 exactly; `capacity_floor_thaw` correctly silent (nothing frozen) | **CONFIRMED (on a rebuilt series; a shipped 300-row series would need a fresh 300-year lit run, ~25 min, not in this lane's charter)** |
 | register cells | **no edit, none owed.** `receiptSchemaVersion` is computed at mint (`register.mjs:195`, `finite(receipt?.schemaVersion) ?? 0`); both genesis cells scaffold `0`, not 5 | **CONFIRMED — the brief's premise refuted by the predecessor, re-affirmed here** |
 
+### CAR 2 — the measurements
+| what | measured | verdict |
+|---|---|---|
+| `capacity_realm_load` now declares its real dependency | `requires: ['behavioral.yearly[last].realmDemography']`; `receiptCarries` walks the envelope segment by segment (`[last]` = the final row, an empty array is absent) | **CONFIRMED** |
+| a lit receipt without the reading is NOT-EXECUTABLE, not clean | reason on its face: `requires receipt.behavioral.yearly[last].realmDemography — absent from this receipt`; proved for a missing `behavioral`, an empty `yearly`, a null `yearly`, a null `realmDemography`, and a series carrying the reading on an EARLIER year but not the last | **CONFIRMED** |
+| the walker grades the path | `tripwireFieldReach(rows, writerSource, nestedSource)` — first segment against the receipt writer, the rest against the nested writer's shipped keys, in a new `unreachablePaths` channel. On the live tree: `unreachable []`, `unreachablePaths []`, `unreadable []` | **CONFIRMED** |
+| a nested path with no nested source is REFUSED, not passed | 2-arg call ⇒ `unreadable` names `capacity_realm_load` with the path in the reason | **CONFIRMED** |
+| the zero is CAUSED, on the OBSERVER this time | reconstruct the pre-P4 observer by deleting the one shipping line (non-vacuity proved first): `unreachablePaths` = `[{capacity_realm_load, behavioral.yearly[last].realmDemography, segment realmDemography}]` | **CONFIRMED** |
+| ⛔ a FALSE UNREACHABLE found in the walker itself and fixed | the literal scanner could not read a CONDITIONAL SHORTHAND SPREAD — `...(realmDemography ? { realmDemography } : {})`, the exact form `behavioral-observation.mjs:1054` uses — so its first reading was that NO writer ships `realmDemography`. Scanner extended | **CONFIRMED — caught by measurement before the test was written** |
+| …and the extension moves no receipt-writer key | old scanner (`git show HEAD:` at `ec265d24c`, imported from scratch) vs new, same writer source: **43 keys, identical set**, added `[]`, lost `[]` | **CONFIRMED — the car-1 ratchet is untouched** |
+| the "unreachable == declares requires" identity | **restated.** It held only while every requirement was a top-level field of ONE writer. Asserted now as the subset law plus a totality control that blinds BOTH writers and recovers the whole roster | **declared, see R9** |
+| GRADE MOVEMENT over every `whole_world_soak` receipt on disk | **ZERO real receipts change grade.** Archived 300-year `research-lit-4s`: lit, reading present → unchanged (`fullInstrument false`, the two series rows NOT-EXECUTABLE). Fresh 30-year DARK: gate dark → unchanged. Fresh 30-year LIT: reading present → unchanged. `tests/fixtures/simSoakReceiptFixture.json`: not a soak receipt shape, dark → unchanged | **CONFIRMED by census** |
+| the ONE shape that moved is a synthetic FIXTURE | `soakRegister.test.js`'s `researchReceipt()` claimed `lit` and carried no realm reading — a shape the writer cannot produce (`observeRealmDemography` returns non-null on exactly the worlds whose demographic term runs). Corrected to the writer's shape; `realmReading: false` reconstructs the pre-P4 shape so the mint door's refusal is proved | **CONFIRMED — declared, see R10** |
+| no register figure moves | `deriveRegisterFigures` never reads `realmDemography`: same figure KEY SET and identical VALUES with and without it, measured on the real 300-year receipt | **CONFIRMED** |
+| focused suites, each run alone, exit captured in-shell | tripwireRegistry **10/10**, tripwireCaller **10/10**, soakRegister **8/8**, soakScriptSeams **8/8**, demographicsEnvelope **6/6**, soakInvariants **16/16**, realmScaleCertification **10/10**, simMetricEmitter **7/7**, curveBandFreeze **4/4** — every `EXIT=0` | **CONFIRMED (each count read from its OWN log file, per R8)** |
+| eslint on the three touched files | `EXIT=0` | **CONFIRMED** |
+
 ## RETROVALIDATION ROW
 | # | call | ground | who owns it |
 |---|---|---|---|
@@ -45,6 +62,9 @@
 | R5 | **Two inherited comment defects corrected against measurement before the commit.** (a) The predecessor's block cited `behavioral-observation.mjs:1222`; the `soak_subsystem_configuration` stamp is at **:1202** (a 20-line error) — corrected, and `:644` added since it shares the constant too. (b) The block called the bump a lane REFUSAL; per addendum §2 it is recorded as the **chair's withdrawal on the lane's measurement**. The stale sentence "The exact diff is handed to the chair" was removed — nothing is handed; the bump is withdrawn. | `grep -n SOAK_RECEIPT_SCHEMA_VERSION` across `scripts src tests docs`. | lane |
 | R6 | **The two capacity rows' own headers in `tripwires.mjs` were updated in the same commit.** They asserted a LIVE blindness ("no written receipt has ever carried `yearlyPopulations`… until it lands the row is NOT-EXECUTABLE") which car 1 makes false. A source comment that claims a cured defect is still live is the same false-report class this lane exists to close. `requires` is UNCHANGED on both rows, and the new text says why it stays: every receipt already on disk still lacks both fields. | the honesty program; in-charter (`scripts/soak/*`). | lane |
 | R7 | **No register `--write`, no tuning value moved, no golden re-recorded, no signature touched, no push, no stash, no `git add -A`/`-u`/`.`.** Staged by explicit path; porcelain 0 after the commit. | STATE NEVER FATE. | lane |
+| R8 | **⚠ A FIGURE THIS LANE FIRST WROTE WAS FALSE, CAUGHT AND CORRECTED.** Car 1's six suite counts were recorded from `grep -h 'Tests  ' $SC/soak909/*.log`, which prints in ALPHABETICAL filename order, not the loop's order — so five of six were attributed to the wrong file (tripwireCaller was written 4/4 and is 10/10; curveBandFreeze 10/10 and is 4/4). Every count is now read from its own log by name. The estate's "a verdict keyed by POSITION breaks when the list is reordered" hazard, live, in a receipt. | re-read per file, 03:25. | lane |
+| R9 | **The reachability identity was RESTATED rather than deleted.** `unreachable rows == rows declaring requires` was a coincidence of a single writer; `capacity_realm_load` declares a requirement it can reach, so the equality now fails harmlessly. Kept as the subset law it was protecting (whatever the walker convicts announced its dependency) plus a stronger totality control that blinds BOTH writers and recovers the full roster. Weakening it to nothing was the alternative and was refused. | measured, car 2. | lane |
+| R10 | **A synthetic fixture was corrected to the writer's shape, and the correction is DECLARED because it is the class this lane exists to refuse.** `researchReceipt()` claimed `lit` while carrying no `realmDemography` — the estate's "a fixture can be the only writer of the SHAPE" hazard inverted: here the fixture was the only writer of a shape the writer CANNOT produce, and it made the row's silence look like a pass. The reading planted sits INSIDE the row's band on both clauses, so it adds an instrument and not a green; `realmReading: false` keeps the refusal provable; no register figure moves. | measured, car 2. | lane |
 
 ## PROVENANCE
 - Scratch: `$SC/soak909/` — `fresh-30y-4s.json` + `.run.log`, `fresh-30y-4s-lit.json` + `.run.log`, `fresh-30y-eval.txt`, `fresh-30y-lit-eval.txt`, `archived-b6-eval.txt`, the three annotated receipts, six vitest logs, `eslint-car1.log`.

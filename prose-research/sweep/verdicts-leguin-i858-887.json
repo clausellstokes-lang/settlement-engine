@@ -1,0 +1,233 @@
+{
+ "name": "leguin",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 858,
+   "feature": "plainness and economy",
+   "claim": "Le Guin says she has read overpolished fiction and found it kind of a bore.",
+   "source": "Ursula K. Le Guin, \"A Return to Earthsea\", Locus Magazine, September 2001",
+   "url": "https://www.locusmag.com/2001/Issue09/LeGuin.html",
+   "quote": "I’ve read overpolished fiction, and it’s kind of a bore.",
+   "page": "excerpt on composition and revision"
+  },
+  {
+   "index": 860,
+   "feature": "annalist voice and deep time",
+   "claim": "Le Guin describes researching the history of Earthsea as going into the archives, which are all in her head.",
+   "source": "Ursula K. Le Guin, \"A Return to Earthsea\", Locus Magazine, September 2001",
+   "url": "https://www.locusmag.com/2001/Issue09/LeGuin.html",
+   "quote": "I went into the archives",
+   "page": "excerpt on returning to Earthsea"
+  },
+  {
+   "index": 871,
+   "feature": "point of view and distance",
+   "claim": "Le Guin says the present tense, used by some writers to make the telling more actual, actually distances the story.",
+   "source": "Ursula K. Le Guin, \"Some Thoughts on Narrative\" (1980), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "actually distances the story",
+   "page": "\"Some Thoughts on Narrative\", p.38"
+  },
+  {
+   "index": 873,
+   "feature": "point of view and distance",
+   "claim": "Le Guin says narrative locates itself in the past in order to allow itself forward movement.",
+   "source": "Ursula K. Le Guin, \"Some Thoughts on Narrative\" (1980), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "It locates itself in the past",
+   "page": "\"Some Thoughts on Narrative\", p.38"
+  },
+  {
+   "index": 876,
+   "feature": "civic record register",
+   "claim": "Le Guin presents a single line of runes carved in Carlisle Cathedral, reading that Tolfink carved these runes in this stone, as a whole story.",
+   "source": "Ursula K. Le Guin, \"It Was a Dark and Stormy Night; or, Why Are We Huddling about the Campfire?\" (1979), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "Tolfink carved these runes in this stone.",
+   "page": "\"It Was a Dark and Stormy Night\", p.29"
+  },
+  {
+   "index": 877,
+   "feature": "annalist voice and deep time",
+   "claim": "Le Guin says that runic inscription is pretty close to Barbara Herrnstein Smith's earliest form of historiography, notch-cutting.",
+   "source": "Ursula K. Le Guin, \"It Was a Dark and Stormy Night\" (1979), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "Barbara Herrnstein Smith’s earliest form of historiography",
+   "page": "\"It Was a Dark and Stormy Night\", p.29"
+  },
+  {
+   "index": 878,
+   "feature": "civic record register",
+   "claim": "Le Guin says the inscription does not really meet the requirement of Minimal Connexity and has little beginning or end.",
+   "source": "Ursula K. Le Guin, \"It Was a Dark and Stormy Night\" (1979), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "it does not really meet the requirement of Minimal Connexity",
+   "page": "\"It Was a Dark and Stormy Night\", p.29"
+  },
+  {
+   "index": 879,
+   "feature": "civic record register",
+   "claim": "Le Guin nonetheless judges the carver of that inscription a reliable narrator who bore witness to his own existence.",
+   "source": "Ursula K. Le Guin, \"It Was a Dark and Stormy Night\" (1979), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "Tolfink was a reliable narrator",
+   "page": "\"It Was a Dark and Stormy Night\", p.29"
+  },
+  {
+   "index": 880,
+   "feature": "omission as information",
+   "claim": "Le Guin explains the extreme brevity of the runic record by saying the material was obdurate and life is short.",
+   "source": "Ursula K. Le Guin, \"It Was a Dark and Stormy Night\" (1979), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "The material was obdurate, and life is short.",
+   "page": "\"It Was a Dark and Stormy Night\", p.29"
+  },
+  {
+   "index": 881,
+   "feature": "place and institution description",
+   "claim": "Le Guin says what artists do is make a particularly skillful selection of fragments of cosmos, chosen and arranged to give an illusion of coherence and duration.",
+   "source": "Ursula K. Le Guin, \"World-Making\" (1981), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "a particularly skillful selection of fragments of cosmos",
+   "page": "\"World-Making\", p.46"
+  },
+  {
+   "index": 882,
+   "feature": "place and institution description",
+   "claim": "Le Guin says that all a work of art is, is an explorer's sketch-map.",
+   "source": "Ursula K. Le Guin, \"World-Making\" (1981), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "all it is is an explorer’s sketch-map",
+   "page": "\"World-Making\", p.47"
+  },
+  {
+   "index": 883,
+   "feature": "civic record register",
+   "claim": "Le Guin reproduces a sentence from her father's Handbook of the Indians of California declaring a people extinct so far as all practical purposes are concerned.",
+   "source": "Ursula K. Le Guin, \"World-Making\" (1981), in Dancing at the Edge of the World (1989), quoting A. L. Kroeber, Handbook of the Indians of California (1918)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "so far as all practical purposes are concerned",
+   "page": "\"World-Making\", p.47-48, block quotation from her father"
+  },
+  {
+   "index": 884,
+   "feature": "place and institution description",
+   "claim": "Le Guin's own travel piece renders a stretch of country as bare noun phrases with a repeated frame, writing that sagebrush is at its intervals and power poles at their intervals.",
+   "source": "Ursula K. Le Guin, \"Places Names\" (1981), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "Sagebrush at its intervals. Power poles at their intervals.",
+   "page": "\"Places Names\", section I, To the Little Bighorn, p.52"
+  },
+  {
+   "index": 886,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says the job of composition is getting the right words in the right order and getting the measure right.",
+   "source": "Ursula K. Le Guin, \"Reciprocity of Prose and Poetry\" (1983), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "the right order, getting the measure right, is the same",
+   "page": "\"Reciprocity of Prose and Poetry\", p.112-113"
+  },
+  {
+   "index": 887,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says prose could have its own proper, looser rhythms and measures, distinct from metre.",
+   "source": "Ursula K. Le Guin, \"Reciprocity of Prose and Poetry\" (1983), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "prose could have its own proper, looser rhythms and measures",
+   "page": "\"Reciprocity of Prose and Poetry\", p.111"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 858,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I've read overpolished fiction, and it's kind of a bore.",
+   "note": "Raw page fetched by curl with a browser UA, HTTP 200. Quote appears word for word in the final interview excerpt, followed by a sentence saying fiction needs a certain roughness. Both limbs (has read overpolished fiction; found it a bore) supported."
+  },
+  {
+   "index": 860,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I went into the archives—which are all in my head",
+   "note": "Same raw page. First excerpt: she gets interested in why Earthsea is the way it is, says she started researching the history, then the quoted line ending 'of course!'. All three limbs (researching Earthsea's history; going into the archives; archives in her head) supported."
+  },
+  {
+   "index": 871,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "make the telling \"more actual,\" actually distances the story",
+   "note": "Raw ebin.pub full text, HTTP 200, 548k chars. Nearest preceding running head is SOME THOUGHTS ON NARRATIVE (1980) and the next is the same title with page 39, placing the passage on p.38 as cited. Page attributes the 'more actual' motive to some writers of narrative fiction who currently employ the present tense; every limb supported."
+  },
+  {
+   "index": 873,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It locates itself in the past ... to allow itself forward movement",
+   "note": "Same essay and page (p.38, bracketed by the SOME THOUGHTS ON NARRATIVE running heads). Subject 'It' is narrative, established two sentences earlier where narrative is said to make a journey; the parenthesis 'whether the real or an imagined, fictional past' is elided by the claim without changing it."
+  },
+  {
+   "index": 876,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolfink carved these runes in this stone.",
+   "note": "Running head immediately above the passage reads IT WAS A DARK AND STORMY NIGHT with page 29, matching the citation. All limbs supported: the stone is in the north transept of Carlisle Cathedral, the inscription is described as one line of runes, and the line is introduced as the whole story."
+  },
+  {
+   "index": 877,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pretty close to Barbara Herrnstein Smith's earliest form of historiography-notch-cutting",
+   "note": "Same p.29 passage, the sentence directly after the Tolfink inscription. Notch-cutting is joined to the phrase by a dash in the source, exactly as the claim reports it."
+  },
+  {
+   "index": 878,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it does not really meet the requirement of Minimal Connexity",
+   "note": "Same p.29 passage. Quote is verbatim, prefaced on the page by the qualifier 'As a story'. The claim's second limb is supported by the immediately following sentence, which says it does not have much beginning or end."
+  },
+  {
+   "index": 879,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Yet I would say Tolfink was a reliable narrator",
+   "note": "Same p.29 passage. The concessive 'nonetheless' matches the page's 'Yet'; the witness limb is supported by the next sentence, where Tolfink is said to bear witness at least to the existence of Tolfink, a human being unwilling to dissolve into his surroundings."
+  },
+  {
+   "index": 880,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The material was obdurate, and life is short.",
+   "note": "Same p.29 passage, verbatim. The explanatory limb is carried by juxtaposition rather than an explicit 'because': the sentence follows the note that the inscription lacks much beginning or end, and the carving is described earlier as laboriously done. Reading it as the reason for the brevity is the plain sense, but the connective is implicit."
+  },
+  {
+   "index": 881,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a particularly skillful selection of fragments of cosmos",
+   "note": "Nearest preceding running head WORLD-MAKING (1981); the sentence straddles the printed 46/47 break, consistent with the p.46 citation. Both limbs supported: artists make this selection, and the bits are chosen and arranged to give an illusion of coherence and duration amid the streaming of events. The claim elides the intervening words about useful and entertaining bits."
+  },
+  {
+   "index": 882,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "all it is is an explorer's sketch-map",
+   "note": "Running head WORLD-MAKING 47 immediately precedes, matching the p.47 citation. On the page the clause is preceded by 'And yet' and followed by a phrase about a chart of shorelines on a foggy coast; the referent 'it' is the work of art named in the prior sentence."
+  },
+  {
+   "index": 883,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Costanoan group is extinct so far as all practical purposes",
+   "note": "Running head WORLD-MAKING 47, with the block quotation running over to the p.48 head, matching the p.47-48 citation. Page introduces it as written by her father in the Handbook of the Indians of California sixty-three years earlier, supporting the father and title limbs; the sentence ends 'are concerned' and the block continues about surviving scattered individuals. Kroeber is not named at this point on the page, but the claim sentence does not assert the name."
+  },
+  {
+   "index": 884,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sagebrush at its intervals. Power poles at their intervals.",
+   "note": "Running head PLACES NAMES (1981); the section header 'I TO THE LITTLE BIGHORN' and the preceding page head 52 match the citation. The form limb is visible in the source text itself: three verbless noun phrases on the same frame, the third being raindrops at their intervals, in a piece framed as a journey east from Portland in June 1981."
+  },
+  {
+   "index": 886,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "getting the right words in the right order, getting the measure right",
+   "note": "Running head RECIPROCITY OF PROSE AND POETRY with the page number printed 113, matching the p.112-113 citation; a page break falls inside the sentence between 'in' and 'the right order'. On the page the job is said to be the same in composing as in translating; the claim states it of composition only, which the sentence supports since it is composition being compared."
+  },
+  {
+   "index": 887,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prose could have its own proper, looser rhythms and measures",
+   "note": "Running head RECIPROCITY OF PROSE AND POETRY 111, matching the p.111 citation. The 'distinct from metre' limb is supported in the same paragraph, where Le Guin glosses Shelley by separating the measure from the meter, which she says he dismisses as accidental."
+  }
+ ]
+}

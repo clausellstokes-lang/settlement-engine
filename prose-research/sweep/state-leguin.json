@@ -35682,12 +35682,26 @@
    "note": "Live locusmag.com excerpts page fetched raw (HTTP 200); page headed 'Ursula K. Le Guin: A Return to Earthsea', September 2001, 'Excerpts from the interview'. The final excerpt contains 'In fact, I've learned to stop fiddling and twiddling' and, two sentences later, the quoted sentence verbatim. The claim's causal 'because' is carried by the intervening sentence on overpolished fiction being a bore, i.e. by Le Guin's juxtaposed rationale rather than by an explicit connective. The page's curly quotes arrive mojibaked (Windows-1252) but no quoted word is affected.",
    "fromFile": "verdicts-leguin-i787-857.json"
   },
+  "858": {
+   "index": 858,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I've read overpolished fiction, and it's kind of a bore.",
+   "note": "Raw page fetched by curl with a browser UA, HTTP 200. Quote appears word for word in the final interview excerpt, followed by a sentence saying fiction needs a certain roughness. Both limbs (has read overpolished fiction; found it a bore) supported.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
   "859": {
    "index": 859,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "I don't have plots; I have situations, I have stories",
    "note": "Raw page fetched from locusmag.com (HTTP 200), 'Ursula K. Le Guin: A Return to Earthsea', September 2001 interview excerpts. The second excerpt opens by calling her books character-driven and continues with the quoted sentence verbatim (the page's curly apostrophes render as mojibake in the raw byte stream; the wording is identical). Both limbs supported.",
    "fromFile": "verdicts-leguin-i843-885.json"
+  },
+  "860": {
+   "index": 860,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I went into the archives—which are all in my head",
+   "note": "Same raw page. First excerpt: she gets interested in why Earthsea is the way it is, says she started researching the history, then the quoted line ending 'of course!'. All three limbs (researching Earthsea's history; going into the archives; archives in her head) supported.",
+   "fromFile": "verdicts-leguin-i858-887.json"
   },
   "861": {
    "index": 861,
@@ -35760,12 +35774,26 @@
    "note": "Raw page fetched (same ebin.pub scan, HTTP 200). Sentence appears word for word on p.38 of 'Some Thoughts on Narrative', immediately after the observation that the present tense, used to make telling 'more actual', actually distances the story.",
    "fromFile": "verdicts-leguin-i843-885.json"
   },
+  "871": {
+   "index": 871,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "make the telling \"more actual,\" actually distances the story",
+   "note": "Raw ebin.pub full text, HTTP 200, 548k chars. Nearest preceding running head is SOME THOUGHTS ON NARRATIVE (1980) and the next is the same title with page 39, placing the passage on p.38 as cited. Page attributes the 'more actual' motive to some writers of narrative fiction who currently employ the present tense; every limb supported.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
   "872": {
    "index": 872,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "does not normally use the present tense except for special effect",
    "note": "Raw page fetched (same ebin.pub scan, HTTP 200). On p.38 of 'Some Thoughts on Narrative' the full clause - narrative does not normally use the present tense except for special effect or out of affectation - appears verbatim, including the 'or out of affectation' tail the claim asserts. The sentence opens 'This might be why', which hedges the causal explanation (narrative's forward movement through time), not the observation itself, so the claim's limb stands.",
    "fromFile": "verdicts-leguin-i843-885.json"
+  },
+  "873": {
+   "index": 873,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It locates itself in the past ... to allow itself forward movement",
+   "note": "Same essay and page (p.38, bracketed by the SOME THOUGHTS ON NARRATIVE running heads). Subject 'It' is narrative, established two sentences earlier where narrative is said to make a journey; the parenthesis 'whether the real or an imagined, fictional past' is elided by the claim without changing it.",
+   "fromFile": "verdicts-leguin-i858-887.json"
   },
   "874": {
    "index": 874,
@@ -35781,12 +35809,96 @@
    "note": "Raw page fetched (same ebin.pub scan, HTTP 200). Sentence appears word for word between the scan's page markers 39 and 40 - so p.39 as cited - in 'Some Thoughts on Narrative', following the passage on the immortal gene having no story and the once-upon-a-time king who does not live forever.",
    "fromFile": "verdicts-leguin-i843-885.json"
   },
+  "876": {
+   "index": 876,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolfink carved these runes in this stone.",
+   "note": "Running head immediately above the passage reads IT WAS A DARK AND STORMY NIGHT with page 29, matching the citation. All limbs supported: the stone is in the north transept of Carlisle Cathedral, the inscription is described as one line of runes, and the line is introduced as the whole story.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
+  "877": {
+   "index": 877,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pretty close to Barbara Herrnstein Smith's earliest form of historiography-notch-cutting",
+   "note": "Same p.29 passage, the sentence directly after the Tolfink inscription. Notch-cutting is joined to the phrase by a dash in the source, exactly as the claim reports it.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
+  "878": {
+   "index": 878,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it does not really meet the requirement of Minimal Connexity",
+   "note": "Same p.29 passage. Quote is verbatim, prefaced on the page by the qualifier 'As a story'. The claim's second limb is supported by the immediately following sentence, which says it does not have much beginning or end.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
+  "879": {
+   "index": 879,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Yet I would say Tolfink was a reliable narrator",
+   "note": "Same p.29 passage. The concessive 'nonetheless' matches the page's 'Yet'; the witness limb is supported by the next sentence, where Tolfink is said to bear witness at least to the existence of Tolfink, a human being unwilling to dissolve into his surroundings.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
+  "880": {
+   "index": 880,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The material was obdurate, and life is short.",
+   "note": "Same p.29 passage, verbatim. The explanatory limb is carried by juxtaposition rather than an explicit 'because': the sentence follows the note that the inscription lacks much beginning or end, and the carving is described earlier as laboriously done. Reading it as the reason for the brevity is the plain sense, but the connective is implicit.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
+  "881": {
+   "index": 881,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a particularly skillful selection of fragments of cosmos",
+   "note": "Nearest preceding running head WORLD-MAKING (1981); the sentence straddles the printed 46/47 break, consistent with the p.46 citation. Both limbs supported: artists make this selection, and the bits are chosen and arranged to give an illusion of coherence and duration amid the streaming of events. The claim elides the intervening words about useful and entertaining bits.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
+  "882": {
+   "index": 882,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "all it is is an explorer's sketch-map",
+   "note": "Running head WORLD-MAKING 47 immediately precedes, matching the p.47 citation. On the page the clause is preceded by 'And yet' and followed by a phrase about a chart of shorelines on a foggy coast; the referent 'it' is the work of art named in the prior sentence.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
+  "883": {
+   "index": 883,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Costanoan group is extinct so far as all practical purposes",
+   "note": "Running head WORLD-MAKING 47, with the block quotation running over to the p.48 head, matching the p.47-48 citation. Page introduces it as written by her father in the Handbook of the Indians of California sixty-three years earlier, supporting the father and title limbs; the sentence ends 'are concerned' and the block continues about surviving scattered individuals. Kroeber is not named at this point on the page, but the claim sentence does not assert the name.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
+  "884": {
+   "index": 884,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sagebrush at its intervals. Power poles at their intervals.",
+   "note": "Running head PLACES NAMES (1981); the section header 'I TO THE LITTLE BIGHORN' and the preceding page head 52 match the citation. The form limb is visible in the source text itself: three verbless noun phrases on the same frame, the third being raindrops at their intervals, in a piece framed as a journey east from Portland in June 1981.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
   "885": {
    "index": 885,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "a novel, just as much as a poem, is its words",
    "note": "Raw page fetched (same ebin.pub scan, HTTP 200). In 'Reciprocity of Prose and Poetry' (1983), after the page marker following 111 - consistent with the cited p.112 - Le Guin writes that she believes it while also believing translation to be mysterious; the clause appears verbatim and the claim's 'she believes' limb is explicit in the original.",
    "fromFile": "verdicts-leguin-i843-885.json"
+  },
+  "886": {
+   "index": 886,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "getting the right words in the right order, getting the measure right",
+   "note": "Running head RECIPROCITY OF PROSE AND POETRY with the page number printed 113, matching the p.112-113 citation; a page break falls inside the sentence between 'in' and 'the right order'. On the page the job is said to be the same in composing as in translating; the claim states it of composition only, which the sentence supports since it is composition being compared.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
+  "887": {
+   "index": 887,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prose could have its own proper, looser rhythms and measures",
+   "note": "Running head RECIPROCITY OF PROSE AND POETRY 111, matching the p.111 citation. The 'distinct from metre' limb is supported in the same paragraph, where Le Guin glosses Shelley by separating the measure from the meter, which she says he dismisses as accidental.",
+   "fromFile": "verdicts-leguin-i858-887.json"
+  },
+  "888": {
+   "index": 888,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "less from the sense and sound of any sentence or paragraph",
+   "note": "Raw full text of the book scan at ebin.pub; quote 'the pacing and rhythm of paragraphs and chapters' appears verbatim in 'Reciprocity of Prose and Poetry', on the page carrying the running head RECIPROCITY OF PROSE AND POETRY 109 (OCR 'log'), confirming p.109. The subject is the large-scale work the Silas Marner passage came from. Nuance recorded, not a defect: the page's small-unit side is 'any sentence or paragraph' (and includes 'sense' as well as sound), and the large-unit side also names the shape and pace of the actions described; the claim's narrower 'any single sentence' is contained within it.",
+   "fromFile": "verdicts-leguin-i888-915.json"
   },
   "889": {
    "index": 889,
@@ -35844,6 +35956,13 @@
    "note": "Raw page fetched from ursulakleguin.com blog 51, \"The Narrative Gift as a Moral Conundrum\" (HTTP 200). The full sentence in the paragraph beginning \"Inept writing lames or cripples good narrative only if it's truly inept\" reads word for word as the chunk quotes it, continuing \", if the writer has the gift.\" The claim's \"narrative gift\" limb is supported: the page says \"the gift\" and the essay's title and opening line (\"The narrative gift, is that what to call it?\") fix the referent. Source-metadata correction, not a claim limb: the post is dated May 2012 on the page (byline \"May 1, 2012\", opening \"May 2012 (Reading, Seeing ii)\"), not 2011.",
    "fromFile": "verdicts-leguin-i889-923.json"
   },
+  "897": {
+   "index": 897,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The prose is of unobtrusive excellence.",
+   "note": "ursulakleguin.com blog 51 fetched live; sentence appears verbatim in the paragraph praising a book that 'brilliantly demonstrates a narrative gift in the service of clear thought, honest feeling, and passionate integrity' (unnamed in that paragraph; contrasted with Kathryn Stockett's The Help). Admiration limb is explicit. CITATION CORRECTION: the page dates the post May 2012 (Reading, Seeing ii), not 2011.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
   "898": {
    "index": 898,
    "verdict": "VERIFIED_VERBATIM",
@@ -35858,12 +35977,96 @@
    "note": "Raw page fetched from lithub.com (HTTP 200); byline Euan Monaghan, April 1, 2016, matching the source field (the page also states the interview first appeared in Structo Magazine issue 14). The quote is word for word in Le Guin's answer to the opening question \"Lavinia was your most recent novel... how it came about\", so the Lavinia limb holds. The page continues \", as it were -- finding the story as it happened\", a hedge the claim does not carry but does not contradict.",
    "fromFile": "verdicts-leguin-i889-923.json"
   },
+  "900": {
+   "index": 900,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "so different from poetry, because it's in a way much coarser",
+   "note": "lithub.com fetched live; quote appears verbatim in Le Guin's answer to the Woolf-and-sound question. The 'much coarser' limb is on the page but split across markup spans ('coarse'+'r'), so it renders correctly in a browser and is only invisible to a naive substring grep; verified in the raw HTML. Page's wording is 'the sound in the rhythm of prose', not 'sound and rhythm'.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
+  "901": {
+   "index": 901,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's a very long beat, the rhythms of a prose work",
+   "note": "lithub.com, same answer on Woolf and sound; quote 'long beat, the rhythms of a prose work' verbatim. Page order is inverted from the claim (predicate first) but both limbs hold.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
+  "902": {
+   "index": 902,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Of course, the sentence has its rhythms too.",
+   "note": "lithub.com, same answer; sentence verbatim and immediately follows the long-beat sentence, so the claim's 'besides the long beat of the whole work' framing is supported by adjacency.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
+  "903": {
+   "index": 903,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the rhythm and the beat, the music of the sound",
+   "note": "lithub.com; quote verbatim in the answer to the Macaulay/Swinburne question, locator correct. Page says the deeper meaning 'is where poetry approaches music' where the claim says 'shares with music' - same substance.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
+  "904": {
+   "index": 904,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't think syllabically, I think rhythmically.",
+   "note": "lithub.com; verbatim (curly apostrophe on the page) in the answer about haiku and why the syllable count gives her no form. Locator correct.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
+  "905": {
+   "index": 905,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is the principal problem that confronts a writer",
+   "note": "theanarchistlibrary.org fetched live; page header confirms Rob Maslen, Foundation: The Review of Science Fiction No. 67, Summer 1996. Quote 'recording a diversity of different understandings and ways of speaking' verbatim, in the Semley's-necklace section, within the clause 'for her, as for her mother Theodora Kroeber ... is the principal problem that confronts a writer, whether she is an archaeologist or a novelist'. Le Guin limb supported by the antecedent 'for her'; the page frames it as a writer's problem generally, and the claim's omitted tail is 'rooted in a particular time and place'.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
+  "906": {
+   "index": 906,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "kept and dated year by year for 50 years",
+   "note": "publicbooks.org fetched live; the whole sentence names the annual records of Mr. Balwhidder, minister of the parish of Dalmailing in Ayrshire, and the 1760-1810 span. Every limb verbatim.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
+  "907": {
+   "index": 907,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a very old-fashioned narrator, and therefore reliable",
+   "note": "publicbooks.org; sentence opens the Mr. Balwhidder paragraph verbatim, and the following sentences ('He will not, he cannot, mislead you') confirm the reliability limb.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
   "908": {
    "index": 908,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"Galt tells without showing\"",
    "note": "Raw page fetched from publicbooks.org (HTTP 200). The sentence appears twice, as a pull quote and in the body: \"In pure, ignorant defiance of the decree of the Iowa Writing School that controls almost all modern fiction, Galt tells without showing.\" Both limbs hold -- the Iowa Writing School decree is Le Guin's own phrasing, and the praise limb is explicit in the preceding sentence, \"Having read that sentence, I was in love with the book\", as well as in the article's standfirst about a novel that \"blissfully tells without showing\".",
    "fromFile": "verdicts-leguin-i889-923.json"
+  },
+  "909": {
+   "index": 909,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Violence is witnessed without participation",
+   "note": "publicbooks.org; verbatim, italicised in the paragraph beginning 'Whatever his annals tell of greed, cruelty, or hate', immediately preceding the account of the riot at the kirk (the claim's locator points one paragraph later than the sentence sits, which does not touch any limb).",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
+  "910": {
+   "index": 910,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's left up to us to hear what's being told",
+   "note": "publicbooks.org; quote verbatim, continuing 'to imagine it, to feel it'. The page states it in the passive with no agent named; the agent named in the surrounding argument is Galt ('Galt tells without showing'), acting through his annalist narrator, whose own restraint ('All he says about it is...') is the mechanism - so the claim's 'the annalist leaves it up to the reader' is a supported gloss, not a page phrase.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
+  "911": {
+   "index": 911,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in those few words, in their choice and in their cadence",
+   "note": "publicbooks.org; the page reads 'And all the material we need in order to hear, imagine, feel the scene is in those few words, in their choice and in their cadence.' Every limb verbatim; claim shifts 'we' to 'the reader'.",
+   "fromFile": "verdicts-leguin-i888-915.json"
+  },
+  "912": {
+   "index": 912,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Galt's prose works like poetry: every word tells",
+   "note": "publicbooks.org; verbatim (italicised). The page joins the two limbs with a colon where the claim says 'because'; the colon carries the same causal force and the following quoted line illustrates it.",
+   "fromFile": "verdicts-leguin-i888-915.json"
   },
   "913": {
    "index": 913,
@@ -35878,6 +36081,13 @@
    "trueWording": "\"without even a period, only a semicolon\"",
    "note": "Raw page fetched from publicbooks.org. The paragraph after the block quotation reads \"And immediately, without even a period, only a semicolon, 'we went to the manse, and there we had an excellent dinner ...'\", following Galt's \"We then got out at the window, and it was a heavy day to me.\" Quote is verbatim and both limbs hold: the annalist is Mr. Balwhidder, whose year-by-year annals Le Guin is describing, and the movement is from the riot's aftermath straight to the dinner.",
    "fromFile": "verdicts-leguin-i889-923.json"
+  },
+  "915": {
+   "index": 915,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "may yield psychological and anthropological insights of universal value",
+   "note": "publicbooks.org; the sentence 'Intimate knowledge of one small community may yield psychological and anthropological insights of universal value.' closes the small-town-novels paragraph (Cranford, Casterbridge, Lark Rise, Gopher Prairie, Holt). Locator correct, every limb verbatim.",
+   "fromFile": "verdicts-leguin-i888-915.json"
   },
   "916": {
    "index": 916,
