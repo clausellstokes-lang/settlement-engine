@@ -10,8 +10,11 @@
  *      War layer + Religion dynamics and saving persists warLayerEnabled AND (via the
  *      legacy-alias reconciliation) faithSpreadEnabled.
  */
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 
 // ── Shared mocks ─────────────────────────────────────────────────────────────
 const flagMock = vi.fn(() => false);
@@ -31,20 +34,53 @@ vi.mock('../../src/components/map/PantheonPanel.jsx', () => ({ default: () => nu
 // THE HERALD (2026-07-22): War & Resolve is no longer a standalone door — it folds
 // into the War door under the warEconomySurfacing flag. Stub the War door's other
 // live blocks so the assertion targets only the WarResolveSection fold-in.
-vi.mock('../../src/components/map/LiveWarStatus.jsx', () => ({ default: () => null }));
-vi.mock('../../src/components/map/RealmIntrigue.jsx', () => ({ default: () => null }));
-vi.mock('../../src/components/map/BeliefDivergenceBand.jsx', () => ({ default: () => null }));
-vi.mock('../../src/components/map/WarResolveSection.jsx', () => ({
-  default: (props) => {
-    warResolveCapture.props = props;
-    return 'war-resolve-mounted';
-  },
+//
+// ⛔ THE STUBS ARE NOW SWAPPABLE, AND THE MOUNT PINS BELOW ARE NOT WHAT NEEDED IT.
+// VIS-906 (§906) owes a FIRST-PAINT proof — "a lit sentence a reader cannot see is
+// dark" — and that proof is worthless against a stub: `'war-resolve-mounted'` is a
+// bare string with no host chain, so asserting it is visible asserts nothing about
+// the prose a reader actually meets. The mount pins still want the stub (they assert
+// the GATE, and a real block would drag its siblings' store reads into a test about
+// a flag). So each factory returns ONE component that dispatches on `swap.state.on`:
+// OFF (the default, and the state every pre-existing test runs in) is the historic
+// stub, byte-for-byte; ON is `createElement(actual.default, props)` — the REAL block,
+// in the SAME React instance, because `importOriginal()` and `import('react')` here
+// resolve through the live module cache. That is the whole reason this is a factory
+// swap rather than `vi.resetModules()` + a dynamic re-import: resetting the registry
+// would hand the fresh graph a SECOND React while `render` still held the first, and
+// every hook in WarResolveSection's `useMemo` would throw on an invalid hook call.
+const swap = vi.hoisted(() => {
+  const state = { on: false };
+  return {
+    state,
+    /**
+     * @param {() => Promise<any>} importOriginal
+     * @param {(props: any) => any} stub what the historic mount pins observe
+     */
+    make: async (importOriginal, stub) => {
+      const actual = await importOriginal();
+      const { createElement } = await import('react');
+      return { default: (props) => (state.on ? createElement(actual.default, props) : stub(props)) };
+    },
+  };
+});
+vi.mock('../../src/components/map/LiveWarStatus.jsx', io => swap.make(io, () => null));
+vi.mock('../../src/components/map/RealmIntrigue.jsx', io => swap.make(io, () => null));
+vi.mock('../../src/components/map/BeliefDivergenceBand.jsx', io => swap.make(io, () => null));
+vi.mock('../../src/components/map/WarResolveSection.jsx', io => swap.make(io, (props) => {
+  warResolveCapture.props = props;
+  return 'war-resolve-mounted';
 }));
 
 import RealmInspector from '../../src/components/map/RealmInspector.jsx';
 import HeraldSection from '../../src/components/map/HeraldSection.jsx';
+import HeraldBody from '../../src/components/map/HeraldBody.jsx';
 import WarFaithMapOverlay from '../../src/components/map/WarFaithMapOverlay.jsx';
 import SimulationRulesDialog from '../../src/components/map/SimulationRulesDialog.jsx';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
+/** The source tree this suite reads its fold verdicts out of (see readSrc below). */
+const SRC_COMPONENTS = join(dirname(fileURLToPath(import.meta.url)), '../../src/components');
 
 afterEach(() => {
   cleanup();
@@ -312,5 +348,220 @@ describe('PerspectiveStandings — one observer, plain words, DM-gated beliefs',
     const { default: PerspectiveStandings } = await import('../../src/components/map/PerspectiveStandings.jsx');
     const { container } = render(<PerspectiveStandings campaign={{ id: 'c1', name: 'Realm' }} nameById={NAMES} />);
     expect(container.firstChild).toBeNull();
+  });
+});
+
+// ── §906 VIS — THE FIRST-PAINT LAW over the War door ─────────────────────────
+/**
+ * ⛔ A MOUNT IS NOT A READER. The three pins at the head of this file prove the
+ * GATE (flag off ⇒ absent, flag on ⇒ mounted, no campaign ⇒ empty state) against a
+ * STUB whose whole body is the string `'war-resolve-mounted'`. A stub has no host
+ * chain, so none of them can answer the question §904's L-UI-MAT receipt left open
+ * at row R6: does a reader of the real War door actually SEE the War & Resolve
+ * prose on first paint, with no click?
+ *
+ * The law applied here is DESK-VISIBILITY's, stated in
+ * tests/lint/dossierMountRegistry.walker.test.js:1285-1430 — "a lit sentence a
+ * reader cannot see is dark". Its two halves are asserted separately below,
+ * because they fail differently:
+ *
+ *   THE DOM HALF — no ancestor between the surface and the container root carries
+ *   `hidden`, `aria-hidden="true"`, an inline `display:none`, or `aria-expanded=
+ *   "false"`. This is a live walk of `parentElement`, not a source claim.
+ *
+ *   THE FOLD HALF — a shut `<Section collapsible>` / `<Collapsible>` emits NO BYTES
+ *   (Primitives.jsx:114's `{open && children}`), so a fold cannot be caught by
+ *   looking at what rendered: there is nothing to look at. The walker therefore
+ *   grades folds by a SOURCE READ of the opening tag, and so does this suite. The
+ *   mechanism each primitive on this path offers, measured at 0eb028111:
+ *     • HeraldSection  — offers NO fold on the children path at all. Its `{children}`
+ *       (HeraldSection.jsx:52) sits OUTSIDE the `<Section>` opened on the next line,
+ *       which wraps only the report feed. The War door's whole live-block grid,
+ *       WarResolveSection included, is that `children`. Asserted structurally below.
+ *     • WorldPulsePrimitives.Section — NOT a fold. It is a plain <section> + <h3> +
+ *       unconditional `{children}` (:185-199): no open state, no `defaultOpen`, no
+ *       `aria-expanded`, nothing to toggle. It offers no runtime mechanism to read,
+ *       so the source read is the only honest instrument.
+ *     • The `<Section heading="At war">` at WarResolveSection.jsx:163 carries no
+ *       `collapsible` attribute, which is exactly what the walker's `hostOpenness`
+ *       (:1420-1428) keys on to grade a host OPEN.
+ *   No primitive on this path exposes `aria-expanded` or a toggle heading, so the
+ *   source read is used for the fold half throughout — reported as such in the receipt.
+ */
+describe('§906 — War & Resolve is READ inside the real War door, not merely mounted', () => {
+  // s1 (Ravager) besieges s2 (Aurelia); Aurelia holds a teleportation circle. The
+  // SHAPE is reused from tests/ui/warResolveSection.test.jsx, which pins the same
+  // block in isolation — the difference this suite exists for is the HOST.
+  const nameById = new Map([['s1', 'Ravager'], ['s2', 'Aurelia']]);
+  const town = (name, patch = {}) => ({
+    name,
+    tier: patch.tier || 'town',
+    population: patch.population || 4000,
+    config: { magicExists: true, government: 'Council' },
+    institutions: patch.institutions || [],
+    economicState: { foodSecurity: patch.foodSecurity || { storageMonths: 6, deficitPct: 0 } },
+    powerStructure: {
+      publicLegitimacy: { score: patch.legitimacy ?? 60 },
+      factions: [{ faction: 'Town Council', category: 'civic', power: 60, isGoverning: true }],
+    },
+    npcs: [{ id: `n_${name}`, name: `Reeve of ${name}`, importance: 'key' }],
+  });
+  const siegeCampaign = {
+    id: 'c1',
+    name: 'Realm',
+    settlementIds: ['s1', 's2'],
+    worldState: { deployments: { s1: { targetId: 's2', sinceTick: 2, role: 'siege' } }, warExhaustion: {} },
+    regionalGraph: { channels: [{ type: 'war_front', from: 's1', to: 's2', status: 'confirmed' }] },
+  };
+  const siegeSaves = [
+    { id: 's1', name: 'Ravager', settlement: town('Ravager', { tier: 'city', population: 30000 }) },
+    { id: 's2', name: 'Aurelia', settlement: town('Aurelia', { institutions: [{ name: 'Teleportation Circle', status: 'active' }], foodSecurity: { storageMonths: 0.5, deficitPct: 40 } }) },
+  ];
+
+  const doorProps = {
+    section: 'war',
+    campaign: siegeCampaign,
+    saves: siegeSaves,
+    nameById,
+    tier: 'premium',
+    canManageCampaigns: true,
+    emptyHandlers: {},
+  };
+
+  beforeEach(() => {
+    // THE REAL BLOCKS, and the STORE mocked rather than any block: a sibling that
+    // reads the store is still the sibling a reader meets.
+    swap.state.on = true;
+    storeState = {
+      savedSettlements: siegeSaves,
+      campaigns: [siegeCampaign],
+      activeCampaignId: 'c1',
+      mapState: { layers: { warFaith: false }, placements: {} },
+      toggleLayer: vi.fn(),
+      auth: { tier: 'premium' },
+      isElevated: () => false,
+      geometryVersion: 0,
+    };
+  });
+  afterEach(() => { swap.state.on = false; });
+
+  /**
+   * Every ancestor from `el` up to (and including) `root`, nearest first.
+   * @param {Element} el @param {Element} root @returns {Element[]}
+   */
+  function chainTo(el, root) {
+    const chain = [];
+    for (let node = el; node; node = node.parentElement) {
+      chain.push(node);
+      if (node === root) break;
+    }
+    return chain;
+  }
+
+  /**
+   * THE DOM HALF of the first-paint law, asserted per ancestor so a failure names
+   * the exact element that hid the prose rather than reporting a bare false.
+   * @param {Element} el @param {Element} root @param {string} label
+   */
+  function expectNoHiddenAncestor(el, root, label) {
+    for (const node of chainTo(el, root)) {
+      const how = node.hasAttribute('hidden') ? 'the `hidden` attribute'
+        : node.getAttribute('aria-hidden') === 'true' ? 'aria-hidden="true"'
+          : node.style?.display === 'none' ? 'an inline display:none'
+            : node.getAttribute('aria-expanded') === 'false' ? 'aria-expanded="false" (a shut fold)'
+              : null;
+      expect(
+        how,
+        `FIRST-PAINT LAW [${label}]: <${node.tagName.toLowerCase()}> on the host chain hides`
+        + ` the surface with ${how}. A lit sentence a reader cannot see is dark.`,
+      ).toBeNull();
+    }
+  }
+
+  // `join(dirname(fileURLToPath(import.meta.url)), …)` — the same derivation the
+  // tests/lint walkers use (negativeAssertionAnchor:79, dossierMountRegistry:72).
+  // ⚠ NOT `new URL(rel, import.meta.url)`: measured under this suite's jsdom
+  // environment, that resolved to `<testdir>/undefined` rather than the source path.
+  const readSrc = (rel) => readFileSync(join(SRC_COMPONENTS, rel), 'utf8');
+
+  test('the lit prose reaches the accessible DOM on first paint, with no interaction', () => {
+    flagMock.mockImplementation(name => name === 'warEconomySurfacing');
+    const { container } = render(<HeraldBody {...doorProps} />);
+
+    // (b) THE PROSE ITSELF — the "At war" section heading is a real heading in the
+    // accessible tree, and the Resolve chip beside it is the block's own reading.
+    // No click, no `openSection()` helper, no fixture chosen to spring a fold: this
+    // is the door as it paints.
+    const atWar = screen.getByRole('heading', { name: 'At war' });
+    expect(atWar).toBeTruthy();
+    // Scoped to the surface's own <section>: the real siblings name these settlements
+    // too (that is the point of rendering them real), so a page-wide getByText would
+    // be satisfied by a neighbour's mention and prove nothing about THIS block.
+    const surface = atWar.closest('section');
+    expect(surface).toBeTruthy();
+    const inSurface = within(surface);
+    expect(inSurface.getAllByText('Resolve').length).toBeGreaterThan(0);
+    // The besieged town and its siege badge are the sentence the surface exists for.
+    expect(inSurface.getByText('Aurelia')).toBeTruthy();
+    expect(inSurface.getByText('Under siege')).toBeTruthy();
+
+    // (c) THE DOM HALF of the law, over the whole chain from the heading to the root.
+    expectNoHiddenAncestor(atWar, container, 'War door → At war');
+  });
+
+  test('the fold half: no statically-shut host stands between the surface and the door root', () => {
+    // Graded the way tests/lint/dossierMountRegistry.walker.test.js:1420-1428 grades
+    // a host, because a shut fold renders no bytes for a DOM walk to find.
+    const warResolve = readSrc('map/WarResolveSection.jsx');
+    const openings = [...warResolve.matchAll(/<Section\b[^>]*>/g)].map(m => m[0]);
+    expect(openings.length).toBeGreaterThan(0);
+    for (const tag of openings) {
+      // `Section` folds ONLY when passed `collapsible`; absent it, the walker's
+      // hostOpenness (dossierMountRegistry.walker.test.js:1420-1428) grades it 'open'.
+      // anchored: the `openings.length > 0` assertion above is the liveness anchor — a renamed or deleted primitive empties the list and reds THERE, so this exclusion can never pass vacuously against nothing.
+      expect(tag, `a fold appeared on the War & Resolve host: ${tag}`).not.toMatch(/\bcollapsible\b/);
+    }
+
+    // The primitive itself offers no fold to open: plain <section>, unconditional children.
+    const primitives = readSrc('map/WorldPulsePrimitives.jsx');
+    const sectionDecl = primitives.slice(primitives.indexOf('export function Section('));
+    const sectionBody = sectionDecl.slice(0, sectionDecl.indexOf('\n}\n') + 2);
+    expect(sectionBody).toContain('{children}');
+    expect(sectionBody).not.toMatch(/defaultOpen|aria-expanded|useState/); // anchored: the same slice just proved it renders {children}, so the component is live; the absent fold machinery is the claim.
+
+    // HeraldSection hands the door's live-block grid through as `children`, and its
+    // own <Section> (the report feed) opens AFTER that line — so the feed's host can
+    // never enclose WarResolveSection. Positional, because that is the actual defence.
+    const herald = readSrc('map/HeraldSection.jsx');
+    const childrenAt = herald.indexOf('{children}');
+    const sectionAt = herald.indexOf('<Section ');
+    expect(childrenAt).toBeGreaterThan(-1);
+    expect(sectionAt).toBeGreaterThan(-1);
+    expect(
+      childrenAt,
+      'HeraldSection moved {children} INSIDE its report-feed <Section>: the War door\'s'
+      + ' live blocks would then inherit that host, and this suite\'s DOM proof would be'
+      + ' grading a different chain than the one the reader meets.',
+    ).toBeLessThan(sectionAt);
+  });
+
+  test('NEGATIVE CONTROL: with the flag forced OFF the same door paints none of that prose', () => {
+    flagMock.mockReturnValue(false);
+    const { container } = render(<HeraldBody {...doorProps} />);
+    // The door itself is unmistakably live — it is the same render, same fixture,
+    // same real siblings; only the flag moved. `Since the last turning` is the
+    // HeraldSection feed heading, which travels the identical code path.
+    expectAbsentWithAnchor(
+      container.textContent,
+      'At war',
+      'Since the last turning',
+      'warEconomySurfacing OFF ⇒ the War & Resolve surface is dark in the real War door',
+    );
+    expectAbsentWithAnchor(
+      container.textContent,
+      'Under siege',
+      'Since the last turning',
+      'warEconomySurfacing OFF ⇒ the siege badge is dark in the real War door',
+    );
   });
 });
