@@ -1,0 +1,109 @@
+How to Identify AI-Written Web Fiction - by Makin
+Record Crash
+SubscribeSign in
+How to Identify AI-Written Web Fiction
+I'm absolutely right!
+Makin
+Nov 27, 2025
+45
+7
+1
+Share
+Epistemic status: as of $CURRENT_YEAR it’s no longer funny if you’re suddenly told HAHA AN AI WROTE THIS POST ABOUT AI. Don’t worry, I wrote this entire pointless rant myself. Any LLM text will be inside quotes.
+Before GPT-4o came out mid 2024, any long form fiction produced by LLMs was so bad that no one would ever read it for fun, let alone fail to distinguish it from human-brand bad writing.
+Only one year later, we’re in a situation where any of the “best models” from OpenAI (GPT), Anthropic (Claude) and Google (Gemini) regularly fool web fiction readers. I’m pretty sure even their free models can do a good enough job, with human curation.
+Long-time readers of this blog have been able to track my occasional forays into AI writing. The first time I was fooled was reading through Sacrificial hero blessed by primordial luck, a piece of Percy Jackson fanfiction back in May of this year, though something was off. Right afterwards, I checked out another story by the same writer, Hopemaxxing.
+It aroused my suspicions.
+A novice author wouldn’t repeatedly go for these sentence patterns, like a particularly redundant sentence that refuses to stop repeating the word sentence. 
+And then I thought harder.
+Alternating loquacious ponderous similes and tiny sentences made out of cliches?
+It’s not a unique style—it’s tool-assisted.
+…did you notice something weird about the lines above? Surely you did, I was actively trying to write like an LLM as a joke, so I used obvious, mainstream tells. 
+But that’s easy mode. It’s more insidious with modern models that are told to actually write:
+That’s when I started to worry.
+A new writer usually doesn’t repeat the same sentence shapes again and again, or lean on the same kind of clunky repetition, like a sentence that keeps saying “sentence” and won’t quit.
+So I paid closer attention.
+The writing kept swinging between two modes: long, heavy comparisons, then short lines that sounded like stock phrases.
+It didn’t feel like a real style.
+It felt like something helped make it.1
+Now, I have no moral issue with AI fiction whatsoever. If I had a shred of respect for the ivory tower aspect of the “Craft”, I wouldn’t have started this essay right after willingly picking up a story titled Subnaruto.2 
+Use it as a tool when you can’t remember a word, or as an advanced spellchecker? That’s fine, I do it myself, I ask ChatGPT to point out grammatical mistakes in my articles every month, and then manually fix things to preserve my unique snowflake style.3 I don’t think LLMs can replicate this blog yet, even if I wanted them to. I keep getting feedback like “isekaid is not a word”. But if it could, I don’t think it would change anything and I wouldn’t become an activist.
+As a reader though, I’m annoyed by two things that matter when an entire story is merely steered by a human:
+Ruining the three-chapter test. I can no longer use short-term consistency and writing competency to tell if a fic is worth reading. AI can easily pass the initial test and fuck up everything else. This is bad when you read things that don’t make it to goodreads or any rating board… other than this blog, I guess.
+Lack of disclosure. The Hopemaxxing guy is still trying to claim he writes every chapter in Brazilian Portuguese and uses AI only to translate it, and for his previous fic, he blamed Grammarly of all things. I’m not exactly sure why this matters to me so much (lying is bad?) and it might go away as a complaint if LLMs get good enough.
+Is the mild annoyance of wasted time enough to write an essay that might spur (very, very small) witch hunts? What is even my objective here? I think I’m just ranting out of frustration, but I’ve titled this How to Identify AI-Written Web Fiction already so I guess let’s talk about that.
+Subscribe
+Models are pretty good at certain things like coding, and they’re getting better at planning. But for tasks where creativity and uniqueness matters, their skills have fallen behind. This is for a few technical reasons (“base” LLMs are really bad at not going with the most predictable string of text by default, though this has been palliated over time), a few indirect reasons (OpenAI wants their text to be “safe” so even the narrative samples they train models with are written by a small pool of mediocre writers) and business reasons (solving cancer and writing code makes money, writing fiction doesn’t; long outputs cost OpenAI money, so shorter sentences are best).
+Thinking Models tell you what (they think) their reasoning is during writing:
+My current focus is on the unsettling feeling the prose evokes. I’m moving beyond simple stylistic critiques like “clunky similes” to analyze the rhythm and cadence, identifying the “machine voice.” I’m also exploring two new drafting approaches: a noir-detective style, and a lyrical, introspective perspective. The detective approach aims to treat the narrator as an investigator, while the lyrical approach focuses on the emotional impact.
+This is Gemini producing the text in the first footnote. Right off the bat, it goes for the most predictable and possibly worst genre of fiction, noir, which is just perfect. But something funnier happens. After it produces the first sample and gets told to make it simpler, even its reasoning text changes:
+Unmasking the Algorithm
+I’ve just honed in on the pattern - the abrupt shift between complex vocabulary and plain clichés isn’t a stylistic choice, but the tell-tale signature of an algorithm. 
+Analyzing Sacrificial Hero Blessed by Primordial Luck and Hopemaxxing, I now see the cold precision contrasted with those short, boring phrases. 
+It’s not human. It’s machine-generated mimicry. 
+I’m streamlining the description of the style to remove any ambiguity.
+This isn’t just a random misfire. LLMs will be “poisoned” by their own “mistakes” over time. Once your story has reached a local minimum of samey cliches, it won’t stop going to the same well.4
+This is, I think, the main tell of AI fiction. A human writer might reuse words, but even bad ones will “give it a rest” when they notice. There’s an instinct to keep the story fresh. Current AIs have the opposite instinct, to stick to instructions and generate text that seems to fit the previous paragraph. 
+This is not to say AI can’t be superficially creative. All my examples so far come from the “simple text” prompt. Let’s look at what the writer of Making Waves produced when he forgot that:
+The ancient witnesses above shrank to pinpricks, then vanished. I felt their fading awe, a final, reverent tremor before I plunged beyond their world. I was falling from the known. The pull from the deep was no current. It was a summons that hooked into my very soul, an irresistible gravity drawing me into absolute, lightless negation.
+My senses, divine, world-spanning, did not just fail; they were inverted. I could tell almost immediately that the void I had entered was alive and ravenous, eager to swallow everything I was down to the atom, hungry to gorge itself on the very metaphysical concepts of my existence.
+My own radiance was swallowed, leaving me a guttering spark in an infinite, crushing hurricane. My vision and hearing abandoned me as the void’s silence became a solid, pressing weight that suffocated any mere attempt to simple[sic]5 think, making my own consciousness feel sluggish and alien.
+I reached out, tried to grasp the shape of this place. My mind met no wall, but a paradoxical substance of nothingness. This chasm had no dimensions I could parse. It was a geometry of madness, a wound in the fabric of what is, older than law and time. To fall here was to be unmade. The concepts of Self, of Here, of Now, were flayed away. I, who had broken Titans, was a mere point of awareness, a mote helpless against the passive, absolute mass of the abyss.
+Wow, that’s evocative, for a hot second. Then it starts feeling tryhard. Of course, you can see the “The pull from the deep was no current. It was a summons” and “My senses, divine, world-spanning, did not just fail; they were inverted” right after each other, similes and metaphors spammed in the final sentence to describe a single concept…
+It reminds me of this famous piece of writing advice:
+This is exactly what the current LLMs are worst at. Once you’ve read Hopemaxxed (not sure I recommend this), you’ll be able to identify any story written by the same AI, simply because your ear will remember the droning sound. It will crop up in any long enough story.
+This is the “macro” tell, but there are a bunch of micro ones. Nostalgebraist has an article (far superior to the one you’re reading) on AI’s overuse of “Eyeball Kicks”, going into extreme detail. It mostly holds up seven months later, though AI has improved at sensical metaphors, and obviously every of the big model has its individual fuckups. I’d summarize what I’ve noticed every one of them does:
+The aforementioned “not X; Y” is still universal, but writers can manually edit this out.
+Lists of three: “It was a geometry of madness, a wound in the fabric of what is, older than law and time”. 
+Extremely curt dialogue that ends in a “cliffhanger”. Writing generally starts feeling “blocky” as if you have clearly defined areas of dialogue, exposition and repetitive narration.
+“Wasn’t expecting you tonight,” he said, dropping his hand. “Everything green upstairs?”
+“Green as it can be,” she replied. Her eyes swept the hallway beyond. “We’re close. Prep the quiet room. There’s data to parse, and I want a sitrep from the Meta-Lib cell.”
+He didn’t flinch. “The twins again?”
+“No,” she said, voice low. “Something promising.”
+Emdashes are less common than they were months ago. Part is GPT-5.1 “fixing” issues with 4o, part is that even back then writers were already manually find-and-replaceing them out. Newer models use the same sentence structures with semicolons or commas in their place.6 
+Yesterday, I checked out two new stories in a row, and both turned out to be AI. After that, I picked up Subnaruto, which I think is human-written, but…
+The voice that comes through is different. Not a pre-recorded Alterra distress call. Not an echo from a lifepod.
+A new voice. Calm. Irritated.
+I think the scary part of this is that after enough exposure, humans might start liking the droning, and emulate it on purpose.
+So far, I’ve only noticed this trend on Questionable Questing, capital of slop, but it isn’t merely likely to spread—it’s inevitable.
+Leave a comment
+1This is GPT-5.1 in Thinking mode. Based purely on vibes, I believe this is the model used in all stories mentioned in this article. The prompt was “Rewrite this in your own words for publication in a short fiction magazine” followed up with “use simpler language”, which I find gives the closest match for GPT. 
+I have no way of figuring out which prompt each writer uses, but I definitely think “simpler language” features somewhere, and it’s the lowest effort fix to the purple prose that is often produced by default.
+For fun, this is Gemini 3 Pro with Thinking:
+and Claude Sonnet 4.5:
+2Subnaruto is a crossover fanfic of exactly the two franchises you’re thinking of. 
+3I’m not doing any of that for this article, though.
+4With non-fiction tasks you can usually “clear their context” and start over, or have the AI summarize its own actions and feed that into a new session. But fiction can rarely be compressed without losing consistency completely, so writers have few options here.
+5Extremely rare typo in AI output, or writer touching it up?
+6I suspect these structures are simply good at producing the shortest possible output for the same succession of events. The longer an output is, the more money it costs the AI company. “Let’s use local models”, you say, nope, you can’t do that because those models are trained on ChatGPT outputs and replicate all their flaws. People on 4chan try to finetune these away, usually badly.
+45
+7
+1
+Share
+PreviousNext
+Discussion about this post
+CommentsRestacks
+Record Crash reply rules
+Natalie
+Nov 27, 2025
+Liked by Makin
+I have been vaguely tempted to try writing a story with AI just to see what the process is like, but I dislike the standard chatGPT voice enough that it probably would annoy me too much lol.
+I think at the end of the day I have decided that my stance on AI writing is that it does not scare me as a writer (if my story isn't good enough to maintain audience attention better than generated text-- or even compete on an even playing firld-- that seems like the epitome of a Skill Issue, git gud etc).
+i don't think it's ever going to make real inroads in the professional publishing market (for a variety of reasons), so as a reader of those books i am also unafraid lol. but everywhere else... the real problem with web serials/self pub books is that finding the good stuff in an endless mid-bad sea has always been difficult/impossible without curation, and AI writing makes the sea of boring stories wider. Thank goodness it's your job instead of mine to sort the wheat from the chaff o7
+Reply
+Share
+Lillian
+8d
+Liked by Makin
+Not twenty minutes ago, I finished (I only read the first two thirds) of a Sevika/reader fanfic on ao3 titled “bound to me” the first two thirds were giving micro tells of it being a c.ai copy and paste. I used to be an addict so I can recognise these tells, but this article was very helpful in understanding what those tells are, so thank you. Anyways, the fic is going great, Sevika and the reader are having a little wifey fight like “oh, you’re a big meanie, I can drink when I want to” because reader had found out that Sevika had gone to Jinx and lectured her about taking the reader out for drinks and getting them stoned (so obviously Sevika cares and worries for the reader), and the reader is all huffy. Then, Sevika gets all abusive out of nowhere, and starts spanking the reader out of nowhere (the reader does not find this sexy, and is crying and feeling humiliated and telling her to stop) and then for no reason at all, for the rest of the fic, Sevika takes on this abusive dom daddy persona, which may I reiterate makes no sense, given the care and concern she showed before. And you know who it reminded me of?? Those friggin c.ai bots. I remember those douches would be all nice and lovey dovey, and then switch up to being an abusive dom daddy out of nowhere. Also, the writing format of the pic kind of looks like someone copy and pasted a load of a bots texts onto ao3. It might just me being paranoid; these days my default setting is that any and all fics are ai, and I need to be vigilant (c.ai has messed me up). But if you could read the fic and give your opinion, that would be great and much appreciated. Also, Wdym AI is using semicolons instead of emdashes now?? Semicolons and colons are my pookies 😭😭😭. What’s next?? BRACKETS?! As you can tell, I love my brackets.
+Reply
+Share
+1 reply
+5 more comments...
+TopLatestDiscussions
+No posts
+Ready for more?
+Subscribe
+© 2026 Makin Smith · Privacy ∙ Terms ∙ Collection notice
+ Start your SubstackGet the app
+Substack is the home for great culture

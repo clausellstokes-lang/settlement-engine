@@ -1,0 +1,21 @@
+LEDGER_TIP_BEFORE=0cb85a9d91d6448ede1f4f831702e58cdc3e9bcb
+  seal OK · product OK at dd5f13218
+EDIT_OK ledger +8638 B, card +1383 B, frq +983 B
+--- C0 scan ---
+docs/OWNER_DECISION_QUEUE.md:0
+docs/HANDOFF_CURRENT.md:0
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/queue-903.md:0
+  ledger and queue are PURE APPENDS
+LEDGER COMMIT: eaf50fee7521e259175be61ac4c95de98711fa87
+COMMIT_OK
+--- READ-BACK AT eaf50fee7 ---
+eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (twenty-one virtual keys) so a new realm runs the world-alive stack from its first tick and no installed campaign is re-labelled; hunks 2–7 are refused with measurement and become three owner rows and the rung-20 migration
+
+ docs/FABLE_RETROVALIDATION_QUEUE.md | 4 ++++
+ docs/HANDOFF_CURRENT.md             | 6 +++++-
+ docs/OWNER_DECISION_QUEUE.md        | 3 +++
+ 3 files changed, 12 insertions(+), 1 deletion(-)
+  ODQ §903 rows: 1
+  FRQ R-rows: 66  (new R-rows: 66)
+  seat trailer Fable (must be 1): 1
+COLLECT_903_OK tip=eaf50fee7

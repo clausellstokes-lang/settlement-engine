@@ -1,0 +1,234 @@
+{
+ "name": "leguin",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 573,
+   "feature": "other: essay reception",
+   "claim": "Michael Swanwick judges that From Elfland to Poughkeepsie holds up extremely well thirty-seven years after publication and would still be a good starting place for someone learning to write fantasy.",
+   "source": "Michael Swanwick, Flogging Babel, 14 October 2010",
+   "url": "http://floggingbabel.blogspot.com/2010/10/revisiting-poughkeepsie-part-2-language.html",
+   "quote": "Yes, the essay holds up extremely well",
+   "page": "paragraph beginning 'To answer the question'"
+  },
+  {
+   "index": 574,
+   "feature": "other: essay reception",
+   "claim": "Michael Swanwick argues that the essay's central conceit, that Poughkeepsie stands in for everything fantasy is not, has been disproved by Rachel Pollack's Unquenchable Fire, a core fantasy set in Poughkeepsie.",
+   "source": "Michael Swanwick, Flogging Babel, 14 October 2010",
+   "url": "http://floggingbabel.blogspot.com/2010/10/revisiting-poughkeepsie-part-2-language.html",
+   "quote": "has been, ironically enough, disproved",
+   "page": "second paragraph"
+  },
+  {
+   "index": 581,
+   "feature": "other: worldbuilding trappings",
+   "claim": "Le Guin, quoted by John Pyle from From Elfland to Poughkeepsie, wrote that a writer may use all the trappings of fantasy without ever actually imagining anything.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1973), quoted in John Pyle, 23 November 2012",
+   "url": "https://fairyspell.wordpress.com/2012/11/23/from-elfland-to-poughkeepsie/",
+   "quote": "without ever actually imagining anything",
+   "page": "paragraph beginning 'As I mentioned above'"
+  },
+  {
+   "index": 585,
+   "feature": "translation and register",
+   "claim": "Alessandro Amenta finds that the Polish translator Stanislaw Baranczak, while reproducing the novel's different linguistic registers, is inclined to elevate the tone of the phrase by an ennobling strategy accompanied by expansion and amplification.",
+   "source": "Alessandro Amenta, Kwartalnik Neofilologiczny LXX 2/2023, p. 282",
+   "url": "http://journals.pan.pl/Content/128312/PDF/2023-02-KNEO-06.pdf",
+   "quote": "inclined to elevate the tone of the phrase",
+   "page": "section 'As regards style issues'"
+  },
+  {
+   "index": 586,
+   "feature": "per-speaker register",
+   "claim": "Alessandro Amenta states that different linguistic registers are employed in A Wizard of Earthsea and that the Polish translator generally respects and reproduces them.",
+   "source": "Alessandro Amenta, Kwartalnik Neofilologiczny LXX 2/2023",
+   "url": "http://journals.pan.pl/Content/128312/PDF/2023-02-KNEO-06.pdf",
+   "quote": "generally respects and reproduces the different linguistic registers",
+   "page": "section 'As regards style issues'"
+  },
+  {
+   "index": 589,
+   "feature": "compounds and coinages",
+   "claim": "Alessandro Amenta reports that Le Guin's neologisms for plants, animals, fantastic creatures and objects - perriot, corly, gebbeth, pellawi, otak, harrekki - are usually borrowed into Polish without any adaptation.",
+   "source": "Alessandro Amenta, Kwartalnik Neofilologiczny LXX 2/2023, p. 281",
+   "url": "http://journals.pan.pl/Content/128312/PDF/2023-02-KNEO-06.pdf",
+   "quote": "pellawi, otak, harrekki",
+   "page": "p. 281"
+  },
+  {
+   "index": 601,
+   "feature": "other: style as substance",
+   "claim": "Le Guin, quoted by Philip Chase from From Elfland to Poughkeepsie, wrote that if you remove the style all you have left is a synopsis of the plot.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1973), quoted in Philip Chase (video), 16 November 2021",
+   "url": "https://www.youtube.com/watch?v=5lDA8VyeLx0",
+   "quote": "if you remove the style all you have left is a synopsis",
+   "page": "quotation of the essay in the second half of the video"
+  },
+  {
+   "index": 602,
+   "feature": "other: style as substance",
+   "claim": "Le Guin, quoted by Philip Chase, wrote that in fantasy there is only a construct built in a void with every joint and seam and nail exposed.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1973), quoted in Philip Chase (video), 16 November 2021",
+   "url": "https://www.youtube.com/watch?v=5lDA8VyeLx0",
+   "quote": "a construct built in a void with every joint and seam",
+   "page": "closing quotation of the video"
+  },
+  {
+   "index": 603,
+   "feature": "other: exposition through speech",
+   "claim": "A speaker on Tooky's Mag paraphrases Le Guin as holding that in fantasy every time a character speaks the speech is itself an act of worldbuilding, because the writer cannot rely on shared history.",
+   "source": "Tooky's Mag, 'How Le Guin Wrote Fantasy' (video podcast), 12 April 2024",
+   "url": "https://www.youtube.com/watch?v=gRiLN205a0U",
+   "quote": "every time a character speaks is itself an active World building",
+   "page": "discussion of the constructed world"
+  },
+  {
+   "index": 609,
+   "feature": "other: reversal as structure",
+   "claim": "Le Guin, quoted by Kate Nepveu, calls two closing sentences of straightforward narrative description full of rapid reversals and says they are like drumbeats.",
+   "source": "Ursula K. Le Guin, 'Rhythmic Pattern in The Lord of the Rings', quoted in Kate Nepveu, LiveJournal, 4 June 2006",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "quote": "full of rapid reversals",
+   "page": "analysis of the closing sentences of 'Fog on the Barrow-Downs'"
+  },
+  {
+   "index": 612,
+   "feature": "other: usage and grammar",
+   "claim": "Le Guin, quoted by Mary Anne Mohanraj, wrote in her 1987 bracketed revision that the English generic singular pronoun was they, them, their until the sixteenth century and should be restored to the written language, letting the pedants and pundits squeak and gibber in the streets.",
+   "source": "Ursula K. Le Guin, bracketed 1987 commentary in 'Is Gender Necessary? Redux' (Dancing at the Edge of the World), quoted in Mary Anne Mohanraj, Reactor, 1 November 2018",
+   "url": "https://reactormag.com/write-critique-revise-repeat-on-le-guin-and-asking-the-hard-questions-of-ourselves/",
+   "quote": "let the pedants and pundits squeak and gibber in the streets",
+   "page": "section quoting the pronoun revision"
+  },
+  {
+   "index": 620,
+   "feature": "other: selective detail",
+   "claim": "Le Guin told Paul Morton that in writing, if you do not have to mention the doorknob you do not, unlike film where every visual object must be designed.",
+   "source": "Ursula K. Le Guin, interviewed by Paul Morton, The Millions, 31 January 2013",
+   "url": "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+   "quote": "if you don't have to mention the doorknob you don't",
+   "page": "section on imagining invented worlds"
+  },
+  {
+   "index": 623,
+   "feature": "gloss and over-explaining",
+   "claim": "Le Guin said of rereading The Lathe of Heaven that she would cut it, because the characters talk too much and explain things too much.",
+   "source": "Ursula K. Le Guin, interviewed by Paul Morton, The Millions, 31 January 2013",
+   "url": "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+   "quote": "They talk too much. They explain things too much.",
+   "page": "section on doing not-doing"
+  },
+  {
+   "index": 625,
+   "feature": "dialogue register",
+   "claim": "Le Guin said she does not write dialogue the way Hemingway writes Spanish-accented English in For Whom the Bell Tolls, and that she finds it a little affected and foolish.",
+   "source": "Ursula K. Le Guin, interviewed by Paul Morton, The Millions, 31 January 2013",
+   "url": "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+   "quote": "I find it a little affected and foolish",
+   "page": "section on invented languages"
+  },
+  {
+   "index": 627,
+   "feature": "other: words as acts",
+   "claim": "Le Guin told Jonathan White that she believes words are acts and that writers must therefore be held responsible for what their words do.",
+   "source": "Ursula K. Le Guin, interviewed by Jonathan White, 'Coming Back From the Silence'",
+   "url": "https://peterschmidt.domains.swarthmore.edu/engl5H/leguin.interv.html",
+   "quote": "If you believe that words are acts, as I do",
+   "page": "section on language as a tool of forgetting"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 573,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Yes, the essay holds up extremely well\"",
+   "note": "Raw post fetched from floggingbabel.blogspot.com (HTTP 200), bylined Michael Swanwick, Thursday October 14 2010. The quote is verbatim in the paragraph beginning 'To answer the question I first asked yesterday', whose next sentence says the essay would still be a very good starting place for someone trying to learn to write fantasy. The 'thirty-seven years after it was first published' limb is verbatim in the opening paragraph. Every limb supported."
+  },
+  {
+   "index": 574,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"has been, ironically enough, disproved\"",
+   "note": "Same raw post. Its second paragraph states the title's central conceit - Poughkeepsie standing in for everything fantasy is not - has been, ironically enough, disproved; it names Rachel Pollack's 1988 Unquenchable Fire, calls it core fantasy, and the following paragraph says the novel is set in Poughkeepsie. All limbs supported."
+  },
+  {
+   "index": 581,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"trappings of fantasy without ever actually imagining anything\"",
+   "note": "Raw post fetched from fairyspell.wordpress.com (HTTP 200), bylined John Pyle, 23 November 2012, on Le Guin's 'From Elfland to Poughkeepsie'. Pyle quotes Le Guin's sentence about a writer using all the trappings of fantasy without ever actually imagining anything; the fragment matches word for word. Only locator drift: it sits in the paragraph after the one beginning 'As I mentioned above'. All claim limbs supported."
+  },
+  {
+   "index": 585,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"inclined to elevate the tone of the phrase\"",
+   "note": "PDF fetched raw from journals.pan.pl (HTTP 200, 7pp) and extracted with pdftotext. The section headed 'As regards style issues' says Baranczak generally respects and reproduces the novel's different linguistic registers yet is inclined to elevate the tone of the phrase by an ennobling strategy, frequently accompanied by expansion and amplification, then gives a six-row EN/PL example table. The abstract names the translator Stanislaw Baranczak. Content limbs all supported; only the citation's page is off - the passage is on p. 283 (running head), not p. 282."
+  },
+  {
+   "index": 586,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"generally respects and reproduces the different linguistic registers\"",
+   "note": "Same raw PDF, same 'As regards style issues' section; the fragment matches word for word across a line break. Both limbs - that different registers are employed in the novel, and that the Polish translator generally respects and reproduces them - are supported."
+  },
+  {
+   "index": 589,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"usually borrowed without any adaptation, for instance perriot, corly, gebbeth\"",
+   "note": "Same raw PDF. The sentence starts on p. 281 (neologisms for plants, animals, fantastic creatures or objects usually borrowed without any adaptation, listing perriot, corly, gebbeth) and runs over the page break to pellawi, otak, harrekki on p. 282, so the cited p. 281 is right and the given fragment is verbatim. 'Into Polish' is the article's subject throughout."
+  },
+  {
+   "index": 601,
+   "verdict": "BLOCKED",
+   "trueWording": "raw page not reached - caption track refused by every route",
+   "note": "Video confirmed as Philip Chase, uploadDate 2021-11-16, title 'What is good fantasy prose?: a look at Ursula Le Guin's From Elfland to Poughkeepsie' - but the spoken quotation cannot be checked. Watch page fetched raw (HTTP 200, browser UA); it confirms author and upload date only. Spoken content unreachable: youtube /api/timedtext returns Google's 'Sorry...' abuse page with and without cookies/Referer and with fmt=json3; youtube_transcript_api reports IpBlocked; the Wayback capture's archived captionTracks URL returns the same Sorry page and timedtext itself is unarchived; Invidious (inv.nadeko.net empty body; f5.si, tiekoetter, chocolatemoo53 bot-walled), Piped, youtubetotranscript and filmot (Cloudflare), tactiq (App Check), kome.ai (522), notegpt (login expired), youtubetranscript.com (reports YouTube blocking it), allorigins/codetabs/corsproxy/r.jina.ai all refused; browser-pane navigation to youtube.com denied. No routeHints on this claim. All three mandated recovery routes were tried."
+  },
+  {
+   "index": 602,
+   "verdict": "BLOCKED",
+   "trueWording": "raw page not reached - caption track refused by every route",
+   "note": "Same video as index 601 (Philip Chase, 2021-11-16). The closing quotation is audio-only; the watch-page HTML contains no occurrence of 'joint and seam' or 'synopsis'. Watch page fetched raw (HTTP 200, browser UA); it confirms author and upload date only. Spoken content unreachable: youtube /api/timedtext returns Google's 'Sorry...' abuse page with and without cookies/Referer and with fmt=json3; youtube_transcript_api reports IpBlocked; the Wayback capture's archived captionTracks URL returns the same Sorry page and timedtext itself is unarchived; Invidious (inv.nadeko.net empty body; f5.si, tiekoetter, chocolatemoo53 bot-walled), Piped, youtubetotranscript and filmot (Cloudflare), tactiq (App Check), kome.ai (522), notegpt (login expired), youtubetranscript.com (reports YouTube blocking it), allorigins/codetabs/corsproxy/r.jina.ai all refused; browser-pane navigation to youtube.com denied. No routeHints on this claim. All three mandated recovery routes were tried."
+  },
+  {
+   "index": 603,
+   "verdict": "BLOCKED",
+   "trueWording": "raw page not reached - caption track refused by every route",
+   "note": "Video confirmed as Tooky's Mag, 'How Le Guin Wrote Fantasy', uploadDate 2024-04-12; the watch-page HTML contains no occurrence of 'world building'. Watch page fetched raw (HTTP 200, browser UA); it confirms author and upload date only. Spoken content unreachable: youtube /api/timedtext returns Google's 'Sorry...' abuse page with and without cookies/Referer and with fmt=json3; youtube_transcript_api reports IpBlocked; the Wayback capture's archived captionTracks URL returns the same Sorry page and timedtext itself is unarchived; Invidious (inv.nadeko.net empty body; f5.si, tiekoetter, chocolatemoo53 bot-walled), Piped, youtubetotranscript and filmot (Cloudflare), tactiq (App Check), kome.ai (522), notegpt (login expired), youtubetranscript.com (reports YouTube blocking it), allorigins/codetabs/corsproxy/r.jina.ai all refused; browser-pane navigation to youtube.com denied. No routeHints on this claim. All three mandated recovery routes were tried."
+  },
+  {
+   "index": 609,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the passage is TWO closing sentences - the page prints three, and Le Guin calls them 'These few lines', not two sentences",
+   "trueWording": "\"full of rapid reversals\"; \"They are like drumbeats\"",
+   "note": "Raw post fetched from kate-nepveu.livejournal.com/180011.html (HTTP 200), kate_nepveu, June 4 2006, discussing Le Guin's 'Rhythmic Pattern in The Lord of the Rings'. The quoted closing passage of 'Fog on the Barrow Downs' is THREE sentences, and Le Guin's comment opens 'These few lines of straightforward narrative description...' before the quoted fragment, then adds that they are like drumbeats. The fragment, the 'straightforward narrative description' limb and the drumbeats limb are all verbatim; only the count 'two closing sentences' fails, hence PARTIAL."
+  },
+  {
+   "index": 612,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"let the pedants and pundits squeak and gibber in the streets\"",
+   "note": "Raw article fetched from reactormag.com (HTTP 200), by Mary Anne Mohanraj, dated 2018-11-01. It block-quotes Le Guin's bracketed insertion, which says the generic he/him/his was an invention of male grammarians, that until the sixteenth century the English generic singular pronoun was they/them/their, that it should be restored to the written language, and closes with the quoted clause - verbatim. The article separately dates the piece 'Is Gender Necessary? Redux (1976/1987)' from Dancing at the Edge of the World and describes its running commentary in bracketed italics, so the '1987 bracketed revision' limb holds. Every limb supported."
+  },
+  {
+   "index": 620,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"if you don't have to mention the doorknob you don't\"",
+   "note": "Raw interview fetched from themillions.com (HTTP 200), by Paul Morton, January 31 2013. Asked about imagining chairs and doorknobs in her invented worlds, Le Guin answers with the quoted clause verbatim and continues that in science-fiction movies you do have to imagine and design the doorknob, and every single visual object has to be designed. Both limbs supported."
+  },
+  {
+   "index": 623,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"They talk too much. They explain things too much.\"",
+   "note": "Same raw Millions interview, in the answer about doing as little as possible: she says she was re-reading The Lathe of Heaven and, though still fond of it, would cut it if she could, then the quoted two sentences appear verbatim. Rereading, the would-cut limb and both reasons are present."
+  },
+  {
+   "index": 625,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I find it a little affected and foolish\"",
+   "note": "Same raw Millions interview. The interviewer's question names For Whom the Bell Tolls and Hemingway's 'Spanishfied English'; Le Guin replies that she does not do it the way Hemingway does with a Spanish accent, that she dislikes it, and then the quoted clause appears verbatim. Both limbs supported."
+  },
+  {
+   "index": 627,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If you believe that words are acts, as I do\"",
+   "note": "Raw page fetched from peterschmidt.domains.swarthmore.edu (HTTP 200): 'Coming Back From the Silence, an interview with Ursula Le Guin, by Jonathan White'. Answering the question about language as a tool of forgetting, Le Guin's sentence opens with the quoted clause verbatim and concludes that one must hold writers responsible for what their words do. Both limbs supported."
+  }
+ ]
+}

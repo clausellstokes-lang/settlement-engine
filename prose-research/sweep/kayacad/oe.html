@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script id="anubis_version" type="application/json">"v1.26.2"
+</script><script id="anubis_challenge" type="application/json">{"rules":{"algorithm":"fast","difficulty":2},"challenge":{"issuedAt":"2026-09-06T21:15:57.674703841+02:00","metadata":{"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36","X-Real-Ip":"98.204.52.68"},"id":"01a07826-186a-7aa6-8028-4678e575352e","method":"fast","randomData":"dd3dfd811e75f25c1f0f9ffb70206d32f09e533af561bdae1075b3792df0d8be40ff04bb3e9ccf337d0dbf17430558763359b19850539a9464318266153cd6ed","policyRuleHash":"ac980f49c4d35fab","difficulty":2,"spent":false}}
+</script><script id="anubis_base_prefix" type="application/json">""
+</script><script id="anubis_public_url" type="application/json">""
+</script>
+		<link rel="stylesheet" href="/.within.website/x/cmd/anubis/static/css/challenge.css"/>
+	</head>
+	<body>
+		<div class="challenge">
+			<img
+				class="challenge__logo"
+				src="/.within.website/x/cmd/anubis/static/img/oe-logo.png"
+				alt="OpenEdition"
+			>
+			<div class="centered-div"><p id="status">Loading...</p><p id="anubis-script-error" style="display:none;">Anubis could not load its JavaScript. The server may be overloaded. Please reload the page to try again.</p><script id="anubis-main" async type="module" src="/.within.website/x/cmd/anubis/static/js/main.mjs?cacheBuster=v1.26.2"></script><script>/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this page.
+
+Copyright (c) 2026 Xe Iaso <xe.iaso@techaro.lol>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+@licend  The above is the entire license notice
+for the JavaScript code in this page.
+
+## Rationale
+
+This script catches `main.mjs` failing to load and re-injects it with
+jittered exponential backoff.
+
+Without this any failures loading `main.mjs` leaves the challenge page
+sitting on the "Loading..." message forever with no error messaging
+outside of the browser console, which is unavailable on mobile browsers.
+
+Disable loading this script at your peril. You have been warned.
+*/
+(()=>{var f=(e,t=750,n=1e4)=>Math.random()*Math.min(n,t*Math.pow(e,2));var d=(e,t={},n=[])=>{let s=typeof e=="function"?e(t):Object.assign(document.createElement(e),t);return Array.isArray(n)||(n=[n]),s.append(...n),s};var i=e=>document.getElementById(e);var _=e=>e.map(i);(()=>{let e=i("anubis-main");if(!e){console.debug("can't find anubis main.mjs element via ID `anubis-main`, bailing");return}let t=e.getAttribute("src");if(!t){console.debug("can't find src attribute of script element `anubis-main`, bailing");return}let n=t.indexOf("?")===-1?"?":"&",s=4,E=750,A=1e4,c=1e4,a=0,l=0,u=()=>window.__anubisBooted===!0,p=()=>{let r=_(["anubis-script-error","status","progress"]);if(r.filter(D=>D==null).length!==0){console.debug("missing one of the following elements: anubis-script-error, status, progress. cannot proceed, bailing.");return}let[o,M,T]=r;o.style.display="block",M.style.display="none",T.style.display="none"},m=r=>()=>{if(u()||r!==l)return;if(l++,a++,a>s){p();return}let o=f(a,E,A);setTimeout(y,o)},y=()=>{if(u())return;let r=m(l),o=d("script",{async:!0,type:"module",src:t+n+"anubisRetry="+a,onerror:r});document.head.appendChild(o),setTimeout(r,c)},b=m(0);e.onerror=b,setTimeout(b,c)})();})();
+</script><div id="progress" role="progressbar" aria-labelledby="status"><div class="bar-inner"></div></div><div id="testarea"></div></div>
+			<div class="challenge__block">
+				<p class="challenge__block__text">
+					Ce site utilise Anubis, un outil qui filtre les robots nuisibles.<br />
+					Nous vérifions actuellement que vous n’êtes pas un robot.
+				</p>
+				<p class="challenge__block__text">
+					En cas de problème, contactez-nous à contact(at)openedition.org
+				</p>
+			</div>
+			<div class="challenge__block">
+				<p class="challenge__block__text challenge__block__text--en">
+					This site uses Anubis, a tool which filters out harmful bots.<br />
+					We’re currently verifying that you’re not a robot.
+				</p>
+				<p class="challenge__block__text challenge__block__text--en">
+					If you encounter a problem, please contact us at contact(at)openedition.org
+				</p>
+			</div>
+			<div class="spinner"></div>
+		</div>
+	</body>
+</html>

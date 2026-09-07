@@ -1,0 +1,24 @@
+
+### QUERY: Le Guin tribute novelist "her prose" OR "her sentences" 2018 Griffith OR Chiang OR Palmer OR Samatar | bytes 73789
+- safest | https://tb-manual.torproject.org/security-settings/#safest
+
+### QUERY: "Counter Craft" Lincoln Michel Le Guin | bytes 73789
+- safest | https://tb-manual.torproject.org/security-settings/#safest
+
+### QUERY: David Mitchell Guardian "Wizard of Earthsea" Le Guin | bytes 73789
+- safest | https://tb-manual.torproject.org/security-settings/#safest
+
+### QUERY: Le Guin Earthsea tabletop RPG designer prose tone "Beyond the Wall" | bytes 73789
+- safest | https://tb-manual.torproject.org/security-settings/#safest
+
+### QUERY: "Le Guin" stylometry OR "corpus stylistics" OR "stylistic analysis" Earthsea thesis | bytes 73789
+- safest | https://tb-manual.torproject.org/security-settings/#safest
+
+### QUERY: Sean Guynes "Le Guin Reread" "Tombs of Atuan" tor.com | bytes 73789
+- safest | https://tb-manual.torproject.org/security-settings/#safest
+
+### QUERY: Naimon "Conversations on Writing" Le Guin review rhythm sentence | bytes 73789
+- safest | https://tb-manual.torproject.org/security-settings/#safest
+
+### QUERY: "Writer Unboxed" Le Guin prose | bytes 73789
+- safest | https://tb-manual.torproject.org/security-settings/#safest

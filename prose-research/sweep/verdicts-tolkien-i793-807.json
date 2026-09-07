@@ -1,0 +1,235 @@
+{
+ "name": "tolkien",
+ "chunk": 11,
+ "claims": [
+  {
+   "index": 793,
+   "feature": "content words stripped",
+   "claim": "Johan Groth finds Andersson reduces 'pages', 'reader' and 'discover' to 'den', 'man' and 'få reda på', while Ohlmarks's showy style grows beyond all bounds.",
+   "source": "Ringarna herre (igen) samt några synpunkter på Åke Ohlmarks (Johan Groth)",
+   "url": "https://www.gogab.se/2011/ringarna-herre-igen-samt-nagra-synpunkter-pa-ake-ohlmarks",
+   "quote": "prunkande stil",
+   "page": ""
+  },
+  {
+   "index": 794,
+   "feature": "anglicism avoidance",
+   "claim": "Andersson's diary records his fear of the 'anglicism ghost' and his search for names like 'Riftedal' that keep the English sound while reading as Swedish.",
+   "source": "Utdrag ur Översättarens anmärkningar (Erik Andersson diary excerpts)",
+   "url": "https://tolkien.mbor.se/dagbok.php",
+   "quote": "anglicismspöket",
+   "page": ""
+  },
+  {
+   "index": 795,
+   "feature": "what imitators do not imitate",
+   "claim": "Shippey's afterword considers Tolkien's imitators and what they do not imitate, notably language-building and interlaced storylines.",
+   "source": "T.A. Shippey — J.R.R. Tolkien: Author of the Century (Falling Letters review)",
+   "url": "https://fallingletters.ca/2012/11/ta-shippey-jrr-tolkien-author-of-century.html",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 796,
+   "feature": "mark of Tolkien",
+   "claim": "Shippey holds that no modern writer of fantasy has managed to escape the mark of Tolkien.",
+   "source": "J. R. R. Tolkien: Author of the Century (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/J._R._R._Tolkien:_Author_of_the_Century",
+   "quote": "escape the mark of Tolkien",
+   "page": ""
+  },
+  {
+   "index": 797,
+   "feature": "point-for-point imitation",
+   "claim": "Shippey noted The Sword of Shannara's dogged adherence to Tolkien with point-for-point analogues (Sauron to Brona, Gandalf to Allanon, hobbits to Shea and Flick).",
+   "source": "The Sword of Shannara (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Sword_of_Shannara",
+   "quote": "dogged",
+   "page": ""
+  },
+  {
+   "index": 798,
+   "feature": "story stolen, prose not imitated",
+   "claim": "Lin Carter wrote that Brooks was not trying to imitate Tolkien's prose but to steal his story line and cast, calling it the most cold-blooded complete rip-off of another book.",
+   "source": "The Sword of Shannara (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Sword_of_Shannara",
+   "quote": "wasn't trying to imitate Tolkien's prose",
+   "page": ""
+  },
+  {
+   "index": 799,
+   "feature": "undigested Tolkien",
+   "claim": "Brian Attebery called The Sword of Shannara undigested Tolkien with especially blatant correspondences, while Choice praised it as exceptionally well-written and very readable.",
+   "source": "The Sword of Shannara (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Sword_of_Shannara",
+   "quote": "undigested Tolkien",
+   "page": ""
+  },
+  {
+   "index": 800,
+   "feature": "popular rather than academic tone",
+   "claim": "Brooks acknowledged heavy Tolkien influence in his first novel and said he then adopted a popular-fiction approach rather than an academic tone.",
+   "source": "The Sword of Shannara (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Sword_of_Shannara",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 801,
+   "feature": "critics silent on prose",
+   "claim": "Contemporary critics of Shannara focused almost exclusively on plot and world-building parallels rather than prose, with Choice calling it exceptionally well-written.",
+   "source": "The Sword of Shannara: The Critics Fifty Years Later (Dark Worlds Quarterly)",
+   "url": "https://gwthomas.org/the-sword-of-shannara-the-critics-fifty-years-later/",
+   "quote": "exceptionally well-written, very readable",
+   "page": ""
+  },
+  {
+   "index": 802,
+   "feature": "talks instead of sings",
+   "claim": "Vredenburgh judges that Shannara talks when it should at least be trying to sing, is bereft of atmosphere, and follows Tolkien's story architecture rather than his prose.",
+   "source": "Half a Century of Reading Tolkien, Part Seven: The Sword of Shannara (Black Gate)",
+   "url": "https://www.blackgate.com/2025/11/02/half-a-century-of-reading-tolkien-part-seven-the-sword-of-shannara-by-terry-brooks/",
+   "quote": "talks when it should at least be trying to sing",
+   "page": ""
+  },
+  {
+   "index": 803,
+   "feature": "expository dialogue",
+   "claim": "Tom Simon finds Brooks's prose stilted and turgid, alternating between expository lumps and expository lumps feebly disguised as dialogue, with names uniformly slipshod.",
+   "source": "1977: Lord of the Rinky-dink (Tom Simon, Bondwine)",
+   "url": "https://bondwine.com/2007/01/22/1977-lord-of-the-rinky-dink/",
+   "quote": "expository lumps feebly disguised as dialogue",
+   "page": ""
+  },
+  {
+   "index": 804,
+   "feature": "diluted substitute",
+   "claim": "Simon cites Shippey's point that readers hungry for heroic fantasy would take any substitute no matter how diluted, and del Rey's targeting of young readers least likely to notice the writing.",
+   "source": "1977: Lord of the Rinky-dink (Tom Simon, Bondwine)",
+   "url": "https://bondwine.com/2007/01/22/1977-lord-of-the-rinky-dink/",
+   "quote": "take any substitute, no matter how diluted",
+   "page": ""
+  },
+  {
+   "index": 805,
+   "feature": "modifier density",
+   "claim": "The Big Bad Book Blog counts adjectives and adverbs at 21% of words in a sample passage, calls the prose wooden yet lightweight, and notes dialogue tags like 'blazed up angrily' replacing 'said'.",
+   "source": "The Sword of Shannara by Terry Brooks (The Big Bad Book Blog)",
+   "url": "https://bookblog.kjodle.net/2015/01/28/sword-of-shannara-by-terry-brooks/",
+   "quote": "wooden yet lightweight",
+   "page": ""
+  },
+  {
+   "index": 806,
+   "feature": "directional map names",
+   "claim": "Dial H For Houston contrasts Tolkien's invented languages with Brooks naming a corner of the map after a direction, and calls the prose flat.",
+   "source": "Book Review: Terry Brooks' The Sword of Shannara (Dial H For Houston)",
+   "url": "https://dialhforhouston.wordpress.com/2014/11/18/book-review-terry-brooks-the-sword-of-shannara/",
+   "quote": "the prose is flat",
+   "page": ""
+  },
+  {
+   "index": 807,
+   "feature": "bare formula",
+   "claim": "Attebery said Shannara tries to evoke wonder without engaging the mind or emotions, reducing Tolkien to a bare formula; Jane Yolen saw derivative fantasy sinking into pastel unicorns and coy talking swords.",
+   "source": "Tolkien's impact on fantasy (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_impact_on_fantasy",
+   "quote": "pastel unicorns, coy talking swords",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 793,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"pages\" blir \"den\", \"reader\" blir \"man\", \"discover\" blir \"fa reda pa\"",
+   "note": "Groth: Andersson skar hart med osthyveln, the three reductions listed exactly as claimed; and \"Ohlmarks later ... sin prunkande stil vaxa over alla bredder\" - quote \"prunkande stil\" verbatim. Raw page fetched direct (gogab.se, 200)."
+  },
+  {
+   "index": 794,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"anglicismspoket, den formodligen mest dodliga faran for en oversattare\"",
+   "note": "Diary entry 21 Jan 2004 stages the anglicism ghost as a wraith rising in the dark (fear rendered as an icy draft, unable to breathe). Riftedal entries 26 Oct 2003 / 18-19 Jan 2004: \"Namnet syns mig helt idealiskt, det later till och med snarlikt det engelska namnet\"; the Swedish-reading limb rests on the diary noting \"rift\" as a Swedish noun of \"riva\" (ramna, spricka) treated in Helsingborgs Dagblad, not on an explicit \"reads as Swedish\" sentence. Raw page fetched direct (tolkien.mbor.se, 200)."
+  },
+  {
+   "index": 795,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"considers what they don't imitate, such as language-building and the interlacing storylines\"",
+   "note": "Blogger Jenna on the afterword: \"I also enjoyed the afterwards of the book, in which Shippey considers Tolkien's imitators but also considers what they don't imitate, such as language-building and the interlacing storylines.\" Claim matches near word-for-word; graded SUBSTANCE only because the claim carries an empty quote field, so there is no quotation to verify verbatim. Raw page fetched direct (fallingletters.ca, 200)."
+  },
+  {
+   "index": 796,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no \"modern writer of fantasy has managed to escape the mark of Tolkien\"",
+   "note": "Wikipedia raw wikitext (action=raw): \"Shippey notes that no 'modern writer of fantasy has managed to escape the mark of Tolkien'.\" in the Afterword paragraph, cited to Shippey 2001 pp. 305-328."
+  },
+  {
+   "index": 797,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the dogged way in which it follows Tolkien point for point\"",
+   "note": "Wikipedia raw wikitext: Shippey \"writes that the novel is distinctive for 'the dogged way in which it follows Tolkien point for point'\" and located analogues \"such as Sauron (Brona), Gandalf (Allanon), the Hobbits (Shea and Flick)\" - all three named pairs present verbatim."
+  },
+  {
+   "index": 798,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"wasn't trying to imitate Tolkien's prose, just steal his story line and complete cast\"",
+   "note": "Wikipedia raw wikitext: Carter (1978) \"denounced ... as 'the single most cold-blooded, complete rip-off of another book that I have ever read'\" and further wrote \"Terry Brooks wasn't trying to imitate Tolkien's prose, just steal his story line and complete cast of characters\". Both limbs verbatim."
+  },
+  {
+   "index": 799,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"undigested Tolkien\" ... \"especially blatant in its point-for-point correspondence\"",
+   "note": "Wikipedia raw wikitext: Attebery \"accused ... of being 'undigested Tolkien' which was 'especially blatant in its point-for-point correspondence'\"; separately ''Choice'' \"stated that the novel was 'exceptionally well-written, very readable'\". Both limbs on the same page."
+  },
+  {
+   "index": 800,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"I'm a popular fiction writer, that's the way I approached it\"",
+   "note": "Wikipedia raw wikitext: \"He admits that he was very influenced by The Lord of the Rings when writing it, being his first novel\", plus the 2012 interview blockquote \"Tolkien approached it as an academic ... not as popular fiction. I'm a popular fiction writer, that's the way I approached it. ... I was heavily under the influence of Tolkien when I wrote Sword of Shannara\". Graded SUBSTANCE because the claim carries an empty quote field; note the page frames the popular-fiction approach as how he wrote Sword, not as something adopted afterwards."
+  },
+  {
+   "index": 801,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Choice (July-August 1977) said the book was \\u201cexceptionally well-written, very readable\\u201d\"",
+   "note": "Quote is verbatim on the page. But the page does not say critics focused almost exclusively on plot and world-building parallels rather than prose - it splits them into pro and con camps and several of the cited critics address the writing itself: MacRae \"looked to Brooks' driving prose\", Tymn is listed as positive, and Choice praises the writing. The parallels point is attached only to Schlobin (\"notes the similarities ... as do most reviewers\") and Shippey (\"goes the whole way listing a point-for-point imitation\"). Live URL returned 403 to a plain curl; recovered on route (1), a browser user agent plus Accept/Referer headers, HTTP 200, 107,233 bytes, article by G. W. Thomas dated 2 May 2026.",
+   "unsupportedLimb": "that contemporary critics focused almost exclusively on plot and world-building parallels rather than prose"
+  },
+  {
+   "index": 802,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sword \"talks when it should at least be trying to sing\" ... \"bereft of atmosphere\"",
+   "note": "Fletcher Vredenburgh, Black Gate, 2 Nov 2025: \"Last time around, I wrote Sword 'talks when it should at least be trying to sing,' and I stand by that\" (verbatim, with \"at least\"), and \"a book that talks when it should be trying to sing, a bereft of atmosphere. I think all those things hold true.\" Third limb is composite rather than a single sentence: his own words give the story side (\"a story that tracks so closely to the LotR in so many places\") and the prose side separately (\"it rarely finds any of the fantastical transcendence of Tolkien\"); the explicit story-not-prose contrast appears on the page verbatim only inside the quoted Lin Carter passage."
+  },
+  {
+   "index": 803,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"he alternates between expository lumps as such, and expository lumps feebly disguised as dialogue\"",
+   "note": "Tom Simon (bondwine.com, 22 January 2007, byline present): quote verbatim; \"726 mind-numbing and turgid pages\"; the summary verdict \"in prose, stilted\"; and \"The names in The Sword of Shannara are uniformly slipshod\". Every limb on the page."
+  },
+  {
+   "index": 804,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"they would take any substitute, no matter how diluted\"",
+   "note": "The sentence is a block quotation Simon explicitly attributes to Shippey's J.R.R. Tolkien: Author of the Century (\"he recovers his usual perspicacity, and puts his finger on the secret of Terry Brooks's commercial success\"). Del Rey limb: \"del Rey bought the book and skilfully marketed it to the demographic group least likely to turn up its nose at the quality of the writing\", with the young named as that group (\"it was to the young that the Shannara books chiefly appealed\"; \"Some people simply do not notice the badness of the prose ... most common among young readers\")."
+  },
+  {
+   "index": 805,
+   "verdict": "PARTIAL",
+   "trueWording": "\"the dialogue wooden yet lightweight, like a foundation with dry rot\"",
+   "note": "Two limbs confirmed verbatim: \"That passage comprises 83 words, of which 17 are either adjectives or adverbs. That means 21% - one word in five - is a modifier\", and the dialogue-tag section quoting \"\\u201cThat's fine, coming from you,\\u201d Flick blazed up angrily\" against \"the best form of dialogue attribution is \\u201che said, she said\\u201d\". The site is indeed The Big Bad Book Blog. The quoted phrase is on the page but is predicated of the dialogue, not of the prose: \"The plot is thin, the characters stereotypes, and the dialogue wooden yet lightweight\" - a three-item list in which dialogue is the distinct item. The blog's general prose verdict is worded differently (\"Brooks can't (or won't) write a decent line of prose\").",
+   "unsupportedLimb": "that the blog calls the prose 'wooden yet lightweight' - the phrase is predicated of the dialogue, a distinct item in its list"
+  },
+  {
+   "index": 806,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The book is long, the prose is flat, and the characters are dull and forgettable\"",
+   "note": "Dial H For Houston, 18 Nov 2014: quote verbatim; the contrast is explicit - \"Tolkien plotted out histories, wrote songs, hell, made up entire languages when he created Middle Earth. Brooks, on the other hand ... let's look at the map\", then \"You can name one corner of the map after a direction. One. Anything more is just lazy.\""
+  },
+  {
+   "index": 807,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"to evoke wonder without engaging the mind or emotions\" ... \"to a bare formula\"",
+   "note": "Wikipedia raw wikitext: \"Attebery wrote that it attempted 'to evoke wonder without engaging the mind or emotions', reducing Tolkien's artistry 'to a bare formula'\"; Yolen on Tolkienesque books: \"what began in grace and power easily degenerated into a kind of mythic silliness\", with \"pastel unicorns, coy talking swords, and a paint-by-number medieval setting\" - the claim's quote verbatim."
+  }
+ ]
+}

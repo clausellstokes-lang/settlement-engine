@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 1,
+ "indices": [
+  750,
+  751,
+  752,
+  756,
+  757,
+  761,
+  762,
+  765,
+  767,
+  768,
+  770,
+  771,
+  776,
+  778,
+  779
+ ],
+ "claims": [
+  {
+   "index": 750,
+   "feature": "other: fantasy as a method for history",
+   "claim": "Borowska-Szerszun sets The Fionavar Tapestry apart from the rest of Kay's work as completely different from that historical-fantasy form.",
+   "source": "Sylwia Borowska-Szerszun, \"King Arthur and Imagined Indians\", in Studies in Medievalism XXXIV (Boydell, 2025)",
+   "url": "https://www.cambridge.org/core/product/identifier/9781805435631%23c9/type/book_part",
+   "quote": "grounded in history but uses the elements of the fantastic",
+   "page": "chapter opening (Cambridge Core extract), p. 174"
+  },
+  {
+   "index": 751,
+   "feature": "other: memory as the shape of the record",
+   "claim": "Borowska-Szerszun argues that the restoration of Tigana's name reproduces a Tolkienian resolution while remaining marked by loss, fragmentation and incomplete knowledge.",
+   "source": "Sylwia Borowska-Szerszun, \"The limits of the happy ending: Eucatastrophe and cultural memory in Guy Gavriel Kay's Tigana\", Orbis Litterarum (2026)",
+   "url": "https://api.openalex.org/works/doi:10.1111/oli.70057",
+   "quote": "",
+   "page": "publisher abstract"
+  },
+  {
+   "index": 752,
+   "feature": "other: history as consequence",
+   "claim": "Drab opens her chapter on Kay's Ysabel by arguing that fantasy's representation of the Middle Ages tends on the whole to be trivialized because general knowledge of the period is limited to simplified concepts.",
+   "source": "Ewa Drab, \"Medievalisms and Romance Traditions in Guy Gavriel Kay's Ysabel\", in Medievalism in English Canadian Literature (Boydell, 2020)",
+   "url": "https://www.cambridge.org/core/product/identifier/9781787448858%23c11/type/book_part",
+   "quote": "the representation of this part of history",
+   "page": "chapter opening (Cambridge Core extract), p. 172"
+  },
+  {
+   "index": 756,
+   "feature": "other: characterisation",
+   "claim": "Doherty faults The Fionavar Tapestry for using its Arthurian figures as ciphers, calling Lancelot more of a stereotype than a character.",
+   "source": "John J. Doherty, \"The High Fantasies of Lawhead and Kay\" (BrightWeavings)",
+   "url": "http://brightweavings.com/doherty/",
+   "quote": "Lancelot is more of a stereotype than a character",
+   "page": "closing section on The Fionavar Tapestry"
+  },
+  {
+   "index": 757,
+   "feature": "other: characterisation",
+   "claim": "Doherty holds up Tigana as evidence of what Kay can do when he does not confine characters to their symbolic value.",
+   "source": "John J. Doherty, \"The High Fantasies of Lawhead and Kay\" (BrightWeavings)",
+   "url": "http://brightweavings.com/doherty/",
+   "quote": "an evocative, rich story that studies the seemingly incompatible themes",
+   "page": "closing section on The Fionavar Tapestry"
+  },
+  {
+   "index": 761,
+   "feature": "other: unreliable chronicler inside the fiction",
+   "claim": "Cheryl Morgan reports Kay's note that the historian Procopius is so unpleasant about Theodora that his testimony must be suspect.",
+   "source": "Cheryl Morgan, 'Pieces of History', Emerald City (reprinted BrightWeavings), paraphrasing Kay",
+   "url": "https://brightweavings.com/pieces-of-history-2/",
+   "quote": "his testimony must be suspect",
+   "page": "body, on the real history"
+  },
+  {
+   "index": 762,
+   "feature": "other: court politics rendered without dominating the book",
+   "claim": "Morgan judges Kay's court politics believably subtle and devious without social nuance becoming the whole book.",
+   "source": "Cheryl Morgan, 'Pieces of History', Emerald City (reprinted BrightWeavings, posted 2016-05-07)",
+   "url": "https://brightweavings.com/pieces-of-history-2/",
+   "quote": "believably subtle and devious without making social nuance",
+   "page": "body, on the politics"
+  },
+  {
+   "index": 765,
+   "feature": "other: characters repeat across books",
+   "claim": "Cobb concedes that judged as realist fiction Kay's characters are not sufficiently differentiated from book to book.",
+   "source": "Christopher Cobb, in Cobb and Mohanraj, 'From Tapestry to Mosaic', Strange Horizons, 13 November 2000",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/from-tapestry-to-mosaic-the-fantasy-novels-of-guy-gavriel-kay/",
+   "quote": "his characters are not sufficiently differentiated from book to book",
+   "page": "Tigana section, CC turn"
+  },
+  {
+   "index": 767,
+   "feature": "other: trajectory toward historical realism",
+   "claim": "Cobb reads the Sarantine Mosaic as part of Kay's trajectory away from high fantasy towards historical realism.",
+   "source": "Christopher Cobb, in Cobb and Mohanraj, 'We must learn to bend, or we break', Strange Horizons, 13 November 2000",
+   "url": "https://strangehorizons.com/non-fiction/reviews/we-must-learn-to-bend-or-we-break-the-art-of-living-in-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "trajectory away from high fantasy towards historical realism",
+   "page": "CC turn on history"
+  },
+  {
+   "index": 768,
+   "feature": "other: narrator as recorder of the world",
+   "claim": "Cobb's closing judgment is that Kay makes the Mosaic with an unwearying spirit of love for the spectacle of the world that he records.",
+   "source": "Christopher Cobb, in Cobb and Mohanraj, 'We must learn to bend, or we break', Strange Horizons, 13 November 2000",
+   "url": "https://strangehorizons.com/non-fiction/reviews/we-must-learn-to-bend-or-we-break-the-art-of-living-in-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "love for the spectacle of the world that he records",
+   "page": "CC's last word"
+  },
+  {
+   "index": 770,
+   "feature": "other: fantasy as a prism on the past",
+   "claim": "Kay says the fantasy method removes a level of presumption that one can know what Justinian and Theodora's marriage was like.",
+   "source": "Guy Gavriel Kay, interviewed by Sandy Auden, infinity plus, 3 July 2005",
+   "url": "https://www.infinityplus.co.uk/nonfiction/intggk.htm",
+   "quote": "It removes a level of presumption",
+   "page": "answer on similarities between past and present"
+  },
+  {
+   "index": 771,
+   "feature": "other: the unimportance of great events to ordinary citizens",
+   "claim": "Kay traces a motif of the Sarantine Mosaic to Auden's poem on Breughel and the relative unimportance of great events for ordinary citizens.",
+   "source": "Guy Gavriel Kay, interviewed by Sandy Auden, infinity plus, 3 July 2005",
+   "url": "https://www.infinityplus.co.uk/nonfiction/intggk.htm",
+   "quote": "the relative un importance of great events",
+   "page": "answer on the legacy theme"
+  },
+  {
+   "index": 776,
+   "feature": "other: show rather than announce",
+   "claim": "Shoul's advice to Kay is to talk about his characters less and show their actions more.",
+   "source": "Simeon Shoul, review of The Lions of Al-Rassan, infinity plus",
+   "url": "https://www.infinityplus.co.uk/nonfiction/alrassan.htm",
+   "quote": "talk about your characters less, show us their actions more",
+   "page": "body, advice"
+  },
+  {
+   "index": 778,
+   "feature": "other: ordinary trades as the vantage on power",
+   "claim": "Shoul says the book uses the experiences and perspective of a master artisan to explore the life of the greatest city on earth.",
+   "source": "Simeon Shoul, review of Lord of Emperors, infinity plus",
+   "url": "https://www.infinityplus.co.uk/nonfiction/lordofemperors.htm",
+   "quote": "the experiences and perspective of a master artisan",
+   "page": "body, first paragraph"
+  },
+  {
+   "index": 779,
+   "feature": "concrete sensory noun",
+   "claim": "Sandy Auden says Kay delivers his historical detail with no dry technical facts.",
+   "source": "Sandy Auden, review of The Last Light of the Sun, infinity plus",
+   "url": "https://www.infinityplus.co.uk/nonfiction/lastlightofthesun.htm",
+   "quote": "There are no dry technical facts",
+   "page": "body, on Kay's love of history"
+  }
+ ]
+}

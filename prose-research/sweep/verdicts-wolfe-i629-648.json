@@ -1,0 +1,235 @@
+{
+ "name": "wolfe",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 629,
+   "feature": "other: the record that does not survive",
+   "claim": "Wolfe says none of his Plant Engineering magazine articles have been reprinted anywhere.",
+   "source": "Gene Wolfe, written reply to Nigel Price, 'Gene Wolfe's time at Plant Engineering', Ultan's Library, 2013",
+   "url": "https://ultan.org.uk/plant-engineering/",
+   "quote": "none of my magazine articles have been reprinted anywhere",
+   "page": "Wolfe's reply to Price, closing"
+  },
+  {
+   "index": 630,
+   "feature": "other: dating a record",
+   "claim": "Ultan's Library dates Wolfe's Plant Engineering employment 1972 to 1984.",
+   "source": "Nigel Price, 'Gene Wolfe's time at Plant Engineering', Ultan's Library, 2013",
+   "url": "https://ultan.org.uk/plant-engineering/",
+   "quote": "worked (1972 – 1984) as an editor",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 631,
+   "feature": "other: dating a record",
+   "claim": "Plant Engineering's own obituary of Wolfe dates his senior editorship 1972 to 1986, four years later than the terminal date Ultan's Library gives.",
+   "source": "Bob Vavra, 'Gene Wolfe: 1931-2019', Plant Engineering, 2019",
+   "url": "https://www.plantengineering.com/gene-wolfe-1931-2019/",
+   "quote": "senior editor of Plant Engineering magazine from 1972 to 1986",
+   "page": "opening line"
+  },
+  {
+   "index": 632,
+   "feature": "other: what editing taught him",
+   "claim": "Wolfe says being the Letters to the Editor editor at Plant Engineering was good and fun and taught him a lot of stuff.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, 'Suns New, Long, and Short', Nova Express Vol 5 No 1, Fall/Winter 1998 (blog reprint 2021)",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "which was good and fun and taught me a lot",
+   "page": "answer on Plant Engineering"
+  },
+  {
+   "index": 633,
+   "feature": "other: editor ranking",
+   "claim": "Asked to name the best editors he had worked with, Wolfe named David Hartwell first and called him his principal editor.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, 'Suns New, Long, and Short', Nova Express Vol 5 No 1, Fall/Winter 1998 (blog reprint 2021)",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "He's been my principal editor over the years",
+   "page": "answer on best editors"
+  },
+  {
+   "index": 634,
+   "feature": "other: editor ranking",
+   "claim": "Wolfe placed Damon Knight second among the editors he had worked with, after Hartwell.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, 'Suns New, Long, and Short', Nova Express Vol 5 No 1, Fall/Winter 1998 (blog reprint 2021)",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "Damon Knight would have to come in second",
+   "page": "answer on best editors"
+  },
+  {
+   "index": 638,
+   "feature": "other: drafting",
+   "claim": "Dirda reports that every one of Wolfe's stories and novels goes through at least three drafts and occasionally as many as ten.",
+   "source": "Michael Dirda, reporting, The Washington Post Book World, 30 January 1983",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1983-01-29-michaeldirda-thebookofthenewsun-interview.txt",
+   "quote": "at least three drafts, occasionally as many as 10",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 639,
+   "feature": "other: editorial workload",
+   "claim": "Dirda reports that at Plant Engineering Wolfe bought some twenty-five free-lanced articles a year.",
+   "source": "Michael Dirda, reporting, The Washington Post Book World, 30 January 1983",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1983-01-29-michaeldirda-thebookofthenewsun-interview.txt",
+   "quote": "buys some 25 free-lanced articles a year",
+   "page": "paragraph 2"
+  },
+  {
+   "index": 640,
+   "feature": "other: editorial workload",
+   "claim": "Dirda reports that Wolfe wrote a major cover story for Plant Engineering every few months while writing The Book of the New Sun.",
+   "source": "Michael Dirda, reporting, The Washington Post Book World, 30 January 1983",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1983-01-29-michaeldirda-thebookofthenewsun-interview.txt",
+   "quote": "writes a major cover story every few months",
+   "page": "paragraph 2"
+  },
+  {
+   "index": 641,
+   "feature": "other: revision discipline",
+   "claim": "Wolfe says he is never sure he is through with a manuscript until he mails it out.",
+   "source": "Gene Wolfe, interviewed by Michael Dirda, The Washington Post Book World, 30 January 1983",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1983-01-29-michaeldirda-thebookofthenewsun-interview.txt",
+   "quote": "Until I mail a manuscript out I'm never sure",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 642,
+   "feature": "other: what an editor made of him",
+   "claim": "Wolfe says his dedication of The Fifth Head of Cerberus to Damon Knight commemorates Knight growing him from a bean.",
+   "source": "Gene Wolfe, interviewed by Michael Dirda, The Washington Post Book World, 30 January 1983",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1983-01-29-michaeldirda-thebookofthenewsun-interview.txt",
+   "quote": "when he grew me from a bean",
+   "page": "paragraph on Knight"
+  },
+  {
+   "index": 643,
+   "feature": "other: what an editor made of him",
+   "claim": "Dirda describes Damon Knight as a mentor to many contemporary science fiction writers.",
+   "source": "Michael Dirda, reporting, The Washington Post Book World, 30 January 1983",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1983-01-29-michaeldirda-thebookofthenewsun-interview.txt",
+   "quote": "a mentor to many contemporary science fiction writers",
+   "page": "paragraph on Knight"
+  },
+  {
+   "index": 646,
+   "feature": "other: an editor changing the form not the sentences",
+   "claim": "Wolfe says Damon Knight liked 'Trip, Trap' but not its double-column format, and asked him to break it into conventional alternating sections.",
+   "source": "Gene Wolfe, Contemporary Authors Autobiography Series Vol. 9, quoted on WolfeWiki",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Stories.TripTrap",
+   "quote": "Knight liked the story but not its double-column format",
+   "page": "'A note about the writing of the story'"
+  },
+  {
+   "index": 647,
+   "feature": "other: an editor marking the cut points",
+   "claim": "Wolfe says Knight returned the story marked to show the points at which he felt the switches from one letter to the other should be made.",
+   "source": "Gene Wolfe, Contemporary Authors Autobiography Series Vol. 9, quoted on WolfeWiki",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Stories.TripTrap",
+   "quote": "marked to show the points at which he felt",
+   "page": "'A note about the writing of the story'"
+  },
+  {
+   "index": 648,
+   "feature": "other: an editor marking the cut points",
+   "claim": "Wolfe says he spent a couple of hours trying to improve on Knight's marked switch points and found he could not.",
+   "source": "Gene Wolfe, Contemporary Authors Autobiography Series Vol. 9, quoted on WolfeWiki",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Stories.TripTrap",
+   "quote": "I spent a couple of hours trying to improve",
+   "page": "'A note about the writing of the story'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 629,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "none of my magazine articles have been reprinted anywhere",
+   "note": "Raw page ultan.org.uk/plant-engineering fetched (200, browser UA). Quote verbatim in Wolfe's closing written reply to Nigel Price; Wolfe prefaces it with a 'to the best of my knowledge' hedge the claim drops, and the framing paragraph ties the articles to Plant Engineering back issues."
+  },
+  {
+   "index": 630,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "worked (1972 – 1984) as an editor",
+   "note": "Raw page fetched. Opening paragraph, byline 'By Nigel', 27 July 2013: Wolfe 'worked (1972 – 1984) as an editor for the technical magazine Plant Engineering'. En dash matches; every limb supported."
+  },
+  {
+   "index": 631,
+   "verdict": "PARTIAL",
+   "trueWording": "senior editor of Plant Engineering magazine from 1972 to 1986",
+   "note": "Raw page plantengineering.com/gene-wolfe-1931-2019 fetched (200). Opening line of Bob Vavra's obituary carries the quote word for word, so the 1972–1986 dating limb holds; the comparative limb is arithmetically wrong against the 1984 verified at index 630.",
+   "unsupportedLimb": "the arithmetic limb 'four years later than the terminal date Ultan's Library gives' — 1986 is TWO years after Ultan's 1984, not four"
+  },
+  {
+   "index": 632,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which was good and fun and taught me a lot",
+   "note": "Raw blogspot reprint fetched (200). Header confirms Lawrence Person, Nova Express Vol 5 No 1, Fall/Winter 1998, posted 25 April 2021. Quote verbatim in the Plant Engineering answer: 'I also got to be the Letters to the Editor editor, which was good and fun and taught me a lot of stuff'; the Plant Engineering limb is fixed by LP's question and Wolfe's 'on the staff of Plant Engineering magazine'."
+  },
+  {
+   "index": 633,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He's been my principal editor over the years",
+   "note": "Same raw page. Q: 'Who are the best editors you've worked with over the years?' A: 'Oh, David Hartwell, obviously. He's been my principal editor over the years.' Hartwell named first and called principal editor: both limbs supported. Straight apostrophe on the page, as in the claim."
+  },
+  {
+   "index": 634,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Damon Knight would have to come in second",
+   "note": "Same answer, next sentence: 'Other than David Hartwell, Damon Knight would have to come in second.' The 'after Hartwell' limb is explicit in 'Other than David Hartwell'."
+  },
+  {
+   "index": 638,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "at least three drafts, occasionally as many as 10",
+   "note": "Raw text file at gwern.net fetched (200), full Washington Post Book World piece of 30 January 1983. Paragraph 3: 'Every one of his carefully wrought stories and novels undergoes at least three drafts, occasionally as many as 10.' The 'every one' limb is on the page."
+  },
+  {
+   "index": 639,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "buys some 25 free-lanced articles a year",
+   "note": "Same raw text, paragraph 2: 'There he edits, buys some 25 free-lanced articles a year, and writes a major cover story every few months', with 'there' being Plant Engineering Magazine in Barrington, Illinois."
+  },
+  {
+   "index": 640,
+   "verdict": "PARTIAL",
+   "trueWording": "writes a major cover story every few months",
+   "note": "Raw text fetched. The quotation and the 'for Plant Engineering' limb are verbatim and supported in paragraph 2. The concurrency with The Book of the New Sun is a reasonable inference from his seven years' writing overlapping the job, but the page does not state it.",
+   "unsupportedLimb": "the temporal limb 'while writing The Book of the New Sun' — the page reports the cover stories in the present tense of the January 1983 interview, when Wolfe says he has finished the first draft of The Urth of the New Sun and is at work on short stories; it never dates the cover stories to the tetralogy's writing"
+  },
+  {
+   "index": 641,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Until I mail a manuscript out I'm never sure",
+   "note": "Same raw text, paragraph 3, Wolfe in his own voice: 'Until I mail a manuscript out I'm never sure that I'm through with it.'"
+  },
+  {
+   "index": 642,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "when he grew me from a bean",
+   "note": "Same raw text, paragraph on Knight: 'That's what I meant when I dedicated The Fifth Head of Cerberus to Damon in memory of when he grew me from a bean.' Both limbs — the dedication and what it commemorates — are on the page."
+  },
+  {
+   "index": 643,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a mentor to many contemporary science fiction writers",
+   "note": "Same raw text, same paragraph, in Dirda's reporting voice inside dashes: 'In 1967 Damon Knight--a mentor to many contemporary science fiction writers-- published Wolfe's third story'."
+  },
+  {
+   "index": 646,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Knight liked the story but not its double-column format",
+   "note": "Raw wolfewiki.com Stories.TripTrap fetched (200). Section 'A note about the writing of the story', quoting Contemporary Authors Autobiography Series Vol. 9. The second limb is the page's own continuation: 'asked me to break it up into conventional skips from astronaut to alien and back to astronaut'."
+  },
+  {
+   "index": 647,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "marked to show the points at which he felt",
+   "note": "Same section: 'Knight returned Trip Trap marked to show the points at which he felt the switches from one letter to the other should be made.' Every limb of the claim sentence, including 'from one letter to the other', is the page's wording."
+  },
+  {
+   "index": 648,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I spent a couple of hours trying to improve",
+   "note": "Same section, next sentence: 'I spent a couple of hours trying to improve on them and found I could not...' — 'them' being Knight's marked switch points from the preceding sentence."
+  }
+ ]
+}

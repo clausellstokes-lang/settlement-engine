@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 6,
+ "indices": [
+  588,
+  590,
+  591,
+  592,
+  593,
+  594,
+  595,
+  596,
+  597,
+  617,
+  631,
+  632,
+  634,
+  635,
+  636
+ ],
+ "claims": [
+  {
+   "index": 588,
+   "feature": "cadence and rhythm",
+   "claim": "Alessandro Amenta says the Polish translation generally maintains the high, solemn tone of some of Le Guin's sentences.",
+   "source": "Alessandro Amenta, Kwartalnik Neofilologiczny LXX 2/2023, p. 283",
+   "url": "http://journals.pan.pl/Content/128312/PDF/2023-02-KNEO-06.pdf",
+   "quote": "maintains the high, solemn tone of some Le Guin's",
+   "page": "p. 283"
+  },
+  {
+   "index": 590,
+   "feature": "diction (native vs latinate)",
+   "claim": "James Marino says the impression of simplicity in A Wizard of Earthsea comes from Le Guin using simple words that are themselves almost always very old.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "simple words words that are themselves almost always very old",
+   "page": "middle of the video, on the impression of simplicity"
+  },
+  {
+   "index": 591,
+   "feature": "diction (native vs latinate)",
+   "claim": "James Marino states that Le Guin does not use technical terms and does not use jargon.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "She doesn't use technical terms, she doesn't use jargon",
+   "page": "on the impression of simplicity"
+  },
+  {
+   "index": 592,
+   "feature": "place and institution description",
+   "claim": "James Marino contrasts Le Guin's naming of built things with an elaborate alternative, saying she will not say crenellation but will talk about houses and say roof and tower.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "She's not going to say crenellation",
+   "page": "on the impression of simplicity"
+  },
+  {
+   "index": 593,
+   "feature": "diction (native vs latinate)",
+   "claim": "James Marino formulates Le Guin's lexical rule as: the more technical and the more limited a word is, the less likely she is to use it.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "The more technical the more limited a word the less likely",
+   "page": "on the impression of simplicity"
+  },
+  {
+   "index": 594,
+   "feature": "diction (native vs latinate)",
+   "claim": "James Marino says Le Guin chooses common ordinary words because they have picked up a lot of associations in their travels, not for simplicity's own sake.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "associations in their travels",
+   "page": "closing of the video"
+  },
+  {
+   "index": 595,
+   "feature": "sentence length variation",
+   "claim": "James Marino observes that Le Guin's sentences in the Nemmerle death passage are fairly long and complex and that she saves the shortest sentence, the three-word 'He lay dying', for the highest impact.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "She saves the shortest sentence for the highest impact",
+   "page": "analysis of the Nemmerle passage, chapter four"
+  },
+  {
+   "index": 596,
+   "feature": "adjective and adverb discipline",
+   "claim": "James Marino notes that Le Guin writes that the Archmage is cold, very cold, rather than reaching for frigid or subzero, leaving simple words for the reader to fill in with emotional associations.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "Simple words for you to fill in with emotional associations",
+   "page": "analysis of the Nemmerle passage"
+  },
+  {
+   "index": 597,
+   "feature": "archaism",
+   "claim": "James Marino says fantasists who use elaborate vocabulary are trying to create distance, and that Le Guin finds that effect distracting and fakey.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "She finds that effect distracting and and fakey",
+   "page": "on the words Le Guin does not want in fantasy"
+  },
+  {
+   "index": 617,
+   "feature": "diction (native vs latinate)",
+   "claim": "Hari Kunzru describes Le Guin's prose as clear and clean and never tainted by inkhorn medievalism or technological jargon.",
+   "source": "Hari Kunzru, 'Ursula Le Guin: Wizardry is artistry', The Guardian, 20 November 2014",
+   "url": "https://www.theguardian.com/books/2014/nov/20/ursula-le-guin-wizardry-is-artistry-interview-national-book-awards",
+   "quote": "a clear, clean prose that is never tainted by inkhorn medievalism",
+   "page": "opening profile section"
+  },
+  {
+   "index": 631,
+   "feature": "place and institution description",
+   "claim": "Jason P. Vest attributes the conviction of Le Guin's invented worlds to her weaving each place's contradictions, tensions, mores and rites into satisfyingly detailed portraits of its society.",
+   "source": "Jason P. Vest, 'The Re-Possessed', The Common Reader (Washington University), 30 May 2021",
+   "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
+   "quote": "weaving each place's contradictions, tensions, mores, and rites",
+   "page": "early section on the first Hainish novels"
+  },
+  {
+   "index": 632,
+   "feature": "place and institution description",
+   "claim": "Jason P. Vest says Le Guin's fiction swiftly convinces its readers that the worlds she invents are real places rife with complex histories, cultures and characters.",
+   "source": "Jason P. Vest, The Common Reader, 30 May 2021",
+   "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
+   "quote": "real places rife with complex histories, cultures, and characters",
+   "page": "early section on the first Hainish novels"
+  },
+  {
+   "index": 634,
+   "feature": "cadence and rhythm",
+   "claim": "Cummins attributes Le Guin's style to her sensitivity to sound and syntax.",
+   "source": "Elizabeth Cummins, Understanding Ursula K. Le Guin (Univ. of South Carolina Press, 1990)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aunderstandingurs0000cumm%20AND%20%22results%20from%20her%20sensitivity%20to%20sound%20and%20syntax%22",
+   "quote": "results from her sensitivity to sound and syntax",
+   "page": "archive.org search-inside snippet (page_num not resolvable per-highlight)"
+  },
+  {
+   "index": 635,
+   "feature": "civic record register",
+   "claim": "Cummins says Always Coming Home lacks the objective tone of most anthropological writing.",
+   "source": "Elizabeth Cummins, Understanding Ursula K. Le Guin (1990)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aunderstandingurs0000cumm%20AND%20%22it%20lacks%20the%20objective%20tone%20of%20most%20anthropological%20writing%22",
+   "quote": "it lacks the objective tone of most anthropological writing",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 636,
+   "feature": "civic record register",
+   "claim": "Cummins says Le Guin's way of presenting a culture is to use the textual model of the ethnograph.",
+   "source": "Elizabeth Cummins, Understanding Ursula K. Le Guin (1990)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aunderstandingurs0000cumm%20AND%20%22use%20the%20textual%20model%20of%20the%20ethnograph%22",
+   "quote": "use the textual model of the ethnograph",
+   "page": "archive.org search-inside snippet"
+  }
+ ]
+}

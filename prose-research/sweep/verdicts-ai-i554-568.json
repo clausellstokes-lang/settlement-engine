@@ -1,0 +1,234 @@
+{
+ "name": "ai",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 554,
+   "feature": "counter-evidence",
+   "claim": "Winterson closes by asking readers to read AI as AI has read them.",
+   "source": "Jeanette Winterson, The Guardian (Books), 12 March 2025",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "quote": "AI reads us. Now it’s time for us to read AI",
+   "page": "final lines"
+  },
+  {
+   "index": 555,
+   "feature": "counter-evidence",
+   "claim": "Akutagawa Prize winner Rie Qudan said in her acceptance speech that about 5% of her novel's whole text was written directly by generative AI.",
+   "source": "Rie Qudan's acceptance speech, quoted by Thu-Huong Ha, The Japan Times, 19 January 2024",
+   "url": "https://www.japantimes.co.jp/culture/2024/01/19/books/akutagawa-prize-book-chatgpt/",
+   "quote": "about 5% of the whole text is written directly from",
+   "page": "paragraph beginning 'In her acceptance speech'"
+  },
+  {
+   "index": 556,
+   "feature": "reader and expert judgment",
+   "claim": "The Japan Times reports that the Qudan prize announcement drew hundreds of comments on X where the previous announcement had drawn dozens.",
+   "source": "Thu-Huong Ha, The Japan Times, 19 January 2024",
+   "url": "https://www.japantimes.co.jp/culture/2024/01/19/books/akutagawa-prize-book-chatgpt/",
+   "quote": "Hundreds of comments poured in on social media platform X",
+   "page": "paragraph beginning 'The internet had some thoughts'"
+  },
+  {
+   "index": 557,
+   "feature": "detection and its failures",
+   "claim": "In Mark Lawrence's blind test, after at least 370 votes per poll three of the eight pieces were still undecided or decided wrongly.",
+   "source": "Mark Lawrence, 'AI writing results', personal blog, 14 September 2023",
+   "url": "https://www.marklawrence.buzz/2023/09/ai-writing-results.html",
+   "quote": "After a minimum 370 votes 3 of the 8 cases",
+   "page": "Main observations, item iv"
+  },
+  {
+   "index": 558,
+   "feature": "counter-evidence",
+   "claim": "Two of the three highest-rated pieces in Lawrence's reader poll were written by ChatGPT 4.",
+   "source": "Mark Lawrence, 'AI writing results', personal blog, 14 September 2023",
+   "url": "https://www.marklawrence.buzz/2023/09/ai-writing-results.html",
+   "quote": "The 2nd and 3rd highest rated pieces were AI-written",
+   "page": "Main observations, item vi"
+  },
+  {
+   "index": 559,
+   "feature": "register measured",
+   "claim": "Lawrence's test material was eight pieces of flash fiction of about 350 words each, all written to a single 'meeting a dragon' prompt.",
+   "source": "Mark Lawrence, 'So ... is AI writing any good?', personal blog, 13 September 2023",
+   "url": "https://www.marklawrence.buzz/2023/09/so-is-ai-writing-any-good.html",
+   "quote": "8 pieces of flash fiction, all of them ~350 words",
+   "page": "setup, paragraph beginning 'Below are (initially)'"
+  },
+  {
+   "index": 560,
+   "feature": "archaism",
+   "claim": "Lawrence attributes the low rating of his eighth piece to his having instructed the model to use nineteenth-century language.",
+   "source": "Mark Lawrence, 'AI writing results', personal blog, 14 September 2023",
+   "url": "https://www.marklawrence.buzz/2023/09/ai-writing-results.html",
+   "quote": "I asked for 19th century language, clearly unpopular choice!",
+   "page": "list of pieces, item 8"
+  },
+  {
+   "index": 561,
+   "feature": "opening sentence",
+   "claim": "A commenter on Lawrence's results post reports that every AI piece introduced the dragon in its opening statement in a similar manner.",
+   "source": "Anonymous commenter, 2 October 2023, under Mark Lawrence's 'AI writing results'",
+   "url": "https://www.marklawrence.buzz/2023/09/ai-writing-results.html",
+   "quote": "the AI pieces all introduced the dragon in the opening statement",
+   "page": "comments, Anonymous 2 October 2023"
+  },
+  {
+   "index": 562,
+   "feature": "reader and expert judgment",
+   "claim": "A commenter on Lawrence's results post calls the highly-rated AI piece's prose simplistic nonsense.",
+   "source": "Anonymous commenter, 2 October 2023, under Mark Lawrence's 'AI writing results'",
+   "url": "https://www.marklawrence.buzz/2023/09/ai-writing-results.html",
+   "quote": "enticed by the AI's simplistic nonsense prose",
+   "page": "comments, Anonymous 2 October 2023"
+  },
+  {
+   "index": 563,
+   "feature": "reader and expert judgment",
+   "claim": "Lawrence warns that his voting pool contained many writers and so should judge writing better than a general readership.",
+   "source": "Mark Lawrence, 'AI writing results', personal blog, 14 September 2023",
+   "url": "https://www.marklawrence.buzz/2023/09/ai-writing-results.html",
+   "quote": "The people voting on this included MANY writers",
+   "page": "Note i, above Main observations"
+  },
+  {
+   "index": 564,
+   "feature": "steerability",
+   "claim": "Vauhini Vara reports that GPT-3's language became more candid as her own prompting sentences became more candid.",
+   "source": "Vauhini Vara, 'Ghosts', The Believer, 9 August 2021",
+   "url": "https://believermag.com/ghosts/",
+   "quote": "Candor, apparently, begat candor",
+   "page": "introduction, paragraph beginning 'I had always avoided'"
+  },
+  {
+   "index": 565,
+   "feature": "counter-evidence",
+   "claim": "Vara states that she wrote only the bold sentences of the nine 'Ghosts' stories and GPT-3 wrote the remainder.",
+   "source": "Vauhini Vara, 'Ghosts', The Believer, 9 August 2021",
+   "url": "https://believermag.com/ghosts/",
+   "quote": "I authored the sentences in bold and GPT-3 filled in the rest",
+   "page": "introduction, final paragraph before story 1"
+  },
+  {
+   "index": 566,
+   "feature": "counter-evidence",
+   "claim": "Vara says the only alterations she and her editor made to the AI text were paragraph breaks and shortening.",
+   "source": "Vauhini Vara, 'Ghosts', The Believer, 9 August 2021",
+   "url": "https://believermag.com/ghosts/",
+   "quote": "adding paragraph breaks in some instances and shortening the length",
+   "page": "introduction, final paragraph before story 1"
+  },
+  {
+   "index": 567,
+   "feature": "repetition and refrain",
+   "claim": "Vara praises a GPT-3 passage built entirely of near-identical repeated sentences as the truest Modern Love column she had read.",
+   "source": "Vauhini Vara, 'Ghosts', The Believer, 9 August 2021",
+   "url": "https://believermag.com/ghosts/",
+   "quote": "I had never read such an accurate Modern Love in my life",
+   "page": "opening section, parenthesis about the New York Times"
+  },
+  {
+   "index": 568,
+   "feature": "other: fabricated specifics in a first-person register",
+   "claim": "Vara warns her readers in advance that inconsistencies and untruths appear in the unedited GPT-3 text.",
+   "source": "Vauhini Vara, 'Ghosts', The Believer, 9 August 2021",
+   "url": "https://believermag.com/ghosts/",
+   "quote": "inconsistencies and untruths appear",
+   "page": "introduction, final paragraph before story 1"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 554,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI reads us. Now it's time for us to read AI.",
+   "note": "Final line of the Guardian piece, byline 'Jeanette Winterson', dated 'Wed 12 Mar 2025'. Quote exact (curly apostrophe); closing-position and both limbs supported."
+  },
+  {
+   "index": 555,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "probably about 5% of the whole text is written directly from the generative AI",
+   "note": "Page: 'In her acceptance speech, Qudan stated: \"This is a novel written by making full use of a generative AI like ChatGPT, and probably about 5% of the whole text is written directly from the generative AI.\"' Every limb (Akutagawa winner, acceptance speech, ~5%, directly from generative AI) supported; page hedges with 'probably'."
+  },
+  {
+   "index": 556,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hundreds of comments poured in on X, while the last announcement received merely dozens",
+   "note": "Page, paragraph beginning 'The internet had some thoughts.': 'Hundreds of comments poured in on social media platform X, while the last prize announcement received merely dozens.' Both limbs supported."
+  },
+  {
+   "index": 557,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "After a minimum 370 votes 3 of the 8 cases were undecided or incorrecly decided",
+   "note": "Main observations item iv, verbatim (page's own typo 'incorrecly'). 'At least 370 votes per poll' corroborated by item i ('minumum of 370 votes per poll') and the intro ('the polls with the least number of votes ... has 374'). Blindness of the test confirmed by the companion setup post ('The AI/human poll results will be revealed after the experiment concludes')."
+  },
+  {
+   "index": 558,
+   "verdict": "PARTIAL",
+   "trueWording": "The 2nd and 3rd highest rated pieces were AI-written",
+   "note": "Item vi is verbatim and the conclusion repeats 'two of the top three rated pieces are AI written'; the results chart confirms pieces 2 and 3 (both red = AI) sit below only piece 4. But the cited results page never names a model: the string 'ChatGPT'/'GPT' does not occur anywhere on it. The limb is nonetheless TRUE and verified on the sibling post the page links as 'Read about the experiment here' (https://www.marklawrence.buzz/2023/09/so-is-ai-writing-any-good.html): 'some of the pieces were written by ChatGPT 4, which is the paid for version'. Fix by citing the setup post for the model.",
+   "unsupportedLimb": "written by ChatGPT 4 - the cited results page attributes the pieces only to 'AI', naming no model"
+  },
+  {
+   "index": 559,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Below are (initially) 8 pieces of flash fiction, all of them ~350 words",
+   "note": "Setup post: 'Below are (initially) 8 pieces of flash fiction, all of them ~350 words. All of them were written to the prompt: \"write a piece of fiction based on 'meeting a dragon\"'. Two qualifiers the same page carries, neither contradicting the claim: 'for the AI there were additional very brief suggestions concerning tone &/or setting to generate variety', and 'the total number of pieces may exceed 8' (the run ended with 10; the results post analyses 'the first 8 pieces ... with the last 2 off to the side')."
+  },
+  {
+   "index": 560,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "8 - AI written (I asked for 19th century language, clearly unpopular choice!)",
+   "note": "List of pieces, item 8, verbatim. The 'low rating' limb is confirmed from the page's own results chart (results.jpg, read as an image): piece 8 sits alone at the bottom of the axis at 1.70 average rating, the lowest of all ten. Page's word for it is 'unpopular'."
+  },
+  {
+   "index": 561,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the AI pieces all introduced the dragon in the opening statement, and did so in a similar manner",
+   "note": "Comment by Anonymous, 2 October 2023 at 08:37, verbatim in the served HTML (Blogger comments are inline, not iframed). Both limbs - every AI piece, and 'in a similar manner' - supported."
+  },
+  {
+   "index": 562,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "concerning that others were enticed by the AI's simplistic nonsense prose",
+   "note": "Same comment (Anonymous, 2 October 2023). Its subject is stated in the preceding sentences: 'Truly flabbergasted by the performance of #2. That is not a well written story.' Piece 2 is AI-written and the 2nd highest rated, so the 'highly-rated AI piece' limb holds."
+  },
+  {
+   "index": 563,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The people voting on this included MANY writers, so we should expect better judgement from them",
+   "note": "Note i, above Main observations: '... so we should expect better judgement from them on writing matters than we would expect from the general readership or general public.' Both limbs supported; the note is a caveat Lawrence raises himself."
+  },
+  {
+   "index": 564,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Candor, apparently, begat candor",
+   "note": "Paragraph beginning 'I had always avoided writing about my sister's death', exactly as cited: 'At first, in my reticence, I offered GPT-3 only one brief, somewhat rote sentence about it. The AI matched my canned language; cliches abounded. But as I tried to write more honestly, the AI seemed to be doing the same.' Live believermag.com returned a Cloudflare 403; verdict formed on the RAW Wayback capture web.archive.org/web/20220512115630id_/https://believermag.com/ghosts/ (full article body present), not on any summary."
+  },
+  {
+   "index": 565,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In the nine stories below, I authored the sentences in bold and GPT-3 filled in the rest",
+   "note": "Final introductory paragraph before story 1, verbatim including the 'nine stories' limb. Raw Wayback capture (live site Cloudflare-blocked)."
+  },
+  {
+   "index": 566,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "My and my editor's sole alterations ... adding paragraph breaks ... and shortening the length",
+   "note": "Same paragraph: 'My and my editor's sole alterations to the AI-generated text were adding paragraph breaks in some instances and shortening the length of a few of the stories'. 'Sole' supports the 'only alterations' limb. Raw Wayback capture."
+  },
+  {
+   "index": 567,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I had never read such an accurate Modern Love in my life",
+   "note": "Parenthesis about the New York Times in the opening section. The passage praised is quoted on the page and is indeed built entirely of near-identical sentences: 'We went out for dinner. We went out for drinks. We went out for dinner again. We went out for drinks again. We went out for dinner and drinks again.' The claim's 'truest' renders the page's 'accurate' (the adjacent sentence does say GPT-3's language was 'almost truer than writing any human would produce'). Raw Wayback capture."
+  },
+  {
+   "index": 568,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "because it has not been edited beyond this, inconsistencies and untruths appear",
+   "note": "Final introductory paragraph before story 1, i.e. in advance of the stories, verbatim. Raw Wayback capture."
+  }
+ ]
+}

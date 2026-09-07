@@ -1,0 +1,54 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 4673 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneDESKINT
+
+ ❯ tests/lint/writerReach.walker.test.js (56 tests | 2 failed) 33347ms
+     × the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers 6ms
+     × the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers
+AssertionError: corpusMeta.simulationFlagsLit must equal OSR's frozen value: expected 81 to be 80 // Object.is equality
+
+- Expected
++ Received
+
+- 80
++ 81
+
+ ❯ tests/lint/writerReach.walker.test.js:214:10
+    212|     for (const key of keys) {
+    213|       expect(baseline.corpusMeta[key], `corpusMeta.${key} must equal O…
+    214|         .toBe(osrBaseline.corpusMeta[key]);
+       |          ^
+    215|     }
+    216|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count
+AssertionError: live corpusMeta.simulationFlagsLit still equals OSR's frozen value: expected 81 to be 80 // Object.is equality
+
+- Expected
++ Received
+
+- 80
++ 81
+
+ ❯ tests/lint/writerReach.walker.test.js:222:10
+    220|     for (const key of Object.keys(osrBaseline.corpusMeta)) {
+    221|       expect(live.corpus.meta[key], `live corpusMeta.${key} still equa…
+    222|         .toBe(osrBaseline.corpusMeta[key]);
+       |          ^
+    223|     }
+    224|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 54 passed (56)
+   Start at  15:03:29
+   Duration  33.95s (transform 2.69s, setup 22ms, import 498ms, tests 33.35s, environment 0ms)
+

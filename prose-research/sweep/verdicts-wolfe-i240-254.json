@@ -1,0 +1,237 @@
+{
+ "name": "wolfe",
+ "chunk": 16,
+ "claims": [
+  {
+   "index": 240,
+   "feature": "archaism",
+   "claim": "Wolfe's appendix says his substituted real words are meant to be suggestive rather than definitive.",
+   "source": "Wikipedia relaying Gene Wolfe's appendix to The Shadow of the Torturer (cited as Shadow and Claw, Tor 1994, p. 211)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "intended to be suggestive rather than definitive",
+   "page": "Style section"
+  },
+  {
+   "index": 241,
+   "feature": "archaism",
+   "claim": "Wolfe's appendix names peltast, androgyn and exultant as real words standing in for undiscovered concepts.",
+   "source": "Wikipedia relaying Gene Wolfe's appendix to The Shadow of the Torturer (cited as Shadow and Claw, Tor 1994, p. 211)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "Such words as peltast, androgyn, and exultant are substitutions",
+   "page": "Style section"
+  },
+  {
+   "index": 242,
+   "feature": "other: rereading",
+   "claim": "Wolfe defined a great story in a 1982 letter as one a cultivated reader can read with pleasure and reread with increasing pleasure.",
+   "source": "Wikipedia relaying Gene Wolfe, chain letter to George R. R. Martin and Greg Benford, 10 July 1982, as published in Castle of Days (1992)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "One that can be read with pleasure by a cultivated reader",
+   "page": "Style section"
+  },
+  {
+   "index": 243,
+   "feature": "omission as information",
+   "claim": "Wikipedia's synthesis states that Wolfe planted subtle hints and lacunae that the text may never refer to explicitly, giving a backyard of morning glories in Free Live Free as an example legible only to a reader with horticultural knowledge.",
+   "source": "Wikipedia, 'Gene Wolfe', Style section (unattributed editorial synthesis)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "subtle hints and lacunae that may never be explicitly referred to",
+   "page": "Style section"
+  },
+  {
+   "index": 244,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi argues that Wolfe's narrator writes from a post-historic vantage point at which all dating is vague.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 6 July 2020, revising his 'Posthistory 101' (Extrapolation vol. 37 no. 2, 1996)",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "post-historic vantage point means that all time is vague",
+   "page": "section 2.2"
+  },
+  {
+   "index": 245,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi contrasts Wolfe with Jack Vance, who dates his dying-Earth events by numbered Aeons, and says Wolfe writes against that grain.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "goes against the Vancean grain of numbered Aeons",
+   "page": "section 2.2"
+  },
+  {
+   "index": 246,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi revises his own published estimate of the duration of the Autarchy and reports that the text supports only a range between one thousand and thirty thousand years.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "the range is actually between one thousand and thirty-thousand years",
+   "page": "section 2.1"
+  },
+  {
+   "index": 247,
+   "feature": "place and institution description",
+   "claim": "Andre-Driussi infers from a single offhand remark by a minor character that the city's name records a failure of its water treatment, and that technological decline is what poisoned the river.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "the poisoning of the water is a direct result of technological decline",
+   "page": "section 1"
+  },
+  {
+   "index": 248,
+   "feature": "consequence on a household",
+   "claim": "Andre-Driussi reconstructs from that same remark that the city had to move upstream to escape its own filth, a civic history the narrative never states outright.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "the city had to move upstream to avoid its own filth",
+   "page": "section 1"
+  },
+  {
+   "index": 249,
+   "feature": "archaism",
+   "claim": "Wowra states that all the strange words in The Book of the New Sun are real English words, and that this shows how odd language can sound without invented vocabulary.",
+   "source": "Scott Wowra, introduction to 'The Lupine Scholar: an interview with Michael Andre-Driussi', Ultan's Library, 21 May 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "how odd language can sound without science fiction authors inventing new words",
+   "page": "introduction"
+  },
+  {
+   "index": 250,
+   "feature": "archaism",
+   "claim": "Wowra reports that Wolfe answered the charge of fabricating words by publishing the essay 'Words Weird and Wonderful' in The Castle of the Otter in 1982 to show the words were genuine.",
+   "source": "Scott Wowra, introduction to 'The Lupine Scholar', Ultan's Library, 21 May 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "all the words he used in THE SHADOW OF THE TORTURER",
+   "page": "introduction"
+  },
+  {
+   "index": 251,
+   "feature": "archaism",
+   "claim": "Wowra gives omophagist and cherkaji as examples of Wolfe's seemingly counterfeit but genuine vocabulary, glossing them as an eater of raw flesh and Persian light cavalry.",
+   "source": "Scott Wowra, introduction to 'The Lupine Scholar', Ultan's Library, 21 May 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "omophagist (an eater of raw flesh) and cherkaji",
+   "page": "introduction"
+  },
+  {
+   "index": 252,
+   "feature": "civic record register",
+   "claim": "Borski describes the frame of the third novella of The Fifth Head of Cerberus as a junior military officer adjudicating a case from a file of documents.",
+   "source": "Robert Borski, review of The Fifth Head of Cerberus (Millennium, 1999), Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "an unnamed junior military officer is seeking to adjudicate the case",
+   "page": "section on V.R.T."
+  },
+  {
+   "index": 253,
+   "feature": "other: documentary frame",
+   "claim": "Borski reports that most of what that officer reads comes to the reader as extracts, among them taped interrogation transcripts, a field journal and a prison diary.",
+   "source": "Robert Borski, review of The Fifth Head of Cerberus, Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "Much of what the officer examines takes the form of extracts",
+   "page": "section on V.R.T."
+  },
+  {
+   "index": 254,
+   "feature": "other: documentary frame",
+   "claim": "Borski notes that the dossier is not ordered chronologically and that ordinary details of the officer's own present keep interrupting the documents he is reading.",
+   "source": "Robert Borski, review of The Fifth Head of Cerberus, Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "Little is told chronologically, and often mundanities from the present-time narrative intrude",
+   "page": "section on V.R.T."
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 240,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "and are intended to be suggestive rather than definitive.",
+   "note": "Style section quotes the appendix verbatim; footnote 27 is Shadow & Claw (Tor, 1994), p. 211, matching the cited source. Appendix also says he used no invented terms, supporting 'real words'."
+  },
+  {
+   "index": 241,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Such words as peltast, androgyn, and exultant are substitutions of this kind",
+   "note": "Verbatim on the page; the only difference is whitespace left by stripped italic tags around the commas. Preceding sentence supplies 'yet undiscovered concepts' and 'in no case have I done so' (no invented terms)."
+  },
+  {
+   "index": 242,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "One that can be read with pleasure by a cultivated reader and reread with increasing pleasure.",
+   "note": "Verbatim. Footnote 26 dates it: chain letter to George R. R. Martin and Greg Benford, July 10, 1982, as published in Castle of Days (1992) - so the '1982 letter' limb is carried by the page's own citation."
+  },
+  {
+   "index": 243,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe also left subtle hints and lacunae that may never be explicitly referred to in the text.",
+   "note": "Verbatim, and the next sentence gives the example: 'a backyard full of morning glories is an intentional foreshadowing of events in Free Live Free, but it is apparent only to a reader with a horticultural background.' The sentence carries no footnote, so 'unattributed editorial synthesis' holds."
+  },
+  {
+   "index": 244,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Severian's post-historic vantage point means that all time is vague",
+   "note": "In section 2.2, verbatim. Page frames it as shared with Nigel Price ('We agreed with the basic principle'), and Severian is the narrator, so 'Wolfe's narrator' is right."
+  },
+  {
+   "index": 245,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In this Wolfe goes against the Vancean grain of numbered Aeons known as history",
+   "note": "Section 2.2, verbatim, followed by two Rhialto the Marvellous (1984) examples ('During the 17th Aeon...'). The page writes 'Vancean' and 'the dying Earth' rather than spelling out 'Jack Vance' in that sentence."
+  },
+  {
+   "index": 246,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Recent reading suggests that the range is actually between one thousand and thirty-thousand years",
+   "note": "Section 2.1, verbatim, directly after 'In \"Posthistory 101\" and Lexicon Urthus I stated that the time from Ymar to Severian was about a chiliad' - the revision limb. He then refines: 'most accurately \"many chiliads,\" which means \"more than three chiliads\"', a narrowing the claim omits but does not misstate."
+  },
+  {
+   "index": 247,
+   "verdict": "PARTIAL",
+   "trueWording": "When Jonas says the city was not called Nessus yet because it did not poison the water, it now seems crystal clear to me that the poisoning of the water is a direct result of technological decline.",
+   "note": "Quote is verbatim in section 1 and the water-treatment reading is explicit ('a metropolis of the high population density only possible through 20th century technology for water treatment'). But the page does not call the remark offhand, and it treats Jonas as a major interpretive figure - 'Jonas now shines for me as the man of history... he is our stand-in, our surrogate in Severian's Commonwealth' - so 'a single offhand remark by a minor character' is the claim-writer's framing, not the page's.",
+   "unsupportedLimb": "that the source is a single offhand remark by a minor character (the page casts Jonas as a major figure and never calls the remark offhand)"
+  },
+  {
+   "index": 248,
+   "verdict": "PARTIAL",
+   "trueWording": "The technology fell until finally the city had to move upstream to avoid its own filth.",
+   "note": "Quote is verbatim in the same section 1 paragraph, and it is plainly the critic's own inference ('it now seems crystal clear to me'). The page nowhere asserts that Wolfe's narrative never states this civic history outright, so that limb is unsupported by this source.",
+   "unsupportedLimb": "that the narrative never states this civic history outright - the page makes no claim about what the novels do or do not state"
+  },
+  {
+   "index": 249,
+   "verdict": "PARTIAL",
+   "trueWording": "All of the strange words that appear in THE BOOK OF THE NEW SUN are real.",
+   "note": "Wowra's introduction carries the quoted clause verbatim ('...just how odd language can sound without science fiction authors inventing new words that lack inherent meaning'). But the page says the words are 'real', never 'English'; the word 'English' does not appear anywhere on the page, and its own gloss for cherkaji is 'Persian light cavalry'.",
+   "unsupportedLimb": "that the strange words are real ENGLISH words - the page says only that they are 'real'"
+  },
+  {
+   "index": 250,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mr. Wolfe produced the essay \"Words Weird and Wonderful\" in THE CASTLE OF THE OTTER (1982) to demonstrate that, in fact, all the words he used in THE SHADOW OF THE TORTURER were genuine.",
+   "note": "Verbatim. The charge limb is on the page too: 'In the early 1980s, frustrated readers accused Mr. Wolfe of deliberately fabricating unusual words to confuse them.'"
+  },
+  {
+   "index": 251,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "bizarre and seemingly counterfeit words like omophagist (an eater of raw flesh) and cherkaji (Persian light cavalry)",
+   "note": "Verbatim, including both glosses; 'seemingly counterfeit' and 'are real' carry the counterfeit-but-genuine limb."
+  },
+  {
+   "index": 252,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Framing everything is the present-time narrative, wherein an unnamed junior military officer is seeking to adjudicate the case of John V. Marsch",
+   "note": "Verbatim in the V.R.T. paragraph; the page names V.R.T. as 'the closing' of the three novellas, and the file-of-documents limb is carried by 'Much of what the officer examines takes the form of extracts. Among the materials he samples...'."
+  },
+  {
+   "index": 253,
+   "verdict": "PARTIAL",
+   "trueWording": "Much of what the officer examines takes the form of extracts... taped interviews by various interrogators of Marsch, the field journal... and Marsch's prison diary.",
+   "note": "The quoted sentence is verbatim and all three document types are on the page. The quantifier is not: the page says 'Much of what the officer examines', not 'most of what that officer reads'. The page also says 'taped interviews by various interrogators', not 'taped interrogation transcripts', and describes what the officer examines rather than how it reaches the reader.",
+   "unsupportedLimb": "'most' - the page says 'Much of what the officer examines'; and 'taped interrogation transcripts' for the page's 'taped interviews by various interrogators'"
+  },
+  {
+   "index": 254,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Little is told chronologically, and often mundanities from the present-time narrative intrude",
+   "note": "Verbatim. The 'present-time narrative' is defined two sentences earlier as the officer's frame, 'the long night that encompasses his task', so 'the officer's own present' is supported."
+  }
+ ]
+}

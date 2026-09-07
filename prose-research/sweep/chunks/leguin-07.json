@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 7,
+ "indices": [
+  637,
+  638,
+  642,
+  643,
+  644,
+  645,
+  647,
+  648,
+  649,
+  652,
+  653,
+  655,
+  656,
+  658,
+  659
+ ],
+ "claims": [
+  {
+   "index": 637,
+   "feature": "civic record register",
+   "claim": "Cummins says the ethnograph model admits both the voices of the anthropologist and of the people being studied.",
+   "source": "Elizabeth Cummins, Understanding Ursula K. Le Guin (1990)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aunderstandingurs0000cumm%20AND%20%22both%20the%20voices%20of%20the%20anthropologist%22",
+   "quote": "both the voices of the anthropologist",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 638,
+   "feature": "point of view and distance",
+   "claim": "Cummins says Le Guin uses an omniscient point of view for the section covering ages seven to nineteen.",
+   "source": "Elizabeth Cummins, Understanding Ursula K. Le Guin (1990)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aunderstandingurs0000cumm%20AND%20%22Le%20Guin%20uses%20an%20omniscient%20point%20of%20view%22",
+   "quote": "Le Guin uses an omniscient point of view",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 642,
+   "feature": "civic record register",
+   "claim": "Bittner says fantastic narratives include 'documents' to create an air of factuality.",
+   "source": "James W. Bittner, Approaches to the Fiction of Ursula K. Le Guin (1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aapproachestofict0000bitt%20AND%20%22to%20create%20an%20air%20of%20factuality%22",
+   "quote": "to create an air of factuality",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 643,
+   "feature": "annalist voice and deep time",
+   "claim": "Bittner describes the narrator of 'Winter's King' as a historian telling a familiar story.",
+   "source": "James W. Bittner, Approaches to the Fiction of Ursula K. Le Guin (1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aapproachestofict0000bitt%20AND%20%22The%20narrator%20is%20a%20historian%2C%20telling%20a%20familiar%20story%22",
+   "quote": "The narrator is a historian, telling a familiar story",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 644,
+   "feature": "civic record register",
+   "claim": "Bittner reports that the documents following Estraven's death include a hearth-tale from the archives of the College of Historians in Erhenrang.",
+   "source": "James W. Bittner, Approaches to the Fiction of Ursula K. Le Guin (1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aapproachestofict0000bitt%20AND%20%22archives%20of%20the%20College%20of%20Historians%20in%20Erhenrang%22",
+   "quote": "archives of the College of Historians in Erhenrang",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 645,
+   "feature": "place and institution description",
+   "claim": "Bittner says the novel interleaves extracts from Estraven's journal with an anthropological report and Gethenian legends.",
+   "source": "James W. Bittner, Approaches to the Fiction of Ursula K. Le Guin (1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aapproachestofict0000bitt%20AND%20%22an%20anthropological%20report%2C%20and%20Gethenian%20legends%22",
+   "quote": "an anthropological report, and Gethenian legends",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 647,
+   "feature": "place and institution description",
+   "claim": "Slusser says the landscape of one of Le Guin's worlds is quite ordinary by earth standards.",
+   "source": "George Edgar Slusser, The Farthest Shores of Ursula K. Le Guin (Borgo Press, 1976)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Afarthestshoresof0000slus%20AND%20%22The%20landscape%20is%20quite%20ordinary%20by%20earth%20standards%22",
+   "quote": "The landscape is quite ordinary by earth standards",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 648,
+   "feature": "civic record register",
+   "claim": "Slusser describes a narrative framework intermingled with interpolated tales, documents and diaries.",
+   "source": "George Edgar Slusser, The Farthest Shores of Ursula K. Le Guin (1976)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Afarthestshoresof0000slus%20AND%20%22intermingled%20with%20interpolated%20tales%2C%20documents%2C%20diaries%22",
+   "quote": "intermingled with interpolated tales, documents, diaries",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 649,
+   "feature": "plainness and economy",
+   "claim": "An essay in Bloom's volume says Le Guin's style has evolved towards simplicity.",
+   "source": "An essay in Harold Bloom, ed., Ursula K. Le Guin: Modern Critical Views (Chelsea House, 1986) — contributor not resolvable from the snippet window",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00bloo%20AND%20%22Le%20Guin%27s%20style%20has%20evolved%20towards%20simplicity%22",
+   "quote": "Le Guin's style has evolved towards simplicity",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 652,
+   "feature": "civic record register",
+   "claim": "Bloom says the narrator of that chapter is a field investigator of the Ekumen wryly cataloging a weird matter.",
+   "source": "Harold Bloom, introduction to Ursula K. Le Guin: Modern Critical Views (Chelsea House, 1986)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00bloo%20AND%20%22wryly%20cataloging%20a%20weird%20matter%22",
+   "quote": "wryly cataloging a weird matter",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 653,
+   "feature": "omission as information",
+   "claim": "An essay in Bloom's volume says three chapters and the Appendix are documents separate from the actual narrative.",
+   "source": "An essay in Harold Bloom, ed., Ursula K. Le Guin: Modern Critical Views (1986)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00bloo%20AND%20%22are%20documents%20separate%20from%20the%20actual%20narrative%22",
+   "quote": "are documents separate from the actual narrative",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 655,
+   "feature": "civic record register",
+   "claim": "Bloom says the investigator's field notes add a number of sharper observations.",
+   "source": "Harold Bloom, introduction to Ursula K. Le Guin's The Left Hand of Darkness (Chelsea House, 1987)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinsle0000unse%20AND%20%22Her%20field%20notes%20add%20a%20number%20of%20sharper%20observations%22",
+   "quote": "Her field notes add a number of sharper observations",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 656,
+   "feature": "point of view and distance",
+   "claim": "Cadden says much of Le Guin's short fiction shows a steady use of free indirect discourse.",
+   "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre: Fiction for Children and Adults (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22a%20steady%20use%20of%20free%20indirect%20discourse%22",
+   "quote": "a steady use of free indirect discourse",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 658,
+   "feature": "civic record register",
+   "claim": "Cadden calls 'A Description of Earthsea' a text that is neither story nor afterword.",
+   "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22a%20text%20that%20is%20neither%20story%20nor%20afterword%22",
+   "quote": "a text that is neither story nor afterword",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 659,
+   "feature": "place and institution description",
+   "claim": "Cadden says 'A Description of Earthsea' runs to almost thirty pages of Earthsea lore and history.",
+   "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22almost%20thirty%20pages%20of%20Earthsea%20lore%20and%20history%22",
+   "quote": "almost thirty pages of Earthsea lore and history",
+   "page": "archive.org search-inside snippet"
+  }
+ ]
+}

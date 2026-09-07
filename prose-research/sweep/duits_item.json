@@ -1,0 +1,174 @@
+{
+  "id" : "2d2909fb-ed02-495a-8799-4aacc2dc24ad",
+  "uuid" : "2d2909fb-ed02-495a-8799-4aacc2dc24ad",
+  "name" : "Translating Robin Hobb's Assassin's Apprentice",
+  "handle" : "20.500.12932/11119",
+  "metadata" : {
+    "dc.contributor.advisor" : [ {
+      "value" : "Koster, C.",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.contributor.author" : [ {
+      "value" : "Duits, I.",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.date.accessioned" : [ {
+      "value" : "2012-07-27T17:01:53Z",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.date.available" : [ {
+      "value" : "2012-07-27",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    }, {
+      "value" : "2012-07-27T17:01:53Z",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 1
+    } ],
+    "dc.date.issued" : [ {
+      "value" : "2012",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.description.abstract" : [ {
+      "value" : "Thesis on Robin Hobb's fantasy novel Assassin's Apprentice, with a theoretical framework regarding the translation of fantasy literature, the difficulties with translating proper names and a translation criticism based on the original translation of the novel by Feberwee and Cuijpers.",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.description.sponsorship" : [ {
+      "value" : "Utrecht University",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.format.extent" : [ {
+      "value" : "1584874 bytes",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.format.mimetype" : [ {
+      "value" : "application/pdf",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.identifier.uri" : [ {
+      "value" : "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.language.iso" : [ {
+      "value" : "en",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.rights.accessrights" : [ {
+      "value" : "Open Access",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.rights.license" : [ {
+      "value" : "CC-BY-NC-ND",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.subject.courseuu" : [ {
+      "value" : "Engelse taal en cultuur",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.subject.keywords" : [ {
+      "value" : "Robin, Hobb, Assassin's, Apprentice, proper names, fantasy literature",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.title" : [ {
+      "value" : "Translating Robin Hobb's Assassin's Apprentice",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.type.content" : [ {
+      "value" : "Bachelor Thesis",
+      "language" : "",
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ]
+  },
+  "inArchive" : true,
+  "discoverable" : true,
+  "withdrawn" : false,
+  "lastModified" : "2026-05-20T10:55:52.689353Z",
+  "entityType" : null,
+  "type" : "item",
+  "_links" : {
+    "accessStatus" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/accessStatus"
+    },
+    "bundles" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/bundles"
+    },
+    "identifiers" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/identifiers"
+    },
+    "mappedCollections" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/mappedCollections"
+    },
+    "owningCollection" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/owningCollection"
+    },
+    "relationships" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/relationships"
+    },
+    "version" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/version"
+    },
+    "templateItemOf" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/templateItemOf"
+    },
+    "thumbnail" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/thumbnail"
+    },
+    "submitter" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad/submitter"
+    },
+    "self" : {
+      "href" : "https://studenttheses.uu.nl/server/api/core/items/2d2909fb-ed02-495a-8799-4aacc2dc24ad"
+    }
+  }
+}

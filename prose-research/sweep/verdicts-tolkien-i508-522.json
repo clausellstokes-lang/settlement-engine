@@ -1,0 +1,233 @@
+{
+ "name": "tolkien",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 508,
+   "feature": "intrusive-to-self-effacing arc",
+   "claim": "The Hobbit opens with a very intrusive narrator who recedes as the book grows serious; by The Lord of the Rings the narrator is impartial and multi-viewpoint, measured on Wayne Booth's scale.",
+   "source": "Thomas 2000, as summarised in kate_nepveu's reading notes",
+   "url": "https://kate-nepveu.livejournal.com/181350.html",
+   "quote": "impartial and self-effacing",
+   "page": ""
+  },
+  {
+   "index": 509,
+   "feature": "discourse juxtaposition in The Hobbit",
+   "claim": "In The Hobbit fairy-tale and epic discourses are set against everyday speech through irony and parody.",
+   "source": "Thomas Kullmann, 'Intertextual Patterns in J.R.R. Tolkien's The Hobbit and The Lord of the Rings', NJES 8(2) 2009 (abstract via Semantic Scholar API)",
+   "url": "https://api.semanticscholar.org/graph/v1/paper/ef4bbee7b8993086ff7315388bece6038fa6241d?fields=title,abstract,year,venue,openAccessPdf,externalIds",
+   "quote": "juxtaposed with everyday speech through irony and parody",
+   "page": ""
+  },
+  {
+   "index": 510,
+   "feature": "realism plus archaic rhetoric",
+   "claim": "In The Lord of the Rings nineteenth-century circumstantial realism and pathetic fallacy combine with archaic rhetorical patterns.",
+   "source": "Kullmann 2009 (abstract)",
+   "url": "https://api.semanticscholar.org/graph/v1/paper/ef4bbee7b8993086ff7315388bece6038fa6241d?fields=title,abstract,year,venue,openAccessPdf,externalIds",
+   "quote": "circumstantial realism and pathetic fallacy combine with archaic rhetorical patterns",
+   "page": ""
+  },
+  {
+   "index": 511,
+   "feature": "Elfland register in dialogue",
+   "claim": "The Aragorn/Boromir/Elrond exchange is a quieter English, extraordinary for simple timelessness, with sobriety, wit and force — the language of men of character.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "It has sobriety, wit, and force",
+   "page": ""
+  },
+  {
+   "index": 512,
+   "feature": "plain style with range",
+   "claim": "Tolkien writes a plain, clear English whose outstanding virtue is flexibility and variety, from the commonplace to the stately.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "ranges easily from the commonplace to the stately",
+   "page": ""
+  },
+  {
+   "index": 513,
+   "feature": "unstriking vocabulary",
+   "claim": "Tolkien's vocabulary is not striking; everything is direct, concrete and simple, with no 'ichor'.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "Tolkien's vocabulary is not striking; he has no ichor",
+   "page": ""
+  },
+  {
+   "index": 514,
+   "feature": "prose sliding into metre",
+   "claim": "The prose can slide into metrical poetry, as in the Bombadil episode, without careless readers noticing.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "can slide into metrical poetry",
+   "page": ""
+  },
+  {
+   "index": 515,
+   "feature": "archaism as distancer",
+   "claim": "The archaic manner is a perfect distancer but a high wire on which one slip spoils all; Eddison did it perfectly, novices fake it with -est and mayhap.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "The archaic manner is indeed a perfect distancer",
+   "page": ""
+  },
+  {
+   "index": 516,
+   "feature": "register alternation as failure",
+   "claim": "Alternating colloquial American for humour and old formal usage for earnest moments (Leiber, Zelazny) jerks the reader between Elfland and Poughkeepsie and breaks character coherence.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "the characters lose coherence in my mind",
+   "page": ""
+  },
+  {
+   "index": 517,
+   "feature": "fake plainness",
+   "claim": "The journalistic plainness of bad fantasy is flat not simple, inexact not clear, with vague sensory cues; Tolkien's plainness is the real thing.",
+   "source": "Le Guin 1973",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "is not really simple, but flat",
+   "page": ""
+  },
+  {
+   "index": 518,
+   "feature": "two-beat narrative rhythm",
+   "claim": "The rhythm shaping the narrative is stress/release, a walking gait, carried without faltering across the whole book.",
+   "source": "Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (2001), quoted in kate_nepveu's reading notes",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "quote": "as simple as a rhythm can be: two beats",
+   "page": ""
+  },
+  {
+   "index": 519,
+   "feature": "polarities of mood",
+   "claim": "'Fog on the Barrow-downs' pulses between polarities — darkness/daylight, confusion/clarity, trap/freedom — and each pole grows out of its opposite.",
+   "source": "Le Guin 2001, via kate_nepveu",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "quote": "a pulsation back and forth between polarities",
+   "page": ""
+  },
+  {
+   "index": 520,
+   "feature": "sentence-level reversals",
+   "claim": "The chapter's closing sentences reverse darkness/lights, downhill/up, hill/village, fire/night in quiet simple language, like drumbeats.",
+   "source": "Le Guin 2001, via kate_nepveu",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "quote": "They are like drumbeats",
+   "page": ""
+  },
+  {
+   "index": 521,
+   "feature": "trochaic beat",
+   "claim": "On the irreducible simplicity of the trochaic beat Tolkien builds a complex, stable rhythmic pattern in imagined space and time.",
+   "source": "Le Guin 2001, via kate_nepveu (Google Books confirms 'trochaic' on p. 106 of The Wave in the Mind)",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "quote": "Relying on the irreducible simplicity of the trochaic beat",
+   "page": ""
+  },
+  {
+   "index": 522,
+   "feature": "read-aloud cadence",
+   "claim": "Even long sentences follow the breath, punctuation falls where one needs to pause, and the cadences are graceful and inevitable.",
+   "source": "Le Guin, quoted in Jason Fisher, 'Reading The Lord of the Rings aloud' (Lingwë, 2010)",
+   "url": "http://lingwe.blogspot.com/2010/09/reading-lord-of-rings-aloud.html",
+   "quote": "the cadences are graceful and inevitable",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 508,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw LiveJournal page (kate_nepveu, 2006-06-06) reached with a browser UA. Body reads: 'the opening of The Hobbit is told by a very intrusive narrator [*], but as the book gets more serious toward the end, the narrator recedes; and by the start of The Lord of the Rings, the narrator has become impartial and self-effacing, presenting many more viewpoints than at the start of The Hobbit.' The quote 'impartial and self-effacing' is exact. Booth limb supported by the footnote at the asterisk: 'Thomas recounts a system from Wayne Booth's The Rhetoric of Fiction that characterizes narrators on a scale between unintrusive and intrusive'. Essay identified on the page as Paul Edmund Thomas, 'Some of Tolkien's Narrators', in Tolkien's Legendarium (=2000)."
+  },
+  {
+   "index": 509,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "juxtaposed with everyday speech pattern through irony and parody",
+   "note": "Named Semantic Scholar API URL REACHED RAW: it returned HTTP 429 on six attempts, then HTTP 200 on the seventh in a backoff loop. Its abstract field reads: 'In The Hobbit, fairy-tale and epic discourses are juxtaposed with everyday speech pattern through irony and parody.' Corroborated character-for-character by two independent raw API routes fetched before the retry succeeded - Crossref https://api.crossref.org/works/10.35360/njes.190 (HTTP 200, JATS abstract) and OpenAlex https://api.openalex.org/works/doi:10.35360/njes.190 (HTTP 200, inverted index rebuilt). No summarizer or search snippet was used. (Publisher page publicera.kb.se sits behind an Anubis proof-of-work wall and njes-journal.com refused TLS; the Wayback capture 20221017110104id_ of ojs.ub.gu.se/index.php/njes/article/view/338 independently confirms Kullmann, NJES Vol 8 No 2, 2009.) Claim substance fully supported. Graded SUBSTANCE rather than VERBATIM for one reason only: the supplied quote drops the word 'pattern' from 'everyday speech pattern'."
+  },
+  {
+   "index": 510,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "circumstantial realism and pathetic fallacy supplemented by archaic rhetorical patterns",
+   "note": "Same raw route as 509 - the named Semantic Scholar API URL returned HTTP 200 on the seventh attempt after six 429s, and Crossref plus OpenAlex on DOI 10.35360/njes.190 return the identical abstract. Abstract reads: 'In The Lord of the Rings, elements of the nineteenth-century novel like circumstantial realism and pathetic fallacy are supplemented by archaic rhetorical patterns.' Every limb holds - nineteenth-century novel, circumstantial realism, pathetic fallacy, archaic rhetorical patterns. Graded SUBSTANCE rather than VERBATIM for one reason only: the supplied quote reads 'combine with' where the abstract reads 'are supplemented by'."
+  },
+  {
+   "index": 511,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "PDF fetched as binary (HTTP 200, application/pdf, 8 pp.) and text-extracted with pypdf. 'It has sobriety, wit, and force' is exact. Context: 'In the third passage, the speakers are quieter, and use a less extraordinary English; or rather an English extraordinary for its simple timelessness... It has sobriety, wit, and force. It is the language of men of character.' The third passage is confirmed to be the LotR exchange - Aragorn ('Who can tell?' said Aragorn), Boromir and Elrond all speak in it, and Le Guin later writes 'in the third quotation, the very slight whine in Boromir's tone'. All limbs supported."
+  },
+  {
+   "index": 512,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF. 'ranges easily from the commonplace to the stately' is exact, in: 'Tolkien writes a plain, clear English. Its outstanding virtue is its flexibility, its variety. It ranges easily from the commonplace to the stately'. Every limb (plain clear English, outstanding virtue, flexibility, variety, commonplace-to-stately range) is on the page."
+  },
+  {
+   "index": 513,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF, exact match including the semicolon: 'Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete, and simple.' The 'ichor' limb is doubly supported - Le Guin earlier calls Ichor 'the infallible touchstone of the seventh-rate'."
+  },
+  {
+   "index": 514,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF: 'can slide into metrical poetry, as in the Tom Bombadil episode, without the careless readers even noticing.' Quote exact; the Bombadil limb and the careless-readers limb are both on the page."
+  },
+  {
+   "index": 515,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF: 'The archaic manner is indeed a perfect distancer, but you have to do it perfectly. It's a high wire: one slip spoils all. The man who did it perfectly was, of course, Eddison.' The novice limb is supported earlier in the same passage: 'The general assumption is that you add -est and you're there... Fake feeling: fake grammar' and 'Mayhap. It can't be maybe, it can't be perhaps; it has to be mayhap'. All four limbs on the page."
+  },
+  {
+   "index": 516,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF: 'Fritz Leiber and Roger Zelazny have both written in the comic-heroic vein, but their technique is different: they alternate the two styles. When humor is intended the characters talk colloquial American English, or even slang, and at earnest moments they revert to old formal usages... I am jerked back and forth between Elland [sic - Elfland] and Poughkeepsie; the characters lose coherence in my mind, and I lose confidence in them.' Quote exact; every limb present. The scan reads 'Elland' where the essay's word is Elfland (the essay's own title); this is an OCR/typesetting slip in the copy, not a divergence in the claim."
+  },
+  {
+   "index": 517,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same extracted PDF: 'It is a fake plainness. It is not really simple, but flat. It is not really clear, but inexact. Its directness is specious. Its sensory cues... are vague and generalized... To what then is it appropriate? To journalism. It is journalistic prose.' Quote exact. The Tolkien contrast limb is explicit two sentences earlier: 'Does that make it equal to Tolkien's? Alas, no.'"
+  },
+  {
+   "index": 518,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw LiveJournal page (kate_nepveu, 2006-06-04) reached with a browser UA; it block-quotes Le Guin: 'The rhythm that shapes and directs his narrative... is very strong and very simple, as simple as a rhythm can be: two beats. Stress, release... A walking gait--but on so vast a scale... that it carries the whole enormous narrative straight through from beginning to end, from There to Back Again, without faltering.' Quote exact; stress/release, walking gait and without-faltering limbs all present. The page also names the essay's provenance (Meditations on Middle Earth, ed. Haber; reprinted in The Wave in the Mind)."
+  },
+  {
+   "index": 519,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same raw page: 'She closely reads chapter 8 of Fellowship, \"Fog on the Barrow Downs,\" and lists recurrent elements together with what they reverse into, \"a pulsation back and forth between polarities of feeling, mood, image, emotion, action\"... Examples are \"darkness/daylight,\" \"confusion of thought/clarity,\" and \"imprisonment or a trap/freedom\".' The each-pole-grows-from-its-opposite limb is the next sentence: 'The positive causes or grows from the negative state, and the negative from the position.' Quote exact; all limbs supported."
+  },
+  {
+   "index": 520,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same raw page: 'These are the final sentences' introduces the two closing sentences, then 'These few lines of straightforward narrative description are full of rapid reversals: darkness/lights twinkling--downhill/up again--the rise of Bree-hill/the village under it (west of it)--a dark mass/misty stars--a fire/the night. They are like drumbeats... Yet the tone is quiet, the language simple.' Quote exact; all four named reversals and the quiet/simple limb are on the page."
+  },
+  {
+   "index": 521,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same raw page, closing block quote: 'Relying on the irreducible simplicity of the trochaic beat, stress/unstress, Tolkien constructs an inexhaustibly complex, stable rhythmic pattern in imagined space and time.' Quote exact; the complex/stable/imagined-space-and-time limbs are all verbatim. (The parenthetical Google Books p.106 note in the source field is provenance, not a claim limb, and was not independently checked.)"
+  },
+  {
+   "index": 522,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw Lingwe (Jason Fisher) post of 2010-09-23 fetched with a browser UA. It opens with the Le Guin block quote: 'Even when the sentences are long, their flow is perfectly clear, and follows the breath; punctuation comes just where you need to pause; the cadences are graceful and inevitable.' followed by 'So wrote Ursula K. Le Guin'. Quote exact; the long-sentences, breath, punctuation-pause and cadence limbs are all on the page."
+  }
+ ]
+}

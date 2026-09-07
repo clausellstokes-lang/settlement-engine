@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 5,
+ "claims": [
+  {
+   "index": 180,
+   "feature": "register oscillation",
+   "claim": "AI fiction swings between overwrought similes and tiny cliché sentences without a governing restraint.",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "Alternating loquacious ponderous similes and tiny sentences",
+   "page": ""
+  },
+  {
+   "index": 181,
+   "feature": "tricolon of abstractions",
+   "claim": "Lists of three escalating abstractions are a signature ('a geometry of madness, a wound in the fabric...').",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "a geometry of madness, a wound in the fabric",
+   "page": ""
+  },
+  {
+   "index": 182,
+   "feature": "metaphor clustering at sentence end",
+   "claim": "Multiple similes/metaphors are stacked in a closing sentence to describe one concept.",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "spammed in the final sentence to describe a single concept",
+   "page": ""
+  },
+  {
+   "index": 183,
+   "feature": "blocky curt dialogue",
+   "claim": "AI dialogue is curt, rigidly demarcated from exposition, and tends to end scenes on a cliffhanger.",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "Extremely curt dialogue that ends in a cliffhanger",
+   "page": ""
+  },
+  {
+   "index": 184,
+   "feature": "lexical tells drift",
+   "claim": "Surface tells shift within months (em dashes replaced by semicolons/commas in newer models) while structural tells persist.",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "Emdashes are less common than months ago",
+   "page": ""
+  },
+  {
+   "index": 185,
+   "feature": "intent assigned to scenery",
+   "claim": "AI assigns agentive verbs to inanimate things ('dawn unfurled'), a tell that is also just bad writing.",
+   "source": "Kevin Hess, 2025-08-13",
+   "url": "https://kevinhesswrites.substack.com/p/new-free-books-and-one-way-to-spot",
+   "quote": "overassign active verbs, and by extension intent",
+   "page": ""
+  },
+  {
+   "index": 186,
+   "feature": "no concrete particulars",
+   "claim": "AI prose lacks the specific proper nouns, places and objects that anchor human writing.",
+   "source": "Matthew Vollmer, 'A Field Guide to AI Tells' (citing Laura Preston)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "no Tuesday, no laundromat, no grandmother's cough drops",
+   "page": ""
+  },
+  {
+   "index": 187,
+   "feature": "what machine prose never does",
+   "claim": "LLM prose never contradicts itself and recovers, digresses and walks it back, uses an unexplained idiom, risks a joke, or leaves a thought unfinished.",
+   "source": "Matthew Vollmer, 'A Field Guide to AI Tells'",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "make a joke that risks falling flat",
+   "page": ""
+  },
+  {
+   "index": 188,
+   "feature": "low burstiness and essay shape",
+   "claim": "Uniform sentence length and a default intro/three-body/recap shape regardless of length; paragraphs close on aphoristic pull-quotes.",
+   "source": "Matthew Vollmer, 'A Field Guide to AI Tells'",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "high school essay vibes",
+   "page": ""
+  },
+  {
+   "index": 189,
+   "feature": "characters sound alike",
+   "claim": "In AI fiction characters share one voice with no idiolect or dialect, exposition arrives by explanation, and endings resolve rather than trust ambiguity.",
+   "source": "Matthew Vollmer (attributing to Neil Clarke and critical consensus)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 190,
+   "feature": "nonsensical descriptor",
+   "claim": "Fan-fiction readers flag physically meaningless description as an AI signature.",
+   "source": "Thousand Roads forum, 'Detecting AI Use in Fiction' (user Goolix)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "a jaw that was, objectively, a jaw",
+   "page": ""
+  },
+  {
+   "index": 191,
+   "feature": "emotional evasion",
+   "claim": "AI narration gestures at feeling without naming it, declining to examine emotion with specificity.",
+   "source": "Thousand Roads forum (user Negrek)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "Something he didn't have a good word for",
+   "page": ""
+  },
+  {
+   "index": 192,
+   "feature": "bizarre simile plus rule of three",
+   "claim": "A rule-of-three fragment attached to a strange simile is described as a screaming red flag.",
+   "source": "Thousand Roads forum (user Negrek)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "a voice like a waiting room",
+   "page": ""
+  },
+  {
+   "index": 193,
+   "feature": "'Not...' fragment stacking",
+   "claim": "Successive fragments opening with 'Not' are a common LLM pattern.",
+   "source": "Thousand Roads forum (user Goolix)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "Not quite a smile. Not unkind. Not impatient.",
+   "page": ""
+  },
+  {
+   "index": 194,
+   "feature": "premise tracking failure",
+   "claim": "A character plans four contingencies around a premise the story then contradicts, showing the model does not track its own setup.",
+   "source": "Thousand Roads forum (user Dragonfree)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 180,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Alternating loquacious ponderous similes and tiny sentences",
+   "note": "Exact substring in Makin's article (page continues 'made out of cliches?'). Makin writes it while deliberately imitating LLM tells; Gemini's own quoted reasoning corroborates the alternation as 'the tell-tale signature of an algorithm'. 'Without a governing restraint' is the researcher's gloss, not the page's words."
+  },
+  {
+   "index": 181,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a geometry of madness, a wound in the fabric",
+   "note": "Exact substring, and the article itself uses it as its 'Lists of three' bullet example: Lists of three: 'It was a geometry of madness, a wound in the fabric of what is, older than law and time'. Claim fully supported."
+  },
+  {
+   "index": 182,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "spammed in the final sentence to describe a single concept",
+   "note": "Exact substring; full sentence reads '...similes and metaphors spammed in the final sentence to describe a single concept…'. Claim fully supported."
+  },
+  {
+   "index": 183,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Extremely curt dialogue that ends in a “cliffhanger”.",
+   "note": "Word-for-word match; the page puts cliffhanger in scare quotes, which the citation drops. The 'rigidly demarcated from exposition' half is also supported: 'Writing generally starts feeling “blocky” as if you have clearly defined areas of dialogue, exposition and repetitive narration.'"
+  },
+  {
+   "index": 184,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Emdashes are less common than they were months ago.",
+   "note": "Quote as cited ('than months ago') is NOT on the page; the page reads 'than they were months ago'. Substance fully supported, including the replacement mechanism: 'Newer models use the same sentence structures with semicolons or commas in their place', and persistence of structural tells ('The aforementioned “not X; Y” is still universal')."
+  },
+  {
+   "index": 185,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "overassign active verbs, and by extension intent",
+   "note": "Exact substring: 'AI still has a tendency to overassign active verbs, and by extension intent, to inanimate objects that wouldn't be acting out of agency.' The 'dawn unfurled' example is the article's centrepiece, and the 'also just bad writing' half is supported: 'it could just be that they're not exactly a very good writer.' Byline/date match (Kevin Hess, Aug 13 2025)."
+  },
+  {
+   "index": 186,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "No Tuesday. No laundromat. No grandmother with a specific brand…",
+   "note": "Quote as cited is a compression; the page's tell #24 'The missing concrete particular' reads 'No Tuesday. No laundromat. No grandmother with a specific brand of mentholated cough drop.' Laura Preston is cited on the same lines (n+1, 'An Age of Hyperabundance'), and 'No grain: no proper nouns, no specific months, no brand names' repeats the point. Substance sound; the quote is not verbatim."
+  },
+  {
+   "index": 187,
+   "verdict": "NOT_FOUND",
+   "trueWording": "",
+   "note": "The cited quote 'make a joke that risks falling flat' does not appear. Across the full article text (43k chars) 'joke' occurs once, unrelated ('became the whole joke'); 'digress', 'idiom' and 'unfinished' occur zero times; 'contradict' occurs once about Turnitin false positives. Nothing on the page enumerates what LLM prose never does in these terms. WebFetch, run independently, also returned NONE. The nearest adjacent material is tell #12 'Hypotactic smoothness, no fragments' ('Their sentences resolve. Real prose misbehaves.'), which does not carry the claim's list."
+  },
+  {
+   "index": 188,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "high school essay vibes",
+   "note": "Exact substring, and correctly framed as Vollmer's guide quoting AI for Lifelong Learners. All three claim parts are on the page: #9 'Uniform sentence length (low burstiness)'; #13 'LLMs default to intro + three body sections + recap even for 100-word answers'; #19 'Aphoristic closure — Paragraphs end on a pseudo-profound kicker designed to feel like a pull-quote.'"
+  },
+  {
+   "index": 189,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Dialogue flattening: characters sound alike; no distinct idiolect.",
+   "note": "No quote was supplied, so verbatim is not assessable. All three parts verified in section 'B. In Fiction': 'characters sound alike; no distinct idiolect. No one has verbal tics, dialect, or pattern of evasion'; '“As-you-know-Bob” exposition: the model's default is to resolve mysteries with explanatory speech rather than action'; 'Resolution bias: endings tie up. The model does not trust the reader with ambiguity unless explicitly told to.' ATTRIBUTION CAVEAT: Neil Clarke is quoted on the page only for 'they are boring. They are flat' / 'bad in ways that no human has been bad before'; the three bullets are the guide's own, listed after Clarke under 'Beyond that:', not Clarke's words."
+  },
+  {
+   "index": 190,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a jaw that was, objectively, a jaw",
+   "note": "Quote appears word for word twice on the thread page. ATTRIBUTION IS WRONG: it is in post #1 by Negrek (thread starter, Aug 18 2026), not Goolix. Negrek coins the phrase as a label ('the legendary phrase “a jaw that was, objectively, a jaw”'); the AI text itself reads 'a jaw that was, objectively, a really nice jaw', with Negrek's note 'a very very weird thing to write.' Goolix (post #4) does make a same-shape point about physically impossible description ('What kind of coat can conceal breadth?... its model of physical reality is wonky'), so the feature holds under Goolix too, but this quote is not his."
+  },
+  {
+   "index": 191,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Something he didn't have a good word for",
+   "note": "Exact substring in Negrek's editorial note (post #1): 'Claude is often vague. Something he didn't have a good word for, something he couldn't name.' Attribution to Negrek is correct. CAVEAT: the source frames it as generic vagueness, not specifically emotional evasion; the narrated instance is 'Shane's brain did something he didn't have a good word for'. 'Declining to examine emotion with specificity' is the researcher's gloss."
+  },
+  {
+   "index": 192,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a voice like a waiting room",
+   "note": "Exact substring (three occurrences). Negrek, post #1, correct attribution: '...until I get to the “He had a voice like a waiting room” line, at which point it's like BZZZT, GAME OVER. The rule-of-three + simile combined with the bizarre metaphor (his voice was designed to contain things??) is a screaming red flag.' Claim fully supported including 'screaming red flag'."
+  },
+  {
+   "index": 193,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "starting a sentence with “not”–is common with LLMs",
+   "note": "The cited three-fragment string is a COMPOSITE and appears nowhere contiguously (confirmed by raw-text scan and by independent WebFetch). The page has 'Not quite a smile.' in one excerpt and, ~10k chars later, a separate 'really Claude-y' example line: '“Not unkind. Not impatient. Just—waiting.”' The pattern claim itself is supported by Negrek's note: '[Note: This structure–starting a sentence with “not”–is common with LLMs.]' ATTRIBUTION IS WRONG: both passages are Negrek's post #1, not Goolix."
+  },
+  {
+   "index": 194,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Perfectly confident, convincing-sounding writing that just makes no sense at all.",
+   "note": "No quote was supplied. Verified in Dragonfree's post #5 (attribution correct): 'I'm so amused by the AI deciding that Nox had four different contingency plans based on the idea that he'd get a Luxray as a starter (if they're all based on the same singular assumption, what makes them four different contingency plans?) and none for any other possibility, only for it to turn out he's actually getting his starter from a lab that gives out Johto starters'. The generated excerpt ('He'd built four contingency branches off that single point. He had built zero contingency branches off anything else.') was posted by Flyg0n; Dragonfree supplies the premise-tracking analysis."
+  }
+ ]
+}

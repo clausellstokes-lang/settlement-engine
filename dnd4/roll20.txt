@@ -1,0 +1,591 @@
+
+ Settlements | D&D 2024 | Roll20 Compendium 
+ Skip to Main Content 
+ Play Now 
+ Join a Game 
+ Characters 
+ Shop 
+ Tools 
+ Compendium 
+ Community 
+ Subscribe 
+ Sign In 
+ Unlock to Continue Reading
+ Purchase this content to gain full access. By purchasing this content, you will unlock items for the virtual tabletop as well.
+ D&D Dungeon Master's Guide (2024)
+ Games  RPG Rulebooks  Core Games
+ Wizards of the Coast
+ $29.99
+ Already have an account? Sign In
+ plus 
+ Sign Up to Unlock Content 
+ library
+ search 
+ search 
+ Table of Contents
+ cancel 
+ Dungeon Master's Guide (2024)
+ The Basics chevronDown 
+ The Basics
+ What Does a DM Do
+ Things You Need
+ Preparing a Session
+ How to Run a Session
+ Example of Play
+ Every DM Is Unique
+ Ensuring Fun for All
+ Running the Game chevronDown 
+ Running the Game
+ Know Your Players
+ Group Size
+ Multiple DMs
+ Narration
+ Resolving Outcomes
+ Running Social Interaction
+ Running Exploration
+ Running Combat
+ Character Advancement
+ DM's Toolbox chevronDown 
+ DM's Toolbox
+ Alignment
+ Chases
+ Creating a Background
+ Creating a Creature
+ Creating a Magic Item
+ Creating a Spell
+ Curses and Magical Contagions
+ Death
+ Doors
+ Dungeons
+ Environmental Effects
+ Fear and Mental Stress
+ Firearms and Explosives
+ Gods and Other Powers
+ Hazards
+ Marks of Prestige
+ Mobs
+ Nonplayer Characters
+ Poison
+ Renown
+ Settlements
+ Settlements by Size 
+ Do I Need a Settlement Map? 
+ Settlement Tables and Tracker 
+ Defining Traits 
+ Claims to Fame 
+ Current Calamities 
+ Local Leaders 
+ Tavern Names* 
+ Random Shops 
+ Siege Equipment
+ Supernatural Gifts
+ Traps
+ Creating Adventures chevronDown 
+ Creating Adventures
+ Step-by-Step Adventures
+ Lay Out the Premise
+ Draw In the Players
+ Plan Encounters
+ Bring It to an End
+ Adventure Rewards
+ Adventure Examples
+ Creating Campaigns chevronDown 
+ Creating Campaigns
+ Step-by-Step Campaigns
+ Your Campaign Journal
+ Campaign Premise
+ Campaign Start
+ Plan Adventures
+ Ending a Campaign
+ Greyhawk
+ Important Names
+ Greyhawk's Premise
+ Free City of Greyhawk
+ Greyhawk Gazetteer
+ Cosmology chevronDown 
+ Cosmology
+ The Planes
+ Planar Travel
+ Planar Adventuring
+ Tour of the Multiverse
+ Abyss
+ Acheron
+ Arborea
+ Arcadia
+ Astral Plane
+ Beastlands
+ Bytopia
+ Carceri
+ Demiplanes
+ Elemental Plane of Air
+ Elemental Plane of Earth
+ Elemental Plane of Fire
+ Elemental Plane of Water
+ Elysium
+ Ethereal Plane
+ Far Realm
+ Feywild
+ Gehenna
+ Hades
+ Limbo
+ Material Plane
+ Mechanus
+ Mount Celestia
+ Negative Plane
+ Nine Hells
+ Outlands
+ Pandemonium
+ Para-elemental Planes
+ Positive Plane
+ Shadowfell
+ Sigil, City of Doors
+ Ysgard
+ Treasure chevronDown 
+ Treasure
+ Treasure Themes
+ Coins
+ Trade Bars
+ Trade Goods
+ Gemstones
+ Art Objects
+ Magic Items
+ Random Magic Items
+ Arcana Tables
+ Armaments Tables
+ Implements Tables
+ Relics Tables
+ Bastions chevronDown 
+ Bastions
+ Gaining a Bastion
+ Bastion Turns
+ Bastion Map
+ Basic Facilities
+ Special Facilities
+ Bastion Events
+ Fall of a Bastion
+ Lore Glossary chevronDown 
+ Lore Glossary
+ Credits chevronDown 
+ Credits
+ Settlements
+ Rules
+ plus 
+ Create Character 
+ Source 
+ Dungeon Master's Guide (2024)
+ Your campaign world is likely to include settlements that characters can visit. The characters might even adopt one of these settlements as a home base, in or near which they can build their Bastions when they are of high enough level to do so (see chapter 8 ).
+ The Settlements by Size table provides population ranges for villages, towns, and cities as well as the value of the most expensive item the settlement is likely to have for sale. Adjust these numbers as you wish to account for special circumstances. For example, a  Potion of Healing  (which costs 50 GP) is too expensive an item to purchase in most villages, but a village that happens to have an alchemist, an herbalist, or a potion brewer might have one or more such potions for sale.
+ Life in a city is full of fantastical surprises! 
+ Settlements by Size
+ Settlement   | 
+ Population Range   | 
+ Max. GP Value | 
+ Village | 
+ Up to 500 | 
+ 20 GP | 
+ Town | 
+ 501–5,000 | 
+ 2,000 GP | 
+ City | 
+ 5,001 and higher | 
+ 200,000 GP | 
+ Do I Need a Settlement Map?
+ A settlement doesn’t always require a map. Simply describing the settlement to your players is usually sufficient. But if it’s important for the players to know where certain buildings or other locations are in the settlement, having a map is helpful.
+ For an example of a settlement map, see the Crossroads Village map in appendix B.
+ Settlement Tables and Tracker
+ The following tables allow you to flesh out details about a settlement. You can use the accompanying Settlement Tracker to record important information about a village, town, or city in your campaign.
+ Defining Traits
+ 1d20   | 
+ Trait | 
+ 1–2 | 
+ Fortified outer wall
+ | 
+ 3–4 | 
+ Lots of gardens, parks, and greenery
+ | 
+ 5–6 | 
+ Lots of mud, filth, and litter
+ | 
+ 7–8 | 
+ Sprawling cemetery
+ | 
+ 9–10 | 
+ Lingering fog
+ | 
+ 11–12 | 
+ Noise and smoke from smithies and forges
+ | 
+ 13 | 
+ Canals and bridges
+ | 
+ 14 | 
+ Cliffs on one or more sides
+ | 
+ 15–16 | 
+ Clean streets and well-maintained buildings
+ | 
+ 17–18 | 
+ Ancient ruins within the settlement
+ | 
+ 19–20 | 
+ Impressive structure (such as a keep, temple, circle of standing stones, or ziggurat)
+ | 
+ Claims to Fame
+ 1d20   | 
+ Claim to Fame | 
+ 1 | 
+ Delicious food
+ | 
+ 2 | 
+ Rude people
+ | 
+ 3 | 
+ Friendly folk
+ | 
+ 4 | 
+ Artists or writers
+ | 
+ 5 | 
+ Great hero/savior
+ | 
+ 6 | 
+ Flowers
+ | 
+ 7 | 
+ Seasonal festival
+ | 
+ 8 | 
+ Hauntings
+ | 
+ 9 | 
+ Spellcasters
+ | 
+ 10 | 
+ Decadence
+ | 
+ 11 | 
+ Piety
+ | 
+ 12 | 
+ Gambling
+ | 
+ 13 | 
+ Godlessness
+ | 
+ 14 | 
+ Education
+ | 
+ 15 | 
+ Wines
+ | 
+ 16 | 
+ High fashion
+ | 
+ 17 | 
+ Political intrigue
+ | 
+ 18 | 
+ Powerful guilds
+ | 
+ 19 | 
+ Patriotism
+ | 
+ 20 | 
+ Ancient ruins
+ | 
+ Current Calamities
+ 1d12   | 
+ Calamity | 
+ 1 | 
+ Monsters infest the settlement.
+ | 
+ 2 | 
+ A key figure died; murder is suspected.
+ | 
+ 3 | 
+ War brews between rival guilds or gangs.
+ | 
+ 4 | 
+ A plague or famine sparks riots.
+ | 
+ 5 | 
+ Monsters attack anyone who approaches or leaves the settlement.
+ | 
+ 6 | 
+ Trade disputes cause economic hardship.
+ | 
+ 7 | 
+ A natural disaster threatens the settlement.
+ | 
+ 8 | 
+ A prophecy of doom has residents on edge.
+ | 
+ 9 | 
+ Locals are being drafted to fight in a war.
+ | 
+ 10 | 
+ Political or religious strife threatens violence.
+ | 
+ 11 | 
+ The settlement is under siege.
+ | 
+ 12 | 
+ Scandal threatens powerful local families.
+ | 
+ Local Leaders
+ 1d12   | 
+ Leader | 
+ 1 | 
+ Respected, fair, and just leader or council
+ | 
+ 2 | 
+ Feared tyrant
+ | 
+ 3 | 
+ Coward manipulated by others
+ | 
+ 4 | 
+ Illegitimate leader causing civil unrest
+ | 
+ 5 | 
+ Powerful monster
+ | 
+ 6 | 
+ Mysterious, anonymous conspirators
+ | 
+ 7 | 
+ Contested leadership (with open fighting)
+ | 
+ 8 | 
+ Acrimonious council unable to make decisions
+ | 
+ 9 | 
+ Doltish lout
+ | 
+ 10 | 
+ Dying leader (with disputed succession)
+ | 
+ 11 | 
+ Iron-willed and respected leader or council
+ | 
+ 12 | 
+ Religious leader or council
+ | 
+ Tavern Names*
+ 1d20   | 
+ First Part   | 
+ Second Part | 
+ 1 | 
+ The Golden
+ | 
+ Lyre
+ | 
+ 2 | 
+ The Silver
+ | 
+ Dolphin
+ | 
+ 3 | 
+ The Beardless
+ | 
+ Dwarf
+ | 
+ 4 | 
+ The Laughing
+ | 
+ Pegasus
+ | 
+ 5 | 
+ The Dancing
+ | 
+ Hut
+ | 
+ 6 | 
+ The Gilded
+ | 
+ Rose
+ | 
+ 7 | 
+ The Stumbling
+ | 
+ Stag
+ | 
+ 8 | 
+ The Wolf and
+ | 
+ Duck
+ | 
+ 9 | 
+ The Fallen
+ | 
+ Lamb
+ | 
+ 10 | 
+ The Leering
+ | 
+ Demon
+ | 
+ 11 | 
+ The Drunken
+ | 
+ Goat
+ | 
+ 12 | 
+ The Wine and
+ | 
+ Spirit
+ | 
+ 13 | 
+ The Roaring
+ | 
+ Horde
+ | 
+ 14 | 
+ The Frowning
+ | 
+ Jester
+ | 
+ 15 | 
+ The Barrel and
+ | 
+ Bucket
+ | 
+ 16 | 
+ The Thirsty
+ | 
+ Crow
+ | 
+ 17 | 
+ The Wandering
+ | 
+ Satyr
+ | 
+ 18 | 
+ The Barking
+ | 
+ Dog
+ | 
+ 19 | 
+ The Happy
+ | 
+ Spider
+ | 
+ 20 | 
+ The Witch and
+ | 
+ Dragon
+ | 
+ *Roll a separate d20 for each part of the tavern’s name.
+ Random Shops
+ 1d20   | 
+ Type | 
+ 1 | 
+ Pawnshop
+ | 
+ 2 | 
+ Apothecary
+ | 
+ 3 | 
+ Grocer
+ | 
+ 4 | 
+ Delicatessen
+ | 
+ 5 | 
+ Potter
+ | 
+ 6 | 
+ Undertaker
+ | 
+ 7 | 
+ Bookstore
+ | 
+ 8 | 
+ Moneylender
+ | 
+ 9 | 
+ Armorer
+ | 
+ 10 | 
+ Chandler
+ | 
+ 11 | 
+ Smithy
+ | 
+ 12 | 
+ Carpenter
+ | 
+ 13 | 
+ Weaver
+ | 
+ 14 | 
+ Jeweler
+ | 
+ 15 | 
+ Baker
+ | 
+ 16 | 
+ Mapmaker
+ | 
+ 17 | 
+ Tailor
+ | 
+ 18 | 
+ Ropemaker
+ | 
+ 19 | 
+ Mason
+ | 
+ 20 | 
+ Scribe
+ | 
+ Related Content
+ D&D Core Rulebook Bundle (2024) 
+ Games  RPG Rulebooks  Core Games
+ Wizards of the Coast
+ $89.97
+ D&D Monster Manual (2024) 
+ Games  RPG Rulebooks  Bestiaries
+ Wizards of the Coast
+ $29.99
+ D&D Mordenkainen Presents: Monsters of the Multiverse
+ Games  RPG Rulebooks  Rules Expansions
+ Wizards of the Coast
+ $29.99
+ D&D Curse of Strahd
+ Games  Adventures  Long Campaigns
+ Wizards of the Coast
+ $24.99
+ D&D Ravenloft Bundle
+ Games  RPG Rulebooks  Rules Expansions
+ Wizards of the Coast
+ $46.73
+ D&D Tasha's Cauldron of Everything
+ Games  RPG Rulebooks  Rules Expansions
+ Wizards of the Coast
+ $29.99
+ D&D Xanathar's Guide to Everything
+ Games  RPG Rulebooks  Rules Expansions
+ Wizards of the Coast
+ $29.99
+ D&D Phandelver and Below: The Shattered Obelisk
+ Games  Adventures  Short Campaigns
+ Wizards of the Coast
+ $29.99
+ View More Related Content
+ Section 21
+ Renown
+ chevronLeft
+ Previous Section
+ Previous
+ Section 23
+ Siege Equipment
+ Next Section
+ Next
+ chevronRight
+ Roll20 uses cookies to improve your experience on our site. Cookies enable you to enjoy certain features, social sharing functionality, and tailor message and display ads to your interests on our site and others. They also help us understand how our site is being used. By continuing to use our site, you consent to our use of cookies. Update your cookie preferences here .
+ × 
+ × 
+ Cookie Preferences
+ Accept cookies 
+ We use Cookies to help personalize and improve Roll20. For more information on our use of non-essential Cookies, visit our Privacy Policy here. 

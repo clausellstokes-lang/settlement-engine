@@ -1,0 +1,43 @@
+{
+ "role": "verifier",
+ "name": "tolkien",
+ "angle": null,
+ "tag": "i508-522",
+ "lines": 132,
+ "firstTs": "2026-09-06T12:08:12.668Z",
+ "lastTs": "2026-09-06T12:14:32.696Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 33,
+  "WebSearch": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://kate-nepveu.livejournal.com/181350.html",
+  "https://kate-nepveu.livejournal.com/180011.html",
+  "https://api.semanticscholar.org/graph/v1/paper/ef4bbee7b8993086ff7315388bece6038fa6241d?fields=title,abstract,year,venue,openAccessPdf,externalIds",
+  "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "https://lingwe.blogspot.com/2010/09/reading-lord-of-rings-aloud.html",
+  "https://api.openalex.org/works?filter=title.search:Intertextual%20Patterns%20in%20J.R.R.%20Tolkien&per-page=5",
+  "https://api.openalex.org/works?search=Intertextual+Patterns+in+Tolkien+Hobbit+Lord+of+the+Rings&per-page=5",
+  "https://www.semanticscholar.org/paper/ef4bbee7b8993086ff7315388bece6038fa6241d",
+  "https://njes-journal.com/articles/10.35360/njes.190",
+  "https://publicera.kb.se/njes/article/view/28390",
+  "https://ojs.ub.gu.se/index.php/njes/article/view/338",
+  "https://api.crossref.org/works/10.35360/njes.190",
+  "https://api.openalex.org/works/doi:10.35360/njes.190",
+  "https://www.semanticscholar.org/paper/Intertextual-Patterns-in-J.R.R.Tolkien%E2%80%99s-The-Hobbit-Kullmann/ef4bbee7b8993086ff7315388bece6038fa6241d",
+  "https://web.archive.org/web/20221017110104id_/https://ojs.ub.gu.se/index.php/njes/article/view/338"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and verified. All 15 sources were reached as raw text; nothing was BLOCKED.",
+ "run": "wf_d8edf077-aca",
+ "agent": "a231932d4e9e031e8",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d8edf077-aca/agent-a231932d4e9e031e8.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i508-522.json",
+  "exists": true
+ }
+}

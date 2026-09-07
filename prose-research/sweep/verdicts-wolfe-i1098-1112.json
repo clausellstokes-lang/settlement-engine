@@ -1,0 +1,323 @@
+{
+ "name": "wolfe",
+ "chunk": 24,
+ "claims": [
+  {
+   "index": 1098,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe said he tries not to leave a clue more than once.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (published in Peter Wright (ed.), Shadows of the New Sun, Liverpool UP, 2007, at p. 109ff)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "I try not to leave a clue more than once",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1099,
+   "feature": "repetition and refrain",
+   "claim": "Wolfe said repeating a clue five times tells him the writer thinks the reader is dumber than he is.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "you are writing for somebody that is a lot dumber",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "rejects",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1100,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe said he generally leaves all the clues he thinks the reader will require, sometimes more.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "leave all the clues that I think the reader",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1101,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe likened interpretation to police work, where most of the effort is finding more clues.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "the great majority of it consists of finding more clues",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1102,
+   "feature": "point of view and distance",
+   "claim": "Wolfe said life seen superficially has very little pattern to it.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "Life seen superficially has very little pattern to it",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1103,
+   "feature": "civic record register",
+   "claim": "Wolfe said he tried to write about the pagan world as the pagans themselves wrote about it.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "to write about that pagan world as the pagans themselves",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1104,
+   "feature": "other: modern framing rejected",
+   "claim": "Wolfe said reading modern historians gives a very rationalistic viewpoint of the ancient religious world.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "we are reading a very rationalistic viewpoint",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "rejects",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1105,
+   "feature": "place and institution description",
+   "claim": "Wolfe said he made use of the memory palace system in the Soldier books.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "I have made use of the memory palace",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1106,
+   "feature": "civic record register",
+   "claim": "Wolfe said he described the Spartan ceremony that killed the Helots in detail exactly as it was.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "a ceremony that I described in detail exactly as it was",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1107,
+   "feature": "compounds and coinages",
+   "claim": "Wolfe denied making up any words, saying only that some are typos.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "No, but some of them are typos",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "rejects",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1108,
+   "feature": "naming and forms of address",
+   "claim": "Wolfe described Qabbalistic literature as a place he could steal ideas and names from.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "a place that I could steal ideas and names from",
+   "page": "interview transcript",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1109,
+   "feature": "place and institution description",
+   "claim": "Wolfe said he was reacting against the idealization of the ancient world that many people hold.",
+   "source": "Gene Wolfe, interview with James B. Jordan, conducted 1992 (in Shadows of the New Sun, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "reacting against an ideali-",
+   "page": "interview transcript (the word breaks across a line in the PDF)",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1992",
+   "routeHint": "PDF fetched from gwern.net and text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium"
+  },
+  {
+   "index": 1110,
+   "feature": "withheld information and inference",
+   "claim": "Andre-Driussi concludes enough clues were provided for the major mysteries to be solved in the tetralogy itself.",
+   "source": "Michael Andre-Driussi, 'What Gene Wolfe Expects of His Readers: The Urth of the New Sun as an Answer to Mysteries in The Book of the New Sun', The Internet Review of Science Fiction, April 2009",
+   "url": "https://web.archive.org/web/20090406143511id_/http://www.irosf.com/q/zine/article/10536",
+   "quote": "enough clues were provided for such major mysteries to be solved",
+   "page": "body of essay",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "Wayback raw capture (id_ form) of the defunct irosf.com article",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1111,
+   "feature": "omission as information",
+   "claim": "Andre-Driussi says one major mystery was probably not even recognised as a mystery by most readers.",
+   "source": "Michael Andre-Driussi, 'What Gene Wolfe Expects of His Readers', IRoSF, April 2009",
+   "url": "https://web.archive.org/web/20090406143511id_/http://www.irosf.com/q/zine/article/10536",
+   "quote": "probably not even recognized as a mystery by most readers",
+   "page": "body of essay",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "Wayback raw capture (id_ form) of the defunct irosf.com article",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1112,
+   "feature": "repetition and refrain",
+   "claim": "Andre-Driussi counts at least seven points at which Severian has intimations of the deluge.",
+   "source": "Michael Andre-Driussi, 'What Gene Wolfe Expects of His Readers', IRoSF, April 2009",
+   "url": "https://web.archive.org/web/20090406143511id_/http://www.irosf.com/q/zine/article/10536",
+   "quote": "In at least seven points in TBOTNS, Severian has intimations",
+   "page": "body of essay",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "Wayback raw capture (id_ form) of the defunct irosf.com article",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1098,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I try not to leave a clue more than once",
+   "note": "Raw PDF (gwern.net, 31pp, pdftotext -layout); chapter 9, Jordan interview, Soldier-of-Arete clues exchange. Wolfe's answer opens with this sentence; he adds that repeated clues bother him in other writers' books."
+  },
+  {
+   "index": 1099,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you are writing for somebody that is a lot dumber",
+   "note": "Same answer, one sentence later: the left-handed-hero example, 'if you tell me five times', then this clause closing 'than I am'. Both limbs (five times; dumber than he is) on the page."
+  },
+  {
+   "index": 1100,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leave all the clues that I think the reader",
+   "note": "Same answer; the sentence continues 'is going to require, sometimes more than they require', supplying the 'sometimes more' limb."
+  },
+  {
+   "index": 1101,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the great majority of it consists of finding more clues",
+   "note": "Same answer, closing movement: Wolfe turns from the reader solving his books to 'a real life situation' and 'actual police work', where reasoning from clues is little of the work. The likening is his own, carried by that continuous answer rather than by an explicit 'reading is like police work' sentence."
+  },
+  {
+   "index": 1102,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Life seen superficially has very little pattern to it",
+   "note": "Later exchange on whether he writes the modern everything-is-perspective novel; he answers that the confusion can be got through, then this sentence."
+  },
+  {
+   "index": 1103,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to write about that pagan world as the pagans themselves",
+   "note": "Soldier of the Mist / Soldier of Arete exchange; the sentence ends 'wrote about it', preceded by his statement that the gods of paganism were real."
+  },
+  {
+   "index": 1104,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we are reading a very rationalistic viewpoint",
+   "note": "Immediately after 1103: 'If we read modern historians' precedes the quoted clause, which ends 'of this' - 'this' being the pagan religious world just described (temples, sacrifices to Ares or Apollo)."
+  },
+  {
+   "index": 1105,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I have made use of the memory palace",
+   "note": "Frances Yates / Art of Memory exchange; the sentence ends 'system in the Soldier books, of course', after he traces the concept to Simonides."
+  },
+  {
+   "index": 1106,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a ceremony that I described in detail exactly as it was",
+   "note": "Sparta/Helots answer: the freed Helots are each given a young Spartan companion who kills him at a signal; Wolfe adds that it really took place. Both limbs on the page."
+  },
+  {
+   "index": 1107,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "No, but some of them are typos",
+   "note": "Answer to Jordan's 'You didn't make up any words?'; Wolfe's 'No' takes the negative question, then the typos exception, then 'Ushas is not one of them though'."
+  },
+  {
+   "index": 1108,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a place that I could steal ideas and names from",
+   "note": "Same Ushas answer, after 'Read Qabbalic literature' and his saying he does not believe in it; 'To me it was' precedes the quoted clause."
+  },
+  {
+   "index": 1109,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "reacting against an idealization of the ancient world that many people",
+   "note": "Latro's-world exchange near the Soldier of Sidon passage; the sentence ends 'have', and is followed by the anecdote of the ideal society run on slaves. Graded SUBSTANCE, not VERBATIM: the supplied quote 'reacting against an ideali-' is a pdftotext line-break artifact, not a word of the printed text."
+  },
+  {
+   "index": 1110,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "enough clues were provided for such major mysteries to be solved",
+   "note": "Wayback raw capture (id_ form) fetched, 200, HTML stripped locally; byline 'by Michael Andre-Driussi', April 2009, Criticism section. The sentence ends 'in the original tetrology' (the page's spelling) and is introduced by 'With the mysteries laid bare, it becomes apparent that'."
+  },
+  {
+   "index": 1111,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "probably not even recognized as a mystery by most readers",
+   "note": "Same essay, paragraph before the deluge discussion: 'Urth also delivers an unambiguous answer to a major mystery that was' precedes the quoted clause, which is followed by the dash and 'the relation of New Sun and the deluge'."
+  },
+  {
+   "index": 1112,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In at least seven points in TBOTNS, Severian has intimations",
+   "note": "Next sentence of the same paragraph; it continues 'of deluge' (the page has no article) and names the howdah-ride vision as the emblematic case."
+  }
+ ]
+}

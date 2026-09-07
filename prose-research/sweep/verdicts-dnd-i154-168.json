@@ -1,0 +1,233 @@
+{
+ "name": "dnd",
+ "chunk": 7,
+ "claims": [
+  {
+   "index": 154,
+   "feature": "read-aloud cadence problem",
+   "claim": "'When most speakers read something aloud, their voice takes a different tone and cadence than when they speak extemporaneously', so attention wanders; boxed text also dwells on 'the color of the sunset'.",
+   "source": "DMDavid — Picturing the dungeon: boxed text (David Hartlage, 2012-11-15)",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "their voice takes a different tone and cadence",
+   "page": "blog post"
+  },
+  {
+   "index": 155,
+   "feature": "reading vs paraphrasing (1980s attitude)",
+   "claim": "Gnome Stew (2008): in the 1980s reading boxed text aloud was 'considered a cardinal sin' among GMs, who were expected to paraphrase; the author later found reading helped immersion; commenters: 'Short box text is fine, long box text is a challenge.'",
+   "source": "Gnome Stew — Hot Button: Reading the Boxed Text (Walt Ciechanowski, 2008-12-18)",
+   "url": "https://gnomestew.com/hot-button-reading-the-boxed-text/",
+   "quote": "considered a cardinal sin",
+   "page": "post + comments"
+  },
+  {
+   "index": 156,
+   "feature": "rehearsed delivery",
+   "claim": "DM's Workshop: practice reading text aloud between sessions and match pacing to conversational speech; boxed text is a tool to adapt, not a script to recite.",
+   "source": "Dungeon Master's Workshop — DM 101: Mastering the Boxed Text (2019-09-27)",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "quote": "",
+   "page": "essay"
+  },
+  {
+   "index": 157,
+   "feature": "two-sentence attention budget",
+   "claim": "Noonan's undercover Gen Con 2005 observation was that players attend to only the first two sentences of read-aloud boxed text before they start stacking dice or talking.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "If you're the DM, you get two sentences. Period.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 158,
+   "feature": "oration versus conversation",
+   "claim": "Boxed text fails because it replaces the game's native conversational exchange (player asks, DM answers) with oration, which players are not used to listening to.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text replaces that conversation with oration.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 159,
+   "feature": "load-bearing facts lost in boxes",
+   "claim": "Players repeatedly missed the concrete data embedded in boxed text (room dimensions, number of exits, number of monsters, who is a corpse), forcing DMs to repeat it mid-action.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "basic stuff, like room dimensions, how many doors exit the room",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 160,
+   "feature": "cold reading of scripted prose",
+   "claim": "DMs read boxed text cold, from a script they have never spoken aloud, so even dynamic DMs deliver it flatly.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Not a recipe for compelling delivery.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 161,
+   "feature": "historical shrinkage of boxed text",
+   "claim": "Noonan documents that WotC boxed text had already shortened by 2005, contrasting a three-sentence Sons of Gruumsh door entry with a paragraph-long 1999 Return to the Keep on the Borderlands cave entry.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text in adventures used to be a lot longer",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 162,
+   "feature": "paraphrase over verbatim",
+   "claim": "Noonan's advice to DMs is to ditch the boxed text and give the initial room description in their own words to keep the players in a conversation.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "ditch the boxed text and use your own words",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 163,
+   "feature": "format experimentation at WotC",
+   "claim": "In 2005 WotC R&D was actively testing alternatives to boxed text at the table, to appear in products if they played better.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "We're goofing around with some alternatives right now.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "index": 164,
+   "feature": "read-versus-play gap",
+   "claim": "Noonan states an RPG book is first experienced by reading but lived by playing, so reading only yields an educated guess about quality.",
+   "source": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "quote": "Reading a roleplaying book just lets you make an educated guess",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "index": 165,
+   "feature": "metaplot prose reads well, plays badly",
+   "claim": "Mid-1990s campaign settings with intertwined factions and metaplots were great reads but hard to run because PCs became bit players.",
+   "source": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "quote": "In short, they read good, played bad.",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "index": 166,
+   "feature": "stat blocks as table-only prose",
+   "claim": "Pregenerated NPC stat blocks are no fun on a read-through but save the busy DM at the table, and WotC was working to make such material easier to find and use.",
+   "source": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "quote": "They're no fun on a read-through.",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "index": 167,
+   "feature": "no second person in read-aloud",
+   "claim": "RPGA/Living Greyhawk guidance forbids 'you', 'your' and 'you're' in read-aloud text because they seize control of the characters.",
+   "source": "Living Greyhawk, Intro to Writing: Dire Boxed Text (Craig Heir, RPGA/WotC, 2004-04-13)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+   "quote": "Avoid the word \"you\" like the plague",
+   "page": "RPGA editor column on WotC site (read via Wayback)"
+  },
+  {
+   "index": 168,
+   "feature": "no assigned emotions or actions",
+   "claim": "Boxed text must not tell characters what they feel or do (crying babies bringing a tear to your eyes; grabbing your sword in fear); rewrite as a neutral scene the players react to.",
+   "source": "Living Greyhawk, Intro to Writing: Dire Boxed Text (Craig Heir, RPGA/WotC, 2004-04-13)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+   "quote": "read aloud text does not run the character",
+   "page": "RPGA editor column on WotC site (read via Wayback)"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 154,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When most speakers read something aloud, their voice takes a different tone",
+   "note": "Live page (dmdavid.com tag URL resolves to the 2012-11-15 post by David Hartlage). Exact sentence: 'When most speakers read something aloud, their voice takes a different tone and cadence than when they speak extemporaneously, and that monotony can cause players' attention to wander.' The sunset limb is also present: 'Perhaps too many boxed text descriptions have lingered on descriptions of the color of the sunset and other bits of obviously unimportant fluff.'"
+  },
+  {
+   "index": 155,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it was considered a cardinal sin in my gaming circles",
+   "note": "Live page. 'Back in the Reagan era, it was considered a cardinal sin in my gaming circles to read boxed text in published modules'; 'As players, we expected the GM to read the boxed text on her own and paraphrase it for us'; 'I found that I didn't mind boxed text so much. It helped with immersion'. The commenter line is in the page's comment markup as 'Basically, short box text is fine, long box text is a challenge.' — the claim drops 'Basically,' and capitalises. Scope note: the author locates the taboo 'in my gaming circles', not among GMs generally."
+  },
+  {
+   "index": 156,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "match the pace of the text to your regular speech",
+   "note": "Claim carries no quote field, so verbatim grading does not apply; the page supports every limb in near-identical words. 'Practice reading some of the text aloud between sessions if you can so that you can learn the pronunciation and how to match the pace of the text to the cadence of your regular speech.' Tool-not-script limb: 'The most important thing to understand about boxed text is that it's a tool... You need to take the boxed text and make it yours rather than submit to its authority' and 'Adjust it as much or as little as you like'."
+  },
+  {
+   "index": 157,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If you're the DM, you get two sentences. Period.",
+   "note": "Wayback raw capture 20210713073031id_ of archive.wizards.com. Full context: 'If you're the DM, you get two sentences. Period. Beyond that, your players are stacking dice, talking to each other, or staring off into space.' Narrator of the undercover section is Noonan ('because Dave spent a lot of time wandering around the convention hall at Gen Con'), Gen Con 2005. Only difference from the claim's quote is the page's curly apostrophe."
+  },
+  {
+   "index": 158,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boxed text replaces that conversation with oration.",
+   "note": "Same 2005 capture. Verbatim. Conversation limb: 'At its heart, a D&D game is a conversation... You tell the DM what you want to do, and the DM replies with the consequences of the action.' Not-used-to-listening limb: DMs without boxed text 'are doing it in a style the players are used to', and 'oration is inherently harder to concentrate on than conversation.'"
+  },
+  {
+   "index": 159,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "basic stuff, like room dimensions, how many doors exit the room",
+   "note": "Same 2005 capture. Full: 'players were missing the actual data in the boxed text - basic stuff, like room dimensions, how many doors exit the room, and number of monsters.' Corpse limb from the quoted player questions: 'Wait, the lady in the room is a corpse?' Repetition limb: DMs 'wound up repeating and paraphrasing all the information in it anyway - often in the middle of the action.'"
+  },
+  {
+   "index": 160,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Not a recipe for compelling delivery.",
+   "note": "Same 2005 capture. 'DMs are, by and large, reading the boxed text cold... even a dynamic, dramatic DM is reading from a script that he or she has never uttered aloud before. Not a recipe for compelling delivery.' The claim's 'flatly' is the page's 'not a recipe for compelling delivery'."
+  },
+  {
+   "index": 161,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boxed text in adventures used to be a lot longer than it is today",
+   "note": "Same 2005 capture. The Sons of Gruumsh excerpt quoted on the page is exactly three sentences about two 15-foot oak doors; it is contrasted with a single long paragraph, the cave-mouth entry from '1999's Return to the Keep on the Borderlands, pulled at random from my shelf'."
+  },
+  {
+   "index": 162,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ditch the boxed text and use your own words",
+   "note": "Same 2005 capture. 'Or better yet, ditch the boxed text and use your own words for the initial description of the room. You'll engage your players in a conversation.'"
+  },
+  {
+   "index": 163,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We're goofing around with some alternatives right now.",
+   "note": "Same 2005 capture. 'But boxed text is something we're definitely watching closely. We're goofing around with some alternatives right now. If they play better at the table, you'll see them in products at some point.' Hedge worth carrying: the page says 'goofing around with', which is weaker than the claim's 'actively testing'; the table-play condition and the products limb are explicit."
+  },
+  {
+   "index": 164,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Reading a roleplaying book just lets you make an educated guess",
+   "note": "Wayback raw capture 20130531083417id_ of www.wizards.com. 'Roleplaying games are fundamentally different than most other media because the way you first experience the product (by reading it) isn't the way you experience it in the long term (by playing it)... Reading a roleplaying book just lets you make an educated guess about whether it's any good or not. You've got to play it to know for sure.' Byline is David Noonan alone."
+  },
+  {
+   "index": 165,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In short, they read good, played bad.",
+   "note": "Same 2006 capture. 'A lot of roleplaying games and especially campaign settings from the mid-1990s... an intertwined web of factions and organizations... Most had ongoing metaplots... It's difficult to slot your own PCs into a game with an important metaplot... either adhere to canon and relegate the PCs to bit players in the ongoing drama, or do your own thing and pitch the provided metaplot... In short, they read good, played bad.'"
+  },
+  {
+   "index": 166,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They're no fun on a read-through.",
+   "note": "Same 2006 capture. 'Another example of \"reads boring\" is the sets of pregenerated NPC stat blocks we put in books. They're no fun on a read-through. But they might save the busy DM's bacon at the table... (And for the record, we're working on ways to make that sort of thing easier for the DM to find and use quickly.)' The page hedges with 'might save'; the claim states it flatly."
+  },
+  {
+   "index": 167,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Avoid the word \"you\" like the plague including derivations",
+   "note": "Wayback raw capture 20161101184116id_ of archive.wizards.com; Living Greyhawk 'Intro to Writing' column, 04/13/2004, by Craig Heir. 'Avoid the word \"you\" like the plague including derivations like \"your\" or \"you're.\"' Reason limb: the rewritten example is glossed 'The text is straight forward but takes control of the characters.' Framing note: the column presents this as tips/guidelines, not a formal prohibition."
+  },
+  {
+   "index": 168,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "read aloud text does not run the character, the player does",
+   "note": "Same 2004 capture. 'some boxed text dictates character actions or assigns emotions to characters... After all, read aloud text does not run the character, the player does.' Both cited examples are on the page verbatim - 'The crying of the babies brings a tear to your eyes.' and 'Fearing for your safety, you grab the hilt of your sword.' - each followed by a neutral rewrite ('Inside the orphanage the babies cry for their lost parents.')."
+  }
+ ]
+}

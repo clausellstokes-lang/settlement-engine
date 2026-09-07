@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 9,
+ "indices": [
+  1132,
+  1133,
+  1134,
+  1135,
+  1136,
+  1137,
+  1138,
+  1139,
+  1140,
+  1141,
+  1142,
+  1143,
+  1144,
+  1145,
+  1146
+ ],
+ "claims": [
+  {
+   "index": 1132,
+   "feature": "edition and house style",
+   "claim": "Jeremy Crawford is credited as managing editor of Waterdeep: Dragon Heist.",
+   "source": "Waterdeep: Dragon Heist (Wizards of the Coast, 2018), credits page, read through the Internet Archive's OCR text",
+   "url": "https://archive.org/stream/wheaton_Wdh/Waterdeep%20-%20%20Dragon%20Heist_djvu.txt",
+   "quote": "Managing Editor: Jeremy Crawford",
+   "page": "credits page"
+  },
+  {
+   "index": 1133,
+   "feature": "edition and house style",
+   "claim": "The DMs Guild describes the style-guide package as PDF documents distributed by Wizards of the Coast to official play writers.",
+   "source": "Dungeon Masters Guild, DMs Guild Creator Resource - Style Guide Resources product page",
+   "url": "http://web.archive.org/web/20240423102657id_/https://www.dmsguild.com/product/267467/",
+   "quote": "distributed by Wizards of the Coast to official play writers",
+   "page": "product description"
+  },
+  {
+   "index": 1134,
+   "feature": "edition and house style",
+   "claim": "The DMs Guild product page dates the House Style Guide's update to January 2019.",
+   "source": "Dungeon Masters Guild, DMs Guild Creator Resource - Style Guide Resources product page",
+   "url": "http://web.archive.org/web/20240423102657id_/https://www.dmsguild.com/product/267467/",
+   "quote": "The House Style Guide has been updated January 2019.",
+   "page": "product description note"
+  },
+  {
+   "index": 1135,
+   "feature": "edition and house style",
+   "claim": "The DMs Guild page credits the package's adventure-design tips to Chris Perkins and Greg Bilsland.",
+   "source": "Dungeon Masters Guild, DMs Guild Creator Resource - Style Guide Resources product page",
+   "url": "http://web.archive.org/web/20240423102657id_/https://www.dmsguild.com/product/267467/",
+   "quote": "tips for adventure design from Chris Perkins and Greg",
+   "page": "product description"
+  },
+  {
+   "index": 1136,
+   "feature": "edition and house style",
+   "claim": "The DMs Guild states that following the style guides is not required to publish on the platform.",
+   "source": "Dungeon Masters Guild, DMs Guild Creator Resource - Style Guide Resources product page",
+   "url": "http://web.archive.org/web/20240423102657id_/https://www.dmsguild.com/product/267467/",
+   "quote": "Following these style guides is not required to publish on",
+   "page": "product description"
+  },
+  {
+   "index": 1137,
+   "feature": "edition and house style",
+   "claim": "The D&D adventure design guide distributed with the house style guide is bylined Chris Perkins and Greg Bilsland.",
+   "source": "Chris Perkins and Greg Bilsland, Writing Adventures (D&D Adventure Design Guide)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "By Chris Perkins & Greg Bilsland",
+   "page": "title line"
+  },
+  {
+   "index": 1138,
+   "feature": "plainness and economy",
+   "claim": "Perkins and Bilsland tell adventure writers to present information as concisely as possible to ease the burden on the DM.",
+   "source": "Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 7",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "present information as concisely as possible, to ease the burden",
+   "page": "General Principles, 7"
+  },
+  {
+   "index": 1139,
+   "feature": "concrete sensory noun",
+   "claim": "Perkins and Bilsland name NPCs, dungeon dressings and treasure hoards as the elements that deserve descriptive text despite the concision rule.",
+   "source": "Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 7",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "namely NPCs, dungeon dressings, and treasure hoards",
+   "page": "General Principles, 7"
+  },
+  {
+   "index": 1140,
+   "feature": "naming and forms of address",
+   "claim": "Perkins and Bilsland say character is added to an NPC by describing distinctive physical features, mannerisms and quirks.",
+   "source": "Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 7",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "distinctive physical features, mannerisms, and quirks",
+   "page": "General Principles, 7"
+  },
+  {
+   "index": 1141,
+   "feature": "withheld information and inference",
+   "claim": "Perkins and Bilsland rule that the text must not keep the DM in suspense, and must not conceal or bury information the DM needs.",
+   "source": "Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 6",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "The goal isn’t to keep the DM in suspense",
+   "page": "General Principles, 6"
+  },
+  {
+   "index": 1142,
+   "feature": "dm-facing sentence",
+   "claim": "Perkins and Bilsland require that an NPC be properly introduced before the text mentions that NPC by name in passing.",
+   "source": "Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 6",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "make sure that an NPC is properly introduced before casually",
+   "page": "General Principles, 6"
+  },
+  {
+   "index": 1143,
+   "feature": "annalist voice and deep time",
+   "claim": "Perkins and Bilsland hold that an adventure is about the here and now, and that the less history it carries the better.",
+   "source": "Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 4",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure is about the here and now.",
+   "page": "General Principles, 4"
+  },
+  {
+   "index": 1144,
+   "feature": "edition and house style",
+   "claim": "The Perkins and Bilsland guide sends writers to the Chicago Manual of Style, 16th edition, and to the D&D House Style Guide for grammar and punctuation.",
+   "source": "Chris Perkins and Greg Bilsland, Writing Adventures, closing line",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "The Chicago Manual of Style (16th edition) and the",
+   "page": "closing line"
+  },
+  {
+   "index": 1145,
+   "feature": "plainness and economy",
+   "claim": "Ray Vallese says RPG supplements are supposed to focus on communicating the basic information rather than dazzling the audience with clever prose.",
+   "source": "Ray Vallese, TSR Planescape editor, interviewed at Planescape: I am the Mimir, 1999",
+   "url": "https://mimir.net/chant/an-interview-with-ray-and-val-vallese/",
+   "quote": "communicating the basic info and less on dazzling the audience",
+   "page": "answer comparing the novel to supplements"
+  },
+  {
+   "index": 1146,
+   "feature": "register modulation",
+   "claim": "Vallese qualifies that rule for the Planescape line, saying many people have remarked they bought Planescape products just to read them.",
+   "source": "Ray Vallese, TSR Planescape editor, interviewed at Planescape: I am the Mimir, 1999",
+   "url": "https://mimir.net/chant/an-interview-with-ray-and-val-vallese/",
+   "quote": "purchased PS products just to read them",
+   "page": "answer comparing the novel to supplements"
+  }
+ ]
+}

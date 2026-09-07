@@ -1,0 +1,24 @@
+{{deletion archive|previous=May 2024|next=September 2024}}
+===[[Uvs Nuur Lake]]===
+Created as part of a larger group of Mongolian editors (see [[User:A09/LTA/MON]]), though unlike many of the others, I couldn't find specific copyvio nor was it AI-generated. However, many of this user's uploads on Commons lack a license (all but one are confirmed copyvios) which make me skeptical of trusting this article. It would be better to nuke this article and restart from scratch were we to have an actual travel article of Uvs Nuur Lake. --<span style="font-family:BlinkMacSystemFont; font-size: 14px">[[User:SHB2000|<span style="color:#0b6487">SHB2000</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 22:59, 3 August 2024 (UTC)
+
+:Agreed. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 23:05, 3 August 2024 (UTC)
+: Opposed. If the article text and photos are not copied from others then there is no reason to delete this, if the article clearly presenting new site. [[User:MN5|MN5]] ([[User talk:MN5|talk]]) 03:44, 4 August 2024 (UTC)
+::[[User:MN5]], first of all, read [[Wikivoyage:Bodies of water]] and tell us why this lake shouldn't just have a listing in an article for the nearest town. Second, instead of using the word "if", tell us where the text and photos are from. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 08:01, 4 August 2024 (UTC)
+::I don't know exact copyright policy of the English Wikivoyage but based on the tracker I've created yesterday we can see that some article contained image material that was all tagged and deleted as copyright infringement. [[User:A09|A09]] ([[User talk:A09|talk]]) 09:02, 4 August 2024 (UTC)
+:::[[User:A09|A09]], the exact copyright policy is spelled out on the [[Wikivoyage:Copyleft]] page. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 06:40, 5 August 2024 (UTC)
+::::Thanks, it was a refreshing read. Best regards, [[User:A09|A09]] ([[User talk:A09|talk]]) 07:51, 5 August 2024 (UTC)
+
+:It could be redirected (and maybe merged) to [[Ulaangom]] which has a listing for the lake. [[User:AlasdairW|AlasdairW]] ([[User talk:AlasdairW|talk]]) 09:38, 4 August 2024 (UTC)
+::Even then it would be better to nuke it then create a redirect – that way if the text in question is a copyvio, it can't be found in the history. --<span style="font-family:BlinkMacSystemFont; font-size: 14px">[[User:SHB2000|<span style="color:#0b6487">SHB2000</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 10:00, 4 August 2024 (UTC)
+----
+'''Outcome:''' clear consensus to delete. --<span style="font-family:BlinkMacSystemFont; font-size: 14px">[[User:SHB2000|<span style="color:#0b6487">SHB2000</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 10:08, 17 August 2024 (UTC)
+===[[Khamar Monastery]]===
+Similar to above, though I couldn't confirm whether this was a copyvio. Previous articles and file uploads on Commons have either been deleted as a) copyvio, b) AI-generated article or c) out-of-scope. Monatries are also very edge cases for their own articles, and only get their own in exceedingly rare cases. --<span style="font-family:BlinkMacSystemFont; font-size: 14px">[[User:SHB2000|<span style="color:#0b6487">SHB2000</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 01:49, 5 August 2024 (UTC)
+
+:Delete per nom. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 06:40, 5 August 2024 (UTC)
+::How about [[Yeruu River]]? [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 06:43, 5 August 2024 (UTC)
+:::I think that could be speedied per [[Wikivoyage:Bodies of water]]. --<span style="font-family:BlinkMacSystemFont; font-size: 14px">[[User:SHB2000|<span style="color:#0b6487">SHB2000</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 06:53, 5 August 2024 (UTC)
+::::Well, it's claimed to be a rural area, but I don't think it fits the Wikivoyage guidelines for a rural area article. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 07:50, 5 August 2024 (UTC)
+----
+'''Outcome:''' deleted. --<span style="font-family:BlinkMacSystemFont; font-size: 14px">[[User:SHB2000|<span style="color:#0b6487">SHB2000</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 03:31, 20 August 2024 (UTC)

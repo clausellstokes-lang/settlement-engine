@@ -1,0 +1,1125 @@
+{
+ "name": "ai",
+ "regrade": true,
+ "claims": [
+  {
+   "index": 8,
+   "feature": "discourse tells survive style polishing",
+   "claim": "Narrative-level features still identify AI fiction at 93.9% macro-F1 after professional-style rewriting, so surface edits do not humanize structure.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": "far harder to humanize",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 10,
+   "feature": "lexical overuse (style verbs/adjectives)",
+   "claim": "LLM-processed text shows abrupt excess of style words such as delves (28x), showcasing (10x), intricate, underscores, pivotal, meticulously, realm; 2024 excess words were 66% verbs and 16% adjectives.",
+   "source": "Kobak, González-Márquez, Horvát & Lause (arXiv 2406.07016; Science Advances 2025)",
+   "url": "https://arxiv.org/html/2406.07016v4",
+   "quote": "",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 11,
+   "feature": "lexical overuse not inherited from training data",
+   "claim": "Twenty-one focal words (delve, showcasing, underscores, intricate, garnered, boasts, groundbreaking, realm, aligns, etc.) are overrepresented in ChatGPT output yet not in pre-LLM corpora, consistent with RLHF as the source.",
+   "source": "Juzek & Ward, Why Does ChatGPT Delve So Much? (arXiv 2412.11385, Dec 2024)",
+   "url": "https://arxiv.org/html/2412.11385v1",
+   "quote": "Lexical overrepresentation remains a feature of current iterations of ChatGPT",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 12,
+   "feature": "reader sensitisation to tell-words",
+   "claim": "Readers become wary of signature words like delve and may judge a text on those words rather than its content.",
+   "source": "Juzek & Ward (arXiv 2412.11385)",
+   "url": "https://arxiv.org/html/2412.11385v1",
+   "quote": "wary of the word 'delve'",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 22,
+   "feature": "novelty, surprise, diversity",
+   "claim": "Across 60 LLMs vs 60 humans, human five-sentence stories are more novel, more surprising and more lexically and semantically diverse (p<0.05 to p<0.0001).",
+   "source": "Ismayilzada, Stevenson & van der Plas (ICCC 2025; arXiv 2411.02316)",
+   "url": "https://arxiv.org/abs/2411.02316",
+   "quote": "fall short in terms of novelty, surprise and diversity",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 23,
+   "feature": "verbosity mistaken for quality",
+   "claim": "LLM stories are more linguistically complex and verbose (more unique words, longer dependency paths, more nouns and adjectives) but less creative than human stories.",
+   "source": "Ismayilzada et al. (ICCC 2025)",
+   "url": "https://arxiv.org/abs/2411.02316",
+   "quote": "linguistically more complex and verbose yet less creative",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 25,
+   "feature": "collective homogenisation via AI ideas",
+   "claim": "Writers given GPT-4 story ideas produced stories 10.7% more similar to one another and 5.2% more similar to the AI prompts, while individual ratings rose mostly for low-creativity writers.",
+   "source": "Doshi & Hauser, Science Advances 10(28), 2024",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11244532/",
+   "quote": "collectively a narrower scope of novel content is produced",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 33,
+   "feature": "nominalization and noun density",
+   "claim": "Instruction-tuned LLMs use nominalizations 1.5–2x, 'that' subject clauses 2.6x and phrasal coordination 1.9x human rates, producing a noun-heavy academic style regardless of genre.",
+   "source": "Reinhart et al., PNAS 2025",
+   "url": "https://arxiv.org/html/2410.16107v2",
+   "quote": "informationally dense, noun-heavy style",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 37,
+   "feature": "syntactic templates and tell-words",
+   "claim": "LLM prose repeats templates such as 'sense of', 'weight of', 'mix of', and the word 'unspoken' appears in about 15% of LLM outputs but rarely in human samples.",
+   "source": "Chakrabarty, Laban & Wu (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.14509v4",
+   "quote": "",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 40,
+   "feature": "abrupt resolution after a peak",
+   "claim": "LLM stories show 7–9x higher 'drop ratios' than human stories, meaning a suspenseful element is resolved immediately after it peaks instead of being developed.",
+   "source": "Xu et al., Echoes in AI (PNAS 2025)",
+   "url": "https://arxiv.org/html/2501.00273",
+   "quote": "",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 42,
+   "feature": "early climax and low suspense",
+   "claim": "Major Setback and Climax arrive about 10–15% earlier in GPT-4 narratives, and human stories sustain higher suspense with the gap widening from midpoint to end.",
+   "source": "Tian et al. (EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "higher levels of suspense",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 47,
+   "feature": "conflict-free social worlds",
+   "claim": "LLM story character networks are denser (0.338–0.470 vs 0.182), more positive (mean edge weight 0.236–0.659 vs −0.061) and more clustered than human science-fiction, with far less variability.",
+   "source": "Nonaka & Perry (arXiv 2510.18932, Sep 2025)",
+   "url": "https://arxiv.org/html/2510.18932v1",
+   "quote": "less conflict-driven social dynamics",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 52,
+   "feature": "atmosphere over action",
+   "claim": "LLMs produce mood-laden 'perceived space' at about twice the human rate (GPT-4.1 0.47 vs human 0.19) and under-produce action space, substituting atmosphere for embodied movement.",
+   "source": "Rohrbacher et al., How LLMs Build Fictional Worlds (arXiv 2609.02482, Sep 2026)",
+   "url": "https://arxiv.org/html/2609.02482v1",
+   "quote": "roughly twice the human baseline",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 59,
+   "feature": "expert-judged creativity vs a novelist",
+   "claim": "Six literary experts scored Patricio Pron's synopses 1.94 on creativity vs GPT-4's 0.97 (English) and 0.88 (Spanish), and style originality 1.70 vs 0.63/0.36.",
+   "source": "Marco, Gonzalo, Mateo-Girona & del Castillo, Pron vs Prompt (EMNLP 2024; arXiv 2407.01119)",
+   "url": "https://arxiv.org/html/2407.01119v2",
+   "quote": "GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 65,
+   "feature": "counter-evidence: craft mechanics",
+   "claim": "On an epic-comedy task GPT-4 outscored five human writers overall (80.2 vs 70.1) and on epic-genre habitation (8.1 vs 4.9); humans led only on originality (8.0 vs 7.6) with humor near-tied (6.4 vs 6.0).",
+   "source": "Gómez-Rodríguez & Williams, A Confederacy of Models (Findings EMNLP 2023)",
+   "url": "https://aclanthology.org/2023.findings-emnlp.966/",
+   "quote": "Humans retain an edge in creativity",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 68,
+   "feature": "sentence-length burstiness (news)",
+   "claim": "LLM sentences cluster in a 10–30 token band with less length variation than human sentences, and lexical richness is lower (STTR 0.424 vs 0.491).",
+   "source": "Muñoz-Ortiz, Gómez-Rodríguez & Vilares, Artificial Intelligence Review 2024",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11422446/",
+   "quote": "less variation when compared to human-generated sentences",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 69,
+   "feature": "positivity and emotion narrowing (news)",
+   "claim": "LLM text carries more joy and positive emotion while humans show more fear and disgust; LLMs also use more pronouns and magnify male-pronoun bias.",
+   "source": "Muñoz-Ortiz et al. 2024",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11422446/",
+   "quote": "",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 70,
+   "feature": "sentence-length distribution (Portuguese news)",
+   "claim": "Human sentence lengths show a broader, flatter distribution while AI outputs cluster around the mean; AI cuts informal expressions 54–72%, raises positive emotion 114–133% and certainty 111–152%.",
+   "source": "Rodrigues, Sturm & Pinheiro, iScience (Feb 2026)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12969083/",
+   "quote": "broader and flatter distribution",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 78,
+   "feature": "game dialogue: grounding failures",
+   "claim": "32% of GPT-4 game lines were judged illogical once the next utterance appeared, and generations violated the game's faction logic (e.g. an 'ultra-liberal' character).",
+   "source": "Akoury, Yang & Iyyer (Findings EMNLP 2023)",
+   "url": "https://aclanthology.org/2023.findings-emnlp.151/",
+   "quote": "illogical in hindsight",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 82,
+   "feature": "screenplay: thematic focus and character",
+   "claim": "In blind evaluation by 20+ professional TV screenwriters, direct LLM screenwriting showed lack of thematic focus, out-of-character dialogue and thin character development, mimicking screenplay style without conciseness or visual language.",
+   "source": "Lei, Zong, Li, Zhou & Liu, Beyond Direct Generation (arXiv 2510.23163, Oct 2025)",
+   "url": "https://arxiv.org/html/2510.23163v1",
+   "quote": "lack of thematic focus, out-of-character dialogue, and insufficient character development",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 83,
+   "feature": "game narrative: tone and endings",
+   "claim": "Industry experts building a game-narrative quality framework record LLM outputs as unconvincing, repetitive or tonally misaligned, with overly positive or uninspired endings and genre-adherence failures.",
+   "source": "Valdivia & Burelli, Evaluating Quality of Gaming Narratives Co-created with AI (arXiv 2509.04239)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "overly positive or uninspired endings",
+   "angle": "peer-reviewed"
+  },
+  {
+   "index": 85,
+   "feature": "subtext",
+   "claim": "AI-assisted manuscripts read as polished but soulless, with no psychological reasoning or subtext beneath the surface text for an editor to draw out.",
+   "source": "Mary Kole, developmental editor, on janefriedman.com (2026-08-13)",
+   "url": "https://janefriedman.com/after-editing-two-ai-assisted-manuscripts-i-rewrote-my-client-agreement/",
+   "page": "After Editing Two AI-Assisted Manuscripts, I Rewrote My Client Agreement",
+   "quote": "",
+   "angle": "novelists,"
+  },
+  {
+   "index": 88,
+   "feature": "subtext (dialogue)",
+   "claim": "AI dialogue gives no character verbal tics, dialect, or a pattern of evasion; everyone says what they mean, and mysteries get resolved by as-you-know-Bob speech rather than action.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "quote": "",
+   "angle": "novelists,"
+  },
+  {
+   "index": 89,
+   "feature": "subtext (dialogue)",
+   "claim": "AI stories carry philosophical, expository dialogue 59% of the time versus 34% in human stories.",
+   "source": "Russell et al., StoryScope, arXiv 2604.03136 (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
+   "quote": "",
+   "angle": "novelists,"
+  },
+  {
+   "index": 94,
+   "feature": "specificity (averaging)",
+   "claim": "Every choice the prompter does not make, the model fills with the statistical average, and that average is the least interesting choice available.",
+   "source": "Nick Bailey, LitReactor (2026-06-18)",
+   "url": "https://litreactor.com/columns/human-editors-vs-ai-editing/",
+   "page": "Human Editors vs AI Editing: What AI Still Can't Do",
+   "quote": "that average is equivalent to the least interesting choices possible",
+   "angle": "novelists,"
+  },
+  {
+   "index": 95,
+   "feature": "specificity (averaging)",
+   "claim": "Fiction is roughly one deliberate choice per word; a prompt makes far fewer choices, and the unmade choices come out generic and without intention.",
+   "source": "Lincoln Michel, novelist, Counter Craft (2024-09-04)",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "page": "Art Without Intention",
+   "quote": "Art is something that results from making a lot of choices.",
+   "angle": "novelists,"
+  },
+  {
+   "index": 99,
+   "feature": "rhythm",
+   "claim": "Generated text has a predictable, even rhythm and no emotional valence, so it lulls rather than moves the reader.",
+   "source": "Josh Bernoff (2026-02-05)",
+   "url": "https://bernoff.com/blog/how-editors-should-handle-ai-generated-manuscripts",
+   "page": "How editors should handle AI-generated manuscripts",
+   "quote": "could lull the reader to sleep",
+   "angle": "novelists,"
+  },
+  {
+   "index": 102,
+   "feature": "rhythm",
+   "claim": "AI plants one-sentence fragment paragraphs before scene hooks and an em-dash per paragraph, and the pattern has become recognizable to editors.",
+   "source": "Carrie Jones, developmental editor (2026-03-21)",
+   "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
+   "page": "What Makes a Story \"Look\" Like AI Wrote It?",
+   "quote": "The rhythm is becoming recognizable as an AI pattern",
+   "angle": "novelists,"
+  },
+  {
+   "index": 104,
+   "feature": "rhythm",
+   "claim": "Vendor measurement: about 85% of GPT-4o sentences fall in the 15-28 word range and Gemini paragraphs are nearly identical in length, versus human prose ranging 4 to 55+ words with no central cluster (unreplicated vendor figures).",
+   "source": "TextSight blog, vendor (2026-06-16)",
+   "url": "https://www.textsight.ai/blog/ai-rhythm-explained/",
+   "page": "What 'AI Rhythm' Means",
+   "quote": "AI rhythm is the mechanical, metronomic quality of text",
+   "angle": "novelists,"
+  },
+  {
+   "index": 105,
+   "feature": "rhythm (verse)",
+   "claim": "LLM poetry has a choppy cadence built from constant objective correlatives and persistent enjambment, which makes it recognizable.",
+   "source": "The Literary Quant, poet (2026-08-14)",
+   "url": "https://new2criticism.substack.com/p/in-offense-of-llm-poetry",
+   "page": "In Offense of LLM Poetry",
+   "quote": "Constant objective correlatives and choppy cadence",
+   "angle": "novelists,"
+  },
+  {
+   "index": 110,
+   "feature": "tidy endings (structural root)",
+   "claim": "Fiction needs events that surprise then feel inevitable, and earlier details that get re-valued by later ones; autoregressive generation coordinates neither well over length.",
+   "source": "Katherine Elkins, The AI Fiction Paradox, arXiv 2603.13545 (2026-03-13)",
+   "url": "https://arxiv.org/abs/2603.13545",
+   "page": "The AI Fiction Paradox",
+   "quote": "fiction repeatedly requires the significance of earlier details to be reinterpreted",
+   "angle": "novelists,"
+  },
+  {
+   "index": 111,
+   "feature": "tidy endings (verse)",
+   "claim": "LLM poems force closure with contrived mic-drop final lines.",
+   "source": "The Literary Quant (2026-08-14)",
+   "url": "https://new2criticism.substack.com/p/in-offense-of-llm-poetry",
+   "page": "In Offense of LLM Poetry",
+   "quote": "contrived mic-drops like the last sentence",
+   "angle": "novelists,"
+  },
+  {
+   "index": 114,
+   "feature": "reflexive antithesis",
+   "claim": "In AI fiction the 'not X; Y' construction feels obligatory rather than natural, often alongside stacked triplets of descriptors.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "page": "How to Identify AI-Written Web Fiction",
+   "quote": "",
+   "angle": "novelists,"
+  },
+  {
+   "index": 116,
+   "feature": "reflexive antithesis",
+   "claim": "The 'isn't just X; it's Y' frame combined with a metaphor and a tricolon is a signature machine sentence that carries no content.",
+   "source": "Carly Ayres (2024-12-05)",
+   "url": "https://carly.substack.com/p/spotting-machine-made-prose",
+   "page": "Spotting machine-made prose",
+   "quote": "It says absolutely nothing at all.",
+   "angle": "novelists,"
+  },
+  {
+   "index": 118,
+   "feature": "the gloss",
+   "claim": "AI spells out meaning that human fiction leaves implied; the tell lives in the story's structure, not its word choice.",
+   "source": "Dramatica blog (2026-05-29)",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "page": "The AI Tells Are in the Story",
+   "quote": "AI explains. Humans imply.",
+   "angle": "novelists,"
+  },
+  {
+   "index": 123,
+   "feature": "pet words",
+   "claim": "A cluster of grandeur nouns and verbs (testament, pivotal, delve, intricate, realm) co-occurs in LLM output and lends borrowed significance to flat subjects.",
+   "source": "Wikipedia editors, Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "page": "Wikipedia:Signs of AI writing",
+   "quote": "enduring testament to the influence of Italian colonial",
+   "angle": "novelists,"
+  },
+  {
+   "index": 129,
+   "feature": "metaphor",
+   "claim": "AI stacks multiple comparisons onto one concept and overloads description with redundant sensory 'eyeball kicks'.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "page": "How to Identify AI-Written Web Fiction",
+   "quote": "",
+   "angle": "novelists,"
+  },
+  {
+   "index": 131,
+   "feature": "emotion rendering",
+   "claim": "AI carries emotion through bodily sensation and somatic metaphor 81% of the time versus 38% for humans, while naming emotions explicitly less often (8% vs 29%), an inversion of the usual 'AI tells emotions' assumption.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
+   "quote": "AI overwhelmingly conveys emotion through physical sensations and bodily metaphors",
+   "angle": "novelists,"
+  },
+  {
+   "index": 138,
+   "feature": "rule of three",
+   "claim": "Tricolon and stacked triplets of descriptors are overused as a default rhetorical shape.",
+   "source": "tropes.fyi AI Writing Pattern Directory",
+   "url": "https://tropes.fyi/directory",
+   "page": "Tropes - AI Writing Pattern Directory",
+   "quote": "Products impress; platforms empower",
+   "angle": "novelists,"
+  },
+  {
+   "index": 143,
+   "feature": "counter-evidence",
+   "claim": "MFA readers strongly disfavored prompted AI pastiches on stylistic fidelity (OR 0.16), but after fine-tuning on the author's corpus both MFA and general readers preferred the AI, and it was flagged as AI only 3% of the time; the tells above characterize prompted default-register output.",
+   "source": "Chakrabarty, Ginsburg, Dhillon, arXiv 2510.13939 (2025-10-15, rev 2026-03-17)",
+   "url": "https://arxiv.org/abs/2510.13939",
+   "page": "Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers",
+   "quote": "Fine-tuned outputs were rarely flagged as AI-generated (3% vs. 97%)",
+   "angle": "novelists,"
+  },
+  {
+   "index": 144,
+   "feature": "counter-evidence",
+   "claim": "2,587 lay readers rated ChatGPT rewrites of three published short stories higher on quality and absorption than the originals and identified authorship at chance; the researchers attribute this to AI being clearer and more predictable, which is the same property editors name as the gloss.",
+   "source": "Sears and Weisberg (Villanova) via earth.com report (2026-08-04)",
+   "url": "https://earth.com/news/readers-prefer-ai-generated-stories",
+   "page": "Readers rated AI stories higher than human fiction in study of 2,587 adults",
+   "quote": "People generally prefer predictability",
+   "angle": "novelists,"
+  },
+  {
+   "index": 148,
+   "feature": "subplot absence / causal tidiness",
+   "claim": "AI fiction runs one tight causal chain with far fewer subplots and more protagonist-driven resolutions than human fiction.",
+   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "tighter causal chains, more protagonist-driven resolutions",
+   "angle": "publishing"
+  },
+  {
+   "index": 149,
+   "feature": "temporal flatness",
+   "claim": "Human stories use more time jumps, flashbacks and nonlinear delay of revelation; AI stories stay chronological.",
+   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "more temporal discontinuity",
+   "angle": "publishing"
+  },
+  {
+   "index": 150,
+   "feature": "dialogue as debate",
+   "claim": "AI dialogue drifts into philosophical debate rather than character-driven exchange.",
+   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "AI dialogue more often turns into philosophical debate",
+   "angle": "publishing"
+  },
+  {
+   "index": 153,
+   "feature": "cliché / fluff",
+   "claim": "17% of professional edits to LLM prose removed clichés and filler.",
+   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509)",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "unnecessary filler",
+   "angle": "publishing"
+  },
+  {
+   "index": 160,
+   "feature": "choices per word",
+   "claim": "A 10,000-word story is ~10,000 choices; a 100-word prompt makes almost none of them, and the hardest work is shaping and refining.",
+   "source": "Lincoln Michel, 'Art Without Intention', 2024-09-04",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "shaping, honing, and refining",
+   "angle": "publishing"
+  },
+  {
+   "index": 166,
+   "feature": "AI poetry over-narrates",
+   "claim": "AI poetry submissions don't make much sense and are overly narrative.",
+   "source": "Emily Hockaday interview",
+   "url": "https://nanocrit.com/index.php/issues/issue17/An-Interview-with-Emily-Hockaday-Senior-Managing-Editor-of-Asimov-s-Science-Fiction-Magazine-by-Jason-Ellis",
+   "quote": "overly narrative in places",
+   "angle": "publishing"
+  },
+  {
+   "index": 167,
+   "feature": "bad in new ways",
+   "claim": "Clarkesworld found generated submissions were the worst ever received and failed in ways human writing does not.",
+   "source": "Neil Clarke, Clarkesworld Editor's Desk, April 2023",
+   "url": "https://clarkesworldmagazine.com/clarke_04_23/",
+   "quote": "sometimes bad in entirely new ways",
+   "angle": "publishing"
+  },
+  {
+   "index": 172,
+   "feature": "soulless product",
+   "claim": "Uncanny's editor says AI stories are obvious without detectors and produce a soulless product; they drove submissions to 2,800 in two weeks.",
+   "source": "Michael Damian Thomas, The Uncanny Valley 62, Uncanny Magazine issue 67",
+   "url": "https://www.uncannymagazine.com/article/the-uncanny-valley-62/",
+   "quote": "it creates a terrible, soulless product",
+   "angle": "publishing"
+  },
+  {
+   "index": 180,
+   "feature": "register oscillation",
+   "claim": "AI fiction swings between overwrought similes and tiny cliché sentences without a governing restraint.",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "Alternating loquacious ponderous similes and tiny sentences",
+   "angle": "publishing"
+  },
+  {
+   "index": 190,
+   "feature": "nonsensical descriptor",
+   "claim": "Fan-fiction readers flag physically meaningless description as an AI signature.",
+   "source": "Thousand Roads forum, 'Detecting AI Use in Fiction' (user Goolix)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "a jaw that was, objectively, a jaw",
+   "angle": "publishing"
+  },
+  {
+   "index": 191,
+   "feature": "emotional evasion",
+   "claim": "AI narration gestures at feeling without naming it, declining to examine emotion with specificity.",
+   "source": "Thousand Roads forum (user Negrek)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "Something he didn't have a good word for",
+   "angle": "publishing"
+  },
+  {
+   "index": 193,
+   "feature": "'Not...' fragment stacking",
+   "claim": "Successive fragments opening with 'Not' are a common LLM pattern.",
+   "source": "Thousand Roads forum (user Goolix)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "Not quite a smile. Not unkind. Not impatient.",
+   "angle": "publishing"
+  },
+  {
+   "index": 197,
+   "feature": "over-frequent model-specific words",
+   "claim": "Words like 'fluorescent', 'humming', 'particular' recur at rates traceable to a specific model's slop profile.",
+   "source": "Thousand Roads forum citing sam-paech/slop-forensics",
+   "url": "https://github.com/sam-paech/slop-forensics",
+   "quote": "heart pounding chest",
+   "angle": "publishing"
+  },
+  {
+   "index": 207,
+   "feature": "robotic but grammatical",
+   "claim": "Nvidia's ACE demo NPC lines were structurally fine yet robotic, with no personality or charm.",
+   "source": "Bradly Shankar, MobileSyrup, 2023-05-29",
+   "url": "https://mobilesyrup.com/2023/05/29/nvidia-player-ai-conversations-tech-demo/",
+   "quote": "they're undeniably robotic",
+   "angle": "publishing"
+  },
+  {
+   "index": 210,
+   "feature": "genre and tone misalignment",
+   "claim": "Narrative-design experts list AI game narrative failures: unconvincing or repetitive content, wrong genre, uneven quality across sessions, and a bias toward overly positive endings.",
+   "source": "Valdivia & Burelli, arXiv 2509.04239, 2025-09-04",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "overly positive or uninspired endings",
+   "angle": "publishing"
+  },
+  {
+   "index": 215,
+   "feature": "publisher bans are ethical not qualitative",
+   "claim": "Paizo, Chaosium, WotC, Renegade, Stonemaier, Free League ban AI text/art on ethics and livelihood grounds; only Monte Cook Games gives a quality verdict.",
+   "source": "Geeknative roundup",
+   "url": "https://www.geeknative.com/221420/the-human-touch-the-growing-list-of-tabletop-companies-banning-ai/",
+   "quote": "exact opposite of inspiration",
+   "angle": "publishing"
+  },
+  {
+   "index": 216,
+   "feature": "AI RPG text stagnant and obvious",
+   "claim": "RPG crowdfunding backers report AI-written project text is easy to catch and has not improved in three years; human creators now fear tripping the same alarm.",
+   "source": "EN World, 'AI is destroying crowdfunding' (user Agamon, 2026-08-25)",
+   "url": "https://www.enworld.org/threads/ai-is-destroying-crowdfunding.720435/",
+   "quote": "it's been at the same level for three years",
+   "angle": "publishing"
+  },
+  {
+   "index": 220,
+   "feature": "false-positive hazard",
+   "claim": "A human-written indie RPG was review-bombed as ChatGPT slop because the story 'felt artificial'; reader tells fire on human work too.",
+   "source": "Outlook Respawn on Shrine's Legacy, 2025-12-15",
+   "url": "https://respawn.outlookindia.com/gaming/gaming-news/shrines-legacy-devs-deny-ai-slop-chatgpt-rumors",
+   "quote": "the story felt artificial",
+   "angle": "publishing"
+  },
+  {
+   "index": 223,
+   "feature": "em dash",
+   "claim": "Google Books Ngram data show em dash frequency in published books has stayed high for centuries, so ChatGPT is mirroring professional convention rather than exhibiting a machine signature.",
+   "source": "SALT.agency — Sarah Mitchell, 2026-01-29",
+   "url": "https://salt.agency/blog/in-defence-of-the-em-dash-what-the-ai-writing-debate-gets-wrong/",
+   "page": "In Defence of the em dash",
+   "quote": "There is no simple formula for detecting AI writing.",
+   "angle": "the"
+  },
+  {
+   "index": 225,
+   "feature": "em dash",
+   "claim": "Measured human em dash density (mean 3.23, range 0.33–17.12 per 1,000 words) envelops the LLM range (0.0–10.62 across twelve models), and the rate is a provider-specific fine-tuning artifact, with Llama's RLHF suppressing it to zero.",
+   "source": "arXiv 2603.27006 — E. M. Freeburg, The Last Fingerprint",
+   "url": "https://arxiv.org/html/2603.27006v1",
+   "page": "How Markdown Training Shapes LLM Prose",
+   "quote": "a diagnostic signature of how a model was fine-tuned",
+   "angle": "the"
+  },
+  {
+   "index": 227,
+   "feature": "em dash",
+   "claim": "Heavy em dash use in contemporary fiction has been taught by New York editors since the 1990s, and the tells cited against Shy Girl (flat voice, improbable similes, em dashes) equally fit unedited, neurodivergent or ESL human writing.",
+   "source": "Anne R. Allen, 2026-03-28",
+   "url": "https://annerallen.com/2026/03/does-the-shy-girl-ai-accusation-mean-writers-should-stop-using-the-em-dash/",
+   "page": "Does the Shy Girl Mess Mean We Give Up the Em Dash?",
+   "quote": "also be attributed to amateurish or unedited writing",
+   "angle": "the"
+  },
+  {
+   "index": 235,
+   "feature": "vocabulary (delve)",
+   "claim": "Nigerian and other British-colonial-educated English speakers use 'delve' as an ordinary word from school onward, so a single-word tell convicts entire human dialects.",
+   "source": "Vanguard (Nigeria), 2024-04",
+   "url": "https://www.vanguardngr.com/2024/04/nigerians-tackle-american-author-for-claiming-delve-is-only-used-by-chatgpt/",
+   "page": "Nigerians tackle American author for claiming 'delve' is only used by ChatGPT",
+   "quote": "no one used basic words like 'delve'",
+   "angle": "the"
+  },
+  {
+   "index": 236,
+   "feature": "vocabulary (delve) — counter-counter",
+   "claim": "Corpus analysis finds the 21 LLM focal words (delve, intricate, underscore, realm...) are probably not overrepresented in training data and not especially prevalent in any human English variety, undercutting the 'it's Nigerian English' defence while confirming the base-rate shift in LLM output is real and likely post-training.",
+   "source": "arXiv 2412.11385 — Juzek & Ward, Why Does ChatGPT 'Delve' So Much? (COLING 2025)",
+   "url": "https://arxiv.org/html/2412.11385v1",
+   "page": "Sources of Lexical Overrepresentation in LLMs",
+   "quote": "probably not overrepresented in the training data",
+   "angle": "the"
+  },
+  {
+   "index": 238,
+   "feature": "machine detectors (evasion)",
+   "claim": "A single 'employ literary language' self-edit prompt dropped detection of ChatGPT essays from up to 100% to up to 13% and of abstracts from 68% to 28%, so ornate prose evades detectors — the inverse of the folk tells.",
+   "source": "arXiv 2304.02819 — Liang et al., 2023",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "page": "GPT detectors are biased against non-native English writers",
+   "quote": "detection rates dropping from up to 100% to up to 13%",
+   "angle": "the"
+  },
+  {
+   "index": 244,
+   "feature": "machine detectors (theory)",
+   "claim": "Recursive paraphrasing breaks watermark, neural, zero-shot and retrieval detectors, and the best achievable detector degrades toward random as LLM text distributions approach human ones; spoofing can also make human text read as AI.",
+   "source": "arXiv 2303.11156 — Sadasivan et al., Can AI-Generated Text be Reliably Detected?",
+   "url": "https://arxiv.org/abs/2303.11156",
+   "page": "Can AI-Generated Text be Reliably Detected?",
+   "quote": "our recursive paraphrasing method can significantly reduce detection rates",
+   "angle": "the"
+  },
+  {
+   "index": 249,
+   "feature": "expert detection (contrast case)",
+   "claim": "Five heavy ChatGPT users' majority vote misclassified only 1 of 300 articles even under paraphrase and humanization, but they relied on AI vocabulary plus holistic judgments of formality, originality and clarity — not punctuation counts.",
+   "source": "ACL 2025 / arXiv 2501.15654 — Russell, Karpinska, Iyyer",
+   "url": "https://arxiv.org/abs/2501.15654",
+   "page": "People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text",
+   "quote": "misclassifies only 1 of 300 articles",
+   "angle": "the"
+  },
+  {
+   "index": 253,
+   "feature": "originality (where the gap actually sits)",
+   "claim": "Ten professional writers applying a 14-test Torrance creative-writing rubric found LLM stories pass 3–10x fewer tests than professionals', with the deficit in originality and elaboration rather than fluency or structure; LLM judges did not correlate with the experts.",
+   "source": "CHI 2024 / arXiv 2309.14556 — Chakrabarty et al.",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "page": "Art or Artifice? Large Language Models and the False Promise of Creativity",
+   "quote": "pass 3-10X less TTCW tests",
+   "angle": "the"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 8,
+   "verdict": "PARTIAL",
+   "trueWording": "far harder to \"humanize\"",
+   "note": "Quote verbatim in the Introduction (with 'humanize' in scare quotes). §4.2 confirms 93.9% macro-F1 on style-edited stories vs 95.5% unedited, a 1.6-point drop. One precision caveat: the rewriting is LAMP span-level artifact removal performed by Gemini itself using 25 few-shot examples from professional writers on 278 Gemini stories — not rewriting by professionals, so 'professional-style rewriting' is a loose gloss.",
+   "unsupportedLimb": "\"professional-style rewriting\" — the edit was Gemini's own LAMP span-level artifact removal, not rewriting by professionals."
+  },
+  {
+   "index": 10,
+   "verdict": "PARTIAL",
+   "trueWording": "delves (r=28.0), showcasing (r=10.2), underscores (r=10.9); 66% verbs, 16% adjectives",
+   "note": "No quote supplied. Kobak et al. give delves r=28.0 and showcasing r=10.2 exactly, and 'hundreds of words have abruptly increased their frequency after ChatGPT became available'. The POS split is real but narrower than stated: 'Out of all 319 excess style words in 2024, 66% were verbs and 16% were adjectives' — style words, not all excess words. 'intricate' is the paper's own example of a style word; 'pivotal', 'realm' and 'meticulously' appear in the paper only as words identified by cited work (Liang et al. 2024b; Gray 2024) and in illustrative AI-style sentences, not in Kobak's own headline excess list.",
+   "unsupportedLimb": "the 66%-verbs/16%-adjectives split holds only of the 319 excess STYLE words, and pivotal, realm and meticulously are not in Kobak's own excess list."
+  },
+  {
+   "index": 11,
+   "verdict": "PARTIAL",
+   "trueWording": "lexical overrepresentation remains a feature of current iterations of ChatGPT",
+   "note": "Quote verbatim in §7 (sentence-internal, so lowercase 'lexical'). Appendix A's table of 21 focal words contains every word named in the claim: delve/delves/delved/delving, showcasing, underscores, intricate, garnered, boasts, groundbreaking, realm, aligns. §4 and Appendix B confirm the words are not overrepresented in pre-LLM corpora (arXiv, LCC, PubMed, Wikipedia). One hedge: the paper reports 'mixed evidence' for RLHF — 'the model testing is consistent with RLHF playing a role', not a demonstrated source.",
+   "unsupportedLimb": "\"consistent with RLHF as the source\" — the paper reports mixed evidence, only that testing is \"consistent with RLHF playing a role\", not a demonstrated source."
+  },
+  {
+   "index": 12,
+   "verdict": "PARTIAL",
+   "trueWording": "wary of the word \"delve\"",
+   "note": "Verbatim in the Introduction ('participants became wary of the word \"delve\" in the first sentence of an abstract') and echoed in §6 as 'Wariness about the word \"delve\"'. Caveat on the second half: the paper's line about judging on words rather than content is a speculation about rushed, underpaid RLHF evaluators — 'Rushed human evaluators might base their evaluations on the presence of particular words rather than on content' — not a finding about readers generally.",
+   "unsupportedLimb": "\"readers may judge a text on those words rather than its content\" — the paper says this of rushed RLHF evaluators, not of readers generally."
+  },
+  {
+   "index": 22,
+   "verdict": "PARTIAL",
+   "trueWording": "tend to fall short in terms of novelty, surprise and diversity",
+   "note": "Quote matches word for word. The abstract also confirms the design (60 LLMs, 60 people, five-sentence cue-word task) and the comparison class ('average human writers'). Caveat: the p-value range (p<0.05 to p<0.0001) does not appear anywhere on this abstract-only page, and 'diversity' is not broken out into lexical vs semantic.",
+   "unsupportedLimb": "the p<0.05-to-p<0.0001 range and the lexical-vs-semantic split of diversity appear nowhere on the cited abstract page."
+  },
+  {
+   "index": 23,
+   "verdict": "PARTIAL",
+   "trueWording": "LLMs generate stylistically complex stories, but tend to fall short",
+   "note": "The quoted wording is not on the page. The core proposition — more complex yet less creative — is supported: the abstract says LLMs 'generate stylistically complex stories, but tend to fall short in terms of novelty, surprise and diversity,' and lists linguistic complexity among the measured dimensions. The specific verbosity evidence (unique words, dependency path length, noun and adjective counts) is absent; searches for 'verbos', 'unique words', 'dependency', 'noun', 'adjective' returned zero hits.",
+   "unsupportedLimb": "the verbosity evidence (more unique words, longer dependency paths, more nouns and adjectives) is absent from the page — zero hits on every search term."
+  },
+  {
+   "index": 25,
+   "verdict": "CONTRADICTED",
+   "trueWording": "collectively a narrower scope of novel content is produced",
+   "note": "Quote matches word for word, and the page is confirmed as Doshi & Hauser (Science Advances, GPT-4 ideas). Concentration of individual gains among low-creativity writers is supported ('especially among less creative writers'). IMPORTANT CORRECTION: 10.7% is misdescribed. The paper says the similarity increase 'represents 10.7% and 8.9% of the total range' of similarity scores (an 8.10-point range) — not that stories were 10.7% more similar to one another. Separately, 5.2% more similar to the AI ideas is the ONE-idea condition; the five-idea condition is 5.0%. A different 10.7% elsewhere on the page refers to novelty gains for low-DAT writers, which may be the source of the conflation.",
+   "unsupportedLimb": "\"stories 10.7% more similar to one another\" — the paper's 10.7% is a share of the similarity score's total range, not a similarity increase, and 5.2% is the one-idea condition alone."
+  },
+  {
+   "index": 33,
+   "verdict": "PARTIAL",
+   "trueWording": "\"informationally dense, noun-heavy style\"",
+   "note": "Quote appears verbatim twice. Figures confirmed: nominalizations 'at 1.5 to 2 times the rate of humans' generally, and for GPT-4o specifically ''that' clauses as subject 2.6 times as often (d=0.77), nominalizations 2.1 times as often (d=1.23), and phrasal coordination 1.9 times as often (d=0.81)'. Two glosses: the 2.6x and 1.9x figures are GPT-4o-specific, not all instruction-tuned models; and 'academic' is the claim's word, not the paper's, though the paper does attribute the style to instruction tuning across a diverse array of genres.",
+   "unsupportedLimb": "the 2.6x \"that\"-clause and 1.9x phrasal-coordination rates are GPT-4o-specific, not all instruction-tuned models, and \"academic\" is not the paper's word."
+  },
+  {
+   "index": 37,
+   "verdict": "PARTIAL",
+   "trueWording": "\"a word like unspoken occurs in about 15% of LLM-generated responses\"",
+   "note": "No quote supplied, but both halves are explicit in Section 5.3: 'Figure 6 shows how a word like unspoken occurs in about 15% of LLM-generated responses. Similarly phrases such as weight of, sense of, mix of occur very rarely or not at all in original seed paragraphs... while they occur frequently in LLM-generated responses.' One imprecision: the paper reserves 'syntactic templates' for its part-of-speech n-gram analysis (Table 8) and files these three phrases under recurrent awkward words/phrases; the claim merges the two.",
+   "unsupportedLimb": "\"templates\" — the paper files \"sense of / weight of / mix of\" under recurrent awkward words and phrases, reserving \"syntactic templates\" for its POS n-gram analysis."
+  },
+  {
+   "index": 40,
+   "verdict": "PARTIAL",
+   "trueWording": "\"LLM-generated stories lead to 7–9 higher drop ratio than human-written ones\"",
+   "note": "No quote supplied. Figure confirmed in Section 5 (the page literally reads '7–9 higher drop ratio', the multiplication sign apparently lost in the HTML build). Mechanism supported: 'a high drop ratio indicates that the Sui Generis score decreases immediately after the peak at position i, without progressively unraveling the surprising plot,' associated with 'abrupt resolutions that leave key suspenseful plot elements unresolved.' Slight tension in the claim's gloss: the paper's drop measures a surprising element being dropped or hastily closed off, sometimes left unresolved, rather than strictly 'resolved'.",
+   "unsupportedLimb": "\"resolved immediately after it peaks\" — the paper's drop measures an element dropped or hastily closed off, sometimes left unresolved, not strictly resolved."
+  },
+  {
+   "index": 42,
+   "verdict": "PARTIAL",
+   "trueWording": "\"a substantial advancement (i.e., early occurrence) of TP4 and TP5\"",
+   "note": "The quote 'higher levels of suspense' IS verbatim ('human-written stories consistently exhibit higher levels of suspense'), as is the widening gap ('the gap begins to enlarge as the plot progresses from the midpoint (0.5 relative position) towards the end'). Downgraded from VERBATIM because the claim's magnitude is unsourced: the strings '10%' and '15%' appear nowhere in the paper, and the earlier arrival of Major Setback (TP4) and Climax (TP5) is reported only qualitatively plus a violin plot (Figure 2) with no numeric positions. The '10–15% earlier' figure appears to be eyeballed from that figure.",
+   "unsupportedLimb": "\"about 10–15% earlier\" — the strings 10% and 15% appear nowhere in the paper; the advancement of TP4/TP5 is reported only qualitatively and in a violin plot."
+  },
+  {
+   "index": 47,
+   "verdict": "PARTIAL",
+   "trueWording": "less conflict-driven social dynamics",
+   "note": "arXiv 2510.18932v1, Nonaka & Perry. Quote verbatim. Table 1 in the raw HTML confirms density 0.338–0.470 vs human 0.182, clustering 0.623–0.766 vs 0.485, human mean edge weight −0.061 ('the only negative average edge weight'). ONE CORRECTION: the LLM edge-weight range is 0.235–0.659 (GPT-4o Mini = 0.235), not 0.236–0.659. Human corpus is confirmed science fiction (Project Gutenberg, genre-filtered, n=168). 'Far less variability' is supported by the paper's framing — 'LLMs have connectivity measure scores that cluster closely, while human-written stories are dispersed' — though per-metric SDs are mixed (human density SD 0.056 is actually lower than every model's).",
+   "unsupportedLimb": "the LLM edge-weight floor is 0.235 (GPT-4o Mini), not 0.236, and \"far less variability\" is not borne out per-metric — human density SD (0.056) is lower than every model's."
+  },
+  {
+   "index": 52,
+   "verdict": "PARTIAL",
+   "trueWording": "roughly twice the human baseline",
+   "note": "arXiv 2609.02482v1, Rohrbacher, Nieth, Salin, Eskofier & Mahlberg. Verbatim: 'Whereas human-authored fiction shows normalized frequencies of around 0.19 in both languages, all four models exceed this level, with GPT 4.1 reaching around 0.47 in English and 0.38 in German, roughly twice the human baseline.' CAVEAT on the second half: the action-space deficit is not universal — 'GPT 4.1 is the only model that remains close to or above the human baseline'; Gemma 3, Mistral 3.2 and LlaMA 3.3 fall below it. The abstract's own framing does support the substitution claim: humans 'predominantly employ action space ... whereas LLMs systematically overproduce perceived space, emphasizing atmosphere and affect.'",
+   "unsupportedLimb": "the action-space deficit is not universal — GPT 4.1 stays close to or above the human baseline; only Gemma 3, Mistral 3.2 and LlaMA 3.3 fall below it."
+  },
+  {
+   "index": 59,
+   "verdict": "PARTIAL",
+   "trueWording": "GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3",
+   "note": "arXiv 2407.01119v2, Marco, Gonzalo, Mateo & Ramón del Castillo. Quote verbatim ('In all dimensions, GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3.'). Verified: 'We recruited six literary experts'; the task is 600-word synopses of imaginary movie titles, so 'synopses' is correct; 'Pron's creativity score is particularly high (average of 1.94)'; 'GPT-4 scores are particularly low in style originality (0.36 in Spanish and 0.63 in English), where Pron gets 1.70'. CAVEAT: the two GPT-4 creativity figures (0.97 English, 0.88 Spanish) do NOT appear anywhere in the page text — the text says only that Pron's 1.94 'roughly doubles GPT-4 creativity scores in English and Spanish'. Those values presumably sit inside Figure 1, which is an image and not machine-readable, so they are consistent with but not confirmable from the page.",
+   "unsupportedLimb": "the GPT-4 creativity figures 0.97 (English) and 0.88 (Spanish) do not appear anywhere in the page text; they sit inside a non-machine-readable figure."
+  },
+  {
+   "index": 65,
+   "verdict": "PARTIAL",
+   "trueWording": "Humans retain an edge in creativity",
+   "note": "Quote is word for word in the abstract on the ACL Anthology landing page. That page carries the abstract only — none of the numbers are on it — so I additionally pulled the paper PDF (aclanthology.org/2023.findings-emnlp.966.pdf), Table 2, which confirms every figure: chatgpt-gpt4 overall 80.2±7.3 vs human 70.1±17.4; item 7 (epic-genre habitation) 8.1±1.4 vs 4.9±2.1; item 5 (creativity/originality) human 8.0±2 vs 7.6±1; item 10 (dark humor) human 6.4±3.4 vs 6.0±2.8. Human stories were by five different writers. One imprecision: humans also edged GPT-4 on humor (6.4 vs 6.0), so 'led only on originality' is not strictly true, though the claim itself calls humor near-tied.",
+   "unsupportedLimb": "\"humans led only on originality\" is not strictly true — humans also edged GPT-4 on humor, 6.4 vs 6.0."
+  },
+  {
+   "index": 68,
+   "verdict": "PARTIAL",
+   "trueWording": "less variation when compared to human-generated sentences",
+   "note": "Quote is word for word. Same sentence continues: 'the models exhibit a higher frequency of sentence generation within the 10 to 30 token range compared to humans'. Caveat on the STTR pair: Table 2 gives Human 0.491 and six models at 0.452 / 0.424 / 0.460 / 0.457 / 0.461 / 0.466 — 0.424 is Falcon-7B alone, the lowest model, not an LLM-wide value; the LLM range is 0.424-0.466. Direction of the claim ('lexical richness is lower') holds for all six.",
+   "unsupportedLimb": "STTR 0.424 is Falcon-7B alone, the lowest model, not an LLM-wide value; the model range is 0.424–0.466."
+  },
+  {
+   "index": 69,
+   "verdict": "PARTIAL",
+   "trueWording": "Humans exhibit stronger fear and disgust, less joy",
+   "note": "No quotation supplied. Conclusion states: 'Humans tend to exhibit stronger negative emotions (such as fear and disgust) and less joy compared to text generated by LLMs'; 'LLM outputs use more numbers, symbols and auxiliaries ... as well as more pronouns'; 'The sexist bias prevalent in human text is also expressed by LLMs, and even magnified in all of them but' Falcon 7B. Table 9: human male-female pronoun ratio 1.71, exceeded by every model except Falcon 7B, which reduces the bias by 7.5% — the one exception the claim's blanket 'magnify' elides.",
+   "unsupportedLimb": "the blanket \"magnify male-pronoun bias\" elides Falcon 7B, the one model that reduces the bias (by 7.5%)."
+  },
+  {
+   "index": 70,
+   "verdict": "PARTIAL",
+   "trueWording": "a broader and flatter distribution",
+   "note": "Quote word for word: human texts 'exhibit greater variability in length, characterized by a broader and flatter distribution. In contrast, AI-generated texts ... are more uniform, clustering closely around the average.' Table 3 confirms all three ranges, but ONLY in the factual-news columns: informal -54.42/-55.99/-72.22%, posemo +114.19/+119.22/+132.96%, certain +152.49/+142.86/+111.00%. The fake-news columns are materially lower (posemo +69.96 to +78.95%, certain +21.43 to +39.11%), so the claim should be scoped to factual news. Source confirmed as Rodrigues, Sturm & Pinheiro, iScience 2026 Feb 12;29(3):114976, European Portuguese.",
+   "unsupportedLimb": "the 54–72% / 114–133% / 111–152% ranges hold only in the factual-news columns; the fake-news columns are materially lower (posemo +70 to +79%, certain +21 to +39%)."
+  },
+  {
+   "index": 78,
+   "verdict": "PARTIAL",
+   "trueWording": "illogical in hindsight",
+   "note": "Quote is a verbatim annotation tag in the paper PDF. Body: 'as 32% of generations rated by at least one player are deemed illogical upon reading the next utterance' - the claim's '32% of GPT-4 game lines' drops the 'rated by at least one player' qualifier, a mild overstatement. Faction example confirmed: generation 'does not conform to the game's notion of an ultra-liberal character'.",
+   "unsupportedLimb": "\"32% of GPT-4 game lines\" drops the paper's \"rated by at least one player\" qualifier — a mild overstatement."
+  },
+  {
+   "index": 82,
+   "verdict": "PARTIAL",
+   "trueWording": "preliminary end-to-end experiments revealed these shortcomings, say the authors",
+   "note": "MISATTRIBUTION. The quoted string is verbatim on the page, but it describes the AUTHORS' OWN preliminary experiments: 'Our preliminary experiments with this end-to-end approach revealed suboptimal results. The generated screenplays often suffer from a lack of thematic focus, out-of-character dialogue, and insufficient character development.' The blind evaluation by 'over 20 experienced screenwriters' (professional Chinese television drama screenwriters) produced the Expert Score / 75% win rate, not this defect list. 'Mimicking screenplay style without conciseness or visual language' is also the authors' intro framing: 'outputs that superficially mimic screenplay style but lack the conciseness, visual language, and structural integrity'.",
+   "unsupportedLimb": "the defect list is misattributed — thematic focus, out-of-character dialogue and thin character development come from the authors' own preliminary experiments, not from the blind screenwriter evaluation."
+  },
+  {
+   "index": 83,
+   "verdict": "PARTIAL",
+   "trueWording": "some studies identifying trends toward overly positive or uninspired endings",
+   "note": "MISATTRIBUTION. Quote is verbatim but is the authors citing prior literature in the introduction ('with some studies identifying trends toward overly positive or uninspired endings [13]'), not something the expert panel recorded. 'Unconvincing, repetitive, or misaligned with the desired tone or character development' is likewise the authors' framing in the introduction. Only the genre element is genuinely a panel finding: 'experts raised concerns about the degree to which the story aligns with, subverts, or engages with genre conventions'.",
+   "unsupportedLimb": "misattributed — \"unconvincing, repetitive, tonally misaligned\" and \"overly positive or uninspired endings\" are the authors citing prior literature; only the genre item is an expert-panel finding."
+  },
+  {
+   "index": 85,
+   "verdict": "PARTIAL",
+   "trueWording": "The craft was polished ... but the humanity was difficult to find",
+   "note": "No quote was supplied, so verbatim cannot apply. Mary Kole's guest post (August 13 2026) supports the substance: 'At first glance, both looked very polished'; 'The craft was polished ... but the humanity was difficult to find'; 'Instead of having an [author's intention to serve]'. Two attribution caveats: 'soulless' is Josh Bernoff quoted inside Kole's post ('They are also soulless'), and 'no subtext, no psychological reasoning behind it' is a reader comment by Sarah Chauncey that Kole endorses in reply ('No subtext is a great call').",
+   "unsupportedLimb": "\"soulless\" is Josh Bernoff quoted inside the post and \"no subtext, no psychological reasoning\" is a reader's comment, not the cited editor's own observations."
+  },
+  {
+   "index": 88,
+   "verdict": "PARTIAL",
+   "trueWording": "No one has verbal tics, dialect, or pattern of evasion",
+   "note": "No quote supplied. Page: 'Dialogue flattening: characters sound alike; no distinct idiolect. No one has verbal tics, dialect, or pattern of evasion' and 'As-you-know-Bob exposition: the model's default is to resolve mysteries with explanatory speech rather than action.' The clause 'everyone says what they mean' is the claimant's gloss - it is not stated on the page.",
+   "unsupportedLimb": "\"everyone says what they mean\" is the claimant's gloss and is not stated on the page."
+  },
+  {
+   "index": 89,
+   "verdict": "PARTIAL",
+   "trueWording": "AI dialogue serves philosophical debate more often (59% vs. 34%)",
+   "note": "No quote supplied. The abs page carries the abstract only; the figures are in the full text of the same paper (arxiv.org/html/2604.03136v6): section 4.1 'AI dialogue serves philosophical debate more often (59% vs. 34%)' and Table 16 'Dialogue Function -> philosophical debate 34% [human] 59% [AI]'. Numbers exact. The claim's word 'expository' is a gloss; the paper's feature is 'philosophical debate' as a dialogue function.",
+   "unsupportedLimb": "\"expository\" is the claim's gloss; the paper's feature is \"philosophical debate\" as a dialogue function."
+  },
+  {
+   "index": 94,
+   "verdict": "PARTIAL",
+   "trueWording": "that average is equivalent to the least interesting choices possible",
+   "note": "ATTRIBUTION DEFECT. Quote is word for word on the LitReactor page, but the page presents it as Ted Chiang's, quoted from The New Yorker — not Nick Bailey's own wording: 'As Ted Chiang from The New Yorker puts it: \"AI has to fill in the choices you are not making... that average is equivalent to the least interesting choices possible.\"' Cite Chiang (via LitReactor), not Bailey.",
+   "unsupportedLimb": "attribution — the wording is Ted Chiang's, quoted by LitReactor from The New Yorker, not the cited author's own."
+  },
+  {
+   "index": 95,
+   "verdict": "PARTIAL",
+   "trueWording": "art is something that results from making a lot of choices",
+   "note": "ATTRIBUTION DEFECT, same shape as index 94. Quote is word for word (source lowercases 'art') but it is Ted Chiang's line quoted inside Lincoln Michel's essay, not Michel's. The one-choice-per-word figure is also Chiang's: 'a ten-thousand-word short story requires something on the order of ten thousand choices... a hundred-word prompt, you have made on the order of a hundred choices.' Michel's own supporting wording is 'It produces automatically, without intention.'",
+   "unsupportedLimb": "attribution — both the quoted line and the one-choice-per-word arithmetic are Ted Chiang's, quoted inside Michel's essay, not Michel's."
+  },
+  {
+   "index": 99,
+   "verdict": "PARTIAL",
+   "trueWording": "lacks emotional valence and could lull the reader to sleep",
+   "note": "Quote word for word: 'This AI \"accent\" creates text that lacks emotional valence and could lull the reader to sleep.' One wording drift in the claim: Bernoff writes 'A boring, even tone' and 'AI text tends to be predictable' — he says even TONE, not even rhythm. Say tone if quoting him on this.",
+   "unsupportedLimb": "\"even rhythm\" — Bernoff writes \"a boring, even tone\", not even rhythm."
+  },
+  {
+   "index": 102,
+   "verdict": "PARTIAL",
+   "trueWording": "the rhythm is becoming recognizable as an AI pattern",
+   "note": "QUOTE SPLICE. The quotation is word for word, but it belongs to a DIFFERENT tell: it closes the 'COMMA + LIKE or + AS IF' section and describes that construction's rhythm, not fragments or em-dashes. The claim's two structural elements are nonetheless supported elsewhere on the page: 'each sentence fragment is its own paragraph... Often these come at an end of a scene, right before a \"hook\" to read more' and, for em-dashes, 'There's one in every paragraph.' Do not attach this quote to the fragment/em-dash sentence.",
+   "unsupportedLimb": "the \"becoming recognizable as an AI pattern\" quote closes the COMMA + LIKE/AS IF section and does not attach to the fragment-paragraph or em-dash tells."
+  },
+  {
+   "index": 104,
+   "verdict": "PARTIAL",
+   "trueWording": "AI rhythm is the mechanical, metronomic quality of text",
+   "note": "Quote verbatim but truncated ('...of text generated by language models'). Figures confirmed on the page: 'GPT-4o generates approximately 85% of its sentences in the 15-28 word range' and 'Human prose, by contrast, typically spans from 4 to 55+ words without clustering around a central point.' The Gemini element is looser than the claim states: the page says 'Gemini Pro demonstrates paragraph-level rhythm... maintaining 4-5 sentences per paragraph consistently' — a sentence COUNT, not 'nearly identical length.' Vendor blog (TextSight, by its own founder/CEO), no method or sample disclosed; the unreplicated-vendor caveat in the claim is warranted and must survive.",
+   "unsupportedLimb": "\"Gemini paragraphs are nearly identical in length\" — the page reports a sentence COUNT (4–5 per paragraph), not paragraph length."
+  },
+  {
+   "index": 105,
+   "verdict": "PARTIAL",
+   "trueWording": "The constant objective correlatives and choppy cadence",
+   "note": "Quote is word-for-word (page drops leading 'The'). Enjambment is separately supported on the page: 'The terse, constantly enjambed lines lacked adjectives.' The claim's causal framing (cadence 'built from' correlatives and enjambment) is the summarizer's synthesis; the page lists them as co-occurring tells.",
+   "unsupportedLimb": "the causal framing (cadence \"built from\" objective correlatives and enjambment) is the summarizer's synthesis; the page lists them as co-occurring tells."
+  },
+  {
+   "index": 110,
+   "verdict": "PARTIAL",
+   "trueWording": "fiction repeatedly requires the significance of earlier details to be reinterpreted",
+   "note": "Verbatim in the abstract. Surprise-then-inevitable is also supported: 'events must feel both surprising in the moment and retrospectively inevitable', with 'Standard autoregressive generation... creating a practical obstacle to coordinating' them. Minor overreach: the abstract pins autoregression to challenge one only; the revaluation failure is described as unreliable long-range reasoning, so 'coordinates neither' slightly overstates.",
+   "unsupportedLimb": "\"coordinates neither well\" overstates — the abstract pins autoregression to the surprise/inevitability challenge only."
+  },
+  {
+   "index": 111,
+   "verdict": "PARTIAL",
+   "trueWording": "it loves contrived mic-drops like the last sentence",
+   "note": "Quote verbatim within that sentence. 'Force closure' and 'final lines' are the summarizer's gloss - the source is a parenthetical self-referential joke about its own last sentence, listed among LLM-poetry tells.",
+   "unsupportedLimb": "\"force closure\" and \"final lines\" are the summarizer's gloss on what the source offers as a parenthetical self-referential joke."
+  },
+  {
+   "index": 114,
+   "verdict": "PARTIAL",
+   "trueWording": "The aforementioned \"not X; Y\" is still universal",
+   "note": "No quote supplied. The page catalogues the construction and puts 'Lists of three' as the very next item in the same tell list, so the triplet adjacency holds. But the page says the construction is 'universal', never that it 'feels obligatory rather than natural' - that characterization is the summarizer's, and the nearest support is the essay calling such passages 'tryhard'.",
+   "unsupportedLimb": "\"feels obligatory rather than natural\" is the summarizer's characterization; the page says only that the construction is \"universal\"."
+  },
+  {
+   "index": 116,
+   "verdict": "PARTIAL",
+   "trueWording": "it says absolutely nothing at all",
+   "note": "Words appear verbatim but as a clause, not a sentence: 'The kind you skim past, then return only to discover it says absolutely nothing at all.' Referent nuance - that line is the article's opener about nondescript machine prose generally; the 'isn't just X; it's Y' + metaphor + tricolon template is introduced separately, credited to Elizabeth Goodspeed as 'a particularly grating pattern' with the template spelled out verbatim.",
+   "unsupportedLimb": "the \"says absolutely nothing at all\" line is the article's opener about machine prose generally, not about the \"isn't just X; it's Y\" + metaphor + tricolon template."
+  },
+  {
+   "index": 118,
+   "verdict": "PARTIAL",
+   "trueWording": "AI explains. Humans imply.",
+   "note": "Verbatim on the page, but second-hand: the Dramatica post quotes it from a reply by Mohammad Siam, X, May 27, 2026, not as its own formulation. The rest of the claim is the post's own thesis - it moves the conversation 'from punctuation to narrative construction' and quotes StoryScope's 'AI spells out meaning'.",
+   "unsupportedLimb": "attribution — \"AI explains. Humans imply.\" is quoted from a Mohammad Siam reply on X, not the Dramatica post's own formulation."
+  },
+  {
+   "index": 123,
+   "verdict": "PARTIAL",
+   "trueWording": "delve, intricate/intricacies, pivotal, tapestry, testament (realm absent)",
+   "note": "The quotation is verbatim on the page ('An enduring testament to the influence of Italian colonial rule in Somalia'), but the claim's word cluster is not fully supported: a literal search of the raw wikitext finds NO occurrence of 'realm'. 'delve' is listed only for the 2023-mid-2024 era, noted as dropping off sharply in 2025. Downgraded from verbatim because the claim asserts an unsupported member.",
+   "unsupportedLimb": "\"realm\" occurs zero times on the page, and \"delve\" is listed only for the 2023–mid-2024 era as dropping off sharply in 2025."
+  },
+  {
+   "index": 129,
+   "verdict": "PARTIAL",
+   "trueWording": "metaphors spammed in the final sentence to describe a single concept",
+   "note": "No quote was supplied. Stacking is the author's own Micro-tell wording. 'Eyeball Kicks' is named as AI overuse but the author credits Nostalgebraist for the analysis rather than arguing it himself, and notes newer models have improved at sensical metaphors - so the sensory-overload half rests on a citation, not this author's evidence.",
+   "unsupportedLimb": "the sensory-overload (\"eyeball kicks\") half rests on the author's citation of Nostalgebraist rather than his own evidence, and he notes newer models have improved."
+  },
+  {
+   "index": 131,
+   "verdict": "PARTIAL",
+   "trueWording": "AI overwhelmingly conveys emotion through physical sensations and bodily metaphors",
+   "note": "Found in the paper's full text (arxiv.org/html/2604.03136v1), not on the /abs abstract page. Both figure pairs check out: '(81% vs. 38% human)' and 'Humans use explicit emotion labels 29% of the time versus just 8% for AI.' The 'inversion of the usual assumption' framing is the claim author's gloss, not the paper's phrasing.",
+   "unsupportedLimb": "\"an inversion of the usual AI-tells-emotions assumption\" is the claim author's gloss, not the paper's framing."
+  },
+  {
+   "index": 138,
+   "verdict": "PARTIAL",
+   "trueWording": "Products impress people; platforms empower them.",
+   "note": "Quote is ALTERED, not verbatim - 'people' and 'them' were dropped. Claim substance holds: entry reads 'Overuse of the rule-of-three pattern, often extended to four or five' and 'A single tricolon is elegant; three back-to-back tricolons (tri-tricolons) are a pattern recognition failure.' Source says stacked tricolons, not 'triplets of descriptors'.",
+   "unsupportedLimb": "\"triplets of descriptors\" — the source describes stacked tricolons (rule of three), not descriptor triplets."
+  },
+  {
+   "index": 143,
+   "verdict": "PARTIAL",
+   "trueWording": "Fine-tuned outputs were rarely flagged as AI-generated (3% vs. 97% for prompting) by leading detectors.",
+   "note": "Verified against raw arXiv abstract HTML, not just the fetch layer. Quote verbatim but truncated mid-parenthetical (drops 'for prompting'). OR=0.16 for MFA fidelity confirmed; 'Both groups preferred fine-tuned AI' confirmed. The trailing clause 'the tells above characterize prompted default-register output' is the analyst's own inference and is not in the paper.",
+   "unsupportedLimb": "the trailing clause \"the tells above characterize prompted default-register output\" is the analyst's own inference and is not in the paper."
+  },
+  {
+   "index": 144,
+   "verdict": "PARTIAL",
+   "trueWording": "Perhaps people generally prefer predictability",
+   "note": "Quote strips the hedge 'Perhaps', which carries the speculative force: 'Perhaps people generally prefer predictability, because difficult or subtle material requires more brain power.' Everything else confirmed: 2,587 adults, Sears and Deena Skolnick Weisberg at Villanova, three published stories rewritten by ChatGPT, higher quality and Story World Absorption Scale ratings, and the gloss link 'AI writing tends to be clearer, more direct and easier to process' plus 'the AI versions of our stories usually stated their themes explicitly'. One imprecision: 'at chance' is loose - experiment 2 was 39.93%, below chance ('worse than a coin flip'); only experiment 3 (51.97%) was at chance.",
+   "unsupportedLimb": "\"identified authorship at chance\" — experiment 2 was 39.93%, below chance; only experiment 3 (51.97%) was at chance."
+  },
+  {
+   "index": 148,
+   "verdict": "PARTIAL",
+   "trueWording": "AI stories show tighter causal chains, more protagonist-driven resolutions, fewer subplots, and cleaner internal acceptance.",
+   "note": "Quote verbatim (same sentence as 147). Minor drift: the claim's intensifier 'far fewer subplots' is not in the source, which says only 'fewer subplots' with no magnitude. This is a secondary source glossing StoryScope, not the paper itself.",
+   "unsupportedLimb": "the intensifier \"far fewer subplots\" is not in the source, which says only \"fewer subplots\" with no magnitude."
+  },
+  {
+   "index": 149,
+   "verdict": "PARTIAL",
+   "trueWording": "They use more temporal discontinuity, more flashbacks and nonlinear movement",
+   "note": "Quote verbatim. Delay-of-revelation half also present: 'more willing to let a revelation reshape earlier material rather than simply deliver the next clean cause in a line.' Drift: the source is strictly comparative (human stories use MORE); it never asserts the claim's absolute 'AI stories stay chronological.'",
+   "unsupportedLimb": "\"AI stories stay chronological\" — the source is strictly comparative (humans use MORE) and never asserts the absolute."
+  },
+  {
+   "index": 150,
+   "verdict": "PARTIAL",
+   "trueWording": "AI dialogue more often turns into philosophical debate.",
+   "note": "Dramatica blog (May 29, 2026) para on theme over-explanation carries the quoted sentence word for word. Caveat: the claim's contrast 'rather than character-driven exchange' is the analyst's gloss; the page does not use that phrase.",
+   "unsupportedLimb": "\"rather than character-driven exchange\" is the analyst's gloss; the page does not use that phrase."
+  },
+  {
+   "index": 153,
+   "verdict": "PARTIAL",
+   "trueWording": "Clichés (17%); 'unnecessary filler' is defined under Unnecessary/Redundant Exposition (18%)",
+   "note": "SPLIT SOURCING - the two halves come from different categories. 17% is confirmed for Clichés alone (defined as overused phrases losing original impact). The verbatim phrase 'unnecessary filler' is W2's gloss on 'fluff' inside section 4.4.2, the 18% exposition category already cited at index 152. So 'clichés and filler' at 17% conflates the 17% and 18% rows; recommend restating as clichés only.",
+   "unsupportedLimb": "\"clichés and filler\" at 17% conflates two categories — 17% is Clichés alone; filler sits under the 18% Unnecessary/Redundant Exposition row."
+  },
+  {
+   "index": 160,
+   "verdict": "PARTIAL",
+   "trueWording": "The hardest and most time-consuming part of writing is shaping, honing, and refining",
+   "note": "Quote verbatim and is Michel's own sentence. PROVENANCE CAVEAT: the choices arithmetic is not Michel's - it is a block quotation from Ted Chiang's New Yorker piece 'Why A.I. Isn't Going to Make Art', reading 'a ten-thousand-word short story requires something on the order of ten thousand choices' and 'if you supply a hundred-word prompt, you have made on the order of a hundred choices'. Attribute the arithmetic to Chiang via Michel. Also, the page says a hundred choices, not 'almost none'.",
+   "unsupportedLimb": "the ten-thousand-choices arithmetic is Ted Chiang's, block-quoted by Michel, and the page says a hundred choices, not \"almost none\"."
+  },
+  {
+   "index": 166,
+   "verdict": "PARTIAL",
+   "trueWording": "It was didn't make much sense. And then it was overly narrative in places.",
+   "note": "Quote exact. CAVEAT ON SCOPE: the example is a poem an AI generator wrote in a friend's style, posted for a laugh - NOT a slush submission. Hockaday says separately 'the poems are still bad' and that poetry submissions exist but 'there is nothing good'. Do not cite this as being about submissions.",
+   "unsupportedLimb": "scope — the poem was an AI generator's pastiche of a friend's style posted for a laugh, not a slush submission."
+  },
+  {
+   "index": 167,
+   "verdict": "PARTIAL",
+   "trueWording": "among the worst submissions we've ever received and sometimes bad in entirely new ways",
+   "note": "Quote exact. Precision note: Clarke wrote 'among the worst submissions we've ever received', not 'the worst ever received' - the claim slightly overstates.",
+   "unsupportedLimb": "\"the worst ever received\" overstates Clarke's \"among the worst submissions we've ever received\"."
+  },
+  {
+   "index": 172,
+   "verdict": "PARTIAL",
+   "trueWording": "I can't stress enough that it creates a terrible, soulless product",
+   "note": "Quote exact. 'We don't use AI detectors... AI garbage is fairly obvious' supports the no-detectors limb. Precision note: 2,800 submissions came from the open period August 25 to September 8 (15 days) and AI is called 'a big reason' for the volume, not the sole cause; page is issue Sixty-Seven as cited.",
+   "unsupportedLimb": "\"they drove submissions to 2,800 in two weeks\" — AI is called \"a big reason\", not the sole cause, and the open period ran 15 days."
+  },
+  {
+   "index": 180,
+   "verdict": "PARTIAL",
+   "trueWording": "Alternating loquacious ponderous similes and tiny sentences",
+   "note": "Exact substring in Makin's article (page continues 'made out of cliches?'). Makin writes it while deliberately imitating LLM tells; Gemini's own quoted reasoning corroborates the alternation as 'the tell-tale signature of an algorithm'. 'Without a governing restraint' is the researcher's gloss, not the page's words.",
+   "unsupportedLimb": "\"without a governing restraint\" is the researcher's gloss, not the page's words."
+  },
+  {
+   "index": 190,
+   "verdict": "PARTIAL",
+   "trueWording": "a jaw that was, objectively, a jaw",
+   "note": "Quote appears word for word twice on the thread page. ATTRIBUTION IS WRONG: it is in post #1 by Negrek (thread starter, Aug 18 2026), not Goolix. Negrek coins the phrase as a label ('the legendary phrase “a jaw that was, objectively, a jaw”'); the AI text itself reads 'a jaw that was, objectively, a really nice jaw', with Negrek's note 'a very very weird thing to write.' Goolix (post #4) does make a same-shape point about physically impossible description ('What kind of coat can conceal breadth?... its model of physical reality is wonky'), so the feature holds under Goolix too, but this quote is not his.",
+   "unsupportedLimb": "attribution is wrong — the quoted phrase is Negrek's (thread starter, post #1), not Goolix's as the row's source states."
+  },
+  {
+   "index": 191,
+   "verdict": "PARTIAL",
+   "trueWording": "Something he didn't have a good word for",
+   "note": "Exact substring in Negrek's editorial note (post #1): 'Claude is often vague. Something he didn't have a good word for, something he couldn't name.' Attribution to Negrek is correct. CAVEAT: the source frames it as generic vagueness, not specifically emotional evasion; the narrated instance is 'Shane's brain did something he didn't have a good word for'. 'Declining to examine emotion with specificity' is the researcher's gloss.",
+   "unsupportedLimb": "\"declining to examine emotion with specificity\" is the researcher's gloss; the source frames the tell as generic vagueness."
+  },
+  {
+   "index": 193,
+   "verdict": "PARTIAL",
+   "trueWording": "starting a sentence with “not”–is common with LLMs",
+   "note": "The cited three-fragment string is a COMPOSITE and appears nowhere contiguously (confirmed by raw-text scan and by independent WebFetch). The page has 'Not quite a smile.' in one excerpt and, ~10k chars later, a separate 'really Claude-y' example line: '“Not unkind. Not impatient. Just—waiting.”' The pattern claim itself is supported by Negrek's note: '[Note: This structure–starting a sentence with “not”–is common with LLMs.]' ATTRIBUTION IS WRONG: both passages are Negrek's post #1, not Goolix.",
+   "unsupportedLimb": "the three-fragment string is a composite that appears nowhere contiguously, and both passages are Negrek's, not Goolix's."
+  },
+  {
+   "index": 197,
+   "verdict": "PARTIAL",
+   "trueWording": "over-represented lexical patterns in LLM outputs",
+   "note": "ADVERSARIAL DOWNGRADE. 'heart pounding chest' IS verbatim on the repo page, but only as a throwaway illustration of what a trigram is: 'Trigrams (three-word combinations not including stop-words, e.g., heart pounding chest)'. The three words the claim names -- fluorescent, humming, particular -- appear ZERO times on the GitHub page; they come from the Thousand Roads thread's sample text (fluorescent x8, humming x4 there). The repo supports only the mechanism half: 'Analyze a model's outputs for repetitive words, bigrams, trigrams... and slop scores' and 'Cluster models based on slop profile similarity'. The quote does not evidence the claim attached to it.",
+   "unsupportedLimb": "fluorescent, humming and particular appear zero times on the cited repo page, and the quote illustrates only what a trigram is — the repo supports the mechanism half alone."
+  },
+  {
+   "index": 207,
+   "verdict": "PARTIAL",
+   "trueWording": "they're undeniably robotic, not offering any sort of personality or charm",
+   "note": "Verbatim. The 'structurally fine' half immediately precedes it: \"Jin's responses are functionally sound; there's nothing inherently wrong with them in terms of structure or grammar.\" It is the Nvidia/Convai demo (Riva, NeMo, Audio2Face) in a cyberpunk ramen diner; the page does not use the brand name 'ACE'. Bradly Shankar, May 29, 2023 -- matches.",
+   "unsupportedLimb": "the page never uses the brand name \"ACE\"; it is the Nvidia/Convai demo (Riva, NeMo, Audio2Face)."
+  },
+  {
+   "index": 210,
+   "verdict": "PARTIAL",
+   "trueWording": "trends toward overly positive or uninspired endings",
+   "note": "arXiv 2509.04239 (Valdivia & Burelli). Quote exact in Sec. I: 'with some studies identifying trends toward overly positive or uninspired endings [13], or uneven output quality across sessions [14]'. 'unconvincing, repetitive, or misaligned with the desired tone' is also verbatim earlier in Sec. I. Wrong genre is Sec. V-A: 'producing a hard-boiled detective story when a fantasy narrative is requested, was identified as a significant quality failure' -- genre alignment is a 'must-be' requirement. CAVEAT ON ATTRIBUTION: only the genre item comes from the n=10 Delphi expert panel; the endings/uneven-quality items are the paper citing prior studies [13][14], and 'unconvincing, repetitive' is the authors' own intro framing. Cite the four items as documented failures, not as one expert list.",
+   "unsupportedLimb": "only the genre item comes from the n=10 Delphi expert panel; the endings and uneven-quality items are the paper citing prior studies, and \"unconvincing, repetitive\" is the authors' intro framing."
+  },
+  {
+   "index": 215,
+   "verdict": "PARTIAL",
+   "trueWording": "describe algorithmic generation as the 'exact opposite of inspiration'",
+   "note": "Geeknative roundup by Andrew Girdwood, January 15, 2026. Quote verbatim; all six named publishers are on the page with bans on AI text and/or art (Free League's stated policy is against AI ART specifically). CAVEAT: 'ethics and livelihood grounds' is explicit for only two entries -- Free League 'citing ethical concerns regarding the livelihoods of professional illustrators' and Three Sale Studios 'considering it unethical'; Paizo, Chaosium, WotC, Renegade and Stonemaier are listed with policy content but no stated grounds, and the ethics framing otherwise comes from the article's intro and closing. 'Only Monte Cook Games gives a quality verdict' holds across the roster, though the intro separately credits Games Workshop with positioning 'human-made craftsmanship as the ultimate luxury'.",
+   "unsupportedLimb": "\"on ethics and livelihood grounds\" is explicit for only two entries — Paizo, Chaosium, WotC, Renegade and Stonemaier are listed with no stated grounds, and Free League's stated policy is against AI art."
+  },
+  {
+   "index": 216,
+   "verdict": "PARTIAL",
+   "trueWording": "it's been at the same level for three years",
+   "note": "EN World thread 'AI is destroying crowdfunding', post by Agamon dated Aug 25, 2026. Quote verbatim: 'Art, music, and I'm getting good at catching AI writing now, too. And it isn't getting any better, it's been at the same level for three years.' The second half of the claim is the same poster's earlier post: any product with 'that \"AI slop\" look to it may be instantly ignored, even when human artists are being used... I need to be very careful about art styles and anything that may trigger the AI \"spidey sense\".' Note that fear is voiced about ART styles specifically, not prose.",
+   "unsupportedLimb": "\"human creators now fear tripping the same alarm\" — the voiced fear is about ART styles, not prose."
+  },
+  {
+   "index": 220,
+   "verdict": "PARTIAL",
+   "trueWording": "a 'vibe' that the story felt artificial",
+   "note": "Outlook Respawn, Krishna Goswami, 15 Dec 2025. Quote verbatim. Shrine's Legacy by Positive Concept Games; devs state they 'worked exclusively with human talent for everything from writing to coding' and 'do not endorse generative AI and will never use it'. Page supplies the false-positive frame directly: 'A 2024 Microsoft study found that users can correctly identify AI-generated content only about 62% of the time, suggesting that \"gut feelings\" about art or dialogue are frequently wrong.' Precision note: the ChatGPT accusation came from one 'belligerent review' saying the narrative was 'made in ChatGPT'; the felt-artificial vibe is from OTHER reviews, so 'because' overstates a single causal chain.",
+   "unsupportedLimb": "\"because the story felt artificial\" overstates a single causal chain — the ChatGPT accusation was one belligerent review; the felt-artificial vibe came from other reviews."
+  },
+  {
+   "index": 223,
+   "verdict": "CONTRADICTED",
+   "trueWording": "em dash still far outstrips the semi-colon and exclamation mark",
+   "note": "SALT.agency, Sarah Mitchell, January 29, 2026. The supplied quote IS on the page word for word, but it supports a DIFFERENT point (detector unreliability), not the Ngram claim -- so it cannot be cited as evidence for this claim. The Ngram substance is on the page: a 'Google Books Ngram graph comparing the frequencies of the em dash (in blue), semi-colon (red) and exclamation point (green) in books published between 1500 and 2022', plus 'precious little evidence that ChatGPT does use the em dash too frequently; or at least more frequently than the average professional writer' and the training-data argument about professionally edited pre-internet text. CONTRADICTS 'stayed high for centuries': the page states 'the frequency in usage of the em dash does drop away after the mid-'90s' -- what survives is relative dominance, not a flat curve. Re-cut the claim to the dominance wording.",
+   "unsupportedLimb": "\"em dash frequency has stayed high for centuries\" is contradicted — the page states usage \"does drop away after the mid-'90s\"; only relative dominance survives (and the supplied quote supports detector unreliability, a different point)."
+  },
+  {
+   "index": 225,
+   "verdict": "PARTIAL",
+   "trueWording": "a diagnostic signature of how a model was fine-tuned",
+   "note": "Quote exact. Every figure confirmed: 'weighted mean across our sample was 3.23 per 1,000 words (median 3.83; range 0.33-17.12)'; GPT-4.1 unconstrained 10.62; 'twelve models from five providers'; 'Meta's Llama models produce zero'; base-vs-instruct Llama 3.1 8B shows 'a latent tendency exists pre-RLHF, with the direction and magnitude of amplification determined by the fine-tuning procedure'. One loose word: 'envelops' overstates - the human range 0.33-17.12 does not reach the LLM floor of 0.0.",
+   "unsupportedLimb": "\"envelops\" overstates — the human range 0.33–17.12 does not reach the LLM floor of 0.0."
+  },
+  {
+   "index": 227,
+   "verdict": "PARTIAL",
+   "trueWording": "also be attributed to amateurish or unedited writing",
+   "note": "Quote exact (Anne R. Allen quoting Mark Williams at TNPS). New York/1990s supported: 'Because New York publishing taught us to. I first heard the term \"em dash\" ... in the mid-1990s. I'd scored an in-person critique ... by a real New York editor.' Neurodivergent/ESL supported: 'these are also the \"tells\" of an autistic or ESL writer.' One gloss: the reported tells are 'the narrative voice was all over the place', 'no emotional engagement', 'improbable similes and superfluous verbiage' - 'flat voice' is the claim's paraphrase, not the article's word.",
+   "unsupportedLimb": "\"flat voice\" is the claim's paraphrase; the reported tell is \"the narrative voice was all over the place\"."
+  },
+  {
+   "index": 235,
+   "verdict": "PARTIAL",
+   "trueWording": "no one used basic words like 'delve'",
+   "note": "Quote exact, inside a quoted tweet: 'Imagine after being force-fed colonial languages, being forced to speak it better than its owners then being told that no one used basic words like \\'delve\\' in real life. Habibi, come to Nigeria.' Ordinary-word usage is evidenced by a second tweet: 'As an ardent reader, I've been using \\'delve\\' since I was a teenager mostly in writing. Today as a teacher I use it a lot more in speaking.' 'From school onward' is the claim's gloss on that; the article never says 'school'.",
+   "unsupportedLimb": "\"from school onward\" is the claim's gloss; the article never says school."
+  },
+  {
+   "index": 236,
+   "verdict": "PARTIAL",
+   "trueWording": "probably not overrepresented in the training data",
+   "note": "Quote exact. '21 focal words' exact, and delve/intricate/underscore/realm are all in the Table 2 list. Variety claim exact in substance: 'we do not find evidence that the focal words are especially prevalent in any particular variety of English'; the Nigerian-English hypothesis is named and rejected - 'Our initial analysis of ICE does not support this hypothesis.' One hedge lost in the claim: the paper says only that 'the model testing is consistent with RLHF playing a role', weaker than 'likely post-training'.",
+   "unsupportedLimb": "\"likely post-training\" overstates the paper's hedge, that testing is only \"consistent with RLHF playing a role\"."
+  },
+  {
+   "index": 238,
+   "verdict": "CONTRADICTED",
+   "trueWording": "reduced detection rates from 100% to 13%",
+   "note": "Quote is a paraphrase, not on the page in any form; the paper reads 'a second-round self-edit prompt (\"Elevate the provided text by employing literary language\") applied to ChatGPT-3.5 significantly reduced detection rates from 100% to 13%' - no 'up to' on either figure. The abstract figures are right (68% -> 28%: 'still identified up to 68% of fake abstracts ... lowered detection rates to up to 28%') but come from a DIFFERENT prompt, 'employing advanced technical language', so the claim's 'a single \\'employ literary language\\' self-edit prompt' covering both results is wrong. Same URL caveat as 237: figures are in the full text, not the /abs/ page.",
+   "unsupportedLimb": "attributing both results to a single \"employ literary language\" prompt is wrong — the 68%→28% abstract figures come from a different prompt (\"employing advanced technical language\"), and the quote's \"up to\" phrasing is not on the page."
+  },
+  {
+   "index": 244,
+   "verdict": "PARTIAL",
+   "trueWording": "our recursive paraphrasing method can significantly reduce detection rates",
+   "note": "Quote appears word for word in the abstract, as do watermarking, neural network-based detectors, zero shot classifiers, retrieval-based detectors, and spoofing 'aimed at misclassifying human-written text as AI-generated'. Caveat: the current abstract states the theory only as 'a theoretical framework connecting the AUROC of the best possible detector to the Total Variation distance between human and AI text distributions' — the claim's gloss 'degrades toward random as distributions approach human ones' is the paper's result but is not spelled out in the abstract text now on the page.",
+   "unsupportedLimb": "\"degrades toward random as LLM text distributions approach human ones\" is not spelled out in the abstract now on the page, which states only an AUROC/Total-Variation theoretical framework."
+  },
+  {
+   "index": 249,
+   "verdict": "PARTIAL",
+   "trueWording": "misclassifies only 1 of 300 articles",
+   "note": "Quote appears word for word: 'the majority vote among five such \"expert\" annotators misclassifies only 1 of 300 articles'. Also confirmed: robustness 'even in the presence of evasion tactics like paraphrasing and humanization', and reliance on 'specific lexical clues (\"AI vocabulary\")' plus 'formality, originality, clarity'. The claim's 'not punctuation counts' is the researcher's own contrast, not a source statement; the paper simply never cites punctuation.",
+   "unsupportedLimb": "\"not punctuation counts\" is the researcher's own contrast; the paper never cites punctuation."
+  },
+  {
+   "index": 253,
+   "verdict": "PARTIAL",
+   "trueWording": "LLM-generated stories pass 3-10X less TTCW tests than stories written by professionals",
+   "note": "Quote appears word for word. Abstract confirms 'TTCW consists of 14 binary tests', 'We recruit 10 creative writers', and 'none of the LLMs positively correlate with the expert assessments'. Caveat: the dimensional gloss is only half supported - the paper states 'all models achieve their highest pass rate on the Fluency dimension' and Table 5 puts Originality lowest, but it does not single out Elaboration as a deficit (Elaboration tracks Flexibility), and it frames the gap as broad rather than concentrated.",
+   "unsupportedLimb": "the dimensional gloss is only half supported — the paper does not single out Elaboration as a deficit and frames the gap as broad rather than concentrated."
+  }
+ ]
+}

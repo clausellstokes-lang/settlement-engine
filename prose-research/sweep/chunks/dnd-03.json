@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 3,
+ "indices": [
+  809,
+  810,
+  811,
+  812,
+  813,
+  815,
+  816,
+  820,
+  821,
+  825,
+  826,
+  827,
+  829,
+  830,
+  831
+ ],
+ "claims": [
+  {
+   "index": 809,
+   "feature": "civic record register",
+   "claim": "GAZ1 gives Specularum an official census of 50.000 taken fifteen years before the setting's present.",
+   "source": "Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "quote": "the official census of 50.000 was taken 15 years ago",
+   "page": "Gaz 1 Part 4, the cities of Karameikos"
+  },
+  {
+   "index": 810,
+   "feature": "place and institution description",
+   "claim": "In GAZ1 some notable places of Karameikos merit only a paragraph of description.",
+   "source": "Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "quote": "Some merit only a paragraph",
+   "page": "Gaz 1 Part 4, the cities of Karameikos"
+  },
+  {
+   "index": 811,
+   "feature": "plainness and economy",
+   "claim": "An essayist characterises J. Eric Holmes's Basic Set prose as dispassionate, methodical and encouraging.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "His prose is dispassionate, methodical, and encouraging",
+   "page": "section 'The Translotar: J. Eric Holmes'"
+  },
+  {
+   "index": 812,
+   "feature": "edition and house style",
+   "claim": "The same essay calls the original 1974 boxed set's text dense and peculiar.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "The text in the set was dense and peculiar",
+   "page": "section 'The Translotar: J. Eric Holmes'"
+  },
+  {
+   "index": 813,
+   "feature": "plainness and economy",
+   "claim": "The same essay calls Tom Moldvay's 1981 Basic text both efficient and lyrical.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "Moldvay’s text seems both efficient and lyrical",
+   "page": "section 'The poet: Tom Moldvay'"
+  },
+  {
+   "index": 815,
+   "feature": "omission as information",
+   "claim": "The essay says Moldvay's adventures implied a cosmology, a history and a mood through their placement of statues, monsters and ruins.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "Each adventure implied a cosmology, a history, and a mood",
+   "page": "section 'The poet: Tom Moldvay'"
+  },
+  {
+   "index": 816,
+   "feature": "place and institution description",
+   "claim": "The essay says Moldvay's adventures communicated worldviews rather than merely offering maps.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "These adventures communicated worldviews, rather than merely offering maps",
+   "page": "section 'The poet: Tom Moldvay'"
+  },
+  {
+   "index": 820,
+   "feature": "civic record register",
+   "claim": "The article says Gygax's settlement populations and locations followed real-world economic maxims.",
+   "source": "John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "quote": "His settlement populations and locations followed real-world economic maxims",
+   "page": "section 'Keeping It Real'"
+  },
+  {
+   "index": 821,
+   "feature": "civic record register",
+   "claim": "The article says Gygax gave each nation its imports, exports and the trade routes used to carry them.",
+   "source": "John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "quote": "each nation's imports and exports and the trade routes they used",
+   "page": "section 'Keeping It Real'"
+  },
+  {
+   "index": 825,
+   "feature": "plainness and economy",
+   "claim": "Zeb Cook says TSR's early module settings were held to no more than what would fit on a page.",
+   "source": "David 'Zeb' Cook, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "We made no more than what we could put on a page",
+   "page": "first exchange on models of world building"
+  },
+  {
+   "index": 826,
+   "feature": "place and institution description",
+   "claim": "Cook says every early TSR module required a quick setting created only so the module could be explained.",
+   "source": "David 'Zeb' Cook, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "For every module, you had to create a quick setting",
+   "page": "first exchange on models of world building"
+  },
+  {
+   "index": 827,
+   "feature": "omission as information",
+   "claim": "Cook reports readers wrote in convinced TSR held much more setting material than the page contained.",
+   "source": "David 'Zeb' Cook, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "You obviously have a whole bunch more",
+   "page": "first exchange on models of world building"
+  },
+  {
+   "index": 829,
+   "feature": "place and institution description",
+   "claim": "Baur calls the Forgotten Realms the kitchen sink approach to world building.",
+   "source": "Wolfgang Baur, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "The Forgotten Realms is the kitchen sink approach to world building",
+   "page": "exchange on TSR settings"
+  },
+  {
+   "index": 830,
+   "feature": "plainness and economy",
+   "claim": "Baur describes a newer one-book model as providing the minimum viable world building.",
+   "source": "Wolfgang Baur, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "to provide the minimum viable world building",
+   "page": "exchange on models of world building"
+  },
+  {
+   "index": 831,
+   "feature": "place and institution description",
+   "claim": "Cook says the worst world building books he has read are literally just lists of places and people.",
+   "source": "David 'Zeb' Cook, Kobold Press world building seminar transcript, part 2, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
+   "quote": "are ones that are literally just lists of places and people",
+   "page": "exchange on conflict"
+  }
+ ]
+}

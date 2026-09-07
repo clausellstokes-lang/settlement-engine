@@ -1,0 +1,36 @@
+{
+ "role": "verifier",
+ "name": "kay",
+ "angle": null,
+ "tag": "i1022-1036",
+ "lines": 94,
+ "firstTs": "2026-09-06T23:38:08.117Z",
+ "lastTs": "2026-09-06T23:42:38.343Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 21,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.goodreads.com/book/show/104089.Tigana",
+  "https://www.goodreads.com/book/show/104101.The_Lions_of_Al_Rassan",
+  "https://www.reddit.com/r/Fantasy/comments/1bep250/is_tigana_a_good_representation_of_guy_gavriel_kay/.json?limit=500",
+  "https://www.reddit.com/r/Fantasy/comments/15u1pk0/some_thoughts_about_tigana_heavy_spoilers/.json?limit=500",
+  "https://old.reddit.com/r/Fantasy/comments/1bep250/is_tigana_a_good_representation_of_guy_gavriel_kay/",
+  "https://old.reddit.com/r/Fantasy/comments/15u1pk0/some_thoughts_about_tigana_heavy_spoilers/",
+  "https://www.reddit.com/r/Fantasy/comments/1bep250/is_tigana_a_good_representation_of_guy_gavriel_kay/",
+  "https://www.reddit.com/r/Fantasy/comments/15u1pk0/some_thoughts_about_tigana_heavy_spoilers/",
+  "https://web.archive.org/web/20250321071147id_/https://www.reddit.com/r/Fantasy/comments/1bep250/is_tigana_a_good_representation_of_guy_gavriel_kay/",
+  "https://web.archive.org/web/20250304145029id_/https://www.reddit.com/r/Fantasy/comments/15u1pk0/some_thoughts_about_tigana_heavy_spoilers/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "the `__NEXT_DATA__` apolloState `Review:` nodes, so reviewer name, star rating, date and like count were each checked against the claim), and the two Reddit threads recovered through Wayback raw captures after both `reddit.com` (403) and `old.reddit.com` (a \"Welcome to Reddit\" interstitial) blocked.",
+ "run": "wf_d76e605d-6d1",
+ "agent": "af95d71dd978e867d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_d76e605d-6d1/agent-af95d71dd978e867d.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i1022-1036.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i1105-1119",
+ "lines": 8,
+ "firstTs": "2026-09-07T03:45:44.292Z",
+ "lastTs": "2026-09-07T03:45:44.698Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 2am (America/New_York)",
+ "run": "wf_00551368-b67",
+ "agent": "a02419f8eec53237c",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-a02419f8eec53237c.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1105-1119.json",
+  "exists": false
+ }
+}

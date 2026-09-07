@@ -1,0 +1,37 @@
+# C3 ENVELOPE — the figures the green arms compute and discard
+realm settlements: 6
+
+## THE ARRIVAL (the finding beside CAP-7)
+first-filling year, per settlement (only those that ever arrive within 60 y):
+  Cairnhold    year 1   (inside the 30-year campaign)
+  Elderfen     year 12   (inside the 30-year campaign)
+  Brackwater   year 27   (inside the 30-year campaign)
+  Dunmarch     year 49   (AFTER the campaign a customer plays)
+  Ashford      year 50   (AFTER the campaign a customer plays)
+  Fallowmere   never reaches the filling band in 60 years
+within30 = 3 of 6
+within60 = 5 of 6
+crowdingLines fired over 60 years = 8
+
+## STATE MOTION (bar 0.05)
+moved 170 of 180 settlement-year transitions; share = 0.9444
+
+## DIFFERENTIATION (bar 0.10)
+  Ashford      30-year ratio 1.4750
+  Brackwater   30-year ratio 1.6531
+  Cairnhold    30-year ratio 1.1750
+  Dunmarch     30-year ratio 1.3016
+  Elderfen     30-year ratio 1.3571
+  Fallowmere   30-year ratio 1.1685
+spread = 0.4846
+
+## NO FLOOR
+settlements unmoved over 30 years: none
+
+## 60-YEAR OCCUPANCY (population / bound at year 60)
+  Ashford      start   1200  y30   1770  y60   2508  bound   3240  y60/bound 0.7741
+  Brackwater   start    320  y30    529  y60    586  bound    720  y60/bound 0.8139
+  Cairnhold    start     40  y30     47  y60     42  bound     54  y60/bound 0.7778
+  Dunmarch     start   7000  y30   9111  y60  11607  bound  15416  y60/bound 0.7529
+  Elderfen     start    700  y30    950  y60    968  bound   1190  y60/bound 0.8134
+  Fallowmere   start  30000  y30  35056  y60  40959  bound  62480  y60/bound 0.6556

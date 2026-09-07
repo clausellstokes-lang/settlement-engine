@@ -1,0 +1,27 @@
+[
+ {
+  "id": "cure-1",
+  "before": "{settlement} is getting by on not being tested. The margin has been narrowing rather than widening, and nothing in hand is closing it.",
+  "after": "{settlement} is getting by on not being tested. The margin narrows, and nothing in hand is closing it."
+ },
+ {
+  "id": "cure-2",
+  "before": "{settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.",
+  "after": "{settlement} sits open. No ground here helps the town, and everything it has must be built rather than found."
+ },
+ {
+  "id": "cure-3",
+  "before": "The town believes it could hold against the usual trouble and does not claim more than that, which is a fair reading of what it has.",
+  "after": "The town believes it could hold against the usual trouble. It claims no more, and that is a fair reading of what it has."
+ },
+ {
+  "id": "cure-4",
+  "before": "{settlement} has a line and professionals to hold it, which is real deterrence against raiding and against a conventional assault; it is not a posture rated for a long siege without stores behind it.",
+  "after": "{settlement} has a line and professionals to hold it, and that is real deterrence against raiding and a conventional assault. The posture is not rated for a long siege without stores behind it."
+ },
+ {
+  "id": "cure-5",
+  "before": "The town has no hill and no narrows and does not pretend otherwise; what {settlement} holds it holds by standing on it.",
+  "after": "The town has no hill and no narrows, does not pretend otherwise, and what {settlement} holds it holds by standing on it."
+ }
+]

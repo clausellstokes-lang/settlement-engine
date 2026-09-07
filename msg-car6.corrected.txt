@@ -1,0 +1,7 @@
+Composed landing (chair car): SK-0's full_simulation pin retires by citation and the presets table takes its place — the totals run found the packet manifest red
+
+The census-totals run refused to bank a new regression: implementationPackets IA-1 was red at the composed tip and green at the base, because DOCKET item 7 gave the whole-world soak a --preset and removed the hard-wired SIMULATION_RULE_PRESETS.full_simulation.rules literal that SK-0's requiredSymbols pins. The manifest's own law is the cure: a retired symbol is annotated retiredBy with a section citation (§899, DOCKET item 7, car 2200db6f3), never deleted, and the packet's living subject — the presets table the soak now certifies — is pinned in its place (presets: SIMULATION_RULE_PRESETS). Proof: 18/18 under the mutex (the validator CLI was invoked with a flag it does not have and printed its usage — that line is NOT a receipt; the vitest run is the only proof).
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

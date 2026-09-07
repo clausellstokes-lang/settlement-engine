@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 0,
+ "indices": [
+  940,
+  942,
+  946,
+  947,
+  948,
+  950,
+  952,
+  953,
+  954,
+  956,
+  957,
+  958,
+  959,
+  960,
+  961
+ ],
+ "claims": [
+  {
+   "index": 940,
+   "feature": "other: fabricated fact in the record",
+   "claim": "Sato reports that AI-hallmarked obituaries that reached the top of Google Search announced the death of Brian Vastag, who was alive.",
+   "source": "Mia Sato, 'The unsettling scourge of obituary spam', The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "Except Brian Vastag was very much alive",
+   "page": "body, third paragraph"
+  },
+  {
+   "index": 942,
+   "feature": "other: fabricated fact in the record",
+   "claim": "Sato reports that the near-identical generated obituaries each repeated the same wrong statement of where the deceased had lived.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "repeating inaccurate details, like where Mazur lived",
+   "page": "body, section on the Vastag/Mazur obituaries"
+  },
+  {
+   "index": 946,
+   "feature": "other: missing testimony",
+   "claim": "Sato reports the generated obituary articles carry no quotations from family or friends of the deceased.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "they lack quotes from family or friends of the deceased",
+   "page": "body, section on The Thaiger"
+  },
+  {
+   "index": 947,
+   "feature": "other: fabricated or absent citation",
+   "claim": "Sato reports the generated obituary articles cite no outside reporting although they are written in the form of news articles.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "do not cite outside reporting",
+   "page": "body, section on The Thaiger"
+  },
+  {
+   "index": 948,
+   "feature": "other: hedged non-statement",
+   "claim": "A generated obituary of a Calgary woman, quoted by Sato as a demonstration passage, ends by advising the public to await verified information instead of stating a fact.",
+   "source": "a spam obituary quoted verbatim by Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "the curious and concerned public is advised to stay tuned",
+   "page": "body, section on The Thaiger"
+  },
+  {
+   "index": 950,
+   "feature": "other: mechanism (scrape then summarise)",
+   "claim": "Sato reports that one article announcing Vastag's death appears to be an AI summary of an op-ed he co-authored with the woman who had actually died.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "appears to be an AI summary of the op-ed",
+   "page": "body, paragraph on hallmarks of AI generation"
+  },
+  {
+   "index": 952,
+   "feature": "other: kin relation corrupted",
+   "claim": "Weiss reports that Echovita's automated summary of a family-written obituary turned the dead woman's granddaughter into a grandson.",
+   "source": "Ben Weiss, 'The Morbid War Over Online Obituaries', WIRED, 26 Dec 2021",
+   "url": "https://www.wired.com/story/morbid-war-online-obituaries/",
+   "quote": "Her granddaughter became a grandson",
+   "page": "body, opening section"
+  },
+  {
+   "index": 953,
+   "feature": "other: kin omitted",
+   "claim": "Weiss reports that the same automated summary left the dead woman's children out of the list of survivors.",
+   "source": "Ben Weiss, 'The Morbid War Over Online Obituaries', WIRED, 26 Dec 2021",
+   "url": "https://www.wired.com/story/morbid-war-online-obituaries/",
+   "quote": "her children weren’t mentioned as survivors",
+   "page": "body, opening section"
+  },
+  {
+   "index": 954,
+   "feature": "other: relation category error",
+   "claim": "Weiss reports that the automated summary called the dead woman's two dogs her close friends without recording that they were dogs.",
+   "source": "Ben Weiss, 'The Morbid War Over Online Obituaries', WIRED, 26 Dec 2021",
+   "url": "https://www.wired.com/story/morbid-war-online-obituaries/",
+   "quote": "failing to note that they were dogs",
+   "page": "body, opening section"
+  },
+  {
+   "index": 956,
+   "feature": "other: garbled record register",
+   "claim": "Knibbs reports that MSN published an obituary of the former NBA player Brandon Hunter that was incoherent and oddly hostile.",
+   "source": "Kate Knibbs, 'The Bizarre Cottage Industry of YouTube Obituary Pirates', WIRED, 22 Sep 2023",
+   "url": "https://www.wired.com/story/youtube-obituary-pirates/",
+   "quote": "an incoherent and oddly hostile obituary for former NBA player",
+   "page": "body, penultimate section"
+  },
+  {
+   "index": 957,
+   "feature": "other: garbled record register",
+   "claim": "Knibbs reports that critics assumed that garbled MSN obituary had been written by AI, and that Microsoft never confirmed it.",
+   "source": "Kate Knibbs, WIRED, 22 Sep 2023",
+   "url": "https://www.wired.com/story/youtube-obituary-pirates/",
+   "quote": "critics assumed the garbled article was written by AI",
+   "page": "body, penultimate section"
+  },
+  {
+   "index": 958,
+   "feature": "other: platform policy",
+   "claim": "MyHeritage's amended terms, quoted by Russell, narrow the licence to use its records to personal, non-commercial and human use.",
+   "source": "MyHeritage terms and conditions, quoted by Judy G. Russell, 'AI meets TOS', The Legal Genealogist, 12 May 2026",
+   "url": "https://www.legalgenealogist.com/2026/05/12/ai-meets-tos/",
+   "quote": "personal, non-commercial, and human use",
+   "page": "body, MyHeritage section"
+  },
+  {
+   "index": 959,
+   "feature": "other: fabricated fact in the record",
+   "claim": "Brad Foley, opening WikiTree's style-guide question, states that Bing and ChatGPT easily generate attractive genealogical biographies full of false facts.",
+   "source": "Brad Foley, quoted in Mags Gaulden's question 'Should WikiTree have a style guide for AI generated content?', WikiTree G2G, 22 Nov 2023",
+   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+   "quote": "easily generate lovely bios with lots of false",
+   "page": "question body"
+  },
+  {
+   "index": 960,
+   "feature": "other: hedged non-statement",
+   "claim": "Brad Foley states that a single footnote meets WikiTree's current sourcing standard but is clearly not enough for a thirty-line generated biography carrying forty-five separate statements.",
+   "source": "Brad Foley, quoted in Mags Gaulden's WikiTree G2G question, 22 Nov 2023",
+   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+   "quote": "A single footnote meets current standards, but is clearly not enough",
+   "page": "question body"
+  },
+  {
+   "index": 961,
+   "feature": "other: eulogy register in the record",
+   "claim": "M Ross writes a parody line of generated biography prose in which the subject is a loving mother who always looked after her children.",
+   "source": "M Ross, answer on WikiTree G2G, 23 Nov 2023",
+   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+   "quote": "was a loving mother, she always looked after her children",
+   "page": "answer, +18 votes"
+  }
+ ]
+}

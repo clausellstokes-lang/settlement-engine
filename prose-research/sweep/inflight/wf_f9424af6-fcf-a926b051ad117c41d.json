@@ -1,0 +1,42 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i79-93",
+ "lines": 125,
+ "firstTs": "2026-09-06T17:35:10.149Z",
+ "lastTs": "2026-09-06T17:41:58.497Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 27,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://olddungeonmaster.com/2015/08/03/5e-writers-guide/",
+  "https://www.blogofholding.com/?p=8463",
+  "https://thealexandrian.net/wordpress/51393/roleplaying-games/dd-5e-2024-why-rules-glossaries-kinda-suck",
+  "https://olddungeonmaster.com/2024/10/01/dd-5-5-phb-review-playing-the-game-and-the-rules-glossary/",
+  "https://www.wargamer.com/dnd/new-players-handbook-easier",
+  "http://idlecartulary.com/2024/08/31/i-read-the-players-handbook-2024/",
+  "https://www.tenkarstavern.com/2013/03/mike-mearls-latest-legends-lore-column.html",
+  "https://www.enworld.org/threads/design-philosophy-of-5e.356173/",
+  "https://shadomain.com/tales-from-the-tavern-interview-with-scott-fitzgerald-gray/",
+  "https://screenrant.com/dnd-2024-dungeon-master-guide-future-campaigns/",
+  "https://screenrant.com/dnd-2024-dungeon-master-guide-interview-perkins-wyatt/",
+  "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+  "https://www.enworld.org/threads/monsters-more-an-in-depth-review-of-the-2025-d-d-monster-manual.710932/",
+  "https://www.thegamer.com/dungeons-dragons-dnd-2025-monster-manual-review-impressions/",
+  "https://skylandgames.wordpress.com/2017/11/13/review-xanathars-guide-to-everything/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written. All 15 URLs returned HTTP 200 on the first route (live URL with a browser user agent, read as raw stripped HTML — no summarizer, no Wayback needed, no BLOCKED).",
+ "run": "wf_f9424af6-fcf",
+ "agent": "a926b051ad117c41d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_f9424af6-fcf/agent-a926b051ad117c41d.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i79-93.json",
+  "exists": true
+ }
+}

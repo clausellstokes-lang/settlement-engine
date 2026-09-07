@@ -1,0 +1,235 @@
+{
+ "name": "dnd",
+ "chunk": 22,
+ "claims": [
+  {
+   "index": 484,
+   "feature": "place and institution description",
+   "claim": "Prince of Nothing describes T1's room descriptions as thick, indigestible paragraphs.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2021",
+   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
+   "quote": "Room descriptions in thick, indigestible paragraphs",
+   "page": "body, paragraph on early-TSR bugaboos"
+  },
+  {
+   "index": 485,
+   "feature": "other: enumerated inventory",
+   "claim": "Prince of Nothing calls T1's itemised room contents Victorian room catalogs.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2021",
+   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
+   "quote": "the odd Victorian room catalogs",
+   "page": "body, paragraph on early-TSR bugaboos"
+  },
+  {
+   "index": 486,
+   "feature": "place and institution description",
+   "claim": "Prince of Nothing says T1 presents a vast catalogue of seemingly mundane NPCs.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2021",
+   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
+   "quote": "A vast catalogue of seemingly mundane NPCs are presented",
+   "page": "body, paragraph on the village proper"
+  },
+  {
+   "index": 487,
+   "feature": "concrete sensory noun",
+   "claim": "Prince of Nothing credits T1's mundane commercial details with creating the appearance of a continuous, living world.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2021",
+   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
+   "quote": "the appearance of a world in flux, a continuous place",
+   "page": "body, paragraph beginning Little details in the village"
+  },
+  {
+   "index": 488,
+   "feature": "edition and house style",
+   "claim": "Prince of Nothing says module design after T1 became considerably sparser on starting-town detail.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2021",
+   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
+   "quote": "considerably sparser on their starting town details",
+   "page": "body, paragraph on the village proper"
+  },
+  {
+   "index": 489,
+   "feature": "withheld information and inference",
+   "claim": "John Roy credits Greyhawk author Carl Sargent with implying terrifying things using few chosen words.",
+   "source": "John Roy, D&D Beyond article on the 2024 Dungeon Master's Guide, 2024",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "quote": "implying terrifying things with a few carefully chosen words",
+   "page": "section on discovering Greyhawk"
+  },
+  {
+   "index": 490,
+   "feature": "civic record register",
+   "claim": "John Roy says the 2024 DMG's Greyhawk Gazetteer pairs each nation's description with its history of conflict.",
+   "source": "John Roy, D&D Beyond article on the 2024 Dungeon Master's Guide, 2024",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "quote": "Greyhawk Gazetteer, along with their history of conflict",
+   "page": "section on the Gazetteer"
+  },
+  {
+   "index": 491,
+   "feature": "civic record register",
+   "claim": "John Roy says Gygax gave each Greyhawk nation its imports, exports and trade routes.",
+   "source": "John Roy, D&D Beyond article on the 2024 Dungeon Master's Guide, 2024",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "quote": "imports and exports and the trade routes they used",
+   "page": "section on Greyhawk as a wargamer's setting"
+  },
+  {
+   "index": 492,
+   "feature": "civic record register",
+   "claim": "Maliszewski says GAZ1's gazetteer half covers history, politics and society plus its most important locales and NPCs.",
+   "source": "James Maliszewski, Grognardia, 2022",
+   "url": "http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html",
+   "quote": "the gazetteer proper, covering the history, politics, and society",
+   "page": "body, paragraph on the module's two sections"
+  },
+  {
+   "index": 493,
+   "feature": "civic record register",
+   "claim": "Maliszewski quotes GAZ1's cover copy promising a complete historical, economical, geographical and sociological overview.",
+   "source": "James Maliszewski, Grognardia, 2022, quoting GAZ1's cover copy (Aaron Allston, TSR, 1987)",
+   "url": "http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html",
+   "quote": "a complete historical, economical",
+   "page": "body, second paragraph"
+  },
+  {
+   "index": 494,
+   "feature": "place and institution description",
+   "claim": "Maliszewski notes GAZ1 supplies maps of typical taverns and manor houses rather than only named ones.",
+   "source": "James Maliszewski, Grognardia, 2022",
+   "url": "http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html",
+   "quote": "typical taverns and manor houses",
+   "page": "body, paragraph on the module's two sections"
+  },
+  {
+   "index": 495,
+   "feature": "civic record register",
+   "claim": "Prince of Nothing says GAZ1's focus is everything around the adventures rather than the adventure locations.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2020",
+   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
+   "quote": "everything around those adventures, setting up the framework",
+   "page": "body, third paragraph"
+  },
+  {
+   "index": 496,
+   "feature": "civic record register",
+   "claim": "Prince of Nothing names the gazetteer form's failure mode as a boring encyclopedic recitation of contradictory drivel.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2020",
+   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
+   "quote": "boring encyclopedic recitation of meaningless and sometimes mutually contradictory drivel",
+   "page": "body, third paragraph"
+  },
+  {
+   "index": 497,
+   "feature": "annalist voice and deep time",
+   "claim": "Prince of Nothing says GAZ1 gives its setting history in broad sweeping strokes.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2020",
+   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
+   "quote": "Setting history is given in broad sweeping strokes",
+   "page": "body, paragraph on setting history"
+  },
+  {
+   "index": 498,
+   "feature": "place and institution description",
+   "claim": "Prince of Nothing says GAZ1 treats the capital Specularum through neighborhoods, main streets and the ducal palace.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2020",
+   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
+   "quote": "extensive treatment in terms of neighborhoods, main streets, ducal palace",
+   "page": "body, paragraph beginning Contrary to what you might believe"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 484,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Room descriptions in thick, indigestible paragraphs",
+   "note": "Raw HTML fetched (200, 51KB) and tag-stripped. Body: 'These are the usual early TSR bugaboos with the module; Room descriptions in thick, indigestible paragraphs and notes on monster placement in rooms other then the one where the monster is actually placed...' Byline PrinceofNothing, dated 2021/07/31."
+  },
+  {
+   "index": 485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are also the odd Victorian room catalogs",
+   "note": "Same paragraph: 'There are also the odd Victorian room catalogs (i.e. this room has 23 halbeards, 315 arrows and 5 casks of oil).' The parenthetical confirms the 'itemised room contents' limb."
+  },
+  {
+   "index": 486,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A vast catalogue of seemingly mundane NPCs are presented",
+   "note": "Verbatim in the village paragraph: 'A vast catalogue of seemingly mundane NPCs are presented, but underneath the facade of rural simplicity is a web of intrigue, espionage...'"
+  },
+  {
+   "index": 487,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "creates the appearance of a world in flux, a continuous place, a living world",
+   "note": "Paragraph opens 'Little details in the village. Unscrupulous merchants that sell broken down nags... Stores with prices that are a few percentage points higher or lower then standard, availability, a lengthy list of drinks and meals at the inn. It affects gameplay but it also creates the appearance of a world in flux, a continuous place, a living world.' Both the commercial-detail limb and the continuous/living-world limb are on the page."
+  },
+  {
+   "index": 488,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "subsequent module design would be considerably sparser on their starting town details",
+   "note": "Verbatim: '...up almost half the adventure, and subsequent module design would be considerably sparser on their starting town details, but I suspect this level of detail... will come'. 'after T1' = 'subsequent'."
+  },
+  {
+   "index": 489,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Author Carl Sargent was a master at implying terrifying things with a few carefully chosen words",
+   "note": "Raw HTML fetched (200, 74KB). Byline 'by John Roy', Oct 21, 2024, title 'Greyhawk Returns in the 2024 Dungeon Master's Guide'. Sentence follows three paragraphs on the Greyhawk supplement 'Iuz the Evil', so the 'Greyhawk author' limb is supported; full page wording adds 'that suggested more than they described.'"
+  },
+  {
+   "index": 490,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "descriptions of Oerth's nations in the chapter's Greyhawk Gazetteer, along with their history of conflict",
+   "note": "Verbatim, in the 'A Battle-Ready World' section, whose preceding sentence names 'The Greyhawk campaign setting in the 2024 Dungeon Master's Guide', supporting the '2024 DMG's' limb; page continues 'and what strife they're currently facing.'"
+  },
+  {
+   "index": 491,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He provided each nation's imports and exports and the trade routes they used to transport them",
+   "note": "Verbatim in the 'Keeping It Real' section, subject 'Gygax' established two sentences earlier ('Gygax laid out not only the current nations of Oerik...'). Section heading is 'Keeping It Real', not the claim's page hint 'wargamer's setting', but the hint is not a limb of the claim."
+  },
+  {
+   "index": 492,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The first part is the gazetteer proper, covering the history, politics, and society of the Grand Duchy, including descriptions of its most important locales and NPCs",
+   "note": "Raw HTML fetched (200, 23KB). Preceding sentence 'The module is divided into two sections' supports the 'half' limb; posted by James Maliszewski."
+  },
+  {
+   "index": 493,
+   "verdict": "PARTIAL",
+   "trueWording": "the module boasted of providing 'a complete historical, economical [sic], geographical, and sociological overview'",
+   "note": "The quotation is verbatim on the page (with a bracketed [sic] after 'economical'), and the four adjectives plus 'complete... overview' all match. But the page attributes it only to 'the module boasted of providing' — it never says the wording is the cover/back-cover copy, so that attribution limb rests on outside knowledge, not this page.",
+   "unsupportedLimb": "that the quoted boast is GAZ1's cover copy"
+  },
+  {
+   "index": 494,
+   "verdict": "PARTIAL",
+   "trueWording": "Scattered throughout the module are numerous maps for use in play, like typical taverns and manor houses",
+   "note": "'typical taverns and manor houses' is verbatim. The page draws no contrast with named/specific taverns; the only contrast it makes is with the poster-sized map ('This is in addition to the large, poster-sized map of the Grand Duchy, its capital city of Specularum, and the frontier town of Threshold'), which is a different contrast from the one the claim asserts.",
+   "unsupportedLimb": "rather than only named ones"
+  },
+  {
+   "index": 495,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the focus of Gaz 1 is not on all the exciting adventure locations... but rather, everything around those adventures, setting up the framework",
+   "note": "Raw HTML fetched (200, 57KB), princeofnothingblogs 2020/03/30. Both limbs (not the adventure locations / everything around them) are in the same sentence."
+  },
+  {
+   "index": 496,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In the hands of a lesser man, a boring encyclopedic recitation of meaningless and sometimes mutually contradictory drivel",
+   "note": "Verbatim, immediately after the sentence verified for 484-index 495; 'In the hands of a lesser man' establishes it as the form's failure mode, contrasted with 'In the hands of Aaron Allston... the whole becomes compelling'."
+  },
+  {
+   "index": 497,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Setting history is given in broad sweeping strokes",
+   "note": "Verbatim at the start of its paragraph, continuing 'that serve the goal of hinting at prior ages from which the GM may readibly draw inspiration for a whole flock of dungeons.'"
+  },
+  {
+   "index": 498,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The capital city of Specularum gets an extensive treatment in terms of neighborhoods, main streets, ducal palace etc.",
+   "note": "Verbatim; the paragraph does begin 'Contrary to what you might believe there's actual content in this damn Gazzeteer as well', matching the page hint."
+  }
+ ]
+}

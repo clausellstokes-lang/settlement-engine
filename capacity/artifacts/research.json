@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 2,
+  "kind": "realm_scale_evidence",
+  "profile": "research-lit-4s",
+  "description": "The interim lit cell: three hundred years at four settlements, sized to fit a hosted six-hour job.",
+  "source": {
+    "commit": "4243bdc610fe5b380f1d0029973cf9088bae1631",
+    "dirty": false,
+    "sourceFingerprint": "fef4c11e043ecf4d639533fb5c96645f418862dc2aa16502c62d336a35bbcfb0"
+  },
+  "sourceAtCompletion": {
+    "commit": "4243bdc610fe5b380f1d0029973cf9088bae1631",
+    "dirty": false,
+    "sourceFingerprint": "fef4c11e043ecf4d639533fb5c96645f418862dc2aa16502c62d336a35bbcfb0"
+  },
+  "sourceStable": true,
+  "complete": true,
+  "mechanicalPassed": true,
+  "passed": true,
+  "casesPlanned": 1,
+  "casesCompleted": 1,
+  "matrix": [
+    {
+      "id": "research-lit-4s-300y-4s-seed1",
+      "years": 300,
+      "settlements": 4,
+      "seed": "realm-scale-research-lit-4s-300y-4s-seed1",
+      "lighting": {
+        "demographicsEnabled": true
+      }
+    }
+  ],
+  "summary": {
+    "casesPassed": 1,
+    "casesMeasured": 1,
+    "yearlyMs": {
+      "p50": 2470,
+      "p95": 2988.6000000000004,
+      "max": 3464
+    },
+    "realmBytes": {
+      "p50": 2563047,
+      "p95": 2867321.25,
+      "max": 2902602
+    },
+    "structuredCloneMs": {
+      "p50": 16.798708000103943,
+      "p95": 16.798708000103943,
+      "max": 16.798708000103943
+    },
+    "isolatedWorker": {
+      "transport": "node:worker_threads",
+      "casesMeasured": 1,
+      "browserWebWorkerMeasured": false,
+      "requestToTerminalMs": {
+        "p50": 3870.081,
+        "p95": 3870.081,
+        "max": 3870.081
+      },
+      "workerHandlerToTerminalPostMs": {
+        "p50": 3441.339,
+        "p95": 3441.339,
+        "max": 3441.339
+      }
+    },
+    "peakHeapUsedBytes": 509407024
+  },
+  "evidenceDigest": "c8205d4e1147c2fb28be42e93a4e18a753850cfa050d5a9709204527f1e3ffe0",
+  "caseReceipts": [
+    "research-lit-4s.cases/research-lit-4s-300y-4s-seed1.json"
+  ],
+  "failures": [],
+  "behavioralCertification": {
+    "schemaVersion": 5,
+    "kind": "behavioral_certification_evaluation",
+    "horizons": {
+      "useful": {
+        "years": 30,
+        "role": "A useful-campaign behavior horizon. Evidence-bearing, but not sufficient for the product certificate.",
+        "productGate": false
+      },
+      "release": {
+        "years": 100,
+        "role": "The release and endurance horizon. This is the only horizon that can earn the product certificate.",
+        "productGate": true
+      },
+      "research": {
+        "years": 300,
+        "role": "An attractor and legibility study. It diagnoses the model and never widens the launch promise by itself.",
+        "productGate": false
+      }
+    },
+    "profile": "research-lit-4s",
+    "profileEligible": false,
+    "observationsComplete": false,
+    "releaseCasesMeasured": 0,
+    "settlementYearsMeasured": 0,
+    "automatedPassed": false,
+    "humanChronicleReview": {
+      "passed": false,
+      "errors": [
+        "Human Chronicle review is missing."
+      ],
+      "review": null
+    },
+    "passed": false,
+    "checks": [],
+    "failures": [],
+    "propertiesEarned": [],
+    "claimBoundary": "This profile is regression or research evidence and cannot earn the product certificate."
+  },
+  "humanReviewEvidence": null,
+  "certificationSoakCandidate": null,
+  "completedAt": "2026-09-07T04:35:20.115Z",
+  "claimBoundary": {
+    "certificationWritten": false,
+    "manifestEntryEligible": false,
+    "reason": "This profile is regression or research evidence and cannot earn the product certificate.",
+    "workerTiming": "Worker duration is an actual Node worker_threads isolate measurement, not browser Web Worker or field-device timing."
+  }
+}

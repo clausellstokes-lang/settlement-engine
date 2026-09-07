@@ -1,0 +1,364 @@
+ 
+ The Best and Worst of Adventure Formats at Winter Fantasy 2020 | Alphastream 
+ Alphastream 
+ The Alphastream Game Design Blog
+ Home 
+ Support My Work! 
+ Subscribe to Alphastream.org! 
+ About Me 
+ RPG Streaming 
+ Resources 
+ Miniatures 
+ Ashes of Athas 
+ Available Products 
+ Contact 
+ The Best and Worst of Adventure Formats at Winter Fantasy 2020
+ The Winter Fantasy convention is one of my favorites for many reasons. Last time we talked about the qualities of my best DM . This time I want to talk about adventure format. 
+ I love DMing, and conventions allow me to learn countless
+lessons from adventure authors. One of those lessons is how to set up a great
+scene so both the DM and players will enjoy it. Sometimes, the lessons is how
+NOT to do it.
+ Organized play programs must experiment continuously. Sometimes those experiments will be immediately awesome, and sometimes they will be adjusted further over time. I’ve deliberately chosen examples from an author I greatly admire (Jeff Stevens, support his awesome work here ), a CCC program I greatly admire (Moonshaes), and an overall program I really admire (Adventurers League), from a company I greatly admire (Wizards of the Coast). I strongly recommend the Moonshaes adventures as a great campaign to purchase for ideas and to run and play.
+ It’s Not Just About Boxed Text
+ Read-aloud boxed text is a hot topic these days, with many authors for or against it. Boxed text is often too long and can stifle open play. It can put players to sleep or make them feel like the game is on rails with limited options. James Introcaso does an excellent job talking about the issues here. 
+ Boxed text, however, is only part of the way an adventure communicates what is happening to the DM, and through the DM to the players. Every part of the page or pages in a scene/encounter must be distilled and brought to life when running a cool scene. 
+ For the purposes of this blog post, I’m not concerned
+about the presence or lack of boxed text, except in one regard: If you don’t have boxed text, then the DM
+still needs some way to understand what to convey to the PCs. 
+ This article is not about boxed text. It is about how all
+parts of the adventure format can help or hinder the DM in creating great play.
+ Why We Got Here
+ D&D has often favored approaches that inhibit open play. Early editions often had almost no format at all, because the encounters themselves had so little detail. Four orcs in a room, roll initiative! The better adventures had complexity and a stronger narrative, but the format was seldom more complex than placing some words in bold. 
+ 3E was perhaps the most egregious in inhibiting open play through format. Some of the adventures really feel like a miniature battle, regardless of whether the encounter had story elements or complications. Here is an example of an encounter from Into the Darkness , a free adventure WotC created to entice players into 3E. In this example, the headers are clear and driven by the action, but the encounter itself is rather lackluster. The only option is combat and the only interesting point is how the kobolds can stay out of reach. It’s not a great encounter for new players, despite the purpose of this product!
+ From Into the Darkness , by Wizards of the Coast 
+ This next example is from a 3E published adventure, The Frostfell Rift . This one is only slightly more complex, with a small hook around the minotaur showing up a bit later. Everything is linear and predetermined, with little opportunity for player creativity. 
+ From Fantastic Locations: The Frostfell Rift , by Wizards of the Coast 
+ 4E adventures went through several style changes, but the
+format generally fit the function. While the approach in organized play could
+lead to open play, most published adventures leaned toward the 3E model. 
+ Later I will take a look at how other companies handle open play. First, let’s turn to the recent changes D&D has made to organized play format. Though the current season is 9, there were season 8 adventures at the convention.
+ Season 8 Changes
+ D&D’s organized play program, the D&D Adventurer’s League (AL), has run several experiments with how to organize information. Season 8 AL leaned heavily into the idea of moving away from boxed text and separating information into specific headings so that DMs could find the information and use it as needed.
+ Here’s the concept. You have an encounter with monsters. But, you don’t want to just drive a fight. So, you create headings that have all the ingredients, and the DM can figure out how to work them together based on what the party is doing. You further use headings like “Call to Action” to communicate player goals, and you might have “Playing the Pillars” to give DMs ideas on how to shape the adventure to parties that want more combat, more exploration, or more roleplaying. You often have a flowchart at the start of the adventure to show how the plot/encounters can branch. 
+ Season 8 required that authors use the format. This is still true for Season 9 AL content, though the format has changed a bit (for the better, mostly). 
+ One of the first examples of the season 8 format was the
+adventure Rrakkma, and you can see this format below. The encounter can provide
+open play. However, I had to read it twice to understand what is taking place, and
+many DMs will be unsure of how to play the combat developments once the mind
+flayer shows up, or how to really incorporate those different pillars.
+ From Rrakkma , by Wizards of the Coast 
+ Now let’s take a look at a Moonshae adventure. This is a great adventure with really cool scenes, but the format does it a disservice. The author has to use multiple headings, which forces them to break up the information that should be in one place. Worse still, the information ends up out of order, instead of taking place chronologically.
+ In this first example, the characters face an interesting door at the end of an underwater hallway. I am a huge fan of talking doors and what this encounter is doing. The players have to think about their character’s personality and speak from the heart. 
+ From MOON12-02, A Gift From the Queen 
+ Note how the above format makes it hard to think about what to actually say to the players to describe the door as they approach. The information is spread out. We get a description of the door under “Dimensions & Terrain,” but then we get a clarification under “Door” that it is covered in part of the wall mural, and the face is decorated with a waterfall. But we can’t just look at “Door.” You must read both places. 
+ When running season 8 adventures, you quickly learn that information can be anywhere. There could be new information about the door in any section! Indeed, the “Creatures/NPCs” section has information on when the door animates (within 5 feet) and what it says. 
+ The Playing the Pillars sidebar hits one of my pet peeves. It exists sort of just to exist, and doesn’t add a ton of value. The combat information isn’t optional. There is no combat option, as the door can’t be damaged (arguably, that information should be under “Door”). Exploration and Social also end up being seemingly truths, or maybe they really are options? It isn’t clear. Either way, I don’t consider such small things to really bring the pillars to life. This is already a role-play encounter with some exploration. What’s the point?
+ And, really, let’s take a step back. The open play here comes from the really cool concept, where players get to make a confession of sorts to an animated door and perhaps learn lore. Nothing about the format makes the play more open! 
+ The next scene in the adventure is a meeting with the
+queen, who is in a sarcophagus. Take a look at the format.
+ From MOON12-02, A Gift From the Queen 
+ Imagine you are running this. How do you describe the room to the players? The “Dimensions & Terrain” section does a decent job with the borders of the room, but the centerpiece is the coffin and the information about it is spread confusingly across several sections. It’s glass and emits light. Oh, and it’s lidless and draped in purple (wait… can we see the glass?). The coffin is on a raised altar-like pedestal. At the bottom of the first column we learn that the floor is decorated in ruby quartz.
+ Now take a look at this version, revealing a section I
+blanked out. The encounter happened to include an excerpt from a novel. It is
+the equivalent of boxed text, and it is wonderful. Not because it’s boxed text,
+but because if eschews the format and actually gathers all of the information
+in one place!
+ From MOON12-02, A Gift From the Queen 
+ The season 8 adventures I’ve seen all suffer from format. Not only does the format not offer much value, but it actively obfuscates the content and makes the adventure harder to run well at the table. 
+ A Format that Worked Well
+ The format for the current season 9 adventures is less forced than season 8 but still unnecessarily requires authors to use headings and diffuse information. I spoke to a few authors at the convention, and none of them was a fan of the format, though a few were neutral on it.
+ What was really interesting was the format for the new series of Eberron adventures from the Oracle of War campaign . This is a mini-campaign of 12 adventures, separate from the season 9 Forgotten Realms plot line. The Eberron campaign adventures are excellent for many reasons, and the format brings the positive qualities to maximum effect while making them easy to run. 
+ Interestingly, there is a high amount of open play
+(relative to D&D) in these adventures. The lack of a season 9 format is
+actually a boon to these adventures, allowing each scene to do what it needs to
+do. 
+ SPOILERS! 
+ This will be a spoiler for one aspect of the seventh
+adventure, Song of the Sky , and
+specific spoilers for one encounter. If you want to play these (and you should
+if you can), jump to the SPOILERS END section below. 
+ Okay, here comes the general spoiler. In this adventure,
+you look for an NPC. She has an agenda, and while you know the places she will
+visit, you don’t know the order. Cleverly, the later spots have ways she can
+end up slowed or stopped, so the party can catch up. I ran this twice, and the
+characters went to different places in different order, resulting in a noticeably
+different play experience that reflected their choices. It was meaningful.
+Within encounters, play opened up based on their actions, their approaches, and
+what I had learned about the party. This was top-notch adventure design.
+ Now for the specific encounter. This is one of the
+locations they can visit. 
+ From EB-07, Song of the Sky 
+ Reading through that encounter, there is a fair bit to it. One bad guy outside loading a sky car. A stairwell leading up to an apartment, with two more bad guys and the boss. We have headings, but they reflect the geography and are given in the likely order we will encounter them. Boxed text gathers what we need to start the scene off. A gear icon is standard in this adventure, referring to an element resulting from previous adventures.
+ Both preparing and running this adventure were a joy. My
+two runs were notably different, a result of the design. The format allows the
+design to shine.  
+ SPOILERS END 
+ The Key to Opening Up Play Isn’t Format
+ While format can get make it hard to have open play, it’s
+really not about headings. The main impact of that is whether the adventure is
+easy or hard to run. 
+ Open play comes from design. If we look at WotC’s own
+design for hardback books, their headings are based on the design. They don’t
+use a particular rigid format. Instead, the approach is much like the Eberron
+adventures, following the needs of the encounter. 
+ No format gets past an encounter that places four orcs in a plain room and tells the DM to roll initiative. To make that encounter different, we have to design elements that are evocative to players, stimulating them to make choices around how to interact with the encounter. Let’s take a shot at it:
+ There are four orcs in a small guardroom, surrounding a table with spilled drinks and dice. 
+ One of the orcs is accusing the other of lying about the rules of the game. 
+ The orc’s weapons are in a barrel, near where the characters enter. 
+ In this version of four orcs in a room, the players have choices. They can simply fight. They can go for the weapons. They can make a check to actually know the rules of the dice game and either calm the orcs down and befriend them or use that knowledge to cause the orcs to fight each other.
+ I’ve written and developed many D&D adventures where characters have agency and open play. It’s never been about the format. It’s about requiring the design to create open play. Open play isn’t just nonlinear play (it can be either) and it isn’t just about the pillars (though it can be helped by them). It’s about players having agency and choices, and the freedom to decide how they approach a scene. And that’s just in the D&D context.
+ If We Want Fully Open Play, D&D Adventures Must Change Drastically
+ D&D has primarily been about a series of detailed encounters. Play opportunities must often fit into that structure, which necessarily inhibits the possibilities. 
+ If we want to really open up play, we have to then write
+differently. But it isn’t about headings. It’s about the overall style. 
+ D&D has always employed a detailed prescriptive style. It almost always describes a location, everything in it, and then maybe offers some ways to open up the experience. In rare cases, larger adventure elements change based on player option (for example, in the classic adventure Temple of Elemental Evil, the party might turn one elemental cult against another). 
+ Some other RPGs use a similar format. But many RPGs use a far more open format. A scene is more like a set of ingredients, and the players are choosing which ones come forth and will get used. The GM is making decisions less on the text and far more on what the players choose to do. 
+ Here is an example of how Pelgrane Press approaches an adventure for the awesome RPG Night’s Black Agents . This is from the very fun adventure The Red Connection , which I ran two years ago at Winter Fantasy . 
+ From The Red Connection by Pelgrane Press 
+ This is actually a complex scene. A spy for the characters has alerted them that something is up. The spy is being moved by his vampire handlers from New York to London on a plane, and he has some “gift” with him to some new vampire ally. The players get to decide what to do.
+ The players have great freedom, and the GM gets a bunch of potential “ingredients” for play. One time I ran this, the players split up, with some boarding in New York and then the rest assaulting the plane right after it landed in London. Another table waited, discretely infiltrating the plane in London. Players might just tail the spy. Or they might get him at the first airport before takeoff and try to impersonate him. There are many options and the adventure is set up as a list of ingredients/options we might use or discard.
+ If they go on the plane, we have a few notes on who is there. A section I didn’t show actually has a timeline of what happens during the flight, because vampires do some creepy stuff! If the party instead attacks in London, we get info on that as well. They could even lose track of him and then find where he was taken and his eventual fate.
+ It reminds me of a Spycraft adventure, Shadow , where a guy with a briefcase spends just over a day in Spain. He has a stolen vehicle, and the heroes need to recover it. Spycraft has built in legwork skills and rules, so the scene doesn’t deal with briefing the characters. It just gives the GM basic details for the scene:
+ “ This scene is fairly free form. The only imperative is contacting Marcus to learn the information he may have as soon as possible (before the US Military), all the while not causing a scene. The listed events below are not necessarily common knowledge, but can be determined with proper role-play and investigation: 
+ The Agent’s Briefing is at Noon on Saturday. 
+ Marcus is in Jerez Spain for a football (soccer) tournament between Xerez CD and Real Madrid. 
+ He arrived Saturday and will attend Mass Sunday (he has to keep up a proper image). 
+ The tournament is Monday evening at 5:00pm. 
+ Marcus has a private Box for the tournament, which he will be sharing with select friends and playmates (yes, those kinds of playmates). 
+ Marcus left the Shadow in a shipping crate at an storage facility in Jerez, Spain (Scene 2), when he arrived on Saturday morning. 
+ Marcus leaves town that evening, heading home to Madrid (driving his Ferrari). “
+ The above is from SPY7-01, Shadow , by Crafty Games
+ We know the target is there for a soccer match, loves soccer and women and fast cars (this is all important since seduction and racing are big parts of Spycraft character builds), and a few timing details. When I played this, we spent about 2 hours going through this part. We infiltrated his room. No info was found, so our seductive spy hit on him at the hotel bar and then our driver challenged him to a race. 2 hours of open play, all based on a paragraph and some bullet points! 
+ And that’s the main point. If D&D wants to truly have big open play opportunities, it has to change its approach. It’s not about headings and similar adventure format. It’s about designing scenes where the players and their characters have the freedom to do what they want and the adventure stimulates them to do so. 
+ Your Turn
+ What do you think? Has the format of an adventure helped or hindered your attempts to run a good game? What are your favorite adventures that create open play, and what about the adventure created that?
+ Share this:
+ Email a link to a friend (Opens in new window) 
+ Email 
+ Share on X (Opens in new window) 
+ X 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ Share on Mastodon (Opens in new window) 
+ Mastodon 
+ More 
+ Share on Facebook (Opens in new window) 
+ Facebook 
+ Share on Tumblr (Opens in new window) 
+ Tumblr 
+ Share on Pinterest (Opens in new window) 
+ Pinterest 
+ Related 
+ 2 comments on “ The Best and Worst of Adventure Formats at Winter Fantasy 2020 ” 
+ Tomas Gimenez Rioja March 10, 2020
+ Great article on how to format and build great encounters! I do love creating “ingredients” as you call them in my game that the players can use in different ways and forms. As this was not enough, I learned quite a bit about how to format my adventures! Great article and I hope to see more of this kind! 🙂
+ Reply 
+ Alphastream March 10, 2020
+ Thanks so much! This kind of feedback is really useful, as it helps me think about what to discuss in upcoming weeks.
+ Reply 
+ Leave a Reply Cancel reply 
+ Your email address will not be published. Required fields are marked * 
+ Comment * 
+ Name * 
+ Email * 
+ Website 
+ Notify me of follow-up comments by email. 
+ Notify me of new posts by email. 
+ Δ 
+ Information
+ This entry was posted on February 20, 2020 by Alphastream and tagged 3E , 5E , Authoring , Conventions . 
+ Shortlink
+ https://wp.me/p6TzVY-AB 
+ Navigation
+ Previous post 
+ Next post 
+ Search for: 
+ Recent Posts
+ Join My Tables at 2026 GameHole Con! 
+ Dark Sun Returns! 
+ The Beautiful Game (Your RPG Isn’t the World Cup) 
+ How Often Should We Roll Skill Checks, If At All? 
+ How Many PCs Can Try a Skill Check? 
+ Categories
+ Campaigns 
+ Dark Sun 
+ DM Advice 
+ Featured 
+ Minis and Terrain 
+ Organized Play 
+ Player Technique 
+ Real Life 
+ Reviews 
+ RPG Industry 
+ Streaming 
+ Uncategorized 
+ Recent Comments
+ Alphastream on Join My Tables at 2026 GameHole Con! 
+ Todd Rixman on Join My Tables at 2026 GameHole Con! 
+ Alphastream on Dark Sun Returns! 
+ richgreen01 on Dark Sun Returns! 
+ abs1nth on Tomb of Annihilation comes alive with Jungle Treks! 
+ Support This Site
+ Categories
+ Campaigns 
+ Dark Sun 
+ DM Advice 
+ Featured 
+ Minis and Terrain 
+ Organized Play 
+ Player Technique 
+ Real Life 
+ Reviews 
+ RPG Industry 
+ Streaming 
+ Uncategorized 
+ Tags
+ 3E 
+ 4E 
+ 5E 
+ AD&D 
+ Ashes of Athas 
+ Authoring 
+ Backstory 
+ Basic 
+ campaigns 
+ Challenge Level 
+ Character Building 
+ Conventions 
+ Conversions 
+ Crown of Sorrow 
+ Daggerheart 
+ DDI 
+ Downtime 
+ Dragon Talk 
+ Ecology 
+ FATE 
+ Forgotten Realms 
+ Gen Con 
+ Greyhawk 
+ Horror 
+ Miniatures 
+ Monsters 
+ NPCs 
+ Numenera 
+ OD&D 
+ OGL 
+ One D&D 
+ Overland Travel 
+ Pace 
+ Playtesting 
+ Props 
+ Ravenloft 
+ RPG History 
+ Sci-Fi 
+ Setting 
+ Spelljammer 
+ Streaming 
+ Tactics 
+ Terrain 
+ Tomb of Annihilation 
+ World-building 
+ Archives
+ August 2026 
+ July 2026 
+ May 2026 
+ April 2026 
+ January 2026 
+ November 2025 
+ September 2025 
+ July 2025 
+ June 2025 
+ May 2025 
+ April 2025 
+ March 2025 
+ February 2025 
+ November 2024 
+ August 2024 
+ July 2024 
+ May 2024 
+ April 2024 
+ March 2024 
+ January 2024 
+ November 2023 
+ October 2023 
+ September 2023 
+ August 2023 
+ July 2023 
+ June 2023 
+ May 2023 
+ April 2023 
+ March 2023 
+ February 2023 
+ January 2023 
+ December 2022 
+ November 2022 
+ October 2022 
+ September 2022 
+ August 2022 
+ July 2022 
+ June 2022 
+ May 2022 
+ April 2022 
+ March 2022 
+ February 2022 
+ January 2022 
+ December 2021 
+ November 2021 
+ October 2021 
+ September 2021 
+ August 2021 
+ July 2021 
+ June 2021 
+ May 2021 
+ April 2021 
+ March 2021 
+ February 2021 
+ January 2021 
+ October 2020 
+ September 2020 
+ August 2020 
+ July 2020 
+ June 2020 
+ May 2020 
+ April 2020 
+ March 2020 
+ February 2020 
+ January 2020 
+ December 2019 
+ November 2019 
+ May 2019 
+ March 2019 
+ April 2018 
+ March 2018 
+ January 2018 
+ November 2017 
+ September 2017 
+ August 2017 
+ July 2017 
+ February 2017 
+ January 2017 
+ November 2016 
+ October 2016 
+ September 2016 
+ August 2016 
+ May 2016 
+ February 2016 
+ January 2016 
+ December 2015 
+ November 2015 
+ October 2015 
+ Mastodon
+ Follow me on 
+ Mastodon 
+ BlueSky
+ Follow me on 
+ BlueSky 
+ Privacy Policy
+ Our Privacy Policy 
+ Proudly powered by WordPress 
+ Theme: Suburbia by WPSHOWER .
+ Don't miss a post!
+ Subscribe to receive blog updates, product discounts, and new product notifications directly in your inbox!
+ Invalid email address
+ I promise not to spam you. Unsubscribe at any time. 
+ Thanks for subscribing!

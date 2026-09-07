@@ -1,0 +1,233 @@
+{
+ "name": "dnd",
+ "chunk": 1,
+ "claims": [
+  {
+   "index": 15,
+   "feature": "boxed text length and person (official 5e guidance)",
+   "claim": "D&D Beyond's official column advises boxed text of roughly four sentences under 100 words, phrased as third-person scene statements rather than 'as you enter, you notice', limited to perceivable sensory detail and excluding PC feelings, villain monologues and non-mechanical game terms.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 2019-11-06",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Read your boxed text aloud to check readability",
+   "page": ""
+  },
+  {
+   "index": 16,
+   "feature": "boxed text: appearance hedging",
+   "claim": "Boxed text should describe only what characters perceive, treating everything sensed as 'appears to be' rather than asserting hidden facts.",
+   "source": "Shawn Merwin, D&D Beyond, 2019-11-06",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Everything they sense 'appears to be' what it is",
+   "page": ""
+  },
+  {
+   "index": 17,
+   "feature": "DM-facing text: entertainment register",
+   "claim": "Chris Perkins says published adventure text should entertain the DM who reads it, seeding humour and Easter eggs so the DM is more inclined to run it, and hooks should appeal to 80–90% of players.",
+   "source": "Todd Kenreck, 'Chris Perkins on Writing Your Own Adventures', D&D Beyond, 2018-04-19",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+   "quote": "having had a few good laughs",
+   "page": ""
+  },
+  {
+   "index": 18,
+   "feature": "house-style adventure priorities",
+   "claim": "The WotC House Style Guide bundle circulated to freelancers is summarised as: focus on the characters, include a credible threat, focus on the here and now and omit verbose backstories.",
+   "source": "Mike Shea, 'On Writing Adventures', Sly Flourish, 2019-06-17",
+   "url": "https://slyflourish.com/on_writing_adventures.html",
+   "quote": "Focus on the here and now. Omit verbose backstories.",
+   "page": ""
+  },
+  {
+   "index": 19,
+   "feature": "boxed text definition (academic)",
+   "claim": "Boxed text is descriptive text in the adventure book meant to be read aloud verbatim or paraphrased, interleaved with rules references, and the DM-facing text explicitly instructs when to read or skip it.",
+   "source": "Callison-Burch et al., 'Dungeons and Dragons as a Dialogue Challenge for AI', EMNLP 2022, Appendix B",
+   "url": "https://aclanthology.org/2022.emnlp-main.637.pdf",
+   "quote": "Read the boxed text when you're ready to start.",
+   "page": ""
+  },
+  {
+   "index": 20,
+   "feature": "read-aloud text as stage direction",
+   "claim": "McKenzie treats read-aloud text as the adventure's 'at rise' stage direction, typographically set apart and read verbatim, and dates its first appearance to The Hidden Shrine of Tamoachan.",
+   "source": "Brian McKenzie, 'D&D Adventures as Tragedy', Analog Game Studies, 2023-12-18",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "hints of what may be done are given in this text",
+   "page": ""
+  },
+  {
+   "index": 21,
+   "feature": "DM preference for boxed text (designer poll)",
+   "claim": "A Jeremy Crawford Twitter poll cited by McKenzie found 59.5% of DMs prefer occasional boxed text, 34.4% want lots, and about 6% want none.",
+   "source": "Brian McKenzie, Analog Game Studies, 2023-12-18",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "occasional boxed text",
+   "page": ""
+  },
+  {
+   "index": 22,
+   "feature": "read-aloud text function and NPC action",
+   "claim": "Grouling Cover describes module read-aloud text as passages the DM is instructed to read that usually describe location but sometimes narrate NPC action, and likens it to a videogame cut-scene.",
+   "source": "Jennifer Grouling Cover, The Creation of Narrative in Tabletop Role-Playing Games (McFarland 2010), pp. 64–66, 80",
+   "url": "https://books.google.com/books?id=xl7P7GwME3gC&q=%22read+aloud%22",
+   "quote": "read aloud text that the DM is instructed to read",
+   "page": ""
+  },
+  {
+   "index": 23,
+   "feature": "second-person immersion",
+   "claim": "Grouling Cover argues second-person address pulls players directly into the storyworld, situating and immersing them, drawing on Fludernik's narratology of second-person texts.",
+   "source": "Jennifer Grouling Cover, The Creation of Narrative in Tabletop Role-Playing Games (2010), pp. 21, 85",
+   "url": "https://books.google.com/books?id=xl7P7GwME3gC&q=%22second+person%22",
+   "quote": "pulling them directly into the storyworld",
+   "page": ""
+  },
+  {
+   "index": 24,
+   "feature": "loaded adjectives in 5e adventure prose",
+   "claim": "Hines finds Tomb of Annihilation's text repeatedly uses 'tribal', 'exotic' and 'savage', and its Port Nyanzaru read-aloud leans on vague stereotypes (dinosaurs, bright clothing, click languages) rather than specific cultural detail.",
+   "source": "Mark Hines, Analog Game Studies, 2023-03-19",
+   "url": "https://analoggamestudies.org/2023/03/thats-just-what-the-book-says-game-mechanics-and-narrative-as-symbiotic-co-constructive-elements-in-tomb-of-annihilation/",
+   "quote": "heavy, characteristic accent",
+   "page": ""
+  },
+  {
+   "index": 25,
+   "feature": "DM-facing performance instructions",
+   "claim": "Hines notes DM-facing text instructs voicing Chultans with a heavy accent and tongue clicks, and reads background wording like 'correctly ascertain its original purpose' as prose that frames ruins as needing outsider validation.",
+   "source": "Mark Hines, Analog Game Studies, 2023-03-19",
+   "url": "https://analoggamestudies.org/2023/03/thats-just-what-the-book-says-game-mechanics-and-narrative-as-symbiotic-co-constructive-elements-in-tomb-of-annihilation/",
+   "quote": "correctly ascertain its original purpose",
+   "page": ""
+  },
+  {
+   "index": 26,
+   "feature": "gothic adjective register in read-aloud",
+   "claim": "Hewitt shows Curse of Strahd's Death House read-aloud builds gothic atmosphere through decay adjectives (moldy, rusty, gaunt, pale-faced, voluminous) in present-tense third-person description.",
+   "source": "Meghan Hewitt, Analog Game Studies, 2024-12-15",
+   "url": "https://analoggamestudies.org/2024/12/mechanical-storytelling-in-dungeons-and-dragons-strahd-in-relation-to-the-gothic/",
+   "quote": "festooned with moldy skeletons",
+   "page": ""
+  },
+  {
+   "index": 27,
+   "feature": "rulebook paratext / prologue fiction",
+   "claim": "Jara analyses rulebooks as framing devices whose covers, prologues, epilogues and embedded fiction shape play; storytelling-game books open with atmospheric prologue fiction, whereas the 1974 D&D booklets used such framing far less.",
+   "source": "David Jara, 'A Closer Look at the (Rule-) Books', International Journal of Role-Playing 4 (2013)",
+   "url": "https://journals.uu.se/IJRP/article/view/228",
+   "quote": "notoriously less prominent in early TRPGs",
+   "page": ""
+  },
+  {
+   "index": 28,
+   "feature": "genesic framing",
+   "claim": "Jara coins 'genesic framing' for rulebook text that discloses its own framing and incites players to produce further text, which he says accounts for the medium's persistence.",
+   "source": "David Jara, IJRP 4 (2013)",
+   "url": "https://journals.uu.se/IJRP/article/view/228",
+   "quote": "what I have called genesic framing",
+   "page": ""
+  },
+  {
+   "index": 29,
+   "feature": "visual–textual dissonance (1978 module)",
+   "claim": "Macdonell argues the 1978 Tomb of Horrors' scripted descriptions and its illustration booklet are dissonant, producing interpretive ambiguity, and that later editions removed the visual assets (abstract only; full text paywalled).",
+   "source": "Cameron Macdonell, 'Tomes and Tombs', Games and Culture, 2025",
+   "url": "https://journals.sagepub.com/doi/10.1177/15554120251368945",
+   "quote": "visual–textual dissonance produces interpretive ambiguity",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 15,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tip 5. Read your boxed text aloud to check readability",
+   "note": "Quote verbatim (Tip 5 heading). Every element confirmed on the page: 'Four sentences, and less than 100 words.'; third-person example replacing 'As you enter the clearing, you notice the bloated corpse of a headless dragon'; Tip 3 'Describe everything the characters can sense, but not what they can't'; boxed text criticised when it 'assumes a character's feelings, movements, actions, or reactions'; the four-paragraph villain 'boxed-text monologue' criticised; Tip 6 'Avoid game mechanical terms used in a non-mechanical way'. Byline 'by Shawn Merwin / Nov 6, 2019' matches. Fetched by WebFetch and re-fetched raw by curl (HTTP 200)."
+  },
+  {
+   "index": 16,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Everything they sense “appears to be” what it is.",
+   "note": "Word-for-word match; only the inner quotation marks differ (page uses curly double quotes, the claim renders them single). Full context: 'Tip 4. Avoid “seems to be” or “appears to be.” For the characters, perception is reality.' Supports the claim that boxed text should describe only what characters perceive without hedging."
+  },
+  {
+   "index": 17,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "if they come away from reading that adventure, having had a few good laughs, they're much more inclined to run it",
+   "note": "Quote verbatim, spoken by Chris Perkins. Also verbatim on the page: 'if you are going to make somebody read something for **** sakes', make it entertaining'; 'Put puns in your adventure. Put little laughs. Put little Easter eggs in your adventure.'; and 'the bait has to be something that is generally applicable ... maybe 80 or 90% of players are going to latch onto'. Byline 'by Todd Kenreck / Apr 19, 2018' matches. Note: the 80-90% line is about the adventure hook/bait, exactly as claimed."
+  },
+  {
+   "index": 18,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Focus on the here and now. Omit verbose backstories.",
+   "note": "Quote verbatim as one bullet in the article's 'D&D House Style Guide' list. Companion bullets read 'Focus on the importance of the characters.' and 'Include a solid credible threat.' — the claim's shortened wording is a fair summary, not the page's exact words. Framing confirmed: 'This free set of documents from Wizards of the Coast includes the house styles the D&D team gives to freelancers.' Byline 'by Mike on 17 June 2019' matches."
+  },
+  {
+   "index": 19,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Read the boxed text when you’re ready to start.",
+   "note": "Quote verbatim (curly apostrophe) inside Appendix B, 'B Lost Mine of Phadelver Adventure', of the EMNLP 2022 paper (Callison-Burch, Tomar, Martin, Ippolito et al.). The definition is also verbatim: 'The adventure book provides boxed text, which is descriptive text to be read aloud verbatim or to paraphrase. It also gives details about the combat ... and links to relevant [rules]'; and the skip instruction follows: 'If you create a different adventure hook, skip to the second paragraph'. Paper title is 'Dialog Challenge', not 'Dialogue Challenge' — trivial. Verified by extracting the PDF text locally (15 pages)."
+  },
+  {
+   "index": 20,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hints of what may be done are given in this text and the DM should only provide vague information if questioned.",
+   "note": "Quote verbatim (the article quoting The Hidden Shrine of Tamoachan). Confirmed: 'Read-aloud text is analogous to “at rise” descriptions.' and 'D&D adventure writers employ descriptive text in the same way as playwrights use “at rise” descriptions'; 'because it is typically set outside from the other text in a box'; 'the 1980 adventure module The Hidden Shrine of Tamoachan marks its first appearance.' One gloss unsupported: the word 'verbatim' never appears in the article — it says the DM 'is instructed to read' the boxed text to players. Byline 'December 18, 2023 Brian McKenzie' matches."
+  },
+  {
+   "index": 21,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The results were 59.5% desired “occasional boxed text,” 34.4% “lots of boxed text,” and only 6% of respondents did not want any boxed text.",
+   "note": "All three figures and the phrase 'occasional boxed text' verbatim. Attribution confirmed: 'A Twitter poll by D&D's current lead rules designer Jeremy Crawford saw 2,248 replies to the question “How much boxed text (aka read-aloud text) do you like in an adventure you run?”' (endnote 38 cites @JeremyECrawford, 17 Nov 2016). The claim's 'about 6%' matches 'only 6%'."
+  },
+  {
+   "index": 22,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "read aloud text that the DM is instructed to read to the players. Often these passages describe the location, but sometimes they are also used to describe the action of NPCs",
+   "note": "Google Books snippet for p.64 of Cover's book carries the quoted fragment word for word plus the location/NPC-action distinction. The cut-scene comparison is on the adjacent snippets: p.65 '... read aloud in the TRPG, but add more visual interest. Cut-scenes are moments in a videogames where the gameplay is interrupted by a visual scene' and p.66 '... read aloud text in the module. The opening of the computer game is a fairly elaborate cut-scene'. Cited pages 64-66 and 80 all return snippets. Route note: WebFetch of the URL returned metadata only; the snippets came from the same URL fetched raw with curl (HTTP 200), whose embedded JSON holds four search_results."
+  },
+  {
+   "index": 23,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "second-person, pulling them directly into the storyworld, situating them in a place, and immersing them.",
+   "note": "Quote verbatim in the Google Books snippet, together with 'situating' and 'immersing'. Fludernik is confirmed at p.85: 'Monik Fludernik (1994) explains that “second person texts frequently undermine this story-discourse dichotomy by the very nonnaturalness of their design...”'. Caveat: the immersion sentence sits on p.107, not on pp.21/85 as the source field cites; p.21 discusses second person and audience address, p.85 the Fludernik narratology. Same curl route as index 22."
+  },
+  {
+   "index": 24,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the frequency that words like “tribal,” “exotic,” and “savage” crop up throughout the module",
+   "note": "Both halves confirmed. Loaded adjectives verbatim as quoted. Port Nyanzaru: 'the first instance of “flavor text”, or text that the Dungeon Master is explicitly meant to read aloud to the players, highlights dinosaurs, “Minstrels in bright clothing,” and voices speaking “in an unfamiliar language filled with clicks.” Here, we begin to see how the module gestures towards vague stereotypes of the African diaspora'. The claim's quote field ('heavy, characteristic accent') is also verbatim on the page, though it belongs to the DM-guidance sentence (index 25) rather than the Port Nyanzaru passage. Byline 'March 19, 2023 Mark Hines' matches."
+  },
+  {
+   "index": 25,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "encouraging players to adopt a certain mentality or approach",
+   "note": "First half verified verbatim: 'the game's only guidance in portraying Chultans is to emphasize “tongue clicks” and their “heavy, characteristic accent.”' The quoted fragment 'correctly ascertain its original purpose' is also verbatim. But the claim's characterisation is the claimant's gloss, not Hines's: he presents it as the Archaeologist *background's mechanical feature* (an identity mechanic), arguing it caters to 'dungeons that combine race and place' and is 'meant to evoke images and stereotype in the minds of players' — he never calls it prose and never says ruins need outsider validation. Downgraded for that gap only."
+  },
+  {
+   "index": 26,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "gothic atmosphere clearly set through the statue and skeletal remains",
+   "note": "The Death House passage is quoted verbatim on the page — 'This room is festooned with moldy skeletons that hang from rusty shackles against the walls... a gaunt, pale-faced man wearing a voluminous black cloak' — so all five adjectives are present, and Hewitt does say 'The gothic atmosphere is clearly set through the daunting presence of the statue, as well as the skeletal remains lurking in the corners of the room.' What the article does NOT do is what the claim credits it with: it introduces the passage as 'The suggested description', never uses the terms 'read-aloud' or 'boxed text' (zero occurrences), and makes no argument about decay adjectives, present tense, or third person. The adjective/tense/person analysis is the claimant's, not Hewitt's. Byline 'December 15, 2024 Meghan Hewitt' matches."
+  },
+  {
+   "index": 27,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“double use” of framing devices was notoriously less prominent in early TRPGs",
+   "note": "Quote verbatim in the full-text PDF (journals.uu.se/IJRP/article/download/228/252/576), in the passage 'by observing the simplicity of the original cover of the D&D game from 1974 (See fig. 3), it becomes evident that the aforementioned “double use” of framing devices was notoriously less prominent in early TRPGs'. The storytelling-game prologue point is also explicit: 'practically all of them begin with a prologue consisting of a short narrative text that provides an atmospheric introduction into the fictional setting'. The abstract names 'cover illustrations, prologues and epilogues' as the paratexts studied; section 3.3.2 covers 'Prologues, Epilogues and Framing/Embedded Narratives'. Note: the source's comparison is specifically the covers' double (typographic + pictorial) framing, not framing in general."
+  },
+  {
+   "index": 28,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the use of framings in TRPGs to incite the production (and not only the reception) of text is what I have called genesic framing",
+   "note": "Quote verbatim, in the conclusion and repeated as a pull-quote. Self-disclosure element confirmed ('of self-disclosure, as well as the use of framings...'), as is the persistence element: 'it is this feature that is likely to account for much of the complexity of the TRPG medium as well as for its persistence in time.' The source hedges with 'likely to account for much of', where the claim says flatly 'accounts for'."
+  },
+  {
+   "index": 29,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the first edition’s visual–textual dissonance produces interpretive ambiguity that might enhance embodied player engagement",
+   "note": "ROUTE: journals.sagepub.com returned HTTP 403 to both WebFetch and a browser-UA curl, and the Wayback availability API reports no snapshot for this DOI, so the Sage page itself is unreachable. Verified instead against the publisher-deposited abstract for the same DOI via the Crossref API (HTTP 200): title 'Tomes and Tombs: Toward a Phenomenology of Interiors in Dungeons & Dragons', author Cameron Macdonell, published online 2025-09-03. That abstract carries the claim's quote word for word, and also 'Later editions increasingly removed visual assets'. Unconfirmed at abstract level (full text paywalled, as the claim itself concedes): the year 1978 and the specific 'illustration booklet'; the abstract says 'the first edition' and 'visual assets', and hedges with 'might enhance'."
+  }
+ ]
+}

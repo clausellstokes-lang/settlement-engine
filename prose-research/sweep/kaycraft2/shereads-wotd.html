@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://shereadsnovels.com/xmlrpc.php">
+<title>Written on the Dark by Guy Gavriel Kay &#8211; She Reads Novels</title>
+<script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Noto+Sans:r,i,b,bi:latin,latin-ext"]},"api_url":"https:\/\/fonts-api.wp.com\/css"};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = '/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active body, .wf-active button, .wf-active input, .wf-active select, .wf-active textarea{font-family:"Noto Sans",sans-serif}.wf-active .menu-toggle{font-family:"Noto Sans",sans-serif}.wf-active .comment-navigation a, .wf-active .paging-navigation a, .wf-active .post-navigation a{font-family:"Noto Sans",sans-serif}.wf-active .site-description{font-family:"Noto Sans",sans-serif}.wf-active .archive .page-title, .wf-active .search .page-title{font-family:"Noto Sans",sans-serif}.wf-active .entry-meta{font-family:"Noto Sans",sans-serif}.wf-active .format-quote blockquote:before{font-family:"Noto Sans",sans-serif}.wf-active .format-quote blockquote{font-family:"Noto Sans",sans-serif}.wf-active blockquote cite{font-family:"Noto Sans",sans-serif}.wf-active .jetpack-testimonial .entry-title{font-family:"Noto Sans",sans-serif}.wf-active .wp-caption-dd, .wf-active .wp-caption-text{font-family:"Noto Sans",sans-serif}</style>
+<meta name='robots' content='max-image-preview:large' />
+
+<!-- Async WordPress.com Remote Login -->
+<script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.parentNode.removeChild( dom_node ); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[ i ].parentNode.removeChild( dom_nodes[ i ] );
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+					+ '//' + window.location.hostname
+					+ '&postid=47167'
+					+ '&is_singular=1';
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9zaGVyZWFkc25vdmVscy5jb20%3D"
+		+ "&wpcomid=13133801"
+		+ "&time=" + Math.floor( Date.now() / 1000 );
+	document.body.appendChild( iframe );
+}, false );
+</script>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//widgets.wp.com' />
+<link rel='dns-prefetch' href='//fonts-api.wp.com' />
+<link rel="alternate" type="application/rss+xml" title="She Reads Novels &raquo; Feed" href="https://shereadsnovels.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="She Reads Novels &raquo; Comments Feed" href="https://shereadsnovels.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="She Reads Novels &raquo; Written on the Dark by Guy Gavriel&nbsp;Kay Comments Feed" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/feed/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-1' href='/_static/??-eJxtzN0KQEAQQOEXssaKcCHPsq1Jy+xPZjavL1JKLr86HTiSsjEIBgGfVaK8uMCwoiRjt8fAOYCPcyZk2JGM4KxSZPmotMwF/B/Jbfh+b1355EfdddWg26av1xMpeTR5&cssminify=yes' type='text/css' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/common.min.css */
+</style>
+<style id="wp-block-library-inline-css-extra">
+.has-text-align-justify {
+	text-align:justify;
+}
+.has-text-align-justify{text-align:justify;}
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}.wp-block-tab:not(.has-text-color){color:inherit!important}.wp-block-tab:not(.has-background){background-color:inherit!important}.wp-block-tab:focus,.wp-block-tab:hover{text-decoration:none}.wp-block-tab:focus-visible{outline:auto;outline-offset:0}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/classic.min.css */
+</style>
+
+<style id="coblocks-inline-format-inline-css">
+.uppercase{text-transform:uppercase}
+/*# sourceURL=coblocks-inline-format-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-12-1' href='/_static/??-eJx9jcEKg0AMRH+oaVhorR7Eb9E16IpZg8min2889FZ6GYbhPQYPgbhlo2zIBWQtU8qKcdvJd5be0AmmMfW0Ejv2jKoP/K0daZzIXNdvB6PzvyJ+A8MgO6mCJ6fCYLN/6e113IZXU9WfUL/DcgHSTkDo&cssminify=yes' type='text/css' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--albert-sans: 'Albert Sans', sans-serif;--wp--preset--font-family--alegreya: Alegreya, serif;--wp--preset--font-family--arvo: Arvo, serif;--wp--preset--font-family--bodoni-moda: 'Bodoni Moda', serif;--wp--preset--font-family--bricolage-grotesque: 'Bricolage Grotesque', sans-serif;--wp--preset--font-family--cabin: Cabin, sans-serif;--wp--preset--font-family--chivo: Chivo, sans-serif;--wp--preset--font-family--commissioner: Commissioner, sans-serif;--wp--preset--font-family--cormorant: Cormorant, serif;--wp--preset--font-family--courier-prime: 'Courier Prime', monospace;--wp--preset--font-family--crimson-pro: 'Crimson Pro', serif;--wp--preset--font-family--dm-mono: 'DM Mono', monospace;--wp--preset--font-family--dm-sans: 'DM Sans', sans-serif;--wp--preset--font-family--dm-serif-display: 'DM Serif Display', serif;--wp--preset--font-family--domine: Domine, serif;--wp--preset--font-family--eb-garamond: 'EB Garamond', serif;--wp--preset--font-family--epilogue: Epilogue, sans-serif;--wp--preset--font-family--fahkwang: Fahkwang, sans-serif;--wp--preset--font-family--figtree: Figtree, sans-serif;--wp--preset--font-family--fira-sans: 'Fira Sans', sans-serif;--wp--preset--font-family--fjalla-one: 'Fjalla One', sans-serif;--wp--preset--font-family--fraunces: Fraunces, serif;--wp--preset--font-family--gabarito: Gabarito, system-ui;--wp--preset--font-family--ibm-plex-mono: 'IBM Plex Mono', monospace;--wp--preset--font-family--ibm-plex-sans: 'IBM Plex Sans', sans-serif;--wp--preset--font-family--ibarra-real-nova: 'Ibarra Real Nova', serif;--wp--preset--font-family--instrument-serif: 'Instrument Serif', serif;--wp--preset--font-family--inter: Inter, sans-serif;--wp--preset--font-family--josefin-sans: 'Josefin Sans', sans-serif;--wp--preset--font-family--jost: Jost, sans-serif;--wp--preset--font-family--libre-baskerville: 'Libre Baskerville', serif;--wp--preset--font-family--libre-franklin: 'Libre Franklin', sans-serif;--wp--preset--font-family--literata: Literata, serif;--wp--preset--font-family--lora: Lora, serif;--wp--preset--font-family--merriweather: Merriweather, serif;--wp--preset--font-family--montserrat: Montserrat, sans-serif;--wp--preset--font-family--newsreader: Newsreader, serif;--wp--preset--font-family--noto-sans-mono: 'Noto Sans Mono', sans-serif;--wp--preset--font-family--nunito: Nunito, sans-serif;--wp--preset--font-family--open-sans: 'Open Sans', sans-serif;--wp--preset--font-family--overpass: Overpass, sans-serif;--wp--preset--font-family--pt-serif: 'PT Serif', serif;--wp--preset--font-family--petrona: Petrona, serif;--wp--preset--font-family--piazzolla: Piazzolla, serif;--wp--preset--font-family--playfair-display: 'Playfair Display', serif;--wp--preset--font-family--plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;--wp--preset--font-family--poppins: Poppins, sans-serif;--wp--preset--font-family--raleway: Raleway, sans-serif;--wp--preset--font-family--roboto: Roboto, sans-serif;--wp--preset--font-family--roboto-slab: 'Roboto Slab', serif;--wp--preset--font-family--rubik: Rubik, sans-serif;--wp--preset--font-family--rufina: Rufina, serif;--wp--preset--font-family--sora: Sora, sans-serif;--wp--preset--font-family--source-sans-3: 'Source Sans 3', sans-serif;--wp--preset--font-family--source-serif-4: 'Source Serif 4', serif;--wp--preset--font-family--space-mono: 'Space Mono', monospace;--wp--preset--font-family--syne: Syne, sans-serif;--wp--preset--font-family--texturina: Texturina, serif;--wp--preset--font-family--urbanist: Urbanist, sans-serif;--wp--preset--font-family--work-sans: 'Work Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-albert-sans-font-family{font-family: var(--wp--preset--font-family--albert-sans) !important;}.has-alegreya-font-family{font-family: var(--wp--preset--font-family--alegreya) !important;}.has-arvo-font-family{font-family: var(--wp--preset--font-family--arvo) !important;}.has-bodoni-moda-font-family{font-family: var(--wp--preset--font-family--bodoni-moda) !important;}.has-bricolage-grotesque-font-family{font-family: var(--wp--preset--font-family--bricolage-grotesque) !important;}.has-cabin-font-family{font-family: var(--wp--preset--font-family--cabin) !important;}.has-chivo-font-family{font-family: var(--wp--preset--font-family--chivo) !important;}.has-commissioner-font-family{font-family: var(--wp--preset--font-family--commissioner) !important;}.has-cormorant-font-family{font-family: var(--wp--preset--font-family--cormorant) !important;}.has-courier-prime-font-family{font-family: var(--wp--preset--font-family--courier-prime) !important;}.has-crimson-pro-font-family{font-family: var(--wp--preset--font-family--crimson-pro) !important;}.has-dm-mono-font-family{font-family: var(--wp--preset--font-family--dm-mono) !important;}.has-dm-sans-font-family{font-family: var(--wp--preset--font-family--dm-sans) !important;}.has-dm-serif-display-font-family{font-family: var(--wp--preset--font-family--dm-serif-display) !important;}.has-domine-font-family{font-family: var(--wp--preset--font-family--domine) !important;}.has-eb-garamond-font-family{font-family: var(--wp--preset--font-family--eb-garamond) !important;}.has-epilogue-font-family{font-family: var(--wp--preset--font-family--epilogue) !important;}.has-fahkwang-font-family{font-family: var(--wp--preset--font-family--fahkwang) !important;}.has-figtree-font-family{font-family: var(--wp--preset--font-family--figtree) !important;}.has-fira-sans-font-family{font-family: var(--wp--preset--font-family--fira-sans) !important;}.has-fjalla-one-font-family{font-family: var(--wp--preset--font-family--fjalla-one) !important;}.has-fraunces-font-family{font-family: var(--wp--preset--font-family--fraunces) !important;}.has-gabarito-font-family{font-family: var(--wp--preset--font-family--gabarito) !important;}.has-ibm-plex-mono-font-family{font-family: var(--wp--preset--font-family--ibm-plex-mono) !important;}.has-ibm-plex-sans-font-family{font-family: var(--wp--preset--font-family--ibm-plex-sans) !important;}.has-ibarra-real-nova-font-family{font-family: var(--wp--preset--font-family--ibarra-real-nova) !important;}.has-instrument-serif-font-family{font-family: var(--wp--preset--font-family--instrument-serif) !important;}.has-inter-font-family{font-family: var(--wp--preset--font-family--inter) !important;}.has-josefin-sans-font-family{font-family: var(--wp--preset--font-family--josefin-sans) !important;}.has-jost-font-family{font-family: var(--wp--preset--font-family--jost) !important;}.has-libre-baskerville-font-family{font-family: var(--wp--preset--font-family--libre-baskerville) !important;}.has-libre-franklin-font-family{font-family: var(--wp--preset--font-family--libre-franklin) !important;}.has-literata-font-family{font-family: var(--wp--preset--font-family--literata) !important;}.has-lora-font-family{font-family: var(--wp--preset--font-family--lora) !important;}.has-merriweather-font-family{font-family: var(--wp--preset--font-family--merriweather) !important;}.has-montserrat-font-family{font-family: var(--wp--preset--font-family--montserrat) !important;}.has-newsreader-font-family{font-family: var(--wp--preset--font-family--newsreader) !important;}.has-noto-sans-mono-font-family{font-family: var(--wp--preset--font-family--noto-sans-mono) !important;}.has-nunito-font-family{font-family: var(--wp--preset--font-family--nunito) !important;}.has-open-sans-font-family{font-family: var(--wp--preset--font-family--open-sans) !important;}.has-overpass-font-family{font-family: var(--wp--preset--font-family--overpass) !important;}.has-pt-serif-font-family{font-family: var(--wp--preset--font-family--pt-serif) !important;}.has-petrona-font-family{font-family: var(--wp--preset--font-family--petrona) !important;}.has-piazzolla-font-family{font-family: var(--wp--preset--font-family--piazzolla) !important;}.has-playfair-display-font-family{font-family: var(--wp--preset--font-family--playfair-display) !important;}.has-plus-jakarta-sans-font-family{font-family: var(--wp--preset--font-family--plus-jakarta-sans) !important;}.has-poppins-font-family{font-family: var(--wp--preset--font-family--poppins) !important;}.has-raleway-font-family{font-family: var(--wp--preset--font-family--raleway) !important;}.has-roboto-font-family{font-family: var(--wp--preset--font-family--roboto) !important;}.has-roboto-slab-font-family{font-family: var(--wp--preset--font-family--roboto-slab) !important;}.has-rubik-font-family{font-family: var(--wp--preset--font-family--rubik) !important;}.has-rufina-font-family{font-family: var(--wp--preset--font-family--rufina) !important;}.has-sora-font-family{font-family: var(--wp--preset--font-family--sora) !important;}.has-source-sans-3-font-family{font-family: var(--wp--preset--font-family--source-sans-3) !important;}.has-source-serif-4-font-family{font-family: var(--wp--preset--font-family--source-serif-4) !important;}.has-space-mono-font-family{font-family: var(--wp--preset--font-family--space-mono) !important;}.has-syne-font-family{font-family: var(--wp--preset--font-family--syne) !important;}.has-texturina-font-family{font-family: var(--wp--preset--font-family--texturina) !important;}.has-urbanist-font-family{font-family: var(--wp--preset--font-family--urbanist) !important;}.has-work-sans-font-family{font-family: var(--wp--preset--font-family--work-sans) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-14-1' href='/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/verbum-comments.css?m=1785880900i&cssminify=yes' type='text/css' media='all' />
+<link rel='stylesheet' id='verbum-gutenberg-css-css' href='https://widgets.wp.com/verbum-block-editor/block-editor.css?ver=1771405207' media='all' />
+<link rel='stylesheet' id='sela-fonts-css' href='https://fonts-api.wp.com/css?family=Source+Sans+Pro%3A300%2C300italic%2C400%2C400italic%2C600%7CDroid+Serif%3A400%2C400italic%7COswald%3A300%2C400&#038;subset=latin%2Clatin-ext' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-18-1' href='/_static/??-eJyFjkEOwiAQRS8kTruorIxHMZSMSIWBMEMaby81LjAa3f2fvPdnYM3KJhIkgVhVDtV5YlhQsrG3VweuBGdPFhwSFt8E/h73lnkH3aZcMSJDrjMwBgMs94B/qe3Uk1Rrtil+8N2nBeeQXIsOGtXVX5LDpEKyRnyit6Iuwfiyqad4HLUeD4Oehml5AN9qbi0=&cssminify=yes' type='text/css' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='print-css-19-1' href='/wp-content/mu-plugins/global-print/global-print.css?m=1465851035i&cssminify=yes' type='text/css' media='print' />
+<style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+/*# sourceURL=jetpack-global-styles-frontend-style-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-22-1' href='/_static/??-eJyNjcEKwjAQRH/IuC2WqgfxUyTNhnTrZhO6CcW/t0ovIoi3NzDzBpZsXJLipUCsJnMNJAqTL9m6+5ZBq0BMWNkr6Ghnjxbx8UaSsHeqO/hbdCNxMFRiBE2OLBtOIelH+FKW0cf1fOwgcBos//pcCIMvCmtlYxNmQmMFDZOW1/YaL+3xdOjPfdM20xMaP2Eu&cssminify=yes' type='text/css' media='all' />
+<script id="jetpack_related-posts-js-extra">
+var related_posts_js_options = {"post_heading":"h4"};
+//# sourceURL=jetpack_related-posts-js-extra
+</script>
+<script id="wpcom-actionbar-placeholder-js-extra">
+var actionbardata = {"siteID":"13133801","postID":"47167","siteURL":"https://shereadsnovels.com","xhrURL":"https://shereadsnovels.com/wp-admin/admin-ajax.php","nonce":"d3985ff58f","isLoggedIn":"","statusMessage":"","subsEmailDefault":"instantly","proxyScriptUrl":"https://s0.wp.com/wp-content/js/wpcom-proxy-request.js?m=1513050504i&amp;ver=20211021","shortlink":"https://wp.me/pT6Hv-cgL","i18n":{"followedText":"New posts from this site will now appear in your \u003Ca href=\"https://wordpress.com/reader\"\u003EReader\u003C/a\u003E","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","shortLinkCopied":"Shortlink copied to clipboard."}};
+//# sourceURL=wpcom-actionbar-placeholder-js-extra
+</script>
+<script id="jetpack-mu-wpcom-settings-js-before">
+var JETPACK_MU_WPCOM_SETTINGS = {"assetsUrl":"https://s0.wp.com/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/"};
+//# sourceURL=jetpack-mu-wpcom-settings-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJx1T9sOgjAM/SFL5cHAi/FTDLCGdG5jbq3I3zsVE0z0qT05txycIwxTEAqCXiE6HTlktCSxGy4rxqwBzxwG7JWdwUSuEzIQpyz5G1WeQ2XzDje5tmicQEzTfflwJcypofwk7VUpLevZBvwVgecxldJfbZsVM5uR5GV/v9Crj3Bjmovr5I91czjs67ppW/sAEe5iYw=='></script>
+<script id="rlt-proxy-js-after">
+	rltInitialize( {"token":null,"iframeOrigins":["https:\/\/widgets.wp.com"]} );
+//# sourceURL=rlt-proxy-js-after
+</script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://shereadsnovels.wordpress.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/" />
+<link rel='shortlink' href='https://wp.me/pT6Hv-cgL' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fshereadsnovels.com%2F2025%2F05%2F30%2Fwritten-on-the-dark-by-guy-gavriel-kay%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fshereadsnovels.com%2F2025%2F05%2F30%2Fwritten-on-the-dark-by-guy-gavriel-kay%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Written on the Dark by Guy Gavriel Kay" />
+<meta property="og:url" content="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/" />
+<meta property="og:description" content="It seems to me that most moments in a life can be called interludes: following something, preceding something. Carrying us forward, with our needs and nature and desires, as we move through our tim…" />
+<meta property="article:published_time" content="2025-05-30T08:21:50+00:00" />
+<meta property="article:modified_time" content="2025-05-30T08:21:50+00:00" />
+<meta property="og:site_name" content="She Reads Novels" />
+<meta property="og:image" content="https://shereadsnovels.com/wp-content/uploads/2025/03/written-on-the-dark.png?w=195" />
+<meta property="og:image:width" content="195" />
+<meta property="og:image:height" content="300" />
+<meta property="og:image:alt" content="" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<meta name="twitter:creator" content="@shereadsnovels" />
+<meta name="twitter:site" content="@shereadsnovels" />
+<meta name="twitter:text:title" content="Written on the Dark by Guy Gavriel&nbsp;Kay" />
+<meta name="twitter:image" content="https://shereadsnovels.com/wp-content/uploads/2025/03/written-on-the-dark.png?w=144" />
+<meta name="twitter:card" content="summary" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=32" sizes="16x16" />
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=32" sizes="16x16" />
+<link rel="apple-touch-icon" href="https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=114" />
+<link rel='openid.server' href='https://shereadsnovels.com/?openidserver=1' />
+<link rel='openid.delegate' href='https://shereadsnovels.com/' />
+<link rel="search" type="application/opensearchdescription+xml" href="https://shereadsnovels.com/osd.xml" title="She Reads Novels" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="description" content="It seems to me that most moments in a life can be called interludes: following something, preceding something. Carrying us forward, with our needs and nature and desires, as we move through our time. It also seems to me that it is foolish to try to comprehend all that happens to us, let alone understand&hellip;" />
+<style id="custom-background-css">
+body.custom-background { background-image: url("https://shereadsnovels.wordpress.com/wp-content/uploads/2026/05/grey-star.jpg"); background-position: left top; background-size: auto; background-repeat: repeat; background-attachment: scroll; }
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-0-3' href='/_static/??-eJyNjMEKgzAQBX9IfVpq60X8lGLXRaLJJrhZ/P1SUM8eZxgGeyopSmbJCFYmb7MTxcI5jbQeDDXBxwnh6yOtCt1d4q0i1QK3ByFO5llB4xZN2V/NKf6/IfTNu2sfzbPuXssPrlM6pw==&cssminify=yes' type='text/css' media='all' />
+<style id="jetpack-subscriptions-inline-css">
+#subscribe-email input {
+	width: 95%;
+}
+
+.comment-subscription-form {
+	margin-bottom: 1em;
+}
+
+.comment-subscription-form .subscribe-label {
+	display: inline !important;
+}
+
+/*
+Text meant only for screen readers.
+Provides support for themes that do not bundle this CSS yet.
+@see https://make.wordpress.org/accessibility/2015/02/09/hiding-text-for-screen-readers-with-wordpress-core/
+***********************************/
+.screen-reader-text {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	overflow-wrap: normal !important;
+}
+
+/*# sourceURL=/wp-content/mu-plugins/jetpack-plugin/sun/_inc/build/subscriptions/subscriptions.min.css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-3' href='/wp-content/mu-plugins/jetpack-plugin/sun/modules/widgets/goodreads/css/goodreads.css?m=1753279645i&cssminify=yes' type='text/css' media='all' />
+
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-47167 single-format-standard custom-background wp-theme-pubsela customizer-styles-applied not-multi-author display-header-text jetpack-reblog-enabled">
+<div id="page" class="hfeed site">
+	<header id="masthead" class="site-header" role="banner">
+		<a class="skip-link screen-reader-text" href="#content" title="Skip to content">Skip to content</a>
+
+		<div class="site-branding">
+			<a href="https://shereadsnovels.com/" class="site-logo-link" rel="home" itemprop="url"></a>			<h1 class="site-title"><a href="https://shereadsnovels.com/" title="She Reads Novels" rel="home">She Reads Novels</a></h1>
+							<h2 class="site-description">&quot;She had read novels while other people perused the Sunday papers&quot; &#8211; Mary Elizabeth Braddon</h2>
+					</div><!-- .site-branding -->
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle" aria-controls="menu" aria-expanded="false">Menu</button>
+			<div class="menu"><ul>
+<li ><a href="https://shereadsnovels.com/">Home</a></li><li class="page_item page-item-485"><a href="https://shereadsnovels.com/reviews-by-author/">A-Z Review List</a></li>
+<li class="page_item page-item-2"><a href="https://shereadsnovels.com/about/">About</a></li>
+<li class="page_item page-item-488 page_item_has_children"><a href="https://shereadsnovels.com/challenges/">Challenges and Projects</a>
+<ul class='children'>
+	<li class="page_item page-item-51058 page_item_has_children"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/">20 Books of Summer&nbsp;2026</a>
+	<ul class='children'>
+		<li class="page_item page-item-47268 page_item_has_children"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/">20 Books of Summer&nbsp;2025</a>
+		<ul class='children'>
+			<li class="page_item page-item-43157 page_item_has_children"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/">20 Books of Summer&nbsp;2024</a>
+			<ul class='children'>
+				<li class="page_item page-item-39768 page_item_has_children"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/">20 Books of Summer&nbsp;2023</a>
+				<ul class='children'>
+					<li class="page_item page-item-35379 page_item_has_children"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/">20 Books of Summer&nbsp;2022</a>
+					<ul class='children'>
+						<li class="page_item page-item-31734"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/20-books-of-summer-2021/">20 Books of Summer&nbsp;2021</a></li>
+						<li class="page_item page-item-28766"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/20-books-of-summer-2020/">20 Books of Summer&nbsp;2020</a></li>
+						<li class="page_item page-item-25995"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/20-books-of-summer-2019/">20 Books of Summer&nbsp;2019</a></li>
+						<li class="page_item page-item-22918"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/20-books-of-summer-2018/">20 Books of Summer&nbsp;2018</a></li>
+						<li class="page_item page-item-19727"><a href="https://shereadsnovels.com/challenges/20-books-of-summer-2026/20-books-of-summer-2025/20-books-of-summer-2024/20-books-of-summer-2023/20-books-of-summer-2022/20-books-of-summer-2017/">20 Books of Summer&nbsp;2017</a></li>
+					</ul>
+</li>
+				</ul>
+</li>
+			</ul>
+</li>
+		</ul>
+</li>
+	</ul>
+</li>
+	<li class="page_item page-item-11059"><a href="https://shereadsnovels.com/challenges/historical-fiction/">Reading the Walter Scott&nbsp;Prize</a></li>
+	<li class="page_item page-item-1124"><a href="https://shereadsnovels.com/challenges/completed-challenges/">Completed Challenges</a></li>
+	<li class="page_item page-item-11137"><a href="https://shereadsnovels.com/challenges/reading-lists/">Reading Lists</a></li>
+	<li class="page_item page-item-13622"><a href="https://shereadsnovels.com/challenges/goodreads-tbr-project/">Goodreads TBR Project</a></li>
+</ul>
+</li>
+<li class="page_item page-item-6419 page_item_has_children"><a href="https://shereadsnovels.com/my-journey-through-time/">My Journey Through&nbsp;Time</a>
+<ul class='children'>
+	<li class="page_item page-item-17387"><a href="https://shereadsnovels.com/my-journey-through-time/ancient-greece/">Ancient Greece</a></li>
+	<li class="page_item page-item-13263"><a href="https://shereadsnovels.com/my-journey-through-time/ancient-rome/">Ancient Rome</a></li>
+	<li class="page_item page-item-21679"><a href="https://shereadsnovels.com/my-journey-through-time/history-of-spain/">History of Spain</a></li>
+	<li class="page_item page-item-25404"><a href="https://shereadsnovels.com/my-journey-through-time/history-of-wales/">History of Wales</a></li>
+	<li class="page_item page-item-13973"><a href="https://shereadsnovels.com/my-journey-through-time/pre-conquest-england-and-house-of-normandy/">Pre-Conquest England and House of&nbsp;Normandy</a></li>
+	<li class="page_item page-item-12233"><a href="https://shereadsnovels.com/my-journey-through-time/the-plantagenets/">The Plantagenets</a></li>
+	<li class="page_item page-item-41947"><a href="https://shereadsnovels.com/my-journey-through-time/historical-fiction-in-translation/">Historical Fiction in&nbsp;Translation</a></li>
+	<li class="page_item page-item-10870"><a href="https://shereadsnovels.com/my-journey-through-time/the-wars-of-the-roses/">The Wars of the&nbsp;Roses</a></li>
+	<li class="page_item page-item-10916"><a href="https://shereadsnovels.com/my-journey-through-time/the-tudors-part-1/">The Tudors: Part&nbsp;1</a></li>
+	<li class="page_item page-item-11173 page_item_has_children"><a href="https://shereadsnovels.com/my-journey-through-time/the-tudors-part-2/">The Tudors: Part&nbsp;2</a>
+	<ul class='children'>
+		<li class="page_item page-item-13480"><a href="https://shereadsnovels.com/my-journey-through-time/the-tudors-part-2/inspired-by-shakespeare/">Inspired by Shakespeare</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-18957"><a href="https://shereadsnovels.com/my-journey-through-time/irish-history/">Irish History</a></li>
+	<li class="page_item page-item-11015 page_item_has_children"><a href="https://shereadsnovels.com/my-journey-through-time/the-english-civil-war/">James I/VI, Charles I and the English Civil&nbsp;War</a>
+	<ul class='children'>
+		<li class="page_item page-item-15742"><a href="https://shereadsnovels.com/my-journey-through-time/the-english-civil-war/restoration-and-late-17th-century/">Restoration and late 17th&nbsp;century</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-11747"><a href="https://shereadsnovels.com/my-journey-through-time/world-war-i/">World War I</a></li>
+	<li class="page_item page-item-14543"><a href="https://shereadsnovels.com/my-journey-through-time/scottish-history/">Scottish History</a></li>
+</ul>
+</li>
+<li class="page_item page-item-49618 page_item_has_children"><a href="https://shereadsnovels.com/read-in-2026/">Read in 2026</a>
+<ul class='children'>
+	<li class="page_item page-item-45926"><a href="https://shereadsnovels.com/read-in-2026/read-in-2025/">Read in 2025</a></li>
+	<li class="page_item page-item-41907"><a href="https://shereadsnovels.com/read-in-2026/read-in-2024/">Read in 2024</a></li>
+	<li class="page_item page-item-38256 page_item_has_children"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/">Read in 2023</a>
+	<ul class='children'>
+		<li class="page_item page-item-33726"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2022/">Read in 2022</a></li>
+		<li class="page_item page-item-30283"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2021/">Read in 2021</a></li>
+		<li class="page_item page-item-27596"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2020/">Read in 2020</a></li>
+		<li class="page_item page-item-24877"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2019/">Read in 2019</a></li>
+		<li class="page_item page-item-21431"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2018/">Read in 2018</a></li>
+		<li class="page_item page-item-17797"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2017/">Read in 2017</a></li>
+		<li class="page_item page-item-14894"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2016/">Read in 2016</a></li>
+		<li class="page_item page-item-12281"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2015/">Read in 2015</a></li>
+		<li class="page_item page-item-7271"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2014/">Read in 2014</a></li>
+		<li class="page_item page-item-9560"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2013/">Read in 2013</a></li>
+		<li class="page_item page-item-5115"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2012/">Read in 2012</a></li>
+		<li class="page_item page-item-1032"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2011/">Read in 2011</a></li>
+		<li class="page_item page-item-2416"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2010-2/">Read in 2010</a></li>
+		<li class="page_item page-item-1040"><a href="https://shereadsnovels.com/read-in-2026/read-in-2023/read-in-2009/">Read in 2009</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li class="page_item page-item-512"><a href="https://shereadsnovels.com/review-policy/">Review Policy</a></li>
+<li class="page_item page-item-5683 page_item_has_children"><a href="https://shereadsnovels.com/the-classics-club/">The Classics Club</a>
+<ul class='children'>
+	<li class="page_item page-item-14324"><a href="https://shereadsnovels.com/the-classics-club/womens-classic-literature-event/">Women&#8217;s Classic Literature&nbsp;Event</a></li>
+</ul>
+</li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+				
+<article id="post-47167" class="post-47167 post type-post status-publish format-standard hentry category-fantasy category-reviews tag-guy-gavriel-kay without-featured-image">
+
+	
+	<header class="entry-header ">
+					<h1 class="entry-title">Written on the Dark by Guy Gavriel&nbsp;Kay</h1>			</header><!-- .entry-header -->
+
+	<div class="entry-body">
+
+				<div class="entry-meta">
+			<span class="date"><a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/" title="Permalink to Written on the Dark by Guy Gavriel&nbsp;Kay" rel="bookmark"><time class="entry-date published" datetime="2025-05-30T09:21:50+01:00">May 30, 2025</time></a></span>		</div><!-- .entry-meta -->
+		
+				<div class="entry-content">
+			<blockquote><p>It seems to me that most moments in a life can be called interludes: following something, preceding something. Carrying us forward, with our needs and nature and desires, as we move through our time. It also seems to me that it is foolish to try to comprehend all that happens to us, let alone understand the world. </p></blockquote>
+<p><a href="https://shereadsnovels.com/wp-content/uploads/2025/03/written-on-the-dark.png"><img data-attachment-id="46609" data-permalink="https://shereadsnovels.com/2025/03/18/top-ten-tuesday-books-on-my-spring-tbr-3/written-on-the-dark/#main" data-orig-file="https://shereadsnovels.com/wp-content/uploads/2025/03/written-on-the-dark.png" data-orig-size="255,393" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Written on the Dark" data-image-description="" data-image-caption="" data-large-file="https://shereadsnovels.com/wp-content/uploads/2025/03/written-on-the-dark.png?w=255" src="https://shereadsnovels.com/wp-content/uploads/2025/03/written-on-the-dark.png?w=195" alt="" width="195" height="300" class="alignleft size-medium wp-image-46609" srcset="https://shereadsnovels.com/wp-content/uploads/2025/03/written-on-the-dark.png?w=195 195w, https://shereadsnovels.com/wp-content/uploads/2025/03/written-on-the-dark.png?w=97 97w, https://shereadsnovels.com/wp-content/uploads/2025/03/written-on-the-dark.png 255w" sizes="(max-width: 195px) 100vw, 195px" /></a> This is a beautiful historical fantasy novel loosely inspired by the life of the poet François Villon. It takes us to a world that will be familiar to Kay readers – a world with two moons, one blue and one white, where the three main religions are Asharite, Jaddite and Kindath, corresponding to Islam, Christianity and Judaism – but where his most recent novels have been set in thinly disguised versions of Venice, Dubrovnik and Constantinople, this one takes place in Ferrieres, based on medieval France.</p>
+<p>On a freezing cold night in the city of Orane, the young poet Thierry Villar steps out of the tavern in which he’s been staying to find that he is surrounded by armed horsemen. He’s convinced that he’s going to be arrested – desperate for money, Thierry had become embroiled in a plot to rob a sanctuary – but to his surprise, he is escorted through the streets to where a man lies dead, brutally stabbed. This is the Duke de Montereau, one of the most powerful noblemen in Ferrieres and the younger brother of King Roch, who is struggling to rule due to mental illness. In return for not arresting Thierry, the provost of Orane asks him to help discover who murdered the Duke by listening to gossip in the city’s shops and taverns.</p>
+<p>If you know your French history, you may have guessed that King Roch is based on King Charles VI, nicknamed ‘the Mad’ due to his episodes of mental instability and a belief that he was made of glass. Montereau, then, is a fictional version of the King’s brother, the Duke of Orléans, who was assassinated in 1407. Other people and incidents in the novel can also be connected to real characters and events from the Hundred Years’ War, which adds an extra layer of interest to the story if you’re familiar with this period of history. If not, it doesn’t matter at all since, as all the names have been changed, the book can also be read as a work of pure fiction.</p>
+<p><em>Written on the Dark</em> is a shorter novel than is usual for Kay and feels more tightly plotted than his other recent books, with a stronger focus on the main character and fewer diversions into the stories of minor characters. This probably explains why I thought this book was more enjoyable than the last two or three. Although I know nothing about the real François Villon so can’t say how his story may correspond with Thierry Villar’s, I found Thierry a likeable character; he has his flaws and sometimes makes mistakes, but this just makes him feel more relatable and human. An overarching theme of the book (and of Kay’s work in general) is the idea that even people who are considered ordinary or insignificant can play a key role in important events and influence not only their own fate but the fates of many others.     </p>
+<p>The fantasy aspect of the novel is limited mainly to the alternate version of France and to a mysterious character known as Gauvard Colle who can communicate with the ‘half-world’. There are also some surprising twists where things like the Battle of Agincourt and the story of Joan of Arc don’t go in quite the direction you would expect! I loved this one and am looking forward to reading his earlier book inspired by medieval France, <em>A Song for Arbonne</em>, which is one of a small number of Kay novels I haven&#8217;t read yet.  </p>
+<p><em>Thanks to Hodderscape for providing a copy of this book for review via <a href="http://www.netgalley.co.uk" target="_blank">NetGalley</a>.</em></p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-email"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-email-47167"
+				class="share-email sd-button share-icon"
+				href="mailto:?subject=%5BShared%20Post%5D%20Written%20on%20the%20Dark%20by%20Guy%20Gavriel%20Kay&#038;body=https%3A%2F%2Fshereadsnovels.com%2F2025%2F05%2F30%2Fwritten-on-the-dark-by-guy-gavriel-kay%2F&#038;share=email"
+				target="_blank"
+				aria-labelledby="sharing-email-47167"
+				data-email-share-error-title="Do you have email set up?" data-email-share-error-text="If you&#039;re having problems sharing via email, you might not have email set up for your browser. You may need to create a new email yourself." data-email-share-nonce="36bc46207d" data-email-share-track-url="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?share=email">
+				<span id="sharing-email-47167" hidden>Email a link to a friend (Opens in new window)</span>
+				<span>Email</span>
+			</a></li><li class="share-print"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-print-47167"
+				class="share-print sd-button share-icon"
+				href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#print?share=print"
+				target="_blank"
+				aria-labelledby="sharing-print-47167"
+				>
+				<span id="sharing-print-47167" hidden>Print (Opens in new window)</span>
+				<span>Print</span>
+			</a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-facebook-47167"
+				class="share-facebook sd-button share-icon"
+				href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?share=facebook"
+				target="_blank"
+				aria-labelledby="sharing-facebook-47167"
+				>
+				<span id="sharing-facebook-47167" hidden>Share on Facebook (Opens in new window)</span>
+				<span>Facebook</span>
+			</a></li><li class="share-reddit"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-reddit-47167"
+				class="share-reddit sd-button share-icon"
+				href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?share=reddit"
+				target="_blank"
+				aria-labelledby="sharing-reddit-47167"
+				>
+				<span id="sharing-reddit-47167" hidden>Share on Reddit (Opens in new window)</span>
+				<span>Reddit</span>
+			</a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-twitter-47167"
+				class="share-twitter sd-button share-icon"
+				href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?share=twitter"
+				target="_blank"
+				aria-labelledby="sharing-twitter-47167"
+				>
+				<span id="sharing-twitter-47167" hidden>Share on X (Opens in new window)</span>
+				<span>X</span>
+			</a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-13133801-47167-6a9aa0768cf52' data-src='//widgets.wp.com/likes/index.html?ver=20260904#blog_id=13133801&amp;post_id=47167&amp;origin=shereadsnovels.wordpress.com&amp;obj_id=13133801-47167-6a9aa0768cf52&amp;domain=shereadsnovels.com' data-name='like-post-frame-13133801-47167-6a9aa0768cf52' data-title='Like or Reblog'><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class='loading'>Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>					</div><!-- .entry-content -->
+		
+				<footer class="entry-meta">
+			<span class="cat-links">Posted in: <a href="https://shereadsnovels.com/category/reviews/fantasy/" rel="category tag">Fantasy</a>, <a href="https://shereadsnovels.com/category/reviews/" rel="category tag">Reviews</a></span><span class="sep"> | </span><span class="tags-links">Tagged: <a href="https://shereadsnovels.com/tag/guy-gavriel-kay/" rel="tag">Guy Gavriel Kay</a></span>		</footer><!-- .entry-meta -->
+		
+			</div><!-- .entry-body -->
+
+</article><!-- #post-## -->
+
+					<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">Post navigation</h1>
+		<div class="nav-links">
+			<div class="nav-previous"><a href="https://shereadsnovels.com/2025/05/28/the-sirens-by-emilia-hart/" rel="prev"><span class="meta-nav"></span>&nbsp;The Sirens by Emilia&nbsp;Hart</a></div><div class="nav-next"><a href="https://shereadsnovels.com/2025/05/31/my-commonplace-book-may-2025/" rel="next">My Commonplace Book: May&nbsp;2025&nbsp;<span class="meta-nav"></span></a></div>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	
+				
+	<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			10 thoughts on &ldquo;<span>Written on the Dark by Guy Gavriel&nbsp;Kay</span>&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+			
+	<li id="comment-98238" class="comment byuser comment-author-aelfwynhotmailcom even thread-even depth-1 parent">
+		<article id="div-comment-98238" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="http://aelfwynhotmailcom.wordpress.com" class="url" rel="ugc external nofollow">aelfwynhotmailcom</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comment-98238">
+						<time datetime="2025-05-30T10:53:04+01:00">
+							May 30, 2025 at 10:53 am						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?replytocom=98238#respond" data-commentid="98238" data-postid="47167" data-belowelement="div-comment-98238" data-respondelement="respond" data-replyto="Reply to aelfwynhotmailcom" aria-label="Reply to aelfwynhotmailcom">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='aelfwynhotmailcom&#039;s avatar' src='https://0.gravatar.com/avatar/6f4c59df6077a60e1a92039d9c7fb8d1c3b9c7173b92568b540af2d0aa9c549c?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/6f4c59df6077a60e1a92039d9c7fb8d1c3b9c7173b92568b540af2d0aa9c549c?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/6f4c59df6077a60e1a92039d9c7fb8d1c3b9c7173b92568b540af2d0aa9c549c?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/6f4c59df6077a60e1a92039d9c7fb8d1c3b9c7173b92568b540af2d0aa9c549c?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/6f4c59df6077a60e1a92039d9c7fb8d1c3b9c7173b92568b540af2d0aa9c549c?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/6f4c59df6077a60e1a92039d9c7fb8d1c3b9c7173b92568b540af2d0aa9c549c?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p class="wp-block-paragraph">Thank you for that review, it sounds wonderful.  Kay is now the only author whose books I buy new in hardback, and coincidentally he&#8217;s a big fan of my all-time favourite author, Dorothy Dunnett.  I&#8217;m really looking forward to this &#8211; I&#8217;ve read everything he&#8217;s written, and he writes so beautifully and poetically.  My favourite, though, is still Tigana, and it&#8217;s curious how prescient that book was, given certain recent events in eastern Europe.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-98244" class="comment byuser comment-author-shereadsnovels bypostauthor odd alt depth-2">
+		<article id="div-comment-98244" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen (She Reads Novels)</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comment-98244">
+						<time datetime="2025-05-30T22:05:40+01:00">
+							May 30, 2025 at 10:05 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?replytocom=98244#respond" data-commentid="98244" data-postid="47167" data-belowelement="div-comment-98244" data-respondelement="respond" data-replyto="Reply to Helen (She Reads Novels)" aria-label="Reply to Helen (She Reads Novels)">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p class="wp-block-paragraph">I hope you enjoy this one. He does write beautifully and I found this particular book very atmospheric as well. There are a few of his books I still haven&#8217;t read, but of those I have, Tigana is also my favourite.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-98242" class="comment byuser comment-author-conmartin13 even thread-odd thread-alt depth-1 parent">
+		<article id="div-comment-98242" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn">Staircase Wit</cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comment-98242">
+						<time datetime="2025-05-30T18:53:42+01:00">
+							May 30, 2025 at 6:53 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?replytocom=98242#respond" data-commentid="98242" data-postid="47167" data-belowelement="div-comment-98242" data-respondelement="respond" data-replyto="Reply to Staircase Wit" aria-label="Reply to Staircase Wit">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Staircase Wit&#039;s avatar' src='https://1.gravatar.com/avatar/a5917fe578a13571872388f27b0a8d72a05f8667ca9b30bf47adc3571160dd95?s=48&#038;d=identicon&#038;r=G' srcset='https://1.gravatar.com/avatar/a5917fe578a13571872388f27b0a8d72a05f8667ca9b30bf47adc3571160dd95?s=48&#038;d=identicon&#038;r=G 1x, https://1.gravatar.com/avatar/a5917fe578a13571872388f27b0a8d72a05f8667ca9b30bf47adc3571160dd95?s=72&#038;d=identicon&#038;r=G 1.5x, https://1.gravatar.com/avatar/a5917fe578a13571872388f27b0a8d72a05f8667ca9b30bf47adc3571160dd95?s=96&#038;d=identicon&#038;r=G 2x, https://1.gravatar.com/avatar/a5917fe578a13571872388f27b0a8d72a05f8667ca9b30bf47adc3571160dd95?s=144&#038;d=identicon&#038;r=G 3x, https://1.gravatar.com/avatar/a5917fe578a13571872388f27b0a8d72a05f8667ca9b30bf47adc3571160dd95?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>I have only read Tigana but my mother is a big fan &#8211; and admirer of his &#8211; I guess from Dunnett events.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-98252" class="comment byuser comment-author-shereadsnovels bypostauthor odd alt depth-2">
+		<article id="div-comment-98252" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen (She Reads Novels)</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comment-98252">
+						<time datetime="2025-05-31T21:19:52+01:00">
+							May 31, 2025 at 9:19 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?replytocom=98252#respond" data-commentid="98252" data-postid="47167" data-belowelement="div-comment-98252" data-respondelement="respond" data-replyto="Reply to Helen (She Reads Novels)" aria-label="Reply to Helen (She Reads Novels)">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p class="wp-block-paragraph">Tigana is my favourite, but his books cover a wide range of settings and time periods and I&#8217;ve enjoyed all the ones I&#8217;ve read so far.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-98243" class="comment byuser comment-author-whatmeread even thread-even depth-1 parent">
+		<article id="div-comment-98243" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="http://whatmeread.wordpress.com" class="url" rel="ugc external nofollow">whatmeread</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comment-98243">
+						<time datetime="2025-05-30T21:22:22+01:00">
+							May 30, 2025 at 9:22 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?replytocom=98243#respond" data-commentid="98243" data-postid="47167" data-belowelement="div-comment-98243" data-respondelement="respond" data-replyto="Reply to whatmeread" aria-label="Reply to whatmeread">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='whatmeread&#039;s avatar' src='https://1.gravatar.com/avatar/d152344d48982c10fb065048a7b328e4c86e8de2b7867a74d033905aa7306e57?s=48&#038;d=identicon&#038;r=G' srcset='https://1.gravatar.com/avatar/d152344d48982c10fb065048a7b328e4c86e8de2b7867a74d033905aa7306e57?s=48&#038;d=identicon&#038;r=G 1x, https://1.gravatar.com/avatar/d152344d48982c10fb065048a7b328e4c86e8de2b7867a74d033905aa7306e57?s=72&#038;d=identicon&#038;r=G 1.5x, https://1.gravatar.com/avatar/d152344d48982c10fb065048a7b328e4c86e8de2b7867a74d033905aa7306e57?s=96&#038;d=identicon&#038;r=G 2x, https://1.gravatar.com/avatar/d152344d48982c10fb065048a7b328e4c86e8de2b7867a74d033905aa7306e57?s=144&#038;d=identicon&#038;r=G 3x, https://1.gravatar.com/avatar/d152344d48982c10fb065048a7b328e4c86e8de2b7867a74d033905aa7306e57?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p class="wp-block-paragraph">Gosh, I guess I don&#8217;t know enough French history. However, I sometimes enjoy Kay&#8217;s books, at least his later ones, so I might read this one. I revisited his earlier trilogy a few years ago and thought it was juvenile, but the others are just not my genre.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-98253" class="comment byuser comment-author-shereadsnovels bypostauthor odd alt depth-2">
+		<article id="div-comment-98253" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen (She Reads Novels)</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comment-98253">
+						<time datetime="2025-05-31T21:22:43+01:00">
+							May 31, 2025 at 9:22 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?replytocom=98253#respond" data-commentid="98253" data-postid="47167" data-belowelement="div-comment-98253" data-respondelement="respond" data-replyto="Reply to Helen (She Reads Novels)" aria-label="Reply to Helen (She Reads Novels)">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p class="wp-block-paragraph">You don&#8217;t need to know the history, but it&#8217;s interesting if you do and can spot the parallels! I&#8217;ve only read the first book in his early trilogy and didn&#8217;t like it as much as his later books. </p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-98247" class="comment byuser comment-author-calmgrove even thread-odd thread-alt depth-1 parent">
+		<article id="div-comment-98247" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="http://CalmgroveBooks.wordpress.com" class="url" rel="ugc external nofollow">Calmgrove</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comment-98247">
+						<time datetime="2025-05-31T14:41:46+01:00">
+							May 31, 2025 at 2:41 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?replytocom=98247#respond" data-commentid="98247" data-postid="47167" data-belowelement="div-comment-98247" data-respondelement="respond" data-replyto="Reply to Calmgrove" aria-label="Reply to Calmgrove">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Calmgrove&#039;s avatar' src='https://2.gravatar.com/avatar/281e2468315e4af90fe50e2a83a11438c779786d542fb41389325e40b47e5ce9?s=48&#038;d=identicon&#038;r=G' srcset='https://2.gravatar.com/avatar/281e2468315e4af90fe50e2a83a11438c779786d542fb41389325e40b47e5ce9?s=48&#038;d=identicon&#038;r=G 1x, https://2.gravatar.com/avatar/281e2468315e4af90fe50e2a83a11438c779786d542fb41389325e40b47e5ce9?s=72&#038;d=identicon&#038;r=G 1.5x, https://2.gravatar.com/avatar/281e2468315e4af90fe50e2a83a11438c779786d542fb41389325e40b47e5ce9?s=96&#038;d=identicon&#038;r=G 2x, https://2.gravatar.com/avatar/281e2468315e4af90fe50e2a83a11438c779786d542fb41389325e40b47e5ce9?s=144&#038;d=identicon&#038;r=G 3x, https://2.gravatar.com/avatar/281e2468315e4af90fe50e2a83a11438c779786d542fb41389325e40b47e5ce9?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p>Every time you mention GGK and his work I regret still not picking up my copies of the Fionnovar books or a more recent title. Grrr.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-98254" class="comment byuser comment-author-shereadsnovels bypostauthor odd alt depth-2">
+		<article id="div-comment-98254" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen (She Reads Novels)</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comment-98254">
+						<time datetime="2025-05-31T22:14:47+01:00">
+							May 31, 2025 at 10:14 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?replytocom=98254#respond" data-commentid="98254" data-postid="47167" data-belowelement="div-comment-98254" data-respondelement="respond" data-replyto="Reply to Helen (She Reads Novels)" aria-label="Reply to Helen (She Reads Novels)">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p class="wp-block-paragraph">The Fionavar books, being more traditional fantasy, didn&#8217;t appeal to me as much as his later alternate history novels, but I read the first one and enjoyed it more than I expected. Of all the books of his I&#8217;ve read, though, my favourite is Tigana, which I can highly recommend.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li id="comment-98256" class="comment even thread-even depth-1 parent">
+		<article id="div-comment-98256" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn">Mark Robinson</cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comment-98256">
+						<time datetime="2025-06-01T22:13:59+01:00">
+							June 1, 2025 at 10:13 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?replytocom=98256#respond" data-commentid="98256" data-postid="47167" data-belowelement="div-comment-98256" data-respondelement="respond" data-replyto="Reply to Mark Robinson" aria-label="Reply to Mark Robinson">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Mark Robinson&#039;s avatar' src='https://0.gravatar.com/avatar/c777482e2d48ed3ef86b13aed747cda6678eb8c8d3ac57c46cf0aad26d5ccef6?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/c777482e2d48ed3ef86b13aed747cda6678eb8c8d3ac57c46cf0aad26d5ccef6?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/c777482e2d48ed3ef86b13aed747cda6678eb8c8d3ac57c46cf0aad26d5ccef6?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/c777482e2d48ed3ef86b13aed747cda6678eb8c8d3ac57c46cf0aad26d5ccef6?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/c777482e2d48ed3ef86b13aed747cda6678eb8c8d3ac57c46cf0aad26d5ccef6?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/c777482e2d48ed3ef86b13aed747cda6678eb8c8d3ac57c46cf0aad26d5ccef6?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p class="wp-block-paragraph">A Song For Arbonne is a magnificent story.  Kay has the ability to move the reader.  He makes you invest in the characters and experience the full gamut of their emotions.</p>
+<p class="wp-block-paragraph">I read quite widely and enjoy a range of fiction.  Many authors write well and have richly constructed plots and fully developed characters, but so few can make the reader engage like Kay.</p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	<ul class="children">
+
+	<li id="comment-98266" class="comment byuser comment-author-shereadsnovels bypostauthor odd alt depth-2">
+		<article id="div-comment-98266" class="comment-body">
+
+			<header class="comment-meta">
+				<cite class="fn"><a href="https://shereadsnovels.wordpress.com" class="url" rel="ugc external nofollow">Helen (She Reads Novels)</a></cite> <span class="says">says:</span>
+				<div class="comment-metadata">
+					<a href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comment-98266">
+						<time datetime="2025-06-02T21:49:19+01:00">
+							June 2, 2025 at 9:49 pm						</time>
+					</a>
+				</div><!-- .comment-metadata -->
+
+				
+				<div class="comment-tools">
+					
+					<span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/?replytocom=98266#respond" data-commentid="98266" data-postid="47167" data-belowelement="div-comment-98266" data-respondelement="respond" data-replyto="Reply to Helen (She Reads Novels)" aria-label="Reply to Helen (She Reads Novels)">Reply</a></span>				</div><!-- .comment-tools -->
+			</header><!-- .comment-meta -->
+
+			<div class="comment-author vcard">
+				<img referrerpolicy="no-referrer" alt='Helen&#039;s avatar' src='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=48&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=72&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=96&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=144&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/689f1b7756f1e85b257241ebc5f6cc36895ce737e6a3d2b019c081e91a262472?s=192&#038;d=identicon&#038;r=G 4x' class='avatar avatar-48' height='48' width='48' loading='lazy' decoding='async' />			</div><!-- .comment-author -->
+
+			<div class="comment-content">
+				<p class="wp-block-paragraph">Thanks, Mark. I&#8217;ll look forward to reading A Song For Arbonne and the other remaining Kay novels I haven&#8217;t read yet. He writes beautifully and I agree that he&#8217;s a very engaging author &#8211; his characters always feel so real and convincing. </p>
+			</div><!-- .comment-content -->
+		</article><!-- .comment-body -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Please leave a comment.  Thanks! <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://shereadsnovels.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+
+
+<div class="comment-form__verbum transparent"></div><div class="verbum-form-meta"><input type='hidden' name='comment_post_ID' value='47167' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+
+			<input type="hidden" name="highlander_comment_nonce" id="highlander_comment_nonce" value="ac2b0e8a39" />
+			<input type="hidden" name="verbum_show_subscription_modal" value="" /></div><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="6e7fb8ebe8" /></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="227"/><script>
+document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
+</script>
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	<div id="secondary" class="widget-area sidebar-widget-area" role="complementary">
+		<aside id="search-4" class="widget widget_search"><h3 class="widget-title">Search this blog</h3><form role="search" method="get" class="search-form" action="https://shereadsnovels.com/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside><aside id="follow_button_widget-3" class="widget widget_follow_button_widget">
+		<a class="wordpress-follow-button" href="https://shereadsnovels.com" data-blog="13133801" data-lang="en" >Follow She Reads Novels on WordPress.com</a>
+		<script type="text/javascript">(function(d){ window.wpcomPlatform = {"titles":{"timelines":"Embeddable Timelines","followButton":"Follow Button","wpEmbeds":"WordPress Embeds"}}; var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');p.type = 'text/javascript';p.async = true;p.src = '//widgets.wp.com/platform.js';f.parentNode.insertBefore(p,f);}(document));</script>
+
+		</aside><aside id="blog_subscription-6" class="widget widget_blog_subscription jetpack_subscription_widget"><h3 class="widget-title"><label for="subscribe-field">Follow Blog via Email</label></h3>
+
+			<div class="wp-block-jetpack-subscriptions__container">
+			<form
+				action="https://subscribe.wordpress.com"
+				method="post"
+				accept-charset="utf-8"
+				data-blog="13133801"
+				data-post_access_level="everybody"
+				id="subscribe-blog"
+			>
+				<p>Enter your email address to follow this blog and receive notifications of new posts by email.</p>
+				<p id="subscribe-email">
+					<label
+						id="subscribe-field-label"
+						for="subscribe-field"
+						class="screen-reader-text"
+					>
+						Email Address:					</label>
+
+					<input
+							type="email"
+							name="email"
+							autocomplete="email"
+							
+							style="width: 95%; padding: 1px 10px"
+							placeholder="Email Address"
+							value=""
+							id="subscribe-field"
+							required
+						/>				</p>
+
+				<p id="subscribe-submit"
+									>
+					<input type="hidden" name="action" value="subscribe"/>
+					<input type="hidden" name="blog_id" value="13133801"/>
+					<input type="hidden" name="source" value="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/"/>
+					<input type="hidden" name="sub-type" value="widget"/>
+					<input type="hidden" name="redirect_fragment" value="subscribe-blog"/>
+					<input type="hidden" id="_wpnonce" name="_wpnonce" value="8a13ee4057" />					<button type="submit"
+													class="wp-block-button__link"
+																	>
+						Follow					</button>
+				</p>
+			</form>
+						</div>
+			
+</aside><aside id="text-20" class="widget widget_text"><h3 class="widget-title">Follow on X</h3>			<div class="textwidget"><a href="https://twitter.com/shereadsnovels" class="twitter-follow-button" data-show-count="false" data-text-color="#404040" data-link-color="#009933">Follow @shereadsnovels</a>
+</div>
+		</aside><aside id="text-19" class="widget widget_text"><h3 class="widget-title">Follow me on Bloglovin&#8217;</h3>			<div class="textwidget"><a href="http://www.bloglovin.com/en/blog/3266972" title="Follow She Reads Novels on Bloglovin"><img src="https://i0.wp.com/www.bloglovin.com/widget/bilder/en/widget.gif" alt="Follow on Bloglovin" border="0"></a></div>
+		</aside><aside id="rss_links-6" class="widget widget_rss_links"><ul><li><a href="https://shereadsnovels.com/feed/" title="Subscribe to Posts">RSS - Posts</a></li><li><a href="https://shereadsnovels.com/comments/feed/" title="Subscribe to Comments">RSS - Comments</a></li></ul>
+</aside><aside id="media_image-19" class="widget widget_media_image"><style>.widget.widget_media_image { overflow: hidden; }.widget.widget_media_image img { height: auto; max-width: 100%; }</style><a href="https://shereadsnovels.wordpress.com/my-journey-through-time/"><img width="300" height="168" src="https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg" class="image wp-image-18953 alignnone attachment-full size-full" alt="" style="max-width: 100%; height: auto;" decoding="async" loading="lazy" srcset="https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg 300w, https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg?w=150&amp;h=84 150w, https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg?w=200&amp;h=112 200w" sizes="auto, (max-width: 300px) 100vw, 300px" data-attachment-id="18953" data-permalink="https://shereadsnovels.com/journey-through-time/" data-orig-file="https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg" data-orig-size="300,168" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;1&quot;}" data-image-title="Journey Through Time" data-image-description="" data-image-caption="" data-large-file="https://shereadsnovels.com/wp-content/uploads/2017/03/journey-through-time.jpg?w=300" /></a></aside>
+		<aside id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="widget-title">Recent Posts</h3>
+		<ul>
+											<li>
+					<a href="https://shereadsnovels.com/2026/09/04/the-heiress-of-northanger-abbey-by-nancy-bilyeau/">The Heiress of Northanger Abbey by Nancy&nbsp;Bilyeau</a>
+									</li>
+											<li>
+					<a href="https://shereadsnovels.com/2026/09/02/the-snow-witch-by-kirsty-ferry/">The Snow Witch by Kirsty&nbsp;Ferry</a>
+									</li>
+											<li>
+					<a href="https://shereadsnovels.com/2026/09/01/top-ten-tuesday-books-with-nationalities-in-the-title/">Top Ten Tuesday: Books With Nationalities In The&nbsp;Title</a>
+									</li>
+											<li>
+					<a href="https://shereadsnovels.com/2026/08/31/my-commonplace-book-august-2026/">My Commonplace Book: August&nbsp;2026</a>
+									</li>
+											<li>
+					<a href="https://shereadsnovels.com/2026/08/29/the-end-of-20-books-of-summer-and-september-plans/">The end of 20 Books of Summer &#8211; and September&nbsp;plans</a>
+									</li>
+					</ul>
+
+		</aside><aside id="archives-6" class="widget widget_archive"><h3 class="widget-title">Archives</h3>		<label class="screen-reader-text" for="archives-dropdown-6">Archives</label>
+		<select id="archives-dropdown-6" name="archive-dropdown">
+			
+			<option value="">Select Month</option>
+				<option value='https://shereadsnovels.com/2026/09/'> September 2026 &nbsp;(3)</option>
+	<option value='https://shereadsnovels.com/2026/08/'> August 2026 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2026/07/'> July 2026 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2026/06/'> June 2026 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2026/05/'> May 2026 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2026/04/'> April 2026 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2026/03/'> March 2026 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2026/02/'> February 2026 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2026/01/'> January 2026 &nbsp;(20)</option>
+	<option value='https://shereadsnovels.com/2025/12/'> December 2025 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2025/11/'> November 2025 &nbsp;(20)</option>
+	<option value='https://shereadsnovels.com/2025/10/'> October 2025 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2025/09/'> September 2025 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2025/08/'> August 2025 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2025/07/'> July 2025 &nbsp;(19)</option>
+	<option value='https://shereadsnovels.com/2025/06/'> June 2025 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2025/05/'> May 2025 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2025/04/'> April 2025 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2025/03/'> March 2025 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2025/02/'> February 2025 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2025/01/'> January 2025 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2024/12/'> December 2024 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2024/11/'> November 2024 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2024/10/'> October 2024 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2024/09/'> September 2024 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2024/08/'> August 2024 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2024/07/'> July 2024 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2024/06/'> June 2024 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2024/05/'> May 2024 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2024/04/'> April 2024 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2024/03/'> March 2024 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2024/02/'> February 2024 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2024/01/'> January 2024 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2023/12/'> December 2023 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2023/11/'> November 2023 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2023/10/'> October 2023 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2023/09/'> September 2023 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2023/08/'> August 2023 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2023/07/'> July 2023 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2023/06/'> June 2023 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2023/05/'> May 2023 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2023/04/'> April 2023 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2023/03/'> March 2023 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2023/02/'> February 2023 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2023/01/'> January 2023 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/12/'> December 2022 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/11/'> November 2022 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2022/10/'> October 2022 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2022/09/'> September 2022 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/08/'> August 2022 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/07/'> July 2022 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/06/'> June 2022 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2022/05/'> May 2022 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2022/04/'> April 2022 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2022/03/'> March 2022 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2022/02/'> February 2022 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2022/01/'> January 2022 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2021/12/'> December 2021 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2021/11/'> November 2021 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2021/10/'> October 2021 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2021/09/'> September 2021 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2021/08/'> August 2021 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2021/07/'> July 2021 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2021/06/'> June 2021 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2021/05/'> May 2021 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2021/04/'> April 2021 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2021/03/'> March 2021 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2021/02/'> February 2021 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2021/01/'> January 2021 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2020/12/'> December 2020 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2020/11/'> November 2020 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2020/10/'> October 2020 &nbsp;(8)</option>
+	<option value='https://shereadsnovels.com/2020/09/'> September 2020 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2020/08/'> August 2020 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2020/07/'> July 2020 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2020/06/'> June 2020 &nbsp;(8)</option>
+	<option value='https://shereadsnovels.com/2020/05/'> May 2020 &nbsp;(8)</option>
+	<option value='https://shereadsnovels.com/2020/04/'> April 2020 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2020/03/'> March 2020 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2020/02/'> February 2020 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2020/01/'> January 2020 &nbsp;(19)</option>
+	<option value='https://shereadsnovels.com/2019/12/'> December 2019 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2019/11/'> November 2019 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2019/10/'> October 2019 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2019/09/'> September 2019 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2019/08/'> August 2019 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2019/07/'> July 2019 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2019/06/'> June 2019 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2019/05/'> May 2019 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2019/04/'> April 2019 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2019/03/'> March 2019 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2019/02/'> February 2019 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2019/01/'> January 2019 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2018/12/'> December 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/11/'> November 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/10/'> October 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/09/'> September 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/08/'> August 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/07/'> July 2018 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2018/06/'> June 2018 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2018/05/'> May 2018 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2018/04/'> April 2018 &nbsp;(19)</option>
+	<option value='https://shereadsnovels.com/2018/03/'> March 2018 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2018/02/'> February 2018 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2018/01/'> January 2018 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/12/'> December 2017 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2017/11/'> November 2017 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2017/10/'> October 2017 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2017/09/'> September 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/08/'> August 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/07/'> July 2017 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2017/06/'> June 2017 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2017/05/'> May 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/04/'> April 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/03/'> March 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2017/02/'> February 2017 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2017/01/'> January 2017 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2016/12/'> December 2016 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2016/11/'> November 2016 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2016/10/'> October 2016 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2016/09/'> September 2016 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2016/08/'> August 2016 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2016/07/'> July 2016 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2016/06/'> June 2016 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2016/05/'> May 2016 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2016/04/'> April 2016 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2016/03/'> March 2016 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2016/02/'> February 2016 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2016/01/'> January 2016 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2015/12/'> December 2015 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2015/11/'> November 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/10/'> October 2015 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2015/09/'> September 2015 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2015/08/'> August 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/07/'> July 2015 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2015/06/'> June 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/05/'> May 2015 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2015/04/'> April 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/03/'> March 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/02/'> February 2015 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2015/01/'> January 2015 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2014/12/'> December 2014 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2014/11/'> November 2014 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2014/10/'> October 2014 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2014/09/'> September 2014 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2014/08/'> August 2014 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2014/07/'> July 2014 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2014/06/'> June 2014 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2014/05/'> May 2014 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2014/04/'> April 2014 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2014/03/'> March 2014 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2014/02/'> February 2014 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2014/01/'> January 2014 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2013/12/'> December 2013 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2013/11/'> November 2013 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2013/10/'> October 2013 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2013/09/'> September 2013 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2013/08/'> August 2013 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2013/07/'> July 2013 &nbsp;(7)</option>
+	<option value='https://shereadsnovels.com/2013/06/'> June 2013 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2013/05/'> May 2013 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2013/04/'> April 2013 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2013/03/'> March 2013 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2013/02/'> February 2013 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2013/01/'> January 2013 &nbsp;(11)</option>
+	<option value='https://shereadsnovels.com/2012/12/'> December 2012 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2012/11/'> November 2012 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2012/10/'> October 2012 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2012/09/'> September 2012 &nbsp;(8)</option>
+	<option value='https://shereadsnovels.com/2012/08/'> August 2012 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2012/07/'> July 2012 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2012/06/'> June 2012 &nbsp;(8)</option>
+	<option value='https://shereadsnovels.com/2012/05/'> May 2012 &nbsp;(5)</option>
+	<option value='https://shereadsnovels.com/2012/04/'> April 2012 &nbsp;(7)</option>
+	<option value='https://shereadsnovels.com/2012/03/'> March 2012 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2012/02/'> February 2012 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2012/01/'> January 2012 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2011/12/'> December 2011 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2011/11/'> November 2011 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2011/10/'> October 2011 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2011/09/'> September 2011 &nbsp;(17)</option>
+	<option value='https://shereadsnovels.com/2011/08/'> August 2011 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2011/07/'> July 2011 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2011/06/'> June 2011 &nbsp;(16)</option>
+	<option value='https://shereadsnovels.com/2011/05/'> May 2011 &nbsp;(18)</option>
+	<option value='https://shereadsnovels.com/2011/04/'> April 2011 &nbsp;(15)</option>
+	<option value='https://shereadsnovels.com/2011/03/'> March 2011 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2011/02/'> February 2011 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2011/01/'> January 2011 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2010/12/'> December 2010 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2010/11/'> November 2010 &nbsp;(9)</option>
+	<option value='https://shereadsnovels.com/2010/10/'> October 2010 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2010/09/'> September 2010 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2010/08/'> August 2010 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2010/07/'> July 2010 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2010/06/'> June 2010 &nbsp;(12)</option>
+	<option value='https://shereadsnovels.com/2010/05/'> May 2010 &nbsp;(10)</option>
+	<option value='https://shereadsnovels.com/2010/04/'> April 2010 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2010/03/'> March 2010 &nbsp;(14)</option>
+	<option value='https://shereadsnovels.com/2010/02/'> February 2010 &nbsp;(13)</option>
+	<option value='https://shereadsnovels.com/2010/01/'> January 2010 &nbsp;(20)</option>
+	<option value='https://shereadsnovels.com/2009/12/'> December 2009 &nbsp;(22)</option>
+	<option value='https://shereadsnovels.com/2009/11/'> November 2009 &nbsp;(31)</option>
+	<option value='https://shereadsnovels.com/2009/10/'> October 2009 &nbsp;(4)</option>
+
+		</select>
+
+			<script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value ) {
+				document.location.href = dropdown.value;
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "archives-dropdown-6" );
+
+//# sourceURL=WP_Widget_Archives%3A%3Awidget
+</script>
+</aside><aside id="categories-4" class="widget widget_categories"><h3 class="widget-title">Categories</h3><form action="https://shereadsnovels.com" method="get"><label class="screen-reader-text" for="cat">Categories</label><select  name='cat' id='cat' class='postform'>
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="36502859">After the Sunday Papers</option>
+	<option class="level-0" value="143095">Author Interviews</option>
+	<option class="level-0" value="26046">Blog Updates</option>
+	<option class="level-0" value="1936042">Book Miscellany</option>
+	<option class="level-0" value="9068">Childhood Memories</option>
+	<option class="level-0" value="924">Events</option>
+	<option class="level-0" value="9548">Features</option>
+	<option class="level-0" value="82555">Giveaways</option>
+	<option class="level-0" value="15235025">Historical Musings</option>
+	<option class="level-0" value="366">Memes</option>
+	<option class="level-0" value="19496723">My Commonplace Book</option>
+	<option class="level-0" value="9169092">New Book Arrivals</option>
+	<option class="level-0" value="368468">Not About Books</option>
+	<option class="level-0" value="531339">Reading Challenges</option>
+	<option class="level-0" value="309">Reviews</option>
+	<option class="level-1" value="64079">&nbsp;&nbsp;&nbsp;Chick Lit</option>
+	<option class="level-1" value="7225">&nbsp;&nbsp;&nbsp;Children&#8217;s</option>
+	<option class="level-1" value="6720">&nbsp;&nbsp;&nbsp;Classics</option>
+	<option class="level-1" value="3898">&nbsp;&nbsp;&nbsp;Crime</option>
+	<option class="level-1" value="3027824">&nbsp;&nbsp;&nbsp;Did Not Finish</option>
+	<option class="level-1" value="7224">&nbsp;&nbsp;&nbsp;Fantasy</option>
+	<option class="level-1" value="1747">&nbsp;&nbsp;&nbsp;Fiction</option>
+	<option class="level-1" value="585700">&nbsp;&nbsp;&nbsp;Gothic Fiction</option>
+	<option class="level-1" value="1651">&nbsp;&nbsp;&nbsp;Graphic Novels</option>
+	<option class="level-1" value="92732">&nbsp;&nbsp;&nbsp;Historical Fiction</option>
+	<option class="level-1" value="1252">&nbsp;&nbsp;&nbsp;Horror</option>
+	<option class="level-1" value="18517">&nbsp;&nbsp;&nbsp;Memoirs</option>
+	<option class="level-1" value="13078">&nbsp;&nbsp;&nbsp;Mystery</option>
+	<option class="level-1" value="5174">&nbsp;&nbsp;&nbsp;Mythology</option>
+	<option class="level-1" value="634707">&nbsp;&nbsp;&nbsp;Neo-Victorian</option>
+	<option class="level-1" value="3748">&nbsp;&nbsp;&nbsp;Non-Fiction</option>
+	<option class="level-1" value="1868">&nbsp;&nbsp;&nbsp;Philosophy</option>
+	<option class="level-1" value="43050">&nbsp;&nbsp;&nbsp;Plays</option>
+	<option class="level-1" value="422">&nbsp;&nbsp;&nbsp;Poetry</option>
+	<option class="level-1" value="10615">&nbsp;&nbsp;&nbsp;Science Fiction</option>
+	<option class="level-1" value="10515571">&nbsp;&nbsp;&nbsp;Sensation Novels</option>
+	<option class="level-1" value="546">&nbsp;&nbsp;&nbsp;Short Stories</option>
+	<option class="level-1" value="8811">&nbsp;&nbsp;&nbsp;Suspense</option>
+	<option class="level-1" value="11183">&nbsp;&nbsp;&nbsp;Thriller</option>
+	<option class="level-1" value="12343">&nbsp;&nbsp;&nbsp;YA Fiction</option>
+	<option class="level-0" value="1571794">Sunday Salon</option>
+	<option class="level-0" value="1">Uncategorized</option>
+</select>
+</form><script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value && parseInt( dropdown.value ) > 0 && dropdown instanceof HTMLSelectElement ) {
+				dropdown.parentElement.submit();
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "cat" );
+
+//# sourceURL=WP_Widget_Categories%3A%3Awidget
+</script>
+</aside><aside id="jetpack_posts_i_like-3" class="widget widget_jetpack_posts_i_like"><h3 class="widget-title">Posts I Like</h3><ul class='widgets-list-layout no-grav'><li><img src='https://i0.wp.com/m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1774085879i/216443369.jpg?resize=40%2C40&#038;ssl=1' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://bewitchingbooksravenousreads.wordpress.com/2026/09/03/book-review-serenity-falls-by-c-j-tudor/' class='bump-view' data-bump-view='pil'>Book Review: Serenity Falls by&hellip;</a> <span>on&nbsp;<a href='http://bewitchingbooksravenousreads.wordpress.com' class='bump-view' data-bump-view='pil'>Bewitching Books, Ravenous Reads</a></span></div></li><li><img src='https://whatmeread.files.wordpress.com/2026/07/methods-of-lady-waldenhurst.jpg?w=800&#038;resize=40%2C40' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://whatmeread.com/2026/09/03/review-2768-ripxxi-the-methods-of-lady-walderhurst/' class='bump-view' data-bump-view='pil'>Review 2768: #RIPXXI! The Meth&hellip;</a> <span>on&nbsp;<a href='http://whatmeread.com' class='bump-view' data-bump-view='pil'>What? Me Read?</a></span></div></li><li><img src='https://hopewellslibraryoflife.files.wordpress.com/2026/05/4b2c1187cac3a24ac5105a8c878a0ffb.jpg?w=800&#038;resize=40%2C40' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://hopewellslibraryoflife.wordpress.com/2026/09/03/20-books-of-summer-2026-wrap-up/' class='bump-view' data-bump-view='pil'>20 Books of Summer 2026 Wrap-u&hellip;</a> <span>on&nbsp;<a href='http://hopewellslibraryoflife.wordpress.com' class='bump-view' data-bump-view='pil'>Hopewell&#039;s Public Library of Life</a></span></div></li><li><img src='https://thebookwormchronicles.files.wordpress.com/2026/05/img_1549.jpeg?fit=1200%2C1200&#038;w=800&#038;resize=40%2C40' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://thebookwormchronicles.wordpress.com/2026/09/03/%e2%98%80-my-10-books-of-summer-2026-wrap-up/' class='bump-view' data-bump-view='pil'>☀ My 10 Books of Summer 2026 W&hellip;</a> <span>on&nbsp;<a href='http://thebookwormchronicles.wordpress.com' class='bump-view' data-bump-view='pil'></a></span></div></li><li><img src='https://whatcathyreadnext.files.wordpress.com/2023/03/william-boyd-2026524540-e1679412548536.webp?w=800&#038;resize=40%2C40' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://whatcathyreadnext.co.uk/2026/09/03/book-review-cold-sunset-by-william-boyd-vikingbooksuk/' class='bump-view' data-bump-view='pil'>Book Review - Cold Sunset by W&hellip;</a> <span>on&nbsp;<a href='http://whatcathyreadnext.co.uk' class='bump-view' data-bump-view='pil'>What Cathy Read Next...</a></span></div></li><li><img src='https://fictionfanblog.files.wordpress.com/2025/05/chatsworth-library.webp?w=800&#038;resize=40%2C40' class='widgets-list-layout-blavatar' /><div class='widgets-list-layout-links'><a href='https://fictionfanblog.wordpress.com/2026/09/03/tbr-thursday-506/' class='bump-view' data-bump-view='pil'>TBR Thursday 506...</a> <span>on&nbsp;<a href='http://fictionfanblog.wordpress.com' class='bump-view' data-bump-view='pil'>FictionFan&#039;s Book Reviews</a></span></div></li></ul></aside><aside id="custom_html-2" class="widget_text widget widget_custom_html"><h3 class="widget-title">NetGalley</h3><div class="textwidget custom-html-widget"><img src="https://www.netgalley.co.uk/badge/f0c81353dd681b24c370f7a474c91c92b5358ee1" width="80" height="80" alt="200 Book Reviews" title="200 Book Reviews" />
+<img src="https://www.netgalley.co.uk/badge/dd2f01316b573e58c61468ef6428335f87931873" width="80" height="80" alt="80%" title="80%" />
+<img src="https://www.netgalley.co.uk/badge/2c670e2e47ecc42a64fc9e04c91c3169b8dd47f3" width="80" height="80" alt="Reviews Published" title="Reviews Published" />
+<img src="https://www.netgalley.co.uk/badge/6715b76580311c11564714b179fb737d2daf9e06" width="80" height="80" alt="2016 NetGalley Challenge" title="2016 NetGalley Challenge" />
+<img src="https://www.netgalley.co.uk/badge/5accfa233c64682c426297305a84acf778a282cd" width="80" height="80" alt="2015 Challenge Participant" title="2015 Challenge Participant" />
+<img src="https://www.netgalley.co.uk/badge/e6e7b8db1fe052de87ca5392c9281a22bd344e34" width="80" height="80" alt="Professional Reader" title="Professional Reader" /></div></aside><aside id="wpcom-goodreads-3" class="widget widget_goodreads"><h3 class="widget-title">Currently reading</h3><div class="jetpack-goodreads-legacy-widget gr_custom_widget" id="gr_custom_widget_204148_currently_reading"></div>
+<script src="https://www.goodreads.com/review/custom_widget/204148.Currently%20reading:%20currently-reading?cover_position=&#038;cover_size=small&#038;num_books=5&#038;order=d&#038;shelf=currently-reading&#038;sort=date_added&#038;widget_bg_transparent=&#038;widget_id=204148_currently_reading"></script>
+</aside><aside id="text-16" class="widget widget_text">			<div class="textwidget"><!--NetworkedBlogs Start--><!--.networkedblogs_widget a {text-decoration:none;color:#3B5998;font-weight:normal;}.networkedblogs_widget .networkedblogs_footer a {text-decoration:none;color:#FFFFFF;font-weight:normal;}--><div id='networkedblogs_container' style='height:180px;padding-top:20px;'><div id='networkedblogs_above'></div><div id='networkedblogs_widget' style="width:120px;margin:0 auto;padding:0 0 3px;font-family:'lucida grande', tahoma, Verdana, Arial, Sans-Serif;font-size:11px;font-weight:normal;text-decoration:none;background:#3B5998 none repeat scroll 0 0;border:none;line-height:13px;"><div id='networkedblogs_header' style="padding:1px 1px 2px 3px;text-align:left;"><a href='http://www.facebook.com/apps/application.php?id=9953271133' style="text-decoration:none;color:#FFFFFF;font-weight:normal;font-size:11px;background-repeat:no-repeat;">NetworkedBlogs</a></div><div id='networkedblogs_body' style="background-color:#FFFFFF;color:#444444;padding:4px;border-left:1px solid #D8DFEA;border-right:1px solid #D8DFEA;text-align:left;"><table cellpadding="0" cellspacing="0" style="border:none;padding:0;"><tr><td style="border:none;padding:0;"><span style="color:#777777;">Blog:</span></td></tr><tr><td style="border:none;padding:0;"><a target="_blank" href="http://www.networkedblogs.com/blog/she-reads-novels" style="text-decoration:none;color:#3B5998;" rel="noopener">She Reads Novels</a></td></tr><tr><td style="border:none;padding:0;"><div style="padding:0;color:#777777;">Topics:</div></td></tr><tr><td style="border:none;padding:0;">  </td></tr><tr><td style="border:none;padding:0;"><div id='networkedblogs_badges'>&nbsp;</div></td></tr><tr><td style="border:none;padding:0;"><div style='padding:0;text-align:center;'><a target="_blank" href="http://www.networkedblogs.com/blog/she-reads-novels?ahash=70f588656260895e6340aa17f862a1d3" style="text-decoration:none;color:#666666;font-weight:normal;font-size:10px;" rel="noopener">Follow my blog</a></div></td></tr></table></div></div><div id='networkedblogs_below' class='networkedblogs_below'></div></div><!--NetworkedBlogs End--></div>
+		</aside>	</div><!-- #secondary -->
+
+	</div><!-- #content -->
+
+	
+	<footer id="colophon" class="site-footer">
+		
+		<div class="site-info"  role="contentinfo">
+			<a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a>
+			
+					</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<!--  -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/files/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/pub/sela/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="grofiles-cards-js" src="//0.gravatar.com/js/hovercards/hovercards.min.js?ver=202636d1133547e8a1f2801609f51cef12522abe7f6647d869e9fbc974fe356a37e613"></script>
+<script id="wpgroho-js-extra">
+var WPGroHo = {"my_hash":""};
+//# sourceURL=wpgroho-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1610363240i'></script>
+
+	<script>
+		// Initialize and attach hovercards to all gravatars
+		( function() {
+			function init() {
+				if ( typeof Gravatar === 'undefined' ) {
+					return;
+				}
+
+				if ( typeof Gravatar.init !== 'function' ) {
+					return;
+				}
+
+				Gravatar.profile_cb = function ( hash, id ) {
+					WPGroHo.syncProfileData( hash, id );
+				};
+
+				Gravatar.my_hash = WPGroHo.my_hash;
+				Gravatar.init(
+					'body',
+					'#wp-admin-bar-my-account',
+					{
+						i18n: {
+							'Edit your profile →': 'Edit your profile →',
+							'View profile →': 'View profile →',
+							'Contact': 'Contact',
+							'Send money': 'Send money',
+							'Sorry, we are unable to load this Gravatar profile.': 'Sorry, we are unable to load this Gravatar profile.',
+							'Gravatar not found.': 'Gravatar not found.',
+							'Too Many Requests.': 'Too Many Requests.',
+							'Internal Server Error.': 'Internal Server Error.',
+							'Is this you?': 'Is this you?',
+							'Claim your free profile.': 'Claim your free profile.',
+							'Email': 'Email',
+							'Home Phone': 'Home Phone',
+							'Work Phone': 'Work Phone',
+							'Cell Phone': 'Cell Phone',
+							'Contact Form': 'Contact Form',
+							'Calendar': 'Calendar',
+						},
+					}
+				);
+			}
+
+			if ( document.readyState !== 'loading' ) {
+				init();
+			} else {
+				document.addEventListener( 'DOMContentLoaded', init );
+			}
+		} )();
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-7f2b7d828885773ab5f8d2b2bea9e99e">
+	</div>
+	<div class="grofile-hash-map-9059aeed6ff4af803e53a2635ba5601c">
+	</div>
+	<div class="grofile-hash-map-c0e12eab57966348801e745e6a213e48">
+	</div>
+	<div class="grofile-hash-map-0866b15b5a8b2863d4b79483fe0ffc99">
+	</div>
+	<div class="grofile-hash-map-c297df653a8e20262755dbc321b680b2">
+	</div>
+	<div class="grofile-hash-map-6c34cb3a346de82f2942d9c53a6f3b5e">
+	</div>
+	</div>
+		<div id="actionbar" dir="ltr" style="display: none;"
+			class="actnbr-pub-sela actnbr-has-follow actnbr-has-actions">
+		<ul>
+								<li class="actnbr-btn actnbr-hidden">
+						<a class="actnbr-action actnbr-actn-comment" href="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/#comments">
+							<svg class="gridicon gridicons-comment" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M12 16l-5 5v-5H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v9c0 1.1-.9 2-2 2h-7z"/></g></svg>							<span>Comment						</span>
+						</a>
+					</li>
+									<li class="actnbr-btn actnbr-hidden">
+						<a class="actnbr-action actnbr-actn-reblog" href="">
+							<svg class="gridicon gridicons-reblog" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M22.086 9.914L20 7.828V18c0 1.105-.895 2-2 2h-7v-2h7V7.828l-2.086 2.086L14.5 8.5 19 4l4.5 4.5-1.414 1.414zM6 16.172V6h7V4H6c-1.105 0-2 .895-2 2v10.172l-2.086-2.086L.5 15.5 5 20l4.5-4.5-1.414-1.414L6 16.172z"/></g></svg><span>Reblog</span>
+						</a>
+					</li>
+									<li class="actnbr-btn actnbr-hidden">
+								<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+							<div class="actnbr-popover tip tip-top-left actnbr-notice" id="follow-bubble">
+							<div class="tip-arrow"></div>
+							<div class="tip-inner actnbr-follow-bubble">
+															<ul>
+											<li class="actnbr-sitename">
+			<a href="https://shereadsnovels.com">
+				<img loading='lazy' alt='' src='https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=50&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' srcset='https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=50&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 1x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=75&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 1.5x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=100&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 2x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=150&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 3x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=200&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 4x' class='avatar avatar-50' height='50' width='50' />				She Reads Novels			</a>
+		</li>
+										<div class="actnbr-message no-display"></div>
+									<form method="post" action="https://subscribe.wordpress.com" accept-charset="utf-8" style="display: none;">
+																						<div class="actnbr-follow-count">Join 929 other subscribers</div>
+																					<div>
+										<input type="email" name="email" placeholder="Enter your email address" class="actnbr-email-field" aria-label="Enter your email address" />
+										</div>
+										<input type="hidden" name="action" value="subscribe" />
+										<input type="hidden" name="blog_id" value="13133801" />
+										<input type="hidden" name="source" value="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/" />
+										<input type="hidden" name="sub-type" value="actionbar-follow" />
+										<input type="hidden" id="_wpnonce" name="_wpnonce" value="8a13ee4057" />										<div class="actnbr-button-wrap">
+											<button type="submit" value="Sign me up">
+												Sign me up											</button>
+										</div>
+									</form>
+									<li class="actnbr-login-nudge">
+										<div>
+											Already have a WordPress.com account? <a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fshereadsnovels.com%252F2025%252F05%252F30%252Fwritten-on-the-dark-by-guy-gavriel-kay%252F">Log in now.</a>										</div>
+									</li>
+								</ul>
+															</div>
+						</div>
+					</li>
+							<li class="actnbr-ellipsis actnbr-hidden">
+				<svg class="gridicon gridicons-ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"/></g></svg>				<div class="actnbr-popover tip tip-top-left actnbr-more">
+					<div class="tip-arrow"></div>
+					<div class="tip-inner">
+						<ul>
+								<li class="actnbr-sitename">
+			<a href="https://shereadsnovels.com">
+				<img loading='lazy' alt='' src='https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=50&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' srcset='https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=50&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 1x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=75&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 1.5x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=100&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 2x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=150&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 3x, https://secure.gravatar.com/blavatar/6d85d56c76f143cd980d1771e199c73e5cbb24604dbf9c6754888df16e067fb4?s=200&#038;d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png 4x' class='avatar avatar-50' height='50' width='50' />				She Reads Novels			</a>
+		</li>
+								<li class="actnbr-folded-follow">
+										<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+								</li>
+														<li class="actnbr-signup"><a href="https://wordpress.com/start/">Sign up</a></li>
+							<li class="actnbr-login"><a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fshereadsnovels.com%252F2025%252F05%252F30%252Fwritten-on-the-dark-by-guy-gavriel-kay%252F">Log in</a></li>
+																<li class="actnbr-shortlink">
+										<a href="https://wp.me/pT6Hv-cgL">
+											<span class="actnbr-shortlink__text">Copy shortlink</span>
+											<span class="actnbr-shortlink__icon"><svg class="gridicon gridicons-checkmark" height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M9 19.414l-6.707-6.707 1.414-1.414L9 16.586 20.293 5.293l1.414 1.414"/></g></svg></span>
+										</a>
+									</li>
+																<li class="flb-report">
+									<a href="https://wordpress.com/abuse/?report_url=https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/" target="_blank" rel="noopener noreferrer">
+										Report this content									</a>
+								</li>
+															<li class="actnbr-reader">
+									<a href="https://wordpress.com/reader/blogs/13133801/posts/47167">
+										View post in Reader									</a>
+								</li>
+															<li class="actnbr-subs">
+									<a href="https://subscribe.wordpress.com/">Manage subscriptions</a>
+								</li>
+																<li class="actnbr-fold"><a href="">Collapse this bar</a></li>
+														</ul>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+<script>
+window.addEventListener( "DOMContentLoaded", function( event ) {
+	var link = document.createElement( "link" );
+	link.href = "/wp-content/mu-plugins/actionbar/actionbar.css?v=20250116";
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	document.head.appendChild( link );
+
+	var script = document.createElement( "script" );
+	script.src = "/wp-content/mu-plugins/actionbar/actionbar.js?v=20250204";
+	document.body.appendChild( script );
+} );
+</script>
+
+			<div id="jp-carousel-loading-overlay" style="display: none;">
+			<div id="jp-carousel-loading-wrapper">
+				<span id="jp-carousel-library-loading"><svg class="jetpack-spinner" width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+			</div>
+		</div>
+		<div class="jp-carousel-overlay" style="display: none;">
+
+		<div class="jp-carousel-container">
+			<!-- The Carousel Swiper -->
+			<div
+				class="jp-carousel-wrap swiper jp-carousel-swiper-container jp-carousel-transitions"
+				itemscope
+				itemtype="https://schema.org/ImageGallery">
+				<div class="jp-carousel swiper-wrapper"></div>
+				<div class="jp-swiper-button-prev swiper-button-prev">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskPrev" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="9" height="12">
+							<path d="M16.2072 16.59L11.6496 12L16.2072 7.41L14.8041 6L8.8335 12L14.8041 18L16.2072 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskPrev)">
+							<rect x="0.579102" width="23.8823" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+				<div class="jp-swiper-button-next swiper-button-next">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskNext" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="8" height="12">
+							<path d="M8.59814 16.59L13.1557 12L8.59814 7.41L10.0012 6L15.9718 12L10.0012 18L8.59814 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskNext)">
+							<rect x="0.34375" width="23.8822" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+			</div>
+			<!-- The main close buton -->
+			<div class="jp-carousel-close-hint">
+				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<mask id="maskClose" mask-type="alpha" maskUnits="userSpaceOnUse" x="5" y="5" width="15" height="14">
+						<path d="M19.3166 6.41L17.9135 5L12.3509 10.59L6.78834 5L5.38525 6.41L10.9478 12L5.38525 17.59L6.78834 19L12.3509 13.41L17.9135 19L19.3166 17.59L13.754 12L19.3166 6.41Z" fill="white"/>
+					</mask>
+					<g mask="url(#maskClose)">
+						<rect x="0.409668" width="23.8823" height="24" fill="#FFFFFF"/>
+					</g>
+				</svg>
+			</div>
+			<!-- Image info, comments and meta -->
+			<div class="jp-carousel-info">
+				<div class="jp-carousel-info-footer">
+					<div class="jp-carousel-pagination-container">
+						<div class="jp-swiper-pagination swiper-pagination"></div>
+						<div class="jp-carousel-pagination"></div>
+					</div>
+					<div class="jp-carousel-photo-title-container">
+						<div class="jp-carousel-photo-caption"></div>
+					</div>
+					<div class="jp-carousel-photo-icons-container">
+						<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-info" aria-label="Toggle photo metadata visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskInfo" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M12.7537 2C7.26076 2 2.80273 6.48 2.80273 12C2.80273 17.52 7.26076 22 12.7537 22C18.2466 22 22.7046 17.52 22.7046 12C22.7046 6.48 18.2466 2 12.7537 2ZM11.7586 7V9H13.7488V7H11.7586ZM11.7586 11V17H13.7488V11H11.7586ZM4.79292 12C4.79292 16.41 8.36531 20 12.7537 20C17.142 20 20.7144 16.41 20.7144 12C20.7144 7.59 17.142 4 12.7537 4C8.36531 4 4.79292 7.59 4.79292 12Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskInfo)">
+										<rect x="0.8125" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+							</span>
+						</a>
+												<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-comments" aria-label="Toggle photo comments visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskComments" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M4.3271 2H20.2486C21.3432 2 22.2388 2.9 22.2388 4V16C22.2388 17.1 21.3432 18 20.2486 18H6.31729L2.33691 22V4C2.33691 2.9 3.2325 2 4.3271 2ZM6.31729 16H20.2486V4H4.3271V18L6.31729 16Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskComments)">
+										<rect x="0.34668" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+
+								<span class="jp-carousel-has-comments-indicator" aria-label="This image has comments."></span>
+							</span>
+						</a>
+											</div>
+				</div>
+				<div class="jp-carousel-info-extra">
+					<div class="jp-carousel-info-content-wrapper">
+						<div class="jp-carousel-photo-title-container">
+							<div class="jp-carousel-photo-title"></div>
+						</div>
+						<div class="jp-carousel-comments-wrapper">
+															<div id="jp-carousel-comments-loading">
+									<span>Loading Comments...</span>
+								</div>
+								<div class="jp-carousel-comments"></div>
+								<div id="jp-carousel-comment-form-container">
+									<span id="jp-carousel-comment-form-spinner"><svg class="jetpack-spinner" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+									<div id="jp-carousel-comment-post-results"></div>
+																														<form id="jp-carousel-comment-form">
+												<label for="jp-carousel-comment-form-comment-field" class="screen-reader-text">Write a Comment...</label>
+												<textarea
+													name="comment"
+													class="jp-carousel-comment-form-field jp-carousel-comment-form-textarea"
+													id="jp-carousel-comment-form-comment-field"
+													placeholder="Write a Comment..."
+												></textarea>
+												<div id="jp-carousel-comment-form-submit-and-info-wrapper">
+													<div id="jp-carousel-comment-form-commenting-as">
+																													<fieldset>
+																<label for="jp-carousel-comment-form-email-field">Email (Required)</label>
+																<input type="text" name="email" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-email-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-author-field">Name (Required)</label>
+																<input type="text" name="author" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-author-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-url-field">Website</label>
+																<input type="text" name="url" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-url-field" />
+															</fieldset>
+																											</div>
+													<input
+														type="submit"
+														name="submit"
+														class="jp-carousel-comment-form-button"
+														id="jp-carousel-comment-form-button-submit"
+														value="Post Comment" />
+												</div>
+											</form>
+																											</div>
+													</div>
+						<div class="jp-carousel-image-meta">
+							<div class="jp-carousel-title-and-caption">
+								<div class="jp-carousel-photo-info">
+									<div class="jp-carousel-caption" itemprop="caption description"></div>
+								</div>
+
+								<div class="jp-carousel-photo-description"></div>
+							</div>
+							<a class="jp-carousel-image-download" href="#" aria-label="Download image" target="_blank" style="display: none;">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="3" y="3" width="19" height="18">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M5.84615 5V19H19.7775V12H21.7677V19C21.7677 20.1 20.8721 21 19.7775 21H5.84615C4.74159 21 3.85596 20.1 3.85596 19V5C3.85596 3.9 4.74159 3 5.84615 3H12.8118V5H5.84615ZM14.802 5V3H21.7677V10H19.7775V6.41L9.99569 16.24L8.59261 14.83L18.3744 5H14.802Z" fill="white"/>
+									</mask>
+									<g mask="url(#mask0)">
+										<rect x="0.870605" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+								<span class="jp-carousel-download-text"></span>
+							</a>
+							<div class="jp-carousel-image-map" style="display: none;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+		
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/":47167};
+	</script>
+				<script id="twitter-widgets-js" src="https://platform.twitter.com/widgets.js?ver=20111117"></script>
+
+	<script type="text/javascript">
+		(function () {
+			var wpcom_reblog = {
+				source: 'toolbar',
+
+				toggle_reblog_box_flair: function (obj_id, post_id) {
+
+					// Go to site selector. This will redirect to their blog if they only have one.
+					const postEndpoint = `https://wordpress.com/post`;
+
+					// Ideally we would use the permalink here, but fortunately this will be replaced with the 
+					// post permalink in the editor.
+					const originalURL = `${ document.location.href }?page_id=${ post_id }`; 
+					
+					const url =
+						postEndpoint +
+						'?url=' +
+						encodeURIComponent( originalURL ) +
+						'&is_post_share=true' +
+						'&v=5';
+
+					const redirect = function () {
+						if (
+							! window.open( url, '_blank' )
+						) {
+							location.href = url;
+						}
+					};
+
+					if ( /Firefox/.test( navigator.userAgent ) ) {
+						setTimeout( redirect, 0 );
+					} else {
+						redirect();
+					}
+				},
+			};
+
+			window.wpcom_reblog = wpcom_reblog;
+		})();
+	</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/likes/queuehandler.js?m=1741961244i'></script>
+<script id="jetpack-testimonial-theme-supports-js-after">
+const jetpack_testimonial_theme_supports = false
+//# sourceURL=jetpack-testimonial-theme-supports-js-after
+</script>
+<script id="wp-hooks-js" src="/wp-content/plugins/gutenberg-core/v23.9.0/build/scripts/hooks/index.min.js?m=1788366818i&#038;ver=f0f188028580e8dc1255"></script>
+<script id="wp-i18n-js" src="/wp-content/plugins/gutenberg-core/v23.9.0/build/scripts/i18n/index.min.js?m=1788366818i&#038;ver=1dfe7db3940c23ea9216"></script>
+<script id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script id="verbum-settings-js-before">
+window.VerbumComments = {"Log in or provide your name and email to leave a reply.":"Log in or provide your name and email to leave a reply.","Log in or provide your name and email to leave a comment.":"Log in or provide your name and email to leave a comment.","Receive web and mobile notifications for posts on this site.":"Receive web and mobile notifications for posts on this site.","Name":"Name","Email (address never made public)":"Email (address never made public)","Website (optional)":"Website (optional)","Leave a reply. (log in optional)":"Leave a reply. (log in optional)","Leave a comment. (log in optional)":"Leave a comment. (log in optional)","Log in to leave a reply.":"Log in to leave a reply.","Log in to leave a comment.":"Log in to leave a comment.","Logged in via %s":"Logged in via %s","Log out":"Log out","Your browser is blocking the cookies needed to log in and comment here. Allow cookies in your privacy settings, then reload the page.":"Your browser is blocking the cookies needed to log in and comment here. Allow cookies in your privacy settings, then reload the page.","Email":"Email","(Address never made public)":"(Address never made public)","Instantly":"Instantly","Daily":"Daily","Reply":"Reply","Comment":"Comment","WordPress":"WordPress","Weekly":"Weekly","Notify me of new posts":"Notify me of new posts","Email me new posts":"Email me new posts","Email me new comments":"Email me new comments","Cancel":"Cancel","Write a comment...":"Write a comment...","Write a reply...":"Write a reply...","Website":"Website","Optional":"Optional","We'll keep you in the loop!":"We'll keep you in the loop!","Loading your comment...":"Loading your comment...","Discover more from":"Discover more from She Reads Novels","Subscribe now to keep reading and get access to the full archive.":"Subscribe now to keep reading and get access to the full archive.","Continue reading":"Continue reading","Never miss a beat!":"Never miss a beat!","Interested in getting blog post updates? Simply click the button below to stay in the loop!":"Interested in getting blog post updates? Simply click the button below to stay in the loop!","Enter your email address":"Enter your email address","Subscribe":"Subscribe","Comment sent successfully":"Comment sent successfully","Save my name, email, and website in this browser for the next time I comment.":"Save my name, email, and website in this browser for the next time I comment.","hovercardi18n":{"Edit your profile \u2192":"Edit your profile \u2192","View profile \u2192":"View profile \u2192","Contact":"Contact","Send money":"Send money","Gravatar not found.":"Gravatar not found.","This profile is private.":"This profile is private.","Too Many Requests.":"Too Many Requests.","Internal Server Error.":"Internal Server Error.","Sorry, we are unable to load this Gravatar profile.":"Sorry, we are unable to load this Gravatar profile."},"siteId":13133801,"postId":47167,"mustLogIn":false,"requireNameEmail":true,"commentRegistration":false,"connectURL":"https://shereadsnovels.wordpress.com/public.api/connect/?action=request\u0026domain=shereadsnovels.com","logoutURL":"https://shereadsnovels.wordpress.com/wp-login.php?action=logout\u0026_wpnonce=7937a4f974","homeURL":"https://shereadsnovels.com/","subscribeToBlog":true,"subscribeToComment":true,"isJetpackCommentsLoggedIn":false,"jetpackUsername":"","jetpackUserId":0,"jetpackSignature":"","jetpackAvatar":"https://0.gravatar.com/avatar/?s=96\u0026amp;d=identicon\u0026amp;r=G","enableBlocks":true,"enableSubscriptionModal":true,"currentLocale":"en","isJetpackComments":false,"allowedBlocks":["core/paragraph","core/list","core/code","core/list-item","core/quote","core/image","core/embed","core/quote","core/code"],"embedNonce":"9abb0c8b2d","verbumBundleUrl":"/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-mu-wpcom/src/features/verbum-comments/dist/index.js","isRTL":false,"vbeCacheBuster":1771405207,"iframeUniqueId":0,"colorScheme":false}
+//# sourceURL=verbum-settings-js-before
+</script>
+<script data-wp-strategy="defer" defer id="verbum-dynamic-loader-js" src="/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/assets/dynamic-loader.js?m=1772522099i&#038;minify=false&#038;ver=8b5296f9195db92c42e4"></script>
+<script id="jetpack-carousel-js-extra">
+var jetpackSwiperLibraryPath = {"url":"/wp-content/mu-plugins/jetpack-plugin/sun/_inc/blocks/swiper.js"};
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https://shereadsnovels.com/wp-admin/admin-ajax.php","nonce":"a3ada6bf6a","display_exif":"1","display_comments":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","image_label":"Open image in full-screen.","download_original":"View full size \u003Cspan class=\"photo-size\"\u003E{0}\u003Cspan class=\"photo-size-times\"\u003E\u00d7\u003C/span\u003E{1}\u003C/span\u003E","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https://shereadsnovels.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fshereadsnovels.com%2F2025%2F05%2F30%2Fwritten-on-the-dark-by-guy-gavriel-kay%2F","blog_id":"13133801","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"stats_query_args":"blog=13133801&v=wpcom&tz=1&user_id=0&subd=shereadsnovels","is_public":"1"};
+//# sourceURL=jetpack-carousel-js-extra
+</script>
+<script id="sharing-js-js-extra">
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+//# sourceURL=sharing-js-js-extra
+</script>
+<script id="jetpack-script-data-js-before">
+window.JetpackScriptData = {"site":{"host":"wpcom","is_wpcom_platform":true}};
+//# sourceURL=jetpack-script-data-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJydkN1uwyAMhV9ohE2r1O1i2qNULpDUCRiETX/eflabRNMmddUuEHD8HZuDPRXjMkkgsXIIKbAtbW85RLAjW4IjDiCYqRv5yd6HecJiItJk+uwamx7Pj7h0XzAkF5tXQHWXU1KLqaHES5fw1wtSMyW2AUnxIAXcZFQ6FTXOBcuNltruGMjnaqFJTiCCbnUBcxC2+4bRryK7ikWMB4EHBn+bt9MQcy8HNTfNt2KL8EccmJBTEPPaPd/aLUJfr7C/411G3D7ix/XfSfgANXjw/nI9Ig1zhM/08bJ9275vNrrGLzxQ3ME='></script>
+<script id="sharing-js-js-after">
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "facebook" ] = "menubar=1,resizable=1,width=600,height=400";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "twitter" ] = "menubar=1,resizable=1,width=600,height=350";
+//# sourceURL=sharing-js-js-after
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/72x72/","ext":".png","svgUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?m=1783090810i&ver=7.1-RC3-63319"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
+</script>
+	<iframe src='https://widgets.wp.com/likes/master.html?ver=20260904#ver=20260904' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+	<div id='likes-other-gravatars' role="dialog" aria-hidden="true" tabindex="-1"><div class="likes-text"><span>%d</span></div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+	<script src="//stats.wp.com/w.js?69" defer></script> <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'13133801','blog_tz':'1','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+		// Prevent sending pageview tracking from WP-Admin pages.
+		_stq.push(['view', {'blog':'13133801','v':'wpcom','tz':'1','user_id':'0','post':'47167','subd':'shereadsnovels'}]);
+		_stq.push(['extra', {'crypt':'UE5tW3cvZGRmTkx6U0I2P0glOVIwL1NyN0w0ZEJYUkJ4fE1daltaZGplN0VaVWVwd3dDNHFQMElzd2Y2bDFQSXo0QkkrX2ExTnImY3NXQ2Y2eUgzWW5neVtubC4sMy9SWGw/NCVMPzZ4Z2RQNi43UkZUK11EVllia3FKcWx6JjM4WUxQMHlnSVlyS3NdLGxGNnwweSU9a3Z0Jjd6c3BOJnE2LTRXVz1wa0J2L3BHL0JmNS1IOGkmeSt3eU84ek89L0FvdVJQSk4ta3c0ayZiRmt+TGpYLmdkOTY5WkxwdC5tcWNPX2tpbURdRWRGU3MyUHQtcjZddEF0dmE5VXRCdV9+RiZpNiY/S1NHbUE='}]);
+_stq.push([ 'clickTrackerInit', '13133801', '47167' ]);
+</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:1px;width:1px;overflow:hidden;position:absolute;bottom:1px;" alt="" /></noscript>
+<meta id="bilmur" property="bilmur:data" content="" data-provider="wordpress.com" data-service="simple" data-site-tz="Europe/London" data-custom-props="{&quot;enq_jquery&quot;:&quot;1&quot;,&quot;logged_in&quot;:&quot;0&quot;,&quot;wptheme&quot;:&quot;pub\/sela&quot;,&quot;wptheme_is_block&quot;:&quot;0&quot;}"   >
+		<script defer src="/wp-content/js/bilmur.min.js?i=17&amp;m=202636"></script> 	
+<script>
+(function() {
+	'use strict';
+
+	const fetches = {};
+	const promises = {};
+	const urls = {
+		'wp-polyfill': '/wp-includes/js/dist/vendor/wp-polyfill.min.js?m=1786440387i&ver=3.15.0',
+		'verbum': '/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/verbum-comments.js?m=1785880900i&minify=false&ver=ecf5cfe8827907d3ea28'
+	};
+	const loaders = {
+		'verbum': () => {
+			fetchExternalScript('wp-polyfill');
+			fetchExternalScript('verbum');
+			promises['wp-polyfill'] = promises['wp-polyfill'] || loadWPScript('wp-polyfill');
+			promises['verbum'] = promises['verbum'] || promises['wp-polyfill'].then( () => loadWPScript('verbum') );
+			return promises['verbum'];
+		},
+		
+	};
+	const scriptExtras = {
+		
+	};
+
+	window.WP_Enqueue_Dynamic_Script = {
+		loadScript: (handle) => {
+			if (!loaders[handle]) {
+				console.error('WP_Enqueue_Dynamic_Script: unregistered script `' + handle + '`.');
+			}
+			return loaders[handle]();
+		}
+	};
+
+	function fetchExternalScript(handle) {
+		if (!urls[handle]) {
+			return Promise.resolve();
+		}
+
+		fetches[handle] = fetches[handle] || fetch(urls[handle], { mode: 'no-cors' });
+		return fetches[handle];
+	}
+
+	function runExtraScript(handle, type, index) {
+		const id = 'wp-enqueue-dynamic-script:' + handle + ':' + type + ':' + (index + 1);
+		const template = document.getElementById(id);
+		if (!template) {
+			return Promise.reject();
+		}
+
+		const script = document.createElement( 'script' );
+		script.innerHTML = template.innerHTML;
+		document.body.appendChild( script );
+		return Promise.resolve();
+	}
+
+	function loadExternalScript(handle) {
+		if (!urls[handle]) {
+			return Promise.resolve();
+		}
+
+		return fetches[handle].then(() => {
+			return new Promise((resolve, reject) => {
+				const script = document.createElement('script');
+				script.onload = () => resolve();
+				script.onerror = (e) => reject(e);
+				script.src = urls[handle];
+				document.body.appendChild(script);
+			});
+		});
+	}
+
+	function loadExtra(handle, pos) {
+		const count = (scriptExtras[handle] && scriptExtras[handle][pos]) || 0;
+		let promise = Promise.resolve();
+
+		for (let i = 0; i < count; i++) {
+			promise = promise.then(() => runExtraScript(handle, pos, i));
+		}
+
+		return promise;
+	}
+
+	function loadWPScript(handle) {
+		// Core loads scripts in this order. See: https://github.com/WordPress/WordPress/blob/a59eb9d39c4fcba834b70c9e8dfd64feeec10ba6/wp-includes/class-wp-scripts.php#L428.
+		return loadExtra(handle, 'translations')
+			.then(() => loadExtra(handle, 'before'))
+			.then(() => loadExternalScript(handle))
+			.then(() => loadExtra(handle, 'after'));
+	}
+} )();
+</script>
+
+</body>
+</html>

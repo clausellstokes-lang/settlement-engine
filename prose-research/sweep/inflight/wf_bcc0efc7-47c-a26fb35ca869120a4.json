@@ -1,0 +1,28 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i768-782",
+ "lines": 79,
+ "firstTs": "2026-09-06T18:20:23.825Z",
+ "lastTs": "2026-09-06T18:24:05.905Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 15,
+  "StructuredOutput": 2
+ },
+ "urlsFetched": [
+  "https://arxiv.org/pdf/$id"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and read back (15 verdicts, indices 768–782). All four sources were fetched as raw PDFs from arxiv.org with a browser user agent and text-extracted locally with pypdf — no summarizer in the loop, so every verdict is formed against the raw page text.",
+ "run": "wf_bcc0efc7-47c",
+ "agent": "a26fb35ca869120a4",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a26fb35ca869120a4.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i768-782.json",
+  "exists": true
+ }
+}

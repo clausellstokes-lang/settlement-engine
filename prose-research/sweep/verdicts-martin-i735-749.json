@@ -1,0 +1,233 @@
+{
+ "name": "martin",
+ "chunk": 27,
+ "claims": [
+  {
+   "index": 735,
+   "feature": "place and institution description",
+   "claim": "VanderMeer's Locus year-in-review calls the stalled military campaign stuck in the dead of winter in A Dance with Dragons evocative and harrowing.",
+   "source": "Jeff VanderMeer, 'A Dozen of the Best from 2011', Locus, 5 February 2012",
+   "url": "https://locusmag.com/review/a-dozen-of-the-best-from-2011/",
+   "quote": "stuck in the dead of winter is also evocative and",
+   "page": "entry on A Dance with Dragons"
+  },
+  {
+   "index": 736,
+   "feature": "other: voice strain and mannerism",
+   "claim": "VanderMeer's Locus year-in-review says the Tyrion point-of-view scenes are perhaps the baggiest in A Dance with Dragons, straining at times for sardonic effect.",
+   "source": "Jeff VanderMeer, 'A Dozen of the Best from 2011', Locus, 5 February 2012",
+   "url": "https://locusmag.com/review/a-dozen-of-the-best-from-2011/",
+   "quote": "are perhaps the baggiest in the novel, straining at times",
+   "page": "entry on A Dance with Dragons"
+  },
+  {
+   "index": 737,
+   "feature": "other: length and density",
+   "claim": "VanderMeer's Locus year-in-review calls A Dance with Dragons a huge, dense novel.",
+   "source": "Jeff VanderMeer, 'A Dozen of the Best from 2011', Locus, 5 February 2012",
+   "url": "https://locusmag.com/review/a-dozen-of-the-best-from-2011/",
+   "quote": "a huge, dense novel that devotes several scenes",
+   "page": "entry on A Dance with Dragons"
+  },
+  {
+   "index": 738,
+   "feature": "repetition and refrain",
+   "claim": "Adam Whitehead's 2014 review says the general prose style of The World of Ice and Fire is reasonable although prone to repetition.",
+   "source": "Adam Whitehead, The Wertzone, 18 November 2014",
+   "url": "https://thewertzone.blogspot.com/2014/11/the-world-of-ice-and-fire-by-george-rr.html",
+   "quote": "The general prose style is reasonable, although prone to repetition.",
+   "page": "paragraph beginning 'The book's conceit'"
+  },
+  {
+   "index": 739,
+   "feature": "repetition and refrain",
+   "claim": "Whitehead's 2014 review reports that in The World of Ice and Fire it is not uncommon to see a phrase used and then re-used just a few paragraphs later.",
+   "source": "Adam Whitehead, The Wertzone, 18 November 2014",
+   "url": "https://thewertzone.blogspot.com/2014/11/the-world-of-ice-and-fire-by-george-rr.html",
+   "quote": "a phrase used and then re-used just a few paragraphs later",
+   "page": "paragraph beginning 'The book's conceit'"
+  },
+  {
+   "index": 740,
+   "feature": "civic record register",
+   "claim": "Whitehead's 2014 review says giving The World of Ice and Fire an in-universe origin — a young maester writing a brief primer for King Robert Baratheon — makes for a less dry reading experience than it might have been.",
+   "source": "Adam Whitehead, The Wertzone, 18 November 2014",
+   "url": "https://thewertzone.blogspot.com/2014/11/the-world-of-ice-and-fire-by-george-rr.html",
+   "quote": "makes for a less dry reading experience than it might have",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 741,
+   "feature": "other: hedging and attribution in a chronicle",
+   "claim": "Whitehead's 2014 review says the narrator Yandel covers almost every claim in The World of Ice and Fire with lengthy caveats.",
+   "source": "Adam Whitehead, The Wertzone, 18 November 2014",
+   "url": "https://thewertzone.blogspot.com/2014/11/the-world-of-ice-and-fire-by-george-rr.html",
+   "quote": "cover almost every claim in the book with lengthy caveats",
+   "page": "paragraph beginning 'The other problem'"
+  },
+  {
+   "index": 742,
+   "feature": "withheld information and inference",
+   "claim": "Whitehead's 2014 review says the book sometimes describes an event as mythological or untrue in a way that, combined with the reader's knowledge of the novels, makes clear what conclusions the reader is being directed to.",
+   "source": "Adam Whitehead, The Wertzone, 18 November 2014",
+   "url": "https://thewertzone.blogspot.com/2014/11/the-world-of-ice-and-fire-by-george-rr.html",
+   "quote": "by sometimes describing an event as mythological or untrue",
+   "page": "paragraph beginning 'The other problem'"
+  },
+  {
+   "index": 743,
+   "feature": "place and institution description",
+   "claim": "Whitehead's 2014 review faults the disparity of information across regions in The World of Ice and Fire, saying the North gets short shrift while the longest region chapter goes to the ironborn.",
+   "source": "Adam Whitehead, The Wertzone, 18 November 2014",
+   "url": "https://thewertzone.blogspot.com/2014/11/the-world-of-ice-and-fire-by-george-rr.html",
+   "quote": "The North gets short shrift, which is quite surprising",
+   "page": "paragraph beginning 'There is also an issue'"
+  },
+  {
+   "index": 744,
+   "feature": "register modulation",
+   "claim": "Whitehead's 2014 review says the rarer excerpts from the second in-world historian, Maester Gyldayn, give some of the more evocative moments in The World of Ice and Fire.",
+   "source": "Adam Whitehead, The Wertzone, 18 November 2014",
+   "url": "https://thewertzone.blogspot.com/2014/11/the-world-of-ice-and-fire-by-george-rr.html",
+   "quote": "he does give us some of the more evocative moments",
+   "page": "paragraph beginning 'The book's conceit'"
+  },
+  {
+   "index": 745,
+   "feature": "civic record register",
+   "claim": "Whitehead's 2014 review describes The World of Ice and Fire's conceit as Maester Yandel writing a sort of Rough Guide to Westeros and Essos.",
+   "source": "Adam Whitehead, The Wertzone, 18 November 2014",
+   "url": "https://thewertzone.blogspot.com/2014/11/the-world-of-ice-and-fire-by-george-rr.html",
+   "quote": "a sort of Rough Guide to Westeros and Essos",
+   "page": "paragraph beginning 'The book's conceit'"
+  },
+  {
+   "index": 746,
+   "feature": "civic record register",
+   "claim": "Mark Flowers's School Library Journal review of The World of Ice and Fire reports that he expected the book to be dry but was pleasantly surprised by the ease of its prose.",
+   "source": "Mark Flowers, School Library Journal (Adult Books 4 Teens), 8 January 2015",
+   "url": "https://blogs.slj.com/adult4teen/2015/01/08/the-world-of-ice-and-fire/",
+   "quote": "pleasantly surprised by the ease of Martin",
+   "page": "blog preface above the review"
+  },
+  {
+   "index": 747,
+   "feature": "civic record register",
+   "claim": "Flowers's SLJ review praises the authors' facility in conjuring epic conflicts and romances within the few sentences allotted to each entry of The World of Ice and Fire.",
+   "source": "Mark Flowers, School Library Journal (Adult Books 4 Teens), 8 January 2015",
+   "url": "https://blogs.slj.com/adult4teen/2015/01/08/the-world-of-ice-and-fire/",
+   "quote": "in the few sentences allotted to them in various entries",
+   "page": "blog preface above the review"
+  },
+  {
+   "index": 748,
+   "feature": "annalist voice and deep time",
+   "claim": "Flowers's SLJ review describes the first half of The World of Ice and Fire as a reign-by-reign account of the Targaryen dynasty.",
+   "source": "Mark Flowers, School Library Journal (Adult Books 4 Teens), 8 January 2015",
+   "url": "https://blogs.slj.com/adult4teen/2015/01/08/the-world-of-ice-and-fire/",
+   "quote": "a reign-by-reign account of the Targaryen dynasty",
+   "page": "signed SLJ review, body"
+  },
+  {
+   "index": 749,
+   "feature": "place and institution description",
+   "claim": "Flowers's SLJ review says the half of The World of Ice and Fire that sketches each of the Seven Kingdoms and its ruling families has less narrative drive than the dynastic half.",
+   "source": "Mark Flowers, School Library Journal (Adult Books 4 Teens), 8 January 2015",
+   "url": "https://blogs.slj.com/adult4teen/2015/01/08/the-world-of-ice-and-fire/",
+   "quote": "This half has less narrative drive",
+   "page": "signed SLJ review, body"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 735,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A stalled military campaign stuck in the dead of winter is also evocative and harrowing.",
+   "note": "Live locusmag page fetched raw (HTTP 200, browser UA). Sentence appears word for word in the A Dance with Dragons entry; both limbs (evocative, harrowing) present."
+  },
+  {
+   "index": 736,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Scenes from the point of view of a certain famous dwarf",
+   "note": "Quote is verbatim on the raw page ('are perhaps the baggiest in the novel, straining at times for sardonic effect'), but the page never writes 'Tyrion' - it says 'a certain famous dwarf'. Identification is unambiguous in context yet is the claim's wording, not VanderMeer's, so graded substance rather than verbatim."
+  },
+  {
+   "index": 737,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a huge, dense novel that devotes several scenes to bizarre and beautifully imaginative set-pieces",
+   "note": "Verbatim on the raw locusmag page in the A Dance with Dragons entry."
+  },
+  {
+   "index": 738,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The general prose style is reasonable, although prone to repetition.",
+   "note": "Verbatim on the raw Wertzone page (HTTP 200, browser UA), in the paragraph following 'The book's conceit'."
+  },
+  {
+   "index": 739,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is not uncommon to see a phrase used and then re-used just a few paragraphs later.",
+   "note": "Verbatim on the raw page, the sentence immediately after the prose-style sentence of claim 738."
+  },
+  {
+   "index": 740,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the attempt to give the text an in-universe origin (a young maester writing a brief primer on the world for the notoriously impatient King Robert Baratheon) makes for a less dry reading experience than it might have been",
+   "note": "Verbatim on the raw page in the third paragraph; every limb (in-universe origin, young maester, brief primer, King Robert Baratheon, less dry) is on the page."
+  },
+  {
+   "index": 741,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Yandel likes to cover almost every claim in the book with lengthy caveats.",
+   "note": "Verbatim in the paragraph beginning 'The other problem'. Yandel's status as the book's in-world author/narrator is established earlier on the same page ('the young Maester Yandel ... has written the book')."
+  },
+  {
+   "index": 742,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "by sometimes describing an event as mythological or untrue, but when combined with the reader's knowledge of the novels it becomes clearer what conclusions the reader is being directed to",
+   "note": "Verbatim on the raw page at the end of the 'The other problem' paragraph. Claim's 'makes clear' renders the page's 'becomes clearer'; no substantive divergence."
+  },
+  {
+   "index": 743,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The North gets short shrift, which is quite surprising, whilst the longest region chapter is given to the ironborn.",
+   "note": "Verbatim on the raw page; the preceding sentence supplies the disparity-of-information limb ('There is also an issue with the disparity of information given on different regions')."
+  },
+  {
+   "index": 744,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "excerpts from his work are rare ... he does give us some of the more evocative moments in the book",
+   "note": "Verbatim on the raw page. The rarity limb and Gyldayn's status as the second, more authoritative in-world source are both stated. Note the page spells him 'Master Gyldayn' (apparent typo for Maester) at first mention."
+  },
+  {
+   "index": 745,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The book's conceit is that the young Maester Yandel ... has written the book a sort of Rough Guide to Westeros and Essos",
+   "note": "Verbatim on the raw page (the page's own sentence has a dropped 'as' before 'a sort of')."
+  },
+  {
+   "index": 746,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Going in, I was expecting something a little on the dry side-but I was pleasantly surprised by the ease of Martin, Garcia, and Antonsson's prose",
+   "note": "Live blogs.slj.com returned HTTP 500 (WordPress critical error); verdict formed on the raw Wayback capture https://web.archive.org/web/20150205084238id_/http://blogs.slj.com/adult4teen/2015/01/08/the-world-of-ice-and-fire/ - raw archived HTML, not a summarizer. Quote verbatim in the blog preface, as the claim's page hint says."
+  },
+  {
+   "index": 747,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "their facility in conjuring epic conflicts and romances in the few sentences allotted to them in various entries",
+   "note": "Verbatim in the preface of the raw Wayback capture. Claim's 'each entry' renders the page's 'various entries'; the praised parties are Martin, Garcia and Antonsson."
+  },
+  {
+   "index": 748,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the bulk of the book's first half is taken up by a reign-by-reign account of the Targaryen dynasty",
+   "note": "Verbatim in the signed review body of the raw Wayback capture; page says 'the bulk of' the first half, which the claim compresses to 'the first half'."
+  },
+  {
+   "index": 749,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The second half sketches each of the Seven Kingdoms, along with accounts of the ruling families. This half has less narrative drive",
+   "note": "Verbatim in the signed review body. The comparand is implicit: the page writes an unmarked 'less narrative drive' immediately after describing the first half's reign-by-reign Targaryen account, so 'than the dynastic half' is the only available reading, not an explicit statement."
+  }
+ ]
+}

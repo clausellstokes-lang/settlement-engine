@@ -1,0 +1,234 @@
+{
+ "name": "leguin",
+ "chunk": 3,
+ "claims": [
+  {
+   "index": 531,
+   "feature": "other: passive voice",
+   "claim": "Le Guin, quoting her own Steering the Craft, says writers who want to take responsibility are wary of the passive voice.",
+   "source": "Ursula K. Le Guin quoting Steering the Craft pp. 56-57, in 'Navigating the Ocean of Story - Session 1, Part 3' (2015)",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "Writers who want to take responsibility are wary of it.",
+   "page": "answer to Christy; she cites Steering the Craft pp. 56-57"
+  },
+  {
+   "index": 532,
+   "feature": "other: passive voice",
+   "claim": "Le Guin says the passive voice ought to be used freely where it belongs and calls it one of the lovely versatilities of the verb.",
+   "source": "Ursula K. Le Guin quoting Steering the Craft pp. 56-57, in 'Navigating the Ocean of Story - Session 1, Part 3' (2015)",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "It is one of the lovely versatilities of the verb.",
+   "page": "answer to Christy; she cites Steering the Craft pp. 56-57"
+  },
+  {
+   "index": 538,
+   "feature": "other: story shape",
+   "claim": "Le Guin offers the walking story, in which you cover ground while seeing everything around you, as an alternative to the fast-paced suspenseful one.",
+   "source": "Ursula K. Le Guin, 'What Makes a Story' (c. 2007), ursulakleguin.com",
+   "url": "https://www.ursulakleguin.com/what-makes-a-story",
+   "quote": "steady, and you fall into the flow of the gait",
+   "page": "paragraph on walking"
+  },
+  {
+   "index": 539,
+   "feature": "other: responsibility for words",
+   "claim": "Le Guin defines a writer as a person who cares what words mean.",
+   "source": "Ursula K. Le Guin, 'A Few Words to a Young Writer' (undated), ursulakleguin.com",
+   "url": "https://www.ursulakleguin.com/a-few-words-to-a-young-writer",
+   "quote": "A writer is a person who cares what words mean",
+   "page": "second paragraph"
+  },
+  {
+   "index": 540,
+   "feature": "terminology consistency",
+   "claim": "Le Guin says the grammar words subject, predicate, object, adjective, adverb and the tenses are the names of the writer's tools.",
+   "source": "Ursula K. Le Guin, introduction to the 2015 revision of Steering the Craft, quoted on ursulakleguin.com",
+   "url": "https://www.ursulakleguin.com/steering-the-craft",
+   "quote": "these are the names of the writer’s tools",
+   "page": "'From the Introduction' section"
+  },
+  {
+   "index": 544,
+   "feature": "other: worldbuilding consistency",
+   "claim": "Adam Roberts disputes Francis Spufford's account by arguing that Le Guin is openly inconsistent and untruthful in her worldbuilding.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "",
+   "page": "paragraph beginning 'I would put it slightly differently'"
+  },
+  {
+   "index": 545,
+   "feature": "other: worldbuilding consistency",
+   "claim": "Francis Spufford, quoted by Adam Roberts, credits Earthsea with the deep consistency that lets an imagined world unfold from its premises.",
+   "source": "Francis Spufford, The Child That Books Built (2002), 84-85, quoted in Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "the deep consistency that allows an imagined world to unfold",
+   "page": "block quotation from The Child That Books Built"
+  },
+  {
+   "index": 547,
+   "feature": "other: allusion and gloss",
+   "claim": "Adam Roberts says Le Guin was too scrupulous in her worldbuilding to leave the ivory door unexplained, and so glossed the ivory as a dragon's tooth because Earthsea has no elephants.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "too scrupulous in her worldbuilding to leave this detail",
+   "page": "paragraph on the gates of horn and ivory"
+  },
+  {
+   "index": 549,
+   "feature": "compounds and coinages",
+   "claim": "Adam Roberts reads the True Speech words tolk and inien as an acknowledgement of Tolkien built into Le Guin's invented vocabulary.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "an elegant way of acknowledging her major influence",
+   "page": "paragraph following the Master Hand quotation"
+  },
+  {
+   "index": 550,
+   "feature": "terminology consistency",
+   "claim": "Adam Roberts notes that Le Guin's rule that no thing can have two true names forces the limit on a mage's power, quoting the novel's statement that a mage can control only what he can name exactly and wholly.",
+   "source": "Ursula K. Le Guin, A Wizard of Earthsea, p. 48, quoted in Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "A mage can control only what is near him",
+   "page": "block quotation, [48]"
+  },
+  {
+   "index": 553,
+   "feature": "other: descriptive craft",
+   "claim": "Sean Guynes calls incredible sentences, artful descriptions and expert use of setting and tone obvious staples of Le Guin's work as a writer.",
+   "source": "Sean Guynes, Reactor, 29 April 2020",
+   "url": "https://reactormag.com/the-tombs-of-atuan-power-ideology-and-becoming-uneaten/",
+   "quote": "incredible sentences, artful descriptions, and expert use of setting and tone",
+   "page": "paragraph beginning 'The dark is a powerful fictive tool'"
+  },
+  {
+   "index": 554,
+   "feature": "other: didacticism",
+   "claim": "Sean Guynes says Ged serves in The Farthest Shore as a regular mouthpiece for musings about power and responsibility, for pages at a time.",
+   "source": "Sean Guynes, \"The Farthest Shore: The Return of the King\", Reactor, 6 May 2020",
+   "url": "https://reactormag.com/the-farthest-shore-the-return-of-the-king/",
+   "quote": "with Ged as a regular mouthpiece",
+   "page": "paragraph beginning 'Of course, comparisons aren't everything'"
+  },
+  {
+   "index": 557,
+   "feature": "other: theme carried by texture not statement",
+   "claim": "Le Guin, quoted by Erlich, said that dissecting the ideas out of the Earthsea trilogy yields fortune-cookie ideas such as Don't Meddle and Keep the Balance.",
+   "source": "Ursula K. Le Guin, \"Response\", Science-Fiction Studies (1975), p. 45, quoted in Richard D. Erlich, Coyote's Song, Conclusion ((c)2000)",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/conclusion.htm",
+   "quote": "you get things like Don't Meddle. Keep the Balance",
+   "page": "Conclusion, opening pages"
+  },
+  {
+   "index": 559,
+   "feature": "humour",
+   "claim": "Richard D. Erlich attributes to a sly sense of humour the fact that Le Guin's work reads as teaching rather than as Sister Ursula Explaining It All.",
+   "source": "Richard D. Erlich, Coyote's Song, Other Lessons: Picture Books ((c)2000)",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/picture.htm",
+   "quote": "teaching works and not Sister Ursula Explaining It All",
+   "page": "section on Fish Soup"
+  },
+  {
+   "index": 560,
+   "feature": "other: didacticism",
+   "claim": "Richard D. Erlich accepts Le Guin's didacticism as a given but calls it dialogic didacticism, noting that her certainties are rare and that she ordinarily debates with herself.",
+   "source": "Richard D. Erlich, Coyote's Song, Introduction ((c)2000)",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/intro.htm",
+   "quote": "Le Guin has her certainties, but they are rare",
+   "page": "Introduction, opening pages"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 531,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Writers who want to take responsibility are wary of it",
+   "note": "Raw page fetched live. In her answer to Christy she says she wants to quote from Steering the Craft, 'On p. 56-57 is a little essay on the passive voice', and the quoted essay ends with this sentence; 'it' is the passive voice. Every limb supported."
+  },
+  {
+   "index": 532,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one of the lovely versatilities of the verb",
+   "note": "Same answer to Christy, same quoted pp. 56-57 essay, sentence immediately preceding: where the passive does belong, she says, we ought to use it freely. Both limbs of the claim supported."
+  },
+  {
+   "index": 538,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "steady, and you fall into the flow of the gait",
+   "note": "Walking paragraph on the live page; it continues that you cover ground while seeing everything around you. The immediately preceding paragraph describes the running story as 'fast-paced, suspenseful', so the contrast limb holds; a third type (dancing) follows."
+  },
+  {
+   "index": 539,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A writer is a person who cares what words mean",
+   "note": "Second paragraph of the live page, opening the sentence; it continues with what they say and how. Undated, signed Ursula K. Le Guin."
+  },
+  {
+   "index": 540,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "these are the names of the writer's tools",
+   "note": "'From the Introduction' section on the live Steering the Craft page. The preceding sentence lists subject, predicate, object, adjective and adverb, past tense and past perfect tense, so every grammar term in the claim is on the page. Page describes the book as a complete revision of the 1998 edition."
+  },
+  {
+   "index": 544,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Le Guin is inconsistent, untruthful, in her worldbuilding - openly, directly so",
+   "note": "Claim supplied no quotation, so graded on substance. Live Medium URL returned 403; reached via Wayback raw capture 20250908044316id_. Roberts introduces the Spufford block quote with a sentence saying he differs from Spufford's account, then says he would put it slightly differently, grants that Le Guin is indeed careful, and then asserts the wording above (italic emphasis on the negating prefixes). Minor metadata note: the capture's latestPublishedAt is 2023-02-06, one day off the claim's stated 5 February 2023."
+  },
+  {
+   "index": 545,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the deep consistency that allows an imagined world to unfold",
+   "note": "Inside the block quotation Roberts reproduces from Spufford, The Child That Books Built (2002), 84-85, cited in-page. Spufford is describing Le Guin's Earthsea novels and says this is what they shared with Tolkien; the sentence continues 'from its premises solidly, step by certain step'. Reached via Wayback raw capture."
+  },
+  {
+   "index": 547,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "too scrupulous in her worldbuilding to leave this detail",
+   "note": "Paragraph on the gates of horn and ivory. The same sentence carries the parenthetical reason (Earthsea has no elephants) and the gloss, which the page renders as a tooth of the Great Dragon. All three limbs supported. Reached via Wayback raw capture."
+  },
+  {
+   "index": 549,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an elegant way of acknowledging her major influence",
+   "note": "Page gives the True Speech word for rock as tolk and for sea as inien, then reads Earthsea as tolk-inien, i.e. Tolkienian, followed by this phrase. Roberts frames it as what Le Guin is saying; the reading is his. Reached via Wayback raw capture."
+  },
+  {
+   "index": 550,
+   "verdict": "PARTIAL",
+   "trueWording": "A mage can control only what is near him",
+   "note": "The quotation is exact and the p.48 marker is on the page, but the raw markup shows the <blockquote> opens at 'Here is the reason.' and closes after '[48]' - so the two-true-names rule, the 'sets the limits of that power' sentence and the quoted line are all one continuous quotation from the novel, with no Roberts commentary between them. Roberts's own adjacent sentences run the other way: he calls exact-and-whole naming impossible and says the magic system 'is and is not' consistent. The claim's paraphrase also drops 'what is near him', which is a separate limit from naming.",
+   "unsupportedLimb": "the limb making the two-true-names rule and the mage's-limit inference Roberts's own note - both sit inside the quoted p.48 novel passage, not in his commentary"
+  },
+  {
+   "index": 553,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "incredible sentences, artful descriptions, and expert use of setting and tone",
+   "note": "Live reactormag page, byline Sean Guynes, published April 29 2020, in the paragraph beginning 'The dark is a powerful fictive tool'. The clause continues 'by now all obvious staples of her work as a writer', supporting that limb."
+  },
+  {
+   "index": 554,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "with Ged as a regular mouthpiece-for pages at a time!",
+   "note": "Live reactormag page, byline Sean Guynes, published May 6 2020, paragraph beginning 'Of course, comparisons aren't everything.' The clause continues 'for musings about power and responsibility, life and death, doing and being', supporting both the subject-matter and the pages-at-a-time limbs."
+  },
+  {
+   "index": 557,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you get things like Don't Meddle. Keep the Balance",
+   "note": "Coyote's Song Conclusion (chapter 20), ~1.9k characters in, reached via the supplied Wayback raw capture. Erlich introduces it as Le Guin responding to the 1975 Le Guin issue of Science-Fiction Studies, quotes 'If you dissect the ideas out of' the Earthsea trilogy, gives a third example, and cites (45); the page's own word is 'Fortune-cookie ideas'. Authorship confirmed from CoyoteHome.htm."
+  },
+  {
+   "index": 559,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "teaching works and not Sister Ursula Explaining It All",
+   "note": "Coyote's Song chapter 12, 'Other Lessons: Picture Books', within the Fish Soup section, reached via the supplied Wayback raw capture. Page attributes it to a sly sense of humor (US spelling), glossed as the mature comic sense. Page hedges slightly more than the claim: it says this is 'Part of what' keeps her work 'almost always' so."
+  },
+  {
+   "index": 560,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin has her certainties, but they are rare",
+   "note": "Coyote's Song Introduction, opening pages (~2k characters in), reached via the supplied Wayback raw capture. All limbs on the page: he accepts her didacticism as a given, avoids the word because readers hear it negatively, offers 'dialogic didacticism', and the quoted sentence ends 'and, ordinarily, she debates with herself.' Authorship (Richard D. Erlich) confirmed from CoyoteHome.htm."
+  }
+ ]
+}

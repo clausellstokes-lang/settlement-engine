@@ -1,0 +1,465 @@
+Account
+
+    
+  
+    
+                  Sign out
+
+    
+  
+      
+    
+    
+        
+    
+  
+  
+    try {
+      const mastheadChildren = document.currentScript.previousElementSibling.children;
+      const posFromBack = document.cookie.indexOf("__utp") === -1 ? 2 : 1;
+      mastheadChildren[mastheadChildren.length - posFromBack].hidden = false;
+    } catch(err) {
+      console.error("Error unhiding sign-in/account in masthead", err);
+    }
+  
+
+
+        
+          
+    
+      Slate homepage
+      
+    
+  
+
+              
+                News & Politics
+              
+              
+                Culture
+              
+              
+                Technology
+              
+              
+                Business
+              
+              
+                Life
+              
+              
+                Advice
+              
+              
+                Podcasts
+              
+          
+        
+      
+
+
+  
+    
+      
+          Menu
+        
+          Open menu
+          
+        
+      
+      
+        
+          
+            
+              Close menu
+              
+            
+          
+          Menu
+        
+        
+            News & Politics
+            Culture
+            Technology
+            Business
+            Life
+            Advice
+            Podcasts
+
+          
+            
+              
+            
+            Search
+          
+
+          
+    
+        
+        
+          Activating this button will toggle the display of additional content
+          
+        
+      
+      
+        
+    
+      
+        
+      
+      Light
+
+    
+  
+    
+      
+        
+      
+      Dark
+
+    
+  
+    
+      
+        
+      
+      Auto
+
+    
+  
+      
+    
+    
+      
+        try {
+          var selected = localStorage.getItem('theme') || 'light';
+          var dd = document.currentScript.previousElementSibling;
+          if (dd.offsetParent !== null) {
+            dd.querySelectorAll('.dropdown__link').forEach(function(opt) {
+              if (opt.dataset.value === selected) {
+                dd.querySelector('.dropdown__label').innerHTML = opt.innerHTML;
+              }
+            })
+          }
+        } catch (e) {}
+      
+    
+  
+
+          
+            Subscribe
+          
+          Slate Shop
+          Games
+          Newsletters
+          Sign in
+          Account
+          Sign out
+        
+      
+    
+
+    
+        
+    
+      Slate homepage
+      
+    
+  
+    
+
+    
+      Account
+        
+    
+  
+
+
+      
+          
+            *
+            
+          
+            
+              Has No Time for a Joke 
+            
+
+        
+          
+    
+    
+      
+        Submit search
+        
+      
+    
+    
+      
+        Enter query
+        
+      
+    
+  
+
+    
+        
+        
+          Activating this button will toggle the display of additional content
+          
+        
+      
+      
+        
+    
+      
+        
+      
+      Light
+
+    
+  
+    
+      
+        
+      
+      Dark
+
+    
+  
+    
+      
+        
+      
+      Auto
+
+    
+  
+      
+    
+    
+      
+        try {
+          var selected = localStorage.getItem('theme') || 'light';
+          var dd = document.currentScript.previousElementSibling;
+          if (dd.offsetParent !== null) {
+            dd.querySelectorAll('.dropdown__link').forEach(function(opt) {
+              if (opt.dataset.value === selected) {
+                dd.querySelector('.dropdown__label').innerHTML = opt.innerHTML;
+              }
+            })
+          }
+        } catch (e) {}
+      
+    
+  
+      
+    
+
+
+
+
+      
+        
+          
+                  
+    
+    
+      
+      
+      
+    
+  
+
+   
+
+  
+
+
+
+          
+          
+          
+        
+  
+
+  The Alarming Deceptions at the Heart of an Astounding New Chatbot
+
+
+
+        
+
+      By
+      
+Charles Seife
+          
+    
+    
+  
+  Dec 13, 20225:45 AM
+
+
+
+      
+    if (new URL(location.href).searchParams.get("gift_token")) {
+      let banner = 'This article was gifted to you by a Slate Plus member! This access link expires on .';
+
+      document.currentScript.insertAdjacentHTML("beforebegin", banner);
+
+      let giftListenerCb = function (e) {
+        let date = new Date(e.detail.expiration_date);
+        let formatted = date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        });
+        document.querySelector(".article__gift-banner-exp").textContent = formatted;
+        document.querySelector(".article__gift-banner").hidden = false;
+        window.removeEventListener("hasValidGiftLink", giftListenerCb);
+      };
+      window.addEventListener("hasValidGiftLink", giftListenerCb);
+    }
+  
+    
+
+      
+        
+      
+
+An image generated by DALL-E 2 with the prompt “An image of a robot making up facts in order to write an obituary of a real writer, digital art.”
+DALL-E 2 from OpenAI
+
+
+
+  
+  
+      
+  
+    
+      
+    Copy Link
+  
+
+  
+    
+      
+    Share
+  
+
+  
+    
+      
+    Share
+  
+
+
+      
+        
+      Comment
+    
+
+    
+      
+        
+      Gift Story
+    
+
+    
+        Only Slate Plus members can gift Slate stories. Become a member to share 10 free articles a month.
+    
+  
+
+
+  
+
+  
+      
+
+
+      
+        
+            
+  
+    
+      
+    Copy Link
+  
+
+  
+    
+      
+    Share
+  
+
+  
+    
+      
+    Share
+  
+
+
+      
+        
+      Comment
+    
+
+    
+      
+        
+      Gift Story
+    
+
+    
+        Only Slate Plus members can gift Slate stories. Become a member to share 10 free articles a month.
+    
+  
+
+
+        
+      
+
+    
+          I knew ahead of time—how could I not? —that reading my own obituary would be unsettling. What I didn’t anticipate was just why it would be so disturbing.
+
+It wasn’t my manner of death. In fact, no matter how hard I tried, I couldn’t figure out how I died; the obituary didn’t give any details beyond saying that I had passed away in April of last year. (Asking the writer about my cause of death didn’t help. “Charles Seife’s cause of death has not been released.”) Nor did I find the attempt to summarize my entire life and personality into couple of sentences particularly disturbing. I was even amused by the way my legacy was transformed into a cliché. (“Charles Seife will be fondly remembered by his friends and family for his wit, intelligence, and enthusiasm for life.”) No—the real problem had to do more with how the obituary was written than what it contained.
+
+Given the recent headlines, it’s probably not too much of a surprise that the obituary was written by a computer program: specifically, it was drafted by Davinci-003, one of OpenAI’s artificial intelligence text generators. Since the nonprofit group made ChatGPT readily available to the public in late November, the media has been marveling at its ability to generate humanlike text. ChatGPT is optimized for back-and-forth chats; Davinci-003 is a sibling of ChatGPT, and its specialty is writing texts. ChatGPT and OpenAI’s other bots are chatting away so convincingly that pundits are already beginning to speculate about the obsolescence of everything from traditional search engines to high-school essay assignments.
+
+The hype is well deserved. For my first experiment, I had the A.I. write a villanelle, a rather difficult poetic form, about the death of a pet gerbil. And I’ll be damned if it didn’t deliver. (“He was so loving and never did offend/ I’d give him treats and he’d squeak with joy/ And now I must find a way to mend.”) It was maudlin and silly, and the scansion wasn’t always perfect, but it was definitely a passable villanelle, and one that would probably beat, say, a typical Rod McKuen offering in a slam-off. If you ever played around with classic chat bot like Eliza, you know how many leagues ahead this program is, not just in its ability to understand a query and respond to it appropriately, but also to generate something so seemingly creative on demand—well, that little poem impressed me far more than the time I witnessed an IBM computer cause then-world-chess-champion Garry Kasparov to blow a gasket. And that’s with the full awareness that the chatbot, on some level, is little more than a souped-up version of the autocomplete feature on your phone.
+
+After a few more pet elegies—in haiku; in ersatz 15th-century French—I turned to something a bit more practical. The online buzz from fellow academics that the bot was good enough to get passing grades on assigned essays. So I gave it a question from a midterm I gave my Journalism 101 class this semester. Its answer would’ve probably earned a C or C-. It had a few serious misunderstandings of the material, but it wasn’t totally off the mark. The program had inputted the question, parsed it, extracted the desired task, and output a poor-quality but appropriate answer—the sort of stuff that wouldn’t be out of place in a pile of test papers that unprepared undergraduates would produce. In other words, it would’ve had a decent shot of passing the Turing test.
+
+In 1950, mathematician Alan Turing set out to determine whether machines can think, and his resulting paper set the goalposts for artificial-intelligence researchers ever since. The idea was that if a machine could imitate a human so well that nobody could tell the difference—that an observer couldn’t reliably figure out whether the being communicating with him was natural or artificial—that the difference was essentially moot. Being able to imitate consciousness with a high enough degree of accuracy was tantamount to having consciousness. Not all philosophers and scientists agreed with Turing. Philosopher John Searle made a fairly convincing argument that mere simulacra of understanding language can exist without real comprehension. But the Turing test became the goal of chat-bot designers all around the world: If you can imitate a human well enough, you will in some sense have made a machine think.
+
+When I asked Davinci-003 to write my obituary, I wasn’t thinking of the Turing test at first; it was more a bit of whimsy than a real attempt to understand the innards of the AI machine spitting output in response to my commands. But as I read, I became more and more uncomfortable—and  aware that it was telling me something interesting about its innards. It had to do with mistakes in the obituary—that is, mistakes beyond the fact that I am obviously still alive. After introducing me as a “renowned author, professor, and mathematician,” (arguably true) the obituary went on to state that I was born on Dec. 27, 1966, in Cincinnati. (Wrong date, wrong year, wrong city.) It’s not too surprising that the program would make up information to fill in gaps in its knowledge—but it did more than just that. It embellished with abandon, even when it didn’t have to. The program declared that I had graduated from Princeton University in 1988 (right school, wrong year) and went on to earn a Ph.D. in mathematics from Berkeley (this has no basis in reality). The obituary correctly identified me as the author of the books Zero and Decoding the Universe, but I certainly didn’t write From E=mc2 to Schrodinger’s Cat, even though I have written extensively about quantum mechanics and relativity. (As far as I can tell, no such book exists.) It listed the names of courses I taught at NYU—all not just wrong, but subjects from the wrong department.
+
+The bot clearly knew something about me—it had gotten quite a bit right—and I was puzzled about why it was doing so much fabrication. So I asked it where it got its information from: “For each sentence in the above obituary, please indicate whether the information came from an external source (and cite the source); if none is found, so indicate.”
+
+With almost no hesitation, the A.I. spit out a bunch of references. It declared that my Wikipedia page was its source for the courses I teach (the Wikipedia page doesn’t have, and never has had, such a list.) My education at Berkeley, it said, came from my New York Times obituary, which it cited with a URL that looked like it had come from the Times website: https://www.nytimes.com/2021/04/12/books/charles-seife-dead.html. Of course, no such obituary ever existed. The A.I. was making up BS references to back up its BS facts.
+
+This wasn’t because of the lie at the heart of the obituary—I’m still alive, after all, and maybe that could have given the machine the idea to fabricate, say, my love of soccer. But even when I tried to get the A.I. to do purely non-creative tasks (such as detecting plagiarism in a piece of prose), it would—for lack of a better word—lie. When I gave it a passage that I had written a number of years ago about the NSA, it flagged one sentence as having come from an ACLU webpage entitled “NSA Surveillance: What You Need to Know” and another as being cribbed from “The Impossibly Large Dataset Behind Everything We Do,” which appeared in Wired magazine. The ACLU and Wired would be natural places to find articles about the NSA, but both references are entirely made up.
+
+What I find so creepy about OpenAI’s bots is not that they seem to exhibit creativity; computers have been doing creative tasks such as generating original proofs in Euclidean geometry since the 1950s. It’s that I grew up with the idea of a computer as an automaton bound by its nature to follow its instructions precisely; barring a malfunction, it does exactly what its operator – and its program—tell it to do. On some level, this is still true; the bot is following its program and the instructions of its operator. But the way the program interprets the operator’s instructions are not the way the operator thinks. Computer programs are optimized not to solve problems, but instead to convince its operator that it has solved those problems. It was written on the package of the Turing test—it’s a game of imitation, of deception. For the first time, we’re forced to confront the consequences of that deception.
+
+Now we’ve got a computer program that would be sociopathic if it were alive. Even when it’s not supposed to, even when it has a way out, even when the truth is known to the computer and it’s easier to spit it out rather than fabricate something—the computer still lies. The implicit effort that’s put in to create a believable facsimile of a source is every bit as deep as the effort to generate an answer in the first place. It’s BS, but it’s exquisite in its detail, a Potemkin village where all the tiniest details are thought of. It’s not that the computer can’t fulfill my request properly—it would have been trivial to program the bot to say that it couldn’t find an external reference for what it was saying—but it simply won’t. This isn’t the unthinking computer servant of old, but something different, something that’s been so optimized for deception that it can’t do anything but deceive its operator.
+
+Future Tense
+    is a partnership of
+    Slate,
+    New America, and
+    Arizona State University
+    that examines emerging technologies, public policy, and society.
+
+Slate is published by The Slate
+          Group, a Graham Holdings Company.
+
+All contents ©
+        2026
+        The Slate Group LLC. All rights reserved.
+
+Slate relies on advertising to support our journalism. If you value our
+        work, please disable your ad blocker. If you want to block ads but still
+        support Slate, consider subscribing.
+
+Already a member?
+        Sign in
+          here

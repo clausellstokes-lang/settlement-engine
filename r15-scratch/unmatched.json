@@ -1,0 +1,4307 @@
+[
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "CULTURE_PROFILES",
+  "leaf": "[idx]",
+  "n": 187,
+  "ex": [
+   "Timber-framed street houses cluster around a market green, with stone reserved for halls, ",
+   "Farmsteads and craft yards form compact wards around a hall, church, or fortified manor."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/commercialReasonsNews.js",
+  "exp": "COMMERCIAL_KIND_REGISTRY",
+  "leaf": "(other)",
+  "n": 137,
+  "ex": [
+   "{counterpart} took the wagons and sent nothing back; the compact is broken.",
+   "The wharf at {settlement} waited for a cargo that never came, and stopped waiting in the a"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/economicData.js",
+  "exp": "TRADE_DEPENDENCY_NEEDS",
+  "leaf": ".detail",
+  "n": 60,
+  "ex": [
+   "grain and mill sites for water-powered milling",
+   "grain reserves for storage"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/grammarNews.js",
+  "exp": "GRAMMAR_KIND_REGISTRY",
+  "leaf": "(other)",
+  "n": 58,
+  "ex": [
+   "The peace of {settlement} and {counterpart} has run its course: {band} years, and no hand ",
+   "The {term} {settlement} and {counterpart} kept between them came to its last day and was f"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "GOODS_MODIFIERS_BY_TIER",
+  "leaf": ".desc",
+  "n": 51,
+  "ex": [
+   "Fresh eggs from household chickens",
+   "Rabbits, fowl from local hunting"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/identity.js",
+  "exp": "RESOURCE_DATA",
+  "leaf": ".desc",
+  "n": 33,
+  "ex": [
+   "Deep-water or reef fishing close to shore; reliable fish and seafood supply",
+   "Coastal evaporation pans or inland salt deposits; the settlement produces its own salt"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/grammarNews.js",
+  "exp": "GRAMMAR_KIND_REGISTRY",
+  "leaf": "[idx]",
+  "n": 28,
+  "ex": [
+   "It ended at the turn of the year, in a season when neither court had anyone watching the p",
+   "Nothing written stands between the two courts now; what comes next is nobody's to forbid."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/stressorPicker.js",
+  "exp": "buildStressorPickerItems()",
+  "leaf": ".desc",
+  "n": 20,
+  "ex": [
+   "The attacks are following a pattern that suggests coordination, not desperation. Someone i",
+   "Campaign crisis: pressures public legitimacy, faction stability, social trust."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "SUPPLY_CHAIN_NEEDS",
+  "leaf": ".label",
+  "n": 16,
+  "ex": [
+   "Horse & Animal Trade",
+   "Raw Materials & Fuel"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/envoyChanceMeetingNews.js",
+  "exp": "CHANCE_MEETING_KIND_REGISTRY",
+  "leaf": "(other)",
+  "n": 16,
+  "ex": [
+   "{npc} of {home}, passing through {settlement}, {outcome_phrase} in {counterpart}.",
+   "Word from {settlement}: {npc} and {counterpart} {outcome_phrase}, and neither court sent t"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/economicData.js",
+  "exp": "INSTITUTION_FINISHED_GOODS_DEMAND",
+  "leaf": "[idx]",
+  "n": 15,
+  "ex": [
+   "Replacement arms and basic equipment",
+   "Quality weapons and armour"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/commercialReasonsNews.js",
+  "exp": "COMMERCIAL_KIND_REGISTRY",
+  "leaf": "[idx]",
+  "n": 14,
+  "ex": [
+   "The carters sent to fetch it waited out the month at the far gate and came home with the l",
+   "The levy went up when the passes opened and has not come down since the snow returned."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customCategories.js",
+  "exp": "CATEGORY_BY_KEY",
+  "leaf": ".hint",
+  "n": 13,
+  "ex": [
+   "Trade goods or services this institution generates when present.",
+   "Resources, goods, or services this institution consumes."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/armyStrength.js",
+  "exp": "ARMY_STRENGTH_PHRASES",
+  "leaf": ".phrase",
+  "n": 13,
+  "ex": [
+   "a formidable host, few in the region could match it in the field",
+   "a strong army, ready to take the field with confidence"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/deityEffects.js",
+  "exp": "DEITY_AXIS_EFFECTS",
+  "leaf": ".effect",
+  "n": 13,
+  "ex": [
+   "Evil-aligned worship lets corruption take root even without organized crime",
+   "Good-aligned worship exposes corruption and favors incorruptible successors"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/generate/characterPresets.js",
+  "exp": "ARCHETYPES",
+  "leaf": ".desc",
+  "n": 12,
+  "ex": [
+   "Trade hub; guild security",
+   "Major overland hub; active guilds"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/region/goodsCatalog.js",
+  "exp": "GOOD_CATALOG",
+  "leaf": "[idx]",
+  "n": 12,
+  "ex": [
+   "bulk grain and foodstuffs",
+   "raw hides and animal products"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/index.js",
+  "exp": "PARTY_IMPACT_KINDS",
+  "leaf": ".note",
+  "n": 12,
+  "ex": [
+   "The party ended an active stressor (broke the siege, cured the plague).",
+   "The party blunted but did not end a stressor."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "SUPPLY_CHAIN_NEEDS",
+  "leaf": ".desc",
+  "n": 11,
+  "ex": [
+   "What the settlement eats, how it stores food, and what it can export",
+   "What the earth, forest, and water provide for construction and industry"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "SUPPLY_CHAIN_NEEDS",
+  "leaf": ".entrepotNote",
+  "n": 11,
+  "ex": [
+   "Salt is among the most-traded commodities. Port and crossroads settlements profit from red",
+   "Luxury goods are the primary cargo of long-distance trade. Entrepôt cities profit enormous"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/institutionServiceKeys.generated.js",
+  "exp": "INSTITUTION_SERVICE_KEYS",
+  "leaf": "[idx]",
+  "n": 11,
+  "ex": [
+   "Airship docking (high magic)",
+   "Aqueduct or water system"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "CULTURE_PROFILES",
+  "leaf": ".scope",
+  "n": 11,
+  "ex": [
+   "A timber-and-stone, guild-and-estate design grammar.",
+   "A masonry, civic-square, patronage-and-law design grammar."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/supplyChainState.js",
+  "exp": "NEED_HEURISTICS",
+  "leaf": ".failureConsequence",
+  "n": 11,
+  "ex": [
+   "bread prices climb; relief queues lengthen; legitimacy strains.",
+   "raw inputs run short; downstream chains feel the squeeze first."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/supplyChainState.js",
+  "exp": "NEED_HEURISTICS",
+  "leaf": "[idx]",
+  "n": 11,
+  "ex": [
+   "miners and quarry workers",
+   "consumers reliant on local goods"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/map/WorldMapTourSteps.js",
+  "exp": "WORLD_MAP_TOUR_STEPS",
+  "leaf": ".body",
+  "n": 9,
+  "ex": [
+   "Switch between View, Terrain, Annotate, and Routes. Each mode swaps the toolbar below for ",
+   "Drag a saved canon settlement from the palette onto the map to place it, then click any pl"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "SUPPLY_CHAIN_NEEDS",
+  "leaf": "[idx]",
+  "n": 9,
+  "ex": [
+   "Date Palms and Orchards",
+   "Advanced weapons and armor"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/economicData.js",
+  "exp": "TRADE_DEPENDENCY_NEEDS",
+  "leaf": ".label",
+  "n": 7,
+  "ex": [
+   "Stone + iron + grain",
+   "Paper + knowledge sources"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/identity.js",
+  "exp": "RESOURCE_DATA",
+  "leaf": ".warning",
+  "n": 7,
+  "ex": [
+   "Fishing grounds require water access.",
+   "A deep harbour requires coastal port access."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/namingData.js",
+  "exp": "NAMING_DATA",
+  "leaf": ".description",
+  "n": 7,
+  "ex": [
+   "Northern European, medieval German/Austrian style",
+   "Middle Eastern/North African influenced"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/customContentSchema.js",
+  "exp": "DEFENSE_ROLES",
+  "leaf": ".label",
+  "n": 7,
+  "ex": [
+   "Does not contribute to defense",
+   "Fortification — walls, towers"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/neighbourMirror.js",
+  "exp": "MIRROR_BASIS_WORDS",
+  "leaf": "(other)",
+  "n": 7,
+  "ex": [
+   "an errand of ours they took off the road",
+   "a story we seeded in their court"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/deityFlaws.js",
+  "exp": "DEITY_FLAWS",
+  "leaf": ".note",
+  "n": 7,
+  "ex": [
+   "The packet-anchored modulation: the boon weakens as pantheon share is contested. Reads the",
+   "The packet-anchored modulation: the temper pull sharpens while faith fortunes fall. Reads "
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "INDUSTRY_WATER_NEEDS",
+  "leaf": ".reason",
+  "n": 6,
+  "ex": [
+   "Tanning requires large amounts of water for processing hides",
+   "Dyeing textiles requires significant water for preparation and rinsing"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/realm/realmItemAttention.js",
+  "exp": "REALM_ATTENTION_DEFINITIONS",
+  "leaf": ".reason",
+  "n": 6,
+  "ex": [
+   "A realm decision is unresolved and awaits the GM.",
+   "A staged order no longer passes its current legal preconditions."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/foundingCatalog.js",
+  "exp": "FOUNDING_INSTITUTIONS",
+  "leaf": ".desc",
+  "n": 6,
+  "ex": [
+   "A house of care for the dying and the incurably ill poor, kept by the faithful. No one is ",
+   "A charitable house feeding and sheltering the destitute poor, the aged, and the disabled w"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/lib/supplyChains.js",
+  "exp": "CHAIN_DEFS",
+  "leaf": ".description",
+  "n": 6,
+  "ex": [
+   "Ore extraction to metalworking institutions",
+   "Agricultural production to food processing"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/generate/nextSteps.js",
+  "exp": "buildNextSteps()",
+  "leaf": ".hint",
+  "n": 5,
+  "ex": [
+   "Keep it for campaigns, inline editing, and export.",
+   "A print-ready dossier for the table."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/resourceTerrainCompatibility.js",
+  "exp": "getCompatibleResources()",
+  "leaf": ".incompatibleReason",
+  "n": 5,
+  "ex": [
+   "Only available in coastal terrain",
+   "Only available in coastal or desert terrain"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/summary/settlementQuickGuide.js",
+  "exp": "composeSettlementQuickGuide()",
+  "leaf": ".text",
+  "n": 5,
+  "ex": [
+   "Its founding purpose is not recorded.",
+   "No governing authority is recorded."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/causeVocabulary.js",
+  "exp": "CAUSE_CLASSES",
+  "leaf": ".label",
+  "n": 5,
+  "ex": [
+   "a broken supply chain",
+   "the strength levied away"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/espionage/infiltrationDepth.js",
+  "exp": "INFILTRATION_LEVELS",
+  "leaf": ".access",
+  "n": 5,
+  "ex": [
+   "waypoint hearing on a journey: the host's own beliefs",
+   "the target dwell: counting granaries, seeing the place"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/factionCompetition.js",
+  "exp": "FACTION_VERB_PHRASES",
+  "leaf": ".may",
+  "n": 5,
+  "ex": [
+   "press a challenge to the government",
+   "move to suppress an institution"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/factionCompetition.js",
+  "exp": "FACTION_VERB_PHRASES",
+  "leaf": ".did",
+  "n": 5,
+  "ex": [
+   "presses a challenge to the government",
+   "moves to suppress an institution"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/faithNews.js",
+  "exp": "FAITH_KIND_REGISTRY",
+  "leaf": "(other)",
+  "n": 5,
+  "ex": [
+   "The last altar of {creed} in {settlement} went dark; none there now keep the rite.",
+   "The undercroft at {temple} was cleared for grain, and the word is that nobody objected."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/informationNews.js",
+  "exp": "INFORMATION_KIND_REGISTRY",
+  "leaf": "(other)",
+  "n": 5,
+  "ex": [
+   "{counterpart} has been shown {band}; nothing since {season}.",
+   "Given {band} to see, and given it late."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/simulationProfile.js",
+  "exp": "PROFILE_COERCION_LAWS",
+  "leaf": ".message",
+  "n": 5,
+  "ex": [
+   "That world-progression setting isn’t recognized: defaulting to advancing it yourself.",
+   "That autonomy setting is not recognised; the realm keeps its current approval custom."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/temperamentPresets.js",
+  "exp": "TEMPERAMENTS",
+  "leaf": ".description",
+  "n": 5,
+  "ex": [
+   "A gentle age. The world keeps its own counsel and turns slowly; change waits to be asked f",
+   "The measured middle. Settlements rise and fall at a believable pace, trade and rumor cross"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/application/commands/adapters/customContentApply.js",
+  "exp": "customContentCommandSpecs",
+  "leaf": ".description",
+  "n": 4,
+  "ex": [
+   "Create a definition or append one immutable content revision.",
+   "Restore an archived custom-content definition."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/dossier/proseFieldLabels.js",
+  "exp": "PROSE_FIELD_LABELS",
+  "leaf": ".label",
+  "n": 4,
+  "ex": [
+   "How the challenge was overcome",
+   "Safety, as first surveyed"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/identity.js",
+  "exp": "SPECIAL_RESOURCES",
+  "leaf": ".description",
+  "n": 4,
+  "ex": [
+   "Remnants of a previous civilization",
+   "Intersection of magical energy"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/content/customSupplyChainPresentation.js",
+  "exp": "CUSTOM_CHAIN_STATE_PRESENTATION",
+  "leaf": ".summary",
+  "n": 4,
+  "ex": [
+   "Every reviewed component materialized; trade endpoints are live.",
+   "This settlement is eligible, but one or more components are unavailable."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/instantWorld/genesisDiplomacy.js",
+  "exp": "GENESIS_RELATION_CAUSES",
+  "leaf": ".phrase",
+  "n": 4,
+  "ex": [
+   "the older seat has long overshadowed the younger",
+   "both seats agreed to stand together from the first"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/relationships/canonicalRelationship.js",
+  "exp": "RELATIONSHIP_SELECTIONS",
+  "leaf": ".label",
+  "n": 4,
+  "ex": [
+   "Current settlement is patron",
+   "Current settlement is client"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/state/compareSystemState.js",
+  "exp": "compareSystemState()",
+  "leaf": ".explanation",
+  "n": 4,
+  "ex": [
+   "Resilience fell slightly; pressure increased",
+   "Volatility fell slightly; pressure increased"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/envoyTaskCatalog.js",
+  "exp": "NEGOTIATION_METHODS",
+  "leaf": ".note",
+  "n": 4,
+  "ex": [
+   "a court that thinks well of its own nerve will spend to keep the reputation; a frightened ",
+   "the honest middle. It misfires on nobody, which is exactly why it is not free: it reads th"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/informationNews.js",
+  "exp": "INFORMATION_KIND_REGISTRY",
+  "leaf": "[idx]",
+  "n": 4,
+  "ex": [
+   "Less than we fear, and the reckoning is a season stale.",
+   "What they hold of us is old paper."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/pdf/variants.js",
+  "exp": "PDF_VARIANTS",
+  "leaf": ".description",
+  "n": 4,
+  "ex": [
+   "Quick prep doc: no timeline, no canon-only sections.",
+   "Full campaign-ready document with current state and timeline."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/new/economyDeskRead.js",
+  "exp": "economyDeskRead()",
+  "leaf": ".sentence",
+  "n": 3,
+  "ex": [
+   "The town is meant to be shut and the market is not empty. Nobody local will explain that, ",
+   "The town's living is the road. Goods come, goods go, and the town takes its part of both."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "IMPORT_GOODS_BY_TIER",
+  "leaf": ".name",
+  "n": 3,
+  "ex": [
+   "Quality cloth and clothing",
+   "Spices and exotic dyes"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "SUPPLY_CHAIN_NEEDS",
+  "leaf": ".resource",
+  "n": 3,
+  "ex": [
+   "Coal or peat deposits",
+   "Oasis and Water Rights"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/sampleSettlements.js",
+  "exp": "SAMPLE_SETTLEMENTS",
+  "leaf": ".teaser",
+  "n": 3,
+  "ex": [
+   "A rain-grey harbour town where the council and the temple have stopped speaking, and the m",
+   "A mountain city built on iron, ruled by its guild-masters, whose mines now give up too lit"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/customContentSchema.js",
+  "exp": "DEITY_TIER",
+  "leaf": ".label",
+  "n": 3,
+  "ex": [
+   "Major — a pillar of the pantheon",
+   "Minor — a lesser god"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/hegemonyRead.js",
+  "exp": "HEGEMONY_TUNING",
+  "leaf": ".phrase",
+  "n": 3,
+  "ex": [
+   "commands the lion’s share of the realm’s strength",
+   "holds a great part of the realm’s strength"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "defenseThreatProse()",
+  "leaf": ".sentence",
+  "n": 3,
+  "ex": [
+   "The town's plan for an army is to not be interesting to one, and everybody here can state ",
+   "The town settles things itself, quickly, and does not always settle them well."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/generationContentProfile.js",
+  "exp": "GENERATION_CONTENT_PROFILES",
+  "leaf": ".description",
+  "n": 3,
+  "ex": [
+   "Adventure, danger, and political conflict without generated trafficking, slavery, torture,",
+   "Serious conflict and social pressure without generated trafficking, slavery, or torture; v"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/instantWorld/worldPlan.js",
+  "exp": "REALM_SIZES",
+  "leaf": ".blurb",
+  "n": 3,
+  "ex": [
+   "A compact frontier: one market town and its hamlets.",
+   "A settled region anchored by a walled city."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/instantWorld/worldPlan.js",
+  "exp": "TONES",
+  "leaf": ".blurb",
+  "n": 3,
+  "ex": [
+   "Ties hold; change is local and slow.",
+   "A balanced, believable region."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/simulationSpine.js",
+  "exp": "SPINE_RUNGS",
+  "leaf": ".frame",
+  "n": 3,
+  "ex": [
+   "Its real power lies with",
+   "It is currently strained by"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/spatial/cohesionWeave.js",
+  "exp": "ECONOMIC_BASE_LENS",
+  "leaf": ".warStyle",
+  "n": 3,
+  "ex": [
+   "seasonal army (the harvest imperative bites)",
+   "route wars; folds to embargoes"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/npcCirculation.js",
+  "exp": "rejectionNewsItem()",
+  "leaf": "[idx]",
+  "n": 3,
+  "ex": [
+   "The gate was shut against them over the matter at their last home.",
+   "What is spoken of them here is a matter of ."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/npcVerdictApply.js",
+  "exp": "verdictHeraldItem()",
+  "leaf": "[idx]",
+  "n": 3,
+  "ex": [
+   "The corruption was proven and the office was forfeit.",
+   "The settlement keeps no prison."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pulseKernel.js",
+  "exp": "RESIDUE_STRIP_SITES",
+  "leaf": ".banks",
+  "n": 3,
+  "ex": [
+   "occupation seed + conquest disposition ratchet",
+   "vassal promotion + advance-win disposition residue"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/lib/aboutMapping.js",
+  "exp": "ABOUT_UNITS",
+  "leaf": ".heading",
+  "n": 3,
+  "ex": [
+   "What if the town remembered?",
+   "One tick, in dependency order"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customCategories.js",
+  "exp": "AUTHORING_LANES",
+  "leaf": ".blurb",
+  "n": 2,
+  "ex": [
+   "Institutions, services, resources, trade goods, and the supply chains they form: the stati",
+   "Deities, traditions, and factions. Deities gain mechanics after assignment; factions enter"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/gallery/galleryMapsUtils.js",
+  "exp": "KIND_OPTIONS",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "Bare terrain and geography. No settlements, no world state.",
+   "The map populated with its settlements, plus the living world you choose to reveal: the in"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/generate/nextSteps.js",
+  "exp": "buildNextSteps()",
+  "leaf": ".label",
+  "n": 2,
+  "ex": [
+   "Save it to your library",
+   "Place it on your world map"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/map/WorldMapTourSteps.js",
+  "exp": "WORLD_MAP_TOUR_STEPS",
+  "leaf": ".title",
+  "n": 2,
+  "ex": [
+   "Place & select settlements",
+   "What am I looking at?"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/map/heraldCommandSourceParity.js",
+  "exp": "HERALD_COMMAND_SOURCE_PARITY",
+  "leaf": ".owner",
+  "n": 2,
+  "ex": [
+   "LiveWarStatus, RealmIntrigue, BeliefDivergenceBand, WarResolveSection",
+   "RealmItem archive and HeraldHeadline"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/map/heraldRegister.js",
+  "exp": "REMNANT_GRADE",
+  "leaf": ".epitaph",
+  "n": 2,
+  "ex": [
+   "A great city that dwindled to a final thorp and died. Its stones stand as a landmark and a",
+   "It dwindled and was abandoned. A quiet site marks where it stood."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/economicData.js",
+  "exp": "INSTITUTION_FINISHED_GOODS_DEMAND",
+  "leaf": ".exportBonus",
+  "n": 2,
+  "ex": [
+   "Quality tools and weapons",
+   "Alchemical trade (potions, reagents)"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "IMPORT_GOODS_BY_TIER",
+  "leaf": ".desc",
+  "n": 2,
+  "ex": [
+   "Wide variety of crafts",
+   "Slaves imported from war fronts, pirate suppliers, and distant slave-holding regions."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/customContentSchema.js",
+  "exp": "CRITICALITY",
+  "leaf": ".label",
+  "n": 2,
+  "ex": [
+   "Critical — food, water, timber",
+   "Discretionary — luxury / comfort"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/customContentSchema.js",
+  "exp": "DEITY_EFFECT_CHANNELS",
+  "leaf": ".label",
+  "n": 2,
+  "ex": [
+   "Healing and resistance to pestilence",
+   "Order and the keeping of law"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/customContentSchema.js",
+  "exp": "FOOD_IMPACT",
+  "leaf": ".label",
+  "n": 2,
+  "ex": [
+   "Produces food — raises supply",
+   "Consumes food — raises demand"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/forceComposition.js",
+  "exp": "FORCE_COMPOSITION_TABLES",
+  "leaf": ".many",
+  "n": 2,
+  "ex": [
+   "troops of heavy horse",
+   "circles of war mages"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "defenseForcesProse()",
+  "leaf": ".sentence",
+  "n": 2,
+  "ex": [
+   "The town would defend itself as a crowd defends itself, which is to say briefly and in sev",
+   "The town has no answer to anything it cannot see, and is unprepared rather than protected "
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/stateProse/economyStateProse.js",
+  "exp": "COMPLEXITY_NOUN",
+  "leaf": "(other)",
+  "n": 2,
+  "ex": [
+   "broad base of trades",
+   "mix of field and market"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/tradePressure.js",
+  "exp": "TRADE_PRESSURE_PHRASES",
+  "leaf": ".phrase",
+  "n": 2,
+  "ex": [
+   "a vital, hard-to-replace tie",
+   "a valuable trade tie"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/instantWorld/worldPlan.js",
+  "exp": "MAGIC_CHOICES",
+  "leaf": ".blurb",
+  "n": 2,
+  "ex": [
+   "Mages, arcane orders, enchanted trade, and magical events all belong here.",
+   "No working magic anywhere in the realm. Gods and temples remain."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/npc/livedExperienceFunnel.js",
+  "exp": "FUNNEL_TUNING",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "the three pull magnitudes (derived: faint = the floor, heavy = one full band)",
+   "the per-family learn ladder: carried as a mechanical tercile over the pack order until rea"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/stressorPicker.js",
+  "exp": "buildStressorPickerItems()",
+  "leaf": ".name",
+  "n": 2,
+  "ex": [
+   "Beast & Raider Threat",
+   "Indebted to Outside Power"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/townMap/asymmetrySources.js",
+  "exp": "extractAsymmetrySources()",
+  "leaf": ".cause",
+  "n": 2,
+  "ex": [
+   "waterfront (the town meets the water)",
+   "market accretion (stalls crowd the trade gate)"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/traditions/politics.js",
+  "exp": "reexpressed()",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "a whole ox turned on the spit",
+   "the guild ovens working through the night"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/tuning/autoTunableRegistry.js",
+  "exp": "CANDIDATE_RAILS",
+  "leaf": ".note",
+  "n": 2,
+  "ex": [
+   "SQL k-floor; monotone UP only (§4). Owner-ratify if auto-tightening is wanted.",
+   "SQL k-floor; monotone UP only (§4)."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/espionage/infiltrationDepth.js",
+  "exp": "STANDING_COVER_GATE",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "a persisted cover schema, owner-admitted",
+   "an undo/restore round-trip for the new key space"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/feasibilityGate.js",
+  "exp": "classifyFeasibility()",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "Weighed against the walls, the attacker is no contest: the defender's home ground counted.",
+   "Utterly outmatched, a thorpe against a fortified city; the siege cannot succeed."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/npcCirculation.js",
+  "exp": "arrivalNewsItem()",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "{factionName} had a seat open at the bottom.",
+   "They came from the road."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/npcDmVerbRecords.js",
+  "exp": "deathNewsItem()",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "{who} is recorded among the dead at {where}.",
+   "Any order standing against them dies with them."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/razingExecution.js",
+  "exp": "razingDecisionFor()",
+  "leaf": ".receipt",
+  "n": 2,
+  "ex": [
+   "the conquest doctrine is not lit in this world; no town burns by it.",
+   "{razerId} is not at the extreme with {victimId}: the border is not hostile, the resentment"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/reinforcement.js",
+  "exp": "REINFORCEMENT_FLOW_WORDS",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "A thin trickle of men and materiel",
+   "Everything the home could send"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/routeNetworkCharterEvents.js",
+  "exp": "charterHeraldItem()",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "The realm cannot close this material loop by any other road.",
+   "The profit is worth the danger, and the caravans will pay for it."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/routeNetworkConsumersInterdiction.js",
+  "exp": "severanceReasons()",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "The road from {b} carried {join} into {b}.",
+   "Traffic on that way stood at {band}."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/routeNetworkDecay.js",
+  "exp": "gradeStepHeraldItem()",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "Nothing has walked the way in {quietTicks} weeks.",
+   "The route stands on the record, and it will not be struck from it."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/warCoalitionRefusal.js",
+  "exp": "buildCoalitionRefusalOutcome()",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "The court weighed the wider retaliation that a march against {coalitionNameFor} could awak",
+   "The calling court records the refusal as a breach of allied expectation."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/store/settlementDeityHelpers.js",
+  "exp": "DEITY_WRITE_REFUSAL",
+  "leaf": "[idx]",
+  "n": 2,
+  "ex": [
+   "Deities come from your custom Compendium.",
+   "Requires premium custom content."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/application/commands/adapters/customContentApply.js",
+  "exp": "customContentArchiveSpec",
+  "leaf": ".description",
+  "n": 1,
+  "ex": [
+   "Archive a custom-content definition without deleting its revisions."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/application/commands/adapters/importReconciliationApply.js",
+  "exp": "importCampaignAttachExistingSpec",
+  "leaf": ".description",
+  "n": 1,
+  "ex": [
+   "Rehome one existing settlement into the reviewed target campaign."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/application/commands/adapters/importReconciliationApply.js",
+  "exp": "importSettlementCreateAndAttachSpec",
+  "leaf": ".description",
+  "n": 1,
+  "ex": [
+   "Create one dormant imported settlement and attach it atomically."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/application/commands/adapters/partyImpactRecord.js",
+  "exp": "partyImpactRecordSpec",
+  "leaf": ".description",
+  "n": 1,
+  "ex": [
+   "Record one reviewed party impact through the World Pulse input lane."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/application/commands/adapters/pendingEditCommit.js",
+  "exp": "pendingEditCommitSpec",
+  "leaf": ".description",
+  "n": 1,
+  "ex": [
+   "Commit one exact owner-scoped set of reviewed settlement edits."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/application/commands/commandEnvelope.js",
+  "exp": "validateCommandEnvelope()",
+  "leaf": ".message",
+  "n": 1,
+  "ex": [
+   "command must be a plain object"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".category",
+  "n": 1,
+  "ex": [
+   "Which part of settlement life this belongs to and where it appears in the dossier. This cl"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".authority",
+  "n": 1,
+  "ex": [
+   "Describes the kind of power associated with this content. It is currently presentation-onl"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".defenseRole",
+  "n": 1,
+  "ex": [
+   "Describes a defensive role for presentation and future registered operations. It does not "
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".essential",
+  "n": 1,
+  "ex": [
+   "Always eligible when its tier gate passes, rather than entering only through a probability"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".foodImpact",
+  "n": 1,
+  "ex": [
+   "Whether this raises local food supply or adds daily food demand. Once its activation gate "
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".satisfies",
+  "n": 1,
+  "ex": [
+   "The trade category this good can satisfy. Registered demand categories are mechanical; a c"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".criticality",
+  "n": 1,
+  "ex": [
+   "For resources and services, critical content is guaranteed generation eligibility when its"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".economicWeight",
+  "n": 1,
+  "ex": [
+   "Where this category registers an economic consumer, the value weights its contribution. In"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".magical",
+  "n": 1,
+  "ex": [
+   "Presentation tag: this content is arcane or enchanted. No additional magic mechanic is inf"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".criminal",
+  "n": 1,
+  "ex": [
+   "Presentation tag: this content operates outside the law. No additional crime mechanic is i"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".tierMin",
+  "n": 1,
+  "ex": [
+   "Smallest settlement size where registered generation consumers allow it to appear. In pres"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".tierMax",
+  "n": 1,
+  "ex": [
+   "Largest settlement size where this can appear. Leave blank for no upper limit."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".sceneProfileId",
+  "n": 1,
+  "ex": [
+   "Registered 3D architectural grammar. TownScene still owns dimensions, geometry, LOD, colli"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".landmarkLevel",
+  "n": 1,
+  "ex": [
+   "Presentation prominence in the 3D portrait. It never changes institutional power or 2D pla"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".materialFamily",
+  "n": 1,
+  "ex": [
+   "A bounded material family interpreted by TownScene; arbitrary textures and shaders are not"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".glyph",
+  "n": 1,
+  "ex": [
+   "A registered building silhouette. The scene compiler validates and budgets its geometry."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".archetype",
+  "n": 1,
+  "ex": [
+   "For example: merchant guild, thieves’ cabal, or knightly order."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".agenda",
+  "n": 1,
+  "ex": [
+   "What this faction is trying to achieve."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".scale",
+  "n": 1,
+  "ex": [
+   "How much reach and influence this faction has."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".methods",
+  "n": 1,
+  "ex": [
+   "How it pursues its agenda, such as bribery, force, or diplomacy."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".alignmentAxis",
+  "n": 1,
+  "ex": [
+   "Good against evil. Under a GOOD creed, institutions expose corruption and choose incorrupt"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".lawAxis",
+  "n": 1,
+  "ex": [
+   "Law against chaos. A LAWFUL creed strengthens law and order and props a traditional ruler’"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".rankAxis",
+  "n": 1,
+  "ex": [
+   "The faith’s reach. A MAJOR orthodoxy anchors religious authority and can tighten a realm’s"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".portfolio",
+  "n": 1,
+  "ex": [
+   "What the god is “of”, in your own words: its sacred domains, myths, the tone of its worshi"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".domain",
+  "n": 1,
+  "ex": [
+   "A one-word sphere shown beside the faith. War and conquest lower a devoted settlement’s ba"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".motifElement",
+  "n": 1,
+  "ex": [
+   "The founding image this holiday is built around: harvest, hearth, river, or the dead."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".motifAct",
+  "n": 1,
+  "ex": [
+   "How the settlement observes it: feast, procession, vigil, contest, fair, or offering."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "leaf": ".epithet",
+  "n": 1,
+  "ex": [
+   "An optional flavour line shown beneath the tradition in a dossier."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/founders/hallRegister.js",
+  "exp": "covenantProseStyle",
+  "leaf": ".fontFamily",
+  "n": 1,
+  "ex": [
+   "\"Crimson Text\", Georgia, serif"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/map/gatheredDocket.js",
+  "exp": "heldDocketPromise()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "Every matter is settled."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/map/lifecycleGlyphStyle.js",
+  "exp": "LIFECYCLE_GLYPH_STYLE",
+  "leaf": ".label",
+  "n": 1,
+  "ex": [
+   "Relic ruin / abandoned"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/new/tabConstants.js",
+  "exp": "SERVICE_META",
+  "leaf": ".note",
+  "n": 1,
+  "ex": [
+   "Available if you know where to look"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/settlement/faithPanelModel.js",
+  "exp": "FALL_SENTENCE",
+  "leaf": ".discredited",
+  "n": 1,
+  "ex": [
+   "The patron fell. Discredited: the creed lost its rightful claim, and the town let another "
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/settlement/faithPanelModel.js",
+  "exp": "FALL_SENTENCE",
+  "leaf": ".displaced",
+  "n": 1,
+  "ex": [
+   "The patron fell. Displaced: the town’s devotion drifted to another creed until the seat ch"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/settlement/faithPanelModel.js",
+  "exp": "FALL_SENTENCE",
+  "leaf": ".imposed",
+  "n": 1,
+  "ex": [
+   "The patron fell. Imposed: the seat changed hands by decree of those who rule, not by the d"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/settlement/faithPanelModel.js",
+  "exp": "FALL_SENTENCE",
+  "leaf": ".suppressed",
+  "n": 1,
+  "ex": [
+   "The patron fell. Suppressed: the creed was driven from its seat by force, its rites pushed"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/settlements/useCampaignAdvance.js",
+  "exp": "ADVANCE_REFUSAL_TEXT",
+  "leaf": ".world_not_canonized",
+  "n": 1,
+  "ex": [
+   "The realm advances only after you canonize this campaign world."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/settlements/useCampaignAdvance.js",
+  "exp": "ADVANCE_REFUSAL_TEXT",
+  "leaf": ".no_settlements",
+  "n": 1,
+  "ex": [
+   "Add at least one settlement to this campaign before advancing."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/settlements/useCampaignAdvance.js",
+  "exp": "ADVANCE_REFUSAL_TEXT",
+  "leaf": ".busy",
+  "n": 1,
+  "ex": [
+   "The realm is already advancing. Give it a moment."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/settlements/useCampaignAdvance.js",
+  "exp": "ADVANCE_REFUSAL_TEXT",
+  "leaf": ".advance_paused",
+  "n": 1,
+  "ex": [
+   "This realm has a paused advance. Resume it (or undo it) before advancing again."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/settlements/useCampaignAdvance.js",
+  "exp": "ADVANCE_REFUSAL_TEXT",
+  "leaf": ".world_frozen",
+  "n": 1,
+  "ex": [
+   "Time is frozen in this world. Nothing moves until you unfreeze it. Change World progressio"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/components/theme.js",
+  "exp": "dropShadow()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "drop-shadow(NaNpx NaNpx {b}px {c})"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/config/entitlementLadder.js",
+  "exp": "DEFERRED_LADDER_ROWS",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "InteriorView has no product importer and no per-settlement sample allowance exists — unshi"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/galleryReactionVocab.js",
+  "exp": "REACTION_LABELS",
+  "leaf": ".worth_walking",
+  "n": 1,
+  "ex": [
+   "A world worth walking"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/galleryReactionVocab.js",
+  "exp": "REACTION_LABELS",
+  "leaf": ".run_campaign",
+  "n": 1,
+  "ex": [
+   "I'd run a campaign here"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "RESOURCE_CHAINS",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "Access to external mill"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "SUPPLY_CHAIN_NEEDS",
+  "leaf": ".gemstone_deposits",
+  "n": 1,
+  "ex": [
+   "Gem Mining & Lapidary"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/chains.js",
+  "exp": "SUPPLY_CHAIN_NEEDS",
+  "leaf": ".note",
+  "n": 1,
+  "ex": [
+   "Holy sites generate economic activity through pilgrim spending: effectively a non-trade in"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/identity.js",
+  "exp": "RESOURCE_DATA",
+  "leaf": ".label",
+  "n": 1,
+  "ex": [
+   "Hot Springs / Healing Waters"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/data/goods/identity.js",
+  "exp": "SPECIAL_RESOURCES",
+  "leaf": ".economicBoost",
+  "n": 1,
+  "ex": [
+   "Toll and customs revenue"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/design/tokens.js",
+  "exp": "fontFamily",
+  "leaf": ".mono",
+  "n": 1,
+  "ex": [
+   "\"JetBrains Mono\", \"Fira Code\", Consolas, monospace"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/autonomy/accelerationOps.js",
+  "exp": "describeNudge()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "{type} at {originSettlementId} (severity 0%)"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/briefs/citations.js",
+  "exp": "ENGINE_DOES_NOT_RECORD",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "the engine does not record this"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/content/contentEffectProjection.js",
+  "exp": "contentFieldTruth()",
+  "leaf": ".explanation",
+  "n": 1,
+  "ex": [
+   "This field is outside the registered content vocabulary."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/content/customSupplyChainPresentation.js",
+  "exp": "customSupplyChainReasonText()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "{component} is not currently available."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "materializeCulturalIdentity()",
+  "leaf": ".scope",
+  "n": 1,
+  "ex": [
+   "A locally blended design grammar; both traditions remain visible rather than collapsing in"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "materializeCulturalIdentity()",
+  "leaf": ".builtForm",
+  "n": 1,
+  "ex": [
+   "Timber-framed street houses cluster around a market green, with stone reserved for halls, "
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "materializeCulturalIdentity()",
+  "leaf": ".civicPattern",
+  "n": 1,
+  "ex": [
+   "Household heads, landed patrons, and craft associations negotiate authority through custom"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "materializeCulturalIdentity()",
+  "leaf": ".exchangePattern",
+  "n": 1,
+  "ex": [
+   "Guild-regulated craft production and overland fairs organize exchange. Contract, warehousi"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "materializeCulturalIdentity()",
+  "leaf": ".foodways",
+  "n": 1,
+  "ex": [
+   "Grain, orchard produce, preserved meat, dairy, and ale anchor the local table. Bread grain"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "materializeCulturalIdentity()",
+  "leaf": ".sacredLife",
+  "n": 1,
+  "ex": [
+   "Parish observance coexists with household customs, saints, oath sites, and seasonal rites."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "materializeCulturalIdentity()",
+  "leaf": ".defensePattern",
+  "n": 1,
+  "ex": [
+   "Earthworks and timber palisades mature into gated stone walls as wealth and threat increas"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "materializeCulturalIdentity()",
+  "leaf": ".socialTexture",
+  "n": 1,
+  "ex": [
+   "Household, guild, parish, and estate obligations overlap; authority is visible through off"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "materializeCulturalIdentity()",
+  "leaf": ".architecturalDetail",
+  "n": 1,
+  "ex": [
+   "half-timbered upper floors project above the busier lanes; arcaded market fronts define th"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/customContent.js",
+  "exp": "classifyCustomEntity()",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "\"{name}\" classified as other institution."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/customContentSchema.js",
+  "exp": "ECONOMIC_WEIGHT",
+  "leaf": ".label",
+  "n": 1,
+  "ex": [
+   "Backbone of the economy"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/customContentSchema.js",
+  "exp": "POWER_AUTHORITIES",
+  "leaf": ".label",
+  "n": 1,
+  "ex": [
+   "Civic / legal authority"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/deityEffects.js",
+  "exp": "deityPressureOf()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "No supported local patron domain changes this court's bar for war."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/discourseKernel.js",
+  "exp": "CONNECTIVE_LEXICON",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "Against what was coming:"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/dossierViewModel.js",
+  "exp": "deriveBlockadeRelief()",
+  "leaf": ".display",
+  "n": 1,
+  "ex": [
+   "The blockade is biting: no magical channel runs it, and the import share of need goes unme"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/dossierViewModel.js",
+  "exp": "deriveExportPosture()",
+  "leaf": ".label",
+  "n": 1,
+  "ex": [
+   "Entrepôt: re-exports transit goods"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/dossierViewModel.js",
+  "exp": "deriveGranaryOutlook()",
+  "leaf": ".detail",
+  "n": 1,
+  "ex": [
+   "the granary is nearly empty (0.0 of 0.0 months)"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/dossierViewModel.js",
+  "exp": "deriveGranaryOutlook()",
+  "leaf": ".display",
+  "n": 1,
+  "ex": [
+   "{season} — the granary is nearly empty (0.0 of 0.0 months)"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/dossierViewModel.js",
+  "exp": "deriveViability()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "VIABLE: economically self-sufficient and historically plausible."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/economyFreshness.js",
+  "exp": "ECONOMY_FRESHNESS_SENTENCES",
+  "leaf": ".tallies",
+  "n": 1,
+  "ex": [
+   "Events recorded after this settlement's last survey may not be fully counted in these tall"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/economyFreshness.js",
+  "exp": "ECONOMY_FRESHNESS_SENTENCES",
+  "leaf": ".catalog",
+  "n": 1,
+  "ex": [
+   "Events recorded after this settlement's last survey may not be fully counted in this catal"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/forceComposition.js",
+  "exp": "FORCE_COMPOSITION_TABLES",
+  "leaf": ".one",
+  "n": 1,
+  "ex": [
+   "troop of heavy horse"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/humanizeEngineTokens.js",
+  "exp": "tickCalendarDetailLabel()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "week 1 of spring, year 1"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/humanizeEngineTokens.js",
+  "exp": "tickCalendarLabel()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "the spring of year 1"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/labelBands.js",
+  "exp": "COMPLEXITY_LABEL",
+  "leaf": ".HIGHLY_DIVERSIFIED",
+  "n": 1,
+  "ex": [
+   "Highly diversified — multiple major revenue streams"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/labelBands.js",
+  "exp": "COMPLEXITY_LABEL",
+  "leaf": ".DIVERSIFIED",
+  "n": 1,
+  "ex": [
+   "Diversified — broad institutional economic base"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/labelBands.js",
+  "exp": "COMPLEXITY_LABEL",
+  "leaf": ".CONCENTRATED",
+  "n": 1,
+  "ex": [
+   "Concentrated — fewer revenue streams than scale suggests"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/labelBands.js",
+  "exp": "COMPLEXITY_LABEL",
+  "leaf": ".LIMITED",
+  "n": 1,
+  "ex": [
+   "Limited — narrow economic base for this scale"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/labelBands.js",
+  "exp": "COMPLEXITY_LABEL",
+  "leaf": ".SUBSISTENCE",
+  "n": 1,
+  "ex": [
+   "Subsistence — survival economy"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/labelBands.js",
+  "exp": "COMPLEXITY_LABEL",
+  "leaf": ".SPECIALIZED",
+  "n": 1,
+  "ex": [
+   "Specialized production and trade"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/labelBands.js",
+  "exp": "COMPLEXITY_LABEL",
+  "leaf": ".MIXED",
+  "n": 1,
+  "ex": [
+   "Mixed subsistence and market"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/labelBands.js",
+  "exp": "COMPLEXITY_LABEL",
+  "leaf": ".AGRICULTURAL",
+  "n": 1,
+  "ex": [
+   "Agricultural surplus with trade links"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/labelBands.js",
+  "exp": "COMPLEXITY_LABEL",
+  "leaf": ".MINOR_SURPLUS",
+  "n": 1,
+  "ex": [
+   "Subsistence with minor surplus"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "leaf": ".war_preparation",
+  "n": 1,
+  "ex": [
+   "gearing for war, the economy shifting to a war footing"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "leaf": ".mobilized",
+  "n": 1,
+  "ex": [
+   "fully mobilized, a war economy ready to march"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "leaf": ".war_exhaustion",
+  "n": 1,
+  "ex": [
+   "war-weary, its army spent"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "leaf": ".demobilizing",
+  "n": 1,
+  "ex": [
+   "standing down, the war economy unwinding"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "leaf": ".plausible",
+  "n": 1,
+  "ex": [
+   "a real contest, the outcome uncertain"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "leaf": ".auto_fail",
+  "n": 1,
+  "ex": [
+   "hopeless; the defender is far too strong to assault"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "leaf": ".harassment",
+  "n": 1,
+  "ex": [
+   "too weak to take the town; it could only raid the approaches"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "leaf": ".require_coalition",
+  "n": 1,
+  "ex": [
+   "not alone; it would take a coalition to threaten the defender"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "leaf": ".require_betrayal",
+  "n": 1,
+  "ex": [
+   "only from within: the defender would have to fracture first (a coup or revolt)"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "leaf": ".require_magic",
+  "n": 1,
+  "ex": [
+   "only with decisive magical force could the attack succeed"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/neighbourMirror.js",
+  "exp": "MIRROR_BAND_WORDS",
+  "leaf": ".unknown",
+  "n": 1,
+  "ex": [
+   "nothing we can account for"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/neighbourMirror.js",
+  "exp": "MIRROR_STALENESS_WORDS",
+  "leaf": ".unknown",
+  "n": 1,
+  "ex": [
+   "on no date our record holds"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/neighbourMirror.js",
+  "exp": "NEIGHBOUR_MIRROR_HEADING",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "What the neighbours have been shown"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/occupationStatus.js",
+  "exp": "OCCUPATION_STATUS_PHRASES",
+  "leaf": ".contested",
+  "n": 1,
+  "ex": [
+   "a contested occupation; the occupier has not yet taken hold"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/occupationStatus.js",
+  "exp": "OCCUPATION_STATUS_PHRASES",
+  "leaf": ".unstable",
+  "n": 1,
+  "ex": [
+   "an unstable occupation; control is precarious"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/occupationStatus.js",
+  "exp": "OCCUPATION_STATUS_PHRASES",
+  "leaf": ".extractive",
+  "n": 1,
+  "ex": [
+   "an extractive occupation; the occupier bleeds it for everything it holds"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/occupationStatus.js",
+  "exp": "OCCUPATION_STATUS_PHRASES",
+  "leaf": ".stabilized",
+  "n": 1,
+  "ex": [
+   "a stabilized occupation; the occupier holds it firmly"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/occupationStatus.js",
+  "exp": "OCCUPATION_STATUS_PHRASES",
+  "leaf": ".vassalized",
+  "n": 1,
+  "ex": [
+   "a client state; the occupied settlement now serves its conqueror"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/occupationStatus.js",
+  "exp": "OCCUPATION_STATUS_PHRASES",
+  "leaf": ".phrase",
+  "n": 1,
+  "ex": [
+   "restive: sabotage and noncompliance harry the garrison"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".punitive_sack_vengeance",
+  "n": 1,
+  "ex": [
+   "It ended in a sack, taken as the answer to a burning of its own."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".punitive_sack_initiation",
+  "n": 1,
+  "ex": [
+   "It ended in a sack, and that burning was the opening of the reckoning, not its answer."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".conquest",
+  "n": 1,
+  "ex": [
+   "It ended in conquest: {victor} held what it had taken."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".annihilation",
+  "n": 1,
+  "ex": [
+   "It ended with a seat that did not outlast the war."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".fragmentation",
+  "n": 1,
+  "ex": [
+   "It ended piecemeal, the coalition falling apart into separate peaces."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".ruler_change",
+  "n": 1,
+  "ex": [
+   "It ended when a court changed hands and the new seat put the war down."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".exhaustion",
+  "n": 1,
+  "ex": [
+   "It ended in exhaustion, with neither court left willing to carry it."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".terms",
+  "n": 1,
+  "ex": [
+   "It ended at the table, with terms written down."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".not_a_closed_war",
+  "n": 1,
+  "ex": [
+   "The record does not yet call this war closed."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".no_terminal_evidence",
+  "n": 1,
+  "ex": [
+   "How it ended is not set down in the record."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "leaf": ".razing_road_unreconstructable",
+  "n": 1,
+  "ex": [
+   "It ended with a burning the record cannot attribute, so the manner is left unsaid."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".founded",
+  "n": 1,
+  "ex": [
+   "Raised by this power"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".merchant",
+  "n": 1,
+  "ex": [
+   "A commercial house of this power"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".military",
+  "n": 1,
+  "ex": [
+   "An armed body under this command"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".religious",
+  "n": 1,
+  "ex": [
+   "A house of this faith"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".arcane",
+  "n": 1,
+  "ex": [
+   "An order under this arcane power"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".criminal",
+  "n": 1,
+  "ex": [
+   "A front under this influence"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".noble",
+  "n": 1,
+  "ex": [
+   "A retainer house of this line"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".government",
+  "n": 1,
+  "ex": [
+   "A civic office of this authority"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".craft",
+  "n": 1,
+  "ex": [
+   "A guild under this craft power"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".labor",
+  "n": 1,
+  "ex": [
+   "A workshop of this commons"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".outsider",
+  "n": 1,
+  "ex": [
+   "Aligned with this outside power"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".occupation",
+  "n": 1,
+  "ex": [
+   "Held under this occupying power"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "leaf": ".other",
+  "n": 1,
+  "ex": [
+   "Aligned with this power"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/historyBeats.js",
+  "exp": "LIKELY_FUTURE_BEAT_TEXT",
+  "leaf": ".crisis",
+  "n": 1,
+  "ex": [
+   "A crisis is imminent if no one intervenes."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/historyBeats.js",
+  "exp": "LIKELY_FUTURE_BEAT_TEXT",
+  "leaf": ".test",
+  "n": 1,
+  "ex": [
+   "The next year will test whoever holds the chair."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/historyBeats.js",
+  "exp": "LIKELY_FUTURE_BEAT_TEXT",
+  "leaf": ".continuity",
+  "n": 1,
+  "ex": [
+   "Continuity, with the usual slow erosion of any settlement."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/npc/characterConsumers.js",
+  "exp": "CORRUPTION_DEPTH_GATE",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "the reach: a drifted vice opens a door on 7 of 17 axes, because ten axes carry no legacy f"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/npc/characterEdit.js",
+  "exp": "CHART_WRITER_SEAM",
+  "leaf": ".note",
+  "n": 1,
+  "ex": [
+   "UNLANDED on this base and therefore NAMED, never imported. At the reconcile the reader and"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/npc/characterReadModel.js",
+  "exp": "DECAY_CLAUSE",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "the slow work of years"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/npc/livedExperienceCatalog.js",
+  "exp": "EXPERIENCE_TABLE",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "n/a - teaches nothing"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/npc/npcBank.js",
+  "exp": "validateNpcFacet()",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "unknown facet kind \"{a}\""
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/regenerationMode.js",
+  "exp": "MODE_DESCRIPTIONS",
+  "leaf": ".nudge",
+  "n": 1,
+  "ex": [
+   "Preserve most. Minor cosmetic / narrative variation only."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/regenerationMode.js",
+  "exp": "MODE_DESCRIPTIONS",
+  "leaf": ".rebalance",
+  "n": 1,
+  "ex": [
+   "Preserve user canon + locked entities. Recalculate affected subsystems."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/regenerationMode.js",
+  "exp": "MODE_DESCRIPTIONS",
+  "leaf": ".reforge",
+  "n": 1,
+  "ex": [
+   "Keep only hard anchors (seed, name, tier). Reroll almost everything."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/region/wizardNews.js",
+  "exp": "IMPACT_LABELS",
+  "leaf": ".criminal_pressure",
+  "n": 1,
+  "ex": [
+   "a rise in lawlessness"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/region/wizardNews.js",
+  "exp": "IMPACT_LABELS",
+  "leaf": ".religious_pressure",
+  "n": 1,
+  "ex": [
+   "a stir among the faithful"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/regionalGraph.js",
+  "exp": "deriveRegionalLink()",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "Neighbour \"{name}\" classified as other."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/regionalGraph.js",
+  "exp": "summarizeRegional()",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "No structured regional neighbours."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/roads/migrationReason.js",
+  "exp": "MIGRATION_CAUSE",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "A column of folk leaving a shed settlement"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/roads/ops.js",
+  "exp": "applyRoadsPartyRelease()",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "unknown roads op \"{c}\""
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/rulingPowerCoup.js",
+  "exp": "COUP_RISK_LABELS",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "Critical. The seat could fall"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/spatial/calamity.js",
+  "exp": "stampTitle()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "The Great Calamity of {a}, year {b}"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/spatial/dispatchEV.js",
+  "exp": "emboldenedReceipt()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "The merchants are emboldened by the {a} run. A risky delivery paid off."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/spatial/generosityEV.js",
+  "exp": "GENEROSITY_INSTRUMENTS",
+  "leaf": ".note",
+  "n": 1,
+  "ex": [
+   "Statecraft §2.4 GIVE lane: warning an ally, priced by the SACRIFICE of the telling (strate"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/spatial/generosityEV.js",
+  "exp": "generosityReceipt()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "Grain went to {receiverName}: their ground shields {giverName}'s flank: the granary opened"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/spatial/index.js",
+  "exp": "PORT_ADVISORY_PHRASE",
+  "leaf": ".unpartnered_harbour",
+  "n": 1,
+  "ex": [
+   "a harbour with no counterpart across the water"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/spatial/supplyShipments.js",
+  "exp": "starvationReceipt()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "{institutionName} starves: the {input} road is cut (every supplier severed) under {cause}."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/state/bands.js",
+  "exp": "BAND_HINT",
+  "leaf": ".Stable",
+  "n": 1,
+  "ex": [
+   "Healthy. Shocks are absorbed without crisis."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/state/bands.js",
+  "exp": "BAND_HINT",
+  "leaf": ".Strained",
+  "n": 1,
+  "ex": [
+   "Functional but stretched. A bad season would hurt."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/state/bands.js",
+  "exp": "BAND_HINT",
+  "leaf": ".Vulnerable",
+  "n": 1,
+  "ex": [
+   "One real shock away from failure."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/state/bands.js",
+  "exp": "BAND_HINT",
+  "leaf": ".Critical",
+  "n": 1,
+  "ex": [
+   "Already failing. This is plot fuel."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/state/deriveSystemState.js",
+  "exp": "deriveSystemState()",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "Few factions: concentrated power"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/summary/settlementQuickGuide.js",
+  "exp": "composeSettlementQuickGuide()",
+  "leaf": ".identitySentence",
+  "n": 1,
+  "ex": [
+   "This settlement is a settlement."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/tableEvents.js",
+  "exp": "tableEventToNewsEntry()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "{kind} at the table ({band})"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/threatProfile.js",
+  "exp": "summarizeThreats()",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "No threats currently pressing the settlement."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/townMap/siteGenesis.js",
+  "exp": "generateSite()",
+  "leaf": ".sourceRef",
+  "n": 1,
+  "ex": [
+   "the coast (sea trade)"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/traditions/genesis.js",
+  "exp": "describeTraditionWindow()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "Seedtime, the first week"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/traditions/politics.js",
+  "exp": "reexpressed()",
+  "leaf": ".epithet",
+  "n": 1,
+  "ex": [
+   "older than any charter the town can show"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/traditions/prose.js",
+  "exp": "traditionBeatProse()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "{name} went well this year in {town}. A town's observances carry its identity forward, and"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js",
+  "exp": "conquestExtractionCondition()",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "{toPowerName} extracts wealth, troops, and authority from the conquered settlement."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js",
+  "exp": "installOccupationAuthority()",
+  "leaf": ".desc",
+  "n": 1,
+  "ex": [
+   "A foreign occupation authority installed by conquest."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js",
+  "exp": "cascadeNewsEntry()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "{nameFor} and {nameFor}: {fromType} becomes {toType}"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js",
+  "exp": "openCoalitionEnemyRelationship()",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "An allied court answered a live call and opened its own bilateral war edge."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/attrition.js",
+  "exp": "applyAttritionToRecord()",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "The attacking host bled lightly this turn in a {band} engagement, though supply, food and "
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/brokerageServices.js",
+  "exp": "answerBrokerageQuery()",
+  "leaf": ".detail",
+  "n": 1,
+  "ex": [
+   "No house in this world keeps a register worth paying for."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/brokerageServices.js",
+  "exp": "brokerageQueryPrice()",
+  "leaf": ".detail",
+  "n": 1,
+  "ex": [
+   "The house wants real coin for this, and will want it before it speaks."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/brokerageServices.js",
+  "exp": "interceptOutboundRecord()",
+  "leaf": ".detail",
+  "n": 1,
+  "ex": [
+   "Nothing legible left that house this week."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/brokerageServicesPlant.js",
+  "exp": "commissionPlant()",
+  "leaf": ".detail",
+  "n": 1,
+  "ex": [
+   "No market in this world sells that."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/brokerageServicesRules.js",
+  "exp": "INTERCEPT_BAND_REASONS",
+  "leaf": ".legible",
+  "n": 1,
+  "ex": [
+   "The town keeps no secrets worth the name, so the whole of the traffic read plainly."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/brokerageServicesRules.js",
+  "exp": "INTERCEPT_BAND_REASONS",
+  "leaf": ".clouded",
+  "n": 1,
+  "ex": [
+   "Gates half-raised cost the watcher the subtlest of it, and left the rest standing."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/brokerageServicesRules.js",
+  "exp": "INTERCEPT_BAND_REASONS",
+  "leaf": ".fogged",
+  "n": 1,
+  "ex": [
+   "Behind closed gates only the bare shape survived: that a contract exists at all."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/brokerageServicesRules.js",
+  "exp": "INTERCEPT_BAND_REASONS",
+  "leaf": ".opaque",
+  "n": 1,
+  "ex": [
+   "Nothing survived the gates."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/calamityKernel.js",
+  "exp": "forceCalamityStrike()",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "Killed in the calamity."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/calamityKernel.js",
+  "exp": "forceCalamityStrike()",
+  "leaf": ".name",
+  "n": 1,
+  "ex": [
+   "{name}'s Great Calamity, year {year}"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/calamityKernel.js",
+  "exp": "forceCalamityStrike()",
+  "leaf": ".description",
+  "n": 1,
+  "ex": [
+   "The calamity has overwhelmed the seat of power; the response is contested and legitimacy b"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/conquestExecution.js",
+  "exp": "conquestMarginVerdict()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "the margin between the victor and the held settlement cannot be measured, and an unmeasure"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/conquestExecution.js",
+  "exp": "inheritedHunger()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "nothing the victor holds can be weighed for hunger."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "collapseSeatBooksUnderThreat()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "the seat keeps its own books: the war is not yet its own survival."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "conquestTermsRange()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "the court has no bargaining range: it cannot judge the war."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "mistakenFeasibilityReceipt()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "the court held no judgement to be wrong about."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "readConquestFeasibility()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "the court cannot judge a conquest of its rival: the pair is not two named settlements."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "termsRangesOverlap()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "neither side can price the war, so no range can be compared."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/conquestIntent.js",
+  "exp": "readConquestIntent()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "no conquest intent can be read: the court has no martial disposition on record."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "engagementOptions()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "Committed to the field. The prize is worth the blood."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "interventionLegitimacy()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "An army sent to raise up rebels. Every neighbor now reads a ring tightening, and arms."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "interventionNews()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "{patronId}'s banners march on {targetId}'s succession"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "interventionNews()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "{patronId} threw an army into {targetId}'s contest to raise the challengers. {receipt}"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "prizeRivalryCasus()",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "Two banners raced for one crown. The prize itself is now the quarrel between them."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "reactiveResponse()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "No word of banners on the roads: the muster stands down."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "scoreMotives()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "A tribute binds the seat to us. A client that falls is an empire that shrinks."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/deityStanceLane.js",
+  "exp": "footholdOutcome()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "{rivalName} finds an ear in {cityName}"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/deityStanceLane.js",
+  "exp": "footholdOutcome()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "{npcName}, whose temper leans to {rivalName} and away from {patronName}, has become the cr"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/demographicsLand.js",
+  "exp": "landLine()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "Every opening left to {b} lies out beyond the reach of any road."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/demographicsPlans.js",
+  "exp": "planLine()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "{b} does nothing in particular. The work stands at 100 percent and 0 of the stores it need"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/demographicsResponses.js",
+  "exp": "responseLine()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "{b} does nothing in particular."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/demographicsRisk.js",
+  "exp": "demographicRiskOf()",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "and the holding is scattered over open ground"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/demographicsWar.js",
+  "exp": "perceivedScarcityClause()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "The court believes their granaries are bare and the court is wrong about it."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/dispositionProfile.js",
+  "exp": "thresholdFactorOf()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "No supported disposition channel changes this court's action bar."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/envoyChanceMeetingNews.js",
+  "exp": "CHANCE_MEETING_EXPOSED_REASON",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "a refusal that did not stay private."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/envoyChanceMeetingNews.js",
+  "exp": "CHANCE_MEETING_REASON",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "a guest and a notable met by chance; what passed between them is now a tie across two cour"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/espionage/espionageDoctrine.js",
+  "exp": "readEspionageDoctrine()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "No espionage doctrine can be read for this court: no court was named."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/espionage/espionageDoctrine.js",
+  "exp": "unknownDoctrine()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "No espionage doctrine can be read for this court: {a}."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/espionage/espionageGauntlet.js",
+  "exp": "captorLeniencyRead()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "The captor court has no readable doctrine, so its caught guest is treated as any other."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/espionage/espionageProductStage.js",
+  "exp": "standoffDecisionFor()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "Pride carried him through the gate: the approach read no worse than his nerve, and only an"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/espionage/espionageTap.js",
+  "exp": "TAP_RECEIPTS",
+  "leaf": ".beliefs",
+  "n": 1,
+  "ex": [
+   "as X itself believes"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/espionage/espionageTap.js",
+  "exp": "TAP_RECEIPTS",
+  "leaf": ".delta",
+  "n": 1,
+  "ex": [
+   "X speaks one thing and believes another"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/espionage/espionageTap.js",
+  "exp": "TAP_RECEIPTS",
+  "leaf": ".performance",
+  "n": 1,
+  "ex": [
+   "as told in X's markets"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/faithField.js",
+  "exp": "FAITH_UNBOUND_CHANNELS",
+  "leaf": ".hearth",
+  "n": 1,
+  "ex": [
+   "No fertility or household causal variable exists. The word appears only in a founding-myth"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/faithNews.js",
+  "exp": "faithReceipt()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "{creedName} lost its last altar in {settlementName}; no one there keeps the rite, and the "
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/feasibilityGate.js",
+  "exp": "feasibilityVerdictClause()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "the matchup alone made a storm worth trying"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/index.js",
+  "exp": "STRESSOR_CATALOG",
+  "leaf": ".label",
+  "n": 1,
+  "ex": [
+   "Monster or raider pressure"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/index.js",
+  "exp": "canRecoverResource()",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "Renewable or managed resource can recover when pressure drops."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/institutionStatusModel.js",
+  "exp": "INSTITUTION_CAUSE_CURES",
+  "leaf": ".supply_shortage",
+  "n": 1,
+  "ex": [
+   "the road reopens or the stores refill"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/institutionStatusModel.js",
+  "exp": "INSTITUTION_CAUSE_CURES",
+  "leaf": ".corruption_exposed",
+  "n": 1,
+  "ex": [
+   "the house is cleaned out and the scandal closes"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/institutionStatusModel.js",
+  "exp": "INSTITUTION_CAUSE_CURES",
+  "leaf": ".damage",
+  "n": 1,
+  "ex": [
+   "the repairs are finished"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/institutionStatusModel.js",
+  "exp": "INSTITUTION_CAUSE_CURES",
+  "leaf": ".siege_occupation",
+  "n": 1,
+  "ex": [
+   "the siege lifts or the occupier withdraws"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/institutionStatusModel.js",
+  "exp": "INSTITUTION_CAUSE_LABELS",
+  "leaf": ".damage",
+  "n": 1,
+  "ex": [
+   "damage to the building"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/lineageClaim.js",
+  "exp": "scoreKinshipBond()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "The lineage was cited by both sides to opposite ends, and the quieter reading held."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/magicBufferModel.js",
+  "exp": "EXPLOITATION_GATE_CONTRACT",
+  "leaf": ".absentMeaning",
+  "n": 1,
+  "ex": [
+   "no regime is known, so nothing can be exploited and the magic term is zero"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/magicBufferModel.js",
+  "exp": "bufferReceiptLine()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "The wards blunted the worst of it, and it cost nothing anyone can name."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/magicBufferModel.js",
+  "exp": "bufferShortfallLine()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "The wards reached further than the stores could pay for, and stopped where the coin stoppe"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/magicFormsPractitioner.js",
+  "exp": "defaultPractitionerName()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "The Hedge wizard of a"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/magicRegimeModel.js",
+  "exp": "MAGIC_REGIME_LABELS",
+  "leaf": ".subsistence",
+  "n": 1,
+  "ex": [
+   "what the practitioners can do unpaid"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/magicRegimeModel.js",
+  "exp": "MAGIC_REGIME_LABELS",
+  "leaf": ".funded",
+  "n": 1,
+  "ex": [
+   "what the town itself pays for"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/magicRegimeModel.js",
+  "exp": "MAGIC_REGIME_LABELS",
+  "leaf": ".patronized",
+  "n": 1,
+  "ex": [
+   "what a patron underwrites"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/magicRegimeModel.js",
+  "exp": "MAGIC_REGIME_LABELS",
+  "leaf": ".industrial",
+  "n": 1,
+  "ex": [
+   "work that pays for itself"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/magicSubstitution.js",
+  "exp": "magicDependencySentence()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "The settlement takes a little of its bread from the arcane houses: about 0 percent of what"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/npcCirculation.js",
+  "exp": "arrivalNewsItem()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "A stranger takes up residence in {settlementName}."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/npcCirculation.js",
+  "exp": "arrivalNewsItem()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "They enter {factionName} at its lowest rung."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/npcCirculation.js",
+  "exp": "rejectionNewsItem()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "A stranger is turned away at the gates of {settlementName}."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/npcCirculation.js",
+  "exp": "rejectionNewsItem()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "The story that put them on the road reached {settlementName} before they did."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/npcDmVerbRecords.js",
+  "exp": "deathNewsItem()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "The realm strikes their name from the register of the living. {where} was the last place t"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/npcVerdictApply.js",
+  "exp": "verdictHeraldItem()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "{npcName} is imprisoned in {settlementName}."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/npcVerdictApply.js",
+  "exp": "verdictHeraldItem()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "The office is forfeit and the seat at {factionName} stands open."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/opportunism.js",
+  "exp": "perceivedVulnerabilityClause()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "The court believes their walls are thinly held and the court is wrong about it."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pactFormation.js",
+  "exp": "answerPactProposal()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "This court's posture reads settled: nothing was heard from its remembered standing, its di"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pactFormation.js",
+  "exp": "reserveFor()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "This court's posture reads settled: nothing was heard from its remembered standing, its di"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pactFormation.js",
+  "exp": "signPactProposal()",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "Agreed in peace between {from} and {to}, and extracted from nobody."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pactFormation.js",
+  "exp": "signPactProposal()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "{from} and {to} have set their names to it, in peace and not at a war's end."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pactProposals.js",
+  "exp": "openPactProposal()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "There was nothing here that could be written into an instrument."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "dependencyFearOf()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "This court can carry what the bargain would cost it in reliance."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "scoreFaithCommunion()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "One of these courts holds no belief about the other's observance."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "scoreMigrationPressure()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "One of these courts holds no belief about where people are going."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "scoreSharedThreat()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "No court either of these believes in is armed enough to be worth fearing together."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "scoreTradeDemand()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "No scarcity ladder was supplied to price a demand against."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "PEACE_VETO_PROSE",
+  "leaf": ".peace_no_deployment",
+  "n": 1,
+  "ex": [
+   "That court has no army in the field against that foe. There is no war of theirs to wind do"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "PEACE_VETO_PROSE",
+  "leaf": ".peace_already_ordered",
+  "n": 1,
+  "ex": [
+   "The recall order is already given; the army marches home."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "scoreBeliefConvergence()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "Both courts have been schooled to the same truth by the fighting. No offer is an insult an"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "scoreObligationDischarged()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "The compact or original quarrel no longer supplies a borrowed cause for war."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "scoreRealignment()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "A common enemy stands at both gates. The peace is signed in haste, for the horde was in th"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/peaceTermsDrafting.js",
+  "exp": "signingReason()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "{c} accepts the {type} demanded by {b}."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "compareSpoils()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "burning yields 0 once against 0 from holding. This was a place worth more dead than alive,"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "conservedSack()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "the settlement cannot be counted, and an uncounted place cannot be sacked."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "razingDeparture()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "They burned the settlement and rode home. The victor took no ground, left no garrison, and"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "razingGate()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "the victor has not taken the defeated: there is no razing without a won siege."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "razingSpoils()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "there is nothing in the ash: the army carries off what a ruin has, which is nothing."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "readRelationshipExtremity()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "the court is not at the extreme with its neighbour: the border is not hostile, the resentm"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "tierFallDescriptor()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "what the settlement was and what it is now cannot both be read, so no fall can be counted."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/razingExecution.js",
+  "exp": "razingDeterrenceFor()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "nobody would inherit the right to answer the burning"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/razingExecution.js",
+  "exp": "razingSeverityFrom()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "no quarrel stands hot enough to price a burning."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/reinforcement.js",
+  "exp": "computeReinforcement()",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "Origin is itself besieged/occupied. It cannot spare reinforcements."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/relationshipCompatibility.js",
+  "exp": "validateRelationship()",
+  "leaf": ".reason",
+  "n": 1,
+  "ex": [
+   "'{a}' is not a canonical relationship type."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/routeNetworkCharterEvents.js",
+  "exp": "charterHeraldItem()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "A road is chartered between {a} and {b}"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/routeNetworkCharterEvents.js",
+  "exp": "charterHeraldItem()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "The way opens as a track, and it will be as good a road as it is walked."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/routeNetworkDecay.js",
+  "exp": "gradeStepHeraldItem()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "The road between {a} and {b} is abandoned"
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/routeNetworkDecay.js",
+  "exp": "gradeStepHeraldItem()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "The way is not struck from the map. It is only overgrown, and it remembers."
+  ],
+  "prod": false
+ },
+ {
+  "file": "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+  "exp": "forceResettleEntry()",
+  "leaf": ".label",
+  "n": 1,
+  "ex": [
+   "New settlement name (optional)"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/settlementLifecycleKernel.js",
+  "exp": "forceFoundSteading()",
+  "leaf": ".refusal",
+  "n": 1,
+  "ex": [
+   "only town-or-higher parents seed steadings"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/settlementLifecycleKernel.js",
+  "exp": "forceFoundSteadingEntry()",
+  "leaf": ".label",
+  "n": 1,
+  "ex": [
+   "Resource key (optional: the vein the camp exists for)"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/sovereigntyAppraisal.js",
+  "exp": "appraiseSettlementAsset()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "the court cannot price the holding: the pair is not an asset and a court."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/sovereigntyAssets.js",
+  "exp": "readSovereigntyAsset()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "no holding was named, so none can be judged."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/sovereigntyBundle.js",
+  "exp": "valueBundleThroughNeeds()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "no court was named, so the bundle has no valuer and no value."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/sovereigntyIntent.js",
+  "exp": "judgeSovereigntySale()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "No verdict is recorded on this sale: no buyer is named."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/sovereigntyIntent.js",
+  "exp": "readSovereigntySaleIntent()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "weighs selling to . No court is named as the seller, so no appetite is recorded. The sale "
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/sovereigntyIntent.js",
+  "exp": "saleAppetiteOf()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "No court is named as the seller, so no appetite is recorded."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/sovereigntyReach.js",
+  "exp": "sovereigntyReach()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "a reach question needs a buyer and a holding that are two different places."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/stressorGates.js",
+  "exp": "STRESSOR_SPAWN_GATES",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "Few congregations here to fracture."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/successorNpc.js",
+  "exp": "successorNpc()",
+  "leaf": ".short",
+  "n": 1,
+  "ex": [
+   "Newly installed after a corruption scandal. Determined to stay above suspicion."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/supplyWebWarfare.js",
+  "exp": "WEBWAR_VETO_PROSE",
+  "leaf": ".webwar_self",
+  "n": 1,
+  "ex": [
+   "A court cannot open a supply-war campaign against itself."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/supplyWebWarfare.js",
+  "exp": "WEBWAR_VETO_PROSE",
+  "leaf": ".webwar_no_web",
+  "n": 1,
+  "ex": [
+   "That target has no readable supply web to strangle (no reachable outside suppliers)."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/supplyWebWarfare.js",
+  "exp": "WEBWAR_VETO_PROSE",
+  "leaf": ".webwar_plan_exists",
+  "n": 1,
+  "ex": [
+   "That court already runs a live indirect campaign; one plan per aggressor."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/supplyWebWarfare.js",
+  "exp": "scoreCampaignEV()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "The target can be taken directly, and the slow strangulation would cost more time than it "
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/warCoalitionRefusal.js",
+  "exp": "buildCoalitionRefusalOutcome()",
+  "leaf": ".headline",
+  "n": 1,
+  "ex": [
+   "{coalitionNameFor} refuses {coalitionNameFor}'s call"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/warCoalitionRefusal.js",
+  "exp": "buildCoalitionRefusalOutcome()",
+  "leaf": ".summary",
+  "n": 1,
+  "ex": [
+   "{coalitionNameFor} will not send its army against {coalitionNameFor}; the refusal now stan"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/warReasons.js",
+  "exp": "CASUS_VETO_PROSE",
+  "leaf": ".casus_unknown_type",
+  "n": 1,
+  "ex": [
+   "That is not a typed reason for war this engine tracks."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/warReasons.js",
+  "exp": "CASUS_VETO_PROSE",
+  "leaf": ".casus_engine_derived",
+  "n": 1,
+  "ex": [
+   "That cause must arise from the world’s own record. A lineage claim requires a surviving fo"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/warReasons.js",
+  "exp": "CASUS_VETO_PROSE",
+  "leaf": ".casus_self",
+  "n": 1,
+  "ex": [
+   "A court cannot hold a casus belli against itself."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/warReasons.js",
+  "exp": "scoreAllianceObligation()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "A sworn ally remains in the field under the same living cause."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/domain/worldPulse/warReasons.js",
+  "exp": "scoreGrievance()",
+  "leaf": ".receipt",
+  "n": 1,
+  "ex": [
+   "A ledger of grievances stands open: resentment runs hot, and old wrongs have not faded."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/lib/accountSettlementContentPortability.js",
+  "exp": "remapAccountSettlementContentProvenance()",
+  "leaf": ".error",
+  "n": 1,
+  "ex": [
+   "Settlement content provenance has an invalid shape."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/lib/customContentArchive.js",
+  "exp": "validateCustomContentArchive()",
+  "leaf": ".message",
+  "n": 1,
+  "ex": [
+   "archive must be an object."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/lib/importReconciliation.js",
+  "exp": "ingestSettlementForgeExport()",
+  "leaf": ".message",
+  "n": 1,
+  "ex": [
+   "This export is too large to reconcile safely."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/lib/importReconciliation.js",
+  "exp": "previewImportReconciliation()",
+  "leaf": ".error",
+  "n": 1,
+  "ex": [
+   "This reconciliation session is malformed or unsupported."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/lib/importReconciliation.js",
+  "exp": "previewImportReconciliation()",
+  "leaf": ".message",
+  "n": 1,
+  "ex": [
+   "The reconciliation session was rejected."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/lib/instantWorld/factionDedup.js",
+  "exp": "FACTION_DESCRIPTORS_EXTRA",
+  "leaf": "[idx]",
+  "n": 1,
+  "ex": [
+   "The Guild of Artificers"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/lib/seoCompendium.js",
+  "exp": "compendiumEntryHead()",
+  "leaf": ".description",
+  "n": 1,
+  "ex": [
+   "{term}, a {category} in the SettlementForge Compendium. Every entry renders from the deter"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/pdf/lib/headlines.js",
+  "exp": "overviewHeadline()",
+  "leaf": "(other)",
+  "n": 1,
+  "ex": [
+   "A {toLowerCase}, {toLowerCase} {toLowerCase} under active strain (1 crisis chip)."
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/pdf/variants.js",
+  "exp": "PDF_VARIANTS",
+  "leaf": ".label",
+  "n": 1,
+  "ex": [
+   "Campaign State / War Room"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/store/aiRequestLifecycle.js",
+  "exp": "DAILY_LIFE_FIELD_LABELS",
+  "leaf": ".night",
+  "n": 1,
+  "ex": [
+   "Walking the night watch"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/store/aiRequestLifecycle.js",
+  "exp": "NARRATIVE_FIELD_LABELS",
+  "leaf": ".thesis",
+  "n": 1,
+  "ex": [
+   "Writing the settlement’s identity"
+  ],
+  "prod": true
+ },
+ {
+  "file": "src/store/aiRequestLifecycle.js",
+  "exp": "NARRATIVE_FIELD_LABELS",
+  "leaf": ".connectionsMap",
+  "n": 1,
+  "ex": [
+   "Mapping the political web"
+  ],
+  "prod": true
+ }
+]

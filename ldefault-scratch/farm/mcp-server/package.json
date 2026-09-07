@@ -1,0 +1,21 @@
+{
+  "name": "settlementforge-truth-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local, read-only MCP server that serves a SettlementForge world export as receipts-bearing truth for any AI. No cloud, no keys, no write path.",
+  "type": "module",
+  "bin": {
+    "sf-truth-server": "bin/cli.js"
+  },
+  "main": "src/server.js",
+  "exports": {
+    ".": "./src/server.js",
+    "./tools": "./src/tools.js"
+  },
+  "files": ["bin", "src", "README.md"],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "SEE LICENSE IN ../LICENSE",
+  "dependencies": {}
+}

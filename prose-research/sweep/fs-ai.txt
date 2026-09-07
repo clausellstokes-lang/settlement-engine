@@ -1,0 +1,298 @@
+ 
+
+ AI Developments in Genealogy and How They Impact You 
+
+ FamilySearch Blog 
+
+ Categories 
+
+ About FamilySearch 
+
+ How to Use FamilySearch 
+
+ What's New at FamilySearch 
+
+ For Latter-day Saints 
+
+ Inspiration and Resources 
+
+ Temple and Family History Callings 
+
+ For the Whole Family 
+
+ Easy Activities 
+
+ Record Your Story 
+
+ Genealogy Research 
+
+ Genealogy Records 
+
+ Research Tips 
+
+ Websites, Apps, and Tools 
+
+ Heritage and History 
+
+ Heritage 
+
+ History 
+
+ News and Events 
+
+ News 
+
+ RootsTech Blog 
+
+ Spotlights 
+
+ Subscribe 
+
+ AI Developments in Genealogy
+
+ By 
+ Abby Tanner 
+
+ February 19, 2026
+
+ Share
+
+ Facebook 
+
+ X 
+
+ Pinterest 
+
+ Email 
+
+ Technology around the world is advancing at a rapid pace. Extensive information is available at the tips of our fingers. Glasses can show people an augmented reality. Devices in a home can be programmed to follow routines with a simple tap. And for genealogists and family historians, the advancement of artificial intelligence (AI) has been applied to family history to create AI genealogy tools to enhance and facilitate the research process. 
+ AI is a topic that brings both excitement and concern. When used responsibly and ethically, AI can have a great impact for good, making records and family information more accessible to people all over the world. Let’s dive into more about what this technology is, how it has already been affecting the genealogy field, some common concerns, and what AI genealogy has to offer.
+ A Few Quick Definitions—What Is AI, and How Does It Work?
+
+ AI, or artificial intelligence, is a broader field focused on building computer systems that can perform tasks we associate with human intelligence. These tasks include understanding language, recognizing images, and making decisions.
+ AI systems can work quickly, handle vast amounts of information, and perform tasks that are, well, too boring for humans to want to do.
+ Many technical words come up when people talk about AI. Click the terms below to see an explanation that may help demystify them.
+
+ Machine learning 
+
+ Definition: A type of AI that allows computers to learn from data.
+
+ How It Works: Machine learning is one way AI systems are built. It allows computers to learn from examples instead of being programmed with detailed rules. Instead of telling the computer exactly what to do in every situation, programmers show it lots of examples, and it figures out the patterns on its own.
+
+ Example: A programmer can show a computer thousands of examples of spam and nonspam emails. From these examples, the computer learns what is spam and what is a legitimate email. The computer automatically sorts emails as they come in, so you don't have to set up specific rules.
+
+ NLP (natural language processing) 
+
+ Definition: A type of AI that allows computers to understand and use human language, both written and spoken.
+
+ How It Works: An NLP system looks at how words are used together and learns common language patterns (for example, “rain” and “cloud” often appear in the same context). By recognizing these patterns, the system can figure out what someone likely means and respond in a way that makes sense.
+
+ Example: When you ask a voice assistant a question or use an online translator, NLP enables the system to understand what you’re saying and respond appropriately.
+
+ OCR (optical character recognition) and handwriting recognition 
+
+ Definition: A type of AI that allows computers to read printed or handwritten text from images or scanned documents.
+
+ How It Works: An AI system looks at a picture of text—such as a scanned document or a photo of a record—and converts the words into typed text. This process makes the text searchable, editable, and easier to save.
+
+ Example: If you upload a photo of a record, such as a census form, the AI re-creates that information as clear, typed text that you can immediately search or copy.
+
+ Generative AI 
+
+ Definition: A type of AI that creates new content, such as text, images, music, or video, in response to prompts entered by a human user.
+
+ How It Works: Generative AI systems are trained on large collections of existing content. Using the patterns it learned from the content, the AI can piece together something new, such as an AI-generated story, graphic, or video.
+
+ Example: When AI writes a short story, creates an image from a description, or composes music, it is using generative AI.
+
+ How Can AI Be Used for Genealogy?
+
+ While the science behind artificial intelligence might seem complicated, understanding how AI can help in genealogy is not. This technological innovation can be quite helpful in your family history search and also in learning about your family. 
+
+ Here are some things many organizations and genealogists use artificial intelligence for in genealogy work: 
+
+ Transcribing records: Records are difficult to search manually, and many are old and difficult to read. AI can help transcribe record images—including those that are handwritten—so you can more easily search and read them.
+ Analyzing images: Identifying faces in old photos has never been easier, thanks to artificial intelligence. AI is also used to organize, colorize, repair, and label photos.
+ Matching data: If you’re looking for a specific person over multiple documents or databases, AI can help combine and search across datasets. This type of AI also helps provide record suggestions that may result in rich, additional details about an ancestor.
+ Constructing family trees: AI can suggest relatives to add to a family tree by identifying similar information and relationships.
+ Telling stories: Stories help you know your family’s past, and with AI, you can breathe life into the past. AI can help transcribe recorded stories, transform dry details into a story or biographical format, and help suggest historical context for an ancestor’s life events. If you’re into augmented reality, it can even generate video or audio avatars of your ancestors.
+ Translation: If your ancestors’ records or journals are in a different language than the one you speak, AI translation can help you get a first glimpse at the information the records hold.
+
+ Can I Use ChatGPT for Genealogy?
+
+ You might have heard of the popular AI system called ChatGPT. People can use ChatGPT , Microsoft Copilot , and other generative AI systems to assist in writing family stories, generate illustrations, and ask general questions about the life of an ancestor. 
+ Here are some questions you can ask generative AI programs to help with your family history:
+
+ Can you help me interpret the text of a family document?
+ Can you analyze surname origins and variations?
+ What are some online databases where I can find historical records relevant to my family history?
+ Can you help me contextualize the life of an ancestor within historical events and societal trends?
+ I have a lot of genealogical data. Can you help me organize the data into a time line?
+ Can you help me craft a story about a family member with the genealogy records I have?
+ Take full advantage of systems like ChatGPT! You can ask generative AI programs nearly anything, and you can even ask them to give you prompts and ideas for more things to ask and research.
+Keep in mind that it is always best to carefully review results given to you by generative AI or an AI assistant. Any facts given to you should be checked carefully, and the results may need to be polished or refined. (See more later in this article about reviewing AI results.)
+ AI Genealogy Classes from RootsTech—Available Online for Free
+
+ The RootsTech genealogy conference offers several classes and events about AI in genealogy, giving great insights you can use in your family history work. The purpose of RootsTech is to help you learn about and connect with everything that could enhance your family history experience. A key part of RootsTech is also showcasing the latest innovations for genealogy.
+
+ Join us for RootsTech 2026! 
+
+ Join us for the world's largest family history event, available both online and in person in Salt Lake City, Utah. Discover inspiring speeches and expert-led classes. Attending virtually is free! 
+
+ Visit RootsTech 
+
+ More 
+
+ The classes listed below talk about many aspects of AI in genealogy, including tools available for enhancing photos, reports on advancements in record transcription, and systems for finding connections through DNA analysis.
+ From Research to Draft: Rapidly Writing Your Ancestor's Story 
+ 5 Family Photo Traps and Technology Tricks 
+ Harnessing the Power of AI to Document Your Family 
+ Research Documents and Letters with Artificial Intelligence 
+ How Can Artificial Intelligence Assist Family Historians 
+ Learn Genealogy Faster and Easier with Artificial Intelligence 
+ Guidelines for the Responsible Use of Artificial Intelligence (AI) in Genealogy 
+ Leveraging Partnerships, Artificial Intelligence (AI), and Community Engagement to Improve Discoverability of Records 
+ Beginning with AI Genealogy: Getting Started with Generative Artificial Intelligence 
+ AI-Powered Family History Research 
+ Efficient Locality Research with AI: Discovering New Avenues of Exploration 
+ Learning to Use AI Tools: Taking Your Prompting Skills to the Next Level 
+ AI Being Used by Different Genealogy Organizations
+
+ With all the recent AI developments, it shouldn’t be a surprise that a lot of companies and organizations are using AI to advance their own systems. Many of these companies attend the annual RootsTech conference. Here are a few organizations that featured some of their latest AI technology.
+
+ Storied 
+
+ Writing family histories can seem daunting, but when you use StoryAssist, an AI feature, you can glimpse the past and create dynamic and engaging narratives. Unlock the power of AI in storytelling by allowing artificial intelligence to be your ghostwriter.
+
+ Watch Video 
+
+ More 
+
+ FamilySearch 
+
+ A RootsTech class, taught by Colette Hokanson, showcased FamilySearch's AI-powered tools. You can search hard-to-find ancestors in old wills, deeds, and records without being overwhelmed.
+
+ Watch Video 
+
+ More 
+
+ Ancestry 
+
+ Uncovering your family tree has never been easier, as you will soon learn in this class with Hunter Cannon from Ancestry. This video will teach all about using AI to empower you to make more discoveries and learn about your past more quickly.
+
+ Watch Video 
+
+ More 
+
+ AI at FamilySearch
+
+ Over the past few years, FamilySearch has used AI to provide more tools to help people accelerate their family history research. These tools include AI-indexed records, full-text search, an AI help chatbot, and an AI research assistant.
+ AI-Indexed Records
+
+ The process of making digital records searchable on FamilySearch.org was previously completed entirely through the efforts of volunteers . Thanks to handwriting-recognition technology , more and more digital records are becoming searchable than ever before. AI performs an initial read-through of a historical record and identifies names, dates, and other genealogically valuable information. Volunteers follow behind the AI to check its work. The volunteer side of making records searchable is done through Get Involved .
+
+ Volunteer with Get Involved 
+
+ Full-Text Search
+
+ FamilySearch Full‑Text Search uses AI and advanced handwriting recognition technology to create transcripts from handwritten historical documents. This search tool makes it possible to quickly search unindexed record collections and find relevant information in seconds—work that would otherwise take hours of manually reviewing images. Although Full‑Text Search isn’t yet available for all FamilySearch image collections, more collections are being added regularly.
+ Watch this RootsTech class to learn more about how to use FamilySearch's Full-Text Search feature to find your ancestors.
+
+ Try Full-Text Search 
+
+ Help Chatbot
+
+ The improved help chatbot uses AI technology to answer many of your questions as you use the website, including where to find and how to use various website features. The help chatbot is available on the Help and Learning page . You can find it by clicking Get Help in the lower right corner. 
+ AI Research Assistant
+
+ For the newest beginner to seasoned genealogy experts, FamilySearch’s new AI Research Assistant provides tree-extending hints on the home page to quickly identify opportunities for you to review, validate, and add your ancestors’ names to the tree. 
+ Watch this RootsTech class about using the AI Research Assistant to find your ancestors.
+
+ Learn More About the AI Research Assistant 
+
+ Concerns and Ethics with AI Genealogy
+
+ As mentioned, computers make mistakes. Ultimately, AI can do only what it has been programmed to do. That is why using AI ethically and responsibly is important, as well as understanding its limitations. Here are some common concerns raised about AI in genealogy and things you can do to address these concerns when using AI tools.
+
+ Accuracy of Information
+
+ Genealogists make it a rule to check information and research given to them before adding it to compiled genealogies and family trees. This rule is essential to follow with AI-generated information. As AI technology grows and improves, its accuracy usually does as well, but AI still makes mistakes. Here are some tips for checking AI genealogy information:
+
+ When AI matches data for you, review the information to make sure you agree it is a match.
+ Always check the original image of a record when possible, even if you have an AI transcription of the record.
+ Compare original images with repaired or colorized images to make sure you’re satisfied with the changes.
+ Keep in mind that historical facts and stories generated by AI should be checked against original or reputable sources to ensure accuracy.
+ Be Aware of Copyright
+
+ When you use an AI tool, be sure to check how you can use the information it provides. When you go beyond personal use, for example, you may want to know who owns the copyright for that material, how it can be shared, or if it is even able to be protected by copyright. Derivative works that don't properly cite or use sources according to the laws governing that content may infringe on copyrighted material.
+
+ Protect Your Privacy
+
+ AI tools sometimes use the information given to them to help improve their algorithms or generate content for other users. This can be advantageous for future users of the tool, but it may also pose a privacy risk, depending on how that tool uses the information. If you put information into an AI tool, check the settings options and privacy policies (the same as you would do in any place you are putting personal or private information). You likely want to be sure of how that information is going to be used or shared and make informed choices about what you enter in the AI tool. 
+ Lack of Transparency
+
+ Some AI tools do not list the sources of their information, but this lack of transparency is improving with many AI technology providers. It will generally be easier for you to fact-check information if you use a tool that lists its sources. Depending on the project, however, you may also be able to verify the information by looking for alternative sources online. 
+ Companies that use AI tools often add markers to the results to let someone know it was generated by AI and how thoroughly it might have been checked already. 
+
+ Possibility of Bias
+
+ What an AI tool delivers is usually only as good as the information it has available. This means that if its sample set is limited or if its samples have biases, it will also have those limitations or biases. For example, summaries of information will be able to include only what was available to summarize. Information about different cultures or demographics will depend on the sources the AI pulls from. Since AI doesn’t actually think for itself and doesn’t have morals or a perfect grasp of language, its results should also always be screened for phrasing that might be undesirable. 
+
+ Using AI Technology to Its Full Potential
+
+ Organizations and individuals all around the world have been and are currently using AI to help millions of people research their family history and make deeper connections with their family’s past. When providers and users of AI technology use it ethically and responsibly, it can have a great impact in the genealogy field.
+
+ Keeping Up to Date with the Latest Advances
+
+ As technology advances, so does the world of genealogy. This article just scratches the surface of how artificial intelligence can help you discover more about those who came before you. FamilySearch wants to help you learn all you can about the ways to uncover your family history and the secrets of your past. 
+ To learn more about artificial intelligence in genealogy, be sure to check in each year to see new AI-related classes from RootsTech. 
+
+ Browse AI Genealogy Classes 
+
+ Related Articles
+
+ Introducing Tree Extending Hints from the AI Research Assistant 
+
+ By 
+ S.R. Gilbert 
+
+ December 22, 2025
+
+ You can’t miss it! As soon as you sign in to FamilySearch.org, the new AI Research Assistant will let you know if it has found tree-extendin…
+
+ More 
+
+ Full-Text Search: A Powerful Tool for Making Genealogy Discoveries 
+
+ By 
+ FamilySearch 
+
+ October 18, 2025
+
+ FamilySearch has been improving Full-Text Search since RootsTech 2024, increasing its capability to search millions of records. This powerfu…
+
+ More 
+
+ Indexing: Celebrating the Past, Looking to the Future 
+
+ By 
+ Kathryn Grant 
+
+ May 7, 2025
+
+ Have you ever indexed FamilySearch historical records? If so, you've been a part of the long and fascinating history of indexing.
+
+ More 
+
+ Page of 2
+
+ Tags
+
+ Websites, Apps, and Tools 
+
+ About the Author
+
+ Abby Tanner 
+
+ Abby was born and raised in Utah and has a bachelor’s degree in communications from Brigham Young University. She has a lifelong love for reading, and her passions include almost anything to do with the world of books, including writing, editing, and designing.
+

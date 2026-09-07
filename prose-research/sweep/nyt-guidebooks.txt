@@ -1,0 +1,237 @@
+ 
+ A New Frontier for Travel Scammers: A.I.-Generated Guidebooks - The New York Times 
+ Skip to content Skip to site index 
+ Travel | A New Frontier for Travel Scammers: A.I.-Generated Guidebooks 
+ https://www.nytimes.com/2023/08/05/travel/amazon-guidebooks-artificial-intelligence.html 
+ Share full article 
+ 443 
+ AI Travelbooks Cover
+ Shoddy guidebooks, promoted with deceptive reviews, have flooded Amazon in recent months. 
+ Their authors claim to be renowned travel writers. But do they even exist? Or are they A.I. inventions? 
+ And how widespread is the problem? 
+ Supported by
+ SKIP ADVERTISEMENT 
+ A New Frontier for Travel Scammers: A.I.-Generated Guidebooks
+ Share full article 
+ 443 
+ By Seth Kugel and Stephen Hiltner 
+ Aug. 5, 2023 
+ In March, as she planned for an upcoming trip to France, Amy Kolsky, an experienced international traveler who lives in Bucks County, Pa., visited Amazon.com and typed in a few search terms: travel , guidebook , France . Titles from a handful of trusted brands appeared near the top of the page: Rick Steves, Fodor’s, Lonely Planet. Also among the top search results was the highly rated “France Travel Guide,” by Mike Steves, who, according to an Amazon author page, is a renowned travel writer.
+ “I was immediately drawn by all the amazing reviews,” said Ms. Kolsky, 53, referring to what she saw at that time: universal raves and more than 100 five-star ratings. The guide promised itineraries and recommendations from locals. Its price tag — $16.99, compared with $25.49 for Rick Steves’s book on France — also caught Ms. Kolsky’s attention. She quickly ordered a paperback copy, printed by Amazon’s on-demand service.
+ When it arrived, Ms. Kolsky was disappointed by its vague descriptions, repetitive text and lack of itineraries. “It seemed like the guy just went on the internet, copied a whole bunch of information from Wikipedia and just pasted it in,” she said. She returned it and left a scathing one-star review.
+ Though she didn’t know it at the time, Ms. Kolsky had fallen victim to a new form of travel scam: shoddy guidebooks that appear to be compiled with the help of generative artificial intelligence , self-published and bolstered by sham reviews, that have proliferated in recent months on Amazon.
+ The books are the result of a swirling mix of modern tools: A.I. apps that can produce text and fake portraits ; websites with a seemingly endless array of stock photos and graphics; self-publishing platforms — like Amazon’s Kindle Direct Publishing — with few guardrails against the use of A.I.; and the ability to solicit, purchase and post phony online reviews, which runs counter to Amazon’s policies and may soon face increased regulation from the Federal Trade Commission .
+ The use of these tools in tandem has allowed the books to rise near the top of Amazon search results and sometimes garner Amazon endorsements such as “#1 Travel Guide on Alaska.”
+ A recent Amazon search for the phrase “Paris Travel Guide 2023,” for example, yielded dozens of guides with that exact title. One, whose author is listed as Stuart Hartley, boasts, ungrammatically, that it is “Everything you Need to Know Before Plan a Trip to Paris.” The book itself has no further information about the author or publisher. It also has no photographs or maps, though many of its competitors have art and photography easily traceable to stock-photo sites. More than 10 other guidebooks attributed to Stuart Hartley have appeared on Amazon in recent months that rely on the same cookie-cutter design and use similar promotional language.
+ The Times also found similar books on a much broader range of topics, including cooking, programming, gardening, business, crafts, medicine, religion and mathematics, as well as self-help books and novels, among many other categories.
+ Amazon declined to answer a series of detailed questions about the books. In a statement provided by email, Lindsay Hamilton, a spokeswoman for the company, said that Amazon is constantly evaluating emerging technologies. “All publishers in the store must adhere to our content guidelines ,” she wrote. “We invest significant time and resources to ensure our guidelines are followed and remove books that do not adhere to these guidelines.”
+ AI Travelbooks
+ This is the Amazon listing for the guidebook purchased by Ms. Kolsky. At first glance, it seems legitimate. 
+ But things start to look dubious on the “About the Author” page. 
+ The Times was unable to locate any of Mike Steves’s previously published work. Nor could any records be found of his home or family in Edmonds, Wash. — which happens to be the home of the acclaimed travel writer Rick Steves. 
+ Mike Steves’s author photo shows anomalies consistent with its having been created by A.I., including … 
+ … unnatural elements on or near the ears (in this case, a partially formed earring) … 
+ … distorted clothing … 
+ … and a blurry and abstract background. 
+ The distribution of the book’s reviews also raises suspicions: All are either five-star reviews — possibly purchased, solicited or written by phony accounts — or one-star reviews. 
+ The positive reviews are generic, off-topic or nonsensical. 
+ They contrast starkly with the one-star reviews … 
+ … which often point to misleading claims in the book’s description: “There is no itinerary included,” Ms. Kolsky wrote. 
+ The Times ran 35 passages from the Mike Steves book through an artificial intelligence detector from Originality.ai . The detector works by analyzing millions of records known to be created by A.I. and millions created by humans, and learning to recognize the differences between the two, explained Jonathan Gillham, the company’s founder.
+ The detector assigns a score of between 0 and 100, based on the percentage chance its machine-learning model believes the content was A.I.-generated. All 35 passages scored a perfect 100, meaning they were almost certainly produced by A.I.
+ The company claims that the version of its detector used by The Times catches more than 99 percent of A.I. passages and mistakes human text for A.I. on just under 1.6 percent of tests.
+ The Times identified and tested 64 other comparably formatted guidebooks, most with at least 50 reviews on Amazon, and the results were strikingly similar. Of 190 paragraphs tested with Originality.ai, 166 scored 100, and only 12 scored under 75. By comparison, the scores for passages from well-known travel brands like Rick Steves, Fodor’s, Frommer’s and Lonely Planet were nearly all under 10, meaning there was next to no chance that they were written by A.I. generators.
+ Amazon, A.I. and trusted travel brands
+ Although the rise of crowdsourcing on sites like Tripadvisor and Yelp, not to mention free online travel sites and blogs and tips from TikTok and Instagram influencers, has reduced the demand for print guidebooks and their e-book versions, they are still big sellers. On a recent day in July, nine of the top 50 travel books on Amazon — a category that includes fiction, nonfiction, memoirs and maps — were European guidebooks from Rick Steves.
+ Mr. Steves, reached in Stockholm around midnight after a day of researching his series’s Scandinavia guide, said he had not heard of the Mike Steves book and did not appear concerned that generative A.I. posed a threat.
+ “I just cannot imagine not doing it by wearing out shoes,” said Mr. Steves, who had just visited a Viking-themed restaurant and a medieval-themed competitor, and determined that the Viking one was far superior. “You’ve got to be over here talking to people and walking.”
+ Mr. Steves spends about 50 days a year on the road in Europe, he said, and members of his team spend another 300 to update their approximately 20 guidebooks, as well as smaller spinoffs.
+ But Pauline Frommer, the editorial director of the Frommer’s guidebook series and the author of a popular New York guidebook, is worried that “little bites” from the faux guidebooks are affecting their sales. Ms. Frommer said she spends three months a year testing restaurants and working on other annual updates for the book — and gaining weight she is currently trying to work off.
+ “And to think that some entity thinks they can just sweep the internet and put random crap down is incredibly disheartening,” she said.
+ Amazon has no rules forbidding content generated primarily by artificial intelligence, but the site does offer guidelines for book content , including titles, cover art and descriptions: “Books for sale on Amazon should provide a positive customer experience. We do not allow descriptive content meant to mislead customers or that doesn’t accurately represent the content of the book. We also do not allow content that’s typically disappointing to customers.”
+ Mr. Gillham, the founder of Originality.ai, which is based in Ontario, said his clients are largely content producers seeking to suss out contributions that are written by artificial intelligence. “In a world of A.I.-generated content,” he said, “the traceability from author to work is going to be an increasing need.”
+ Finding the real authors of these guidebooks can be impossible. There is no trace of the “renowned travel writer” Mike Steves, for example, having published “articles in various travel magazines and websites,” as the biography on Amazon claims. In fact, The Times could find no record of any such writer’s existence, despite conducting an extensive public records search. (Both the author photo and the biography for Mike Steves were very likely generated by A.I., The Times found.)
+ Mr. Gillham stressed the importance of accountability. Buying a disappointing guidebook is a waste of money, he said. But buying a guidebook that encourages readers to travel to unsafe places — “that’s dangerous and problematic,” he said.
+ The Times found several instances where troubling omissions and outdated information might lead travelers astray. A guidebook on Moscow published in July under the name Rebecca R. Lim — “a respected figure in the travel industry” whose Amazon author photo also appears on a website called Todo Sobre el Acido Hialurónico (“All About Hyaluronic Acid”) alongside the name Ana Burguillos — makes no mention of Russia’s ongoing war with Ukraine and includes no up-to-date safety information. (The U.S. Department of State advises Americans not to travel to Russia .) And a guidebook on Lviv, Ukraine, published in May, also fails to mention the war and encourages readers to “pack your bags and get ready for an unforgettable adventure in one of Eastern Europe’s most captivating destinations.”
+ Sham reviews
+ Amazon has an anti-manipulation policy for customer reviews, though a careful examination by The Times found that many of the five-star reviews left on the shoddy guidebooks were either extremely general or nonsensical. The browser extension Fakespot , which detects what it considers “deceptive” reviews and gives each product a grade from A to F, gave many of the guidebooks a score of D or F.
+ Some reviews are curiously inaccurate. “This guide has been spectacular,” wrote a user named Muñeca about Mike Steves’s France guide. “Being able to choose the season to know what climate we like best, knowing that their language is English.” (The guide barely mentions the weather and clearly states that the language of France is French.)
+ Most of the questionably written rave reviews for the threadbare guides are from “verified purchases,” though Amazon’s definition of a “verified purchase” can include readers who downloaded the book for free.
+ “These reviews are making people dupes,” said Ms. Frommer. “It’s what makes people waste their money and keeps them away from real travel guides.”
+ Ms. Hamilton, the Amazon spokeswoman, wrote that the company has no tolerance for fake reviews. “We have clear policies that prohibit reviews abuse. We suspend, ban, and take legal action against those who violate these policies and remove inauthentic reviews.” Amazon would not say whether any specific action has been taken against the producers of the Mike Steves book and other similar books. During the reporting of this article, some of the suspicious reviews were removed from many of the books The Times examined, and a few books were taken down. Amazon said it blocked more than 200 million suspected fake reviews in 2022.
+ But even when Amazon does remove reviews, it can leave five-star ratings with no text. As of Aug. 3, Adam Neal’s “Spain Travel Guide 2023” had 217 reviews removed by Amazon, according to a Fakespot analysis, but still garners a 4.4 star rating, in large part because 24 of 27 reviewers who omitted a written review awarded the book five stars. “I feel like my guide cannot be the same one that everyone is rating so high,” wrote a reviewer named Sarie, who gave the book one star.
+ Many of the books also include “editorial reviews,” seemingly without oversight from Amazon. Some are particularly audacious, like Dreamscape Voyages’ “Paris Travel Guide 2023,” which includes fake reviews from heavy hitters like Afar magazine (“Prepare to be amazed”) and Condé Nast Traveler (“Your ultimate companion to unlocking the true essence of the City of Lights”). Both publications denied reviewing the book.
+ ‘You’ve got to be there in the field’
+ Artificial intelligence experts generally agree that generative A.I. can be helpful to authors if used to enhance their own knowledge. Darby Rollins, the founder of the A.I. Author, a company that helps people and businesses leverage generative A.I. to improve their work flow and grow their businesses, found the guidebooks “very basic.”
+ But he could imagine good guidebooks produced with the help of artificial intelligence. “A.I. is going to augment and enhance and extend what you’re already good at doing,” he said. “If you’re already a good writer and you’re already an expert on travel in Europe, then you’re bringing experiences, perspective and insights to the table. You’re going to be able to use A.I. to help organize your thoughts and to help you create things faster.”
+ The real Mr. Steves was less sure about the merits of using A.I. “I don’t know where A.I. is going, I just know what makes a good guidebook,” he said. “And I think you’ve got to be there in the field to write one.”
+ Ms. Kolsky, who was scammed by the Mike Steves book, agreed. After returning her initial purchase, she opted instead for a trusted brand.
+ “I ended up buying Rick Steves,” she said.
+ Design by Gabriel Gianordoli . Susan Beachy contributed research.
+ Seth Kugel is the columnist for “ Tripped Up ,” an advice column that helps readers navigate the often confusing world of travel.
+ Stephen Hiltner is an editor, writer and photojournalist on the Travel desk.
+ A version of this article appears in print on , Section A , Page 1 of the New York edition with the headline: New Frontier in Travel Scams: Guidebooks Generated by A.I. . Order Reprints | Today’s Paper | Subscribe 
+ See more on: Federal Trade Commission, U.S. 
+ Read 443 comments 
+ Share full article 
+ 443 
+ Related Content
+ Advertisement
+ SKIP ADVERTISEMENT 
+ Site Index
+ Go to Home Page » 
+ News Home Page 
+ U.S. 
+ World 
+ Politics 
+ New York 
+ Education 
+ Sports 
+ Business 
+ Tech 
+ Science 
+ Weather 
+ The Great Read 
+ Obituaries 
+ Headway 
+ Visual Investigations 
+ The Magazine 
+ Arts Book Review 
+ Best Sellers Book List 
+ Dance 
+ Movies 
+ Music 
+ Pop Culture 
+ Television 
+ Theater 
+ Visual Arts 
+ Lifestyle Health 
+ Well 
+ Food 
+ Restaurant Reviews 
+ Love 
+ Travel 
+ Style 
+ Fashion 
+ Real Estate 
+ T Magazine 
+ Opinion Today's Opinion 
+ Columnists 
+ Editorials 
+ Guest Essays 
+ Op-Docs 
+ Letters 
+ Sunday Opinion 
+ Opinion Video 
+ Opinion Audio 
+ More Audio 
+ Games 
+ Cooking 
+ Wirecutter 
+ The Athletic 
+ Jobs 
+ Video 
+ Graphics 
+ Trending 
+ Live Events 
+ Corrections 
+ Reader Center 
+ TimesMachine 
+ The Learning Network 
+ School of The NYT 
+ inEducation 
+ News
+ Home Page 
+ U.S. 
+ World 
+ Politics 
+ New York 
+ Education 
+ Sports 
+ Business 
+ Tech 
+ Science 
+ Weather 
+ The Great Read 
+ Obituaries 
+ Headway 
+ Visual Investigations 
+ The Magazine 
+ Arts
+ Book Review 
+ Best Sellers Book List 
+ Dance 
+ Movies 
+ Music 
+ Pop Culture 
+ Television 
+ Theater 
+ Visual Arts 
+ Lifestyle
+ Health 
+ Well 
+ Food 
+ Restaurant Reviews 
+ Love 
+ Travel 
+ Style 
+ Fashion 
+ Real Estate 
+ T Magazine 
+ Opinion
+ Today's Opinion 
+ Columnists 
+ Editorials 
+ Guest Essays 
+ Op-Docs 
+ Letters 
+ Sunday Opinion 
+ Opinion Video 
+ Opinion Audio 
+ More
+ Audio 
+ Games 
+ Cooking 
+ Wirecutter 
+ The Athletic 
+ Jobs 
+ Video 
+ Graphics 
+ Trending 
+ Live Events 
+ Corrections 
+ Reader Center 
+ TimesMachine 
+ The Learning Network 
+ School of The NYT 
+ inEducation 
+ Account
+ Subscribe 
+ Manage My Account 
+ Home Delivery 
+ Gift Subscriptions 
+ Group Subscriptions 
+ Gift Articles 
+ Email Newsletters 
+ NYT Licensing 
+ Replica Edition 
+ Times Store 
+ Site Information Navigation
+ © 2026 The New York Times Company 
+ NYTCo 
+ Contact Us 
+ Accessibility 
+ Work with us 
+ Advertise 
+ T Brand Studio 
+ Privacy Policy 
+ Cookie Policy 
+ Terms of Service 
+ Terms of Sale 
+ Site Map 
+ Canada 
+ International 
+ Help 
+ Subscriptions 
+ Manage Privacy Preferences 
+ 

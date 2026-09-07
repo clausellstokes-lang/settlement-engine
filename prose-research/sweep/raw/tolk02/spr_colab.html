@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="csrf-token" content="3LpCypAU7hHR6nTAb3llJ3WswCMVWHYrnegA56lJ">
+<meta name="env" content="production">
+<meta name="locale" content="ru">
+
+    <meta name="description" content="Drawing on a corpus which separates dialogue and narrative sections in The Lord of the Rings, the present chapter explores the most common syntactic n-grams (i.e. sequences of syntactic tags) in the narrative section. Using the imaginative prose section of the PHRASEOROM corpus (post-war fiction) and the British National Corpus as a reference, we extracted the statistically most significant 3-grams, 4-grams, 5-grams and 6-grams. The chapter pays equal attention to constructions that Tolkien, compared to other authors, tends to avoid, and to those that he prefers. The chapter is rounded off with two sample paragraphs which illustrate how the syntactic patterns identified blend together to produce different kinds of narrative effect.">
+
+    <title>The Narrative Syntax of The Lord of the Rings | CoLab</title>
+
+            <meta property="og:type" content="article" />
+            <meta property="og:locale" content="ru_RU" />
+            <meta property="og:site_name" content="CoLab" />
+            <meta property="og:image:type" content="image/png" />
+            <meta property="og:image" content="https://colab.ws/logo/figure_black.png" />
+            <meta property="og:title" content="The Narrative Syntax of The Lord of the Rings" />
+            <meta property="og:description" content="Drawing on a corpus which separates dialogue and narrative sections in The Lord of the Rings, the present chapter explores the most common syntactic n-grams (i.e. sequences of syntactic tags) in the narrative section. Using the imaginative prose section of the PHRASEOROM corpus (post-war fiction) and the British National Corpus as a reference, we extracted the statistically most significant 3-grams, 4-grams, 5-grams and 6-grams. The chapter pays equal attention to constructions that Tolkien, compared to other authors, tends to avoid, and to those that he prefers. The chapter is rounded off with two sample paragraphs which illustrate how the syntactic patterns identified blend together to produce different kinds of narrative effect." />
+            <meta property="og:url" content="https://colab.ws/articles/10.1007%2F978-3-030-69299-5_3" />
+    
+    
+        <link href="https://colab.ws/favicon.png" rel="icon" />
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+
+        <!-- Styles -->
+        <link rel="preload" as="style" href="https://colab.ws/build/assets/app-B5A2msYE.css" /><link rel="preload" as="style" href="https://colab.ws/build/assets/progress-Dlhdi0ZE.css" /><link rel="preload" as="style" href="https://colab.ws/build/assets/style-Ez_gcw7a.css" /><link rel="preload" as="style" href="https://colab.ws/build/assets/image-picker-rY1gzbMh.css" /><link rel="stylesheet" href="https://colab.ws/build/assets/app-B5A2msYE.css" data-navigate-track="reload" /><link rel="stylesheet" href="https://colab.ws/build/assets/progress-Dlhdi0ZE.css" data-navigate-track="reload" /><link rel="stylesheet" href="https://colab.ws/build/assets/style-Ez_gcw7a.css" data-navigate-track="reload" /><link rel="stylesheet" href="https://colab.ws/build/assets/image-picker-rY1gzbMh.css" data-navigate-track="reload" />
+                
+                    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(72013501, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/72013501" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+        
+                    
+            <script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+            
+        
+                
+    <!-- Livewire Styles --><style >[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak] {display: none !important;}[wire\:cloak] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}</style>
+</head>
+    <body class="font-sans antialiased ">
+        <div>
+            <header>
+    <nav>
+        <div x-data="{ open: false }" class="bg-white  fixed w-full z-50 top-0 shadow-lg">
+
+
+
+            <!-- Primary Navigation Menu -->
+            <div class="h-16 lg:h-auto px-3 sm:py-1 flex items-center">
+
+                <div class="flex gap-4 w-full">
+
+                    <!-- Logo -->
+                    <div class="shrink-0 flex items-center">
+                        <a
+                                class="outline-none focus:outline-none"
+                                href="https://colab.ws"
+                                title="CoLab">
+                            <img src="https://colab.ws/logo/black_logo.svg" class="logo sm:hidden md:hidden lg:hidden xl:inline hidden" alt="CoLab"/>
+                            <img src="https://colab.ws/logo/figure_black.svg" class="logo sm:inline md:inline lg:inline xl:hidden inline" alt="CoLab"/>
+                        </a>
+                    </div>
+
+                    <div class="grow flex lg:block items-center">
+
+                        <div class="flex items-center grow min-h-12">
+
+                            <!-- Search dropdown -->
+                            <div class="shrink grow">
+                                <div
+                                        x-on:resize.window="isMobile = (window.innerWidth < 640) ? true : false;"
+                                        x-data="{ open: false, isMobile: (window.innerWidth < 640) ? true : false }"
+                                        x-cloak>
+                                    <div class="sm:hidden flex justify-start items-center">
+                                        <a
+                                                href="#"
+                                                @click.prevent="open = !open"
+                                                :class="{ 'bg-stone-100': !open, 'bg-blue-100': open }"
+                                                class="flex justify-center items-center
+                                                text-gray-500 hover:text-gray-700 focus:text-gray-700
+                                                w-9 h-9 rounded-full"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                    </div>
+                                    <div
+                                            x-show="open || !isMobile"
+                                            class="
+                                            absolute sm:relative top-16 sm:top-auto inset-x-0
+                                            flex items-center shadow-lg sm:shadow-none">
+                                        <div class="relative p-3 sm:p-0 bg-white w-full">
+                                            <div wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;cbjIqVoAPTR2vVNlwQhu&quot;,&quot;name&quot;:&quot;search-dropdown-new&quot;,&quot;path&quot;:&quot;articles\/10.1007%2F978-3-030-69299-5_3&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[&quot;4504758-0&quot;],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;ru&quot;},&quot;checksum&quot;:&quot;73769d5ae97c98ca732e1e19790b1b9a21a868568df395c37d95c4fd27122255&quot;}" wire:effects="{&quot;scripts&quot;:{&quot;4504758-0&quot;:&quot;    &lt;script&gt;\n        Alpine.data(&#039;searchDropdown&#039;, (minChars, maxChars) =&gt; {\n            return {\n                items: [],\n\n                term: &#039;&#039;,\n                prevTerm: &#039;&#039;,\n                uuid: &#039;&#039;,\n\n                minChars: minChars,\n                maxChars: maxChars,\n\n                loading: false,\n                \n                hasTerm: false,\n                hasValidTerm: false,\n                nothingFound: false,\n                somethingFound: false,\n\n                isHidden: true,\n                \n                init: function()\n                {\n                    \/\/\n                },\n                updatedTerm() \n                {\n                    const term = this.term ? this.term.trim() : &#039;&#039;;\n\n                    if (!term) {\n                        this.clear();\n\n                        return;\n                    }\n\n                    this.hasTerm = true;\n\n                    if (\n                        term.length &lt; this.minChars\n                        || term.length &gt; this.maxChars\n                    ) {\n                        this.items = [];\n\n                        this.hasValidTerm = false;\n                        this.nothingFound = false;\n                        this.somethingFound = false;\n\n                        return;\n                    }\n\n                    this.hasValidTerm = true;\n\n                    if (\n                        this.prevTerm !== term\n                        || !this.nothingFound &amp;&amp; !this.somethingFound\n                    ) {\n                        this.prevTerm = term;\n                        this.isHidden = false;\n\n                        this.search();\n                    }\n                },\n                search: function() \n                {\n                    this.setUuid();\n\n                    this.loading = true;\n\n                    this.$wire.search(this.term, this.uuid)\n                        .then(\n                            data =&gt; {\n                                if (data.success) {\n                                    if (data.uuid === this.uuid) {\n                                        this.items = data.items;\n\n                                        this.somethingFound = data.items.length &gt; 0;\n                                        this.nothingFound = data.items.length === 0;\n\n                                        this.isHidden = false;\n                                    }\n                                } else {\n                                    this.error = data.message;\n\n                                    this.somethingFound = false;\n                                    this.nothingFound = true;\n\n                                    this.isHidden = false;\n                                }\n\n                                this.loading = false;\n                            })\n                        .catch(\n                            err =&gt; {\n                                console.log(err);\n\n                                this.somethingFound = false;\n                                this.nothingFound = true;\n\n                                this.isHidden = false;\n                            }\n                        );\n                },\n                show: function()\n                {\n                    this.isHidden = false;\n                },\n                hide: function()\n                {\n                    this.isHidden = true;\n                },\n                clear: function()\n                {\n                    this.term = &#039;&#039;;\n                    this.prevTerm = &#039;&#039;;\n\n                    this.items = [];\n\n                    this.hasTerm = false;\n                    this.hasValidTerm = false;\n                    this.nothingFound = false;\n                    this.somethingFound = false;\n\n                    this.isHidden = true;\n                },\n                setUuid: function()\n                {\n                    this.uuid = window.getUuid();\n                },\n            }\n        });\n    &lt;\/script&gt;\n    &quot;}}" wire:id="cbjIqVoAPTR2vVNlwQhu"
+    class="w-full"
+    x-data="searchDropdown('3', '255')"
+    x-cloak
+    wire:ignore>
+
+    <div class="relative" @click.outside="hide">
+        <div class="relative">
+
+            <div>
+                <form @submit.prevent="updatedTerm">
+                    <input
+                        x-model="term"
+                        @input.debounce.750ms="updatedTerm"
+                        @focus="show"
+                        type="text"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        maxlength="255"
+                        spellcheck="false"
+                        aria-hidden="true"
+                        placeholder="Поиск учёных, организаций, журналов, DOI, ISSN, ROR"
+                        :class="{ 'border-b-white rounded-b-none': hasValidTerm && (nothingFound || somethingFound) && !isHidden, 'bg-stone-100!': loading }"
+                        class="border w-full p-2 focus outline-none text-sm" />
+                </form>
+            </div>
+
+            <a
+                href="#"
+                x-show="hasTerm && !loading"
+                @click.prevent="clear"
+                class="absolute right-3 inset-y-0 flex items-center text-gray-500"><i class="fa-solid fa-xmark"></i></a>
+
+        </div>
+
+        <template x-if="nothingFound && hasValidTerm && !isHidden">
+            <div
+                :class="{ 'bg-stone-100!': loading }"
+                class="
+                    absolute inset-x-0 z-10 -mt-px
+                    w-full sm:right-auto sm:left-auto overflow-hidden
+                    border border-t-0 bg-white shadow-lg rounded-b-md">
+                <div class="p-2">Ничего не найдено</div>
+            </div>
+        </template>
+
+        <template x-if="somethingFound && hasValidTerm && !isHidden">
+            <div
+                :class="{ 'bg-stone-100!': loading }"
+                class="
+                    absolute inset-x-0 z-10 -mt-px
+                    w-full sm:right-auto sm:left-auto overflow-hidden
+                    border border-t-0 bg-white shadow-lg rounded-b-md">
+                <template x-for="item in items" :key="item.key">
+                    <a
+                        :href="item.href"
+                        class="flex gap-2 p-2 text-black hover:text-black hover:bg-blue-200">
+                        <template x-if="item.image_url">
+                            <div class="w-9 h-9">
+                                <div
+                                    :style="'background-image: url(' + item.image_url + ')'"
+                                    class="
+                                        flex justify-center items-center
+                                        rounded-full bg-cover bg-center bg-stone-200
+                                        w-9 h-9">
+                                </div>
+                            </div>
+                        </template>
+                        <div class="grow">
+                            <div x-html="item.name" class="text-sm font-medium"></div>
+                            <template x-if="item.hasInfo">
+                                <div class="text-xs text-gray-600">
+                                    <span x-text="item.info"></span>
+                                </div>
+                            </template>
+                        </div>
+                    </a>
+                </template>
+            </div>
+        </template>
+
+    </div>
+
+</div>
+
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sm:px-2">
+                                <div x-data="{ open: false }" x-cloak>
+    <a
+        href="#"
+        title="RU"
+        class="block uppercase p-3 font-bold outline-none"
+        @click.prevent="open = !open">ru</a>
+    <div class="relative">
+        <div
+            x-show="open"
+            @click.outside="open = false"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="transform opacity-0 scale-95"
+            x-transition:enter-end="transform opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100"
+            x-transition:leave-end="transform opacity-0 scale-95"
+            class="absolute rounded-b-md shadow-xl bg-white">
+                                                                            <a
+                        class="
+                            rounded-b-md
+                            block p-3 uppercase font-bold
+                            text-gray-500 hover:text-gray-700 focus:text-gray-700 hover:bg-stone-100 outline-none"
+                        href="https://colab.ws/en"
+                        title="EN">en</a>
+                                    </div>
+    </div>
+</div>
+                            </div>
+
+                            <div class="flex items-center">
+
+                                <div class="flex items-center justify-center">
+                                    
+                                    
+                                        <div>
+                                            <div wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;6oyYXwTqmufXYIMWED4K&quot;,&quot;name&quot;:&quot;feedback.feedback-header&quot;,&quot;path&quot;:&quot;articles\/10.1007%2F978-3-030-69299-5_3&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[&quot;2927140055-0&quot;],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;ru&quot;},&quot;checksum&quot;:&quot;3b99ee42f9ea41e45d5ce5191fa140703533161c2afb85184e9e054ae4ecb075&quot;}" wire:effects="{&quot;scripts&quot;:{&quot;2927140055-0&quot;:&quot;    &lt;script&gt;\n        Alpine.data(&#039;feedback&#039;, (email) =&gt; {\n            return {\n                email: email,\n                message: &#039;&#039;,\n\n                successMessage: &#039;&#039;,\n                errors: [],\n\n                submitting: false,\n                submitted: false,\n\n                submit()\n                {\n                    if (this.submitting) {\n                        return;\n                    }\n\n                    this.errors = [];\n                    this.submitting = true;\n\n                    this.$wire.submit({\n                        email: this.email,\n                        message: this.message,\n                    })\n                        .then(\n                            (result) =&gt; {\n                                if (result.success) {\n                                    this.successMessage = result.message;\n                                    this.message = &#039;&#039;;\n                                    this.submitted = true;\n                                } else {\n                                    this.errors = result.errors;\n                                }\n\n                                this.submitting = false;\n                            })\n                        .catch((error) =&gt; {\n                            console.error(&#039;Feedback error &#039;, error);\n\n                            this.submitting = false;\n                        });\n                },\n            }\n        });\n    &lt;\/script&gt;\n    &quot;}}" wire:id="6oyYXwTqmufXYIMWED4K" x-data="feedback('')" wire:ignore>
+    <div
+    class="flex "
+    x-data="{ show: 0 }" x-cloak>
+
+    <!--[if BLOCK]><![endif]-->        <!--[if BLOCK]><![endif]-->            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <button
+                    @click.prevent="show = !show"
+                    class="
+                        relative mr-2
+                        w-9 h-9 rounded-full border cursor-pointer
+                        flex items-center justify-center
+                        bg-white text-gray-500 hover:text-blue-600 hover:border-blue-600"
+                    href="#"
+                    title="Обратная связь"><i class="fa-solid fa-question"></i></button>
+            <!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+        <!--[if ENDBLOCK]><![endif]-->    <!--[if ENDBLOCK]><![endif]-->
+    <div
+        x-show="show"
+        class="fixed inset-0 overflow-y-auto z-50">
+
+        <div
+            x-show="show"
+            @click="show = false;"
+            class="fixed inset-0"
+
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0">
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        <div
+            x-show="show"
+            class="
+                realtive z-50
+                mx-auto pt-28
+                w-full sm:w-2/3 lg:w-1/2
+                xl:max-w-7xl lg:max-w-6xl md:max-w-5xl sm:max-w-4xl"
+
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0 translate-y-0 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-0 scale-95">
+
+            <div class="bg-white z-50 p-6 relative rounded-lg">
+                <button
+                    href="#"
+                    @click.prevent="show = false"
+                    class="flex justify-center items-center absolute right-3 top-3 text-2xl w-4 h-4 cursor-pointer">
+                    <img src="https://colab.ws/images/cross.svg" alt="" />
+                </button>
+
+                <div class="w-full">
+                    <!--[if BLOCK]><![endif]-->                        <div class="flex justify-center pb-3">
+                            <div class="sm:text-lg"><span class="text-black font-semibold">Написать нам</span></div>
+                        </div>
+                    <!--[if ENDBLOCK]><![endif]-->
+                    <div><template x-if="submitted">
+            <div class="p-3 bg-green-50 text-green-600 text-center rounded font-semibold" x-text="successMessage"></div>
+        </template>
+
+        <template x-if="!submitted">
+            <form>
+                <div class="grid gap-4">
+                    <div>
+                        <div>
+                            <label for="feedback-email" class="text-black">Email</label>
+                        </div>
+                        <input
+                                placeholder="Ваш email"
+                                class="form-input border w-full text-black"
+                                id="feedback-email"
+                                type="email"
+                                x-model="email" />
+
+                        <template x-if="errors.email">
+                            <div class="error" x-html="errors.email"></div>
+                        </template>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="feedback-message" class="text-black">Сообщение</label>
+                        </div>
+
+                        <textarea
+                                placeholder="Ваше сообщение, предложение или идея"
+                                class="border w-full form-textarea text-black"
+                                rows="8"
+                                x-model="message"
+                                id="feedback-message"></textarea>
+
+                        <template x-if="errors.message">
+                            <div class="error" x-html="errors.message"></div>
+                        </template>
+
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="flex items-center">
+                            <a
+                                    href="https://t.me/colab_support"
+                                    class="flex items-center bg-blue-50 hover:bg-blue-100 rounded p-2"
+                                    target="_blank">
+                                <i class="fa-brands fa-telegram text-2xl"></i>
+                                <span class="ml-1 font-semibold">Чат поддержки</span>
+                            </a>
+                        </div>
+                        <button
+                                @click.prevent="submit"
+                                type="submit"
+                                class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded font-semibold">Отправить</button>
+                    </div>
+                </div>
+            </form>
+        </template></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+                                            </div>
+
+                                        <a
+                                            class="
+                                                hidden lg:flex justify-center items-center
+                                                bg-blue-500 text-white hover:text-white hover:bg-blue-600
+                                                w-9 h-9 rounded-full"
+                                                href="https://colab.ws/login"><i class="fa-solid fa-sign-in-alt"></i></a>
+                                                                    </div>
+
+                                <!-- Hamburger -->
+                                <div class="flex items-center lg:hidden">
+                                    <button
+                                            @click="open = ! open"
+                                            class="
+                                            p-2
+                                            rounded-md
+                                            inline-flex items-center justify-center
+                                            text-gray-500 hover:text-gray-700 focus:text-gray-700
+                                            outline-none focus:outline-none">
+                                        <svg class="h-8 w-8" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
+                                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M4 6h16M4 12h16M4 18h16"/>
+                                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
+                                                  stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Navigation links -->
+                        <div class="hidden lg:-my-px lg:flex py-1 ">
+
+                                                                                                <a
+                                        class="
+                                            p-2
+                                            uppercase text-xs font-semibold
+                                            whitespace-nowrap inline-flex items-center
+                                            hover:text-blue-500 text-gray-900
+                                            text-cobalt! font-bold!"
+                                             target="_blank"                                             href="https://cobalt.colab.ws/">Поиск публикаций</a>
+                                                                                                                                <a
+                                        class="
+                                            p-2
+                                            uppercase text-xs font-semibold
+                                            whitespace-nowrap inline-flex items-center
+                                            hover:text-blue-500 text-gray-900
+                                            "
+                                                                                        href="https://colab.ws/organizations">Организации</a>
+                                                                                                                                <a
+                                        class="
+                                            p-2
+                                            uppercase text-xs font-semibold
+                                            whitespace-nowrap inline-flex items-center
+                                            hover:text-blue-500 text-gray-900
+                                            "
+                                                                                        href="https://colab.ws/researchers">Учёные</a>
+                                                                                                                                <a
+                                        class="
+                                            p-2
+                                            uppercase text-xs font-semibold
+                                            whitespace-nowrap inline-flex items-center
+                                            hover:text-blue-500 text-gray-900
+                                            "
+                                                                                        href="https://colab.ws/journals">Журналы</a>
+                                                                                                                                <a
+                                        class="
+                                            p-2
+                                            uppercase text-xs font-semibold
+                                            whitespace-nowrap inline-flex items-center
+                                            hover:text-blue-500 text-gray-900
+                                            "
+                                                                                        href="https://colab.ws/labs">Лаборатории</a>
+                                                                                                                                <a
+                                        class="
+                                            p-2
+                                            uppercase text-xs font-semibold
+                                            whitespace-nowrap inline-flex items-center
+                                            hover:text-blue-500 text-gray-900
+                                            "
+                                                                                        href="https://colab.ws/conferences">Конференции</a>
+                                                                                                                                <a
+                                        class="
+                                            p-2
+                                            uppercase text-xs font-semibold
+                                            whitespace-nowrap inline-flex items-center
+                                            hover:text-blue-500 text-gray-900
+                                            "
+                                                                                        href="https://colab.ws/partner-journals">Партнёрские журналы</a>
+                                                                                    </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Responsive Navigation Menu -->
+            <div :class="{'block': open, 'hidden': !open}" class="hidden">
+
+                <ul class="text-center">
+
+                                            <li>
+                            <a class="block
+    hover:bg-stone-100
+    items-center
+    px-2 pt-1
+    border-b-2 border-transparent
+    leading-loose
+    text-black hover:text-gray-700 text-xl uppercase font-bold" href="https://cobalt.colab.ws/">
+    Поиск публикаций
+</a>
+                        </li>
+                                            <li>
+                            <a class="block
+    hover:bg-stone-100
+    items-center
+    px-2 pt-1
+    border-b-2 border-transparent
+    leading-loose
+    text-black hover:text-gray-700 text-xl uppercase font-bold" href="https://colab.ws/organizations">
+    Организации
+</a>
+                        </li>
+                                            <li>
+                            <a class="block
+    hover:bg-stone-100
+    items-center
+    px-2 pt-1
+    border-b-2 border-transparent
+    leading-loose
+    text-black hover:text-gray-700 text-xl uppercase font-bold" href="https://colab.ws/researchers">
+    Учёные
+</a>
+                        </li>
+                                            <li>
+                            <a class="block
+    hover:bg-stone-100
+    items-center
+    px-2 pt-1
+    border-b-2 border-transparent
+    leading-loose
+    text-black hover:text-gray-700 text-xl uppercase font-bold" href="https://colab.ws/journals">
+    Журналы
+</a>
+                        </li>
+                                            <li>
+                            <a class="block
+    hover:bg-stone-100
+    items-center
+    px-2 pt-1
+    border-b-2 border-transparent
+    leading-loose
+    text-black hover:text-gray-700 text-xl uppercase font-bold" href="https://colab.ws/labs">
+    Лаборатории
+</a>
+                        </li>
+                                            <li>
+                            <a class="block
+    hover:bg-stone-100
+    items-center
+    px-2 pt-1
+    border-b-2 border-transparent
+    leading-loose
+    text-black hover:text-gray-700 text-xl uppercase font-bold" href="https://colab.ws/conferences">
+    Конференции
+</a>
+                        </li>
+                                            <li>
+                            <a class="block
+    hover:bg-stone-100
+    items-center
+    px-2 pt-1
+    border-b-2 border-transparent
+    leading-loose
+    text-black hover:text-gray-700 text-xl uppercase font-bold" href="https://colab.ws/partner-journals">
+    Партнёрские журналы
+</a>
+                        </li>
+                    
+                                            <li>
+                            <a class="block
+    hover:bg-stone-100
+    items-center
+    px-2 pt-1
+    border-b-2 border-transparent
+    leading-loose
+    text-black hover:text-gray-700 text-xl uppercase font-bold" href="https://colab.ws/login">
+    Войти
+</a>
+                        </li>
+                                    </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+            <!-- Page Content -->
+            <main class="relative"><div class="page  padding-nav-height  min-h-screen">
+    <div x-data x-cloak>
+
+                            
+        
+        <div class="pt-6 grid grid-cols-12 gap-6 mb-12" item="{&quot;id&quot;:95255638,&quot;journal_id&quot;:null,&quot;prefix_id&quot;:8,&quot;image_id&quot;:null,&quot;doi&quot;:&quot;10.1007\/978-3-030-69299-5_3&quot;,&quot;title&quot;:&quot;The Narrative Syntax of The Lord of the Rings&quot;,&quot;created_at&quot;:&quot;2023-06-05T23:11:40.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-06-05T23:11:40.000000Z&quot;,&quot;authors_string&quot;:&quot;Kullmann T., Siepmann D.&quot;,&quot;refreshed_at&quot;:&quot;2023-06-06 02:11:40&quot;,&quot;page&quot;:null,&quot;volume&quot;:null,&quot;issue&quot;:null,&quot;source_id&quot;:1,&quot;authors_number&quot;:2,&quot;pmid&quot;:null,&quot;type_id&quot;:16,&quot;abstract&quot;:&quot;Drawing on a corpus which separates dialogue and narrative sections in The Lord of the Rings, the present chapter explores the most common syntactic n-grams (i.e. sequences of syntactic tags) in the narrative section. Using the imaginative prose section of the PHRASEOROM corpus (post-war fiction) and the British National Corpus as a reference, we extracted the statistically most significant 3-grams, 4-grams, 5-grams and 6-grams. The chapter pays equal attention to constructions that Tolkien, compared to other authors, tends to avoid, and to those that he prefers. The chapter is rounded off with two sample paragraphs which illustrate how the syntactic patterns identified blend together to produce different kinds of narrative effect.&quot;,&quot;number&quot;:null,&quot;arxiv_id&quot;:null,&quot;is_open_access&quot;:0,&quot;profile_author_matches&quot;:null,&quot;url_pdf&quot;:null,&quot;published_string&quot;:&quot;2021-05-05&quot;,&quot;year&quot;:2021,&quot;published_date&quot;:&quot;2021-05-05&quot;,&quot;published_int&quot;:20210505,&quot;is_review&quot;:2,&quot;num_citations_colab&quot;:0,&quot;publisher_id&quot;:null,&quot;page_from&quot;:71,&quot;page_to&quot;:87,&quot;references_count&quot;:2,&quot;url_primary&quot;:null,&quot;image&quot;:null,&quot;journal&quot;:null,&quot;publisher&quot;:null,&quot;type&quot;:{&quot;id&quot;:16,&quot;crossref_id&quot;:&quot;book-chapter&quot;,&quot;crossref_name&quot;:&quot;Book Chapter&quot;,&quot;created_at&quot;:&quot;2021-09-21T11:18:09.000000Z&quot;,&quot;updated_at&quot;:&quot;2021-09-21T11:18:09.000000Z&quot;},&quot;subjects&quot;:[]}"><div class="lg:w-11/12 w-full sm:px-6 lg:px-0 mx-auto col-span-12 mb-6"><div class="grid grid-cols-12 xl:gap-9 gap-6"><div class="xl:col-span-9 lg:col-span-8 md:col-span-7 col-span-12">
+                    <div class="sm:px-0 px-6">
+
+                        <div class="grid gap-6">
+
+                            <div>
+                                <div class="flex ">
+                                    <div>
+                                        
+                                        <div class="mb-3">
+                                            <div class="flex items-center flex-wrap">
+                                            <span>
+                    <span>страницы</span>&nbsp;<span>71-87</span>
+                </span>                        </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+
+                                                                    <div>
+    <h1 class="small-title">The Narrative Syntax of The Lord of the Rings</h1>
+</div>
+                                                            </div>
+
+                                                            <div wire:snapshot="{&quot;data&quot;:{&quot;article&quot;:[null,{&quot;class&quot;:&quot;App\\Models\\Article&quot;,&quot;key&quot;:95255638,&quot;s&quot;:&quot;mdl&quot;}]},&quot;memo&quot;:{&quot;id&quot;:&quot;zW7aojEemTxitE6jLRNC&quot;,&quot;name&quot;:&quot;article-authors&quot;,&quot;path&quot;:&quot;articles\/10.1007%2F978-3-030-69299-5_3&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[&quot;2208065428-0&quot;],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;ru&quot;},&quot;checksum&quot;:&quot;562cbb4c83b470dfb116c599957ff667102284889015eb0a3c1b8bd0a6f92c9f&quot;}" wire:effects="{&quot;scripts&quot;:{&quot;2208065428-0&quot;:&quot;    &lt;script&gt;\n        Alpine.data(&#039;articleAuthors&#039;, (authorsData) =&gt; {\n            return {\n                authors: authorsData.authors,\n                affiliations: authorsData.affiliations,\n                authorsTotal: authorsData.authorsTotal,\n                affiliationsTotal: authorsData.affiliationsTotal,\n\n                hasMore: authorsData.hasMore,\n                allLoaded: !authorsData.hasMore,\n\n                expandAffiliations: true,\n\n                loading: false,\n\n                getAll()\n                {\n                    if (this.loading) {\n                        return;\n                    }\n\n                    if (this.allLoaded) {\n                        return;\n                    }\n\n                    this.loading = true;\n\n                    $wire.getAllAuthors()\n                        .then(\n                            result =&gt; {\n                                this.authors        = result.authors;\n                                this.affiliations   = result.affiliations;\n                                this.hasMore        = result.hasMore;\n                                this.allLoaded      = !this.hasMore;\n\n                                this.loading = false;\n\n                                document.dispatchEvent(\n                                    new CustomEvent(&#039;set-text-collapse&#039;)\n                                );\n                            })\n                        .catch((error) =&gt; {\n                            console.error(&#039;Get all authors error &#039;, error);\n\n                            this.loading = false;\n                        });\n                }\n            }\n        });\n    &lt;\/script&gt;\n    &quot;}}" wire:id="zW7aojEemTxitE6jLRNC" x-data="articleAuthors(JSON.parse('{\u0022authors\u0022:[{\u0022author\u0022:4993880,\u0022sequence_id\u0022:1,\u0022sort_order\u0022:0,\u0022numbers\u0022:\u00221\u0022,\u0022href\u0022:\u0022\u0022,\u0022affiliations\u0022:{\u002259441024\u0022:59441024},\u0022profile\u0022:null,\u0022fullname\u0022:\u0022Thomas Kullmann\u0022},{\u0022author\u0022:25888881,\u0022sequence_id\u0022:0,\u0022sort_order\u0022:10,\u0022numbers\u0022:\u00221\u0022,\u0022href\u0022:\u0022\u0022,\u0022affiliations\u0022:{\u002259441024\u0022:59441024},\u0022profile\u0022:null,\u0022fullname\u0022:\u0022Dirk Siepmann\u0022}],\u0022affiliations\u0022:[{\u0022id\u0022:59441024,\u0022name\u0022:\u0022Institut f\\u00fcr Anglistik und Amerikanistik, University of Osnabr\\u00fcck, Osnabr\\u00fcck, Germany\u0022,\u0022ror_id\u0022:null,\u0022number\u0022:1,\u0022countries\u0022:[{\u0022code\u0022:\u0022de\u0022,\u0022name\u0022:\u0022\\u0413\\u0435\\u0440\\u043c\\u0430\\u043d\\u0438\\u044f\u0022}],\u0022organization\u0022:{\u0022ror_id\u0022:\u002204qmmjx98\u0022,\u0022image_src\u0022:\u0022\\\/storage\\\/images\\\/resized\\\/WpgpLXYvPRvS5jww00Hry63ftb7x6aTv2yDWc3Sl_small_thumb.webp\u0022,\u0022name\u0022:\u0022\\u041e\\u0441\\u043d\\u0430\\u0431\\u0440\\u044e\\u043a\\u0441\\u043a\\u0438\\u0439 \\u0443\\u043d\\u0438\\u0432\\u0435\\u0440\\u0441\\u0438\\u0442\\u0435\\u0442\u0022,\u0022href\u0022:\u0022https:\\\/\\\/colab.ws\\\/organizations\\\/04qmmjx98\u0022},\u0022organizations\u0022:[]}],\u0022authorsTotal\u0022:2,\u0022affiliationsTotal\u0022:1,\u0022hasMore\u0022:false}'))" x-cloak wire:ignore>
+
+    <div class="grid gap-3">
+
+        <div
+    x-ref="authors"
+    x-data="{
+        show: false,
+        showButton: false,
+    }"
+    x-init="
+        $nextTick(() => { showButton = $refs.authors.offsetHeight > parseInt(window.innerHeight / 2) - 48; });
+        document.addEventListener('set-text-collapse', (e) => {
+            $nextTick(() => { showButton = $refs.authors.offsetHeight > parseInt(window.innerHeight / 2) - 48; });
+        });"
+    :class="{
+        'max-h-half-screen' : !show,
+        'pb-12': showButton
+    }"
+    class="relative overflow-y-hidden">
+    <div class="description "><div class="flex flex-wrap">
+                <template x-for="(author, key) in authors">
+                    <div class="flex flex-nowrap leading-7">
+
+                        <template x-if="author.href">
+                            <a
+                                target="_blank"
+                                :href="author.href"
+                                title="author.fullname"
+                                class="inline whitespace-nowrap"
+                                x-html="author.fullname"></a>
+                        </template>
+
+                        <template x-if="!author.href">
+                            <span>
+                                <span class="whitespace-nowrap" x-html="author.fullname"></span>
+                            </span>
+                        </template>
+
+                        <template x-if="author.numbers">
+                            <sup class="top-2" x-text="author.numbers"></sup>
+                        </template>
+                        <template x-if="key < authors.length - 1">
+                            <span>,&nbsp;</span>
+                        </template>
+
+                    </div>
+                </template>
+
+                <template x-if="hasMore && authors.length < authorsTotal">
+                    <div class="flex flex-nowrap leading-7"><span>,&nbsp;</span><span>...</span></div>
+                </template>
+
+            </div></div>
+    <a
+        x-ref="hideButton"
+        x-show="showButton"
+        class="py-3
+            flex justify-center items-center
+            bg-blue-50 hover:bg-blue-100
+            absolute bottom-0 left-0 right-0"
+        @click.prevent="show = !show;"
+        x-text="show ? 'Скрыть' : 'Показать полный список';"
+        href="#"></a>
+</div>
+
+        <template x-if="affiliations.length">
+            <div class="grid gap-3">
+
+                <template x-if="!hasMore && allLoaded">
+                    <div>
+                        <a
+                            href="#"
+                            @click.prevent="expandAffiliations = !expandAffiliations"
+                            class="
+                                inline-block
+                                whitespace-nowrap
+                                text-xs uppercase font-semibold p-1 rounded
+                                bg-blue-50 hover:bg-blue-100">
+                            <i class="fa-solid fa-angle-up" x-show="expandAffiliations"></i>
+                            <i class="fa-solid fa-angle-down" x-show="!expandAffiliations"></i>
+                            <span x-show="expandAffiliations">Скрыть аффилиации авторов</span>
+                            <span x-show="!expandAffiliations">Показать аффилиации авторов</span>
+                        </a>
+                    </div>
+                </template>
+
+                <div x-show="expandAffiliations">
+                    <template x-for="affiliation in affiliations">
+                        <div class="flex">
+                            <div class="min-w-3 text-center">
+                                <sup x-text="affiliation.number"></sup>
+                            </div>
+                            <span>&nbsp;</span>
+                            <div>
+
+                                <template x-if="affiliation.organization.href">
+                                    <div class="inline-block">
+                                        <template x-if="affiliation.organization.href">
+                                            <a
+                                                target="_blank"
+                                                :title="affiliation.organization.name"
+                                                :href="affiliation.organization.href">
+                                                <span class="text-sm leading-6" x-html="affiliation.name"></span>
+                                            </a>
+                                        </template>
+                                    </div>
+                                </template>
+
+                                <template x-if="!affiliation.organization.href && affiliation.organizations.length">
+                                    <div class="inline-block">
+                                        <template x-if="affiliation.organizations.length">
+                                            <div x-data="{ 'isOpened': false }" class="relative inline-block">
+                                                <a
+                                                        href="#"
+                                                        @click.prevent="isOpened = !isOpened"
+                                                        class="text-sm leading-6">
+                                                    <span class="border-b border-dotted border-blue-500" x-html="affiliation.name"></span>
+                                                    <i class="fa-solid" :class="isOpened ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                                                </a>
+                                                <div x-show="isOpened" class="absolute shadow-xl bg-white z-10">
+                                                    <template x-if="affiliation.organizations">
+                                                        <template x-for="organization in affiliation.organizations">
+                                                            <a
+                                                                    target="_blank"
+                                                                    :href="organization.href"
+                                                                    :title="organization.title"
+                                                                    class="text-sm leading-6 flex items-center hover:bg-blue-50 p-1">
+                                                                <template x-if="organization.image_src">
+                                                                    <div class="mr-1">
+                                                                        <div class="w-6 h-6 overflow-hidden">
+                                                                            <img
+                                                                                    class="object-contain"
+                                                                                    :src="organization.image_src"
+                                                                                    :alt="organization.name" />
+                                                                        </div>
+                                                                    </div>
+                                                                </template>
+                                                                <div class="text-sm leading-6" x-text="organization.name"></div>
+                                                            </a>
+                                                        </template>
+
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+
+                                <template x-if="!affiliation.organization.href && !affiliation.organizations.length">
+                                    <span>
+                                        <span class="text-sm leading-6" x-html="affiliation.name"></span>
+                                    </span>
+                                </template>
+
+                                <template x-if="affiliation.countries.length">
+                                    <template x-for="country in affiliation.countries">
+                                        <span>
+                                            <span class="text-sm leading-6">|&nbsp;<span
+                                                class="fi"
+                                                :class="'fi-' + country.code"
+                                                :title="country.name"></span>
+                                            </span>
+                                        </span>
+                                    </template>
+                                </template>
+
+                                <template x-if="affiliation.href_edit">
+                                    <span class="text-sm leading-6">|&nbsp;<a target="_blank" :href="affiliation.href_edit">Редактировать</a></span>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template x-if="hasMore && affiliations.length < affiliationsTotal">
+                        <div class="flex"><span>...</span></div>
+                    </template>
+                </div>
+
+            </div>
+        </template>
+
+        <template x-if="hasMore && !allLoaded">
+            <div>
+                <a
+                    href="#"
+                    @click.prevent="getAll"
+                    class="
+                        inline-flex gap-1
+                        whitespace-nowrap
+                        text-sm uppercase font-bold p-1 rounded
+                        bg-blue-50 hover:bg-blue-100">
+                    <span>Показать всех авторов, <span>Всего</span></span>
+                    <span x-text="authorsTotal" class="font-bold"></span>
+                    <span x-show="loading"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+                </a>
+            </div>
+        </template>
+
+    </div>
+
+</div>
+
+                                
+                            <div class="flex sm:flex-row flex-col sm:gap-6 gap-1 flex-wrap">
+                    <div>
+                <span class="font-semibold">Тип публикации</span>:&nbsp;<span>Book Chapter</span>
+            </div>
+                    <div>
+                <span class="font-semibold">Дата публикации</span>:&nbsp;<span>2021-05-05</span>
+            </div>
+            </div>
+
+                            
+                            <div class="md:hidden grid gap-1">
+                                <div class="flex items-center gap-1">
+        <div>
+                    <span>&mdash;</span>
+            </div>
+</div>
+                                
+                            </div>
+
+                            <div>
+                    <div class="flex sm:flex-row flex-col ">
+                <div class="flex">
+                                            <span>DOI:&nbsp;</span>
+                                        <a
+                        class="mr-1"
+                        id="doi_url"
+                        href="https://doi.org/10.1007/978-3-030-69299-5_3"
+                        target="_blank">10.1007/978-3-030-69299-5_3</a>
+                </div>
+                <div>
+                    <a
+                        id="js_copy_doi"
+                        href="#"
+                        class="
+                            inline-block
+                            whitespace-nowrap
+                            text-sm py-0 px-2
+                            rounded-full
+                            bg-blue-50 hover:bg-blue-100">Скопировать DOI</a>
+                </div>
+            </div>
+                    </div>
+
+                            
+                            
+                            <div class="bg-stone-50 p-6">
+        <div class="mb-3 font-semibold">Краткое описание</div>
+        <div class="description">Drawing on a corpus which separates dialogue and narrative sections in The Lord of the Rings, the present chapter explores the most common syntactic n-grams (i.e. sequences of syntactic tags) in the narrative section. Using the imaginative prose section of the PHRASEOROM corpus (post-war fiction) and the British National Corpus as a reference, we extracted the statistically most significant 3-grams, 4-grams, 5-grams and 6-grams. The chapter pays equal attention to constructions that Tolkien, compared to other authors, tends to avoid, and to those that he prefers. The chapter is rounded off with two sample paragraphs which illustrate how the syntactic patterns identified blend together to produce different kinds of narrative effect.</div>
+    </div>
+
+                            <div>
+                                                                    <div class="col-span-12 mb-6"><div class="bg-stone-50 py-6 md:bg-white md:py-0">
+        
+        <div x-data="{ tab: 'article_references' }">
+
+            <div class="flex flex-wrap md:flex-nowrap mb-6 justify-start md:border-b border-gray-200 md:px-0 px-4">
+            <div
+            x-ref="article_references"
+            :class="
+                tab === 'article_references'
+                    ? 'md:bg-white bg-blue-50 text-blue-500 border-white md:border-blue-500'
+                    : 'border-white hover:text-blue-500'"
+            class="relative md:border-b-2 flex items-center rounded-md md:rounded-none transition-all">
+                        <button
+                type="button"
+                @click.prevent="tab = 'article_references'; if (tab.includes('_map')) { document.dispatchEvent(new CustomEvent('refresh-map')); }"
+                class="
+                    relative text-sm
+                    font-semibold uppercase p-3
+                    outline-none active:outline-none focus:outline-none
+                    ">
+                <span>Пристатейные ссылки</span>
+                <strong
+                    id="tab_article_references_value"
+                    class="hidden  lg:inline bg-blue-50 lg:px-1 inline-block ">2</strong>
+            </button>
+        </div>
+    
+    <script>
+        document.addEventListener('set-tab-value', function(e) {
+            const detail = e.detail;
+            const value = detail[1];
+            if (value) {
+                const el = document.getElementById(detail[0]);
+
+                if (el) {
+                    el.innerHTML = value;
+                    el.classList.add('lg:inline', 'bg-blue-50', 'lg:px-1', 'inline-block');
+                }
+            }
+        });
+    </script>
+</div>
+
+            <div>
+                                    <div x-show="tab === 'article_references'">
+                        <div wire:snapshot="{&quot;data&quot;:{&quot;item&quot;:[null,{&quot;class&quot;:&quot;App\\Models\\Article&quot;,&quot;key&quot;:95255638,&quot;s&quot;:&quot;mdl&quot;}],&quot;found&quot;:0,&quot;total&quot;:0,&quot;filterData&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;orderData&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;profiles&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;isExport&quot;:false,&quot;exportFileName&quot;:&quot;&quot;,&quot;type&quot;:&quot;references&quot;,&quot;entity&quot;:&quot;article&quot;,&quot;metrics&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;favourites&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;likes&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}]},&quot;memo&quot;:{&quot;id&quot;:&quot;pvuZqiAtHkjFhSmgq9V6&quot;,&quot;name&quot;:&quot;articles-list-new&quot;,&quot;path&quot;:&quot;articles\/10.1007%2F978-3-030-69299-5_3&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;ru&quot;},&quot;checksum&quot;:&quot;b920e7ba7b63f899c3484e0d33d6dbf8bd6daecce18670463f399dbb42dc68e4&quot;}" wire:effects="[]" wire:id="pvuZqiAtHkjFhSmgq9V6" x-data="articlesListNew([], JSON.parse('[{\u0022alias\u0022:\u0022date\u0022,\u0022name\u0022:\u0022\\u041f\\u043e \\u0434\\u0430\\u0442\\u0435\u0022},{\u0022alias\u0022:\u0022citations\u0022,\u0022name\u0022:\u0022\\u041f\\u043e \\u0446\\u0438\\u0442\\u0438\\u0440\\u0443\\u0435\\u043c\\u043e\\u0441\\u0442\\u0438\u0022}]'), 'pvuZqiAtHkjFhSmgq9V6')" x-cloak wire:ignore>
+
+    <div class="flex flex-col gap-6 relative" >
+
+        <!--[if BLOCK]><![endif]-->            <template x-if="filters.length">
+                <div class="bg-stone-100 p-6 grid gap-6">
+    <div class="flex flex-wrap gap-6">
+        <template x-for="item in filters" :key="item.alias">
+            <template x-if="['input', 'select', 'selector'].includes(item.type)">
+                <div>
+                    <template x-if="item.type === 'input'">
+                        <div>
+    <label :for="item.alias + parentKey" x-text="item.name"></label>
+
+    <input
+            :id="item.alias + parentKey"
+            @change="filterBy(item.alias, $event.target.value)"
+            @clear-input.window="if ($event.detail === parentKey) { document.getElementById(item.alias + parentKey).value = ''; }"
+            class="form-input border w-full" />
+</div>                    </template>
+                    <template x-if="item.type === 'select'">
+                        <div>
+    <label :for="item.alias + parentKey" x-text="item.name"></label>
+
+    <select
+            :id="item.alias + parentKey"
+            @change="filterBy(item.alias, $event.target.value)"
+            @clear-select.window="if ($event.detail === parentKey) { document.getElementById(item.alias + parentKey).selectedIndex = 0; }"
+            class="form-select border">
+        <template x-for="option in item.options" :key="item.alias + (option.value ? option.value : 0)">
+            <option :value="option.value" x-text="option.name"></option>
+        </template>
+    </select>
+</div>                    </template>
+                    <template x-if="item.type === 'selector'">
+                        <div class="sm:w-96 w-full">
+    <label x-text="item.name"></label>
+
+    <div
+            class="relative"
+            x-cloak
+            x-data="articlesFilterSelector(item, parentKey)">
+
+        <div>
+            <div>
+                <input
+                        placeholder=""
+                        type="text"
+                        @click.prevent="isOpened = true;"
+                        @click.outside="if (!isSorted) { isOpened = false }; isSorted = false;"
+                        @input="filter"
+                        class="form-select w-full outline-none border"
+                        :class="isOpened && options.length ? 'border-b-white rounded-t rounded-b-none' : ''"
+                        autocomplete="off"
+                        aria-hidden="true" />
+            </div>
+
+            <div
+                    x-show="isOpened && options.length"
+                    class="absolute z-10 left-0 right-0 max-h-80 overflow-y-hidden border-b border-l border-r bg-white rounded-b">
+                <div class="flex items-center gap-2 h-8 px-2 bg-stone-100" @click="isSorted = true;">
+                    <a href="#" class="text-xs px-1 rounded" :class="{ 'bg-blue-100': sortedBy === 'alphabet' }" @click.prevent="sortByAlphabet">По алфавиту</a>
+                    <a href="#" class="text-xs px-1 rounded" :class="{ 'bg-blue-100': sortedBy === 'count' }" @click.prevent="sortByCount">По количеству статей</a>
+                </div>
+                <div class="overflow-y-scroll max-h-72">
+                    <ul class="bg-white">
+                        <template x-for="option in options" :key="item.alias + (option.value ? option.value : 0)" >
+                            <li x-show="!regex || matches(option.name)">
+                                <a
+                                        href="#"
+                                        class="py-1 px-2 hover:bg-blue-100 text-black hover:text-black block"
+                                        @click.prevent="select(option.value)">
+                                    <span x-html="option.name + ' ' + '(' + option.count + ')'"></span>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="flex flex-wrap mt-1" x-show="selected.length > 0">
+            <template x-for="option in selected" :key="option.value">
+                <div class="flex py-1 px-2 bg-blue-100 mr-1 mb-1 rounded">
+                    <div class="pr-1" x-html="option.name"></div>
+                    <a
+                            class="block"
+                            href="#"
+                            @click.prevent="deselect(option.value)"><i class="fa-solid fa-xmark"></i></a>
+                </div>
+            </template>
+        </div>
+
+        <script>
+            function articlesFilterSelector(item, parentKey)
+            {
+                return {
+                    isOpened: false,
+                    isMultiple: false,
+                    isSorted: false,
+                    sortedBy: 'alphabet',
+                    options: item.options,
+                    alias: item.alias,
+                    selected: [],
+                    parentKey: parentKey,
+                    regex: null,
+                    init: function () {
+                        const _this = this;
+
+                        window.addEventListener('clear-selector', function(e) {
+                            if (e.detail === parentKey) {
+                                _this.selected = [];
+                                _this.isOpened = false;
+                            }
+                        });
+                    },
+                    sortByAlphabet: function()
+                    {
+                        this.options.sort((a, b) => {
+                            const nameA = a.name.toUpperCase();
+                            const nameB = b.name.toUpperCase();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+
+                        this.isSorted = true;
+                        this.sortedBy = 'alphabet';
+                    },
+                    sortByCount: function()
+                    {
+                        this.options.sort((a, b) => b.count - a.count);
+
+                        this.isSorted = true;
+                        this.sortedBy = 'count';
+                    },
+                    deselect: function(value) {
+                        const selectedLength = this.selected.length;
+                        for (let key = 0; key < selectedLength; key++) {
+                            const option = this.selected[key];
+
+                            if (option.value === value) {
+                                this.selected.splice(key, 1);
+
+                                this.$dispatch('filter-changed', {
+                                    'alias': this.alias,
+                                    'value': 0,
+                                    'parentKey': this.parentKey
+                                });
+
+                                break;
+                            }
+                        }
+                    },
+                    select: function(value) {
+                        if (!this.isMultiple) {
+                            this.selected = [];
+                        }
+
+                        let add = true;
+
+                        const selectedLength = this.selected.length;
+                        for (let key = 0; key < selectedLength; key++) {
+                            const option = this.selected[key];
+
+                            if (option.value === value) {
+                                add = false;
+                                break;
+                            }
+                        }
+
+                        if (add) {
+                            for (const option of this.options) {
+                                if (option.value === value) {
+                                    this.selected.push(option);
+
+                                    this.$dispatch('filter-changed', {
+                                        'alias': this.alias,
+                                        'value': option.value,
+                                        'parentKey': this.parentKey
+                                    });
+
+                                    break;
+                                }
+                            }
+                        }
+
+                        this.isOpened = false;
+                    },
+                    filter: function(e) {
+                        let term = e.target.value;
+
+                        this.regex = null;
+                        if (term) {
+                            term = term.trim();
+                            term = term.replace(/([^a-z0-9 ._\-]+)/gi, '');
+                            if (term) {
+                                this.regex = new RegExp(term, 'i');
+                            }
+                        }
+                    },
+                    matches: function(name) {
+                        return this.regex ? this.regex.test(name) : false;
+                    }
+                }
+            }
+        </script>
+
+    </div>
+
+</div>                    </template>
+                </div>
+            </template>
+        </template>
+    </div>
+    <div class="flex flex-wrap gap-6">
+        <template x-for="item in filters" :key="item.alias">
+            <div>
+                <template x-if="item.type === 'checkbox'">
+                    <div x-data="{ 'value': item.value }" class="-mx-2">
+    <label
+            class="rounded-md p-2 whitespace-nowrap flex items-center gap-1 cursor-pointer"
+            @click.prevent="value = !value; filterBy(item.alias, value)"
+            :for="item.alias + parentKey"
+            :class="{
+                'bg-blue-100': value,
+                'bg-stone-100': !value
+            }">
+        <input
+                @clear-checkbox.window="if ($event.detail === parentKey) { value = false }"
+                type="checkbox"
+                :value="value"
+                :id="item.alias + parentKey" />
+        <span x-text="item.name"></span>
+    </label>
+</div>                </template>
+            </div>
+        </template>
+    </div>
+</div>            </template>
+        <!--[if ENDBLOCK]><![endif]-->
+        <template x-if="orders.length > 0 || showTotal || hasExport">
+            <div class="flex justify-between gap-6 flex-wrap">
+                <div class="flex gap-3 flex-wrap items-center sm:order-1 order-2">
+                    <template x-if="hasExport && showTotal">
+                        <div>
+                            <button
+                                    @click.prevent="exportItems"
+                                    class="p-2 text-white bg-blue-500 hover:bg-blue-600 font-semibold rounded-md">
+                                <span>Скачать</span>
+                                <i class="fa-solid fa-file-csv"></i>
+                            </button>
+                        </div>
+                    </template>
+                    <template x-if="showTotal">
+                        <div><span>Найдено</span>&nbsp;<span x-text="found" class="font-semibold"></span></div>
+                    </template>
+                </div>
+
+                <template x-if="orders.length || filters.length">
+
+                    <div class="flex justify-end items-center gap-6 sm:order-2 order-1">
+
+                        <div x-show="!loadingItems && isFiltered">
+                            <a href="#" @click.prevent="clear" class="border-b border-dotted border-blue-500 hover:border-blue-600">Очистить фильтр</a>
+                        </div>
+
+                        <template x-if="orders.length">
+                            <div class="flex items-center flex-wrap sm:flex-nowrap gap-2">
+
+                                <template x-for="item in orders" :key="item.alias">
+                                    <a
+                                        href="#"
+                                        @click.prevent="orderBy(item.alias)"
+                                        class="rounded-md p-2 whitespace-nowrap outline-none"
+                                        :class="{
+                                            'text-blue-500 hover:text-blue-600 bg-blue-50': orderData.orderBy === item.alias,
+                                            'text-black bg-stone-100': orderData.orderBy !== item.alias
+                                        }">
+                                        <span class="inline-block" x-text="item.name"></span>
+                                        <span
+                                                x-show="orderData.orderBy === item.alias"
+                                                style="width: 10px;"
+                                                class="inline-block">
+                                            <i
+                                                class="fa-solid"
+                                                :class="{
+                                                    'fa-sort-up': orderData.orderDirection === 'asc',
+                                                    'fa-sort-down': orderData.orderDirection === 'desc'
+                                                }"></i>
+                                        </span>
+                                    </a>
+                                </template>
+                            </div>
+                        </template>
+
+                    </div>
+
+                </template>
+            </div>
+        </template>
+
+        <div>
+
+            <template x-if="items.length === 0 && !loadingItems && filters.length">
+                <div>Ничего не найдено, попробуйте изменить настройки фильтра.</div>
+            </template>
+
+            <template x-if="items.length > 0">
+                <div class="grid gap-2" :id="containerId">
+                    <template x-for="item in items" :key="item.key" x-effect="items.length && setMetrics">
+                        <div class="text-xs bg-white hover:bg-stone-100 transition-all p-2 rounded-md">
+                            <div class="flex gap-2" x-data="{ showAbstract: false, showCitations: false }">
+                                <div class="flex flex-col sm:flex-row gap-2">
+                                    <div class="flex flex-col items-center gap-1 min-w-7">
+                                        <a href="#" class="text-xl" @click.prevent="favourite(item.id)">
+                                            <i :class="{ 'fa-solid fa-bookmark': item.is_favourite, 'fa-regular fa-bookmark': !item.is_favourite }"></i>
+                                        </a>
+
+                                        <div class="w-7 h-7 overflow-hidden" x-show="item.publisherImageSrc">
+                                            <img class="object-contain" :alt="item.publisherName" :title="item.publisherName" :src="item.publisherImageSrc" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grow">
+                                    <div class="font-medium">
+                                        <a :href="item.href" x-html="item.title" class="font-medium text-sm sm:text-base leading-5 sm:leading-6 block"></a>
+                                    </div>
+                                    <div>
+                                        <span x-text="item.authors"></span>
+                                    </div>
+                                    <div class="flex flex-wrap items-center">
+                                        <template x-if="item.journalName">
+                                            <div class="flex items-center gap-x-1 flex-wrap">
+
+                                                <template x-if="item.journalHref">
+                                                    <a :href="item.journalHref" target="_blank">
+                                                        <span x-text="item.journalName" class="font-bold"></span>
+                                                    </a>
+                                                </template>
+
+                                                <template x-if="!item.journalHref">
+                                                    <span x-text="item.journalName" class="font-bold"></span>
+                                                </template>
+
+                                                <template x-if="item.quartileSci">
+                                                    <span
+                                                        title="Квартиль SCImago"
+                                                        x-text="item.journalQuartileSci"
+                                                        :class="'bg-q' + item.quartileSci"
+                                                        class="text-white font-bold rounded px-1 h-5 cursor-default inline-flex items-center justify-center whitespace-nowrap uppercase"></span>
+                                                </template>
+                                                <template x-if="item.in_top_sci">
+                                                    <span
+                                                            title="Tоп 10% SCImago"
+                                                            :class="'bg-q' + item.quartileSci"
+                                                            class="text-white font-bold rounded px-1 h-5 cursor-default inline-flex items-center justify-center whitespace-nowrap uppercase">Tоп 10% SCImago</span>
+                                                </template>
+                                                <template x-if="item.quartileWos">
+                                                    <span
+                                                        title="Квартиль WOS"
+                                                        x-text="item.journalQuartileWos"
+                                                        :class="'bg-q' + item.quartileWos"
+                                                        class="text-white font-bold rounded px-1 h-5 cursor-default inline-flex items-center justify-center whitespace-nowrap uppercase"></span>
+                                                </template>
+                                                <template x-if="item.in_nature_index">
+                                                    <span
+                                                            title="Nature Index"
+                                                            class="text-black bg-gray-200 font-bold rounded px-1 h-5 cursor-default inline-flex items-center justify-center whitespace-nowrap uppercase">Nature Index</span>
+                                                </template>
+                                                <template x-if="item.coreRank">
+                                                    <span
+                                                            title="Core Rank"
+                                                            x-text="item.journalCoreRank"
+                                                            :class="'bg-q' + item.coreRank"
+                                                            class="text-white font-bold rounded px-1 h-5 cursor-default inline-flex items-center justify-center whitespace-nowrap uppercase"></span>
+                                                </template>
+                                                <template x-if="item.whiteLevel">
+                                                    <span
+                                                        title="Уровень БС"
+                                                        x-text="item.journalWhiteLevel"
+                                                        :class="'bg-q' + item.whiteLevel"
+                                                        class="text-white font-bold rounded px-1 h-5 cursor-default inline-flex items-center justify-center whitespace-nowrap uppercase"></span>
+                                                </template>
+
+                                                <template x-if="item.is_open_access && item.pdfHref">
+                                                    <a
+                                                        :href="item.pdfHref"
+                                                        title="PDF"
+                                                        target="_blank"
+                                                        class="bg-open-access rounded cursor-pointer h-5 p-0.5 inline-flex items-center">
+                                                        <img class="w-4 h-4 object-contain" alt="Open Access" src="https://colab.ws/images/open_access_white.svg" />
+                                                        <span class="text-white font-bold">PDF</span>
+                                                    </a>
+                                                </template>
+
+                                                <template x-if="item.is_open_access && !item.pdfHref">
+                                                    <span
+                                                        title="Open Access"
+                                                        class="bg-open-access rounded cursor-default w-5 h-5 p-0.5 inline-block text-center">
+                                                            <img class="w-4 h-4 object-contain" alt="Open Access" src="https://colab.ws/images/open_access_white.svg" />
+                                                    </span>
+                                                </template>
+
+                                                <span class="-ml-1">&nbsp;</span>
+                                            </div>
+                                        </template>
+
+                                        <template x-if="item.published">
+                                            <span>
+                                                <span x-text="item.published"></span><span x-show="item.abstract">,&nbsp;</span>
+                                            </span>
+                                        </template>
+
+                                        <template x-if="item.abstract">
+                                            <span>
+                                                <a href="#" @click.prevent="showAbstract = !showAbstract" :class="{ 'bg-blue-50' : showAbstract }">
+                                                    <span>Краткое описание</span>
+                                                    <i :class="{ 'fa-solid fa-angle-up': showAbstract, 'fa-solid fa-angle-down': !showAbstract }"></i>
+                                                </a><span x-show="item.citations">&nbsp;</span>
+                                            </span>
+                                        </template>
+
+                                        <template x-if="item.citations">
+                                            <span>
+                                                <a href="#" @click.prevent="showCitations = !showCitations" :class="{ 'bg-blue-50' : showCitations }" target="_blank">
+                                                    <span>Цитирует <span class="font-medium" x-text="item.citations.length"></span></span>
+                                                    <i :class="{ 'fa-solid fa-angle-up': showCitations, 'fa-solid fa-angle-down': !showCitations }"></i>
+                                                </a>
+                                            </span>
+                                        </template>
+
+                                    </div>
+                                    <template x-if="item.abstract">
+                                        <div x-html="item.abstract" x-show="showAbstract"></div>
+                                    </template>
+                                    
+                                    <template x-if="item.citations">
+                                        <div class="flex flex-col gap-2 mt-2" x-show="showCitations">
+                                            <template x-for="item in item.citations" :key="item.key">
+                                                <div class="flex gap-2">
+                                                    <div>
+                                                        <div class="w-7 h-7 overflow-hidden">
+                                                            <div x-show="item.publisherImageSrc">
+                                                                <img class="object-contain" :alt="item.publisherName" :title="item.publisherName" :src="item.publisherImageSrc" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="grow">
+                                                        <div>
+                                                            <a :href="item.href" x-html="item.title" class="font-medium text-sm block"></a>
+                                                        </div>
+                                                        <div class="flex flex-wrap items-center">
+                                                            <template x-if="item.journalName">
+                                                                <div class="flex items-center gap-1 flex-wrap">
+
+                                                                    <template x-if="item.journalHref">
+                                                                        <a :href="item.journalHref" target="_blank">
+                                                                            <span x-text="item.journalName" class="font-bold"></span>
+                                                                        </a>
+                                                                    </template>
+
+                                                                    <template x-if="!item.journalHref">
+                                                                        <span x-text="item.journalName" class="font-bold"></span>
+                                                                    </template>
+
+                                                                    <template x-if="item.quartileSci">
+                                                                        <span
+                                                                                title="Квартиль SCImago"
+                                                                                x-text="item.journalQuartileSci"
+                                                                                :class="'bg-q' + item.quartileSci"
+                                                                                class="text-white font-bold rounded px-1 h-5 cursor-default inline-flex items-center justify-center whitespace-nowrap uppercase"></span>
+                                                                    </template>
+
+                                                                    <template x-if="item.quartileWos">
+                                                                        <span
+                                                                                title="Квартиль WOS"
+                                                                                x-text="item.journalQuartileWos"
+                                                                                :class="'bg-q' + item.quartileWos"
+                                                                                class="text-white font-bold rounded px-1 h-5 cursor-default inline-flex items-center justify-center whitespace-nowrap uppercase"></span>
+                                                                    </template>
+
+                                                                    <template x-if="item.whiteLevel">
+                                                                        <span
+                                                                                title="Уровень БС"
+                                                                                x-text="item.journalWhiteLevel"
+                                                                                :class="'bg-q' + item.whiteLevel"
+                                                                                class="text-white font-bold rounded px-1 h-5 cursor-default inline-flex items-center justify-center whitespace-nowrap uppercase"></span>
+                                                                    </template>
+
+                                                                    <template x-if="item.is_open_access">
+                                                                        <span
+                                                                                title="Open Access"
+                                                                                class="bg-open-access rounded cursor-default w-5 h-5 p-0.5 inline-block text-center">
+                                                                            <img class="w-4 h-4 object-contain" alt="Open Access" src="https://colab.ws/images/open_access_white.svg" />
+                                                                        </span>
+                                                                    </template>
+
+                                                                    <span>,&nbsp;</span>
+                                                                </div>
+                                                            </template>
+
+                                                            <template x-if="item.published">
+                                                                <span>
+                                                                    <span x-text="item.published"></span>
+                                                                </span>
+                                                            </template>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </div>
+                                <div>
+
+                                    <div class="flex sm:flex-row flex-col gap-2">
+                                        <div>
+                                            <span
+                                                class="__dimensions_badge_embed__"
+                                                :data-doi="item.doi"
+                                                data-style="small_circle"></span>
+                                        </div>
+
+                                        <div
+                                            x-tooltip.interactive="{
+                                                content: () => $refs.tooltip.innerHTML,
+                                                allowHTML: true,
+                                                appendTo: $root
+                                            }"
+                                            class="
+                                                metric-citations relative cursor-default
+                                                text-sm hover:text-base
+                                                flex justify-center items-center">
+                                            <div
+                                                style="background-image: url('https://colab.ws/logo/figure_black.svg');"
+                                                class="h-16 w-16 bg-no-repeat bg-center bg-contain metric-citations-image transition-all">
+                                            </div>
+                                            <div
+                                                class="
+                                                    absolute top-3 left-3 h-10 w-10
+                                                    transition-all rounded-full bg-white
+                                                    flex justify-center items-center">
+                                                <span x-text="item.num_citations_string"></span>
+                                            </div>
+
+                                            <template x-ref="tooltip">
+                                                <div class="bg-white text-black p-2">
+                                                    <div>
+                                                        <span>Всего цитирований</span>:
+                                                        <span class="font-semibold" x-text="item.num_citations"></span>
+                                                    </div>
+
+                                                    <template x-if="item.num_citations && item.metrics">
+
+                                                        <div>
+
+                                                            <div>
+                                                                <span>Цитирований c <span x-text="item.metrics.latestCitationsYear"></span></span>:
+                                                                <span class="font-semibold" x-text="item.metrics.latestCitationsCount"></span>
+                                                                <template x-if="item.metrics.latestCitationsPercentage">
+                                                                    <span>
+                                                                        (<span class="font-semibold" x-text="item.metrics.latestCitationsPercentage + '%'"></span>)
+                                                                    </span>
+                                                                </template>
+                                                            </div>
+
+                                                            <template x-if="item.metrics.journalId">
+                                                                <div>
+                                                                    <div>
+                                                                        <span>Самый цитирующий журнал</span>
+                                                                    </div>
+                                                                    <div class="flex gap-2 items-center">
+                                                                        <template x-if="item.metrics.publisherImageSrc">
+                                                                            <div>
+                                                                                <div class="w-7 h-7 overflow-hidden">
+                                                                                    <div>
+                                                                                        <img
+                                                                                            class="object-contain"
+                                                                                            :alt="item.metrics.journalName"
+                                                                                            :title="item.metrics.journalName"
+                                                                                            :src="item.metrics.publisherImageSrc" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </template>
+                                                                        <div class="grow flex items-center">
+                                                                            <a :href="item.metrics.journalHref" class="text-sm font-semibold" x-text="item.metrics.journalName"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <span>Цитирований в журнале</span>:
+                                                                        <span class="font-semibold" x-text="item.metrics.journalCitationsCount"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </template>
+
+                                                        </div>
+
+                                                    </template>
+
+                                                </div>
+                                            </template>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+        </div>
+
+        <div class="flex justify-center" x-show="paginationSize > 1">
+            <ul class="pagination flex">
+                <li>
+                    <a
+                        href="#"
+                        class="rounded-l-md bg-stone-100"
+                        :class="{'cursor-default text-stone-300 hover:text-stone-300 gray': paginationPage === 1 }"
+                        @click.prevent="prev"><i class="fa-solid fa-angle-left"></i></a>
+                </li>
+
+                <template x-for="item in paginationPages" :key="item.key">
+                    <li :class="{
+                        'active': item.isActive,
+                        'hidden sm:block': item.desktopOnly,
+                        'sm:hidden block': item.mobileOnly
+                    }">
+                        <a
+                            href="#"
+                            class="bg-stone-100"
+                            :class="{
+                                'gray': !item.isLink,
+                                'cursor-default text-stone-300 hover:text-stone-300': !item.isLink,
+                                'cursor-default': item.isActive,
+                            }"
+                            x-text="item.text"
+                            @click.prevent="go(item.page)"></a>
+                    </li>
+                </template>
+
+                <li>
+                    <a
+                       href="#"
+                       class="rounded-r-md bg-stone-100"
+                       :class="{ 'cursor-default text-stone-300 hover:text-stone-300 gray': paginationPage === paginationSize }"
+                       @click.prevent="next"><i class="fa-solid fa-angle-right"></i></a>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="absolute inset-0 bg-stone-100/75 flex justify-center items-center py-6" x-show="loadingItems">
+            <div class="p-6 bg-stone-100 w-full flex justify-center">
+                <i class="fa-solid fa-circle-notch fa-spin text-4xl text-stone-600"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function articlesListNew(filters, orders, parentKey)
+        {
+            return {
+                items: [],
+                filters: filters,
+                orders: orders,
+                found: 0,
+                filterData: [],
+                latestFilterData: [],
+                orderData: {
+                    orderBy: 'date',
+                    orderDirection: 'desc',
+                },
+                paginationPages: [],
+                paginationPage: 1,
+                paginationSize: 1,
+                loadingItems: false,
+                parentKey: parentKey,
+                containerId: '',
+
+                isFiltered: false,
+                isFilterUpdated: false,
+                showTotal: false,
+                hasExport: false,
+                searchesByClick: false,
+                init()
+                {
+                    this.setFilters();
+                    this.setItems(true);
+
+                    const _this = this;
+
+                    window.addEventListener('filter-changed', function(event) {
+                        if (parentKey === event.detail.parentKey) {
+                            _this.filterBy(event.detail.alias, event.detail.value);
+                        }
+                    });
+
+                    window.addEventListener('filter-selector-updated', function(event) {
+                        if (parentKey === event.detail.parentKey) {
+                            _this.filterBy(event.detail.inputName, event.detail.itemFilterData);
+                        }
+                    });
+
+                    this.containerId = 'publications_' + this.parentKey;
+                    this.searchesByClick = !!document.getElementById('articles_search_button_' + this.parentKey);
+                },
+                clear() {
+                    this.paginationPage = 1;
+
+                    this.setFilters();
+                    this.setItems(true);
+
+                    this.$dispatch('clear-selector', parentKey);
+                    this.$dispatch('clear-select', parentKey);
+                    this.$dispatch('clear-checkbox', parentKey);
+                    this.$dispatch('clear-input', parentKey);
+                    this.$dispatch('clear-filter-selector', parentKey);
+                },
+                setFilters()
+                {
+                    let filterData = [];
+                    for (const item of this.filters) {
+                        filterData.push({
+                            alias: item.alias,
+                            value: item.value
+                        });
+                    }
+
+                    this.filterData = filterData;
+                    this.latestFilterData = filterData;
+                    this.isFiltered = false;
+                    this.isFilterUpdated = false;
+                },
+                setLatestFilter()
+                {
+                    let filterData = [];
+                    for (const item of this.filterData) {
+                        filterData.push({
+                            alias: item.alias,
+                            value: item.value
+                        });
+                    }
+
+                    this.latestFilterData = filterData;
+                    this.isFilterUpdated = false;
+                },
+                favourite(id)
+                {
+                    this.$wire.favourite(id)
+                        .then(
+                            data => {
+                                if (data.success) {
+                                    for (const item of this.items) {
+                                        if (item.id === data.id) {
+                                            item.is_favourite = !item.is_favourite;
+
+                                            break;
+                                        }
+                                    }
+                                }
+                            })
+                        .catch(
+                            err => console.log(err)
+                        );
+                },
+                filterBy(alias, value)
+                {
+                    for (const item of this.filterData) {
+                        if (alias === item.alias && item.value !== value) {
+                            item.value = value;
+
+                            if (this.searchesByClick) {
+                                this.setIsFiltered();
+                                this.setIsFilterUpdated();
+
+                                return;
+                            }
+
+                            this.paginationPage = 1;
+
+                            this.setItems(false);
+
+                            break;
+                        }
+                    }
+                },
+                orderBy(alias)
+                {
+                    if (this.orderData.orderBy === alias) {
+                        this.orderData.orderDirection = this.orderData.orderDirection === 'desc' ? 'asc' : 'desc';
+                    } else {
+                        this.orderData.orderBy = alias;
+                        this.orderData.orderDirection = 'desc';
+                    }
+
+                    this.setItems(false);
+                },
+                prev()
+                {
+                    const page = this.paginationPage;
+                    if (page > 1) {
+                        this.go(page - 1);
+                    }
+                },
+                next()
+                {
+                    const page = this.paginationPage;
+                    if (page < this.paginationSize) {
+                        this.go(page + 1);
+                    }
+                },
+                go(page)
+                {
+                    page = parseInt(page);
+                    if (page && page !== this.paginationPage) {
+                        this.paginationPage = page;
+
+                        this.setItems(false);
+                    }
+                },
+                /*filter()
+                {
+                    this.paginationPage = 1;
+
+                    this.setItems(false);
+                },*/
+                search()
+                {
+                    if (this.loadingItems || !this.isFilterUpdated) {
+                        return;
+                    }
+
+                    this.paginationPage = 1;
+
+                    this.setItems();
+                },
+                setItems(isInit)
+                {
+                    this.loadingItems = true;
+
+                    isInit = !!isInit;
+
+                    this.$wire.getData(this.paginationPage, this.orderData, this.filterData, isInit)
+                        .then(
+                            data => {
+                                if (data.success) {
+                                    this.loadingItems = false;
+
+                                    this.items = data.items;
+                                    this.found = data.found;
+                                    this.paginationSize = data.paginationSize;
+                                    this.paginationPages = data.paginationPages;
+
+                                    if (isInit) {
+                                        this.$dispatch('set-tab-value', [
+                                            'tab_' + data.entity + '_' + data.type + '_value',
+                                            this.found
+                                        ]);
+
+                                        this.showTotal = data.showTotal;
+                                        this.hasExport = data.hasExport;
+                                    }
+
+                                    this.setLatestFilter();
+
+                                    this.setIsFiltered();
+                                }
+                            })
+                        .catch(
+                            err => console.log(err)
+                        );
+                },
+                setIsFilterUpdated()
+                {
+                    this.isFilterUpdated = false;
+                    for (const filterDataItem of this.filterData) {
+                        for (const latestFilterDataItem of this.latestFilterData) {
+                            if (filterDataItem.alias === latestFilterDataItem.alias) {
+                                if (filterDataItem.value !== latestFilterDataItem.value) {
+                                    this.isFilterUpdated = true;
+                                }
+                            }
+                        }
+                    }
+                },
+                setIsFiltered()
+                {
+                    this.isFiltered = false;
+                    for (const defaultItem of this.filters) {
+                        for (const filterItem of this.filterData) {
+                            if (defaultItem.alias === filterItem.alias) {
+                                const defaultValue =
+                                    defaultItem.type === 'checkbox' || defaultItem.type === 'input'
+                                        ? defaultItem.value
+                                        : parseInt(defaultItem.value);
+
+                                const filterValue =
+                                    defaultItem.type === 'checkbox' || defaultItem.type === 'input'
+                                        ? filterItem.value
+                                        : parseInt(filterItem.value);
+
+                                if (defaultValue !== filterValue) {
+                                    this.isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                },
+                exportItems()
+                {
+                    this.loadingExport = true;
+
+                    this.$wire.exportData()
+                        .then(
+                            () => {
+                                this.loadingExport = false;
+                            })
+                        .catch(
+                            err => console.log(err)
+                        );
+                },
+                setMetrics()
+                {
+                    this.$nextTick(() => {
+                        window.__dimensions_embed.addBadges();
+                    });
+                },
+            };
+        }
+    </script>
+</div>
+                    </div>
+                            </div>
+        </div>
+    </div></div>
+                                                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="xl:col-span-3 lg:col-span-4 md:col-span-5 col-span-12">
+
+                    <div class="grid gap-6">
+    <div class="flex flex-col sm:flex-row md:flex-col bg-stone-50 p-6 bg-amber-100!" item="{&quot;id&quot;:95255638,&quot;journal_id&quot;:null,&quot;prefix_id&quot;:8,&quot;image_id&quot;:null,&quot;doi&quot;:&quot;10.1007\/978-3-030-69299-5_3&quot;,&quot;title&quot;:&quot;The Narrative Syntax of The Lord of the Rings&quot;,&quot;created_at&quot;:&quot;2023-06-05T23:11:40.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-06-05T23:11:40.000000Z&quot;,&quot;authors_string&quot;:&quot;Kullmann T., Siepmann D.&quot;,&quot;refreshed_at&quot;:&quot;2023-06-06 02:11:40&quot;,&quot;page&quot;:null,&quot;volume&quot;:null,&quot;issue&quot;:null,&quot;source_id&quot;:1,&quot;authors_number&quot;:2,&quot;pmid&quot;:null,&quot;type_id&quot;:16,&quot;abstract&quot;:&quot;Drawing on a corpus which separates dialogue and narrative sections in The Lord of the Rings, the present chapter explores the most common syntactic n-grams (i.e. sequences of syntactic tags) in the narrative section. Using the imaginative prose section of the PHRASEOROM corpus (post-war fiction) and the British National Corpus as a reference, we extracted the statistically most significant 3-grams, 4-grams, 5-grams and 6-grams. The chapter pays equal attention to constructions that Tolkien, compared to other authors, tends to avoid, and to those that he prefers. The chapter is rounded off with two sample paragraphs which illustrate how the syntactic patterns identified blend together to produce different kinds of narrative effect.&quot;,&quot;number&quot;:null,&quot;arxiv_id&quot;:null,&quot;is_open_access&quot;:0,&quot;profile_author_matches&quot;:null,&quot;url_pdf&quot;:null,&quot;published_string&quot;:&quot;2021-05-05&quot;,&quot;year&quot;:2021,&quot;published_date&quot;:&quot;2021-05-05&quot;,&quot;published_int&quot;:20210505,&quot;is_review&quot;:2,&quot;num_citations_colab&quot;:0,&quot;publisher_id&quot;:null,&quot;page_from&quot;:71,&quot;page_to&quot;:87,&quot;references_count&quot;:2,&quot;url_primary&quot;:null,&quot;image&quot;:null,&quot;journal&quot;:null,&quot;publisher&quot;:null,&quot;type&quot;:{&quot;id&quot;:16,&quot;crossref_id&quot;:&quot;book-chapter&quot;,&quot;crossref_name&quot;:&quot;Book Chapter&quot;,&quot;created_at&quot;:&quot;2021-09-21T11:18:09.000000Z&quot;,&quot;updated_at&quot;:&quot;2021-09-21T11:18:09.000000Z&quot;},&quot;subjects&quot;:[]}" title="Вы ученый?" >
+
+    
+    <div class="grid gap-3">
+                    <h4>Вы ученый?</h4>
+        
+        <div>
+        <div><div class="mb-3">Создайте профиль, чтобы получать персональные рекомендации коллег, конференций и новых статей.</div>
+
+                                    <a wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;OkQVP5XgSKK4h0CRJKLG&quot;,&quot;name&quot;:&quot;orcid-auth&quot;,&quot;path&quot;:&quot;articles\/10.1007%2F978-3-030-69299-5_3&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;ru&quot;},&quot;checksum&quot;:&quot;28b94476b74c36478cd2841eb259841869406ffb690d2ea2e147829da76c5b68&quot;}" wire:effects="[]" wire:id="OkQVP5XgSKK4h0CRJKLG"
+    wire:click.prevent="submit"
+    href="#"
+    class=" flex justify-center items-center gap-1 h-12 px-6 btn bg-orcid hover:bg-orcid-dark rounded-md  focus:outline-none">
+    <span class="inline-flex items-center justify-center text-2xl text-white hover:text-white">
+        <i class="fa-solid fa-circle-notch fa-spin" wire:loading></i>
+        <i class=" fa-brands fa-orcid rounded-full" wire:loading.class="hidden"></i>
+        <span class=" font-medium whitespace-nowrap">&nbsp;Войти с ORCID</span>
+    </span>
+</a></div>
+</div>
+
+            </div>
+</div>
+                        
+                        
+                        <div class="flex flex-col sm:flex-row md:flex-col bg-stone-50 p-6" item="{&quot;id&quot;:95255638,&quot;journal_id&quot;:null,&quot;prefix_id&quot;:8,&quot;image_id&quot;:null,&quot;doi&quot;:&quot;10.1007\/978-3-030-69299-5_3&quot;,&quot;title&quot;:&quot;The Narrative Syntax of The Lord of the Rings&quot;,&quot;created_at&quot;:&quot;2023-06-05T23:11:40.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-06-05T23:11:40.000000Z&quot;,&quot;authors_string&quot;:&quot;Kullmann T., Siepmann D.&quot;,&quot;refreshed_at&quot;:&quot;2023-06-06 02:11:40&quot;,&quot;page&quot;:null,&quot;volume&quot;:null,&quot;issue&quot;:null,&quot;source_id&quot;:1,&quot;authors_number&quot;:2,&quot;pmid&quot;:null,&quot;type_id&quot;:16,&quot;abstract&quot;:&quot;Drawing on a corpus which separates dialogue and narrative sections in The Lord of the Rings, the present chapter explores the most common syntactic n-grams (i.e. sequences of syntactic tags) in the narrative section. Using the imaginative prose section of the PHRASEOROM corpus (post-war fiction) and the British National Corpus as a reference, we extracted the statistically most significant 3-grams, 4-grams, 5-grams and 6-grams. The chapter pays equal attention to constructions that Tolkien, compared to other authors, tends to avoid, and to those that he prefers. The chapter is rounded off with two sample paragraphs which illustrate how the syntactic patterns identified blend together to produce different kinds of narrative effect.&quot;,&quot;number&quot;:null,&quot;arxiv_id&quot;:null,&quot;is_open_access&quot;:0,&quot;profile_author_matches&quot;:null,&quot;url_pdf&quot;:null,&quot;published_string&quot;:&quot;2021-05-05&quot;,&quot;year&quot;:2021,&quot;published_date&quot;:&quot;2021-05-05&quot;,&quot;published_int&quot;:20210505,&quot;is_review&quot;:2,&quot;num_citations_colab&quot;:0,&quot;publisher_id&quot;:null,&quot;page_from&quot;:71,&quot;page_to&quot;:87,&quot;references_count&quot;:2,&quot;url_primary&quot;:null,&quot;image&quot;:null,&quot;journal&quot;:null,&quot;publisher&quot;:null,&quot;type&quot;:{&quot;id&quot;:16,&quot;crossref_id&quot;:&quot;book-chapter&quot;,&quot;crossref_name&quot;:&quot;Book Chapter&quot;,&quot;created_at&quot;:&quot;2021-09-21T11:18:09.000000Z&quot;,&quot;updated_at&quot;:&quot;2021-09-21T11:18:09.000000Z&quot;},&quot;subjects&quot;:[]}" >
+
+    
+    <div class="grid gap-3">
+        
+        <div>
+            <div class="font-semibold">Метрики</div>
+        <div><div class="flex sm:flex-row  flex-col  gap-2">
+    
+
+
+            <div>
+            <span
+                class="__dimensions_badge_embed__"
+                data-doi="10.1007/978-3-030-69299-5_3"
+                data-style="small_circle"></span>
+        </div>
+    
+            <div
+            x-tooltip.interactive="{
+            content: () => $refs.tooltip.innerHTML,
+            allowHTML: true,
+            appendTo: $root
+        }"
+            class="
+            metric-citations relative cursor-default w-16 h-16
+            text-sm hover:text-base
+            flex justify-center items-center">
+        <div
+                style="background-image: url('https://colab.ws/logo/figure_black.svg');"
+                class="h-16 w-16 bg-no-repeat bg-center bg-contain metric-citations-image transition-all">
+        </div>
+        <div
+                class="
+                absolute top-3 left-3 h-10 w-10
+                transition-all rounded-full bg-white
+                flex justify-center items-center">
+            <span>0</span>
+        </div>
+
+        <template x-ref="tooltip">
+            <div class="bg-white text-black p-2">
+                <div>
+                    <span>Всего цитирований</span>:
+                    <span class="font-semibold">0</span>
+                </div>
+
+                            </div>
+        </template>
+    </div>
+    
+</div></div>
+</div>
+
+                            <div>
+        <div><div>
+    <div class="font-semibold">Поделиться</div>
+
+    <div class="flex gap-2 flex-wrap">
+                            <div class="bg-white rounded-full w-14 h-14 flex items-center justify-center">
+                <a
+                    title="Twitter"
+                    target="_blank"
+                    class="text-blue-500 hover:text-blue-600 block text-4xl leading-4"
+                    href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fcolab.ws%2Farticles%2F10.1007%252F978-3-030-69299-5_3"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+                                    <div class="bg-white rounded-full w-14 h-14 flex items-center justify-center">
+                <a
+                    title="Mendeley"
+                    target="_blank"
+                    class="text-mendeley block text-4xl leading-4"
+                    href="https://www.mendeley.com/import/?doi=10.1007%2F978-3-030-69299-5_3"><i class="fa-brands fa-mendeley"></i></a>
+            </div>
+            </div>
+
+    </div></div>
+</div>
+
+            </div>
+</div>
+
+                        <div class="flex flex-col sm:flex-row md:flex-col bg-stone-50 p-6 hidden md:flex" item="{&quot;id&quot;:95255638,&quot;journal_id&quot;:null,&quot;prefix_id&quot;:8,&quot;image_id&quot;:null,&quot;doi&quot;:&quot;10.1007\/978-3-030-69299-5_3&quot;,&quot;title&quot;:&quot;The Narrative Syntax of The Lord of the Rings&quot;,&quot;created_at&quot;:&quot;2023-06-05T23:11:40.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-06-05T23:11:40.000000Z&quot;,&quot;authors_string&quot;:&quot;Kullmann T., Siepmann D.&quot;,&quot;refreshed_at&quot;:&quot;2023-06-06 02:11:40&quot;,&quot;page&quot;:null,&quot;volume&quot;:null,&quot;issue&quot;:null,&quot;source_id&quot;:1,&quot;authors_number&quot;:2,&quot;pmid&quot;:null,&quot;type_id&quot;:16,&quot;abstract&quot;:&quot;Drawing on a corpus which separates dialogue and narrative sections in The Lord of the Rings, the present chapter explores the most common syntactic n-grams (i.e. sequences of syntactic tags) in the narrative section. Using the imaginative prose section of the PHRASEOROM corpus (post-war fiction) and the British National Corpus as a reference, we extracted the statistically most significant 3-grams, 4-grams, 5-grams and 6-grams. The chapter pays equal attention to constructions that Tolkien, compared to other authors, tends to avoid, and to those that he prefers. The chapter is rounded off with two sample paragraphs which illustrate how the syntactic patterns identified blend together to produce different kinds of narrative effect.&quot;,&quot;number&quot;:null,&quot;arxiv_id&quot;:null,&quot;is_open_access&quot;:0,&quot;profile_author_matches&quot;:null,&quot;url_pdf&quot;:null,&quot;published_string&quot;:&quot;2021-05-05&quot;,&quot;year&quot;:2021,&quot;published_date&quot;:&quot;2021-05-05&quot;,&quot;published_int&quot;:20210505,&quot;is_review&quot;:2,&quot;num_citations_colab&quot;:0,&quot;publisher_id&quot;:null,&quot;page_from&quot;:71,&quot;page_to&quot;:87,&quot;references_count&quot;:2,&quot;url_primary&quot;:null,&quot;image&quot;:null,&quot;journal&quot;:null,&quot;publisher&quot;:null,&quot;type&quot;:{&quot;id&quot;:16,&quot;crossref_id&quot;:&quot;book-chapter&quot;,&quot;crossref_name&quot;:&quot;Book Chapter&quot;,&quot;created_at&quot;:&quot;2021-09-21T11:18:09.000000Z&quot;,&quot;updated_at&quot;:&quot;2021-09-21T11:18:09.000000Z&quot;},&quot;subjects&quot;:[]}" >
+
+    
+    <div class="grid gap-3">
+        
+        <div>
+            <div class="font-semibold">Издатель</div>
+        <div><div class="flex items-center gap-1">
+        <div>
+                    <span>&mdash;</span>
+            </div>
+</div></div>
+</div>
+
+            </div>
+</div>
+
+                        
+                        
+                            <div class="flex flex-col sm:flex-row md:flex-col bg-stone-50 p-6" item="{&quot;id&quot;:95255638,&quot;journal_id&quot;:null,&quot;prefix_id&quot;:8,&quot;image_id&quot;:null,&quot;doi&quot;:&quot;10.1007\/978-3-030-69299-5_3&quot;,&quot;title&quot;:&quot;The Narrative Syntax of The Lord of the Rings&quot;,&quot;created_at&quot;:&quot;2023-06-05T23:11:40.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-06-05T23:11:40.000000Z&quot;,&quot;authors_string&quot;:&quot;Kullmann T., Siepmann D.&quot;,&quot;refreshed_at&quot;:&quot;2023-06-06 02:11:40&quot;,&quot;page&quot;:null,&quot;volume&quot;:null,&quot;issue&quot;:null,&quot;source_id&quot;:1,&quot;authors_number&quot;:2,&quot;pmid&quot;:null,&quot;type_id&quot;:16,&quot;abstract&quot;:&quot;Drawing on a corpus which separates dialogue and narrative sections in The Lord of the Rings, the present chapter explores the most common syntactic n-grams (i.e. sequences of syntactic tags) in the narrative section. Using the imaginative prose section of the PHRASEOROM corpus (post-war fiction) and the British National Corpus as a reference, we extracted the statistically most significant 3-grams, 4-grams, 5-grams and 6-grams. The chapter pays equal attention to constructions that Tolkien, compared to other authors, tends to avoid, and to those that he prefers. The chapter is rounded off with two sample paragraphs which illustrate how the syntactic patterns identified blend together to produce different kinds of narrative effect.&quot;,&quot;number&quot;:null,&quot;arxiv_id&quot;:null,&quot;is_open_access&quot;:0,&quot;profile_author_matches&quot;:null,&quot;url_pdf&quot;:null,&quot;published_string&quot;:&quot;2021-05-05&quot;,&quot;year&quot;:2021,&quot;published_date&quot;:&quot;2021-05-05&quot;,&quot;published_int&quot;:20210505,&quot;is_review&quot;:2,&quot;num_citations_colab&quot;:0,&quot;publisher_id&quot;:null,&quot;page_from&quot;:71,&quot;page_to&quot;:87,&quot;references_count&quot;:2,&quot;url_primary&quot;:null,&quot;image&quot;:null,&quot;journal&quot;:null,&quot;publisher&quot;:null,&quot;type&quot;:{&quot;id&quot;:16,&quot;crossref_id&quot;:&quot;book-chapter&quot;,&quot;crossref_name&quot;:&quot;Book Chapter&quot;,&quot;created_at&quot;:&quot;2021-09-21T11:18:09.000000Z&quot;,&quot;updated_at&quot;:&quot;2021-09-21T11:18:09.000000Z&quot;},&quot;subjects&quot;:[]}" >
+
+    
+    <div class="grid gap-3">
+        
+        <div>
+        <div><div wire:snapshot="{&quot;data&quot;:{&quot;article&quot;:[null,{&quot;class&quot;:&quot;App\\Models\\Article&quot;,&quot;key&quot;:95255638,&quot;s&quot;:&quot;mdl&quot;}]},&quot;memo&quot;:{&quot;id&quot;:&quot;W6y98zaRLjKbB2ULul71&quot;,&quot;name&quot;:&quot;feedback.feedback-article&quot;,&quot;path&quot;:&quot;articles\/10.1007%2F978-3-030-69299-5_3&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[&quot;2927140055-0&quot;],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;ru&quot;},&quot;checksum&quot;:&quot;2ce95b12c1d546e43281e97a0fb990ee53791e4c3e0f4c52f36a463b5815a070&quot;}" wire:effects="{&quot;scripts&quot;:{&quot;2927140055-0&quot;:&quot;    &lt;script&gt;\n        Alpine.data(&#039;feedback&#039;, (email) =&gt; {\n            return {\n                email: email,\n                message: &#039;&#039;,\n\n                successMessage: &#039;&#039;,\n                errors: [],\n\n                submitting: false,\n                submitted: false,\n\n                submit()\n                {\n                    if (this.submitting) {\n                        return;\n                    }\n\n                    this.errors = [];\n                    this.submitting = true;\n\n                    this.$wire.submit({\n                        email: this.email,\n                        message: this.message,\n                    })\n                        .then(\n                            (result) =&gt; {\n                                if (result.success) {\n                                    this.successMessage = result.message;\n                                    this.message = &#039;&#039;;\n                                    this.submitted = true;\n                                } else {\n                                    this.errors = result.errors;\n                                }\n\n                                this.submitting = false;\n                            })\n                        .catch((error) =&gt; {\n                            console.error(&#039;Feedback error &#039;, error);\n\n                            this.submitting = false;\n                        });\n                },\n            }\n        });\n    &lt;\/script&gt;\n    &quot;}}" wire:id="W6y98zaRLjKbB2ULul71" x-data="feedback('')" wire:ignore>
+    <div
+    class="flex "
+    x-data="{ show: 0 }" x-cloak>
+
+    <!--[if BLOCK]><![endif]-->        <!--[if BLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <button
+                    @click.prevent="show = !show"
+                    class="p-2 bg-blue-500 hover:bg-blue-600 font-semibold text-white rounded-md cursor-pointer">Ошибка в публикации?</button>
+            <!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+        <!--[if ENDBLOCK]><![endif]-->    <!--[if ENDBLOCK]><![endif]-->
+    <div
+        x-show="show"
+        class="fixed inset-0 overflow-y-auto z-50">
+
+        <div
+            x-show="show"
+            @click="show = false;"
+            class="fixed inset-0"
+
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0">
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        <div
+            x-show="show"
+            class="
+                realtive z-50
+                mx-auto pt-28
+                w-full sm:w-2/3 lg:w-1/2
+                xl:max-w-7xl lg:max-w-6xl md:max-w-5xl sm:max-w-4xl"
+
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0 translate-y-0 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-0 scale-95">
+
+            <div class="bg-white z-50 p-6 relative rounded-lg">
+                <button
+                    href="#"
+                    @click.prevent="show = false"
+                    class="flex justify-center items-center absolute right-3 top-3 text-2xl w-4 h-4 cursor-pointer">
+                    <img src="https://colab.ws/images/cross.svg" alt="" />
+                </button>
+
+                <div class="w-full">
+                    <!--[if BLOCK]><![endif]-->                        <div class="flex justify-center pb-3">
+                            <div class="sm:text-lg"><span class="text-black font-semibold">Ошибка в публикации?</span></div>
+                        </div>
+                    <!--[if ENDBLOCK]><![endif]-->
+                    <div><template x-if="submitted">
+            <div class="p-3 bg-green-50 text-green-600 text-center rounded font-semibold" x-text="successMessage"></div>
+        </template>
+
+        <template x-if="!submitted">
+            <form>
+                <div class="grid gap-4">
+                    <div>
+                        <div>
+                            <label for="feedback-email" class="text-black">Email</label>
+                        </div>
+                        <input
+                                placeholder="Ваш email"
+                                class="form-input border w-full text-black"
+                                id="feedback-email"
+                                type="email"
+                                x-model="email" />
+
+                        <template x-if="errors.email">
+                            <div class="error" x-html="errors.email"></div>
+                        </template>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="feedback-message" class="text-black">Сообщение</label>
+                        </div>
+
+                        <textarea
+                                placeholder="Ваше сообщение, предложение или идея"
+                                class="border w-full form-textarea text-black"
+                                rows="8"
+                                x-model="message"
+                                id="feedback-message"></textarea>
+
+                        <template x-if="errors.message">
+                            <div class="error" x-html="errors.message"></div>
+                        </template>
+
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="flex items-center">
+                            <a
+                                    href="https://t.me/colab_support"
+                                    class="flex items-center bg-blue-50 hover:bg-blue-100 rounded p-2"
+                                    target="_blank">
+                                <i class="fa-brands fa-telegram text-2xl"></i>
+                                <span class="ml-1 font-semibold">Чат поддержки</span>
+                            </a>
+                        </div>
+                        <button
+                                @click.prevent="submit"
+                                type="submit"
+                                class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded font-semibold">Отправить</button>
+                    </div>
+                </div>
+            </form>
+        </template></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div></div>
+</div>
+
+            </div>
+</div>
+</div>
+                </div></div></div></div>
+    </div>
+</div></main>
+
+                            <footer>
+    <div class="relative">
+        <div class="bg-black text-white ">
+            <div class="
+                w-full px-4 sm:px-6 lg:px-6
+                mx-auto py-12
+                flex md:flex-row flex-col gap-8">
+
+                <div class="md:w-1/3 grid gap-4">
+                    <div>
+                        <a href="https://colab.ws" title="CoLab">
+                            <img src="https://colab.ws/logo/white_logo.svg" class="logo" alt="CoLab"/>
+                        </a>
+                    </div>
+
+                    <div>
+                        <a href="mailto:info@colab.ws" class="text-xl text-gray-200 hover:text-white">info@colab.ws</a>
+                    </div>
+
+                    <div>
+                        <ul>
+                            <li class="mb-1">
+                                <a href="https://colab.ws/privacy-policy" class="text-gray-200 hover:text-white">Политика конфиденциальности</a>
+                            </li>
+                                                            <li>
+                                    <a href="https://colab.ws/ads-rules" class="text-gray-200 hover:text-white">Правила размещения объявлений</a>
+                                </li>
+                                                    </ul>
+                    </div>
+
+                    <div class="flex items-center justify-start flex-wrap gap-8">
+                        <div>
+                            <a
+                                    class="w-20 h-20 overflow-hidden"
+                                    target="_blank"
+                                    href="https://cobalt.colab.ws/"
+                                    title="Cobalt search">
+                                <img
+                                        class="w-20 h-20"
+                                        src="https://colab.ws/images/inverse_cobalt.svg"
+                                        alt="Cobalt search" />
+                            </a>
+                        </div>
+
+                                                    <div class="flex justify-start">
+                                <a target="_blank" href="https://наука.рф/" title="Десятилетие науки и технологий в России">
+                                    <img
+                                        src="https://colab.ws/images/decade.svg"
+                                        class="nauka_logo"
+                                        alt="Десятилетие науки и технологий в России" />
+                                </a>
+                            </div>
+                        
+                                                    <div class="flex justify-start">
+                                <a target="_blank" href="https://гиснаука.рф/" title="Домен наука и инновации">
+                                    <img
+                                            src="https://colab.ws/images/gisnauka.svg"
+                                            class="gisnauka_logo"
+                                            alt="Домен наука и инновации" />
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                </div>
+
+                <div class="md:w-2/3 flex sm:flex-row flex-col gap-8">
+
+                    <div class="sm:w-1/2 md:px-2">
+                        <div class="text-gray-600 text-lg sm:text-xl uppercase font-semibold mb-2">Платформа</div>
+                        <div class="grid xl:grid-cols-2 xl:gap-8">
+                                                            <div class="flex flex-col gap-2">
+                                                                            <a href="https://cobalt.colab.ws/" class="text-gray-200 hover:text-white"  target="_blank" >Поиск публикаций</a>
+                                                                            <a href="https://colab.ws/organizations" class="text-gray-200 hover:text-white" >Организации</a>
+                                                                            <a href="https://colab.ws/researchers" class="text-gray-200 hover:text-white" >Учёные</a>
+                                                                            <a href="https://colab.ws/journals" class="text-gray-200 hover:text-white" >Журналы</a>
+                                                                            <a href="https://colab.ws/labs" class="text-gray-200 hover:text-white" >Лаборатории</a>
+                                                                            <a href="https://colab.ws/conferences" class="text-gray-200 hover:text-white" >Конференции</a>
+                                                                            <a href="https://colab.ws/partner-journals" class="text-gray-200 hover:text-white" >Партнёрские журналы</a>
+                                                                    </div>
+                                                            <div class="flex flex-col gap-2">
+                                                                            <a href="https://colab.ws/equipment" class="text-gray-200 hover:text-white" >Оборудование</a>
+                                                                            <a href="https://colab.ws/news" class="text-gray-200 hover:text-white" >Новости</a>
+                                                                            <a href="https://colab.ws/faq" class="text-gray-200 hover:text-white" >Ответы на&nbsp;вопросы</a>
+                                                                            <a href="https://colab.ws/map" class="text-gray-200 hover:text-white" >Карта</a>
+                                                                    </div>
+                                                    </div>
+                    </div>
+
+                    <div class="sm:w-1/2 md:w-7/12 xl:w-2/3 md:px-2 flex sm:justify-end">
+                        <div>
+                            <div class="text-gray-600 text-lg sm:text-xl uppercase font-semibold mb-2">Подпишись на обновления</div>
+
+                            <div class="grid gap-4">
+                                
+
+                                <div class="flex gap-4">
+                                                                            <a
+                                            rel="nofollow"
+                                            target="_blank"
+                                            href="https://t.me/colaboratory"
+                                            class="text-4xl text-gray-200 hover:text-white leading-none"><i class="fa-brands fa-telegram"></i></a>
+                                                                            <a
+                                            rel="nofollow"
+                                            target="_blank"
+                                            href="https://vk.ru/colabws"
+                                            class="text-4xl text-gray-200 hover:text-white leading-none"><i class="fa-brands fa-vk"></i></a>
+                                                                    </div>
+
+                                <div>
+                                    <div wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;PLwoUFGYLTrXexwyV2oB&quot;,&quot;name&quot;:&quot;feedback.feedback-footer&quot;,&quot;path&quot;:&quot;articles\/10.1007%2F978-3-030-69299-5_3&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[&quot;2927140055-0&quot;],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;ru&quot;},&quot;checksum&quot;:&quot;6f753a340147c8fb8ae1459d55397b22ff768441095c37923e7c696d1871a851&quot;}" wire:effects="{&quot;scripts&quot;:{&quot;2927140055-0&quot;:&quot;    &lt;script&gt;\n        Alpine.data(&#039;feedback&#039;, (email) =&gt; {\n            return {\n                email: email,\n                message: &#039;&#039;,\n\n                successMessage: &#039;&#039;,\n                errors: [],\n\n                submitting: false,\n                submitted: false,\n\n                submit()\n                {\n                    if (this.submitting) {\n                        return;\n                    }\n\n                    this.errors = [];\n                    this.submitting = true;\n\n                    this.$wire.submit({\n                        email: this.email,\n                        message: this.message,\n                    })\n                        .then(\n                            (result) =&gt; {\n                                if (result.success) {\n                                    this.successMessage = result.message;\n                                    this.message = &#039;&#039;;\n                                    this.submitted = true;\n                                } else {\n                                    this.errors = result.errors;\n                                }\n\n                                this.submitting = false;\n                            })\n                        .catch((error) =&gt; {\n                            console.error(&#039;Feedback error &#039;, error);\n\n                            this.submitting = false;\n                        });\n                },\n            }\n        });\n    &lt;\/script&gt;\n    &quot;}}" wire:id="PLwoUFGYLTrXexwyV2oB" x-data="feedback('')" wire:ignore>
+    <div
+    class="flex "
+    x-data="{ show: 0 }" x-cloak>
+
+    <!--[if BLOCK]><![endif]-->        <!--[if BLOCK]><![endif]-->            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <a
+                    @click.prevent="show = !show"
+                    class="text-gray-200 hover:text-white border-b border-dotted"
+                    href="#"
+                    title="Обратная связь">Написать нам</a>
+            <!--[if ENDBLOCK]><![endif]-->
+        <!--[if ENDBLOCK]><![endif]-->    <!--[if ENDBLOCK]><![endif]-->
+    <div
+        x-show="show"
+        class="fixed inset-0 overflow-y-auto z-50">
+
+        <div
+            x-show="show"
+            @click="show = false;"
+            class="fixed inset-0"
+
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0">
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        <div
+            x-show="show"
+            class="
+                realtive z-50
+                mx-auto pt-28
+                w-full sm:w-2/3 lg:w-1/2
+                xl:max-w-7xl lg:max-w-6xl md:max-w-5xl sm:max-w-4xl"
+
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0 translate-y-0 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-0 scale-95">
+
+            <div class="bg-white z-50 p-6 relative rounded-lg">
+                <button
+                    href="#"
+                    @click.prevent="show = false"
+                    class="flex justify-center items-center absolute right-3 top-3 text-2xl w-4 h-4 cursor-pointer">
+                    <img src="https://colab.ws/images/cross.svg" alt="" />
+                </button>
+
+                <div class="w-full">
+                    <!--[if BLOCK]><![endif]-->                        <div class="flex justify-center pb-3">
+                            <div class="sm:text-lg"><span class="text-black font-semibold">Написать нам</span></div>
+                        </div>
+                    <!--[if ENDBLOCK]><![endif]-->
+                    <div><template x-if="submitted">
+            <div class="p-3 bg-green-50 text-green-600 text-center rounded font-semibold" x-text="successMessage"></div>
+        </template>
+
+        <template x-if="!submitted">
+            <form>
+                <div class="grid gap-4">
+                    <div>
+                        <div>
+                            <label for="feedback-email" class="text-black">Email</label>
+                        </div>
+                        <input
+                                placeholder="Ваш email"
+                                class="form-input border w-full text-black"
+                                id="feedback-email"
+                                type="email"
+                                x-model="email" />
+
+                        <template x-if="errors.email">
+                            <div class="error" x-html="errors.email"></div>
+                        </template>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="feedback-message" class="text-black">Сообщение</label>
+                        </div>
+
+                        <textarea
+                                placeholder="Ваше сообщение, предложение или идея"
+                                class="border w-full form-textarea text-black"
+                                rows="8"
+                                x-model="message"
+                                id="feedback-message"></textarea>
+
+                        <template x-if="errors.message">
+                            <div class="error" x-html="errors.message"></div>
+                        </template>
+
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="flex items-center">
+                            <a
+                                    href="https://t.me/colab_support"
+                                    class="flex items-center bg-blue-50 hover:bg-blue-100 rounded p-2"
+                                    target="_blank">
+                                <i class="fa-brands fa-telegram text-2xl"></i>
+                                <span class="ml-1 font-semibold">Чат поддержки</span>
+                            </a>
+                        </div>
+                        <button
+                                @click.prevent="submit"
+                                type="submit"
+                                class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded font-semibold">Отправить</button>
+                    </div>
+                </div>
+            </form>
+        </template></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>                    </div>
+
+        
+        <link rel="modulepreload" as="script" href="https://colab.ws/build/assets/editor-Bgarq-5b.js" /><link rel="modulepreload" as="script" href="https://colab.ws/build/assets/app-bFvbzaq4.js" /><link rel="modulepreload" as="script" href="https://colab.ws/build/assets/chunk-svZgaeHr.js" /><link rel="modulepreload" as="script" href="https://colab.ws/build/assets/ru-DxSjflRa.js" /><link rel="modulepreload" as="script" href="https://colab.ws/build/assets/main-BZZleDSC.js" /><link rel="modulepreload" as="script" href="https://colab.ws/build/assets/clipboard-BXSsfZVZ.js" /><script type="module" src="https://colab.ws/build/assets/editor-Bgarq-5b.js" data-navigate-track="reload"></script><script type="module" src="https://colab.ws/build/assets/app-bFvbzaq4.js" data-navigate-track="reload"></script><script type="module" src="https://colab.ws/build/assets/ru-DxSjflRa.js" data-navigate-track="reload"></script><script type="module" src="https://colab.ws/build/assets/main-BZZleDSC.js" data-navigate-track="reload"></script><script type="module" src="https://colab.ws/build/assets/clipboard-BXSsfZVZ.js" data-navigate-track="reload"></script>
+                
+                <script>window.twttr = (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0],
+                    t = window.twttr || {};
+                if (d.getElementById(id)) return t;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+
+                t._e = [];
+                t.ready = function(f) {
+                    t._e.push(f);
+                };
+
+                return t;
+            }(document, "script", "twitter-wjs"));</script>
+    
+    <script src="https://colab.ws/vendor/livewire/livewire.min.js?id=57eb113f"   data-csrf="3LpCypAU7hHR6nTAb3llJ3WswCMVWHYrnegA56lJ" data-update-uri="/livewire/update" data-navigate-once="true"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 5,
+ "indices": [
+  1058,
+  1059,
+  1060,
+  1061,
+  1062,
+  1063,
+  1064,
+  1065,
+  1066,
+  1067,
+  1068,
+  1069,
+  1072,
+  1073,
+  1074
+ ],
+ "claims": [
+  {
+   "index": 1058,
+   "feature": "edition and house style",
+   "claim": "Version 1.08a takes the Chicago Manual of Style, 17th edition as one of its two foundations.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "The Chicago Manual of Style, 17th edition",
+   "page": "opening section"
+  },
+  {
+   "index": 1059,
+   "feature": "edition and house style",
+   "claim": "The earlier version 1.04a of the same guide took the Chicago Manual of Style, 16th edition as its foundation, so the house authority moved one Chicago edition between the two releases.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.04a",
+   "url": "https://adventurersleague.files.wordpress.com/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "The Chicago Manual of Style, 16th edition",
+   "page": "opening section"
+  },
+  {
+   "index": 1060,
+   "feature": "edition and house style",
+   "claim": "The superseded version of the guide is numbered 1.04a and carries a 2013 copyright line.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.04a",
+   "url": "https://adventurersleague.files.wordpress.com/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "Version 1.04a ©2013 Wizards of the Coast",
+   "page": "running footer, every page"
+  },
+  {
+   "index": 1061,
+   "feature": "edition and house style",
+   "claim": "Neither released version of the D&D style guide names an author, editor or compiler anywhere in its pages; the only attribution is the corporate copyright line.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a (11 pages) and v1.04a (9 pages)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "",
+   "page": "whole document"
+  },
+  {
+   "index": 1062,
+   "feature": "dm-facing sentence",
+   "claim": "The house style guide states that in rules text the D&D editors prefer to achieve gender neutrality by writing in the second person wherever possible.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Achieving Gender Neutrality",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "neutrality by writing in the second person",
+   "page": "Achieving Gender Neutrality"
+  },
+  {
+   "index": 1063,
+   "feature": "terminology consistency",
+   "claim": "The house style guide instructs writers to avoid page references as much as possible.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Page References",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "We avoid page references as much as possible.",
+   "page": "Cross-References, Page References"
+  },
+  {
+   "index": 1064,
+   "feature": "terminology consistency",
+   "claim": "The guide's stated reason for avoiding page references is that they are labor-intensive, having to be added by hand during galley review.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Page References",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "They are labor-intensive (they must be added by",
+   "page": "Cross-References, Page References"
+  },
+  {
+   "index": 1065,
+   "feature": "terminology consistency",
+   "claim": "The guide tells writers to use cross-references judiciously because they are easily overused.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Cross-References",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Use cross-references judiciously.",
+   "page": "Cross-References"
+  },
+  {
+   "index": 1066,
+   "feature": "terminology consistency",
+   "claim": "The guide sets a monster's name in bold only on its first appearance in an encounter area or subsection, not on every mention.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Terms to Set in Bold",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Set a monster’s name in bold only the first time",
+   "page": "Terms to Set in Bold"
+  },
+  {
+   "index": 1067,
+   "feature": "terminology consistency",
+   "claim": "The guide forbids any word coming between the number of monsters appearing and the name of the stat block.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Terms to Set in Bold",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Make sure no text gets between the number of",
+   "page": "Terms to Set in Bold"
+  },
+  {
+   "index": 1068,
+   "feature": "terminology consistency",
+   "claim": "The guide treats italicized spell and magic item names as titles rather than as descriptions of the thing they create.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Terms to Italicize",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "The italicized terms are treated as titles",
+   "page": "Terms to Italicize"
+  },
+  {
+   "index": 1069,
+   "feature": "register modulation",
+   "claim": "Ray Vallese, the Planescape line's editor, says the products were often written in a wry, overly clever voice that smirked at the setting's ignorant outsiders.",
+   "source": "Ray Vallese, TSR Planescape editor, interviewed at Exposition Break, 2022",
+   "url": "https://www.expositionbreak.com/a-walk-through-the-planes-an-interview-with-monte-cook-ray-vallese-and-colin-mccomb/",
+   "quote": "written in a wry, overly clever voice that smirked",
+   "page": "answer on Planescape's reputation"
+  },
+  {
+   "index": 1072,
+   "feature": "diction (native vs latinate)",
+   "claim": "Monte Cook recalls that WotC president Peter Adkison did not want a line whose characters used slang he could not understand to discuss philosophy.",
+   "source": "Monte Cook, Planescape designer, interviewed at Exposition Break, 2022",
+   "url": "https://www.expositionbreak.com/a-walk-through-the-planes-an-interview-with-monte-cook-ray-vallese-and-colin-mccomb/",
+   "quote": "not people using slang he didn’t understand to discuss philosophy",
+   "page": "answer on Planescape after the WotC purchase"
+  },
+  {
+   "index": 1073,
+   "feature": "plainness and economy",
+   "claim": "Christopher Perkins states as a working practice that he keeps his descriptions spare.",
+   "source": "Christopher Perkins, The Dungeon Master Experience: T'wit, Dungeon 197, 2011",
+   "url": "https://web.archive.org/web/20201112024903if_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+   "quote": "I keep my descriptions spare.",
+   "page": "column: T'wit"
+  },
+  {
+   "index": 1074,
+   "feature": "adjective and adverb discipline",
+   "claim": "Perkins says he keeps his NPC descriptions brief as well.",
+   "source": "Christopher Perkins, The Dungeon Master Experience: T'wit, Dungeon 197, 2011",
+   "url": "https://web.archive.org/web/20201112024903if_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+   "quote": "I keep my NPC descriptions brief as well.",
+   "page": "column: T'wit"
+  }
+ ]
+}

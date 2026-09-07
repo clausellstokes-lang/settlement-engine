@@ -1,0 +1,66 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 16894 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneOSR18
+
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the baseline is CONTENT-ADDRESSED, names the corpus and the detector it judged with, and every registered identity parses 18ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count 4ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surface roots are real files, every counting class has a non-empty closure, and the STOP set is disjoint from every root 3ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > web-display and web-transitive partition the web closure exactly, web-display contains no src/domain/worldPulse file, and only COUNTING_CLASSES count toward LIT 17ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the local BUILTIN_MEMBERS twin equals OSR's module-private set byte for byte, and no written key collides with it 4ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the declared DARK register is structurally lawful and every row is live-verified 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity 91ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > CHARSET_SURFACES mirrors SURFACE_CLASSES minus news and minus web-transitive — the six RENDERING classes, pinned for the day CHARSET Car 1 lands 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the identity grammar is OSR's: writerIdentity(k, s) equals identityOf(a canonical six-field legacy finding carrying key k and shapes [s]), and the bare two-field form is refused 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the EXECUTED corpus and the closures > the producers ran and the write population is not empty 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the EXECUTED corpus and the closures > THE PREMISE HOLDS: a written key the probe measured DARK is written, and its shape carries a liveness anchor 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the EXECUTED corpus and the closures > the web closure contains the lazily-imported tabs — a dynamic import of an extensionless .jsx target is an edge 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the EXECUTED corpus and the closures > the dossier-pdf closure contains the view model and the sections, and the campaign-pdf and world-book closures are disjoint from src/pdf 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the EXECUTED corpus and the closures > the worker construction edge is followed: pdfRender.worker.js reaches SettlementPDF.jsx 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the EXECUTED corpus and the closures > no closure enters the STOP set 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the scan reached the tree and credited a real share of surface reads at grade R 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > every DARK identity is REGISTERED or BANKED — the shrink-only comparison is clean 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > no registered row is LIT — a row that outlives its darkness must be STRUCK (bank the win) 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent 2ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the population sentinel: judged and every counting closure hold above 90 % of the register 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > THE CROSS-JOIN NAMES THE CULTURE CLASS: a synthetic OSR finding "culture on settlement" in generateCampaignPDF.js joined with the written "culture on config" reports a shape-mismatched key on campaign-pdf 3ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > THE CULTURE CLASS IS STILL LIVE: the dossier view model and the quick guide read culture on settlement and npcs while the writer is config — six rows, exact, a review-backlog wiring finding 6692ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the web-only gap report lists identities LIT on web-display with no paid-PDF reach, and the recon's culture case is no longer among them 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > pendingSurfaceBacklog returns exactly the pending-surface rows, sorted by surface then identity 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the export allowlist arm reaches json-export at grade A for exactly the allowlisted keys, and json-export does not count toward LIT 2ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > dark-by-construction (simulation-flag): the M13 clauses convict a lit flag, a non-virtual flag, and a writer that stopped writing 3ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > dark-by-construction (generation-dial): a dial already at its lit version convicts the row 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > engine-internal: a consumer that does not read the key convicts; a consumer whose read is only in a comment or a string convicts (code-only) 3ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > engine-internal: a consumer inside a counting closure convicts — that identity would be LIT 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > pending-surface: an uncited car convicts; a cited car on a surface the identity already reaches convicts; a car that resolves to no in-tree artifact convicts 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > pending-surface: a row beyond the genesis-banked population is refused — the cohort ceiling shrinks and only --rebank --charter grows it 4ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > clause S: a row whose identity is LIT is convicted with the strike instruction 3ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > the structural law refuses a malformed, duplicated, wrong-reason, or foreign-field row 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > the two generation-dial rows are LIVE-VERIFIED, and NEITHER writer writes in any of OSR’s four spellings — the executed bit is the write proof 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > THE WIDENING IS NARROW: a generation-dial identity that is NOT dial-gated still convicts at clause W 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > THE WIDENING IS REASON-SCOPED: an engine-internal row whose writer writes only by assignment still convicts at clause W 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > clause S is REASON-AWARE: a dial row is EXPECTED absent from the judged population, and a dial that has ROLLED convicts with its own instruction 3ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > a generation-dial row with NO measured dialGated set convicts — an absent measurement is not an acquittal 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the register doors convict what they cannot verify > a second --genesis over an existing baseline is refused 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE PARTITION HOLDS: each planted probe is addressed by its own file 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE MUTANT REDS: a synthetic written key on a judged shape with no reader is DARK, unregistered, ceiling 0 102ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE MUTANT LIGHTS AT GRADE R: a planted web root reading settlement.__plantedWrittenKey 98ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE MUTANT LIGHTS AT GRADE N ONLY: the same key read on an unresolvable receiver 97ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE STOP HOLDS: the same read planted at a src/generators path lights nothing 95ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE CLASS MAP DISCRIMINATES: a read planted in the dossier-pdf root set lights dossier-pdf and not campaign-pdf 96ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > EVERY EDGE KIND IS FOLLOWED: static, export-from, import(), new URL(…, import.meta.url), require, and the extensionless .jsx specifier 3ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE SWAP MUTANT: a new dark identity at constant count reds with its identity named 100ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds 117ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > ⚠⚠ THE SCAN BUDGET: exactly TWO full-tree scans, never one per mutant 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the lit-dial arm > the lit corpus observed customContentRoster on settlement and the dark corpus did not — the MAT retro-control, executed 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the lit-dial arm > the density v2 roll is dial-gated: densityRungRole on npcs is present lit and absent dark 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the lit-dial arm > the dial-gated set is DOUBLY CONTROLLED: the pack is not a dial and neither is the producer set, and the uncontrolled reading fires the STOP 0ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the lit-dial arm > every dial-gated identity is in the frozen roster and every frozen entry is still dial-gated — a new dial-gated key reds by name 1ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the lit-dial arm > the lit arm changes no draw: the walker corpus is byte-identical beside the lit one, and the dials are passed on the arm’s own configs 4ms
+ ✓ tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the lit-dial arm > a lit-dial identity that gains a surface reader is convicted as struck, not silently lit 1ms
+
+ Test Files  1 passed (1)
+      Tests  56 passed (56)
+   Start at  21:27:08
+   Duration  36.34s (transform 2.84s, setup 25ms, import 525ms, tests 35.70s, environment 0ms)
+

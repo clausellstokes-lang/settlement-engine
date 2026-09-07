@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 8,
+ "indices": [
+  660,
+  661,
+  662,
+  668,
+  670,
+  671,
+  672,
+  673,
+  674,
+  676,
+  677,
+  678,
+  679,
+  683,
+  684
+ ],
+ "claims": [
+  {
+   "index": 660,
+   "feature": "point of view and distance",
+   "claim": "Cadden says 'A Description of Earthsea' is told from outside the world of Earthsea.",
+   "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22is%20told%20from%20outside%20the%20world%20of%20Earthsea%22",
+   "quote": "is told from outside the world of Earthsea",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 661,
+   "feature": "annalist voice and deep time",
+   "claim": "Cadden says the book is true to the voice of the anthropologist examining the ways of the Kesh.",
+   "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22the%20voice%20of%20the%20anthropologist%20examining%20the%20ways%22",
+   "quote": "the voice of the anthropologist examining the ways",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 662,
+   "feature": "point of view and distance",
+   "claim": "Cadden says the book does not rely on any one narrating voice in the presentation of this anthropological text.",
+   "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22in%20the%20presentation%20of%20this%20anthropological%20text%22",
+   "quote": "in the presentation of this anthropological text",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 668,
+   "feature": "concrete sensory noun",
+   "claim": "An essay in that volume notes that Ai sees each keystone in the city of Erhenrang joined by red cement.",
+   "source": "An essay in Olander and Greenberg, eds., Ursula K. Le Guin (Taplinger, 1979)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00olan%20AND%20%22each%20keystone%20he%20sees%20in%20the%20city%20of%20Erhenrang%22",
+   "quote": "each keystone he sees in the city of Erhenrang",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 670,
+   "feature": "diction (native vs latinate)",
+   "claim": "Spivack says the language of A Wizard of Earthsea is largely Anglo-Saxon in diction.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22Saxon%20in%20diction%2C%20strongly%20alliterative%22",
+   "quote": "Saxon in diction, strongly alliterative",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 671,
+   "feature": "cadence and rhythm",
+   "claim": "Spivack says the alliteration in A Wizard of Earthsea is pervasive, recalling the oral tradition.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22The%20alliteration%20is%20pervasive%2C%20recalling%20the%20oral%20tradition%22",
+   "quote": "The alliteration is pervasive, recalling the oral tradition",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 672,
+   "feature": "place and institution description",
+   "claim": "Spivack says Le Guin draws on her anthropological background to create cultural concepts for her imaginary worlds.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22Drawing%20on%20her%20anthropological%20background%2C%20Le%20Guin%20is%20able%22",
+   "quote": "Drawing on her anthropological background, Le Guin is able",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 673,
+   "feature": "diction (native vs latinate)",
+   "claim": "Spivack says the vocabulary of Le Guin's poems is straightforward, with a diction austerely avoiding the Latinate or the ornate.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22a%20diction%20austerely%20avoiding%20the%20Latinate%20or%20the%20ornate%22",
+   "quote": "a diction austerely avoiding the Latinate or the ornate",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 674,
+   "feature": "diction (native vs latinate)",
+   "claim": "Spivack calls the diction of those poems homely and reminiscent of Robert Frost.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22The%20homely%20diction%20is%20reminiscent%20of%20Robert%20Frost%22",
+   "quote": "The homely diction is reminiscent of Robert Frost",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 676,
+   "feature": "plainness and economy",
+   "claim": "Bucknall says what Le Guin says of Tolkien's style is to a certain extent true of the way she writes herself.",
+   "source": "Barbara J. Bucknall, Ursula K. Le Guin (Frederick Ungar, 1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22is%20to%20a%20certain%20extent%20true%20of%20the%20way%20she%22",
+   "quote": "is to a certain extent true of the way she",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 677,
+   "feature": "register modulation",
+   "claim": "Bucknall says Le Guin's style varies from book to book and from character to character.",
+   "source": "Barbara J. Bucknall, Ursula K. Le Guin (1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22which%20varies%20from%20book%20to%20book%20and%20from%20character%22",
+   "quote": "which varies from book to book and from character",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 678,
+   "feature": "adjective and adverb discipline",
+   "claim": "Bucknall praises Le Guin for writing poetically while resisting the temptation to overwrite.",
+   "source": "Barbara J. Bucknall, Ursula K. Le Guin (1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22while%20resisting%20the%20temptation%20to%20overwrite%22",
+   "quote": "while resisting the temptation to overwrite",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 679,
+   "feature": "register modulation",
+   "claim": "Bucknall says Le Guin's style does not have the stately and heroic tone of The Lord of the Rings.",
+   "source": "Barbara J. Bucknall, Ursula K. Le Guin (1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22does%20not%20have%20the%20stately%20and%20heroic%20tone%22",
+   "quote": "does not have the stately and heroic tone",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 683,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin writes that Tolkien writes a plain, clear English.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973), quoted in Bucknall (1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22Tolkien%20writes%20a%20plain%2C%20clear%20English%22",
+   "quote": "Tolkien writes a plain, clear English",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 684,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin writes that Tolkien's vocabulary is not striking.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973), quoted in Bucknall (1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22Tolkien%E2%80%99s%20vocabulary%20is%20not%20striking%22",
+   "quote": "Tolkien’s vocabulary is not striking",
+   "page": "archive.org search-inside snippet"
+  }
+ ]
+}

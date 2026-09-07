@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 29,
+ "claims": [
+  {
+   "index": 589,
+   "feature": "place and institution description",
+   "claim": "Merwin tells writers to ask which encounter elements are better shown on a map than described in prose.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Outlines and Frameworks', D&D Beyond, 9 Oct 2019",
+   "url": "https://www.dndbeyond.com/posts/623-lets-design-an-adventure-outlines-and-frameworks",
+   "quote": "better represented in a map rather than strictly described in the text",
+   "page": "outline checklist"
+  },
+  {
+   "index": 590,
+   "feature": "place and institution description",
+   "claim": "For sandbox adventures Merwin recommends a less detailed encounter description leaning on the NPCs' resources so the DM can set it in any of several places.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Thinking Like a Designer', D&D Beyond, 2020",
+   "url": "https://www.dndbeyond.com/posts/753-lets-design-an-adventure-thinking-like-a-designer",
+   "quote": "a less-detailed description that relies on place",
+   "page": "audience and adventure type section"
+  },
+  {
+   "index": 591,
+   "feature": "dm-facing sentence",
+   "claim": "Merwin makes the test of an adventure's layout whether it serves the DM running it at the table.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Thinking Like a Designer', D&D Beyond, 2020",
+   "url": "https://www.dndbeyond.com/posts/753-lets-design-an-adventure-thinking-like-a-designer",
+   "quote": "serves the DM who will be running your content",
+   "page": "layout section"
+  },
+  {
+   "index": 592,
+   "feature": "place and institution description",
+   "claim": "Hartlage reports that Gygax's own Castle Greyhawk key gave most rooms a one-line note.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "he usually wrote a 1-line note for each room",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 593,
+   "feature": "plainness and economy",
+   "claim": "Judges Guild's Bob Bledsaw said referees told him they wanted only a skeletal framework of description.",
+   "source": "Bob Bledsaw, Dragon #27, quoted by David Hartlage, DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "a very skeletal framework",
+   "page": "Tegel Manor and minimal descriptions"
+  },
+  {
+   "index": 594,
+   "feature": "edition and house style",
+   "claim": "Hartlage credits Gygax's longer location descriptions in G1 Steading of the Hill Giant Chief (1978) with setting the pattern for later adventures.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "set the pattern for virtually every adventure to follow",
+   "page": "Gary Gygax sets the standard"
+  },
+  {
+   "index": 595,
+   "feature": "plainness and economy",
+   "claim": "Hartlage identifies the padding mechanism: the convention of long descriptions makes authors stretch a good middle sentence to an assigned length.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "pads it like a school paper stretched to an assigned length",
+   "page": "Longer descriptions"
+  },
+  {
+   "index": 596,
+   "feature": "place and institution description",
+   "claim": "Hartlage argues a location's length of description should follow its purpose in play, so a sheriff's kitchen needs no inventory.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "no one needs an item-by-item inventory of her kitchen",
+   "page": "Matching description to a location's purpose"
+  },
+  {
+   "index": 597,
+   "feature": "omission as information",
+   "claim": "Hartlage warns that excess description buries the details that would actually enter play.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "An avalanche of description does more than squander page count",
+   "page": "Matching description to a location's purpose"
+  },
+  {
+   "index": 598,
+   "feature": "boxed text form",
+   "claim": "Hartlage's defence of boxed text is that it consolidates and marks which features need describing.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "consolidates and identifies features that require description",
+   "page": "Boxed, read-aloud text"
+  },
+  {
+   "index": 599,
+   "feature": "edition and house style",
+   "claim": "Hartlage observes that Storm King's Thunder (2016) omits almost all read-aloud text, unlike Curse of Strahd which boxes every location.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "omits almost all read-aloud text",
+   "page": "Boxed, read-aloud text"
+  },
+  {
+   "index": 600,
+   "feature": "plainness and economy",
+   "claim": "Michael Curtis describes the one-page-dungeon style of Stonehell as giving the minimum information needed to run the dungeon.",
+   "source": "Michael Curtis, quoted by David Hartlage, DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "the minimum amount of information needed to run the dungeon",
+   "page": "The influence of one-page dungeons"
+  },
+  {
+   "index": 601,
+   "feature": "concrete sensory noun",
+   "claim": "Hartlage's rule for a dungeon key is that descriptions carry telling details and plot-critical information.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "focus on telling details and plot-critical information",
+   "page": "The ideal dungeon description"
+  },
+  {
+   "index": 602,
+   "feature": "concrete sensory noun",
+   "claim": "B11 King's Festival (1989) told DMs that good description goes beyond sight to noises, smells and touch.",
+   "source": "Carl Sargent, B11 King's Festival (TSR, 1989), quoted by David Hartlage, DMDavid, 2024",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "quote": "A good DM details more than simply what PCs see",
+   "page": "B11 King's Festival (1989) — Description and the senses"
+  },
+  {
+   "index": 603,
+   "feature": "per-speaker register",
+   "claim": "Keep on the Shadowfell (2008) told DMs to distinguish NPCs with an accent or favourite saying, a signature object, or a single personality adjective.",
+   "source": "Bruce Cordell and Mike Mearls, H1 Keep on the Shadowfell (2008), paraphrased with a quoted adjective list by David Hartlage, DMDavid, 2024",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "quote": "greedy, bored, suspicious, tired, enthusiastic",
+   "page": "H1 Keep on the Shadowfell (2008)"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 589,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Do any of your encounters contain elements better represented in a map rather than strictly described in the text?",
+   "note": "Raw HTML fetched with a browser UA (HTTP 200). Byline 'by Shawn Merwin', 'Oct 9, 2019', title matches. Quote exact in the 'Handouts, Maps, and Appendices' section; posed as a checklist question to the writer, exactly as claimed."
+  },
+  {
+   "index": 590,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "give a less-detailed description that relies on place, and more on the resources",
+   "note": "Raw page (HTTP 200), 'Let's Design an Adventure: Thinking Like a Designer', by Shawn Merwin, Mar 25, 2020. Sandbox limb exact ('Are you writing more of a sandbox-style adventure...'); kobold-ambush example says the DM can then set it 'in the mountain pass, the city streets, or the abandoned mines'. Caution for downstream use: the excerpted fragment stops mid-sentence and reads as if description relies ON place; the full sentence (apparently missing a 'less') puts the weight on the kobolds' resources, which is what the claim asserts."
+  },
+  {
+   "index": 591,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "make sure the layout you employ serves the DM who will be running your content",
+   "note": "Raw page, 'Layout' section: 'In the end, though, make sure the layout you employ serves the DM who will be running your content. How much flipping between pages will they be forced to do?' The at-the-table limb is carried by the page-flipping/usability sentences that follow."
+  },
+  {
+   "index": 592,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When D&D co-creator Gary Gygax created his first dungeon under Castle Greyhawk, he usually wrote a 1-line note for each room",
+   "note": "Raw HTML fetched direct (HTTP 200); the /tag/ URL serves the full post 'How much description should a dungeon key include?', 21 Nov 2016, by David Hartlage. Quote exact in the opening paragraph. 'usually ... for each room' supports 'most rooms'; the post's frame is the dungeon key, and it adds that Gygax shared the notes with Rob Kuntz."
+  },
+  {
+   "index": 593,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "all they desired was a very skeletal framework with the more time-consuming level details worked out",
+   "note": "Raw page, 'Tegel Manor and minimal descriptions': Bledsaw in Dragon magazine issue 27 - 'we had some bad feedback which indicated that judges felt that the actual description of dungeons was their domain and all they desired was a very skeletal framework'. Bledsaw is named a Judges Guild founder; 'judges' is the referee term, so 'referees told him' is supported."
+  },
+  {
+   "index": 594,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gary's longer descriptions set the pattern for virtually every adventure to follow",
+   "note": "Raw page, 'Gary Gygax sets the standard': 'Gary started publishing adventures with G1 Steading of the Hill Giant Chief (1978). He included generous descriptions for every location' then the quoted sentence. Title, year and credit limbs all on the page."
+  },
+  {
+   "index": 595,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This description takes a good, middle sentence and pads it like a school paper stretched to an assigned length",
+   "note": "Raw page, 'Longer descriptions', on the 1989 Gamescience Tegel B9 bedroom; the next sentence supplies the convention limb: 'The custom of longer description encourages authors to write something even when they have little to add.'"
+  },
+  {
+   "index": 596,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A location's purpose in the game should also figure into the length of its descriptions ... no one needs an item-by-item inventory of her kitchen",
+   "note": "Raw page, 'Matching description to a location's purpose'. Both limbs exact: purpose governs length, and the sheriff example ('If the player characters meet the sheriff about a wanted poster')."
+  },
+  {
+   "index": 597,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "An avalanche of description does more than squander page count. It buries many great details might actually enter play",
+   "note": "Raw page, same section; the following sentence is the Victor Wachter example buried in a page-long workroom description inside a 5-page mansion. (The source sentence carries a typo, 'many great details might actually enter play', reproduced here verbatim.)"
+  },
+  {
+   "index": 598,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "boxed text consolidates and identifies features that require description",
+   "note": "Raw page, 'Boxed, read-aloud text': 'Even though I seldom read-aloud text verbatim, boxed text consolidates and identifies features that require description. I like box text, but not every location needs it.' - a defence with a limit, as claimed."
+  },
+  {
+   "index": 599,
+   "verdict": "PARTIAL",
+   "trueWording": "His follow-up, Storm King's Thunder, omits almost all read-aloud text",
+   "unsupportedLimb": "the parenthetical '(2016)' publication year for Storm King's Thunder - the page dates neither adventure",
+   "note": "Quote exact and the contrast limb is exact too ('Curse of Strahd includes it for every location'), but the page gives no publication year for Storm King's Thunder; its only 2016 dates are the post's own date (November 21, 2016) and archive-sidebar labels. The year is independently correct but is not evidence from this page."
+  },
+  {
+   "index": 600,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Curtis explains that the format provides 'the minimum amount of information needed to run the dungeon'",
+   "note": "Raw page, 'The influence of one-page dungeons': 'Michael Curtis, author of the well-reviewed Stonehell megadungeon follows a style pioneered for one-page dungeons.' Quote continues '...allowing the referee to customize the adventure to his own (and his players') tastes.'"
+  },
+  {
+   "index": 601,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Descriptions should focus on telling details and plot-critical information-details I can use in play",
+   "note": "Raw page, 'The ideal dungeon description'; stated as Hartlage's own prescription for a dungeon key, followed by 'Don't bury the evocative bits in lavish descriptions of sleeping pallets and rubbish.'"
+  },
+  {
+   "index": 602,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A good DM details more than simply what PCs see. Don't forget noises ... smells ... and tactile senses",
+   "note": "Raw HTML fetched direct (HTTP 200); the /tag/ URL serves the full post 'From B1 to Pinebrook...', 30 January 2024, by David Hartlage. Heading 'B11 King's Festival (1989) by Carl Sargent', subhead 'Description and the senses', and the post says TSR started the new set with it - year, author and publisher limbs all on the page."
+  },
+  {
+   "index": 603,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "giving them an accent or favorite saying, showing them with a favorite thing like a lucky coin or pet cat, or adding a personality-related adjective",
+   "note": "Raw page, section 'H1 Keep on the Shadowfell (2008) by Bruce Cordell and Mike Mearls'. The quoted adjective run is exact and continues 'sly, nervous, dumb, zealous, and so on'; Hartlage paraphrases with the list quoted, exactly as the claim's source line states."
+  }
+ ]
+}

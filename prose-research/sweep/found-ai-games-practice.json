@@ -1,0 +1,1144 @@
+{
+ "claims": [
+  {
+   "feature": "fact hallucination in creature lore",
+   "claim": "In CALYPSO's 71-participant Discord deployment, the most common undesired behaviour DMs reported was the model inventing monster facts — giant spiders with telepathy, an insect with a poison ability, a frost salamander with wings.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "giving giant spiders telepathy",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "feature": "paraphrase instead of synthesis",
+   "claim": "Asked to summarise an encounter, GPT-3 (text-davinci-003) merely rephrased the monster reference text, which DMs said does not help run the encounter and over-focused on numeric stats.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "doesn't really help in running an encounter",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "feature": "prompt-phrase echo (degenerate output)",
+   "claim": "A phrase repeated in the prompt ('you may use information from mythology and common sense') came back verbatim in the output, forcing the authors to randomise prompt wording.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "include the phrase “mythology and common sense” verbatim",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "feature": "combat description without state",
+   "claim": "The model struggled to describe combat because it had no combat-state or map-placement information; DMs split between using output verbatim, mining vivid phrases, and rewriting entirely.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "the model struggled sometimes to describe combat",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "feature": "lore-less creatures get thin text",
+   "claim": "When a monster had only numeric stats and no published prose (real animals, golems), the summariser had nothing to draw on and produced unhelpful text until prompted to use 'thematic commonsense'.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "feature": "group-level homogenization",
+   "claim": "In a 36-participant within-subjects study, different users produced less semantically distinct ideas with ChatGPT than with an Oblique Strategies deck (p=.038); the effect is group-level (the LLM suggests similar ideas to different people), not individual fixation.",
+   "source": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text",
+   "url": "https://arxiv.org/html/2402.01536",
+   "quote": "less semantically distinct ideas with ChatGPT",
+   "page": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text"
+  },
+  {
+   "feature": "repetition on request for more",
+   "claim": "Participants found that asking ChatGPT for more ideas returned repeats of the same ones.",
+   "source": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text",
+   "url": "https://arxiv.org/html/2402.01536",
+   "quote": "When I want more, I want different more.",
+   "page": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text"
+  },
+  {
+   "feature": "easy but unrewarding",
+   "claim": "The single most common interview theme (n=10) was that ChatGPT was easier to use but less rewarding; n=8 found it less engaging.",
+   "source": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text",
+   "url": "https://arxiv.org/html/2402.01536",
+   "quote": "easier to use but less rewarding",
+   "page": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text"
+  },
+  {
+   "feature": "low inferential distance",
+   "claim": "The authors attribute homogenization partly to the low inferential distance between LLM outputs and apparently complete ideas — the output arrives looking finished, so users stop diverging.",
+   "source": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text",
+   "url": "https://arxiv.org/html/2402.01536",
+   "quote": "low inferential distance between LLM outputs",
+   "page": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text"
+  },
+  {
+   "feature": "intent-sparse text",
+   "claim": "Expanding a one-sentence instruction into a story delegates most of the ~1,500 decisions a 1,500-word piece needs to the model, leaving text with an unusually low ratio of human decision-making to length.",
+   "source": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally",
+   "url": "https://mkremins.github.io/publications/Dearth_In2Writing2024.pdf",
+   "quote": "unusually sparse in terms of expressive intent per word",
+   "page": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally"
+  },
+  {
+   "feature": "'soulless' explained",
+   "claim": "The recurring verdict that AI output is 'soulless' reflects the sparseness of intent in the outputs that are easiest to create and therefore dominate non-enthusiasts' impressions.",
+   "source": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally",
+   "url": "https://mkremins.github.io/publications/Dearth_In2Writing2024.pdf",
+   "quote": "reflects the sparseness of intent in the outputs",
+   "page": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally"
+  },
+  {
+   "feature": "experienced writers detect cliché",
+   "claim": "Experienced writers, with an ear for evocative language and an aversion to cliché, readily identify problems in AI-generated text; novices treat the machine as a creative authority and delegate more.",
+   "source": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally",
+   "url": "https://mkremins.github.io/publications/Dearth_In2Writing2024.pdf",
+   "quote": "a strong aversion to cliché",
+   "page": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally"
+  },
+  {
+   "feature": "homogenization by delegated decisions",
+   "claim": "A tool that makes similar creative decisions in similar usage scenarios homogenizes different users' outputs in proportion to how many decisions it makes directly.",
+   "source": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally",
+   "url": "https://mkremins.github.io/publications/Dearth_In2Writing2024.pdf",
+   "quote": "makes similar creative decisions in similar usage scenarios",
+   "page": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally"
+  },
+  {
+   "feature": "long-arc incoherence",
+   "claim": "LLMs are effective at open-domain story generation but struggle with long-term coherence, often failing to produce a satisfying overall arc or reader experience.",
+   "source": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)",
+   "url": "https://arxiv.org/html/2406.00554",
+   "quote": "often failing to produce a satisfying overall story arc",
+   "page": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)"
+  },
+  {
+   "feature": "semantic and syntactic homogeneity",
+   "claim": "Compared with human-written stories, LLM stories show unoriginality in both what happens and how sentences are built.",
+   "source": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)",
+   "url": "https://arxiv.org/html/2406.00554",
+   "quote": "unoriginality or homogeneity in both the semantic and syntactic aspects",
+   "page": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)"
+  },
+  {
+   "feature": "opening-paragraph convergence",
+   "claim": "Across ten-story sets per premise, earlier paragraphs were more homogeneous than later ones whether or not ASP guidance was used — openings converge hardest.",
+   "source": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)",
+   "url": "https://arxiv.org/html/2406.00554",
+   "quote": "",
+   "page": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)"
+  },
+  {
+   "feature": "post-training diversity collapse",
+   "claim": "PPO/DPO-style post-training raises output quality but lowers diversity; instruction-tuned models cluster as high-reward, low-diversity, and a deviation-weighted objective was needed to reach human-dataset diversity.",
+   "source": "Modifying Large Language Model Post-Training for Diverse Creative Writing (Chung, Kreminski et al.; COLM 2025)",
+   "url": "https://arxiv.org/html/2503.17126",
+   "quote": "high reward but with low diversity",
+   "page": "Modifying Large Language Model Post-Training for Diverse Creative Writing (Chung, Kreminski et al.; COLM 2025)"
+  },
+  {
+   "feature": "homogeneously positive arcs",
+   "claim": "Across 819 GPT-4 vs 819 human movie synopses, LLM stories are homogeneously positive and lack tension: GPT-4 produced 'Man in Hole' arcs over 50% of the time versus 28% for humans, and 'Riches to Rags' 1.3% versus 14.6%.",
+   "source": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "LLM stories are homogeneously positive and lack tension",
+   "page": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)"
+  },
+  {
+   "feature": "premature turning points",
+   "claim": "LLMs place the major setback and climax earlier in the timeline than human writers, compressing pacing and diminishing suspense and arousal.",
+   "source": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "introduce plot turning points earlier in the timeline",
+   "page": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)"
+  },
+  {
+   "feature": "avoidance of negative progressions",
+   "claim": "Models are biased toward certain macro arcs and lack narrative diversity, especially by avoiding negative plot progressions.",
+   "source": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "particularly in avoiding negative plot progressions",
+   "page": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)"
+  },
+  {
+   "feature": "flat late-story arousal",
+   "claim": "Human stories show higher arousal than LLM stories, and the gap widens after the midpoint toward the ending; explicit turning-point guidance raised suspense ratings ~40%.",
+   "source": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "",
+   "page": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)"
+  },
+  {
+   "feature": "skipped steps at scale",
+   "claim": "As story scale grows (larger maps, more characters), generated plans skip necessary steps while keeping a correct high-level structure.",
+   "source": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)",
+   "url": "https://arxiv.org/html/2506.10161",
+   "quote": "output plans tend to skip steps, leading to failure cases",
+   "page": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)"
+  },
+  {
+   "feature": "unmotivated character action",
+   "claim": "Most failed plans were causally sound but had characters acting without valid intention — Aladdin obtains the lamp and casts a spell with no established motive.",
+   "source": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)",
+   "url": "https://arxiv.org/html/2506.10161",
+   "quote": "character actions lacking valid intention",
+   "page": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)"
+  },
+  {
+   "feature": "conflict shortcuts",
+   "claim": "When asked for dramatic conflict, models produced shortcuts such as an adventurer repeatedly getting snakebites and healing himself rather than clashing commitment frames.",
+   "source": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)",
+   "url": "https://arxiv.org/html/2506.10161",
+   "quote": "",
+   "page": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)"
+  },
+  {
+   "feature": "context-limit collapse",
+   "claim": "Intentional-planning success drops sharply from 2 to 3 adventurers and again from 10 to 12, the latter likely from exceeding context limits; only RL-trained reasoning models handled intentionality and conflict.",
+   "source": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)",
+   "url": "https://arxiv.org/html/2506.10161",
+   "quote": "",
+   "page": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)"
+  },
+  {
+   "feature": "thematic over-determination",
+   "claim": "Across 61,608 stories, AI narrators explain the theme in 77% of stories versus 52% human; the pattern is over-determination.",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "AI spells out meaning rather than trusting the reader",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "feature": "bodily-metaphor emotion",
+   "claim": "AI conveys emotion through physical sensations and bodily metaphors in 81% of stories versus 38% human, and over-uses smell imagery (82% vs 57%).",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "physical sensations and bodily metaphors (81% vs. 38% human)",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "feature": "subplot-free single track",
+   "claim": "79% of AI stories have no subplots versus 57% human; AI favours tighter causal chains and protagonist-driven resolutions (69% vs 46%).",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "far fewer subplots (79% “no subplots” vs. 57%)",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "feature": "vague allusion, no named specifics",
+   "claim": "AI avoids naming real brands, places or works and uses vague allusions (72% vs 50%); humans cite specific texts and authors at nearly double the rate (47% vs 24%).",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "avoids naming real brands, places, or works",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "feature": "morally unambiguous protagonists",
+   "claim": "Human stories present morally ambivalent protagonists more often (59% vs 38%), span more locations, and carry more dialogue relative to narration.",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "present morally ambivalent protagonists more often (59% vs. 38%)",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "feature": "acceptance endings",
+   "claim": "AI resolutions favour internal understanding or acceptance (47% vs 27% human).",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "favor internal understanding or acceptance (47% vs. 27%)",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "feature": "human rarity in narrative space",
+   "claim": "Human narratives occupy a rarer, more dispersed region of narrative-feature space; narrative features alone detect AI at 93.2% macro-F1.",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "Human narratives are rarer.",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "feature": "generic without specification",
+   "claim": "Prompting current LLMs for stories without specifying style or substance yields output that feels generic.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "tends to produce output that feels generic",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  },
+  {
+   "feature": "over-compliant GM",
+   "claim": "An LLM game master accommodates even the most bizarre player requests with little regard for predetermined events, where a human GM would curb them.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "accommodate for even the most bizarre requests",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  },
+  {
+   "feature": "confident falsehood",
+   "claim": "LLMs output plausible but false statements because they are a probable word sequence.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "output plausible but false statements",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  },
+  {
+   "feature": "intent capture failure",
+   "claim": "LLMs sometimes fail to capture user intent, especially sarcasm, and repeated clarification frustrates the player.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "sometimes struggle to capture user intent",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  },
+  {
+   "feature": "detail drift",
+   "claim": "Pilot users of an LLM game master found story elements deviated from their intent and specific details changed, such as the number of enemies or items.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "such as the number of enemies or items",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "feature": "inventory amnesia",
+   "claim": "Asked what the character was holding, the GM often gave incoherent answers and forgot items just picked up; performance worsened as the game continued.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "the GM often provided incoherent responses",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "feature": "nonsensical combat outcomes",
+   "claim": "Unless actions were meticulously described, the prompt-engineered GM produced characters stumbling or self-injuring when it failed to identify a target.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "characters stumbling or self-injuring",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "feature": "over-compliance derailment",
+   "claim": "Over-compliance in the GM role makes the game veer drastically from the intended narrative, potentially irreparably.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "veering drastically from the intended narrative",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "feature": "immersion-harming dialogue",
+   "claim": "Poorly generated dialogue or incoherent arcs can disrupt immersion or actively harm player experience, undermining the engagement the system was meant to foster.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "poorly generated dialogue or incoherent narrative arcs",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "feature": "voice as a missing dimension",
+   "claim": "A 10-expert Delphi panel added 'Voice' as a quality dimension because naturalness did not capture tone; a distinctive voice is a critical marker of story quality distinct from plot.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "a distinctive and compelling narrative voice",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "feature": "genre misalignment",
+   "claim": "Producing a hard-boiled detective story when fantasy was requested was rated a must-be failure regardless of technical competence.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "producing a hard-boiled detective story when a fantasy narrative is requested",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "feature": "unpredictable quality variance",
+   "claim": "Even with well-crafted prompts, generated quality varies unpredictably across sessions, with trends toward overly positive or uninspired endings.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "feature": "no mental model",
+   "claim": "LLMs cannot read a text, form a mental model of it, and then use that model; they only produce babbled text.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "All they can do is produce a stream of babbled text.",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "feature": "continuity loss mid-scene",
+   "claim": "In a ChatGPT Lasers & Feelings playtest transcript, the model forgot everyone was aboard ships and turned the attacking pirates into lost travellers within a few turns.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "ChatGPT momentarily forgets that everyone is onboard ships.",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "feature": "hallucination as word-guessing",
+   "claim": "'Hallucination' misdescribes the failure: there is no false model, only a guessed word that matched training patterns and did not conform to reality.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "It's just words. There is no underlying mental model",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "feature": "simulacra without totality",
+   "claim": "Individual moments read as good simulacra, but the whole is random babble because a GM's job is to hold and update a canonical model of the world.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "the totality of the experience is nothing more than random babble",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "feature": "rules not applied",
+   "claim": "ChatGPT violated the one-page ruleset's two core mechanics within the first turns (no complication after a success, arithmetic wrong on the target number).",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "feature": "telling emotion instead of showing",
+   "claim": "Read-aloud announces 'the desperate cry of a woman in distress' and that a mask 'emanates a palpable malevolence' instead of letting players feel it.",
+   "source": "tenfootpole.org — The Curse of the Swamp (Bryce Lynch review, 2024-06-01, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9177",
+   "quote": "You're telling people things. You want to SHOW people things.",
+   "page": "tenfootpole.org — The Curse of the Swamp (Bryce Lynch review, 2024-06-01, plus comments)"
+  },
+  {
+   "feature": "AI-style prose recognised by readers",
+   "claim": "Commenters flagged the prose as AI or EASL and the publisher's reply as written in ChatGPT style; hooks were 'standard please help me stuff, very abstract'.",
+   "source": "tenfootpole.org — The Curse of the Swamp (Bryce Lynch review, 2024-06-01, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9177",
+   "quote": "the prose reeks of either EASL or AI",
+   "page": "tenfootpole.org — The Curse of the Swamp (Bryce Lynch review, 2024-06-01, plus comments)"
+  },
+  {
+   "feature": "content-free padding openers",
+   "claim": "Room openers like 'Arriving at the house, the PCs see a strange sight: the structure appears to be…' say nothing and can be deleted without impact; every encounter does this.",
+   "source": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9471",
+   "quote": "Note the padding. Note how it doesn't say ANYTHING.",
+   "page": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)"
+  },
+  {
+   "feature": "ChatGPT default room-description style",
+   "claim": "A commenter identifies the padding as ChatGPT's default when asked to 'write a room description for a D&D game'; 'be brief' removes it, but the author must first see it as meaningless.",
+   "source": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9471",
+   "quote": "A tell-tale sign of ChatGPT, btw. It's its default style",
+   "page": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)"
+  },
+  {
+   "feature": "training corpus mediocrity",
+   "claim": "Commenters note the model's style inherits the mediocrity of the typical D&D adventure writing it was trained on.",
+   "source": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9471",
+   "quote": "the typical D&D adventure writing ChatGPT was trained on",
+   "page": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)"
+  },
+  {
+   "feature": "abstract adjective vs concrete detail",
+   "claim": "The review contrasts the module's weak abstract adjectives with the concrete detail a good description needs.",
+   "source": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9471",
+   "quote": "",
+   "page": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)"
+  },
+  {
+   "feature": "second-person action narration",
+   "claim": "The intro read-aloud is full of second-person narration of the players' own actions, which a commenter attributes to ChatGPT's default unless told 'not to describe my actions'.",
+   "source": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9189",
+   "quote": "YOU step off the boat. YOU see a so and so.",
+   "page": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)"
+  },
+  {
+   "feature": "identical prompts yield identical corridors",
+   "claim": "A commenter received the module's exact corridor phrase from ChatGPT a year earlier for a different sewer adventure — same prompt, same output.",
+   "source": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9189",
+   "quote": "the results will be almost or exactly the same",
+   "page": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)"
+  },
+  {
+   "feature": "read-aloud/DM-text boundary blur",
+   "claim": "No typographic distinction between read-aloud and DM text; the long intro diverts player attention.",
+   "source": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9189",
+   "quote": "It just sort of all runs together",
+   "page": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)"
+  },
+  {
+   "feature": "stock decay-and-dripping sensory line",
+   "claim": "The module's 'stench of decay… dripping water echoes off the damp walls' line is cited as the predictable generated sensory opener; three dock encounters reuse identical read-aloud.",
+   "source": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9189",
+   "quote": "",
+   "page": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)"
+  },
+  {
+   "feature": "backstory for everything",
+   "claim": "Everything in the module gets a backstory and the read-aloud reveals all details, so players need not engage in the back-and-forth that is the heart of play; a commenter asks whether the publisher relies on AI.",
+   "source": "tenfootpole.org — The Temple of the Serpent Queen (Bryce Lynch review, 2024-08-07, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9302",
+   "quote": "",
+   "page": "tenfootpole.org — The Temple of the Serpent Queen (Bryce Lynch review, 2024-08-07, plus comments)"
+  },
+  {
+   "feature": "plausible word-sequences (technobabble)",
+   "claim": "ChatGPT's explanations are superficially plausible technobabble that get less clear on inspection because it is generating plausible word-sequences with no idea what they mean.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "quote": "just generating plausible word-sequences",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)"
+  },
+  {
+   "feature": "spatial nonsense",
+   "claim": "Generated rooms had trap doors in the ceiling that characters fall through; the bot does not understand up and down.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "quote": "does not understand the implications of “up” and “down”",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)"
+  },
+  {
+   "feature": "fluff without mechanics",
+   "claim": "A generated 'burst of flame' had no damage stats — pure fluff with no game effect.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "quote": "it's pure fluff with no effect",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)"
+  },
+  {
+   "feature": "source confabulation",
+   "claim": "Monsters were attributed to the Fiend Folio that appear in no version of it; the model knows they are discussed near the Fiend Folio without knowing its contents.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "quote": "without actually knowing what's in the Fiend Folio",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)"
+  },
+  {
+   "feature": "self-similarity across generations",
+   "claim": "A 'unique' trick room repeated elements of the previous room; the experimenter concluded he would have to seed the model with his own elements.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "quote": "there were similarities with the original room",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)"
+  },
+  {
+   "feature": "templated NPC blocks",
+   "claim": "Beoric's module-generation transcript shows every NPC in the same template and motivations reused verbatim ('greed and loyalty to their boss'), with guard rooms repeated across levels.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 1 (Beoric's experiment, Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/",
+   "quote": "",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 1 (Beoric's experiment, Dec 2022)"
+  },
+  {
+   "feature": "illusion of help",
+   "claim": "Mike Shea finds LLMs useful for small coding projects but not for RPGs: they offer the illusion of help, and his best RPG work is his own.",
+   "source": "Sly Flourish — The Best LLM for Generating RPG Stuff: Your Brain (Mike Shea, 2024-09-30)",
+   "url": "https://slyflourish.com/best_llm.html",
+   "quote": "They offer the illusion of help",
+   "page": "Sly Flourish — The Best LLM for Generating RPG Stuff: Your Brain (Mike Shea, 2024-09-30)"
+  },
+  {
+   "feature": "slop",
+   "claim": "LLM output fills the internet with slop; he lists this alongside IP, energy and labour objections.",
+   "source": "Sly Flourish — The Best LLM for Generating RPG Stuff: Your Brain (Mike Shea, 2024-09-30)",
+   "url": "https://slyflourish.com/best_llm.html",
+   "quote": "They fill the internet with slop.",
+   "page": "Sly Flourish — The Best LLM for Generating RPG Stuff: Your Brain (Mike Shea, 2024-09-30)"
+  },
+  {
+   "feature": "length benchmark (human craft)",
+   "claim": "Shea's read-aloud standard: keep it short and powerful, know its purpose, and cut 25% of any draft — the bar generated boxed text is measured against by reviewers.",
+   "source": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08) — human craft benchmark",
+   "url": "https://slyflourish.com/writing_awesome_readaloud_text.html",
+   "quote": "Keep it short and keep it powerful.",
+   "page": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08) — human craft benchmark"
+  },
+  {
+   "feature": "clarity benchmark (human craft)",
+   "claim": "Shea's 'Tell, Don't Show': players understand about half of what is described, so state the facts that matter plainly while keeping flavour — the opposite of the padded, withholding generated style.",
+   "source": "Sly Flourish — Tell, Don't Show (Mike Shea, 2024-02-12) — human craft benchmark",
+   "url": "https://slyflourish.com/tell_dont_show.html",
+   "quote": "",
+   "page": "Sly Flourish — Tell, Don't Show (Mike Shea, 2024-02-12) — human craft benchmark"
+  },
+  {
+   "feature": "needs a lot of editing",
+   "claim": "Co-authoring with GPT-2 felt like working with a human writer who needs heavy editing; she kept the bits she liked and re-prompted.",
+   "source": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)",
+   "url": "https://emshort.blog/2021/07/18/the-uncanny-deck-co-authoring-with-gpt-2/",
+   "quote": "a human writer who just needs a lot of editing",
+   "page": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)"
+  },
+  {
+   "feature": "shallow associations",
+   "claim": "Deeper thematic associations ('salt is associated with archiving') needed far more training data to be remembered than surface form.",
+   "source": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)",
+   "url": "https://emshort.blog/2021/07/18/the-uncanny-deck-co-authoring-with-gpt-2/",
+   "quote": "takes more training data to tune it to remember deeper associations",
+   "page": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)"
+  },
+  {
+   "feature": "constraint drift",
+   "claim": "The model spontaneously produced rank-and-suit combinations absent from the corpus — welcome for the fantasy deck, but outside the intended parameters.",
+   "source": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)",
+   "url": "https://emshort.blog/2021/07/18/the-uncanny-deck-co-authoring-with-gpt-2/",
+   "quote": "spontaneously pop up a combo of rank and suit",
+   "page": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)"
+  },
+  {
+   "feature": "boring, robotic baseline",
+   "claim": "A basic language model produces boring, robotic answers; the writer must condition it with backstory, personality and dialogue style before it sounds like anyone.",
+   "source": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)",
+   "url": "https://news.ubisoft.com/en-us/article/5qXdxhshJBXoanFZApdG3L/how-ubisofts-new-generative-ai-prototype-changes-the-narrative-for-npcs",
+   "quote": "it would produce boring, robotic answers",
+   "page": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)"
+  },
+  {
+   "feature": "character drift",
+   "claim": "The team constantly asks whether an answer is something the character would say and, when not, traces what in the model made it stray from the writer's vision.",
+   "source": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)",
+   "url": "https://news.ubisoft.com/en-us/article/5qXdxhshJBXoanFZApdG3L/how-ubisofts-new-generative-ai-prototype-changes-the-narrative-for-npcs",
+   "quote": "Would Lisa say this?",
+   "page": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)"
+  },
+  {
+   "feature": "bias-driven flirtation",
+   "claim": "An attractive female character's answers veered flirtatious and seductive and had to be reprogrammed.",
+   "source": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)",
+   "url": "https://news.ubisoft.com/en-us/article/5qXdxhshJBXoanFZApdG3L/how-ubisofts-new-generative-ai-prototype-changes-the-narrative-for-npcs",
+   "quote": "veered towards flirtatious and seductive",
+   "page": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)"
+  },
+  {
+   "feature": "coherence needs lots of authored content",
+   "claim": "Narrative director Virginie Mosser: NEO NPCs need a lot of written content — backstory, flow, qualities, colloquialisms — to be coherent and have real personality.",
+   "source": "Game Developer — How do Ubisoft's AI-driven NPCs handle dynamic player interactions? (Michael Higham, 2024-03-19, hands-on)",
+   "url": "https://www.gamedeveloper.com/design/how-do-ubisoft-s-ai-driven-npcs-handle-dynamic-player-interactions-",
+   "quote": "a lot of content for them to be more coherent",
+   "page": "Game Developer — How do Ubisoft's AI-driven NPCs handle dynamic player interactions? (Michael Higham, 2024-03-19, hands-on)"
+  },
+  {
+   "feature": "guardrails steer to optimal choice",
+   "claim": "The third demo scenario played like a traditional dialogue tree with an optimal choice, revealing guardrails steering the conversation to the narrative objective.",
+   "source": "Game Developer — How do Ubisoft's AI-driven NPCs handle dynamic player interactions? (Michael Higham, 2024-03-19, hands-on)",
+   "url": "https://www.gamedeveloper.com/design/how-do-ubisoft-s-ai-driven-npcs-handle-dynamic-player-interactions-",
+   "quote": "",
+   "page": "Game Developer — How do Ubisoft's AI-driven NPCs handle dynamic player interactions? (Michael Higham, 2024-03-19, hands-on)"
+  },
+  {
+   "feature": "bland chatbot demos",
+   "claim": "Tommy Thompson finds these chatbot NPC demos bland because they focus purely on the linguistic aspect.",
+   "source": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)",
+   "url": "https://www.aiandgames.com/p/ubisofts-teammates-demo-and-their",
+   "quote": "I find these chatbot demos really bland",
+   "page": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)"
+  },
+  {
+   "feature": "two writers, three months, twenty minutes",
+   "claim": "The 20–30 minute NEO NPC demo was the end-result of two narrative designers working full-time for three months writing high-quality content so the universe held up.",
+   "source": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)",
+   "url": "https://www.aiandgames.com/p/ubisofts-teammates-demo-and-their",
+   "quote": "two narrative designers working full-time",
+   "page": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)"
+  },
+  {
+   "feature": "robotic delivery",
+   "claim": "In the 2025 Teammates demo the NPCs' dialogue and delivery were rather robotic, and latency added a second or two per exchange.",
+   "source": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)",
+   "url": "https://www.aiandgames.com/p/ubisofts-teammates-demo-and-their",
+   "quote": "rather robotic, which makes sense given they're robots",
+   "page": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)"
+  },
+  {
+   "feature": "no desire to converse",
+   "claim": "Thompson did not strike up conversation with the NPCs because he felt no need to; NPCs should respond to actions.",
+   "source": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)",
+   "url": "https://www.aiandgames.com/p/ubisofts-teammates-demo-and-their",
+   "quote": "I don't feel the need to engage in dialogue with them",
+   "page": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)"
+  },
+  {
+   "feature": "stock deflection lines",
+   "claim": "Square Enix's Portopia NLU assistant answers most inputs with 'Hmm…', 'Maybe we should focus on the task at hand?' and 'I'm not sure what to say about that'.",
+   "source": "PC Gamer — Square Enix's free 'AI tech preview' has a Steam user rating of Very Negative and deserves it (Jody Macgregor, 2023-04-24)",
+   "url": "https://www.pcgamer.com/square-enixs-free-ai-tech-preview-has-a-steam-user-rating-of-very-negative-and-deserves-it/",
+   "quote": "Maybe we should focus on the task at hand?",
+   "page": "PC Gamer — Square Enix's free 'AI tech preview' has a Steam user rating of Very Negative and deserves it (Jody Macgregor, 2023-04-24)"
+  },
+  {
+   "feature": "exact-wording demand",
+   "claim": "'ask about murder' and 'show photograph to bartender' failed; only 'Show the photograph of Kozo Yamakawa to the bartender' worked — the exact problem the AI was meant to solve.",
+   "source": "PC Gamer — Square Enix's free 'AI tech preview' has a Steam user rating of Very Negative and deserves it (Jody Macgregor, 2023-04-24)",
+   "url": "https://www.pcgamer.com/square-enixs-free-ai-tech-preview-has-a-steam-user-rating-of-very-negative-and-deserves-it/",
+   "quote": "unable to do something because I couldn't find the right wording",
+   "page": "PC Gamer — Square Enix's free 'AI tech preview' has a Steam user rating of Very Negative and deserves it (Jody Macgregor, 2023-04-24)"
+  },
+  {
+   "feature": "NLG cut for safety",
+   "claim": "The natural-language generation feature was omitted from the release because of a risk of unethical replies, leaving only pre-written responses.",
+   "source": "Steam — SQUARE ENIX AI Tech Preview: THE PORTOPIA SERIAL MURDER CASE (store page; fetched 2026-09-06)",
+   "url": "https://store.steampowered.com/app/2280000/SQUARE_ENIX_AI_Tech_Preview_THE_PORTOPIA_SERIAL_MURDER_CASE/",
+   "quote": "a risk of the AI generating unethical replies",
+   "page": "Steam — SQUARE ENIX AI Tech Preview: THE PORTOPIA SERIAL MURDER CASE (store page; fetched 2026-09-06)"
+  },
+  {
+   "feature": "repeating phrases to progress",
+   "claim": "After 30 minutes Colantonio had barely progressed and was repeating the same few phrases; the investigation felt as unnatural as classic text adventures.",
+   "source": "Digital Trends — Square Enix's free AI game isn't selling me on the tech's power (Giovanni Colantonio, 2023-04-25)",
+   "url": "https://www.digitaltrends.com/gaming/square-enix-ai-game-portopia-impressions/",
+   "quote": "repeating the same few phrases over and over",
+   "page": "Digital Trends — Square Enix's free AI game isn't selling me on the tech's power (Giovanni Colantonio, 2023-04-25)"
+  },
+  {
+   "feature": "nothing beyond AI Dungeon",
+   "claim": "With generation removed, Colantonio asks what users are seeing that AI Dungeon did not show years earlier.",
+   "source": "Digital Trends — Square Enix's free AI game isn't selling me on the tech's power (Giovanni Colantonio, 2023-04-25)",
+   "url": "https://www.digitaltrends.com/gaming/square-enix-ai-game-portopia-impressions/",
+   "quote": "wasn't already shown in games like AI Dungeon years ago",
+   "page": "Digital Trends — Square Enix's free AI game isn't selling me on the tech's power (Giovanni Colantonio, 2023-04-25)"
+  },
+  {
+   "feature": "reception",
+   "claim": "At launch the demo sat at Very Negative with 236 reviews; as of 2026-09-06 the Steam page shows 15% positive of 476.",
+   "source": "Time Extension — Square Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With Negative Reviews (2023-04)",
+   "url": "https://www.timeextension.com/news/2023/04/square-enix-remaking-the-portopia-serial-murder-case-as-a-free-ai-tech-demo",
+   "quote": "a dumber input system than Zork",
+   "page": "Time Extension — Square Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With Negative Reviews (2023-04)"
+  },
+  {
+   "feature": "couldn't create great narrative",
+   "claim": "Keywords' three-developer team quickly found the technology couldn't write all the code or create great narrative and had to add human experts.",
+   "source": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)",
+   "url": "https://www.keywordsstudios.com/en/project-ava-exploring-genais-promising-future-in-game-production/",
+   "quote": "couldn't write all the code or create great narrative",
+   "page": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)"
+  },
+  {
+   "feature": "first drafts only",
+   "claim": "GenAI was useful for first drafts of dialogue and storyline brainstorming, not finished narrative.",
+   "source": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)",
+   "url": "https://www.keywordsstudios.com/en/project-ava-exploring-genais-promising-future-in-game-production/",
+   "quote": "first drafts of dialogue",
+   "page": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)"
+  },
+  {
+   "feature": "failed to generate significant portion",
+   "claim": "Even for a deliberately simple narrative-driven 2D game, GenAI failed to generate a significant portion of the code or planned assets.",
+   "source": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)",
+   "url": "https://www.keywordsstudios.com/en/project-ava-exploring-genais-promising-future-in-game-production/",
+   "quote": "failed to generate a significant portion",
+   "page": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)"
+  },
+  {
+   "feature": "unable to replace talent",
+   "claim": "After evaluating 400+ tools and pulling bench resource from seven studios, Keywords' FY2023 report concluded the tooling was unable to replace talent; the game will not be released.",
+   "source": "Game Developer — Keywords tried to make a game using GenAI but said the tech was 'unable to replace talent' (2024-03-13)",
+   "url": "https://www.gamedeveloper.com/production/keywords-tried-to-make-a-game-using-genai-but-said-the-tech-was-unable-to-replace-talent-",
+   "quote": "unable to replace talent",
+   "page": "Game Developer — Keywords tried to make a game using GenAI but said the tech was 'unable to replace talent' (2024-03-13)"
+  },
+  {
+   "feature": "generic dialogue vs specificity",
+   "claim": "Josh Sawyer: the demos seem impressive for a chatbot, but Obsidian's appeal is characters and replies that feel very specific, not generic dialogue.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "I hate to say it, but generic dialogue",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  },
+  {
+   "feature": "micro-moments not stories",
+   "claim": "Joon Sung Park: generative agents are good at believable micro-moments but unlikely to be used to create really fun stories.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "creating these believable, like, micro-moments",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  },
+  {
+   "feature": "pipeline of voices",
+   "claim": "Xalavier Nelson Jr.: eliminating junior writing positions means no mid-levels, no seniors, and no vibrant creative voices later.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "they don't become the vibrant, creative voices",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  },
+  {
+   "feature": "soulless machines",
+   "claim": "Eric Barone: even if AI becomes indistinguishable from the best writers, he wants games made by human beings.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "games made by soulless machines",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  },
+  {
+   "feature": "no thread or resolution",
+   "claim": "AI Dungeon's freeform tales have no recognisable thread or resolution; wrapping up is left to the player.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "no recognizable thread or resolution to any of its freeform tales",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "feature": "player does the heavy lifting",
+   "claim": "Even when a story makes occasional sense, the player is the one doing all the heavy lifting to make it cohere.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "you're the one doing all the heavy lifting",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "feature": "vague witnesses and non-sequiturs",
+   "claim": "A detective scenario became a fever dream of frustratingly vague witnesses and bizarre non-sequiturs, and not in an artfully noirish way.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "frustratingly vague witnesses and bizarre non-sequiturs",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "feature": "continuity errors",
+   "claim": "Told he was stabbed 'again' with no first time; a locked door becomes an open, lockless one.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "stabbed ‘again’ in my sleep (there was no first time)",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "feature": "no memory of premise",
+   "claim": "The bot has little to no memory of what was established or of the initial prompt, so stories hop off the rails unless constantly reminded.",
+   "source": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "quote": "little to no memory of what you've already established",
+   "page": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)"
+  },
+  {
+   "feature": "dead-end loops",
+   "claim": "Stories hit dead-end loops where whatever the player types returns the same reply.",
+   "source": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "quote": "I keep getting the same reply over and over again",
+   "page": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)"
+  },
+  {
+   "feature": "hijacks the protagonist",
+   "claim": "The bot takes control of the player character, swaps characters and hops genres to move things along.",
+   "source": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "quote": "",
+   "page": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)"
+  },
+  {
+   "feature": "abrupt shifts",
+   "claim": "The story could not decide whether the player had witnessed or survived a plane crash before another abrupt shift upended everything.",
+   "source": "Stuff — AI Dungeon review (Craig Grannell, c. 2020, 4/5) — fetched via curl",
+   "url": "https://www.stuff.tv/app-reviews/ai-dungeon/review",
+   "quote": "another abrupt shift that upended everything",
+   "page": "Stuff — AI Dungeon review (Craig Grannell, c. 2020, 4/5) — fetched via curl"
+  }
+ ],
+ "sourcesRead": [
+  {
+   "title": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "kind": "academic paper (games research)",
+   "substantive": true
+  },
+  {
+   "title": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text",
+   "url": "https://arxiv.org/html/2402.01536",
+   "kind": "academic paper",
+   "substantive": true
+  },
+  {
+   "title": "Max Kreminski — Publications (index page)",
+   "url": "https://mkremins.github.io/publications/",
+   "kind": "index page",
+   "substantive": false
+  },
+  {
+   "title": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally",
+   "url": "https://mkremins.github.io/publications/Dearth_In2Writing2024.pdf",
+   "kind": "academic position paper",
+   "substantive": true
+  },
+  {
+   "title": "Endless Forms Most Similar: The Dearth of the Author in AI-Supported Art (Kreminski; AI & Society 2025) — PDF, grep only",
+   "url": "https://mkremins.github.io/publications/Dearth_AI&S2025.pdf",
+   "kind": "academic paper (grep only, not read in full)",
+   "substantive": false
+  },
+  {
+   "title": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)",
+   "url": "https://arxiv.org/html/2406.00554",
+   "kind": "academic paper",
+   "substantive": true
+  },
+  {
+   "title": "Modifying Large Language Model Post-Training for Diverse Creative Writing (Chung, Kreminski et al.; COLM 2025)",
+   "url": "https://arxiv.org/html/2503.17126",
+   "kind": "academic paper",
+   "substantive": true
+  },
+  {
+   "title": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)",
+   "url": "https://arxiv.org/html/2506.10161",
+   "kind": "academic paper (games research)",
+   "substantive": true
+  },
+  {
+   "title": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "kind": "academic paper",
+   "substantive": true
+  },
+  {
+   "title": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "kind": "academic paper",
+   "substantive": true
+  },
+  {
+   "title": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "kind": "academic survey (games research)",
+   "substantive": true
+  },
+  {
+   "title": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "kind": "academic paper (games research)",
+   "substantive": true
+  },
+  {
+   "title": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "kind": "academic paper (games research, Delphi study)",
+   "substantive": true
+  },
+  {
+   "title": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "kind": "practitioner essay (RPG design)",
+   "substantive": true
+  },
+  {
+   "title": "The Alexandrian — posts tagged 'ai' (one post only)",
+   "url": "https://thealexandrian.net/wordpress/tag/ai",
+   "kind": "index page",
+   "substantive": false
+  },
+  {
+   "title": "tenfootpole.org — The Curse of the Swamp (Bryce Lynch review, 2024-06-01, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9177",
+   "kind": "adventure-module review",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9471",
+   "kind": "adventure-module review",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9189",
+   "kind": "adventure-module review",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org — The Temple of the Serpent Queen (Bryce Lynch review, 2024-08-07, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9302",
+   "kind": "adventure-module review",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "kind": "practitioner forum thread",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole forum — Making a Module using ChatGPT, page 1 (Beoric's experiment, Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/",
+   "kind": "practitioner forum thread",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org site search for 'chatgpt' (returned Nothing Found)",
+   "url": "https://tenfootpole.org/ironspike/?s=chatgpt",
+   "kind": "site search (dry)",
+   "substantive": false
+  },
+  {
+   "title": "Sly Flourish — The Best LLM for Generating RPG Stuff: Your Brain (Mike Shea, 2024-09-30)",
+   "url": "https://slyflourish.com/best_llm.html",
+   "kind": "practitioner essay (DM advice)",
+   "substantive": true
+  },
+  {
+   "title": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08) — human craft benchmark",
+   "url": "https://slyflourish.com/writing_awesome_readaloud_text.html",
+   "kind": "practitioner craft article (benchmark, no AI content)",
+   "substantive": true
+  },
+  {
+   "title": "Sly Flourish — Tell, Don't Show (Mike Shea, 2024-02-12) — human craft benchmark",
+   "url": "https://slyflourish.com/tell_dont_show.html",
+   "kind": "practitioner craft article (benchmark, no AI content)",
+   "substantive": true
+  },
+  {
+   "title": "Sly Flourish — article archive (index)",
+   "url": "https://slyflourish.com/archive.html",
+   "kind": "index page",
+   "substantive": false
+  },
+  {
+   "title": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)",
+   "url": "https://emshort.blog/2021/07/18/the-uncanny-deck-co-authoring-with-gpt-2/",
+   "kind": "practitioner essay (IF author)",
+   "substantive": true
+  },
+  {
+   "title": "Emily Short blog searches for LLM / large language model / ChatGPT / AI Dungeon / generative, and the 2023 archive (no LLM-era posts; 2024 and 2025 archives return 404)",
+   "url": "https://emshort.blog/?s=LLM",
+   "kind": "site search (dry)",
+   "substantive": false
+  },
+  {
+   "title": "The Game Design Roundtable #308 — Narrative AI with Emily Short (episode page; outline only, no transcript)",
+   "url": "https://thegamedesignroundtable.com/episode/308-narrative-ai-with-emily-short/",
+   "kind": "podcast page (no transcript)",
+   "substantive": false
+  },
+  {
+   "title": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)",
+   "url": "https://news.ubisoft.com/en-us/article/5qXdxhshJBXoanFZApdG3L/how-ubisofts-new-generative-ai-prototype-changes-the-narrative-for-npcs",
+   "kind": "primary corporate article (team interviews)",
+   "substantive": true
+  },
+  {
+   "title": "Game Developer — How do Ubisoft's AI-driven NPCs handle dynamic player interactions? (Michael Higham, 2024-03-19, hands-on)",
+   "url": "https://www.gamedeveloper.com/design/how-do-ubisoft-s-ai-driven-npcs-handle-dynamic-player-interactions-",
+   "kind": "trade journalism (hands-on)",
+   "substantive": true
+  },
+  {
+   "title": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)",
+   "url": "https://www.aiandgames.com/p/ubisofts-teammates-demo-and-their",
+   "kind": "expert analysis (game AI researcher)",
+   "substantive": true
+  },
+  {
+   "title": "Matt's Homepage — Ubisoft demoed AI NPC tech at GDC 2024 (2024-09-12)",
+   "url": "https://mattfife.com/?p=12230",
+   "kind": "personal blog (thin)",
+   "substantive": false
+  },
+  {
+   "title": "Time Extension — Square Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With Negative Reviews (2023-04)",
+   "url": "https://www.timeextension.com/news/2023/04/square-enix-remaking-the-portopia-serial-murder-case-as-a-free-ai-tech-demo",
+   "kind": "games journalism",
+   "substantive": true
+  },
+  {
+   "title": "PC Gamer — Square Enix's free 'AI tech preview' has a Steam user rating of Very Negative and deserves it (Jody Macgregor, 2023-04-24)",
+   "url": "https://www.pcgamer.com/square-enixs-free-ai-tech-preview-has-a-steam-user-rating-of-very-negative-and-deserves-it/",
+   "kind": "games journalism (hands-on)",
+   "substantive": true
+  },
+  {
+   "title": "Digital Trends — Square Enix's free AI game isn't selling me on the tech's power (Giovanni Colantonio, 2023-04-25)",
+   "url": "https://www.digitaltrends.com/gaming/square-enix-ai-game-portopia-impressions/",
+   "kind": "games journalism (hands-on)",
+   "substantive": true
+  },
+  {
+   "title": "Steam — SQUARE ENIX AI Tech Preview: THE PORTOPIA SERIAL MURDER CASE (store page; fetched 2026-09-06)",
+   "url": "https://store.steampowered.com/app/2280000/SQUARE_ENIX_AI_Tech_Preview_THE_PORTOPIA_SERIAL_MURDER_CASE/",
+   "kind": "primary (publisher description + review aggregate)",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia — The Portopia Serial Murder Case (2023 AI Tech Preview section; used as a map to PC Gamer and Digital Trends)",
+   "url": "https://en.wikipedia.org/wiki/The_Portopia_Serial_Murder_Case",
+   "kind": "aggregator",
+   "substantive": false
+  },
+  {
+   "title": "Game Developer — Keywords tried to make a game using GenAI but said the tech was 'unable to replace talent' (2024-03-13)",
+   "url": "https://www.gamedeveloper.com/production/keywords-tried-to-make-a-game-using-genai-but-said-the-tech-was-unable-to-replace-talent-",
+   "kind": "trade journalism (quotes FY2023 report)",
+   "substantive": true
+  },
+  {
+   "title": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)",
+   "url": "https://www.keywordsstudios.com/en/project-ava-exploring-genais-promising-future-in-game-production/",
+   "kind": "primary corporate write-up",
+   "substantive": true
+  },
+  {
+   "title": "PC Games Insider — Keywords tried making game with generative AI, failed (2024-03-15; echoes the same report)",
+   "url": "https://www.pcgamesinsider.biz/news/74358/keywords-tried-making-game-with-generative-ai-failed/",
+   "kind": "trade journalism (echo of gd-keywords)",
+   "substantive": false
+  },
+  {
+   "title": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "kind": "journalism (radio transcript)",
+   "substantive": true
+  },
+  {
+   "title": "GamesRadar — Indie game dev says generative AI means he couldn't make his 2021 breakout today (Xalavier Nelson Jr., 2024-01)",
+   "url": "https://www.gamesradar.com/indie-game-devs-says-generative-ai-means-he-couldnt-make-his-2021-breakout-today/",
+   "kind": "games journalism (off-angle: stock-image provenance, not prose)",
+   "substantive": false
+  },
+  {
+   "title": "TheGamer — Game Developers Band Together To Rubbish Nexon's Claims That Every Studio Is Using AI (2025-11-12)",
+   "url": "https://www.thegamer.com/developers-speak-out-against-nexon-claims-everybody-uses-ai/",
+   "kind": "games journalism (stance only, no prose critique)",
+   "substantive": false
+  },
+  {
+   "title": "Game Developer — Xalavier Nelson Jr. author page and 'Phantom inspiration and the ethical auteur' podcast page",
+   "url": "https://www.gamedeveloper.com/design/phantom-inspiration-and-the-ethical-auteur-with-xalavier-nelson-jr-",
+   "kind": "index / podcast page (no AI content)",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia — AI Dungeon (Reception section; used as a map to TapSmart, 148Apps, Stuff reviews)",
+   "url": "https://en.wikipedia.org/wiki/AI_Dungeon",
+   "kind": "aggregator",
+   "substantive": false
+  },
+  {
+   "title": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "kind": "app review (GPT-2 era)",
+   "substantive": true
+  },
+  {
+   "title": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "kind": "app review (GPT-2 era)",
+   "substantive": true
+  },
+  {
+   "title": "Stuff — AI Dungeon review (Craig Grannell, c. 2020, 4/5) — fetched via curl",
+   "url": "https://www.stuff.tv/app-reviews/ai-dungeon/review",
+   "kind": "app review (GPT-2 era)",
+   "substantive": true
+  },
+  {
+   "title": "Cheap and Easy Open-Ended Text Input for Interactive Emergent Narrative (Kreminski et al.; FDG 2024) — grep only",
+   "url": "https://mkremins.github.io/publications/PWIM_FDG2024.pdf",
+   "kind": "academic paper (grep only)",
+   "substantive": false
+  },
+  {
+   "title": "Unmet Creativity Support Needs in Computationally Supported Creative Writing (Kreminski & Martens; In2Writing 2022) — grep only",
+   "url": "https://mkremins.github.io/publications/WritingSupportNeeds_In2Writing2022.pdf",
+   "kind": "academic paper (grep only)",
+   "substantive": false
+  }
+ ]
+}

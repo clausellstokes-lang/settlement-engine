@@ -1,0 +1,29 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i435-449",
+ "lines": 70,
+ "firstTs": "2026-09-06T17:25:24.061Z",
+ "lastTs": "2026-09-06T17:29:56.990Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 14,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.lrb.co.uk/the-paper/v35/n07/john-lanchester/when-did-you-get-hooked",
+  "https://www.nybooks.com/articles/2013/11/07/women-and-thrones/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "tations was matched byte-for-byte against the stripped page text. Checkpoint written to `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i435-449.json` (15 claims, 15 verdicts, re-read after write).",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "aae08b7145841ba6a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-aae08b7145841ba6a.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i435-449.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 1,
+ "indices": [
+  420,
+  421,
+  422,
+  423,
+  424,
+  425,
+  426,
+  427,
+  428,
+  429,
+  430,
+  433,
+  435,
+  437,
+  438
+ ],
+ "claims": [
+  {
+   "index": 420,
+   "feature": "annalist voice and deep time",
+   "claim": "David Mitchell states that the cumulative effect of Le Guin’s stylistic restraint is that A Wizard of Earthsea reads like a tale handed down through generations of storytellers.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "reads like the retelling of a tale first told centuries",
+   "page": "section on style and voice"
+  },
+  {
+   "index": 421,
+   "feature": "place and institution description",
+   "claim": "David Mitchell states that a quoted passage describing an East Reach woman’s customary greeting gesture persuades precisely because its detail seems too particular to have been invented.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "Such specificity is persuasive because it sounds too detailed",
+   "page": "paragraph following the quoted East Reach greeting"
+  },
+  {
+   "index": 422,
+   "feature": "plainness and economy",
+   "claim": "David Mitchell names a studied neutrality of style as one of the two failure modes fantasy prose falls into, the other being a cod-historic narratorial voice.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "a studied neutrality of style tastes like clingfilm",
+   "page": "section on style and voice"
+  },
+  {
+   "index": 423,
+   "feature": "archaism",
+   "claim": "David Mitchell states that a cod-historic narratorial voice in a fantasy novel feels like being locked inside a medieval theme park.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "A cod-historic narratorial voice in a fantasy novel",
+   "page": "section on style and voice"
+  },
+  {
+   "index": 424,
+   "feature": "place and institution description",
+   "claim": "David Mitchell states that descriptions of people and places in A Wizard of Earthsea are frugal enough to leave the reader’s imagination room to collaborate.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "rich enough to nourish the reader’s imagination, but frugal enough",
+   "page": "section on style and voice"
+  },
+  {
+   "index": 425,
+   "feature": "point of view and distance",
+   "claim": "David Mitchell states that Le Guin gives minor characters who appear only briefly the psychological depth of oil paintings.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "thumbnail sketches contain the psychological depth of oil paintings",
+   "page": "paragraph on minor characters (Pechvarry)"
+  },
+  {
+   "index": 426,
+   "feature": "place and institution description",
+   "claim": "David Mitchell lists trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery as the mundane institutional furniture that makes Earthsea’s fantastical elements feel quotidian.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery",
+   "page": "paragraph beginning \"Earthsea is a fantasy world\""
+  },
+  {
+   "index": 427,
+   "feature": "withheld information and inference",
+   "claim": "David Mitchell states that A Wizard of Earthsea contains moments of foreshadowing and authorial omniscience but no tricks.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "moments of foreshadowing and authorial omniscience but no tricks",
+   "page": "section on style and voice"
+  },
+  {
+   "index": 428,
+   "feature": "plainness and economy",
+   "claim": "Margaret Atwood names graceful prose first among the qualities that earned Le Guin her awards.",
+   "source": "Margaret Atwood, \"The Queen of Quinkdom\", The New York Review of Books, 26 September 2002 issue",
+   "url": "https://www.nybooks.com/articles/2002/09/26/the-queen-of-quinkdom/",
+   "quote": "her graceful prose, carefully thought-through premises, psychological insight",
+   "page": "paragraph beginning \"Which brings us to Ursula K. Le Guin\""
+  },
+  {
+   "index": 429,
+   "feature": "civic record register",
+   "claim": "Margaret Atwood describes the task of Le Guin’s Ekumen envoys as non-invasive, non-directive understanding and recording of the societies they visit.",
+   "source": "Margaret Atwood, \"The Queen of Quinkdom\", The New York Review of Books, 26 September 2002 issue",
+   "url": "https://www.nybooks.com/articles/2002/09/26/the-queen-of-quinkdom/",
+   "quote": "non-directive understanding and recording are the functions required",
+   "page": "paragraph describing the Ekumen premise"
+  },
+  {
+   "index": 430,
+   "feature": "register modulation",
+   "claim": "Margaret Atwood states that Le Guin, though at times a movingly lyrical writer, has never avoided writing gore when the story required it.",
+   "source": "Margaret Atwood, \"The Queen of Quinkdom\", The New York Review of Books, 26 September 2002 issue",
+   "url": "https://www.nybooks.com/articles/2002/09/26/the-queen-of-quinkdom/",
+   "quote": "at times a movingly lyrical writer",
+   "page": "paragraph on \"Old Music and the Slave Women\""
+  },
+  {
+   "index": 433,
+   "feature": "plainness and economy",
+   "claim": "The unsigned Kirkus review of Tehanu calls the novel’s prose flawless and poetic and says even young readers will be beguiled by it.",
+   "source": "Kirkus Reviews, unsigned review of Tehanu, 1 February 1990",
+   "url": "https://www.kirkusreviews.com/book-reviews/ursula-k-le-guin/tehanu/",
+   "quote": "beguiled by the flawless, poetic prose",
+   "page": "review body"
+  },
+  {
+   "index": 435,
+   "feature": "annalist voice and deep time",
+   "claim": "The unsigned Kirkus review of Tehanu says Le Guin weaves contemporary concerns into a tale carrying the universality and dignity of legend.",
+   "source": "Kirkus Reviews, unsigned review of Tehanu, 1 February 1990",
+   "url": "https://www.kirkusreviews.com/book-reviews/ursula-k-le-guin/tehanu/",
+   "quote": "a tale with the universality and dignity of legend",
+   "page": "review body"
+  },
+  {
+   "index": 437,
+   "feature": "sentence length variation",
+   "claim": "Zadie Smith, in the Library of America tribute page, calls Le Guin’s sentences as elegant and beautiful as any written in the twentieth century.",
+   "source": "Zadie Smith, in \"Fellow writers remember Ursula K. Le Guin, 1929–2018\", Library of America, January 2018",
+   "url": "https://www.loa.org/news-and-views/1375-fellow-writers-remember-ursula-k-le-guin-1929-2018/",
+   "quote": "her sentences, as elegant and beautiful as any written",
+   "page": "Zadie Smith entry"
+  },
+  {
+   "index": 438,
+   "feature": "plainness and economy",
+   "claim": "Harold Bloom, in the Library of America tribute page, calls Le Guin an exquisite stylist.",
+   "source": "Harold Bloom, in \"Fellow writers remember Ursula K. Le Guin, 1929–2018\", Library of America, January 2018",
+   "url": "https://www.loa.org/news-and-views/1375-fellow-writers-remember-ursula-k-le-guin-1929-2018/",
+   "quote": "Ursula was an exquisite stylist",
+   "page": "Harold Bloom entry"
+  }
+ ]
+}

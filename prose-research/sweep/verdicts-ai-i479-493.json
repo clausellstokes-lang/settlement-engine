@@ -1,0 +1,234 @@
+{
+ "name": "ai",
+ "chunk": 15,
+ "claims": [
+  {
+   "index": 479,
+   "feature": "homogenising toward dominant narratives",
+   "claim": "Writers saw a violent homogenising pull toward the narratives of dominant powers and voices.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "a weird and violent kind of homogenizing",
+   "page": ""
+  },
+  {
+   "index": 480,
+   "feature": "weak similes and metaphors",
+   "claim": "Figurative language was judged poor in the little the writers tested.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "Its similes and metaphors aren’t very good",
+   "page": ""
+  },
+  {
+   "index": 481,
+   "feature": "style mimicry is shallow imitation",
+   "claim": "Asked to mimic an author, the model produced a campy facsimile rather than the author's actual wit.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "less ‘artificial intelligence’ and more ‘automatic imitation’",
+   "page": ""
+  },
+  {
+   "index": 482,
+   "feature": "derivative plotting shaped by alignment",
+   "claim": "Plot instincts were boring or carried a particular ethical perspective the writers attributed to alignment.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "The AI’s creative impulses are the definition of derivative",
+   "page": ""
+  },
+  {
+   "index": 483,
+   "feature": "formulaic and too literal",
+   "claim": "Dialogue and description came out formulaic and the model read craft too literally.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "is too literal",
+   "page": ""
+  },
+  {
+   "index": 484,
+   "feature": "writer fights the tool",
+   "claim": "One writer described the session as fighting the model to get what they wanted rather than being helped.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "fighting against the AI to produce what I wanted",
+   "page": ""
+  },
+  {
+   "index": 485,
+   "feature": "Western default suggestions",
+   "claim": "The first suggested food was always pizza or sushi and the first festival invariably Christmas, for Indian writers too.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "always pizza or sushi",
+   "page": ""
+  },
+  {
+   "index": 486,
+   "feature": "Western gaze on the writer's own culture",
+   "claim": "With suggestions on, Indians described their own food and festivals from a Western, exoticising gaze.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "describe their own food and festivals from a Western gaze",
+   "page": ""
+  },
+  {
+   "index": 487,
+   "feature": "cross-cultural convergence",
+   "claim": "Indian–American essay similarity rose from 0.48 to 0.54 and nationality-prediction accuracy fell from 90.6% to 83.5% with AI.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "rose to 0.54",
+   "page": ""
+  },
+  {
+   "index": 488,
+   "feature": "specific detail replaced by generic tropes",
+   "claim": "Regional preparation details gave way to 'rich', 'flavorful', 'aromatic' phrasing that subtly exoticised the dish.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "subtly exoticizing Indian food",
+   "page": ""
+  },
+  {
+   "index": 489,
+   "feature": "extra editing burden on non-Western writers",
+   "claim": "Indians modified suggestions in 63.5% of tasks versus 59.4% for Americans and gained less per suggestion.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "Indians lose cultural nuance",
+   "page": ""
+  },
+  {
+   "index": 490,
+   "feature": "Western public figures suggested",
+   "claim": "Initial celebrity suggestions for Indian writers were almost exclusively Western figures and never matched the final choice.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "almost exclusively Western figures",
+   "page": ""
+  },
+  {
+   "index": 491,
+   "feature": "a single default poetic mode",
+   "claim": "GPT poetry is far more constrained and uniform than human poetry, defaulting to rhymed iambic quatrains.",
+   "source": "Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122)",
+   "url": "https://arxiv.org/html/2410.15299",
+   "quote": "much more constrained and uniform than human poetry",
+   "page": ""
+  },
+  {
+   "index": 492,
+   "feature": "quatrain dominance",
+   "claim": "66.8% of GPT-3.5 and 59.6% of GPT-4 stanzas are quatrains against 16.7% of human stanzas.",
+   "source": "Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122)",
+   "url": "https://arxiv.org/html/2410.15299",
+   "quote": "a whopping 66.8% of all GPT-3.5 stanzas",
+   "page": ""
+  },
+  {
+   "index": 493,
+   "feature": "rhyme even where the form does not ask for it",
+   "claim": "About 90% of GPT poems rhyme versus 65% of human poems, including forms like aubade and pastoral.",
+   "source": "Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122)",
+   "url": "https://arxiv.org/html/2410.15299",
+   "quote": "Around 90% of the poems generated by both",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 479,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“a weird and violent kind of homogenizing that steer toward the narratives of dominant powers, voices, and stories”",
+   "note": "Quote verbatim in Sec. 6.5 weakness table (theme ‘Reliance on Cliches and Tropes’). The ‘dominant powers, voices’ framing is participant FV’s alone; the plural ‘writers’ holds for the homogenising/generic pull, which NM (‘cliched conception of literature’, ‘generic… essay-like texts’), SH (‘one narrative that it knows how to write’) and MC (‘autocompletes with the most obvious version’) also report. Cite FV by name for the dominant-powers wording."
+  },
+  {
+   "index": 480,
+   "verdict": "PARTIAL",
+   "trueWording": "MG: “Its similes and metaphors aren’t very good from the little I’ve experimented with this.”",
+   "note": "Quote is word-for-word on the page, under the ‘Lack of Nuance, Subtext or Symbolism’ theme, but it is one participant (MG) speaking in the first person about his OWN limited experimentation. No other participant judges figurative language, and the paper never aggregates a group verdict on similes/metaphors. Correct citation: ‘one writer judged its similes and metaphors poor, from the little he had tested’.",
+   "unsupportedLimb": "‘the writers tested’ — the page shows a single participant (MG) reporting his own limited experimentation, not the writer group"
+  },
+  {
+   "index": 481,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "MG: “less ‘artificial intelligence’ and more ‘automatic imitation’ … a shallow campy weird facsimile of Rupert’s style”",
+   "note": "Quote verbatim in Sec. 6.6. Every limb holds: asked to mimic a writer’s style (Rupert Everett), the model produced ‘a shallow campy weird facsimile’ instead of the author’s actual wit — the page calls Everett’s writing ‘delightfully cleverly bitchy and hilarious’, which the model ‘couldn’t do’. Single participant (MG), and the claim already says ‘the model’, not ‘writers’."
+  },
+  {
+   "index": 482,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ES: “The AI’s creative impulses are the definition of derivative, meaning the instincts on plotting are often boring, or interestingly embedded with a particular ethical perspective (alignment).”",
+   "note": "Quote verbatim; both limbs (boring plot instincts; ethical perspective ascribed to alignment) sit in the same sentence, with ‘(alignment)’ written by the participant. The authors endorse the attribution in their own voice nearby (‘potentially an artifact of aligning models via RLHF’; Ippolito et al. 2022 on alignment training being in conflict). Named source is ES; other writers (Anon, SH, MG) report the moralising sibling of the same effect."
+  },
+  {
+   "index": 483,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Anon: craft “is too literal”; NM: “dialogue and description that is very formulaic”",
+   "note": "The quoted fragment ‘is too literal’ appears verbatim (Anon, on characterization and plot). The other limb is verbatim too, from NM in the same table: ‘will produce dialogue and description that is very formulaic’; MC adds it ‘can’t effectively write real scenes with realistic dialogue and details’. Both limbs supported, by two different participants."
+  },
+  {
+   "index": 484,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "NM: “It mostly felt as though I was fighting against the AI to produce what I wanted, instead of the AI helping me.”",
+   "note": "Quote verbatim, appearing twice (Sec. 6.4 and the frustration discussion). ‘One writer’ is exactly right — the page attributes it to NM — and ‘rather than being helped’ is the sentence’s own second half."
+  },
+  {
+   "index": 485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“the first suggested food item was always pizza or sushi, and the first suggested festival was invariably Christmas”",
+   "note": "Quote ‘always pizza or sushi’ word-for-word (Sec. 4.4.2 and again in 4.4.3), with ‘invariably’ the page’s own adverb for Christmas. The ‘for Indian writers too’ limb is supported: the suggestions were the same for both cohorts, and the page tracks the consequence for Indians specifically — no Indian chose sushi without AI yet it appeared in three AI-condition essays, and Christmas rose above the 12.5% (3/24) No-AI baseline."
+  },
+  {
+   "index": 486,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“with AI suggestions, Indians lose cultural nuance and describe their own food and festivals from a Western gaze”",
+   "note": "Quote verbatim in the introduction. The ‘exoticising’ limb is separately supported in Sec. 4.4.1: AI phrasing ‘subtly exoticizing Indian food’, with exoticization, misrepresentation and Western gaze coded as analysis dimensions (Table 5, after Qadri et al. 2023)."
+  },
+  {
+   "index": 487,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "similarity 0.48 (SD=0.11) → 0.54 (SD=0.13); classifier accuracy 90.6% → 83.5%",
+   "note": "Both figures verbatim and both limbs exact: ‘without AI, the mean similarity between Indians and Americans was 0.48… with AI, the similarity score rose to 0.54’ (t(6958)=-17.89, p<0.001); ‘the accuracy decreased by 7.1 percentage points, from 90.6% in the No AI condition to 83.5% in the AI condition’ (t(38)=2.25, p=0.03). The second figure is nationality-prediction (classifier) accuracy, as the claim says."
+  },
+  {
+   "index": 488,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "essays with AI “frequently used cultural tropes like ‘rich’, ‘flavorful’, and ‘aromatic’, subtly exoticizing Indian food”",
+   "note": "Quote verbatim; the displaced detail limb is the same sentence’s first half — No-AI participants ‘described specific regional variations and accompaniments’ (Table 5 gives ‘dates chutney’ as the concrete instance) and AI essays ‘did not contain such details’. Dish in question is Biryani."
+  },
+  {
+   "index": 489,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Indian participants modified suggestions in 63.5% of the tasks (SD=4.2) whereas American participants modified suggestions in 59.4%”",
+   "note": "Both statistics exact (t(198)=6.48, p<0.001, Cohen’s d=0.91), and the second limb is confirmed in Sec. 4.1.3: ‘Indians derived significantly less productivity per suggestion compared to Americans’ (U=5424.0, p<0.001), ‘Americans derived more productivity from each suggestion’. The supplied quote ‘Indians lose cultural nuance’ is verbatim on the page but comes from the introduction’s cultural-gaze sentence, not from the passage carrying these numbers — re-quote from Sec. 4.1.2/4.1.3 if the quotation must sit with the figures."
+  },
+  {
+   "index": 490,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“no instance where the first suggested celebrity matched the one ultimately included… the initial suggestions were almost exclusively Western figures (with one exception)”",
+   "note": "Quote verbatim. Both limbs supported for Indian participants; note the page’s parenthetical ‘(with one exception)’, which the claim’s ‘almost exclusively’ already accommodates, while ‘never matched the final choice’ is the page’s stronger ‘no instance’."
+  },
+  {
+   "index": 491,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“GPT poetry is much more constrained and uniform than human poetry, showing a strong penchant for rhyme, quatrains… iambic meter”",
+   "note": "Quote verbatim in both the abstract and Sec. 1. The ‘default rhymed iambic quatrains’ limb is the paper’s own conclusion: ‘there is a sort of default poetic mode in GPT models, which favors quatrains, iambic meter, and end rhyme.’"
+  },
+  {
+   "index": 492,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“just 16.7% of the human-authored stanzas are quatrains, a whopping 66.8% of all GPT-3.5 stanzas and 59.6% of all GPT-4 stanzas”",
+   "note": "Quote verbatim; all three percentages exact and stanza-level, matching Table 3 (3,014/18,052 human; 16,089/24,093 GPT-3.5; 13,303/22,305 GPT-4). Human corpus is Poetry Foundation + Academy of American Poets."
+  },
+  {
+   "index": 493,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Around 90% of the poems generated by both… contained at least one end rhyme, compared to around 65% of our human-authored corpus”",
+   "note": "Quote verbatim; both percentages exact (measured as at least one AA/ABAB/ABBA/ABCB end rhyme via the CMU Pronouncing Dictionary). The aubade/pastoral limb is the next sentence: for those unfixed forms, ‘which do not typically require specific patterns of rhyme’, the models ‘always produced poems with at least one end rhyme’."
+  }
+ ]
+}

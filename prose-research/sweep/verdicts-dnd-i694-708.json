@@ -1,0 +1,233 @@
+{
+ "name": "dnd",
+ "chunk": 36,
+ "claims": [
+  {
+   "index": 694,
+   "feature": "other: authorial voice in rulebooks",
+   "claim": "Gabor Lux argues that how an adventure is told matters as well as what is told.",
+   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
+   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
+   "quote": "it also matters how it gets told",
+   "page": "Against the Ultra-Minimalism, 'The Keep on the Borderlands without...'"
+  },
+  {
+   "index": 695,
+   "feature": "plainness and economy",
+   "claim": "Gabor Lux argues that ultra-minimalism strips flavour, depth and inner complexity out of game texts.",
+   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
+   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
+   "quote": "Ultra-Minimalism is stripping games of their flavour, depth and inner complexity",
+   "page": "Against the Ultra-Minimalism, opening"
+  },
+  {
+   "index": 696,
+   "feature": "other: authorial voice in rulebooks",
+   "claim": "Gabor Lux says stylistic elements technically superfluous to an encounter give a game text a voice that sticks in the imagination.",
+   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
+   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
+   "quote": "a voice that speaks to us and sticks",
+   "page": "Against the Ultra-Minimalism, 'The Keep on the Borderlands without...'"
+  },
+  {
+   "index": 697,
+   "feature": "place and institution description",
+   "claim": "Gabor Lux says The Village of Hommlet paints an idyllic rural community by dwelling on random details that do not matter in an adventure.",
+   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
+   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
+   "quote": "spending much of its time talking about random details",
+   "page": "Against the Ultra-Minimalism, 'Know your enemy'"
+  },
+  {
+   "index": 698,
+   "feature": "edition and house style",
+   "claim": "Gabor Lux says layout and graphic design can improve accessibility but do not replace style.",
+   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
+   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
+   "quote": "it doesn’t replace style",
+   "page": "Against the Ultra-Minimalism, 'The Keep on the Borderlands without...'"
+  },
+  {
+   "index": 699,
+   "feature": "other: read-play gap",
+   "claim": "Gabor Lux says the large Pathfinder and 5e publishers produce encounters that read well and play terribly.",
+   "source": "Gabor Lux (Melan), 'Aid, Not Replacement', Beyond Fomalhaut, 2018",
+   "url": "http://beyondfomalhaut.blogspot.com/2018/03/blog-aid-not-replacement.html",
+   "quote": "encounters which read well but play terribly",
+   "page": "Aid, Not Replacement"
+  },
+  {
+   "index": 700,
+   "feature": "other: aid not replacement",
+   "claim": "Gabor Lux revives T. Foster's slogan that a published game text is a creativity aid, not a creativity replacement.",
+   "source": "Gabor Lux (Melan), 'Aid, Not Replacement', Beyond Fomalhaut, 2018",
+   "url": "http://beyondfomalhaut.blogspot.com/2018/03/blog-aid-not-replacement.html",
+   "quote": "Creativity aid, not creativity replacement",
+   "page": "Aid, Not Replacement"
+  },
+  {
+   "index": 701,
+   "feature": "plainness and economy",
+   "claim": "Tad Davis proposes a middle way between maximalist and minimalist keys resting on a skillful application of economy.",
+   "source": "Tad Davis, 'On Useful Dungeon Key Entries', ars phantasia, 2013",
+   "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
+   "quote": "a skillful application of the principle of economy",
+   "page": "On Useful Dungeon Key Entries, 'A Via Media'"
+  },
+  {
+   "index": 702,
+   "feature": "boxed text form",
+   "claim": "Tad Davis reports the minimalist camp's argument that read-aloud descriptions take too much time and bore players.",
+   "source": "Tad Davis, 'On Useful Dungeon Key Entries', ars phantasia, 2013",
+   "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
+   "quote": "take up too much time and bore players to tears",
+   "page": "On Useful Dungeon Key Entries, 'Assessing the Two Approaches'"
+  },
+  {
+   "index": 703,
+   "feature": "boxed text form",
+   "claim": "Tad Davis declines to eliminate boxed text, valuing it as a way of partitioning the information meant for players.",
+   "source": "Tad Davis, 'On Useful Dungeon Key Entries', ars phantasia, 2013",
+   "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
+   "quote": "not convinced that we should completely eliminate the boxed text",
+   "page": "On Useful Dungeon Key Entries, 'Assessing the Two Approaches'"
+  },
+  {
+   "index": 704,
+   "feature": "other: key format",
+   "claim": "Tad Davis says that navigating walls of text costs time even when the page is well laid out.",
+   "source": "Tad Davis, 'On Useful Dungeon Key Entries', ars phantasia, 2013",
+   "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
+   "quote": "navigating the walls of text takes time",
+   "page": "On Useful Dungeon Key Entries, 'Assessing the Two Approaches'"
+  },
+  {
+   "index": 705,
+   "feature": "concrete sensory noun",
+   "claim": "cygnus rewrites each key with a one to two sentence description touching the five senses.",
+   "source": "cygnus, 'Rewriting Dungeon Keys', The Lady and Tiger, 2023",
+   "url": "https://theladyandtiger.com/2023/11/30/rewriting-dungeon-keys/",
+   "quote": "Short description (one to two sentences), highlighting the 5 senses.",
+   "page": "Rewriting Dungeon Keys, 'The Key'"
+  },
+  {
+   "index": 706,
+   "feature": "other: seen in a glance",
+   "claim": "cygnus says focusing on what the characters can immediately perceive is what keeps the description from rambling.",
+   "source": "cygnus, 'Rewriting Dungeon Keys', The Lady and Tiger, 2023",
+   "url": "https://theladyandtiger.com/2023/11/30/rewriting-dungeon-keys/",
+   "quote": "focusing on what the characters can immediately perceive",
+   "page": "Rewriting Dungeon Keys"
+  },
+  {
+   "index": 707,
+   "feature": "edition and house style",
+   "claim": "cygnus names the Old-School Essentials house style for adventure writing as one of the two models for his rewritten keys.",
+   "source": "cygnus, 'Rewriting Dungeon Keys', The Lady and Tiger, 2023",
+   "url": "https://theladyandtiger.com/2023/11/30/rewriting-dungeon-keys/",
+   "quote": "the Old-School Essentials house style for adventure writing",
+   "page": "Rewriting Dungeon Keys"
+  },
+  {
+   "index": 708,
+   "feature": "other: reference layout",
+   "claim": "Justin Alexander says the one thing he loves about the delve format is putting everything needed to run an area in that area's description.",
+   "source": "Justin Alexander, 'Are We Really This Stupid?', The Alexandrian, 2011",
+   "url": "https://thealexandrian.net/wordpress/1217/roleplaying-games/are-we-really-this-stupid",
+   "quote": "Putting everything you need to run an encounter area in the description",
+   "page": "Are We Really This Stupid?, 'Isolated Encounters'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 694,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It doesn't just matter what gets told, it also matters how it gets told.",
+   "note": "Raw page fetched (HTTP 200, browser UA). Quote exact in section 'The Keep on the Borderlands without The Keep on the Borderlands'. Byline 'Melan'; sidebar links a 'melan-gabor-lux-bibliography' page, confirming Melan = Gabor Lux. Context is adventures/game texts, so 'how an adventure is told' is supported."
+  },
+  {
+   "index": 695,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In old-school gaming, Ultra-Minimalism is stripping games of their flavour, depth and inner complexity.",
+   "note": "Quote exact. Page says 'stripping games of' rather than 'out of game texts'; the essay's subject throughout is modules and rulesets, so the limb holds. Locator drift only: the sentence sits in the 'Know your enemy' section, not the opening."
+  },
+  {
+   "index": 696,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "These things, even if technically 'superfluous' for specific, individual encounters, give game materials a voice.",
+   "note": "Quote exact. 'These things' resolves in the preceding sentence to Gygaxian prose, Bob Bledsaw's quirky humour and M.A.R. Barker's dry wit, i.e. stylistic elements; 'technically superfluous for specific, individual encounters' and 'sticks in our imagination' both on the page. Locator section correct."
+  },
+  {
+   "index": 697,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hommlet draws the portrait of an idyllic rural community by spending much of its time talking about random details.",
+   "note": "Quote exact and every limb present verbatim: 'The Village of Hommlet draws the portrait of an idyllic rural community by spending much of its time talking about random details that don't really matter in an adventure.' Locator 'Know your enemy' is correct."
+  },
+  {
+   "index": 698,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Layout wizardry and graphical design ... vastly improve accessibility, but it doesn't replace style.",
+   "note": "Quote exact (curly apostrophe matches). Full sentence: 'Layout wizardry and graphical design can make GMing flow better, and vastly improve accessibility, but it doesn't replace style.' Both limbs supported; locator section correct."
+  },
+  {
+   "index": 699,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the larger PF and 5e publishers ... a bloated, lumbering mess full of encounters which read well but play terribly",
+   "note": "Raw page fetched (HTTP 200). Quote exact. Page writes 'larger PF and 5e publishers'; PF is Pathfinder. The read/play contrast is explicit ('may pass as interesting bog reading, but put them on the table')."
+  },
+  {
+   "index": 700,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a slogan pioneered by T. Foster - 'Creativity aid, not creativity replacement'",
+   "note": "Quote exact. Page: 'I want to return to a slogan pioneered by T. Foster', which supports 'revives'. Applied to RPG books/supplements ('These mottoes articulate something about the flexibility of good game materials'), supporting the 'published game text' limb. Page also credits Bob Bledsaw with the original point."
+  },
+  {
+   "index": 701,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What such a synthesis requires is a skillful application of the principle of economy.",
+   "note": "Raw page fetched (HTTP 200). Quote exact, in the section headed 'A Via Media' (= middle way), which explicitly synthesises the maximalist and minimalist schools set out earlier. Byline on page: Tad Davis, December 5, 2013, ars phantasia."
+  },
+  {
+   "index": 702,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "these descriptions tend to take up too much time and bore players to tears",
+   "note": "Quote exact. Reported, not asserted: 'Others have observed that the minimalist approach also has three advantages over its more ponderous rival ... Third, in particular the absence of boxed descriptions meant to be read aloud to players...'. Locator drift only: the sentence closes the section just before 'Assessing the Two Approaches'."
+  },
+  {
+   "index": 703,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I am also not convinced that we should completely eliminate the boxed text ... format.",
+   "note": "Quote exact in 'Assessing the Two Approaches'. The valuing limb is explicit in the next sentence: 'they still strike me as a useful way of partitioning off information specifically to be given to the players.'"
+  },
+  {
+   "index": 704,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "As visually well laid out as exhibit A is, navigating the walls of text takes time.",
+   "note": "Quote exact. The 'even when well laid out' limb is the same sentence's concessive clause. Same section as the locator states."
+  },
+  {
+   "index": 705,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Short description (one to two sentences), highlighting the 5 senses.",
+   "note": "Raw page fetched (HTTP 200). Quote exact, and it is the first line of the key template under the heading 'The Key'. Byline: 'Published by cygnus on November 30, 2023', The Lady and Tiger. Note the running prose hedges slightly - 'tries to touch on a few of the senses' - while the template says 5."
+  },
+  {
+   "index": 706,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "focusing on what the characters can immediately perceive helps to ... avoid rambling boxed text",
+   "note": "Quote exact. The page hedges where the claim does not: 'helps to both A) avoid rambling boxed text and, B) quickly identify key room elements', versus the claim's 'is what keeps'. Substance of the single asserted limb is supported."
+  },
+  {
+   "index": 707,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a mish-mash of Courtney's keying style in Hack & Slash: On Set Design and the Old-School Essentials house style for adventure writing",
+   "note": "Quote exact, and the 'one of two models' limb is supported by the sentence naming exactly two sources for the rewritten key format."
+  },
+  {
+   "index": 708,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there's one thing I really love about the delve format: Putting everything you need to run an encounter area in the description of the encounter area",
+   "note": "Raw page fetched (HTTP 200). Quote exact, in the section headed 'ISOLATED ENCOUNTERS'. Page byline The Alexandrian, January 10th 2011, Justin Alexander. Page hedges with 'Conceptually' and goes on to name two problems with the format in practice; the claim's limb is only about what he loves, so it holds."
+  }
+ ]
+}

@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 5,
+ "indices": [
+  920,
+  921,
+  933,
+  934,
+  936,
+  937,
+  942,
+  947,
+  948,
+  949,
+  950,
+  951,
+  964,
+  965,
+  969
+ ],
+ "claims": [
+  {
+   "index": 920,
+   "feature": "other: what Kay actually did on the Silmarillion",
+   "claim": "Kane says Christopher Tolkien gave remarkably little insight into the final step in which he created the published work with Kay's help.",
+   "source": "Douglas C. Kane, interviewed at TheOneRing.net about Arda Reconstructed, 2009",
+   "url": "https://www.theonering.com/douglas-kane-talks-about-arda-reconstructed/",
+   "quote": "he created the final publish work with Guy Kay's help",
+   "page": "interview, 'how did this book come about' answer"
+  },
+  {
+   "index": 921,
+   "feature": "other: what Kay actually did on the Silmarillion",
+   "claim": "Ordway reports that Kane's answer to whether the editorial cuts changed Tolkien's prose style for the worse seems to be yes.",
+   "source": "Holly Ordway, review of Arda Reconstructed, Mythprint / The Mythopoeic Society",
+   "url": "https://www.mythsoc.org/reviews/arda-reconstructed-ordway.htm",
+   "quote": "Kane's answer seems to be yes",
+   "page": "review body"
+  },
+  {
+   "index": 933,
+   "feature": "other: biography of the Silmarillion year",
+   "claim": "Rettino's thesis dates Kay's becoming an editor of The Silmarillion to 1974, citing Ordway.",
+   "source": "Matthew Rettino, 'Fantasies of History', 2012 McGill honours thesis, hosted at brightweavings.com",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "he became an editor of The Silmarillion in 1974",
+   "page": "introduction"
+  },
+  {
+   "index": 934,
+   "feature": "other: Tolkien as influence after the Silmarillion year",
+   "claim": "Ordway says the strongest single literary influence on Kay's Fionavar Tapestry is Tolkien, a natural result of his co-editing The Silmarillion.",
+   "source": "Holly Ordway, 'The World-Building of Guy Gavriel Kay' (1998 independent study, UMass Amherst), hosted at brightweavings.com",
+   "url": "https://brightweavings.com/worldbuilding/",
+   "quote": "The strongest single literary influence on Kay's creation of The Fionavar",
+   "page": "section on The Fionavar Tapestry"
+  },
+  {
+   "index": 936,
+   "feature": "other: poetry practice",
+   "claim": "Rettino reports that in his introduction to Beyond this Dark House the poet Don Coles writes that Kay has an ease with crafting words in prose or poetry.",
+   "source": "Matthew Rettino, review of Beyond this Dark House, matthewrettino.com, 7 February 2014",
+   "url": "https://matthewrettino.com/2014/02/07/beyond-this-dark-house-by-guy-gavriel-kay/",
+   "quote": "Coles writes that Kay has an ease with crafting words",
+   "page": "review body, third paragraph"
+  },
+  {
+   "index": 937,
+   "feature": "other: poetry practice",
+   "claim": "Rettino notes that one poem in Beyond this Dark House is dedicated to J.R.R. Tolkien.",
+   "source": "Matthew Rettino, review of Beyond this Dark House, matthewrettino.com, 7 February 2014",
+   "url": "https://matthewrettino.com/2014/02/07/beyond-this-dark-house-by-guy-gavriel-kay/",
+   "quote": "nods towards his relationship with J. R. R. Tolkien",
+   "page": "review body, sixth paragraph"
+  },
+  {
+   "index": 942,
+   "feature": "concrete sensory noun",
+   "claim": "Macpherson says Dunnett's every researched detail is seamlessly woven in, offering a sensory experience of sounds, tastes, colours and textures.",
+   "source": "Marie Macpherson, The Writers' Writer, Dorothy Dunnett Centenary (Dorothy Dunnett Society)",
+   "url": "https://dunnettcentral.org/centenary/the-writers-writer/",
+   "quote": "every detail is seamlessly woven into her astonishing tapestries",
+   "page": "Marie Macpherson section"
+  },
+  {
+   "index": 947,
+   "feature": "other: Kay and the Dunnett Society",
+   "claim": "Kay was the keynote speaker at the Dorothy Dunnett Centenary Gathering in 2023.",
+   "source": "The Writers' Writer, Dorothy Dunnett Centenary (Dorothy Dunnett Society)",
+   "url": "https://dunnettcentral.org/centenary/the-writers-writer/",
+   "quote": "author and keynote speaker @ DD Centenary Gathering 2023",
+   "page": "Guy Gavriel Kay section heading"
+  },
+  {
+   "index": 948,
+   "feature": "other: Kay and Dunnett in person",
+   "claim": "Kay says Dunnett was wonderful in person and not only in print, across many encounters.",
+   "source": "Guy Gavriel Kay, The Writers' Writer, Dorothy Dunnett Centenary (Dorothy Dunnett Society)",
+   "url": "https://dunnettcentral.org/centenary/the-writers-writer/",
+   "quote": "she was wonderful in person, not just in print",
+   "page": "Guy Gavriel Kay section"
+  },
+  {
+   "index": 949,
+   "feature": "other: biography of the Silmarillion year",
+   "claim": "Kay says he met Dorothy Dunnett in spring 1975 while living in a village outside Oxford working on the papers that became The Silmarillion.",
+   "source": "Guy Gavriel Kay, 'In Memoriam - Dorothy Dunnett', Locus Magazine, December 2001, reproduced at brightweavings.com",
+   "url": "https://brightweavings.com/dunnett/",
+   "quote": "working on the papers that became The Silmarillion",
+   "page": "first paragraph"
+  },
+  {
+   "index": 950,
+   "feature": "other: what Kay actually did on the Silmarillion",
+   "claim": "Kay says going through the Tolkien correspondence was a part of the editing process he worked on.",
+   "source": "Guy Gavriel Kay, 'In Memoriam - Dorothy Dunnett', Locus Magazine, December 2001, reproduced at brightweavings.com",
+   "url": "https://brightweavings.com/dunnett/",
+   "quote": "which was a part of the editing process",
+   "page": "first paragraph"
+  },
+  {
+   "index": 951,
+   "feature": "other: silence about the editing method",
+   "claim": "Kay says he did not discuss the details of editing The Silmarillion with Dunnett in 1975 and still does not.",
+   "source": "Guy Gavriel Kay, 'In Memoriam - Dorothy Dunnett', Locus Magazine, December 2001, reproduced at brightweavings.com",
+   "url": "https://brightweavings.com/dunnett/",
+   "quote": "I didn't discuss the details of editing The Silmarillion",
+   "page": "fourth paragraph"
+  },
+  {
+   "index": 964,
+   "feature": "other: untranslated allusion",
+   "claim": "Spangenberg says the quantity of literary allusions and quotations in the Lymond Chronicles drew her into a paper chase after Dunnett's sources.",
+   "source": "Lisa L. Spangenberg, 'The Books of Dorothy Dunnett', Digital Medievalist / Celtic Studies Resources",
+   "url": "https://www.digitalmedievalist.com/reading-lists/dorothy-dunnett/",
+   "quote": "enticed me into a paper chase as I tried to locate",
+   "page": "introductory paragraph"
+  },
+  {
+   "index": 965,
+   "feature": "other: untranslated allusion",
+   "claim": "Spangenberg says the two Dunnett Companion books supply the sources and even the translations for many of the allusions in the novels.",
+   "source": "Lisa L. Spangenberg, 'The Books of Dorothy Dunnett', Digital Medievalist / Celtic Studies Resources",
+   "url": "https://www.digitalmedievalist.com/reading-lists/dorothy-dunnett/",
+   "quote": "offer the sources and even the translations, for many of the allusions",
+   "page": "books section"
+  },
+  {
+   "index": 969,
+   "feature": "other: untranslated allusion",
+   "claim": "The Dunnett close-reader 'bill' wonders what percentage of readers had to look up the word epithalamium to follow the passage.",
+   "source": "bill, 'The Play for Jonathan Crouch - IV: Several Moves by a Knight', Bill's Dunnett Blog, 5 August 2026",
+   "url": "https://www.dorothydunnett.co.uk/blog/lymond-reading-notes/the-play-for-jonathan-crouch-iv-several-moves-by-a-knight.php",
+   "quote": "had to look up the former",
+   "page": "reading notes, epithalamium paragraph"
+  }
+ ]
+}

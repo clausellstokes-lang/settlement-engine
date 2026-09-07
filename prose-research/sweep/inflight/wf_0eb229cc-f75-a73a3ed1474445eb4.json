@@ -1,0 +1,33 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i1441-1455",
+ "lines": 104,
+ "firstTs": "2026-09-07T04:38:48.707Z",
+ "lastTs": "2026-09-07T04:45:37.524Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 19,
+  "StructuredOutput": 2
+ },
+ "urlsFetched": [
+  "https://arxiv.org/pdf/$id",
+  "https://arxiv.org/abs/2002.02492",
+  "https://arxiv.org/abs/2012.14660",
+  "https://arxiv.org/abs/2010.02650",
+  "https://arxiv.org/abs/2102.01454",
+  "https://arxiv.org/abs/2004.10450",
+  "https://arxiv.org/abs/2009.07243"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "The parameters need to be top-level rather than nested. Retrying.",
+ "run": "wf_0eb229cc-f75",
+ "agent": "a73a3ed1474445eb4",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-a73a3ed1474445eb4.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1441-1455.json",
+  "exists": true
+ }
+}

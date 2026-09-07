@@ -1,0 +1,275 @@
+Journal of Tolkien Research
+Journal of Tolkien Research
+Volume 14 Issue 1 Article 7
+2022
+Tolkien as a Literary Artist (2021) by Thomas Kullmann and Dirk
+Tolkien as a Literary Artist (2021) by Thomas Kullmann and Dirk
+Siepmann Siepmann
+John R. Holmes
+F r anciscan University of Steubenville, jholmes@franciscan.edu
+Follow this and additional works at: https://scholar.valpo.edu/journaloftolkienresearch
+Part of the Literature in English, British Isles Commons
+Recommended Citation Recommended Citation
+Holmes, John R. (2022) "Tolkien as a Literary Artist (2021) by Thomas Kullmann and Dirk Siepmann,"
+Journal of T olkien Research : Vol. 14 : Iss. 1 , Article 7.
+Available at: https://scholar.valpo.edu/journaloftolkienresearch/vol14/iss1/7
+This Book Review is brought to you for free and open access by ValpoScholar. It has been accepted for inclusion in
+Journal of Tolkien Research by an authorized administrator of ValpoScholar. For more information, please contact
+a ValpoScholar staff member at scholar@valpo.edu.
+Tolkien as a Literary Artist: Exploring Rhetoric, Language and Style in “The Lord
+of the Rings”, by Thomas Kullmann and Dirk Siepmann. Cham, Switzerland:
+Palgrave Macmillan, 2021. xiv, 319 pp. $149.99 (hardcover) ISBN
+9783030692988. Also available in ebook format.
+This book will ruffle feathers.
+In Tolkien as a Literary Artist, authors Thomas Kullmann and Dirk Siepmann
+have applied corpus linguistics (the quantitative and qualitative analysis of word
+frequency and sequence that large databases of digitized texts have made possible
+in this century) to the text of The Lord of the Rings. Along the way they have also
+incorporated into their study other, more traditional, methods of literary analysis,
+though these are always informed by this newly available data.
+Some of the results of such deep analysis of Tolkien’s “Rhetoric, Language,
+and Style,
+” to echo the subtitle of this book, corroborate judgements of critics over
+the half-century since the publication of The Lord of the Rings (such as the role of
+the hobbits as mediating focal characters, K& S Chapter 4). Other results tend to
+refute long-held views (like the prevalence and significance of archaic inversions;
+see K & S p. 40), and these are the findings likely to make some splash. In between
+are those findings that will be a matter of indifference to most readers but will prove
+useful to some future writer on Tolkien who wonders why Aragorn begins a
+pronouncement about the future with shall half again as often as Gandalf does, and
+seven times as often as Sam or Pippin.
+Kullmann and Siepmann’s title is a fair reflection of their approach to studying
+the language of The Lord of the Rings: “Tolkien as a Literary Artist.” By “literary
+artist” they purport “not to accord any special status to the creator of Middle-earth,”
+but simply to use the same tools to evaluate Tolkien’s works as might be brought
+to bear on those of more “canonical” authors such as James Joyce or Virginia Woolf
+(4). These techniques are primarily Corpus Stylistics on Siepmann’s part, and
+literary analysis within a framework of “intertextuality” on Kullmann’s. The
+distinction between the two authors is invited by the careful attribution of each
+chapter to one or the other (or both), though to be sure there are fruitful mutual
+influences between the two authors. By measuring Tolkien with the same rod used
+for academically respectable authors, Siepmann and Kullmann touch on the
+simmering question of Tolkien’s canonical status in academe—a status which still
+seems slow in coming. The authors measure the glacial pace of canonical
+acceptance in the introduction of this book (and in its conclusion) by appeal to
+standard histories of English-language literature which allocate relatively little
+space (in some cases none) to Tolkien (1). Avoiding the chimera of “relative literary
+merit,” virtually all the statements about Tolkien’s style in this book are made
+1
+Holmes: Tolkien as a Literary Artist (2021)
+Published by ValpoScholar, 2022
+against the baseline of English-language novels of the nineteenth and twentieth
+centuries (a particular area of expertise for Professor Kullmann).
+While this analysis allows an easy refutation of critical charges of Tolkien’s
+language as “impoverished” or “simple and lacking in conventional novelistic
+textures” (5)—a refutation more empirical than hitherto possible—the procedure
+has the effect of bringing newer and more sophisticated weapons to a battle whose
+issue has been decided decades ago. Nevertheless, a few litanies of key words
+illustrating new uses of old roots in Tolkien leads to the bold and possibly startling
+assertion that Tolkien is “in a much less obvious sense than in the case of James
+Joyce or Virginia Woolf . . . a linguistic post-modernist” (8).
+Even pronouncements like this, presented as challenges to critical consensus,
+will strike many current Tolkien scholars and fans as old news. Tolkien’s debt to
+19th- and early-20th-century novels is presented by Kullmann and Siepmann as
+“often . . . overlooked” (297), an assessment that itself overlooks the past few
+decades of criticism explicating echoes of modern fiction in Tolkien, culminating
+in Holly Ordway’s Tolkien’s Modern Reading (2021).
+A particular strength of Tolkien as a Literary Artist is its catalogues of Tolkien’s
+archaisms of diction and syntax, long stigmatized by detractors as either grating on
+the modern ear, or channeling the pseudo-medievalism of the nineteenth century.
+As impressive as these massive marshalling of texts can be, judgments about just
+what key words are supposedly “archaic” are not presented with any regularity.
+This is particularly surprising, since the database makes possible an objective
+definition of archaism. We could simply consider an archaism to be an older usage
+not reflected elsewhere in the corpus, or reflected measurably less frequently. So a
+purely nominal definition of “archaism” can be posited by appeal to what words are
+no longer in wide use. But surely this is as useless to criticism as the other extreme,
+the reader’s whim which asserts, “Verily and forsooth, such and such a locution be
+archaism, because I say it be archaism.” Unless there is a measure of such usages
+before the 19th century, how do we know the given usage is archaic? And if, as
+Siepmann and Kullmann seem to imply, romances by the like of Sir Walter Scott
+and William Morris are the sources of supposed the elder diction, how do we
+identify them as archaisms in Scott and Morris?
+Illustrations of what I consider the arbitrariness of the “archaic” label abound:
+I shall (note the archaism of “shall” and “abound”) select a few. The differentiation
+of “glad / gladness” from “happy / happiness,” “joyous / joy” across different
+characters (Aragorn, hobbits, and Gimli respectively; pages 265, 273, 287) is itself
+quite valuable. Why, though, label glad “literary” (265)? Perhaps because of
+association with the King James “glad tidings? In which case “tidings” is the
+2
+Journal of Tolkien Research, Vol. 14 [2022], Iss. 1, Art. 7
+https://scholar.valpo.edu/journaloftolkienresearch/vol14/iss1/7
+archaic element (as Kullmann and Siepmann duly report in contradistinction to
+“news,” p. 265), not “glad.
+” Nearing my seventh decade of exposure to colloquial
+English, I cannot bring myself to consider “glad” a linguistic throwback.
+Further: mere infrequency is not enough to brand a word: this study marks
+unscathed as similarly “literary,” though I’ll wager it will pass unnoticed among
+most 21st century general readers. Recent lexicographers seem to agree: I could not
+find a current dictionary that lists “scathe” as archaic.
+While the introduction to this book seems to take a proper delight in twitting
+Tolkien fans and critics who “seem to know Tolkien by heart, but have read little
+else,” and “explain Tolkien by reference to Tolkien”—these are the ruffled feathers
+referred to earlier, and perhaps you’ll say they need ruffling, and perhaps I’ll
+agree—nevertheless, Siepmann and Kullmann are sometimes guilty of the opposite
+extreme of ignoring obvious contexts in Tolkien’s major texts outside of The Lord
+of the Rings. Granted, the stated purpose of Tolkien as a Literary Artist is objective
+study of that one text. But something as simple as placing “orcs” in the same
+category with “hobbits” as words “invented by Tolkien” (without any detectable
+play with the etymology of Latin inventio as “discovery”) is the sort of claim one
+would expect of that hypothetical reader who knows Tolkien by heart, but little
+else. Otherwise the very sources that Tolkien mined for the word orc would be
+obvious, as would its connection with the modern metathesized and vocalized form
+ogre (noted by the OED). When the tenth-century glossator(s) of MS Cotton
+Cleopatra A.iii listed equivalents for Latin orcus, the first choice was simply “orc.”
+(Then þyrs, then hel-deofol.)
+A bit more nuanced is this book’s unfortunate designation of such phenomena
+as the sentient willow in “The Old Forest” chapter (Book I, Chapter 6), Treebeard,
+and Elves as “supernatural” (pages 133, 149, 240) without at least acknowledging
+Tolkien’s twitting of the OED for the unsuitability of the word in regard to fairy.
+In the same way, the conscious nuance of “magic” in the text of The Lord of the
+Rings itself is ignored by Kullmann and Siepmann, to the point of calling plants
+that have healing properties “magic” (132) when their effect could as easily be
+considered pharmacological, even within the context of the fantasy novel; and
+Saruman’s hypnotic control over people is termed “magic” (145) when similar
+auto-suggestion can be instanced in the primary world, even if it be merely a trick
+of the mind.
+Prof. Kullmann’s expertise in the 19th and 20th century British novel is
+invaluable in detecting echoes (or in Julia Kristeva’s terms “pre-texts”) of Tolkien’s
+contemporaries in The Lord of the Rings. Such echoes, where demonstrable, are
+welcome as a healthy antidote to the too-frequent assumption in Tolkien criticism
+3
+Holmes: Tolkien as a Literary Artist (2021)
+Published by ValpoScholar, 2022
+that the salient pre-text must always be medieval. Yet Tolkien as a Literary Artist
+perhaps sounds the other extreme by excluding pre-modern corpora of English
+writing—corpora that undeniably informed Tolkien’s diction. The loss of that pre-
+modern context is not limited to the words in The Lord of the Rings that are no
+longer found in English, such as mathom or marish or eored, but is felt in words
+that are still with us, like tale, sheen, or the verb form of shape, which
+simultaneously bear quite different modern (“story,” “reflected light,” “to give
+form”) and Anglo-Saxon (“counting,” “beauty,” “to create”) meanings.
+Consequently, Kullmann and Siepmann’s discussions of the supposed
+disposition of reek (49), the supposed cliché status of bitter end (59), or the
+preference of doom for “judgment” (179) all miss the diachronic nuances of those
+three items. In the case of reek, the primary meaning when Tolkien wrote was
+“smell,” but many of the iterations in The Lord of the Rings more closely fit the
+earlier sense of “vaporish wafting.” Of the twenty-four iterations of
+reek/reeks/reeking, in The Lord of the Rings, Siepmann and Kullmann’s assertion
+that the word is “associated with the foul odours of Mordor” (49), do not
+differentiate the two layers of meaning. Admittedly, some of Tolkien’s uses of the
+word, such as “a reek arose of torches,” or “reeking marshes,” might merge both
+senses. But locutions like “a smoldering reek” and “a reek lay on the land” tend
+more toward the sight of the rising cloud than to the smell.
+The case of bitter end is stickier. In the discourse of the 19th and 20th century
+novels that form the baseline for the study of Tolkien’s words for Kullmann and
+Siepmann, authors consciously avoid any collocations of words other writers have
+used before them, anathematizing such combinations with the stamp of “cliché,”
+originally French printers’ jargon for the pre-arranged block of type or image (also
+called a “stereotype”). But before moveable type such re-use of others’ words was
+not stigmatized. It was even cultivated. And in any case, collocations happen
+despite our diligence, or else the concept of “pre-text” used in this study would be
+impossible. Simply remember that Tolkien was trained as a language historian and
+the significance of word patterns change. A cliché becomes a fossil of various
+semantic associations, pointing to earlier forms. More often than not, a cliché in
+The Lord of the Rings presents Tolkien with an opportunity to suggest earlier states
+of the words. Bitter originally suggested a physical image, meaning “sharp” (related
+to bite), subsequently applied metaphorically to taste. But that semantic change is
+a red herring in the combination “bitter end,” because it does not derive, as
+commonly assumed, from the bitter dregs after the sweet stuff is gone, but from the
+“bit” end of a rope.
+4
+Journal of Tolkien Research, Vol. 14 [2022], Iss. 1, Art. 7
+https://scholar.valpo.edu/journaloftolkienresearch/vol14/iss1/7
+Tolkien reverts to the earlier visual meaning of “bitter” twice in the “Shelob’s
+Lair” chapter (Book IV, Chapter 9), avoiding reference to the “bitter end” of
+Frodo’s sword Sting by speaking of its “bitter edge”—a double pun, since “edge”
+was an Old English word for “sword” (related to the modern meaning by
+synecdoche). A few pages later Sam’s blade meets Shelob when the giant spider
+“thrust herself on a bitter spike.” Tolkien only uses the combination “bitter end”
+nine times in the half-million words of the novel, modifying it four times with “the,”
+three times with “a,” once with “its” and once with no direct modifier (“to find
+bitter end”). These variations force the reader, I think, to consider the constituent
+words of the collocation separately.
+The “layered” semantics of English words is yet another argument for extending
+the corpora in any future studies of Tolkien’s style. The continuity of English style
+and syntax, a pet notion of Tolkien’s, is obscured when the context of earlier forms
+is ignored. Something as simple as the gendered pronouns for sun and moon in
+Middle-earth, for example, is misconstrued when Kullmann presents them as
+following “Germanic conventions . . . rather than the English poetic convention of
+referring to the sun as ‘he’, as in Latin.” The significance of the feminine sun is not
+that it is a Germanic rather than a Latinate feature, but that it is later rather than
+earlier. English did not change its grammatical gender: it lost it as an inflection.
+Old English grammatical gender not a matter of pronouns only. And while it is true
+that one can find a masculine sunna in Old English (in Ælfric, for example), by far
+the norm is feminine sunne. Alfred the Great’s educational reform normalized the
+West Saxon feminine form, and the instruction in Old English that Tolkien received
+in the first decades of the 20th century followed such West Germanic
+normalization—much to the irritation of young John Ronald, who remained
+Mercian at heart.
+Another mechanism by which the words of older writers merge with ours is in
+song, and the prevalence of song and verse in The Lord of the Rings calls for a
+procedural exclusion in the word-crunching involved in this study. The book does
+in fact give special attention to the lyrical side of The Lord of the Rings, and
+Kullmann’s chapter on “Songs and Poems” (Chapter 8) is one of the best features
+of this volume. But the tendency of diction in poetry to skew older than diction in
+the novel will consequently taint the results of any word search intended to scout
+“archaism” or “literary” word use—unless song is separated out in the sample.
+If all these quibbles over detail (and some over design) obscure the
+attractiveness and (what is even rarer) the usefulness of Tolkien as a Literary Artist,
+then shame on the reviewer. Even readers who quarrel with some of its conclusions
+5
+Holmes: Tolkien as a Literary Artist (2021)
+Published by ValpoScholar, 2022
+will, I believe, find the beginnings of several critical conversations on Tolkien’s
+stylistics in this book.
+The introduction (Chapter 1) is virtually an executive summary of the whole
+book, including paraphrases and direct repetitions from the later chapters.
+Chapter 2 (“Tolkien as a Stylist,” Siepmann) presents the key-word analysis as
+a function of the same key-words in 19th and 20th century fiction, with a bonus in
+2.3.3 of “Key Words Shared with Tolkien’s Translation of Beowulf.”
+Chapter 3 (“Narrative Syntax,” Siepmann) gets deep into the weeds of
+grammatical construction in Tolkien’s style on word, phrase, and clause levels,
+ending with analysis of two sample paragraphs.
+Chapter 4 (“Points of View,” Kullmann) confirms and deepens the stylistic
+observations of Tom Shippey (not cited in the chapter bibliography), Jared Lobdell,
+Brian Rosebury, and Steve Walker, measuring the dominance of the hobbit point
+of view in the novel by making them the internal storytellers (85% of all “non-
+direct” speech, according to Kullmann, represents hobbits), and the foci of
+“psychonarration (p. 105).
+Chapter 5 (“Landscape Descriptions,” Kullmann), identifies three functions of
+landscape in The Lord of the Rings: to glorify the English countryside, to mirror the
+state of a character’s mind, and to “add magic.”
+Chapter 6 (“Speeches and Declarations,” Kullmann) allows for more formal
+and ritual uses of speech, and acknowledges the extent to which syntax and style
+observations of previous chapters become more complex when speech acts become
+more formal.
+Chapter 7 (“Storytelling,” Kullmann) identifies three categories of the 45 to 50
+“intercalated” stories told by twenty-three characters in the novel: simultaneous
+events, exposition, and “mythological” past.
+Chapter 8 (“Poems and Songs,” Kullmann) includes a well-crafted argument
+that in following the histories of these traditional songs “readers become
+philologists.”
+Chapter 9 (“Language and Character,” both authors) is an expansion of
+suggestions in earlier chapters of the ways in which idiolect aids characterization
+in The Lord of the Rings. The individual observations on characters’ speech is of
+tremendous value to readers and critics interested in character study in Tolkien.
+The conclusion (Chapter 10, “Tolkien’s Position in Literary History,” both
+authors) is modest, tentative, and brief, though it does not shirk from stylistic
+comparison with the canonical giants Shakespeare and Joyce.
+I have called Tolkien as a Literary Artist a useful book, and that may be an
+understatement. Its word lists and stylistic observations will form the basis of
+6
+Journal of Tolkien Research, Vol. 14 [2022], Iss. 1, Art. 7
+https://scholar.valpo.edu/journaloftolkienresearch/vol14/iss1/7
+articles and studies for years to come. One of my first evaluative questions of any
+work on Tolkien is always, “will this add to our understanding and appreciation of
+Tolkien’s work?” For this work, the answer is, “oh, yes, immensely—both in itself,
+and in its potential to generate valuable criticism.”
+In spite of the feathers.
+John R. Holmes
+Franciscan University of Steubenville
+Steubenville, Ohio
+7
+Holmes: Tolkien as a Literary Artist (2021)
+Published by ValpoScholar, 2022

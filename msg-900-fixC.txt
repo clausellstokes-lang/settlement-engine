@@ -1,0 +1,7 @@
+Desk landing (fix car C): the command request's typedef names the charset table it already reads — the gate's full-typecheck ratchet convicted CHARSET Car 2's wiring, which the lane's domain-strict check could not see
+
+`applyCustomContentCommand` reads `request.charsetTable` (CHARSET Car 2, a655279e9: the optional table `loadCustomContentCharsetWall` accepts so tests can prove the refuse branch without lighting the manifest door), but the request's JSDoc object type did not declare it: TS2339 under tsconfig.full.json, `src/store/customContentSliceRuntime.js: 1 error (baseline 0)`. The property enters the typedef as `charsetTable?:unknown` (the loader's own `@param {unknown} [table]`). Full typecheck ratchet exit 0; the file lints clean. No register reads this line (a JSDoc comment in src/store: not the voice scanner's tier, not a writer, not a detector, not a title), so the totals car stays the last register-bearing car. Lane law recorded: a lane that touches src outside src/domain runs `npm run typecheck:ratchet`, not only the domain-strict check.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

@@ -1,0 +1,12 @@
+sitemap: https://www.poetryfoundation.org/sitemap_index.xml
+Crawl-delay: 5
+
+User-agent: *
+Disallow: /cpresources/
+Disallow: /vendor/
+Disallow: /.env
+Disallow: /_nuxt/
+Disallow: /proxy/
+Disallow: /search
+Disallow: /*/browse
+Disallow: /categories/

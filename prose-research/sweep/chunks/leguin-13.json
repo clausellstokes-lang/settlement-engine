@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 13,
+ "indices": [
+  787,
+  789,
+  791,
+  795,
+  834,
+  835,
+  836,
+  837,
+  838,
+  845,
+  846,
+  847,
+  850,
+  854,
+  857
+ ],
+ "claims": [
+  {
+   "index": 787,
+   "feature": "civic record register",
+   "claim": "A prohibition is recorded as a dated passive naming the authority that imposed it and the reason it stands.",
+   "source": "Le Guin, Rocannon's World (1966), second handbook entry, quoted by Books & Boots",
+   "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+   "quote": "the planet was placed under Interdict by the Allworld HILF Authority",
+   "page": "second quotation, Control and Taxation Missions"
+  },
+  {
+   "index": 789,
+   "feature": "register modulation",
+   "claim": "The blogger contrasts the folk-tale style of the novel's opening story with the more factual style of the rest.",
+   "source": "Books & Boots (astrofella), review of Rocannon's World, 2019",
+   "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+   "quote": "cast in much more factual, sci fi style",
+   "page": "section 'The plot'"
+  },
+  {
+   "index": 791,
+   "feature": "opening sentence",
+   "claim": "Anand Pandian describes Rocannon's World as opening with the ethnographer's survey of hominoid species on one world.",
+   "source": "Anand Pandian, anthro{dendum}, 2018",
+   "url": "http://anthrodendum.org/2018/01/26/ursula-ak-le-guin-interplanetary-anthropologist-2/",
+   "quote": "opening with his survey of “hominoid” species on the world",
+   "page": "paragraph beginning 'Le Guin's books teem with anthropologists'"
+  },
+  {
+   "index": 795,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin describes Tolkien's vocabulary as unstriking and everything in it as direct, concrete and simple.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "everything is direct, concrete, and simple",
+   "page": "p.8 of the PDF"
+  },
+  {
+   "index": 834,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says prose rhythms are regular, if at all, only on a very much larger and longer scale than metrical feet.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+   "quote": "only on a very much larger, longer scale",
+   "page": "answer to Alex, question 1"
+  },
+  {
+   "index": 835,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says prose rhythms are hard to talk about because we have no vocabulary for them.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+   "quote": "we have no vocabulary for them",
+   "page": "answer to Alex, question 1"
+  },
+  {
+   "index": 836,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says that whether composing or rewriting she does not think consciously about the rhythmic factors in a story.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+   "quote": "I don’t think consciously about the rhythmic factors in a story",
+   "page": "answer to Alex, question 1"
+  },
+  {
+   "index": 837,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says reading aloud makes you aware of a word or phrase that tangles up the pace and needs to be moved or removed.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+   "quote": "a word or a phrase that tangles up the pace",
+   "page": "answer to Alex, question 1"
+  },
+  {
+   "index": 838,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says a hesitation while reading your own prose aloud may reveal a fault in the rhythm.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+   "quote": "Wherever you hesitate in your reading aloud may reveal a fault",
+   "page": "answer to Alex, question 1"
+  },
+  {
+   "index": 845,
+   "feature": "place and institution description",
+   "claim": "Le Guin says her own specimen general description of an invented town, placing Horb on the coast of the southernmost of nine continents, implies very little.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2 — Three New Questions\", Book View Cafe, 21 March 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-three-new-questions",
+   "quote": "This general description implies very little",
+   "page": "answer to Nicole and Bayla, world-building demonstration"
+  },
+  {
+   "index": 846,
+   "feature": "place and institution description",
+   "claim": "Le Guin says her second specimen sentence about Horb lets the reader learn that the place has a long-established trading economy without stating it.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2 — Three New Questions\", Book View Cafe, 21 March 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-three-new-questions",
+   "quote": "it has a long-established trading economy",
+   "page": "answer to Nicole and Bayla, world-building demonstration"
+  },
+  {
+   "index": 847,
+   "feature": "concrete sensory noun",
+   "claim": "Le Guin says the difference between her two specimen descriptions is specificity, and prescribes packing sentences with specifics, not with generalities.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2 — Three New Questions\", Book View Cafe, 21 March 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-three-new-questions",
+   "quote": "packing your sentences with specifics, not with generalities",
+   "page": "answer to Nicole and Bayla"
+  },
+  {
+   "index": 850,
+   "feature": "omission as information",
+   "claim": "Le Guin says a writer can fake quite a lot or leave it unsaid so long as the invented world looks and smells and tastes real.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2 — Three New Questions\", Book View Cafe, 21 March 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-three-new-questions",
+   "quote": "so long as your world looks and smells and tastes real",
+   "page": "final answer to Nicole and Bayla"
+  },
+  {
+   "index": 854,
+   "feature": "place and institution description",
+   "claim": "Le Guin says that with an invented world you have to describe more than a realist does.",
+   "source": "Ursula K. Le Guin interviewed by John Plotz, Public Books, 15 June 2015",
+   "url": "https://www.publicbooks.org/the-storys-where-i-go-an-interview-with-ursula-k-le-guin/",
+   "quote": "you have to describe more than a realist does",
+   "page": "answer on describing an invented world"
+  },
+  {
+   "index": 857,
+   "feature": "plainness and economy",
+   "claim": "Le Guin says she has learned to stop fiddling and twiddling because fiction needs a certain roughness.",
+   "source": "Ursula K. Le Guin, interview excerpts, \"A Return to Earthsea\", Locus Magazine, September 2001 (Locus Online excerpts page)",
+   "url": "https://www.locusmag.com/2001/Issue09/LeGuin.html",
+   "quote": "Fiction needs a certain roughness.",
+   "page": "excerpt on composition and revision"
+  }
+ ]
+}

@@ -1,0 +1,234 @@
+{
+ "name": "kay",
+ "chunk": 9,
+ "claims": [
+  {
+   "index": 135,
+   "feature": "present tense for women's viewpoints",
+   "claim": "Harrison (in comments) states Under Heaven's sections with women viewpoint characters are in present tense while male-viewpoint sections are in past tense.",
+   "source": "Niall Harrison, 'Under Heaven' (review), Vector / BSFA (2010-08-18)",
+   "url": "https://vector-bsfa.com/2010/08/18/under-heaven/",
+   "quote": "are in present tense",
+   "page": ""
+  },
+  {
+   "index": 136,
+   "feature": "narrator on coincidence and historians",
+   "claim": "Harrison quotes the narrator's remark that only a patient historian or a story-shaper would note such conjunctions, as Kay's self-reflexive use of history.",
+   "source": "Niall Harrison, 'Under Heaven' (review), Vector / BSFA (2010-08-18)",
+   "url": "https://vector-bsfa.com/2010/08/18/under-heaven/",
+   "quote": "Only a patient historian with access to records",
+   "page": ""
+  },
+  {
+   "index": 137,
+   "feature": "veiled omniscient",
+   "claim": "Walton names Kay's Sarantine style an odd, distanced, elegiac 'veiled omniscient': a narrator who knows everything but draws and lifts veils.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "odd, distanced, elegaic style that I want to call veiled omniscient",
+   "page": ""
+  },
+  {
+   "index": 138,
+   "feature": "withheld identity trick (criticism)",
+   "claim": "Walton dislikes Kay's Dunnett-like trick of describing a character for pages without saying who is who.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "plays tricks where he described but doesn’t say who is who",
+   "page": ""
+  },
+  {
+   "index": 139,
+   "feature": "pulling back / artifice",
+   "claim": "Walton says there is always a pulling back, events interpreted through a consciousness of artifice, like the wrong end of a telescope.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "there’s always a pulling back",
+   "page": ""
+  },
+  {
+   "index": 140,
+   "feature": "no throwaway viewpoints",
+   "claim": "Walton notes many points of view but Kay never takes up a character just to throw them away; ironic omniscient linking underlines everything.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "he never takes up a character just to throw them away",
+   "page": ""
+  },
+  {
+   "index": 141,
+   "feature": "single-day compression and pluperfect",
+   "claim": "Walton observes the books concentrate on single days with heavy flashback, using more pluperfect than anything she can think of, almost like Ulysses.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "more use of the pluperfect tense in these than anything else",
+   "page": ""
+  },
+  {
+   "index": 142,
+   "feature": "one event from many strata",
+   "claim": "Walton notes a chariot race is seen from a driver, someone in the crowd and an undercook making soup.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "an undercook for the Blue faction making soup",
+   "page": ""
+  },
+  {
+   "index": 143,
+   "feature": "mediating metaphors",
+   "claim": "Walton says Kay mediates the world through chariot races and mosaic-making, describing heresy and empire in those terms.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "mediates the world through the chariot races",
+   "page": ""
+  },
+  {
+   "index": 144,
+   "feature": "details that bite",
+   "claim": "Walton praises details real enough to bite: tesserae quality, mud, fish sauces, the arrow-extraction tool.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "The details are all real enough to bite",
+   "page": ""
+  },
+  {
+   "index": 145,
+   "feature": "historical fantasy is open",
+   "claim": "Walton argues renaming reshuffles the deck so no reader knows the ending: a historical novel is inevitably tragedy, a historical fantasy is open.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "a historical fantasy is open",
+   "page": ""
+  },
+  {
+   "index": 146,
+   "feature": "sparse glinting magic",
+   "claim": "Walton says the little magic runs glinting through everything like silver threads in shot silk.",
+   "source": "Jo Walton, 'Mosaics and charioteers: Guy Gavriel Kay's Sarantine Mosaic', Tor.com/Reactor (2009-11-02)",
+   "url": "https://reactormag.com/mosaics-and-charioteers-guy-gavriel-kays-sarantine-mosaic/",
+   "quote": "like the silver threads in shot silk",
+   "page": ""
+  },
+  {
+   "index": 147,
+   "feature": "mannered and distanced (criticism)",
+   "claim": "Walton finds Arbonne mannered, distanced and held at arm's length, its world denser than its gossamer characters.",
+   "source": "Jo Walton, 'Provencal Fantasy: Guy Gavriel Kay's A Song for Arbonne', Tor.com/Reactor (2010-08-06)",
+   "url": "https://reactormag.com/provencal-fantasy-guy-gavriel-kays-a-song-for-arbonne/",
+   "quote": "mannered and distanced and held at arm’s length",
+   "page": ""
+  },
+  {
+   "index": 148,
+   "feature": "set-piece moments",
+   "claim": "Walton remembers Arbonne chiefly through set-piece moments of the kind Kay does so well.",
+   "source": "Jo Walton, 'Provencal Fantasy: Guy Gavriel Kay's A Song for Arbonne', Tor.com/Reactor (2010-08-06)",
+   "url": "https://reactormag.com/provencal-fantasy-guy-gavriel-kays-a-song-for-arbonne/",
+   "quote": "a few set-piece moments, of the kind Kay does so well",
+   "page": ""
+  },
+  {
+   "index": 149,
+   "feature": "trajectory away from magic",
+   "claim": "Walton traces a trajectory away from magic from Fionavar through Tigana and Arbonne to Lions.",
+   "source": "Jo Walton, 'Provencal Fantasy: Guy Gavriel Kay's A Song for Arbonne', Tor.com/Reactor (2010-08-06)",
+   "url": "https://reactormag.com/provencal-fantasy-guy-gavriel-kays-a-song-for-arbonne/",
+   "quote": "a trajectory away from magic",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 135,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the sections with women viewpoint characters ... are in present tense, compared to sections with male viewpoint characters in past tense",
+   "note": "Niall's own comment (Aug 19 2010, 7:34 am) on his Vector review; quote 'are in present tense' exact. Live URL 403s behind a JS proof-of-work wall; raw page read via Wayback id_ capture 20250916021402."
+  },
+  {
+   "index": 136,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Only a patient historian with access to records is likely to discover such links,” Kay writes; only “someone shaping a story for palace or marketplace … would note these conjunctions”",
+   "note": "Both halves quoted verbatim by Harrison and framed as 'The novelistic attention to coincidence becomes an illustration' of story-making from history, alongside 'As the implied narrator becomes a real narrator'. Harrison attributes with 'Kay writes' rather than 'the narrator', but the quoted words are the novel's narration (p.542). Wayback raw capture."
+  },
+  {
+   "index": 137,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "written in an odd, distanced, elegaic style that I want to call veiled omniscient",
+   "note": "Page continues: 'The omniscient narrator knows what will happen ... He draws and lifts veils.' Note Walton spells it 'elegaic'."
+  },
+  {
+   "index": 138,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He plays tricks where he described but doesn’t say who is who—does anybody like this? I hate it when Dorothy Dunnett does it",
+   "note": "Dunnett named explicitly; 'don’t leave me guessing who it is for two pages' supports the for-pages limb."
+  },
+  {
+   "index": 139,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there’s always a pulling back",
+   "note": "Same paragraph: 'interpreted through the consciousness of artifice' and 'always looking through the wrong end of the telescope'."
+  },
+  {
+   "index": 140,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are many points of view, but he never takes up a character just to throw them away",
+   "note": "Next sentence: 'The ironic linking of everything together in omniscient connects and underlines'."
+  },
+  {
+   "index": 141,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there’s more use of the pluperfect tense in these than anything else I can think of",
+   "note": "Same paragraph: 'concentrate on single days ... with lots of flashbacks' and 'This single day thing is almost like Ulysses'."
+  },
+  {
+   "index": 142,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "see it from the point of view of a driver, someone in the crowd, an undercook for the Blue faction making soup",
+   "note": "All three strata named in one sentence about a chariot race."
+  },
+  {
+   "index": 143,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay mediates the world through the chariot races and the making of mosaics",
+   "note": "Followed by 'We get the heresy and the religion through the mosaics. We get life and control of the empire through the chariot racing.'"
+  },
+  {
+   "index": 144,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The details are all real enough to bite, the varying quality of the glass tesserae, the mud, the fish sauces, the tool for drawing out arrows from flesh",
+   "note": "All four listed details present verbatim."
+  },
+  {
+   "index": 145,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a historical novel is inevitably a tragedy, a historical fantasy is open",
+   "note": "Reshuffle limb: 'because you have changed the names and reshuffled the deck, nobody knows what’s going to happen'."
+  },
+  {
+   "index": 146,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It’s not much magic, but it runs glinting through everything else like the silver threads in shot silk",
+   "note": "Preceded by the inventory of the small magic (soul-birds, one god encounter, flashes of flame, prophetic dreams)."
+  },
+  {
+   "index": 147,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it’s all mannered and distanced and held at arm’s length",
+   "note": "Gossamer limb: 'the world is more memorable and somehow denser than the characters, who are in comparison gossamer.'"
+  },
+  {
+   "index": 148,
+   "verdict": "PARTIAL",
+   "trueWording": "The characters, however, and the plot, had vanished from my mind ... except for a few set-piece moments",
+   "note": "Quote is exact, but Walton's 'except' applies to characters and plot only — the same sentence-pair says 'I remembered the setting perfectly well' (lavender fields, Court of Love, troubadours), so set-pieces are not how she chiefly remembers the book.",
+   "unsupportedLimb": "that she remembers Arbonne chiefly through set-pieces — she remembered the setting perfectly well; only characters and plot had vanished"
+  },
+  {
+   "index": 149,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is also a trajectory away from magic—Fionavar is full of magic, Tigana has somewhat less, Arbonne has less again, and The Lions of Al-Rassan has nothing but an accurate prophecy",
+   "note": "All four books named in the stated order."
+  }
+ ]
+}

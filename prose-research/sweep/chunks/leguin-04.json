@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 4,
+ "indices": [
+  490,
+  496,
+  497,
+  499,
+  500,
+  502,
+  504,
+  505,
+  506,
+  507,
+  508,
+  509,
+  510,
+  511,
+  512
+ ],
+ "claims": [
+  {
+   "index": 490,
+   "feature": "civic record register",
+   "claim": "A generalisation about Seggri's literary institutions is written as an agentless past passive inside the report.",
+   "source": "Ursula K. Le Guin, 'The Matter of Seggri' (1994), full text transcription, sfsfss.com",
+   "url": "https://www.sfsfss.com/stories2/Le%20Guin,%20Ursula%20K.%20-%20The%20Matter%20of%20Seggri.html",
+   "quote": "Small value was placed on preserving a \"true\" text",
+   "page": "report section on Seggri literature"
+  },
+  {
+   "index": 496,
+   "feature": "omission as information",
+   "claim": "Le Guin's editorial note on the Kesh novella records its damage in transit and its lost pages in the flat voice of a catalogue entry.",
+   "source": "Ursula K. Le Guin, editorial note in Always Coming Home, quoted by Brian Attebery in a Library of America interview",
+   "url": "https://www.loa.org/news-and-views/1491-always-coming-home-the-ursula-k-le-guin-book-that-breaks-the-novel-form-8220wide-open8221/",
+   "quote": "was damaged in transit, and the rest of the third chapter",
+   "page": "final question of the interview"
+  },
+  {
+   "index": 497,
+   "feature": "withheld information and inference",
+   "claim": "The same editorial note states the extent of the loss as a hedged range of pages rather than an exact figure.",
+   "source": "Ursula K. Le Guin, editorial note in Always Coming Home, quoted by Brian Attebery in a Library of America interview",
+   "url": "https://www.loa.org/news-and-views/1491-always-coming-home-the-ursula-k-le-guin-book-that-breaks-the-novel-form-8220wide-open8221/",
+   "quote": "the last ten or twenty pages of the novel, are lost",
+   "page": "final question of the interview"
+  },
+  {
+   "index": 499,
+   "feature": "place and institution description",
+   "claim": "Attebery presents the Back of the Book as a section a reader may begin with for its world-building rather than as an appendix.",
+   "source": "Brian Attebery, interviewed by Library of America",
+   "url": "https://www.loa.org/news-and-views/1491-always-coming-home-the-ursula-k-le-guin-book-that-breaks-the-novel-form-8220wide-open8221/",
+   "quote": "you can start with “The Back of the Book” and relish",
+   "page": "fourth answer"
+  },
+  {
+   "index": 500,
+   "feature": "place and institution description",
+   "claim": "Matthew Keeley argues that the scholarly and cultural notes that would be appendices elsewhere are the main text of Always Coming Home.",
+   "source": "Matthew Keeley, Reactor (Tor.com) review, 2019",
+   "url": "https://reactormag.com/book-reviews-the-new-edition-of-ursula-k-le-guins-always-coming-home/",
+   "quote": "are here the core of the text",
+   "page": "paragraph beginning 'The table of contents'"
+  },
+  {
+   "index": 502,
+   "feature": "place and institution description",
+   "claim": "Matthew Keeley describes Always Coming Home as a book whose ambition is to become a place.",
+   "source": "Matthew Keeley, Reactor (Tor.com) review, 2019",
+   "url": "https://reactormag.com/book-reviews-the-new-edition-of-ursula-k-le-guins-always-coming-home/",
+   "quote": "This is a book that aspires to placehood.",
+   "page": "paragraph beginning 'This novel represents a culmination'"
+  },
+  {
+   "index": 504,
+   "feature": "point of view and distance",
+   "claim": "A CSU Expository Reading and Writing Course module teaches The Left Hand of Darkness as a report addressed by Genly Ai to an official of the Ekumen.",
+   "source": "CSU Expository Reading and Writing Course, The Left Hand of Darkness module, Student Version",
+   "url": "https://rivercity.wusd.k12.ca.us/subsites/Brandon-Duff/documents/Expository-Reading-and-Writing-Course/Modules/The-Left-Hand-of-Darkness/Student%20Version.pdf",
+   "quote": "this novel is presented as a report from Genly Ai",
+   "page": "Activity 12, p. 73"
+  },
+  {
+   "index": 505,
+   "feature": "civic record register",
+   "claim": "The same module names the in-world genre of the novel's frame as an ansible document.",
+   "source": "CSU Expository Reading and Writing Course, The Left Hand of Darkness module, Student Version",
+   "url": "https://rivercity.wusd.k12.ca.us/subsites/Brandon-Duff/documents/Expository-Reading-and-Writing-Course/Modules/The-Left-Hand-of-Darkness/Student%20Version.pdf",
+   "quote": "It is called an ansible document.",
+   "page": "Activity 12, p. 73"
+  },
+  {
+   "index": 506,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says the rhythm of a story, however complicated and subtle, is what carries the reader.",
+   "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+   "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "quote": "that’s what’s going to carry the reader",
+   "page": "final section, on economy and rhythm"
+  },
+  {
+   "index": 507,
+   "feature": "plainness and economy",
+   "claim": "Le Guin praises old painters for getting simple in their means because they know they have not got time.",
+   "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+   "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "quote": "Just so plain and simple. Because they know they haven’t got time.",
+   "page": "closing answer"
+  },
+  {
+   "index": 508,
+   "feature": "plainness and economy",
+   "claim": "Le Guin distinguishes the economy she means from minimalism, which she calls a self-conscious mannerist style she cannot write.",
+   "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+   "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "quote": "I’m not talking minimalism",
+   "page": "closing answer"
+  },
+  {
+   "index": 509,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin says that in departing from the heroic fantasy tradition she found a less formal vocabulary and a cadence better suited to what she had to say.",
+   "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+   "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "quote": "I found a less formal vocabulary and a cadence better suited",
+   "page": "answer on the shift toward economy"
+  },
+  {
+   "index": 510,
+   "feature": "register modulation",
+   "claim": "Le Guin describes her own career-long change as easing up on the formality of her prose.",
+   "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+   "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "quote": "I’ve eased up on the formality of the prose",
+   "page": "answer on the shift toward economy"
+  },
+  {
+   "index": 511,
+   "feature": "archaism",
+   "claim": "Le Guin names Tolkien, Dunsany, Eddison, MacDonald and Malory as the earlier-generation styles that the language of serious fantasy still rested on in the sixties and seventies.",
+   "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+   "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "quote": "",
+   "page": "answer on the shift toward economy"
+  },
+  {
+   "index": 512,
+   "feature": "plainness and economy",
+   "claim": "Le Guin compares an aging writer's language to old shoes or kitchen gear that no longer needs fancy stuff.",
+   "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+   "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "quote": "your language gets like your shoes or your kitchen gear",
+   "page": "answer on the shift toward economy"
+  }
+ ]
+}

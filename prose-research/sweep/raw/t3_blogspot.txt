@@ -1,0 +1,374 @@
+ 
+ Tolkien: Medieval and Modern: Translating the Red Book of Westmarch 
+Tolkien: Medieval and Modern
+ Pages 
+ Home 
+ Syllabus 2026 
+ The Forge of Tolkien 
+ Further Reading 
+ Syllabus 2011-2023 
+ Friday, April 18, 2014 
+Translating the Red Book of Westmarch
+ According
+to his forward in the first edition of The
+Fellowship of the Ring , Tolkien wrote the story in the manner he did, with
+the language he did, and with the style that he did because he was translating
+the Red Book of Westmarch. He was simply the translator. It was not up to him
+to take liberties in who said what and in what manner. He encountered this red
+book and translated it from Westron into English. Let us assume that this is
+true. Let us forget Tolkien’s masterful skill of creation and story-crafting
+(blasphemy, I know) and let us believe that he is nothing more than a translator.
+ What
+interests me most about Tolkien’s translations is his translation of words that
+don’t quite have an English equivalent, such as names, both of people and
+places, as well as races. With Quenya and Sindarin names, the solution is
+simple: don’t translate it. Tolkien only translated the book from Westron to
+English and from Rohirric to Old English*; the other languages and the names
+which derive from these languages largely remain, such as Aragorn, Galadriel,
+and Mordor. Yet the names of races and those whose names derive from Westron
+still provide a problem for translation. Some solutions are simple. Dwarves,
+for example, is a translation that seems rather obvious. The race he was
+describing – short, stocky humanoids who enjoy mining and beer – was already a thing.
+So he simply translated the Westron word narag 
+to the English word dwarf. Likewise,
+elves were a concept we already had. Yet this is not so easy for the word hobbit. The creatures we know as hobbits
+are largely Tolkien’s own invention.** We don’t have a name yet for them. He
+could have simply called them halflings. I think that’s a name that our society
+could understand without much prior knowledge. However, that would be a poor
+translation of the Red Book. This book was written by hobbits. Hobbits did not
+call themselves halflings, or in Westron banakil; 
+no, they called themselves hobbits, kuduk .
+ Kuduk means “hole-dweller.” As such, Tolkien
+had to properly translate the word. For this, he borrowed from Old English.
+Hobbit derives from hol byldan, Old
+English for “hole build.” These are then grouped together into hole-builder: holbytla. And from this, we get hobbit .*** Ents provide us with a
+similar problem. Most cultures have talking trees; however, we lack a unified
+term for these creatures, other than the rather cumbersome “talking trees.” Tolkien
+instead named them Ents , which again
+he borrowed from Old English. Ent 
+means giant. Yet, Ents are not Giants.
+That is not to say they are not very large, towering creatures. But they are
+not the same Giants. Giants as we known them do (or did) exist in Middle Earth.
+Giants and Ents are distinct creatures. Tolkien used distinct names to refer to
+them. So, why did Tolkien refer to them with an Old English word for Giants? He
+could have created a more precise name again using Old English. I do not know
+the Westron word for Ent, but I do know they are described as Shepherds of the
+Trees. So, in Old English that would be treowa
+hierdeas. Perhaps the word treeherd 
+or something similar did not have the same feeling that Tolkien wanted for the
+Ents. Yet still, I find it odd that Tolkien decided to use an Old English synonym
+for a race that is not synonymous with Giants. 
+ We
+also see Tolkien’s hand when it comes to the translation of the Hobbits’ names.
+We know Frodo, Sam, Merry, Pippin, and Bilbo. However, their actual names were
+Maura, Ban, Kali, Razar, and Bilba. Bilba’s name change was the smallest, and
+it was simply to avoid confusion. In English, names that end in –a are
+typically associated with the feminine. To make sure there was no doubt in Bilba’s
+masculinity, Tolkien changed the hobbit’s name to Bilbo to conform to English
+standards. Alright, so that explains why Bilbo still has a “weird” name, but
+what about Frodo? Why does Frodo have a weird name when Sam, Merry, and Pippin
+all get (relatively) normal names? Ah! Well, that’s because Tolkien only
+translated Westron into English. Maura isn’t a Westron name. It’s Rohirric. So
+Tolkien couldn’t translate it into English. It had to be translated into Old
+English. Maura in Rohirric means “wise, experienced one” so Tolkien gave him
+the equivalent Old English name, Frodo. Now, just because the other three received
+(relatively) normal names in translation does not mean their names were
+translated with any less care. Sam is short for Samwise, not Samuel. As such,
+the name is English in origin, not Hebrew. Samwise (a rather unfortunate name
+given the meaning) means “almost wise” or “half wise.” This makes it a direct
+translation of his Westron name Banazir. Kali
+means happy leading to Merry. Razar is short for Razanur which essentially
+means “traveler.” Pippin is short for Peregrin, which also means “traveler” or “wandering
+pilgrim” but alas, Peregrin derives from Latin as opposed to English. However,
+it has entered into English lexicon, and Westron only needs be translated into
+English, not necessarily into English words with English ancestry. 
+ So
+why do this? Why translate these names into English? It is understandable to
+translate narag into dwarf because
+Tolkien’s audience would have a concept for what a dwarf is. The same is true
+for elves. But why did Tolkien create an English word, such as hobbit, ent, or Samwise,
+when he could have just as easily left it in Westron (or Rohirric). He could
+have told us a tale of a kuduk named Banazir. He could have told us about
+King Turac of Rohan. But he didn’t.
+He translated it. He created words in the English language simply so he could consistently translate the Red Book of
+Westmarch from Westron into English. But I suppose that reveals the lengths
+that Tolkien was willing to travel. He would rather change the English language
+and make new words than provide us with a substandard translation. Now that is
+a dedicated translator. 
+* Rohirric is the linguistic
+ancestor of Westron, just as Old English is the ancestor of English. 
+** 
+Yes, I know. Subconscious Snergs. 
+*** Actually, Tolkien created the
+word hobbit first and then created a backwards etymology so that the hobbits
+could have an equal footing with the other races which have such linguistic
+depth. Which is pretty impressive. But again, I am assuming Tolkien is nothing
+but a translator and he did no creating! 
+-N. Lurquin 
+By
+ "Tolkien: Medieval and Modern" 
+at
+ April 18, 2014 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ Style 
+ 2 comments: 
+ dyingst 
+said...
+These are some very interesting observations. Beyond the internal consistency which Tolkien so meticulously maintains, I wonder if they can lead us to deeper questions about the role and choices of the translator and, beyond that, to how Tolkien understands himself as an artist. Every translator must make choices, beyond simply finding the correct words and remaining consistent. They have considerable influence over the tone, emphases, and much more, as we can see by looking at any two translations of a classic text (compare, for example, Dryden's Aeneid to the Penguin Classics edition, or the Pevear and Volokhonsky Dostoevsky to the Garnett version). Can we see the sorts of choices operative in Tolkien's works (it might be interesting to think about the differences in tone between the Hobbit and LotR in these terms)? Can we imagine an "alternative" translation of the Red Book? What would that look like? (Perhaps these questions are so fascinating to me because the Seamus Heaney translation of Beowulf is sitting on my desk and I just got an e-mail from Amazon about Tolkien's soon to be released translation, I think that would make for a fascinating comparison) On Tolkien as an artist, we might ask does Tolkien really only consider himself a translator? Or does he, even more interesting, consider himself the creator of a text, the Red Book, in another language, which he then seeks to translate into English? What's at stake with these interpretations? Your post brings us to the edge of these considerations, it would be great to delve a little further. 
+April 20, 2014 at 12:40 PM
+ Unknown 
+said...
+Cayce’s readings are filled with examples of reaping what has been sown in previous lives. An individual suffering from severe asthma is told, “You cannot press the life out of others without seeming at times to have it pressed out of oneself.” A deaf person hears this admonition online translation : ”Then do not close your ears again to those who plead for aid.”
+February 20, 2015 at 8:35 AM
+ Post a Comment 
+ Newer Post 
+ Older Post 
+ Home 
+Subscribe to:
+ Post Comments (Atom) 
+ About this course 
+"Tolkien: Medieval and Modern"
+ J.R.R. Tolkien's The Lord of the Rings is one of the most popular works of imaginative literature of the twentieth century. This course seeks to understand its appeal by situating Tolkien's creation within the context of Tolkien’s own work as both artist and scholar alongside its medieval sources and modern parallels. Themes to be addressed include the problem of genre and the uses of tradition, the nature of history and its relationship to place, the activity of creation and its relationship to language, beauty, evil and power, the role of monsters in imagination and criticism, the twinned challenges of death and immortality, fate and free will, and the interaction between the world of "faerie" and religious belief. 
+ View my complete profile 
+ But my horn shall be exalted like that of the unicorn 
+ Themes 
+ Creativity and Free Will I: Aulë and Fëanor 
+ (51) 
+ Creativity and Free Will II: Númenor 
+ (41) 
+ Creativity and Free Will III: Frodo and the Ring 
+ (47) 
+ Death and Immortality I: Elves and Men 
+ (55) 
+ Death and Immortality II: Men and Hobbits 
+ (51) 
+ Fantasy and Fairy Tale 
+ (21) 
+ Fragments and Elf-Friends 
+ (28) 
+ History and Place 
+ (50) 
+ Jewels and Trees I 
+ (42) 
+ Jewels and Trees II 
+ (42) 
+ Language and Dreams 
+ (48) 
+ Language and Names 
+ (46) 
+ Monsters and Critics 
+ (51) 
+ Style 
+ (40) 
+ The Meaning of Life I: Worship 
+ (49) 
+ The Meaning of Life II: Cult 
+ (19) 
+ The Music of Creation 
+ (51) 
+ Visits to Middle-earth 
+ Followers 
+ Nolwë ola, ar cuila lohta 
+Course designed and taught by Rachel Fulton Brown Associate Professor of History The University of Chicago 
+ Search This Blog 
+ Upon an instrument of ten strings 
+ Blog Archive 
+ ► 
+2026
+ (78) 
+ ► 
+June
+ (1) 
+ ► 
+May
+ (36) 
+ ► 
+April
+ (37) 
+ ► 
+March
+ (4) 
+ ► 
+2023
+ (68) 
+ ► 
+May
+ (39) 
+ ► 
+April
+ (25) 
+ ► 
+March
+ (4) 
+ ► 
+2020
+ (105) 
+ ► 
+June
+ (14) 
+ ► 
+May
+ (54) 
+ ► 
+April
+ (36) 
+ ► 
+March
+ (1) 
+ ► 
+2017
+ (120) 
+ ► 
+June
+ (1) 
+ ► 
+May
+ (60) 
+ ► 
+April
+ (56) 
+ ► 
+March
+ (3) 
+ ▼ 
+2014
+ (218) 
+ ► 
+June
+ (26) 
+ ► 
+May
+ (110) 
+ ▼ 
+April
+ (82) 
+ Creation Myth and the Canon: What It Means to be S... 
+ A Concern About Hobbits 
+ Ainulindalë is to Elves as Genesis is to Men 
+ Literalism and the Problem of Evil 
+ The Origin of Evil and If God Is Good 
+ Religious Fragmentation in Tolkien's Legendarium 
+ Relative realities, framing, and religion 
+ Why Music? 
+ String Theory: Creation, Music, and Humanity 
+ Eru and Eden: How Tolkien's Creation Myth Exemplif... 
+ Fragments from Wednesday's Discussion 
+ True Names: A Counterexample 
+ Some Thoughts on Languages 
+ Dream Tongue 
+ The Creations of the Valar and Valarin 
+ Name and Language in Tolkien 
+ Tom is the Master 
+ The Sub Creative Art of Language 
+ "O felix peccatum Babel!" and the Function of Lang... 
+ The Aesthetics of Language 
+ Orc-language and why it is corrupt 
+ Asterisk History 
+ Names and History: the Development of Language 
+ The Role of Place and History in the Creation of t... 
+ The Past Recedes 
+ History, Fantasy and Historical Relativism 
+ Between Reality and History in Time, Mythology 
+ When the Value of Myth and History Lies in Action ... 
+ The History Within Myths 
+ An Anachronistic History 
+ Seeds and Gardeners: Patterns of Characterization ... 
+ History as Myth and a Few Other Things As Well 
+ Giving the Ordinary Meaning 
+ Historical Fantasy, and Fantastical History: The S... 
+ Holly and Ruin 
+ Taking Root: Tolkien and the Land 
+ How Can History Be Real If Our Myths Aren't Real 
+ The World Is Flat, and How We Can Avoid It: Farmer... 
+ Translation, Style, and Historical Narrative 
+ A Far-off Gleam of Evangelium 
+ To Make a Soul: Tolkien and Variations of Speech i... 
+ A Hobbit Book: The Simplicity of Style 
+ Self-Stylin': Gandalf the Grey 
+ Tolkien's Mastery of Words 
+ The Style of the Elf-Friend 
+ Tolkien's Use of Poetry and Prose 
+ Tolkien’s Style: Fluidity between the Humble and t... 
+ Translating the Red Book of Westmarch 
+ Poetry, Peoples, and Memory 
+ The Uses of Poetry in Lord of the Rings 
+ On Devices, Dreams, and Dumbledore, or, "Of course... 
+ The Importance of Machine 
+ Spaceships: On Travel Between Primary and Secondar... 
+ Paths to a Tangible Legend 
+ The Machine that Conquered Time 
+ The Author in the Work 
+ Tolkien and Time Travel 
+ Private languages and Communication in Tolkien's L... 
+ Dream-Language Interactions across Tolkien's Work 
+ Breaching the Secondary Reality 
+ Reincarnation in Tolkien 
+ Fragments Within the Works of Tolkien 
+ Falling Asleep Again: Frodo's Experience 
+ Atlantis and Atalantie 
+ Language and People 
+ The Route to the Lost Road: Tolkien's Application ... 
+ The Reality of the Imagined 
+ Whence and why a story? Art and Allegory in Tolkie... 
+ Immortality through Fragmentation 
+ Our Need for Elf-friends 
+ The Inevitable Homecoming 
+ Keepers of Faerie 
+ The Agency and Destiny of Elf Friends 
+ Building Bridges to Faerie 
+ The End of the Story 
+ On Fragments, Soup, and Rapunzel 
+ Elf-friends and Credibility 
+ Tom Bombadil and Fantasy as Reason 
+ Rissik and the Literary Value of Creation 
+ Meditations 
+ Our Right: Used and Misused 
+ Who Are Fairy Stories Written For? Come, Tom Bomba... 
+ ► 
+2011
+ (176) 
+ ► 
+June
+ (9) 
+ ► 
+May
+ (74) 
+ ► 
+April
+ (89) 
+ ► 
+March
+ (4) 
+ In the works of thy hands, I shall rejoice 
+ Guides to Arda 
+ Ansible 
+ Elvish Linguistic Fellowship 
+ Family Tree of the Tolkien Legendarium 
+ Glǽmscrafu 
+ Internet Sacred Text Archive 
+ J.R.R. Tolkien and WWI 
+ LotR Project 
+ Planet Tolkien 
+ The (Other) Tolkien Professor 
+ The Cambridge Tolkien Society 
+ The Catholic Imagination of J.R.R. Tolkien 
+ The DM of the Rings 
+ The Forge of Tolkien 
+ The Grey Havens 
+ The One Ring 
+ The Tolkien Estate 
+ The Tolkien Meta-FAQ 
+ The Tolkien Music List 
+ The Tolkien Shop 
+ Tolkien Collecting Resources 
+ Tolkien Collection, Marquette University 
+ Tolkien Gateway 
+ Tolkien Library 
+ Tolkien Sarcasm Page 
+ Tolkien Society 
+ Tolkien's The Notion Club Papers 
+ Tolkienian Fonts for Windows 
+ Useful Elvish Phrases 
+Images from the Stuttgart Psalter, Stuttgart, Württembergische Landesbibliothek, Cod.bibl.fol. 23. Theme images by caracterdesign . Powered by Blogger .
+ 

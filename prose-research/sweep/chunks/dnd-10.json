@@ -1,0 +1,28 @@
+{
+ "name": "dnd",
+ "chunk": 10,
+ "indices": [
+  1148,
+  1149
+ ],
+ "claims": [
+  {
+   "index": 1148,
+   "feature": "boxed text form",
+   "claim": "James Wyatt says the 2024 Dungeon Master’s Guide now defines boxed text, so published adventures need not keep doing so.",
+   "source": "James Wyatt, quoted by Ben Brosofsky, ScreenRant interview with Christopher Perkins and James Wyatt",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-interview-perkins-wyatt/",
+   "quote": "Now the DMG tells you what boxed text is",
+   "page": "ScreenRant, 25 October 2024"
+  },
+  {
+   "index": 1149,
+   "feature": "boxed text form",
+   "claim": "Dungeon Master’s Workshop dates the introduction of boxed text to the 1979 module The Hidden Shrine of Tamoachan, written so that competing tables received identical room descriptions.",
+   "source": "The Archmage, \"Dungeon Mastering 101: Mastering the Boxed Text\", Dungeon Master’s Workshop",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "quote": "ever since boxed text was introduced in The Hidden Shrine of Tamoachan",
+   "page": "post of 27 September 2019"
+  }
+ ]
+}

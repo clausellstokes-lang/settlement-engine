@@ -1,0 +1,280 @@
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 52604 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 53505 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 54402 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 55416 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 59975 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 60607 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 63046 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 63509 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 64272 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 65232 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 66858 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 67724 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 70838 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 71693 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 73134 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 73842 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 75063 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 76328 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 77087 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 83307 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 95300 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 97504 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 99809 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52:  7300 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 11997 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 27100 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 30267 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 34743 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
