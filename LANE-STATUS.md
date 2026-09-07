@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 03:05:55 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 03:11:39 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegation sitting — the owner hands the open rows to the chair's judgment an
 
@@ -129,18 +129,19 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
-- **dnd**: claims 1212 · verdicts 1168 (todo 44) · kept 915 · partial 207 · verdict files 82 (triage 2, regrade r6) · section 09-07 00:36 · critic 09-07 01:07
-- **ai**: claims 1518 · verdicts 1518 (todo 0) · kept 1015 · partial 191 · verdict files 84 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-07 02:10
+- **dnd**: claims 1212 · verdicts 1212 (todo 0) · kept 950 · partial 216 · verdict files 86 (triage 2, regrade r6) · section 09-07 00:36 · critic 09-07 01:07
+- **ai**: claims 1518 · verdicts 1287 (todo 231) · kept 1015 · partial 191 · verdict files 84 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-07 02:10
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
-- **leguin**: claims 924 · verdicts 831 (todo 93) · kept 592 · partial 98 · verdict files 51 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
+- **leguin**: claims 924 · verdicts 861 (todo 63) · kept 619 · partial 101 · verdict files 53 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r10/wf_543ddb3b-67c, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r12/wf_43d098bf-eff, ai r10/wf_0eb229cc-f75
 
 ## WORKFLOW RUNS of chair session b43943b4-3b40-4fd9-bc63-9b9c9afb55b4 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_36047b28-91e: 2 journal lines, 2 agents
-- wf_43d098bf-eff: 4 journal lines, 4 agents
-- wf_543ddb3b-67c: 4 journal lines, 4 agents
+- wf_36047b28-91e: 6 journal lines, 3 agents
+- wf_37a1566c-e8f: 4 journal lines, 4 agents
+- wf_43d098bf-eff: 9 journal lines, 5 agents
+- wf_543ddb3b-67c: 6 journal lines, 4 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.41 3.11 8.01
+load: 2.35 2.91 6.32

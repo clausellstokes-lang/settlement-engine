@@ -4219,6 +4219,30 @@
   }
  },
  {
+  "index": 1156,
+  "feature": "place and institution description",
+  "claim": "The publisher's settlement slot list opens with a slot labelled Defining Trait.",
+  "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+  "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+  "quote": "DEFINING TRAIT",
+  "page": "Settlement Tracker, first field",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2024",
+  "routeHint": "direct PDF fetch from media.dndbeyond.com, pdftotext -layout",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1156,
+   "verdict": "PARTIAL",
+   "trueWording": "“DEFINING TRAIT” — third element, after SETTLEMENT NAME and the size row",
+   "unsupportedLimb": "opens with — DEFINING TRAIT is not the handout's first slot",
+   "note": "Quote is on the page verbatim as the first large boxed field, but the tracker's field order is SETTLEMENT NAME, then the VILLAGE/TOWN/CITY checkbox row, then DEFINING TRAIT. The claim's own page note ('first field') is therefore wrong; DEFINING TRAIT is the first descriptive prompt, not the first slot.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
+  }
+ },
+ {
   "index": 1161,
   "feature": "boxed text form",
   "claim": "The Death House read-aloud paragraph opens a settlement with a road, the village, and a simile drawn from its own building stock rather than with any statistic.",
@@ -4236,10 +4260,10 @@
   "verdict": {
    "index": 1161,
    "verdict": "PARTIAL",
-   "trueWording": "its tall houses dark as tombstones",
-   "unsupportedLimb": "that the simile is drawn from the village's own building stock - the simile's vehicle is tombstones (grave markers), not buildings; the houses are the tenor being compared, not the source of the comparison",
-   "note": "Raw PDF fetched live (HTTP 200, 62 MB), pdftotext. The quoted fragment is verbatim; the two-column flow splits it, and the paragraph continues 'tombstones. Nestled among these solemn dwellings are a handful of closed-up shops. Even the tavern is shut tight.' Road, village and absence of any statistic are all supported. Only the 'building stock' characterisation of the simile fails.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“its tall houses dark as tombstones”",
+   "unsupportedLimb": "a simile drawn from its own building stock — the simile's image is tombstones, not the village's buildings",
+   "note": "Raw PDF (media.wizards.com, HTTP 200, 62 MB) via curl + pdftotext. The boxed read-aloud after 'Once they reach the village, read:' begins 'The gravel road leads to a village, its tall houses dark as tombstones.' Road, village and absence of any statistic are all supported; the simile's vehicle is tombstones (grave markers), while the houses are its subject, so 'drawn from its own building stock' is not what the page does.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -4260,10 +4284,10 @@
   "verdict": {
    "index": 1162,
    "verdict": "PARTIAL",
-   "trueWording": "Death House is the name given to an old row house",
-   "unsupportedLimb": "that the locals are the ones who give the name - the sentence is agentless passive ('is the name given'), and the only mention of locals nearby is that they 'give the building a wide berth', which is avoidance, not naming",
-   "note": "Raw PDF, section 'History'. The quote is verbatim and the naming-by-epithet form is supported; the page does locate the house by village and map area (E7) and mentions the family that built it, so the 'rather than by an owner or address' contrast is the verifier's reading rather than the page's statement.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“Death House is the name given to an old row house”",
+   "unsupportedLimb": "the name the locals give it — the page never says locals bestow the name",
+   "note": "Same raw PDF, 'History' section. The sentence continues 'in the village of Barovia (area E7 on the village map)'; naming by neither owner nor street address is supported (the Durst family is named only later), but the agent of the naming is unstated — the only 'locals' sentence on the page is 'Locals give the building a wide berth for fear of antagonizing the evil spirits'.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -4284,10 +4308,202 @@
   "verdict": {
    "index": 1165,
    "verdict": "PARTIAL",
-   "trueWording": "Icehaven is a village of 5,000 souls",
-   "unsupportedLimb": "that the people's trade is in that same opening sentence - the opening sentence gives name, population, species mix and coastal location; the trade ('ply their trades on fishing boats') arrives two sentences later",
-   "note": "Live page fetched with a browser user agent (HTTP 200). Quote verbatim under the heading 'The Village of Icehaven'. Name and population limbs hold; the 'in one sentence' limb does not. Separately, the source attribution 'Wizards of the Coast / D&D Beyond' is loose for a February 2020 article: the byline is James Haeck, and D&D Beyond was not WotC-owned until 2022.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“Icehaven is a village of 5,000 souls”",
+   "unsupportedLimb": "in one sentence — the trade is in the next sentence, not the opener",
+   "note": "Raw HTML by curl with browser UA (HTTP 200, 284 KB), tags stripped locally. Under 'The Village of Icehaven' the opening sentence gives name, population and demographics and ends '—on the northern coast of the Dwendalian Empire.' The trade limb comes only in the following sentence: 'the people of Icehaven primarily ply their trades on fishing boats.' Free, official D&D Beyond Encounter of the Week column confirmed by the page's own tags.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
+  }
+ },
+ {
+  "index": 1172,
+  "feature": "boxed text form",
+  "claim": "The same column ties each read-aloud to the precise moment and threshold at which it is spoken.",
+  "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Battle of the Braggarts', 2020",
+  "url": "https://www.dndbeyond.com/posts/723-encounter-of-the-week-battle-of-the-braggarts",
+  "quote": "Read or paraphrase the following as the characters enter the Wartpimple Tavern",
+  "page": "'Social Encounter: Battle of the Braggarts'",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2020",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1172,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'ties EACH read-aloud to the precise moment and threshold' - one of the four cues is explicitly left to the DM ('At some point when the characters are in the tavern (at the DM's discretion)'), and a second is tied only to a purpose ('to introduce the characters to some of the bar's other patrons')",
+   "trueWording": "one cue: 'At some point ... at the DM's discretion'",
+   "note": "The quoted cue itself is strict-exact on the page. The article carries four 'Read or paraphrase' cues: the tavern entry (moment), the bar patrons (purpose only), the boasting escalation (explicitly DM discretion, no threshold), and the failure branch (three failures before three successes - a real threshold). So the universal 'each' is not supported; two of four qualify.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1177,
+  "feature": "place and institution description",
+  "claim": "The same report shows the leadership roll returning a political condition rather than a person, an illegitimate leader causing civil unrest.",
+  "source": "Randy, Gaming Nexus, reporting a Wizards of the Coast preview with Chris Perkins, 10 Oct 2024",
+  "url": "https://www.gamingnexus.com/News/65236/The-DMs-Toolbox-in-the-DD-2024-Dungeon-Masters-Guide-is-filled-with-fireball-fungus-and-total-party-kills",
+  "quote": "Local leaders: An illegitimate leader causing civil unrest",
+  "page": "settlement demonstration paragraph",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2024-10-10",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1177,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'returning a political condition rather than a person' - the entry's head noun is a leader ('An illegitimate leader'), unnamed but a person-type result, with the condition attached as a participial clause",
+   "trueWording": "Local leaders: An illegitimate leader causing civil unrest",
+   "note": "Quote is strict-exact. The page supports that the result is a leadership situation rather than a named individual, but it does not support the stronger 'a condition rather than a person' framing; the roll returns a leader described by his effect. Downgraded rather than caveated.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1178,
+  "feature": "civic record register",
+  "claim": "The freely licensed System Reference Document 5.2.1 contains no settlement-description rules: its four occurrences of settlement are all inside spell and equipment text.",
+  "source": "Wizards of the Coast, System Reference Document 5.2.1 (CC-BY-4.0), 2025",
+  "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+  "quote": "",
+  "page": "whole document; grep over extracted text",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025",
+  "routeHint": "direct PDF fetch, pdftotext, grep -c -i settlement returns 4, all in Commune with Nature, spellcasting services and crafting text",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1178,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'all inside spell and equipment text' - the fourth mention is in the Magic Items chapter's 'Crafting Magic Items' rules (p. 206), a chapter the SRD itself distinguishes from 'Equipment'",
+   "trueWording": "fourth mention sits in 'Crafting Magic Items' (p. 206)",
+   "note": "PDF fetched (HTTP 200, 6.03MB) and text extracted with pdftotext; two extractions agree on exactly four stem occurrences (three 'settlements', one 'settlement'). Locations: p.102 Equipment > Spellcasting services ('Most settlements contain individuals who are willing to cast spells'); p.116 spell Commune with Nature, twice ('castles and settlements'; 'Locations of settlements'); p.206 Magic Items > Crafting Magic Items > Raw Materials ('in any other settlement, that chance is 25 percent'). The 'no settlement-description rules' limb is confirmed: the Gameplay Toolbox lists Travel Pace, Backgrounds, Curses, Environmental Effects, Fear, Poison, Traps and Combat Encounters, and no settlement entry.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1179,
+  "feature": "boxed text form",
+  "claim": "Neither freely licensed SRD, 5.1 nor 5.2.1, mentions read-aloud or boxed text anywhere, so no lawful open-licence source carries the form.",
+  "source": "Wizards of the Coast, System Reference Document 5.1 (2016) and 5.2.1 (2025)",
+  "url": "https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf",
+  "quote": "",
+  "page": "whole documents; grep over extracted text",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025",
+  "routeHint": "direct PDF fetch of both, pdftotext, grep -i for 'read aloud', 'read-aloud', 'boxed text' returns zero hits in each",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1179,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'so no lawful open-licence source carries the form' - a universal claim about open-licence sources generally that two documents cannot establish",
+   "trueWording": "zero matches for 'read-aloud' or 'boxed' in both SRDs",
+   "note": "Both PDFs fetched (5.1 HTTP 200, 4.86MB; 5.2.1 HTTP 200, 6.03MB) and extracted with pdftotext. Case-insensitive grep for 'read aloud', 'read-aloud', 'boxed text' and bare 'boxed' returns 0 in each document, so the measured limb is CONFIRMED for both SRDs; only the generalising 'so' clause outruns the evidence.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1182,
+  "feature": "place and institution description",
+  "claim": "The same published passage states the town's defences as two absences rather than as a description.",
+  "source": "Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article",
+  "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
+  "quote": "The town has no walls and no garrison",
+  "page": "'Tips For Running Phandalin in Your Games', quoted boxed text",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019 text, reprinted 2023",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1182,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'rather than as a description' - the same sentence continues 'but most of the adults keep weapons within easy reach in case the need for arms should arise', a positive description of the town's defence",
+   "trueWording": "'The town has no walls and no garrison' plus armed adults",
+   "note": "Quote is strict-exact and the 'two absences' limb (no walls, no garrison) is fully supported. The contrastive second clause of the same sentence supplies a positive defensive description, so the exclusive framing is downgraded rather than caveated.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1184,
+  "feature": "place and institution description",
+  "claim": "The official article's own settlement table gives each location a proprietor and a verbless short description.",
+  "source": "Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023",
+  "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
+  "quote": "Modest inn for eating, resting, and gossip",
+  "page": "'Key NPCs and Locations' table, Stonehill Inn row",
+  "kind": "vendor",
+  "polarity": "applies",
+  "date": "2023-09-18",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1184,
+   "verdict": "PARTIAL",
+   "trueWording": "Modest inn for eating, resting, and gossip",
+   "note": "Quote byte-exact in the 'Key NPCs and Locations' table, Stonehill Inn row; the table's three columns are Location / Proprietor / Short description and all nine rows do carry a named proprietor. The universal 'verbless' limb fails on one row.",
+   "unsupportedLimb": "that EVERY row's short description is verbless - the Lionshield Coster row reads 'Supplies armor and weapons', a finite verb phrase (8 of 9 rows are verbless)",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1208,
+  "feature": "plainness and economy",
+  "claim": "The D&D story lead states in his own collected columns that he keeps his descriptions spare.",
+  "source": "Christopher Perkins, The Dungeon Master Experience 2011 collected columns, Wizards of the Coast",
+  "url": "https://web.archive.org/web/20201112024903id_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+  "quote": "I keep my descriptions spare.",
+  "page": "'Pacing' column",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2011",
+  "routeHint": "the live wizards.com URL now returns an HTML page; read as PDF via the Wayback raw capture, then pdftotext",
+  "registerHint": "dm-page",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1208,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'The D&D story lead' — the source names Perkins D&D Senior Producer, not story lead",
+   "trueWording": "I keep my descriptions spare.",
+   "note": "Wayback raw PDF fetched (200, 3.8MB, PDF 1.7) and text-extracted with pdftotext. The quoted sentence appears word for word in the December 2011 / Dungeon 197 installment, whose running head is 'The Dungeon Master Experience: T'wit' — the pacing column on 'the ancient art of contraction', not a column titled 'Pacing' as the claim's page field says. It heads one of his listed tactics: 'I keep my descriptions spare. If the characters are hired to escort a merchant caravan...' The collected-columns limb is supported (the PDF is the compiled 2011 DM Experience columns). The unsupported limb is the title: the PDF's author blocks read 'Chris Perkins is the D&D Senior Producer at Wizards of the Coast LLC' and 'he's the senior producer for the Dungeons & Dragons Roleplaying Game and leads the team of designers, developers, and editors' — nothing in the source calls him a story lead.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1211,
+  "feature": "terminology consistency",
+  "claim": "A settlement-generator vendor attributes a population tier set of hamlet 50-300, village 300-900 and town 1,000-8,000 to the Dungeon Master's Guide, figures that match neither the publisher's own 2024 settlement handout nor any edition it names.",
+  "source": "Vito, 'D&D Settlement Sizes — Hamlet, Village, Town, and City', Tools and Taverns, updated 13 Jul 2026",
+  "url": "https://toolsandtaverns.com/guides/settlement-guide",
+  "quote": "DMG population tiers: hamlet 50-300, village 300-900, town 1,000-8,000",
+  "page": "'Key Takeaways'",
+  "kind": "vendor",
+  "polarity": "asserts",
+  "date": "2026-07-13",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "none",
+  "confidence": "medium — the page's attribution to the DMG is unsourced and it names no edition; the mismatch with the 2024 Settlement Tracker's 500 / 501-5,000 / 5,001+ bands is my comparison",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1211,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the figures match no WotC edition nor the 2024 settlement handout — the page makes no comparison and names no edition",
+   "trueWording": "DMG population tiers: hamlet 50-300, village 300-900, town 1,000-8,000",
+   "note": "Raw HTML fetched (200, 25KB). The quote is the exact opening of the first 'Key Takeaways' bullet, which continues ', city 8,000+, metropolis 25,000+.' The vendor limb is supported: the site sells/hosts a 'D&D Settlement Generator' it links from this guide. The attribution limb is supported twice — the bullet's 'DMG population tiers' and the body's 'The Dungeon Master's Guide splits settlements into rough tiers by population'. What this page cannot support is the claim's second half: it names no edition of the DMG and makes no comparison to any WotC handout, so the mismatch assertion needs a separate source and is not verified here.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
   }
  }
 ]

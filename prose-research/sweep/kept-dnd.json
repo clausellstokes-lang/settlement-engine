@@ -19141,9 +19141,9 @@
   "verdict": {
    "index": 1153,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "VILLAGE (POP. UP TO 500)",
-   "note": "Raw PDF fetched live (HTTP 200, 5.3 MB), pdftotext -layout. Size checkbox row carries three population bands; village band is as quoted. Footer reads TM & (c) 2024 Wizards of the Coast LLC, so publisher and year are on the artefact itself.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“VILLAGE (POP. UP TO 500)”",
+   "note": "Raw PDF pulled by curl (HTTP 200, 5.3 MB) and extracted with pdftotext -layout. The size checkbox row carries all three bands; footer reads TM & © 2024 Wizards of the Coast LLC, and the page is a photocopiable handout. Every limb (WotC, 2024, handout, size banded by population, village up to 500) is on the page.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -19164,9 +19164,9 @@
   "verdict": {
    "index": 1154,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "TOWN (POP. 501–5,000)",
-   "note": "Same raw PDF, same size checkbox row, second band. En dash in the original between 501 and 5,000, as the claim's quote has it.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“TOWN (POP. 501–5,000)”",
+   "note": "Same raw PDF text; second checkbox of the size row, en dash as quoted. Exact string match.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -19187,32 +19187,9 @@
   "verdict": {
    "index": 1155,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "CITY (POP. 5,001+)",
-   "note": "Same raw PDF, same size checkbox row, third band. The three bands are contiguous and exhaustive.",
-   "fromFile": "verdicts-dnd-i0-14.json"
-  }
- },
- {
-  "index": 1156,
-  "feature": "place and institution description",
-  "claim": "The publisher's settlement slot list opens with a slot labelled Defining Trait.",
-  "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
-  "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
-  "quote": "DEFINING TRAIT",
-  "page": "Settlement Tracker, first field",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "2024",
-  "routeHint": "direct PDF fetch from media.dndbeyond.com, pdftotext -layout",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "place-lawful-primaries",
-  "verdict": {
-   "index": 1156,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "DEFINING TRAIT",
-   "note": "First of the four boxed slots, immediately below the settlement-name line and the size row. The name line and size row are header, not slots, so 'opens with' holds.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“CITY (POP. 5,001+)”",
+   "note": "Same raw PDF text; third checkbox of the size row. Exact string match.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -19233,9 +19210,9 @@
   "verdict": {
    "index": 1157,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "CLAIM TO FAME",
-   "note": "Second boxed slot, directly under Defining Trait.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“CLAIM TO FAME”",
+   "note": "Same raw PDF text; the boxed field immediately below DEFINING TRAIT. Claim asserts only that the slot exists and is so labelled — supported.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -19256,9 +19233,9 @@
   "verdict": {
    "index": 1158,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "LOCAL LEADER",
-   "note": "Fourth boxed slot (after Defining Trait, Claim to Fame, Current Calamity), as the claim's page field says. Checked the whole one-page handout: it is the only leadership slot; Noteworthy People is a free list, not a leadership field. The 'single' limb holds.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“LOCAL LEADER”",
+   "note": "Same raw PDF text; fourth boxed field (after CURRENT CALAMITY). It is the only leadership-labelled slot on the sheet — the other fields are DEFINING TRAIT, CLAIM TO FAME, CURRENT CALAMITY, NOTEWORTHY PEOPLE/PLACES and the gp line — so 'single leadership slot' holds.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -19279,9 +19256,9 @@
   "verdict": {
    "index": 1159,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "NOTEWORTHY PLACES",
-   "note": "Right-hand of two parallel seven-line list columns; the left is headed NOTEWORTHY PEOPLE. Places and people are separate columns, as claimed.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“NOTEWORTHY PLACES”",
+   "note": "Same raw PDF text; a seven-line list column headed NOTEWORTHY PLACES sits beside a separate seven-line NOTEWORTHY PEOPLE column, so both the list-slot limb and the separation limb are on the page.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -19302,9 +19279,9 @@
   "verdict": {
    "index": 1160,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "GP VALUE OF THE MOST EXPENSIVE ITEM FOR SALE",
-   "note": "Footer field, followed by a colon and a rule. Read the complete handout text to test the 'only' limb: the other fields are name, size band, Defining Trait, Claim to Fame, Current Calamity, Local Leader, and the two lists. No other currency or economic figure appears, so 'only' is supported. Population is a size band, not an economic figure.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“GP VALUE OF THE MOST EXPENSIVE ITEM FOR SALE”",
+   "note": "Same raw PDF text; the footer field above the copyright line. The whole sheet was read: the only other numerals are the population bands (demographic, not economic), so 'the only economic figure' holds.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -19325,9 +19302,9 @@
   "verdict": {
    "index": 1163,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "provide a template for creating NPCs and building settlements",
-   "note": "Live page fetched with a browser user agent (HTTP 200). The routeHint's warning is real: the body uses non-breaking spaces, and a naive grep found nothing until the bytes were normalised. Byline confirmed on the page as 'by Mike Bernier Nov 12, 2024'. The sentence sits under the heading 'Adventures, Handouts, and Ready-to-Play Maps' and its subject is 'the handouts sprinkled throughout the book', the book being the 2024 Dungeon Master's Guide. Every limb holds.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“provide a template for creating NPCs and building settlements”",
+   "note": "Raw HTML pulled by curl with a browser UA (HTTP 200, 323 KB), tags stripped locally — no summarizer. Byline 'by Mike Bernier', dated Nov 12, 2024 (launch day: the page carries 'The 2024 Dungeon Master's Guide is Now Available'), section heading 'Adventures, Handouts, and Ready-to-Play Maps'. Sentence: 'the handouts sprinkled throughout the book provide a template for creating NPCs and building settlements.'",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -19348,9 +19325,9 @@
   "verdict": {
    "index": 1164,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "it replaces all rules in the 2014 version of the book",
-   "note": "Live page fetched with a browser user agent (HTTP 200), byline 'by DND Staff Feb 20, 2025', tagged Studio Blog, under the heading 'Using This Book with Older Books'. The page's full sentence carries a conditional the claim drops: 'When you play D&D with the Dungeon Master's Guide (2024), it replaces...'. That is scope, not contradiction, so the verdict stands; a downstream user who needs the conditional should carry it.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“it replaces all rules in the 2014 version of the book”",
+   "note": "Raw HTML by curl with browser UA (HTTP 200, 270 KB), tags stripped locally. Under heading 'Using This Book with Older Books': 'When you play D&D with the Dungeon Master's Guide (2024), it replaces all rules in the 2014 version of the book.' Byline 'by DND Staff', Feb 20, 2025, tagged Studio Blog, on the WotC-owned D&D Beyond (page footer: Wizards of the Coast LLC | All Rights Reserved), so the publisher-attribution limb holds.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -19371,9 +19348,9 @@
   "verdict": {
    "index": 1166,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Icehaven is a village of 5,000 souls",
-   "note": "Both halves verified against raw sources fetched in this same batch: the 'village' label and the 5,000 figure are verbatim on the 2020 page (heading 'The Village of Icehaven'), and the 2024 Settlement Tracker PDF puts 5,000 inside its town band (501-5,000) with village capped at 500. The mismatch is therefore real. As the claim's own confidence note says, it is a cross-document comparison, not a statement either page makes - that framing is accurate and is the only reason this is not a same-page finding.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“Icehaven is a village of 5,000 souls”",
+   "note": "Same raw article; the section heading is literally 'The Village of Icehaven'. The band limb is checked against the other raw source in this chunk: the 2024 Settlement Tracker's middle checkbox reads TOWN (POP. 501–5,000), so 5,000 falls in the town band while the column calls it a village. Both limbs supported.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
   }
  },
  {
@@ -19394,9 +19371,837 @@
   "verdict": {
    "index": 1167,
    "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The leader of the village, Starosta Ernath Noack",
-   "note": "Live page, heading 'Arrival of the Infected One'. Quote verbatim. The office-title reading is corroborated later in the same article, where 'starosta' is used as a bare common noun ('the aging starosta', 'the starosta's guest room'), so Starosta is title, Ernath given name, Noack surname, in that order.",
-   "fromFile": "verdicts-dnd-i0-14.json"
+   "trueWording": "“The leader of the village, Starosta Ernath Noack”",
+   "note": "Same raw article, under the heading 'Arrival of the Infected One' as the claim's page note says. Order is office title (starosta, the Dwendalian village-elder office — the page also uses 'Starosta of Icehaven' and 'the village starosta'), given name Ernath, surname Noack.",
+   "fromFile": "verdicts-dnd-i1153-1167.json"
+  }
+ },
+ {
+  "index": 1168,
+  "feature": "concrete sensory noun",
+  "claim": "The arrival read-aloud describes the village through its housing stock and street pattern rather than through its inhabitants.",
+  "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
+  "url": "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
+  "quote": "mostly made up of steep-roofed cottages, separated by twisting streets",
+  "page": "'Investigation Encounter: Snowed In', read-aloud",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2020",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1168,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "mostly made up of steep-roofed cottages, separated by twisting streets",
+   "note": "Raw page fetched with a browser UA (HTTP 200). Quote is strict-exact in the arrival read-aloud introduced by 'When the characters arrive in Icehaven, read or paraphrase the following:'. The whole read-aloud names arch, cottages, streets, docks, inn, ship and no inhabitants, so the 'rather than through its inhabitants' limb holds.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1169,
+  "feature": "place and institution description",
+  "claim": "The column then lists the settlement's important locations by name and numbers them as labelled sub-entries.",
+  "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
+  "url": "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
+  "quote": "The following areas in Icehaven are important to this encounter",
+  "page": "'Investigation Encounter: Snowed In'",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2020",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1169,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The following areas in Icehaven are important to this encounter",
+   "note": "Strict-exact, immediately after the arrival read-aloud. Five areas are listed by name (The Haven, The Harborline, Icebreaker Inn and Tavern, House of Warmth, Starosta's Manor) and then appear as numbered sub-headings 1.-5., with cross-references of the form '(area 1)'. Every limb supported.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1170,
+  "feature": "naming and forms of address",
+  "claim": "A second official column names a governing officer as an invented office title plus given name plus surname, followed by the plain English office in apposition.",
+  "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Battle of the Braggarts', 2020",
+  "url": "https://www.dndbeyond.com/posts/723-encounter-of-the-week-battle-of-the-braggarts",
+  "quote": "Taskhand Durth Mirimm, the current governor",
+  "page": "'The Wastes of Xhorhas and the City of Jigow'",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2020",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1170,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Taskhand Durth Mirimm, the current governor",
+   "note": "Strict-exact in 'The Wastes of Xhorhas and the City of Jigow'. Invented office title (Taskhand) + given name + surname, then the plain-English office in apposition; the sentence goes on to call him the Kryn governor exerting power over local matters.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1171,
+  "feature": "terminology consistency",
+  "claim": "The same column qualifies its own size label, calling Jigow a small city by population while describing its extent as a sprawl of towns.",
+  "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Battle of the Braggarts', 2020",
+  "url": "https://www.dndbeyond.com/posts/723-encounter-of-the-week-battle-of-the-braggarts",
+  "quote": "Jigow is a small city by population, but its sprawl of towns",
+  "page": "'The Wastes of Xhorhas and the City of Jigow'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2020",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1171,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a small city by population, but its sprawl of towns",
+   "note": "Strict-exact; full sentence reads 'Jigow is a small city by population, but its sprawl of towns, villages, and neighborhoods stretches across much of the northern coast of Xhorhas.' Both limbs (size label qualified by population; extent given as sprawl) supported.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1173,
+  "feature": "plainness and economy",
+  "claim": "An official D&D Beyond column advises compressing an unremarkable stretch into a single sentence rather than accumulating uninspired description.",
+  "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Trek to Ten-Towns', 2020",
+  "url": "https://www.dndbeyond.com/posts/855-encounter-of-the-week-trek-to-ten-towns",
+  "quote": "better to simply describe the day’s travel in a single sentence",
+  "page": "'Trek to Ten-Towns'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2020",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1173,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "better to simply describe the day's travel in a single sentence",
+   "note": "Strict-exact in the 'Trek to Ten-Towns' travel section; the sentence begins 'if there isn't anything special around' (the unremarkable stretch) and ends 'than to give a litany of uninspired descriptions of a nondescript snowy road'. Every limb supported.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1174,
+  "feature": "boxed text form",
+  "claim": "The same column tells the DM to vary the wording of a repeated transition so the read-aloud does not sound scripted.",
+  "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Trek to Ten-Towns', 2020",
+  "url": "https://www.dndbeyond.com/posts/855-encounter-of-the-week-trek-to-ten-towns",
+  "quote": "so it doesn't seem like you're reading from a script",
+  "page": "'Trek to Ten-Towns'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2020",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1174,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "so it doesn't seem like you're reading from a script",
+   "note": "Strict-exact. Full sentence: 'You should improvise a slightly different sentence every time you move from scene to scene, so it doesn't seem like you're reading from a script.' It follows the scene-to-scene read-aloud, so 'vary the wording of a repeated transition' is supported.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1175,
+  "feature": "place and institution description",
+  "claim": "A reporter covering the publisher's own preview says the 2024 settlement generator's first roll produces the town's defining feature, giving a Sprawling Cemetery in the demonstration.",
+  "source": "Randy, Gaming Nexus, reporting a Wizards of the Coast preview with Chris Perkins, 10 Oct 2024",
+  "url": "https://www.gamingnexus.com/News/65236/The-DMs-Toolbox-in-the-DD-2024-Dungeon-Masters-Guide-is-filled-with-fireball-fungus-and-total-party-kills",
+  "quote": "the town's defining feature is [roll the dice] a Sprawling Cemetery",
+  "page": "settlement demonstration paragraph",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2024-10-10",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1175,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the town's defining feature is [roll the dice] a Sprawling Cemetery",
+   "note": "Raw page fetched (HTTP 200, 27KB); byline 'Randy', posted 10/10/2024, covering the Wizards preview with Chris Perkins and interviewer Todd Kenreck. Quote strict-exact; it is the first roll narrated in the demonstration ('[roll the dice]' then 'roll dice again' for claim to fame), which supports the 'first roll' limb.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1176,
+  "feature": "place and institution description",
+  "claim": "The same report gives the current-calamity roll's demonstration result as monsters infesting the settlement.",
+  "source": "Randy, Gaming Nexus, reporting a Wizards of the Coast preview with Chris Perkins, 10 Oct 2024",
+  "url": "https://www.gamingnexus.com/News/65236/The-DMs-Toolbox-in-the-DD-2024-Dungeon-Masters-Guide-is-filled-with-fireball-fungus-and-total-party-kills",
+  "quote": "What current calamity is befalling the town: Monsters infest the settlement",
+  "page": "settlement demonstration paragraph",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2024-10-10",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1176,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What current calamity is befalling the town: Monsters infest the settlement",
+   "note": "Strict-exact in the same settlement demonstration paragraph, third roll in the narrated sequence.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1180,
+  "feature": "boxed text form",
+  "claim": "An official D&D Beyond article reprints the published Phandalin arrival passage and calls it boxed text.",
+  "source": "Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023",
+  "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
+  "quote": "The boxed text above serves as a fantastic base",
+  "page": "'Arrival in Phandalin'",
+  "kind": "vendor",
+  "polarity": "asserts",
+  "date": "2023-09-18",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1180,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The boxed text above serves as a fantastic base",
+   "note": "Raw page fetched (HTTP 200). Quote strict-exact under 'Arrival in Phandalin' > 'Visual Description'; the passage it points back to is the reprinted Phandalin description, closed by the line 'Source: Dragon of Icespire Peak'. Article bylined Mike Bernier, Sep 18, 2023. Both limbs (reprints the passage; calls it boxed text) supported.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1181,
+  "feature": "place and institution description",
+  "claim": "The published Phandalin boxed text sizes the town by counting its buildings rather than its people.",
+  "source": "Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article",
+  "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
+  "quote": "which consists of forty or fifty simple log buildings",
+  "page": "'Tips For Running Phandalin in Your Games', quoted boxed text, sourced to Dragon of Icespire Peak",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019 text, reprinted 2023",
+  "routeHint": "curl with browser user agent; the article carries a 'Source: Dragon of Icespire Peak' line under the passage",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1181,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which consists of forty or fifty simple log buildings",
+   "note": "Strict-exact in the reprinted boxed text sourced to Dragon of Icespire Peak. The passage gives no population figure anywhere - the residents are characterised by trade ('farmers, stonecutters, blacksmiths, traders, prospectors, and children'), never counted - so 'sizes the town by counting its buildings rather than its people' holds.",
+   "fromFile": "verdicts-dnd-i1168-1182.json"
+  }
+ },
+ {
+  "index": 1183,
+  "feature": "concrete sensory noun",
+  "claim": "The same published passage characterises the townspeople by listing their trades and ending the list with children.",
+  "source": "Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article",
+  "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
+  "quote": "They are farmers, stonecutters, blacksmiths, traders, prospectors, and children",
+  "page": "'Tips For Running Phandalin in Your Games', quoted boxed text",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019 text, reprinted 2023",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1183,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They are farmers, stonecutters, blacksmiths, traders, prospectors, and children",
+   "note": "Raw page fetched (HTTP 200, browser UA). Quote byte-exact in the boxed text under 'Tips For Running Phandalin in Your Games', immediately followed on the page by 'Source: Dragon of Icespire Peak', confirming the reprint attribution. The list runs trades then ends on children, exactly as claimed.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1185,
+  "feature": "naming and forms of address",
+  "claim": "That table names a proprietor as given name plus surname with species and gender in parentheses.",
+  "source": "Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023",
+  "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
+  "quote": "Toblen Stonehill (human male)",
+  "page": "'Key NPCs and Locations' table, Stonehill Inn row",
+  "kind": "vendor",
+  "polarity": "applies",
+  "date": "2023-09-18",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1185,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Toblen Stonehill (human male)",
+   "note": "Byte-exact in the 'Key NPCs and Locations' table, Proprietor column of the Stonehill Inn row. Given name plus surname with species and gender parenthesised is the table's consistent form (e.g. the Barthen's Provisions and Alderleaf Farm rows follow it).",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1186,
+  "feature": "dm-facing sentence",
+  "claim": "The article instructs the DM to describe a town's layout starting from its street surface and cart tracks.",
+  "source": "Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023",
+  "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
+  "quote": "Describe the town's layout, from the muddy streets lined with cart tracks",
+  "page": "'Arrival in Phandalin', 'Visual Description'",
+  "kind": "vendor",
+  "polarity": "asserts",
+  "date": "2023-09-18",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dm-page",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1186,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the town's layout, from the muddy streets lined with cart tracks",
+   "note": "Byte-exact, straight apostrophe included, in the 'Visual Description' bullet under the 'Arrival in Phandalin' heading. The sentence is addressed to the DM and does begin the layout at street surface and cart tracks before moving to the buildings.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1187,
+  "feature": "civic record register",
+  "claim": "Wizards of the Coast publishes an in-world settlement newspaper as a free handout for the Phandalin adventures.",
+  "source": "Mike Bernier, 'Downloadable Handout: Read the Latest Edition of the Phandalin Post', D&D Beyond, 5 Sep 2023",
+  "url": "https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of",
+  "quote": "a newspaper that covers events in Phandalin",
+  "page": "opening paragraph",
+  "kind": "vendor",
+  "polarity": "asserts",
+  "date": "2023-09-05",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1187,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a newspaper that covers events in Phandalin",
+   "note": "Byte-exact in the opening body paragraph. In-world newspaper, handout, and the Phandalin adventures (Shattered Obelisk, Lost Mine of Phandelver) are all on the page. Caveat, not a failed limb: the page says 'Downloadable Handout' and supplies the image inline rather than printing the word 'free', and credits D&D Beyond / Mike Bernier rather than naming Wizards of the Coast.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1188,
+  "feature": "opening sentence",
+  "claim": "That in-world newspaper opens a story with a dateline of in-world date and settlement, then a verbless list of the damage.",
+  "source": "Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023",
+  "url": "https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of",
+  "quote": "Ches 25, Phandalin – Ambushed wagons, dead travelers, and a town",
+  "page": "'Goblin Ambush Shocks Travelers on Triboar Trail'",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2023-09-05",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1188,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ches 25, Phandalin - Ambushed wagons, dead travelers, and a town",
+   "note": "Byte-exact including the en dash, opening the story headlined 'Goblin Ambush Shocks Travelers on Triboar Trail'. Ches is a Forgotten Realms month, so the dateline is in-world date plus settlement; the list that follows carries no finite verb.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1189,
+  "feature": "naming and forms of address",
+  "claim": "That in-world newspaper attributes a quotation by given name, surname, office and institution, then the settlement.",
+  "source": "Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023",
+  "url": "https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of",
+  "quote": "Linene Graywind, owner of Lionshield Coster in Phandalin",
+  "page": "'Goblin Ambush Shocks Travelers on Triboar Trail'",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2023-09-05",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1189,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Linene Graywind, owner of Lionshield Coster in Phandalin",
+   "note": "Byte-exact in the attribution of the first quoted speaker in the 'Goblin Ambush' story. Given name, surname, office ('owner'), institution ('Lionshield Coster'), then settlement ('in Phandalin') appear in exactly the claimed order.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1190,
+  "feature": "naming and forms of address",
+  "claim": "The same newspaper attributes a tradesman by given name plus trade plus the institution he keeps.",
+  "source": "Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023",
+  "url": "https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of",
+  "quote": "said Toblen, the innkeeper of the Stonehill Inn",
+  "page": "'Redbrands' Reign of Terror'",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2023-09-05",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1190,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "said Toblen, the innkeeper of the Stonehill Inn",
+   "note": "Byte-exact in the section headed \"Redbrands' Reign of Terror\". Given name alone, then trade, then the institution he keeps, with no surname used here (the sister article's table gives it as Stonehill).",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1191,
+  "feature": "naming and forms of address",
+  "claim": "In reported speech the same newspaper addresses the settlement's leader by office title plus surname, without a given name.",
+  "source": "Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023",
+  "url": "https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of",
+  "quote": "What is Townmaster Wester going to do to keep us safe?",
+  "page": "'Goblin Ambush Shocks Travelers on Triboar Trail'",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2023-09-05",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1191,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What is Townmaster Wester going to do to keep us safe?",
+   "note": "Byte-exact inside speech the paper reports from an anonymous townsperson in the 'Goblin Ambush' story. Office title plus surname with no given name; the same form recurs in the paper's own narrative prose ('a lack of resistance from Townmaster Wester').",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1192,
+  "feature": "terminology consistency",
+  "claim": "Within one official article the same officer is called Townminster Weston in the editorial commentary and Townmaster Wester in the handout text.",
+  "source": "Mike Bernier, 'Downloadable Handout: Read the Latest Edition of the Phandalin Post', D&D Beyond, 5 Sep 2023",
+  "url": "https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of",
+  "quote": "Townminster Weston hasn’t been of any help",
+  "page": "'What's in This Issue of the Phandalin Post?'",
+  "kind": "vendor",
+  "polarity": "applies",
+  "date": "2023-09-05",
+  "routeHint": "curl with browser user agent; the handout text earlier on the same page reads 'Townmaster Wester'",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1192,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Townminster Weston hasn't been of any help",
+   "note": "Byte-exact, curly apostrophe included, in the editorial section \"What's in This Issue of the Phandalin Post?\", while the reproduced handout text above it twice reads 'Townmaster Wester'. Both spellings sit in the one article and the commentary refers back to those same articles, so it is the same officer: title and surname both differ.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1193,
+  "feature": "place and institution description",
+  "claim": "A third official column opens a settlement entry with the settlement's name, its peoples and its region, in one sentence.",
+  "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Storm Celebration', 2020",
+  "url": "https://www.dndbeyond.com/posts/742-encounter-of-the-week-storm-celebration",
+  "quote": "Boroftkrah is a settlement of orcs, half-orcs, and a few people",
+  "page": "'Boroftkrah and the Gods'",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2020",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1193,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boroftkrah is a settlement of orcs, half-orcs, and a few people",
+   "note": "Byte-exact as the opening sentence under the 'Boroftkrah and the Gods' heading; the sentence continues 'of other races in the Greying Wildlands', supplying the region. Page is dated Mar 9, 2020 and tagged 'Encounter Of The Week', matching the cited column and year.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1194,
+  "feature": "place and institution description",
+  "claim": "A reviewer locates the 2024 Dungeon Master's Guide's settlement-creation tables in the toolbox chapter.",
+  "source": "Harvey Randall, PC Gamer, 2024 Dungeon Master's Guide review",
+  "url": "https://www.pcgamer.com/games/gosh-i-think-d-and-ds-finally-done-it-the-2024-dungeon-masters-guide-actually-does-a-decent-job-of-teaching-you-how-to-run-a-game/",
+  "quote": "the toolbox's ones for dungeons and settlement creation",
+  "page": "'The toolbox' section",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2024",
+  "routeHint": "live URL 403s to curl; read via the Wayback raw capture https://web.archive.org/web/20260612023305id_/<url>",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1194,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the toolbox's ones for dungeons and settlement creation",
+   "note": "Byte-exact in the random-tables paragraph; the preceding paragraph opens 'First up, the toolbox: This is the least focused chapter of the book', locating the tables in that chapter. Byline Harvey Randall, and the piece reviews the 2024 DMG. Locator nit: the section's actual heading is 'Tools & boxes', not 'The toolbox'.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1195,
+  "feature": "place and institution description",
+  "claim": "The same reviewer judges those settlement tables a bullet-point list of suggestions rather than a guide to inventing one's own.",
+  "source": "Harvey Randall, PC Gamer, 2024 Dungeon Master's Guide review",
+  "url": "https://www.pcgamer.com/games/gosh-i-think-d-and-ds-finally-done-it-the-2024-dungeon-masters-guide-actually-does-a-decent-job-of-teaching-you-how-to-run-a-game/",
+  "quote": "more of a bullet-point list of suggestions than a guide",
+  "page": "'The toolbox' section",
+  "kind": "reception",
+  "polarity": "disputes",
+  "date": "2024",
+  "routeHint": "Wayback raw capture",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1195,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more of a bullet-point list of suggestions than a guide",
+   "note": "Byte-exact, same paragraph as 1194; the sentence completes 'to cooking up good ideas of your own', which carries the claim's 'inventing one's own' limb. The referent 'these' is the dungeon and settlement-creation tables named in the prior clause.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1196,
+  "feature": "place and institution description",
+  "claim": "A read-through of the 2014 Dungeon Master's Guide names Random Settlements as a section of its chapter 5.",
+  "source": "Lex Starwalker, Game Master's Journey episode 235, 16 Dec 2018",
+  "url": "https://lexstarwalker.com/gamemastersjourney/235",
+  "quote": "Random Settlements",
+  "page": "episode contents list",
+  "kind": "analysis",
+  "polarity": "mentions",
+  "date": "2018-12-16",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Random Settlements",
+   "note": "Byte-exact as an h3 in the episode contents list, sitting under the h2 'Adventure Environments - Settlements'; page title is 'GMJ 235: DMG Chapter 5: Adventure Environments', dated December 16, 2018. The page names the book only as 'Dungeon Master's Guide', but its 2018 date and the listed chapter structure (Chapters 1-5 across earlier episodes) fix it as the 2014 fifth-edition guide.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1197,
+  "feature": "place and institution description",
+  "claim": "The same read-through names Mapping a Settlement as another section of the 2014 guide's chapter 5.",
+  "source": "Lex Starwalker, Game Master's Journey episode 235, 16 Dec 2018",
+  "url": "https://lexstarwalker.com/gamemastersjourney/235",
+  "quote": "Mapping a Settlement",
+  "page": "episode contents list",
+  "kind": "analysis",
+  "polarity": "mentions",
+  "date": "2018-12-16",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1197,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mapping a Settlement",
+   "note": "Byte-exact as a sibling h3 to 'Random Settlements' under the same 'Adventure Environments - Settlements' h2 of the episode contents list, so it is named as another chapter 5 section. Edition inferred from the page's December 16, 2018 date as for 1196.",
+   "fromFile": "verdicts-dnd-i1183-1197.json"
+  }
+ },
+ {
+  "index": 1198,
+  "feature": "boxed text form",
+  "claim": "A Wizards of the Coast adventure designer states on the publisher's own site that boxed text is named for the line that marks it to be read aloud.",
+  "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+  "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "quote": "denoting that it should be read aloud to the players",
+  "page": "opening paragraph",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2019-11-06",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1198,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "denoting that it should be read aloud to the players",
+   "note": "Raw HTML fetched (200, 319KB). Opening paragraph: boxed text 'got its name from the thin boxed-line that sometimes surrounds the text', with the quoted clause following word for word. Byline 'by Shawn Merwin'; his bio lists WotC-published credits (Acquisitions Incorporated, Baldur's Gate: Descent into Avernus, Storm Lord's Wrath) and an Adventurers League role, so 'a Wizards of the Coast adventure designer' is supported as a designer of WotC adventures, not as a stated employee. Site footer carries 'Wizards of the Coast LLC | All Rights Reserved'. FLAG (external, not verified from the page): the article is dated Nov 2019, when D&D Beyond was operated by Fandom/Curse; WotC ownership came later, so 'the publisher's own site' holds for the page as fetched today, not necessarily at publication.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1199,
+  "feature": "point of view and distance",
+  "claim": "The same designer's first tip is to write boxed text in the third person rather than the second.",
+  "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+  "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "quote": "Move from the second-person point of view to the third person",
+  "page": "'Tip 1'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2019-11-06",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1199,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Move from the second-person point of view to the third person",
+   "note": "Exact heading of 'Tip 1', the first of six numbered tips. Claim limb 'first tip' confirmed: the tip list begins at Tip 1 immediately after the worked bad example.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1200,
+  "feature": "point of view and distance",
+  "claim": "He gives as the reason that dropping the second person makes it hard to attribute actions or feelings to the characters.",
+  "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+  "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "quote": "it’s difficult to inadvertently include character actions, motivations, feelings, or movements",
+  "page": "'Tip 1'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2019-11-06",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1200,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "difficult to inadvertently include character actions, motivations, feelings, or movements",
+   "note": "Body of 'Tip 1', word for word including the curly apostrophe in 'it's'. The full sentence supplies the causal limb: 'If we do not use the word “you” as the subject of the sentences in boxed text, it's difficult...' — so the reason limb ('dropping the second person makes it hard to attribute actions or feelings') is supported.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1201,
+  "feature": "plainness and economy",
+  "claim": "The same designer rules the novelist's impulse out of boxed text.",
+  "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+  "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "quote": "boxed text is not the place to unleash that inner novelist",
+  "page": "'Tip 2'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2019-11-06",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1201,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "boxed text is not the place to unleash that inner novelist",
+   "note": "Body of 'Tip 2. Avoid the novelist/dramatist urge', word for word. The section then enumerates three sub-problems (2a purple detail, 2b villain soliloquy, 2c action in progress), which supports 'rules the novelist's impulse out'.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1202,
+  "feature": "withheld information and inference",
+  "claim": "He rules that boxed text must describe only what the characters can sense.",
+  "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+  "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "quote": "Describe everything the characters can sense, but not what they can’t",
+  "page": "'Tip 3'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2019-11-06",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1202,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Describe everything the characters can sense, but not what they can't",
+   "note": "Exact heading of 'Tip 3' (curly apostrophe in 'can't'). Body confirms both halves: text must not omit the obvious (the 50-foot chasm) and must not detail what characters could not know (crates' contents).",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1203,
+  "feature": "sentence length variation",
+  "claim": "He measures his own model boxed text at four sentences and under a hundred words.",
+  "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+  "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "quote": "Four sentences, and less than 100 words.",
+  "page": "'A Boxed-Text Opening'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2019-11-06",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1203,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Four sentences, and less than 100 words.",
+   "note": "Exact sentence opening the analysis under 'A Boxed-Text Opening', immediately after his own carrion-crows sample. It is his measurement of his own model text, as the claim states.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1204,
+  "feature": "opening sentence",
+  "claim": "He assigns the opening sentence of a scene the job of setting tone and introducing the scene.",
+  "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+  "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "quote": "The first sentence sets the tone and introduces the scene",
+  "page": "'A Boxed-Text Opening'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2019-11-06",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The first sentence sets the tone and introduces the scene",
+   "note": "Word for word under 'A Boxed-Text Opening'; the page continues 'using words like “carrion” and “bloody.”' He then assigns jobs to sentences two, three and four in the same paragraph, so the sentence-role framing is the section's own.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1205,
+  "feature": "boxed text form",
+  "claim": "The 2024 free rules define boxed text as text meant to be read aloud when the characters first arrive at a location.",
+  "source": "Wizards of the Coast, D&D Free Rules (2024), 'The Basics'",
+  "url": "https://www.dndbeyond.com/sources/dnd/br-2024/the-basics",
+  "quote": "meant to be read aloud to the players when their characters",
+  "page": "'Step 1: Describe the Situation'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2024",
+  "routeHint": "curl with browser user agent; this free-rules page is served without sign-in",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "meant to be read aloud to the players when their characters",
+   "note": "Raw HTML fetched (200, 246KB). Third paragraph under 'Step 1: Describe the Situation': 'Published adventures often include text in a box like this, which is meant to be read aloud to the players when their characters first arrive at a location or under a specific circumstance.' Two scope notes: the page never uses the phrase 'boxed text' (it says 'text in a box like this'), and it adds a second trigger, 'or under a specific circumstance', which the claim omits without denying. Source-name note: the page and its breadcrumb label this 'Basic Rules', not 'Free Rules'; the URL path is br-2024 and it is the 2024 line (a separate 'Basic Rules (2014)' is linked), so the '2024' limb is confirmed.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1206,
+  "feature": "place and institution description",
+  "claim": "The same 2024 free-rules paragraph says boxed text usually describes locations.",
+  "source": "Wizards of the Coast, D&D Free Rules (2024), 'The Basics'",
+  "url": "https://www.dndbeyond.com/sources/dnd/br-2024/the-basics",
+  "quote": "It usually describes locations so the players know what’s happening",
+  "page": "'Step 1: Describe the Situation'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2024",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1206,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It usually describes locations so the players know what's happening",
+   "note": "Same paragraph as index 1205, sentence two, word for word; the paragraph continues 'and have a sense of what their characters' options are'. The 'same paragraph' limb is confirmed — both quotes sit in one paragraph under 'Step 1: Describe the Situation'.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1207,
+  "feature": "sentence length variation",
+  "claim": "The publisher's own 2024 rules put the attention limit for descriptive text at about three sentences.",
+  "source": "Wizards of the Coast, D&D Free Rules (2024), 'The Basics'",
+  "url": "https://www.dndbeyond.com/sources/dnd/br-2024/the-basics",
+  "quote": "lose focus after about three sentences of descriptive text",
+  "page": "'Step 1: Describe the Situation'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2024",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1207,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "lose focus after about three sentences of descriptive text",
+   "note": "Word for word in the paragraph directly after the boxed-text paragraph, still under 'Step 1: Describe the Situation': 'Most players begin to lose focus after about three sentences of descriptive text.' Scope note: the rules say players 'begin to lose focus after about' three sentences — a hedged observation rather than a prescribed cap; the claim's word 'limit' is firmer than the page, though the quoted hedge travels with it. Publisher limb supported by the WotC LLC footer on the fetched page.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1209,
+  "feature": "withheld information and inference",
+  "claim": "The same designer says he does not frontload information.",
+  "source": "Christopher Perkins, The Dungeon Master Experience 2011 collected columns, Wizards of the Coast",
+  "url": "https://web.archive.org/web/20201112024903id_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+  "quote": "I don’t frontload information.",
+  "page": "'Pacing' column",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2011",
+  "routeHint": "Wayback raw capture of the wizards.com PDF, then pdftotext",
+  "registerHint": "dm-page",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1209,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't frontload information.",
+   "note": "Word for word (curly apostrophe) in the same December 2011 / Dungeon 197 pacing column, a few tactics below index 1208's sentence: 'I don't frontload information. I let it trickle out in dribs and drabs...' The claim sentence carries no job-title limb (it says only 'the same designer'), so it verifies where 1208 goes PARTIAL.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
+  }
+ },
+ {
+  "index": 1210,
+  "feature": "naming and forms of address",
+  "claim": "The same designer says he builds his human surnames on roots from western European cultures.",
+  "source": "Christopher Perkins, 'The Dungeon Master Experience: What's in a Name?', collected 2011 columns, Wizards of the Coast",
+  "url": "https://web.archive.org/web/20201112024903id_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+  "quote": "and last names with roots in western European cultures",
+  "page": "'What's in a Name?'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2011",
+  "routeHint": "Wayback raw capture of the wizards.com PDF, then pdftotext",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-lawful-primaries",
+  "verdict": {
+   "index": 1210,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "and last names with roots in western European cultures",
+   "note": "Found in 'The Dungeon Master Experience: What's in a Name?' in the same collected PDF. The only break is the PDF's typographic line-break hyphen ('cul-tures'); reading order confirms the words are contiguous. Full sentence: 'I tend to go for names that sound like seldom used real-world names (e.g., Arando, Caven, Fenton, Mirabel, Remora) and last names with roots in western European cultures (e.g., Caskajaro, Moonridge, Ratley, Van Hyden), or names built around nautical terms.' Scope note: he prefaces it with 'My human names are all over the map' and offers nautical-term names as an alternative, so this is a stated tendency among several, not his only surname rule — the claim's 'says he builds' does not overreach that, but a downstream use should not read it as an exclusive rule.",
+   "fromFile": "verdicts-dnd-i1198-1211.json"
   }
  }
 ]

@@ -12141,6 +12141,29 @@
   }
  },
  {
+  "index": 766,
+  "feature": "civic record register",
+  "claim": "The headnote defines a social institution in a present-tense passive sentence of ordinary words.",
+  "source": "Ursula K. Le Guin, 'Mountain Ways' headnote, excerpted on the author's official site",
+  "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
+  "quote": "Ki'O society is divided into two halves or moieties, called",
+  "page": "'Mountain Ways', headnote",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2002 collection; page retrieved 2026-09-06",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 766,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ki'O society is divided into two halves or moieties, called",
+   "note": "'Mountain Ways' headnote, first line: present-tense passive 'is divided', self-glossing 'moieties' as 'two halves'; raw HTML of ursulakleguin.com fetched with a browser UA (HTTP 200).",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
   "index": 767,
   "feature": "terminology consistency",
   "claim": "The headnote sets out the four permitted relationships as a labelled list, each pairing given its own named term.",
@@ -12161,6 +12184,144 @@
    "trueWording": "The Morning woman and the Evening man (the \"Morning marriage\")",
    "note": "Verbatim on the same excerpts page. Lead-in line reads 'The expected relationships within each sedoretu are:' followed by four separate one-line items, each ending in a parenthesised name (Morning, Evening, Day, Night marriage); a fifth line then names the forbidden pairings. The claim's word 'permitted' is the page's 'expected', the only contrast on the page being 'forbidden'.",
    "fromFile": "verdicts-leguin-i763-807.json"
+  }
+ },
+ {
+  "index": 768,
+  "feature": "omission as information",
+  "claim": "The headnote records that the forbidden relationships have no name at all except sacrilege.",
+  "source": "Ursula K. Le Guin, 'Mountain Ways' headnote, excerpted on the author's official site",
+  "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
+  "quote": "they aren't called anything, except sacrilege",
+  "page": "'Mountain Ways', headnote",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2002 collection; page retrieved 2026-09-06",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 768,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they aren't called anything, except sacrilege",
+   "note": "Headnote's last structural sentence names the two forbidden pairings (Morning woman/Morning man, Evening woman/Evening man) and ends on this clause. Every limb on the page.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
+  "index": 769,
+  "feature": "place and institution description",
+  "claim": "'Mountain Ways' opens on a present-tense sentence that places settlements in a named upland and states their density.",
+  "source": "Ursula K. Le Guin, 'Mountain Ways', excerpted on the author's official site",
+  "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
+  "quote": "In the stony uplands of the Deka Mountains the farmholds are few",
+  "page": "'Mountain Ways', first line of the story",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2002 collection; page retrieved 2026-09-06",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 769,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In the stony uplands of the Deka Mountains the farmholds are",
+   "note": "First line of the story proper, immediately after the headnote; present-tense 'are', named upland (Deka Mountains), density stated in the clause that follows ('few and far between').",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
+  "index": 771,
+  "feature": "plainness and economy",
+  "claim": "An economic relation between a people and their herds is stated as a plain two-clause sentence that reverses itself.",
+  "source": "Ursula K. Le Guin, 'Mountain Ways', excerpted on the author's official site",
+  "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
+  "quote": "The farmers are dependent on the ariu; the ariu are not",
+  "page": "'Mountain Ways', second section",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2002 collection; page retrieved 2026-09-06",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 771,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The farmers are dependent on the ariu; the ariu are not",
+   "note": "'Mountain Ways', second paragraph: semicolon-joined two-clause reversal, in a paragraph about combing fleece and selling pelts, so the relation is economic on the page.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
+  "index": 772,
+  "feature": "opening sentence",
+  "claim": "'Solitude' opens with a header declaring the text an addition to a named, numbered prior report on a planet.",
+  "source": "Ursula K. Le Guin, 'Solitude', excerpted on the author's official site",
+  "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
+  "quote": "An addition to \"POVERTY: The Second Report on Eleven-Soro\"",
+  "page": "'Solitude', headnote",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2002 collection; page retrieved 2026-09-06",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 772,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "An addition to \"POVERTY: The Second Report on Eleven-Soro\"",
+   "note": "Headnote line under the title 'Solitude', continuing with the Mobile's name and 'by her daughter, Serenity'. Named report, ordinal 'Second', and Eleven-Soro identified later in paragraph 2 as the eleventh planet of the Soro system.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
+  "index": 773,
+  "feature": "point of view and distance",
+  "claim": "The narrator of 'Solitude' names her mother's profession in a bare apposition before saying anything about her.",
+  "source": "Ursula K. Le Guin, 'Solitude', excerpted on the author's official site",
+  "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
+  "quote": "My mother, a field ethnologist, took the difficulty of learning anything",
+  "page": "'Solitude', first paragraph",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2002 collection; page retrieved 2026-09-06",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 773,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "My mother, a field ethnologist, took the difficulty of learning anything",
+   "note": "Opening words of 'Solitude' paragraph 1; the bare apposition sits between the subject and the verb, so nothing is said of her before the profession.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
+  "index": 775,
+  "feature": "place and institution description",
+  "claim": "Rocannon's World opens with a gazetteer heading that gives a galactic area number, an entry number and the planet name.",
+  "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted in full by Books & Boots",
+  "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "quote": "Galactic Area 8, No. 62: FOMALHAUT II",
+  "page": "prologue quotation, blog paragraph 3",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-12-05 (quoting the 1966 novel)",
+  "routeHint": "direct curl, browser UA; the blogger says he quotes the passage in full, and the block follows immediately",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 775,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Galactic Area 8, No. 62: FOMALHAUT II",
+   "note": "Books & Boots introduces the block as the novel's opening quote from the 'Abridged Handy Pocket Guide to Intelligent Life-forms', 'which I quote in full'; heading carries area number, entry number, planet name. (The same post later calls the Semley story the novel's opening; the handbook entry is the epigraph before it.)",
+   "fromFile": "verdicts-leguin-i766-786.json"
   }
  },
  {
@@ -12187,6 +12348,52 @@
   }
  },
  {
+  "index": 779,
+  "feature": "withheld information and inference",
+  "claim": "The handbook grades the strength of its own evidence by saying that brief contacts only indicated what it reports.",
+  "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted by Books & Boots",
+  "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "quote": "indicated village and nomadic communal societies",
+  "page": "prologue quotation, Species I-B",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-12-05 (quoting the 1966 novel)",
+  "routeHint": "direct curl, browser UA; the word before it is broken by OCR as 'con~ tacts'",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 779,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "indicated village and nomadic communal societies",
+   "note": "Species I-B entry: the sentence's subject is 'Brief contacts' (the blog's OCR renders it 'Brief con~ tacts'), and the entry closes 'Status E-Query', so the evidential grading is on the page.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
+  "index": 780,
+  "feature": "plainness and economy",
+  "claim": "The handbook delivers a fiscal verdict on a whole people in a two-word sentence.",
+  "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted by Books & Boots",
+  "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "quote": "Currently untaxable",
+  "page": "prologue quotation, Species I-B",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-12-05 (quoting the 1966 novel)",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 780,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Currently untaxable",
+   "note": "Species I-B (the Fua), penultimate sentence of the entry; the post's later handbook block confirms taxation is an institutional category ('Control and Taxation Missions').",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
   "index": 781,
   "feature": "dm-facing sentence",
   "claim": "The handbook addresses its reader with a bare imperative telling him to note a social division.",
@@ -12207,6 +12414,29 @@
    "trueWording": "Note horizontal social cleavage into 2 pseudo-races",
    "note": "Verbatim inside the Species II (Liuar) entry on the same page, a bare imperative followed by the two named pseudo-races (Olgyior 'midmen', Angyar 'lords'). The reader-addressing limb rests on the imperative itself; the page assigns the reader no gender.",
    "fromFile": "verdicts-leguin-i763-807.json"
+  }
+ },
+ {
+  "index": 782,
+  "feature": "place and institution description",
+  "claim": "The planetary entry states landmass coverage as a percentage of the planet's surface.",
+  "source": "Le Guin, Rocannon's World (1966), second handbook entry, quoted by Books & Boots",
+  "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "quote": "Four major landmasses, Northwest, Southwest, East and Antarctic Continents, occupy 38%",
+  "page": "second quotation, physical description",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-12-05 (quoting the 1966 novel)",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 782,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Four major landmasses... occupy 38% of planetary surface",
+   "note": "Second handbook block ('Number 62: FOMALHAUT II'), physical description, immediately after the gravity line; the four continents are named in between.",
+   "fromFile": "verdicts-leguin-i766-786.json"
   }
  },
  {
@@ -12256,6 +12486,75 @@
   }
  },
  {
+  "index": 785,
+  "feature": "annalist voice and deep time",
+  "claim": "The handbook's history is a labelled section whose first sentence is a dated passive naming the expedition.",
+  "source": "Le Guin, Rocannon's World (1966), second handbook entry, quoted by Books & Boots",
+  "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "quote": "History: The planet was charted by the Elieson Expedition in 202",
+  "page": "second quotation, History",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-12-05 (quoting the 1966 novel)",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 785,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "History: The planet was charted by the Elieson Expedition in 202",
+   "note": "Second handbook block: 'History:' labels the section whose remaining lines are the surveys and missions; first sentence is passive, dated 202, and names the expedition.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
+  "index": 786,
+  "feature": "civic record register",
+  "claim": "A survey is recorded as a verbless line of label, year and named director.",
+  "source": "Le Guin, Rocannon's World (1966), second handbook entry, quoted by Books & Boots",
+  "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "quote": "First Ethnographic Survey, 321, Director: G. Rocannon",
+  "page": "second quotation, last line",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-12-05 (quoting the 1966 novel)",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 786,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "First Ethnographic Survey, 321, Director: G. Rocannon",
+   "note": "Last line of the second handbook block on the page: label, year, named director, no verb.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
+  "index": 787,
+  "feature": "civic record register",
+  "claim": "A prohibition is recorded as a dated passive naming the authority that imposed it and the reason it stands.",
+  "source": "Le Guin, Rocannon's World (1966), second handbook entry, quoted by Books & Boots",
+  "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "quote": "the planet was placed under Interdict by the Allworld HILF Authority",
+  "page": "second quotation, Control and Taxation Missions",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-12-05 (quoting the 1966 novel)",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 787,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the planet was placed under Interdict by the Allworld HILF Authority",
+   "note": "Live site returned a 403 JS challenge; read via the Wayback raw capture 20260605103418id_. The line sits in the SECOND quoted handbook entry (the 'Number 62: FOMALHAUT II' block introduced by 'And a little later in the narrative'), under History, exactly where the claim points. All four limbs present in the one sentence: dated (a year opens the clause), passive voice, the imposing authority named, and a trailing 'pending...' clause giving the reason it stands.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
   "index": 788,
   "feature": "other: figures in a record",
   "claim": "The planetary entry gives the length of a year down to the second.",
@@ -12279,6 +12578,29 @@
   }
  },
  {
+  "index": 789,
+  "feature": "register modulation",
+  "claim": "The blogger contrasts the folk-tale style of the novel's opening story with the more factual style of the rest.",
+  "source": "Books & Boots (astrofella), review of Rocannon's World, 2019",
+  "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "quote": "cast in much more factual, sci fi style",
+  "page": "section 'The plot'",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2019-12-05",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 789,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cast in much more factual, sci fi style",
+   "note": "Same Wayback raw capture. Sentence sits under the heading 'The plot' and contrasts the opening Semley story, told in 'olde worlde, fake folk tale style', with the rest of the narrative. Both limbs of the claim (folk-tale opening vs more factual rest) are in that one sentence.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
   "index": 790,
   "feature": "other: encyclopedic form",
   "claim": "Le Guin's Foundation describes Tales from Earthsea as concluding with an account of the world's history, people, languages, literature and magic.",
@@ -12299,6 +12621,52 @@
    "trueWording": "an account of Earthsea's history, people, languages, literature, and magic",
    "note": "ursulakleguin.com/tales-from-earthsea fetched raw (HTTP 200). The book description reads 'Concluding with with an account of...' (the doubled 'with' is the page's own typo); the footer identifies the site as The Ursula K. Le Guin Foundation, supporting the attribution limb.",
    "fromFile": "verdicts-leguin-i763-807.json"
+  }
+ },
+ {
+  "index": 791,
+  "feature": "opening sentence",
+  "claim": "Anand Pandian describes Rocannon's World as opening with the ethnographer's survey of hominoid species on one world.",
+  "source": "Anand Pandian, anthro{dendum}, 2018",
+  "url": "http://anthrodendum.org/2018/01/26/ursula-ak-le-guin-interplanetary-anthropologist-2/",
+  "quote": "opening with his survey of “hominoid” species on the world",
+  "page": "paragraph beginning 'Le Guin's books teem with anthropologists'",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2018-01-26",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 791,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "opening with his survey of “hominoid” species on the world",
+   "note": "Live page fetched raw (HTTP 200). Byline 'By Anand Pandian', dated January 26, 2018, anthrodendum. Quote is verbatim, curly quotes included, in the paragraph beginning 'Le Guin's mother, Theodora Kroeber...' which contains the line 'Le Guin's books teem with anthropologists'. The page names the subject an interplanetary ethnographer and completes the phrase with the specific world (Fomalhaut II); the claim's 'one world' is a fair generalisation, not an added limb.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
+  "index": 795,
+  "feature": "diction (native vs latinate)",
+  "claim": "Le Guin describes Tolkien's vocabulary as unstriking and everything in it as direct, concrete and simple.",
+  "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "everything is direct, concrete, and simple",
+  "page": "p.8 of the PDF",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "1973",
+  "routeHint": "live URL, browser UA; third-party PDF transcription, pypdf extraction",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 795,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "everything is direct, concrete, and simple",
+   "note": "PDF fetched as binary and text-extracted with pdftotext (route 3). Title page reads 'Ursula K. Le Guin's \"From Elfland to Poughkeepsie\" (1973)'. The sentence reads that Tolkien's vocabulary is not striking, he has no ichor, then the quoted clause; it sits in the paragraph on Tolkien's plain, clear English, on the eighth text page of the extraction (the claim's p.8 checks out). Scope note: the page's 'everything' covers Tolkien's prose generally rather than the vocabulary alone, which entails rather than contradicts the claim's narrower reading.",
+   "fromFile": "verdicts-leguin-i787-857.json"
   }
  },
  {
@@ -12716,6 +13084,121 @@
   }
  },
  {
+  "index": 834,
+  "feature": "cadence and rhythm",
+  "claim": "Le Guin says prose rhythms are regular, if at all, only on a very much larger and longer scale than metrical feet.",
+  "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+  "quote": "only on a very much larger, longer scale",
+  "page": "answer to Alex, question 1",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2016",
+  "routeHint": "live URL, curl with browser UA, tags stripped locally",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 834,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only on a very much larger, longer scale",
+   "note": "Live ursulakleguin.com page fetched raw (HTTP 200); answer to Alex, question 1. Quote verbatim. The 'than metrical feet' limb is carried by the immediately preceding sentence, which rules metric feet and verses out because this is prose, not poetry -- adjacent-sentence support, not a separate assertion.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
+  "index": 835,
+  "feature": "cadence and rhythm",
+  "claim": "Le Guin says prose rhythms are hard to talk about because we have no vocabulary for them.",
+  "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+  "quote": "we have no vocabulary for them",
+  "page": "answer to Alex, question 1",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2016",
+  "routeHint": "live URL, curl with browser UA, tags stripped locally",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 835,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we have no vocabulary for them",
+   "note": "Same page and answer. Full clause runs 'And they're hard to talk about, since we have no vocabulary for them', where 'they' is prose rhythms from the prior sentence. Both limbs (hard to talk about; no vocabulary) supported.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
+  "index": 836,
+  "feature": "cadence and rhythm",
+  "claim": "Le Guin says that whether composing or rewriting she does not think consciously about the rhythmic factors in a story.",
+  "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+  "quote": "I don’t think consciously about the rhythmic factors in a story",
+  "page": "answer to Alex, question 1",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2016",
+  "routeHint": "live URL, curl with browser UA, tags stripped locally",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 836,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don’t think consciously about the rhythmic factors in a story",
+   "note": "Same page and answer. Sentence opens 'Whether I'm composing or re-writing,' then the quoted clause verbatim, curly apostrophe included. The composing/rewriting limb is explicit.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
+  "index": 837,
+  "feature": "cadence and rhythm",
+  "claim": "Le Guin says reading aloud makes you aware of a word or phrase that tangles up the pace and needs to be moved or removed.",
+  "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+  "quote": "a word or a phrase that tangles up the pace",
+  "page": "answer to Alex, question 1",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2016",
+  "routeHint": "live URL, curl with browser UA, tags stripped locally",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 837,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a word or a phrase that tangles up the pace",
+   "note": "Same page and answer. Full sentence begins 'Reading aloud, you're aware of' the quoted phrase 'and needs to be moved or removed'. Both the reading-aloud limb and the moved-or-removed limb are on the page.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
+  "index": 838,
+  "feature": "cadence and rhythm",
+  "claim": "Le Guin says a hesitation while reading your own prose aloud may reveal a fault in the rhythm.",
+  "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+  "quote": "Wherever you hesitate in your reading aloud may reveal a fault",
+  "page": "answer to Alex, question 1",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2016",
+  "routeHint": "live URL, curl with browser UA, tags stripped locally",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 838,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wherever you hesitate in your reading aloud may reveal a fault",
+   "note": "Same page and answer; the sentence continues 'in the rhythm, the forward flow of the words', which supplies the claim's 'fault in the rhythm' limb. The context is explicitly reading your own prose aloud.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
   "index": 842,
   "feature": "closing sentence",
   "claim": "Le Guin recommends thinking of a story as an organic whole in which the beginning will imply the end and the end will fulfill the beginning.",
@@ -12762,6 +13245,75 @@
   }
  },
  {
+  "index": 845,
+  "feature": "place and institution description",
+  "claim": "Le Guin says her own specimen general description of an invented town, placing Horb on the coast of the southernmost of nine continents, implies very little.",
+  "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2 — Three New Questions\", Book View Cafe, 21 March 2016",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-three-new-questions",
+  "quote": "This general description implies very little",
+  "page": "answer to Nicole and Bayla, world-building demonstration",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2016",
+  "routeHint": "live URL, curl with browser UA, tags stripped locally",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 845,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This general description implies very little",
+   "note": "Live ursulakleguin.com page fetched raw (HTTP 200), answer to Nicole and Bayla, the invented planet Teg / place Horb demonstration. The specimen sentence immediately before the quote places Horb on the coast of the southernmost of the nine continents of Teg, matching the claim word for word in substance. Horb is treated as a town/city later in the same answer (streets, ports, Palace gate, 'the city').",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
+  "index": 846,
+  "feature": "place and institution description",
+  "claim": "Le Guin says her second specimen sentence about Horb lets the reader learn that the place has a long-established trading economy without stating it.",
+  "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2 — Three New Questions\", Book View Cafe, 21 March 2016",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-three-new-questions",
+  "quote": "it has a long-established trading economy",
+  "page": "answer to Nicole and Bayla, world-building demonstration",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2016",
+  "routeHint": "live URL, curl with browser UA, tags stripped locally",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 846,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it has a long-established trading economy",
+   "note": "Same page and answer. The second specimen sentence (traders, windships, voor-pelts and diamonds) is followed by Le Guin's list of what 'we also learn', which includes the quoted clause verbatim. The 'without stating it' limb is supported by the framing question she is answering -- how much you can imply in a description.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
+  "index": 847,
+  "feature": "concrete sensory noun",
+  "claim": "Le Guin says the difference between her two specimen descriptions is specificity, and prescribes packing sentences with specifics, not with generalities.",
+  "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2 — Three New Questions\", Book View Cafe, 21 March 2016",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-three-new-questions",
+  "quote": "packing your sentences with specifics, not with generalities",
+  "page": "answer to Nicole and Bayla",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2016",
+  "routeHint": "live URL, curl with browser UA, tags stripped locally",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 847,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "packing your sentences with specifics, not with generalities",
+   "note": "Same page and answer. The paragraph after the two specimen sentences states that the difference is in specificity, then prescribes embodying it in concrete, vivid details, ending in the quoted phrase verbatim. Both limbs present.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
   "index": 848,
   "feature": "other: default medievalism",
   "claim": "Le Guin says a specimen sentence putting a rider and a palace gate into Horb lands the reader in the European Middle Ages so that nobody has to do any thinking about it at all.",
@@ -12782,6 +13334,29 @@
    "trueWording": "Nobody has to do any thinking about it at all",
    "note": "Raw page fetched (HTTP 200). In the Nicole/Bayla answer, under 'How much to rely on the way cultures in our world work?', the specimen sentence has Vig spurring his horse through Horb's streets and drawing rein at the Palace gate; Le Guin then places the reader in Horb in the European Middle Ages, cozy and feudal, followed by the quoted sentence verbatim. Post date on page: March 21, 2016.",
    "fromFile": "verdicts-leguin-i843-885.json"
+  }
+ },
+ {
+  "index": 850,
+  "feature": "omission as information",
+  "claim": "Le Guin says a writer can fake quite a lot or leave it unsaid so long as the invented world looks and smells and tastes real.",
+  "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2 — Three New Questions\", Book View Cafe, 21 March 2016",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-three-new-questions",
+  "quote": "so long as your world looks and smells and tastes real",
+  "page": "final answer to Nicole and Bayla",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2016",
+  "routeHint": "live URL, curl with browser UA, tags stripped locally",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 850,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "so long as your world looks and smells and tastes real",
+   "note": "Same page, final paragraph of the answer to Nicole and Bayla. Full sentence: you can fake quite a lot or leave it unsaid, then the quoted clause. Caveat recorded, not a downgrade: the page conjoins two further conditions after this one (complexity, emotional weight, integrity), which the claim omits; the claim asserts no exclusivity, so no limb is unsupported.",
+   "fromFile": "verdicts-leguin-i787-857.json"
   }
  },
  {
@@ -12828,6 +13403,52 @@
    "trueWording": "I tried to write good ones",
    "note": "Raw page fetched (HTTP 200), Session 1 Part 4, dated September 21, 2015 on the page. In the answer to Esme, Le Guin distinguishes recognition from achievement, disclaims having set out to write successful books in the immediately preceding sentence, and follows with the quoted words verbatim. Both limbs of the claim supported.",
    "fromFile": "verdicts-leguin-i843-885.json"
+  }
+ },
+ {
+  "index": 854,
+  "feature": "place and institution description",
+  "claim": "Le Guin says that with an invented world you have to describe more than a realist does.",
+  "source": "Ursula K. Le Guin interviewed by John Plotz, Public Books, 15 June 2015",
+  "url": "https://www.publicbooks.org/the-storys-where-i-go-an-interview-with-ursula-k-le-guin/",
+  "quote": "you have to describe more than a realist does",
+  "page": "answer on describing an invented world",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2015",
+  "routeHint": "live URL, curl with browser UA, tags stripped locally",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 854,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you have to describe more than a realist does",
+   "note": "Live publicbooks.org page fetched raw (HTTP 200); byline John Plotz, dated 6.15.2015, matching the claim's attribution. Quote verbatim in Le Guin's answer ('UL:') in section I, which opens 'I'm very strong on accuracy and exactitude' and continues that the leaving-out is half the art.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  }
+ },
+ {
+  "index": 857,
+  "feature": "plainness and economy",
+  "claim": "Le Guin says she has learned to stop fiddling and twiddling because fiction needs a certain roughness.",
+  "source": "Ursula K. Le Guin, interview excerpts, \"A Return to Earthsea\", Locus Magazine, September 2001 (Locus Online excerpts page)",
+  "url": "https://www.locusmag.com/2001/Issue09/LeGuin.html",
+  "quote": "Fiction needs a certain roughness.",
+  "page": "excerpt on composition and revision",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2001",
+  "routeHint": "live URL, curl with browser UA; cp1252 decoding",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 857,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Fiction needs a certain roughness.",
+   "note": "Live locusmag.com excerpts page fetched raw (HTTP 200); page headed 'Ursula K. Le Guin: A Return to Earthsea', September 2001, 'Excerpts from the interview'. The final excerpt contains 'In fact, I've learned to stop fiddling and twiddling' and, two sentences later, the quoted sentence verbatim. The claim's causal 'because' is carried by the intervening sentence on overpolished fiction being a bore, i.e. by Le Guin's juxtaposed rationale rather than by an explicit connective. The page's curly quotes arrive mojibaked (Windows-1252) but no quoted word is affected.",
+   "fromFile": "verdicts-leguin-i787-857.json"
   }
  },
  {

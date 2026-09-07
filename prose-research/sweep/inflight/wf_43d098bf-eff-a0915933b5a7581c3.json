@@ -1,0 +1,21 @@
+{
+ "role": "regrade",
+ "name": "dnd",
+ "angle": null,
+ "tag": "regrade-r12",
+ "lines": 51,
+ "firstTs": "2026-09-07T07:09:39.754Z",
+ "lastTs": "2026-09-07T07:11:25.090Z",
+ "tools": {
+  "Bash": 8,
+  "Read": 3
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by running the merge command and reading the resulting file.",
+ "run": "wf_43d098bf-eff",
+ "agent": "a0915933b5a7581c3",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_43d098bf-eff/agent-a0915933b5a7581c3.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

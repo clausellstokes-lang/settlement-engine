@@ -2052,6 +2052,30 @@
   }
  },
  {
+  "index": 770,
+  "feature": "place and institution description",
+  "claim": "A settlement is identified by a present-tense copula sentence that nests farm inside village inside watershed inside river inside continent inside planet.",
+  "source": "Ursula K. Le Guin, 'Mountain Ways', excerpted on the author's official site",
+  "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
+  "quote": "Danro is the farthest farm of Oro Village in the High Watershed",
+  "page": "'Mountain Ways', second section",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2002 collection; page retrieved 2026-09-06",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 770,
+   "verdict": "PARTIAL",
+   "trueWording": "Danro is the farthest farm of Oro Village",
+   "note": "Quote verbatim; the sentence nests Danro / Oro Village / High Watershed / Mane River / Oniasu / O. Five levels are typed by the page, the fifth is not.",
+   "unsupportedLimb": "'continent' - the page never types Oniasu as a continent, only 'on Oniasu on O'",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
   "index": 774,
   "feature": "per-speaker register",
   "claim": "A Gethenian narrator explains the offworld convention for numbering years before stating her own.",
@@ -2073,6 +2097,54 @@
    "trueWording": "They call the year of some portentous event Year One",
    "note": "Quote is verbatim. Byline on the page confirms the Gethenian narrator (Sov Thade Tage em Ereb, of Rer, in Karhide, on Gethen), and her own count is stated in the next sentence ('Here it's always Year One'), so the narrator and ordering limbs hold; only the 'offworld' attribution overreaches, since Orgoreyn is on Gethen.",
    "fromFile": "verdicts-leguin-i763-807.json"
+  }
+ },
+ {
+  "index": 776,
+  "feature": "place and institution description",
+  "claim": "A people is described in the handbook by a verbless string of adjectives closing on a height range in centimetres.",
+  "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted by Books & Boots",
+  "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "quote": "Highly intelligent, fully hominoid nocturnal troglodytes, 120-135 cm. in height",
+  "page": "prologue quotation, Species I-A",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-12-05 (quoting the 1966 novel)",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 776,
+   "verdict": "PARTIAL",
+   "trueWording": "Highly intelligent, fully hominoid nocturnal troglodytes, 120-135 cm. in height",
+   "note": "Quote verbatim in the Species I-A entry, and the string is verbless. But it does not close there: the page continues the same string with two more items after the height.",
+   "unsupportedLimb": "'closing on a height range' - the string runs on past the height with 'light skin, dark head-hair'",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
+  "index": 777,
+  "feature": "civic record register",
+  "claim": "An intervention by the institution is recorded as a verbless clause with a grade and a date range and no actor.",
+  "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted by Books & Boots",
+  "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
+  "quote": "Technology enhanced to Industrial, Point C, during League Mission of 252-254",
+  "page": "prologue quotation, Species I-A",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-12-05 (quoting the 1966 novel)",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 777,
+   "verdict": "PARTIAL",
+   "trueWording": "Technology enhanced to Industrial, Point C, during League Mission of 252-254",
+   "note": "Quote verbatim in Species I-A; grade ('Industrial, Point C'), date range (252-254) and suppressed agent all on the page. The clause is not verbless: it is a reduced/non-finite clause built on the participle 'enhanced' (contrast the genuinely verbless line at index 786).",
+   "unsupportedLimb": "'verbless clause' - the clause carries the participle 'enhanced'",
+   "fromFile": "verdicts-leguin-i766-786.json"
   }
  },
  {

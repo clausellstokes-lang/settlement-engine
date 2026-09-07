@@ -34820,12 +34820,62 @@
    "note": "Raw page of the Birthday of the World excerpts fetched (HTTP 200). The line sits directly under the 'Mountain Ways' heading and before the story's first narrative paragraph ('Danro is the farthest farm...'), so the 'before the story starts' limb holds.",
    "fromFile": "verdicts-leguin-i763-807.json"
   },
+  "766": {
+   "index": 766,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ki'O society is divided into two halves or moieties, called",
+   "note": "'Mountain Ways' headnote, first line: present-tense passive 'is divided', self-glossing 'moieties' as 'two halves'; raw HTML of ursulakleguin.com fetched with a browser UA (HTTP 200).",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
   "767": {
    "index": 767,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "The Morning woman and the Evening man (the \"Morning marriage\")",
    "note": "Verbatim on the same excerpts page. Lead-in line reads 'The expected relationships within each sedoretu are:' followed by four separate one-line items, each ending in a parenthesised name (Morning, Evening, Day, Night marriage); a fifth line then names the forbidden pairings. The claim's word 'permitted' is the page's 'expected', the only contrast on the page being 'forbidden'.",
    "fromFile": "verdicts-leguin-i763-807.json"
+  },
+  "768": {
+   "index": 768,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they aren't called anything, except sacrilege",
+   "note": "Headnote's last structural sentence names the two forbidden pairings (Morning woman/Morning man, Evening woman/Evening man) and ends on this clause. Every limb on the page.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
+  "769": {
+   "index": 769,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In the stony uplands of the Deka Mountains the farmholds are",
+   "note": "First line of the story proper, immediately after the headnote; present-tense 'are', named upland (Deka Mountains), density stated in the clause that follows ('few and far between').",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
+  "770": {
+   "index": 770,
+   "verdict": "PARTIAL",
+   "trueWording": "Danro is the farthest farm of Oro Village",
+   "note": "Quote verbatim; the sentence nests Danro / Oro Village / High Watershed / Mane River / Oniasu / O. Five levels are typed by the page, the fifth is not.",
+   "unsupportedLimb": "'continent' - the page never types Oniasu as a continent, only 'on Oniasu on O'",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
+  "771": {
+   "index": 771,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The farmers are dependent on the ariu; the ariu are not",
+   "note": "'Mountain Ways', second paragraph: semicolon-joined two-clause reversal, in a paragraph about combing fleece and selling pelts, so the relation is economic on the page.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
+  "772": {
+   "index": 772,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "An addition to \"POVERTY: The Second Report on Eleven-Soro\"",
+   "note": "Headnote line under the title 'Solitude', continuing with the Mobile's name and 'by her daughter, Serenity'. Named report, ordinal 'Second', and Eleven-Soro identified later in paragraph 2 as the eleventh planet of the Soro system.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
+  "773": {
+   "index": 773,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "My mother, a field ethnologist, took the difficulty of learning anything",
+   "note": "Opening words of 'Solitude' paragraph 1; the bare apposition sits between the subject and the verb, so nothing is said of her before the profession.",
+   "fromFile": "verdicts-leguin-i766-786.json"
   },
   "774": {
    "index": 774,
@@ -34835,6 +34885,29 @@
    "note": "Quote is verbatim. Byline on the page confirms the Gethenian narrator (Sov Thade Tage em Ereb, of Rer, in Karhide, on Gethen), and her own count is stated in the next sentence ('Here it's always Year One'), so the narrator and ordering limbs hold; only the 'offworld' attribution overreaches, since Orgoreyn is on Gethen.",
    "fromFile": "verdicts-leguin-i763-807.json"
   },
+  "775": {
+   "index": 775,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Galactic Area 8, No. 62: FOMALHAUT II",
+   "note": "Books & Boots introduces the block as the novel's opening quote from the 'Abridged Handy Pocket Guide to Intelligent Life-forms', 'which I quote in full'; heading carries area number, entry number, planet name. (The same post later calls the Semley story the novel's opening; the handbook entry is the epigraph before it.)",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
+  "776": {
+   "index": 776,
+   "verdict": "PARTIAL",
+   "trueWording": "Highly intelligent, fully hominoid nocturnal troglodytes, 120-135 cm. in height",
+   "note": "Quote verbatim in the Species I-A entry, and the string is verbless. But it does not close there: the page continues the same string with two more items after the height.",
+   "unsupportedLimb": "'closing on a height range' - the string runs on past the height with 'light skin, dark head-hair'",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
+  "777": {
+   "index": 777,
+   "verdict": "PARTIAL",
+   "trueWording": "Technology enhanced to Industrial, Point C, during League Mission of 252-254",
+   "note": "Quote verbatim in Species I-A; grade ('Industrial, Point C'), date range (252-254) and suppressed agent all on the page. The clause is not verbless: it is a reduced/non-finite clause built on the participle 'enhanced' (contrast the genuinely verbless line at index 786).",
+   "unsupportedLimb": "'verbless clause' - the clause carries the participle 'enhanced'",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
   "778": {
    "index": 778,
    "verdict": "VERIFIED_VERBATIM",
@@ -34842,12 +34915,33 @@
    "note": "astrofella.wordpress.com fetched raw (HTTP 200, 166 KB). The blog quotes the Pocket Guide prologue in full: entry I-A ends 'Status C-Prime.' and entry I-B ends 'Status E-Query.'; the Species II (Liuar) entry carries no status. So exactly two of the three species entries close on a two-word status code.",
    "fromFile": "verdicts-leguin-i763-807.json"
   },
+  "779": {
+   "index": 779,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "indicated village and nomadic communal societies",
+   "note": "Species I-B entry: the sentence's subject is 'Brief contacts' (the blog's OCR renders it 'Brief con~ tacts'), and the entry closes 'Status E-Query', so the evidential grading is on the page.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
+  "780": {
+   "index": 780,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Currently untaxable",
+   "note": "Species I-B (the Fua), penultimate sentence of the entry; the post's later handbook block confirms taxation is an institutional category ('Control and Taxation Missions').",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
   "781": {
    "index": 781,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Note horizontal social cleavage into 2 pseudo-races",
    "note": "Verbatim inside the Species II (Liuar) entry on the same page, a bare imperative followed by the two named pseudo-races (Olgyior 'midmen', Angyar 'lords'). The reader-addressing limb rests on the imperative itself; the page assigns the reader no gender.",
    "fromFile": "verdicts-leguin-i763-807.json"
+  },
+  "782": {
+   "index": 782,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Four major landmasses... occupy 38% of planetary surface",
+   "note": "Second handbook block ('Number 62: FOMALHAUT II'), physical description, immediately after the gravity line; the four continents are named in between.",
+   "fromFile": "verdicts-leguin-i766-786.json"
   },
   "783": {
    "index": 783,
@@ -34863,6 +34957,27 @@
    "note": "Verbatim in the same First Geographical Survey entry, closing the sentence about landings and HILF contacts on East and Northwest Continents. 'below' is the document's own forward pointer, and the entry gives no species description of its own.",
    "fromFile": "verdicts-leguin-i763-807.json"
   },
+  "785": {
+   "index": 785,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "History: The planet was charted by the Elieson Expedition in 202",
+   "note": "Second handbook block: 'History:' labels the section whose remaining lines are the surveys and missions; first sentence is passive, dated 202, and names the expedition.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
+  "786": {
+   "index": 786,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "First Ethnographic Survey, 321, Director: G. Rocannon",
+   "note": "Last line of the second handbook block on the page: label, year, named director, no verb.",
+   "fromFile": "verdicts-leguin-i766-786.json"
+  },
+  "787": {
+   "index": 787,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the planet was placed under Interdict by the Allworld HILF Authority",
+   "note": "Live site returned a 403 JS challenge; read via the Wayback raw capture 20260605103418id_. The line sits in the SECOND quoted handbook entry (the 'Number 62: FOMALHAUT II' block introduced by 'And a little later in the narrative'), under History, exactly where the claim points. All four limbs present in the one sentence: dated (a year opens the clause), passive voice, the imposing authority named, and a trailing 'pending...' clause giving the reason it stands.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
   "788": {
    "index": 788,
    "verdict": "VERIFIED_VERBATIM",
@@ -34870,12 +34985,26 @@
    "note": "Verbatim in the physical-description block of the second handbook quotation, alongside Rotation, mean distance and obliquity. Revolution is the orbital year, given to the second.",
    "fromFile": "verdicts-leguin-i763-807.json"
   },
+  "789": {
+   "index": 789,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cast in much more factual, sci fi style",
+   "note": "Same Wayback raw capture. Sentence sits under the heading 'The plot' and contrasts the opening Semley story, told in 'olde worlde, fake folk tale style', with the rest of the narrative. Both limbs of the claim (folk-tale opening vs more factual rest) are in that one sentence.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
   "790": {
    "index": 790,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "an account of Earthsea's history, people, languages, literature, and magic",
    "note": "ursulakleguin.com/tales-from-earthsea fetched raw (HTTP 200). The book description reads 'Concluding with with an account of...' (the doubled 'with' is the page's own typo); the footer identifies the site as The Ursula K. Le Guin Foundation, supporting the attribution limb.",
    "fromFile": "verdicts-leguin-i763-807.json"
+  },
+  "791": {
+   "index": 791,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "opening with his survey of “hominoid” species on the world",
+   "note": "Live page fetched raw (HTTP 200). Byline 'By Anand Pandian', dated January 26, 2018, anthrodendum. Quote is verbatim, curly quotes included, in the paragraph beginning 'Le Guin's mother, Theodora Kroeber...' which contains the line 'Le Guin's books teem with anthropologists'. The page names the subject an interplanetary ethnographer and completes the phrase with the specific world (Fomalhaut II); the claim's 'one world' is a fair generalisation, not an added limb.",
+   "fromFile": "verdicts-leguin-i787-857.json"
   },
   "792": {
    "index": 792,
@@ -34897,6 +35026,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "795": {
+   "index": 795,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "everything is direct, concrete, and simple",
+   "note": "PDF fetched as binary and text-extracted with pdftotext (route 3). Title page reads 'Ursula K. Le Guin's \"From Elfland to Poughkeepsie\" (1973)'. The sentence reads that Tolkien's vocabulary is not striking, he has no ichor, then the quoted clause; it sits in the paragraph on Tolkien's plain, clear English, on the eighth text page of the extraction (the claim's p.8 checks out). Scope note: the page's 'everything' covers Tolkien's prose generally rather than the vocabulary alone, which entails rather than contradicts the claim's narrower reading.",
+   "fromFile": "verdicts-leguin-i787-857.json"
   },
   "796": {
    "index": 796,
@@ -35164,6 +35300,41 @@
    "note": "Raw page, paragraph beginning 'On the other hand, the pressure of opinion'. Quote verbatim; 'such rules' refers back in the same paragraph to 'the rules of what's currently trendy, the rules of what's supposed to be salable', so both limbs hold.",
    "fromFile": "verdicts-leguin-i808-842.json"
   },
+  "834": {
+   "index": 834,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only on a very much larger, longer scale",
+   "note": "Live ursulakleguin.com page fetched raw (HTTP 200); answer to Alex, question 1. Quote verbatim. The 'than metrical feet' limb is carried by the immediately preceding sentence, which rules metric feet and verses out because this is prose, not poetry -- adjacent-sentence support, not a separate assertion.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
+  "835": {
+   "index": 835,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we have no vocabulary for them",
+   "note": "Same page and answer. Full clause runs 'And they're hard to talk about, since we have no vocabulary for them', where 'they' is prose rhythms from the prior sentence. Both limbs (hard to talk about; no vocabulary) supported.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
+  "836": {
+   "index": 836,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don’t think consciously about the rhythmic factors in a story",
+   "note": "Same page and answer. Sentence opens 'Whether I'm composing or re-writing,' then the quoted clause verbatim, curly apostrophe included. The composing/rewriting limb is explicit.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
+  "837": {
+   "index": 837,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a word or a phrase that tangles up the pace",
+   "note": "Same page and answer. Full sentence begins 'Reading aloud, you're aware of' the quoted phrase 'and needs to be moved or removed'. Both the reading-aloud limb and the moved-or-removed limb are on the page.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
+  "838": {
+   "index": 838,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wherever you hesitate in your reading aloud may reveal a fault",
+   "note": "Same page and answer; the sentence continues 'in the rhythm, the forward flow of the words', which supplies the claim's 'fault in the rhythm' limb. The context is explicitly reading your own prose aloud.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
   "839": {
    "index": 839,
    "verdict": "SKIPPED_TRIAGE",
@@ -35207,6 +35378,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "845": {
+   "index": 845,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This general description implies very little",
+   "note": "Live ursulakleguin.com page fetched raw (HTTP 200), answer to Nicole and Bayla, the invented planet Teg / place Horb demonstration. The specimen sentence immediately before the quote places Horb on the coast of the southernmost of the nine continents of Teg, matching the claim word for word in substance. Horb is treated as a town/city later in the same answer (streets, ports, Palace gate, 'the city').",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
+  "846": {
+   "index": 846,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it has a long-established trading economy",
+   "note": "Same page and answer. The second specimen sentence (traders, windships, voor-pelts and diamonds) is followed by Le Guin's list of what 'we also learn', which includes the quoted clause verbatim. The 'without stating it' limb is supported by the framing question she is answering -- how much you can imply in a description.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
+  "847": {
+   "index": 847,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "packing your sentences with specifics, not with generalities",
+   "note": "Same page and answer. The paragraph after the two specimen sentences states that the difference is in specificity, then prescribes embodying it in concrete, vivid details, ending in the quoted phrase verbatim. Both limbs present.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
   "848": {
    "index": 848,
    "verdict": "VERIFIED_VERBATIM",
@@ -35220,6 +35412,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "850": {
+   "index": 850,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "so long as your world looks and smells and tastes real",
+   "note": "Same page, final paragraph of the answer to Nicole and Bayla. Full sentence: you can fake quite a lot or leave it unsaid, then the quoted clause. Caveat recorded, not a downgrade: the page conjoins two further conditions after this one (complexity, emotional weight, integrity), which the claim omits; the claim asserts no exclusivity, so no limb is unsupported.",
+   "fromFile": "verdicts-leguin-i787-857.json"
   },
   "851": {
    "index": 851,
@@ -35242,6 +35441,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "854": {
+   "index": 854,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you have to describe more than a realist does",
+   "note": "Live publicbooks.org page fetched raw (HTTP 200); byline John Plotz, dated 6.15.2015, matching the claim's attribution. Quote verbatim in Le Guin's answer ('UL:') in section I, which opens 'I'm very strong on accuracy and exactitude' and continues that the leaving-out is half the art.",
+   "fromFile": "verdicts-leguin-i787-857.json"
+  },
   "855": {
    "index": 855,
    "verdict": "SKIPPED_TRIAGE",
@@ -35255,6 +35461,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "857": {
+   "index": 857,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Fiction needs a certain roughness.",
+   "note": "Live locusmag.com excerpts page fetched raw (HTTP 200); page headed 'Ursula K. Le Guin: A Return to Earthsea', September 2001, 'Excerpts from the interview'. The final excerpt contains 'In fact, I've learned to stop fiddling and twiddling' and, two sentences later, the quoted sentence verbatim. The claim's causal 'because' is carried by the intervening sentence on overpolished fiction being a bore, i.e. by Le Guin's juxtaposed rationale rather than by an explicit connective. The page's curly quotes arrive mojibaked (Windows-1252) but no quoted word is affected.",
+   "fromFile": "verdicts-leguin-i787-857.json"
   },
   "859": {
    "index": 859,

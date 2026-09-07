@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 03:05:27 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 03:11:28 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -68,6 +68,7 @@
 | dnd | finder | place-lawful-primaries | result | 56 | claims.json | 60 claims, complete=True @03:00:39 | 06:39:14 |
 | dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:50:21 | 03:18:23 |
 | dnd | regrade | regrade-r10 | result | 0 | — | — | 04:08:15 |
+| dnd | regrade | regrade-r12 | in-flight | 0 | — | — | 07:11:25 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
 | dnd | synth |  | result | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:52:03 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
@@ -90,10 +91,10 @@
 | dnd | verifier | i1132-1146 | result | 4 | — | verdict file WRITTEN | 06:52:21 |
 | dnd | verifier | i1142-1152 | failed | 0 | — | verdict file absent | 03:45:28 |
 | dnd | verifier | i1148-1149 | result | 2 | — | verdict file WRITTEN | 06:50:20 |
-| dnd | verifier | i1153-1167 | in-flight | 5 | — | verdict file absent | 07:05:19 |
-| dnd | verifier | i1168-1182 | in-flight | 7 | — | verdict file absent | 07:05:15 |
-| dnd | verifier | i1183-1197 | in-flight | 5 | — | verdict file absent | 07:05:17 |
-| dnd | verifier | i1198-1211 | in-flight | 4 | — | verdict file absent | 07:04:46 |
+| dnd | verifier | i1153-1167 | result | 5 | — | verdict file WRITTEN | 07:07:10 |
+| dnd | verifier | i1168-1182 | result | 7 | — | verdict file WRITTEN | 07:09:39 |
+| dnd | verifier | i1183-1197 | result | 5 | — | verdict file WRITTEN | 07:09:13 |
+| dnd | verifier | i1198-1211 | result | 4 | — | verdict file WRITTEN | 07:09:13 |
 | dnd | verifier | i725-749 | result | 4 | — | verdict file WRITTEN | 06:43:08 |
 | dnd | verifier | i751-774 | result | 5 | — | verdict file WRITTEN | 06:43:42 |
 | dnd | verifier | i775-807 | result | 6 | — | verdict file WRITTEN | 06:43:25 |
@@ -117,18 +118,23 @@
 | leguin | verifier | i588-636 | result | 38 | — | verdict file WRITTEN | 06:43:35 |
 | leguin | verifier | i637-659 | result | 4 | — | verdict file WRITTEN | 06:34:20 |
 | leguin | verifier | i660-684 | in-flight | 19 | — | verdict file absent | 06:53:52 |
-| leguin | verifier | i660-684 | in-flight | 1 | — | verdict file absent | 07:03:37 |
+| leguin | verifier | i660-684 | in-flight | 4 | — | verdict file absent | 07:10:44 |
 | leguin | verifier | i686-721 | in-flight | 9 | — | verdict file absent | 06:53:37 |
-| leguin | verifier | i686-721 | in-flight | 7 | — | verdict file absent | 07:05:17 |
+| leguin | verifier | i686-721 | in-flight | 12 | — | verdict file absent | 07:11:18 |
 | leguin | verifier | i722-743 | result | 4 | — | verdict file WRITTEN | 06:48:26 |
 | leguin | verifier | i744-764 | result | 7 | — | verdict file WRITTEN | 06:48:31 |
-| leguin | verifier | i766-786 | in-flight | 2 | — | verdict file absent | 07:05:16 |
-| leguin | verifier | i787-857 | in-flight | 8 | — | verdict file absent | 07:05:25 |
+| leguin | verifier | i766-786 | result | 2 | — | verdict file WRITTEN | 07:06:28 |
+| leguin | verifier | i787-857 | result | 8 | — | verdict file WRITTEN | 07:07:52 |
 | martin | critic |  | result | 34 | critic-martin.md | — | 02:31:58 |
 | wolfe | critic |  | result | 0 | critic-wolfe.md | — | 02:10:22 |
 | wolfe | synth |  | result | 0 | — | — | 01:52:32 |
-| ? | critic |  | in-flight | 0 | — | — | 07:05:23 |
-| ? | critic |  | in-flight | 0 | — | — | 07:05:19 |
+| ? | critic |  | result | 0 | — | — | 07:06:40 |
+| ? | critic |  | result | 0 | — | — | 07:06:57 |
+| ? | other |  | result | 0 | — | — | 07:10:20 |
+| ? | other |  | in-flight | 0 | — | — | 07:11:24 |
+| ? | other |  | in-flight | 0 | — | — | 07:11:25 |
+| ? | other |  | in-flight | 0 | — | — | 07:11:27 |
+| ? | other |  | in-flight | 0 | — | — | 07:11:27 |
 | ? | other |  | result | 0 | — | — | 02:32:40 |
 | ? | other |  | result | 0 | check-hobb.md | — | 02:37:47 |
 | ? | other |  | result | 0 | FIVE_AUTHOR_CHECK.md | — | 02:50:26 |

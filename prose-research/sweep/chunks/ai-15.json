@@ -1,0 +1,68 @@
+{
+ "name": "ai",
+ "chunk": 15,
+ "indices": [
+  1391,
+  1392,
+  1393,
+  1395,
+  1396,
+  1398
+ ],
+ "claims": [
+  {
+   "index": 1391,
+   "feature": "reader and expert judgment",
+   "claim": "Tabletop Sentinel's writer says the curated AI-produced designer bios read as AI-generated work.",
+   "source": "AngusA, Tabletop Sentinel",
+   "url": "https://www.tabletopsentinel.com/news/hobby/dungeon-master-of-disaster-ken-whitmans-ai-bios-stir-ttrpg-chaos",
+   "quote": "they not only read as AI generated work",
+   "page": "paragraph 2"
+  },
+  {
+   "index": 1392,
+   "feature": "reader and expert judgment",
+   "claim": "An EN World poster presents a ChatGPT essay on generic RPG campaign settings as an instance where the model shows the limits of neural network text generation.",
+   "source": "forum poster 'rhythmsoundmotion', EN World",
+   "url": "https://www.enworld.org/threads/chatgpt-writes-%E2%80%9Dmissed-opportunities-in-generic-tabletop-rpg-campaign-settings%E2%80%9D.709326/",
+   "quote": "Sometimes it shows the limits of neural network text generation.",
+   "page": "opening post, 2024-12-30"
+  },
+  {
+   "index": 1393,
+   "feature": "steerability",
+   "claim": "The One-Page RPG Jam 2025's generative-AI policy forbids text generated from a prompt and also text merely re-written by a generative AI tool.",
+   "source": "Unknown Dungeon (jam host), itch.io community policy",
+   "url": "https://itch.io/jam/one-page-rpg-jam-2025/topic/5041892/generative-ai-policy",
+   "quote": "use text generated from a prompt in your game",
+   "page": "'Text' section of the policy"
+  },
+  {
+   "index": 1395,
+   "feature": "abstraction over the concrete",
+   "claim": "Reviewing 'Three Witches', a product whose DriveThruRPG description is labelled as containing AI-generated content, Bryce Lynch writes that nothing in its hex crawl is specific.",
+   "source": "Bryce Lynch, tenfootpole.org review of 'Three Witches' by Rutibex",
+   "url": "https://tenfootpole.org/ironspike/?p=9842",
+   "quote": "There’s nothing specific about anything in that fucking hex crawl.",
+   "page": "review body, on the hex descriptions"
+  },
+  {
+   "index": 1396,
+   "feature": "abstraction over the concrete",
+   "claim": "Bryce Lynch describes the typical hex entry in that product as a one-liner about the terrain followed by a list of things the party might encounter.",
+   "source": "Bryce Lynch, tenfootpole.org review of 'Three Witches'",
+   "url": "https://tenfootpole.org/ironspike/?p=9842",
+   "quote": "A little one liner that is super generic about the terrain",
+   "page": "review body, on the hex descriptions"
+  },
+  {
+   "index": 1398,
+   "feature": "gloss and over-explaining",
+   "claim": "He objects that the DM-facing line states the room's intended effect instead of designing a room that produces it, telling the DM that the entrance is a foreboding entrance.",
+   "source": "Bryce Lynch, tenfootpole.org review of 'Three Witches'",
+   "url": "https://tenfootpole.org/ironspike/?p=9842",
+   "quote": "telling the DM that this is a foreboding entrance",
+   "page": "review body, on the dungeon rooms"
+  }
+ ]
+}

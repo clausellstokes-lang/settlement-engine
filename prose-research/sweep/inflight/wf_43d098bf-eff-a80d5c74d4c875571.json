@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i1168-1182",
- "lines": 53,
+ "lines": 91,
  "firstTs": "2026-09-07T07:02:59.817Z",
- "lastTs": "2026-09-07T07:05:15.184Z",
+ "lastTs": "2026-09-07T07:09:39.743Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 11
+  "Bash": 21,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
@@ -25,9 +26,9 @@
  "run": "wf_43d098bf-eff",
  "agent": "a80d5c74d4c875571",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_43d098bf-eff/agent-a80d5c74d4c875571.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i1168-1182.json",
-  "exists": false
+  "exists": true
  }
 }

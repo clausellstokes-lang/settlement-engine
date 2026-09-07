@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 1,
  "indices": [
-  962,
-  965,
-  966,
-  967,
-  968,
-  969,
-  970,
-  971,
-  972,
-  973,
-  974,
-  976,
-  977,
-  979,
-  984
+  951,
+  963,
+  964,
+  978,
+  980,
+  981,
+  982,
+  983,
+  990,
+  999,
+  1001,
+  1002,
+  1003,
+  1005,
+  1032
  ],
  "claims": [
   {
-   "index": 962,
-   "feature": "other: eulogy register in the record",
-   "claim": "M Ross judges that generated biographical content reads like obituary filler written by somebody who knew nothing about the dead person.",
-   "source": "M Ross, answer on WikiTree G2G, 23 Nov 2023",
+   "index": 951,
+   "feature": "counter-evidence",
+   "claim": "Sato writes that of all the obituaries published for Beth Mazur only the one written by a person who knew her captures who she actually was.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "only Vastag’s obituary captures the actual person Mazur was",
+   "page": "body, closing section"
+  },
+  {
+   "index": 963,
+   "feature": "abstraction over the concrete",
+   "claim": "Stephanie Ward characterises AI-generated WikiTree biographies as pretty words carrying no content.",
+   "source": "Stephanie Ward, answer on WikiTree G2G, 23 Nov 2023",
    "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
-   "quote": "by someone who knew little if anything about the deceased",
-   "page": "answer, +18 votes"
+   "quote": "pretty words for a lot of nothing",
+   "page": "answer, +21 votes"
   },
   {
-   "index": 965,
-   "feature": "other: circular sourcing",
-   "claim": "Chase Ashley reports that ChatGPT 4, asked for a cited profile of Aquila Chase, summarised the existing WikiTree profile and cited that profile for every statement.",
-   "source": "Chase Ashley, comment on WikiTree G2G, 26 Nov 2023",
+   "index": 964,
+   "feature": "steerability",
+   "claim": "M Cole reports that ChatGPT keeps adding lofty summary statements about a subject's achievements whatever prompt is used to forbid opinion.",
+   "source": "M Cole, answer on WikiTree G2G, 23 Nov 2023",
    "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
-   "quote": "summarized it, and cited the WikiTree profile for each statement",
-   "page": "comment thread under the +19 answer"
+   "quote": "adding lofty summary statements about people's achievements no matter what",
+   "page": "answer, +19 votes"
   },
   {
-   "index": 966,
-   "feature": "other: fabricated fact in the record",
-   "claim": "M Cole reports that a ChatGPT profile of Thomas Dudley cited real reference works but asserted facts absent from them, such as his arriving on the Mayflower in 1630.",
-   "source": "M Cole, comment on WikiTree G2G, 26 Nov 2023",
-   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
-   "quote": "included information not in those sources that seemed to be hallucinations",
-   "page": "comment thread under the +19 answer"
-  },
-  {
-   "index": 967,
-   "feature": "other: false intimacy in the record",
-   "claim": "Brad Foley writes a parody line of generated family-history prose in the first person, recalling the smell of a great uncle's pipe.",
-   "source": "Brad Foley, comment on WikiTree G2G, 23 Nov 2023",
-   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
-   "quote": "I remember the smell of his pipe and the sound",
-   "page": "comment under Eric Weddington's answer"
-  },
-  {
-   "index": 968,
-   "feature": "other: person and distance in the record",
-   "claim": "Eric Weddington states that a genealogical biography belongs in the third person and not the first.",
-   "source": "Eric Weddington, comment on WikiTree G2G, 23 Nov 2023",
-   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
-   "quote": "supposed to be in the 3rd person, not the first person",
-   "page": "comment under his +24 answer"
-  },
-  {
-   "index": 969,
-   "feature": "other: platform policy",
-   "claim": "WikiTree's draft AI-image policy, put to a community vote by Brad Foley, gives as its reason that the site is committed to accurate sources and records.",
-   "source": "Brad Foley, draft policy in WikiTree G2G, 13 Apr 2026",
-   "url": "https://www.wikitree.com/g2g/2021670/should-become-official-wikitree-policy-generated-enhanced",
-   "quote": "WikiTree is committed to accurate sources and records",
-   "page": "question body, Draft Policy"
-  },
-  {
-   "index": 970,
-   "feature": "other: platform policy",
-   "claim": "That same draft states the risk it addresses is that AI reconstructions of past people can be taken as fact.",
-   "source": "Brad Foley, draft policy in WikiTree G2G, 13 Apr 2026",
-   "url": "https://www.wikitree.com/g2g/2021670/should-become-official-wikitree-policy-generated-enhanced",
-   "quote": "there is a real risk that they can be taken as fact",
-   "page": "question body, Draft Policy"
-  },
-  {
-   "index": 971,
-   "feature": "other: fabricated or absent citation",
-   "claim": "American Ancestors' Research Services reports that ChatGPT supplied a patron with a Boston marriage record that did not exist.",
-   "source": "Anjelica Oswald, 'Limitations of Artificial Intelligence (AI) in Genealogical Research', Vita Brevis, American Ancestors, 11 May 2026",
-   "url": "https://vitabrevis.americanancestors.org/-ai-in-genealogical-research",
-   "quote": "it made up a record that didn’t exist",
-   "page": "section 'Lessons in AI'"
-  },
-  {
-   "index": 972,
-   "feature": "other: fabricated or absent citation",
-   "claim": "In that case ChatGPT named three specific repositories where the non-existent record could be found.",
-   "source": "Anjelica Oswald, Vita Brevis, American Ancestors, 11 May 2026",
-   "url": "https://vitabrevis.americanancestors.org/-ai-in-genealogical-research",
-   "quote": "described three very specific sources where the patron could find",
-   "page": "section 'Lessons in AI'"
-  },
-  {
-   "index": 973,
-   "feature": "other: fabricated or absent citation",
-   "claim": "Staff checked the city commissioner record books at the exact pages ChatGPT specified and found no record there.",
-   "source": "Anjelica Oswald, Vita Brevis, American Ancestors, 11 May 2026",
-   "url": "https://vitabrevis.americanancestors.org/-ai-in-genealogical-research",
-   "quote": "the exact pages ChatGPT said the record would be with no record located",
-   "page": "section 'Lessons in AI'"
-  },
-  {
-   "index": 974,
-   "feature": "other: transcription error in the record",
-   "claim": "Oswald reports an OCR transcription that rendered a Harvard College record as Harman Collens.",
-   "source": "Anjelica Oswald, Vita Brevis, American Ancestors, 11 May 2026",
-   "url": "https://vitabrevis.americanancestors.org/-ai-in-genealogical-research",
-   "quote": "a record for Harvard College that was transcribed as",
-   "page": "section 'When to use AI'"
-  },
-  {
-   "index": 976,
-   "feature": "other: mechanism (register expects a citation shape)",
-   "claim": "Amy Johnson Crow explains the fabricated legal citations as ChatGPT producing the kind of language its training set showed a legal brief expects.",
-   "source": "Amy Johnson Crow, 'Using ChatGPT for Genealogy — Accurately', 7 Jul 2023",
-   "url": "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
-   "quote": "That was the type of language that was expected",
-   "page": "section 'The Biggest Mistake in Using ChatGPT'"
-  },
-  {
-   "index": 977,
-   "feature": "other: fabricated fact in the record",
-   "claim": "Crow reports that a ChatGPT biography of her obscure great-great-grandfather, prompted with only his name, contained nothing correct.",
+   "index": 978,
+   "feature": "steerability",
+   "claim": "Crow reports that when she supplied the verified facts, ChatGPT's biography still contained editorializing and embellishment she was not comfortable with.",
    "source": "Amy Johnson Crow, 7 Jul 2023",
    "url": "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
-   "quote": "There’s nothing in this biography that’s correct",
+   "quote": "There’s some editorializing and a little bit of embellishment",
    "page": "section 'Getting Accuracy in ChatGPT Results'"
   },
   {
-   "index": 979,
-   "feature": "other: identity conflation",
-   "claim": "Crow states that even for a subject present in its training set, ChatGPT has no good way to tell apart people who share a name.",
-   "source": "Amy Johnson Crow, 7 Jul 2023",
-   "url": "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
-   "quote": "differentiating between people who have the same name",
-   "page": "section 'Getting Accuracy in ChatGPT Results'"
+   "index": 980,
+   "feature": "counter-evidence",
+   "claim": "Nicole Elder Dyer reports that ChatGPT 4 gave the correct Chicago format for a book citation, matching the Chicago Manual of Style 17th edition at p. 799, section 14.101.",
+   "source": "Nicole Elder Dyer, 'Can ChatGPT Help with Genealogy Citations?', Family Locket, 17 Nov 2023",
+   "url": "https://familylocket.com/can-chatgpt-help-with-genealogy-citations/",
+   "quote": "ChatGPT did a great job with providing the accurate format",
+   "page": "section 'Book Citation'"
   },
   {
-   "index": 984,
-   "feature": "other: hedged non-statement",
-   "claim": "The field guide records that when an LLM cannot find information about a person's private life it often asserts instead that the person maintains a low profile.",
+   "index": 981,
+   "feature": "counter-evidence",
+   "claim": "Dyer concludes that ChatGPT had a much harder time with the census citation when she did not supply the details herself.",
+   "source": "Nicole Elder Dyer, Family Locket, 17 Nov 2023",
+   "url": "https://familylocket.com/can-chatgpt-help-with-genealogy-citations/",
+   "quote": "without me providing the details for the 1850 census",
+   "page": "section 'Conclusion'"
+  },
+  {
+   "index": 982,
+   "feature": "lexical tells",
+   "claim": "Wikipedia's WikiProject AI Cleanup field guide lists 'indelible mark' among the words to watch for LLM-written claims of legacy and significance.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup advice page), retrieved 6 Sep 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "indelible mark",
+   "page": "§ Undue emphasis on significance, legacy, and broader trends — Words to watch"
+  },
+  {
+   "index": 983,
+   "feature": "abstraction over the concrete",
+   "claim": "That field guide states LLM writing inflates a subject's importance by adding statements about how arbitrary aspects of it contribute to a broader topic.",
    "source": "Wikipedia:Signs of AI writing, retrieved 6 Sep 2026",
    "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
-   "quote": "often claims that the person \"maintains a low profile\"",
-   "page": "§ Knowledge-cutoff disclaimers and speculation about gaps in sources"
+   "quote": "the importance of the subject matter by adding statements about how",
+   "page": "§ Undue emphasis on significance, legacy, and broader trends"
+  },
+  {
+   "index": 990,
+   "feature": "detection and its failures",
+   "claim": "The field guide relays a 2025 study finding that human ability to tell LLM text from human text is no better than chance.",
+   "source": "Wikipedia:Signs of AI writing relaying a 2025 study (its reference 4), retrieved 6 Sep 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "no better than random chance",
+   "page": "§ Caveats — Your detection ability"
+  },
+  {
+   "index": 999,
+   "feature": "lexical tells",
+   "claim": "Bob Treadway, a daily reader of his local paper's obituary section, names paint-by-numbers phrases and clunky sentences as what makes him suspect an AI obituary.",
+   "source": "Bob Treadway, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+   "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+   "quote": "the paint-by-numbers phrases, the clunky sentences",
+   "page": "section 'Creative ideas for a graveside service'"
+  },
+  {
+   "index": 1001,
+   "feature": "homogenisation",
+   "claim": "Mary McGreevy, who reads obituaries publicly on TikTok, says AI will produce more tributes that feel templated and airbrushed.",
+   "source": "Mary McGreevy, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+   "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+   "quote": "templated and airbrushed",
+   "page": "section 'A faster way to remember you'"
+  },
+  {
+   "index": 1002,
+   "feature": "counter-evidence",
+   "claim": "McGreevy says the obituaries that travel are not written by talented writers.",
+   "source": "Mary McGreevy, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+   "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+   "quote": "It’s not the people who are talented writers whose obituaries go viral",
+   "page": "section 'A faster way to remember you'"
+  },
+  {
+   "index": 1003,
+   "feature": "counter-evidence",
+   "claim": "McGreevy locates the value of an obituary in reaching the imperfect heart of the person rather than in polish.",
+   "source": "Mary McGreevy, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+   "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+   "quote": "to get to the imperfect heart of who that person was",
+   "page": "section 'A faster way to remember you'"
+  },
+  {
+   "index": 1005,
+   "feature": "homogenisation",
+   "claim": "Raicu names the risk of outsourcing memorial writing to machines a flattening effect.",
+   "source": "Irina Raicu, quoted by Drew Harwell, The Washington Post, 3 Aug 2025",
+   "url": "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+   "quote": "flattening effect",
+   "page": "section before 'Passed away peacefully'"
+  },
+  {
+   "index": 1032,
+   "feature": "register measured",
+   "claim": "They chose people biographies for the evaluation on the stated ground that biographies are objective and contain specific rather than vague information.",
+   "source": "Sewon Min et al., arXiv:2305.14251",
+   "url": "https://arxiv.org/pdf/2305.14251",
+   "quote": "Biographies are objective (not subjective or de-",
+   "page": "§3.2, first bullet"
   }
  ]
 }

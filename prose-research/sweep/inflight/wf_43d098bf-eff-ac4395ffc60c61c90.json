@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i1153-1167",
- "lines": 56,
+ "lines": 70,
  "firstTs": "2026-09-07T07:02:58.577Z",
- "lastTs": "2026-09-07T07:05:19.256Z",
+ "lastTs": "2026-09-07T07:07:10.880Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 13
+  "Bash": 16,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
@@ -23,9 +24,9 @@
  "run": "wf_43d098bf-eff",
  "agent": "ac4395ffc60c61c90",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_43d098bf-eff/agent-ac4395ffc60c61c90.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i1153-1167.json",
-  "exists": false
+  "exists": true
  }
 }
