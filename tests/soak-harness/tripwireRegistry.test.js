@@ -9,6 +9,10 @@
  * not a naming convention.
  */
 
+import { readFileSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -18,9 +22,21 @@ import {
   WALL_TIME_TREND_FACTOR,
   YEARLY_BYTES_PER_SETTLEMENT_CEILING,
   evaluateTripwires,
+  receiptWriterFields,
+  tripwireFieldReach,
+  tripwireFieldsRead,
   tripwireRegistryDefects,
   tripwiresOfClass,
 } from '../../scripts/soak/tripwires.mjs';
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+/**
+ * ⛔ THE WRITER IS READ AS TEXT, NEVER IMPORTED. `scripts/soak/**` is an ARM_B_ROOT of the
+ * engine/telemetry wall, and `whole-world-soak.mjs` reaches the engine; importing it from a
+ * harness that pins Arm B would drag the whole simulation across the seam to answer a
+ * question about forty key names.
+ */
+const WRITER_SOURCE = readFileSync(join(ROOT, 'scripts/audit/whole-world-soak.mjs'), 'utf8');
 
 /** A clean receipt: nothing should fire. */
 const clean = (overrides = {}) => ({
@@ -335,6 +351,86 @@ describe('the tripwire registry', () => {
     expect(fired(world({ years: 3, types: ['a'], moving: false }))).toEqual([]);
     // And a receipt with no behavioral fold at all is silent rather than convicted.
     expect(fired(clean())).toEqual([]);
+  });
+
+  it('NO ROW MAY KEY ON A FIELD THE RECEIPT WRITER DOES NOT WRITE — the class, banked and shrink-only', () => {
+    /**
+     * ⛔⛔ THREE ROWS, ONE DEFECT, ONE CAUGHT BY HAND. `capacity_envelope_30y` was refused at
+     * C3 for keying on an unwritten field; `capacity_plateau` and `capacity_floor_thaw`
+     * shipped with the identical defect on the identical reading, and nothing checked them,
+     * because the check was a person remembering. This arm is that check as machinery: what
+     * each row reads, from the row's own source; what the writer writes, from the writer's
+     * own source; and the difference.
+     *
+     * ⛔ THE BASELINE IS A RATCHET AND IT ONLY SHRINKS. Two rows are banked as unreachable —
+     * the two the owner's schema row (§907) will cure by shipping the per-year series. A
+     * THIRD row would fail this arm, and so would a re-blinding of a row already reachable.
+     * When the series lands, both figures go to zero and this baseline goes with them.
+     */
+    const UNREACHABLE_ROWS_BANKED = 2;
+    const UNREACHABLE_PAIRS_BANKED = 4;
+
+    const reach = tripwireFieldReach(TRIPWIRES, WRITER_SOURCE);
+
+    // The writer's key set is a real reading, not an empty set that would make every row
+    // look unreachable — 40+ keys, and the ones the deterministic rows actually stand on.
+    expect(reach.written.length).toBeGreaterThan(35);
+    for (const field of ['failures', 'finalPopulations', 'finalDiedFlags', 'startPopulations',
+      'stressorCounts', 'yearlyBytes', 'yearlyHashes', 'settlements', 'behavioral', 'liveness',
+      'subsystems', 'notExecutable', 'peakHeapUsedBytes', 'yearlyMs']) {
+      expect(reach.written, `the writer's key set is missing ${field}`).toContain(field);
+    }
+    // …and the two the writer has never written are absent from it, which is the finding.
+    expect(reach.written).not.toContain('yearlyPopulations');
+    expect(reach.written).not.toContain('yearlyDiedFlags');
+
+    const unreachableRows = [...new Set(reach.unreachable.map((row) => row.id))];
+    expect(unreachableRows).toEqual(['capacity_plateau', 'capacity_floor_thaw']);
+    expect(unreachableRows.length).toBeLessThanOrEqual(UNREACHABLE_ROWS_BANKED);
+    expect(reach.unreachable.length).toBeLessThanOrEqual(UNREACHABLE_PAIRS_BANKED);
+    expect(reach.unreachable).toEqual([
+      { id: 'capacity_plateau', field: 'yearlyDiedFlags' },
+      { id: 'capacity_plateau', field: 'yearlyPopulations' },
+      { id: 'capacity_floor_thaw', field: 'yearlyDiedFlags' },
+      { id: 'capacity_floor_thaw', field: 'yearlyPopulations' },
+    ]);
+    // ⭐ AND EVERY UNREACHABLE ROW DECLARES ITS OWN BLINDNESS. The walker and the runtime
+    // channel must name the same rows, or one of them is lying about the other.
+    expect(unreachableRows).toEqual(
+      TRIPWIRES.filter((row) => Array.isArray(row.requires)).map((row) => row.id),
+    );
+    // No row is beyond the walker's reading.
+    expect(reach.unreadable).toEqual([]);
+
+    // ⛔ THE THIRD ROW, REFUSED WITH A MEASUREMENT. A walker that read only `receiptBody`
+    // would report `non_finite_ledger_figure` as unreachable too — and it is not:
+    // `nonFiniteFigures` is added one statement later, in
+    // `const receipt = { ...receiptBody, nonFiniteFigures }`. The false positive is
+    // reproduced here on purpose, because a guard that cries wolf gets deleted.
+    const bodyOnly = WRITER_SOURCE.slice(0, WRITER_SOURCE.indexOf('const receipt = {'));
+    expect(receiptWriterFields(bodyOnly)).not.toContain('nonFiniteFigures');
+    expect([...new Set(tripwireFieldReach(TRIPWIRES, bodyOnly).unreachable.map((row) => row.id))])
+      .toEqual(['non_finite_ledger_figure', 'capacity_plateau', 'capacity_floor_thaw']);
+    expect(reach.written).toContain('nonFiniteFigures');
+
+    // ⛔ THE NEGATIVE CONTROL. Without it this arm passes on a walker that reads nothing.
+    const planted = [{
+      id: 'planted', class: 'deterministic', band: 'b', home: 'a derivation home long enough to pass',
+      detect: (receipt) => (receipt?.doesNotExist ? ['fired'] : []),
+    }];
+    expect(tripwireFieldReach(planted, WRITER_SOURCE).unreachable)
+      .toEqual([{ id: 'planted', field: 'doesNotExist' }]);
+
+    // The `for (const field of [...]) … receipt?.[field]` idiom is READ, not skipped —
+    // `negative_stock` is built that way and four of its fields would otherwise be invisible.
+    expect(tripwireFieldsRead(TRIPWIRES.find((row) => row.id === 'negative_stock')).fields.sort())
+      .toEqual(['finalPopulations', 'startPopulations', 'stressorCounts', 'yearlyBytes']);
+    // …and a computed read the walker CANNOT resolve is refused rather than passed by
+    // default: a row this guard cannot see is not a row this guard has cleared.
+    const opaque = tripwireFieldsRead({ detect: (receipt) => [receipt?.[String(Math.random())]] });
+    expect(opaque.unreadable).toContain('a computed `receipt[…]` read whose key list is not a literal array');
+    expect(tripwireFieldReach([{ id: 'opaque', detect: (receipt) => [receipt?.[String(Math.random())]] }], WRITER_SOURCE)
+      .unreadable.map((row) => row.id)).toEqual(['opaque']);
   });
 
   it('every row is a REGISTRY ROW — a new class costs its row or the guard is invisible', () => {

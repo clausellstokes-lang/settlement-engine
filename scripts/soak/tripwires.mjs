@@ -460,6 +460,122 @@ export function evaluateTripwires(receipt) {
 }
 
 /**
+ * ═══ THE REACHABILITY WALKER — THE CLASS, NOT THE INSTANCE ═══════════════════════════
+ *
+ * ⛔⛔ THREE ROWS, ONE DEFECT, AND ONLY ONE OF THEM WAS EVER CAUGHT BY HAND.
+ * `capacity_envelope_30y` was REFUSED at C3 for keying on a field the writer did not write.
+ * Its two siblings shipped with the identical defect on the identical reading and were not
+ * checked the same way, because the check was a person remembering rather than a machine.
+ * These three functions are that check as machinery: what each row READS off the receipt,
+ * read from the row's own source; what the writer WRITES, read from the writer's own source;
+ * and the difference, which is the set of rows that can never fire on anything.
+ *
+ * ⛔ IT TEXT-READS, AND IT IMPORTS NO WRITER MODULE. `scripts/soak/**` is an ARM_B_ROOT of
+ * the engine/telemetry wall (`./evaluate.mjs`'s header); importing `whole-world-soak.mjs`
+ * from here would drag the engine across it. The caller hands over the writer's SOURCE.
+ *
+ * ⚠ AND IT READS COMMENTS TOO, DELIBERATELY. `String(fn)` carries a detector's comments, so
+ * a `receipt.foo` written in prose inside a detector is counted as a read. That errs toward
+ * checking MORE fields than the row truly touches and never fewer, which is the only
+ * direction a guard may err in.
+ */
+
+/**
+ * The top-level receipt fields ONE row reads, from its `detect` and `gate` source text.
+ *
+ * @param {{detect?: Function, gate?: Function}} row
+ * @returns {{fields: string[], unreadable: string|null}} `unreadable` names a row this
+ *   walker refuses to grade rather than passing by default.
+ */
+export function tripwireFieldsRead(row) {
+  const source = `${String(row?.detect || '')}\n${String(row?.gate || '')}`;
+  const fields = new Set();
+  for (const match of source.matchAll(/receipt\s*\??\.\s*([A-Za-z_$][\w$]*)/g)) fields.add(match[1]);
+  // THE ONE DOCUMENTED ACCESSOR IDIOM, and it is documented because `negative_stock` uses
+  // it: `for (const field of ['a', 'b']) … receipt?.[field]`. A computed read whose key list
+  // is NOT visible in the same source is reported UNREADABLE — a walker that silently
+  // skipped it would grade a row it cannot see and call the registry sound.
+  if (/receipt\s*\??\.\s*\[/.test(source)) {
+    const literals = [...source.matchAll(/for\s*\(\s*const\s+[A-Za-z_$][\w$]*\s+of\s*\[([^\]]*)\]/g)]
+      .flatMap((loop) => [...loop[1].matchAll(/['"]([A-Za-z_$][\w$]*)['"]/g)].map((entry) => entry[1]));
+    if (!literals.length) {
+      return {
+        fields: [...fields],
+        unreadable: 'a computed `receipt[…]` read whose key list is not a literal array in the same detector',
+      };
+    }
+    for (const literal of literals) fields.add(literal);
+  }
+  return { fields: [...fields], unreadable: null };
+}
+
+/**
+ * The top-level keys the soak's receipt writer actually ships, read from its source.
+ *
+ * ⚠ BOTH OBJECT LITERALS ARE READ, and the second is not decoration: `nonFiniteFigures` is
+ * added in `const receipt = { ...receiptBody, nonFiniteFigures }`, one statement after the
+ * body closes. A walker that read only `receiptBody` would report
+ * `non_finite_ledger_figure` as keyed on an unwritten field — a THIRD unreachable row that
+ * is not unreachable at all, and the kind of false positive that gets a guard deleted.
+ *
+ * @param {string} writerSource the text of `scripts/audit/whole-world-soak.mjs`
+ * @returns {string[]}
+ */
+export function receiptWriterFields(writerSource) {
+  const source = String(writerSource || '');
+  const fields = new Set();
+  for (const opener of ['const receiptBody = {', 'const receipt = {']) {
+    const start = source.indexOf(opener);
+    if (start === -1) continue;
+    let depth = 1;
+    for (const raw of source.slice(start + opener.length).split('\n')) {
+      const line = raw.replace(/\/\/.*$/, '');
+      const trimmed = line.trim();
+      if (depth === 1) {
+        // `key:`, `...(FLAG ? { key: … } : {})`, and the bare `key,` shorthand — the third
+        // matters because `failures` and `frozenTail` ship that way and `throw_or_assert`
+        // keys on the first of them.
+        const keyed = trimmed.match(/^(?:\.\.\.\([^)]*\?\s*\{\s*)?([A-Za-z_$][\w$]*)\s*:/);
+        if (keyed) fields.add(keyed[1]);
+        const shorthand = trimmed.match(/^([A-Za-z_$][\w$]*)\s*,\s*$/);
+        if (shorthand) fields.add(shorthand[1]);
+      }
+      for (const character of line) {
+        if (character === '{') depth += 1;
+        else if (character === '}') depth -= 1;
+      }
+      if (depth <= 0) break;
+    }
+  }
+  return [...fields];
+}
+
+/**
+ * Every row's read set graded against the writer's key set.
+ *
+ * @param {Array<object>} rows
+ * @param {string} writerSource
+ * @returns {{written: string[], unreachable: Array<{id: string, field: string}>,
+ *            unreadable: Array<{id: string, reason: string}>}}
+ */
+export function tripwireFieldReach(rows, writerSource) {
+  const written = new Set(receiptWriterFields(writerSource));
+  const unreachable = [];
+  const unreadable = [];
+  for (const row of rows) {
+    const read = tripwireFieldsRead(row);
+    if (read.unreadable) {
+      unreadable.push({ id: row.id, reason: read.unreadable });
+      continue;
+    }
+    for (const field of read.fields.sort()) {
+      if (!written.has(field)) unreachable.push({ id: row.id, field });
+    }
+  }
+  return { written: [...written].sort(), unreachable, unreadable };
+}
+
+/**
  * The registry's own defect scan, exported so the pin and any future walker convict
  * identically rather than each re-deriving the rule.
  * @returns {string[]} empty means the registry is sound
