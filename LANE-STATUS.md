@@ -1,15 +1,22 @@
-# LANE-STATUS — written 2026-09-07 04:38:32 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 04:44:12 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegation sitting — the owner hands the open rows to the chair's judgment an
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 68c3a1618 · 13 cars over 4243bdc61 · porcelain 1 · last commits:
+- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 68c3a1618 · 13 cars over 4243bdc61 · porcelain 8 · last commits:
     68c3a1618 §909 CAR 4: the seven negative assertions the whole-suite proof counted are anchored — each absence now stands on a liveness anchor that travels its own code path
     d58b489b8 §909 car 3: the fourth designed capacity row is ARMED — the state-motion bars are lifted to one home, both former homes import them, and the roster reaches 12/10 exactly as CAPACITY C3's §2.5 predicted
     268d53605 §909 car 2: the weak zero had a third floor — `requires` becomes a field PATH, the reachability walker learns the observer, and `capacity_realm_load` stops answering a silent clean about a reading it never had
     ec265d24c §909 car 1a: the per-year population series ships, additively on v5 — the two capacity rows stop being blind and the reachability ratchet reaches zero with a control that proves the zero was caused
     porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M scripts/audit/soakInvariants.mjs
+       M scripts/soak/evaluate-receipt.mjs
+       M scripts/soak/evaluate.mjs
+       M scripts/soak/run.mjs
        M scripts/soak/tripwires.mjs
+       M tests/soak-harness/soakInvariants.test.js
+       M tests/soak-harness/soakRegister.test.js
+       M tests/soak-harness/tripwireRegistry.test.js
     receipt `receipt-cap-trip-907.md` (mtime 09-07 01:50) head:
       | # RECEIPT — LANE CAP-TRIP-907
       | **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
@@ -131,22 +138,23 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
-- **dnd**: claims 1212 · verdicts 1209 (todo 3) · kept 913 · partial 253 · verdict files 87 (triage 2, regrade r6) · section 09-07 03:58 · critic 09-07 04:33
+- **dnd**: claims 1212 · verdicts 1212 (todo 0) · kept 916 · partial 253 · verdict files 88 (triage 2, regrade r6) · section 09-07 03:58 · critic 09-07 04:33
 - **ai**: claims 1518 · verdicts 1287 (todo 231) · kept 1015 · partial 191 · verdict files 84 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-07 02:10
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 666 · partial 117 · verdict files 59 (triage 2, regrade r8) · section 09-07 04:03 · critic 09-07 04:36
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
-- LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r10/wf_543ddb3b-67c, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r12/wf_43d098bf-eff, ai r11/wf_6dd3b009-2b0, dnd_r13 r13/
+- LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r10/wf_543ddb3b-67c, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r12/wf_43d098bf-eff, ai r11/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2
 
 ## WORKFLOW RUNS of chair session b43943b4-3b40-4fd9-bc63-9b9c9afb55b4 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_2c525e43-1f2: 1 journal lines, 1 agents
+- wf_2c525e43-1f2: 3 journal lines, 2 agents
 - wf_36047b28-91e: 6 journal lines, 3 agents
 - wf_37a1566c-e8f: 8 journal lines, 4 agents
 - wf_43d098bf-eff: 14 journal lines, 7 agents
 - wf_543ddb3b-67c: 20 journal lines, 10 agents
 - wf_6dd3b009-2b0: 1 journal lines, 1 agents
+- wf_a1a420b6-993: 5 journal lines, 3 agents
 - wf_e092839f-8b1: 20 journal lines, 10 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.37 2.32 3.28
+load: 2.38 2.59 3.11

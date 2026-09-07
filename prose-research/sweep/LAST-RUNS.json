@@ -19,7 +19,8 @@
   "argsFile": "args-leguin-r10.json",
   "tag": "r10",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--leguin-r10.js",
-  "status": "COMPLETE 04:36 (session b43943b4; r10 = the S_VERIFY completion): 7 chunks / 93 verified / 87 kept; section-leguin.md 04:03 (29 features); critic-leguin.md 04:36 (r8 preserved as critic-leguin.r8.md; r10 copy critic-leguin.r10.md). CLOSED under S-BOUND for FIND; the critic names a correction tail (the S6b fingerprint landed 09-06 22:51 and the section says none exists; five Wikipedia relays counted as support; feature 12 contradicted by its own Elfland page; 82 SKIPPED rows that are second sources for single-source limbs) — see _queue.leguin_housekeeping."
+  "status": "COMPLETE 04:36 (session b43943b4; r10 = the S_VERIFY completion): 7 chunks / 93 verified / 87 kept; section-leguin.md 04:03 (29 features); critic-leguin.md 04:36 (r8 preserved as critic-leguin.r8.md; r10 copy critic-leguin.r10.md). CLOSED under S-BOUND for FIND; the critic names a correction tail (the S6b fingerprint landed 09-06 22:51 and the section says none exists; five Wikipedia relays counted as support; feature 12 contradicted by its own Elfland page; 82 SKIPPED rows that are second sources for single-source limbs) — see _queue.leguin_housekeeping.",
+  "dryCheck": "04:39: DRY against section-leguin.r9.md — 29 → 29 features, 0 new, 0 dropped (section 04:03; 140 of 170 feature keys under 3 sources by the kit count)"
  },
  "wolfe": {
   "runId": "wf_8cd21474-a7b",
@@ -82,7 +83,7 @@
   ],
   "running": [
    "ai-r11 wf_6dd3b009-2b0 (S_VERIFY + procgen, 04:35)",
-   "dnd-r13 (launching 04:38: the housekeeping tail)"
+   "dnd-r13 wf_2c525e43-1f2 (housekeeping tail, 04:38)"
   ],
   "resume": "session 405b5e7e (23:52): the two r10 runIds above resume ONLY in that session (Workflow({scriptPath, resumeFromRunId})); a NEW session rebuilds: CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd ai → r11 args → cd prose-research && python3 mk-embedded.py sweep/args-<n>-r11.json → Workflow({scriptPath}) ×2, then update this file. Both r10 runs are TAILS of the owner-GO'd r9 targeted rounds, not new FIND rounds (S-BOUND: dnd/ai have NO round after these). || keep TWO research runs alive: when one completes (its task notification), LAUNCH the next in `order` by Workflow({scriptPath: d[<next>].scriptPath}) (martin, then ai — their scripts are built; a runId of '' means never launched); set its runId/status RUNNING here. In THIS session a completed run's runId can be resumed by resumeFromRunId; a NEW session must rebuild (CONFIRM_DEAD=1 sh $SC/resume-research.sh <names>) and re-embed.",
   "done": [
@@ -130,10 +131,10 @@
   "S5c": "OWNER ROW: the Kay fingerprint needs the owner's own copies of two novels as local files (never sealed); nothing runs until the owner supplies them"
  },
  "dnd_r13": {
-  "runId": "",
+  "runId": "wf_2c525e43-1f2",
   "argsFile": "args-dnd-r13.json",
   "tag": "r13",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r13.js",
-  "status": "BUILT 04:36, NOT LAUNCHED — the housekeeping tail (3 verify-only rows 819/822/823 + the r12 critic's regrade under the chair's route ruling + synth + critic); launch when leguin r10 or ai r11 completes (two-slot cap). ⚠ never re-run resume-research.sh for dnd (it would clobber this)."
+  "status": "RUNNING since 04:39 (session b43943b4): the housekeeping tail — 3 verify-only rows + the r12 critic's regrade under the chair's route ruling + synth + critic"
  }
 }

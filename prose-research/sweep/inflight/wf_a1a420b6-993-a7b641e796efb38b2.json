@@ -1,0 +1,20 @@
+{
+ "role": "critic",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 69,
+ "firstTs": "2026-09-07T08:38:56.503Z",
+ "lastTs": "2026-09-07T08:43:44.450Z",
+ "tools": {
+  "Bash": 15
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Wrote the reader-1 list. Verification receipts: state sha256 `ce3c4fff20d52177` / 1,791,483 bytes matches the identity the critic states it read; `untriage-leguin.json` untouched (52,488 bytes, `ba80e69cda43b5ec`, mtime 02:03); all 119 rows confirmed `SKIPPED_TRIAGE`; longest `why` is 168 chars.",
+ "run": "wf_a1a420b6-993",
+ "agent": "a7b641e796efb38b2",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_a1a420b6-993/agent-a7b641e796efb38b2.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
