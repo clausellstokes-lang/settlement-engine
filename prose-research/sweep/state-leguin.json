@@ -30136,10 +30136,11 @@
   },
   "76": {
    "index": 76,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Le Guin invites us in, holds us back; co-creators, collaborators, listeners.",
    "note": "Quote 'co-creators, collaborators, listeners, as if to an oral tale' is verbatim. Page: 'Le Guin instead invites us in and holds us back, reminds us that we are reading (or hearing) a story, making us co-creators...' — page says 'reading (or hearing)', the claim keeps only 'hearing'; subject is Le Guin rather than 'the narration'. Both are within paraphrase.",
-   "fromFile": "verdicts-leguin-i75-89.json"
+   "unsupportedLimb": "the subject 'the narration' — the verifier's note says the page's subject is Le Guin, not the narration, and that the page reads 'reading (or hearing)' where the claim keeps only 'hearing'",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "77": {
    "index": 77,
@@ -30682,10 +30683,11 @@
   },
   "151": {
    "index": 151,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "while Ged is important to the story, he is also treated with detachment and clear-sightedness",
    "note": "Quote verbatim on the raw page. 'By the narration' is a light gloss: the page attributes the detachment to how the story/Le Guin treats Ged, not to a named narrator.",
-   "fromFile": "verdicts-leguin-i150-164.json"
+   "unsupportedLimb": "'by the narration' — the note says the page attributes the detachment to how the story/Le Guin treats Ged, not to a named narrator",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "152": {
    "index": 152,
@@ -32442,10 +32444,11 @@
   },
   "399": {
    "index": 399,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "account for much of her stylistic power and accessibility",
    "note": "Exact in the closing section (section 3), before the footnotes. All three ingredients are on the page: '19th-Century Realism', a 'Virginia-Woolf-type adoption of some techniques of lyric poetry', and 'the ethical abstraction of American romances'. Suvin hedges - the blend 'may account for' - where the claim says 'attributes'; the hedge is a softening, not a different proposition.",
-   "fromFile": "verdicts-leguin-i385-415.json"
+   "unsupportedLimb": "the unhedged 'attributes' — the note records that Suvin hedges, writing that the blend 'may account for' her stylistic power and accessibility",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "400": {
    "index": 400,
@@ -32463,10 +32466,11 @@
   },
   "402": {
    "index": 402,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "validating the carefully chosen and believable details which compose the thorough",
    "note": "Same raw Theall capture. 'The actual sensory experience and subjective response of strangers or outsiders plays a central role in' + the quoted words + 'accounts Le Guin gives us of her fictional worlds.' The claim's 'validates' compresses the page's 'plays a central role in validating', a shade stronger but not a distinct limb.",
-   "fromFile": "verdicts-leguin-i388-419.json"
+   "unsupportedLimb": "the unhedged 'validates' — the note records that the page reads 'plays a central role in validating', which the claim compresses into a shade stronger a proposition",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "403": {
    "index": 403,
@@ -32484,10 +32488,11 @@
   },
   "405": {
    "index": 405,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the rigors of Karhide or the asceticism of Anarres",
    "note": "Same raw Theall capture, endnote 1 (the passage is immediately followed by note 2 citing Le Guin's 'Is Gender Necessary?'). 'There would appear to be a strong though again ambiguous connection between such a Puritan or Yankee tradition and Le Guin's sensibility, which manifests itself in descriptions such as those of' + the quote. The claim's 'links' drops Theall's hedge ('would appear', 'ambiguous'), but the connection is drawn.",
-   "fromFile": "verdicts-leguin-i388-419.json"
+   "unsupportedLimb": "the unhedged 'links' — the note records that the claim drops Theall's hedge, the page reading 'There would appear to be a strong though again ambiguous connection'",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "406": {
    "index": 406,
@@ -32632,10 +32637,11 @@
   },
   "426": {
    "index": 426,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery",
    "note": "Guardian, paragraph beginning 'Earthsea is a fantasy world' - the locator in the claim is correct. The seven-item list is verbatim and in order. One softening to note: the page reads 'so human a world - with [list] - that its fantastical elements feel ALMOST quotidian'; the claim drops 'almost'. The hedge is minor and the substance holds, so this is not downgraded, but downstream copy should keep 'almost'.",
-   "fromFile": "verdicts-leguin-i420-438.json"
+   "unsupportedLimb": "the flat 'feel quotidian' — the note records that the page reads 'ALMOST quotidian' and that the claim drops 'almost'",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "427": {
    "index": 427,
@@ -32667,10 +32673,11 @@
   },
   "431": {
    "index": 431,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The story-and the book-ends with a minimalist dance",
    "note": "NYRB live URL fetched raw, byline Margaret Atwood, 'September 26, 2002 issue'. Final body paragraph; Atwood then quotes the closing lines ('Swaying, she lifted her bare feet...'), presenting them as how story and book end. She does not use the phrase 'last words' herself.",
-   "fromFile": "verdicts-leguin-i416-475.json"
+   "unsupportedLimb": "'as the book's last words' — the note says Atwood does not use the phrase 'last words' herself",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "432": {
    "index": 432,
@@ -32836,10 +32843,11 @@
   },
   "455": {
    "index": 455,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a welcomed variation from the high-fantastic",
    "note": "Wayback raw id_ capture of sfra.org/Coyote/earthsea.htm (20151107114510), the URL as given; fetched directly, no live-host attempt needed. Closing section of 'Earthsea Revisited: Tehanu', numbered paragraph 53: '...we gain the possibility for a different style than that of the Earthsea trilogy, and, to my tastes, if not a better style, a welcomed variation from the high-fantastic.' Erlich's wording is 'the possibility for a different style' — a hedge the claim drops, though the same sentence does affirm the variation.",
-   "fromFile": "verdicts-leguin-i439-461.json"
+   "unsupportedLimb": "the flat 'gains a different style' — the note records Erlich's wording as 'the possibility for a different style', a hedge the claim drops",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "456": {
    "index": 456,
@@ -32970,10 +32978,11 @@
   },
   "474": {
    "index": 474,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Tehanu can show the skill of experience making less do more",
    "note": "Same Kelso PDF, printed page 16. Quote 'making less do more, rather than more do more' verbatim. One nuance: the page hedges with the modal 'can show'; the claim asserts 'shows'. The substance is supported, so the limb stands, but the modal is softer on the page.",
-   "fromFile": "verdicts-leguin-i462-489.json"
+   "unsupportedLimb": "the flat 'shows' — the note records that the page hedges with the modal 'can show' (same wording the r4 regrade downgraded at the duplicate claim [57])",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "475": {
    "index": 475,
@@ -33399,10 +33408,11 @@
   },
   "535": {
    "index": 535,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "describe what the world looks like, smells like, sounds like",
    "note": "The ursulakleguin.com URL has no Wayback capture and the live host blocks Anthropic agents in robots.txt, so verified on the original Book View Cafe post the claim's own source field names: Wayback raw capture 20151029022249id_ of bookviewcafe.com/blog/2015/10/05/navigating-the-ocean-of-story-session-1-part-5/. Quote verbatim in the reply to Tamara, whose readers called her drafts 'too crammed with ideas'; the surrounding sentence supplies the 'easier pace' and 'moments of relief' limbs.",
-   "fromFile": "verdicts-leguin-i514-572.json"
+   "unsupportedLimb": "the quotation was read not at the cited ursulakleguin.com URL but on a Wayback raw capture (20251029022249id_) of the original bookviewcafe.com post — verified location, but not the cited page",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "536": {
    "index": 536,
@@ -33787,59 +33797,67 @@
   },
   "590": {
    "index": 590,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "simple words words that are themselves almost always very old",
    "note": "Word for word in the transcript: the sentence names 'the wizard of Earthsea' and 'the impression of simplicity' as what these old simple words create, so every limb holds. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
-   "fromFile": "verdicts-leguin-i588-636.json"
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML retrieved through the api.allorigins.win proxy), not the cited video page and not a human transcript; the doubled 'words words' in the quoted string is an ASR artifact",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "591": {
    "index": 591,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "She doesn't use technical terms, she doesn't use jargon",
    "note": "Word for word, immediately following the 'almost always very old' sentence in the simplicity passage. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
-   "fromFile": "verdicts-leguin-i588-636.json"
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "592": {
    "index": 592,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "She's not going to say crenellation",
    "note": "Verbatim; the next two sentences of the same passage supply the other limbs (talk about houses; say roof, tower), and the preceding sentences set the contrast with fantasists' 'elaborate vocabulary'. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
-   "fromFile": "verdicts-leguin-i588-636.json"
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "593": {
    "index": 593,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "The more technical the more limited a word the less likely",
    "note": "Verbatim; the transcript completes it '...she is to use it', immediately after the roof/tower sentences. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
-   "fromFile": "verdicts-leguin-i588-636.json"
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "594": {
    "index": 594,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "picked up a lot of associations in their travels",
    "note": "Verbatim in the closing seconds ('Simple words or common words that have a long history... Words with a shadow. That's how Le Guin rolls.'). The 'not for simplicity's own sake' limb is carried by the video's opening ('deceptively simple', 'makes it look simple, but there's a lot of art and craft involved') rather than by one sentence. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
-   "fromFile": "verdicts-leguin-i588-636.json"
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript; the 'not for simplicity's own sake' limb rests on the video's opening rather than on one sentence",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "595": {
    "index": 595,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "She saves the shortest sentence for the highest impact",
    "note": "Verbatim; the transcript's preceding sentence gives 'They're fairly long and complex and flowing sentences' and the following words are 'He lay dying. Three words. Three words. Four syllables.' Passage is the chapter-four Archmage death scene. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
-   "fromFile": "verdicts-leguin-i588-636.json"
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "596": {
    "index": 596,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Simple words for you to fill in with emotional associations",
    "note": "Verbatim; preceded in the transcript by 'Is he frigid? Is he freezing?... Is he subzero? No, he's cold. Very cold.', and the quoted novel line is 'the Archmage lay also unmoving but cold, very cold'. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
-   "fromFile": "verdicts-leguin-i588-636.json"
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "597": {
    "index": 597,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "She finds that effect distracting and and fakey",
    "note": "Verbatim, doubled 'and' included; the sentence before it reads 'The fantasists who use those words are trying to create a distance by using the elaborate vocabulary.' Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
-   "fromFile": "verdicts-leguin-i588-636.json"
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript; the doubled 'and and' in the quoted string is an ASR artifact",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "598": {
    "index": 598,
@@ -34111,10 +34129,11 @@
   },
   "636": {
    "index": 636,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "drawing the reader into the making of the culture",
    "note": "The quoted phrase is verbatim, but the page's own framing is narrower than 'presenting a culture': the window reads '...the characters and for drawing the reader into the making of the culture is to use the textual model of the ethnograph, in which both the voices of the anthropologist and the people being studied are heard.' Cite the page's wording, not 'presenting'. The agent is unnamed inside the window; it is Le Guin by the chapter's subject (Always Coming Home). Volume is lending-restricted at archive.org (_djvu.txt returns 403), so the raw book page cannot be opened; the given search-inside URL was fetched raw and returns verbatim OCR of the book, widened with extra phrase queries to resolve the sentence around the match.",
-   "fromFile": "verdicts-leguin-i588-636.json"
+   "unsupportedLimb": "'Le Guin's way of presenting a culture' — the note says the page's own framing is narrower ('for drawing the reader into the making of the culture') and instructs to cite the page's wording, not 'presenting'; the agent is also unnamed inside the search-inside window",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "637": {
    "index": 637,
@@ -34729,10 +34748,11 @@
   },
   "723": {
    "index": 723,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "…or as many as you like, or not at all",
    "note": "Same page, section 'Thou mayest'. The claim's quote is verbatim; the full quoted line runs on past 'nine times' to the open ending given as trueWording, so 'open list ending in the option of not at all' is exact. One attribution nuance worth recording: the page presents the sentence as Le Guin's own writing ('when describing a ritual song ‘the four/five heya’ she wrote that…'), so 'a Kesh description' must be read as a description of a Kesh song, not one authored by the Kesh.",
-   "fromFile": "verdicts-leguin-i722-743.json"
+   "unsupportedLimb": "'a Kesh description' — the note says the page presents the sentence as Le Guin's own writing and that the phrase must be read as a description of a Kesh song, not one authored by the Kesh",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "724": {
    "index": 724,
@@ -34837,10 +34857,11 @@
   },
   "738": {
    "index": 738,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "research into nonexistent history is to tell the story",
    "note": "Same troypress.com paragraph, introduced by 'She wrote', and the sentence ends with finding out what happened. The page does not itself name the Tales from Earthsea foreword as the origin, but the claim sentence does not assert that.",
-   "fromFile": "verdicts-leguin-i709-759.json"
+   "unsupportedLimb": "the source attribution to the Foreword to Tales from Earthsea — the note says the page does not itself name that foreword as the origin (r8 critic §2: the attribution is the finder's and should be marked as such until the foreword is reached)",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "739": {
    "index": 739,
@@ -35242,10 +35263,11 @@
   },
   "795": {
    "index": 795,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "everything is direct, concrete, and simple",
    "note": "PDF fetched as binary and text-extracted with pdftotext (route 3). Title page reads 'Ursula K. Le Guin's \"From Elfland to Poughkeepsie\" (1973)'. The sentence reads that Tolkien's vocabulary is not striking, he has no ichor, then the quoted clause; it sits in the paragraph on Tolkien's plain, clear English, on the eighth text page of the extraction (the claim's p.8 checks out). Scope note: the page's 'everything' covers Tolkien's prose generally rather than the vocabulary alone, which entails rather than contradicts the claim's narrower reading.",
-   "fromFile": "verdicts-leguin-i787-857.json"
+   "unsupportedLimb": "'everything in it [the vocabulary]' — the note records that the page's 'everything is direct, concrete, and simple' reads on Tolkien's prose generally rather than on the vocabulary alone (same limb the r4 regrade downgraded at the duplicate claim [104])",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   },
   "796": {
    "index": 796,

@@ -1,0 +1,687 @@
+{
+ "name": "leguin",
+ "regrade": true,
+ "method": "Every one of the 679 kept rows was read (claim, quote, trueWording, verifier note). A VERIFIED grade was downgraded wherever the note itself states a MISMATCH between the claim and the page - an absent limb, a dropped hedge, a strengthened proposition, a gloss or attribution the page does not make, or a subject/scope shift - regardless of any excuse the verifier then offered. Notes that only record a locator, date, edition, orthography or source-field nuance, an elision that weakens or narrows the claim, or support carried by an adjacent sentence without a stated mismatch, were left standing. The VERIFIED_SUBSTANCE rows are the r9 finding on quotations read somewhere other than the cited URL; they are downgrades of VERIFIED_VERBATIM and are carried in `verdicts` so a merge applies them, even though the brief's enum named only PARTIAL/NOT_FOUND/CONTRADICTED.",
+ "claims": [
+  {
+   "index": 76,
+   "feature": "oral-tale co-creation",
+   "claim": "Burt: the narration invites readers in and holds them back, reminding them they are hearing a story and making them co-creators, collaborators, listeners as if to an oral tale.",
+   "source": "Stephanie Burt (Strange Horizons)",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+   "quote": "co-creators, collaborators, listeners, as if to an oral tale",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 151,
+   "feature": "point of view and distance",
+   "claim": "Maureen Eichner reads Ged as treated with detachment and clear-sightedness by the narration.",
+   "source": "Maureen Eichner, 'Ursula Le Guin Reading Notes: A Wizard of Earthsea', By Singing Light",
+   "url": "https://bysinginglight.wordpress.com/2016/03/04/ursula-le-guin-reading-notes-a-wizard-of-earthsea/",
+   "quote": "he is also treated with detachment and clear-sightedness",
+   "page": "paragraph on tone and prose style",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2016-03-04",
+   "routeHint": "direct fetch, HTML stripped to text",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "angle": "craft"
+  },
+  {
+   "index": 399,
+   "feature": "other: stylistic lineage",
+   "claim": "Suvin attributes much of Le Guin's stylistic power and accessibility to a blend of nineteenth-century realism, lyric-poetic technique and the ethical abstraction of American romances.",
+   "source": "Darko Suvin, 'Parables of De-Alienation', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20260206193435id_/https://www.depauw.edu/sfs/backissues/7/suvin7art.htm",
+   "quote": "account for much of her stylistic power and accessibility",
+   "page": "closing section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1975-11",
+   "routeHint": "Wayback raw capture (web.archive.org/web/<ts>id_/) of the DePauw SFS page; the live DePauw URL now 404s",
+   "registerHint": "none",
+   "confidence": "high",
+   "angle": "academic-2"
+  },
+  {
+   "index": 402,
+   "feature": "concrete sensory noun",
+   "claim": "Theall says the sensory experience and subjective response of Le Guin's outsiders validates the carefully chosen and believable details that compose her accounts of her worlds.",
+   "source": "Donald F. Theall, 'The Art of Social-Science Fiction', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20251222093314id_/https://www.depauw.edu/sfs/backissues/7/theall7art.htm",
+   "quote": "the carefully chosen and believable details",
+   "page": "second section, on the stranger visiting a new world",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1975-11",
+   "routeHint": "Wayback raw capture (web.archive.org/web/<ts>id_/) of the DePauw SFS page; the live DePauw URL now 404s",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "angle": "academic-2"
+  },
+  {
+   "index": 405,
+   "feature": "place and institution description",
+   "claim": "Theall links a Puritan or Yankee tradition to Le Guin's sensibility as it shows in descriptions of the rigors of Karhide and the asceticism of Anarres.",
+   "source": "Donald F. Theall, 'The Art of Social-Science Fiction', Science Fiction Studies #7 (November 1975), note 1",
+   "url": "https://web.archive.org/web/20251222093314id_/https://www.depauw.edu/sfs/backissues/7/theall7art.htm",
+   "quote": "the rigors of Karhide or the asceticism of Anarres",
+   "page": "endnote 1",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1975-11",
+   "routeHint": "Wayback raw capture (web.archive.org/web/<ts>id_/) of the DePauw SFS page; the live DePauw URL now 404s",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium",
+   "angle": "academic-2"
+  },
+  {
+   "index": 426,
+   "feature": "place and institution description",
+   "claim": "David Mitchell lists trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery as the mundane institutional furniture that makes Earthsea’s fantastical elements feel quotidian.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery",
+   "page": "paragraph beginning \"Earthsea is a fantasy world\"",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2015-10-23",
+   "routeHint": "live URL with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "angle": "close-2"
+  },
+  {
+   "index": 431,
+   "feature": "closing sentence",
+   "claim": "Margaret Atwood characterises the closing scene of The Birthday of the World as a minimalist dance and quotes it as the book’s last words.",
+   "source": "Margaret Atwood, \"The Queen of Quinkdom\", The New York Review of Books, 26 September 2002 issue",
+   "url": "https://www.nybooks.com/articles/2002/09/26/the-queen-of-quinkdom/",
+   "quote": "ends with a minimalist dance, as an old woman",
+   "page": "final paragraph",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2002-09-26",
+   "routeHint": "live nybooks.com URL with browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high",
+   "angle": "close-2"
+  },
+  {
+   "index": 455,
+   "feature": "register modulation",
+   "claim": "Richard D. Erlich states that Tehanu gains a different style from the Earthsea trilogy, which he calls a welcome variation from the high-fantastic.",
+   "source": "Richard D. Erlich, Coyote’s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Earthsea Revisited: Tehanu\"",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/earthsea.htm",
+   "quote": "a welcomed variation from the high-fantastic",
+   "page": "chapter Earthsea Revisited: Tehanu, closing section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "Wayback raw capture of /Coyote/earthsea.htm",
+   "registerHint": "none",
+   "confidence": "high",
+   "angle": "close-2"
+  },
+  {
+   "index": 474,
+   "feature": "plainness and economy",
+   "claim": "Sylvia Kelso states that Tehanu shows the skill of experience making less do more rather than more do more.",
+   "source": "Sylvia A. Kelso, \"Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin\", Paradoxa 21 (2009), pp. 7-22",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "making less do more, rather than more do more",
+   "page": "p. 16",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "Wayback/live PDF: paradoxa.com hosts this one article of Paradoxa 21 as a free PDF; binary fetched with curl and text extracted with pypdf",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "angle": "close-2"
+  },
+  {
+   "index": 535,
+   "feature": "concrete sensory noun",
+   "claim": "Le Guin prescribes passages that describe what the world looks like, smells like and sounds like as the relief that paces an idea-crammed story.",
+   "source": "Ursula K. Le Guin, 'Navigating the Ocean of Story - Session 1, Part 5' (Book View Cafe, 2015)",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-5",
+   "quote": "describe what the world looks like, smells like, sounds like",
+   "page": "answer on stories too crammed with ideas",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2015",
+   "routeHint": "direct fetch (curl, browser user agent), HTML stripped to text",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "angle": "voice-2"
+  },
+  {
+   "index": 590,
+   "feature": "diction (native vs latinate)",
+   "claim": "James Marino says the impression of simplicity in A Wizard of Earthsea comes from Le Guin using simple words that are themselves almost always very old.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "simple words words that are themselves almost always very old",
+   "page": "middle of the video, on the impression of simplicity",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2026-05-16",
+   "routeHint": "YouTube auto-caption transcript via youtube-transcript-api; the quotation reproduces the auto-generated caption text, including its repeated word",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — quoted from an auto-generated caption track, so wording and punctuation are the transcriber's",
+   "angle": "close"
+  },
+  {
+   "index": 591,
+   "feature": "diction (native vs latinate)",
+   "claim": "James Marino states that Le Guin does not use technical terms and does not use jargon.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "She doesn't use technical terms, she doesn't use jargon",
+   "page": "on the impression of simplicity",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2026-05-16",
+   "routeHint": "YouTube auto-caption transcript",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — auto-caption transcript",
+   "angle": "close"
+  },
+  {
+   "index": 592,
+   "feature": "place and institution description",
+   "claim": "James Marino contrasts Le Guin's naming of built things with an elaborate alternative, saying she will not say crenellation but will talk about houses and say roof and tower.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "She's not going to say crenellation",
+   "page": "on the impression of simplicity",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2026-05-16",
+   "routeHint": "YouTube auto-caption transcript",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — auto-caption transcript",
+   "angle": "close"
+  },
+  {
+   "index": 593,
+   "feature": "diction (native vs latinate)",
+   "claim": "James Marino formulates Le Guin's lexical rule as: the more technical and the more limited a word is, the less likely she is to use it.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "The more technical the more limited a word the less likely",
+   "page": "on the impression of simplicity",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2026-05-16",
+   "routeHint": "YouTube auto-caption transcript",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — auto-caption transcript",
+   "angle": "close"
+  },
+  {
+   "index": 594,
+   "feature": "diction (native vs latinate)",
+   "claim": "James Marino says Le Guin chooses common ordinary words because they have picked up a lot of associations in their travels, not for simplicity's own sake.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "associations in their travels",
+   "page": "closing of the video",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2026-05-16",
+   "routeHint": "YouTube auto-caption transcript",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — auto-caption transcript",
+   "angle": "close"
+  },
+  {
+   "index": 595,
+   "feature": "sentence length variation",
+   "claim": "James Marino observes that Le Guin's sentences in the Nemmerle death passage are fairly long and complex and that she saves the shortest sentence, the three-word 'He lay dying', for the highest impact.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "She saves the shortest sentence for the highest impact",
+   "page": "analysis of the Nemmerle passage, chapter four",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2026-05-16",
+   "routeHint": "YouTube auto-caption transcript",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — auto-caption transcript",
+   "angle": "close"
+  },
+  {
+   "index": 596,
+   "feature": "adjective and adverb discipline",
+   "claim": "James Marino notes that Le Guin writes that the Archmage is cold, very cold, rather than reaching for frigid or subzero, leaving simple words for the reader to fill in with emotional associations.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "Simple words for you to fill in with emotional associations",
+   "page": "analysis of the Nemmerle passage",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2026-05-16",
+   "routeHint": "YouTube auto-caption transcript",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — auto-caption transcript",
+   "angle": "close"
+  },
+  {
+   "index": 597,
+   "feature": "archaism",
+   "claim": "James Marino says fantasists who use elaborate vocabulary are trying to create distance, and that Le Guin finds that effect distracting and fakey.",
+   "source": "James Marino, 'Le Guin's Style' (video), 16 May 2026",
+   "url": "https://www.youtube.com/watch?v=m5oHYOrS0No",
+   "quote": "She finds that effect distracting and and fakey",
+   "page": "on the words Le Guin does not want in fantasy",
+   "kind": "analysis",
+   "polarity": "rejects",
+   "date": "2026-05-16",
+   "routeHint": "YouTube auto-caption transcript; the doubled 'and and' is in the caption text",
+   "registerHint": "none",
+   "confidence": "medium — auto-caption transcript",
+   "angle": "close"
+  },
+  {
+   "index": 636,
+   "feature": "civic record register",
+   "claim": "Cummins says Le Guin's way of presenting a culture is to use the textual model of the ethnograph.",
+   "source": "Elizabeth Cummins, Understanding Ursula K. Le Guin (1990)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aunderstandingurs0000cumm%20AND%20%22use%20the%20textual%20model%20of%20the%20ethnograph%22",
+   "quote": "use the textual model of the ethnograph",
+   "page": "archive.org search-inside snippet",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "1990",
+   "routeHint": "archive.org search-inside via Open Library, scoped by identifier",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium (snippet-only)",
+   "angle": "academic-2"
+  },
+  {
+   "index": 723,
+   "feature": "place and institution description",
+   "claim": "Saleem quotes a Kesh description of a ritual song whose permitted repetitions are given as an open list ending in the option of not at all.",
+   "source": "Mazin Saleem quoting Always Coming Home, Strange Horizons, 2018",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+   "quote": "it may be sung four times, or five times, or nine times",
+   "page": "section 'Thou mayest'",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2018-11-26",
+   "routeHint": "direct curl, browser UA; Le Guin's sentence quoted inside Saleem's",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "angle": "record-register"
+  },
+  {
+   "index": 738,
+   "feature": "other: how the record is made",
+   "claim": "Le Guin states that research into a nonexistent history is done by telling the story and finding out what happened.",
+   "source": "Ursula K. Le Guin, Foreword to Tales from Earthsea, quoted by Troy Press",
+   "url": "https://troypress.com/a-history-of-earthsea/",
+   "quote": "research into nonexistent history is to tell the story",
+   "page": "paragraph on world-building",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2001 (foreword), quoted n.d.",
+   "routeHint": "direct curl, browser UA; the same sentence is quoted at greater length by Mazin Saleem in Strange Horizons",
+   "registerHint": "none",
+   "confidence": "high",
+   "angle": "record-register"
+  },
+  {
+   "index": 795,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin describes Tolkien's vocabulary as unstriking and everything in it as direct, concrete and simple.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "everything is direct, concrete, and simple",
+   "page": "p.8 of the PDF",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1973",
+   "routeHint": "live URL, browser UA; third-party PDF transcription, pypdf extraction",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "angle": "voice-2"
+  },
+  {
+   "index": 32,
+   "feature": "flawless poetic prose with metaphor",
+   "claim": "Kirkus praised Tehanu's flawless, poetic prose and its thoughtful, potent metaphor.",
+   "source": "Wikipedia: Tehanu (citing Kirkus)",
+   "url": "https://en.wikipedia.org/wiki/Tehanu",
+   "quote": "flawless, poetic prose",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 35,
+   "feature": "plain strong exact diction; grave formal tone",
+   "claim": "The guide characterizes the language as plain, strong and exact, the tone grave and slightly formal.",
+   "source": "NEA Big Read Reader's Guide: A Wizard of Earthsea (PDF)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "quote": "plain, strong, and exact",
+   "page": "p. 4",
+   "angle": "academic"
+  },
+  {
+   "index": 36,
+   "feature": "balanced musical sentence rhythm",
+   "claim": "The rhythm of her sentences is described as carefully balanced and musical.",
+   "source": "NEA Big Read Reader's Guide: A Wizard of Earthsea (PDF)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "quote": "carefully balanced and musical",
+   "page": "p. 4",
+   "angle": "academic"
+  },
+  {
+   "index": 37,
+   "feature": "Old English alliteration and assonance",
+   "claim": "It notes occasional alliteration and assonance reminiscent of Old English verse, citing 'Forest rises ridge behind ridge to the stone and snow of the heights'.",
+   "source": "NEA Big Read Reader's Guide: A Wizard of Earthsea (PDF)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "quote": "reminiscent of Old English verse",
+   "page": "p. 4",
+   "angle": "academic"
+  },
+  {
+   "index": 38,
+   "feature": "wizard as writer",
+   "claim": "Le Guin (2008 interview): what a wizard does is like what a writer does — making things out of words and making things happen with words.",
+   "source": "NEA Big Read Reader's Guide: A Wizard of Earthsea (PDF)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "quote": "He or she is making things out of words",
+   "page": "p. 5",
+   "angle": "academic"
+  },
+  {
+   "index": 39,
+   "feature": "gravely austere tone",
+   "claim": "The guide says The Left Hand of Darkness is written in a tone even more gravely austere than A Wizard of Earthsea.",
+   "source": "NEA Big Read Reader's Guide: A Wizard of Earthsea (PDF)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "quote": "a tone even more gravely austere",
+   "page": "p. 9",
+   "angle": "academic"
+  },
+  {
+   "index": 40,
+   "feature": "quietly poetic language",
+   "claim": "A discussion question calls the novel's language 'often quietly poetic'.",
+   "source": "NEA Big Read Reader's Guide: A Wizard of Earthsea (PDF)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "quote": "often quietly poetic",
+   "page": "p. 10",
+   "angle": "academic"
+  },
+  {
+   "index": 41,
+   "feature": "elegant diction",
+   "claim": "The introduction credits the book's elegant diction, geographical sweep and mounting suspense.",
+   "source": "NEA Big Read Reader's Guide: A Wizard of Earthsea (PDF)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "quote": "elegant diction, geographical sweep, and mounting suspense",
+   "page": "p. 3",
+   "angle": "academic"
+  },
+  {
+   "index": 43,
+   "feature": "austere but vivid",
+   "claim": "The SFE calls the initial Earthsea trilogy austere but vivid, a major work reaching beyond its Young Adult audience.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "austere but vivid",
+   "page": "",
+   "angle": "academic"
+  },
+  {
+   "index": 140,
+   "feature": "opening sentence",
+   "claim": "The NEA Teacher's Guide offers the novel's first sentence as the demonstration of Le Guin's plain, direct writing.",
+   "source": "NEA Big Read Teacher's Guide to A Wizard of Earthsea (NEA / Arts Midwest)",
+   "url": "https://www.arts.gov/sites/default/files/Teachers-Guide-LeGuin.pdf",
+   "quote": "Consider the very first sentence of the novel",
+   "page": "Lesson Five, Figurative Language",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "undated NEA Big Read guide",
+   "routeHint": "direct PDF fetch, pypdf extraction",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "angle": "craft"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 76,
+   "verdict": "PARTIAL",
+   "trueWording": "Le Guin invites us in, holds us back; co-creators, collaborators, listeners.",
+   "note": "Quote 'co-creators, collaborators, listeners, as if to an oral tale' is verbatim. Page: 'Le Guin instead invites us in and holds us back, reminds us that we are reading (or hearing) a story, making us co-creators...' — page says 'reading (or hearing)', the claim keeps only 'hearing'; subject is Le Guin rather than 'the narration'. Both are within paraphrase.",
+   "unsupportedLimb": "the subject 'the narration' — the verifier's note says the page's subject is Le Guin, not the narration, and that the page reads 'reading (or hearing)' where the claim keeps only 'hearing'"
+  },
+  {
+   "index": 151,
+   "verdict": "PARTIAL",
+   "trueWording": "while Ged is important to the story, he is also treated with detachment and clear-sightedness",
+   "note": "Quote verbatim on the raw page. 'By the narration' is a light gloss: the page attributes the detachment to how the story/Le Guin treats Ged, not to a named narrator.",
+   "unsupportedLimb": "'by the narration' — the note says the page attributes the detachment to how the story/Le Guin treats Ged, not to a named narrator"
+  },
+  {
+   "index": 399,
+   "verdict": "PARTIAL",
+   "trueWording": "account for much of her stylistic power and accessibility",
+   "note": "Exact in the closing section (section 3), before the footnotes. All three ingredients are on the page: '19th-Century Realism', a 'Virginia-Woolf-type adoption of some techniques of lyric poetry', and 'the ethical abstraction of American romances'. Suvin hedges - the blend 'may account for' - where the claim says 'attributes'; the hedge is a softening, not a different proposition.",
+   "unsupportedLimb": "the unhedged 'attributes' — the note records that Suvin hedges, writing that the blend 'may account for' her stylistic power and accessibility"
+  },
+  {
+   "index": 402,
+   "verdict": "PARTIAL",
+   "trueWording": "validating the carefully chosen and believable details which compose the thorough",
+   "note": "Same raw Theall capture. 'The actual sensory experience and subjective response of strangers or outsiders plays a central role in' + the quoted words + 'accounts Le Guin gives us of her fictional worlds.' The claim's 'validates' compresses the page's 'plays a central role in validating', a shade stronger but not a distinct limb.",
+   "unsupportedLimb": "the unhedged 'validates' — the note records that the page reads 'plays a central role in validating', which the claim compresses into a shade stronger a proposition"
+  },
+  {
+   "index": 405,
+   "verdict": "PARTIAL",
+   "trueWording": "the rigors of Karhide or the asceticism of Anarres",
+   "note": "Same raw Theall capture, endnote 1 (the passage is immediately followed by note 2 citing Le Guin's 'Is Gender Necessary?'). 'There would appear to be a strong though again ambiguous connection between such a Puritan or Yankee tradition and Le Guin's sensibility, which manifests itself in descriptions such as those of' + the quote. The claim's 'links' drops Theall's hedge ('would appear', 'ambiguous'), but the connection is drawn.",
+   "unsupportedLimb": "the unhedged 'links' — the note records that the claim drops Theall's hedge, the page reading 'There would appear to be a strong though again ambiguous connection'"
+  },
+  {
+   "index": 426,
+   "verdict": "PARTIAL",
+   "trueWording": "trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery",
+   "note": "Guardian, paragraph beginning 'Earthsea is a fantasy world' - the locator in the claim is correct. The seven-item list is verbatim and in order. One softening to note: the page reads 'so human a world - with [list] - that its fantastical elements feel ALMOST quotidian'; the claim drops 'almost'. The hedge is minor and the substance holds, so this is not downgraded, but downstream copy should keep 'almost'.",
+   "unsupportedLimb": "the flat 'feel quotidian' — the note records that the page reads 'ALMOST quotidian' and that the claim drops 'almost'"
+  },
+  {
+   "index": 431,
+   "verdict": "PARTIAL",
+   "trueWording": "The story-and the book-ends with a minimalist dance",
+   "note": "NYRB live URL fetched raw, byline Margaret Atwood, 'September 26, 2002 issue'. Final body paragraph; Atwood then quotes the closing lines ('Swaying, she lifted her bare feet...'), presenting them as how story and book end. She does not use the phrase 'last words' herself.",
+   "unsupportedLimb": "'as the book's last words' — the note says Atwood does not use the phrase 'last words' herself"
+  },
+  {
+   "index": 455,
+   "verdict": "PARTIAL",
+   "trueWording": "a welcomed variation from the high-fantastic",
+   "note": "Wayback raw id_ capture of sfra.org/Coyote/earthsea.htm (20151107114510), the URL as given; fetched directly, no live-host attempt needed. Closing section of 'Earthsea Revisited: Tehanu', numbered paragraph 53: '...we gain the possibility for a different style than that of the Earthsea trilogy, and, to my tastes, if not a better style, a welcomed variation from the high-fantastic.' Erlich's wording is 'the possibility for a different style' — a hedge the claim drops, though the same sentence does affirm the variation.",
+   "unsupportedLimb": "the flat 'gains a different style' — the note records Erlich's wording as 'the possibility for a different style', a hedge the claim drops"
+  },
+  {
+   "index": 474,
+   "verdict": "PARTIAL",
+   "trueWording": "Tehanu can show the skill of experience making less do more",
+   "note": "Same Kelso PDF, printed page 16. Quote 'making less do more, rather than more do more' verbatim. One nuance: the page hedges with the modal 'can show'; the claim asserts 'shows'. The substance is supported, so the limb stands, but the modal is softer on the page.",
+   "unsupportedLimb": "the flat 'shows' — the note records that the page hedges with the modal 'can show' (same wording the r4 regrade downgraded at the duplicate claim [57])"
+  },
+  {
+   "index": 535,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "describe what the world looks like, smells like, sounds like",
+   "note": "The ursulakleguin.com URL has no Wayback capture and the live host blocks Anthropic agents in robots.txt, so verified on the original Book View Cafe post the claim's own source field names: Wayback raw capture 20151029022249id_ of bookviewcafe.com/blog/2015/10/05/navigating-the-ocean-of-story-session-1-part-5/. Quote verbatim in the reply to Tamara, whose readers called her drafts 'too crammed with ideas'; the surrounding sentence supplies the 'easier pace' and 'moments of relief' limbs.",
+   "unsupportedLimb": "the quotation was read not at the cited ursulakleguin.com URL but on a Wayback raw capture (20251029022249id_) of the original bookviewcafe.com post — verified location, but not the cited page"
+  },
+  {
+   "index": 590,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "simple words words that are themselves almost always very old",
+   "note": "Word for word in the transcript: the sentence names 'the wizard of Earthsea' and 'the impression of simplicity' as what these old simple words create, so every limb holds. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML retrieved through the api.allorigins.win proxy), not the cited video page and not a human transcript; the doubled 'words words' in the quoted string is an ASR artifact"
+  },
+  {
+   "index": 591,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "She doesn't use technical terms, she doesn't use jargon",
+   "note": "Word for word, immediately following the 'almost always very old' sentence in the simplicity passage. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript"
+  },
+  {
+   "index": 592,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "She's not going to say crenellation",
+   "note": "Verbatim; the next two sentences of the same passage supply the other limbs (talk about houses; say roof, tower), and the preceding sentences set the contrast with fantasists' 'elaborate vocabulary'. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript"
+  },
+  {
+   "index": 593,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "The more technical the more limited a word the less likely",
+   "note": "Verbatim; the transcript completes it '...she is to use it', immediately after the roof/tower sentences. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript"
+  },
+  {
+   "index": 594,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "picked up a lot of associations in their travels",
+   "note": "Verbatim in the closing seconds ('Simple words or common words that have a long history... Words with a shadow. That's how Le Guin rolls.'). The 'not for simplicity's own sake' limb is carried by the video's opening ('deceptively simple', 'makes it look simple, but there's a lot of art and craft involved') rather than by one sentence. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript; the 'not for simplicity's own sake' limb rests on the video's opening rather than on one sentence"
+  },
+  {
+   "index": 595,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "She saves the shortest sentence for the highest impact",
+   "note": "Verbatim; the transcript's preceding sentence gives 'They're fairly long and complex and flowing sentences' and the following words are 'He lay dying. Three words. Three words. Four syllables.' Passage is the chapter-four Archmage death scene. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript"
+  },
+  {
+   "index": 596,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Simple words for you to fill in with emotional associations",
+   "note": "Verbatim; preceded in the transcript by 'Is he frigid? Is he freezing?... Is he subzero? No, he's cold. Very cold.', and the quoted novel line is 'the Archmage lay also unmoving but cold, very cold'. Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript"
+  },
+  {
+   "index": 597,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "She finds that effect distracting and and fakey",
+   "note": "Verbatim, doubled 'and' included; the sentence before it reads 'The fantasists who use those words are trying to create a distance by using the elaborate vocabulary.' Raw ASR caption track for m5oHYOrS0No reached as XML (srv3) after direct timedtext, Chrome-pane same-origin fetch, YouTube's own get_transcript panel call and WebFetch all failed (429/400); the ANDROID-client signed caption URL was retrieved byte-for-byte through the api.allorigins.win transport proxy. Wording is YouTube auto-transcription, not a human transcript; video confirmed 'Le Guin's Style', James Marino, uploaded 2026-05-16, 515s.",
+   "unsupportedLimb": "the quotation is YouTube auto-transcription (ASR caption XML via the allorigins proxy), not the cited video page and not a human transcript; the doubled 'and and' in the quoted string is an ASR artifact"
+  },
+  {
+   "index": 636,
+   "verdict": "PARTIAL",
+   "trueWording": "drawing the reader into the making of the culture",
+   "note": "The quoted phrase is verbatim, but the page's own framing is narrower than 'presenting a culture': the window reads '...the characters and for drawing the reader into the making of the culture is to use the textual model of the ethnograph, in which both the voices of the anthropologist and the people being studied are heard.' Cite the page's wording, not 'presenting'. The agent is unnamed inside the window; it is Le Guin by the chapter's subject (Always Coming Home). Volume is lending-restricted at archive.org (_djvu.txt returns 403), so the raw book page cannot be opened; the given search-inside URL was fetched raw and returns verbatim OCR of the book, widened with extra phrase queries to resolve the sentence around the match.",
+   "unsupportedLimb": "'Le Guin's way of presenting a culture' — the note says the page's own framing is narrower ('for drawing the reader into the making of the culture') and instructs to cite the page's wording, not 'presenting'; the agent is also unnamed inside the search-inside window"
+  },
+  {
+   "index": 723,
+   "verdict": "PARTIAL",
+   "trueWording": "…or as many as you like, or not at all",
+   "note": "Same page, section 'Thou mayest'. The claim's quote is verbatim; the full quoted line runs on past 'nine times' to the open ending given as trueWording, so 'open list ending in the option of not at all' is exact. One attribution nuance worth recording: the page presents the sentence as Le Guin's own writing ('when describing a ritual song ‘the four/five heya’ she wrote that…'), so 'a Kesh description' must be read as a description of a Kesh song, not one authored by the Kesh.",
+   "unsupportedLimb": "'a Kesh description' — the note says the page presents the sentence as Le Guin's own writing and that the phrase must be read as a description of a Kesh song, not one authored by the Kesh"
+  },
+  {
+   "index": 738,
+   "verdict": "PARTIAL",
+   "trueWording": "research into nonexistent history is to tell the story",
+   "note": "Same troypress.com paragraph, introduced by 'She wrote', and the sentence ends with finding out what happened. The page does not itself name the Tales from Earthsea foreword as the origin, but the claim sentence does not assert that.",
+   "unsupportedLimb": "the source attribution to the Foreword to Tales from Earthsea — the note says the page does not itself name that foreword as the origin (r8 critic §2: the attribution is the finder's and should be marked as such until the foreword is reached)"
+  },
+  {
+   "index": 795,
+   "verdict": "PARTIAL",
+   "trueWording": "everything is direct, concrete, and simple",
+   "note": "PDF fetched as binary and text-extracted with pdftotext (route 3). Title page reads 'Ursula K. Le Guin's \"From Elfland to Poughkeepsie\" (1973)'. The sentence reads that Tolkien's vocabulary is not striking, he has no ichor, then the quoted clause; it sits in the paragraph on Tolkien's plain, clear English, on the eighth text page of the extraction (the claim's p.8 checks out). Scope note: the page's 'everything' covers Tolkien's prose generally rather than the vocabulary alone, which entails rather than contradicts the claim's narrower reading.",
+   "unsupportedLimb": "'everything in it [the vocabulary]' — the note records that the page's 'everything is direct, concrete, and simple' reads on Tolkien's prose generally rather than on the vocabulary alone (same limb the r4 regrade downgraded at the duplicate claim [104])"
+  }
+ ],
+ "noteEdits": [
+  {
+   "index": 32,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "even young readers will be beguiled by the flawless, poetic prose",
+   "note": "Live en.wikipedia.org/wiki/Tehanu. Verbatim: Kirkus Reviews '...even young readers will be beguiled by the flawless, poetic prose, the philosophy expressed in thoughtful, potent metaphor, and the consummately imagined world' (ref Kirkus, January 15, 1990). Both limbs — flawless poetic prose and thoughtful, potent metaphor — supported.  [r10 regrade: trueWording filled from this note, which carries the confirmed wording; the field was left blank by verdicts-leguin-i30-44.json.]",
+   "edit": "trueWording filled"
+  },
+  {
+   "index": 35,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Throughout A Wizard of Earthsea Le Guin's language is plain, strong, and exact; her tone grave and slightly formal",
+   "note": "NEA PDF fetched live (HTTP 200, 515,637 bytes, 12 pages), text extracted with pypdf. Printed page 4, 'The Language of Fantasy': 'Throughout A Wizard of Earthsea Le Guin's language is plain, strong, and exact; her tone grave and slightly formal; and the rhythm of her sentences carefully balanced and musical.' Quote verbatim; both limbs (diction and tone) supported. Page attribution p.4 is correct.  [r10 regrade: trueWording filled from this note, which carries the confirmed wording; the field was left blank by verdicts-leguin-i30-44.json.]",
+   "edit": "trueWording filled"
+  },
+  {
+   "index": 36,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the rhythm of her sentences carefully balanced and musical",
+   "note": "Same sentence, same printed page 4: 'the rhythm of her sentences carefully balanced and musical'. Quote verbatim, limb supported. Page attribution p.4 correct.  [r10 regrade: trueWording filled from this note, which carries the confirmed wording; the field was left blank by verdicts-leguin-i30-44.json.]",
+   "edit": "trueWording filled"
+  },
+  {
+   "index": 37,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the occasional touches of alliteration and assonance-reminiscent of Old English verse",
+   "note": "Printed page 4, immediately following: 'Note the occasional touches of alliteration and assonance-reminiscent of Old English verse-in such phrases as this: \"Forest rises ridge behind ridge to the stone and snow of the heights.\"' Quote verbatim; the alliteration/assonance limb and the cited example sentence both verbatim. Page attribution p.4 correct.  [r10 regrade: trueWording filled from this note, which carries the confirmed wording; the field was left blank by verdicts-leguin-i30-44.json.]",
+   "edit": "trueWording filled"
+  },
+  {
+   "index": 38,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What a wizard does is like what a writer does. He or she is making things out of words and making things happen with words.",
+   "note": "Printed page 5, 'An Interview with Ursula K. Le Guin': header reads 'On January 7, 2008, Dan Stone of the National Endowment for the Arts interviewed Ursula K. Le Guin at her home in Oregon' - the 2008 limb is confirmed on the page. UKL: 'What a wizard does is like what a writer does. He or she is making things out of words and making things happen with words.' Quote verbatim; every limb supported. Page attribution p.5 correct (the answer sits on p.5, the interview continues onto p.6).  [r10 regrade: trueWording filled from this note, which carries the confirmed wording; the field was left blank by verdicts-leguin-i30-44.json.]",
+   "edit": "trueWording filled"
+  },
+  {
+   "index": 39,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Left Hand of Darkness is written in a tone even more gravely austere than A Wizard of Earthsea",
+   "note": "Printed page 9, 'Le Guin and Her Other Works': 'Perhaps the best-known and most taught of all modern science fiction novels, The Left Hand of Darkness is written in a tone even more gravely austere than A Wizard of Earthsea.' Quote verbatim; both limbs supported. Page attribution p.9 correct.  [r10 regrade: trueWording filled from this note, which carries the confirmed wording; the field was left blank by verdicts-leguin-i30-44.json.]",
+   "edit": "trueWording filled"
+  },
+  {
+   "index": 40,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The language of A Wizard of Earthsea is often quietly poetic.",
+   "note": "Printed page 10, Discussion Questions, question 4: 'The language of A Wizard of Earthsea is often quietly poetic. Comment on three sentences that you find particularly beautiful or moving.' Quote verbatim, and it is indeed a discussion question. Page attribution p.10 correct.  [r10 regrade: trueWording filled from this note, which carries the confirmed wording; the field was left blank by verdicts-leguin-i30-44.json.]",
+   "edit": "trueWording filled"
+  },
+  {
+   "index": 41,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The book's elegant diction, geographical sweep, and mounting suspense are quite irresistible.",
+   "note": "Printed page 3, 'Introduction to the Book': 'The book's elegant diction, geographical sweep, and mounting suspense are quite irresistible.' Quote verbatim, all three limbs supported, and it does sit under the heading 'Introduction to the Book'. Page attribution p.3 correct.  [r10 regrade: trueWording filled from this note, which carries the confirmed wording; the field was left blank by verdicts-leguin-i30-44.json.]",
+   "edit": "trueWording filled"
+  },
+  {
+   "index": 43,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The initial Earthsea trilogy, austere but vivid, is a major work",
+   "note": "Live sf-encyclopedia.com/entry/le_guin_ursula_k fetched (HTTP 200, 101,578 bytes). Verbatim: 'The initial Earthsea trilogy, austere but vivid, is a major work whose appeal goes far beyond the Young Adult audience at whom in the first instance it was aimed'. Quote verbatim; all three limbs (austere but vivid, major work, reaching beyond the Young Adult audience) supported.  [r10 regrade: trueWording filled from this note, which carries the confirmed wording; the field was left blank by verdicts-leguin-i30-44.json.]",
+   "edit": "trueWording filled"
+  },
+  {
+   "index": 140,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Consider the very first sentence of the novel: 'The island of Gont...'",
+   "note": "Raw PDF. The sentence immediately follows 'plain, strong, and direct, without obvious flourish', so it is offered as the illustration of that plainness. Lesson Five.  [r10 regrade, r8 critic §2: fullSentence — the trueWording reproduces the novel's first sentence and is fourteen words counting the quoted fragment (twelve by the merger's whitespace count, so the automatic flag does not fire); trim before any copy, and key on the word count, not the flag.]",
+   "edit": "fullSentence flag added"
+  }
+ ]
+}

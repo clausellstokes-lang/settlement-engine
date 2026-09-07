@@ -564,6 +564,24 @@
   }
  },
  {
+  "index": 76,
+  "feature": "oral-tale co-creation",
+  "claim": "Burt: the narration invites readers in and holds them back, reminding them they are hearing a story and making them co-creators, collaborators, listeners as if to an oral tale.",
+  "source": "Stephanie Burt (Strange Horizons)",
+  "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+  "quote": "co-creators, collaborators, listeners, as if to an oral tale",
+  "page": "",
+  "angle": "academic",
+  "verdict": {
+   "index": 76,
+   "verdict": "PARTIAL",
+   "trueWording": "Le Guin invites us in, holds us back; co-creators, collaborators, listeners.",
+   "note": "Quote 'co-creators, collaborators, listeners, as if to an oral tale' is verbatim. Page: 'Le Guin instead invites us in and holds us back, reminds us that we are reading (or hearing) a story, making us co-creators...' — page says 'reading (or hearing)', the claim keeps only 'hearing'; subject is Le Guin rather than 'the narration'. Both are within paraphrase.",
+   "unsupportedLimb": "the subject 'the narration' — the verifier's note says the page's subject is Le Guin, not the narration, and that the page reads 'reading (or hearing)' where the claim keeps only 'hearing'",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
+  }
+ },
+ {
   "index": 78,
   "feature": "the right word",
   "claim": "Tearle credits Le Guin with picking up the right word on the end of her pen; Plotz devotes a chapter to her use of language and naming and to the careful, deliberate nature of her prose.",
@@ -1016,6 +1034,31 @@
    "unsupportedLimb": "polarity",
    "fromFile": "verdicts-leguin-regrade-r8.json"
   }
+ },
+ {
+  "index": 151,
+  "feature": "point of view and distance",
+  "claim": "Maureen Eichner reads Ged as treated with detachment and clear-sightedness by the narration.",
+  "source": "Maureen Eichner, 'Ursula Le Guin Reading Notes: A Wizard of Earthsea', By Singing Light",
+  "url": "https://bysinginglight.wordpress.com/2016/03/04/ursula-le-guin-reading-notes-a-wizard-of-earthsea/",
+  "quote": "he is also treated with detachment and clear-sightedness",
+  "page": "paragraph on tone and prose style",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2016-03-04",
+  "routeHint": "direct fetch, HTML stripped to text",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 151,
+   "verdict": "PARTIAL",
+   "trueWording": "while Ged is important to the story, he is also treated with detachment and clear-sightedness",
+   "note": "Quote verbatim on the raw page. 'By the narration' is a light gloss: the page attributes the detachment to how the story/Le Guin treats Ged, not to a named narrator.",
+   "unsupportedLimb": "'by the narration' — the note says the page attributes the detachment to how the story/Le Guin treats Ged, not to a named narrator",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
+  },
+  "fullSentence": true
  },
  {
   "index": 156,
@@ -1548,6 +1591,78 @@
   }
  },
  {
+  "index": 399,
+  "feature": "other: stylistic lineage",
+  "claim": "Suvin attributes much of Le Guin's stylistic power and accessibility to a blend of nineteenth-century realism, lyric-poetic technique and the ethical abstraction of American romances.",
+  "source": "Darko Suvin, 'Parables of De-Alienation', Science Fiction Studies #7 (November 1975)",
+  "url": "https://web.archive.org/web/20260206193435id_/https://www.depauw.edu/sfs/backissues/7/suvin7art.htm",
+  "quote": "account for much of her stylistic power and accessibility",
+  "page": "closing section",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1975-11",
+  "routeHint": "Wayback raw capture (web.archive.org/web/<ts>id_/) of the DePauw SFS page; the live DePauw URL now 404s",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 399,
+   "verdict": "PARTIAL",
+   "trueWording": "account for much of her stylistic power and accessibility",
+   "note": "Exact in the closing section (section 3), before the footnotes. All three ingredients are on the page: '19th-Century Realism', a 'Virginia-Woolf-type adoption of some techniques of lyric poetry', and 'the ethical abstraction of American romances'. Suvin hedges - the blend 'may account for' - where the claim says 'attributes'; the hedge is a softening, not a different proposition.",
+   "unsupportedLimb": "the unhedged 'attributes' — the note records that Suvin hedges, writing that the blend 'may account for' her stylistic power and accessibility",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
+  }
+ },
+ {
+  "index": 402,
+  "feature": "concrete sensory noun",
+  "claim": "Theall says the sensory experience and subjective response of Le Guin's outsiders validates the carefully chosen and believable details that compose her accounts of her worlds.",
+  "source": "Donald F. Theall, 'The Art of Social-Science Fiction', Science Fiction Studies #7 (November 1975)",
+  "url": "https://web.archive.org/web/20251222093314id_/https://www.depauw.edu/sfs/backissues/7/theall7art.htm",
+  "quote": "the carefully chosen and believable details",
+  "page": "second section, on the stranger visiting a new world",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1975-11",
+  "routeHint": "Wayback raw capture (web.archive.org/web/<ts>id_/) of the DePauw SFS page; the live DePauw URL now 404s",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 402,
+   "verdict": "PARTIAL",
+   "trueWording": "validating the carefully chosen and believable details which compose the thorough",
+   "note": "Same raw Theall capture. 'The actual sensory experience and subjective response of strangers or outsiders plays a central role in' + the quoted words + 'accounts Le Guin gives us of her fictional worlds.' The claim's 'validates' compresses the page's 'plays a central role in validating', a shade stronger but not a distinct limb.",
+   "unsupportedLimb": "the unhedged 'validates' — the note records that the page reads 'plays a central role in validating', which the claim compresses into a shade stronger a proposition",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
+  }
+ },
+ {
+  "index": 405,
+  "feature": "place and institution description",
+  "claim": "Theall links a Puritan or Yankee tradition to Le Guin's sensibility as it shows in descriptions of the rigors of Karhide and the asceticism of Anarres.",
+  "source": "Donald F. Theall, 'The Art of Social-Science Fiction', Science Fiction Studies #7 (November 1975), note 1",
+  "url": "https://web.archive.org/web/20251222093314id_/https://www.depauw.edu/sfs/backissues/7/theall7art.htm",
+  "quote": "the rigors of Karhide or the asceticism of Anarres",
+  "page": "endnote 1",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1975-11",
+  "routeHint": "Wayback raw capture (web.archive.org/web/<ts>id_/) of the DePauw SFS page; the live DePauw URL now 404s",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 405,
+   "verdict": "PARTIAL",
+   "trueWording": "the rigors of Karhide or the asceticism of Anarres",
+   "note": "Same raw Theall capture, endnote 1 (the passage is immediately followed by note 2 citing Le Guin's 'Is Gender Necessary?'). 'There would appear to be a strong though again ambiguous connection between such a Puritan or Yankee tradition and Le Guin's sensibility, which manifests itself in descriptions such as those of' + the quote. The claim's 'links' drops Theall's hedge ('would appear', 'ambiguous'), but the connection is drawn.",
+   "unsupportedLimb": "the unhedged 'links' — the note records that the claim drops Theall's hedge, the page reading 'There would appear to be a strong though again ambiguous connection'",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
+  }
+ },
+ {
   "index": 422,
   "feature": "plainness and economy",
   "claim": "David Mitchell names a studied neutrality of style as one of the two failure modes fantasy prose falls into, the other being a cod-historic narratorial voice.",
@@ -1569,6 +1684,54 @@
    "note": "Quote is verbatim, but the enumeration limb fails. The page names THREE hazards in one sentence, separated by semicolons: the cod-historic narratorial voice, jarring neologisms ('totally awesome'), and then studied neutrality. It never frames these as two failure modes, nor pairs neutrality against the cod-historic voice as its opposite. The 'Scylla and Charybdis' figure two sentences earlier applies to style and voice generally, not to this list.",
    "unsupportedLimb": "that studied neutrality is one of only TWO failure modes, the other being the cod-historic voice - the page names a third, jarring neologisms, between them",
    "fromFile": "verdicts-leguin-i420-438.json"
+  }
+ },
+ {
+  "index": 426,
+  "feature": "place and institution description",
+  "claim": "David Mitchell lists trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery as the mundane institutional furniture that makes Earthsea’s fantastical elements feel quotidian.",
+  "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+  "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+  "quote": "trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery",
+  "page": "paragraph beginning \"Earthsea is a fantasy world\"",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2015-10-23",
+  "routeHint": "live URL with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close-2",
+  "verdict": {
+   "index": 426,
+   "verdict": "PARTIAL",
+   "trueWording": "trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery",
+   "note": "Guardian, paragraph beginning 'Earthsea is a fantasy world' - the locator in the claim is correct. The seven-item list is verbatim and in order. One softening to note: the page reads 'so human a world - with [list] - that its fantastical elements feel ALMOST quotidian'; the claim drops 'almost'. The hedge is minor and the substance holds, so this is not downgraded, but downstream copy should keep 'almost'.",
+   "unsupportedLimb": "the flat 'feel quotidian' — the note records that the page reads 'ALMOST quotidian' and that the claim drops 'almost'",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
+  }
+ },
+ {
+  "index": 431,
+  "feature": "closing sentence",
+  "claim": "Margaret Atwood characterises the closing scene of The Birthday of the World as a minimalist dance and quotes it as the book’s last words.",
+  "source": "Margaret Atwood, \"The Queen of Quinkdom\", The New York Review of Books, 26 September 2002 issue",
+  "url": "https://www.nybooks.com/articles/2002/09/26/the-queen-of-quinkdom/",
+  "quote": "ends with a minimalist dance, as an old woman",
+  "page": "final paragraph",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2002-09-26",
+  "routeHint": "live nybooks.com URL with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "close-2",
+  "verdict": {
+   "index": 431,
+   "verdict": "PARTIAL",
+   "trueWording": "The story-and the book-ends with a minimalist dance",
+   "note": "NYRB live URL fetched raw, byline Margaret Atwood, 'September 26, 2002 issue'. Final body paragraph; Atwood then quotes the closing lines ('Swaying, she lifted her bare feet...'), presenting them as how story and book end. She does not use the phrase 'last words' herself.",
+   "unsupportedLimb": "'as the book's last words' — the note says Atwood does not use the phrase 'last words' herself",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   }
  },
  {
@@ -1596,6 +1759,30 @@
   }
  },
  {
+  "index": 455,
+  "feature": "register modulation",
+  "claim": "Richard D. Erlich states that Tehanu gains a different style from the Earthsea trilogy, which he calls a welcome variation from the high-fantastic.",
+  "source": "Richard D. Erlich, Coyote’s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Earthsea Revisited: Tehanu\"",
+  "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/earthsea.htm",
+  "quote": "a welcomed variation from the high-fantastic",
+  "page": "chapter Earthsea Revisited: Tehanu, closing section",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2009",
+  "routeHint": "Wayback raw capture of /Coyote/earthsea.htm",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "close-2",
+  "verdict": {
+   "index": 455,
+   "verdict": "PARTIAL",
+   "trueWording": "a welcomed variation from the high-fantastic",
+   "note": "Wayback raw id_ capture of sfra.org/Coyote/earthsea.htm (20151107114510), the URL as given; fetched directly, no live-host attempt needed. Closing section of 'Earthsea Revisited: Tehanu', numbered paragraph 53: '...we gain the possibility for a different style than that of the Earthsea trilogy, and, to my tastes, if not a better style, a welcomed variation from the high-fantastic.' Erlich's wording is 'the possibility for a different style' — a hedge the claim drops, though the same sentence does affirm the variation.",
+   "unsupportedLimb": "the flat 'gains a different style' — the note records Erlich's wording as 'the possibility for a different style', a hedge the claim drops",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
+  }
+ },
+ {
   "index": 462,
   "feature": "opening sentence",
   "claim": "Michael Dirda opens his review by quoting the first sentence of A Wizard of Earthsea, which names the island of Gont, its mile-high peak, its towns in high valleys and its ports on dark narrow bays before naming any person.",
@@ -1617,6 +1804,30 @@
    "note": "Wayback raw capture (20170827235846id_) of the WaPo archive page; live URL died mid-stream (curl 92). Dirda's review body does open with the novel's opening quotation, and no person is named before Sparrowhawk four sentences in. The quote fragment is verbatim. But the towns/ports detail belongs to the novel's SECOND sentence, which Dirda quotes next, not to the first sentence the claim attributes it to. Byline 'By Michael Dirda', February 25, 1990, reviewing Tehanu - all confirmed.",
    "unsupportedLimb": "the claim attributes the towns-in-high-valleys and ports-on-dark-narrow-bays detail to the first sentence; on the page those words fall in the novel's second sentence",
    "fromFile": "verdicts-leguin-i462-489.json"
+  }
+ },
+ {
+  "index": 474,
+  "feature": "plainness and economy",
+  "claim": "Sylvia Kelso states that Tehanu shows the skill of experience making less do more rather than more do more.",
+  "source": "Sylvia A. Kelso, \"Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin\", Paradoxa 21 (2009), pp. 7-22",
+  "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+  "quote": "making less do more, rather than more do more",
+  "page": "p. 16",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2009",
+  "routeHint": "Wayback/live PDF: paradoxa.com hosts this one article of Paradoxa 21 as a free PDF; binary fetched with curl and text extracted with pypdf",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close-2",
+  "verdict": {
+   "index": 474,
+   "verdict": "PARTIAL",
+   "trueWording": "Tehanu can show the skill of experience making less do more",
+   "note": "Same Kelso PDF, printed page 16. Quote 'making less do more, rather than more do more' verbatim. One nuance: the page hedges with the modal 'can show'; the claim asserts 'shows'. The substance is supported, so the limb stands, but the modal is softer on the page.",
+   "unsupportedLimb": "the flat 'shows' — the note records that the page hedges with the modal 'can show' (same wording the r4 regrade downgraded at the duplicate claim [57])",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   }
  },
  {
@@ -1785,6 +1996,30 @@
    "note": "Le Guin's reply, mid-piece. Page frames the exchange as a conversation ('talks to', 'I have enjoyed this conversation'), never as writing/correspondence; also the page blames 'publishers, or editors, or critics', the claim only publishers. Rest verbatim: 'A literary form degenerates into a formula.'",
    "unsupportedLimb": "that Le Guin 'wrote to' Cunningham — the page shows a conversation, not correspondence",
    "fromFile": "verdicts-leguin-i628-708.json"
+  }
+ },
+ {
+  "index": 636,
+  "feature": "civic record register",
+  "claim": "Cummins says Le Guin's way of presenting a culture is to use the textual model of the ethnograph.",
+  "source": "Elizabeth Cummins, Understanding Ursula K. Le Guin (1990)",
+  "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aunderstandingurs0000cumm%20AND%20%22use%20the%20textual%20model%20of%20the%20ethnograph%22",
+  "quote": "use the textual model of the ethnograph",
+  "page": "archive.org search-inside snippet",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1990",
+  "routeHint": "archive.org search-inside via Open Library, scoped by identifier",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium (snippet-only)",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 636,
+   "verdict": "PARTIAL",
+   "trueWording": "drawing the reader into the making of the culture",
+   "note": "The quoted phrase is verbatim, but the page's own framing is narrower than 'presenting a culture': the window reads '...the characters and for drawing the reader into the making of the culture is to use the textual model of the ethnograph, in which both the voices of the anthropologist and the people being studied are heard.' Cite the page's wording, not 'presenting'. The agent is unnamed inside the window; it is Le Guin by the chapter's subject (Always Coming Home). Volume is lending-restricted at archive.org (_djvu.txt returns 403), so the raw book page cannot be opened; the given search-inside URL was fetched raw and returns verbatim OCR of the book, widened with extra phrase queries to resolve the sentence around the match.",
+   "unsupportedLimb": "'Le Guin's way of presenting a culture' — the note says the page's own framing is narrower ('for drawing the reader into the making of the culture') and instructs to cite the page's wording, not 'presenting'; the agent is also unnamed inside the search-inside window",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   }
  },
  {
@@ -2004,6 +2239,30 @@
   }
  },
  {
+  "index": 723,
+  "feature": "place and institution description",
+  "claim": "Saleem quotes a Kesh description of a ritual song whose permitted repetitions are given as an open list ending in the option of not at all.",
+  "source": "Mazin Saleem quoting Always Coming Home, Strange Horizons, 2018",
+  "url": "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+  "quote": "it may be sung four times, or five times, or nine times",
+  "page": "section 'Thou mayest'",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2018-11-26",
+  "routeHint": "direct curl, browser UA; Le Guin's sentence quoted inside Saleem's",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 723,
+   "verdict": "PARTIAL",
+   "trueWording": "…or as many as you like, or not at all",
+   "note": "Same page, section 'Thou mayest'. The claim's quote is verbatim; the full quoted line runs on past 'nine times' to the open ending given as trueWording, so 'open list ending in the option of not at all' is exact. One attribution nuance worth recording: the page presents the sentence as Le Guin's own writing ('when describing a ritual song ‘the four/five heya’ she wrote that…'), so 'a Kesh description' must be read as a description of a Kesh song, not one authored by the Kesh.",
+   "unsupportedLimb": "'a Kesh description' — the note says the page presents the sentence as Le Guin's own writing and that the phrase must be read as a description of a Kesh song, not one authored by the Kesh",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
+  }
+ },
+ {
   "index": 726,
   "feature": "point of view and distance",
   "claim": "Saleem describes a gloss attached to a Kesh story as spoken by a commentator on that story in the present tense.",
@@ -2073,6 +2332,30 @@
    "note": "troypress.com 'A History of Earthsea' (11 Nov 2023) carries the quoted clause verbatim in the world-building paragraph, but the string 'Description of Earthsea' never occurs on the page (zero hits over the raw HTML) and the five stories are not tied to Tales from Earthsea in that sentence.",
    "unsupportedLimb": "the identification of that essay as 'A Description of Earthsea'",
    "fromFile": "verdicts-leguin-i709-759.json"
+  }
+ },
+ {
+  "index": 738,
+  "feature": "other: how the record is made",
+  "claim": "Le Guin states that research into a nonexistent history is done by telling the story and finding out what happened.",
+  "source": "Ursula K. Le Guin, Foreword to Tales from Earthsea, quoted by Troy Press",
+  "url": "https://troypress.com/a-history-of-earthsea/",
+  "quote": "research into nonexistent history is to tell the story",
+  "page": "paragraph on world-building",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2001 (foreword), quoted n.d.",
+  "routeHint": "direct curl, browser UA; the same sentence is quoted at greater length by Mazin Saleem in Strange Horizons",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 738,
+   "verdict": "PARTIAL",
+   "trueWording": "research into nonexistent history is to tell the story",
+   "note": "Same troypress.com paragraph, introduced by 'She wrote', and the sentence ends with finding out what happened. The page does not itself name the Tales from Earthsea foreword as the origin, but the claim sentence does not assert that.",
+   "unsupportedLimb": "the source attribution to the Foreword to Tales from Earthsea — the note says the page does not itself name that foreword as the origin (r8 critic §2: the attribution is the finder's and should be marked as such until the foreword is reached)",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   }
  },
  {
@@ -2217,6 +2500,30 @@
    "note": "Quote verbatim in Species I-A; grade ('Industrial, Point C'), date range (252-254) and suppressed agent all on the page. The clause is not verbless: it is a reduced/non-finite clause built on the participle 'enhanced' (contrast the genuinely verbless line at index 786).",
    "unsupportedLimb": "'verbless clause' - the clause carries the participle 'enhanced'",
    "fromFile": "verdicts-leguin-i766-786.json"
+  }
+ },
+ {
+  "index": 795,
+  "feature": "diction (native vs latinate)",
+  "claim": "Le Guin describes Tolkien's vocabulary as unstriking and everything in it as direct, concrete and simple.",
+  "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "quote": "everything is direct, concrete, and simple",
+  "page": "p.8 of the PDF",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "1973",
+  "routeHint": "live URL, browser UA; third-party PDF transcription, pypdf extraction",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 795,
+   "verdict": "PARTIAL",
+   "trueWording": "everything is direct, concrete, and simple",
+   "note": "PDF fetched as binary and text-extracted with pdftotext (route 3). Title page reads 'Ursula K. Le Guin's \"From Elfland to Poughkeepsie\" (1973)'. The sentence reads that Tolkien's vocabulary is not striking, he has no ichor, then the quoted clause; it sits in the paragraph on Tolkien's plain, clear English, on the eighth text page of the extraction (the claim's p.8 checks out). Scope note: the page's 'everything' covers Tolkien's prose generally rather than the vocabulary alone, which entails rather than contradicts the claim's narrower reading.",
+   "unsupportedLimb": "'everything in it [the vocabulary]' — the note records that the page's 'everything is direct, concrete, and simple' reads on Tolkien's prose generally rather than on the vocabulary alone (same limb the r4 regrade downgraded at the duplicate claim [104])",
+   "fromFile": "verdicts-leguin-regrade-r10.json"
   }
  },
  {
