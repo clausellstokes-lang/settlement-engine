@@ -1,0 +1,212 @@
+# HORIZON EXTRACT
+receipt              /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/capacity-horizon/artifacts/horizon-600y-4s-lit.json
+bytes                10496438
+kind=whole_world_soak schemaVersion=5 years=600 settlements=4
+seed                 realm-scale-research-lit-4s-600y-4s-seed1
+caseId               (none — no register cell identity claimed)
+passed               true
+demographicsEnabled  true   <- the overlay, read off the receipt
+finalHash            e6837b3810a4f3bfe09e24db12552fe06ee67005474e2109469f1d218c52ccc9
+receipt.notExecutable (writer's own) = []
+
+## ⭐ THE SHIPPED SERIES (§909 car 1) — is it on the receipt, and how long?
+  yearlyPopulations   rows=600  width=4
+  yearlyDiedFlags     rows=600  width=4
+  behavioral.yearly   rows=600
+
+## ⭐ evaluateReceipt — the PRODUCT grading its own receipt
+  deterministicFirings 4
+  fullInstrument       true   (it lives on the ANNOTATED receipt, not on the evaluation)
+  notExecutable (folded) []
+  annotated.notExecutable []
+  FINDINGS:
+    FINDING  capacity_plateau  [deterministic]  "settlement 0 never plateaued: 12186 at year 299 against 14080 at year 599"
+    FINDING  capacity_plateau  [deterministic]  "settlement 1 never plateaued: 2968 at year 299 against 3117 at year 599"
+    FINDING  capacity_plateau  [deterministic]  "settlement 2 never plateaued: 231 at year 299 against 305 at year 599"
+    FINDING  capacity_plateau  [deterministic]  "settlement 3 never plateaued: 65 at year 299 against 35 at year 599"
+  OBSERVABILITY:
+    (none)
+
+## ⭐ THE FOUR CAPACITY ROWS, one line each — gate / requires / horizon / verdict
+  capacity_plateau         class=deterministic  gate=true  requires=["yearlyPopulations[last]","yearlyDiedFlags[last]"]
+                           horizon required=150 observed=600
+                           ⇒ EXECUTED, FIRED
+                           detector output (4): ["settlement 0 never plateaued: 12186 at year 299 against 14080 at year 599","settlement 1 never plateaued: 2968 at year 299 against 3117 at year 599","settlement 2 never plateaued: 231 at year 299 against 305 at year 599","settlement 3 never plateaued: 65 at year 299 against 35 at year 599"]
+  capacity_floor_thaw      class=deterministic  gate=true  requires=["yearlyPopulations[last]","yearlyDiedFlags[last]"]
+                           horizon required=100 observed=600
+                           ⇒ EXECUTED, SILENT (no finding)
+                           detector output (0): []
+  capacity_realm_load      class=deterministic  gate=true  requires=["behavioral.yearly[last].realmDemography{}"]
+                           horizon required=n/a observed=n/a
+                           ⇒ EXECUTED, SILENT (no finding)
+                           detector output (0): []
+  capacity_envelope_30y    class=deterministic  gate=true  requires=["behavioral.yearly[last].motion{}"]
+                           horizon required=30 observed=600
+                           ⇒ EXECUTED, SILENT (no finding)
+                           detector output (0): []
+
+## ⭐ REALM loadRatio01 BY DECADE (behavioral.yearly[y].realmDemography)
+  year  loadRatio01  pressure01  population    bound  capacity  granary walls  inWindow[0.6,1.05]
+    10       0.7367      0.7217       17862    24247     24749        3     1  YES
+    20       0.7106      0.6962       17231    24247     24749        3     1  YES
+    30       0.7040      0.6844       17103    24294     24990        2     2  YES
+    40       0.7124      0.6932       17306    24294     24967        2     2  YES
+    50       0.7129      0.6941       17696    24823     25496        2     2  YES
+    60       0.7259      0.7082       18018    24823     25443        2     2  YES
+    70       0.6173      0.6018       15402    24952     25595        2     2  YES
+    80       0.6229      0.6068       15133    24294     24937        2     2  YES
+    90       0.6181      0.6025       15342    24823     25466        2     2  YES
+   100       0.6470      0.6300       16143    24952     25625        2     2  YES
+   110       0.6874      0.6701       17064    24823     25466        2     2  YES
+   120       0.7392      0.6918       17648    23873     25512        2     2  YES
+   130       0.7506      0.7023       17918    23873     25512        2     2  YES
+   140       0.7527      0.7044       17970    23873     25512        2     2  YES
+   150       0.7478      0.7000       17948    24002     25641        2     2  YES
+   160       0.7517      0.7034       17945    23873     25512        2     2  YES
+   170       0.7510      0.7028       17929    23873     25512        2     2  YES
+   180       0.7329      0.6852       17496    23873     25535        2     2  YES
+   190       0.7271      0.6783       17357    23873     25590        2     2  YES
+   200       0.5625      0.5264       13429    23873     25512        2     2  no
+   210       0.5357      0.5024       12845    23978     25567        2     2  no
+   220       0.4883      0.4590       11709    23978     25512        2     2  no
+   230       0.4843      0.4544       11675    24107     25696        2     2  no
+   240       0.5040      0.4728       12149    24107     25696        2     2  no
+   250       0.5214      0.4900       12501    23978     25512        2     2  no
+   260       0.5414      0.5089       12982    23978     25512        2     2  no
+   270       0.5648      0.5308       13542    23978     25512        2     2  no
+   280       0.5905      0.5550       14158    23978     25512        2     2  no
+   290       0.6122      0.5756       14758    24107     25641        2     2  YES
+   300       0.6443      0.6051       15450    23978     25535        2     2  YES
+   310       0.6765      0.6347       16309    24107     25696        2     2  YES
+   320       0.7094      0.6667       17010    23978     25512        2     2  YES
+   330       0.6063      0.5684       14158    23352     24909        2     2  YES
+   340       0.6051      0.5672       14588    24107     25719        2     2  YES
+   350       0.6320      0.5940       15154    23978     25512        2     2  YES
+   360       0.5405      0.5076       12995    24044     25601        2     2  no
+   370       0.5609      0.5273       13487    24044     25578        2     2  no
+   380       0.5736      0.5392       13791    24044     25578        2     2  no
+   390       0.5786      0.5435       13913    24044     25601        2     2  no
+   400       0.6233      0.5859       14986    24044     25578        2     2  YES
+   410       0.6637      0.6239       15959    24044     25578        2     2  YES
+   420       0.6979      0.6563       16871    24173     25707        2     2  YES
+   430       0.7297      0.6859       17544    24044     25578        2     2  YES
+   440       0.6404      0.6002       15107    23590     25171        2     2  YES
+   450       0.6361      0.5966       15424    24248     25852        2     2  YES
+   460       0.6624      0.6219       16062    24248     25829        2     2  YES
+   470       0.5922      0.5570       14283    24119     25645        2     2  no
+   480       0.6073      0.5711       14647    24119     25645        2     2  YES
+   490       0.6304      0.5929       15205    24119     25645        2     2  YES
+   500       0.6603      0.6210       15925    24119     25645        2     2  YES
+   510       0.6871      0.6456       16571    24119     25668        2     2  YES
+   520       0.7157      0.6731       17262    24119     25645        2     2  YES
+   530       0.7363      0.6918       17758    24119     25668        2     2  YES
+   540       0.7450      0.7006       17968    24119     25645        2     2  YES
+   550       0.7444      0.6988       18050    24248     25829        2     2  YES
+   560       0.7460      0.7016       17993    24119     25645        2     2  YES
+   570       0.7433      0.6972       18023    24248     25852        2     2  YES
+   580       0.6548      0.6143       15921    24314     25918        2     2  YES
+   590       0.6915      0.6493       16813    24314     25895        2     2  YES
+   600       0.7251      0.6821       17537    24185     25711        2     2  YES
+
+  first decade INSIDE [0.6,1.05]: year 10 (0.7367)
+  last  decade OUTSIDE          : year 470 (0.5922)
+  ENTERS AND STAYS              : NO
+
+## ⭐ SETTLEMENT SHAPES — settlementShapeOf on BOTH series (they must agree)
+  settlement       len  start   y-mid   centuryAgo   final  |final-centuryAgo|  5%*final   shape(shipped)  shape(stateVectors)
+  soak-a          600  15160   12186        12471   14080             1609.0     704.0   other           other
+  soak-b          600   2750    2968         3054    3117               63.0     155.9   plateau         plateau
+  soak-c          600   1889     231          320     305               15.0      15.3   plateau         plateau
+  soak-d          600    536      65           80      35               45.0       1.8   other           other
+
+## ⭐ capacity_plateau, term by term per settlement (the row's own clauses)
+  the row reads pops[last=599] against pops[mid=299] (years 600 and 300); band |yLast-yMid|/yMid <= 0.05
+  soak-a         yMid= 12186 yLast= 14080  drift=0.1554  NOT plateau (3.1x the window)
+                 century multipliers (bar 50): y0->y100 x0.87  y100->y200 x0.81  y200->y300 x1.14  y300->y400 x1.00  y400->y500 x1.02
+  soak-b         yMid=  2968 yLast=  3117  drift=0.0502  NOT plateau (1.0x the window)
+                 century multipliers (bar 50): y0->y100 x0.88  y100->y200 x1.22  y200->y300 x1.00  y300->y400 x0.80  y400->y500 x1.28
+  soak-c         yMid=   231 yLast=   305  drift=0.3203  NOT plateau (6.4x the window)
+                 century multipliers (bar 50): y0->y100 x0.29  y100->y200 x1.62  y200->y300 x0.26  y300->y400 x1.70  y400->y500 x0.82
+  soak-d         yMid=    65 yLast=    35  drift=0.4615  NOT plateau (9.2x the window)
+                 century multipliers (bar 50): y0->y100 x0.07  y100->y200 x14.83  y200->y300 x0.12  y300->y400 x1.39  y400->y500 x0.89
+
+## ⭐ deriveRegisterFigures — runaway / floored / unlawfulZero / bifurcated
+  realm.runawayCount                 0  (shrink)
+  realm.flooredCount                 0  (shrink)
+  realm.unlawfulZeroCount            0  (shrink)
+  realm.bifurcated                   0  (shrink)
+  realm.ratio                        0.8301931452376444  (band 0.25)
+  population.soak-a.shape            "other"  (exact)
+  population.soak-a.final            14080  (band 0.1)
+  population.soak-b.shape            "plateau"  (exact)
+  population.soak-b.final            3117  (band 0.1)
+  population.soak-c.shape            "plateau"  (exact)
+  population.soak-c.final            305  (band 0.1)
+  population.soak-d.shape            "other"  (exact)
+  population.soak-d.final            35  (band 0.1)
+  shapes: {"soak-a":"other","soak-b":"plateau","soak-c":"plateau","soak-d":"other"}
+
+## ⭐ COST — the receipt's OWN timing (`runDurationsMs`, register figure `cost.primaryMs`)
+  runDurationsMs = {"primary":2239561,"replay":2230837,"divergent":13819}
+  peakHeapUsedBytes = 563801984
+  ticksAdvanced = 62660
+  settlement-years  = 600 y x 4 s = 2400
+  run A (primary)   = 2239561 ms = 2239.6 s  ⇒ 0.9332 s per settlement-year
+  run B (replay)    = 2230837 ms = 2230.8 s  ⇒ 0.9295 s per settlement-year
+  run C (divergent) = 13819 ms = 13.8 s
+  A+B+C             = 4484.2 s
+
+## trough / recovery (is the curve still moving at the horizon?)
+  soak-a         min   7642 at y219   final  14080   recovered +6438
+  soak-b         min   2106 at y 27   final   3117   recovered +1011
+  soak-c         min    172 at y569   final    305   recovered +133
+  soak-d         min      0 at y 15   final     35   recovered +35
+  realm, last 50 y: y550=18050  y560=17993  y570=18023  y580=15921  y590=16813  y600=17537
+  realm change over the LAST FIFTY YEARS: 18050 -> 17537 = -2.8%
+
+## ⭐⭐ DOES IT SETTLE? the realm's 50-year growth rate at each 50-year mark
+   (a SETTLING world drives this toward 0; a world still moving holds it away from 0)
+   mark   realm(y-50)   realm(y)    50y change   |change| vs the 5% plateau band
+   y100        17696      16143   -8.8%       1.8x the band
+   y150        16143      17948   +11.2%       2.2x the band
+   y200        17948      13429   -25.2%      5.0x the band
+   y250        13429      12501   -6.9%       1.4x the band
+   y300        12501      15450   +23.6%       4.7x the band
+   y350        15450      15154   -1.9%       INSIDE the band
+   y400        15154      14986   -1.1%       INSIDE the band
+   y450        14986      15424   +2.9%        INSIDE the band
+   y500        15424      15925   +3.2%        INSIDE the band
+   y550        15925      18050   +13.3%       2.7x the band
+   y600        18050      17537   -2.8%       INSIDE the band
+
+## ⭐ the realm loadRatio01 at each 50-year mark, and its own 50-year drift
+   y 50  load 0.7129     IN WINDOW
+   y100  load 0.6470  Δ50y -0.0659   IN WINDOW
+   y150  load 0.7478  Δ50y +0.1008   IN WINDOW
+   y200  load 0.5625  Δ50y -0.1853   below the 0.6 floor
+   y250  load 0.5214  Δ50y -0.0411   below the 0.6 floor
+   y300  load 0.6443  Δ50y +0.1229   IN WINDOW
+   y350  load 0.6320  Δ50y -0.0123   IN WINDOW
+   y400  load 0.6233  Δ50y -0.0087   IN WINDOW
+   y450  load 0.6361  Δ50y +0.0128   IN WINDOW
+   y500  load 0.6603  Δ50y +0.0242   IN WINDOW
+   y550  load 0.7444  Δ50y +0.0841   IN WINDOW
+   y600  load 0.7251  Δ50y -0.0193   IN WINDOW
+
+## ⭐⭐ `yearlyMs` — THE COST CURVE OF THIS ONE WORLD (no seed confound)
+   entries 600
+   through year   cumulative run-A cost   s/settlement-year to that point
+   y100               270.9 s        0.6772
+   y200               586.3 s        0.7329
+   y300               938.2 s        0.7818
+   y400              1342.7 s        0.8392
+   y500              1776.1 s        0.8880
+   y600              2211.6 s        0.9215
+
+   per-year cost by CENTURY (the age term, measured inside one run):
+     years   1-100   mean   2708.8 ms/year   (baseline)
+     years 101-200   mean   3154.6 ms/year   x1.165 of the first century
+     years 201-300   mean   3518.2 ms/year   x1.299 of the first century
+     years 301-400   mean   4045.1 ms/year   x1.493 of the first century
+     years 401-500   mean   4333.9 ms/year   x1.600 of the first century
+     years 501-600   mean   4355.0 ms/year   x1.608 of the first century
