@@ -45,3 +45,46 @@ Measured citation table (old → new), each re-verified after the edit:
 
 ### ⚠ OUT-OF-SCOPE DEFECT OBSERVED, NOT TOUCHED (chair row)
 The NEXT subsection, "AccountMenu (chip + dropdown)" (`docs/UIUX_AUDIT_AND_PLAN.md`, the `*Purpose:*`/`*Layout today:*` lines and the two `**good**` rows), describes a **three-row dropdown ending in a divided, danger-toned Sign out** and cites `AccountMenu.jsx:145-163` / `:156-164`. Measured at `0eb028111`: the dropdown is `AccountMenu.jsx:185-201` and its three rows are **Account / Messages / Manage subscription & credits** — there is **no Sign out row and no divider** in the component. Two `**good**` verdicts there rest on code that is not in the build. Out of my brief's scope (I touched nothing); recommend a follow-on docs car.
+
+---
+
+## P2/P3 — CAR 2 measurement (CONFIRMED at `0eb028111`, before any test was written)
+
+### The brief's premises, re-derived — three drifted, none load-bearing
+| Brief claim | Measured |
+|---|---|
+| `HeraldBody.jsx:239-245` mounts `<WarResolveSection>` | **:240-246**; and it is the **sixth** child of the war grid, not the fifth — the brief's list omits `<DoorLensChip section="war" />` at :233 |
+| `flag('warEconomySurfacing')` at `HeraldBody:192` | ✅ exact |
+| `WarResolveSection` hosts at `:163, :171` | ✅ exact |
+| `HowToUse.jsx:436` renders the voiced header via `PageHeader` | `:436` is `const voiced = useFlag('handbookVoice')`; **`<PageHeader {...header} />` is at :454** |
+| `HowToUse.jsx:192` forks the essay coda inside `QuickStart` (:183) | `:192` is the `useFlag` read; **the fork is at :263** (`{voiced ? <VoicedConceptIntro /> : conceptIntro}`). `QuickStart` at :183 ✅ |
+| `GuideSection` "always open (design §3)", `:71-73` | **:73-81** (the docblock's phrase is at :70-71) ✅ in substance |
+| flags ship `true` | ✅ `flagRegistry.js:117` (`handbookVoice`), `:118` (`warEconomySurfacing`) |
+
+### THE HOST CHAINS, AND WHICH MECHANISM EACH PRIMITIVE OFFERED
+**War & Resolve** — `HeraldBody:231` → `HeraldSection:51` grid → **`:52 {children}`** → `HeraldBody:232` grid → `:240 {showResolve && …}` → `WarResolveSection:154` → **`:163 <Section heading="At war">`** → `WorldPulsePrimitives:187 <section>` → `:196 {children}`.
+- `HeraldSection` — **offers no fold on this path at all.** Its `{children}` (:52) is rendered OUTSIDE the `<Section>` opened at :53, which wraps only the report feed. The brief's "inside `HeraldSection`" is true of the component, not of its fold. *Mechanism used: a positional source read, pinned in the test.*
+- `WorldPulsePrimitives.Section` (:185-199) — **is not a fold.** Plain `<section>` + `<h3>` + unconditional `{children}`; no open state, no `defaultOpen`, no `aria-expanded`, no toggle. The file's only `useState` (:59) belongs to an unrelated input. *It offered NO runtime mechanism, so the source read was the only honest instrument.*
+- `<Section heading="At war">` carries no `collapsible` ⇒ the walker's `hostOpenness` (:1420-1428) grades it **open**. *Mechanism used: source read of the opening tag, exactly as the walker does.*
+- `RealmInspector` — no `<Section>`/`<Collapsible>` anywhere; its only `hidden` is `overflow: 'hidden'`, which is not a first-paint hide.
+- ⚠ The one real gate is DATA, not a fold: `{atWar.length > 0 && …}` (:162). Hence the siege fixture.
+
+**The Handbook** — `HowToUse:453 <Page>` → `:454 <PageHeader>` (header) and `:458 <GuideSection unit="quick">` → `QuickStart:183` → `:263` fork (essay).
+- `GuideSection` (:73-81) — **not a fold**: plain `<section>` + `<h2>` + unconditional `{children}`, "the de-collapsed replacement for a former tab … always open (design §3)" (:70-71).
+- `Page` and `PageHeader` (primitives) — plain divs; no fold, no `hidden`, no `aria-hidden`. `PageHeader` renders the title as `<h1>` (`as = 'h1'`, :27,:44), so the header is assertable by ROLE.
+- *No primitive on this page exposes `aria-expanded` or a toggle heading, so the fold half is asserted at the DOM level instead — see the finding below.*
+
+### ⭐ FINDING — `standalone` IS INERT, AND THE EXISTING PIN'S DOCBLOCK IS STALE
+`export default function HowToUse()` (`HowToUse.jsx:429`) **takes no props**; `grep -c standalone src/components/HowToUse.jsx` = **0**. So `<HowToUse standalone />` (the existing pin, `handbookVoice.test.jsx:53,63,72,82`) and `<HowToUse />` (`AppViews.jsx:133`) mount the IDENTICAL tree — the brief's P3 question, answered.
+Consequently `expandHandbook` (`handbookVoice.test.jsx:33-37`) is a **DEAD HELPER** and its docblock claim ("the Keeper's Handbook … is COLLAPSED by default", :30-32) is **STALE** — there is no `button[aria-expanded]` matching /Keeper/ in the rendered page. It is the very `openSection()` shape the walker condemns at :1294-1299. I did NOT delete it (it is not my car and the pins above pass); I pinned its premise dead instead, so a reintroduced fold reds.
+
+## ⛔ STOP RULE: **NOT FIRED.** Both surfaces PASS the first-paint law.
+No shut fold, no hidden ancestor, prose present on first paint with zero interaction, on both. No `test.todo`, no CAR 3, **zero `src/` bytes**.
+
+## PREDICTIONS — IN WRITING, BEFORE ANY REGISTER INSTRUMENT RUNS
+Tests added: warFaithSurfacing **+3**, handbookVoice **+3** ⇒ **N = 6**. `describe(` added: **+1** each ⇒ **M = 2**. No file added, renamed or deleted.
+- **Lighting census** — `files` **2543 UNCHANGED**, `parked` 373, `credited` 2170 unchanged. `titles` 23653 + 1 (the anchor car's, already in the tree and not mine) + 6 = **23660**. `suiteTitles` 6333 + 2 = **6335**. The arm is sequenced and stops at the first failure, so I predict **exactly ONE red**: `expected 23660 to be 23653` (ACTUAL first), with suiteTitles never reached. The door is the chair's — I take no `LIGHTING_CENSUS_REFREEZE`.
+- **Test ratchet** — totalTests 31970 + 1 + 6 = **31977**, and **NO DOOR OWED**: `check-test-ratchet.mjs` compares against `Math.floor(total × 0.9)` collapse floors (the anchor car's P4), and 31977 sits far above `floor(31970 × 0.9)` = 28773.
+- **Negative-assertion frozen rows — UNCHANGED, both.** Scanned with the walker's own three rules (`BARE_NEGATIVE_RE` / `HELPER_RE` / `ANNOTATION_RE`, :92-98,:124-134): `tests/components/warFaithSurfacing.test.jsx` = **0 un-anchored ⇒ stays ABSENT from the frozen list** (it is absent today); `tests/components/handbookVoice.test.jsx` = **2 un-anchored, at :58 and :68, both PRE-EXISTING ⇒ stays at its frozen 2** (`negativeAssertionAnchor.walker.test.js:303`). Every negative I wrote is anchored: 4 via `expectAbsentWithAnchor`, 2 via a `// anchored:` line.
+- **OSR** — `check-observed-shape-readers.mjs` = **1972 exact**, no drift (zero `src/` bytes).
+- **Typecheck** — **NOT OWED**: zero `src/` bytes in either car. (A CAR 3 cure would have owed `typecheck:domain:strict` + `typecheck:ratchet`; no CAR 3 exists.)

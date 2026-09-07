@@ -28,7 +28,7 @@
   "argsFile": "args-wolfe-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--wolfe-r8.js",
-  "status": "RUNNING (session df942c1b): synth DONE 21:48 (section-wolfe.md 139,632 B); critic in flight — r8 = the r7 tail",
+  "status": "COMPLETE 22:5x (r8 = the r7 TAIL: synth 21:48 section-wolfe.md 139,632 B, 42 features; critic-wolfe.md rewritten). STOPPED by S-BOUND rule 4 (the one top-up was r7). Critic headlines → S12 input + the open triage decision: ~60 SKIPPED_TRIAGE rows would move features (Thrust 1983, Gordon 1986, Auerbach, Clute SFE); feature 40's numeric guards rest on one reddit poster; feature 3's 'a third under eight words' has NO row (metrics json only); 116 kept rows used in no feature; seven printed quotations have no home in their cited row; 277 untagged rows break the coverage table; the Le Guin blurb is reconstructed across four rows (print one fragment); two 13-word kept quotes to trim at source (326, 1244); 681's '1966' implausible on its face.",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--wolfe-r7.js",
   "prev": {
    "runId": "wf_1326cde9-2e5",
@@ -38,11 +38,11 @@
   "dryCheck": "22:15: 42 features vs 38 (section-wolfe.r7.md from the 21:25 seal): 6 new (le guin on wolfe; cadence shifts; the same fact printed differently; the imitation fails as mannered; what the dissent says; the archivist moralises nothing) / 2 dropped. NOT dry by the letter, but wolfe's ONE critic-driven top-up is spent (rule 4) — no further round; the 6 go to S12 as input."
  },
  "martin": {
-  "runId": "",
+  "runId": "wf_0cd91522-1ce",
   "argsFile": "args-martin-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--martin-r8.js",
-  "status": "BUILT 21:11, NOT LAUNCHED — queued for the next free research slot; critic only (skipSynth)",
+  "status": "RUNNING since 22:52 (session df942c1b) — critic only (skipSynth); section-martin.md 15:41 stands",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--martin-r7.js",
   "prev": {
    "runId": "wf_3a29e467-750",
@@ -64,7 +64,7 @@
   "argsFile": "args-dnd-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r8.js",
-  "status": "RUNNING (session df942c1b): synth DONE 21:46 (section-dnd.md 127,898 B); critic in flight — r8 = the r7 launch rebuilt (synth + critic)",
+  "status": "COMPLETE 22:5x (r8 = the r7 launch rebuilt: synth 21:46 section-dnd.md 127,898 B, 50 bold-numbered features; critic-dnd.md 24,659 B, r1 critic preserved as critic-dnd.r1.md). ⚠ THE CRITIC STILL NAMES THE PLACE HOLE (the S-BOUND condition for dnd's ONE targeted FIND round — owner-gated): the 5e settlement gazetteers (Ten-Towns, Baldur's Gate, Vallaki, Sigil, SCAG: 0 hits), 2014 DMG ch. 5 Settlements + Random Settlements tables (0 rows), the SRD measurement (0 hits), the editorial staff (0 rows). Also: eight PARTIAL rows cited as kept; two Rules adopt a PARTIAL limb; rows 1–2 mis-graded CONTRADICTED (superseded, not contradicted); ~35 triage-skipped rows would move features; 34 kept URLs on dead/hijacked hosts; self-contradictions f9 vs f32 etc. → S12 input.",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--dnd-r7.js",
   "prev": {
    "runId": "wf_3d71f708-fe3",
@@ -74,11 +74,11 @@
   "dryCheck": "22:15 (dry-check.py now reads BOLD-numbered features too — the old heading-only regex read 0 and printed a FALSE dry): 50 features vs 19 in the r7 snapshot (section-dnd.r7.md, recovered from the 21:25 kit seal — the 21:42 seal held a MID-WRITE 20 KB partial; never snapshot from a seal taken while a synth is writing): 45 new / 14 dropped by the four-word key — the section was REWRITTEN in the new form, so the diff is a re-keying, not 45 discoveries. NOT dry by the letter; this was a synth-only completion round over verified claims — no FIND round follows unless the critic names the PLACE hole (S-BOUND: ONE targeted round, owner-gated)."
  },
  "ai": {
-  "runId": "",
+  "runId": "wf_d3face35-f20",
   "argsFile": "args-ai-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r8.js",
-  "status": "BUILT 21:11, NOT LAUNCHED — queued after martin; critic only (skipSynth)",
+  "status": "RUNNING since 22:53 (session df942c1b) — critic only (skipSynth); section-ai.md 15:34 stands",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--ai-r7.js",
   "prev": {
    "runId": "wf_b15831a8-df4",
@@ -95,17 +95,19 @@
    "ai"
   ],
   "running": [
-   "wolfe",
-   "dnd"
+   "martin",
+   "ai"
   ],
   "resume": "keep TWO research runs alive: when one completes (its task notification), LAUNCH the next in `order` by Workflow({scriptPath: d[<next>].scriptPath}) (martin, then ai — their scripts are built; a runId of '' means never launched); set its runId/status RUNNING here. In THIS session a completed run's runId can be resumed by resumeFromRunId; a NEW session must rebuild (CONFIRM_DEAD=1 sh $SC/resume-research.sh <names>) and re-embed.",
   "done": [
    "hobb",
    "leguin",
    "kay",
-   "tolkien"
+   "tolkien",
+   "wolfe",
+   "dnd"
   ],
-  "open_decision": "TRIAGE-BY-FEATURE completion pass for leguin (~250–300) and hobb (~60): a kit change (split-chunks --triage keyed on section features × witness) + verify-only runs; owner-gated on cost under the 17:40 cap",
+  "open_decision": "(1) TRIAGE-BY-FEATURE completion pass — verify-only: leguin ~250–300, hobb ~60, wolfe ~60, dnd ~35 rows (both new critics re-name it); a kit change (split-chunks --triage keyed on section features × witness) + verify-only runs; owner-gated on cost under the 17:40 cap. (2) dnd's ONE targeted FIND round: its new critic still names the PLACE hole (5e gazetteers, DMG ch. 5 Settlements, SRD measurement, editorial staff) — S-BOUND allows exactly one; owner says go. (3) ai: decided by its r8 critic (running).",
   "at_switch_2044": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time",
   "resumed_2112": "session df942c1b: wolfe r8 wf_8cd21474-a7b + dnd r8 wf_f191dac2-82a launched 21:12; martin r8 / ai r8 built and waiting"
  }
