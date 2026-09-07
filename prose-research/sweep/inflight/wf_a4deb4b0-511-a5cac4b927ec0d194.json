@@ -3,19 +3,20 @@
  "name": null,
  "angle": null,
  "tag": null,
- "lines": 61,
+ "lines": 100,
  "firstTs": "2026-09-07T15:51:52.121Z",
- "lastTs": "2026-09-07T15:55:01.916Z",
+ "lastTs": "2026-09-07T15:58:42.834Z",
  "tools": {
-  "Bash": 15,
-  "Read": 1
+  "Bash": 23,
+  "Read": 1,
+  "StructuredOutput": 1
  },
  "urlsFetched": [],
  "filesWritten": [],
- "lastAssistantText": "I'll start by recording state and reading the receipt and brief in full.",
+ "lastAssistantText": "Work complete. Recording the verdicts.",
  "run": "wf_a4deb4b0-511",
  "agent": "a5cac4b927ec0d194",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/8de5f153-f375-48fb-803c-ec578a273a4a/subagents/workflows/wf_a4deb4b0-511/agent-a5cac4b927ec0d194.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": null
 }
