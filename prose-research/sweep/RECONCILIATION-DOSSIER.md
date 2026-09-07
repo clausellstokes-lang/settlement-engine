@@ -429,3 +429,10 @@ Seat: Fable 5.1 — validated.
 One block of the town record (the line that names the governing body, three variants) was rewritten so that the facts stayed and the shape varied where the data allowed. It took three attempts and three independent adversaries: the first attempt changed claims and rested on a bug in the probe script; the second over-stated what the data allows and mis-read one verb; the third could not break either rewritten sentence, and every fault it found was in the chair's labels, corrected in the sample's §8. What it proved: the rewrite can remove the machine tells without changing a fact, and the two shapes the block shows were already in it — more shapes need more typed facts, which is the authoring wave you chartered (§11). With Part B and this dossier ratified at §912, the reconciliation has fully passed. Your pause of 12:40 is discharged by its own condition. Next: the checkers are built (the entry walker, the shape walker with your three numbers, the presence measure, the unrendered-facts count), then the blind DM panel, then the rewrite wave, then your walk. Files: `s12-sitting/taste/TASTE-SAMPLE-912-v3.md` and the three refutations beside it.
 
 Seat: Fable 5.1 — validated.
+
+---
+
+## §14 OWNER DIRECTIVE — the blind DM panel is struck; the beta is the panel (appended 2026-09-07 19:10 EDT by the Fable chair; §0–§13 byte-unchanged,      431 lines)
+You ruled (~20:10): there are no game masters to convene, so the panel step is skipped; the real game masters come from the beta launch at the end. What that changes: before launch, the rewrite is accepted by the checkers, by adversaries who report findings for the chair (never a pass), and by your walk. After launch, your beta users are the panel — and the chair recommends the beta be able to record what the panel would have told us: which sentence a reader thought was machine-made, whether a town read as a real place, and what made them want to play. That is a product design item for the beta, yours to want. §6.4 of this dossier is superseded. Ledger §912.6.
+
+Seat: Fable 5.1 — validated.
