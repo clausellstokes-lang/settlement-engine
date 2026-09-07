@@ -70,3 +70,171 @@ Opus finder, 2026-09-06. Method: OPUS-FINDER-METHOD.md.
   (NUCLEUS gen-ppl ~47–50 vs HUMAN 24.01 on Wikipedia text: nucleus prose is about twice as surprising as the human encyclopedic reference.)
 - §4.3 human eval: 200 prefixes of length 32 from Wikitext-103 test set, continuations of length 128, five graders, 9,000 annotated samples, 5-point Likert on coherence/fluency/informativeness. SimCTG+contrastive beats nucleus on coherence and fluency, Sign Test p<0.05.
 - §6.1 self-similarity defined per Ethayarajh; at output layer (layer 12) SimCTG self-similarity "notably lower than other baselines".
+
+# ============================================================
+# ROUND 2 — successor Opus finder, 2026-09-06/07 night
+# The predecessor's ROSTER was complete (all six named items fetched). This round
+# opened at the EXPANSION phase and read only sources ABSENT from its 30-url list.
+# 21 new substantive sources, 92 new claims. Raw text under sweep/dec2/*.txt.
+# ============================================================
+
+## ⭐ THE HEADLINE FINDING FOR THE SYNTHESIS: the register gap is NOT where the program thinks it is.
+The method file says of the AI catalogue: "a source that measured the archival or encyclopedic
+register (none has, so far)". For the CRAFT/INDUSTRY/VOICE angles that is right. For THE DECODING
+LITERATURE IT IS FALSE, and by a wide margin: this literature is disproportionately measured on
+Wikipedia. Sources read this round that measured the encyclopedic register directly:
+  - Xu et al. (DITTO, NeurIPS 2022) — Wikitext-103, human 0.01% vs MLE 14.50% sentence repetition
+  - Welleck et al. 2020 — Wikitext-103; GPT2-117M greedy non-termination ratio 37.91%
+  - Meister & Cotterell (ACL 2021) — models TRAINED ON WIKIPEDIA DUMPS; Zipf, Heaps, length,
+    stopword and symbol distributions of generated vs human encyclopedic text
+  - Ravfogel et al. (Conformal Nucleus Sampling) — 10,000 English Wikipedia items; OPT overconfident
+  - Li et al. (Contrastive Decoding) — human eval on wikipedia + wikinews + story
+  - Ji et al. (ICLR 2024) — Wikipedia and News domains, GPT-2 XL and OPT-6.7B
+  - Zhou et al. (Balancing Diversity and Risk) — Wikipedia-English prefix tree
+  - Liu et al. (FACE-2, Findings of EMNLP 2025) — Wikipedia-English + BBC-News + WritingPrompts
+  - Garces Arias et al. (Decoding Decoded) — book, wikinews, wikitext
+  - Su et al. (contrastive search) — Wikitext-103 (predecessor already banked this one)
+WHAT IS STILL MISSING: nobody measures the register the dossier actually wants — a civic record, a
+gazetteer, an annal. Two dedicated searches for that returned nothing; that absence is the finding.
+
+## 1. FINLAYSON, HEWITT, KOLLER, SWAYAMDIPTA, SABHARWAL — Closing the Curious Case (2310.01693, ICLR 2024)
+The direct answer to the angle's anchor paper. Truncation works because it PROVABLY keeps you inside
+the true support (Corollary 1) — but a threshold "is an inherently limited approach": if the model
+ranks a bad token above a good one, NO threshold separates them. Source of the error named: the
+SOFTMAX BOTTLENECK (low-rank output matrix). MAUVE, lower-entropy OWT: eta 85.0/90.4/86.0/87.1 vs
+BA-eta 87.8/92.2/88.4/89.6 (Small/Medium/Large/XL). Honest: no method best at every size.
+Human raters preferred LOWER-ENTROPY generations — the paper's own explanation is that a rater
+seeing one sample per method cannot assess diversity. ⭐ THAT IS A CAUTION FOR OUR OWN TASTE PANELS.
+
+## 2. XU, LIU, YAN, CAI, LI, LI — Learning to Break the Loop (2206.02369, NeurIPS 2022)
+THE MECHANISM OF THE LOOP, measured. Self-reinforcement: IP1 > 90% — a SINGLE sentence-level context
+repetition already raises the repeat probability, before any token has repeated. Higher initial
+probability ⇒ stronger self-reinforcement ⇒ a model's OWN maximisation output is the text most at
+risk. Human Wikitext-103: 0.02% (abstract) / 0.01% (Table 1) consecutive sentence repetition.
+Refutes Fu et al.'s first-order-Markov account: "language models do look at the long-distance context".
+
+## 3. WELLECK, KULIKOV, KIM, PANG, CHO (2002.02492) — greedy, beam, top-k AND nucleus are all
+INCONSISTENT: each can return an infinite-length sequence of ZERO probability under the model itself.
+GPT2-117M greedy on Wikitext-103: rL = 37.91% (L=1500). Nucleus is NOT immune: 0.06% / 0.13%.
+
+## 4. FU, LAM, SO, SHI (2012.14660, AAAI 2021) — DISPUTES architecture and sampler as the cause;
+locates it in "the traits of our language" — the HIGH INFLOW problem (too many words predict the
+same next word). Round-2 note: Xu et al. above refute the Markov assumption this rests on.
+
+## 5. MEISTER, VIEIRA, COTTERELL (2010.02650, EMNLP 2020) — ⚠⚠ THE TENSION THE SYNTHESIS MUST HOLD.
+Beam search works because it enforces UNIFORM INFORMATION DENSITY; LOWER surprisal standard
+deviation correlated with HIGHER BLEU. That is the OPPOSITE polarity to Holtzman's burstiness
+figure. RESOLUTION: the domain differs — this is NMT (IWSLT'14, WMT'14), a constrained task with a
+reference, not open-ended generation. Do not cite either for the other's domain.
+
+## 6. PILLUTLA et al. — MAUVE (2102.01454). Greedy .016, ancestral .882, nucleus .940 (GPT-2 XL, web).
+⭐ "nucleus sampling does not effectively cover the human text distribution" (Type II error) and
+"some pieces of plausible human text cannot be generated by truncation-based decoding algorithms".
+That is the metronome stated as a theorem of coverage. Spearman with human human-likeness: MAUVE .952.
+
+## 7. ZHANG, DUCKWORTH, IPPOLITO, NEELAKANTAN (2004.10450) — THE LIKELIHOOD TRAP (146 crowdworkers,
+100 sentences): human quality ratings turn NEGATIVE against model log-likelihood past an inflection
+point. 38,000+ ratings on ~10,000 samples. ⭐ AND: "when aligned on entropy, sample quality between
+all autoregressive decoding algorithms is comparable" — samplers only diverge at LOW entropy.
+
+## 8. NADEEM, HE, CHO, GLASS (2009.07243, AACL 2020) — top-k, nucleus and tempered sampling are ON A
+PAR under human eval (602 crowdworkers; GPT2-small fine-tuned on Gigaword and Wikitext-103). The
+three shared properties: entropy reduction, order preservation, slope preservation.
+
+## 9. IPPOLITO, DUCKWORTH, CALLISON-BURCH, ECK (1911.00650, ACL 2020) — ⭐ "improvements in decoding
+methods have primarily optimized for fooling humans." MEASURED LEXICAL MECHANISM: top-k puts up to
+80% of its mass in the 500 most common token types; nucleus, pure sampling AND human text need
+≥1,100 types for the same share. Human raters: 71.4% accuracy on 192-token excerpts.
+
+## 10. PEEPERKORN, KOUWENHOVEN, BROWN, JORDANOUS (2405.00492, ICCC 2024) — THE TEMPERATURE VERDICT.
+Llama 2-Chat 70B, t ∈ {.001,.334,.667,1.0,1.334,1.667,2.0}, 36 participants, 31 stories.
+Weak positive novelty correlation, negative coherence correlation; "far more nuanced and weak than
+suggested by the creativity parameter claim"; t>1.0 did NOT reliably add diversity.
+
+## 11. MEISTER & COTTERELL (2106.00085, ACL 2021) — trained on WIKIPEDIA DUMPS. Nucleus aligns closest
+to natural-language distributions; BEAM sampling diverges strongly across length/stopword/symbol.
+Warns that Zipf adherence is a bad gauge. Gives quantitative backing to "babble repetitively".
+
+## 12. TANG, LIU, XU, HUANG — top-nSigma (2411.07641). At T=3.0, GSM8K: sample 0.00, top-p 0.00,
+top-k 2.34, min-p 14.84, top-nSigma 74.61 (LLaMA-3-8B-Instruct). ⚠ REGISTER: REASONING, NOT PROSE.
+Claims top-p and min-p admit MORE noise as temperature rises. Best temperature ≈1.5.
+
+## 13. LI, HOLTZMAN et al. — Contrastive Decoding (2210.15097, ACL 2023). Human eval on wikipedia,
+wikinews, story: CD preferred 2.6x over nucleus on coherence, 1.4x on fluency. ⭐ THE QUALITATIVE
+NUCLEUS FAILURE IS A REGISTER FAILURE: "a style shift from third person narrative style to first
+person conversational style" mid-continuation, plus a drift into email format.
+
+## 14. ZHOU, KEUPER, FRITZ (2408.13586) — reported sampler gains are "highly dependent on the curated
+parameters"; "There exists no universal optimal paramters" [sic]. Wikipedia-English prefix tree:
+the truncation point that exactly covers the real continuations varies drastically per prefix.
+Mirostat performed poorly on all three downstream tasks.
+
+## 15. MEISTER, PIMENTEL, MALAGUTTI, WILCOX, COTTERELL — On the Efficacy of Sampling Adapters
+(2307.03749, ACL 2023). ⭐⭐ THE THEORETICAL STATEMENT OF THE METRONOME: every adapter is a
+PRECISION-FOR-RECALL TRADE — "a model loses its ability to produce certain strings", precision on
+desirable text rises. Not visible in perplexity. AND the honest nuance: the BEST quality scores come
+from an INTERMEDIATE point, not from maximum precision.
+
+## 16. JI, KE, WANG, HUANG (2310.01041, ICLR 2024) — Wikipedia + News, GPT-2 XL and OPT-6.7B.
+Sampling gives less repetition but "disjunctive in discourse"; search keeps coherence and repeats.
+Nucleus reaches human-level diversity "at the cost of low coherence"; typical decoding gives the
+highest diversity AND the lowest coherence (severe topic shift).
+
+## 17. AHMED & SINGH — Entropy-Aligned Decoding, EPIC (2601.01714, Jan 2026 preprint). top-p, top-k
+AND min-p all "exhibit systematic bias away from the target entropy" even tuned. WritingPrompts
+win rate vs min-p (ChatGPT-5 judge, 10 seeds): top-k 54%, top-p 51%, typical 43%, TEMPERATURE
+tau=1.5 **0%**, EPIC 58%. ⚠ LM-as-judge, not human raters; base model not named in the text read.
+
+## 18. CHANG et al. — REAL Sampling (2406.07735). The trade stated plainly: a higher p raises
+diversity and lowers factuality.
+
+## 19. RENZE & GUVEN (2402.05201) — NULL RESULT: temperature 0.0-1.0 has no statistically significant
+effect on problem-solving accuracy (nine LLMs x five prompting techniques). ⚠ MCQA, not prose.
+
+## 20. ILINYKH & DOBNIK (2511.04754) — ⚠⚠ THE METHODOLOGICAL LANDMINE UNDER FEATURES 5/11/17.
+Humans show ~2x the surprisal variance of models under a caption-trained n-gram scorer — but
+rescoring the SAME texts with a general LM REVERSES the finding. "relying on a single scorer can
+completely invert conclusions." Any burstiness measurement we build must report several scorers.
+
+## 21. XU, ZHOU, CELIKYILMAZ, MA — Look-back (2305.13477). The minimum KL between the current step's
+distribution and earlier steps' distributions falls toward 0 as a loop sets in; human continuations
+keep it away from 0. Also: the coherence hypothesis fails — greedy confidence-following can be
+INCOHERENT. Relays the induction-head ("analogical sequence copying") account.
+
+## 22. RAVFOGEL, GOLDBERG, GOLDBERGER — Conformal Nucleus Sampling (2305.02633). ⭐ OPT models are
+OVERCONFIDENT: the true next word falls inside the top-p set LESS than p of the time, on 10,000
+English Wikipedia items. Worst in the LOWEST-ENTROPY contexts — exactly where truncation bites
+hardest. Calibration shows moderate INVERSE scaling with model size.
+
+## 23. BOREC, SADLER, SCHLANGEN (2408.16345) — widening the nucleus reduces memorisation only
+modestly; "soft memorization" (echoing training data without verbatim resemblance) survives it.
+
+## 24. LIU, LI, XU, WANG, YUAN, YANG — FACE-2 (Findings of EMNLP 2025, pages 2444-2463). ⭐⭐ THE
+MODERN METRONOME INSTRUMENT: the SPECTRUM of surprisal over position, on Wikipedia-English, BBC-News
+and WritingPrompts, models to 70-72B. Larger models produce a spectrum closer to human. ⚠ MODEL-ERA
+DRIFT stated explicitly: FACE-1's GPT-2-era conclusions on scaling and sampling "does not
+necessarily apply to current LLMs."
+
+## 25. GARCES ARIAS, LI, HEUMANN, ASSENMACHER — Decoding Decoded (2410.06097). 2.2 million
+continuations across book/wikinews/wikitext. Optimal configurations vary by model AND task.
+"Larger models do not show a clear advantage" — GPT2-XL (1.5B) sometimes beats Llama3 (8B).
+Beam search fails against human references everywhere.
+
+## 26. MAHAUT & FRANZON (2504.01100, Nov 2025) — REPETITIONS ARE NOT ALL ALIKE. Pythia 1.4B across
+checkpoints: an ICL copying loop with a dedicated attention circuit, versus a natural loop that
+appears early, has NO identifiable circuit, and attends disproportionately to LOW-INFORMATION
+tokens (punctuation, newlines) — a fallback when context cannot be retrieved. Both uncertainty AND
+over-reliance on context drive repetition; they are concurrent, not rival, mechanisms.
+
+## SOURCES DELIBERATELY NOT CLAIMED (off this angle, belong to another finder)
+- StoryScope (2604.03136, COLM 2026) — superb on AI fiction, but ZERO mentions of surprisal,
+  temperature or decoding. Discourse-level narrative features. Hand to the craft/close angle.
+- AI as Humanity's Salieri / Creativity Index (2410.04265) — n-gram overlap, not decoding.
+- Narrative Flattening (2605.27878), Readers Prefer AI Trained on Copyrighted Books (2510.13939) —
+  surfaced in search, off-angle here, worth flagging to the craft and reception angles.
+
+## STOPPING RULE
+Roster exhausted by the predecessor. Six lateral searches run this round; the last two surfaced
+nothing new on-angle (the Mirostat query returned only Mirostat itself; the fiction-sampler query
+returned fiction-evaluation papers with no decoding content). Two dedicated searches for a decoding
+study in the gazetteer/annals/civic-record register returned nothing — recorded above as a finding.

@@ -1,12 +1,12 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:13:11 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:19:12 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | failed | 0 | — | — | 03:45:47 |
 | ai | critic |  | result | 0 | critic-ai.md | — | 02:25:15 |
 | ai | finder | arch-biographical-record | result | 57 | — | 104 claims, complete=True @23:50:23 | 03:27:43 |
-| ai | finder | arch-decoding-literature | in-flight | 31 | — | 180 claims, complete=False @00:12:36 | 04:13:05 |
-| ai | finder | arch-decoding-literature | failed | 30 | — | 180 claims, complete=False @00:12:36 | 03:45:34 |
+| ai | finder | arch-decoding-literature | in-flight | 31 | — | 180 claims, complete=True @00:14:26 | 04:14:47 |
+| ai | finder | arch-decoding-literature | failed | 30 | — | 180 claims, complete=True @00:14:26 | 03:45:34 |
 | ai | finder | arch-gazetteer-travel-history | result | 32 | payload.json, payload2.json | 79 claims, complete=True @23:50:23 | 03:15:34 |
 | ai | finder | arch-historical-fact-measured | result | 22 | — | 69 claims, complete=True @23:50:23 | 03:16:09 |
 | ai | finder | arch-second-tell-catalogue | failed | 51 | — | 80 claims, complete=True @23:45:42 | 03:45:43 |
@@ -43,7 +43,7 @@
 | dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:50:21 | 03:18:23 |
 | dnd | regrade | regrade-r10 | result | 0 | — | — | 04:08:15 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
-| dnd | synth |  | in-flight | 0 | — | — | 04:12:36 |
+| dnd | synth |  | in-flight | 0 | — | — | 04:17:23 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
 | dnd | verifier | i1007-1021 | result | 2 | — | verdict file WRITTEN | 03:45:27 |

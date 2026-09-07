@@ -54,7 +54,7 @@
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-decoding-literature.json",
   "claims": 180,
-  "complete": false,
-  "mtime": "00:12:36"
+  "complete": true,
+  "mtime": "00:14:26"
  }
 }
