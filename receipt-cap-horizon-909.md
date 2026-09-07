@@ -200,3 +200,27 @@ What the 600-year run CAN answer, and what this lane will answer with it:
    the 300-year world's 0.4787? Two seeds agreeing is evidence about the FIXTURE FAMILY; two seeds
    disagreeing would mean the §907 figure is seed-specific and the tuning desk is reading noise.
 Both readings are reported. Neither is presented as the other.
+
+### M1 — RUN A LANDED: **2,239.6 s for 600 y × 4 s = 0.9332 s/settlement-year** (09:28:34)
+⛔ **THE PRE-REGISTERED PREDICTION WAS WRONG BY +23.8 %, AND THAT IS A FINDING, NOT AN
+EMBARRASSMENT.** The linear-age model predicted run A = 1,809 s; it measured **2,239.6 s**. The same
+model reproduced the 300-year run to 1.1 %, so the miss is not arithmetic — **the per-year cost
+accelerates beyond linear once a world passes ~300 years**, and no model fitted inside 300 years
+predicts 600.
+
+| horizon (4 settlements, LIT) | run A | s/settlement-year |
+|---|---|---|
+| 30 y | 55.0 s | 0.4585 |
+| 300 y | 762.3 s | 0.6352 |
+| **600 y** | **2,239.6 s** | **0.9332** |
+
+`run A(600) / run A(300) = 2.938` for a doubled horizon ⇒ an exponent in YEARS of
+`ln(2.938)/ln(2) = 1.555`. Read across the whole range the acceleration is plain: ×10 years
+(30→300) buys ×1.386 on the rate, while the next ×2 years (300→600) buys ×1.469.
+
+⚠⚠ **AND THAT CROSS-RUN READING IS CONFOUNDED BY THE SEED, SO IT IS NOT THE FIGURE THIS LANE
+STANDS ON.** The 300-year and 600-year runs are different worlds (R6). A world with more souls
+costs more per year for reasons that have nothing to do with age. The clean measurement is the
+run's own `yearlyMs` series, which prices any prefix of THIS world — reported when the receipt
+lands. On the 300-year world that instrument reads: century 1 mean **2,147.6 ms/year**, century 2
+**2,504.9** (×1.166), century 3 **2,851.8** (×1.328).

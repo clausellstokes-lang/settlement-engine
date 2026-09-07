@@ -198,3 +198,29 @@ for (let y = 50; y <= yearly.length; y += 50) {
   console.log(`   y${String(y).padStart(3)}  load ${load.toFixed(4)}  ${prevLoad === null ? '' : `Δ50y ${(load - prevLoad >= 0 ? '+' : '') + (load - prevLoad).toFixed(4)}`}   ${load >= 0.6 && load <= 1.05 ? 'IN WINDOW' : 'below the 0.6 floor'}`);
   prevLoad = load;
 }
+
+// ── ⭐⭐ THE PER-YEAR COST SERIES — the SEED-CONTROLLED horizon measurement ────────
+// `yearlyMs` is the run's own per-year wall clock. Summing its first N entries prices an
+// N-year run OF THIS WORLD, so the horizon axis can be read WITHOUT the seed confound that
+// comparing two differently-seeded runs carries.
+const yms = Array.isArray(receipt_yearlyMs(r)) ? receipt_yearlyMs(r) : [];
+function receipt_yearlyMs(rec) { return rec?.yearlyMs; }
+if (yms.length) {
+  console.log('');
+  console.log('## ⭐⭐ `yearlyMs` — THE COST CURVE OF THIS ONE WORLD (no seed confound)');
+  console.log(`   entries ${yms.length}`);
+  const cum = [];
+  let run = 0;
+  yms.forEach((v, i) => { run += Number(v) || 0; cum[i] = run; });
+  console.log('   through year   cumulative run-A cost   s/settlement-year to that point');
+  for (let y = 100; y <= yms.length; y += 100) {
+    console.log(`   y${String(y).padStart(3)}          ${(cum[y - 1] / 1000).toFixed(1).padStart(10)} s        ${(cum[y - 1] / 1000 / (y * Number(r.settlements))).toFixed(4)}`);
+  }
+  console.log('');
+  console.log('   per-year cost by CENTURY (the age term, measured inside one run):');
+  for (let c = 0; c * 100 < yms.length; c += 1) {
+    const slice = yms.slice(c * 100, (c + 1) * 100).map(Number);
+    const mean = slice.reduce((t, v) => t + v, 0) / slice.length;
+    console.log(`     years ${String(c * 100 + 1).padStart(3)}-${String(Math.min((c + 1) * 100, yms.length)).padStart(3)}   mean ${mean.toFixed(1).padStart(8)} ms/year   ${c === 0 ? '(baseline)' : `x${(mean / (yms.slice(0, 100).map(Number).reduce((t, v) => t + v, 0) / 100)).toFixed(3)} of the first century`}`);
+  }
+}
