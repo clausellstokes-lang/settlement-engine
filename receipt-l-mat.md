@@ -403,4 +403,98 @@ brief `$SC/briefs/brief-L-MAT-FIX.md`, drafted from `$SC/skeptic-912/FOLD.md` (s
 | `ls node_modules \| wc -l` | ≈453–454 | 452 (non-hidden; `ls -A` = 454) ✔ |
 | `$SC/HOLD-VITEST` | absent | absent ✔ |
 
-## STATUS: PARTIAL — cars 7/8/9 not yet landed.
+## ARRIVAL CHECK #2 — THE RE-DISPATCHED LANE (2026-09-07 18:45:02 EDT, from `date`) — PASS
+The lane above died with its session mid-car-7, leaving 13 files uncommitted. This is the
+successor's own arrival, taken before touching anything.
+
+| item | required | measured |
+|---|---|---|
+| dock HEAD | `7d96e2b72245fa465182d59dade31621f31ecf2c` | `7d96e2b72245fa465182d59dade31621f31ecf2c` ✔ |
+| `git status --porcelain` | the predecessor's 13 lines | 13 (7 src + 6 test), exactly the chair's list ✔ |
+| `ls -A node_modules \| wc -l` | ≈453–454 | **455** — ⚠ +1 against the brief's window; no install was run by this lane, and the walkers that read the tree are green, so it is recorded, not acted on |
+| `$SC/HOLD-VITEST` | absent | absent ✔ |
+| `pgrep -fl vitest \| grep -v gate-mutex \| wc -l` | 0 | 0 ✔ |
+
+## STATUS: PARTIAL — car 7 LANDED (`f46ba7846`); cars 8/9 not yet landed.
+
+---
+
+## CAR 7 — BEHAVIOUR (sha `f46ba7846`, 2026-09-07 ~19:1x EDT) — DEF-1…DEF-5
+The predecessor's uncommitted work was read file by file against the brief, re-proved, and
+**one item re-cut** (DEF-3, below) before it was committed as this lane's car. Nothing was
+discarded; nothing unaccounted-for was found.
+
+| DEF | measured BEFORE | measured AFTER |
+|---|---|---|
+| 1 | the gallery ingest copied `customContentRoster`, `customContentProvenance` and `_livingContentLawVersion` from a foreign account's dossier into the importer's library, on BOTH gallery paths | `scrubGalleryImportLivingContent` in `importScrub.js` drops all three on both paths; reference-identical when there is nothing to strip |
+| 2 | a LIT marker hydrated by the Library's Load reached `birthConfig` unclamped and minted a roster **on a shipped dark build** (the fold's `probe-chain.mjs`) | the marker is destructured off before the mint spreads; the born world carries no marker and no roster, through the real pipeline. Dial LIT still births v2 — armed in both directions |
+| 3 | a foreign roster + provenance receipt reached `normalizedInput` and therefore persistence, unwarned | both dropped before the entry freezes, one `unsupported` issue each, `settlement_content_record_unmappable` |
+| 4 | after a correctly remapped import, one `revertToSnapshotAction` re-persisted the SOURCE roster (`"src-secret-def"`) | every `versionHistory[i].settlement` takes the same remap-or-drop; the revert restores the destination record, or nothing |
+| 5 | a fully localUid-mapped roster returned `..._identity_incomplete` and the WHOLE roster dropped | a local-only row is carried; an unresolvable localUid still refuses the whole roster; an empty-string `customDefinitionId` is not an identity claim |
+
+**CONFIRMED (executed):** every row above has an arm; all fifteen focused files were run one
+at a time with the exit captured in-shell before any pipe.
+
+### ⚠ REFUSAL 5 — DEF-1's marker drop is GALLERY-SCOPED, not `scrubImportedConfig`'s
+The brief asks for `_livingContentLawVersion` in `scrubImportedConfig`'s destructured drop
+list. **Refused with the measurement:** that destructure is shared by all three import paths
+(`importScrub.test.js`'s store-4 block pins it), and on the ACCOUNT path the marker is a saved
+world's own immutable birth law. Dropping it there reclassifies a v2 world as v1 while the
+account remap keeps its roster — the two halves would then disagree about the same world. The
+strip is a gallery-scoped sibling instead, and the refusal is itself pinned by an arm
+(`⛔ THE ACCOUNT PATH KEEPS THE MARKER`) asserting `prepareSettlementEntry` still returns the
+marker at 2. Predecessor's call; re-derived and adopted by this lane.
+
+### ⚠ THE DEF-3 RE-CUT — a chair-permitted DROP replaces the predecessor's REMAP, on two measurements
+The predecessor implemented DEF-3 by importing the two account-importer remappers into
+`importReconciliationAdmission.js`. That reds **two shrink-only instruments**, both measured:
+
+1. **`writerReach.walker` — 55 passed / 1 FAILED.** Control taken the hard way: with the seven
+   src files restored to HEAD by `git show HEAD:<path>` the same walker is **56 passed**, and the
+   car-7 bytes restored by md5-verified `cp` reproduce the red. A closure probe over
+   `surfaceClosures` located it exactly — the remapper import added three modules to
+   `web-transitive` (`accountSettlementContentPortability.js`, `settlementContentProvenance.js`,
+   `livingContentLawVersion.js`), and `settlementContentProvenance.js` reads `.source` on stress
+   items, so `source on stress` moved `web-transitive=N → R` against a frozen baseline
+   (`scripts/.writer-reach-baseline.json`) this lane may not write.
+2. **`observedShapeReaders.walker` — 42 passed / 2 FAILED**, identities 1397→1399, reads
+   1972→1974. `src/lib/importReconciliationAdmission.js` holds a frozen row for
+   `importedFrom on settlement`, so the resolver binds `settlement`-shaped receivers in this
+   file; `settlement.customContentRoster != null` scored as a reader-with-no-writer, and that
+   baseline is shrink-only **by construction** (`--write` refuses to add an identity).
+
+**The ruling.** R-F says the two records are "remapped-or-dropped" there, and the fold's own
+DEF-3 smallest cure names dropping both as an option. At this boundary the two are
+**behaviourally identical today** — a reconciliation source is an export FILE with no archive,
+no receipt and no pack, so the only constructible identity map is the empty
+`archiveBacked:false` default and every non-null record refuses anyway. The drop is therefore
+the same outcome without dragging two modules into the web closure for no behavioural
+difference, and it states the same rule the gallery strip states one file away. The
+`Object.hasOwn` condition (rather than a value read) is the second half of the same decision.
+Both are argued at the site, not just here. **After the re-cut: `writerReach.walker` 56 passed,
+`observedShapeReaders.walker` 44 passed, closure diff vs HEAD = `livingContentLawVersion.js`
+alone (a constants leaf that reads no field).**
+
+⚠ This is a LANE JUDGMENT inside a chair ruling's stated latitude, not a refusal of R-F: both
+records are still cured, together, on that path. It is vetoable — if the chair wants the shared
+remappers on this boundary regardless, the price is a `writer-reach --write` re-freeze of one
+string and an OSR row that the OSR baseline cannot lawfully take at all.
+
+### THE PROMISE — the paths car 7 touches, each with the arm that proves it
+| path | arm |
+|---|---|
+| create | `⛔ CREATE (THE CLAMP)` + `⛔ THE CLAMP DOES NOT DEFEAT THE MINT` (`livingContentLawWiring`) |
+| read / regenerate | the dark arms and the same-seed control, unchanged and re-run green |
+| persist | `DEF-3 — reconciliation drops what it cannot re-address` (`normalizedInput`) |
+| undo | `a v3 ARCHIVE envelope remaps the SNAPSHOT roster too` + the no-archive twin (`accountImportSlice`) |
+| import (gallery) | `⛔ DEF-1: a foreign scope record never lands in the importer's library` |
+| import (account) | `⛔ THE ACCOUNT PATH KEEPS THE MARKER` + the DEF-5 quartet |
+| public / DM share | unchanged in car 7; `livingContentRosterPublicDrop` 6 passed as a regression control |
+
+### DEFERRED from car 7 (documented, not bugs to re-find)
+- **`node_modules` reads 455**, one above the brief's window. Not acted on: no install was run
+  by this lane and every tree-reading walker is green.
+- **The OSR/writer-reach instruments are blind to import boundaries by construction** — their
+  corpus is GENERATED worlds, which carry neither exactness record while the dial is dormant.
+  Any future cure that READS these keys in a file whose receivers resolve will meet the same
+  wall. Recorded at the site in `importReconciliationAdmission.js`.
