@@ -388,3 +388,61 @@ export function composedFillByBlock(sites) {
   }
   return byBlock;
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// THE UNRENDERED-FACTS CENSUS (§912.1's condition one) — the number the AUTHORING WAVE
+// is sized from.
+//
+// THE QUESTION: per composer, which typed facts does it HOLD — the readings its caller
+// builds for it and the settlement fields it reads — that no sentence RENDERS? A fact the
+// composer touches only to choose a POOL KEY is rendered as a CHOICE and never as a word; a
+// fact it puts in a slot bag is rendered as a word. The gap between the two is what a new
+// pool key would be written FOR.
+//
+// ⚠ WHAT THIS MEASURES AND WHAT IT DOES NOT. It measures REACH, from source: every
+// `readings.x` and `settlement?.x` the composer names. It does NOT measure whether the fact
+// is interesting, whether a sentence could be licensed by it, or whether the engine holds a
+// value for it on any given town. Those are the authoring wave's judgments and the owner's.
+// A fact counted here is a CANDIDATE, and the census says so on every row.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Every typed fact a composer names, split into RENDERED (it reaches a slot bag) and
+ * KEY-ONLY (it only chooses a pool).
+ * @returns {Array<{file: string, held: string[], rendered: string[], keyOnly: string[]}>}
+ */
+export function unrenderedFacts() {
+  const sites = fillSites();
+  return COMPOSERS.map((rel) => {
+    const src = readFileSync(join(ROOT, rel), 'utf8');
+    // Comments name fields constantly and explain why they are NOT read; a census that
+    // counted them would report the composer's own reasoning as its reach.
+    const code = src
+      .split('\n')
+      .filter((l) => !/^\s*(\/\/|\*|\/\*)/.test(l))
+      .join('\n');
+    /** @type {Set<string>} */
+    const held = new Set();
+    for (const m of code.matchAll(/\breadings(?:\?)?\.([a-zA-Z_$][\w$]*)/g)) held.add(`readings.${m[1]}`);
+    for (const m of code.matchAll(/\bsettlement(?:\?)?\.([a-zA-Z_$][\w$]*)/g)) held.add(`settlement.${m[1]}`);
+    // A fact is RENDERED when its name appears inside a resolved slot bag's value — the bag
+    // is the only path from a field to a word.
+    const bagText = sites.filter((s) => s.file === rel).map((s) => s.slots.join(' ')).join(' ');
+    const slotNames = new Set(bagText.split(/\s+/).filter(Boolean));
+    /** @type {string[]} */
+    const rendered = [];
+    /** @type {string[]} */
+    const keyOnly = [];
+    for (const fact of [...held].sort()) {
+      const leaf = fact.split('.')[1];
+      // A field is counted as rendered when a slot of the same name is offered, or when the
+      // field's own name appears in a slot bag's value expression in the source.
+      const inBag = slotNames.has(leaf)
+        || new RegExp(`(slots|Slots)\\s*[:=][^;]{0,400}\\b${leaf}\\b`).test(code);
+      (inBag ? rendered : keyOnly).push(fact);
+    }
+    return {
+      file: rel, held: [...held].sort(), rendered, keyOnly,
+    };
+  });
+}
