@@ -1,16 +1,17 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 16:28:09 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 16:32:09 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ? | critic |  | failed | 0 | — | — | 16:36:44 |
 | ? | critic |  | result | 0 | CRITIC-S12.md | — | 17:49:27 |
-| ? | other |  | in-flight | 0 | — | — | 20:26:48 |
-| ? | other |  | in-flight | 0 | — | — | 20:27:15 |
-| ? | other |  | in-flight | 0 | — | — | 20:27:51 |
+| ? | other |  | result | 0 | refutations.md | — | 20:30:16 |
+| ? | other |  | result | 0 | rulings.md | — | 20:31:15 |
+| ? | other |  | in-flight | 0 | — | — | 20:32:07 |
 | ? | other |  | result | 0 | RECONCILIATION-DOSSIER.md | — | 20:16:53 |
-| ? | other |  | in-flight | 0 | — | — | 20:28:07 |
-| ? | other |  | in-flight | 0 | — | — | 20:27:39 |
-| ? | other |  | in-flight | 0 | chron.mjs, r6.mjs, r6b.mjs, r6c.mjs, r6d.mjs, rest.mjs, run1.mjs, run2.mjs, run3 | — | 20:28:06 |
+| ? | other |  | result | 0 | — | — | 20:29:47 |
+| ? | other |  | result | 0 | — | — | 20:31:41 |
+| ? | other |  | in-flight | 0 | bdash.mjs, chron.mjs, r6.mjs, r6b.mjs, r6c.mjs, r6d.mjs, rest.mjs, run1.mjs, run | — | 20:30:34 |
+| ? | other |  | in-flight | 0 | — | — | 20:32:07 |
 | ? | other |  | result | 0 | — | — | 15:08:52 |
 | ? | other |  | result | 0 | FOLD.md | — | 15:23:48 |
 | ? | other |  | result | 0 | — | — | 15:12:16 |
