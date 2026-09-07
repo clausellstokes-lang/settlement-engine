@@ -2317,5 +2317,74 @@
    "note": "Interview: summary, then analysis of deeper or symbolic connections, then allusion sections - but the next sentences say that was the structure for the short stories, while for the longer works he chose a thesis and built the write-up round it.",
    "fromFile": "verdicts-wolfe-i1143-1157.json"
   }
+ },
+ {
+  "index": 1166,
+  "feature": "withheld information and inference",
+  "claim": "Wolfe stated in his own essay that all four of a character's requested books must have something to do with the narrator, i.e. that no listed object in the scene is inert.",
+  "source": "Roy C. Lackey relaying Gene Wolfe's essay 'Books in The Book of the New Sun' (PLAN[E]T ENGINEERING), Urth mailing list, 2006-10-03",
+  "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058665.html",
+  "quote": "[t]hey all must have something to do with",
+  "page": "body, paragraph 1",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "2006-10",
+  "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium",
+  "verdict": {
+   "index": 1166,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the generalising gloss that no listed object in the scene is inert",
+   "trueWording": "[t]hey all must have something to do with Severian.",
+   "note": "Wayback raw capture. Lackey, Tue Oct 3 2006, quoting Wolfe's essay at second hand from PLAN[E]T ENGINEERING. The first half of the claim is exact, including that the four books are the ones Thecla requested and that Severian is the narrator. The 'i.e.' clause is the claim-writer's extrapolation to scene objects generally: neither Wolfe nor Lackey says it, and the whole point of Lackey's message is that one of the four, the genealogy folio, resists the rule and 'bugs' him.",
+   "fromFile": "verdicts-wolfe-i1158-1172.json"
+  }
+ },
+ {
+  "index": 1169,
+  "feature": "withheld information and inference",
+  "claim": "A character's inheritance of an estate is inferred from one line of reported speech; the death and the inheritance are never stated.",
+  "source": "Roy C. Lackey, Urth mailing list, '(urth) Thecla's genealogy folio' thread, 2006-10-07",
+  "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003053.html",
+  "quote": "Her father was dead, so",
+  "page": "body, 'Which sister is the older?' paragraph",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2006-10",
+  "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 1169,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the death is never stated - Lackey treats the father's death as established textual fact",
+   "trueWording": "Her father was dead, so the estate had evidently fallen",
+   "note": "Wayback raw capture. Lackey, Sat Oct 7 2006, in the 'Which sister is the older?' paragraph. The inheritance limb is exactly supported: it is inferred from doubly reported speech (Severian told Thea what Thecla had told him about refurnishing the estate) and Lackey marks the inference with 'evidently'. The death is not withheld, though: he asserts it flatly here, says earlier in the same message that Thecla's father died before her arrest and that he does not buy Borski's dodge of that fact, and the sibling message at 003055 quotes the text itself, 'my father had given a ball for me each year until his death'.",
+   "fromFile": "verdicts-wolfe-i1158-1172.json"
+  }
+ },
+ {
+  "index": 1250,
+  "feature": "withheld information and inference",
+  "claim": "Knode demonstrates the device by chasing a detail to its root: the first line names a woman who plants a tree, and a line hundreds of pages later, under her married name, shows the narrator is already dead.",
+  "source": "Mordicai Knode, 'Gene Wolfe's Peace Will Leave You Anything But Peaceful', Reactor (Tor.com), 2012-10-26",
+  "url": "https://reactormag.com/gene-wolfe-peace-review/",
+  "quote": "if you chase all the details to their roots",
+  "page": "body, the elm tree demonstration",
+  "kind": "analysis",
+  "polarity": "applies",
+  "date": "2012-10-26",
+  "routeHint": "wayback raw capture https://web.archive.org/web/20260822235215id_/<url>",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 1250,
+   "verdict": "PARTIAL",
+   "trueWording": "much, much later in the book",
+   "unsupportedLimb": "'hundreds of pages later' — the page gives no page distance, only 'much, much later in the book'",
+   "note": "Quote 'if you chase all the details to their roots' is verbatim. Supported limbs: the page quotes the novel's first line naming Eleanor Bold and the planted elm, then the later line addressed to Mrs. Porter (her married name), read as showing Weer is already dead and buried. The quantified distance is the sole unsupported limb; string 'hundreds of pages' is absent from the raw page.",
+   "fromFile": "verdicts-wolfe-i1248-1254.json"
+  }
  }
 ]

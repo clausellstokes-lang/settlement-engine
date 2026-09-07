@@ -3,12 +3,13 @@
  "name": "wolfe",
  "angle": null,
  "tag": "i1203-1217",
- "lines": 66,
+ "lines": 75,
  "firstTs": "2026-09-07T00:28:33.382Z",
- "lastTs": "2026-09-07T00:31:20.440Z",
+ "lastTs": "2026-09-07T00:32:42.219Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 14
+  "Bash": 16,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
@@ -21,9 +22,9 @@
  "run": "wf_1326cde9-2e5",
  "agent": "a8e643f86ad1fa3c6",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a8e643f86ad1fa3c6.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i1203-1217.json",
-  "exists": false
+  "exists": true
  }
 }
