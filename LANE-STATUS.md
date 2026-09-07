@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 01:34:02 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 01:41:08 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 lands with zero product bytes — the three CAPACITY measurements are ta
 
@@ -130,7 +130,7 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
 - **dnd**: claims 1153 · verdicts 1153 (todo 0) · kept 760 · partial 195 · verdict files 70 (triage 2, regrade r6) · section 09-07 00:36 · critic 09-07 01:07
-- **ai**: claims 1518 · verdicts 1518 (todo 0) · kept 1015 · partial 191 · verdict files 84 (triage 2, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
+- **ai**: claims 1518 · verdicts 1518 (todo 0) · kept 1015 · partial 191 · verdict files 84 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-06 22:23
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
@@ -142,4 +142,4 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 - wf_4bd76597-3a3: 8 journal lines, 4 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;77333 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;77335 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
-load: 25.58 18.59 11.46
+load: 22.82 23.00 17.47

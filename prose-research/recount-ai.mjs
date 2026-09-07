@@ -13,7 +13,7 @@ const docKey = (u) => { try { const x = new URL(u); const p = x.pathname.replace
 const isGloss = (r) => /dramatica\.com/.test(r.url) && /storyscope/i.test(r.source + ' ' + r.claim);
 let text = readFileSync(process.argv[2], 'utf8');
 // 1. headers
-const parts = text.split(/(?=^### )/m);
+const parts = text.split(/(?=^#{2,3} )/m);
 const citedAll = new Set(); const partialCited = new Set();
 const out = parts.map(block => {
   if (!/^### /.test(block)) return block;
@@ -30,9 +30,10 @@ const out = parts.map(block => {
   const splits = []; if (kinds.reader) splits.push(`${kinds.reader} reader comment${kinds.reader > 1 ? 's' : ''}`); if (kinds.vendor) splits.push(`${kinds.vendor} vendor statement${kinds.vendor > 1 ? 's' : ''}`); if (kinds.relay) splits.push(`${kinds.relay} relay${kinds.relay > 1 ? 's' : ''}`);
   if (splits.length) h += `, of which ${splits.join(', ')} (kind field, where present)`;
   if (nonllm.length) h += `; ${nonllm.length} non-LLM row${nonllm.length > 1 ? 's' : ''} cited for the human side and not counted`;
-  h += `; ${partRows.length} partial row${partRows.length === 1 ? '' : 's'} cited for quotation only`;
+  h += partRows.length ? `; ${partRows.length} partial row${partRows.length === 1 ? '' : 's'} cited for quotation only` : '; no partial rows cited';
   if (exclKept.length) h += `; excluded row${exclKept.length > 1 ? 's' : ''} ${exclKept.map(i => '[' + i + ']').join(', ')} cited on a supported limb or for the record only`;
   h += '. Counts generated from the JSON by recount-ai.mjs.';
+  if (/^### 29\./.test(block)) console.error("feature 29 guide rows:", counted.filter(i => /Signs_of_AI_writing/.test(K.get(i).url)).length, "docs:", [...docs].join(" | "));
   return block.replace(/^Supported by: RECOUNT.*$/m, h);
 });
 text = out.join('');
@@ -52,7 +53,7 @@ const trim12 = (s) => { const w = String(s || '').trim().split(/\s+/).filter(Boo
 const esc = (s) => String(s || '').replace(/\|/g, '/').replace(/\n/g, ' ');
 let table = '\n## PARTIAL rows: verbatim quotation only, and the limb that is not supported\n\nThese ' + partial.length + ' rows may be cited for the quotation in the second column and for nothing else. Where the supplied quotation was not on the page, the verifier\'s true wording is given; where the true wording exceeds twelve words it is trimmed and marked. The unsupported limb is the verifier\'s own statement of it.\n\n| index | quotation (the verifier\'s true wording, at most twelve words) | the unsupported limb |\n|---|---|---|\n';
 for (const r of partial) table += `| ${r.index} | ${esc(trim12(r.verdict.trueWording))} | ${esc(r.verdict.unsupportedLimb || '(no limb recorded by the verifier; see the note)')} |\n`;
-text += table;
+text = text.replace("<!-- PARTIAL_TABLE -->", table.trim());
 writeFileSync(process.argv[3], text);
 // 5. checks
 const norm = (s) => String(s).toLowerCase().replace(/[“”"'‘’`]/g, '').replace(/[^a-z0-9%.$\s-]/g, ' ').replace(/\s+/g, ' ').trim();
@@ -63,7 +64,7 @@ for (const line of text.split("\n")) { if (/^\|/.test(line)) continue; for (cons
 const lines = text.split('\n');
 for (const line of lines) { if (/^\|/.test(line)) continue; const ids = [...expand(line).matchAll(/\[(\d{1,4})\]/g)].map(x => +x[1]); if (!ids.length) continue; const tws = []; for (const i of ids) { const r = K.get(i) || P.get(i); if (r) { tws.push(norm(r.verdict.trueWording)); if (r.verdict.verdict === "VERIFIED_VERBATIM" && r.quote) tws.push(norm(r.quote)); } else if (merged.verdicts[i]) { tws.push(norm(merged.verdicts[i].trueWording || "")); } } for (const m of line.matchAll(/"([^"\n]{3,})"/g)) { const q = norm(m[1]); if (q.split(' ').length < 2) continue; if (!tws.some(t => t.includes(q))) problems.push(`QUOTE NOT IN TW: "${m[1].slice(0, 70)}" | line: ${line.slice(0, 60)}`); } }
 // 13-gram continuation check against every trueWording over 12 words
-const nt = norm(text);
+const norm2 = (x) => String(x).toLowerCase().replace(/[“”"'‘’`]/g, "").replace(/\s+/g, " ").trim(); const nt = norm2(text);
 for (const r of [...kept, ...partial]) { const tw = norm(r.verdict.trueWording).split(' ').filter(Boolean); if (tw.length < 13) continue; for (let i = 0; i + 13 <= tw.length; i++) { const g = tw.slice(i, i + 13).join(' '); if (nt.includes(g)) { problems.push(`13-GRAM from [${r.index}]: ${g}`); break; } } }
 console.log(JSON.stringify({ keptCited: citedAll.size, keptUncited: uncitedKept, partialCited: partialCited.size, partialUncited: uncitedPartial, problems: problems.length }, null, 1));
 console.log(problems.join('\n'));
