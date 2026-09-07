@@ -12,3 +12,12 @@ gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as
  ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 6997ms
      × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 49ms
 Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+vendored lib tinymce/plugins/__exact_set_probe__.js ships under public/map/libs/ but is NOT pinned in VENDOR-MANIFEST.json — it would reach production un-verified. Audit the bytes for advisories, add a manifest entry, then re-pin: node scripts/validate-map-fork.mjs --update-manifest
+vendored lib pinned in manifest is missing on disk: flatqueue.js
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document
