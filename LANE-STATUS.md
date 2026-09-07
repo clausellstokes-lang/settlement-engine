@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-07 18:44:16 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 18:50:00 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 3b1c0eaa5 · ledger = 69b2cc5e4 §912.4: the taste sample passes at its third cut after three Opus refutations, and with P
+product claude/composite-r4 = 3b1c0eaa5 · ledger = 21df569ab §912.5: the owner commissions the whole rewrite on all the surfaces and the dossier — t
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3b1c0eaa5 · 18 cars over 4243bdc61 · porcelain 0 · last commits:
@@ -141,4 +141,4 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = 69b2cc5e4 §912.4: the taste
 - wf_31ce68bc-a03: 18 journal lines, 9 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.99 2.29 2.16
+load: 2.57 2.59 2.33
