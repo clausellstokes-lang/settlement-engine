@@ -608,3 +608,10 @@ Seat: Fable 5.1 — the S12 judgment seat; ratified by the Fable chair at the ne
 **Nothing here is applied; no corpus byte moved; the walkers, loaders, classes and tables named in §1–§13 remain OWED (Opus builds).** The next act is the taste sample under SITTING §F, then the blind DM panel, then the wave — the owner's 14:0x order.
 
 Seat: Fable 5.1 — validated (§912, FRQ R75).
+
+---
+
+## 15. OWNER DECISION — THE AUTHORING WAVE IS CHARTERED (appended 2026-09-07 17:31 EDT by the Fable chair; §0–§14 byte-unchanged,      610 lines)
+**The owner, ~17:28, verbatim in substance:** "yeah do it" — new sentence pools keyed to facts the engine already computes but the record does not yet render, or new fields in the world data (the example: a timber town's sawpits or log run) — "but do it after the rewrite while also taking count of what the rewrite is missing and making sure that it is coherent with what a dossier has for state and elements." §13.4's "deferred, the owner's to want" is DISCHARGED: the wave is chartered as a class. **Sequence:** the rewrite wave → the COUNT → the authoring wave → the walk → the launch. **Condition one, THE COUNT:** per block, the presence measure (§13.2), the licensed level-1 members (the slot census, SITTING §A12) and an UNRENDERED-FACTS census — every fact the engine computes for the block's domain that no pool renders — so each new key is sized from a number. **Condition two, COHERENCE:** every new key attaches to an existing block, state key or element the dossier already holds and is licensed by a typed field (the institution table's row, a state key, a roster element); the same-entry contradiction walker (§9; CLERK-LAWS §2) gates every new variant against its block and siblings at the freeze; no key invents an element class without a field; arm D reads the new keys like the old. A new key is a seed input from its birth (A7; index 0 canonical; never an append; A17). Every key's text is public copy, owner-signed at the walk; a persisted field is a schema act, owner-gated at its landing. Ledger §912.1.
+
+Seat: Fable 5.1 — validated.

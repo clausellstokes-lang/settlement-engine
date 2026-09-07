@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-07 17:30:18 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 17:36:00 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 3b1c0eaa5 · ledger = ac7aa4b7f §912: the grand prose reconciliation (S12) is ratified at the chair's sitting — ledger-
+product claude/composite-r4 = 3b1c0eaa5 · ledger = b09208342 §912.1: the owner charters the authoring wave — new sentence pools keyed to facts the e
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3b1c0eaa5 · 18 cars over 4243bdc61 · porcelain 0 · last commits:
@@ -141,4 +141,4 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = ac7aa4b7f §912: the grand p
 - wf_31ce68bc-a03: 18 journal lines, 9 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.55 2.38 2.32
+load: 2.07 2.33 2.34

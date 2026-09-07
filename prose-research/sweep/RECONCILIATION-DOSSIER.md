@@ -403,3 +403,10 @@ Seat: Fable 5.1 — the S12 judgment seat; ratified by the Fable chair at the ne
 The full ruling, rule by rule, with the chair's own measurements: `$SC/s12-sitting/SITTING-RULINGS-912.md`. Nothing here is applied; no corpus byte moved.
 
 Seat: Fable 5.1 — validated (§912, FRQ R75).
+
+---
+
+## §11 OWNER DECISION — the authoring wave (appended 2026-09-07 17:31 EDT by the Fable chair; §0–§10 byte-unchanged,      405 lines)
+You decided (~17:28): **yes** to giving the record blocks more typed facts — new sentence pools keyed to facts the engine already computes but the record does not yet render, or new fields in the world data (your example: a timber town's sawpits or log run) — **after the rewrite**, **counting what the rewrite leaves missing**, and **keeping every addition coherent with what each dossier already holds for its state and its elements**. Recorded in the ledger as §912.1 and in the rulebook as Part B §15. What it means in practice: the rewrite runs first; during it the checker counts, block by block, how concrete each block is, which sentence shapes its facts license, and which facts the engine computes that no sentence renders; then the authoring wave adds new sentence pools only where that count says a block is flat, only attached to a state or element the dossier already has, only licensed by a typed fact, and only after the contradiction checker has read each new sentence against its block and its siblings. Each new sentence is public copy you sign at the walk; any new world-data field is a schema change you sign at its landing.
+
+Seat: Fable 5.1 — validated.
