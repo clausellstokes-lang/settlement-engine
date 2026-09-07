@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 09:37:22 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 09:43:22 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -59,6 +59,9 @@
 | ? | critic |  | result | 0 | — | — | 08:44:03 |
 | ? | critic |  | result | 0 | — | — | 08:43:39 |
 | ? | critic |  | result | 0 | — | — | 08:24:52 |
+| ? | other |  | in-flight | 0 | — | — | 13:42:23 |
+| ? | other |  | in-flight | 0 | — | — | 13:43:06 |
+| ? | other |  | in-flight | 0 | — | — | 13:41:21 |
 | ? | other |  | result | 0 | — | — | 08:47:35 |
 | ? | other |  | result | 0 | — | — | 07:52:29 |
 | ? | other |  | result | 0 | — | — | 08:00:44 |
@@ -73,7 +76,7 @@
 | ? | other |  | result | 0 | — | — | 12:39:01 |
 | ? | other |  | result | 0 | best-ai.md | — | 12:53:34 |
 | ? | other |  | result | 0 | best-leguin.md | — | 12:22:45 |
-| ? | other |  | in-flight | 0 | EXEMPLAR-BEST-PARTS.md | — | 13:36:36 |
+| ? | other |  | result | 0 | EXEMPLAR-BEST-PARTS.md | — | 13:39:01 |
 | ? | other |  | result | 0 | — | — | 12:24:43 |
 | ? | other |  | result | 0 | — | — | 12:38:09 |
 | ? | other |  | result | 0 | — | — | 12:54:49 |
