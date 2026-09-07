@@ -1,8 +1,8 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 01:58:57 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 02:05:44 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
-| ai | critic |  | in-flight | 0 | — | — | 05:58:40 |
+| ai | critic |  | in-flight | 11 | — | — | 06:05:04 |
 | ai | critic |  | failed | 0 | — | — | 03:45:47 |
 | ai | critic |  | result | 0 | critic-ai.md | — | 02:25:15 |
 | ai | finder | arch-biographical-record | result | 57 | — | 104 claims, complete=True @23:50:23 | 03:27:43 |
