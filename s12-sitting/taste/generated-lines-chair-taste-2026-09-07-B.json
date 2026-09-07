@@ -1,0 +1,295 @@
+{
+ "seed": "chair-taste-2026-09-07-B",
+ "settlement": {
+  "name": "Langburg",
+  "population": 2198,
+  "config": {
+   "settType": "town",
+   "culture": "germanic",
+   "terrain": "grassland",
+   "tradeRouteAccess": "road"
+  }
+ },
+ "lines": [
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "readiness ADEQUATE",
+   "angle": "visitor",
+   "text": "A stranger sees an ordinary defended town at Langburg: enough on the walls to be serious, not enough to be reassuring.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "terrain EXPOSED",
+   "angle": "visitor",
+   "text": "Langburg sits open. There is no ground here that helps it, and everything the town has must be built rather than found.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Invasion & War: walls with NO force",
+   "angle": "street",
+   "text": "The town has the thing that would save it and not the people who would use it, and says so when pressed.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Internal Security: court without detention",
+   "angle": "street",
+   "text": "The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Economic Survival: STRONG",
+   "angle": "street",
+   "text": "The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Disasters & Famine: granary AND hospital",
+   "angle": "street",
+   "text": "The town has a place for grain and a place for the ill, and knows exactly what having both is worth.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "walls PRESENT",
+   "angle": "visitor",
+   "text": "There is a line around Langburg and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "watch PRESENT",
+   "angle": "street",
+   "text": "There are people walking the town at Langburg at night, and the town's sense of itself rests more on that than on anything at the gate.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "angle": "visitor",
+   "text": "A stranger at Langburg finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "arcane defense ABSENT",
+   "angle": "street",
+   "text": "The town has no answer to anything it cannot see, and is unprepared rather than protected in that respect.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "COMPOUND override (a crisis stress has rewritten the label)",
+   "angle": "street",
+   "text": "The ordinary safety of Langburg has stopped applying. Whatever the town was, the crisis on it now is what governs the streets.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "angle": "street",
+   "text": "What the town says about its own safety at Langburg is what the town says on a first acquaintance, and a longer one would be a different account.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "poolKey": "Logistics & Supply: Granary with road supply",
+   "angle": "counterforce",
+   "text": "An interruption on the roads to Langburg does not reach the table, and the granary is the reason rather than the roads.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "poolKey": "WALLED-STRAINED",
+   "angle": "ledger",
+   "text": "Langburg's gates (if walled) stands better than the watch that should man it; stone keeps itself, and wages do not.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-8",
+   "poolKey": "override active (generic framing)",
+   "angle": "ledger",
+   "text": "What Langburg's defenses are ordinarily worth does not describe the town at present; there is a crisis on it, and the arrangements have been rebuilt around the crisis.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-8",
+   "poolKey": "override active, viability intact",
+   "angle": "ledger",
+   "text": "Langburg is under real pressure and is not in danger of ending; the posture has changed and the town has not.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-DEF-9",
+   "poolKey": "magicDependency false",
+   "angle": "counterforce",
+   "text": "There is magic at Langburg and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "angle": "counterforce",
+   "text": "The road runs past Langburg and Langburg takes very little from it; the traffic is real and the town has stayed outside it.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "NO-MARKET",
+   "angle": "counterforce",
+   "text": "Langburg keeps no market worth the name; exchange here happens at doorsteps and in yards, at the scale the town actually needs.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-GEN-11",
+   "poolKey": "the MARGINAL arm: neither verdict returned",
+   "angle": "ledger",
+   "text": "Whether Langburg holds together is not a settled question. The pieces mostly fit, and the places where they do not are the places worth reading.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-GEN-11",
+   "poolKey": "THE FIRST-SURVEY QUALIFICATION",
+   "angle": "street",
+   "text": "The town was read once, carefully, and the reading has not been repeated.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-GEN-14",
+   "poolKey": "GROWN-UNRECORDED",
+   "angle": "street",
+   "text": "Langburg was never founded so much as agreed to, one household at a time.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Contested",
+   "angle": "ledger",
+   "text": "The Guild Council's writ runs shorter at Langburg each season, and what the rolls show is not defiance so much as delay, which comes to the same figure at collection.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by SAFETY, adverse",
+   "angle": "ledger",
+   "text": "What the Guild Council has lost at Langburg it has lost to the crime returns. A town that does not feel safe stops crediting whoever is meant to keep it so.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "angle": "threshold",
+   "text": "What is settled at Langburg is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "angle": "street",
+   "text": "Nobody at Langburg needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "angle": "street",
+   "text": "The town has turned on whoever sits at Langburg, and the turning is doing more damage to the hold than any rival has managed.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "angle": "visitor",
+   "text": "A stranger who addresses the Guild Council at Langburg by any other title is corrected, politely and immediately.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-POW-7",
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "angle": "visitor",
+   "text": "A stranger at Langburg cannot work out who is aligned with whom, and the reason is that nobody is.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "angle": "street",
+   "text": "Langburg manages. The market trade covers what the town needs and leaves a little over, and the little over is what the year gets argued about.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-8",
+   "poolKey": "MODERATE",
+   "angle": "visitor",
+   "text": "Nothing about Langburg's condition asks to be remarked on. The town supports itself and has a little in hand.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "PRESSURED",
+   "angle": "threshold",
+   "text": "Langburg is not hungry and has no cushion. A shock to the fields or the road would be felt inside a season.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: a broad spread, no leader",
+   "angle": "threshold",
+   "text": "Langburg would barely notice losing any single trade and could not replace several, which is a different exposure from the obvious one.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "angle": "street",
+   "text": "Everybody here knows what leaves and what arrives, because the same carts do both.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "angle": "counterforce",
+   "text": "What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-11",
+   "poolKey": "TERRAIN: Plains",
+   "angle": "street",
+   "text": "There is nothing between this town and the horizon but what the town has planted, and the town knows both halves of that.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-11",
+   "poolKey": "ECONOMIC STRENGTHS: the roster is populated",
+   "angle": "ledger",
+   "text": "Langburg has more than one thing it is good at, and the list is short enough that everybody here could recite it.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-11",
+   "poolKey": "STRATEGIC VALUE: the generator's assessment, framed",
+   "angle": "ledger",
+   "text": "What Langburg is worth to anybody else is a separate question from what it is worth to itself, and the two answers are not close.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-11",
+   "poolKey": "EXPLOITATION: fullyExploited",
+   "angle": "street",
+   "text": "This is the trade the town is actually built on, and the town has taken it as far as it goes.",
+   "audience": "dm"
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "angle": "canonical",
+   "text": "Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.",
+   "audience": "player"
+  }
+ ]
+}
