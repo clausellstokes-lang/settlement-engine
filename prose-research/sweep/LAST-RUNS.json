@@ -11,7 +11,7 @@
   "argsFile": "args-kay-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--kay-r8.js",
-  "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — verification COMPLETE (12 files / 169 verdicts; state unverified 0); regrade-r8 / section / critic on disk: verdicts-kay-regrade-r8.json@20:00 section-kay.md@20:21 critic-kay.md@15:04; the resume script derives the owed tail (regrade if no regrade-r8; synth if the section predates the last verdict; critic)",
+  "status": "COMPLETE 20:52 (r8 = THE ONE TOP-UP: 17 chunks / 235 verified / 223 kept incl. the 2 rescue chunks and 96 fresh claims from transcripts-and-readers; regrade-r8; section-kay.md 20:21, 120 KB; critic-kay.md second pass 20:5x). STOPPED by S-BOUND rule 4. Its critic: the EoF 1997 entry EXISTS behind an HTTP 404 (Kincaid, not \"Kuzca\"); the Christopher Tolkien primary (War of the Jewels) is open on IA; 11 kept rows are Wikipedia relays counted as voices; and the TRIAGE DEFECT a third time — second sources for #143, #135/#656–658, #683, #974/#975 sit in SKIPPED_TRIAGE while the section marks the rules thin. All of it → S12 input + the open triage decision. DO NOT rebuild kay.",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--kay-r8.js"
  },
  "leguin": {
@@ -79,9 +79,10 @@
   "resume": "keep TWO research runs alive: when one completes (its task notification), resume the next in `order` by Workflow({scriptPath: d[<next>].scriptPath, resumeFromRunId: d[<next>].runId}); set its status RUNNING here",
   "done": [
    "hobb",
-   "leguin"
+   "leguin",
+   "kay"
   ],
   "open_decision": "TRIAGE-BY-FEATURE completion pass for leguin (~250–300) and hobb (~60): a kit change (split-chunks --triage keyed on section features × witness) + verify-only runs; owner-gated on cost under the 17:40 cap",
-  "at_switch": "20:44:42: kay + wolfe were the two live runs; dnd → martin → ai queued; after the switch REBUILD all five with resume-research.sh (a new session cannot resume a runId) and launch two at a time"
+  "at_switch": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time"
  }
 }

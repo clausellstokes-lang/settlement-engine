@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 20:50:49 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 20:52:40 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MAT landing lands at six cars — two of O-13's three product flags light 
 
@@ -97,8 +97,8 @@ KeyError: 'tag'
 - wf_3a29e467-750: 1 journal lines, 1 agents
 - wf_3d71f708-fe3: 1 journal lines, 1 agents
 - wf_b15831a8-df4: 1 journal lines, 1 agents
-- wf_d76e605d-6d1: 42 journal lines, 22 agents
+- wf_d76e605d-6d1: 43 journal lines, 22 agents
 - wf_e95fca37-bb5: 32 journal lines, 18 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.70 2.97 3.08
+load: 2.85 3.03 3.09
