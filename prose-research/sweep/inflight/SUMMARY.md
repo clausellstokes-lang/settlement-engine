@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 01:15:24 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 01:21:25 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -13,7 +13,7 @@
 | ai | finder | arch-worldbuilding-communities | result | 62 | — | 66 claims, complete=True @23:50:23 | 03:23:02 |
 | ai | regrade | regrade-r10 | result | 0 | — | — | 05:07:46 |
 | ai | regrade | regrade-r9 | failed | 0 | — | — | 03:45:46 |
-| ai | synth |  | in-flight | 0 | — | — | 05:13:28 |
+| ai | synth |  | in-flight | 0 | — | — | 05:21:22 |
 | ai | synth |  | failed | 0 | — | — | 03:45:47 |
 | ai | verifier | i1000-1014 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1006-1025 | result | 10 | — | verdict file WRITTEN | 04:24:22 |

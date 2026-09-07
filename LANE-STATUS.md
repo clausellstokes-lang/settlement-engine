@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 01:15:52 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 01:21:30 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 lands with zero product bytes — the three CAPACITY measurements are ta
 
@@ -8,11 +8,11 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
     11f6425a9 §907 CAR 3: capacity_envelope_30y re-measured — the refusal's stated mechanism was FALSE, the row stays out on a different and measured ground, and the reinstatement is handed to the chair with the figures
     6f4fa80ad §907 CAR 2: the reachability guard — a walker reads what every tripwire row keys on and what the receipt writer actually writes, and the two blind rows are BANKED as a shrink-only baseline
     3835be900 §907 CAR 1: the tripwire registry gets a NOT-EXECUTABLE channel — a row keyed on a field no receipt writer ships says so instead of answering [], and a blind instrument can no longer certify itself full
-    receipt `receipt-cap-trip-907.md` (mtime 09-07 01:07) head:
+    receipt `receipt-cap-trip-907.md` (mtime 09-07 01:17) head:
       | # RECEIPT — LANE CAP-TRIP-907
       | **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
       | 
-      | **STATUS: PARTIAL** — CAR 1 landed (`3835be900`). CARS 2–4 in flight. Last written Mon Sep  7 01:06:33 EDT 2026.
+      | **STATUS: COMPLETE** — four cars chartered, **three landed as built and one landed as a measured REFUSAL** (car 3's row is not armed; the corrections it owed did land). Last written Mon Sep  7 01:15:48 EDT 2026.
       | 
       | ## ARRIVAL CHECK — Mon Sep  7 00:52:00 EDT 2026 — **all three lines pass**
       | - `git rev-parse HEAD` == `4243bdc610fe5b380f1d0029973cf9088bae1631` — **CONFIRMED**
@@ -142,4 +142,4 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 - wf_4bd76597-3a3: 8 journal lines, 4 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.88 2.57 2.50
+load: 3.43 3.19 2.80
