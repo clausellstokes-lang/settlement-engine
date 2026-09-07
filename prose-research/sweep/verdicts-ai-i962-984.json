@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 1,
+ "claims": [
+  {
+   "index": 962,
+   "feature": "other: eulogy register in the record",
+   "claim": "M Ross judges that generated biographical content reads like obituary filler written by somebody who knew nothing about the dead person.",
+   "source": "M Ross, answer on WikiTree G2G, 23 Nov 2023",
+   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+   "quote": "by someone who knew little if anything about the deceased",
+   "page": "answer, +18 votes"
+  },
+  {
+   "index": 965,
+   "feature": "other: circular sourcing",
+   "claim": "Chase Ashley reports that ChatGPT 4, asked for a cited profile of Aquila Chase, summarised the existing WikiTree profile and cited that profile for every statement.",
+   "source": "Chase Ashley, comment on WikiTree G2G, 26 Nov 2023",
+   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+   "quote": "summarized it, and cited the WikiTree profile for each statement",
+   "page": "comment thread under the +19 answer"
+  },
+  {
+   "index": 966,
+   "feature": "other: fabricated fact in the record",
+   "claim": "M Cole reports that a ChatGPT profile of Thomas Dudley cited real reference works but asserted facts absent from them, such as his arriving on the Mayflower in 1630.",
+   "source": "M Cole, comment on WikiTree G2G, 26 Nov 2023",
+   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+   "quote": "included information not in those sources that seemed to be hallucinations",
+   "page": "comment thread under the +19 answer"
+  },
+  {
+   "index": 967,
+   "feature": "other: false intimacy in the record",
+   "claim": "Brad Foley writes a parody line of generated family-history prose in the first person, recalling the smell of a great uncle's pipe.",
+   "source": "Brad Foley, comment on WikiTree G2G, 23 Nov 2023",
+   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+   "quote": "I remember the smell of his pipe and the sound",
+   "page": "comment under Eric Weddington's answer"
+  },
+  {
+   "index": 968,
+   "feature": "other: person and distance in the record",
+   "claim": "Eric Weddington states that a genealogical biography belongs in the third person and not the first.",
+   "source": "Eric Weddington, comment on WikiTree G2G, 23 Nov 2023",
+   "url": "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+   "quote": "supposed to be in the 3rd person, not the first person",
+   "page": "comment under his +24 answer"
+  },
+  {
+   "index": 969,
+   "feature": "other: platform policy",
+   "claim": "WikiTree's draft AI-image policy, put to a community vote by Brad Foley, gives as its reason that the site is committed to accurate sources and records.",
+   "source": "Brad Foley, draft policy in WikiTree G2G, 13 Apr 2026",
+   "url": "https://www.wikitree.com/g2g/2021670/should-become-official-wikitree-policy-generated-enhanced",
+   "quote": "WikiTree is committed to accurate sources and records",
+   "page": "question body, Draft Policy"
+  },
+  {
+   "index": 970,
+   "feature": "other: platform policy",
+   "claim": "That same draft states the risk it addresses is that AI reconstructions of past people can be taken as fact.",
+   "source": "Brad Foley, draft policy in WikiTree G2G, 13 Apr 2026",
+   "url": "https://www.wikitree.com/g2g/2021670/should-become-official-wikitree-policy-generated-enhanced",
+   "quote": "there is a real risk that they can be taken as fact",
+   "page": "question body, Draft Policy"
+  },
+  {
+   "index": 971,
+   "feature": "other: fabricated or absent citation",
+   "claim": "American Ancestors' Research Services reports that ChatGPT supplied a patron with a Boston marriage record that did not exist.",
+   "source": "Anjelica Oswald, 'Limitations of Artificial Intelligence (AI) in Genealogical Research', Vita Brevis, American Ancestors, 11 May 2026",
+   "url": "https://vitabrevis.americanancestors.org/-ai-in-genealogical-research",
+   "quote": "it made up a record that didn’t exist",
+   "page": "section 'Lessons in AI'"
+  },
+  {
+   "index": 972,
+   "feature": "other: fabricated or absent citation",
+   "claim": "In that case ChatGPT named three specific repositories where the non-existent record could be found.",
+   "source": "Anjelica Oswald, Vita Brevis, American Ancestors, 11 May 2026",
+   "url": "https://vitabrevis.americanancestors.org/-ai-in-genealogical-research",
+   "quote": "described three very specific sources where the patron could find",
+   "page": "section 'Lessons in AI'"
+  },
+  {
+   "index": 973,
+   "feature": "other: fabricated or absent citation",
+   "claim": "Staff checked the city commissioner record books at the exact pages ChatGPT specified and found no record there.",
+   "source": "Anjelica Oswald, Vita Brevis, American Ancestors, 11 May 2026",
+   "url": "https://vitabrevis.americanancestors.org/-ai-in-genealogical-research",
+   "quote": "the exact pages ChatGPT said the record would be with no record located",
+   "page": "section 'Lessons in AI'"
+  },
+  {
+   "index": 974,
+   "feature": "other: transcription error in the record",
+   "claim": "Oswald reports an OCR transcription that rendered a Harvard College record as Harman Collens.",
+   "source": "Anjelica Oswald, Vita Brevis, American Ancestors, 11 May 2026",
+   "url": "https://vitabrevis.americanancestors.org/-ai-in-genealogical-research",
+   "quote": "a record for Harvard College that was transcribed as",
+   "page": "section 'When to use AI'"
+  },
+  {
+   "index": 976,
+   "feature": "other: mechanism (register expects a citation shape)",
+   "claim": "Amy Johnson Crow explains the fabricated legal citations as ChatGPT producing the kind of language its training set showed a legal brief expects.",
+   "source": "Amy Johnson Crow, 'Using ChatGPT for Genealogy — Accurately', 7 Jul 2023",
+   "url": "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
+   "quote": "That was the type of language that was expected",
+   "page": "section 'The Biggest Mistake in Using ChatGPT'"
+  },
+  {
+   "index": 977,
+   "feature": "other: fabricated fact in the record",
+   "claim": "Crow reports that a ChatGPT biography of her obscure great-great-grandfather, prompted with only his name, contained nothing correct.",
+   "source": "Amy Johnson Crow, 7 Jul 2023",
+   "url": "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
+   "quote": "There’s nothing in this biography that’s correct",
+   "page": "section 'Getting Accuracy in ChatGPT Results'"
+  },
+  {
+   "index": 979,
+   "feature": "other: identity conflation",
+   "claim": "Crow states that even for a subject present in its training set, ChatGPT has no good way to tell apart people who share a name.",
+   "source": "Amy Johnson Crow, 7 Jul 2023",
+   "url": "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
+   "quote": "differentiating between people who have the same name",
+   "page": "section 'Getting Accuracy in ChatGPT Results'"
+  },
+  {
+   "index": 984,
+   "feature": "other: hedged non-statement",
+   "claim": "The field guide records that when an LLM cannot find information about a person's private life it often asserts instead that the person maintains a low profile.",
+   "source": "Wikipedia:Signs of AI writing, retrieved 6 Sep 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "often claims that the person \"maintains a low profile\"",
+   "page": "§ Knowledge-cutoff disclaimers and speculation about gaps in sources"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 962,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "by someone who knew little if anything about the deceased",
+   "note": "Raw page via Wayback capture 20260525050716id_ (live wikitree.com returns an AWS WAF challenge, HTTP 202 x-amzn-waf-action: challenge). Byline confirmed: 'answered Nov 23, 2023 by M Ross Golden Owl (1.3m points)', answer header '+18 votes' as the locator states. The obituary-filler limb is carried by the same sentence, which continues about filling the ten lines an obituary requires. One softening to record: the page says 'little if anything', the claim says 'knew nothing' - idiomatically equivalent, not an added limb."
+  },
+  {
+   "index": 965,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "summarized it, and cited the WikiTree profile for each statement",
+   "note": "Same Wayback capture. Comment byline 'Nov 26, 2023 by Chase Ashley Owl (360k points)'. Opening of that comment supports the ChatGPT 4 and the cited-profile-of-Aquila-Chase limbs; the circularity limb is the quoted clause. Locator nit only: the comment sits under the +24 answer (Eric Weddington's), not the '+19 answer' the page field names - metadata, not a claim limb, so no grade change."
+  },
+  {
+   "index": 966,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "included information not in those sources that seemed to be hallucinations",
+   "note": "Same Wayback capture. Comment byline 'Nov 26, 2023 by M Cole Owl (119k points)'. The same sentence names the three cited works (rendered 'Wikipedian', Encyclopedia.com, Britannica.com) and gives the Mayflower-1630 example plus an Anne Hutchinson execution claim, so every limb holds. Locator nit: this comment too sits under the +24 answer, not a +19 one."
+  },
+  {
+   "index": 967,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I remember the smell of his pipe and the sound",
+   "note": "Same Wayback capture. Comment byline 'Nov 23, 2023 by Brad Foley Owl (111k points)', under Eric Weddington's +24 answer as the locator states. The line is framed as invented sample AI content ('If a website has ai content that says...'), opening by calling the subject a great uncle, so the parody, first-person and great-uncle limbs are all supported."
+  },
+  {
+   "index": 968,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "supposed to be in the 3rd person, not the first person",
+   "note": "Same Wayback capture. Comment byline 'Nov 23, 2023 by Eric Weddington Owl (578k points)'; the answer above it carries the '+24 votes' header the locator names. Subject of the quoted sentence is 'a genealogical biography', matching the claim exactly."
+  },
+  {
+   "index": 969,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "WikiTree is committed to accurate sources and records",
+   "note": "Raw page via Wayback capture 20260414170025id_ (live host WAF-challenged). Question body under the heading 'Draft Policy'; page opens 'Please vote agree or disagree on the answers below', asked by Brad Foley, and the capture's 'asked 20 hours ago' places it on 13 Apr 2026 as the source line says. The quoted clause runs on into 'and as such requires that...', which is what makes it the stated reason."
+  },
+  {
+   "index": 970,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there is a real risk that they can be taken as fact",
+   "note": "Same Wayback capture, same Draft Policy paragraph, two sentences earlier than the §969 quote. The preceding sentence supplies the 'AI reconstructions of past people' limb by describing imaginative reconstructions of past people or events."
+  },
+  {
+   "index": 971,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "but it made up a record that didn't exist",
+   "note": "Live page fetched directly, HTTP 200, HubSpot HTML, author meta 'Anjelica Oswald', dated May 11 2026. Section 'Lessons in AI' as the locator states; that section opens with Research Services receiving a patron chat about a Boston marriage record of the late 1700s, so the Research-Services, patron, Boston and marriage-record limbs are all on the page."
+  },
+  {
+   "index": 972,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "described three very specific sources where the patron could find",
+   "note": "Same live fetch, 'Lessons in AI'. The sentence continues by naming them - FamilySearch, AmericanAncestors.org and the Massachusetts State Archives - which supports reading 'sources' as the claim's 'repositories'."
+  },
+  {
+   "index": 973,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact pages ChatGPT said the record would be with no record located",
+   "note": "Same live fetch, 'Lessons in AI'. Full sentence begins 'We even went through the city commissioner record books to...', giving the staff-checked and record-books limbs; trueWording trimmed to twelve contiguous words for the cap."
+  },
+  {
+   "index": 974,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a record for Harvard College that was transcribed as \"Harman Collens\"",
+   "note": "Same live fetch, section 'When to use AI' as the locator states. The sentence sits in the OCR discussion and is followed by a caption contrasting the original Harvard College record with the faulty transcription, so the OCR limb holds."
+  },
+  {
+   "index": 976,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That was the type of language that was expected",
+   "note": "Live page fetched directly after adding browser Accept/Accept-Language headers - a bare UA gets HTTP 412 from the host; with headers, HTTP 200, dated July 7 2023. Section 'The Biggest Mistake in Using ChatGPT'. The two sentences before the quote state that ChatGPT looked at its training set, saw that legal briefs have citations of a given shape, and gave him that - which is the claim's mechanism limb. The fabricated-citations limb is set up in the article's opening line about the lawyer whose brief carried fake legal citations."
+  },
+  {
+   "index": 977,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There's nothing in this biography that's correct",
+   "note": "Same live fetch, section 'Getting Accuracy in ChatGPT Results'. That section names John Peter Kingery as one of her great-great-grandfathers and calls him a pretty average, obscure individual; the prompt quoted just above is 'write a biography of John Peter Kingery', with the text stating ChatGPT had no context beyond the name. Every limb supported."
+  },
+  {
+   "index": 979,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a good way of differentiating between people who have the same name",
+   "note": "Same live fetch, same section, the sentence immediately after the §977 quote. Its opening clause - even if the ancestor were famous and somewhere in the training set - carries the claim's 'present in its training set' limb; the negation ('it doesn't have') is trimmed out of trueWording only for the twelve-word cap and is present on the page."
+  },
+  {
+   "index": 984,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "often claims that the person \"maintains a low profile\"",
+   "note": "Raw wikitext fetched from en.wikipedia.org via ?action=raw, HTTP 200, retrieved 7 Sep 2026. Section heading is exactly the locator's '=== Knowledge-cutoff disclaimers and speculation about gaps in sources ==='. The preceding sentences describe chatbots failing to find sources and emitting a not-publicly-available disclaimer, and the quoted sentence is conditioned on that unknown information being about an individual's personal life - the claim's 'cannot find information about a person's private life' limb. The page lists a second stock phrase alongside it and adds that this too is speculative."
+  }
+ ]
+}

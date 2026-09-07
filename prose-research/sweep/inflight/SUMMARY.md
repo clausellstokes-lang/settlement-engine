@@ -1,11 +1,11 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:19:12 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:25:13 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | failed | 0 | — | — | 03:45:47 |
 | ai | critic |  | result | 0 | critic-ai.md | — | 02:25:15 |
 | ai | finder | arch-biographical-record | result | 57 | — | 104 claims, complete=True @23:50:23 | 03:27:43 |
-| ai | finder | arch-decoding-literature | in-flight | 31 | — | 180 claims, complete=True @00:14:26 | 04:14:47 |
+| ai | finder | arch-decoding-literature | result | 31 | — | 180 claims, complete=True @00:14:26 | 04:19:20 |
 | ai | finder | arch-decoding-literature | failed | 30 | — | 180 claims, complete=True @00:14:26 | 03:45:34 |
 | ai | finder | arch-gazetteer-travel-history | result | 32 | payload.json, payload2.json | 79 claims, complete=True @23:50:23 | 03:15:34 |
 | ai | finder | arch-historical-fact-measured | result | 22 | — | 69 claims, complete=True @23:50:23 | 03:16:09 |
@@ -14,6 +14,7 @@
 | ai | regrade | regrade-r9 | failed | 0 | — | — | 03:45:46 |
 | ai | synth |  | failed | 0 | — | — | 03:45:47 |
 | ai | verifier | i1000-1014 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1006-1025 | result | 10 | — | verdict file WRITTEN | 04:24:22 |
 | ai | verifier | i1015-1029 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1030-1044 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1045-1059 | failed | 0 | — | verdict file absent | 03:45:44 |
@@ -32,8 +33,11 @@
 | ai | verifier | i1240-1254 | failed | 0 | — | verdict file absent | 03:45:46 |
 | ai | verifier | i1255-1257 | failed | 0 | — | verdict file absent | 03:45:46 |
 | ai | verifier | i940-954 | failed | 0 | — | verdict file absent | 03:45:43 |
+| ai | verifier | i940-961 | result | 6 | — | verdict file WRITTEN | 04:22:23 |
 | ai | verifier | i955-969 | failed | 0 | — | verdict file absent | 03:45:43 |
+| ai | verifier | i962-984 | result | 7 | — | verdict file WRITTEN | 04:23:40 |
 | ai | verifier | i970-984 | failed | 0 | — | verdict file absent | 03:45:43 |
+| ai | verifier | i985-1004 | in-flight | 7 | — | verdict file absent | 04:25:01 |
 | ai | verifier | i985-999 | failed | 0 | — | verdict file absent | 03:45:43 |
 | dnd | critic |  | failed | 0 | — | — | 03:45:30 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 02:10:32 |
@@ -43,7 +47,7 @@
 | dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:50:21 | 03:18:23 |
 | dnd | regrade | regrade-r10 | result | 0 | — | — | 04:08:15 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
-| dnd | synth |  | in-flight | 0 | — | — | 04:17:23 |
+| dnd | synth |  | in-flight | 0 | head.md, part6.md | — | 04:24:55 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
 | dnd | verifier | i1007-1021 | result | 2 | — | verdict file WRITTEN | 03:45:27 |

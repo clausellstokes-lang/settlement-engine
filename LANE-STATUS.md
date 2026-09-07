@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 00:19:09 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 00:24:51 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lighting tail's three follow-on cars land as one consist — the mobileSingleCh
 
@@ -95,7 +95,7 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
 - **dnd**: claims 1153 · verdicts 1153 (todo 0) · kept 760 · partial 195 · verdict files 70 (triage 2, regrade r6) · section 09-06 21:46 · critic 09-06 22:09
-- **ai**: claims 1426 · verdicts 1225 (todo 201) · kept 769 · partial 144 · verdict files 62 (triage 2, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
+- **ai**: claims 1426 · verdicts 1270 (todo 156) · kept 812 · partial 146 · verdict files 65 (triage 2, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
@@ -103,8 +103,8 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r8/wf_e95fca37-bb5, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r10/wf_4bd76597-3a3, ai r10/wf_0eb229cc-f75
 
 ## WORKFLOW RUNS of chair session 405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_0eb229cc-f75: 1 journal lines, 1 agents
+- wf_0eb229cc-f75: 9 journal lines, 5 agents
 - wf_4bd76597-3a3: 5 journal lines, 3 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.38 2.81 4.00
+load: 3.24 2.99 3.69

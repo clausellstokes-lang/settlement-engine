@@ -5,3 +5,14 @@ gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as
 # whole-world soak — 300 years × 4 settlements, seed "realm-scale-research-lit-4s-300y-4s-seed1", full_simulation preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
 
 ## run A (primary)
+  300 years in 762.3s — final tick 15600 (15600 expected)
+
+## isolated worker evidence (actual Node worker_threads; not browser timing)
+  cold 3873.074ms · request 3870.081ms · worker handler 3441.339ms
+  transport node:worker_threads · thread 1 · 52 progress messages
+
+## assertions
+  PASS  tick arithmetic — finalTick 15600 == years×52
+  PASS  actual isolated Node worker execution — worker thread 1 != main thread 0
+  PASS  isolated worker output equals the direct domain path — 32c81cba35df == 32c81cba35df
+  PASS  isolated worker completed a non-vacuous one-year advance — 52 progress messages; final tick 52/52

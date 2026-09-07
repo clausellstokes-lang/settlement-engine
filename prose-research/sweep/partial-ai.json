@@ -2652,5 +2652,55 @@
    "unsupportedLimb": "'the model cannot get the balance right' — the page asserts difficulty ('A.I. finds it very difficult to get the balance right'), not impossibility",
    "fromFile": "verdicts-ai-i909-923.json"
   }
+ },
+ {
+  "index": 948,
+  "feature": "other: hedged non-statement",
+  "claim": "A generated obituary of a Calgary woman, quoted by Sato as a demonstration passage, ends by advising the public to await verified information instead of stating a fact.",
+  "source": "a spam obituary quoted verbatim by Mia Sato, The Verge, 12 Feb 2024",
+  "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+  "quote": "the curious and concerned public is advised to stay tuned",
+  "page": "body, section on The Thaiger",
+  "kind": "analysis",
+  "polarity": "applies",
+  "date": "2024-02-12",
+  "routeHint": "curl with a desktop browser user agent on the live URL",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "unnamed generative-AI tools, observed Feb 2024; register measured: obituary / biographical record",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 948,
+   "verdict": "PARTIAL",
+   "trueWording": "the curious and concerned public is advised to stay tuned",
+   "note": "Raw page, The Thaiger section: Sato quotes one sentence from an article on the death of a Calgary, Canada woman, telling readers updates are anticipated and to stay tuned for verified information. The page never says the sentence closes the article, so the 'ends by' limb is unsupported; every other limb (Calgary woman, AI-hallmarked site, awaiting verified information) is on the page.",
+   "unsupportedLimb": "that the quoted sentence ends the article",
+   "fromFile": "verdicts-ai-i940-961.json"
+  }
+ },
+ {
+  "index": 1023,
+  "feature": "other: neutral-seeming but not neutral",
+  "claim": "Wikipedia's large language models policy page states LLMs can produce content neutral-seeming in tone but not in substance.",
+  "source": "Wikipedia:Large language models, retrieved 6 Sep 2026",
+  "url": "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
+  "quote": "neutral-seeming in tone, but not necessarily in substance",
+  "page": "§ Algorithmic bias and non-neutral point of view",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2026-09-06",
+  "routeHint": "curl with a desktop browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "LLMs generally; the page's bias note is dated 'as of 2026'; register measured: encyclopedic articles",
+  "angle": "arch-biographical-record",
+  "verdict": {
+   "index": 1023,
+   "verdict": "PARTIAL",
+   "trueWording": "neutral-seeming in tone, but not necessarily in substance",
+   "note": "Fetched twice as raw text: the wikitext via action=raw and the rendered page, both 200. The quotation is verbatim on the page, in the section the claim names. The substantive limb is fully supported. The failing limb is the descriptor: the page's own hatnote reads 'This is an information page. It is not a Wikipedia policy or guideline', and its short description is 'Wikipedia information page'. Wikipedia treats policy, guideline and information page as distinct tiers, and the redirect line at the top points to a DIFFERENT page, Wikipedia:Writing articles with large language models, as the content guideline. Downstream prose must not say 'Wikipedia policy states'.",
+   "unsupportedLimb": "that the cited page is a policy page - its own banner says it is not a Wikipedia policy or guideline, but an information page",
+   "fromFile": "verdicts-ai-i1006-1025.json"
+  }
  }
 ]
