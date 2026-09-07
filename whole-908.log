@@ -15,3 +15,9 @@ Not implemented: HTMLCanvasElement's toDataURL() method: without installing the 
  ❯ tests/docs/enforcement-claims.test.js (21 tests | 1 failed) 1389ms
      × every completeness claim carries an @enforced-by tag with ≥1 target 11ms
 Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document

@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 01:27:12 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 01:34:02 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 lands with zero product bytes — the three CAPACITY measurements are ta
 
@@ -142,4 +142,4 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 - wf_4bd76597-3a3: 8 journal lines, 4 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;77333 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;77335 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
-load: 17.36 8.96 5.26
+load: 25.58 18.59 11.46

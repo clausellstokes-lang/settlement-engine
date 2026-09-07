@@ -1,6 +1,6 @@
 # Section: ai. Where generated prose fails against skilled human fiction and game writing, and what it does in the record register
 
-Built from `sweep/kept-ai.json` (1355879 bytes, 2026-09-07 01:07, md5 141faf26d22f9d212a9f9ef0dfb6dcdc), `sweep/partial-ai.json` (282955 bytes, 2026-09-07 01:07, md5 ba01e0d6d5df63815222f6cd7bd97de7) and `sweep/state-ai.json` (2518011 bytes, 2026-09-07 01:07, md5 750b156cee1cf037ba7c81fffb467ab0), which `node sweep-state.mjs merge ai --update-state` wrote at 01:07:57 EDT in this run (output line: name ai, claims 1518, verdicts 1518, kept 1015, partial 191, chunkFiles 84, verdictsFromFiles 1661). The 84 verdict inputs, by name (bytes, mtime): INPUT_ROSTER The previous section (`section-ai.md`, 222230 bytes, 2026-09-06 15:34) was built from the 940-claim state with 769 kept rows; this one is built from the 1518-claim state after the archival round (R9), whose six angles and one un-angled decoding chunk add 246 net kept rows, and after the r10 regrade, which downgraded sixteen pre-940 rows from verified to PARTIAL ([62], [87], [156], [261], [303], [344], [363], [374], [392], [405], [449], [506], [520], [531], [601], [610]); every one of those is now cited for its quotation only. The chair's notes on the previous draft and the round-2 critic's findings are applied where marked (chair's note applied) and (critic's finding applied).
+Built from `sweep/kept-ai.json` (1355879 bytes, 2026-09-07 01:07, md5 141faf26d22f9d212a9f9ef0dfb6dcdc), `sweep/partial-ai.json` (282955 bytes, 2026-09-07 01:07, md5 ba01e0d6d5df63815222f6cd7bd97de7) and `sweep/state-ai.json` (2518011 bytes, 2026-09-07 01:07, md5 750b156cee1cf037ba7c81fffb467ab0), which `node sweep-state.mjs merge ai --update-state` wrote at 01:07:57 EDT in this run (output line: name ai, claims 1518, verdicts 1518, kept 1015, partial 191, chunkFiles 84, verdictsFromFiles 1661). The 84 verdict inputs, by name (bytes, mtime): in mtime order, dates 2026, `chunk-00` (15530, 09-05 19:47), `chunk-01` (16516, 09-05 19:51), `i105-119` (13789, 09-05 20:45), `i120-134` (13235, 09-05 20:49), `i135-149` (14661, 09-05 20:53), `i150-164` (13469, 09-05 20:58), `i165-179` (12659, 09-05 21:02), `i180-194` (14609, 09-05 21:08), `i195-209` (14642, 09-05 21:14), `i210-224` (18812, 09-05 21:21), `i225-239` (17808, 09-05 21:27), `i240-253` (16546, 09-05 21:31), `regrade-r1` (87896, 09-06 00:21), `i254-268` (18841, 09-06 13:30), `i299-313` (19292, 09-06 13:31), `i284-298` (21218, 09-06 13:32), `i269-283` (22011, 09-06 13:32), `i359-373` (17483, 09-06 13:36), `i314-328` (18232, 09-06 13:37), `i344-358` (21311, 09-06 13:38), `i329-343` (20261, 09-06 13:40), `i374-388` (18841, 09-06 13:44), `i404-418` (18997, 09-06 13:45), `i419-433` (19788, 09-06 13:45), `i389-403` (18835, 09-06 13:46), `i464-478` (16571, 09-06 13:49), `i434-448` (14481, 09-06 13:49), `i449-463` (15469, 09-06 13:50), `i479-493` (15945, 09-06 13:50), `triage-r5` (5931, 09-06 14:00), `i494-508` (13919, 09-06 14:08), `i569-584` (14129, 09-06 14:09), `i509-523` (16234, 09-06 14:09), `i554-568` (14427, 09-06 14:09), `i524-538` (17440, 09-06 14:10), `i539-553` (17147, 09-06 14:11), `i646-660` (15315, 09-06 14:14), `i662-677` (15792, 09-06 14:15), `i616-630` (13267, 09-06 14:15), `i631-645` (17044, 09-06 14:15), `i601-615` (15022, 09-06 14:15), `i585-600` (15514, 09-06 14:15), `i723-737` (14787, 09-06 14:18), `i753-767` (13181, 09-06 14:18), `i693-707` (15839, 09-06 14:18), `i738-752` (13794, 09-06 14:19), `i708-722` (15992, 09-06 14:19), `i678-692` (14947, 09-06 14:19), `i768-782` (14886, 09-06 14:23), `i813-828` (16334, 09-06 14:23), `i846-860` (15966, 09-06 14:23), `i829-845` (13062, 09-06 14:24), `i798-812` (16447, 09-06 14:24), `i783-797` (16857, 09-06 14:25), `i939-939` (1719, 09-06 14:26), `i876-893` (15881, 09-06 14:28), `i924-938` (17034, 09-06 14:28), `i909-923` (16798, 09-06 14:29), `i861-875` (16908, 09-06 14:29), `i894-908` (16796, 09-06 14:29), `regrade-r5` (158629, 09-06 14:42), `triage-r10` (178040, 09-06 23:50), `i940-961` (13099, 09-07 00:22), `i962-984` (15409, 09-07 00:23), `i1006-1025` (15713, 09-07 00:23), `i985-1004` (16495, 09-07 00:26), `i1026-1043` (13895, 09-07 00:29), `i1046-1108` (18003, 09-07 00:30), `i1110-1160` (17100, 09-07 00:31), `i1162-1193` (15958, 09-07 00:31), `i1232-1259` (14699, 09-07 00:36), `i1335-1378` (16304, 09-07 00:37), `i1198-1227` (16556, 09-07 00:38), `i1262-1326` (16973, 09-07 00:38), `i1415-1425` (6182, 09-07 00:39), `i1383-1414` (16152, 09-07 00:43), `i1426-1440` (21191, 09-07 00:43), `i1441-1455` (20510, 09-07 00:44), `i1486-1500` (22214, 09-07 00:50), `i1456-1470` (20757, 09-07 00:51), `i1471-1485` (20916, 09-07 00:51), `i1501-1515` (21296, 09-07 00:51), `i1516-1517` (3714, 09-07 00:53), `regrade-r10` (163066, 09-07 01:07). The previous section (`section-ai.md`, 222230 bytes, 2026-09-06 15:34) was built from the 940-claim state with 769 kept rows; this one is built from the 1518-claim state after the archival round (R9), whose six angles and one un-angled decoding chunk add 246 net kept rows, and after the r10 regrade, which downgraded sixteen pre-940 rows from verified to PARTIAL ([62], [87], [156], [261], [303], [344], [363], [374], [392], [405], [449], [506], [520], [531], [601], [610]); every one of those is now cited for its quotation only. The chair's notes on the previous draft and the round-2 critic's findings are applied where marked (chair's note applied) and (critic's finding applied).
 
 Citation convention: `[n]` is the claim index in `kept-ai.json` (or, for rows marked partial, in `partial-ai.json`). Every quotation is the verifier's `trueWording`, trimmed to at most twelve words; a row flagged `fullSentence` (257 kept, 21 partial) is cited by its claim and by the source's section or page and never has its trueWording copied. Only VERIFIED_VERBATIM and VERIFIED_SUBSTANCE rows support a feature. PARTIAL rows appear only for their verbatim quotation, marked (partial, quote only), never for the limb the verifier rejected, and are tabulated at the end. Six excluded rows are cited on a supported limb only because the chair's notes instruct it ([25], [30], [60], [223], [238] and, for its era note, none other); [97], [142] and [252] are dropped or retired; the remaining NOT_FOUND, BLOCKED and SKIPPED_TRIAGE rows are named in the coverage section and cited nowhere as support. The sweep ran seventeen angles: `peer-reviewed and arXiv studies` (indices 0 to 84), `novelists, fiction editors and developmental editors` (85 to 144), `publishing and games industry` (145 to 220), `the case AGAINST the common tells` (221 to 253), `record-register` (254 to 340), `games-practice` (341 to 444), `peer-reviewed-absentees` (445 to 550), `counter-cases` (551 to 633), `critics-direct` (634 to 739 and 812 to 939), `steerability-mechanism` (740 to 811), and the archival round: `arch-biographical-record` (940 to 1043), `arch-decoding-literature` (1044 to 1131), `arch-gazetteer-travel-history` (1132 to 1210), `arch-historical-fact-measured` (1211 to 1279), `arch-second-tell-catalogue` (1280 to 1359), `arch-worldbuilding-communities` (1360 to 1425) and the decoding finder's second round, which carries no angle field (1426 to 1517). A source document is a paper or page, not a row; arXiv abstract, HTML, PDF and ar5iv renderings of one paper count once; the Dramatica blog's glosses of StoryScope are counted as derivative. Every Supported-by header is generated from the JSON by `recount-ai.mjs` from the rows the body actually cites, and it now prints the split the critic asked for: reader comments, vendor statements and relays are counted and named, and rows that observe a non-LLM system (Preston's keyword chatbot Brenda [641] to [646], Starfield's procedural cities [865], BioWare's pre-LLM quests [870], Echovita's 2021 summariser [952] to [954], an OCR transcription [974]) are cited for the human side and excluded from the verified count (critic's finding applied). StoryScope carries 33 kept rows at its arXiv URL plus 2 Dramatica glosses ([147], [151]) and 8 partial rows; the chair's figure of 15 or 17 and the earlier nine and 13 were counts of older states and are superseded by the scripted count (chair's note applied).
 
@@ -14,7 +14,7 @@ What the corpus says in one sentence: the surface tells (a word list, a punctuat
 
 ### 1. The gloss: meaning is stated, not implied [R]
 
-Supported by: RECOUNT
+Supported by 35 verified rows across 17 source documents (plus 3 derivative glosses of a roster document), of which 1 reader comment, 1 vendor statement, 2 relays (kind field, where present); 2 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [0] StoryScope: "AI stories over-explain themes and favor tidy, single-track plots"; narrators explain the theme 77% of the time against 52% for humans. The same figure was re-verified by four other verifiers at [117] ("AI over-explains its themes"), [145], [366] and [829]; [830] carries the paper's own name for the pattern, over-determination: "AI spells out meaning rather than trusting the reader to infer it".
 - [815] Mohammad Siam's reply on X, relayed by the Dramatica blog and verified as a relay (the X post itself was not fetched): "AI explains. Humans imply." [118] is the same line graded partial for attribution and is superseded.
@@ -38,7 +38,7 @@ Reconstruction rule: the dossier never names what a fact means. An entry states 
 
 ### 2. Closure is forced: every thread tied, no ambiguity held, no ending deferred [F]
 
-Supported by: RECOUNT
+Supported by 17 verified rows across 9 source documents (plus 1 derivative gloss of a roster document); 4 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [1] StoryScope: "far fewer subplots" (seventy-nine per cent of AI stories have none, against fifty-seven); [4]: "more protagonist-driven resolutions" (69% against 46%) and humans are more comfortable with ambiguous endings; [5]: humans "frame protagonist' choices as more morally ambiguous" (59% against 38%; the apostrophe typo is the paper's); [371]: "AI resolutions favor internal understanding or acceptance (47% vs. 27%)". [107], [368] and [833] re-verify the same figures; [147] is the Dramatica gloss, "cleaner internal acceptance".
 - [43] Sui et al.: "a fundamental inability to defer closure". Professional New Yorker fiction stays unpredictable near the close (late no-rate 0.607) while the top LLM stories collapse to 0.215 and retain 23% of tension peaks against 52%.
@@ -55,7 +55,7 @@ Reconstruction rule: every dossier entry leaves at least one civic matter standi
 
 ### 3. The world tilts toward comfort: conflict sanitised, stability over change, positive arcs, flinching from harm [R]
 
-Supported by: RECOUNT
+Supported by 13 verified rows across 10 source documents, of which 2 reader comments (kind field, where present); 5 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [28] Rettberg and Wigers, 11,800 stories for 236 countries: one plot template (a return to a small town, a minor conflict resolved by tradition and a community event); "Real-world conflicts are sanitised, romance is almost absent". [29]: AI narrative "prioritises stability above change and tradition above growth", a narrative standardisation distinct from representational bias.
 - [41] Tian et al.: GPT-4 arcs are "strongly favoring positive outcomes"; Riches-to-Rags falls from 14.6% of human stories to 1.3%, Oedipus from 9.3% to 1.7%, Rags-to-Riches rises from 4.4% to 13.0%. [360], the same paper: the models lack diversity "particularly in avoiding negative plot progressions".
@@ -76,7 +76,7 @@ Reconstruction rule: the dossier records harm plainly and does not reconcile it.
 
 ### 4. One track: no subplot, no time jump, no fourth wall, no reference outward [F]
 
-Supported by: RECOUNT
+Supported by 11 verified rows across 2 source documents (plus 1 derivative gloss of a roster document); 2 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [370] StoryScope: human stories span more locations, carry more dialogue relative to narration and "present morally ambivalent protagonists more often (59% vs. 38%)"; [96]: five models occupy one shared region while human stories draw on a broader repertoire.
 - [369] and [837]: AI "avoids naming real brands, places, or works"; humans reference specific texts and authors at nearly double the AI rate (47% against 24%); references that do occur are vague allusions (72% against 50%).
@@ -92,7 +92,7 @@ Reconstruction rule: the dossier cross-references. The entry on the mill points 
 
 ### 5. Flat pressure: no escalation, no suspense, no trajectory, sentences that can be swapped [F]
 
-Supported by: RECOUNT
+Supported by 29 verified rows across 20 source documents, of which 1 vendor statement (kind field, where present); 5 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [9] StoryScope: "Claude produces notably flat event escalation"; GPT over-indexes on gossip and dream sequences, Gemini writes the tidiest endings; [146] is the same line from the industry angle.
 - [359] Tian et al.: "LLMs introduce plot turning points earlier in the timeline"; the major setback and the climax arrive early, compressing pacing and diminishing suspense.
@@ -122,7 +122,7 @@ Reconstruction rule: order the dossier so that later entries depend on earlier o
 
 ### 6. Sameness: a narrow narrative space, echoed plots, default names, one template for every culture, one default poetic mode [R]
 
-Supported by: RECOUNT
+Supported by 70 verified rows across 43 source documents (plus 1 derivative gloss of a roster document), of which 1 relay (kind field, where present); 11 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 Narrative space, measured:
 - [7] StoryScope: human stories "occupy a rarer, more dispersed region of narrative space"; the human-to-AI centroid distance is 1.6 times the AI-to-AI distance; 24.7% of human stories fall in the rarest decile against 7.1% of AI stories ([372] and [841] re-verify; [151] is the Dramatica gloss).
@@ -165,7 +165,7 @@ Reconstruction rule: names, numbers and openings are drawn from the engine's poo
 
 ### 7. No grain: missing particulars, regression to the generic, advert tone, vague authority, no testimony [R]
 
-Supported by: RECOUNT
+Supported by 62 verified rows across 35 source documents, of which 1 reader comment, 2 vendor statements (kind field, where present); 1 non-LLM row cited for the human side and not counted; 10 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [91] Vollmer: "No grain: no proper nouns, no specific months, no brand names" (the sentence continues to dialect and rhythm). [186], tell twenty-four: "No Tuesday. No laundromat." and no grandmother with a named brand of cough drop (chair's copyright note applied: the tail is paraphrased).
 - [92] Lowe: "Observations don't accumulate meaning across a manuscript"; AI describes grief where a human shows a man who cannot stop moving.
@@ -190,7 +190,7 @@ Reconstruction rule: every dossier sentence carries at least one particular the 
 
 ### 8. Feeling by formula: bodies, smells, weather that mirrors grief, a mood vocabulary, sensation attached to the immaterial [F]
 
-Supported by: RECOUNT
+Supported by 19 verified rows across 6 source documents; 4 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [2] StoryScope: AI "conveys emotion through physical sensations and bodily metaphors (81% vs. 38%)" ([367] and [834] re-verify); [835]: humans use explicit emotion labels 29% of the time against 8%; [3] and [836]: AI "deploys more smell-based imagery (82% vs. 57%)".
 - [127] Vollmer on AI metaphor: "Right ballpark, wrong physics."; rain pattering against a window, mirroring unspoken grief, filed under mood-saturated weather and rooms. [122] a recycled mood vocabulary: "ache, hollow, tether, linger, fragile, fractured, ember, bloom" (the list continues: cradle, ruin, veil, threadbare). SINGLE SOURCE for the mood list (critic's finding applied).
@@ -207,7 +207,7 @@ Reconstruction rule: the archivist renders no feeling at all, in any of the four
 
 ### 9. Dialogue: on the nose, curt blocks that end on a hook, no motivation, one voice; NPC lines that forget the world [F]
 
-Supported by: RECOUNT
+Supported by 35 verified rows across 21 source documents; 10 partial rows cited for quotation only; excluded rows [97], [142] cited on a supported limb or for the record only. Counts generated from the JSON by recount-ai.mjs.
 
 - [831] StoryScope: "AI dialogue serves philosophical debate more often (59% vs. 34%)".
 - [80] Dramatron professionals: "Show, not tell: here we are just telling"; [79] tight and prescriptive relationships, pun names; [81]: "Where is the emotional motivation".
@@ -231,7 +231,7 @@ Reconstruction rule (Herald pools and DM page): each speaking role owns a pool w
 
 ### 10. No one behind the sentence: no point of view, no intent, no origin; the answer-shaped thing [R]
 
-Supported by: RECOUNT
+Supported by 69 verified rows across 35 source documents, of which 3 reader comments (kind field, where present); 1 non-LLM row cited for the human side and not counted; 4 partial rows cited for quotation only; excluded row [30] cited on a supported limb or for the record only. Counts generated from the JSON by recount-ai.mjs.
 
 Theory, 2020 and 2021:
 - [516] Bender and Koller: a system trained only on form "has a priori no way to learn meaning"; [517] the octopus's reply seems meaningful only because "A does all the work in attributing meaning"; [518] internally coherent text suffices for phatic exchange and breaks at the coconut catapult and the bear; [519] GPT-2's bear-and-sticks completions co-occur with bears but none would help.
@@ -264,7 +264,7 @@ Reconstruction rule: the archivist has a position and a stake. The dossier is wr
 
 ### 11. The metronome: uniform sentence length, constant pacing, essay shape; and the two-mode alternation [R]
 
-Supported by: RECOUNT
+Supported by 27 verified rows across 18 source documents, of which 1 vendor statement (kind field, where present); 14 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [98] Vollmer: "Pacing flatness: scenes unfold at a constant rate"; sentence length sits at a metronomic 14 to 22 word median with small variance.
 - [665] Guo: "Sentences are roughly the same length. The cadence never varies."; [666]: "They tend to pick a lane and stay in it". [657] nostalgebraist: "no modulation, no room to breathe". [170] Clarke: "There's a difference in rhythm".
@@ -290,7 +290,7 @@ Reconstruction rule: sentence length follows the load. A single fact takes a sho
 
 ### 12. Manufactured emphasis: fragments as sentences, one-line paragraphs, stacked negations, cliffhanger ends [R]
 
-Supported by: RECOUNT
+Supported by 9 verified rows across 8 source documents, of which 1 reader comment (kind field, where present); 4 partial rows cited for quotation only; excluded row [187] cited on a supported limb or for the record only. Counts generated from the JSON by recount-ai.mjs.
 
 - [103] tropes.fyi: "He published this. Openly. In a book. As a priest." Short standalone fragments for manufactured emphasis (undated, self-published; treat as illustrative). SINGLE SOURCE for the fragment sub-tell (chair's note applied).
 - [183] Makin: curt dialogue that ends on a cliffhanger. SINGLE SOURCE for the cliffhanger sub-tell.
@@ -306,7 +306,7 @@ Reconstruction rule: no fragment stands as a sentence in the dossier. No paragra
 
 ### 13. Reflexive antithesis: not X but Y [R]
 
-Supported by: RECOUNT
+Supported by 10 verified rows across 8 source documents; 3 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [112] Wikipedia's guide catalogues negative parallelism, not just X but also Y and not X but Y; [178]: not only but and it is not just recur, and the guide is "this list is descriptive, not prescriptive; observations, not rules". Both rows describe encyclopedic text [R].
 - [113] Gonzales: "your brain doesn't skip to the alternative"; the reader retains the negated concept. SINGLE SOURCE for the cognition claim, resting on one 2003 study the page cites (critic's finding applied).
@@ -323,7 +323,7 @@ Reconstruction rule: the construction is banned in the dossier without exception
 
 ### 14. The rule of three: tricolons, stacked triplets, three abstractions [R]
 
-Supported by: RECOUNT
+Supported by 12 verified rows across 9 source documents; 3 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 For the tell:
 - [73] Bakhshi: LLM argumentative prose uses tricolon 7.13 times per document against 3.73 for human experts, with devices "deployed independently of argumentative occasion". SINGLE SOURCE for the rate.
@@ -342,7 +342,7 @@ Reconstruction rule: a list in the dossier runs to the true count of the things 
 
 ### 15. AI vocabulary: grandeur nouns, avoided copulas, significance adverbs, participial openers, noun-heavy sentences, and the words that drift [R]
 
-Supported by: RECOUNT
+Supported by 60 verified rows across 23 source documents, of which 1 reader comment, 4 relays (kind field, where present); 10 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 Measured overuse:
 - [34] Reinhart et al.: GPT-4o uses camaraderie 162 times, tapestry 155, intricate 119, underscore 107 and amidst 100 times the human rate; "grandiose, if hollow, summative sentences". [35]: models "do not vary their linguistic output in response to contextual factors". [32]: instruction-tuned models use "present participial clauses at 2 to 5 times the rate" of humans; the archival round adds [1344], the same paper at its PDF, "GPT-4o uses present participial clauses at 5.3 times the rate" of humans, and [1313], Huang et al. relaying it, so the syntax rests on one paper verified three times, not on a single row (chair's note applied: the previous draft's single-source flag beside [33] is corrected; [33] is partial and quote-only).
@@ -371,7 +371,7 @@ Reconstruction rule: the dossier's lexicon is civic and plain. Its verbs are is,
 
 ### 16. Metaphor: off-target, piled up, stacked at the sentence end, scenery given intent, lyrical nonsense, concept piled on concept [R]
 
-Supported by: RECOUNT
+Supported by 26 verified rows across 16 source documents, of which 1 reader comment (kind field, where present); 6 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [127] Vollmer: "Right ballpark, wrong physics." [128] sudo: what AIs fail to grasp includes "Logically coherent metaphors". [130] tropes.fyi: forced figurative language "sounds clever rather than because it clarifies anything".
 - [157] Michel on the OpenAI story: "protagonists cut from whole cloth, emotions dyed and draped over sentences", the five-car pile-up; [137] on the Granta story: "man, it does not have a story. There's no narrative." (partial, quote only) [156]: "Grief, as I've learned, is a delta" (the line is the OpenAI story's own text quoted by Michel; downgraded in r10).
@@ -391,7 +391,7 @@ Reconstruction rule: the archivist uses no figurative language. A comparison, wh
 
 ### 17. Repetition without relief: the same word, the same shape, the same cliché well; and the loop [R]
 
-Supported by: RECOUNT
+Supported by 38 verified rows across 23 source documents, of which 1 relay (kind field, where present); 11 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [139] Makin: a human writer might reuse words, but "even bad ones will 'give it a rest' when they notice"; [179]: "it won't stop going to the same well". The mechanism Makin gives (the model keeps obeying the instruction and fitting the previous paragraph) is Makin's alone; SINGLE SOURCE for that mechanism (chair's note applied); the measured mechanism is below.
 - [347] Anderson et al.: "When I want more, I want different more." [664] Coagulopath: "you just get the same stuff again". [397] a commenter's principle: "the results will be almost or exactly the same" when the prompts are; [399] three dock encounters in one module share one read-aloud word for word.
@@ -416,7 +416,7 @@ Reconstruction rule: a thing keeps its one name throughout the dossier (the mill
 
 ### 18. The em dash, contested and drifting [R]
 
-Supported by: RECOUNT
+Supported by 14 verified rows across 9 source documents, of which 1 relay (kind field, where present); 5 partial rows cited for quotation only; excluded row [223] cited on a supported limb or for the record only. Counts generated from the JSON by recount-ai.mjs.
 
 As a tell in current output:
 - [904] Kriss: "But it's strangely hard to get rid of them."; [903] his hypothesis, and only a hypothesis: within the training data "the em dash is more likely to appear" in well-formed prose. [707] Baumler et al.: editors removed em dashes as a mark "commonly associated with LLM-generated text", the belief as of 2026 rather than its truth. [1420] the guide: "LLM output uses them more often than nonprofessional human-written text" of the same genre, in a section the page flagged in September 2026 as possibly historical; [1421]: "AI-generated em dashes are usually surrounded by spaces".
@@ -437,7 +437,7 @@ Reconstruction rule: the dossier's no-em-dash rule stands as house style, justif
 
 ### 19. The evaluative register: vibes, praise, sycophancy, puffery, positive emotion, the distanced formal voice, the eulogy [R]
 
-Supported by: RECOUNT
+Supported by 34 verified rows across 19 source documents, of which 4 reader comments, 1 vendor statement (kind field, where present); 5 non-LLM rows cited for the human side and not counted; 5 partial rows cited for quotation only; excluded row [30] cited on a supported limb or for the record only. Counts generated from the JSON by recount-ai.mjs.
 
 - [204] in Seed, heavy, beautiful, iconic and vibes attach to an age, a name and a shoe colour alike; [202] filler, as in feature 7. [201] and [869] Litchfield: "a by turns smarmy and sycophantic tone". [853] Martin on Copilot: "when I asked for more detail it became weirdly effusive". [700] Strauss: "hyper-personalization coupled with lavish praise".
 - [592] Hern names the source: a wild model's "fawning obsequiousness" hammered into line through RLHF. [758] Sharma et al.: feedback "does not depend solely on the content of the text"; [759]: Claude 1.3 "wrongly admits mistakes on 98% of questions" when challenged; [760]: "matching a user's views is one of the most predictive features".
@@ -456,7 +456,7 @@ Reconstruction rule: the archivist rates nothing and praises nothing. No adjecti
 
 ### 20. Length and consistency: strong openings that decay, errors in the middle and the tail, tells that scale with length, openings by formula [R]
 
-Supported by: RECOUNT
+Supported by 25 verified rows across 20 source documents, of which 4 reader comments (kind field, where present); 2 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [49] Wang et al.: "high-starting, low-ending". [53] Li et al.: in long LLM stories consistency errors are "most common in factual and temporal dimensions", clustering in the middle (no human baseline). [169] and [648] Clarke: "the tells are more obvious on longer works".
 - [165] Hockaday: "usually you can tell the first couple of sentences". [48] Beguš: Once upon a time. [561] a reader of Lawrence's blind test: "the AI pieces all introduced the dragon in the opening statement". [497] Walsh et al.: the same first word, In.
@@ -474,7 +474,7 @@ Reconstruction rule: the dossier is built from short entries, each a self-contai
 
 ### 21. Canon and premise breaks: facts the world does not hold, and instruction residue in the text [R]
 
-Supported by: RECOUNT
+Supported by 26 verified rows across 20 source documents; 7 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [194] Dragonfree; [195] canon names confused; [208] a faction forgotten; [206] ketchup in the Song dynasty; [53] factual and temporal errors mid-narrative.
 - [341] CALYPSO: "giving giant spiders telepathy". [402] Beoric, December 2022: the bot "does not understand the implications of 'up' and 'down'". [386] the ships forgotten.
@@ -493,7 +493,7 @@ Reconstruction rule: a dossier sentence may assert only what the world state hol
 
 ### 22. Register invariance: style over story, the same style everywhere, the default breaks through, humour and genre as coin flips, institutional prose already converted [R]
 
-Supported by: RECOUNT
+Supported by 32 verified rows across 22 source documents, of which 1 reader comment (kind field, where present); 3 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [35] Reinhart et al.: no variation by context. [51] Jung et al.: six models "consistently prioritize Style over narrative content elements". [71]; [135]; [38].
 - [499] Walsh et al.: the poetic default "still breaks through" prompts; [491]. [481] an emerging writer asked for a named author's style got "less 'artificial intelligence' and more 'automatic imitation'"; [635] Chiang: style mimicry "produces a highly derivative story"; [656] the Hemingway exception.
@@ -514,7 +514,7 @@ Reconstruction rule: the four registers (the archivist, the Herald's short pools
 
 ### 23. The reader split: lay readers prefer the predictable, experts do not, LLM judges agree with neither, and fine-tuning closes the expert gap [R]
 
-Supported by: RECOUNT
+Supported by 89 verified rows across 43 source documents, of which 4 reader comments, 4 relays (kind field, where present); 10 partial rows cited for quotation only; excluded row [60] cited on a supported limb or for the record only. Counts generated from the JSON by recount-ai.mjs.
 
 Lay readers and rubric judges prefer it:
 - [61] Marco, Gonzalo and Fresno: surface-focused readers reward readability and richness; holistic readers value "thematic development, rhetorical variety, and sentiment dynamics".
@@ -546,7 +546,7 @@ Reconstruction rule (program, not prose): the owner's eye is the metric. No LLM 
 
 ### 24. Detectors are not a gate [R]
 
-Supported by: RECOUNT
+Supported by 57 verified rows across 28 source documents, of which 2 reader comments (kind field, where present); 8 partial rows cited for quotation only; excluded rows [238], [550] cited on a supported limb or for the record only. Counts generated from the JSON by recount-ai.mjs.
 
 - [237] and [543] Liang et al.: seven detectors flagged human TOEFL essays at an "average false positive rate: 61.22%"; [544]: they "penalize writers with constrained linguistic expressions"; [545]: a literary self-edit cut "detection rates from 100% to 13%". Re-cut excluded row (chair's note applied): [238] is CONTRADICTED only in attributing both drops to one prompt; its abstract figure, from 68% to 28%, came from a second prompt asking for advanced technical language, so ornate and technical registers both evade the detectors.
 - [239] The Markup: detector design "inherently discriminates against non-native authors". [240] the vendor's "a False Positive Value of 5.04%" (a vendor with a stake). [241] OpenAI withdrew its classifier within six months. [242]: "Selections from The Bible also show up as AI-generated." [243] Vanderbilt: 750 wrongly flagged papers in 75,000 "if it is even possible".
@@ -569,7 +569,7 @@ Reconstruction rule (program): the program's instruments measure structure (glos
 
 ### 25. Assistance homogenises even human work [F]
 
-Supported by: RECOUNT
+Supported by 28 verified rows across 10 source documents, of which 1 relay (kind field, where present); 0 partial rows cited for quotation only; excluded row [25] cited on a supported limb or for the record only. Counts generated from the JSON by recount-ai.mjs.
 
 - [628] Doshi and Hauser, the primary (chair's note applied: [252], the press release, is retired): "access to generative AI ideas causes stories to be evaluated as more" creative; [629]: AI-enabled stories are "more similar to each other than stories by humans alone"; [630]: "an increase in novelty of 8.1%"; [631]: "how well the story was written increase by up to 26.6%" for the least creative writers; [632]: "there is little effect of having access to generative AI ideas" for the most creative; [633]: GPT-4, one three-sentence idea. Re-cut excluded row [25], CONTRADICTED on the phrasing of one figure, cited on its supported limb: "collectively a narrower scope of novel content is produced", the similarity increases being 10.7% and 8.9% of the total range of similarity scores, not a 10.7% gain in similarity (chair's note applied).
 - [74] Padmakumar and He: essays written with InstructGPT "repeat higher-order n-grams more frequently"; [771]; [772]: "this effect is mainly attributable to InstructGPT"; [773]: the user's own "text remains unaffected by model collaboration".
@@ -586,7 +586,7 @@ Reconstruction rule (program): the reconstruction wave does not route every pool
 
 ### 26. The industry verdicts: barks are load-bearing, placeholder text does not help, publishers and awards pledge, prompts ship in the text, the slush pile doubled [F]
 
-Supported by: RECOUNT
+Supported by 62 verified rows across 36 source documents, of which 1 reader comment, 4 vendor statements, 3 relays (kind field, where present); 1 non-LLM row cited for the human side and not counted; 11 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - Barks and incidental lines, one document (chair's note applied: SINGLE SOURCE for the load-bearing claim): [209] Randall; [863]: "Background chatter, combat barks, NPC dialogue, side-quests, it all matters."; [864]: "Combat barks can characterise an enemy faction"; [866]: hundreds of small lines "they can create a sense of scale or place"; [865] Starfield's procedural cities have "all the rough edges sanded off" (procedural generation, not an LLM, counted for the human side). Adjacent: [417]; [420] Thompson: the demo was "two narrative designers working full-time" for three months, one source (critic's finding applied); [407] Shea: "They offer the illusion of help".
 - Placeholder text: [200] and [868] Larian; [867]: "We don't have any text generation touching our dialogues, journal entries"; [429] Keywords' developers found it "couldn't write all the code or create great narrative"; [430]; [431]; one corporate report echoed by every outlet (critic's finding applied). [1388] Hargrave's clunky names do the job for a prototype, and no further.
@@ -608,7 +608,7 @@ These are the rows in the sweep that measure the register the dossier writes: th
 
 ### 27. Fabrication in the record: real sources unread, invented entities with plausible detail, wrong dates, invented places and people, fabricated citations [R]
 
-Supported by: RECOUNT
+Supported by 45 verified rows across 22 source documents; 12 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [257] WikiProject AI Cleanup: recent models cite real sources but "will likely not verify the content"; [258]: models "virtually always fail to properly source claims". [259] Wikipedia's LLM page: the fictitious "greater-toothed pademelons"; [262]: errors arrive "plausible-sounding and given with an air of confidence"; [1025]: models "hallucinate citations of non-existent references by making up titles, authors" and URLs.
 - [267] 404 Media: patrons "asking him to find books that don't exist". [268] FActScore: biographies "riddled with errors"; the archival round re-verified the paper at [1028] ("ChatGPT only achieves 58%"), [1029] (42.5%, 58.3% and 71.5%), [1030] ("Error rates are higher for rarer entities") and [1031] (later facts worse); [270].
@@ -626,7 +626,7 @@ Reconstruction rule: the finite-semantics law is the whole rule. Every noun in a
 
 ### 28. Over-association and the dominant version: relations gestured at, facts linked that no source links, minority accounts dropped [R]
 
-Supported by: RECOUNT
+Supported by 17 verified rows across 10 source documents; 5 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [276] STORM: generated articles "introduce unverifiable connections between different pieces of information"; [277]. [292], [889] and [1415], one guide section at three fetches (critic's finding applied: one document, not two): LLMs "will often allude vaguely to the two subjects being" connected instead of stating the relation.
 - [279] Index on Censorship: "if it finds a particular version of a story cited more often" it is treated as mainstream; [282] Historica: "hallucinations reinforce dominant perspectives while marginalizing underrepresented voices". [283] Brooks et al.: eight of forty-five flagged articles "partial towards a specific viewpoint"; [316].
@@ -642,7 +642,7 @@ Reconstruction rule: a relation in the dossier is named or absent: the mill belo
 
 ### 29. The encyclopedic tells: the field guide's signs, with three settlement entries [R]
 
-Supported by: RECOUNT
+Supported by 59 verified rows across 6 source documents, of which 1 reader comment, 3 relays (kind field, where present); 11 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 The settlement entries:
 - [877] and [1178] the October 2024 revision of Kumba, Cameroon: road networks "helped solidify its role as a regional hub" and "solidify its role as a regional hub". [879], [286] and [1413] the June 2023 revision of Douera, Algeria: a census figure followed by "creating a lively community within its borders." and "further enhancing its significance as a dynamic hub". (partial, quote only) [1176] the June 2023 Alamata woreda entry, "stands as a vibrant town with a rich cultural heritage" (it was not the article's opening). [876]: significance statements "for even the most mundane of subjects".
@@ -665,7 +665,7 @@ Reconstruction rule: this is the dossier's direct ban list, and it binds the arc
 
 ### 30. Measured drift in record and institutional registers: less readable, fewer references, expansion without verification, non-stationary tells [R]
 
-Supported by: RECOUNT
+Supported by 36 verified rows across 19 source documents; 4 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [313] Huang et al.: longer words, fewer to-be verbs, fewer pronouns, longer sentences, "tend to be less readable"; [314]: "clear drop in accuracy" in retrieval on Gemini-revised pages.
 - [315] Brooks et al.: 0.667 footnotes per sentence against 0.972, 0.383 links per word against 1.77, "less integrated into the Wikipedia nexus"; [317] and [801]: "we detect that as many as 5% of 2,909 English" articles created in August 2024 contain significant AI content; [802].
@@ -685,7 +685,7 @@ Reconstruction rule: the record register's specific failure is expansion without
 
 ### 34. The biographical record: fabricated lives, corrupted kin, the eulogy register, the hedged non-statement, circular sourcing, no testimony [R]
 
-Supported by: RECOUNT
+Supported by 61 verified rows across 16 source documents, of which 12 reader comments, 7 vendor statements (kind field, where present); 4 non-LLM rows cited for the human side and not counted; 4 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 This feature is the archival round's biographical angle, the register nearest the dossier's entries on a settlement's named holders. Every row observes an obituary, a genealogical biography, an encyclopedic biography or a citation to a record.
 
@@ -717,7 +717,7 @@ Reconstruction rule: a person in the dossier is a name, an office, a holding and
 
 ### 35. The gazetteer and place description: the invented place with vivid adjectives, the promotional register intruding, the omitted war, the missing first-hand particular, place text that is more positive than the place [R]
 
-Supported by: RECOUNT
+Supported by 32 verified rows across 18 source documents, of which 5 reader comments, 2 vendor statements (kind field, where present); 5 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 The invented place, and the invented particular:
 - [1192] a Peruvian guide on an AI itinerary to a nonexistent Sacred Canyon of Humantay: "confidently written and full of vivid adjectives"; [1193]: the name is "a combination of two places that have no relation" to the description. [331] and [332] as in feature 27. [1198] a Wikivoyage editor on a batch of small-town articles: "AI's tendency to hallucinate regarding places or events that don't already" have an online presence makes much of their content probably false.
@@ -740,7 +740,7 @@ Reconstruction rule: a place in the dossier is what the engine holds of it: its 
 
 ### 36. Historical fact and archival summarisation under measurement: the benchmarks, the trial, the news audits, the legal record [R]
 
-Supported by: RECOUNT
+Supported by 28 verified rows across 10 source documents, of which 2 reader comments (kind field, where present); 5 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 Dated historical fact:
 - [1211] HiST-LLM, NeurIPS 2024: "GPT-4-turbo 46.0 [45.5, 46.5] (4-choice balanced accuracy)", the best of seven; [1212]: "Llama-3.1-8B (FP8) 33.6 [33.2, 34.1]", the weakest; [1213]: the models beat "random guessing (25%) but falling short of expert comprehension"; [1215]: GPT-4-Turbo "achieves 55.3% for 8,000-6,000 BCE, drops to 38.7% for 1,500-2,000 CE"; [1217]: every Seshat variable is recorded as evidenced or inferred and the benchmark tests the difference; [1224] del Rio-Chanona: "History is often viewed as facts, but sometimes interpretation is necessary". (partial, quote only) [1221]: "only achieved about 46% accuracy" (the byline is Rollet, not Wiggers).
@@ -765,7 +765,7 @@ The previous draft's practical conclusion, that no prompt, temperature or model 
 
 ### 31. What does not fix it: temperature, penalties, negative prompts, a diversity instruction, a style instruction, a punctuation instruction, a surface rewrite, a different sampler [R]
 
-Supported by: RECOUNT
+Supported by 68 verified rows across 33 source documents, of which 3 reader comments, 1 relay (kind field, where present); 4 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [50] DK and Hatzel: negative prompting and temperature scaling "fail to meaningfully address this homogeneity"; [76]: switching models does not restore diversity.
 - [754] Lanchantin et al.: temperature did "not alleviate this problem, as we see a sharp decline in quality"; [797] janus, 2022: raising temperature "will flatten the rest of the output distribution into undifferentiated goo"; [798]: the collapse "is irreducible to an effective decrease in temperature"; [804] Peeperkorn et al.: "temperature is weakly correlated with novelty"; [805]; [806]: "far more nuanced and weak" than the creativity-parameter claim; [782] Yun et al.: under a full chat template the gains "from temperature scaling are substantially smaller".
@@ -794,7 +794,7 @@ Reconstruction rule (program): no rendering pass may rely on a sampling paramete
 
 ### 32. What partly does: a sampling prompt that asks for a distribution, minimal templates, per-author fine-tuning at a cost, diversity-aware training, base models, data accumulation, a better decoder, a fenced-in role [F]
 
-Supported by: RECOUNT
+Supported by 54 verified rows across 32 source documents, of which 2 vendor statements, 1 relay (kind field, where present); 4 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - [746] Zhang et al., Verbalized Sampling: "VS increases diversity by 1.6-2.1×" over direct prompting; [750]; [751]; [752]: "larger models benefit more from VS"; [747]: "mode collapse can be mitigated at inference time"; [748]: "aligned models retain significant inherent diversity". [799] janus: "possible to avoid mode collapse using prompt engineering". [1123] to [1127] of the same paper: [1123] the typicality-bias mechanism is verified; [1124] to [1127] were triaged.
 - [780] Yun et al.: the collapse is governed by the chat template's structural tokens; [783]: WritingPrompts semantic diversity 0.3291 under the full template, 0.4767 under a minimal prompt.
@@ -814,7 +814,7 @@ Reconstruction rule (program): the pools are authored, so none of this is used a
 
 ### 33. Why it happens: the alignment objective, shared instruction data, the template, the preference data's typicality bias, overfitting to the markers of quality [F]
 
-Supported by: RECOUNT
+Supported by 60 verified rows across 35 source documents, of which 1 relay (kind field, where present); 3 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 - The objective: [753] Lanchantin et al.: with equally rewarded generations, "shifting all probability to only one of them is an optimal solution"; [794] Xiao et al.: "this bias could lead to a phenomenon we term preference collapse"; [795].
 - Where it enters: [740] Kirk et al.: "RLHF significantly reduces output diversity compared to" SFT; [741]; [745]; [742]: "It is unclear whether this tradeoff is a fundamental one in fine-tuning"; [743], [744]. [807] O'Mahony et al.: "We find that SFT is largely responsible for the drop"; [808]; [809]; [811]. [357] Chung et al. [775] Lu et al.: the index falls "by an average of 30.1% after RLHF"; [779]. [772]. [46]. [537] Moon et al.: "homogenization may be an inherent feature of current LLMs". [786] and [787] Murthy, Ullman and Hu. [45] and [31]. [1094] the Antislop relay of Kirk.
@@ -884,7 +884,7 @@ What the table says: nineteen of the thirty-eight faults now have at least one v
 
 ### 37. The second tell catalogues, set beside Wikipedia's guide, with each tell's source [R]
 
-Supported by: RECOUNT
+Supported by 24 verified rows across 11 source documents, of which 2 relays (kind field, where present); 1 partial row cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 The critic asked for a second, independent record-register tell catalogue because feature 29 rests on one page family. The archival round fetched the English policy criterion, the French and German project pages, two peer-reviewed tell lists, four measured studies, a Cornell Tech source audit, Wiki Education's hand check and the Chambers and Kelley detector study; the triage verified ten rows of eighty and skipped seventy, so the table below sets the guide beside what was verified and names what was not.
 
@@ -908,7 +908,7 @@ Reconstruction rule: feature 29's ban list is re-read against both the guide and
 
 ### 38. Setting prose in the worldbuilding and tabletop communities: the reviewers, the designers, the moderators, and one generated archive [R]
 
-Supported by: RECOUNT
+Supported by 41 verified rows across 16 source documents, of which 6 reader comments, 3 vendor statements, 1 relay (kind field, where present); 8 partial rows cited for quotation only. Counts generated from the JSON by recount-ai.mjs.
 
 The chair asked that the community and reviewer voices on generated setting prose stand as their own feature. The archival round could not reach the storefronts' review text (DriveThruRPG, DMs Guild and World Anvil are behind Cloudflare; Reddit is walled), so the feature stands on a store-labelled hex-crawl read line by line, two module comment threads, a designer-history site, a tool vendor, a rules study, a survey and two policies.
 
@@ -931,7 +931,7 @@ Reconstruction rule (dossier and DM page): a summary summarises: the Adventure S
 
 No row in kept-ai.json, partial-ai.json or state-ai.json carries an `alt` field (count 0), so no row carries a second verifier's verdict in the shape the brief names. The second-verifier evidence exists in another shape: 196 of the 1518 claims carry a verdict in more than one verdict file, because the r1 regrade (68 rows, 2026-09-06 00:21), the r5 regrade (77 rows, 14:42) and the r10 regrade (73 rows, 2026-09-07 01:07) re-graded rows that a first pass had already graded. Every one of the 196 pairs disagrees, by construction, because the regrades were adversarial passes aimed at rows with a suspected loose limb: 91 went VERIFIED_VERBATIM then VERIFIED_SUBSTANCE (kept); 74 went VERIFIED_VERBATIM then PARTIAL and 2 went VERBATIM then SUBSTANCE then PARTIAL (partial); 27 went VERIFIED_SUBSTANCE then PARTIAL (partial); 2 went VERIFIED_SUBSTANCE then CONTRADICTED (excluded). Of the 1015 kept rows, 91 carry a second verdict and all 91 disagree with the first, in the one direction the regrades could move a kept row: they were downgraded from VERBATIM to SUBSTANCE because the quotation lives in a full text, PDF or mirror rather than at the cited landing page; their substance was re-confirmed, not disputed. The r10 regrade's sixteen pre-940 downgrades to PARTIAL are named in the header; every one was a hedge, a scope word or an attribution the claim had smoothed, and none reversed a finding. The triage-r10 file assigned SKIPPED_TRIAGE to 285 of the archival round's 578 claims, so 295 claims in all carry a triage verdict and no verification; the coverage table names the count per angle, and the second-catalogue angle is the one most affected (70 of 80). The random second pass over unsuspected kept rows that the critic asked for did not run; until it runs, the flip rate on suspected rows (100 per cent, by selection) says nothing about the 924 kept rows that carry one verdict.
 
-Aggregate source concentration among the 1015 kept rows, by host: arxiv.org 398, en.wikipedia.org 72, nytimes.com 23, together 493 of 1015 (48.6 per cent); arxiv.org is a resolver over 115 distinct papers, so the host figure overstates concentration of documents and understates concentration of publishers. The next hosts are doi.org (21), aclanthology.org (19), pcgamer.com (19), tenfootpole.org (19), nature.com (12), newyorker.com (12), countercraft.substack.com (11). There are 134 distinct hosts, 328 distinct URLs, 303 distinct documents once arXiv renderings of one paper are merged, and 480 distinct source strings. By document, the four heaviest are en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing (59 rows, reached by six angles), arXiv 2604.03136 StoryScope (33 rows), arXiv 2409.14509 LAMP (23 rows) and Kriss's New York Times Magazine essay (20 rows), together 135 rows (13.3 per cent). The archival round's own concentration is lower than the corpus's: its 246 kept rows come from 91 documents, and its heaviest are the Post's obituary report (12 rows), Wikipedia's guide (11 new rows), the ASIC answer (8) and Seife's Slate piece (8). Of the 1015 kept rows, KEPT_CITED are cited above and KEPT_UNCITED are not; the uncited kept rows are UNCITED_LIST. Of the 191 partial rows, PARTIAL_CITED are cited for quotation and PARTIAL_UNCITED are not, the uncited ones being rows whose true wording carries digits that the citation convention keeps out of any sentence naming a partial row, rows that repeat a kept row's quotation, or rows that support no feature above.
+Aggregate source concentration among the 1015 kept rows, by host: arxiv.org 398, en.wikipedia.org 72, nytimes.com 23, together 493 of 1015 (48.6 per cent); arxiv.org is a resolver over 115 distinct papers, so the host figure overstates concentration of documents and understates concentration of publishers. The next hosts are doi.org (21), aclanthology.org (19), pcgamer.com (19), tenfootpole.org (19), nature.com (12), newyorker.com (12), countercraft.substack.com (11). There are 134 distinct hosts, 328 distinct URLs, 303 distinct documents once arXiv renderings of one paper are merged, and 480 distinct source strings. By document, the four heaviest are en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing (59 rows, reached by six angles), arXiv 2604.03136 StoryScope (33 rows), arXiv 2409.14509 LAMP (23 rows) and Kriss's New York Times Magazine essay (20 rows), together 135 rows (13.3 per cent). The archival round's own concentration is lower than the corpus's: its 246 kept rows come from 91 documents, and its heaviest are the Post's obituary report (12 rows), Wikipedia's guide (11 new rows), the ASIC answer (8) and Seife's Slate piece (8). Of the 1015 kept rows, 1015 are cited above and 0 are not; the uncited kept rows are none. Of the 191 partial rows, 175 are cited for quotation and 16 are not, the uncited ones being rows whose true wording carries digits that the citation convention keeps out of any sentence naming a partial row, rows that repeat a kept row's quotation, or rows that support no feature above.
 
 REGISTER MAP (which failure modes bind which register; chair's note applied).
 - The settlement dossier's archivist is bound first by Part D (27 to 30 and 34 to 36), which is the measured evidence in its own register, by feature 37's two catalogues, and by every Part A and B rule marked [R]: 1 (no gloss, no participle of significance, no analysis the record did not hold), 3 (no death peaceful by default, no place more positive than the place), 7 (a particular in every sentence, a named record, no vague authority, no epithet on a place, testimony as witness and date), 10 (the office is the author; a citation points at a roll the engine made), 11 (length follows load; keep the plain copula), 12 (no fragment, no list, no kicker), 13 (no antithesis), 14 (true counts), 15 (the ban list, held as house style), 16 (no figure of speech; no thing acts without an actor; no route famous), 17 (one name per thing; no output fed back as context), 18 (the no-em-dash and straight-quote house rules, recorded as style), 19 (no praise, no puffery, no eulogy), 20 (short self-contained entries; relations are the engine's), 21 (only what the world state holds; the residue gate), 22 (no promotional phrase can enter), 24 (verification, not a detector, is the gate). The [F] rules it inherits as analogy, with the sharpest weight on 2 (a matter stays open), 5 (dependency order, a count that moves), 6 (pool dispersion), 8 (no feeling, no weather as mirror, no spectral vocabulary) and 25 (no single-model rewrite). Features 34 to 36 add the record-specific bans: a person is name, office, holding and dates; kin is the engine's; a place is what the engine holds of it; no fact is ever asked of a model; a gap is a gap.
@@ -939,3 +939,201 @@ REGISTER MAP (which failure modes bind which register; chair's note applied).
 - The chronicle line is bound by 5 (each year depends on the one before), 4 (a later year may re-value an earlier one and refers back by name), 2 (a matter closes once; no moral at year's end), 20 (each line self-contained, opening on the event, no two lines opening alike), 6 (no default names, no default disasters), 3 (a settlement may fall and stay fallen), 28 (a relation named or absent), 29 (no Challenges or Future prospects shape, no closing summary), 30 (no sentence that exists to connect two others), 36 (the year's summary is a count of its facts, never a model's reading; [1215]'s period gradient and the news audits [1241] to [1247] are the measured reasons a chronicle line is never generated), and 11's coherence warning ([1475], [1485]: a continuation that drifts in topic or person mid-line).
 - The DM page alone carries 9's NPC rules (role-keyed pools, faction memory, no anachronism), 21's build-gate scan for instruction residue, 26 and 38 (stubs over placeholders; barks are load-bearing; a summary summarises; a background has facts; [1397]'s second-person purple read-aloud is the named failure of boxed text), and the program rules of 23, 24, 25, 31, 32, 33 and 37 (no LLM judge, no lay gate, no detector gate, no single-model rewrite of the pools, no sampling parameter or sampler as a source of variation, no model upgrade taken as a cure, a tell list re-read at every collection). A DM note may use one antithesis per page (13) and is the only register allowed a designer's aside; [1378]'s reader tells (a misspelling, a long loose construction) are human marks the DM page may keep.
 
+
+## PARTIAL rows: verbatim quotation only, and the limb that is not supported
+
+These 191 rows may be cited for the quotation in the second column and for nothing else. Where the supplied quotation was not on the page, the verifier's true wording is given; where the true wording exceeds twelve words it is trimmed and marked. The unsupported limb is the verifier's own statement of it.
+
+| index | quotation (the verifier's true wording, at most twelve words) | the unsupported limb |
+|---|---|---|
+| 6 | fourth wall (67% vs. 39%); reader directly (28% vs. 7%); specific texts (trimmed) | the 'temporal complexity' framing — the verifier records that the three cited percentages are intertextuality/fourth-wall features, not temporal ones |
+| 8 | far harder to "humanize" | "professional-style rewriting" — the edit was Gemini's own LAMP span-level artifact removal, not rewriting by professionals. |
+| 10 | delves (r=28.0), showcasing (r=10.2), underscores (r=10.9); 66% verbs, 16% adjectives | the 66%-verbs/16%-adjectives split holds only of the 319 excess STYLE words, and pivotal, realm and meticulously are not in Kobak's own excess list. |
+| 11 | lexical overrepresentation remains a feature of current iterations of ChatGPT | "consistent with RLHF as the source" — the paper reports mixed evidence, only that testing is "consistent with RLHF playing a role", not a demonstrated source. |
+| 12 | wary of the word "delve" | "readers may judge a text on those words rather than its content" — the paper says this of rushed RLHF evaluators, not of readers generally. |
+| 22 | tend to fall short in terms of novelty, surprise and diversity | the p<0.05-to-p<0.0001 range and the lexical-vs-semantic split of diversity appear nowhere on the cited abstract page. |
+| 23 | LLMs generate stylistically complex stories, but tend to fall short | the verbosity evidence (more unique words, longer dependency paths, more nouns and adjectives) is absent from the page — zero hits on every search term. |
+| 33 | "informationally dense, noun-heavy style" | the 2.6x "that"-clause and 1.9x phrasal-coordination rates are GPT-4o-specific, not all instruction-tuned models, and "academic" is not the paper's word. |
+| 37 | "a word like unspoken occurs in about 15% of LLM-generated responses" | "templates" — the paper files "sense of / weight of / mix of" under recurrent awkward words and phrases, reserving "syntactic templates" for its POS n-gram analysis. |
+| 40 | "LLM-generated stories lead to 7–9 higher drop ratio than human-written ones" | "resolved immediately after it peaks" — the paper's drop measures an element dropped or hastily closed off, sometimes left unresolved, not strictly resolved. |
+| 42 | "a substantial advancement (i.e., early occurrence) of TP4 and TP5" | "about 10–15% earlier" — the strings 10% and 15% appear nowhere in the paper; the advancement of TP4/TP5 is reported only qualitatively and in a violin plot. |
+| 47 | less conflict-driven social dynamics | the LLM edge-weight floor is 0.235 (GPT-4o Mini), not 0.236, and "far less variability" is not borne out per-metric — human density SD (0.056) is lower than every model's. |
+| 52 | roughly twice the human baseline | the action-space deficit is not universal — GPT 4.1 stays close to or above the human baseline; only Gemma 3, Mistral 3.2 and LlaMA 3.3 fall below it. |
+| 59 | GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3 | the GPT-4 creativity figures 0.97 (English) and 0.88 (Spanish) do not appear anywhere in the page text; they sit inside a non-machine-readable figure. |
+| 62 | more predictable and formulaic narratives | the framing word 'only' before 26.7% — the verifier records that this is the least-cliche result of the three models, 'not a low absolute' |
+| 65 | Humans retain an edge in creativity | "humans led only on originality" is not strictly true — humans also edged GPT-4 on humor, 6.4 vs 6.0. |
+| 68 | less variation when compared to human-generated sentences | STTR 0.424 is Falcon-7B alone, the lowest model, not an LLM-wide value; the model range is 0.424–0.466. |
+| 69 | Humans exhibit stronger fear and disgust, less joy | the blanket "magnify male-pronoun bias" elides Falcon 7B, the one model that reduces the bias (by 7.5%). |
+| 70 | a broader and flatter distribution | the 54–72% / 114–133% / 111–152% ranges hold only in the factual-news columns; the fake-news columns are materially lower (posemo +70 to +79%, certain +21 to +39%). |
+| 78 | illogical in hindsight | "32% of GPT-4 game lines" drops the paper's "rated by at least one player" qualifier — a mild overstatement. |
+| 82 | preliminary end-to-end experiments revealed these shortcomings, say the authors | the defect list is misattributed — thematic focus, out-of-character dialogue and thin character development come from the authors' own preliminary experiments, not from the blind screenwriter evaluation. |
+| 83 | some studies identifying trends toward overly positive or uninspired endings | misattributed — "unconvincing, repetitive, tonally misaligned" and "overly positive or uninspired endings" are the authors citing prior literature; only the genre item is an expert-panel finding. |
+| 85 | The craft was polished ... but the humanity was difficult to find | "soulless" is Josh Bernoff quoted inside the post and "no subtext, no psychological reasoning" is a reader's comment, not the cited editor's own observations. |
+| 87 | They are boring. They are flat | the 'no subtext or layers' limb — the verifier does not locate it on this page, recording only that it 'appears in the other pass at the same quote' |
+| 88 | No one has verbal tics, dialect, or pattern of evasion | "everyone says what they mean" is the claimant's gloss and is not stated on the page. |
+| 89 | AI dialogue serves philosophical debate more often (59% vs. 34%) | "expository" is the claim's gloss; the paper's feature is "philosophical debate" as a dialogue function. |
+| 93 | it will fail to have the emotion linked to it | the concrete-sensory-detail limb, supported only indirectly (via a worked deep-POV rewrite) rather than by a stated rule |
+| 94 | that average is equivalent to the least interesting choices possible | attribution — the wording is Ted Chiang's, quoted by LitReactor from The New Yorker, not the cited author's own. |
+| 95 | art is something that results from making a lot of choices | attribution — both the quoted line and the one-choice-per-word arithmetic are Ted Chiang's, quoted inside Michel's essay, not Michel's. |
+| 99 | lacks emotional valence and could lull the reader to sleep | "even rhythm" — Bernoff writes "a boring, even tone", not even rhythm. |
+| 100 | A novice author wouldn't repeatedly go for these sentence patterns | the attribution limb — the wording is from Makin's parody passage written in the AI voice, not his own analysis |
+| 101 | Alternating loquacious ponderous similes and tiny sentences made out of cliches | the attribution limb — the wording is from Makin's parody passage written in the AI voice, not his own analysis |
+| 102 | the rhythm is becoming recognizable as an AI pattern | the "becoming recognizable as an AI pattern" quote closes the COMMA + LIKE/AS IF section and does not attach to the fragment-paragraph or em-dash tells. |
+| 104 | AI rhythm is the mechanical, metronomic quality of text | "Gemini paragraphs are nearly identical in length" — the page reports a sentence COUNT (4–5 per paragraph), not paragraph length. |
+| 105 | The constant objective correlatives and choppy cadence | the causal framing (cadence "built from" objective correlatives and enjambment) is the summarizer's synthesis; the page lists them as co-occurring tells. |
+| 110 | fiction repeatedly requires the significance of earlier details to be reinterpreted | "coordinates neither well" overstates — the abstract pins autoregression to the surprise/inevitability challenge only. |
+| 111 | it loves contrived mic-drops like the last sentence | "force closure" and "final lines" are the summarizer's gloss on what the source offers as a parenthetical self-referential joke. |
+| 114 | The aforementioned "not X; Y" is still universal | "feels obligatory rather than natural" is the summarizer's characterization; the page says only that the construction is "universal". |
+| 116 | it says absolutely nothing at all | the "says absolutely nothing at all" line is the article's opener about machine prose generally, not about the "isn't just X; it's Y" + metaphor + tricolon template. |
+| 118 | AI explains. Humans imply. | attribution — "AI explains. Humans imply." is quoted from a Mohammad Siam reply on X, not the Dramatica post's own formulation. |
+| 123 | delve, intricate/intricacies, pivotal, tapestry, testament (realm absent) | "realm" occurs zero times on the page, and "delve" is listed only for the 2023–mid-2024 era as dropping off sharply in 2025. |
+| 129 | metaphors spammed in the final sentence to describe a single concept | the sensory-overload ("eyeball kicks") half rests on the author's citation of Nostalgebraist rather than his own evidence, and he notes newer models have improved. |
+| 131 | AI overwhelmingly conveys emotion through physical sensations and bodily metaphors | "an inversion of the usual AI-tells-emotions assumption" is the claim author's gloss, not the paper's framing. |
+| 138 | Products impress people; platforms empower them. | "triplets of descriptors" — the source describes stacked tricolons (rule of three), not descriptor triplets. |
+| 140 | AI does this on a sentence level often with those em-dashes, declarative (trimmed) | the quote's anchoring — it sits in the deep-POV section and is not the source's support for the em-dash claim |
+| 141 | Pacing flatness: scenes unfold at a constant rate. | the POV-lock limb, which Vollmer attributes to Charlie Guo rather than observing himself |
+| 143 | Fine-tuned outputs were rarely flagged as AI-generated (3% vs. 97% for prompting) (trimmed) | the trailing clause "the tells above characterize prompted default-register output" is the analyst's own inference and is not in the paper. |
+| 144 | Perhaps people generally prefer predictability | "identified authorship at chance" — experiment 2 was 39.93%, below chance; only experiment 3 (51.97%) was at chance. |
+| 148 | AI stories show tighter causal chains, more protagonist-driven resolutions, fewer subplots, and (trimmed) | the intensifier "far fewer subplots" is not in the source, which says only "fewer subplots" with no magnitude. |
+| 149 | They use more temporal discontinuity, more flashbacks and nonlinear movement | "AI stories stay chronological" — the source is strictly comparative (humans use MORE) and never asserts the absolute. |
+| 150 | AI dialogue more often turns into philosophical debate. | "rather than character-driven exchange" is the analyst's gloss; the page does not use that phrase. |
+| 153 | Clichés (17%); 'unnecessary filler' is defined under Unnecessary/Redundant Exposition (18%) | "clichés and filler" at 17% conflates two categories — 17% is Clichés alone; filler sits under the 18% Unnecessary/Redundant Exposition row. |
+| 156 | Grief, as I've learned, is a delta | the attribution limb — the verifier records the quoted line is the OpenAI story's own text quoted by Michel, not Michel's prose (the rule applied to [100] and [101]) |
+| 160 | The hardest and most time-consuming part of writing is shaping, honing, and (trimmed) | the ten-thousand-choices arithmetic is Ted Chiang's, block-quoted by Michel, and the page says a hundred choices, not "almost none". |
+| 166 | It was didn't make much sense. And then it was overly narrative (trimmed) | scope — the poem was an AI generator's pastiche of a friend's style posted for a laugh, not a slush submission. |
+| 167 | among the worst submissions we've ever received and sometimes bad in entirely (trimmed) | "the worst ever received" overstates Clarke's "among the worst submissions we've ever received". |
+| 172 | I can't stress enough that it creates a terrible, soulless product | "they drove submissions to 2,800 in two weeks" — AI is called "a big reason", not the sole cause, and the open period ran 15 days. |
+| 174 | is a testament/reminder | the 'pivotal moment' phrase, which the verifier records is not contiguous on the page (only slash-variants appear) |
+| 180 | Alternating loquacious ponderous similes and tiny sentences | "without a governing restraint" is the researcher's gloss, not the page's words. |
+| 188 | high school essay vibes | the attribution limb — 'high school essay vibes' is Vollmer quoting AI for Lifelong Learners, not his own coinage |
+| 189 | Dialogue flattening: characters sound alike; no distinct idiolect. | the attribution to Neil Clarke — the verifier records the three bullets as the guide's own, not Clarke's words |
+| 190 | a jaw that was, objectively, a jaw | attribution is wrong — the quoted phrase is Negrek's (thread starter, post #1), not Goolix's as the row's source states. |
+| 191 | Something he didn't have a good word for | "declining to examine emotion with specificity" is the researcher's gloss; the source frames the tell as generic vagueness. |
+| 193 | starting a sentence with “not”–is common with LLMs | the three-fragment string is a composite that appears nowhere contiguously, and both passages are Negrek's, not Goolix's. |
+| 196 | Whitney, with startling gentleness for someone who'd been arguing about tea infusion (trimmed) | the attribution limb — the quoted line comes from the AI-generated sample fic, not the commenter's own observation |
+| 197 | over-represented lexical patterns in LLM outputs | fluorescent, humming and particular appear zero times on the cited repo page, and the quote illustrates only what a trigram is — the repo supports the mechanism half alone. |
+| 207 | they're undeniably robotic, not offering any sort of personality or charm | the page never uses the brand name "ACE"; it is the Nvidia/Convai demo (Riva, NeMo, Audio2Face). |
+| 210 | trends toward overly positive or uninspired endings | only the genre item comes from the n=10 Delphi expert panel; the endings and uneven-quality items are the paper citing prior studies, and "unconvincing, repetitive" is the authors' intro framing. |
+| 215 | describe algorithmic generation as the 'exact opposite of inspiration' | "on ethics and livelihood grounds" is explicit for only two entries — Paizo, Chaosium, WotC, Renegade and Stonemaier are listed with no stated grounds, and Free League's stated policy is against AI art. |
+| 216 | it's been at the same level for three years | "human creators now fear tripping the same alarm" — the voiced fear is about ART styles, not prose. |
+| 218 | an AI prompt asking for a rewrite in another author's voice | the book's June 2025 publication date and its Kindle Unlimited membership, which the verifier records the page never states |
+| 220 | a 'vibe' that the story felt artificial | "because the story felt artificial" overstates a single causal chain — the ChatGPT accusation was one belligerent review; the felt-artificial vibe came from other reviews. |
+| 222 | Later editors put the dashes back -- because they weren't accidents | the 'signature mark' limb — the page calls Dickinson 'the patron saint of the em dash' rather than saying it was her signature mark |
+| 225 | a diagnostic signature of how a model was fine-tuned | "envelops" overstates — the human range 0.33–17.12 does not reach the LLM floor of 0.0. |
+| 227 | also be attributed to amateurish or unedited writing | "flat voice" is the claim's paraphrase; the reported tell is "the narrative voice was all over the place". |
+| 231 | a reflection of effective communication strategies embedded within their training data | the attribution limb — the page attributes the quoted concession to 'AI writing tools', so it is an LLM self-description relayed by the vendor, not the vendor's own finding |
+| 234 | Human speech and writing is being influenced by LLMs | the quote's anchoring — the verifier records it sits on the convergence point rather than on either half of the claim it is attached to |
+| 235 | no one used basic words like 'delve' | "from school onward" is the claim's gloss; the article never says school. |
+| 236 | probably not overrepresented in the training data | "likely post-training" overstates the paper's hedge, that testing is only "consistent with RLHF playing a role". |
+| 244 | our recursive paraphrasing method can significantly reduce detection rates | "degrades toward random as LLM text distributions approach human ones" is not spelled out in the abstract now on the page, which states only an AUROC/Total-Variation theoretical framework. |
+| 249 | misclassifies only 1 of 300 articles | "not punctuation counts" is the researcher's own contrast; the paper never cites punctuation. |
+| 253 | LLM-generated stories pass 3-10X less TTCW tests than stories written by professionals | the dimensional gloss is only half supported — the paper does not single out Elaboration as a deficit and frames the gap as broad rather than concentrated. |
+| 254 | hoax with well-formatted citations referencing completely nonexistent works | that it passed Articles for Creation, and that it survived 2023-01 to 2023-12 |
+| 255 | list of completely fake sources in Russian and Hungarian | that Russian and Hungarian were chosen/effective because fewer reviewers could check them |
+| 256 | real German and French sources, but completely off-topic; unrelated lifeform | that the unrelated subject was a crab |
+| 260 | LLMs draw conclusions not present in any single reliable source | that it is delivered in encyclopedic voice |
+| 261 | neutral-seeming in tone, but not necessarily in substance | the superlative 'hardest to catch' and the unrestricted 'biographies' — the verifier records the page says 'especially salient' and narrows to biographies of living persons |
+| 263 | might invent details when faced with an obscure-topic prompt | the 'rather than saying less' limb, which the verifier records is not stated on the page and is only inferred from inventing |
+| 264 | One subtly false claim or distorted quote can misinform readers | that it survives review (the page asserts only that it can misinform and damage trust) |
+| 265 | drafts often read like advertorials or partisan spins | the promotional-language-mixed-into-facts limb, which the page states only as a feared hypothetical rather than an observation |
+| 266 | seven references in one AI draft, five of those fabricated | that the others led to unrelated articles - the page says the citations 'led nowhere' |
+| 269 | Error rates are higher for rarer entities, consistently across all models | the ~80% to ~16% ChatGPT figures — no per-frequency-bin precision numbers appear anywhere in the page text; they exist only inside Figure 2 (top), an image whose alt text is 'Refer to caption' |
+| 271 | 36.0% and 37.6% of supported and unsupported sentences have citations | '36% of both' — the two rates are not equal: supported sentences are 36.0% but unsupported sentences are 37.6%, not 36% |
+| 275 | the most common errors stem from... improper inferential links | the second- and third-place ranking ('then inaccurate paraphrase, then irrelevant sources') — the paper states only which error is most common; the actual distribution is in Figure 8, an image, and the text never ranks inaccurate paraphrasing above citing irrelevant sources |
+| 278 | often the most reliable way... is to check whether the sources support (trimmed) | 'stylistic signs ONLY prioritise which sentences to check' — the page presents sign-reading as the main identification method, one that 'can produce high degrees of certainty', not merely a triage step; and it calls source-checking 'often the most reliable way', not the only reliable test |
+| 280 | instructing Copilot to cite primary sources... the bot confidently misquoted primary sources | that the fabricated paper was produced under the cite-primary-sources instruction — on the page the invented paper came from the EARLIER prompt (an essay based on Kanisetti's work); only the misquoting followed the primary-sources instruction |
+| 293 | common among human writers, but stereotypically an AI sign | 'recur far above human frequency' - the page asserts no frequency comparison against human writers, and explicitly says the construction is common among human writers |
+| 296 | LLMs overuse the rule of three | the 'rather than because the record has three' contrast, which the verifier records the page never phrases |
+| 297 | uses them more often than nonprofessional human-written text of the same genre | the unqualified 'abnormally high rate' — the page's baseline is nonprofessional human writing, and its own maintenance box says the sign seems less common in current LLM output |
+| 298 | older LLMs often ended sections by summarizing and restating | the '2022-2024' date window - the page attaches no date range to section summaries (the dated heading 'Didactic disclaimers (November 2022-2024)' is a different sign) |
+| 303 | the object is promoted to subject and becomes the 'doer' | the absolute 'no human actor is ever named' — the verifier records the page says LLM output 'defaults to actor-less constructions at high density' |
+| 304 | insource search of "in connection with" in Draft space returns 720 results | '720 Draft-space hits' is the count for "in connection with" alone, not the three phrases together; 'disproportionately' is asserted by no measurement on the page |
+| 306 | the spreadsheet I keep has 106 signs (sorted by strength) | 'most of which' overstates the page's 'a lot of them', and it is one editor's personal spreadsheet, not 'editors' collectively tracking |
+| 309 | real 2023 abstracts: is/are 'dropped by more than 10%'; rest is simulation | the 10-17% range and the 99%/308% rises are GPT-3.5 SIMULATION results (Table 1, abstracts before vs after ChatGPT processing), not measured changes in 2023 arXiv abstracts |
+| 320 | federated output more complete than ground truth, scored lower | 'more than the record asked for' - the paper says ISAD(G)'s Extent element asks for size AND format, so the extra was beyond the archivist ground truth, not beyond the standard |
+| 324 | fabricated citations include names of real journals and publishers | 'authentic-sounding authors and plausible titles' - the paper never assesses author or title plausibility in fabricated citations |
+| 330 | a group of 24 drivers ... had actually taken a detour | 'coach parties' - the article reports one group of 24 DRIVERS on a trip from the mainland, not coach/bus parties |
+| 337 | GPTZero is black-box; the second tool, Binoculars, is 'more transparent' | 'the detectors black-box' (plural) - only GPTZero is; the Signpost explicitly calls the second detector, the open-source Binoculars, 'more transparent' |
+| 344 | DMs found that the model struggled sometimes to describe combat | the causal 'because it had no combat-state or map-placement information' — the verifier records this is 'the paper's implication rather than its assertion' |
+| 345 | no helpful summary when a monster had only numeric game stats | the 'had nothing to draw on' limb, which overstates the paper's 'minimal external knowledge' |
+| 354 | effective at open-domain story generation ... struggle with long-term story coherence | the attribution limb — the sentence is the paper's related-work framing attributed to Kreminski and Martens (2022), not a result of the cited paper |
+| 355 | unoriginality or homogeneity in both the semantic and syntactic aspects of generated (trimmed) | the attribution limb — the page attributes the finding to Anderson et al. (2024) and Begus (2023), not to the cited paper |
+| 356 | earlier paragraphs tended to be more homogenous than later paragraphs | 'openings converge hardest' - the paper immediately qualifies the trend as 'relatively weak' and says it 'did not hold across all premises', a hedge the claim drops |
+| 358 | Man in Hole: 30.7% of human stories versus 51.3% of GPT-4 stories | '28% for humans' for Man in Hole - Figure 4 gives the human share as 30.7% (GPT-4 51.3%); no 28% figure for that arc appears anywhere in the paper |
+| 361 | Human arousal higher; gap enlarges midpoint to end; +40% over vanilla | the 'raised suspense ratings ~40%' limb — the verifier records the 40% as a human comparative win-rate, not a rating scale |
+| 363 | most failed plans causally sound, actions lacking valid intention | the unscoped generalisation — the verifier records the finding is scoped to the o1 model and hedged as 'often with', where the claim states it flatly |
+| 365 | drops are in western conflict-planning with adventurers, not intentional planning | the attribution of the 2-to-3 and 10-to-12 adventurer drops to intentional planning; the page reports them for the western dramatic-conflict variations |
+| 374 | An LLM Game Master would try to accommodate for even the most (trimmed) | the indicative 'accommodates' — the verifier records the paper's verb is the conditional 'would try to' |
+| 384 | Quality varies unpredictably; cited studies found overly positive endings, uneven sessions | the overly-positive-endings and across-sessions limbs, which the paper reports as findings of cited studies (Taveekitworachai et al. 2023) rather than its own |
+| 389 | basic math screwed up; no complication inflicted after the success | the 'two core mechanics' limb — the article's two mechanics are the action roll and Helping, and both cited violations are action-roll rules (Helping is never shown violated) |
+| 392 | "Note the padding. Note how it doesn't say ANYTHING." | the universal 'every encounter' — the verifier records the page phrases it as recurrence, not a literal universal |
+| 394 | One commenter laments the mediocre D&D corpus ChatGPT trained on | "Commenters" (plural) - exactly one comment on the page makes this point (Anonymous, Nov 26 2024, 1:04 am); no second commenter says it |
+| 404 | without actually knowing what's in the Fiend Folio | the flat assertion — both source statements are hedged ('as far as I can tell', 'apparently') while the claim states them flatly |
+| 405 | there were similarities with the original room | the verb 'concluded' — the verifier records the page says 'I suspect ... if you use it a lot' |
+| 406 | motivated by greed and loyalty to their goblin boss | the 'every NPC in the same template' limb, which the verifier records holds within a key rather than across the whole transcript (and the block format was dictated by the prompter) |
+| 409 | Keep it short and keep it powerful. | the bar generated boxed text is measured against by reviewers |
+| 410 | Players understand about half of what we describe to them. | the opposite of the padded, withholding generated style |
+| 412 | takes more training data to tune it to remember deeper associations | the 'far more' intensifier, which the verifier records as an overstatement of the page's 'more' |
+| 428 | the demo now sits at a 'Very Negative' rating with a total (trimmed) | 'as of 2026-09-06 the Steam page shows 15% positive of 476' - absent from this page (it is on the Steam store page, where I confirmed it); and the Zork quote is a reader comment, not the article |
+| 432 | we ultimately utilized bench resource from seven different game development studios ... (trimmed) | the 'FY2023 report' label, which the verifier records is inferred from the March 2024 dateline rather than printed on the page |
+| 449 | AI is only adept at regurgitating tropes | the evidential status — the verifier records the proposition is reported as a participant hypothesis (p15), not an authors' finding |
+| 456 | the 'subtext' is either incorrectly interpreted or missing | that models reproduce the surface accurately: faithfulness is the paper's LOWEST-scoring attribute — only 44% (GPT-4), 30% (Claude), 8% (Llama) of summaries are rated fully correct, and the abstract says all three 'make faithfulness mistakes in over 50% of summaries' |
+| 457 | stories with unreliable narrators are harder for all three models to summarize | that ALL THREE models repeat the narrator's self-description as fact — the page evidences this with one GPT-4 example only; no Claude or Llama instance is shown |
+| 472 | Wordcraft generally suggests simple and sensible metaphors. | the exclusivity 'only' — the page says Wordcraft 'generally' suggests simple and sensible metaphors, not that it offered nothing else |
+| 479 | “a weird and violent kind of homogenizing that steer toward the narratives (trimmed) | the plural 'writers' for the dominant-powers framing, which the verifier records is participant FV's alone |
+| 480 | MG: “Its similes and metaphors aren’t very good from the little I’ve (trimmed) | ‘the writers tested’ — the page shows a single participant (MG) reporting his own limited experimentation, not the writer group |
+| 489 | “Indian participants modified suggestions in 63.5% of the tasks (SD=4.2) whereas American (trimmed) | the quote's anchoring — 'Indians lose cultural nuance' comes from the introduction's cultural-gaze sentence, not from the passage carrying the 63.5%/59.4% figures |
+| 498 | Median limerick 25 lines; models bundle multiple poems together. | the sonnet-bundling limb (stated for GPT-3.5 only) and the causal 'because the model does not stop', which the paper hedges as 'we think this tendency more likely suggests' |
+| 501 | Models struggle with unfixed forms; elegy is more often recognized. | the parenthetical listing elegy among the forms models struggle with - the paper says forms on concrete subjects 'like death (elegy)' are MORE often recognized |
+| 506 | Players selected the boundary sentence 23.4% of time, chance 10%. | the framing word 'only' before 23.4% — the verifier records that the paper frames 23.4% as above chance rather than as 'only' |
+| 509 | cues "may not be related to stylistic details, at least not within (trimmed) | the unhedged, unrestricted second limb "readers' cues were not stylistic" — the page says only "may not be related to stylistic details, at least not within the genre of political speeches" |
+| 520 | sometimes a mirage built on leveraging artifacts in the training data | the unhedged 'a mirage' — the verifier records the page says apparent reasoning is 'sometimes a mirage', not always |
+| 531 | one of the main functions of creativity ... is the expression of (trimmed) | the 'which requires expression of deep emotion' limb — the verifier records the paper calls deep emotion one of the main FUNCTIONS of creativity, not a requirement of it, and hedges the machine limb with '(so far)' |
+| 549 | unfairly penalise students who write at a higher level of perplexity | the generalisation to any differing 'perplexity profile' — the paper names a higher perplexity level specifically (and the quote is in the PDF body, not at the cited abs URL) |
+| 551 | its understanding of its lack of understanding | not in its scene-making or characterisation - the article never discusses either, so the exclusion is inferred from silence rather than stated |
+| 558 | The 2nd and 3rd highest rated pieces were AI-written | written by ChatGPT 4 - the cited results page attributes the pieces only to 'AI', naming no model |
+| 570 | Basic AI spews clichés. | that cliché is *the* characteristic defect — the page gives three co-equal 'Basic AI' defect headings (boring emails, clichés, happy endings), not one |
+| 601 | “in part because they find AI poems more straightforward” | the sole-cause reading — the verifier records the authors offer it 'in part', as a partial and not the sole explanation |
+| 610 | “possibly because fine-tuning eliminates the stylistic tics… experts used to distinguish” | the verb 'attribute' — the verifier records the authors hedge the mechanism as 'possibly because', so the claim states it with more confidence than the page does |
+| 615 | “plot, character development, or structure might not be accurately reflected” | the 'leaves plot, character and structure unmeasured' limb, which overstates the page's hedge 'might not be accurately reflected' (and the brief was a 200-450 word excerpt, not only a 450-word ceiling) |
+| 637 | its sentences - and the small-scale choices they represent - help to (trimmed) | the two dropped hedges — Chiang writes 'I doubt you could' rather than 'you could not', and 'help to determine' rather than 'determine' |
+| 690 | Then, I cracked it, by establishing a fenced-in space for the AI (trimmed) | the 'rather than any structural role' limb, which the verifier records is not phrased that way on the page and is only entailed |
+| 789 | Code generation only: within high-quality outputs, preference-tuned models less diverse. | the unrestricted scope - the paper confines this finding to code generation, not generation at large |
+| 796 | Multiple credible sources: text-davinci-002 was not trained with RLHF. | that janus coined the mode-collapse usage - the page never says so, and its own prior-work section points the other way |
+| 820 | one of the features of AI writing that Mahadevan finds most jarring | the definite/superlative framing 'the feature of AI writing he finds most jarring' — the page says 'one of the features' |
+| 826 | I do get concerned that we fixate on these quick heuristics | the actor: the source says 'we fixate', not that readers fixate — and 'to identify AI' generally, not AI writing specifically |
+| 843 | We extract 10,272 human-written stories from Books3, from short story anthologies | that the corpus register is published literary fiction and not an archival or record register |
+| 885 | Mid-2025 and on (GPT-5): emphasizing, enhance, highlighting, showcasing (plus words associated with (trimmed) | (no limb recorded by the verifier; see the note) |
+| 905 | hundreds of Amazon books feature Elara Voss or Elena Voss | that the hundreds of Amazon books use 'those names' including Kael — the page's pair is Elara Voss or Elena Voss |
+| 910 | A.I. finds it very difficult to get the balance right | 'the model cannot get the balance right' — the page asserts difficulty ('A.I. finds it very difficult to get the balance right'), not impossibility |
+| 948 | the curious and concerned public is advised to stay tuned | that the quoted sentence ends the article |
+| 986 | Though the details of these resistance efforts aren't widely documented | that 'Throwing Curves: Eva Zeisel' is a Wikipedia biography — the page names it only as the article the revision belongs to, and that article is about a 2002 documentary film, not a biography |
+| 1000 | stilted messages that read as if they were ripped from LinkedIn | that Treadway said it — the LinkedIn simile is Harwell's paraphrase of Treadway's reaction, not words attributed to him; Treadway's own quoted line instead says the obits look like they were taken off a resume |
+| 1023 | neutral-seeming in tone, but not necessarily in substance | that the cited page is a policy page - its own banner says it is not a Wikipedia policy or guideline, but an information page |
+| 1055 | why high-probability text is often dull or generic | 'low probability is low information content' - the paper's relation runs the other way: high probability implies low information content |
+| 1111 | Introduction: "low-information strings may be seen as boring and uninformative" | "the low-probability end of the paradox" - the paper places boring/uninformative strings at the LOW-INFORMATION extreme, which (information = negative log-probability) is the HIGH-probability end; the low-probability end is the one it calls "hard to process" |
+| 1140 | Quote exact, but framed under "troubling omissions", not as close or characteristic | (a) that the guidebook "closed by" this passage - the article gives no position in the book, saying only that it 'encourages readers to'; (b) that the reporters quote it 'as characteristic of the books' - it appears in the troubling-omissions-and-outdated-information paragraph, not in any discussion of house style |
+| 1147 | "as bad as telling about a train that doesn't run" | the flat 'is as bad as' — the verifier records the source hedges with 'can be as bad as' |
+| 1157 | Menu was Pegasus's, the host's alternative after ChatGPT's pick was full | "at the restaurant it named ... that restaurant's menu" - the ChatGPT-named restaurant could not seat him; the menu lacking the dishes belongs to Pegasus, a place the host recommended instead |
+| 1176 | stands as a vibrant town with a rich cultural heritage | 'opened by saying' - the page never says the passage was the article's opening, and the cited revision shows it was not |
+| 1207 | the model estimates were systematically more elevated | 'identity-perception indices' - the paper's IPI is the sentiment-based ingroup preference index, not an identity-perception index |
+| 1221 | only achieved about 46% accuracy | the attributed byline - the TechCrunch piece is bylined Charles Rollet, not Kyle Wiggers |
+| 1250 | Accuracy (20%) and providing sufficient context (14%) | the '20 percent / 14 percent OF significant issues' denominator - the report gives these as percentages of all AI responses |
+| 1262 | there exists only a single, indisputable answer | excluding facts on which sources disagree |
+| 1269 | with Perplexity answering 37 percent of the queries incorrectly | that 37% and 94% are the range endpoints across all eight tools |
+| 1276 | Gemini-3-Pro-Preview 1.94 6.27 73.97 26.71 | the highest of the closed-source models listed |
+| 1360 | incompatible with our policies on citation | the flat 'do not cite the material they were trained on' — the verifier records the rule hedges with 'tend to provide incomplete or even no proper citation' |
+| 1366 | there are no links, internal or external | no source references — the page reports absent links and no list of published work, never absent citations |
+| 1372 | It got confused and included Star Trek setting information. | Alexander testing Gemini — the Gemini session was commenter anotherpanacea's shared transcript, which Alexander only analysed |
+| 1383 | commercial content primarily written by AI language generators | that partly AI-written titles are permitted — page states only the ban and its 'primarily' scope, never an affirmative permission |
+| 1436 | "chosen with maximum probability which can avoid the self-reinforcement effect" (§2.2) | the sole-reason framing and the dropped hedge — the verifier records the paper says the effectiveness 'may rely on' and gives two reasons, of which the claim states only the second; the quote also sits in §2.2 of the PDF, not on the cited /abs/ page |
+| 1440 | Table 4: GPT2-117M rL 37.91%, greedy decoding, limit L = 500 | 'had not ended within 1500 steps' - the 37.91% figure is measured at L = 500, not 1500 |
+| 1457 | violating the identified properties could lead to drastic performance degradation | that violating ANY ONE of the three properties produced the large drop: Section 5.2 finds random mask sampling, which violates order preservation, on par with the existing algorithms, and concludes order preservation could be further relaxed; the degradation is attributed only to violating entropy reduction or slope preservation, and the abstract hedges with 'could lead to'. |
+| 1466 | aligns with natural language more closely than text produced using other | the superlative 'closest' — the verifier records the paper says nucleus sampling 'often' aligns more closely, and that §5.4 has LSTM text under random sampling following all three distributions the closest of any model; the quote also sits in §5.5 of the PDF, not on the cited /abs/ page |
+| 1468 | we take this as quantitative evidence for recent qualitative observations | the rank-frequency results: the 'this' taken as quantitative evidence for repetitive babbling is only the type-token finding of Section 5.2, namely the two transformer models' visible fall-off in unique words for longer-length sequences, described there as a deficiency seemingly specific to the transformer architecture. No rank-frequency result is cited for the babbling observation. |
+| 1469 | the limitation of using adherence to Zipf's law as a gauge | the stated reason. Section 5.1 grounds the Zipf conclusion in a rank-frequency comparison alone: models fit a Zipfian distribution no more poorly than natural language does, the qualitatively worst text (a trigram model under beam sampling) follows the power law most closely, and models nonetheless learn empirical rank-frequency trends well. Type-token divergence is not offered as the reason; Section 5.2, from which the supplied quotation comes, reports transformers under nucleus sampling matching the type-token trend most closely. |
+| 1480 | For all the three tasks, Mirostat does not perform well in general | the unhedged 'which they attribute to' — the verifier records the source's attribution is hedged as 'probably because'; the quote also sits in §6 of the PDF, not on the cited /abs/ page |
+| 1481 | model loses its ability to produce certain strings, its precision rate | the universal 'every truncation sampler' — the verifier records the paper's own scope word is 'most', not 'every'; the exact quote also sits in §1 of the PDF, not on the cited /abs/ page |
+| 1503 | We ran the models on 10,000 English Wikipedia predictions | 'one of the few decoding studies to work in the encyclopedic register' - the paper makes no comparative claim about other decoding studies' registers |
+| 1514 | Repetition in this condition lacks a clearly identifiable circuit | 'behaviourally identical' - the paper says 'behaviorally similar' and 'superficially similar', and Section 5 measures a behavioural difference between the two (natural repetition starts at higher, wider-spread entropy; ICL converges to near-zero entropy by cycle 4) |
+| 1516 | Sec. 5: median entropy decreases as cycles increase; probability rise cited | that the authors themselves measure rising probability of the repeated tokens — the paper measures entropy only, and attributes the probability rise to prior literature ("results from the literature reporting increasing probabilities for repetition", Sec. 3; "consistent with previous findings" prefaces the quoted Discussion sentence) |
