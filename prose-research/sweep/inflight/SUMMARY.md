@@ -1,10 +1,16 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 16:16:08 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 16:22:08 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ? | critic |  | failed | 0 | — | — | 16:36:44 |
 | ? | critic |  | result | 0 | CRITIC-S12.md | — | 17:49:27 |
-| ? | other |  | in-flight | 0 | RECONCILIATION-DOSSIER.md | — | 20:14:56 |
+| ? | other |  | in-flight | 0 | — | — | 20:22:08 |
+| ? | other |  | in-flight | 0 | — | — | 20:21:46 |
+| ? | other |  | in-flight | 0 | — | — | 20:22:05 |
+| ? | other |  | result | 0 | RECONCILIATION-DOSSIER.md | — | 20:16:53 |
+| ? | other |  | in-flight | 0 | — | — | 20:21:56 |
+| ? | other |  | in-flight | 0 | — | — | 20:22:02 |
+| ? | other |  | in-flight | 0 | — | — | 20:22:08 |
 | ? | other |  | result | 0 | — | — | 15:08:52 |
 | ? | other |  | result | 0 | FOLD.md | — | 15:23:48 |
 | ? | other |  | result | 0 | — | — | 15:12:16 |
@@ -40,12 +46,6 @@
 | ? | other |  | result | 0 | — | — | 15:14:16 |
 | ? | other |  | in-flight | 0 | — | — | 15:19:38 |
 | ? | other |  | in-flight | 0 | — | — | 15:19:38 |
-| ? | other |  | in-flight | 0 | — | — | 14:27:52 |
-| ? | other |  | result | 0 | reconcile-dossier-archivist.md | — | 14:10:11 |
-| ? | other |  | in-flight | 0 | — | — | 14:27:45 |
-| ? | other |  | result | 0 | — | — | 14:14:25 |
-| ? | other |  | in-flight | 0 | — | — | 14:26:49 |
-| ? | other |  | result | 0 | reconcile-npc-ladder.md | — | 14:16:27 |
 | ? | other |  | result | 0 | CLERK-LAWS.md | — | 17:32:22 |
 | ? | other |  | failed | 0 | RULES-V2-PART-B.md | — | 18:25:52 |
 | ? | other |  | result | 0 | reconcile-dm-page.md, dm-only-measure.mjs, recount.py | — | 17:03:54 |
