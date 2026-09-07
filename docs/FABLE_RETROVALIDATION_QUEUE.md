@@ -3727,3 +3727,7 @@ No Opus car landed in this act. The battery (six cheap runs, one full run, two b
 
 No Opus car landed in this act. The twelve rulings, the two recorded owner words and the S12 lesson are Fable chair acts; the lanes they charter (SOAK-HONEST-909, CAP-HORIZON-909, L-MAT) enrol their retrovalidation rows at their own landings, beginning at §910.
 **Status:** no enrolment; §910 enrols SOAK-HONEST-909.
+## §910 — THE SOAK-HONEST LANDING (SEAT: Fable 5.1 — validated)
+
+### R73 — lane SOAK-HONEST-909 (9 cars, five by the lane: `ec265d24c` `268d53605` `d58b489b8` `68c3a1618` `864e76be9` by the lane, then the chair's register cars `6906e1935` `3f4914abc` `0a4d59826` `3b1c0eaa5`; receipt `receipt-soak-honest-909`; R1–R16 as ruled in the row above; the skeptic pass `wf_e092839f-8b1` (nine lenses + a critic, read-only) is the chair's re-derivation — its findings are the charter of car 5 and each is cited to the command that produced it; CONFIRMED by execution: the archived-receipt grades, the fresh-receipt grades, the roster 12/10, the walker 0/0, the same-seed `finalHash` equality, the 32-receipt census (the critic's `grade.mjs`), the empty-series probe (the critic's `empty.mjs`); PLAUSIBLE until car 5's run: the observability channel's exact reasons on the 29-row receipt)
+**Status:** enrolled; R1–R16 ratified (R11 reversible, R8 declared); four rows reopened and cured by car 5; three deferrals documented in the receipt.
