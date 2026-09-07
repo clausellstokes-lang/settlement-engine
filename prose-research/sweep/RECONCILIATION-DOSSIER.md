@@ -422,3 +422,10 @@ Seat: Fable 5.1 — validated.
 You left them to the chair. They were measured, not chosen: each of the ten human registers we fingerprinted was scored against the band formed by the other nine on twenty-one rules. Every human record breaks between one and seven of them (a sixth on average), typically by a tenth of a band and rarely by more than half, and none breaks none — each hand breaks a different handful. So: an entry may exceed at most a third of the soft rules (the human maximum), by at most half a band on any one (the human 90th percentile), and a block that breaks nothing is flagged for a look (no human record does that). The checker will re-measure these per paragraph before it enforces them; you may veto any of the three. Ledger §912.3.
 
 Seat: Fable 5.1 — validated.
+
+---
+
+## §13 THE TASTE SAMPLE PASSED — the reconciliation has fully passed (appended 2026-09-07 18:33 EDT by the Fable chair; §0–§12 byte-unchanged,      424 lines)
+One block of the town record (the line that names the governing body, three variants) was rewritten so that the facts stayed and the shape varied where the data allowed. It took three attempts and three independent adversaries: the first attempt changed claims and rested on a bug in the probe script; the second over-stated what the data allows and mis-read one verb; the third could not break either rewritten sentence, and every fault it found was in the chair's labels, corrected in the sample's §8. What it proved: the rewrite can remove the machine tells without changing a fact, and the two shapes the block shows were already in it — more shapes need more typed facts, which is the authoring wave you chartered (§11). With Part B and this dossier ratified at §912, the reconciliation has fully passed. Your pause of 12:40 is discharged by its own condition. Next: the checkers are built (the entry walker, the shape walker with your three numbers, the presence measure, the unrendered-facts count), then the blind DM panel, then the rewrite wave, then your walk. Files: `s12-sitting/taste/TASTE-SAMPLE-912-v3.md` and the three refutations beside it.
+
+Seat: Fable 5.1 — validated.

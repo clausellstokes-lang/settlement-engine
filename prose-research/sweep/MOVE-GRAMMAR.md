@@ -337,3 +337,10 @@ Seat: Fable 5.1 — the S12 judgment seat; ratified by the Fable chair at the ne
 | §5.2.6 the cross-register absence set | a PROPOSED instrument, no binding force (Part B §10 item 10) |
 | §6.1 "two variants in two grammars" | one block, one pool, ALL its variants (Part B §10 item 11); the sample's block DS-POW-5 (SITTING §F) |
 | §3.2's draw as `hash % length` (as quoted in the dossier §5) | `eligible[avalanche32(fnv1a32(seed::blockId::poolKey)) % eligible.length]` (`stateProseKernel.js:304`) |
+
+### 9.1 Added by the chair after the taste sample's third refutation (2026-09-07 18:33 EDT)
+| passage | amendment (OWED to the walker lane — to be carried, not yet in force) |
+|---|---|
+| §1.2 (eleven moves) and §2.1 (V1–V8) hold no QUALIFY | R-DA-03's QUALIFY — a second FACT licensed by a SECOND typed field, its own sentence, never a which-tail (wall 6) — is a licensed second SENTENCE, not an order member; whether it counts as a move for arm A's classifier (§4.1 item 3 reads clause structure) is decided once, in the walker lane; a QUALIFY whose second field the block does not hold is arm D's red (the taste sample's [street] variant carries one, pre-existing, banked) |
+| §1.2 row 5's INSTITUTION assertion types | self-naming ("calls itself the {seat}") is not listed; whether it is an INSTITUTION assertion or a PRESENT state is WITHHELD to the walker lane's spec |
+| §4.1 item 3 (moves read by clause structure) | a move packed into a nominal appositive is invisible to the classifier and reads as an arm-A disagreement with a correct tag — an appositive arm is owed (taste sample §8.1) |

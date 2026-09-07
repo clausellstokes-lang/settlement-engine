@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-07 18:32:54 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 18:38:34 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 3b1c0eaa5 · ledger = 26bb3e7ec §912.3: the three numbers of §912.2 are set by the chair under the owner's delegation, m
+product claude/composite-r4 = 3b1c0eaa5 · ledger = 69b2cc5e4 §912.4: the taste sample passes at its third cut after three Opus refutations, and with P
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3b1c0eaa5 · 18 cars over 4243bdc61 · porcelain 0 · last commits:
@@ -141,4 +141,4 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = 26bb3e7ec §912.3: the three
 - wf_31ce68bc-a03: 18 journal lines, 9 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.53 1.86 2.10
+load: 2.35 1.98 2.06
