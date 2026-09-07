@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:18:23 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:24:25 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -173,7 +173,7 @@
 | wolfe | regrade | regrade-r7 | result | 0 | build-wolfe-r7.mjs | — | 01:03:44 |
 | wolfe | synth |  | failed | 0 | — | — | 19:50:41 |
 | wolfe | synth |  | in-flight | 0 | — | — | 01:04:17 |
-| wolfe | synth |  | in-flight | 0 | — | — | 01:14:58 |
+| wolfe | synth |  | in-flight | 0 | — | — | 01:22:03 |
 | wolfe | verifier | i1008-1022 | result | 6 | — | verdict file WRITTEN | 00:18:08 |
 | wolfe | verifier | i1023-1037 | result | 6 | — | verdict file WRITTEN | 00:17:49 |
 | wolfe | verifier | i1038-1052 | result | 5 | — | verdict file WRITTEN | 00:22:48 |
