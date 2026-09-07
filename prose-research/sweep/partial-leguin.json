@@ -1908,6 +1908,30 @@
   }
  },
  {
+  "index": 661,
+  "feature": "annalist voice and deep time",
+  "claim": "Cadden says the book is true to the voice of the anthropologist examining the ways of the Kesh.",
+  "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+  "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22the%20voice%20of%20the%20anthropologist%20examining%20the%20ways%22",
+  "quote": "the voice of the anthropologist examining the ways",
+  "page": "archive.org search-inside snippet",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2005",
+  "routeHint": "archive.org search-inside via Open Library, scoped by identifier",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium (snippet-only; the book Always Coming Home is named at the head of the same window)",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 661,
+   "verdict": "PARTIAL",
+   "trueWording": "“The Back of the Book” in Always Coming Home is true",
+   "note": "Quote verbatim (…the voice of the anthropologist examining the ways of the Kesh). But the page attributes the anthropologist-voice to one back-matter section, not to the novel; the claim generalises a section to the whole book, and the neighbouring sentences stress that no single voice governs.",
+   "unsupportedLimb": "'the book' — Cadden's subject is the section “The Back of the Book”, not Always Coming Home entire",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  }
+ },
+ {
   "index": 697,
   "feature": "register modulation",
   "claim": "Cogell's bibliography records a review calling Le Guin's style in one book different from her preceding works.",

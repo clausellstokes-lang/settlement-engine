@@ -3,19 +3,19 @@
  "name": "dnd",
  "angle": null,
  "tag": "regrade-r12",
- "lines": 205,
+ "lines": 229,
  "firstTs": "2026-09-07T07:09:39.754Z",
- "lastTs": "2026-09-07T07:17:11.854Z",
+ "lastTs": "2026-09-07T07:19:35.970Z",
  "tools": {
-  "Bash": 10,
+  "Bash": 16,
   "Read": 46
  },
  "urlsFetched": [],
  "filesWritten": [],
- "lastAssistantText": "I'll start by running the merge command and reading the resulting file.",
+ "lastAssistantText": "2, 812, 1057, 1069, 1110, 1122, 1137) are already partial.\n\n**Four citation date fields the verifiers caught but that do not touch a claim limb** (worth patching, not downgrading): 914 says 2016, post is 15 Nov 2012; 915 and 917 say 2018–2020, post is 21 Nov 2016; 930 says 2021, post is 12 Jul 2020.",
  "run": "wf_43d098bf-eff",
  "agent": "a0915933b5a7581c3",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_43d098bf-eff/agent-a0915933b5a7581c3.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": null
 }

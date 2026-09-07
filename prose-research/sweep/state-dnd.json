@@ -16415,10 +16415,11 @@
   },
   "86": {
    "index": 86,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "allows them to state things more plainly and use more natural language",
-   "note": "Raw page read via curl. OP by Thaumaturge, Jun 25, 2014, thread 'Design Philosophy of 5e'. Quote verbatim: 'I think a benefit of this is it allows them to state things more plainly and use more natural language.' Rulings-over-exact-language limb verbatim: 'To let real people make real rulings that impact their own play instead of trying to nail down a specific style of play through exact language.' Community-inference framing correct - the natural-language line is the poster's own 'I think', hung off the Mearls Starter Set Unboxing video (one video, cited at ~46:15/48:00), not a designer statement about prose.",
-   "fromFile": "verdicts-dnd-i79-93.json"
+   "note": "R11 completeness-critic finding (4): row 86 is an EN World poster's 'I think', not Mearls — PARTIAL on the attribution limb. The verifier's own note agrees: 'the natural-language line is the poster's own \"I think\", hung off the Mearls Starter Set Unboxing video (one video, cited at ~46:15/48:00), not a designer statement about prose.'",
+   "unsupportedLimb": "the attribution: the 'more natural language' inference is poster Thaumaturge's own 'I think', not a Mearls statement",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "87": {
    "index": 87,
@@ -21193,10 +21194,11 @@
   },
   "753": {
    "index": 753,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "A lot of this involves de-bullet pointing the text.",
    "note": "Live raw page fetched. Opening paragraph, dated March 23 2023: the rewrite is of 'Behind Closed Doors', shown to be his own by 'I'm a better writer than I was three years ago' and 'even my bullet-points'. 'Largely' tracks the page's 'a lot of this'. Only nuance: the page says bullets -> prose, never that the text had been prose before ('back into').",
-   "fromFile": "verdicts-dnd-i751-774.json"
+   "unsupportedLimb": "'back into prose': the verifier records that the page says bullets -> prose and never that the text had been prose before",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "754": {
    "index": 754,
@@ -22415,10 +22417,11 @@
   },
   "925": {
    "index": 925,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the Armory and Council Hall in Bryn Shander get 2-3 sentences each",
-   "note": "Raw page, section 'Ten-Towns Businesses & NPCs'. Context puts both among the extra locations Legacy adds ('presents all of these plus 17 more'), and calls those write-ups 'not extensive', supporting 'minor'.",
-   "fromFile": "verdicts-dnd-i917-931.json"
+   "note": "R11 completeness-critic finding (3): row 925 measures Legacy of the Crystal Shard (2013, D&D Next), not a fifth-edition hardcover — PARTIAL on the dating limb. The measured Bryn Shander Armory/Council Hall write-ups are real; the edition the row is filed under is not.",
+   "unsupportedLimb": "the dating/edition limb: Legacy of the Crystal Shard is a 2013 D&D Next product, not a fifth-edition hardcover",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "926": {
    "index": 926,
@@ -22465,31 +22468,35 @@
   },
   "932": {
    "index": 932,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The following tables allow you to flesh out details about a settlement.",
-   "note": "Quote verbatim under 'Settlement Tables and Tracker'. All four headings appear exactly as given (Defining Traits 1d20, Claims to Fame 1d20, Current Calamities 1d12, Local Leaders 1d12), and a Settlements by Size table heads the section. The 'settlement-level' qualifier is doing real work and holds: the section carries two further roll tables, Tavern Names* and Random Shops, but each generates a sub-location inside the settlement, not an attribute of the settlement as a whole. Wizards' own Settlement Tracker corroborates the count by recording exactly those four rolled slots.",
-   "fromFile": "verdicts-dnd-i932-946.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "933": {
    "index": 933,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Simply describing the settlement to your players is usually sufficient.",
-   "note": "Quote verbatim in the sidebar headed 'Do I Need a Settlement Map?', whose opening sentence independently states a settlement does not always require a map. The page then adds that a map is helpful when it matters where buildings are - context the claim's own 'usually' accommodates rather than contradicts.",
-   "fromFile": "verdicts-dnd-i932-946.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "934": {
    "index": 934,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Village Up to 500; Town 501-5,000; City 5,001 and higher",
-   "note": "Quote verbatim in the sentence introducing the table. The three rows carry exactly the bands claimed. The same table also carries a Max. GP Value column (village 20 GP, town 2,000 GP, city 200,000 GP), which the claim does not mention but does not misstate.",
-   "fromFile": "verdicts-dnd-i932-946.json"
+   "verdict": "PARTIAL",
+   "trueWording": "population ranges for villages, towns, and cities",
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner — trueWording replaced by the verifier-confirmed quote field per the r11 critic finding 6; the three bands the verifier confirmed in the table are Village Up to 500; Town 501-5,000; City 5,001 and higher",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "935": {
    "index": 935,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "(which costs 50 GP) is too expensive an item",
-   "note": "Quote verbatim in the second paragraph, inside a worked example opening 'For example, a Potion of Healing...'. The numeral sits in running prose, not in a table, exactly as claimed.",
-   "fromFile": "verdicts-dnd-i932-946.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "936": {
    "index": 936,
@@ -22501,10 +22508,11 @@
   },
   "937": {
    "index": 937,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Respected, fair, and just leader or council",
-   "note": "Quote verbatim as row 1 of the Local Leaders 1d12 table; rows 8, 11 and 12 also name a council ('Acrimonious council unable to make decisions', 'Iron-willed and respected leader or council', 'Religious leader or council'). The 'retitled' limb is corroborated from the 2014 source fetched for indices 944-946: the 2014 equivalent is headed 'Ruler's Status' and its row 1 reads 'Respected, fair, and just' with no council offered.",
-   "fromFile": "verdicts-dnd-i932-946.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "938": {
    "index": 938,
@@ -22516,10 +22524,11 @@
   },
   "939": {
    "index": 939,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "2024 tables: Size, Traits, Fame, Calamities, Leaders, Taverns, Shops - none relations",
-   "note": "Absence claim, so no quote is possible; graded on a full enumeration of the fetched section. The 2024 Settlements section carries exactly seven tables - Settlements by Size, Defining Traits, Claims to Fame, Current Calamities, Local Leaders, Tavern Names*, Random Shops - and none concerns relations between peoples. The second limb is independently confirmed in the 2014 OCR fetched for indices 944-946, where a d20 table headed 'Race Relations' is the first of the Random Settlements tables. Both limbs stand.",
-   "fromFile": "verdicts-dnd-i932-946.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "940": {
    "index": 940,
@@ -22553,38 +22562,43 @@
   },
   "944": {
    "index": 944,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "When creating a settlement for your campaign, focus",
-   "note": "Quote verbatim in the full-book OCR; the sentence completes 'on the locations that are most relevant to the adventure.' Located in the Settlements section of ch.5, and the page foot two screens later reads '112 CHAPTER 5 I ADVENTURE ENVIRONMENTS', confirming the cited page and chapter.",
-   "fromFile": "verdicts-dnd-i932-946.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "945": {
    "index": 945,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the inhabitants of every building; that way lies madness.",
-   "note": "Quote verbatim; the full sentence opens 'Don't worry about naming every street and identifying...'. Both limbs of the claim - every street, every building's inhabitants - are present, as is the madness figure. Immediately follows the passage verified at index 944 on the same page.",
-   "fromFile": "verdicts-dnd-i932-946.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "946": {
    "index": 946,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "settlement. They assume that you've already determined",
-   "note": "Quote verbatim, straight apostrophe in the OCR matching the claim exactly; the sentence completes 'its size and its basic form of government.' The five-table count is confirmed by enumeration: under the 'Random Settlements' heading the OCR carries Race Relations, Ruler's Status, Notable Traits, Known For Its..., and Current Calamity, after which a separate 'Random Buildings' subsection begins. Both limbs hold.",
-   "fromFile": "verdicts-dnd-i932-946.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "947": {
    "index": 947,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "its size and its basic form of government.",
-   "note": "Raw OCR of the archive.org _djvu.txt (1,207,785 bytes, HTTP 200, curl direct). Quote exact at the head of 'Random Settlements'. The section carries exactly five tables in this order before the p.112 footer and the next section ('Random Buildings'): Race Relations, Ruler's Status, Notable Traits, Known For Its ..., Current Calamity. All five headings match the claim.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "948": {
    "index": 948,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Known For Its ...",
-   "note": "Quote exact, including the ellipsis, as the table heading. Its d20 column is headed 'Feature' and every result is a completing noun ('Delicious cuisine', 'Rude people', 'Piety', 'Gambling', 'Patriotism'), so the heading does read as a stem the rolled result finishes. Both limbs supported.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "949": {
    "index": 949,
@@ -22596,17 +22610,19 @@
   },
   "950": {
    "index": 950,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "concentrate instead on the major features.",
-   "note": "Quote exact. The sentence opens 'Mapping a Settlement' and reads, in full, that when you draw a settlement map you should not worry about the placement of every building and should concentrate instead on the major features. The claim's 'ignore' is a fair rendering of the book's 'don't worry about'; every limb is on the page.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "951": {
    "index": 951,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the kinds of trades that dominate the neighborhood",
-   "note": "Quote exact. The same paragraph in 'Mapping a Settlement' tells the DM to give wards names reflecting their personalities, which identify the trades, a geographical characteristic, or a dominant site - and all three of the claim's cited examples are the book's own, in its own parentheses: Tannery Square (with Temple Row), Riverside (with Hilltop), and the Lords' Quarter.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "952": {
    "index": 952,
@@ -22626,45 +22642,51 @@
   },
   "954": {
    "index": 954,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Settle on a single defining factor that sums up a",
-   "note": "Quote exact; the sentence completes with the settlement's personality and an instruction to extrapolate from there, and the paragraph then demonstrates it - a canal city like Venice yields sights, sounds, smells and the feel of humidity; a fog-shrouded city yields cold mist, muffled hooves, the smell of rain. Both limbs, the single factor and the extrapolation, are supported.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "955": {
    "index": 955,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "of this sort needs no more than a brief description.",
-   "note": "Quote exact, and the preceding sentence in 'Local Color' supplies the antecedent the claim depends on: a settlement that serves as a place where the characters stop to rest and to buy supplies. 'A settlement of this sort' is that settlement, so the rest-and-resupply limb is the book's own.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "956": {
    "index": 956,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Create only the features of a settlement",
-   "note": "Quote exact (the claim's longer form, carrying the tail of the previous sentence, also matches the OCR byte for byte). Under 'Purpose'. The passage continues that you create the features you know you'll need, with notes on general features, then allow the place to grow organically as the adventurers interact with more of it - so the 'let the place grow later' limb is supported too.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "957": {
    "index": 957,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Disregard any advice here that runs counter to",
-   "note": "Quote exact; the sentence completes with the DM's vision for a settlement, and the sentence before it frames the whole section as guidelines to help you build the settlement you want. The licence is explicit and it is scoped to this settlement section, exactly as claimed.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "958": {
    "index": 958,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Organizations: A village might contain one or two",
-   "note": "Quote exact. Checked all three size entries, not just the quoted one: Village, Town and City each carry the same five labelled fields in the same order - Population, Government, Defense, Commerce, Organizations - before their running prose. The record shape holds across the set, so the 'each settlement size' limb is confirmed rather than inferred from one entry.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "959": {
    "index": 959,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Cities that hold more than twenty-five thousand people",
-   "note": "Quote exact, in the running prose beneath the City record, in a sentence saying such cities are extremely rare before naming Waterdeep, Sharn and the Free City of Greyhawk. The threshold is spelled out in words in prose, as claimed.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "960": {
    "index": 960,
@@ -22676,17 +22698,19 @@
   },
   "961": {
    "index": 961,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "worth 50 gp in Waterdeep and 30 gp",
-   "note": "Quote exact. The sentence, about Waterdeep's harbor moon, completes with 'elsewhere', so both coin values sit as numerals inside one sentence of running prose under 'Example: The Forgotten Realms'. The surrounding paragraphs do the same repeatedly (the toal at 2 gp, Silverymoon's electrum moon at 1 gp / 1 ep, the eclipsed moon at 5 ep / 2 ep), so the pattern is the section's habit, not a one-off.",
-   "fromFile": "verdicts-dnd-i947-961.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "962": {
    "index": 962,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "naturally divide the city into wards (neighborhoods defined by specific features)",
-   "note": "archive.org _djvu.txt OCR of the 2014 DMG fetched raw by curl; the string appears at OCR line 2576 in the Settlements > Size > City passage. Both limbs hold: the preceding sentence has the stages of a city's growth identified by the expansion of the walls beyond the central core, and it is those internal walls that divide the city into wards. Section attribution ch.1 Settlements > Size > City is consistent (the Purpose section begins p.15 per a second source).",
-   "fromFile": "verdicts-dnd-i962-976.json"
+   "note": "ROUTE QUESTIONED — archive.org full-book OCR",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "963": {
    "index": 963,
@@ -22763,38 +22787,43 @@
   },
   "973": {
    "index": 973,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "proclaimed itself free and independent seventy-eight years ago",
-   "note": "Same raw roll20 fetch. Quote verbatim in the third paragraph of the Free City of Greyhawk opening. The elapsed span of seventy-eight years is spelled in words, with no numeral form anywhere in that sentence, so both limbs hold.",
-   "fromFile": "verdicts-dnd-i962-976.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "974": {
    "index": 974,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "made up of sixteen coequal rulers",
-   "note": "Same raw roll20 fetch. Quote verbatim and it does sit under the 'City Government' heading as the page field says: the council is the Directing Oligarchy and its membership count is spelled in words, not given as a numeral.",
-   "fromFile": "verdicts-dnd-i962-976.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "975": {
    "index": 975,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a standing garrison of some eight hundred",
-   "note": "Same raw roll20 fetch. Quote verbatim under the 'City Watch' heading; the sentence continues into linked creature names (Guards and Veteran Warriors). The garrison size is spelled in words. Both limbs hold.",
-   "fromFile": "verdicts-dnd-i962-976.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "976": {
    "index": 976,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "A 30-foot-high stone wall winds like a snake around the city.",
-   "note": "Same raw roll20 fetch. Quote verbatim as the first sentence under 'City Walls'. It is running prose, not a stat line, and the measurement is a numeral - and the same section keeps that habit (secret compartments at 300-foot intervals, a 30-foot-tall ladder, a sentry every 300 feet), so the contrast with the spelled-out counts in 973-975 is a real and consistent house rule: counts of people and years in words, physical measurements in numerals.",
-   "fromFile": "verdicts-dnd-i962-976.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "977": {
    "index": 977,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The perpetrator pays a fine of 2d10 GP or works",
-   "note": "Verbatim in the 'Crime' > 'Petty Crime' paragraph of the Roll20 licensed 2024 DMG page (HTTP 200, raw curl with browser UA, HTML stripped). Both limbs hold: the dice expression 2d10 and the coin abbreviation GP sit inside a prose sentence, and the same three-category Crime block also carries 50 GP, 250 GP, 100 GP, 1d6 years and 2d10 years in running prose.",
-   "fromFile": "verdicts-dnd-i977-991.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "978": {
    "index": 978,
@@ -22814,31 +22843,35 @@
   },
   "980": {
    "index": 980,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the year 576 in the Common Year",
-   "note": "Quote verbatim in 'The Big Picture'. The dating limb holds: realm-level events are dated 356 CY (Nyrond joining the secession), 453 CY (accession of King Tavish IV) and 569 CY (Battle of Emridy Meadows). Caveat on form only - the present year is written out as the Common Year in the same parenthesis rather than abbreviated CY, though the abbreviation is used for the dated events.",
-   "fromFile": "verdicts-dnd-i977-991.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "981": {
    "index": 981,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Seven years ago, knights and soldiers from Furyondy",
-   "note": "Quote verbatim under 'Central Flanaess' > 'Battle of Emridy Meadows'; the numeral form is in 'The Big Picture' on the same page, which asks the reader to picture the Flanaess about 200 years ago. The no-single-rule limb is reinforced by a second mismatched pair on the page: the Eastern Flanaess culture paragraph writes almost 800 years ago as a numeral while the Western Flanaess paragraph spells out about a thousand years ago, so no consistent spell-out threshold is in force.",
-   "fromFile": "verdicts-dnd-i977-991.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "982": {
    "index": 982,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the only relevant details of this history are those that",
-   "note": "Verbatim in the opening sentence of 'Living History', which completes with the clause that they feature in your adventures. The page states it of Greyhawk's own history of ancient empires and recent wars - the claim's generalisation to a setting's history is a fair reading of the worked setting, and the following sentence tells the DM to reveal significant details in the course of adventures.",
-   "fromFile": "verdicts-dnd-i977-991.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "983": {
    "index": 983,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "provide concrete touchstones to past events",
-   "note": "Verbatim in 'Living History' > 'Echoes of the Past', where all three of the claim's examples appear in one sentence: a crater in the side of a mountain, a defaced statue in the town square, a holiday celebrating a local hero. The page's own word is concrete touchstones rather than physical residue, and the third example (a holiday) is a custom rather than a physical object - a gloss, not a failed limb.",
-   "fromFile": "verdicts-dnd-i977-991.json"
+   "note": "ROUTE QUESTIONED — Roll20 body behind a purchase banner",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "984": {
    "index": 984,
@@ -23423,10 +23456,11 @@
   },
   "1064": {
    "index": 1064,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "They are labor-intensive (they must be added by",
    "note": "Raw PDF, 'Page References'. Full sentence continues 'hand during galley review), and they invite error.' Quote matches word for word and every limb (labor-intensive; added by hand; during galley review) is on the page. Flag for the downstream editor: the guide gives TWO reasons in that one sentence -- labor-intensiveness AND that page references invite error -- so the claim's definite 'The guide's stated reason' should not be read as the only reason.",
-   "fromFile": "verdicts-dnd-i1058-1074.json"
+   "unsupportedLimb": "the definite 'The guide's stated reason': the verifier flags that the guide gives TWO reasons in that sentence — labour-intensiveness AND that page references invite error",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "1065": {
    "index": 1065,
@@ -23923,10 +23957,11 @@
   },
   "1135": {
    "index": 1135,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "tips for adventure design from Chris Perkins and Greg",
    "note": "Same Wayback capture: 'In addition to the D&D House Style Guide, this package includes tips for adventure design from Chris Perkins and Greg Bilsand...'. The quoted fragment is word for word. FLAG: the page misspells the surname as 'Bilsand'; the string 'Bilsland' does not occur on this page, though the guide PDF itself is bylined 'Greg Bilsland'. The claim's spelling is correct for the person, not for this page.",
-   "fromFile": "verdicts-dnd-i1132-1146.json"
+   "unsupportedLimb": "the surname as cited: the verifier's FLAG records that the page reads 'Bilsand' and that the string 'Bilsland' does not occur on it",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "1136": {
    "index": 1136,
@@ -24298,10 +24333,11 @@
   },
   "1187": {
    "index": 1187,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a newspaper that covers events in Phandalin",
    "note": "Byte-exact in the opening body paragraph. In-world newspaper, handout, and the Phandalin adventures (Shattered Obelisk, Lost Mine of Phandelver) are all on the page. Caveat, not a failed limb: the page says 'Downloadable Handout' and supplies the image inline rather than printing the word 'free', and credits D&D Beyond / Mike Bernier rather than naming Wizards of the Coast.",
-   "fromFile": "verdicts-dnd-i1183-1197.json"
+   "unsupportedLimb": "the publisher-and-price limbs: the verifier records that the page says 'Downloadable Handout' rather than 'free' and credits D&D Beyond / Mike Bernier rather than naming Wizards of the Coast",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "1188": {
    "index": 1188,
@@ -24375,10 +24411,11 @@
   },
   "1198": {
    "index": 1198,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "denoting that it should be read aloud to the players",
    "note": "Raw HTML fetched (200, 319KB). Opening paragraph: boxed text 'got its name from the thin boxed-line that sometimes surrounds the text', with the quoted clause following word for word. Byline 'by Shawn Merwin'; his bio lists WotC-published credits (Acquisitions Incorporated, Baldur's Gate: Descent into Avernus, Storm Lord's Wrath) and an Adventurers League role, so 'a Wizards of the Coast adventure designer' is supported as a designer of WotC adventures, not as a stated employee. Site footer carries 'Wizards of the Coast LLC | All Rights Reserved'. FLAG (external, not verified from the page): the article is dated Nov 2019, when D&D Beyond was operated by Fandom/Curse; WotC ownership came later, so 'the publisher's own site' holds for the page as fetched today, not necessarily at publication.",
-   "fromFile": "verdicts-dnd-i1198-1211.json"
+   "unsupportedLimb": "'the publisher's own site' at publication: the verifier's FLAG records that D&D Beyond was operated by Fandom/Curse in Nov 2019 and that WotC ownership came later, and that 'a Wizards of the Coast adventure designer' is supported as a designer of WotC adventures, not as a stated employee",
+   "fromFile": "verdicts-dnd-regrade-r12.json"
   },
   "1199": {
    "index": 1199,

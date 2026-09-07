@@ -34282,6 +34282,28 @@
    "note": "Verbatim, appositive to the title and followed by 'The first tale, \"The Finder'. OCR leaves a stray closing single quote after 'history'; an unfiltered search-inside for the phrase returns only this book, so the wording is Cadden's own.",
    "fromFile": "verdicts-leguin-i637-659.json"
   },
+  "660": {
+   "index": 660,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is told from outside the world of Earthsea",
+   "note": "Cadden (Routledge 2005, ursulakleguinbey0000cadd) full sentence reads: 'A Description of Earthsea' is told from outside the world of Earthsea rather than by the historian from within. Quote verbatim; subject and predicate both on the page.",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
+  "661": {
+   "index": 661,
+   "verdict": "PARTIAL",
+   "trueWording": "“The Back of the Book” in Always Coming Home is true",
+   "note": "Quote verbatim (…the voice of the anthropologist examining the ways of the Kesh). But the page attributes the anthropologist-voice to one back-matter section, not to the novel; the claim generalises a section to the whole book, and the neighbouring sentences stress that no single voice governs.",
+   "unsupportedLimb": "'the book' — Cadden's subject is the section “The Back of the Book”, not Always Coming Home entire",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
+  "662": {
+   "index": 662,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "narrative relationships keep us from fixing on any one narrating voice",
+   "note": "Quote 'in the presentation of this anthropological text' is verbatim. Page wording is 'The rich and layered narrative relationships keep us from fixing on any one narrating voice…' — agency is the reader/narrative relationships, not 'the book does not rely'; substance (no single narrating voice) holds.",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
   "663": {
    "index": 663,
    "verdict": "SKIPPED_TRIAGE",
@@ -34317,6 +34339,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "668": {
+   "index": 668,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each keystone he sees in the city of Erhenrang",
+   "note": "Olander & Greenberg eds., Taplinger 1979 (ursulakleguin00olan) confirmed by item metadata. Page: 'Ai notices that each keystone he sees in the city of Erhenrang is joined by red cement.' Quote verbatim, red-cement limb supported.",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
   "669": {
    "index": 669,
    "verdict": "SKIPPED_TRIAGE",
@@ -34324,12 +34353,75 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "670": {
+   "index": 670,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the language is largely Anglo-Saxon in diction, strongly alliterative",
+   "note": "Spivack, Twayne 1984 (ursulakleguin0453spiv) confirmed by metadata. Work identity proven by walking left: 'The style of A Wizard of Earthsea is suitable to its subject of mythic magery. Artful yet simple, the language is largely Anglo-Saxon in diction…'",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
+  "671": {
+   "index": 671,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The alliteration is pervasive, recalling the oral tradition",
+   "note": "Contiguous with the A Wizard of Earthsea sentence proven for 670 (…of an austere but heroic age. The alliteration is pervasive…). Page continues 'of the heroic poem Beowulf'; the claim's truncation at 'oral tradition' does not distort.",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
+  "672": {
+   "index": 672,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "create cultural concepts for her imaginary societies",
+   "note": "Quote 'Drawing on her anthropological background, Le Guin is able' is verbatim, but the page reads 'imaginary societies', not 'imaginary worlds'; page then instances 'kemmer'. Substance of the claim holds in the page's other words.",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
+  "673": {
+   "index": 673,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a diction austerely avoiding the Latinate or the ornate",
+   "note": "The 'poems' limb proven by walking left: '…achieve an economy rare in poetry, and quite different from Le Guin's fictional style. The vocabulary is straightforward, with a diction austerely avoiding the Latinate or the ornate.'",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
+  "674": {
+   "index": 674,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The homely diction is reminiscent of Robert Frost",
+   "note": "Same poetry passage as 673; page: 'These monologues are richly suggestive, leaving much unsaid. The homely diction is reminiscent of Robert Frost, but the mythic allusions are closer to William Butler Yeats.'",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
   "675": {
    "index": 675,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "676": {
+   "index": 676,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is to a certain extent true of the way she writes herself",
+   "note": "Bucknall, Ungar 1981 (ursulakleguin00buck) confirmed by metadata. Full sentence recovered: 'And yet what she says of Tolkien's style, as opposed to the “Poughkeepsie” (or fake fantasy) style, is to a certain extent true of the way she writes herself.'",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
+  "677": {
+   "index": 677,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which varies from book to book and from character to character",
+   "note": "Page: 'Her style, which varies from book to book and from character to character, does not have…'. Subject fixed to Le Guin by the preceding sentences ('She is also an outstanding stylist. She expresses herself…').",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
+  "678": {
+   "index": 678,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "vividly, and poetically while resisting the temptation to overwrite",
+   "note": "Page: 'She is also an outstanding stylist. She expresses herself clearly, vividly, and poetically while resisting the temptation to overwrite.' Praise limb supported by 'outstanding stylist'.",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
+  "679": {
+   "index": 679,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "does not have the stately and heroic tone",
+   "note": "Page continues '…of The Lord of the Rings'; subject is 'Her style' (Le Guin), established in the same sentence verified at 677.",
+   "fromFile": "verdicts-leguin-i660-684.json"
   },
   "680": {
    "index": 680,
@@ -34351,6 +34443,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "683": {
+   "index": 683,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien writes a plain, clear English",
+   "note": "Words are Le Guin's, not Bucknall's: the block quote runs 'A plain language is the noblest of all. It is also the most difficult. Tolkien writes a plain, clear English…' and Bucknall closes 'This tribute to Tolkien is a statement of the standard Le Guin sets for herself.' Her notes cite '…Poughkeepsie,” in The Language of the Night, p. 93'.",
+   "fromFile": "verdicts-leguin-i660-684.json"
+  },
+  "684": {
+   "index": 684,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien’s vocabulary is not striking",
+   "note": "Page: 'Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete and simple.' Same Le Guin block quote as 683, attribution proven by the following 'This tribute to Tolkien is a statement of the standard Le Guin sets for herself.'",
+   "fromFile": "verdicts-leguin-i660-684.json"
   },
   "685": {
    "index": 685,
@@ -35780,6 +35886,20 @@
    "note": "Raw page fetched from publicbooks.org. Verbatim in the Austen-comparison paragraph: \"But his humor, though softer, is like hers -- dry, subtle, morally loaded, and really funny.\" The page locator in the chunk is exact; \"hers\" is Jane Austen's, and the four adjectives are applied to Galt's humour as the claim states.",
    "fromFile": "verdicts-leguin-i889-923.json"
   },
+  "917": {
+   "index": 917,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "small-town novels are intensely grounded; rich in satire, humor, and character",
+   "note": "Raw HTML fetched live (HTTP 200, 101,122 bytes, browser UA) and stripped to text; full essay body present, not a summarizer or snippet. The quoted fragment appears word for word in the paragraph that runs from Gaskell's Cranford through the list of fictional towns (Casterbridge, Lark Rise, Dunnet Landing, Gopher Prairie, Holt). Both limbs of the claim are on the page: 'intensely grounded' and the satire/humor/character series, which the page extends with 'human affectations and affections'. Byline 'Ursula K. Le Guin' and dateline '1.23.2017' confirmed on the page, matching the cited 23 January 2017. Le Guin writes this in her own voice about small-town novels as a class, so the attribution limb holds. Only difference from the claim is the American spelling 'humor'.",
+   "fromFile": "verdicts-leguin-i917-921.json"
+  },
+  "918": {
+   "index": 918,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He will not, he cannot, mislead you. He is transparent.",
+   "note": "Same live raw fetch of the Public Books essay. The two sentences appear word for word, punctuation included, in the paragraph beginning 'Mr. Balwhidder is a very old-fashioned narrator, and therefore reliable.' The 'annalist narrator' limb is supported: the page identifies Mr. Balwhidder as the minister keeping the annual records of the parish of Dalmailing year by year for 50 years, 1760-1810, and calls him a narrator in the same sentence. The 'transparent' limb is the page's own word. Whole quoted string is ten words, within the twelve-word cap.",
+   "fromFile": "verdicts-leguin-i917-921.json"
+  },
   "919": {
    "index": 919,
    "verdict": "VERIFIED_VERBATIM",
@@ -35793,6 +35913,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "921": {
+   "index": 921,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin's language is clear and clean",
+   "note": "Raw HTML fetched live from theguardian.com (HTTP 200, 498,026 bytes, browser UA) and stripped to text; the article body is in the fetched HTML, no paywall or summarizer involved. The quoted fragment appears verbatim, with a straight apostrophe (byte-checked via od), inside the section headed 'Kim Stanley Robinson / The Left Hand of Darkness by Ursula K Le Guin (1969)', so the attribution limb is on the page. The page continues that the language holds both her father Alfred Kroeber's anthropological mindset and her mother Theodora Kroeber's poetry of stories. Article title 'The stars of modern SF pick the best science fiction' and datePublished 2011-05-13T23:06:01Z (14 May 2011 BST) both confirmed in the page metadata, matching the citation.",
+   "fromFile": "verdicts-leguin-i917-921.json"
   },
   "922": {
    "index": 922,

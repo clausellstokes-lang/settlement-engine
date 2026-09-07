@@ -1,0 +1,21 @@
+{
+ "role": "synth",
+ "name": "dnd",
+ "angle": null,
+ "tag": null,
+ "lines": 74,
+ "firstTs": "2026-09-07T07:19:36.005Z",
+ "lastTs": "2026-09-07T07:23:26.459Z",
+ "tools": {
+  "Bash": 9,
+  "Read": 13
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "",
+ "run": "wf_43d098bf-eff",
+ "agent": "a11078b9fb3a19b65",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_43d098bf-eff/agent-a11078b9fb3a19b65.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
