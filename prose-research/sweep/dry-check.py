@@ -16,7 +16,10 @@ def feats(path):
     return out
 cur=os.path.join(S,'section-%s.md'%name)
 if not os.path.exists(cur): print(json.dumps({'name':name,'error':'no section yet'})); sys.exit(0)
-prev=a[a.index('--prev')+1] if '--prev' in a else (sorted(glob.glob(os.path.join(S,'section-%s.r*.md'%name)))[-1:] or [None])[0]
+def _rnum(f):
+    m=re.search(r'\.r(\d+)[a-z]?(?:-[^.]*)?\.md$',f); return int(m.group(1)) if m else -1
+# 09-07 04:16 (chair): the newest snapshot by NUMERIC round tag — a lexical sort ranked r8 above r11 and compared round 12 against round 8
+prev=a[a.index('--prev')+1] if '--prev' in a else (sorted(glob.glob(os.path.join(S,'section-%s.r*.md'%name)),key=_rnum)[-1:] or [None])[0]
 c=feats(cur); p=feats(prev) if prev else []
 def key(t): return set(t.split()[:4])   # a feature is "the same" when its first four words match (headings get reworded between rounds)
 new=[t for t in c if not any(key(t)==key(q) or (len(key(t)&key(q))>=3) for q in p)] if p else c

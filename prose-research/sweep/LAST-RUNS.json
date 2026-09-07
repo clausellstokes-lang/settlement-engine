@@ -62,7 +62,8 @@
   "argsFile": "args-dnd-r12.json",
   "tag": "r12",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r12.js",
-  "status": "RUNNING since 03:04 (session b43943b4, the account-switch successor): r12 = the COMPLETION of the S_VERIFY r11 that died 02:53 with 405b5e7e (its 152 verify rows all landed, 1153/1153): 4 chunks / 59 rows = the folded place-lawful-primaries finder (60 claims, complete) + regrade (the ROUTE RELABEL notes carried verbatim from r11) + synth + critic. Not a FIND round (TAG LAW)."
+  "status": "RUNNING since 03:04 (session b43943b4, the account-switch successor): r12 = the COMPLETION of the S_VERIFY r11 that died 02:53 with 405b5e7e (its 152 verify rows all landed, 1153/1153): 4 chunks / 59 rows = the folded place-lawful-primaries finder (60 claims, complete) + regrade (the ROUTE RELABEL notes carried verbatim from r11) + synth + critic. Not a FIND round (TAG LAW).",
+  "dryCheck": "04:16: DRY against section-dnd.r11.md — 61 → 61 features, 0 new, 0 dropped (the r12 synth wrote section-dnd.md 03:58; 338 of 368 feature keys under 3 sources by the kit count); the critic still running"
  },
  "ai": {
   "runId": "",

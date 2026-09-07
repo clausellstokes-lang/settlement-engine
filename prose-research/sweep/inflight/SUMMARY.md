@@ -1,10 +1,9 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:09:47 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:15:48 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | result | 11 | — | — | 06:11:37 |
 | ai | critic |  | failed | 0 | — | — | 03:45:47 |
-| ai | critic |  | result | 0 | critic-ai.md | — | 02:25:15 |
 | ai | finder | arch-biographical-record | result | 57 | — | 104 claims, complete=True @23:50:23 | 03:27:43 |
 | ai | finder | arch-decoding-literature | result | 31 | — | 180 claims, complete=True @00:14:26 | 04:19:20 |
 | ai | finder | arch-decoding-literature | failed | 30 | — | 180 claims, complete=True @00:14:26 | 03:45:34 |
@@ -108,8 +107,9 @@
 | dnd | verifier | i962-976 | result | 10 | — | verdict file WRITTEN | 03:32:25 |
 | dnd | verifier | i977-991 | result | 4 | — | verdict file WRITTEN | 03:30:44 |
 | dnd | verifier | i992-1006 | result | 5 | — | verdict file WRITTEN | 03:41:17 |
+| leguin | critic |  | in-flight | 0 | — | — | 08:15:34 |
 | leguin | regrade | regrade-r10 | result | 2 | — | — | 07:37:27 |
-| leguin | synth |  | in-flight | 0 | assign-leguin.json, secA.md, secB.md, secC.md, secD.md, section-leguin.draft.md | — | 08:03:36 |
+| leguin | synth |  | result | 0 | assign-leguin.json, secA.md, secB.md, secC.md, secD.md, section-leguin.draft.md | — | 08:14:15 |
 | leguin | verifier | i388-419 | result | 6 | — | verdict file WRITTEN | 06:21:11 |
 | leguin | verifier | i420-438 | result | 5 | — | verdict file WRITTEN | 06:21:10 |
 | leguin | verifier | i439-461 | result | 9 | — | verdict file WRITTEN | 06:21:43 |
@@ -129,7 +129,6 @@
 | leguin | verifier | i858-887 | result | 2 | — | verdict file WRITTEN | 07:25:14 |
 | leguin | verifier | i888-915 | result | 5 | — | verdict file WRITTEN | 07:24:57 |
 | leguin | verifier | i917-921 | result | 2 | verdicts-leguin-i917-921.json | verdict file WRITTEN | 07:22:21 |
-| martin | critic |  | result | 34 | critic-martin.md | — | 02:31:58 |
 | ? | critic |  | result | 0 | — | — | 07:06:40 |
 | ? | critic |  | result | 0 | — | — | 07:06:57 |
 | ? | other |  | result | 0 | — | — | 07:10:20 |
@@ -139,12 +138,12 @@
 | ? | other |  | result | 0 | — | — | 07:16:25 |
 | ? | other |  | result | 0 | — | — | 07:52:29 |
 | ? | other |  | result | 0 | — | — | 08:00:44 |
-| ? | other |  | in-flight | 0 | — | — | 08:09:44 |
+| ? | other |  | result | 0 | — | — | 08:14:56 |
 | ? | other |  | result | 0 | — | — | 08:05:04 |
 | ? | other |  | result | 0 | — | — | 08:02:55 |
-| ? | other |  | in-flight | 0 | — | — | 08:09:45 |
+| ? | other |  | result | 0 | — | — | 08:13:53 |
 | ? | other |  | result | 0 | — | — | 07:52:44 |
-| ? | other |  | in-flight | 0 | — | — | 08:09:41 |
+| ? | other |  | in-flight | 0 | — | — | 08:14:53 |
 | ? | other |  | result | 0 | — | — | 07:52:09 |
 | ? | other |  | result | 0 | — | — | 02:32:40 |
 | ? | other |  | result | 0 | check-hobb.md | — | 02:37:47 |
