@@ -2019,5 +2019,142 @@
    "note": "Quote verbatim on the raw Preface page. The positive characterisation is fully supported, but the contrast with plainness is the claim's own gloss: dense allusion and conceptual elusiveness are not sentence-level plainness, and the same critic's Shadows introduction (index 982) calls Wolfe's Wizard Knight prose spare. Do not cite this as Wright denying plainness of style.",
    "fromFile": "verdicts-wolfe-i978-992.json"
   }
+ },
+ {
+  "index": 996,
+  "feature": "withheld information and inference",
+  "claim": "Wolfe conveys the executioner's guild training as plain practical instruction to the condemned man.",
+  "source": "Gene Wolfe, The Shadow of the Torturer, quoted in Peter Wright, Attending Daedalus (2003), 'How the Whip Came Back'",
+  "url": "https://www.cambridge.org/core/books/attending-daedalus/how-the-whip-came-back-directing-reader-response/2A2AC1DCBED89BCD79CD247018F62257",
+  "quote": "cautioned him to empty his bladder, which relaxes at",
+  "page": "pp. 104-125",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "1980",
+  "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 996,
+   "verdict": "PARTIAL",
+   "trueWording": "told him then (as I had been taught)",
+   "note": "Chapter 7 Summary quotes the Agilus scaffold passage; the eleven quoted words appear exactly, and the training limb is carried by the parenthesis and by 'Severian, in his role as headsman'. But the word 'guild' occurs nowhere on this page (checked case-insensitively over the whole fetched document), so the institutional attribution is the claim's own addition.",
+   "unsupportedLimb": "the executioner's GUILD - the page grounds the training only in '(as I had been taught)' and 'his role as headsman', never in a guild",
+   "fromFile": "verdicts-wolfe-i993-1007.json"
+  }
+ },
+ {
+  "index": 1000,
+  "feature": "omission as information",
+  "claim": "Wright asserts the narrator of 'The Toy Theatre' sustains his illusion by not seeing his operator.",
+  "source": "Peter Wright, Attending Daedalus (2003), 'Toy Theatre', pp. 69-85",
+  "url": "https://www.cambridge.org/core/books/attending-daedalus/toy-theatre-uncovering-the-story-of-the-urth-cycle/8A95293F693266D39C225BE509844A1E",
+  "quote": "in order to sustain the illusion under which he lives",
+  "page": "pp. 69-85",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2003",
+  "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 1000,
+   "verdict": "PARTIAL",
+   "trueWording": "he 'pretends not to see' his operator",
+   "note": "Chapter 5 Summary carries the quoted clause exactly, but the mechanism on the page is pretence, not blindness: the Joruri gloss it rests on says the operators 'stand in full view of the audience, but the audience pretends not to see them', and the narrator likewise 'pretends not to see' his operator. Flattening that to 'not seeing' inverts the point of the figure.",
+   "unsupportedLimb": "by NOT SEEING his operator - the page says he pretends not to see an operator standing in full view",
+   "fromFile": "verdicts-wolfe-i993-1007.json"
+  }
+ },
+ {
+  "index": 1029,
+  "feature": "dialogue register",
+  "claim": "Wolfe's demonstration of interior register is a four-word thought about another mouth to feed.",
+  "source": "Gene Wolfe, 'Balding, Avuncular Gene's Quick and Dirty Guide', in Shadows of the New Sun (2007), pp. 204-205",
+  "url": "https://www.cambridge.org/core/books/shadows-of-the-new-sun/balding-avuncular-genes-quick-and-dirty-guide-to-creating-memorable-characters/18069AE78DC641BA399808B91630AD05",
+  "quote": "Another mouth to feed. Well, hell.",
+  "page": "pp. 204-205",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2007",
+  "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+  "registerHint": "none",
+  "confidence": "medium",
+  "verdict": {
+   "index": 1029,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Another mouth to feed. Well, hell.\" - six words",
+   "note": "Quotation is verbatim on the live page, inside single curly quotes, as Wolfe's demonstration of the second aim, taking the reader into the character's psyche - so the 'interior register' limb holds. The word count does not: the thought as printed runs six words. Only its first sentence is four words, and the claim's own quote field carries all six.",
+   "fromFile": "verdicts-wolfe-i1023-1037.json"
+  }
+ },
+ {
+  "index": 1066,
+  "feature": "sentence length variation",
+  "claim": "Aramini faults his own Between Light and Shadow for twisty sentences that lose the reader.",
+  "source": "Marc Aramini, 'Standing on the Shoulders of Giants', Ultan's Library, 20 July 2020",
+  "url": "https://ultan.org.uk/standing-on-the-shoulders-of-giants-a-review-of-michael-andre-driussis-the-book-of-the-new-sun-a-chapter-guide/",
+  "quote": "twisty and confounding sentences that sometimes lose themselves",
+  "page": "body of review",
+  "kind": "analysis",
+  "polarity": "disputes",
+  "date": "2020",
+  "routeHint": "live page fetched with a browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 1066,
+   "verdict": "PARTIAL",
+   "trueWording": "\"twisty and confounding sentences that sometimes lose themselves\" plus the reader",
+   "unsupportedLimb": "\"his own\" — this page never states that Aramini wrote Between Light and Shadow; the aside names the book without claiming authorship",
+   "note": "Live page, browser UA. Quote verbatim, and the fault limb holds: the sentence continues \"as well as the reader\", contrasted against Andre-Driussi's clarity, with Between Light and Shadow named parenthetically as the interminable work. But the self-attribution is inference from the byline and from a different Ultan's Library page (the 'A Solar Labyrinth' post, which does identify Aramini as its author); on this page the ownership is implied by tone only, never stated.",
+   "fromFile": "verdicts-wolfe-i1053-1067.json"
+  }
+ },
+ {
+  "index": 1067,
+  "feature": "other: chapter-guide summary register",
+  "claim": "Andre-Driussi's whole entry for one chapter is a single present-tense sentence of plot.",
+  "source": "Michael Andre-Driussi, The Book of the New Sun: A Chapter Guide, quoted in Marc Aramini, 'Standing on the Shoulders of Giants', Ultan's Library, 2020",
+  "url": "https://ultan.org.uk/standing-on-the-shoulders-of-giants-a-review-of-michael-andre-driussis-the-book-of-the-new-sun-a-chapter-guide/",
+  "quote": "At the duel Severian is treacherously struck dead, but he rises",
+  "page": "quoted in review",
+  "kind": "relay",
+  "polarity": "applies",
+  "date": "2020",
+  "routeHint": "live page fetched with a browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium",
+  "verdict": {
+   "index": 1067,
+   "verdict": "PARTIAL",
+   "trueWording": "\"At the duel Severian is treacherously struck dead, but he rises\"",
+   "unsupportedLimb": "\"whole entry ... is a single present-tense sentence of plot\" — the quoted entire entry also carries a Commentary line quoting page 239 and glossing the paschal egg as Easter resurrection",
+   "note": "Live page, browser UA. Quote verbatim, introduced as Andre-Driussi's entire entry on chapter 27 of The Shadow of the Torturer, \"Is He Dead?\", and the sentence is present tense and plot-only (it continues about the opponent panicking and killing spectators). But the reproduced entry has two parts, the summary sentence and a Commentary paragraph, so the entry is not a single sentence; Aramini's complaint is brevity (\"Michael, give us more, please!\"), not that nothing but plot appears.",
+   "fromFile": "verdicts-wolfe-i1053-1067.json"
+  }
+ },
+ {
+  "index": 1095,
+  "feature": "withheld information and inference",
+  "claim": "Auerbach disputes that the reader can derive meaning from the parts because the whole context is missing.",
+  "source": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish, 2007",
+  "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+  "quote": "we do not have the whole context",
+  "page": "essay body",
+  "kind": "analysis",
+  "polarity": "disputes",
+  "date": "2007",
+  "routeHint": "live page fetched with a browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "verdict": {
+   "index": 1095,
+   "verdict": "PARTIAL",
+   "trueWording": "we can't derive from the whole what the meaning",
+   "unsupportedLimb": "'derive meaning from the parts' inverts the page's direction: Auerbach says the meaning of any particular piece cannot be derived from the whole, not the reverse",
+   "note": "The quoted limb 'we do not have the whole context' is verbatim in the text-stability paragraph, and the missing-context cause is exactly Auerbach's. But the claim reverses part and whole, so the derivation limb as written is not what the page says.",
+   "fromFile": "verdicts-wolfe-i1083-1097.json"
+  }
  }
 ]

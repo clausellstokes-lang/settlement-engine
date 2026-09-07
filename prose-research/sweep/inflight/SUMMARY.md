@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 20:16:03 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 20:22:05 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -98,7 +98,6 @@
 | dnd | verifier | i859-871 | failed | 0 | — | verdict file absent | 18:42:51 |
 | dnd | verifier | i871-871 | result | 1 | — | verdict file WRITTEN | 18:55:16 |
 | hobb | critic |  | failed | 0 | — | — | 19:45:57 |
-| hobb | critic |  | result | 0 | critic-hobb.md | — | 18:29:49 |
 | hobb | critic |  | result | 0 | critic-hobb.md | — | 22:39:48 |
 | hobb | finder | critics-absent | result | 93 | — | 67 claims, complete=True @17:25:57 | 19:27:01 |
 | hobb | finder | dropped-and-routes | result | 68 | — | 94 claims, complete=True @17:25:57 | 19:27:00 |
@@ -107,7 +106,6 @@
 | hobb | regrade | regrade-r6 | failed | 0 | — | — | 19:45:55 |
 | hobb | regrade | regrade-r7 | result | 0 | build-r7.mjs | — | 22:00:30 |
 | hobb | synth |  | failed | 0 | — | — | 19:45:56 |
-| hobb | synth |  | result | 0 | section-hobb.md | — | 18:17:47 |
 | hobb | synth |  | result | 0 | section-hobb-body.md | — | 22:27:15 |
 | hobb | verifier | i386-400 | result | 7 | — | verdict file WRITTEN | 19:30:47 |
 | hobb | verifier | i401-415 | result | 11 | — | verdict file WRITTEN | 19:33:53 |
@@ -147,7 +145,7 @@
 | kay | regrade | regrade-r8 | result | 0 | — | — | 00:00:50 |
 | kay | synth |  | failed | 0 | — | — | 19:46:20 |
 | kay | synth |  | failed | 0 | kay-stats.mjs, section-kay.md | — | 18:42:12 |
-| kay | synth |  | in-flight | 0 | — | — | 00:10:56 |
+| kay | synth |  | in-flight | 0 | section-kay.md | — | 00:22:05 |
 | kay | verifier | i1007-1021 | result | 10 | — | verdict file WRITTEN | 23:43:41 |
 | kay | verifier | i1022-1036 | result | 10 | — | verdict file WRITTEN | 23:42:38 |
 | kay | verifier | i1037-1051 | result | 5 | — | verdict file WRITTEN | 23:48:03 |
@@ -292,8 +290,12 @@
 | wolfe | regrade | regrade-r6 | failed | 0 | — | — | 19:50:40 |
 | wolfe | synth |  | failed | 0 | — | — | 19:50:41 |
 | wolfe | synth |  | result | 0 | section-wolfe.md | — | 18:23:22 |
-| wolfe | verifier | i1008-1022 | in-flight | 6 | — | verdict file absent | 00:16:02 |
-| wolfe | verifier | i1023-1037 | in-flight | 6 | — | verdict file absent | 00:15:51 |
+| wolfe | verifier | i1008-1022 | result | 6 | — | verdict file WRITTEN | 00:18:08 |
+| wolfe | verifier | i1023-1037 | result | 6 | — | verdict file WRITTEN | 00:17:49 |
+| wolfe | verifier | i1038-1052 | in-flight | 5 | — | verdict file absent | 00:21:48 |
+| wolfe | verifier | i1053-1067 | result | 3 | — | verdict file WRITTEN | 00:21:31 |
+| wolfe | verifier | i1068-1082 | result | 8 | — | verdict file WRITTEN | 00:21:48 |
+| wolfe | verifier | i1083-1097 | in-flight | 4 | — | verdict file WRITTEN | 00:21:50 |
 | wolfe | verifier | i468-482 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i468-507 | result | 8 | — | verdict file WRITTEN | 23:47:17 |
 | wolfe | verifier | i483-497 | failed | 0 | — | verdict file absent | 19:50:38 |
@@ -338,7 +340,7 @@
 | wolfe | verifier | i873-880 | failed | 0 | — | verdict file absent | 19:50:40 |
 | wolfe | verifier | i897-945 | result | 4 | — | verdict file WRITTEN | 00:11:48 |
 | wolfe | verifier | i947-977 | result | 3 | — | verdict file WRITTEN | 00:10:34 |
-| wolfe | verifier | i978-992 | in-flight | 4 | — | verdict file absent | 00:15:43 |
-| wolfe | verifier | i993-1007 | in-flight | 7 | — | verdict file absent | 00:15:43 |
+| wolfe | verifier | i978-992 | result | 4 | — | verdict file WRITTEN | 00:17:01 |
+| wolfe | verifier | i993-1007 | result | 7 | — | verdict file WRITTEN | 00:17:18 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).

@@ -3,12 +3,13 @@
  "name": "wolfe",
  "angle": null,
  "tag": "i993-1007",
- "lines": 42,
+ "lines": 53,
  "firstTs": "2026-09-07T00:12:55.706Z",
- "lastTs": "2026-09-07T00:15:43.431Z",
+ "lastTs": "2026-09-07T00:17:18.558Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 7
+  "Bash": 9,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.cambridge.org/core/books/attending-daedalus/solar-labyrinth-metafictional-devices-and-textual-complexity/49656CDCE0E04E7F80E4E4FE4FFC069C",
@@ -20,13 +21,13 @@
   "https://www.cambridge.org/core/books/attending-daedalus/last-thrilling-wonder-story-intergeneric-operations/3CC9BC9E09B6B06DA7BE6219A48DC01E"
  ],
  "filesWritten": [],
- "lastAssistantText": "All 15 quotations are byte-exact on their live pages. Two claims over-state a limb: 996 asserts a \"guild\" (absent from that page — it says only \"as I had been taught\") and 1000 says \"not seeing\" where the page says he *pretends* not to see. Writing the checkpoint.",
+ "lastAssistantText": "ent (no Wayback fallback needed); each carries a \"Summary\" block containing the chapter's opening pages, and all 15 quotations were checked byte-exactly against the normalized raw text rather than by eye. Checkpoint written and re-read at 17,475 bytes with 15 claims, 15 verdicts and aligned indices.",
  "run": "wf_1326cde9-2e5",
  "agent": "ada13f9264047fd80",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-ada13f9264047fd80.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i993-1007.json",
-  "exists": false
+  "exists": true
  }
 }

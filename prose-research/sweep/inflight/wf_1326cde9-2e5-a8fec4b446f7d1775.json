@@ -3,12 +3,13 @@
  "name": "wolfe",
  "angle": null,
  "tag": "i1008-1022",
- "lines": 43,
+ "lines": 58,
  "firstTs": "2026-09-07T00:12:55.706Z",
- "lastTs": "2026-09-07T00:16:02.147Z",
+ "lastTs": "2026-09-07T00:18:08.514Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 7
+  "Bash": 9,
+  "StructuredOutput": 2
  },
  "urlsFetched": [
   "https://www.cambridge.org/core/books/attending-daedalus/last-thrilling-wonder-story-intergeneric-operations/3CC9BC9E09B6B06DA7BE6219A48DC01E",
@@ -19,13 +20,13 @@
   "https://www.cambridge.org/core/books/shadows-of-the-new-sun/nor-the-summers-as-golden-writing-multivolume-works/1BF1BCBAAE4043F14CCEB7395D5D5462"
  ],
  "filesWritten": [],
- "lastAssistantText": "Every one of the 15 quotes is a byte-exact contiguous substring of the raw pages, reached by direct curl with a browser user agent and stripped locally (no summarizer). Now let me write the checkpoint file.",
+ "lastAssistantText": "Checkpoint file written and validated (15 claims, 15 verdicts, max trueWording 12 words). Returning verdicts.",
  "run": "wf_1326cde9-2e5",
  "agent": "a8fec4b446f7d1775",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a8fec4b446f7d1775.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i1008-1022.json",
-  "exists": false
+  "exists": true
  }
 }
