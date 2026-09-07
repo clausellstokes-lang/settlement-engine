@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 10:35:01 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 10:40:41 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 3b1c0eaa5 · ledger = 29a4ff20d §910: the soak receipt ships its per-year series and the capacity rows become fully execu
 
@@ -153,4 +153,4 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = 29a4ff20d §910: the soak re
 - wf_faa375e7-29f: 20 journal lines, 10 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.13 1.69 2.05
+load: 1.98 1.88 2.01
