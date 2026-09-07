@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 21:31:02 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 21:36:46 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MAT landing lands at six cars — two of O-13's three product flags light 
 
@@ -76,14 +76,22 @@ product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MA
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 6582958ce · 0 cars over 6582958ce · porcelain 1 · HOLD-VITEST PRESENT · receipt head:
+      | # RECEIPT — ANCHOR-905 — **PARTIAL** (in flight)
+      | 
+      | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
+      | Dock: `$SC/laneANCHOR905` detached @ `6582958ce7bdc10bcbb8c69d9789b4d957fc5890`
+      | Arrival porcelain: **0 lines**. node_modules: **453 symlinked packages** (never materialised).
+      | VITEST HOLD present at start (`$SC/HOLD-VITEST`) — all reading/measuring/editing done under the hold; no vitest, no build.
+- **L-PROBE-2 (chair)**: cheap 6/6 tips · full: FULL_DONE · bracket: === certify 902-osr18 @ fd36f0298 start 21:35:28 porcelain=0
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-05 21:01
-- **dnd**: claims 872 · verdicts 872 (todo 0) · kept 619 · partial 147 · verdict files 55 (triage 1, regrade r6) · section 09-05 20:56 · critic 09-05 21:12
+- **dnd**: claims 872 · verdicts 872 (todo 0) · kept 619 · partial 147 · verdict files 55 (triage 1, regrade r6) · section 09-06 21:33 · critic 09-05 21:12
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 00:55
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
-- **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 14:19 · critic 09-06 14:32
+- **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:35 · critic 09-06 14:32
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r8/wf_e95fca37-bb5, wolfe r8/wf_8cd21474-a7b, martin r8/, hobb r7/wf_255b6391-7fb, dnd r8/wf_f191dac2-82a, ai r8/
 
@@ -92,4 +100,4 @@ product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MA
 - wf_f191dac2-82a: 1 journal lines, 1 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.68 2.97 3.06
+load: 2.84 2.77 2.91

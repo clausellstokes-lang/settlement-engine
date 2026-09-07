@@ -20738,3 +20738,1122 @@ TRUE_EXIT_archive=0
 listing.sh: extracted 2174 src modules to /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base
 quiet probe 1/3: load1=3.24 busy=0  OK
 quiet probe 2/3: load1=2.63 busy=0  OK
+quiet probe 3/3: load1=2.53 busy=0  OK
+── step build: sh -c cd '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base' && npm run build
+
+> settlementforge@1.0.0 prebuild
+> node scripts/generate-sitemap.mjs
+
+[sitemap] wrote 326 URLs to public/sitemap.xml
+
+> settlementforge@1.0.0 build
+> vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 3869 modules transformed.
+rendering chunks...
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/domain/worldPulse/temperamentPresets.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/temperament/TemperamentPicker.jsx but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/temperament/TemperamentPicker.jsx, dynamic import will not move module into another chunk.
+
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/autoReloadClient.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/account/AccountAutoReloadPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/account/AccountAutoReloadPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/account/AccountAutoReloadPanel.jsx but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/account/AccountAutoReloadPanel.jsx, dynamic import will not move module into another chunk.
+
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/analytics.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/generate/SaveToLibraryButton.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/primitives/EditableInline.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/surveyor/InterpretApplyPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/sessionClient.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/authSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/canonEventCommandEntry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/canonLifecycleTelemetry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/index.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementLifecycleHelpers.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementPendingEditActions.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementPendingEdits.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementPendingEdits.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementPendingEdits.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementRenameHelpers.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementSlice.js but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/GenerateWizard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/HomeHero.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/OutputContainer.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/SettlementDetail.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/SettlementsPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/SingleDossierSuccessPage.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/WorldMap.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/account/ReferralRedeemBlocks.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/compendium/CompendiumGlobalSearch.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/compendium/HelpPopover.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/dossier/DossierHeaderRow.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/dossier/PendingChangesBar.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/dossier/SimulationDrawer.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/dossier/WelcomeCreditCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/generate/ExportDraftButton.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/generate/LayeredConfigurationPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/generate/PipelineReveal.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/home/WelcomeBackCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/map/ModeSwitch.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/map/WizardNewsPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/map/WorldMapStage.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/pricing/FounderTile.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/pricing/PricingMomentCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/primitives/LockedDestination.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/settlement/VersionsTab.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/settlements/CampaignFolder.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/settlements/SettlementCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/settlements/libraryDeleteHandlers.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/components/surveyor/CorpusFactoryPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/foundry/generateFoundryModule.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/hooks/useFunnelEvent.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/hooks/useReferralIntent.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/hooks/useReturnVisit.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/aiAnalyst.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/gallery.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/generationTelemetry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/interview.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/landingFunnelAnalytics.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/researchCapture.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/stripe.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/main.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/accountImportBody.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/aiOverlayLifecycle.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/aiSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/campaignAdvanceSession.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/campaignRegionalSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/campaignSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/campaignSpatialCanonize.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/campaignWorldPulseDeferred.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/galleryImportMap.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/galleryImportSettlement.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/mapSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/utils/generateCampaignPDF.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/utils/generateSettlementPDF.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/utils/generateWorldBook.js, dynamic import will not move module into another chunk.
+
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/structuralFingerprint.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementSlice.js but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/instantWorld/composeInstantWorld.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/pulseFingerprint.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/regionalFingerprint.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/researchCapture.js, dynamic import will not move module into another chunk.
+
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/lib/researchCapture.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/canonLifecycleTelemetry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/saveMoments.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/settlementRenameHelpers.js but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/aiSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/store/campaignAdvanceSession.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/utils/generateCampaignPDF.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/src/utils/generateSettlementPDF.js, dynamic import will not move module into another chunk.
+
+computing gzip size...
+dist/index.html                                                     7.10 kB │ gzip:   2.84 kB
+dist/assets/customContentPreview.worker-DyDgXNmC.js             1,627.30 kB
+dist/assets/pdfRender.worker-BB4g_XtS.js                        2,035.95 kB
+dist/assets/advanceInterval.worker-CpF-_p4p.js                  2,652.63 kB
+dist/assets/FloatingAffordances-Cx4HzXZ_.css                        1.02 kB │ gzip:   0.42 kB
+dist/assets/index-CiMob2Ip.css                                     19.80 kB │ gzip:   5.03 kB
+dist/assets/dossierEntitlements-1Eht3dMl.js                         0.07 kB │ gzip:   0.09 kB
+dist/assets/adjudicationMark-BqEExeSV.js                            0.09 kB │ gzip:   0.10 kB
+dist/assets/rubrication-BeG2ToGk.js                                 0.13 kB │ gzip:   0.12 kB
+dist/assets/viewerAuthority-CGHWOfPP.js                             0.14 kB │ gzip:   0.14 kB
+dist/assets/RealmEntityContext-BKFrpAJR.js                          0.17 kB │ gzip:   0.16 kB
+dist/assets/referralRedeem-SzIUcYJp.js                              0.18 kB │ gzip:   0.15 kB
+dist/assets/settlementConfigMigration-he6xJZCP.js                   0.19 kB │ gzip:   0.15 kB
+dist/assets/support-Cvt7UAo_.js                                     0.20 kB │ gzip:   0.18 kB
+dist/assets/spatialCaptureRegistry-CzpsE_Wc.js                      0.20 kB │ gzip:   0.14 kB
+dist/assets/founderSeats-1_XhsFQD.js                                0.22 kB │ gzip:   0.18 kB
+dist/assets/text-DZjQ-OKY.js                                        0.23 kB │ gzip:   0.20 kB
+dist/assets/downloadBlob-C_JrcvrE.js                                0.24 kB │ gzip:   0.20 kB
+dist/assets/faithEventFilter-Bu_eHwP8.js                            0.24 kB │ gzip:   0.22 kB
+dist/assets/ink-Co0m7keZ.js                                         0.27 kB │ gzip:   0.22 kB
+dist/assets/lifecycleGlyphStyle-CsYTkNOY.js                         0.28 kB │ gzip:   0.19 kB
+dist/assets/roadSceneAi-DVIIdvb8.js                                 0.29 kB │ gzip:   0.22 kB
+dist/assets/accountTransferContract-C1LAP5Z4.js                     0.29 kB │ gzip:   0.23 kB
+dist/assets/defenseScoreBands-BKTSJlbR.js                           0.29 kB │ gzip:   0.25 kB
+dist/assets/numberWords-C_3apVZr.js                                 0.30 kB │ gzip:   0.19 kB
+dist/assets/lowDiscrepancy-qS9GY-8D.js                              0.31 kB │ gzip:   0.24 kB
+dist/assets/Page-Ds8prBsW.js                                        0.32 kB │ gzip:   0.25 kB
+dist/assets/roadsRescueInflame-CZ8Tpwmn.js                          0.33 kB │ gzip:   0.24 kB
+dist/assets/vendor-supabase-kHcLnhpD.js                             0.34 kB │ gzip:   0.25 kB
+dist/assets/format-number-CUT3IM7u.js                               0.34 kB │ gzip:   0.26 kB
+dist/assets/EconomyFreshnessNote-9Vgkm6oW.js                        0.34 kB │ gzip:   0.27 kB
+dist/assets/founderChairRequest-C-rS9toS.js                         0.35 kB │ gzip:   0.25 kB
+dist/assets/settlementThreat-VtSDjIKU.js                            0.37 kB │ gzip:   0.24 kB
+dist/assets/criminalOpRole-BApbL-8J.js                              0.37 kB │ gzip:   0.24 kB
+dist/assets/viabilityFilter-1giXQ9ar.js                             0.39 kB │ gzip:   0.23 kB
+dist/assets/DevEmailBanner-DQxeKDj5.js                              0.40 kB │ gzip:   0.27 kB
+dist/assets/useAboutHashScroll-CcG5V8ww.js                          0.42 kB │ gzip:   0.30 kB
+dist/assets/importScrub-UjHDM8GJ.js                                 0.43 kB │ gzip:   0.24 kB
+dist/assets/ageBands-cotI5YTG.js                                    0.51 kB │ gzip:   0.29 kB
+dist/assets/npcBank-BbeeHHTH.js                                     0.51 kB │ gzip:   0.29 kB
+dist/assets/docketLapse-Cm4o94hO.js                                 0.52 kB │ gzip:   0.34 kB
+dist/assets/spatialLedgerAccess-BjiEL5HR.js                         0.52 kB │ gzip:   0.28 kB
+dist/assets/useReferralIntent-D9fBYdAn.js                           0.52 kB │ gzip:   0.33 kB
+dist/assets/aiChronicleContext-uqHyyNdM.js                          0.53 kB │ gzip:   0.33 kB
+dist/assets/entityRefTokenizer-O9QWRF1U.js                          0.53 kB │ gzip:   0.34 kB
+dist/assets/warFrontReads-BVV7s4Nf.js                               0.55 kB │ gzip:   0.32 kB
+dist/assets/relationshipColors-D5AY5ixs.js                          0.55 kB │ gzip:   0.33 kB
+dist/assets/customTradeLabelOwnership-MFpzu2XB.js                   0.56 kB │ gzip:   0.33 kB
+dist/assets/CaptchaGate-bJCpS-17.js                                 0.58 kB │ gzip:   0.36 kB
+dist/assets/useLivePricing-C7XPphXX.js                              0.60 kB │ gzip:   0.39 kB
+dist/assets/DevFlagPanel-xGauvJpb.js                                0.61 kB │ gzip:   0.39 kB
+dist/assets/deityNames-BsuCtFPQ.js                                  0.67 kB │ gzip:   0.41 kB
+dist/assets/safetySeverity-Dp4bd7uI.js                              0.74 kB │ gzip:   0.38 kB
+dist/assets/det-pow-COyTktyy.js                                     0.74 kB │ gzip:   0.41 kB
+dist/assets/DeleteConfirmation-DCqYyps-.js                          0.77 kB │ gzip:   0.46 kB
+dist/assets/servicesDisplay-C7S6ql7P.js                             0.80 kB │ gzip:   0.40 kB
+dist/assets/compose-BDi7k1Bj.js                                     0.80 kB │ gzip:   0.51 kB
+dist/assets/pendingEditCommitRuntime-CnWG9W1k.js                    0.81 kB │ gzip:   0.47 kB
+dist/assets/EmptyState-uTecbM6A.js                                  0.82 kB │ gzip:   0.50 kB
+dist/assets/det-math-decay-C2p8_4am.js                              0.83 kB │ gzip:   0.45 kB
+dist/assets/imFellFace-CB6BiQcX.js                                  0.83 kB │ gzip:   0.48 kB
+dist/assets/tierFacts-i9eCHUru.js                                   0.84 kB │ gzip:   0.40 kB
+dist/assets/emailLifecycle-Bq_yFG87.js                              0.86 kB │ gzip:   0.41 kB
+dist/assets/RealmEntityLink-CvWOjwEI.js                             0.89 kB │ gzip:   0.56 kB
+dist/assets/guidance-DK1aYUao.js                                    0.90 kB │ gzip:   0.44 kB
+dist/assets/pricingMoments-CW14jbw6.js                              0.90 kB │ gzip:   0.52 kB
+dist/assets/bandedStock-zp_PeO5r.js                                 0.91 kB │ gzip:   0.52 kB
+dist/assets/pseudo-CMFaYX2Q.js                                      0.91 kB │ gzip:   0.60 kB
+dist/assets/ClerkNote-Vr6mYIXv.js                                   0.91 kB │ gzip:   0.49 kB
+dist/assets/ResetPasswordPage-DvQx7Vu_.js                           0.92 kB │ gzip:   0.55 kB
+dist/assets/consistency-Batx9waE.js                                 0.94 kB │ gzip:   0.54 kB
+dist/assets/PageHeader-CEo6HY1f.js                                  0.94 kB │ gzip:   0.52 kB
+dist/assets/campaignHydration-CntfkY46.js                           0.95 kB │ gzip:   0.53 kB
+dist/assets/Segmented-sfYNun7q.js                                   0.96 kB │ gzip:   0.61 kB
+dist/assets/design-KanxctZ7.js                                      0.98 kB │ gzip:   0.55 kB
+dist/assets/importReconciliationCommandRuntime-tgLzzZuj.js          0.99 kB │ gzip:   0.53 kB
+dist/assets/det-math-BvTfuDJc.js                                    1.00 kB │ gzip:   0.52 kB
+dist/assets/FounderBadge-W5gLjiqO.js                                1.01 kB │ gzip:   0.64 kB
+dist/assets/AccountFAQ-DbeXjyNW.js                                  1.01 kB │ gzip:   0.59 kB
+dist/assets/NarrativeNote-BukuZqeP.js                               1.01 kB │ gzip:   0.62 kB
+dist/assets/SessionEvictedBanner-Bsw_Zr0z.js                        1.01 kB │ gzip:   0.65 kB
+dist/assets/campaignDeletionSession-BqvOzy_-.js                     1.02 kB │ gzip:   0.53 kB
+dist/assets/founderTransferClient-CXzYTLRX.js                       1.02 kB │ gzip:   0.45 kB
+dist/assets/PublicSimulationBand-CcDF1AbJ.js                        1.03 kB │ gzip:   0.52 kB
+dist/assets/dossierRetroClaim-DEhvcTHF.js                           1.05 kB │ gzip:   0.56 kB
+dist/assets/advanceWorkerClient-BXKFTGyE.js                         1.11 kB │ gzip:   0.62 kB
+dist/assets/proseFieldLabels-w3GBSsvK.js                            1.14 kB │ gzip:   0.42 kB
+dist/assets/useDialogFocusTrap-BCm-qAOE.js                          1.21 kB │ gzip:   0.62 kB
+dist/assets/StateBadge-CdYfqI9Y.js                                  1.22 kB │ gzip:   0.75 kB
+dist/assets/Card-WuQY_cIS.js                                        1.22 kB │ gzip:   0.66 kB
+dist/assets/activeCustomContentContext-DOIPC74H.js                  1.22 kB │ gzip:   0.63 kB
+dist/assets/checkoutReconcile-fiyRlhux.js                           1.23 kB │ gzip:   0.65 kB
+dist/assets/campaignContentBindingCache-CfMyJlwK.js                 1.23 kB │ gzip:   0.65 kB
+dist/assets/RegisterPage-D2sKeNjI.js                                1.23 kB │ gzip:   0.72 kB
+dist/assets/forecastFingerprint-DXGQZUlr.js                         1.29 kB │ gzip:   0.68 kB
+dist/assets/tableClerk-DGq9q2MB.js                                  1.30 kB │ gzip:   0.72 kB
+dist/assets/relationshipEdgeStyle-gF0gA26J.js                       1.31 kB │ gzip:   0.52 kB
+dist/assets/ConfirmEmailPage-B1VvK-xP.js                            1.33 kB │ gzip:   0.66 kB
+dist/assets/citations-DAaaWgMI.js                                   1.34 kB │ gzip:   0.67 kB
+dist/assets/VerifyEmailPage-Ci_8CuA5.js                             1.34 kB │ gzip:   0.68 kB
+dist/assets/realmMapExport-K1Pd8t9q.js                              1.39 kB │ gzip:   0.77 kB
+dist/assets/TurnstileGate-BZ5f2nPz.js                               1.40 kB │ gzip:   0.77 kB
+dist/assets/logo-qupQdHAe.js                                        1.41 kB │ gzip:   0.82 kB
+dist/assets/Badge-DYIidl2q.js                                       1.43 kB │ gzip:   0.77 kB
+dist/assets/importReconciliationCommandPersistence-Cyamb3cT.js      1.43 kB │ gzip:   0.76 kB
+dist/assets/LegalPage-B3_02GRK.js                                   1.45 kB │ gzip:   0.72 kB
+dist/assets/CampaignEmptyState-Bi9y66t3.js                          1.45 kB │ gzip:   0.76 kB
+dist/assets/authSecurity-D76bohL-.js                                1.46 kB │ gzip:   0.71 kB
+dist/assets/campaignContentBindingModel-BiR3vMYj.js                 1.46 kB │ gzip:   0.57 kB
+dist/assets/SignInPage-C5jcsK0q.js                                  1.46 kB │ gzip:   0.81 kB
+dist/assets/DesktopOnlyGate-D7j4UkyR.js                             1.48 kB │ gzip:   0.76 kB
+dist/assets/entitlementLadder-3Os1f3Ji.js                           1.50 kB │ gzip:   0.54 kB
+dist/assets/canonLifecycleTelemetry-B6BAOG_K.js                     1.53 kB │ gzip:   0.68 kB
+dist/assets/mobilizationStatus-C1qoZwUX.js                          1.54 kB │ gzip:   0.74 kB
+dist/assets/customContentPreviewClient-C60aaJjW.js                  1.56 kB │ gzip:   0.77 kB
+dist/assets/dossierClaimStash-DRw-nRZ0.js                           1.58 kB │ gzip:   0.60 kB
+dist/assets/Disclosure-BShJpaTZ.js                                  1.60 kB │ gzip:   0.86 kB
+dist/assets/PlotHooksTab-CfmDP1Bx.js                                1.60 kB │ gzip:   0.91 kB
+dist/assets/consentSync-CJk6kFEp.js                                 1.61 kB │ gzip:   0.83 kB
+dist/assets/RealmUnfurlLoading-DC1co05o.js                          1.62 kB │ gzip:   0.92 kB
+dist/assets/intentComparator-DVXQosA0.js                            1.63 kB │ gzip:   0.87 kB
+dist/assets/useOwnerScopedSaves-CfAqIqYf.js                         1.64 kB │ gzip:   0.80 kB
+dist/assets/authIntents-BiMovPIh.js                                 1.66 kB │ gzip:   0.82 kB
+dist/assets/useReaderAudience-BI1dQ6Xf.js                           1.66 kB │ gzip:   0.82 kB
+dist/assets/credibilityRead-L5JYaO9N.js                             1.67 kB │ gzip:   0.86 kB
+dist/assets/tonightAtTheTable-BCVGGa8d.js                           1.72 kB │ gzip:   0.96 kB
+dist/assets/realmArcSummary-Bw2-kF15.js                             1.74 kB │ gzip:   0.88 kB
+dist/assets/purchaseHistory-DANR5afs.js                             1.75 kB │ gzip:   0.84 kB
+dist/assets/errandMint-DxxEBGP-.js                                  1.75 kB │ gzip:   0.71 kB
+dist/assets/sessionClient-DbFAZaUv.js                               1.77 kB │ gzip:   0.86 kB
+dist/assets/CampaignSyncBanner-DZa0Whfh.js                          1.77 kB │ gzip:   1.03 kB
+dist/assets/constructionUsage-ldRM8ce1.js                           1.79 kB │ gzip:   0.91 kB
+dist/assets/namedPersonTransit-DoVc80dD.js                          1.79 kB │ gzip:   0.76 kB
+dist/assets/AuthModal-D8IGM4zH.js                                   1.80 kB │ gzip:   0.97 kB
+dist/assets/interpretReview-DzKvdILz.js                             1.83 kB │ gzip:   0.80 kB
+dist/assets/galleryImportSettlement-W_zMeZ4Q.js                     1.84 kB │ gzip:   0.98 kB
+dist/assets/humanizeEngineTokens-CIA21OTz.js                        1.86 kB │ gzip:   0.88 kB
+dist/assets/mapThumb-TtkSzCf-.js                                    1.89 kB │ gzip:   0.83 kB
+dist/assets/AddressChain-BZFG2TeZ.js                                1.89 kB │ gzip:   0.85 kB
+dist/assets/editFingerprint-B2riqQaT.js                             1.96 kB │ gzip:   0.83 kB
+dist/assets/politicsRead-DyUbzwm1.js                                1.99 kB │ gzip:   0.99 kB
+dist/assets/tabConstants-JBThzi7W.js                                1.99 kB │ gzip:   0.84 kB
+dist/assets/applyDispatch-DsGjBlHG.js                               2.01 kB │ gzip:   0.85 kB
+dist/assets/FirstDossierCallouts-D1tihjyO.js                        2.03 kB │ gzip:   1.10 kB
+dist/assets/userRoutes-BOz9oVN4.js                                  2.05 kB │ gzip:   0.92 kB
+dist/assets/pools-Njh_YDS9.js                                       2.05 kB │ gzip:   0.86 kB
+dist/assets/pantheonDepth-DwtZSIZZ.js                               2.14 kB │ gzip:   1.01 kB
+dist/assets/regionalMapOverlay-CeGO3jhj.js                          2.15 kB │ gzip:   1.09 kB
+dist/assets/TravelRingsLayer-GLxeYg3-.js                            2.22 kB │ gzip:   1.13 kB
+dist/assets/BottomSheet-DvRermuR.js                                 2.22 kB │ gzip:   1.16 kB
+dist/assets/surveyorAutonomy-BHUCGm5B.js                            2.24 kB │ gzip:   1.14 kB
+dist/assets/placementRaster-mMN-PfKu.js                             2.25 kB │ gzip:   1.01 kB
+dist/assets/chronicle-9xL8rpGY.js                                   2.26 kB │ gzip:   1.07 kB
+dist/assets/tradePressure-CswJSM6B.js                               2.27 kB │ gzip:   1.04 kB
+dist/assets/BountyPage-1CscBLjs.js                                  2.27 kB │ gzip:   1.15 kB
+dist/assets/PricingMomentCard-D8uEyU5x.js                           2.27 kB │ gzip:   1.21 kB
+dist/assets/useJourneyConductor-DnOqWZXI.js                         2.29 kB │ gzip:   1.05 kB
+dist/assets/opVocabulary-lq5aNk5J.js                                2.31 kB │ gzip:   1.18 kB
+dist/assets/CovenantPage-BTftn0u3.js                                2.34 kB │ gzip:   1.17 kB
+dist/assets/SetNewPasswordPage-TMF6Z-aT.js                          2.34 kB │ gzip:   1.05 kB
+dist/assets/aiAnalyst-DWJV_XHb.js                                   2.37 kB │ gzip:   1.21 kB
+dist/assets/generationTelemetry-CtrCOuA-.js                         2.37 kB │ gzip:   1.17 kB
+dist/assets/variants-DylSHtSY.js                                    2.38 kB │ gzip:   0.80 kB
+dist/assets/DestroySettlementControl-DBMg3QCV.js                    2.39 kB │ gzip:   1.11 kB
+dist/assets/tradeFlow-DzJ2d6bc.js                                   2.39 kB │ gzip:   1.29 kB
+dist/assets/importReconciliationShared-G8JDFbFt.js                  2.40 kB │ gzip:   1.11 kB
+dist/assets/MobileTabStrip-CRSkG2FP.js                              2.42 kB │ gzip:   1.31 kB
+dist/assets/settlementDeityHelpers-nLhNTTtm.js                      2.45 kB │ gzip:   1.06 kB
+dist/assets/AutoSaveChip-DTUTqYjp.js                                2.45 kB │ gzip:   1.37 kB
+dist/assets/occupationStatus-CnCqYrPy.js                            2.46 kB │ gzip:   0.99 kB
+dist/assets/accountContentReferenceInspection-DpQiStHS.js           2.47 kB │ gzip:   1.09 kB
+dist/assets/ai-DZMVJ0h_.js                                          2.47 kB │ gzip:   1.30 kB
+dist/assets/stripe-BbzUI19U.js                                      2.50 kB │ gzip:   1.22 kB
+dist/assets/JourneyFilm-C_OWJ0s5.js                                 2.52 kB │ gzip:   1.26 kB
+dist/assets/userRouteCharter-DD0O4X6h.js                            2.52 kB │ gzip:   1.20 kB
+dist/assets/routeNetworkConsumersTransit-D_kHYQNW.js                2.54 kB │ gzip:   1.07 kB
+dist/assets/imageUpload-CX3GEEXJ.js                                 2.54 kB │ gzip:   1.17 kB
+dist/assets/armyStrength-B5Q2whJL.js                                2.55 kB │ gzip:   1.17 kB
+dist/assets/QuickInspector-Vt2Sh2w_.js                              2.57 kB │ gzip:   1.29 kB
+dist/assets/saveMoments-B66mpdgX.js                                 2.58 kB │ gzip:   1.02 kB
+dist/assets/RoadmapPage-vPAS979x.js                                 2.65 kB │ gzip:   1.25 kB
+dist/assets/LockControls-BRhV87Sl.js                                2.71 kB │ gzip:   1.22 kB
+dist/assets/spatialSubstrateRead-Cns0yEgB.js                        2.75 kB │ gzip:   1.35 kB
+dist/assets/interview-CvxwZnXL.js                                   2.79 kB │ gzip:   1.40 kB
+dist/assets/TerrainToolbar-BkAAUlDX.js                              2.80 kB │ gzip:   1.30 kB
+dist/assets/heraldFilter-CzloDrjQ.js                                2.80 kB │ gzip:   1.22 kB
+dist/assets/WorkbenchFactionRename-BJeiBMCk.js                      2.91 kB │ gzip:   1.42 kB
+dist/assets/PlacementDetailCard-C882SHsC.js                         2.93 kB │ gzip:   1.37 kB
+dist/assets/SystemStateBar-FoG9J3jL.js                              2.94 kB │ gzip:   1.26 kB
+dist/assets/timelineTrack-B2Sy9i-8.js                               2.94 kB │ gzip:   1.24 kB
+dist/assets/pendingDossier-CYUkVBPQ.js                              2.96 kB │ gzip:   1.11 kB
+dist/assets/configVocabulary-1IEWa-7p.js                            3.00 kB │ gzip:   1.32 kB
+dist/assets/relationshipCompatibility-DREeWJJP.js                   3.00 kB │ gzip:   0.79 kB
+dist/assets/galleryUtils-BpHTyq5d.js                                3.01 kB │ gzip:   1.45 kB
+dist/assets/feasibilityGate-8feCpdn8.js                             3.07 kB │ gzip:   1.38 kB
+dist/assets/civility-TpgHWdNO.js                                    3.16 kB │ gzip:   1.55 kB
+dist/assets/settlement-normalize-BleiCyLV.js                        3.18 kB │ gzip:   1.50 kB
+dist/assets/pulseHelpers-CV_8gNBH.js                                3.20 kB │ gzip:   1.35 kB
+dist/assets/PipelineReveal-Crlo3EQ8.js                              3.23 kB │ gzip:   1.71 kB
+dist/assets/contentEnvironment-CydzPnPu.js                          3.23 kB │ gzip:   1.22 kB
+dist/assets/NarrativeArchivePanel-BC8Ttxbq.js                       3.24 kB │ gzip:   1.55 kB
+dist/assets/deityEffects-DXDVE0Uy.js                                3.27 kB │ gzip:   1.11 kB
+dist/assets/NotesTab-BnsXirry.js                                    3.33 kB │ gzip:   1.56 kB
+dist/assets/publicSafe-CNyvkf9Y.js                                  3.36 kB │ gzip:   1.53 kB
+dist/assets/foundersHall-BJBQNzU5.js                                3.39 kB │ gzip:   1.63 kB
+dist/assets/RoutesToolbar-ueCn3fit.js                               3.39 kB │ gzip:   1.46 kB
+dist/assets/worldSnapshot-DZxPClGt.js                               3.40 kB │ gzip:   1.71 kB
+dist/assets/importReconciliationCommandEntry-LrwI10f9.js            3.41 kB │ gzip:   1.55 kB
+dist/assets/WelcomeCreditCard-DtJU8BBj.js                           3.42 kB │ gzip:   1.60 kB
+dist/assets/regionalFingerprint-qm_14Dcu.js                         3.42 kB │ gzip:   1.54 kB
+dist/assets/treatySuccessionReaffirmedVoice-DPaV8lm_.js             3.46 kB │ gzip:   1.68 kB
+dist/assets/ChronicleTab-DW2Es5h2.js                                3.47 kB │ gzip:   1.37 kB
+dist/assets/stressorAftermath-SVA8ONZ5.js                           3.49 kB │ gzip:   1.60 kB
+dist/assets/useRealmEntityNav-CJWDOSoX.js                           3.53 kB │ gzip:   1.46 kB
+dist/assets/regenIdentityFold-CEqIX1m6.js                           3.56 kB │ gzip:   1.46 kB
+dist/assets/settlementWorldChronicle-B-1JXYFa.js                    3.57 kB │ gzip:   1.59 kB
+dist/assets/warSiegeVerdict-LLAfzdt6.js                             3.62 kB │ gzip:   1.74 kB
+dist/assets/FirstHundredPage-74LEX30I.js                            3.64 kB │ gzip:   1.61 kB
+dist/assets/AssignDeityFromMap-BriBY6TT.js                          3.68 kB │ gzip:   1.61 kB
+dist/assets/WhileYouWereAway-CVRSzUnB.js                            3.68 kB │ gzip:   1.51 kB
+dist/assets/Primitives-CH2rxtdr.js                                  3.69 kB │ gzip:   1.35 kB
+dist/assets/ProgressJourneyOverlay-bF3wMenb.js                      3.69 kB │ gzip:   1.78 kB
+dist/assets/instantWorldBody-bVxz9kRS.js                            3.70 kB │ gzip:   1.87 kB
+dist/assets/saveAdmission-Cay2A8qB.js                               3.70 kB │ gzip:   1.49 kB
+dist/assets/MagicTab-BqYHzqC1.js                                    3.73 kB │ gzip:   1.46 kB
+dist/assets/drainQueuedEvents-CrO_mxnf.js                           3.73 kB │ gzip:   1.69 kB
+dist/assets/SimulationDrawer-BURPOmFF.js                            3.74 kB │ gzip:   1.75 kB
+dist/assets/landingFixture-N5vvkeBd.js                              3.80 kB │ gzip:   1.76 kB
+dist/assets/treatySuccessionDecision-BBuvhqU4.js                    3.82 kB │ gzip:   1.75 kB
+dist/assets/pantheon-DY2oJ2ru.js                                    3.84 kB │ gzip:   1.65 kB
+dist/assets/WorldPulsePrimitives-BGzkg3Kr.js                        3.84 kB │ gzip:   1.54 kB
+dist/assets/KeyboardPlacementControl-D-x_5cj2.js                    3.90 kB │ gzip:   1.91 kB
+dist/assets/heraldRegister-DJ_ukJR4.js                              3.91 kB │ gzip:   1.79 kB
+dist/assets/surveyorPanelKit-O47Jk9Pi.js                            3.92 kB │ gzip:   1.59 kB
+dist/assets/advanceCampaignWorld-_2Y5qm_e.js                        3.93 kB │ gzip:   1.82 kB
+dist/assets/customSupplyChainPresentation-BkHpdxbU.js               3.94 kB │ gzip:   1.68 kB
+dist/assets/spatialCost-DPo_oc88.js                                 3.98 kB │ gzip:   1.43 kB
+dist/assets/canonEventCommandPersistence-DbFE3rcX.js                3.98 kB │ gzip:   1.19 kB
+dist/assets/SubstrateTab-DSzEzq8g.js                                4.02 kB │ gzip:   1.79 kB
+dist/assets/FounderTile-C7i5jLXu.js                                 4.04 kB │ gzip:   1.87 kB
+dist/assets/canonEventCommandRecovery-BJImq56W.js                   4.05 kB │ gzip:   1.58 kB
+dist/assets/newsBody-DSkiwhS1.js                                    4.10 kB │ gzip:   1.78 kB
+dist/assets/commandEnvelope-DenhDA1_.js                             4.11 kB │ gzip:   1.66 kB
+dist/assets/PublicDossierView-rOUwR2si.js                           4.13 kB │ gzip:   2.02 kB
+dist/assets/npcCredibility-esRRCkrh.js                              4.15 kB │ gzip:   1.90 kB
+dist/assets/WorkbenchProseEditor-B8Ye9O_v.js                        4.18 kB │ gzip:   1.87 kB
+dist/assets/vendor-icons-BhnrOqvz.js                                4.23 kB │ gzip:   1.76 kB
+dist/assets/neighbourBackLink-l3qHUB8m.js                           4.23 kB │ gzip:   1.63 kB
+dist/assets/campaignSync-DDPqsuNW.js                                4.24 kB │ gzip:   1.84 kB
+dist/assets/embattlement-C13Z9rGo.js                                4.27 kB │ gzip:   1.96 kB
+dist/assets/interpretApply-C11-6XWy.js                              4.27 kB │ gzip:   1.80 kB
+dist/assets/rulingPowerCoup-CInZEQUa.js                             4.30 kB │ gzip:   1.95 kB
+dist/assets/dossierMounts-CmG4mM4a.js                               4.31 kB │ gzip:   1.49 kB
+dist/assets/analyticsFlush-C0_G7RE0.js                              4.31 kB │ gzip:   1.85 kB
+dist/assets/Dialog-Bo5TIDIB.js                                      4.34 kB │ gzip:   1.66 kB
+dist/assets/customContentCutover-CAz7iRJ3.js                        4.38 kB │ gzip:   1.69 kB
+dist/assets/index-BrY7RU95.js                                       4.39 kB │ gzip:   2.00 kB
+dist/assets/CharterRoadCard-CCxuZxI1.js                             4.41 kB │ gzip:   2.06 kB
+dist/assets/CommandPalette-BxZ1tmAR.js                              4.43 kB │ gzip:   2.17 kB
+dist/assets/PostGenCoach-C3ov4YmW.js                                4.43 kB │ gzip:   2.03 kB
+dist/assets/UndoHistoryPanel-BRTmAU6x.js                            4.57 kB │ gzip:   2.19 kB
+dist/assets/auspice-CTX-Eruv.js                                     4.62 kB │ gzip:   2.18 kB
+dist/assets/settlementQuickGuide-B_xK9FXv.js                        4.68 kB │ gzip:   1.97 kB
+dist/assets/tableEvents-Cn0hnN2I.js                                 4.70 kB │ gzip:   2.05 kB
+dist/assets/TraditionsTab-BI8_lkpk.js                               4.70 kB │ gzip:   2.10 kB
+dist/assets/DMCompassTab-BkH38ftD.js                                4.71 kB │ gzip:   1.60 kB
+dist/assets/GatheredAdjudication-CrD7L2Ol.js                        4.74 kB │ gzip:   2.22 kB
+dist/assets/npcFacetContract-CwNEhTEK.js                            4.78 kB │ gzip:   1.35 kB
+dist/assets/warStatus-CBbyyf3M.js                                   4.81 kB │ gzip:   1.82 kB
+dist/assets/AnnotateToolbar-CZyk76WD.js                             4.82 kB │ gzip:   1.60 kB
+dist/assets/guidanceRegistry-DZjwRZwy.js                            4.83 kB │ gzip:   1.24 kB
+dist/assets/HeraldRemembrance-LJAYRImo.js                           4.92 kB │ gzip:   2.27 kB
+dist/assets/deityAuthoring-BUr4QAbv.js                              4.96 kB │ gzip:   2.29 kB
+dist/assets/customContentApply-ZnOUbPH1.js                          4.98 kB │ gzip:   2.03 kB
+dist/assets/ImageCropper-CWPfoQal.js                                5.13 kB │ gzip:   2.41 kB
+dist/assets/militaryStrength-DPLzUOyW.js                            5.24 kB │ gzip:   2.43 kB
+dist/assets/faithField-DTihaWxL.js                                  5.27 kB │ gzip:   2.43 kB
+dist/assets/RumorsTab-BGT74Cnz.js                                   5.27 kB │ gzip:   2.18 kB
+dist/assets/content-identity-CFIG6Vg0.js                            5.35 kB │ gzip:   2.61 kB
+dist/assets/warAndRoadNames-BXZptxs1.js                             5.41 kB │ gzip:   2.17 kB
+dist/assets/SummaryTabV2-CJwUjdSx.js                                5.44 kB │ gzip:   1.89 kB
+dist/assets/genesis-BiIvDWnY.js                                     5.44 kB │ gzip:   2.49 kB
+dist/assets/AiUsageDashboard-Pz3H6ti5.js                            5.45 kB │ gzip:   2.28 kB
+dist/assets/TableView-CFTftm8P.js                                   5.47 kB │ gzip:   2.27 kB
+dist/assets/campaignContentBindingCas-BURfB1MP.js                   5.49 kB │ gzip:   1.65 kB
+dist/assets/campaignCanonRelationshipSession-FZhWM_Gm.js            5.52 kB │ gzip:   2.33 kB
+dist/assets/ExportSheet-BfK4F_jP.js                                 5.55 kB │ gzip:   2.27 kB
+dist/assets/dossierViewModel-Dcm1PKjG.js                            5.55 kB │ gzip:   2.39 kB
+dist/assets/piety-B4wYf8ZA.js                                       5.59 kB │ gzip:   2.34 kB
+dist/assets/hegemony-DP0jcXLB.js                                    5.67 kB │ gzip:   2.35 kB
+dist/assets/pipeline-metadata-HTPpmYyS.js                           5.69 kB │ gzip:   2.12 kB
+dist/assets/npcVerbsBody-BMcvSN7F.js                                5.80 kB │ gzip:   2.27 kB
+dist/assets/pulseFingerprint-DYVzlxXc.js                            5.89 kB │ gzip:   2.41 kB
+dist/assets/MapLegend-DQek89NG.js                                   5.91 kB │ gzip:   1.99 kB
+dist/assets/tradeSalience-CDS8p2qs.js                               5.93 kB │ gzip:   2.56 kB
+dist/assets/forecastRun-DqjYU_sY.js                                 5.96 kB │ gzip:   2.73 kB
+dist/assets/HeraldWanderers-DxJnHTRh.js                             5.98 kB │ gzip:   2.53 kB
+dist/assets/foodStockpile-njnqeZta.js                               6.00 kB │ gzip:   2.55 kB
+dist/assets/autoplacement-DWyUSEvk.js                               6.07 kB │ gzip:   2.89 kB
+dist/assets/pestilence-BQVgpThF.js                                  6.17 kB │ gzip:   2.49 kB
+dist/assets/customContentCommands-Bq9noKfs.js                       6.18 kB │ gzip:   2.15 kB
+dist/assets/pendingEditsPreview-D62vQWKr.js                         6.19 kB │ gzip:   2.21 kB
+dist/assets/warTerminationCauseTables-Hocm8qDJ.js                   6.20 kB │ gzip:   2.54 kB
+dist/assets/CampaignContentBindingLifecycle-CVRUqbq-.js             6.24 kB │ gzip:   2.32 kB
+dist/assets/index-Bum0SlL2.js                                       6.28 kB │ gzip:   2.15 kB
+dist/assets/VersionDiffView-DQMfO5Vx.js                             6.34 kB │ gzip:   2.83 kB
+dist/assets/galleryImportMap-DAR3YOQ2.js                            6.60 kB │ gzip:   2.61 kB
+dist/assets/entityLinks-D49j6oQ5.js                                 6.61 kB │ gzip:   2.58 kB
+dist/assets/campaignSpatialCanonize-D8F5QD1e.js                     6.66 kB │ gzip:   2.82 kB
+dist/assets/brokerageServicesPlant-BJHFKqgB.js                      6.68 kB │ gzip:   2.89 kB
+dist/assets/PrivacyPage-oYMypZuJ.js                                 6.68 kB │ gzip:   2.73 kB
+dist/assets/InstantWorldEntry-Bx3IuNyZ.js                           6.76 kB │ gzip:   2.81 kB
+dist/assets/worldPlan-DY4p2Elf.js                                   6.77 kB │ gzip:   2.88 kB
+dist/assets/authUI-BFoc_y8u.js                                      6.98 kB │ gzip:   2.88 kB
+dist/assets/generateSettlementPDF-BtYaYFEl.js                       7.17 kB │ gzip:   3.44 kB
+dist/assets/HeraldMobileCompanion-BrTGg1d6.js                       7.22 kB │ gzip:   3.27 kB
+dist/assets/FaithTab-DtbD9PhQ.js                                    7.26 kB │ gzip:   2.60 kB
+dist/assets/accountImport-BgkNW_a-.js                               7.30 kB │ gzip:   2.68 kB
+dist/assets/WorldPage-DGGZah2o.js                                   7.33 kB │ gzip:   3.07 kB
+dist/assets/flags-BjgcsBL_.js                                       7.38 kB │ gzip:   3.60 kB
+dist/assets/SettlementPalette-DTpxAYrO.js                           7.43 kB │ gzip:   3.11 kB
+dist/assets/magicProfile-DJUfjbE5.js                                7.59 kB │ gzip:   2.54 kB
+dist/assets/useRealmInspector-D25IAp9m.js                           7.64 kB │ gzip:   3.00 kB
+dist/assets/simulationRules-D1YKWy5z.js                             7.65 kB │ gzip:   2.55 kB
+dist/assets/RealmMobileGate-WW5g1uVB.js                             7.73 kB │ gzip:   3.66 kB
+dist/assets/PantheonPanel-h_4BtoIi.js                               7.79 kB │ gzip:   2.75 kB
+dist/assets/AuthPanel-q9zde7TP.js                                   7.87 kB │ gzip:   2.55 kB
+dist/assets/importReconciliationCommandTransaction-BMGCuq-r.js      7.93 kB │ gzip:   3.03 kB
+dist/assets/discoverDependencyCandidates-CX66zaOO.js                7.96 kB │ gzip:   2.78 kB
+dist/assets/simulationProfile-BxJDhZnM.js                           7.96 kB │ gzip:   3.18 kB
+dist/assets/LayersPanel-NvVA0e1A.js                                 7.98 kB │ gzip:   2.88 kB
+dist/assets/PipelineRail-Bun1QxRP.js                                8.09 kB │ gzip:   3.04 kB
+dist/assets/cross-settlement-conflicts-DZD41IBr.js                  8.12 kB │ gzip:   2.99 kB
+dist/assets/PurchaseModal-63PANG0W.js                               8.20 kB │ gzip:   3.09 kB
+dist/assets/DeityAssignmentPanel-Dl9EVEve.js                        8.21 kB │ gzip:   2.47 kB
+dist/assets/treatyBreach-CoF3nT2N.js                                8.34 kB │ gzip:   3.23 kB
+dist/assets/distanceRead-GmHOzVIS.js                                8.56 kB │ gzip:   2.94 kB
+dist/assets/LiveWarStatus-C62XrN8J.js                               8.60 kB │ gzip:   3.73 kB
+dist/assets/canonEventCommandTransaction-DgZSZmSN.js                8.61 kB │ gzip:   3.18 kB
+dist/assets/hookEscalation-RyeGdjdW.js                              8.61 kB │ gzip:   3.49 kB
+dist/assets/TermsPage-iL6Aay6P.js                                   8.69 kB │ gzip:   3.45 kB
+dist/assets/BuyThisDossier-C5ddvbUK.js                              8.74 kB │ gzip:   3.35 kB
+dist/assets/SupplyChainsPanel-D61Q8_b2.js                           8.78 kB │ gzip:   2.89 kB
+dist/assets/roadNetwork-CWhIFZnn.js                                 8.82 kB │ gzip:   3.74 kB
+dist/assets/peaceTermsDocument-Cobiw2pM.js                          8.91 kB │ gzip:   3.28 kB
+dist/assets/districtProfile-DkbZMZ4p.js                             9.05 kB │ gzip:   3.85 kB
+dist/assets/WandererVerbControls-BUGu9hlL.js                        9.18 kB │ gzip:   3.68 kB
+dist/assets/SingleDossierSuccessPage-Kfdi9a6m.js                    9.19 kB │ gzip:   3.28 kB
+dist/assets/threatProfile-BdWvLtLE.js                               9.27 kB │ gzip:   3.23 kB
+dist/assets/dispositionLedger-b5in1zAq.js                           9.37 kB │ gzip:   3.42 kB
+dist/assets/AutoplacementConsent-DOqdEzxs.js                        9.38 kB │ gzip:   3.57 kB
+dist/assets/stopConditions-CDcTEt5k.js                              9.66 kB │ gzip:   3.40 kB
+dist/assets/warReasonTaxonomy-CPRtBRvq.js                           9.73 kB │ gzip:   3.22 kB
+dist/assets/demographicsRates-BWrxzS8Q.js                           9.76 kB │ gzip:   3.97 kB
+dist/assets/CoverImageField-Dzn4QfcZ.js                             9.79 kB │ gzip:   3.81 kB
+dist/assets/NPCsTab-aNxQUUP_.js                                     9.90 kB │ gzip:   4.30 kB
+dist/assets/HomeLanding-BJGgzBix.js                                10.00 kB │ gzip:   4.57 kB
+dist/assets/npcLedger-DcqjuwV6.js                                  10.15 kB │ gzip:   3.45 kB
+dist/assets/npcLedgerProjection-DoxafEaI.js                        10.33 kB │ gzip:   3.61 kB
+dist/assets/custom-schema-DX3uv2IM.js                              10.43 kB │ gzip:   4.01 kB
+dist/assets/CorpusFactoryPanel-BUG8H5l-.js                         10.59 kB │ gzip:   4.31 kB
+dist/assets/ContentSampleReceipt-BQgSDfdK.js                       10.61 kB │ gzip:   3.35 kB
+dist/assets/kernel-C62X6N-E.js                                     10.68 kB │ gzip:   4.35 kB
+dist/assets/conquestDoctrineStage-BFytLVzC.js                      10.68 kB │ gzip:   4.08 kB
+dist/assets/composeInstantWorld-D-c6AG4U.js                        10.71 kB │ gzip:   4.47 kB
+dist/assets/treasury-BpJTdnfP.js                                   10.95 kB │ gzip:   3.90 kB
+dist/assets/partyImpact-DlCUSXod.js                                10.95 kB │ gzip:   4.32 kB
+dist/assets/PendingChangesBar-CtRPJkei.js                          11.04 kB │ gzip:   4.28 kB
+dist/assets/ResourcesTab-V18Lmpkl.js                               11.11 kB │ gzip:   2.75 kB
+dist/assets/paradigmAxisCatalog-CyiHqnyi.js                        11.11 kB │ gzip:   2.19 kB
+dist/assets/pactAmendment-B51Gs9zb.js                              11.12 kB │ gzip:   4.40 kB
+dist/assets/disposition-B4dkSUY2.js                                11.36 kB │ gzip:   4.71 kB
+dist/assets/vendor-icons-map-TfwNIEU8.js                           11.37 kB │ gzip:   4.07 kB
+dist/assets/treatyDocument-BIyWdocN.js                             11.68 kB │ gzip:   4.66 kB
+dist/assets/state-BkFOKlyD.js                                      11.77 kB │ gzip:   4.48 kB
+dist/assets/CampaignImportPanel-BIa4atv-.js                        11.89 kB │ gzip:   4.32 kB
+dist/assets/pendingEditIntents-DaB9DaZQ.js                         11.98 kB │ gzip:   4.01 kB
+dist/assets/ChroniclersLetterPanel-BOkp5xrw.js                     12.10 kB │ gzip:   4.79 kB
+dist/assets/HeraldGazetteer-D6_-nXnC.js                            12.14 kB │ gzip:   4.79 kB
+dist/assets/custom-registry-D_AuRBwA.js                            12.16 kB │ gzip:   3.98 kB
+dist/assets/surveyorWrite-DAS9eLJL.js                              12.35 kB │ gzip:   4.56 kB
+dist/assets/VersionsTab-D_ymvcq3.js                                12.38 kB │ gzip:   5.18 kB
+dist/assets/envoyErrandVocabulary-divNdg1J.js                      12.39 kB │ gzip:   4.18 kB
+dist/assets/SessionMode-CVu5yyJN.js                                12.67 kB │ gzip:   4.48 kB
+dist/assets/pressureModel-Bndc84nx.js                              12.72 kB │ gzip:   4.91 kB
+dist/assets/FoundersHallPage-CHwP3LXB.js                           12.77 kB │ gzip:   4.65 kB
+dist/assets/ConstructionPanel-FpVrz7mS.js                          12.89 kB │ gzip:   4.76 kB
+dist/assets/ViabilityTab-BDm85A9U.js                               12.92 kB │ gzip:   3.77 kB
+dist/assets/religionState-f1gh3UHI.js                              13.02 kB │ gzip:   4.86 kB
+dist/assets/HistoryTab-BSb8D8JL.js                                 13.31 kB │ gzip:   4.20 kB
+dist/assets/regenerationDelta--v85LvIj.js                          13.45 kB │ gzip:   4.92 kB
+dist/assets/wizardNews-BW5yhsYD.js                                 13.56 kB │ gzip:   5.23 kB
+dist/assets/WarResolveSection-DSSAEdEv.js                          13.59 kB │ gzip:   5.43 kB
+dist/assets/defenseDisplay-BZPJOYLC.js                             13.93 kB │ gzip:   5.70 kB
+dist/assets/generateWorldBook-K8SQwm0l.js                          13.93 kB │ gzip:   5.78 kB
+dist/assets/campaignContentBindingSession-BZc4qTva.js              14.04 kB │ gzip:   4.40 kB
+dist/assets/SettlementWorkbench-CIKRJdfk.js                        14.08 kB │ gzip:   5.37 kB
+dist/assets/FaithSection-B0dWdIKY.js                               14.11 kB │ gzip:   5.20 kB
+dist/assets/capacityModel-CX4NBkd6.js                              14.25 kB │ gzip:   4.77 kB
+dist/assets/contentPacks-MfXBPEiB.js                               14.25 kB │ gzip:   4.54 kB
+dist/assets/ServicesTab-CdZ9Y_pU.js                                14.29 kB │ gzip:   4.92 kB
+dist/assets/factionRename-DiHr2LHh.js                              14.42 kB │ gzip:   4.55 kB
+dist/assets/relationshipMemory-CHeQ2_oS.js                         15.00 kB │ gzip:   5.71 kB
+dist/assets/momentum-Bpz8hU4o.js                                   15.11 kB │ gzip:   6.07 kB
+dist/assets/ai-layer-BVenJO64.js                                   15.23 kB │ gzip:   6.03 kB
+dist/assets/vendor-icons-lazy-C42pVeA7.js                          15.77 kB │ gzip:   5.23 kB
+dist/assets/WorldPulsePanel-ZIaWOxAp.js                            15.97 kB │ gzip:   5.69 kB
+dist/assets/AutonomyPanel-qsuMG_CW.js                              16.06 kB │ gzip:   5.87 kB
+dist/assets/mapEdits-DySe1Yx0.js                                   16.28 kB │ gzip:   5.43 kB
+dist/assets/sessionCommandRuntime-BEOmyGy4.js                      16.78 kB │ gzip:   5.23 kB
+dist/assets/ShareToGallery-BMlpqo0x.js                             16.81 kB │ gzip:   5.31 kB
+dist/assets/DailyLifeTab-CFilsC1x.js                               16.94 kB │ gzip:   7.64 kB
+dist/assets/vendor-state-CBu5u-4u.js                               17.31 kB │ gzip:   7.22 kB
+dist/assets/RealmVerbComposer-SeMfpNIL.js                          17.53 kB │ gzip:   6.34 kB
+dist/assets/generateCampaignPDF-RGGBzyq4.js                        18.37 kB │ gzip:   7.52 kB
+dist/assets/campaignWorldPulseDeferred-BcBepA6N.js                 18.40 kB │ gzip:   6.13 kB
+dist/assets/WarTab-VX-iTYyN.js                                     18.60 kB │ gzip:   6.73 kB
+dist/assets/settlementPendingEdits-k_BBuxGz.js                     18.70 kB │ gzip:   6.07 kB
+dist/assets/index-CZAP_dTK.js                                      19.44 kB │ gzip:   7.64 kB
+dist/assets/affordanceManifest-ChBnOEBr.js                         19.81 kB │ gzip:   6.26 kB
+dist/assets/CustomContentPanel-C5GQVTIU.js                         20.79 kB │ gzip:   7.47 kB
+dist/assets/WizardNewsPanel-B59ZTha9.js                            21.01 kB │ gzip:   7.45 kB
+dist/assets/SummaryTab-DU-Ar54T.js                                 21.14 kB │ gzip:   6.60 kB
+dist/assets/worldState-BtsxnH3S.js                                 21.18 kB │ gzip:   7.39 kB
+dist/assets/DefenseTab-D4sOUUJl.js                                 21.94 kB │ gzip:   6.48 kB
+dist/assets/campaignAdvanceSession-Cz97H0jj.js                     22.15 kB │ gzip:   8.62 kB
+dist/assets/warCosts-CMQoNriy.js                                   22.62 kB │ gzip:   8.80 kB
+dist/assets/MapShareEditorOverlay-C627Rwgo.js                      22.74 kB │ gzip:   8.23 kB
+dist/assets/accountImportBody-B59OQkz6.js                          22.77 kB │ gzip:   7.12 kB
+dist/assets/generateFoundryModule-njzkdJqf.js                      23.11 kB │ gzip:   9.06 kB
+dist/assets/occupation-DWCYoWUT.js                                 23.46 kB │ gzip:   8.31 kB
+dist/assets/SimulationRulesDialog-CUQ3Xw5W.js                      23.51 kB │ gzip:   7.81 kB
+dist/assets/RealmDashboard-lnzArPBt.js                             23.51 kB │ gzip:   8.68 kB
+dist/assets/engine-core-lazy-B5kkcykF.js                           23.85 kB │ gzip:   7.39 kB
+dist/assets/peaceReasons-CTQC2pYY.js                               24.75 kB │ gzip:   9.25 kB
+dist/assets/PricingPage-DMKD2Xls.js                                24.79 kB │ gzip:   8.11 kB
+dist/assets/LandingBelowFold-CNLvlp2I.js                           25.30 kB │ gzip:   6.61 kB
+dist/assets/customContentSliceRuntime-Be4W0rkv.js                  27.61 kB │ gzip:   7.90 kB
+dist/assets/supplyCompleteness-D6SoLPFP.js                         28.39 kB │ gzip:  10.45 kB
+dist/assets/AboutWhatThisIs-CBYUcJlt.js                            28.65 kB │ gzip:  10.12 kB
+dist/assets/customContentArchive-Cmis51VH.js                       28.72 kB │ gzip:   8.19 kB
+dist/assets/RelationshipsTab-9mlBDteA.js                           29.04 kB │ gzip:   9.32 kB
+dist/assets/DmScreen-CD5KlH8c.js                                   29.13 kB │ gzip:  10.24 kB
+dist/assets/OverviewTab-Dk-Hjk5I.js                                30.10 kB │ gzip:   8.74 kB
+dist/assets/HowToUse-DYJ9fW6y.js                                   31.30 kB │ gzip:   9.85 kB
+dist/assets/stressors-Cjalma3t.js                                  31.83 kB │ gzip:  11.24 kB
+dist/assets/envoyErrandRecords-WGVxtnG6.js                         32.36 kB │ gzip:  10.75 kB
+dist/assets/gallery-DHDH9eBl.js                                    32.54 kB │ gzip:  12.21 kB
+dist/assets/FloatingAffordances-Bat4KPd1.js                        33.06 kB │ gzip:  10.18 kB
+dist/assets/razingExecution-BD88Zr_h.js                            35.87 kB │ gzip:  13.09 kB
+dist/assets/newsVoice-BsWwYB83.js                                  38.31 kB │ gzip:  12.94 kB
+dist/assets/PowerTab-DYPpd8Rg.js                                   39.17 kB │ gzip:  11.96 kB
+dist/assets/EconomicsTab-8eoCe864.js                               39.75 kB │ gzip:  11.08 kB
+dist/assets/RealmInspector-BRoc9Iii.js                             40.48 kB │ gzip:  13.58 kB
+dist/assets/InstitutionLink-GuHW25kX.js                            43.66 kB │ gzip:  17.65 kB
+dist/assets/headlines-kObojOZE.js                                  44.88 kB │ gzip:  14.74 kB
+dist/assets/StructuredCampaignReconciliation-bpDHYeW0.js           45.91 kB │ gzip:  13.64 kB
+dist/assets/MapOverlay-Bl5NV1Vm.js                                 47.05 kB │ gzip:  15.32 kB
+dist/assets/campaignRuntime-B7qQEwjA.js                            48.03 kB │ gzip:  14.23 kB
+dist/assets/contentVocabulary-BkGyl14U.js                          48.80 kB │ gzip:   7.27 kB
+dist/assets/spatialSubstrateDerive-BbVx_XpC.js                     49.29 kB │ gzip:  18.10 kB
+dist/assets/npcDmVerbs-C63YFqjo.js                                 51.30 kB │ gzip:  16.03 kB
+dist/assets/customContentServiceRuntime-CnEw2ax7.js                52.17 kB │ gzip:  14.05 kB
+dist/assets/index-BLbjGo7u.js                                      54.39 kB │ gzip:  19.16 kB
+dist/assets/OutputContainer-DqXaK7MK.js                            57.34 kB │ gzip:  19.60 kB
+dist/assets/envoyDiplomacy-Bj_gGlY7.js                             64.29 kB │ gzip:  21.38 kB
+dist/assets/InterpretApplyPanel-CVmlXeqY.js                        65.89 kB │ gzip:  15.06 kB
+dist/assets/settlementRumors-C-3J0Xfi.js                           77.65 kB │ gzip:  25.55 kB
+dist/assets/WorldMap-ByMEKAai.js                                   81.82 kB │ gzip:  28.37 kB
+dist/assets/GalleryPage-BdZY6dZt.js                                83.14 kB │ gzip:  23.49 kB
+dist/assets/compendiumData.generated-D7VWMgBe.js                   88.76 kB │ gzip:  23.29 kB
+dist/assets/beliefMap-CUM2qU_s.js                                  97.98 kB │ gzip:  31.29 kB
+dist/assets/AdminPanel-CtTkFZtP.js                                101.63 kB │ gzip:  27.35 kB
+dist/assets/GenerateWizard-lkW6gFbC.js                            103.53 kB │ gzip:  30.75 kB
+dist/assets/realmManifest-BCS4Xmgh.js                             104.38 kB │ gzip:  34.27 kB
+dist/assets/data-DNRTdNLS.js                                      114.83 kB │ gzip:  34.06 kB
+dist/assets/npcLadderState-BZfGSH33.js                            123.55 kB │ gzip:  39.36 kB
+dist/assets/AccountPage-BhpTigcu.js                               123.99 kB │ gzip:  34.68 kB
+dist/assets/engine-core-BVmV76eg.js                               125.40 kB │ gzip:  40.14 kB
+dist/assets/settlementLifecycleFirstClass-tuYjDc3N.js             144.93 kB │ gzip:  49.49 kB
+dist/assets/CompendiumPanel-Dsu7X7Gz.js                           154.44 kB │ gzip:  45.38 kB
+dist/assets/index.es-E3Qf3OZR.js                                  159.03 kB │ gzip:  53.09 kB
+dist/assets/realmItemReadModel-BsuoqGHm.js                        161.60 kB │ gzip:  49.86 kB
+dist/assets/SettlementPDF-BiE_NiVE.js                             172.20 kB │ gzip:  40.34 kB
+dist/assets/vendor-react-BQxSgP9l.js                              193.16 kB │ gzip:  60.55 kB
+dist/assets/vendor-html2canvas-DXEQVQnt.js                        201.04 kB │ gzip:  47.43 kB
+dist/assets/grammarNews-BuQGXV7p.js                               238.06 kB │ gzip:  80.63 kB
+dist/assets/applyWorldPulse-N8NpTp3T.js                           241.36 kB │ gzip:  81.88 kB
+dist/assets/SettlementsPanel-C8WbuuxP.js                          258.53 kB │ gzip:  77.70 kB
+dist/assets/npcComponents-ZCMkQX4_.js                             278.33 kB │ gzip:  74.07 kB
+dist/assets/advanceInterval-CRcPTom7.js                           526.65 kB │ gzip: 173.68 kB
+dist/assets/index-DZR8Jeau.js                                     576.19 kB │ gzip: 182.29 kB
+dist/assets/engine-CNE6BzAa.js                                    674.54 kB │ gzip: 221.35 kB
+dist/assets/data-lazy-BO3GAdPY.js                                 742.36 kB │ gzip: 223.59 kB
+dist/assets/vendor-pdf-x9xNGeG_.js                              1,623.20 kB │ gzip: 578.98 kB
+✓ built in 15.12s
+
+> settlementforge@1.0.0 postbuild
+> node scripts/prerender-routes.mjs
+
+[prerender] wrote 311 static route documents (13 views + 15 gallery hubs + 283 compendium entries) under dist/
+TRUE_EXIT_build=0
+── step measure: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/closure-measure.mjs --dist /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base/dist --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.base --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/h-listing.base.json
+closure-measure OK  assets=494 closureFiles=8 closureBytes=1047133 budget=1048000 margin=867 listingDigest=b26cfef18685 -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/h-listing.base.json
+TRUE_EXIT_measure=0
+output ok: (h) the base listing -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/h-listing.base.json (82231 bytes)
+listing.sh: base measurement -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/h-listing.base.json
+TRUE_EXIT=0
+TRUE_EXIT_h_listing_base=0
+── step h_listing_tip: sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/listing.sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLUIMAT /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full --ref HEAD --against /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/h-listing.base.json
+listing.sh: measuring ref HEAD = 6582958ce7bdc10bcbb8c69d9789b4d957fc5890 (tree porcelain: 0 entr(ies))
+── step archive: sh -c git -C '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLUIMAT' archive 'HEAD' | tar -x -C '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip'
+TRUE_EXIT_archive=0
+listing.sh: extracted 2188 src modules to /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip
+quiet probe 1/3: load1=2.58 busy=0  OK
+quiet probe 2/3: load1=2.53 busy=0  OK
+quiet probe 3/3: load1=2.53 busy=0  OK
+── step build: sh -c cd '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip' && npm run build
+
+> settlementforge@1.0.0 prebuild
+> node scripts/generate-sitemap.mjs
+
+[sitemap] wrote 326 URLs to public/sitemap.xml
+
+> settlementforge@1.0.0 build
+> vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 3886 modules transformed.
+rendering chunks...
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/domain/worldPulse/temperamentPresets.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/temperament/TemperamentPicker.jsx but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/temperament/TemperamentPicker.jsx, dynamic import will not move module into another chunk.
+
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/autoReloadClient.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/account/AccountAutoReloadPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/account/AccountAutoReloadPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/account/AccountAutoReloadPanel.jsx but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/account/AccountAutoReloadPanel.jsx, dynamic import will not move module into another chunk.
+
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/analytics.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/generate/SaveToLibraryButton.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/primitives/EditableInline.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/surveyor/InterpretApplyPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/sessionClient.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/authSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/canonEventCommandEntry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/canonLifecycleTelemetry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/index.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementGenerateAction.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementGenerateAction.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementLifecycleHelpers.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementPendingEditActions.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementPendingEdits.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementPendingEdits.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementPendingEdits.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementRenameHelpers.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementSlice.js but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/GenerateWizard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/HomeHero.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/OutputContainer.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/SettlementDetail.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/SettlementsPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/SingleDossierSuccessPage.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/WorldMap.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/account/ReferralRedeemBlocks.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/compendium/CompendiumGlobalSearch.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/compendium/HelpPopover.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/dossier/DossierHeaderRow.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/dossier/PendingChangesBar.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/dossier/SimulationDrawer.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/dossier/WelcomeCreditCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/generate/ExportDraftButton.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/generate/LayeredConfigurationPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/generate/PipelineReveal.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/home/WelcomeBackCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/map/ModeSwitch.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/map/WizardNewsPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/map/WorldMapStage.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/pricing/FounderTile.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/pricing/PricingMomentCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/primitives/LockedDestination.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/settlement/VersionsTab.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/settlements/CampaignFolder.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/settlements/SettlementCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/settlements/libraryDeleteHandlers.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/components/surveyor/CorpusFactoryPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/foundry/generateFoundryModule.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/hooks/useFunnelEvent.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/hooks/useReferralIntent.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/hooks/useReturnVisit.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/aiAnalyst.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/gallery.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/generationTelemetry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/interview.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/landingFunnelAnalytics.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/researchCapture.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/stripe.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/main.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/accountImportBody.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/aiOverlayLifecycle.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/aiSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/campaignAdvanceSession.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/campaignRegionalSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/campaignSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/campaignSpatialCanonize.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/campaignWorldPulseDeferred.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/galleryImportMap.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/galleryImportSettlement.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/mapSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/utils/generateCampaignPDF.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/utils/generateSettlementPDF.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/utils/generateWorldBook.js, dynamic import will not move module into another chunk.
+
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/lib/researchCapture.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/canonLifecycleTelemetry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/saveMoments.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/settlementRenameHelpers.js but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/aiSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/store/campaignAdvanceSession.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/utils/generateCampaignPDF.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/src/utils/generateSettlementPDF.js, dynamic import will not move module into another chunk.
+
+computing gzip size...
+dist/index.html                                                     7.10 kB │ gzip:   2.84 kB
+dist/assets/generation.worker-DJ5p8GPj.js                       1,404.24 kB
+dist/assets/customContentPreview.worker-BGkjwmFr.js             1,627.63 kB
+dist/assets/pdfRender.worker-0X-9M_FS.js                        2,037.48 kB
+dist/assets/advanceInterval.worker-B6MKQvud.js                  2,660.24 kB
+dist/assets/FloatingAffordances-Cx4HzXZ_.css                        1.02 kB │ gzip:   0.42 kB
+dist/assets/index-CiMob2Ip.css                                     19.80 kB │ gzip:   5.03 kB
+dist/assets/dossierEntitlements-1Eht3dMl.js                         0.07 kB │ gzip:   0.09 kB
+dist/assets/adjudicationMark-BqEExeSV.js                            0.09 kB │ gzip:   0.10 kB
+dist/assets/densityCreateBoundary-CLYaPKyo.js                       0.10 kB │ gzip:   0.11 kB
+dist/assets/rubrication-BeG2ToGk.js                                 0.13 kB │ gzip:   0.12 kB
+dist/assets/viewerAuthority-CGHWOfPP.js                             0.14 kB │ gzip:   0.14 kB
+dist/assets/magicWorksAt-CU5C7jFg.js                                0.15 kB │ gzip:   0.15 kB
+dist/assets/RealmEntityContext-BKFrpAJR.js                          0.17 kB │ gzip:   0.16 kB
+dist/assets/referralRedeem-SzIUcYJp.js                              0.18 kB │ gzip:   0.15 kB
+dist/assets/settlementConfigMigration-he6xJZCP.js                   0.19 kB │ gzip:   0.15 kB
+dist/assets/warConvergenceContract-DkRgetCT.js                      0.19 kB │ gzip:   0.15 kB
+dist/assets/support-Cvt7UAo_.js                                     0.20 kB │ gzip:   0.18 kB
+dist/assets/spatialCaptureRegistry-CzpsE_Wc.js                      0.20 kB │ gzip:   0.14 kB
+dist/assets/founderSeats-1_XhsFQD.js                                0.22 kB │ gzip:   0.18 kB
+dist/assets/text-DZjQ-OKY.js                                        0.23 kB │ gzip:   0.20 kB
+dist/assets/downloadBlob-C_JrcvrE.js                                0.24 kB │ gzip:   0.20 kB
+dist/assets/faithEventFilter-Bu_eHwP8.js                            0.24 kB │ gzip:   0.22 kB
+dist/assets/ink-Co0m7keZ.js                                         0.27 kB │ gzip:   0.22 kB
+dist/assets/lifecycleGlyphStyle-CsYTkNOY.js                         0.28 kB │ gzip:   0.19 kB
+dist/assets/roadSceneAi-DVIIdvb8.js                                 0.29 kB │ gzip:   0.22 kB
+dist/assets/accountTransferContract-C1LAP5Z4.js                     0.29 kB │ gzip:   0.23 kB
+dist/assets/defenseScoreBands-BKTSJlbR.js                           0.29 kB │ gzip:   0.25 kB
+dist/assets/numberWords-C_3apVZr.js                                 0.30 kB │ gzip:   0.19 kB
+dist/assets/lowDiscrepancy-qS9GY-8D.js                              0.31 kB │ gzip:   0.24 kB
+dist/assets/Page-JXNXS69e.js                                        0.32 kB │ gzip:   0.25 kB
+dist/assets/roadsRescueInflame-CZ8Tpwmn.js                          0.33 kB │ gzip:   0.24 kB
+dist/assets/vendor-supabase-kHcLnhpD.js                             0.34 kB │ gzip:   0.25 kB
+dist/assets/format-number-CUT3IM7u.js                               0.34 kB │ gzip:   0.26 kB
+dist/assets/EconomyFreshnessNote-De2Y3N4I.js                        0.34 kB │ gzip:   0.26 kB
+dist/assets/founderChairRequest-C-rS9toS.js                         0.35 kB │ gzip:   0.25 kB
+dist/assets/settlementThreat-By9JJ621.js                            0.37 kB │ gzip:   0.24 kB
+dist/assets/criminalOpRole-BApbL-8J.js                              0.37 kB │ gzip:   0.24 kB
+dist/assets/viabilityFilter-1giXQ9ar.js                             0.39 kB │ gzip:   0.23 kB
+dist/assets/DevEmailBanner-Bioiw1n0.js                              0.40 kB │ gzip:   0.27 kB
+dist/assets/useAboutHashScroll-CcG5V8ww.js                          0.42 kB │ gzip:   0.30 kB
+dist/assets/importScrub-UjHDM8GJ.js                                 0.43 kB │ gzip:   0.24 kB
+dist/assets/ageBands-cotI5YTG.js                                    0.51 kB │ gzip:   0.29 kB
+dist/assets/npcBank-CnOcOnoA.js                                     0.51 kB │ gzip:   0.29 kB
+dist/assets/docketLapse-8IyZUa2j.js                                 0.52 kB │ gzip:   0.35 kB
+dist/assets/spatialLedgerAccess-BjiEL5HR.js                         0.52 kB │ gzip:   0.28 kB
+dist/assets/useReferralIntent-BLi9qP58.js                           0.52 kB │ gzip:   0.33 kB
+dist/assets/aiChronicleContext-uqHyyNdM.js                          0.53 kB │ gzip:   0.33 kB
+dist/assets/entityRefTokenizer-O9QWRF1U.js                          0.53 kB │ gzip:   0.34 kB
+dist/assets/warFrontReads-JOmxhjrg.js                               0.55 kB │ gzip:   0.32 kB
+dist/assets/relationshipColors-D5AY5ixs.js                          0.55 kB │ gzip:   0.33 kB
+dist/assets/customTradeLabelOwnership-MFpzu2XB.js                   0.56 kB │ gzip:   0.33 kB
+dist/assets/CaptchaGate-D54iR_kS.js                                 0.58 kB │ gzip:   0.36 kB
+dist/assets/useLivePricing-CjbiWYS9.js                              0.60 kB │ gzip:   0.39 kB
+dist/assets/DevFlagPanel-BAlk8EzQ.js                                0.61 kB │ gzip:   0.39 kB
+dist/assets/deityNames-BsuCtFPQ.js                                  0.67 kB │ gzip:   0.41 kB
+dist/assets/safetySeverity-Dp4bd7uI.js                              0.74 kB │ gzip:   0.38 kB
+dist/assets/det-pow-COyTktyy.js                                     0.74 kB │ gzip:   0.41 kB
+dist/assets/DeleteConfirmation-iti2ucMo.js                          0.77 kB │ gzip:   0.46 kB
+dist/assets/servicesDisplay-C7S6ql7P.js                             0.80 kB │ gzip:   0.40 kB
+dist/assets/compose-BDi7k1Bj.js                                     0.80 kB │ gzip:   0.51 kB
+dist/assets/pendingEditCommitRuntime-B5GixMVq.js                    0.81 kB │ gzip:   0.47 kB
+dist/assets/EmptyState-DGLPBya3.js                                  0.82 kB │ gzip:   0.50 kB
+dist/assets/det-math-decay-C2p8_4am.js                              0.83 kB │ gzip:   0.45 kB
+dist/assets/imFellFace-CB6BiQcX.js                                  0.83 kB │ gzip:   0.48 kB
+dist/assets/tierFacts-v3YX2j4w.js                                   0.84 kB │ gzip:   0.41 kB
+dist/assets/emailLifecycle-Bq_yFG87.js                              0.86 kB │ gzip:   0.41 kB
+dist/assets/RealmEntityLink-BsaGNUbF.js                             0.89 kB │ gzip:   0.56 kB
+dist/assets/guidance-DK1aYUao.js                                    0.90 kB │ gzip:   0.44 kB
+dist/assets/pricingMoments-Bquen9l0.js                              0.90 kB │ gzip:   0.52 kB
+dist/assets/bandedStock-zp_PeO5r.js                                 0.91 kB │ gzip:   0.52 kB
+dist/assets/pseudo-BndNIBi6.js                                      0.91 kB │ gzip:   0.60 kB
+dist/assets/ClerkNote-KCcB_Tua.js                                   0.91 kB │ gzip:   0.49 kB
+dist/assets/ResetPasswordPage-C2MCRuRg.js                           0.92 kB │ gzip:   0.55 kB
+dist/assets/consistency-Batx9waE.js                                 0.94 kB │ gzip:   0.54 kB
+dist/assets/PageHeader-D3_cZ-hl.js                                  0.94 kB │ gzip:   0.52 kB
+dist/assets/campaignHydration-Cw2yG2HK.js                           0.95 kB │ gzip:   0.53 kB
+dist/assets/Segmented-CvYiGenJ.js                                   0.96 kB │ gzip:   0.61 kB
+dist/assets/design-Bohr9gHn.js                                      0.98 kB │ gzip:   0.55 kB
+dist/assets/importReconciliationCommandRuntime-CMjJwJgN.js          0.99 kB │ gzip:   0.53 kB
+dist/assets/det-math-BvTfuDJc.js                                    1.00 kB │ gzip:   0.52 kB
+dist/assets/FounderBadge-DXmw5Ul0.js                                1.01 kB │ gzip:   0.64 kB
+dist/assets/AccountFAQ-B1r-QAVI.js                                  1.01 kB │ gzip:   0.59 kB
+dist/assets/NarrativeNote-Cvfqp7D0.js                               1.01 kB │ gzip:   0.62 kB
+dist/assets/SessionEvictedBanner-DGEamsXB.js                        1.01 kB │ gzip:   0.65 kB
+dist/assets/campaignDeletionSession-ClojUMFT.js                     1.02 kB │ gzip:   0.53 kB
+dist/assets/founderTransferClient-CXzYTLRX.js                       1.02 kB │ gzip:   0.45 kB
+dist/assets/PublicSimulationBand-aEXhMeFS.js                        1.03 kB │ gzip:   0.52 kB
+dist/assets/dossierRetroClaim-BAyHJ0Ya.js                           1.05 kB │ gzip:   0.56 kB
+dist/assets/advanceWorkerClient-B_Bb6Vkp.js                         1.11 kB │ gzip:   0.62 kB
+dist/assets/proseFieldLabels-w3GBSsvK.js                            1.14 kB │ gzip:   0.42 kB
+dist/assets/anonGenCounter-_MF8mMez.js                              1.15 kB │ gzip:   0.50 kB
+dist/assets/trendLens-CUtpP3X1.js                                   1.17 kB │ gzip:   0.65 kB
+dist/assets/useDialogFocusTrap-BCm-qAOE.js                          1.21 kB │ gzip:   0.62 kB
+dist/assets/StateBadge-CjyRI_wI.js                                  1.22 kB │ gzip:   0.75 kB
+dist/assets/Card-DAEyz74Q.js                                        1.22 kB │ gzip:   0.66 kB
+dist/assets/activeCustomContentContext-_oUxzRW0.js                  1.22 kB │ gzip:   0.63 kB
+dist/assets/checkoutReconcile-fiyRlhux.js                           1.23 kB │ gzip:   0.65 kB
+dist/assets/campaignContentBindingCache-Cxlw_wwg.js                 1.23 kB │ gzip:   0.65 kB
+dist/assets/RegisterPage-4yCnyWNa.js                                1.23 kB │ gzip:   0.72 kB
+dist/assets/forecastFingerprint-DXGQZUlr.js                         1.29 kB │ gzip:   0.68 kB
+dist/assets/tableClerk-Bs-0HRKl.js                                  1.30 kB │ gzip:   0.72 kB
+dist/assets/relationshipEdgeStyle-gF0gA26J.js                       1.31 kB │ gzip:   0.52 kB
+dist/assets/ConfirmEmailPage-Cf9QoZTO.js                            1.33 kB │ gzip:   0.66 kB
+dist/assets/citations-DAaaWgMI.js                                   1.34 kB │ gzip:   0.67 kB
+dist/assets/VerifyEmailPage-uXbCaWm1.js                             1.34 kB │ gzip:   0.68 kB
+dist/assets/realmMapExport-BBqx34xX.js                              1.39 kB │ gzip:   0.77 kB
+dist/assets/TurnstileGate-BZ5f2nPz.js                               1.40 kB │ gzip:   0.77 kB
+dist/assets/logo-qupQdHAe.js                                        1.41 kB │ gzip:   0.82 kB
+dist/assets/Badge-DqreIHAm.js                                       1.43 kB │ gzip:   0.77 kB
+dist/assets/importReconciliationCommandPersistence-CHjmpop5.js      1.43 kB │ gzip:   0.76 kB
+dist/assets/LegalPage-CArVv5mH.js                                   1.45 kB │ gzip:   0.73 kB
+dist/assets/CampaignEmptyState-DiRn7BPU.js                          1.45 kB │ gzip:   0.76 kB
+dist/assets/authSecurity-D76bohL-.js                                1.46 kB │ gzip:   0.71 kB
+dist/assets/campaignContentBindingModel-ALFRuZuN.js                 1.46 kB │ gzip:   0.57 kB
+dist/assets/SignInPage-Cd1v1wnp.js                                  1.46 kB │ gzip:   0.81 kB
+dist/assets/DesktopOnlyGate-Cin3n6uu.js                             1.48 kB │ gzip:   0.76 kB
+dist/assets/generationRequest-BSh4LEU-.js                           1.48 kB │ gzip:   0.83 kB
+dist/assets/entitlementLadder-DP8-6fYN.js                           1.50 kB │ gzip:   0.55 kB
+dist/assets/canonLifecycleTelemetry-NvXagkAT.js                     1.53 kB │ gzip:   0.69 kB
+dist/assets/mobilizationStatus-C1qoZwUX.js                          1.54 kB │ gzip:   0.74 kB
+dist/assets/customContentPreviewClient-rG9vj1cF.js                  1.56 kB │ gzip:   0.77 kB
+dist/assets/dossierClaimStash-DRw-nRZ0.js                           1.58 kB │ gzip:   0.60 kB
+dist/assets/Disclosure-DzmZ1Dyf.js                                  1.60 kB │ gzip:   0.86 kB
+dist/assets/consentSync-YjbDIddj.js                                 1.61 kB │ gzip:   0.83 kB
+dist/assets/RealmUnfurlLoading-PJkCZOh8.js                          1.62 kB │ gzip:   0.92 kB
+dist/assets/intentComparator-LuU3PFsZ.js                            1.63 kB │ gzip:   0.87 kB
+dist/assets/useOwnerScopedSaves-BYld_0pq.js                         1.64 kB │ gzip:   0.80 kB
+dist/assets/authIntents-BiMovPIh.js                                 1.66 kB │ gzip:   0.82 kB
+dist/assets/useReaderAudience-1o9HEzKw.js                           1.66 kB │ gzip:   0.82 kB
+dist/assets/credibilityRead-tt02zpnQ.js                             1.67 kB │ gzip:   0.86 kB
+dist/assets/tonightAtTheTable-B_8AzPze.js                           1.72 kB │ gzip:   0.96 kB
+dist/assets/labelBands-BDv-706K.js                                  1.73 kB │ gzip:   0.84 kB
+dist/assets/realmArcSummary-B4PjDBMD.js                             1.74 kB │ gzip:   0.88 kB
+dist/assets/purchaseHistory-DANR5afs.js                             1.75 kB │ gzip:   0.84 kB
+dist/assets/errandMint-CLq7OIf5.js                                  1.75 kB │ gzip:   0.71 kB
+dist/assets/sessionClient-F2SLhc9i.js                               1.77 kB │ gzip:   0.87 kB
+dist/assets/CampaignSyncBanner-Mjdpu3wV.js                          1.77 kB │ gzip:   1.03 kB
+dist/assets/constructionUsage-ldRM8ce1.js                           1.79 kB │ gzip:   0.91 kB
+dist/assets/namedPersonTransit-ljFmluJc.js                          1.79 kB │ gzip:   0.76 kB
+dist/assets/AuthModal-DNMblutd.js                                   1.80 kB │ gzip:   0.97 kB
+dist/assets/treatyOrientation-B4NtBDt-.js                           1.81 kB │ gzip:   0.68 kB
+dist/assets/interpretReview-DzKvdILz.js                             1.83 kB │ gzip:   0.80 kB
+dist/assets/galleryImportSettlement-DbkZ-GYI.js                     1.84 kB │ gzip:   0.98 kB
+dist/assets/humanizeEngineTokens-C_kLpGwL.js                        1.86 kB │ gzip:   0.88 kB
+dist/assets/mapThumb-TtkSzCf-.js                                    1.89 kB │ gzip:   0.83 kB
+dist/assets/AddressChain-BjGFz8kR.js                                1.89 kB │ gzip:   0.85 kB
+dist/assets/editFingerprint-_t7L5r_L.js                             1.96 kB │ gzip:   0.83 kB
+dist/assets/politicsRead-4j8s3qsu.js                                1.99 kB │ gzip:   0.98 kB
+dist/assets/tabConstants-z6MnbESi.js                                1.99 kB │ gzip:   0.84 kB
+dist/assets/applyDispatch-DsGjBlHG.js                               2.01 kB │ gzip:   0.85 kB
+dist/assets/FirstDossierCallouts-LGl4VgDI.js                        2.03 kB │ gzip:   1.10 kB
+dist/assets/userRoutes-C6WY3Oo7.js                                  2.05 kB │ gzip:   0.92 kB
+dist/assets/pools-Njh_YDS9.js                                       2.05 kB │ gzip:   0.86 kB
+dist/assets/pantheonDepth-CnKT-iZ6.js                               2.14 kB │ gzip:   1.01 kB
+dist/assets/regionalMapOverlay-CfP1Ikqf.js                          2.15 kB │ gzip:   1.08 kB
+dist/assets/TravelRingsLayer-685ZID0c.js                            2.22 kB │ gzip:   1.13 kB
+dist/assets/BottomSheet-7MTKdM6D.js                                 2.22 kB │ gzip:   1.17 kB
+dist/assets/surveyorAutonomy-CbaansZ5.js                            2.24 kB │ gzip:   1.14 kB
+dist/assets/placementRaster-mMN-PfKu.js                             2.25 kB │ gzip:   1.01 kB
+dist/assets/chronicle-CehMTvjX.js                                   2.26 kB │ gzip:   1.08 kB
+dist/assets/tradePressure-CO5EEqfO.js                               2.27 kB │ gzip:   1.04 kB
+dist/assets/BountyPage-BmHK_1bi.js                                  2.27 kB │ gzip:   1.14 kB
+dist/assets/PricingMomentCard-BiFZ5BYk.js                           2.27 kB │ gzip:   1.21 kB
+dist/assets/useJourneyConductor-NHhoqBZg.js                         2.29 kB │ gzip:   1.05 kB
+dist/assets/opVocabulary-DjqPR-Kk.js                                2.31 kB │ gzip:   1.18 kB
+dist/assets/warEndingClassifier-IxrwTJO3.js                         2.32 kB │ gzip:   1.08 kB
+dist/assets/CovenantPage-DKp4LZq8.js                                2.34 kB │ gzip:   1.17 kB
+dist/assets/SetNewPasswordPage-8HkHYNhc.js                          2.34 kB │ gzip:   1.06 kB
+dist/assets/generationTelemetry-BERbdX0g.js                         2.37 kB │ gzip:   1.17 kB
+dist/assets/variants-DylSHtSY.js                                    2.38 kB │ gzip:   0.80 kB
+dist/assets/DestroySettlementControl-D_8VtoNB.js                    2.39 kB │ gzip:   1.11 kB
+dist/assets/tradeFlow-BrFQ2BnG.js                                   2.39 kB │ gzip:   1.29 kB
+dist/assets/importReconciliationShared-G8JDFbFt.js                  2.40 kB │ gzip:   1.11 kB
+dist/assets/MobileTabStrip-DV-gSg8r.js                              2.42 kB │ gzip:   1.31 kB
+dist/assets/aiAnalyst-BW5uGal1.js                                   2.44 kB │ gzip:   1.23 kB
+dist/assets/settlementDeityHelpers-BC4GcOHi.js                      2.45 kB │ gzip:   1.05 kB
+dist/assets/AutoSaveChip-BTgfW7TU.js                                2.45 kB │ gzip:   1.38 kB
+dist/assets/occupationStatus-CnCqYrPy.js                            2.46 kB │ gzip:   0.99 kB
+dist/assets/accountContentReferenceInspection-HLIDF5aF.js           2.47 kB │ gzip:   1.09 kB
+dist/assets/ai-DZMVJ0h_.js                                          2.47 kB │ gzip:   1.30 kB
+dist/assets/stripe-BozUznmM.js                                      2.50 kB │ gzip:   1.22 kB
+dist/assets/JourneyFilm-Cm1ShnJQ.js                                 2.52 kB │ gzip:   1.26 kB
+dist/assets/userRouteCharter-Dwxv3_y0.js                            2.52 kB │ gzip:   1.20 kB
+dist/assets/routeNetworkConsumersTransit-I2-aQOWJ.js                2.54 kB │ gzip:   1.06 kB
+dist/assets/imageUpload-CX3GEEXJ.js                                 2.54 kB │ gzip:   1.17 kB
+dist/assets/PlotHooksTab-CffYS8DX.js                                2.56 kB │ gzip:   1.32 kB
+dist/assets/QuickInspector-DlWnmx95.js                              2.57 kB │ gzip:   1.29 kB
+dist/assets/saveMoments-CsrkpV5i.js                                 2.58 kB │ gzip:   1.02 kB
+dist/assets/armyStrength-ODV8M6cY.js                                2.62 kB │ gzip:   1.19 kB
+dist/assets/RoadmapPage-D_L50_48.js                                 2.65 kB │ gzip:   1.25 kB
+dist/assets/LockControls-BKpC3LXg.js                                2.71 kB │ gzip:   1.22 kB
+dist/assets/spatialSubstrateRead-TzyXAidz.js                        2.75 kB │ gzip:   1.35 kB
+dist/assets/TerrainToolbar-DshX6Wqz.js                              2.80 kB │ gzip:   1.30 kB
+dist/assets/heraldFilter-C8XCLeFo.js                                2.80 kB │ gzip:   1.22 kB
+dist/assets/interview-C2kpTo9c.js                                   2.87 kB │ gzip:   1.43 kB
+dist/assets/WorkbenchFactionRename-CVy0G3jo.js                      2.91 kB │ gzip:   1.42 kB
+dist/assets/PlacementDetailCard-B4563GrL.js                         2.93 kB │ gzip:   1.37 kB
+dist/assets/SystemStateBar-Bowpw7kI.js                              2.94 kB │ gzip:   1.26 kB
+dist/assets/timelineTrack-B2Sy9i-8.js                               2.94 kB │ gzip:   1.24 kB
+dist/assets/pendingDossier-CYUkVBPQ.js                              2.96 kB │ gzip:   1.11 kB
+dist/assets/configVocabulary-2y33vF_b.js                            3.00 kB │ gzip:   1.32 kB
+dist/assets/relationshipCompatibility-DREeWJJP.js                   3.00 kB │ gzip:   0.79 kB
+dist/assets/galleryUtils-BpHTyq5d.js                                3.01 kB │ gzip:   1.45 kB
+dist/assets/feasibilityGate-8feCpdn8.js                             3.07 kB │ gzip:   1.38 kB
+dist/assets/civility-BnBOXYHd.js                                    3.16 kB │ gzip:   1.55 kB
+dist/assets/settlement-normalize-BleiCyLV.js                        3.18 kB │ gzip:   1.50 kB
+dist/assets/pulseHelpers-HlNvJhPy.js                                3.20 kB │ gzip:   1.34 kB
+dist/assets/PipelineReveal-Nsla19lJ.js                              3.23 kB │ gzip:   1.71 kB
+dist/assets/contentEnvironment-rhcn1RCU.js                          3.23 kB │ gzip:   1.22 kB
+dist/assets/NarrativeArchivePanel-M8n3MOp5.js                       3.24 kB │ gzip:   1.55 kB
+dist/assets/deityEffects-Cm7C1oRp.js                                3.27 kB │ gzip:   1.11 kB
+dist/assets/NotesTab-CHk6zTQ3.js                                    3.33 kB │ gzip:   1.56 kB
+dist/assets/publicSafe-BloY6Ahq.js                                  3.36 kB │ gzip:   1.53 kB
+dist/assets/foundersHall-BJBQNzU5.js                                3.39 kB │ gzip:   1.63 kB
+dist/assets/RoutesToolbar-Be_Az2nn.js                               3.39 kB │ gzip:   1.46 kB
+dist/assets/worldSnapshot-D7L9a1jn.js                               3.40 kB │ gzip:   1.71 kB
+dist/assets/importReconciliationCommandEntry-BemS2Laz.js            3.41 kB │ gzip:   1.55 kB
+dist/assets/WelcomeCreditCard-DWpMEaZh.js                           3.42 kB │ gzip:   1.60 kB
+dist/assets/regionalFingerprint-DUQh0Tvb.js                         3.42 kB │ gzip:   1.53 kB
+dist/assets/ChronicleTab-KZwuPaFD.js                                3.47 kB │ gzip:   1.37 kB
+dist/assets/stressorAftermath-BRyu93JW.js                           3.49 kB │ gzip:   1.60 kB
+dist/assets/useRealmEntityNav-4ut3r53c.js                           3.53 kB │ gzip:   1.46 kB
+dist/assets/treatySuccessionReaffirmedVoice-CLPvXX1s.js             3.53 kB │ gzip:   1.70 kB
+dist/assets/regenIdentityFold-CEqIX1m6.js                           3.56 kB │ gzip:   1.46 kB
+dist/assets/settlementWorldChronicle-B-1JXYFa.js                    3.57 kB │ gzip:   1.59 kB
+dist/assets/warSiegeVerdict-De3O8wmG.js                             3.62 kB │ gzip:   1.74 kB
+dist/assets/FirstHundredPage-XROScDFy.js                            3.64 kB │ gzip:   1.61 kB
+dist/assets/AssignDeityFromMap-DDG28RQ8.js                          3.68 kB │ gzip:   1.62 kB
+dist/assets/WhileYouWereAway-CzqBi1HS.js                            3.68 kB │ gzip:   1.51 kB
+dist/assets/Primitives-BDzN-vOD.js                                  3.69 kB │ gzip:   1.35 kB
+dist/assets/ProgressJourneyOverlay-BNyk7gN0.js                      3.69 kB │ gzip:   1.78 kB
+dist/assets/saveAdmission-CIDSjqUV.js                               3.70 kB │ gzip:   1.49 kB
+dist/assets/MagicTab-D95VwfUa.js                                    3.73 kB │ gzip:   1.46 kB
+dist/assets/drainQueuedEvents-CqW3RTk8.js                           3.73 kB │ gzip:   1.69 kB
+dist/assets/SimulationDrawer-BJVxgIRm.js                            3.74 kB │ gzip:   1.75 kB
+dist/assets/instantWorldBody-C6HGzXqQ.js                            3.74 kB │ gzip:   1.89 kB
+dist/assets/landingFixture-N5vvkeBd.js                              3.80 kB │ gzip:   1.76 kB
+dist/assets/treatySuccessionDecision-DMPViwnR.js                    3.82 kB │ gzip:   1.75 kB
+dist/assets/pantheon-CtyTVrKH.js                                    3.84 kB │ gzip:   1.65 kB
+dist/assets/WorldPulsePrimitives-SqDDi67i.js                        3.84 kB │ gzip:   1.54 kB
+dist/assets/KeyboardPlacementControl-DN_2CrVY.js                    3.90 kB │ gzip:   1.91 kB
+dist/assets/heraldRegister-DVzLXjGT.js                              3.91 kB │ gzip:   1.79 kB
+dist/assets/surveyorPanelKit-Dvm1Q0ZI.js                            3.92 kB │ gzip:   1.59 kB
+dist/assets/customSupplyChainPresentation-CE8hFtXu.js               3.94 kB │ gzip:   1.68 kB
+dist/assets/spatialCost-DPo_oc88.js                                 3.98 kB │ gzip:   1.43 kB
+dist/assets/canonEventCommandPersistence-BzQohHUf.js                3.98 kB │ gzip:   1.19 kB
+dist/assets/SubstrateTab-BFIXVN7y.js                                4.02 kB │ gzip:   1.80 kB
+dist/assets/hegemony-CxnhOJa5.js                                    4.04 kB │ gzip:   1.85 kB
+dist/assets/FounderTile-BpuhMhaX.js                                 4.04 kB │ gzip:   1.88 kB
+dist/assets/canonEventCommandRecovery-Cu3H-Cjh.js                   4.05 kB │ gzip:   1.58 kB
+dist/assets/newsBody-BA4jODKG.js                                    4.10 kB │ gzip:   1.78 kB
+dist/assets/commandEnvelope-DenhDA1_.js                             4.11 kB │ gzip:   1.66 kB
+dist/assets/PublicDossierView-CFO9y1mU.js                           4.13 kB │ gzip:   2.01 kB
+dist/assets/advanceCampaignWorld-1M7NJUaB.js                        4.13 kB │ gzip:   1.89 kB
+dist/assets/npcCredibility-Blkw7rPC.js                              4.15 kB │ gzip:   1.90 kB
+dist/assets/WorkbenchProseEditor-CjEJZnkz.js                        4.18 kB │ gzip:   1.87 kB
+dist/assets/vendor-icons-BhnrOqvz.js                                4.23 kB │ gzip:   1.76 kB
+dist/assets/neighbourBackLink-X8wo8mYu.js                           4.23 kB │ gzip:   1.63 kB
+dist/assets/campaignSync-DDPqsuNW.js                                4.24 kB │ gzip:   1.84 kB
+dist/assets/embattlement-C13Z9rGo.js                                4.27 kB │ gzip:   1.96 kB
+dist/assets/interpretApply-Cf2QkWZu.js                              4.27 kB │ gzip:   1.80 kB
+dist/assets/analyticsFlush-joKmjT9_.js                              4.31 kB │ gzip:   1.85 kB
+dist/assets/Dialog-CPdR3KbT.js                                      4.34 kB │ gzip:   1.66 kB
+dist/assets/rulingPowerCoup-DJT2nfaW.js                             4.36 kB │ gzip:   1.97 kB
+dist/assets/customContentCutover-p14R3mES.js                        4.38 kB │ gzip:   1.69 kB
+dist/assets/index-DJj-UFUY.js                                       4.39 kB │ gzip:   2.00 kB
+dist/assets/CharterRoadCard-BPkyw2Qq.js                             4.41 kB │ gzip:   2.06 kB
+dist/assets/CommandPalette-BSwniPbj.js                              4.43 kB │ gzip:   2.17 kB
+dist/assets/PostGenCoach-Bk8bbiZr.js                                4.43 kB │ gzip:   2.03 kB
+dist/assets/UndoHistoryPanel-ByN_zrOe.js                            4.57 kB │ gzip:   2.18 kB
+dist/assets/settlementQuickGuide-C82HXj-5.js                        4.68 kB │ gzip:   1.97 kB
+dist/assets/tableEvents-Cn0hnN2I.js                                 4.70 kB │ gzip:   2.05 kB
+dist/assets/TraditionsTab-TaR5M99U.js                               4.70 kB │ gzip:   2.10 kB
+dist/assets/DMCompassTab-DVQM8wC4.js                                4.71 kB │ gzip:   1.61 kB
+dist/assets/GatheredAdjudication-DxRo6RN5.js                        4.74 kB │ gzip:   2.22 kB
+dist/assets/npcFacetContract-CwNEhTEK.js                            4.78 kB │ gzip:   1.35 kB
+dist/assets/auspice-TdjKh3AV.js                                     4.82 kB │ gzip:   2.26 kB
+dist/assets/AnnotateToolbar-T8YQaHl8.js                             4.82 kB │ gzip:   1.60 kB
+dist/assets/guidanceRegistry-DZjwRZwy.js                            4.83 kB │ gzip:   1.24 kB
+dist/assets/warRemembrance-DRZBhpjy.js                              4.90 kB │ gzip:   2.26 kB
+dist/assets/warStatus-aWTKi9XL.js                                   4.91 kB │ gzip:   1.87 kB
+dist/assets/deityAuthoring-BUr4QAbv.js                              4.96 kB │ gzip:   2.29 kB
+dist/assets/customContentApply-XPC28tpD.js                          4.98 kB │ gzip:   2.03 kB
+dist/assets/ImageCropper-C_yYGOqe.js                                5.13 kB │ gzip:   2.41 kB
+dist/assets/militaryStrength-C-Aoy90s.js                            5.24 kB │ gzip:   2.43 kB
+dist/assets/faithField-D--kh-Yq.js                                  5.27 kB │ gzip:   2.43 kB
+dist/assets/RumorsTab-0IVOPa6O.js                                   5.27 kB │ gzip:   2.18 kB
+dist/assets/content-identity-CFIG6Vg0.js                            5.35 kB │ gzip:   2.61 kB
+dist/assets/warAndRoadNames-B0Kth9jR.js                             5.42 kB │ gzip:   2.18 kB
+dist/assets/SummaryTabV2-ZpYNWoM_.js                                5.44 kB │ gzip:   1.88 kB
+dist/assets/genesis-DY-xSKMs.js                                     5.44 kB │ gzip:   2.49 kB
+dist/assets/AiUsageDashboard-DlbRVAmS.js                            5.45 kB │ gzip:   2.28 kB
+dist/assets/TableView-XW1FN0ds.js                                   5.47 kB │ gzip:   2.27 kB
+dist/assets/campaignContentBindingCas-BtTdjFSk.js                   5.49 kB │ gzip:   1.65 kB
+dist/assets/campaignCanonRelationshipSession-CgO5Kzbe.js            5.52 kB │ gzip:   2.33 kB
+dist/assets/ExportSheet-C5kNNK0D.js                                 5.55 kB │ gzip:   2.27 kB
+dist/assets/dossierViewModel-ZMl0mqjL.js                            5.55 kB │ gzip:   2.39 kB
+dist/assets/piety-DHZdx4gn.js                                       5.59 kB │ gzip:   2.34 kB
+dist/assets/pipeline-metadata-Bpb8SnQ1.js                           5.66 kB │ gzip:   2.10 kB
+dist/assets/pulseFingerprint-Cl5nHPa0.js                            5.89 kB │ gzip:   2.41 kB
+dist/assets/MapLegend-urUz3mKR.js                                   5.91 kB │ gzip:   1.99 kB
+dist/assets/npcVerbsBody-BdpCT3gr.js                                5.92 kB │ gzip:   2.31 kB
+dist/assets/tradeSalience-C6Tsmg_3.js                               5.93 kB │ gzip:   2.56 kB
+dist/assets/foodStockpile-eQXOhq_H.js                               6.00 kB │ gzip:   2.55 kB
+dist/assets/warTerminationCauseTables-DAzwq9E_.js                   6.03 kB │ gzip:   2.47 kB
+dist/assets/HeraldWanderers-DWvR8cEq.js                             6.05 kB │ gzip:   2.56 kB
+dist/assets/autoplacement-LZzBxGjy.js                               6.07 kB │ gzip:   2.89 kB
+dist/assets/forecastRun-nkcbCENn.js                                 6.16 kB │ gzip:   2.81 kB
+dist/assets/pestilence-Dcusn_Ms.js                                  6.17 kB │ gzip:   2.49 kB
+dist/assets/pendingEditsPreview-BaVDRAXl.js                         6.19 kB │ gzip:   2.21 kB
+dist/assets/CampaignContentBindingLifecycle-D36NKdWJ.js             6.24 kB │ gzip:   2.32 kB
+dist/assets/index-DWYZAy6z.js                                       6.28 kB │ gzip:   2.15 kB
+dist/assets/VersionDiffView-CPn-ff0P.js                             6.34 kB │ gzip:   2.83 kB
+dist/assets/customContentCommands-DLO0TL4H.js                       6.54 kB │ gzip:   2.30 kB
+dist/assets/faithPanelModel-D4jFgEMj.js                             6.57 kB │ gzip:   2.98 kB
+dist/assets/galleryImportMap-CvubIcvi.js                            6.60 kB │ gzip:   2.61 kB
+dist/assets/entityLinks-C8lilJt-.js                                 6.61 kB │ gzip:   2.58 kB
+dist/assets/campaignSpatialCanonize-BDueh-oU.js                     6.66 kB │ gzip:   2.81 kB
+dist/assets/brokerageServicesPlant-Bmqm-M0o.js                      6.68 kB │ gzip:   2.88 kB
+dist/assets/PrivacyPage-k2gw96fR.js                                 6.68 kB │ gzip:   2.73 kB
+dist/assets/InstantWorldEntry-MK3WbSJi.js                           6.76 kB │ gzip:   2.81 kB
+dist/assets/worldPlan-C7grpITI.js                                   6.77 kB │ gzip:   2.88 kB
+dist/assets/beliefAxes-CmtjIgX4.js                                  6.86 kB │ gzip:   2.88 kB
+dist/assets/authUI-D1KcvQnZ.js                                      6.98 kB │ gzip:   2.88 kB
+dist/assets/heraldCausalGrammar-BZ7zJl16.js                         7.00 kB │ gzip:   2.28 kB
+dist/assets/generateSettlementPDF-COSRrubL.js                       7.25 kB │ gzip:   3.47 kB
+dist/assets/HeraldRemembrance-CoUOI93h.js                           7.29 kB │ gzip:   2.79 kB
+dist/assets/accountImport-DNgb4hMf.js                               7.30 kB │ gzip:   2.68 kB
+dist/assets/HeraldMobileCompanion-Dm53fvpI.js                       7.34 kB │ gzip:   3.32 kB
+dist/assets/WorldPage-D6r3a4aR.js                                   7.37 kB │ gzip:   3.10 kB
+dist/assets/SettlementPalette-DfwLLVEs.js                           7.43 kB │ gzip:   3.11 kB
+dist/assets/flags-BsF8p1FK.js                                       7.58 kB │ gzip:   3.66 kB
+dist/assets/FaithSection-DZxth3GL.js                                7.58 kB │ gzip:   2.47 kB
+dist/assets/magicProfile-BCh4hLgt.js                                7.59 kB │ gzip:   2.54 kB
+dist/assets/useRealmInspector-DRSb--hk.js                           7.64 kB │ gzip:   3.00 kB
+dist/assets/FaithTab-DRvPfWjL.js                                    7.76 kB │ gzip:   2.82 kB
+dist/assets/PantheonPanel-DAw6Ezv7.js                               7.79 kB │ gzip:   2.74 kB
+dist/assets/RealmMobileGate-BXJiV1HO.js                             7.85 kB │ gzip:   3.72 kB
+dist/assets/AuthPanel-5SRgyxYt.js                                   7.87 kB │ gzip:   2.56 kB
+dist/assets/importReconciliationCommandTransaction-CN7LjprR.js      7.93 kB │ gzip:   3.03 kB
+dist/assets/discoverDependencyCandidates-CDZUwlSw.js                7.96 kB │ gzip:   2.78 kB
+dist/assets/simulationProfile-Opk1Swgn.js                           7.96 kB │ gzip:   3.18 kB
+dist/assets/LayersPanel-CRQrObwt.js                                 7.98 kB │ gzip:   2.88 kB
+dist/assets/PipelineRail-C4Mtp6dP.js                                8.08 kB │ gzip:   3.04 kB
+dist/assets/cross-settlement-conflicts-DER4KRaN.js                  8.12 kB │ gzip:   2.99 kB
+dist/assets/PurchaseModal-CXs-ppsS.js                               8.20 kB │ gzip:   3.09 kB
+dist/assets/DeityAssignmentPanel-CLWWmLTQ.js                        8.21 kB │ gzip:   2.47 kB
+dist/assets/treatyBreach-D8-BqZuR.js                                8.35 kB │ gzip:   3.23 kB
+dist/assets/simulationRules-DmDEacj2.js                             8.37 kB │ gzip:   2.81 kB
+dist/assets/distanceRead-GmHOzVIS.js                                8.56 kB │ gzip:   2.94 kB
+dist/assets/canonEventCommandTransaction-B8S7EUF2.js                8.61 kB │ gzip:   3.18 kB
+dist/assets/hookEscalation-BEmprhKd.js                              8.61 kB │ gzip:   3.49 kB
+dist/assets/TermsPage-BDw8G66y.js                                   8.69 kB │ gzip:   3.45 kB
+dist/assets/LiveWarStatus-hPaWD663.js                               8.71 kB │ gzip:   3.78 kB
+dist/assets/settlementGenerateAction-HPfI0JIR.js                    8.74 kB │ gzip:   3.75 kB
+dist/assets/BuyThisDossier-BtkMIjwl.js                              8.74 kB │ gzip:   3.35 kB
+dist/assets/SupplyChainsPanel-L4vXKzgN.js                           8.78 kB │ gzip:   2.89 kB
+dist/assets/roadNetwork-QFQoJtJj.js                                 8.82 kB │ gzip:   3.74 kB
+dist/assets/peaceTermsDocument-D7l6XDXs.js                          8.91 kB │ gzip:   3.28 kB
+dist/assets/WarFaithDesk-D1HQ_Hw4.js                                8.96 kB │ gzip:   3.48 kB
+dist/assets/districtProfile-DQ1Rhu3d.js                             9.05 kB │ gzip:   3.85 kB
+dist/assets/WandererVerbControls-CVu-F6Aa.js                        9.18 kB │ gzip:   3.68 kB
+dist/assets/SingleDossierSuccessPage-CL9UVKPq.js                    9.19 kB │ gzip:   3.28 kB
+dist/assets/threatProfile-CQ51MryJ.js                               9.27 kB │ gzip:   3.23 kB
+dist/assets/dispositionLedger-DtbrGZyc.js                           9.37 kB │ gzip:   3.42 kB
+dist/assets/AutoplacementConsent-BEsaLXkm.js                        9.38 kB │ gzip:   3.57 kB
+dist/assets/stopConditions-DFbXGTgF.js                              9.66 kB │ gzip:   3.41 kB
+dist/assets/warReasonTaxonomy-CaEONHWN.js                           9.73 kB │ gzip:   3.22 kB
+dist/assets/demographicsRates-B5rPHdbe.js                           9.76 kB │ gzip:   3.97 kB
+dist/assets/CoverImageField-CAM2h434.js                             9.79 kB │ gzip:   3.81 kB
+dist/assets/dossierMounts-BfGvAr01.js                               9.87 kB │ gzip:   2.74 kB
+dist/assets/defenseStateProse-CI_AKmUy.js                           9.88 kB │ gzip:   3.60 kB
+dist/assets/NPCsTab-n1CYn0b1.js                                     9.97 kB │ gzip:   4.31 kB
+dist/assets/HomeLanding-xmVI1D0y.js                                10.04 kB │ gzip:   4.59 kB
+dist/assets/npcLedger-DcqjuwV6.js                                  10.15 kB │ gzip:   3.45 kB
+dist/assets/npcLedgerProjection-DoxafEaI.js                        10.33 kB │ gzip:   3.61 kB
+dist/assets/custom-schema-CGs1GSfA.js                              10.43 kB │ gzip:   4.02 kB
+dist/assets/kernel-CznyAwqE.js                                     10.46 kB │ gzip:   4.26 kB
+dist/assets/ContentSampleReceipt-DWYK3jlT.js                       10.61 kB │ gzip:   3.35 kB
+dist/assets/CorpusFactoryPanel-BYHLO9vG.js                         10.67 kB │ gzip:   4.34 kB
+dist/assets/conquestDoctrineStage-OlAYuvMk.js                      10.68 kB │ gzip:   4.08 kB
+dist/assets/composeInstantWorld-BcPUdEWI.js                        10.76 kB │ gzip:   4.49 kB
+dist/assets/treasury-Bk0RoAHp.js                                   10.95 kB │ gzip:   3.90 kB
+dist/assets/PendingChangesBar-ti3SWEmA.js                          11.04 kB │ gzip:   4.27 kB
+dist/assets/partyImpact-B8d3uC0M.js                                11.07 kB │ gzip:   4.36 kB
+dist/assets/paradigmAxisCatalog-CyiHqnyi.js                        11.11 kB │ gzip:   2.19 kB
+dist/assets/pactAmendment-DjJ_ZUt_.js                              11.12 kB │ gzip:   4.40 kB
+dist/assets/disposition-C4KjJu8N.js                                11.36 kB │ gzip:   4.71 kB
+dist/assets/vendor-icons-map-TfwNIEU8.js                           11.37 kB │ gzip:   4.07 kB
+dist/assets/ResourcesTab-BalAdiKe.js                               11.54 kB │ gzip:   2.95 kB
+dist/assets/treatyDocument-DX2GxOdC.js                             11.72 kB │ gzip:   4.68 kB
+dist/assets/custom-charset-CWI_jkK2.js                             11.76 kB │ gzip:   3.53 kB
+dist/assets/state-2rtg65E7.js                                      11.77 kB │ gzip:   4.48 kB
+dist/assets/CampaignImportPanel-DZK7dRFs.js                        11.89 kB │ gzip:   4.32 kB
+dist/assets/pendingEditIntents-DPeurIOw.js                         11.98 kB │ gzip:   4.02 kB
+dist/assets/ChroniclersLetterPanel-BzqDTy32.js                     12.10 kB │ gzip:   4.80 kB
+dist/assets/custom-registry-BVhvVbs1.js                            12.16 kB │ gzip:   3.98 kB
+dist/assets/economyDeskRead-DeczwoSf.js                            12.16 kB │ gzip:   4.66 kB
+dist/assets/HeraldGazetteer-CpGZPuPD.js                            12.21 kB │ gzip:   4.82 kB
+dist/assets/VersionsTab-jN63z67W.js                                12.38 kB │ gzip:   5.17 kB
+dist/assets/envoyErrandVocabulary-2Or8e--3.js                      12.39 kB │ gzip:   4.18 kB
+dist/assets/surveyorWrite-B4T1GPVl.js                              12.42 kB │ gzip:   4.59 kB
+dist/assets/SessionMode-B7lyVYjL.js                                12.70 kB │ gzip:   4.50 kB
+dist/assets/pressureModel-CuwKmHZq.js                              12.72 kB │ gzip:   4.91 kB
+dist/assets/FoundersHallPage-ZXyYshX2.js                           12.77 kB │ gzip:   4.66 kB
+dist/assets/ConstructionPanel-B_qdvpWP.js                          13.02 kB │ gzip:   4.83 kB
+dist/assets/religionState-B8zl6y4I.js                              13.02 kB │ gzip:   4.86 kB
+dist/assets/regenerationDelta-MKN0OlV0.js                          13.45 kB │ gzip:   4.92 kB
+dist/assets/wizardNews-DKMx18RK.js                                 13.56 kB │ gzip:   5.23 kB
+dist/assets/WarResolveSection-OExT8ExG.js                          13.71 kB │ gzip:   5.47 kB
+dist/assets/defenseDisplay-sXvTP3wW.js                             13.93 kB │ gzip:   5.70 kB
+dist/assets/campaignContentBindingSession-uGr3rS24.js              14.04 kB │ gzip:   4.40 kB
+dist/assets/SettlementWorkbench-zNhr3bVC.js                        14.08 kB │ gzip:   5.36 kB
+dist/assets/ViabilityTab-coK_2KNz.js                               14.21 kB │ gzip:   4.25 kB
+dist/assets/capacityModel-BNT0yfP7.js                              14.25 kB │ gzip:   4.77 kB
+dist/assets/contentPacks-Cn9HmGyy.js                               14.34 kB │ gzip:   4.59 kB
+dist/assets/factionRename-Dua7sMP7.js                              14.42 kB │ gzip:   4.55 kB
+dist/assets/generateWorldBook-BYB7VcX8.js                          14.50 kB │ gzip:   6.04 kB
+dist/assets/HistoryTab-Jio5TPyd.js                                 14.69 kB │ gzip:   4.58 kB
+dist/assets/ServicesTab-B-teYSJ3.js                                14.81 kB │ gzip:   5.15 kB
+dist/assets/relationshipMemory-zjMk7h94.js                         15.00 kB │ gzip:   5.71 kB
+dist/assets/momentum-yCDXsfoR.js                                   15.11 kB │ gzip:   6.07 kB
+dist/assets/ai-layer-BVenJO64.js                                   15.23 kB │ gzip:   6.03 kB
+dist/assets/vendor-icons-lazy-Dj8SHWIb.js                          15.77 kB │ gzip:   5.23 kB
+dist/assets/WorldPulsePanel-CR_D6uqp.js                            16.05 kB │ gzip:   5.71 kB
+dist/assets/AutonomyPanel-C3q69W3t.js                              16.13 kB │ gzip:   5.90 kB
+dist/assets/mapEdits-DySe1Yx0.js                                   16.28 kB │ gzip:   5.43 kB
+dist/assets/sessionCommandRuntime-B5YY9oMI.js                      16.78 kB │ gzip:   5.23 kB
+dist/assets/ShareToGallery-iEG4SsZ6.js                             16.81 kB │ gzip:   5.31 kB
+dist/assets/DailyLifeTab-ccVPdCt4.js                               17.26 kB │ gzip:   7.81 kB
+dist/assets/vendor-state-CBu5u-4u.js                               17.31 kB │ gzip:   7.22 kB
+dist/assets/RealmVerbComposer-C75nNntb.js                          17.74 kB │ gzip:   6.44 kB
+dist/assets/generateCampaignPDF-B85OFOFQ.js                        18.37 kB │ gzip:   7.52 kB
+dist/assets/campaignWorldPulseDeferred-jvfhfP9F.js                 18.65 kB │ gzip:   6.22 kB
+dist/assets/settlementPendingEdits-C3s4rtFW.js                     18.70 kB │ gzip:   6.07 kB
+dist/assets/index-KTpN8nuc.js                                      19.44 kB │ gzip:   7.64 kB
+dist/assets/WarTab-CBsfD3pJ.js                                     19.72 kB │ gzip:   7.14 kB
+dist/assets/affordanceManifest-DB4MUOMT.js                         19.81 kB │ gzip:   6.27 kB
+dist/assets/CustomContentPanel-ChpWJXWP.js                         20.86 kB │ gzip:   7.50 kB
+dist/assets/generalDeskRead-CC9TXe3l.js                            20.89 kB │ gzip:   6.33 kB
+dist/assets/SummaryTab-BvludlQ8.js                                 21.16 kB │ gzip:   6.61 kB
+dist/assets/WizardNewsPanel-B5MG8d3M.js                            21.20 kB │ gzip:   7.53 kB
+dist/assets/worldState-CfnomMM9.js                                 21.28 kB │ gzip:   7.43 kB
+dist/assets/DefenseTab-BMfX6544.js                                 21.48 kB │ gzip:   5.67 kB
+dist/assets/campaignAdvanceSession-8t0X2Yh1.js                     22.34 kB │ gzip:   8.70 kB
+dist/assets/warCosts-DeVo3T4F.js                                   22.62 kB │ gzip:   8.80 kB
+dist/assets/MapShareEditorOverlay-Butoky2D.js                      22.74 kB │ gzip:   8.23 kB
+dist/assets/accountImportBody-BhKvqzSw.js                          22.78 kB │ gzip:   7.13 kB
+dist/assets/generateFoundryModule-6vF-9pNr.js                      23.19 kB │ gzip:   9.09 kB
+dist/assets/occupation-CrWn8RVE.js                                 23.46 kB │ gzip:   8.31 kB
+dist/assets/SimulationRulesDialog-beAZGiEF.js                      23.51 kB │ gzip:   7.81 kB
+dist/assets/RealmDashboard-Dm4O6lO3.js                             23.55 kB │ gzip:   8.70 kB
+dist/assets/engine-core-lazy-BgfJ0-dZ.js                           23.85 kB │ gzip:   7.38 kB
+dist/assets/peaceReasons-ZC8-Dghx.js                               24.75 kB │ gzip:   9.25 kB
+dist/assets/PricingPage-DbFO7Qir.js                                24.79 kB │ gzip:   8.12 kB
+dist/assets/LandingBelowFold-D89fVi9X.js                           25.34 kB │ gzip:   6.63 kB
+dist/assets/supplyCompleteness-CLd8855d.js                         28.43 kB │ gzip:  10.47 kB
+dist/assets/customContentSliceRuntime-B5iyGcab.js                  28.52 kB │ gzip:   8.18 kB
+dist/assets/AboutWhatThisIs-DAhCIbg_.js                            28.69 kB │ gzip:  10.14 kB
+dist/assets/customContentArchive-7cdl9Ojf.js                       28.72 kB │ gzip:   8.19 kB
+dist/assets/DmScreen-Drh1o10A.js                                   29.36 kB │ gzip:  10.34 kB
+dist/assets/RelationshipsTab-CVsxaDql.js                           29.87 kB │ gzip:   9.59 kB
+dist/assets/HowToUse-BLdXgf6n.js                                   31.30 kB │ gzip:   9.85 kB
+dist/assets/stressors-D05DuAY5.js                                  31.82 kB │ gzip:  11.24 kB
+dist/assets/envoyErrandRecords-CZOtwi5h.js                         32.36 kB │ gzip:  10.76 kB
+dist/assets/gallery-BBcNmwD9.js                                    32.54 kB │ gzip:  12.21 kB
+dist/assets/FloatingAffordances-BKNWrSBq.js                        33.15 kB │ gzip:  10.20 kB
+dist/assets/OverviewTab-D5ufmcWb.js                                33.33 kB │ gzip:   9.31 kB
+dist/assets/EconomicsTab-CKVkvq_n.js                               35.27 kB │ gzip:   9.88 kB
+dist/assets/razingExecution-GDa3nE1Y.js                            35.87 kB │ gzip:  13.09 kB
+dist/assets/newsVoice-BsWwYB83.js                                  38.31 kB │ gzip:  12.94 kB
+dist/assets/PowerTab-BiLH0uqY.js                                   39.17 kB │ gzip:  11.95 kB
+dist/assets/RealmInspector-B7NeuuuD.js                             40.60 kB │ gzip:  13.63 kB
+dist/assets/InstitutionLink-yWVkTQgq.js                            43.66 kB │ gzip:  17.65 kB
+dist/assets/headlines-CDuMbijM.js                                  44.88 kB │ gzip:  14.75 kB
+dist/assets/StructuredCampaignReconciliation-DVxz-AOT.js           45.91 kB │ gzip:  13.65 kB
+dist/assets/MapOverlay-CvcOa8CL.js                                 47.05 kB │ gzip:  15.32 kB
+dist/assets/campaignRuntime-_3fC2Obw.js                            48.27 kB │ gzip:  14.35 kB
+dist/assets/spatialSubstrateDerive-DFQNAg6O.js                     49.29 kB │ gzip:  18.10 kB
+dist/assets/contentVocabulary-C3mIGGzH.js                          50.11 kB │ gzip:   7.73 kB
+dist/assets/npcDmVerbs-CPHLm-09.js                                 51.30 kB │ gzip:  16.02 kB
+dist/assets/customContentServiceRuntime-DdrQddto.js                52.17 kB │ gzip:  14.05 kB
+dist/assets/index-c5vHoPSF.js                                      55.23 kB │ gzip:  19.49 kB
+dist/assets/OutputContainer-B3aNyAvu.js                            58.28 kB │ gzip:  19.91 kB
+dist/assets/envoyDiplomacy-Otq5dzKd.js                             64.34 kB │ gzip:  21.40 kB
+dist/assets/InterpretApplyPanel-DoQR8RLW.js                        65.97 kB │ gzip:  15.09 kB
+dist/assets/settlementRumors-C3a-5aCp.js                           77.71 kB │ gzip:  25.57 kB
+dist/assets/WorldMap-kHN56VWz.js                                   82.09 kB │ gzip:  28.47 kB
+dist/assets/GalleryPage-CKWZV8nQ.js                                83.14 kB │ gzip:  23.49 kB
+dist/assets/compendiumData.generated-I_6xg8zG.js                   89.58 kB │ gzip:  23.31 kB
+dist/assets/beliefMap-BUFBDHrM.js                                  91.23 kB │ gzip:  28.90 kB
+dist/assets/AdminPanel-sEAUKEAh.js                                101.70 kB │ gzip:  27.38 kB
+dist/assets/GenerateWizard-CRdgl58m.js                            103.57 kB │ gzip:  30.75 kB
+dist/assets/realmManifest-CxPUsctb.js                             104.38 kB │ gzip:  34.27 kB
+dist/assets/data-DuZw95wO.js                                      114.87 kB │ gzip:  34.07 kB
+dist/assets/npcLadderState-bdFuAUcp.js                            123.55 kB │ gzip:  39.35 kB
+dist/assets/AccountPage-WJ_vpN_m.js                               123.99 kB │ gzip:  34.69 kB
+dist/assets/engine-core-DVnVay6B.js                               126.45 kB │ gzip:  40.52 kB
+dist/assets/settlementLifecycleFirstClass-CZwL80FR.js             144.98 kB │ gzip:  49.50 kB
+dist/assets/realmItemReadModel-DC2SgcoQ.js                        155.13 kB │ gzip:  48.10 kB
+dist/assets/CompendiumPanel-BhCnLuP4.js                           155.98 kB │ gzip:  45.90 kB
+dist/assets/index.es-B7xb79RY.js                                  159.03 kB │ gzip:  53.09 kB
+dist/assets/SettlementPDF-4F0aX8a1.js                             172.27 kB │ gzip:  40.36 kB
+dist/assets/vendor-react-BQxSgP9l.js                              193.16 kB │ gzip:  60.55 kB
+dist/assets/vendor-html2canvas-DXEQVQnt.js                        201.04 kB │ gzip:  47.43 kB
+dist/assets/grammarNews-bkN0efkJ.js                               238.10 kB │ gzip:  80.65 kB
+dist/assets/applyWorldPulse-D7kpEpM7.js                           241.40 kB │ gzip:  81.90 kB
+dist/assets/SettlementsPanel-BI6BoKXD.js                          257.76 kB │ gzip:  77.45 kB
+dist/assets/npcComponents-ruAoubxw.js                             278.33 kB │ gzip:  74.08 kB
+dist/assets/advanceInterval-ClNQ_Ti3.js                           532.85 kB │ gzip: 175.82 kB
+dist/assets/index-BQkmQLx6.js                                     570.27 kB │ gzip: 180.35 kB
+dist/assets/engine-iWNNiad6.js                                    674.05 kB │ gzip: 221.11 kB
+dist/assets/data-lazy-pqPyi0JA.js                                 939.52 kB │ gzip: 272.28 kB
+dist/assets/vendor-pdf-D7p7nzp1.js                              1,623.20 kB │ gzip: 578.99 kB
+✓ built in 16.76s
+
+> settlementforge@1.0.0 postbuild
+> node scripts/prerender-routes.mjs
+
+[prerender] wrote 311 static route documents (13 views + 15 gallery hubs + 283 compendium entries) under dist/
+TRUE_EXIT_build=0
+── step measure: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/closure-measure.mjs --dist /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip/dist --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/scratch-build.tip --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/h-listing.tip.json --against /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/h-listing.base.json
+closure-measure OK  assets=514 closureFiles=8 closureBytes=1042086 budget=1048000 margin=5914 listingDigest=a494c0fa0348 -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/h-listing.tip.json
+  diff: closure -5047 B vs allowance 767 B; added=410 removed=390
+  VERDICT: clear — the closure moved -5047 B against an allowance of 767 B
+TRUE_EXIT_measure=0
+output ok: (h) the tip listing -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/h-listing.tip.json (115739 bytes)
+listing.sh: tip measurement -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/904-tip-full/h-listing.tip.json
+TRUE_EXIT=0
+TRUE_EXIT_h_listing_tip=0
+
+── every captured exit ──
+TRUE_EXIT_eager_stop=0
+TRUE_EXIT_c_presence=0
+TRUE_EXIT_d_census=0
+TRUE_EXIT_e_rosters=0
+TRUE_EXIT_f_birth=0
+TRUE_EXIT_g_pulse=0
+TRUE_EXIT_a_golden=1
+TRUE_EXIT_b_certify=0
+TRUE_EXIT_h_listing_base=0
+TRUE_EXIT_h_listing_tip=0
+TRUE_EXIT=1

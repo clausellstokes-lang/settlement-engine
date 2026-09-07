@@ -1,260 +1,88 @@
-# Section: dnd. The prose style of official D&D content
+# Dossier section: dnd (the prose style of official D&D content)
+
+Built from (bytes, mtime, local time 2026-09-06 unless dated): state-dnd.json (1670496, 21:10:36, rewritten by the merge); kept-dnd.json (743990, 21:10:36) and partial-dnd.json (226041, 21:10:36), both written by `node sweep-state.mjs merge dnd --update-state` at 21:10; the 58 verdict files it merged, all in the same sweep directory: verdicts-dnd-chunk-00.json (18453, 09-05 19:44:33); chunk-01 (19963, 09-05 19:52:47); i30-44 (18867, 09-05 20:46:21); i45-48 (6308, 09-05 20:50:14); i49-63 (23281, 13:43:15); i64-78 (20095, 13:39:39); i79-93 (21339, 13:41:08); i94-108 (20720, 13:41:49); i109-123 (19534, 14:10:33); i124-138 (20058, 13:49:13); i139-153 (19433, 13:49:16); i154-168 (16273, 13:47:35); i169-183 (14349, 14:08:33); i184-198 (16837, 14:11:11); i199-213 (17281, 14:09:15); i214-228 (16757, 14:09:38); i229-243 (17530, 14:10:27); i244-258 (15459, 14:11:44); i259-273 (14739, 14:12:34); i274-288 (14972, 14:15:14); i289-303 (17118, 14:18:09); i304-318 (16265, 14:16:23); i319-333 (14780, 14:16:08); i334-348 (14859, 14:15:50); i349-363 (15786, 14:16:41); i364-378 (19127, 14:21:58); i379-393 (20038, 14:22:31); i394-408 (15764, 14:26:56); i409-423 (15324, 14:26:16); i424-438 (14135, 14:26:41); i439-453 (17819, 14:27:05); i454-468 (15668, 14:27:16); i469-483 (15915, 14:27:33); i484-498 (14008, 14:30:14); i499-513 (14450, 14:30:43); i514-528 (12097, 14:34:19); i529-543 (11925, 14:33:37); i544-558 (15504, 14:33:53); i559-573 (11455, 14:34:29); i574-588 (15553, 14:38:43); i589-603 (14746, 14:34:17); i604-618 (15341, 14:38:07); i619-633 (15651, 14:37:57); i634-648 (12903, 14:41:51); i649-663 (16696, 14:42:22); i664-678 (14139, 14:41:22); i679-693 (12591, 14:42:06); i694-708 (14184, 14:42:50); i709-723 (13409, 14:41:54); i724-795 (15799, 14:59:52); i796-842 (15046, 14:58:54); i843-870 (14190, 14:57:44); i871-871 (1588, 14:55:10); verdicts-dnd-triage-r6.json (60746, 14:52:14); verdicts-dnd-regrade-r6.json (130149, 15:13:28, merged last so its downgrades win). Merge report: 872 claims, 872 verdicts, 619 kept, 147 partial, 58 verdict files read, 958 file verdicts taken (86 first-pass verdicts were overwritten by the regrade).
+
+## Scope and method
+
+The sweep holds 872 claims across eight angles: the first run's single angle `academic` (49 claims, 09-05), then `craft`, `voice` and `close` (rounds 2 and 3), then `house-style-2019`, `place-register`, `scholarship-history` and `usability-school` (round 4). 619 are kept (607 VERIFIED_VERBATIM, 12 VERIFIED_SUBSTANCE); 147 are PARTIAL; 2 CONTRADICTED; 2 NOT_FOUND; 102 SKIPPED_TRIAGE (never verified, S-BOUND); 0 BLOCKED. Every feature below rests on kept rows only, cited by index. A PARTIAL row is cited only for the quotation the verifier found on the page, marked (P), never for its unsupported limb; all 147 are tabulated at the end. Quotations are the verifier's true wording trimmed to under twelve words; a row flagged fullSentence in the merge (203 kept rows, 63 partial) is cited by claim and by document and page and is never copied whole. "Rows" counts kept rows cited; "works" counts distinct documents or critics behind them. A feature resting on one work is flagged ONE WORK; on one critic across several pages, ONE SOURCE. Disagreements are marked in place.
+
+The reconstruction rules are for a settlement dossier composed by a calm archivist: present tense, concrete civic nouns, no digits, no em dash. Where a rule binds another register (the Herald's short pools, the chronicle line, the DM page) it says so, and the register map after the features collects the assignments.
+
+The chair's notes for this synthesis and where each is applied: the 2013 guide (v1.04a) is superseded by v1.08a ("updated January 2019") and again, internally, by a 2021 Word revision, so every house rule below names its version, and no 2013-only rule is presented as house law (Part I throughout; the two CONTRADICTED rows are the two 2013-only rules the first sweep stated as law). Three of the four angles never ran before this round; the features that still rest on the academic angle alone are flagged ACADEMIC ANGLE ONLY (features 45, 46, 47, 49). The chair's feature 11 (boxed-text date) is feature 29 here; feature 8 (four sentences, under one hundred words) is feature 27; feature 15 (the adjective ban) is feature 48; features 12 and 13 (Wikipedia relays) are folded into features 42, 45 and 46 with each relay flagged; feature 16 (the Gygaxian counter-register) is feature 45 and now carries Gygax's own account via Grognardia. Coverage rows per angle and the verdict counts close the section.
+
+## I. The house guide and what it actually governs
+
+**1. A written house style guide exists, in three versions, inside a bundle; the public copy has not moved since 2019.**
+Support: 20 rows, 11 works. v1.04a itself 49; v1.08a itself 50, 241, 242; the 2021 docx 296, 297; DMs Guild tweets 52, 371; Crawford 370; EN World thread 58; Witchlight Dungeoncraft 57; Dungeoncraft v1.9c 363, 365; Critical Hits freelancer 225; Kobold Press 64; Half-Cover and Old Dungeon Master 54; Mearls 2025 (P) 240; the 2025 forum question (P) 383; POCGamer (P) 56; EN World bundle (P) 380.
+Versions: v1.04a, ©2013, nine pages, Chicago 16 (49); v1.08a, ©2018 on every footer, eleven pages, Chicago 17, the January 2019 date only in the mirror's filename (50, 241); a Word revision created by Kim Mohan 2016 and last modified by Judy Bauer 2021-07-06 that ships inside the Adventurers League Dungeoncraft Pack of 2023-12-04 (296) and cites merriam-webster.com rather than the printed Collegiate (297). The general rules apply to every D&D product, "whether RPG books, board games, novels" (242). Organized-play authors are told they "should be familiar with the D&D Style Guide" (57) and "Adventures must use the template provided" (363). A freelancer of 2012 was told Chicago is "your main bible" (225). Community writers who said no guide existed (54) were wrong in fact and right about publicity: the guide reached the public on DMs Guild only in late 2018 (58, 52), and a 2025 asker reports the download "hasn't been updated since 2019" (P 383, the asker's own report).
+Rule: The archivist's house is a Chicago house. Where this section says "house law" it means v1.08a as amended by the 2021 revision; a rule found only in v1.04a is history.
+
+**2. The guide is a mechanics-of-style document; it says nothing about read-aloud prose or voice, and its one tone paragraph is the high-fantasy gate.**
+Support: 6 rows, 3 works. 49, 50 (zero hits for "box" and "aloud" in either PDF); 72, 245, 246; premise check (P) 392.
+True wording: "Avoid overusing sidebars." (50, the opening of a section new in 2019); "ring wraiths aren't used for gags" (72, 245; both versions); "Teamwork and friendship are a huge part" (246).
+Rule: The archivist takes typography, terminology and grammar from the house and takes voice from nowhere in the house. Tone is gated once: a thing that would seem out of place in high fantasy does not belong; humour and tragedy are admitted while they do not overtake the general tone. The dossier is a record of a company of people, never of a lone knight.
+
+**3. Second person is the house instrument for gender neutrality in rules text, and only in rules text.**
+Support: 3 rows, 2 versions of ONE WORK. 60 (v1.04a: "often achieve"), 248 (v1.08a: "prefer to ... whenever possible"); Grouling Cover on second-person immersion is PARTIAL (P 23, p. 107 not pp. 21/85).
+Note: the first sweep's row 2, which stated the 2013 wording and the singular-they ban as house law, is CONTRADICTED by v1.08a.
+Rule: Instruction addresses "you"; description never does. The dossier is description and has no second person anywhere. (See features 21 and 22 for the read-aloud side of the same rule.)
+
+**4. The pronoun policy moved three times, and the current law is the 2021 revision.**
+Support: 15 rows, 3 versions of ONE WORK plus two designer statements. 2013 ban 293, 294; 2019 permission rationed 249 (and P 61), Crawford 370, DMs Guild 371; 2021 unrationed 299, running text 300, generic creatures 301, ambiguity 302, rare "it" 303, canon pronouns 304; devices to avoid 250; gender identity not assumed 247; dialogue exemption 252.
+True wording: "Don't use 'they' or 'their' as singular pronouns" (293, v1.04a, superseded); "but don't abuse this liberty" (P 61, v1.08a); "you must ensure that the pronoun's antecedent is clear" (299, 2021); "In rules text, use 'it.'" (300); "A beholder never keeps its promises." (301); "Such exceptions should be rare." (303); "avoid 'he/she' and 's/he' altogether" (250).
+Disagreement across versions: 2013 forbids singular they; 2019 allows it as a last resort; 2021 allows it freely with a clear antecedent. Not a disagreement between sources but a dated sequence; cite the year.
+Rule: A person of unknown standing takes they and their with an unmistakable antecedent; where two people share a sentence the noun is repeated or the sentence goes plural. Humanoids and other sapient folk of unknown gender take they; beasts, cosmic horrors and things from other planes take it; a sapient creature takes it only as a rare deliberate cruelty. He or she is used sparingly, he/she never, alternation never. A named canonical figure keeps the pronoun canon gives. The archivist does not assume the reader's gender.
+
+**5. Man and woman, gendered suffixes, and god: the 2019 rule and the 2021 reversal.**
+Support: 6 rows, 2 versions of ONE WORK. 251 (2019: humans only), 298 (2021: any people), 253 and P 75 (suffixes), 254 (god), 252 (dialogue exemption).
+True wording: "Man and woman reserved for describing humans only" (251, v1.08a); "we can write 'dwarf man' or 'gnome woman.'" (298, 2021); "Avoid gender-specific suffixes whenever possible." (P 75); "use 'god' whether the deity is male or female" (254).
+Disagreement across versions: the 2019 restriction is reversed in 2021; the 2021 wording is current law.
+Rule: Priest, actor, god, whatever the person's sex; priestess and goddess only inside a title the world itself uses. Dwarf woman and gnome man are permitted. In reported speech and first-person narrative a character may break any of this, because a character does not follow editorial style.
+
+**6. Numerals belong to rules text; prose spells its numbers out.**
+Support: 7 rows, 3 versions of ONE WORK. 4, 65 (v1.04a); 266, 276 (v1.08a); 267 (percent); 2021 examples still lowercase "hit points" (P 312); Chicago 9.2 named (266).
+True wording: "In rules writing, we use numerals more often." (4); "we spell out whole numbers from zero to one hundred" (266); "The two cities are fifty miles apart." (276); "Use the word 'percent,' rather than the symbol %" (267).
+Rule: The dossier is prose, not rules: every count is a word (forty households, six mills, three and a half leagues), which is also the dossier's own no-digits law arriving by a second road. Numerals live on the DM page beside game quantities and in tables.
+
+**7. Spelling, punctuation and heading mechanics are fixed: American, Webster's first variant, serial comma, negative contractions, run-in heads with terminal punctuation.**
+Support: 15 rows, 3 versions of ONE WORK. 9 (v1.04a, six rules in one row); 259, 260, 261, 262, 263, 264, 265 (v1.08a); 255, 256, 76 (headings, new in 2019); 295 (Vertical Lists renamed Bulleted Lists); emphasis (P 257), sidebars (P 258), inline subhead (P 3, P 69), contractions (P 71).
+True wording: "We require the serial comma." (9, 260); "we use 'toward,' not 'towards,'" (259); "non-elf, non-dwarf" (262); "Use a heading for a structural reason, not an aesthetic one" (255); "Use a period, an exclamation point, or a question mark" (256); "Use bold for such emphasis, unless it's in the heading" (P 257).
+Rule: American spelling, the serial comma, contractions formed with not admitted (don't, can't, wasn't) and any contraction that can be misread avoided. A run-in heading closes with a period, not a colon. Headings descend without skipping a level and exist for structure. A sidebar that must follow a passage to make sense is not a sidebar. The dossier chooses the period for its run-in heads; the guide permits any terminal mark, so that choice is a house decision within house law.
+
+**8. Cross-references name a title, never a page.**
+Support: 4 rows, 2 versions of ONE WORK. 10 (v1.04a); 268, 269, 270 (v1.08a).
+True wording: "We avoid page references as much as possible." (10, 270); "Use cross-references judiciously" (268); "We use letters, not numbers, for appendices" (269).
+Rule: The dossier points to another entry by its quoted title, to a chapter by its number, to a table by its unquoted title; it never cites a page, because pagination moves between printings.
+
+**9. Game terms have a typography: capitalise the term classes, italicise spells and items as titles, bold a stat-block name once, and bold means a game object.**
+Support: 12 rows, 3 versions of ONE WORK plus four observers. 7, 68 (v1.04a); 273, 274, 275 (v1.08a); 306 (2021); Dragon guidelines 184; 2024 capitalisation 80, 82, 367, 43; 2021 creature types (P 305).
+True wording: "The italicized terms are treated as titles" (7); "the wall of fire spell produces a wall of fire" (68, 274); "write 'four goblins,' not 'four loud goblins'" (275); "this indicates the term is a game object" (306); "'Cube' is capitalized, which indicates a term in the Rules Glossary" (P 81); "just being used in their normal sense" (43).
+Disagreement: none on the rules; the 2024 books capitalise many more mechanics (Hit Points, Bonus Action) than the 2021 internal guide, whose examples still read "hit points" (P 312).
+Rule: In the dossier no word wears game typography, because the dossier contains no game object; the moment a term is capitalised or bolded the reader is told it is a rule to be looked up. Game typography belongs on the DM page, where a creature's name is bold at first appearance and nothing sits between the number and the name.
+
+**10. The verb idiom of the rules is a closed list, and its phrasings are canonical.**
+Support: 20 rows, 3 versions of ONE WORD-LIST plus four relays. 62, 63, 66, 67, 6 (v1.04a); 277, 278, 279, 280, 281 (P), 282, 283, 284, 285, 287 (v1.08a); 307, 308, 309 (2021); Kobold Press 64; Half-Cover 78; 2024 conditions 82; verb list (P 5).
+True wording: "You make a saving throw, and it succeeds or fails" (62); "We have abandoned that practice." (6, 66, 279, 280); "Avoid referring to points of damage" (67, 282); "We often prefer the word 'total'" (280); "proficient in Elvish and Arcana" (284); "This term is a noun, not a verb" (285); "The word 'attack' confuses many of our readers" (307); "call it a stat block" (309); "Beware of using 'human' as a synonym for 'mortal.'" (287).
+Rule: For the DM page only: cast a spell, deal and take damage, make a saving throw that succeeds or fails, make an attack that hits or misses, regain hit points, finish a rest, succeed on a check (never merely make one unless both outcomes follow at once), ten fire damage never ten points of it, an extra 1d4 fire damage, proficient in a skill or language and with a tool or weapon, Dungeon Master a noun. For the archivist one transfer holds: human is a people, not a synonym for mortal, and humanoid is a creature type and stays off the civic page.
+
+**11. The word list fixes spellings and plurals; abbreviations are a fixed set; ordering is letter by letter; the 2024 books renamed core terms.**
+Support: 8 rows, 4 works. 288, 292 (v1.08a); 310 (2021); 2024 renames 44, 236, 368, 46; 2021 additions (P 311); species (P 369).
+True wording: "mithral (not mithril)" (288); "NPC nonplayer character" (292); "We use letter-by-letter alphabetization." (310); "Cast a Spell action -> Magic action" (44); "a monster that has a personal name" (368); "three paragraphs and a table to roll on" (46).
+Rule: Dwarves, not dwarfs; staffs; war band; drow, kenku and yuan-ti unchanged in the plural. The dossier's own lists and registers run letter by letter, spaces ignored. Where the world is a D&D world the current word is species, not race, and a named, characterful monster is an NPC.
+
+**12. Time is written in days and years in rules, and in the Realms the week is a tenday, the hour a bell, and the clock never o'clock.**
+Support: 6 rows, 2 works (general guide and Realms guide) plus one reader. 286 (v1.08a; P 70 for v1.04a); 353, 354, 355 (Realms guide); readers on WotC's own breaches 381 (and P 77).
+True wording: "say a game effect lasts for 7 days, not 1 week" (286); "'mid morning' or 'nigh sunset.'" (353); "'first day,' 'second day,' 'third day,'" (354); "tenday (never week)" (355).
+Disagreement: readers note WotC's own hardcovers still print "week" (381), so the Realms rule is aspirational in the publisher's practice.
+Rule: The archivist keeps time in the units the world keeps. Durations in rules are days or years, never weeks or months, because the length of a week varies by world. In-world speech gives loose times (mid morning, nigh sunset), bells where a temple has a clock, and counts the days of the tenday; there is no weekend. This is a setting-specific rule and the dossier adopts only its shape: name the local unit and keep it.
+
+**13. The house keeps an in-world lexicon: forms of address, greetings, the trade tongue, and the word for a party.**
+Support: 8 rows, 2 works. 289, 290, 291 (v1.08a, Forgotten Realms Terms and Adventuring Parties, both new in 2019); 356, 357, 358, 359 (Realms guide); P 73.
+True wording: "goodsir (a form of address, not capped)" (289, 357); "godsforsaken (replaces Godforsaken)" (356); "use 'group,' 'band,' 'company,' or, especially, 'party.'" (291); "Common is little more than a trade" (358); "Well met. The most often used greeting" (359).
+Rule: The dossier's address terms are lowercase when they are forms of address (goodsir) and capped when they are titles (Goodman). A polytheistic world says godsforsaken. A company of adventurers is a party, band or company, never a fellowship, because the word carries Tolkien and D&D parties are fractious. The common tongue is a plain trade language and nuance lives in the older regional tongues, which is a licence for the Herald's pools to be plainer than the chronicle line. These are Realms rules; the dossier borrows the method (a short list of house words with their reasons), not the words.
+
+**14. Setting stewardship and content standards: leave the world as found, keep it G sliding to PG, no stereotypes, no real-world religions as evil analogues, and take setting facts from official sources.**
+Support: 14 rows, 4 works. Standards 2020: 330, 331, 332, 333, 334; Realms guide: 348, 349, 350, 352, (P 351); IP guide 361, (P 360); general guide 244, 272, (P 271); Dungeoncraft (P 364), (P 382).
+True wording: "D&D is, for the most part, a G-rated game." (331); "Don't use profanity." (330); "Don't attach specific traits or attributes to all members" (332); "their evil should be called out as awful and wrong" (333); "(Pack it in. Pack it out.)" (349); "The Forgotten Realms is a hopeful setting." (348); "Keep it PG." (352); "and their stuff is for taking" (361); "Don't rely on Internet searches" (244); "'She is in Elysium.'" (272).
+Rule: The dossier never attaches a trait to all members of a people, culture, religion or sexuality; it never draws an evil faith from a living one; it names a villain's wrong as wrong; it keeps sex and gore at PG; it has no profanity. It leaves established places, peoples and gods restorable. Its facts come from the setting's own record, not from a wiki. A character is on a plane and in Elysium. Note the tone split the guide itself records: hopeful Realms, cynical Greyhawk, tragic Dragonlance; a dossier declares which it is.
 
-Built from `sweep/kept-dnd.json` (62415 bytes, 2026-09-05 20:50:39), which `sweep-state.mjs merge dnd --update-state` wrote from `sweep/state-dnd.json` (65516 bytes, 2026-09-05 20:50:39, rewritten by the same merge) and four verdict files: `verdicts-dnd-chunk-00.json` (18453 bytes, 19:44:33), `verdicts-dnd-chunk-01.json` (19963 bytes, 19:52:47), `verdicts-dnd-i30-44.json` (18867 bytes, 20:46:21), `verdicts-dnd-i45-48.json` (6308 bytes, 20:50:14). Merge output: 49 claims, 49 verdicts, 47 kept, 0 partial. Every claim in this run carries the single sweep angle `academic` (angleOrder: "academic and scholar"); the source-class breakdown in the coverage table is derived by the section writer from the source fields, not from the sweep.
-
-Citation convention: `[n]` is the claim index in `kept-dnd.json`. A quotation is given in the verifier's `trueWording`, trimmed to under twelve words. Where the verifier's note quotes page text that the `trueWording` field does not carry, it is marked "verifier note quotes". Features resting on one source document are flagged SINGLE SOURCE. Two claims are excluded because their verdict was NOT_FOUND: [47] Shank's MA thesis (the cited academia.edu page carries no abstract) and [48] the sweep's own negative result on stylometric scholarship (an existential negative no single page can establish).
-
-A caution on what "official" covers here. The only house document in the corpus is the 2013 WotC style guide [0] through [10], and it is a mechanics-of-style document with one tone paragraph [8]. Everything else is third-party editorial guidance (Paizo's Dungeon), designer commentary, scholarship, Wikipedia synthesis, and press. The section therefore describes the style as it is prescribed, observed, and criticised, and marks which is which.
-
-## Numbered features
-
-### 1. The house style is mechanical; voice is left almost entirely unwritten
-
-Supported by one source document, three claims: [0], [1], [8]. SINGLE SOURCE.
-
-- [0] The document exists and is titled "D&D Style Guide: Writing and Editing" (Version 1.04a, 2013, nine pages). The verifier notes that the guide says nothing about its own distribution to freelancers; that provenance is unverified.
-- [1] Its authorities are "The Chicago Manual of Style, 16th edition" and Merriam-Webster's Collegiate, with the guide covering where the house departs from or expands on them.
-- [8] The one tone paragraph is "High Fantasy": epic scope, adventuring teams over lone knights, humour permitted when "ring wraiths aren't used for gags". The verifier's read of all nine pages confirms no other voice or register section exists.
-
-Reconstruction rule: the dossier's house style should likewise be written down as mechanics first (which nouns are capitalised, which take italics, how a section is cited, how a list is introduced), with a single short tone paragraph. Tone in the settlement dossier is the archivist's calm: the register of a serious record of a place, no gag, no wink. The mechanics do the consistency; the tone paragraph does the ceiling.
-
-### 2. Instructional text addresses the reader in the second person; descriptive text never does
-
-Supported by four source documents, five claims: [2], [23] for the "you" of rules; [11], [15], [22] for its absence from description. DISAGREEMENT by register, marked below.
-
-- [2] The guide: "achieve gender neutrality by writing in the second person" (rules text); singular "they" barred outside dialogue, "he/she" alternation barred. The verifier notes the guide hedges with "often".
-- [23] Grouling Cover, from the narratology side: second person is "pulling them directly into the storyworld". (Verifier caveat: the sentence sits on page 107, not the pages the source field cites.)
-- [11] Paizo's Dungeon guidelines, the other way for read-aloud text: "it does not make any reference to the viewer", and "you see" or "as you enter the room" are banned because they assume player action.
-- [15] Merwin on D&D Beyond agrees for boxed text: third-person scene statements replace "as you enter the clearing, you notice" (verifier note quotes the page's own example).
-- [22] Grouling Cover, describing practice: "read aloud text that the DM is instructed to read", which usually describes location.
-
-Disagreement: not a contradiction but a split by function. Rules and procedure speak to "you"; scene description speaks of the place and nobody's arrival. The sources agree once the register is named.
-
-Reconstruction rule: the settlement dossier is description, not instruction, so it inherits the second half only. The reader is never addressed. Nobody enters, notices, or sees. The mill stands on the east bank; the toll gate opens at first light; the ward roll lists forty households. Where the dossier must explain how to use itself, that apparatus may say "you", and it is set apart from the record (see feature 11).
-
-### 3. Numerals belong to rules; narrative counts are spelled out
-
-Supported by one source document, one claim: [4]. SINGLE SOURCE.
-
-- [4] "In rules writing, we use numerals more often." The verifier confirms the guide's contrast pair verbatim: hit points, rounds and feet take numerals; "the two cities are fifty miles apart" and "slept for six hours" are spelled out under Chicago's rule for narrative.
-
-Reconstruction rule: the dossier is narrative, so the guide's own rule puts it on the spelled-out side. Forty households, six mills, a two-day road. The no-digits constraint of the archivist register is therefore not an eccentricity; it is the house rule for non-rules prose. Figures that are truly tabular (the ledger of tithes, the ward counts) go in a table, where the guide's numeral rule applies instead, and the prose beside the table does not repeat them (feature 12).
-
-### 4. Terms are fixed, one verb per noun, and a mechanical term is marked as mechanical
-
-Supported by five source documents, seven claims: [5], [6], [7] (WotC guide), [42] (Torner via Wikipedia), [43] (Rhodes), [44] (D&D Beyond staff), [45] (Brosofsky). DISAGREEMENT on whether 5e actually applied its own policy, marked below.
-
-- [5] The verb list: "You make a saving throw, and it succeeds or fails." You deal damage, take damage, regain hit points; attacks hit or miss and never succeed or fail. Verifier caveat: the ban on "must make" is conditional, and for saves the guide prefers "must make a saving throw".
-- [6] Old synonyms are retired outright: "We have abandoned that practice." (twice, for 4E's "save" and for "result" as the number rolled). Also "magic item" never "magical item"; "hit point maximum" never "maximum hit points".
-- [7] Capitalised: ability scores, Armor Class, class features, Difficulty Class, Dungeon Master, feats, languages, planes, skills, traits. Italicised as titles: spells, magic items, artifacts. "The italicized terms are treated as titles", distinct from the effects they create (a wall of fire spell produces a wall of fire).
-- [42] Torner on 3e's design intent: "terminology and choices should be immediately intelligible to all".
-- [43] Rhodes on the 2014 PHB: DMs had to work out whether words were "just being used in their normal sense" or were mechanics; the 2024 PHB capitalises mechanics and adds an A to Z glossary.
-- [44] The 2024 renames are tabulated by the publisher: "Cast a Spell action -> Magic action", race to species, Inspiration to Heroic Inspiration, Use an Object to Utilize, shoving folded into Unarmed Strike; glossary entries for Ally, Bloodied, Enemy, Passive Perception.
-- [45] Screen Rant on the 2024 glossary: it de-emphasises art to prioritise text, and its cost is "the lack of a dedicated section for Conditions".
-
-Disagreement: the 2013 guide [7] already had a capitalisation list, yet Rhodes [43] finds the 2014 book left ordinary and mechanical words indistinguishable. Read together, the policy existed and its coverage was incomplete; the 2024 cure was to mark every mechanic and index it. Brosofsky [45] records the cost of a single consolidated glossary.
-
-Reconstruction rule: the dossier keeps a closed lexicon of civic nouns and pairs each with its verbs. A granary holds and issues; a council sits and rules; a road carries; a levy is raised and met. A thing is called by one name throughout: the same building is never "the grain store" in one entry and "the silo" in the next. Any word that carries a defined meaning in the engine (a status, a tier, a condition) is marked as such wherever it appears, and the dossier carries a glossary of its marked terms, sectioned rather than one undifferentiated list.
-
-### 5. Punctuation and spelling are house-fixed, and a run-in heading closes with a period
-
-Supported by one source document, two claims: [3], [9]. SINGLE SOURCE.
-
-- [3] The inline subhead is heading four and is "followed by terminal punctuation, not a colon": "Keen Senses. You have proficiency in the Perception skill." Verifier caveat: any terminal punctuation is allowed, not only the period.
-- [9] "We require the serial comma." American spelling; "Asmodeus's lair"; "non-elf" but "nonhuman"; contractions formed with "not" are encouraged; a vertical list is introduced by a complete sentence ended by a colon.
-
-Reconstruction rule: a dossier entry may open with a run-in heading closed by a period and followed by its sentence on the same line: "The Toll Gate. It opens at first light and closes at the curfew bell." Serial comma always. Possessives take the full apostrophe s after a name ending in s. A list is introduced by a full sentence and a colon, never by a fragment. The guide's encouragement of "not" contractions is a rule for instructional voice; the archivist register does not inherit it, and that is a register decision, recorded here rather than sourced.
-
-### 6. Cross-references cite a title, never a page
-
-Supported by one source document, one claim: [10]. SINGLE SOURCE.
-
-- [10] "We avoid page references as much as possible." They are hand-added at galley and invite error. A chapter is cited by number; a subsection or sidebar by its quoted title; a table title is not quoted.
-
-Reconstruction rule: the dossier refers to its own parts by their titles in quotation marks ("see 'The Ward Roll'"), never by page or position, since a generated document has no stable pages and a regenerated one has no stable order. A table is referred to by its bare title.
-
-### 7. Description states what stands there; it presumes no action and assigns no feeling
-
-Supported by four source documents, five claims: [11], [12] (Paizo), [15], [16] (Merwin), [20] (McKenzie). Feature 2 covers the pronoun half; this feature covers content.
-
-- [11] Read-aloud text is "a bare-bones description of the encounter area" that makes no reference to the viewer and assumes no action by the players.
-- [12] It excludes creatures, whose positions depend on circumstance, and "should only rarely run more than a few sentences"; long passages become handouts.
-- [15] Merwin: describe everything the characters can sense but not what they cannot; boxed text is faulted when it assumes a character's feelings, movements, actions or reactions; villain monologues in boxed text are faulted; "Read your boxed text aloud to check readability".
-- [16] "Everything they sense 'appears to be' what it is." Merwin's Tip 4 bans "seems to be" and "appears to be": for the characters, perception is reality.
-- [20] McKenzie likens read-aloud text to a play's "at rise" description, and quotes the 1980 module: "Hints of what may be done are given in this text". Verifier caveat: the article never says "verbatim"; it says the DM is instructed to read the text.
-
-Disagreement: Paizo [12] bars creatures from read-aloud text; Grouling Cover [22] observes that read-aloud text sometimes narrates NPC action. One is a 3.5e editorial rule, the other a scholar's description of practice across modules. They do not agree, and the rule is the stricter one.
-
-Reconstruction rule: the dossier describes each place in the present as it stands: the walls, the gate, the well, the market cross, the smoke over the tannery. No arrival, no discovery, no reader's reaction. No hedging on visible fact: the well is dry, not "appears dry"; where the record itself is uncertain, the uncertainty is named as a gap in the record, not as a seeming. Inhabitants appear as standing conditions (the guild keeps forty journeymen; the watch musters at dusk), never as a scene in progress. A description hints at what could be done with the place (the sluice can be opened; the tower commands the ford) without saying so. No speeches.
-
-### 8. Description is short: four sentences, under a hundred words, and most tables want it occasional
-
-Supported by three source documents, three claims: [12] (Paizo), [15] (Merwin), [21] (McKenzie reporting Crawford's poll).
-
-- [12] "should only rarely run more than a few sentences".
-- [15] Verifier note quotes the page: "Four sentences, and less than 100 words."
-- [21] Crawford's 2016 poll of 2,248 replies: 59.5% wanted "occasional boxed text", 34.4% lots, 6% none.
-
-Reconstruction rule: a settlement entry's descriptive block is capped at four sentences. What will not fit goes to a labelled table or a separate titled block the reader can skip. The cap is the house figure, and the poll is the reason it holds: most readers want description in doses.
-
-### 9. The past is rationed; the present comes first
-
-Supported by three source documents, three claims: [14] (Paizo), [18] (Shea summarising the WotC freelancer bundle), [46] (Arndt on the 2025 Monster Manual). DISAGREEMENT on whether compression is a virtue, marked below.
-
-- [14] "an adventure is not a short story"; condense or sacrifice background in favour of how the thing plays; no railroading, no rigid timelines. Verifier note quotes the design guide: background is no more than five per cent of the adventure's length.
-- [18] The house bullets as Shea reproduces them: "Focus on the here and now. Omit verbose backstories." with companions on the importance of the characters and a credible threat.
-- [46] Arndt: the 2025 Monster Manual cuts iconic monsters from multi-page lore to "three paragraphs and a table to roll on", adds a subtitle to every monster, and reads as a glorified encyclopedia stripped to the utilitarian.
-
-Disagreement: the editorial guides [14] [18] prescribe compression; Arndt [46] reports the same compression in the 2025 book as a loss of in-universe voice. The two agree on the fact and disagree on its value. The dossier takes the ration from the guides and the warning from Arndt.
-
-Reconstruction rule: every entry leads with the present state of the place. History follows and is rationed to a small fraction of the entry, told as the events that explain what stands now (the granary was raised after the famine; the wall was breached in the last war and rebuilt in stone). The archivist's voice remains in-world while it compresses, so that three paragraphs still read as a record kept by someone, not as a stripped index.
-
-### 10. Entries are keyed, slotted, and ordered the same way every time; the figures sit beside the prose
-
-Supported by four source documents, four claims: [13] (Paizo), [36] and [37] (Wikipedia on the Monster Manual and monster entries), [46] (Arndt).
-
-- [13] The Dungeon template: header with an Encounter Level, then "Read-aloud Text, General Description, Creature(s), Tactics", followed in the source by Trap(s), Treasure, Development, and Ad-Hoc XP Adjustment, with read-aloud generally first. Verifier caveat: the original claim misordered the list and omitted two slots; the order above is the source's. Manuscripts of five to fifteen thousand words, ten thousand ideal.
-- [36] Švelch sees the Monster Manual as "modeled after medieval bestiaries, only with more precise figures".
-- [37] The 1977 book put the stat lines on the same page as the descriptions.
-- [46] Every 2025 monster gets a subtitle, and its lore becomes three paragraphs and a table.
-
-Reconstruction rule: every settlement entry has the same named slots in the same order, and an unnecessary slot is omitted rather than left as a stub. The header carries the name and a one-line epithet (The Ford Town. A river crossing under a stone tower.). The description block comes first, then the standing facts, then the parties, then what changes. The ledger figures for a place sit on the same page as its prose, never in an appendix the reader must turn to.
-
-### 11. The voiced block is set apart and cued; the apparatus says when to read it
-
-Supported by three source documents, three claims: [19] (Callison-Burch et al.), [20] (McKenzie), [38] (Wikipedia on Tamoachan).
-
-- [19] The adventure book provides boxed text, "descriptive text to be read aloud verbatim or to paraphrase", interleaved with rules links, and the apparatus says "Read the boxed text when you're ready to start."
-- [20] Boxed text is "typically set outside from the other text in a box"; the 1980 Hidden Shrine of Tamoachan is its first appearance.
-- [38] Wikipedia: "the first D&D adventure to use boxed, read aloud text". Verifier caveat: the only citation is a 2017 blog post by Merric B, not a scholarly source. Flagged as weakly sourced on that point; McKenzie [20] is the stronger witness for the same date.
-
-Reconstruction rule: the dossier separates two voices typographically. The record proper (what the archivist sets down about the place) is one block; the apparatus (how the reader uses the dossier, what a section means, when to consult a table) is another, visibly different, and it may say "you". A reader always knows which voice is speaking, and the apparatus never leaks into the record.
-
-### 12. Prose amplifies the figures; it never restates them, and a listing with no depth is a fault
-
-Supported by three source documents, three claims: [36] (Turnbull via Wikipedia), [37] (Greenwood via Wikipedia), [40] (Furniss via Wikipedia). All three are Wikipedia syntheses of the reviews; the reviews themselves were not fetched.
-
-- [36] Turnbull praised the explanatory text because it amplifies the statistics where necessary.
-- [37] Greenwood on some Fiend Folio creatures: strange appearances and little else, "there is no depth to their listings". Verifier caveat: the remark is about a subset of creatures, which the claim generalised.
-- [40] Furniss: "I love the marriage of narrative and mechanical information" (verifier note quotes the page).
-
-Reconstruction rule: a sentence in the dossier says what the table cannot: who, why, since when, with what consequence. It does not say "the town has forty households" when the ward roll beside it says forty. A place entry that is only its figures with an appearance attached is the Fiend Folio fault and is rejected.
-
-### 13. An in-world narrator is a device for rumour and error, and its register must stay in period
-
-Supported by three source documents, three claims: [39] (Hall via Wikipedia), [40] (Kunzelman via Wikipedia), [41] (Bristol and Jones via Wikipedia). DISAGREEMENT with feature 14, marked there.
-
-- [40] "having Volo write the guide means that he can be wrong"; the device lets the book carry opinions, rumours and suspicions that may be unfounded, and Kunzelman faults the book where it tells facts instead.
-- [39] Xanathar's marginal voice "sounds more like a cranky Redditor than a fantastical crime boss"; it "feels a bit too modern". Verifier caveat: one reviewer, not "reviewers".
-- [41] Bristol found reading Curse of Strahd "like reading a choose-your-own-adventure book from front to back"; Jones calls it a mix of setting manual and adventure module in one.
-
-Reconstruction rule: the archivist is an in-world narrator with a stated vantage (the town clerk, the abbey's annalist, the guild's recorder), which licenses the dossier to carry rumour and dispute so long as each is labelled as such: "the millers say", "the roll disputes this". The voice never uses a word or idiom that would sound wrong in the period the setting implies; the Xanathar failure marks the boundary. The dossier reads front to back as a document with a shape, not as a database dump.
-
-### 14. The text should reward the person who reads it, within the bounds of the register
-
-Supported by one source document, one claim: [17]. SINGLE SOURCE. DISAGREEMENT with feature 13.
-
-- [17] Chris Perkins: if DMs come away from an adventure "having had a few good laughs" they are more inclined to run it; put puns, little laughs and Easter eggs in; the hook must be bait that eighty or ninety per cent of players will take.
-
-Disagreement: Perkins [17] prescribes humour for the DM-facing text; Hall [39] shows the failure mode when an in-character voice reaches for modern comedy; the guide [8] fixes the ceiling at what Lord of the Rings or Game of Thrones would tolerate. Together they define a narrow permission rather than a contradiction.
-
-Reconstruction rule: a dry observation in the archivist's own voice is permitted at most once in an entry, never a pun, never a modern idiom, and never at the expense of the record's plainness. The reward for the reader is the concrete, telling detail (feature 15), not a joke.
-
-### 15. Atmosphere comes from named concrete things, not from evaluative adjectives
-
-Supported by two source documents, three claims: [24], [25] (Hines), [26] (Hewitt).
-
-- [24] Hines on Tomb of Annihilation: "words like 'tribal,' 'exotic,' and 'savage' crop up throughout", and the first read-aloud of Port Nyanzaru gestures at vague stereotype through dinosaurs, bright clothing and a language of clicks.
-- [25] The only DM guidance for portraying Chultans is a heavy accent and tongue clicks. Verifier caveat: the claim's reading of "correctly ascertain its original purpose" as prose about ruins is the claimant's gloss; Hines presents it as a background feature that encourages "a certain mentality or approach".
-- [26] Hewitt quotes the Death House passage (moldy skeletons, rusty shackles, a gaunt, pale-faced man) and says the "gothic atmosphere clearly set through the statue and skeletal remains". Verifier caveat: the adjective, tense and person analysis in the original claim is the claimant's, not Hewitt's; Hewitt's own attribution of atmosphere is to the concrete objects.
-
-Reconstruction rule: the dossier builds mood from nouns the reader can point at: the shackle, the statue, the smoke, the shut gate, the empty stall. Evaluative adjectives that characterise a people ("savage", "exotic", "tribal", "primitive") are banned outright; adjectives that describe a thing's state (dry, rusted, whitewashed) are permitted and preferred. No instruction on how a people sound. A culture is shown through its institutions and objects, never through a summary word.
-
-### 16. The Gygaxian counter-register: authority worth keeping, diction worth leaving
-
-Supported by five source documents, five claims: [30] (Cook), [31] (Maliszewski), [32] (Akrasia quoting Foster), [33] (Gus L), [34] (Horvath via Wikipedia). DISAGREEMENT on the value of the difficulty, marked below. This is the historical register, not the current one.
-
-- [30] Cook on the AD&D voice: "using the passive voice a lot, the occasional stream-of-consciousness digressions", an advanced vocabulary, and a very authoritative tone; reading the DMG was like reading a treatise, which validated the hobby.
-- [31] "use a platinum word when one worth a copper would do". Verifier caveat: the line is a reader's comment that Maliszewski endorses, not the post body; the post itself gives "perforce", "antithesis of weal", the love of thesauruses, and Vault of the Drow as the fullest flower. NOT supported by the page: that Maliszewski coined the term, that the 1979 DMG is the peak, or that the sentences are long and multi-clause.
-- [32] "you had to be smarter than average to understand it". Verifier caveat: the sentence is Trent Foster's, quoted by Akrasia, who endorses it; the simplification-lost-the-appeal thesis is also Foster's; "dweomer", "phantasm", "eldritch" appear only in Akrasia's comment reply.
-- [33] Gus L on S1: characters are "precipitated" rather than dropped, in a thesaurus-lover's style; the information design requires multiple re-reads; yet "Gygax was good at short punchy bits of detail". NOT supported: that room text mixes mechanics with narrative.
-- [34] Horvath: the 1979 DMG is "strange and deeply idiosyncratic", a singular vision; Wieck: the 2e DMG became as much advice as manual; Taylor: the 5e DMG spends its first hundred and twenty-seven pages teaching a novice.
-
-Disagreement: Cook [30], Foster and Akrasia [32] read the difficulty as legitimacy and appeal; Gus L [33] reads the same style as confusing information design; the edition record [35] [42] shows the publisher moving steadily toward the plain side (coherence over muddle in 1978, intelligibility in 3e, polish in 2014). The observers do not agree; the publisher's trajectory is unambiguous.
-
-Reconstruction rule: the dossier keeps the treatise's seriousness and authority, which is the calm archivist's whole warrant, and leaves the diction. A plain word where a plain word serves; active constructions as the default (the council levies, not "a levy is imposed"); no digression from the entry's subject; and the Gygaxian virtue that survives is the short concrete detail, one per sentence. Sentence length is not established by any source here (the "long multi-clause" claim failed verification), so the dossier's sentence length is a house decision.
-
-### 17. The text avoids the undifferentiated wall
-
-Supported by two source documents, two claims: [35] (Wikipedia on the PHB), [45] (Brosofsky).
-
-- [35] Turnbull in 1978 called the original rules ambiguous and muddled against a coherent AD&D handbook; Schick in 1991 found 2e spell descriptions bloated past a hundred pages; Kelly in 2014 found the writing much more polished; Abbott in 2024 found "the spell section was an unrelenting wall of text".
-- [45] The 2024 glossary gives most of its real estate to text and squeezes art into monochrome banners; its cost is one undivided list.
-
-Reconstruction rule: no block of the dossier runs without a heading, a slot boundary, or a table for more than the four-sentence cap. Coherence is a house virtue with a forty-year record behind it; polish is the recent one. The glossary is sectioned, so that a reader looking for one class of term (statuses, offices, tenures) finds a section and not an alphabet.
-
-### 18. Framing text discloses its own vantage and invites the reader to produce
-
-Supported by two source documents, three claims: [27], [28] (Jara), [29] (Macdonell, abstract only).
-
-- [27] Rulebooks frame play through covers, prologues, epilogues and embedded fiction; storytelling games open with atmospheric prologue fiction; such double framing was "notoriously less prominent in early TRPGs". Verifier caveat: the comparison is specifically about covers' typographic and pictorial framing.
-- [28] "what I have called genesic framing": framing that discloses itself and incites the production, not only the reception, of text; Jara says this is likely to account for much of the medium's persistence (hedged, where the claim said "accounts for").
-- [29] Macdonell (Crossref abstract, full text paywalled and the Sage page unreachable): the first edition's "visual-textual dissonance produces interpretive ambiguity" that might enhance engagement; later editions removed visual assets.
-
-Reconstruction rule: the dossier may open with a short framing passage in the archivist's own voice that states who keeps this record, from where, and with what gaps. That disclosure is itself the invitation: the reader knows what is not recorded and can produce it. Ambiguity in the dossier is always a named gap, never an accident of prose, since the dossier is a record and not a puzzle.
-
-### 19. Instruction and reference are different documents, and the record is reference
-
-Supported by one source document, one claim: [34] (Wikipedia on the DMG, citing Wieck and Taylor). SINGLE SOURCE.
-
-- [34] Wieck: the 2e DMG has become "as much a guide of advice" as a manual of specific information (verifier note quotes the page); Taylor: the 5e DMG devotes its first hundred and twenty-seven pages to teaching a novice.
-
-Reconstruction rule: the dossier is the manual of specific information. Advice on how to use a settlement (how to run a market day, what a siege does to the ward roll) belongs in the apparatus (feature 11) or in a separate guide, never inside the entry. An entry that starts teaching has left the register.
-
-## Coverage table
-
-### Sources per angle
-
-The sweep assigned every claim one angle. The second table is the section writer's classification of the same sources by kind.
-
-| Sweep angle | Source rows (distinct source strings) | Claims | Kept |
-|---|---|---|---|
-| academic (angleOrder: "academic and scholar") | 36 strings naming 31 distinct documents | 49 | 47 |
-
-| Source class (derived) | Distinct documents | Claim indices | Kept claims |
-|---|---|---|---|
-| Official WotC and D&D Beyond editorial | 4 (2013 style guide; Merwin 2019; Kenreck/Perkins 2018; D&D Beyond staff 2024) | 0 to 10, 15, 16, 17, 44 | 15 |
-| Third-party editorial guideline | 1 (Paizo Dungeon submission guidelines) | 11, 12, 13, 14 | 4 |
-| Designer and community commentary | 6 (Shea; Cook; Maliszewski; Akrasia; Gus L; Rhodes) | 18, 30, 31, 32, 33, 43 | 6 |
-| Peer-reviewed or scholarly | 7 (Callison-Burch et al.; McKenzie; Grouling Cover; Hines; Hewitt; Jara; Macdonell) | 19 to 29 | 11 |
-| Wikipedia synthesis of reviews and monographs | 9 articles | 34 to 42 | 9 |
-| Press review | 2 (Brosofsky; Arndt) | 45, 46 | 2 |
-| Not kept | 2 (Shank thesis, academia.edu; the sweep's own negative result) | 47, 48 | 0 |
-
-### Verdict counts
-
-| Verdict | Count |
-|---|---|
-| VERIFIED_VERBATIM | 43 |
-| VERIFIED_SUBSTANCE | 4 (indices 13, 25, 26, 41) |
-| Verified, total kept | 47 |
-| NOT_FOUND | 2 (indices 47, 48) |
-| CONTRADICTED | 0 |
-| BLOCKED | 0 |
-| Total | 49 |
-
-Per verdict file: chunk-00 (0 to 14) 14 verbatim, 1 substance; chunk-01 (15 to 29) 13 verbatim, 2 substance; i30-44 14 verbatim, 1 substance; i45-48 2 verbatim, 2 not found.
-
-### Features by breadth
-
-| Breadth | Features |
-|---|---|
-| One source document (flagged) | 1, 3, 5, 6, 14, 19 |
-| Two documents | 15, 17, 18 |
-| Three documents | 8, 9, 11, 12, 13 |
-| Four or more documents | 2, 4, 7, 10, 16 |
-| Explicit disagreements marked | 2 (register split), 4 (policy versus application), 7 (creatures in description), 9 (compression as virtue or loss), 14 versus 13 (humour and register), 16 (difficulty as appeal or fault) |
-
-### What the corpus does not establish
-
-Recorded so the dossier's house rules on these points are known to be house decisions rather than inherited style: sentence length (the one claim to it, in [31], failed verification); em dashes and semicolons (no source touches either); tense of description (the present-tense claim in [26] was the claimant's, not Hewitt's); contractions in non-instructional voice (the guide's permission [9] is for rules text); and whether any stylometric study of official D&D prose exists ([48], NOT_FOUND as an unestablished negative). Two Wikipedia-mediated features (12, 13) rest on syntheses whose underlying reviews were not fetched.

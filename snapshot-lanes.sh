@@ -25,6 +25,8 @@ for rec in receipt-s12a-checkpair.md:S12A-CHECKPAIR receipt-r15-tail.md:R15-TAIL
 echo "- R15-TAIL checkpoint: $( [ -f $SC/prose-research/sweep/R15-tail-classification.json ] && python3 -c "import json;d=json.load(open('$SC/prose-research/sweep/R15-tail-classification.json'));print('rows',len(d.get('rows',[])),'files',len(d.get('perFile',{})),'complete',d.get('complete'))" 2>/dev/null || echo 'no JSON yet')"
 echo "- S12A: check-pair.v1.mjs $( [ -f $SC/prose-research/check-pair.v1.mjs ] && echo present || echo absent ); check-pair.mjs mtime $(stat -f '%Sm' -t '%m-%d %H:%M' $SC/prose-research/check-pair.mjs)"
 echo
+echo "- **ANCHOR-905** dock \`laneANCHOR905\` HEAD $(git -C $SC/laneANCHOR905 rev-parse --short HEAD 2>/dev/null) · $(git -C $SC/laneANCHOR905 rev-list --count 6582958ce..HEAD 2>/dev/null) cars over 6582958ce · porcelain $(git -C $SC/laneANCHOR905 status --porcelain -uall 2>/dev/null | wc -l | tr -d ' ') · HOLD-VITEST $( [ -e $SC/HOLD-VITEST ] && echo PRESENT || echo absent ) · receipt head:"; [ -f $SC/receipt-anchor-905.md ] && head -6 $SC/receipt-anchor-905.md | sed 's/^/      | /'
+echo "- **L-PROBE-2 (chair)**: cheap $(grep -c 'TRUE_EXIT=0' $SC/lprobe2-cheap.log 2>/dev/null)/6 tips · full: $(tail -1 $SC/lprobe2-full-904.log 2>/dev/null | cut -c1-120) · bracket: $(tail -1 $SC/lprobe2-certify-bracket.log 2>/dev/null | cut -c1-100)"
 echo "## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json"
 cd $SC/prose-research && node sweep-state.mjs summary 2>/dev/null | python3 -c "
 import json,sys,os,glob,time

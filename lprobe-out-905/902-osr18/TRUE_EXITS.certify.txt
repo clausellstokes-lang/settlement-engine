@@ -1,0 +1,9 @@
+TRUE_EXIT_seam=0
+TRUE_EXIT_soak_dramatic_campaign=0
+WALL_SECONDS_soak_dramatic_campaign=38
+TRUE_EXIT_readback_dramatic_campaign=0
+TRUE_EXIT_certify_dramatic_campaign=0
+TRUE_EXIT_soak_full_simulation=0
+WALL_SECONDS_soak_full_simulation=48
+TRUE_EXIT_readback_full_simulation=0
+TRUE_EXIT_certify_full_simulation=0
