@@ -1,0 +1,29 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i1158-1172",
+ "lines": 44,
+ "firstTs": "2026-09-07T00:28:33.380Z",
+ "lastTs": "2026-09-07T00:32:06.217Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 8,
+  "Read": 1
+ },
+ "urlsFetched": [
+  "http://lists.urth.net/pipermail/urth-urth.net/2006-October/$id.html",
+  "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+  "https://web.archive.org/web/2021id_/http://lists.urth.net/pipermail/urth-urth.net/2006-October/$id.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Both Green Book messages confirm their quotes. Now the remaining four pages.",
+ "run": "wf_1326cde9-2e5",
+ "agent": "ab96ffdf1a811c333",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-ab96ffdf1a811c333.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i1158-1172.json",
+  "exists": false
+ }
+}

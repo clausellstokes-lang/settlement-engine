@@ -1,0 +1,28 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i1173-1187",
+ "lines": 41,
+ "firstTs": "2026-09-07T00:28:33.381Z",
+ "lastTs": "2026-09-07T00:32:06.795Z",
+ "tools": {
+  "ToolSearch": 2,
+  "Bash": 6,
+  "TaskStop": 1
+ },
+ "urlsFetched": [
+  "http://lists.urth.net/pipermail/urth-urth.net/2006-October/$n.html",
+  "https://web.archive.org/web/${TS[$n"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll fetch each unique URL once and verify the claims against the raw pages.",
+ "run": "wf_1326cde9-2e5",
+ "agent": "a9aa38709f7353647",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a9aa38709f7353647.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i1173-1187.json",
+  "exists": false
+ }
+}
