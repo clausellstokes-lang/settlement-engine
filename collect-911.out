@@ -1,0 +1,26 @@
+LEDGER_TIP_BEFORE=29a4ff20decab4d3c2f827ab6b9d3ca036febbbf
+  product UNCHANGED at 3b1c0eaa5 (a ledger-only act)
+  DESIGN_HORIZON.md: three-line in-place amendment, mark three times, line count unchanged
+EDIT_OK ledger +14726 B, card +2696 B, frq +2361 B
+--- C0 scan ---
+docs/OWNER_DECISION_QUEUE.md:0
+docs/HANDOFF_CURRENT.md:0
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/queue-911.md:0
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/design-horizon.911.md:0
+  ledger and queue are PURE APPENDS
+LEDGER COMMIT: e3840ab627838210e71fde0eb04fb44d1f6021dd
+COMMIT_OK
+--- READ-BACK AT e3840ab62 ---
+e3840ab62 §911: the horizon is measured — CAP-HORIZON-909 lands with zero product bytes at 3b1c0eaa5: the 600-year lit run discharges §910's D1 (capacity_plateau executed and fired on a shipped series), the fixture settles into the realm-load window on this seed, §907's 0.4787 is a seed fact (a second seed reads 0.6443 at year 300 under byte-identical src), SOAK-1 is re-priced at ≈ 4.0–4.9 h, and a six-lens skeptic pass corrected the receipt in thirty-two places before the ledger took it
+
+ docs/DESIGN_HORIZON.md              | 6 +++---
+ docs/FABLE_RETROVALIDATION_QUEUE.md | 4 ++++
+ docs/HANDOFF_CURRENT.md             | 5 ++++-
+ docs/OWNER_DECISION_QUEUE.md        | 3 +++
+ 4 files changed, 14 insertions(+), 4 deletions(-)
+  ODQ §911 rows: 1
+  HANDOFF pickup: 1 new / 1 demoted
+  DESIGN_HORIZON §911 marks: 3
+  FRQ §911 section: 1
+  seat trailer Fable (must be 1): 1
+COLLECT_911_OK tip=e3840ab62

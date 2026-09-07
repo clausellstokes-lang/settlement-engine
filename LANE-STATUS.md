@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-07 11:26:15 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 11:32:03 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 3b1c0eaa5 · ledger = 29a4ff20d §910: the soak receipt ships its per-year series and the capacity rows become fully execu
+product claude/composite-r4 = 3b1c0eaa5 · ledger = e3840ab62 §911: the horizon is measured — CAP-HORIZON-909 lands with zero product bytes at 3b1c0e
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3b1c0eaa5 · 18 cars over 4243bdc61 · porcelain 0 · last commits:
@@ -143,4 +143,4 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = 29a4ff20d §910: the soak re
 - wf_bdebda48-278: 9 journal lines, 6 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.99 2.95 2.76
+load: 3.01 2.98 2.86
