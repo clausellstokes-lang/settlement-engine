@@ -1,0 +1,1474 @@
+Delta's D&D Hotspot: Classic Stat Block Formatting 
+
+ skip to main |
+ skip to sidebar 
+
+Delta's D&D Hotspot
+
+ Math, history, and design of old-school D&D 
+
+ 2017-10-09 
+
+Classic Stat Block Formatting
+
+I was writing some stuff recently, and started wrestling with myself over how to present monster statistical notations in the adventure text. Partly this is a result of the formatting in classic TSR modules and texts varying over the years; but of course I want something that satisfies my own intuitions regarding brevity, usability, etc.
+
+The primary difference in styles that caught my attention as I write this is that the earliest adventures included statistics in parenthetical notes within narrative text paragraphs (the contents of course varied, sometimes as minimal as just hit points, but that's a not my main thrust here). Adventures at a later date removed the statistics from inside narrative text, placing them instead outside of each paragraph, in a specialized statistical block. Prominent examples of the early style included the GDQ modules, AD&D rulebooks, B/X rules and B1-2, etc.; examples of the later style would include module T1-4 and products of that era. So I started searching for where the switchover point was. 
+
+Now, here's the discovery that made me think this worth posting about: Gygax's AD&D Dungeon Module S4, The Lost Caverns of Tsojcanth , published in 1982, surprisingly constitutes the exact switchover point all by itself, because it actually includes both styles within the one product! Namely: The original dungeon-based adventure area, the "Lost Caverns" (used in Winter Con V, 1976), maintains the older parenthetical in-paragraph style. But the newly added wilderness encounter areas (which actually appear first in the module) instead use the newer isolated-stat-block style.
+
+Example of the older style in the dungeon areas (S4, p. 14):
+
+Example of the newer style in the wilderness areas (S4, p. 7): 
+
+The 1982-1983 era was clearly a time of great flux in the presentation of D&D rules and adventures. You'll notice in the S4 wilderness example above that the "new style" isolated stat blocks were given before the text, whereas later it would usually be after (a minor modification, I think). The Hickmans' modules I3-5 in 1983 had a very regimented structure of every single paragraph being labelled for either "Play", "Monster", "Treasure", "Character", etc. By 1985, T1-4 kept only the smallest part of that, with a specialized paragraph labelled "Treasure" for each encounter area.
+
+While I'm not very fond of those experiments at hard regimentation (or even "boxed text" descriptions), on reflection I really do like the statistical elements being removed from the text paragraphs, and it's probably the only new formatting idea from that time that was "sticky" and still commonly used today (e.g.: see Bill Webb's Rappan Athuk ). Among the advantages are: allowing the writer to stay in the descriptive "voice" and not get distracted by statistical elements (perhaps more of a problem for some of us than others); easier for the DM to read and parse sensory descriptions in play; better for finalizing paragraphs/orphans separate from stat edits; more attractive on the page; and, if desired, easier to convert a product to other game editions. 
+
+Which style do you prefer?
+
+Posted by
+
+ Delta 
+
+at
+ 
+ 05:00 
+
+ 21 comments:
+
+ Peter D October 9, 2017 at 6:01 AM 
+ The wilderness style one, with the separated block. It doesn't matter if it's first or last, but it helps me immensely if it's on its own and not embedded in a paragraph.
+
+I use that myself - and a specially labeled "treasure" section - for my own game notes.
+ Reply Delete 
+ Replies 
+ Delta October 9, 2017 at 7:05 PM 
+ I looks like it's pretty unanimous that people prefer it separated. I agree. I may get into trouble by looking back at the earliest stuff (DMG, GDQ) and not remembering that the style changed a few years later.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ G. B. Veras October 9, 2017 at 8:27 AM 
+ Separated block, actually not only of monsters. One block with a summary of what you sense when you enter the room and another block with better descriptions of what is inside the room.
+ Reply Delete 
+ Replies 
+ Delta October 9, 2017 at 7:05 PM 
+ Sounds good to me.
+ Delete 
+ Replies 
+ Reply 
+
+ G. B. Veras October 11, 2017 at 2:48 PM 
+ In a similar vein... The Temple of Lies by Zzarchov Kowolski provides a nice layout if you use a table/notebook or print it in color.
+
+"Orange[italic,bold] text indicates a hidden danger.
+Red[bold] indicates an obvious person
+or monster.
+Blue[small-caps] indicates the most obvious detail of an area.
+Green[italic] is treasure."
+
+The stats block are at the end of the book but looking into the room wall of text you can find the important bricks easly.
+ Delete 
+ Replies 
+ Reply 
+
+ Delta October 15, 2017 at 7:02 PM 
+ I kind of like that; it would be a big change for me and require always printing in color (might look a bit loud for my tastes). Also, I'm in an environment where we're always being warned these days by the accessibility office not to put important information in color coding (in consideration of color-blind people). 
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Charles Saeger October 9, 2017 at 8:44 AM 
+ The second one, but without the arcane abbreviations. Write out “fly” and “damage.”
+ Reply Delete 
+ Replies 
+ Delta October 9, 2017 at 7:07 PM 
+ It's an interesting detail. To me, the abbreviations MV, AC, HD seem pretty clear. But I do prefer to write Atk and Dam in my stat blocks. I do write out "Flight" as a special ability -- the inch/slash/whatever notation is very unclear. 
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Baquies October 9, 2017 at 10:58 AM 
+ The second. I live flavor, then a box or separation for tactics/description, then the stat block. Bonus for an extra blank line or two for me to jot down notes.
+ Reply Delete 
+ Replies 
+ Delta October 9, 2017 at 7:11 PM 
+ One little detail I notice for both T1-4 and Rappan Athuk is the possibility of an encounter area with, say, 20 paragraphs or so of text (and possibly many layers of monsters or traps that might pop up). Both of those texts insert the monster stat immediately after the paragraph in which it appears (instead of waiting to the end of the whole area). I approve of that.
+ Delete 
+ Replies 
+ Reply 
+
+ Baquies October 10, 2017 at 8:29 AM 
+ That makes sense, almost breaking it down into mini encounter areas.
+In the case of an area like that I would hope the layout artists do us a favor an try and get it to fit on two facing pages. Makes it easier when things go bad and an avalanche of monsters starts to fall.
+ Delete 
+ Replies 
+ Reply 
+
+ Delta October 15, 2017 at 7:03 PM 
+ That would be nice!
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Leon Atkinson October 9, 2017 at 11:53 AM 
+ I appreciate how Basic Fantasy modules also include blocks of hit point boxes to quickly check off in groups of five, like this:
+
+HP 6 ☐☐☐☐☐ ☐
+ Reply Delete 
+ Replies 
+ Delta October 9, 2017 at 7:09 PM 
+ Oof, that might be a bit much for me (e.g., the stirge example above; Gygax tends to have lots of encounters with huge numbers of monsters). Actually, I tend to not list hit points at all, myself (roll them on the fly). I have one DM I play for who just rolls hit dice in the open, and then uses the dice themselves as the record (taking some away as hits accrue). 
+ Delete 
+ Replies 
+ Reply 
+
+ Anonymous October 9, 2017 at 7:45 PM 
+ That is the how I usually do it (great when you've got over a hundred d6s in a pencil case), but mainly because I'm not running a BF module with those HP boxes.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Anonymous October 9, 2017 at 12:30 PM 
+ Separated. I'm not opposed to mixing stats and flavour text, but in the case of monsters I'm probably going to want to keep referring to the information in a combat situation, and if it's packed in with the description I'm going to have difficulty finding it. 
+
+Oh and +1 to Basic Fantasy's method which Leon Atkinson mentioned above, it's very convenient.
+ Reply Delete 
+ Replies 
+ Delta October 15, 2017 at 7:04 PM 
+ That's a clean sweep on keeping them separated!
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Anonymous October 21, 2017 at 11:57 PM 
+ I prefer a monster stat sheet in the back. This way if the vampire gets out of his crypt and the party encounters him later, you don't have to try to remember which page his lair was on. I like to italicize anything magical and bold threats like monsters and traps, within the description paragraph. 
+ Reply Delete 
+ Replies 
+ Delta October 22, 2017 at 6:46 PM 
+ In theory I get that, but in practice (various products that did that) it never did me any real good. 
+
+If the stats were in one place or the other, clearly in the set lair is the far more common use-case (I don't want to be flipping from front to back in the book in every encounter). If it's in both then that uses a lot of paper at the back for a relatively uncommon benefit, IMO. 
+ Delete 
+ Replies 
+ Reply 
+
+ Anonymous November 5, 2017 at 10:57 PM 
+ I would photocopy the monster sheet at the back of the text and paperclip it to my DM screen. That's how I organize my screen area when I write a self-contained adventure. 
+ Delete 
+ Replies 
+ Reply 
+
+ Delta November 12, 2017 at 6:29 PM 
+ Yeah, I used to do that and now I'm finding more use from the stats in the encounter text itself. I use the screen space for the OD&D Vol-2 roster of basic monsters. (Partly recently I've been running huge adventures like OD&D sandbox wilderness and Rappan Athuk which might bias this experience.)
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Add comment 
+ 
+ Load more... 
+
+ Newer Post 
+
+ Older Post 
+ 
+ Home 
+
+Subscribe to:
+ Post Comments (Atom) 
+
+ About Me
+
+Delta
+
+ College lecturer in mathematics and computer science, ex-computer game programmer, D&D streamer. 
+ 
+ View my complete profile 
+
+ Testimonial
+
+"Maybe the nerdiest 15 seconds that I've ever listened to in my entire life" -- Luke Gygax
+
+ D&D House Rules in Brief
+
+ Attacks: d20 + HD + AC ≥ 20
+
+ Scale: 1" = 5 ft., 1 round = 10 sec
+
+ Encumbrance: Stone units.
+
+ Money: Silver standard.
+
+ Classes: Clerics removed.
+
+ View more detail 
+
+ Wandering DMs
+
+Our YouTube channel 
+
+Live Chat Sundays 1 PM ET
+
+ OED Games
+
+My game company
+
+ Bluesky
+
+My micro blogger
+
+ GitHub
+
+My code repository
+
+ Add-Ons for OD&D
+
+ Original Edition Delta 
+
+House rules for OD&D
+
+Free download
+
+ OED: Book of Spells, 2E 
+
+Core spells in a concise booklet
+
+Available at Lulu.com
+
+ OED: Book of War 
+
+Mass combat with miniatures
+
+Available at Lulu.com
+
+ OED: Deck of Spells 
+
+Memorization made easy with old-school style spell cards
+
+ Popular Posts
+
+ First Post! Original D&D 
+
+ The Big Mistake in Weapon vs. Armor Adjustments 
+
+ Why Did Natural 20's Become Automatic Hits? 
+
+ What is the Best Combat Algorithm? 
+
+ Testing Balanced Dice 
+
+ Spells Through the Ages – Fireball 
+
+ SciFi Saturday – Boardgame House Rules 
+
+ Critical Hits Tables 
+
+ Damn You, Gygax! Part 4 
+
+ Spells Through The Ages – Contact Other Plane 
+
+ Blog Archive
+
+ ► 
+
+2025
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+2024
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+August
+ 
+ (1) 
+
+ ► 
+
+2023
+ 
+ (16) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+July
+ 
+ (2) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+May
+ 
+ (3) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (2) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ► 
+
+2022
+ 
+ (14) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+2021
+ 
+ (41) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (4) 
+
+ ► 
+
+May
+ 
+ (6) 
+
+ ► 
+
+April
+ 
+ (2) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (7) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2020
+ 
+ (35) 
+
+ ► 
+
+November
+ 
+ (1) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+August
+ 
+ (6) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (5) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2019
+ 
+ (56) 
+
+ ► 
+
+December
+ 
+ (1) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (9) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (9) 
+
+ ► 
+
+June
+ 
+ (4) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (6) 
+
+ ► 
+
+February
+ 
+ (8) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2018
+ 
+ (73) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+September
+ 
+ (8) 
+
+ ► 
+
+August
+ 
+ (6) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (9) 
+
+ ► 
+
+May
+ 
+ (7) 
+
+ ► 
+
+April
+ 
+ (10) 
+
+ ► 
+
+March
+ 
+ (9) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (7) 
+
+ ▼ 
+
+2017
+ 
+ (70) 
+
+ ► 
+
+December
+ 
+ (3) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ▼ 
+
+October
+ 
+ (6) 
+ 
+ Mummies Through the Ages 
+
+ Medieval Demographics in Brief 
+
+ Rappan Athuk DM's Log Index Cards 
+
+ Classic Stat Block Formatting 
+
+ Saturday Software: OED Monster Database v.2 
+
+ Tip-Offs in Tamoachan 
+
+ ► 
+
+September
+ 
+ (5) 
+
+ ► 
+
+August
+ 
+ (11) 
+
+ ► 
+
+July
+ 
+ (14) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (8) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2016
+ 
+ (60) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (1) 
+
+ ► 
+
+July
+ 
+ (7) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (6) 
+
+ ► 
+
+April
+ 
+ (9) 
+
+ ► 
+
+March
+ 
+ (8) 
+
+ ► 
+
+February
+ 
+ (11) 
+
+ ► 
+
+January
+ 
+ (5) 
+
+ ► 
+
+2015
+ 
+ (53) 
+
+ ► 
+
+December
+ 
+ (3) 
+
+ ► 
+
+November
+ 
+ (6) 
+
+ ► 
+
+October
+ 
+ (6) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (7) 
+
+ ► 
+
+April
+ 
+ (5) 
+
+ ► 
+
+March
+ 
+ (8) 
+
+ ► 
+
+February
+ 
+ (5) 
+
+ ► 
+
+2014
+ 
+ (87) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (7) 
+
+ ► 
+
+September
+ 
+ (7) 
+
+ ► 
+
+August
+ 
+ (8) 
+
+ ► 
+
+July
+ 
+ (9) 
+
+ ► 
+
+June
+ 
+ (9) 
+
+ ► 
+
+May
+ 
+ (10) 
+
+ ► 
+
+April
+ 
+ (9) 
+
+ ► 
+
+March
+ 
+ (6) 
+
+ ► 
+
+February
+ 
+ (8) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2013
+ 
+ (79) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (7) 
+
+ ► 
+
+July
+ 
+ (6) 
+
+ ► 
+
+June
+ 
+ (8) 
+
+ ► 
+
+May
+ 
+ (11) 
+
+ ► 
+
+April
+ 
+ (9) 
+
+ ► 
+
+March
+ 
+ (7) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2012
+ 
+ (75) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (7) 
+
+ ► 
+
+October
+ 
+ (6) 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (10) 
+
+ ► 
+
+June
+ 
+ (8) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (9) 
+
+ ► 
+
+February
+ 
+ (10) 
+
+ ► 
+
+January
+ 
+ (13) 
+
+ ► 
+
+2011
+ 
+ (143) 
+
+ ► 
+
+December
+ 
+ (13) 
+
+ ► 
+
+November
+ 
+ (12) 
+
+ ► 
+
+October
+ 
+ (15) 
+
+ ► 
+
+September
+ 
+ (17) 
+
+ ► 
+
+August
+ 
+ (15) 
+
+ ► 
+
+July
+ 
+ (7) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (14) 
+
+ ► 
+
+April
+ 
+ (14) 
+
+ ► 
+
+March
+ 
+ (13) 
+
+ ► 
+
+February
+ 
+ (15) 
+
+ ► 
+
+January
+ 
+ (5) 
+
+ ► 
+
+2010
+ 
+ (80) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (7) 
+
+ ► 
+
+September
+ 
+ (10) 
+
+ ► 
+
+August
+ 
+ (14) 
+
+ ► 
+
+July
+ 
+ (2) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (13) 
+
+ ► 
+
+April
+ 
+ (11) 
+
+ ► 
+
+March
+ 
+ (7) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (6) 
+
+ ► 
+
+2009
+ 
+ (68) 
+
+ ► 
+
+December
+ 
+ (7) 
+
+ ► 
+
+November
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (5) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (2) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (3) 
+
+ ► 
+
+April
+ 
+ (8) 
+
+ ► 
+
+March
+ 
+ (5) 
+
+ ► 
+
+February
+ 
+ (9) 
+
+ ► 
+
+January
+ 
+ (16) 
+
+ ► 
+
+2008
+ 
+ (25) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (2) 
+
+ ► 
+
+January
+ 
+ (5) 
+
+ ► 
+
+2007
+ 
+ (21) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (9)

@@ -1,0 +1,28 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i1098-1112",
+ "lines": 61,
+ "firstTs": "2026-09-07T00:22:48.784Z",
+ "lastTs": "2026-09-07T00:26:17.756Z",
+ "tools": {
+  "Bash": 13,
+  "ToolSearch": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+  "https://web.archive.org/web/20090406143511id_/http://www.irosf.com/q/zine/article/10536"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "",
+ "run": "wf_1326cde9-2e5",
+ "agent": "a440c188a8092c69b",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a440c188a8092c69b.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i1098-1112.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,261 @@
+/**
+ * tests/domain/militaryStrength.test.js — Phase B0 military-strength model.
+ *
+ * Pins:
+ *   - deriveMilitaryCapacity returns the structured decomposition (facets +
+ *     contributors + hooks).
+ *   - The core proposal finding: a well-found CITY scores far above a bare
+ *     THORPE ("a thorpe army ≠ a city army").
+ *   - war_exhaustion lowers currentCapacity below theoreticalCapacity, while a
+ *     no-war settlement has current === theoretical.
+ *   - Per-facet sanity (manpower/institutions/materiel/logistics/economy/will).
+ *   - Determinism (same input → identical output) + no input mutation.
+ *   - MOUNTED NOWHERE: no pulse path imports the module (grep-proven).
+ */
+
+import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { execSync } from 'node:child_process';
+import {
+  deriveMilitaryCapacity,
+  militaryCapacityScalar,
+} from '../../src/domain/worldPulse/militaryStrength.js';
+
+const FACET_KEYS = ['manpower', 'institutions', 'materiel', 'logistics', 'economy', 'will'];
+
+// A well-found city: high tier + population, military institutions + walls,
+// weapons exports, deep food reserves, a martial government.
+const city = {
+  settlement: {
+    name: 'Ironhold', tier: 'city', population: 18000,
+    powerStructure: { government: 'Military autocracy', publicLegitimacy: { score: 65 }, factions: [] },
+    institutions: [
+      { name: 'Royal Garrison' },
+      { name: 'City Watch' },
+      { name: 'Grand Armory' },
+      { name: 'War College' },
+      { name: 'Master Weaponsmiths Guild' },
+    ],
+    economicState: {
+      prosperity: 'prosperous',
+      primaryExports: [{ name: 'forged weapons' }, { name: 'plate armor' }, { name: 'siege engines' }],
+      foodSecurity: { resilienceScore: 78, storageMonths: 8 },
+    },
+    defenseProfile: { scores: { military: 80, monster: 60, internal: 70, economic: 65, magical: 50 } },
+    activeConditions: [],
+  },
+};
+
+// A bare thorpe: lowest tier, tiny population, no military institutions, no
+// materiel, thin food, a pacific commune government.
+const thorpe = {
+  settlement: {
+    name: 'Mudfen', tier: 'thorp', population: 60,
+    powerStructure: { government: 'Peasant commune', publicLegitimacy: { score: 50 }, factions: [] },
+    institutions: [{ name: 'Common Granary' }, { name: 'Shrine' }],
+    economicState: {
+      prosperity: 'subsistence',
+      primaryExports: [{ name: 'turnips' }],
+      foodSecurity: { resilienceScore: 35, storageMonths: 1 },
+    },
+    defenseProfile: { scores: { military: 18, monster: 25, internal: 30, economic: 25, magical: 20 } },
+    activeConditions: [],
+  },
+};
+
+describe('deriveMilitaryCapacity — structured decomposition', () => {
+  it('returns theoreticalCapacity, currentCapacity, facets, hooks, contributors', () => {
+    const cap = deriveMilitaryCapacity(city);
+    expect(typeof cap.theoreticalCapacity).toBe('number');
+    expect(typeof cap.currentCapacity).toBe('number');
+    expect(cap.facets).toBeTruthy();
+    for (const k of FACET_KEYS) {
+      expect(typeof cap.facets[k], `facet ${k}`).toBe('number');
+      expect(cap.facets[k]).toBeGreaterThanOrEqual(0);
+      expect(cap.facets[k]).toBeLessThanOrEqual(100);
+    }
+    expect(cap.hooks).toHaveProperty('warExhaustion');
+    expect(cap.hooks).toHaveProperty('warDrain');
+    expect(cap.hooks).toHaveProperty('armyDeployed');
+    expect(Array.isArray(cap.contributors)).toBe(true);
+    expect(cap.contributors.length).toBeGreaterThan(0);
+    for (const c of cap.contributors) {
+      expect(FACET_KEYS).toContain(c.facet);
+      expect(typeof c.source).toBe('string');
+      expect(typeof c.delta).toBe('number');
+    }
+  });
+
+  it('a well-found city scores FAR above a bare thorpe (a thorpe army != a city army)', () => {
+    const cityCap = deriveMilitaryCapacity(city).theoreticalCapacity;
+    const thorpeCap = deriveMilitaryCapacity(thorpe).theoreticalCapacity;
+    expect(cityCap).toBeGreaterThan(thorpeCap);
+    // "far above": the gap should be wide, not marginal.
+    expect(cityCap - thorpeCap).toBeGreaterThan(30);
+    // Every contributing facet should favor the city or tie.
+    const cf = deriveMilitaryCapacity(city).facets;
+    const tf = deriveMilitaryCapacity(thorpe).facets;
+    expect(cf.manpower).toBeGreaterThan(tf.manpower);
+    expect(cf.institutions).toBeGreaterThan(tf.institutions);
+    expect(cf.materiel).toBeGreaterThan(tf.materiel);
+  });
+
+  it('militaryCapacityScalar is theoreticalCapacity normalized to 0..1', () => {
+    const cap = deriveMilitaryCapacity(city);
+    expect(militaryCapacityScalar(city)).toBeCloseTo(cap.theoreticalCapacity / 100, 6);
+  });
+
+  it('does not grant native military or materiel strength from current custom display names', () => {
+    const base = {
+      settlement: {
+        ...thorpe.settlement,
+        institutions: [],
+        economicState: {
+          ...thorpe.settlement.economicState,
+          primaryExports: [],
+        },
+      },
+    };
+    const namesakes = [
+      { name: 'Royal Garrison' },
+      { name: 'Master Weaponsmiths Forge' },
+    ];
+    const currentCustom = {
+      settlement: {
+        ...base.settlement,
+        institutions: namesakes.map((institution, index) => ({
+          ...institution,
+          source: 'custom',
+          customDefinitionId: `definition:institutions:military-collision-${index}`,
+        })),
+      },
+    };
+    const legacyUnstamped = {
+      settlement: {
+        ...base.settlement,
+        institutions: namesakes,
+      },
+    };
+
+    const baseline = deriveMilitaryCapacity(base);
+    const custom = deriveMilitaryCapacity(currentCustom);
+    const legacy = deriveMilitaryCapacity(legacyUnstamped);
+
+    expect(custom.facets.institutions).toBe(baseline.facets.institutions);
+    expect(custom.facets.materiel).toBe(baseline.facets.materiel);
+    expect(legacy.facets.institutions).toBeGreaterThan(baseline.facets.institutions);
+    expect(legacy.facets.materiel).toBeGreaterThan(baseline.facets.materiel);
+  });
+});
+
+describe('war erosion — current vs theoretical', () => {
+  it('a no-war settlement has currentCapacity === theoreticalCapacity', () => {
+    const cap = deriveMilitaryCapacity(city);
+    expect(cap.currentCapacity).toBe(cap.theoreticalCapacity);
+  });
+
+  it('war_exhaustion lowers currentCapacity below theoreticalCapacity', () => {
+    const atWar = {
+      settlement: {
+        ...city.settlement,
+        activeConditions: [
+          { archetype: 'war_exhaustion', severity: 0.8 },
+          { archetype: 'war_drain', severity: 0.6 },
+        ],
+      },
+    };
+    const cap = deriveMilitaryCapacity(atWar);
+    expect(cap.currentCapacity).toBeLessThan(cap.theoreticalCapacity);
+    expect(cap.hooks.warExhaustion).toBeCloseTo(0.8, 6);
+    expect(cap.hooks.warDrain).toBeCloseTo(0.6, 6);
+    // theoreticalCapacity is the LATENT base — it bends only via economic_capacity
+    // (which war_drain legitimately erodes). Holding the economy facet constant
+    // via ctx isolates the latent base, which is identical war vs no-war: the
+    // erosion lives in currentCapacity, not the theoretical floor.
+    const pinned = { economicCapacityScore: 70 };
+    expect(deriveMilitaryCapacity(atWar, pinned).theoreticalCapacity)
+      .toBe(deriveMilitaryCapacity(city, pinned).theoreticalCapacity);
+  });
+
+  it('army_deployed is exposed as a hook (B1/B2 split deployed vs home), not subtracted from theoretical', () => {
+    const deployed = {
+      settlement: { ...city.settlement, activeConditions: [{ archetype: 'army_deployed', severity: 0.5 }] },
+    };
+    const cap = deriveMilitaryCapacity(deployed);
+    expect(cap.hooks.armyDeployed).toBeCloseTo(0.5, 6);
+    expect(cap.theoreticalCapacity).toBe(deriveMilitaryCapacity(city).theoreticalCapacity);
+  });
+});
+
+describe('robustness + purity', () => {
+  it('accepts a bare settlement as well as an item wrapper', () => {
+    const fromItem = deriveMilitaryCapacity(city).theoreticalCapacity;
+    const fromBare = deriveMilitaryCapacity(city.settlement).theoreticalCapacity;
+    expect(fromBare).toBe(fromItem);
+  });
+
+  it('returns a neutral floor envelope for a missing settlement', () => {
+    const cap = deriveMilitaryCapacity(null);
+    expect(cap.theoreticalCapacity).toBe(0);
+    expect(cap.currentCapacity).toBe(0);
+  });
+
+  it('is deterministic and does not mutate its input', () => {
+    const before = JSON.stringify(city);
+    const a = deriveMilitaryCapacity(city);
+    const b = deriveMilitaryCapacity(city);
+    expect(JSON.stringify(a)).toBe(JSON.stringify(b));
+    expect(JSON.stringify(city)).toBe(before);
+  });
+
+  it('uses ctx.economicCapacityScore when provided (hot-path seam)', () => {
+    const high = deriveMilitaryCapacity(city, { economicCapacityScore: 100 });
+    const low = deriveMilitaryCapacity(city, { economicCapacityScore: 0 });
+    expect(high.facets.economy).toBe(100);
+    expect(low.facets.economy).toBe(0);
+    expect(high.theoreticalCapacity).toBeGreaterThan(low.theoreticalCapacity);
+  });
+});
+
+describe('mounted-everywhere-it-should-be guarantee', () => {
+  // B0 shipped militaryStrength MOUNTED NOWHERE (the model could not change any
+  // behaviour). B1/B2/B4 then wired it INTO the live pulse (the deployment-strength
+  // envelope, occupation usefulness, trade salience), and F1 surfaces it through a
+  // player-safe display read-model (army strength). So the importer set is now a
+  // KNOWN ALLOWLIST — the model + its test + those deliberate consumers — and any
+  // OTHER importer (an accidental hot-path coupling) is the failure.
+  it('only the known B1/B2/B4 engine consumers + the F1 display read-model import the model', () => {
+    // Match the IMPORT path (…/militaryStrength.js), not the bare word — the
+    // generators carry an unrelated local `militaryStrength` variable. Scan CODE
+    // files only: data baselines (e.g. tests/lint/.domain-any-baseline.json) list
+    // file paths without importing anything.
+    const hits = execSync(
+      "grep -rln --include='*.js' --include='*.jsx' \"/militaryStrength.js\" src tests || true",
+      { cwd: process.cwd(), encoding: 'utf8' },
+    ).trim().split('\n').filter(Boolean).map(p => p.replace(/\/{2,}/g, '/'));
+    const ALLOWED = new Set([
+      'src/domain/worldPulse/militaryStrength.js',       // the model
+      'tests/domain/militaryStrength.test.js',           // its own test
+      'tests/domain/ruinFilter.probe.test.js',           // ruin-filter lane — proves a ruined garrison fields no martial force
+      'src/domain/worldPulse/warCapacityReads.js',       // B1/B2 — the deployment strength envelope. THE DECOMPOSITION WAVE (R-BLD-4) moved buildCapacityLookup out of warDeployment.js into this pure-read leaf, so the model's ONE engine-side importer moved with it. This is a RELOCATION of an existing allowlist row, not a new consumer: warDeployment.js no longer imports the model at all, and its row below is gone. The couplings this walker guards against are unchanged in number and in kind.
+      'src/domain/worldPulse/occupation.js',             // B3 — occupied-settlement usefulness
+      'src/domain/worldPulse/tradeSalience.js',          // B4 — materiel-gap salience
+      'src/domain/worldPulse/religiousContest.js',       // religion rework — occupation→conversion force-scaling (occupying-force size)
+      'src/domain/display/armyStrength.js',              // F1 — player-safe army-strength read-model
+      'src/domain/display/warResolve.js',                // P5 — War & Resolve display read-model (needs the raw facets for the exact will/hope the siege uses)
+      'src/domain/worldPulse/irregularForce.js',         // SEAT-78 / D10 — the irregular-force law's below-threshold half. A DELIBERATE ENGINE CONSUMER on the B1/B2/B4 pattern, not an accidental hot-path coupling: it reads the EXISTING `facets.manpower` and `facets.institutions` off the 0..100 capacity axis to price a rising against the loyal remainder, precisely so there is no SECOND combat math in the estate — the row's own charter states the F1 UNIT LAW is honoured trivially because the car never touches heads at all. The read sits behind `participation01 > 0`, and behind the `irregularForceEnabled === true` gate above that, so a dark world never reaches the model at all.
+      'src/domain/worldPulse/roadsKernel.js',            // THE ROADS §7 amendment C — escort protection reads the home settlement's military quality (readiness/experience/capacity) at dispatch ("better soldiers and equipment do make a difference")
+      'tests/domain/roadsEmbassyExtensions.test.js',     // THE ROADS §11b R-8 — the escort-refinement test reconstructs the frozen escort01 = militaryQuality01(readiness/experience/capacity) × settlementWeight01 (a deliberate test reader, the RC-e roadsKernel precedent)
+      'tests/domain/deityTemperConsumerCensus.walker.test.js', // W-FAITH F2c — THE WEAKEST ROW IN THIS LIST, and deliberately so. That walker is a CENSUS: it names this module as a repo-relative STRING in its consumer table because this file is one of the eleven sites that read a deity's temper. It does not import the model, does not call it, and mounts nothing — it only greps this file for the provenance line that proves the deity comes from `s?.config?.primaryDeitySnapshot`. The coupling this allowlist guards against is an accidental hot-path importer; a path spelled inside a census table is the opposite of that, and spelling it obliquely to dodge the scan would have made both censuses less readable while removing neither's real subject.
+      'tests/domain/conquestExecutionWr8.test.js',       // WR-8 amendment N — the overwhelming gate is a THEORETICAL-CAPACITY POINTS GAP, and the whole reason it is a gap rather than a ratio is a measured fact about this model's compression (conquestExecution.js's tuning block records it). A pin that asserted the band boundaries against hand-typed numbers would prove only that the constants equal themselves; this test derives real capacities from real settlement rows through deriveMilitaryCapacity so the gate is checked against the spread the engine actually produces. A deliberate test reader on the roadsEmbassyExtensions/ruinFilter precedent — it imports the MODEL, mounts nothing, and adds no hot-path coupling.
+    ]);
+    const offenders = hits.filter(p => !ALLOWED.has(p));
+    expect(offenders, `unexpected importers: ${offenders.join(', ')}`).toEqual([]);
+  });
+
+  it('the model itself imports no React/Zustand/store', () => {
+    const src = readFileSync('src/domain/worldPulse/militaryStrength.js', 'utf8');
+    expect(/from ['"]react['"]/.test(src)).toBe(false);
+    expect(/zustand|\/store\//.test(src)).toBe(false);
+  });
+});

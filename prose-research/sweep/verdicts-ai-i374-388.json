@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 8,
+ "claims": [
+  {
+   "index": 374,
+   "feature": "over-compliant GM",
+   "claim": "An LLM game master accommodates even the most bizarre player requests with little regard for predetermined events, where a human GM would curb them.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "accommodate for even the most bizarre requests",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  },
+  {
+   "index": 375,
+   "feature": "confident falsehood",
+   "claim": "LLMs output plausible but false statements because they are a probable word sequence.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "output plausible but false statements",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  },
+  {
+   "index": 376,
+   "feature": "intent capture failure",
+   "claim": "LLMs sometimes fail to capture user intent, especially sarcasm, and repeated clarification frustrates the player.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "sometimes struggle to capture user intent",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  },
+  {
+   "index": 377,
+   "feature": "detail drift",
+   "claim": "Pilot users of an LLM game master found story elements deviated from their intent and specific details changed, such as the number of enemies or items.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "such as the number of enemies or items",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "index": 378,
+   "feature": "inventory amnesia",
+   "claim": "Asked what the character was holding, the GM often gave incoherent answers and forgot items just picked up; performance worsened as the game continued.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "the GM often provided incoherent responses",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "index": 379,
+   "feature": "nonsensical combat outcomes",
+   "claim": "Unless actions were meticulously described, the prompt-engineered GM produced characters stumbling or self-injuring when it failed to identify a target.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "characters stumbling or self-injuring",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "index": 380,
+   "feature": "over-compliance derailment",
+   "claim": "Over-compliance in the GM role makes the game veer drastically from the intended narrative, potentially irreparably.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "veering drastically from the intended narrative",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "index": 381,
+   "feature": "immersion-harming dialogue",
+   "claim": "Poorly generated dialogue or incoherent arcs can disrupt immersion or actively harm player experience, undermining the engagement the system was meant to foster.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "poorly generated dialogue or incoherent narrative arcs",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "index": 382,
+   "feature": "voice as a missing dimension",
+   "claim": "A 10-expert Delphi panel added 'Voice' as a quality dimension because naturalness did not capture tone; a distinctive voice is a critical marker of story quality distinct from plot.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "a distinctive and compelling narrative voice",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "index": 383,
+   "feature": "genre misalignment",
+   "claim": "Producing a hard-boiled detective story when fantasy was requested was rated a must-be failure regardless of technical competence.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "producing a hard-boiled detective story when a fantasy narrative is requested",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "index": 384,
+   "feature": "unpredictable quality variance",
+   "claim": "Even with well-crafted prompts, generated quality varies unpredictably across sessions, with trends toward overly positive or uninspired endings.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "index": 385,
+   "feature": "no mental model",
+   "claim": "LLMs cannot read a text, form a mental model of it, and then use that model; they only produce babbled text.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "All they can do is produce a stream of babbled text.",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "index": 386,
+   "feature": "continuity loss mid-scene",
+   "claim": "In a ChatGPT Lasers & Feelings playtest transcript, the model forgot everyone was aboard ships and turned the attacking pirates into lost travellers within a few turns.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "ChatGPT momentarily forgets that everyone is onboard ships.",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "index": 387,
+   "feature": "hallucination as word-guessing",
+   "claim": "'Hallucination' misdescribes the failure: there is no false model, only a guessed word that matched training patterns and did not conform to reality.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "It's just words. There is no underlying mental model",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "index": 388,
+   "feature": "simulacra without totality",
+   "claim": "Individual moments read as good simulacra, but the whole is random babble because a GM's job is to hold and update a canonical model of the world.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "the totality of the experience is nothing more than random babble",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 374,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "An LLM Game Master would try to accommodate for even the most bizarre requests",
+   "note": "Sec. V Limitations. Raw arXiv HTML v5, exact: 'Human GMs frequently curb the more exotic player requests...' then 'An LLM Game Master would try to accommodate for even the most bizarre requests, with little consideration for the consequential impacts to any predetermined game events.' Every limb (human GM curbs; LLM accommodates; little regard for predetermined events) is on the page. Only softening: the paper's verb is conditional 'would try to', the claim's is indicative 'accommodates'."
+  },
+  {
+   "index": 375,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they will output plausible but false statements simply because they are a probable sequence of words",
+   "note": "Sec. V, hallucination paragraph. Exact on raw page: 'LLMs suffer from hallucinations [50,151], meaning that they will output plausible but false statements simply because they are a probable sequence of words.' Both limbs supported."
+  },
+  {
+   "index": 376,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLMs sometimes struggle to capture user intent; especially sarcasm; clarifying multiple times leads to frustration",
+   "note": "Sec. V. Exact: 'Another limitation is that LLMs sometimes struggle to capture user intent. This is especially evident with expressions of sarcasm [156].' and 'Many LLMs misunderstand user requests [157], and clarifying to the LLM multiple times leads to frustration.' The player limb is carried by the surrounding sentences ('applications of LLMs that converse directly with the player'; 'can be a frustrating experience' for the user)."
+  },
+  {
+   "index": 377,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some story elements deviated from their intent or specific details seemed to change",
+   "note": "Sec. 3.3 Pilot Study with Game Master v1 (N=8, recruited TTRPG/CYOA players). Exact: 'many participants finding that some story elements deviated from their intent or that the specific details seemed to change, such as the number of enemies or items.' The 'pilot users' limb is confirmed by the section heading and 'The resulting GM v1 was validated in a pilot study with users (N=8)'."
+  },
+  {
+   "index": 378,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the GM often provided incoherent responses or forgot that the player had just picked up an item",
+   "note": "Sec. 3.3, same pilot paragraph. Exact: 'participants asked for a more robust way to check what items their character was holding-some tried to ask the system, and this worked in some cases, yet the GM often provided incoherent responses or forgot that the player had just picked up an item.' The worsening limb is the next sentence: 'the system would begin to do worse as the game continued in terms of keeping track of the story'."
+  },
+  {
+   "index": 379,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unless they meticulously described their actions, v1 often resulted in non-sensical outcomes",
+   "note": "Sec. 5.2, Game Master Flexibility Dynamics. Exact: 'Participants found that unless they meticulously described their actions, v1 often resulted in non-sensical outcomes, such as characters stumbling or self-injuring when the system failed to identify an appropriate target.' The 'prompt-engineered GM' limb = v1, confirmed by the Introduction: 'explored if and how well we can realize a first GM version with prompt engineering techniques alone.'"
+  },
+  {
+   "index": 380,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "over-compliance ... may result in the game veering drastically from the intended narrative, potentially causing irreparable disruptions",
+   "note": "Sec. 2 related work. Exact on the page: 'Another issue is the over-compliance of LLMs, which, in the role of a GM, may result in the game veering drastically from the intended narrative, potentially causing irreparable disruptions.' Note for the record: this sentence is ChatRPG's paraphrase of Gallotta et al. 2024 (the claim-374 source), not an original ChatRPG finding - but it is the page's own wording, so the attribution holds."
+  },
+  {
+   "index": 381,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "poorly generated dialogue or incoherent narrative arcs may disrupt player immersion or actively harm player experience",
+   "note": "Sec. I Introduction. Exact: 'In some cases, poorly generated dialogue or incoherent narrative arcs may disrupt player immersion or actively harm player experience-undermining the very engagement such systems are designed to foster.' Every limb present."
+  },
+  {
+   "index": 382,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we engaged a panel of n=10 experts; a distinctive and compelling narrative voice is a critical marker",
+   "note": "Sec. III-B and V-A. The panel-size limb IS on the raw page: 'we engaged a panel of <math alttext=\"n=10\">...</math> experts in narrative design for games' - rendered as MathML, so a naive tag-strip drops it; confirmed both in the raw HTML source and in the arXiv PDF ('a panel of n = 10 experts'). Sec. V-A exact: 'while \"Naturalness\" was included as a dimension, it did not fully capture the nuanced aspects of voice or tone' and 'a distinctive and compelling narrative voice is a critical marker of story quality, distinct from plot or character development.' Delphi method confirmed throughout."
+  },
+  {
+   "index": 383,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "producing a hard-boiled detective story when a fantasy narrative is requested ... regardless of technical competence",
+   "note": "Sec. V-A. Exact: 'a story that fails to adhere to or meaningfully challenge the tropes of its genre, such as producing a hard-boiled detective story when a fantasy narrative is requested, was identified as a significant quality failure, regardless of technical competence. As such, genre alignment emerged as a \"must-be\" requirement for the readers.' The 'must-be' label attaches to the genre-alignment dimension rather than to the individual example, but the claim's compression is faithful."
+  },
+  {
+   "index": 384,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Quality varies unpredictably; cited studies found overly positive endings, uneven sessions",
+   "note": "No quote was supplied and none is needed: every limb is on the raw page, but split across two sentences of Sec. I with different attributions. The paper's own sentence: 'Even with well-crafted prompts, the quality of the generated content can vary unpredictably, leading to results that are unconvincing, repetitive, or misaligned with the desired tone or character development.' The endings and across-sessions limbs come from the preceding sentence, where the paper is REPORTING other work: 'with some studies identifying trends toward overly positive or uninspired endings [13], or uneven output quality across sessions [14]' (refs 13/14 = Taveekitworachai et al. 2023). So the claim is supported by the source but fuses the authors' own assertion with findings they attribute to cited studies; graded SUBSTANCE rather than VERBATIM for that reason."
+  },
+  {
+   "index": 385,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They can't read a text, form a mental model ... All they can do is produce a stream of babbled text",
+   "note": "Exact on the live page (thealexandrian.net, HTTP 200, no block): 'They can't read a text, form a mental model of what that text means, and then use that mental model. They can't observe the world, think about it abstractly, and then describe their conclusions. All they can do is produce a stream of babbled text.' Both limbs verbatim."
+  },
+  {
+   "index": 386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ChatGPT momentarily forgets that everyone is onboard ships ... now they're no longer pirates. They're lost travelers",
+   "note": "Section 'AI GAME MASTERS'. Exact: 'The PCs are following a distress signal. It turns out that the distress signal is actually a trap set by bloodthirsty pirates. Two ships attack! ChatGPT momentarily forgets that everyone is onboard ships. We're back in ships, but now there's only one pirate ship. And now they're no longer pirates. They're lost travelers who are hoping the PCs can help them chart a course home.' The 'playtest transcript' limb is the page's own framing: 'I asked it to generate a playtest transcript of the game' and the transcript's own header 'Lasers & Feelings - Playtest Session Transcript'. 'Within a few turns' is a faithful compression of the successive beats of one encounter."
+  },
+  {
+   "index": 387,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A 'hallucination' would imply a false mental model ... It's just words. There is no underlying mental model",
+   "note": "Exact: 'This is why the term \"hallucinate\" is deceptive... A \"hallucination\" would imply that the LLM has formed a false mental model of the world and is now describing that false understanding. But this is not, in fact, what's happening. What's happened is that it guessed a word and that word, while matching the patterns found in the model's training data, did not conform to reality. It's just words. There is no underlying mental model behind them.' All three limbs (misdescription, no false model, guessed word matching training patterns but not reality) verbatim."
+  },
+  {
+   "index": 388,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "individual moments ... are all pretty good simulacra ... the totality of the experience is nothing more than random babble",
+   "note": "Exact: 'The individual moments ... are all pretty good simulacra. But they are, in fact, an illusion, and the totality of the experience is nothing more than random babble.' The causal limb is the immediately preceding paragraph: 'the GM's primary responsibility is to create and hold a mental model of the game world... This mental model is the canonical reality of the game, and it's continuously updated', followed by 'LLMs can't handle the fictional continuity of an RPG adventure for the same reason they \"hallucinate.\"'"
+  }
+ ]
+}

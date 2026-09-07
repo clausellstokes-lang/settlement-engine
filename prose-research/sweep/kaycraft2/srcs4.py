@@ -1,0 +1,18 @@
+SOURCES=[
+ dict(title="Gary K. Wolfe Reviews A Brightness Long Ago (Locus)", url="https://locusmag.com/review/gary-k-wolfe-reviews-a-brightness-long-ago-by-guy-gavriel-kay/", kind="analysis", substantive=True, date="2019-05", route="curl browser UA, live URL"),
+ dict(title="Review: A Brightness Long Ago (Elitist Book Reviews)", url="https://elitistbookreviews.com/2019/05/14/a-brightness-long-ago/", kind="analysis", substantive=True, date="2019-05-14", route="curl browser UA, live URL"),
+ dict(title="A Brightness Long Ago, reviewed by Judith Starkston (Historical Novel Society)", url="https://historicalnovelsociety.org/reviews/a-brightness-long-ago/", kind="analysis", substantive=True, date="2019-05-01", route="curl browser UA, live URL"),
+ dict(title="The World of Guy Gavriel Kay (Fantasy-Faction)", url="https://fantasy-faction.com/2011/the-world-of-guy-gavriel-kay", kind="reception", substantive=True, date="2011", route="curl browser UA, live URL"),
+ dict(title="Written on the Dark (Salon Futura)", url="https://www.salonfutura.net/2025/04/written-on-the-dark/", kind="analysis", substantive=True, date="2025-04", route="curl browser UA, live URL"),
+ dict(title="Interview: Guy Gavriel Kay on A Brightness Long Ago, Tolkien, Reimagining History (Greg Cook, Wonderland)", url="https://gregcookland.com/wonderland/2019/04/28/guy-gavriel-kay/", kind="own-words", substantive=True, date="2019-04-28", route="curl browser UA, live URL"),
+ dict(title="A Brightness Long Ago review (Bookwormex)", url="https://bookwormex.com/brightness-long-ago-guy-gavriel-kay-review/", kind="reception", substantive=True, date="", route="curl browser UA, live URL"),
+ dict(title="Author Interview: Guy Gavriel Kay (Far Beyond Reality)", url="https://farbeyondreality.com/2013/03/19/author-interview-guy-gavriel-kay/", kind="own-words", substantive=False, date="2013-03-19", route="curl browser UA, live URL; page body did not render prose-craft content"),
+ dict(title="Guy Gavriel Kay interview 2001 (idic.ca / Voyageur)", url="https://idic.ca/voyageur.idic.ca/Kay01.htm", kind="own-words", substantive=False, date="2001", route="curl browser UA, live URL; no prose-level craft matched"),
+ dict(title="Merging history and the fantastic with Guy Gavriel Kay (Medievalists.net)", url="https://www.medievalists.net/2019/07/history-fantastic-guy-gavriel-kay/", kind="own-words", substantive=False, date="2019-07", route="curl browser UA, live URL; short notice page"),
+ dict(title="A Brightness Long Ago review (Book and Film Globe)", url="https://bookandfilmglobe.com/fiction/book-review-a-brightness-long-ago/", kind="reception", substantive=False, date="", route="curl browser UA, live URL; no prose-craft observation"),
+ dict(title="Written on the Dark (She Reads Novels)", url="https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/", kind="reception", substantive=False, date="2025-05-30", route="curl browser UA, live URL; no prose-craft observation"),
+ dict(title="The Lions of Al-Rassan (She Reads Novels)", url="https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/", kind="reception", substantive=False, date="2013-08-17", route="curl browser UA, live URL; no prose-craft observation"),
+ dict(title="Interview Guy Gavriel Kay: the historian of fantasy (Just A Word, Medium)", url="https://justaword.fr/interview-guy-gavriel-kay-8d92c6bf6229", kind="own-words", substantive=False, date="", route="blocked: Medium-hosted page returned a 750-byte stub with no article text"),
+ dict(title="Interviews index (BrightWeavings)", url="https://brightweavings.com/category/ggks-words/interviews/", kind="own-words", substantive=False, date="", route="curl browser UA, live URL; index page used for discovery"),
+]
+CLAIMS=[]

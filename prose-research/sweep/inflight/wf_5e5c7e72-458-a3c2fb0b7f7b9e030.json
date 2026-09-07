@@ -1,0 +1,38 @@
+{
+ "role": "verifier",
+ "name": "leguin",
+ "angle": null,
+ "tag": "i375-383",
+ "lines": 78,
+ "firstTs": "2026-09-06T17:18:46.739Z",
+ "lastTs": "2026-09-06T17:23:26.332Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 17,
+  "WebFetch": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.theparisreview.org/blog/2019/11/20/leguins-subversive-imagination/",
+  "https://commonreader.wustl.edu/c/the-re-possessed/",
+  "https://granta.com/her-left-hand-the-darkness/",
+  "https://fivebooks.com/best-books/best-ursula-le-guin-books-sherryl-vint/",
+  "https://reactormag.com/introducing-the-ursula-k-le-guin-reread/",
+  "https://efanzines.com/SFC/SteamEngineTime/SET11.pdf",
+  "http://web.archive.org/cdx/search/cdx?url=$u&output=text&fl=timestamp,statuscode,mimetype,length&limit=8&filter=statuscode:200",
+  "https://web.archive.org/web/20191121050122id_/https://www.theparisreview.org/blog/2019/11/20/leguins-subversive-imagination/",
+  "https://web.archive.org/web/20190718094045id_/https://granta.com/her-left-hand-the-darkness/",
+  "https://web.archive.org/web/20210508144857id_/https://fivebooks.com/best-books/best-ursula-le-guin-books-sherryl-vint/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All nine claims resolved. Writing the checkpoint file.",
+ "run": "wf_5e5c7e72-458",
+ "agent": "a3c2fb0b7f7b9e030",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_5e5c7e72-458/agent-a3c2fb0b7f7b9e030.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i375-383.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,63 @@
+ 
+ WolfeWiki - Where to Begin? A Novice's Guide to the Lupine Maze 
+ WolfeWiki 
+ Introduction 
+ Introduction for newcomers to Wolfe's work 
+ Contents 
+ All recent changes 
+ Admin 
+ General 
+ Signing up to be a contributor 
+ Contributor profiles 
+ Discussion of edits, structure, etc 
+ RSS feeds from this wiki 
+ Technical resources 
+ edit SideBar 
+The contents of WolfeWiki is licensed under the Creative Commons BY Licence , except where stated otherwise. 
+ Search :
+View 
+ Edit 
+ Discuss 
+ History 
+ Print 
+Where to Begin? A Novice's Guide to the Lupine Maze
+Introduction 
+So you've heard about this guy Gene Wolfe and you've heard that he's some kind of genius. 
+Maybe you read about him in the Washington Post or the magazine First Things .
+Maybe you know that he's won lots of awards. 
+Maybe you've seen him praised to the skies by his peers, like Michael Swanwick, Ursula K. Le Guin, and Neil Gaiman. 
+Or maybe you've just seen his books on the science fiction and fantasy shelves of your local chain store over the last few decades. 
+At any rate, you'd like to give Gene Wolfe's work a try.
+But where to begin? For one thing, he's written a lot -- as of this editing, twenty-six novels, twelve collections of short stories, and myriad other things. For another, maybe you've heard that he can be a difficult read.
+Well, yeah. He can. He uses unusual words, and his stories don't always go where they seem to be going. His narrators forget things, make mistakes, or simply lie.
+This wiki article offers you two things: a few possible places to start reading Wolfe, and a bit of viaticum to help you along the way.
+Entry Points 
+Here are a few places a reader unfamiliar with Wolfe's work might consider starting.
+Short Stories
+Actually, Wolfe's first short story collection, The Island of Doctor Death and Other Stories and Other Stories may still be the best place to start. It isn't that he hasn't written a plethora of excellent stories since then, but for this first collection, he was able to do some serious cherry-picking. There isn't a story in it that's less than his best. And, because it isn't a "themed" collection in any sense, it gives a pretty wide view of Wolfe's styles and concerns.
+A more recent alternative would be The Best of Gene Wolfe , which is pretty much what the title says, with Wolfe-written introductions to each story.
+Novels
+Wolfe has written a number of novels, but over half of them form part of one series or another. Of his standalone novels, two stand out as both particularly good and particularly good points to meet the work of Gene Wolfe.
+ Peace 
+This is a quiet book. It's the life story of a man named Alden Dennis "Den" Weer, told by himself. It's also one of the creepiest books ever written. Weer lives in the Midwest during the twentieth century -- but to say more is to give away things that Weer is trying desperately to conceal from you.
+ The Fifth Head of Cerberus 
+Technically, " 5HC " (as aficionados call it) isn't exactly a novel. It's three novellas, set in the same milieu . Each tells its own story, but they supplement, contradict, and comment on each other in ways that make the whole much, much larger than its parts. The only thing like it in traditional literature is Faulkner's The Sound and the Fury , but 5HC otherwise owes much more to Proust than to Faulkner. On a pair of colony worlds, the various narrators confront questions of identity at every level from the personal to the species, and the questions are very, very disturbing.
+ The Wizard Knight 
+Possibly the easiest read in Wolfe's corpus, The Wizard Knight still offers the reader a great deal to ponder. A teenaged boy from modern America finds himself in a fantastic world of seven "levels," populated by demons, fairies, and godlike and angelic beings. He learns to be a Knight, and, more importantly, a man. TWK is really one long novel, but published in two volumes, The Knight and The Wizard .
+The Masterpiece
+Of Wolfe's major series, one is generally held to be his masterpiece: The Book of the New Sun . Consisting of four novels, but currently available in one- and two-volume editions, Wolfe presents us with a civilization so far in the future that its "mines" are the cities of our era (or perhaps a bit later), so advanced and so decadent that its people make very little difference in their minds between a sea-sailor and a star-sailor. We see this world through the eyes of Severian, an apprentice, then journeyman, of the Guild of Seekers for Truth and Penitence, commonly known as "the torturers." Severian, exiled from his guild for an unforgivable crime, wanders across the face of his world, Urth, and finds an even more fantastic and terrible destiny than that for which he was raised.
+Hints for Beginners 
+It wouldn't hurt, before even reading a single Wolfe story, to read Neil Gaiman's short and useful essay "How to Read Gene Wolfe" . What he says is all true, even when it is contradictory.
+Another good article for beginners is Matthew Keeley's "How Gene Wolfe Starts a Story (and Where to Start Reading His Work)" on Tor.com . It has some insights into interpreting Wolfe and recommendations on whether to start reading.
+While Wolfe's narrators are often unreliable, Wolfe himself is not. He goes more deeply into the heads of his narrators, as narrators, than most writers, and figures out what they would say, rather than what he wants to say. Thus, when encountering a Lupine text, some good questions to begin with are, "Who is telling this story, and when? Why are they telling it, and to whom?" The answers to these questions may not be obvious, or, if it is, the obvious answers are probably wrong.
+Apparent contradictions are often useful hints that the narrator is concealing something. (Once in a while, they result from typographic errors that get past all the copyediting stages.) If X contradicts Y, ask yourself which one the narrator would prefer to be true, and why the narrator would cover up the other.
+Similarly, though Wolfe frequently plays games with the reader, he plays them fairly. Wolfe has said that he doesn't give the important information twice, because he feels his intelligence insulted when other writers do so. The information you need is always there -- but it might not be where you expect it to be.
+If the information you need isn't there, you're probably attacking the wrong question.
+Look up the words you don't understand. Some of them aren't in most dictionaries. Eventually this wiki will have a guide to a lot of those words.
+ Page last modified on November 17, 2017, at 08:55 PM 
+ ▲ Top ▲ 
+ Search 
+ Recent Changes 
+ All Recent Changes 
+ -->
+function:RenderStopWatch 

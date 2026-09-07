@@ -1,0 +1,179 @@
+ Quagmire!. The Making of a 1980's D&D Module | by Jon Peterson | Medium Sitemap 
+ Open in app Sign up 
+ Sign in 
+
+ Medium Logo 
+
+ Write
+
+ Search 
+
+ Sign up 
+ Sign in 
+
+ Quagmire!
+
+ Jon Peterson 
+
+ 16 min read · 
+ Dec 29, 2014 
+
+ -- 
+
+ 2 
+
+ Listen
+
+ Share
+
+ The Making of a 1980's D&D Module
+ Jon Peterson (author of Playing at the World ) 
+ Press enter or click to view image in full size 
+
+ From the mid-1970s onward, players of the game Dungeons & Dragons could purchase pre-written adventures called “modules” from the game’s publisher, TSR. As examples of proper dungeon design, or sources of inspiration, or simply as collectibles, these products rapidly grew into a lucrative business. Modules paved the way for computer role-playing games, some of which directly adapted these tabletop adventures.
+ Module design began with tournament play, following prominent examples like Gary Gygax’s famous “Tomb of Horrors” for the 1975 Origins convention tournament, which TSR would later package as a module coded “S1.” Later adventurers fighting giants (in modules G1-G3) or drow (in modules D1-D3) followed in the footsteps of tournament players in the summer of 1978. TSR also accepted freelance module submissions: they were impressed enough with Lawrence Schick’s “White Plume Mountain” to not only accept it for publication but also to hire its author as one of their earliest staff designers.
+ By 1982, TSR employed a growing stable of designers, and dreaming up new modules was among their core responsibilities. But while the module design process became standardized, the resulting bureaucracy could introduce stultifying delays. Tracing one detailed example of the in-house design and development behind these adventures reveals the strengths and limitations of TSR’s day-to-day operations at the height of its powers.
+ Press enter or click to view image in full size 
+
+ At the end of June 1982, the manager of TSR’s design department, Allen Hammack, sent out a memo to his staff requiring everyone to produce a number of “briefs” for new ideas across all of the major product lines. Each brief would consist of a single-page form pitching the name and description of a new product: going down the topic checklist, almost all were game adventure modules, with many slated for versions of Dungeons & Dragons .
+ The recipients of this memo included many prominent designers then working at TSR, the likes of Tracy Hickman (of Dragonlance fame), Zeb Cook (who would go on to lead the 2nd edition Dungeons & Dragons design), and Jeff Grubb (later author of the Manual of the Planes ), to name just a few.
+ Press enter or click to view image in full size 
+
+ Random Events
+ On the bottom middle in the picture above sits Merle Rasmussen. Merle had joined the design team a few weeks before Hammack’s memo circulated, but he was already noteworthy as the designer of an espionage role-playing game TSR previously published as a freelance submission: Top Secret (1980). Although not primarily a fantasy game designer, Merle produced the requisite briefs for Dungeons & Dragons modules, including two for the Expert game, which he delivered on July 23. One would eventually become a module—but only after two years in a process quagmire, affectionately divided below into nine levels of development hell.
+ Development Hell Level 1: Creative Approval 
+ TSR went through several iterations of the one-page “brief” form in the 1980s. While most earlier briefs were written longhand, by the summer of 1982 many examples, like Merle’s two briefs for Expert modules shown below, were typed into TSR’s new HP3000 computer system, which would remain in use into the mid-1990s. The design staff then favored authoring with an HP text editor called EDIT2, though most internal reviewers still edited on printouts rather than accessing documents on the computer.
+ The first hurdle a brief had to pass was a review by the creative staff.
+ Press enter or click to view image in full size 
+
+ All briefs submitted through the process, such as this first example, the “Frozen Burial Mounds of the Southmarch,” were vetted personally by Gary Gygax: in pencil, at the top, Gary has written a noncommittal “Ok.” In red ink, to the right of Gary’s comment, Frank Mentzer recommends that the module be renamed, but also gives it an “Ok.” In blue ink, a third hand has complained “no hooks urgency” — this likely comes from Harold Johnson.
+ Gary and Frank were not at the time directly attached to the TSR design staff: in 1982, Gary was President of TSR Hobbies, and Frank worked for him directly under the rubric of “Special Projects,” while the design staff reported up through Brian Blume. Despite this arrangement, creative approval over new products still clearly began with Gary at this time. In other surviving briefs, we can see Gary providing expressions of enthusiasm (“Excellent!”), or doubt (“?” was often his only comment), or sometimes dismissal (“KO” for “knock out,” sometimes following an initial “?”).
+ Press enter or click to view image in full size 
+
+ The second brief Merle produced for Expert modules was titled “Quagmire of the Swamp King.” The premise has the Swamp King “searching for adventurers to chart his kingdom so safe navigation by ship can occur,” which Merle promises will help to teach players mapping skills. This photocopy kept by Merle does not preserve comments from Gary and Frank, but the proposal met with their approval and was scheduled for development.
+ Then the paper trail ends, for a time. With around a dozen designers each tasked to produce 36 briefs, it must have taken Gary and his staff some time to give all the submissions due consideration—surely this contributed to the brevity of Gary’s responses. But the fall of 1982 also marked an important transition point for TSR: Gary began phasing himself out of a central creative capacity at this point, as his interests turned towards media projects. Also, most of TSR staff, including the designers, relocated to the company’s new facility on Sheridan Springs road in Lake Geneva before the end of the year, the planning and execution of which must have slowed down work considerably.
+ Development Hell Level 2: Marketing Approval 
+ Scarcely a week after the designers moved to Sheridan Springs in early November, the head of marketing, TSR Executive Vice President Will Niebling, left the company. This undoubtedly compounded any delays, as marketing approval was required to move forward on the briefs. The resulting logjam would only be resolved after the New Year.
+ Press enter or click to view image in full size 
+
+ In March 1983, Allen Hammack returned to the design staff to explain how “the Product Managers had a marathon meeting with Kevin a few weeks ago to help clear up the backlog of briefs.” With the exit of Niebling as the head of marketing, it was then his former boss Kevin Blume who had to assess the commercial potential of each proposal. Dissatisfied with lack of hooks in the briefs, Kevin asked that the design staff “SELL the brief to him!”
+ The “Quagmire of the Swamp King” brief still had some traction internally. On April 14, marketing met with Harold Johnson and signed off on the project, though with some “to-do” notes for the designer. Merle Rasmussen dutifully returned to the brief, and within a month he produced a new version.
+ Press enter or click to view image in full size 
+
+ This time, rather than type up his brief on the computer, Merle wrote it by hand on a form. He first shortened the name to “Quagmire.” But more significantly, the purpose of the adventure is no longer cartographical improvements. Now there is urgency: the “rock of the Swamp King will sink into oblivion” shortly, “when the moon rises again.” Characters must help the kingdom’s people find dry land, or even better, civilization.
+ Under the name of “Quagmire” (though often listed on forms with the longer former title crossed out) the new proposal continued through TSR’s approval process. While other modules of the time underwent a detailed finance review with an analysis of potential profit, this proposal seems to have advanced without one—and thus it perhaps skipped a further level of development hell.
+ Press enter or click to view image in full size 
+
+ This worksheet served as the final documentation of internal approval within TSR. Gary had already given creative approval. The authorization signature at the bottom is the “B2" initials of Brian Blume dated June 21, and his brother Kevin (as “KBB”) has indicated his own approval in the margin. That was probably necessary because soon after Brian approved “Quagmire,” TSR underwent a series of significant organizational changes.
+ Development Hell Level 3: Reorganization Paralysis 
+ It is surely no coincidence that Brian signed off on the “Quagmire” brief, as well as many others, only three days before TSR Hobbies, Inc. reorganized into four separate companies. As of June 1983, Gary was no longer President of TSR: he would run a new entertainment division. Brian headed a ventures division, and Kevin took over the core games business that now went by the name TSR, Inc. Probably Brian was tying up loose ends before the transition.
+ This upheaval resulted from the significant cash flow problems of the company, which had recently registered its first loss. Kevin needed to reduce corporate expenses drastically, and thus embarked on a grueling campaign of layoffs over the next year. The constant employee turnover and staff reductions took a heavy toll on development efforts, though the design department would remain largely unscathed until the following April. But creative staff did not work in a vacuum, and the pressures on the organization surely slowed ongoing design.
+ Development Hell Level 4: Scheduling 
+ Design staff was not sitting idle waiting for executive approvals: in the summer of 1983, Merle was responsible for editing the Boot Hill module Range War ( BH5). TSR did not like their design staff to write multiple projects in parallel: they very much preferred serializing short sprints of development. However, at the same time that Brian signed off on the “Quagmire” brief, he also approved a slew of others, including Merle’s proposal “Lathan’s Gold” (originally titled, “Land Ho!”) for an Expert Dungeons & Dragons solo module. Prioritization decisions thus needed to be made.
+ Press enter or click to view image in full size 
+
+ It turned out that “Lathan’s Gold” went first. Development on that module began in August, on a roughly three-month timeline which inevitably slipped by a few weeks in practice. As this memo shows, the process for developing a module involved far more than just the author: there were busy editors, illustrators, and layout staff whose availability had to be scheduled as well. Ultimately, Lathan’s Gold (XSOLO) would come out in 1984.
+ After Lathan’s Gold , Merle had another solo module in the pipeline: the Basic Dungeons & Dragons product Ghost of Lion Castle (BSOLO), for which he turned in a manuscript around December 8. “Quagmire” thus waited its turn behind these other projects for nearly six months.
+ Development Hell Level 5: Design Crunch Time 
+ Once the Ghost of Lion Castle went to Frank Mentzer for consultation, the time for “Quagmire” had come. For all product design at this time, TSR tracked progress with a “Calendar of Work.”
+ Press enter or click to view image in full size 
+
+ This calendar shows development extending from mid-December to early February, with a week of vacation for Merle in January. Tim Kilpin is now attached as an editor, and Ruth Hoyer will lay the module out. Note that a product code “(X6?)” has tentatively been assigned. Every Thursday afternoon is set aside for a half-day of product playtesting. One quarter of the text is due on Monday January 16, and then another quarter that Wednesday.
+ The entire rough draft is slated for completion on February 3. 1984. For a group management design team meeting on Wednesday, December 28, Merle wrote up a description of the goals of the project.
+ Press enter or click to view image in full size 
+
+ Here we get our best insight to date into the actual content of the developing module. The ultimate objective remains to help the inhabitants of a sinking city find a new home, but we learn for the first time that “Quagmire” is intended to expand the “known world” of D&D (later “Mystara”). Where previously, the recommended adventurer levels had been given as 6–10, now they are listed as 4–10, and specific party constitutions are suggested.
+ Per the calendar, two important pieces of outline material were due the following week on January 4: the section breakdown and storyboard.
+ Press enter or click to view image in full size 
+
+ The section breakdown worksheet accompanies a plot summary: in it, we see more references to the known world, including the Isle of Dread (the subject of the first Expert module). The sections themselves are measured both by page count and by line count: the lines in question reflect the total number of lines in the HP3000 EDIT2 program. The values Merle filled in are projections—to the side, we can see some actual figures from the design process.
+ At this juncture, preliminary work on the layout also began. TSR modules produced in the early 1980s usually followed a standard 32-page design with a folding 3-panel outer cover. The “Quagmire” project called for one perforated panel on the cover which could be cut off as a handout for players. For every module, the first step in layout was a storyboard showing how those pages would eventually be filled; staff would iterate the storyboard repeatedly as section lengths and organization became clearer.
+ Press enter or click to view image in full size 
+
+ Development Hell Level 6: Maps and Illustrations 
+ During the design process, naturally Merle needed draft maps to illustrate key locations. Maps and handouts are listed as due on January 20 on the calendar. As “Quagmire” neared publication, Diesel LaForce would redraw all the maps in the standard TSR style, but the first drafts come from Merle.
+ Press enter or click to view image in full size 
+
+ The key location in “Quagmire” is the Spiral City, the 13-level structure that is slowly sinking into the bog. In the storyboard above, it is given a full page (18) in the layout of the module, and is one of four map pages marked for use by the Dungeon Master only. Merle’s own illustration of the Spiral City on graph paper was transcribed faithful by Diesel, keeping the same water levels and retaining the designation that the Spiral City view is the fourth map. The spiral center staircase is clearer in the published version.
+ In addition to the maps intended for the Dungeon Master, there was also one “in-character” area map for the players accompanying a letter from the Swamp King. Merle drew it on a pair of index cards which he then taped together. A half-page placeholder for this map can be seen in the storyboard above, on the third panel of the inside cover.
+ Press enter or click to view image in full size 
+
+ For the published version, TSR removed the names of cities from the map, including familiar “known world” places like Ierendi, as well as some of the smaller islands. Even the pointer to the Spiral City of Quagmire itself is withheld from the players.
+ No Dungeons & Dragons module would be complete without dramatic interior art. Jeffrey Butler produced a number of large artworks for “Quagmire,” though their eventual locations in the module do not entirely match the early storyboard above. During development, the Ohio Graphic Arts Systems printed proofs of these illustrations in large format for review by TSR.
+ Press enter or click to view image in full size 
+
+ This illustration ultimately covered one third of page 28 of the published module.
+ Development Hell Level 7: Rough Draft Consultation 
+ Press enter or click to view image in full size 
+
+ The product calendar aimed to complete the rough draft on February 3, and the draft that survives from the editing cycle bears dates ranging between Februrary 3 and 16—the product delivered more or less on schedule. Draft product text printed out from the HP3000 at TSR always shows the line numbers on the left hand, as these translated easily into lines of the eventual product. This cover page largely shows boilerplate text.
+ The most thorough review of the text came in the consultation from Frank Mentzer—at this stage, Gary Gygax played little role in everyday creative matters. As the current shepherd of Basic Dungeons & Dragons and its expansions (Expert, Companions, Masters, and Immortals, collectively “BECMI”), Frank held responsibility for making sure modules for these product lines exercised the system consistently and met with quality expectations.
+ Press enter or click to view image in full size 
+
+ Frank’s redline review of the “Quagmire” rough draft contains a number of minor recommended fixes as well as summary comments on the side, signed with his initial. He stresses that the draft contains some “neat places” and “good design ideas,” but he is concerned that the text is “obviously padded” and “extremely repetitive.” He can only wonder if there was a “time crunch?” He suggests that the text be revised before publication.
+ In places where Frank had concerns about points of system, he could provide far more detailed and blunt feedback to improve products—though his investment of significant effort was more likely a token of friendship than a sign of censure. In “Quagmire,” he was especially concerned about the pre-generated characters provided: all are drawn from the prior TSR product The Shady Dragon Inn , though with some discrepancies in presentation and description.
+ Press enter or click to view image in full size 
+
+ The proposed pregenerated party, Frank notes, actually has an “evil orientation” with 3 Chaotics. Harold Forkbeard’s “broadsword” is “not in system” for Expert, as Frank well knows. He complains that in character descriptions, “Dexterity” and “Constitution” are not given in the order they appear on character sheets. Constructions like “Patriarch Cleric” are redundant, he maintains, as in “female girl.” He makes numerous other small fixes and suggestions.
+ These corrections ultimately made it into the published module: Harold’s broadsword has vanished, and “Dexterity” appears in its proper order. Much of the detail which troubled Frank, including the saving throw notation and the flavor text, simply did not make the final cut. At the conclusion of the consultation process, Frank penned a quick executive summary which explains his overall position on the draft module.
+ Press enter or click to view image in full size 
+
+ It dates to February 22, a rapid turn-around on his review given when the draft was printed. He calls “Quagmire” a “paradox,” a mix of good and bad. It is clear from the tone of the note that Frank does not intended to block publication: he deems it is “technically OK, but needs work.” That his “consultation” resulted in significant changes illustrates how, despite the reorganization the year before that moved Gary and Frank out of TSR Inc., they continued to have meaningful oversight over its creative development.
+ Development Hell Level 8: The Proof 
+ The final step before publication was the printing of a mock-up proof of the module to catch any final proofreading errors or typesetting problems. The layout conformed to the style guide set by product standards. Every TSR module had a product standards sheet which listed all of the styles, typesizes, margins and related layout decisions associated with the product.
+ Press enter or click to view image in full size 
+
+ The “Quagmire” product standards sheet still lists the code “(X6?)” tentatively. Per the storyboard, it calls for 4 half-page illustrations and a single quarter-page illustration, along with key art for chapter headings. Baskerville was then the typeface of choice for TSR. While the cover painting artist had not yet been selected, the product standards suggests a theme: a “swampy, misty, foggy, overhanging jungle surrounding a party of explorers.”
+ These instructions, along with the rough draft text, could now finally be implemented as a proof. The proof typically did not contain illustrations, or even the display fonts for key headers, it just trialed a typeset layout of the text which would slightly resemble the final version of the product.
+ Press enter or click to view image in full size 
+
+ This page of the proof, for example, crams in the text that appears on both the cover and the back of the published version of “Quagmire.” There are only a few lines of text on the front: the module’s code and the name of its author, as well as a few sentences of flavor text eventually to appear below the cover illustration. Not even the module name is given. On the back, we again note the lack of the title, though the bulk of the jacket text is final.
+ If the proof bore little resemblance to the final product, what was it good for? It provided a way to spot errors in the typesetting process before integration with the final layout.
+ Press enter or click to view image in full size 
+
+ For example, this “High Seas” passage appears in the final layout on page 13, not page 10, and Table 9 doesn’t show up until page 14. But this rendition allows the layout staff to identify errors in their typesetting that need to be fixed. In entry 5 of Table 9, the words “the characters” have lost the space between them. Entry 9 of that table also shows a place where a stray carriage return or an error in justification has prematurely truncated a line.
+ Once these problems were resolved, the illustrations and maps could be integrated in with the text for the final layout. This resulted in the published module.
+ Development Hell Level 9: The Release 
+ After two years in development, Merle’s brief for the “Quagmire of the Swamp King” became Quagmire! (X6). Steve Peregrine painted the cover image for the module, and it does have many of the elements suggested by the product standards sheet, including how “vines and snakes hang from the trees,” though it omits any “glowing eyes” which peer at the adventurers through the “dark foliage.”
+ Press enter or click to view image in full size 
+
+ The cover of the finished product reveals some limitations of the proofing process. Note that the final sentence of the flavor text below Peregrine’s painting states, “But who are these creatures that want you to fall?” Above, in the proof, the same sentence more plausibly reads, “But who are these creatures that want you to fail ?” The back cover drops the third paragraph shown in the proof, which references the “spiral cities” of the region.
+ Why should the release constitute another level of development hell, rather than a cause for celebration? Ironically, before Quagmire! came out, Merle Rasmussen was himself released from TSR in a mass layoff announced on April 3, 1984: a “day that will live in infamy” as Jim Ward deemed it and veterans of the time remember it. Merle had been on staff for just 22 months, and for virtually that entire time Quagmire! was in development.
+ By 1985, TSR had reduced payroll to less than one third of its 1983 peak. The elimination of much of the design staff opened the door to freelance module publications: Dungeons & Dragons co-creator Dave Arneson’s Blackmoor-based “DA” module series commenced at this time. Merle Rasmussen continued to publish modules as a freelancer: for example, he wrote the Savage Coast (X9) along with his wife Jackie. But as he knew from the development hell that preceded the publication of Top Secret in 1980, the freelance situation could also be a quagmire.
+ The author would like to thank Merle Rasmussen, Frank Mentzer and Jeff Grubb for their help with this piece. For more by Jon Peterson, see the Playing at the World blog , or his other pieces on Medium, including the “ Ambush at Sheridan Springs ” and the “ First Female Gamers .” 
+
+ -- 
+
+ -- 
+
+ 2 
+
+ Written by Jon Peterson 
+ 364 followers 
+ · 28 following 
+
+ Responses ( 2 )
+
+ See all responses 
+
+ Help
+
+ Status
+
+ About
+
+ Careers
+
+ Press
+
+ Blog
+
+ Privacy
+
+ Rules
+
+ Terms
+
+ Text to speech
+
+ 

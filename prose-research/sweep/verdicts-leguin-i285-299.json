@@ -1,0 +1,233 @@
+{
+ "name": "leguin",
+ "chunk": 16,
+ "claims": [
+  {
+   "index": 285,
+   "feature": "omission as information",
+   "claim": "Le Guin says that in describing an invented world you have to leave out an enormous amount, and that the leaving-out is half the art.",
+   "source": "Ursula K. Le Guin, interviewed by John Plotz, 'The Story's Where I Go', Public Books, 15 June 2015",
+   "url": "https://www.publicbooks.org/the-storys-where-i-go-an-interview-with-ursula-k-le-guin/",
+   "quote": "the leaving-out is half the art",
+   "page": "section I, 'Names Come First with Me'"
+  },
+  {
+   "index": 286,
+   "feature": "place and institution description",
+   "claim": "Le Guin says that with an invented world you have to describe more than a realist does.",
+   "source": "Ursula K. Le Guin, interviewed by John Plotz, 'The Story's Where I Go', Public Books, 15 June 2015",
+   "url": "https://www.publicbooks.org/the-storys-where-i-go-an-interview-with-ursula-k-le-guin/",
+   "quote": "you have to describe more than a realist does",
+   "page": "section I, 'Names Come First with Me'"
+  },
+  {
+   "index": 287,
+   "feature": "withheld information and inference",
+   "claim": "Le Guin praises Tolkien for telling the reader where they are and what the weather is and leaving the rest up to the reader.",
+   "source": "Ursula K. Le Guin, interviewed by John Plotz, 'The Story's Where I Go', Public Books, 15 June 2015",
+   "url": "https://www.publicbooks.org/the-storys-where-i-go-an-interview-with-ursula-k-le-guin/",
+   "quote": "You know where you are, you know what the weather is",
+   "page": "section I, 'Names Come First with Me'"
+  },
+  {
+   "index": 288,
+   "feature": "naming and forms of address",
+   "claim": "Le Guin says names come first with her and that she cannot write about a character who does not have the right name.",
+   "source": "Ursula K. Le Guin, interviewed by John Plotz, 'The Story's Where I Go', Public Books, 15 June 2015",
+   "url": "https://www.publicbooks.org/the-storys-where-i-go-an-interview-with-ursula-k-le-guin/",
+   "quote": "Names come first with me.",
+   "page": "section I, 'Names Come First with Me'"
+  },
+  {
+   "index": 289,
+   "feature": "translation and register",
+   "claim": "Le Guin says Angelica Gorodischer's Kalpa Imperial is written in very simple, pure Spanish because the pieces are storyteller's stories.",
+   "source": "Ursula K. Le Guin, interviewed by Euan Monaghan, Literary Hub, 1 April 2016",
+   "url": "https://lithub.com/ursula-k-le-guin-on-racism-anarchy-and-hearing-her-characters-speak/",
+   "quote": "very simple, pure Spanish, because they’re storyteller’s stories",
+   "page": "closing section on translation"
+  },
+  {
+   "index": 290,
+   "feature": "civic record register",
+   "claim": "Le Guin describes her story 'The Matter of Seggri' as a compendium of reports on a world written by various observers over many years, taken from the archives of the Historians of Hain.",
+   "source": "Ursula K. Le Guin, Foreword to The Birthday of the World",
+   "url": "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+   "quote": "a compendium of reports on the society of a world",
+   "page": "foreword, paragraph on 'The Matter of Seggri'"
+  },
+  {
+   "index": 291,
+   "feature": "annalist voice and deep time",
+   "claim": "Le Guin says the history of her invented Hainish universe consists largely of gaps.",
+   "source": "Ursula K. Le Guin, Foreword to The Birthday of the World",
+   "url": "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+   "quote": "its history consists largely of gaps",
+   "page": "foreword, second paragraph"
+  },
+  {
+   "index": 292,
+   "feature": "other: linked-story form",
+   "claim": "Le Guin argues that a book of stories linked by place, characters, theme and movement is a real form, which she proposes calling a story suite.",
+   "source": "Ursula K. Le Guin, Foreword to The Birthday of the World",
+   "url": "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+   "quote": "linked by place, characters, theme, and movement",
+   "page": "foreword, paragraph on Four Ways to Forgiveness"
+  },
+  {
+   "index": 293,
+   "feature": "other: meaning is not a message",
+   "claim": "Le Guin says the meaning of a story may lie in the language itself and in the movement of the story as read, rather than in a tidy bit of advice.",
+   "source": "Ursula K. Le Guin, 'A Message About Messages', first published by CBC Magazine, 2005",
+   "url": "https://www.ursulakleguin.com/message-about-messages",
+   "quote": "in the language itself, in the movement of the story as read",
+   "page": "body, second paragraph"
+  },
+  {
+   "index": 294,
+   "feature": "place and institution description",
+   "claim": "Le Guin says a fantastic setting requires vivid and specific description, and that while characters may lose touch with their reality the storyteller cannot.",
+   "source": "Ursula K. Le Guin, blog 95, 'Are they going to say this is fantasy?', 2 March 2015",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "quote": "A fantastic setting requires vivid and specific description",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 295,
+   "feature": "place and institution description",
+   "claim": "Le Guin says a toneless, inexact language is incapable of creating landscape, meaningful relationship or credible event.",
+   "source": "Ursula K. Le Guin, blog 95, 'Are they going to say this is fantasy?', 2 March 2015",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "quote": "A toneless, inexact language is incapable of creating landscape",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 296,
+   "feature": "place and institution description",
+   "claim": "Le Guin says the imaginary must be imagined accurately and with scrupulous consistency.",
+   "source": "Ursula K. Le Guin, blog 95, 'Are they going to say this is fantasy?', 2 March 2015",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "quote": "accurately and with scrupulous consistency",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 297,
+   "feature": "place and institution description",
+   "claim": "Le Guin says a generic landscape and vague perceptions must be brought to life by the language of the telling, since the whole thing is made out of words.",
+   "source": "Ursula K. Le Guin, blog 95, 'Are they going to say this is fantasy?', 2 March 2015",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "quote": "must be brought to life by the language of the telling",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 298,
+   "feature": "naming and forms of address",
+   "claim": "Le Guin names as a fault of The Buried Giant that a character never once forgets to address his wife as 'princess', and says she came to wish he would.",
+   "source": "Ursula K. Le Guin, blog 95, 'Are they going to say this is fantasy?', 2 March 2015",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "quote": "forgets to address his wife as “princess”",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 299,
+   "feature": "place and institution description",
+   "claim": "Le Guin praises William Alexander's Goblin Secrets for the unlabored imaginative authority and completeness of its setting and for the fine, vivid English it is written in.",
+   "source": "Ursula K. Le Guin, blog 52, 'Some Recent Fantasies', 21 May 2012",
+   "url": "https://www.ursulakleguin.com/blog/52-some-recent-fantasies",
+   "quote": "unlabored imaginative authority and completeness of its setting",
+   "page": "paragraph on Goblin Secrets"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 285,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Of course, you have to leave out an enormous amount, too, and the leaving-out is half the art.",
+   "note": "Public Books interview fetched raw (curl, browser UA, HTTP 200). Section I 'Names Come First with Me'. Full sentence on page: 'With an invented world, though, you have to describe more than a realist does. Of course, you have to leave out an enormous amount, too, and the leaving-out is half the art.' Quote string is character-exact; both limbs (invented world; leaving-out is half the art) supported."
+  },
+  {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "With an invented world, though, you have to describe more than a realist does.",
+   "note": "Same raw page, section I. Quote character-exact within that sentence; the claim adds nothing beyond it."
+  },
+  {
+   "index": 287,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You know where you are, you know what the weather is, from what direction the wind's blowing.",
+   "note": "Same raw page, section I. Context: 'Tolkien is really such a master there. You know where you are, you know what the weather is, from what direction the wind's blowing. He tells you what he can about it - but the rest of it's up to you.' Praise of Tolkien, the weather limb and the rest-is-up-to-the-reader limb all present."
+  },
+  {
+   "index": 288,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Names come first with me. I can't write about a character if he or she doesn't have a name. The right name.",
+   "note": "Same raw page, section I, in reply to Plotz's question about island names. Quote character-exact; the 'right name' limb is the next sentence."
+  },
+  {
+   "index": 289,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "those are in very simple, pure Spanish, because they're storyteller's stories",
+   "note": "Lit Hub page fetched raw (HTTP 200); byline 'Euan Monaghan', dated 'April 1, 2016' on the page. Full context: 'And my translation of Angelica Gorodischer, the Kalpa Imperial, I knew very little Spanish then, but those are in very simple, pure Spanish, because they're storyteller's stories, and I could work through them with the dictionary.' Quote character-exact."
+  },
+  {
+   "index": 290,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'The Matter of Seggri' is a compendium of reports on the society of a world called Seggri written by various observers over a period of many years.",
+   "note": "ursulakleguin.com foreword fetched raw (HTTP 200). Next sentence: 'These documents are from the archives of the Historians of Hain, who are to reports as squirrels are to nuts.' Every limb - various observers, many years, archives of the Historians of Hain - is on the page; quote character-exact."
+  },
+  {
+   "index": 291,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Its Time Line is like something the kitten pulled out of the knitting basket, and its history consists largely of gaps.",
+   "note": "Same raw foreword; verified it sits in body paragraph 2 by parsing the page's <p> elements, matching the cited page locator. Nuance recorded, not a deduction: on the page she reports that others call it 'the Hainish Universe' while she calls it the Ekumen - the referent of 'its' is that same invented universe, so the claim's wording is accurate."
+  },
+  {
+   "index": 292,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a book of stories linked by place, characters, theme, and movement, so as to form, not a novel, but a whole",
+   "note": "Same raw foreword, paragraph on 'Old Music and the Slave Women' / Four Ways to Forgiveness. Later in the same paragraph: 'It is a real form, and deserves a real name. Maybe we could call it a story suite? I think I will.' Both the real-form limb and the proposed name are present; quote character-exact."
+  },
+  {
+   "index": 293,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the meaning of the story might lie in the language itself, in the movement of the story as read, in an inexpressible sense of discovery, rather than a tidy bit of advice",
+   "note": "ursulakleguin.com 'A Message about Messages' fetched raw (HTTP 200); page footer confirms 'first published by CBC Magazine, 2005'. Quote character-exact. Framing nuance: Le Guin puts it as a rhetorical question to reviewers ('Does it ever occur to such reviewers that...'), which asserts the position rather than merely asking; 'may lie' in the claim tracks 'might lie' on the page, and the 'rather than a tidy bit of advice' limb is verbatim."
+  },
+  {
+   "index": 294,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A fantastic setting requires vivid and specific description; while characters may lose touch with their reality, the storyteller can't.",
+   "note": "ursulakleguin.com blog 95 fetched raw (HTTP 200), signed '- UKL 2 March 2015'. The sentence sits in body paragraph 3, matching the cited locator. Quote character-exact; both limbs are the two halves of one sentence."
+  },
+  {
+   "index": 295,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A toneless, inexact language is incapable of creating landscape, meaningful relationship, or credible event.",
+   "note": "Same raw blog 95 paragraph 3. Quote character-exact and the claim reproduces the whole sentence, including all three of landscape, meaningful relationship, credible event."
+  },
+  {
+   "index": 296,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The imaginary must be imagined, accurately and with scrupulous consistency.",
+   "note": "Same raw blog 95 paragraph 3. Quote character-exact ('accurately and with scrupulous consistency'); the 'imaginary must be imagined' limb is the same sentence, with 'be imagined' italicised on the page."
+  },
+  {
+   "index": 297,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But so generic a landscape and such vague, elusive perceptions must be brought to life by the language of the telling. The whole thing is made out of words, after all.",
+   "note": "Same raw blog 95 paragraph 3. Quote character-exact; the 'made out of words' limb is the immediately following sentence."
+  },
+  {
+   "index": 298,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "how is it that Axl never, ever, not once, forgets to address his wife as “princess”? I came to wish very much that he would.",
+   "note": "Same raw blog 95 paragraph 3, in her criticism of Ishiguro's The Buried Giant. Quote character-exact including the curly quotation marks around princess; the named character is Axl, the wife Beatrice, and the wish limb is the next sentence."
+  },
+  {
+   "index": 299,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is outstanding... for the unlabored imaginative authority and completeness of its setting, and for the fine, vivid English it's written in",
+   "note": "ursulakleguin.com blog 52 fetched raw (HTTP 200); page headed '52. Some Recent Fantasies', signed '- UKL 21 May 2012'. Both limbs of the claim are the two halves of that clause about Goblin Secrets by William Alexander; quote character-exact."
+  }
+ ]
+}

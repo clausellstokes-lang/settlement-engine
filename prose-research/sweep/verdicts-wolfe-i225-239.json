@@ -1,0 +1,234 @@
+{
+ "name": "wolfe",
+ "chunk": 15,
+ "claims": [
+  {
+   "index": 225,
+   "feature": "per-speaker register",
+   "claim": "Wolfe says an intelligent reader can tell who spoke from what was said, without a speech tag.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express vol. 5 no. 1, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "knows who said that from what was said",
+   "page": "answer on speech patterns"
+  },
+  {
+   "index": 226,
+   "feature": "point of view and distance",
+   "claim": "Wolfe states that once a person inside the story tells the story, that narrator is necessarily unreliable.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "then the narrator is damn well going to be unreliable",
+   "page": "answer on The Fifth Head of Cerberus"
+  },
+  {
+   "index": 227,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe grounds narrator unreliability in courtroom testimony, where several witnesses all trying to tell the truth have nonetheless seen different things.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "all trying to tell the truth, but they have all seen",
+   "page": "answer on The Fifth Head of Cerberus"
+  },
+  {
+   "index": 228,
+   "feature": "plainness and economy",
+   "claim": "Wolfe says a complex story has to be told in a clear structure, because otherwise it is not complex but merely confused.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "or it isn't complex, it's simply confused",
+   "page": "answer on narrative style"
+  },
+  {
+   "index": 229,
+   "feature": "plainness and economy",
+   "claim": "The interviewer characterises The Book of the Long Sun as told in a straightforward and transparent narrative style despite its complexity, and Wolfe does not dispute the description.",
+   "source": "Lawrence Person, question put to Gene Wolfe in Nova Express vol. 5 no. 1, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "told in a very straightforward and transparent narrative style",
+   "page": "question on narrative style"
+  },
+  {
+   "index": 230,
+   "feature": "archaism",
+   "claim": "Wolfe says he began the Sun books with the deliberate decision not to coin invented proper names.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "the idea of not coining Tars Tarkas type names",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 231,
+   "feature": "archaism",
+   "claim": "Wolfe says the right choice for those books was archaic real names and archaic terms rather than coinages.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "using archaic names and archaic terms for things",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 232,
+   "feature": "archaism",
+   "claim": "Wolfe attaches a condition to his use of archaic terms: they must appear in contexts that make their meaning clear to the reader.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "it will be clear to the reader what is meant",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 233,
+   "feature": "diction (native vs latinate)",
+   "claim": "Wolfe describes his method of sourcing vocabulary as looking up the Latin or Greek word for what he needs and then finding an English word someone had already anglicised from it.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "someone will have anglicized this term as a new word",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 234,
+   "feature": "naming and forms of address",
+   "claim": "Wolfe praises Avram Davidson for building imaginary countries out of obsolete real place names.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "in using obsolete place names",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 235,
+   "feature": "naming and forms of address",
+   "claim": "Wolfe describes Davidson's place-naming procedure as taking a third-century name and asking what if this place had survived under that name.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "Suppose this place survived as an entity with that name",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 236,
+   "feature": "place and institution description",
+   "claim": "Wolfe argues that a very large city would show great diversity across its neighbourhoods and social levels, and calls the monocultured world of much science fiction laziness.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "diversity among the neighborhoods and social levels",
+   "page": "answer on multiple cultures"
+  },
+  {
+   "index": 237,
+   "feature": "per-speaker register",
+   "claim": "Wolfe observes that in a real city people on different social levels already talk in ways that are almost different languages.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "people are talking in ways that are almost different languages",
+   "page": "answer on multiple cultures"
+  },
+  {
+   "index": 238,
+   "feature": "point of view and distance",
+   "claim": "Wolfe says real people are unreliable narrators all the time even when they are trying to be reliable.",
+   "source": "Gene Wolfe, quoted in Wikipedia's Gene Wolfe article, citing Lawrence Person's Nova Express interview (Fall/Winter 1998)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "Real people really are unreliable narrators all the time",
+   "page": "Style section"
+  },
+  {
+   "index": 239,
+   "feature": "archaism",
+   "claim": "In the appendix to The Shadow of the Torturer Wolfe states that he could have used invented terms but in no case did so.",
+   "source": "Wikipedia relaying Gene Wolfe's appendix to The Shadow of the Torturer (cited as Shadow and Claw, Tor 1994, p. 211)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "in no case have I done so",
+   "page": "Style section"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 225,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "without a speech tag",
+   "trueWording": "reader, if intelligent, knows who said that from what was said",
+   "note": "Quote verbatim: 'And so the reader, if the reader is intelligent, knows who said that from what was said.' Wolfe's answer covers speech patterns ('Spider does not talk like Maytera Mint') and content-based identification, but the page never mentions dialogue tags or their absence; that limb is the claim-writer's extrapolation."
+  },
+  {
+   "index": 226,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "if this person in the story tells it, the narrator is damn well going to be unreliable",
+   "note": "Verbatim on the page, with the antecedent condition intact: 'if the narration is not by an all-knowing, all-seeing author, if you're going to say that this person in the story is going to tell the story, then the narrator is damn well going to be unreliable.' Every limb supported."
+  },
+  {
+   "index": 227,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "five or six witnesses all trying to tell the truth have all seen different things",
+   "note": "Verbatim: 'Ask any courtroom lawyer about examining five or six different witnesses to the same event. The five or six witnesses are all trying to tell the truth, but they have all seen different things, or in some cases think they have seen things that are not in fact there.' Courtroom grounding and the 'seen different things' limb both supported."
+  },
+  {
+   "index": 228,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "almost that it has to be, or it isn't complex, it's simply confused",
+   "note": "Verbatim; answers LP's question 'the more complex the story, the more clear the narrative structure should be?'. Wolfe hedges the first limb slightly ('It's almost that it has to be' rather than a flat 'has to be'), then gives the 10,000-part-machine-in-a-box illustration. Hedge noted, not a defect in the claim."
+  },
+  {
+   "index": 229,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Long Sun, though very complex, is told in a very straightforward and transparent style",
+   "note": "The words are the interviewer's (LP), correctly attributed in the claim's source field. Wolfe's reply — 'It's almost that it has to be, or it isn't complex, it's simply confused' — engages the premise without disputing it, so the 'does not dispute' limb reads true off the page."
+  },
+  {
+   "index": 230,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I started out with the idea of not coining Tars Tarkas type names",
+   "note": "Verbatim, in answer to a question about 'both of the Sun works'; the deliberateness limb is carried by 'I felt in this book I am not going to do that, I don't think it's right for this book.' 'Tars Tarkas type names' is Burroughs-style invented proper names, so the claim's generalisation holds."
+  },
+  {
+   "index": 231,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What's right is using archaic names and archaic terms for things",
+   "note": "Verbatim, and the 'rather than coinages' contrast is explicit in the immediately preceding sentences ('not coining Tars Tarkas type names ... What's right is'). 'Real' is entailed by 'not coined' — he sourced them from the Oxford Unabridged."
+  },
+  {
+   "index": 232,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "for things in connections in which it will be clear to the reader what is meant",
+   "note": "Verbatim; the condition is attached in the same sentence as the archaism endorsement, exactly as the claim says. 'Connections' = contexts."
+  },
+  {
+   "index": 233,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "look up the Latin or Greek word, then assume someone anglicized it",
+   "note": "Verbatim within: 'looking up the Latin word or the Greek word that corresponds to something you need a word for, and then going back to unabridged dictionaries on the assumption that someone will have anglicized this term as a new word.' Both limbs supported."
+  },
+  {
+   "index": 234,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Avram Davidson did wonderful work like that, in using obsolete place names",
+   "note": "Verbatim; the praise limb is doubled ('Davidson was a fine, fine writer') and the imaginary-countries limb is explicit ('funny little European countries that don't actually exist')."
+  },
+  {
+   "index": 235,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "taking a third-century place name: Suppose this place survived as an entity with that name",
+   "note": "Verbatim inside Wolfe's quotation of Davidson's inner procedure: 'he's taking a place name from the third century AD, or something like that, and saying to himself: \"Suppose this place survived as an entity with that name? Here it is.\"'"
+  },
+  {
+   "index": 236,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a great deal of diversity among the neighborhoods and social levels; monoculture is mostly laziness",
+   "note": "Both limbs are in the same GW answer: 'I think it's mostly laziness. Mental sloth more than anything else' replies to LP's question about SF's monocultured worlds, and the city limb is 'if you posit a city that would occupy, say, the eastern half of North America ... a great deal of diversity among the neighborhoods and social levels.'"
+  },
+  {
+   "index": 237,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "on various levels of society, people are talking in ways that are almost different languages already",
+   "note": "Verbatim, prefaced by 'If you look at a big city, you discover that' — the real-city and social-level limbs are both on the page, and 'already' carries the claim's 'already'."
+  },
+  {
+   "index": 238,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Real people really are unreliable narrators all the time, even if they try to be reliable",
+   "note": "Verbatim in the Style section of the live Wikipedia article (raw wikitext via Special:Export, rev 2026-09-02). The 'even when trying to be reliable' limb is the sentence's own tail. Wikipedia cites ref name=PersonInterview = Lawrence Person, 'Suns new, long, and short', Nova Express vol. 5 no. 1, Fall-Winter 1998 — the attribution in the claim is exact, and the sentence also appears verbatim in the interview transcript itself."
+  },
+  {
+   "index": 239,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I might easily have saved myself great labor by invented terms; in no case have I done so",
+   "note": "Verbatim in the Style section blockquote, introduced as 'In the appendix to The Shadow of the Torturer, he says'. The citation is Wolfe, Shadow & Claw, Tor 1994, p. 211, matching the claim's source line. The 'could have used' limb is 'I might easily have saved myself a great deal of labor by having recourse to invented terms'."
+  }
+ ]
+}

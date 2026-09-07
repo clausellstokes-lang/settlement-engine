@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i1183-1197",
+ "lines": 57,
+ "firstTs": "2026-09-07T07:02:59.818Z",
+ "lastTs": "2026-09-07T07:05:17.893Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 11
+ },
+ "urlsFetched": [
+  "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
+  "https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of",
+  "https://www.dndbeyond.com/posts/742-encounter-of-the-week-storm-celebration",
+  "https://www.pcgamer.com/games/gosh-i-think-d-and-ds-finally-done-it-the-2024-dungeon-masters-guide-actually-does-a-decent-job-of-teaching-you-how-to-run-a-game/",
+  "https://lexstarwalker.com/gamemastersjourney/235"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "The D&D Beyond claims all land. Now let me verify the remaining structural limbs — the full table, page dates, section headings, and the Lex contents list.",
+ "run": "wf_43d098bf-eff",
+ "agent": "ab29e8293060665a3",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_43d098bf-eff/agent-ab29e8293060665a3.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i1183-1197.json",
+  "exists": false
+ }
+}

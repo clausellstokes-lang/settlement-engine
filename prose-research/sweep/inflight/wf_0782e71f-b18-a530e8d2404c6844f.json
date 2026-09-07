@@ -1,0 +1,18 @@
+{
+ "role": "regrade",
+ "name": "dnd",
+ "angle": null,
+ "tag": "regrade-r3",
+ "lines": 5,
+ "firstTs": "2026-09-06T09:52:35.756Z",
+ "lastTs": "2026-09-06T09:52:36.060Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 10:10am (America/New_York)",
+ "run": "wf_0782e71f-b18",
+ "agent": "a530e8d2404c6844f",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_0782e71f-b18/agent-a530e8d2404c6844f.jsonl",
+ "journal": "failed",
+ "checkpointFile": null
+}

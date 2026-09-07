@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Verifying your browser…</title>
+    <!-- No-JS visitors are sent to the image captcha automatically. -->
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=/antibot/captcha" />
+    </noscript>
+    <style>
+      :root { color-scheme: light dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; display: grid; place-items: center;
+        font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: #f7f7f8; color: #18181b;
+      }
+      #antibot-ref-id {
+        user-select: all; font-size: .95em; background: #e5e5ea;
+        padding: 2px 6px; border-radius: 4px;
+      }
+      @media (prefers-color-scheme: dark) {
+        body { background: #0b0b0d; color: #e7e7ea; }
+        .card { background: #17171a !important; border-color: #2a2a30 !important; }
+        #antibot-ref-id { background: #2a2a30; }
+      }
+      .card {
+        width: min(92vw, 420px); padding: 2rem; border-radius: 14px;
+        background: #fff; border: 1px solid #e5e5ea; text-align: center;
+        box-shadow: 0 6px 30px rgba(0,0,0,.06);
+      }
+      .spinner {
+        width: 34px; height: 34px; margin: 0 auto 1rem;
+        border: 3px solid currentColor; border-top-color: transparent;
+        border-radius: 50%; animation: spin 0.8s linear infinite; opacity: .6;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      h1 { font-size: 1.15rem; margin: 0 0 .35rem; }
+      p { margin: .25rem 0; opacity: .8; font-size: .95rem; }
+      a { color: inherit; }
+      .email-protection { vertical-align: middle; }
+      #antibot-fallback { margin-top: 1.25rem; font-size: .9rem; }
+      /* The cheapest fix gets the most weight: retrying resolves most failures,
+         so this reads as the primary action rather than one option among three. */
+      #antibot-retry {
+        /* No text-align override: inherit the card's centring so this box reads
+           as part of the same column as the text above and below it. */
+        margin: 1rem 0; padding: .7rem .85rem;
+        border: 1px solid #e5e5ea; border-radius: 8px; background: #f4f7ff;
+      }
+      @media (prefers-color-scheme: dark) {
+        #antibot-retry { background: #14161d; border-color: #2a2a30; }
+      }
+    </style>
+    <script>
+      // Self-host the cap WASM (no external CDN).
+      //
+      // ?v=2 — ONE-TIME cache poisoning escape, not a version knob.
+      // Cache-busting is automatic: the app serves an ETag + Cache-Control:
+      // no-cache, so browsers revalidate and pick up changes on their own, and
+      // that keeps working — this parameter never needs bumping for a normal
+      // deploy. It exists because of a past incident: nginx briefly served the
+      // OLD bundle at these stable URLs still carrying the previous
+      // `Cache-Control: public, max-age=31536000, immutable` header. Every
+      // visitor in that window pinned that copy in their BROWSER cache until
+      // 2027, and `immutable` means they never revalidate — so they kept running
+      // a stale bundle no matter what the server sends (measured: fresh page
+      // loads still POSTing the long-removed "client_timeout"). Server-side
+      // purging cannot reach those entries; changing the URL is the only escape.
+      window.CAP_CUSTOM_WASM_URL =
+        "/antibot/assets/cap_wasm_bg.wasm?v=2";
+    </script>
+    <script>
+      // Resilient image-captcha fallback (plain ES5 — MUST parse on very old
+      // engines: PaleMoon/Goanna, legacy Firefox, etc.). The challenge scripts
+      // below use modern JS (optional chaining, WASM, WebCrypto); a browser that
+      // can't PARSE them just aborts that <script>, <noscript> does NOT fire
+      // (JS is enabled), and the JS-driven fallback never appears — the visitor
+      // is stuck on the spinner. This watchdog runs FIRST and reveals the image
+      // captcha if the challenge errors out or never starts.
+      (function () {
+        var revealed = false, sent = {};
+        // Best-effort telemetry so unsupported browsers are visible in the app's
+        // logging backend. Uses an <img> GET (works on the oldest engines). One
+        // beacon per distinct reason — a stray runtime error must not consume the
+        // slot a genuine parse_error would need. Logged via /antibot/api/client-report.
+        function report(reason, e) {
+          if (sent[reason]) return;
+          sent[reason] = true;
+          try {
+            var q = "reason=" + reason + "&t=" + (+new Date());
+            // Without the message we cannot tell a SyntaxError in our own bundle
+            // from an extension throwing on an unrelated script — which is what
+            // made this signal unreadable before.
+            if (e) {
+              if (e.message) q += "&msg=" + encodeURIComponent(String(e.message).slice(0, 200));
+              if (e.filename) q += "&file=" + encodeURIComponent(String(e.filename).slice(0, 200));
+              if (e.lineno) q += "&line=" + encodeURIComponent(String(e.lineno));
+            }
+            new Image().src = "/antibot/api/client-report?" + q;
+          } catch (err) { /* best effort */ }
+        }
+        function reveal(msg) {
+          if (revealed) return;
+          revealed = true;
+          var fb = document.getElementById("antibot-fallback");
+          if (fb) fb.hidden = false;
+          var link = document.getElementById("antibot-captcha-link");
+          if (link) {
+            link.href = "/antibot/captcha?redirect=" +
+              encodeURIComponent(location.pathname + location.search);
+          }
+          // href="" resolves to the current document, so the link reloads even
+          // on engines too old to have run the module bundle. Setting it
+          // explicitly keeps the query string and drops any fragment.
+          var rl = document.getElementById("antibot-reload");
+          if (rl) rl.href = location.pathname + location.search;
+          var info = document.getElementById("antibot-info");
+          if (info) info.style.display = "none";
+          var st = document.getElementById("antibot-status");
+          if (st && msg) st.textContent = msg;
+        }
+        window.__antibotReveal = reveal;
+        // Is this error from a script WE serve, or from someone else's?
+        // Same-origin scripts report a real filename; extension content scripts
+        // report moz-extension://… / chrome-extension://…, and cross-origin ones
+        // report "" with the message "Script error.".
+        function isOurScript(f) {
+          return typeof f === "string" && f.indexOf("/antibot/assets/") !== -1;
+        }
+        // Registered before the challenge scripts load, so it catches their
+        // parse/runtime errors. e.message is present for script errors and
+        // absent for resource-load failures, so unrelated 404s don't trigger it.
+        //
+        // Only OUR scripts failing is fatal. This used to reveal the captcha on
+        // any uncaught error, which was wrong: window.onerror is global, so an
+        // extension or an unrelated inline script throwing anywhere on the page
+        // tripped it. Measured over 24h, 63 of 93 visitors reported "parse_error"
+        // and then passed the JS challenge normally — they were shown "your
+        // browser couldn't run the automatic check" while it was, in fact,
+        // running. Errors from elsewhere are still reported (as script_error) so
+        // they stay visible, but they no longer derail a working challenge.
+        // A bundle that genuinely cannot parse is still covered twice: its own
+        // filename lands here, and the not_started backstop below catches the rest.
+        window.addEventListener("error", function (e) {
+          if (!e || !e.message) return;
+          var fatal = isOurScript(e.filename);
+          report(fatal ? "parse_error" : "script_error", e);
+          if (fatal) {
+            reveal("Your browser couldn't run the automatic check — please solve an image challenge instead.");
+          }
+        }, true);
+        // Backstop: the challenge module sets window.__antibotStarted the moment
+        // it runs. If that hasn't happened a few seconds after load, the bundle
+        // never parsed/started — offer the fallback.
+        setTimeout(function () {
+          if (!window.__antibotStarted) {
+            report("not_started");
+            reveal("This is taking longer than expected — you can solve an image challenge instead.");
+          }
+        }, 8000);
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="card">
+      <div class="spinner" aria-hidden="true"></div>
+      <h1>Checking your browser</h1>
+      <p id="antibot-status">Starting verification…</p>
+      <p id="antibot-info">This takes a couple of seconds and happens automatically.</p>
+      <div id="antibot-fallback" hidden>
+        <p>
+          If you can't pass the test, whitelist your extensions on this
+          website, update your browser and use a modern web browser (Firefox/Chrome/Safari).
+        </p>
+        <p id="antibot-retry">
+          You may try the automated checks a second time. Some checks may fail
+          once and succeed on a second try.<br/>
+          <a id="antibot-reload" href="">Reload now.</a>
+        </p>
+        <p>
+          Still having trouble?<br/>
+          Ask for help by sending an email at <object class="email-protection" data="/antibot/email-protection.svg" type="image/svg+xml"></object>
+          with the browser that you are using and this reference ID:
+          <br/><code id="antibot-ref-id">no_id_generated</code>
+        </p>
+        <p>
+          <a id="antibot-captcha-link" href="/antibot/captcha">And solve an image challenge instead.</a>
+        </p>
+      </div>
+    </main>
+
+    <!-- cap widget (defines <cap-widget>); loaded from our cached assets. -->
+    <!-- ?v=2: one-time escape from browser copies pinned as `immutable`; see the
+         note in <head>. Keep all three assets on the same value. -->
+    <script src="/antibot/assets/cap.min.js?v=2"></script>
+    <!-- Orchestrator: solve PoW -> fingerprint -> /verify. -->
+    <script type="module" src="/antibot/assets/js-challenge.js?v=2"></script>
+
+    <!-- Always-visible manual fallback for anyone who prefers it. -->
+    <script>
+      // Enrich the fallback link with the original destination for the JS path,
+      // and populate the reference ID from the __antibot_ref cookie once it's set.
+      (function () {
+        var f = document.getElementById("antibot-captcha-link");
+        if (f) f.href = "/antibot/captcha?redirect=" + encodeURIComponent(location.pathname + location.search);
+        var rl = document.getElementById("antibot-reload");
+        if (rl) rl.href = location.pathname + location.search;
+
+        function updateRef() {
+          var m = document.cookie.match(/(?:^|;\s*)__antibot_ref=([0-9a-f]+)/);
+          var el = document.getElementById("antibot-ref-id");
+          if (m && el && el.textContent !== m[1]) el.textContent = m[1];
+        }
+        updateRef();
+        setInterval(updateRef, 500);
+      })();
+    </script>
+  </body>
+</html>

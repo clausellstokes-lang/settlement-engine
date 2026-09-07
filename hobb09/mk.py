@@ -1,0 +1,55 @@
+import json
+src="/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-09.json"
+dst="/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i135-149.json"
+d=json.load(open(src))
+V=[
+ {"index":135,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"Bee travels up the Rain Wild River, noting animals and plants matching North American flora/fauna",
+  "note":"Raw HTML of elliottrwi.com post (18 May 2026, by geoffreybelliott) fetched with a browser UA. Body text: \"In a yet later example, Bee travels up the Rain Wild River, noting animals and plants that seem to line up with North American flora and fauna.\" Quote exact; the paper is expressly on the Fitz and the Fool novels. Only softening: Elliott hedges \"seem to line up with\" where the claim says \"matching\"."},
+ {"index":136,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"20 test texts taken from works by Bardugo, Dickens, Gaiman, Hobb, Landy, Sanderson, Tolkien",
+  "note":"Sciendo PDF fetched and text-extracted (19 pp.); title/author/journal/DOI match (Slavova, CAIT 20.2, 2020, DOI 10.2478/cait-2020-0012). p. 13: \"We designated 20 texts, each about one page long, taken from works by Leigh Bardugo, Charles Dickens, Neil Gaiman, Robin Hobb, Derek Landy, Brandon Sanderson, and J. R. R. Tolkien.\" Quote exact. Nuance worth carrying: these are the validation \"experimental texts\", not the main EmoBank-derived corpus."},
+ {"index":137,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"The first chapter's introduction almost reads like an encyclopaedia about the Six Duchies",
+  "note":"Utrecht thesis PDF fetched and extracted (45 pp.); title page confirms \"Translating Robin Hobb's Assassin's Apprentice\", BA Thesis, Utrecht University, Iris Duits, April 2012. Text: \"In the introduction of the first chapter, this is not yet a major problem, since this part almost reads like an encyclopaedia, offering factual information on the Six Duchies.\" Quote exact, all limbs supported. Locator note: the passage sits on printed p. 15 in ch. 6 (Translation criticism - Translation strategies), not ch. 3 as the claim's page field says."},
+ {"index":138,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"Even in English the language seems archaic; long, complex sentences occur",
+  "note":"Same Duits PDF, same paragraph as #137 (printed p. 15): \"Even in English, the language seems a bit archaic, and long, complex sentences occur.\" Quote exact; the sentence immediately follows the encyclopaedia remark, so \"in that encyclopaedic opening\" is supported."},
+ {"index":139,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"English sentence clear and to the point; Dutch seems formal and wordy",
+  "note":"Duits PDF, printed p. 15: comparing Hobb's \"I have spoiled another leaf of the fine stuff...\" with Feberwee and Cuijpers' Dutch - \"The English sentence is clear and to the point, whereas the Dutch sentence seems formal and wordy.\" Quote exact; both limbs on the page."},
+ {"index":140,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"Proper names have an important role; translating them well is very important",
+  "note":"Duits PDF, Introduction (printed p. 3): \"Proper names have an important role in this novel, so translating them well is very important.\" Quote exact. \"Central problem\" is supported: the thesis gives proper names two of its nine sections (ch. 4 and ch. 5)."},
+ {"index":141,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"Six Duchies nobles name children after virtues, hoping they emulate them",
+  "note":"Kok thesis PDF fetched and extracted (110 pp.); title page confirms \"The Boundaries of Imagination / Important aspects of fantasy translation\", Marlies Kok, Translation Master Thesis, Utrecht readers Naaijkens and Koster. Printed p. 27: \"The nobles of the land called the Six Duchies have the custom to name their children after virtues or traits, in hopes of them emulating that which they were named after in later life...\" Quote exact; every limb supported."},
+ {"index":142,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"Readers might not realise the names are English words, not fantastical-sounding",
+  "note":"Kok PDF, printed p. 27: \"...the reader of the translation, who might not realise the names are not fantastical-sounding but English words.\" Quote exact. Context is the Farseer noble names (Shrewd, Chivalry, Verity, Regal, Patience, Desire), so \"Hobb's noble names\" is supported; \"ordinary\" is the claim's own gloss on \"English words\"."},
+ {"index":143,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"Half-translating loses the habit; it seems too infrequent to signify",
+  "note":"Kok PDF, printed p. 28: \"By only translating half of the noble names to something of similar meaning in the target language, the underlying cultural habit of naming noble children after virtues is lost on the reader of the translation, since in translation it does not seem to happen often enough to be of significance in the setting's culture while it actually is.\" Quote exact; both the half-translation limb and the frequency-of-significance reason are on the page."},
+ {"index":144,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"Native-speaker utterances, among them a selection from Hobb's Royal Assassin, the only novel referenced",
+  "note":"Raw HTML of elliottrwi.com/research/hobb-bibliography/ (\"The Fedwren Project: A Robin Hobb Annotated Bibliography\") fetched with a browser UA. Bruening entry cites NLLT vol. 32, no. 2, May 2014, pp. 363-422, matching the claim, and the annotation reads: \"...utterances by native speakers of English (among which is a selection from Hobb's Royal Assassin, notably the only novel referenced) do not make the distinctions that theorists posit...\" Quote exact; every limb supported."},
+ {"index":145,"verdict":"PARTIAL","unsupportedLimb":"that 'nitterdy-natterdy' is Hobb's coinage - the article only cites the phrase as occurring in her novel, never says she invented it",
+  "trueWording":"English uses the expression nitterdy-natterdy, from Hobb's Assassin's Apprentice",
+  "note":"Estudios de Traduccion PDF fetched from revistas.ucm.es and extracted (15 pp.); article confirmed as Garnes, Estud. trad. 2016, 6: 39-53. Section 5.3 'Otros recursos lexicos', printed p. 47: example (9a) is quoted from Assassin's Apprentice and \"En ingles se utiliza la expresion nitterdy-natterdy.\" Quote exact, and the section's framing (\"otras expresiones que contienen la nocion semantica de iteracion o duracion de la accion y una evaluacion negativa\") supports 'English lexical resource for intensification'. Only the word 'coinage' is unsourced."},
+ {"index":146,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"Two important data: insistence on the action and the speaker's weariness",
+  "note":"Garnes PDF, printed p. 47: the cited English expressions \"nos indican dos datos importantes para este analisis; insistencia en la accion y el hastio del hablante.\" Quote exact; 'two things at once' matches \"dos datos importantes\", and 'hastio' is weariness/tedium."},
+ {"index":147,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"Le Guin and Hobb have in later works begun to question the male/king package",
+  "note":"UTS PDF (02whole.pdf) fetched and extracted (86 pp.); running head confirms \"Kings. What a good idea. Pamela Freeman\", printed p. 42: \"Other women writers have kept the whole male/king package, although some, like Ursula Le Guin and Robin Hobb, have in their later works begun to question this. (See, for example, the difference in attitudes to monarchy between Hobb's Assassin's Apprentice series, 1996-1998, and her Liveship Traders books, 1999-2001.)\" Quote exact; every limb, including the Farseer/Liveship citation, is on the page."},
+ {"index":148,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"40 novels - 20 classic, 20 modern; first chapter of each manually annotated",
+  "note":"peerj.com returned Cloudflare 403 to both a plain and a browser-UA request (and to the .pdf); reached the raw page through the Wayback capture https://web.archive.org/web/20260208122918id_/https://peerj.com/articles/cs-189/ , which carries the full text. \"20 classic and 20 modern novels\" appears verbatim several times, incl. contribution (4) \"an annotated gold standard dataset with entities and coreferences of 20 classic and 20 modern novels\"; \"In each of these novels, the first chapter is manually annotated with named entities and coreference relations\"; Table A2 lists Assassin's Apprentice, Robin Hobb (1995) under Modern."},
+ {"index":149,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"3rd-person novels perform significantly better than 1st-person ones",
+  "note":"Same Wayback raw capture. Conclusion and Future Work: \"We did find that novels written in 3rd person perspective perform significantly better than those written in 1st person, which is in line with findings in related studies.\" Quote exact; the body gives p < 0.01, and Tables 3-4 mark Assassin's Apprentice with the symbol whose legend reads \"Novels written in 1st person are marked with the circled dot\", so the first-person class does include it."},
+]
+out={"name":"hobb","chunk":9,"claims":d["claims"],"verdicts":V}
+assert [v["index"] for v in V]==d["indices"], "index mismatch"
+json.dump(out,open(dst,"w"),indent=1,ensure_ascii=False)
+print("wrote",dst,len(json.dumps(out)))

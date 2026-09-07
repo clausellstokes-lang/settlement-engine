@@ -1,0 +1,236 @@
+{
+ "name": "tolkien",
+ "chunk": 8,
+ "claims": [
+  {
+   "index": 568,
+   "feature": "literary and traditional diction",
+   "claim": "A translation must avoid colloquialism and false modernity and be literary and traditional, because the original's diction was poetical, archaic and artificial in its own day.",
+   "source": "Wikipedia, 'On Translating Beowulf'",
+   "url": "https://en.wikipedia.org/wiki/On_Translating_Beowulf",
+   "quote": "colloquialism and false modernity",
+   "page": ""
+  },
+  {
+   "index": 569,
+   "feature": "neither colloquial nor obscure",
+   "claim": "The language should be intentionally antiquated but not arcane — words still in literary use among educated people — avoiding both the colloquial and the obscure.",
+   "source": "Philip Irving Mitchell (DBU), outline of 'On Translating Beowulf'",
+   "url": "https://www.dbu.edu/mitchell/tolkien-medieval-tradition-resources/beowulf-translate.html",
+   "quote": "avoid both the colloquial and the obscure",
+   "page": ""
+  },
+  {
+   "index": 570,
+   "feature": "modern literary, not colloquial English",
+   "claim": "The translator owes allegiance to the original's meaning and style and renders it into modern literary English, not present-day colloquial English.",
+   "source": "Tolkien Estate, J.R.R. Tolkien 'Thoughts on Translation (Beowulf)'",
+   "url": "https://www.tolkienestate.com/scholarship/j-r-r-tolkien-thoughts-on-translation-beowulf/",
+   "quote": "modern literary, not present-day colloquial",
+   "page": ""
+  },
+  {
+   "index": 571,
+   "feature": "compact compounds",
+   "claim": "Resolving Old English compounds into phrases keeps colour but loosens and weakens the texture; compact naming is preferred.",
+   "source": "Wikipedia, 'On Translating Beowulf'",
+   "url": "https://en.wikipedia.org/wiki/On_Translating_Beowulf",
+   "quote": "loosens and weakens the texture",
+   "page": ""
+  },
+  {
+   "index": 572,
+   "feature": "children's-book manner regretted (Letter 215)",
+   "claim": "Publishing The Hobbit under the convention that fairy-stories are for children had unfortunate effects on its mode of expression and narrative method, which he would have corrected if not rushed.",
+   "source": "Carpenter (ed.), The Letters of J.R.R. Tolkien, no. 215 to Walter Allen (April 1959, unsent draft)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "unfortunate effects on the mode of expression and narrative method",
+   "page": ""
+  },
+  {
+   "index": 573,
+   "feature": "address-to-children as blemish",
+   "claim": "Intelligent children of good taste single out the points in manner where the address is to children as blemishes.",
+   "source": "Tolkien Gateway, 'Letter 215'",
+   "url": "https://tolkiengateway.net/wiki/Letter_215",
+   "quote": "singled out the places where the address was to children",
+   "page": ""
+  },
+  {
+   "index": 574,
+   "feature": "whimsy to historical (register arc of The Hobbit)",
+   "claim": "The Hobbit begins in a whimsy, even facetious, mode and moves steadily to a more serious, consistent and historical one — and he regrets much of the early manner.",
+   "source": "The Letters of J.R.R. Tolkien, no. 215",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "more consistent and historical",
+   "page": ""
+  },
+  {
+   "index": 575,
+   "feature": "LotR addressed to no class of reader",
+   "claim": "The Lord of the Rings was not specially addressed to children or any other class but to anyone who enjoys a long exciting story; adult language is assumed.",
+   "source": "The Letters of J.R.R. Tolkien, no. 215",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "a long exciting story",
+   "page": ""
+  },
+  {
+   "index": 576,
+   "feature": "regret of 'for children' style (Letter 165)",
+   "claim": "In so far as The Hobbit was dressed up as for children in style or manner, Tolkien regrets it, and so, he says, do the children.",
+   "source": "The Letters of J.R.R. Tolkien, no. 165 to Houghton Mifflin (June 1955)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "in style or manner, I regret it",
+   "page": ""
+  },
+  {
+   "index": 577,
+   "feature": "sound before sense (fine words)",
+   "claim": "Words like plenilune and argent are beautiful before they are understood; limiting vocabulary to a child's supposed reach cuts off the gifted from extending it.",
+   "source": "The Letters of J.R.R. Tolkien, no. 234 to Jane Neave (22 Nov 1961)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "beautiful words before they are understood",
+   "page": ""
+  },
+  {
+   "index": 578,
+   "feature": "first meeting in a living context",
+   "claim": "A fine word should first be met in a living context, not a dictionary; 'argent' does not mean 'silver' because its phonetic incarnation and heraldic overtones differ.",
+   "source": "The Letters of J.R.R. Tolkien, no. 234",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "in a living context, and not in a dictionary",
+   "page": ""
+  },
+  {
+   "index": 579,
+   "feature": "flattening (writing down) deprecated",
+   "claim": "Tolkien deprecated the writing-down, flattening attitude that leaves children with little respect and no love for words; The Hobbit's early part was his one such mistake.",
+   "source": "Tolkien Gateway, 'Letter 234'",
+   "url": "https://tolkiengateway.net/wiki/Letter_234",
+   "quote": "writing down, flattening attitude",
+   "page": ""
+  },
+  {
+   "index": 580,
+   "feature": "full register span (Letter 131)",
+   "claim": "The Lord of the Rings is meant to include, even in style, the colloquialism and vulgarity of hobbits, poetry, and the highest style of prose.",
+   "source": "The Letters of J.R.R. Tolkien, no. 131 to Milton Waldman (1951)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "the colloquialism and vulgarity of Hobbits",
+   "page": ""
+  },
+  {
+   "index": 581,
+   "feature": "tone rises with the hero's development",
+   "claim": "In The Hobbit the tone and style change with the hobbit's development, passing from fairy-tale to the noble and high and relapsing on the return.",
+   "source": "The Letters of J.R.R. Tolkien, no. 131",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "passing from fairy-tale to the noble and high",
+   "page": ""
+  },
+  {
+   "index": 582,
+   "feature": "lesser tales against vast backcloths",
+   "claim": "The legendarium ranges from the cosmogonic to the fairy-story level, the larger founded on the lesser and the lesser drawing splendour from the vast backcloths.",
+   "source": "Wikipedia, 'Impression of depth in The Lord of the Rings' (citing Letter 131)",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "the lesser drawing splendour from the vast backcloths",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 568,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "avoid 'colloquialism and false modernity'; 'literary and traditional'",
+   "note": "Raw en.wikipedia.org/wiki/On_Translating_Beowulf fetched by curl (200). Quote 'colloquialism and false modernity' appears verbatim (Magennis quoting Tolkien). Every limb supported: the same block carries \"your language must be literary and traditional: not because it is now a long while since the poem was made ... but because the diction of Beowulf was poetical, archaic, artificial (if you will), in the day that the poem was made.\""
+  },
+  {
+   "index": 569,
+   "verdict": "PARTIAL",
+   "trueWording": "antiquated not arcane; avoid the colloquial and the obscure",
+   "unsupportedLimb": "'words still in literary use among educated people' — that qualifier appears nowhere on the DBU page (full page text read, 6,116 chars; no occurrence of 'educated' or 'literary use')",
+   "note": "Raw dbu.edu page fetched by curl (200). Quote 'avoid both the colloquial and the obscure' is verbatim, and 'intentionally antiquated but not intentionally arcane' supports that limb; the 'still in literary use among educated people' gloss is imported from Tolkien's essay, not from this page."
+  },
+  {
+   "index": 570,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'absolute allegiance to the thing translated: to its meaning, its style'",
+   "note": "Raw tolkienestate.com page fetched by curl (200). Quote 'modern literary, not present-day colloquial' verbatim, in the parenthesis '(modern literary, not present-day colloquial) English is an instrument of very great capacity'. Allegiance limb verbatim too: 'First of all by absolute allegiance to the thing translated: to its meaning, its style, technique, and form.'"
+  },
+  {
+   "index": 571,
+   "verdict": "PARTIAL",
+   "trueWording": "'Choice between the evils will vary with occasions'",
+   "unsupportedLimb": "'compact naming is preferred' — the page states no preference; it says the naming method 'retains the compactness of the original but loses its colour' and closes 'Choice between the evils will vary with occasions'",
+   "note": "Raw Wikipedia page fetched by curl (200). Quote 'loosens and weakens the texture' verbatim, and the colour/texture trade-off is exactly as claimed; but the page presents the two methods as balanced evils rather than favouring compact naming."
+  },
+  {
+   "index": 572,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'if I had not been rushed, I should have corrected'",
+   "note": "Letters PDF fetched (200, 1.88 MB, 493 pp) and text-extracted with pypdf. Letter 215 To Walter Allen, unsent draft (PDF p.309): 'When I published The Hobbit – hurriedly and without due consideration – I was still influenced by the convention that fairy-stories are naturally directed to children ... But it had some unfortunate effects on the mode of expression and narrative method, which if I had not been rushed, I should have corrected.' Quote verbatim; all limbs supported."
+  },
+  {
+   "index": 573,
+   "verdict": "PARTIAL",
+   "trueWording": "'Intelligent children ... singled out the places where the address was to children as blemishes'",
+   "unsupportedLimb": "'of good taste' — the Tolkien Gateway page says only 'Intelligent children, he was glad to say'; the qualifier is absent from this page",
+   "note": "tolkiengateway.net returns 403 behind a Cloudflare 'Just a moment...' challenge to curl with both Chrome and Safari UAs plus full navigation headers; recovered via Wayback raw capture https://web.archive.org/web/20260104191641id_/https://tolkiengateway.net/wiki/Letter_215 (200). Quote is verbatim there. The 'of good taste' limb IS in the primary text (Letters PDF, Letter 215: 'Intelligent children of good taste (of which there seem quite a number)') but not on the cited page, so the claim is sound and the citation is short of it."
+  },
+  {
+   "index": 574,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "begins 'whimsy', even facetious; moves to serious/historical; 'I regret much'",
+   "note": "Letters PDF, Letter 215 (PDF pp.309-310): 'The Hobbit can be seen to begin in what might be called a more \"whimsy\" mode, and in places even more facetious, and move steadily to a more serious or significant, and more consistent and historical. .... But I regret much of it all the same.' Quote 'more consistent and historical' verbatim; every limb supported (page reads 'more serious or significant' where the claim says 'more serious')."
+  },
+  {
+   "index": 575,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'not specially addressed to children or to any other class of people'",
+   "note": "Letters PDF, Letter 215: 'that work was not specially addressed to children or to any other class of people. But to any one who enjoyed a long exciting story, of the sort that I myself naturally enjoy.' Quote verbatim. Adult-language limb supported in the same letter: 'I am not specially interested in children, and certainly not in writing for them: i.e. in addressing directly and expressly those who cannot understand adult language.'"
+  },
+  {
+   "index": 576,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'In so far as it was dressed up as \"for children\" ... I regret it. So do the children.'",
+   "note": "Letters PDF at Letter 165 To the Houghton Mifflin Co. (PDF p.232). Quote 'in style or manner, I regret it' verbatim, and 'So do the children' immediately follows; the editorial bracket '[The Hobbit]' fixes the referent. Location caveat: the sentence sits in Carpenter's headnote to Letter 165, quoting Harvey Breit's 5 June 1955 New York Times column drawn from Tolkien's own answers, not in the body of the 30 June 1955 letter — which opens 'Please do not blame me for what Breit made of my letter!'"
+  },
+  {
+   "index": 577,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'you ... simply cut off the gifted ones from the chance of extending it'",
+   "note": "Letters PDF, Letter 234 To Jane Neave, 22 November 1961 (PDF p.330): 'As for plenilune and argent, they are beautiful words before they are understood'. Quote verbatim; second limb verbatim too: 'As soon as you limit your vocabulary to what you suppose to be within their reach, you in fact simply cut off the gifted ones from the chance of extending it.'"
+  },
+  {
+   "index": 578,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'They think argent \"means\" silver. But it does not.'",
+   "note": "Letters PDF, Letter 234: 'surely the first meeting should be in a living context, and not in a dictionary, like dried flowers in a hortus siccus!' Quote verbatim. Both remaining limbs on the page: 'clothed in a totally different phonetic incarnation' and 'the heraldic overtones it has ... which \"silver\" has not'."
+  },
+  {
+   "index": 579,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "deprecated it; 'only made the mistake once, in the early part of The Hobbit'",
+   "note": "tolkiengateway.net 403 (Cloudflare challenge) on the live URL with browser UAs; recovered via Wayback raw capture https://web.archive.org/web/20260107071600id_/https://tolkiengateway.net/wiki/Letter_234 (200). Page: 'Tolkien deprecated the writing down, flattening attitude that made so many children have little respect and no love for words.' Quote verbatim; the one-mistake limb is supported earlier on the same page: 'He had only made the mistake once, in the early part of The Hobbit.'"
+  },
+  {
+   "index": 580,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'even in style it is to include the colloquialism and vulgarity of Hobbits'",
+   "note": "Letters PDF, Letter 131 To Milton Waldman (PDF p.167 header; passage at p.177): '...even in style it is to include the colloquialism and vulgarity of Hobbits, poetry and the highest style of prose.' Quote verbatim (pypdf inserts stray intra-word spaces such as 'styl e' / 'colloquialis m'; the whitespace-stripped text matches the quote exactly)."
+  },
+  {
+   "index": 581,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'relapsing with the return' (claim says 'on the return')",
+   "note": "Letters PDF, Letter 131: 'as a critic has perceived) the tone and style change with the Hobbit's development, passing from fairy-tale to the noble and high and relapsing with the return.' Quote verbatim; all limbs supported, the only difference being the preposition ('with the return' vs the claim's 'on the return')."
+  },
+  {
+   "index": 582,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'the larger founded on the lesser in contact with the earth'",
+   "note": "Raw en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings fetched by curl (200). Blockquote: 'ranging from the large and cosmogonic, to the level of romantic fairy-story—the larger founded on the lesser in contact with the earth, the lesser drawing splendour from the vast backcloths'. Quote verbatim; the page's reference list confirms the source as 'Carpenter 2023, Letter #131 to Milton Waldman, late in 1951'."
+  }
+ ]
+}

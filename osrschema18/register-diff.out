@@ -1,0 +1,133 @@
+=== TOP-LEVEL FIELDS ===
+  MOVED  _doc   (expanded below)
+  MOVED  corpusMeta   (expanded below)
+  MOVED  digests   (expanded below)
+  MOVED  frozen: "2026-09-05" -> "2026-09-06"
+  MOVED  frozenAtSha: "0742f8ff5997bb5ddb369c152cb31d587dde7121" -> "f20d5dd480a8ad4647b570b23b89f933268352a7"
+  SAME   identities: 1397 -> 1397
+  SAME   inventory   (expanded below)
+  MOVED  manifests   (expanded below)
+  MOVED  migrationReview   (expanded below)
+  SAME   minRows: 40 -> 40
+  SAME   originMinRows: 8 -> 8
+  SAME   rowTags   (expanded below)
+  MOVED  scanStats   (expanded below)
+  MOVED  scannerProvenance   (expanded below)
+  MOVED  schema: 17 -> 18
+  MOVED  sentinel   (expanded below)
+  SAME   total: 1972 -> 1972
+
+=== corpusMeta ===
+  SAME   configs: 4
+  SAME   generations: 16
+  SAME   originCount: 8560
+  SAME   pulseIntervals: 12
+  SAME   seeds: 4
+  SAME   shapeCount: 1299
+  MOVED  simulationFlagsLit: 80 -> 81
+  SAME   steadingsMinted: 12
+  SAME   transitionCount: 14496
+
+=== scanStats ===
+  MOVED  files: 2162 -> 2176
+  MOVED  reads: 124468 -> 125631
+  MOVED  resolved: 9563 -> 9669
+  MOVED  unresolved: 114905 -> 115962
+
+=== sentinel ===
+  MOVED  resolvedReads: 9563 -> 9669
+  SAME   totalKeys: 6532
+  SAME   usableShapes: 337
+
+=== scannerProvenance ===
+  MOVED  detectorDigest: "47f0690763a29c13dd83e760ebf9bccfc2e9a26baabf0c08e413c02f5597304d" -> "fbe88af3fce2f5fa467fb87ce2eb32816843edca0f71a4ffc797eef4369f1621"
+  MOVED  executionTreeDigest: "c5874127a9fa2b782546954fb250be704f5f0c02b37f00ba2f32020e8aba373d" -> "ca2f98f5c59e63384295eeb1d36884cca97fd6f1c914cb06131337cb99a23b73"
+  MOVED  scanTreeDigest: "3005cc5439d0d5a2f7dc28d2f1c5343c2118e1fc0c7666c9de4b8a0ab7749db5" -> "2ef7e90d07af0524cb7fbc93bbeca01f84cb077c469adbcd6904f9ba5f033f05"
+  MOVED  sourceTreeDigest: "e885ca5ab702a28c628029a6c45e66860368673986536c054d8225d5a4f6e20c" -> "99d0e5cdf7946269836568c6aa572ebc79451a2ef7f4ec4b38ff4be256fba5dd"
+  SAME   unscannedInputDigest: "158d2a7bb5d62f1c14023e64b1310405a32803591be0d54c69cf3a84fe1c46ea"
+
+=== digests ===
+  MOVED  corpusMeta: "50004ef29a853e94cd3c9e0da4e2a6ce9eefe4faca60ff01cf87632ca4c668ee" -> "2ef657c8f5a9218ab81c47dc0bc66756055cffcaef2ab01edad1a8e630b37ca1"
+  SAME   inventory: "40856b9ba70142af926f44985a1f8cc9cb979fb833b6e3a7d6bdcde914f1d763"
+  MOVED  manifests: "f6916d8a7e67a5e22f3f0c73b2d581322557477af3c226dbf51d195c8e28c0e2" -> "f9bffc79fd10dc0dbff0952113fa344222e8216ad90a2386fe686bf50aaa816c"
+  MOVED  migrationReview: "ed71a1e91f62e5af1ace1a0b9c6959b7b132c0c811f75475b8b184f7dfa6efef" -> "18f64e22297327451588ed1d17bb96327c5ddb47174b60b4c92fbdfdbf10e178"
+  SAME   rowTags: "820c468615ac0421b401e29aee3ef223517294215a8b9f3b82130f5e814480f5"
+  MOVED  scanStats: "a3c891c936ee1ab55ae29764f27c5955604ab140ffb9f2a55e2f66975d050274" -> "7a92a29309e74c30dda59db6446c76a7af0a65635b33fd448a67ad62c7b67bb6"
+  MOVED  sentinel: "66f67a7dc66d4447369ca5d9494142fb4fff0d3eced3168448211c5cd6861c3a" -> "d605d1e1564df8456c92ebe48f9c880ce6dba7bb51897fa348674b5195617789"
+
+=== manifests (by sub-manifest digest) ===
+  MOVED  detectorTree: 47f0690763a29c13… -> fbe88af3fce2f5fa…  (entries 11 -> 11)
+  MOVED  executionTree: c5874127a9fa2b78… -> ca2f98f5c59e6338…  (entries 2187 -> 2201)
+  MOVED  scanTree: 3005cc5439d0d5a2… -> 2ef7e90d07af0524…  (entries 2162 -> 2176)
+  MOVED  sourceTree: e885ca5ab702a28c… -> 99d0e5cdf7946269…  (entries 2176 -> 2190)
+
+=== migrationReview (every field) ===
+  MOVED  bundleDigest: 290d8ef0f76059a662ef… -> 4f0b554fb0fdbaf6d260…
+  MOVED  corpusDigest: 64e56d4fadfe2ed36cd6… -> 2027915cb4408bf1053d…
+  MOVED  currentArtifactDigest: 02fe9dd367d2d490daef… -> b1a8ec196e575f71c165…
+  MOVED  currentDetectorDigest: 47f0690763a29c13dd83… -> fbe88af3fce2f5fa467f…
+  MOVED  currentFindingsDigest: b2f6dcbfc26aa76fa935… -> 8169c79a5f716b5b7515…
+  MOVED  currentScannerSha: 0742f8ff5997bb5ddb36… -> f20d5dd480a8ad4647b5…
+  MOVED  currentScannerToolDigest: de5a816611263167557e… -> b17a86279b0fc3380a02…
+  MOVED  detectorTreeDigest: 47f0690763a29c13dd83… -> fbe88af3fce2f5fa467f…
+  MOVED  executionTreeDigest: c5874127a9fa2b782546… -> ca2f98f5c59e63384295…
+  SAME   legacyAlgorithmBaseSha: 6e7acc4dd88a43cb608f… -> 6e7acc4dd88a43cb608f…
+  MOVED  legacyArtifactDigest: 02fe9dd367d2d490daef… -> b1a8ec196e575f71c165…
+  MOVED  legacyDetectorDigest: 47f0690763a29c13dd83… -> fbe88af3fce2f5fa467f…
+  MOVED  legacyScannerSha: 0742f8ff5997bb5ddb36… -> f20d5dd480a8ad4647b5…
+  MOVED  legacyScannerToolDigest: de5a816611263167557e… -> b17a86279b0fc3380a02…
+  MOVED  predecessorBaselineDigest: 48aad71c31686782be38… -> bf6782a389d95c02b206…
+  MOVED  predecessorBaselineTextSha256: 510bee95c16501f0d199… -> 119516bd65f53eb3e0f3…
+  MOVED  predecessorInventoryDigest: 5a74442aa13825ad8f75… -> 40856b9ba70142af926f…
+  MOVED  reportDigest: 8ff0c9f2b450bd9d1421… -> 426729a5437f878b0ba1…
+  MOVED  reviewDigest: fd86596d0046f2364c9e… -> 86bcb8958fc55d284b97…
+  SAME   scanConfigDigest: cef0ab59a909576cf6a8… -> cef0ab59a909576cf6a8…
+  MOVED  scanTreeDigest: 3005cc5439d0d5a2f7dc… -> 2ef7e90d07af0524cb7f…
+  MOVED  sourceTreeDigest: e885ca5ab702a28c6280… -> 99d0e5cdf79462698365…
+  MOVED  subjectSha: 0742f8ff5997bb5ddb36… -> f20d5dd480a8ad4647b5…
+  SAME   targetInventoryDigest: 40856b9ba70142af926f… -> 40856b9ba70142af926f…
+
+=== INVENTORY, ROW BY ROW ===
+  GONE 0 · NEW 0 · COUNT-MOVED 0
+  inventory digest identical: true
+  rowTags   digest identical: true
+
+=== _doc, LINE BY LINE ===
+  SAME  [0] READER-WITH-NO-WRITER INVENTORY — per-file HEURISTIC-LEAF identities and governed ce
+  SAME  [1] A row is "<key> on <shape>": multiplicity, produced by the governed legacy-leaf dete
+  SAME  [2] Content-addressed per identity: dormant headroom and identity swaps are refused, so 
+  SAME  [3] identity in an already-listed file reds exactly as a new file does, even at constant
+  SAME  [4] The line number is excluded so unrelated line churn does not rewrite the governed id
+  SAME  [5] Ordinary shrink maintenance is a governed --write re-freeze on a clean committed tre
+  SAME  [6] That derived re-freeze may only lower or delete rows; the governed reasoned path may
+  SAME  [7] Detector changes require a new governed instrument migration.
+  SAME  [8] The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot en
+  -OLD  [9] SCHEMA 10 = schema 9's topology, tag law and eight-identity M8/M9 bank, ALL UNCHANGED,
+  +NEW  [9] SCHEMA 18 = schema 17's topology, tag law and NINE-identity declared M8/M9 bank, ALL
+  -OLD  [10] re-governed to the landed inputs a second time: two dossier-prose generated
+  +NEW  [10] UNCHANGED, re-governed so the migration receipt's SUBJECT COMMIT lies inside the lineage
+  -OLD  [11] (subject-but-unscanned) sources were regenerated and package.json gained one lint-staged
+  +NEW  [11] that carries this register: a genesis taken in one dock and replayed into another leaves
+  -OLD  [12] binding, with the lockfile untouched. This rung declares no identity and retunes nothing.
+  +NEW  [12] `migrationReview.subjectSha` unreachable, and `validateBaselineHistory` — which
+  -OLD  [13] The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —
+  +NEW  [13] reconstructs this receipt FROM THAT COMMIT'S TREE — then refuses the gate AND every
+  -OLD  [14] CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12
+  +NEW  [14] --write until a rung re-anchors it. This rung declares no identity, retunes nothing and
+  -OLD  [15] language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside
+  +NEW  [15] moves no row: its reconciliation is EMPTY. Of the nine declared bank entries EIGHT bank
+  -OLD  [16] the detectorTree digest this envelope binds, so retuning any reds the gate and needs a new mint.
+  +NEW  [16] reads today; `isCriminal on incomeSources` has banked nothing since schema 17 made its
+  -OLD  [17] An untagged row means: a guarded read, of a real record rather than browser or language surface,
+  +NEW  [17] writer observable, and banked is always a subset of declared.
+  -OLD  [18] of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.
+  +NEW  [18] The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —
+  -OLD  [19] A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.
+  +NEW  [19] CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12
+  -OLD  [20] Schemas 4–9 are the RETIRED numeric predecessors.
+  +NEW  [20] language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside
+  +NEW  [21] the detectorTree digest this envelope binds, so retuning any reds the gate and needs a new mint.
+  +NEW  [22] An untagged row means: a guarded read, of a real record rather than browser or language surface,
+  +NEW  [23] of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.
+  +NEW  [24] A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.
+  +NEW  [25] Schemas 4–17 are the RETIRED numeric predecessors.

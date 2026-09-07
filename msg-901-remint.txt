@@ -1,0 +1,7 @@
+Edge-shared bundle re-minted at the lighting composition: seven bundle inputs moved under the lighting cars (aiCharterBundle.js + its meta, and the aiGrounding / aiOutputSchema / analyticsEvents / intentAtlas metas)
+
+The ritual: immer + seedrandom materialised for the build only, restored to symlinks after (453 links before and after); the reproducibility and freshness tests are the proof at the gate. ⚠ The ritual script had stamped this car with the §899 landing's cause line (the clamp sweep's) — the message is amended here to the measured cause; the tree is byte-identical.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

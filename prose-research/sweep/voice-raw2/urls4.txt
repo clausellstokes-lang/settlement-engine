@@ -1,0 +1,6 @@
+gbc1 https://www.theguardian.com/books/2014/sep/02/the-bone-clocks-david-mitchell-review
+gbc2 https://www.theguardian.com/books/2014/sep/02/bone-clocks-david-mitchell-review-ursula-k-le-guin
+gbc3 https://www.theguardian.com/books/2014/sep/02/the-bone-clocks-review-david-mitchell-ursula-le-guin
+structo https://structomagazine.co.uk/interviews/ursula-k-le-guin/
+structo2 https://structomagazine.co.uk/ursula-k-le-guin/
+reactor-intro https://reactormag.com/read-ursula-k-le-guins-introduction-to-the-books-of-earthsea/

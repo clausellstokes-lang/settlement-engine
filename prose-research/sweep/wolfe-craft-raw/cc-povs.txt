@@ -1,0 +1,177 @@
+Counter Craft 
+
+ Subscribe Sign in 
+
+ There Are More than Five POVs
+ A little craft rant on points of view in fiction. 
+
+ Lincoln Michel 
+ Jun 22, 2026 
+
+ 343
+ 
+ 71
+ 71
+ 
+ Share
+
+ Hello readers, 
+ You may have noticed I didn’t post a Counter Craft article last week, which is because I spent the last couple weeks in a furious creative haze to finish up a draft of my forthcoming haunted house novel Haunted Hills . The process of writing that novel has been completely different from the processes behind my last two novels, Metallic Realms and The Body Scout . Partly, that’s just the way it seems to go with books. Each time, you have to teach yourself how to write a book all over again. 1 It’s quite annoying. But another reason is that I challenged myself to write a novel in a rotating third-person point of view instead of the first-person POVs of my first two novels. 
+ This is my segue into a low-stakes (and probably overly pedantic) craft topic: why I dislike the traditional POV taxonomy. 
+ When I teach intro to literature classes to undergraduates, I open the first class going over the five types of POV. (This may seem overly basic, but most of my students are not humanities majors and are unfamiliar with such things.) Each time I teach the traditional POV taxonomy, I feel it isn’t the most useful one from a fiction writing, uh, point of view. 
+ Here’s a quick refresher. The alleged five forms of POV are as follows: First-person (“I do this”), second-person (“you do that”), and third-person (“he/she/they/it do the other thing”). However, third-person POV is broken down into three types: third-person objective (no interiority), third-person limited (one character’s interiority and perspective), third-person omniscient (unlimited interiority and perspective). Those are your five. 
+ There is more we could say, of course. First-person POV implies a character who exists within the fictional story world while the various third-person forms are narrated by a voice that usually exists outside of the story world. But, that’s the gist. Most intro to literature guides will also say that second-person POV and third-person objective POV are rare in literature, 2 meaning you’re left with only three common POV forms. 
+ I disagree. 
+ It’s not that the categories are wrong exactly. But they are rooted more in grammar than narrative. Grammatically, “I” and “we” are both first-person pronouns. Narratively, there is a dramatic difference between an “I” narrator and a collective “we” narrative voice. An I is a single character and the story is limited to one perspective. A we is a group, which can provide a plethora of perspectives or else a sort of consensus chorus perspective. That opens up entirely different storytelling opportunities and restrictions. 
+ The grammar focus of POV taxonomy also seems to confuse many. More than once I’ve seen people, even professional critics , mistake a first-person POV with direct address (“I wanted to tell you about the time I woke up as a big ol’ bug”) for true second-person POV (“You wake up and realize you have turned into a gigantic bug.”) 
+ Look, I said this was going to be a pedantic and low-stakes post. But for fun I’m going to offer a different taxonomy of POV based more on storytelling than grammar. From a narrative perspective, I think there are three main questions as far as POV goes. 1) Information, aka what can the narrator know and convey to the reader. 2) Filtration, aka whose consciousness(es) is information filtered through. 3) Modulation, aka how is the narrator shaping information for the assumed listener. 
+
+ The Storyteller (first-person singular — classic style) 
+
+ I read about it in the paper, in the subway, on my way to work. I read it, and I couldn’t believe it, and I read it again. — “Sonny’s Blues” by James Baldwin 
+
+ This is your classic first-person POV. These days it is likely the most common POV of any type. A character inside the story world is telling a tale to an undefined listener/reader. In this mode, the implied listener is not a part of the fictional reality. They are in essence whoever is reading the tale. Historically, there was often explicit artifice to this effect. “To whoever finds these letters, please believe my strange tale!” In our modern narrative-savvy times, the convention is to avoid overt signaling. The reader gets it. Either way, the story is told from one person’s perspective and we understand the story is being crafted for us. This is where the possibility of “unreliable narrators” creeps in, although many would argue all uses of first-person imply some level of unreliability just as in real life we know anyone speaking to us is omitting, exaggerating, minimizing, distorting, and otherwise shaping a narrative both intentionally and unintentionally. That’s just what people do. 
+ The Chorus (first-person plural) 
+
+ When Miss Emily Grierson died, our whole town went to her funeral: the men through a sort of respectful affection for a fallen monument, the women mostly out of curiosity to see the inside of her house, which no one save an old man-servant—a combined gardener and cook—had seen in at least ten years - “A Rose for Emily” by William Faulkner. 
+
+ For my money, the difference between a “we” and “I” is as enormous as anything in the traditional taxonomy. An I narrator is filtering the story through an individual character and can only relate information that individual would know. A collective speaks as a consensus and can know many things. In some ways, this POV is similar to third-person omniscient. The narrator might just know everything and be able to get in countless people’s heads. But the Chorus can also allow the author to represent a group consensus—the judgmental town in Faulkner’s “A Rose for Emily” or the boys in The Virgin Suicides— that is quite unique. 
+ The “we” has an expansive range. It might represent the entire human species (“We’d really like it if you Martians stopped invading”) or a group as small as two, plus anything in between. One of my favorite uses of a Chorus narrator is Alice Sola Kim’s “Mothers, Lock Up Your Daughters Because They Are Terrifying,” which speaks on behalf of three girls, 3 all Korean adoptees, in a way that constantly shifts to represent both the group’s collective identity and the way each pair of girls judges the third. 
+
+ The Appeal (first-person with direct address) 
+
+ Your mother wouldn’t let me bring the ice chest into the house, so I left it in the garage. — Caiman by Bret Anthony Johnson. 
+
+ Sometimes a narrator is not addressing a vague reader outside of the story world but a specific person within the fictional world. The character is modulating the story to appeal to that specific person in a specific way. A guy who is telling a story to try to win back his ex (“You see, baby, I’m a changed man now that I’ve completed my character arc!”) is going to spin a story differently than one trying to explain a divorce to their child (“Our lives will never be the same after this inciting incident, son.”) Either way, the existence of the addressee within the story world allows for different types of stories than ones addressing an undefined reader outside of the fictional world.
+ I don’t think every time a narrator speaks to a “you” fits into this category. Often a you is used generally in the same way as one (“to skin a cat, first you have to lure it with milk”) and other times they are metafictionally addressing someone other than a character in the story. For example, the famous ending of Denis Johnson’s “Car Crash While Hitchhiking” that suddenly addresses the reader 4 directly: “And you, you ridiculous people, you expect me to help you.” Could the latter constitute another type of POV? Sure, why not. I gotta cap the number here somewhat. 
+ The Diarist (first-person singular — incognito mode) 
+
+ A list of all the people who have ever lived and what is known of them 
+ Entry for the Tenth Day of the Fifth Month in the Year the Albatross came to the South-Western Halls
+ Since the World began it is certain that there have existed fifteen people. Possibly there have been more; but I am a scientist and must proceed according to the evidence. 
+ — Piranesi by Susanna Clarke 
+
+ Some first-person narrators are not telling a story to an undefined audience or to a specific character(s) in the story world. Sometimes they’re telling a story to themselves. This might be literally in diary entries or in some other way imply the story was written for the narrator’s eyes only. There is still unreliability—don’t we often lie to ourselves?—but it is of a different sort. 
+ In a strange way, many first-person singular present tense stories read as a form of this because the narrator relates their impressions in the moment rather than modulated by time and telling. Perhaps I’m stretching the number of first-person forms. Let me move on to second-person ones. 
+ The You-I (second-person singular — classic style) 
+
+ You are not the kind of guy who would be at a place like this at this time of the morning. But here you are, and you cannot say that the terrain is entirely unfamiliar, although the details are fuzzy. You are at a nightclub talking to a girl with a shaved head. The club is either Heartbreak or the Lizard Lounge. — Bright Lights, Big City by Jay McInerny 
+
+ The You-I is in many ways a pronoun swapped first-person or third-person limited. In this POV, the “you” is a character who exists in the story world and normally the narrative is filtered through that character’s voice. In McInerny’s opening above, you know that the “you” is not you —the reader holding the book—nor is it an avatar of the reader in some Choose Your Own Adventure way. It’s a specific male character in this specific fictional setting talking to a specific female character. Narratively it functions like the Storyteller POV. Information is restricted to what one character knows. That character is the sole filter for the story. 
+ Why use this form? 5 Theoretically, this POV makes the reader feel closer to the character. “I was burning with anger” is apparently distancing while “You were burning with anger” brings you closer. I guess. OTOH, the most common complaint about You-I POV is that readers dislike it because it distances them from the story by making them constantly “No, I did not do that! Stop saying I did!” 
+ This is the most common form of second-person because it is the easiest to write and to read. The writer’s brain simply mentally swaps pronouns, and the reader’s brain does the same thing. It causes minimal friction. This also makes it the least interesting use of second-person for me. Sometimes, the POV represents the main character’s estrangement from themselves or the like. But much of the time, this POV seems to be picked because the writer thinks it sounds cool or thinks is more literary without the POV really impacting the story. I want there to be a reason to use second-person. 
+ The Instruction Manual (second-person imperative) 
+
+ Wash the white clothes on Monday and put them on the stone heap; wash the color clothes on Tuesday and put them on the clothesline to dry; don’t walk bare-head in the hot sun; cook pumpkin fritters in very hot sweet oil; soak your little cloths right after you take them off; — “Girl” by Jamaica Kincaid 
+
+ This is the voice of an instruction manual, WikiHow article, or recipe book. “First you beat the eggs, then you add a teaspoon of sugar.” It’s pretty hard to find pure examples of this in fiction outside of experimental work, since it is difficult to weave a narrative without clear characters. But you can see versions of it that blur the line between Instruction Manual and the You-I. 
+ A classic example is Jamaica Kincaid’s “Girl,” which is a story in the form of a mother giving a laundry list of gendered instructions in one semicolon-laden paragraph. There’s also Lorrie Moore’s “How to Become a Writer Or, Have You Earned This Cliche?” : “First, try to be something, anything, else. A movie star/astronaut. A movie star/ missionary. A movie star/kindergarten teacher. President of the World. Fail miserably. It is best if you fail at an early age — say, 14.” And the metafictional narration of Italo Calvino’s If on a winter’s night a traveler that opens “You are about to begin reading Italo Calvino’s new novel If on a winter’s night a traveler . Relax. Concentrate. Dispel every thought.” 
+ These stories ultimately still imply specific characters in specific fictional worlds but they deploy an instruction manual approach that changes the sentences, style, and stories. 
+ The Reporter (third-person objective) 
+
+ He was in the bedroom pushing clothes into a suitcase when she came to the door. 
+ I’m glad you’re leaving! I’m glad you’re leaving! she said. Do you hear? 
+ He kept on putting his things into the suitcase. 
+ Son of a bitch! I’m so glad you’re leaving! She began to cry. You can’t even look me in the face, can you? 
+ — Popular Mechanics by Raymond Carver 
+
+ The Reporter is what I’m calling third-person objective because this is the POV used in journalism and it adds a journalistic flavor to fiction. Third-person objective is when there is no interiority at all—no dipping into any character’s mind to show their thoughts, memories, or feelings—and relates only description, actions, and dialogue. Only what a camera on the wall might see.
+ It’s a cold mode. Most readers recoil at it. Characters are our windows into a story, and third-person objective narrators are opaque windows. It’s well-suited to minimalism and most digestible in short shorts. In Carver’s very short story “Popular Mechanics,” a couple fights over a baby and yet we never even learn what precipitates the fight or for that matter even their names. While every other POV is filtered through a singular or collective consciousness, the Reporter presents only the facts without filtration. 6 
+ The Motorcycle Sidecar (third-person limited — single player mode) 
+
+ She did not stop to ask if it were or were not a monstrous joy that held her. A clear and exalted perception enabled her to dismiss the suggestion as trivial. She knew that she would weep again when she saw the kind, tender hands folded in death; the face that had never looked save with love upon her, fixed and gray and dead. But she saw beyond that bitter moment a long procession of years to come that would belong to her absolutely. And she opened and spread her arms out to them in welcome. 
+ — “The Story of an Hour” by Kate Chopin 
+
+ This is the most popular form of third-person narration, when the narrator is a sort of sidecar attached to the main character’s motorcycle. The narrator goes where the main character goes, sees what they see, and thinks what they think. This is called either “close third” or “third-person limited.” In many ways, this mode is similar to the Storyteller. One character provides the information and filtration. However, there can be a gap between the narrator’s voice and the main character’s subjectivity. The gap is bridged by means of “free indirect discourse.” 7 That’s creative writing jargon for when a third-person narration slips into the character’s voice without direct signaling. Bob stubbed his toe on a plastic truck. Damn it! Lucy’s little brat was always leaving his toys all over their crappy apartment. The reader understands “little brat” and “crappy” are Bob’s thoughts. This gap also means the story is modulated by the narrative voice rather than who the character is addressing (as in the Appeal or the Diarist). 
+
+ The Floating Camera (third-person limited — multiplayer mode) 
+
+ She was struck dumb with frustration. She had obviously disappointed him in some fundamental way, which she felt was completely due to misunderstanding. If only she could think of the correct thing to say, she was sure she could clear it up. […] 
+ She hadn’t yet noticed how much he had disappointed her. 
+ He couldn’t tell if he was disappointing her or not. She completely mystified him, especially after her abrupt speech on cerebralism. It was now impossible to even have a clear picture of what he wanted to do to this unglamorous creature, who looked as though she bit her nails and read books at night. 
+ — “A Romantic Weekend” by Mary Gaitskill 
+
+ This is a simple concept—third-person limited, but not limited to one person—that radically changes a story. A Floating Camera floats between the perspectives of different characters. This is not the same as true third-person omniscient (see below). A Floating Camera doesn’t know everything, nor does it have a distinct narrative-god voice separate from the character. But it moves between the perspectives of different characters, allowing scenes and interactions to be filtered through multiple perspectives. 
+ Many novels—to pick one, George R. R. Martin’s A Song of Ice and Fire series—will alternate POV characters each chapter. But a skilled writer can hop between multiple characters’ minds within a chapter or even a paragraph. A favorite example is Mary Gaitskill’s irony-drenched “A Romantic Weekend,” which constantly flips back and forth between a man and woman on a disappointing romantic getaway showing us how each person keeps misinterpreting the other. 
+
+ The God-Narrator (Third-Person Omniscient aka God Mode) 
+
+ Oh, Dylan. Oh Melanie. You fakers both. You cannot hide every flaw. You cannot hide flaws that are not flaws but are mere signs that you are part of this world, a place where terrible and wonderful beauties are coming to pieces at every moment and others are constructing themselves out of the remains […] Some, such as a certain set of extraterrestrials (who do not appear in this story), see all mass as flowing together like uninterrupted light. They would say the flaw is that humans conceived of themselves as separate in the first place, that we imagined ourselves as privately taking up space. 
+ — Earth 7 by Deb Olin Unferth 
+
+ The God-Narrator is omniscient aka all-knowing. It is the one POV that has access to unlimited information. A God-Narrator can freely dip into multiple characters’ subjectivities, as in the Floating Camera, but can also tell us things no characters in the story could know. The far future. The distant past. The thoughts of inanimate objects. Whatever they want. 
+ The God-Narrator becomes a distinct voice that comments on the action itself. It provides opinions and judgments. See my example above, taken from Deb Olin Unferth’s novel Earth 7 (which I just reviewed for the New York Times so is on my mind ). Although the God-Narrator might imply a sort of passive authority, that doesn’t have to be the case. Indeed the God-Narrator can even become an I, such as in “The Moon in its Flight” by Gilbert Sorrentino , where the author-narrator begins to metafictionally comment on the story of two lovers: “I’ll put her virgin flesh into a black linen suit, a single strand of pearls around her throat. Did I say that she had honey-colored hair? Believe me when I say he wanted to kiss her shoes.” 
+ The God-Narrator is a very common POV in classic novels from before the mid-20th century. It has fallen out of favor for various reasons—readers’ preference for psychological intimacy and/or self-insert fantasy, a postmodern turn away from singular authority and objective truth, and writers who simply can’t pull it off—but when done well few POVs are as satisfying. 
+ There are endless variations on these POV categories. And these categories themselves have endless variations. Tense and point of telling 8 alone complicate each of the above. The beauty of fiction is that the possibilities of storytelling are endless. Still, Substack posts have to end. So, dear readers, I’ll stop this one here. 
+ 
+ Counter Craft is a reader-supported publication. To receive new posts and support my work, consider becoming a free or paid subscriber.
+
+ Subscribe 
+
+ My new novel Metallic Realms is out in stores! Reviews have called the book “brilliant” ( Esquire ), “riveting” ( Publishers Weekly ), “hilariously clever” ( Elle ), “a total blast” ( Chicago Tribune ), “unrelentingly smart and inventive” ( Locus ), and “just plain wonderful” ( Booklist ). My previous books are the science fiction noir novel The Body Scout and the genre-bending story collection Upright Beasts . If you enjoy this newsletter, perhaps you’ll enjoy one or more of those books too. 
+
+ 1 [sad trombone dot wav]
+
+ 2 Both are more common in non-literary forms. Second-person is common in instruction manuals or recipes. Third-person objective is the default form of journalism. 
+
+ 3 And possibly one dark entity.
+
+ 4 Some people argue the narrator is addressing an NA group here.
+
+ 5 Although I’m restricting myself to fiction here, the You-I is also an increasingly common form of personal essay writing. Essayists often say the second-person pronoun gives them some useful distance from the personal experiences they write about and/or it represents the distance that already exists from, say, an adult writing about a childhood experience. 
+
+ 6 Yes, yes, the details are chosen by the narrator in some way. But a third-person objective narrator stays as thin and distant as possible. If the narrator becomes any kind of character, then we’ve shifted to another third-person mode. 
+
+ 7 James Wood is famously obsessed with free indirect discourse and once gave a talk at my university about it. For weeks, many of my classmates (who had slightly misheard) talked about “free and direct” speech until our professor said “just call it close third!” 
+
+ 8 Jargon for where in time the narration sits from the events described. E.g., an old character reflecting back on childhood events vs. someone telling you what happened to them last week.
+
+ 343
+ 
+ 71
+ 71
+ 
+ Share
+
+ Previous Next 
+
+ Discussion about this post
+ Comments Restacks 
+
+ Tucker May 
+
+ Jun 22 
+
+Liked by Lincoln Michel 
+
+ I really enjoyed the new labels you've attached to each POV. Helpful ways to think about them 
+
+ Reply
+
+ Share
+
+ Nicholas Kotar 
+
+ Jun 22 
+
+Liked by Lincoln Michel 
+
+ I love this. So good. 
+
+ Reply
+
+ Share
+
+ 69 more comments... 
+
+ Top Latest Discussions 
+
+ No posts
+
+ Ready for more?
+
+ Subscribe 
+
+ © 2026 Lincoln Michel · Privacy ∙ Terms ∙ Collection notice 
+ Start your Substack Get the app 
+ Substack is the home for great culture

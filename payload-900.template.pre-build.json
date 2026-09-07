@@ -1,0 +1,13 @@
+{
+ "odq_marker": "\n§900 ",
+ "odq_rows": [
+  "§900 · __ROW__ `38474a59e` -> `__CAS_SHA__`, sealed `refs/preserve/landing-desk-2026-09-05`; gate green (`TRUE_EXIT=0`, __TESTS__ tests). __ROW_BODY__\n"
+ ],
+ "card_top_heading_prefix": "## ⭐⭐⭐⭐⭐ PICKUP AT §899",
+ "card_demote_from": "## ⭐⭐⭐⭐⭐ PICKUP AT §899 — ",
+ "card_demote_to": "## (superseded) PICKUP AT §899 — ",
+ "card_new_block": "## ⭐⭐⭐⭐⭐ PICKUP AT §900 — **__CARD__** (`38474a59e` -> `__CAS_SHA__`).\n\n__CARD_BODY__",
+ "frq_in": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/frq.head.900",
+ "frq_tail": "## §900 — __TAIL__ (SEAT: Fable 5.1 — validated)\n\n__TAIL_BODY__\n",
+ "frq_out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/queue-900.md"
+}

@@ -1,0 +1,233 @@
+{
+ "name": "wolfe",
+ "chunk": 28,
+ "claims": [
+  {
+   "index": 420,
+   "feature": "withheld information and inference",
+   "claim": "Mordicai Knode says Wolfe does not lay out a trail of breadcrumbs in Peace but the clues are there.",
+   "source": "Mordicai Knode, Reactor (Tor.com), 26 October 2012",
+   "url": "https://reactormag.com/gene-wolfe-peace-review/",
+   "quote": "doesn’t lay out breadcrumbs in a trail…but the clues are there",
+   "page": "body, section on the second layer"
+  },
+  {
+   "index": 421,
+   "feature": "other: incidental detail as evidence",
+   "claim": "Mordicai Knode says the reader who chases all the details of Peace to their roots reaches the conclusion that the narrator is dead.",
+   "source": "Mordicai Knode, Reactor (Tor.com), 26 October 2012",
+   "url": "https://reactormag.com/gene-wolfe-peace-review/",
+   "quote": "if you chase all the details to their roots",
+   "page": "body, section on the third layer"
+  },
+  {
+   "index": 422,
+   "feature": "withheld information and inference",
+   "claim": "Mordicai Knode says the evidence that the narrator of Peace is dead is buried in the text but convincing.",
+   "source": "Mordicai Knode, Reactor (Tor.com), 26 October 2012",
+   "url": "https://reactormag.com/gene-wolfe-peace-review/",
+   "quote": "The evidence for it is buried, but convincing.",
+   "page": "body, section on the third layer"
+  },
+  {
+   "index": 423,
+   "feature": "naming and forms of address",
+   "claim": "Wowra says folk etymology is the primary method by which the narrator Latro records the place names in Soldier of the Mist.",
+   "source": "Scott Wowra, Ultan's Library, 7 September 2016",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "it is the primary method Latro uses to record his place names",
+   "page": "Introduction"
+  },
+  {
+   "index": 424,
+   "feature": "naming and forms of address",
+   "claim": "Wowra, classifying Latro's place names by George Stewart's toponymic taxonomy, says the predominant category is folk etymology, followed by descriptive, associative and commemorative names.",
+   "source": "Scott Wowra, Ultan's Library, 7 September 2016",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "The predominant category is folk etymology, followed by the less frequent",
+   "page": "section 'Toponymy', final paragraph"
+  },
+  {
+   "index": 425,
+   "feature": "place and institution description",
+   "claim": "Wowra says Latro records place names that do not match the sounds he heard because he is trying to communicate a deeper meaning about a place.",
+   "source": "Scott Wowra, Ultan's Library, 7 September 2016",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "he is trying to communicate a deeper meaning about a place",
+   "page": "section 'Folk Etymology'"
+  },
+  {
+   "index": 426,
+   "feature": "naming and forms of address",
+   "claim": "Wolfe, in a Spring 1988 Weird Tales interview with Darrell Schweitzer reproduced by Wowra, says Latro calls Athens “Thought” because that is what he thinks it means, though his derivation is incorrect.",
+   "source": "Gene Wolfe, interviewed by Darrell Schweitzer, Weird Tales, Spring 1988, quoted by Scott Wowra",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "Latro calls Athens Thought because that’s what he thinks it means.",
+   "page": "section 'Introduction', block quotation"
+  },
+  {
+   "index": 427,
+   "feature": "naming and forms of address",
+   "claim": "Wowra quotes the Foreword of Soldier of the Mist saying the original writer sometimes wrote place names as he heard them and more often translated them when he believed he understood their meanings.",
+   "source": "Gene Wolfe, Foreword to Soldier of the Mist (Tor hardback, 1986), quoted by Scott Wowra",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "I have followed the original writer, who sometimes wrote them as",
+   "page": "section 'Introduction', block quotation"
+  },
+  {
+   "index": 428,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi and Nigel Price agree that Severian's post-historic vantage point means that all time in the Solar Cycle is vague.",
+   "source": "Michael Andre-Driussi, Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "Severian’s post-historic vantage point means that all time is vague",
+   "page": "section 2.2 'Revising my estimate'"
+  },
+  {
+   "index": 429,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi says Wolfe goes against the Vancean grain of numbered Aeons, contrasting Wolfe's vague reckoning with the numbered Aeons of Vance's Rhialto the Marvellous.",
+   "source": "Michael Andre-Driussi, Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "Wolfe goes against the Vancean grain of numbered Aeons",
+   "page": "section 2.2 'Revising my estimate'"
+  },
+  {
+   "index": 430,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi revises his own estimate of the span from Ymar to Severian to a range between one thousand and thirty-thousand years, most accurately “many chiliads”.",
+   "source": "Michael Andre-Driussi, Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "the range is actually between one thousand and thirty-thousand years",
+   "page": "section 2.1 'Overview'"
+  },
+  {
+   "index": 431,
+   "feature": "omission as information",
+   "claim": "Andre-Driussi names as an elusive mystery the fact that the Autarch's name is never written in Severian's narrative.",
+   "source": "Michael Andre-Driussi, Ultan's Library, 27 August 2008 (essay written 1992)",
+   "url": "https://ultan.org.uk/the-death-of-catherine-the-weal/",
+   "quote": "why the Autarch’s name is never written in Severian’s narrative",
+   "page": "body, before the section on minor mysteries"
+  },
+  {
+   "index": 432,
+   "feature": "other: incidental detail as evidence",
+   "claim": "Andre-Driussi says a character is described as being like a bear 22 chapters before the reader is given his name or his sobriquet.",
+   "source": "Michael Andre-Driussi, Ultan's Library, 28 December 2003",
+   "url": "https://ultan.org.uk/lions-and-tigers-and-bears/",
+   "quote": "22 chapters before we are given his name or his sobriquet",
+   "page": "section on the second bear"
+  },
+  {
+   "index": 433,
+   "feature": "opening sentence",
+   "claim": "Borski says the titular novella of The Fifth Head of Cerberus begins with a Proustian echo.",
+   "source": "Robert Borski, Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "So begins, with its Proustian echo, the titular novella",
+   "page": "review, paragraph 1"
+  },
+  {
+   "index": 434,
+   "feature": "closing sentence",
+   "claim": "Borski says the last sentence of the titular novella is as chilling as any written in science fiction and encapsulates the mindset of incipient tyrants.",
+   "source": "Robert Borski, Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "the last sentence of the novella is as chilling as any",
+   "page": "review, paragraph on the first novella"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 420,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mister Wolfe doesn't lay out breadcrumbs in a trail...but the clues are there.",
+   "note": "Reactor page fetched live (HTTP 200, browser UA). Sentence appears verbatim in the paragraph on Peace's second layer, directly after 'Alden Dennis Weer is one of these [unreliable narrators]'. Both limbs (no breadcrumb trail; clues nonetheless present) on the page."
+  },
+  {
+   "index": 421,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "if you chase all the details to their roots, you'll find that Eleanor Bold took the married name of Porter",
+   "note": "Verbatim on the live page in the third-layer paragraph. The chase's terminus is stated there: 'Alden Dennis Weer is dead... Weer is buried and done. He's a ghost, haunting himself.' Weer is identified earlier as the narrator, so the 'narrator is dead' limb is supported."
+  },
+  {
+   "index": 422,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The evidence for it is buried, but convincing.",
+   "note": "Verbatim on the live page, immediately after 'Alden Dennis Weer is dead', so the antecedent of 'it' is the narrator's death exactly as the claim states."
+  },
+  {
+   "index": 423,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This process of translation is referred to as folk etymology, and it is the primary method Latro uses to record his place names.",
+   "note": "Ultan's Library page fetched live (HTTP 200). Verbatim in the Introduction, immediately after the Foreword block quotation, as the claim's page field says."
+  },
+  {
+   "index": 424,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The predominant category is folk etymology, followed by the less frequent use of descriptive, associative, and commemorative place names.",
+   "note": "Verbatim as the final paragraph of the 'Toponymy' section, preceded by 'attempt to classify some of Latro's place names in Soldier of the Mist according to Stewart's taxonomy' — the Stewart-taxonomy limb and the ordering of the three lesser categories both hold."
+  },
+  {
+   "index": 425,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he records place names that do not match the literal sounds spoken by a Hellene because he is trying to communicate a deeper meaning about a place",
+   "note": "Verbatim in the 'Folk Etymology' section (sentence ends 'based on his understanding of the language'). The claim's 'sounds he heard' renders the page's 'literal sounds spoken by a Hellene'."
+  },
+  {
+   "index": 426,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Latro calls Athens Thought because that's what he thinks it means... although his derivation of it is incorrect.",
+   "note": "Verbatim inside the block quotation in the Introduction, introduced on the page as 'Darrell Schweitzer's interview with Mr. Wolfe that appeared in the Spring 1988 edition of Weird Tales'. Every limb — speaker, venue, date, and the incorrect derivation — is on the page."
+  },
+  {
+   "index": 427,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In dealing with place names, I have followed the original writer, who sometimes wrote them as he heard them but more often translated them when he understood (or believed he understood) their meanings.",
+   "note": "Verbatim in the Introduction block quotation, cited on the page as 'Soldier of the Mist, 1986, xii; ... the original Tor hardback edition' and introduced via 'we learn in the Foreword to Soldier of the Mist'."
+  },
+  {
+   "index": 428,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We agreed with the basic principle that Severian's post-historic vantage point means that all time is vague.",
+   "note": "Verbatim in section 2.2 'Revising my estimate', in the sentence 'Nigel Price and I were chatting... We agreed'. The page says 'all time' without qualification, in a discussion of Urth's history; the claim's gloss 'in the Solar Cycle' narrows rather than exceeds it."
+  },
+  {
+   "index": 429,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In this Wolfe goes against the Vancean grain of numbered Aeons known as history by the grubbing wizards of the dying Earth",
+   "note": "Verbatim in section 2.2; the very next words are 'as in the following examples from Rhialto the Marvellous (1984)', followed by the 17th- and 16th-Aeon quotations, so the contrast limb is on the page."
+  },
+  {
+   "index": 430,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Recent reading suggests that the range is actually between one thousand and thirty-thousand years, most accurately \"many chiliads\"",
+   "note": "Verbatim as the whole of section 2.1 'Overview', whose preceding sentence — 'In \"Posthistory 101\" and Lexicon Urthus I stated that the time from Ymar to Severian was about a chiliad' — supports the 'revises his own estimate' limb."
+  },
+  {
+   "index": 431,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Appian the Elder in no way addresses the particular elusive mystery of why the Autarch's name is never written in Severian's narrative",
+   "note": "Verbatim on the live page, in the same sentence that then turns to 'a few minor mysteries' — matching the claim's stated location. Byline on the page: 'By Michael Andre-Driussi, On 27 August 2008', essay written 1992."
+  },
+  {
+   "index": 432,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So 22 chapters before we are given his name or his sobriquet, Hildegrin is described as being like a bear.",
+   "note": "Verbatim in the section opening 'The second bear is Hildegrin', which quotes Shadow of the Torturer ch.1 'as if a dove had momentarily commanded an arctother'. Byline: Michael Andre-Driussi, 28 December 2003."
+  },
+  {
+   "index": 433,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So begins, with its Proustian echo, the titular novella of Gene Wolfe's The Fifth Head of Cerberus",
+   "note": "Verbatim in the review's first paragraph, immediately after the novella's opening line; the page credits 'reviewed by Robert Borski' (posted 28 August 2001)."
+  },
+  {
+   "index": 434,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the last sentence of the novella is as chilling as any written in all of science fiction and effectively encapsulates the mindset of all incipient tyrannical figures",
+   "note": "Verbatim at the close of the paragraph on the opening/titular novella ('while \"The Fifth Head of Cerberus\" opens up the book...'), so both limbs — chilling as any in sf, and the tyrant's mindset — are supported."
+  }
+ ]
+}

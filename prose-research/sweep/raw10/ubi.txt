@@ -1,0 +1,54 @@
+ How Ubisoft’s New Generative AI Prototype Changes the Narrative for NPCs 
+
+ 386 / 2535 Back 
+ 
+ March 19 , 2024 
+ 6 Min Read 
+ corporate updates inside ubisoft fr studio 
+ How Ubisoft’s New Generative AI Prototype Changes the Narrative for NPCs
+ Lucy O’Brien 
+ Have you ever dreamed of having a real conversation with an NPC in a video game? Not just one gated within a dialogue tree of pre-determined answers, but an actual conversation, conducted through spontaneous action and reaction? Lately, a small R&D team at Ubisoft’s Paris studio, in collaboration with Nvidia’s Audio2Face application and Inworld’s Large Language Model (LLM), have been experimenting with generative AI in an attempt to turn this dream into a reality. Their project, NEO NPC, uses GenAI to prod at the limits of how a player can interact with an NPC without breaking the authenticity of the situation they are in, or the character of the NPC itself.
+
+ Considering that word – authenticity – the project has had to be a hugely collaborative effort across artistic and scientific disciplines. Generative AI is a hot topic of conversation in the videogame industry, and Senior Vice President of Production Technology Guillemette Picard is keen to stress that the goal behind all genAI projects at Ubisoft is to bring value to the player; and that means continuing to focus on human creativity behind the scenes. “The way we worked on this project, is always with our players and our developers in mind,” says Picard. “With the player in mind, we know that developers and their creativity must still drive our projects. Generative AI is only of value if it has value for them.”
+
+ Characters, Not Programs
+
+ Practically, this means that the personalities of these NPCs aren’t created by a machine, but by a writer, who shapes their character, backstory, and conversationstyle, and then continues to tweak once the learning language model starts improvising dialogue. Narrative Director Virginie Mosser has spent the last year and a half creating characters for the NEO NPC project, and she’s found it a rewarding, if totally new, experience.
+
+ “I’m used to building a character’s backstory, their hopes and dreams, the experiences that shaped their personality, and used all that information to nurture myself into writing dialogue,” explains Mosser. Now, she builds a character’s backstory, their hopes and dreams, the experiences that shaped their personality, and uses all that information to nurture a model.
+
+ “It’s very different,” she says. “But for the first time in my life, I can have a conversation with a character I’ve created. I’ve dreamed of that since I was a kid.”
+
+ By Mosser’s side throughout the project has been Data Scientist Mélanie Lopez Malet, who teaches the model to behave like Mosser’s original creation through guardrail systems, player input analysis, 3D environment and textual instructions. Malet, who used to teach high school literature and remains inspired by good storytelling, has been equally as driven as Mosser to create NPCs that react like real characters created by humans.
+
+ Always Iterating
+
+ A language model, Malet explains, is a big box full of concepts and statistics that produce words that might go together, based on the common co-existence of certain words. So, if you were to talk to a basic language model, it would produce boring, robotic answers. By conditioning the statistics within the model to go in the direction you want, based on the backstory, personality, and dialogue style as envisioned by a writer, it begins to understand what you expect.
+
+ “The model’s task becomes: I must impersonate this character,’” says Malet. “It is really important to us that it behaves like the character Virginie created. So, while we’re talking to it, we ask ourselves: ‘is this Lisa? Would Lisa say this?’ and if the answer is no, we need to go back and find out what happened within the model to make it stray from the vision Virginie had.”
+
+ Sticking to the Scenario
+
+ Such iterative character creation also helps to put structure around any player behavior that might disrupt, say, the tone of a particular scenario, or the goal it ultimately wants you to reach. Characters are programmed to react to player prompts in certain ways, or not react, depending on their personalities. “It’s garbage in, garbage out,” says Malet of players inputting nonsensical prompts. “But it’s also magic in, magic out. And when the player creates their own scene and it all clicks? That’s an incredible experience for them.”
+
+ There are other guardrails in place; the team has a lot of filters in place to catch toxicity and inappropriate inputs on the part of the player, for example. “We have made a distinction between the player antagonizing the NPC and insulting them, so we can properly scope what is toxic,” says Malet. The model is then crafted to react to said toxicity: it will no longer be collaborative.
+
+ “It’s important to us to reiterate that these characters do not have free will,” says Mosser. “They are there to play a role in a story. They have a narrative arc.”
+
+ Catching Bias
+
+ As we talk, the team keeps returning to authenticity – or soul , as Mosser puts it – as the guiding light for everything they touch. There’s a keen sensitivity toward bias and stereotypes within the LLM and its influence on character design and behavior. “we created a physically attractive female character,” explains Malet, “and its answers veered towards flirtatious and seductive, so we had to reprogram it”. There’s also a firm belief in human performance as an irreplaceable part of building a believable character.
+
+ “To have a character who is really expressive,” Malet says, “you need an actor who is very expressive.”
+
+ The End Goal and Next Steps
+
+ Project NEO NPC is only a prototype, and there’s still a way to go before it can be implemented in a game. The end goal is to keep it as a flexible tool, as useful for smaller Ubisoft projects as it could be for AAA. “You don’t need to be a AAA developer to onboard this technology and present your players with a new experience,” says Picard. “There are a ton of gameplay possibilities with NEO NPCs.”
+
+ The team are using GDC 2024 to present the project, but also as the checkpoint to take stock of industry feedback, and gather their learnings to date on what the technology means for them and their players in the future. Malet and Mosser also want to take the opportunity to emphasize that there is room for creativity in the generative AI space, that data and storytelling can live side by side.
+
+ “I’m a creative,” says Mosser. “And every day since I began working on this project, I’ve created.”
+
+ Share:
+
+ 

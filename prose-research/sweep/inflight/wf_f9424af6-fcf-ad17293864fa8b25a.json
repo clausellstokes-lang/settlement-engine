@@ -1,0 +1,18 @@
+{
+ "role": "synth",
+ "name": "dnd",
+ "angle": null,
+ "tag": null,
+ "lines": 5,
+ "firstTs": "2026-09-06T17:51:07.586Z",
+ "lastTs": "2026-09-06T17:51:08.316Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 5:20pm (America/New_York)",
+ "run": "wf_f9424af6-fcf",
+ "agent": "ad17293864fa8b25a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_f9424af6-fcf/agent-ad17293864fa8b25a.jsonl",
+ "journal": "failed",
+ "checkpointFile": null
+}

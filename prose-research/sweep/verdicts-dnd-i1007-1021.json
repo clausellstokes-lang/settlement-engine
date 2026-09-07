@@ -1,0 +1,327 @@
+{
+ "name": "dnd",
+ "chunk": 9,
+ "claims": [
+  {
+   "index": 1007,
+   "feature": "point of view and distance",
+   "claim": "Exactly one of the 72 sentences of SRD 5.1 Appendix PH-C uses the second person, and it stands in the opening paragraph.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "you might walk on streets made of solid fire",
+   "page": "p. 363, opening",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1008,
+   "feature": "point of view and distance",
+   "claim": "The second-person token rate of SRD 5.1 Appendix PH-C is 1.96 per 1,000 words against 38.50 per 1,000 words in the SRD 5.1 rules pages 77-85 measured the same way.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 363-365 vs pp. 77-85",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1009,
+   "feature": "punctuation tics",
+   "claim": "SRD 5.1 Appendix PH-C contains 7 em dashes, a rate of 4.58 per 1,000 words, against 2.23 per 1,000 words in the SRD 5.1 rules pages 77-85.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 363-365",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1010,
+   "feature": "other: contractions",
+   "claim": "SRD 5.1 Appendix PH-C contains 3 contractions in 1,530 words (They’re, doesn’t, don’t), a rate of 1.96 per 1,000 words.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 363-365",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1011,
+   "feature": "other: tense",
+   "claim": "SRD 5.1 Appendix PH-C is written in the present tense: is/are occur 24.84 times per 1,000 words and was/were 0.65 times per 1,000 words, the single past clause being \"from which all the worlds were made\".",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "from which all the worlds were made",
+   "page": "p. 364, Inner Planes",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1012,
+   "feature": "punctuation tics",
+   "claim": "SRD 5.1 Appendix PH-C contains no semicolon, no question mark and no exclamation mark across its 72 sentences.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 363-365",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1013,
+   "feature": "dm-facing sentence",
+   "claim": "The SRD 5.1 section \"The Environment\" (pp. 86-87) uses no second-person pronoun at all across its 56 sentences.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "By its nature, adventuring involves delving into places",
+   "page": "p. 86",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 1014,
+   "feature": "dm-facing sentence",
+   "claim": "The SRD 5.1 section \"The Environment\" carries 15.96 numerals per 1,000 words against zero in the place-describing Appendix PH-C.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 86-87 (1,065 words)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 1015,
+   "feature": "edition and house style",
+   "claim": "The SRD 5.2.1 rules pages 5-18 carry 44.12 second-person tokens per 1,000 words, the highest second-person density of any segment measured in either SRD.",
+   "source": "Finder measurement over SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0, 364 pp.), pdftotext extraction",
+   "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+   "quote": "",
+   "page": "pp. 5-18 (8,024 words)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 1016,
+   "feature": "place and institution description",
+   "claim": "The one dwelling the SRD describes at length, the Magnificent Mansion spell, is written in the second person and carries 26.72 numerals per 1,000 words in SRD 5.1.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "a magnificent foyer with numerous chambers beyond",
+   "page": "SRD 5.1, spell \"Magnificent Mansion\"",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 1017,
+   "feature": "boxed text form",
+   "claim": "Neither SRD contains any read-aloud or boxed text: a case-insensitive search for \"read aloud\", \"read-aloud\", \"read the following\", \"boxed text\" and \"aloud to the players\" returns zero matches across all 403 pages of SRD 5.1 and all 364 pages of SRD 5.2.1.",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
+   "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+   "quote": "",
+   "page": "whole of both documents",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1018,
+   "feature": "place and institution description",
+   "claim": "Neither SRD contains a settlement table; the word \"settlement\" occurs twice in the whole of SRD 5.1 and once in SRD 5.2.1, always as a rules noun.",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
+   "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+   "quote": "",
+   "page": "whole of both documents",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1019,
+   "feature": "place and institution description",
+   "claim": "In SRD 5.2.1 the only occurrence of the phrase \"Village, town, or city\" is a row label in the Spellcasting-services price table.",
+   "source": "Finder measurement over SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0, 364 pp.), pdftotext extraction",
+   "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+   "quote": "Village, town, or city",
+   "page": "SRD 5.2.1 Equipment, Spellcasting services table",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1020,
+   "feature": "civic record register",
+   "claim": "The strings \"gazetteer\", \"chronicle\", \"annal\", \"archive\" and \"ledger\" occur zero times in the full text of SRD 5.1 and zero times in the full text of SRD 5.2.1.",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
+   "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+   "quote": "",
+   "page": "whole of both documents",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1021,
+   "feature": "place and institution description",
+   "claim": "SRD 5.1 monster entries carry no habitat or lair description: the Aboleth entry on p. 261 is a stat block with no descriptive paragraph.",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "SRD 5.1 p. 261",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1007,
+   "verdict": "PARTIAL",
+   "trueWording": "second paragraph of the appendix opening, p. 363",
+   "unsupportedLimb": "it stands in the opening paragraph",
+   "note": "Fetched the PDF fresh with a browser UA (HTTP 200, 3,158,713 bytes, md5 af3bffd37916093b21325574febf1f72, 403 pages) and ran pdftotext -enc UTF-8. Appendix PH-C occupies PDF/printed pp. 363-365. Sentence count: 74 sentence-final periods, minus the two run-in bold labels 'Spells.' and 'Portals.', = 72 sentences exactly as claimed. Second-person tokens across the whole appendix: 3 (you x1, your x2), and all three sit in one and the same sentence, so exactly one of the 72 sentences uses the second person - CONFIRMED. Quote 'you might walk on streets made of solid fire' appears verbatim. The failing limb is location: that sentence opens 'As your character achieves greater power...' and stands in the SECOND paragraph of the appendix's unheaded introduction. The first paragraph runs 'The cosmos teems with a multitude of worlds...' through '...the dominions of the gods.' and contains no second-person token; the indented paragraph beginning 'Many spells and magic items...' is where the sentence lives."
+  },
+  {
+   "index": 1008,
+   "verdict": "PARTIAL",
+   "trueWording": "pp. 77-85 measure 42.92; 38.38 only including p. 86",
+   "unsupportedLimb": "38.50 per 1,000 words in the SRD 5.1 rules pages 77-85",
+   "note": "Appendix limb CONFIRMED exactly: 3 second-person tokens over the finder's 1,530-word denominator = 1.96 per 1,000. Comparator limb does not reproduce for the stated range. Measuring pp. 77-85 the same way (pdftotext, page-footer and page-number stripped) gives 245 second-person tokens in 5,708 words = 42.92 per 1,000. The claimed 38.50 requires a denominator of 6,364 words, which is 11% MORE text than pp. 77-85 contains, so no heading- or table-stripping can reach it; excluding headings pushes the rate UP, not down. The figure is reproducible only if p. 86 is included: pp. 77-86 give the same 245 tokens (p. 86 has zero) over 6,383 words = 38.38, and 6,363 words once headings are dropped = 38.50 exactly. So the denominator spans one page more than the label. The comparison's substance survives - the appendix is roughly 20x less second-person than the rules pages - but the specific figure is attached to the wrong range."
+  },
+  {
+   "index": 1009,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "7 em dashes, 4.58/1,000; rules pages measure 2.10",
+   "note": "CONFIRMED for the appendix: exactly 7 U+2014 em dashes in Appendix PH-C (and zero en dashes), 7/1,530 = 4.575 = 4.58 per 1,000, matching the claim to the rounding. Comparator: measuring pp. 77-85 inclusive of headings and table cells gives 12 em dashes in 5,708 words = 2.10 per 1,000, against the claimed 2.23. The gap is 6% and is explained by denominator scope rather than by any error of range: 12 em dashes over a prose-only denominator of 5,381 words gives 2.230, and pp. 77-85 carry well over 300 words of headings and table cells (Ability Modifiers, Skills, Travel Pace). The finder's PH-C denominator of 1,530 against my raw 1,556 shows the same heading-excluding convention. Direction and magnitude - the appendix roughly doubles the rules pages - hold on either denominator."
+  },
+  {
+   "index": 1010,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "They're, doesn't, don't - the only three contractions",
+   "note": "CONFIRMED. A scan of every apostrophe-bearing token in Appendix PH-C returns exactly five: They're, plane's, doesn't, plane's, don't. Two are possessives ('a plane's alignment', 'the plane's'); the three contractions are precisely the three the claim names, in that order. 3/1,530 = 1.9608 = 1.96 per 1,000, matching. My raw whitespace word count over the three pages is 1,556 including the appendix title and the nine section headings; net of headings this lands on the claimed 1,530, and the same 1,530 denominator reproduces the claim's other three rates (4.58 em dash, 24.84 is/are, 0.65 was/were) to the last digit, so the denominator is internally consistent."
+  },
+  {
+   "index": 1011,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quote verbatim, Inner Planes paragraph, p. 364",
+   "note": "CONFIRMED on every limb. is = 13 and are = 25, total 38; 38/1,530 = 24.837 = 24.84 per 1,000. was = 0 and were = 1, total 1; 1/1,530 = 0.654 = 0.65 per 1,000. The single 'were' is the quoted clause, which appears verbatim inside the Inner Planes paragraph on p. 364: the plane provides the raw elemental substance 'from which all the worlds were made'. Checked the 'single past clause' limb adversarially by listing every -ed form in the appendix (abandoned, abstracted, accomplished, called, created, defined, formed, generated, governed, pinched, required, resurrected, suspended and the rest): all are passives or participles inside present-tense or present-perfect constructions ('is called', 'are defined', 'have abandoned', 'has been pinched off'), and 'had' occurs zero times. 'were made' is the only finite past-tense clause in the appendix."
+  },
+  {
+   "index": 1012,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "zero semicolons, question marks, exclamation marks throughout",
+   "note": "CONFIRMED. Character counts over the normalised text of Appendix PH-C (pp. 363-365, footers stripped): semicolon 0, question mark 0, exclamation mark 0. The 72-sentence denominator is the same one verified at index 1007 (74 sentence-final periods less the two run-in labels 'Spells.' and 'Portals.'), so every one of the appendix's sentence-final marks is a full stop. No quotation was supplied with the claim, so the verdict is by substance rather than verbatim."
+  },
+  {
+   "index": 1013,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quote verbatim, opening of The Environment, p. 86",
+   "note": "CONFIRMED on every limb, and the sentence count is exact. The quoted words open the section verbatim on p. 86: 'By its nature, adventuring involves delving into places that are dark, dangerous, and full of mysteries to be explored.' Second-person pronouns across the whole of pp. 86-87 (you, your, yours, yourself, yourselves): ZERO - a regex sweep returns an empty list, which also covers the Resting material that shares p. 87. Sentence count for the section proper - The Environment through the end of Interacting with Objects, i.e. stopping where 'Resting' begins - is 56, matching the claim exactly. The section is written entirely about 'a creature' and 'a character' with the GM in the third person."
+  },
+  {
+   "index": 1014,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "17 digit runs in 1,065 words; appendix has none",
+   "note": "CONFIRMED, and the figure reproduces to the last digit once the counting convention is recovered. The Environment section (p. 86 to the end of Interacting with Objects on p. 87) contains these numeric strings: 1d6, 10, 20d6, 1, 30, 1, 0, 14, 3, 2, 0, 3, 1, 15, 0. Counted as digit runs rather than whole tokens, the dice expressions split (1d6 gives 1 and 6; 20d6 gives 20 and 6), yielding exactly 17 runs; 17/1,065 = 15.962 = 15.96 per 1,000. My raw word count for the section is 1,083 including its ten sub-headings, which lands on the claimed 1,065 net of headings - the same heading-excluding convention the finder used throughout. The contrast limb is likewise CONFIRMED: Appendix PH-C contains no numeral at all, the only digits on those pages being the page-number footers."
+  },
+  {
+   "index": 1015,
+   "verdict": "PARTIAL",
+   "trueWording": "pp. 5-18 measure 42.97; SRD 5.1 pp. 36-49 reach 88.91",
+   "unsupportedLimb": "the highest second-person density of any segment measured in either SRD",
+   "note": "Fetched SRD 5.2.1 fresh with a browser UA (HTTP 200, 6,031,375 bytes, md5 393692267005a40d5a194e1707eb9ebb, 364 pages). The density limb is close but not exact: pp. 5-18 measure 416 second-person tokens in 9,682 words = 42.97 per 1,000, against the claimed 44.12 over 8,024 words. The 1,658-word denominator gap points to table content (Ability Modifiers, Skills, Action Summary, Conditions) being stripped, which I cannot reconstruct; on any reading the segment is very heavily second-person, so that limb stands substantively. The superlative does NOT stand. Sweeping every 14-page window across both documents, the peak second-person density in SRD 5.1 is pp. 36-49 - the class descriptions - at 667 tokens in 7,502 words = 88.91 per 1,000, more than double the claimed figure; pp. 35-56 all sit above 83. SRD 5.2.1's own peak window is pp. 48-61 at 73.41. The claim's own comparator, SRD 5.1 pp. 77-85, measures 42.92, so pp. 5-18 lead it by 0.05 per 1,000 - a statistical tie, not a margin."
+  },
+  {
+   "index": 1016,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quote verbatim, Magnificent Mansion spell, SRD 5.1 p. 162",
+   "note": "CONFIRMED on every limb, with the numeral rate exact. The spell sits on SRD 5.1 p. 162; the quoted words appear verbatim in 'Beyond the portal is a magnificent foyer with numerous chambers beyond.' Second person: the description body carries 12 second-person tokens in 262 words (45.80 per 1,000) and every sentence of it addresses the caster - 'You conjure an extradimensional dwelling', 'You choose where its one entrance is located', 'You can create any floor plan you like'. Numerals: the body after the Duration line contains 7 numbers (5, 10, 30, 50, 10, 100, 100) in 262 words = 26.718 = 26.72 per 1,000, matching exactly. Checked the 'one dwelling described at length' limb against the SRD's other candidates: Tiny Hut is a 10-foot dome of force at roughly 180 words with no rooms, Rope Trick an extradimensional space with no description, and Mighty Fortress and Secure Shelter are absent from SRD 5.1 entirely."
+  },
+  {
+   "index": 1017,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "all five strings return zero in both documents",
+   "note": "CONFIRMED. Case-insensitive substring searches over the full normalised pdftotext extraction of both PDFs - SRD 5.1 at 403 pages and 241,237 words, SRD 5.2.1 at 364 pages and 238,360 words, page counts matching the claim - return zero matches for all five strings in both documents: 'read aloud' 0/0, 'read-aloud' 0/0, 'read the following' 0/0, 'boxed text' 0/0, 'aloud to the players' 0/0. Adversarial control: the bare string 'aloud' does occur, 3 times in each document, so the searches were reaching live text rather than failing silently; none of those occurrences is a read-aloud instruction."
+  },
+  {
+   "index": 1018,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "singular 'settlement' twice and once; plural adds three",
+   "note": "CONFIRMED on the counting convention the claim's own method implies. Word-boundary searches for the singular return exactly 2 in SRD 5.1 and exactly 1 in SRD 5.2.1, as claimed. Both SRD 5.1 instances are plain rules nouns - selling loot on returning 'to a town or other settlement', and delivering something 'to a distant settlement'; the SRD 5.2.1 instance is the crafting-materials rule, 'in any other settlement, that chance is 25 percent'. Flag for downstream use: SRD 5.2.1 additionally carries the plural 'settlements' 3 times (spellcasting services, an area-divination spell, and a druidic locate effect), so a reader who takes 'the word' to include inflected forms would find 4, not 1; SRD 5.1 has no plural at all. The no-settlement-table limb holds: neither document contains any settlement-size table, 'hamlet' and 'metropolis' occur zero times in both, and the only table with settlement categories is the SRD 5.2.1 Spellcasting Services availability column."
+  },
+  {
+   "index": 1019,
+   "verdict": "PARTIAL",
+   "trueWording": "three occurrences, all rows of that same table",
+   "unsupportedLimb": "the only occurrence",
+   "note": "The quoted phrase is verbatim and the table attribution is right, but the count is wrong. 'Village, town, or city' occurs THREE times in SRD 5.2.1, not once - it is the Availability entry on three consecutive rows of the Spellcasting Services table, against Cantrip (30 GP), spell level 1 (50 GP) and spell level 2 (200 GP); the rows above level 2 read 'Town or city only' and then 'City only'. The phrase appears nowhere outside that table, so the claim's point - that this is the SRD's only settlement-size vocabulary and it exists purely as a price-table row label - survives intact, and the table is in the Equipment chapter as stated. Graded PARTIAL solely because the singular 'the only occurrence' is not what the document shows."
+  },
+  {
+   "index": 1020,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "all five strings absent from both SRD texts",
+   "note": "CONFIRMED, and deliberately over-inclusively. Case-insensitive substring searches (not word-boundary, so 'annal' would have caught 'annals' and 'archive' would have caught 'archives' or 'archivist') over the full text of both documents return zero for all five terms in both: gazetteer 0/0, chronicle 0/0, annal 0/0, archive 0/0, ledger 0/0. Denominators are 241,237 words for SRD 5.1 and 238,360 for SRD 5.2.1, so the absence is across the whole of both texts, not a sampled segment. The civic-record register is entirely absent from the SRD."
+  },
+  {
+   "index": 1021,
+   "verdict": "CONTRADICTED",
+   "trueWording": "p. 379 Giant Spider: 'making their lairs on ceilings'",
+   "note": "The specific limb is right and the generalisation is refuted by the same document. Aboleth CONFIRMED: PDF/printed p. 261 carries 'Monsters (A) / Aboleth / Large aberration, lawful evil' straight into Armor Class, Hit Points, Speed, the ability array, traits, actions and legendary actions, with no descriptive or habitat paragraph anywhere in the entry. But SRD 5.1 monster entries DO carry habitat and lair description elsewhere. The Giant Spider entry on p. 379 reads that giant spiders 'are most commonly found underground, making their lairs on ceilings or in dark, web-filled crevices' and that such lairs 'are often festooned with web cocoons holding past victims' - habitat and lair, explicitly. The same pattern recurs: giant fire beetles 'are most commonly found underground and in dark forests', mammoths 'inhabit a wide range of climes, from subarctic to subtropical', reef sharks 'inhabit shallow waters and coral reefs', and in the NPC entries druids 'dwell in forests and other secluded wilderness locations' while evil mages 'dwell in isolated sites'. The habitat-free pattern holds for the main Monsters chapter but not for SRD 5.1 monster entries as a class, which is what the claim asserts."
+  }
+ ]
+}

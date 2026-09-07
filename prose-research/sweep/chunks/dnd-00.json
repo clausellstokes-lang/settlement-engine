@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 0,
+ "indices": [
+  1153,
+  1154,
+  1155,
+  1156,
+  1157,
+  1158,
+  1159,
+  1160,
+  1161,
+  1162,
+  1163,
+  1164,
+  1165,
+  1166,
+  1167
+ ],
+ "claims": [
+  {
+   "index": 1153,
+   "feature": "place and institution description",
+   "claim": "Wizards of the Coast's own 2024 settlement handout bands settlement size by population, with a village at up to 500 people.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "VILLAGE (POP. UP TO 500)",
+   "page": "Settlement Tracker, size checkbox row"
+  },
+  {
+   "index": 1154,
+   "feature": "place and institution description",
+   "claim": "The same 2024 handout sets the town band at a population of 501 to 5,000.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "TOWN (POP. 501–5,000)",
+   "page": "Settlement Tracker, size checkbox row"
+  },
+  {
+   "index": 1155,
+   "feature": "place and institution description",
+   "claim": "The same 2024 handout sets the city band at a population of 5,001 or more.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "CITY (POP. 5,001+)",
+   "page": "Settlement Tracker, size checkbox row"
+  },
+  {
+   "index": 1156,
+   "feature": "place and institution description",
+   "claim": "The publisher's settlement slot list opens with a slot labelled Defining Trait.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "DEFINING TRAIT",
+   "page": "Settlement Tracker, first field"
+  },
+  {
+   "index": 1157,
+   "feature": "place and institution description",
+   "claim": "The publisher's settlement slot list carries a slot labelled Claim to Fame.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "CLAIM TO FAME",
+   "page": "Settlement Tracker, second field"
+  },
+  {
+   "index": 1158,
+   "feature": "place and institution description",
+   "claim": "The publisher's settlement slot list carries a single leadership slot labelled Local Leader.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "LOCAL LEADER",
+   "page": "Settlement Tracker, fourth field"
+  },
+  {
+   "index": 1159,
+   "feature": "place and institution description",
+   "claim": "The publisher's settlement handout keeps a list slot for the settlement's noteworthy places, separate from its people.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "NOTEWORTHY PLACES",
+   "page": "Settlement Tracker, right-hand list column"
+  },
+  {
+   "index": 1160,
+   "feature": "place and institution description",
+   "claim": "The only economic figure the publisher's settlement handout asks a DM to record is the gp value of the most expensive item for sale.",
+   "source": "Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide",
+   "url": "https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf",
+   "quote": "GP VALUE OF THE MOST EXPENSIVE ITEM FOR SALE",
+   "page": "Settlement Tracker, footer field"
+  },
+  {
+   "index": 1161,
+   "feature": "boxed text form",
+   "claim": "The Death House read-aloud paragraph opens a settlement with a road, the village, and a simile drawn from its own building stock rather than with any statistic.",
+   "source": "Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016",
+   "url": "https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf",
+   "quote": "The gravel road leads to a village, its tall houses dark as",
+   "page": "Death House, arrival read-aloud"
+  },
+  {
+   "index": 1162,
+   "feature": "naming and forms of address",
+   "claim": "Death House names a building by the name the locals give it rather than by an owner or address.",
+   "source": "Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016",
+   "url": "https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf",
+   "quote": "Death House is the name given to an old row house",
+   "page": "Death House, 'History'"
+  },
+  {
+   "index": 1163,
+   "feature": "place and institution description",
+   "claim": "D&D Beyond's own launch article says the 2024 Dungeon Master's Guide's handouts serve as a template for building settlements.",
+   "source": "Mike Bernier, 'What's New in the 2024 Dungeon Master's Guide?', D&D Beyond, 12 Nov 2024",
+   "url": "https://www.dndbeyond.com/posts/1825-whats-new-in-the-2024-dungeon-masters-guide",
+   "quote": "creating NPCs and building settlements",
+   "page": "'Adventures, Handouts, and Ready-to-Play Maps'"
+  },
+  {
+   "index": 1164,
+   "feature": "edition and house style",
+   "claim": "Wizards of the Coast states that the 2024 Dungeon Master's Guide replaces all rules in the 2014 version of the book.",
+   "source": "DND Staff, 'Updates in the Dungeon Master's Guide (2024)', D&D Beyond, 20 Feb 2025",
+   "url": "https://www.dndbeyond.com/posts/1916-updates-in-the-dungeon-masters-guide-2024",
+   "quote": "it replaces all rules in the 2014 version of the book",
+   "page": "'Using This Book with Older Books'"
+  },
+  {
+   "index": 1165,
+   "feature": "place and institution description",
+   "claim": "An official free D&D Beyond encounter opens a settlement entry with the settlement's name, a population figure, and its people's trade, in one sentence.",
+   "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
+   "url": "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
+   "quote": "Icehaven is a village of 5,000 souls",
+   "page": "'The Village of Icehaven'"
+  },
+  {
+   "index": 1166,
+   "feature": "terminology consistency",
+   "claim": "The same official column calls Icehaven a village while giving it a population of 5,000, a figure the publisher's own 2024 settlement handout places in the town band.",
+   "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
+   "url": "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
+   "quote": "Icehaven is a village of 5,000 souls",
+   "page": "'The Village of Icehaven'"
+  },
+  {
+   "index": 1167,
+   "feature": "naming and forms of address",
+   "claim": "The same column names a settlement's leader as office title plus given name plus surname, in that order.",
+   "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
+   "url": "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
+   "quote": "The leader of the village, Starosta Ernath Noack",
+   "page": "'Arrival of the Infected One'"
+  }
+ ]
+}

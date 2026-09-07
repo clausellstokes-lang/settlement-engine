@@ -1,0 +1,777 @@
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Articles
+https://doi.org/10.1590/1806-9983e670404
+Ivagining worlds: on Ursula K. Le Guin, 
+social science-fiction, and altertopias
+Ivaginando mundos: Ursula K. Le Guin, ficção 
+científica social e altertopias
+Miguel Vale de AlmeidaI, II
+https://orcid.org/0000-0001-9879-0677
+miguel.almeida@iscte.pt
+I Instituto Universitário de Lisboa – Lisboa, Portugal
+II Centro em Rede de Investigação em Antropologia – Lisboa, Portugal
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida2
+Abstract
+Ethnography-based Anthropology and Science Fiction can engage in a productive dia-
+logue since both address what is proposed as “altertopias”. Utopias, dystopias, and cul-
+tural alterity share the possibility of imagining social and cultural organizations 
+different from both those of the authors and those of the readers. These imaginations 
+are intrinsically creative/artistic and political at the same time, and they critique 
+power structures, especially when approached through a feminist stance. Inspired by 
+the literary work of Ursula Le Guin, the article takes this further by experimenting 
+with the inclusion of a fictional piece of “Social science fiction” that itself plays on 
+Le Guin’s themes.
+Keywords: Ursula Le Guin; science fiction; altertopia; ethnography.
+Resumo
+A antropologia de base etnográfica e a ficção científica podem estabelecer um diálogo 
+produtivo, uma vez que ambas tratam de “altertopias”. Utopias, distopias e alteridade 
+cultural partilham a possibilidade de imaginar organizações sociais e culturais dife-
+rentes das dos autores e leitores. Estas imaginações são intrinsecamente criativas/
+artísticas e políticas simultaneamente, sobretudo se abordadas desde uma perspetiva 
+feminista. Inspirado pela obra literária de Ursula Le Guin, o artigo leva esta posição 
+mais longe através da experimentação da escrita ficcional no género “ficção científica 
+social” a partir de temas propostas por aquela autora.
+Palavras-chave: Ursula Le Guin; ficção científica; altertopia; etnografia.
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 3
+Ethnography-based Anthropology and science-fiction are commonly regarded 
+as separate genres of intellectual and literary production. The former is seen as 
+scientific and the latter as artistic. Anthropology deals with actually existing 
+forms of social life and social worlds whereas science fiction deals with “fan-
+tasy”. Both a positivistic stance on science (especially social science and the 
+humanities) and a romantic stance on art (especially literature) have been pro-
+fusely questioned and challenged since the post-modern turn in both social 
+sciences and the arts. This article aims at illustrating the possible porosity 
+between Ethnography-based Anthropology and the literary genre of science 
+fiction with a focus on sex, gender, and sexuality and resorting to a feminist 
+and queer perspective.
+Anthropology aims at making the exotic familiar to make the familiar exotic, 
+as the well-known saying goes. Science-fiction aims at imagining worlds that 
+do not exist but does so based on the historical, social, and cultural experience 
+of both author and readers. That experience includes the diversity of human 
+social constructs as recorded in the ethnographic archive and in anthropologi-
+cal analysis. In this sense, can one say that they both work in a utopian mode? By 
+this I mean the utopias and dystopias proper – those of science fiction – and the 
+altertopias of Ethnography. By altertopias I do not mean that the ethnographic 
+record relates to a non-existing reality (it does not, of course, since it reports on 
+the actual life of existing human groups), but rather that the world thus 
+reported is alien to the reader, albeit not so to both anthropologist and the 
+human group with whom the ethnography was produced.
+In both genres and in both forms of intellectual production, we are faced 
+with alternative worlds. The portrayal of those worlds itself opens a space for a 
+critique of the reader’s common-sense reality. Feminist and queer imagina-
+tions, specifically, work for changes in social relations and identities that nec-
+essarily engage in altertopian  endeavors, since they are in opposition to 
+actually existing heteronormativity, and both Anthropology and science-
+fiction are of enormous potential as fields of inquiry and imagination with a 
+politically transformative potential. Anthropologists can immediately think of 
+Haraway’s (2016) speculative and science-fiction inspired work on the future, 
+or the ethnographically based theorization of Marilyn Strathern (2001) and her 
+proposal to overcome the Western template of understanding gender as based 
+on the sexualized concepts of “men” and “women”. Their political effect can 
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida4
+not be underestimated: one imagines the future as an overcoming of present 
+challenges, the other presents an alternative cultural construct that chellenges 
+our certainties. In this sense, politics requires imagination: “we could have 
+been, or we could be like them” (the ethnographic other, or alter); “we could 
+have been or become like them” (the other, or alter, in science-fiction).
+*
+The literary work of Ursula K. Le Guin (1929-2018) has been the subject of exten-
+sive analytical and critical work, the review of which is outside the scope of this 
+article. I would rather focus – based on my anthropological experience and on 
+my predilection for Le Guin’s oeuvre – on aspects of her approach to gender and 
+sexuality, as well as political-economic utopias and dystopias. Specifically, I 
+have been paying attention in her work to three aspects. Firstly, how it shows 
+that our gender and political-economic orders can be seen as dystopian, includ-
+ing those utopian political projects that were implemented or experimented 
+with; Secondly, how her work calls for utopian models that are small-scale, eco-
+logical, and egalitarian – and very much inspired in the ethnographic archives 
+but without conceding to pre-modern nostalgia; Thirdly, how productive the 
+porosity between Anthropology and science-fiction can be for our discipline’s 
+contribution to the imagination of a feminist-and queer-inspired world, as well 
+as a critique of our present situation.
+Ursula K. Le Guin’s science-fiction oeuvre deals, among others, with two fun-
+damental topics of concern here: gender and sexuality, on the one hand; and 
+political-economic utopia and dystopia, on the other. Can her feminist 
+approach to the subject and subjects of her stories be seen as a form of queer 
+imagination avant la lettre ? Also, does her approach to anarchist utopias, coun-
+terpointed with capitalist and anthropocenic dystopias, avoid the simplistic 
+dichotomies of the political debates of the pre-Fall-of-the-Berlin-wall era? From 
+a biographical point of view, Le Guin’s upbringing in her father’s (Alfred Kroeber) 
+ethnographic field sites and museum institution has – as she has admitted – 
+inspired her work. For this purpose, and to highlight the aspects mentioned in 
+the previous paragraph, I will focus on her novels The left hand of darkness (1969), 
+The word for world is forest  (1972), The dispossessed  (1974), Always coming home
+(1985), and, generally, in what critics have called the Hainish Cycle in her work.
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 5
+My reading of Le Guin has been centered, throughout the years, on the 
+abovementioned cycle of novels and stories. The cycle was not intended as 
+such by Le Guin, it was not “a series” that she had planned. It is rather an ex-
+post connection, rather than collection, of novels and short stories set in several 
+different imaginary planets. These planets’ populations were the result of colo-
+nization by the original humans from planet Hain. Both Hainish genetic 
+experimentation and local evolutionary processes led to different sub-species 
+of humans and different cultural complexes in different planets.
+Furthermore, in many novels we get to know a planet through the narrative 
+of a Mobile, an ethnographer of sorts, who is supposed to report on the popula-
+tion, without interfering in their lives and history, in order to help the Ecumene
+(the cooperative, anarchy-like federation of planets colonized by Hain) decide 
+when and if to establish contact and provide technology (mainly communica-
+tion technology that allows for cooperation and exchange of knowledge).
+*
+Baker-Cristales (2012) uses the wonderful expression “social science fiction” 
+when referring to Le Guin’s ethnographic sensibility. She notes how “ethno-
+graphic writing (is) neither fiction nor science” (Baker-Cristales, 2012, p. 15) and 
+resorts to Jameson’s (2005) notion of how “the belief that storytelling and imag-
+ination are entirely distinct projects from science and truth-telling is a product 
+of a particular, very circumscribed, social-historical system – modern capital-
+ism” (Baker-Cristales, 2012, p. 17). As Jameson (2005, p. 286) has conveyed, rather 
+than predicting, science fiction’s purpose is to “defamiliarize and restructure 
+our experience of our own present, and to do so in specific ways distinct from 
+all other forms of defamiliarization”. Baker-Cristales notes how often the pro-
+tagonists of Le Guin’s novels are anthropologists by another name. “By using 
+ethnography as a textual model for fiction, Le Guin aims to transcend some of 
+the limitations of fiction – the end of the story” (Baker-Cristales, 2012, p. 19).
+In the words of Fredric Jameson (1975, p. 4), “one of the most significant 
+potentialities of Science Fiction as a form is precisely this capacity to provide 
+something like an experimental variation on our own empirical universe”. This 
+experimentation is usually codified as analogy and extrapolation (Jameson, 1975). 
+It is complemented by world reduction , a taking away of certain characteristics, 
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida6
+whether technological, institutional, or cultural, of our habitual cultural world 
+(Modern, Western, Capitalist…), thus setting the stage for speculating the out-
+come of that removal, a sort of “take away this variable and see what happens”.
+In The left hand of darkness, Le Guin (1969) describes a world without gender. 
+People in planet Gethen – who are human, as everyone in the Hainish Cycle 
+planets, albeit modified by local evolution – are hermaphrodytes 1 and do not 
+experience permanent libido or sex drive. Like in many species we know, they 
+have estrus, or cycles of sexual availability, called kemmer. When on kemmer, if 
+two persons are attracted to each other one of them will develop secondary 
+female characteristics and the other male characteristics. There is no way to 
+tell which will be which and a person can “become” both male and female in 
+different kemmer cycles in their lifetime. Jameson (1975, p. 7-8) also com-
+mented on the Gethen:
+Rather than stand in favor of a wider tolerance for all kinds of sexual behavior, it 
+seems more appropriate to insist […] on the feminist dimension of her novel, and 
+on its demystification of the sex roles themselves. The basic point about Gethe-
+nian sexuality is that the sex role does not color everything else in life, as is the 
+case with us, but is rather contained and defused, reduced to that brief period of 
+the monthly cycle when, as with our [non-human] animal species, the Gethe-
+nian are in “heat” or “kemmer”.
+So, instead of eliminating sex, Gethenian biology eliminates sexual repression, 
+according to Jameson (1975, p. 8):
+For if Le Guin’s Gethen does not do away with sex, it may be suggested that it 
+does away with everything that is problematic about it […] The dream of some 
+scarcely imaginable freedom from sex, indeed, is a very ancient human fantasy, 
+almost as powerful in its own way as the outright sexual wish-fulfillments 
+themselves.
+1  This is the expression that the author uses, which of course resonates as politically passé to 
+contemporary readers, albeit being an actual scientific definition applicable to several species.
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 7
+Le Guin connects Gethenian absence of a permanent sex drive and the 
+absence of gender to the wider theme of societal organization and conflict: 
+there being no gender oppression or violence, Gethen is a society uninterested 
+in growth and power, and does not therefore see the point in war between 
+either factions or nations.
+The theme of gender and sexuality, and its connection to wider societal pre-
+dispositions, is prevalent in Le Guin’s works – from societies where women are 
+in power, to those where there is no distinction between sexual orientations. 
+In The dispossessed  (Le Guin, 1974), the anarchist organization of the planet 
+Anarres is not depicted only on the grounds of communal possession, central 
+organization of the distribution of labor and resources, or on the ecological 
+care and avoidance of disproportionate growth or accumulation. It is also char-
+acterized by what could be called as “free love” and the absence of structured 
+marriage, cohabitation, or marriage alliances – as opposed to its nemesis 
+planet, Urras (and also its origin, Anarres being a colony settled by radicals 
+that have fled from Urras), where capitalism is full-fledged as well as gender 
+and sexual structures very similar to our contemporary patriarchal ones.
+Is Anarres a utopia like so many others in mainstream, run of the mill 
+science-fiction? Not quite. Le Guin seems to want to say that it is an experiment, 
+an on-going one, where hesitation and doubt have a place. That is what the 
+main character, Shevek, embodies, when he decides to play the role of the sci-
+entific emissary to Urras, where he is both attracted to and disgusted by the 
+niceties of an affluent society, while back home in Anarres he is also ambiva-
+lent about the political choices and, most of all, the unavoidable fact that even 
+in progressive utopias a new hegemony tends to be established, social pressure 
+to conformity occurring as well.
+The above-mentioned reference, by Jameson, to the plot strategy of “world 
+reduction” (let’s remove capitalism, the nation state, industrial production, 
+cars, and airplanes, and see what life could be like) is applicable to Le Guin. She 
+does something like this in Always coming home , a novel that is not part of the 
+Hainish Cycle. It is an invented ethnography. It follows the style of early ethno-
+graphic efforts and is reminiscent of Malinowski’s writing template. However, 
+it is also an archaeology of the future, not a rendition of the bast or of a contempo-
+rary culturally different society. It depicts California in a future when people 
+have gone back (but, as certainly Le Guin would say, forward) to indigenous ways 
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida8
+of living, especially in what regards keeping small-scale, ecologically balanced 
+societies, with close social ties based on communal modes of existence. Indige-
+nous but of today – and tomorrow . This neo-tribal society exists while an Inter-
+net-like technology is available, kept by automated entities that do not interfere 
+with human life but simply collect, organize, and provide information.
+As Baker-Cristales (2012, p. 24) has said,
+Cultural critique, in both the case of ethnography and in Le Guin’s fiction, is a 
+critical assessment of the world as it is thought to be, a rejection of what is. The 
+other side of this cultural critique is utopia, a dreaming of what could or should 
+be […] As Michel-Rolph Trouillot pointed out, utopian writing began to diverge 
+from realist accounts of the world early in the 16th century, but the two are nec-
+essarily linked – what he calls the “savage-utopia correspondence”.2
+The connection between Le Guin’s concern with gender and sex, on the one 
+hand, and her concern with apparently utopian modes of social, economic, and 
+political organization, on the other, was also observed by Jameson (1975, p. 12-13):
+The existence of modern technology in the midst of an essentially feudal order 
+[in The left hand of darkness] […] It becomes difficult to escape the conclusion that 
+this attempt to rethink Western history without capitalism is of a piece, struc-
+turally and in its general spirit, with the attempt to imagine human biology 
+without desire…
+Donna Haraway (2014) also refers to the connection between Always coming 
+home and the problematization of the Anthropocene (actually, the Chthu-
+lucene, in her formulation), when she acknowledges her inspiration on 
+Le Guin – together with anthropologists Marilyn Strathern and Anna Tsing – 
+and how she helped her realize that utopias shouldn’t be big systems and sig-
+nifiers, but actual small-scale human attempts at relation and connection 
+with other species and the world. Haraway (2016) is the leading contemporary 
+2  See Trouillot (2003, p. 19). Trouillot’s work can be a source of critique of homologies between 
+Western utopian thought and narratives of the cultural difference of colonized peoples. 
+Le Guin’s social science fiction avoids the trap of both the noble savage and the savage primitive.
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 9
+author acknowledging the influence of (and dialogue with) Le Guin, when she 
+writes that “Le Guin’s carrier bag theory of narrative comes to the rescue, along 
+with biologist Deborah Gordon’s theories about ant interactions and colony 
+behavior, to elaborate the possibilities of ecological evolutionary developmen-
+tal biology and nonhierarchical systems theories for shaping the best stories. 
+Science fiction and science fact cohabit happily in this tale” (Haraway, 2016, p. 7, my 
+italics). Haraway is referring also to stories that deal with non-human charac-
+ters, but her assessment would certainly aply to stories starring humans in the 
+Hainish cycle. What is at stake is the radical change of perspective . Le Guin 
+(1989, p. 97-98) herself wrote inspiringly on this:
+Copernicus told us that the Earth was not the center. Darwin told us that man is 
+not the center. If we listened to the anthropologists, we might hear them telling 
+us, with appropriate indirectness, that the White West is not the center. The 
+center of the world is a bluff on the Klamath River, a rock in Mecca, a hole in the 
+ground in Greece, nowhere, its circumference everywhere. Perhaps the utopist 
+should heed this unsettling news at last. Perhaps the utopist would do well to 
+lose the plan, throw away the map, get off the motorcycle, put on a very strange-
+looking hat, bark sharply three times, and trot off looking thin, yellow, and dingy 
+across the desert and up into the digger pines.
+In Returns: becoming indigenous in the twenty-first century , James Clifford 
+(2013) revisits the well-known story (among anthropologists) of Ishi, and he 
+does so from a contemporary perspective, one that does not see Native Amer-
+ican realities, especially in California, as something of the past, as extermi-
+nated, but rather as growing and expanding albeit in new ways. He retells 
+the story of Ishi, popularized as “the last wild man”, who lived part of his life 
+in Alfred Kroeber’s (Le Guin’s father) museum at Berkeley. He also tells the 
+story of Theodora Kroeber’s (Le Guin’s mother) popularization of Ishi’s story 
+and symbolism in her books, especially her children’s book 3. He goes on to 
+narrate the story of Orin Starn’s investigation of Ishi’s brain at the Smithso-
+nian Institution and the Indian efforts, in California, for repatriation of the 
+3   Ishi, last of his tribe (Kroeber, 1964).
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida10
+remains, as well as the polemic at Berkeley over the need or not for apologiz-
+ing for Kroeber’s and the university’s actions in the past (a campaign cham-
+pioned by Nancy Scheper-Hughes, and countered by one of Le Guin’s 
+brothers, literary scholar Karl Kroeber). And, of course, he cannot avoid men-
+tioning Ursula.
+Why and how? Because in a way he establishes an opposition and contrast 
+between Le Guin’s work, especially the abovementioned Always coming home
+(Le Guin, 1985), and “Kroeber’s purified pre-contact reconstructions of Califor-
+nia” (Clifford, 2013, p. 106). In a sub-chapter titled “Utopia”, he says how 
+Ursula’s work “draws on folklore, popular culture, Taoism, post-sixties femi-
+nism and environmentalism” (Clifford, 2013, p. 111) and how much these are 
+themes that are central to Ishi’s world:
+[…] colonial domination and miscomprehension; the compromised but real pos-
+sibilities of cross-cultural understanding; complicity and friendship at fraught 
+frontiers; preservation of traditions and the dynamics of change; the communal 
+arts of living in balance with others and in scale with the environment.
+*
+For many years I used Le Guin’s (1972) novel The word for world is forest  in Intro-
+ductory Anthropology classes. It helped, through the guise of science fiction, to 
+convey the sense of doing ethnography as a process of cooperative knowledge 
+building between anthropologist and the social groups (through specific per-
+sons) – and how much ethnography-based knowledge is the outcome of pro-
+cesses of porosity and juxtaposition between scientific, literary, interactional, 
+and interpersonal processes that result in a new type of knowledge that is 
+quintessentially human(istic).
+The altertopia of the context of The word for world is forest mimics the process 
+of ethnographic discovery, as well as depicts the conflicts of power resulting 
+from colonial and capitalist encroachment in many communities. It does so 
+through the guise of fiction, something that is more effective on young stu-
+dents than descriptions of our “real” History (always prone to trigger emotional 
+or ideological reactions that hinder learning).
+Clifford (2013, p. 119) focuses precisely on this book:
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 11
+In Le Guin’s parable […] anthropological humanism emerges as both essential 
+and impotent in situations of colonial/anti-colonial antagonism. Lyubov [the 
+main character, an anthropologist of sorts] is unable to reconcile inter-personal 
+loyalty, political commitment, and scientific comprehension: he will not emerge 
+unscathed with his intercultural understanding.
+The word for world is forest  depicts capitalist and colonialist exploitation of 
+native resources (in a planet of the Ecumene, the loose federation centered in 
+Hain), together with extreme racism and extermination of the “savages”, whose 
+rich culture – and, indeed, alternative ( altertopian) social and ecological organi-
+zation – is dismissed 4. It is at the very other end of the line connecting Kroe-
+ber’s anthropology and the Native American experience of Kroeber’s time, on 
+the one hand, and today’s Native American situation as well as contemporary 
+utopian visions on the verge of the Anthropocene, on the other.
+Then, in Kroeber’s time: the “last wild man”, the unavoidable result of the 
+triumph of civilization, something to feel sorry about but unstoppable for sup-
+posedly good reasons (“evolution”, “civilization”, the colonial/capitalist 
+utopia…), and anthropologists whose mission was to salvage and register that 
+which was about to disappear. To salvage the savage, so to speak.
+Now: the renaissance of Native American identities, with casinos and local 
+and state politics, performative arts, comedy, self-representations, newly 
+invented or consolidated tribal entities, mixed and urban identifications, etc., 
+and anthropologists who consider the difficulties of cross-cultural dialogue 
+and believe not only in constant, ongoing mixture, cultural reinvention and in 
+decolonizing knowledge, but also in the unavoidable doubts and conflicts that 
+utopias and civilizational projects entail – as does Le Guin.
+As Clifford (2013, p. 121) says, poetically: “Ishi in a loincloth, Ishi in work 
+clothes, Ishi with feathers, Ishi in a suit and tie”. Becoming indigenous after 
+colonization (Clifford’s expression) is, after all, what we can find in Always 
+coming home. In her theoretical essay inspired by that novel, “A non-Euclidian 
+view of California as a cold place to be”, Le Guin (1989, p. 85, my italics) says:
+4  It would inspire the script for the movie Avatar.
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida12
+I am not proposing a return to the Stone Age. My intent is not reactionary, nor 
+even conservative, but simply subversive. It seems that the utopian imagination 
+is trapped, like capitalism and industrialism and the human population, in a 
+one-way future consisting only of growth. All I am trying to do is figure out how 
+to put a pig on the tracks.
+And in the same essay:
+Utopia has been Euclidian, it has been European, and it has been masculine. I 
+am trying to suggest, in an evasive, distrustful, untrustworthy fashion, and as 
+obscurely as I can, that our final loss of faith in that radiant sandcastle may 
+enable our eyes to adjust to a dimmer light and in it perceive another kind of 
+utopia […] It may look very like some kind of place Coyote 5 made after having a 
+conversation with his own dung. […] [A yin utopia] would be dark, wet, obscure, 
+weak, yielding, passive, participatory, circular, cyclical, peaceful, nurturant, 
+retreating, contracting and cold. (Le Guin, 1989, p. 88-90).
+*
+Maybe the trigger for this article was my difficulty in imagining the bodies of 
+Gethen people. That is how “imaginative” became ivaginative, for in my efforts 
+to picture Gethenians I always ended up picturing a vagina, certainly because 
+it is an altertopian  organ for my male body. It is important to distinguish my 
+use of the differently spelled “ivagination”, which is mostly playful, from the 
+philosophical concept of “invagination”. For Derrida (1980), invagination 
+describes narratives that fold upon themselves. It is an aspect of “différance”, 
+opening the “inside” to the “other” and denying a stable identity to both. But I 
+should be more accurate: not just the vagina. A clitoris will engorge exponen-
+tially in the “male” person during kemmer, and the vagina will widen signifi-
+cantly in the “female”. And both gonads – testicles and ovaries – reside inside 
+both persons. As does the uterus. One thing becomes obvious when the picture 
+turns clearer: the gestational potential that resides in the uterus is in both per-
+5  The coyote is a recurrent mythological character in many Native American cultures, especially in 
+California. it often assumes an ambiguous nature, at times a divine figure, at others a trickster.
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 13
+sons. They are, in “our” sense, in our intrinsically biologically gendered world 
+view, both women, in the sense that they are both potential gestating humans. 
+Would I dare say that Le Guin was wrong, that Gethenians are all women? And 
+that the presence of gender is tantamount to the presence of the masculine? 
+Its absence would be general, human femininity, humanity as feminine. What, 
+in my reading, is common to all Gethenians is the uterus. The Gethenian 
+theme can thus be seen not just as a matter of gender balance, or gender oscil-
+lation, or gender interchangeability, or any variation thereof, but as referring to 
+gender itself as a temporary phenomenon beyond being human. That could be 
+seen as Queer avant la lettre  – before queer became, in common parlance, a 
+rather flat synonym for individual choice and performativity.
+Social Science Fiction and the Ethnographic mode seem to go hand in 
+hand, instead of being at odds. Le Guin’s novels, like all good science fiction, 
+succeed in being internally consistent and logical. Science-fiction is not mere 
+fantasy, for things in it must make sense according to its own established 
+premises. In Social Science Fiction one must be even more careful because the 
+material upon which the fictional work is done is human experience, relation-
+ality and sociality, and it needs to make sense to us, readers of the here and 
+now. And it always does, at least with Le Guin, because the worlds she imag-
+ines are the worlds that we are constantly imagining in the “what ifs?” that we 
+pose resorting to the materials at hand – bodies, social constraints, institu-
+tions, political projects, “nature”, possible ontologies…. The ethnographic mode 
+is one of creating intelligibility, through defamiliarization and refamiliariza-
+tion, only achievable because the material used is common to interpreted and 
+interpreter.
+In a world where the effects of colonialism-cum-capitalism have created 
+new indigeneities; in a world where modern utopias seem to have become 
+more disillusions than illusions; in a world now marked by all that the neolo-
+gism “Anthropocene” encapsulates; in this world, Le Guin’s invented knowl-
+edge of other worlds, and the anthropologists’ knowledge of worlds created by 
+others, provide materials and imaginative designs for altertopias.
+If Le Guin’s father, Alfred Kroeber, was “salvaging the savage”, Kroeber’s 
+daughter, Le Guin, provides us a glimpse of what it can be to “savage the sal-
+vage”. The poetic notation of that change would be the replacement of the mas-
+culine m of imagination by the feminine v in ivagination – not an “image” but a 
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida14
+life-giver, a genital.6 Le Guin (2017, p. 1035) herself wrote thus about her Gethe-
+nian experiment:
+I was not reccomending the Gethenian sexual setup: I was using it. It was a 
+heuristic device, a though-experiment. Physicists often do thought-experi-
+ments. Einstein shoots a light ray through a moving elevator; Schrodinger puts a 
+cat in a box. There is no elevator, no cat, no box. The experiment is performed, 
+the question is asked, in the mind. Einstein’s elevator, Schrodinger’s cat, my 
+Gethenians, are simply a way of thinking.
+Following her inspiration, and in order to take seriously my approach to the 
+porosity between science-fiction and Anthropology, what follows is my own 
+work of fiction. It is clearly inspired in the Gethenian theme – in fact, it can be 
+understood as a “take” on The left hand of darkness. It was meant to be passed on 
+to students of gender and sexuality as part of a pedagogical sequence consisting 
+of: a) the presentation of culturally diverse gender orders and regimes (Connell, 
+1987); b) their exposure to Le Guin’s fiction (not just The left hand of darkness, but 
+also A fisherman of the inland sea7); c) my own fiction, as a way of putting together 
+the possibility to imagine and the conventional and systematic nature of social 
+organization that can be described by anthropologists with internal coherence. 
+Fiction meets Anthropology in Social Science Fiction in the process of ivagining
+worlds.
+*
+6  As mentioned before I have been reading mostly Le Guin’s novels from the so-called Hainish 
+Cycle. I have not dealt with her vast work on the fantasy genre, the Earthsea series. But as I was 
+writing this essay, I was reading her early work, before both series. It is based on Orsinia, an 
+imaginary Mitteleuropa country and the action takes place in the period of liberal and national-
+ist revolutions, namely against the Austrian Empire. It is very curious to see Le Guin’s fascina-
+tion with a specific historical past and geographical location, especially one where and when 
+“utopias” thrived – nationalism, socialism, zionism, communism, utopian socialism – that 
+today have clearly gone awry.
+7  This story takes place in planet O, where local marriage ( sedoretu) consists of a Morning (moities 
+being Morning and Evening) woman and man and an Evening woman and man; the heterosex-
+ual pairs are called Morning and Evening according to the woman’s moiety; the homosexual 
+pairs are called Day – the two women – and Night – the two men.
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 15
+Evolution
+From the notes of Eva g Sirdi, written approximately 150 years ago in the margins 
+of a copy of the “Holy Ala’m” and discovered in the region of the Great Lakes of North-
+ern Barbaria, selected and transcribed by Bei ag Arik, Doctor in Human Evolution by 
+the University of Golmak.
+“It was the morning of my return from my second expedition and once more 
+I was arriving empty handed. Seven years before, at the end of my first expedi-
+tion, Ad had been waiting for me with an understanding smile. Ad had 
+received my letter, sent by commercial ship, in which I told my frustration for 
+not having found what I was looking for. Ad’s smile had then been also one of 
+encouragement: ‘Do not worry, there will be a next time and, who knows, you’ll 
+then succeed’. Seven years and one more letter full of disappointment later, 
+how would it go? One can take one, or two, or maybe even three consecutive 
+disappointments. You take a deep breath and get back up on your feet again. 
+But can the person you share your life with see the other fail time and time 
+again? Would the smile be understanding and encouraging once more?”
+“Like seven years before, you could hardly see the harbor through the mist. The 
+journey to the Northern Hemisphere must be done in the right time of the year, 
+to take advantage of the favorable ocean currents and avoid the harsh climate. 
+Consequently, the return trip always took place in the Southern Fall months, a 
+season of thick fogs, penetrating humidity, and a feeble, pale light, as if filtered by 
+layers of gauze. The contours of harbor and town took a while to focus. First you 
+would see the fickle light of the whale-oil lanterns held by relatives waiting for 
+you. Some higher, some lower, probably held respectively by adults and children. 
+Slowly, the dark shapes of the Araken’s palace up in the Hill became perceptible, 
+together with the sails of other ships. But even before the bodies of the cherished 
+ones became visible, you could hear a band playing a welcoming saruetz.”
+“Expeditions to the Northern hemisphere were always State events. An 
+expedition was an expensive endeavor and the satisfaction of curiosity, or the 
+search for knowledge (what, so the saying goes, the ancients called Science) 
+were the State’s last priority. The Araken, our State council, wanted us to find 
+precious metals more than anything. In that regard the expedition had gone 
+quite well: two months of slow and painful sailing to the North; the good for-
+tune of having found a potentate of Northern Barbarians enjoying a period of 
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida16
+peace with their neighbors and therefore willing to negotiate with us; the 
+childish naiveté with which those barbarians accepted our gifts of worthless 
+monkey skins – apparently so important for their ritual bartering in prestige 
+competitions between their chiefs – in Exchange for metals whose value they 
+were far from even imagining; the sumptuous reception that was offered us; 
+and, at last, a one and a half month return trip with exceptionally calm seas.”
+“The crew threw the thick and heavy ropes. The fog insisted on hiding the 
+contours of the bodies waiting for us. Would Ad be there? Would Ad have 
+decided to stay home, not knowing what to do with my frustration? If my mis-
+sion as commercial envoy of the Araken had gone well – as had the other one, 
+seven years before – the same could not be said of my other mission, my mis-
+sion. Once again, I had gone up the wide river that penetrates the jungle up 
+from the capital of the Northern potentate that we traded with. Once again, I 
+had, with relative ease, hired a large group of carriers and a trustworthy guide 
+who was very knowledgeable in the native legends about the existence of what 
+they called the agan-uruk, the dimorphic creatures. Once again, I had been 
+able to reach the edge of the great mountain chain. That time I had even 
+climbed all the way up to the Great Lakes region, where the creatures suppos-
+edly live, despite having lost a handful of carriers, taken by the strange disease 
+that infests the woods and marshlands, and that I was lucky to avoid, some 
+may say thanks to the amulets that the head-priest of the Araken had given 
+me. During that journey I had even managed to obtain a piece of a creature in 
+one of our traps – a foot, to be exact, similar in all aspects to our own feet, there-
+fore from either a dimorph or any normal native of the land. I had not found 
+anything remotely like a camp or a village of any sort. Nothing.”
+“I remember the ship scratching the stone of the pier. I could already see the 
+shapes of people. Agitated, running back and forth, shouting names, kin looking 
+for kin. Ad wouldn’t do that. Ad always reserved the expression of emotions for 
+smiles, looks, body movements. Most people experienced a ship’s arrival as a 
+once in a lifetime event. Their lives unfolded almost entirely in our port city of 
+Golmak, maybe in the outskirts too, or in some portion of territory at a horse-
+ride’s distance. To travel is to adventure, to adventure is to travel. Although both 
+expressions have a slight phonetic difference – armek and armëk – they mean 
+the same to the common folk: risk, danger, daring, challenging the infinitely 
+calm routine of life in Golmak. Ad never wanted to travel with me. Ad did share 
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 17
+my interest and curiosity for research and knowledge. The same indomitable 
+urge to know how things work, well beyond the explanations in the Holy Ala’m 
+or the Laws of the Araken – the latter being no more than pragmatic transposi-
+tions of the former. Ad had other ways of searching for knowledge. Reading was 
+a favorite activity, reading like there was not enough time in life to read every-
+thing that has ever been written, whereas I…. I would travel-adventure. That 
+was why we had decided that it would be wiser that Ad, not me, should be the 
+one to someday get pregnant, to be the uru, the genitor from inside.”
+“I remember how suddenly the fog lifted. There was Ad, an unmistakable 
+shape, behind the band that was playing off-key a repetitive saruetz, and the 
+high dignitaries and lineage heads that I had to salute, one at a time, with def-
+erence and respect, and from whom I received congratulations and promises of 
+rewards. Behind all of them, Ad was the true center of my attention: the same 
+beauty as in my previous return seven years before, the same demeanor, the 
+same attitude, staying calmly behind other people, not wanting to be a part of 
+the excited crowd. I like it that way: Ad’s attention, eyes, and body were focused 
+on me. And when I got close, it was relief that I felt. Ad’s smile seemed to be 
+saying, once more, ‘You can always try again’.”
+“How many times does one make love with the same person as if it were the 
+first time? Few people can reply without irony: ‘Once’. That day Ad and I 
+became part of the group of happy few who can say ‘three’ – the very first, when 
+we met, the second when I came back from my first expedition, and the third 
+on that foggy day. Still at the harbor, Ad hugs me gently and for very long. And 
+whispered: ‘We’ll talk about your trip tomorrow’. I recall feeling Ad’s breasts 
+harden. Ad must have felt the same with my penis. And immediately, in those 
+brief seconds of desire’s work, when one’s desire pulls the other’s desire and 
+vice-versa, I felt the same happening to Ad’s penis and Ad felt the same hap-
+pening to my breasts. And both Ad and I felt, under our penises, the anxious 
+moisture of our vaginas growing.”
+“‘Maybe now we should talk about the expedition’. Suggestions such as 
+this, when coming from Ad, mean decisions already taken. Ad knew that I 
+would have two important meeting the following day. The first, with the 
+Araken, I would attend alone, and not a shadow of a problem was foreseeable. 
+On the contrary: the metal booty that I had obtained from the Northern bar-
+barians was such that I could almost expect to be granted a title of nobility, 
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida18
+not to mention land and riches. My status in the Araken seemed to have one 
+direction only: forward and upward. The second meeting, I would attend with 
+Ad, since we were both full members of the Guild of Sages, a semi-secret 
+group of fifteen people dedicated to the search of knowledge of the world, of a 
+whole planet Earth to be discovered. We were all well versed in the exegesis 
+of the Holy Ala’m; we had all learned how to read, write, and think in theolog-
+ical schools and we all had, in some moment or other in our youth, seriously 
+considered the pursuit of a priestly career. But we all had decided instead to 
+engage in the pursuit of knowledge and curiosity, to try to recover the ‘Sci-
+ence’ that our ancestors had practiced millennia before.”
+“‘What will you tell the Guild about the trip?’ – and Ad’s voice was now in the 
+opposite register of the music of sex from a few hours before. ‘Don’t you think 
+it’s better that after this second attempt you abandon your pursuit?’ ‘But I 
+won’t abandon my pursuit, Ad, even you still support me on that, don’t you?’ 
+‘You know I do. But you also know that I do it because I know that you believe 
+that you are right. But if you insist on the search for the dimorphs, Ev, it can 
+be….’ ‘Dangerous?’, I completed. I knew the risk was real. Although the mem-
+bers of the Guild of Sages shared a code of honor that placed the search for 
+knowledge above other loyalties, it was also true that several members of the 
+Guild were simultaneously members of the Araken. The Araken had 101 mem-
+bers, representing all the lineages of Golmak. They all knew each other from 
+the priestly schools – that was what united us as an elite and separated us 
+from the common folk. In such circumstances it was easy, too easy, for any 
+rumor or suspicion to leave the Guild and rapidly contaminate the Araken.”
+“As Eva g Sirdi, member of the Sirdi lineage, one of the oldest in Golmak, I felt 
+protected. Not having pursued the priestly career had not been a disadvantage, 
+since that was not expected of all young people. Priestly teaching was expected 
+for all, not the profession. My choice of a commercial career had been respected, 
+and even more so after my successes with the Northern Barbarians. Even my 
+semi-secret life in the Guild could be seen as an eccentricity of the kind allowed 
+to the powerful. However, there was a rumor in town about how my commercial 
+trips were a ruse for the satisfaction of my curiosity, a word that although not 
+outrageous, had a titillating, provocative overtone, a taste of the forbidden. The 
+true problem lay elsewhere: the nature of my search and curiosity, the question 
+that I was asking, the answer that that question suggested.”
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 19
+“Once, after my first expedition to the North, Ad ordered me, very harshly, to 
+sit and pay attention. ‘Listen, Ev, listen very carefully. Sometimes a priestly 
+education too early in life leads those who have the knowledge of the sacred 
+texts to be those who forget them sooner. Listen to this:
+Upon creating the Universe, Ala’m rejoiced in the beauty and perfection of Their 
+work. The sky, deep blue when lit by the moon or light blue when warmed by the 
+sun, was a thing of perfection and tranquility. The sea, reflecting the colors of 
+the sky, leaped its waves, now gently, then furiously. The earth, green and flat, 
+dark and mountainous, connected sky and sea. Such was A’lam’s dwelling. To 
+inhabit it with life did Ala’m create the plants that grow from earth, cast their 
+seed and generate their own twins. Not satisfied with the plants, did Ala’m 
+create the animals that move on it and did Ala’m make them more intricate 
+than the plants they fed upon. He called some female, he called some male, and 
+from the union of female and male new and different creatures were born. But 
+seeing Ala’m that much was the dispute between females for males and 
+between males for females, They made a new being, one that would feed on 
+plants and animals. In the divine image did They create it, without female or 
+male, and granted it with the gift of curiosity so that it could roam the world and 
+possess it and, in the journey, find Ala’m Themselves, the one that is everywhere 
+and nowhere.
+“‘Why are you Reading me that, Ad? I know the Holy Ala’m. By heart. ‘Because 
+you can’t take away from people that minor sentence. Minor, but of the great-
+est importance: in the divine image. At least you can’t do it yet. And only Ala’m 
+knows when you can…’ ‘But what I defend is somehow there, in the text’, I 
+argued, ‘Ala’m was not satisfied with two-sex animals. One can say that Ala’m 
+made them evolve. And since we do not descend from, say, a snake or a mock-
+ingbird, we must descend from people that still had the two-sex characteristic, 
+such as monkeys do. My theory is not incompatible with the sacred texts. Nor 
+with the ability that Ala’m gave me to… question. You know that is my stand-
+ing, Ad’. Ad knew. Ad also knew the legends and myths that I had registered in 
+the North and that told of a mythical people with two sexes.”
+“Ad accepted my theory and as a curious person, as a member of the Guild, 
+also had a practical mind and thought that it was impossible to demonstrate 
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida20
+my hypothesis: ‘You will never find your missing link, I’m afraid. I would give 
+anything to help you achieve that goal and yet I would also give everything to 
+have you give up your travels.’ Differently from the tasteless stories told by the 
+common folk, our arguments did not invariably finish with love making, with 
+the perfect symmetry that the uneducated like, the two members of the couple 
+taking turns in penetrating one another, time and time again in the endless 
+pursuit of the perfect amorous equilibrium. Our arguments were… arguments, 
+as if we were in the Guild of Sages, and always ended in an impasse, a dead-
+end. ‘So, Ad, your problem is that you think that there is no missing link. That 
+there isn’t a species like our own but in a previous evolutionary stage, a stage 
+with two sexes?’ ‘No, Ev, that is not my problem’.”
+“I didn’t understand Ad’s fear until, two weeks later, I received the summons 
+from the Court of Inquiring of the Araken. I had never been present in a Court 
+session. All that was known about that most rigid and secretive institution on 
+Earth was the product of rumor, cautionary tales, scaring legends made to 
+instill obedience and consensus. The most terrible tale had involved a relative 
+of mine, Ca. My uru or genitor from inside – the person who gave birth to me – 
+did not share genitors with anyone, did not have ere, neither from the inside 
+nor from the outside. My ulu, or genitor from the outside, however – the one 
+who had inseminated my uru – shared genitors with Ca. They was, therefore, 
+ere of my ulu. My alik. I was still an adolescent when my uru and my ulu 
+embarrassingly announced that alik Ca had been banned to exile in a foreign 
+land. They never wanted to explain to me why. Whenever they tried to do so 
+they would give up, and I felt that they were embarrassed, that they could find 
+or proffer the right words. Only years later did I come to know the truth and 
+through indirect ways: Ca had been denounced to the Court of Inquiring for 
+using only one of his genitals (the vagina) in the sexual act, and for refusing to 
+use the other. How bigoted people can be when they impose their notion of 
+‘sexual plenitude’! So narrow-minded, a law that criminalizes that! Today, as 
+someone who dedicates life to the pursuit of knowledge and the satisfaction of 
+curiosity, I think that my alik Ca was probably just ill, the victim of some reces-
+sive disease from the time in evolution when we had not yet achieved our stage 
+of perfect unimorphs.”
+“I never knew who denounced me to the Court. The Court accepts anony-
+mous complaints and guarantees anonymity. The Court just could not accept 
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 21
+that a member of the Araken and of one of the most prestigious lineages, and 
+with priestly training, would use the sacred texts to find in them a hint, an 
+opening, for a, as the sentence said, ‘sinful confabulation’ on the origins of 
+humankind in two-sexed creatures. Ad’s fear was confirmed. The love of my life 
+watched the trial without flinching and when testifying supported coura-
+geously the merit of the work of the Guild and the right to be free to speculate 
+and pursue curiosity. When asked about opinion on my theory, Ad replied hon-
+estly that we did not agree on that. But the Court used that against me: ‘The 
+fact that not even the trespasser’s partner agrees with the sinful delirium con-
+firms the enormity of the deviousness and heresy of the curiosity path that the 
+trespasser has chosen to follow’.”
+“I couldn’t even say goodbye to Ad. And there won’t be another return jour-
+ney to Golmak. Nor ship, or long weeks at sea, or precious metals to transport, 
+or festive receptions, titles or riches, fog in the harbor, Ad’s smile, hair, hands, 
+eyes, breasts, cock, cunt, sweat, voice, smell. They have only granted me one 
+wish: that the place of exile be the Northern Barbarian potentate of my last 
+trip. But, if in Golmak I had been banned for questioning the literal interpreta-
+tion of the Holy Ala’m and the consequent symbiosis between ecclesiastical 
+and political powers, in the Barbarian lands of the North I was seen, in the 
+purest and simple, and therefore most brutal way as a perversion. I ended up 
+being banished twice, from both home and the shabby barbarian encampment 
+on the shores of the Great Lakes. I am now roaming deserted landscapes. I 
+brought with me this copy of the Holy Ala’m, my only Reading, my only Writing 
+paper. And a charcoal portrait of Ad. I live like a hermit and, too often, like a 
+madperson. I talk to myself. I argue with myself. I rest motionless for long peri-
+ods of time, until hunger makes me look for food. Slowly I give up.”
+This seemed to be the last note by Eva g Sirdi. However, the mentioned charcoal 
+portrait of Ad contained, in the back, a brief and final note, certainly written in two 
+different moments. It is, for all intents and purposes, the note that made the member 
+of the medieval Guild of Sages the pioneer of the modern science of human evolution:
+“Exhausted, I woke up to the vision of a camp. No idea how I got there. A 
+campfire beside me. Shabby tents made of canes. Tiny creatures (thought they 
+were infants) inspect me with curiosity. They laugh. They are disgusted too. 
+They point at my genitals and breasts. They touch them with sticks. And they 
+talked! Don’t understand the language, but they talk! The work of Ala’m, 
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida22
+praised be They! Then I watched them closer. ‘Mutilation’, I thought. ‘Abnor-
+mality’, too. Some of the creatures had a penis, a bag for exo-eggs, like lower 
+animals, where the vagina should be. Some had just the vagina, uncovered by a 
+hanging penis, although somewhat hidden by more flesh. These are the agan-
+uruk, they have to be! Agan-uruk. The “divided people”. Dimorphic. Dimorphs. 
+Found what I’ve been looking for! […]”
+“[…] Too late. Henceforth I, most advanced representative of the higher 
+stages of evolution and Ala’m’s creation, will be just an object of disgust and 
+curiosity, the strange unimorph of the tribe.”
+*
+This fiction was inspired by the Gethenian theme of The left hand of darkness. It 
+was developed to include not only the aspects of sex, gender, and sexuality, but 
+also the social organization of power and knowledge, and plays with classical 
+portrayals of the tropes of expedition, discovery, otherness (taken farther than 
+cultural difference, including, therefore, questions of evolution). It also plays 
+with time and chronology, picturing Earth society in a future that is an appar-
+ent return to our current past; and placing contemporary human bodies as 
+“predecessors” in the evolutionary scale. This allows for the imagination of an 
+altertopia that is simultaneously a fantasy and a “system” that draws inspira-
+tion from the archives of ethnography. There is, of course, danger in moving 
+back and forth between fact and fiction, real lives of real humans, and those of 
+imaginary characters. But in imagining bodies that are apparently radically 
+different one ends up realizing the familiarity of the components; desire, sex, 
+and the social organization of them can be imagined as otherwise, as different 
+from our own, especially in what concerns inequality and power. Furthermore, 
+gender disappears, relationality and sociality do not.
+This kind of social science fiction is necessarily permeated by feminist and 
+queer values and perspectives, not taking for granted neither heteronormativ-
+ity, nor binarism or the body. Although some ethnographic archives do provide 
+us with a variety of gender and sexuality orders and regimes, and even with the 
+non-centrality of gender in the Western conceptual sense, they do not provide 
+us with the absence of gender.
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Ivagining worlds 23
+References
+BAKER-CRISTALES, B. Poiesis of possibility: the ethnographic sensibilities of 
+Ursula K. Le Guin. Anthropology and Humanism, [s. l.], v. 37, n. 1, p. 15-26, 2012.
+CLIFFORD, J. Ishi’s story. In: CLIFFORD, J. Returns: becoming indigenous in the 
+twenty-first century. Cambridge: Harvard University Press, 2013. p. 91-191.
+CONNEL, R. Gender and power: society, the person and sexual politics . Sydney: Allen 
+& Unwin, 1987.
+DERRIDA, J. The law of genre. Critical Inquiry, [s. l.], v. 7, n. 1, p. 55-81, 1980.
+HARAWAY, D. Anthropocene, Capitalocene, Chthulucene: staying with the trouble. 
+In: ANTHROPOCENE: ARTS OF LIVING ON A DAMAGED PLANET, 2014, University 
+of California, Santa Cruz. Højbjerg: Aarhus University Research on the Anthro-
+pocene, 2014. Available at: https://vimeo.com/97663518. Accessed: 6 Sept. 2023.
+HARAWAY, D. Staying with the trouble : making kin in the Chthulucene. Durham: 
+Duke University Press, 2016.
+JAMESON, F. World reduction in Le Guin: the emergence of utopian narrative. Sci-
+ence Fiction Studies, [s. l.], v. 7, n. 2, part 3, p. 1-17, 1975.
+JAMESON, F. Archaeologies of the future : the desire called utopia and other science 
+fictions. New York: Verso, 2005.
+KROEBER, T. Ishi, last of his tribe. Berkeley: Parnassus Press, 1964.
+LE GUIN, U. K. The left hand of darkness. New York: Ace, 1969.
+LE GUIN, U. K. The word for world is forest. New York: Putnam, 1972.
+LE GUIN, U. K. The dispossessed: an ambiguous utopia. New York: Harper & Row, 1974.
+LE GUIN, U. K. Always coming home. New York: Harper & Row, 1985.
+LE GUIN, U. K. A non-Euclidian view of California as a cold place to be. In: LE GUIN, U. 
+K. Dancing at the edge of the world. New York: Groove Press, 1989. p. 80-100. Available at: 
+https://cpb-us-e1.wpmucdn.com/sites.ucsc.edu/dist/9/20/files/2019/07/1989a_Le-
+Guin_non-Euclidean-view-California.pdf. Accessed: 6 Sept. 2023.
+LE GUIN, U. K. Hainish novels and stories: vol. 1. New York: Library of America, 2017.
+Horiz. antropol., Porto Alegre, ano 29, n. 67, e670404, set./dez. 2023
+Miguel Vale de Almeida24
+STRATHERN, M. Same-sex and cross-sex relations: some internal comparisons. In: 
+GREGOR, T.; TUZIN, D. (ed.). Gender in Amazonia and Melanesia: an exploration of the 
+comparative method. Los Angeles: University of California Press, 2001. p. 221-244.
+TROUILLOT, M.-R. Anthropology and the savage slot: the poetics and politics of oth-
+erness. In: TROUILLOT, M.-R. Global transformations: anthropology and the modern 
+world. New York: Palgrave, 2003. p. 7-28.
+Recebido: 30/09/2022 Aceito: 27/05/2023 | Received: 9/30/2022 Accepted: 5/27/2023
+Esta obra está licenciada com uma Licença Creative Commons - Atribuição 4.0 Internacional
+This work is licensed under a Creative Commons Attribution 4.0 International License

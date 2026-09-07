@@ -1,0 +1,591 @@
+{{short description|Wikipedia policy describing when pages may be deleted speedily}} 
+{{Redirect-multi|2|WP:SD|WP:SPEEDY}}
+{{pp-extended|reason=Persistent [[Wikipedia:Disruptive editing|disruptive editing]]|small=yes}}
+{{pp-move}}
+{{Policy|subcategory=deletion|WP:SD|WP:CSD|WP:SPEEDY}}
+{{nutshell|Under certain limited conditions, a page may be deleted by an [[Wikipedia:Administrators|administrator]] without waiting for any discussion.}}
+{{Deletion policy list}}
+
+'''Speedy deletion''' is a process that provides [[Wikipedia:Administrators|administrators]] with broad [[Wikipedia:consensus|consensus]] to bypass [[Wikipedia:Deletion process|deletion discussion]], at their discretion, and immediately delete certain Wikipedia pages or files that meet one of the '''criteria for speedy deletion''' ('''CSD''') listed below. Because deletion is reversible only by administrators, other deletions occur only after discussion, unless they are [[Wikipedia:Proposed deletion|proposed deletion]]s. Speedy deletion is intended to reduce the time spent on deletion discussions for pages or files with [[Wikipedia:Snowball clause|no practical chance]] of surviving discussion.<ref>In this context, ''speedy'' refers to the simple decision-making process, not the length of time since the article was created.</ref> Anyone can request speedy deletion by adding one of the [[Wikipedia:Template index/Speedy deletion|speedy deletion templates]], but only administrators may actually delete. There are [[#Contesting speedy deletion requests|ways to contest the speedy deletion requests]], although in most cases the page creator must refrain from removing the tag.
+
+Before nominating a page for speedy deletion, consider whether it could be improved, reduced to a [[Wikipedia:Stub|stub]], merged or redirected elsewhere, reverted to a better previous revision, or handled in some other way (see {{section link|Wikipedia:Deletion policy|Alternatives to deletion}}). A page is eligible for speedy deletion only if all of its [[Help:Page history|history]] is also eligible. Users nominating a page for speedy deletion should specify which criteria the page meets, and should notify the page creator and any major contributors. If a page needs to be removed from Wikipedia for privacy reasons (e.g., non-public personal information, a child disclosing their age, or possible libel), [[Wikipedia:Requests for oversight|request oversight]] instead.
+
+Administrators should take care not to speedily delete pages or media except in the most obvious cases. If a page has survived its most recent deletion discussion, it should not be speedily deleted except for newly discovered copyright violations and pages that meet specific uncontroversial criteria; these criteria are noted below. Contributors sometimes create pages over several edits, so administrators should avoid deleting a page that appears incomplete too soon after its creation.
+
+Besides speedy deletion, there are the following methods of deletion:
+* [[Wikipedia:Deletion discussions venues]] ([[Wikipedia:AFD|AfD]], [[Wikipedia:CFD|CfD]], [[Wikipedia:FFD|FfD]], [[Wikipedia:MFD|MfD]], [[Wikipedia:RFD|RfD]], [[Wikipedia:TFD|TfD]]), the normal method for discussing potentially controversial deletions.
+* [[Wikipedia:Proposed deletion]]s, for nominating articles and files for uncontroversial deletion.
+* [[Wikipedia:Proposed deletion of biographies of living people]], for articles on living persons without sources.
+*[[Wikipedia:Presumptive removal of AI-generated content]] ({{aka}} "LLM PROD") for articles in which the [[Wikipedia:Presumptive_removal_of_AI-generated_content#Requirements|community has acknowledged]] that the creator was misusing AI.
+
+== <span class="anchor" id="cri"></span><span class="anchor" id="CRI"></span><span class="anchor" id="crit"></span><span class="anchor" id="CRIT"></span><span class="anchor" id="CRITERIA"></span>Nomenclature ==
+
+Letter-number abbreviations (G12, A3...) are often used to refer to the criteria for speedy deletion, and are given in each section. For example, "CSD G12" refers to ''criterion 12'' under ''general'' (copyright infringement) and "CSD U1" refers to ''criterion 1'' under ''user'' (user request). Some in-between numbers are skipped, as abbreviations denoting [[#Obsolete criteria|obsolete criteria]] remain unused. [[WP:AUJ|{{Strong|These abbreviations can be confusing}}]] to new editors or anyone else unfamiliar with the process; in many situations a [[Wikipedia:Make technical articles understandable|plain-English explanation]] of why a specific page was or should be deleted is preferable.
+
+== <span class="anchor" id="d"></span><span class="anchor" id="D"></span><span class="anchor" id="dt"></span><span class="anchor" id="DT"></span><span class="anchor" id="delt"></span><span class="anchor" id="DELT"></span><span class="anchor" id="deltem"></span><span class="anchor" id="DELTEM"></span><span class="anchor" id="deltemp"></span><span class="anchor" id="DELTEMP"></span><span class="anchor" id="deletion template"></span><span class="anchor" id="Deletion template"></span><span class="anchor" id="DELETIONTEMPLATE"></span>Requesting speedy deletion ==
+
+Immediately following each speedy deletion criterion below is a list of templates used to mark pages or files for speedy deletion under the criterion being used. To alert administrators to the nomination, place the relevant speedy deletion template at the top of the page or file you are nominating (but see {{sectionlink|#Pages that need to be tagged in a special manner}} below). Please be sure to supply an [[Help:Edit summary|edit summary]] that mentions that the page is being nominated for speedy deletion. All of the speedy deletion templates are named as ''Db-X'' with ''Db'' standing for 'delete because'. A list of the ''Db-X'' templates can be found at [[Wikipedia:Speedy deletion/Deletion templates]].
+
+If a page falls under more than one of the criteria, instead of adding multiple tags it is possible to add a single {{Tl|Db-multiple}} tag to cover them all. For example, if an article seems both to be blatantly promotional ([[#G11|G11]]) and also to fail to indicate the significance of its subject (A7) then the tag {{Tlx|Db-multiple|G11|A7}} can be used to indicate both of these concerns. The article can then be speedily deleted if an administrator assesses it and decides that either or both of the criteria apply.
+
+There is a strong consensus that the creators and major contributors of pages and files should be warned of a speedy deletion nomination (or of the deletion if not informed before). All speedy deletion templates (using criteria other than U1, U2, G5<ref>except {{tl|db-gs}} which has {{tl|db-gs-notice}}</ref>, G6<ref>except {{tl|db-copypaste}} which has {{tl|db-copypaste-notice}}</ref>, G7, G8, C4) thus contain in their body a pre-formatted, suggested warning template to notify the relevant party or parties of the nomination for speedy deletion under the criterion used. You can copy and paste such warnings to the talk pages of the creators and major contributors, choose from others listed at [[:Category:Speedy deletion warning templates]], or place the unified warning template, {{Tlxs|CSD-warn|{{Var|csd}}|''Page name''}}, which allows you to tailor your warning under any particular criterion by replacing <code>{{Var|csd}}</code> with the associated criterion abbreviation (e.g., [[#G4|G4]], [[#A7|A7]]).
+
+Use common sense when applying a speedy deletion request to a page: review the page history to make sure that all earlier revisions of the page meet the speedy deletion criterion, because a single editor can replace an article with material that appears to cause the page to meet one or more of the criteria.
+
+=== Pages that need to be tagged in a special manner ===
+Some pages either cannot or should not be tagged for speedy deletion in the normal manner:
+* Pages that you cannot edit (e.g., due to protection), or [[JavaScript Object Notation|JSON]] pages: place the template on the corresponding Talk page instead, along with an explanation of which page to delete.
+* [[Wikipedia:Template namespace|Template:]] pages: place the template within a noinclude tag, like {{Tag|noinclude|content={{tlf|Db-x}}}}, so the deletion tag doesn't get included in a page using it.
+* [[Wikipedia:Lua|Module:]] pages (except for /doc pages): place the template with [[Module:Module wikitext]], like this: <syntaxhighlight lang="lua" inline>require('Module:Module wikitext')._addText('{{Db-x}}')</syntaxhighlight>
+* [[Help:Cascading Style Sheets|CSS]] (including [[Wikipedia:TemplateStyles|sanitized CSS]]) or [[Wikipedia:User scripts|JavaScript]] pages: place the template in a comment, like this: <code>/* {{tlf|Db-x}} */</code>
+
+==<span class="anchor" id="Removing speedy deletion tags"></span><span class="anchor" id="Contesting speedy deletion tagging"></span>Contesting speedy deletion requests==
+
+{{Shortcut|WP:SDCONTEST|WP:RMSD}}
+
+If the page has been tagged for speedy deletion but has not been deleted yet, any editor other than the creator may remove the tag, which should be taken in as a [[Wikipedia:Assume good faith|good faith]] sign that the deletion is controversial and another deletion process should be used. The creator of a page may remove a speedy deletion tag only if the criterion in question is [[#G6|G6]], [[#G7|G7]], [[#G8|G8]], [[#G13|G13]], [[#G14|G14]], [[#C1|C1]], [[#C4|C4]], [[#T5|T5]], [[#U1|U1]], or [[#U6|U6]].<ref>The current wording of this paragraph dates to [[Wikipedia talk:Criteria for speedy deletion/Archive 77#Contesting deletion: proposed changes to the text|an April 2020 discussion]]. G14 was added in [[Wikipedia talk:Criteria for speedy deletion/Archive 79#Can creators remove G14 tags?|October 2020]]. C1 was added in [[Wikipedia talk:Criteria for speedy deletion/Archive 83#C1 removal by author|August 2022]]. C4 was added in [[Wikipedia talk:Speedy deletion/Archive 89#C4 and author removal|September 2024]]. T5 was added in [[Wikipedia talk:Speedy deletion/Archive 90#Author removal|February 2025]]. U6 was added in [[Wikipedia talk:Speedy deletion#Allow creator to remove U6 tags?|December 2025]].</ref> For all other speedy deletion criteria, the creator of a page must not remove the speedy deletion tag from it. A creator who disagrees with the speedy deletion shall instead click on the "Contest this speedy deletion" button that appears inside the speedy deletion tag. This button links to the [[Wikipedia:Talk page|discussion page]] with a pre-formatted area for the creator to explain why the page should not be deleted. 
+
+If a page has already been speedily deleted, any editor (including the creator) can request its undeletion by using the box below if the page was deleted under one of the following criteria:{{trim|{{#section:Wikipedia:Requests for undeletion/Header|speedy}}}}{{trim|{{#section:Wikipedia:Requests for undeletion/Header|abandoned}}}}{{trim|{{#section:Wikipedia:Requests for undeletion/Abandoned pages|speedy}}}}If the page was not deleted under one of the criteria listed above and you believe the deletion was erroneous, you can contact the administrator who performed the deletion or you can formally contest the decision by [[WP:DELREVD|opening a deletion review]].
+
+== Pages that have survived deletion discussions ==
+As an exception to the policy that [[Wikipedia:Deletion policy#Deletion discussion takes precedence|if a page's most recent deletion discussion was closed as "keep" or "no consensus" it should not be speedily deleted]], the following criteria also apply to those pages, with or without any specified limitations:
+*{{slink|#G5. Creations in violation of bans, blocks, or general sanctions}}{{snd}}subject to the strict condition that the XfD participants were unaware that the page would have met this criterion
+*{{slink|#G6. Technical deletions}}{{snd}}only if the deletion is temporary, or if no actual content will be removed
+*{{slink|#G8. Pages dependent on a non-existent or deleted page}}
+*{{slink|#G9. Office actions}}
+*{{slink|#G12. Unambiguous copyright infringement}}
+*{{slink|#G13. Abandoned drafts and Articles for creation submissions}}{{snd}}if 6 months have passed since the deletion discussion and any subsequent human edits
+*{{slink|#G14. Unnecessary disambiguation pages}}{{snd}}if extant pages listed have decreased down to 0 (or to 1, other requirements being met), since the deletion discussion
+*{{slink|#F8. Files available as identical copies on Wikimedia Commons}}{{snd}}if the file did not exist on Commons at the time of the FfD
+*{{slink|#F9. Unambiguous copyright infringement}}
+*{{slink|#U1. User request}}
+These criteria may only be used in such cases when no controversy exists; in the event of a dispute, [[Wikipedia:Deletion venues|start a new deletion discussion]].
+
+== <span class="anchor" id="g"></span><span class="anchor" id="G"></span><span class="anchor" id="gc"></span><span class="anchor" id="GC"></span><span class="anchor" id="gcrit"></span><span class="anchor" id="GCRIT"></span><span class="anchor" id="gencrit"></span><span class="anchor" id="GENCRIT"></span><span class="anchor" id="generalcrit"></span><span class="anchor" id="GENERALCRIT"></span><span class="anchor" id="general"></span><span class="anchor" id="GENERAL"></span><span class="anchor" id="List of criteria"></span>General ==
+{{Shortcut|WP:GSD}}
+These criteria for speedy deletion apply to [[Wikipedia:Namespace|every type of page]], such as articles, drafts, redirects, user pages, talk pages, and files, with exclusions listed for specific criteria.
+
+=== <span class="anchor" id="G1"></span><span class="anchor" id="g1"></span><span class="anchor" id="nonsense"></span>G1. Patent nonsense ===
+{{Shortcut|WP:G1}}
+{{Further|Wikipedia:Patent nonsense}}
+This applies to pages consisting entirely of incoherent text or [[gibberish]] with no meaningful content or history. It does {{em|not}} cover poor writing, partisan screeds, obscene remarks, implausible theories, [[Wikipedia:Vandalism|vandalism]], [[Wikipedia:Do not create hoaxes|hoaxes]], fictional material, coherent [[Template:Not English|non-English]] material, or [[Wikipedia:Pages needing translation into English|poorly translated material]]. In short, if it is understandable, G1 does not apply. It also does not apply to pages in the [[Wikipedia:User page|user namespace]].
+* {{Tl|Db-g1}}, {{Tl|Db-nonsense}}
+* {{clc|Candidates for speedy deletion as nonsense pages}}
+
+=== <span class="anchor" id="G2"></span><span class="anchor" id="g2"></span><span class="anchor" id="test"></span>G2. Test pages ===
+{{Shortcut|WP:G2}}
+This applies to pages created to test editing or other Wikipedia functions. It applies to subpages of the [[Wikipedia:Sandbox|Wikipedia Sandbox]] created as tests, but does {{strong|not}} apply to the Sandbox itself, pages in the [[Wikipedia:User page|user namespace]], or valid but unused or duplicate templates.
+* {{Tl|Db-g2}}, {{Tl|Db-test}}
+* {{clc|Candidates for speedy deletion as test pages}}
+
+=== <span class="anchor" id="G3"></span><span class="anchor" id="g3"></span><span class="anchor" id="vandalism"></span><span class="anchor" id="vandal"></span>G3. Pure vandalism and blatant hoaxes ===
+{{Shortcut|WP:G3}}
+{{Further|Wikipedia:Vandalism|Wikipedia:Do not create hoaxes}}
+This applies to pages that only consist of [[Wikipedia:Vandalism|vandalism]], redirects created by cleanup from [[Wikipedia:Vandalism#Page-move vandalism|page-move vandalism]], blatant and obvious misinformation (including files intended to misinform) and blatant [[Wikipedia:Do not create hoaxes|hoaxes]]. [[Wikipedia:Do not create hoaxes#Hoaxes versus articles about hoaxes|Articles {{em|about}} notable hoaxes]] are acceptable if it is clear that they are ''describing'' a hoax.
+* {{Tl|Db-g3}}, {{Tl|Db-vandalism}} <small>– for vandalism</small>
+* {{Tl|Db-hoax}} <small>– for hoaxes</small>
+* {{clc|Candidates for speedy deletion as vandalism}}, {{clc|Candidates for speedy deletion as hoaxes}}
+
+=== <span class="anchor" id="G4"></span><span class="anchor" id="g4"></span><span class="anchor" id="repost"></span>G4. Recreation of a page that was deleted per a deletion discussion ===
+{{Shortcut|WP:G4}}
+This applies to sufficiently identical copies, having any title, of a page deleted via its most recent [[Wikipedia:Deletion discussions|deletion discussion]].<ref>The result of the most recent deletion discussion controls. This means that if the most recent discussion was "keep" or a default to keep through no consensus, G4 does not apply. Likewise, an article that was deleted through its most recent discussion, but was kept in earlier discussions, is subject to the criterion and may be deleted ([[Wikipedia talk:Criteria for speedy deletion/Archive 44#Is CSD G4 applicable or inapplicable to a previously kept page whose most recent discussion ended in deletion?|discussion]]).</ref> It excludes pages that are {{em|not}} substantially identical to the deleted version, and pages to which the reason for the deletion no longer applies.<ref>For the avoidance of doubt, if a page is deleted at AfD and subsequently recreated as a redirect, G4 does not apply, even if that option was discussed and rejected in the AfD ([[Special:Permalink/1188537615#RfC: Does CSD:G4 apply to a page deleted in AfD and immediately recreated as a redirect page?|discussion]]).</ref> It excludes pages in userspace and draftspace where the content was converted<ref>A conversion to draft is when a page from a different namespace is moved, or its content copied, as a draft.</ref> to a [[WP:DRAFT|draft]] for explicit improvement (but not simply to circumvent Wikipedia's [[Wikipedia:Deletion policy|deletion policy]]). This criterion also does not cover content undeleted via a [[Wikipedia:Deletion review|deletion review]], or that was only deleted via [[Wikipedia:Proposed deletion|proposed deletion]] (including deletion discussions closed as [[WP:SOFTDELETE|"soft delete"]]) or speedy deletion.
+
+A page being [[WP:SALT|creation protected]] is not a factor in whether G4 applies; the content still has to be substantially identical. For cases that are not substantially identical it may be wise to [[WP:DRAFTIFY|move to draft space]] without leaving a redirect.
+
+* {{Tl|Db-g4}}, {{Tl|Db-repost}}
+* {{clc|Candidates for speedy deletion as pages previously deleted via deletion discussion}}
+
+=== <span class="anchor" id="G5"></span><span class="anchor" id="g5"></span><span class="anchor" id="banned"></span><span class="anchor" id="G5. Creations by banned or blocked users"></span>G5. Creations in violation of bans, blocks, or general sanctions ===
+{{Shortcut|WP:G5}}
+{{broader|Wikipedia:Banning policy#Edits by and on behalf of banned and blocked editors}}
+{{also|Wikipedia:Speedy keep#4. Nomination in violation of a ban or block}}
+This applies to pages created by [[Wikipedia:Banning policy|banned]] or [[Wikipedia:Blocking policy|blocked]] users {{strong|in violation of their ban or block}}, as well as pages created in violation of creation restrictions imposed by [[Wikipedia:General sanctions|general sanctions]],<ref>To qualify for this criterion, the page must have been created while the user was actually banned or blocked, or while the creation restriction imposed by the general sanction was in effect. Pages created before the ban, block, or general sanction was imposed, as well as pages created after it was lifted, cannot be speedily deleted under this criterion.</ref> and that have no substantial<ref>Accepting a draft at [[WP:Articles for creation|Articles for creation]] is not considered a substantial edit, per [[Wikipedia:Deletion review/Log/2024 November 26]]</ref> edits by others not subject to a block, ban, or sanction. Pages created by a [[Wikipedia:Sockpuppetry|sockpuppet account]] are eligible if they were created while any of that person's accounts was blocked or banned.<ref>The underlying rationale for this criterion was articulated in [[Wikipedia talk:Speedy deletion#RfC: Updating G15 ("LLM-generated pages without human review")|a 2026 RfC]]:
+
+{{blockquote|[A]lthough the general, default rule on Wikipedia is that pages are only deleted if the topic or content of the page violates policy and not because of how the page was created – meaning that a page on a policy-compliant topic and with policy-compliant content is generally ''not'' deleted, even if it was created in a way that violates policy (e.g., by an [[WP:UPE|undisclosed paid editor]]) – Wikipedia has [[WP:5P5|no firm rules]] and there are exceptions to this default rule. A well-known exception that already has global consensus is [G5], which allows, under certain circumstances, speedy deletion of pages created by banned or blocked users in violation of their ban or block, ''even if'' the page is otherwise policy-compliant.{{Pb}}The rationale behind G5 is twofold: first, it acts as a deterrent. If people who are blocked or banned could just create a new account and keep on editing, it would render the blocks and bans ineffective at preventing disruption, since block/ban evasion would be an effective way to continue editing. Second, it saves editor time by allowing block- or ban-evading pages to be deleted wholesale, without having to review each page for policy compliance. This is a judgment call, a trade-off, between needing blocks/bans to be effective and the practicalities of having limited editor resources on the one hand, and removing otherwise policy-compliant pages on the other hand. In the case of G5, global consensus is that it's worth deleting "good" pages in order to deter block/ban evasion, and in order to keep the cleanup workload manageable.}}</ref>
+* For [[Wikipedia:Topic ban|topic-banned]] editors, the entire page must fall within the scope of the user's topic ban. If only parts of the page violate the ban and another speedy deletion criterion would not immediately apply if they were removed, the page is ineligible for G5.<ref>The wording of this point was clarified in [[Wikipedia talk:Speedy deletion#G5 clarification|a 2026 discussion]].</ref>
+* For violations of creation restrictions imposed by general sanctions, such as the [[WP:ECR|extended confirmed restriction]],<ref>The Arbitration Committee and the community have included the following when deciding a topic area should be covered by the extended confirmed restriction:{{blockquote|Non-extended-confirmed editors may not create new articles, but administrators may exercise discretion when deciding how to enforce this remedy on article creations. Deletion of new articles created by non-extended-confirmed editors is permitted but not required.}}</ref> the remedies must specifically permit deletion as an enforcement measure.
+* This criterion does not apply to [[WP:TRANS|transcluded]] templates or [[WP:CAT|populated categories]] unless they have been transcluded or populated entirely by the banned or blocked user; these edits [[WP:BANREVERT|need to be reverted]] before deletion.
+* {{Tlp|Db-g5|''banned or blocked user''}}, {{Tlp|Db-banned|''banned or blocked user''}}, {{Tlp|Db-gs|''contentious topic code''}}
+* {{clc|Candidates for speedy deletion as having been created by blocked or banned users}}, {{clc|Candidates for speedy deletion as having been created in violation of general sanctions}}
+
+=== <span class="anchor" id="G6"></span><span class="anchor" id="g6"></span><span class="anchor" id="histmerge"></span><span class="anchor" id="disambig"></span>G6. Technical deletions ===
+{{Shortcut|WP:G6}}
+{{see also|Wikipedia:What G6 is not}}<!--
+This section is transcluded into [[Wikipedia:What G6 is not]], please don't remove the <section> tags. Learn more at [[WP:TRANS]]. -->
+<section begin=G6text/>This is for [[Wikipedia:Consensus|uncontroversial]] maintenance, including:
+* Pages which prevent [[Help:Renaming (moving) a page|page moves]], such as redirects. Administrators should be aware of the [[Wikipedia:Requested moves/Closing instructions#Moving procedures|proper procedures]] where a redirect or page holding up a page move has a non-trivial page history. An administrator who deletes a page that is blocking a move should ensure that the move is completed after deleting it.
+* Pages unambiguously created in error or in the incorrect namespace, or redirects created by moving away from a title that was obviously unintended.
+* Templates orphaned as the result of a consensus at [[Wikipedia:Templates for discussion]].<section end=G6text/>
+
+* {{Tlp|Db-g6|2=rationale=''reason''}} <small>– If none of the special tags below apply, this tag should be used with a reason specified in the {{Para|rationale}} parameter.</small>
+* {{Tlp|Db-copypaste|''page to be moved''}} <small>– for [[Wikipedia:Administrators' guide/Fixing cut-and-paste moves|cut-and-paste page moves]] that need to be temporarily deleted to make room for a clean page move.</small>
+* {{Tlp|Db-move|''page to be moved''|''reason''}} <small>– for pages that are currently holding up a non-controversial or consensual page move.</small>
+* {{Tlp|Db-moved}} <small>– for pages that were holding up a page move, until they were moved out of the way by a [[Wikipedia:page mover|page mover]].</small>
+* {{Tlp|Db-afc-move|Draft:''page to be moved''}} <small>– for pages that are currently holding up a non-controversial or consensual page move as a result of an [[Wikipedia:WikiProject Articles for creation|Articles for creation]] (AFC) review, typically for articles in draft space.</small>
+* {{Tlp|1=Db-xfd|2=fullvotepage=''link to closed [[Wikipedia:Deletion process|deletion discussion]]''|wrap=yes}} <small>– for pages where a consensus to delete has been previously reached via deletion discussion, but which were not deleted.</small>
+* {{tl|Db-error}} <small>– for pages obviously created in error.</small>
+* {{clc|Candidates for technical speedy deletion}}
+
+=== <span class="anchor" id="G7"></span><span class="anchor" id="g7"></span><span class="anchor" id="author"></span><span class="anchor" id="blanked"></span>G7. Author requests deletion ===
+{{Shortcut|WP:G7}}
+If requested in good faith and provided that the only substantial content of the page was added by its author. For redirects created as a result of a [[Help:Moving a page|page move]], the mover must also have been the only substantive contributor to the pages before the move.<ref name="page move redirects"/> If the sole author [[Wikipedia:Glossary#Blanking|blanks]] a page other than a userspace page, a category page, or any type of talk page, this can be taken as a deletion request. If an author requests deletion of a page currently undergoing a deletion discussion, the closing admin may interpret that request as agreement with the deletion rationale.
+* {{Tl|Db-g7}}, {{Tl|Db-author}}, {{Tl|Db-blanked}}, {{Tl|Db-self}}
+* {{clc|Candidates for speedy deletion by user}} (same category as U1)                                                                                  
+
+=== <span class="anchor" id="G8"></span><span class="anchor" id="g8"></span><span class="anchor" id="talk"></span><span class="anchor" id="subpage"></span><span class="anchor" id="catfd"></span><span class="anchor" id="redirnone"></span>G8. Pages dependent on a non-existent or deleted page ===
+{{Shortcut|WP:G8}}
+Examples include, but are not limited to:
+* [[Wikipedia:Talk page|Talk pages]] with no corresponding subject page
+* [[Wikipedia:Subpages|Subpages]] with no parent page
+* [[Wikipedia:Manual of Style/Accessibility#Video|Timed Text pages]] without a corresponding file (or when the file has been moved to Commons)
+* [[Wikipedia:Redirect|Redirects]] to target pages that never existed or were deleted
+* [[Wikipedia:Editnotice|Editnotices]] of non-existent or [[Wikipedia:Protection policy#Creation protection|unsalted]] deleted pages
+
+This criterion excludes any page that is useful to Wikipedia, and in particular:
+* Deletion discussions that are not logged elsewhere
+* [[Wikipedia:Talk page guidelines#User talk pages|User talk pages]]
+* Talk page archives (except article talk page archives where the corresponding article and main talk page have been deleted and the page is not otherwise useful to Wikipedia – check for page-moves and merges before using G8 on article-talk-page-archives; the parent article might still exist under a different name)
+* Redirects that were broken as a result of a page move or retargeting (these should instead be retargeted to their target's new name), except where [[WP:R2|R2]] speedy deletion would then immediately apply if they were fixed (e.g., redirects to articles that have been [[WP:DRAFTIFY|draftified]])
+* Plausible redirects that can be changed to valid targets
+* [[Wikipedia:User subpages|User]] subpages when the user has not created a user page
+* Talk pages for files that exist on [[Wikipedia:Wikimedia Commons|Wikimedia Commons]]
+* Pages that should be moved to a different location<ref>Note that new editors sometimes mistakenly start article drafts on talk pages that have no article. If you see this, move the draft to [[Wikipedia:Drafts|the draft space]] or to the user's [[Wikipedia:Userspace|userspace]], making sure the new user is listed as author and not you.</ref>
+
+Exceptions may be sign-posted with the template {{Tl|G8-exempt}}.
+* {{Tl|Db-g8}} <small>– for cases not covered by any of the special tags below</small>
+* {{Tl|Db-redirnone}} <small>– for pages that redirect to nonexistent/deleted pages, or pages currently flagged for speedy deletion</small>
+* {{Tl|Db-subpage}} <small>– for subpages of nonexistent/deleted pages, or pages currently flagged for speedy deletion</small>
+* {{Tl|Db-timedtext}} <small>– for Timed Text pages of nonexistent/deleted files, or files currently flagged for speedy deletion</small>
+* {{Tl|Db-talk}} <small>– for talk pages of nonexistent/deleted pages, or pages currently flagged for speedy deletion</small>
+* {{clc|Candidates for speedy deletion as dependent on a non-existent page}}, {{clc|Candidates for speedy deletion as broken redirects}}
+
+=== <span class="anchor" id="G9"></span><span class="anchor" id="g9"></span><span class="anchor" id="office"></span><span class="anchor" id="OFFICE"></span><span class="anchor" id="wmf"></span><span class="anchor" id="WMF"></span>G9. Office actions ===
+{{Shortcut|WP:G9}}
+In exceptional circumstances, the Wikimedia Foundation may immediately delete a page as an [[Wikipedia:Office actions|office action]]. Deletions of this type must not be reversed without permission from the Foundation.
+
+=== <span class="anchor" id="G10"></span><span class="anchor" id="g10"></span><span class="anchor" id="attack"></span><span class="anchor" id="ATTACK"></span><span class="anchor" id="ATK"></span><span class="anchor" id="ATCK"></span>G10. Pages that disparage, threaten, intimidate, or harass their subject or some other entity, and serve no other purpose ===
+{{Shortcut|WP:G10}}
+{{Main|Wikipedia:Attack page}}
+Examples of attack pages may include: [[Wikipedia:Libel|libel]], [[Wikipedia:No legal threats|legal threats]], material intended purely to [[Wikipedia:Harassment|harass or intimidate]] a person, or [[Wikipedia:Biographies of living persons|biographical material about a living person]] that is entirely negative in tone and unsourced. These pages should be speedily deleted when there is no [[Wikipedia:Neutral point of view|neutral]] version in the page history to revert to. Both the page title and page content may be taken into account in assessing an attack. Articles about living people deleted under this criterion should {{strong|not}} be restored or recreated by any editor until the [[Wikipedia:Biographies of living persons|biographical article standards]] are met. Other pages violating the Biographies of living persons policy might be eligible for deletion under the conditions stipulated at {{sectionlink|Wikipedia:Biographies of living persons#Summary deletion, creation prevention, and courtesy blanking}}, although in most cases a deletion discussion should be initiated instead.
+
+Redirects from plausible search terms are not eligible under this criterion. For example, a term used on the target page to refer to its subject is often a plausible redirect – see [[Wikipedia:RNEUTRAL]].
+* {{Tl|Db-g10}}, {{Tl|Db-attack}}, {{Tl|Db-attackorg}}, {{Tl|Db-personal attack}}
+* {{Tl|Db-negublp}} <small>– for [[Wikipedia:Biographies of living persons|articles about living persons]] that are unsourced, entirely negative in tone, and have no neutral version to revert to</small>
+* {{clc|Candidates for speedy deletion as attack pages}}
+
+=== <span class="anchor" id="G11"></span><span class="anchor" id="g11"></span><span class="anchor" id="spam"></span>G11. Unambiguous advertising or promotion ===
+{{Shortcut|WP:G11}}
+{{Main|Wikipedia:Spam}}
+{{Seealso|Wikipedia:Identifying blatant advertising}}
+
+This applies to pages that are {{em|exclusively}} promotional and would need to be {{em|fundamentally}} rewritten to serve as encyclopedia articles, [[Wikipedia:What Wikipedia is not#Wikipedia is not a soapbox or means of promotion|rather than advertisements]]. If a subject is [[Wikipedia:Notability|notable]] and the content could plausibly be replaced with text written from a [[Wikipedia:Neutral point of view|neutral point of view]], this is preferable to deletion. '''Note:''' Any article that describes its subject from a neutral point of view does not qualify for this criterion. However, "promotion" does not necessarily mean commercial promotion: anything can be promoted, including a person, a non-commercial organization, a point of view, etc.
+* {{Tl|Db-g11}}, {{Tl|Db-promo}}, {{Tl|Db-spam}}
+* {{Tl|Db-spamuser}} <small>– for userpages used only for publicity and promotion, with a username that promotes or implies affiliation with the entity being promoted</small>
+* {{clc|Candidates for speedy deletion as spam}}
+
+=== <span class="anchor" id="G12"></span><span class="anchor" id="g12"></span><span class="anchor" id="copyvio"></span>G12. Unambiguous copyright infringement ===
+{{Shortcut|WP:G12}}
+{{Main|Wikipedia:Copyright violations}}
+This applies to text pages that contain copyrighted material with no credible assertion of public domain, fair use, or a [[Wikipedia:Compatible license|compatible free license]], where there is no non-infringing content on the page worth saving. Only if the history is unsalvageably corrupted should it be deleted in its entirety; earlier versions without infringement should be retained. For equivocal cases that do not meet speedy deletion criteria (such as where there is a dubious assertion of permission, where free-content edits overlie the infringement, or where there is only partial infringement or close paraphrasing), the article or the appropriate section should be blanked with {{Tls|Copyvio|2=url=''insert URL here''}}, and the page should be listed at [[Wikipedia:Copyright problems]]. Please consult [[Wikipedia:Copyright violations]] for other instructions. Public-domain and other free content, such as a [[Wikipedia:Mirrors and forks|Wikipedia mirror]], do not fall under this criterion, nor is mere lack of attribution of such works a reason for speedy deletion. For files, see the [[#F9|equivalent criterion]] in the [[#Files|"Files" section]] here, which has more specific instructions.
+* {{Tlp|Db-g12|2=url=''source URL''}}, {{Tlp|Db-copyvio|2=url=''source URL''}}
+:'''Note:''' If other criteria apply in addition to G12, the template {{Tl|Db-multiple}} should be used instead, so we do not waste time seeking [[Wikipedia:Requesting copyright permission|copyright permission]] after deleting the page.
+* {{Tlp|Db-multiple|2=g12|3=url=''source URL''|4=''other criteria''}}
+* {{clc|Candidates for speedy deletion as copyright violations}} (same category as F9)
+
+=== <span class="anchor" id="G13"></span><span class="anchor" id="g13"></span><span class="anchor" id="AFC"></span><span class="anchor" id="AfC"></span><span class="anchor" id="afc"></span>G13. Abandoned drafts and ''Articles for creation'' submissions ===
+{{Shortcut|WP:G13}}
+{{Further|Wikipedia:Articles for creation}}
+This applies to any non-redirect<ref>It was determined that the community consensus in [[Wikipedia:Village pump (proposals)/Archive 135#Draft Namespace Redirects|a 2016 RfC]] redirects amounted to "there is a clear consensus against deletion of draft namespace redirects. There is a rough consensus against the alternative proposal to delete draft namespace redirects after six months."</ref> pages that have not been edited by a human in six months found in:
+# [[Wikipedia:Drafts|Draft namespace]],
+# [[WP:UD|Userspace]] with an {{Tl|AFC submission}} template
+Adding a CSD template to a page does not reset the six-month clock, but removing a CSD template does.<ref>Per [[Special:PermaLink/1121242926#RFC on clarifying G13 and what constitutes "last human edit"|this RFC]].</ref> Pages deleted under G13 may be restored upon request by following the procedure at [[Wikipedia:Requests for undeletion/Abandoned pages]].
+* {{Tl|Db-g13}}, {{Tl|Db-afc}}
+* {{clc|Candidates for speedy deletion as abandoned drafts or AfC submissions}} 
+
+=== <span class="anchor" id="G14"></span><span class="anchor" id="g14"></span><span class="anchor" id="Disambiguation"></span><span class="anchor" id="disambiguation"></span><span class="anchor" id="disambig"></span>G14. Unnecessary disambiguation pages ===
+{{Shortcut|WP:G14}}
+This applies to the following:
+* [[Wikipedia:Disambiguation|Disambiguation]] pages with titles ending in {{nowrap|"(disambiguation)"}} that list only one extant Wikipedia page.<ref name="G14-PTOPIC">A boldfaced link to the [[MOS:DABPRIMARY|primary topic]] at the top of a disambiguation page counts as a listed page.</ref>
+* Disambiguation pages, regardless of title, that list zero extant Wikipedia pages.<ref name="G14-PTOPIC"/>
+* Redirects that end in {{nowrap|"(disambiguation)"}} but target neither disambiguation pages nor pages that perform disambiguation-like functions (such as [[Wikipedia:set index articles|set index articles]] or lists).
+If a disambiguation page whose title does ''not'' end in "(disambiguation)" lists only one extant Wikipedia page, it should be changed to a redirect, unless it is more appropriate to move the linked page to the title currently used for the disambiguation page.
+* {{Tl|Db-g14}}, {{Tl|Db-disambig}}
+* {{clc|Candidates for speedy deletion as unnecessary disambiguation pages}}
+
+=== <span class="anchor" id="G15"></span><span class="anchor" id="g15"></span><span class="anchor" id="G15. LLM-generated pages without human review"></span>G15. Unambiguously LLM-generated pages ===
+{{Shortcut|WP:G15}}
+This applies to any page<ref>Per [[Wikipedia talk:Speedy deletion#RfC: Updating G15 ("LLM-generated pages without human review")|a 2026 RfC]], "It should be noted that global consensus is that "G" CSD criteria apply to all pages, ... so G15 already applies, and continues to apply, to any kind of page, not just articles. However, whether templates, modules, user scripts, etc., could, even in theory, meet the criteria of G15 ... remains unresolved."</ref> (including previous revisions that are substantially similar) that exhibits any of the three following signs which indicate that the page could only plausibly have been generated by [[large language model]]s (LLMs).
+* '''Communication intended for the user''' – This may include collaborative communication (e.g., "Here is your Wikipedia article on..."),<ref>Note that user-facing instructions may be present in infoboxes, especially older ones. For example, articles with [[Template:Infobox military person]] often contain the boilerplate "Add spouse if reliably sourced".</ref> knowledge-cutoff disclaimers (e.g., "Up to my last training update ..."), self-insertion (e.g., "as a large language model"), and [[Wikipedia:AIPLACEHOLDER|unfilled placeholders]] (e.g., "Smith was born on [Birth Date]" rather than the person's actual birth date).<ref>Note that placeholders also appear on human-made [[:Category:Article creation templates|article templates]] such as [[Template:Biography]], the use of which are not signs of LLM generation.</ref>
+* '''Non-existent or nonsensical references''' – This may include external links that are [[Wikipedia:Link rot|dead]] on arrival, [[ISBN]]s with invalid [[checksum]]s, unresolvable or unrelated [[Digital Object Identifiers|DOI]]s (e.g., a paper about a species of beetle in an article about computer science),  citations that exhibit invalid [[temporality]] (e.g., news reports about an accident before the accident occurred), or incorrect metadata (e.g., misattributed authors). To rule out other causes like typos or [[link rot]], tagging editors should consult the [[Wayback Machine]] and not take a single example as definitive.<ref>For example, seemingly dead-on-arrival links may have been [[geoblock]]ed in your region or copied from another article.</ref> When a page includes a large number of references, the references of concern should be noted in the rationale.
+* '''Technical indicators''' – This may include [[Wikipedia:Signs of AI writing#Internal formatting and reference markup bugs|model-specific citation bugs]] like the insertion of <code>oaicite</code>, <code>attributionIndex</code> JSON blocks, or <code>turn0search0</code>, as well as the presence of <code>```wikitext</code> or <code>```wiki</code> [[markdown]] code blocks ([[Wikipedia:Signs of AI writing/Wikitext wrapped in Markdown code blocks from chatbots|additional explanation]]). 
+
+In addition to the clear-cut signs listed above, there are other, more subjective [[Wikipedia:AISIGNS|signs of LLM writing]] that may also plausibly stem from human error or unfamiliarity with Wikipedia's [[Wikipedia:PAG|policies and guidelines]], which should not serve as the sole basis for applying this criterion. For less clear-cut cases, consider starting a discussion at the [[Wikipedia:AI noticeboard|AI noticeboard]] or [[Wikipedia:Articles for deletion|Articles for deletion]].  
+
+* {{Tl|Db-g15}}, {{Tl|Db-ai}}, {{Tl|Db-llm}}
+* {{clc|Candidates for speedy deletion as unambiguously LLM-generated content}}
+
+== <span class="anchor" id="a"></span><span class="anchor" id="A"></span><span class="anchor" id="articles"></span><span class="anchor" id="ARTICLES"></span><span class="anchor" id="article" style="margin:0"></span><span class="anchor" id="Article"></span><span class="anchor" id="ARTICLE"></span><span class="anchor" id="art"></span><span class="anchor" id="Art"></span><span class="anchor" id="ART"></span><span class="anchor" id="arti"></span><span class="anchor" id="Arti"></span><span class="anchor" id="ARTI"></span>Articles ==
+
+{{Shortcut|WP:ASD}}
+These criteria for speedy deletion apply only to pages in the article (main) namespace. They do not apply to redirects. For any articles that are not speedy deletion candidates, use [[Wikipedia:Articles for deletion]] or [[Wikipedia:Proposed deletion]].
+
+=== <span class="anchor" id="A1"></span><span class="anchor" id="a1"></span><span class="anchor" id="nocontext"></span>A1. No context ===
+{{Shortcut|WP:A1}}
+This applies to articles lacking sufficient context to identify the subject of the article.<ref name="A1 Rfc">[[Wikipedia talk:Criteria for speedy deletion/Archive 60#Rfc regarding A1|An RfC containing relevant discussions on the A1 criterion]]</ref> For example, if the page title is "Alex", and the page only has the content "He is a funny man with a red car and makes people laugh.", there isn't sufficient context to identify who is meant by "Alex". It applies only to very short articles. Note that ''context'' is different from ''content'', treated in [[#A3|A3]]. This excludes coherent [[Template:Not English|non-English]] material and [[Wikipedia:Pages needing translation into English|poorly translated material]]. If any information in the title or on the page, including links, allows an editor, possibly with the aid of a web search, to find further information on the subject in an attempt to expand or edit it, A1 is not appropriate. Do not tag under this criterion in the first few minutes after a new article is created.<ref name="Hasty">Consensus has developed that in most cases articles should not be tagged for deletion under this criterion moments after creation as the creator may be actively working on the content; though there is no set time requirement, a ten-minute delay before tagging under this criterion is suggested as good practice. Please {{strong|do not}} mark the page as [[Wikipedia:New pages patrol/patrolled pages|patrolled]] before that delay passes, to ensure the article is reviewed at a later time.</ref>
+* {{Tl|Db-a1}}, {{Tl|Db-nocontext}}
+* {{clc|Candidates for speedy deletion as lacking context}}
+
+=== <span class="anchor" id="A2"></span><span class="anchor" id="a2"></span><span class="anchor" id="notenglish"></span>A2. Foreign-language articles that exist on another Wikimedia project ===
+{{Shortcut|WP:A2}}
+This applies to articles not written in English that have essentially the same content as an article on another Wikimedia project. If the article is not the same as an article on another project, use the template {{tlx|Not English}} instead, and list the page at [[Wikipedia:Pages needing translation into English]] for review and possible translation.
+* {{Tl|Db-a2}}, {{Tl|Db-foreign}}
+* {{clc|Candidates for speedy deletion as existing on foreign Wikimedia projects}} 
+
+=== <span class="anchor" id="A3"></span><span class="anchor" id="a3"></span><span class="anchor" id="nocontent"></span><span class="anchor" id="blankcsd"></span>A3. No content ===
+{{Shortcut|WP:A3}}
+This applies to articles consisting only of external links, category tags, "See also" sections, a rephrasing of the title, attempts to correspond with the person or group named by its title, questions that should have been asked at a [[Wikipedia:Noticeboards|noticeboard]], chat-like comments, template tags, or images. This may also apply to articles consisting entirely of the framework of the [[Wikipedia:Article wizard|Article wizard]] with no additional content, or no content at all. However, this criterion does not cover very short articles that have context, which may be valid [[Wikipedia:Stub|stubs]], and articles consisting only of an [[Wikipedia:Infobox|infobox]]. This criterion {{em|excludes}} poor writing, coherent [[template:notenglish|non-English]] material, and [[Wikipedia:Pages needing translation into English|poorly translated material]]. Do not tag under this criterion in the first few minutes after a new article is created.<ref name="Hasty" />
+* {{Tl|Db-a3}}, {{Tl|Db-nocontent}}, {{Tl|Db-contact}}
+* {{Tl|Db-empty}} <small>– context-specific version: calls {{Tl|Db-c1}} for categories, and {{Tl|Db-a3}} everywhere else.</small>
+* {{clc|Candidates for speedy deletion as empty articles}}
+
+=== <span class="anchor" id="A7"></span><span class="anchor" id="a7"></span><span class="anchor" id="bio"></span><span class="anchor" id="corp"></span><span class="anchor" id="band"></span><span class="anchor" id="club"></span><span class="anchor" id="group"></span><span class="anchor" id="web"></span><span class="anchor" id="importance"></span>A7. No indication of importance (people, animals, organizations, web content, events) ===
+{{Shortcut|WP:A7}}
+{{Further|Wikipedia:Credible claim of significance}}
+This applies to any article about a {{strong|real person, individual animal, commercial or non-commercial organization, [[Wikipedia:Notability (web)|web content]], or organized event<ref name="Wikipedia:Notability (events)#Routine coverage">[[Wikipedia:Notability (events)#Routine coverage|Routine coverage of unorganised events]] – for example, shooting incidents – may not necessarily qualify under A7; [[Wikipedia:Articles for deletion|deletion discussions]] should be preferred in such cases.</ref>}} that does not indicate why its subject is important or significant, {{strong| except for [[educational institution]]s}}.<ref name="Past discussions leading to schools being exempt from A7">[[Wikipedia talk:WikiProject Schools/Criteria for Speedy Deletion A7|Past discussions leading to schools being exempt from A7]].</ref> This is distinct from [[Wikipedia:Verifiability|verifiability]] and [[Wikipedia:Identifying reliable sources|reliability of sources]], and is a lower standard than [[Wikipedia:Notability|notability]]. This criterion applies {{strong|only}} to articles about the listed subjects; in particular, it does {{strong|not}} apply to articles about albums (these may be covered by [[#A9|A9]]), products, books, films, TV programs, software, or other creative works, nor to entire {{em|species}} of animals. The criterion {{strong|does}} apply if the claim of significance or importance given is not credible, and any article with a blatantly false claim may also be submitted for [[#G3|speedy deletion as a hoax]]. If the claim's credibility is unclear, you can improve the article yourself, [[Wikipedia:Proposed deletion|propose deletion]], or list the article at [[Wikipedia:Articles for deletion|articles for deletion]].
+* {{Tl|Db-a7}}
+* {{Tl|Db-person}} <small>– for people</small>
+* {{Tl|Db-band}} <small>– for bands</small>
+* {{Tl|Db-club}} <small>– for clubs, societies and groups</small>
+* {{Tl|Db-inc}} <small>– for commercial and non-commercial organizations</small>
+* {{Tl|Db-web}} <small>– for web content</small>
+* {{Tl|Db-animal}} <small>– for individual animals</small>
+* {{Tl|Db-event}} <small> – for events</small>
+* {{clc|Candidates for speedy deletion as importance or significance not asserted}} (same as A9)
+
+=== <span class="anchor" id="A9"></span><span class="anchor" id="a9"></span><span class="anchor" id="music"></span>A9. No indication of importance (musical recordings) ===
+{{Shortcut|WP:A9}}
+{{Further|Wikipedia:Credible claim of significance}}
+This applies to any article about a {{strong|musical recording}} or {{strong|list of musical recordings}} where {{strong|none of the contributing recording artists has an article}} and that {{strong|does not indicate why its subject is important or significant}} ({{em|both}} conditions must be met). This is distinct from questions of [[Wikipedia:Verifiability|verifiability]] and [[Wikipedia:Identifying reliable sources|reliability of sources]], and is a lower standard than [[Wikipedia:Notability (music)|notability]]. This criterion does not apply to other forms of creative media, products, or any other types of articles.
+
+The criterion does {{strong|not}} apply to any article that makes {{strong|any [[Wikipedia:Credible claim of significance|credible claim of significance]] or importance}} even if the claim is not supported by a reliable source or does not qualify on Wikipedia's [[Wikipedia:Notability|notability guidelines]].
+* {{Tl|Db-a9}}, {{Tl|Db-album}}, {{Tl|Db-song}}, {{Tl|Db-discog}}
+* {{clc|Candidates for speedy deletion as importance or significance not asserted}} (same as A7)
+
+=== <span class="anchor" id="A10"></span><span class="anchor" id="a10"></span><span class="anchor" id="duplicate"></span>A10. Recently created article that duplicates an existing topic ===
+{{Shortcut|WP:A10}}
+This applies to any {{strong|recently created}}<ref name="recent">The definition of recent is intentionally flexible since some pages may receive more notice than others. Pages older than about 3–6 weeks are unlikely to be considered recently created; pages older than about 3–4 months almost never are. Higher-profile pages are considered recently created for shorter periods than those with a lower profile.</ref> article with no relevant page history that duplicates an existing English Wikipedia article, and that {{strong|does not expand upon, detail or improve information}} within any existing article(s) on the subject, and where the title is {{strong|not a plausible [[Wikipedia:redirect|redirect]]}}. This does {{strong|not}} include [[Wikipedia:Splitting|split pages]] or any article that expands or reorganizes an existing one or that contains referenced, [[Wikipedia:Merging|mergeable]] material. It also does {{strong|not}} include disambiguation pages.
+* {{Tlp|Db-a10|2=article=''Existing article title''}}, {{Tlp|Db-same|2=article=''Existing article title''}}
+The title chosen for the vast majority of duplicate articles will be a plausible misspelling of, or alternative name for, the existing article, and a [[Wikipedia:Redirect|redirect]] should be created instead of deletion. This criterion should, accordingly, only be used rarely, and only for pages whose titles are not plausible redirects.
+* {{clc|Candidates for speedy deletion as duplicate articles}}
+
+=== <span class="anchor" id="A11"></span><span class="anchor" id="a11"></span><span class="anchor" id="madeup"></span><span id="A11._Obviously_made_up"></span>A11. Obviously invented ===
+{{Shortcut|WP:A11}}
+{{Main|Wikipedia:Wikipedia is not for things made up one day}}
+
+{{Further|Wikipedia:Credible claim of significance}}
+
+This applies to any article that plainly indicates that the subject was [[Wikipedia:Wikipedia is not for things made up one day|invented, coined, or discovered by the article's creator or someone they personally know]] and does not credibly indicate why its subject is important or significant. The criterion does {{strong|not}} apply to any article that makes {{strong|any {{em|credible}} claim of significance or importance}}, even if the claim is not supported by a reliable source or does not qualify under Wikipedia's notability guidelines. Note: {{strong|This is not intended for hoaxes}} (see [[#G3|G3]]).<ref>Unlike a hoax, subject to deletion as vandalism under [[#G3|G3]] as a bad faith attempt to deceive, CSD A11 is for topics that were or may have been actually created and are real, but have no notice or significance except among a small group of people, e.g., a newly invented drinking game or new word.</ref>
+* {{Tl|Db-a11}}, {{Tl|Db-invented}}, {{Tl|Db-madeup}}
+* {{clc|Candidates for speedy deletion as obviously invented}}
+
+== <span class="anchor" id="r"></span><span class="anchor" id="R"></span><span class="anchor" id="rdr"></span><span class="anchor" id="RDR"></span><span class="anchor" id="redir"></span><span class="anchor" id="REDIR"></span><span class="anchor" id="rdrt"></span><span class="anchor" id="RDRT"></span><span class="anchor" id="rdrct"></span><span class="anchor" id="RDRCT"></span><span class="anchor" id="Redirect"></span><span class="anchor" id="REDIRECT"></span><span class="anchor" id="REDIRECTS"></span>Redirects ==
+
+{{Shortcut|WP:RSD}}
+These criteria for speedy deletion apply to [[Wikipedia:Redirect|redirects]], including [[Wikipedia:Soft redirect|soft redirects]], in any namespace, with exclusions listed for specific criteria. Redirects whose page histories are [[Wikipedia:ATTREQ|necessary for attribution]], including redirects created by [[Wikipedia:Merging|merges]],<ref>See [[Wikipedia:Merge and delete]] for an explanation as to why redirects created by merges cannot be deleted in most cases.</ref> and articles or stubs that have been converted into redirects are not eligible for speedy deletion. For any redirects that are not speedy deletion candidates, use [[Wikipedia:Redirects for discussion|Redirects for discussion]]. In some cases, it may be possible to make a useful redirect by changing the target instead of deleting it.
+
+=== <span class="anchor" id="R2"></span><span class="anchor" id="r2"></span><span class="anchor" id="rediruser"></span><span class="anchor" id="userfy"></span>R2. Cross-namespace redirects ===
+{{Shortcut|WP:R2}}{{See also|Wikipedia:Cross-namespace redirects|Category:Cross-namespace redirects|Wikipedia:Manual of Style/Linking#General points on linking style}}
+This applies to redirects from the [[Wikipedia:Main namespace|main namespace]] to any other namespace {{em|except}} the Category:, Template:, Wikipedia:, Help:, and Portal: namespaces.
+* {{Tl|Db-r2}}, {{Tl|Db-rediruser}}
+* {{clc|Candidates for speedy deletion as inappropriate cross-namespace redirects}}
+
+=== <span class="anchor" id="R3"></span><span class="anchor" id="r3"></span><span class="anchor" id="redirtypo"></span>R3. Recently created, implausible typos ===
+{{Shortcut|WP:R3}}
+This applies to {{strong|recently created}}<ref name="recent" /> redirects from {{strong|implausible}} [[Typographical error|typos]] or [[misnomer]]s. However, some redirects in [[:Category:Redirects from alternative languages|other languages]] are generally useful. This criterion does not apply to common misspellings or misnomers, to redirects created as a result of a [[Wikipedia:Moving a page|page move]]<ref name="page move redirects">Page moves are excluded because of a history of improper deletions of these redirects. A move creates a redirect to ensure that any external links that point to Wikipedia remain valid; should such links exist, deleting these redirects will break them. Such redirects must be discussed at [[Wikipedia:Redirects for discussion]] before deletion. However, redirects that were obviously made in error can be deleted as [[#G6|G6]], technical deletions.</ref> (unless nothing was at the title until recently), and to redirects that point to a disambiguation page and end with {{nowrap|"(disambiguation)"}}.
+* {{Tl|Db-r3}}, {{Tl|Db-redirtypo}}
+* {{clc|Candidates for speedy deletion as implausible redirects}}
+
+=== <span class="anchor" id="R4"></span><span class="anchor" id="r4"></span><span class="anchor" id="redircom"></span>R4. File namespace redirects with names that match Wikimedia Commons pages ===
+{{Shortcut|WP:R4}}
+This applies to redirects in the "File:" namespace with the same name as a file or redirect at [[Wikipedia:Wikimedia Commons|Wikimedia Commons]], provided any eventual [[Wikipedia:File link|file links]] to it on Wikipedia are obviously not intended for the file and don't redirect to Wikimedia Commons.
+* {{Tl|Db-r4}}, {{Tl|Db-redircom}}
+* {{clc|Candidates for speedy deletion as file redirects shadowing Wikimedia Commons files}}
+
+=== Other issues with redirects ===
+*For redirects to deleted or non-existent pages, see [[#G8|G8]].
+*For redirects that end in {{nowrap|"(disambiguation)"}}, see [[#G14|G14]].
+*For redirects that are not speedy deletion candidates, use [[Wikipedia:Redirects for discussion|Redirects for discussion]].
+
+Redirects that do not work because of software limitations, such as redirects to special pages or to pages on other wikis, may be converted to soft redirects if they have a non-trivial history or other valid uses.
+
+For reversal of redirects, use {{Tlx|Db-move}}, a special case of {{Tlx|Db-g6}}.
+
+== <span class="anchor" id="Images.2FMedia"></span><span class="anchor" id="Images&Media"></span><span class="anchor" id="Images & Media"></span><span class="anchor" id="Images and media"></span><span class="anchor" id="images"></span><span class="anchor" id="Images"></span><span class="anchor" id="IMAGES"></span><span class="anchor" id="media"></span><span class="anchor" id="Media"></span><span class="anchor" id="MEDIA"></span><span class="anchor" id="image"></span><span class="anchor" id="Image"></span><span class="anchor" id="IMAGE"></span><span class="anchor" id="i"></span><span class="anchor" id="I"></span><span class="anchor" id="m"></span><span class="anchor" id="M"></span><span class="anchor" id="img"></span><span class="anchor" id="IMG"></span><span class="anchor" id="f"></span><span class="anchor" id="F"></span><span class="anchor" id="files"></span><span class="anchor" id="FILES"></span><span class="anchor" id="md"></span><span class="anchor" id="MD"></span><span class="anchor" id="mda"></span><span class="anchor" id="MDA"></span>Files ==
+{{Shortcut|WP:FSD|WP:DI}}
+These criteria for speedy deletion apply to files, images, and other media. These criteria formerly began with '''I''' (e.g., I1, I2, I3) but have since been replaced with '''F''', without the actual criteria being changed. This was because the [[Help:Files|file namespace]] was formerly known as the image namespace.
+
+For any files that are not speedy deletion candidates, use the [[Wikipedia:Proposed deletion|Proposed deletion]] or [[Wikipedia:Files for discussion|Files for discussion]] processes.
+
+=== <span class="anchor" id="F1"></span><span class="anchor" id="f1"></span><span class="anchor" id="I1"></span><span class="anchor" id="i1"></span><span class="anchor" id="redundant image"></span>F1. Redundant ===
+{{Shortcut|WP:I1}}
+This applies to unused duplicates or lower-quality/resolution copies of another Wikipedia file having the same [[Wikipedia:Image use policy#Format|file format]]. This excludes files hosted on Wikimedia Commons; for these, see criterion [[#F8|F8]].<ref>This does not apply to files duplicated on Wikimedia Commons, because of [[Wikipedia talk:Moving files to the Commons|license issues]]; instead see {{Section link|F8. Files available as identical copies on Wikimedia Commons}}.</ref>
+* {{Tlp|Db-f1|''replacement file name.ext''}}, {{Tlp|Db-redundantfile| ''replacement file name.ext''}}, {{tlp|Isd|''replacement file name.ext''}}
+* {{clc|Candidates for speedy deletion as redundant files}}
+
+=== <span class="anchor" id="F2"></span><span class="anchor" id="f2"></span><span class="anchor" id="I2"></span><span class="anchor" id="i2"></span><span class="anchor" id="noimage"></span><span class="anchor" id="badimage"></span>F2. Corrupt, missing, or empty file ===
+{{Shortcut|WP:F2}}
+This applies to files that are corrupt, missing, empty, or that contain superfluous and blatant non-metadata information.<ref>Before deleting this latter type of file/page, check whether the [[MediaWiki]] engine can read it by previewing a resized thumbnail of it. Even if it renders, if it contains significant superfluous information that cannot be accounted for as [[metadata]] directly relating to the file data, it may be deleted. It is always preferred to correct the problem by uploading a file that contains only good data plus acceptable metadata.</ref> This also applies to file description pages that lack a corresponding file or correspond to Commons files and do not include information that is specific to English Wikipedia (like {{Tlx|FeaturedPicture}}).<ref>Content from file description pages that is relevant to the Commons should be copied over before deleting the local page. If necessary, copy the attribution history as well.</ref>
+* {{Tl|Db-f2}}, {{Tl|Db-nofile}}, {{Tl|Db-fpcfail}}
+* {{Tl|Db-imagepage}} <small>– for file description pages with no corresponding file</small>
+* {{clc|Candidates for speedy deletion as missing files}}
+
+=== <span class="anchor" id="F3"></span><span class="anchor" id="f3"></span><span class="anchor" id="I3"></span><span class="anchor" id="i3"></span><span class="anchor" id="noncom"></span><span class="anchor" id="ccnoncom"></span><span class="anchor" id="by-nc"></span><span class="anchor" id="BY-NC"></span><span class="anchor" id="by-nc-sa"></span><span class="anchor" id="BY-NC-SA"></span>F3. Improper license ===
+{{Shortcut|WP:F3}}
+This criterion is used to flag files licensed as "[[WP:NONCOM|for non-commercial use only]]" (including non-commercial [[Creative Commons licenses]]), "no derivative use", "for Wikipedia use only", or "used with permission". These may be deleted, unless they comply with the limited standards for the use of [[Wikipedia:Non-free content|non-free content]]. Files which do not meet the [[Wikipedia:Image use policy#GNU Free Documentation License|criteria for using the GNU Free Documentation License]] may be deleted under this criterion.
+* {{Tl|Db-f3}}, {{Tl|Db-noncom}}
+* {{clc|Candidates for speedy deletion as files with unacceptable licenses}}
+
+=== <span class="anchor" id="F4"></span><span class="anchor" id="f4"></span><span class="anchor" id="I4"></span><span class="anchor" id="i4"></span><span class="anchor" id="unksource"></span>F4. Lack of licensing information ===
+{{Shortcut|WP:F4}}
+This applies to files lacking the necessary licensing information to verify copyright status after being [[:Category:Wikipedia files with unknown source|identified]] as [[:Category:Wikipedia files with unknown copyright status|such]] for {{strong|seven days}}. Administrators should check the upload summary, file information page, and the file itself for a source before deleting under this criterion.
+* {{tlsp|Di-no source}}, {{tlsp|Nsd}} <small>– no source</small>
+* {{tlsp|Di-no license}}, {{tlsp|Nld}} <small>– no license</small>
+* {{tlsp|Di-no source no license}}, {{tlsp|Nsdnld}} <small>– neither source nor license</small>
+* {{tlsp|Di-dw no source}}, {{tlsp|Dw-nsd}} <small>– [[derivative work]] with no source for the incorporated work</small>
+* {{tlsp|Di-dw no license}}, {{tlsp|Dw-nld}} <small>– derivative work with no license for the incorporated work</small>
+* {{tlsp|Di-dw no source no license}}, {{tlsp|Dw-nsdnld}} <small>– derivative work with neither source nor license for the incorporated work</small>
+* [[:Category:Wikipedia files with unknown source|Category:Wikipedia files with unknown source]], [[:Category:Wikipedia files with unknown copyright status|Category:Wikipedia files with unknown copyright status]]<ref>See also: {{clc|All Wikipedia files with unknown source}} and {{clc|All Wikipedia files with unknown copyright status}}</ref>
+
+=== <span class="anchor" id="F5"></span><span class="anchor" id="f5"></span><span class="anchor" id="I5"></span><span class="anchor" id="i5"></span><span class="anchor" id="unfree"></span>F5. Orphaned non-free use files ===
+{{Shortcut|WP:F5}}
+This applies to files that are not under a [[Wikipedia:Image copyright tags/Free licenses|free license]] or in the [[Wikipedia:public domain|public domain]] and that are not used in any {{strong|article}}. These may be deleted after being [[:Category:Orphaned non-free use Wikipedia files|identified]] as such for more than {{strong|seven days}} or immediately if the file's {{strong|only}} use was on a deleted article and it is {{strong|very unlikely}} to have any use on any other valid article. This includes previous revisions of the files overwritten by copyright violations. Reasonable exceptions may be made for files uploaded for an upcoming article.
+* {{Tl|Db-f5}} <small>– for immediate F5 deletions</small>
+* {{tlsp|Di-orphaned non-free use}}, {{Tlsp|Orfud}} <small>– for files</small>
+* {{tlsp|Orphaned non-free revisions}}, {{Tlsp|Orfurrev}} <small>– for revisions only</small>
+* {{clc|Candidates for speedy deletion as orphaned non-free use files}}
+
+=== <span class="anchor" id="F6"></span><span class="anchor" id="f6"></span><span class="anchor" id="I6"></span><span class="anchor" id="i6"></span><span class="anchor" id="norat"></span>F6. Missing non-free use rationale ===
+{{Shortcut|WP:F6}}
+This applies to [[Wikipedia:Non-free content|non-free]] files claiming fair use but without a [[Wikipedia:Fair use rationale guideline|use rationale]]. These may be deleted after being [[:Category:Wikipedia files with no non-free use rationale|identified]] as such for {{strong|seven days}}. The boilerplate [[Wikipedia:Image copyright tags/All#Fair use|copyright tags setting out fair use criteria]] does not constitute a rationale. This criterion does not apply to situations where a use rationale is provided but is disputed.
+* {{tl|Di-no non-free use rationale}}, {{Tlsp|Nrd}} <small>– no non-free use rationale</small>
+* {{tl|Di-missing article links}} <small>– missing non-free use rationale for one or more articles</small>
+*{{clc|All Wikipedia files with no non-free use rationale}}
+
+=== <span class="anchor" id="F7"></span><span class="anchor" id="f7"></span><span class="anchor" id="I7"></span><span class="anchor" id="i7"></span><span class="anchor" id="badfairuse"></span>F7. Invalid non-free use claim ===
+{{Shortcut|WP:F7}}
+{{ordered list|type=lower-latin |start=2
+|{{anchor|F7b|f7b|I7b|i7b}} [[Wikipedia:Non-free content|Non-free files]] from a press agency or photo agency (e.g., [[Associated Press]], [[Getty Images]]), where the file itself is {{strong|not}} the [[Wikipedia:Non-free content#Unacceptable use|subject of sourced commentary]], are considered an invalid claim of fair use and fail the strict requirements of [[Wikipedia:Non-free content criteria]], and may be deleted {{strong|immediately}}.
+|{{anchor|F7c|f7c|I7c|i7c}} [[Wikipedia:Non-free content|Non-free files]] that have been [[:Category:Replaceable non-free use Wikipedia files|identified]] as being replaceable by a free file and tagged with {{Tlx|Rnfu|Subst=yes}} may be deleted after {{strong|two days}}, if no justification is given for the claim of irreplaceability. If the replaceability is disputed, the nominator should not be the one deleting the file.
+|{{anchor|F7d|f7d|I7d|i7d}} Invalid fair-use claims tagged with {{Tlx|Dnfu|Subst=yes}} may be deleted {{strong|seven days}} after they are tagged, if a full and valid fair-use use rationale is not added.
+}}
+* {{Tl|Db-f7}}, {{Tl|Db-badfairuse}} <small>– for immediate F7 deletions</small>
+* {{tlsp|Di-replaceable non-free use}}, {{Tlsp|Rnfu}} <small>– replaceable with free files</small>
+* {{tlsp|Di-disputed non-free use rationale}}, {{Tlsp|Dnfu}} <small>– disputed non-free use rationales</small>
+* {{clc|Candidates for speedy deletion as files with clearly invalid fair-use claims}}
+
+=== <span class="anchor" id="F8"></span><span class="anchor" id="f8"></span><span class="anchor" id="I8"></span><span class="anchor" id="i8"></span><span class="anchor" id="NowCommonsThis"></span>F8. Files available as identical copies on [[Wikimedia Commons]] ===
+{{Shortcut|WP:F8}}
+Provided the following conditions are met:
+* The Commons version is in the same [[Wikipedia:Image use policy#Format|file format]] and is of the same or higher quality and resolution.
+* The file's license and source status are beyond a reasonable doubt, and the license is undoubtedly accepted at Commons. To avoid deletion at Commons, please ensure the Commons page description has all of the following:
+** Name and date of death of the creator of the artistic work represented by the file, or else clear evidence that a free license was given. If anonymous, ensure the page description provides evidence that establishes the anonymous status.
+** Country where the artistic work represented by the file was situated, or where it was first published.
+** Date when the artistic work represented by the file was created or first published, depending on the copyright law of the origin country.
+** All file revisions that meet the first condition have been transferred to Commons as revisions of the Commons copy and properly marked as such.
+* The file is not marked as {{Tlx|Do not move to Commons}} or as {{Tlx|Keep local}}.<!--
+* The uploader(s) of the media have not previously expressed an objection to such deletions.-->
+* All information on the file description page is present on the Commons file description page, including the complete upload history with links to the uploader's local user pages (the upload history is {{em|not}} necessary if the file's license does not require it, although it is still recommended). If there is any information not relevant to any other project on the file description page (like the {{Tlx|FeaturedPicture}} template), the file description page must be undeleted after the file deletion.<!--
+* All appropriate and relevant past revisions or versions of the file have also been transfered. -->
+* If the file is available on Commons under a different name than locally, all local references to the file must be updated to point to the title used at Commons.
+* The file is not protected. {{strong|Do not delete protected files}}, even if there is an identical copy on Commons, unless the file is no longer in use (check [[Help:What links here|what links here]]). They are usually locally uploaded and protected here since they are used in the interface or in some widely used high-risk templates. Deleting the local copy of an image used in the interface {{strong|does break things}}. [[Wikipedia:Cascade-protected items#Cascade protected images|More about high-risk images]].
+* {{Tlx|C-uploaded}} files may be speedily deleted as soon as they are off the [[Main Page]].
+* {{Tl|Db-f8}}, {{Tl|Now Commons}}, {{Tlp|Now Commons|File:''name of file on Commons.ext''}}
+* [[:Category:Wikipedia files with the same name on Wikimedia Commons|Category:Wikipedia files with the same name on Wikimedia Commons]], [[:Category:Wikipedia files with a different name on Wikimedia Commons|Category:Wikipedia files with a different name on Wikimedia Commons]]<ref>See also: {{clc|All Wikipedia files with the same name on Wikimedia Commons}} and {{clc|All Wikipedia files with a different name on Wikimedia Commons}}</ref>
+
+=== <span class="anchor" id="F9"></span><span class="anchor" id="f9"></span><span class="anchor" id="I9"></span><span class="anchor" id="i9"></span><span class="anchor" id="filecopyvio"></span>F9. Unambiguous copyright infringement ===
+{{Shortcut|WP:F9}}
+This applies to obviously non-free files that are not claimed by the uploader to be fair use. A URL or other indication of where the file originated should be mentioned. This does not include files with a credible claim that the owner has released them under a Wikipedia-compatible free license. Most files from stock photo libraries such as [[Getty Images]] will not be released under such a license. Blatant infringements should be tagged with the {{Tlx|Db-filecopyvio}} template. Non-blatant copyright infringements should be discussed at [[Wikipedia:Files for discussion]].
+* {{Tlp|Db-f9|2=url=''URL of source''}}, {{Tlp|Db-filecopyvio|2=url=''URL of source''}}
+* {{clc|Candidates for speedy deletion as copyright violations}} (same category as G12)
+
+=== <span class="anchor" id="F11"></span><span class="anchor" id="f11"></span><span class="anchor" id="I11"></span><span class="anchor" id="i11"></span><span class="anchor" id="noperm"></span>F11. No evidence of permission ===
+{{Shortcut|WP:F11}}
+If an uploader has specified a license and has named a third party as the source or copyright holder without providing evidence that this third party has in fact agreed, the item may be deleted {{strong|seven days after notification}} of the uploader. Acceptable evidence of licensing normally consists of either a link to the source website where the license is stated, or a statement by the copyright holder e-mailed or forwarded to {{mailto|permissions-en|wikimedia.org}}. Such a confirmation is also required if the source is an organization or web publication that the uploader claims to represent or own.
+
+Instances of {{strong|obvious}} copyright violations where the uploader would have no reasonable expectation of obtaining permission (e.g., major studio movie posters, television images, album covers, or logos) without a claim of [[fair use]] should instead be speedily deleted per [[#F9|F9]] (unambiguous copyright infringement). Files tagged with {{Tl|Permission pending}} for more than 30 days may also be speedily deleted under this criterion. ({{#ifexpr:{{VRT backlog}}=0|The permissions-en queue currently has a backlog of less than a day|Note that the permissions-en messages queue currently has a {{VRT backlog}}-day backlog; consider waiting at least this long before tagging VRT pending files for deletion}}.) Files tagged {{tl|Permission received}} whose permissions have not been confirmed after 30 days may be deleted immediately under this criterion, without waiting an additional seven days, provided a check of the ticket is performed by a VRT agent to confirm that no further interaction is ongoing.
+* {{tlsp|Di-no permission}}, {{Tlsp|Npd}}
+* {{Tlsp|Db-no permission-VRT}}
+* [[:Category:Wikipedia files missing permission]]<ref>See also: {{clc|All Wikipedia files missing evidence of permission}}</ref>
+
+== <span class="anchor" id="c"></span><span class="anchor" id="C"></span><span class="anchor" id="cat"></span><span class="anchor" id="CAT"></span><span class="anchor" id="category"></span><span class="anchor" id="Category"></span><span class="anchor" id="CATEGORY"></span>Categories ==
+{{Shortcut|WP:CCSD}}
+These criteria for speedy deletion apply only to pages in the category namespace. For any [[Help:Category|category]] pages that are not speedy deletion candidates, use [[Wikipedia:Categories for discussion|Categories for discussion]] instead.
+
+=== <span class="anchor" id="C1"></span><span class="anchor" id="c1"></span><span class="anchor" id="catempty"></span>C1. Unpopulated categories ===
+{{Shortcut|WP:C1}}
+This criterion applies to categories that have been unpopulated (or only populated by pages themselves tagged for speedy deletion) for at least seven days. This does not apply to [[:Category:Disambiguation categories|disambiguation categories]], [[:Category:Wikipedia soft redirected categories|category redirects]], categories under discussion at a [[Wikipedia:deletion discussions|deletion discussion venue]], or project categories that by their nature may become empty on occasion (e.g., [[WP:PROJCATS|cleanup categories]], or [[:Category:Wikipedians looking for help]]). Place {{Tl|Possibly empty category}} (or, for administrative categories, {{tl|Wikipedia category|hidden=yes|tracking=yes}}) at the top of the page to prevent such categories from being deleted.
+* {{Tl|Db-c1}}, {{tl|db-catempty}}.
+* {{Tl|Db-empty}} <small>– context-specific version: calls {{Tl|Db-c1}} for categories, and {{Tl|Db-a3}} everywhere else.</small>
+* {{clc|Empty categories awaiting deletion}}, and after seven days {{clc|Candidates for speedy deletion as empty categories}}
+
+=== <span class="anchor" id="C2"></span><span class="anchor" id="c2"></span><span class="anchor" id="catspeedy"></span><span class="anchor" id="C2A"></span><span class="anchor" id="C2B"></span><span class="anchor" id="C2C"></span><span class="anchor" id="C2D"></span><span class="anchor" id="C2E"></span><span class="anchor" id="C2F"></span>C2. Speedy renaming and merging ===
+Assorted sub-criteria that are used only at [[Wikipedia:Categories for discussion/Speedy|Categories for discussion/Speedy]]; please see that page for [[Wikipedia:Categories for discussion/Speedy#Speedy criteria|its speedy criteria]].
+
+=== <span class="anchor" id="C4"></span><span class="anchor" id="c4"></span><span class="anchor" id="catmaintenance"></span>C4. Unused maintenance categories ===
+{{shortcut|WP:C4}}
+This criterion applies to unused maintenance categories, such as empty dated maintenance categories for dates in the past (e.g., [[:Category:Articles lacking sources from July 2009|Category:Articles lacking sources from July 2009]]), tracking categories no longer used by a template after a rewrite, or empty subcategories of [[:Category:Wikipedia sockpuppets]] or [[:Category:Suspected Wikipedia sockpuppets]]. Note that empty maintenance categories are not necessarily unused—this criterion is for categories that will ''always'' be empty, not just ''currently'' empty. If you are unsure whether a category is still being used by a template, consider asking the creator of the category or at the template's talk page before tagging.
+* {{t|db-c4}}, {{t|db-templatecat}}
+* {{clc|Category:Candidates for speedy deletion as unused maintenance categories}}
+
+== <span class="anchor" id="T"></span><span class="anchor" id="t"></span><span class="anchor" id="TM"></span><span class="anchor" id="Tm"></span><span class="anchor" id="tm"></span><span class="anchor" id="template"></span><span class="anchor" id="TEMPLATE"></span><span class="anchor" id="Template"></span>Templates ==
+{{Shortcut|WP:TSD}}
+{{redir-dist|WP:CSDT|Wikipedia:XfD today#Speedy deletion candidates}}
+These criteria for speedy deletion apply only to pages in the template namespace. For any [[Wikipedia:Templates|templates]] and [[Wikipedia:Lua|Lua modules]] that are not speedy deletion candidates, use [[Wikipedia:Templates for discussion]].<ref>However, use [[Wikipedia:Categories for discussion]] for [[WP:stub templates|stub templates]] and [[Wikipedia:Miscellany for deletion]] for [[WP:userboxes|userboxes]] instead.</ref>
+
+=== <span class="anchor" id="T5"></span><span class="anchor" id="t5"></span>T5. Unused template subpages ===
+{{Shortcut|WP:T5}}
+This applies to unused [[WP:SUBPAGE|subpages]] of templates or modules, such as:
+*[[Wikipedia:Template documentation|Template documentation subpages]] unused by the template itself (editors tagging and deleting such pages should ensure that all relevant content, including categories, has been moved to the template page or the replacement documentation)
+*/core subpages which are not called by the template itself
+*Old subpages of {{t|POTD protected}}
+*Unnecessary subpages of {{t|Taxonomy}}, e.g., because it is incorrectly set up, or relates to a taxon no longer used
+It excludes [[Wikipedia:Template sandbox and test cases|sandbox and test cases subpages]], subpages of [[Module:Sandbox]], as well as anything tagged with {{t|T5-exempt}}. Reasonable exceptions apply for subpages which will be used soon, and editors are free to [[Wikipedia:Requests for undeletion|request undeletion]].
+* {{tl|Db-t5}}
+* {{clc|Candidates for speedy deletion as unused template subpages}}
+
+== <span class="anchor" id="u"></span><span class="anchor" id="U"></span><span class="anchor" id="up"></span><span class="anchor" id="UP"></span><span class="anchor" id="user"></span><span class="anchor" id="User"></span><span class="anchor" id="USER"></span><span class="anchor" id="user page"></span><span class="anchor" id="User page"></span><span class="anchor" id="USERPAGE"></span><span class="anchor" id="userpage"></span><span class="anchor" id="Userpage"></span><span class="anchor" id="userpages"></span><span class="anchor" id="Userpages"></span><span class="anchor" id="USERPAGES"></span>User pages ==
+{{Shortcut|WP:USD}}
+These criteria for speedy deletion apply only to pages in the User: and User talk: namespaces. For any [[Wikipedia:user page|user page]]s that are not speedy deletion candidates, use [[Wikipedia:Miscellany for deletion]] instead.
+
+=== <span class="anchor" id="U1"></span><span class="anchor" id="u1"></span><span class="anchor" id="userreq"></span>U1. User request ===
+{{Shortcut|WP:U1}}
+Personal [[Wikipedia:User page|user pages]] and [[Wikipedia:Subpages|subpages]] (but not [[WP:DELTALK|user talk pages]]) upon request by their user. This also includes [[Wikipedia:editnotice|editnotice]]s for user pages. In some rare cases, there may be an administrative need to retain the page. Pages that have previously been moved are only eligible if all previous titles were in the user's userspace.
+* {{Tl|Db-u1}}, {{Tl|Db-userreq}} (These templates are not displayed on pages such as [[Cascading Style Sheets|.css]] and [[JavaScript|.js]], but their categorization still works.)
+* {{clc|Candidates for speedy deletion by user}} (same category as G7)
+
+=== <span class="anchor" id="U2"></span><span class="anchor" id="u2"></span><span class="anchor" id="nouser"></span>U2. Nonexistent user ===
+{{Shortcut|WP:U2}}
+{{redirect|WP:U2|the WikiProject for the band|Wikipedia:WikiProject U2}}
+This applies to user pages, user subpages, and user talk pages of users that do not exist on the English Wikipedia (check [[Special:ListUsers]]), except user pages for IP users who have edited, redirects from misspellings of an established user's user page, and redirects created due to a [[Wikipedia:Changing username|user being renamed]]. Pages of users who exist on other WMF wikis but do not have local accounts are eligible for deletion.<ref>{{sectionlink|Wikipedia talk:Criteria for speedy deletion/Archive 85#U2 and global accounts}}</ref>
+
+Before tagging or deleting a page under this criterion, consider whether it is preferable to move the page to another location, such as a user subpage of the primary contributor.
+* {{Tl|Db-u2}}, {{Tl|Db-nouser}}
+* {{clc|Candidates for speedy deletion as userpage or subpage of a nonexistent user}}
+
+=== <span class="anchor" id="U6"></span><span class="anchor" id="u6"></span>U6. Abandoned user subpages of non-contributors ===
+{{Shortcut|WP:U6}}
+{{further|Wikipedia:Replacement of CSD U5 FAQ}}
+[[WP:UP|User subpages]] of users who have made few or no edits outside of user space, which have not been edited by a human in at least six months, excluding redirects, <code>.js</code> pages, <code>.css</code> pages, and [[Wikipedia:Books|Wikipedia Books]].<ref>Wikipedia Books are a legacy feature and are slated to eventually be converted into reading lists. See [[phab:T394563]].</ref> Promising drafts may be moved to [[WP:draftspace|draftspace]] by any editor as an alternative to deletion.<ref>In such a case, the act of moving the page to draftspace counts as a human edit that restarts the [[WP:Speedy deletion#G13|G13]] eligibility clock.</ref>
+
+The [[User:CSD U6 Bot|CSD U6 Bot]] automatically tags unambiguous U6 candidates.<ref>The primary criteria to count as unambiguous are that the creator has <em>no</em> non-userspace edits and the page has <em>no</em> non-bot-flagged edits in the past six months. See [[Wikipedia:Bots/Requests for approval/CSD U6 Bot]] for the full definition.</ref> In addition to tagging newly-eligible pages, it is working through the backlog of eligible pages predating U6's adoption. Its taggings carry a one-week delay to allow for human review and potential draftification. Humans may apply U6 tags as with any other criterion, without the delay, but are discouraged from scripted mass-tagging of pages that will eventually be handled by the bot.<ref>[[Special:GoToComment/c-Tamzin-20251114211400-CSD U6 implementation details|Village pump thread: CSD U6 implementation details]]</ref>
+* {{Tl|Db-u6}}
+* {{clc|Candidates for speedy deletion as abandoned user subpages of non-contributors}}
+* {{clc|Bot-tagged U6 candidates pending deletion}}
+
+=== <span class="anchor" id="U7"></span><span class="anchor" id="u7"></span>U7. Excessively unrelated non-draft subpages by non-contributors ===
+{{Shortcut|WP:U7}}
+{{further|Wikipedia:Replacement of CSD U5 FAQ}}
+[[WP:UP|User subpages]] of users who have made few or no edits outside of user space, were created more than six months ago, could not be interpreted as draft articles (even very bad ones), and consist entirely of:{{ordered list
+| type = lower-alpha|Creative or persuasive writing unrelated to Wikipedia (e.g., [[fan fiction]]s or political essays)|Lengthy<ref name="lengthy">"Lengthy" is not precisely defined, but note that it is not uncommon for established Wikipedians' userpages to have several paragraphs about their personal and professional lives. Less leeway may be given on length for content that veers closer to being promotional.</ref> descriptions of a person's professional accomplishments that are written in the [[grammatical person|first person]] or formatted like a [[résumé]] or ''[[curriculum vitae]]'' and do not serve as [[WP:PAID|paid-contribution disclosures]]|Lengthy<ref name="lengthy"/> content about the user's personal life, things in their environment (e.g., friends, pets, or belongings), or things they have [[WP:NOTMADEUP|invented]]|Links to websites that are primarily commercial in nature<ref>A link indirectly providing some way to give the user money (e.g., a YouTube channel that enables paid subscriptions, or a personal website with a donation button) does not automatically make it <em>primarily</em> commercial.</ref>
+}}For similar content on a page that is not eligible under this criterion (e.g., a top-level user page), blanking or selective removal may be appropriate as described at {{slink|Wikipedia:User pages#What may I not have in my user pages?}}.
+* {{Tl|Db-u7}}
+* {{clc|Candidates for speedy deletion as excessively unrelated non-draft subpages by non-contributors}}
+
+== <span class="anchor" id="n"></span><span class="anchor" id="N"></span><span class="anchor" id="nc"></span><span class="anchor" id="NC"></span><span class="anchor" id="non"></span><span class="anchor" id="NON"></span><span class="anchor" id="noncrit"></span><span class="anchor" id="NONCRIT"></span><span class="anchor" id="noncriteria"></span><span class="anchor" id="NONCRITERIA"></span><span class="anchor" id="Noncriteria"></span>Non-criteria ==
+{{Wikipedia talk:Criteria for speedy deletion/Common requests}}{{shortcut|WP:NOTCSD}}
+The following are not {{em|by themselves}} sufficient to justify speedy deletion:
+# '''Reasons based on [[Wikipedia:What Wikipedia is not]] or essays'''. Wikipedia is not: "a dictionary", "an indiscriminate collection of information", "a crystal ball", "a how-to list"; or essays like [[Wikipedia:Listcruft]], [[Wikipedia:Obscure topics]], [[Wikipedia:Deny recognition]],...; are not valid reasons for speedy deletion.
+# '''[[Wikipedia:HOAX|Less-obvious hoaxes]]'''. If even only remotely plausible, a suspected hoax article should receive scrutiny in a wider forum. Truth is often stranger than fiction. Note that "blatant and obvious hoaxes and misinformation" are subject to speedy deletion as [[#G3|vandalism]].
+# '''Original research'''. It is not always easy to tell whether an article consists of material that violates [[Wikipedia:No original research|the policy against novel theories or interpretations]] or is simply unsourced.
+# '''Notability'''. Articles that seem to have obviously non-notable subjects are eligible for speedy deletion only if the article does not give [[Wikipedia:Credible claim of significance|a credible indication of why the subject might be important or significant]].
+# '''Failure to assert importance but not an [[#A7|A7]], [[#A9|A9]] or [[#A11|A11]] category'''. There is no consensus to speedily delete articles of types not specifically listed in A7, A9 or A11 under those criteria. Nor does it apply to [[neologism]]s that do not meet [[#A11|A11]] because new specialized terms should have a wider hearing.
+# '''Author deletion requests made in bad faith'''. Author deletion requests made in bad faith, out of frustration, after others have contributed substantially (because the work of others is involved) or in an attempt to [[Wikipedia:Revocation of our licensing is not permitted|revoke their freely-licensed contributions]] are not granted. However, anyone may request deletion of pages in their userspace.
+# '''Very short articles'''. Short articles with sufficient content and context to qualify as [[Wikipedia:STUB|stubs]] may not be speedily deleted under criteria [[#A1|A1]] and [[#A3|A3]]; other criteria may still apply.
+# '''Copies that are not copyright violations'''. If content appears both here and somewhere else (possibly in modified form), consider the possibility that Wikipedia's is the original version and the other site copied from Wikipedia's version. Alternatively, the same author may have written both versions, or the original may be free content.
+# '''PNG / GIF files replaced by JPEG images'''. JPEG encoding discards information that may be important later. Do not delete the original PNG / GIF files.
+# '''Questionable material that is not vandalism'''. Earnest efforts are never vandalism, so to [[Wikipedia:assume good faith|assume good faith]], do not delete as vandalism unless reasonably certain.
+# '''User and user talk pages of temporary accounts'''. Although users are encouraged to create Wikipedia accounts, unregistered users are still allowed to edit Wikipedia and are identified by temporary accounts. If an unregistered user uses a temporary account for some time, it may have a user page and/or user talk page associated with it, and even for abandoned temporary accounts, the history can contain important discussions or information that may be of interest.
+# '''An article written in a foreign language or script'''. An article should not be speedily deleted just because it is not written in English. Instead it should be tagged with {{Tl|Not English}} and listed at [[Wikipedia:Pages needing translation into English]]. It may be reconsidered after translation whether the article merits deletion, retention or improvement by means of a suitable tag. However, if it already exists on another Wikimedia project, it {{em|might}} be speedily deletable under criterion [[#A2|A2]].
+# '''Subject request'''. Sometimes somebody claiming to be the subject of a biographical article requests deletion of the article, or even blanks the article. Article subjects do not have an automatic right to have their articles deleted. Nor does such a criterion apply to namespaces other than article space: for example, pages in the Wikipedia namespace devoted to a discussion about a particular editor. See also: {{sectionlink|Wikipedia:Deletion policy#Deletion of biographies and BLPs}}
+# '''Orphaned pages or redirects'''. A page cannot be deleted just because no other pages link to it. This includes redirects – even if 'What links here' returns nothing, a redirect may be a likely search phrase, or have links to it from outside Wikipedia.
+# '''Redirects that are poorly targeted'''. A redirect should not be deleted just because its target is incorrect or confusing. Instead, change the redirect to a better target. If you're not sure where it should be targeted, open a discussion at [[WP:RFD|Redirects for discussion]].
+# '''Drafts covering the same topic as an existing mainspace article'''. These are not valid deletions under [[#A10|A10]] (due to not being articles) nor [[#G6|G6]]. They can be [[Wikipedia:Miscellany for deletion/Speedy redirect|replaced with a redirect to the mainspace article]] or [[Wikipedia:Merging|merged]] if necessary.
+# '''Conflict of interest'''.  Merely having an author connected to its subject, or even one paid to write about it, is not by itself sufficient to speedily delete a page.  While users [[Wikipedia:Username policy#Promotional usernames|with promotional usernames]] are frequently blocked, [[#G5|G5]] does not apply unless they were already evading a block or ban when they wrote it.  [[#G11|G11]] can be used to delete exclusively-promotional ''writing'', but doesn't apply to neutrally written material even if the intent is obviously promotional.
+
+== <span class="anchor" id="proc"></span><span class="anchor" id="PROC"></span><span class="anchor" id="pa"></span><span class="anchor" id="PA"></span><span class="anchor" id="pfa"></span><span class="anchor" id="PFA"></span><span class="anchor" id="admin"></span><span class="anchor" id="ADMIN"></span><span class="anchor" id="sysop"></span><span class="anchor" id="SYSOP"></span><span class="anchor" id="procedure"></span><span class="anchor" id="Procedure"></span><span class="anchor" id="PROCEDURE"></span><span class="anchor" id="administrator"></span><span class="anchor" id="Administrator"></span><span class="anchor" id="ADMINISTRATOR"></span><span class="anchor" id="administrators"></span><span class="anchor" id="Administrators"></span><span class="anchor" id="ADMINISTRATORS"></span>Procedure for administrators ==
+
+{{See also|Wikipedia:Deletion process}}
+Make sure to specify the reason for deletion in the deletion summary. Also, in general, the article's creator and major contributors should have been notified.
+
+Before deleting a page, check the [[Wikipedia:Page history|page history]] to assess whether it would instead be possible to [[Help:Reverting|revert]] and salvage a previous version, or if there was actually a [[Wikipedia:How to fix cut and paste moves|cut-and-paste move]] involved. Also:
+* The initial [[Help:Edit summary|edit summary]] may have information about the source of or reason for the page.
+* The [[Help:Talk page|talk page]] may refer to previous deletion discussions or have ongoing discussions relevant to including the page.
+* The [[Help:Log|page log]] may have information about previous deletions that could warrant [[Wikipedia:SALT|SALT]]ing the page or keeping it on good reason.
+* ''[[Special:WhatLinksHere|What links here]]'' may show that the page is an oft-referred part of the encyclopedia, or may show other similar pages that warrant deletion. For pages that should not be re-created, incoming links in other pages (except in discussions, archives and tracking pages) should be removed.
+
+'''If speedy deletion is inappropriate''' for a page:
+# Please remove the speedy deletion tag from the page. Doing so will automatically remove the page from [[:Category:Candidates for speedy deletion]].
+# Consider notifying the nominator, using {{tl|speedy-decline}} or {{tl|uw-csd}}. (If you're using [[User:Ale jrb/Scripts#CSDH (CSD Helper)|CSD Helper]], it will usually notify the nominator for you; it will normally use [https://en.wikipedia.org/w/index.php?title=User:Ale_jrb/Scripts/CSDHelper&action=raw its own notification template].)
+
+'''When deleting''' a page through the speedy deletion process, please specify the reason for deletion in the deletion summary, so that it will be recorded in the [[Special:Log/delete|deletion log]]. Quoting page content in the deletion summary may be helpful, but '''''must not''''' be done for [[#G10|attack content]] or [[#G12|copyrighted text]]. In some cases, it would be appropriate to notify the page's creator of the deletion.
+
+[[WP:Twinkle|Twinkle]] or [[User:Ale jrb/Scripts#CSDH (CSD Helper)|CSDHelper]] can be used to process nominations more quickly and smoothly. When processing a nomination:
+* Twinkle can delete the page.
+** Twinkle can notify the page creator if the page is deleted.
+* CSDH can delete the page, convert the nomination into a [[Wikipedia:Proposed deletion|PROD]] nomination, or decline the nomination.
+** CSDH can notify the nominator if the nomination is converted or declined.
+
+== <span class="anchor" id="Obsolete criteria"></span><span class="anchor" id="Obsolete groups"></span><span class="anchor" id="t"></span><span class="anchor" id="T"></span><span class="anchor" id="tem"></span><span class="anchor" id="TEM"></span><span class="anchor" id="temp"></span><span class="anchor" id="TEMP"></span><span class="anchor" id="templ"></span><span class="anchor" id="TEMPL"></span><span class="anchor" id="tmplt"></span><span class="anchor" id="TMPLT"></span><span class="anchor" id="tmpt"></span><span class="anchor" id="TMPT"></span><span class="anchor" id="template"></span><span class="anchor" id="Template"></span><span class="anchor" id="TEMPLATE"></span><span class="anchor" id="por"></span><span class="anchor" id="POR"></span><span class="anchor" id="port"></span><span class="anchor" id="PORT"></span><span class="anchor" id="portal"></span><span class="anchor" id="Portal"></span><span class="anchor" id="PORTAL"></span><span class="anchor" id="prtl"></span><span class="anchor" id="PRTL"></span><span class="anchor" id="Temporary"></span><span class="anchor" id="Exceptional circumstances"></span><span class="anchor" id="X"></span><span class="anchor" id="x"></span>Obsolete ==
+{{Shortcut|WP:OCSD|WP:PCSD|WP:XCSD}}
+In the past, criteria for speedy deletion beginning with the following letters were used:
+* "'''P'''" for portals
+* "'''X'''" for temporary criteria to assist in large-scale cleanups of problematic pages that would otherwise overwhelm the normal deletion processes
+All criteria in these groups have been rendered obsolete; as such, these groups are not currently in use.
+
+Some criteria in the active groups were also used in the past but are no longer valid. They are kept here for historical reference and to preserve numbering. Two of the repealed criteria did not have consensus before being enacted, and three were meant to be temporary. The remainder were merged into broader criteria or removed entirely.
+
+; {{va|A4|a4|text=''[[#Articles|A]]4. Attempts to correspond with the person or group named by its title'' : Merged with and later superseded by [[#A3|"No content"]] (A3) in November 2005<ref>[[Special:Diff/29215127|Diff of change]]</ref> as part of a [[Wikipedia:BOLD|bold rewrite]] that was made to simplify the criterion (''[[Wikipedia talk:Criteria for speedy deletion/Archive 6#Deprecate CSD|archived discussion 1]], [[Wikipedia talk:Criteria for speedy deletion/Archive 6#Rewrite|discussion 2]], [[Wikipedia talk:Criteria for speedy deletion/Archive 6#Changing policy requires consensus|discussion 3]]'').}}
+; {{va|A5|a5|transwiki|text=''A5. Transwikied articles'' : Was repealed in December 2022 due to lack of use ([[Wikipedia talk:Criteria for speedy deletion/Archive 84#A5. Transwikied articles - Wiktionary|''unopposed proposal'']]). Instead, use [[Wikipedia:Articles for deletion]]. Deleted articles that are temporarily restored to allow for a transwiki may be re-deleted under [[#G6|"technical deletion"]] (G6).}}
+; {{va|A6|a6|text=''A6. Attack articles'' : Superseded by [[#G10|"Attack pages"]] (G10) in March 2006 ''([[Wikipedia talk:Criteria for speedy deletion/Archive 8#Proposed CSD G10 - Attack pages|discussion]])''.}}
+; {{va|A8|a8|text=''A8. Blatant copyright infringement articles'' : Superseded by [[#G12|"Unambiguous copyright infringement"]] (G12) in October 2006 ''([[Wikipedia talk:Criteria for speedy deletion/Archive 13#Turning A8 into a general criteria|unopposed proposal]])''.}}
+; {{va|R1|r1|text=''[[#Redirects|R]]1. Redirects to non-existent pages'' : Merged into [[#G8|"Pages dependent on a non-existent or deleted page"]] (G8) in September 2008 (''[[Wikipedia talk:Criteria for speedy deletion/Archive 31#Does the deletion of a documentation page for a deleted template fall under G6?|discussion]]'').}}
+; {{va|F7a|f7a|I7a|i7a|text=''[[#Files|F]]7a. [[Wikipedia:Non-free content|Non-free]] images or media with a clearly invalid fair-use tag'' : Repealed in March 2021 due to the problem being easily surmountable (''[[Wikipedia talk:Criteria for speedy deletion/Archive 80#Modification of F7|discussion]]''). Instead, the invalid tag should be corrected. Once the tag is corrected, other speedy deletion criteria may apply.}}
+; {{va|F10|f10|I10|i10|uselessnonmedia|text=''F10. Useless non-media'' : Deprecated in favor of [[WP:PROD|proposed deletion]] in February 2023 following rare usage and added technical restrictions on what file types can be uploaded (''[[Wikipedia talk:Criteria for speedy deletion/Archive 85#RfC: Removing F10. Useless non-media files|discussion]]'').}}
+; {{va|C3|c3|text=''[[#Categories|C]]3. Categories solely populated from a template'' : Merged into [[#G8|"Pages dependent on a non-existent or deleted page"]] (G8) in October 2008 (''[[Wikipedia talk:Criteria for speedy deletion/Archive 31#Merge C3 into G8?|discussion]]''), and then later split out to [[#C4|"Unused maintenance categories"]] (C4) in 2024.}}
+; {{va|T1|t1|disparage|text=''[[#Templates|T]]1. Divisive and inflammatory templates'' : Enacted by [[User:Jimbo Wales|Jimbo Wales]] without formally assessing consensus during the [[Wikipedia:T1 and T2 debates|userbox wars]]. Was repealed in February 2009 (''[[Wikipedia talk:Criteria for speedy deletion/Archive 33#Removal of T1 redux|discussion]]''). Instead, [[#G10|"attack pages"]] (G10) may be applicable in some cases; otherwise, use [[Wikipedia:Miscellany for deletion]] for userboxes and [[Wikipedia:Templates for discussion]] for all other templates.}}
+; {{va|T2|t2|misrepresent|T2. Misrepresentation of policy|text=''T2. Misrepresentation of policy'' : Was repealed in July 2020 following rare, often incorrect, use ([[Wikipedia talk:Speedy deletion/Archive 78#RfC: Removing T2|''discussion'']]). Instead, [[#G3|"pure vandalism"]] (G3) may be applicable in some cases; otherwise, use [[Wikipedia:Templates for discussion]].}}
+; {{va|T3|t3|hardcode|T3. Duplication and hardcoded instances|text=''T3. Duplication and hardcoded instances'' : Was repealed in December 2020 due to misuse and the seven-day hold ([[WT:Criteria for speedy deletion/Archive 79#RFC: should WP:T3 be deprecated?|''discussion'']]). Instead, use an existing applicable criterion or submit the template to [[Wikipedia:Templates for discussion]].}}
+; {{va|T4|t4|text=''T4. Subpages of non-existent pages'' : Merged into [[#G8|"Pages dependent on a non-existent or deleted page"]] (G8) in September 2008 (''[[Wikipedia talk:Speedy deletion/Archive 30#T4|discussion]]'').}}
+; {{va|U3|fairusegallery|text=''[[#User pages|U]]3. Non-free galleries'' : Was repealed in July 2021 since a bot automatically removes non-free images from user pages (''[[Wikipedia talk:Criteria for speedy deletion/Archive 81#Proposal: repeal criteria U3|discussion]]'').}}
+; {{va|U4|u4|oldip|text=''U4. Old IP address talk pages that meet specific criteria'' : Never enacted as policy anywhere, but deletions occurred nonetheless. Was repealed in March 2009 ([[Wikipedia talk:Criteria for speedy deletion/Archive 33#U4|''discussion'']]).}}
+; {{va|U5|u5|NOTWEBHOST|notwebhost|text=''U5. Non-contributor's misuse of Wikipedia as a web host'' : Repealed in October 2025 (''[[Wikipedia talk:Speedy deletion/Archive 93#RfC: Replacing U5 with a primarily procedural mechanism|discussion]]'') and replaced with [[#U6|U6]] and [[#U7|U7]]. {{xref|See also [[Wikipedia:Replacement of CSD U5 FAQ]].}}}}
+; {{va|P1|p1|text=''[[#Obsolete groups|P]]1. Any portal that would be subject to speedy deletion as an article'' : Repealed in February 2023 following rare usage ([[Wikipedia talk:Criteria for speedy deletion/Archive 85#RfC: Should P1 and P2 be repealed as CSDs?|''discussion'']]).}}
+; {{va|P2|p2|text=''P2. Underpopulated portal'' : Repealed in February 2023 following rare usage ([[Wikipedia talk:Criteria for speedy deletion/Archive 85#RfC: Should P1 and P2 be repealed as CSDs?|''discussion'']]).}}
+; {{va|X1|x1|Neelix|neelix|text=''[[#Exceptional circumstances|X]]1. Redirects created by Neelix'' : [[Wikipedia:Administrators' noticeboard/IncidentArchive906#Proposal: temporary WP:IAR speedy delete criterion|Created]] as a G6 extension in December 2015 shortly after the [[Wikipedia:Administrators' noticeboard/IncidentArchive904#Dozens,Thousands upon thousands of unnecessary redirects|discovery]] and [[Wikipedia:Arbitration/Requests/Case/Neelix|arbitration case]] regarding 50,000+ questionable redirects created by the user [[User:Neelix|Neelix]], and later [[Wikipedia:Administrators' noticeboard/CXT#Suggestion|split into its own criterion]]. Was repealed in April 2018 after cleanup was completed (''[[Wikipedia:Administrators' noticeboard/Archive297#X1 Cleanup complete|discussion]]''). Instead, use [[Wikipedia:Redirects for discussion]].}}
+; {{va|X2|x2|CXT|cxt|X2. Pages created by the content translation tool|text=''X2. Pages created by the content translation tool'' : [[Special:PermaLink/732763423#Suggestion|Created]] to delete pages created by the [[WP:CXT|content translation tool]] prior to 27 July 2016. Was deprecated in July 2017 when consensus agreed to move most of the remaining pages to the draft namespace (''[[Wikipedia:Administrators' noticeboard/Archive291#X2 Nuke time|discussion]]'').}}
+; {{va|X3|x3|X3. Redirects with no space before a parenthetical disambiguation|text=''X3. Redirects with no space before a parenthetical disambiguation'' : Created in [[Special:Diff/1221873691|May 2024]] to deal with improper spacing of article title redirects that did not fall under [[#R3|R3]] due to their age. Repealed in [[Wikipedia talk:Speedy deletion/Archive 93#RFC: Time to promote or repeal WP:X3?|November 2025]] following the completion of the cleanup.}}
+; {{tl|db-blankdraft}} : This subcriterion, [[Wikipedia talk:Speedy deletion/Archive 56#G6 for default Article Wizard text|proposed]] in 2015, was originally part of "[[#G6. Technical deletions|Technical deletions]]" (G6). In 2018, its scope was changed and it was [[Wikipedia talk:Speedy deletion/Archive 72#Proposal to merge db-blankdraft into G13|moved]] under "[[#G13. Abandoned drafts and Articles for creation submissions|Abandoned drafts and ''Articles for creation'' submissions]]" (G13). The subcriterion was [[Wikipedia talk:Speedy deletion/Archive 90#Should the point 3 of G13 be obsoleted?|removed]] in 2025.
+
+== See also ==
+{{Offer help}}
+{{Div col}}
+* [[Wikipedia:Articles for deletion/Common outcomes]]
+* [[Wikipedia:Alternative outlets]]
+* [[:Category:Candidates for speedy deletion]]
+* [[:Category:Speedy deletion warning templates]]
+* [[Wikipedia:Speedy deletion/Deletion templates]]
+* [[Wikipedia:Deletion guidelines for administrators]]
+* [[Wikipedia:Deletion review]]
+* [[Wikipedia:No blank pages]]
+* [[Wikipedia:Proposed deletion]]
+* [[Wikipedia:Undeletion policy]]
+* [[Wikipedia:What to do if your article gets CSD tagged]]
+* [[Wikipedia:Over-hasty Speedy Deleters]]
+* [[Wikipedia:Field guide to proper speedy deletion]]
+{{Div col end}}
+
+== Footnotes ==
+{{Reflist}}
+{{Speedy deletion navbox}}
+{{Wikipedia community|state=collapsed}}
+[[Category:Speedy deletion| ]]

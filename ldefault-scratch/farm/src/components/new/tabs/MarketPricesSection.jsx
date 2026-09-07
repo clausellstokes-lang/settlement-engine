@@ -1,0 +1,95 @@
+/**
+ * MarketPricesSection.jsx — the dossier's MARKET PRICES section (round-21 Wave 7,
+ * rebuilt under the PRICE-HEURISTICS LAW, ODQ §776).
+ *
+ * Extracted as a sibling leaf (the EconomicFlowsSection / dossierLazyTabs idiom)
+ * so EconomicsTab.jsx stays under the max-lines ratchet as sections accrue. Pure
+ * presentation over the market-movement read-model: how each traded good has
+ * MOVED against the settlement's own usual price (the seeded trade profile + the
+ * M6a stock bands + the M6d flow drift) — never a coin figure. The coin itself
+ * is the DM's to set at the table (§776.1); this section hands them the honest
+ * movement to price against. Renders ONLY when `prices.present`.
+ *
+ * READING ORDER (the legibility law): the crier's one-line glance, then the
+ * moved goods each with their spoken movement, then the steady goods folded
+ * into a single quiet line — a column of identical "its usual price" rows would
+ * bury the movements the section exists to surface.
+ */
+import { FS, swatch, MUTED, GOLD_DEEP } from '../../theme.js';
+import { Section } from '../Primitives';
+
+// The crier's band → colour: dear = shortage, cheap = surplus, steady =
+// adequate. Sourced from the token swatch (exact-value keys) so the section
+// reads consistently with the M6d Live Trade Flow band right above it.
+const PRICE_TAG_COLOR = {
+  dear: swatch['#8B1A1A'],
+  steady: swatch['#A0762A'],
+  cheap: swatch['#1A5A28'],
+};
+
+/** @param {{ id:string,label:string,phrase:string,tag:'dear'|'steady'|'cheap' }} q */
+function Movement(q) {
+  const color = PRICE_TAG_COLOR[q.tag] || GOLD_DEEP;
+  return (
+    <div key={q.id} style={{display:'flex',alignItems:'baseline',gap:8,flexWrap:'wrap',padding:'3px 0'}}>
+      <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,minWidth:0}}>{q.label}</span>
+      <span style={{fontSize:FS.sm,color:swatch.inkMag2}}>{q.phrase}</span>
+      {/* The chip names the M6a stock band; a road-shade (band adequate) speaks
+          through its phrase alone — a STEADY chip beside "a shade above" would
+          contradict itself. */}
+      {q.tag !== 'steady' && (
+        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.05em'}}>{q.tag}</span>
+      )}
+    </div>
+  );
+}
+
+/** One trade column (Sells / Buys): moved goods as rows, steady goods folded
+ *  into a single quiet line so the movements keep the stage.
+ *  @param {{ heading:string, color:string, quotes:Array<{id:string,label:string,phrase:string,movement:string,tag:'dear'|'steady'|'cheap'}> }} props */
+function TradeColumn({ heading, color, quotes }) {
+  const moved = quotes.filter(q => q.movement !== 'usual');
+  const steady = quotes.filter(q => q.movement === 'usual');
+  return (
+    <div>
+      <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>{heading}</div>
+      {moved.map(Movement)}
+      {steady.length > 0 && (
+        <div style={{fontSize:FS.sm,color:swatch.inkMag2,padding:'3px 0'}}>
+          <span style={{color:MUTED}}>At their usual prices: </span>
+          {steady.map(q => q.label).join(', ')}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * @param {{ prices: { present:boolean,
+ *   exports: Array<{id:string,label:string,phrase:string,movement:string,tag:'dear'|'steady'|'cheap'}>,
+ *   imports: Array<{id:string,label:string,phrase:string,movement:string,tag:'dear'|'steady'|'cheap'}>,
+ *   highlight: { id:string, label:string, tag:'dear'|'cheap', crierLine:string } | null } }} props
+ */
+export default function MarketPricesSection({ prices }) {
+  return (
+    <Section title="Market Prices" collapsible defaultOpen accent={GOLD_DEEP}>
+      {prices.highlight && (
+        <p style={{fontSize:FS.md,color:swatch.inkMag,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic',
+          borderLeft:`3px solid ${PRICE_TAG_COLOR[prices.highlight.tag] || GOLD_DEEP}`,paddingLeft:10}}>
+          &ldquo;{prices.highlight.crierLine}&rdquo;
+        </p>
+      )}
+      <div style={{display:'grid',gridTemplateColumns:'1fr',gap:10}}>
+        {prices.exports.length > 0 && (
+          <TradeColumn heading="Sells (exports)" color={swatch.success} quotes={prices.exports} />
+        )}
+        {prices.imports.length > 0 && (
+          <TradeColumn heading="Buys (imports)" color={swatch.danger} quotes={prices.imports} />
+        )}
+      </div>
+      <p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
+        Reckoned against this settlement&rsquo;s own usual prices, off the founding trade profile and the live scarcity of the roads. The coin itself is yours to set at the table.
+      </p>
+    </Section>
+  );
+}

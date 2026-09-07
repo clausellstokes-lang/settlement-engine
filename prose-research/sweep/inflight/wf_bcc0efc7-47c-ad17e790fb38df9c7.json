@@ -1,0 +1,32 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i924-938",
+ "lines": 58,
+ "firstTs": "2026-09-06T18:25:47.907Z",
+ "lastTs": "2026-09-06T18:29:12.072Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 10,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.robinsloan.com/lab/is-it-okay/",
+  "https://neil-clarke.com/ai-and-short-fiction-2/",
+  "https://neil-clarke.com/ai-and-short-fiction-1/",
+  "https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web",
+  "https://thenewpublishingstandard.com/2026/06/09/david-shelley-ai-detection-publishing/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All five sources fetched live (HTTP 200, browser UA) and checked as raw text. Now writing the checkpoint.",
+ "run": "wf_bcc0efc7-47c",
+ "agent": "ad17e790fb38df9c7",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-ad17e790fb38df9c7.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i924-938.json",
+  "exists": true
+ }
+}

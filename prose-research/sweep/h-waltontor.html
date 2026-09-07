@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+
+<script>
+let ageConfirmed;
+let ageConfirmedCookie = "_ageConfirmed";
+let date = new Date();
+
+date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000);
+
+let expires = "; expires=" + date.toGMTString();
+    let domain = "." + window.location.hostname;
+let forceExpireDate = "Wed, 31 Oct 2012 08:50:17 GMT";
+
+function getCookie(name) {
+  let value = "; " + document.cookie;
+  let parts = value.split("; " + name + "=");
+
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+function checkForAgeCookie() {
+  let cookieValue = getCookie(ageConfirmedCookie);
+
+        if (cookieValue == null) {
+            ageConfirmed;
+
+            const addStyle = (() => {
+                const style = document.createElement('style');
+                document.head.append(style);
+                return (styleString) => style.textContent = styleString;
+            })();
+
+            addStyle(`#onetrust-banner-sdk { display: none; }`);
+        } else if (cookieValue && cookieValue == "YES") {
+            ageConfirmed = true;
+        } else if (cookieValue && cookieValue == "NO") {
+  ageConfirmed = false;
+}
+    }
+
+function ageGate() {
+  if (!getCookie(ageConfirmedCookie)) {
+    document.getElementById("age-gate").removeAttribute("style");
+  } else {
+    document.getElementById("age-gate").style.display = "none";
+  }
+}
+
+function confirmedAge(value) {
+  document.cookie =
+    ageConfirmedCookie +
+    "=" +
+    value +
+    expires +
+    ";path=/; Samesite=Lax;domain=" +
+    domain +
+    ";";
+
+  if (value == "YES") {
+/*    document.cookie =
+      "OptanonConsent" +
+      "=" +
+      value +
+      forceExpireDate +
+      ";path=/; Samesite=Lax;domain=" +
+      domain +
+      ";";
+*/
+    ageConfirmed = true;
+            location.reload();
+  } else {
+    ageConfirmed = false;
+            let expireCookieValue = getCookie("OptanonConsent");
+          // USE THIS LINE FOR TEST
+          // document.cookie = "OptanonConsent" + "=" + expireCookieValue + ";expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/; Samesite=Lax;"; //domain=" + domain + ";";
+          // USE THIS LINE FOR PROD
+          document.cookie = "OptanonConsent" + "=" + expireCookieValue + ";expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/; Samesite=Lax;domain=" + domain + ";";
+          location.reload();
+  }
+
+  document.getElementById("age-gate").style.display = "none";
+}
+
+window.geofeed = function (options) {
+	var country = options.country.toString();
+	var state = options.state.toString();
+
+	if (country == "US") {
+		checkForAgeCookie();
+		setTimeout(ageGate, 500);
+	}
+
+};
+
+var json = document.createElement("script");
+json.setAttribute(
+  "src",
+  "https://geolocation.onetrust.com/cookieconsentpub/v1/geo/location/geofeed"
+);
+document.head.appendChild(json);
+
+</script>
+
+<div id="age-gate" title="age gate" class="age-gate-overlay" style="display:none;">
+<div class="age-gate-content-container">
+<div class="age-gate-text">
+<p style="font-size: 1rem">For compliance with applicable privacy laws:</p>
+<p>Are you between 13-15 years old?</p><br>
+</div>
+<div class="confirm-btn-container">
+<button id="age-gate-no" onclick="window.confirmedAge('NO')">No</button>
+<button id="age-gate-yes" onclick="window.confirmedAge('YES')">Yes</button>
+</div>
+</div>
+</div>
+
+
+
+<script type="text/javascript" src="https://cdn.cookielaw.org/consent/d22907aa-9739-4543-a9f8-4ccac65e20a0/OtAutoBlock.js"></script>
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="d22907aa-9739-4543-a9f8-4ccac65e20a0"></script>
+<script type="text/javascript">
+function OptanonWrapper() {
+if (!getCookie('_ageConfirmed')) {
+    var groupID = ['C0002', 'C0003', 'C0004'];
+    var OTdomain = OneTrust.GetDomainData().Domain;
+
+    function updateOtCookie(ID) {
+        var cookie = getCookie("OptanonConsent");
+        for (var i = 0; i < ID.length; i++) {
+            cookie = cookie.replace('%2C' + ID[i] + '%3A0', "%2C" + ID[i] + "%3A0");
+            cookie = cookie.replace('%2C' + ID[i] + '%3A1', "%2C" + ID[i] + "%3A0");
+            var cookieName = "OptanonConsent";
+            OptanonActiveGroups = OptanonActiveGroups.replace("," + ID[i] + ",", ",");
+            OnetrustActiveGroups = OnetrustActiveGroups.replace("," + ID[i] + ",", ",");
+        }
+        document.cookie = cookieName + "=" + cookie + ";path=/;domain=" + domain + ";";
+    }
+    var ageGateYes = document.getElementById("age-gate-yes");
+    ageGateYes.addEventListener('click', function handler() {
+        updateOtCookie(groupID);
+    });
+} else { //do nothing
+}
+
+}
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0" content="width=device-width, user-scalable=no" />
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-76.png">
+<link rel="apple-touch-icon" sizes="96x96" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-96.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-180.png">
+<link rel="apple-touch-icon" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-60.png">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon.ico" />
+<title>Jo Walton  |  Tor.com</title>
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://www.tor.com/wp-content/themes/tor/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5W2ZGVB');</script>
+
+<meta name="robots" content="max-image-preview:large" />
+
+<meta name="google-site-verification" content="TKdgmMLGHnS29XwYAR1A9VCy1ejitKME08p83KA8bbw" />
+<meta name="p:domain_verify" content="c5fa3aa04d7b8e9504e9307da5489225" />
+<link rel="dns-prefetch" href="//www.google.com" />
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//i0.wp.com" />
+<link rel="dns-prefetch" href="//c0.wp.com" />
+<link rel="dns-prefetch" href="//widgets.wp.com" />
+<link rel="alternate" type="application/rss+xml" title="Tor.com &raquo; Posts by Jo Walton Feed" href="https://www.tor.com/author/jo-walton/feed/" />
+<link rel="stylesheet" id="theme-style-css" href="https://www.tor.com/wp-content/themes/tor/custom.css?ver=6.4.2" type="text/css" media="all" />
+<link rel="stylesheet" id="wp-block-library-css" href="https://c0.wp.com/c/6.4.2/wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all" />
+<style id="wp-block-library-inline-css" type="text/css">
+.has-text-align-justify{text-align:justify;}
+</style>
+<style id="bp-login-form-style-inline-css" type="text/css">
+.widget_bp_core_login_widget .bp-login-widget-user-avatar{float:left}.widget_bp_core_login_widget .bp-login-widget-user-links{margin-left:70px}#bp-login-widget-form label{display:block;font-weight:600;margin:15px 0 5px;width:auto}#bp-login-widget-form input[type=password],#bp-login-widget-form input[type=text]{background-color:#fafafa;border:1px solid #d6d6d6;border-radius:0;font:inherit;font-size:100%;padding:.5em;width:100%}#bp-login-widget-form .bp-login-widget-register-link,#bp-login-widget-form .login-submit{display:inline;width:-moz-fit-content;width:fit-content}#bp-login-widget-form .bp-login-widget-register-link{margin-left:1em;vertical-align:super}#bp-login-widget-form .bp-login-widget-pwd-link{font-size:80%}
+
+</style>
+<style id="bp-member-style-inline-css" type="text/css">
+[data-type="bp/member"] input.components-placeholder__input{border:1px solid #757575;border-radius:2px;flex:1 1 auto;padding:6px 8px}.bp-block-member{position:relative}.bp-block-member .member-content{display:flex}.bp-block-member .user-nicename{display:block}.bp-block-member .user-nicename a{border:none;color:currentColor;text-decoration:none}.bp-block-member .bp-profile-button{width:100%}.bp-block-member .bp-profile-button a.button{bottom:10px;display:inline-block;margin:18px 0 0;position:absolute;right:0}.bp-block-member.has-cover .item-header-avatar,.bp-block-member.has-cover .member-content,.bp-block-member.has-cover .member-description{z-index:2}.bp-block-member.has-cover .member-content,.bp-block-member.has-cover .member-description{padding-top:75px}.bp-block-member.has-cover .bp-member-cover-image{background-color:#c5c5c5;background-position:top;background-repeat:no-repeat;background-size:cover;border:0;display:block;height:150px;left:0;margin:0;padding:0;position:absolute;top:0;width:100%;z-index:1}.bp-block-member img.avatar{height:auto;width:auto}.bp-block-member.avatar-none .item-header-avatar{display:none}.bp-block-member.avatar-none.has-cover{min-height:200px}.bp-block-member.avatar-full{min-height:150px}.bp-block-member.avatar-full .item-header-avatar{width:180px}.bp-block-member.avatar-thumb .member-content{align-items:center;min-height:50px}.bp-block-member.avatar-thumb .item-header-avatar{width:70px}.bp-block-member.avatar-full.has-cover{min-height:300px}.bp-block-member.avatar-full.has-cover .item-header-avatar{width:200px}.bp-block-member.avatar-full.has-cover img.avatar{background:hsla(0,0%,100%,.8);border:2px solid #fff;margin-left:20px}.bp-block-member.avatar-thumb.has-cover .item-header-avatar{padding-top:75px}.entry .entry-content .bp-block-member .user-nicename a{border:none;color:currentColor;text-decoration:none}
+
+</style>
+<style id="bp-members-style-inline-css" type="text/css">
+[data-type="bp/members"] .components-placeholder.is-appender{min-height:0}[data-type="bp/members"] .components-placeholder.is-appender .components-placeholder__label:empty{display:none}[data-type="bp/members"] .components-placeholder input.components-placeholder__input{border:1px solid #757575;border-radius:2px;flex:1 1 auto;padding:6px 8px}[data-type="bp/members"].avatar-none .member-description{width:calc(100% - 44px)}[data-type="bp/members"].avatar-full .member-description{width:calc(100% - 224px)}[data-type="bp/members"].avatar-thumb .member-description{width:calc(100% - 114px)}[data-type="bp/members"] .member-content{position:relative}[data-type="bp/members"] .member-content .is-right{position:absolute;right:2px;top:2px}[data-type="bp/members"] .columns-2 .member-content .member-description,[data-type="bp/members"] .columns-3 .member-content .member-description,[data-type="bp/members"] .columns-4 .member-content .member-description{padding-left:44px;width:calc(100% - 44px)}[data-type="bp/members"] .columns-3 .is-right{right:-10px}[data-type="bp/members"] .columns-4 .is-right{right:-50px}.bp-block-members.is-grid{display:flex;flex-wrap:wrap;padding:0}.bp-block-members.is-grid .member-content{margin:0 1.25em 1.25em 0;width:100%}@media(min-width:600px){.bp-block-members.columns-2 .member-content{width:calc(50% - .625em)}.bp-block-members.columns-2 .member-content:nth-child(2n){margin-right:0}.bp-block-members.columns-3 .member-content{width:calc(33.33333% - .83333em)}.bp-block-members.columns-3 .member-content:nth-child(3n){margin-right:0}.bp-block-members.columns-4 .member-content{width:calc(25% - .9375em)}.bp-block-members.columns-4 .member-content:nth-child(4n){margin-right:0}}.bp-block-members .member-content{display:flex;flex-direction:column;padding-bottom:1em;text-align:center}.bp-block-members .member-content .item-header-avatar,.bp-block-members .member-content .member-description{width:100%}.bp-block-members .member-content .item-header-avatar{margin:0 auto}.bp-block-members .member-content .item-header-avatar img.avatar{display:inline-block}@media(min-width:600px){.bp-block-members .member-content{flex-direction:row;text-align:left}.bp-block-members .member-content .item-header-avatar,.bp-block-members .member-content .member-description{width:auto}.bp-block-members .member-content .item-header-avatar{margin:0}}.bp-block-members .member-content .user-nicename{display:block}.bp-block-members .member-content .user-nicename a{border:none;color:currentColor;text-decoration:none}.bp-block-members .member-content time{color:#767676;display:block;font-size:80%}.bp-block-members.avatar-none .item-header-avatar{display:none}.bp-block-members.avatar-full{min-height:190px}.bp-block-members.avatar-full .item-header-avatar{width:180px}.bp-block-members.avatar-thumb .member-content{min-height:80px}.bp-block-members.avatar-thumb .item-header-avatar{width:70px}.bp-block-members.columns-2 .member-content,.bp-block-members.columns-3 .member-content,.bp-block-members.columns-4 .member-content{display:block;text-align:center}.bp-block-members.columns-2 .member-content .item-header-avatar,.bp-block-members.columns-3 .member-content .item-header-avatar,.bp-block-members.columns-4 .member-content .item-header-avatar{margin:0 auto}.bp-block-members img.avatar{height:auto;max-width:-moz-fit-content;max-width:fit-content;width:auto}.bp-block-members .member-content.has-activity{align-items:center}.bp-block-members .member-content.has-activity .item-header-avatar{padding-right:1em}.bp-block-members .member-content.has-activity .wp-block-quote{margin-bottom:0;text-align:left}.bp-block-members .member-content.has-activity .wp-block-quote cite a,.entry .entry-content .bp-block-members .user-nicename a{border:none;color:currentColor;text-decoration:none}
+
+</style>
+<style id="bp-dynamic-members-style-inline-css" type="text/css">
+.bp-dynamic-block-container .item-options{font-size:.5em;margin:0 0 1em;padding:1em 0}.bp-dynamic-block-container .item-options a.selected{font-weight:600}.bp-dynamic-block-container ul.item-list{list-style:none;margin:1em 0}.bp-dynamic-block-container ul.item-list li{margin-bottom:1em}.bp-dynamic-block-container ul.item-list li:after,.bp-dynamic-block-container ul.item-list li:before{content:" ";display:table}.bp-dynamic-block-container ul.item-list li:after{clear:both}.bp-dynamic-block-container ul.item-list li .item-avatar{float:left;width:60px}.bp-dynamic-block-container ul.item-list li .item{margin-left:70px}
+
+</style>
+<style id="bp-online-members-style-inline-css" type="text/css">
+[data-type="bp/online-members"] .avatar-block{display:flex;flex-flow:row wrap}[data-type="bp/online-members"] .avatar-block img{margin:.5em}
+
+</style>
+<style id="bp-active-members-style-inline-css" type="text/css">
+[data-type="bp/active-members"] .avatar-block{display:flex;flex-flow:row wrap}[data-type="bp/active-members"] .avatar-block img{margin:.5em}
+
+</style>
+<style id="bp-latest-activities-style-inline-css" type="text/css">
+.bp-latest-activities .components-flex.components-select-control select[multiple]{height:auto;padding:0 8px}.bp-latest-activities .components-flex.components-select-control select[multiple]+.components-input-control__suffix svg{display:none}.bp-latest-activities-block a,.entry .entry-content .bp-latest-activities-block a{border:none;text-decoration:none}.bp-latest-activities-block .activity-list.item-list blockquote{border:none;padding:0}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini){box-shadow:1px 0 4px rgba(0,0,0,.15);padding:0 1em;position:relative}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):after,.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):before{border-color:transparent;border-style:solid;content:"";display:block;height:0;left:15px;position:absolute;width:0}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):before{border-top-color:rgba(0,0,0,.15);border-width:9px;bottom:-18px;left:14px}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):after{border-top-color:#fff;border-width:8px;bottom:-16px}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item.mini .avatar{display:inline-block;height:20px;margin-right:2px;vertical-align:middle;width:20px}.bp-latest-activities-block .activity-list.item-list footer{align-items:center;display:flex}.bp-latest-activities-block .activity-list.item-list footer img.avatar{border:none;display:inline-block;margin-right:.5em}.bp-latest-activities-block .activity-list.item-list footer .activity-time-since{font-size:90%}.bp-latest-activities-block .widget-error{border-left:4px solid #0b80a4;box-shadow:1px 0 4px rgba(0,0,0,.15)}.bp-latest-activities-block .widget-error p{padding:0 1em}
+
+</style>
+<style id="bp-sitewide-notices-style-inline-css" type="text/css">
+[data-type="bp/sitewide-notices"] .bp-screen-reader-text{clip:rect(0 0 0 0);word-wrap:normal!important;border:0;height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}[data-type="bp/sitewide-notices"] [data-bp-tooltip]:after{word-wrap:break-word;background-color:#fff;border:1px solid #737373;border-radius:1px;box-shadow:4px 4px 8px rgba(0,0,0,.2);color:#333;content:attr(data-bp-tooltip);display:none;font-family:Helvetica Neue,Helvetica,Arial,san-serif;font-size:12px;font-weight:400;letter-spacing:normal;line-height:1.25;max-width:200px;opacity:0;padding:5px 8px;pointer-events:none;position:absolute;text-shadow:none;text-transform:none;transform:translateZ(0);transition:all 1.5s ease;visibility:hidden;white-space:nowrap;z-index:100000}[data-type="bp/sitewide-notices"] .bp-tooltip:after{left:50%;margin-top:7px;top:110%;transform:translate(-50%)}.bp-sitewide-notice-block{border-left:4px solid #ff853c;padding-left:1em;position:relative}.bp-sitewide-notice-block h2:before{background:none;border:none}.bp-sitewide-notice-block .dismiss-notice{background-color:transparent;border:1px solid #ff853c;color:#ff853c;display:block;padding:.2em .5em;position:absolute;right:.5em;top:.5em;width:-moz-fit-content;width:fit-content}.bp-sitewide-notice-block .dismiss-notice:hover{background-color:#ff853c;color:#fff}
+
+</style>
+<link rel="stylesheet" id="mediaelement-css" href="https://c0.wp.com/c/6.4.2/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css" type="text/css" media="all" />
+<link rel="stylesheet" id="wp-mediaelement-css" href="https://c0.wp.com/c/6.4.2/wp-includes/js/mediaelement/wp-mediaelement.min.css" type="text/css" media="all" />
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="tor-merriweather-webfont-css" href="https://fonts.googleapis.com/css?family=Merriweather%3A400%2C400i%2C700%2C700i&#038;ver=1.0.74" type="text/css" media="all" />
+<link rel="stylesheet" id="tor-open-sans-css" href="https://fonts.googleapis.com/css?family=Open+Sans%3A200%2C300%2C300italic%2C400%2C400italic%2C600%2C600italic%2C700%2C700italic&#038;ver=1.0.74" type="text/css" media="all" />
+<link rel="stylesheet" id="tablet-css" href="https://www.tor.com/wp-content/themes/tor/static/css/tablet.css?ver=1.0.74" type="text/css" media="all and (min-width: 767px)" />
+<link rel="stylesheet" id="desktop-css" href="https://www.tor.com/wp-content/themes/tor/static/css/desktop.css?ver=1.0.74" type="text/css" media="all and (min-width: 1024px)" />
+<link rel="stylesheet" id="mobile-css" href="https://www.tor.com/wp-content/themes/tor/static/css/mobile.css?ver=1.0.74" type="text/css" media="all and (max-width: 767px)" />
+<link rel="stylesheet" id="mini-tablet-css" href="https://www.tor.com/wp-content/themes/tor/static/css/mini-tablet.css?ver=1.0.74" type="text/css" media="(min-width: 641px) and (max-width: 767px)" />
+<link rel="stylesheet" id="social-logos-css" href="https://c0.wp.com/p/jetpack/12.9.1/_inc/social-logos/social-logos.min.css" type="text/css" media="all" />
+<link rel="stylesheet" id="jetpack_css-css" href="https://c0.wp.com/p/jetpack/12.9.1/css/jetpack.css" type="text/css" media="all" />
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/vendor.bundle.js?ver=1.0.74" id="vendor-js"></script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/ga.bundle.js?ver=1.0.74" id="tor-ga-js"></script>
+<script type="text/javascript" id="sharing-js-fe-js-extra">
+/* <![CDATA[ */
+var tor_sharing_fe = ["is_logged_in",false];
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/sharing.bundle.js?ver=1.0.74" id="sharing-js-fe-js"></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?ver=2.8.6" id="recaptcha-js"></script>
+<link rel="https://api.w.org/" href="https://www.tor.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.tor.com/wp-json/wp/v2/users/327" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.tor.com/xmlrpc.php?rsd" />
+<script type="text/javascript">var ajaxurl = 'https://www.tor.com/wp-admin/admin-ajax.php';</script>
+
+<style type="text/css">
+ul#menu-footer-menu-small li:nth-child(2) {
+    position: relative;
+    padding-right: 30px !important;
+}
+
+
+ul#menu-footer-menu-small li:nth-child(2)::after {
+    content: "";
+    position: absolute;
+    right: 0px;
+    top: 4px;
+    width: 27px;
+    height: 10px;
+    background-image: url("/wp-content/uploads/2023/09/privacyoptions730x350.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+</style>
+
+
+<script type="text/javascript">
+		var dfp_ad_slots = [];
+		var googletag = googletag || {};
+		googletag.cmd = googletag.cmd || [];
+		(function() {
+		var gads = document.createElement('script');
+		gads.async = true;
+		gads.type = 'text/javascript';
+		var useSSL = 'https:' == document.location.protocol;
+		gads.src = (useSSL ? 'https:' : 'http:') +
+		'//www.googletagservices.com/tag/js/gpt.js';
+		var node = document.getElementsByTagName('script')[0];
+		node.parentNode.insertBefore(gads, node);
+		})();
+		</script>
+<script type="text/javascript">
+		googletag.cmd.push(function() {
+			var mappingtop = googletag.sizeMapping().addSize([1280,1],[[728,90]]).addSize([1024,1],[[728,90]]).addSize([850,1],[[728,90]]).addSize([768,1],[[728,90]]).addSize([0,0],[[320,50]]).build();
+var mappingright1 = googletag.sizeMapping().addSize([1280,1],[[300,250]]).addSize([1024,1],[[300,250]]).addSize([850,1],[[300,250]]).addSize([768,1],[]).addSize([0,0],[[300,250]]).build();
+dfp_ad_slots[0] = googletag.defineSlot('/21876227215/tor.com',[728,90],'div-gpt-ad-top').defineSizeMapping(mappingtop).addService(googletag.pubads()).setTargeting('pos', 'top');
+dfp_ad_slots[1] = googletag.defineSlot('/21876227215/tor.com',[300,250],'div-gpt-ad-right1').defineSizeMapping(mappingright1).addService(googletag.pubads()).setTargeting('pos', 'right1');
+			googletag.pubads().enableSingleRequest();
+			googletag.pubads().enableAsyncRendering();
+			googletag.pubads().collapseEmptyDivs( true );
+			googletag.enableServices();
+		});
+		</script>
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+
+<meta property="og:type" content="profile" />
+<meta property="og:site_name" content="Tor.com" />
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg" />
+<meta property="og:image:alt" content />
+<meta property="og:title" content="Jo Walton" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="https://www.tor.com/author/jo-walton/" />
+<meta property="og:description" content="&lt;p&gt;	Jo Walton is a fantasy and science fiction writer who was born in Wales in 1964 and now makes her home in Canada. Her first published novel was &lt;em&gt;The King&rsquo;s Peace&lt;/em&gt; (2000), followed by &lt;em&gt;The King&rsquo;s Name&lt;/em&gt; (2001). In 2002 she won the John W. Campbell Award for Best New Writer, and subsequently published two more fantasy novels, &lt;em&gt;The Prize in the Game&lt;/em&gt; (2002) and the World Fantasy Award-winning novel &lt;em&gt;Tooth and Claw&lt;/em&gt; (2003).&lt;/p&gt;
+&lt;p&gt;
+	In 2006 she published &lt;em&gt;Farthing&lt;/em&gt;, a novel set in an alternate historical continuum in which Britain struck an early truce with Hitler. In 2007 she published a sequel, &lt;em&gt;Ha&rsquo;penny&lt;/em&gt;, and another in 2008, &lt;em&gt;Half a Crown&lt;/em&gt;. She refers to this sequence as the Small Change trilogy, and her Tor.com story &ldquo;Escape to Other Worlds with Science Fiction&rdquo; is set in the America of that world.&lt;/p&gt;
+
+&lt;p&gt;Her 2011 novel &lt;em&gt;Among Others &lt;/em&gt;won the Hugo and Nebula Awards. In 2014, she published &lt;em&gt;What Makes This Book So Great,&lt;/em&gt; a collection of some of her essays written for Tor.com, and the novel &lt;em&gt;My Real Children&lt;/em&gt;, which also won the James Tiptree, Jr. Award. &lt;em&gt;The Just City&lt;/em&gt;, a novel exploration of Plato&#039;s &lt;em&gt;Republic&lt;/em&gt; was published in early 2015 to widespread praise. &lt;/p&gt;
+
+&lt;p&gt;She lives with her husband in Montreal, Quebec.&lt;/p&gt;
+&lt;p&gt;
+	&lt;a href=&quot;http://en.wikipedia.org/wiki/Jo_Walton&quot;&gt;Wikipedia&lt;/a&gt; |&lt;a href=&quot;http://papersky.livejournal.com/&quot;&gt;Author Page &lt;/a&gt;|&lt;a href=&quot;http://papersky.livejournal.com/&quot;&gt; &lt;/a&gt;&lt;a href=&quot;http://www.goodreads.com/author/show/107170.Jo_Walton&quot;&gt;Goodreads&lt;/a&gt;&lt;/p&gt;
+" />
+<meta property="profile:first_name" content="Jo" />
+<meta property="profile:last_name" content="Walton" />
+<meta property="fb:app_id" content="966242223397117" />
+<meta property="article:publisher" content="https://www.facebook.com/tordotcom/" />
+<meta property="author" content="Jo Walton" />
+<meta property="article:author" content="https://www.tor.com/author/jo-walton/" />
+<meta name="twitter:site" content="@tordotcom" />
+
+<style>
+
+	body .age-gate-overlay {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 2147483646;
+	background-color: #c1c5c899;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+body .age-gate-content-container {
+	background: #fff;
+	width: 570px;
+	padding: 30px;
+}
+
+body .age-gate-text p {
+	color: #333333;
+  font-family: "Nunito", "sans-serif";
+	font-size: 2rem;
+	font-weight: normal;
+	margin-top: 8px;
+}
+
+body .confirm-btn-container button {
+	color: #fff;
+	background: #ab0033;
+	border: none;
+	padding: 10px 20px;
+	width: 100px;
+	text-transform: uppercase;
+	display: inline-block;
+	font-weight: bold;
+}
+
+body .confirm-btn-container button:first-child {
+	margin-right: 15px;
+}
+</style>
+</head>
+<body class="bp-legacy archive author author-jo-walton author-327 no-js">
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W2ZGVB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div id="page-wrapper">
+<header id="page-header">
+<div id="div-gpt-ad-top" class="dfp-ad dfp-top">
+<script type="text/javascript">
+		if ( typeof googletag != 'undefined' ) {
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-top'); });
+		}
+	</script>
+</div>
+<hgroup id="page-header-masthead">
+<h1 id="site-logo"><a href="https://www.tor.com/" title="Tor.com" rel="home">Tor.com</a></h1>
+<a href="#" id="menu-control" class="mobile"><i class="icon-menu"></i></a>
+<h2 id="site-description">Science fiction. Fantasy. The universe. And related subjects.</h2>
+</hgroup>
+<nav id="page-navigation">
+<h1 class="assistive-text section-heading">Main menu</h1>
+<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+<div class="menu-header-menu-container"><ul id="menu-header-menu" class="menu"><li id="menu-item-18" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18"><a href="https://www.tor.com/category/all-fiction/">Fiction</a></li>
+<li id="menu-item-21" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-21"><a href="/series">Series</a></li>
+<li id="menu-item-23" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23"><a target="_blank" rel="noopener" href="https://publishing.tor.com/">Publishing</a></li>
+<li id="menu-item-212027" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-212027"><a target="_blank" rel="noopener" href="https://read.macmillan.com/tordotcom/newsletter-signup/">Newsletter</a></li>
+</ul></div> <div class="search-toggle icon-search-2"></div>
+<form method="get" id="searchform" action="https://www.tor.com/search-page/">
+<label for="s" class="assistive-text">Search</label>
+<input type="text" class="field" name="s" id="s" placeholder="Search" />
+<button type="submit" class="search-submit"><i class="icon-search-2"></i><span class="assistive-text">Search</span></button>
+</form>
+<div id="account-wrapper" data-nonce="754f617a70">
+<ul class="logged-out">
+<li class="login-control"><a href="#" class="login-button login">Log In</a></li>
+<li class="login-control"><a href="https://www.tor.com/register/" class="register-button">Register</a></li>
+</ul>
+</div>
+</nav>
+</header>
+<div id="main">
+<section id="primary">
+<div id="content" class="archive">
+<header class="content-header">
+<span class="content-title author">Tor.com content by</span>
+<h1 class="author-title">Jo Walton</h1>
+<div class="author-title-links">
+<a href="https://www.tor.com/members/bluejo/">view profile</a> |
+<a href="https://www.tor.com/author/jo-walton/feed/">
+RSS feed </a>
+</div>
+<div class="post-section-links">
+<div class="post-section-button"><a href="#fiction_excerpt">Fiction and Excerpts [15]</a></div>
+<div class="post-section-button active"><a href="#all">All</a></div>
+</div>
+</header>
+<div id="fiction_excerpt" class="archive-section">
+<h2 class="archive-section-title">Fiction and Excerpts [15]</h2>
+<article data-nonce="a7ab34b0ea" data-post-id="447331" id="post-447331" class="has-post-thumbnail post-447331 post type-post status-publish format-standard hentry category-excerpts tag-alternate-history tag-excerpts tag-historical-fantasy tag-jo-walton tag-lent tag-tor-books genre-alternate-history genre-historical store-amazon-store store-barnes-noble-store store-ibooks-store store-indiebound-store visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results publisher-tor-books">
+<picture class="featured-image-wrapper horizontal" data-id="449532">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/04/Lent-header.png?resize=50%2C38&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/04/Lent-header.png?resize=123%2C92&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/04/Lent-header.png?resize=140%2C105&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/04/Lent-header.png?resize=50%2C38&#038;quality=100&#038;ssl=1"></img>
+</picture>
+<header class="entry-header ">
+<h2 class="entry-title">
+<a href="https://www.tor.com/2019/04/16/read-the-first-chapter-of-jo-waltons-lent/">Read the First Chapter of Jo Walton&#8217;s <em>Lent</em></a>
+</h2>
+<div class="entry-meta">
+<span class="entry-author-byline">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-dateline">
+<div class="entry-date ">Tue Apr 16, 2019 1:00pm</div>
+<a id="favorite-447331" href="#" data-nonce="07f1e87510" data-entity-id="447331" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">2 Favorites [+]</a>
+</div>
+</div>
+</header>
+<div class="entry-excerpt">
+<a href="https://www.tor.com/genre/alternate-history/" rel="tag">Alternate History</a>, <a href="https://www.tor.com/genre/historical/" rel="tag">Historical</a> || A magical re-imagining of the man who remade fifteenth-century Florence—in all its astonishing strangeness. </div>
+</article>
+<article data-nonce="6e9ad1584f" data-post-id="374534" id="post-374534" class="has-post-thumbnail post-374534 post type-post status-publish format-standard hentry category-excerpts tag-an-informal-history-of-the-hugos tag-collections tag-essay-collection tag-excerpts tag-jo-walton tag-non-fiction tag-tor-books genre-non-fiction store-amazon-store store-barnes-noble-store store-ibooks-store store-indiebound-store visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results publisher-tor-books">
+<picture class="featured-image-wrapper horizontal" data-id="374536">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/Hugos-JoWalton-crop.jpg?resize=50%2C38&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/Hugos-JoWalton-crop.jpg?resize=123%2C92&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/Hugos-JoWalton-crop.jpg?resize=140%2C105&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/Hugos-JoWalton-crop.jpg?resize=50%2C38&#038;quality=100&#038;ssl=1"></img>
+</picture>
+<header class="entry-header ">
+<h2 class="entry-title">
+<a href="https://www.tor.com/2018/07/11/excerpts-an-informal-history-of-the-hugos-jo-walton/"><em>An Informal History of the Hugos</em></a>
+</h2>
+<div class="entry-meta">
+<span class="entry-author-byline">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-dateline">
+<div class="entry-date ">Wed Jul 11, 2018 1:00pm</div>
+<a id="favorite-374534" href="#" data-nonce="6c95ea7f25" data-entity-id="374534" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">3 Favorites [+]</a>
+</div>
+</div>
+</header>
+<div class="entry-excerpt">
+<a href="https://www.tor.com/genre/non-fiction/" rel="tag">Non-Fiction</a> || A collection of essays from Jo Walton, surveying the Hugo finalists and winners from the award's inception up to the year 2000. </div>
+</article>
+<div id="archive-section-load-more-container"></div>
+<div class="load-more-button-wrapper">
+<input type="button" id="tor-load-more" data-action="load_more_fiction_excerpt" data-nonce="84b5bca880" data-id="187" data-type="author" data-offset="2" data-numposts="15" value="Show More">
+</div>
+</div>
+<div id="all" class="author-blog-archive">
+<div id="infinite-scroll-wrapper">
+<article data-nonce="dece249c49" data-post-id="764257" id="post-764257" class="post-764257 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-books tag-connie-willis tag-ian-r-macleod tag-jo-walton-reads tag-k-j-parker tag-lois-mcmaster-bujold tag-poul-anderson tag-steven-brust visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results article-book-recommendations">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2024/01/04/jo-waltons-reading-list-december-2023/">Jo Walton&#8217;s Reading List: December 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu Jan 4, 2024 11:00am</span>
+<a href="https://www.tor.com/2024/01/04/jo-waltons-reading-list-december-2023/#comments" class="entry-comment-count">
+1 comment </a>
+<a id="favorite-764257" href="#" data-nonce="4f9055dcf3" data-entity-id="764257" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">Favorite This</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2024/01/04/jo-waltons-reading-list-december-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="764440">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/Jo-Walton-Reading-List-Dec-2023.png?fit=600%2C300&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/Jo-Walton-Reading-List-Dec-2023.png?fit=750%2C375&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/Jo-Walton-Reading-List-Dec-2023.png?fit=750%2C375&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/Jo-Walton-Reading-List-Dec-2023.png?fit=1440%2C720&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/Jo-Walton-Reading-List-Dec-2023.png?fit=600%2C300&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>Oh my goodness, 2024 already! I was home in December, writing, and over the holidays I had friends to stay in a Covid-cautious bubble that let me have fun and see people in a relatively safe way, though my son and other friends got sick—which meant that the present-opening part of Christmas got postponed several days after the traditional 25<sup>th</sup>. Stay safe out there.</p>
+<p>I finished thirteen books in December, some of them great.</p>
+<p> <a href="https://www.tor.com/2024/01/04/jo-waltons-reading-list-december-2023/#more-764257" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="2812e75562" data-post-id="761362" id="post-761362" class="post-761362 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-ann-and-jeff-vandermeer tag-ann-vandermeer tag-books tag-david-mitchell tag-jeff-vandermeer tag-jo-walton-reads tag-k-j-parker tag-kate-elliott tag-lois-mcmaster-bujold tag-sofia-samatar visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results article-book-recommendations">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/12/11/jo-waltons-reading-list-november-2023/">Jo Walton&#8217;s Reading List: November 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Mon Dec 11, 2023 3:00pm</span>
+<a href="https://www.tor.com/2023/12/11/jo-waltons-reading-list-november-2023/#comments" class="entry-comment-count">
+14 comments </a>
+<a id="favorite-761362" href="#" data-nonce="92a4b5a24d" data-entity-id="761362" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">10 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/12/11/jo-waltons-reading-list-november-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="762212">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/12/Jo-Walton-Books-Nov-2023.png?fit=600%2C400&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/12/Jo-Walton-Books-Nov-2023.png?fit=750%2C500&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/12/Jo-Walton-Books-Nov-2023.png?fit=750%2C500&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/12/Jo-Walton-Books-Nov-2023.png?fit=1440%2C960&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/12/Jo-Walton-Books-Nov-2023.png?fit=600%2C400&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>November was a dark cold month spent entirely at home, reading and trying to write. Whose idea was this? Oh all right, mine, but having the clocks go back wasn&#8217;t my idea. Anyway, I read 26 books in November, and some of them were great and some of them were interesting, and one or two I hated, but they&#8217;re very varied.</p>
+<p> <a href="https://www.tor.com/2023/12/11/jo-waltons-reading-list-november-2023/#more-761362" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="9fb278d0b8" data-post-id="759842" id="post-759842" class="post-759842 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-ben-aaronovitch tag-books tag-jo-walton-reads tag-margaret-atwood tag-t-h-white tag-the-fortunate-fall tag-the-inferno tag-victoria-goddard tag-vladimir-nabokov visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results article-book-recommendations">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/11/17/jo-waltons-reading-list-october-2023/">Jo Walton&#8217;s Reading List: October 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Fri Nov 17, 2023 10:00am</span>
+<a href="https://www.tor.com/2023/11/17/jo-waltons-reading-list-october-2023/#comments" class="entry-comment-count">
+9 comments </a>
+<a id="favorite-759842" href="#" data-nonce="72b5da1475" data-entity-id="759842" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">9 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/11/17/jo-waltons-reading-list-october-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="760915">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/11/Jo-Walton-reading-list-Oct-2023.png?fit=600%2C367&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/11/Jo-Walton-reading-list-Oct-2023.png?fit=750%2C458&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/11/Jo-Walton-reading-list-Oct-2023.png?fit=750%2C458&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/11/Jo-Walton-reading-list-Oct-2023.png?fit=1440%2C880&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/11/Jo-Walton-reading-list-Oct-2023.png?fit=600%2C367&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>I was in Chicago for the first few weeks of October and then home in Montreal for the last week. I read eighteen books. I&#8217;m sorry this is late, but some of these were surprisingly difficult to talk about.</p>
+<p> <a href="https://www.tor.com/2023/11/17/jo-waltons-reading-list-october-2023/#more-759842" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="c6a759d0eb" data-post-id="757835" id="post-757835" class="post-757835 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-books tag-history tag-jennifer-crusie tag-jo-walton-reads tag-shelley-parker-chan tag-vajra-chandrasekera visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results article-book-recommendations">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/10/04/jo-waltons-reading-list-september-2023/">Jo Walton&#8217;s Reading List: September 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Wed Oct 4, 2023 10:00am</span>
+<a href="https://www.tor.com/2023/10/04/jo-waltons-reading-list-september-2023/#comments" class="entry-comment-count">
+8 comments </a>
+<a id="favorite-757835" href="#" data-nonce="24c6ca7764" data-entity-id="757835" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">8 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/10/04/jo-waltons-reading-list-september-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="757927">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/10/Jo-Walton-Sept-2023.png?fit=600%2C300&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/10/Jo-Walton-Sept-2023.png?fit=750%2C375&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/10/Jo-Walton-Sept-2023.png?fit=750%2C375&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/10/Jo-Walton-Sept-2023.png?fit=1440%2C720&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/10/Jo-Walton-Sept-2023.png?fit=600%2C300&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>September was an excellent month, I was in Florence the whole time until right at the end when I flew to Chicago. I read eleven books, and it&#8217;s only now seeing them together as a list that I realise they&#8217;re kind of an odd bunch. But some of them were outstanding.</p>
+<p> <a href="https://www.tor.com/2023/10/04/jo-waltons-reading-list-september-2023/#more-757835" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="11c31bc739" data-post-id="756113" id="post-756113" class="post-756113 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-books tag-jo-walton-reads tag-jon-evans tag-malinda-lo tag-naomi-kritzer tag-shelley-parker-chan visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results article-book-recommendations">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/09/13/jo-waltons-reading-list-august-2023/">Jo Walton&#8217;s Reading List: August 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Wed Sep 13, 2023 1:00pm</span>
+<a href="https://www.tor.com/2023/09/13/jo-waltons-reading-list-august-2023/#comments" class="entry-comment-count">
+10 comments </a>
+<a id="favorite-756113" href="#" data-nonce="d8919fef70" data-entity-id="756113" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">9 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/09/13/jo-waltons-reading-list-august-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="756659">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/09/Jo-Walton-Aug-2023.png?fit=600%2C318&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/09/Jo-Walton-Aug-2023.png?fit=750%2C397&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/09/Jo-Walton-Aug-2023.png?fit=750%2C397&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/09/Jo-Walton-Aug-2023.png?fit=1440%2C762&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/09/Jo-Walton-Aug-2023.png?fit=600%2C318&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>August was a wonderful but very busy month. I was in Florence the whole time, mostly having an excellent time dashing around with friends looking at beautiful art and eating great food. I read only seven books.</p>
+<p> <a href="https://www.tor.com/2023/09/13/jo-waltons-reading-list-august-2023/#more-756113" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="25341fdc19" data-post-id="754101" id="post-754101" class="post-754101 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-books tag-david-mitchell tag-jo-walton-reads tag-peter-dickinson tag-ray-nayler tag-susan-palwick tag-susanna-clarke tag-theodora-goss tag-victoria-goddard visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results article-book-recommendations">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/08/04/jo-waltons-reading-list-july-2023/">Jo Walton&#8217;s Reading List: July 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Fri Aug 4, 2023 10:00am</span>
+<a href="https://www.tor.com/2023/08/04/jo-waltons-reading-list-july-2023/#comments" class="entry-comment-count">
+12 comments </a>
+<a id="favorite-754101" href="#" data-nonce="786d180628" data-entity-id="754101" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">17 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/08/04/jo-waltons-reading-list-july-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="754251">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/08/Jo-Walton-July-2023.png?fit=600%2C360&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/08/Jo-Walton-July-2023.png?fit=750%2C450&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/08/Jo-Walton-July-2023.png?fit=750%2C450&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/08/Jo-Walton-July-2023.png?fit=1440%2C864&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/08/Jo-Walton-July-2023.png?fit=600%2C360&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>July was an excellent month. I started off at home in Montreal, flew to Florence, was here for a week then took a train to northern Spain for the Celsius 232 festival where I had a great time, then took the train back again to Florence. I&#8217;ve been here on my own writing and reading, which is pretty great. I read nineteen books in July, which I&#8217;m excited to share with you.</p>
+<p> <a href="https://www.tor.com/2023/08/04/jo-waltons-reading-list-july-2023/#more-754101" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="ef9930eb19" data-post-id="749606" id="post-749606" class="post-749606 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-ben-aaronovitch tag-books tag-italo-calvino tag-jo-walton-reads tag-malinda-lo tag-rich-larson tag-tasting-light tag-vernor-vinge tag-victoria-goddard visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results article-book-recommendations">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/07/10/jo-waltons-reading-list-june-2023/">Jo Walton&#8217;s Reading List: June 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Mon Jul 10, 2023 2:00pm</span>
+<a href="https://www.tor.com/2023/07/10/jo-waltons-reading-list-june-2023/#comments" class="entry-comment-count">
+32 comments </a>
+<a id="favorite-749606" href="#" data-nonce="d7389c4429" data-entity-id="749606" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">6 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/07/10/jo-waltons-reading-list-june-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="750803">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/07/Jo-Walton-book-list-June-2023.png?fit=600%2C381&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/07/Jo-Walton-book-list-June-2023.png?fit=750%2C476&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/07/Jo-Walton-book-list-June-2023.png?fit=750%2C476&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/07/Jo-Walton-book-list-June-2023.png?fit=1440%2C914&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/07/Jo-Walton-book-list-June-2023.png?fit=600%2C381&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>I was home all of June, we had Scintillation here in Montreal which meant lots of friends were in town that week, so I had lots of excellent hanging out and live conversation, in addition to the convention, which was great. I read seventeen books, and this month&#8217;s crop turned out to be an odd mix of books I liked very much and books I didn&#8217;t like for various reasons.</p>
+<p> <a href="https://www.tor.com/2023/07/10/jo-waltons-reading-list-june-2023/#more-749606" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="bcebc29b2d" data-post-id="744440" id="post-744440" class="post-744440 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-barbara-hambly tag-ben-aaronovitch tag-books tag-elizabeth-wein tag-isabel-yap tag-jo-walton-reads tag-kj-parker tag-lois-mcmaster-bujold tag-s-b-divya visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/06/08/jo-waltons-reading-list-may-2023/">Jo Walton&#8217;s Reading List: May 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu Jun 8, 2023 1:00pm</span>
+<a href="https://www.tor.com/2023/06/08/jo-waltons-reading-list-may-2023/#comments" class="entry-comment-count">
+29 comments </a>
+<a id="favorite-744440" href="#" data-nonce="e7ce657e7c" data-entity-id="744440" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">18 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/06/08/jo-waltons-reading-list-may-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="746012">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Jo-Walton-May-2023.png?fit=600%2C382&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Jo-Walton-May-2023.png?fit=750%2C477&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Jo-Walton-May-2023.png?fit=750%2C477&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Jo-Walton-May-2023.png?fit=1440%2C916&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Jo-Walton-May-2023.png?fit=600%2C382&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>May was a month when I was at home, with lots of pain and not doing much except reading a lot of the time. Fortunately there were lots of good books waiting to be read, so this was one of those months when I read a whole bunch of books, 35 in all, which is a lot even for me. Some of them I have lots to say about, so this post may be a little long.</p>
+<p> <a href="https://www.tor.com/2023/06/08/jo-waltons-reading-list-may-2023/#more-744440" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="90139fc317" data-post-id="741168" id="post-741168" class="post-741168 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-algis-budrys tag-ben-aaronovitch tag-books tag-jo-walton-reads tag-libraries tag-samuel-r-delany visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/05/04/jo-waltons-reading-list-april-2023/">Jo Walton&#8217;s Reading List: April 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu May 4, 2023 12:00pm</span>
+<a href="https://www.tor.com/2023/05/04/jo-waltons-reading-list-april-2023/#comments" class="entry-comment-count">
+25 comments </a>
+<a id="favorite-741168" href="#" data-nonce="eb48874d88" data-entity-id="741168" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">10 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/05/04/jo-waltons-reading-list-april-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="741223">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/05/jo-walton-reads-april-2023.png?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/05/jo-walton-reads-april-2023.png?fit=750%2C+9999&#038;crop=0%2C0%2C100%2C390px&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/05/jo-walton-reads-april-2023.png?fit=750%2C+9999&#038;crop=0%2C0%2C100%2C390px&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/05/jo-walton-reads-april-2023.png?fit=1400%2C+9999&#038;crop=0%2C0%2C100%2C770px&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/05/jo-walton-reads-april-2023.png?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>April was all spent in Chicago working on Ada Palmer&#8217;s class simulation of the papal election of 1492. It really does consume the whole month, tweaking character sheets, writing letters, helping orchestrate—there&#8217;s barely time to eat, and pretty much all my reading was just reading myself to sleep. I came home to Montreal right at the end of April and did finish a few things on the train. I only read six books all month, and here they are.</p>
+<p> <a href="https://www.tor.com/2023/05/04/jo-waltons-reading-list-april-2023/#more-741168" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="18743ec6a2" data-post-id="737694" id="post-737694" class="post-737694 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-a-s-byatt tag-ben-aaronovitch tag-books tag-jo-walton-reads tag-steven-brust tag-vlad-taltos visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/04/07/jo-waltons-reading-list-march-2023/">Jo Walton&#8217;s Reading List: March 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Fri Apr 7, 2023 10:00am</span>
+<a href="https://www.tor.com/2023/04/07/jo-waltons-reading-list-march-2023/#comments" class="entry-comment-count">
+23 comments </a>
+<a id="favorite-737694" href="#" data-nonce="b122b8c296" data-entity-id="737694" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">11 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/04/07/jo-waltons-reading-list-march-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="738044">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/03/Jo-Walton-March-2023.png?fit=600%2C314&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/03/Jo-Walton-March-2023.png?fit=750%2C392&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/03/Jo-Walton-March-2023.png?fit=750%2C392&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/03/Jo-Walton-March-2023.png?fit=1440%2C753&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/03/Jo-Walton-March-2023.png?fit=600%2C314&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>March was a great month where I was in Florence for the first three weeks and then flew to Chicago to help Ada with the <a href="https://www.tor.com/2019/05/15/how-tea-history-and-a-simulated-papal-election-inspired-lent/" target="_blank" rel="noopener" data-keep-unchecked="no">Papal Election</a> of 1492. I read just twelve books, but some of them were awesome.</p>
+<p> <a href="https://www.tor.com/2023/04/07/jo-waltons-reading-list-march-2023/#more-737694" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="7cabd2aa6c" data-post-id="736314" id="post-736314" class="post-736314 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-arthur-ransome tag-ben-aaronovitch tag-books tag-georgette-heyer tag-j-r-r-tolkien tag-jo-walton-reads tag-joan-aiken tag-marge-piercy tag-vikram-seth visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/03/24/jo-waltons-reading-list-february-2023/">Jo Walton&#8217;s Reading List: February 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Fri Mar 24, 2023 10:00am</span>
+<a href="https://www.tor.com/2023/03/24/jo-waltons-reading-list-february-2023/#comments" class="entry-comment-count">
+56 comments </a>
+<a id="favorite-736314" href="#" data-nonce="2972c08b9b" data-entity-id="736314" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">15 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/03/24/jo-waltons-reading-list-february-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="736724">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/03/jo-walton-reads-feb-2023.png?fit=600%2C315&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/03/jo-walton-reads-feb-2023.png?fit=750%2C394&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/03/jo-walton-reads-feb-2023.png?fit=750%2C394&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/03/jo-walton-reads-feb-2023.png?fit=1440%2C756&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/03/jo-walton-reads-feb-2023.png?fit=600%2C315&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>February was a cold, snowy month in Montreal with icy sidewalks and lots of blizzards. I was at home most of the month and didn&#8217;t go out much. I was teaching my online history of SF course, and writing, and then at the very end of the month I flew to Florence. I read seventeen books, a mixed lot, but some of them were outstanding.</p>
+<p> <a href="https://www.tor.com/2023/03/24/jo-waltons-reading-list-february-2023/#more-736314" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="8381424abb" data-post-id="730444" id="post-730444" class="post-730444 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-alfred-bester tag-ben-aaronovitch tag-books tag-daphne-du-maurier tag-g-willow-wilson tag-james-l-cambias tag-jo-walton-reads tag-k-j-parker visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/02/14/jo-waltons-reading-list-january-2023/">Jo Walton&#8217;s Reading List: January 2023</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Tue Feb 14, 2023 2:00pm</span>
+<a href="https://www.tor.com/2023/02/14/jo-waltons-reading-list-january-2023/#comments" class="entry-comment-count">
+28 comments </a>
+<a id="favorite-730444" href="#" data-nonce="76d4615d1c" data-entity-id="730444" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">18 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/02/14/jo-waltons-reading-list-january-2023/">
+<picture class="featured-image-wrapper horizontal" data-id="732467">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/01/Jo-Walton-Jan-2023.png?fit=600%2C396&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/01/Jo-Walton-Jan-2023.png?fit=750%2C496&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/01/Jo-Walton-Jan-2023.png?fit=750%2C496&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/01/Jo-Walton-Jan-2023.png?fit=1440%2C951&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/01/Jo-Walton-Jan-2023.png?fit=600%2C396&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>I was home all month, which was the normal kind of cold snowy January we have in Montreal. I was working on the essay collection (done!) and the novel, but I didn&#8217;t go out, and anyone would be forgiven for thinking I spent the whole month doing nothing but sitting by the window reading my book and watching it snow, because I read twenty-eight books this month. Some of them were great.</p>
+<p> <a href="https://www.tor.com/2023/02/14/jo-waltons-reading-list-january-2023/#more-730444" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="2b582b2ff3" data-post-id="726438" id="post-726438" class="post-726438 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-books tag-david-mitchell tag-jo-walton-reads tag-jon-evans tag-nisi-shawl tag-peter-s-beagle tag-sarah-j-maas tag-walter-jon-williams visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2023/01/13/jo-waltons-reading-list-december-2022/">Jo Walton&#8217;s Reading List: December 2022</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Fri Jan 13, 2023 12:00pm</span>
+<a href="https://www.tor.com/2023/01/13/jo-waltons-reading-list-december-2022/#comments" class="entry-comment-count">
+20 comments </a>
+<a id="favorite-726438" href="#" data-nonce="34e7a9bd62" data-entity-id="726438" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">17 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2023/01/13/jo-waltons-reading-list-december-2022/">
+<picture class="featured-image-wrapper horizontal" data-id="727789">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/01/Jo-Walton-Dec-2022.png?fit=600%2C396&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/01/Jo-Walton-Dec-2022.png?fit=750%2C496&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/01/Jo-Walton-Dec-2022.png?fit=750%2C496&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/01/Jo-Walton-Dec-2022.png?fit=1440%2C951&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/01/Jo-Walton-Dec-2022.png?fit=600%2C396&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>December began excellently in Rome, then we flew to Chicago for a couple of days, then went by train to Boston for a conference. After that I said goodbye to Ada and headed home to Montreal in time for the holidays. It was a pretty good month in which I read eighteen books, and some of them were outstanding.</p>
+<p> <a href="https://www.tor.com/2023/01/13/jo-waltons-reading-list-december-2022/#more-726438" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="02f0090466" data-post-id="722072" id="post-722072" class="post-722072 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-ben-aaronovitch tag-books tag-italo-calvino tag-jo-walton-reads tag-robert-a-heinlein tag-the-thousand-and-one-nights visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2022/12/09/jo-waltons-reading-list-november-2022/">Jo Walton&#8217;s Reading List: November 2022</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Fri Dec 9, 2022 12:00pm</span>
+<a href="https://www.tor.com/2022/12/09/jo-waltons-reading-list-november-2022/#comments" class="entry-comment-count">
+10 comments </a>
+<a id="favorite-722072" href="#" data-nonce="684954f8da" data-entity-id="722072" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">5 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2022/12/09/jo-waltons-reading-list-november-2022/">
+<picture class="featured-image-wrapper horizontal" data-id="723092">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2022/12/Jo-Walton-Nov-2022.png?fit=600%2C296&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2022/12/Jo-Walton-Nov-2022.png?fit=750%2C370&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2022/12/Jo-Walton-Nov-2022.png?fit=750%2C370&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2022/12/Jo-Walton-Nov-2022.png?fit=1440%2C710&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2022/12/Jo-Walton-Nov-2022.png?fit=600%2C296&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>November started off in Nantes for Utopiales, then I flew to New Orleans for World Fantasy, and from there I flew to Rome to meet up with Ada again, where I still am, in a little apartment in Trastevere. We also had a weekend in Florence. So another terrific month, with much seeing friends at World Fantasy and then more seeing friends and meeting new people in Rome and Florence.  I read just twelve books.</p>
+<p> <a href="https://www.tor.com/2022/12/09/jo-waltons-reading-list-november-2022/#more-722072" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="ab8fe17805" data-post-id="719386" id="post-719386" class="post-719386 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-alexis-hall tag-books tag-george-r-r-martin tag-jo-walton-reads tag-kj-parker tag-marta-randall tag-moniquill-blackgoose tag-samuel-r-delany visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/jo-walton-reads/" rel="category tag">Jo Walton Reads</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2022/11/11/jo-waltons-reading-list-october-2022/">Jo Walton&#8217;s Reading List: October 2022</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Fri Nov 11, 2022 12:00pm</span>
+<a href="https://www.tor.com/2022/11/11/jo-waltons-reading-list-october-2022/#comments" class="entry-comment-count">
+12 comments </a>
+<a id="favorite-719386" href="#" data-nonce="f625482e6c" data-entity-id="719386" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">10 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2022/11/11/jo-waltons-reading-list-october-2022/">
+<picture class="featured-image-wrapper horizontal" data-id="719954">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2022/11/Jo-Walton-October-2022.png?fit=600%2C384&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2022/11/Jo-Walton-October-2022.png?fit=750%2C480&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2022/11/Jo-Walton-October-2022.png?fit=750%2C480&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2022/11/Jo-Walton-October-2022.png?fit=1440%2C922&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2022/11/Jo-Walton-October-2022.png?fit=600%2C384&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>October was a really excellent month, starting in Turin, then going west to Spain for Hispacon, where we met a lot of very enthusiastic Spanish fans, then a book tour through France, all on trains. We had a couple of lovely rest days in Narbonne, then Ada and I signed books and answered questions at a bunch of really different bookstores, big diverse Ombres Blanches in Toulouse, little specialist Imaginautes in Tours, huge branch of huge chain FNAC in Paris, plugged-in neighorhood bookstore Quatre Chemins in Lille, and GLBT bookstore Les Mots à la Bouche in Paris. At all these places we met people who loved books and reading. It was terrific. Then we ended the month at Utopiales in Nantes, one of France&#8217;s best conventions.</p>
+<p>I read twelve books, mostly on trains.</p>
+<p> <a href="https://www.tor.com/2022/11/11/jo-waltons-reading-list-october-2022/#more-719386" class="more-link">[Read more]</a></p>
+</div>
+</article>
+</div>
+</div>
+<div id="page-sidebar">
+<div class="widget"><h2>Latest Posts</h2> <ul id="latest-posts">
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/tor-com/" title="Posts by Tor.com" class="entry-author" rel="author">Tor.com</a> </span>
+<a href="https://www.tor.com/2024/01/04/cover-reveal-celestial-monsters-by-aiden-thomas/">Gods, Beasts, and Burgeoning Romance: Aiden Thomas Talks <em>Celestial Monsters</em></a>
+<span class="post-date">26 mins ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/molly-templeton/" title="Posts by Molly Templeton" class="entry-author" rel="author">Molly Templeton</a> </span>
+<a href="https://www.tor.com/2024/01/04/the-course-of-teen-love-runs-rampant-and-bloody-in-the-new-trailer-for-lisa-frankenstein/">The Course of Teen Love Runs Rampant and Bloody in the New Trailer for <em>Lisa Frankenstein</em></a>
+<span class="post-date">31 mins ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/jo-walton/" title="Posts by Jo Walton" class="entry-author" rel="author">Jo Walton</a> </span>
+<a href="https://www.tor.com/2024/01/04/jo-waltons-reading-list-december-2023/">Jo Walton&#8217;s Reading List: December 2023</a>
+<span class="post-date">1 hour ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/paige-vest/" title="Posts by Paige Vest" class="entry-author" rel="author">Paige Vest</a> and <a href="https://www.tor.com/author/lyndsey-luther/" title="Posts by Lyndsey Luther" class="entry-author" rel="author">Lyndsey Luther</a> </span>
+<a href="https://www.tor.com/2024/01/04/elantris-reread-chapters-forty-nine-and-fifty/"><em>Elantris</em> Reread: Chapters Forty-Nine and Fifty</a>
+<span class="post-date">2 hours ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/vanessa-armstrong/" title="Posts by Vanessa Armstrong" class="entry-author" rel="author">Vanessa Armstrong</a> </span>
+<a href="https://www.tor.com/2024/01/03/sneak-peek-of-la-breas-final-season-reveals-fighting-dinosaurs/">Sneak Peek of <i>La Brea</i>’s Final Season Reveals Dinosaurs Wrecking The Automotive Museum, Like Dinosaurs Do</a>
+<span class="post-date">20 hours ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/vanessa-armstrong/" title="Posts by Vanessa Armstrong" class="entry-author" rel="author">Vanessa Armstrong</a> </span>
+<a href="https://www.tor.com/2024/01/03/the-first-omen-trailer-gives-us-priests-and-nuns-creating-an-evil-offspring/"><i>The First Omen</i> Trailer Gives Us Priests and Nuns Creating An Evil Offspring</a>
+<span class="post-date">22 hours ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/ruthanna-emrys/" title="Posts by Ruthanna Emrys" class="entry-author" rel="author">Ruthanna Emrys</a> and <a href="https://www.tor.com/author/anne-m-pillsworth/" title="Posts by Anne M. Pillsworth" class="entry-author" rel="author">Anne M. Pillsworth</a> </span>
+<a href="https://www.tor.com/2024/01/03/into-the-creepy-clown-mouth-max-gladstones-last-exit-part-11/">Into the Creepy Clown Mouth: Max Gladstone&#8217;s <em>Last Exit</em> (Part 11)</a>
+<span class="post-date">22 hours ago</span>
+</li>
+</ul>
+</div><div class="widget"><h2>Recent Comments</h2><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Arben</span> on <a href="https://www.tor.com/2013/08/20/star-trek-deep-space-nine-rewatch-the-alternate/comment-page-1/#comment-989286"><em>Star Trek: Deep Space Nine</em> Rewatch: &#8220;The Alternate&#8221;</a><span class="comment-widget-date"> 38 seconds ago</span></li><li class="recentcomments"><span class="comment-author-link">Steven Hedge</span> on <a href="https://www.tor.com/2024/01/04/elantris-reread-chapters-forty-nine-and-fifty/comment-page-1/#comment-989285"><em>Elantris</em> Reread: Chapters Forty-Nine and Fifty</a><span class="comment-widget-date"> 7 mins ago</span></li><li class="recentcomments"><span class="comment-author-link">Theak</span> on <a href="https://www.tor.com/2024/01/04/jo-waltons-reading-list-december-2023/comment-page-1/#comment-989284">Jo Walton&#8217;s Reading List: December 2023</a><span class="comment-widget-date"> 46 mins ago</span></li><li class="recentcomments"><span class="comment-author-link">noblehunter</span> on <a href="https://www.tor.com/2024/01/04/elantris-reread-chapters-forty-nine-and-fifty/comment-page-1/#comment-989283"><em>Elantris</em> Reread: Chapters Forty-Nine and Fifty</a><span class="comment-widget-date"> 57 mins ago</span></li><li class="recentcomments"><span class="comment-author-link">Gilphon</span> on <a href="https://www.tor.com/2024/01/04/elantris-reread-chapters-forty-nine-and-fifty/comment-page-1/#comment-989282"><em>Elantris</em> Reread: Chapters Forty-Nine and Fifty</a><span class="comment-widget-date"> 1 hour ago</span></li><li class="recentcomments"><span class="comment-author-link">noblehunter</span> on <a href="https://www.tor.com/2024/01/02/reading-the-wheel-of-time-young-bull-dreams-and-perrin-makes-a-choice-in-winters-heart-part-6/comment-page-1/#comment-989281">Reading The Wheel of Time: Young Bull Dreams, and Perrin Makes a Choice in <em>Winter&#8217;s Heart</em> (Part 6)</a><span class="comment-widget-date"> 1 hour ago</span></li><li class="recentcomments"><span class="comment-author-link">Russell H</span> on <a href="https://www.tor.com/2024/01/02/five-sf-stories-featuring-externally-mandated-body-modifications/comment-page-1/#comment-989280">Five SF Stories Featuring Externally Mandated Body Modifications</a><span class="comment-widget-date"> 1 hour ago</span></li></ul><a href="https://www.tor.com/conversations/" class="widget-view-more-link">more comments</a></div></div>
+</div>
+</section>
+</div>
+<footer id="page-footer">
+<div class="menu-footer-menu-large-container"><ul id="menu-footer-menu-large" class="menu"><li id="menu-item-155053" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-155053"><a href="https://www.tor.com/about-us/">About</a></li>
+<li id="menu-item-141444" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141444"><a href="https://www.tor.com/submissions-guidelines/">Submissions</a></li>
+<li id="menu-item-141443" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141443"><a href="https://www.tor.com/advertise/">Advertise</a></li>
+<li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-34"><a href="/blog-archive">Archive</a></li>
+<li id="menu-item-33" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33"><a href="/search-page/">Search</a></li>
+</ul></div> <div class="share-menus">
+<ul class="footer-share menu">
+<li>
+Follow Tor.com </li>
+<li>
+<a target="_blank" href="https://twitter.com/tordotcom">
+<i class="icon-twitter-1"></i>
+<span class="assistive-text">Twitter</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.facebook.com/tordotcom">
+<i class="icon-facebook-1"></i>
+<span class="assistive-text">Facebook</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.instagram.com/tordotcompub/">
+<i class="icon-instagram-1"></i>
+<span class="assistive-text">Instagram</span>
+</a>
+</li>
+<li>
+<a href="https://www.tor.com/rss-feeds">
+<i class="icon-rss"></i>
+<span class="assistive-text">RSS</span>
+</a>
+</li>
+</ul>
+<ul class="footer-share german menu">
+<li>
+Follow Tor.com Germany </li>
+<li>
+<a target="_blank" href="http://www.tor-online.de/">
+<i class="icon-home"></i>
+<span class="assistive-text">Tor Germany Home</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://twitter.com/fischertor">
+<i class="icon-twitter-1"></i>
+<span class="assistive-text">Twitter</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.facebook.com/FISCHERTORVERLAG/">
+<i class="icon-facebook-1"></i>
+<span class="assistive-text">Facebook</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.instagram.com/fischertorverlag/">
+<i class="icon-instagram-1"></i>
+<span class="assistive-text">Instagram</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="menu-footer-menu-small-container"><ul id="menu-footer-menu-small" class="menu"><li id="menu-item-141601" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141601"><a href="https://www.tor.com/privacy-notice/">Privacy Policy</a></li>
+<li id="menu-item-757512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-757512"><a href="https://www.tor.com/your-privacy-choices/">Your Privacy Choices</a></li>
+<li id="menu-item-376236" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-376236"><a href="/privacy-notice/#onlinetracking">Ads and Cookies</a></li>
+<li id="menu-item-141602" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141602"><a href="https://www.tor.com/terms-of-use/">Terms of Use</a></li>
+<li id="menu-item-141600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141600"><a href="https://www.tor.com/contact-us/">Contact</a></li>
+</ul></div> <span class="copyright">&copy; 2024 Macmillan | All stories, art, and posts are the copyright of their respective authors</span>
+<a href="#" class="mobile back-to-top">Back to top</a>
+</footer>
+</div>
+<style>
+
+footer#page-footer{
+	margin-top: 296px;
+}
+	
+	
+</style>
+<script type="text/javascript">
+		var infiniteScroll = {"settings":{"id":"infinite-scroll-wrapper","ajaxurl":"https:\/\/www.tor.com\/?infinity=scrolling","type":"click","wrapper":true,"wrapper_class":"infinite-wrap","footer":false,"click_handle":"1","text":"More Posts","totop":"Scroll back to top","currentday":"11.11.22","order":"DESC","scripts":[],"styles":[],"google_analytics":false,"offset":1,"history":{"host":"www.tor.com","path":"\/author\/jo-walton\/page\/%d\/","use_trailing_slashes":true,"parameters":""},"query_args":{"author_name":"jo-walton","error":"","m":"","p":0,"post_parent":"","subpost":"","subpost_id":"","attachment":"","attachment_id":0,"name":"","pagename":"","page_id":0,"second":"","minute":"","hour":"","day":0,"monthnum":0,"year":0,"w":0,"category_name":"","tag":"","cat":"","tag_id":"","feed":"","tb":"","paged":0,"meta_key":"","meta_value":"","preview":"","s":"","sentence":"","title":"","fields":"","menu_order":"","embed":"","category__in":[],"category__not_in":[],"category__and":[],"post__in":[],"post__not_in":[],"post_name__in":[],"tag__in":[],"tag__not_in":[],"tag__and":[],"tag_slug__in":[],"tag_slug__and":[],"post_parent__in":[],"post_parent__not_in":[],"author__in":[],"author__not_in":[],"search_columns":[],"posts_per_page":15,"post_type":["post","sweepstakes"],"tax_query":[[{"taxonomy":"visible","field":"slug","terms":"contributor-pages","operator":"AND"}]],"ignore_sticky_posts":false,"suppress_filters":false,"cache_results":true,"update_post_term_cache":true,"update_menu_item_cache":false,"lazy_load_term_meta":true,"update_post_meta_cache":true,"nopaging":false,"comments_per_page":"75","no_found_rows":false,"taxonomy":"visible","term":"contributor-pages","order":"DESC"},"query_before":"2024-01-04 12:30:42","last_post_date":"2022-11-11 12:00:28","body_class":"infinite-scroll","loading_text":"Loading new page"}};
+		</script>
+<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  ga('create', 'UA-3533630-3', 'www.tor.com');
+		  		  ga('require', 'linkid', 'linkid.js');
+		  ga('require', 'displayfeatures');
+		  ga('send', 'pageview');
+		</script>
+<div id="entry-content__footer-popup" class="entry-content__footer-popup">
+<div class="entry-content__footer-popup-content">
+<i class="icon-cancel" title="Close Notification"></i>
+<p id="entry-content__footer-popup-text">
+Our <a href="https://www.tor.com/privacy-notice/" target="_blank">Privacy Notice</a> has been updated to explain how we use cookies, which you accept by continuing to use this website. To withdraw your consent, see <a href="https://www.tor.com/privacy-notice/#yourchoices" target="_blank">Your Choices</a>. </p>
+</div>
+</div>
+<script type="text/javascript" src="https://c0.wp.com/p/jetpack/12.9.1/_inc/build/infinite-scroll/infinity.min.js" id="the-neverending-homepage-js"></script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-image-cdn/dist/image-cdn.js?minify=false&amp;ver=132249e245926ae3e188" id="jetpack-photon-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/p/jetpack/12.9.1/modules/likes/queuehandler.js" id="jetpack_likes_queuehandler-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/ui/core.min.js" id="jquery-ui-core-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/ui/effect.min.js" id="jquery-effects-core-js"></script>
+<script type="text/javascript" id="global-js-extra">
+/* <![CDATA[ */
+var tor_wp_vars = {"breakpoints":[{"name":"mobile","width":767},{"name":"desktop","width":9999}],"wp_ajax_url":"https:\/\/www.tor.com\/wp-admin\/admin-ajax.php","static_url":"https:\/\/www.tor.com\/wp-content\/themes\/tor\/static\/","current_url":"https:\/\/www.tor.com\/author\/jo-walton","site_domain":"www.tor.com","is_home":false,"is_single":false,"is_user_logged_in":false,"modal":"\n<div class=\"modal-login-form\">\n\t<h2 class=\"login-form-title\">Log in to Tor.com<\/h2>\n\t<form name=\"loginform\" id=\"loginform\" action=\"https:\/\/www.tor.com\/wp-login.php?wpe-login=tormain\" method=\"post\">\n\t\t<input type=\"text\" placeholder=\"username\" name=\"log\" id=\"user\" class=\"input\" value=\"\" size=\"20\">\n\t\t<input type=\"password\" placeholder=\"password\" name=\"pwd\" id=\"pass\" class=\"input\" value=\"\" size=\"20\">\n\t\t<input type=\"submit\" name=\"wp-submit\" id=\"wp-submit\" class=\"button-primary\" value=\"Log In\">\n\t\t<a href=\"https:\/\/www.tor.com\/wp-login.php?action=lostpassword\" class=\"forgot-password\">Forgot Password<\/a>\n\t\t<input name=\"rememberme\" type=\"hidden\" id=\"rememberme\" value=\"forever\">\n\t\t<input type=\"hidden\" id=\"redirect_to\" name=\"redirect_to\" value=\"https:\/\/www.tor.com\/author\/jo-walton\">\n\t\t<input type=\"hidden\" id=\"login_tracking\" name=\"login_tracking\" value=\"\" \/>\n\t<\/form>\n<\/div>\n","post_id":"","protected_content":false,"allow_tinymce":false};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/global.bundle.js?ver=1.0.74" id="global-js"></script>
+<script type="text/javascript">
+			(function() {
+				var extend = function(out) {
+					out = out || {};
+
+					for (var i = 1; i < arguments.length; i++) {
+						if (!arguments[i])
+						continue;
+
+						for (var key in arguments[i]) {
+						if (arguments[i].hasOwnProperty(key))
+							out[key] = arguments[i][key];
+						}
+					}
+
+					return out;
+				};
+				extend( window.infiniteScroll.settings.scripts, ["jquery-core","jquery-migrate","jquery","vendor","tor-ga","sharing-js-fe","recaptcha","the-neverending-homepage","jetpack-photon","jetpack_likes_queuehandler","jquery-ui-core","jquery-effects-core","global"] );
+				extend( window.infiniteScroll.settings.styles, ["theme-style","the-neverending-homepage","wp-block-library","bp-login-form-style","bp-member-style","bp-members-style","bp-dynamic-members-style","bp-online-members-style","bp-active-members-style","bp-latest-activities-style","bp-embed-activity-style","bp-sitewide-notices-style","videopress-video-style","mediaelement","wp-mediaelement","classic-theme-styles","global-styles","open-sans","jetpack_likes","tor-merriweather-webfont","tor-open-sans","tablet","desktop","mobile","mini-tablet","sharedaddy","social-logos","jetpack_css","core-block-supports-duotone"] );
+			})();
+		</script>
+<span id="infinite-aria" aria-live="assertive"></span>
+</body>
+</html>

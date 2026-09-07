@@ -1,0 +1,56 @@
+
+# W-C1 WAR-CLUSTER SOAK (deterministic; cohort=4000)
+
+## A. READINESS DECAY HALF-LIFE (item 4) — week tick; target: years erosion, decades full-rust
+   DOWN_DECAY = 0.002 (chosen). From a maxed readiness 0.8, neutral patron.
+
+   candidate   half-life(wk / yr)     full→EPS(wk / yr)
+   0.04            17 /   0.3          125 /    2.4
+   0.003          231 /   4.4         1690 /   32.5
+   0.002          347 /   6.7         2536 /   48.8 ← CHOSEN
+   0.001          693 /  13.3         5073 /   97.6
+
+   patron megaphone spread (chosen DOWN_DECAY, bleed 0.6):
+   regime      half-life(wk / yr)
+   peacelike      202 /   3.9
+   neutral        347 /   6.7
+   warlike        542 /  10.4
+
+## B. THREAT ENVELOPE (item 2) — the CLIMB a menacing border drives, and the peace decay
+   readiness at 26/104/260 wk (½/2/5 yr) of a STANDING threat, from cold; neutral patron.
+
+   scenario                 footing    @26wk   @104wk  @260wk   (decades→1.0)
+   peace (no threat)          0.00     0.00    0.00    0.00
+   1 war front nearby         0.15     0.67    0.99    1.00
+   front + occupation         0.27     0.87    1.00    1.00
+   fully encircled            0.30     0.90    1.00    1.00
+   peace decay: a maxed 0.8, threat gone ⇒ 0.65 after 104 wk (2 yr) — sheds over years, not seasons.
+   READING: peace ⇒ 0 (never climbs). A standing menace ARMS a town over years even with no
+            war of its own; the stronger the menace, the faster — "a menacing border sustains it".
+
+## C. SUPPLY-GAP QUALITY GRADIENT (item 3) — deployedQualityMult over REAL war-kit completeness
+   Synthetic settlement exporting the first K of 5 core war-kit commodities.
+
+   war-kit exports      deployed quality ×
+    0 / 5 commodities     0.550   ← FLOOR (chainless, degraded, never zero)
+    1 / 5 commodities     0.633
+    2 / 5 commodities     0.716
+    3 / 5 commodities     0.798
+    4 / 5 commodities     0.881
+    5 / 5 commodities     0.964
+
+## D. RUST-SITE ERROR by ALIGNMENT (item 1) — seeded per-decision fidelity error
+   Cohort 4000 seeded draws; mean |factor−1| and max. SIZING = rust only (chaosPull 0);
+   PEACE = chaos+rust (war-entry geometry). Lawful reads TRUE at the sizing axis.
+
+   SITE     alignment    rust(exp)     mean|err|   max|err|
+   sizing   (any law)    exp 1.00        0.000     0.000
+   sizing   (any law)    exp 0.50        0.051     0.101
+   sizing   (any law)    exp 0.00        0.176     0.350
+   ---
+   peace    lawful       exp 1.00        0.000     0.000
+   peace    lawful       exp 0.30        0.095     0.190
+   peace    chaotic-devout exp 1.00        0.295     0.600
+   peace    chaotic-devout exp 0.30        0.377     0.750
+   CAPS: sizing |err| ≤ RUST_MAX_ERROR 0.35; combined ≤ TOTAL_MAX 0.75.
+

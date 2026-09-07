@@ -1,0 +1,233 @@
+{
+ "name": "kay",
+ "chunk": 1,
+ "claims": [
+  {
+   "index": 383,
+   "feature": "other: the past rhymes rather than repeats",
+   "claim": "Kay says the fantastic quarter-turn makes reader and author share that they are rhyming with the past, not trying to pin the present down with it precisely.",
+   "source": "Guy Gavriel Kay, 'The Big Idea', Whatever",
+   "url": "https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/",
+   "quote": "rhyming with the past, not trying to pin the present down",
+   "page": "body"
+  },
+  {
+   "index": 384,
+   "feature": "other: no moralising or lecture",
+   "claim": "Kay says he wants readers thinking about their own time but not for lessons, because he is offering a story and not giving a lecture.",
+   "source": "Guy Gavriel Kay, 'The Big Idea', Whatever",
+   "url": "https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/",
+   "quote": "I’m offering a story not giving a lecture",
+   "page": "body, near the end"
+  },
+  {
+   "index": 385,
+   "feature": "other: meaning left to the reader",
+   "claim": "Kay says he is focused on complicating things, on nuance, and on letting readers decide what they find in or take away from a book.",
+   "source": "Guy Gavriel Kay, 'The Big Idea', Whatever",
+   "url": "https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/",
+   "quote": "letting readers decide what they find in or take away",
+   "page": "body, early"
+  },
+  {
+   "index": 386,
+   "feature": "other: no dates or facts on the page",
+   "claim": "Kay says being alert to the themes of history does not necessarily mean the minutiae of dates and places, but patterns, lessons and warnings.",
+   "source": "Guy Gavriel Kay, Children of Earth and Sky Author Questions, BrightWeavings",
+   "url": "https://brightweavings.com/children-of-earth-and-sky-author-questions/",
+   "quote": "the minutiae of dates and places",
+   "page": "answer 2"
+  },
+  {
+   "index": 390,
+   "feature": "other: history as residue on ordinary lives",
+   "claim": "Kay says Children of Earth and Sky was deliberately about people who are not important in the scheme of things, and about how grand events can reach down and affect people far away.",
+   "source": "Guy Gavriel Kay, Children of Earth and Sky Author Questions, BrightWeavings",
+   "url": "https://brightweavings.com/children-of-earth-and-sky-author-questions/",
+   "quote": "how those grand events can reach down and affect people far away",
+   "page": "answer 5"
+  },
+  {
+   "index": 394,
+   "feature": "other: history as residue on a place",
+   "claim": "Kay says he began thinking about how some parts of the world still carry the hard imprint of what has gone before.",
+   "source": "Guy Gavriel Kay, 'Letter to the Reader of Ysabel'",
+   "url": "https://brightweavings.com/letter-to-the-reader-of-ysabel/",
+   "quote": "still carry the hard imprint of what has gone before",
+   "page": "body, penultimate section"
+  },
+  {
+   "index": 395,
+   "feature": "other: research must be digested not dumped",
+   "claim": "Kay says his grounding in research has to be so secure that the vast majority of it does not enter the book except subliminally or very quietly, or else the result is the info dump he hates as a reader.",
+   "source": "Guy Gavriel Kay, interviewed by Kristin Centorcelli, SF Signal",
+   "url": "https://brightweavings.com/interview-with-kristin-centorcelli/",
+   "quote": "does not enter the book except subliminally, or does so very quietly",
+   "page": "answer on research for River of Stars"
+  },
+  {
+   "index": 396,
+   "feature": "other: minor figures carry the setting",
+   "claim": "Kay says he often achieves his strongest effects through the peripheral figures, whether of character, emotion, or shaping depth to a setting for the reader.",
+   "source": "Guy Gavriel Kay, interviewed by Kristin Centorcelli, SF Signal",
+   "url": "https://brightweavings.com/interview-with-kristin-centorcelli/",
+   "quote": "through the peripheral figures I can achieve my strongest effects",
+   "page": "answer on grey characters"
+  },
+  {
+   "index": 402,
+   "feature": "closing sentence",
+   "claim": "Kay says he does not believe in saying exactly what happens to characters after a novel closes, and that the ending of every book he has written makes this point.",
+   "source": "Guy Gavriel Kay, The Fionavar Tapestry Afterword (2003)",
+   "url": "https://brightweavings.com/fionavarafterword/",
+   "quote": "saying exactly what happens to characters after a novel closes",
+   "page": "body, on Sharra"
+  },
+  {
+   "index": 406,
+   "feature": "other: no moralising or lecture",
+   "claim": "Kay says he does not write novels inspired by history to offer easy parallels to our own time, because that can feel lazy or glib or both.",
+   "source": "Guy Gavriel Kay, 'Exile', BrightWeavings",
+   "url": "https://brightweavings.com/exile/",
+   "quote": "That can feel lazy, or glib, or both",
+   "page": "body, River of Stars section"
+  },
+  {
+   "index": 408,
+   "feature": "other: not talking down to the reader",
+   "claim": "Kay praises Dorothy Dunnett for flatly refusing to talk down to her readers, making demands and rewarding them.",
+   "source": "Guy Gavriel Kay, '6 Books I Love', cbc.ca",
+   "url": "https://brightweavings.com/6-books-i-love/",
+   "quote": "flatly refuses to talk down to her readers",
+   "page": "entry on the Lymond Chronicles"
+  },
+  {
+   "index": 409,
+   "feature": "other: quarter turn to the fantastic",
+   "claim": "Kay tells The Guardian he steeps himself in a period and then twists it just a little to give himself ethical and creative space.",
+   "source": "Guy Gavriel Kay, quoted by Alison Flood, The Guardian",
+   "url": "https://brightweavings.com/interview-with-alison-flood-for-the-guardian/",
+   "quote": "I steep myself in a period and then I twist it",
+   "page": "later in the article, on El Cid"
+  },
+  {
+   "index": 410,
+   "feature": "other: quarter turn to the fantastic",
+   "claim": "Alison Flood reports that Kay loves one critic's description of his work as history with a quarter-turn to the fantastic; the phrase is the critic's, reported by Flood.",
+   "source": "Alison Flood (reporter's paraphrase), The Guardian",
+   "url": "https://brightweavings.com/interview-with-alison-flood-for-the-guardian/",
+   "quote": "history with a quarter-turn to the fantastic",
+   "page": "middle of the article"
+  },
+  {
+   "index": 411,
+   "feature": "other: real lives not co-opted",
+   "claim": "Kay says he has been calling the current practice an epidemic of co-opting real lives, while declining to criticise writers who do it.",
+   "source": "Guy Gavriel Kay, quoted by Alison Flood, The Guardian",
+   "url": "https://brightweavings.com/interview-with-alison-flood-for-the-guardian/",
+   "quote": "an epidemic of co-opting real lives",
+   "page": "later in the article"
+  },
+  {
+   "index": 412,
+   "feature": "other: competing versions of one story",
+   "claim": "Kay says Children of Earth and Sky has several scenes in which one conversation is described by more than one of the people in it, and that when he switches point of view the conversation is not the same.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "as described by more than one of the people in the conversation",
+   "page": "answer on multiple points of view"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 383,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If I do it right, this use of the fantastic ... causes reader and author to share with each other that we are, indeed, rhyming with the past, not trying to pin the present down with it precisely.",
+   "note": "Raw page fetched (HTTP 200). Quote is a literal substring. Preceding sentence supplies the 'quarter-turn to the fantastic' referent ('What one reviewer called history with a quarter-turn to the fantastic. If I do it right, this use of the fantastic...'). Only nuance: Kay hedges the effect with 'If I do it right', which the claim drops."
+  },
+  {
+   "index": 384,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I want people reading ... and also thinking about ... right now. Not for lessons! I'm offering a story not giving a lecture.",
+   "note": "Raw page. Quote verbatim (curly apostrophe). Both limbs -- readers thinking about their own time, and not-for-lessons/story-not-lecture -- are consecutive sentences in the penultimate section."
+  },
+  {
+   "index": 385,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'm focused on complicating things, multiple ideas, on nuance, on letting readers decide what they find in or take away from a book.",
+   "note": "Raw page, fifth paragraph of Kay's essay. Quote verbatim. Claim omits 'multiple ideas' but adds nothing unsupported."
+  },
+  {
+   "index": 386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we are at risk ... if we are ignorant of the themes of history. That doesn't necessarily mean the minutiae of dates and places, it has to do -- for me -- with patterns, lessons, warnings that can emerge.",
+   "note": "Raw page, answer 2, as the claim's page hint says. Quote verbatim; all three limbs present. Kay frames it negatively ('ignorant of the themes of history'); the claim's 'being alert to' is the same proposition inverted."
+  },
+  {
+   "index": 390,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Children of Earth and Sky was deliberately set up in my mind to be about people who are not important in the scheme of things ... how those grand events can reach down and affect people far away.",
+   "note": "Raw page, answer 5, matching the page hint. Quote verbatim; both limbs are sentences in the same answer."
+  },
+  {
+   "index": 394,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I started thinking about how some parts of the world still carry the hard imprint of what has gone before.",
+   "note": "Raw page ('Letter to the Reader of Ysabel'), penultimate paragraph as hinted. Quote verbatim; Kay's own first-person statement."
+  },
+  {
+   "index": 395,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I believe that grounding has to be so secure that the vast majority of the research does not enter the book except subliminally, or does so very quietly ... or else you get what I hate as a reader, which is the 'info dump'.",
+   "note": "Raw page, in the answer about research for River of Stars. Quote verbatim; every limb (secure grounding, vast majority, subliminal/quiet, info dump he hates as a reader) is in the one sentence."
+  },
+  {
+   "index": 396,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I often find that through the peripheral figures I can achieve my strongest effects, whether of character, emotion, or shaping depth to a setting for the reader.",
+   "note": "Raw page. Quote verbatim. Note the site's own formatting runs the grey-characters question into the previous answer with no break, but the sentence is Kay's and sits in that answer."
+  },
+  {
+   "index": 402,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Now, I don't believe in saying exactly what happens to characters after a novel closes - the ending of every book I've written makes this point.",
+   "note": "Raw page, in the Sharra passage as hinted. Quote verbatim; both limbs in one sentence. Date detail only: the header says the afterword first appeared in the 2004 20th-anniversary edition, and Kay signs it December 2003, so the source label's '(2003)' is the signing date, not the publication date."
+  },
+  {
+   "index": 406,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't write novels inspired by history to offer easy parallels to our own time. That can feel lazy, or glib, or both.",
+   "note": "Raw page (essay headed 'Exile'; the WordPress post title is 'Under Heaven Author's Letter'). Quote verbatim, in the paragraph following the River of Stars discussion, as hinted. The claim's 'because' makes explicit a link the page leaves to adjacency."
+  },
+  {
+   "index": 408,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Dunnett also flatly refuses to talk down to her readers; she makes demands and rewards them - hugely.",
+   "note": "Raw page; the Lymond Chronicles entry, as hinted. Quote verbatim. Page confirms the piece first appeared at cbc.ca in 2016."
+  },
+  {
+   "index": 409,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I steep myself in a period and then I twist it just that little bit to give myself the ethical and creative space that seems to work for me.",
+   "note": "Raw page (BrightWeavings reproduction, headnote: 'originally appeared at theguardian.com ... written by Alison Flood'). Quote verbatim, in the El Cid paragraph as hinted. Claim's 'just a little' paraphrases 'just that little bit'."
+  },
+  {
+   "index": 410,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "One critic described his work as 'history with a quarter-turn to the fantastic' - a phrase Kay loves.",
+   "note": "Raw page. Quote verbatim, in Flood's narration (not in Kay's quoted speech), which is exactly what the claim asserts: the phrase is the critic's, reported by Flood."
+  },
+  {
+   "index": 411,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I've been calling it an epidemic of co-opting real lives ... Though he is careful never to criticise any writer who does.",
+   "note": "Raw page. Quote verbatim in Kay's speech. The second limb is Flood's narration plus Kay's own words ('I have vastly enjoyed a great many books that do not share my view on this'); the article separately notes he will not 'discuss or critique contemporaries'."
+  },
+  {
+   "index": 412,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I have several scenes in this novel where a conversation takes place, as described by more than one of the people in the conversation. When I switch to another character's point of view, the conversation isn't the same.",
+   "note": "Raw LARB page fetched directly (HTTP 200, no paywall). Quote verbatim, in the answer to the question about multiple points of view, as hinted. 'This novel' is Children of Earth and Sky, the interview's subject."
+  }
+ ]
+}

@@ -1,0 +1,233 @@
+{
+ "name": "martin",
+ "chunk": 1,
+ "claims": [
+  {
+   "index": 315,
+   "feature": "titled POV chapters",
+   "claim": "An editor's first-50 review credits titled POV chapters with removing head-hopping confusion and praises exposition delivered in scene.",
+   "source": "The Editorial Department (Shannon Roberts), 2016",
+   "url": "https://www.editorialdepartment.com/a-game-of-thrones/",
+   "quote": "giving each character a clearly titled chapter solves the problem admirably",
+   "page": ""
+  },
+  {
+   "index": 316,
+   "feature": "fluid lyricism without tedium",
+   "claim": "Description flows without Tolkien-style descriptive excess and each character keeps a distinct voice.",
+   "source": "Literary Analysis, 2012-06-07",
+   "url": "https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/",
+   "quote": "fluid lyricism, without ever lapsing into Tolkienesque descriptive tedium",
+   "page": ""
+  },
+  {
+   "index": 317,
+   "feature": "name as tone promise",
+   "claim": "Sanderson's lecture uses 'Bran Stark' in chapter one as a tone promise of bleakness.",
+   "source": "Humanities Notebook (Heba Hallak), 2026-04-15",
+   "url": "https://humanitiesnotebook.substack.com/p/in-class-with-brandon-sanderson",
+   "quote": "is a tone promise",
+   "page": ""
+  },
+  {
+   "index": 318,
+   "feature": "OED-dated archaisms",
+   "claim": "Ser, southron, and craven date to 1451, 1488, and 1400; turncloak is an archaic-sounding remake of turncoat; 'butt' and 'ass' jar.",
+   "source": "OUPblog (Adam Pulford), 2012-04-16",
+   "url": "https://blog.oup.com/2012/04/words-are-wind-game-of-thrones-language/",
+   "quote": "Martin's archaic-sounding amendment of turncoat",
+   "page": ""
+  },
+  {
+   "index": 319,
+   "feature": "regional idiom and proverb",
+   "claim": "Different cultures are marked by colloquial phrases and aphorisms such as 'words are wind'.",
+   "source": "OUPblog (Adam Pulford), 2012-04-16",
+   "url": "https://blog.oup.com/2012/04/words-are-wind-game-of-thrones-language/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 320,
+   "feature": "sparing 1400s diction, modern syntax",
+   "claim": "Martin uses accurate late-Middle-English words sparingly, avoids thou/thee, and keeps modern syntax.",
+   "source": "U of Saskatchewan HEL blog (Just), 2018-01-22",
+   "url": "https://sites.usask.ca/helus/2018/01/22/old-fashioned-english/",
+   "quote": "sweet spot between Modern and Middle English",
+   "page": ""
+  },
+  {
+   "index": 321,
+   "feature": "lexical cohesion and register by class",
+   "claim": "Repeated insult words bind paragraphs, 'without' means outside, and m'Lord versus my Lord marks class; lexical density about 4–4.5 and a sixth-grade readability index.",
+   "source": "A.R. Rivera, 'A Brief Linguistic Exam', 2023-09-10",
+   "url": "https://authorarrivera.com/2023/09/10/a-brief-linguistic-exam-of-a-song-of-ice-and-fire/",
+   "quote": "Terms like 'elsewise'",
+   "page": ""
+  },
+  {
+   "index": 322,
+   "feature": "adverb avoidance",
+   "claim": "Text-mining across four series finds Martin uses -ly adverbs least and reads at about age ten by readability index.",
+   "source": "Winter Is Coming (Dan Selcke) on Dimitris Spathis, 2015-09-24",
+   "url": "https://winteriscoming.net/2015/09/24/check-out-this-awesome-linguistic-analysis-of-a-song-of-ice-and-fire/",
+   "quote": "George R.R. Martin hates adverbs",
+   "page": ""
+  },
+  {
+   "index": 323,
+   "feature": "measured readability and sentence length",
+   "claim": "AGOT scores Flesch Reading Ease 87, has 851 sentences over 30 words, 3.39% slow-paced paragraphs, and near-equal standard versus alternative dialogue tags with adverbs in tags flagged.",
+   "source": "AutoCrit, 'What's the Score? A Game of Thrones'",
+   "url": "https://www.autocrit.com/whats-the-score-a-game-of-thrones/",
+   "quote": "Flesch Reading Ease score of 87",
+   "page": ""
+  },
+  {
+   "index": 324,
+   "feature": "overused archaisms (criticism)",
+   "claim": "'Mummer's farce' recurs constantly and 'jape' reads as a pretentious substitute for joke; prose 'borders on serviceable'.",
+   "source": "The Erstwhile Philistine (Asher Gelzer-Govatos), 2012-03-21",
+   "url": "https://theerstwhilephilistine.wordpress.com/2012/03/21/the-literary-crimes-of-george-r-r-martin/",
+   "quote": "at least ten times in every book",
+   "page": ""
+  },
+  {
+   "index": 325,
+   "feature": "formulaic tic speech (criticism)",
+   "claim": "Hodor's and Reek's repeated lines become formula rather than characterisation.",
+   "source": "The Erstwhile Philistine (Asher Gelzer-Govatos), 2012-03-21",
+   "url": "https://theerstwhilephilistine.wordpress.com/2012/03/21/the-literary-crimes-of-george-r-r-martin/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 326,
+   "feature": "sex-scene prose (criticism)",
+   "claim": "Sex scenes fixate on nipple size and colour and crude similes, unlike his assured violence and heraldry.",
+   "source": "Portland Mercury (Streckert), 2014-04-02",
+   "url": "https://www.portlandmercury.com/General/2014/04/02/12111961/the-erotica-of-westeros",
+   "quote": "not good at writing about sex",
+   "page": ""
+  },
+  {
+   "index": 327,
+   "feature": "food catalogues",
+   "claim": "Feasts are rendered as course-by-course lists with taste and smell, and appetite indexes a character's mental state.",
+   "source": "Gizmodo (Katharine Trendacosta), 2017",
+   "url": "https://gizmodo.com/the-15-best-food-descriptions-in-a-song-of-ice-and-fire-1796908714",
+   "quote": "flavored with fear",
+   "page": ""
+  },
+  {
+   "index": 328,
+   "feature": "food as belonging and class",
+   "claim": "Meal descriptions mark inclusion, class, and culture, with sensory verbs carrying the emotion.",
+   "source": "Cultura Colectiva (Carrasco), 2019-04-09",
+   "url": "https://culturacolectiva.com/en/art/books/game-of-thrones-food-analysis-george-rr-martin/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 329,
+   "feature": "chapter rewriting (Martin's words)",
+   "claim": "Martin describes loving a Tyrion chapter, then rereading it and deciding it failed.",
+   "source": "Narrative Looking Glass (Matt), 2026-01",
+   "url": "https://narrativelookingglass.substack.com/p/george-rr-martin-brandon-sanderson",
+   "quote": "I wrote a Tyrion chapter I just loved",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 315,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "While shifting POV can occasionally lead to confusion, giving each character a clearly titled chapter solves the problem admirably.",
+   "note": "Quote exact. Exposition-in-scene praise also present: 'By giving us needed information in the form of dialogue and scenes, Martin holds our attention.' Byline Shannon Roberts confirmed; piece marks AGOT's 20th anniversary (=2016), though the page footer stamp reads 2024-01-07."
+  },
+  {
+   "index": 316,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "accounts of the mythic world unfold with fluid lyricism, without ever lapsing into Tolkienesque descriptive tedium",
+   "note": "Quote exact. Distinct-voice half confirmed in the same paragraph: Martin gives 'each character their own unique voice'. Date 2012-06-07 matches the URL path."
+  },
+  {
+   "index": 317,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "naming his viewpoint character Bran Stark in the first chapter of A Game of Thrones is a tone promise. The name Stark implies a bleak and grim mood",
+   "note": "Quote exact and the bleakness gloss is explicit. Byline Heba Hallak, Apr 15 2026, confirmed on the page; it reports Sanderson's BYU lecture."
+  },
+  {
+   "index": 318,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which is Martin's archaic-sounding amendment of turncoat",
+   "note": "Quote exact. Every other element confirmed on the page: 'Ser for Sir, Southron for Southern, and craven meaning cowardly all date from 1451, 1488, and 1400 respectively, according to the Oxford English Dictionary', and 'modern-sounding terms such as butt and ass jarring'."
+  },
+  {
+   "index": 319,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "portrayed through a number of colloquial phrases",
+   "note": "No quote was supplied, so substance only. Page: the flavour of the different languages of the seven kingdoms is 'portrayed through a number of colloquial phrases', and '\"Words are wind\" is another aphorism used by the characters'. Page says languages/kingdoms where the claim says cultures."
+  },
+  {
+   "index": 320,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin hits a sweet spot between Modern and Middle English",
+   "note": "Quote exact. Rest confirmed verbatim: 'While choosing not to use Middle English pronouns and using mostly modern syntax, Martin gives A Game of Thrones a historical feel by using accurate 1400s archaic diction'; 'Martin uses these words sparingly'. Author Delane Just, Jan 22 2018."
+  },
+  {
+   "index": 321,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "For instance, terms like \"elsewise\" (A Feast For Crows, p. 2742) could hardly be found in any story set in modern times",
+   "note": "Words match exactly; only the capital T and the single-quote style differ from the page's mid-sentence 'terms like \"elsewise\"'. All four sub-claims confirmed: lexical cohesion via the repeated insult ('repeated five times', 'ties parts of a text'); 'without' in 'the old English meaning \"outside [the wall]\"'; m'Lord vs my Lord by birth; density 'between 4 and 4.5'; 'The ARI score for A Game of Thrones is sixth-grade, or 11-12 years old'."
+  },
+  {
+   "index": 322,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What does this chart tell us? That George R.R. Martin hates adverbs.",
+   "note": "Quote exact. Four series confirmed (LOTR, Harry Potter, Hunger Games, ASOIAF) and 'you only need to be 10 years old to understand A Song of Ice and Fire'. Caveat: the page never says '-ly' adverbs nor the word 'least' - it credits an adverb chart hosted on Spathis' own Medium post."
+  },
+  {
+   "index": 323,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a Game of Thrones comes in with a Flesch Reading Ease score of 87",
+   "note": "Quote exact and all three further figures confirmed: 'a comparatively small 851 sentences containing more than 30 words'; 'A tiny 3.39% of A Game of Thrones is detected as slower in pace'; 'having almost the same number of alternative dialogue tags as we do the standard two is a little alarming'; and a section flagging 'Martin's use of adverbs in dialogue tags'."
+  },
+  {
+   "index": 324,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "seriously, the phrase comes up at least ten times in every book",
+   "note": "Quote exact, about 'mummer's farce'. 'Jape' confirmed: 'Jape, aside from its pretentiousness, is a singularly displeasing word.' The prose verdict is on the page but differently worded and misspelled there: 'Most of the time his prose borders on the servicable' - the claim's 'borders on serviceable' is a paraphrase, not a quotation."
+  },
+  {
+   "index": 325,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Annoying speech mannerisms... sometimes his choices are inexplicable",
+   "note": "No quote was supplied. Page devotes a section to Hodor's one-word dialogue (a mock exchange ending 'HOOOOOOODOOOOOOOOR') and to Reek's rhyme, 'Reek, my name is Reek, it rhymes with [random word]', framing both as mechanical repetition rather than characterisation."
+  },
+  {
+   "index": 326,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "George R.R. Martin is good at writing about violence and heraldry. He is not good at writing about sex.",
+   "note": "Quote exact. Nipples confirmed: 'Nipples of massive girth, darkness, and circumference: Martin is obsessed with them', with 'big dark', 'huge dark', 'fat'/'brown', 'wide pink circles'. Crude similes confirmed: 'Myrish swamp', 'fat pink mast'. Byline Joe Streckert, April 2 2014; note the live URL now redirects to portlandmercury.com/general/the-erotica-of-westeros-12111961/."
+  },
+  {
+   "index": 327,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tonight all the food was flavored with fear",
+   "note": "Quote exact (Martin's line as quoted in the piece). Course-by-course cataloguing confirmed ('All the while the courses came and went... Then came trout fresh from the river'), and the appetite claim is explicit: 'Martin uses people's reaction to food a lot to show state of mind.'"
+  },
+  {
+   "index": 328,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "uses food to establish the emotional states of his characters",
+   "note": "No quote was supplied. Belonging/class confirmed ('a sign of brotherhood, of the sense of fraternity'; Jon as bastard 'not fit to sit in the main hall'), culture confirmed ('Dothraki food, drink, and the way they celebrate tell us quite a bit about them as a group'). 'Sensory verbs' is the analyst's gloss, not the page's wording. Byline note: page credits 'By Andrea Guzman' in the body under poster Isabel Carrasco, translated by Oliver G. Alvar; date April 9 2019 matches."
+  },
+  {
+   "index": 329,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I wrote a Tyrion chapter I just loved... Then I looked at it and said: 'I can't do this, it will change the whole book.'",
+   "note": "Quote exact. The 'reread and decided it failed' half is the page's next clause. Author 'Matt', Jan 30 2026, confirmed on the page; it quotes Martin on The Winds of Winter."
+  }
+ ]
+}

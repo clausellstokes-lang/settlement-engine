@@ -1,0 +1,233 @@
+{
+ "name": "leguin",
+ "chunk": 17,
+ "claims": [
+  {
+   "index": 300,
+   "feature": "withheld information and inference",
+   "claim": "Le Guin praises in Goblin Secrets a haunting quality, a sense of depth, of unspoken further implication in the adventures and the characters.",
+   "source": "Ursula K. Le Guin, blog 52, 'Some Recent Fantasies', 21 May 2012",
+   "url": "https://www.ursulakleguin.com/blog/52-some-recent-fantasies",
+   "quote": "a sense of depth, of unspoken further implication",
+   "page": "paragraph on Goblin Secrets"
+  },
+  {
+   "index": 301,
+   "feature": "place and institution description",
+   "claim": "Le Guin says she likes stories that take the reader quietly into a place and let them do difficult and interesting work with some of the people there.",
+   "source": "Ursula K. Le Guin, blog 52, 'Some Recent Fantasies', 21 May 2012",
+   "url": "https://www.ursulakleguin.com/blog/52-some-recent-fantasies",
+   "quote": "take you quietly into a place and let you do difficult",
+   "page": "paragraph on Kij Johnson"
+  },
+  {
+   "index": 302,
+   "feature": "point of view and distance",
+   "claim": "Le Guin says Homer truly does not take sides, and that this is what permits the story to be tragic.",
+   "source": "Ursula K. Le Guin, blog 31, 'Papa H', 24 July 2011",
+   "url": "https://www.ursulakleguin.com/blog/31-papa-h",
+   "quote": "Homer truly doesn’t take sides",
+   "page": "paragraph 7"
+  },
+  {
+   "index": 303,
+   "feature": "point of view and distance",
+   "claim": "Le Guin says Homer's impartiality is far from dispassionate, the story being a torrent of passionate actions while remaining unprejudiced.",
+   "source": "Ursula K. Le Guin, blog 31, 'Papa H', 24 July 2011",
+   "url": "https://www.ursulakleguin.com/blog/31-papa-h",
+   "quote": "His impartiality is far from dispassionate",
+   "page": "paragraph 6"
+  },
+  {
+   "index": 304,
+   "feature": "withheld information and inference",
+   "claim": "Le Guin says she had put clues into A Wizard of Earthsea without knowing it, and that they led her on into Ged's life.",
+   "source": "Ursula K. Le Guin, interview in Karabatak Magazine, 9th edition, summer 2013",
+   "url": "https://www.ursulakleguin.com/interview-karabatak",
+   "quote": "I had put clues into the book, without knowing it",
+   "page": "answer 6"
+  },
+  {
+   "index": 305,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says the rhythms of a prose work are a very long beat, different from and in a way much coarser than the rhythms of poetry.",
+   "source": "Ursula K. Le Guin in conversation with David Naimon, 'Dictators are Always Afraid of Poets', excerpt from Conversations on Writing (Tin House, 2018), Literary Hub",
+   "url": "https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/",
+   "quote": "long beat, the rhythms of a prose work",
+   "page": "the exchange about Virginia Woolf and sound"
+  },
+  {
+   "index": 306,
+   "feature": "civic record register",
+   "claim": "Rich Horton reports that the ethnographic sections of Always Coming Home, while intellectually interesting, are often a struggle to read.",
+   "source": "Rich Horton, \"Review: Always Coming Home, by Ursula K. Le Guin\", Strange at Ecbatan blog, 24 April 2024",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "quote": "intellectually intriguing, but, really, often a struggle to read",
+   "page": "body, final verdict paragraph"
+  },
+  {
+   "index": 307,
+   "feature": "other: archival register as a whole book",
+   "claim": "Horton describes Always Coming Home as reading to a great extent like a writer deciding to include all her notes.",
+   "source": "Rich Horton, Strange at Ecbatan blog, 24 April 2024",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "quote": "like a writer deciding to include all her notes",
+   "page": "body, second half"
+  },
+  {
+   "index": 308,
+   "feature": "other: whole-work judgment",
+   "claim": "Horton judges Always Coming Home more impressive than involving.",
+   "source": "Rich Horton, Strange at Ecbatan blog, 24 April 2024",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "quote": "more impressive than it is involving",
+   "page": "final verdict paragraph"
+  },
+  {
+   "index": 309,
+   "feature": "civic record register",
+   "claim": "Horton records that Le Guin placed a roughly hundred-page appendix called The Back of the Book at the end of the novel.",
+   "source": "Rich Horton, Strange at Ecbatan blog, 24 April 2024",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "quote": "in the final section, some 100 pages",
+   "page": "body, second paragraph"
+  },
+  {
+   "index": 310,
+   "feature": "point of view and distance",
+   "claim": "Horton identifies the Pandora sections as the voice of the author or the future anthropologist recording the material.",
+   "source": "Rich Horton, Strange at Ecbatan blog, 24 April 2024",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "quote": "a stand in for the author or the future anthropologist",
+   "page": "body"
+  },
+  {
+   "index": 311,
+   "feature": "civic record register",
+   "claim": "Scott Manley Hadley describes Always Coming Home as a novel that masquerades as anthropology, a study of a people.",
+   "source": "Scott Manley Hadley, \"Always Coming Home by Ursula Le Guin\", Triumph Of The Now, 13 July 2019",
+   "url": "https://triumphofthenow.com/2019/07/13/always-coming-home-by-ursula-le-guin/",
+   "quote": "a novel that masquerades as anthropology, a study of a people",
+   "page": "review body"
+  },
+  {
+   "index": 312,
+   "feature": "place and institution description",
+   "claim": "Hadley reports that Le Guin includes third-person essays on Kesh culture covering how they measure time and how they draw maps.",
+   "source": "Scott Manley Hadley, Triumph Of The Now, 13 July 2019",
+   "url": "https://triumphofthenow.com/2019/07/13/always-coming-home-by-ursula-le-guin/",
+   "quote": "how they measure time, how they draw maps",
+   "page": "review body"
+  },
+  {
+   "index": 313,
+   "feature": "other: non-narrative form",
+   "claim": "Hadley calls Always Coming Home fiction without being storytelling, though it contains many stories.",
+   "source": "Scott Manley Hadley, Triumph Of The Now, 13 July 2019",
+   "url": "https://triumphofthenow.com/2019/07/13/always-coming-home-by-ursula-le-guin/",
+   "quote": "It is fiction without being storytelling, though it contains many",
+   "page": "closing paragraphs"
+  },
+  {
+   "index": 314,
+   "feature": "place and institution description",
+   "claim": "Cat Eldridge contrasts the two worlds: Tolkien has virtually no ethnographic detail where Le Guin has no history.",
+   "source": "Cat Eldridge, review of Always Coming Home, A Green Man Review",
+   "url": "https://agreenmanreview.com/books/ursula-k-le-guins-always-coming-home/",
+   "quote": "Tolkien’s world has virtually no ethnographic detail",
+   "page": "review body"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a haunting quality, a sense of depth, of unspoken further implication",
+   "note": "ursulakleguin.com/blog/52 fetched live (HTTP 200, raw HTML). Goblin Secrets paragraph: 'And there's something else to it that I can't put words to: a haunting quality, a sense of depth, of unspoken further implication, in the adventures and the characters, which is its real magic.' Quote exact; book, author (William Alexander) and every limb supported."
+  },
+  {
+   "index": 301,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stories that take you quietly into a place",
+   "note": "Same page, Kij Johnson section: 'I like stories that take you quietly into a place and let you do difficult and interesting work with some of the people there.' Quote exact; the claim only shifts 'you' to third person. Said of 'The Man Who Bridged the Mist'."
+  },
+  {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Homer truly doesn't take sides, and so he permits the story to be tragic",
+   "note": "ursulakleguin.com/blog/31 fetched live (HTTP 200). Exact: 'But Homer truly doesn't take sides, and so he permits the story to be tragic.' Both limbs supported. Minor: the sentence sits in the sixth body paragraph, not the seventh as the page field says; that is a locator, not a claim limb."
+  },
+  {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His impartiality is far from dispassionate; the story is a torrent of passionate actions",
+   "note": "Same page: 'His impartiality is far from dispassionate; the story is a torrent of passionate actions, generous, despicable, magnificent, trivial. But it is unprejudiced.' All three limbs (far from dispassionate, torrent of passionate actions, unprejudiced) present verbatim."
+  },
+  {
+   "index": 304,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I had put clues into the book, without knowing it, that led me on into Ged's life",
+   "note": "ursulakleguin.com/interview-karabatak fetched live (HTTP 200); header confirms 'Karabatak Magazine, 9th edition, summer issue, 2013'. Answer 6 (as the page field claims): 'I had no idea, when I wrote A Wizard of Earthsea... But I had put clues into the book, without knowing it, that led me on into Ged's life.' Quote exact, the Earthsea referent explicit."
+  },
+  {
+   "index": 305,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's a very long beat, the rhythms of a prose work",
+   "note": "lithub.com fetched live (HTTP 200); page carries 'From Ursula K. Le Guin: Conversations on Writing. Used with permission of Tin House Books. Copyright 2018.' In the Woolf/sound exchange with David Naimon: 'When you're talking about the sound in the rhythm of prose, it is so different from poetry, because it's in a way much coarser. It's a very long beat, the rhythms of a prose work.' The quote string matches contiguously despite the page's stray letter-spacing artifacts; all three limbs (very long beat, different from poetry, much coarser) supported."
+  },
+  {
+   "index": 306,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "intellectually intriguing, but, really, often a struggle to read",
+   "note": "rrhorton.blogspot.com fetched live (HTTP 200); byline Rich Horton, dated Wednesday, April 24, 2024. Final-verdict paragraph: 'The ethnographic bits -- and they are not just \"bits\" -- are intellectually intriguing, but, really, often a struggle to read.' Quote exact; 'intellectually interesting' in the claim paraphrases 'intellectually intriguing' and is the same limb."
+  },
+  {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It does read, to a great extent, like a writer deciding to include all her notes",
+   "note": "Same page: 'It does read, to a great extent, like a writer deciding to include all her notes.' Quote exact; the 'to a great extent' hedge that the claim carries is the page's own."
+  },
+  {
+   "index": 308,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more impressive than it is involving",
+   "note": "Same page, final verdict: 'It is in the end a novel (or \"book\" or \"construct\" or whatever) that is more impressive than it is involving.' Quote exact and the whole claim is that sentence."
+  },
+  {
+   "index": 309,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in the final section, some 100 pages, called 'The Back of the Book'",
+   "note": "Same page: 'she literally does -- in the final section, some 100 pages, called \"The Back of the Book\".' Quote exact; ~100 pages, the title, and the end-of-book position all supported. Flagging the wording: Horton calls it 'the final section', never 'appendix' -- the claim's word is a paraphrase of a section of notes at the book's end, not an added fact. Locator drift: it is the fourth body paragraph, not the second."
+  },
+  {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Pandora', a stand in for the author or the future anthropologist who is recording all this data",
+   "note": "Same page: 'There are also snippets from the point of view of \"Pandora\", a stand in for the author or the future anthropologist who is recording all this data.' Quote exact; 'voice' in the claim renders the page's 'point of view'/'stand in', and 'recording the material' renders 'recording all this data'."
+  },
+  {
+   "index": 311,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a novel that masquerades as anthropology, a study of a people",
+   "note": "triumphofthenow.com fetched live (HTTP 200); byline scottmanleyhadley, July 13, 2019. 'Always Coming Home is a novel that masquerades as anthropology, a study of a people living in what remains of California's Napa Valley a thousand years or so into the future.' Quote exact, both limbs supported."
+  },
+  {
+   "index": 312,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "includes third person essays about their culture: how they measure time, how they draw maps",
+   "note": "Same page: 'Le Guin supplies interviews with Kesh archivists/historians and includes third person essays about their culture: how they measure time, how they draw maps, what is their relationship with \"the City of Mind\"...' Quote exact; 'third-person essays', 'Kesh culture', and both named topics all present."
+  },
+  {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is fiction without being storytelling, though it contains many stories within itself",
+   "note": "Same page, closing stretch: 'The novel is a speculative, post-anthropocene text. It is fiction without being storytelling, though it contains many stories within itself.' Quote exact; the 'It' is Always Coming Home, named throughout the review."
+  },
+  {
+   "index": 314,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's world has virtually no ethnographic detail, while Le Guin's has no history",
+   "note": "agreenmanreview.com fetched live (HTTP 200); byline Cat Eldridge, publisher of Green Man Review. 'This is the antithesis of Tolkien's Lord of the Rings. Tolkien's world has virtually no ethnographic detail, while Le Guin's has no history.' Quote exact (curly apostrophe matches); the contrast limb is the same sentence's second half."
+  }
+ ]
+}

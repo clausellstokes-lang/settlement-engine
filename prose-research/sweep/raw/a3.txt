@@ -1,0 +1,227 @@
+ 
+ Evaluating Quality of Gaming Narratives Co-created with AI 
+ Report GitHub Issue 
+ × 
+ Title: 
+ Content selection saved. Describe the issue below: 
+ Description: 
+ Submit without GitHub 
+ Submit in GitHub 
+ arXiv is now an independent nonprofit! 
+ Learn more 
+ × 
+ Back to arXiv 
+ Why HTML? 
+ Report Issue 
+ Back to Abstract 
+ Download PDF 
+ Abstract 
+ I Introduction 
+ II Usage of LLMs for story content in games 
+ III Proposed Framework to Assess Story Quality 
+ III-A Initial list of story quality dimensions 
+ III-B Expert Validation via Delphi Method 
+ III-C Player Satisfaction and the Kano Mapping 
+ IV The Results 
+ V Discussion and Future Work 
+ V-A Emergent dimensions: Voice and Genre Alignment 
+ References 
+ License: CC BY 4.0
+arXiv:2509.04239v1 [cs.AI] 04 Sep 2025 
+ Evaluating Quality of Gaming Narratives Co-created with AI 
+ Arturo Valdivia
+ Affiliation:  Play, Culture and AI Section 
+ IT University of Copenhagen
+ Copenhagen, Denmark 
+ arturo@valdivia.xyz
+ Paolo Burelli
+ Affiliation:  Play, Culture and AI Section 
+ IT University of Copenhagen
+ Copenhagen, Denmark 
+ pabu@itu.dk
+ Abstract 
+ This paper proposes a structured methodology to evaluate AI-generated game narratives, leveraging the Delphi study structure with a panel of narrative design experts. Our approach synthesizes story quality dimensions from literature and expert insights, mapping them into the Kano model framework to understand their impact on player satisfaction. The results can inform game developers on prioritizing quality aspects when co-creating game narratives with generative AI. 
+ Index Terms:  Game Narrative Design, Large Language Models, Quality Assurance
+ I Introduction 
+ While generative AI has surged into public and research consciousness following the release of systems like ChatGPT, video games have a longer tradition of using AI techniques to generate content that would otherwise be authored by human designers. This tradition is well established in the field of Procedural Content Generation , which encompasses a range of methods for algorithmically creating game elements such as levels, characters, quests, and storylines  [ 1 ] . However, the advent of Large Language Models (LLMs) has introduced new levels of sophistication and adaptability to the co-creation of story content, enabling systems that can respond more flexibly to player input, adapt to context, and simulate human-like narrative reasoning. 
+ Despite its promise, it could be argued that the development of AI-assisted narrative generation has outpaced game developers' ability to ensure consistent quality across all LLM-generated outputs. In some cases, poorly generated dialogue or incoherent narrative arcs may disrupt player immersion or actively harm player experience—undermining the very engagement such systems are designed to foster. This quality gap becomes especially critical in story-driven games, where narrative is the primary differentiator, and in experiences targeted at sensitive audiences such as children ( e.g. , games like YOLI   [ 2 ] ). Even with well-crafted prompts, the quality of the generated content can vary unpredictably, leading to results that are unconvincing, repetitive, or misaligned with the desired tone or character development. Consequently, ensuring the acceptability of LLM-generated narrative output has become a high-stakes concern for game developers and narrative designers. 
+ In this context, the present work aims to propose a framework to systematically evaluate the quality of gaming narratives co-created with AI. This framework can help game developers to identify what story quality dimensions are most relevant for LLM-generated narratives in their games, and anticipating how do these dimensions map to player satisfaction. 
+ II Usage of LLMs for story content in games 
+ A growing body of research has explored the use of LLMs to generate in-game dialogue, particularly for Non-player Characters (NPCs), focusing on aspects such as context-awareness  [ 3 ] , narrative coherence  [ 4 ] , and character personality  [ 5 ] , with efforts also targeting stylized or story-focused dialogue  [ 6 ] . These systems have been used both within games and in external community settings, such as Discord, where NPCs interact with players in ongoing storylines  [ 7 ] . Results from these studies show that LLM-generated dialogue can enhance player experience, especially when the models are contextually grounded or guided by structured design frameworks  [ 8 ] ; although, human-authored dialogue often remains preferred in some contexts  [ 9 ] . 
+ Beyond dialogue, LLMs are also being employed to co-create broader narrative structures, including story arcs and quests. Research has examined the use of LLMs in generating interactive stories  [ 10 ] , procedural quests  [ 8 ] , and complete story games  [ 11 ] , with some projects even characterizing such games as "AI-native", i.e. , games in which generative AI fundamentally shapes gameplay  [ 10 ] . These applications offer both promise and challenge. Although players often appreciate the increased flexibility and personalization enabled by AI-generated content, concerns remain about coherence, consistency, and unintended bias in story outcomes  [ 12 ] , with some studies identifying trends toward overly positive or uninspired endings  [ 13 ] , or uneven output quality across sessions  [ 14 ] . 
+ One pressing question for game teams is: How can we reliably evaluate the quality of AI-generated narrative content, especially in real-time, where a human narrative designer cannot intervene? 
+A natural candidate is the technique known as LLM-as-a-Judge , where a second LLM is prompted to evaluate outputs generated by another model. This approach has gained traction due to its scalability and promising correlation with human judgments in creative tasks like storytelling, provided an appropriate prompt design  [ 15 , 16 ] . However, it raises a second, equally important question: What should such a judge evaluate? In practice, unguided evaluations often produce unreliable assessments or overly generic feedback. 
+ III Proposed Framework to Assess Story Quality 
+ To ensure narrative quality in LLM-generated stories, we propose a structured evaluation framework involving three stages. First, compiling a list of variables that may have an impact on the quality of the story —we refer to these variables as story quality dimensions . Second, validating the relevance and exhaustiveness of this list through a Delphi study   [ 17 ] leveraging a panel of experts on narrative design for games and other more technical game practitioners actively engaged in the generation of stories with LLMs. Third, classifying the quality dimensions in one of the different requirement types ( e.g. , " Must-have " or " Indifferent ") established in the Kano map  [ 18 ] . We develop each of these stages in the following sections. 
+ Fig. 1: Illustration of the proposed framework to evaluate story quality. 
+ III-A Initial list of story quality dimensions 
+ As a starting point for compiling a comprehensive list of story quality dimensions (SQDs) — i.e. , variables that may have an impact on the quality of the story— we utilize the systematic literature review conducted by  [ 15 ] , which identified a list of twenty-three common dimensions used for evaluating story quality. Figure 2 contains the list and description of these twenty-three SQDs. 
+ The SQDs outlined in Figure 2 serve as overarching categories that encompass various aspects of story quality. Moreover, by drilling down to a second-order level, we can identify the specific factors —or, sub-dimensions — that contribute to each SQD's overall impact on the story. For instance, in the case of the Surprise dimension, the authors in  [ 19 ] identify 7 sub-dimensions that make a well-made surprise. These sub-dimensions include for example Divergence (the
+magnitude of the knowledge revision caused by the reveal) and Suddenness (the speed at which the audience's understanding shifts in response to a new revelation). In this work, however, we focus the analysis exclusively on the first-order SQDs. 
+ It is also worth noting at this point that for some SQDs, there are known quantitative evaluation methods. For instance, in the case of the Grammaticality dimension, the authors in  [ 20 ] employ -regularized linear regression to learn a model of sentence grammaticality from various linguistic features. Their results suggest a strong agreement with the assessment made by human expert annotators. The evaluation —whether quantitative or qualitative— of the different SQDs is considered outside the scope of this work. 
+ III-B Expert Validation via Delphi Method 
+ To validate and refine the list of story quality dimensions, we employ a Delphi study . In this section, we primarily follow the framework outlined by  [ 17 ] to introduce the methodology. A Delphi study is a structured, iterative process designed to gather and distill knowledge from a panel of experts through rounds of questionnaires and controlled feedback. This approach aims to generate reliable and creative insights or to produce sustainable information for decision-making, making it especially well-suited to exploratory studies in domains with limited empirical data. 
+ Delphi studies are inherently iterative and typically proceed through multiple rounds to achieve consensus. In each round, participants anonymously provide their opinions via questionnaires. Researchers then collect, synthesize, and return feedback that includes aggregated group responses alongside individualized reflections. This controlled feedback mechanism enables participants to refine their perspectives in light of the broader panel's input, fostering convergence toward a shared understanding or consensus. Iterations are typically concluded upon observing minimal changes in responses between successive rounds. Anonymity is a crucial element of this process, minimizing the influence of dominant individuals, reducing biases and social pressures, and encouraging candid self-expression and self-correction. 
+ The selection of the expert panel is another critical component. Experts are typically geographically dispersed and chosen for their deep knowledge and practical experience in the relevant domain. A diverse panel ensures a breadth of perspectives, while careful documentation of expert profiles allows readers to assess the credibility and representativeness of the findings. For this study, we engaged a panel of experts in narrative design for games and other technical game practitioners actively working with LLM-generated stories. These experts come from a range of contexts, including AAA studios, top-grossing free-to-play titles, and indie developers. Our panel is distributed across Europe and the United States and has a balanced gender representation. We highlight here that our panel size of experts is within the methodological recommendations made by  [ 21 ] . 
+ Among the various forms of Delphi studies, the ranking-type Delphi is particularly well-suited to our work. This variant is structured to reach group consensus on the relative importance of a set of issues and typically proceeds through three stages: brainstorming to identify relevant factors, narrowing down the initial list, and ranking the refined items to identify priorities and consensus. In our study, rather than simply assigning ordinal ranks to the SQDs, experts are asked to categorize each item within one of the requirement types of the Kano map , as described in the next section. 
+ III-C Player Satisfaction and the Kano Mapping 
+ To understand how the identified dimensions of the quality of the story influence the reader's satisfaction, we employ principles from the Kano model   [ 18 ] . Originally developed for customer requirement analysis, the Kano model provides a structured framework for examining how the presence or absence of specific attributes affects customer satisfaction —or, in our case, player satisfaction . This makes it particularly relevant for our work, as it allows us to move beyond identifying dimensions of story quality to understanding their impact on player experience. 
+ The model uses functional (the feature is present) and dysfunctional (the feature is absent) questions to evaluate the attributes. Based on participants' responses to these paired questions, attributes (here corresponding to story quality dimensions) can be classified into one of the Kano categories : 
+ • 
+ Delighter: Attributes that significantly increase satisfaction when present but do not cause dissatisfaction when absent. These often represent unexpected positive features. 
+ • 
+ Performance: Attributes whose presence leads to satisfaction and whose absence results in dissatisfaction. Satisfaction is proportional to the performance of these attributes. 
+ • 
+ Must-have: Attributes that are considered basic expectations. Their absence or poor performance results in significant dissatisfaction, but their presence does not notably increase satisfaction. 
+ • 
+ Indifferent: Attributes that neither increase nor decrease satisfaction. Participants are neutral towards these factors. 
+ • 
+ Reverse: Attributes that cause dissatisfaction when present and satisfaction when absent. These indicate features that are actively disliked. 
+ In our study, applying the Kano model framework allows us to link the quality dimensions of the story with their potential effects on the satisfaction of the player. Rather than simply ranking these dimensions, our approach involves asking experts to classify each dimension within one of the Kano categories. This classification provides a nuanced understanding of how different aspects of story quality contribute to overall player experience, offering a more structured and quantifiable perspective on the relative importance of each dimension. 
+ IV The Results 
+ Figure 2 summarizes the results of our study. The experts participating in this study were asked to rank the importance of each Story Quality Dimension using a Likert scale from 1 to 5, where 1 means " Not important at all " and 5 means " Critically important ". 
+ In this first round of the Delphi study, none of the twenty-three Story Quality Dimensions (SQDs) received a low median score below 3.0, indicating that no dimension was considered " Not important at all " or " Slightly important ". Furthermore, 78% of the SQDs had a median importance score of at least 3.5, placing most SQDs at least as " Very important ", with 26% of them receiving a median importance score above 4.5, corresponding to " Critically important ". 
+ On the other hand, we observe that more than half (57%) of SQDs are expected to be in the " One-dimensional " category of the Kano mapping, meaning that player satisfaction is expected to be proportional to the level at which the game story is able to perform in each of these dimensions. Additionally, 26% SQDs were classified as " Most-haves ", 13% as " Attractive ", and only one SQD was classified as " Indifferent ". 
+ Altogether, these results provide evidence in favor of the relevance of the initial list of SQDs considered for this study. 
+ V Discussion and Future Work 
+ From this first round of the Delphi study, we conclude that the initial list of twenty-three Story Quality Dimension is relevant, and it can be used to inform game developer's prioritization when it comes to decide which aspects of quality should be ensured in the stories generated partially or fully using AI.
+An added value from this first round is that feedback gathered from our expert panel provided valuable insights with the potential to extend SQDs beyond the initial list identified by  [ 15 ] . Notably, experts emphasized the importance of two additional dimensions that had not been explicitly considered in the earlier stages of our study: voice and genre alignment . 
+ V-A Emergent dimensions: Voice and Genre Alignment 
+ First, experts noted that while " Naturalness " was included as a dimension, it did not fully capture the nuanced aspects of voice or tone . According to our experts, a distinctive and compelling narrative voice is a critical marker of story quality, distinct from plot or character development. This voice shapes the reader's engagement and can distinguish a high-quality story from one that is merely functional. As explicitly highlighted by one expert, " a good writer should be able to create a unique and compelling voice outside of character and plot elements ". Based on this input, we recognized voice as an independent dimension, classified by the expert as both important and unexpected when present—a marker of particularly high-quality narratives. 
+ Second, experts raised concerns about the degree to which the story aligns with, subverts, or engages with genre conventions. They argued that genre alignment is a fundamental dimension of quality, particularly in contexts where expectations around genre play a critical role in shaping reader satisfaction. For instance, a story that fails to adhere to or meaningfully challenge the tropes of its genre, such as producing a hard-boiled detective story when a fantasy narrative is requested, was identified as a significant quality failure, regardless of technical competence. As such, genre alignment emerged as a "must-be" requirement for the readers. 
+ By incorporating voice and genre alignment as distinct dimensions, we expand the evaluative framework to better capture the expectations and nuanced assessments of narrative experts. 
+ In a forthcoming paper, we conduct a second round of this Dephi study, and we complement it with large scale survey aiming at capturing players' preferences (in the sense of Kano) on a specific game genre. 
+ Fig. 2: Results from the first round of a Delphi study. The score reflects the median score obtained by surveying our panel of experts. The importance of each Story Quality Dimension is given in a Likert scale from 1 to 5, where 1 means "Not important at all" and 5 means "Critically important". The last column shows the predicted Kano category of player satisfaction. 
+ Acknowledgment 
+ We would like to thank all the experts who participated in this study for the time they generously devoted to completing the surveys and for all the feedback provided during the interviews. 
+ References 
+ [1] 
+M. J. Nelson, N. Shaker, and J. Togelius, Procedural Content Generation
+in Games . Springer Cham, 2016.
+ [2] 
+"Yoli games," YOLI ApS, May 2025, accessed: 2025-05-24. [Online]. Available:
+https://www.playyoli.com
+ [3] 
+L. M. Csepregi, "The effect of context-aware llm-based npc conversations on
+player engagement in role-playing video games," 2021, unpublished
+manuscript.
+ [4] 
+N. Akoury, Q. Yang, and M. Iyyer, "A framework for exploring player
+perceptions of llm-generated dialogue in commercial video games," in
+ Findings of the Association for Computational Linguistics: EMNLP 2023 ,
+2023, pp. 2295–2311.
+ [5] 
+G. L. Latouche, L. Marcotte, and B. Swanson, "Generating video game scripts
+with style," in Proceedings of the 5th Workshop on NLP for
+Conversational AI (NLP4ConvAI 2023) , 2023, pp. 129–139.
+ [6] 
+M. Müller-Brockhausen, G. Barbero, and M. Preuss, "Chatter generation through
+language models," in 2023 IEEE Conference on Games (CoG) . IEEE, 2023, pp. 1–6.
+ [7] 
+Y. Sun, H. Wang, P. M. Chan, M. Tabibi, Y. Zhang, H. Lu, Y. Chen, C. H. Lee,
+and A. Asadipour, "Fictional worlds, real connections: Developing community
+storytelling social chatbots through llms," 2023.
+ [8] 
+T. Ashby, B. K. Webb, G. Knapp, J. Searle, and N. Fulda, "Personalized quest
+and dialogue generation in role-playing games: A knowledge graph- and
+language model-based approach," in Proceedings of the 2023 CHI
+Conference on Human Factors in Computing Systems . ACM, 2023, article 290.
+ [9] 
+N. Akoury, R. Salz, and M. Iyyer, "Towards grounded dialogue generation in
+video game environments," 2023.
+ [10] 
+Y. Sun, Z. Li, K. Fang, C. H. Lee, and A. Asadipour, "Language as reality: A
+co-creative storytelling game experience in 1001 nights using generative
+ai," in Proceedings of the AAAI Conference on Artificial Intelligence
+and Interactive Digital Entertainment , vol. 19, 2023, pp. 425–434.
+ [11] 
+Q. R. Yong and A. Mitchell, "From playing the story to gaming the system:
+Repeat experiences of a large language model-based interactive story," in
+ International Conference on Interactive Digital Storytelling . Springer, 2023, pp. 395–409.
+ [12] 
+M. C. Gursesli, P. Taveekitworachai, F. Abdullah, M. F. Dewantoro, A. Lanata,
+A. Guazzini, V. K. Lê, A. Villars, and R. Thawonmas, "The chronicles of
+chatgpt: Generating and evaluating visual novel narratives on climate change
+through chatgpt," in International Conference on Interactive Digital
+Storytelling . Springer, 2023, pp.
+181–194.
+ [13] 
+P. Taveekitworachai, F. Abdullah, M. C. Gursesli, M. F. Dewantoro, S. Chen,
+A. Lanata, A. Guazzini, and R. Thawonmas, "What is waiting for us at the
+end? inherent biases of game story endings in large language models," in
+ International Conference on Interactive Digital Storytelling . Springer, 2023, pp. 274–284.
+ [14] 
+P. Taveekitworachai, M. C. Gursesli, F. Abdullah, S. Chen, F. Cala,
+A. Guazzini, A. Lanata, and R. Thawonmas, "Journey of chatgpt from prompts
+to stories in games: the positive, the negative, and the neutral," in
+ 2023 IEEE 13th International Conference on Consumer Electronics-Berlin
+(ICCE-Berlin) . IEEE, 2023, pp.
+202–203.
+ [15] 
+D. Yang and Q. Jin, "What makes a good story and how can we measure it? a
+comprehensive survey of story evaluation," arXiv preprint
+arXiv:2408.14622 , 2024.
+ [16] 
+J. Gu, X. Jiang, Z. Shi, H. Tan, X. Zhai, C. Xu, W. Li, Y. Shen, S. Ma, H. Liu,
+S. Wang, K. Zhang, Y. Wang, W. Gao, L. Ni, and J. Guo, "A survey on
+llm-as-a-judge," 2025. [Online]. Available:
+https://arxiv.org/abs/2411.15594
+ [17] 
+E. Ziglio, "The delphi method and its contribution fo decision-making." in
+ Gazing Into the Oracle: The Delphi Method and Its Application to Social
+Policy and Public Health , M. Adler and E. Ziglio, Eds. Jessica Kingsley Publishers, 1996, pp. 3–26.
+ [18] 
+N. Kano, N. Seraku, F. Takahashi, and S. ichi Tsuji, "Attractive quality and
+must-be quality," Journal of The Japanese Society for Quality
+Control , vol. 14, no. 2, pp. 147–156, 1984.
+ [19] 
+P. Chieppe, P. Sweetser, and E. Newman, "Bayesian modelling of the well-made
+surprise," ? , 1984.
+ [20] 
+M. Heilman, A. Cahill, N. Madnani, M. Lopez, M. Mulholland, and J. Tetreault,
+"Predicting grammaticality on an ordinal scale," ? , 1984.
+ [21] 
+H. A. Linstone and M. Turoff, The Delphi Method: Techniques and
+Applications , 2nd ed. Reading, MA:
+Addison-Wesley, 2002.
+ Experimental support, please
+ view the build logs 
+ for errors. Generated by
+ L
+ A 
+ T
+ E 
+ xml 
+ .
+ Instructions for reporting errors 
+ We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+ support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+ methods listed below: 
+ Click the "Report Issue" ( 
+ ) button, located in the page header. 
+ Tip: You can select the relevant text first, to include it in your report. 
+ Our team has already identified the following issues . We appreciate your time reviewing and reporting rendering errors we
+ may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+ should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+ all. 
+ Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion , and welcome developer contributions . 
+ We gratefully acknowledge support from
+ our major funders ,
+ member institutions , ,
+ and all contributors.
+ About 
+ · 
+ Help 
+ · 
+ Contact 
+ · 
+ Subscribe 
+ · 
+ Copyright 
+ · 
+ Privacy 
+ · 
+ Accessibility 
+ · 
+ Operational Status (opens in new tab) 
+ Major funding support from 

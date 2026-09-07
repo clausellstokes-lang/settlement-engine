@@ -1,0 +1,234 @@
+{
+ "name": "wolfe",
+ "chunk": 1,
+ "claims": [
+  {
+   "index": 15,
+   "feature": "first person implies unreliability",
+   "claim": "Any narrator who is a person inside the story is going to be unreliable; five or six honest courtroom witnesses to one event all report different things.",
+   "source": "Person 1998 (Nova Express) interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "the narrator is damn well going to be unreliable",
+   "page": "pp. 168-169 (Fifth Head)"
+  },
+  {
+   "index": 16,
+   "feature": "unattributed dialogue by idiolect and content",
+   "claim": "Speakers in crowded Long Sun scenes are identified without tags by characteristic phrases or mistakes and by each saying only what that character would say in that circumstance.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "saying something that only Maytera Marble would say",
+   "page": "p. 168"
+  },
+  {
+   "index": 17,
+   "feature": "clear structure for complex story",
+   "claim": "The more complex the story, the clearer its narrative structure must be; shaken up, a ten-thousand-part machine is just a box of junk.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "it isn't complex, it's simply confused",
+   "page": "p. 169"
+  },
+  {
+   "index": 18,
+   "feature": "archaic real words, not coinages",
+   "claim": "For the New Sun he refused Tars-Tarkas-style invented names and used archaic names and terms in contexts where the reader can work out what is meant.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "not coining Tars Tarkas type names",
+   "page": "p. 173"
+  },
+  {
+   "index": 19,
+   "feature": "dictionary method for anglicised terms",
+   "claim": "He finds the Latin or Greek word for the thing he needs, then searches unabridged dictionaries on the assumption that someone once anglicised it, often finding an 18th-century citation.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "someone will have anglicised this term",
+   "page": "p. 173"
+  },
+  {
+   "index": 20,
+   "feature": "false-author framing",
+   "claim": "In Fifth Head the story attributed to John V. Marsch is actually written by the shadowchild who replaced him, a trick Wolfe concedes is New Wave.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "not actually written by John V. Marsch",
+   "page": "p. 169"
+  },
+  {
+   "index": 21,
+   "feature": "diversity of registers within one world",
+   "claim": "Wolfe rejects monocultured SF worlds as mental sloth, noting that in one big city people at different social levels already speak almost different languages.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "Mental sloth more than anything else.",
+   "page": "pp. 172-173"
+  },
+  {
+   "index": 22,
+   "feature": "revision turns synopsis into hard facts",
+   "claim": "Wolfe often first writes synopsis and in revision lengthens it, turning generalities into hard facts and making each speaker talk as she talks.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "I turned generalities into hard facts.",
+   "page": ""
+  },
+  {
+   "index": 23,
+   "feature": "show cruelty, never state it",
+   "claim": "He forbids himself sentences like 'Nick was a bad man and a cruel man' and must instead show Nick being bad within the story.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "Easy writing makes damned hard reading.",
+   "page": ""
+  },
+  {
+   "index": 24,
+   "feature": "four-draft ceiling",
+   "claim": "He stops when he can no longer tell whether changes improve the piece, usually after four drafts; a fifth that reverts to the second is a bad sign.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "A fifth draft may find me reverting",
+   "page": ""
+  },
+  {
+   "index": 25,
+   "feature": "dialogue as triple-duty action",
+   "claim": "Dialogue must entertain, forward the plot and characterize the speaker at once, and sound like what that speaker would say to that person then.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "Dialogue is action.",
+   "page": ""
+  },
+  {
+   "index": 26,
+   "feature": "distinct idiolect for minor characters",
+   "claim": "Even unimportant characters must speak differently from one another; students reject this because everybody sounds alike to them.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "The butler mustn't sound like the footman",
+   "page": ""
+  },
+  {
+   "index": 27,
+   "feature": "concrete over abstract",
+   "claim": "Like poetry and song, fiction demands the concrete; he contrasts an abstract shipwreck summary with a ballad naming the ship, the cargo and the shoal.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "fiction demands the concrete",
+   "page": ""
+  },
+  {
+   "index": 28,
+   "feature": "expectation and satisfaction as story engine",
+   "claim": "A short story works by engendering expectations and satisfying them; he told a student to post a sign reading 'I AM GOING TO TELL YOU SOMETHING COOL'.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "engendering expectations and satisfying them",
+   "page": ""
+  },
+  {
+   "index": 29,
+   "feature": "fantasy as the truer register",
+   "claim": "Realistic fiction leaves out far too much of human experience; fantasy is nearer the truth.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "Realistic fiction leaves out far, far too much.",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 15,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"then the narrator is damn well going to be unreliable\"",
+   "note": "Raw PDF text extracted with pypdf from gwern.net copy (Shadows of the New Sun ch.12, p.169). Quote appears word for word. Both limbs on page: narration by 'this person in the story' entails unreliability, and 'Ask any courtroom lawyer about examining five or six different witnesses to the same event. The five or six witnesses are all trying to tell the truth, but they have all seen different things.' 'Honest' = 'all trying to tell the truth'."
+  },
+  {
+   "index": 16,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"she is saying something that only Maytera Marble would say\"",
+   "note": "Raw PDF p.168. Quote verbatim. Interviewer's question supplies the crowded-scene limb ('scenes with a number of characters all speaking in turn without being identified'); Wolfe gives both mechanisms: 'certain characteristic phrases or mistakes, or whatever, that will identify him as the speaker' and the circumstance test ('the speech that... Maytera Marble makes under a certain circumstance, is not the speech that Blood would make')."
+  },
+  {
+   "index": 17,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"or it isn't complex, it's simply confused\"; 10,000 parts shaken = \"a box of junk\"",
+   "note": "Raw PDF p.169. Quote verbatim. Machine limb verbatim too: 'If you have a machine with 10,000 parts and you shake them up in a box, what you have is a box of junk.' One hedge worth recording: Wolfe answers 'It's almost that it has to be', slightly softer than the claim's flat 'must be', but the proposition is his and affirmed."
+  },
+  {
+   "index": 18,
+   "verdict": "PARTIAL",
+   "trueWording": "\"I started out with the idea of not coining Tars Tarkas type names\"",
+   "unsupportedLimb": "the attribution to The Book of the New Sun specifically - the page says only 'I felt in this book I am not going to do that', answering a question about 'both of the Sun works'; neither Wolfe nor the interviewer names the New Sun in this exchange",
+   "note": "Raw PDF p.173-174. Quote verbatim. The method limb is fully supported: 'What's right is using archaic names and archaic terms for things in connections in which it will be clear to the reader what is meant.' Only the book attribution is unsupported by this page."
+  },
+  {
+   "index": 19,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"on the assumption that someone will have anglicised this term as a new word\"",
+   "note": "Raw PDF p.173-174. Quote verbatim. Every limb present: 'looking up the Latin or Greek word that corresponds to something you need a word for, and then going back to unabridged dictionaries...' and 'very often you find that somebody did indeed do that, and it crops up in the Oxford dictionary for a citation in the 18th century or whatever.'"
+  },
+  {
+   "index": 20,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"not actually written by John V. Marsch, but by the shadowchild who has replaced\" him",
+   "note": "Raw PDF p.169. Quote verbatim. New Wave limb doubly supported: Wolfe calls it 'the rather tricky thing, which I suppose is New Wave' and then, after the interviewer supplies the title, 'That's New Wave.' 'Concedes' is fair - he had just minimised his New Wave membership."
+  },
+  {
+   "index": 21,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I think it's mostly laziness. Mental sloth more than anything else.\"",
+   "note": "Raw PDF pp.172-173. Quote verbatim. Big-city limb verbatim: 'If you look at a big city, you discover that, on various levels of society, people are talking in ways that are almost different languages already.' The monoculture-criticism limb is established in the question ('you have in the past criticised sf works that depict monocultured worlds') and affirmed by the answer."
+  },
+  {
+   "index": 22,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I turned generalities into hard facts. I made India talk the way she talks.\"",
+   "note": "Raw HTML fetched from clarkesworldmagazine.com (HTTP 200) and de-tagged locally; no summarizer. Quote verbatim. Synopsis limb: 'Often I tend to write synopsis. When I do, I have to flesh it out in revision.' Lengthening limb: interviewer notes 'you made the second version longer' and Wolfe answers 'It's longer, but it has a lot more meat.'"
+  },
+  {
+   "index": 23,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"'Nick was a bad man and a cruel man.' That's easy. I know I can't say it at all.\"",
+   "note": "Raw Clarkesworld HTML. Quote verbatim, though on the page Wolfe attributes it to another ('Long ago somebody said, \"Easy writing makes damned hard reading.\"') - the claim does not assert authorship, so no limb fails. Show-don't-state limb verbatim: 'I have to show [Nick] being bad and cruel in the context of the story.'"
+  },
+  {
+   "index": 24,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"A fifth draft may find me reverting to the second or the third, and that's a bad sign.\"",
+   "note": "Raw Clarkesworld HTML. Quote verbatim. Stopping-rule limb verbatim: 'There comes a point at which I'm no longer sure that what I'm doing is improving the piece. That's when I stop working on it and send it in. Usually - not always, but usually - I get there after four drafts.' Page says reverting to the second OR THIRD; the claim's 'second' is a subset, not a contradiction."
+  },
+  {
+   "index": 25,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"It must entertain the reader, forward the plot, and characterize the speaker.\"",
+   "note": "Raw Clarkesworld HTML. Quote 'Dialogue is action.' verbatim as its own line. Simultaneity limb: 'All pretty much at the same time.' Naturalness limb verbatim: 'it must sound natural - that is, like something that speaker might say at that time to that person.'"
+  },
+  {
+   "index": 26,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The butler mustn't sound like the footman, even though neither is an important character.\"",
+   "note": "Raw Clarkesworld HTML. Quote verbatim. Student limb verbatim: 'This is one of those truths that students reject out of hand. They reject it because everybody sounds alike. / To them.' - the page's line break makes 'To them' the sting, which the claim renders correctly."
+  },
+  {
+   "index": 27,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Like poetry and song, fiction demands the concrete.\"",
+   "note": "Raw Clarkesworld HTML. Quote verbatim. The contrast is on the page: abstract version 'The vessel, bearing fuel to the New World, met with misfortune shortly before its arrival'; ballad names ship ('the Nightingale'), cargo ('Twenty-one days from Clyde in coal') and shoal ('he drowned on the hard-rock shoal'). All three nouns of the claim check out."
+  },
+  {
+   "index": 28,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"By engendering expectations and satisfying them.\"",
+   "note": "Raw Clarkesworld HTML, answering 'In general terms, how does a short story work?' Quote verbatim. Sign limb verbatim including capitalisation: 'I told a student once to letter a sign and put it where he'd see it when he wrote: \"I AM GOING TO TELL YOU SOMETHING COOL.\"'"
+  },
+  {
+   "index": 29,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Because fantasy is nearer the truth, that's all... Realistic fiction leaves out far, far too much.\"",
+   "note": "Raw Clarkesworld HTML. Quote verbatim. Both limbs in one answer; the human-experience limb is carried by the adjacent 'How true is that story for the bulk of humankind?' Claim's ordering is reversed from the page's, which does not affect support."
+  }
+ ]
+}

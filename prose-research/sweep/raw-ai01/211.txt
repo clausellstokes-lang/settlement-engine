@@ -1,0 +1,203 @@
+ One third of game workers using genAI, but half think it's bad 
+
+ Together, we power an unparalleled network of 220+ online properties covering 10,000+ granular topics, serving an audience of 50+ million professionals with original, objective content from trusted sources. We help you gain critical insights and make more informed decisions across your business priorities.
+ Informa PLC | ABOUT US | INVESTOR RELATIONS | TALENT 
+
+ This site is operated by a business or businesses owned by Informa PLC and all copyright resides with them. Informa PLC's registered office is 5 Howick Place, London SW1P 1WG. Registered in England and Wales. Number 8860726.
+
+ Game Market Research Watch GDC Talks on GDC Vault Attend or Exhibit at GDC Advertise 
+
+ Newsletter Sign-Up 
+
+ Newsletter Sign-Up 
+
+ Trending 
+ Related Topics
+ ▫️ Layoffs & Studio Closures 
+ ▫️ GDC Festival of Gaming 
+ ▫️ Generative AI & ML 
+ ▫️ Industry Lawsuits 
+ ▫️ Development Tools 
+ ▫️ Culture & Dev Communities 
+
+ Recent in Trending 
+ Top Stories 
+
+ Production Strategically making Star Wars Zero Company, ft. Greg Foertsch Strategically making Star Wars Zero Company, ft. Greg Foertsch by Game Developer Podcast 
+
+ Sep 4, 2026 
+
+ Design Paradox Interactive's Afterworld wants to entice new players to grand strategy with tasty RPG hooks Paradox Interactive's Afterworld wants to entice new players to grand strategy with tasty RPG hooks by Alessandro Fillari 
+
+ Sep 1, 2026 7 Min Read 
+
+ Latest News 
+ Related Topics
+ ▫️ Weekly News Highlights 
+ ▫️ News Deep Dives 
+ ▫️ GD Collective Research 
+
+ Recent in Latest News 
+
+ Cloud Xbox to cap Cloud Gaming hours for Game Pass subscribers Xbox to cap Cloud Gaming hours for Game Pass subscribers by Bryant Francis 
+
+ Sep 3, 2026 3 Min Read 
+
+ Business Supercell's acquisition of Metacore expected to close this month Supercell's acquisition of Metacore expected to close this month by Diego Argüello 
+
+ Sep 3, 2026 2 Min Read 
+
+ [GDC] 
+ Related Topics
+ ▫️ Talks & Interviews 
+ ▫️ GDC News 
+ ▫️ GDC Vault: Editor Picks 
+ ▫️ Register for GDC 
+ ▫️ GDC Vault: Full Library 
+ ▫️ Dev Surveys, Data, & Insights 
+
+ Recent in [GDC] 
+ Learn More 
+
+ Production Strategically making Star Wars Zero Company, ft. Greg Foertsch Strategically making Star Wars Zero Company, ft. Greg Foertsch by Game Developer Podcast 
+
+ Sep 4, 2026 
+
+ Design Paradox Interactive's Afterworld wants to entice new players to grand strategy with tasty RPG hooks Paradox Interactive's Afterworld wants to entice new players to grand strategy with tasty RPG hooks by Alessandro Fillari 
+
+ Sep 1, 2026 7 Min Read 
+
+ Game Developer Podcast 
+ Game Design 
+ Programming 
+ More 
+ Related Topics
+ ▫️ Developer Interviews 
+ ▫️ Game Dev Deep Dives 
+ ▫️ Video Game Postmortems 
+ ▫️ Partner Perspectives 
+
+ Recent in More 
+ Read More 
+
+ Production Strategically making Star Wars Zero Company, ft. Greg Foertsch Strategically making Star Wars Zero Company, ft. Greg Foertsch by Game Developer Podcast 
+
+ Sep 4, 2026 
+
+ Design Paradox Interactive's Afterworld wants to entice new players to grand strategy with tasty RPG hooks Paradox Interactive's Afterworld wants to entice new players to grand strategy with tasty RPG hooks by Alessandro Fillari 
+
+ Sep 1, 2026 7 Min Read 
+
+ Business 
+ Production 
+ Programming 
+ Design 
+ News 
+ 36 percent of game workers use generative AI, but half think it's bad for the industry 
+ AI is most commonly used for research or brainstorming, with daily tasks, code assistance, and prototyping lower on the list.
+
+ Diego Argüello , Contributing Editor, News , GameDeveloper.com February 3, 2026
+
+ 3 Min Read 
+
+ Photo by Jonathan Kemper on Unsplash 
+
+ 36 percent of game industry professionals are using generative AI tools as part of their job. Half of them, however, think the technology is having a negative impact on the industry. 
+ That's according to the 2026 State of the Game Industry report, an annual survey conducted by GDC Festival of Gaming based on responses from over 2,300 industry professionals. 
+ Respondents employed at game studios (30 percent) reporting using generative AI tools far less than their peers at publishing companies, support teams, and marketing or PR firms (58 percent). 
+ There was also a considerable difference in AI usage based on the professional status of respondents. Those working in upper management (47 percent), for example, used AI tools more than those in the lower decks (29 percent). Studio directors sit between those two groups (36 percent). 
+ 21 percent of respondents said they use internal generative AI tools—although that metric increased to 30 percent for workers at triple-A studios. 
+ Related: Supercell's acquisition of Metacore expected to close this month 
+ Large language models (LLMs) were the most used AI tool by a country mile. The three most popular were ChatGPT (74 percent), Google Gemini (37 percent), and Microsoft Copilot (22 percent). 
+ As for text-to-image or video tools, Midjourney was the most used (17 percent), with Adobe Generative Fill (13 percent) and Sora AI (8 percent) following behind. Several respondents also disclosed the use of Claude, a LLM that was not included in this year's survey. 
+ So, what are developers using those AI tools for? According to the survey, 81 percent of respondents use them for research or brainstorming, while 47 percent leverage them to complete daily tasks such as writing emails and code assistance. 
+ The data indicates generative AI tools are used less for creative tasks such as asset generation (19 percent), procedural generation (10 percent), and player-facing features (5 percent). 
+ Men also reported using generative AI tools more than women (41 percent compared to 35 percent), while older workers appear to be more reliant on the tech than their younger counterparts (46 percent compared to 34 percent). 
+ 52 percent of professionals think generative AI is having a negative impact on the industry
+ Game developers seemingly failed to warm to generative AI tools in 2025 , with some suggesting the technology would lower the quality of video games . 
+ Indeed, according to the 2025 State of the Game Industry report, 30 percent of respondents felt generative AI would have a negative impact on the game industry (an increase from 18 percent in 2024). 
+ Related: Gamecity Hamburg launches second round of prototype funding 
+ That figure has once again shot up. This year's survey found that 52 percent of respondents believe generative AI is having a negative impact. Workers in visual and technical art (64 percent), game design and narrative (63 percent), and game programming (59 percent) hold the most unfavorable views. 
+ The survey also surfaced a great deal of opposition among those in quality assurance and community support, but the sample sizes were relatively small. 
+ There are some respondents who claimed generative AI is having a positive impact on the industry. About 7 percent of them expressed that view, which is down from 13 percent in 2025. The metric is higher for executives and those in business operations and services (19 percent each). 
+ When asked 'What considerations or values guide your decisions about if, when, or how to use generative AI tools in your work?,' respondents provided a range of thoughtful answers: 
+ "Why would I replace human creativity with a regurgitated amalgamation of everything that’s come before?," said one senior employee based in the United States. 
+ "I believe AI can be a fantastic tool to streamline tedious work and help a lot in the STEM space. It, however, can never replace human creativity and artistic expression," added another respondent, also based in the United States. 
+ Related: CD Projekt Red won't be abandoning physical releases 
+ Game Developer and GDC Festival of Gaming are sibling companies under Informa Festivals. 
+
+ Read more about:
+ Generative AI, Machine Learning, & LLMs Top Stories State of the Game Industry Data 
+
+ About the Author
+
+ Diego Argüello
+
+ Contributing Editor, News, GameDeveloper.com
+
+ Diego Nicolás Argüello is a freelance journalist and critic from Argentina. Video games helped him to learn English, so now he covers them for places like The New York Times, NPR, Rolling Stone, and more. He also runs Into the Spine, a site dedicated to fostering and supporting new writers, and co-hosted Turnabout Breakdown, a podcast about the Ace Attorney series. He’s most likely playing a rhythm game as you read this. 
+
+ See more from Diego Argüello 
+
+ Daily news, dev blogs, and stories from Game Developer straight to your inbox
+
+ Stay Updated 
+
+ Latest News
+ More News 
+
+ Cloud Xbox to cap Cloud Gaming hours for Game Pass subscribers Xbox to cap Cloud Gaming hours for Game Pass subscribers by Bryant Francis 
+
+ Sep 3, 2026 3 Min Read 
+
+ Keep up with the latest News, Interviews, and Talk Coverage from GDC Festival of Gaming right here on Game Developer
+
+ READ ON 
+
+ Latest Podcasts 
+ Production Strategically making Star Wars Zero Company, ft. Greg Foertsch
+ Sep 4, 2026 
+ Audio GDC Side Quest - Inside Austin Wintory's Collaborative Composing Process
+ Aug 28, 2026 
+ Programming We're finally talking about AI, ft. David 'Rez' Graham and Luke Dicken
+ Aug 21, 2026 
+ Production What devs need to know about localization, ft. Concha Fernandez Alvarez, Aurelie Perrin, and Guido Di Carlo
+ Aug 7, 2026 
+ See all 
+
+ Game Developer Collective
+ More 
+
+ Business Games that sell DLC and in-app purchases appear to benefit most from subscription services Games that sell DLC and in-app purchases appear to benefit most from subscription services by Bryant Francis 
+
+ Jan 27, 2026 3 Min Read 
+
+ Business Devs are more worried than ever that generative AI will lower the quality of games Devs are more worried than ever that generative AI will lower the quality of games by Bryant Francis 
+
+ Sep 16, 2025 4 Min Read 
+
+ Game Design & Marketing Highlights
+ See More 
+
+ Design Paradox Interactive's Afterworld wants to entice new players to grand strategy with tasty RPG hooks Paradox Interactive's Afterworld wants to entice new players to grand strategy with tasty RPG hooks 
+
+ Design Warlock's magic system was built on game-bending player choices Warlock's magic system was built on game-bending player choices 
+
+ More from GD
+ Blog with Game Developer Blogging Guidelines Game Developer Podcast Submit a Tip 
+
+ Connect
+ About Us Advertise Contact Us 
+
+ Join Us
+
+ Newsletter Sign-Up 
+
+ Follow Us
+
+ Copyright © 2026 Informa. This website is owned and operated by Informa. Informa PLC's registered office is 5 Howick Place, London SW1P 1WG.
+ About Informa | Contact Informa | Privacy | Terms 
+
+ Your Privacy Choices 
+
+ 

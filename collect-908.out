@@ -1,0 +1,21 @@
+LEDGER_TIP_BEFORE=898dcb5b83106e63c3d21d00cb7e02c52b29c8d8
+  seal OK · product OK at 6ebe0ef3b
+EDIT_OK ledger +5790 B, card +3321 B, frq +2252 B
+--- C0 scan ---
+docs/OWNER_DECISION_QUEUE.md:0
+docs/HANDOFF_CURRENT.md:0
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/queue-908.md:0
+  ledger and queue are PURE APPENDS
+LEDGER COMMIT: 64735cb3494aff3a174d46f3d05e7ce051a498e8
+COMMIT_OK
+--- READ-BACK AT 64735cb34 ---
+64735cb34 §908: the capacity tripwires are made honest — CAP-TRIP-907 lands as nine cars over 4243bdc61: a row keyed on a field no receipt ships declares itself not-executable instead of answering [], a blind receipt can no longer certify itself full, the two blind rows are banked shrink-only, the C3 refusal is corrected to its measured ground, and the register door now closes honestly until the owner's series row ships
+
+ docs/FABLE_RETROVALIDATION_QUEUE.md | 4 ++++
+ docs/HANDOFF_CURRENT.md             | 8 +++++++-
+ docs/OWNER_DECISION_QUEUE.md        | 3 +++
+ 3 files changed, 14 insertions(+), 1 deletion(-)
+  ODQ §908 rows: 1
+  FRQ R-rows: 72  (new R-rows: 72)
+  seat trailer Fable (must be 1): 1
+COLLECT_908_OK tip=64735cb34

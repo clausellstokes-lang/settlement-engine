@@ -1,0 +1,227 @@
+
+ CRANNOGMAN - UMA ANÁLISE DA TRADUÇÃO DE NEOLOGISMOS DE GEORGE R. R. MARTIN COM O AUXÍLIO DA LINGUÍSTICA DE CORPUS
+ | Colineares
+Ir para o conteúdo principal
+Ir para o menu de navegação principal
+Ir para o rodapé
+Open Menu
+ Atual
+ Arquivos
+ Anúncios
+ Sobre
+ Sobre a Revista
+ Submissões
+ Equipe Editorial
+ Declaração de Privacidade
+ Contato
+ Buscar
+ Cadastro
+ Acesso
+ Início
+/
+ Arquivos
+/
+ v. 9 n. 2 (2022): Revista Colineares
+/
+ Artigos
+ CRANNOGMAN - UMA ANÁLISE DA TRADUÇÃO DE NEOLOGISMOS DE GEORGE R. R. MARTIN COM O AUXÍLIO DA LINGUÍSTICA DE CORPUS
+Autores
+ Vinícius Gomes de Morais
+ Universidade do Estado do Rio Grande do Norte (UERN)
+ https://orcid.org/0000-0003-0362-0021
+ Nilson Roberto Barros da Silva
+ Universidade do Estado do Rio Grande do Norte (UERN)
+ DOI:
+ https://doi.org/10.59776/2357-8203.2022.5385
+ Palavras-chave:
+ Linguística de Corpus; Tradução literária; Neologismos; Neologia; George R. R. Martin. 
+Resumo
+Este artigo possui como objetivo analisar as estratégias de tradução dos neologismos criados pelo escritor americano George R. R. Martin presentes nas obras de literatura fantástica da série de livros em língua inglesa 
+A Song of Ice and Fire
+ (
+As Crônicas de Gelo e Fogo)
+. Primeiramente, encontraram-se os neologismos do 
+corpus 
+de estudo em sua língua de partida (língua inglesa), usando a Linguística de 
+Corpus
+ com auxílio do 
+software 
+para análise linguística em 
+corpora
+Wordsmith Tools 8.0
+ (SCOTT, 2021). Em seguida, foram categorizadas as criações lexicais em língua inglesa com base nos processos linguísticos que as formam (STEINBERG, 2003), assim como identificaram-se os procedimentos ou técnicas utilizadas ao traduzir seus correspondentes em língua portuguesa (NEWMARK, 1988) e (BEDNARSKA, 2015). Finalmente, analisou-se como um dos neologismos foi formado e de que modo a tradução dele se configurou. A abordagem metodológica dessa pesquisa possui caráter quali-quantitivo e descritivo. Qualitativo, como é próprio dos estudos realizados na área das ciências humanas e linguísticas e quantitativo porque levou-se em conta a quantidade de neologismos encontrados através da coleta de dados. Ao concluir este artigo, tem-se como principais achados os estudos acerca da linguística de 
+corpus
+ que, ao encontrar os neologismos dentro de um 
+corpus 
+tão vasto como o utilizado, colaborou para a realização dessa pesquisa, sobretudo no fator tempo. A teoria sobre Neologia e Neologismos demonstrou como determinar o que é um neologismo, bem como deu suporte à compreensão da formação de uma nova palavra e ao entendimento das traduções.
+ Downloads
+ Não há dados estatísticos.
+ Biografia do Autor
+ Vinícius Gomes de Morais, 
+Universidade do Estado do Rio Grande do Norte (UERN)
+Mestrando do PPCL - Pós-Graduação em Ciências da Linguagem da Universidade do Estado
+do Rio Grande do Norte (UERN). E-mail: viniciusgomes@alu.uern.br. 
+ Nilson Roberto Barros da Silva, 
+Universidade do Estado do Rio Grande do Norte (UERN)
+Possui doutorado em Estudos Linguísticos e Literários em Inglês pelo Programa de PósGraduação em Estudos Linguísticos e Literários em Inglês da Universidade de São Paulo (USP). É professor do quadro permanente do Programa de Pós-Graduação em Ciências da Linguagem (PPCL) da Universidade do Estado do Rio Grande do Norte (UERN) e líder do Grupo de Estudos da Tradução (GET) – UERN/CNPQ. E-mail: nilsonbarros@uern.br. 
+ Referências
+BEDNARSKA, Katarzyna. “Author’s neologisms in George R. R. Martin’s A Game of Thrones and their Polish and Slovene translations”. Białostockie Archiwum Językowe 15: 21-32. 
+https://doi.org/10.15290/baj.2015.15.02
+. 2015. 
+BOULANGER, Jean-Claude. Problématique d’une méthodologie d’identification des néologismes en terminologie. Néologie et lexicologie. Hommage à Louis Guilbert, Paris, Larousse Université, coll. Langue et langage, p. 36-46. [article] Disponível em: 
+https://boulanger.recherche.usherbrooke.ca/document-article-boulanger_1979
+. Acesso em: 21 de Fev. 2023. 
+CORREIA, Margarita; ALMEIDA, Gladis. Neologia em Português. São Paulo: Parábola Editorial. 2012. 
+FISCHER, Roswitha. Lexical Change in Present-day English: A Corpus-based Study of the Motivation, Institutionalization, and Productivity of Creative Neologisms. Narr. Tubingen-Germany. 1998. 
+LUIZ, T. M. . ROMEU E JULIETA EM POCAHONTAS: ESTUDOS DA ADAPTAÇÃO, LITERATURA COMPARADA E A TEORIA DA INTERTEXTUALIDADE. COLINEARES, Mossoró, Brasil, v. 9, n. 1, p. 86–102, 2022. Disponível em: 
+https://periodicos.apps.uern.br/index.php/RCOL/article/view/4639
+. Acesso em: 7 ago. 2023. 
+MARTIN, George R. R. A Game of Thrones. A Song of Ice and Fire Series. Bantam Books. US. 1996. 
+MARTIN, George R. R. A Guerra dos Tronos. As Crônicas de Gelo e Fogo. Tradução: Jorge Candeias. Grupo Companhia das Letras – Editora Suma. Rio de Janeiro. 2019. 
+NEWMARK, Peter. A Textbook of Translation. Shangai Foreign Language Education Press / Prentice Hall International. 1988. 
+REY, A. Néologisme: un pseudo-concept? Cahiers de Lexicologie, v. 28, n. 1, p. 3-17, 1976. 
+SCOTT, Michael. WordSmith Tools. Published by Lexical Analysis Software and Oxford University Press since 1996. Versão 8.0. 2021. 
+STEINBERG, Martha. Neologismos de Língua Inglesa. São Paulo: Editora Nova Alexandria. 2003. 
+ Downloads
+ pdf
+ Publicado
+31-12-2022
+ Como Citar
+GOMES DE MORAIS, Vinícius; BARROS DA SILVA, Nilson Roberto. CRANNOGMAN - UMA ANÁLISE DA TRADUÇÃO DE NEOLOGISMOS DE GEORGE R. R. MARTIN COM O AUXÍLIO DA LINGUÍSTICA DE CORPUS. 
+Colineares
+, Mossoró, Brasil, v. 9, n. 2, p. 81–98, 2022. DOI: 10.59776/2357-8203.2022.5385. Disponível em: https://periodicos.apps.uern.br/index.php/RCOL/article/view/5385. Acesso em: 6 set. 2026.
+ Fomatos de Citação
+ ACM
+ ACS
+ APA
+ ABNT
+ Chicago
+ Harvard
+ IEEE
+ MLA
+ Turabian
+ Vancouver
+ Baixar Citação
+ Endnote/Zotero/Mendeley (RIS)
+ BibTeX
+ Edição
+ v. 9 n. 2 (2022): Revista Colineares
+ Seção
+ Artigos
+ Licença
+Copyright (c) 2022 Vinícius Gomes de Morais, Nilson Roberto Barros da Silva
+Este trabalho está licenciado sob uma licença 
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+.
+Artigos mais lidos pelo mesmo(s) autor(es)
+ Amanda Priscila Garcia Gomes Diniz,
+ Nilson Roberto Barros da Silva,
+ O CASAMENTO E A ASCENSÃO SOCIAL EM PRIDE AND PREJUDICE SOB A VISÃO DA LINGUÍSTICA DE CORPUS
+,
+ Colineares: v. 9 n. 2 (2022): Revista Colineares
+Artigos Semelhantes
+ Amanda Priscila Garcia Gomes Diniz,
+ Nilson Roberto Barros da Silva,
+ O CASAMENTO E A ASCENSÃO SOCIAL EM PRIDE AND PREJUDICE SOB A VISÃO DA LINGUÍSTICA DE CORPUS
+ ,
+ Colineares: v. 9 n. 2 (2022): Revista Colineares
+ Tiago Marques Luiz,
+ ROMEU E JULIETA EM POCAHONTAS: ESTUDOS DA ADAPTAÇÃO, LITERATURA COMPARADA E A TEORIA DA INTERTEXTUALIDADE
+ ,
+ Colineares: v. 9 n. 1 (2022): Revista Colineares
+ Nilson Roberto Barros da Silva,
+ "˜MI DE MIGUEL"™ E "˜À FRANCESA"™: UMA ANÁLISE DA TRADUÇÃO DE JOGOS DE PALAVRAS COM O AUXÍLIO DA LINGUÍSTICA DE CORPUS
+ ,
+ Colineares: v. 5 n. 1 (2018): Revista Colineares
+ Emanuele Rayane de Medeiros,
+ Glenia Ellen Soares da Costa,
+ Jammara Oliveira Vasconcelos de Sá,
+ FUNÇÃO COGNITIVO-DISCURSIVA: 
+ ,
+ Colineares: v. 10 n. Único (2025): Revista Colineares: Fluxo contínuo
+ Luana Signorelli Faria da Costa,
+ Luis Henrique Garcia Ferreira,
+ O MUNDO MAQUINADO
+ ,
+ Colineares: v. 10 n. Único (2025): Revista Colineares: Fluxo contínuo
+ Antônia Monaiza da Silva,
+ Pedro Adrião da Silva Júnior,
+ ANÁLISE DOS ATOS DE FALA DIRETIVO E EXPRESSIVO NOS ENUNCIADOS DOS PERSONAGENS ELENA E MIGUEL NA ANIMAÇÃO COCO
+ ,
+ Colineares: v. 9 n. 1 (2022): Revista Colineares
+ Gessika Demétrio de Alcântara,
+ Cid Ivan da Costa Carvalho,
+ PERCEPÇÕES SOCIOLINGUÍSTICAS DE ENUNCIADOS ORAIS
+ ,
+ Colineares: v. 10 n. Único (2025): Revista Colineares: Fluxo contínuo
+ Wesley Linhares Vieira,
+ Luan Barbosa de Carvalho,
+ A INTERTEXTUALIDADE NA CONSTRUÇÃO DE SENTIDOS
+ ,
+ Colineares: v. 10 n. Único (2025): Revista Colineares: Fluxo contínuo
+ Maria de Fátima dos Santos Barros,
+ Ailma do Nascimento Silva,
+ ESTUDO FONOLÓGICO DOS APAGAMENTOS DE /S/ E /R/, EM POSIÇÃO DE CODA, NA EDUCAÇÃO DE JOVENS E ADULTOS
+ ,
+ Colineares: v. 10 n. Único (2025): Revista Colineares: Fluxo contínuo
+ Shayane França Lopes,
+ Análise discursiva de enunciados sobre a “educação de qualidade”
+ ,
+ Colineares: v. 11 n. 2 (2026): Revista Colineares: Fluxo Contínuo
+1
+2
+3
+4
+5
+>
+>>
+ Você também pode 
+iniciar uma pesquisa avançada por similaridade
+ para este artigo.
+ Enviar Submissão
+ Enviar Submissão
+ Idioma
+ Português (Brasil)
+ English
+ Español (España)
+Informações
+ Para Leitores
+ Para Autores
+ Para Bibliotecários
+Palavras-chave
+Redes Sociais
+https://www.instagram.com/colineares/
+Identificadores
+ISSN: 2357-8203
+https://portal.issn.org/resource/ISSN/2357-8203
+ORCID da Revista
+https://orcid.org/0009-0006-1854-6775
+Indexadores
+https://www.crossref.org/
+Diretórios
+https://miguilim.ibict.br/handle/miguilim/6606
+https://diadorim.ibict.br/vufind/Record/6606?sid=8002350
+https://www.latindex.org/latindex/ficha/23933
+Portais
+https://oasisbr.ibict.br/vufind/datasources/datasource?name=Revista%20Colineares
+https://livre2.cnen.gov.br/Inicial.asp
+Bases de dados
+https://scholar.google.com.br/citations?user=QH_OBV8AAAAJ&hl=pt-BR
+Preservação digital
+https://cariniana.ibict.br/
+Revista 
+Colineares
+ (ISSN 2357-8203)  é uma publicação do Programa de Pós-Graduação em Ciências da Linguagem (PPCL), vinculado à Faculdade de Letras e Artes (FALA), da Universidade do Estado do Rio Grande do Norte (UERN)/Campus Mossoró.
+Endereço da revista:
+Universidade do Estado do Rio Grande do Norte (UERN)
+Faculdade de Letras e Artes (FALA) - Bloco III
+Av. Prof. Antônio Campos - Bairro Presidente Costa e Silva, s/n - CEP: 59625-620 - Mossoró/RN
+E-mail: rev.colineares@uern.br
+Apoio institucional:
+Pró-Reitoria de Pesquisa e Pós-Graduação (PROPEG)
+Este trabalho está licenciado sob uma licença 
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+.
+Classificação Qualis/CAPES (Quadriênio 2021-2024): 
+Linguí­stica e Literatura - B2
+Interdisciplinar - B2

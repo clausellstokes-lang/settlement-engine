@@ -1,0 +1,908 @@
+                                                  Consistency of a Recurrent Language Model With Respect to
+                                                                     Incomplete Decoding
+
+                                                           Sean Welleck1∗      Ilia Kulikov1∗     Jaedeok Kim2†
+                                                              Richard Yuanzhe Pang1         Kyunghyun Cho1,3
+                                                    1                     2
+                                                      New York University   Samsung Research 3 CIFAR Associate Fellow
+
+
+
+
+                                                              Abstract                             These issues are suspected to be related to the max-
+                                                                                                   imum likelihood objective’s local normalization,
+                                            Despite strong performance on a variety of             which results in a discrepancy between the learned
+                                            tasks, neural sequence models trained with             model’s distribution and the distribution induced by
+
+
+
+
+arXiv:2002.02492v2 [cs.LG] 2 Oct 2020
+                                            maximum likelihood have been shown to ex-              the decoding algorithm used to generate sequences
+                                            hibit issues such as length bias and degener-
+                                                                                                   (Lafferty et al., 2001; Andor et al., 2016). This has
+                                            ate repetition. We study the related issue of
+                                            receiving infinite-length sequences from a re-         prompted the development of alternative decoding
+                                            current language model when using common               methods (Wu et al., 2016; Holtzman et al., 2019)
+                                            decoding algorithms. To analyze this issue, we         and training objectives (Murray and Chiang, 2018;
+                                            first define inconsistency of a decoding algo-         Welleck et al., 2019). In this paper, we formalize
+                                            rithm, meaning that the algorithm can yield an         and study this discrepancy between the model and
+                                            infinite-length sequence that has zero probabil-       the decoding algorithm.
+                                            ity under the model. We prove that commonly
+                                                                                                      We begin by formally defining recurrent neu-
+                                            used incomplete decoding algorithms – greedy
+                                            search, beam search, top-k sampling, and nu-           ral language models, a family that encompasses
+                                            cleus sampling – are inconsistent, despite the         neural models used in practice, such as recurrent
+                                            fact that recurrent language models are trained        neural networks (Elman, 1990; Cho et al., 2014;
+                                            to produce sequences of finite length. Based           Hochreiter and Schmidhuber, 1997), and transform-
+                                            on these insights, we propose two remedies             ers (Vaswani et al., 2017). Next, we formally define
+                                            which address inconsistency: consistent vari-          a decoding algorithm – a function that induces a
+                                            ants of top-k and nucleus sampling, and a self-
+                                                                                                   distribution over sequences given a recurrent lan-
+                                            terminating recurrent language model. Empir-
+                                            ical results show that inconsistency occurs in
+                                                                                                   guage model and a context distribution – which is
+                                            practice, and that the proposed methods pre-           used to obtain probable sequences from a model. In
+                                            vent inconsistency.                                    this paper, we show that the distribution induced by
+                                                                                                   a decoding algorithm can contradict this intended
+                                        1   Introduction                                           use; instead, the decoding algorithm may return
+                                                                                                   improbable, infinite-length sequences.
+                                        Neural sequence models trained with maximum                   Our main finding is that a sequence which re-
+                                        likelihood estimation (MLE) have become a stan-            ceives zero probability under a recurrent language
+                                        dard approach to modeling sequences in a variety           model’s distribution can receive nonzero probabil-
+                                        of natural language applications such as machine           ity under the distribution induced by a decoding
+                                        translation (Bahdanau et al., 2015), dialogue mod-         algorithm. This occurs when the recurrent language
+                                        eling (Vinyals et al., 2015), and language modeling        model always ranks the sequence termination token
+                                        (Radford et al., 2019). Despite this success, MLE-         outside of the set of tokens considered at each de-
+                                        trained neural sequence models have been shown             coding step, yielding an infinite-length, zero proba-
+                                        to exhibit issues such as length bias (Sountsov            bility sequence. This holds whenever the decoding
+                                        and Sarawagi, 2016; Stahlberg and Byrne, 2019)             algorithm is incomplete, in the sense that the algo-
+                                        and degenerate repetition (Holtzman et al., 2019).         rithm excludes tokens from consideration at each
+                                            ∗                                                      step of decoding, which is the case for common
+                                             Equal contribution. Correspondence to: Sean Welleck
+                                        wellecks@nyu.edu.                                          methods such as greedy search, beam search, top-k
+                                           †
+                                             Work done at New York University.                     sampling (Fan et al., 2018), and nucleus sampling
+(Holtzman et al., 2019). We formalize our main          Definition 2.2 (Context distribution). A context dis-
+finding using the notion of consistency (Chen et al.,   tribution p(C) is a probability distribution defined
+2017) – whether a distribution assigns probability      over a set C. An element C ∈ C is called a context.
+mass only to finite sequences – and prove that a
+consistent recurrent language model paired with         2.1   Recurrent Language Models
+an incomplete decoding algorithm can induce an          A recurrent language model is an autoregressive
+inconsistent sequence distribution.                     model of a sequence distribution, where each con-
+   Based on the insight that inconsistency occurs       ditional probability is parameterized with a neural
+due to the behavior of the termination token un-        network. Importantly, we assume that all tokens
+der incomplete decoding, we develop two meth-           in a sequence are dependent on each other under a
+ods for addressing inconsistency. First, we pro-        recurrent language model. This allows us to avoid
+pose consistent sampling methods which guarantee        cases in which the model degenerates to a Marko-
+that the termination token is not excluded from se-     vian language model, such as an n-gram model
+lection during decoding. Second, we introduce a         with a finite n.
+self-terminating recurrent language model which         Definition 2.3 (Recurrent language model). A re-
+ensures that the termination token is eventually        current language model pθ is a neural network that
+ranked above all others, guaranteeing consistency       computes the following at each time step:
+under incomplete decoding.
+   To empirically measure inconsistency, we de-                                           exp(u>v ht + cv )
+                                                        pθ (yt = v | y<t , C) = P                   >
+                                                                                                                   ,
+code sequences from trained recurrent language                                         v 0 ∈V exp(uv 0 ht + cv 0 )
+models and measure the proportion of sequences
+with lengths far exceeding the maximum training         where ht = fθ (yt , ht−1 ) and h0 = gθ (C), and
+sequence length. Our experiments on the Wikitext2       u, c, θ are parameters. A recurrent language model
+dataset (Merity et al., 2016) suggest that inconsis-    thereby computes the probability of a sequence
+tency occurs in practice when using incomplete          Y = (y1 , . . . , yT ) by
+decoding methods, while the proposed consistent                                  T
+sampling methods and self-terminating model pa-
+                                                                                 Y
+                                                                  pθ (Y | C) =         pθ (yt | y<t , C),
+rameterization prevent inconsistency and maintain                                t=1
+language modeling quality.
+   The theoretical analysis reveals defects of ex-      where y<t = (y1 , . . . , yt−1 ). This distribution sat-
+isting decoding algorithms, providing a way to          isfies yi 6⊥⊥ yj | C, ∀i < j.
+develop future models, inference procedures, and           Practical variants of the recurrent language
+learning algorithms. We present methods related to      model differ by the choice of transition function fθ
+sampling and model parameterization, but there are      (Elman, 1990; Hochreiter and Schmidhuber, 1997;
+more directions for future investigation; we close      Cho et al., 2014; Vaswani et al., 2017). The use of
+with directions related to sequence-level learning.     softmax (Bridle, 1990) implies that every unique
+                                                        token in the vocabulary is considered at every loca-
+2   Background                                          tion of a sequence.
+
+We begin our discussion by establishing back-           Remark 2.1. Under the conditional distribution
+ground definitions. First, we define a sequence         of a recurrent LM, every token v ∈ V is as-
+which is the main object of our investigation.          signed a positive probability, implying that 0 <
+                                                        pθ (v | y<t , C) < 1. Any finite sequence is proba-
+Definition 2.1 (Sequence). A sequence Y is an           ble under a recurrent LM under any context, i.e.,
+ordered collection of items from a predefined finite    pθ (Y | C) > 0 for any sequence Y of finite length.
+vocabulary V . A sequence of finite length always
+ends with a special token heosi ∈ V that only           2.2   Decoding Algorithms
+appears at the end of a sequence.                       Because it is intractable to decode the most proba-
+   Each model we consider generates a sequence          ble sequence, it is necessary in practice to use an
+conditioned on context information, such as a prefix    approximate decoding algorithm.
+in sentence completion. To consider this, we define     Definition 2.4 (Decoding algorithm). A decoding
+a context distribution.                                 algorithm F(pθ , C) is a function that generates
+a sequence Ỹ given a recurrent language model                Deterministic decoding. The other family con-
+pθ and context C. Let qF denote the distribution              sists of deterministic decoding algorithms, where
+induced by the decoding algorithm F.                          a token is selected deterministically according to
+   We consider two families of decoding algo-                 a rule at each decoding step. The most naive al-
+rithms. In our analysis we only consider algorithms           gorithm, called greedy decoding, simply takes the
+that decode in a single pass, forward in time, with-          most probable token at each step.
+out modifying previously selected tokens.                     Definition 2.8 (Greedy decoding). Greedy decod-
+                                                              ing Fgreedy generates a sequence from a recurrent
+Stochastic decoding. The first family consists of
+                                                              language model pθ given context C by recursively
+stochastic algorithms. Among them, ancestral sam-
+                                                              selecting the most likely token from pθ (yt |ỹ<t , C)
+pling is asymptotically unbiased and can be used
+                                                              until ỹt = heosi:
+for finding the most probable sequence, although
+with high variance.                                                  ỹt = arg max log pθ (yt = v | ỹ<t , C).
+                                                                                 v∈V
+Definition 2.5 (Ancestral sampling). Ancestral
+sampling Fanc generates a sequence from a re-                    In contrast to greedy decoding, beam search with
+current language model pθ given context C by re-              width k, Fbeam-k , operates on the level of partial se-
+cursively sampling from pθ (yt | ỹ<t , C) until ỹt =        quences or prefixes. Starting from a set of empty
+heosi: ỹt ∼ pθ (yt | ỹ<t , C).                              prefixes, at each iteration a new prefix set is formed
+                                                              by expanding each prefix with each possible token,
+   To avoid the high variance, two approximate
+                                                              then choosing the k highest scoring expanded pre-
+stochastic decoding algorithms have recently been
+                                                              fixes; refer to Appendix A for a formal definition.
+proposed and tested with recurrent language mod-
+els. Top-k sampling considers only a subset of the            Incompleteness. Other than ancestral sampling,
+k most probable tokens from the vocabulary at a               the decoding algorithms above are incomplete in
+time, while nucleus sampling considers only the               that they only consider a strict subset of the full
+minimal subset of most probable tokens whose total            vocabulary V at each time step, aside from the
+probability is higher than a predefined threshold.            trivial case of k = |V |.1
+Definition 2.6 (Top-k sampling (Fan et al., 2018)).           Definition 2.9 (Incomplete Decoding). A decoding
+Top-k sampling Ftop-k generates a sequence from               algorithm F is incomplete when for each context
+a recurrent language model pθ given context C by              C and prefix y<t , there is a strict subset Vt0 ( V
+recursively sampling from:                                    such that
+                                                                        X
+                                                                             qF (yt = v | y<t , C) = 1.
+              (
+                pθ (v | y<t , C), if v ∈ Vk ,
+      q(v) ∝                                                             v∈Vt0
+                0,                otherwise.
+                                                              3   Consistency of a Decoding Algorithm
+where Vk = arg top-k pθ (v 0 | y<t , C).
+                   v0                                         Definition of consistency. A recurrent language
+Definition 2.7 (Nucleus sampling (Holtzman et al.,            model pθ may assign a positive probability to an
+2019)). Nucleus sampling Fnuc-µ generates a se-               infinitely long sequence, in which case we call the
+quence from a recurrent language model pθ given               model inconsistent. This notion of consistency was
+context C by recursively sampling from the fol-               raised and analyzed earlier, for instance by Booth
+lowing proposal distribution. Let v1 , . . . , v|V |          and Thompson (1973) and Chen et al. (2017), in
+denote tokens in V such that pθ (vi | y<t , C) ≥              terms of whether the distribution induced by pθ is
+pθ (vj | y<t , C) for all i < j, and define                   concentrated on finite sequences. We extend their
+                (                                             definition to account for the context C.
+                   pθ (v | y<t , C), if v ∈ Vµ ,              Definition 3.1 (Consistency of a recurrent lan-
+        q(v) ∝
+                   0,                otherwise,               guage model). A recurrent language model is
+                                                             consistent under a context distribution p(C) if
+where Vµ = v1 , · · · , vkµ with                              pθ (|Y | = ∞) = 0. Otherwise, the recurrent lan-
+                                                              guage model is said to be inconsistent.
+                        k
+               (                                      )
+                        X                                        1
+   kµ = min k                 pθ (vi | y<t , C) > µ       .        Nucleus sampling is incomplete when for every context
+                        i=1
+                                                              C and prefix y<t , minv∈V pθ (v|y<t , C) < 1 − µ.
+   Any sequence decoded from a consistent model
+for a given context is guaranteed to terminate.
+Lemma 3.1. If a recurrent LM pθ is consistent,
+pθ (|Y | = ∞ | C) = 0 for any probable context C.2
+  Next, we establish a practical condition under
+which a recurrent language model is consistent.
+Lemma 3.2. A recurrent LM pθ is consistent if
+kht kp is uniformly bounded for some p ≥ 1.
+                                                        Figure 1: A depiction of the model’s sequence distribu-
+Proof sketch. If kht kp is bounded, then each u>
+                                               v ht     tion (light grey, solid border) and the decoder’s induced
+is bounded, hence pθ (heosi |y<t , C) > ξ > 0 for       sequence distribution (dark grey, dotted border). The
+a constant ξ. Thus pθ (|Y | = ∞) ≤ limt→∞ (1 −          white and black rectangles depict the set of all finite
+                                                        and infinite sequences, respectively. We prove that un-
+ξ)t = 0, meaning that pθ is consistent.
+                                                        der practical conditions, any incomplete decoding algo-
+                                                        rithm may be inconsistent with respect to a consistent
+   Although this condition is practical because
+                                                        model, as depicted.
+layer normalization or bounded activation func-
+tions (Elman, 1990; Cho et al., 2014; Vaswani et al.,
+2017) result in bounded ht , we show that even if a     Theorem 3.4 (Inconsistency of an incomplete de-
+recurrent language model is consistent, a decoding      coding algorithm). There exists a consistent recur-
+algorithm may produce an infinite-length sequence.      rent LM pθ from which an incomplete decoding
+We formalize this discrepancy using the consis-         algorithm F, that considers only up to (|V | − 1)-
+tency of a decoding algorithm.                          most likely tokens according to pθ (yt | y<t , C) at
+Definition 3.2 (Consistency of a decoding algo-         each step t, finds an infinite-length sequence Ỹ
+rithm). A decoding algorithm F is consistent with       with probability 1, i.e., qF (|Y | = ∞) = 1.
+respect to a consistent recurrent language model pθ     Proof. We prove this theorem by constructing a
+under a context distribution p(C) if the decoding       tanh recurrent network. We define the recurrent
+algorithm F preserves the consistency of the model      function fθ as
+pθ , that is, qF (|Y | = ∞) = 0.
+   When a consistent recurrent language model pθ          ht = fθ (yt , ht−1 )
+                                                                                              
+and a decoding algorithm F induce a consistent                             Wh 0              0
+                                                             = tanh               ht−1 +             ,
+distribution qF , we say that pθ paired with F is                           0 I            e(yt )
+consistent. For instance, any consistent recurrent
+language model paired with ancestral sampling is        where e(yt ) ∈ R|V | is a one-hot representation of
+consistent, because the induced distribution qFanc is   yt , Wh ∈ Rd×d where every entry is positive, and
+the same as the distribution of the original model.     I is an identity matrix of size |V | × |V |. h0 =
+We also have an analogue of Lemma 3.1.                  gθ (C) is constructed to consist of positive values
+                                                        only. Because each element of |ht | is bounded by
+Lemma 3.3. A consistent decoding algorithm with
+                                                        1, the constructed recurrent language model pθ is
+respect to a consistent recurrent LM decodes only
+                                                        consistent by Lemma 3.2.
+probable sequences. That is, if qF (Y | C) > 0,
+then pθ (Y | C) > 0 for any probable context C.             We set uv (see Definition 2.3) to
+                                                                                                   
+Inconsistency of incomplete decoding. Any in-                         ūv                     ūheosi
+                                                             uv =            , uheosi =                 ,
+complete decoding algorithm (Definition 2.9) can                     e(v)                   e(heosi)
+be inconsistent regardless of the context distribu-
+                                                        where v 6= heosi, all elements of ūv are positive,
+tion, because there is a recurrent LM that places
+                                                        all elements of ūheosi are negative, and e(v) is a
+heosi outside of Vt0 at every step of decoding. To
+                                                        one-hot representation of v. cv is set to zero.
+show this, we construct a consistent recurrent lan-
+                                                           This defines a valid recurrent language model
+guage model whose distribution induced by an in-
+                                                        (Definition 2.3), since the conditional distribution
+complete decoding algorithm is inconsistent.
+                                                        at each time t is influenced by all the previous
+   2
+       Proofs of Lemmas 3.1-3.3 are in Appendix B.      tokens. More specifically, the logit of a token v
+depends on tt0 =1 1(yt0 = v), where 1 is an indi-
+              P
+cator function.
+   This recurrent language model always outputs
+positive logits for non-heosi tokens, and outputs
+negative logits for the heosi token. This im-
+plies p(heosi | y<t , C) < p(v | y<t , C) for all
+v ∈ V \ {heosi}. This means that heosi is al-
+ways ranked last at each time step, so an incom-
+plete decoding algorithm that considers at most
+(|V | − 1) most probable tokens at each time step
+from pθ (yt | y<t , C) cannot decode heosi and thus
+always decodes an infinitely long sequence Ŷ , i.e.,
+qF (|Y | = ∞ | C) = 1 for any context C. It yields      Figure 2: The self-terminating recurrent LM uses the
+                                                        layer shown in grey instead of the standard softmax
+qF (|Y | = ∞) = 1, while pθ (|Y | = ∞) = 0 due
+                                                        layer. The layer takes logits (u>     · ht ), the previous
+to consistency of the model pθ .                                                   heosi
+                                                        step’s heosi probability (pt−1 ), and a hyper-parameter
+   Greedy decoding, beam search, top-k sampling,         ∈ (0, 1). The layer computes α using Definition 4.3,
+                                                                                                     heosi
+and nucleus sampling are all inconsistent according     which determines the heosi probability (pt         ∈ (, 1)),
+                                                                               heosi       heosi
+to this theorem.                                        and guarantees that pt        > pt−1 . The remaining
+                                                        probability mass is allocated to the non-heosi tokens.
+4       Fixing the inconsistency
+In this section, we consider two ways to prevent        following modified proposal distribution:
+inconsistency arising from incomplete decoding                         (
+algorithms. First, we introduce consistent versions                     pθ (v|y<t , C), if v ∈ V 0 ,
+                                                                q(v) ∝
+of top-k and nucleus sampling. Second, we in-                           0,              otherwise,
+troduce the self-terminating recurrent language
+model, which is consistent when paired with any of      where V 0 = {heosi} ∪ arg top-k pθ (v 0 | y<t , C).
+the decoding algorithms considered in this paper.                                       v0
+                                                        Definition 4.2 (Consistent nucleus sampling).
+4.1       Consistent Sampling Algorithms                Consistent nucleus sampling is nucleus sampling
+The proof of Theorem 3.4 suggests that the incon-       with the following modified proposal distribution:
+sistency of incomplete decoding algorithms arises               (
+from the fact that heosi may be excluded indefi-                 pθ (v | y<t , C),        if v ∈ Vµ ∪ {heosi},
+                                                         q(v) ∝
+nitely from the set of top-ranked tokens. We pro-                0,                       otherwise.
+pose a simple modification to top-k and nucleus
+sampling that forces heosi to be included at each          The induced probability of heosi under these
+step of decoding. First, we give a condition for        two algorithms is always equal to or larger than the
+when a particular model pθ paired with a decoding       model’s probability. By Theorem 4.1, these algo-
+algorithm F is consistent.                              rithms are consistent with respect to any consistent
+Theorem 4.1. Suppose a recurrent LM pθ has uni-         recurrent language model.
+formly bounded kht kp for some p ≥ 1. If a de-
+                                                        4.2   Self-Terminating Recurrent LM
+coding algorithm F satisfies qF (heosi | y<t , C) ≥
+pθ (heosi | y<t , C) for every prefix y<t and context   Although these consistent sampling algorithms can
+C, then the decoding algorithm F is consistent          be used with any recurrent language model, their
+with respect to the model pθ .3                         stochastic nature may not be suitable for finding a
+                                                        single, highly probable sequence. To avoid this lim-
+   We define consistent variants of top-k and nu-
+                                                        itation, we propose the self-terminating recurrent
+cleus sampling which satisfy this condition.
+                                                        language model (STRLM).
+Definition 4.1 (Consistent top-k sampling). Con-
+                                                        Definition 4.3 (Self-terminating recurrent lan-
+sistent top-k sampling is top-k sampling with the
+                                                        guage model). A self-terminating recurrent lan-
+    3
+        See Appendix C for the proof.                   guage model computes the following conditional
+probability at each time step:                             the behavior of language models, encompassing
+                                                          machine translation (Bahdanau et al., 2015), story
+                    1 − α(ht ),             v = heosi ,   generation (Fan et al., 2018), and dialogue mod-
+ pθ (v | y<t , C) =    α(ht ) exp(u> ht +cv )              eling (Vinyals et al., 2015). The task consists of
+                    P             v
+                               exp(u> h +c )
+                                               ,
+                          v 0 ∈V 0        v0 t   v0        decoding a continuation Ŷ ∼ F(pθ , C) given a
+α(h0 ) = σ(u>
+            heosi h0 ),                                    length-k prefix C = (c1 , . . . , ck ), resulting in a
+                                                           completion (c1 , . . . , ck , ŷ1 . . . , ŷT ).
+α(ht ) = σ(u>
+            heosi ht ) [1 − pθ (heosi |y<t−1 , C)] ,
+                                                           Dataset. Our first two experiments use Wikitext2
+with σ : R → [0, 1 − ε] and ε ∈ (0, 1). ht is              (Merity et al., 2016), which consists of paragraphs
+computed as in the original recurrent LM.                  from English Wikipedia, since it has frequently
+  The underlying idea is that the probability of           been used to evaluate language models (Grave et al.,
+heosi increases monotonically, since                       2017; Melis et al., 2018; Merity et al., 2018). We
+                                                           consider both word and BPE5 tokenization. We
+                           t
+            heosi
+                           Y                               split each paragraph into sentences using Spacy6 .
+           pt       =1−              σ(u>
+                                        heosi ht0 ).       We split each sequence, using the first k tokens
+                           t0 =0
+                                                           as a context and the remaining tokens as a con-
+Consequently, the STRLM is consistent when                 tinuation. To ensure that each sequence contains a
+paired with greedy decoding or beam search; see            prefix, we prepend padding tokens to make it length
+Appendix C for formal statements and proofs.               k. Special hbosi and heosi tokens are inserted at
+                                                           the beginning and end of each sequence. We use
+5   Empirical Validation                                   k = 10. Table 7 contains dataset statistics.
+The theoretical results rely on the existence of a         Context distribution. We define empirical con-
+model that results in inconsistency; it remains to         text distributions with prefixes from the train, valid,
+                                                                                        1 P|D|               (n) ),
+be shown that inconsistency with respect to incom-         and test sets: p(C; D) = |D|       n=1 1(C = C
+plete decoding occurs with recurrent language mod-         where D = {(C (n) , Y (n) )}N
+                                                                                       n=1 is a dataset split.
+els encountered in practice. Moreover, while the
+proposed methods carry theoretical guarantees in           Evaluation metrics. We use finite sequences to
+terms of consistency, we must check whether they           approximately measure the consistency of a model
+retain language modeling quality. To do so, we             paired with a decoding algorithm, since decoding
+perform experiments using a sequence completion            an infinite-length sequence is impossible. We use
+task. In each experiment, we use the beginning of          the proportion of decoded continuations that are
+a sequence as context, then decode continuations           longer than a predefined limit,
+from a trained recurrent LM and measure the pro-                                  |D|
+portion of non-terminated sequences in order to                              1 X
+                                                                       rL =      1(|Ŷ (n) | ≥ L),
+approximately measure inconsistency. The first ex-                          |D|
+                                                                                 n=1
+periment (§5.1) shows that inconsistency occurs in
+practice, and the second experiment (§5.2) shows           where Ŷ (n) ∼ F(pθ , C (n) ) for each context C (n)
+the effectiveness of the proposed approaches. Our          in D. We call rL the non-termination ratio of the
+third experiment (§5.3) shows that inconsistency           decoding algorithm F for an underlying model and
+also occurs frequently in GPT-2, a large-scale trans-      context distribution. A value of rL greater than
+former language model.4                                    zero means that some sequences did not terminate
+                                                           within L steps. When L is infinity, this implies
+Sequence completion. We evaluate recurrent                 that the model paired with the decoding algorithm
+language models on a sequence completion task,             is inconsistent. In practice, we use a finite L that
+which has previously been used to evaluate the             is substantially larger than the maximum training
+effectiveness of sequence models, e.g., Sutskever          sequence length, and we interpret a non-zero rL as
+et al. (2011); Graves (2013); Radford et al. (2019);       evidence that the model paired with the decoding
+Holtzman et al. (2019); Welleck et al. (2019). Se-         algorithm is inconsistent. We use L = 1500, more
+quence completion is a general setting for studying        than 10 times the max training sequence length.
+  4                                                           5
+    Code available at https://github.com/uralik/                  github.com/huggingface/tokenizers
+                                                              6
+consistency-lm.                                                   https://spacy.io/
+   In each experiment, we report the mean and stan-                                        tanh-RNN       LSTM-RNN
+dard deviation of metrics across 10 independent ini-              ancestral                0.00 ± 0.0     0.00 ± 0.0
+tializations. Unless specified otherwise, we report               greedy                   12.35 ± 5.18   1.53 ± 1.41
+metrics using the test context distribution, since                beam-2                   1.38 ± 0.95    0.07 ± 0.06
+the train, valid, and randomly generated context                  beam-4                   0.25 ± 0.19    0.00 ± 0.01
+distributions had similar results.                                topk-2                   0.01 ± 0.01    0.01 ± 0.01
+                                                                  topk-4                   0.00 ± 0.0     0.00 ± 0.01
+                                                                  nucleus-0.2              0.06 ± 0.02    0.13 ± 0.15
+Training. We train recurrent                        language      nucleus-0.4              0.04 ± 0.02    0.02 ± 0.01
+models for sequence completion with
+                                                                  consistent topk-2        0.00 ± 0.0     0.00 ± 0.01
+maximum        likelihood,
+                  PT                  using       the    loss     consistent topk-4        0.00 ± 0.0     0.00 ± 0.0
+L(pθ , Y ) = − t=1 log pθ (yt | y<t , c1 , . . . , ck ),          consistent nucleus-0.2   0.04 ± 0.02    0.01 ± 0.01
+where Y = (c1 , . . . , ck , y1 , . . . , yT ). This amounts      consistent nucleus-0.4   0.02 ± 0.02    0.01 ± 0.01
+to running the full training sequence through a
+                                                                Table 1: Non-termination ratio (rL (%)) of decoded se-
+recurrent model and zeroing the loss for the first              quences using ancestral sampling, incomplete, and con-
+k tokens, so that the first k steps correspond to               sistent decoding methods.
+learning a gθ that encodes the context.
+
+Models. We consider recurrent neural networks                   On the other hand, the non-zero non-termination
+with hyperbolic tangent activations (tanh-RNN; El-              ratios for the incomplete decoding algorithms sug-
+man, 1990) and LSTM units (LSTM-RNN; Hochre-                    gest inconsistency with respect to each algorithm,
+iter and Schmidhuber, 1997). We perform an ini-                 providing evidence for Theorem 3.4.
+tial hyper-parameter sweep and select the best set                 Using greedy decoding, roughly 12% of all
+of hyper-parameters for each of tanh-RNN and                    contexts resulted in a non-terminating continua-
+LSTM-RNN based on the validation perplexities.7                 tion with the tanh-RNN, and roughly 1% with
+With this best set of hyperparameters, we train each            the LSTM-RNN. Nucleus sampling also produced
+of these models with 10 different initializations.              non-terminating sequences with the tanh-RNN
+The choice of tanh and LSTM RNNs implies that                   (0.06%, nuc-0.2) and LSTM-RNN (0.13%, nuc-
+all of the recurrent language models that we train              0.2). Top-k sampling yielded a small number
+are consistent according to Lemma 3.2. Our LSTM                 of non-terminating samples. In general, non-
+models achieve similar test perplexity (91.86 ± 0.4,            termination approaches zero as k and µ increase,
+word tokenization) to those reported in previous                since heosi has a lower chance of being excluded.
+work (Merity et al., 2018); see Appendix D.                        Beam search produced non-terminating se-
+   Additionally, we train self-terminating tanh-                quences with both the tanh-RNN and LSTM-RNN
+RNN and LSTM-RNN variants (Definition 4.3) at                   models. This means that heosi was outside of the
+various values of ε, which controls a lower bound               top tokens (determined by the beam width) con-
+on the termination probability at each step. We use             sidered at each step, since in our experiments we
+σ(x) = (1 − ε) · sigmoid(x). We use the hyper-                  terminated the beam search when a single beam
+parameters selected in the preceding grid search.               prefix contained heosi. Larger beam widths reduce
+Below, we consider BPE tokenization; similar con-               non-termination, similar to increasing k or µ.
+clusions held for word tokenization.8
+                                                                5.2   Consistency of the Proposed Methods
+5.1      Inconsistency of Recurrent LMs
+                                                                Consistent sampling. Table 1 shows that consis-
+In this experiment, we demonstrate evidence of                  tent nucleus and top-k sampling (§4.1) resulted
+inconsistency with incomplete decoding methods.                 in only terminating sequences, except for a few
+Table 1 shows non-termination ratios for the re-                cases that we attribute to the finite limit L used
+current language models using the decoding algo-                to measure the non-termination ratio. Consistent
+rithms considered in this work. Decoding with an-               nucleus paired with tanh-RNN did not reduce rL
+cestral sampling always resulted in sequences that              as much as when it was paired with LSTM-RNN.
+terminated within L steps, since the induced distri-            Example continuations are shown in Table 2. On
+bution is the same as that of the consistent model.             prefixes that led to non-termination with the base-
+   7
+       Refer to Appendix D for the hyper-parameter ranges.      line method, the quality tends to improve with the
+   8
+       Refer to Appendix for results with word tokenization.    consistent variant since the continuation now termi-
+ Prefix       One Direction delivered a performance of “ Kiss You
+ nucleus      ” , and the album ’s second album , “ The X @-@ Files ” , “ The A. ” , “ The Preder ” , “ We ’ve Have You ” , “
+              I ’ve You Wanna Stay ” , “ The Dream ” , “ The Bide ” , “ My Achievement ”, “ The B. B. ” , “ A Life ” . . .
+ c-nucleus    ” , and “ My Boo ” was released on September 29 , 2010 . heosi
+ Prefix      Boulter starred in two films in 2008 ,
+ nucleus     and the band ’s music , and “ The Rise of Monkey ” , “ The One With the Way ” , “ The “ Always ” , ” “ Always
+             Your ” , “ The Wift ” , “ The Baste ” , “ The Special With ” , “ The Way ” , “ The Special With You ” . . .
+ c-nucleus   and the latter was released in the United States . heosi
+ Prefix      This period of unhappiness was the making of
+ Baseline    the “ most important ” of the “ mad ” , and the “ “ most important ” of the ” “ ” , “ the most important ” , and
+             the “ devil ” , “ The ” , “ The One ” , “ The One ” , “ The One ” , “ The One ” , “ The One ” , “ The One ” , “
+             The One ” , “ The One ” , “ The One ” , “ The One ” , “ The One ” , “ The One ” , “ The One ” , “ The One ” . . .
+ STRLM       the first commandment of the poem . heosi
+ Prefix      Du Fu ’s mother died shortly after he was
+ Baseline    a member of the Order of the Order of the Order of the Order of the Order of the Order of the Order of the
+             Order of the Order of the Republic of the Republic of the Republic of the Republic of the Republic of . . .
+ STRLM       a member of the Order of the British Empire . heosi
+
+   Table 2: Continuations with consistent nucleus sampling (µ = 0.2) and self-terminating LSTM ( = 10−3 ).
+
+
+nates. Note that since the model’s non-heosi token                                 ST         rL (%)         perplexity
+probabilities at each step are only modified by a                                  ! 10   −2
+
+
+
+                                                                        tanh-RNN
+                                                                                               00.00 ± 0.0    229.09 ± 9.2
+multiplicative constant, the sampling process can                                  ! 10−3      00.00 ± 0.0    191.63 ± 1.4
+still enter a repetitive cycle (e.g., when the constant                            ! 10−4      00.02 ± 0.02   188.36 ± 2.2
+is close to 1), though it is guaranteed to terminate.                              7 –         12.35 ± 5.2    186.44 ± 1.4
+                                                                                   ! 10−2      0.00 ± 0.0     219.71 ± 9.2
+Self-terminating RLM. As seen in Table 3, the
+                                                                        LSTM
+                                                                                   ! 10−3      0.00 ± 0.0     186.04 ± 1.6
+self-terminating recurrent language models are con-                                ! 10−4      0.18 ± 0.35    183.57 ± 2.3
+sistent with respect to greedy decoding, at the ex-                                7 –         1.48 ± 1.43    178.19 ± 1.3
+pense of perplexity compared to the vanilla model.
+The value of ε from Definition 4.3, which controls               Table 3: Non-termination ratio (rL (%)) of greedy-
+a lower-bound on termination probability at each                 decoded sequences and test perplexity for STRLMs.
+step, influences both rL and perplexity. When ε is
+too large (ε = 10−2 ), perplexity degrades. When
+ε is too small (ε = 10−4 ), the lower-bound grows
+slowly, so heosi is not guaranteed to be top-ranked
+within L steps, resulting in a positive rL . An ε
+of 10−3 balanced consistency and language model-
+ing quality, with a zero non-termination ratio and
+perplexity within 8 points of the baseline.
+   As shown in Figure 3, the self-terminating model
+matches the data length distribution better than
+the baseline. Example decoded sequences are
+shown in Table 2. For prefixes that led to non-
+                                                                 Figure 3: Lengths of generated sequences using greedy
+termination with the baseline, the self-terminating
+                                                                 decoding from vanilla and self-terminating LSTMs.
+models yields finite sequences with reasonable
+quality. The examples suggest that some cases
+of degenerate repetition (Holtzman et al., 2019;                 scraped web pages (see Radford et al. (2019)).
+Welleck et al., 2019) are attributed to inconsistency.           GPT-2 has been observed to produce repetitive
+                                                                 text with greedy and beam search (Holtzman et al.,
+5.3   Inconsistency of GPT-2
+                                                                 2019).
+We perform a final experiment with GPT-2 117M,
+a transformer language model pre-trained with                    Experimental setup. We use the Wikitext-103
+maximum likelihood on WebText, a collection of                   dataset (Merity et al., 2016), a large-scale collec-
+tion of Wikipedia articles with over 100 million                                   rL (%)   perplexity
+words and 260 thousand unique tokens. We split                    GPT2-117M        37.91    20.92
+the dataset into sequences according to the dataset’s             GPT2-117M ST     00.00    27.25
+newline boundaries, then split each sequence into a
+context C and continuation Y , resulting in a dataset     Table 4: Non-termination ratio (rL (%)) of greedy-
+                                                          decoded sequences and perplexity for GPT2-117M and
+of (C, Y ) pairs. Each continuation ends in a spe-
+                                                          the self-terminating variant (ST) on Wikitext-103.
+cial heosi token. We use a context size of k = 10
+tokens, and discard sequences that are length k
+or shorter. The resulting dataset contains 874,556        interesting direction is to investigate whether the
+training, 1,896 validation, and 2,162 test pairs.         lack of decoding in maximum likelihood learning
+   We fine-tune the pre-trained GPT-2 model using         is a cause of inconsistency. Maximum likelihood
+maximum likelihood for 400k steps, and select the         learning fits the model pθ using the data distribu-
+model state with the lowest validation perplexity         tion, whereas a decoded sequence from the trained
+(evaluated every 5k steps). Each training batch con-      model follows the distribution qF induced by a
+tains a maximum of 1024 total tokens. We use the          decoding algorithm. Sequence-level learning, how-
+implementation and default hyper-parameters from          ever, uses a decoding algorithm during training
+the transformers library (Wolf et al., 2019).             (e.g., Ranzato et al. (2016)), which we hypothe-
+We fine-tune the self-terminating GPT-2 models in         size can result in a good sequence generator that is
+a similar manner, starting from the pre-trained GPT-      consistent with respect to incomplete decoding.
+2 model and using the same hyper-parameters.
+   Each model is evaluated using greedy decoding          7   Conclusion
+with a maximum sequence length of 500, which
+was selected so that each decoded validation batch        We extended the notion of consistency of a recur-
+could fit in GPU memory. We define the non-               rent language model put forward by Chen et al.
+termination ratio (rL ) using L = 500; this limit         (2017) to incorporate a decoding algorithm, and
+is more strict than the limit used in the preced-         used it to analyze the discrepancy between a model
+ing experiments (1500), yet still allows us to see        and the distribution induced by a decoding algo-
+large differences in generation behavior between          rithm. We proved that incomplete decoding is in-
+the model and the ground truth (e.g. see Figure 4).       consistent, and proposed two methods to prevent
+                                                          this: consistent decoding and the self-terminating
+Results. Table 4 shows the non-termination ratio
+                                                          recurrent language model. Using a sequence com-
+and perplexity of the baseline and self-terminating
+                                                          pletion task, we confirmed that empirical incon-
+GPT-2 models. The self-terminating variant pre-
+                                                          sistency occurs in practice, and that each method
+vents non-termination, at the cost of perplexity. The
+                                                          prevents inconsistency while maintaining the qual-
+model here uses  = 2.5 × 10−3 , which we se-
+                                                          ity of generated sequences. We suspect the absence
+lected after observing that at higher values of , e.g.
+                                                          of decoding in maximum likelihood estimation as a
+1.0 × 10−3 , the self-terminating model generated
+                                                          cause behind this inconsistency, and suggest inves-
+sequences longer than the limit used to determine
+                                                          tigating sequence-level learning as an alternative.
+termination (500). Figure 4 shows the length dis-
+tributions of the baseline GPT-2 continuations and
+                                                          Acknowledgements
+those of the self-terminating GPT-2. The GPT-
+2 117M model generates many sequences at or               We thank Chris Dyer, Noah Smith and Kevin
+near the maximum sequence length (500), unlike            Knight for valuable discussions. This work was
+the ground-truth data. Introducing self-termination       supported by NSF Award 1922658 NRT-HDR: FU-
+shifts the mass towards shorter sequences, whose          TURE Foundations, Translation, and Responsibil-
+lengths are also present in the ground-truth data.        ity for Data Science; Samsung Advanced Institute
+                                                          of Technology (Next Generation Deep Learning:
+6   Future Directions
+                                                          from pattern recognition to AI); and Samsung Re-
+The methods we proposed in this paper resolve in-         search (Improving Deep Learning using Latent
+consistency by changing the decoding algorithm            Structure). KC thanks eBay and NVIDIA for their
+or model parameterization. Another approach is to         support.
+address inconsistency in the learning phase. One
+References                                                  John Lafferty, Andrew McCallum, and Fernando C N
+                                                              Pereira. 2001. Conditional random fields: Prob-
+Daniel Andor, Chris Alberti, David Weiss, Aliaksei            abilistic models for segmenting and labeling se-
+  Severyn, Alessandro Presta, Kuzman Ganchev, Slav            quence data. ICML ’01 Proceedings of the Eigh-
+  Petrov, and Michael Collins. 2016. Globally normal-         teenth International Conference on Machine Learn-
+  ized transition-based neural networks. In 54th An-          ing.
+  nual Meeting of the Association for Computational
+  Linguistics, ACL 2016 - Long Papers, volume 4,            Gábor Melis, Chris Dyer, and Phil Blunsom. 2018. On
+  pages 2442–2452.                                             the state of the art of evaluation in neural language
+                                                               models. In 6th International Conference on Learn-
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Ben-               ing Representations, ICLR 2018 - Conference Track
+  gio. 2015. Neural machine translation by jointly             Proceedings.
+  learning to align and translate.   In 3rd Inter-
+  national Conference on Learning Representations,          Stephen Merity, Nitish Shirish Keskar, and Richard
+  ICLR 2015, San Diego, CA, USA, May 7-9, 2015,                Socher. 2018. Regularizing and optimizing LSTM
+  Conference Track Proceedings.                                language models. In 6th International Conference
+                                                               on Learning Representations, ICLR 2018 - Confer-
+T. L. Booth and R. A. Thompson. 1973. Applying prob-           ence Track Proceedings.
+   ability measures to abstract languages. IEEE Trans-      Stephen Merity, Caiming Xiong, James Bradbury, and
+   actions on Computers, C-22(5):442–450.                      Richard Socher. 2016. Pointer sentinel mixture mod-
+                                                               els. ArXiv, abs/1609.07843.
+John S Bridle. 1990. Probabilistic interpretation of
+  feedforward classification network outputs, with re-      Kenton Murray and David Chiang. 2018. Correct-
+  lationships to statistical pattern recognition. In Neu-     ing length bias in neural machine translation. In
+  rocomputing, pages 227–236. Springer.                       Proceedings of the Third Conference on Machine
+                                                              Translation: Research Papers, pages 212–223, Brus-
+Yining Chen, Sorcha Gilroy, Andreas Maletti, Jonathan         sels, Belgium. Association for Computational Lin-
+  May, and Kevin Knight. 2017. Recurrent neural               guistics.
+  networks as weighted language recognizers. arXiv
+  preprint arXiv:1711.05408.                                Alec Radford, Jeffrey Wu, Rewon Child, David Luan,
+                                                              Dario Amodei, and Ilya Sutskever. 2019. Language
+Kyunghyun Cho, Bart van Merriënboer, Dzmitry Bah-            models are unsupervised multitask learners. OpenAI
+  danau, and Yoshua Bengio. 2014. On the properties           Blog, 1(8):9.
+  of neural machine translation: Encoder–decoder ap-        Marc’Aurelio Ranzato, Sumit Chopra, Michael Auli,
+  proaches. In Proceedings of SSST-8, Eighth Work-           and Wojciech Zaremba. 2016. Sequence level train-
+  shop on Syntax, Semantics and Structure in Statisti-       ing with recurrent neural networks. In 4th Inter-
+  cal Translation, pages 103–111, Doha, Qatar. Asso-         national Conference on Learning Representations,
+  ciation for Computational Linguistics.                     ICLR 2016, San Juan, Puerto Rico, May 2-4, 2016,
+                                                             Conference Track Proceedings.
+Jeffrey L Elman. 1990. Finding structure in time. Cog-
+   nitive science, 14(2):179–211.                           Pavel Sountsov and Sunita Sarawagi. 2016. Length
+                                                              bias in encoder decoder models and a case for global
+Angela Fan, Mike Lewis, and Yann Dauphin. 2018. Hi-           conditioning. In Proceedings of the 2016 Confer-
+  erarchical neural story generation. arXiv preprint          ence on Empirical Methods in Natural Language
+  arXiv:1805.04833.                                           Processing, pages 1516–1525, Austin, Texas. Asso-
+                                                              ciation for Computational Linguistics.
+Edouard Grave, Armand Joulin, and Nicolas Usunier.
+  2017. Improving neural language models with a con-        Felix Stahlberg and Bill Byrne. 2019. On NMT search
+  tinuous cache. In 5th International Conference on           errors and model errors: Cat got your tongue? In
+  Learning Representations, ICLR 2017 - Conference            Proceedings of the 2019 Conference on Empirical
+  Track Proceedings.                                          Methods in Natural Language Processing and the
+                                                              9th International Joint Conference on Natural Lan-
+Alex Graves. 2013.    Generating sequences with               guage Processing (EMNLP-IJCNLP), pages 3354–
+  recurrent neural networks.     arXiv preprint               3360, Hong Kong, China. Association for Computa-
+  arXiv:1308.0850.                                            tional Linguistics.
+                                                            Ilya Sutskever, James Martens, and Geoffrey Hinton.
+Sepp Hochreiter and Jürgen Schmidhuber. 1997.                 2011. Generating text with recurrent neural net-
+  Long short-term memory. Neural Computation,                  works. In Proceedings of the 28th International
+  9(8):1735–1780.                                              Conference on Machine Learning, ICML 2011.
+Ari Holtzman, Jan Buys, Maxwell Forbes, and Yejin           Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob
+  Choi. 2019. The curious case of neural text degener-        Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz
+  ation. arXiv preprint arXiv:1904.09751.                     Kaiser, and Illia Polosukhin. 2017. Attention is all
+  you need. In Advances in Neural Information Pro-
+  cessing Systems.
+Oriol Vinyals, Google Quoc, and V Le. 2015. A Neu-
+  ral Conversational Model. In ICML Deep Learning
+  Workshop.
+
+Sean Welleck, Ilia Kulikov, Stephen Roller, Emily Di-
+  nan, Kyunghyun Cho, and Jason Weston. 2019. Neu-
+  ral text generation with unlikelihood training. arXiv
+  preprint arXiv:1908.04319.
+
+Thomas Wolf, Lysandre Debut, Victor Sanh, Julien
+  Chaumond, Clement Delangue, Anthony Moi, Pier-
+  ric Cistac, Tim Rault, Rémi Louf, Morgan Fun-
+  towicz, et al. 2019. Transformers: State-of-the-
+  art natural language processing. arXiv preprint
+  arXiv:1910.03771.
+Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V
+  Le, Mohammad Norouzi, Wolfgang Macherey,
+  Maxim Krikun, Yuan Cao, Qin Gao, Klaus
+  Macherey, et al. 2016. Google’s neural machine
+  translation system: Bridging the gap between hu-
+  man and machine translation.      arXiv preprint
+  arXiv:1609.08144.
+A    Additional Definitions                                   p satisfying 1/p + 1/q = 1. Then we have from
+                                                              Hölder’s inequality, for all v ∈ V and t,
+In contrast to greedy decoding, beam search with
+width k, Fbeam-k , operates on the level of partial                u>        >                           +
+                                                                    v ht ≤ kuv ht k1 ≤ kht kp kuv kq < Bu ,
+sequences or prefixes.
+                                                              where u+ = maxv∈V kuv kq . Note that
+Definition A.1 (Prefix). A prefix ρt is an ordered
+collection of items from V . The score of a prefix is              X >                                      
+                                                                       uv ht +cv            u> h  +c
+                                                               log   e           ≤ log max e v  t    v
+                                                                                                       × |V |
+               t                                                                              v∈V
+               X                                                    v∈V
+    s(ρt ) =          log pθ (yτ = ρt [τ ] | ρt [< τ ], C),                         ≤ max{u>
+                                                                                           v ht + cv } + log |V |
+               τ =1                                                                    v∈V
+                                                                                    < Bu + c+ + log |V |,
+                                                                                          +
+where ρt [τ ] is a token at time τ from ρt .
+   Starting from a set of empty prefixes, at each             where c+ = maxv∈V cv . For a given y<t and con-
+iteration a new prefix set is formed by expanding             text C,
+each prefix, then choosing the k highest scoring
+expanded prefixes.                                                log pθ (heosi | y<t , C)
+                                                                                                      >
+                                                                                              X
+Definition A.2 (Beam search). Beam search with                =(u>
+                                                                 heosi ht + cheosi ) − log          euv ht +cv
+                                                                                              v∈V
+width k, Fbeam−k , generates a sequence from a
+recurrent language model pθ by maintaining a size-            >(−Bu + cheosi ) − (Bu + c+ + log |V |) > −∞,
+                                                                          +                   +
+                                      top
+k prefix set Ptop
+                t . Starting with P0      = ∅, at
+                                                              and it follows that pθ (heosi | y<t , C) > ξ > 0 for
+each iteration t ∈ {1, 2, . . .} beam search forms
+                                                              some strictly positive constant ξ. Then
+a newSprefix set Ptop
+                   t by expanding the current set,
+Pt = ρ∈Ptop {ρ ◦ v | v ∈ V } (where ρ ◦ v is con-                   pθ (|Y | = ∞) = lim pθ (|Y | > t)
+            t−1
+catenation), then choosing the k highest scoring                                      t→∞
+
+elements: Ptop                              top
+            t = arg top-k s(ρ). Any ρ ∈ Pt end-
+                                                                                   = lim E [pθ (|Y | > t | C)]
+                                                                                     t→∞
+                           ρ∈Pt                                                        h                      i
+ing with heosi is restricted from being expanded                                   = E lim pθ (|Y | > t | C)
+                                                                                        t→∞
+further, and is added to a set S. Beam search ends                                     h             i
+when S contains k sequences, and returns the high-                                 ≤ E lim (1 − ξ)t = 0,
+                                                                                             t→∞
+est scoring sequence in S.
+                                                              and hence pθ is consistent.
+B    Proof of Lemmas in Section 3
+                                                              Lemma 3.3. A consistent decoding algorithm with
+Lemma 3.1. If a recurrent language model pθ is                respect to a consistent recurrent language model
+consistent, pθ (|Y | = ∞ | C) = 0 for any probable            decodes only probable sequences. That is, if
+context C.                                                    qF (Y | C) > 0, then pθ (Y | C) > 0 for any proba-
+                                                              ble context C.
+Proof. Suppose there exists a probable context C̃
+                                                              Proof. Suppose there exists a decoded sequence
+such that pθ (|Y | = ∞ | C̃) > 0. Then
+                                                              Ỹ by F and probable context C̃ such that
+                                                              qF (Ỹ | C̃) > 0 but pθ (Ỹ | C̃) = 0. By Remark
+    pθ (|Y | = ∞) = E [pθ (|Y | = ∞ | C)]
+                                                              2.1, the sequence Ỹ is of infinite length and thus
+                       ≥ p(C̃)pθ (|Y | = ∞ | C̃) > 0,         qF (|Y | = ∞ | C̃) ≥ qF (Ỹ | C̃) > 0, which contra-
+                                                              dicts the consistency of qF by Lemma 3.1.
+which contradicts the consistency of the model pθ .
+                                                              C     Proofs for Section 4
+Lemma 3.2. A recurrent language model pθ is                   Theorem 4.1. Suppose a recurrent LM pθ has uni-
+consistent if kht kp is uniformly bounded for some            formly bounded kht kp for some p ≥ 1. If a de-
+p ≥ 1.                                                        coding algorithm F satisfies qF (heosi | y<t , C) ≥
+                                                              pθ (heosi | y<t , C) for every prefix y<t and context
+Proof. Let B > 0 be an upper bound such that                  C, then the decoding algorithm F is consistent
+kht kp < B for all t. Let q be the conjugate of               with respect to the model pθ .
+Proof. By Lemma 3.2 the model pθ is con-               For any subsequence y = (y1 , . . . , yl ) with y1 6=
+sistent and pθ (heosi | y<t , C) > ξ for some          heosi,
+positive value ξ. Thus, qF (heosi | y<t , C) ≥
+                                                                                    l
+pθ (heosi | y<t , C) > ξ. For t ≥ 1,                                                Y
+                                                            pθ (ρ̂ ◦ y | ρ̂, C) =         pθ (yi | ρ̂ ◦ y<i , C)
+                                                                                    i=1
+       qF (|Y | > t | C)
+                                                                                 ≤ pθ (y1 | ρ̂, C)
+       = qF (y1 6= heosi , · · · , yt 6= heosi | C)
+                                                                                 < pθ (heosi | ρ̂, C).
+       ≤ (1 − ξ)t .
+                                                       Thus, ρ̂ ◦ heosi is the most probable sequence
+Taking the limit t → ∞ and expectation over C,
+                                                       among sequences starting with the prefix ρ̂, and
+we have
+                                                       it follows that ρ̂ ◦ heosi ∈ S(ρ̂).
+                                                           Thus, in S(ρ̂), there are (k − 1) sequences start-
+                      h                   i
+  qF (|Y | = ∞) = EC lim qF (|Y | > t | C)
+                                   t→∞                 ing with ρ̂ ◦ v for v ∈ V \ {heosi}. By the same
+                        ≤ lim (1 − ξ)t = 0,            argument, at each step at least one sequence ending
+                           t→∞
+                                                       with heosi is added to S(ρ̂), and therefore at time
+from which the decoding algorithm is consistent.       step (B + k), k sequences ending with heosi are in
+                                                       S(ρ̂).
+                                                           Note that the result set S by Fbeam−k (Defini-
+Theorem 4.2. Greedy decoding is consistent with        tion 2.11) satisfies
+respect to any self-terminating recurrent LM.                                    [
+                                                                          S⊆          S(ρ).
+                heosi
+Proof. Let pt       denote pθ (heosi | y<t , C) and                               ρ∈PB
+                                                                                      top
+ heosi         >
+at     denote uheosi ht + cheosi . By Definition 4.3
+                                                                           top
+we have                                                Since each ρ ∈ PB induces sequences of length
+                                                       at most B + k, we have
+    heosi                 heosi          heosi
+  pt        = 1 − σ(at            )(1 − pt−1 )
+                   t                                                pθ (|Y | > B + k | C) = 0.
+                             heosi
+                   Y
+            =1−           σ(at0 ) ≥ 1 − (1 − )t+1 .
+                  t0 =0                                Taking the expectation over C yields the consis-
+                                                       tency of the model pθ .
+Take B = − log 2/ log(1 − ). We then have
+ heosi
+pt     > 1/2 for all t > B, which implies that
+heosi is always the most probable token after time
+step B. Hence, the sequence length is less than B
+with probability 1.
+
+Theorem 4.3. Beam search with width k, Fbeam−k ,
+is consistent with respect to any STRLM.
+
+Proof. Let S(ρ) be the size-k set of sequences kept
+by Fbeam−k that start with a prefix ρ.
+  Take B = − log 2/ log(1 − ) as in the proof of
+Theorem 4.2. Suppose that there exists at least one
+             top
+prefix ρ̂ ∈ PB which does not end with heosi.
+  We first want to show that ρ̂ induces at most k
+more steps in beam search with width k, that is,
+Y ∈ S(ρ̂) implies |Y | ≤ B + k.
+  We know from the proof of Theorem 4.2 that
+an STRLM pθ satisfies: for any context C and
+v ∈ V \ {heosi},
+
+            pθ (heosi | ρ̂, C) > pθ (v | ρ̂, C).
+      Parameter                 Values
+                                                                  Parameter                                Values
+      Hidden Size               {256, 512, 1024}
+      Dropout                   {0.1, 0.3, 0.5}                   Hidden Size                              {256, 512, 1024}
+      Embedding Weight Tying    {True, False}                     Dropout                                  {0.1, 0.3, 0.5}
+                                                                  Embedding Weight Tying                   {True, False}
+Table 5: Grid search specification. The values selected
+for the LSTM-RNN and tanh-RNN models are shown            Table 6: Grid search specification. The values selected
+in bold and italics, respectively (word tokenization).    for the LSTM-RNN and tanh-RNN models are shown
+                                                          in bold and italics, respectively (BPE tokenization).
+
+D    Additional Results and Experiment
+     Details                                               Type               # Train    # Valid       # Test     |V |       Avg. len
+                                                           Word               78274      8464          9708       33182      24
+Training. Each model is trained on a single                BPE                83344      8721          10156      19483      28
+Nvidia P40 GPU for up to 100 epochs, stopping
+when validation perplexity does not decrease for                                 Table 7: Wikitext2 statistics.
+10 consecutive epochs.
+Hyper-parameters. Tables 5,6 show the grid                                                   tanh-RNN           LSTM-RNN
+search specifications. All models were 2 layers                     ancestral                0.00 ± 0.0         0.00 ± 0.0
+and were trained with the Adam optimizer.                           greedy                   6.07 ± 5.6         1.03 ± 0.3
+                                                                    beam-2                   1.21 ± 0.3         0.07 ± 0.1
+Model perplexities. Tables 10, 11 shows train                       beam-4                   0.29 ± 0.1         0.00 ± 0.0
+and test perplexities for the tanh-RNN and LSTM-
+                                                                    topk-2                   0.84 ± 0.8         0.00 ± 0.0
+RNN models using word and BPE tokenization,                         topk-4                   0.02 ± 0.0         0.00 ± 0.0
+respectively.                                                       nucleus-0.2              2.49 ± 0.2         0.76 ± 0.3
+                                                                    nucleus-0.4              0.32 ± 0.1         0.22 ± 0.1
+Additional example continuations. Table 12
+shows additional greedy-decoded continuations us-         Table 8: Non-termination ratio (rL (%)) of decoded
+ing a self-terminating LSTM-RNN and the baseline          sequences using ancestral sampling and incomplete de-
+LSTM-RNN with BPE tokenization.                           coding methods (word tokenization).
+
+GPT-2 length distributions. Figure 4 shows the
+length distributions of ground-truth continuations,                            ST            rL (%)            perplexity
+continuations from GPT-2 117M, and continuations                               ! 10     −2
+
+
+
+                                                                   tanh-RNN
+                                                                                              0.00 ± 0.0        150.07 ± 2.7
+from the self-terminating GPT-2 117M.                                          ! 10−3         0.00 ± 0.0        138.01 ± 0.6
+                                                                               ! 10−4         1.04 ± 0.6        138.67 ± 1.8
+                                                                               7 –            6.07 ± 5.6        136.57 ± 1.8
+                                                                               ! 10−2         0.00 ± 0.0        101.24 ± 0.3
+                                                                   LSTM
+                                                                               ! 10−3         0.00 ± 0.0        94.33 ± 0.6
+                                                                               ! 10−4         0.94 ± 0.5        94.15 ± 0.8
+                                                                               7 –            1.03 ± 0.3        91.86 ± 0.4
+
+                                                          Table 9: Non-termination ratio (rL (%)) of greedy-
+                                                          decoded sequences and test perplexity for self-
+                                                          terminating recurrent models (word tokenization).
+
+
+
+                                                                         model                 context      perplexity
+Figure 4: Lengths of ground-truth and greedy-decoded
+continuations from the baseline GPT-2 117M and self-                     tanh-RNN              train        91.54 ± 7.9
+                                                                         tanh-RNN              test         136.57 ± 1.8
+terminating GPT-2 117M models ( = 0.0025).
+                                                                         LSTM-RNN              train        45.80 ± 2.5
+                                                                         LSTM-RNN              test         91.86 ± 0.4
+
+                                                          Table 10: Perplexities of trained recurrent language
+                                                          models (word tokenization).
+        model         context   perplexity
+        tanh-RNN      train     61.20 ± 1.2
+        tanh-RNN      test      186.44 ± 1.4
+        LSTM-RNN      train     72.72 ± 2.4
+        LSTM-RNN      test      178.39 ± 1.2
+
+Table 11: Perplexities of trained recurrent language
+models (BPE tokenization).
+ Prefix      Payne was quoted as saying : “ With the album
+ nucleus     ’s ” album , “ The Predious ” , “ The One With the Wind ” , “ I ’ve Ever ’t Have You ’s My Way ” , “ I ’ve
+             Ever It ’s Johnny ” , “ The Predes ” , “ “ Always ” , “ The Predatory Was ” , “ The Dream ” , “ The Baste ” , ” “
+             Always Boy ” , “ My Drum ” , “ The Simpsons ” , “ “ Always Man ”, “ The “ Sweet Night ” , . . .
+ c-nucleus   ’s ” album , “ The Predious ” , “ The One With the Wind ” , “ I ’ve Ever ’t Have You ’s My Way ” heosi
+ Prefix      In a 2006 interview , fellow actor Ben Whish
+ nucleus     ’s father , a young actor , and a romantic relationship with the show , “ The One Where the The Simpsons ” , “
+             The Pape ” , “ The Next Generation ” , “ The Sixth Extinction ” , “ We ’t You Wanna Stay ” , “ The Dream ” , “
+             The Predator ” , “ The Collection ” , “ The Big Lear ” , “ The Predor ” , “ The Predation ” , “ My Blue ” , “
+             The Simpsons ” , “ The Sixth Extinction ” , “ My Love ” , “ The Rise of the Year ” , “ The Simpsons ” , “ The
+             Predator ” , “ My Dream ” , . . .
+ c-nucleus   was the first time in the film , and was published in the same episode of the season . heosi
+ Prefix      Most of what is known of Du Fu ’s
+ Baseline    “ the ” , the ” “ great ” , the ” “ ” , “ the most important ” , “ the most important ” , “ Ode to the Nightingale ” , “
+             Ode to the Nightingale ” , “ Ode to the Nightingale ” , “ Ode to the Nightingale ” , “ Ode to the Nightingale ” , “
+             Ode to the Nightingale ” , “ Ode to the Nightingale ” , “ Ode to the Nightingale ” , . . .
+ STRLM       Coty , was a “ one of the most important ” of the American science fiction . heosi
+ Prefix      He was relieved by Yan Wu , a friend and
+ Baseline    the first wife of the Order of the Order of the Order of the Order of the Order of the Republic of the Republic of
+             the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic
+             of the Republic of the Republic of the Republic of the Republic . . .
+ STRLM       the wife of the Royal Navy . heosi
+
+Table 12: More continuations with consistent nucleus sampling (µ = 0.2) and self-terminating LSTM ( = 10−3 )
+with BPE tokenization.
+

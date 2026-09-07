@@ -1,0 +1,233 @@
+{
+ "name": "leguin",
+ "chunk": 8,
+ "claims": [
+  {
+   "index": 165,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin's count of the hundred-syllable Tolkien sample gives 45 one-syllable words out of 72 words.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "Words of one syllable: 45",
+   "page": "the Tolkien sample's per-passage counts"
+  },
+  {
+   "index": 166,
+   "feature": "stylometry",
+   "claim": "Le Guin says her samples are far too small and her stress-counting too subjective for any conclusions to be drawn.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "too subjective for any conclusions at all to be drawn",
+   "page": "after the comparison tables"
+  },
+  {
+   "index": 167,
+   "feature": "stylometry",
+   "claim": "Le Guin observes that Jane Austen's stress-count nearly matching the textbook's shows stress-counting alone cannot indicate the quality of prose.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "merely counting stresses is not going to give us any solid",
+   "page": "after the comparison tables"
+  },
+  {
+   "index": 168,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin's counts show that in even a readable textbook more than half the words are polysyllables.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "in even a readable textbook more than half the words",
+   "page": "'Various interesting factoids emerge'"
+  },
+  {
+   "index": 169,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin's counts show Mark Twain using more one-syllable words than the folktale sample.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "that Mark Twain uses more one-syllable words than a folktale",
+   "page": "'Various interesting factoids emerge'"
+  },
+  {
+   "index": 170,
+   "feature": "sentence length variation",
+   "claim": "Le Guin's counts show Woolf writing the shortest sentences of the eight samples and Austen the longest.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "Woolf writes the shortest sentences of the lot and Austen the longest",
+   "page": "'Various interesting factoids emerge'"
+  },
+  {
+   "index": 171,
+   "feature": "repetition and refrain",
+   "claim": "Le Guin asserts that the power of deliberate repetition in a narrative is both great and legitimate.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "deliberate repetition in a narrative is both great and legitimate",
+   "page": "'Repetition of Words or Phrases'"
+  },
+  {
+   "index": 172,
+   "feature": "repetition and refrain",
+   "claim": "Le Guin states flatly that rhythm is repetition.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "Rhythm is repetition.",
+   "page": "'Beyond Stress: Long Prose Rhythms'"
+  },
+  {
+   "index": 173,
+   "feature": "other: narrative coherence by semirepetition",
+   "claim": "Le Guin says a narrative's coherence is established by inner references and backward- or forward-looking semirepetitions.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "coherence is established by inner references and backward-looking or forward-looking",
+   "page": "'Repetition of Images, Actions, Moods, and Themes'"
+  },
+  {
+   "index": 174,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin warns that if the rhythms become predictable the coherence of the story is mechanical.",
+   "source": "Ursula K. Le Guin, 'Stress-Rhythm in Poetry and Prose', The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "If the rhythms become predictable, the coherence of the story",
+   "page": "'Repetition of Images, Actions, Moods, and Themes'"
+  },
+  {
+   "index": 175,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin describes textbook prose as hobbling along clogged by a superfluity of unnecessary and understressed polysyllables.",
+   "source": "Ursula K. Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (2001), in The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "clogged by a superfluity of egregiously unnecessary and understressed polysyllables",
+   "page": "early pages of the essay, on stress ratios"
+  },
+  {
+   "index": 176,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin gives the ratio for narrative prose as one beat in every two to four syllables, against one in two or three for poetry.",
+   "source": "Ursula K. Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (2001), in The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "that ratio goes down to one beat in two to four",
+   "page": "early pages of the essay, on stress ratios"
+  },
+  {
+   "index": 177,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says Tolkien's prose runs to the normal narrative ratio of one stress every two to four syllables.",
+   "source": "Ursula K. Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (2001), in The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "one stress every two to four syllables",
+   "page": "early pages of the essay, on stress ratios"
+  },
+  {
+   "index": 178,
+   "feature": "per-speaker register",
+   "claim": "Le Guin describes the speech of the elves and noble folk such as Aragorn as having a dignified, often stately gait but no regular stress-beat.",
+   "source": "Ursula K. Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (2001), in The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "a dignified, often stately gait, but not a regular stress-beat",
+   "page": "on metric passages in the Trilogy"
+  },
+  {
+   "index": 179,
+   "feature": "register modulation",
+   "claim": "Le Guin says Tolkien's narrative moves in balanced cadences in passages of epic action yet remains pure prose.",
+   "source": "Ursula K. Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (2001), in The Wave in the Mind (Shambhala, 2004)",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "quote": "balanced cadences in passages of epic action",
+   "page": "on metric passages in the Trilogy"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 165,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Words: 72 / Words of one syllable: 45",
+   "note": "Raw PDF text extracted with pypdf from the live espivblogs copy (HTTP 200, 1,538,986 bytes, 253 pages). In the Tolkien sample of 'Stress-Rhythm in Poetry and Prose': 'Sentences: 4 plus a paragraph break / Bars: 15 / Words: 72 / Words of one syllable: 45'. The hundred-syllable limb is supported: 'The passages are of one hundred syllables to the dagger (anything past the dagger is not counted)', and the summary tables are headed 'Per 100-syllable sample:', where 'Number of one-syllable words' lists 'Tolkien: 45' and 'Number of words' lists 'Austen, Tolkien: 72'. Every limb supported."
+  },
+  {
+   "index": 166,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The samples are far too small and the method of counting stresses too subjective for any conclusions at all to be drawn",
+   "note": "Verbatim on the page immediately after the comparison tables and the 'Various interesting factoids emerge' list. The claim's 'her stress-counting' renders the page's 'the method of counting stresses'; both limbs (samples too small; counting too subjective) are on the page in one sentence."
+  },
+  {
+   "index": 167,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That Jane Austen's stress-count is almost the same as that of the textbook is, however, a good indication that merely counting stresses is not going to give us any solid indications of the quality--in all senses--of the prose",
+   "note": "Verbatim, immediately following the 'far too small' sentence. Both limbs supported: the Austen/textbook near-match (tables give Austen 33, Craig 32) and the inference about quality. Nuance, not a defect: the page hedges as 'a good indication that merely counting stresses is not going to give us any SOLID indications' where the claim says 'shows ... cannot indicate' -- the hedge is carried inside the quoted words themselves."
+  },
+  {
+   "index": 168,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that in even a readable textbook more than half the words are polysyllables",
+   "note": "Verbatim, third bullet of the 'Various interesting factoids emerge' list. Corroborated by her own counts for the Craig et al. textbook sample: 'Words: 52.5 / Words of one syllable: 25', i.e. more than half polysyllabic."
+  },
+  {
+   "index": 169,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that Mark Twain uses more one-syllable words than a folktale",
+   "note": "Verbatim, second bullet of the 'Various interesting factoids emerge' list. Corroborated by the table 'Number of one-syllable words, most to fewest: Twain: 72 / \"Three Bears\": 62'."
+  },
+  {
+   "index": 170,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that Woolf writes the shortest sentences of the lot and Austen the longest",
+   "note": "Verbatim, fourth bullet of the 'Various interesting factoids emerge' list. The claim's 'of the eight samples' is supported: the tables enumerate exactly eight samples ('Three Bears', Woolf, Tolkien, Twain, Stein, Darwin, Austen, Craig). Source-internal tension worth flagging but not a claim defect, since the claim reports what Le Guin's counts are said to show and the page asserts it as a factoid emerging from those counts: her per-passage counts give Darwin 1 sentence in 77 words against Austen 1 sentence in 72, so within the 100-syllable window Darwin's single sentence is the longer; both samples are cut mid-sentence at the dagger."
+  },
+  {
+   "index": 171,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But the power of deliberate repetition in a narrative is both great and legitimate",
+   "note": "Verbatim, closing sentence of the 'Repetition of Words or Phrases' section, exactly the section the claim names."
+  },
+  {
+   "index": 172,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Rhythm is repetition.",
+   "note": "Verbatim, opening the 'BEYOND STRESS / Long Prose Rhythms' section the claim names ('Rhythm is repetition. In a prose narrative, which must \"move\" with the events it tells...'). The sentence occurs twice in the book -- again in the following essay, 'Rhythmic Pattern in The Lord of the Rings' -- so the attribution is safe either way."
+  },
+  {
+   "index": 173,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Its coherence is established by inner references and backward-looking or forward-looking semirepetitions",
+   "note": "Verbatim in the 'Repetition of Images, Actions, Moods, and Themes' section, the section the claim names. The claim's 'backward- or forward-looking semirepetitions' compresses the page's 'backward-looking or forward-looking semirepetitions'; the referent of 'Its' is 'a well-written narrative', so the claim's 'a narrative's coherence' is exact."
+  },
+  {
+   "index": 174,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If the rhythms become predictable, the coherence of the story is mechanical",
+   "note": "Verbatim, two sentences after the semirepetitions sentence, in the same 'Repetition of Images, Actions, Moods, and Themes' section. The claim's 'warns' matches the passage's contrastive structure (pure repetition loses drive; predictable rhythms make coherence mechanical; varied repetitions give forward movement)."
+  },
+  {
+   "index": 175,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "textbook prose tends to hobble along clogged by a superfluity of egregiously unnecessary and understressed polysyllables",
+   "note": "Verbatim in 'Rhythmic Pattern in The Lord of the Rings', in the stress-ratio passage on the essay's early pages, exactly where the claim's page hint places it. The essay's own headnote supports the 2001 attribution: it 'happily found a home in Karen Haber's anthology of writing on Tolkien, Meditations on Middle Earth, published in 2001'. The claim drops 'egregiously' from its paraphrase but the quote field carries it."
+  },
+  {
+   "index": 176,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In poetry ... one syllable out of every two or three has a beat on it ... In narrative prose, that ratio goes down to one beat in two to four",
+   "note": "Both limbs verbatim and adjacent: 'In poetry, by and large, one syllable out of every two or three has a beat on it: Tum ta Tum ta ta Tum Tum ta, and so on... . In narrative prose, that ratio goes down to one beat in two to four: ta Tum tatty Tum ta Tum tatatty, and so on... .'"
+  },
+  {
+   "index": 177,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's prose runs to the normal narrative ratio of one stress every two to four syllables",
+   "note": "Verbatim, the sentence immediately after the textbook-prose sentence of claim 175. The page continues: 'In passages of intense action and feeling the ratio may get pretty close to 50 percent, like poetry, but still, except for Tom, it is irregular, it can't be scanned' -- a qualification the claim does not contradict, since it reports the normal ratio."
+  },
+  {
+   "index": 178,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The speech of the elves and noble folk such as Aragorn has a dignified, often stately gait, but not a regular stress-beat",
+   "note": "Verbatim, in the passage on metric passages in the Trilogy the claim's page hint names ('If there are other metric passages in the Trilogy, I've missed them.'). Every limb -- elves and noble folk, Aragorn as the example, dignified/often stately gait, absence of a regular stress-beat -- is on the page."
+  },
+  {
+   "index": 179,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The narrative moves in balanced cadences in passages of epic action ... but it remains pure prose",
+   "note": "Verbatim in the same paragraph as claim 178: 'The narrative moves in balanced cadences in passages of epic action, with a majestic sweep reminiscent of epic poetry, but it remains pure prose.' Both limbs (balanced cadences in epic action; remains pure prose) supported."
+  }
+ ]
+}

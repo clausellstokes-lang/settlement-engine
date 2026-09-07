@@ -1,0 +1,324 @@
+{
+ "name": "wolfe",
+ "chunk": 26,
+ "claims": [
+  {
+   "index": 1128,
+   "feature": "withheld information and inference",
+   "claim": "Clute says long stretches of the book only become intelligible on a second or third reading.",
+   "source": "John Clute, 'It Is Becoming to Grapple with This Book', Science Fiction Weekly issue 197, 29 January 2001",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2001-01-29-johnclute-excessivecandorv7no5issue197-itisbecomingtograpplewiththisbook.html",
+   "quote": "on a second or third reading",
+   "page": "body of column",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2001",
+   "routeHint": "gwern.net mirror of the defunct scifi.com column, fetched live",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1129,
+   "feature": "per-speaker register",
+   "claim": "Wolfe gives a child narrator, Hoof, a plain declarative voice for the hardest matter in the book.",
+   "source": "Gene Wolfe, Return to the Whorl, quoted in John Clute, 'It Is Becoming to Grapple with This Book', Science Fiction Weekly issue 197, 2001",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2001-01-29-johnclute-excessivecandorv7no5issue197-itisbecomingtograpplewiththisbook.html",
+   "quote": "Father was good. That is the hard part to explain",
+   "page": "quoted in the column",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2001",
+   "routeHint": "gwern.net mirror of the defunct scifi.com column, fetched live",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1130,
+   "feature": "withheld information and inference",
+   "claim": "Clute says the door to the inner rooms of a Wolfe story is never open.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "the door to the inner rooms is never open",
+   "page": "opening of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "gwern.net mirror of the defunct SCI FI Wire review, fetched live",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1131,
+   "feature": "plainness and economy",
+   "claim": "Clute held that every word Wolfe wrote was meant, leaving no sentence to be slurred over.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "every word he wrote was meant",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "gwern.net mirror of the defunct SCI FI Wire review, fetched live",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1132,
+   "feature": "metaphor discipline",
+   "claim": "Clute asserts Wolfe did not create metaphors in his text, or only ones with a literal meaning attached.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "metaphors to which a literal meaning, a literal architectonic, could",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "gwern.net mirror of the defunct SCI FI Wire review, fetched live",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1133,
+   "feature": "metaphor discipline",
+   "claim": "Clute says the closest Wolfe normally gets to metaphor is letting a protagonist tell a lie.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "the closest Wolfe normally gets to metaphor is when he",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "gwern.net mirror of the defunct SCI FI Wire review, fetched live",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1134,
+   "feature": "concrete sensory noun",
+   "claim": "Clute asserts Wolfe wrote neither thematics nor allegory but the thing itself.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "he did not write allegory, he wrote the thing itself",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "gwern.net mirror of the defunct SCI FI Wire review, fetched live",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1135,
+   "feature": "plainness and economy",
+   "claim": "Clute describes 'The Fifth Head of Cerberus' as written in a fluent, seemingly translucent style.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "a fluent, seemingly translucent style",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "gwern.net mirror of the defunct SCI FI Wire review, fetched live",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1136,
+   "feature": "withheld information and inference",
+   "claim": "Clute says the story can only be understood when every word is adhered to literally.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "understood when every word is adhered to literally",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "gwern.net mirror of the defunct SCI FI Wire review, fetched live",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1137,
+   "feature": "civic record register",
+   "claim": "Clute notes the opening tells us the tale is a memoir we are meant to understand was written down.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "we are meant to understand has actually been written down",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "gwern.net mirror of the defunct SCI FI Wire review, fetched live",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1138,
+   "feature": "place and institution description",
+   "claim": "Clute says the home of a Wolfe narrator tends to combine prison, pleasure garden and tomb.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "the features of a prison, a “pleasure garden,” and a tomb",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "gwern.net mirror of the defunct SCI FI Wire review, fetched live",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1139,
+   "feature": "other: critical neglect",
+   "claim": "Clute says academics have notoriously tended to shun Wolfe for decades.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "academics have notoriously tended to shun him for decades",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2009",
+   "routeHint": "gwern.net mirror of the defunct SCI FI Wire review, fetched live",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1140,
+   "feature": "omission as information",
+   "claim": "Aramini states it is generally accepted that Wolfe's style leaves out conclusions most genre work would include.",
+   "source": "Marc A. Aramini, '...Does It Mean? Gene Wolfe: Perverse Puzzle Maker', PhD dissertation, University of Nevada Las Vegas, May 2019",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+   "quote": "leaving out conclusions that most genre work would definitely include",
+   "page": "ch. 1",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2019",
+   "routeHint": "PDF fetched from gwern.net, text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1141,
+   "feature": "withheld information and inference",
+   "claim": "Aramini reports a general consensus that Wolfe leaves resolutions for the reader to infer.",
+   "source": "Marc A. Aramini, 'Gene Wolfe: Perverse Puzzle Maker', PhD dissertation, UNLV, May 2019",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+   "quote": "which are left to the reader to infer",
+   "page": "ch. 1",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2019",
+   "routeHint": "PDF fetched from gwern.net, text extracted with pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1142,
+   "feature": "withheld information and inference",
+   "claim": "Aramini reports Wright's counter-claim that Wolfe's allusions are distractions and misdirections.",
+   "source": "Marc A. Aramini, 'Gene Wolfe: Perverse Puzzle Maker', PhD dissertation, UNLV, May 2019",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+   "quote": "are actually distractions and misdirections",
+   "page": "ch. 1",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2019",
+   "routeHint": "PDF fetched from gwern.net, text extracted with pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1128,
+   "verdict": "PARTIAL",
+   "trueWording": "may be understood, on a second or third reading",
+   "unsupportedLimb": "\"only become intelligible\" - Clute writes that seemingly interminable passages MAY be understood on rereading as a necessary feature of the telling; he never says they are unintelligible otherwise, and the word \"only\" is not on the page.",
+   "note": "Raw gwern mirror of the archived scifi.com column fetched with a browser UA (200, 846KB). Quote is verbatim, in the paragraph after the Hoof block quote, about the long conversations Silk launches into. What the reread yields there is grasping their purpose, not plain intelligibility."
+  },
+  {
+   "index": 1129,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Father was good. That is the hard part to explain",
+   "note": "Block quote from Return to the Whorl reproduced in the column, introduced as Hoof, one of Horn's children, who has taken over the task of writing the Book for a few chapters. The quoted passage is short declarative narration and is explicitly about what is hard to explain; Clute's surrounding paragraphs treat Silk's goodness as the book's hardest matter."
+  },
+  {
+   "index": 1130,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the door to the inner rooms is never open",
+   "note": "First sentence of the review (raw gwern mirror of the SCI FI Wire page, 200, 1.2MB), following \"We do not enter a story by Gene Wolfe without knocking\". Page location hint \"opening of review\" is correct."
+  },
+  {
+   "index": 1131,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "every word he wrote was meant",
+   "note": "In the paragraph on the miracle decade: Clute gives it as the first thing to understand, then and now, and the next sentence supplies the second limb - there could be no slurring over of sentences in the reader's mind."
+  },
+  {
+   "index": 1132,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "metaphors to which a literal meaning, a literal architectonic, could",
+   "note": "Same paragraph, immediately after the \"every word he wrote was meant\" sentence; the clause opens \"As Wolfe did not create metaphors in his text - or if he only created metaphors to which...be attached\". Both limbs of the claim are on the page."
+  },
+  {
+   "index": 1133,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the closest Wolfe normally gets to metaphor is when he",
+   "note": "End of the paragraph on the Fifth Head twin-planet setting, where twins, mirrors, masks and lies are listed; the sentence completes with allowing one of his protagonists to tell a lie, so the lie limb is supported too."
+  },
+  {
+   "index": 1134,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he did not write allegory, he wrote the thing itself",
+   "note": "In the '70s paragraph; the full clause also carries the thematics limb - Clute lists thematics, then allegory, then the thing itself. Contiguous on the page as quoted."
+  },
+  {
+   "index": 1135,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a fluent, seemingly translucent style",
+   "note": "Opening of the paragraph on \"The Fifth Head of Cerberus\" (the story about guarding the hell within); the attribution to that title is explicit in the same sentence."
+  },
+  {
+   "index": 1136,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "understood when every word is adhered to literally",
+   "note": "Same sentence as 1135: the translucent style may distract the reader from realizing that it can only be understood when every word is adhered to literally. The \"only\" limb IS on the page here, unlike claim 1128."
+  },
+  {
+   "index": 1137,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we are meant to understand has actually been written down",
+   "note": "Paragraph quoting the story's first line about going to bed early, which Clute says informs us immediately that we are reading a memoir; the Proust comparison sits between the two limbs. Both limbs (opening tells us; memoir written down) supported."
+  },
+  {
+   "index": 1138,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the features of a prison, a “pleasure garden,” and a tomb",
+   "note": "Paragraph on the second paragraph of the story and the narrator's house; the page reads \"is likely to combine\" where the claim says \"tends to\", and the next clause repeats the tendency for a typical Wolfe tale, so the hedge is faithful. Curly quotes around pleasure garden match the page."
+  },
+  {
+   "index": 1139,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "academics have notoriously tended to shun him for decades",
+   "note": "In the '70s paragraph, given as one of the reasons (the other being that he is indeed difficult) - the claim reports the shunning without the causal frame, which the page supports as written."
+  },
+  {
+   "index": 1140,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leaving out conclusions that most genre work would definitely include",
+   "note": "PDF fetched with a browser UA (200, 1.6MB) and extracted with pdftotext -layout; passage is on printed page 7, inside Chapter One: Introduction, so the ch. 1 hint is right. Sentence begins \"It is generally accepted that one of the hallmarks of Wolfe's style involves...\", supporting the generally-accepted limb."
+  },
+  {
+   "index": 1141,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which are left to the reader to infer",
+   "note": "Same page 7 paragraph, two sentences later: Aramini writes that the absence resonates with the general consensus that Wolfe leaves out certain resolutions, which are left to the reader to infer. Consensus limb explicit."
+  },
+  {
+   "index": 1142,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "are actually distractions and misdirections",
+   "note": "Page 7, sentence attributing the position to Peter Wright's Attending Daedalus regarding the allusions and familiar tropes Wolfe employs, especially in The Book of the New Sun. Counter-claim framing is fair: Aramini sets it against the consensus (\"However, Wright insists...\") and rebuts it a page later."
+  }
+ ]
+}

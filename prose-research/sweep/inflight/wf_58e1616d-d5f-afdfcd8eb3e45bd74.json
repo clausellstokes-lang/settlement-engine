@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i390-404",
+ "lines": 55,
+ "firstTs": "2026-09-06T17:22:17.314Z",
+ "lastTs": "2026-09-06T17:27:18.793Z",
+ "tools": {
+  "Read": 2,
+  "ToolSearch": 1,
+  "Bash": 10,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "http://lists.urth.net/pipermail/urth-urth.net/2006-September/$u.html",
+  "https://ultan.org.uk/the-reader-as-augur/",
+  "https://web.archive.org/web/${t}id_/http://lists.urth.net/pipermail/urth-urth.net/2006-September/$u.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": " 80 with a browser user agent, three times, 75s each), and the Ultan's Library article fetched live at HTTP 200. Checkpoint written to `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i390-404.json`.",
+ "run": "wf_58e1616d-d5f",
+ "agent": "afdfcd8eb3e45bd74",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_58e1616d-d5f/agent-afdfcd8eb3e45bd74.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i390-404.json",
+  "exists": true
+ }
+}

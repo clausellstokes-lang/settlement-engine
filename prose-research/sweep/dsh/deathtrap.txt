@@ -1,0 +1,928 @@
+Welcome to the Deathtrap: Designing Layout and Information in Adventures 
+
+Welcome to the Deathtrap
+
+ OSR Gaming for Tools & Reviews for GMs 
+
+ Tools 
+
+ Adventures and Encounters 
+
+ Resources 
+
+ Product Reviews 
+
+ Books & Games 
+
+ Sunday, August 29, 2021 
+
+Designing Layout and Information in Adventures
+
+One of the great joys of reading OSR products is just how many innovations I get to see not just in game design, but in designing layout and information. 
+ The Evolution of Dungeons & Dragons' Information Design
+ It took some time for Dungeons & Dragons to settle on a solid format for how to convey a scenario. And the style that dominated design in the late 80s through the 90s was serviceable. It could stuffs lot onto a small space.
+ 
+ From Temple of Elemental Evil (p. 67)
+©1985 TSR, Inc. 
+Click to Enlarge 
+ 
+ Today its a format that remains perfectly useful. In fact, many successful lines, like Goodman Games' Dungeon Crawl Classics adventures use them with only a little modification.
+
+ From Sailors on the Starless Sea (p. 7)
+©2012 Goodman Games, Inc. 
+Click to Enlarge 
+ 
+ Over time, the developers of Dungeons & Dragons have tried a few ways to improve the formula, with mixed results. Personally, I was quite fond of 3rd edition's structure, which clearly signposted monsters, treasure, traps, and tactics using indentation and icons, and presented in a specific order. It also posted Encounter Level at the beginning of each encounter. It was a little less space efficient, but much easier to read when actually running the adventure. 
+ 
+ From Return to the Temple of Elemental Evil (p. 51)
+©2001 Wizards of the Coast, Inc. 
+Click to Enlarge 
+ Dungeons & Dragons 4th Edition took a radical departure from the way previous editions presented. Locations that had no encounter are often compressed into single paragraphs with minimal effort spent on description. Encounters are given a setup that explains goals, environment, and starting the encounter, followed bdescriptions of action and events. Detailed, full-sized monster stat blocks as might be seen in the Monster Manual sit in a separate column. A second page of the encounter includes tactics, a description of the area and a miniaturized version of the battle map. For the area with initial unit placements. 
+ This format is detailed, and space-intensive; it fills a single spread of pages. Given the elaborate color images and larger font, it also is a relatively expensive format for print. It is, However designed to be easy to use at the table. 
+ We saw many of these design changes appearing in the last days of Dungeons & Dragons 3e. Books like the Monster Manual 4 included example lair maps, variant monsters, and information on how to build adventures that used the monster. Later modules such as Eyes of the Lich Queen and Red Hand of Doom included encounter - specific battle maps with notations. In retrospect, one can easily see that many of the products from 2006 & 2007 were designed as transitional products to get players ready for the changes they had already planned for D&D4e . 
+ 
+ From Keep on the Shadowfell (p. 28-29)
+©2008 Wizards of the Coast, Inc.
+Click to Enlarge 
+ Strangely, this format hasn't really stuck with Wizards of the Coast. My copy of D&D5e's Candlekeep Mysteries looks more like Temple of Elemental Evil than Keep on the Shadowfell or Red Hand of Doom (3rd Ed.'s gold standard adventure). They still signpost traps and treasure with bold italics at the start of the appropriate paragraph. But in the end it is a wall of text with a boxed description.
+ Ultimately, it is no surprise Dungeons & Dragons hasn't mixed it up too much. The old formula is familiar and functional. After the response to 4th Ed., they also are likely to be very cautious of departing too much from formula.
+ Innovating Information Design
+ If 4th edition taught the TTRPG community, however, it is that a good layout and information design can vastly improve the play experience. Especially if not overdone. Part of what has distinguished the post-4e and especially Old-School crowd has been an interest in finding ways to make games easier to read, learn, and when it comes to adventures, use at the table.
+ Making games easier to use borders on obsession with some parts of the OSR crowd. It is definitely why Necrotic Gnome's Old School Essentials system has rapidly risen to the position of dominant retroclone in the OSR market: the core game remains a very light tweaked version of Moldvay-era B/X Dungeons & Dragons. What sets it apart is that the rules are written, structured, and ordered in a way that makes them very easy to learn and quick to reference. There is an incredible attention to designing how the information is presented . 
+ Here are a few of my favorite from different OSR games and designers that might be valuable to you in your own note making or in designing a module to bring to market.
+ Hail the Mighty Spread
+ This is an innovation you can see pretty clearly above in the image from Keep on the Shadowfell, and is a pretty basic principle of graphic design: whenever presenting information that people have to use on the fly, try to avoid making the reader have to flip pages, especially in the middle of a paragraph. When possible include everything you can on one page or across two facing pages (a "spread".) If you must make a page turn to present information try to arrange things so that the information on the next page is the least essential.
+ When a GM has to turn pages back and forth to get information (an "unfortunate turn") it does interrupt not just the flip of play, but the GMs stream of thought.
+ This can be tricky to do consistently in large-scale modules, but certainly it has been a focus of a lot of designers and I can say that I have found the results to be very pleasing.
+ Hit Points Trackers 
+ From JN2: Monkey Isle 2nd Ed. (p. 11)
+ Copyright © 2009-2015, 2018-2019 J.D. Neal 
+ Click to Enlarge 
+
+ This is a frippery I love from Basic Fantasy RPG: they have check boxes to allow easy tracking of NPC and Monster hit points on the page. Because Basic Fantasy RPG and its modules are sold on Amazon at cost , a module in print will run you $3-$6 and are easy to get with free shipping, so the Basic Fantasy community can afford to include design elements that are most useful if are going to run a game with a print copy.
+ Embedded Maps
+ Placing a small copy of the larger dungeon map on a spread so that the rooms being described can easily be located without flipping to the complete dungeon map elsewhere in the book. Knowing where the PCs are and where the exits lead minimizes flipping and makes finding the next location at a glance much easier.
+ Visual Stat Blocks
+ Using tidy graphics to represent monsters and NPCs rather than chunky blocks of text is slightly less space-efficient, but it can make reading a module much easier. While I have seen a few of these, my favorite is the ones used by Venger Satanis in his Cha'alt books. They are incredibly easy to use at just a glance.
+ 
+ From Cha'alt: Fuscia Malaise (p. 76)
+©2020 Kort'thalis Publishing 
+Click to Enlarge 
+ MAP Character Descriptions 
+ From D12 Monthly #3 (p. 15)
+©2021 YUMDM
+Click to Enlarge 
+
+ Finding brief, effective ways to characterize NPCs without spending large amounts of space has been one of the most useful tools I have seen integrated into newer RPG designs. I have seen everything from a parenthesis with three descriptive adjectives to a system of celebrity comparison. My favorite version of this is the MAP method introduced in d12 Monthly (previously D8 Monthly) that notes a character's M otivation A ppearance and P ersonality in three fragments after a character's name in parenthesis.
+ Point-Form NPC Details
+ One of my favorite innovations comes from Jacob Hurst and the Swordfish Islands crew's The Dark of Hot Springs Island . It is a method for giving detailed rundowns of the personality and motivation of important NPCs like faction leaders and villains. It can also be done to cover entire factions and their motivations. 
+ This is done in three sections: "What They Want," "What They Don't Want," and "What Else?" with at least three bullet points each. The last, "What Else? " section allows the GM to add quirks, important points, and complex goals. 
+ 
+ From The Dark of Hot Springs Island (p. 124)
+©2017 The Swordfish Islands
+Click to Enlarge 
+ Point Form Description
+ Another Swordfish Islands innovation, rather than give a long box text, Hot Springs Island provides a handful of adjectives that describe the area the GM can use as they see fit while Improvising a description. 
+ 
+ From The Dark of Hot Springs Island (p. 21)
+ ©2017 The Swordfish Islands
+ Click to Enlarge 
+ 
+ Multidimensional Encounter Tables 
+ The image above also includes an excellent example of a Multidimensional Encounter table. By rolling 3d6 three times in this compact table gives you a creature, a number, and what they are doing, giving you a far more dynamic way of breathing life into your encounters. 
+
+ Room Difficulty / Level 
+ From Index Card RPG Core 2e (p. 90)
+©2018 RUNEHAMMER Games
+Click to Enlarge 
+
+ Roleplaying games such as Index Card RPG Core 2e and The Cypher System establish the target for dice rolls using a single number, The Target in the case of ICRPG or the Level in the case of Cypher System . 
+ While this is essentially a rules innovation it also makes design much easier as a single icon can be placed to mark that number, saving a considerable amount of redundant data. I find that the ICRPG notation is particularly useful for this. 
+ Digest Format
+ Most traditional Dungeons & Dragons modules use 8.5" × 1"1 pages, whether they are a slim 16-page module or a 300-page hardbound rulebook. This is appropriate for some purposes, but can make books difficult to pack or casually peruse. The smaller formats such as zines, digest books, and chapbooks all use a similar size arund 5.5" × 8.5", which can be simpker to format for easy reading and layout. Not to mention more portable. I personally have fallen in love with the physical design of Lamentations of the Flame Princess ' book design for travel and reading. 
+ Guide Post Icons
+ This was actually an easily-overlooked element of AD&D2e's design I have not seen much imitated outside of The Strange from Monte Cook Games : using small icons either at the top of sections or page corners to indicate different chapters, topics, or game subsystems. AD&D2e used icons on page corners to differentiate chapters. The Strange uses icons to show which kinds of visited worlds ("recursions") the section describes and which character foci would be appropriate to us when visiting it .(i.e. "This is a fantasy world; you may use this character focus while visiting it.") 
+ My Own Experiments
+ Looking at how these different ideas have been deployed has really encouraged me to try to include the innovations I find most intriguing. Over time I have started to develop a sense of which idea will fit which project. 
+ Full Throttle
+ My Index Card RPG 2e learning dungeon, Harkin’s Slave-Pit , takes advantage of the fact that ICRPG doesn't really have a long tradition I am moving against in terms of format. I tried to use all of my favorite innovations in a single, unique structure. 
+ Each location in the dungeon includes a mini-map, and starts with an icon setting the Target for the room. 
+ I used my own version of point form description, offering a note for sight, sound, hearing, touch, and smell where possible, along with salient details that the PCs can use to navigate the environment. All in fragments to offer the GM the ability to make his own description with the points they decide are best. 
+ I follow this with a Monster section where relevant discussing motivation, activity, and tactics before offering a stat block. 
+ Notes includes any important points about the environment, machinery, etc, comes next in bullet point. 
+ Finally, in add a Timer section describing consequences of allowing a trap or monster encounter to carry on too long,
+ This structure is punchy and simple to run. I have received a lof of positive feedback on it, and have at least one other module in the works with a similar format. 
+ 
+ From Harkin’s Slave-Pit 
+©2020 Brian C. Rideout 
+Click to Enlarge 
+ Pamphlet Design and What it Taught Me
+ When I first decided to share my content on DrivethruRPG , I needed to "rip off the bandaid," and just get something out there. It was the only way to get over my own doubts and self-consciousness. So, I created a series of simple, fun pamphlet adventures . I paused halfway through creating modules like Harkin’s Slave-Pit to make them. 
+ Keen to use those same innovations, I spent several nights trying different formats, but more modern styles, I found, were always a trade-off of space for informational flow. I had a hell of a time making a good adventure fit on two pages using something like the format above. 
+ With the extremely limited space available to create even a five-room dungeon , I quickly realized that the old formula used by TSR might not be the easiest to use at a table, but in terms of space, it is one of the most economical options. I moved to traditional Dungeons & Dragons module style so that I coukd make the most of my space. With only a double - sided sheet of paper to work with, making sure my adventures were positioned in tight blocks of information that were familiar and most DMs was an obvious solution.
+ More importantly, I realized that at the end of the day, there is nothing wrong with the old TSR module style. The new design elements are augmentations, not fixes to a broken structure. 
+ Below you can see ½ of the adventure location described in my module Love Nest of the Barbarix condensed to fit ⅓ of a sheet of paper:
+ 
+ From Love Nest of the Barbarix 
+CC-BY-NC-SA Brian C. Rideout 
+Click to Enlarge 
+ Balance
+ After creating a few of my pamphlet adventures and getting some feedback, I decided that my latest project, The Maze of the Screaming Heads would work best if I balanced my desire to create something easy to use at the table with something compact that I could eventually set up for print.
+ I started by using the digest size and standard print margins, I wanted to make sure that the book didn't spread across too many pages. I made sure that information was included area by area in a way that required minimal page flipping. For that, a more traditional Dungeons & Dragons- style room description proved a better fit.
+ I was able to include mini-maps once per spread to show the (usually 2-3) rooms featured on that spread to make the map more manageable. I used subheadings to signpost monsters and treasure. 
+ In several places I needed to detail NPCs. For unimportant NPCs like contacts and hirelings, I include a Map description for shorthand. For three NPCs who are likely to interact with the party and their choices meaningfully, I instead gave them a Point-Form description in the vein of Hot Springs Island . 
+ The end result is a more traditional presentation, but augmented with maps and laid out to avoid page flipping, while offering richer NPCs in a tight space. It still needs some modifications to the file in Scribus in order to be printable, but I hope to create a printable version very soon.
+ 
+ From Maze of the Screaming Heads (p. 18-19)
+©2021 Brian C. Rideout
+Click to Enlarge 
+ Is it my final format? Probably not. There are so many amazing ways to reorganize information out there to make the game feel easier to run and understand. I would be a fool not to take some more advantage of what the brilliant indie and OSR designers have to offer. But I hope that this design offers a smoother, simpler play experience for the GM, while keeping print costs down and getting as much fun as possible on each given page. 
+
+Posted by
+ 
+ Brian C. Rideout 
+
+at
+ 
+ 8:29 AM 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ Adventures ,
+ My Games ,
+ OSR ,
+ Theory 
+
+ 4 comments:
+
+ NOLAbert August 29, 2021 at 11:18 AM 
+ This is the best overview of adventure design structures I’ve seen. It’s very comprehensive. In my adventure, The Hidden Necropolis, I mostly used the trad TSR style updated via Goodman Games with some sections demarcated separately in bold for encounters and developments. It seems to me the evolution of the embedded map style is in part due to the inability to offer maps separate from the module (e.g., TSR’s separate covers). But it seems to me in this digital era, offering a separate printable map is easy. 
+
+Interestingly, Melan/Gabor Lux just wrote about the state of the OSR on his blog, http://beyondfomalhaut.blogspot.com/2021/08/blog-year-five-old-school-refocus.html, and he laments the overemphasis of design elements over content. 
+ Reply Delete 
+ Replies 
+ Brian C. Rideout August 29, 2021 at 11:44 AM 
+ Right now design is an obsession, and it is true that too much emphasis on design and layout can become a matter of style over substance. Or putting lipstick on the proverbial pig.
+
+Used well, these elements can take your good ideas and make them really shine. It will increase the chances that an already awesome idea will get played at more tables and build some great word of mouth.
+
+But if you apply enough style and design to an adventure and it has no substance to back it up you are going to end up with disappointed players. And it will cost you in the long run.
+
+Right now I do worry that we are seeing a wave of designs so focused on being beautiful and easy to read, but offer nothing new for play. And it might just damage the overall reputation of the indie RPG scene. 
+ Delete 
+ Replies 
+ Reply 
+
+ Brian C. Rideout August 29, 2021 at 11:45 AM 
+ Now I have two more follow - up article ideas! Thank you! 
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Hugh September 4, 2021 at 6:33 PM 
+ This is a fun post. Good ideas well filtered. I think an OSR theme is function over form. There are many systemless art theme coffee table games (many of which are awesome of course) in circ today. 
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Add comment 
+ 
+ Load more... 
+
+ Newer Post 
+
+ Older Post 
+ 
+ Home 
+
+Subscribe to:
+ Post Comments (Atom) 
+
+ Something to Say?
+
+ Catch me on Twitter! 
+
+ Strange Ways
+
+ Six alternate classes and magic systems for any OSR-Compatible game. 
+
+ Heroes & Homelands
+
+ A fast & light OSR game meant for easy copying, pasting, and hacking. 
+
+ Undeadwood: Weird West RPG
+
+ The preview version of my Wierd West Fantasy RPG to accompany my development podcast "Dead Man's Dice" 
+
+ Eternal Ocean & Wreck
+
+ My Latest Sci-Fi TTRPG Project 
+
+ Drakken: Classic Sword & Sorcery ed.
+
+ Ultra-light, ultra-fast, OSR compatible game. 
+
+ Deathtrap Lite
+
+ Sword and Sorcery Adventure Game 
+
+ Currently Reading
+ Tales of Argosa
+ Currently Running
+ Swords & Wizardry
+ Death in Space
+ Knave 2e
+ Low Fantasy gaming
+
+ Currently Playing
+ Blueholme
+ Tales of Argosa
+ 
+ Currently Writing
+
+ The Depths of the Eternal Ocean
+ Undeadwood: Weird West RPG
+
+ Currently Producing
+
+ Swords Against Madness 
+ Trans-Real News 
+ Dead Man's Dice 
+
+ Currently Listening
+
+ Tale of the Manticore 
+
+ Legend of the Bones 
+
+ Legends from the Fireside 
+
+ Stories from the First Watch 
+
+ Errant Adventures 
+
+ A Wasteland Story 
+
+ On YouTube
+
+ Search
+
+ Categories
+
+ Abou 
+
+ About 
+
+ Adventures 
+
+ Art 
+
+ Campaign Updates 
+
+ Candlekeep Mysteries 
+
+ Classic Adventures 
+
+ Conversions 
+
+ Cthulhu Ftaghn! 
+
+ Deathtrap Lite 
+
+ Dragonette 
+
+ Drakken 
+
+ Drowned World 
+
+ Eternal Ocean 
+
+ Game 
+
+ Golden Heresy 
+
+ Hex23 
+
+ Hot Springs Island 
+
+ Interviews 
+
+ Kids 
+
+ Live Play 
+
+ LotFP 
+
+ Lowlife 2090 
+
+ Midnight Zone 
+
+ My Games 
+
+ OSR 
+
+ Podcasts 
+
+ Publishing 
+
+ QuAD 
+
+ Random Generators 
+
+ Resources 
+
+ Review 
+
+ RPGaDay2021 
+
+ Ruins & Redcaps 
+
+ Rules 
+
+ Solo 
+
+ SPAAACE! 
+
+ Square Dungeon 
+
+ System-Neutral Content 
+
+ Theory 
+
+ Tools 
+
+ Undeadwood WWRPG 
+
+ wargaming 
+
+ Wierth 
+
+ World-Building 
+
+ Xen 
+
+ Blog Archive
+
+ ► 
+
+2026
+ 
+ (5) 
+
+ ► 
+
+May
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2025
+ 
+ (27) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2024
+ 
+ (54) 
+
+ ► 
+
+December
+ 
+ (6) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (4) 
+
+ ► 
+
+June
+ 
+ (4) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (5) 
+
+ ► 
+
+March
+ 
+ (5) 
+
+ ► 
+
+February
+ 
+ (8) 
+
+ ► 
+
+January
+ 
+ (6) 
+
+ ► 
+
+2023
+ 
+ (79) 
+
+ ► 
+
+December
+ 
+ (7) 
+
+ ► 
+
+November
+ 
+ (6) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (6) 
+
+ ► 
+
+July
+ 
+ (8) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (12) 
+
+ ► 
+
+April
+ 
+ (7) 
+
+ ► 
+
+March
+ 
+ (6) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (11) 
+
+ ► 
+
+2022
+ 
+ (106) 
+
+ ► 
+
+December
+ 
+ (7) 
+
+ ► 
+
+November
+ 
+ (9) 
+
+ ► 
+
+October
+ 
+ (7) 
+
+ ► 
+
+September
+ 
+ (9) 
+
+ ► 
+
+August
+ 
+ (14) 
+
+ ► 
+
+July
+ 
+ (9) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (8) 
+
+ ► 
+
+April
+ 
+ (6) 
+
+ ► 
+
+March
+ 
+ (9) 
+
+ ► 
+
+February
+ 
+ (9) 
+
+ ► 
+
+January
+ 
+ (12) 
+
+ ▼ 
+
+2021
+ 
+ (139) 
+
+ ► 
+
+December
+ 
+ (10) 
+
+ ► 
+
+November
+ 
+ (10) 
+
+ ► 
+
+October
+ 
+ (9) 
+
+ ► 
+
+September
+ 
+ (17) 
+
+ ▼ 
+
+August
+ 
+ (10) 
+ 
+ Zine Review: D12 Monthly Issue #4 
+
+ On the Application of Maquillage to the Porcine Snout 
+
+ Designing Layout and Information in Adventures 
+
+ Review : Lands of Legends: Holy 
+
+ The Maze of Screaming Heads 
+
+ Sunburns and Shoals, Making Nature Matter in D&D 
+
+ Review : D12 Monthly Issue 3 
+
+ Zzonga Fruit - The Sweet, Sweet Destroyer 
+
+ #RPGaDay2021 4- Throne 
+
+ #RPGaDay2021 Catch Up 
+
+ ► 
+
+July
+ 
+ (8) 
+
+ ► 
+
+June
+ 
+ (12) 
+
+ ► 
+
+May
+ 
+ (15) 
+
+ ► 
+
+April
+ 
+ (12) 
+
+ ► 
+
+March
+ 
+ (12) 
+
+ ► 
+
+February
+ 
+ (8) 
+
+ ► 
+
+January
+ 
+ (16) 
+
+ ► 
+
+2020
+ 
+ (108) 
+
+ ► 
+
+December
+ 
+ (8) 
+
+ ► 
+
+November
+ 
+ (9) 
+
+ ► 
+
+October
+ 
+ (13) 
+
+ ► 
+
+September
+ 
+ (19) 
+
+ ► 
+
+August
+ 
+ (11) 
+
+ ► 
+
+July
+ 
+ (15) 
+
+ ► 
+
+June
+ 
+ (8) 
+
+ ► 
+
+May
+ 
+ (13) 
+
+ ► 
+
+April
+ 
+ (12) 
+
+ My Review Philosophy and Policy
+
+I review games - even ones I don't like with two goals. 
+
+ First, to help everyone discover the cool ideas, designs, and mechanics that will help them build their best possible game at home.
+
+ Second, to help developers make the most polished games they can with honest, thoughtful feedback. 
+
+ Read my full policy here. 
+
+ Blogroll
+
+ Stephen's Hobby Workshop Questing Beast 
+ The Angry GM 
+ Wizard Thief Fighter 
+ Hill Cantons 
+ The Man with a Hammer 
+ Goblin Punch 
+ Trilemma Adventures 
+ Coins and Scrolls 
+ Grognardia 
+ The RPG Pundit 
+ Aaron the Pedantic 
+ Venger's Old School Gaming Blog 
+ Zenopus Archives 
+
+ Grumpy Wizard 
+ Vaults of Pandius 
+ Wrath of Zombie 
+
+ Brinehouse 
+ Yum/DM 
+
+ Caulbearer Press 
+
+ Elf Maids and Octopi 
+
+Lord Matteus' Ancient Tomes and Wondrous Items 
+
+Seed of Worlds 
+
+ Contact Form
+
+Name
+
+Email
+ * 
+
+Message
+ * 
+
+ For Inmates & Staff of Correctional Facilities
+
+Specialized versions of the files for Drakken are available on request free of charge.
+
+ The OSR logo was created by Stuart Roberton an is licensed under a Creative Commons Attribution 3.0 Unported License. 
+
+"Dungeon Jail" image is from 2minutetabletop.com/ and is licensed under a CC BY-NC 4.0 License 
+
+© 2020 Brian Rideout. Travel theme. Powered by Blogger .

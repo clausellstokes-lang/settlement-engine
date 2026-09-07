@@ -1,0 +1,5578 @@
+[
+ {
+  "key": "src/data/tradeGoodsData.js::INSTITUTION_SERVICES",
+  "file": "src/data/tradeGoodsData.js",
+  "exp": "INSTITUTION_SERVICES",
+  "n": 934,
+  "samples": [
+   "Settles quarrels between households by custom",
+   "Calls and chairs the gathering of families",
+   "Keeps the memory of boundaries, debts, and old agreements"
+  ],
+  "paths": [
+   "INSTITUTION_SERVICES.Household elder.Dispute mediation.desc",
+   "INSTITUTION_SERVICES.Household elder.Communal decisions.desc",
+   "INSTITUTION_SERVICES.Household elder.Record of custom.desc",
+   "INSTITUTION_SERVICES.Household elder.Hospitality.desc",
+   "INSTITUTION_SERVICES.Village headman.Dispute mediation.desc",
+   "INSTITUTION_SERVICES.Village headman.Communal labour.desc"
+  ]
+ },
+ {
+  "key": "src/store/selectors.js::selectCurrentCatalog()",
+  "file": "src/store/selectors.js",
+  "exp": "selectCurrentCatalog()",
+  "n": 274,
+  "samples": [
+   "A free hamlet with no lord's representative. Communal elder consensus governs shared affairs.",
+   "All family heads hold equal voice on shared concerns. Slower but more egalitarian.",
+   "A steward appointed by a distant lord to oversee the settlement. Authority is formal but often resented."
+  ],
+  "paths": [
+   "selectCurrentCatalog().Government.Informal elder consensus.desc",
+   "selectCurrentCatalog().Government.Head-of-household consensus.desc",
+   "selectCurrentCatalog().Government.Lord's reeve.desc",
+   "selectCurrentCatalog().Government.Household elder.desc",
+   "selectCurrentCatalog().Government.Lord's steward.desc",
+   "selectCurrentCatalog().Government.Village headman.desc"
+  ]
+ },
+ {
+  "key": "src/domain/compendium/searchIndex.js::COMPENDIUM_INDEX",
+  "file": "src/domain/compendium/searchIndex.js",
+  "exp": "COMPENDIUM_INDEX",
+  "n": 199,
+  "samples": [
+   "smallest single institution subsistence 8-60",
+   "local subsistence minimal trade 61-400",
+   "surplus weekly market guilds begin 401-900"
+  ],
+  "paths": [
+   "COMPENDIUM_INDEX[0].keywords",
+   "COMPENDIUM_INDEX[1].keywords",
+   "COMPENDIUM_INDEX[2].keywords",
+   "COMPENDIUM_INDEX[3].keywords",
+   "COMPENDIUM_INDEX[4].keywords",
+   "COMPENDIUM_INDEX[5].keywords"
+  ]
+ },
+ {
+  "key": "src/domain/cultureProfiles.js::CULTURE_PROFILES",
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "CULTURE_PROFILES",
+  "n": 198,
+  "samples": [
+   "A timber-and-stone, guild-and-estate design grammar.",
+   "Timber-framed street houses cluster around a market green, with stone reserved for halls, bridges, and defenses.",
+   "Farmsteads and craft yards form compact wards around a hall, church, or fortified manor."
+  ],
+  "paths": [
+   "CULTURE_PROFILES.germanic.scope",
+   "CULTURE_PROFILES.germanic.builtForm[0]",
+   "CULTURE_PROFILES.germanic.builtForm[1]",
+   "CULTURE_PROFILES.germanic.civicPattern[0]",
+   "CULTURE_PROFILES.germanic.civicPattern[1]",
+   "CULTURE_PROFILES.germanic.exchangePattern[0]"
+  ]
+ },
+ {
+  "key": "src/data/stressInstitutionEffects.js::STRESS_INSTITUTION_EFFECTS",
+  "file": "src/data/stressInstitutionEffects.js",
+  "exp": "STRESS_INSTITUTION_EFFECTS",
+  "n": 189,
+  "samples": [
+   "Secretly negotiating surrender terms with the besieging force, without the council's knowledge",
+   "Treason. The garrison would execute them on the spot if they found out",
+   "Has been rationing their own private food stores while publicly enforcing the communal rationing order"
+  ],
+  "paths": [
+   "STRESS_INSTITUTION_EFFECTS.under_siege[0].secret",
+   "STRESS_INSTITUTION_EFFECTS.under_siege[0].stakes",
+   "STRESS_INSTITUTION_EFFECTS.under_siege[1].secret",
+   "STRESS_INSTITUTION_EFFECTS.under_siege[1].stakes",
+   "STRESS_INSTITUTION_EFFECTS.under_siege[2].secret",
+   "STRESS_INSTITUTION_EFFECTS.under_siege[2].stakes"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/commercialReasonsNews.js::COMMERCIAL_KIND_REGISTRY",
+  "file": "src/domain/worldPulse/commercialReasonsNews.js",
+  "exp": "COMMERCIAL_KIND_REGISTRY",
+  "n": 151,
+  "samples": [
+   "{counterpart} took the wagons and sent nothing back; the compact is broken.",
+   "The wharf at {settlement} waited for a cargo that never came, and stopped waiting in the autumn.",
+   "The factors' book at {settlement} carries {counterpart} in the column of debts unanswered."
+  ],
+  "paths": [
+   "COMMERCIAL_KIND_REGISTRY[0].pool[0]()",
+   "COMMERCIAL_KIND_REGISTRY[0].pool[1]()",
+   "COMMERCIAL_KIND_REGISTRY[0].pool[2]()",
+   "COMMERCIAL_KIND_REGISTRY[0].pool[3]()",
+   "COMMERCIAL_KIND_REGISTRY[0].pool[4]()",
+   "COMMERCIAL_KIND_REGISTRY[0].pool[5]()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/grammarNews.js::GRAMMAR_KIND_REGISTRY",
+  "file": "src/domain/worldPulse/grammarNews.js",
+  "exp": "GRAMMAR_KIND_REGISTRY",
+  "n": 86,
+  "samples": [
+   "The peace of {settlement} and {counterpart} has run its course: {band} years, and no hand that signed it still holds a s",
+   "The {term} {settlement} and {counterpart} kept between them came to its last day and was filed as closed; neither court ",
+   "In {settlement} the market kept its hours as always; the pact with {counterpart} ended that week, and the carters heard "
+  ],
+  "paths": [
+   "GRAMMAR_KIND_REGISTRY[0].pool[0]()",
+   "GRAMMAR_KIND_REGISTRY[0].pool[1]()",
+   "GRAMMAR_KIND_REGISTRY[0].pool[2]()",
+   "GRAMMAR_KIND_REGISTRY[0].pool[3]()",
+   "GRAMMAR_KIND_REGISTRY[0].pool[4]()",
+   "GRAMMAR_KIND_REGISTRY[0].pool[5]()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/habitForkRegistry.js::HABIT_FORK_REGISTRY",
+  "file": "src/domain/worldPulse/habitForkRegistry.js",
+  "exp": "HABIT_FORK_REGISTRY",
+  "n": 68,
+  "samples": [
+   "identify what a migration draw is graded against — arrival versus attrition on the chosen destination — before this row ",
+   "a keyed race inside the migration advance; the acting settlement and the action it is choosing between have not been rea",
+   "identify the graded outcome of a demographic plan, and whether the fork is a choice at all"
+  ],
+  "paths": [
+   "HABIT_FORK_REGISTRY[0].closeOwed",
+   "HABIT_FORK_REGISTRY[0].reason",
+   "HABIT_FORK_REGISTRY[1].closeOwed",
+   "HABIT_FORK_REGISTRY[1].reason",
+   "HABIT_FORK_REGISTRY[2].closeOwed",
+   "HABIT_FORK_REGISTRY[2].reason"
+  ]
+ },
+ {
+  "key": "src/data/economicData.js::TRADE_DEPENDENCY_NEEDS",
+  "file": "src/data/economicData.js",
+  "exp": "TRADE_DEPENDENCY_NEEDS",
+  "n": 67,
+  "samples": [
+   "grain and mill sites for water-powered milling",
+   "grain reserves for storage",
+   "grain reserves at scale"
+  ],
+  "paths": [
+   "TRADE_DEPENDENCY_NEEDS.Mills (2-5).detail",
+   "TRADE_DEPENDENCY_NEEDS.Town granary.detail",
+   "TRADE_DEPENDENCY_NEEDS.City granaries.detail",
+   "TRADE_DEPENDENCY_NEEDS.State granary complex.detail",
+   "TRADE_DEPENDENCY_NEEDS.Subsistence farming.detail",
+   "TRADE_DEPENDENCY_NEEDS.Common grazing land.detail"
+  ]
+ },
+ {
+  "key": "src/lib/instantWorld/factionDedup.js::candidateNames()",
+  "file": "src/lib/instantWorld/factionDedup.js",
+  "exp": "candidateNames()",
+  "n": 64,
+  "samples": [
+   "The Greater Independent Bloc",
+   "The Greater Free Alliance",
+   "The Greater Common Interest"
+  ],
+  "paths": [
+   "candidateNames()[4]",
+   "candidateNames()[5]",
+   "candidateNames()[6]",
+   "candidateNames()[7]",
+   "candidateNames()[8]",
+   "candidateNames()[9]"
+  ]
+ },
+ {
+  "key": "src/data/goods/chains.js::SUPPLY_CHAIN_NEEDS",
+  "file": "src/data/goods/chains.js",
+  "exp": "SUPPLY_CHAIN_NEEDS",
+  "n": 52,
+  "samples": [
+   "What the settlement eats, how it stores food, and what it can export",
+   "Salt is among the most-traded commodities. Port and crossroads settlements profit from redistribution.",
+   "Date Palms and Orchards"
+  ],
+  "paths": [
+   "SUPPLY_CHAIN_NEEDS.food_security.desc",
+   "SUPPLY_CHAIN_NEEDS.food_security.chains[2].entrepotNote",
+   "SUPPLY_CHAIN_NEEDS.food_security.chains[7].resourceSubstitutes[1]",
+   "SUPPLY_CHAIN_NEEDS.food_security.chains[8].label",
+   "SUPPLY_CHAIN_NEEDS.raw_extraction.label",
+   "SUPPLY_CHAIN_NEEDS.raw_extraction.desc"
+  ]
+ },
+ {
+  "key": "src/data/goods/chains.js::GOODS_MODIFIERS_BY_TIER",
+  "file": "src/data/goods/chains.js",
+  "exp": "GOODS_MODIFIERS_BY_TIER",
+  "n": 51,
+  "samples": [
+   "Fresh eggs from household chickens",
+   "Rabbits, fowl from local hunting",
+   "Wheat, barley, oats beyond subsistence needs"
+  ],
+  "paths": [
+   "GOODS_MODIFIERS_BY_TIER.thorp.Eggs.desc",
+   "GOODS_MODIFIERS_BY_TIER.thorp.Small game.desc",
+   "GOODS_MODIFIERS_BY_TIER.hamlet.Grain surplus.desc",
+   "GOODS_MODIFIERS_BY_TIER.hamlet.Raw wool.desc",
+   "GOODS_MODIFIERS_BY_TIER.hamlet.Livestock.desc",
+   "GOODS_MODIFIERS_BY_TIER.hamlet.Game meat.desc"
+  ]
+ },
+ {
+  "key": "src/domain/autonomy/index.js::signalRegistryEntries()",
+  "file": "src/domain/autonomy/index.js",
+  "exp": "signalRegistryEntries()",
+  "n": 47,
+  "samples": [
+   "The food security causal score (0–100).",
+   "The food security causal band (surplus/adequate/strained/critical/collapsed).",
+   "The labor capacity causal score (0–100)."
+  ],
+  "paths": [
+   "signalRegistryEntries()[0].description",
+   "signalRegistryEntries()[1].description",
+   "signalRegistryEntries()[2].description",
+   "signalRegistryEntries()[3].description",
+   "signalRegistryEntries()[4].description",
+   "signalRegistryEntries()[5].description"
+  ]
+ },
+ {
+  "key": "src/data/goods/identity.js::RESOURCE_DATA",
+  "file": "src/data/goods/identity.js",
+  "exp": "RESOURCE_DATA",
+  "n": 41,
+  "samples": [
+   "Deep-water or reef fishing close to shore; reliable fish and seafood supply",
+   "Fishing grounds require water access.",
+   "Coastal evaporation pans or inland salt deposits; the settlement produces its own salt"
+  ],
+  "paths": [
+   "RESOURCE_DATA.fishing_grounds.desc",
+   "RESOURCE_DATA.fishing_grounds.warning",
+   "RESOURCE_DATA.salt_flats.desc",
+   "RESOURCE_DATA.deep_harbour.desc",
+   "RESOURCE_DATA.deep_harbour.warning",
+   "RESOURCE_DATA.shipbuilding_timber.desc"
+  ]
+ },
+ {
+  "key": "src/domain/display/warAndRoadNames.js::WAR_NAME_POOLS",
+  "file": "src/domain/display/warAndRoadNames.js",
+  "exp": "WAR_NAME_POOLS",
+  "n": 41,
+  "samples": [
+   "the War of the Old Grievance",
+   "the War of the Unanswered Wrong",
+   "the War of the Long Complaint"
+  ],
+  "paths": [
+   "WAR_NAME_POOLS.grievance[0]",
+   "WAR_NAME_POOLS.grievance[1]",
+   "WAR_NAME_POOLS.grievance[3]",
+   "WAR_NAME_POOLS.revanchism[1]",
+   "WAR_NAME_POOLS.resource_pressure[0]",
+   "WAR_NAME_POOLS.resource_pressure[2]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/stressorDynamics.js::VARIANT_HOOKS",
+  "file": "src/domain/worldPulse/stressorDynamics.js",
+  "exp": "VARIANT_HOOKS",
+  "n": 35,
+  "samples": [
+   "A courier carries coin that traces back across the border.",
+   "Exposing the sponsor would be a casus belli, if anyone dares name them aloud.",
+   "Someone local is living slightly too well for their station."
+  ],
+  "paths": [
+   "VARIANT_HOOKS.foreign_sponsored[0]",
+   "VARIANT_HOOKS.foreign_sponsored[1]",
+   "VARIANT_HOOKS.foreign_sponsored[2]",
+   "VARIANT_HOOKS.abandoned_agent[0]",
+   "VARIANT_HOOKS.abandoned_agent[1]",
+   "VARIANT_HOOKS.abandoned_agent[2]"
+  ]
+ },
+ {
+  "key": "src/lib/flags.js::FLAGS",
+  "file": "src/lib/flags.js",
+  "exp": "FLAGS",
+  "n": 31,
+  "samples": [
+   "Discord OAuth sign-in button. Safe flag-on: an unconfigured provider degrades to a calm message.",
+   "Google OAuth sign-in button. Safe flag-on: an unconfigured provider degrades to a calm message.",
+   "P102 / D-1: consolidate 14 dossier tabs into 5 thematic groups. PROMOTED default-on; flag retained as soak killswitch."
+  ],
+  "paths": [
+   "FLAGS.discordOauth.description",
+   "FLAGS.googleOauth.description",
+   "FLAGS.dossierFiveTabs.description",
+   "FLAGS.inlineEdit.description",
+   "FLAGS.settlementWorkbench.description",
+   "FLAGS.heraldCommandBrief.description"
+  ]
+ },
+ {
+  "key": "src/components/compendium/customContentEditorCopy.js::CUSTOM_CONTENT_FIELD_HINTS",
+  "file": "src/components/compendium/customContentEditorCopy.js",
+  "exp": "CUSTOM_CONTENT_FIELD_HINTS",
+  "n": 28,
+  "samples": [
+   "Which part of settlement life this belongs to and where it appears in the dossier. This classifies presentation; it does",
+   "Describes the kind of power associated with this content. It is currently presentation-only and does not silently change",
+   "Describes a defensive role for presentation and future registered operations. It does not change defense totals unless a"
+  ],
+  "paths": [
+   "CUSTOM_CONTENT_FIELD_HINTS.category",
+   "CUSTOM_CONTENT_FIELD_HINTS.authority",
+   "CUSTOM_CONTENT_FIELD_HINTS.defenseRole",
+   "CUSTOM_CONTENT_FIELD_HINTS.essential",
+   "CUSTOM_CONTENT_FIELD_HINTS.foodImpact",
+   "CUSTOM_CONTENT_FIELD_HINTS.satisfies"
+  ]
+ },
+ {
+  "key": "src/domain/display/engagementNarrative.js::ENGAGEMENT_PHASES",
+  "file": "src/domain/display/engagementNarrative.js",
+  "exp": "ENGAGEMENT_PHASES",
+  "n": 25,
+  "samples": [
+   "the lines close around the walls",
+   "the fields outside are eaten bare",
+   "the gate gives, and the town changes hands"
+  ],
+  "paths": [
+   "ENGAGEMENT_PHASES.conquest[0]",
+   "ENGAGEMENT_PHASES.conquest[1]",
+   "ENGAGEMENT_PHASES.conquest[3]",
+   "ENGAGEMENT_PHASES.siege_lifted[2]",
+   "ENGAGEMENT_PHASES.siege_lifted[3]",
+   "ENGAGEMENT_PHASES.field_battle[0]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/demographicsRates.js::DEMOGRAPHIC_TUNING_COVERAGE",
+  "file": "src/domain/worldPulse/demographicsRates.js",
+  "exp": "DEMOGRAPHIC_TUNING_COVERAGE",
+  "n": 25,
+  "samples": [
+   "What the ground does to the density ceiling, per terrain.",
+   "The unsuppressed birth rate per tick, per tier.",
+   "The natural mortality floor per tick, per tier. It exists at zero pressure forever."
+  ],
+  "paths": [
+   "DEMOGRAPHIC_TUNING_COVERAGE[2].note",
+   "DEMOGRAPHIC_TUNING_COVERAGE[3].note",
+   "DEMOGRAPHIC_TUNING_COVERAGE[4].note",
+   "DEMOGRAPHIC_TUNING_COVERAGE[5].note",
+   "DEMOGRAPHIC_TUNING_COVERAGE[6].note",
+   "DEMOGRAPHIC_TUNING_COVERAGE[7].note"
+  ]
+ },
+ {
+  "key": "src/domain/factionRename.js::FACTION_RENAME_SURFACES",
+  "file": "src/domain/factionRename.js",
+  "exp": "FACTION_RENAME_SURFACES",
+  "n": 23,
+  "samples": [
+   "the canonical display name",
+   "the legacy alias every tolerant reader falls back to",
+   "the exact name of the faction holding the governing seat"
+  ],
+  "paths": [
+   "FACTION_RENAME_SURFACES[0].why",
+   "FACTION_RENAME_SURFACES[1].why",
+   "FACTION_RENAME_SURFACES[2].why",
+   "FACTION_RENAME_SURFACES[3].why",
+   "FACTION_RENAME_SURFACES[4].why",
+   "FACTION_RENAME_SURFACES[5].why"
+  ]
+ },
+ {
+  "key": "src/domain/stressorPicker.js::buildStressorPickerItems()",
+  "file": "src/domain/stressorPicker.js",
+  "exp": "buildStressorPickerItems()",
+  "n": 22,
+  "samples": [
+   "Beast & Raider Threat",
+   "The attacks are following a pattern that suggests coordination, not desperation. Someone is directing this (whether a ri",
+   "Campaign crisis: pressures public legitimacy, faction stability, social trust."
+  ],
+  "paths": [
+   "buildStressorPickerItems()[0].name",
+   "buildStressorPickerItems()[0].desc",
+   "buildStressorPickerItems()[1].desc",
+   "buildStressorPickerItems()[2].desc",
+   "buildStressorPickerItems()[3].desc",
+   "buildStressorPickerItems()[4].desc"
+  ]
+ },
+ {
+  "key": "src/domain/supplyChainState.js::NEED_HEURISTICS",
+  "file": "src/domain/supplyChainState.js",
+  "exp": "NEED_HEURISTICS",
+  "n": 22,
+  "samples": [
+   "bread prices climb; relief queues lengthen; legitimacy strains.",
+   "miners and quarry workers",
+   "raw inputs run short; downstream chains feel the squeeze first."
+  ],
+  "paths": [
+   "NEED_HEURISTICS.food_security.failureConsequence",
+   "NEED_HEURISTICS.raw_extraction.victims[0]",
+   "NEED_HEURISTICS.raw_extraction.failureConsequence",
+   "NEED_HEURISTICS.manufacturing.victims[1]",
+   "NEED_HEURISTICS.manufacturing.failureConsequence",
+   "NEED_HEURISTICS.trade_entrepot.failureConsequence"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/stressorDynamics.js::STRESSOR_SYNERGIES",
+  "file": "src/domain/worldPulse/stressorDynamics.js",
+  "exp": "STRESSOR_SYNERGIES",
+  "n": 22,
+  "samples": [
+   "the sick cannot work the fields",
+   "the blockade stands. No relief can arrive",
+   "the wider war keeps the besiegers supplied"
+  ],
+  "paths": [
+   "STRESSOR_SYNERGIES.famine.disease_outbreak.note",
+   "STRESSOR_SYNERGIES.famine.siege.note",
+   "STRESSOR_SYNERGIES.siege.wartime.note",
+   "STRESSOR_SYNERGIES.wartime.siege.note",
+   "STRESSOR_SYNERGIES.disease_outbreak.famine.note",
+   "STRESSOR_SYNERGIES.disease_outbreak.mass_migration.note"
+  ]
+ },
+ {
+  "key": "src/domain/content/contentVocabulary.js::CUSTOM_CONTENT_MANIFEST",
+  "file": "src/domain/content/contentVocabulary.js",
+  "exp": "CUSTOM_CONTENT_MANIFEST",
+  "n": 21,
+  "samples": [
+   "The icon-free, category-aware authority for custom-content authoring, compiler admission, and effect truth.",
+   "When a settlement is generated.",
+   "Only while the institution is present in a settlement."
+  ],
+  "paths": [
+   "CUSTOM_CONTENT_MANIFEST.purpose",
+   "CUSTOM_CONTENT_MANIFEST.categories[0].fields[4].condition",
+   "CUSTOM_CONTENT_MANIFEST.categories[0].fields[8].condition",
+   "CUSTOM_CONTENT_MANIFEST.categories[0].fields[9].condition",
+   "CUSTOM_CONTENT_MANIFEST.categories[0].fields[10].condition",
+   "CUSTOM_CONTENT_MANIFEST.categories[0].fields[16].condition"
+  ]
+ },
+ {
+  "key": "src/domain/npc/characterReadModel.js::EXPERIENCE_CLAUSES",
+  "file": "src/domain/npc/characterReadModel.js",
+  "exp": "EXPERIENCE_CLAUSES",
+  "n": 21,
+  "samples": [
+   "a captivity nobody paid to end",
+   "a death close to home",
+   "a season held captive"
+  ],
+  "paths": [
+   "EXPERIENCE_CLAUSES.abandoned_unransomed",
+   "EXPERIENCE_CLAUSES.bereavement_close",
+   "EXPERIENCE_CLAUSES.captured_held",
+   "EXPERIENCE_CLAUSES.caught_lying_exposed",
+   "EXPERIENCE_CLAUSES.corruption_exposed",
+   "EXPERIENCE_CLAUSES.coup_at_home"
+  ]
+ },
+ {
+  "key": "src/components/organic/samples/fixtures.js::dossierFixture",
+  "file": "src/components/organic/samples/fixtures.js",
+  "exp": "dossierFixture",
+  "n": 20,
+  "samples": [
+   "On the coast road; a tidal harbour",
+   "A wall town that learned to trade with the sea it once feared.",
+   "You come to Thornwall by the coast road, and the wall shows first: grey stone the height of four men, salt-stained on it"
+  ],
+  "paths": [
+   "dossierFixture.tradeAccess",
+   "dossierFixture.character",
+   "dossierFixture.arrival",
+   "dossierFixture.situation[0].note",
+   "dossierFixture.situation[1].note",
+   "dossierFixture.situation[2].note"
+  ]
+ },
+ {
+  "key": "src/domain/tuning/proposedSoakBands.js::RATIFIED_SOAK_BANDS",
+  "file": "src/domain/tuning/proposedSoakBands.js",
+  "exp": "RATIFIED_SOAK_BANDS",
+  "n": 20,
+  "samples": [
+   "Court successions per faction, per sim-decade",
+   "successions per faction per decade",
+   "The cadence dial targets \"a succession per faction every few sim-years, NEITHER stasis NOR churn.\" A few years is roughl"
+  ],
+  "paths": [
+   "RATIFIED_SOAK_BANDS[0].label",
+   "RATIFIED_SOAK_BANDS[0].unit",
+   "RATIFIED_SOAK_BANDS[0].rationale",
+   "RATIFIED_SOAK_BANDS[1].label",
+   "RATIFIED_SOAK_BANDS[1].unit",
+   "RATIFIED_SOAK_BANDS[2].label"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/index.js::DRAMA_CLASS_REGISTRY",
+  "file": "src/domain/worldPulse/index.js",
+  "exp": "DRAMA_CLASS_REGISTRY",
+  "n": 19,
+  "samples": [
+   "A besieging force is an independent war-arc birth.",
+   "Wartime pressure spawns a spontaneous war arc.",
+   "A disease outbreak is the plague class."
+  ],
+  "paths": [
+   "DRAMA_CLASS_REGISTRY.stressor_birth_siege.rationale",
+   "DRAMA_CLASS_REGISTRY.stressor_birth_wartime.rationale",
+   "DRAMA_CLASS_REGISTRY.stressor_birth_disease_outbreak.rationale",
+   "DRAMA_CLASS_REGISTRY.stressor_birth_magic_deadzone.rationale",
+   "DRAMA_CLASS_REGISTRY.stressor_birth_magical_instability.rationale",
+   "DRAMA_CLASS_REGISTRY.stressor_birth_monster_raider_pressure.rationale"
+  ]
+ },
+ {
+  "key": "src/components/organic/samples/fixtures.js::pricingFixture",
+  "file": "src/components/organic/samples/fixtures.js",
+  "exp": "pricingFixture",
+  "n": 18,
+  "samples": [
+   "The price on this page is the price at checkout. No setup fees, no seat math, no surprise renewals.",
+   "For the curious DM trying things out.",
+   "Generate any size, from hamlet to metropolis"
+  ],
+  "paths": [
+   "pricingFixture.noHiddenFees",
+   "pricingFixture.tiers[0].tagline",
+   "pricingFixture.tiers[0].features[0]",
+   "pricingFixture.tiers[0].features[2]",
+   "pricingFixture.tiers[0].features[3]",
+   "pricingFixture.tiers[1].tagline"
+  ]
+ },
+ {
+  "key": "src/data/economicData.js::INSTITUTION_FINISHED_GOODS_DEMAND",
+  "file": "src/data/economicData.js",
+  "exp": "INSTITUTION_FINISHED_GOODS_DEMAND",
+  "n": 17,
+  "samples": [
+   "Replacement arms and basic equipment",
+   "Quality weapons and armour",
+   "Advanced weapons and armour (bulk contract)"
+  ],
+  "paths": [
+   "INSTITUTION_FINISHED_GOODS_DEMAND.military.importLabels[0]",
+   "INSTITUTION_FINISHED_GOODS_DEMAND.military.importLabels[1]",
+   "INSTITUTION_FINISHED_GOODS_DEMAND.military.importLabels[2]",
+   "INSTITUTION_FINISHED_GOODS_DEMAND.military.exportBonus",
+   "INSTITUTION_FINISHED_GOODS_DEMAND.religious.importLabels[0]",
+   "INSTITUTION_FINISHED_GOODS_DEMAND.religious.importLabels[1]"
+  ]
+ },
+ {
+  "key": "src/domain/display/warAndRoadNames.js::WAR_REASON_CLAUSES",
+  "file": "src/domain/display/warAndRoadNames.js",
+  "exp": "WAR_REASON_CLAUSES",
+  "n": 16,
+  "samples": [
+   "an old wrong that was never answered",
+   "ground lost in an earlier war",
+   "fields and goods the realm can no longer do without"
+  ],
+  "paths": [
+   "WAR_REASON_CLAUSES.grievance",
+   "WAR_REASON_CLAUSES.revanchism",
+   "WAR_REASON_CLAUSES.resource_pressure",
+   "WAR_REASON_CLAUSES.treaty_default",
+   "WAR_REASON_CLAUSES.encirclement",
+   "WAR_REASON_CLAUSES.legitimacy_hunger"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyChanceMeetingNews.js::CHANCE_MEETING_KIND_REGISTRY",
+  "file": "src/domain/worldPulse/envoyChanceMeetingNews.js",
+  "exp": "CHANCE_MEETING_KIND_REGISTRY",
+  "n": 16,
+  "samples": [
+   "{npc} of {home}, passing through {settlement}, {outcome_phrase} in {counterpart}.",
+   "Word from {settlement}: {npc} and {counterpart} {outcome_phrase}, and neither court sent them to.",
+   "On the road to {settlement}, {npc} of {home} fell in with {counterpart} and {outcome_phrase} before either reached the g"
+  ],
+  "paths": [
+   "CHANCE_MEETING_KIND_REGISTRY[0].pool[0]()",
+   "CHANCE_MEETING_KIND_REGISTRY[0].pool[1]()",
+   "CHANCE_MEETING_KIND_REGISTRY[0].pool[2]()",
+   "CHANCE_MEETING_KIND_REGISTRY[0].pool[3]()",
+   "CHANCE_MEETING_KIND_REGISTRY[0].pool[4]()",
+   "CHANCE_MEETING_KIND_REGISTRY[0].pool[5]()"
+  ]
+ },
+ {
+  "key": "src/lib/galleryHubs.js::GALLERY_HUBS",
+  "file": "src/lib/galleryHubs.js",
+  "exp": "GALLERY_HUBS",
+  "n": 16,
+  "samples": [
+   "Public D&D settlements raised on plains terrain: browse, react, and import them into your own campaign.",
+   "Public D&D settlements raised on hills terrain: browse, react, and import them into your own campaign.",
+   "Public D&D settlements raised on forest terrain: browse, react, and import them into your own campaign."
+  ],
+  "paths": [
+   "GALLERY_HUBS[0].blurb",
+   "GALLERY_HUBS[1].blurb",
+   "GALLERY_HUBS[2].blurb",
+   "GALLERY_HUBS[3].blurb",
+   "GALLERY_HUBS[4].blurb",
+   "GALLERY_HUBS[5].blurb"
+  ]
+ },
+ {
+  "key": "src/lib/seo.js::VIEW_DESCRIPTIONS",
+  "file": "src/lib/seo.js",
+  "exp": "VIEW_DESCRIPTIONS",
+  "n": 14,
+  "samples": [
+   "Generate a living tabletop-RPG settlement in seconds: economy, factions, NPCs, institutions, and history, ready for the ",
+   "The SettlementForge compendium: settlement tiers, trade, power and faction archetypes, religion, stress, and the institu",
+   "SettlementForge pricing. Generate and save settlements for free, or unlock the Realm, AI narration, and cross-settlement"
+  ],
+  "paths": [
+   "VIEW_DESCRIPTIONS.generate",
+   "VIEW_DESCRIPTIONS.compendium",
+   "VIEW_DESCRIPTIONS.pricing",
+   "VIEW_DESCRIPTIONS.about-what-this-is",
+   "VIEW_DESCRIPTIONS.about-guide",
+   "VIEW_DESCRIPTIONS.gallery"
+  ]
+ },
+ {
+  "key": "src/components/compendium/customCategories.js::CATEGORY_BY_KEY",
+  "file": "src/components/compendium/customCategories.js",
+  "exp": "CATEGORY_BY_KEY",
+  "n": 13,
+  "samples": [
+   "Trade goods or services this institution generates when present.",
+   "Resources, goods, or services this institution consumes.",
+   "Institutions this one represents. When present, smaller institutions are not listed separately."
+  ],
+  "paths": [
+   "CATEGORY_BY_KEY.institutions.dependencies[0].hint",
+   "CATEGORY_BY_KEY.institutions.dependencies[1].hint",
+   "CATEGORY_BY_KEY.institutions.dependencies[2].hint",
+   "CATEGORY_BY_KEY.services.dependencies[0].hint",
+   "CATEGORY_BY_KEY.services.dependencies[1].hint",
+   "CATEGORY_BY_KEY.resources.dependencies[0].hint"
+  ]
+ },
+ {
+  "key": "src/data/roadmapLedger.js::ROADMAP_LEDGER",
+  "file": "src/data/roadmapLedger.js",
+  "exp": "ROADMAP_LEDGER",
+  "n": 13,
+  "samples": [
+   "Same seed, same world, forever",
+   "A world is stable and reproducible. The same seed always builds the same place, down to the last street, so what you sha",
+   "A settlement that explains itself"
+  ],
+  "paths": [
+   "ROADMAP_LEDGER[0].title",
+   "ROADMAP_LEDGER[0].summary",
+   "ROADMAP_LEDGER[1].title",
+   "ROADMAP_LEDGER[1].summary",
+   "ROADMAP_LEDGER[2].title",
+   "ROADMAP_LEDGER[3].title"
+  ]
+ },
+ {
+  "key": "src/domain/display/armyStrength.js::ARMY_STRENGTH_PHRASES",
+  "file": "src/domain/display/armyStrength.js",
+  "exp": "ARMY_STRENGTH_PHRASES",
+  "n": 13,
+  "samples": [
+   "a formidable host, few in the region could match it in the field",
+   "a strong army, ready to take the field with confidence",
+   "a capable militia, enough to defend its own and raid a neighbour"
+  ],
+  "paths": [
+   "ARMY_STRENGTH_PHRASES.STRENGTH_BANDS[0].phrase",
+   "ARMY_STRENGTH_PHRASES.STRENGTH_BANDS[1].phrase",
+   "ARMY_STRENGTH_PHRASES.STRENGTH_BANDS[2].phrase",
+   "ARMY_STRENGTH_PHRASES.STRENGTH_BANDS[3].phrase",
+   "ARMY_STRENGTH_PHRASES.STRENGTH_BANDS[4].phrase",
+   "ARMY_STRENGTH_PHRASES.REMAINING_BANDS[0].phrase"
+  ]
+ },
+ {
+  "key": "src/domain/display/deityEffects.js::DEITY_AXIS_EFFECTS",
+  "file": "src/domain/display/deityEffects.js",
+  "exp": "DEITY_AXIS_EFFECTS",
+  "n": 13,
+  "samples": [
+   "Evil-aligned worship lets corruption take root even without organized crime",
+   "Good-aligned worship exposes corruption and favors incorruptible successors",
+   "A warlike creed raises the realm's aggression"
+  ],
+  "paths": [
+   "DEITY_AXIS_EFFECTS.alignment.evil.effect",
+   "DEITY_AXIS_EFFECTS.alignment.good.effect",
+   "DEITY_AXIS_EFFECTS.temperament.warlike.effect",
+   "DEITY_AXIS_EFFECTS.temperament.peacelike.effect",
+   "DEITY_AXIS_EFFECTS.rank.major.effect",
+   "DEITY_AXIS_EFFECTS.rank.minor.effect"
+  ]
+ },
+ {
+  "key": "src/domain/dossier/powerSupport.js::SUPPORT_BASIS",
+  "file": "src/domain/dossier/powerSupport.js",
+  "exp": "SUPPORT_BASIS",
+  "n": 13,
+  "samples": [
+   "Raised by this power",
+   "A commercial house of this power",
+   "An armed body under this command"
+  ],
+  "paths": [
+   "SUPPORT_BASIS.founded",
+   "SUPPORT_BASIS.aligned.merchant",
+   "SUPPORT_BASIS.aligned.military",
+   "SUPPORT_BASIS.aligned.religious",
+   "SUPPORT_BASIS.aligned.arcane",
+   "SUPPORT_BASIS.aligned.criminal"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/faithTuningSurface.js::FAITH_TUNING_COVERAGE",
+  "file": "src/domain/worldPulse/faithTuningSurface.js",
+  "exp": "FAITH_TUNING_COVERAGE",
+  "n": 13,
+  "samples": [
+   "How much louder the patron is than a co-resident cult.",
+   "The kernel reading of the three authored strength bands.",
+   "The channel backstop; the reachable band uses 63 percent of it (pack row 30)."
+  ],
+  "paths": [
+   "FAITH_TUNING_COVERAGE[0].note",
+   "FAITH_TUNING_COVERAGE[1].note",
+   "FAITH_TUNING_COVERAGE[2].note",
+   "FAITH_TUNING_COVERAGE[4].note",
+   "FAITH_TUNING_COVERAGE[5].note",
+   "FAITH_TUNING_COVERAGE[6].note"
+  ]
+ },
+ {
+  "key": "src/components/generate/characterPresets.js::ARCHETYPES",
+  "file": "src/components/generate/characterPresets.js",
+  "exp": "ARCHETYPES",
+  "n": 12,
+  "samples": [
+   "Trade hub; guild security",
+   "Major overland hub; active guilds",
+   "Resource extraction; high military"
+  ],
+  "paths": [
+   "ARCHETYPES[1].desc",
+   "ARCHETYPES[2].desc",
+   "ARCHETYPES[3].desc",
+   "ARCHETYPES[5].desc",
+   "ARCHETYPES[6].desc",
+   "ARCHETYPES[7].desc"
+  ]
+ },
+ {
+  "key": "src/design/organic/index.js::MOTION_GRAMMAR",
+  "file": "src/design/organic/index.js",
+  "exp": "MOTION_GRAMMAR",
+  "n": 12,
+  "samples": [
+   "page arrival — the document is laid on the desk and settles",
+   "panel reveal — a folded leaf opens from its crease",
+   "a rule draws itself once at first paint, left to right"
+  ],
+  "paths": [
+   "MOTION_GRAMMAR.layDown.means",
+   "MOTION_GRAMMAR.unfold.means",
+   "MOTION_GRAMMAR.ruleDraw.means",
+   "MOTION_GRAMMAR.inkDarken.means",
+   "MOTION_GRAMMAR.press.means",
+   "MOTION_GRAMMAR.slipIn.means"
+  ]
+ },
+ {
+  "key": "src/domain/factionRename.js::NPC_NON_CASCADED_SURFACES",
+  "file": "src/domain/factionRename.js",
+  "exp": "NPC_NON_CASCADED_SURFACES",
+  "n": 12,
+  "samples": [
+   "the secret is generated prose that names the characters it implicates; prose policy for people is owner-gated (see above",
+   "the stakes sentence names who would pay to bury the secret; prose policy for people is owner-gated",
+   "the grouping copy of the same secret prose; it moves if and only if its twin does"
+  ],
+  "paths": [
+   "NPC_NON_CASCADED_SURFACES[0].why",
+   "NPC_NON_CASCADED_SURFACES[1].why",
+   "NPC_NON_CASCADED_SURFACES[2].why",
+   "NPC_NON_CASCADED_SURFACES[3].why",
+   "NPC_NON_CASCADED_SURFACES[4].why",
+   "NPC_NON_CASCADED_SURFACES[5].why"
+  ]
+ },
+ {
+  "key": "src/domain/region/goodsCatalog.js::GOOD_CATALOG",
+  "file": "src/domain/region/goodsCatalog.js",
+  "exp": "GOOD_CATALOG",
+  "n": 12,
+  "samples": [
+   "bulk grain and foodstuffs",
+   "raw hides and animal products",
+   "cut stone and masonry"
+  ],
+  "paths": [
+   "GOOD_CATALOG.grain.aliases[1]",
+   "GOOD_CATALOG.livestock.aliases[5]",
+   "GOOD_CATALOG.stone.aliases[7]",
+   "GOOD_CATALOG.clay.aliases[1]",
+   "GOOD_CATALOG.clay.aliases[5]",
+   "GOOD_CATALOG.iron.aliases[3]"
+  ]
+ },
+ {
+  "key": "src/domain/townMap/arch/cathedralSection.js::buildCathedralSection()",
+  "file": "src/domain/townMap/arch/cathedralSection.js",
+  "exp": "buildCathedralSection()",
+  "n": 12,
+  "samples": [
+   "pierced nave wall (thickness + reveals)",
+   "pointed archivolt (voussoir ring)",
+   "central mullion + jamb shafts"
+  ],
+  "paths": [
+   "buildCathedralSection().elements[0]",
+   "buildCathedralSection().elements[2]",
+   "buildCathedralSection().elements[3]",
+   "buildCathedralSection().elements[4]",
+   "buildCathedralSection().elements[5]",
+   "buildCathedralSection().elements[6]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/index.js::PARTY_IMPACT_KINDS",
+  "file": "src/domain/worldPulse/index.js",
+  "exp": "PARTY_IMPACT_KINDS",
+  "n": 12,
+  "samples": [
+   "The party ended an active stressor (broke the siege, cured the plague).",
+   "The party blunted but did not end a stressor.",
+   "The party (or their failure) deepened a stressor."
+  ],
+  "paths": [
+   "PARTY_IMPACT_KINDS.resolve_stressor.note",
+   "PARTY_IMPACT_KINDS.ease_stressor.note",
+   "PARTY_IMPACT_KINDS.worsen_stressor.note",
+   "PARTY_IMPACT_KINDS.name_attacker.note",
+   "PARTY_IMPACT_KINDS.broker_relationship.note",
+   "PARTY_IMPACT_KINDS.inflame_relationship.note"
+  ]
+ },
+ {
+  "key": "src/components/map/WorldMapTourSteps.js::WORLD_MAP_TOUR_STEPS",
+  "file": "src/components/map/WorldMapTourSteps.js",
+  "exp": "WORLD_MAP_TOUR_STEPS",
+  "n": 11,
+  "samples": [
+   "Switch between View, Terrain, Annotate, and Routes. Each mode swaps the toolbar below for tools specific to that task.",
+   "Place & select settlements",
+   "Drag a saved canon settlement from the palette onto the map to place it, then click any placed settlement to select and "
+  ],
+  "paths": [
+   "WORLD_MAP_TOUR_STEPS[0].body",
+   "WORLD_MAP_TOUR_STEPS[1].title",
+   "WORLD_MAP_TOUR_STEPS[1].body",
+   "WORLD_MAP_TOUR_STEPS[2].body",
+   "WORLD_MAP_TOUR_STEPS[3].body",
+   "WORLD_MAP_TOUR_STEPS[4].body"
+  ]
+ },
+ {
+  "key": "src/data/institutionServiceKeys.generated.js::INSTITUTION_SERVICE_KEYS",
+  "file": "src/data/institutionServiceKeys.generated.js",
+  "exp": "INSTITUTION_SERVICE_KEYS",
+  "n": 11,
+  "samples": [
+   "Airship docking (high magic)",
+   "Aqueduct or water system",
+   "Bowyers & fletchers (guild)"
+  ],
+  "paths": [
+   "INSTITUTION_SERVICE_KEYS[99]",
+   "INSTITUTION_SERVICE_KEYS[106]",
+   "INSTITUTION_SERVICE_KEYS[117]",
+   "INSTITUTION_SERVICE_KEYS[118]",
+   "INSTITUTION_SERVICE_KEYS[140]",
+   "INSTITUTION_SERVICE_KEYS[173]"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::DEF10_DARK_POOLS",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "DEF10_DARK_POOLS",
+  "n": 11,
+  "samples": [
+   "badge STRONG (any arm)",
+   "badge ADEQUATE (any arm)",
+   "badge WEAK (any arm)"
+  ],
+  "paths": [
+   "DEF10_DARK_POOLS[0]",
+   "DEF10_DARK_POOLS[1]",
+   "DEF10_DARK_POOLS[2]",
+   "DEF10_DARK_POOLS[3]",
+   "DEF10_DARK_POOLS[4]",
+   "DEF10_DARK_POOLS[7]"
+  ]
+ },
+ {
+  "key": "src/domain/display/warRemembrance.js::WAR_ENDING_TELLINGS",
+  "file": "src/domain/display/warRemembrance.js",
+  "exp": "WAR_ENDING_TELLINGS",
+  "n": 11,
+  "samples": [
+   "It ended in a sack, taken as the answer to a burning of its own.",
+   "It ended in a sack, and that burning was the opening of the reckoning, not its answer.",
+   "It ended in conquest: {victor} held what it had taken."
+  ],
+  "paths": [
+   "WAR_ENDING_TELLINGS.punitive_sack_vengeance",
+   "WAR_ENDING_TELLINGS.punitive_sack_initiation",
+   "WAR_ENDING_TELLINGS.conquest",
+   "WAR_ENDING_TELLINGS.annihilation",
+   "WAR_ENDING_TELLINGS.fragmentation",
+   "WAR_ENDING_TELLINGS.ruler_change"
+  ]
+ },
+ {
+  "key": "src/components/home/landingFixture.js::fixture",
+  "file": "src/components/home/landingFixture.js",
+  "exp": "fixture",
+  "n": 10,
+  "samples": [
+   "The road into Cnocby becomes a street at a point you can't precisely identify. The settlement grows around you gradually",
+   "Rónnat Sullivan is about to call it in.",
+   "A neutral figure is being pressured by both The Free Alliance and The Establishment to take a side before the next counc"
+  ],
+  "paths": [
+   "fixture.town.prose",
+   "fixture.town.pressure",
+   "fixture.town.hooks[1].text",
+   "fixture.voice.narrated",
+   "fixture.realm.whyTrace[0].reason",
+   "fixture.realm.whyTrace[1].reason"
+  ]
+ },
+ {
+  "key": "src/data/securityQuestions.js::SECURITY_QUESTIONS",
+  "file": "src/data/securityQuestions.js",
+  "exp": "SECURITY_QUESTIONS",
+  "n": 10,
+  "samples": [
+   "What was the name of the first street you lived on?",
+   "What was the first name of your oldest childhood friend?",
+   "What was the name of your first pet?"
+  ],
+  "paths": [
+   "SECURITY_QUESTIONS[0].text",
+   "SECURITY_QUESTIONS[1].text",
+   "SECURITY_QUESTIONS[2].text",
+   "SECURITY_QUESTIONS[3].text",
+   "SECURITY_QUESTIONS[4].text",
+   "SECURITY_QUESTIONS[5].text"
+  ]
+ },
+ {
+  "key": "src/domain/display/mobilizationStatus.js::MOBILIZATION_STATUS_PHRASES",
+  "file": "src/domain/display/mobilizationStatus.js",
+  "exp": "MOBILIZATION_STATUS_PHRASES",
+  "n": 10,
+  "samples": [
+   "gearing for war, the economy shifting to a war footing",
+   "fully mobilized, a war economy ready to march",
+   "war-weary, its army spent"
+  ],
+  "paths": [
+   "MOBILIZATION_STATUS_PHRASES.POSTURE_PHRASE.war_preparation",
+   "MOBILIZATION_STATUS_PHRASES.POSTURE_PHRASE.mobilized",
+   "MOBILIZATION_STATUS_PHRASES.POSTURE_PHRASE.war_exhaustion",
+   "MOBILIZATION_STATUS_PHRASES.POSTURE_PHRASE.demobilizing",
+   "MOBILIZATION_STATUS_PHRASES.FEASIBILITY_PHRASE.plausible",
+   "MOBILIZATION_STATUS_PHRASES.FEASIBILITY_PHRASE.auto_fail"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyChanceMeeting.js::CHANCE_MEETING_TUNING_PROVENANCE",
+  "file": "src/domain/worldPulse/envoyChanceMeeting.js",
+  "exp": "CHANCE_MEETING_TUNING_PROVENANCE",
+  "n": 10,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (§12 row 7; enrolled in TUNEREG at its landing)",
+   "the three base rungs 3 / 4 / 2 and the plus-or-minus-one modifiers",
+   "the approach die: base 2, plus 2 at an at-odds target, plus 1 covert"
+  ],
+  "paths": [
+   "CHANCE_MEETING_TUNING_PROVENANCE.status",
+   "CHANCE_MEETING_TUNING_PROVENANCE.ownerRows[0]",
+   "CHANCE_MEETING_TUNING_PROVENANCE.ownerRows[1]",
+   "CHANCE_MEETING_TUNING_PROVENANCE.ownerRows[2]",
+   "CHANCE_MEETING_TUNING_PROVENANCE.ownerRows[3]",
+   "CHANCE_MEETING_TUNING_PROVENANCE.ownerRows[4]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/factionCompetition.js::FACTION_VERB_PHRASES",
+  "file": "src/domain/worldPulse/factionCompetition.js",
+  "exp": "FACTION_VERB_PHRASES",
+  "n": 10,
+  "samples": [
+   "press a challenge to the government",
+   "presses a challenge to the government",
+   "move to suppress an institution"
+  ],
+  "paths": [
+   "FACTION_VERB_PHRASES.faction_government_challenge.may",
+   "FACTION_VERB_PHRASES.faction_government_challenge.did",
+   "FACTION_VERB_PHRASES.faction_institution_suppression.may",
+   "FACTION_VERB_PHRASES.faction_institution_suppression.did",
+   "FACTION_VERB_PHRASES.faction_institution_capture.may",
+   "FACTION_VERB_PHRASES.faction_institution_capture.did"
+  ]
+ },
+ {
+  "key": "src/domain/cultureProfiles.js::materializeCulturalIdentity()",
+  "file": "src/domain/cultureProfiles.js",
+  "exp": "materializeCulturalIdentity()",
+  "n": 9,
+  "samples": [
+   "A locally blended design grammar; both traditions remain visible rather than collapsing into a generic fallback.",
+   "Timber-framed street houses cluster around a market green, with stone reserved for halls, bridges, and defenses. Masonry",
+   "Household heads, landed patrons, and craft associations negotiate authority through customary rights. Councils, magistra"
+  ],
+  "paths": [
+   "materializeCulturalIdentity().scope",
+   "materializeCulturalIdentity().builtForm",
+   "materializeCulturalIdentity().civicPattern",
+   "materializeCulturalIdentity().exchangePattern",
+   "materializeCulturalIdentity().foodways",
+   "materializeCulturalIdentity().sacredLife"
+  ]
+ },
+ {
+  "key": "src/domain/display/labelBands.js::COMPLEXITY_LABEL",
+  "file": "src/domain/display/labelBands.js",
+  "exp": "COMPLEXITY_LABEL",
+  "n": 9,
+  "samples": [
+   "Highly diversified — multiple major revenue streams",
+   "Diversified — broad institutional economic base",
+   "Concentrated — fewer revenue streams than scale suggests"
+  ],
+  "paths": [
+   "COMPLEXITY_LABEL.HIGHLY_DIVERSIFIED",
+   "COMPLEXITY_LABEL.DIVERSIFIED",
+   "COMPLEXITY_LABEL.CONCENTRATED",
+   "COMPLEXITY_LABEL.LIMITED",
+   "COMPLEXITY_LABEL.SUBSISTENCE",
+   "COMPLEXITY_LABEL.SPECIALIZED"
+  ]
+ },
+ {
+  "key": "src/domain/fieldManifest.js::FROZEN_VS_LIVE",
+  "file": "src/domain/fieldManifest.js",
+  "exp": "FROZEN_VS_LIVE",
+  "n": 9,
+  "samples": [
+   "Generation verdicts with NO live sibling — display-as-generated is honest today. Whichever package gives any of them a p",
+   "Displays read the tick-advanced stock, never a cached generation value.",
+   "Zeroed while an effective deficit holds; restored from the structural base."
+  ],
+  "paths": [
+   "FROZEN_VS_LIVE[1].displayRule",
+   "FROZEN_VS_LIVE[2].displayRule",
+   "FROZEN_VS_LIVE[6].displayRule",
+   "FROZEN_VS_LIVE[7].displayRule",
+   "FROZEN_VS_LIVE[8].guards[1].why",
+   "FROZEN_VS_LIVE[11].displayRule"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/informationNews.js::INFORMATION_KIND_REGISTRY",
+  "file": "src/domain/worldPulse/informationNews.js",
+  "exp": "INFORMATION_KIND_REGISTRY",
+  "n": 9,
+  "samples": [
+   "Less than we fear, and the reckoning is a season stale.",
+   "{counterpart} has been shown {band}; nothing since {season}.",
+   "Given {band} to see, and given it late."
+  ],
+  "paths": [
+   "INFORMATION_KIND_REGISTRY[0].pool[0]",
+   "INFORMATION_KIND_REGISTRY[0].pool[1]()",
+   "INFORMATION_KIND_REGISTRY[0].pool[2]()",
+   "INFORMATION_KIND_REGISTRY[0].pool[3]()",
+   "INFORMATION_KIND_REGISTRY[0].pool[4]()",
+   "INFORMATION_KIND_REGISTRY[0].pool[5]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pulseStageManifest.js::PULSE_STAGE_TOPOLOGY",
+  "file": "src/domain/worldPulse/pulseStageManifest.js",
+  "exp": "PULSE_STAGE_TOPOLOGY",
+  "n": 9,
+  "samples": [
+   "Normalize the incoming world and mint deterministic pulse identity.",
+   "Age and update slow actor state before conditions and movers read it.",
+   "Advance existing pressures and convert resolved conditions into consequences."
+  ],
+  "paths": [
+   "PULSE_STAGE_TOPOLOGY[0].purpose",
+   "PULSE_STAGE_TOPOLOGY[1].purpose",
+   "PULSE_STAGE_TOPOLOGY[2].purpose",
+   "PULSE_STAGE_TOPOLOGY[3].purpose",
+   "PULSE_STAGE_TOPOLOGY[4].purpose",
+   "PULSE_STAGE_TOPOLOGY[5].purpose"
+  ]
+ },
+ {
+  "key": "src/domain/factionRename.js::NON_CASCADED_SURFACES",
+  "file": "src/domain/factionRename.js",
+  "exp": "NON_CASCADED_SURFACES",
+  "n": 8,
+  "samples": [
+   "regime lineage is recorded history, not a live reference",
+   "the durable identity undo keys on; a rename changes the label only",
+   "recorded history, and unreachable: renames are refused in canon phase"
+  ],
+  "paths": [
+   "NON_CASCADED_SURFACES[0].why",
+   "NON_CASCADED_SURFACES[1].why",
+   "NON_CASCADED_SURFACES[2].why",
+   "NON_CASCADED_SURFACES[3].why",
+   "NON_CASCADED_SURFACES[4].why",
+   "NON_CASCADED_SURFACES[8].why"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/npcVerdictApply.js::RELINQUISHED_FIELDS",
+  "file": "src/domain/worldPulse/npcVerdictApply.js",
+  "exp": "RELINQUISHED_FIELDS",
+  "n": 8,
+  "samples": [
+   "the influence stock itself; a jailed or roaming person contributes none",
+   "the numeric power score the faction and ladder reads consume",
+   "the propagation weight a named figure carries into other reads"
+  ],
+  "paths": [
+   "RELINQUISHED_FIELDS[0].why",
+   "RELINQUISHED_FIELDS[1].why",
+   "RELINQUISHED_FIELDS[3].why",
+   "RELINQUISHED_FIELDS[4].why",
+   "RELINQUISHED_FIELDS[5].why",
+   "RELINQUISHED_FIELDS[6].why"
+  ]
+ },
+ {
+  "key": "src/components/generate/nextSteps.js::buildNextSteps()",
+  "file": "src/components/generate/nextSteps.js",
+  "exp": "buildNextSteps()",
+  "n": 7,
+  "samples": [
+   "Save it to your library",
+   "Keep it for campaigns, inline editing, and export.",
+   "A print-ready dossier for the table."
+  ],
+  "paths": [
+   "buildNextSteps().steps[0].label",
+   "buildNextSteps().steps[0].hint",
+   "buildNextSteps().steps[1].hint",
+   "buildNextSteps().steps[2].hint",
+   "buildNextSteps().steps[3].label",
+   "buildNextSteps().steps[3].hint"
+  ]
+ },
+ {
+  "key": "src/components/organic/samples/fixtures.js::deitiesFixture",
+  "file": "src/components/organic/samples/fixtures.js",
+  "exp": "deitiesFixture",
+  "n": 7,
+  "samples": [
+   "The twelve deities of the core pantheon, as a surveyor records them: the name a town swears by, the portfolio it prays o",
+   "The sea, safe harbour, and the toll of drowning",
+   "Smithing, honest weights, and the guild oath"
+  ],
+  "paths": [
+   "deitiesFixture.intro",
+   "deitiesFixture.entries[0].portfolio",
+   "deitiesFixture.entries[1].portfolio",
+   "deitiesFixture.entries[2].portfolio",
+   "deitiesFixture.entries[3].portfolio",
+   "deitiesFixture.entries[4].portfolio"
+  ]
+ },
+ {
+  "key": "src/components/settlement/eventComposer/EventComposerConstants.js::_TYPE_ICONS",
+  "file": "src/components/settlement/eventComposer/EventComposerConstants.js",
+  "exp": "_TYPE_ICONS",
+  "n": 7,
+  "samples": [
+   "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6",
+   "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2",
+   "M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-"
+  ],
+  "paths": [
+   "_TYPE_ICONS.REMOVE_INSTITUTION.render().props.iconNode[1][1].d",
+   "_TYPE_ICONS.REMOVE_INSTITUTION.render().props.iconNode[2][1].d",
+   "_TYPE_ICONS.DAMAGE_INSTITUTION.render().props.iconNode[0][1].d",
+   "_TYPE_ICONS.CUT_TRADE_ROUTE.render().props.iconNode[0][1].d",
+   "_TYPE_ICONS.CUT_TRADE_ROUTE.render().props.iconNode[1][1].d",
+   "_TYPE_ICONS.CUT_TRADE_ROUTE.render().props.iconNode[2][1].d"
+  ]
+ },
+ {
+  "key": "src/data/namingData.js::NAMING_DATA",
+  "file": "src/data/namingData.js",
+  "exp": "NAMING_DATA",
+  "n": 7,
+  "samples": [
+   "Northern European, medieval German/Austrian style",
+   "Middle Eastern/North African influenced",
+   "Chinese, Japanese and Korean medieval influenced - Song Dynasty, Heian Period, Goryeo"
+  ],
+  "paths": [
+   "NAMING_DATA.germanic.description",
+   "NAMING_DATA.arabic.description",
+   "NAMING_DATA.east_asian.description",
+   "NAMING_DATA.mesoamerican.description",
+   "NAMING_DATA.south_asian.description",
+   "NAMING_DATA.steppe.description"
+  ]
+ },
+ {
+  "key": "src/domain/aiGrounding.js::forbiddenChanges()",
+  "file": "src/domain/aiGrounding.js",
+  "exp": "forbiddenChanges()",
+  "n": 7,
+  "samples": [
+   "Adding NEW factions, institutions, NPCs, threats, conditions, or chains.",
+   "Renaming proper nouns (settlement name, faction names, NPC names, district names).",
+   "Changing numerical or categorical facts (population, tier, prosperity band, faction power)."
+  ],
+  "paths": [
+   "forbiddenChanges()[0]",
+   "forbiddenChanges()[1]",
+   "forbiddenChanges()[2]",
+   "forbiddenChanges()[3]",
+   "forbiddenChanges()[4]",
+   "forbiddenChanges()[5]"
+  ]
+ },
+ {
+  "key": "src/domain/customContentSchema.js::DEFENSE_ROLES",
+  "file": "src/domain/customContentSchema.js",
+  "exp": "DEFENSE_ROLES",
+  "n": 7,
+  "samples": [
+   "Does not contribute to defense",
+   "Fortification — walls, towers",
+   "Garrison — standing troops"
+  ],
+  "paths": [
+   "DEFENSE_ROLES[0].label",
+   "DEFENSE_ROLES[1].label",
+   "DEFENSE_ROLES[2].label",
+   "DEFENSE_ROLES[3].label",
+   "DEFENSE_ROLES[4].label",
+   "DEFENSE_ROLES[6].label"
+  ]
+ },
+ {
+  "key": "src/domain/display/neighbourMirror.js::MIRROR_BASIS_WORDS",
+  "file": "src/domain/display/neighbourMirror.js",
+  "exp": "MIRROR_BASIS_WORDS",
+  "n": 7,
+  "samples": [
+   "an errand of ours they took off the road",
+   "a story we seeded in their court",
+   "a silence we have kept"
+  ],
+  "paths": [
+   "MIRROR_BASIS_WORDS.intercept:caught",
+   "MIRROR_BASIS_WORDS.plant:strengthBand",
+   "MIRROR_BASIS_WORDS.posture:sealed",
+   "MIRROR_BASIS_WORDS.record:independent",
+   "MIRROR_BASIS_WORDS.share:allianceLabel",
+   "MIRROR_BASIS_WORDS.transfer:partial"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/deityFlaws.js::DEITY_FLAWS",
+  "file": "src/domain/worldPulse/deityFlaws.js",
+  "exp": "DEITY_FLAWS",
+  "n": 7,
+  "samples": [
+   "The packet-anchored modulation: the boon weakens as pantheon share is contested. Reads the religion state shares only.",
+   "The packet-anchored modulation: the temper pull sharpens while faith fortunes fall. Reads the pantheon ledger wins and l",
+   "D2 chartered variance, not mean: the boon and bane magnitude band widens. A variance needs a seeded draw, and the field "
+  ],
+  "paths": [
+   "DEITY_FLAWS[0].note",
+   "DEITY_FLAWS[1].note",
+   "DEITY_FLAWS[2].note",
+   "DEITY_FLAWS[3].note",
+   "DEITY_FLAWS[4].note",
+   "DEITY_FLAWS[6].note"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/operationsVoice.js::OPERATIONS_VOICE_PROVENANCE",
+  "file": "src/domain/worldPulse/espionage/operationsVoice.js",
+  "exp": "OPERATIONS_VOICE_PROVENANCE",
+  "n": 7,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (every sentence in this file is voice-taste awaiting the pen; the vocabularies are closed, the",
+   "every line and reason here is the pen's: the words are candidates, and none is signed",
+   "the going-native reversal line is DELIBERATELY UNWRITTEN. Writing it is a ruling on the unsigned reversal fork, never a "
+  ],
+  "paths": [
+   "OPERATIONS_VOICE_PROVENANCE.status",
+   "OPERATIONS_VOICE_PROVENANCE.ownerRows[0]",
+   "OPERATIONS_VOICE_PROVENANCE.ownerRows[1]",
+   "OPERATIONS_VOICE_PROVENANCE.ownerRows[2]",
+   "OPERATIONS_VOICE_PROVENANCE.ownerRows[3]",
+   "OPERATIONS_VOICE_PROVENANCE.ownerRows[4]"
+  ]
+ },
+ {
+  "key": "src/lib/instantWorld/composerPipeline.js::COMPOSER_COUPLINGS",
+  "file": "src/lib/instantWorld/composerPipeline.js",
+  "exp": "COMPOSER_COUPLINGS",
+  "n": 7,
+  "samples": [
+   "the shared id counter",
+   "Any step that mints an id must keep its position relative to every other id-minting step; the campaign id is minted FIRS",
+   "the placements ⇄ members join"
+  ],
+  "paths": [
+   "COMPOSER_COUPLINGS[0].subject",
+   "COMPOSER_COUPLINGS[0].rule",
+   "COMPOSER_COUPLINGS[1].subject",
+   "COMPOSER_COUPLINGS[1].rule",
+   "COMPOSER_COUPLINGS[2].subject",
+   "COMPOSER_COUPLINGS[2].rule"
+  ]
+ },
+ {
+  "key": "src/lib/spatialUsage.js::EXEMPT_LEDGER_KEYS",
+  "file": "src/lib/spatialUsage.js",
+  "exp": "EXEMPT_LEDGER_KEYS",
+  "n": 7,
+  "samples": [
+   "supply-web economic pressure STOCK, not a distinct exercised mover",
+   "E1 generosity reserve-discipline STOCK (give-side motive substrate), not a distinct exercised mover",
+   "E1 generosity give-side WILLINGNESS STOCK (motive substrate feeding the generosity verbs), not a distinct exercised move"
+  ],
+  "paths": [
+   "EXEMPT_LEDGER_KEYS.merchantAppetite",
+   "EXEMPT_LEDGER_KEYS.bufferDiscipline",
+   "EXEMPT_LEDGER_KEYS.generosityWillingness",
+   "EXEMPT_LEDGER_KEYS.obligations",
+   "EXEMPT_LEDGER_KEYS.peaceReasons",
+   "EXEMPT_LEDGER_KEYS.warReasons"
+  ]
+ },
+ {
+  "key": "src/data/goods/chains.js::INDUSTRY_WATER_NEEDS",
+  "file": "src/data/goods/chains.js",
+  "exp": "INDUSTRY_WATER_NEEDS",
+  "n": 6,
+  "samples": [
+   "Tanning requires large amounts of water for processing hides",
+   "Dyeing textiles requires significant water for preparation and rinsing",
+   "Fulling uses water-powered hammers to clean and thicken cloth"
+  ],
+  "paths": [
+   "INDUSTRY_WATER_NEEDS.Tannery.reason",
+   "INDUSTRY_WATER_NEEDS.Dyers' guild.reason",
+   "INDUSTRY_WATER_NEEDS.Fulling mill.reason",
+   "INDUSTRY_WATER_NEEDS.Mill.reason",
+   "INDUSTRY_WATER_NEEDS.Brewery.reason",
+   "INDUSTRY_WATER_NEEDS.Paper mill.reason"
+  ]
+ },
+ {
+  "key": "src/domain/display/occupationStatus.js::OCCUPATION_STATUS_PHRASES",
+  "file": "src/domain/display/occupationStatus.js",
+  "exp": "OCCUPATION_STATUS_PHRASES",
+  "n": 6,
+  "samples": [
+   "a contested occupation; the occupier has not yet taken hold",
+   "an unstable occupation; control is precarious",
+   "an extractive occupation; the occupier bleeds it for everything it holds"
+  ],
+  "paths": [
+   "OCCUPATION_STATUS_PHRASES.STATE_PHRASE.contested",
+   "OCCUPATION_STATUS_PHRASES.STATE_PHRASE.unstable",
+   "OCCUPATION_STATUS_PHRASES.STATE_PHRASE.extractive",
+   "OCCUPATION_STATUS_PHRASES.STATE_PHRASE.stabilized",
+   "OCCUPATION_STATUS_PHRASES.STATE_PHRASE.vassalized",
+   "OCCUPATION_STATUS_PHRASES.RESISTANCE_BANDS[2].phrase"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::DEF6_C3_BLOCKED_POOLS",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "DEF6_C3_BLOCKED_POOLS",
+  "n": 6,
+  "samples": [
+   "Magical Capability: Arcane support",
+   "Legal Infrastructure: Court + Prison",
+   "Legal Infrastructure: Court only"
+  ],
+  "paths": [
+   "DEF6_C3_BLOCKED_POOLS[4]",
+   "DEF6_C3_BLOCKED_POOLS[6]",
+   "DEF6_C3_BLOCKED_POOLS[7]",
+   "DEF6_C3_BLOCKED_POOLS[8]",
+   "DEF6_C3_BLOCKED_POOLS[10]",
+   "DEF6_C3_BLOCKED_POOLS[11]"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::defenseThreatProse()",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "defenseThreatProse()",
+  "n": 6,
+  "samples": [
+   "The town's plan for an army is to not be interesting to one, and everybody here can state the plan.",
+   "Invasion & War: neither walls nor force",
+   "The town settles things itself, quickly, and does not always settle them well."
+  ],
+  "paths": [
+   "defenseThreatProse().invasion.sentence",
+   "defenseThreatProse().invasion.provenance.poolKey",
+   "defenseThreatProse().internal.sentence",
+   "defenseThreatProse().internal.provenance.poolKey",
+   "defenseThreatProse().disaster.sentence",
+   "defenseThreatProse().disaster.provenance.poolKey"
+  ]
+ },
+ {
+  "key": "src/domain/npc/characterDrift.js::DRIFT_PROVENANCE",
+  "file": "src/domain/npc/characterDrift.js",
+  "exp": "DRIFT_PROVENANCE",
+  "n": 6,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (the magnitudes are derived, not authored)",
+   "a TIGHTER per-axis offset clamp than the full spectrum span (F11 fixes the property, not the number)",
+   "the materialization floor: F9 offers a quarter-band as a CANDIDATE"
+  ],
+  "paths": [
+   "DRIFT_PROVENANCE.status",
+   "DRIFT_PROVENANCE.ownerRows[0]",
+   "DRIFT_PROVENANCE.ownerRows[1]",
+   "DRIFT_PROVENANCE.ownerRows[2]",
+   "DRIFT_PROVENANCE.ownerRows[3]",
+   "DRIFT_PROVENANCE.consumers"
+  ]
+ },
+ {
+  "key": "src/domain/realm/realmItemAttention.js::REALM_ATTENTION_DEFINITIONS",
+  "file": "src/domain/realm/realmItemAttention.js",
+  "exp": "REALM_ATTENTION_DEFINITIONS",
+  "n": 6,
+  "samples": [
+   "A realm decision is unresolved and awaits the GM.",
+   "A staged order no longer passes its current legal preconditions.",
+   "A significant condition is active in the current realm state."
+  ],
+  "paths": [
+   "REALM_ATTENTION_DEFINITIONS.blocking_decision.reason",
+   "REALM_ATTENTION_DEFINITIONS.lapsed_order.reason",
+   "REALM_ATTENTION_DEFINITIONS.critical_condition.reason",
+   "REALM_ATTENTION_DEFINITIONS.major_change.reason",
+   "REALM_ATTENTION_DEFINITIONS.emerging_pressure.reason",
+   "REALM_ATTENTION_DEFINITIONS.routine_record.reason"
+  ]
+ },
+ {
+  "key": "src/domain/summary/settlementQuickGuide.js::composeSettlementQuickGuide()",
+  "file": "src/domain/summary/settlementQuickGuide.js",
+  "exp": "composeSettlementQuickGuide()",
+  "n": 6,
+  "samples": [
+   "This settlement is a settlement.",
+   "Its founding purpose is not recorded.",
+   "No governing authority is recorded."
+  ],
+  "paths": [
+   "composeSettlementQuickGuide().identitySentence",
+   "composeSettlementQuickGuide().definingTruths[0].text",
+   "composeSettlementQuickGuide().definingTruths[1].text",
+   "composeSettlementQuickGuide().definingTruths[2].text",
+   "composeSettlementQuickGuide().immediatePressure.text",
+   "composeSettlementQuickGuide().entryPoint.text"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/infiltrationDrift.js::PARKED_CUSTODY_EXITS",
+  "file": "src/domain/worldPulse/espionage/infiltrationDrift.js",
+  "exp": "PARKED_CUSTODY_EXITS",
+  "n": 6,
+  "samples": [
+   "a linking field on the hold row, or a close reason that names the agent: a persisted schema change, owner-gated",
+   "an elected-exposure door on the web's creation seam, which F8 rules applies verbatim to placed seats and therefore needs",
+   "a reachable vice-ward FIDELITY source: a design act on the W-LIVES table, not a tuning row"
+  ],
+  "paths": [
+   "PARKED_CUSTODY_EXITS[0].unblockingAct",
+   "PARKED_CUSTODY_EXITS[1].unblockingAct",
+   "PARKED_CUSTODY_EXITS[2].unblockingAct",
+   "PARKED_CUSTODY_EXITS[3].evidence",
+   "PARKED_CUSTODY_EXITS[3].unblockingAct",
+   "PARKED_CUSTODY_EXITS[4].unblockingAct"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/foundingCatalog.js::FOUNDING_INSTITUTIONS",
+  "file": "src/domain/worldPulse/foundingCatalog.js",
+  "exp": "FOUNDING_INSTITUTIONS",
+  "n": 6,
+  "samples": [
+   "A house of care for the dying and the incurably ill poor, kept by the faithful. No one is turned away for want of coin.",
+   "A charitable house feeding and sheltering the destitute poor, the aged, and the disabled who cannot work. Endowed by the",
+   "A house that takes in parentless children and raises them until they can be apprenticed or placed. Order and mercy, kept"
+  ],
+  "paths": [
+   "FOUNDING_INSTITUTIONS[0].desc",
+   "FOUNDING_INSTITUTIONS[1].desc",
+   "FOUNDING_INSTITUTIONS[2].desc",
+   "FOUNDING_INSTITUTIONS[3].desc",
+   "FOUNDING_INSTITUTIONS[4].desc",
+   "FOUNDING_INSTITUTIONS[5].desc"
+  ]
+ },
+ {
+  "key": "src/lib/supplyChains.js::CHAIN_DEFS",
+  "file": "src/lib/supplyChains.js",
+  "exp": "CHAIN_DEFS",
+  "n": 6,
+  "samples": [
+   "Ore extraction to metalworking institutions",
+   "Agricultural production to food processing",
+   "Forestry to construction and shipbuilding"
+  ],
+  "paths": [
+   "CHAIN_DEFS[0].description",
+   "CHAIN_DEFS[1].description",
+   "CHAIN_DEFS[2].description",
+   "CHAIN_DEFS[3].description",
+   "CHAIN_DEFS[4].description",
+   "CHAIN_DEFS[5].description"
+  ]
+ },
+ {
+  "key": "src/components/settlements/useCampaignAdvance.js::ADVANCE_REFUSAL_TEXT",
+  "file": "src/components/settlements/useCampaignAdvance.js",
+  "exp": "ADVANCE_REFUSAL_TEXT",
+  "n": 5,
+  "samples": [
+   "The realm advances only after you canonize this campaign world.",
+   "Add at least one settlement to this campaign before advancing.",
+   "The realm is already advancing. Give it a moment."
+  ],
+  "paths": [
+   "ADVANCE_REFUSAL_TEXT.world_not_canonized",
+   "ADVANCE_REFUSAL_TEXT.no_settlements",
+   "ADVANCE_REFUSAL_TEXT.busy",
+   "ADVANCE_REFUSAL_TEXT.advance_paused",
+   "ADVANCE_REFUSAL_TEXT.world_frozen"
+  ]
+ },
+ {
+  "key": "src/data/goods/chains.js::IMPORT_GOODS_BY_TIER",
+  "file": "src/data/goods/chains.js",
+  "exp": "IMPORT_GOODS_BY_TIER",
+  "n": 5,
+  "samples": [
+   "Quality cloth and clothing",
+   "Wide variety of crafts",
+   "Slaves imported from war fronts, pirate suppliers, and distant slave-holding regions."
+  ],
+  "paths": [
+   "IMPORT_GOODS_BY_TIER.village.basic[1].name",
+   "IMPORT_GOODS_BY_TIER.village.fromHigher[2].desc",
+   "IMPORT_GOODS_BY_TIER.town.restricted[0].desc",
+   "IMPORT_GOODS_BY_TIER.town.fromCityOrMetropolis[1].name",
+   "IMPORT_GOODS_BY_TIER.city.fromHinterland[2].name"
+  ]
+ },
+ {
+  "key": "src/data/goods/identity.js::SPECIAL_RESOURCES",
+  "file": "src/data/goods/identity.js",
+  "exp": "SPECIAL_RESOURCES",
+  "n": 5,
+  "samples": [
+   "Remnants of a previous civilization",
+   "Intersection of magical energy",
+   "Location of religious significance"
+  ],
+  "paths": [
+   "SPECIAL_RESOURCES.ancientRuins.description",
+   "SPECIAL_RESOURCES.magicalNode.description",
+   "SPECIAL_RESOURCES.holySite.description",
+   "SPECIAL_RESOURCES.strategicPass.description",
+   "SPECIAL_RESOURCES.strategicPass.effects.economicBoost"
+  ]
+ },
+ {
+  "key": "src/domain/display/parityContract.js::PARITY_EXEMPT",
+  "file": "src/domain/display/parityContract.js",
+  "exp": "PARITY_EXEMPT",
+  "n": 5,
+  "samples": [
+   "The PDF reads this prose from the AI overlay only. The settlement's own canonical scalar exists, is generator-written, s",
+   "AI-narrative path only; absent from the data dossier.",
+   "tone color hex / bar widths"
+  ],
+  "paths": [
+   "PARITY_EXEMPT[0].reason",
+   "PARITY_EXEMPT[3].reason",
+   "PARITY_EXEMPT[5].fact",
+   "PARITY_EXEMPT[5].reason",
+   "PARITY_EXEMPT[6].reason"
+  ]
+ },
+ {
+  "key": "src/domain/npc/characterReadModel.js::CHARACTER_READ_PROVENANCE",
+  "file": "src/domain/npc/characterReadModel.js",
+  "exp": "CHARACTER_READ_PROVENANCE",
+  "n": 5,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (two vocabularies and four frames; nothing here is taste the pen has ruled)",
+   "THE THIRTY REASON CLAUSES: one per teaching kind. They are the reader-facing name of every experience the funnel can bin",
+   "THE THREE LEVEL PHRASES (a little / notably / above all): the only adverbs the read model owns"
+  ],
+  "paths": [
+   "CHARACTER_READ_PROVENANCE.status",
+   "CHARACTER_READ_PROVENANCE.ownerRows[0]",
+   "CHARACTER_READ_PROVENANCE.ownerRows[1]",
+   "CHARACTER_READ_PROVENANCE.ownerRows[3]",
+   "CHARACTER_READ_PROVENANCE.ownerRows[4]"
+  ]
+ },
+ {
+  "key": "src/domain/npc/knownCharacter.js::KNOWN_CHARACTER_PROVENANCE",
+  "file": "src/domain/npc/knownCharacter.js",
+  "exp": "KNOWN_CHARACTER_PROVENANCE",
+  "n": 5,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (the belief weight is derived from two existing ladders)",
+   "the observer TRUST mapping: carried as a linear read across the spectrum's own span, so neutral lands on exactly one hal",
+   "whether a DISPLACEMENT should move belief at all — it is on record and names no band, so today it marks the axis as spok"
+  ],
+  "paths": [
+   "KNOWN_CHARACTER_PROVENANCE.status",
+   "KNOWN_CHARACTER_PROVENANCE.ownerRows[0]",
+   "KNOWN_CHARACTER_PROVENANCE.ownerRows[2]",
+   "KNOWN_CHARACTER_PROVENANCE.ownerRows[3]",
+   "KNOWN_CHARACTER_PROVENANCE.ownerRows[4]"
+  ]
+ },
+ {
+  "key": "src/domain/npc/npcFacets.js::NPC_FACET_REGISTRY",
+  "file": "src/domain/npc/npcFacets.js",
+  "exp": "NPC_FACET_REGISTRY",
+  "n": 5,
+  "samples": [
+   "the NPC card renders the normalized trait chips (temperament included)",
+   "the role/category mix is weighted by institution presence + stressors",
+   "the NPC card reads the declared role archetype while preserving the authored office/title"
+  ],
+  "paths": [
+   "NPC_FACET_REGISTRY.temperament.consumers[1].read",
+   "NPC_FACET_REGISTRY.role.source.reads",
+   "NPC_FACET_REGISTRY.role.consumers[1].read",
+   "NPC_FACET_REGISTRY.goal.source.reads",
+   "NPC_FACET_REGISTRY.goal.consumers[1].read"
+  ]
+ },
+ {
+  "key": "src/domain/resourceTerrainCompatibility.js::getCompatibleResources()",
+  "file": "src/domain/resourceTerrainCompatibility.js",
+  "exp": "getCompatibleResources()",
+  "n": 5,
+  "samples": [
+   "Only available in coastal terrain",
+   "Only available in coastal or desert terrain",
+   "Only available in riverside terrain"
+  ],
+  "paths": [
+   "getCompatibleResources()[0].incompatibleReason",
+   "getCompatibleResources()[1].incompatibleReason",
+   "getCompatibleResources()[4].incompatibleReason",
+   "getCompatibleResources()[25].incompatibleReason",
+   "getCompatibleResources()[30].incompatibleReason"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/causeVocabulary.js::CAUSE_CLASSES",
+  "file": "src/domain/worldPulse/causeVocabulary.js",
+  "exp": "CAUSE_CLASSES",
+  "n": 5,
+  "samples": [
+   "a broken supply chain",
+   "the strength levied away",
+   "the pressure of the war"
+  ],
+  "paths": [
+   "CAUSE_CLASSES[1].label",
+   "CAUSE_CLASSES[4].label",
+   "CAUSE_CLASSES[6].label",
+   "CAUSE_CLASSES[8].label",
+   "CAUSE_CLASSES[9].label"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyChanceMeetingNews.js::CHANCE_MEETING_NEWS_TUNING_PROVENANCE",
+  "file": "src/domain/worldPulse/envoyChanceMeetingNews.js",
+  "exp": "CHANCE_MEETING_NEWS_TUNING_PROVENANCE",
+  "n": 5,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (ROAD B; enrolled in the tuning register at the §899 landing; the major band at §900)",
+   "the recorded meeting's Herald severity, the notable band's own weight",
+   "the recorded meeting's Herald score, an integer the feed sorts by"
+  ],
+  "paths": [
+   "CHANCE_MEETING_NEWS_TUNING_PROVENANCE.status",
+   "CHANCE_MEETING_NEWS_TUNING_PROVENANCE.ownerRows[0]",
+   "CHANCE_MEETING_NEWS_TUNING_PROVENANCE.ownerRows[1]",
+   "CHANCE_MEETING_NEWS_TUNING_PROVENANCE.ownerRows[2]",
+   "CHANCE_MEETING_NEWS_TUNING_PROVENANCE.ownerRows[3]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyTaskCatalog.js::PARKED_ENVOY_TASKS",
+  "file": "src/domain/worldPulse/envoyTaskCatalog.js",
+  "exp": "PARKED_ENVOY_TASKS",
+  "n": 5,
+  "samples": [
+   "mint a casus kind whose producer is the delivery of a demand: a new receipt family, therefore owner-visible",
+   "a close reason, or a linking field, that makes a swap distinguishable from two releases: a persisted vocabulary change, ",
+   "legitimacy / standing displays"
+  ],
+  "paths": [
+   "PARKED_ENVOY_TASKS[0].unblockingAct",
+   "PARKED_ENVOY_TASKS[1].unblockingAct",
+   "PARKED_ENVOY_TASKS[2].claimedFamily",
+   "PARKED_ENVOY_TASKS[2].unblockingAct",
+   "PARKED_ENVOY_TASKS[4].unblockingAct"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/infiltrationDepth.js::ENROLLMENT_GATE_DISPOSITION",
+  "file": "src/domain/worldPulse/espionage/infiltrationDepth.js",
+  "exp": "ENROLLMENT_GATE_DISPOSITION",
+  "n": 5,
+  "samples": [
+   "one live asset per (patron, target) pair. The web enforces it as a candidate SKIP with no word of its own, because it sc",
+   "the realm-wide per-patron live-asset cap, verbatim: F8's named clause",
+   "the rising-upkeep affordability floor, verbatim: F8's named degradation"
+  ],
+  "paths": [
+   "ENROLLMENT_GATE_DISPOSITION[0].note",
+   "ENROLLMENT_GATE_DISPOSITION[1].note",
+   "ENROLLMENT_GATE_DISPOSITION[2].note",
+   "ENROLLMENT_GATE_DISPOSITION[3].note",
+   "ENROLLMENT_GATE_DISPOSITION[4].note"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/infiltrationDepth.js::INFILTRATION_LEVELS",
+  "file": "src/domain/worldPulse/espionage/infiltrationDepth.js",
+  "exp": "INFILTRATION_LEVELS",
+  "n": 5,
+  "samples": [
+   "waypoint hearing on a journey: the host's own beliefs",
+   "the target dwell: counting granaries, seeing the place",
+   "the gather-or-govern dwell: re-sampling on a ramping catch"
+  ],
+  "paths": [
+   "INFILTRATION_LEVELS[0].access",
+   "INFILTRATION_LEVELS[1].access",
+   "INFILTRATION_LEVELS[2].access",
+   "INFILTRATION_LEVELS[3].access",
+   "INFILTRATION_LEVELS[4].access"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/infiltrationDrift.js::INFILTRATION_DRIFT_PROVENANCE",
+  "file": "src/domain/worldPulse/espionage/infiltrationDrift.js",
+  "exp": "INFILTRATION_DRIFT_PROVENANCE",
+  "n": 5,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (breadth is derived from the rung index; no rate is authored here)",
+   "whether the ambient milieu term is meant to be capable of a paradigm reversal at all, or whether reversals are events-on",
+   "the two custody exits that are admitted are BOTH closed by a human act, and no hold in this engine closes by simulation."
+  ],
+  "paths": [
+   "INFILTRATION_DRIFT_PROVENANCE.status",
+   "INFILTRATION_DRIFT_PROVENANCE.ownerRows[1]",
+   "INFILTRATION_DRIFT_PROVENANCE.ownerRows[2]",
+   "INFILTRATION_DRIFT_PROVENANCE.ownerRows[3]",
+   "INFILTRATION_DRIFT_PROVENANCE.consumers"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/faithNews.js::FAITH_KIND_REGISTRY",
+  "file": "src/domain/worldPulse/faithNews.js",
+  "exp": "FAITH_KIND_REGISTRY",
+  "n": 5,
+  "samples": [
+   "The last altar of {creed} in {settlement} went dark; none there now keep the rite.",
+   "The undercroft at {temple} was cleared for grain, and the word is that nobody objected.",
+   "{settlement}'s roster carries {creed} no longer: not suppressed, not sleeping; gone from the parish entirely."
+  ],
+  "paths": [
+   "FAITH_KIND_REGISTRY[0].pool[0]()",
+   "FAITH_KIND_REGISTRY[0].pool[1]()",
+   "FAITH_KIND_REGISTRY[0].pool[2]()",
+   "FAITH_KIND_REGISTRY[0].pool[3]()",
+   "FAITH_KIND_REGISTRY[0].pool[4]()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/npcCirculation.js::rejectionNewsItem()",
+  "file": "src/domain/worldPulse/npcCirculation.js",
+  "exp": "rejectionNewsItem()",
+  "n": 5,
+  "samples": [
+   "A stranger is turned away at the gates of {settlementName}.",
+   "The story that put them on the road reached {settlementName} before they did.",
+   "The gate was shut against them over the matter at their last home."
+  ],
+  "paths": [
+   "rejectionNewsItem().headline",
+   "rejectionNewsItem().summary",
+   "rejectionNewsItem().reasons[0]",
+   "rejectionNewsItem().reasons[1]",
+   "rejectionNewsItem().reasons[2]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/npcVerdictApply.js::verdictHeraldItem()",
+  "file": "src/domain/worldPulse/npcVerdictApply.js",
+  "exp": "verdictHeraldItem()",
+  "n": 5,
+  "samples": [
+   "{npcName} is imprisoned in {settlementName}.",
+   "The office is forfeit and the seat at {factionName} stands open.",
+   "The corruption was proven and the office was forfeit."
+  ],
+  "paths": [
+   "verdictHeraldItem().headline",
+   "verdictHeraldItem().summary",
+   "verdictHeraldItem().reasons[0]",
+   "verdictHeraldItem().reasons[1]",
+   "verdictHeraldItem().reasons[2]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/simulationProfile.js::PROFILE_COERCION_LAWS",
+  "file": "src/domain/worldPulse/simulationProfile.js",
+  "exp": "PROFILE_COERCION_LAWS",
+  "n": 5,
+  "samples": [
+   "That world-progression setting isn’t recognized: defaulting to advancing it yourself.",
+   "That autonomy setting is not recognised; the realm keeps its current approval custom.",
+   "The realm does not yet reckon distance. Every settlement is a neighbour."
+  ],
+  "paths": [
+   "PROFILE_COERCION_LAWS[0].apply().message",
+   "PROFILE_COERCION_LAWS[1].apply().message",
+   "PROFILE_COERCION_LAWS[2].apply().message",
+   "PROFILE_COERCION_LAWS[3].apply().message",
+   "PROFILE_COERCION_LAWS[4].apply().message"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/temperamentPresets.js::TEMPERAMENTS",
+  "file": "src/domain/worldPulse/temperamentPresets.js",
+  "exp": "TEMPERAMENTS",
+  "n": 5,
+  "samples": [
+   "A gentle age. The world keeps its own counsel and turns slowly; change waits to be asked for, and the great powers hold ",
+   "The measured middle. Settlements rise and fall at a believable pace, trade and rumor cross the region, and no single han",
+   "A steady realm that must reckon with the year. The seasons turn, the granary is watched, and a hard winter is a hardship"
+  ],
+  "paths": [
+   "TEMPERAMENTS[0].description",
+   "TEMPERAMENTS[1].description",
+   "TEMPERAMENTS[2].description",
+   "TEMPERAMENTS[3].description",
+   "TEMPERAMENTS[4].description"
+  ]
+ },
+ {
+  "key": "src/pdf/variants.js::PDF_VARIANTS",
+  "file": "src/pdf/variants.js",
+  "exp": "PDF_VARIANTS",
+  "n": 5,
+  "samples": [
+   "Quick prep doc: no timeline, no canon-only sections.",
+   "Full campaign-ready document with current state and timeline.",
+   "Lean recap: cover, current state, timeline only. For reviewing what changed."
+  ],
+  "paths": [
+   "PDF_VARIANTS.draft_brief.description",
+   "PDF_VARIANTS.canon_dossier.description",
+   "PDF_VARIANTS.timeline_packet.description",
+   "PDF_VARIANTS.campaign_state.label",
+   "PDF_VARIANTS.campaign_state.description"
+  ]
+ },
+ {
+  "key": "src/application/commands/adapters/customContentApply.js::customContentCommandSpecs",
+  "file": "src/application/commands/adapters/customContentApply.js",
+  "exp": "customContentCommandSpecs",
+  "n": 4,
+  "samples": [
+   "Create a definition or append one immutable content revision.",
+   "Restore an archived custom-content definition.",
+   "Import or update one validated content-pack version atomically."
+  ],
+  "paths": [
+   "customContentCommandSpecs[0].description",
+   "customContentCommandSpecs[2].description",
+   "customContentCommandSpecs[3].description",
+   "customContentCommandSpecs[4].description"
+  ]
+ },
+ {
+  "key": "src/components/dossier/proseFieldLabels.js::PROSE_FIELD_LABELS",
+  "file": "src/components/dossier/proseFieldLabels.js",
+  "exp": "PROSE_FIELD_LABELS",
+  "n": 4,
+  "samples": [
+   "How the challenge was overcome",
+   "Safety, as first surveyed",
+   "Guard effectiveness, as first surveyed"
+  ],
+  "paths": [
+   "PROSE_FIELD_LABELS.settlement[7].label",
+   "PROSE_FIELD_LABELS.settlement[11].label",
+   "PROSE_FIELD_LABELS.settlement[12].label",
+   "PROSE_FIELD_LABELS.settlement[13].label"
+  ]
+ },
+ {
+  "key": "src/components/settlement/faithPanelModel.js::FALL_SENTENCE",
+  "file": "src/components/settlement/faithPanelModel.js",
+  "exp": "FALL_SENTENCE",
+  "n": 4,
+  "samples": [
+   "The patron fell. Discredited: the creed lost its rightful claim, and the town let another take the seat.",
+   "The patron fell. Displaced: the town’s devotion drifted to another creed until the seat changed hands.",
+   "The patron fell. Imposed: the seat changed hands by decree of those who rule, not by the drift of belief."
+  ],
+  "paths": [
+   "FALL_SENTENCE.discredited",
+   "FALL_SENTENCE.displaced",
+   "FALL_SENTENCE.imposed",
+   "FALL_SENTENCE.suppressed"
+  ]
+ },
+ {
+  "key": "src/design/boundBook.js::SEAM_KINDS",
+  "file": "src/design/boundBook.js",
+  "exp": "SEAM_KINDS",
+  "n": 4,
+  "samples": [
+   "art held between hard chrome rails",
+   "art resolves into page through a tokenized scrim",
+   "art is hard-framed inside the house border ring"
+  ],
+  "paths": [
+   "SEAM_KINDS.letterbox.means",
+   "SEAM_KINDS.feather.means",
+   "SEAM_KINDS.plate.means",
+   "SEAM_KINDS.edge.means"
+  ]
+ },
+ {
+  "key": "src/domain/ai/suggestedQuestions.js::suggestedQuestions()",
+  "file": "src/domain/ai/suggestedQuestions.js",
+  "exp": "suggestedQuestions()",
+  "n": 4,
+  "samples": [
+   "What is happening in my world right now?",
+   "Which settlements are under the most pressure?",
+   "What can I share with my players?"
+  ],
+  "paths": [
+   "suggestedQuestions()[0]",
+   "suggestedQuestions()[1]",
+   "suggestedQuestions()[2]",
+   "suggestedQuestions()[3]"
+  ]
+ },
+ {
+  "key": "src/domain/content/customSupplyChainPresentation.js::CUSTOM_CHAIN_STATE_PRESENTATION",
+  "file": "src/domain/content/customSupplyChainPresentation.js",
+  "exp": "CUSTOM_CHAIN_STATE_PRESENTATION",
+  "n": 4,
+  "samples": [
+   "Every reviewed component materialized; trade endpoints are live.",
+   "This settlement is eligible, but one or more components are unavailable.",
+   "One or more reviewed components fall outside this settlement tier."
+  ],
+  "paths": [
+   "CUSTOM_CHAIN_STATE_PRESENTATION.active.summary",
+   "CUSTOM_CHAIN_STATE_PRESENTATION.blocked.summary",
+   "CUSTOM_CHAIN_STATE_PRESENTATION.ineligible.summary",
+   "CUSTOM_CHAIN_STATE_PRESENTATION.unverified.summary"
+  ]
+ },
+ {
+  "key": "src/domain/density/densityCreateBoundary.js::PIPELINE_REACHERS",
+  "file": "src/domain/density/densityCreateBoundary.js",
+  "exp": "PIPELINE_REACHERS",
+  "n": 4,
+  "samples": [
+   "the generation core runs a request whose density law was already minted by the BIRTH caller that built it; minting again",
+   "generates a dossier only to compare it against the surveyor's construct constraints and report deviations; the result is",
+   "renders a preview of what homebrew content would do to a generation; the output is shown, never persisted."
+  ],
+  "paths": [
+   "PIPELINE_REACHERS.src/workers/generationRequest.js.why",
+   "PIPELINE_REACHERS.src/components/surveyor/ConstructionPanel.jsx.why",
+   "PIPELINE_REACHERS.src/workers/customContentPreview.worker.js.why",
+   "PIPELINE_REACHERS.src/store/campaignContentBindingSession.js.why"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::DEF7_DARK_POOLS",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "DEF7_DARK_POOLS",
+  "n": 4,
+  "samples": [
+   "live band FALLS SHORT of the built profile",
+   "live band EXCEEDS the built profile",
+   "a contributor with a RECORDED reason, adverse"
+  ],
+  "paths": [
+   "DEF7_DARK_POOLS[5]",
+   "DEF7_DARK_POOLS[6]",
+   "DEF7_DARK_POOLS[7]",
+   "DEF7_DARK_POOLS[8]"
+  ]
+ },
+ {
+  "key": "src/domain/display/visibilityAudit.js::default()",
+  "file": "src/domain/display/visibilityAudit.js",
+  "exp": "default()",
+  "n": 4,
+  "samples": [
+   "Covert mobilizer omitted from player standings",
+   "A covert-only world reports no live mobilization to players",
+   "No covert smuggling tie in a player trade-pressure read"
+  ],
+  "paths": [
+   "default().checks[0].label",
+   "default().checks[2].label",
+   "default().checks[3].label",
+   "default().checks[4].label"
+  ]
+ },
+ {
+  "key": "src/domain/display/warAndRoadNames.js::ROUTE_NAME_POOLS",
+  "file": "src/domain/display/warAndRoadNames.js",
+  "exp": "ROUTE_NAME_POOLS",
+  "n": 4,
+  "samples": [
+   "the carters' road to {dest}",
+   "the road between {a} and {b}",
+   "the water road to {dest}"
+  ],
+  "paths": [
+   "ROUTE_NAME_POOLS.land.addressed[3]()",
+   "ROUTE_NAME_POOLS.land.paired[1]()",
+   "ROUTE_NAME_POOLS.water.addressed[3]()",
+   "ROUTE_NAME_POOLS.water.paired[1]()"
+  ]
+ },
+ {
+  "key": "src/domain/factionRename.js::NPC_RENAME_SURFACES",
+  "file": "src/domain/factionRename.js",
+  "exp": "NPC_RENAME_SURFACES",
+  "n": 4,
+  "samples": [
+   "the character record's own display name at the canonical home",
+   "the grouping copy the dossier renders as a faction member chip; a separate object on every reloaded save",
+   "the first end of an NPC relationship edge, joined by display name"
+  ],
+  "paths": [
+   "NPC_RENAME_SURFACES[0].why",
+   "NPC_RENAME_SURFACES[1].why",
+   "NPC_RENAME_SURFACES[2].why",
+   "NPC_RENAME_SURFACES[3].why"
+  ]
+ },
+ {
+  "key": "src/domain/instantWorld/genesisDiplomacy.js::GENESIS_RELATION_CAUSES",
+  "file": "src/domain/instantWorld/genesisDiplomacy.js",
+  "exp": "GENESIS_RELATION_CAUSES",
+  "n": 4,
+  "samples": [
+   "the older seat has long overshadowed the younger",
+   "both seats agreed to stand together from the first",
+   "goods have moved between the two since the founding"
+  ],
+  "paths": [
+   "GENESIS_RELATION_CAUSES.tier_dominance.phrase",
+   "GENESIS_RELATION_CAUSES.mutual_defence.phrase",
+   "GENESIS_RELATION_CAUSES.market_exchange.phrase",
+   "GENESIS_RELATION_CAUSES.standing_rivalry.phrase"
+  ]
+ },
+ {
+  "key": "src/domain/npc/characterConsumers.js::CONSUMER_SEAM_PROVENANCE",
+  "file": "src/domain/npc/characterConsumers.js",
+  "exp": "CONSUMER_SEAM_PROVENANCE",
+  "n": 4,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (every magnitude below is derived from the spectrum, none authored)",
+   "R6's centre gives its three terms an EQUAL derived share. A signed weighting (a desperate man's nerve counting for more ",
+   "R8's breadth runs from one band's share of the window to half of it. The two ends are derived from the spectrum; a signe"
+  ],
+  "paths": [
+   "CONSUMER_SEAM_PROVENANCE.status",
+   "CONSUMER_SEAM_PROVENANCE.ownerRows[1]",
+   "CONSUMER_SEAM_PROVENANCE.ownerRows[2]",
+   "CONSUMER_SEAM_PROVENANCE.ownerRows[3]"
+  ]
+ },
+ {
+  "key": "src/domain/relationships/canonicalRelationship.js::RELATIONSHIP_SELECTIONS",
+  "file": "src/domain/relationships/canonicalRelationship.js",
+  "exp": "RELATIONSHIP_SELECTIONS",
+  "n": 4,
+  "samples": [
+   "Current settlement is patron",
+   "Current settlement is client",
+   "Current settlement is overlord"
+  ],
+  "paths": [
+   "RELATIONSHIP_SELECTIONS[7].label",
+   "RELATIONSHIP_SELECTIONS[8].label",
+   "RELATIONSHIP_SELECTIONS[9].label",
+   "RELATIONSHIP_SELECTIONS[10].label"
+  ]
+ },
+ {
+  "key": "src/domain/state/bands.js::BAND_HINT",
+  "file": "src/domain/state/bands.js",
+  "exp": "BAND_HINT",
+  "n": 4,
+  "samples": [
+   "Healthy. Shocks are absorbed without crisis.",
+   "Functional but stretched. A bad season would hurt.",
+   "One real shock away from failure."
+  ],
+  "paths": [
+   "BAND_HINT.Stable",
+   "BAND_HINT.Strained",
+   "BAND_HINT.Vulnerable",
+   "BAND_HINT.Critical"
+  ]
+ },
+ {
+  "key": "src/domain/state/compareSystemState.js::compareSystemState()",
+  "file": "src/domain/state/compareSystemState.js",
+  "exp": "compareSystemState()",
+  "n": 4,
+  "samples": [
+   "Resilience fell slightly; pressure increased",
+   "Volatility fell slightly; pressure increased",
+   "External Threat fell slightly; pressure increased"
+  ],
+  "paths": [
+   "compareSystemState()[0].explanation",
+   "compareSystemState()[1].explanation",
+   "compareSystemState()[2].explanation",
+   "compareSystemState()[3].explanation"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/brokerageServicesRules.js::INTERCEPT_BAND_REASONS",
+  "file": "src/domain/worldPulse/brokerageServicesRules.js",
+  "exp": "INTERCEPT_BAND_REASONS",
+  "n": 4,
+  "samples": [
+   "The town keeps no secrets worth the name, so the whole of the traffic read plainly.",
+   "Gates half-raised cost the watcher the subtlest of it, and left the rest standing.",
+   "Behind closed gates only the bare shape survived: that a contract exists at all."
+  ],
+  "paths": [
+   "INTERCEPT_BAND_REASONS.legible",
+   "INTERCEPT_BAND_REASONS.clouded",
+   "INTERCEPT_BAND_REASONS.fogged",
+   "INTERCEPT_BAND_REASONS.opaque"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/demographicsPushPull.js::pushScoreOf()",
+  "file": "src/domain/worldPulse/demographicsPushPull.js",
+  "exp": "pushScoreOf()",
+  "n": 4,
+  "samples": [
+   "the walls are the wall",
+   "a threat stands at the gate",
+   "the fields can be counted"
+  ],
+  "paths": [
+   "pushScoreOf().drivers[0].guard",
+   "pushScoreOf().drivers[1].guard",
+   "pushScoreOf().drivers[2].guard",
+   "pushScoreOf().drivers[4].guard"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyTaskCatalog.js::ENVOY_TASK_PROVENANCE",
+  "file": "src/domain/worldPulse/envoyTaskCatalog.js",
+  "exp": "ENVOY_TASK_PROVENANCE",
+  "n": 4,
+  "samples": [
+   "the four admitted rows are receipt-verified, not taste, but WHICH of them a court may charter, and at what cadence, is t",
+   "tribute: the same fork one row along, and it was hidden inside a slash in §4's prose",
+   "the four method words and their nerve fits. The fits are derived from the volume's own sentence about threatening coward"
+  ],
+  "paths": [
+   "ENVOY_TASK_PROVENANCE.ownerRows[0]",
+   "ENVOY_TASK_PROVENANCE.ownerRows[2]",
+   "ENVOY_TASK_PROVENANCE.ownerRows[4]",
+   "ENVOY_TASK_PROVENANCE.consumers"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyTaskCatalog.js::NEGOTIATION_METHODS",
+  "file": "src/domain/worldPulse/envoyTaskCatalog.js",
+  "exp": "NEGOTIATION_METHODS",
+  "n": 4,
+  "samples": [
+   "a court that thinks well of its own nerve will spend to keep the reputation; a frightened one hears the appeal as a dema",
+   "the honest middle. It misfires on nobody, which is exactly why it is not free: it reads the smallest amount about the ot",
+   "the volume's own line: threaten the cowardly court, never the brave one. Pressed against a dominant court it hardens the"
+  ],
+  "paths": [
+   "NEGOTIATION_METHODS[0].note",
+   "NEGOTIATION_METHODS[1].note",
+   "NEGOTIATION_METHODS[2].note",
+   "NEGOTIATION_METHODS[3].note"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/infiltrationDepth.js::STANDING_COVER_GATE",
+  "file": "src/domain/worldPulse/espionage/infiltrationDepth.js",
+  "exp": "STANDING_COVER_GATE",
+  "n": 4,
+  "samples": [
+   "a persisted cover schema, owner-admitted",
+   "an undo/restore round-trip for the new key space",
+   "the cover can assert only what is RECEIPTED"
+  ],
+  "paths": [
+   "STANDING_COVER_GATE.owes[0]",
+   "STANDING_COVER_GATE.owes[2]",
+   "STANDING_COVER_GATE.candidateShapes[1].cost",
+   "STANDING_COVER_GATE.candidateShapes[1].grazes"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/index.js::EXEMPT_STRESSOR_TYPES",
+  "file": "src/domain/worldPulse/index.js",
+  "exp": "EXEMPT_STRESSOR_TYPES",
+  "n": 4,
+  "samples": [
+   "A migration is consequence-adjacent (it is usually the OUTCOME of a famine/war arc, not an independent birth).",
+   "Infiltration is a covert, ambiguous seed: safer un-governed than mis-paced.",
+   "A criminal corridor is a slow structural condition, not a spontaneous major-arc birth."
+  ],
+  "paths": [
+   "EXEMPT_STRESSOR_TYPES.mass_migration",
+   "EXEMPT_STRESSOR_TYPES.infiltration",
+   "EXEMPT_STRESSOR_TYPES.criminal_corridor",
+   "EXEMPT_STRESSOR_TYPES.betrayal"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/institutionStatusModel.js::INSTITUTION_CAUSE_CURES",
+  "file": "src/domain/worldPulse/institutionStatusModel.js",
+  "exp": "INSTITUTION_CAUSE_CURES",
+  "n": 4,
+  "samples": [
+   "the road reopens or the stores refill",
+   "the house is cleaned out and the scandal closes",
+   "the repairs are finished"
+  ],
+  "paths": [
+   "INSTITUTION_CAUSE_CURES.supply_shortage",
+   "INSTITUTION_CAUSE_CURES.corruption_exposed",
+   "INSTITUTION_CAUSE_CURES.damage",
+   "INSTITUTION_CAUSE_CURES.siege_occupation"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/magicRegimeModel.js::MAGIC_REGIME_LABELS",
+  "file": "src/domain/worldPulse/magicRegimeModel.js",
+  "exp": "MAGIC_REGIME_LABELS",
+  "n": 4,
+  "samples": [
+   "what the practitioners can do unpaid",
+   "what the town itself pays for",
+   "what a patron underwrites"
+  ],
+  "paths": [
+   "MAGIC_REGIME_LABELS.subsistence",
+   "MAGIC_REGIME_LABELS.funded",
+   "MAGIC_REGIME_LABELS.patronized",
+   "MAGIC_REGIME_LABELS.industrial"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/npcCirculation.js::arrivalNewsItem()",
+  "file": "src/domain/worldPulse/npcCirculation.js",
+  "exp": "arrivalNewsItem()",
+  "n": 4,
+  "samples": [
+   "A stranger takes up residence in {settlementName}.",
+   "They enter {factionName} at its lowest rung.",
+   "{factionName} had a seat open at the bottom."
+  ],
+  "paths": [
+   "arrivalNewsItem().headline",
+   "arrivalNewsItem().summary",
+   "arrivalNewsItem().reasons[0]",
+   "arrivalNewsItem().reasons[1]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/routeNetworkCharterEvents.js::charterHeraldItem()",
+  "file": "src/domain/worldPulse/routeNetworkCharterEvents.js",
+  "exp": "charterHeraldItem()",
+  "n": 4,
+  "samples": [
+   "A road is chartered between {a} and {b}",
+   "The way opens as a track, and it will be as good a road as it is walked.",
+   "The realm cannot close this material loop by any other road."
+  ],
+  "paths": [
+   "charterHeraldItem().headline",
+   "charterHeraldItem().summary",
+   "charterHeraldItem().reasons[0]",
+   "charterHeraldItem().reasons[1]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/routeNetworkDecay.js::gradeStepHeraldItem()",
+  "file": "src/domain/worldPulse/routeNetworkDecay.js",
+  "exp": "gradeStepHeraldItem()",
+  "n": 4,
+  "samples": [
+   "The road between {a} and {b} is abandoned",
+   "The way is not struck from the map. It is only overgrown, and it remembers.",
+   "Nothing has walked the way in {quietTicks} weeks."
+  ],
+  "paths": [
+   "gradeStepHeraldItem().headline",
+   "gradeStepHeraldItem().summary",
+   "gradeStepHeraldItem().reasons[0]",
+   "gradeStepHeraldItem().reasons[1]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/warCoalitionRefusal.js::buildCoalitionRefusalOutcome()",
+  "file": "src/domain/worldPulse/warCoalitionRefusal.js",
+  "exp": "buildCoalitionRefusalOutcome()",
+  "n": 4,
+  "samples": [
+   "{coalitionNameFor} refuses {coalitionNameFor}'s call",
+   "{coalitionNameFor} will not send its army against {coalitionNameFor}; the refusal now stands between the allied courts.",
+   "The court weighed the wider retaliation that a march against {coalitionNameFor} could awaken."
+  ],
+  "paths": [
+   "buildCoalitionRefusalOutcome().headline",
+   "buildCoalitionRefusalOutcome().summary",
+   "buildCoalitionRefusalOutcome().reasons[0]",
+   "buildCoalitionRefusalOutcome().reasons[1]"
+  ]
+ },
+ {
+  "key": "src/components/new/economyDeskRead.js::economyDeskRead()",
+  "file": "src/components/new/economyDeskRead.js",
+  "exp": "economyDeskRead()",
+  "n": 3,
+  "samples": [
+   "The town is meant to be shut and the market is not empty. Nobody local will explain that, and everybody local has notice",
+   "The town's living is the road. Goods come, goods go, and the town takes its part of both.",
+   "The town can answer what a town this size ought to answer, and does not think about it further."
+  ],
+  "paths": [
+   "economyDeskRead().foodSecurityRung.sentence",
+   "economyDeskRead().exportPosture.sentence",
+   "economyDeskRead().catalogStanding.sentence"
+  ]
+ },
+ {
+  "key": "src/data/sampleSettlements.js::SAMPLE_SETTLEMENTS",
+  "file": "src/data/sampleSettlements.js",
+  "exp": "SAMPLE_SETTLEMENTS",
+  "n": 3,
+  "samples": [
+   "A rain-grey harbour town where the council and the temple have stopped speaking, and the merchant guilds quietly profit ",
+   "A mountain city built on iron, ruled by its guild-masters, whose mines now give up too little ore.",
+   "A forest village a week from the nearest road, where every cottage bars its door twice and the hunter's lodge kills more"
+  ],
+  "paths": [
+   "SAMPLE_SETTLEMENTS[0].teaser",
+   "SAMPLE_SETTLEMENTS[1].teaser",
+   "SAMPLE_SETTLEMENTS[2].teaser"
+  ]
+ },
+ {
+  "key": "src/design/organic/index.js::MOTION_EASE",
+  "file": "src/design/organic/index.js",
+  "exp": "MOTION_EASE",
+  "n": 3,
+  "samples": [
+   "cubic-bezier(0.33, 0, 0.2, 1)",
+   "cubic-bezier(0.22, 1, 0.36, 1)",
+   "cubic-bezier(0.4, 0, 0.6, 1)"
+  ],
+  "paths": [
+   "MOTION_EASE.ink",
+   "MOTION_EASE.settle",
+   "MOTION_EASE.press"
+  ]
+ },
+ {
+  "key": "src/domain/aiGrounding.js::assemblePromptSections()",
+  "file": "src/domain/aiGrounding.js",
+  "exp": "assemblePromptSections()",
+  "n": 3,
+  "samples": [
+   "You are a structural narrator. The dossier below is a single source of truth — every name, faction, institution, number,",
+   "Voice: confident, unhurried. Specific over generic. Tie every descriptive line to a fact already present in the dossier.",
+   "Output MUST preserve every proper noun from the dossier and every numerical / categorical fact. Restructure and polish f"
+  ],
+  "paths": [
+   "assemblePromptSections().system",
+   "assemblePromptSections().developer",
+   "assemblePromptSections().format"
+  ]
+ },
+ {
+  "key": "src/domain/customContentSchema.js::DEITY_TIER",
+  "file": "src/domain/customContentSchema.js",
+  "exp": "DEITY_TIER",
+  "n": 3,
+  "samples": [
+   "Major — a pillar of the pantheon",
+   "Minor — a lesser god",
+   "Cult — a fringe or secret following"
+  ],
+  "paths": [
+   "DEITY_TIER[0].label",
+   "DEITY_TIER[1].label",
+   "DEITY_TIER[2].label"
+  ]
+ },
+ {
+  "key": "src/domain/display/forceComposition.js::FORCE_COMPOSITION_TABLES",
+  "file": "src/domain/display/forceComposition.js",
+  "exp": "FORCE_COMPOSITION_TABLES",
+  "n": 3,
+  "samples": [
+   "troop of heavy horse",
+   "troops of heavy horse",
+   "circles of war mages"
+  ],
+  "paths": [
+   "FORCE_COMPOSITION_TABLES.UNIT_WORDS.heavy_horse.one",
+   "FORCE_COMPOSITION_TABLES.UNIT_WORDS.heavy_horse.many",
+   "FORCE_COMPOSITION_TABLES.UNIT_WORDS.war_mages.many"
+  ]
+ },
+ {
+  "key": "src/domain/display/hegemonyRead.js::HEGEMONY_TUNING",
+  "file": "src/domain/display/hegemonyRead.js",
+  "exp": "HEGEMONY_TUNING",
+  "n": 3,
+  "samples": [
+   "commands the lion’s share of the realm’s strength",
+   "holds a great part of the realm’s strength",
+   "holds a regional preponderance"
+  ],
+  "paths": [
+   "HEGEMONY_TUNING.SHARE_BANDS[0].phrase",
+   "HEGEMONY_TUNING.SHARE_BANDS[1].phrase",
+   "HEGEMONY_TUNING.SHARE_BANDS[2].phrase"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::defenseForcesProse()",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "defenseForcesProse()",
+  "n": 3,
+  "samples": [
+   "The town would defend itself as a crowd defends itself, which is to say briefly and in several directions at once.",
+   "NO organized force at all",
+   "The town has no answer to anything it cannot see, and is unprepared rather than protected in that respect."
+  ],
+  "paths": [
+   "defenseForcesProse().force.sentence",
+   "defenseForcesProse().force.provenance.poolKey",
+   "defenseForcesProse().arcane.sentence"
+  ]
+ },
+ {
+  "key": "src/domain/generationContentProfile.js::GENERATION_CONTENT_PROFILES",
+  "file": "src/domain/generationContentProfile.js",
+  "exp": "GENERATION_CONTENT_PROFILES",
+  "n": 3,
+  "samples": [
+   "Adventure, danger, and political conflict without generated trafficking, slavery, torture, or hard-drug themes.",
+   "Serious conflict and social pressure without generated trafficking, slavery, or torture; vice and narcotics may appear.",
+   "The complete governed dark-theme vocabulary, including systems of coercion and exploitation."
+  ],
+  "paths": [
+   "GENERATION_CONTENT_PROFILES.heroic.description",
+   "GENERATION_CONTENT_PROFILES.grounded.description",
+   "GENERATION_CONTENT_PROFILES.grim.description"
+  ]
+ },
+ {
+  "key": "src/domain/historyBeats.js::LIKELY_FUTURE_BEAT_TEXT",
+  "file": "src/domain/historyBeats.js",
+  "exp": "LIKELY_FUTURE_BEAT_TEXT",
+  "n": 3,
+  "samples": [
+   "A crisis is imminent if no one intervenes.",
+   "The next year will test whoever holds the chair.",
+   "Continuity, with the usual slow erosion of any settlement."
+  ],
+  "paths": [
+   "LIKELY_FUTURE_BEAT_TEXT.crisis",
+   "LIKELY_FUTURE_BEAT_TEXT.test",
+   "LIKELY_FUTURE_BEAT_TEXT.continuity"
+  ]
+ },
+ {
+  "key": "src/domain/instantWorld/worldPlan.js::REALM_SIZES",
+  "file": "src/domain/instantWorld/worldPlan.js",
+  "exp": "REALM_SIZES",
+  "n": 3,
+  "samples": [
+   "A compact frontier: one market town and its hamlets.",
+   "A settled region anchored by a walled city.",
+   "A whole realm under a great metropolis."
+  ],
+  "paths": [
+   "REALM_SIZES.small.blurb",
+   "REALM_SIZES.medium.blurb",
+   "REALM_SIZES.large.blurb"
+  ]
+ },
+ {
+  "key": "src/domain/instantWorld/worldPlan.js::TONES",
+  "file": "src/domain/instantWorld/worldPlan.js",
+  "exp": "TONES",
+  "n": 3,
+  "samples": [
+   "Ties hold; change is local and slow.",
+   "A balanced, believable region.",
+   "War, faith, and upheaval run hot."
+  ],
+  "paths": [
+   "TONES[0].blurb",
+   "TONES[1].blurb",
+   "TONES[2].blurb"
+  ]
+ },
+ {
+  "key": "src/domain/npc/acceptanceCharacterReads.js::ACCEPTANCE_READ_PROVENANCE",
+  "file": "src/domain/npc/acceptanceCharacterReads.js",
+  "exp": "ACCEPTANCE_READ_PROVENANCE",
+  "n": 3,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (this leaf authors no magnitude; every number it returns is the register's)",
+   "whether a court that holds NO known chart should vet as though the man were ordinary, or refuse to let character speak a",
+   "the §802 R1 willingness door is NOT wired here and its symbol is deliberately unnamed in this file: it has landed nowher"
+  ],
+  "paths": [
+   "ACCEPTANCE_READ_PROVENANCE.status",
+   "ACCEPTANCE_READ_PROVENANCE.ownerRows[0]",
+   "ACCEPTANCE_READ_PROVENANCE.ownerRows[1]"
+  ]
+ },
+ {
+  "key": "src/domain/npc/characterEdit.js::CHART_EDIT_PROVENANCE",
+  "file": "src/domain/npc/characterEdit.js",
+  "exp": "CHART_EDIT_PROVENANCE",
+  "n": 3,
+  "samples": [
+   "STRUCTURE DECIDED; the axis roster itself is owner-taste and UNSIGNED",
+   "whether clearing a chart back to all-neutral should un-canon the NPC. This writer NEVER clears the marker: it cannot kno",
+   "NONE by design; the mount is a later car"
+  ],
+  "paths": [
+   "CHART_EDIT_PROVENANCE.status",
+   "CHART_EDIT_PROVENANCE.ownerRows[1]",
+   "CHART_EDIT_PROVENANCE.consumers"
+  ]
+ },
+ {
+  "key": "src/domain/npc/livedExperienceFunnel.js::FUNNEL_TUNING",
+  "file": "src/domain/npc/livedExperienceFunnel.js",
+  "exp": "FUNNEL_TUNING",
+  "n": 3,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (every figure DERIVED from the floor or from the pack ladder)",
+   "the three pull magnitudes (derived: faint = the floor, heavy = one full band)",
+   "the per-family learn ladder: carried as a mechanical tercile over the pack order until real rates are signed"
+  ],
+  "paths": [
+   "FUNNEL_TUNING.status",
+   "FUNNEL_TUNING.ownerRows[0]",
+   "FUNNEL_TUNING.ownerRows[1]"
+  ]
+ },
+ {
+  "key": "src/domain/npc/livedExperienceSources.js::SOURCE_PROVENANCE",
+  "file": "src/domain/npc/livedExperienceSources.js",
+  "exp": "SOURCE_PROVENANCE",
+  "n": 3,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (the registry is measurement; the blocks are a chair row)",
+   "whether an affiliation-plane realm event should teach EVERY roster member of a settlement or only its seated/important o",
+   "NONE in production by design; the pulse call site is car L5's"
+  ],
+  "paths": [
+   "SOURCE_PROVENANCE.status",
+   "SOURCE_PROVENANCE.ownerRows[3]",
+   "SOURCE_PROVENANCE.consumers"
+  ]
+ },
+ {
+  "key": "src/domain/npc/paradigmAxisCatalog.js::CATALOG_PROVENANCE",
+  "file": "src/domain/npc/paradigmAxisCatalog.js",
+  "exp": "CATALOG_PROVENANCE",
+  "n": 3,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (words and leans are drafts; legacy columns are measured)",
+   "ODQ 806 F1/F2: consolidation, not derivation; corruptibility is per-word",
+   "NONE by design; car L1 lands dark, car L5 re-points consumers"
+  ],
+  "paths": [
+   "CATALOG_PROVENANCE.status",
+   "CATALOG_PROVENANCE.ruling",
+   "CATALOG_PROVENANCE.consumers"
+  ]
+ },
+ {
+  "key": "src/domain/regenerationMode.js::MODE_DESCRIPTIONS",
+  "file": "src/domain/regenerationMode.js",
+  "exp": "MODE_DESCRIPTIONS",
+  "n": 3,
+  "samples": [
+   "Preserve most. Minor cosmetic / narrative variation only.",
+   "Preserve user canon + locked entities. Recalculate affected subsystems.",
+   "Keep only hard anchors (seed, name, tier). Reroll almost everything."
+  ],
+  "paths": [
+   "MODE_DESCRIPTIONS.nudge",
+   "MODE_DESCRIPTIONS.rebalance",
+   "MODE_DESCRIPTIONS.reforge"
+  ]
+ },
+ {
+  "key": "src/domain/simulationSpine.js::SPINE_RUNGS",
+  "file": "src/domain/simulationSpine.js",
+  "exp": "SPINE_RUNGS",
+  "n": 3,
+  "samples": [
+   "Its real power lies with",
+   "It is currently strained by",
+   "Its likely future is"
+  ],
+  "paths": [
+   "SPINE_RUNGS[3].frame",
+   "SPINE_RUNGS[4].frame",
+   "SPINE_RUNGS[6].frame"
+  ]
+ },
+ {
+  "key": "src/domain/spatial/cohesionWeave.js::ECONOMIC_BASE_LENS",
+  "file": "src/domain/spatial/cohesionWeave.js",
+  "exp": "ECONOMIC_BASE_LENS",
+  "n": 3,
+  "samples": [
+   "seasonal army (the harvest imperative bites)",
+   "route wars; folds to embargoes",
+   "limited; guards its supply"
+  ],
+  "paths": [
+   "ECONOMIC_BASE_LENS.agrarian.warStyle",
+   "ECONOMIC_BASE_LENS.trade_hub.warStyle",
+   "ECONOMIC_BASE_LENS.craft.warStyle"
+  ]
+ },
+ {
+  "key": "src/domain/traditions/politics.js::reexpressed()",
+  "file": "src/domain/traditions/politics.js",
+  "exp": "reexpressed()",
+  "n": 3,
+  "samples": [
+   "a whole ox turned on the spit",
+   "the guild ovens working through the night",
+   "older than any charter the town can show"
+  ],
+  "paths": [
+   "reexpressed().expression.trappings[0]",
+   "reexpressed().expression.trappings[1]",
+   "reexpressed().expression.epithet"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/calamityKernel.js::forceCalamityStrike()",
+  "file": "src/domain/worldPulse/calamityKernel.js",
+  "exp": "forceCalamityStrike()",
+  "n": 3,
+  "samples": [
+   "Killed in the calamity.",
+   "{name}'s Great Calamity, year {year}",
+   "The calamity has overwhelmed the seat of power; the response is contested and legitimacy bleeds."
+  ],
+  "paths": [
+   "forceCalamityStrike().settlement.populationHistory[0].reason",
+   "forceCalamityStrike().settlement.calamityHistory[0].name",
+   "forceCalamityStrike().settlement.activeConditions[0].description"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/espionageTap.js::TAP_RECEIPTS",
+  "file": "src/domain/worldPulse/espionage/espionageTap.js",
+  "exp": "TAP_RECEIPTS",
+  "n": 3,
+  "samples": [
+   "as X itself believes",
+   "X speaks one thing and believes another",
+   "as told in X's markets"
+  ],
+  "paths": [
+   "TAP_RECEIPTS.beliefs",
+   "TAP_RECEIPTS.delta",
+   "TAP_RECEIPTS.performance"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/npcDmVerbRecords.js::deathNewsItem()",
+  "file": "src/domain/worldPulse/npcDmVerbRecords.js",
+  "exp": "deathNewsItem()",
+  "n": 3,
+  "samples": [
+   "The realm strikes their name from the register of the living. {where} was the last place that held them.",
+   "{who} is recorded among the dead at {where}.",
+   "Any order standing against them dies with them."
+  ],
+  "paths": [
+   "deathNewsItem().summary",
+   "deathNewsItem().reasons[0]",
+   "deathNewsItem().reasons[1]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/operations/operationGrammar.js::ACCEPTANCE_SEAMS",
+  "file": "src/domain/worldPulse/operations/operationGrammar.js",
+  "exp": "ACCEPTANCE_SEAMS",
+  "n": 3,
+  "samples": [
+   "ODQ §806 ⟨F8⟩ — one vetting home, importance-DESCENDING; neither program forks a second",
+   "ODQ §802 R2 + §802.1 — CHOOSE ON KNOWN, RESOLVE ON TRUE; mortals read reputation, deities keep true-sight",
+   "W-LIVES L5 — the chokepoint every consumer re-routes through; core + drift, sparse"
+  ],
+  "paths": [
+   "ACCEPTANCE_SEAMS[0].ruling",
+   "ACCEPTANCE_SEAMS[3].ruling",
+   "ACCEPTANCE_SEAMS[4].ruling"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pulseKernel.js::RESIDUE_STRIP_SITES",
+  "file": "src/domain/worldPulse/pulseKernel.js",
+  "exp": "RESIDUE_STRIP_SITES",
+  "n": 3,
+  "samples": [
+   "occupation seed + conquest disposition ratchet",
+   "vassal promotion + advance-win disposition residue",
+   "the concluded-war record (W-MEM): staged or sealed out of band"
+  ],
+  "paths": [
+   "RESIDUE_STRIP_SITES[2].banks",
+   "RESIDUE_STRIP_SITES[3].banks",
+   "RESIDUE_STRIP_SITES[4].banks"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/supplyWebWarfare.js::WEBWAR_VETO_PROSE",
+  "file": "src/domain/worldPulse/supplyWebWarfare.js",
+  "exp": "WEBWAR_VETO_PROSE",
+  "n": 3,
+  "samples": [
+   "A court cannot open a supply-war campaign against itself.",
+   "That target has no readable supply web to strangle (no reachable outside suppliers).",
+   "That court already runs a live indirect campaign; one plan per aggressor."
+  ],
+  "paths": [
+   "WEBWAR_VETO_PROSE.webwar_self",
+   "WEBWAR_VETO_PROSE.webwar_no_web",
+   "WEBWAR_VETO_PROSE.webwar_plan_exists"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/warReasons.js::CASUS_VETO_PROSE",
+  "file": "src/domain/worldPulse/warReasons.js",
+  "exp": "CASUS_VETO_PROSE",
+  "n": 3,
+  "samples": [
+   "That is not a typed reason for war this engine tracks.",
+   "That cause must arise from the world’s own record. A lineage claim requires a surviving founding edge and a live inversi",
+   "A court cannot hold a casus belli against itself."
+  ],
+  "paths": [
+   "CASUS_VETO_PROSE.casus_unknown_type",
+   "CASUS_VETO_PROSE.casus_engine_derived",
+   "CASUS_VETO_PROSE.casus_self"
+  ]
+ },
+ {
+  "key": "src/lib/aboutMapping.js::ABOUT_UNITS",
+  "file": "src/lib/aboutMapping.js",
+  "exp": "ABOUT_UNITS",
+  "n": 3,
+  "samples": [
+   "What if the town remembered?",
+   "One tick, in dependency order",
+   "Caged by mechanism, not by promise"
+  ],
+  "paths": [
+   "ABOUT_UNITS[1].heading",
+   "ABOUT_UNITS[3].heading",
+   "ABOUT_UNITS[4].heading"
+  ]
+ },
+ {
+  "key": "src/components/compendium/customCategories.js::AUTHORING_LANES",
+  "file": "src/components/compendium/customCategories.js",
+  "exp": "AUTHORING_LANES",
+  "n": 2,
+  "samples": [
+   "Institutions, services, resources, trade goods, and the supply chains they form: the static building blocks a generation",
+   "Deities, traditions, and factions. Deities gain mechanics after assignment; factions enter through authored events; trad"
+  ],
+  "paths": [
+   "AUTHORING_LANES[0].blurb",
+   "AUTHORING_LANES[1].blurb"
+  ]
+ },
+ {
+  "key": "src/components/gallery/galleryMapsUtils.js::KIND_OPTIONS",
+  "file": "src/components/gallery/galleryMapsUtils.js",
+  "exp": "KIND_OPTIONS",
+  "n": 2,
+  "samples": [
+   "Bare terrain and geography. No settlements, no world state.",
+   "The map populated with its settlements, plus the living world you choose to reveal: the in-world clock, the chronicle, t"
+  ],
+  "paths": [
+   "KIND_OPTIONS[0][2]",
+   "KIND_OPTIONS[1][2]"
+  ]
+ },
+ {
+  "key": "src/components/map/heraldCommandSourceParity.js::HERALD_COMMAND_SOURCE_PARITY",
+  "file": "src/components/map/heraldCommandSourceParity.js",
+  "exp": "HERALD_COMMAND_SOURCE_PARITY",
+  "n": 2,
+  "samples": [
+   "LiveWarStatus, RealmIntrigue, BeliefDivergenceBand, WarResolveSection",
+   "RealmItem archive and HeraldHeadline"
+  ],
+  "paths": [
+   "HERALD_COMMAND_SOURCE_PARITY[2].owner",
+   "HERALD_COMMAND_SOURCE_PARITY[5].owner"
+  ]
+ },
+ {
+  "key": "src/components/map/heraldRegister.js::REMNANT_GRADE",
+  "file": "src/components/map/heraldRegister.js",
+  "exp": "REMNANT_GRADE",
+  "n": 2,
+  "samples": [
+   "A great city that dwindled to a final thorp and died. Its stones stand as a landmark and a warning.",
+   "It dwindled and was abandoned. A quiet site marks where it stood."
+  ],
+  "paths": [
+   "REMNANT_GRADE.relic_ruin.epitaph",
+   "REMNANT_GRADE.abandoned_site.epitaph"
+  ]
+ },
+ {
+  "key": "src/components/organic/samples/fixtures.js::libraryFixture",
+  "file": "src/components/organic/samples/fixtures.js",
+  "exp": "libraryFixture",
+  "n": 2,
+  "samples": [
+   "Grain surplus; a new mint",
+   "Raiders on the upland road"
+  ],
+  "paths": [
+   "libraryFixture.rows[2].signal",
+   "libraryFixture.rows[3].signal"
+  ]
+ },
+ {
+  "key": "src/data/galleryReactionVocab.js::REACTION_LABELS",
+  "file": "src/data/galleryReactionVocab.js",
+  "exp": "REACTION_LABELS",
+  "n": 2,
+  "samples": [
+   "A world worth walking",
+   "I'd run a campaign here"
+  ],
+  "paths": [
+   "REACTION_LABELS.worth_walking",
+   "REACTION_LABELS.run_campaign"
+  ]
+ },
+ {
+  "key": "src/design/organic/index.js::MATERIAL_GRAMMAR",
+  "file": "src/design/organic/index.js",
+  "exp": "MATERIAL_GRAMMAR",
+  "n": 2,
+  "samples": [
+   "paper tooth — an alpha overlay on grounds, never under body text at more than ~4% peak",
+   "plate edge weighting — the pressed line breathes; frames read printed, not drawn by tool"
+  ],
+  "paths": [
+   "MATERIAL_GRAMMAR.grain",
+   "MATERIAL_GRAMMAR.inkBite"
+  ]
+ },
+ {
+  "key": "src/domain/aiGrounding.js::summarizeGroundingPayload()",
+  "file": "src/domain/aiGrounding.js",
+  "exp": "summarizeGroundingPayload()",
+  "n": 2,
+  "samples": [
+   "Identity: {name} ({tier}, pop. {population}).",
+   "Relationship memory entries: 1."
+  ],
+  "paths": [
+   "summarizeGroundingPayload()[0]",
+   "summarizeGroundingPayload()[11]"
+  ]
+ },
+ {
+  "key": "src/domain/autonomy/accelerationOps.js::validateNudge()",
+  "file": "src/domain/autonomy/accelerationOps.js",
+  "exp": "validateNudge()",
+  "n": 2,
+  "samples": [
+   "unknown stressor type \"(empty)\": a nudge may only raise a catalogued pressure",
+   "severity must sit in [0.05, 0.85]"
+  ],
+  "paths": [
+   "validateNudge().errors[0]",
+   "validateNudge().errors[2]"
+  ]
+ },
+ {
+  "key": "src/domain/content/customContentVersioning.js::validateVersionedContent()",
+  "file": "src/domain/content/customContentVersioning.js",
+  "exp": "validateVersionedContent()",
+  "n": 2,
+  "samples": [
+   "Unsupported custom-content category \"{a}\".",
+   "Custom content must be a plain object."
+  ],
+  "paths": [
+   "validateVersionedContent().errors[0]",
+   "validateVersionedContent().errors[1]"
+  ]
+ },
+ {
+  "key": "src/domain/customContentSchema.js::CRITICALITY",
+  "file": "src/domain/customContentSchema.js",
+  "exp": "CRITICALITY",
+  "n": 2,
+  "samples": [
+   "Critical — food, water, timber",
+   "Discretionary — luxury / comfort"
+  ],
+  "paths": [
+   "CRITICALITY[0].label",
+   "CRITICALITY[2].label"
+  ]
+ },
+ {
+  "key": "src/domain/customContentSchema.js::DEITY_EFFECT_CHANNELS",
+  "file": "src/domain/customContentSchema.js",
+  "exp": "DEITY_EFFECT_CHANNELS",
+  "n": 2,
+  "samples": [
+   "Healing and resistance to pestilence",
+   "Order and the keeping of law"
+  ],
+  "paths": [
+   "DEITY_EFFECT_CHANNELS[3].label",
+   "DEITY_EFFECT_CHANNELS[5].label"
+  ]
+ },
+ {
+  "key": "src/domain/customContentSchema.js::DEITY_LAW",
+  "file": "src/domain/customContentSchema.js",
+  "exp": "DEITY_LAW",
+  "n": 2,
+  "samples": [
+   "Lawful — upholds order and oaths",
+   "Chaotic — erodes order, tolerates corruption"
+  ],
+  "paths": [
+   "DEITY_LAW[0].label",
+   "DEITY_LAW[1].label"
+  ]
+ },
+ {
+  "key": "src/domain/customContentSchema.js::FOOD_IMPACT",
+  "file": "src/domain/customContentSchema.js",
+  "exp": "FOOD_IMPACT",
+  "n": 2,
+  "samples": [
+   "Produces food — raises supply",
+   "Consumes food — raises demand"
+  ],
+  "paths": [
+   "FOOD_IMPACT[1].label",
+   "FOOD_IMPACT[2].label"
+  ]
+ },
+ {
+  "key": "src/domain/display/dossierViewModel.js::deriveGranaryOutlook()",
+  "file": "src/domain/display/dossierViewModel.js",
+  "exp": "deriveGranaryOutlook()",
+  "n": 2,
+  "samples": [
+   "the granary is nearly empty (0.0 of 0.0 months)",
+   "{season} — the granary is nearly empty (0.0 of 0.0 months)"
+  ],
+  "paths": [
+   "deriveGranaryOutlook().detail",
+   "deriveGranaryOutlook().display"
+  ]
+ },
+ {
+  "key": "src/domain/display/economyFreshness.js::ECONOMY_FRESHNESS_SENTENCES",
+  "file": "src/domain/display/economyFreshness.js",
+  "exp": "ECONOMY_FRESHNESS_SENTENCES",
+  "n": 2,
+  "samples": [
+   "Events recorded after this settlement's last survey may not be fully counted in these tallies yet.",
+   "Events recorded after this settlement's last survey may not be fully counted in this catalog yet."
+  ],
+  "paths": [
+   "ECONOMY_FRESHNESS_SENTENCES.tallies",
+   "ECONOMY_FRESHNESS_SENTENCES.catalog"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/economyStateProse.js::COMPLEXITY_NOUN",
+  "file": "src/domain/display/stateProse/economyStateProse.js",
+  "exp": "COMPLEXITY_NOUN",
+  "n": 2,
+  "samples": [
+   "broad base of trades",
+   "mix of field and market"
+  ],
+  "paths": [
+   "COMPLEXITY_NOUN.Diversified — broad institutional economic base",
+   "COMPLEXITY_NOUN.Mixed subsistence and market"
+  ]
+ },
+ {
+  "key": "src/domain/display/tradePressure.js::TRADE_PRESSURE_PHRASES",
+  "file": "src/domain/display/tradePressure.js",
+  "exp": "TRADE_PRESSURE_PHRASES",
+  "n": 2,
+  "samples": [
+   "a vital, hard-to-replace tie",
+   "a valuable trade tie"
+  ],
+  "paths": [
+   "TRADE_PRESSURE_PHRASES.SALIENCE_BANDS[0].phrase",
+   "TRADE_PRESSURE_PHRASES.SALIENCE_BANDS[1].phrase"
+  ]
+ },
+ {
+  "key": "src/domain/display/warAndRoadNames.js::UNTYPED_WAR_NAME_MOLDS",
+  "file": "src/domain/display/warAndRoadNames.js",
+  "exp": "UNTYPED_WAR_NAME_MOLDS",
+  "n": 2,
+  "samples": [
+   "the War of {a} and {b}",
+   "the War between {a} and {b}"
+  ],
+  "paths": [
+   "UNTYPED_WAR_NAME_MOLDS[1]()",
+   "UNTYPED_WAR_NAME_MOLDS[2]()"
+  ]
+ },
+ {
+  "key": "src/domain/instantWorld/worldPlan.js::MAGIC_CHOICES",
+  "file": "src/domain/instantWorld/worldPlan.js",
+  "exp": "MAGIC_CHOICES",
+  "n": 2,
+  "samples": [
+   "Mages, arcane orders, enchanted trade, and magical events all belong here.",
+   "No working magic anywhere in the realm. Gods and temples remain."
+  ],
+  "paths": [
+   "MAGIC_CHOICES[0].blurb",
+   "MAGIC_CHOICES[1].blurb"
+  ]
+ },
+ {
+  "key": "src/domain/npc/characterConsumers.js::CORRUPTION_DEPTH_GATE",
+  "file": "src/domain/npc/characterConsumers.js",
+  "exp": "CORRUPTION_DEPTH_GATE",
+  "n": 2,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (pack row 13(a); F13 restored the call to the pen)",
+   "the reach: a drifted vice opens a door on 7 of 17 axes, because ten axes carry no legacy flaw column on their vice side "
+  ],
+  "paths": [
+   "CORRUPTION_DEPTH_GATE.status",
+   "CORRUPTION_DEPTH_GATE.ownerRows[1]"
+  ]
+ },
+ {
+  "key": "src/domain/npc/livedExperienceCatalog.js::LIVED_EXPERIENCE_PROVENANCE",
+  "file": "src/domain/npc/livedExperienceCatalog.js",
+  "exp": "LIVED_EXPERIENCE_PROVENANCE",
+  "n": 2,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (pack Register III, first draft)",
+   "the whole kind roster, every plane assignment, every family assignment and every pull vector"
+  ],
+  "paths": [
+   "LIVED_EXPERIENCE_PROVENANCE.status",
+   "LIVED_EXPERIENCE_PROVENANCE.ownerRows[0]"
+  ]
+ },
+ {
+  "key": "src/domain/region/wizardNews.js::IMPACT_LABELS",
+  "file": "src/domain/region/wizardNews.js",
+  "exp": "IMPACT_LABELS",
+  "n": 2,
+  "samples": [
+   "a rise in lawlessness",
+   "a stir among the faithful"
+  ],
+  "paths": [
+   "IMPACT_LABELS.criminal_pressure",
+   "IMPACT_LABELS.religious_pressure"
+  ]
+ },
+ {
+  "key": "src/domain/townMap/asymmetrySources.js::extractAsymmetrySources()",
+  "file": "src/domain/townMap/asymmetrySources.js",
+  "exp": "extractAsymmetrySources()",
+  "n": 2,
+  "samples": [
+   "waterfront (the town meets the water)",
+   "market accretion (stalls crowd the trade gate)"
+  ],
+  "paths": [
+   "extractAsymmetrySources()[0].cause",
+   "extractAsymmetrySources()[1].cause"
+  ]
+ },
+ {
+  "key": "src/domain/tuning/autoTunableRegistry.js::CANDIDATE_RAILS",
+  "file": "src/domain/tuning/autoTunableRegistry.js",
+  "exp": "CANDIDATE_RAILS",
+  "n": 2,
+  "samples": [
+   "SQL k-floor; monotone UP only (§4). Owner-ratify if auto-tightening is wanted.",
+   "SQL k-floor; monotone UP only (§4)."
+  ],
+  "paths": [
+   "CANDIDATE_RAILS[0].note",
+   "CANDIDATE_RAILS[1].note"
+  ]
+ },
+ {
+  "key": "src/domain/tuning/proposedSoakBands.js::validateSoakBand()",
+  "file": "src/domain/tuning/proposedSoakBands.js",
+  "exp": "validateSoakBand()",
+  "n": 2,
+  "samples": [
+   "min and max must both be finite numbers",
+   "status must be exactly 'RATIFIED' (bands are owner-signed targets)"
+  ],
+  "paths": [
+   "validateSoakBand().reasons[4]",
+   "validateSoakBand().reasons[5]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/convergence.js::interventionNews()",
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "interventionNews()",
+  "n": 2,
+  "samples": [
+   "{patronId}'s banners march on {targetId}'s succession",
+   "{patronId} threw an army into {targetId}'s contest to raise the challengers. {receipt}"
+  ],
+  "paths": [
+   "interventionNews().headline",
+   "interventionNews().summary"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/deityFlaws.js::DEITY_FLAW_PROVENANCE",
+  "file": "src/domain/worldPulse/deityFlaws.js",
+  "exp": "DEITY_FLAW_PROVENANCE",
+  "n": 2,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (the D2 flaw words are drafts mapped onto the chart; frozen only by the owner pen)",
+   "ODQ 800.3 J2: flaws are vice-pole positions on the shared chart; the D2 modulation hooks survive, attached to vice poles"
+  ],
+  "paths": [
+   "DEITY_FLAW_PROVENANCE.status",
+   "DEITY_FLAW_PROVENANCE.ruling"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/deityStanceLane.js::footholdOutcome()",
+  "file": "src/domain/worldPulse/deityStanceLane.js",
+  "exp": "footholdOutcome()",
+  "n": 2,
+  "samples": [
+   "{rivalName} finds an ear in {cityName}",
+   "{npcName}, whose temper leans to {rivalName} and away from {patronName}, has become the creed's foothold within {cityNam"
+  ],
+  "paths": [
+   "footholdOutcome().headline",
+   "footholdOutcome().summary"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyChanceMeetingStage.js::CHANCE_MEETING_STAGE_TUNING_PROVENANCE",
+  "file": "src/domain/worldPulse/envoyChanceMeetingStage.js",
+  "exp": "CHANCE_MEETING_STAGE_TUNING_PROVENANCE",
+  "n": 2,
+  "samples": [
+   "the doubling of that grievance when the approacher wore a covert face",
+   "the residents floor, which is the estate's own notable line rather than a number this lane chose"
+  ],
+  "paths": [
+   "CHANCE_MEETING_STAGE_TUNING_PROVENANCE.ownerRows[1]",
+   "CHANCE_MEETING_STAGE_TUNING_PROVENANCE.ownerRows[2]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/infiltrationDepth.js::PLACEMENT_MISSION_KINDS",
+  "file": "src/domain/worldPulse/espionage/infiltrationDepth.js",
+  "exp": "PLACEMENT_MISSION_KINDS",
+  "n": 2,
+  "samples": [
+   "the L3 placement operation; its FAILURE writes the covert-cause custody hold, which is a live record family with a live ",
+   "the L4 seating operation; F8 rules the placed seat IS the web's foreign-leashed seat reached by a second door, so its ex"
+  ],
+  "paths": [
+   "PLACEMENT_MISSION_KINDS[0].sourceNote",
+   "PLACEMENT_MISSION_KINDS[1].sourceNote"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/infiltrationDrift.js::DEPTH_PRICING_LAW",
+  "file": "src/domain/worldPulse/espionage/infiltrationDrift.js",
+  "exp": "DEPTH_PRICING_LAW",
+  "n": 2,
+  "samples": [
+   "depth prices BREADTH (how many of the host chart's axes an embedding exposes a person to), and never the per-axis quantu",
+   "the registers pack drafts the five depth words as a MILIEU MULTIPLIER; a multiplier is exactly the arithmetic the cliff "
+  ],
+  "paths": [
+   "DEPTH_PRICING_LAW.ruling",
+   "DEPTH_PRICING_LAW.rejected"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/operationsVoice.js::GOING_NATIVE_VOICE_LAW",
+  "file": "src/domain/worldPulse/espionage/operationsVoice.js",
+  "exp": "GOING_NATIVE_VOICE_LAW",
+  "n": 2,
+  "samples": [
+   "the voice speaks strain and never a turning: no line states or presupposes that dwelling can reverse a fidelity while th",
+   "ambient dwelling rests at a whisper (one floor quantum per axis at every rung), and the axis the arc runs on carries zer"
+  ],
+  "paths": [
+   "GOING_NATIVE_VOICE_LAW.rule",
+   "GOING_NATIVE_VOICE_LAW.measured"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/feasibilityGate.js::classifyFeasibility()",
+  "file": "src/domain/worldPulse/feasibilityGate.js",
+  "exp": "classifyFeasibility()",
+  "n": 2,
+  "samples": [
+   "Weighed against the walls, the attacker is no contest: the defender's home ground counted.",
+   "Utterly outmatched, a thorpe against a fortified city; the siege cannot succeed."
+  ],
+  "paths": [
+   "classifyFeasibility().reasons[0]",
+   "classifyFeasibility().reasons[1]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/npcGoalBranches.js::GOAL_BRANCH_PROVENANCE",
+  "file": "src/domain/worldPulse/npcGoalBranches.js",
+  "exp": "GOAL_BRANCH_PROVENANCE",
+  "n": 2,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (the nerve column is the conversion's one authored addition)",
+   "the `nerve` column: thirteen ordinal values saying how bold each branch is. They are the only numbers this conversion au"
+  ],
+  "paths": [
+   "GOAL_BRANCH_PROVENANCE.status",
+   "GOAL_BRANCH_PROVENANCE.ownerRows[0]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/operations/operationGrammar.js::MISSION_KIND_CATALOG",
+  "file": "src/domain/worldPulse/operations/operationGrammar.js",
+  "exp": "MISSION_KIND_CATALOG",
+  "n": 2,
+  "samples": [
+   "the ACQUIRE arm — the only product that may CREATE a belief; it crosses exactly the appraisal legs the mission named and",
+   "the REFUTE arm — the sweeping branch, which crosses every readable slot so the contradiction term can bite, then lands t"
+  ],
+  "paths": [
+   "MISSION_KIND_CATALOG[1].sourceNote",
+   "MISSION_KIND_CATALOG[2].sourceNote"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pactFormation.js::signPactProposal()",
+  "file": "src/domain/worldPulse/pactFormation.js",
+  "exp": "signPactProposal()",
+  "n": 2,
+  "samples": [
+   "Agreed in peace between {from} and {to}, and extracted from nobody.",
+   "{from} and {to} have set their names to it, in peace and not at a war's end."
+  ],
+  "paths": [
+   "signPactProposal().worldState.spatialLedgers.treaties.{from}>{to}.receipts[0]",
+   "signPactProposal().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/peaceReasons.js::PEACE_VETO_PROSE",
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "PEACE_VETO_PROSE",
+  "n": 2,
+  "samples": [
+   "That court has no army in the field against that foe. There is no war of theirs to wind down.",
+   "The recall order is already given; the army marches home."
+  ],
+  "paths": [
+   "PEACE_VETO_PROSE.peace_no_deployment",
+   "PEACE_VETO_PROSE.peace_already_ordered"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/razingExecution.js::razingDecisionFor()",
+  "file": "src/domain/worldPulse/razingExecution.js",
+  "exp": "razingDecisionFor()",
+  "n": 2,
+  "samples": [
+   "the conquest doctrine is not lit in this world; no town burns by it.",
+   "{razerId} is not at the extreme with {victimId}: the border is not hostile, the resentment has not reached what hostilit"
+  ],
+  "paths": [
+   "razingDecisionFor().verdict.receipt",
+   "razingDecisionFor().extremity.receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/reinforcement.js::REINFORCEMENT_FLOW_WORDS",
+  "file": "src/domain/worldPulse/reinforcement.js",
+  "exp": "REINFORCEMENT_FLOW_WORDS",
+  "n": 2,
+  "samples": [
+   "A thin trickle of men and materiel",
+   "Everything the home could send"
+  ],
+  "paths": [
+   "REINFORCEMENT_FLOW_WORDS[0]",
+   "REINFORCEMENT_FLOW_WORDS[2]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/routeNetworkConsumersInterdiction.js::severanceReasons()",
+  "file": "src/domain/worldPulse/routeNetworkConsumersInterdiction.js",
+  "exp": "severanceReasons()",
+  "n": 2,
+  "samples": [
+   "The road from {b} carried {join} into {b}.",
+   "Traffic on that way stood at {band}."
+  ],
+  "paths": [
+   "severanceReasons()[0]",
+   "severanceReasons()[1]"
+  ]
+ },
+ {
+  "key": "src/lib/importReconciliation.js::previewImportReconciliation()",
+  "file": "src/lib/importReconciliation.js",
+  "exp": "previewImportReconciliation()",
+  "n": 2,
+  "samples": [
+   "This reconciliation session is malformed or unsupported.",
+   "The reconciliation session was rejected."
+  ],
+  "paths": [
+   "previewImportReconciliation().error",
+   "previewImportReconciliation().diagnostic.message"
+  ]
+ },
+ {
+  "key": "src/store/aiRequestLifecycle.js::NARRATIVE_FIELD_LABELS",
+  "file": "src/store/aiRequestLifecycle.js",
+  "exp": "NARRATIVE_FIELD_LABELS",
+  "n": 2,
+  "samples": [
+   "Writing the settlement’s identity",
+   "Mapping the political web"
+  ],
+  "paths": [
+   "NARRATIVE_FIELD_LABELS.thesis",
+   "NARRATIVE_FIELD_LABELS.connectionsMap"
+  ]
+ },
+ {
+  "key": "src/store/settlementDeityHelpers.js::DEITY_WRITE_REFUSAL",
+  "file": "src/store/settlementDeityHelpers.js",
+  "exp": "DEITY_WRITE_REFUSAL",
+  "n": 2,
+  "samples": [
+   "Deities come from your custom Compendium.",
+   "Requires premium custom content."
+  ],
+  "paths": [
+   "DEITY_WRITE_REFUSAL.reasons[0]",
+   "DEITY_WRITE_REFUSAL.unlocks[0]"
+  ]
+ },
+ {
+  "key": "src/application/commands/adapters/customContentApply.js::customContentArchiveSpec",
+  "file": "src/application/commands/adapters/customContentApply.js",
+  "exp": "customContentArchiveSpec",
+  "n": 1,
+  "samples": [
+   "Archive a custom-content definition without deleting its revisions."
+  ],
+  "paths": [
+   "customContentArchiveSpec.description"
+  ]
+ },
+ {
+  "key": "src/application/commands/adapters/importReconciliationApply.js::importCampaignAttachExistingSpec",
+  "file": "src/application/commands/adapters/importReconciliationApply.js",
+  "exp": "importCampaignAttachExistingSpec",
+  "n": 1,
+  "samples": [
+   "Rehome one existing settlement into the reviewed target campaign."
+  ],
+  "paths": [
+   "importCampaignAttachExistingSpec.description"
+  ]
+ },
+ {
+  "key": "src/application/commands/adapters/importReconciliationApply.js::importSettlementCreateAndAttachSpec",
+  "file": "src/application/commands/adapters/importReconciliationApply.js",
+  "exp": "importSettlementCreateAndAttachSpec",
+  "n": 1,
+  "samples": [
+   "Create one dormant imported settlement and attach it atomically."
+  ],
+  "paths": [
+   "importSettlementCreateAndAttachSpec.description"
+  ]
+ },
+ {
+  "key": "src/application/commands/adapters/partyImpactRecord.js::partyImpactRecordSpec",
+  "file": "src/application/commands/adapters/partyImpactRecord.js",
+  "exp": "partyImpactRecordSpec",
+  "n": 1,
+  "samples": [
+   "Record one reviewed party impact through the World Pulse input lane."
+  ],
+  "paths": [
+   "partyImpactRecordSpec.description"
+  ]
+ },
+ {
+  "key": "src/application/commands/adapters/pendingEditCommit.js::pendingEditCommitSpec",
+  "file": "src/application/commands/adapters/pendingEditCommit.js",
+  "exp": "pendingEditCommitSpec",
+  "n": 1,
+  "samples": [
+   "Commit one exact owner-scoped set of reviewed settlement edits."
+  ],
+  "paths": [
+   "pendingEditCommitSpec.description"
+  ]
+ },
+ {
+  "key": "src/application/commands/commandEnvelope.js::validateCommandEnvelope()",
+  "file": "src/application/commands/commandEnvelope.js",
+  "exp": "validateCommandEnvelope()",
+  "n": 1,
+  "samples": [
+   "command must be a plain object"
+  ],
+  "paths": [
+   "validateCommandEnvelope().message"
+  ]
+ },
+ {
+  "key": "src/components/founders/hallRegister.js::covenantProseStyle",
+  "file": "src/components/founders/hallRegister.js",
+  "exp": "covenantProseStyle",
+  "n": 1,
+  "samples": [
+   "\"Crimson Text\", Georgia, serif"
+  ],
+  "paths": [
+   "covenantProseStyle.fontFamily"
+  ]
+ },
+ {
+  "key": "src/components/map/gatheredDocket.js::heldDocketPromise()",
+  "file": "src/components/map/gatheredDocket.js",
+  "exp": "heldDocketPromise()",
+  "n": 1,
+  "samples": [
+   "Every matter is settled."
+  ],
+  "paths": [
+   "heldDocketPromise()"
+  ]
+ },
+ {
+  "key": "src/components/map/lifecycleGlyphStyle.js::LIFECYCLE_GLYPH_STYLE",
+  "file": "src/components/map/lifecycleGlyphStyle.js",
+  "exp": "LIFECYCLE_GLYPH_STYLE",
+  "n": 1,
+  "samples": [
+   "Relic ruin / abandoned"
+  ],
+  "paths": [
+   "LIFECYCLE_GLYPH_STYLE.ruin.label"
+  ]
+ },
+ {
+  "key": "src/components/new/tabConstants.js::SERVICE_META",
+  "file": "src/components/new/tabConstants.js",
+  "exp": "SERVICE_META",
+  "n": 1,
+  "samples": [
+   "Available if you know where to look"
+  ],
+  "paths": [
+   "SERVICE_META.criminal.note"
+  ]
+ },
+ {
+  "key": "src/components/theme.js::dropShadow()",
+  "file": "src/components/theme.js",
+  "exp": "dropShadow()",
+  "n": 1,
+  "samples": [
+   "drop-shadow(NaNpx NaNpx {b}px {c})"
+  ],
+  "paths": [
+   "dropShadow()"
+  ]
+ },
+ {
+  "key": "src/config/entitlementLadder.js::DEFERRED_LADDER_ROWS",
+  "file": "src/config/entitlementLadder.js",
+  "exp": "DEFERRED_LADDER_ROWS",
+  "n": 1,
+  "samples": [
+   "InteriorView has no product importer and no per-settlement sample allowance exists — unshipped, so the claim had nothing"
+  ],
+  "paths": [
+   "DEFERRED_LADDER_ROWS[0].reason"
+  ]
+ },
+ {
+  "key": "src/data/goods/chains.js::RESOURCE_CHAINS",
+  "file": "src/data/goods/chains.js",
+  "exp": "RESOURCE_CHAINS",
+  "n": 1,
+  "samples": [
+   "Access to external mill"
+  ],
+  "paths": [
+   "RESOURCE_CHAINS.grain.processingInstitutions[3]"
+  ]
+ },
+ {
+  "key": "src/design/tokens.js::fontFamily",
+  "file": "src/design/tokens.js",
+  "exp": "fontFamily",
+  "n": 1,
+  "samples": [
+   "\"JetBrains Mono\", \"Fira Code\", Consolas, monospace"
+  ],
+  "paths": [
+   "fontFamily.mono"
+  ]
+ },
+ {
+  "key": "src/domain/autonomy/accelerationOps.js::describeNudge()",
+  "file": "src/domain/autonomy/accelerationOps.js",
+  "exp": "describeNudge()",
+  "n": 1,
+  "samples": [
+   "{type} at {originSettlementId} (severity 0%)"
+  ],
+  "paths": [
+   "describeNudge()"
+  ]
+ },
+ {
+  "key": "src/domain/autonomy/index.js::evaluateStopCondition()",
+  "file": "src/domain/autonomy/index.js",
+  "exp": "evaluateStopCondition()",
+  "n": 1,
+  "samples": [
+   "a StopCondition carries version: 1"
+  ],
+  "paths": [
+   "evaluateStopCondition().errors[0]"
+  ]
+ },
+ {
+  "key": "src/domain/briefs/citations.js::ENGINE_DOES_NOT_RECORD",
+  "file": "src/domain/briefs/citations.js",
+  "exp": "ENGINE_DOES_NOT_RECORD",
+  "n": 1,
+  "samples": [
+   "the engine does not record this"
+  ],
+  "paths": [
+   "ENGINE_DOES_NOT_RECORD"
+  ]
+ },
+ {
+  "key": "src/domain/content/contentEffectProjection.js::contentFieldTruth()",
+  "file": "src/domain/content/contentEffectProjection.js",
+  "exp": "contentFieldTruth()",
+  "n": 1,
+  "samples": [
+   "This field is outside the registered content vocabulary."
+  ],
+  "paths": [
+   "contentFieldTruth().explanation"
+  ]
+ },
+ {
+  "key": "src/domain/content/customSupplyChainPresentation.js::customSupplyChainReasonText()",
+  "file": "src/domain/content/customSupplyChainPresentation.js",
+  "exp": "customSupplyChainReasonText()",
+  "n": 1,
+  "samples": [
+   "{component} is not currently available."
+  ],
+  "paths": [
+   "customSupplyChainReasonText()"
+  ]
+ },
+ {
+  "key": "src/domain/customContent.js::classifyCustomEntity()",
+  "file": "src/domain/customContent.js",
+  "exp": "classifyCustomEntity()",
+  "n": 1,
+  "samples": [
+   "\"{name}\" classified as other institution."
+  ],
+  "paths": [
+   "classifyCustomEntity().contributors[0].reason"
+  ]
+ },
+ {
+  "key": "src/domain/customContentSchema.js::ECONOMIC_WEIGHT",
+  "file": "src/domain/customContentSchema.js",
+  "exp": "ECONOMIC_WEIGHT",
+  "n": 1,
+  "samples": [
+   "Backbone of the economy"
+  ],
+  "paths": [
+   "ECONOMIC_WEIGHT[3].label"
+  ]
+ },
+ {
+  "key": "src/domain/customContentSchema.js::POWER_AUTHORITIES",
+  "file": "src/domain/customContentSchema.js",
+  "exp": "POWER_AUTHORITIES",
+  "n": 1,
+  "samples": [
+   "Civic / legal authority"
+  ],
+  "paths": [
+   "POWER_AUTHORITIES[4].label"
+  ]
+ },
+ {
+  "key": "src/domain/customContentSchema.js::validateDeity()",
+  "file": "src/domain/customContentSchema.js",
+  "exp": "validateDeity()",
+  "n": 1,
+  "samples": [
+   "portfolio must be free text (a string)."
+  ],
+  "paths": [
+   "validateDeity().errors[4]"
+  ]
+ },
+ {
+  "key": "src/domain/customContentSchema.js::validateTradition()",
+  "file": "src/domain/customContentSchema.js",
+  "exp": "validateTradition()",
+  "n": 1,
+  "samples": [
+   "epithet must be free text (a string)."
+  ],
+  "paths": [
+   "validateTradition().errors[2]"
+  ]
+ },
+ {
+  "key": "src/domain/display/deityEffects.js::deityPressureOf()",
+  "file": "src/domain/display/deityEffects.js",
+  "exp": "deityPressureOf()",
+  "n": 1,
+  "samples": [
+   "No supported local patron domain changes this court's bar for war."
+  ],
+  "paths": [
+   "deityPressureOf().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/display/discourseKernel.js::CONNECTIVE_LEXICON",
+  "file": "src/domain/display/discourseKernel.js",
+  "exp": "CONNECTIVE_LEXICON",
+  "n": 1,
+  "samples": [
+   "Against what was coming:"
+  ],
+  "paths": [
+   "CONNECTIVE_LEXICON.anticipatory[1]"
+  ]
+ },
+ {
+  "key": "src/domain/display/dossierViewModel.js::deriveBlockadeRelief()",
+  "file": "src/domain/display/dossierViewModel.js",
+  "exp": "deriveBlockadeRelief()",
+  "n": 1,
+  "samples": [
+   "The blockade is biting: no magical channel runs it, and the import share of need goes unmet."
+  ],
+  "paths": [
+   "deriveBlockadeRelief().display"
+  ]
+ },
+ {
+  "key": "src/domain/display/dossierViewModel.js::deriveExportPosture()",
+  "file": "src/domain/display/dossierViewModel.js",
+  "exp": "deriveExportPosture()",
+  "n": 1,
+  "samples": [
+   "Entrepôt: re-exports transit goods"
+  ],
+  "paths": [
+   "deriveExportPosture().label"
+  ]
+ },
+ {
+  "key": "src/domain/display/dossierViewModel.js::deriveViability()",
+  "file": "src/domain/display/dossierViewModel.js",
+  "exp": "deriveViability()",
+  "n": 1,
+  "samples": [
+   "VIABLE: economically self-sufficient and historically plausible."
+  ],
+  "paths": [
+   "deriveViability().summary"
+  ]
+ },
+ {
+  "key": "src/domain/display/humanizeEngineTokens.js::tickCalendarDetailLabel()",
+  "file": "src/domain/display/humanizeEngineTokens.js",
+  "exp": "tickCalendarDetailLabel()",
+  "n": 1,
+  "samples": [
+   "week 1 of spring, year 1"
+  ],
+  "paths": [
+   "tickCalendarDetailLabel()"
+  ]
+ },
+ {
+  "key": "src/domain/display/humanizeEngineTokens.js::tickCalendarLabel()",
+  "file": "src/domain/display/humanizeEngineTokens.js",
+  "exp": "tickCalendarLabel()",
+  "n": 1,
+  "samples": [
+   "the spring of year 1"
+  ],
+  "paths": [
+   "tickCalendarLabel()"
+  ]
+ },
+ {
+  "key": "src/domain/display/neighbourMirror.js::MIRROR_BAND_WORDS",
+  "file": "src/domain/display/neighbourMirror.js",
+  "exp": "MIRROR_BAND_WORDS",
+  "n": 1,
+  "samples": [
+   "nothing we can account for"
+  ],
+  "paths": [
+   "MIRROR_BAND_WORDS.unknown"
+  ]
+ },
+ {
+  "key": "src/domain/display/neighbourMirror.js::MIRROR_STALENESS_WORDS",
+  "file": "src/domain/display/neighbourMirror.js",
+  "exp": "MIRROR_STALENESS_WORDS",
+  "n": 1,
+  "samples": [
+   "on no date our record holds"
+  ],
+  "paths": [
+   "MIRROR_STALENESS_WORDS.unknown"
+  ]
+ },
+ {
+  "key": "src/domain/display/neighbourMirror.js::NEIGHBOUR_MIRROR_HEADING",
+  "file": "src/domain/display/neighbourMirror.js",
+  "exp": "NEIGHBOUR_MIRROR_HEADING",
+  "n": 1,
+  "samples": [
+   "What the neighbours have been shown"
+  ],
+  "paths": [
+   "NEIGHBOUR_MIRROR_HEADING"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::DEF8_UNREACHABLE_POOLS",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "DEF8_UNREACHABLE_POOLS",
+  "n": 1,
+  "samples": [
+   "multiple stresses, one posture shown"
+  ],
+  "paths": [
+   "DEF8_UNREACHABLE_POOLS[0]"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::charterPoolKey()",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "charterPoolKey()",
+  "n": 1,
+  "samples": [
+   "charter hall PRESENT (specialist monster response)"
+  ],
+  "paths": [
+   "charterPoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::contractedForcePoolKey()",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "contractedForcePoolKey()",
+  "n": 1,
+  "samples": [
+   "mercenary / contracted forces PRESENT"
+  ],
+  "paths": [
+   "contractedForcePoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::disasterRowPoolKey()",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "disasterRowPoolKey()",
+  "n": 1,
+  "samples": [
+   "Disasters & Famine: granary AND hospital"
+  ],
+  "paths": [
+   "disasterRowPoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::internalRowPoolKey()",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "internalRowPoolKey()",
+  "n": 1,
+  "samples": [
+   "Internal Security: full legal chain (court AND prison)"
+  ],
+  "paths": [
+   "internalRowPoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::invasionRowPoolKey()",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "invasionRowPoolKey()",
+  "n": 1,
+  "samples": [
+   "Invasion & War: walls AND professional garrison"
+  ],
+  "paths": [
+   "invasionRowPoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/defenseStateProse.js::navalDefensePoolKey()",
+  "file": "src/domain/display/stateProse/defenseStateProse.js",
+  "exp": "navalDefensePoolKey()",
+  "n": 1,
+  "samples": [
+   "Naval Defense: Under blockade"
+  ],
+  "paths": [
+   "navalDefensePoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/economyStateProse.js::prosperityHeaderPoolKey()",
+  "file": "src/domain/display/stateProse/economyStateProse.js",
+  "exp": "prosperityHeaderPoolKey()",
+  "n": 1,
+  "samples": [
+   "COMBINATION C3: the middle rungs"
+  ],
+  "paths": [
+   "prosperityHeaderPoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/generalStateProse.js::originTierPoolKey()",
+  "file": "src/domain/display/stateProse/generalStateProse.js",
+  "exp": "originTierPoolKey()",
+  "n": 1,
+  "samples": [
+   "tier overlay: other tiers"
+  ],
+  "paths": [
+   "originTierPoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/generalStateProse.js::situationPoolKey()",
+  "file": "src/domain/display/stateProse/generalStateProse.js",
+  "exp": "situationPoolKey()",
+  "n": 1,
+  "samples": [
+   "ordinary (route road and the default)"
+  ],
+  "paths": [
+   "situationPoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/generalStateProse.js::viabilityVerdictPoolKey()",
+  "file": "src/domain/display/stateProse/generalStateProse.js",
+  "exp": "viabilityVerdictPoolKey()",
+  "n": 1,
+  "samples": [
+   "the MARGINAL arm: neither verdict returned"
+  ],
+  "paths": [
+   "viabilityVerdictPoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/powerStateProse.js::legitimacyReadingPoolKey()",
+  "file": "src/domain/display/stateProse/powerStateProse.js",
+  "exp": "legitimacyReadingPoolKey()",
+  "n": 1,
+  "samples": [
+   "neutral baseline (nothing pulling either way)"
+  ],
+  "paths": [
+   "legitimacyReadingPoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/powerStateProse.js::politicsPresencePoolKey()",
+  "file": "src/domain/display/stateProse/powerStateProse.js",
+  "exp": "politicsPresencePoolKey()",
+  "n": 1,
+  "samples": [
+   "layer DORMANT (no ledger materialized)"
+  ],
+  "paths": [
+   "politicsPresencePoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/stateProse/stressorsStateProse.js::conditionDirectionPoolKey()",
+  "file": "src/domain/display/stateProse/stressorsStateProse.js",
+  "exp": "conditionDirectionPoolKey()",
+  "n": 1,
+  "samples": [
+   "DIRECTION: stable, and the FLAT case (no valid directional status)"
+  ],
+  "paths": [
+   "conditionDirectionPoolKey()"
+  ]
+ },
+ {
+  "key": "src/domain/display/warAndRoadNames.js::deriveWarName()",
+  "file": "src/domain/display/warAndRoadNames.js",
+  "exp": "deriveWarName()",
+  "n": 1,
+  "samples": [
+   "the {nameFor}–{nameFor} War: {nameFor} against {nameFor}."
+  ],
+  "paths": [
+   "deriveWarName().line"
+  ]
+ },
+ {
+  "key": "src/domain/npc/characterEdit.js::CHART_WRITER_SEAM",
+  "file": "src/domain/npc/characterEdit.js",
+  "exp": "CHART_WRITER_SEAM",
+  "n": 1,
+  "samples": [
+   "UNLANDED on this base and therefore NAMED, never imported. At the reconcile the reader and this writer are the one modul"
+  ],
+  "paths": [
+   "CHART_WRITER_SEAM.note"
+  ]
+ },
+ {
+  "key": "src/domain/npc/characterReadModel.js::DECAY_CLAUSE",
+  "file": "src/domain/npc/characterReadModel.js",
+  "exp": "DECAY_CLAUSE",
+  "n": 1,
+  "samples": [
+   "the slow work of years"
+  ],
+  "paths": [
+   "DECAY_CLAUSE"
+  ]
+ },
+ {
+  "key": "src/domain/npc/livedExperienceCatalog.js::EXPERIENCE_TABLE",
+  "file": "src/domain/npc/livedExperienceCatalog.js",
+  "exp": "EXPERIENCE_TABLE",
+  "n": 1,
+  "samples": [
+   "n/a - teaches nothing"
+  ],
+  "paths": [
+   "EXPERIENCE_TABLE.ordinary_day.receipt"
+  ]
+ },
+ {
+  "key": "src/domain/npc/npcBank.js::validateNpcFacet()",
+  "file": "src/domain/npc/npcBank.js",
+  "exp": "validateNpcFacet()",
+  "n": 1,
+  "samples": [
+   "unknown facet kind \"{a}\""
+  ],
+  "paths": [
+   "validateNpcFacet().reason"
+  ]
+ },
+ {
+  "key": "src/domain/regionalGraph.js::deriveRegionalLink()",
+  "file": "src/domain/regionalGraph.js",
+  "exp": "deriveRegionalLink()",
+  "n": 1,
+  "samples": [
+   "Neighbour \"{name}\" classified as other."
+  ],
+  "paths": [
+   "deriveRegionalLink().contributors[0].reason"
+  ]
+ },
+ {
+  "key": "src/domain/regionalGraph.js::summarizeRegional()",
+  "file": "src/domain/regionalGraph.js",
+  "exp": "summarizeRegional()",
+  "n": 1,
+  "samples": [
+   "No structured regional neighbours."
+  ],
+  "paths": [
+   "summarizeRegional()[0]"
+  ]
+ },
+ {
+  "key": "src/domain/roads/migrationReason.js::MIGRATION_CAUSE",
+  "file": "src/domain/roads/migrationReason.js",
+  "exp": "MIGRATION_CAUSE",
+  "n": 1,
+  "samples": [
+   "A column of folk leaving a shed settlement"
+  ],
+  "paths": [
+   "MIGRATION_CAUSE"
+  ]
+ },
+ {
+  "key": "src/domain/roads/ops.js::applyRoadsPartyRelease()",
+  "file": "src/domain/roads/ops.js",
+  "exp": "applyRoadsPartyRelease()",
+  "n": 1,
+  "samples": [
+   "unknown roads op \"{c}\""
+  ],
+  "paths": [
+   "applyRoadsPartyRelease().reason"
+  ]
+ },
+ {
+  "key": "src/domain/rulingPowerCoup.js::COUP_RISK_LABELS",
+  "file": "src/domain/rulingPowerCoup.js",
+  "exp": "COUP_RISK_LABELS",
+  "n": 1,
+  "samples": [
+   "Critical. The seat could fall"
+  ],
+  "paths": [
+   "COUP_RISK_LABELS[3]"
+  ]
+ },
+ {
+  "key": "src/domain/spatial/calamity.js::stampTitle()",
+  "file": "src/domain/spatial/calamity.js",
+  "exp": "stampTitle()",
+  "n": 1,
+  "samples": [
+   "The Great Calamity of {a}, year {b}"
+  ],
+  "paths": [
+   "stampTitle()"
+  ]
+ },
+ {
+  "key": "src/domain/spatial/dispatchEV.js::emboldenedReceipt()",
+  "file": "src/domain/spatial/dispatchEV.js",
+  "exp": "emboldenedReceipt()",
+  "n": 1,
+  "samples": [
+   "The merchants are emboldened by the {a} run. A risky delivery paid off."
+  ],
+  "paths": [
+   "emboldenedReceipt()"
+  ]
+ },
+ {
+  "key": "src/domain/spatial/generosityEV.js::GENEROSITY_INSTRUMENTS",
+  "file": "src/domain/spatial/generosityEV.js",
+  "exp": "GENEROSITY_INSTRUMENTS",
+  "n": 1,
+  "samples": [
+   "Statecraft §2.4 GIVE lane: warning an ally, priced by the SACRIFICE of the telling (strategic advantage spent + eyes exp"
+  ],
+  "paths": [
+   "GENEROSITY_INSTRUMENTS.warning.note"
+  ]
+ },
+ {
+  "key": "src/domain/spatial/generosityEV.js::generosityReceipt()",
+  "file": "src/domain/spatial/generosityEV.js",
+  "exp": "generosityReceipt()",
+  "n": 1,
+  "samples": [
+   "Grain went to {receiverName}: their ground shields {giverName}'s flank: the granary opened as defense spending."
+  ],
+  "paths": [
+   "generosityReceipt()"
+  ]
+ },
+ {
+  "key": "src/domain/spatial/index.js::PORT_ADVISORY_PHRASE",
+  "file": "src/domain/spatial/index.js",
+  "exp": "PORT_ADVISORY_PHRASE",
+  "n": 1,
+  "samples": [
+   "a harbour with no counterpart across the water"
+  ],
+  "paths": [
+   "PORT_ADVISORY_PHRASE.unpartnered_harbour"
+  ]
+ },
+ {
+  "key": "src/domain/spatial/supplyShipments.js::starvationReceipt()",
+  "file": "src/domain/spatial/supplyShipments.js",
+  "exp": "starvationReceipt()",
+  "n": 1,
+  "samples": [
+   "{institutionName} starves: the {input} road is cut (every supplier severed) under {cause}."
+  ],
+  "paths": [
+   "starvationReceipt()"
+  ]
+ },
+ {
+  "key": "src/domain/state/deriveSystemState.js::deriveSystemState()",
+  "file": "src/domain/state/deriveSystemState.js",
+  "exp": "deriveSystemState()",
+  "n": 1,
+  "samples": [
+   "Few factions: concentrated power"
+  ],
+  "paths": [
+   "deriveSystemState().volatility.drivers[0]"
+  ]
+ },
+ {
+  "key": "src/domain/tableEvents.js::tableEventToNewsEntry()",
+  "file": "src/domain/tableEvents.js",
+  "exp": "tableEventToNewsEntry()",
+  "n": 1,
+  "samples": [
+   "{kind} at the table ({band})"
+  ],
+  "paths": [
+   "tableEventToNewsEntry().headline"
+  ]
+ },
+ {
+  "key": "src/domain/tableLedger.js::validateTableEvent()",
+  "file": "src/domain/tableLedger.js",
+  "exp": "validateTableEvent()",
+  "n": 1,
+  "samples": [
+   "kind must be one of: incident, stressor-relief, obligation, exposure, structure-harm, structure-restored, supply-loss, s"
+  ],
+  "paths": [
+   "validateTableEvent().errors[0]"
+  ]
+ },
+ {
+  "key": "src/domain/threatProfile.js::summarizeThreats()",
+  "file": "src/domain/threatProfile.js",
+  "exp": "summarizeThreats()",
+  "n": 1,
+  "samples": [
+   "No threats currently pressing the settlement."
+  ],
+  "paths": [
+   "summarizeThreats()[0]"
+  ]
+ },
+ {
+  "key": "src/domain/townMap/siteGenesis.js::generateSite()",
+  "file": "src/domain/townMap/siteGenesis.js",
+  "exp": "generateSite()",
+  "n": 1,
+  "samples": [
+   "the coast (sea trade)"
+  ],
+  "paths": [
+   "generateSite().prov[0].sourceRef"
+  ]
+ },
+ {
+  "key": "src/domain/townScene/index.js::validateTownSceneCompileInput()",
+  "file": "src/domain/townScene/index.js",
+  "exp": "validateTownSceneCompileInput()",
+  "n": 1,
+  "samples": [
+   "input must be a plain object"
+  ],
+  "paths": [
+   "validateTownSceneCompileInput().errors[0]"
+  ]
+ },
+ {
+  "key": "src/domain/traditions/genesis.js::describeTraditionWindow()",
+  "file": "src/domain/traditions/genesis.js",
+  "exp": "describeTraditionWindow()",
+  "n": 1,
+  "samples": [
+   "Seedtime, the first week"
+  ],
+  "paths": [
+   "describeTraditionWindow()"
+  ]
+ },
+ {
+  "key": "src/domain/traditions/prose.js::traditionBeatProse()",
+  "file": "src/domain/traditions/prose.js",
+  "exp": "traditionBeatProse()",
+  "n": 1,
+  "samples": [
+   "{name} went well this year in {town}. A town's observances carry its identity forward, and every year they hold or fail "
+  ],
+  "paths": [
+   "traditionBeatProse().summary"
+  ]
+ },
+ {
+  "key": "src/domain/tuning/autoTunableRegistry.js::validateRegistryEntry()",
+  "file": "src/domain/tuning/autoTunableRegistry.js",
+  "exp": "validateRegistryEntry()",
+  "n": 1,
+  "samples": [
+   "surface must be one of display/rollup/analytics (never sim/generation)"
+  ],
+  "paths": [
+   "validateRegistryEntry().reasons[2]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js::conquestExtractionCondition()",
+  "file": "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js",
+  "exp": "conquestExtractionCondition()",
+  "n": 1,
+  "samples": [
+   "{toPowerName} extracts wealth, troops, and authority from the conquered settlement."
+  ],
+  "paths": [
+   "conquestExtractionCondition().causes[0].reason"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js::installOccupationAuthority()",
+  "file": "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js",
+  "exp": "installOccupationAuthority()",
+  "n": 1,
+  "samples": [
+   "A foreign occupation authority installed by conquest."
+  ],
+  "paths": [
+   "installOccupationAuthority().powerStructure.factions[0].desc"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js::cascadeNewsEntry()",
+  "file": "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js",
+  "exp": "cascadeNewsEntry()",
+  "n": 1,
+  "samples": [
+   "{nameFor} and {nameFor}: {fromType} becomes {toType}"
+  ],
+  "paths": [
+   "cascadeNewsEntry().headline"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js::openCoalitionEnemyRelationship()",
+  "file": "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js",
+  "exp": "openCoalitionEnemyRelationship()",
+  "n": 1,
+  "samples": [
+   "An allied court answered a live call and opened its own bilateral war edge."
+  ],
+  "paths": [
+   "openCoalitionEnemyRelationship().worldState.relationshipStates.edge.enemyid.partyid.history[0].reason"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/attrition.js::applyAttritionToRecord()",
+  "file": "src/domain/worldPulse/attrition.js",
+  "exp": "applyAttritionToRecord()",
+  "n": 1,
+  "samples": [
+   "The attacking host bled lightly this turn in a {band} engagement, though supply, food and heart between them took much o"
+  ],
+  "paths": [
+   "applyAttritionToRecord().reasons[0]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/brokerageServices.js::answerBrokerageQuery()",
+  "file": "src/domain/worldPulse/brokerageServices.js",
+  "exp": "answerBrokerageQuery()",
+  "n": 1,
+  "samples": [
+   "No house in this world keeps a register worth paying for."
+  ],
+  "paths": [
+   "answerBrokerageQuery().refusal.detail"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/brokerageServices.js::brokerageQueryPrice()",
+  "file": "src/domain/worldPulse/brokerageServices.js",
+  "exp": "brokerageQueryPrice()",
+  "n": 1,
+  "samples": [
+   "The house wants real coin for this, and will want it before it speaks."
+  ],
+  "paths": [
+   "brokerageQueryPrice().detail"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/brokerageServices.js::interceptOutboundRecord()",
+  "file": "src/domain/worldPulse/brokerageServices.js",
+  "exp": "interceptOutboundRecord()",
+  "n": 1,
+  "samples": [
+   "Nothing legible left that house this week."
+  ],
+  "paths": [
+   "interceptOutboundRecord().refusal.detail"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/brokerageServicesPlant.js::commissionPlant()",
+  "file": "src/domain/worldPulse/brokerageServicesPlant.js",
+  "exp": "commissionPlant()",
+  "n": 1,
+  "samples": [
+   "No market in this world sells that."
+  ],
+  "paths": [
+   "commissionPlant().refusal.detail"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/conquestExecution.js::conquestMarginVerdict()",
+  "file": "src/domain/worldPulse/conquestExecution.js",
+  "exp": "conquestMarginVerdict()",
+  "n": 1,
+  "samples": [
+   "the margin between the victor and the held settlement cannot be measured, and an unmeasured margin is not an overwhelmin"
+  ],
+  "paths": [
+   "conquestMarginVerdict().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/conquestExecution.js::inheritedHunger()",
+  "file": "src/domain/worldPulse/conquestExecution.js",
+  "exp": "inheritedHunger()",
+  "n": 1,
+  "samples": [
+   "nothing the victor holds can be weighed for hunger."
+  ],
+  "paths": [
+   "inheritedHunger().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/conquestFeasibility.js::collapseSeatBooksUnderThreat()",
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "collapseSeatBooksUnderThreat()",
+  "n": 1,
+  "samples": [
+   "the seat keeps its own books: the war is not yet its own survival."
+  ],
+  "paths": [
+   "collapseSeatBooksUnderThreat().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/conquestFeasibility.js::conquestTermsRange()",
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "conquestTermsRange()",
+  "n": 1,
+  "samples": [
+   "the court has no bargaining range: it cannot judge the war."
+  ],
+  "paths": [
+   "conquestTermsRange().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/conquestFeasibility.js::mistakenFeasibilityReceipt()",
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "mistakenFeasibilityReceipt()",
+  "n": 1,
+  "samples": [
+   "the court held no judgement to be wrong about."
+  ],
+  "paths": [
+   "mistakenFeasibilityReceipt().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/conquestFeasibility.js::readConquestFeasibility()",
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "readConquestFeasibility()",
+  "n": 1,
+  "samples": [
+   "the court cannot judge a conquest of its rival: the pair is not two named settlements."
+  ],
+  "paths": [
+   "readConquestFeasibility().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/conquestFeasibility.js::termsRangesOverlap()",
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "termsRangesOverlap()",
+  "n": 1,
+  "samples": [
+   "neither side can price the war, so no range can be compared."
+  ],
+  "paths": [
+   "termsRangesOverlap().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/conquestIntent.js::readConquestIntent()",
+  "file": "src/domain/worldPulse/conquestIntent.js",
+  "exp": "readConquestIntent()",
+  "n": 1,
+  "samples": [
+   "no conquest intent can be read: the court has no martial disposition on record."
+  ],
+  "paths": [
+   "readConquestIntent().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/convergence.js::engagementOptions()",
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "engagementOptions()",
+  "n": 1,
+  "samples": [
+   "Committed to the field. The prize is worth the blood."
+  ],
+  "paths": [
+   "engagementOptions().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/convergence.js::interventionLegitimacy()",
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "interventionLegitimacy()",
+  "n": 1,
+  "samples": [
+   "An army sent to raise up rebels. Every neighbor now reads a ring tightening, and arms."
+  ],
+  "paths": [
+   "interventionLegitimacy().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/convergence.js::prizeRivalryCasus()",
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "prizeRivalryCasus()",
+  "n": 1,
+  "samples": [
+   "Two banners raced for one crown. The prize itself is now the quarrel between them."
+  ],
+  "paths": [
+   "prizeRivalryCasus().reason"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/convergence.js::reactiveResponse()",
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "reactiveResponse()",
+  "n": 1,
+  "samples": [
+   "No word of banners on the roads: the muster stands down."
+  ],
+  "paths": [
+   "reactiveResponse().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/convergence.js::scoreMotives()",
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "scoreMotives()",
+  "n": 1,
+  "samples": [
+   "A tribute binds the seat to us. A client that falls is an empire that shrinks."
+  ],
+  "paths": [
+   "scoreMotives().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/demographicsLand.js::landLine()",
+  "file": "src/domain/worldPulse/demographicsLand.js",
+  "exp": "landLine()",
+  "n": 1,
+  "samples": [
+   "Every opening left to {b} lies out beyond the reach of any road."
+  ],
+  "paths": [
+   "landLine()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/demographicsPlans.js::planLine()",
+  "file": "src/domain/worldPulse/demographicsPlans.js",
+  "exp": "planLine()",
+  "n": 1,
+  "samples": [
+   "{b} does nothing in particular. The work stands at 100 percent and 0 of the stores it needs are raised (100 percent)."
+  ],
+  "paths": [
+   "planLine()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/demographicsRates.js::DEMOGRAPHIC_TUNING_PROVENANCE",
+  "file": "src/domain/worldPulse/demographicsRates.js",
+  "exp": "DEMOGRAPHIC_TUNING_PROVENANCE",
+  "n": 1,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED (wave P landed the values as the lane's claim, not the owner's word)"
+  ],
+  "paths": [
+   "DEMOGRAPHIC_TUNING_PROVENANCE.status"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/demographicsResponses.js::responseLine()",
+  "file": "src/domain/worldPulse/demographicsResponses.js",
+  "exp": "responseLine()",
+  "n": 1,
+  "samples": [
+   "{b} does nothing in particular."
+  ],
+  "paths": [
+   "responseLine()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/demographicsRisk.js::demographicRiskOf()",
+  "file": "src/domain/worldPulse/demographicsRisk.js",
+  "exp": "demographicRiskOf()",
+  "n": 1,
+  "samples": [
+   "and the holding is scattered over open ground"
+  ],
+  "paths": [
+   "demographicRiskOf().raidReasons[1]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/demographicsWar.js::perceivedScarcityClause()",
+  "file": "src/domain/worldPulse/demographicsWar.js",
+  "exp": "perceivedScarcityClause()",
+  "n": 1,
+  "samples": [
+   "The court believes their granaries are bare and the court is wrong about it."
+  ],
+  "paths": [
+   "perceivedScarcityClause()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/dispositionProfile.js::thresholdFactorOf()",
+  "file": "src/domain/worldPulse/dispositionProfile.js",
+  "exp": "thresholdFactorOf()",
+  "n": 1,
+  "samples": [
+   "No supported disposition channel changes this court's action bar."
+  ],
+  "paths": [
+   "thresholdFactorOf().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyChanceMeetingNews.js::CHANCE_MEETING_EXPOSED_REASON",
+  "file": "src/domain/worldPulse/envoyChanceMeetingNews.js",
+  "exp": "CHANCE_MEETING_EXPOSED_REASON",
+  "n": 1,
+  "samples": [
+   "a refusal that did not stay private."
+  ],
+  "paths": [
+   "CHANCE_MEETING_EXPOSED_REASON"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyChanceMeetingNews.js::CHANCE_MEETING_REASON",
+  "file": "src/domain/worldPulse/envoyChanceMeetingNews.js",
+  "exp": "CHANCE_MEETING_REASON",
+  "n": 1,
+  "samples": [
+   "a guest and a notable met by chance; what passed between them is now a tie across two courts, and it will fade as ties d"
+  ],
+  "paths": [
+   "CHANCE_MEETING_REASON"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyTaskCatalog.js::COUNTERPART_SIGHT_LAW",
+  "file": "src/domain/worldPulse/envoyTaskCatalog.js",
+  "exp": "COUNTERPART_SIGHT_LAW",
+  "n": 1,
+  "samples": [
+   "the menu reads what the ENVOY'S COURT KNOWS, never the true chart and never the counterpart's own ledger"
+  ],
+  "paths": [
+   "COUNTERPART_SIGHT_LAW.rule"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/envoyTaskCatalog.js::ENVOY_TASK_CATALOG",
+  "file": "src/domain/worldPulse/envoyTaskCatalog.js",
+  "exp": "ENVOY_TASK_CATALOG",
+  "n": 1,
+  "samples": [
+   "WR-7d mints a real claim against a real custody hold, and the hold closes through its own closed reason vocabulary. The "
+  ],
+  "paths": [
+   "ENVOY_TASK_CATALOG[2].sourceNote"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/espionageDoctrine.js::readEspionageDoctrine()",
+  "file": "src/domain/worldPulse/espionage/espionageDoctrine.js",
+  "exp": "readEspionageDoctrine()",
+  "n": 1,
+  "samples": [
+   "No espionage doctrine can be read for this court: no court was named."
+  ],
+  "paths": [
+   "readEspionageDoctrine().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/espionageDoctrine.js::unknownDoctrine()",
+  "file": "src/domain/worldPulse/espionage/espionageDoctrine.js",
+  "exp": "unknownDoctrine()",
+  "n": 1,
+  "samples": [
+   "No espionage doctrine can be read for this court: {a}."
+  ],
+  "paths": [
+   "unknownDoctrine().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/espionageGauntlet.js::captorLeniencyRead()",
+  "file": "src/domain/worldPulse/espionage/espionageGauntlet.js",
+  "exp": "captorLeniencyRead()",
+  "n": 1,
+  "samples": [
+   "The captor court has no readable doctrine, so its caught guest is treated as any other."
+  ],
+  "paths": [
+   "captorLeniencyRead().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/espionage/espionageProductStage.js::standoffDecisionFor()",
+  "file": "src/domain/worldPulse/espionage/espionageProductStage.js",
+  "exp": "standoffDecisionFor()",
+  "n": 1,
+  "samples": [
+   "Pride carried him through the gate: the approach read no worse than his nerve, and only an entered man hears what a cour"
+  ],
+  "paths": [
+   "standoffDecisionFor().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/faithField.js::FAITH_UNBOUND_CHANNELS",
+  "file": "src/domain/worldPulse/faithField.js",
+  "exp": "FAITH_UNBOUND_CHANNELS",
+  "n": 1,
+  "samples": [
+   "No fertility or household causal variable exists. The word appears only in a founding-myth vocabulary token and in inter"
+  ],
+  "paths": [
+   "FAITH_UNBOUND_CHANNELS.hearth"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/faithNews.js::faithReceipt()",
+  "file": "src/domain/worldPulse/faithNews.js",
+  "exp": "faithReceipt()",
+  "n": 1,
+  "samples": [
+   "{creedName} lost its last altar in {settlementName}; no one there keeps the rite, and the parish roster carries the cree"
+  ],
+  "paths": [
+   "faithReceipt().headline"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/faithTuningSurface.js::FAITH_TUNING_PROVENANCE",
+  "file": "src/domain/worldPulse/faithTuningSurface.js",
+  "exp": "FAITH_TUNING_PROVENANCE",
+  "n": 1,
+  "samples": [
+   "CANDIDATE, OWNER-UNSIGNED, DRAFT-LIT (row O-17, 2026-09-03: the door is open over candidate numbers; every table below i"
+  ],
+  "paths": [
+   "FAITH_TUNING_PROVENANCE.status"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/feasibilityGate.js::feasibilityVerdictClause()",
+  "file": "src/domain/worldPulse/feasibilityGate.js",
+  "exp": "feasibilityVerdictClause()",
+  "n": 1,
+  "samples": [
+   "the matchup alone made a storm worth trying"
+  ],
+  "paths": [
+   "feasibilityVerdictClause()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/index.js::STRESSOR_CATALOG",
+  "file": "src/domain/worldPulse/index.js",
+  "exp": "STRESSOR_CATALOG",
+  "n": 1,
+  "samples": [
+   "Monster or raider pressure"
+  ],
+  "paths": [
+   "STRESSOR_CATALOG.monster_raider_pressure.label"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/index.js::canRecoverResource()",
+  "file": "src/domain/worldPulse/index.js",
+  "exp": "canRecoverResource()",
+  "n": 1,
+  "samples": [
+   "Renewable or managed resource can recover when pressure drops."
+  ],
+  "paths": [
+   "canRecoverResource().reason"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/institutionStatusModel.js::INSTITUTION_CAUSE_LABELS",
+  "file": "src/domain/worldPulse/institutionStatusModel.js",
+  "exp": "INSTITUTION_CAUSE_LABELS",
+  "n": 1,
+  "samples": [
+   "damage to the building"
+  ],
+  "paths": [
+   "INSTITUTION_CAUSE_LABELS.damage"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/ledgerOwnershipManifest.js::LEDGER_OWNERSHIP_MANIFEST",
+  "file": "src/domain/worldPulse/ledgerOwnershipManifest.js",
+  "exp": "LEDGER_OWNERSHIP_MANIFEST",
+  "n": 1,
+  "samples": [
+   "no global writer order; every writer owns its local deterministic ordering"
+  ],
+  "paths": [
+   "LEDGER_OWNERSHIP_MANIFEST[1].ordering"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/lineageClaim.js::scoreKinshipBond()",
+  "file": "src/domain/worldPulse/lineageClaim.js",
+  "exp": "scoreKinshipBond()",
+  "n": 1,
+  "samples": [
+   "The lineage was cited by both sides to opposite ends, and the quieter reading held."
+  ],
+  "paths": [
+   "scoreKinshipBond().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/magicBufferModel.js::EXPLOITATION_GATE_CONTRACT",
+  "file": "src/domain/worldPulse/magicBufferModel.js",
+  "exp": "EXPLOITATION_GATE_CONTRACT",
+  "n": 1,
+  "samples": [
+   "no regime is known, so nothing can be exploited and the magic term is zero"
+  ],
+  "paths": [
+   "EXPLOITATION_GATE_CONTRACT.absentMeaning"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/magicBufferModel.js::bufferReceiptLine()",
+  "file": "src/domain/worldPulse/magicBufferModel.js",
+  "exp": "bufferReceiptLine()",
+  "n": 1,
+  "samples": [
+   "The wards blunted the worst of it, and it cost nothing anyone can name."
+  ],
+  "paths": [
+   "bufferReceiptLine()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/magicBufferModel.js::bufferShortfallLine()",
+  "file": "src/domain/worldPulse/magicBufferModel.js",
+  "exp": "bufferShortfallLine()",
+  "n": 1,
+  "samples": [
+   "The wards reached further than the stores could pay for, and stopped where the coin stopped."
+  ],
+  "paths": [
+   "bufferShortfallLine()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/magicFormsPractitioner.js::defaultPractitionerName()",
+  "file": "src/domain/worldPulse/magicFormsPractitioner.js",
+  "exp": "defaultPractitionerName()",
+  "n": 1,
+  "samples": [
+   "The Hedge wizard of a"
+  ],
+  "paths": [
+   "defaultPractitionerName()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/magicSubstitution.js::magicDependencySentence()",
+  "file": "src/domain/worldPulse/magicSubstitution.js",
+  "exp": "magicDependencySentence()",
+  "n": 1,
+  "samples": [
+   "The settlement takes a little of its bread from the arcane houses: about 0 percent of what it eats each day is conjured,"
+  ],
+  "paths": [
+   "magicDependencySentence()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/opportunism.js::perceivedVulnerabilityClause()",
+  "file": "src/domain/worldPulse/opportunism.js",
+  "exp": "perceivedVulnerabilityClause()",
+  "n": 1,
+  "samples": [
+   "The court believes their walls are thinly held and the court is wrong about it."
+  ],
+  "paths": [
+   "perceivedVulnerabilityClause()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pactFormation.js::answerPactProposal()",
+  "file": "src/domain/worldPulse/pactFormation.js",
+  "exp": "answerPactProposal()",
+  "n": 1,
+  "samples": [
+   "This court's posture reads settled: nothing was heard from its remembered standing, its disposition channels, its learne"
+  ],
+  "paths": [
+   "answerPactProposal().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pactFormation.js::reserveFor()",
+  "file": "src/domain/worldPulse/pactFormation.js",
+  "exp": "reserveFor()",
+  "n": 1,
+  "samples": [
+   "This court's posture reads settled: nothing was heard from its remembered standing, its disposition channels, its learne"
+  ],
+  "paths": [
+   "reserveFor().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pactProposals.js::openPactProposal()",
+  "file": "src/domain/worldPulse/pactProposals.js",
+  "exp": "openPactProposal()",
+  "n": 1,
+  "samples": [
+   "There was nothing here that could be written into an instrument."
+  ],
+  "paths": [
+   "openPactProposal().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pactTriggers.js::dependencyFearOf()",
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "dependencyFearOf()",
+  "n": 1,
+  "samples": [
+   "This court can carry what the bargain would cost it in reliance."
+  ],
+  "paths": [
+   "dependencyFearOf().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pactTriggers.js::scoreFaithCommunion()",
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "scoreFaithCommunion()",
+  "n": 1,
+  "samples": [
+   "One of these courts holds no belief about the other's observance."
+  ],
+  "paths": [
+   "scoreFaithCommunion().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pactTriggers.js::scoreMigrationPressure()",
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "scoreMigrationPressure()",
+  "n": 1,
+  "samples": [
+   "One of these courts holds no belief about where people are going."
+  ],
+  "paths": [
+   "scoreMigrationPressure().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pactTriggers.js::scoreSharedThreat()",
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "scoreSharedThreat()",
+  "n": 1,
+  "samples": [
+   "No court either of these believes in is armed enough to be worth fearing together."
+  ],
+  "paths": [
+   "scoreSharedThreat().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/pactTriggers.js::scoreTradeDemand()",
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "scoreTradeDemand()",
+  "n": 1,
+  "samples": [
+   "No scarcity ladder was supplied to price a demand against."
+  ],
+  "paths": [
+   "scoreTradeDemand().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/peaceReasons.js::scoreBeliefConvergence()",
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "scoreBeliefConvergence()",
+  "n": 1,
+  "samples": [
+   "Both courts have been schooled to the same truth by the fighting. No offer is an insult any more."
+  ],
+  "paths": [
+   "scoreBeliefConvergence().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/peaceReasons.js::scoreObligationDischarged()",
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "scoreObligationDischarged()",
+  "n": 1,
+  "samples": [
+   "The compact or original quarrel no longer supplies a borrowed cause for war."
+  ],
+  "paths": [
+   "scoreObligationDischarged().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/peaceReasons.js::scoreRealignment()",
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "scoreRealignment()",
+  "n": 1,
+  "samples": [
+   "A common enemy stands at both gates. The peace is signed in haste, for the horde was in the passes."
+  ],
+  "paths": [
+   "scoreRealignment().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/peaceTermsDrafting.js::signingReason()",
+  "file": "src/domain/worldPulse/peaceTermsDrafting.js",
+  "exp": "signingReason()",
+  "n": 1,
+  "samples": [
+   "{c} accepts the {type} demanded by {b}."
+  ],
+  "paths": [
+   "signingReason()"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/razing.js::compareSpoils()",
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "compareSpoils()",
+  "n": 1,
+  "samples": [
+   "burning yields 0 once against 0 from holding. This was a place worth more dead than alive, which is the rarer and darker"
+  ],
+  "paths": [
+   "compareSpoils().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/razing.js::conservedSack()",
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "conservedSack()",
+  "n": 1,
+  "samples": [
+   "the settlement cannot be counted, and an uncounted place cannot be sacked."
+  ],
+  "paths": [
+   "conservedSack().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/razing.js::razingDeparture()",
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "razingDeparture()",
+  "n": 1,
+  "samples": [
+   "They burned the settlement and rode home. The victor took no ground, left no garrison, and asked for nothing."
+  ],
+  "paths": [
+   "razingDeparture().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/razing.js::razingGate()",
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "razingGate()",
+  "n": 1,
+  "samples": [
+   "the victor has not taken the defeated: there is no razing without a won siege."
+  ],
+  "paths": [
+   "razingGate().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/razing.js::razingSpoils()",
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "razingSpoils()",
+  "n": 1,
+  "samples": [
+   "there is nothing in the ash: the army carries off what a ruin has, which is nothing."
+  ],
+  "paths": [
+   "razingSpoils().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/razing.js::readRelationshipExtremity()",
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "readRelationshipExtremity()",
+  "n": 1,
+  "samples": [
+   "the court is not at the extreme with its neighbour: the border is not hostile, the resentment has not reached what hosti"
+  ],
+  "paths": [
+   "readRelationshipExtremity().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/razing.js::tierFallDescriptor()",
+  "file": "src/domain/worldPulse/razing.js",
+  "exp": "tierFallDescriptor()",
+  "n": 1,
+  "samples": [
+   "what the settlement was and what it is now cannot both be read, so no fall can be counted."
+  ],
+  "paths": [
+   "tierFallDescriptor().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/razingExecution.js::razingDeterrenceFor()",
+  "file": "src/domain/worldPulse/razingExecution.js",
+  "exp": "razingDeterrenceFor()",
+  "n": 1,
+  "samples": [
+   "nobody would inherit the right to answer the burning"
+  ],
+  "paths": [
+   "razingDeterrenceFor().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/razingExecution.js::razingSeverityFrom()",
+  "file": "src/domain/worldPulse/razingExecution.js",
+  "exp": "razingSeverityFrom()",
+  "n": 1,
+  "samples": [
+   "no quarrel stands hot enough to price a burning."
+  ],
+  "paths": [
+   "razingSeverityFrom().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/reinforcement.js::computeReinforcement()",
+  "file": "src/domain/worldPulse/reinforcement.js",
+  "exp": "computeReinforcement()",
+  "n": 1,
+  "samples": [
+   "Origin is itself besieged/occupied. It cannot spare reinforcements."
+  ],
+  "paths": [
+   "computeReinforcement().reasons[0]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/relationshipCompatibility.js::validateRelationship()",
+  "file": "src/domain/worldPulse/relationshipCompatibility.js",
+  "exp": "validateRelationship()",
+  "n": 1,
+  "samples": [
+   "'{a}' is not a canonical relationship type."
+  ],
+  "paths": [
+   "validateRelationship().issues[0].reason"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/settlementLifecycleFirstClass.js::forceResettleEntry()",
+  "file": "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+  "exp": "forceResettleEntry()",
+  "n": 1,
+  "samples": [
+   "New settlement name (optional)"
+  ],
+  "paths": [
+   "forceResettleEntry().dials[0].label"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/settlementLifecycleKernel.js::forceFoundSteading()",
+  "file": "src/domain/worldPulse/settlementLifecycleKernel.js",
+  "exp": "forceFoundSteading()",
+  "n": 1,
+  "samples": [
+   "only town-or-higher parents seed steadings"
+  ],
+  "paths": [
+   "forceFoundSteading().refusal"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/settlementLifecycleKernel.js::forceFoundSteadingEntry()",
+  "file": "src/domain/worldPulse/settlementLifecycleKernel.js",
+  "exp": "forceFoundSteadingEntry()",
+  "n": 1,
+  "samples": [
+   "Resource key (optional: the vein the camp exists for)"
+  ],
+  "paths": [
+   "forceFoundSteadingEntry().dials[1].label"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/sovereigntyAppraisal.js::appraiseSettlementAsset()",
+  "file": "src/domain/worldPulse/sovereigntyAppraisal.js",
+  "exp": "appraiseSettlementAsset()",
+  "n": 1,
+  "samples": [
+   "the court cannot price the holding: the pair is not an asset and a court."
+  ],
+  "paths": [
+   "appraiseSettlementAsset().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/sovereigntyAssets.js::readSovereigntyAsset()",
+  "file": "src/domain/worldPulse/sovereigntyAssets.js",
+  "exp": "readSovereigntyAsset()",
+  "n": 1,
+  "samples": [
+   "no holding was named, so none can be judged."
+  ],
+  "paths": [
+   "readSovereigntyAsset().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/sovereigntyBundle.js::valueBundleThroughNeeds()",
+  "file": "src/domain/worldPulse/sovereigntyBundle.js",
+  "exp": "valueBundleThroughNeeds()",
+  "n": 1,
+  "samples": [
+   "no court was named, so the bundle has no valuer and no value."
+  ],
+  "paths": [
+   "valueBundleThroughNeeds().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/sovereigntyIntent.js::judgeSovereigntySale()",
+  "file": "src/domain/worldPulse/sovereigntyIntent.js",
+  "exp": "judgeSovereigntySale()",
+  "n": 1,
+  "samples": [
+   "No verdict is recorded on this sale: no buyer is named."
+  ],
+  "paths": [
+   "judgeSovereigntySale().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/sovereigntyIntent.js::readSovereigntySaleIntent()",
+  "file": "src/domain/worldPulse/sovereigntyIntent.js",
+  "exp": "readSovereigntySaleIntent()",
+  "n": 1,
+  "samples": [
+   "weighs selling to . No court is named as the seller, so no appetite is recorded. The sale would serve the realm's books,"
+  ],
+  "paths": [
+   "readSovereigntySaleIntent().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/sovereigntyIntent.js::saleAppetiteOf()",
+  "file": "src/domain/worldPulse/sovereigntyIntent.js",
+  "exp": "saleAppetiteOf()",
+  "n": 1,
+  "samples": [
+   "No court is named as the seller, so no appetite is recorded."
+  ],
+  "paths": [
+   "saleAppetiteOf().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/sovereigntyReach.js::sovereigntyReach()",
+  "file": "src/domain/worldPulse/sovereigntyReach.js",
+  "exp": "sovereigntyReach()",
+  "n": 1,
+  "samples": [
+   "a reach question needs a buyer and a holding that are two different places."
+  ],
+  "paths": [
+   "sovereigntyReach().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/stressorGates.js::STRESSOR_SPAWN_GATES",
+  "file": "src/domain/worldPulse/stressorGates.js",
+  "exp": "STRESSOR_SPAWN_GATES",
+  "n": 1,
+  "samples": [
+   "Few congregations here to fracture."
+  ],
+  "paths": [
+   "STRESSOR_SPAWN_GATES.religious_conversion_fracture().reasons[0]"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/successorNpc.js::successorNpc()",
+  "file": "src/domain/worldPulse/successorNpc.js",
+  "exp": "successorNpc()",
+  "n": 1,
+  "samples": [
+   "Newly installed after a corruption scandal. Determined to stay above suspicion."
+  ],
+  "paths": [
+   "successorNpc().goal.short"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/supplyWebWarfare.js::scoreCampaignEV()",
+  "file": "src/domain/worldPulse/supplyWebWarfare.js",
+  "exp": "scoreCampaignEV()",
+  "n": 1,
+  "samples": [
+   "The target can be taken directly, and the slow strangulation would cost more time than it is worth."
+  ],
+  "paths": [
+   "scoreCampaignEV().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/warReasons.js::scoreAllianceObligation()",
+  "file": "src/domain/worldPulse/warReasons.js",
+  "exp": "scoreAllianceObligation()",
+  "n": 1,
+  "samples": [
+   "A sworn ally remains in the field under the same living cause."
+  ],
+  "paths": [
+   "scoreAllianceObligation().receipt"
+  ]
+ },
+ {
+  "key": "src/domain/worldPulse/warReasons.js::scoreGrievance()",
+  "file": "src/domain/worldPulse/warReasons.js",
+  "exp": "scoreGrievance()",
+  "n": 1,
+  "samples": [
+   "A ledger of grievances stands open: resentment runs hot, and old wrongs have not faded."
+  ],
+  "paths": [
+   "scoreGrievance().receipt"
+  ]
+ },
+ {
+  "key": "src/lib/accountSettlementContentPortability.js::remapAccountSettlementContentProvenance()",
+  "file": "src/lib/accountSettlementContentPortability.js",
+  "exp": "remapAccountSettlementContentProvenance()",
+  "n": 1,
+  "samples": [
+   "Settlement content provenance has an invalid shape."
+  ],
+  "paths": [
+   "remapAccountSettlementContentProvenance().error"
+  ]
+ },
+ {
+  "key": "src/lib/customContentArchive.js::validateCustomContentArchive()",
+  "file": "src/lib/customContentArchive.js",
+  "exp": "validateCustomContentArchive()",
+  "n": 1,
+  "samples": [
+   "archive must be an object."
+  ],
+  "paths": [
+   "validateCustomContentArchive().message"
+  ]
+ },
+ {
+  "key": "src/lib/importReconciliation.js::ingestSettlementForgeExport()",
+  "file": "src/lib/importReconciliation.js",
+  "exp": "ingestSettlementForgeExport()",
+  "n": 1,
+  "samples": [
+   "This export is too large to reconcile safely."
+  ],
+  "paths": [
+   "ingestSettlementForgeExport().diagnostic.message"
+  ]
+ },
+ {
+  "key": "src/lib/instantWorld/factionDedup.js::FACTION_DESCRIPTORS_EXTRA",
+  "file": "src/lib/instantWorld/factionDedup.js",
+  "exp": "FACTION_DESCRIPTORS_EXTRA",
+  "n": 1,
+  "samples": [
+   "The Guild of Artificers"
+  ],
+  "paths": [
+   "FACTION_DESCRIPTORS_EXTRA.crafts[3]"
+  ]
+ },
+ {
+  "key": "src/lib/seo.js::DEFAULT_DESCRIPTION",
+  "file": "src/lib/seo.js",
+  "exp": "DEFAULT_DESCRIPTION",
+  "n": 1,
+  "samples": [
+   "SettlementForge generates living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulates th"
+  ],
+  "paths": [
+   "DEFAULT_DESCRIPTION"
+  ]
+ },
+ {
+  "key": "src/lib/seo.js::OG_IMAGE_ALT_DEFAULT",
+  "file": "src/lib/seo.js",
+  "exp": "OG_IMAGE_ALT_DEFAULT",
+  "n": 1,
+  "samples": [
+   "SettlementForge: living settlements for game masters"
+  ],
+  "paths": [
+   "OG_IMAGE_ALT_DEFAULT"
+  ]
+ },
+ {
+  "key": "src/lib/seoCompendium.js::compendiumEntryHead()",
+  "file": "src/lib/seoCompendium.js",
+  "exp": "compendiumEntryHead()",
+  "n": 1,
+  "samples": [
+   "{term}, a {category} in the SettlementForge Compendium. Every entry renders from the deterministic engine's own registri"
+  ],
+  "paths": [
+   "compendiumEntryHead().description"
+  ]
+ },
+ {
+  "key": "src/pdf/lib/headlines.js::overviewHeadline()",
+  "file": "src/pdf/lib/headlines.js",
+  "exp": "overviewHeadline()",
+  "n": 1,
+  "samples": [
+   "A {toLowerCase}, {toLowerCase} {toLowerCase} under active strain (1 crisis chip)."
+  ],
+  "paths": [
+   "overviewHeadline()"
+  ]
+ },
+ {
+  "key": "src/store/aiRequestLifecycle.js::DAILY_LIFE_FIELD_LABELS",
+  "file": "src/store/aiRequestLifecycle.js",
+  "exp": "DAILY_LIFE_FIELD_LABELS",
+  "n": 1,
+  "samples": [
+   "Walking the night watch"
+  ],
+  "paths": [
+   "DAILY_LIFE_FIELD_LABELS.night"
+  ]
+ }
+]

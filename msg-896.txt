@@ -1,0 +1,21 @@
+§896: the clamp consist lands at 14 cars — six kernel migrations, two repairs that reached the save file, and the first landing under the Fable chair
+
+Six hand-rolled clamp copies take the kernel primitive and two are refused on
+landed pins; the per-ward dwelling cap that FAILED OPEN on a NaN population is
+cured at the shape, and the `|| 0` screen that let Infinity into persisted
+disposition state — where JSON.stringify writes it as null — is cured at all
+seven sites, four of them writers. The strict-type ratchet TIGHTENS 1121 -> 1120
+because the migration removed an error rather than moving one.
+
+The gate ran three times before it ran green, and neither red was a regression:
+a hand-rebuilt dock lacked an UNDECLARED package the culled docks had carried
+(`pg`, imported unguarded by one CI-only test), and chair-verify then refused a
+lighting register whose provenance cited a sha from a different lineage. Both
+are laws now. The seat changed mid-landing: from this act the chair is Fable 5.1
+and every lane is Opus.
+
+Enrols: CLAMP-W1, CLAMP-REPAIR, and the spun-off planUnitCm floor, as R33 to R36.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

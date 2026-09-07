@@ -1,0 +1,3 @@
+proposal: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/capacity/artifacts/soak-register.proposed.json
+NOT-EXECUTABLE  research-lit-4s/research-lit-4s-300y-4s-seed1 — the cell is UNFROZEN genesis: UNFROZEN GENESIS. The INTERIM cell: 300 years x 4 settlements under the lit overlay, sized to fit a hosted 6-hour job (~2.3 h at the 3.5 s/settlement-year estimate — §14 E12 is deliberately left PLAUSIBLE, because two measured 30-year figures disagree by 17.8x at the same horizon and extrapolating either to 300 years is unsound). A DIFFERENT register identity from the 12 s cell, never a substitute for it.
+  measured 24 figure(s); the FIRST clean run is the freeze act

@@ -1,0 +1,235 @@
+{
+ "name": "tolkien",
+ "chunk": 13,
+ "claims": [
+  {
+   "index": 823,
+   "feature": "affectionate parody",
+   "claim": "David Barnett judged the parody shows respect and affection for the source despite its crudity.",
+   "source": "Bored of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Bored_of_the_Rings",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 824,
+   "feature": "parody strongest on Tolkien's phrases",
+   "claim": "The Phuulish Fellow review finds the parody works best when it references Tolkien's own recognisable words and phrases, includes copious inserted verse, and that Tolkien's Party speech is actually funnier than the parody.",
+   "source": "Review: Bored of the Rings (1969) (A Phuulish Fellow)",
+   "url": "https://phuulishfellow.wordpress.com/2023/07/12/review-bored-of-the-rings-1969/",
+   "quote": "actually funnier than the parody",
+   "page": ""
+  },
+  {
+   "index": 825,
+   "feature": "names and forms, not prose",
+   "claim": "My Tolkien Archive judges the parody mimics the forms (foreword, map, prologue) with lazy names, without genuine engagement with Tolkien's prose itself.",
+   "source": "Bored of the Rings: A Parody (My Tolkien Archive)",
+   "url": "https://mytolkienarchive.wordpress.com/2024/12/18/bored-of-the-rings-a-parody-of-j-r-r-tolkiens-lord-of-the-rings/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 826,
+   "feature": "songs mimicked",
+   "claim": "Pechey Ponderings notes the parody's embedded songs are well-crafted and its foreword disclaims any attempt to fill Tolkien's shoes.",
+   "source": "Bored of the Rings review (Pechey Ponderings)",
+   "url": "https://pecheyponderings.wordpress.com/2017/10/19/bored-of-the-rings-a-parody-of-j-r-r-tolkiens-lord-of-the-rings-by-henry-beard-and-douglas-kenney/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 827,
+   "feature": "stew as cliché",
+   "claim": "The Tough Guide's Stew entry mocks stew as the universal fantasy meal even though it takes forty times as long to prepare as steak.",
+   "source": "The DWJ Project: Tough Guide to Fantasyland (Swan Tower)",
+   "url": "https://www.swantower.com/2011/11/19/the-dwj-project-tough-guide-to-fantasyland/",
+   "quote": "forty times as long to prepare as steak",
+   "page": ""
+  },
+  {
+   "index": 828,
+   "feature": "apostrophe names",
+   "claim": "The Guide observes that few Fantasyland names are considered complete unless interrupted by an apostrophe nobody knows how to pronounce.",
+   "source": "The Tough Guide To Fantasyland — Review (HearWriteNow)",
+   "url": "https://hearwritenow.com/writing/reviews/tough-guide-fantasyland/",
+   "quote": "complete unless interrupted by an apostrophe",
+   "page": ""
+  },
+  {
+   "index": 829,
+   "feature": "elf operas",
+   "claim": "Shalizi's review frames the Guide as an attack on fifty years of trilogies that are debased versions of The Lord of the Rings, which Jones calls elf operas.",
+   "source": "Diana Wynne Jones, The Tough Guide to Fantasyland (Cosma Shalizi review)",
+   "url": "https://bactra.org/reviews/tough-guide-to-fantasyland/",
+   "quote": "elf operas",
+   "page": ""
+  },
+  {
+   "index": 830,
+   "feature": "made-strange surface",
+   "claim": "The English Student review reads entries from 'Stew' to 'Reek of Wrongness' as exposing a tour of something made just strange enough to fascinate, with Tolkien as the deeply English conservative template.",
+   "source": "Review: The Tough Guide to Fantasyland (The English Student)",
+   "url": "https://englishstudens.com/2016/01/29/review-the-tough-guide-to-fantasyland/",
+   "quote": "made just strange enough to fascinate",
+   "page": ""
+  },
+  {
+   "index": 831,
+   "feature": "thinly veiled criticism",
+   "claim": "Wikipedia describes the Guide's tone as either thinly veiled criticism of the genre's derivative nature or an affectionate study.",
+   "source": "The Tough Guide to Fantasyland (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Tough_Guide_to_Fantasyland",
+   "quote": "thinly veiled criticism",
+   "page": ""
+  },
+  {
+   "index": 832,
+   "feature": "dialogue lifted directly",
+   "claim": "Sibley and Bakewell's script incorporated many sections of dialogue lifted directly from the book, such as the Window on the West conversations.",
+   "source": "The Lord of the Rings (1981 radio series) (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1981_radio_series)",
+   "quote": "many sections of dialogue lifted directly",
+   "page": "Production"
+  },
+  {
+   "index": 833,
+   "feature": "no fabricated dialogue",
+   "claim": "Sibley preferred removing minor characters entirely to the alternative, which would have been to fabricate dialogue for them.",
+   "source": "The Lord of the Rings (1981 radio series) (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1981_radio_series)",
+   "quote": "to fabricate dialogue for them",
+   "page": "Production"
+  },
+  {
+   "index": 834,
+   "feature": "interlace flattened",
+   "claim": "The adaptation radically restructured books 3-6, flattening Tolkien's interlacing into the Appendix chronology and splicing Frodo and Sam's journey with events in the West.",
+   "source": "The Lord of the Rings (1981 radio series) (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1981_radio_series)",
+   "quote": "",
+   "page": "Production"
+  },
+  {
+   "index": 835,
+   "feature": "pronunciation guidance",
+   "claim": "Christopher Tolkien approved the scripts and recorded a cassette of correct pronunciations of Middle-earth names for the cast.",
+   "source": "The Lord of the Rings (1981 radio series) (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1981_radio_series)",
+   "quote": "",
+   "page": "Production"
+  },
+  {
+   "index": 836,
+   "feature": "adventure-story drift",
+   "claim": "Rosebury praised the dialogue delivery and Woodthorpe's Gollum but found the skilful abridgement subtly reshaped Tolkien's text in the direction of an adventure story.",
+   "source": "The Lord of the Rings (1981 radio series) (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1981_radio_series)",
+   "quote": "in the direction of an adventure story",
+   "page": "Reception"
+  },
+  {
+   "index": 837,
+   "feature": "alliterative verse as narration",
+   "claim": "Christina Scull called it a masterly adaptation that caught the spirit of the books, found the alliterative-verse handling of the Pelennor a brilliant idea, and contrasted its characters as in the book with the films' weakening of almost all the characters.",
+   "source": "The Lord of the Rings (1981 radio series) (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1981_radio_series)",
+   "quote": "a brilliant idea",
+   "page": "Reception"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 823,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "respect and affection for the source material shines through",
+   "note": "en.wikipedia.org/wiki/Bored_of_the_Rings fetched as raw wikitext (Special:Export). Reception para: Barnett finds it 'very funny, albeit perhaps less sophisticated than more modern parodies. But Kenney and Beard's respect and affection for the source material shines through.' Crudity limb also on page: the book 'sits somewhere between ... Mad and ... Animal House - cruder than the former but not quite as rude as the latter.' Claim carried no quote string, so substance grade."
+  },
+  {
+   "index": 824,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "phuulishfellow.wordpress.com raw page. Quote 'actually funnier than the parody' appears word for word: 'Birthday Party Farewell Speech - Tolkien's version is actually funnier than the parody.' Limb 1: 'The earlier sections ... go so far as to reference Tolkien's own recognisable words and phrases, are much stronger.' Limb 2: 'there are copious inserted poems and songs, after the manner of Tolkien.' All limbs supported."
+  },
+  {
+   "index": 825,
+   "verdict": "PARTIAL",
+   "trueWording": "spends a lot of time imitating the forms of it",
+   "note": "mytolkienarchive.wordpress.com raw page. Supported: 'It certainly spends a lot of time imitating the forms of it' (cover art, the authors' statement mimicking Tolkien's Ace-paperback response, 'to the maps, the most basic story and overall shape of things') and the lazy-names limb ('Dildo Buggers! Really? That's the best you could come up with? ... Lazy.'). NOT supported: the review never discusses Tolkien's prose; its complaint is absence of affection/appreciation ('it never really feels like there's any affection there'; 'any hint that they actually appreciate the original work as anything other than a platform'). 'Foreword' appears nowhere on the page; 'prologue' appears only inside the page's blockquoted Wikipedia summary, not in the reviewer's own judgement.",
+   "unsupportedLimb": "no genuine engagement with Tolkien's prose itself - the review never mentions prose (its charge is lack of affection); 'foreword' is absent from the page and 'prologue' occurs only in the quoted Wikipedia blurb"
+  },
+  {
+   "index": 826,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "the songs that are embedded throughout ... were well-crafted",
+   "note": "pecheyponderings.wordpress.com raw page. Songs limb: 'from the various creatures that Frito encounters through to the songs that are embedded throughout. I can admit that these were well-crafted.' Disclaimer limb: 'Beard and Kenney open with the admission that they are not trying to fill the shoes that Tolkien left, but prefer to write something satirical for their own amusement.' The page says they 'open with the admission' rather than naming a foreword; claim carried no quote string, so substance grade."
+  },
+  {
+   "index": 827,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "swantower.com raw page. Quote 'forty times as long to prepare as steak' appears word for word, inside the Tough Guide's STEW entry as quoted in the thread by the blog's own author (Marie Brennan): 'Stew ... is the staple FOOD in Fantasyland ... Stew will be what you are served to eat every single time ... it takes forty times as long to prepare as steak.' Universal-meal limb supported by 'staple FOOD' + 'every single time'. Note the quotation sits in the post's comment thread, not the post body."
+  },
+  {
+   "index": 828,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "complete unless they are interrupted by an apostrophe",
+   "note": "hearwritenow.com raw page. Entry quoted in full: 'Apostrophes: Few names in Fantasyland are considered complete unless they are interrupted by an apostrophe somewhere in the middle... No one knows the reasons for this. Nor does anyone really know how an apostrophe should be pronounced...' Every limb supported, but the claim's quote string drops 'they are', so it is not word for word - substance, not verbatim."
+  },
+  {
+   "index": 829,
+   "verdict": "PARTIAL",
+   "trueWording": "'elf operas,' as they were recently named on Usenet",
+   "note": "bactra.org raw page. Quote 'elf operas' present, and the fifty-years/debased-trilogies limb is verbatim: 'it is still, fifty years on, churning out trilogies which are debased versions of The Lord of the Rings --- ``elf operas,'' as they were recently named on Usenet.' But Shalizi credits the coinage to Usenet, not to Jones; Jones is credited only with 'an open, flagrant and ... hilarious parody'.",
+   "unsupportedLimb": "which Jones calls elf operas - Shalizi attributes the term to Usenet ('as they were recently named on Usenet'), not to Jones"
+  },
+  {
+   "index": 830,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "englishstudens.com raw page. Quote 'made just strange enough to fascinate' word for word: 'a tour of something made just strange enough to fascinate, in an othering kind of way'. Entry range limb: 'Entries range from Stew ... through Goddesses and Gods ... to Reek of Wrongness'. Tolkien limb: 'it's Tolkien, a deeply English and deeply conservative writer, whose work has become the model for the genre'."
+  },
+  {
+   "index": 831,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "en.wikipedia.org/wiki/The_Tough_Guide_to_Fantasyland fetched as raw wikitext. Description section: 'It can all be read as a thinly veiled criticism of the fantasy genre as overly derivative, cliched, and unimaginative. Alternatively it can be seen as an affectionate study of the themes and ideas that resonate through fantasy writing.' Quote verbatim; both alternatives supported. Framing note: the article says the book 'can all be read as' this, and treats 'tone' in the next sentence ('The tone is generally tongue-in-cheek') - the either/or is intact either way."
+  },
+  {
+   "index": 832,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1981_radio_series) raw wikitext. Development>Writing: 'The script attempts to be as faithful as possible to the original novel with many sections of dialogue lifted directly from the source material, such as the conversations between Frodo, Sam and Faramir in “The Window on the West”.' Quote verbatim; all limbs supported. (Claim's page locator says 'Production'; the live article's section is Development > Writing.)"
+  },
+  {
+   "index": 833,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same article, Development>Writing: 'On the decision to excise some minor characters who appeared for only a few lines of the book, Sibley stated he felt it preferable to remove the character altogether than the alternative, “which would have been to fabricate dialogue for them.”' Quote verbatim; both limbs supported."
+  },
+  {
+   "index": 834,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "flattening out Tolkien's interlacing by splicing Frodo and Sam with the West",
+   "note": "Same article, Development>Writing: 'The adaptation radically restructured the chronology of the chapters in Books 3-6, flattening out Tolkien's interlacing by splicing the journey of Frodo and Sam with events in the West. This aligned them with the timeline of events provided by Tolkien in the Appendices.' Every limb supported; claim carried no quote string, so substance grade."
+  },
+  {
+   "index": 835,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "reviewed and approved the final scripts; recorded a pronunciation cassette",
+   "note": "Same article, Development>Writing: 'The author's son and editor Christopher Tolkien reviewed and approved the final scripts for each episode. He recorded an audio cassette of correct pronunciations for Middle-earth words and names to assist the cast during recordings.' Both limbs supported; claim carried no quote string, so substance grade."
+  },
+  {
+   "index": 836,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same article, Analysis section: 'He finds the dialogue well delivered by the actors, admiring especially Peter Woodthorpe's “fine Gollum”, and the abridgement skilful though subtly flattening Tolkien's text “in the direction of an adventure story.”' Quote verbatim; every limb supported (claim's 'reshaped' = page's 'flattening'). Claim's page locator says 'Reception'; the section is titled Analysis."
+  },
+  {
+   "index": 837,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same article, Analysis section: Scull 'thought it a “masterly adaptation” ... especially “caught the spirit of the books”. She found the handling of the Battle of the Pelennor Fields with alliterative verse “a brilliant idea” ... disliking the films' additional material, violence, and “the weakening of almost all the characters” ... the BBC dramatisation presented “the characters I [met] in the book”.' Quote 'a brilliant idea' verbatim; all four limbs supported. Section is Analysis, not Reception."
+  }
+ ]
+}

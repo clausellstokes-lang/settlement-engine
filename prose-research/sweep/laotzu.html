@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="hu" dir="ltr">
+	<head>
+		<title>404 Az oldal nem található</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style type="text/css">
+			#buddha {
+				animation-duration: .7s;
+				animation-name: buddha;
+				animation-timing-function: ease-out;
+				animation-fill-mode: both;
+			}
+			#title span {
+				display: inline-block;
+			  animation-duration: .18s;
+			  animation-name: title;
+			  animation-fill-mode: backwards;
+			  animation-delay: .8s;
+			}
+			#title span + span {
+			  animation-delay: 1s;
+			}
+			#title span + span + span {
+			  animation-delay: 1.2s;
+			}
+			#text {
+			  animation-duration: .6s;
+			  animation-name: text;
+			  animation-fill-mode: both;
+				animation-timing-function: ease-out;
+			  animation-delay: .2s;
+			}
+			#baloon {
+			  animation-duration: .3s;
+			  animation-name: baloon;
+			  animation-fill-mode: both;
+				animation-timing-function: ease-out;
+			  animation-delay: 2.4s;
+			}
+			@keyframes title {
+			  0% {
+			  	opacity: 0;
+			  }
+			  1% {
+			  	opacity: 1;
+			    transform:scale(1,1);
+			    color: #684343;
+			  }
+			  50% {
+			    transform:scale(1.8,1.8);
+			    color: #FFF;
+			  }
+			  100% {
+			    transform:scale(1,1);
+					color: #684343;
+			  }
+			}
+			@keyframes buddha {
+			  0% {
+			    margin-left: 120px;
+			    margin-bottom: -25px;
+			  }
+			  100% {
+					margin-left: 0;
+					margin-bottom: 0;
+			  }
+			}
+			@keyframes text {
+			  0% {
+			    opacity: 0;
+			    transform:scale(.4,.4) translate(0,300px);
+			  }
+			  100% {
+					opacity: 1;
+					transform:scale(1,1) translate(0,0);
+			  }
+			}
+			@keyframes baloon {
+			  0% {
+			    opacity: 0;
+					margin-left: -15px;
+					margin-top: -15px;
+			  }
+			  100% {
+					opacity: 1;
+					margin-left: 0;
+					margin-top: 0;
+			  }
+			}
+			body {
+				background-color: #835555;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			#top {
+				height: 70%;
+				width: 100%;
+				background-color: #ffe3c4;
+				position: absolute;
+			}
+			#wrap {
+				bottom: 0;
+				height: 300px;
+				position: absolute;
+				width: 100%;
+			}
+			#content {
+				width: 460px;
+				margin: 0 auto;
+				position: relative;
+				height: 100%;
+				overflow: hidden;
+			}
+			#baloon {
+				position: absolute;
+				width: 100px;
+				height: 71px;
+				left: 5px;
+				top: 40px;
+				z-index: 501;
+			}
+			#baloon div {
+				position: absolute;
+				top: 19px;
+				left: 18px;
+				font-size: 18px;
+				font-weight: bold;
+				color: #a36d6d;
+				font-family: Arial, Helvetica, sans-serif;
+				display: block;
+				text-decoration: none;
+			}
+			#baloon:hover svg path {
+				stroke: #a36d6d;
+				stroke-width: 6;
+			}
+			#buddha {
+				width: 75px;
+				height: 228px;
+				position: absolute;
+				left:85px;
+				bottom: -2px;
+				z-index: 500;
+			}
+			#title {
+				position: absolute;
+				left: 185px;
+				top: 80px;
+				font-size: 40px;
+				color: #684343;
+				display: block;
+				font-family: Tahoma, Geneva, sans-serif;
+			}
+			#text {
+				position: absolute;
+				left: 185px;
+				top: 130px;
+				text-align: left;
+				font-family: Tahoma, Geneva, sans-serif;
+				font-size: 20px;
+				color: #835555;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="top">
+			<div id="wrap">
+				<div id="content">
+					<a id="baloon" href="https://terebess.hu/search.html">
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 8418.9 311.8 229.6" enable-background="new 0 8418.9 311.8 229.6" xml:space="preserve">
+							<path fill="#FFFFFF" d="M8.5,8513.8c0-47.7,66.7-86.4,148.8-86.4s148.8,38.7,148.8,86.4c0,40.8-48.6,75-114.4,84c5.3,15.3,14.2,33.3,28.2,42.3c-27,0-53.4-21.3-71.7-39.9C70.2,8597.1,8.5,8559.6,8.5,8513.8z"/>
+						</svg>
+						<div>keresés</div>
+					</a>
+					<svg id="buddha" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="6.6 15.8 170.5 519.4" enable-background="new 6.6 15.8 170.5 519.4" xml:space="preserve">
+						<path fill="#A36D6D" d="M116.7,42.2c-0.2,2.3-3,7.8-2.7,9.1c0.1,0.3,3.5,2.8,4.6,4.6c1.6,2.6,1.9,6.4,2.7,7.3
+							c2.2,2.2,7.1,2.1,9.1,3.6c1.8,1.4,2.4,6,3.6,7.3c0.5,0.5,3.4-0.5,3.6,0c0.7,1.4-1.1,3.1-0.9,3.6c0.3,1.2,2.6,1,2.7,1.8
+							c1,5.3-2.1,14.1-0.9,19.1c0.4,1.5,3.6,3.5,3.6,4.6c0.2,10.1-9,21.9-10,31.9c-0.6,5.5-1,16.2-0.9,16.4c2.6,4.7,16.1,6.1,21.8,8.2
+							c10.7,3.9,25.9,15.4,21.6,30.6c-10.1,35.6-8.5,80.3,1.2,116c1,10.1,2.2,18.8,0,30c-3.9,10-3.7,27.3-10.9,34.6c-1.9,1.9-1-1.4-3.6,0
+							c-1.2,0.7-0.9,4-1.8,4.6c-2.4,1.4-0.2-3-3.6-0.9c-2,1.2-2,4.1-2.7,3.6c-6.3-4.1,11.8-17.3,4.6-28.2c-1.7-1.4-2.9,14.7-6.4,13.7
+							c-3.1-0.9-0.6-12.4,0-16.4c0.6-4,1.4-13.9,2.7-18.2c1.5-4.7,5.7-8.1,6.4-11.8c2.2-12.6-8.6-27.5-12.7-40
+							c-5.3-15.8-6.7-30.8-8.2-44.6c-4.1,5.2-3.1,10.3-2.7,15.5c1.9,23.8,9,52.7,7.3,78.3c-1.3,19.9-13.9,49.7-3.6,68.3
+							c2.2,4,6.5,5.9,8.2,9.1c3.7,7,1.6,13.3,4.6,20.9c4.1,10.7,23.9,17.6,19.1,30c-1.3,3.5-3.6,0.9-7.3,3.6c0.1-0.1-3.1,4.2-1.8,3.6
+							c-4.9,2.2-11.2,0.1-12.7,2.7c-4.5,7.8,12.2,22.5,12.8,25c2.3,9.3-10.7,37.6-17.4,40.7c-2.8,1.3-23.5,3.7-25.5-0.9
+							c-1.6-3.9,7-8.1,9.1-12.7c2.9-6.6,6.9-18.5,6.5-24.3c-0.4-4.7-4.1-18.7-8.3-19.6c-7.7-1.6-12.5,14.5-27.3,7.3
+							c-1.1,8.4-2.3,8.5-1.8,16c0.5,7.3,6,15.1,3.6,23.7c-1.9,6.8-24.1,14.9-31.9,15.5c-10.4,0.8-30-4.7-17.3-10
+							c9.1-3.8,23.1-8.7,25.5-16.4c4.5-14.3-5.7-15.2-4.6-27.9c-9.2,1.8-25.5,7.2-26.4,1.8c-0.7-7.8-16.2-6-19.1-9.1
+							c-0.3-0.3-2.7-7.4-2.7-8.2c-0.3-9.2,8.3-19.9,9.1-24.6c1.2-7.1-2.5-15.3-1.8-24.6c0.5-6.4,4.4-13.2,4.6-19.1
+							c0.1-4.7-2.8-10.2-2.7-15.5c0.1-6.6,4.1-13,4.6-20c0.5-7.2-1.9-16-0.9-24.6c1-9.1,3.1-19.7,4.6-27.3c0.9-4.7,3.9-9.1,3.6-11.8
+							c-0.7-7-11-14.4-14.6-22.8c-2.7-6.3-2.3-13.6-4.6-16.4c-4.5-5.6-21-5.7-20.9-17.3c0-2.7,0-5.5,0-8.2c1.1-10.1,1.4-23.6,2.7-24.7
+							c1.8-1.5,4.7-11,6.9-11.7c3.3-1,6.9-0.5,10.3,2c1.8,1.3,1.6,8.9,2.4,10.3c0.5,1.4-1.5,11.6-0.6,13.7c0.8,1.9,2.8-0.2,4.6,2
+							c1.5,1.8-2,14.5,0.1,15.7c1.8,1.1,10.2-1,10.9-1.8c1.5-1.7,2.4-17.8,2.7-21.8c1-13.2,0-34.4,4.6-44.6c5.3-12,18.8-12.3,30-16.4
+							c2.4-0.9,10.8-3.6,9.1-9.1c-0.9-4.8-2.7,2.7-6.4,0.9c4.3-7.5-1.8-11.8-3.6-18.2c-2.1-7.5-1.3-16.8-1.8-23.7
+							c-1.1-14.2-4.6-29.2,8.2-38.2c1.6-1.1,5.8-1,8.2-3.6c1.4-1.5,0.3-5.4,1.8-8.2c2.1-3.9,6.6-5.3,7.3-7.3c1.1-3.2-0.7-9.1,0-12.7
+							c1.4-8.3,5.8-19.1,10-20C110.5,22.2,117.4,32.5,116.7,42.2z"/>
+					</svg>
+					<div id="title"><span>4</span><span>0</span><span>4</span></div>
+					<div id="text">Bejártuk az egész világot,<br />de ezt az oldalt nem találtuk.</div>
+				</div>
+			</div>
+		</div>
+		https://terebess.hu/english/tao/leguin.html	</body>
+</html>

@@ -1,0 +1,15 @@
+§908 CAP-TRIP landing (register car 2): writer-reach re-takes its provenance at the tip; no other register moved
+
+Every figure below was predicted in writing (predict-908.log at 082314af3 and predict-908b.log at d804420d7; the PREDICTIONS line of
+run-registers-908.sh) before a door ran, and the doors were taken AFTER the §908 proof at the four-car tip (5 failed / 32322 passed /
+111 skipped of 32438 — the three banked rows, the census walker at the predicted 23662, and the negative-assertion walker's four sites,
+cured by car 5 d804420d7 and re-proven green file by file). The lighting census was re-taken as register car 1 (2e1bb6311): titles
+23660 -> 23662 (two it() titles the CAP-TRIP cars added inside existing files), suiteTitles 6335, files / parked / credited unchanged.
+The observed-shape CLI's plain read matched the frozen inventory exactly (1972 findings, 0 drift lines) — no src file moved in this
+consist, so NO --write was taken. The writer-reach dry run exited 0 with nothing stale; --write moved provenance alone (frozenAtSha to
+the lighting register car); the cohort is unchanged. Mounts (the door's porcelain empty), prose-numerics (baseline 225 = live 225,
+0 re-keyed, 0 moved) and the tuning inventory (plain walker green) changed nothing.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

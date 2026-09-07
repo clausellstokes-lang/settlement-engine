@@ -1,0 +1,314 @@
+1	Assassin's Apprentice	P7	a chapter titled “The Earliest History
+2	Assassin's Apprentice	P7	an in-milieu historical document, to which the narrator, Fitz, responds in the main text
+3	Assassin's Apprentice	P1	a passage from an in-milieu reference text
+4	Assassin's Apprentice	PNone	
+5	Assassin's Apprentice	P7	an in-milieu commentary, this one discussing the Six Duchies’ practice of single-titled nobility
+6	Assassin's Apprentice	P7	a rumination on royal naming traditions in the Six Duchies
+7	Assassin's Apprentice	PNone	
+8	Assassin's Apprentice	P1	a musing on geography
+9	Assassin's Apprentice	P7	a longer-than-usual musing on the Fool and his background
+10	Assassin's Apprentice	P1	Fitz’s reflective musings on fate
+11	Assassin's Apprentice	P7	an extended musing on the legend of the Pocked Man in the Six Duchies
+12	Assassin's Apprentice	P1	an in-milieu reflective musing on the Red-Ship raiders
+13	Assassin's Apprentice	P1	a compiled assessment of Patience’s character
+14	Assassin's Apprentice	P1	a brief discussion of the eponymous character’s background. It moves thence to gloss over the progress Fitz and Patience make with one another
+15	Assassin's Apprentice	P1	musing on the Skill
+16	Assassin's Apprentice	P7	an in-milieu rumination on prior and then-contemporary practices of Skill instruction
+17	Assassin's Apprentice	P7	a description of a coming-of-age ceremony in which Fitz participates
+18	Assassin's Apprentice	P7	notes about Chade’s efforts to rehabilitate a Forged One and to ascertain the causes and process of Forging from her
+19	Assassin's Apprentice	P7	an in-milieu reflection on the general history and politics of the Mountain Kingdom, whence Verity’s chosen bride, Kettricken, hails
+20	Assassin's Apprentice	P7	a blurb from a fragment that Fitz swiftly after reports reading later on
+21	Assassin's Apprentice	P7	only a brief comment on the virtues of a particular herb
+22	Assassin's Apprentice	P7	Fitz recounting a dream of the Fool and returning swiftly to Fitz puzzling out how he can resolve the situation in which he has found himself
+23	Assassin's Apprentice	P7	only a brief blurb about Shrewd’s approach to diplomacy and Verity’s adherence to that approach
+24	Assassin's Apprentice	P7	a description of a tapestry in Jhaampe that serves as a sort of call-ahead to later novels
+25	Royal Assassin	P7	a brief prologue, unlike Assassin’s Apprentice
+26	Royal Assassin	PNone	
+27	Royal Assassin	P7	someone , only to have that openness set aside–gently, perhaps, as Burrich does with Fitz, but still put aside
+28	Royal Assassin	P7	a description of an old scroll detailing the encounter of the early Six Duchies ruler, King Wisdom, and the Elderlings after which the overall series takes its 
+29	Royal Assassin	P1	a brief rumination on the Wit and the Skill
+30	Royal Assassin	P2	chapter
+31	Royal Assassin	P7	a brief rumination on Shrewd’s three sons, the close relationship between Chivalry and Verity, and the special status accorded to Regal
+32	Royal Assassin	P2	chapter
+33	Royal Assassin	P1	two stanzas from the in-milieu “The Vixen Queen’s Hunt”
+34	Royal Assassin	P7	a brief rumination on the differences between lived experience and careful study
+35	Royal Assassin	P7	a discussion of the state of Skill practice leading up to Verity’s time
+36	Royal Assassin	P1	a brief musing on the Fool
+37	Royal Assassin	P7	Fitz’s later musings on the winter and the state of the Six Duchies during it–not good, in the event
+38	Royal Assassin	P7	Fitz musing on the different teaching styles of the then-last two Skill Masters at Buckkeep
+39	Royal Assassin	P7	a description of how the holiday of the chapter’s title is marked at Buckkeep
+40	Royal Assassin	P7	the commissioning of the warships Verity has had built
+41	Royal Assassin	P7	a gloss of early military actions against the Red-Ship Raiders
+42	Royal Assassin	P1	a brief and enigmatic statement about the Elderlings
+43	Royal Assassin	P7	an account of the defection of one of the warships Verity had had put into service and outfitted
+44	Royal Assassin	P2	chapter
+45	Royal Assassin	P7	accounts of the hardening of attitudes and Chade’s findings on an expedition to the Outislands
+46	Royal Assassin	P7	a rumination on the political future of the Mountain Kingdom during the conflict between the Six Duchies and the Red Ships
+47	Royal Assassin	P7	a brief note on Lady Patience, the former Queen-in-Waiting of the Six Duchies
+48	Royal Assassin	P7	a gloss of the declining state of Bearns Duchy and the Six Duchies, generally, following Brawndy’s visit to Buckkeep
+49	Royal Assassin	P7	a reminder of the Six Duchies figure of the Pocked Man
+50	Royal Assassin	P7	a brief note on the inland town of Tradeford
+51	Royal Assassin	P7	a rumination by Chade about the dichotomy between the Forged Ones and the Skilled
+52	Royal Assassin	P1	a series of what read as folk sayings
+53	Royal Assassin	P7	a note regarding the children of Shrewd and Desire
+54	Royal Assassin	P7	commentary about the historical basis for the tensions between the Coastal and Inland Duchies
+55	Royal Assassin	P7	a traditional “corrective” for the Witted
+56	Royal Assassin	P7	an excerpt from a Six Duchies legend
+57	Royal Assassin	P7	something of an encyclopedia entry regarding Burrich
+58	Royal Assassin	P1	a comment on a centering exercise
+59	Assassin's Quest	P7	a prologue titled “The Unremembered,” in which Fitz muses about the need for purpose and the purposes of his own writing–the framing device of the trilogy of Fa
+60	Assassin's Quest	P7	comments about slavery in the Six Duchies’ neighboring nation of Chalced and a reported story Fitz asserts Burrich latched onto as a way to save him from the du
+61	Assassin's Quest	P7	a reasonably detailed overview of the Six Duchies’ political situation in the wake of Shrewd’s death
+62	Assassin's Quest	P1	a brief passage on the powers and perils of the Skill
+63	Assassin's Quest	P7	a brief statement about the economic importance of the Buck River
+64	Assassin's Quest	P1	a brief rumination on the reciprocal nature of the Wit
+65	Assassin's Quest	P7	a musing on the place of minstrels in the Six Duchies
+66	Assassin's Quest	P7	an extended rumination on Lady Patience and her assumption of power in Buckkeep
+67	Assassin's Quest	P7	notes about the status of the continued fight against the Red-Ship Raiders–including the fall of Brawndy of Bearns
+68	Assassin's Quest	P7	a passage about the recent Skillmasters of the Six Duchies and the strange manner in which Galen, the last of those, formed a coterie
+69	Assassin's Quest	P1	a brief commentary on slavery in the Six Duchies
+70	Assassin's Quest	P7	a brief note about Chade’s activities after the death of Shrewd and Regal’s removal to Tradeford
+71	Assassin's Quest	P7	a brief note on the addictive ecstasy of the Skill
+72	Assassin's Quest	P7	a brief description of the titular lake and town
+73	Assassin's Quest	P1	a brief comment about minstrels’ social status in the Six Duchies
+74	Assassin's Quest	P2	chapter
+75	Assassin's Quest	P2	chapter
+76	Assassin's Quest	P2	chapter
+77	Assassin's Quest	P7	a brief note about Moonseye’s position and its history with Chivalry Farseer
+78	Assassin's Quest	P7	a passage glossing the military situation between the Six Duchies and the Mountain Kingdom as Fitz made his way towards Verity
+79	Assassin's Quest	P2	chapter
+80	Assassin's Quest	P7	a brief musing on diplomacy
+81	Assassin's Quest	P7	a description of Chade that paints him as something of a folk-hero emerging from the Red-Ship Wars
+82	Assassin's Quest	P7	a gloss of the legended early history of the Mountain Kingdom
+83	Assassin's Quest	P1	a brief musing on the source of magic
+84	Assassin's Quest	P1	what seems a nursery rhyme
+85	Assassin's Quest	P1	comments about relative valuation
+86	Assassin's Quest	P2	chapter
+87	Assassin's Quest	PNone	
+88	Assassin's Quest	P1	a brief description of a Mountain Kindgom game
+89	Assassin's Quest	P7	a note about a lost keep in the Six Duchies
+90	Assassin's Quest	P1	a brief comment about one of the White Prophets’ prophecies
+91	Assassin's Quest	P1	a brief comment about the Wit
+92	Assassin's Quest	P7	notes about old tales from the Mountain Kingdom that depict ancient creatures of power
+93	Assassin's Quest	P1	notes about the dearth of Skilled people to aid Verity
+94	Assassin's Quest	PNone	
+95	Assassin's Quest	P7	a gloss of the history between the Six Duchies and the Out Islands, naming the leader of the Forging Red-Ship Raiders: Kebal Rawbread
+96	Assassin's Quest	P7	a note about the progress of the Red-Ship raids against the Six Duchies, with raids striking into the central regions of the kingdom while few troops remained t
+97	Assassin's Quest	P2	chapter
+98	Assassin's Quest	P2	chapter
+99	Assassin's Quest	P1	“The Catalyst comes to change all things”
+100	Assassin's Quest	P7	comments about the end of the Red-Ship war that trail off, revealing themselves to be in Fitz’s retrospective hand
+221	Fool's Errand	PNone	
+222	Fool's Errand	P1	an encyclopedia-like description of the minstrel
+223	Fool's Errand	P1	“cited” commentary on the Wit
+224	Fool's Errand	P1	a discussion of a hedge-witch and her magic’s efficacy
+225	Fool's Errand	P7	what seem to be Fitz’s later recorded musings on the Old Blood and its presence in the lands claimed by the Six Duchies
+226	Fool's Errand	P7	a reminiscence from Fitz about his birth and upbringing, his efforts at creating a coherent history of his nation
+227	Fool's Errand	P1	an in-milieu discussion of the Old Blood from Badgerlock’s “Old Blood Tales ”
+228	Fool's Errand	P7	a letter from Burrich to his counterpart in a lesser court, reporting on a particular charge of his
+229	Fool's Errand	P2	chapter
+230	Fool's Errand	P7	FitzChivalry’s written musings on the myth that spurred Verity to head into the mountains and carve his dragon
+231	Fool's Errand	PNone	
+232	Fool's Errand	P7	an in-milieu commentary about Kettricken’s tenure as Queen of the Six Duchies
+233	Fool's Errand	P1	a brief in-milieu commentary on hunting cats
+234	Fool's Errand	P1	a musing on the stone with which the Elderlings built
+235	Fool's Errand	P1	an in-milieu discussion of the Piebalds
+236	Fool's Errand	P1	an in-milieu gloss of the recent history of the Bresingas
+237	Fool's Errand	P1	a selection from Badgerlock’s Old Blood Tales
+238	Fool's Errand	P1	another in-milieu commentary from Badgerlock’s Old Blood Tales
+239	Fool's Errand	P1	a brief commentary on the gladiatorial King’s Circles that had arisen under Regal
+240	Fool's Errand	P1	a short passage about torture
+241	Fool's Errand	P1	another selection from Badgerlock’s Old Blood Tales
+242	Fool's Errand	P1	a short piece about the White Prophet and Catalyst
+243	Fool's Errand	P1	a brief statement regarding the Skill
+244	Fool's Errand	P1	a story about the Others related in-milieu
+245	Fool's Errand	P1	a brief note about recognizing children who have the Skill
+246	Fool's Errand	P1	a selection from Chivalry Farseer’s treatise “Of the Mountain Kingdom”
+247	Fool's Errand	P1	in-milieu comments regarding training in the Skill
+248	Fool's Errand	P1	in-milieu comments from Fedwren about the relationships between the Six Duchies and the Out Islands
+249	Fool's Errand	P1	in-milieu comments on fennel
+250	Golden Fool	P1	abortive in-milieu comments from Fitz about the loss of Nighteyes
+251	Golden Fool	P7	in-milieu commentary detailing the groups origins, propaganda, and practices
+252	Golden Fool	P1	in-milieu commentary on the White Prophet Hoquin
+253	Golden Fool	P1	an in-milieu commentary about the end of the Red Ships War. It turns then to Fitz returning to the chamber he has as Tom Badgerlock, assessing the room sadly
+254	Golden Fool	P1	a brief in-milieu commentary on the use of herbs and intoxicants in Skill training
+255	Golden Fool	P1	verses from Starling Birdsong
+256	Golden Fool	P1	a selection from an account of the battle in Bingtown Harbor
+257	Golden Fool	P4	an in-milieu commentary regarding the formation of coteries–groups of allied Skill-users
+258	Golden Fool	P7	an in-milieu commentary about the interrelatedness and distinctions of magics in the world of the Elderlings
+259	Golden Fool	P1	an in-milieu note about Skill training
+260	Golden Fool	P1	a report made to Chade at the end of the Red-Ship War
+261	Golden Fool	P7	an in-milieu commentary regarding the perils of trading along the Cursed Shores, from Chalced down to Bingtown
+262	Golden Fool	P7	an in-milieu translated commentary regarding the violent removal by Tintaglia of Chalcedean forces from Bingtown Harbor
+263	Golden Fool	P2	chapter
+264	Golden Fool	P1	part of an in-milieu folk tale
+265	Golden Fool	P1	an in-milieu commentary on what might be called tourist attractions in the Out Islands. The text pivots thence to Fitz ruminating on Thick and on his own commen
+266	Golden Fool	P1	a brief in-milieu commentary about trans-oceanic trade to Jamaillia
+267	Golden Fool	P1	a spy’s report to Chade about the Outisland delegation’s return from Buckkeep
+268	Golden Fool	PNone	
+269	Golden Fool	P7	an in-milieu commentary about a former King of the Six Duchies, Shield, and the formation of his coterie
+270	Golden Fool	P1	a comment from Fedwren about the political structure of the Six Duchies
+271	Golden Fool	P1	an in-milieu note about the Witness Stones
+272	Golden Fool	P1	an extended complaint from one of Chade’s agents on Aslevjal
+273	Golden Fool	P7	an in-milieu discussion of body-sharing among the Witted and their animal partners
+274	Golden Fool	P1	in-milieu commentary about the White Prophet and Catalyst from the perspective of the priesthood of Sa
+275	Golden Fool	P1	an excerpt from an in-milieu fairy tale
+276	Golden Fool	P7	an in-milieu proverb: “One man armed with the right word may do what an army of swordsmen cannot
+277	Golden Fool	P1	a kind of creation story recounted in Badgerlock’s Old Blood Tales
+278	Fool's Fate	PNone	
+279	Fool's Fate	P7	an in-milieu historical gloss of the foundation of Buckkeep by a settling Out Island raider named Taker
+280	Fool's Fate	P1	an in-milieu vignette regarding the White Prophet Hoquin
+281	Fool's Fate	P2	chapter
+282	Fool's Fate	P1	in-milieu commentary from an older Skillmaster
+283	Fool's Fate	P1	a translation of a scroll regarding the Wit
+284	Fool's Fate	P7	an in-milieu commentary about Out Island civic structures
+285	Fool's Fate	P7	an Outisland creation narrative
+286	Fool's Fate	P1	an in-milieu “cautionary tale”
+287	Fool's Fate	P2	chapter
+288	Fool's Fate	P1	commentary about Outisland social structures from Fedwren
+289	Fool's Fate	PNone	
+290	Fool's Fate	P2	chapter
+291	Fool's Fate	P1	a comment about Skill use from a recent Skillmaster
+292	Fool's Fate	P1	a passage detailing the White Prophet Hoquin and his Catalyst, Wild Eye,
+293	Fool's Fate	P7	a brief passage from an in-milieu herbal that reinforces the addictive nature of the plant
+294	Fool's Fate	P1	an in-milieu translation of an Out Island story
+295	Fool's Fate	P7	a letter from the Old Blood to Kettricken
+296	Fool's Fate	P1	in-milieu historical comments from Fedwren
+297	Fool's Fate	P1	a brief note about Aslevjal Island
+298	Fool's Fate	P1	commentary about the White Prophets
+299	Fool's Fate	P7	an excerpt from a letter from Queen Desire detailing her reaction to the introduction of Fitz to Buckkeep at Shrewd’s behest
+300	Fool's Fate	P1	brief in-milieu commentary from Fedwren about the Elderlings
+301	Fool's Fate	P1	an in-milieu story about the enchantment of dragons
+302	Fool's Fate	P1	brief in-milieu commentary regarding the depredations of Kebal Rawbread on his own people
+303	Fool's Fate	P7	in-milieu commentary by Fedwren regarding Chalcedean slave tattooing and manumission
+304	Fool's Fate	P1	an in-milieu spy’s report
+305	Fool's Fate	P1	a note about wizardwood
+306	Fool's Fate	P1	an in-milieu folk-tale
+307	Fool's Fate	P2	chapter
+308	Fool's Fate	P1	an excerpt from a minstrel’s account of events
+309	Fool's Fate	P1	a passage from Chade’s writings about the Witness Stones and Skill-pillars
+310	Fool's Fate	P1	a brief and pointed message from Patience to Kettricken
+311	Fool's Fate	P1	a brief in-milieu directive from an old Skillmaster
+312	Fool's Fate	P1	a brief verse
+313	Fool's Fate	P7	a reply from Kettricken to Bingtown about Tintaglia
+314	Fool's Fate	P7	commentary on a Skill-ritual that summons those with potential for that magic to study
+390	Fool's Assassin	P7	Fitz rehearsing his early experience of hating and fearing Desire
+391	Fool's Assassin	P2	a letter from Chivalry to Burrich dating to just after the former’s abdication
+392	Fool's Assassin	P2	introductory commentary from an older scribe about the magics in use in the Six Duchies
+393	Fool's Assassin	PNone	
+394	Fool's Assassin	P2	an excerpt from an autobiography by Chade Fallstar
+395	Fool's Assassin	P2	a discourse on menopause and aging
+396	Fool's Assassin	P3	an admonishment for Masters of the Skill to observe solo practitioners closely against the possibility of destruction
+397	Fool's Assassin	P7	Fitz fretting about how he will confess his actions to Molly
+398	Fool's Assassin	P1	Fitz glossing the passage of time and Bee’s slow growth
+399	Fool's Assassin	P3	a missive concerning Lant
+400	Fool's Assassin	P2	a short entry in Bee Farseer’s dream journal
+401	Fool's Assassin	P3	a letter from Fitz to Nettle that discusses Verity in Kelsingra
+402	Fool's Assassin	PNone	
+403	Fool's Assassin	P7	Fitz reminiscing about his erstwhile mentor’s tendency towards drama as he answers his summons
+404	Fool's Assassin	P1	Bee receiving her first visit from Wolf-Father. The latter confers with Bee at length, guiding her through her fear and the corridors she had meant to explore
+405	Fool's Assassin	P2	an in-milieu commentary about the Catalyst Wildeye
+406	Fool's Assassin	P2	an excerpted translation done by Fitz of a damaged original
+407	Fool's Assassin	P3	a passage from an assassin’s instruction manual opining on the inherent cruelty of the profession
+408	Fool's Assassin	P7	Bee fuming at Fitz’s attention to Shun
+409	Fool's Assassin	P5	Afragment of recorded prophecy regarding the Unexpected Son
+410	Fool's Assassin	P3	an excerpt from a translated commentary on killing (one that Dargen seems to have studied)
+411	Fool's Assassin	P3	an excerpt from an in-milieu conduct manual
+412	Fool's Assassin	P3	the transcript of a somewhat degraded message seemingly from Riddle to Nettle
+413	Fool's Assassin	P2	a journal entry that references Fitz’s first encounters with Chade , Verity, and Burrich , and his recognition of the Fool as more than he seemed
+414	Fool's Assassin	P3	an excerpt from an instructional text
+415	Fool's Assassin	P2	a brief commentary on instructional practices
+416	Fool's Assassin	P2	an excerpt from Bee’s records of her dreams
+417	Fool's Assassin	P3	an excerpt from Patience’s early writings about Fitz
+418	Fool's Assassin	P5	Abrief excerpt from a pedagogical treatise by Fedwren
+419	Fool's Assassin	P2	an excerpt from Bee’s journals
+420	Fool's Assassin	P2	an excerpt from Fitz’s journals
+421	Fool's Assassin	P2	a short excerpt from an instructional manual in one use of the Skill
+422	Fool's Assassin	P7	Bee noting her return to Withywoods with Lant and Shun
+423	Fool's Quest	P2	a recollection of Nighteyes’s early experience
+424	Fool's Quest	P2	an in-milieu commentary on secrets
+425	Fool's Quest	P2	a set of instructions from one of the Servants that touches on their designs
+426	Fool's Quest	P7	Fitz returning to Chade’s old hidden rooms, where he inadvertently wakes the Fool into a trauma response
+427	Fool's Quest	PNone	
+428	Fool's Quest	P2	an in-milieu historical work reporting the end of the Red Ships War and the reaffirmation of the Farseer dynasty
+429	Fool's Quest	P1	Fitz, disguised as Feldspar, returning to his chambers and planning the events to follow. Riddle greets him there and receives an unexpected apology
+430	Fool's Quest	P2	an excerpt from lyrics by Starling Birdsong
+431	Fool's Quest	P3	a report from Jek about Kelsingra and its reoccupation
+432	Fool's Quest	P2	what appears to be a report from Ash to Rosemary about approaching the Fool
+433	Fool's Quest	P3	a letter to Fitz from Civil Bresinga
+434	Fool's Quest	P2	a passage from the Servants’ histories that articulates a change in terminologies
+435	Fool's Quest	P2	an excerpt from Bee’s dream journals
+436	Fool's Quest	P2	an excerpt from an in-milieu herbal
+437	Fool's Quest	P7	Chade and Fitz continuing to dose and question members of the Withywoods household
+438	Fool's Quest	P2	more commentary about the Servants and their machinations
+439	Fool's Quest	P2	commentary from Chade about medicinal uses of dragon-parts
+440	Fool's Quest	P2	the text of a binding resolution from the Traders’ Council of Bingtown
+441	Fool's Quest	P3	a description of Clerres reported to Chade
+442	Fool's Quest	P3	in-milieu commentary warning of the dangers of travel through the Skill-pillars that might have been useful to characters earlier
+443	Fool's Quest	PNone	
+444	Fool's Quest	P7	Lant reporting to the Farseer elite, as well as Rosemary and Ash
+445	Fool's Quest	P7	Fitz enjoying riding a new horse and not enjoying the attempt by the same–Fleeter–to Wit-bond with him
+446	Fool's Quest	P7	Bee musing on changes among her abductors in the wake of Vindeliar’s suborning
+447	Fool's Quest	P7	Fitz and Fleeter proceeding at speed, Fitz detailing their progress through the night and into the dawn
+448	Fool's Quest	PNone	
+449	Fool's Quest	P2	Dwalia’s comments about Prilkop
+450	Fool's Quest	P1	Fitz struck still as Shine relates the events of Bee’s further abduction . Lant arrives, and Shine turns her attentions to him briefly
+451	Fool's Quest	P2	a commentary on a semi-judicial proceeding
+452	Fool's Quest	P1	Fitz returning to his chambers briefly
+453	Fool's Quest	P2	an excerpt from Bee’s dream journal
+454	Fool's Quest	P7	Fitz announcing his decision to leave Withywoods to the household staff, who accept the news easily
+455	Fool's Quest	P3	an entry from Bee’s dream journal
+456	Fool's Quest	P3	in-milieu commentary about selecting Skill-couriers and their practices
+457	Fool's Quest	P7	Fitz waking in darkness, coming up from the effects of the sleeping draught he had been given
+458	Fool's Quest	P4	an excerpt from Bee’s journals
+459	Assassin's Fate	P6	An extended excerpt from Bee’s dream journals
+460	Assassin's Fate	P7	Bee fleeing from Dwalia and her company after emerging from the Skill-pillar
+461	Assassin's Fate	P7	Fitz experiencing the onset of elfbark’s effects as administered by Lant in Kelsingra
+462	Assassin's Fate	P2	an excerpt from Bee’s dream journals
+463	Assassin's Fate	P3	a commentary from Chade about the decline of the Elderlings and the legendary alliance between them and the early Farseers
+464	Assassin's Fate	P3	a brief excerpt from Bee’s dream-journal
+465	Assassin's Fate	P2	a brief excerpt from Prilkop’s writings
+466	Assassin's Fate	P7	Bee considering her isolation in Chalced as she continues to hide from Dwalia and her company
+467	Assassin's Fate	P2	another excerpt from Bee’s dream journals
+468	Assassin's Fate	P7	Fitz and his companions watching the titular liveship arrive
+469	Assassin's Fate	P7	Fitz adapting to the Tarman and the liveship’s strange resonance with his magics
+470	Assassin's Fate	P7	Bee delighting in Dwalia’s seasickness after her recapture from incarceration
+471	Assassin's Fate	P1	Fitz considering his own image on the figurehead of the eponymous vessel. The Fool as Amber claims to be able to explain, something about which Fitz expresses d
+472	Assassin's Fate	P7	a return to Bee as she remains Dwalia’s captive
+473	Assassin's Fate	P3	a somewhat extended commentary from the Servant Symphe regarding the Fool
+474	Assassin's Fate	P7	Bee dickering with a merchant aboard the ship where she has been captive
+475	Assassin's Fate	P2	an excerpt from Symphe’s papers
+476	Assassin's Fate	P3	a report from Rosemary to Dutiful , Elliania, and Kettricken that follows up on Fitz’s work in Kelsingra
+477	Assassin's Fate	P7	Fitz ruminating on the comparison between meetings of his family and the assemblage of the intertwined Vestrits and rulers of the Pirate Isles
+478	Assassin's Fate	P7	Bee rehearsing her situation and the changes to the same as she is forced to accompany Dwalia and Vindeliar towards Clerres aboard ship
+479	Assassin's Fate	P7	Brashen asking Fitz what Tintaglia wants from him amid a short break from the tasks setting out aboard the Paragon for Clerres demands of all who will sail thit
+480	Assassin's Fate	P7	the Paragon making ready to depart Divvytown in haste, the dragons having departed
+481	Assassin's Fate	P7	Fitz ruminating on long ocean voyages, not entirely happily, as the Paragon proceeds towards Clerres, passing beyond what reliable charts the ship and crew have
+482	Assassin's Fate	P7	Bee considering her approach to the titular place
+483	Assassin's Fate	P1	harsh conversation among the Four as Bee listens, considering her situation
+484	Assassin's Fate	P7	Bee waking to breakfast in her imprisonment
+485	Assassin's Fate	P7	Fitz joining the others from the Six Duchies aboard the Paragon in mourning the death of Chade Fallstar
+486	Assassin's Fate	P2	a letter regarding the Kendry and the challenges recently besetting the ship’s crew
+487	Assassin's Fate	P3	a journal entry from Bee
+488	Assassin's Fate	P1	Bee waking in her cell from an unpleasant dream. She steels herself against Vindeliar and directs her energies towards healing
+489	Assassin's Fate	P7	Fitz taking one of the Paragon ‘s boats uncomfortably, accompanied by Spark, Lant, and Perseverance, all disguised
+490	Assassin's Fate	P1	Capra leaving Bee in her cell once again. Bee and Prilkop confer about her prophetic visions, and Prilkop sorrows over her relative lack of tutelage
+491	Assassin's Fate	P7	Fitz and his companions waiting for Motley to return
+492	Assassin's Fate	P5	Another prophecy, one seeming to summarize the Tawny Man trilogy,
+493	Assassin's Fate	P7	Fitz reaching out to the Fool, thinking the latter dead
+494	Assassin's Fate	P7	Bee exulting in the presence of her father and Perseverance, only to have her joy turn as Fitz bundles her up to take her to Vindeliar
+495	Assassin's Fate	PNone	
+496	Assassin's Fate	P5	Information about the Pocked Man legend in the Six Duchies
+497	Assassin's Fate	P7	Bee regaining consciousness as the Fool talks to her, the experience painful to her because of the number of potential futures he represents
+498	Assassin's Fate	PNone	
+499	Assassin's Fate	PNone	
+500	Assassin's Fate	PNone	
+501	Assassin's Fate	P7	Fitz recalling what the Fool told him of his earlier escape from Clerres and attempting to follow along with it
+502	Assassin's Fate	P5	Testimony from a Skilled apprentice written at Nettle ‘s direction
+503	Assassin's Fate	PNone	
+504	Assassin's Fate	PNone	
+505	Assassin's Fate	PNone	
+506	Assassin's Fate	P7	Bee remarking on her continued visits with Thick and their effects on her daily life
+507	Assassin's Fate	P7	Fitz reflecting on lessons Burrich had taught him after his resurrection
+508	Assassin's Fate	P7	Bee complaining to Nettle of those attending on Fitz’s death, and his continued deterioration is rehearsed
+509	Assassin's Fate	P7	Nettle and Kettricken conferring about their respective next steps as those who had been gathered to attend on Fitz’s passing make their departures

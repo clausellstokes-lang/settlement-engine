@@ -1,0 +1,1 @@
+observed-shape execution INPUT changed since the last re-freeze (1 path(s): src/domain/compendium/generated/compendiumData.generated.js). These are generated/data inputs, not detector sources, so the shrink-only --write re-freeze may absorb them; the instrument is NOT darkened by them.

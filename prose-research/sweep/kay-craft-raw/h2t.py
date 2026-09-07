@@ -1,0 +1,15 @@
+import sys,re,html
+p=sys.argv[1]
+s=open(p,'rb').read().decode('utf-8','replace')
+s=re.sub(r'(?is)<script.*?</script>',' ',s)
+s=re.sub(r'(?is)<style.*?</style>',' ',s)
+s=re.sub(r'(?is)<noscript.*?</noscript>',' ',s)
+s=re.sub(r'(?is)<svg.*?</svg>',' ',s)
+s=re.sub(r'(?i)<(br|/p|/div|/li|/h[1-6]|/tr)[^>]*>','\n',s)
+s=re.sub(r'(?i)<(p|li|h[1-6]|blockquote)[^>]*>','\n',s)
+s=re.sub(r'(?s)<!--.*?-->',' ',s)
+s=re.sub(r'(?s)<[^>]+>',' ',s)
+s=html.unescape(s)
+s=re.sub(r'[ \t\r\f\v]+',' ',s)
+s=re.sub(r'\n\s*\n\s*\n+','\n\n',s)
+print(s.strip())

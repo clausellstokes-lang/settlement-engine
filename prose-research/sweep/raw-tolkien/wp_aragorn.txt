@@ -1,0 +1,927 @@
+ 
+ The Tale of Aragorn and Arwen - Wikipedia 
+ Jump to content 
+ Main menu 
+ Main menu
+ move to sidebar 
+ hide 
+ Navigation
+ Main page 
+ Contents 
+ Current events 
+ Random article 
+ About Wikipedia 
+ Contact us 
+ Contribute
+ Help 
+ Learn to edit 
+ Community portal 
+ Recent changes 
+ Upload file 
+ Special pages 
+ Search 
+ Search 
+ Appearance 
+ Donate 
+ Create account 
+ Log in 
+ Personal tools 
+ Donate 
+ Create account 
+ Log in 
+ Contents
+ move to sidebar 
+ hide 
+ (Top)
+ 1 
+ Context 
+ 2 
+ Frame story 
+ 3 
+ Plot 
+ 4 
+ Analysis 
+ Toggle Analysis subsection 
+ 4.1 
+ Inspiration 
+ 4.2 
+ Missing religion 
+ 4.3 
+ Relegated ending 
+ 4.4 
+ "History, true or feigned" 
+ 4.5 
+ Love and death 
+ 5 
+ See also 
+ 6 
+ Notes 
+ 7 
+ References 
+ Toggle References subsection 
+ 7.1 
+ Primary 
+ 7.2 
+ Secondary 
+ Toggle the table of contents 
+ The Tale of Aragorn and Arwen 
+ 5 languages 
+ Español 
+ فارسی 
+ Galego 
+ Português 
+ 中文 
+ Edit links 
+ Article 
+ Talk 
+ English 
+ Read 
+ Edit 
+ View history 
+ Tools 
+ Tools
+ move to sidebar 
+ hide 
+ Actions
+ Read 
+ Edit 
+ View history 
+ General
+ What links here 
+ Related changes 
+ Upload file 
+ Permanent link 
+ Page information 
+ Cite this page 
+ Get shortened URL 
+ Switch to legacy parser 
+ Print/export
+ Download as PDF 
+ Printable version 
+ In other projects
+ Wikidata item 
+ Appearance
+ move to sidebar 
+ hide 
+ From Wikipedia, the free encyclopedia
+ Story in The Lord of the Rings
+" The Tale of Aragorn and Arwen " is a story within the Appendices of J. R. R. Tolkien 's The Lord of the Rings . It narrates the love of the mortal Man Aragorn and the immortal Elf-maiden Arwen , telling the story of their first meeting, their eventual betrothal and marriage, and the circumstances of their deaths. Tolkien called the tale "really essential to the story". [ 1 ] In contrast to the non-narrative appendices, it extends the main story of the book to cover events both before and after it, one reason it would not fit in the main text. Tolkien gave another reason for its exclusion: that the main text is told from the hobbits ' point of view.
+ The tale to some extent mirrors the " Tale of Beren and Lúthien ", set in an earlier age of Middle-earth . This creates a feeling of historical depth, in what scholars note is an approach similar to that of Dante in his Inferno .
+ Aspects of the tale discussed by scholars include the nature of love and death; the question of why the tale, if so important, was relegated to an appendix; Tolkien's blurring of the line between story and history; the balance Tolkien strikes between open Christianity and his treatment of his characters as pagan ; and the resulting paradox that although Tolkien was a Roman Catholic and considered the book fundamentally Catholic , Middle-earth societies lack religions of their own. It has been noted that the tale's relegation deprives the main story of much of its love-interest , shifting the book's emphasis towards action.
+ Context
+ [ edit ] 
+ The tale is set in the Third and Fourth Ages of J. R. R. Tolkien 's fictional universe , Middle-earth , and was published in 1955 in The Return of the King as the fifth part of the first section of Appendix A of The Lord of the Rings . [ T 1 ] In the main text of the book, Aragorn is presented almost without detail of his relationships, other than a brief interaction with Éowyn , the lady of Rohan , while Arwen barely speaks and hardly features until her marriage at the end of the book. In a letter dated 6 April 1956 to his publisher Rayner Unwin , Tolkien stated that the tale was the only part of the Appendices that was "really essential to the story." [ 1 ] The publishers wanted to omit the Appendices entirely for the first Swedish edition, the 1959-1961 Sagan om ringen ; Tolkien insisted on keeping the tale, stating that it was "essential to the understanding of the main text in many places", and it and Appendix D formed the only appendices to that edition. [ 2 ] The first one-volume edition of The Lord of the Rings that appeared in 1968 omitted all the Appendices "except for The Tale of Aragorn and Arwen ". [ 2 ] {{cite book |last=Tolkien |first=J. R. R. |author-link=J. R. R. Tolkien |title=[[The Lord of the Rings]] |year=1968 |chapter=Foreword |page=10 |publisher=[[George Allen & Unwin]] |location=London |isbn=0-048-23087-1}}</ref><ref>{{cite book |last1=Hammond |first1=Wayne G. |author-link=Wayne G. Hammond|last2=Anderson |first2=Douglas A. |author-link2=Douglas A. Anderson |title=[[J. R. R. Tolkien: A Descriptive Bibliography]]|year=1993 |edition=2002 |isbn=978-0938-76842-5|page=142 |publisher=[[Oak Knoll Press]] and [[The British Library]] |location=Delaware and London}}</ref>"}},"i":0}}]}'> [ a ] {{cite book |last1=Hammond |first1=Wayne G. |author-link=Wayne G. Hammond |last2=Anderson |first2=Douglas A. |author-link2=Douglas A. Anderson|title=[[J. R. R. Tolkien: A Descriptive Bibliography]] |year=1993 |edition=2002 |isbn=978-0938-76842-5 |pages=389–410 |publisher=[[Oak Knoll Press]] and [[The British Library]] |location=Delaware and London}}</ref>"}},"i":0}}]}'> [ b ] 
+ The process of the composition of the tale was explored by Tolkien's son and literary executor Christopher Tolkien in the 12th and final volume of The History of Middle-earth . [ T 3 ] Working from his father's unpublished manuscripts and drafts, he traces the evolution of the tale through several versions and framing devices, including an "abandoned experiment at inserting it into [a] history of the North Kingdom", concluding that "the original design of the tale of Aragorn and Arwen had been lost". [ T 3 ] The original manuscript pages of the deathbed exchange between Aragorn and Arwen show that this key scene was almost unchanged from the published version, and had been written at great speed. [ T 3 ] "}},"i":0}}]}'> [ c ] 
+ Frame story
+ [ edit ] 
+ Further information: Tolkien's frame stories 
+ In Tolkien's fictional universe, the frame story is that the tale was written after Aragorn's death by Barahir, grandson of Faramir and Éowyn , and that an abbreviated version of the tale was included in the copy of the Thain's Book made by Findegil. [ T 4 ] The Tolkien scholar Giuseppe Pezzini writes that the "meta-textual frame ... is duly harmonised in the text through the use of formal features; the appendixes are indeed full of scribal glosses, later notes, and editorial references that are meant to match the elaborate textual history detailed in the Note on the Shire Records." [ 5 ] The narrative voice and the point of view from which the story is told is examined by the scholar of English, literature, and film Christine Barkley, who considers the main part of the tale to have been narrated by Aragorn. [ 6 ] {{cite journal |last=Armstrong |first=Helen |title=There Are Two People in This Marriage |journal=[[Mallorn (journal)|Mallorn]] |date=1998 |volume=36 |pages=5–12}}</ref>"}},"i":0}}]}'> [ d ] 
+ Plot
+ [ edit ] 
+ Aragorn , visiting Rivendell , sings the Lay of Lúthien , an immortal Elf-maiden in the First Age who marries a man, Beren , thereby choosing a mortal life. As he does so, "Lúthien walked before his eyes": he sees Arwen in the woods, and calls out to her "Tinúviel! Tinúviel!" as Beren had done; she reveals that although she seems no older than he, she is of great age, having "the [immortal] life of the Eldar ". He falls in love with her. Arwen's father, Elrond the Half-elven, sees without being told what has happened, and tells Aragorn that a "great doom awaits" him, either to be the greatest of his line since Elendil , or to fall into darkness; and that he "shall neither have wife, nor bind any woman to you in troth" until he is found worthy. In reply, with "the foresight of his kindred", Aragorn prophesies that Elrond's time in Middle-earth is coming to an end, and that Arwen will have to choose between her father and staying in Middle-earth. [ T 5 ] 
+ Aragorn and Arwen meet again in Lothlórien , nearly thirty years later. Galadriel dresses Aragorn in "silver and white, with a cloak of elven-grey and a bright gem on his brow", so that he seems to be an elf-lord. Arwen sees him and makes her choice. They climb the hill of Cerin Amroth, from where they can see the Shadow ( Mordor ) in the East, and the Twilight (the fading of the Elves) in the West, and they " plighted their troth ". Elrond tells Aragorn that they may marry only when he is King of both Gondor and Arnor, the ancient southern and northern Kingdoms of Middle-earth. [ T 5 ] 
+ Some years later, Aragorn helps the Fellowship and the forces of the West to victory in the War of the Ring against the forces of Mordor. At the Battle of the Pelennor Fields , he unfurls the standard made by Arwen and is hailed as King by the people of Gondor. The One Ring is destroyed, taking the power of the three Elven-rings , including Elrond's, with it. Aragorn becomes King of Gondor and Arnor, and at midsummer, he and Arwen are married in Minas Tirith. The Third Age ends as Elrond departs Middle-earth never to return, and he and Arwen are "sundered by the Sea and by a doom beyond the end of the world". [ T 5 ] 
+ Aragorn and Arwen live together as King and Queen of Gondor and Arnor for "six- score [120] years in great glory and bliss". Then, aged 210 and feeling the onset of old age, Aragorn chooses to lay down his life before he falls from his "high seat unmanned and witless". In the scenes that follow, Aragorn and a grief-stricken Arwen converse on the nature of death and the consequences of the choice she had made. Aragorn lies down in "the House of the Kings in the Silent Street" and, giving the crown of Gondor and the sceptre of Arnor to his son Eldarion, he says his final farewell to Arwen and dies, his body remaining "in glory undimmed". Arwen was "not yet weary of her days and thus tasted the bitterness of the mortality that she had taken upon her". The elf-light in her eyes goes out, and she leaves Gondor for Lorien, itself now dimmed as the elf-rulers Galadriel and Celeborn and their people had left Middle-earth. She wanders under the mallorn trees, their leaves falling, and becomes the only living Elf in Middle-earth since Lúthien to die of old age. [ T 5 ] 
+ Analysis
+ [ edit ] 
+ Further information: Themes of The Lord of the Rings 
+ Inspiration
+ [ edit ] 
+ Further information: Tolkien and the classical world 
+ Tolkien's tale may have been inspired by the medieval poem Sir Orfeo , which begins "Orfeo was a king // In Inglond an heiȝe lording" . [ 8 ] 
+ Elena Capra writes that Tolkien made use of the medieval poem Sir Orfeo , based on the classical tale of Orpheus and Eurydice , both for The Hobbit ' s Elvish kingdom, and for his story in The Silmarillion of Beren and Lúthien . That in turn influenced "The Tale of Aragorn and Arwen". In Capra's view, Sir Orfeo ' s key ingredient was the political connection "between the recovery of the main character's beloved and the return to royal responsibility". [ 8 ] 
+ Missing religion
+ [ edit ] 
+ Further information: Christianity in Middle-earth and Paganism in Middle-earth 
+ Tolkien shared the Catholic hope that God had a plan for virtuous pagans like Aragorn. [ 9 ] Woodcut The Three Good Pagans by Hans Burgkmair , 1519 
+ The medievalist and scholar of Old English literature and its use in fantasy, Tom Shippey , analyses the tale for what it says about Tolkien's delicate balance between open Christianity and his treatment of his characters as heathens , a word that Shippey observes Tolkien uses very sparingly. [ 9 ] Shippey notes that both Aragorn and Arwen are pagan, though Aragorn is "remarkably virtuous ... without even the faults of Theoden , and he foreknows his death like a [Christian] saint". [ 9 ] Shippey notes that Arwen is inconsolable, seeing nothing after death, rejecting Aragorn's "we are not bound for ever to the circles of the world, and beyond them is more than memory. Farewell!"; as Shippey says, "Arwen is not comforted" by this; none of the traditional consolations of religion are present. [ 9 ] He observes that Tolkien stated in a letter to a Jesuit priest that he had cut religion out of The Lord of the Rings because it "is absorbed into the story and the symbolism". [ 9 ] [ T 6 ] 
+ Shippey explains that Tolkien, a devout Roman Catholic , "thought, or hoped, that God had a plan for [virtuous pagan] pre-Catholics too", so that heroes like Aragorn would go to Limbo rather than to Hell. [ 9 ] He notes that the tale contains another death-scene, that of Gilraen, Aragorn's mother; she too is not comforted by Aragorn's mention of "a light beyond the darkness", a phrase that Shippey writes could be a hope of salvation, or simply a hope of winning the War of the Ring. [ 10 ] Whatever the case, Shippey considers the tale to give "the deepest sense of religious belief mentioned explicitly in Middle-earth", [ 10 ] but that the result is an "only-slightly-qualified absence of religion", [ 10 ] creating a "paradox of a 'fundamentally Catholic' work which never once mentions God." [ 10 ] 
+ In her study of death and dying in The Lord of the Rings , Amy Amendt-Raduege states that Aragorn's death "follows the step-by-step process outlined by the Ars moriendi ", the Christian precepts on how to die well, namely "the acceptance of death, the refusal of temptation, the dispensation of worldly goods and the last farewell to the family, and the final affirmation of faith". [ 11 ] Amendt-Raduege describes the death of Aragorn as "one of the most deeply moving scenes in the story". [ 11 ] 
+ Relegated ending
+ [ edit ] 
+ In Peter Jackson's The Lord of the Rings film trilogy , the tale is brought from the appendix into the main narrative, [ 12 ] and (shown) Arwen brings the banner of the White Tree to Aragorn, and they are married. In the book these are separate events. [ 13 ] Aragorn is shown wearing a circlet; Tolkien described the crown in the book as a taller version of the helmets of the city guard, and in a later letter as resembling the Hedjet of Upper Egypt . [ 14 ] 
+ The scholar of English literature Chris Walsh describes "The Tale of Aragorn and Arwen" as an alternative ending to The Lord of the Rings , with Aragorn's sombre last words to Arwen in place of the hobbit Sam Gamgee 's cheery "Well, I'm back". [ 12 ] Walsh notes that in a letter, Tolkien wrote "The passage over Sea [to Elvenhome in the West] is not Death ... I am only concerned with Death as part of the nature, physical and spiritual, of Man, and with Hope without guarantees. That is why I regard the tale of Arwen and Aragorn as the most important of the appendices; it is part of the essential story ". [ T 7 ] Sarah Workman writes that the relegation of the tale to an appendix "does not subordinate its importance", citing the same letter. [ 15 ] Walsh states that he is interested to find that while Tolkien had "reluctantly relegated" [ 12 ] the tale to an appendix, it is part of the main story in Peter Jackson's The Lord of the Rings film trilogy , "strategically placed almost exactly half-way through". [ 12 ] The film's depiction of the tale differs from the book's, combining Arwen's arrival, the presentation of the banner, the coronation, and the wedding; in the tale, Aragorn "unfurled the standard of Arwen in the battle of the Fields of Pelennor". [ T 5 ] [ 13 ] Walsh notes that Jackson includes a flash forward to Elrond's vision of Arwen as the King's widow, with the phrase "There is nothing for you here: only death" used both in the film of The Two Towers and again in The Return of the King : in Walsh's view, death is the story's focus. [ 12 ] {{cite journal |last=Straubhaar |first=Sandra Ballif |author-link=Sandra Ballif Straubhaar |title=Gilraen's Linnod: Function, Genre, Prototypes |url=https://muse.jhu.edu/article/182573 |journal=[[Tolkien Studies]] |date=2005 |volume=2 |pages=235–244 |issn=1547-3155 |doi=10.1353/tks.2005.0032|s2cid=170378314 |url-access=subscription }}</ref>"}},"i":0}}]}'> [ e ] 
+ The literary historian and folklorist William Gray adds that the reason for the tale's relegation may be that it does not contribute to the interlacing of the narrative . [ 17 ] Interlacing is the literary device where the narrative jumps between parallel threads. [ 18 ] Gray notes that one effect of the relegation is an emphasis on dramatic action, at the price of "love-interest". [ 17 ] All the same, Gray writes, the tale "is one of Tolkien's most moving pieces. It is a tale about enduring love, triumphing over seemingly impossible odds, and sealed with Arwen's sacrifice of her Elven immortality in order to live with her human husband for 'six score years of great glory and bliss'." [ 17 ] 
+ Tolkien himself gave another explanation, which was that "This story is placed in an appendix, because I have told the whole tale [of The Lord of the Rings ] more or less through 'hobbits'; and that is because another main point in the story for me is the remark of Elrond in Vol. I : 'Such is oft the course of deeds that move the wheels of the world [...] ' " . [ T 8 ] The Tolkien scholar Christina Scull notes that as a result of this hobbit-centred viewpoint, first-time readers can be "as surprised as the hobbits when Arwen and her escort arrive at Minas Tirith". [ 19 ] 
+ Timeline showing how the Tale brackets the main story [ T 9 ] 
+ Year [ T 9 ] "The Tale of Aragorn and Arwen" The Lord of the Rings main narrative 
+ 3rd Age , 241 (Arwen is born) — 
+ 2931 (Aragorn is born) — 
+ 2951 Aragorn falls in love with Arwen. — 
+ 2980 Aragorn and Arwen become engaged. — 
+ 3018-9 Aragorn is one of the Fellowship in the War of the Ring . 
+ 3019, 25 March The One Ring is destroyed. 
+ 3019, 1 May Aragorn becomes King. 
+ 3019, Mid-year's Day Aragorn and Arwen are married. 
+ 4th Age , 1 They live as King and Queen. — 
+ 120 Aragorn dies "in glory undimmed". — 
+ 120–121 Late winter Arwen, heartbroken, leaves Minas Tirith and dies in a deserted Lothlórien . — 
+ The scholar of medieval and Renaissance literature Mary R. Bowman writes that both "The Tale of Aragorn and Arwen" and the final part of Appendix B (a detailed timeline) are examples of the appendices denying the closure of The Lord of the Rings by narrating events for some 120 years after those of the final chapter of the main text; this differs from the non-narrative nature of the later appendices which add "cultural and linguistic material". [ 20 ] 
+ "History, true or feigned"
+ [ edit ] 
+ Mary Bowman compares the "feigned" historical echoing of Beren and Lúthien in the "Tale of Aragorn and Arwen" with Dante 's echoing of Lancelot and Guinevere in his tale of Paolo and Francesca , [ 20 ] here in an 1862 painting by Dante Gabriel Rossetti . 
+ Bowman notes that when Aragorn first sees Arwen, he both sings about Lúthien Tinúviel and calls Arwen by that name "as if the story [of Lúthien and Beren] had come to life before his eyes" [ 20 ] and later he compares his life with Beren's, saying "I have turned my eyes to a treasure no less dear than the treasure of Thingol that Beren once desired". [ 20 ] To Bowman, this blurs the line between story and history , something that as she notes Tolkien much preferred, whether "true or feigned", [ T 10 ] in the same way that Dante in his Inferno (5.121–138) narrates that Paolo and Francesca were trying to imitate Lancelot and Guinevere of Arthurian legend . [ 20 ] 
+ Tolkien, like Dante, provided "history" behind "story" [ 20 ] 
+ Element Tolkien Lord of the Rings Dante Inferno 
+ Story " Tale of Aragorn and Arwen " Paolo and Francesca 
+ Imitating "historic" tale " Tale of Beren and Lúthien " Lancelot and Guinevere 
+ Contained in legendarium The Silmarillion , Tolkien's legendarium Arthurian legend 
+ The Tolkien scholar John D. Rateliff writes that the "Tale of Aragorn and Arwen" forms one of the "very final passages" of the internal chronology of The Lord of the Rings , and that it ends not just with Arwen's death, but the statement that her grave is on Cerin Amroth "until the world is changed, and all the days of her life are utterly forgotten by men that come after ... and with the passing of [Arwen] Evenstar no more is said in this book of the days of old." [ 21 ] Rateliff observes that this points up a "highly unusual" aspect of the book among modern fantasy: it is set "in the real world but in an imagined prehistory." [ 21 ] As a result, Rateliff explains, Tolkien can build what he likes in that distant past, elves and wizards and hobbits and all the rest, provided that he tears it all down again, so that the modern world can emerge from the wreckage, with nothing but "a word or two, a few vague legends and confused traditions" to show for it. [ 21 ] Rateliff praises and quotes the scholar of English literature Paul H. Kocher on this: "At the end of his epic Tolkien inserts ... some forebodings of [Middle-earth's] future which will make Earth what it is today ... he shows the initial steps in a long process of retreat or disappearance [of] all other intelligent species, which will leave man effectually alone on earth ... Ents may still be there in our forests, but what forests have we left? The process of extermination is already well under way in the Third Age, and ... Tolkien bitterly deplores its climax today." [ 22 ] 
+ In this tale of decline and fall, notes Marjorie Burns , Tolkien "clever[ly]" manages to include an element of rising to nobility. Men cannot climb the hierarchy, as Eru , Valar , and Elves are permanently above them. But the Elves voluntarily leave at the end of the Third Age, so men can take their place. Further, Burns writes, the marriage with Arwen infuses Aragorn's line with fresh Elven blood, bringing some of the Elves' actual power and nobility to Gondor. [ 23 ] 
+ Love and death
+ [ edit ] 
+ Further information: Time in The Lord of the Rings and Death and immortality in Middle-earth 
+ The Tolkien scholar Richard C. West notes the resemblance between Arwen and Lúthien, and analyses Arwen's understanding of her fateful choice, between love for Aragorn and mortality on the one hand, and her father's wishes and immortality on the other. [ 24 ] Others such as Bill Davis analyse Tolkien's exploration of mortality through an elf's choosing to die. [ 25 ] West further shows how Tolkien subtly weaves the tale into the main story of The Lord of the Rings . [ 17 ] West gives examples of direct and indirect references to Arwen that only make sense or become clearer once the tale in the Appendices has been read, such as the gift-giving scene in Lothlorien where Aragorn refers to Arwen with his words to Galadriel "Lady, you know all my desire, and long held in keeping the only treasure that I seek. Yet it is not yours to give me, even if you would; and only through darkness shall I come to it", and in response is presented by Galadriel with a green elfstone (earning him the name "Elessar") set in a silver brooch from Arwen. [ 24 ] 
+ West draws a further connection between the tale in the Appendices and the main text in his analysis of the scene at the camp on Weathertop where Aragorn (Strider) recounts to the hobbits in poetry and prose the "Tale of Beren and Lúthien", with West highlighting Aragorn's words and "pensive mood" as he tells them that Lúthien "chose mortality, and to die from the world, so that she might follow [Beren]" and that "together they passed, long ago, beyond the confines of this world" and that she "alone of the Elf-kindred has died indeed and left the world, and they have lost her whom they most loved". [ 24 ] West speculates that Aragorn may be thinking here of the consequences of what will happen should Arwen marry him, and later states that he finds "the lonely death of Arwen the most moving tragedy within [ The Lord of the Rings ]". [ 24 ] A similar conclusion regarding Aragorn's feelings at Weathertop is drawn by scholar of medieval English literature John M. Bowers in his work on the influence of Geoffrey Chaucer on Tolkien. Bowers, looking at both the Weathertop scene and 'The Tale of Aragorn and Arwen', states that like certain pilgrims in Chaucer's Canterbury Tales , Aragorn's stories of his ancestors "open a window into his private desires and fears". [ 26 ] 
+ The scholar of English literature Anna Vaninskaya studies "The Tale of Aragorn and Arwen" to see how Tolkien uses fantasy to examine the issues of love and death, time and immortality. Given that Tolkien's Elves are immortal, they face the question of death from a unique vantage-point. [ 27 ] Sarah Workman writes that in the tale, Arwen's mourning of Aragorn serves to overcome what Peter Brooks called (she writes) the "meaningless", interminable nature of immortality. Workman quotes Brooks's statement that "all narration is obituary" and states that it is in that conception that Tolkien valued Arwen's fate: it is Arwen's "mourning gaze that allows for the transmission of Aragorn's memory", [ 15 ] or in Tolkien's words which she quotes, "And long there he lay, an image of the splendour of the Kings of Men in glory undimmed". [ 15 ] 
+ The Polish scholar of religion in literature and film, Christopher Garbowski, notes that while Tolkien contrasts Elves and Men throughout The Lord of the Rings , he introduces the conceit that an Elf may marry a Man on condition of surrendering her immortality. This happens exactly twice in the legendarium, with Lúthien and then with Arwen. In Garbowski's view the conceit's most dramatic use is an event in "The Tale of Aragorn and Arwen", the moment when Aragorn voluntarily accepts the time of his death, offered to him by Ilúvatar (God), which Garbowski finds "optimistic". Arwen calls this "gift" "bitter to receive"; Garbowski comments that Tolkien's later and much less optimistic posthumously published discourse " Athrabeth Finrod ah Andreth " effectively undermines the status of the "gift", coming close to the Christian position that body and soul cannot be separated. [ 28 ] [ T 11 ] 
+ The political philosopher Germaine Paulo Walsh compares Tolkien's view that "the ability to exercise wise judgment is tied to a steadfast belief in the ultimate justice of the cosmos, even in the face of circumstances that seem hopeless" [ 29 ] with the attitudes towards death in Ancient Greece. He writes that Plato stated that Homer took Achilles as the model for death, the "only sound response" being despair, whereas Tolkien's model is Aragorn, who chooses death freely according to the "ancient prerogative of the Númenórean rulers"; when Arwen pleads with him to hold off, he "concedes that death is a cause for 'sorrow' but not for 'despair'." [ 29 ] Walsh comments that it is significant that at this moment, Arwen calls him Estel, his childhood name, which meant "Hope" or "Trust"; she has to trust his wisdom, and her own choice of love and death. [ 29 ] That Aragorn was wise to choose his death as he did is confirmed, Walsh writes, by the "transformation" of his body after death, as it becomes permanently beautiful, reflecting the "essential goodness of his soul", in contrast to the death of the wizard Saruman , who had turned to evil. [ 29 ] 
+ The scholar of English literature Catherine Madsen notes the reflection of mortality in the "fading" of Middle-earth from the enormous powers like Morgoth and Elbereth that battled in the First Age. She writes that "Aragorn is a hero and a descendant of heroes, but he is brought up in hiding and given the name of Hope [Estel]; Arwen possesses the beauty of Lúthien, but she is born in the twilight of her people and her title is Evenstar; these two restore the original glories only for a little while, before the world is altered and 'fades into the light of common day ' " . [ 30 ] [ f ] Rateliff, writing on the theme of the evocation of loss in Tolkien's works, describes the 'Gift of Men' as being "to accept loss and decay as essential parts of the world" and draws parallels with other writings by Tolkien: "The Elves cling to the past and so are swept away with it; in a fallen world, acceptance of the inevitability of death is the only way to pass beyond the world's limitations, for Brendan or Niggle or Arwen." [ 21 ] 
+ "}},"i":0}}]}'> External videos 'Tolkien in Oxford' : In a 1968 BBC2 television documentary, Tolkien quoted the French philosopher Simone de Beauvoir 's thoughts on death, describing the theme of the inevitability of death as key to his work. (timestamp: 22:07–23:15) [ 31 ] 
+ The medievalist and scholar of mythology Verlyn Flieger wrote that neither the Elves nor anybody else knows where Men go to when they leave Middle-earth, and that the nearest Tolkien came to dealing with the question was in his essay On Fairy-Stories "where, after speculating that since 'fairy-stories are made by men not by fairies', they must deal with what he called the Great Escape, the escape from death. He went on to the singular assertion that 'the Human-stories of the elves are doubtless full of the Escape from Deathlessness'." [ 32 ] [ T 12 ] Flieger suggests that two of the "human stories" of Tolkien's Elves really focus on this kind of escape, the "Tale of Beren and Lúthien" and that of Aragorn and Arwen, where in both cases an elf makes her escape from deathlessness; though since Elves do not die, she questions whether the theme can be at once death and immortality. [ 32 ] Shippey comments that "the themes of the Escape from Death, and the Escape from Deathlessness, are vital parts of Tolkien's entire mythology." [ 33 ] In a 1968 broadcast on BBC2, Tolkien quoted French philosopher Simone de Beauvoir and described the inevitability of death as the "key-spring of The Lord of the Rings ". [ 31 ] <ref name=\"Lee 2018\"/>"}},"i":0}}]}'> [ g ] In their annotated and expanded edition of Tolkien's essay ( Tolkien On Fairy-stories ), Flieger and the textual scholar Douglas A. Anderson provide commentary on 'the Escape from Deathlessness' passage, referencing Tolkien's views in a 1956 letter, that:
+ The real theme [of The Lord of the Rings ] for me is ... Death and Immortality: the mystery of the love of the world in the hearts of a race [Men] 'doomed' to leave and seemingly lose it; the anguish in the hearts of a race [Elves] 'doomed' not to leave it, until its whole evil-aroused story is complete. But if you have now read Vol. III and the story of Aragorn [and Arwen], you will have perceived that. [ T 8 ] [ 34 ] 
+ See also
+ [ edit ] 
+ Born of Hope – a fan film that covers Aragorn's parents and childhood [ 35 ] 
+ Aníron - a love theme in Elvish for Aragorn and Arwen, composed and sung for the soundtrack of The Lord of the Rings film trilogy [ 36 ] 
+ The Loss and the Silence – a string quartet musical composition by Ezequiel Viñao that is titled with a quote from the tale [ 37 ] 
+ Notes
+ [ edit ] 
+ ↑ The foreword to the 1968 edition ends with the following note: "This one-volume, paperback edition of The Lord of the Rings contains the complete text of the revised edition of 1966. The index and all but one of the numerous appendices have been omitted. Though they contain much information that has proved very interesting to many readers, only a small part is necessary to the reading of the tale. They may still be found in the standard hardback edition where they occupy the last 130 pages of The Return of the King ." [ T 2 ] [ 3 ] 
+ ↑ Examples of translations of The Lord of the Rings that were published with the only appendix being the "Tale of Aragorn and Arwen" include the French translation of 1972–3 ( Le Seigneur des anneaux , Paris, Christian Bourgois), the Italian translation of 1970 ( Il signore degli anelli , Milan, Rusconi), and the Spanish translation of 1977-1980 ( El señor de los anillos , Barcelona, Ediciones Minotauro). [ 4 ] 
+ ↑ As described by Christopher Tolkien: "The original [handwritten] manuscript pages in which my father first set down this inspired passage are preserved. He wrote them so fast that without the later [typescript] text scarcely a word would be interpretable." [ T 3 ] 
+ ↑ The narrative voice and the register shifts in the tale are covered further in a paper prompted by Barkley's article. In her close analysis of the tale, Helen Armstrong examines the implications of one of the narrators of the tale being Arwen as she related the story after Aragorn's death. [ 7 ] 
+ ↑ The scholar of Germanic studies Sandra Ballif Straubhaar , in her analysis of a scene from this tale, gives another example of material being adapted for use in the Peter Jackson films. Straubhaar notes that the last words of Aragorn's mother Gilraen to her son feature twice, firstly carved on her gravestone, and secondly quoted by Elrond and Aragorn before the Paths of the Dead sequence. [ 16 ] 
+ ↑ Madsen is here quoting from William Wordsworth 's Ode on Intimations of Immortality , line 76. 
+ ↑ As described by Armstrong (1998) and Lee (2018), Tolkien stated: "human stories [are] always about one thing aren't they? Death: the inevitability of death" and then pulled a newspaper cutting from his pocket and read out the following quote from de Beauvoir's A Very Easy Death (1964): "There is no such thing as a natural death. Nothing that happens to man is ever natural, since his presence calls the whole world into question. All men must die, but for every man his death is an accident, and even if he knows it and consents to it, an unjustifiable violation." [ 7 ] [ 31 ] 
+ References
+ [ edit ] 
+ Primary
+ [ edit ] 
+ ↑ Tolkien, J. R. R. (1955). "Appendix A: Annals of the Kings and Rulers: I The Númenórean Kings: (v) Here follows a part of the tale of Aragorn and Arwen". The Return of the King . Allen & Unwin. 
+ ↑ Tolkien, J. R. R. (1968). "Foreword". The Lord of the Rings . London: George Allen & Unwin . p. 10. ISBN 0-048-23087-1 . 
+ 1 2 3 4 Tolkien, J. R. R. (1996). "The Making of Appendix A: (II) The Tale of Aragorn and Arwen". In Christopher Tolkien (ed.). The Peoples of Middle-earth . HarperCollins . pp. 262– 270. ISBN 978-0261103481 . 
+ ↑ Tolkien, J. R. R. "Prologue: Note on the Shire Records". The Fellowship of the Ring . The Thain's Book was thus the first copy made of the Red Book and contained much that was later omitted or lost. In Minas Tirith it received much annotation, and many corrections, especially of names, words and quotations in the Elvish languages; and there was added to it an abbreviated version of those parts of The Tale of Aragorn and Arwen which lie outside the account of the War. The full tale is stated to have been written by Barahir, grandson of the Steward Faramir, some time after the passing of the King. 
+ 1 2 3 4 5 Tolkien, J. R. R. "Appendix A: The Tale of Aragorn and Arwen". The Lord of the Rings . 
+ ↑ Carpenter, Humphrey , ed. (2023) [1981]. The Letters of J. R. R. Tolkien : Revised and Expanded Edition . New York: HarperCollins . #142 to R. Murray SJ, December 1953. ISBN 978-0-35-865298-4 . 
+ ↑ Carpenter, Humphrey , ed. (2023) [1981]. The Letters of J. R. R. Tolkien : Revised and Expanded Edition . New York: HarperCollins . #181 to Michael Straight, January or February 1956. ISBN 978-0-35-865298-4 . 
+ 1 2 Carpenter, Humphrey , ed. (2023) [1981]. The Letters of J. R. R. Tolkien : Revised and Expanded Edition . New York: HarperCollins . #186, p. 246. ISBN 978-0-35-865298-4 . 
+ 1 2 Tolkien, J. R. R. "Appendix B: The Tale of Years (Chronology of the Westlands)". The Lord of the Rings . 
+ ↑ Tolkien, J. R. R. (1954a). The Fellowship of the Ring . The Lord of the Rings . Boston: Houghton Mifflin . Foreword to the Second Edition. "But I cordially dislike allegory in all its manifestations, and always have done so since I grew old and wary enough to detect its presence. I much prefer history, true or feigned, with its varied applicability to the thought and experience of readers.". OCLC 9552942 . 
+ ↑ Tolkien, J. R. R. (1993). "Part Four. Athrabeth Finrod ah Andreth". In Tolkien, Christopher (ed.). Morgoth's Ring . The History of Middle-earth . Vol. 10. Boston & New York: Houghton Mifflin . pp. 303– 366. ISBN 0-395-68092-1 . 
+ ↑ Tolkien, J. R. R. (1964). " On Fairy-Stories ". Tree and Leaf . George Allen & Unwin . p. 59. 
+ Secondary
+ [ edit ] 
+ 1 2 Hammond, Wayne G. ; Scull, Christina (2006). The J.R.R. Tolkien Companion and Guide . Vol. Chronology. HarperCollins . p. 488. ISBN 978-0-618-39113-4 . 
+ 1 2 Hammond, Wayne G.; Scull, Christina (2005). The Lord of the Rings: A Reader's Companion . HarperCollins. p. 681. ISBN 978-0-00-720907-1 . 
+ ↑ Hammond, Wayne G. ; Anderson, Douglas A. (1993). J. R. R. Tolkien: A Descriptive Bibliography (2002 ed.). Delaware and London: Oak Knoll Press and The British Library . p. 142. ISBN 978-0938-76842-5 . 
+ ↑ Hammond, Wayne G. ; Anderson, Douglas A. (1993). J. R. R. Tolkien: A Descriptive Bibliography (2002 ed.). Delaware and London: Oak Knoll Press and The British Library . pp. 389– 410. ISBN 978-0938-76842-5 . 
+ ↑ Pezzini, Giuseppe (2018). "The authors of Middle Earth: Tolkien and the mystery of literary creation" (PDF) . Journal of Inklings Studies . 8 (1): 31– 64. doi : 10.3366/ink.2018.0003 . hdl : 10023/13159 . ISSN 2045-8797 . Archived (PDF) from the original on 7 May 2021 . Retrieved 5 February 2020 . 
+ ↑ Barkley, Christine (1996). "Point of View in Tolkien" . Mythlore . 21 (2): 256– 262. 
+ 1 2 Armstrong, Helen (1998). "There Are Two People in This Marriage". Mallorn . 36 : 5– 12. 
+ 1 2 Capra, Elena Sofia (2022). Matz, Alicia; Paprocki, Maciej (eds.). "Orfeo out of Care" . Thersites . 15 There and Back Again: Tolkien and the Greco–Roman World. doi : 10.34679/THERSITES.VOL15.209 . Archived from the original on 24 March 2023 . Retrieved 4 May 2023 . 
+ 1 2 3 4 5 6 Shippey, Tom (2005) [1982]. The Road to Middle-Earth (3rd ed.). Grafton ( HarperCollins ). pp. 229– 230. ISBN 978-0261102750 . 
+ 1 2 3 4 Shippey, Tom (2001). J. R. R. Tolkien: Author of the Century . HarperCollins . pp. 177– 179. ISBN 978-0261-10401-3 . 
+ 1 2 Amendt-Raduege, Amy (2018). The Sweet and the Bitter: Death and Dying in J. R. R. Tolkien's The Lord of the Rings . Kent State University Press . pp. 28– 29. ISBN 978-1-60635-305-9 . 
+ 1 2 3 4 5 Walsh, Chris (2009). "Refracted Light: Peter Jackson's The Lord of the Rings" . In Baker, Brian (ed.). Textual Revisions . University of Chester . pp. 243– 244. ISBN 978-1-908258-58-8 . 
+ 1 2 Porter, Lynnette R. (2005). Unsung Heroes of the Lord of the Rings: From the Page to the Screen . Greenwood . p. 158. ISBN 978-0-275-98521-9 . [In the film] Gimli and Legolas both present the most important coronation 'gifts' to Aragorn: his crown and his bride ... Legolas leads the contingent of elves, who, seemingly to Aragorn's surprise, have arrived to present Arwen as a bride. Thus, [they] lead Aragorn into his two greatest roles—as king and as husband/bridegroom. 
+ ↑ Fimi, Dimitra (2007). "Tolkien and Old Norse Antiquity". In Clark, David; Phelpstead, Carl (eds.). Old Norse Made New: Essays on the Post-Medieval Reception of Old Norse Literature and Culture (PDF) . London: Viking Society for Northern Research: University College London. pp. 84– 99. S2CID 163015967 . Archived from the original (PDF) on 26 February 2020. What is immediately obvious to the reader, then, is that Tolkien assigns to the North Kingdom of Gondor a crown that resembles the Crown of the South Kingdom of Egypt. Actually the two crowns look identical, save for the wings that the crown of Gondor has as an additional feature. 
+ 1 2 3 Workman, Sarah (2014). "Female Valour Without Renown: Memory, Mourning and Loss at the Center of Middle-earth". A Quest of Her Own: Essays on the Female Hero in Modern Fantasy . McFarland. pp. 87– 88. ISBN 978-1-4766-1763-3 . 
+ ↑ Straubhaar, Sandra Ballif (2005). "Gilraen's Linnod: Function, Genre, Prototypes" . Tolkien Studies . 2 : 235– 244. doi : 10.1353/tks.2005.0032 . ISSN 1547-3155 . S2CID 170378314 . 
+ 1 2 3 4 Gray, William (2009). "J. R. R. Tolkien and the Love of Faery". Fantasy, Myth and the Measure of Truth: Tales of Pullman, Lewis, Tolkien, MacDonald and Hoffmann . Palgrave Macmillan . p. 102. ISBN 978-0-230-00505-1 . OCLC 228503211 . 
+ ↑ Shippey, Tom (2005) [1982]. The Road to Middle-Earth (3rd ed.). Grafton (HarperCollins). pp. 181– 190. ISBN 978-0261102750 . 
+ ↑ Scull, Christina (2006). " 'What Did He Know and When Did He Know It?' Planning, Inspiration, and 'The Lord of the Rings' ". In Hammond, Wayne G. ; Scull, Christina (eds.). The Lord of the Rings, 1954–2004 : Scholarship in Honor of Richard E. Blackwelder . Marquette University Press . p. 107. ISBN 0-87462-018-X . OCLC 298788493 . 
+ 1 2 3 4 5 6 Bowman, Mary R. (October 2006). "The Story Was Already Written: Narrative Theory in 'The Lord of the Rings' ". Narrative . 14 (3): 272– 293. doi : 10.1353/nar.2006.0010 . JSTOR 20107391 . S2CID 162244172 . 
+ 1 2 3 4 Rateliff, John D. (2006). " 'And All the Days of Her Life Are Forgotten': 'The Lord of the Rings' as Mythic Prehistory". In Hammond, Wayne G. ; Scull, Christina (eds.). The Lord of the Rings, 1954–2004: Scholarship in Honor of Richard E. Blackwelder . Marquette University Press . pp. 67– 100. ISBN 0-87462-018-X . OCLC 298788493 . 
+ ↑ Kocher, Paul H. (1974) [1972]. Master of Middle-earth: The Achievement of J.R.R. Tolkien . Penguin Books. pp. 14– 15. ISBN 0140038779 . 
+ ↑ Burns, Marjorie (2006). "King and Hobbit: the exalted and lowly in Tolkien's created worlds". In Hammond, Wayne G.; Scull, Christina (eds.). The Lord of the Rings, 1954–2004: Scholarship in Honor of Richard E. Blackwelder . Marquette University Press . pp. 149– 150. ISBN 0-87462-018-X . OCLC 298788493 . 
+ 1 2 3 4 West, Richard C. (2006). " 'Her Choice Was Made and Her Doom Appointed': Tragedy and Divine Comedy in the Tale of Aragorn and Arwen". In Hammond, Wayne G.; Scull, Christina (eds.). The Lord of the Rings, 1954–2004: Scholarship in Honor of Richard E. Blackwelder . Marquette University Press . pp. 317– 329. ISBN 0-87462-018-X . OCLC 298788493 . 
+ ↑ Davis, Bill (2013). "Choosing to Die: The Gift of Mortality in Middle-earth" . In Bassham, Gregory; Bronson, Eric (eds.). The Lord of the Rings and Philosophy: One Book to Rule Them All . Open Court . pp. 123– 136. ISBN 978-0-8126-9806-0 . 
+ ↑ Bowers, John M. (2019). Tolkien's Lost Chaucer . Oxford University Press . pp. 244– 245. ISBN 9780198842675 . 
+ ↑ Vaninskaya, Anna (2020). "J. R. R. Tolkien: More Than Memory". Fantasies of time and death: Dunsany, Eddison, Tolkien . Palgrave Macmillan . pp. 153– 228. ISBN 978-1-137-51837-8 . OCLC 1134852757 . 
+ ↑ Garbowski, Christopher (2006). "Death". In Drout, Michael D. C. (ed.). J.R.R. Tolkien Encyclopedia: Scholarship and Critical Assessment . Routledge . pp. 119– 120. ISBN 1-135-88034-4 . 
+ 1 2 3 4 Walsh, Germaine Paulo (2015). "Philosophic Poet: J.R.R. Tolkien's Modern Response to an Ancient Quarrel". In Wood, Ralph C. (ed.). Tolkien Among the Moderns . University of Notre Dame Press . pp. 30– 31. ISBN 978-0-268-15854-5 . 
+ ↑ Madsen, Catherine (2004). " 'Light from an Invisible Lamp': Natural Religion in The Lord of the Rings ". In Chance, Jane (ed.). Tolkien and the Invention of Myth: A Reader . Lexington: University Press of Kentucky . p. 42. ISBN 0-8131-2301-1 . OCLC 54938267 . 
+ 1 2 3 Lee, Stuart D. (2018). " 'Tolkien in Oxford' (BBC, 1968): A Reconstruction" . Tolkien Studies . 15 : 115– 176. doi : 10.1353/tks.2018.0008 . ISSN 1547-3155 . S2CID 171785254 . Archived from the original on 22 October 2020 . Retrieved 28 August 2020 . 
+ 1 2 Flieger, Verlyn (2005). Interrupted Music: The Making of Tolkien's Mythology . Kent State University Press . p. 46. ISBN 978-0-87338-824-5 . 
+ ↑ Shippey, Tom (2005). "Another road to Middle-earth: Jackson's movie trilogy" . In Isaacs, Neil D.; Zimbardo, Rose A. (eds.). Understanding "The Lord of the Rings": The Best of Tolkien Criticism . Houghton Mifflin Harcourt . p. 242. ISBN 0-618-42253-6 . 
+ ↑ Tolkien, J. R. R. (2008). Flieger, Verlyn ; Anderson, Douglas A. (eds.). Tolkien On Fairy-stories . HarperCollins . p. 119 . ISBN 978-0-00-724466-9 . 
+ ↑ Alberto, Maria (2016). " "The effort to translate": Fan Film Culture and the Works of J.R.R. Tolkien" . Journal of Tolkien Research . 3 (3). Archived from the original on 8 November 2020 . Retrieved 6 February 2020 . 
+ ↑ Donnelly, K. J. (2006). "Musical Middle Earth". In Mathijs, Ernest (ed.). The Lord of the Rings: Popular Culture in Global Context . Columbia University Press . p. 309. ISBN 978-1-90476-482-3 . 
+ ↑ Pincus, Andrew L. (4 July 2006). "Juilliard serves a musical stew" . The Berkshire Eagle . 
+ v 
+ t 
+ e 
+ The Lord of the Rings 
+ J. R. R. Tolkien 
+ Constructing The Lord of the Rings 
+ About 
+ Volumes
+ The Fellowship of the Ring 
+ The Two Towers 
+ The Return of the King 
+ Stories
+ " The Shadow of the Past "
+ " The Council of Elrond "
+ " The Scouring of the Shire "
+ " The Tale of Aragorn and Arwen "
+ Translating 
+ list 
+ Swedish 
+ Reception
+ Impact 
+ Literary 
+ Fandom 
+ Fan fiction 
+ Oxonmoot 
+ Tolkienmoot 
+ Works inspired 
+ Tolkien's impact on fantasy 
+ Annotation
+ A Reader's Companion 
+ Elements 
+ Languages 
+ Black Speech 
+ Elvish 
+ Quenya 
+ Sindarin 
+ Khuzdul 
+ Westron 
+ Poetry 
+ A Elbereth Gilthoniel 
+ Namárië 
+ Song of Eärendil 
+ The Man in the Moon Stayed Up Too Late 
+ The Road Goes Ever On 
+ A Walking Song 
+ Other 
+ Artwork 
+ Family trees 
+ Heraldry 
+ Maps 
+ Proverbs 
+ Scripts 
+ Cirth 
+ Tengwar 
+ Analysis 
+ Themes 
+ Addiction to power 
+ Ancestry as guide to character 
+ Architecture 
+ Company of the Ring 
+ Death and immortality 
+ Decline and fall 
+ Divination 
+ Dreams and visions 
+ Economy 
+ England 
+ Environmentalism 
+ Evil 
+ Feudal allegiance 
+ Forests 
+ Geology 
+ Hell 
+ Heroism 
+ Luck and fate 
+ Magic 
+ Mental illness 
+ Moral dilemma 
+ Music 
+ Naming of weapons 
+ Northern courage 
+ Paganism 
+ Plants 
+ Prophecy 
+ Psychological journeys 
+ Quests 
+ Race 
+ Sexuality 
+ Sound and language 
+ Time 
+ Trees 
+ Women 
+ Influences 
+ Antiquarianism 
+ Beowulf 
+ Celtic 
+ Christianity 
+ Classical world 
+ Edwardian adventure stories 
+ First World War 
+ Norse 
+ Medieval 
+ Modern sources 
+ Modernism 
+ William Morris 
+ A mythology for England 
+ Philology 
+ Shakespeare 
+ Techniques 
+ Anachronism 
+ Character pairing 
+ Editorial framing 
+ Frame stories 
+ Pseudotranslation 
+ Impression of depth 
+ Narrative structure 
+ Interlacing 
+ Storytelling 
+ Prose style 
+ Ambiguity 
+ Epic Pooh 
+ Peoples 
+ Maiar 
+ Balrogs 
+ Sauron 
+ Wizards 
+ Gandalf 
+ Radagast 
+ Saruman 
+ Free
+peoples 
+ Dwarves 
+ Balin 
+ Gimli 
+ Elves 
+ Galadriel 
+ Glorfindel 
+ Half-elven 
+ Arwen 
+ Elrond 
+ Legolas 
+ Thranduil 
+ Ents 
+ Treebeard 
+ Hobbits 
+ Bilbo 
+ Frodo 
+ Merry 
+ Pippin 
+ Sam 
+ Men 
+ Beornings 
+ Drúedain 
+ Dúnedain 
+ Aragorn 
+ of Gondor 
+ Boromir 
+ Denethor 
+ Faramir 
+ of Rohan 
+ Éomer 
+ Éowyn 
+ Théoden 
+ Wormtongue 
+ Monsters 
+ Barrow-wight 
+ Gollum 
+ Nazgûl 
+ Witch-king of Angmar 
+ Old Man Willow 
+ Orcs 
+ Shelob 
+ Trolls 
+ Wargs 
+ Watcher in the Water 
+ Other 
+ Eagles 
+ Goldberry 
+ Tom Bombadil 
+ World 
+ Geography 
+ Middle-earth 
+ Eriador
+ Bree 
+ Old Forest 
+ Rivendell 
+ The Shire 
+ Bag End 
+ Gondor 
+ Minas Tirith 
+ Harad 
+ Lothlórien 
+ Mirkwood 
+ Moria 
+ Mordor 
+ Rohan 
+ Isengard 
+ Undying Lands 
+ Battles 
+ Helm's Deep 
+ Pelennor Fields 
+ Morannon 
+ Things 
+ Mithril 
+ Oliphaunts 
+ Palantírs 
+ Phial of Galadriel 
+ Rings of Power 
+ One Ring 
+ List of weapons and armour 
+ Related
+works 
+ The Hobbit 
+ The Adventures of Tom Bombadil 
+ Errantry 
+ Fastitocalon 
+ The Sea-Bell 
+ Donald Swann 
+ The Road Goes Ever On 
+ Bilbo's Last Song 
+ The Silmarillion 
+ Unfinished Tales 
+ The Letters of J. R. R. Tolkien 
+ The History of Middle-earth 
+ The Children of Húrin 
+ The History of The Hobbit 
+ Beren and Lúthien 
+ The Fall of Gondolin 
+ The Nature of Middle-earth 
+ Adaptations and derivative works 
+ Books 
+ Bored of the Rings (1969)
+ The Last Ringbearer (1999)
+ Muddle Earth (2003)
+ Illustrations 
+ A Map of Middle-earth 
+ Pauline Baynes 
+ Barbara Remington 
+ John Howe 
+ Alan Lee 
+ Margrethe II of Denmark 
+ Ted Nasmith 
+ Theatre 
+ Fellowship! (2005)
+ The Lord of the Rings (2006)
+ Music 
+ Bo Hansson 
+ Music Inspired by Lord of the Rings (1972)
+ Johan de Meij 
+ Symphony No. 1 The Lord of the Rings (1988)
+ Led Zeppelin 
+ " Ramble On " (1969)
+ " Misty Mountain Hop " (1971)
+ " The Battle of Evermore " (1971)
+ Radio 
+ The Lord of the Rings ( BBC , 1955)
+ The Lord of the Rings ( NPR , 1979)
+ Hordes of the Things (1980)
+ The Lord of the Rings (BBC, 1981)
+ Der Herr der Ringe (1992)
+ Film 
+ Animated 
+ The Lord of the Rings ( Bakshi , 1978)
+ The Return of the King ( Rankin/Bass , 1980)
+ The War of the Rohirrim ( Kamiyama , 2024)
+ Peter Jackson
+series 
+ The Fellowship of the Ring (2001)
+ The Two Towers (2002)
+ The Return of the King (2003)
+ Music 
+ " Concerning Hobbits "
+ " Into the West "
+ " May It Be "
+ The Music of the Lord of the Rings Films (2010 book)
+ Approach 
+ Production 
+ Hobbiton Movie Set 
+ Peter Jackson's interpretation 
+ Picturing Tolkien 
+ Tolkien on Film 
+ Other 
+ Sagan om ringen (1971)
+ Khraniteli (1991)
+ Hobitit (1993)
+ The Rings of Power (2022)
+ music 
+ The Hunt for Gollum (2027)
+ Fan-made 
+ The Hunt for Gollum (2009)
+ Born of Hope (2009)
+ Video games 
+ Journey to Rivendell 
+ Game One 
+ Game Two: Shadows of Mordor 
+ War in Middle Earth 
+ Vol. I (1990) 
+ Vol. I (SNES) 
+ Riders of Rohan 
+ Elendor 
+ Vol. II: The Two Towers 
+ The Fellowship of the Ring 
+ The Two Towers 
+ The Return of the King 
+ War of the Ring 
+ The Third Age 
+ GBA 
+ The Battle for Middle-earth 
+ Tactics 
+ The Battle for Middle-earth II 
+ The Rise of the Witch-king 
+ Conquest 
+ Aragorn's Quest 
+ War in the North 
+ Lego The Lord of the Rings 
+ Guardians of Middle-earth 
+ Shadow of Mordor 
+ Shadow of War 
+ Gollum 
+ Return to Moria 
+ The Lord of the Rings Online 
+ Mines of Moria 
+ Siege of Mirkwood 
+ Rise of Isengard 
+ Riders of Rohan 
+ Helm's Deep 
+ Mordor 
+ Minas Morgul 
+ War of Three Peaks 
+ Fate of Gundabad 
+ Before the Shadow 
+ Tabletop role-
+playing games 
+ Middle-earth Role Playing 
+ The Lord of the Rings Roleplaying Game 
+ The One Ring Roleplaying Game 
+ Adventures in Middle-earth 
+ Board games 
+ Middle Earth 
+ War of the Ring 
+ Gondor: The Siege of Minas Tirith 
+ Sauron 
+ Lord of the Rings 
+ War of the Ring 
+ Card games 
+ Middle-earth Collectible Card Game 
+ The Lord of the Rings Trading Card Game 
+ The Lord of the Rings: The Card Game 
+ Other games 
+ Middle-earth Strategy Battle Game 
+ Lego The Lord of the Rings 
+ v 
+ t 
+ e 
+ Middle-earth 
+ J. R. R. Tolkien 
+ Bibliography 
+ Canon 
+ Legendarium 
+ Outline 
+ Works 
+ In Tolkien's
+lifetime 
+ The Hobbit (1937)
+ The Lord of the Rings (1954–55)
+ The Fellowship of the Ring 
+ " The Shadow of the Past "
+ " The Council of Elrond "
+ The Two Towers 
+ The Return of the King 
+ " The Scouring of the Shire "
+ " The Tale of Aragorn and Arwen "
+ The Adventures of Tom Bombadil (1962)
+ Posthumous 
+ The Silmarillion (1977)
+ " Ainulindalë "
+ Unfinished Tales (1980)
+ The Letters of J. R. R. Tolkien (1981)
+ Bilbo's Last Song (1990)
+ The three "Great Tales"
+ The Children of Húrin (2007)
+ Beren and Lúthien (2017)
+ The Fall of Gondolin (2018)
+ The Fall of Númenor (2022)
+ History of
+composition 
+ History of
+Middle-earth 
+ [1–2] The Book of Lost Tales (1983–84)
+ Ælfwine 
+ [3] The Lays of Beleriand (1985)
+ [4] The Shaping of Middle-earth (1986)
+ [5] The Lost Road and Other Writings (1987)
+ The Etymologies 
+ Lhammas 
+ [6–9] The History of The Lord of the Rings (1988–1992)
+ The Notion Club Papers 
+ [10] Morgoth's Ring (1993)
+ [11] The War of the Jewels (1994)
+ [12] The Peoples of Middle-earth (1996)
+ Others 
+ John D. Rateliff 
+ The History of The Hobbit (2007)
+ Carl F. Hostetter 
+ The Nature of Middle-earth (2021)
+ Fictional
+universe 
+ Peoples ,
+ monsters 
+ Ainur 
+ Maiar 
+ Balrogs 
+ Wizards 
+ Valar 
+ Dragons 
+ Ancalagon 
+ Smaug 
+ Dwarves 
+ Eagles 
+ Elves 
+ Half-elven 
+ Noldor 
+ Sundering 
+ Ents 
+ Hobbits 
+ Men 
+ Beornings 
+ Drúedain 
+ Dúnedain 
+ Orcs 
+ Trolls 
+ Characters 
+ First and Second Ages
+ Celebrimbor 
+ Eärendil and Elwing 
+ Elendil 
+ Fëanor 
+ Fingolfin 
+ Finwë and Míriel 
+ Gil-galad 
+ Húrin 
+ Isildur 
+ Lúthien and Beren 
+ Melian 
+ Morgoth 
+ Thingol 
+ Tuor and Idril 
+ Túrin Turambar 
+ Ungoliant 
+ Third Age
+ Elrond 
+ Galadriel 
+ Gandalf 
+ Glorfindel 
+ Goldberry 
+ Gollum 
+ Saruman 
+ Sauron 
+ Tom Bombadil 
+ Places 
+ First and Second Ages
+ Beleriand 
+ Númenor 
+ Valinor 
+ Third Age
+ Bree 
+ Esgaroth 
+ Gondor 
+ Harad 
+ Isengard 
+ Lonely Mountain 
+ Lothlórien 
+ Mirkwood 
+ Mordor 
+ Moria 
+ Rivendell 
+ Rohan 
+ The Shire 
+ Bag End 
+ Objects 
+ Mithril 
+ Palantír 
+ Red Book of Westmarch 
+ Rings of Power 
+ One Ring 
+ Silmarils 
+ Two Trees of Valinor 
+ List of weapons and armour 
+ Analysis 
+ Elements 
+ Artwork 
+ Family trees 
+ Heraldry 
+ Languages 
+ Adûnaic 
+ Black Speech 
+ Elvish 
+ Quenya 
+ Sindarin 
+ Khuzdul 
+ Valarin 
+ Westron 
+ Maps 
+ Tolkien's poetry 
+ Scripts 
+ Cirth 
+ Sarati 
+ Tengwar 
+ Themes 
+ Anachronism 
+ Ancestry as guide to character 
+ Architecture 
+ Christianity 
+ Cosmology 
+ Round World dilemma 
+ Death and immortality 
+ Decline and fall 
+ Dreams and visions 
+ Economy 
+ England 
+ Environmentalism 
+ Evil 
+ First World War 
+ Forests 
+ Frame stories 
+ Hell 
+ Heroism 
+ Light 
+ Luck and fate 
+ Magic 
+ Mental illness 
+ Modernism 
+ Moral dilemma 
+ Music 
+ Naming of weapons 
+ Northern courage 
+ Old Straight Road 
+ Paganism 
+ Plants 
+ Psychological journeys 
+ Quests 
+ Sound and language 
+ Time 
+ Trees 
+ Literary 
+ Tolkien's impact on fantasy 
+ Influences 
+ Beowulf 
+ Celtic 
+ Classical world 
+ Finnish language and literature 
+ Medieval 
+ Modern 
+ William Morris 
+ Norse 
+ Philology 
+ Shakespeare 
+ Prose style 
+ Ambiguity 
+ A mythology for England 
+ Geographic 
+ Geology 
+ The Atlas of Middle-earth 
+ Journeys of Frodo 
+ A Map of Middle-earth 
+ Adaptations,
+legacy 
+ Illustrators 
+ Pauline Baynes 
+ Cor Blok 
+ Anke Eißmann 
+ Brothers Hildebrandt 
+ Jenny Dolfen 
+ Mary Fairburn 
+ Donato Giancola 
+ John Howe 
+ Tove Jansson 
+ Alexander Korotich 
+ Alan Lee 
+ Tom Loback 
+ Margrethe II of Denmark 
+ Ted Nasmith 
+ Composers 
+ Bo Hansson 
+ Music Inspired by Lord of the Rings 
+ Leonard Rosenman 
+ Music of The Lord of the Rings , 1978 
+ Johan de Meij 
+ Symphony No. 1 The Lord of the Rings 
+ Howard Shore 
+ Music of The Lord of the Rings film series 
+ Music of The Hobbit film series 
+ Music of The Rings of Power TV series 
+ Bear McCreary 
+ Music of The Rings of Power TV series 
+ Stephen Gallagher
+ Music of The Lord of the Rings: The War of the Rohirrim 
+ Blind Guardian 
+ Nightfall in Middle-Earth 
+ Settings 
+ Donald Swann 
+ The Road Goes Ever On 
+ Poems and Songs of Middle Earth 
+ The Tolkien Ensemble 
+ An Evening in Rivendell 
+ A Night in Rivendell 
+ At Dawn in Rivendell 
+ Leaving Rivendell 
+ Other media 
+ Impact 
+ Middle-earth Enterprises 
+ Works inspired by Tolkien 
+ Fan fiction 
+ Film 
+ Calendars 
+ Video games 
+ Things named after Tolkien and his works 
+ Literary
+criticism 
+ The Complete Guide to Middle-earth 
+ A Companion to J. R. R. Tolkien 
+ Interrupted Music 
+ Master of Middle-Earth 
+ Picturing Tolkien 
+ A Question of Time 
+ J. R. R. Tolkien: Author of the Century 
+ The J. R. R. Tolkien Companion and Guide 
+ J. R. R. Tolkien Encyclopedia 
+ The Lord of the Rings: A Reader's Companion 
+ Perilous Realms 
+ The Road to Middle-Earth 
+ Splintered Light 
+ Tolkien and the Invention of Myth 
+ Tolkien's Art: 'A Mythology for England' 
+ Tolkien: A Look Behind The Lord of the Rings 
+ A Tolkien Compass 
+ Tolkien: Maker of Middle-earth 
+ Tolkien, Race and Cultural History 
+ Tolkien's Legendarium 
+ Tolkien and the Great War 
+ The Worlds of J. R. R. Tolkien 
+ The Ring of Words: Tolkien and the Oxford English Dictionary 
+ Retrieved from " https://en.wikipedia.org/w/index.php?title=The_Tale_of_Aragorn_and_Arwen&oldid=1362579698 "
+ Categories : The Lord of the Rings 
+ British short stories 
+ 1955 short stories 
+ 1955 English-language short stories 
+ Hidden categories: Articles with short description 
+ Short description is different from Wikidata 
+ Good articles 
+ Use dmy dates from April 2022 
+ Use British English from May 2022 
+ All Wikipedia articles written in British English 
+ CS1: long volume value 
+ Articles containing Middle English (1100-1500)-language text 
+ Articles containing Latin-language text 
+ This page was last edited on 4 July 2026, at 22:14 (UTC) .
+ Page was rendered with Parsoid .
+ Text is available under the Creative Commons Attribution-ShareAlike 4.0 License ;
+additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy . Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc. , a non-profit organization.
+ Privacy policy 
+ About Wikipedia 
+ Disclaimers 
+ Contact Wikipedia 
+ Legal & safety contacts 
+ Code of Conduct 
+ Developers 
+ Statistics 
+ Cookie statement 
+ Mobile view 
+ Search 
+ Search 
+ Toggle the table of contents 
+ The Tale of Aragorn and Arwen 
+ 5 languages 
+ Add topic 
+ 

@@ -1,0 +1,84 @@
+{
+ "tolkien": {
+  "angles": [],
+  "extras": [],
+  "droppedForFound": []
+ },
+ "martin": {
+  "angles": [],
+  "extras": [
+   "reception",
+   "scholarship",
+   "measurement",
+   "editorial-ownwords",
+   "closereading"
+  ],
+  "droppedForFound": []
+ },
+ "dnd": {
+  "angles": [
+   "close"
+  ],
+  "extras": [
+   "place-register",
+   "usability-school",
+   "scholarship-history"
+  ],
+  "droppedForFound": [
+   "house-style-2019"
+  ]
+ },
+ "ai": {
+  "angles": [],
+  "extras": [
+   "steerability-mechanism",
+   "counter-cases",
+   "critics-direct"
+  ],
+  "droppedForFound": [
+   "peer-reviewed-absentees",
+   "games-practice"
+  ]
+ },
+ "kay": {
+  "angles": [
+   "academic",
+   "craft",
+   "voice",
+   "close"
+  ],
+  "extras": [],
+  "droppedForFound": []
+ },
+ "leguin": {
+  "angles": [
+   "craft",
+   "voice",
+   "close"
+  ],
+  "extras": [],
+  "droppedForFound": []
+ },
+ "wolfe": {
+  "angles": [
+   "academic",
+   "craft",
+   "close"
+  ],
+  "extras": [],
+  "droppedForFound": [
+   "voice"
+  ]
+ },
+ "hobb": {
+  "angles": [
+   "academic",
+   "craft",
+   "close"
+  ],
+  "extras": [],
+  "droppedForFound": [
+   "voice"
+  ]
+ }
+}

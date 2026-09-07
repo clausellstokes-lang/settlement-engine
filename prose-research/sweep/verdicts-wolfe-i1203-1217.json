@@ -1,0 +1,315 @@
+{
+ "name": "wolfe",
+ "chunk": 31,
+ "claims": [
+  {
+   "index": 1203,
+   "feature": "point of view and distance",
+   "claim": "Asked about the unreliability of his narrators, Wolfe answered that they are all unreliable.",
+   "source": "Gene Wolfe, interviewed by Jason Pontin, MIT Technology Review, 2014-07-25",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "quote": "unreliable. Well, we all are",
+   "page": "section 'Unreliable narrators and craft'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-07-25",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1204,
+   "feature": "other: difficulty as design",
+   "claim": "Wolfe stated that an author who makes everything easy for himself bores the reader.",
+   "source": "Gene Wolfe, interviewed by Jason Pontin, MIT Technology Review, 2014-07-25",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "quote": "make everything easy for yourself as an author, you bore",
+   "page": "section 'Unreliable narrators and craft'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-07-25",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1205,
+   "feature": "per-speaker register",
+   "claim": "Wolfe described his epistolary novel as one whose style changes from one letter writer to another.",
+   "source": "Gene Wolfe, interviewed by Jason Pontin, MIT Technology Review, 2014-07-25",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "quote": "the style changes from one letter writer to another",
+   "page": "answer recommending The Sorcerer's House",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-07-25",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "herald-pools",
+   "confidence": "high"
+  },
+  {
+   "index": 1206,
+   "feature": "register modulation",
+   "claim": "Wolfe attributed the loosening of his later prose to criticism that he was unreadable and overcomplex.",
+   "source": "Gene Wolfe, interviewed by Jason Pontin, MIT Technology Review, 2014-07-25",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "quote": "gotten so much criticism for being unreadable and overcomplex",
+   "page": "answer on his prose becoming looser",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-07-25",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1207,
+   "feature": "register modulation",
+   "claim": "Pontin characterises the later prose as looser, with shorter paragraphs and more reliance on dialogue.",
+   "source": "Jason Pontin, interviewer, MIT Technology Review, 2014-07-25",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "quote": "the paragraphs are shorter, you rely more on dialogue",
+   "page": "question on his prose becoming looser",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2014-07-25",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1208,
+   "feature": "omission as information",
+   "claim": "Wolfe singled out for praise a detail Wells mentions only in passing, that the narrator never learned the name of the sailor in the boat.",
+   "source": "Gene Wolfe, interviewed by Jason Pontin, MIT Technology Review, 2014-07-25",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "quote": "he never learned the name of the sailor",
+   "page": "answer on rereading The Island of Doctor Moreau",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-07-25",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1209,
+   "feature": "plainness and economy",
+   "claim": "Gary K. Wolfe describes the prose as precise and evocative.",
+   "source": "Gary K. Wolfe, review of 'The Dead Man and Other Horror Stories', Locus",
+   "url": "https://locusmag.com/review/gary-k-wolfe-reviews-the-dead-man-and-other-horror-stories-by-gene-wolfe/",
+   "quote": "prose that is precise and evocative",
+   "page": "closing paragraph",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1210,
+   "feature": "per-speaker register",
+   "claim": "Gary K. Wolfe describes a range of narrating voices running from vernacular rhythms to measured cadences.",
+   "source": "Gary K. Wolfe, review of 'The Dead Man and Other Horror Stories', Locus",
+   "url": "https://locusmag.com/review/gary-k-wolfe-reviews-the-dead-man-and-other-horror-stories-by-gene-wolfe/",
+   "quote": "the vernacular rhythms of good old boys to the measured cadences",
+   "page": "closing paragraph",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "herald-pools",
+   "confidence": "high"
+  },
+  {
+   "index": 1211,
+   "feature": "point of view and distance",
+   "claim": "Gary K. Wolfe says the framing devices remind the reader these are told tales and introduce layers of narrative slippage.",
+   "source": "Gary K. Wolfe, review of 'The Dead Man and Other Horror Stories', Locus",
+   "url": "https://locusmag.com/review/gary-k-wolfe-reviews-the-dead-man-and-other-horror-stories-by-gene-wolfe/",
+   "quote": "remind us that these are told tales, but also introduce layers",
+   "page": "paragraph on framing devices",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1212,
+   "feature": "civic record register",
+   "claim": "Gary K. Wolfe lists the document types Wolfe uses as frames, among them a mysterious pamphlet found in a library.",
+   "source": "Gary K. Wolfe, review of 'The Dead Man and Other Horror Stories', Locus",
+   "url": "https://locusmag.com/review/gary-k-wolfe-reviews-the-dead-man-and-other-horror-stories-by-gene-wolfe/",
+   "quote": "a mysterious pamphlet found in a library",
+   "page": "paragraph on framing devices",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1213,
+   "feature": "per-speaker register",
+   "claim": "Gary K. Wolfe calls the narrator's own voice almost pointedly flat and restricted.",
+   "source": "Gary K. Wolfe, review of 'Interlibrary Loan', Locus",
+   "url": "https://locusmag.com/review/gary-k-wolfe-reviews-interlibrary-loan-by-gene-wolfe/",
+   "quote": "own voice is almost pointedly flat and restricted",
+   "page": "third paragraph",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1214,
+   "feature": "per-speaker register",
+   "claim": "Gary K. Wolfe reports that the reclone characters are prohibited in the story from developing their own voices.",
+   "source": "Gary K. Wolfe, review of 'Interlibrary Loan', Locus",
+   "url": "https://locusmag.com/review/gary-k-wolfe-reviews-interlibrary-loan-by-gene-wolfe/",
+   "quote": "prohibited from developing their own voices",
+   "page": "third paragraph",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "herald-pools",
+   "confidence": "high"
+  },
+  {
+   "index": 1215,
+   "feature": "register modulation",
+   "claim": "Gary K. Wolfe judges the late novels more intimate in scope and more restrained in style than the celebrated masterpieces.",
+   "source": "Gary K. Wolfe, review of 'Interlibrary Loan', Locus",
+   "url": "https://locusmag.com/review/gary-k-wolfe-reviews-interlibrary-loan-by-gene-wolfe/",
+   "quote": "more intimate in scope and restrained in style than his celebrated masterpieces",
+   "page": "final sentence",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1216,
+   "feature": "withheld information and inference",
+   "claim": "Gary K. Wolfe notes that parts of the story are recounted by characters whose veracity the reader has reason to question.",
+   "source": "Gary K. Wolfe, review of 'Interlibrary Loan', Locus",
+   "url": "https://locusmag.com/review/gary-k-wolfe-reviews-interlibrary-loan-by-gene-wolfe/",
+   "quote": "characters whose veracity we have plenty of reason to question",
+   "page": "third paragraph",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1217,
+   "feature": "point of view and distance",
+   "claim": "Beck reports the narrator reads as emotionally flat, detached, clinical and morally inconsistent, and argues that this fits his training.",
+   "source": "Don Beck, 'Structure of the New Sun', The Reading Room (Substack), 2025-06-03",
+   "url": "https://donbeck1.substack.com/p/structure-of-the-new-sun",
+   "quote": "detached, clinical, and morally inconsistent",
+   "page": "section Three Techniques, second technique",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2025-06-03",
+   "routeHint": "live fetch with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1203,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"They're all unreliable. Well, we all are\" (Q&A body)",
+   "note": "Section heading 'UNRELIABLE NARRATORS AND CRAFT' present. Bold = interviewer, plain = Wolfe in the page markup; Pontin's prompt 'A persistent theme of your writing is the unreliability of narrators' is bold, Wolfe's reply plain, with 'all' italicised. Quote is a contiguous verbatim substring. Raw HTML fetched with a browser UA (200)."
+  },
+  {
+   "index": 1204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"make everything easy for yourself as an author, you bore\"",
+   "note": "Same section; the full line ends 'the reader'. Confirmed as Wolfe's answer (plain paragraph) following the bold interviewer line about setting himself difficult technical challenges. Raw page reached."
+  },
+  {
+   "index": 1205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the style changes from one letter writer to another\"",
+   "note": "In Wolfe's answer recommending The Sorcerer's House as an entry point; he calls it an epistolary novel in the same answer, so the 'his epistolary novel' limb holds. Raw page reached."
+  },
+  {
+   "index": 1206,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"so much criticism for being unreadable and overcomplex\"",
+   "note": "Wolfe's answer to the interviewer's 'prose has become looser' question; he opens 'It's not that, really' (rejecting the professional-writer cause, not the looseness) and closes by saying he thought he would loosen up, which supports the attribution limb. Raw page reached."
+  },
+  {
+   "index": 1207,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the paragraphs are shorter, you rely more on dialogue\"",
+   "note": "Appears inside a bold interviewer paragraph, i.e. Pontin (bylined author) not Wolfe, as the claim states; the same sentence says the prose 'has become looser' and the tone less poetic. Raw page reached."
+  },
+  {
+   "index": 1208,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"he never learned the name of the sailor\"",
+   "note": "In Wolfe's answer about rereading The Island of Dr. Moreau at about fifty; the page says the narrator mentions it 'just in passing', and the surrounding praise limb rests on Wolfe's 'hitting me like a brick' / 'too dumb to appreciate it as a boy'. Strictly the page attributes the passing mention to the narrator rather than to Wells by name. Raw page reached."
+  },
+  {
+   "index": 1209,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"prose that is precise and evocative\"",
+   "note": "Final body paragraph of the review, in the clause about Wolfe's ability to draw readers into disorienting tales. Raw locusmag page reached (200)."
+  },
+  {
+   "index": 1210,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"vernacular rhythms of good old boys to the measured cadences\"",
+   "note": "Same final body sentence as 1209; the range ends 'of Victorian gentlemen' and is introduced as voices that range across the collection. Raw page reached."
+  },
+  {
+   "index": 1211,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"remind us that these are told tales, but also introduce layers\"",
+   "note": "Framing-devices paragraph (second body paragraph). Page hedges the phrase as layers of *possible* narrative slippage; the claim drops 'possible' but adds nothing the page denies, and the next sentence calls Wolfe's narrators famously tricky. Raw page reached."
+  },
+  {
+   "index": 1212,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a mysterious pamphlet found in a library\"",
+   "note": "Same framing-devices paragraph; the page attaches it to 'Why I Was Hanged' and lists it alongside a manuscript found in a grave and a journal-and-audiotape log. One list item ('a story passed on by an old friend') is not a document type, so 'document types' is a slight generalisation of the list. Raw page reached."
+  },
+  {
+   "index": 1213,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"own voice is almost pointedly flat and restricted\"",
+   "note": "Third body paragraph; the page names the narrator (Smithe) and follows with his line about having to talk the way the first Ern A. Smithe wrote exposition. Raw locusmag page reached (200)."
+  },
+  {
+   "index": 1214,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"prohibited from developing their own voices\"",
+   "note": "Same paragraph, of the reclones; the page adds that they are also prohibited from writing new books and gives the Western author's B-movie slang as the illustration. Raw page reached."
+  },
+  {
+   "index": 1215,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"more intimate in scope and restrained in style\"",
+   "note": "Final sentence of the review; the page reads 'like most of Wolfe's final novels' and ends 'than his celebrated masterpieces', supporting both the late-novels and the comparison limbs. Raw page reached."
+  },
+  {
+   "index": 1216,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"characters whose veracity we have plenty of reason to question\"",
+   "note": "Opening clause of the third body paragraph, prefaced 'as is often the case with Wolfe, parts of the story are recounted by'. Raw page reached."
+  },
+  {
+   "index": 1217,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"emotionally flat—detached, clinical, and morally inconsistent\"",
+   "note": "Section 'Three Techniques', second technique, on the voice and character of Severian. Beck adds 'But that fits. He's a man raised to torture, clinically trained to suppress empathy', which supports the training limb; the page treats Severian as the teller ('he tells us he'll back into the throne') rather than using the word narrator. Raw substack HTML fetched with a browser UA (200); body text read from the page markup, not a summary."
+  }
+ ]
+}

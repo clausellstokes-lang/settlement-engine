@@ -1,0 +1,234 @@
+{
+ "name": "wolfe",
+ "chunk": 8,
+ "claims": [
+  {
+   "index": 120,
+   "feature": "lost object as buried guilt",
+   "claim": "The Boy Scout knife that Weer can never locate, and the pun in 'my den, where I now never go', carry double meanings the narrator does not acknowledge.",
+   "source": "The Solute 2017",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "quote": "my den, where I now never go",
+   "page": ""
+  },
+  {
+   "index": 121,
+   "feature": "digression as postponement",
+   "claim": "The layered tales let Weer escape: as long as he keeps telling stories he need not face what comes next.",
+   "source": "The Solute 2017",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "quote": "as long as Weer keeps telling stories",
+   "page": ""
+  },
+  {
+   "index": 122,
+   "feature": "scrupulously honest up to a point",
+   "claim": "Gaiman's remark, quoted here, that Wolfe's narrators are scrupulously honest but only up to a point.",
+   "source": "The Solute 2017 (quoting Gaiman)",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "quote": "scrupulously honest, but only up to a point",
+   "page": ""
+  },
+  {
+   "index": 123,
+   "feature": "perfect-memory claim contradicted",
+   "claim": "Weer prides himself on remembering everything yet cannot remember the librarian's name, a self-contradiction the text leaves standing.",
+   "source": "Fernandes, Reactor 2019",
+   "url": "https://reactormag.com/peace-wolfes-masterful-rumination-on-nostalgia-memory-and-uncertainty/",
+   "quote": "I who pride myself upon remembering everything",
+   "page": ""
+  },
+  {
+   "index": 124,
+   "feature": "house as mnemonic haunting device",
+   "claim": "The house functions as a point in space for a dead person to revisit his life, a motif Wolfe reused in 'Checking Out'.",
+   "source": "Fernandes, Reactor 2019",
+   "url": "https://reactormag.com/peace-wolfes-masterful-rumination-on-nostalgia-memory-and-uncertainty/",
+   "quote": "a point in space for a dead person",
+   "page": ""
+  },
+  {
+   "index": 125,
+   "feature": "first line resolved through a married name",
+   "claim": "The elm of the first sentence is planted on Weer's grave: Eleanor Bold became Mrs Porter, who much later says she wants to plant a tree on his grave.",
+   "source": "Knode, Reactor 2012",
+   "url": "https://reactormag.com/gene-wolfe-peace-review/",
+   "quote": "The evidence for it is buried, but convincing.",
+   "page": ""
+  },
+  {
+   "index": 126,
+   "feature": "no breadcrumb trail, clues present",
+   "claim": "Wolfe never talks down to the reader and lays out no breadcrumb trail, but the clues are there.",
+   "source": "Knode, Reactor 2012",
+   "url": "https://reactormag.com/gene-wolfe-peace-review/",
+   "quote": "doesn't lay out breadcrumbs in a trail",
+   "page": ""
+  },
+  {
+   "index": 127,
+   "feature": "blink-and-you-miss revelations",
+   "claim": "Wolfe's mysteries are revealed in blink-and-you-miss moments among endless allusions.",
+   "source": "Michel 2026",
+   "url": "https://countercraft.substack.com/p/why-you-should-read-gene-wolfe-and",
+   "quote": "mysteries that are revealed in blink-and-you-miss moments",
+   "page": ""
+  },
+  {
+   "index": 128,
+   "feature": "context over exposition",
+   "claim": "Where other books spend time on exposition, Wolfe largely depends on context to bring the reader through.",
+   "source": "Khanna, LitReactor 2012",
+   "url": "https://litreactor.com/columns/primer-gene-wolfe-the-subtle-master/",
+   "quote": "largely depends on context to bring the reader through",
+   "page": ""
+  },
+  {
+   "index": 129,
+   "feature": "chapter gaps skip the set piece",
+   "claim": "A chapter may end with Able heading to a battle and the next pick up afterwards; questions posed in one chapter are answered several later.",
+   "source": "Khanna, LitReactor 2012",
+   "url": "https://litreactor.com/columns/primer-gene-wolfe-the-subtle-master/",
+   "quote": "In the following chapter, we pick up afterwards",
+   "page": ""
+  },
+  {
+   "index": 130,
+   "feature": "stated chastity contradicted later",
+   "claim": "Severian describes a chaste relationship and later mentions kissing the woman's breasts, an inconsistency read as intentional or unintentional prevarication.",
+   "source": "Khanna, LitReactor 2012",
+   "url": "https://litreactor.com/columns/primer-gene-wolfe-the-subtle-master/",
+   "quote": "intentional or unintentional prevarication",
+   "page": ""
+  },
+  {
+   "index": 131,
+   "feature": "repurposed old words as new language",
+   "claim": "Wolfe repurposes old words to create an almost new language for the world.",
+   "source": "Khanna, LitReactor 2012",
+   "url": "https://litreactor.com/columns/primer-gene-wolfe-the-subtle-master/",
+   "quote": "repurposes old words to create an almost new language",
+   "page": ""
+  },
+  {
+   "index": 132,
+   "feature": "narrator gives few clues to his own feelings",
+   "claim": "The Toy Theater's narrator, like other Wolfe protagonists, gives very few clues about what he himself is feeling.",
+   "source": "Locus 2009, 'The Toy Theater'",
+   "url": "https://locusmag.com/2009/04/reading-gene-wolfe/",
+   "quote": "so few clues about what he himself is feeling",
+   "page": ""
+  },
+  {
+   "index": 133,
+   "feature": "final line dizzying by omission",
+   "claim": "The story's last reported speech ends on 'know' with nothing after it, leaving two readings open, which the critic finds especially hard to parse.",
+   "source": "Locus 2009, 'The Toy Theater'",
+   "url": "https://locusmag.com/2009/04/reading-gene-wolfe/",
+   "quote": "especially hard to parse",
+   "page": ""
+  },
+  {
+   "index": 134,
+   "feature": "single chosen word as keynote",
+   "claim": "The word 'craquelure' for the cracks under a puppet's cosmetics becomes the keynote suggesting how fake everything may be.",
+   "source": "Locus 2009, 'The Toy Theater'",
+   "url": "https://locusmag.com/2009/04/reading-gene-wolfe/",
+   "quote": "That wonderfully well-chosen word craquelure",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 120,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200). Quote exact: Weer lists rooms of his memory house, finishing with 'my den, where I now never go' — 'given how almost everyone calls him Den, of course that's the room he must never visit.' Knife limb also supported: 'since it's a Boy Scout knife, it has a meaning and not just a use'; 'Weer keeps looking in the rooms of his memory for the knife and not finding it'; 'Weer can't find his knife because he can't see what he did with it.'"
+  },
+  {
+   "index": 121,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact: 'the sense that as long as Weer keeps telling stories, or remembering the stories he was told, he won't have to face whatever comes next.' Escape limb supported by the same paragraph: 'digressions and stories not so much building on each other as descending from each other ... a labyrinth in which Weer hopes to disappear.'"
+  },
+  {
+   "index": 122,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact, and attributed to Gaiman on the page: 'Gaiman notes that Wolfe's narrators are “scrupulously honest, but only up to a point.”'"
+  },
+  {
+   "index": 123,
+   "verdict": "PARTIAL",
+   "trueWording": "pride belongs to the old narrator, not young Weer",
+   "note": "Quote is verbatim and the first two limbs hold: 'a librarian—a woman whose name Weer can't remember, something that upsets him very much, because, as he himself claims, “I who pride myself upon remembering everything.”' But the page does not call this a self-contradiction left standing — it immediately offers a reconciliation: 'This total capacity for remembrance, of course, does not belong to the young Weer, but to the old man, the narrator himself.' Nearest general support is a separate line: 'all his narrators are unreliable.'",
+   "unsupportedLimb": "'a self-contradiction the text leaves standing' — the page glosses the tension rather than leaving it unresolved"
+  },
+  {
+   "index": 124,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact: 'the use of a house as a sort of haunting place, a point in space for a dead person who uses it as a mnemonic device, revisiting his life. Wolfe has employed this at least once since Peace: ... a short story written by Wolfe called “Checking Out.”'"
+  },
+  {
+   "index": 125,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact quote, and every limb on the page: first line 'The elm tree planted by Eleanor Bold, the judge's daughter, fell last night'; 'Eleanor Bold took the married name of Porter'; 'much, much later in the book—“Mrs. Porter? You heard her—she wants to plant a tree on my grave when I'm gone”'; 'you should read there that Eleanor did plant the tree…because Weer is buried and done.'"
+  },
+  {
+   "index": 126,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact, one sentence carrying both limbs: 'Never one to talk down to the reader, Mister Wolfe doesn't lay out breadcrumbs in a trail…but the clues are there.'"
+  },
+  {
+   "index": 127,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact: 'Wolfe loves unreliable narrators, mysteries that are revealed in blink-and-you-miss moments, and obscure allusions.' The allusions limb is in the same sentence as 'obscure allusions'; the claim's intensifier 'endless allusions' is the page's own phrase elsewhere ('endless allusions' of The Book of the New Sun), so the limb is supported either way."
+  },
+  {
+   "index": 128,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact: 'Other books might spend much of their time on exposition, but Wolfe largely depends on context to bring the reader through, and new meanings are usually picked up on subsequent readings.'"
+  },
+  {
+   "index": 129,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact: 'Able might be headed off to a big battle in one chapter. In the following chapter, we pick up afterwards and the events of the battle are filled in via flashback or through dialogue.' Second limb one paragraph later: 'A question may be posed in one chapter and not responded to until several later.'"
+  },
+  {
+   "index": 130,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "prevaricating either intentionally or otherwise",
+   "note": "The claim's substance is fully on the page, but the supplied quote is NOT word for word — page reads 'Inconsistencies appear giving the impression that Severian is prevaricating either intentionally or otherwise', not 'intentional or unintentional prevarication'. Rest is exact in substance: 'early in the first book he tells us about an apparently chaste relationship he had with a certain female character. Later, he lets slip a mention about kissing her breasts.'"
+  },
+  {
+   "index": 131,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact: 'Wolfe's worldbuilding is astounding, and he repurposes old words to create an almost new language for the world.'"
+  },
+  {
+   "index": 132,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact, with the comparison limb in the following parenthesis: 'Why does the narrator give us so few clues about what he himself is feeling? (In this, he's very much like other Wolfe protagonists.)' Context confirms this is the 'The Toy Theater' discussion."
+  },
+  {
+   "index": 133,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact: 'Zanni's last words have always seemed especially hard to parse. “[Stromboli] expresses the hope that he himself does not know.” The lack of anything after that last “know” is a little dizzying for me.' Two readings then offered: 'Stromboli hopes that he does not know with whom he, Stromboli, is keeping faith? Or that he does not know the person with whom the narrator is keeping faith?'"
+  },
+  {
+   "index": 134,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact: 'That wonderfully well-chosen word craquelure ends up as the keynote of the story, suggesting just how fake everything in it might be.' Referent limb supported by the plot summary: '“the delicately tinted cheeks beneath the cosmetics showed craquelure”: she is also a puppet.'"
+  }
+ ]
+}

@@ -1,0 +1,2769 @@
+ZENOPUS ARCHIVES: The Return of the Sample Dungeon 
+
+ZENOPUS ARCHIVES
+
+ Exploring the Underworld of Holmes Basic 
+
+ This is the blog. Click
+ here to go to the Zenopus Archives website. 
+
+ Note: Many older posts on this blog are missing images, but can be viewed at the corresponding page in the Internet Archive 
+
+ FEATURED POST
+
+ The Forgotten Smugglers' Cave: Index of Posts 
+
+ An index of posts describing the Forgotten Smugglers' Cave, an adventure for Holmes Basic characters levels 2-4. ...
+
+ Saturday, November 16, 2024 
+
+The Return of the Sample Dungeon
+
+ Cover of the 2024 DMG featuring Warduke, Skylla and Venger
+
+ Out this week is the latest version of the Dungeon Master's Guide , and in addition to bringing back Greyhawk as a sample setting , it also features the return of the Sample Dungeon. In this case, I don't mean the Tower of Zenopus, which goes only by the title "Sample Dungeon" in the Holmes Basic rulebook, but rather the general concept: an example of an adventure for new DMs to both run and base their own designs on. 
+ This was a common feature in the DM section of D&D rulebooks throughout the 1970s and 80s, with OD&D, AD&D 1E and every version of Basic including one, and the dungeons while brief were strongly remembered due to their evocative details and because they were often the first adventure for new players. And decades later, these memories and shared experiences would promote a sense of community among the fan base for each rule set. 
+ The idea started with the original D&D rules in 1974, which included a "Sample Map of Underworld Level" in Vol 3. This dungeon level by Gary Gygax lacked any real theme other providing examples, mostly of tricks and traps that could be used in designing a level. For the first Basic Set in 1977, J. Eric Holmes overhauled the example, creating a coherent first level for beginners complete with a brief backstory to provide a hook for exploring it, and concluding by inviting the DM to create additional levels. 
+ Two years later, in the AD&D 1E DMG, Gygax followed Holmes' example with another dungeon level with a strong story behind it, colloquially known as the Ruined Monastery or the Dungeon of the Fire Opal. Unlike the Zenopus dungeon, only a few rooms of this level were fully detailed, presumably so the DM could complete the keying of the map, along with designing the unshown second level. It also advanced the use of this as a teaching tool by including an integrated Example of Play; i.e., it's set in the described dungeon rooms. 
+ The next two iterations of Basic D&D continued the tradition of including a short dungeon written by the editor. Moldvay Basic (1981) had Tom Moldvay 's Haunted Keep, which more tightly integrated the exemplary level into the dungeon design concepts presented in the DM section. The accompanying Cook-Marsh Expert rules from the same year also provided a Sample Wilderness which mentioned that a town, Luln, was a base for exploring the Haunted Keep, although the town was only briefly described. 
+ In Mentzer Basic (1983), Frank Mentzer expanded the introductory material by adding a solo adventure teaching the basics of play in the Players book, which was followed by a starting group adventure, Castle Mistamere, in the DMs book. One idea common to each of the above was that the dungeon was not complete, giving the new DM a base on which to practice adding their own ideas. The Mentzer Expert rules included the same Sample Wilderness from the previous set, but revised to include a new "Home Town", Threshold, along with a series of eighteen briefly described (single paragraphs) adventures for the DM to use with this setting. 
+ In 1989, however, there was a big change: the revised DMG for AD&D 2E had no sample dungeon at all. The 1991 Rules Cyclopedia similarly lacked an adventure, although the complementary " Black Box" Basic Set from this time did include one, Escape from Zanzer Tem's Dungeon . 
+ The DMGs from 3E (2000) and 3.5E (2003) brought back the sample dungeon by including a revised version of the Ruined Monastery dungeon from the original DMG. These include an updated map, partial level description (first three areas only) and an integrated Example of Play, but the background from the original is severely curtailed. 
+ 
+ The 4E D&D DMG (2008) included a sample town (Fallcrest) and setting (Nentir Value) with an integrated sample dungeon called "Kobold Hall", which with 5 encounter areas literally follows the 5 Room Dungeon design model. (Thanks to Karla Adder on Twitter for the heads up on this.) 
+ Jumping ahead to 5E , while the 2014 DMG included material on generating random dungeons (Appendix A), and a number of sample maps (Appendix C), including an updated version of the Fire Opal dungeon map from the 1979 DMG, as with 2E it lacked a true introductory adventure. 
+ But now with the new DMG, the concept is back in full force and with new innovations. Ra ther than just a single dungeon level, there are five (!) short adventures, each for a different level of characters, and with the suggestion that they can be run sequentially, particularly the first three. There is also a mix of adventure settings: towns, wilderness, small dungeons that rely on the maps by Dyson Logos found in an appendix, nautical, and other planes. I n addition, the first four adventures are given locations in Greyhawk that are found in the setting material and maps elsewhere in the book. 
+ In my next post, I will look a little closer at these adventures and their locations in Greyhawk. 
+ The new DMG is available for order on Amazon 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 8:59 AM 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ DMG Sample Dungeon ,
+ Gygax ,
+ Sample Dungeon 
+
+ No comments:
+
+ Post a Comment
+
+ Newer Post 
+
+ Older Post 
+ 
+ Home 
+
+Subscribe to:
+ Post Comments (Atom) 
+
+ Holmesian Random Name
+
+ Click here for a name 
+
+ Find it here at DMs Guild 
+Ad by the 1000 Foot General 
+
+ DRIVETHRU RPG 
+
+ Basic/OD&D in PDF 
+
+ Basic/OD&D in Print 
+
+ AD&D 1E in PDF 
+
+ AD&D 1E in Print 
+
+ Gamma World 1E 
+
+ OSR Products 
+
+ Links may contain affiliate #s
+
+ THE MAKING OF OD&D
+
+ Reprints ODnD! Find it here 
+
+ PLAYING AT THE WORLD 2E
+
+ Revised edition! Find it here 
+
+ MAHARS OF PELLUCIDAR
+
+ Hardcover reissue of the 1976 classic. Find it here 
+
+ RED AXE OF PELLUCIDAR
+
+ First official release of the sequel! Find it here 
+
+ As an Amazon Associate I earn from qualifying purchases.
+
+ CHARACTER RECORD
+
+ THIS BLOG is devoted to the original D&D Basic set (aka Holmes Basic) & the writings of its editor, J. Eric Holmes
+
+ BUY The Ruined Tower of Zenopus , a 5E conversion, for $1.99 at DMs Guild
+
+ FIND ME 
+ on social media 
+
+ READ my publications or an interview with me 
+
+ LISTEN to podcasts I'm on 
+
+ HOLMES REF : reference sheets for referees 
+ 
+ View my complete profile 
+
+ BLOG SERIES
+
+ Forgotten Smugglers' Cave 
+
+ Tales of Peril Book Club 
+
+ The Holmes Manuscript 
+
+ Greyhawk & Great Kingdom 
+
+ New Monsters for Holmes 
+
+ Warlock D&D (1975) 
+
+ Tolkien 
+
+ BOOK OF SPELLS (RECENT POSTS)
+
+ ► 
+
+2026
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+2025
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ▼ 
+
+2024
+ 
+ (36) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ▼ 
+
+November
+ 
+ (3) 
+ 
+ The Tower Card 
+
+ The Making of OD&D: Half-Price Sale on Amazon 
+
+ The Return of the Sample Dungeon 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (5) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (2) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2023
+ 
+ (44) 
+
+ ► 
+
+December
+ 
+ (1) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (4) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (10) 
+
+ ► 
+
+2022
+ 
+ (29) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2021
+ 
+ (23) 
+
+ ► 
+
+November
+ 
+ (3) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+May
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2020
+ 
+ (68) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (7) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (4) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (7) 
+
+ ► 
+
+March
+ 
+ (8) 
+
+ ► 
+
+February
+ 
+ (10) 
+
+ ► 
+
+January
+ 
+ (5) 
+
+ ► 
+
+2019
+ 
+ (37) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (3) 
+
+ ► 
+
+April
+ 
+ (11) 
+
+ ► 
+
+March
+ 
+ (3) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ► 
+
+2018
+ 
+ (31) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (3) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2017
+ 
+ (51) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (5) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (5) 
+
+ ► 
+
+March
+ 
+ (3) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (4) 
+
+ ► 
+
+2016
+ 
+ (36) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (6) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (10) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ► 
+
+2015
+ 
+ (39) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (6) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (2) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (5) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2014
+ 
+ (55) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (5) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2013
+ 
+ (89) 
+
+ ► 
+
+December
+ 
+ (8) 
+
+ ► 
+
+November
+ 
+ (10) 
+
+ ► 
+
+October
+ 
+ (9) 
+
+ ► 
+
+September
+ 
+ (10) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (6) 
+
+ ► 
+
+May
+ 
+ (11) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (6) 
+
+ ► 
+
+February
+ 
+ (8) 
+
+ ► 
+
+January
+ 
+ (9) 
+
+ ► 
+
+2012
+ 
+ (130) 
+
+ ► 
+
+December
+ 
+ (8) 
+
+ ► 
+
+November
+ 
+ (9) 
+
+ ► 
+
+October
+ 
+ (10) 
+
+ ► 
+
+September
+ 
+ (14) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (11) 
+
+ ► 
+
+May
+ 
+ (13) 
+
+ ► 
+
+April
+ 
+ (13) 
+
+ ► 
+
+March
+ 
+ (17) 
+
+ ► 
+
+February
+ 
+ (11) 
+
+ ► 
+
+January
+ 
+ (18) 
+
+ ► 
+
+2011
+ 
+ (65) 
+
+ ► 
+
+December
+ 
+ (11) 
+
+ ► 
+
+November
+ 
+ (13) 
+
+ ► 
+
+October
+ 
+ (16) 
+
+ ► 
+
+September
+ 
+ (25) 
+
+ ANCIENT SCROLLS (POPULAR POSTS)
+
+ The Holmes Manuscript Series: Index of Posts 
+
+ Ruined Tower of Zenopus Goes Mithral! 
+
+ WARLOCK or how to play D&D without playing D&D? 
+
+ The Holmes Basic Set Cover Art: Exhibited! 
+
+ d20 Unexpectedly Intelligent Monsters in the Monster Manual (1977) 
+
+ Gygax's "City on the Edge" Greyhawk Adventure 
+
+ Lee Gold: 45 Years of Alarums & Excursions! 
+
+ Jim Ward on the Why of Chits 
+
+ 20 Backgrounds for OD&D 
+
+ RANDOM ANCIENT SCROLLS
+
+ Click for d12 Random Posts 
+
+ FORUMS & GROUPS
+
+ OD&D Discussion 
+
+ Dragonsfoot 
+
+ K & K Alehouse 
+
+ r/HolmesBasicDnD 
+
+ FB Holmes Basic 
+
+ The Piazza 
+
+ MeWe Holmes Basic 
+
+ Acaeum 
+
+ RPG Pub 
+
+ Other Forums 
+
+ Holmes Basic G+ Community Archives 
+
+ HELM OF TELEPATHY (RPG BLOGS I FOLLOW)
+
+Reviews from R'lyeh 
+
+[Free RPG Day 2026] Terror in Tortuga
+
+1 day ago
+
+What a Horrible Night... 
+
+Selling Physical Books
+
+1 day ago
+
+Mythopoeic Rambling 
+
+Frightful Fridays! Psychokinetic Elemental
+
+1 day ago
+
+Dyson's Dodecahedron 
+
+Halder’s Delve
+
+2 days ago
+
+Tower of the Archmage 
+
+August ‘26 In Review
+
+2 days ago
+
+Save Vs. Dragon 
+
+Outline for the BX DMG
+
+2 days ago
+
+Sorcerer's Skull 
+
+Some Links on Naming
+
+2 days ago
+
+Fabled Lands 
+
+On the road
+
+2 days ago
+
+The Rolemaster Blog 
+
+Rolemaster: Gaps in the Rules?
+
+3 days ago
+
+Bat in the Attic 
+
+Development of the Majestic Fantasy RPG, Part 3
+
+3 days ago
+
+Greyhawkery 
+
+Greyhawkery Comics: Cultists #51
+
+3 days ago
+
+The Other Side 
+
+Witchcraft Wednesday: The Three Laws of Witchcraft
+
+4 days ago
+
+tenfootpole.org 
+
+Stronghold of the Mad Dwarf
+
+4 days ago
+
+Tao of D&D 
+
+Anticipation
+
+4 days ago
+
+Hobby Games Recce 
+
+What Do Games Tell Our Adversaries?
+
+4 days ago
+
+Sly Flourish 
+
+Lazy Improvised Monsters for Daggerheart
+
+6 days ago
+
+B/X BLACKRAZOR 
+
+Back Into The Woods
+
+6 days ago
+
+Leicester's Ramble 
+
+They Met in a Tavern 34: Drom Misses Out on a Ziggurat
+
+1 week ago
+
+The Gloomy Forest 
+
+Bergummo's Tower Is a Silver Best Seller!
+
+1 week ago
+
+Dungeoneering 
+
+Warriors of the Lost Planet - Tékumel Homage
+
+1 week ago
+
+GROGNARDIA 
+
+Reconsiderations: H.P. Lovecraft
+
+2 weeks ago
+
+Applied Phantasticality 
+
+Hit or Miss: Missed
+
+2 weeks ago
+
+Doomslakers! 
+
+Legendary Lives
+
+3 weeks ago
+
+Havard's Blackmoor 
+
+Mystara Could Return Says WotC's Bilsland
+
+3 weeks ago
+
+Akratic Wizardry 
+
+Pete Fenlon on the Rise and Fall of Iron Crown Enterprises
+
+3 weeks ago
+
+Save vs. Total Party Kill 
+
+Some Thoughts on My Awards
+
+3 weeks ago
+
+Wayne's Books 
+
+Lantillian GX1 short hauler “The Long Shot”: A Ship for your Star Wars RPG 
+players
+
+3 weeks ago
+
+DM David 
+
+Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s 
+for You
+
+3 weeks ago
+
+Methods & Madness 
+
+Single saving throws
+
+3 weeks ago
+
+Cave of the Dice... 
+
+Bandits of Fort Emridy: Turning classic modules into outlaw PC settings
+
+3 weeks ago
+
+The Realm of Zhu 
+
+Zone Trooper: The Solo Future War Roleplaying Board Game
+
+4 weeks ago
+
+Yore 
+
+Doing a comprehensive survey of Appendix N
+
+1 month ago
+
+Richard's Dystopian... 
+
+How I read “theory”
+
+2 months ago
+
+Northport 
+
+Two Great Losses
+
+2 months ago
+
+The Hapless Henchman 
+
+The Backrooms: Terrifying Dungeon Crawl
+
+3 months ago
+
+DIY & dragons 
+
+My 2025 in Review
+
+3 months ago
+
+Echoes from the... 
+
+Let’s Talk About Treasure Types (A)
+
+3 months ago
+
+Tom Van Winkle's... 
+
+Maze Rats conversion for Skerples' Monster Overhaul
+
+3 months ago
+
+The Lizard Man Diaries 
+
+Adventure Game on Cardboard
+
+4 months ago
+
+Blog of Holding 
+
+Draw Steel Monsters on a Credit Card
+
+4 months ago
+
+From Kuroth's Quill 
+
+Castle Greyhawk Four New Dungeon Level Maps Revealed
+
+4 months ago
+
+OSR Grimoire 
+
+Gary Con XVIII
+
+5 months ago
+
+Swords & Dorkery 
+
+Wheel…of…fortunes!
+
+5 months ago
+
+DONJON LANDS 
+
+New Adventure: DONJON LANDS is Moving
+
+6 months ago
+
+Alex Schroeder 
+
+2026-02-26 Clone a virtual machine from inside it
+
+6 months ago
+
+The Cryptic Archivist 
+
+Spatial Paradigms of early CRPGs and Adventure Games
+
+6 months ago
+
+Hidden in Shadows 
+
+Mapping the pre D&D Dungeon Adventure From May 25 1972, Part 1
+
+6 months ago
+
+Nine and Thirty Kingdoms 
+
+Downtime
+
+8 months ago
+
+Fen Orc 
+
+Lovely Hedgerow Review
+
+9 months ago
+
+The Collector's Trove 
+
+The Collector's Trove Presents: Our Latest Auction!
+
+9 months ago
+
+Playing at the World 
+
+Playing at the World 2E V2 Arrives
+
+1 year ago
+
+Pulsipher Game Design 
+
+A "special" review of my book "Game Design," with a twist (the book is NOT 
+the point)
+
+1 year ago
+
+oldschool 
+
+D&D Demon Names
+
+1 year ago
+
+Delta's D&D Hotspot 
+
+Why Did Natural 20's Become Automatic Hits?
+
+1 year ago
+
+Delta's D&D Hotspot 
+
+Why Did Natural 20's Become Automatic Hits?
+
+1 year ago
+
+Explore: Beneath... 
+
+Original Scenarios Resurrected XI: The Tower of Mrannor (1980, Andrew 
+Ravenscroft)
+
+1 year ago
+
+Circle of Dar Janix 
+
+Traveller : Session 53
+
+1 year ago
+
+An Abominable Fancy 
+
+Knave 2e Alternate Attributes
+
+2 years ago
+
+ChicagoWiz 
+
+Last move - to self-hosting!
+
+2 years ago
+
+Appendix N... 
+
+Creature Companion: Shadowdark Edition!
+
+2 years ago
+
+D&D Chronologically 
+
+The Dragon #28, Vol 4.2
+
+2 years ago
+
+Land of Nod 
+
+Angels, Demons and Subtle Bodies
+
+3 years ago
+
+Scottenkainenland 
+
+Company of the White Oak Campaign - Sessions 63-64
+
+3 years ago
+
+The Song of the Susurrus 
+
+Save Against Death
+
+3 years ago
+
+Wampus Country 
+
+Legends of Law: Von Hoff
+
+3 years ago
+
+Dreamscape Design 
+
+The State of Play
+
+3 years ago
+
+Against The Wicked... 
+
+Notes on a semi-successful skill system
+
+4 years ago
+
+Dungeons of Klang 
+
+Dungeon Meshi for Dungeons and Dragons: Ape to Bear
+
+4 years ago
+
+Necropraxis 
+
+The Worm Ouroboros
+
+4 years ago
+
+Darlene the Artist 
+
+Sacred Art for the New Year
+
+6 years ago
+
+Oubliette Magazine 
+
+Squarehex 2019 Review and 2020 Plans
+
+6 years ago
+
+Geekerati 
+
+[From the Archives] Episode 24: An Interview with Jeff Mariotte and a 
+Discussion of Vampires and Other Things that Prefer the Night
+
+6 years ago
+
+Unvisible Citadel 
+
+Saving Throw fundraiser fanzine for James D. Kramer
+
+6 years ago
+
+The Warlock's Home Brew 
+
+The Warlock's Tower
+
+8 years ago
+
+Semper Initiativus Unum 
+
+Happy Gygax Day!
+
+9 years ago
+
+Parzival's Place 
+
+Show 10
+
+Show All
+
+ MINIATURES GAMING
+
+Small Scale World 
+
+F is for Fattypuff, T is for Thinifer
+
+2 days ago
+
+The Sharp End of... 
+
+Midgard: Early Impressions
+
+4 days ago
+
+Battle Game of the Month 
+
+Meet Me At The Crossroads
+
+4 days ago
+
+Here's No Great Matter 
+
+Trebia - the fight
+
+1 week ago
+
+Dear Tony Blair 
+
+Superior Models Starfleets
+
+1 week ago
+
+Realm of Chaos 80s 
+
+A Second Summer of Citadel: Rogue Trader Orc and Space Skaven Conversion, 
+Heroes of the Enemy Within and an Unreleased Fighter and Druid
+
+1 week ago
+
+Plastic Soldier Review 
+
+Linear-A Alexander with Staff reviewed
+
+3 weeks ago
+
+Graeme Davis 
+
+July’s Monster of the Month: The Bonnacon
+
+1 month ago
+
+Fantasy Toy Soldiers 
+
+MAGI: Non Western Wizards/Shaman
+
+2 months ago
+
+Geordie's Big Battles 
+
+Hinton on AI
+
+2 months ago
+
+SquadPainter 
+
+Unlocking Pro Acryl Paint Secrets
+
+6 months ago
+
+Scrum in Miniature 
+
+Scrum Con V
+
+6 months ago
+
+Super Galactic... 
+
+Presenting ... Bob Moss
+
+6 months ago
+
+Third Point of... 
+
+Hobgoblin First Play
+
+1 year ago
+
+Vintage Wargaming 
+
+Warplan 5/5 Campaign System
+
+6 years ago
+
+1000 Foot General 
+
+Sci-Fi Hangar by Impudent Mortal
+
+6 years ago
+
+Show 5
+
+Show All
+
+ FICTION & TOLKIENANA
+
+Wormwoodiana 
+
+Insidious Mechanisms: A New Anthology from Egaeus Press
+
+1 day ago
+
+Black Gate 
+
+Spoiler Free Review: Coyote vs. Acme
+
+1 day ago
+
+m john harrison 
+
+a couple of reactions to TEoE at Insta
+
+6 days ago
+
+A Shiver in the... 
+
+When the Poet Sings, by Lord Dunsany
+
+2 weeks ago
+
+Sacnoth's Scriptorium 
+
+The Cat Room
+
+5 weeks ago
+
+Tolkien & Fantasy 
+
+Icons of the Fantastic: Behind the Scenes
+
+5 weeks ago
+
+JOHN GARTH 
+
+Tolkien, the critics, and why I’m starting an Oxford doctoral project on 
+The Lord of the Rings and war
+
+2 months ago
+
+Too Many Books... 
+
+Book Notes, January–June 2024
+
+6 months ago
+
+On An Underwood... 
+
+Farnsworth Wright’s Favorite Weird Tales by Bobby Derie
+
+6 years ago
+
+Show 5
+
+Show All
+
+ TEXT ADVENTURES
+
+Renga in Blue 
+
+Twin Kingdom Valley (1983)
+
+6 days ago
+
+Lloyd of Gamebooks 
+
+Voting has now closed for the 2026 Lindenbaum competition
+
+1 week ago
+
+The Stack 
+
+0PLAYER
+
+1 year ago
+
+Emily Short 
+
+Dialogue Expressiveness in Mask of the Rose
+
+2 years ago
+
+ MISC
+
+Love in the Time of Chasmosaurs 
+
+Vintage Dinosaur Art: Lone Star Dinosaurs – Part 1
+
+23 hours ago
+
+Happy & d20 
+
+PCT: Hikertown redux
+
+1 day ago
+
+Plaid Stallions 
+
+5 Awesome Things on eBay this week
+
+2 days ago
+
+GRUBB STREET 
+
+Book: Book about Books
+
+3 weeks ago
+
+Garage Sale Finds 
+
+Sprint Magazine
+
+1 month ago
+
+MONSTER BRAINS 
+
+Osamu Tezuka (1928 - 1989)
+
+4 years ago
+
+Show 5
+
+Show All
+
+ Loading... 
+
+ MIRTH
+
+Rusty and Co. 
+
+Level 14: #67
+
+1 day ago
+
+xkcd 
+
+Asteroid Mission
+
+2 days ago
+
+Dork Tower 
+
+Death Becomes Him
+
+3 days ago
+
+Order of the Stick 
+
+1348: Fading Odds
+
+3 weeks ago
+
+d20monkey 
+
+Forever GM 2.0 Design
+
+2 months ago
+
+KoDT 
+
+Hello world!
+
+4 months ago
+
+Marvin the Mage 
+
+Game Wizards Gary and Dave Minis To Be Released at Gamehole Con
+
+4 years ago
+
+Table Titans 
+
+News & Events: Adventure Journals Return with Five New Colors!
+
+5 years ago
+
+Show 5
+
+Show All
+
+ NPCs
+
+ Follow this blog
+
+ Click here 
+
+ Subscribe To
+
+Posts
+
+ Atom
+
+Posts
+
+Comments
+
+ Atom
+
+Comments
+
+ Labels
+
+ ODnD 
+ (107) 
+
+ Holmes Manuscript 
+ (79) 
+
+ Legacy 
+ (65) 
+
+ Portown Campaign 
+ (56) 
+
+ Sample Dungeon 
+ (56) 
+
+ Artists 
+ (55) 
+
+ Printings 
+ (53) 
+
+ Gygax 
+ (52) 
+
+ Boinger and Zereth 
+ (46) 
+
+ Forgotten Smugglers' Cave 
+ (44) 
+
+ Holmes Ref 
+ (44) 
+
+ New Monsters 
+ (41) 
+
+ Cons 
+ (40) 
+
+ B2 
+ (35) 
+
+ Sutherland 
+ (34) 
+
+ Tolkien 
+ (33) 
+
+ Greyhawk 
+ (30) 
+
+ Monster List 
+ (29) 
+
+ Pirates 
+ (26) 
+
+ GaryCon 
+ (24) 
+
+ Sutherland Dragon 
+ (24) 
+
+ Appendix N 
+ (23) 
+
+ OSR 
+ (23) 
+
+ RTOZ 
+ (23) 
+
+ Tales of Peril 
+ (23) 
+
+ Adventures 
+ (22) 
+
+ Chainmail 
+ (22) 
+
+ Miniatures 
+ (22) 
+
+ Zenopus 
+ (22) 
+
+ Cthulhu 
+ (20) 
+
+ Advertisements 
+ (19) 
+
+ 5E 
+ (18) 
+
+ Podcasts 
+ (18) 
+
+ 50th Anniversary 
+ (17) 
+
+ Books 
+ (17) 
+
+ Holmes Blogs 
+ (17) 
+
+ Zines 
+ (17) 
+
+ B1 
+ (16) 
+
+ Publication History 
+ (16) 
+
+ Scrum Con 
+ (16) 
+
+ B/X 
+ (15) 
+
+ DMsGuild 
+ (15) 
+
+ PatW 
+ (15) 
+
+ Chris Holmes 
+ (14) 
+
+ Dice 
+ (14) 
+
+ Skull Mountain 
+ (14) 
+
+ Trampier 
+ (14) 
+
+ Warlock 
+ (14) 
+
+ Sea Caves 
+ (13) 
+
+ ntrpgcon 
+ (13) 
+
+ Chargen 
+ (12) 
+
+ Foreign Editions 
+ (12) 
+
+ History 
+ (12) 
+
+ Arneson 
+ (11) 
+
+ Drivethru 
+ (11) 
+
+ GenCon 
+ (11) 
+
+ Great Kingdom 
+ (11) 
+
+ In Memoriam 
+ (11) 
+
+ Lee Gold 
+ (11) 
+
+ Popular Culture 
+ (11) 
+
+ Balrogs 
+ (10) 
+
+ Blackmoor 
+ (10) 
+
+ Maps 
+ (10) 
+
+ Otus 
+ (10) 
+
+ RTOZ review 
+ (10) 
+
+ Reprints 
+ (10) 
+
+ TSR 
+ (10) 
+
+ Wandering Monsters 
+ (10) 
+
+ ADnD 
+ (9) 
+
+ B3 
+ (9) 
+
+ Bayt Al Azif 
+ (9) 
+
+ DMG 
+ (9) 
+
+ Easter Eggs 
+ (9) 
+
+ Equipment 
+ (9) 
+
+ Rules Expansions 
+ (9) 
+
+ Dagonites 
+ (8) 
+
+ Darlene 
+ (8) 
+
+ Rules Variants 
+ (8) 
+
+ 35 years 
+ (7) 
+
+ Aurania 
+ (7) 
+
+ Dungeon! 
+ (7) 
+
+ Freebie 
+ (7) 
+
+ Holmes for the Holidays 
+ (7) 
+
+ Jean Wells 
+ (7) 
+
+ Play Report 
+ (7) 
+
+ Cinema 
+ (6) 
+
+ Dragon magazine 
+ (6) 
+
+ Green Dragon 
+ (6) 
+
+ Holmes Bibliography 
+ (6) 
+
+ Lore Suto 
+ (6) 
+
+ Monster Faces 
+ (6) 
+
+ Promo 
+ (6) 
+
+ Roslof 
+ (6) 
+
+ Zenopus Art-chives 
+ (6) 
+
+ Ability Scores 
+ (5) 
+
+ Castle Greyhawk 
+ (5) 
+
+ Conan 
+ (5) 
+
+ DMG Sample Dungeon 
+ (5) 
+
+ Delving Deeper 
+ (5) 
+
+ Fangorn 
+ (5) 
+
+ Holmesiana 
+ (5) 
+
+ John Blanche 
+ (5) 
+
+ Kids 
+ (5) 
+
+ Lakofka 
+ (5) 
+
+ Minifigs 
+ (5) 
+
+ New Magic Items 
+ (5) 
+
+ Periodicals 
+ (5) 
+
+ Quotes 
+ (5) 
+
+ Undead 
+ (5) 
+
+ Wham 
+ (5) 
+
+ 1st print 
+ (4) 
+
+ Combat 
+ (4) 
+
+ Community 
+ (4) 
+
+ EPT 
+ (4) 
+
+ Geomorphs 
+ (4) 
+
+ Lake Geneva 
+ (4) 
+
+ Logo 
+ (4) 
+
+ MM 
+ (4) 
+
+ Magic 
+ (4) 
+
+ New Classes 
+ (4) 
+
+ PHB 
+ (4) 
+
+ Saltmarsh 
+ (4) 
+
+ Turnbull 
+ (4) 
+
+ Video 
+ (4) 
+
+ Wereshark 
+ (4) 
+
+ Bell 
+ (3) 
+
+ Carter 
+ (3) 
+
+ Collecting 
+ (3) 
+
+ Computer Games 
+ (3) 
+
+ Contemporary Reviews 
+ (3) 
+
+ DSL 
+ (3) 
+
+ Dee 
+ (3) 
+
+ Draw Your Own Floor Plan 
+ (3) 
+
+ Dungeoneering 
+ (3) 
+
+ Europa 
+ (3) 
+
+ Gamma World 
+ (3) 
+
+ Guidon DnD 
+ (3) 
+
+ Holmes Expert 
+ (3) 
+
+ Kuntz 
+ (3) 
+
+ Lycanthropes 
+ (3) 
+
+ Mentzer 
+ (3) 
+
+ Monster Manual 
+ (3) 
+
+ ODnD Sample Level 
+ (3) 
+
+ Polyhedron 
+ (3) 
+
+ Review 
+ (3) 
+
+ S1 
+ (3) 
+
+ Scrum Club 
+ (3) 
+
+ Text Adventure 
+ (3) 
+
+ Thomas Cole 
+ (3) 
+
+ Tricks and Traps 
+ (3) 
+
+ Willingham 
+ (3) 
+
+ Arduin 
+ (2) 
+
+ Chaosium 
+ (2) 
+
+ Coloring Album 
+ (2) 
+
+ Dragonmirth 
+ (2) 
+
+ Dragons 
+ (2) 
+
+ Drawings 
+ (2) 
+
+ ERB 
+ (2) 
+
+ Elmore 
+ (2) 
+
+ Ephemera 
+ (2) 
+
+ Examples of Play 
+ (2) 
+
+ FRPG book 
+ (2) 
+
+ Holmes Campaign 
+ (2) 
+
+ Holmes-Era Games 
+ (2) 
+
+ Judges Guild 
+ (2) 
+
+ MTA 
+ (2) 
+
+ Metamorphosis Alpha 
+ (2) 
+
+ Moldvay 
+ (2) 
+
+ Movies 
+ (2) 
+
+ Music 
+ (2) 
+
+ New Races 
+ (2) 
+
+ One-Page Dungeon 
+ (2) 
+
+ Pellucidar 
+ (2) 
+
+ Perren 
+ (2) 
+
+ Photo Gallery 
+ (2) 
+
+ Pulps 
+ (2) 
+
+ Retroclones 
+ (2) 
+
+ Rule Interpretations 
+ (2) 
+
+ Spells 
+ (2) 
+
+ TSR UK 
+ (2) 
+
+ Ward 
+ (2) 
+
+ Wargaming 
+ (2) 
+
+ White Dwarf 
+ (2) 
+
+ de Camp 
+ (2) 
+
+ weapons 
+ (2) 
+
+ what if 
+ (2) 
+
+ 45 years 
+ (1) 
+
+ Artifacts 
+ (1) 
+
+ B4 
+ (1) 
+
+ BECMI 
+ (1) 
+
+ Baguettes 
+ (1) 
+
+ Bio 
+ (1) 
+
+ C1 
+ (1) 
+
+ Catalogs 
+ (1) 
+
+ Cheese 
+ (1) 
+
+ Chits 
+ (1) 
+
+ Comics 
+ (1) 
+
+ DDG 
+ (1) 
+
+ Dawn Patrol 
+ (1) 
+
+ DnD from Memory 
+ (1) 
+
+ DnD50 
+ (1) 
+
+ Dungeon Design 
+ (1) 
+
+ Dungeon Hobby Shop 
+ (1) 
+
+ Eldritch Wizardry 
+ (1) 
+
+ Ernie Gygax 
+ (1) 
+
+ Erol Otus 
+ (1) 
+
+ Expedition to Skull Stack Crater 
+ (1) 
+
+ Fiend Folio 
+ (1) 
+
+ Fonts 
+ (1) 
+
+ Games Workshop 
+ (1) 
+
+ Grenadier 
+ (1) 
+
+ Historic FLGS 
+ (1) 
+
+ Holloway 
+ (1) 
+
+ Inspiration 
+ (1) 
+
+ Known World 
+ (1) 
+
+ Lejendary Adventure 
+ (1) 
+
+ Licensed Products 
+ (1) 
+
+ Links 
+ (1) 
+
+ Marsh 
+ (1) 
+
+ Milestones 
+ (1) 
+
+ Mini Dungeon 
+ (1) 
+
+ Mirth 
+ (1) 
+
+ Monster Plants 
+ (1) 
+
+ New Modules 
+ (1) 
+
+ Norton 
+ (1) 
+
+ Purple Worm 
+ (1) 
+
+ RPG 
+ (1) 
+
+ Rumors 
+ (1) 
+
+ Savage Worlds 
+ (1) 
+
+ Saving Throws 
+ (1) 
+
+ Schick 
+ (1) 
+
+ SciFi 
+ (1) 
+
+ Shakespeare 
+ (1) 
+
+ Solo 
+ (1) 
+
+ Star Schlock 
+ (1) 
+
+ Star Wars 
+ (1) 
+
+ Swords & Sorcery 
+ (1) 
+
+ T1 
+ (1) 
+
+ Weird Fiction 
+ (1) 
+
+ Wilderness Adventures 
+ (1) 
+
+ Zeb Cook 
+ (1) 
+
+ ADVERT (CLICK IMAGE TO VISIT - DISCLOSURE: LINK INCLUDES AFFILIATE #)
+
+ " 
+
+Powered by Blogger .

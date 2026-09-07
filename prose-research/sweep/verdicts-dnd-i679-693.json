@@ -1,0 +1,233 @@
+{
+ "name": "dnd",
+ "chunk": 35,
+ "claims": [
+  {
+   "index": 679,
+   "feature": "other: authorial voice in rulebooks",
+   "claim": "James Maliszewski reports that Gygax demurred when told his voice was a dialect of Jack Vance's.",
+   "source": "James Maliszewski, 'High Gygaxian', Grognardia, 2009",
+   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
+   "quote": "I once told Gary my opinion on this and he demurred",
+   "page": "High Gygaxian"
+  },
+  {
+   "index": 680,
+   "feature": "other: authorial voice in rulebooks",
+   "claim": "James Maliszewski contrasts Gygax's florid prose with modern game books, which he says read like technical manuals.",
+   "source": "James Maliszewski, 'High Gygaxian', Grognardia, 2009",
+   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
+   "quote": "Modern game books read like what they are: technical manuals.",
+   "page": "High Gygaxian"
+  },
+  {
+   "index": 681,
+   "feature": "place and institution description",
+   "claim": "James Maliszewski holds up Gygax's description of the Vault of the Drow as more evocative than the place descriptions in contemporary adventures.",
+   "source": "James Maliszewski, 'High Gygaxian', Grognardia, 2009",
+   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
+   "quote": "you'll find few passages in contemporary adventures that are as evocative",
+   "page": "High Gygaxian"
+  },
+  {
+   "index": 682,
+   "feature": "boxed text form",
+   "claim": "Dyson Logos tells OSR adventure writers to get rid of boxed text.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "So, OSR adventure writers, get rid of the boxed text.",
+   "page": "The Dreaded Boxed Text"
+  },
+  {
+   "index": 683,
+   "feature": "dm-facing sentence",
+   "claim": "Dyson Logos proposes replacing read-aloud prose with a point-form list of the things seen in the room, so the DM can present them conversationally.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "replace it with a point-form list of things seen in the room",
+   "page": "The Dreaded Boxed Text"
+  },
+  {
+   "index": 684,
+   "feature": "boxed text form",
+   "claim": "Dyson Logos traces the arrival of read-aloud text in the 1e era to the tournament use of the early published adventures.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "I tend to blame this on the tournament usage",
+   "page": "The Dreaded Boxed Text"
+  },
+  {
+   "index": 685,
+   "feature": "other: key format",
+   "claim": "Bryce Lynch says the number one complaint about published adventures is that they are hard to run.",
+   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "The number one complaint about published adventures",
+   "page": "The Book Introduction, opening"
+  },
+  {
+   "index": 686,
+   "feature": "dm-facing sentence",
+   "claim": "Bryce Lynch distinguishes writing for oneself, where the words are only a memory cue, from writing for a stranger.",
+   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "The words on the page are only a memory cue",
+   "page": "The Book Introduction, third paragraph"
+  },
+  {
+   "index": 687,
+   "feature": "place and institution description",
+   "claim": "Bryce Lynch attributes dry and tedious encounters to the failed transfer of the writer's imagined scene into the reader's head.",
+   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "leading to dry and tedious encounters",
+   "page": "The Book Introduction, fourth paragraph"
+  },
+  {
+   "index": 688,
+   "feature": "other: audience",
+   "claim": "Bryce Lynch frames his book as advice on writing an adventure for publication rather than for one's own table.",
+   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "This book is advice on how to write an adventure for publication.",
+   "page": "The Book Introduction, second paragraph"
+  },
+  {
+   "index": 689,
+   "feature": "plainness and economy",
+   "claim": "Courtney Campbell's key format admits no word that is not important.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
+   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "Any word that is not important, is not used.",
+   "page": "On Set Design, explanation"
+  },
+  {
+   "index": 690,
+   "feature": "dm-facing sentence",
+   "claim": "Courtney Campbell's key replaces prose with bolded nouns, and he says he describes a room using only the bolded words.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
+   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "When describing things, I only use the bolded words!",
+   "page": "On Set Design, explanation"
+  },
+  {
+   "index": 691,
+   "feature": "plainness and economy",
+   "claim": "Courtney Campbell reports that his key gives him everything needed to run the tick encounter in seven words.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
+   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "everything I need to run the encounter successfully in seven words",
+   "page": "On Set Design, explanation"
+  },
+  {
+   "index": 692,
+   "feature": "other: seen in a glance",
+   "claim": "In Courtney Campbell's format the items placed after the bar are the ones immediately visible on entering.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
+   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "After the bar are the immediately visible items!",
+   "page": "On Set Design, explanation"
+  },
+  {
+   "index": 693,
+   "feature": "plainness and economy",
+   "claim": "Gabor Lux credits the classic modules with terse simplicity and language that is expressive but functional.",
+   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
+   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
+   "quote": "terse simplicity, expressive but functional language, play-oriented presentation",
+   "page": "Against the Ultra-Minimalism, 'Know your enemy'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 679,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I once told Gary my opinion on this and he demurred",
+   "note": "Body para 4: 'High Gygaxian speech sounds to me like a local dialect of High Vancian. I once told Gary my opinion on this and he demurred. He didn't think his own peculiar voice was anywhere as erudite and witty as that of Jack Vance...' Byline 'Posted by James Maliszewski' present. Fetched raw HTML via curl (HTTP 200)."
+  },
+  {
+   "index": 680,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Modern game books read like what they are: technical manuals.",
+   "note": "Verbatim, para 3, immediately after the florid-Gygax contrast ('Reading Gygax at his florid best... In what game book can you find such prose nowadays?'). Both limbs supported."
+  },
+  {
+   "index": 681,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Again, I say, you'll find few passages in contemporary adventures that are as evocative.",
+   "note": "Verbatim, and it closes the block-quoted Vault of the Drow description he introduces as 'this bit from Vault of the Drow'. Source says 'passages' where the claim says 'place descriptions' \u2014 the quoted passage is itself a place description, so the claim is narrower than, and contained by, the source."
+  },
+  {
+   "index": 682,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So, OSR adventure writers, get rid of the boxed text.",
+   "note": "Verbatim in the concluding paragraph; post bylined 'Posted by Dyson Logos'. Raw page fetched (HTTP 200)."
+  },
+  {
+   "index": 683,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "replace it with a point-form list of things seen in the room",
+   "note": "Verbatim; the next sentence supplies the conversational limb: 'That makes it easy for the DM to present the salient information in a conversational manner without having to dig through all your \"beautiful\" prose.'"
+  },
+  {
+   "index": 684,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I tend to blame this on the tournament usage",
+   "note": "Verbatim, in full: 'During the 1e days, we saw the advent of \"boxed\" or \"read-aloud\" text. I tend to blame this on the tournament usage of the original published adventures.' Claim's 'early published adventures' = source's 'original published adventures'."
+  },
+  {
+   "index": 685,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The number one complaint about published adventures is that they are hard to run.",
+   "note": "Verbatim; it is the opening sentence of the page. Attribution note: the page itself carries only 'Bryce' (About Bryce\u2026, Bryce's ToDo List) \u2014 the surname Lynch appears nowhere in the HTML, so authorship rests on the site's identity, not this page's text."
+  },
+  {
+   "index": 686,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The words on the page are only a memory cue",
+   "note": "Verbatim (full sentence adds 'to recall what you initially imagined'), third body paragraph, opened by 'There's a key difference between personal use and having someone else use it.' Claim's 'stranger' = source's 'someone else'."
+  },
+  {
+   "index": 687,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leading to dry and tedious encounters",
+   "note": "Verbatim: 'You have to transfer that vision from your head down to paper and in such a way that it can then get into someone else's head... Those translations seldom happen successfully, leading to dry and tedious encounters.'"
+  },
+  {
+   "index": 688,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This book is advice on how to write an adventure for publication.",
+   "note": "Verbatim, second body paragraph, preceded by 'This is not a book about how to design an adventure for your home game.' Both limbs supported."
+  },
+  {
+   "index": 689,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Any word that is not important, is not used.",
+   "note": "Verbatim in the 'Let's break down how this works' list. Attribution note: page byline is '-C'; the site's Biography page names the author 'Courtney' \u2014 the surname Campbell is not on either page."
+  },
+  {
+   "index": 690,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When describing things, I only use the bolded words!",
+   "note": "Verbatim. The bolded-nouns limb checked against the raw HTML <b> spans: Tables, Wooden Cask, Refuse, Furniture, Bones, Ornate Iron Armchair, Blanket, Gem, Iron mail, Pouch, Scrolls, Sack, Barrels, Buckets, Stream, Pool of Water, Cylinder \u2014 all nouns, in a keyed entry rather than prose."
+  },
+  {
+   "index": 691,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "everything I need to run the encounter successfully in seven words",
+   "note": "Verbatim: 'I look down at the tick room, and I see enough information to tell me everything I need to run the encounter successfully in seven words.' The tick-room limb is explicit."
+  },
+  {
+   "index": 692,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "After the bar are the immediately visible items!",
+   "note": "Verbatim. The page states 'immediately visible' without the words 'on entering'; the worked example (the party enters the alcove and is told refuse, furniture, bones) supports that reading, so the qualifier is illustrated rather than merely inferred."
+  },
+  {
+   "index": 693,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "terse simplicity, expressive but functional language, play-oriented presentation",
+   "note": "Verbatim under the 'Know your enemy' heading: 'the classics showed another way: of terse simplicity, expressive but functional language, play-oriented presentation', followed by classic-module examples (Glacial Rift, Tegel Manor, Keep on the Borderlands). Byline 'Melan' = Gabor Lux."
+  }
+ ]
+}

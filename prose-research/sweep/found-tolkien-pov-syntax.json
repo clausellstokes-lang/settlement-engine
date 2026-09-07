@@ -1,0 +1,788 @@
+{
+ "claims": [
+  {
+   "feature": "hobbit-viewpoint share (85 per cent)",
+   "claim": "Kullmann states on p. 111 that 85 per cent of the non-direct-speech (narrative) sections follow the point-of-view conventions of the nineteenth-century novel, i.e. are told from a hobbit's limited point of view.",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "85 per cent, of the non-direct-speech sections of the narrative"
+  },
+  {
+   "feature": "85-per-cent figure traced",
+   "claim": "Wikipedia's sentence that the narrative is told '85% of the time' from one of the four hobbits' viewpoints is footnoted to Kullmann & Siepmann 2021 pp. 90-122; the figure itself sits on p. 111 of the 'Points of View' chapter.",
+   "source": "Wikipedia, Storytelling in The Lord of the Rings",
+   "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+   "quote": "85% of the time"
+  },
+  {
+   "feature": "85-per-cent figure restated by reviewer",
+   "claim": "Holmes reports that Kullmann measures the dominance of the hobbit point of view as 85% of all non-direct speech representing hobbits, and that the hobbits are the foci of 'psychonarration' (p. 105).",
+   "source": "John R. Holmes, review of Kullmann & Siepmann, Journal of Tolkien Research 14.1 (2022)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol14/iss1/7",
+   "quote": "85% of all “non-direct” speech"
+  },
+  {
+   "feature": "dialogue proportion (c. 50 per cent)",
+   "claim": "Kullmann finds about 50 per cent of the text is dialogue, exclamations, embedded stories and recited poems, whereas in a novel direct speech would usually take up about 20 to 30 per cent (p. 90; repeated at p. 159).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "usually take up ca. 20 to 30 per cent"
+  },
+  {
+   "feature": "dialogue proportion",
+   "claim": "Wikipedia summarises K&S: about half of the novel is dialogue, poetry and song or embedded stories, against roughly 25% dialogue in a typical modern novel.",
+   "source": "Wikipedia, Storytelling in The Lord of the Rings",
+   "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+   "quote": ""
+  },
+  {
+   "feature": "dialogue proportion",
+   "claim": "Bolding's review reports Kullmann's finding that direct speech comprises 50 percent of the text (K&S p. 90), with narrative oversight from the hobbits' point of view while keeping the third person.",
+   "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23",
+   "quote": "using direct speech to comprise 50 percent of the text"
+  },
+  {
+   "feature": "dialogue proportion",
+   "claim": "Turner notes Kullmann's point that the proportion of direct speech is higher than usual in nineteenth- or twentieth-century novels because it serves purposes beyond social conversation and evokes older pre-texts.",
+   "source": "Allan Turner, review of Kullmann & Siepmann, Journal of Inklings Studies 12.1 (2022)",
+   "url": "https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144",
+   "quote": ""
+  },
+  {
+   "feature": "omniscient narration rare",
+   "claim": "Omniscient narration is comparatively rare; the reader is most commonly given the point of view of a group of characters, usually hobbits, before it narrows to an individual (p. 90).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "omniscient narration is comparatively rare"
+  },
+  {
+   "feature": "hobbit focalisers",
+   "claim": "The 'Points of View' chapter abstract: the narrator mostly presents the point of view of hobbits as a group or of Frodo, Sam, Pippin or Merry, and only to a far lesser extent Aragorn, Gimli, Legolas and Éowyn.",
+   "source": "Kullmann & Siepmann, 'Points of View' (ch. 4) abstract, Springer",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "to a far lesser extent Aragorn, Gimli, Legolas and Éowyn"
+  },
+  {
+   "feature": "ordinary language for hobbit viewpoint vs archaic omniscient passages",
+   "claim": "Hobbits' points of view are recorded in ordinary language, while other passages use an archaic diction reminiscent of ancient epic and Macpherson's Ossian and convey an omniscient point of view tied to 'epic characters' like Aragorn.",
+   "source": "Kullmann & Siepmann, 'Points of View' (ch. 4) abstract, Springer",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "quote": "recorded in “ordinary” language"
+  },
+  {
+   "feature": "nineteenth-century POV lineage",
+   "claim": "Tolkien's limited point of view follows nineteenth-century novelistic practice; Kullmann traces the technique from Walpole's Castle of Otranto (1764) through Pride and Prejudice, Waverley, The Mill on the Floss, Tess, Mary Webb and Buchan's Witch Wood (p. 92).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "Emphasis is laid on subjective experience rather than facts"
+  },
+  {
+   "feature": "hobbits as intermediaries / reader's representative",
+   "claim": "Like Scott's Waverley and Buchan's David Sempill, the hobbits act as intermediaries and, in Turner's phrase quoted by Kullmann, as representatives of the normality of the reader in a strange environment (pp. 95, 123).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "Tolkien's hobbits act as intermediaries"
+  },
+  {
+   "feature": "mediation as the function of limited POV",
+   "claim": "The function of the point-of-view technique is mediation: a strange environment and chain of events is brought close to the reader through the intermediate agency of characters whose point of view is recorded; the technique goes back to historical fiction (p. 119).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "brought close to the reader through the intermediate agency"
+  },
+  {
+   "feature": "narrator withholds explanation",
+   "claim": "The narrator does not explain why an event has occurred; explanation is left to other characters such as Gandalf or Aragorn, or to the hobbits' own subjective conclusions (p. 91).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "left to other characters, such as Gandalf or Aragorn"
+  },
+  {
+   "feature": "psychonarration reserved to Frodo",
+   "claim": "Psychonarration (Lanser's term) is reserved to Frodo; what Gandalf thinks or plans is left to Frodo's and the reader's speculation (p. 105).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "Psychonarration is reserved to Frodo"
+  },
+  {
+   "feature": "Gandalf's mind withheld",
+   "claim": "Gandalf speaks a lot but his thoughts and feelings are hardly ever communicated to the reader in third-person narration (p. 118).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "hardly ever communicated to the reader"
+  },
+  {
+   "feature": "Aragorn focalised perceptually not psychologically",
+   "claim": "When Aragorn's viewpoint is used we are told what he sees but learn little of his thoughts and feelings (p. 114); an omniscient passage gives way to a hobbit-limited one to lend Aragorn psychological depth via Merry's gaze (p. 102).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "we do not learn much about his thoughts and feelings"
+  },
+  {
+   "feature": "Merry and Pippin as strand-followers",
+   "claim": "The narrative function of Merry and Pippin is to let the novelist take a hobbit's point of view on each spreading strand of the plot after Frodo and Sam leave the Company at the end of Book 2 (p. 99).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "a hobbit's point of view to each of the spreading strands"
+  },
+  {
+   "feature": "focaliser shift from Frodo to Sam",
+   "claim": "In the first two books Frodo observes the world; later Frodo becomes the object of Sam's gaze, with Sam the focalizer in Books 4 and 6 (pp. 108, 119).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "the object of Sam's gaze"
+  },
+  {
+   "feature": "limited POV raises tension and characterises",
+   "claim": "As in nineteenth-century novels, the limited point of view both characterises a person and raises tension; Frodo's viewpoint conveys what he is barely conscious of, e.g. 'finding' he has put on the Ring (p. 105).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": ""
+  },
+  {
+   "feature": "omniscient sections rare and paratextual",
+   "claim": "Sections told by an omniscient narrator are comparatively few, and some (the Prologue, the accounts of Bree and Minas Tirith) resemble a different text type, eighteenth-century antiquarianism such as Percy's Reliques (p. 111).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "comparatively few in number"
+  },
+  {
+   "feature": "epic style at battle crises",
+   "claim": "The 'epic style' first seen with the Riders of Rohan recurs particularly at moments when a battle's outcome is imminent: Helm's Deep, the siege of Gondor, and when the Ring falls into the Cracks of Doom (p. 113).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "at moments when the outcome of a battle is imminent"
+  },
+  {
+   "feature": "Ossianic syntax in epic passages",
+   "claim": "The epic passages' short sentences, parataxis, inversion and repetition, with darkness and night motifs, are reminiscent of Macpherson's Poems of Ossian (p. 116).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "short sentences, parataxis, inversion and repetition"
+  },
+  {
+   "feature": "Rohirrim passage syntax",
+   "claim": "In the Rohirrim passages sentences follow one another paratactically, more complex propositions are built with participles, there are few hypotactic sentences, and the effort of the journey is conveyed by inversions (p. 115).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "there are few hypotactical sentences"
+  },
+  {
+   "feature": "inversion of showing/telling theory",
+   "claim": "Kullmann inverts Lubbock/Friedman: the omniscient archaic passages are the vivid visual 'showing', while point-of-view passages mainly serve to show states of mind rather than to describe action (p. 120).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "mainly serve to show certain states of mind"
+  },
+  {
+   "feature": "Genette/Bal terminology",
+   "claim": "Kullmann notes the shift from Genette's focalisation externe to focalisation interne on Frodo, who becomes Bal's 'focalisé' or Lanser's 'focalizer', but he prefers the historical term 'point of view' (p. 123).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "Frodo becomes the “focalisé”"
+  },
+  {
+   "feature": "hobbit viewpoint vs archaic speech registers",
+   "claim": "The archaic register of Dwarves and Men contrasts starkly with the language of the hobbits and of the narrator, who usually tells the story from the hobbits' points of view (p. 217).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "usually tells the story from the hobbits' points of view"
+  },
+  {
+   "feature": "psychonarration typical of realist novel",
+   "claim": "Turner: Kullmann's psychonarration, events filtered through an individual's limited point of view, is typical of the realistic novel; where no hobbits are present the focus on 'archaic' characters brings narrative language of an older epic tradition.",
+   "source": "Allan Turner, review of Kullmann & Siepmann, Journal of Inklings Studies 12.1 (2022)",
+   "url": "https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144",
+   "quote": ""
+  },
+  {
+   "feature": "no single Tolkien style",
+   "claim": "Turner: K&S dispel any notion of one 'Tolkien style', showing skilful use of several styles resonating with the last few hundred years of English writing.",
+   "source": "Allan Turner, review of Kullmann & Siepmann, Journal of Inklings Studies 12.1 (2022)",
+   "url": "https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144",
+   "quote": "dispel any notion that there is any one ‘Tolkien style’"
+  },
+  {
+   "feature": "parataxis vs hypotaxis as cultural registers",
+   "claim": "Bolding reports Kullmann's contrast of parataxis and hypotaxis as defining the Rohirrim and Gondor cultures, with Gandalf the one speaker who moves fluidly between social registers.",
+   "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23",
+   "quote": "his contrast of parataxis and hypotaxis"
+  },
+  {
+   "feature": "per-speaker register summary",
+   "claim": "Bolding summarises ch. 9: Gandalf and Frodo are the most flexible speakers, Sam undergoes the most evolution, Gimli and Legolas keep the most traditional registers, Merry and Pippin use common English as reality-based touchstones.",
+   "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23",
+   "quote": "Gandalf and Frodo are found to be the most flexible"
+  },
+  {
+   "feature": "modal 'shall' by speaker",
+   "claim": "Holmes cites K&S data that Aragorn opens future pronouncements with 'shall' half again as often as Gandalf and seven times as often as Sam or Pippin.",
+   "source": "John R. Holmes, review of Kullmann & Siepmann, Journal of Tolkien Research 14.1 (2022)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol14/iss1/7",
+   "quote": "seven times as often as Sam or Pippin"
+  },
+  {
+   "feature": "archaic inversion prevalence refuted",
+   "claim": "Holmes: K&S's data tend to refute the long-held view of the prevalence and significance of archaic inversions in Tolkien (K&S p. 40).",
+   "source": "John R. Holmes, review of Kullmann & Siepmann, Journal of Tolkien Research 14.1 (2022)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol14/iss1/7",
+   "quote": "the prevalence and significance of archaic inversions"
+  },
+  {
+   "feature": "embedded stories count",
+   "claim": "Holmes: Kullmann identifies 45 to 50 intercalated stories told by twenty-three characters, in three categories (simultaneous events, exposition, mythological past); Bolding gives 23 storytellers.",
+   "source": "John R. Holmes, review of Kullmann & Siepmann, Journal of Tolkien Research 14.1 (2022)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol14/iss1/7",
+   "quote": "45 to 50 “intercalated” stories told by twenty-three characters"
+  },
+  {
+   "feature": "corpus and n-gram method",
+   "claim": "Siepmann's syntax chapter uses a corpus separating dialogue from narrative, with the PHRASEOROM post-war fiction corpus and the BNC as references, extracting the most significant 3- to 6-grams of syntactic tags and attending to constructions Tolkien avoids as well as prefers.",
+   "source": "Kullmann & Siepmann, 'The Narrative Syntax of The Lord of the Rings' (ch. 3) abstract, Springer",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_3",
+   "quote": "constructions that Tolkien, compared to other authors, tends to avoid"
+  },
+  {
+   "feature": "free indirect speech absent",
+   "claim": "Siepmann finds that the short copular sentences and modal 'would' uses that signal free indirect speech in modern fiction are conspicuous by their absence from The Lord of the Rings (pp. 75-76).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "conspicuous by their absence from The Lord of the Rings"
+  },
+  {
+   "feature": "inner monologue rendered by omniscient narrator",
+   "claim": "Short sentences of the kind found in modern fiction tend to be direct renditions by an omniscient narrator of characters' inner monologue, a strategy Tolkien does not use (p. 75).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "direct renditions by an omniscient narrator of characters' inner monologue"
+  },
+  {
+   "feature": "thought-report by that-clause",
+   "claim": "Instead of free indirect thought Tolkien overuses clauses reporting a character's thoughts with a that-clause ('He thought that he had heard a faint voice') and 'It seemed that' constructions (p. 84).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "It seemed that he had made some decision"
+  },
+  {
+   "feature": "underuse of sentence-initial pronouns",
+   "claim": "At clause level the first thing to note is an evident underuse of personal pronouns in sentence-initial position, against the contemporary-fiction patterns 'She longed to say it', 'He had expected to fight' (p. 74).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "underuse of personal pronouns in sentence-initial position"
+  },
+  {
+   "feature": "reference by name over pronoun",
+   "claim": "Pronoun reference is a dispreferred strategy; given the unusually large cast, reference by name becomes a frequent necessity (p. 75).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "reference by name becomes a frequent necessity"
+  },
+  {
+   "feature": "underuse of modal verbs",
+   "claim": "At word level Tolkien underuses modal verbs relative to post-war fiction (p. 72).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "underuse of modal verbs"
+  },
+  {
+   "feature": "dispreferred adverb-led participle clauses",
+   "claim": "Clause-initial participle clauses introduced by an adverb and followed by a main clause ('Already cringing ..., she suddenly felt') are comparatively rare in The Lord of the Rings (p. 75).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": ""
+  },
+  {
+   "feature": "fronting of adverbials",
+   "claim": "The most conspicuous clause-level idiosyncrasy is the fronting of adverbials, as in 'to a (N) they came' (p. 78).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "the fronting of adverbials"
+  },
+  {
+   "feature": "clause-initial then/presently/suddenly",
+   "claim": "Tolkien overuses 'then', 'presently' and 'suddenly' in clause-initial position (p. 78).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "overuse of then, presently or suddenly in clause-initial position"
+  },
+  {
+   "feature": "inversion types",
+   "claim": "Even a casual reader notices Tolkien's fondness for inverted constructions, most commonly fronted subject complements followed by copular be and the subject ('beautiful was its colour'), and fronted prepositional phrases with other verbs (p. 81).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "fronted subject complements followed by copular be and the subject"
+  },
+  {
+   "feature": "inversion vs fronting terminology",
+   "claim": "Turner notes Siepmann distinguishes linguistically between inversion and fronting whereas Kullmann uses 'inversion' for both in the rhetorical sense.",
+   "source": "Allan Turner, review of Kullmann & Siepmann, Journal of Inklings Studies 12.1 (2022)",
+   "url": "https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144",
+   "quote": "between inversion and fronting"
+  },
+  {
+   "feature": "passive plus prepositional complement",
+   "claim": "An overused clause variant is a passive verb followed by a prepositional complement ('Her shield was shivered in many pieces'), with passive slots filled by original or obsolescent material; the stative passive is far more common than the eventive (pp. 79-80, 83).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "the stative passive is far more common than the eventive"
+  },
+  {
+   "feature": "clause-initial participles and bare participles",
+   "claim": "Tolkien, unlike many novelists, clearly prefers clause-initial over clause-final participial clauses, sometimes reduced to a bare absolute participle ('he, bowing low to the fallen, bade them'), though participial constructions are generally underused (p. 80).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "clear preference for clause-initial participial clauses"
+  },
+  {
+   "feature": "existential there for events",
+   "claim": "Tolkien uses existential clauses with a wide variety of verbs to describe events ('there came ...'), fronted prepositional phrases with existential there, and existential there with passives ('there was held the highest feast'), but hardly ever for mere presence or absence (pp. 76, 82-83).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "existential clauses with a wide variety of verbs"
+  },
+  {
+   "feature": "coordination by and / polysyndeton",
+   "claim": "Clauses and phrases coordinated by 'and' feature prominently; Tolkien uses 'and' with high frequency but sometimes differently from other writers (Table 3.1 'Use of and'; pp. 76, 86).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "Clauses and phrases coordinated by and feature prominently"
+  },
+  {
+   "feature": "dialogue-framing inversion",
+   "claim": "Dialogue-framing sentences of the type 'said Frodo' (verb before name) are a recurrent feature of the narrative syntax (pp. 84-85).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "dialogue-framing sentences (said Frodo)"
+  },
+  {
+   "feature": "sentence-initial 'at last'",
+   "claim": "Sentence-initial 'at last' combined with a short verb, and fronted adjectives functioning as subject complements, are typical sentence openers (p. 84).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": ""
+  },
+  {
+   "feature": "descriptive verbs and intensifiers",
+   "claim": "Key verbs shared with modern fiction are highly descriptive (clutch, cower, crawl, flicker, gape, gasp, gaze, gleam), while Tolkien overuses the emphasizers very, so and too and the adverb 'even', about seven times more common than in modern fiction (pp. 47, 49, 59).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "around seven times more common than in modern fiction"
+  },
+  {
+   "feature": "descriptivity distribution",
+   "claim": "The first half of the book is less densely descriptive; tight clusters of high descriptivity peak in Book Four, chapters II and VII (p. 48).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "three outstanding peaks in Book Four"
+  },
+  {
+   "feature": "archaicity from three lexical causes",
+   "claim": "Siepmann's 2017 corpus study: the impression of archaicity comes from overuse of nineteenth-century fiction words (yonder, journey (v), topmost), avoidance of modern-world words, and dense use of coinages, unusual patterns and obsolescent words; reference corpora were 30m (19th-c fiction), 160m (post-war fiction) and 94m (mixed).",
+   "source": "Dirk Siepmann, 'Tolkien as a stylist: a corpus-based investigation' (Corpus Linguistics 2017, Birmingham)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "three simple lexical causes"
+  },
+  {
+   "feature": "modern words in nineteenth-century patterns",
+   "claim": "Modern key words (they, big, wake, wall, tired, smoke) are used in nineteenth-century patterns, e.g. 'a black smoke' with indefinite article, rare in modern fiction.",
+   "source": "Dirk Siepmann, 'Tolkien as a stylist: a corpus-based investigation' (Corpus Linguistics 2017, Birmingham)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": ""
+  },
+  {
+   "feature": "parataxis at Pelennor (Turner)",
+   "claim": "Wikipedia cites Turner: Tolkien's style is generally simple parataxis, varied by the race and standing of the speaker; at Pelennor the paratactic repeated 'and' creates an exalted biblical register with few archaic words.",
+   "source": "Wikipedia, Tolkien's prose style",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "repeated use of 'and'"
+  },
+  {
+   "feature": "loose semantic fit and inversion",
+   "claim": "Wikipedia cites Shippey's 'loose semantic fit' (conjunctions avoiding explicit logical connection) at significant moments and Rosebury on inversion working better than the plain order ('But glad would he have been').",
+   "source": "Wikipedia, Tolkien's prose style",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": ""
+  },
+  {
+   "feature": "parataxis for excitement",
+   "claim": "McIntosh, citing Garth (p. 271), describes Tolkien's parataxis as short simple sentences joined by 'and' in the Ride of the Rohirrim and Pelennor, producing breathless excitement and rising foreboding.",
+   "source": "Jonathan McIntosh, 'Tolkien's use of parataxis', The Flame Imperishable (2012)",
+   "url": "https://jonathansmcintosh.wordpress.com/2012/03/22/tolkiens-use-of-parataxis/",
+   "quote": "sense of breathless excitement"
+  },
+  {
+   "feature": "Hobbit narrator intrusive then receding",
+   "claim": "Thomas (per Nepveu): The Hobbit opens with a very intrusive narrator who recedes as the book grows serious; the LOTR narrator is impartial and self-effacing, and early LOTR drafts were unsuccessful returns to the intrusive voice (Booth's scale).",
+   "source": "Kate Nepveu, summary of Paul Edmund Thomas, 'Some of Tolkien's Narrators' (2000)",
+   "url": "https://kate-nepveu.livejournal.com/181350.html",
+   "quote": "impartial and self-effacing"
+  },
+  {
+   "feature": "Hobbit narrator omniscient and child-addressed",
+   "claim": "Poveda: The Hobbit's narrator is omniscient, comments on events, addresses the reader as a child, withholds and anticipates information, and is conscious of the written medium.",
+   "source": "Jaume Albero Poveda, 'Narrative models in Tolkien's stories of Middle-earth', Journal of English Studies 4 (2003-04)",
+   "url": "https://dialnet.unirioja.es/descarga/articulo/1975822.pdf",
+   "quote": ""
+  },
+  {
+   "feature": "LOTR narrator disappears behind characters",
+   "claim": "Poveda: LOTR begins in a conversational tone with Hobbit-style asides and an occasionally unreliable narrator ('probably started by the knowledgeable Sam'), but as the plot progresses the voice becomes neutral and the narrator disappears behind the characters.",
+   "source": "Jaume Albero Poveda, 'Narrative models in Tolkien's stories of Middle-earth', Journal of English Studies 4 (2003-04)",
+   "url": "https://dialnet.unirioja.es/descarga/articulo/1975822.pdf",
+   "quote": "the narrator disappears behind the characters"
+  },
+  {
+   "feature": "archaic style confined to elf/men episodes",
+   "claim": "Poveda: archaic forms (ye, hath) and noun-adjective inversion are not predominant but confined to episodes of Elves and Men inspired by epic, chiefly Books II and III; capitalised common nouns (the Sea, the City) mark the style.",
+   "source": "Jaume Albero Poveda, 'Narrative models in Tolkien's stories of Middle-earth', Journal of English Studies 4 (2003-04)",
+   "url": "https://dialnet.unirioja.es/descarga/articulo/1975822.pdf",
+   "quote": "chiefly books II and III"
+  },
+  {
+   "feature": "intrusive authorial narrator (Hobbit)",
+   "claim": "Litschko, using Stanzel and Booth, characterises The Hobbit's narrator as an intrusive authorial narrator who comments and judges, addresses readers directly, shifts point of view, and changes tone in the later-written final chapters.",
+   "source": "Nadja Litschko, 'The Voice of the Narrator in J.R.R. Tolkien's The Hobbit' (GRIN, 2006)",
+   "url": "https://www.grin.com/document/61292",
+   "quote": "intrusive authorial narrator"
+  },
+  {
+   "feature": "limited omniscience when no hobbit present",
+   "claim": "aefenglommung: the story is seen mainly through Frodo's mind, occasionally Merry or Pippin, and increasingly Sam; where no hobbit is present Tolkien draws back into limited omniscience and we do not enter Aragorn's, Gimli's or Legolas's minds, Book 3 reading like a stage-play.",
+   "source": "aefenglommung, 'Point of view in LOTR' (LiveJournal, 2021)",
+   "url": "https://aefenglommung.livejournal.com/1682841.html",
+   "quote": "we do not enter their minds"
+  },
+  {
+   "feature": "multiple tellers and limited vs omniscient narrators",
+   "claim": "Barkley compares the versions of tales told by Bilbo, Aragorn, Gandalf, the Red Book's scholar-editor and the Silmarillion's omniscient narrator: the limited narrator is narrower in scope but richer in detail, dialogue and song, the omniscient broader in theme.",
+   "source": "Christine Barkley, 'Point of View in Tolkien', Mythlore 21.2 (1996)",
+   "url": "https://dc.swosu.edu/mythlore/vol21/iss2/38/",
+   "quote": "The limited third-person narrative focuses attention more on one character"
+  },
+  {
+   "feature": "Prologue/Red Book frame",
+   "claim": "Barkley: the Prologue's Red Book of Westmarch frame authenticates the tale, gives away the happy ending, and contrasts with The Hobbit, whose narrator paraphrased Bilbo's account and revealed his own bias.",
+   "source": "Christine Barkley, 'Point of View in Tolkien', Mythlore 21.2 (1996)",
+   "url": "https://dc.swosu.edu/mythlore/vol21/iss2/38/",
+   "quote": ""
+  },
+  {
+   "feature": "editor/translator frame",
+   "claim": "Wikipedia cites Thomson (1967) and Turner (2011) for the found-manuscript frame in which Tolkien poses as editor/translator of the Red Book, with genealogies and footnotes as editorial apparatus.",
+   "source": "Wikipedia, Storytelling in The Lord of the Rings",
+   "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+   "quote": ""
+  },
+  {
+   "feature": "Hobbit token counts",
+   "claim": "Tauber: The Hobbit's 19 chapters (70th Anniversary edition) yield 95,137 whitespace tokens in 11,532 types, or 95,390/95,643 depending on em-dash handling; 5,165 types carry trailing punctuation and 254 contain em-dashes.",
+   "source": "James Tauber, 'Tokenizing the Hobbit' (Digital Tolkien Project, 2021)",
+   "url": "https://digitaltolkien.com/2021/03/14/tokenizing-the-hobbit.html",
+   "quote": "95,137 tokens in 11,532 types"
+  },
+  {
+   "feature": "Hobbit paragraph count",
+   "claim": "Tauber: The Hobbit has 1,566 paragraphs; 85.8% are uniquely identifiable by their first three tokens and 98.5% by five or fewer.",
+   "source": "James Tauber, 'Minimal Prefixes to Identify Hobbit Paragraphs' (Digital Tolkien Project, 2021)",
+   "url": "https://digitaltolkien.com/2021/03/06/minimal-prefixes-to-identify-hobbit-paragraphs.html",
+   "quote": ""
+  },
+  {
+   "feature": "direct-speech punctuation conventions",
+   "claim": "Tauber: in LOTR a single-sentence utterance followed by a tag ends in a comma before the closing quote; 'A,' said X, 'B.' versus 'A,' said X. 'B.' distinguish one interrupted sentence from two, and the first form is ambiguous.",
+   "source": "James Tauber, 'Punctuation and Structure in Marking Up Direct Speech' (Digital Tolkien Project, 2019)",
+   "url": "https://digitaltolkien.com/2019/05/18/punctuation-and-structure-in-marking-up-direct-speech.html",
+   "quote": ""
+  },
+  {
+   "feature": "speaker identification corpus",
+   "claim": "The Digital Tolkien Project reports speaker identification completed for The Hobbit, The Lord of the Rings and The Silmarillion, enabling dialogue/narrative separation by speaker.",
+   "source": "Digital Tolkien Project, Overview and Sub-Projects",
+   "url": "https://digitaltolkien.com/subprojects/",
+   "quote": "Speaker identification has been completed"
+  },
+  {
+   "feature": "multidimensional register analysis (planned)",
+   "claim": "Tauber's Oxonmoot 2023 abstract applies Multidimensional Register Analysis across The Book of Lost Tales, The Hobbit, LOTR and The Silmarillion, asking whether the Silmarillion's elevated style appears in Elven direct speech in LOTR, noting these shifts had not previously been studied quantitatively.",
+   "source": "Digital Tolkien Project, 'Upcoming Talks' (2023) with Oxonmoot abstract 'Linguistic Variation in Tolkien's Writing Styles'",
+   "url": "https://digitaltolkien.com/2023/06/10/upcoming-talks.html",
+   "quote": "have not previously been studied quantitatively"
+  },
+  {
+   "feature": "LOTR word counts",
+   "claim": "Rateliff collates counts: LotR Project 481,103; an unofficial count 478,492 without appendices and 526,172 with; The Hobbit 95,356; The Silmarillion 130,115; Tolkien's own 1950 estimate was 600,000.",
+   "source": "John D. Rateliff, 'Just How Long is LotR Anyway? (word counts)', Sacnoth's Scriptorium (2017)",
+   "url": "http://sacnoths.blogspot.com/2017/04/just-how-long-is-lotr-anyway-word-counts.html",
+   "quote": ""
+  },
+  {
+   "feature": "Third Age corpus sizes",
+   "claim": "Livesey's corpus: The Hobbit 95,559 tokens; the two books of The Two Towers 66,374 and 64,738 tokens; 'ring' occurs 306 times in Fellowship (1.72 per thousand words), 70 in Two Towers (0.45) and 73 in Return of the King.",
+   "source": "Michael Livesey, 'The Ring Cycle: Journeying Through the Language of Tolkien's Third Age with Corpus Linguistics', JTR 18.1 (2023)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol18/iss1/4/",
+   "quote": "a total wordcount of 95,559 tokens"
+  },
+  {
+   "feature": "Hobbit + LOTR token total",
+   "claim": "Beasley's chapter-level corpus of The Hobbit (19 chapters) and LOTR (5 prologue sections plus 61 chapters) totals 578,432 tokens.",
+   "source": "Michael H. Beasley, 'A Spatial Text Analysis of J. R. R. Tolkien's Middle-Earth' (USC senior thesis, 2019)",
+   "url": "https://scholarcommons.sc.edu/senior_theses/297",
+   "quote": "the total word count calculated, was 578,432"
+  },
+  {
+   "feature": "average sentence length (Hobbit opening)",
+   "claim": "Shugar's grammatical analysis of The Hobbit's opening finds an average sentence length of 19 words, a longest sentence of 59 words, nested clauses with coordinating conjunctions and em-dash interruptions.",
+   "source": "Amelia Shugar, 'A Grammatical Journey down the Hobbit Hole' (2019)",
+   "url": "https://ameliashugar.com/a-grammatical-journey-down-the-hobbit-hole/",
+   "quote": "an average sentence length of 19 words"
+  },
+  {
+   "feature": "longest sentences",
+   "claim": "Forum counting finds a 144-word sentence in the original Fall of Gondolin tale, cites an online claim that the longest LOTR sentence is 111 words, and corrects a 96-word count to 97; Tolkien's punctuation is credited with keeping such sentences readable.",
+   "source": "The Tolkien Forum thread 'Tolkien's Longest Sentence?' (2022)",
+   "url": "https://thetolkien.forum/threads/tolkiens-longest-sentence.30796/",
+   "quote": "one long sentence, counting at 144 words"
+  },
+  {
+   "feature": "dialogue extraction by quotation marks",
+   "claim": "Qiu extracts The Hobbit's dialogue by regex on text enclosed in double quotation marks across 19 chapters; top dialogue words are good (89), time (65), Baggins (46).",
+   "source": "Lilin Qiu, 'Quantifying Emotional Tone in Tolkien's The Hobbit' (arXiv 2512.10865, 2025)",
+   "url": "https://arxiv.org/html/2512.10865v1",
+   "quote": "text enclosed in double quotation marks"
+  },
+  {
+   "feature": "unique-word density",
+   "claim": "LotrProject reports The Hobbit has more unique words and a higher unique-word density than The Silmarillion and each LOTR volume (2009 HarperCollins eBooks, appendices excluded).",
+   "source": "LotrProject, 'Word count and density' (via Wayback)",
+   "url": "http://lotrproject.com/statistics/books/wordscount",
+   "quote": "higher unique word density"
+  }
+ ],
+ "sourcesRead": [
+  {
+   "title": "Storytelling in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+   "kind": "encyclopedia article",
+   "substantive": true
+  },
+  {
+   "title": "Tolkien's prose style (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "kind": "encyclopedia article",
+   "substantive": true
+  },
+  {
+   "title": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside snippets (id 9uAsEAAAQBAJ)",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "kind": "monograph (search-inside snippets with page numbers)",
+   "substantive": true
+  },
+  {
+   "title": "Kullmann & Siepmann, 'Points of View' (ch. 4, pp. 89-127), Springer chapter page",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+   "kind": "chapter abstract",
+   "substantive": true
+  },
+  {
+   "title": "Kullmann & Siepmann, 'The Narrative Syntax of The Lord of the Rings' (ch. 3, pp. 71-87), Springer chapter page",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_3",
+   "kind": "chapter abstract",
+   "substantive": true
+  },
+  {
+   "title": "Kullmann & Siepmann, Tolkien as a Literary Artist, Springer book page (table of contents)",
+   "url": "https://link.springer.com/book/10.1007/978-3-030-69299-5",
+   "kind": "book landing page",
+   "substantive": false
+  },
+  {
+   "title": "Sharon L. Bolding, review of Tolkien as a Literary Artist, Mythlore 41.1 (2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23",
+   "kind": "book review",
+   "substantive": true
+  },
+  {
+   "title": "John R. Holmes, review of Tolkien as a Literary Artist, Journal of Tolkien Research 14.1 (2022)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol14/iss1/7",
+   "kind": "book review",
+   "substantive": true
+  },
+  {
+   "title": "Allan Turner, review of Tolkien as a Literary Artist, Journal of Inklings Studies 12.1 (2022)",
+   "url": "https://www.euppublishing.com/doi/full/10.3366/ink.2022.0144",
+   "kind": "book review",
+   "substantive": true
+  },
+  {
+   "title": "Dirk Siepmann, 'Tolkien as a stylist: a corpus-based investigation into The Lord of the Rings' (Corpus Linguistics 2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "kind": "conference paper",
+   "substantive": true
+  },
+  {
+   "title": "Christine Barkley, 'Point of View in Tolkien', Mythlore 21.2 (1996)",
+   "url": "https://dc.swosu.edu/mythlore/vol21/iss2/38/",
+   "kind": "journal article",
+   "substantive": true
+  },
+  {
+   "title": "Jaume Albero Poveda, 'Narrative models in Tolkien's stories of Middle-earth', Journal of English Studies 4 (2003-04)",
+   "url": "https://dialnet.unirioja.es/descarga/articulo/1975822.pdf",
+   "kind": "journal article",
+   "substantive": true
+  },
+  {
+   "title": "Michael Livesey, 'The Ring Cycle: Journeying Through the Language of Tolkien's Third Age with Corpus Linguistics', JTR 18.1 (2023)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol18/iss1/4/",
+   "kind": "journal article",
+   "substantive": true
+  },
+  {
+   "title": "Michael H. Beasley, 'A Spatial Text Analysis of J. R. R. Tolkien's Middle-Earth' (2019)",
+   "url": "https://scholarcommons.sc.edu/senior_theses/297",
+   "kind": "senior thesis",
+   "substantive": true
+  },
+  {
+   "title": "James Tauber, 'Tokenizing the Hobbit' (Digital Tolkien Project, 2021)",
+   "url": "https://digitaltolkien.com/2021/03/14/tokenizing-the-hobbit.html",
+   "kind": "blog post",
+   "substantive": true
+  },
+  {
+   "title": "James Tauber, 'Minimal Prefixes to Identify Hobbit Paragraphs' (Digital Tolkien Project, 2021)",
+   "url": "https://digitaltolkien.com/2021/03/06/minimal-prefixes-to-identify-hobbit-paragraphs.html",
+   "kind": "blog post",
+   "substantive": true
+  },
+  {
+   "title": "James Tauber, 'Punctuation and Structure in Marking Up Direct Speech' (Digital Tolkien Project, 2019)",
+   "url": "https://digitaltolkien.com/2019/05/18/punctuation-and-structure-in-marking-up-direct-speech.html",
+   "kind": "blog post",
+   "substantive": true
+  },
+  {
+   "title": "James Tauber, 'Counting Breakfasts' (Digital Tolkien Project, 2021)",
+   "url": "https://digitaltolkien.com/2021/09/22/counting-breakfasts.html",
+   "kind": "blog post",
+   "substantive": false
+  },
+  {
+   "title": "Digital Tolkien Project, 'Upcoming Talks' (2023) incl. Oxonmoot abstract",
+   "url": "https://digitaltolkien.com/2023/06/10/upcoming-talks.html",
+   "kind": "blog post",
+   "substantive": true
+  },
+  {
+   "title": "Digital Tolkien Project, Talks",
+   "url": "https://digitaltolkien.com/talks/",
+   "kind": "index page",
+   "substantive": false
+  },
+  {
+   "title": "Digital Tolkien Project, home page",
+   "url": "https://digitaltolkien.com/",
+   "kind": "index page",
+   "substantive": false
+  },
+  {
+   "title": "Digital Tolkien Project, Overview and Sub-Projects",
+   "url": "https://digitaltolkien.com/subprojects/",
+   "kind": "project page",
+   "substantive": true
+  },
+  {
+   "title": "Oxonmoot 2023 schedule entry, 'Linguistic Variation in Tolkien's Writing Styles'",
+   "url": "https://oxonmoot2023.sched.com/event/1P0hP/linguistic-variation-in-tolkiens-writing-styles",
+   "kind": "event listing",
+   "substantive": false
+  },
+  {
+   "title": "aefenglommung, 'Point of view in LOTR' (LiveJournal, 2021)",
+   "url": "https://aefenglommung.livejournal.com/1682841.html",
+   "kind": "blog post",
+   "substantive": true
+  },
+  {
+   "title": "Kate Nepveu, LOTR re-read: Thomas, 'Some of Tolkien's Narrators' (LiveJournal)",
+   "url": "https://kate-nepveu.livejournal.com/181350.html",
+   "kind": "blog summary of essay",
+   "substantive": true
+  },
+  {
+   "title": "Nadja Litschko, 'The Voice of the Narrator in J.R.R. Tolkien's The Hobbit' (GRIN, 2006)",
+   "url": "https://www.grin.com/document/61292",
+   "kind": "student paper excerpt",
+   "substantive": true
+  },
+  {
+   "title": "John D. Rateliff, 'Just How Long is LotR Anyway? (word counts)' (2017)",
+   "url": "http://sacnoths.blogspot.com/2017/04/just-how-long-is-lotr-anyway-word-counts.html",
+   "kind": "blog post",
+   "substantive": true
+  },
+  {
+   "title": "Amelia Shugar, 'A Grammatical Journey down the Hobbit Hole' (2019)",
+   "url": "https://ameliashugar.com/a-grammatical-journey-down-the-hobbit-hole/",
+   "kind": "blog post",
+   "substantive": true
+  },
+  {
+   "title": "The Tolkien Forum, 'Tolkien's Longest Sentence?' (2022, via Wayback)",
+   "url": "https://thetolkien.forum/threads/tolkiens-longest-sentence.30796/",
+   "kind": "forum thread",
+   "substantive": true
+  },
+  {
+   "title": "Goodreads topic 'Tolkien's prose: what makes it so vigorous?'",
+   "url": "https://www.goodreads.com/topic/show/18862123-tolkien-s-prose-what-makes-it-so-vigorous",
+   "kind": "forum thread",
+   "substantive": false
+  },
+  {
+   "title": "Jonathan McIntosh, 'Tolkien's use of parataxis' (The Flame Imperishable, 2012)",
+   "url": "https://jonathansmcintosh.wordpress.com/2012/03/22/tolkiens-use-of-parataxis/",
+   "kind": "blog post",
+   "substantive": true
+  },
+  {
+   "title": "Lilin Qiu, 'Quantifying Emotional Tone in Tolkien's The Hobbit' (arXiv 2512.10865, 2025)",
+   "url": "https://arxiv.org/html/2512.10865v1",
+   "kind": "preprint",
+   "substantive": true
+  },
+  {
+   "title": "Perri et al., 'One Graph to Rule them All' (arXiv 2210.07871, 2022)",
+   "url": "https://arxiv.org/abs/2210.07871",
+   "kind": "preprint abstract",
+   "substantive": false
+  },
+  {
+   "title": "Marcel R. Bülles, 'An Interactive Analysis of Tolkien's works - LotRProject.com' (thetolkienist.com, 2013)",
+   "url": "https://thetolkienist.com/2013/02/17/an-interactive-analysis-of-tolkiens-works-lotrproject-com/",
+   "kind": "blog post",
+   "substantive": false
+  },
+  {
+   "title": "LotrProject, 'Word count and density' (via Wayback)",
+   "url": "http://lotrproject.com/statistics/books/wordscount",
+   "kind": "data site",
+   "substantive": true
+  },
+  {
+   "title": "Narrative structure of The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Narrative_structure_of_The_Lord_of_the_Rings",
+   "kind": "encyclopedia article",
+   "substantive": false
+  },
+  {
+   "title": "Sacnoth/other: Google Books API volumes endpoint (no snippets returned)",
+   "url": "https://www.googleapis.com/books/v1/volumes",
+   "kind": "API endpoint",
+   "substantive": false
+  }
+ ]
+}

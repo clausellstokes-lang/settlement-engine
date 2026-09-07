@@ -1,0 +1,107 @@
+Skip to content 
+
+ DELVE into deadly 5E dungeons! 
+
+ Check out DELVE! 
+
+ Running Rime of the Frostmaiden – Part 2: Structure
+
+ 4 Comments 
+
+ / Icewind Dale , DM's Tips 
+
+ This is part 2 of a series about running Rime of the Frostmaiden. Check out Running Rime of the Frostmaiden – Introduction & Overview for a more in-depth description of the series. 
+ As mentioned in the introduction to this series, I think one of Rime of the Frostmaiden’s biggest weaknesses has to do with its overarching structure. I find that the early chapters are too open, with very little direction provided to the DM, while the later chapters are too linear, leaving little room for including the cool content in Chapter 2 in particular. 
+ Below, I’ll explain how you can restructure Rime of the Frostmaiden to create a more cohesive structure that makes the adventure easier to run, includes more cool stuff from the book organically, and keeps the players engaged and interested in the adventure throughout. 
+
+ The Complete DM's Bundle for Icewind Dale: Rime of the Frostmaiden has advice, notes, handouts, cheatsheets, encounter maps, and other DM's resources for Icewind Dale: Rime of the Frostmaiden. 
+
+ Rime of the Frostmaiden’s Structure 
+
+ The above flowchart is my (arguably simplified) attempt at showing how Rime of the Frostmaiden is structured if we go by what’s written in the book’s introduction. As presented, the adventure consists of two huge – but separated by level requirements – sandboxes, followed by a fairly linear story until the adventure ends in Ythryn. This structure creates a few issues. 
+ Issue 1: An Unstructured Beginning 
+ Now, sandboxes are cool and fun, but completely open and near-directionless sandboxes can quickly become frustrating for both the players and the DM. In Rime of the Frostmaiden’s case, the danger with the very open way the adventure starts, is that the DM may end up running quests and encounters that are either too easy or too difficult (because the quests’ difficulty varies greatly) and that the characters are pushed toward Sunblight Fortress without first reaching the requisite level or before they have had a chance to experience much of the cool stuff the first two chapters has to offer. 
+ Issue 2: A Railroady Middle & Ending 
+ Second, from Vellynne makes her appearance at the end of chapter 4 to the characters delve into Ythryn in chapter 7, the adventure is completely on rails. It’s natural for a campaign to start narrowing down available choices toward the end, but in this case, the end starts a bit early. This is an issue, because having only one option can be just as frustrating as having too many options. And, once again, because the characters are following a railroad straight to Ythryn, they’re likely to miss out on the cool locations in Chapter 2: Icewind Dale unless the DM goes out of their way to include them. 
+
+ Rime of the Frostmaiden – Restructured 
+
+ Boiling it down, the primary goal of restructuring Rime of the Frostmaiden is to create a structure that has more direction in the beginning, more freedom in the middle, and that organically includes more content from Chapter 2: Icewind Dale. Below, I’ll give an overview of how you can restructure Rime of the Frostmaiden’s story to accomplish this, before covering the proposed changes in more detail in later articles.
+ Let’s start with… well, the beginning.
+
+ The Beginning – More Direction 
+
+ As mentioned above, my issue with the beginning of Rime of the Frostmaiden (which I consider everything that happens up until the characters reach Sunblight Fortress) is that it has too little direction. Without direction, the DM may not accomplish all they want to in Ten-Towns and Icewind Dale before the characters are suddenly swept on toward the main story.
+ But first, what do we want to accomplish during the beginning? As I see it, the beginning is where we : 
+ Give information about and foreshadow important plots (Auril’s Everlasting Rime, Xardorok’s dragon, and the Arcane Brotherhood’s search for Ythryn). 
+ Get the characters acquainted with, and invested in, Ten-Towns and its citizens, so that later events (the dragon’s attack!) carry more weight. 
+ Lead the characters organically toward Sunblight Fortress when they’ve reached 5th level and have had a chance to explore Icewind Dale. 
+ To make sure that we accomplish all of this during the beginning, I propose a rough guideline that looks something like this: 
+
+ This example uses Bryn Shander as the starting town, but you can easily swap it with Bremen, Targos, or Termalaine. 
+
+ Starting Out. As I’ll expand upon in the next article, it seems prudent to start the adventure out in the northwestern part of Ten-Towns (Bremen, Bryn Shander, Lonelywood, Targos, and Termalaine) and provide the characters with enough rumors and quests to keep them in this area through level 1 and 2. While they’re here, we’ll foreshadow the Arcane Brotherhood, the duergar, and clue the characters into Auril and her frost druids. 
+ Branching Out. When the characters reach 3rd level in the northwestern part of Ten-Towns, we can begin steering them south toward Caer-Konig, Caer-Dineval, and Easthaven, where they will learn about the duergar’s presence in Icewind Dale, and begin uncovering the duergar’s plans and the location of Sunblight Fortress, while reaching level 4. Depending on what happens, they may also visit other locations at this point, such as Dougan’s Hole, Good Mead, Black Cabin, and so on. 
+ Finding the Fortress. So far, everything has occurred much like it is presented in the book, just with a bit more direction. But now it’s time to change things around: Instead of delivering the location of Sunblight Fortress to the characters on a silver platter or through copious exposition, we make them work for it. To find the fortress, they will have to visit locations in Icewind Dale such as Id Ascendant or Karkolohk (don’t worry, I’ll go into more detail about how to do this later), which also gives them time to advance to level 5 before they arrive at Sunblight Fortress. 
+ Again, exactly how everything connects will be explained in later parts of this series, but hopefully you can get a sense of the general direction we’re taking here.
+
+ The Middle – More Freedom
+
+ When we get to the middle of the adventure (which I consider to be everything from the characters arrive at Sunblight Fortress and until they get to the Caves of Hunger), we have the opposite issue. Instead of too little direction, there’s way too much. It’s all “stop the dragon attacks”, “go to Auril’s Abode and fetch the codicil of white “, and then “get to the glacier and find Ythryn”.
+ This means that while we’re certain to accomplish what we need to (get the characters to Ythryn), we are likely to end up blowing past many of the cool locations in Chapter 2: Icewind Dale and/or make the players feel restricted and railroaded.
+ Now, I’m not blind to the fact that the book tells us that we can hold off on Vellynne’s quest until we feel like presenting it, which would give us room to present more locations from chapter 2. The issue with this, however, is that hitting the pause button on the main plot in the middle of the story is likely to leave the players restless and confused, wondering what the point of the campaign is.
+ What we want to do instead is to let the characters experience some of the cool locations in Chapter 2: Icewind Dale while still progressing towards the campaign’s goal (ending Auril’s Everlasting Rime) – and doing so in a way that gives them more choices and greater freedom. 
+ That could look something this:
+
+ As you’ll notice, Sunblight/Destruction’s Light have actually become more linear, because that’s how I think it plays best (first clearing the fortress and then dealing with the dragon). I’ll elaborate on that later, but for now, what’s more interesting is what happens before and after Auril’s Abode.
+ Before Auril’s Abode. In the book, Vellynne just tells the characters about the Codicil of White and sends them directly to Auril’s Abode to fetch it. What I propose instead, is that we let the characters figure things out for themselves with only a little guidance from Vellynne, and that finding their way to Auril’s Abode includes a visit to one or more locations in chapter 2, such as Angajuk’s Bell, Jarlmoot, Dark Duchess, or Revel’s End. 
+ After Auril’s Abode. In the book, the characters can head straight from Auril’s Abode to the Reghed Glacier, from where they can enter the Caves of Hunger. Again, we can make them work a bit more for it by requiring them to visit locations in chapter 2, such as the Lost Spire of Netheril and Wyrmdoom Crag/Skytower Shelter, to learn where they can enter the Reghed Glacier.
+ The above flowchart is just an example, as there’s a multitude of ways you can put this together, but the essence is the same: instead of just unloading all the information on the characters, Vellynne tells them about Ythryn and the mythallar , and offers suggestions about where to find out more, which prompts the characters to explore more of Icewind Dale. This accomplishes what we set out to do: give the characters more choices to make in the second half of the adventure, as well as include more locations from Chapter 2: Icewind Dale.
+
+ Conclusion & Summary
+
+ In summary, the changes I propose drastically changes the adventure’s structure, but with little actual work required on the DM’s part. By simply adding a little direction to the beginning and inserting a few extra steps before the characters can find Sunblight Fortress, Auril’s Abode, and the Reghed Glacier, we have created a structure that I believe makes the adventure flow better and relies less on exposition.
+ Of course, that’s not all there’s to it. In the coming articles, I’ll go over how to implement these changes in more detail, while also giving advice on how to improve the adventure by inserting foreshadowing and tying the various storylines more closely together.
+
+ Coming Up 
+ In Part 3: Starting Strong we pick up from here, as we discuss how to create a strong start for Icewind Dale: Rime of the Frostmaiden, including a sample starting scenario that provides the characters with an immediate sense of purpose and direction. 
+ In the meanwhile, if you’re looking for more in-depth advice on running and balancing various scenarios, encounters, and locations in Rime of the Frostmaiden, as well as DM’s resources such as DM’s notes, cheatsheets, item handouts, and full-color encounter maps for Icewind Dale, check out the Complete DM’s Bundle for Icewind Dale: Rime of the Frostmaiden here . If you’re just looking for cool full-color maps for the adventure, you can also check out the Rime of the Frostmaiden map pack . 
+ J.A. Valeur 
+ Eventyr Games 
+
+ 4 thoughts on “Running Rime of the Frostmaiden – Part 2: Structure” 
+
+ Pingback: Running Rime of the Frostmaiden – Starting the Adventure 
+
+ Kathy 
+ August 5, 2021 at 8:09 pm 
+
+ This is so helpful! I’m so glad I found this.
+
+ Reply 
+
+ BlindBeholder 
+ October 12, 2022 at 10:16 pm 
+
+ Can you make images even smaller?
+
+ Reply 
+
+ Lydia Hodgins 
+ October 17, 2022 at 6:22 pm 
+
+ Hello! We’d like to help make recommendations for your issue, but we’d like to clarify: Are the images having trouble loading the page because they’re large files? Or are you having trouble viewing the blog post due to the size of the images?
+
+ Reply 
+
+ Leave a Comment Cancel Reply 
+ Your email address will not be published. Required fields are marked * 
+ Type here.. 
+
+ Name* 
+
+ Email* 
+
+ Website 
+
+ Save my name, email, and website in this browser for the next time I comment.

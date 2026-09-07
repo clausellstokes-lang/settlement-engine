@@ -1,0 +1,40 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i420-434",
+ "lines": 78,
+ "firstTs": "2026-09-06T17:25:24.061Z",
+ "lastTs": "2026-09-06T17:29:14.763Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 17,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://bookanalysis.com/george-r-r-martin/fire-and-blood/review/",
+  "https://cannonballread.com/2019/01/fire-blood-a-targaryen-history-1-narfna/",
+  "https://bookshelffantasies.com/2018/12/25/book-review-fire-blood-by-george-r-r-martin/",
+  "https://thecosmiccircus.com/fire-and-blood-by-george-r-r-martin/",
+  "https://blastfromthepastshelf.substack.com/p/review-fire-and-blood-by-george-rr",
+  "https://booksofbrilliance.com/2026/06/12/book-review-fire-and-blood/",
+  "https://www.euronews.com/2014/10/16/what-to-expect-in-george-r-r-martins-new-book-the-world-of-ice-and-fire-got",
+  "https://www.drunkmonkeys.us/book-reviews/2015/2/18/the-world-of-ice-and-fire-by-elio-m-garcia-jr-linda-antonsson",
+  "https://litcritpop.com/2017/08/05/george-r-r-martin-elio-m-garcia-jr-and-linda-antonsson-the-world-of-ice-and-fire-book-review/",
+  "https://www.lrb.co.uk/the-paper/v35/n07/john-lanchester/when-did-you-get-hooked",
+  "http://timetravel.mementoweb.org/timemap/link/https://www.euronews.com/2014/10/16/what-to-expect-in-george-r-r-martins-new-book-the-world-of-ice-and-fire-got",
+  "https://web.archive.org/web/20250815172325id_/https://www.euronews.com/2014/10/16/what-to-expect-in-george-r-r-martins-new-book-the-world-of-ice-and-fire-got",
+  "https://web.archive.org/web/20250815172325id_/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All ten unique sources were reached as raw HTML and read directly (no summarizer, no snippets); only Euronews needed a recovery route (live 406, recovered via the Wayback raw `id_` capture).",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "abf67f33ff394f9b5",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-abf67f33ff394f9b5.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i420-434.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/ktr2/grx.py", line 5, in <module>
+    d=json.loads(m.group(1))
+AttributeError: 'NoneType' object has no attribute 'group'

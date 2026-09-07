@@ -1,0 +1,58 @@
+ 
+ Grab Your Free Books, And Learn a Surprising Sign of AI Fiction (Hint: It’s Not Em Dashes) 
+ One Million Words - Kevin Hess’s Substack 
+ Subscribe Sign in 
+ Grab Your Free Books, And Learn a Surprising Sign of AI Fiction (Hint: It’s Not Em Dashes)
+ Really.
+ Kevin Hess 
+ Aug 13, 2025 
+ Share
+ New promo right here! Never before seen by human eyes anywhere in the multiverse, except… well, some places. But not here. 81 new free books in this promo! Angry bosses, fantasy epics, and everything in between! Check them out here: 
+ Stacked with Stories - Get your faves for FREE! 
+ These authors are hoping you’re finding your new faves there, so check them out! And in case you’ve not clicked through yet, or saw something on the last time through that you forgot to check, here are the links from the beginning of the month. Hundreds of free and discounted books to check out!
+ Free and .99 Fantasy & Paranormal August 
+ Free Books Friday / August 
+ Also, I’m going to continue the sale on Demons and Griffons and Grizzlies, Oh, My! for just a few more days. If you want it, pick it up for . 99c before capitalism ruins everything! ( $24.99 for the whole series on Payhip !) 
+ One Way To Spot AI Writing In Fiction That Nobody Talks About 
+ After a lot of thought on the matter, I came to the conclusion that AI writing isn’t really something that authors are going to have to worry about for awhile. 
+ Don’t get me wrong—it’s going to have a big impact on civilization. I think in the medium term, AI is going to take a lot of jobs, or at least downsize them in the way technology always does. If AI makes it to where to where 2 people could do the work of 3, for example, technically that’s taking one job. But that’s not that much different from the printing press taking away thousands of hours worth of work from medieval calligraphers, is it?
+ But I don’t think it’s going to take work away from writers. And it’ll certainly stick out like a sore thumb until it fixes a number of glaring holes in its technique. I’m not talking about the em dash, because those are perfectly fine—I use them all the time. (I’ll explain how to tell when an em dash is a red flag another time. 
+ A Matter of Intent 
+ Now, how to tell when something is AI? Well, I oversold it on the title a bit. At the end of this piece I’ll explain why not to automatically assume AI is at fault whenever you see this particular thing happen. (I have to get you to click, don’t I?) So rather, just take it as a potential red flag. It’s not a smoking gun, but it is a warm barrel. 
+ So what’s the red flag? AI still seems to have difficulty identifying the difference between verbs done with intent and verbs arising just as a natural course of events. 
+ First, there’s some bad news though. It is getting better. I just ran a test on GPT5, and the results aren’t soul-crushingly banal for a change. In fact, I don’t even hate it. However, some things still stuck out to me which I’ll cover here. 
+ The dawn unfurled across the valley like a slow breath, spilling gold through the latticework of mist that clung to the hollows. Hills rolled in soft, moss-green swells, their crowns scattered with wildflowers the colour of spilled wine and sunlight caught in amber. Between them, ribbons of water slipped silently, their surfaces glass-smooth except where the current curled around a half-submerged boulder or an ancient, leaning willow. 
+ It was a place that seemed to have been dreamt rather than born - a cradle of green and silver where the air itself carried a drowsy sweetness, heavy with the perfume of meadow-sage and rain-wet earth. Birdsong spilled in bright cascades from unseen throats: thrushes trilling from the dark hearts of oaks, larks spiraling upward into pale, cloud-threaded heights. Somewhere far off, a stag gave its low, echoing call, a sound so deep it seemed to ripple through the ground beneath one’s feet. 
+ (You’ve made it this far! Here’s Siegfried sitting on six months of my writing labor as a reward.) 
+ The Shape of Words 
+ And so on. I’ll not belabor the point, because this should be enough to demonstrate. AI still has a tendency to overassign active verbs, and by extension intent, to inanimate objects that wouldn’t be acting out of agency. People and animals do things, the scenery just exists (by way of example). 
+ The first sentence is a particularly good example of AI screwing this up. ‘Unfurled’ is an interesting verb that conveys several things— it conveys a shape, a motion and a endpoint goal all in a single word: 
+ Shape: the object unfurling is something that is long and rolled up
+ Motion: the act of unfurling itself
+ Intent of Action: to go from curled up to stretched out
+ Compare that to a more common phrase—’the sun rose’. 
+ No Shape Conveyed: No shape is conveyed by the verb itself
+ Motion: the act of rising communicated without intent
+ No Intent of Action: the rising and setting sun is a continuous process rather than a point that ends abruptly
+ The last one is particularly key. At some point, a rope or a flag is completely unfurled, and won’t unfurl anymore. There’s no point at which the dawn would stop unfurling, it would just gradually transition into day which transitions into night. A flag unfurls. 
+ Furthermore, if described, the ‘shape’ of dawn would rarely be described as something coiled or rolled up. You just wouldn’t say that naturally unless you were making an awkward comparison intentionally. For example: Morning light lay coiled at the edge of the horizon, ready to lunge like a snake the moment Jenny finally fell asleep in the desperately makeshift campsite. No sleep again. 
+ What About ‘Spilling’? 
+ Ah, hah. Good eye. Now that one’s different. That’s a verb that is occurring as a result of something else causing it to happen. The light is spilling over the horizon (correctly) because the dawn is unfurling (incorrectly placed, but now that it’s here it’s here). Birdsong spilled (correctly) because a living being made it happen. And so on. 
+ Those usages of ‘spill’ were predicated with intent or pseudo-intent, and so they made more sense in context. ‘Dawn unfurled’ makes less sense.
+ This blog post - entirely human (except for the part that’s explicitly from the LLM). 
+ The moral of the story : generally, you’ll want to use verbs that convey intent only with actors that can actually have intent. The King can stand imperiously over a peasant, but you should be careful about having a mountain stand imperiously over his Kingdom. 
+ The Problem Is… 
+ The AI didn’t really give a reason why it used the word ‘unfurled’. Giving a reason would be a referential comparison in the scenery to something that would unfurl. ‘Spreading its light over the horizon like a flag of surrender’ would be a followup that would make ‘dawn unfurled’ make sense. 
+ It’s really not all that mystifying. The LLM is just a word predictor. It had probably had some mediocre literature as part of its training data and learned the phrase that way. The fact that I’ve had more interesting conversations with an LLM than I have with about half the people I’ve spoken to in my years isn’t a sign of ghosts in the machine. It’s more of an indictment on people’s conversational ability out in the wild. 
+ However— using a verb like this isn’t necessarily a red flag that the work is AI. So be careful of accusing people of using AI— it could just be that they’re not exactly a very good writer. And civilization has produced mediocre literature a lot longer than LLMs have, after all. 
+ The birth of Snoopy’s favorite opening line, ‘It was a dark and stormy night…’ 
+ Share
+ Discussion about this post
+ Comments Restacks 
+ Top Latest Discussions 
+ No posts
+ Ready for more?
+ Subscribe 
+ © 2026 Kevin Hess · Privacy ∙ Terms ∙ Collection notice 
+ Start your Substack Get the app 
+ Substack is the home for great culture

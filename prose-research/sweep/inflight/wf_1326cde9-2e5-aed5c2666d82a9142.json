@@ -1,0 +1,29 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i1053-1067",
+ "lines": 47,
+ "firstTs": "2026-09-07T00:18:08.542Z",
+ "lastTs": "2026-09-07T00:21:31.828Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 8,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+  "https://ultan.org.uk/aramini-on-a-solar-labyrinth/",
+  "https://ultan.org.uk/standing-on-the-shoulders-of-giants-a-review-of-michael-andre-driussis-the-book-of-the-new-sun-a-chapter-guide/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All three pages fetched raw and read in full. Writing the checkpoint file.",
+ "run": "wf_1326cde9-2e5",
+ "agent": "aed5c2666d82a9142",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-aed5c2666d82a9142.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i1053-1067.json",
+  "exists": true
+ }
+}
