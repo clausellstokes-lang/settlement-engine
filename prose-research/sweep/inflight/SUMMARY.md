@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 10:40:55 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 10:45:28 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -39,8 +39,6 @@
 | leguin | verifier | i542-616 | in-flight | 13 | — | verdict file absent | 11:54:36 |
 | leguin | verifier | i618-693 | in-flight | 2 | — | verdict file absent | 11:54:36 |
 | leguin | verifier | i694-849 | in-flight | 6 | — | verdict file absent | 11:54:36 |
-| ? | critic |  | result | 0 | — | — | 08:44:03 |
-| ? | critic |  | result | 0 | — | — | 08:43:39 |
 | ? | other |  | in-flight | 0 | — | — | 14:27:52 |
 | ? | other |  | result | 0 | reconcile-dossier-archivist.md | — | 14:10:11 |
 | ? | other |  | in-flight | 0 | — | — | 14:27:45 |
@@ -50,7 +48,6 @@
 | ? | other |  | in-flight | 0 | — | — | 13:53:19 |
 | ? | other |  | in-flight | 0 | — | — | 13:53:19 |
 | ? | other |  | in-flight | 0 | — | — | 13:53:19 |
-| ? | other |  | result | 0 | — | — | 08:47:35 |
 | ? | other |  | result | 0 | — | — | 12:10:50 |
 | ? | other |  | result | 0 | — | — | 12:39:01 |
 | ? | other |  | result | 0 | best-ai.md | — | 12:53:34 |
