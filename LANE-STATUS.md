@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 00:01:59 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 00:07:41 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lighting tail's three follow-on cars land as one consist — the mobileSingleCh
 
@@ -94,7 +94,7 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
-- **dnd**: claims 1153 · verdicts 1153 (todo 0) · kept 773 · partial 182 · verdict files 69 (triage 2, regrade r6) · section 09-06 21:46 · critic 09-06 22:09
+- **dnd**: claims 1153 · verdicts 1153 (todo 0) · kept 760 · partial 195 · verdict files 70 (triage 2, regrade r6) · section 09-06 21:46 · critic 09-06 22:09
 - **ai**: claims 1426 · verdicts 1225 (todo 201) · kept 769 · partial 144 · verdict files 62 (triage 2, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
@@ -107,4 +107,4 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 - wf_4bd76597-3a3: 3 journal lines, 2 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 4.27 3.59 6.51
+load: 3.17 3.38 5.44

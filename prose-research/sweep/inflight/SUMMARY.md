@@ -1,12 +1,12 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:02:23 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:07:10 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | failed | 0 | — | — | 03:45:47 |
 | ai | critic |  | result | 0 | critic-ai.md | — | 02:25:15 |
 | ai | finder | arch-biographical-record | result | 57 | — | 104 claims, complete=True @23:50:23 | 03:27:43 |
-| ai | finder | arch-decoding-literature | in-flight | 12 | — | 128 claims, complete=False @00:01:43 | 04:02:21 |
-| ai | finder | arch-decoding-literature | failed | 30 | — | 128 claims, complete=False @00:01:43 | 03:45:34 |
+| ai | finder | arch-decoding-literature | in-flight | 19 | — | 150 claims, complete=False @00:06:03 | 04:07:06 |
+| ai | finder | arch-decoding-literature | failed | 30 | — | 150 claims, complete=False @00:06:03 | 03:45:34 |
 | ai | finder | arch-gazetteer-travel-history | result | 32 | payload.json, payload2.json | 79 claims, complete=True @23:50:23 | 03:15:34 |
 | ai | finder | arch-historical-fact-measured | result | 22 | — | 69 claims, complete=True @23:50:23 | 03:16:09 |
 | ai | finder | arch-second-tell-catalogue | failed | 51 | — | 80 claims, complete=True @23:45:42 | 03:45:43 |
@@ -41,7 +41,7 @@
 | dnd | finder | place-dmg-settlements | result | 55 | — | 68 claims, complete=True @23:50:21 | 03:18:52 |
 | dnd | finder | place-editorial-staff | result | 36 | — | 95 claims, complete=True @23:50:21 | 03:17:42 |
 | dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:50:21 | 03:18:23 |
-| dnd | regrade | regrade-r10 | in-flight | 0 | — | — | 04:02:09 |
+| dnd | regrade | regrade-r10 | in-flight | 0 | — | — | 04:04:50 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
