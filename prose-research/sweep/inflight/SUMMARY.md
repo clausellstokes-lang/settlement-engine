@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:43:54 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:49:56 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -11,7 +11,7 @@
 | ai | finder | arch-historical-fact-measured | result | 22 | — | 69 claims, complete=True @23:50:23 | 03:16:09 |
 | ai | finder | arch-second-tell-catalogue | failed | 51 | — | 80 claims, complete=True @23:45:42 | 03:45:43 |
 | ai | finder | arch-worldbuilding-communities | result | 62 | — | 66 claims, complete=True @23:50:23 | 03:23:02 |
-| ai | finder | procgen-baseline | in-flight | 19 | — | 55 claims, complete=False @04:41:44 | 08:43:51 |
+| ai | finder | procgen-baseline | in-flight | 28 | — | 68 claims, complete=True @04:45:55 | 08:47:01 |
 | ai | regrade | regrade-r10 | result | 0 | — | — | 05:07:46 |
 | ai | regrade | regrade-r9 | failed | 0 | — | — | 03:45:46 |
 | ai | synth |  | result | 0 | — | — | 05:55:12 |
@@ -69,9 +69,10 @@
 | dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:50:21 | 03:18:23 |
 | dnd | regrade | regrade-r10 | result | 0 | — | — | 04:08:15 |
 | dnd | regrade | regrade-r12 | result | 0 | — | — | 07:19:35 |
-| dnd | regrade | regrade-r13 | in-flight | 0 | — | — | 08:43:53 |
+| dnd | regrade | regrade-r13 | result | 0 | — | — | 08:47:59 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
 | dnd | synth |  | result | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:52:03 |
+| dnd | synth |  | in-flight | 0 | dnd-stats.mjs | — | 08:49:40 |
 | dnd | synth |  | result | 0 | _assemble-dnd.mjs, _gen-tables-dnd.mjs, 00-header.md, 01-method.md, 06-partVI-in | — | 08:16:50 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | verifier | i0-14 | in-flight | 6 | — | verdict file WRITTEN | 06:53:51 |
@@ -135,7 +136,7 @@
 | leguin | verifier | i917-921 | result | 2 | verdicts-leguin-i917-921.json | verdict file WRITTEN | 07:22:21 |
 | ? | critic |  | result | 0 | — | — | 07:06:40 |
 | ? | critic |  | result | 0 | — | — | 07:06:57 |
-| ? | critic |  | in-flight | 0 | — | — | 08:43:44 |
+| ? | critic |  | result | 0 | — | — | 08:44:03 |
 | ? | critic |  | result | 0 | — | — | 08:43:39 |
 | ? | critic |  | result | 0 | — | — | 08:24:52 |
 | ? | other |  | result | 0 | — | — | 07:10:20 |
@@ -143,6 +144,7 @@
 | ? | other |  | result | 0 | — | — | 07:16:12 |
 | ? | other |  | result | 0 | — | — | 07:16:43 |
 | ? | other |  | result | 0 | — | — | 07:16:25 |
+| ? | other |  | result | 0 | — | — | 08:47:35 |
 | ? | other |  | result | 0 | — | — | 07:52:29 |
 | ? | other |  | result | 0 | — | — | 08:00:44 |
 | ? | other |  | result | 0 | — | — | 08:14:56 |

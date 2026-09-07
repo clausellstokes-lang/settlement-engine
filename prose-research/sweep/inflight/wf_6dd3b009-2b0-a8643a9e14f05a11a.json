@@ -3,14 +3,14 @@
  "name": "ai",
  "angle": "procgen-baseline",
  "tag": null,
- "lines": 170,
+ "lines": 211,
  "firstTs": "2026-09-07T08:35:42.715Z",
- "lastTs": "2026-09-07T08:43:51.871Z",
+ "lastTs": "2026-09-07T08:47:01.850Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 40,
-  "WebSearch": 8
+  "Bash": 49,
+  "WebSearch": 10
  },
  "urlsFetched": [
   "https://galaxykate0.tumblr.com/post/139774965871/so-you-want-to-build-a-generator",
@@ -31,18 +31,27 @@
   "https://dhs.stanford.edu/algorithmic-literacy/an-interview-with-tarn-adams/",
   "https://www.rockpapershotgun.com/how-games-benefit-from-procedurally-generated-lore|rps-lore.html",
   "https://www.rockpapershotgun.com/how-to-generate-a-religion|rps-religion.html",
-  "https://www.cs.kent.ac.uk/events/2015/AISB2015/proceedings/aiAndGames/AI-games-15_submission_01--MarkJohnson-modelling.pdf|johnson-aisb.pdf"
+  "https://www.cs.kent.ac.uk/events/2015/AISB2015/proceedings/aiAndGames/AI-games-15_submission_01--MarkJohnson-modelling.pdf|johnson-aisb.pdf",
+  "https://sidequest.zone/2020/07/23/it-was-inevitable-tarn-adams-on-dwarf-fortress/|tarn-sidequest.html",
+  "https://www.pcgamer.com/dwarf-fortress-creator-tarn-adams-talks-about-simulating-the-most-complex-magic-system-ever/|tarn-pcg.html",
+  "https://www.pcgamer.com/dwarf-fortress-creator-tarn-adams-talks-about-simulating-the-most-complex-magic-system-ever/",
+  "https://www.gamedeveloper.com/design/interview-the-making-of-dwarf-fortress",
+  "https://www.cs.kent.ac.uk/events/2015/AISB2015/proceedings/aiAndGames/AI-games-15_submission_01--MarkJohnson-modelling.pdf",
+  "https://www.markrjohnsongames.com/2021/07/27/procedural-book-generation/",
+  "https://mkremins.github.io/publications/Felt_SimpleStorySifter.pdf",
+  "https://www.taylorfrancis.com/chapters/edit/10.1201/9780429488337-18/generating-histories-jason-grinblat",
+  "http://www.ultimaratioregum.co.uk/game/2016/01/23/towards-qualitative-procedural-generation/"
  ],
  "filesWritten": [],
- "lastAssistantText": "All 56 quotes verified verbatim. Writing the first checkpoint.",
+ "lastAssistantText": "Roster exhausted, 68 claims verified verbatim, files written. Returning the record.",
  "run": "wf_6dd3b009-2b0",
  "agent": "a8643a9e14f05a11a",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_6dd3b009-2b0/agent-a8643a9e14f05a11a.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-procgen-baseline.json",
-  "claims": 55,
-  "complete": false,
-  "mtime": "04:41:44"
+  "claims": 68,
+  "complete": true,
+  "mtime": "04:45:55"
  }
 }

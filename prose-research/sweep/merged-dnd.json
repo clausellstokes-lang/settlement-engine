@@ -15776,19 +15776,19 @@
   },
   "1": {
    "index": 1,
-   "verdict": "CONTRADICTED",
+   "verdict": "VERIFIED_VERBATIM",
    "trueWording": "The Chicago Manual of Style, 16th edition",
-   "note": "REGRADE (re-verification chunk, v1.08a): the January-2019 revision reads 'The Chicago Manual of Style, 17th edition', reversing the 16th-edition rule this row states as house law. Verifier's original note: \"Page 1: 'We have two primary resources for the house style of DUNGEONS & DRAGONS products: The Chicago Manual of Style, 16th edition / Merriam-Webster's Collegiate Dictionary, 11th edition.' Minor overstatement in the claim: the guide says it focuses on matters 'where we depart from or expand on' those works, so 'only D&D-specific departures' understates the 'expand on' half.\"",
-   "unsupportedLimb": "the Chicago 16th-edition foundation is reversed by the January-2019 revision (v1.08a), which rests on Chicago 17th; the verifier also flags 'only D&D-specific departures' as understating the guide's 'depart from or expand on'",
-   "fromFile": "verdicts-dnd-regrade-r6.json"
+   "note": "SUPERSEDED - verbatim in the v1.04a guide they cite; the 2019 v1.08a reverses the rule; cite as history only. R11 finding 2, re-ordered by the chair at 04:36 (r13 item 4; asked in r9, r10 and r12): CONTRADICTED is wrong for a rule that was true of its edition.",
+   "unsupportedLimb": "none - the quoted Chicago-16th foundation is verbatim in v1.04a; the row is edition-bound, not false, and must carry the SUPERSEDED mark (v1.08a rests on Chicago 17th)",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "2": {
    "index": 2,
-   "verdict": "CONTRADICTED",
+   "verdict": "VERIFIED_VERBATIM",
    "trueWording": "In rules text, we often achieve gender neutrality by writing in the second person.",
-   "note": "REGRADE (re-verification chunk, v1.08a): the January-2019 revision reverses the singular-'they' prohibition this row states as house law, and upgrades 'often achieve gender neutrality by writing in the second person' to 'prefer to ... whenever possible'. Verifier's original note also flagged: 'CAVEAT: the guide hedges with \"often\", so \"presents as the standard way\" is slightly stronger than the source.'",
-   "unsupportedLimb": "the singular-'they' ban is the 2013 rule and the opposite of the live one: v1.08a reads 'In a departure from our past usage, we allow the use of \"they\" and \"their\" as singular pronouns'",
-   "fromFile": "verdicts-dnd-regrade-r6.json"
+   "note": "SUPERSEDED - verbatim in the v1.04a guide they cite; the 2019 v1.08a reverses the rule; cite as history only. R11 finding 2, re-ordered by the chair at 04:36 (r13 item 4; asked in r9, r10 and r12): CONTRADICTED is wrong for a rule that was true of its edition.",
+   "unsupportedLimb": "none - the quoted second-person/gender-neutrality rule and the singular-'they' ban are verbatim in v1.04a; the row is edition-bound, not false, and must carry the SUPERSEDED mark (v1.08a allows singular 'they')",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "3": {
    "index": 3,
@@ -16120,10 +16120,11 @@
   },
   "47": {
    "index": 47,
-   "verdict": "NOT_FOUND",
+   "verdict": "BLOCKED",
    "trueWording": "",
-   "note": "The cited academia.edu page does not contain the quoted phrase or any supporting text. Direct fetch 403s (WebFetch and curl); the Wayback snapshot 20250914225534 fetched successfully (HTTP 200, 196,401 bytes) and is a login-walled listing page whose only body text is metadata ('Master's Thesis: The Narrative Structures of Dungeons and Dragons', '2011', 'Nathan Shank'), download prompts, related-paper links, and 'Sorry, preview is currently unavailable. You can download the paper by clicking the button above.' Zero occurrences of 'encyclopedic', 'geography', 'ancillary' or 'campaign setting' in the retrieved text. Not BLOCKED — the page was retrieved; it simply carries no abstract. An exact-phrase web search for the quotation surfaced no verbatim match anywhere. The thesis may well say this in its PDF body, but nothing at the cited URL supports it, so the citation as written is unverifiable and needs the PDF itself.",
-   "fromFile": "verdicts-dnd-i45-48.json"
+   "note": "R13 REGRADE (chair ruling 04:36, item 5): BLOCKED, not NOT_FOUND - the direct fetch 403s (WebFetch and curl) and the only reachable page is a login-walled academia.edu listing whose body text is metadata and download prompts, so the thesis text was never read. Second route for a later pass: Crossref/OpenAlex for Shank 2015.",
+   "unsupportedLimb": "no limb was tested: the witness could not be read at all, so the row is unread rather than refuted",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "48": {
    "index": 48,
@@ -21298,10 +21299,11 @@
   },
   "768": {
    "index": 768,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "And hey, there's boxed text for the first time!",
-   "note": "Live raw page fetched. Closing line of the section headed '1982 - Lost Caverns of Tsojcanth Publication', and corroborated later in the same post: the 1983-85 adventures use boxed text 'as introduced in the 1982 Tsojcanth dungeon areas'. 'First' is first within Delta's declared sample - adventures authored by Gygax at two-year intervals across 1974-1985.",
-   "fromFile": "verdicts-dnd-i751-774.json"
+   "note": "R13 REGRADE (r12 critic; chair ruling 04:36): PARTIAL on the unsupported limb, per the verifier's own note - \"'First' is first within Delta's declared sample - adventures authored by Gygax at two-year intervals across 1974-1985.\" The quoted line ('And hey, there's boxed text for the first time!') and the 1982 Tsojcanth attribution are verbatim and stand.",
+   "unsupportedLimb": "the 'first boxed text in a Gygax adventure' limb: first only within Delta's declared sample of Gygax adventures taken at two-year intervals 1974-1985, not first absolutely",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "769": {
    "index": 769,
@@ -21312,10 +21314,11 @@
   },
   "770": {
    "index": 770,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "only a single curt bullet-line per encounter area",
-   "note": "Live raw page fetched. Section '1974 - Castle Greyhawk Notes'; the sentence continues 'noting monster type, number range, and treasure (and absolutely nothing else)'. Two hedges the claim drops: the notes were never published (known from a photo taken at a Gen Con 2007 event), and Delta records debate over whether the encounter text is original, with the map dated 'could be 1972-1974 or so'. He also notes the key is sparser still - one number often covers several rooms and about three-quarters are unkeyed.",
-   "fromFile": "verdicts-dnd-i751-774.json"
+   "note": "R13 REGRADE (r12 critic; chair ruling 04:36): PARTIAL on the unsupported limb, per the verifier's own note - \"Two hedges the claim drops: the notes were never published (known from a photo taken at a Gen Con 2007 event), and Delta records debate over whether the encounter text is original, with the map dated 'could be 1972-1974 or so'.\" The quoted phrase 'only a single curt bullet-line per encounter area' is verbatim.",
+   "unsupportedLimb": "the 1974 Castle Greyhawk figure: the claim drops the source's two hedges - the notes were never published (known only from a Gen Con 2007 photograph) and their authenticity/dating is debated on the page itself",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "771": {
    "index": 771,
@@ -23565,10 +23568,11 @@
   },
   "1080": {
    "index": 1080,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Never force yourself to create more than you must.",
-   "note": "Raw PDF textual.ru/rpg/dungeoncraft.pdf (John H. Kim’s preservation of the 29-part Dragon series, bylined Ray Winninger on its title page), chapter 2 'World Building, Part I — From Dragon Magazine 256'. Printed under the display head 'First Rule of Dungeoncraft:', so the rule’s name and text both match. The source field’s parenthetical about a later WotC role is biographical and is not carried by this page.",
-   "fromFile": "verdicts-dnd-i1075-1090.json"
+   "note": "ROUTE QUESTIONED - textual.ru/rpg/dungeoncraft.pdf, an unauthorised preservation copy of the Dragon 255-283 Dungeoncraft columns, the same route class as the 2014-guide OCR (r12 critic; chair ruling 04:36 under ruling 4 of the 09-07 delegation, vetoable)",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the row was read from an unauthorised preservation copy of the Dragon Dungeoncraft columns, so it may be cited only with this mark until a lawful witness (the owner's own Dragon copies, or an authorised archive) replaces it",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "1081": {
    "index": 1081,
@@ -23579,24 +23583,27 @@
   },
   "1082": {
    "index": 1082,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a Master of the Docks who authorizes all cargo",
-   "note": "Same raw PDF, chapter 3 'World Building, Part II — From Dragon Magazine 257', under 'Home Base', in the 'City' home-base template. The passage says bureaucrats governing the city are dedicated to trade and knowledge functions, giving this office and a Dean of Colleges as examples; the sentence continues 'that comes in and out of the city'. Quote verbatim; every limb supported.",
-   "fromFile": "verdicts-dnd-i1075-1090.json"
+   "note": "ROUTE QUESTIONED - textual.ru/rpg/dungeoncraft.pdf, an unauthorised preservation copy of the Dragon 255-283 Dungeoncraft columns, the same route class as the 2014-guide OCR (r12 critic; chair ruling 04:36 under ruling 4 of the 09-07 delegation, vetoable)",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the row was read from an unauthorised preservation copy of the Dragon Dungeoncraft columns, so it may be cited only with this mark until a lawful witness (the owner's own Dragon copies, or an authorised archive) replaces it",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "1083": {
    "index": 1083,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a place where adventurers gather to swap boasts, rumors, and legends",
-   "note": "Same raw PDF, chapter 7 'The Rumor Mill and Maps — From Dragon Magazine 261', section 'The Rumor Mill'. The instruction is to plan a fairly obvious rumor mill in your base of operations (the home base of the preceding chapters), which carries the claim’s 'home settlement'. Quote verbatim; every limb supported.",
-   "fromFile": "verdicts-dnd-i1075-1090.json"
+   "note": "ROUTE QUESTIONED - textual.ru/rpg/dungeoncraft.pdf, an unauthorised preservation copy of the Dragon 255-283 Dungeoncraft columns, the same route class as the 2014-guide OCR (r12 critic; chair ruling 04:36 under ruling 4 of the 09-07 delegation, vetoable)",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the row was read from an unauthorised preservation copy of the Dragon Dungeoncraft columns, so it may be cited only with this mark until a lawful witness (the owner's own Dragon copies, or an authorised archive) replaces it",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "1084": {
    "index": 1084,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "better to develop two really good ideas than four",
-   "note": "Same raw PDF, Dragon 261 chapter, section 'Interesting NPCs'. The floor is phrased 'you should try to create at least two such personalities' for the base of operations, which supports the claim’s minimum of two interesting NPCs; the quoted sentence continues 'or five mediocre ideas' (claim says 'ones'). Quote verbatim; both limbs supported, the floor in slightly softer words than 'sets'.",
-   "fromFile": "verdicts-dnd-i1075-1090.json"
+   "note": "ROUTE QUESTIONED - textual.ru/rpg/dungeoncraft.pdf, an unauthorised preservation copy of the Dragon 255-283 Dungeoncraft columns, the same route class as the 2014-guide OCR (r12 critic; chair ruling 04:36 under ruling 4 of the 09-07 delegation, vetoable)",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the row was read from an unauthorised preservation copy of the Dragon Dungeoncraft columns, so it may be cited only with this mark until a lawful witness (the owner's own Dragon copies, or an authorised archive) replaces it",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "1085": {
    "index": 1085,
@@ -23868,10 +23875,11 @@
   },
   "1123": {
    "index": 1123,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "does not embrace the narrative style of most PLANESCAPE products",
-   "note": "Raw page fetched (mimir.net, HTTP 200). Answer to 'From what perspective is the product written?'. The page joins the two limbs with 'and' rather than 'because', but the causal reading is the page's own: the next answer notes A Guide to Hell uses a similar narrative style and 'It, too, is designed as a core AD&D product'. The editor's note at the head of the interview identifies Perkins as editor of TSR's DUNGEON Adventures.",
-   "fromFile": "verdicts-dnd-i1115-1131.json"
+   "note": "R13 REGRADE (r12 critic; chair ruling 04:36): PARTIAL on the unsupported limb, per the verifier's own note - \"The page joins the two limbs with 'and' rather than 'because', but the causal reading is the page's own.\" The quoted clause and the Perkins/DUNGEON-editor attribution stand.",
+   "unsupportedLimb": "the causal limb 'because it is a core AD&D product': the causation is the claim's, the interview page joins the core-AD&D-product and narrative-style clauses with 'and'",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "1124": {
    "index": 1124,
@@ -23924,17 +23932,19 @@
   },
   "1131": {
    "index": 1131,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Editors: Michele Carter Scott Fitzgerald Cray, Kim Mohan",
-   "note": "Raw archive.org full-text page fetched (HTTP 200, 1.19MB) and the OCR credits block read directly. Match is exact once the OCR's doubled spaces are collapsed; the OCR renders Gray as 'Cray'. Same page gives 'First Printing: September 201S' (2018) and the 2018 copyright line, and the foreword frames it as a Waterdeep / City of Splendors adventure, so the date and city-adventure limbs hold.",
-   "fromFile": "verdicts-dnd-i1115-1131.json"
+   "note": "ROUTE QUESTIONED - the Waterdeep: Dragon Heist credits block read via the archive.org djvu.txt OCR of the copyrighted 2018 hardcover; a record, but the route class the chair questioned (r12 critic; chair ruling 04:36)",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the credits block was read from an archive.org full-book OCR of the copyrighted 2018 hardcover, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "1132": {
    "index": 1132,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Managing Editor: Jeremy Crawford",
-   "note": "archive.org OCR full text of wdh, credits block under the WATERDEEP DRAGON HEIST title; OCR renders it with doubled spaces ('Managing  Editor:  Jeremy  Crawford'), otherwise word for word. Same credits block also lists Crawford under Rules Development, and Christopher Perkins as Lead Designer and Lead Editor. Fetched raw with a browser UA; text read directly from the page's <pre> block, not a summary.",
-   "fromFile": "verdicts-dnd-i1132-1146.json"
+   "note": "ROUTE QUESTIONED - the Waterdeep: Dragon Heist credits block read via the archive.org djvu.txt OCR of the copyrighted 2018 hardcover; a record, but the route class the chair questioned (r12 critic; chair ruling 04:36)",
+   "unsupportedLimb": "the witness itself, not a limb of the claim: the credits block was read from an archive.org full-book OCR of the copyrighted 2018 hardcover, so it may be cited only with this mark until a lawful witness replaces it",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "1133": {
    "index": 1133,
@@ -24392,17 +24402,19 @@
   },
   "1196": {
    "index": 1196,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Random Settlements",
-   "note": "Byte-exact as an h3 in the episode contents list, sitting under the h2 'Adventure Environments - Settlements'; page title is 'GMJ 235: DMG Chapter 5: Adventure Environments', dated December 16, 2018. The page names the book only as 'Dungeon Master's Guide', but its 2018 date and the listed chapter structure (Chapters 1-5 across earlier episodes) fix it as the 2014 fifth-edition guide.",
-   "fromFile": "verdicts-dnd-i1183-1197.json"
+   "note": "R13 REGRADE (r12 critic; chair ruling 04:36): PARTIAL on the unsupported limb, per the verifier's own note - the page names the book only as 'Dungeon Master's Guide' and the 2014 fifth edition is inferred from the episode's December 16 2018 date, not stated on the page. The 'Random Settlements' heading itself is byte-exact.",
+   "unsupportedLimb": "the '2014 guide' limb: the edition is inferred from the page's 2018 date, it is not on the page",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "1197": {
    "index": 1197,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Mapping a Settlement",
-   "note": "Byte-exact as a sibling h3 to 'Random Settlements' under the same 'Adventure Environments - Settlements' h2 of the episode contents list, so it is named as another chapter 5 section. Edition inferred from the page's December 16, 2018 date as for 1196.",
-   "fromFile": "verdicts-dnd-i1183-1197.json"
+   "note": "R13 REGRADE (r12 critic; chair ruling 04:36): PARTIAL on the unsupported limb, per the verifier's own note - the page names the book only as 'Dungeon Master's Guide' and the 2014 fifth edition is inferred from the episode's December 16 2018 date, not stated on the page. The 'Mapping a Settlement' heading itself is byte-exact.",
+   "unsupportedLimb": "the '2014 guide' limb: the edition is inferred from the page's 2018 date, it is not on the page",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "1198": {
    "index": 1198,
@@ -24492,10 +24504,11 @@
   },
   "1210": {
    "index": 1210,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "and last names with roots in western European cultures",
-   "note": "Found in 'The Dungeon Master Experience: What's in a Name?' in the same collected PDF. The only break is the PDF's typographic line-break hyphen ('cul-tures'); reading order confirms the words are contiguous. Full sentence: 'I tend to go for names that sound like seldom used real-world names (e.g., Arando, Caven, Fenton, Mirabel, Remora) and last names with roots in western European cultures (e.g., Caskajaro, Moonridge, Ratley, Van Hyden), or names built around nautical terms.' Scope note: he prefaces it with 'My human names are all over the map' and offers nautical-term names as an alternative, so this is a stated tendency among several, not his only surname rule — the claim's 'says he builds' does not overreach that, but a downstream use should not read it as an exclusive rule.",
-   "fromFile": "verdicts-dnd-i1198-1211.json"
+   "note": "R13 REGRADE (r12 critic; chair ruling 04:36): PARTIAL on the unsupported limb, per the verifier's own scope note - \"he prefaces it with 'My human names are all over the map' and offers nautical-term names as an alternative, so this is a stated tendency among several, not his only surname rule.\" The quoted clause is verbatim.",
+   "unsupportedLimb": "the exclusivity of the western-European surname roots: they are one tendency among several on the page (nautical-term names offered as an alternative), not Perkins's surname rule",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
   },
   "1211": {
    "index": 1211,

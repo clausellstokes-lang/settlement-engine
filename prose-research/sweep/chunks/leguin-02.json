@@ -2,157 +2,157 @@
  "name": "leguin",
  "chunk": 2,
  "indices": [
-  766,
-  768,
-  769,
-  770,
-  771,
-  772,
-  773,
-  775,
-  776,
-  777,
-  779,
-  780,
-  782,
-  785,
-  786
+  618,
+  619,
+  621,
+  622,
+  624,
+  626,
+  641,
+  646,
+  650,
+  663,
+  664,
+  667,
+  669,
+  675,
+  693
  ],
  "claims": [
   {
-   "index": 766,
-   "feature": "civic record register",
-   "claim": "The headnote defines a social institution in a present-tense passive sentence of ordinary words.",
-   "source": "Ursula K. Le Guin, 'Mountain Ways' headnote, excerpted on the author's official site",
-   "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
-   "quote": "Ki'O society is divided into two halves or moieties, called",
-   "page": "'Mountain Ways', headnote"
-  },
-  {
-   "index": 768,
+   "index": 618,
    "feature": "omission as information",
-   "claim": "The headnote records that the forbidden relationships have no name at all except sacrilege.",
-   "source": "Ursula K. Le Guin, 'Mountain Ways' headnote, excerpted on the author's official site",
-   "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
-   "quote": "they aren't called anything, except sacrilege",
-   "page": "'Mountain Ways', headnote"
+   "claim": "Le Guin told Paul Morton that much of fantasy and science fiction is just the art of suggestion.",
+   "source": "Ursula K. Le Guin, interviewed by Paul Morton, The Millions, 31 January 2013",
+   "url": "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+   "quote": "fantasy and science fiction is just the art of suggestion",
+   "page": "section on imagining invented worlds"
   },
   {
-   "index": 769,
-   "feature": "place and institution description",
-   "claim": "'Mountain Ways' opens on a present-tense sentence that places settlements in a named upland and states their density.",
-   "source": "Ursula K. Le Guin, 'Mountain Ways', excerpted on the author's official site",
-   "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
-   "quote": "In the stony uplands of the Deka Mountains the farmholds are few",
-   "page": "'Mountain Ways', first line of the story"
+   "index": 619,
+   "feature": "omission as information",
+   "claim": "Le Guin told Paul Morton that a writer does not really tell people that much, but they think you have because they imagine it.",
+   "source": "Ursula K. Le Guin, interviewed by Paul Morton, The Millions, 31 January 2013",
+   "url": "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+   "quote": "You don't really tell people that much, but they think you have",
+   "page": "section on imagining invented worlds"
   },
   {
-   "index": 770,
-   "feature": "place and institution description",
-   "claim": "A settlement is identified by a present-tense copula sentence that nests farm inside village inside watershed inside river inside continent inside planet.",
-   "source": "Ursula K. Le Guin, 'Mountain Ways', excerpted on the author's official site",
-   "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
-   "quote": "Danro is the farthest farm of Oro Village in the High Watershed",
-   "page": "'Mountain Ways', second section"
-  },
-  {
-   "index": 771,
+   "index": 621,
    "feature": "plainness and economy",
-   "claim": "An economic relation between a people and their herds is stated as a plain two-clause sentence that reverses itself.",
-   "source": "Ursula K. Le Guin, 'Mountain Ways', excerpted on the author's official site",
-   "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
-   "quote": "The farmers are dependent on the ariu; the ariu are not",
-   "page": "'Mountain Ways', second section"
+   "claim": "Le Guin told Paul Morton that what she has learned as a writer is that you do as little as possible, part of which is leaving a lot of it up to the reader.",
+   "source": "Ursula K. Le Guin, interviewed by Paul Morton, The Millions, 31 January 2013",
+   "url": "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+   "quote": "leaving a lot of it up to the reader",
+   "page": "section on doing not-doing"
   },
   {
-   "index": 772,
-   "feature": "opening sentence",
-   "claim": "'Solitude' opens with a header declaring the text an addition to a named, numbered prior report on a planet.",
-   "source": "Ursula K. Le Guin, 'Solitude', excerpted on the author's official site",
-   "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
-   "quote": "An addition to \"POVERTY: The Second Report on Eleven-Soro\"",
-   "page": "'Solitude', headnote"
+   "index": 622,
+   "feature": "plainness and economy",
+   "claim": "Le Guin said her writing has tended to be shorter and more allusive than it used to be.",
+   "source": "Ursula K. Le Guin, interviewed by Paul Morton, The Millions, 31 January 2013",
+   "url": "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+   "quote": "my writing has tended to be shorter and more allusive",
+   "page": "section on doing not-doing"
   },
   {
-   "index": 773,
+   "index": 624,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin told Paul Morton that she loves the sound of language and plays with word sounds in her head.",
+   "source": "Ursula K. Le Guin, interviewed by Paul Morton, The Millions, 31 January 2013",
+   "url": "https://themillions.com/2013/01/getting-away-with-murder-the-millions-interviews-ursula-k-le-guin.html",
+   "quote": "I love language, I love the sound of language.",
+   "page": "section on invented languages"
+  },
+  {
+   "index": 626,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin told Jonathan White that the language of politicians is empty of everything but rather brutal signals and is something a writer has to get as far away from as possible.",
+   "source": "Ursula K. Le Guin, interviewed by Jonathan White, 'Coming Back From the Silence'",
+   "url": "https://peterschmidt.domains.swarthmore.edu/engl5H/leguin.interv.html",
+   "quote": "empty of everything but rather brutal signals",
+   "page": "section on language as a tool of forgetting"
+  },
+  {
+   "index": 641,
+   "feature": "archaism",
+   "claim": "Bittner says the word 'tale' carries an archaic, distant tone that the word 'story' lacks.",
+   "source": "James W. Bittner, Approaches to the Fiction of Ursula K. Le Guin (UMI Research Press, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aapproachestofict0000bitt%20AND%20%22The%20very%20word%20tale%20has%20an%20archaic%2C%20distant%20tone%22",
+   "quote": "The very word tale has an archaic, distant tone",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 646,
+   "feature": "adjective and adverb discipline",
+   "claim": "Bittner treats a guidebook title carrying many telling adjectives as a reason not to trust its user.",
+   "source": "James W. Bittner, Approaches to the Fiction of Ursula K. Le Guin (1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aapproachestofict0000bitt%20AND%20%22a%20guidebook%20with%20so%20many%20telling%20adjectives%20in%20its%20title%22",
+   "quote": "a guidebook with so many telling adjectives in its title",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 650,
+   "feature": "cadence and rhythm",
+   "claim": "That essay credits Le Guin with a skillful use of cadence and sound patterns.",
+   "source": "An essay in Harold Bloom, ed., Ursula K. Le Guin: Modern Critical Views (1986)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00bloo%20AND%20%22a%20skillful%20use%20of%20cadence%20and%20sound%20patterns%22",
+   "quote": "a skillful use of cadence and sound patterns",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 663,
+   "feature": "plainness and economy",
+   "claim": "Cadden puts it to Le Guin that Leese Webster is very spare.",
+   "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22Leese%20Webster%20is%20very%20spare%22",
+   "quote": "Leese Webster is very spare",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 664,
+   "feature": "plainness and economy",
+   "claim": "Le Guin replies that Leese Webster is austere and that this fit the illustrator's talent.",
+   "source": "Ursula K. Le Guin, in interview with Mike Cadden, printed in Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22It%E2%80%99s%20austere%2C%20and%20that%20fit%20Jim%E2%80%99s%20talent%22",
+   "quote": "It’s austere, and that fit Jim’s talent",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 667,
+   "feature": "plainness and economy",
+   "claim": "An essay in Olander and Greenberg's volume says Le Guin's straightforward stories deal in strong colors and plain fabrics.",
+   "source": "An essay in Joseph D. Olander and Martin Harry Greenberg, eds., Ursula K. Le Guin (Taplinger, 1979) — contributor not resolvable from the snippet window",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00olan%20AND%20%22strong%20colors%20and%20plain%20fabrics%22",
+   "quote": "strong colors and plain fabrics",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 669,
+   "feature": "register modulation",
+   "claim": "Spivack says the style of A Wizard of Earthsea is suitable to its subject.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22The%20style%20of%20A%20Wizard%20of%20Earthsea%20is%20suitable%22",
+   "quote": "The style of A Wizard of Earthsea is suitable",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 675,
+   "feature": "omission as information",
+   "claim": "Spivack calls those monologues richly suggestive, leaving much unsaid.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22richly%20suggestive%2C%20leaving%20much%20unsaid%22",
+   "quote": "richly suggestive, leaving much unsaid",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 693,
    "feature": "point of view and distance",
-   "claim": "The narrator of 'Solitude' names her mother's profession in a bare apposition before saying anything about her.",
-   "source": "Ursula K. Le Guin, 'Solitude', excerpted on the author's official site",
-   "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
-   "quote": "My mother, a field ethnologist, took the difficulty of learning anything",
-   "page": "'Solitude', first paragraph"
-  },
-  {
-   "index": 775,
-   "feature": "place and institution description",
-   "claim": "Rocannon's World opens with a gazetteer heading that gives a galactic area number, an entry number and the planet name.",
-   "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted in full by Books & Boots",
-   "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
-   "quote": "Galactic Area 8, No. 62: FOMALHAUT II",
-   "page": "prologue quotation, blog paragraph 3"
-  },
-  {
-   "index": 776,
-   "feature": "place and institution description",
-   "claim": "A people is described in the handbook by a verbless string of adjectives closing on a height range in centimetres.",
-   "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted by Books & Boots",
-   "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
-   "quote": "Highly intelligent, fully hominoid nocturnal troglodytes, 120-135 cm. in height",
-   "page": "prologue quotation, Species I-A"
-  },
-  {
-   "index": 777,
-   "feature": "civic record register",
-   "claim": "An intervention by the institution is recorded as a verbless clause with a grade and a date range and no actor.",
-   "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted by Books & Boots",
-   "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
-   "quote": "Technology enhanced to Industrial, Point C, during League Mission of 252-254",
-   "page": "prologue quotation, Species I-A"
-  },
-  {
-   "index": 779,
-   "feature": "withheld information and inference",
-   "claim": "The handbook grades the strength of its own evidence by saying that brief contacts only indicated what it reports.",
-   "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted by Books & Boots",
-   "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
-   "quote": "indicated village and nomadic communal societies",
-   "page": "prologue quotation, Species I-B"
-  },
-  {
-   "index": 780,
-   "feature": "plainness and economy",
-   "claim": "The handbook delivers a fiscal verdict on a whole people in a two-word sentence.",
-   "source": "Le Guin, Rocannon's World (1966), opening handbook entry, quoted by Books & Boots",
-   "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
-   "quote": "Currently untaxable",
-   "page": "prologue quotation, Species I-B"
-  },
-  {
-   "index": 782,
-   "feature": "place and institution description",
-   "claim": "The planetary entry states landmass coverage as a percentage of the planet's surface.",
-   "source": "Le Guin, Rocannon's World (1966), second handbook entry, quoted by Books & Boots",
-   "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
-   "quote": "Four major landmasses, Northwest, Southwest, East and Antarctic Continents, occupy 38%",
-   "page": "second quotation, physical description"
-  },
-  {
-   "index": 785,
-   "feature": "annalist voice and deep time",
-   "claim": "The handbook's history is a labelled section whose first sentence is a dated passive naming the expedition.",
-   "source": "Le Guin, Rocannon's World (1966), second handbook entry, quoted by Books & Boots",
-   "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
-   "quote": "History: The planet was charted by the Elieson Expedition in 202",
-   "page": "second quotation, History"
-  },
-  {
-   "index": 786,
-   "feature": "civic record register",
-   "claim": "A survey is recorded as a verbless line of label, year and named director.",
-   "source": "Le Guin, Rocannon's World (1966), second handbook entry, quoted by Books & Boots",
-   "url": "https://astrofella.wordpress.com/2019/12/05/rocannons-world-ursula-le-guin/",
-   "quote": "First Ethnographic Survey, 321, Director: G. Rocannon",
-   "page": "second quotation, last line"
+   "claim": "Dirda says the omniscient narrator confides in the reader like a friend.",
+   "source": "Michael Dirda, NEA Big Read teacher's guide to A Wizard of Earthsea (2008)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinswi00dird%20AND%20%22The%20omniscient%20narrator%20confides%20in%20the%20reader%20like%20a%20friend%22",
+   "quote": "The omniscient narrator confides in the reader like a friend",
+   "page": "archive.org search-inside snippet"
   }
  ]
 }

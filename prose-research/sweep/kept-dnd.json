@@ -1,5 +1,40 @@
 [
  {
+  "index": 1,
+  "feature": "reference authorities",
+  "claim": "The house style rests on the Chicago Manual of Style 16th ed. and Merriam-Webster's Collegiate 11th ed., with the guide covering only D&D-specific departures.",
+  "source": "Wizards of the Coast, D&D Style Guide v1.04a",
+  "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+  "quote": "The Chicago Manual of Style, 16th edition",
+  "angle": "academic",
+  "verdict": {
+   "index": 1,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Chicago Manual of Style, 16th edition",
+   "note": "SUPERSEDED - verbatim in the v1.04a guide they cite; the 2019 v1.08a reverses the rule; cite as history only. R11 finding 2, re-ordered by the chair at 04:36 (r13 item 4; asked in r9, r10 and r12): CONTRADICTED is wrong for a rule that was true of its edition.",
+   "unsupportedLimb": "none - the quoted Chicago-16th foundation is verbatim in v1.04a; the row is edition-bound, not false, and must carry the SUPERSEDED mark (v1.08a rests on Chicago 17th)",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
+  }
+ },
+ {
+  "index": 2,
+  "feature": "second-person rules address",
+  "claim": "Rules text is written in the second person, which the guide presents as the standard way to achieve gender neutrality; singular 'they' is banned outside dialogue and 'he/she' alternation is forbidden.",
+  "source": "Wizards of the Coast, D&D Style Guide v1.04a",
+  "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+  "quote": "achieve gender neutrality by writing in the second person",
+  "angle": "academic",
+  "verdict": {
+   "index": 2,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In rules text, we often achieve gender neutrality by writing in the second person.",
+   "note": "SUPERSEDED - verbatim in the v1.04a guide they cite; the 2019 v1.08a reverses the rule; cite as history only. R11 finding 2, re-ordered by the chair at 04:36 (r13 item 4; asked in r9, r10 and r12): CONTRADICTED is wrong for a rule that was true of its edition.",
+   "unsupportedLimb": "none - the quoted second-person/gender-neutrality rule and the singular-'they' ban are verbatim in v1.04a; the row is edition-bound, not false, and must carry the SUPERSEDED mark (v1.08a allows singular 'they')",
+   "fromFile": "verdicts-dnd-regrade-r13.json"
+  },
+  "fullSentence": true
+ },
+ {
   "index": 6,
   "feature": "terminology consistency (edition-specific bans)",
   "claim": "5e abandoned the 3E/4E use of 'result' for the number rolled and 4E's 'save' for a successful saving throw; 'magic item' never 'magical item'; 'deals 10 fire damage' not 'points of damage'; 'hit point maximum' not 'maximum hit points'.",
@@ -12295,52 +12330,6 @@
   }
  },
  {
-  "index": 768,
-  "feature": "boxed text form",
-  "claim": "Delta dates the first boxed text in a Gygax adventure to the 1982 published Lost Caverns of Tsojcanth.",
-  "source": "Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', Delta's D&D Hotspot, 2021",
-  "url": "https://deltasdnd.blogspot.com/2021/10/early-evolution-of-encounter-text.html",
-  "quote": "And hey, there's boxed text for the first time!",
-  "page": "section '1982 - Lost Caverns of Tsojcanth Publication'",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2021-10-25",
-  "routeHint": "direct fetch",
-  "registerHint": "dm-page",
-  "confidence": "high",
-  "angle": "scholarship-history",
-  "verdict": {
-   "index": 768,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "And hey, there's boxed text for the first time!",
-   "note": "Live raw page fetched. Closing line of the section headed '1982 - Lost Caverns of Tsojcanth Publication', and corroborated later in the same post: the 1983-85 adventures use boxed text 'as introduced in the 1982 Tsojcanth dungeon areas'. 'First' is first within Delta's declared sample - adventures authored by Gygax at two-year intervals across 1974-1985.",
-   "fromFile": "verdicts-dnd-i751-774.json"
-  }
- },
- {
-  "index": 770,
-  "feature": "plainness and economy",
-  "claim": "Gygax's 1974 Castle Greyhawk notes gave a single curt bullet-line per encounter area.",
-  "source": "Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021",
-  "url": "https://deltasdnd.blogspot.com/2021/10/early-evolution-of-encounter-text.html",
-  "quote": "only a single curt bullet-line per encounter area",
-  "page": "section '1974 - Castle Greyhawk Notes'",
-  "kind": "measurement",
-  "polarity": "asserts",
-  "date": "2021-10-25",
-  "routeHint": "direct fetch",
-  "registerHint": "dm-page",
-  "confidence": "high",
-  "angle": "scholarship-history",
-  "verdict": {
-   "index": 770,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "only a single curt bullet-line per encounter area",
-   "note": "Live raw page fetched. Section '1974 - Castle Greyhawk Notes'; the sentence continues 'noting monster type, number range, and treasure (and absolutely nothing else)'. Two hedges the claim drops: the notes were never published (known from a photo taken at a Gen Con 2007 event), and Delta records debate over whether the encounter text is original, with the map dated 'could be 1972-1974 or so'. He also notes the key is sparser still - one number often covers several rooms and about three-quarters are unkeyed.",
-   "fromFile": "verdicts-dnd-i751-774.json"
-  }
- },
- {
   "index": 771,
   "feature": "sentence length variation",
   "claim": "Gygax's 1976 Lost Caverns of Tsojconth tournament document moved from bullet points to full English sentences describing each area.",
@@ -17022,98 +17011,6 @@
   }
  },
  {
-  "index": 1080,
-  "feature": "plainness and economy",
-  "claim": "Ray Winninger's First Rule of Dungeoncraft is never to force yourself to create more than you must.",
-  "source": "Ray Winninger, Dungeoncraft, Dragon 256 (later WotC's D&D executive producer)",
-  "url": "https://textual.ru/rpg/dungeoncraft.pdf",
-  "quote": "Never force yourself to create more than",
-  "page": "Dragon 256, World Building Part I",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "1999",
-  "routeHint": "curl of John H. Kim's collected PDF at textual.ru, pypdf extraction",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "place-editorial-staff",
-  "verdict": {
-   "index": 1080,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Never force yourself to create more than you must.",
-   "note": "Raw PDF textual.ru/rpg/dungeoncraft.pdf (John H. Kim’s preservation of the 29-part Dragon series, bylined Ray Winninger on its title page), chapter 2 'World Building, Part I — From Dragon Magazine 256'. Printed under the display head 'First Rule of Dungeoncraft:', so the rule’s name and text both match. The source field’s parenthetical about a later WotC role is biographical and is not carried by this page.",
-   "fromFile": "verdicts-dnd-i1075-1090.json"
-  }
- },
- {
-  "index": 1082,
-  "feature": "place and institution description",
-  "claim": "Winninger populates a fantasy city's government with functional bureaucrats such as a Master of the Docks who authorises all cargo in and out of the city.",
-  "source": "Ray Winninger, Dungeoncraft, Dragon 257, Home Base",
-  "url": "https://textual.ru/rpg/dungeoncraft.pdf",
-  "quote": "Master of the Docks who authorizes all cargo that",
-  "page": "Dragon 257, Home Base, City",
-  "kind": "own-words",
-  "polarity": "applies",
-  "date": "1999",
-  "routeHint": "collected PDF at textual.ru, pypdf extraction",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "place-editorial-staff",
-  "verdict": {
-   "index": 1082,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "a Master of the Docks who authorizes all cargo",
-   "note": "Same raw PDF, chapter 3 'World Building, Part II — From Dragon Magazine 257', under 'Home Base', in the 'City' home-base template. The passage says bureaucrats governing the city are dedicated to trade and knowledge functions, giving this office and a Dean of Colleges as examples; the sentence continues 'that comes in and out of the city'. Quote verbatim; every limb supported.",
-   "fromFile": "verdicts-dnd-i1075-1090.json"
-  }
- },
- {
-  "index": 1083,
-  "feature": "place and institution description",
-  "claim": "Winninger tells the DM to give the home settlement a rumour mill, a place where adventurers gather to swap boasts, rumours and legends.",
-  "source": "Ray Winninger, Dungeoncraft, Dragon 261, The Rumor Mill",
-  "url": "https://textual.ru/rpg/dungeoncraft.pdf",
-  "quote": "a place where adventurers gather to",
-  "page": "Dragon 261, The Rumor Mill",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "1999",
-  "routeHint": "collected PDF at textual.ru, pypdf extraction",
-  "registerHint": "herald-pools",
-  "confidence": "high",
-  "angle": "place-editorial-staff",
-  "verdict": {
-   "index": 1083,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "a place where adventurers gather to swap boasts, rumors, and legends",
-   "note": "Same raw PDF, chapter 7 'The Rumor Mill and Maps — From Dragon Magazine 261', section 'The Rumor Mill'. The instruction is to plan a fairly obvious rumor mill in your base of operations (the home base of the preceding chapters), which carries the claim’s 'home settlement'. Quote verbatim; every limb supported.",
-   "fromFile": "verdicts-dnd-i1075-1090.json"
-  }
- },
- {
-  "index": 1084,
-  "feature": "place and institution description",
-  "claim": "Winninger sets the minimum population of a home base at two interesting NPCs, arguing it is better to develop two really good ideas than four or five mediocre ones.",
-  "source": "Ray Winninger, Dungeoncraft, Dragon 261, Interesting NPCs",
-  "url": "https://textual.ru/rpg/dungeoncraft.pdf",
-  "quote": "better to develop two really good ideas than four",
-  "page": "Dragon 261, Interesting NPCs",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "1999",
-  "routeHint": "collected PDF at textual.ru, pypdf extraction",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "place-editorial-staff",
-  "verdict": {
-   "index": 1084,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "better to develop two really good ideas than four",
-   "note": "Same raw PDF, Dragon 261 chapter, section 'Interesting NPCs'. The floor is phrased 'you should try to create at least two such personalities' for the base of operations, which supports the claim’s minimum of two interesting NPCs; the quoted sentence continues 'or five mediocre ideas' (claim says 'ones'). Quote verbatim; both limbs supported, the floor in slightly softer words than 'sets'.",
-   "fromFile": "verdicts-dnd-i1075-1090.json"
-  }
- },
- {
   "index": 1085,
   "feature": "boxed text form",
   "claim": "The DUNGEON staff's writers' guidelines state that read-aloud text makes no reference to the viewer.",
@@ -17873,29 +17770,6 @@
   }
  },
  {
-  "index": 1123,
-  "feature": "register modulation",
-  "claim": "Christopher Perkins, then editor of DUNGEON Adventures, says Warriors of Heaven does not embrace the narrative style of most Planescape products because it is a core AD&D product.",
-  "source": "Christopher Perkins, interviewed at Planescape: I am the Mimir, 1999",
-  "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
-  "quote": "does not embrace the narrative style of most PLANESCAPE",
-  "page": "answer on narrative style",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "1999",
-  "routeHint": "curl with browser user agent",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "place-editorial-staff",
-  "verdict": {
-   "index": 1123,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "does not embrace the narrative style of most PLANESCAPE products",
-   "note": "Raw page fetched (mimir.net, HTTP 200). Answer to 'From what perspective is the product written?'. The page joins the two limbs with 'and' rather than 'because', but the causal reading is the page's own: the next answer notes A Guide to Hell uses a similar narrative style and 'It, too, is designed as a core AD&D product'. The editor's note at the head of the interview identifies Perkins as editor of TSR's DUNGEON Adventures.",
-   "fromFile": "verdicts-dnd-i1115-1131.json"
-  }
- },
- {
   "index": 1124,
   "feature": "per-speaker register",
   "claim": "Perkins says the Planescape cant is mostly absent from Warriors of Heaven, apart from an occasional slang word he slipped past the editors.",
@@ -18054,52 +17928,6 @@
    "trueWording": "an editor took over and managed everything about the manuscript",
    "note": "Live grognardia.blogspot.com fetched 200 (raw HTML). Winter's answer to question 4 on editing at TSR: the designer wrote the original manuscript, then this, 'from that point on' with the parenthetical listing additional development, editing, layout, ordering art and maps, proofreading and typefitting. Every limb supported.",
    "fromFile": "verdicts-dnd-i1056-1130.json"
-  }
- },
- {
-  "index": 1131,
-  "feature": "edition and house style",
-  "claim": "Waterdeep: Dragon Heist, the 2018 city adventure, credits Michele Carter, Scott Fitzgerald Gray and Kim Mohan as its editors.",
-  "source": "Waterdeep: Dragon Heist (Wizards of the Coast, 2018), credits page, read through the Internet Archive's OCR text",
-  "url": "https://archive.org/stream/wheaton_Wdh/Waterdeep%20-%20%20Dragon%20Heist_djvu.txt",
-  "quote": "Editors: Michele Carter Scott Fitzgerald Cray, Kim Mohan",
-  "page": "credits page",
-  "kind": "relay",
-  "polarity": "asserts",
-  "date": "2018",
-  "routeHint": "archive.org djvu.txt stream; the OCR renders Gray as Cray",
-  "registerHint": "none",
-  "confidence": "medium",
-  "angle": "place-editorial-staff",
-  "verdict": {
-   "index": 1131,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Editors: Michele Carter Scott Fitzgerald Cray, Kim Mohan",
-   "note": "Raw archive.org full-text page fetched (HTTP 200, 1.19MB) and the OCR credits block read directly. Match is exact once the OCR's doubled spaces are collapsed; the OCR renders Gray as 'Cray'. Same page gives 'First Printing: September 201S' (2018) and the 2018 copyright line, and the foreword frames it as a Waterdeep / City of Splendors adventure, so the date and city-adventure limbs hold.",
-   "fromFile": "verdicts-dnd-i1115-1131.json"
-  }
- },
- {
-  "index": 1132,
-  "feature": "edition and house style",
-  "claim": "Jeremy Crawford is credited as managing editor of Waterdeep: Dragon Heist.",
-  "source": "Waterdeep: Dragon Heist (Wizards of the Coast, 2018), credits page, read through the Internet Archive's OCR text",
-  "url": "https://archive.org/stream/wheaton_Wdh/Waterdeep%20-%20%20Dragon%20Heist_djvu.txt",
-  "quote": "Managing Editor: Jeremy Crawford",
-  "page": "credits page",
-  "kind": "relay",
-  "polarity": "asserts",
-  "date": "2018",
-  "routeHint": "archive.org djvu.txt stream",
-  "registerHint": "none",
-  "confidence": "medium",
-  "angle": "place-editorial-staff",
-  "verdict": {
-   "index": 1132,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Managing Editor: Jeremy Crawford",
-   "note": "archive.org OCR full text of wdh, credits block under the WATERDEEP DRAGON HEIST title; OCR renders it with doubled spaces ('Managing  Editor:  Jeremy  Crawford'), otherwise word for word. Same credits block also lists Crawford under Rules Development, and Christopher Perkins as Lead Designer and Lead Editor. Fetched raw with a browser UA; text read directly from the page's <pre> block, not a summary.",
-   "fromFile": "verdicts-dnd-i1132-1146.json"
   }
  },
  {
@@ -19161,52 +18989,6 @@
   }
  },
  {
-  "index": 1196,
-  "feature": "place and institution description",
-  "claim": "A read-through of the 2014 Dungeon Master's Guide names Random Settlements as a section of its chapter 5.",
-  "source": "Lex Starwalker, Game Master's Journey episode 235, 16 Dec 2018",
-  "url": "https://lexstarwalker.com/gamemastersjourney/235",
-  "quote": "Random Settlements",
-  "page": "episode contents list",
-  "kind": "analysis",
-  "polarity": "mentions",
-  "date": "2018-12-16",
-  "routeHint": "curl with browser user agent",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "place-lawful-primaries",
-  "verdict": {
-   "index": 1196,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Random Settlements",
-   "note": "Byte-exact as an h3 in the episode contents list, sitting under the h2 'Adventure Environments - Settlements'; page title is 'GMJ 235: DMG Chapter 5: Adventure Environments', dated December 16, 2018. The page names the book only as 'Dungeon Master's Guide', but its 2018 date and the listed chapter structure (Chapters 1-5 across earlier episodes) fix it as the 2014 fifth-edition guide.",
-   "fromFile": "verdicts-dnd-i1183-1197.json"
-  }
- },
- {
-  "index": 1197,
-  "feature": "place and institution description",
-  "claim": "The same read-through names Mapping a Settlement as another section of the 2014 guide's chapter 5.",
-  "source": "Lex Starwalker, Game Master's Journey episode 235, 16 Dec 2018",
-  "url": "https://lexstarwalker.com/gamemastersjourney/235",
-  "quote": "Mapping a Settlement",
-  "page": "episode contents list",
-  "kind": "analysis",
-  "polarity": "mentions",
-  "date": "2018-12-16",
-  "routeHint": "curl with browser user agent",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "place-lawful-primaries",
-  "verdict": {
-   "index": 1197,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Mapping a Settlement",
-   "note": "Byte-exact as a sibling h3 to 'Random Settlements' under the same 'Adventure Environments - Settlements' h2 of the episode contents list, so it is named as another chapter 5 section. Edition inferred from the page's December 16, 2018 date as for 1196.",
-   "fromFile": "verdicts-dnd-i1183-1197.json"
-  }
- },
- {
   "index": 1199,
   "feature": "point of view and distance",
   "claim": "The same designer's first tip is to write boxed text in the third person rather than the second.",
@@ -19433,29 +19215,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "I don't frontload information.",
    "note": "Word for word (curly apostrophe) in the same December 2011 / Dungeon 197 pacing column, a few tactics below index 1208's sentence: 'I don't frontload information. I let it trickle out in dribs and drabs...' The claim sentence carries no job-title limb (it says only 'the same designer'), so it verifies where 1208 goes PARTIAL.",
-   "fromFile": "verdicts-dnd-i1198-1211.json"
-  }
- },
- {
-  "index": 1210,
-  "feature": "naming and forms of address",
-  "claim": "The same designer says he builds his human surnames on roots from western European cultures.",
-  "source": "Christopher Perkins, 'The Dungeon Master Experience: What's in a Name?', collected 2011 columns, Wizards of the Coast",
-  "url": "https://web.archive.org/web/20201112024903id_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
-  "quote": "and last names with roots in western European cultures",
-  "page": "'What's in a Name?'",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "2011",
-  "routeHint": "Wayback raw capture of the wizards.com PDF, then pdftotext",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "place-lawful-primaries",
-  "verdict": {
-   "index": 1210,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "and last names with roots in western European cultures",
-   "note": "Found in 'The Dungeon Master Experience: What's in a Name?' in the same collected PDF. The only break is the PDF's typographic line-break hyphen ('cul-tures'); reading order confirms the words are contiguous. Full sentence: 'I tend to go for names that sound like seldom used real-world names (e.g., Arando, Caven, Fenton, Mirabel, Remora) and last names with roots in western European cultures (e.g., Caskajaro, Moonridge, Ratley, Van Hyden), or names built around nautical terms.' Scope note: he prefaces it with 'My human names are all over the map' and offers nautical-term names as an alternative, so this is a stated tendency among several, not his only surname rule — the claim's 'says he builds' does not overreach that, but a downstream use should not read it as an exclusive rule.",
    "fromFile": "verdicts-dnd-i1198-1211.json"
   }
  }

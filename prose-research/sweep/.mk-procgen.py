@@ -110,3 +110,60 @@ out=dict(complete=False,
   sourcesRead=sources, claims=claims)
 open(os.path.join(BASE,"found-ai-procgen-baseline.json"),"w",encoding="utf-8").write(json.dumps(out,indent=1,ensure_ascii=False))
 print("claims",len(claims),"sources",len(sources))
+
+# ================= ROUND 2 =================
+U_TPCG="https://www.pcgamer.com/dwarf-fortress-creator-tarn-adams-talks-about-simulating-the-most-complex-magic-system-ever/"
+U_T08="https://www.gamedeveloper.com/design/interview-the-making-of-dwarf-fortress"
+U_JAISB="https://www.cs.kent.ac.uk/events/2015/AISB2015/proceedings/aiAndGames/AI-games-15_submission_01--MarkJohnson-modelling.pdf"
+U_JBOOK="https://www.markrjohnsongames.com/2021/07/27/procedural-book-generation/"
+U_FELT="https://mkremins.github.io/publications/Felt_SimpleStorySifter.pdf"
+
+S_TPCG="Tarn Adams, interviewed by Wes Fenlon, 'Dwarf Fortress creator Tarn Adams talks about simulating the most complex magic system ever', PC Gamer, 16 Mar 2017"
+S_T08="Tarn Adams, interviewed by John Harris, 'Interview: The Making Of Dwarf Fortress', Gamasutra, 27 Feb 2008"
+S_JAISB="Mark R. Johnson, 'Modelling Cultural, Religious and Political Affiliation in Artificial Intelligence Decision-Making', AISB 2015 AI and Games symposium"
+S_JBOOK="Mark R. Johnson, 'Procedural book generation!', markrjohnsongames.com (Ultima Ratio Regum dev blog), 27 Jul 2021"
+S_FELT="Max Kreminski, Melanie Dickinson and Noah Wardrip-Fruin, 'Felt: A Simple Story Sifter', ICIDS 2019"
+
+E_T17="pre-LLM simulation-based world and history generation, interview Mar 2017 describing Dwarf Fortress in development; register measured: generated world history read in Legends mode"
+E_T08="pre-LLM simulation-based world generation, interview Feb 2008 describing Dwarf Fortress; register measured: generated game plot and world history"
+E_J15="pre-LLM rule-based cultural generation, AISB 2015 paper describing Ultima Ratio Regum in development; register measured: generated cultures, religions and NPC behaviour"
+E_J21="pre-LLM rule-based artifact generation, dev blog Jul 2021 describing URR 0.9; register measured: generated books as physical objects, an archival register"
+E_K19="pre-LLM logic-programming story sifting, ICIDS 2019; register measured: simulated storyworld event chronicles"
+
+R_LIVE="live URL, curl with browser user agent, HTML stripped to text"
+
+A(c("reader and expert judgment","Tarn Adams says a whole class of Dwarf Fortress players skip both play modes and instead do archaeology on the worlds they have generated, reading the history in Legends mode.",S_TPCG,U_TPCG,"They just do archaeology on the worlds they've generated","body, section on the four modes","own-words","asserts","2017-03-16",R_LIVE,"chronicle-line","high",E_T17))
+A(c("other: generated history that does not reach the present","Tarn Adams says many things that happen in world generation do not get pushed forward, leaving stories that cannot continue, and calls that bad.",S_TPCG,U_TPCG,"you have these stories that can't continue, which is bad","body, on carrying world-generation events into play","own-words","asserts","2017-03-16",R_LIVE,"chronicle-line","high",E_T17))
+A(c("homogenisation","Tarn Adams says the named objects Dwarf Fortress dwarves had made for eleven years were not that interesting, though they existed and had names, until claims and history were attached to them.",S_TPCG,U_TPCG,"They're not that interesting, but they're there, they have names","body, on artifacts","own-words","asserts","2017-03-16",R_LIVE,"dossier-archivist","high",E_T17))
+A(c("other: derive the system from the world's premise","Tarn Adams says deriving magic from each world's generated creation myth gives a deeper connection than a fixed ladder of level one and level two spells.",S_TPCG,U_TPCG,"There's a deeper connection than just, this is your level one spells","body, on myth generation and magic","own-words","asserts","2017-03-16",R_LIVE,"none","high",E_T17))
+A(c("abstraction over the concrete","Tarn Adams says a random generator would be very hard-pressed to capture really beautiful symbolism or an advanced writing device.",S_T08,U_T08,"You'd be very hard-pressed to capture really beautiful symbolism","section 'Storytelling as an Idea Source'","own-words","asserts","2008-02-27",R_LIVE,"none","high",E_T08))
+A(c("other: elicit the human process first","Tarn Adams describes his generation method as finding the key basic elements, finding the rules that govern them, and activating them in the world.",S_T08,U_T08,"finding the key, basic elements, finding the rules that govern them","section 'Storytelling as an Idea Source'","own-words","asserts","2008-02-27",R_LIVE,"none","high",E_T08))
+A(c("other: generated detail must be load-bearing","Mark R. Johnson says Ultima Ratio Regum foregrounds generated civilizational, cultural and religious detail in its actors rather than leaving such content as background or lore, as many games do.",S_JAISB,U_JAISB,"rather than leaving such content as \"background\" or \"lore\"","section 2, Procedural Generation and Artificial Intelligence","own-words","asserts","2015",R_PDF,"dossier-archivist","high",E_J15))
+A(c("other: generated detail must be load-bearing","Mark R. Johnson says the generated cultural backgrounds are the only route by which his actors' motivations, interests and agendas can be understood.",S_JAISB,U_JAISB,"whose motivations, interests and agendas can only be understood","section 2, Procedural Generation and Artificial Intelligence","own-words","asserts","2015",R_PDF,"dossier-archivist","high",E_J15))
+A(c("other: typed pools of world facts","Mark R. Johnson says a URR algorithm can procedurally create over a million detailed religions carrying beliefs, gods, festivals, eschatology and altar appearance.",S_JAISB,U_JAISB,"procedurally create over a million detailed religions","section 2, Procedural Generation and Artificial Intelligence","own-words","asserts","2015",R_PDF,"dossier-archivist","high",E_J15))
+A(c("homogenisation","Mark R. Johnson reports over 1 trillion possible generated AI actors in URR, and rests the claim of difference on their behaving differently by social and cultural context rather than on the count.",S_JAISB,U_JAISB,"over 1 trillion possible AI actors","section 2, Procedural Generation and Artificial Intelligence","own-words","asserts","2015",R_PDF,"none","high",E_J15))
+A(c("other: every varying feature carries a fact","Mark R. Johnson says a bookmark on a generated URR book shows a scholarly nation, one of several visual features that each encode a fact about the book's nation of origin.",S_JBOOK,U_JBOOK,"a bookmark shows a scholarly nation","blog post body","own-words","asserts","2021-07-27",R_LIVE,"dossier-archivist","high",E_J21))
+A(c("other: sifting only finds what it was told to find","Kreminski and colleagues describe a simulated storyworld's output as a profusion of events, many of which are relatively uninteresting as narrative building blocks.",S_FELT,U_FELT,"a profusion of events, many of which are relatively uninteresting","section 1, Introduction","analysis","asserts","2019",R_PDF,"chronicle-line","high",E_K19))
+A(c("steerability","Kreminski and colleagues report that they found it very difficult to anticipate in advance the full range of questions a sifting-pattern author would want to ask about the game state, and so gave authors a real query language instead of a preauthored function library.",S_FELT,U_FELT,"very difficult to anticipate in advance the full range of questions","section 5.1, Authoring Sifting Patterns","measurement","asserts","2019",R_PDF,"none","high",E_K19))
+
+sources.extend([
+ dict(title="Dwarf Fortress creator Tarn Adams talks about simulating the most complex magic system ever (PC Gamer)", url=U_TPCG, kind="own-words", substantive=True, date="2017-03-16", route=R_LIVE),
+ dict(title="Interview: The Making Of Dwarf Fortress (Gamasutra / Game Developer)", url=U_T08, kind="own-words", substantive=True, date="2008-02-27", route=R_LIVE),
+ dict(title="Modelling Cultural, Religious and Political Affiliation in Artificial Intelligence Decision-Making (AISB 2015)", url=U_JAISB, kind="own-words", substantive=True, date="2015", route=R_PDF),
+ dict(title="Procedural book generation! (Ultima Ratio Regum dev blog)", url=U_JBOOK, kind="own-words", substantive=True, date="2021-07-27", route=R_LIVE),
+ dict(title="Felt: A Simple Story Sifter (ICIDS 2019)", url=U_FELT, kind="analysis", substantive=True, date="2019", route=R_PDF),
+ dict(title="Generating Histories (chapter in Procedural Storytelling in Game Design, CRC/Routledge 2019)", url="https://www.taylorfrancis.com/chapters/edit/10.1201/9780429488337-18/generating-histories-jason-grinblat", kind="analysis", substantive=False, date="2019", route="BLOCKED: publisher paywall; only unlawful mirrors surfaced; no claims taken"),
+ dict(title="Towards Qualitative Procedural Generation (Ultima Ratio Regum blog page named in the roster)", url="http://www.ultimaratioregum.co.uk/game/2016/01/23/towards-qualitative-procedural-generation/", kind="own-words", substantive=False, date="2016", route="NOT FOUND: 404 at the roster URL; substituted Johnson's AISB 2015 paper and 2021 dev blog"),
+])
+
+out=dict(complete=True,
+  coverage=("Roster: FETCHED RAW and quoted - Compton (galaxykate0.tumblr, 22 Feb 2016), Grinblat & Bucklew FDG'17 PDF, Ryan's 2018 UCSC dissertation (eScholarship PDF, 815pp), "
+            "Smith & Whitehead PCG 2010 (author PDF), Emily Short's oatmeal post (dated 21 Sep 2016, NOT Feb as the angle stated), Tarn Adams in two interviews (Gamasutra 2008, PC Gamer 2017), "
+            "Mark R. Johnson (AISB 2015 paper + 2021 URR dev blog), Max Kreminski (Felt, ICIDS 2019, author's own site). "
+            "NOT FOUND: Johnson's 'Towards Qualitative Procedural Generation' at the roster URL (404) and his RPS columns (404) - substituted his AISB paper and dev blog; Tarn Adams's Roguelike Celebration talk exists only as video, no transcript. "
+            "BLOCKED: Grinblat's 'Generating Histories' chapter (Taylor & Francis paywall; only unlawful mirrors surfaced) and the GDC Vault Caves of Qud talk - zero claims taken from either. "
+            "Ten substantive sources: 5 by direct live fetch, 5 by PDF-binary fetch plus pdftotext; discovery expanded by bibliography chasing from Grinblat's and Ryan's reference lists and by lateral search; "
+            "stopped when the roster was exhausted and two consecutive searches surfaced nothing new that was lawfully reachable."),
+  sourcesRead=sources, claims=claims)
+open(os.path.join(BASE,"found-ai-procgen-baseline.json"),"w",encoding="utf-8").write(json.dumps(out,indent=1,ensure_ascii=False))
+print("FINAL claims",len(claims),"sources",len(sources))
