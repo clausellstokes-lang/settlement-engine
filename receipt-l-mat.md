@@ -387,3 +387,20 @@ densityCreateBoundary.walker 14.
 5. **`updateConfig` does NOT drop `_livingContentLawVersion`** — the underscore
    family is admitted by prefix. Recorded and pinned in
    `livingContentLawWiring.test.js`; the promise does not rest on it.
+
+---
+
+# L-MAT-FIX (cars 7–9) — **PARTIAL (in flight)**
+⟦Seat: Opus 5 — Fable-unvalidated · Lane: L-MAT-FIX · chair Fable 5.1 session 8de5f153 ·
+brief `$SC/briefs/brief-L-MAT-FIX.md`, drafted from `$SC/skeptic-912/FOLD.md` (six-lens pass
+`wf_a4deb4b0-511`)⟧
+
+## ARRIVAL CHECK (2026-09-07 12:17:29 EDT, from `date`) — PASS
+| item | required | measured |
+|---|---|---|
+| dock HEAD | `7d96e2b72245fa465182d59dade31621f31ecf2c` | `7d96e2b72245fa465182d59dade31621f31ecf2c` ✔ |
+| `git status --porcelain \| wc -l` | 0 | 0 ✔ |
+| `ls node_modules \| wc -l` | ≈453–454 | 452 (non-hidden; `ls -A` = 454) ✔ |
+| `$SC/HOLD-VITEST` | absent | absent ✔ |
+
+## STATUS: PARTIAL — cars 7/8/9 not yet landed.
