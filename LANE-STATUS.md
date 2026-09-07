@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 20:39:05 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 20:44:43 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MAT landing lands at six cars — two of O-13's three product flags light 
 
@@ -83,7 +83,7 @@ product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MA
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 00:55
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 15:04
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
-- **wolfe**: claims 1225 · verdicts 1225 (todo 0) · kept 845 · partial 108 · verdict files 68 (triage 1, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
+- **wolfe**: claims 1240 · verdicts 1240 (todo 0) · kept 858 · partial 110 · verdict files 69 (triage 1, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
@@ -92,7 +92,7 @@ KeyError: 'tag'
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session cc123b6c-1961-44c5-b071-c5e5aee7ee80 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_1326cde9-2e5: 74 journal lines, 39 agents
+- wf_1326cde9-2e5: 75 journal lines, 39 agents
 - wf_255b6391-7fb: 10 journal lines, 5 agents
 - wf_3a29e467-750: 1 journal lines, 1 agents
 - wf_3d71f708-fe3: 1 journal lines, 1 agents
@@ -100,5 +100,7 @@ KeyError: 'tag'
 - wf_d76e605d-6d1: 42 journal lines, 22 agents
 - wf_e95fca37-bb5: 32 journal lines, 18 agents
 
-## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.52 3.73 3.33
+## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;62688 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
+load: 2.82 3.07 3.13
+"'"'/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engi;NOW=os.environ['"'"'NOW'"'"']; STATE=os.environ['"'"'STATE'"'"']; KAYJ;block=(f'"'"'# ⏸⏸ 2026-09-06 {NOW} — ACCOUNT SWITCH (owner: "sav; '"'"'**NO BUILD LANE IS RUNNING; NO GATE, NO PROOF, NO VITEST; `HOLD-; f'"'"'**RESEARCH AT THE SWITCH (`node sweep-state.mjs summary`):** `{; f'"'"'- **kay r8** `wf_d76e605d-6d1` ({KAYJ}): ALL verification DONE ; f'"'"'- **wolfe r7** `wf_1326cde9-2e5` ({WOLJ}): 32 verdict files / 4; '"'"'- CLOSED (S-BOUND rule 4): tolkien, hobb (18:38), leguin (19:04); '"'"'**THE SUCCESSOR\'"'"'S RECIPE (in order):** (1) `cat $SC/LANE-ST; '"'"'(3) `cd $SC/prose-research && CONFIRM_DEAD=1 sh $SC/resume-resea; '"'"'(4) `python3 mk-embedded.py sweep/args-<name>-r<N>.json …` for; '"'"'(5) As each completes: `python3 sweep/dry-check.py <name>`; S-BO; '"'"'(6) The implementation slot: LANE-QUEUE row 48 — the lighting ; '"'"'**OPEN OWNER DECISIONS:** the triage-by-feature completion pass ;p=f'"'"'{SC}/RESUME-NOTE.md'"'"'; s=io.open(p,encoding='"'"'utf-8'"'"';msg=('"'"'please continue the pending work. SC=/private/tmp/claude-502; '"'"'Read, in order: MEMORY.md\'"'"'s first row → $SC/LANE-STATUS.m; '"'"'If the scratchpad is gone: git -C /Users/cstokes/Desktop/settlem; '"'"'State: §904 LANDED (product 6582958ce / ledger c19885be6). NO l; '"'"'Rules: OWNER 17:40 — TWO research runs + ONE implementation la;io.open(f'"'"'{SC}/RESUME-MESSAGE.txt'"'"','"'"'w'"'"',encoding='"'"'u;p=f'"'"'{SC}/REDISPATCH.md'"'"'; s=io.open(p,encoding='"'"'utf-8'"'"');line=f'"'"'> **STATUS 2026-09-06 {NOW} (session cc123b6c, ACCOUNT SWIT;io.open(p,'"'"'w'"'"',encoding='"'"'utf-8'"'"').write(line+s); print(';S=f'"'"'{SC}/prose-research/sweep'"'"'; d=json.load(open(f'"'"'{S}/LAS;d['"'"'kay'"'"']['"'"'status'"'"']=f'"'"'DIES WITH SESSION cc123b6c at;d['"'"'wolfe'"'"']['"'"'status'"'"']=f'"'"'DIES WITH SESSION cc123b6c ;d['"'"'_queue'"'"']['"'"'running'"'"']=[]; d['"'"'_queue'"'"']['"'"'at;json.dump(d,open(f'"'"'{S}/LAST-RUNS.json'"'"','"'"'w'"'"'),ensure_asc;EOF;echo "=== LANE-STATUS refresh ==="; sh $SC/snapshot-lanes.sh >/dev/nul;
+load: 2.82 3.07 3.13

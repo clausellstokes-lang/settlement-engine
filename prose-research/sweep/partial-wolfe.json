@@ -2365,6 +2365,52 @@
   }
  },
  {
+  "index": 1241,
+  "feature": "naming and forms of address",
+  "claim": "A reader tracks a repeated self-introduction formula about the spelling of a name across four late novels, and notes that only in the last is the letter capitalised.",
+  "source": "u/Holly-Crystal-Hawks, r/genewolfe, 'Names, Corridors, Windows, and Doors', 2021-07-26",
+  "url": "https://www.reddit.com/r/genewolfe/comments/oof804/names_corridors_windows_and_doors_the_sorcerers/",
+  "quote": "always capitalizes his use",
+  "page": "comment listing four quoted passages with page numbers",
+  "kind": "reader",
+  "polarity": "applies",
+  "date": "2021-07-26",
+  "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 1241,
+   "verdict": "PARTIAL",
+   "trueWording": "exact: \"always capitalizes his use\" of the E, versus A Borrowed Man",
+   "note": "Reddit RSS raw. Comment t1_h6nah0y by u/Holly-Crystal-Hawks, 2021-07-26T23:40, opening 'More structural Wolfey mirrors'. The quotation is verbatim, but the count and the capitalisation limb both drift: the comment quotes five passages from THREE novels (The Sorcerer's House pg. 243; A Borrowed Man pg. 202 and 227; Interlibrary Loan pg. 85 and 237), and its capitalisation point is a contrast between Interlibrary Loan and A Borrowed Man only — the Sorcerer's House passage also prints a capital E. Two of the five passages spell a third party's name (Murrey, Carole) rather than the speaker's, so the formula is not purely self-introduction.",
+   "unsupportedLimb": "'across four late novels' and 'only in the last is the letter capitalised' — the page shows three novels in five passages, and the capitalisation contrast is drawn only between Interlibrary Loan and A Borrowed Man",
+   "fromFile": "verdicts-wolfe-i1233-1247.json"
+  }
+ },
+ {
+  "index": 1246,
+  "feature": "omission as information",
+  "claim": "Polansky states that the narrator's sins are hidden from him as much as from the reader and can be identified only by the scars they leave in his memory.",
+  "source": "Daniel Polansky, 'The Mysteries of Gene Wolfe's Peace (and Why They Keep Me Up at Night)', Reactor (Tor.com), 2015-10-20",
+  "url": "https://reactormag.com/the-mysteries-of-gene-wolfes-peace-and-why-they-keep-me-up-at-night/",
+  "quote": "they can be identified by the scars they leave in his memory",
+  "page": "body, after the section break",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2015-10-20",
+  "routeHint": "wayback raw capture https://web.archive.org/web/20251118073408id_/<url>",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 1246,
+   "verdict": "PARTIAL",
+   "trueWording": "exact: \"identified by the scars they leave in his memory\"",
+   "note": "Live reactormag.com HTML, raw. The hidden-from-Weer limb is supported by the first half of the same sentence, which says the sins and shames are hidden from Weer as much as from the reader. But the page carries no exclusivity: it says they CAN be identified by the scars, never that this is the only route. The 'only' is the record's addition, not the source's.",
+   "unsupportedLimb": "'can be identified ONLY by the scars' — the page says merely that they can be identified by them, with no exclusivity",
+   "fromFile": "verdicts-wolfe-i1233-1247.json"
+  }
+ },
+ {
   "index": 1250,
   "feature": "withheld information and inference",
   "claim": "Knode demonstrates the device by chasing a detail to its root: the first line names a woman who plants a tree, and a line hundreds of pages later, under her married name, shows the narrator is already dead.",

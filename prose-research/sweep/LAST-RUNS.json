@@ -11,7 +11,7 @@
   "argsFile": "args-kay-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--kay-r8.js",
-  "status": "RUNNING since 18:40 (resumed from wf_d76e605d-6d1 — the 2nd research slot after hobb closed)",
+  "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — verification COMPLETE (12 files / 169 verdicts; state unverified 0); regrade-r8 / section / critic: NOT yet on disk; the resume script derives the owed tail (regrade if no regrade-r8; synth if the section predates the last verdict; critic)",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--kay-r8.js"
  },
  "leguin": {
@@ -28,7 +28,7 @@
   "argsFile": "args-wolfe-r7.json",
   "tag": "r7",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--wolfe-r7.js",
-  "status": "RUNNING since 19:05 (resumed from wf_1326cde9-2e5 — the slot leguin freed)",
+  "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — 32 verdict files / 479 verdicts (16 planned + 16 fresh chunks); regrade-r7 / section / critic: NOT yet on disk; the resume script derives the owed tail",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--wolfe-r7.js"
  },
  "martin": {
@@ -75,15 +75,13 @@
    "martin",
    "ai"
   ],
-  "running": [
-   "kay",
-   "wolfe"
-  ],
+  "running": [],
   "resume": "keep TWO research runs alive: when one completes (its task notification), resume the next in `order` by Workflow({scriptPath: d[<next>].scriptPath, resumeFromRunId: d[<next>].runId}); set its status RUNNING here",
   "done": [
    "hobb",
    "leguin"
   ],
-  "open_decision": "TRIAGE-BY-FEATURE completion pass for leguin (~250–300) and hobb (~60): a kit change (split-chunks --triage keyed on section features × witness) + verify-only runs; owner-gated on cost under the 17:40 cap"
+  "open_decision": "TRIAGE-BY-FEATURE completion pass for leguin (~250–300) and hobb (~60): a kit change (split-chunks --triage keyed on section features × witness) + verify-only runs; owner-gated on cost under the 17:40 cap",
+  "at_switch": "20:44:42: kay + wolfe were the two live runs; dnd → martin → ai queued; after the switch REBUILD all five with resume-research.sh (a new session cannot resume a runId) and launch two at a time"
  }
 }
