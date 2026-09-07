@@ -3,12 +3,12 @@
  "name": "leguin",
  "angle": null,
  "tag": null,
- "lines": 104,
+ "lines": 116,
  "firstTs": "2026-09-07T08:14:15.422Z",
- "lastTs": "2026-09-07T08:25:07.059Z",
+ "lastTs": "2026-09-07T08:29:25.299Z",
  "tools": {
-  "Bash": 14,
-  "Read": 17
+  "Bash": 16,
+  "Read": 18
  },
  "urlsFetched": [
   "https://www.youtube.com/watch?v=$id",
@@ -35,7 +35,17 @@
   "https://api.openalex.org/works?search=%22Le%20Guin%22%20%22corpus%20stylistics%22&per-page=3&select=id,title,publication_year",
   "https://api.openalex.org/works?search=%22Le%20Guin%22%20%22free%20indirect%22&per-page=5&select=id,title,publication_year",
   "https://api.openalex.org/works?search=%22Le%20Guin%22%20%22narrative%20voice%22&per-page=5&select=id,title,publication_year",
-  "http://web.archive.org/web/20260421123219id_/http://www.sfsite.com/03a/ul123.htm"
+  "http://web.archive.org/web/20260421123219id_/http://www.sfsite.com/03a/ul123.htm",
+  "https://web.archive.org/cdx/search/cdx?url=sfsite.com/03a/ul123.htm&fl=timestamp,statuscode,length&collapse=digest&limit=12",
+  "https://web.archive.org/cdx/search/cdx?url=sfsite.com/03a/ul123.htm&fl=timestamp,statuscode,length&filter=statuscode:200&limit=1",
+  "http://web.archive.org/web/${TS}id_/http://www.sfsite.com/03a/ul123.htm",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Astructuralfabula00scho%20AND%20%22Le%20Guin%22",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Anovelsforstudent0000unse_j1x5%20AND%20%22Kesh%22",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aecocriticismread0000unse%20AND%20%22carrier%20bag%22",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Astormwarningssci0000unse%20AND%20%22Delany%22",
+  "https://openlibrary.org/search/inside.json?q=%22Mendlesohn%22%20AND%20%22Earthsea%22%20AND%20%22portal%22",
+  "https://openlibrary.org/search/inside.json?q=%22Le%20Guin%22%20AND%20%22Lao%20Tzu%22%20AND%20%22plain%22",
+  "https://api.openalex.org/works?search=%22Le%20Guin%22%20stylometry&per-page=3&select=id,title,publication_year,primary_location"
  ],
  "filesWritten": [],
  "lastAssistantText": "Now the eight find-notes and the JSON shape, all independent, in one batch.",

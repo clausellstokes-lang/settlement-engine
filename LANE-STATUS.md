@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 04:27:13 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 04:32:52 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegation sitting — the owner hands the open rows to the chair's judgment an
 
@@ -129,7 +129,7 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
-- **dnd**: claims 1212 · verdicts 1212 (todo 0) · kept 913 · partial 253 · verdict files 87 (triage 2, regrade r6) · section 09-07 03:58 · critic 09-07 01:07
+- **dnd**: claims 1212 · verdicts 1212 (todo 0) · kept 913 · partial 253 · verdict files 87 (triage 2, regrade r6) · section 09-07 03:58 · critic 09-07 04:32
 - **ai**: claims 1518 · verdicts 1287 (todo 231) · kept 1015 · partial 191 · verdict files 84 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-07 02:10
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 666 · partial 117 · verdict files 59 (triage 2, regrade r8) · section 09-07 04:03 · critic 09-06 18:59
@@ -145,4 +145,4 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 - wf_e092839f-8b1: 20 journal lines, 10 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.58 2.49 4.55
+load: 2.18 2.23 3.75
