@@ -1,0 +1,21 @@
+{
+ "role": "regrade",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "regrade-r7",
+ "lines": 59,
+ "firstTs": "2026-09-07T00:47:31.178Z",
+ "lastTs": "2026-09-07T00:50:15.512Z",
+ "tools": {
+  "Bash": 14,
+  "Read": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Index 174 is already PARTIAL from an earlier r4 regrade (not in the kept set). Now let me dump all 873 kept rows for a full read.",
+ "run": "wf_1326cde9-2e5",
+ "agent": "a970d0631ad0716f7",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a970d0631ad0716f7.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

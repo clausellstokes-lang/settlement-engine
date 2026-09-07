@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 20:44:14 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 20:50:15 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -48,7 +48,7 @@
 | hobb | verifier | i686-695 | failed | 0 | — | verdict file absent | 19:45:50 |
 | kay | critic |  | result | 0 | critic-kay.md | — | 19:06:09 |
 | kay | critic |  | failed | 0 | — | — | 19:46:20 |
-| kay | critic |  | in-flight | 19 | — | — | 00:44:01 |
+| kay | critic |  | in-flight | 29 | — | — | 00:48:19 |
 | kay | finder | academic-routes | result | 109 | — | 46 claims, complete=True @17:25:52 | 19:40:35 |
 | kay | finder | rescue-unread | result | 113 | — | 100 claims, complete=True @17:25:52 | 19:38:12 |
 | kay | finder | silmarillion-and-verse | result | 105 | — | 113 claims, complete=True @17:25:52 | 19:34:08 |
@@ -170,6 +170,7 @@
 | wolfe | finder | monographs | in-flight | 8 | — | 238 claims, complete=True @19:34:41 | 21:31:03 |
 | wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
 | wolfe | regrade | regrade-r6 | failed | 0 | — | — | 19:50:40 |
+| wolfe | regrade | regrade-r7 | in-flight | 0 | — | — | 00:50:15 |
 | wolfe | synth |  | failed | 0 | — | — | 19:50:41 |
 | wolfe | verifier | i1008-1022 | result | 6 | — | verdict file WRITTEN | 00:18:08 |
 | wolfe | verifier | i1023-1037 | result | 6 | — | verdict file WRITTEN | 00:17:49 |
@@ -185,8 +186,8 @@
 | wolfe | verifier | i1173-1187 | result | 13 | — | verdict file WRITTEN | 00:36:09 |
 | wolfe | verifier | i1188-1202 | result | 17 | — | verdict file WRITTEN | 00:35:41 |
 | wolfe | verifier | i1203-1217 | result | 4 | — | verdict file WRITTEN | 00:32:42 |
-| wolfe | verifier | i1218-1232 | in-flight | 16 | — | verdict file absent | 00:42:45 |
-| wolfe | verifier | i1233-1247 | in-flight | 13 | — | verdict file WRITTEN | 00:43:58 |
+| wolfe | verifier | i1218-1232 | result | 24 | — | verdict file WRITTEN | 00:47:31 |
+| wolfe | verifier | i1233-1247 | result | 13 | — | verdict file WRITTEN | 00:44:25 |
 | wolfe | verifier | i1248-1254 | result | 6 | — | verdict file WRITTEN | 00:39:00 |
 | wolfe | verifier | i468-482 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i468-507 | result | 8 | — | verdict file WRITTEN | 23:47:17 |

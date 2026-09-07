@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 20:45:24 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 20:50:49 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MAT landing lands at six cars — two of O-13's three product flags light 
 
@@ -81,9 +81,9 @@ product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MA
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-05 21:01
 - **dnd**: claims 872 · verdicts 872 (todo 0) · kept 619 · partial 147 · verdict files 55 (triage 1, regrade r6) · section 09-05 20:56 · critic 09-05 21:12
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 00:55
-- **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 15:04
+- **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
-- **wolfe**: claims 1240 · verdicts 1240 (todo 0) · kept 858 · partial 110 · verdict files 69 (triage 1, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
+- **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 873 · partial 110 · verdict files 70 (triage 1, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
@@ -92,7 +92,7 @@ KeyError: 'tag'
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session cc123b6c-1961-44c5-b071-c5e5aee7ee80 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_1326cde9-2e5: 75 journal lines, 39 agents
+- wf_1326cde9-2e5: 77 journal lines, 40 agents
 - wf_255b6391-7fb: 10 journal lines, 5 agents
 - wf_3a29e467-750: 1 journal lines, 1 agents
 - wf_3d71f708-fe3: 1 journal lines, 1 agents
@@ -100,5 +100,5 @@ KeyError: 'tag'
 - wf_d76e605d-6d1: 42 journal lines, 22 agents
 - wf_e95fca37-bb5: 32 journal lines, 18 agents
 
-## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;95529 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;import io,os,time,json;SC='"'"'/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engi;def pres(files):;    out=[];    for f in files:;        p=f'"'"'{S}/{f}'"'"';        if os.path.exists(p): out.append(f"{f}@{time.strftime('"'"'%H:;    return '"'"' '"'"'.join(out);kay=pres(['"'"'verdicts-kay-regrade-r8.json'"'"','"'"'section-kay.md'";kayline=f'"'"'{kay} (regrade-r8 {"PRESENT" if "regrade-r8" in kay else;wolline=f'"'"'{wol} (regrade-r7 {"PRESENT" if "regrade-r7" in wol else;p=f'"'"'{SC}/RESUME-NOTE.md'"'"'; s=io.open(p,encoding='"'"'utf-8'"'"';a='"'"'Files present at the switch: (none of regrade-r8 / section / cr;b='"'"'Files present at the switch: (none of regrade-r7 / section / cr;assert s.count(a)==1 and s.count(b)==1;s=s.replace(a,'"'"'Files at the switch: '"'"'+kayline+'"'"'.'"'"').rep;d=json.load(open(f'"'"'{S}/LAST-RUNS.json'"'"'));d['"'"'kay'"'"']['"'"'status'"'"']=d['"'"'kay'"'"']['"'"'status'"'"'].;d['"'"'wolfe'"'"']['"'"'status'"'"']=d['"'"'wolfe'"'"']['"'"'status'"';json.dump(d,open(f'"'"'{S}/LAST-RUNS.json'"'"','"'"'w'"'"'),ensure_asc;EOF;echo "=== force the seal: restart the autosave (its first iteration se;
-load: 2.63 3.01 3.11
+## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 2.70 2.97 3.08
