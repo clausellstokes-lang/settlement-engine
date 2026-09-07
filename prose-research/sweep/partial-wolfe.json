@@ -2089,6 +2089,29 @@
   }
  },
  {
+  "index": 1038,
+  "feature": "withheld information and inference",
+  "claim": "Manlove names Philip K. Dick as the writer nearest Wolfe in breaking boundaries between fiction and reality.",
+  "source": "C. N. Manlove, 'Gene Wolfe, The Book of the New Sun (1980-83)', in Science Fiction: Ten Explorations (1986), note 8",
+  "url": "http://web.archive.org/web/20180618115401id_/https://link.springer.com/chapter/10.1007%2F978-1-349-07259-0_11",
+  "quote": "breaking of boundaries between fiction and reality",
+  "page": "note 8",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1986",
+  "routeHint": "SpringerLink chapter page via Wayback raw capture (20180618115401id_)",
+  "registerHint": "none",
+  "confidence": "medium",
+  "verdict": {
+   "index": 1038,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the unhedged 'the writer nearest Wolfe' — Manlove writes 'Perhaps the nearest writer'",
+   "trueWording": "Perhaps the nearest writer to Wolfe ... is Philip K. Dick",
+   "note": "Wayback raw capture of the SpringerLink chapter page reached (preview page: abstract, Keywords, then Notes). Note 8 is printed in full and does name Philip K. Dick, citing Eye in the Sky, Ubik and Valis; the claim's quoted fragment appears word for word inside it. But Manlove hedges ('Perhaps') and his boundary list is wider than the claim's — fiction/reality, one mind and another, life and death. Chapter body is paywalled preview, so 'this breaking of boundaries' has no visible antecedent.",
+   "fromFile": "verdicts-wolfe-i1038-1052.json"
+  }
+ },
+ {
   "index": 1066,
   "feature": "sentence length variation",
   "claim": "Aramini faults his own Between Light and Shadow for twisty sentences that lose the reader.",
@@ -2155,6 +2178,144 @@
    "unsupportedLimb": "'derive meaning from the parts' inverts the page's direction: Auerbach says the meaning of any particular piece cannot be derived from the whole, not the reverse",
    "note": "The quoted limb 'we do not have the whole context' is verbatim in the text-stability paragraph, and the missing-context cause is exactly Auerbach's. But the claim reverses part and whole, so the derivation limb as written is not what the page says.",
    "fromFile": "verdicts-wolfe-i1083-1097.json"
+  }
+ },
+ {
+  "index": 1117,
+  "feature": "edition and house style",
+  "claim": "The Google Books record gives Solar Labyrinth as 204 pages, where a reviewer of the trade paperback counted 188.",
+  "source": "Google Books record for Robert Borski, Solar Labyrinth (iUniverse, 2004)",
+  "url": "https://books.google.com/books/about/Solar_Labyrinth.html?id=xGjSBAAAQBAJ",
+  "quote": "iUniverse , May 20, 2004 - Literary Criticism - 204 pages",
+  "page": "bibliographic line",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2004",
+  "routeHint": "live page fetched with a browser user agent",
+  "registerHint": "none",
+  "confidence": "medium",
+  "verdict": {
+   "index": 1117,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the second limb — that a reviewer of the trade paperback counted 188 pages",
+   "trueWording": "bibliographic line: \"iUniverse, May 20, 2004 ... 204 pages\"",
+   "note": "204-page limb confirmed verbatim on the bibliographic line (claim's quote carries a stray space before the comma from HTML stripping; rendered page has 'iUniverse,'). The 188 figure is absent: the string '188' occurs nowhere on the page, and no reviewer or trade-paperback pagination is mentioned. That limb needs its own source.",
+   "fromFile": "verdicts-wolfe-i1113-1127.json"
+  }
+ },
+ {
+  "index": 1118,
+  "feature": "other: monograph form",
+  "claim": "Borski's second collection ranges across Wolfe's work from short stories to novellas to book series.",
+  "source": "iUniverse publisher description for Robert Borski, The Long and the Short of It (iUniverse, 17 Feb 2006, 154 pages), on the Google Books record",
+  "url": "https://books.google.com/books/about/THE_LONG_AND_THE_SHORT_OF_IT.html?id=7y1jBrpx4loC",
+  "quote": "from short stories to novellas to mega-book series",
+  "page": "publisher description",
+  "kind": "vendor",
+  "polarity": "asserts",
+  "date": "2006",
+  "routeHint": "live page fetched with a browser user agent",
+  "registerHint": "none",
+  "confidence": "medium",
+  "verdict": {
+   "index": 1118,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that this is Borski's *second* collection — the page never numbers it",
+   "trueWording": "\"from short stories to novellas to mega-book series\"",
+   "note": "Range limb exact in the iUniverse blurb (claim drops 'mega-'). The page places the book as a successor only loosely — subtitle 'More Essays on the Fiction of Gene Wolfe' and 'once again literary detective Robert Borski' — and the word 'second' appears nowhere on the record. Ordinality must come from elsewhere.",
+   "fromFile": "verdicts-wolfe-i1113-1127.json"
+  }
+ },
+ {
+  "index": 1125,
+  "feature": "per-speaker register",
+  "claim": "Clute praises the dozens of dialects and accents of the Short Sun cast as meticulously rendered.",
+  "source": "John Clute, 'It Is Becoming to Grapple with This Book', Excessive Candour column, Science Fiction Weekly issue 197, 29 January 2001",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/2001-01-29-johnclute-excessivecandorv7no5issue197-itisbecomingtograpplewiththisbook.html",
+  "quote": "dialects and accents spoken by the huge cast, all meticulously rendered",
+  "page": "body of column",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2001",
+  "routeHint": "gwern.net mirror of the defunct scifi.com Excessive Candour column, fetched live",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "verdict": {
+   "index": 1125,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "restricting the cast to the Short Sun — the page's 'huge cast' spans both series",
+   "trueWording": "\"dialects and accents spoken by the huge cast, all meticulously rendered\"",
+   "note": "gwern mirror of the scifi.com column fetched live; quote exact, including 'the dozens of different dialects'. But the sentence heads a struggle-list opened by 'Both The Book of the Long Sun and The Book of the Short Sun', and the cast is glossed by 'everyone wants to talk to Silk' — so the praise covers the Long Sun and Short Sun books together, not the Short Sun cast alone. Safe rewording: the huge cast of the Long Sun and Short Sun books.",
+   "fromFile": "verdicts-wolfe-i1113-1127.json"
+  }
+ },
+ {
+  "index": 1128,
+  "feature": "withheld information and inference",
+  "claim": "Clute says long stretches of the book only become intelligible on a second or third reading.",
+  "source": "John Clute, 'It Is Becoming to Grapple with This Book', Science Fiction Weekly issue 197, 29 January 2001",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/2001-01-29-johnclute-excessivecandorv7no5issue197-itisbecomingtograpplewiththisbook.html",
+  "quote": "on a second or third reading",
+  "page": "body of column",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2001",
+  "routeHint": "gwern.net mirror of the defunct scifi.com column, fetched live",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 1128,
+   "verdict": "PARTIAL",
+   "trueWording": "may be understood, on a second or third reading",
+   "unsupportedLimb": "\"only become intelligible\" - Clute writes that seemingly interminable passages MAY be understood on rereading as a necessary feature of the telling; he never says they are unintelligible otherwise, and the word \"only\" is not on the page.",
+   "note": "Raw gwern mirror of the archived scifi.com column fetched with a browser UA (200, 846KB). Quote is verbatim, in the paragraph after the Hoof block quote, about the long conversations Silk launches into. What the reread yields there is grasping their purpose, not plain intelligibility.",
+   "fromFile": "verdicts-wolfe-i1128-1142.json"
+  }
+ },
+ {
+  "index": 1149,
+  "feature": "other: symbol discipline",
+  "claim": "Aramini holds that Wolfe's symbols are rigorous and logical though their meaning is not immediately obvious.",
+  "source": "Marc A. Aramini, 'Gene Wolfe: Perverse Puzzle Maker', PhD dissertation, UNLV, May 2019",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+  "quote": "their meaning is not always immediately obvious",
+  "page": "ch. 1",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2019",
+  "routeHint": "PDF fetched from gwern.net, text extracted with pdftotext -layout",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 1149,
+   "verdict": "PARTIAL",
+   "trueWording": "their meaning is not always immediately obvious",
+   "unsupportedLimb": "the unqualified 'their meaning is not immediately obvious' - the page says 'not always'",
+   "note": "Aramini's own sentence (~p.36, ch. 1) reads 'Symbols are rigorous and logical in Wolfe's hands, but' then the quoted clause; the rigorous-and-logical limb is fully supported, only the dropped hedge is not.",
+   "fromFile": "verdicts-wolfe-i1143-1157.json"
+  }
+ },
+ {
+  "index": 1156,
+  "feature": "other: reference-guide register",
+  "claim": "Aramini's own entries open with a summary of mostly objective details before any analysis.",
+  "source": "Marc Aramini, interviewed by Nigel Price, Ultan's Library, 8 June 2020",
+  "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+  "quote": "I provide a summary with “mostly” objective details",
+  "page": "interview",
+  "kind": "analysis",
+  "polarity": "applies",
+  "date": "2020-06-08",
+  "routeHint": "live page fetched with a browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 1156,
+   "verdict": "PARTIAL",
+   "trueWording": "I provide a summary with 'mostly' objective details",
+   "unsupportedLimb": "that this holds for his entries generally - the page scopes the summary-then-analysis format to the short stories",
+   "note": "Interview: summary, then analysis of deeper or symbolic connections, then allusion sections - but the next sentences say that was the structure for the short stories, while for the longer works he chose a thesis and built the write-up round it.",
+   "fromFile": "verdicts-wolfe-i1143-1157.json"
   }
  }
 ]

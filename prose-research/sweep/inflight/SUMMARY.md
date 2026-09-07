@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 20:22:05 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 20:28:08 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -145,7 +145,7 @@
 | kay | regrade | regrade-r8 | result | 0 | — | — | 00:00:50 |
 | kay | synth |  | failed | 0 | — | — | 19:46:20 |
 | kay | synth |  | failed | 0 | kay-stats.mjs, section-kay.md | — | 18:42:12 |
-| kay | synth |  | in-flight | 0 | section-kay.md | — | 00:22:05 |
+| kay | synth |  | in-flight | 0 | section-kay.md | — | 00:22:26 |
 | kay | verifier | i1007-1021 | result | 10 | — | verdict file WRITTEN | 23:43:41 |
 | kay | verifier | i1022-1036 | result | 10 | — | verdict file WRITTEN | 23:42:38 |
 | kay | verifier | i1037-1051 | result | 5 | — | verdict file WRITTEN | 23:48:03 |
@@ -272,10 +272,7 @@
 | martin | verifier | i945-961 | result | 11 | — | verdict file WRITTEN | 18:15:54 |
 | martin | verifier | i962-983 | result | 5 | — | verdict file WRITTEN | 18:14:43 |
 | martin | verifier | i984-989 | result | 8 | — | verdict file WRITTEN | 18:19:21 |
-| tolkien | critic |  | failed | 0 | critic-tolkien.md | — | 18:42:05 |
-| tolkien | synth |  | result | 0 | section-tolkien.md | — | 18:27:18 |
 | wolfe | critic |  | failed | 0 | — | — | 19:50:41 |
-| wolfe | critic |  | result | 0 | critic-wolfe.md | — | 18:34:19 |
 | wolfe | finder | close-continued | failed | 42 | — | 136 claims, complete=True @19:26:41 | 19:45:45 |
 | wolfe | finder | close-continued | result | 41 | — | 136 claims, complete=True @19:26:41 | 23:31:55 |
 | wolfe | finder | close-continued | in-flight | 1 | — | 136 claims, complete=True @19:26:41 | 21:31:03 |
@@ -289,13 +286,16 @@
 | wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
 | wolfe | regrade | regrade-r6 | failed | 0 | — | — | 19:50:40 |
 | wolfe | synth |  | failed | 0 | — | — | 19:50:41 |
-| wolfe | synth |  | result | 0 | section-wolfe.md | — | 18:23:22 |
 | wolfe | verifier | i1008-1022 | result | 6 | — | verdict file WRITTEN | 00:18:08 |
 | wolfe | verifier | i1023-1037 | result | 6 | — | verdict file WRITTEN | 00:17:49 |
-| wolfe | verifier | i1038-1052 | in-flight | 5 | — | verdict file absent | 00:21:48 |
+| wolfe | verifier | i1038-1052 | result | 5 | — | verdict file WRITTEN | 00:22:48 |
 | wolfe | verifier | i1053-1067 | result | 3 | — | verdict file WRITTEN | 00:21:31 |
 | wolfe | verifier | i1068-1082 | result | 8 | — | verdict file WRITTEN | 00:21:48 |
-| wolfe | verifier | i1083-1097 | in-flight | 4 | — | verdict file WRITTEN | 00:21:50 |
+| wolfe | verifier | i1083-1097 | result | 4 | — | verdict file WRITTEN | 00:22:11 |
+| wolfe | verifier | i1098-1112 | result | 2 | — | verdict file WRITTEN | 00:26:17 |
+| wolfe | verifier | i1113-1127 | in-flight | 6 | — | verdict file WRITTEN | 00:28:06 |
+| wolfe | verifier | i1128-1142 | result | 3 | — | verdict file WRITTEN | 00:25:57 |
+| wolfe | verifier | i1143-1157 | result | 2 | — | verdict file WRITTEN | 00:27:15 |
 | wolfe | verifier | i468-482 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i468-507 | result | 8 | — | verdict file WRITTEN | 23:47:17 |
 | wolfe | verifier | i483-497 | failed | 0 | — | verdict file absent | 19:50:38 |
